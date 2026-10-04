@@ -3,6 +3,8 @@ import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 // Version injectée par la CI à partir du tag git (ex. v1.2.3 -> 1.2.3 / 10203).
@@ -13,11 +15,11 @@ val appVersionCode = providers.gradleProperty("versionCode").map(String::toInt).
 val releaseKeystore = providers.environmentVariable("POKEMAPS_KEYSTORE_FILE")
 
 android {
-    namespace = "io.github.sargo22341.pokmaps"
+    namespace = "org.opensources.pokmaps"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "io.github.sargo22341.pokmaps"
+        applicationId = "org.opensources.pokmaps"
         minSdk = 37
         targetSdk = 37
         versionCode = appVersionCode
@@ -66,6 +68,16 @@ android {
     }
 }
 
+ksp {
+    // Schéma exporté par Room : PokedexSchemaTest le compare à la base générée par tools/build_data.py.
+    arg("room.schemaLocation", layout.buildDirectory.dir("room-schemas").get().asFile.path)
+}
+
+tasks.withType<Test>().configureEach {
+    systemProperty("pokemaps.roomSchemas", layout.buildDirectory.dir("room-schemas").get().asFile.path)
+    systemProperty("pokemaps.database", file("src/main/assets/database/pokedex.db").path)
+}
+
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -73,9 +85,23 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.hilt.android)
+    implementation(libs.mapcompose)
+    ksp(libs.hilt.compiler)
+    ksp(libs.androidx.room.compiler)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.sqlite.jdbc)
+    testImplementation(libs.gson)
 }
 
 // L'application doit fonctionner sans services Google Play (GrapheneOS) :

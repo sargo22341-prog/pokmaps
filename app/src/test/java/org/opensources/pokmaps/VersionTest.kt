@@ -1,4 +1,4 @@
-package io.github.sargo22341.pokmaps
+package org.opensources.pokmaps
 
 import org.junit.Assert.assertTrue
 import org.junit.Test
