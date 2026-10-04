@@ -4,14 +4,24 @@ import java.text.Normalizer
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 
-/** Critères de la liste du Pokédex : texte recherché, type, disponibilité et méthode d'obtention. */
+/** Pokémon capturés ou non dans la version choisie. */
+enum class CaughtFilter {
+    ALL,
+    CAUGHT,
+    MISSING
+}
+
+/** Critères de la liste du Pokédex : texte recherché, type, disponibilité, méthode d'obtention, capture et favoris. */
 data class PokedexFilter(
     val query: String = "",
     val typeId: Int? = null,
     val availableOnly: Boolean = false,
-    val method: ObtainMethod? = null
+    val method: ObtainMethod? = null,
+    val caught: CaughtFilter = CaughtFilter.ALL,
+    val favoritesOnly: Boolean = false
 ) {
-    val isActive: Boolean get() = typeId != null || availableOnly || method != null
+    val isActive: Boolean
+        get() = typeId != null || availableOnly || method != null || caught != CaughtFilter.ALL || favoritesOnly
 }
 
 /**
@@ -26,6 +36,12 @@ object PokedexSearch {
             (filter.typeId == null || entry.types.any { it.id == filter.typeId }) &&
                 (!filter.availableOnly || entry.isAvailable) &&
                 (filter.method == null || filter.method in entry.obtainMethods) &&
+                (!filter.favoritesOnly || entry.favorite) &&
+                when (filter.caught) {
+                    CaughtFilter.ALL -> true
+                    CaughtFilter.CAUGHT -> entry.caught
+                    CaughtFilter.MISSING -> !entry.caught
+                } &&
                 (query.isEmpty() || entry.matches(query, number))
         }
     }

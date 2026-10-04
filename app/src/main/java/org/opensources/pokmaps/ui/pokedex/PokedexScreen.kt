@@ -45,8 +45,11 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.pokedex.CaughtFilter
+import org.opensources.pokmaps.ui.common.CaughtButton
+import org.opensources.pokmaps.ui.common.FavoriteButton
 import org.opensources.pokmaps.ui.common.PixelArt
-import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PixelArtFill
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
 
@@ -65,7 +68,7 @@ fun PokedexScreen(
         SearchField(state.filter.query, viewModel::search)
         Filters(state, viewModel)
         Text(
-            stringResource(R.string.pokedex_count, state.entries.size),
+            stringResource(R.string.pokedex_count_caught, state.entries.size, state.caughtCount, state.total),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
@@ -77,7 +80,12 @@ fun PokedexScreen(
                 modifier = Modifier.fillMaxWidth().padding(32.dp)
             )
         } else {
-            PokedexGrid(state.entries, onOpenPokemon)
+            PokedexGrid(
+                state.entries,
+                onOpenPokemon = onOpenPokemon,
+                onToggleCaught = viewModel::toggleCaught,
+                onToggleFavorite = viewModel::toggleFavorite
+            )
         }
     }
 }
@@ -135,6 +143,20 @@ private fun Filters(state: PokedexUiState, viewModel: PokedexViewModel) {
                 ObtainMethod.entries.map { it to stringResource(it.label) },
             onSelect = viewModel::filterMethod
         )
+        DropdownChip(
+            label = stringResource(
+                if (filter.caught == CaughtFilter.ALL) R.string.pokedex_filter_capture else filter.caught.label
+            ),
+            selected = filter.caught != CaughtFilter.ALL,
+            options = CaughtFilter.entries.map { it to stringResource(it.label) },
+            onSelect = viewModel::filterCaught
+        )
+        FilterChip(
+            selected = filter.favoritesOnly,
+            onClick = viewModel::toggleFavoritesOnly,
+            label = { Text(stringResource(R.string.pokedex_filter_favorites)) },
+            leadingIcon = { Icon(painterResource(R.drawable.ic_star), contentDescription = null) }
+        )
         if (filter.isActive) {
             TextButton(onClick = viewModel::resetFilters) { Text(stringResource(R.string.pokedex_filter_reset)) }
         }
@@ -166,64 +188,90 @@ private fun <T> DropdownChip(label: String, selected: Boolean, options: List<Pai
 }
 
 @Composable
-private fun PokedexGrid(entries: List<PokedexEntry>, onOpenPokemon: (Int) -> Unit) {
+private fun PokedexGrid(
+    entries: List<PokedexEntry>,
+    onOpenPokemon: (Int) -> Unit,
+    onToggleCaught: (PokedexEntry) -> Unit,
+    onToggleFavorite: (PokedexEntry) -> Unit
+) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 120.dp),
+        columns = GridCells.Adaptive(minSize = 160.dp),
         contentPadding = PaddingValues(12.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         items(entries, key = { it.pokemonId }) { entry ->
-            PokedexCard(entry, onClick = { onOpenPokemon(entry.pokemonId) })
+            PokedexCard(
+                entry,
+                onClick = { onOpenPokemon(entry.pokemonId) },
+                onToggleCaught = { onToggleCaught(entry) },
+                onToggleFavorite = { onToggleFavorite(entry) }
+            )
         }
     }
 }
 
 @Composable
-private fun PokedexCard(entry: PokedexEntry, onClick: () -> Unit) {
+private fun PokedexCard(
+    entry: PokedexEntry,
+    onClick: () -> Unit,
+    onToggleCaught: () -> Unit,
+    onToggleFavorite: () -> Unit
+) {
     // Les Pokémon absents de la version restent visibles, estompés.
     val alpha = if (entry.isAvailable) 1f else UNAVAILABLE_ALPHA
     ElevatedCard(Modifier.clickable(onClick = onClick)) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(2.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            PixelArtImage(
-                Sprites.pokemonIcon(entry.pokemonId),
-                PixelArt.POKEMON_ICON,
-                96.dp,
-                contentDescription = null,
-                alpha = alpha
-            )
-            Text(
-                stringResource(R.string.pokedex_number, entry.number),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                entry.name,
-                style = MaterialTheme.typography.titleSmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha)
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                entry.types.forEach { TypeBadge(it) }
-            }
-            if (!entry.isAvailable) {
-                Text(
-                    stringResource(R.string.pokedex_unavailable),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
+        Box {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                PixelArtFill(
+                    Sprites.pokemonIcon(entry.pokemonId),
+                    PixelArt.POKEMON_ICON,
+                    contentDescription = null,
+                    alpha = alpha,
+                    modifier = Modifier.fillMaxWidth()
                 )
+                Text(
+                    stringResource(R.string.pokedex_number, entry.number),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    entry.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha)
+                )
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    entry.types.forEach { TypeBadge(it) }
+                }
+                if (!entry.isAvailable) {
+                    Text(
+                        stringResource(R.string.pokedex_unavailable),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
+            CaughtButton(entry.caught, onToggleCaught, Modifier.align(Alignment.TopStart))
+            FavoriteButton(entry.favorite, onToggleFavorite, Modifier.align(Alignment.TopEnd))
         }
     }
 }
+
+private val CaughtFilter.label: Int
+    get() = when (this) {
+        CaughtFilter.ALL -> R.string.pokedex_filter_all
+        CaughtFilter.CAUGHT -> R.string.pokedex_filter_caught
+        CaughtFilter.MISSING -> R.string.pokedex_filter_missing
+    }
 
 private const val UNAVAILABLE_ALPHA = 0.45f

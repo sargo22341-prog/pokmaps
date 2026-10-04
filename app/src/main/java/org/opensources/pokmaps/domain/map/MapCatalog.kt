@@ -121,6 +121,25 @@ data class MapCatalog(
     }
 
     /**
+     * Warps vers les lieux accessibles depuis une ville, une route ou une carte intérieure (bâtiments, grottes,
+     * étages, sorties), un par lieu. Depuis une ville ou une route, seules les cartes intérieures comptent.
+     */
+    fun accessibleFrom(mapId: Int): List<MapWarp> {
+        val zone = maps[mapId] ?: return emptyList()
+        val candidates = if (zone.parentId == null) entrancesOf(zone.id) else warps[zone.id].orEmpty()
+        return candidates.filter { warp ->
+            val target = warp.targetMapId?.let { maps[it] } ?: return@filter false
+            target.id != zone.id && (zone.parentId == null || target.parentId == null)
+        }.distinctBy { it.targetMapId }
+    }
+
+    /** Tous les objets et personnages du jeu, par identifiant. */
+    val objectsById: Map<Int, MapObject> by lazy { objects.values.flatten().associateBy { it.id } }
+
+    /** Carte (affichable ou ville, route) d'après son identifiant. */
+    fun mapByIdentifier(identifier: String): MapInfo? = maps.values.firstOrNull { it.identifier == identifier }
+
+    /**
      * Entrée sur la carte du monde de chaque carte intérieure : le warp de la carte du monde par lequel
      * on l'atteint en passant par le moins de cartes (Mont Sélénite sous-sol 2 → entrée du Mont Sélénite).
      */

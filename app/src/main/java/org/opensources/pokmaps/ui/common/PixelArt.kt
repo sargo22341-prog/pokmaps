@@ -1,11 +1,14 @@
 package org.opensources.pokmaps.ui.common
 
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.min
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -46,4 +49,26 @@ fun PixelArtImage(
 ) {
     val size = pixelArtSize(source, targetWidth)
     AssetImage(path, contentDescription, modifier.size(size), alpha = alpha)
+}
+
+/**
+ * Image pixel-art aussi grande que possible dans la largeur disponible (au plus `widthLimit`),
+ * agrandie d'un nombre entier de fois.
+ */
+@Composable
+fun PixelArtFill(
+    path: String,
+    source: PixelArt.Source,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    widthLimit: Dp = Dp.Infinity,
+    alpha: Float = 1f
+) {
+    BoxWithConstraints(modifier, contentAlignment = Alignment.Center) {
+        val density = LocalDensity.current
+        val available = with(density) { min(maxWidth, widthLimit).toPx() }
+        val factor = max(1, (available / source.width).toInt())
+        val size = with(density) { DpSize((source.width * factor).toDp(), (source.height * factor).toDp()) }
+        AssetImage(path, contentDescription, Modifier.size(size), alpha = alpha)
+    }
 }

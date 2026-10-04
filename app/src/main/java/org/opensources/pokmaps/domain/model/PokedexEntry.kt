@@ -10,7 +10,10 @@ data class PokedexEntry(
     val name: String,
     val nameEn: String = "",
     val types: List<PokemonType> = emptyList(),
-    val obtainMethods: Set<ObtainMethod> = emptySet()
+    val obtainMethods: Set<ObtainMethod> = emptySet(),
+    /** Capturé dans la version choisie. */
+    val caught: Boolean = false,
+    val favorite: Boolean = false
 ) {
     val isAvailable: Boolean get() = obtainMethods.isNotEmpty()
 }
