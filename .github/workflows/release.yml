@@ -76,8 +76,13 @@ jobs:
         run: echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
 
       - name: Vérifications
-        # Les tests unitaires ne tournent que sur la variante debug (comportement par défaut d'AGP 9).
-        run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintRelease testDebugUnitTest
+        run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintRelease
+
+      # Commande séparée : les variantes debug et release exportent le schéma Room au même endroit,
+      # leurs tâches KSP ne doivent pas tourner en parallèle.
+      # Les tests unitaires ne tournent que sur la variante debug (comportement par défaut d'AGP 9).
+      - name: Tests unitaires
+        run: ./gradlew --stacktrace testDebugUnitTest
 
       - name: Build APK release signé
         env:
