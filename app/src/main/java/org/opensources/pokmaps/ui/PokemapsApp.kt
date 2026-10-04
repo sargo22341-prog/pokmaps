@@ -28,12 +28,19 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.about.AboutScreen
+import org.opensources.pokmaps.ui.character.CharacterScreen
+import org.opensources.pokmaps.ui.character.CharacterViewModel
 import org.opensources.pokmaps.ui.game.GameSelector
 import org.opensources.pokmaps.ui.game.GameViewModel
+import org.opensources.pokmaps.ui.item.ItemScreen
+import org.opensources.pokmaps.ui.item.ItemViewModel
 import org.opensources.pokmaps.ui.map.MapScreen
+import org.opensources.pokmaps.ui.place.PlaceScreen
+import org.opensources.pokmaps.ui.place.PlaceViewModel
 import org.opensources.pokmaps.ui.pokedex.PokedexScreen
 import org.opensources.pokmaps.ui.pokemon.PokemonScreen
 import org.opensources.pokmaps.ui.pokemon.PokemonViewModel
+import org.opensources.pokmaps.ui.search.SearchScreen
 
 /** Destinations principales, accessibles depuis la barre de navigation. */
 enum class TopLevelDestination(val route: String, @StringRes val label: Int, @DrawableRes val icon: Int) {
@@ -42,9 +49,29 @@ enum class TopLevelDestination(val route: String, @StringRes val label: Int, @Dr
 }
 
 private const val ABOUT_ROUTE = "about"
+private const val SEARCH_ROUTE = "search"
 private const val POKEMON_ROUTE = "pokemon/{${PokemonViewModel.POKEMON_ID}}"
+private const val ITEM_ROUTE = "item/{${ItemViewModel.ITEM}}"
+private const val PLACE_ROUTE = "place/{${PlaceViewModel.PLACE}}"
+private const val CHARACTER_ROUTE = "character/{${CharacterViewModel.CHARACTER}}"
+
+/** Titre de la barre du haut des écrans ouverts par-dessus la carte et le Pokédex. */
+private val DETAIL_TITLES = mapOf(
+    ABOUT_ROUTE to R.string.about_title,
+    SEARCH_ROUTE to R.string.search_title,
+    POKEMON_ROUTE to R.string.pokemon_title,
+    ITEM_ROUTE to R.string.item_title,
+    PLACE_ROUTE to R.string.place_title,
+    CHARACTER_ROUTE to R.string.character_title
+)
 
 private fun pokemonRoute(pokemonId: Int) = "pokemon/$pokemonId"
+
+private fun itemRoute(identifier: String) = "item/$identifier"
+
+private fun placeRoute(identifier: String) = "place/$identifier"
+
+private fun characterRoute(objectId: Int) = "character/$objectId"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,25 +81,19 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
     val route = backStackEntry?.destination?.route
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
     val isAbout = route == ABOUT_ROUTE
-    val isPokemon = route == POKEMON_ROUTE
+    val detailTitle = DETAIL_TITLES[route]
     val openPokemon = { pokemonId: Int -> navController.navigate(pokemonRoute(pokemonId)) }
+    val openItem = { identifier: String -> navController.navigate(itemRoute(identifier)) }
+    val openPlace = { identifier: String -> navController.navigate(placeRoute(identifier)) }
+    val openCharacter = { objectId: Int -> navController.navigate(characterRoute(objectId)) }
+    val showMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        stringResource(
-                            when {
-                                isAbout -> R.string.about_title
-                                isPokemon -> R.string.pokemon_title
-                                else -> R.string.app_name
-                            }
-                        )
-                    )
-                },
+                title = { Text(stringResource(detailTitle ?: R.string.app_name)) },
                 navigationIcon = {
-                    if (isAbout || isPokemon) {
+                    if (detailTitle != null) {
                         IconButton(onClick = { navController.popBackStack() }) {
                             Icon(painterResource(R.drawable.ic_back), stringResource(R.string.back))
                         }
@@ -80,6 +101,11 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
                 },
                 actions = {
                     if (!isAbout) {
+                        if (route != SEARCH_ROUTE) {
+                            IconButton(onClick = { navController.navigate(SEARCH_ROUTE) { launchSingleTop = true } }) {
+                                Icon(painterResource(R.drawable.ic_search), stringResource(R.string.search_title))
+                            }
+                        }
                         GameSelector(gameState, gameViewModel::select)
                         IconButton(onClick = { navController.navigate(ABOUT_ROUTE) }) {
                             Icon(painterResource(R.drawable.ic_info), stringResource(R.string.about_title))
@@ -94,7 +120,7 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
                     TopLevelDestination.entries.forEach { destination ->
                         NavigationBarItem(
                             selected = route == destination.route ||
-                                (isPokemon && destination == TopLevelDestination.POKEDEX),
+                                (route == POKEMON_ROUTE && destination == TopLevelDestination.POKEDEX),
                             onClick = { navController.navigateToTopLevel(destination) },
                             icon = { Icon(painterResource(destination.icon), contentDescription = null) },
                             label = { Text(stringResource(destination.label)) }
@@ -109,15 +135,46 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
             startDestination = TopLevelDestination.MAP.route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(TopLevelDestination.MAP.route) { MapScreen(onOpenPokemon = openPokemon) }
+            composable(TopLevelDestination.MAP.route) { MapScreen(onOpenPokemon = openPokemon, onOpenItem = openItem) }
             composable(TopLevelDestination.POKEDEX.route) { PokedexScreen(onOpenPokemon = openPokemon) }
             composable(
                 POKEMON_ROUTE,
                 arguments = listOf(navArgument(PokemonViewModel.POKEMON_ID) { type = NavType.IntType })
             ) {
-                PokemonScreen(
+                PokemonScreen(onOpenPokemon = openPokemon, onOpenItem = openItem, onShowOnMap = showMap)
+            }
+            composable(SEARCH_ROUTE) {
+                SearchScreen(
                     onOpenPokemon = openPokemon,
-                    onShowOnMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) }
+                    onOpenItem = openItem,
+                    onOpenPlace = openPlace,
+                    onOpenCharacter = openCharacter
+                )
+            }
+            composable(ITEM_ROUTE, arguments = listOf(navArgument(ItemViewModel.ITEM) { type = NavType.StringType })) {
+                ItemScreen(onOpenPokemon = openPokemon, onOpenCharacter = openCharacter, onShowOnMap = showMap)
+            }
+            composable(
+                PLACE_ROUTE,
+                arguments = listOf(navArgument(PlaceViewModel.PLACE) { type = NavType.StringType })
+            ) {
+                PlaceScreen(
+                    onOpenPokemon = openPokemon,
+                    onOpenItem = openItem,
+                    onOpenPlace = openPlace,
+                    onOpenCharacter = openCharacter,
+                    onShowOnMap = showMap
+                )
+            }
+            composable(
+                CHARACTER_ROUTE,
+                arguments = listOf(navArgument(CharacterViewModel.CHARACTER) { type = NavType.IntType })
+            ) {
+                CharacterScreen(
+                    onOpenPokemon = openPokemon,
+                    onOpenItem = openItem,
+                    onOpenPlace = openPlace,
+                    onShowOnMap = showMap
                 )
             }
             composable(ABOUT_ROUTE) { AboutScreen() }

@@ -7,7 +7,10 @@ import kotlinx.coroutines.sync.withLock
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MapEntity
 import org.opensources.pokmaps.data.db.NpcOfferRow
+import org.opensources.pokmaps.domain.map.GameIndex
 import org.opensources.pokmaps.domain.map.ItemDetails
+import org.opensources.pokmaps.domain.map.ItemEvolution
+import org.opensources.pokmaps.domain.map.ItemSummary
 import org.opensources.pokmaps.domain.map.MapArea
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
@@ -17,6 +20,7 @@ import org.opensources.pokmaps.domain.map.MapSpot
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Encounter
@@ -29,6 +33,7 @@ import org.opensources.pokmaps.domain.pokemon.LearnedMove
 class MapRepository @Inject constructor(private val dao: MapDao) {
     private val mutex = Mutex()
     private val catalogs = mutableMapOf<Int, MapCatalog>()
+    private val indexes = mutableMapOf<Int, GameIndex>()
 
     /** Cartes du jeu avec leurs warps, objets et zones (gardées en mémoire : la base ne change pas). */
     suspend fun catalog(game: Game): MapCatalog = mutex.withLock {
@@ -67,14 +72,47 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         )
     }
 
+    /** Objets et offres des personnages du jeu (gardés en mémoire comme les cartes). */
+    suspend fun index(game: Game): GameIndex = mutex.withLock {
+        indexes.getOrPut(game.versionGroupId) {
+            val vg = game.versionGroupId
+            GameIndex(
+                items = dao.items(vg).map { ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName) },
+                offers = dao.offerLinks(vg).map {
+                    OfferLink(
+                        objectId = it.objectId,
+                        kind = it.kind,
+                        itemIdentifier = it.itemIdentifier,
+                        itemName = it.itemName,
+                        pokemonId = it.pokemonId,
+                        pokemonName = it.pokemonName,
+                        wantedPokemonName = it.wantedPokemonName,
+                        price = it.price,
+                        quantity = it.quantity
+                    )
+                }
+            )
+        }
+    }
+
     private fun MapEntity.toInfo() = MapInfo(id, identifier, nameFr, parentMapId, x, y, width, height, levelCount)
 
     /** Rencontres des zones dans la version du jeu. */
     suspend fun encounters(game: Game, areaIds: List<Int>): List<Encounter> =
         if (areaIds.isEmpty()) emptyList() else dao.encounters(game.versionId, areaIds).map { it.toEncounter() }
 
-    /** Zones où l'on rencontre un Pokémon dans la version du jeu. */
-    suspend fun pokemonAreas(game: Game, pokemonId: Int): Set<Int> = dao.pokemonAreas(game.versionId, pokemonId).toSet()
+    /** Zones où l'on rencontre un Pokémon dans la version du jeu, avec la méthode de rencontre. */
+    suspend fun pokemonAreaMethods(game: Game, pokemonId: Int): List<Pair<Int, String>> =
+        dao.pokemonAreaMethods(game.versionId, pokemonId).map { it.areaId to it.method }
+
+    /** Personnages qui donnent ou échangent un Pokémon. */
+    suspend fun pokemonGivers(game: Game, pokemonId: Int): List<Int> = dao.pokemonGivers(game.versionGroupId, pokemonId)
+
+    /** Pokémon qui évoluent grâce à un objet. */
+    suspend fun itemEvolutions(game: Game, itemId: Int): List<ItemEvolution> =
+        dao.itemEvolutions(game.versionGroupId, itemId).map {
+            ItemEvolution(it.fromId, it.fromName, it.toId, it.toName)
+        }
 
     /** Équipe d'un dresseur de la carte, avec ses attaques dans le jeu. */
     suspend fun trainerParty(game: Game, objectId: Int): List<TrainerPokemon> {

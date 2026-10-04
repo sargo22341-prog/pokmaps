@@ -3,7 +3,6 @@ package org.opensources.pokmaps.ui.map
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -14,19 +13,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.max
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.PixelArt
-import org.opensources.pokmaps.ui.common.PixelArtImage
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.ui.state.MapState
 
-// Les marqueurs gardent la même taille à l'écran quel que soit le zoom (ils ne sont pas agrandis avec la carte),
-// et les sprites sont agrandis d'un nombre entier de fois pour que leurs pixels restent nets et réguliers.
+// Les marqueurs sont dessinés à l'échelle de la carte : un pixel d'un sprite vaut un pixel Game Boy de la carte,
+// ils grandissent et rapetissent avec elle (un personnage occupe une case, comme dans le jeu).
+
+/** Taille à l'écran de `pixels` pixels de la carte, au zoom actuel. */
+@Composable
+private fun mapPixels(mapState: MapState, pixels: Float): Dp {
+    val scale by remember(mapState) { derivedStateOf { mapState.scale } }
+    return with(LocalDensity.current) { (pixels * scale).toFloat().toDp() }
+}
 
 /** Les marqueurs des calques ne s'affichent qu'à partir d'un certain zoom, pour ne pas surcharger la carte. */
 @Composable
@@ -35,16 +44,18 @@ private fun visibleAtScale(mapState: MapState): Boolean {
     return visible
 }
 
-/** Entrée (porte, escalier, grotte) : on la touche pour entrer. La zone de toucher dépasse largement le point. */
+/** Entrée (porte, escalier, grotte) : on la touche pour entrer (une case autour du point suffit). */
 @Composable
 fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
-    Box(Modifier.size(WARP_TOUCH_SIZE), contentAlignment = Alignment.Center) {
+    val tile = mapPixels(mapState, TILE_PX)
+    val dot = max(mapPixels(mapState, WARP_PX), WARP_MIN_SIZE)
+    Box(Modifier.size(max(tile, dot)), contentAlignment = Alignment.Center) {
         Box(
             Modifier
-                .size(14.dp)
+                .size(dot)
                 .background(WARP_COLOR.copy(alpha = 0.85f), CircleShape)
-                .border(2.dp, Color.White, CircleShape)
+                .border(dot / 7, Color.White, CircleShape)
         )
     }
 }
@@ -58,33 +69,30 @@ fun ObjectMarker(mapState: MapState, obj: MapObject, versionGroupIdentifier: Str
     val pokemonId = obj.pokemonId
     Box {
         when {
-            itemIdentifier != null -> PixelArtImage(
+            itemIdentifier != null -> AssetImage(
                 Sprites.item(itemIdentifier),
-                PixelArt.ITEM_ICON,
-                ITEM_SIZE,
                 contentDescription = obj.itemName,
+                modifier = Modifier.size(mapPixels(mapState, PixelArt.ITEM_ICON)),
                 alpha = if (obj.kind == MapObjectKind.HIDDEN_ITEM) HIDDEN_ALPHA else 1f
             )
 
-            obj.kind == MapObjectKind.POKEMON && pokemonId != null -> PixelArtImage(
+            obj.kind == MapObjectKind.POKEMON && pokemonId != null -> AssetImage(
                 Sprites.pokemonIcon(pokemonId),
-                PixelArt.POKEMON_ICON,
-                POKEMON_SIZE,
-                contentDescription = obj.pokemonName
+                contentDescription = obj.pokemonName,
+                modifier = Modifier.size(mapPixels(mapState, PixelArt.POKEMON_ICON))
             )
 
-            sprite != null -> PixelArtImage(
+            sprite != null -> AssetImage(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),
-                PixelArt.MAP_SPRITE,
-                CHARACTER_SIZE,
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.size(mapPixels(mapState, PixelArt.MAP_SPRITE))
             )
 
-            else -> Box(Modifier.size(12.dp).background(Color.White, CircleShape))
+            else -> Box(Modifier.size(mapPixels(mapState, TILE_PX / 2)).background(Color.White, CircleShape))
         }
         when (obj.kind) {
-            MapObjectKind.HIDDEN_ITEM -> Badge("?", HIDDEN_COLOR, Modifier.align(Alignment.BottomEnd))
-            MapObjectKind.TRAINER -> Badge("!", TRAINER_COLOR, Modifier.align(Alignment.TopEnd))
+            MapObjectKind.HIDDEN_ITEM -> Badge(mapState, "?", HIDDEN_COLOR, Modifier.align(Alignment.BottomEnd))
+            MapObjectKind.TRAINER -> Badge(mapState, "!", TRAINER_COLOR, Modifier.align(Alignment.TopEnd))
             else -> Unit
         }
     }
@@ -92,34 +100,38 @@ fun ObjectMarker(mapState: MapState, obj: MapObject, versionGroupIdentifier: Str
 
 /** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes). */
 @Composable
-fun WildPokemonMarker(wild: WildMarker) {
+fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
     Box {
-        PixelArtImage(
+        AssetImage(
             Sprites.pokemonIcon(wild.pokemonId),
-            PixelArt.POKEMON_ICON,
-            POKEMON_SIZE,
-            contentDescription = wild.name
+            contentDescription = wild.name,
+            modifier = Modifier.size(mapPixels(mapState, PixelArt.POKEMON_ICON))
         )
         when (wild.method) {
-            WildMethod.FISHING -> Badge("🎣", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
-            WildMethod.SURF -> Badge("🌊", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
+            WildMethod.FISHING -> Badge(mapState, "🎣", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
+            WildMethod.SURF -> Badge(mapState, "🌊", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
             WildMethod.WALK -> Unit
         }
     }
 }
 
-/** Pastille ronde avec un symbole, dans un coin du marqueur. */
 @Composable
-private fun Badge(text: String, color: Color, modifier: Modifier = Modifier) {
+private fun mapPixels(mapState: MapState, source: PixelArt.Source): DpSize =
+    DpSize(mapPixels(mapState, source.width.toFloat()), mapPixels(mapState, source.height.toFloat()))
+
+/** Pastille ronde avec un symbole, dans un coin du marqueur, elle aussi à l'échelle de la carte. */
+@Composable
+private fun Badge(mapState: MapState, text: String, color: Color, modifier: Modifier = Modifier) {
+    val size = mapPixels(mapState, BADGE_PX)
+    val fontSize = with(LocalDensity.current) { (size * 0.6f).toSp() }
     Box(
         modifier
-            .size(16.dp)
+            .size(size)
             .background(color, CircleShape)
-            .border(1.dp, Color.White, CircleShape)
-            .padding(1.dp),
+            .border(size / 16, Color.White, CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Text(text, color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold, lineHeight = 9.sp)
+        Text(text, color = Color.White, fontSize = fontSize, fontWeight = FontWeight.Bold, lineHeight = fontSize)
     }
 }
 
@@ -139,9 +151,11 @@ private val WARP_COLOR = Color(0xFF2962FF)
 private val HIDDEN_COLOR = Color(0xFF6A1B9A)
 private val TRAINER_COLOR = Color(0xFFD32F2F)
 private val WATER_COLOR = Color(0xFF0277BD)
-private val WARP_TOUCH_SIZE = 40.dp
-private val ITEM_SIZE = 28.dp
-private val CHARACTER_SIZE = 28.dp
-private val POKEMON_SIZE = 52.dp
+private val WARP_MIN_SIZE = 8.dp
+
+/** Tailles en pixels de la carte (une case du jeu fait 16 pixels). */
+private const val TILE_PX = 16f
+private const val WARP_PX = 9f
+private const val BADGE_PX = 8f
 private const val HIDDEN_ALPHA = 0.75f
 private const val MIN_MARKER_SCALE = 1.0
