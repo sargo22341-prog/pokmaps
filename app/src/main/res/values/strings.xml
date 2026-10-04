@@ -117,10 +117,10 @@
     <string name="map_zone_none">Aucun Pokémon sauvage</string>
     <string name="map_close">Fermer</string>
     <string name="map_hidden_badge">Caché</string>
-    <string name="map_hidden_item_hint">Invisible sur la carte : appuyez sur A face à cette case (ou utilisez le Cherch'Objet).</string>
+    <string name="map_hidden_item_hint">Invisible sur la carte : appuyez sur A face à cette case (ou utilisez le Cherch\'Objet).</string>
     <string name="map_machine_move">Enseigne %1$s</string>
     <string name="map_trainer_party">Équipe</string>
-    <string name="map_trainer_starter">L'équipe du rival dépend du starter choisi.</string>
+    <string name="map_trainer_starter">L\'équipe du rival dépend du starter choisi.</string>
     <string name="map_npc_nothing">Rien à donner, vendre ni échanger.</string>
     <string name="map_offer_gifts">Donne</string>
     <string name="map_offer_sales">Vend</string>
