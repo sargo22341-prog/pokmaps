@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Encounter
@@ -24,6 +25,8 @@ fun EncounterGroups(
     title: (Encounter) -> String,
     modifier: Modifier = Modifier,
     iconPath: ((Encounter) -> String)? = null,
+    iconWidth: Dp = 56.dp,
+    caught: (Encounter) -> Boolean = { false },
     onClick: ((Encounter) -> Unit)? = null
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -35,14 +38,28 @@ fun EncounterGroups(
                 modifier = Modifier.padding(top = 8.dp)
             )
             group.encounters.forEach { encounter ->
-                EncounterLine(encounter, title(encounter), iconPath?.invoke(encounter), onClick)
+                EncounterLine(
+                    encounter,
+                    title(encounter),
+                    iconPath?.invoke(encounter),
+                    iconWidth,
+                    caught(encounter),
+                    onClick
+                )
             }
         }
     }
 }
 
 @Composable
-private fun EncounterLine(encounter: Encounter, title: String, iconPath: String?, onClick: ((Encounter) -> Unit)?) {
+private fun EncounterLine(
+    encounter: Encounter,
+    title: String,
+    iconPath: String?,
+    iconWidth: Dp,
+    caught: Boolean,
+    onClick: ((Encounter) -> Unit)?
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -51,9 +68,12 @@ private fun EncounterLine(encounter: Encounter, title: String, iconPath: String?
             .then(if (onClick != null) Modifier.clickable { onClick(encounter) } else Modifier)
             .padding(vertical = 2.dp)
     ) {
-        if (iconPath != null) PixelArtImage(iconPath, PixelArt.POKEMON_ICON, 56.dp, contentDescription = null)
+        if (iconPath != null) PokemonIconImage(iconPath, iconWidth, contentDescription = null)
         Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(title, style = MaterialTheme.typography.bodyLarge)
+                if (caught) CaughtIcon(28.dp)
+            }
             val details = encounterDetails(encounter)
             if (details.isNotEmpty()) {
                 Text(

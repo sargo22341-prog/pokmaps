@@ -2,7 +2,9 @@ package org.opensources.pokmaps.domain
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.domain.map.FloorLevel
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapWarp
@@ -53,5 +55,53 @@ class MapCatalogTest {
         assertEquals(entrance, entrances[moon1.id])
         assertEquals(entrance, entrances[moon3.id])
         assertNull(entrances[world.id])
+    }
+
+    @Test
+    fun floorsAreParsedFromTheMapIdentifier() {
+        assertEquals("mt-moon" to FloorLevel.Basement(2), FloorLevel.parse("mt-moon-b2f"))
+        assertEquals("silph-co" to FloorLevel.Storey(10), FloorLevel.parse("silph-co-11f"))
+        assertEquals("pokemon-tower" to FloorLevel.Storey(0), FloorLevel.parse("pokemon-tower-1f"))
+        assertEquals("celadon-mart" to FloorLevel.Roof, FloorLevel.parse("celadon-mart-roof"))
+        assertEquals("rocket-hideout" to FloorLevel.Elevator, FloorLevel.parse("rocket-hideout-elevator"))
+        assertNull(FloorLevel.parse("celadon-mansion-roof-house"))
+        assertNull(FloorLevel.parse("ss-anne-1f-rooms"))
+        assertNull(FloorLevel.parse("route-3"))
+    }
+
+    @Test
+    fun floorsOfABuildingAreSortedFromTopToBottom() {
+        assertEquals(listOf(moon1.id, moon2.id, moon3.id), catalog.floorsOf(moon2.id).map { it.mapId })
+        assertTrue(catalog.floorsOf(route3.id).isEmpty())
+        assertTrue(catalog.floorsOf(world.id).isEmpty())
+    }
+
+    @Test
+    fun backGoesUpToTheBuildingEntranceWhateverTheFloor() {
+        // Tous les étages du Mont Sélénite remontent à son entrée sur la Route 3.
+        assertEquals(entrance, catalog.parentEntrance(moon1.id))
+        assertEquals(entrance, catalog.parentEntrance(moon3.id))
+        assertNull(catalog.parentEntrance(world.id))
+
+        // Bâtiment dans un bâtiment : on remonte d'un seul niveau.
+        val gameCorner = MapInfo(1135, "game-corner", "Casino", null, 0, 0, 320, 288, 2)
+        val hideout1 = MapInfo(1199, "rocket-hideout-b1f", "Repaire Rocket (1er sous-sol)", null, 0, 0, 480, 448, 2)
+        val hideout2 = MapInfo(1200, "rocket-hideout-b2f", "Repaire Rocket (2e sous-sol)", null, 0, 0, 480, 448, 2)
+        val door = MapWarp(10, pewter.id, 1400, 1400, gameCorner.id, 200, 260)
+        val stairs = MapWarp(11, gameCorner.id, 270, 40, hideout1.id, 360, 32)
+        val nested = MapCatalog(
+            versionGroupIdentifier = "red-blue",
+            maps = listOf(world, pewter, gameCorner, hideout1, hideout2).associateBy { it.id },
+            warps = listOf(
+                door,
+                stairs,
+                MapWarp(12, hideout1.id, 360, 32, gameCorner.id, 270, 40),
+                MapWarp(13, hideout1.id, 40, 40, hideout2.id, 40, 40)
+            ).groupBy { it.mapId },
+            objects = emptyMap(),
+            areas = emptyMap()
+        )
+        assertEquals(stairs, nested.parentEntrance(hideout2.id))
+        assertEquals(door, nested.parentEntrance(gameCorner.id))
     }
 }

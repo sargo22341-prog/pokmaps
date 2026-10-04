@@ -69,6 +69,7 @@ import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.FavoriteButton
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokemonIconImage
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.formatFactor
 import org.opensources.pokmaps.ui.common.formatNumber
@@ -374,11 +375,12 @@ private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .widthIn(min = 136.dp)
+            .widthIn(min = 72.dp)
             .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
             .padding(4.dp)
     ) {
-        PixelArtImage(Sprites.pokemonIcon(node.pokemonId), PixelArt.POKEMON_ICON, 128.dp, contentDescription = null)
+        // Icône cadrée sur le Pokémon : ses marges transparentes n'écartent plus les flèches.
+        PokemonIconImage(Sprites.pokemonIcon(node.pokemonId), 128.dp, contentDescription = null)
         Text(
             node.name,
             style = MaterialTheme.typography.bodyMedium,
@@ -395,7 +397,7 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .width(96.dp)
+            .width(72.dp)
             .clickable(enabled = identifier != null) { identifier?.let(onOpenItem) }
     ) {
         if (condition != null && identifier != null && condition.itemHasSprite) {
