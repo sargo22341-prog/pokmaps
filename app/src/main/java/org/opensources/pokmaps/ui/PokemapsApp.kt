@@ -20,16 +20,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.about.AboutScreen
 import org.opensources.pokmaps.ui.game.GameSelector
 import org.opensources.pokmaps.ui.game.GameViewModel
 import org.opensources.pokmaps.ui.map.MapScreen
 import org.opensources.pokmaps.ui.pokedex.PokedexScreen
+import org.opensources.pokmaps.ui.pokemon.PokemonScreen
+import org.opensources.pokmaps.ui.pokemon.PokemonViewModel
 
 /** Destinations principales, accessibles depuis la barre de navigation. */
 enum class TopLevelDestination(val route: String, @StringRes val label: Int, @DrawableRes val icon: Int) {
@@ -38,6 +42,9 @@ enum class TopLevelDestination(val route: String, @StringRes val label: Int, @Dr
 }
 
 private const val ABOUT_ROUTE = "about"
+private const val POKEMON_ROUTE = "pokemon/{${PokemonViewModel.POKEMON_ID}}"
+
+private fun pokemonRoute(pokemonId: Int) = "pokemon/$pokemonId"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,13 +54,25 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
     val route = backStackEntry?.destination?.route
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
     val isAbout = route == ABOUT_ROUTE
+    val isPokemon = route == POKEMON_ROUTE
+    val openPokemon = { pokemonId: Int -> navController.navigate(pokemonRoute(pokemonId)) }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(if (isAbout) R.string.about_title else R.string.app_name)) },
+                title = {
+                    Text(
+                        stringResource(
+                            when {
+                                isAbout -> R.string.about_title
+                                isPokemon -> R.string.pokemon_title
+                                else -> R.string.app_name
+                            }
+                        )
+                    )
+                },
                 navigationIcon = {
-                    if (isAbout) {
+                    if (isAbout || isPokemon) {
                         IconButton(onClick = { navController.popBackStack() }) {
                             Icon(painterResource(R.drawable.ic_back), stringResource(R.string.back))
                         }
@@ -74,7 +93,8 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
                 NavigationBar {
                     TopLevelDestination.entries.forEach { destination ->
                         NavigationBarItem(
-                            selected = route == destination.route,
+                            selected = route == destination.route ||
+                                (isPokemon && destination == TopLevelDestination.POKEDEX),
                             onClick = { navController.navigateToTopLevel(destination) },
                             icon = { Icon(painterResource(destination.icon), contentDescription = null) },
                             label = { Text(stringResource(destination.label)) }
@@ -89,8 +109,17 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
             startDestination = TopLevelDestination.MAP.route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(TopLevelDestination.MAP.route) { MapScreen() }
-            composable(TopLevelDestination.POKEDEX.route) { PokedexScreen() }
+            composable(TopLevelDestination.MAP.route) { MapScreen(onOpenPokemon = openPokemon) }
+            composable(TopLevelDestination.POKEDEX.route) { PokedexScreen(onOpenPokemon = openPokemon) }
+            composable(
+                POKEMON_ROUTE,
+                arguments = listOf(navArgument(PokemonViewModel.POKEMON_ID) { type = NavType.IntType })
+            ) {
+                PokemonScreen(
+                    onOpenPokemon = openPokemon,
+                    onShowOnMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) }
+                )
+            }
             composable(ABOUT_ROUTE) { AboutScreen() }
         }
     }
