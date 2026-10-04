@@ -105,13 +105,14 @@ Règles :
 - [x] Sprites des PNJ et objets (vue de face) pour les calques de la carte
 - [x] Intégrer les tuiles dans les assets de l'app (~2 Mo pour les deux jeux)
 
-## Phase 4 — Squelette de l'app
-- [ ] Mise en place de Hilt, Room (`createFromAsset`) et Navigation Compose
-- [ ] Entités et DAO Room calqués sur `tools/pokemaps_data/schema.sql` (version de base = `SCHEMA_VERSION`)
-- [ ] Repositories et cas d'usage
-- [ ] Sélecteur de jeu global (Rouge / Bleu / Jaune), mémorisé avec DataStore : il fixe la version, le groupe de versions et la génération utilisés partout
-- [ ] Barre de navigation : Carte / Pokédex
-- [ ] Écran « À propos » avec les crédits des sources
+## Phase 4 — Squelette de l'app ✅
+- [x] Identifiant de l'application : `org.opensources.pokmaps` (`org.opensources.pokmaps.debug` pour l'APK debug)
+- [x] Mise en place de Hilt, Room (`createFromAsset`, recopie de la base après chaque mise à jour de l'app) et Navigation Compose
+- [x] Entités Room calquées sur `tools/pokemaps_data/schema.sql` (version de base = `SCHEMA_VERSION`), vérifiées en CI par `PokedexSchemaTest` (base générée ↔ schéma exporté par Room)
+- [x] DAO, repositories (jeux, Pokédex, cartes) et cas d'usage
+- [x] Sélecteur de jeu global (Rouge / Bleu / Jaune) dans la barre du haut, mémorisé avec DataStore : il fixe la version, le groupe de versions et la génération utilisés partout
+- [x] Barre de navigation : Carte / Pokédex (carte du monde affichée avec MapCompose, pixels nets ; liste simple du Pokédex en attendant la phase 5)
+- [x] Écran « À propos » avec les crédits des sources
 
 ## Phase 5 — Pokédex
 - [ ] Liste ou grille du Pokédex du jeu choisi (icône pokesprite, numéro régional, nom, types de la génération)
