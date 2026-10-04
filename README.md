@@ -14,34 +14,45 @@ Voir [plan.md](plan.md) pour la feuille de route.
 | Dossier | Contenu |
 |---|---|
 | `app/` | Application Android |
-| `tools/` | Pipeline de données Python : génère `pokedex.db` |
-| `tools/data/` | Données saisies à la main (noms français des lieux, dons et Pokémon fixes) |
+| `tools/` | Pipeline de données Python : génère la base `pokedex.db` et les images |
+| `tools/data/` | Corrections relues à la main (noms français, notes, doublons) |
 | `.github/` | CI/CD (GitHub Actions) |
 
 ## Données
 
-La base `pokedex.db` est générée par `tools/build_db.py` à partir de :
+`tools/build_data.py` génère, dans `app/src/main/assets/` :
 
-- [pret/pokered](https://github.com/pret/pokered) et [pret/pokeyellow](https://github.com/pret/pokeyellow),
-  les désassemblages des jeux : statistiques, attaques, évolutions, rencontres sauvages, pêche, échanges, Casino…
-- [PokéAPI](https://github.com/PokeAPI/pokeapi) (CSV) : noms français des Pokémon, attaques, types et objets,
-  descriptions du Pokédex, tailles et poids
-- `tools/data/*.csv` : noms français des 227 cartes du jeu, dons (Pokémon de départ, Évoli, Lokhlass…),
-  fossiles et Ronflex
+- `database/pokedex.db` : la base SQLite de l'application ;
+- `sprites/` : icônes de boîte des Pokémon, sprites des jeux et icônes d'objets.
+
+Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
+
+- **[PokéAPI](https://pokeapi.co)**, via l'export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi) :
+  Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
+  lieux et rencontres de chaque version. Les CSV sont téléchargés une seule fois au build, avec cache ;
+  l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
+- **[pokesprite](https://github.com/msikma/pokesprite)** : icônes de boîte des Pokémon et icônes d'objets.
+- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites de Rouge/Bleu et Jaune.
+- **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
+  prix du Casino, Pokémon demandés en échange, doublons).
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
-reproductible. La base est vérifiée après chaque génération (151 Pokémon, références cohérentes, probabilités
-de rencontre qui totalisent 100 %, chaque Pokémon obtenable…).
+reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
+qui totalisent 100 %, chaque Pokémon obtenable…).
 
-La base n'est pas versionnée : elle est générée par la CI, ou en local avec la commande ci-dessous.
+Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py` : ajouter Or/Argent, par exemple,
+revient à y ajouter une ligne.
+
+Les données générées ne sont pas versionnées : elles sont produites par la CI, ou en local avec la commande
+ci-dessous.
 
 ## Compiler en local
 
 Prérequis : JDK 21, Android SDK (API 37), Python 3.11 ou plus récent, git.
 
 ```bash
-# 1. Générer la base de données (télécharge les sources dans tools/.cache)
-python3 tools/build_db.py
+# 1. Générer la base de données et les images (télécharge les sources dans tools/.cache)
+python3 tools/build_data.py
 
 # 2. Compiler et installer l'APK debug
 ./gradlew installDebug
@@ -64,7 +75,7 @@ python -m pytest                        # tests du pipeline
 
 ## CI/CD
 
-- **CI** (`.github/workflows/ci.yml`), à chaque push et pull request : génération et tests de la base,
+- **CI** (`.github/workflows/ci.yml`), à chaque push et pull request : génération et tests des données,
   ktlint, vérification sans Google Play, Android Lint, tests unitaires et APK debug
   (téléchargeable dans les artefacts du workflow pendant 14 jours).
 - **Release** (`.github/workflows/release.yml`), à chaque tag `vX.Y.Z` : APK release signé publié dans
@@ -115,5 +126,6 @@ Sans Obtainium : télécharger l'APK depuis la page Releases et l'ouvrir sur le 
 ## Mentions légales
 
 Projet de fan, personnel et non commercial. Pokémon et les noms associés sont des marques de Nintendo,
-Game Freak et The Pokémon Company. Ce dépôt ne contient aucune ROM ni ressource extraite d'une ROM.
+Game Freak et The Pokémon Company ; les images des Pokémon, des objets et des cartes sont © Nintendo, Creatures
+et GAME FREAK. Ce dépôt ne contient aucune ROM ni ressource extraite d'une ROM.
 Le code de l'application est sous licence [MIT](LICENSE).

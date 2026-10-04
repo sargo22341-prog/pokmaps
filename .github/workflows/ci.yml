@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Générer pokedex.db
+      - name: Générer les données (base + images)
         uses: ./.github/actions/build-database
 
       - uses: actions/setup-java@v5

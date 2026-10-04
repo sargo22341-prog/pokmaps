@@ -47,7 +47,7 @@ jobs:
           done
           exit $missing
 
-      - name: Générer pokedex.db
+      - name: Générer les données (base + images)
         uses: ./.github/actions/build-database
 
       - uses: actions/setup-java@v5

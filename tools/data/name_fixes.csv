@@ -1,0 +1,20 @@
+kind,key,name_fr,reason
+location,seafoam-islands,Îles Écume,accents manquants dans PokéAPI
+location,cinnabar-island,Cramois'Île,accent manquant dans PokéAPI
+location,digletts-cave,Cave Taupiqueur,majuscules dans PokéAPI
+location,kanto-underground-path,Souterrain,nom français absent de PokéAPI
+area,seafoam-islands/1f,Îles Écume (RdC),accents manquants dans PokéAPI
+area,seafoam-islands/b1f,Îles Écume (1er sous-sol),accents manquants dans PokéAPI
+area,seafoam-islands/b2f,Îles Écume (2e sous-sol),accents manquants dans PokéAPI
+area,seafoam-islands/b3f,Îles Écume (3e sous-sol),accents manquants dans PokéAPI
+area,seafoam-islands/b4f,Îles Écume (4e sous-sol),accents manquants dans PokéAPI
+area,cinnabar-island,Cramois'Île,accent manquant dans PokéAPI
+area,rock-tunnel/b1f,Grotte (RdC),PokéAPI décale les étages : cette zone est le RdC dans Rouge/Bleu/Jaune
+area,rock-tunnel/b2f,Grotte (sous-sol),PokéAPI décale les étages : cette zone est le sous-sol dans Rouge/Bleu/Jaune
+area,kanto-victory-road-2/1f,Route Victoire (RdC),« Route Victoire 2 » est un nom interne à PokéAPI
+area,kanto-victory-road-2/2f,Route Victoire (1er étage),« Route Victoire 2 » est un nom interne à PokéAPI
+area,kanto-victory-road-2/3f,Route Victoire (2e étage),« Route Victoire 2 » est un nom interne à PokéAPI
+area,celadon-city/celadon-mansion,Résidence de Céladopole (maison sur le toit),traduction plus fidèle au jeu
+area,celadon-city/prize-corner,Comptoir des lots du Casino,le Casino et son comptoir sont deux lieux différents
+area,cinnabar-island/cinnabar-lab,Labo Pokémon de Cramois'Île,traduction plus fidèle au jeu
+area,saffron-city/fighting-dojo,Dojo de Safrania,traduction plus fidèle au jeu
