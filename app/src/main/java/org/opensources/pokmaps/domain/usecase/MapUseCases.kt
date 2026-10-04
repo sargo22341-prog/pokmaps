@@ -5,8 +5,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.data.settings.MapSettings
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
+import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.PokemonPlaces
@@ -58,4 +60,14 @@ class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapReposi
     suspend fun offers(objectId: Int): List<NpcOffer> = maps.offers(objectId)
 
     suspend fun item(game: Game, itemId: Int): ItemDetails? = maps.item(game, itemId)
+}
+
+/** Filtres de la carte choisis par l'utilisateur (tous affichés par défaut). */
+class MapLayersUseCase @Inject constructor(private val settings: MapSettings) {
+    val layers: Flow<Set<MapLayer>> = settings.layers.map { names ->
+        names?.mapNotNull { name -> MapLayer.entries.firstOrNull { it.name == name } }?.toSet()
+            ?: MapLayer.entries.toSet()
+    }
+
+    suspend fun set(layers: Set<MapLayer>) = settings.setLayers(layers.map { it.name }.toSet())
 }

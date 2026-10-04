@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.domain.map
 
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.min
@@ -24,6 +25,13 @@ object WildPlacement {
     private const val GOLDEN_ANGLE = 2.399963
 
     /**
+     * Écart minimal (en pixels, deux cases) entre un Pokémon et un objet, un personnage ou une entrée, sur l'un
+     * des deux axes : l'icône d'un Pokémon est large d'environ deux cases.
+     */
+    private const val CLEAR_X = 32.0
+    private const val CLEAR_Y = 32.0
+
+    /**
      * Nombre de marqueurs de chaque Pokémon : un au moins chacun, puis les emplacements libres partagés selon
      * les poids (probabilités de rencontre), sans dépasser [MAX_COPIES].
      */
@@ -40,6 +48,22 @@ object WildPlacement {
             copies[next]++
         }
         return copies
+    }
+
+    /**
+     * Emplacements assez loin des objets, personnages et entrées (`obstacles`) pour qu'on ne touche pas un
+     * Pokémon à la place de l'un d'eux. S'il en reste moins que `minimum` (un par Pokémon), les emplacements
+     * les moins encombrés complètent.
+     */
+    fun awayFrom(spots: List<Pair<Int, Int>>, obstacles: List<Pair<Int, Int>>, minimum: Int): List<Pair<Int, Int>> {
+        if (obstacles.isEmpty()) return spots
+        // Distance au plus proche obstacle, en multiples de l'écart voulu (1 = juste assez loin).
+        fun clearance(spot: Pair<Int, Int>): Double = obstacles.minOf { (x, y) ->
+            max(abs(spot.first - x) / CLEAR_X, abs(spot.second - y) / CLEAR_Y)
+        }
+        val (clear, crowded) = spots.partition { clearance(it) >= 1.0 }
+        if (clear.size >= minimum) return clear
+        return clear + crowded.sortedByDescending(::clearance).take(minimum - clear.size)
     }
 
     /**

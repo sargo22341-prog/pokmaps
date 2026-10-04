@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Sprites
@@ -42,6 +43,31 @@ fun FavoriteButton(favorite: Boolean, onToggle: () -> Unit, modifier: Modifier =
     }
 }
 
+/** Petite Poké Ball : Pokémon déjà capturé dans la version. */
+@Composable
+fun CaughtIcon(size: Dp, modifier: Modifier = Modifier) {
+    PixelArtImage(
+        Sprites.item(POKE_BALL),
+        PixelArt.ITEM_ICON,
+        size,
+        contentDescription = stringResource(R.string.collection_caught),
+        modifier = modifier
+    )
+}
+
+/** Master Ball : tous les Pokémon sauvages du lieu sont capturés. */
+@Composable
+fun CompleteIcon(size: Dp, modifier: Modifier = Modifier) {
+    PixelArtImage(
+        Sprites.item(MASTER_BALL),
+        PixelArt.ITEM_ICON,
+        size,
+        contentDescription = stringResource(R.string.map_zone_complete),
+        modifier = modifier
+    )
+}
+
 private const val POKE_BALL = "poke-ball"
+private const val MASTER_BALL = "master-ball"
 private const val NOT_CAUGHT_ALPHA = 0.25f
 private val FAVORITE_COLOR = Color(0xFFFFB300)
