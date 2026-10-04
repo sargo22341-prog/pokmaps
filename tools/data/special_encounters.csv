@@ -1,0 +1,18 @@
+versions,map,species,level,method,note_fr
+RB,OAKS_LAB,BULBASAUR,5,GIFT,Pokémon de départ (un seul au choix parmi les trois)
+RB,OAKS_LAB,CHARMANDER,5,GIFT,Pokémon de départ (un seul au choix parmi les trois)
+RB,OAKS_LAB,SQUIRTLE,5,GIFT,Pokémon de départ (un seul au choix parmi les trois)
+Y,OAKS_LAB,PIKACHU,5,GIFT,Pokémon de départ
+Y,CERULEAN_TRADE_HOUSE,BULBASAUR,10,GIFT,Donné par Mélanie si Pikachu est assez attaché au joueur
+Y,ROUTE_24,CHARMANDER,10,GIFT,Donné par un dresseur au nord du Pont Pépite
+Y,VERMILION_CITY,SQUIRTLE,10,GIFT,Donné par l'Agent Jenny après avoir obtenu le Badge Foudre
+RBY,MT_MOON_POKECENTER,MAGIKARP,5,PURCHASE,Vendu 500 ₽ par un marchand (une seule fois)
+RBY,CELADON_MANSION_ROOF_HOUSE,EEVEE,25,GIFT,Pokéball posée sur la table
+RBY,SILPH_CO_7F,LAPRAS,15,GIFT,Donné par un employé après avoir battu le rival
+RBY,FIGHTING_DOJO,HITMONLEE,30,GIFT,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+RBY,FIGHTING_DOJO,HITMONCHAN,30,GIFT,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+RBY,CINNABAR_LAB_FOSSIL_ROOM,OMANYTE,30,FOSSIL,Ressuscité à partir du Fossile Nautile (Mont Sélénite)
+RBY,CINNABAR_LAB_FOSSIL_ROOM,KABUTO,30,FOSSIL,Ressuscité à partir du Fossile Dôme (Mont Sélénite)
+RBY,CINNABAR_LAB_FOSSIL_ROOM,AERODACTYL,30,FOSSIL,Ressuscité à partir du Vieil Ambre (Musée d'Argenta)
+RBY,ROUTE_12,SNORLAX,30,STATIC,Bloque la route : réveillez-le avec la Pokéflûte
+RBY,ROUTE_16,SNORLAX,30,STATIC,Bloque la route : réveillez-le avec la Pokéflûte
