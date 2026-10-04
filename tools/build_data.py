@@ -58,7 +58,7 @@ def main() -> int:
         count = connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
         print(f"  {table:<26} {count:>6} lignes")
     connection.close()
-    sprites = sum(1 for _ in (args.assets / "sprites").rglob("*.png"))
+    sprites = sum(1 for _ in (args.assets / "sprites").rglob("*.*"))
     tiles = list((args.assets / "maps").rglob("*.webp"))
     tiles_size = sum(tile.stat().st_size for tile in tiles) // 1024
     print(f"OK : {database} ({database.stat().st_size // 1024} Ko), {sprites} images")

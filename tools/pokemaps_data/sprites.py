@@ -1,11 +1,12 @@
 """Récupère les images embarquées dans l'application.
 
 - Icônes de boîte des Pokémon et icônes d'objets : msikma/pokesprite.
-- Sprites des jeux (ex. Rouge/Bleu, Jaune) : PokeAPI/sprites.
+- Sprites des jeux (ex. Rouge/Bleu, Jaune) et sprites animés (Noir/Blanc) : PokeAPI/sprites.
 
 Arborescence produite dans les assets :
     sprites/pokemon/icon/<pokemon_id>.png
     sprites/pokemon/<version_group>/<pokemon_id>.png
+    sprites/pokemon/animated/<pokemon_id>.gif
     sprites/items/<item_identifier>.png
 """
 
@@ -22,6 +23,8 @@ from .sources import download, download_all, pokeapi_sprite, pokesprite
 MACHINE_ICON = "items/{kind}/{type}.png"
 # Objets sans icône dans pokesprite : icône d'un objet semblable.
 ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
+# Sprites animés (GIF) de Noir et Blanc, les seuls animés pour toute la 1re génération (affichage en option).
+ANIMATED_SPRITES = "pokemon/versions/generation-v/black-white/animated/{id}.gif"
 
 
 def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[str]:
@@ -44,6 +47,11 @@ def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[st
         for species_id in sorted(builder.pokemon_by_version_group[vg]):
             url, path = pokeapi_sprite(cache, f"pokemon/{game.sprite_folder}/{species_id}.png")
             jobs.append((url, path, output / "pokemon" / vg_identifiers[vg] / f"{species_id}.png"))
+
+    # Sprites animés.
+    for species_id in builder.species:
+        url, path = pokeapi_sprite(cache, ANIMATED_SPRITES.format(id=species_id))
+        jobs.append((url, path, output / "pokemon/animated" / f"{species_id}.gif"))
 
     # Icônes des objets.
     item_paths = _item_icon_paths(builder, cache)
