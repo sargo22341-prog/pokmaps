@@ -186,6 +186,7 @@ def test_sprites(assets, db):
         assert (sprites / "pokemon/icon" / f"{pokemon_id}.png").is_file()
         assert (sprites / "pokemon/red-blue" / f"{pokemon_id}.png").is_file()
         assert (sprites / "pokemon/yellow" / f"{pokemon_id}.png").is_file()
+        assert (sprites / "pokemon/animated" / f"{pokemon_id}.gif").read_bytes().startswith(b"GIF8")
     missing = [
         identifier
         for identifier, has_sprite in db.execute("SELECT identifier, has_sprite FROM item")

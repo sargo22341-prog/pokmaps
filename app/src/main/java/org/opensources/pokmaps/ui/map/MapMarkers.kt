@@ -3,7 +3,6 @@ package org.opensources.pokmaps.ui.map
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -63,13 +62,7 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
 
 /** Objet (avec son icône), objet caché, dresseur, personnage ou Pokémon fixe. */
 @Composable
-fun ObjectMarker(
-    mapState: MapState,
-    obj: MapObject,
-    versionGroupIdentifier: String,
-    alwaysVisible: Boolean = false,
-    caught: Boolean = false
-) {
+fun ObjectMarker(mapState: MapState, obj: MapObject, versionGroupIdentifier: String, alwaysVisible: Boolean = false) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     val sprite = obj.sprite
     val itemIdentifier = obj.itemIdentifier
@@ -102,48 +95,35 @@ fun ObjectMarker(
             MapObjectKind.TRAINER -> Badge(mapState, "!", TRAINER_COLOR, Modifier.align(Alignment.TopEnd))
             else -> Unit
         }
-        if (caught) CaughtBall(mapState, Modifier.align(Alignment.BottomStart))
     }
 }
 
-/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes) ; Poké Ball s'il est capturé. */
+/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes). */
 @Composable
-fun WildPokemonMarker(mapState: MapState, wild: WildMarker, caught: Boolean) {
+fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
     Box {
         AssetImage(
             Sprites.pokemonIcon(wild.pokemonId),
             contentDescription = wild.name,
-            modifier = Modifier.size(mapPixels(mapState, PixelArt.POKEMON_ICON))
+            modifier = Modifier.size(mapPixels(mapState, PixelArt.POKEMON_ICON, wild.scale))
         )
+        val corner = Modifier.align(Alignment.BottomEnd)
         when (wild.method) {
-            WildMethod.FISHING -> Badge(mapState, "🎣", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
-            WildMethod.SURF -> Badge(mapState, "🌊", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
+            WildMethod.FISHING -> Badge(mapState, "🎣", WATER_COLOR, corner, wild.scale)
+            WildMethod.SURF -> Badge(mapState, "🌊", WATER_COLOR, corner, wild.scale)
             WildMethod.WALK -> Unit
         }
-        if (caught) CaughtBall(mapState, Modifier.align(Alignment.BottomStart))
     }
 }
 
-/** Poké Ball d'un Pokémon déjà capturé, à côté de lui (le dessin du Pokémon occupe le centre de l'icône). */
 @Composable
-private fun CaughtBall(mapState: MapState, modifier: Modifier = Modifier) {
-    AssetImage(
-        Sprites.item(POKE_BALL),
-        contentDescription = null,
-        modifier = modifier
-            .padding(start = mapPixels(mapState, CAUGHT_BALL_INSET))
-            .size(mapPixels(mapState, PixelArt.ITEM_ICON.width * CAUGHT_BALL_SCALE))
-    )
-}
-
-@Composable
-private fun mapPixels(mapState: MapState, source: PixelArt.Source): DpSize =
-    DpSize(mapPixels(mapState, source.width.toFloat()), mapPixels(mapState, source.height.toFloat()))
+private fun mapPixels(mapState: MapState, source: PixelArt.Source, scale: Float = 1f): DpSize =
+    DpSize(mapPixels(mapState, source.width * scale), mapPixels(mapState, source.height * scale))
 
 /** Pastille ronde avec un symbole, dans un coin du marqueur, elle aussi à l'échelle de la carte. */
 @Composable
-private fun Badge(mapState: MapState, text: String, color: Color, modifier: Modifier = Modifier) {
-    val size = mapPixels(mapState, BADGE_PX)
+private fun Badge(mapState: MapState, text: String, color: Color, modifier: Modifier = Modifier, scale: Float = 1f) {
+    val size = mapPixels(mapState, BADGE_PX * scale)
     val fontSize = with(LocalDensity.current) { (size * 0.6f).toSp() }
     Box(
         modifier
@@ -180,8 +160,3 @@ private const val WARP_PX = 9f
 private const val BADGE_PX = 8f
 private const val HIDDEN_ALPHA = 0.75f
 private const val MIN_MARKER_SCALE = 1.0
-private const val POKE_BALL = "poke-ball"
-
-/** Poké Ball des Pokémon capturés : icône d'objet réduite, en bas à gauche du Pokémon. */
-private const val CAUGHT_BALL_SCALE = 0.75f
-private const val CAUGHT_BALL_INSET = 4f
