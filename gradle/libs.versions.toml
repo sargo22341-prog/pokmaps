@@ -11,6 +11,7 @@ hiltNavigationCompose = "1.2.0"
 room = "2.8.4"
 datastore = "1.1.7"
 mapcompose = "3.2.8"
+coil = "3.6.3"
 junit = "4.13.2"
 coroutines = "1.10.2"
 sqliteJdbc = "3.53.4.0"
@@ -36,6 +37,8 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 mapcompose = { module = "ovh.plrapps:mapcompose", version.ref = "mapcompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version.ref = "sqliteJdbc" }
