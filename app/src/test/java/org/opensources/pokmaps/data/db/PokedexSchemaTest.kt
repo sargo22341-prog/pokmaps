@@ -62,7 +62,8 @@ class PokedexSchemaTest {
                 Column(
                     name,
                     field.get("affinity").asString,
-                    field.get("notNull").asBoolean,
+                    // Room n'écrit notNull que lorsqu'il vaut true.
+                    field.get("notNull")?.asBoolean ?: false,
                     primaryKey.indexOf(name) + 1
                 )
             }.sortedBy { it.name }
