@@ -10,10 +10,11 @@ from functools import cached_property
 from pathlib import Path
 
 from .games import GAMES, ONE_OFF_METHODS, Game
+from .maps import GameMapData, identifier
 from .pokeapi import ENGLISH, PokeApi, clean_text, optional_int
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -50,9 +51,13 @@ class EncounterGroup:
 
 
 class DatabaseBuilder:
-    def __init__(self, api: PokeApi, games: tuple[Game, ...] = GAMES) -> None:
+    def __init__(
+        self, api: PokeApi, games: tuple[Game, ...] = GAMES, map_data: dict[str, GameMapData] | None = None
+    ) -> None:
         self.api = api
         self.games = games
+        # Cartes générées par maps.build_maps, par groupe de versions (aucune si None).
+        self.map_data = map_data or {}
         groups = {row["identifier"]: row for row in api.table("version_groups")}
         missing = [game.version_group for game in games if game.version_group not in groups]
         if missing:
@@ -444,6 +449,7 @@ class DatabaseBuilder:
         items = self.api.by_id("items")
         categories = {int(row["id"]): row["identifier"] for row in self.api.table("item_categories")}
         used = {item for _, item, _ in self.machine_rows}
+        used |= set(self._map_item_ids.values())
         for row in self.evolution_rows:
             used |= {item for item in (row[6], row[7]) if item}
         # Poké Balls existant dans au moins une des générations configurées.
@@ -455,6 +461,16 @@ class DatabaseBuilder:
             (item_id, items[item_id]["identifier"], names[item_id], categories[int(items[item_id]["category_id"])])
             for item_id in sorted(used)
         ]
+
+    @cached_property
+    def _map_item_ids(self) -> dict[str, int]:
+        """Objets posés sur les cartes : identifiant PokéAPI -> id."""
+        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        identifiers = {obj.item for data in self.map_data.values() for obj in data.objects if obj.item}
+        unknown = sorted(identifiers - ids.keys())
+        if unknown:
+            raise ValueError(f"Objets des cartes inconnus de PokéAPI : {unknown} (voir maps.ITEM_ALIASES)")
+        return {identifier: ids[identifier] for identifier in identifiers}
 
     # --- Lieux et rencontres --------------------------------------------------
 
@@ -657,6 +673,51 @@ class DatabaseBuilder:
             if int(row["version_id"]) in self.version_ids and int(row["location_area_id"]) in self.used_areas
         )
 
+    # --- Cartes ---------------------------------------------------------------
+
+    def map_tables(self) -> dict[str, list[tuple]]:
+        vg_ids = {row["identifier"]: int(row["id"]) for row in self.vg_rows}
+        area_ids = {key: area_id for area_id, key in self.area_keys.items()}
+        species = {row["identifier"]: int(row["id"]) for row in self.species.values()}
+        known_areas = {row[0] for row in self.location_area_table()}
+        maps, areas, warps, objects = [], [], [], []
+        for version_group, data in self.map_data.items():
+            vg = vg_ids[version_group]
+            ids = {row.const: vg * 1000 + row.number for row in data.maps}
+            for row in data.maps:
+                parent = ids[row.parent] if row.parent else None
+                maps.append(
+                    (ids[row.const], vg, identifier(row.const), row.name_fr, parent, row.x, row.y, row.width,
+                     row.height, row.level_count)
+                )  # fmt: skip
+            for const, area in data.areas:
+                if area not in area_ids or area_ids[area] not in known_areas:
+                    raise ValueError(f"map_areas.csv : zone sans rencontre ou inconnue de PokéAPI : {area}")
+                areas.append((ids[const], area_ids[area]))
+            for warp in data.warps:
+                target = ids[warp.target] if warp.target else None
+                warps.append(
+                    (len(warps) + 1, ids[warp.map_const], warp.x, warp.y, target, warp.target_x, warp.target_y)
+                )
+            for obj in data.objects:
+                if obj.pokemon and obj.pokemon not in species:
+                    raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {obj.pokemon}")
+                objects.append(
+                    (
+                        len(objects) + 1,
+                        ids[obj.map_const],
+                        obj.kind,
+                        obj.x,
+                        obj.y,
+                        obj.sprite,
+                        obj.item and self._map_item_ids[obj.item],
+                        obj.pokemon and species[obj.pokemon],
+                        obj.level,
+                        obj.trainer_class,
+                    )
+                )
+        return {"map": maps, "map_area": sorted(set(areas)), "map_warp": warps, "map_object": objects}
+
     # --- Écriture -------------------------------------------------------------
 
     def write(self, output: Path, item_sprites: set[str]) -> None:
@@ -689,6 +750,7 @@ class DatabaseBuilder:
             "encounter": encounters,
             "encounter_condition": conditions,
             "encounter_rate": self.encounter_rate_table(),
+            **self.map_tables(),
         }
         output.parent.mkdir(parents=True, exist_ok=True)
         tmp = output.with_suffix(".tmp")

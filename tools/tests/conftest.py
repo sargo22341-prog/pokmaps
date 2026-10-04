@@ -8,6 +8,7 @@ TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 
 from pokemaps_data.builder import DatabaseBuilder  # noqa: E402
+from pokemaps_data.maps import build_maps  # noqa: E402
 from pokemaps_data.pokeapi import PokeApi  # noqa: E402
 from pokemaps_data.sources import fetch_pokeapi_csv  # noqa: E402
 from pokemaps_data.sprites import build_sprites  # noqa: E402
@@ -16,13 +17,19 @@ CACHE = TOOLS / ".cache"
 
 
 @pytest.fixture(scope="session")
-def builder() -> DatabaseBuilder:
-    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)))
+def assets_root(tmp_path_factory) -> Path:
+    return tmp_path_factory.mktemp("assets")
 
 
 @pytest.fixture(scope="session")
-def assets(builder, tmp_path_factory) -> Path:
-    root = tmp_path_factory.mktemp("assets")
+def builder(assets_root) -> DatabaseBuilder:
+    map_data = build_maps(CACHE, assets_root / "maps")
+    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), map_data=map_data)
+
+
+@pytest.fixture(scope="session")
+def assets(builder, assets_root) -> Path:
+    root = assets_root
     item_sprites = build_sprites(builder, CACHE, root / "sprites")
     builder.write(root / "database/pokedex.db", item_sprites)
     return root
