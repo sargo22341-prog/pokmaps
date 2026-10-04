@@ -111,12 +111,15 @@ Dans GitHub, *Settings → Secrets and variables → Actions → New repository 
 ⚠️ Conservez `pokemaps-release.jks` et ses mots de passe en lieu sûr, **hors du dépôt** : sans eux, il est
 impossible de publier une mise à jour installable par-dessus l'application existante.
 
-**À chaque version** :
+**À chaque version**, au choix :
 
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
+- pousser un tag :
+  ```bash
+  git tag v1.0.0
+  git push origin v1.0.0
+  ```
+- ou, dans GitHub, *Actions → Release → Run workflow* en indiquant la version (ex. `1.0.0`) : le tag est créé
+  sur le dernier commit de la branche choisie.
 
 Le code de version Android est calculé à partir du tag : `MAJEUR × 10000 + MINEUR × 100 + CORRECTIF`.
 
