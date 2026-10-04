@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.pokemon
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,9 +14,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
@@ -37,10 +40,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -58,6 +65,8 @@ import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.PixelArt
+import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.formatFactor
 import org.opensources.pokmaps.ui.common.formatNumber
@@ -269,59 +278,97 @@ private fun Evolutions(details: PokemonDetails, onOpenPokemon: (Int) -> Unit) {
         Text(stringResource(R.string.pokemon_no_evolution))
         return
     }
-    Column {
-        details.evolutions.forEach { EvolutionBranch(it, details.id, onOpenPokemon) }
+    // Arbre de gauche à droite : chaque évolution part de son Pokémon d'origine, avec sa condition sur la flèche.
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.horizontalScroll(rememberScrollState())
+    ) {
+        details.evolutions.forEach { EvolutionTreeNode(it, details.id, onOpenPokemon) }
     }
 }
 
 @Composable
-private fun EvolutionBranch(node: EvolutionNode, currentId: Int, onOpenPokemon: (Int) -> Unit) {
-    Column {
-        val current = node.pokemonId == currentId
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
-                .padding(vertical = 2.dp)
-        ) {
-            AssetImage(Sprites.pokemonIcon(node.pokemonId), contentDescription = null, modifier = Modifier.size(48.dp))
-            Text(
-                node.name,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = if (current) FontWeight.Bold else FontWeight.Normal,
-                color = if (current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
-            )
+private fun EvolutionTreeNode(node: EvolutionNode, currentId: Int, onOpenPokemon: (Int) -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        EvolutionMember(node, currentId, onOpenPokemon)
+        if (node.children.isNotEmpty()) {
+            EvolutionBranches(node.children, currentId, onOpenPokemon)
         }
-        // Plusieurs évolutions possibles (Évoli) : chaque branche est décalée.
-        val indent = if (node.children.size > 1) 24.dp else 0.dp
-        node.children.forEach { child ->
-            Column(Modifier.padding(start = indent)) {
-                child.condition?.let { EvolutionConditionLabel(it) }
-                EvolutionBranch(child, currentId, onOpenPokemon)
+    }
+}
+
+/** Évolutions d'un Pokémon, l'une sous l'autre ; plusieurs (Évoli) sont reliées par un trait vertical. */
+@Composable
+private fun EvolutionBranches(children: List<EvolutionNode>, currentId: Int, onOpenPokemon: (Int) -> Unit) {
+    val branchColor = MaterialTheme.colorScheme.outline
+    val count = children.size
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BRANCH_SPACING),
+        modifier = Modifier.drawBehind {
+            // Plusieurs évolutions possibles (Évoli) : une accolade relie les branches à leur origine.
+            if (count > 1) {
+                val rowHeight = (size.height - BRANCH_SPACING.toPx() * (count - 1)) / count
+                val top = rowHeight / 2
+                val bottom = size.height - rowHeight / 2
+                val stroke = 2.dp.toPx()
+                drawLine(branchColor, Offset(stroke / 2, top), Offset(stroke / 2, bottom), stroke)
+            }
+        }
+    ) {
+        children.forEach { child ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                EvolutionArrow(child.condition, branchColor)
+                EvolutionTreeNode(child, currentId, onOpenPokemon)
             }
         }
     }
 }
 
 @Composable
-private fun EvolutionConditionLabel(condition: EvolutionCondition) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier.padding(start = 16.dp)
+private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: (Int) -> Unit) {
+    val current = node.pokemonId == currentId
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .widthIn(min = 72.dp)
+            .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
+            .padding(4.dp)
     ) {
-        Text("↓", color = MaterialTheme.colorScheme.onSurfaceVariant)
-        val identifier = condition.itemIdentifier
-        if (identifier != null && condition.itemHasSprite) {
-            AssetImage(Sprites.item(identifier), contentDescription = null, modifier = Modifier.size(24.dp))
+        PixelArtImage(Sprites.pokemonIcon(node.pokemonId), PixelArt.POKEMON_ICON, 64.dp, contentDescription = null)
+        Text(
+            node.name,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = if (current) FontWeight.Bold else FontWeight.Normal,
+            color = if (current) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+        )
+    }
+}
+
+/** Flèche vers une évolution, avec sa condition : niveau, pierre (avec son icône) ou échange. */
+@Composable
+private fun EvolutionArrow(condition: EvolutionCondition?, color: Color) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.width(80.dp)
+    ) {
+        val identifier = condition?.itemIdentifier
+        if (condition != null && identifier != null && condition.itemHasSprite) {
+            PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 28.dp, contentDescription = null)
         }
         val text = when {
+            condition == null -> ""
             condition.itemName != null -> condition.itemName
             condition.trigger == "trade" -> stringResource(R.string.evolution_trade)
             condition.minLevel != null -> stringResource(R.string.evolution_level, condition.minLevel)
             else -> stringResource(R.string.evolution_level_up)
         }
-        Text(text, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(
+            text,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center
+        )
+        Text("⟶", color = color, style = MaterialTheme.typography.titleLarge)
     }
 }
 
@@ -507,5 +554,6 @@ private val Ball.label: Int
     }
 
 private val SPRITE_SIZE = 160.dp
+private val BRANCH_SPACING = 8.dp
 private val MOVE_TABS = listOf(R.string.pokemon_moves_level, R.string.pokemon_moves_machine)
 private const val PERCENT = 100

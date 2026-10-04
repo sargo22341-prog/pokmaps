@@ -152,7 +152,9 @@ CREATE TABLE item (
     name_fr TEXT NOT NULL,
     category TEXT NOT NULL,
     -- Icône dans les assets : sprites/items/<identifier>.png
-    has_sprite INTEGER NOT NULL
+    has_sprite INTEGER NOT NULL,
+    -- Description du Pokédex des objets (NULL pour les CT / CS : c'est l'attaque qui compte).
+    description_fr TEXT
 );
 
 -- CT / CS d'un jeu (item = CT01, CS01…).
@@ -319,3 +321,43 @@ CREATE TABLE map_object (
 CREATE INDEX index_map_object_map_id ON map_object (map_id);
 CREATE INDEX index_map_object_item_id ON map_object (item_id);
 CREATE INDEX index_map_object_pokemon_id ON map_object (pokemon_id);
+
+-- Équipe d'un dresseur de la carte (map_object de type trainer), avec les attaques qu'il utilise :
+-- les 4 dernières apprises au niveau du Pokémon, plus les attaques spéciales des champions et du Conseil 4.
+CREATE TABLE trainer_pokemon (
+    map_object_id INTEGER NOT NULL,
+    slot INTEGER NOT NULL,
+    pokemon_id INTEGER NOT NULL,
+    level INTEGER NOT NULL,
+    move1_id INTEGER,
+    move2_id INTEGER,
+    move3_id INTEGER,
+    move4_id INTEGER,
+    PRIMARY KEY (map_object_id, slot)
+);
+
+-- Ce que propose un personnage (map_object) quand on lui parle. kind : gift_item (objet donné, quantity),
+-- gift_pokemon (Pokémon donné, quantity = niveau), sale (objet vendu, price) ou trade (échange :
+-- pokemon_id reçu contre wanted_pokemon_id).
+CREATE TABLE npc_offer (
+    id INTEGER NOT NULL PRIMARY KEY,
+    map_object_id INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    item_id INTEGER,
+    pokemon_id INTEGER,
+    quantity INTEGER,
+    price INTEGER,
+    wanted_pokemon_id INTEGER
+);
+CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
+
+-- Emplacements où dessiner les Pokémon sauvages d'une carte (ville, route ou carte intérieure), bien répartis :
+-- kind grass (hautes herbes), water (eau : surf et pêche) ou floor (sol des grottes et bâtiments).
+CREATE TABLE map_spot (
+    id INTEGER NOT NULL PRIMARY KEY,
+    map_id INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL
+);
+CREATE INDEX index_map_spot_map_id ON map_spot (map_id);

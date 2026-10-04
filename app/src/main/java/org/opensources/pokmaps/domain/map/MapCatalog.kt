@@ -70,7 +70,9 @@ data class MapCatalog(
     val maps: Map<Int, MapInfo>,
     val warps: Map<Int, List<MapWarp>>,
     val objects: Map<Int, List<MapObject>>,
-    val areas: Map<Int, List<MapArea>>
+    val areas: Map<Int, List<MapArea>>,
+    /** Emplacements des Pokémon sauvages de chaque carte (ville, route ou carte intérieure). */
+    val spots: Map<Int, List<MapSpot>> = emptyMap()
 ) {
     val world: MapInfo? = maps.values.firstOrNull { it.identifier == GameMap.WORLD && it.isDisplayable }
 
