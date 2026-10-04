@@ -111,8 +111,15 @@
     <string name="map_layer_warps">Entrées</string>
     <string name="map_layer_items">Objets</string>
     <string name="map_layer_trainers">Dresseurs</string>
-    <string name="map_layer_pokemon">Pokémon fixes</string>
+    <string name="map_layer_npcs">Personnages</string>
+    <string name="map_layer_static_pokemon">Pokémon fixes</string>
+    <string name="map_layer_wild_pokemon">Pokémon sauvages</string>
     <string name="map_back_to">Retour : %1$s</string>
+    <string name="map_floor_ground">RdC</string>
+    <string name="map_floor_storey">%1$d</string>
+    <string name="map_floor_basement">-%1$d</string>
+    <string name="map_floor_roof">Toit</string>
+    <string name="map_floor_elevator">Asc.</string>
     <string name="map_no_encounter">Aucun Pokémon sauvage.</string>
     <string name="map_places">Lieux accessibles</string>
     <string name="map_highlight">Lieux de %1$s</string>
@@ -125,7 +132,13 @@
     <string name="map_open_pokemon">Fiche de %1$s</string>
     <string name="map_zone_list">Liste</string>
     <string name="map_zone_list_description">Liste détaillée des Pokémon et des lieux</string>
-    <string name="map_zone_summary">%1$d Pokémon sauvages</string>
+    <plurals name="map_zone_summary">
+        <item quantity="one">%1$d Pokémon sauvage</item>
+        <item quantity="many">%1$d Pokémon sauvages</item>
+        <item quantity="other">%1$d Pokémon sauvages</item>
+    </plurals>
+    <string name="map_zone_caught">%1$d/%2$d</string>
+    <string name="map_zone_complete">Lieu terminé : tous ses Pokémon sauvages sont capturés</string>
     <string name="map_zone_none">Aucun Pokémon sauvage</string>
     <string name="map_close">Fermer</string>
     <string name="map_hidden_badge">Caché</string>

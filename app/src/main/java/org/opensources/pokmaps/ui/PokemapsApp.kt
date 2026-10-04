@@ -86,7 +86,7 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
     val openItem = { identifier: String -> navController.navigate(itemRoute(identifier)) }
     val openPlace = { identifier: String -> navController.navigate(placeRoute(identifier)) }
     val openCharacter = { objectId: Int -> navController.navigate(characterRoute(objectId)) }
-    val showMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) }
+    val showMap = { navController.showMap() }
 
     Scaffold(
         topBar = {
@@ -186,6 +186,15 @@ private fun NavHostController.navigateToTopLevel(destination: TopLevelDestinatio
     navigate(destination.route) {
         popUpTo(graph.findStartDestination().id) { saveState = true }
         launchSingleTop = true
-        restoreState = true
+        // La carte est la destination de départ : restaurer son état remettrait par-dessus les écrans qu'on vient
+        // de quitter (fiche d'objet, de Pokémon…) au lieu d'afficher la carte.
+        restoreState = destination != TopLevelDestination.MAP
+    }
+}
+
+/** « Voir sur la carte » : revient directement à la carte, en refermant les fiches ouvertes par-dessus. */
+private fun NavHostController.showMap() {
+    if (!popBackStack(TopLevelDestination.MAP.route, inclusive = false)) {
+        navigateToTopLevel(TopLevelDestination.MAP)
     }
 }
