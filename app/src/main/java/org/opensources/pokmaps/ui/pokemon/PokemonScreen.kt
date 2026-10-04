@@ -63,10 +63,12 @@ import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
 import org.opensources.pokmaps.domain.pokemon.EvolutionNode
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.FavoriteButton
+import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.PokemonIconImage
@@ -213,6 +215,8 @@ private fun Header(
                     onError = { artworkFailed = true },
                     modifier = Modifier.fillMaxSize()
                 )
+            } else if (LocalAnimatedSprites.current) {
+                AnimatedPokemonSprite(details.id, details.name, Modifier.fillMaxSize())
             } else {
                 AssetImage(details.spritePath ?: details.iconPath, details.name, Modifier.fillMaxSize())
             }

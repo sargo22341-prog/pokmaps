@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -30,6 +31,7 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.about.AboutScreen
 import org.opensources.pokmaps.ui.character.CharacterScreen
 import org.opensources.pokmaps.ui.character.CharacterViewModel
+import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
 import org.opensources.pokmaps.ui.game.GameSelector
 import org.opensources.pokmaps.ui.game.GameViewModel
 import org.opensources.pokmaps.ui.item.ItemScreen
@@ -41,6 +43,8 @@ import org.opensources.pokmaps.ui.pokedex.PokedexScreen
 import org.opensources.pokmaps.ui.pokemon.PokemonScreen
 import org.opensources.pokmaps.ui.pokemon.PokemonViewModel
 import org.opensources.pokmaps.ui.search.SearchScreen
+import org.opensources.pokmaps.ui.settings.SettingsScreen
+import org.opensources.pokmaps.ui.settings.SettingsViewModel
 
 /** Destinations principales, accessibles depuis la barre de navigation. */
 enum class TopLevelDestination(val route: String, @StringRes val label: Int, @DrawableRes val icon: Int) {
@@ -49,6 +53,7 @@ enum class TopLevelDestination(val route: String, @StringRes val label: Int, @Dr
 }
 
 private const val ABOUT_ROUTE = "about"
+private const val SETTINGS_ROUTE = "settings"
 private const val SEARCH_ROUTE = "search"
 private const val POKEMON_ROUTE = "pokemon/{${PokemonViewModel.POKEMON_ID}}"
 private const val ITEM_ROUTE = "item/{${ItemViewModel.ITEM}}"
@@ -58,6 +63,7 @@ private const val CHARACTER_ROUTE = "character/{${CharacterViewModel.CHARACTER}}
 /** Titre de la barre du haut des écrans ouverts par-dessus la carte et le Pokédex. */
 private val DETAIL_TITLES = mapOf(
     ABOUT_ROUTE to R.string.about_title,
+    SETTINGS_ROUTE to R.string.settings_title,
     SEARCH_ROUTE to R.string.search_title,
     POKEMON_ROUTE to R.string.pokemon_title,
     ITEM_ROUTE to R.string.item_title,
@@ -73,14 +79,26 @@ private fun placeRoute(identifier: String) = "place/$identifier"
 
 private fun characterRoute(objectId: Int) = "character/$objectId"
 
+@Composable
+fun PokemapsApp(
+    gameViewModel: GameViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel()
+) {
+    val settings by settingsViewModel.state.collectAsStateWithLifecycle()
+    CompositionLocalProvider(LocalAnimatedSprites provides settings.animatedSprites) {
+        PokemapsContent(gameViewModel)
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
+private fun PokemapsContent(gameViewModel: GameViewModel) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val route = backStackEntry?.destination?.route
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
-    val isAbout = route == ABOUT_ROUTE
+    // Réglages et « À propos » : ni sélecteur de jeu ni barre de navigation.
+    val isAbout = route == ABOUT_ROUTE || route == SETTINGS_ROUTE
     val detailTitle = DETAIL_TITLES[route]
     val openPokemon = { pokemonId: Int -> navController.navigate(pokemonRoute(pokemonId)) }
     val openItem = { identifier: String -> navController.navigate(itemRoute(identifier)) }
@@ -107,8 +125,8 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
                             }
                         }
                         GameSelector(gameState, gameViewModel::select)
-                        IconButton(onClick = { navController.navigate(ABOUT_ROUTE) }) {
-                            Icon(painterResource(R.drawable.ic_info), stringResource(R.string.about_title))
+                        IconButton(onClick = { navController.navigate(SETTINGS_ROUTE) { launchSingleTop = true } }) {
+                            Icon(painterResource(R.drawable.ic_settings), stringResource(R.string.settings_title))
                         }
                     }
                 }
@@ -177,6 +195,7 @@ fun PokemapsApp(gameViewModel: GameViewModel = hiltViewModel()) {
                     onShowOnMap = showMap
                 )
             }
+            composable(SETTINGS_ROUTE) { SettingsScreen(onOpenAbout = { navController.navigate(ABOUT_ROUTE) }) }
             composable(ABOUT_ROUTE) { AboutScreen() }
         }
     }

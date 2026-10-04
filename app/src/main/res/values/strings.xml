@@ -189,6 +189,10 @@
     <string name="character_not_found">Ce personnage n\'existe pas dans ce jeu.</string>
 
     <string name="about_title">À propos</string>
+    <string name="settings_title">Réglages</string>
+    <string name="settings_display">Affichage</string>
+    <string name="settings_animated_sprites">Sprites animés</string>
+    <string name="settings_animated_sprites_summary">Pokémon animés (sprites de Noir et Blanc) dans le Pokédex et la fiche Pokémon, à la place des sprites fixes.</string>
     <string name="about_version">Version %1$s</string>
     <string name="about_description">Cartes interactives et Pokédex de Pokémon Rouge, Bleu et Jaune, entièrement hors ligne.</string>
     <string name="about_sources_title">Sources</string>
@@ -197,7 +201,7 @@
     <string name="about_credit_pokesprite_title">pokesprite</string>
     <string name="about_credit_pokesprite">Icônes des Pokémon et des objets (msikma/pokesprite).</string>
     <string name="about_credit_sprites_title">PokeAPI/sprites</string>
-    <string name="about_credit_sprites">Sprites des Pokémon de Rouge, Bleu et Jaune.</string>
+    <string name="about_credit_sprites">Sprites des Pokémon de Rouge, Bleu et Jaune, et sprites animés de Noir et Blanc.</string>
     <string name="about_credit_pret_title">pret</string>
     <string name="about_credit_pret">Cartes dessinées à partir des désassemblages pret/pokered et pret/pokeyellow.</string>
     <string name="about_legal_title">Mentions légales</string>

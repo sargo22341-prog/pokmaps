@@ -2,7 +2,6 @@ package org.opensources.pokmaps.ui.map
 
 import android.content.res.Resources
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -88,7 +87,14 @@ enum class WildMethod {
 }
 
 /** Pokémon sauvage dessiné sur la carte, à un emplacement de son terrain (en pixels de la carte affichée). */
-data class WildMarker(val pokemonId: Int, val name: String, val method: WildMethod, val x: Int, val y: Int)
+data class WildMarker(
+    val pokemonId: Int,
+    val name: String,
+    val method: WildMethod,
+    val x: Int,
+    val y: Int,
+    val scale: Float = 1f
+)
 
 /**
  * Lieu sélectionné (ville, route ou carte intérieure) : son contenu est dessiné sur la carte
@@ -168,9 +174,6 @@ class MapViewModel @Inject constructor(
     /** Dernier zoom de chaque carte affichée, retrouvé en y revenant par le bouton retour. */
     private val scales = mutableMapOf<Int, Double>()
 
-    /** Pokémon capturés, lus par les marqueurs (qui se redessinent seuls quand la collection change). */
-    private val caughtIds = mutableStateOf(emptySet<Int>())
-
     /** Cartes où se trouve le Pokémon surligné, et entrée sur la carte du monde de chaque carte intérieure. */
     private var highlightedMaps: Set<Int> = emptySet()
 
@@ -232,7 +235,6 @@ class MapViewModel @Inject constructor(
         }
         viewModelScope.launch {
             observeCollection().collect { collection ->
-                caughtIds.value = collection.caught
                 _state.update { it.copy(caught = collection.caught) }
             }
         }
@@ -499,8 +501,8 @@ class MapViewModel @Inject constructor(
 
     /**
      * Dessine les Pokémon sauvages du lieu sur leur terrain : herbes (ou sol des grottes) en marchant, eau en surfant
-     * ou en pêchant. Chacun apparaît plusieurs fois (les plus fréquents davantage), à des emplacements tirés au
-     * hasard sur tout le terrain, pour montrer qu'on le rencontre partout.
+     * ou en pêchant. Chacun apparaît au moins une fois (les plus fréquents parfois deux), à des emplacements bien
+     * répartis sur le terrain ; sur un terrain étroit, ils sont rangés côte à côte, plus petits.
      */
     private fun wildMarkers(catalog: MapCatalog, zone: MapInfo, encounters: List<Encounter>): List<WildMarker> {
         val spots = catalog.spots[zone.id].orEmpty().groupBy { it.kind }
@@ -523,7 +525,7 @@ class MapViewModel @Inject constructor(
                 spots = WildPlacement.awayFrom(terrain.orEmpty().map { it.x to it.y }, obstacles, species.size),
                 fallback = zone.centerInDisplay(),
                 seed = zone.id * 2 + if (walking) 0 else 1
-            ).map { it.item.copy(x = it.x, y = it.y) }
+            ).map { it.item.copy(x = it.x, y = it.y, scale = it.scale) }
         }
     }
 
@@ -755,13 +757,7 @@ class MapViewModel @Inject constructor(
             val inZone = obj.mapId in zoneParts
             val pokemon = obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null
             mapState.marker("$OBJECT:${obj.id}", obj.x, obj.y, lazy = !inZone, zIndex = 1f, pokemon = pokemon) {
-                ObjectMarker(
-                    mapState,
-                    obj,
-                    catalog.versionGroupIdentifier,
-                    alwaysVisible = inZone,
-                    caught = pokemon && obj.pokemonId in caughtIds.value
-                )
+                ObjectMarker(mapState, obj, catalog.versionGroupIdentifier, alwaysVisible = inZone)
             }
         }
         if (MapLayer.WILD_POKEMON in layers) {
@@ -774,7 +770,7 @@ class MapViewModel @Inject constructor(
                     zIndex = 1f,
                     pokemon = true
                 ) {
-                    WildPokemonMarker(mapState, wild, caught = wild.pokemonId in caughtIds.value)
+                    WildPokemonMarker(mapState, wild)
                 }
             }
         }

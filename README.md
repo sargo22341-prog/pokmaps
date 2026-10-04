@@ -25,7 +25,7 @@ Voir [plan.md](plan.md) pour la feuille de route.
 `tools/build_data.py` génère, dans `app/src/main/assets/` :
 
 - `database/pokedex.db` : la base SQLite de l'application ;
-- `sprites/` : icônes de boîte des Pokémon, sprites des jeux et icônes d'objets ;
+- `sprites/` : icônes de boîte des Pokémon, sprites des jeux, sprites animés (GIF) et icônes d'objets ;
 - `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
   et sprites des PNJ.
 
@@ -36,7 +36,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   lieux et rencontres de chaque version. Les CSV sont téléchargés une seule fois au build, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
 - **[pokesprite](https://github.com/msikma/pokesprite)** : icônes de boîte des Pokémon et icônes d'objets.
-- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites de Rouge/Bleu et Jaune.
+- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites de Rouge/Bleu et Jaune, et sprites animés
+  de Noir/Blanc (activables dans les Réglages).
 - **[pret/pokered](https://github.com/pret/pokered)** et **[pret/pokeyellow](https://github.com/pret/pokeyellow)**
   (désassemblages des jeux) : uniquement pour dessiner les cartes, à partir des blocs, tilesets, palettes Super Game Boy,
   connexions, warps, objets et PNJ. Aucune ROM n'est utilisée.
