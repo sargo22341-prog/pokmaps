@@ -18,8 +18,9 @@ build/
 # OS
 .DS_Store
 
-# Données générées par tools/build_db.py
+# Données générées par tools/build_data.py
 /app/src/main/assets/database/
+/app/src/main/assets/sprites/
 /tools/.cache/
 
 # Python

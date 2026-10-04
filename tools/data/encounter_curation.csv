@@ -1,0 +1,55 @@
+versions,location_area,pokemon,method,action,value
+red|blue|yellow,kanto-route-3/pokemon-center,magikarp,gift,exclude,Doublon : le marchand de Magicarpe se trouve au Centre Pokémon de la Route 4
+red|blue,pallet-town,bulbasaur,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+red|blue,pallet-town,charmander,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+red|blue,pallet-town,squirtle,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+yellow,pallet-town,pikachu,gift,note,Pokémon de départ
+yellow,cerulean-city,bulbasaur,gift,note,Donné par Mélanie si Pikachu est assez attaché au joueur
+yellow,kanto-route-24,charmander,gift,note,Donné par un dresseur au nord du Pont Pépite
+yellow,vermilion-city,squirtle,gift,note,Donné par l'Agent Jenny après avoir obtenu le Badge Foudre
+red|blue|yellow,kanto-route-4/pokemon-center,magikarp,gift,note,Vendu 500 ₽ par un marchand (une seule fois)
+red|blue|yellow,celadon-city/celadon-mansion,eevee,gift,note,Poké Ball posée sur la table de la maison du toit
+red|blue|yellow,saffron-city/silph-co-7f,lapras,gift,note,Donné par un employé de Sylphe SARL
+red|blue|yellow,saffron-city/fighting-dojo,hitmonlee,gift,note,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+red|blue|yellow,saffron-city/fighting-dojo,hitmonchan,gift,note,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+red|blue|yellow,cinnabar-island/cinnabar-lab,omanyte,gift,note,Ressuscité à partir du Fossile Nautile (Mont Sélénite)
+red|blue|yellow,cinnabar-island/cinnabar-lab,kabuto,gift,note,Ressuscité à partir du Fossile Dôme (Mont Sélénite)
+red|blue|yellow,cinnabar-island/cinnabar-lab,aerodactyl,gift,note,Ressuscité à partir du Vieil Ambre (Musée d'Argenta)
+red|blue|yellow,kanto-route-12,snorlax,pokeflute,note,Bloque la route : réveillez-le avec la Pokéflûte
+red|blue|yellow,kanto-route-16,snorlax,pokeflute,note,Bloque la route : réveillez-le avec la Pokéflûte
+red|blue|yellow,kanto-power-plant,voltorb,static,note,Déguisé en Poké Ball
+red|blue|yellow,kanto-power-plant,electrode,static,note,Déguisé en Poké Ball
+red,celadon-city/prize-corner,abra,gift,note,180 jetons
+red,celadon-city/prize-corner,clefairy,gift,note,500 jetons
+red,celadon-city/prize-corner,nidorina,gift,note,1200 jetons
+red,celadon-city/prize-corner,dratini,gift,note,2800 jetons
+red,celadon-city/prize-corner,scyther,gift,note,5500 jetons
+red,celadon-city/prize-corner,porygon,gift,note,9999 jetons
+blue,celadon-city/prize-corner,abra,gift,note,120 jetons
+blue,celadon-city/prize-corner,clefairy,gift,note,750 jetons
+blue,celadon-city/prize-corner,nidorino,gift,note,1200 jetons
+blue,celadon-city/prize-corner,pinsir,gift,note,2500 jetons
+blue,celadon-city/prize-corner,dratini,gift,note,4600 jetons
+blue,celadon-city/prize-corner,porygon,gift,note,6500 jetons
+yellow,celadon-city/prize-corner,abra,gift,note,230 jetons
+yellow,celadon-city/prize-corner,vulpix,gift,note,1000 jetons
+yellow,celadon-city/prize-corner,wigglytuff,gift,note,2680 jetons
+yellow,celadon-city/prize-corner,scyther,gift,note,6500 jetons
+yellow,celadon-city/prize-corner,pinsir,gift,note,6500 jetons
+yellow,celadon-city/prize-corner,porygon,gift,note,9999 jetons
+red|blue,kanto-route-2/north-towards-pewter-city,mr-mime,npc-trade,trade_for,abra
+red|blue,kanto-underground-path,nidoran-f,npc-trade,trade_for,nidoran-m
+red|blue,kanto-route-11,nidorina,npc-trade,trade_for,nidorino
+red|blue,kanto-route-18,lickitung,npc-trade,trade_for,slowbro
+red|blue,cerulean-city,jynx,npc-trade,trade_for,poliwhirl
+red|blue,vermilion-city,farfetchd,npc-trade,trade_for,spearow
+red|blue,cinnabar-island/cinnabar-lab,electrode,npc-trade,trade_for,raichu
+red|blue,cinnabar-island/cinnabar-lab,tangela,npc-trade,trade_for,venonat
+red|blue,cinnabar-island/cinnabar-lab,seel,npc-trade,trade_for,ponyta
+yellow,kanto-route-2/north-towards-pewter-city,mr-mime,npc-trade,trade_for,clefairy
+yellow,kanto-underground-path,machoke,npc-trade,trade_for,cubone
+yellow,kanto-route-11,dugtrio,npc-trade,trade_for,lickitung
+yellow,kanto-route-18,parasect,npc-trade,trade_for,tangela
+yellow,cinnabar-island/cinnabar-lab,rhydon,npc-trade,trade_for,golduck
+yellow,cinnabar-island/cinnabar-lab,dewgong,npc-trade,trade_for,growlithe
+yellow,cinnabar-island/cinnabar-lab,muk,npc-trade,trade_for,kangaskhan

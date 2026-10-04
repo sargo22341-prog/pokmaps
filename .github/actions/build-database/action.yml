@@ -1,5 +1,5 @@
-name: Générer pokedex.db
-description: Génère la base de données de l'application avec tools/build_db.py et lance les tests du pipeline.
+name: Générer les données
+description: Génère la base de données et les images de l'application (tools/build_data.py) et lance les tests du pipeline.
 
 runs:
   using: composite
@@ -10,7 +10,7 @@ runs:
         cache: pip
         cache-dependency-path: tools/requirements-dev.txt
 
-    - name: Cache des sources (pret, PokéAPI)
+    - name: Cache des sources (PokéAPI, pokesprite, PokeAPI/sprites)
       uses: actions/cache@v5
       with:
         path: tools/.cache
@@ -27,9 +27,9 @@ runs:
         ruff check .
         ruff format --check .
 
-    - name: Générer la base
+    - name: Générer la base et les images
       shell: bash
-      run: python tools/build_db.py
+      run: python tools/build_data.py
 
     - name: Tests du pipeline
       shell: bash
