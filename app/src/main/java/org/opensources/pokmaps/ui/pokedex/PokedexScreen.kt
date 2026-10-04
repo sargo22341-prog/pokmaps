@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -46,8 +47,10 @@ import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokedex.CaughtFilter
+import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.FavoriteButton
+import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtFill
 import org.opensources.pokmaps.ui.common.TypeBadge
@@ -230,13 +233,24 @@ private fun PokedexCard(
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                PixelArtFill(
-                    Sprites.pokemonIcon(entry.pokemonId),
-                    PixelArt.POKEMON_ICON,
-                    contentDescription = null,
-                    alpha = alpha,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                if (LocalAnimatedSprites.current) {
+                    AnimatedPokemonSprite(
+                        entry.pokemonId,
+                        contentDescription = null,
+                        alpha = alpha,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(PixelArt.POKEMON_ICON.width / PixelArt.POKEMON_ICON.height.toFloat())
+                    )
+                } else {
+                    PixelArtFill(
+                        Sprites.pokemonIcon(entry.pokemonId),
+                        PixelArt.POKEMON_ICON,
+                        contentDescription = null,
+                        alpha = alpha,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
                 Text(
                     stringResource(R.string.pokedex_number, entry.number),
                     style = MaterialTheme.typography.labelSmall,
