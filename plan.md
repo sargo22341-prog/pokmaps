@@ -149,9 +149,19 @@ Règles :
 - [x] Sprites des Pokémon plus grands (carte, Pokédex, fiche) ; recherche du Pokédex sur une ligne
 - [x] Fiche Pokémon : évolutions en arbre de gauche à droite (branches d'Évoli reliées à Évoli)
 
+## Phase 7 ter — Retouches de la carte et des fiches ✅
+- [x] Marqueurs (Pokémon, objets, personnages) à l'échelle de la carte : ils grandissent et rapetissent avec le zoom (1 pixel de sprite = 1 pixel Game Boy)
+- [x] Pokémon sauvages plus grands, dessinés plusieurs fois (les plus fréquents davantage) et répartis au hasard sur tout leur terrain, loin des bords (`map_spot` : jusqu'à 40 emplacements espacés de 3 cases, l'intérieur des zones d'abord ; `WildPlacement`)
+- [x] Personnage qui n'a rien à donner, vendre ni échanger : aucune mention
+- [x] Changement de version : la carte reste à la même position (même lieu et même zoom) si elle existe dans le nouveau jeu
+- [x] Pokémon donné ou reçu par échange (Excelangue…) : « Voir sur la carte » entre chez le personnage et le centre sur lui
+- [x] Sprites agrandis : évolutions, objets d'évolution et Poké Balls de la fiche (× 2), Pokédex (icônes aussi larges que la case)
+
 ## Phase 8 — Finitions
-- [ ] Recherche globale (Pokémon et lieux)
-- [ ] Favoris ou Pokémon capturés (suivi de progression par version)
+- [x] Recherche globale : Pokémon, lieux, objets (et attaque des CT / CS), personnages (par leur nom ou ce qu'ils donnent, vendent ou échangent)
+- [x] Fiche objet : description, attaque de la CT / CS, Pokémon qu'il fait évoluer, où le trouver (objets visibles et cachés), où l'acheter (prix), qui le donne, avec « Voir sur la carte » qui centre la carte sur l'objet ou le personnage lui-même
+- [x] Fiches lieu (Pokémon sauvages, objets, personnages, lieux accessibles) et personnage (équipe, dons, ventes, échanges)
+- [x] Pokémon capturés (Poké Ball dans le Pokédex et la fiche, suivi par version) et favoris (communs à tous les jeux), filtres « Capture » et « Favoris »
 - [ ] Tests UI Compose sur les parcours principaux
 - [ ] Optimisation de la taille de l'APK (WebP des tuiles, R8)
 - [ ] Captures d'écran dans le README

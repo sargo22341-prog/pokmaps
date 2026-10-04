@@ -49,9 +49,82 @@ interface MapDao {
     )
     suspend fun encounters(versionId: Int, areaIds: List<Int>): List<EncounterRow>
 
-    /** Zones où l'on rencontre un Pokémon dans une version. */
-    @Query("SELECT DISTINCT location_area_id FROM encounter WHERE version_id = :versionId AND pokemon_id = :pokemonId")
-    suspend fun pokemonAreas(versionId: Int, pokemonId: Int): List<Int>
+    /** Zones où l'on rencontre un Pokémon dans une version, avec la méthode (herbes, don, échange…). */
+    @Query(
+        """
+        SELECT DISTINCT e.location_area_id AS areaId, em.identifier AS method
+        FROM encounter e JOIN encounter_method em ON em.id = e.method_id
+        WHERE e.version_id = :versionId AND e.pokemon_id = :pokemonId
+        """
+    )
+    suspend fun pokemonAreaMethods(versionId: Int, pokemonId: Int): List<AreaMethodRow>
+
+    /** Personnages des cartes du jeu qui donnent ou échangent un Pokémon. */
+    @Query(
+        """
+        SELECT DISTINCT n.map_object_id FROM npc_offer n
+        JOIN map_object o ON o.id = n.map_object_id
+        JOIN map m ON m.id = o.map_id
+        WHERE m.version_group_id = :versionGroupId AND n.pokemon_id = :pokemonId
+            AND n.kind IN ('gift_pokemon', 'trade')
+        ORDER BY n.map_object_id
+        """
+    )
+    suspend fun pokemonGivers(versionGroupId: Int, pokemonId: Int): List<Int>
+
+    /** Objets du jeu : ramassables ou cachés, donnés, vendus, CT / CS et objets d'évolution. */
+    @Query(
+        """
+        SELECT i.id, i.identifier, i.name_fr AS name, i.has_sprite AS hasSprite, i.category, mv.name_fr AS moveName
+        FROM item i
+        LEFT JOIN machine ma ON ma.item_id = i.id AND ma.version_group_id = :versionGroupId
+        LEFT JOIN move mv ON mv.id = ma.move_id
+        WHERE ma.item_id IS NOT NULL
+            OR i.id IN (
+                SELECT o.item_id FROM map_object o JOIN map m ON m.id = o.map_id
+                WHERE m.version_group_id = :versionGroupId
+            )
+            OR i.id IN (
+                SELECT n.item_id FROM npc_offer n
+                JOIN map_object o ON o.id = n.map_object_id
+                JOIN map m ON m.id = o.map_id
+                WHERE m.version_group_id = :versionGroupId
+            )
+            OR i.id IN (SELECT e.item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
+        ORDER BY i.id
+        """
+    )
+    suspend fun items(versionGroupId: Int): List<ItemRow>
+
+    /** Dons, ventes et échanges de tous les personnages du jeu. */
+    @Query(
+        """
+        SELECT n.map_object_id AS objectId, n.kind, i.identifier AS itemIdentifier, i.name_fr AS itemName,
+            n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, w.name_fr AS wantedPokemonName, n.price, n.quantity
+        FROM npc_offer n
+        JOIN map_object o ON o.id = n.map_object_id
+        JOIN map m ON m.id = o.map_id
+        LEFT JOIN item i ON i.id = n.item_id
+        LEFT JOIN pokemon p ON p.id = n.pokemon_id
+        LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id
+        WHERE m.version_group_id = :versionGroupId
+        ORDER BY n.id
+        """
+    )
+    suspend fun offerLinks(versionGroupId: Int): List<OfferLinkRow>
+
+    /** Pokémon qui évoluent grâce à un objet dans le jeu. */
+    @Query(
+        """
+        SELECT e.from_pokemon_id AS fromId, f.name_fr AS fromName, e.to_pokemon_id AS toId, t.name_fr AS toName
+        FROM evolution e
+        JOIN pokemon f ON f.id = e.from_pokemon_id
+        JOIN pokemon t ON t.id = e.to_pokemon_id
+        WHERE e.version_group_id = :versionGroupId AND e.item_id = :itemId
+        ORDER BY e.from_pokemon_id
+        """
+    )
+    suspend fun itemEvolutions(versionGroupId: Int, itemId: Int): List<ItemEvolutionRow>
 
     @Query(
         """

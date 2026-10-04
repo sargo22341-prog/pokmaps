@@ -41,3 +41,47 @@ data class ItemDetails(
     val description: String?,
     val move: LearnedMove?
 )
+
+/** Objet du jeu (pour la recherche), avec l'attaque enseignée pour une CT / CS. */
+data class ItemSummary(
+    val id: Int,
+    val identifier: String,
+    val name: String,
+    val hasSprite: Boolean,
+    val moveName: String?
+)
+
+/** Don, vente ou échange d'un personnage de la carte, avec les noms des objets et des Pokémon. */
+data class OfferLink(
+    val objectId: Int,
+    val kind: String,
+    val itemIdentifier: String?,
+    val itemName: String?,
+    val pokemonId: Int?,
+    val pokemonName: String?,
+    val wantedPokemonName: String?,
+    val price: Int?,
+    val quantity: Int?
+) {
+    companion object {
+        const val GIFT_ITEM = "gift_item"
+        const val GIFT_POKEMON = "gift_pokemon"
+        const val SALE = "sale"
+        const val TRADE = "trade"
+    }
+}
+
+/** Objets et offres des personnages d'un jeu, parcourus par la recherche et les fiches. */
+data class GameIndex(val items: List<ItemSummary>, val offers: List<OfferLink>)
+
+/** Évolution déclenchée par un objet (pierre). */
+data class ItemEvolution(val fromId: Int, val fromName: String, val toId: Int, val toName: String)
+
+/**
+ * Où trouver un Pokémon sur les cartes : `maps` (villes, routes et cartes intérieures, y compris celles des
+ * personnages qui le donnent ou l'échangent) et `givers`, ces personnages.
+ */
+data class PokemonPlaces(val maps: Set<Int>, val givers: List<MapObject>) {
+    /** On l'obtient seulement auprès de personnages : on va directement les voir. */
+    val onlyFromGivers: Boolean get() = givers.isNotEmpty() && maps == givers.map { it.mapId }.toSet()
+}

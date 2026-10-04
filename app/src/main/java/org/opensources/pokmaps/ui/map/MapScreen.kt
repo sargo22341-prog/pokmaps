@@ -1,7 +1,6 @@
 package org.opensources.pokmaps.ui.map
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,24 +49,22 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
-import org.opensources.pokmaps.domain.map.NpcOffer
-import org.opensources.pokmaps.domain.map.OfferItem
-import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
-import org.opensources.pokmaps.ui.common.TypeBadge
-import org.opensources.pokmaps.ui.common.label
 import ovh.plrapps.mapcompose.ui.MapUI
 
 @Composable
-fun MapScreen(onOpenPokemon: (Int) -> Unit, modifier: Modifier = Modifier, viewModel: MapViewModel = hiltViewModel()) {
+fun MapScreen(
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: MapViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val snackbar = remember { SnackbarHostState() }
     val notFoundMessage = state.notFound?.let {
@@ -111,7 +108,8 @@ fun MapScreen(onOpenPokemon: (Int) -> Unit, modifier: Modifier = Modifier, viewM
                     detail = detail,
                     versionGroupIdentifier = versionGroup,
                     onClose = viewModel::dismissDetail,
-                    onOpenPokemon = onOpenPokemon
+                    onOpenPokemon = onOpenPokemon,
+                    onOpenItem = onOpenItem
                 )
 
                 zone != null -> ZoneBar(
@@ -332,7 +330,8 @@ private fun DetailCard(
     detail: MapDetail,
     versionGroupIdentifier: String,
     onClose: () -> Unit,
-    onOpenPokemon: (Int) -> Unit
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
 ) {
     Surface(
         shape = MaterialTheme.shapes.large,
@@ -352,8 +351,15 @@ private fun DetailCard(
             ) {
                 when (detail) {
                     is MapDetail.WildPokemon -> WildPokemonDetails(detail, onOpenPokemon)
-                    is MapDetail.Item -> ItemDetailsContent(detail, versionGroupIdentifier)
-                    is MapDetail.Character -> CharacterDetails(detail, versionGroupIdentifier, onOpenPokemon)
+
+                    is MapDetail.Item -> ItemDetailsContent(detail, versionGroupIdentifier, onOpenItem)
+
+                    is MapDetail.Character -> CharacterDetails(
+                        detail,
+                        versionGroupIdentifier,
+                        onOpenPokemon,
+                        onOpenItem
+                    )
                 }
             }
             IconButton(onClick = onClose, modifier = Modifier.align(Alignment.TopEnd)) {
@@ -397,7 +403,7 @@ private fun WildPokemonDetails(detail: MapDetail.WildPokemon, onOpenPokemon: (In
 }
 
 @Composable
-private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: String) {
+private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: String, onOpenItem: (String) -> Unit) {
     val obj = detail.obj
     val hidden = obj.kind == MapObjectKind.HIDDEN_ITEM
     DetailHeader(
@@ -430,13 +436,17 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
         MoveLine(move)
     }
     details.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+    Button(onClick = { onOpenItem(details.identifier) }) {
+        Text(stringResource(R.string.map_open_item, details.name))
+    }
 }
 
 @Composable
 private fun CharacterDetails(
     detail: MapDetail.Character,
     versionGroupIdentifier: String,
-    onOpenPokemon: (Int) -> Unit
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
 ) {
     val obj = detail.obj
     val pokemonId = obj.pokemonId
@@ -472,138 +482,8 @@ private fun CharacterDetails(
             detail.party.forEach { TrainerPokemonRow(it, onOpenPokemon) }
         }
     }
-    Offers(detail.offers)
-    if (obj.kind == MapObjectKind.NPC && detail.offers.isEmpty()) {
-        Text(
-            stringResource(R.string.map_npc_nothing),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
-private fun CharacterSprite(obj: MapObject, versionGroupIdentifier: String) {
-    val sprite = obj.sprite ?: return
-    PixelArtImage(Sprites.mapSprite(versionGroupIdentifier, sprite), PixelArt.MAP_SPRITE, 48.dp, null)
-}
-
-@Composable
-private fun SectionTitle(text: String) {
-    Text(
-        text,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(top = 4.dp)
-    )
-}
-
-/** Pokémon d'un dresseur : niveau et attaques qu'il utilisera. */
-@Composable
-private fun TrainerPokemonRow(mon: TrainerPokemon, onOpenPokemon: (Int) -> Unit) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onOpenPokemon(mon.pokemonId) }
-            .padding(vertical = 4.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PixelArtImage(Sprites.pokemonIcon(mon.pokemonId), PixelArt.POKEMON_ICON, 48.dp, null)
-            Text(mon.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-            Text(stringResource(R.string.encounter_levels, mon.level), style = MaterialTheme.typography.titleSmall)
-        }
-        mon.moves.forEach { MoveLine(it, Modifier.padding(start = 16.dp)) }
-    }
-}
-
-/** Attaque : nom, type et caractéristiques (catégorie, puissance, précision, PP). */
-@Composable
-private fun MoveLine(move: LearnedMove, modifier: Modifier = Modifier) {
-    val none = stringResource(R.string.no_value)
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
-    ) {
-        TypeBadge(move.type)
-        Column(Modifier.weight(1f)) {
-            Text(move.name, style = MaterialTheme.typography.bodyMedium)
-            Text(
-                listOf(
-                    stringResource(move.damageClass.label),
-                    "${stringResource(R.string.move_power)} ${move.power ?: none}",
-                    "${stringResource(R.string.move_accuracy)} ${move.accuracy?.let { "$it %" } ?: none}",
-                    "${stringResource(R.string.move_pp)} ${move.pp}"
-                ).joinToString(" · "),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}
-
-/** Dons, ventes et échanges d'un personnage. */
-@Composable
-private fun Offers(offers: List<NpcOffer>) {
-    val gifts = offers.filter { it is NpcOffer.GiftItem || it is NpcOffer.GiftPokemon }
-    val sales = offers.filterIsInstance<NpcOffer.Sale>()
-    val trades = offers.filterIsInstance<NpcOffer.Trade>()
-    if (gifts.isNotEmpty()) {
-        SectionTitle(stringResource(R.string.map_offer_gifts))
-        gifts.forEach { offer ->
-            when (offer) {
-                is NpcOffer.GiftItem -> OfferItemRow(
-                    offer.item,
-                    if (offer.quantity > 1) {
-                        stringResource(R.string.map_offer_quantity, offer.item.name, offer.quantity)
-                    } else {
-                        offer.item.name
-                    }
-                )
-
-                is NpcOffer.GiftPokemon -> OfferPokemonRow(
-                    offer.pokemonId,
-                    offer.level?.let { stringResource(R.string.map_offer_pokemon_level, offer.name, it) } ?: offer.name
-                )
-
-                else -> Unit
-            }
-        }
-    }
-    if (sales.isNotEmpty()) {
-        SectionTitle(stringResource(R.string.map_offer_sales))
-        sales.forEach { sale ->
-            OfferItemRow(sale.item, sale.item.name, sale.price?.let { stringResource(R.string.map_offer_price, it) })
-        }
-    }
-    if (trades.isNotEmpty()) {
-        SectionTitle(stringResource(R.string.map_offer_trades))
-        trades.forEach { trade ->
-            OfferPokemonRow(trade.pokemonId, stringResource(R.string.map_offer_trade, trade.name, trade.wantedName))
-        }
-    }
-}
-
-@Composable
-private fun OfferItemRow(item: OfferItem, text: String, trailing: String? = null) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        if (item.hasSprite) {
-            PixelArtImage(Sprites.item(item.identifier), PixelArt.ITEM_ICON, 32.dp, null)
-        } else {
-            Box(Modifier.size(32.dp))
-        }
-        Text(text, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-        trailing?.let { Text(it, style = MaterialTheme.typography.titleSmall) }
-    }
-}
-
-@Composable
-private fun OfferPokemonRow(pokemonId: Int, text: String) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 48.dp, null)
-        Text(text, style = MaterialTheme.typography.bodyMedium)
-    }
+    // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
+    Offers(detail.offers, onOpenPokemon = onOpenPokemon, onOpenItem = onOpenItem)
 }
 
 private val DETAIL_MAX_HEIGHT = 360.dp
