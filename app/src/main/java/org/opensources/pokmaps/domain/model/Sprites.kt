@@ -9,6 +9,9 @@ object Sprites {
     fun pokemonSprite(versionGroupIdentifier: String, pokemonId: Int) =
         "sprites/pokemon/$versionGroupIdentifier/$pokemonId.png"
 
+    /** Sprite animé du Pokémon (Noir et Blanc, PokeAPI/sprites), en GIF. */
+    fun pokemonAnimated(pokemonId: Int) = "sprites/pokemon/animated/$pokemonId.gif"
+
     /** Icône d'un objet (pokesprite), ex. « fire-stone ». */
     fun item(identifier: String) = "sprites/items/$identifier.png"
 

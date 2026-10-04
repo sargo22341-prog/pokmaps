@@ -31,7 +31,7 @@ icons come from the pokesprite project; official artwork is served via PokeAPI/s
 |---|---|---|
 | **[PokéAPI](https://pokeapi.co)** — export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv) | **Source principale** : Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, CT/CS, évolutions, Pokédex régionaux, lieux et zones (noms FR), rencontres par version (herbes, surf, cannes, dons, échanges, Pokémon fixes, conditions), table des types par génération | Données BSD-3. [Usage équitable](https://pokeapi.co/docs/v2#fairuse) : on télécharge les CSV **une fois au build**, avec cache ; l'application n'appelle jamais l'API |
 | **[msikma/pokesprite](https://github.com/msikma/pokesprite)** | Icônes de boîte des Pokémon (`pokemon-gen8/regular`) et icônes d'objets (Poké Balls, pierres, CT/CS par type) | Code MIT ; images © Nintendo / Game Freak |
-| **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** | Sprites des jeux embarqués (`versions/generation-i/red-blue`, `yellow`) ; artworks officiels (`other/official-artwork`) chargés en ligne avec cache, en option | Images © Nintendo / Game Freak |
+| **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** | Sprites des jeux embarqués (`versions/generation-i/red-blue`, `yellow`) et sprites animés de Noir et Blanc (`versions/generation-v/black-white/animated`, en option) ; artworks officiels (`other/official-artwork`) chargés en ligne avec cache, en option | Images © Nintendo / Game Freak |
 | **`tools/data/`** (saisie manuelle, relue) | Couche de corrections : noms français corrigés (accents, étages), notes (prix du Casino, Pokémon à échanger, « un seul au choix »), doublons retirés | Ce projet |
 | **[pret/pokered](https://github.com/pret/pokered)**, **[pret/pokeyellow](https://github.com/pret/pokeyellow)** | **Uniquement pour les cartes** : blocs, tilesets, palettes, connexions, objets, PNJ, warps (fichiers sources du dépôt, aucune ROM) | Désassemblages communautaires |
 | Plus tard : [Bulbapedia](https://bulbapedia.bulbagarden.net) (CC BY-NC-SA), export de données PokeDB | Disponibilités des générations récentes absentes de PokéAPI, comme le fait pokemaps.net | À créditer dans l'app |
@@ -173,6 +173,10 @@ Règles :
 - [x] Fiche objet : description, attaque de la CT / CS, Pokémon qu'il fait évoluer, où le trouver (objets visibles et cachés), où l'acheter (prix), qui le donne, avec « Voir sur la carte » qui centre la carte sur l'objet ou le personnage lui-même
 - [x] Fiches lieu (Pokémon sauvages, objets, personnages, lieux accessibles) et personnage (équipe, dons, ventes, échanges)
 - [x] Pokémon capturés (Poké Ball dans le Pokédex et la fiche, suivi par version) et favoris (communs à tous les jeux), filtres « Capture » et « Favoris »
+- [x] Carte allégée : plus de Poké Ball à côté des Pokémon capturés (la progression reste dans la barre du lieu et la liste)
+- [x] Moins de Pokémon sauvages sur la carte : deux marqueurs au plus par Pokémon, un pour quatre emplacements, huit au plus par terrain, répartis au plus loin les uns des autres ; terrain trop étroit (petits étangs) : Pokémon rangés en grille, plus petits, sans se chevaucher (`WildPlacement`)
+- [x] Sprites animés (GIF de Noir et Blanc, PokeAPI/sprites, embarqués) dans le Pokédex et la fiche Pokémon, agrandis d'un nombre entier de fois
+- [x] Écran Réglages (icône ⚙ de la barre du haut) : sprites animés activables (DataStore), accès à « À propos »
 - [ ] Tests UI Compose sur les parcours principaux
 - [ ] Optimisation de la taille de l'APK (WebP des tuiles, R8)
 - [ ] Captures d'écran dans le README
