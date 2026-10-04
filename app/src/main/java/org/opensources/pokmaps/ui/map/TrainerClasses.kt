@@ -1,0 +1,52 @@
+package org.opensources.pokmaps.ui.map
+
+/** Noms français des classes de dresseurs de la 1re génération (identifiants des désassemblages pret). */
+private val TRAINER_CLASSES = mapOf(
+    "agatha" to "Agatha",
+    "beauty" to "Canon",
+    "biker" to "Motard",
+    "bird-keeper" to "Ornithologue",
+    "blackbelt" to "Karatéka",
+    "blaine" to "Auguste",
+    "brock" to "Pierre",
+    "bruno" to "Aldo",
+    "bug-catcher" to "Scout",
+    "burglar" to "Cambrioleur",
+    "channeler" to "Exorciste",
+    "cooltrainer-f" to "Topdresseuse",
+    "cooltrainer-m" to "Topdresseur",
+    "cue-ball" to "Loubard",
+    "engineer" to "Ingénieur",
+    "erika" to "Érika",
+    "fisher" to "Pêcheur",
+    "gambler" to "Parieur",
+    "gentleman" to "Gentleman",
+    "giovanni" to "Giovanni",
+    "hiker" to "Montagnard",
+    "jr-trainer-f" to "Dresseuse",
+    "jr-trainer-m" to "Dresseur",
+    "juggler" to "Jongleur",
+    "koga" to "Koga",
+    "lance" to "Peter",
+    "lass" to "Fillette",
+    "lorelei" to "Olga",
+    "lt-surge" to "Major Bob",
+    "misty" to "Ondine",
+    "pokemaniac" to "Pokémaniac",
+    "psychic-tr" to "Kinésiste",
+    "rival1" to "Rival",
+    "rival2" to "Rival",
+    "rival3" to "Rival",
+    "rocker" to "Rockeur",
+    "rocket" to "Sbire Rocket",
+    "sabrina" to "Morgane",
+    "sailor" to "Marin",
+    "scientist" to "Scientifique",
+    "super-nerd" to "Intello",
+    "swimmer" to "Nageur",
+    "tamer" to "Dompteur",
+    "youngster" to "Gamin"
+)
+
+fun trainerClassName(identifier: String): String =
+    TRAINER_CLASSES[identifier] ?: identifier.replace('-', ' ').replaceFirstChar { it.uppercase() }
