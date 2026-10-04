@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -46,7 +45,8 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.ui.common.AssetImage
+import org.opensources.pokmaps.ui.common.PixelArt
+import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
 
@@ -168,7 +168,7 @@ private fun <T> DropdownChip(label: String, selected: Boolean, options: List<Pai
 @Composable
 private fun PokedexGrid(entries: List<PokedexEntry>, onOpenPokemon: (Int) -> Unit) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 104.dp),
+        columns = GridCells.Adaptive(minSize = 120.dp),
         contentPadding = PaddingValues(12.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -192,11 +192,12 @@ private fun PokedexCard(entry: PokedexEntry, onClick: () -> Unit) {
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-            AssetImage(
+            PixelArtImage(
                 Sprites.pokemonIcon(entry.pokemonId),
+                PixelArt.POKEMON_ICON,
+                96.dp,
                 contentDescription = null,
-                alpha = alpha,
-                modifier = Modifier.size(56.dp)
+                alpha = alpha
             )
             Text(
                 stringResource(R.string.pokedex_number, entry.number),

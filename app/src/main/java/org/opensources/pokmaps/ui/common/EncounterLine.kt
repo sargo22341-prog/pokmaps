@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,7 +51,7 @@ private fun EncounterLine(encounter: Encounter, title: String, iconPath: String?
             .then(if (onClick != null) Modifier.clickable { onClick(encounter) } else Modifier)
             .padding(vertical = 2.dp)
     ) {
-        if (iconPath != null) AssetImage(iconPath, contentDescription = null, modifier = Modifier.size(40.dp))
+        if (iconPath != null) PixelArtImage(iconPath, PixelArt.POKEMON_ICON, 56.dp, contentDescription = null)
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.bodyLarge)
             val details = encounterDetails(encounter)

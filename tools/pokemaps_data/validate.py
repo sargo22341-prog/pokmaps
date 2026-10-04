@@ -84,6 +84,40 @@ CHECKS = (
              OR o.item_id NOT IN (SELECT id FROM item) OR o.pokemon_id NOT IN (SELECT id FROM pokemon)
              OR o.x NOT BETWEEN m.x AND m.x + m.width OR o.y NOT BETWEEN m.y AND m.y + m.height""",
     ),
+    (
+        "équipe de dresseur incohérente",
+        """SELECT t.* FROM trainer_pokemon t LEFT JOIN map_object o ON o.id = t.map_object_id
+           WHERE o.kind IS NOT 'trainer' OR t.pokemon_id NOT IN (SELECT id FROM pokemon)
+             OR t.level NOT BETWEEN 1 AND 100 OR t.move1_id IS NULL""",
+    ),
+    (
+        "attaque de dresseur sans caractéristiques dans le jeu",
+        """SELECT t.map_object_id, t.slot, mv.move_id FROM trainer_pokemon t
+           JOIN map_object o ON o.id = t.map_object_id JOIN map m ON m.id = o.map_id
+           JOIN (SELECT map_object_id, slot, move1_id AS move_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, slot, move2_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, slot, move3_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, slot, move4_id FROM trainer_pokemon) mv
+             ON mv.map_object_id = t.map_object_id AND mv.slot = t.slot AND mv.move_id IS NOT NULL
+           LEFT JOIN move_version_group mvg ON mvg.move_id = mv.move_id AND mvg.version_group_id = m.version_group_id
+           WHERE mvg.move_id IS NULL""",
+    ),
+    (
+        "offre de personnage incohérente",
+        """SELECT n.* FROM npc_offer n LEFT JOIN map_object o ON o.id = n.map_object_id
+           WHERE o.id IS NULL
+             OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'sale', 'trade')
+             OR (n.kind IN ('gift_item', 'sale')) != (n.item_id IS NOT NULL)
+             OR (n.kind IN ('gift_pokemon', 'trade')) != (n.pokemon_id IS NOT NULL)
+             OR (n.kind = 'trade') != (n.wanted_pokemon_id IS NOT NULL)
+             OR n.item_id NOT IN (SELECT id FROM item) OR n.pokemon_id NOT IN (SELECT id FROM pokemon)""",
+    ),
+    (
+        "emplacement de Pokémon hors de sa carte",
+        """SELECT s.id FROM map_spot s JOIN map m ON m.id = s.map_id
+           WHERE s.kind NOT IN ('grass', 'water', 'floor')
+             OR s.x NOT BETWEEN m.x AND m.x + m.width OR s.y NOT BETWEEN m.y AND m.y + m.height""",
+    ),
 )
 
 
