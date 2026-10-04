@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokémaps</string>
+    <string name="home_title">Pokémaps</string>
+    <string name="home_subtitle">Cartes interactives de Pokémon Rouge, Bleu et Jaune</string>
+    <string name="home_wip">Application en cours de construction</string>
+</resources>

@@ -1,0 +1,29 @@
+# Gradle / Android
+.gradle/
+build/
+/local.properties
+/captures
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+
+# OS
+.DS_Store
+
+# Données générées par tools/build_db.py
+/app/src/main/assets/database/
+/tools/.cache/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

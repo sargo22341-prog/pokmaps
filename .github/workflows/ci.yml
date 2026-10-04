@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Données + APK debug
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Générer pokedex.db
+        uses: ./.github/actions/build-database
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Vérifications (ktlint, sans Google Play, lint, tests)
+        run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintDebug testDebugUnitTest
+
+      - name: Build APK debug
+        run: ./gradlew --stacktrace assembleDebug
+
+      - name: Publier l'APK debug
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokemaps-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publier les rapports en cas d'échec
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+          if-no-files-found: ignore
