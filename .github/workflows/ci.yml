@@ -30,7 +30,7 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
 
       - name: Vérifications (ktlint, sans Google Play, lint, tests)
         run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintDebug testDebugUnitTest
@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew --stacktrace assembleDebug
 
       - name: Publier l'APK debug
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pokemaps-debug-apk
           path: app/build/outputs/apk/debug/*.apk
@@ -48,7 +48,7 @@ jobs:
 
       - name: Publier les rapports en cas d'échec
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: rapports
           path: |
