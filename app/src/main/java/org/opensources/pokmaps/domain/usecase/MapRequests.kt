@@ -6,9 +6,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-/** Demande d'affichage sur la carte, venue d'un autre écran (bouton « Voir sur la carte » de la fiche Pokémon). */
+/** Demande d'affichage sur la carte, venue d'un autre écran (boutons « Voir sur la carte » des fiches). */
 sealed interface MapRequest {
     data class HighlightPokemon(val pokemonId: Int, val name: String) : MapRequest
+
+    /** Ouvre un lieu (ville, route ou carte intérieure), d'après l'identifiant de sa carte. */
+    data class OpenPlace(val mapIdentifier: String) : MapRequest
+
+    /** Centre la carte sur un objet ou un personnage (en entrant dans son bâtiment) et ouvre sa fiche. */
+    data class FocusObject(val objectId: Int) : MapRequest
 }
 
 /** Transmet les demandes à l'écran de la carte, qui les consomme. */

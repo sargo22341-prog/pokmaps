@@ -9,6 +9,7 @@ import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.PokemonPlaces
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
@@ -26,15 +27,27 @@ class GetMapEncountersUseCase @Inject constructor(private val maps: MapRepositor
         maps.encounters(game, catalog.areas[mapId].orEmpty().map { it.areaId })
 }
 
-/** Cartes où l'on trouve un Pokémon dans la version du jeu : zones de rencontre et Pokémon fixes. */
+/**
+ * Cartes où l'on trouve un Pokémon dans la version du jeu : zones de rencontre, Pokémon fixes et personnages
+ * qui le donnent ou l'échangent. Pour un don ou un échange, c'est le personnage qui compte (dans sa maison),
+ * pas la zone de rencontre PokéAPI (souvent la route voisine).
+ */
 class GetPokemonMapsUseCase @Inject constructor(private val maps: MapRepository) {
-    suspend operator fun invoke(game: Game, catalog: MapCatalog, pokemonId: Int): Set<Int> {
-        val areas = maps.pokemonAreas(game, pokemonId)
+    suspend operator fun invoke(game: Game, catalog: MapCatalog, pokemonId: Int): PokemonPlaces {
+        val givers = maps.pokemonGivers(game, pokemonId).mapNotNull { catalog.objectsById[it] }
+        val areas = maps.pokemonAreaMethods(game, pokemonId)
+            .filter { (_, method) -> givers.isEmpty() || method !in NPC_METHODS }
+            .map { it.first }
+            .toSet()
         val byArea = catalog.areas.values.flatten().filter { it.areaId in areas }.map { it.mapId }
         val byObject = catalog.objects.values.flatten()
             .filter { it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId }
             .map { it.mapId }
-        return (byArea + byObject).toSet()
+        return PokemonPlaces((byArea + byObject + givers.map { it.mapId }).toSet(), givers)
+    }
+
+    private companion object {
+        val NPC_METHODS = setOf("gift", "npc-trade")
     }
 }
 

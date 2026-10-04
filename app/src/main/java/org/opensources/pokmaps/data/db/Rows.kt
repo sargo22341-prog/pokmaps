@@ -140,3 +140,28 @@ data class ItemDetailsRow(
     val typeIdentifier: String?,
     val typeName: String?
 )
+
+data class AreaMethodRow(val areaId: Int, val method: String)
+
+data class ItemRow(
+    val id: Int,
+    val identifier: String,
+    val name: String,
+    val hasSprite: Boolean,
+    val category: String,
+    val moveName: String?
+)
+
+data class OfferLinkRow(
+    val objectId: Int,
+    val kind: String,
+    val itemIdentifier: String?,
+    val itemName: String?,
+    val pokemonId: Int?,
+    val pokemonName: String?,
+    val wantedPokemonName: String?,
+    val price: Int?,
+    val quantity: Int?
+)
+
+data class ItemEvolutionRow(val fromId: Int, val fromName: String, val toId: Int, val toName: String)

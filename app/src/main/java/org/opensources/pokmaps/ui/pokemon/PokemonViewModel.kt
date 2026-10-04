@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.CatchRate
@@ -18,7 +19,9 @@ import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
+import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokemonUseCase
+import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
 import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
 
 /** PV restants du Pokémon sauvage, en fraction de ses PV max (0 = 1 PV). */
@@ -48,25 +51,32 @@ data class PokemonUiState(
     val game: Game? = null,
     val details: PokemonDetails? = null,
     /** Calcul de capture, seulement pour la 1re génération (formule propre à ces jeux). */
-    val catch: CatchUiState? = null
+    val catch: CatchUiState? = null,
+    /** Capturé dans la version choisie. */
+    val caught: Boolean = false,
+    val favorite: Boolean = false
 )
 
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     observePokemon: ObservePokemonUseCase,
+    observeCollection: ObserveCollectionUseCase,
+    private val updateCollection: UpdateCollectionUseCase,
     private val mapRequests: MapRequests
 ) : ViewModel() {
     private val pokemonId: Int = checkNotNull(savedStateHandle[POKEMON_ID])
     private val catchInput = MutableStateFlow(CatchInput())
 
     val state: StateFlow<PokemonUiState> =
-        combine(observePokemon(pokemonId), catchInput) { page, input ->
+        combine(observePokemon(pokemonId), observeCollection(), catchInput) { page, collection, input ->
             PokemonUiState(
                 loading = false,
                 game = page.game,
                 details = page.details,
-                catch = page.details?.takeIf { page.game.generationId == 1 }?.let { catchState(page.game, it, input) }
+                catch = page.details?.takeIf { page.game.generationId == 1 }?.let { catchState(page.game, it, input) },
+                caught = collection.game == page.game && pokemonId in collection.caught,
+                favorite = pokemonId in collection.favorites
             )
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
 
@@ -75,6 +85,17 @@ class PokemonViewModel @Inject constructor(
     fun setCatchHp(hp: HpChoice) = catchInput.update { it.copy(hp = hp) }
 
     fun setCatchStatus(status: CatchStatus) = catchInput.update { it.copy(status = status) }
+
+    fun toggleCaught() {
+        val current = state.value
+        val game = current.game ?: return
+        viewModelScope.launch { updateCollection.setCaught(game, pokemonId, !current.caught) }
+    }
+
+    fun toggleFavorite() {
+        val favorite = state.value.favorite
+        viewModelScope.launch { updateCollection.setFavorite(pokemonId, !favorite) }
+    }
 
     /** Demande à la carte de surligner les lieux du Pokémon. */
     fun showOnMap() {

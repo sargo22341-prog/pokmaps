@@ -14,7 +14,7 @@
     <!-- Pokédex -->
     <string name="pokedex_search">Rechercher</string>
     <string name="pokedex_clear_search">Effacer la recherche</string>
-    <string name="pokedex_count">%1$d Pokémon</string>
+    <string name="pokedex_count_caught">%1$d Pokémon · %2$d / %3$d capturés</string>
     <string name="pokedex_empty">Aucun Pokémon ne correspond à ces critères.</string>
     <string name="pokedex_filter_available">Disponible dans %1$s</string>
     <string name="pokedex_filter_type">Type</string>
@@ -22,6 +22,18 @@
     <string name="pokedex_filter_all">Tous</string>
     <string name="pokedex_filter_reset">Réinitialiser</string>
     <string name="pokedex_unavailable">Absent de cette version</string>
+    <string name="pokedex_filter_capture">Capture</string>
+    <string name="pokedex_filter_caught">Capturés</string>
+    <string name="pokedex_filter_missing">Non capturés</string>
+    <string name="pokedex_filter_favorites">Favoris</string>
+
+    <!-- Collection -->
+    <string name="collection_caught">Capturé (toucher pour décocher)</string>
+    <string name="collection_not_caught">Marquer comme capturé</string>
+    <string name="collection_favorite">Retirer des favoris</string>
+    <string name="collection_not_favorite">Ajouter aux favoris</string>
+    <string name="collection_caught_in">Capturé dans Pokémon %1$s</string>
+    <string name="collection_not_caught_in">Pas encore capturé dans Pokémon %1$s</string>
 
     <string name="method_walk">Herbes et grottes</string>
     <string name="method_fishing">Pêche</string>
@@ -121,7 +133,6 @@
     <string name="map_machine_move">Enseigne %1$s</string>
     <string name="map_trainer_party">Équipe</string>
     <string name="map_trainer_starter">L\'équipe du rival dépend du starter choisi.</string>
-    <string name="map_npc_nothing">Rien à donner, vendre ni échanger.</string>
     <string name="map_offer_gifts">Donne</string>
     <string name="map_offer_sales">Vend</string>
     <string name="map_offer_trades">Échange</string>
@@ -130,6 +141,39 @@
     <string name="map_offer_pokemon_level">%1$s, niveau %2$d</string>
     <string name="map_offer_trade">Votre %2$s contre son %1$s</string>
     <string name="map_wild_pokemon">Pokémon sauvage</string>
+    <string name="map_open_item">Fiche de l\'objet %1$s</string>
+
+    <!-- Recherche et fiches -->
+    <string name="search_title">Recherche</string>
+    <string name="search_hint">Pokémon, lieu, objet, personnage…</string>
+    <string name="search_intro">Cherchez un Pokémon, un lieu, un objet (ou l\'attaque d\'une CT) ou un personnage de Pokémon %1$s.</string>
+    <string name="search_empty">Aucun résultat.</string>
+    <string name="search_pokemon">Pokémon (%1$d)</string>
+    <string name="search_places">Lieux (%1$d)</string>
+    <string name="search_items">Objets (%1$d)</string>
+    <string name="search_characters">Personnages (%1$d)</string>
+    <string name="sheet_show_on_map">Voir sur la carte</string>
+    <string name="offer_summary_gifts">Donne %1$s</string>
+    <string name="offer_summary_sales">Vend %1$s</string>
+    <string name="offer_summary_trades">Échange %1$s</string>
+    <string name="item_title">Fiche objet</string>
+    <string name="item_not_found">Cet objet n\'existe pas dans ce jeu.</string>
+    <string name="item_evolutions">Fait évoluer</string>
+    <string name="item_evolution">%1$s → %2$s</string>
+    <string name="item_found">Où le trouver</string>
+    <string name="item_sold">Où l\'acheter</string>
+    <string name="item_given">Qui le donne</string>
+    <string name="item_where">Où l\'obtenir</string>
+    <string name="item_nowhere">Introuvable sur les cartes de Pokémon %1$s.</string>
+    <string name="place_title">Fiche lieu</string>
+    <string name="place_not_found">Ce lieu n\'existe pas dans ce jeu.</string>
+    <string name="place_outdoor">Ville ou route</string>
+    <string name="place_indoor">Lieu intérieur</string>
+    <string name="place_wild">Pokémon sauvages</string>
+    <string name="place_items">Objets</string>
+    <string name="place_characters">Personnages</string>
+    <string name="character_title">Fiche personnage</string>
+    <string name="character_not_found">Ce personnage n\'existe pas dans ce jeu.</string>
 
     <string name="about_title">À propos</string>
     <string name="about_version">Version %1$s</string>
