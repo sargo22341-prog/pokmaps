@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 // ktlint est lancé directement via sa CLI : pas de plugin Gradle tiers à maintenir.

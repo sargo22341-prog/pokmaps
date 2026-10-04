@@ -1,4 +1,4 @@
-package io.github.sargo22341.pokmaps.ui.theme
+package org.opensources.pokmaps.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

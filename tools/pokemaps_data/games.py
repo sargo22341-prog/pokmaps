@@ -3,6 +3,8 @@
 Ajouter un jeu (ex. Or/Argent) revient à ajouter une entrée ici : toutes les données
 (Pokémon, attaques, rencontres, lieux…) sont ensuite extraites de PokéAPI pour ce groupe
 de versions. Les identifiants sont ceux de PokéAPI (table version_groups).
+Les cartes sont générées depuis le désassemblage pret du jeu (le lecteur de pret.py est
+écrit pour la 1re génération : un autre jeu demandera d'adapter la lecture de ses cartes).
 """
 
 from __future__ import annotations
@@ -16,11 +18,13 @@ class Game:
     version_group: str
     # Dossier des sprites du jeu dans PokeAPI/sprites (sprites/pokemon/<dossier>/<numéro>.png).
     sprite_folder: str
+    # Désassemblage pret d'où sont générées les cartes (cf. sources.PRET_COMMITS).
+    pret_repo: str
 
 
 GAMES: tuple[Game, ...] = (
-    Game("red-blue", "versions/generation-i/red-blue/transparent"),
-    Game("yellow", "versions/generation-i/yellow/transparent"),
+    Game("red-blue", "versions/generation-i/red-blue/transparent", "pokered"),
+    Game("yellow", "versions/generation-i/yellow/transparent", "pokeyellow"),
 )
 
 # Méthodes de rencontre « uniques » (un Pokémon donné, fixe ou échangé) : pas de probabilité,

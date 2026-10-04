@@ -258,3 +258,64 @@ CREATE TABLE encounter_rate (
     rate INTEGER NOT NULL,
     PRIMARY KEY (version_id, location_area_id, method_id)
 );
+
+-- Cartes générées depuis les désassemblages pret, une série par groupe de versions.
+-- Une carte affichable (parent_map_id NULL) a ses tuiles dans les assets :
+--   maps/<version_group.identifier>/<map.identifier>/<niveau>/<ligne>_<colonne>.webp
+-- tuiles de 256 px, niveaux 0 à level_count - 1, le dernier à la taille réelle (1 px = 1 pixel Game Boy).
+-- Les villes et routes sont des parties de la carte du monde (« kanto ») : parent_map_id la désigne,
+-- (x, y, width, height) est leur rectangle dans cette carte et level_count vaut 0.
+-- Toutes les coordonnées (x, y) sont en pixels de la carte affichée.
+CREATE TABLE map (
+    id INTEGER NOT NULL PRIMARY KEY,
+    version_group_id INTEGER NOT NULL,
+    identifier TEXT NOT NULL,
+    name_fr TEXT NOT NULL,
+    parent_map_id INTEGER,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL,
+    width INTEGER NOT NULL,
+    height INTEGER NOT NULL,
+    level_count INTEGER NOT NULL
+);
+CREATE INDEX index_map_version_group_id ON map (version_group_id);
+CREATE INDEX index_map_parent_map_id ON map (parent_map_id);
+
+-- Zones PokéAPI (et donc rencontres) de chaque carte.
+CREATE TABLE map_area (
+    map_id INTEGER NOT NULL,
+    location_area_id INTEGER NOT NULL,
+    PRIMARY KEY (map_id, location_area_id)
+);
+CREATE INDEX index_map_area_location_area_id ON map_area (location_area_id);
+
+-- Warps (portes, escaliers, entrées de grottes) : position et arrivée (NULL si inconnue).
+CREATE TABLE map_warp (
+    id INTEGER NOT NULL PRIMARY KEY,
+    map_id INTEGER NOT NULL,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL,
+    target_map_id INTEGER,
+    target_x INTEGER,
+    target_y INTEGER
+);
+CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
+
+-- Objets et personnages d'une carte. kind : item (objet ramassable), hidden_item (objet caché),
+-- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau)
+-- ou npc. sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.png.
+CREATE TABLE map_object (
+    id INTEGER NOT NULL PRIMARY KEY,
+    map_id INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL,
+    sprite TEXT,
+    item_id INTEGER,
+    pokemon_id INTEGER,
+    level INTEGER,
+    trainer_class TEXT
+);
+CREATE INDEX index_map_object_map_id ON map_object (map_id);
+CREATE INDEX index_map_object_item_id ON map_object (item_id);
+CREATE INDEX index_map_object_pokemon_id ON map_object (pokemon_id);
