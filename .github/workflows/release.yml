@@ -3,6 +3,12 @@ name: Release
 on:
   push:
     tags: ["v*"]
+  # Release manuelle depuis l'onglet Actions : le tag vX.Y.Z est créé sur le commit construit.
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version à publier (MAJEUR.MINEUR.CORRECTIF, ex. 0.1.0)"
+        required: true
 
 permissions:
   contents: write
@@ -17,8 +23,14 @@ jobs:
 
       - name: Calculer la version depuis le tag
         id: version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
         run: |
-          tag="${GITHUB_REF_NAME}"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            tag="v${INPUT_VERSION#v}"
+          else
+            tag="${GITHUB_REF_NAME}"
+          fi
           if [[ ! "$tag" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             echo "::error::Le tag doit être de la forme vMAJEUR.MINEUR.CORRECTIF (ex. v1.2.3), reçu : $tag"
             exit 1
@@ -28,6 +40,7 @@ jobs:
             echo "::error::MINEUR et CORRECTIF doivent être inférieurs à 100"
             exit 1
           fi
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
           echo "name=${major}.${minor}.${patch}" >> "$GITHUB_OUTPUT"
           echo "code=$(( major * 10000 + minor * 100 + patch ))" >> "$GITHUB_OUTPUT"
 
@@ -93,6 +106,8 @@ jobs:
       - name: Créer la release GitHub
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
           name: Pokémaps ${{ steps.version.outputs.name }}
           generate_release_notes: true
           files: |
