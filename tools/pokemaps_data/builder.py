@@ -14,7 +14,7 @@ from .maps import GameMapData, identifier
 from .pokeapi import ENGLISH, PokeApi, clean_text, optional_int
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -30,6 +30,9 @@ BALL_CATEGORIES = ("standard-balls", "special-balls")
 # Jusqu'à la 3e génération, la catégorie physique / spéciale d'une attaque dépend de son type.
 LAST_TYPE_BASED_DAMAGE_CLASS_GENERATION = 3
 DAMAGE_CLASSES = {1: "status", 2: "physical", 3: "special"}
+
+# Attaques dont la constante pret ne correspond pas à l'identifiant PokéAPI (une fois les tirets retirés).
+MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick"}
 
 
 def _area_key(location_identifier: str, area_identifier: str) -> str:
@@ -450,6 +453,7 @@ class DatabaseBuilder:
         categories = {int(row["id"]): row["identifier"] for row in self.api.table("item_categories")}
         used = {item for _, item, _ in self.machine_rows}
         used |= set(self._map_item_ids.values())
+        used |= set(self._offer_item_ids.values())
         for row in self.evolution_rows:
             used |= {item for item in (row[6], row[7]) if item}
         # Poké Balls existant dans au moins une des générations configurées.
@@ -461,6 +465,42 @@ class DatabaseBuilder:
             (item_id, items[item_id]["identifier"], names[item_id], categories[int(items[item_id]["category_id"])])
             for item_id in sorted(used)
         ]
+
+    @cached_property
+    def _offer_item_ids(self) -> dict[str, int]:
+        """Objets donnés ou vendus par les personnages : identifiant PokéAPI -> id."""
+        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        identifiers = {
+            offer.item for data in self.map_data.values() for obj in data.objects for offer in obj.offers if offer.item
+        }
+        unknown = sorted(identifiers - ids.keys())
+        if unknown:
+            raise ValueError(f"Objets des personnages inconnus de PokéAPI : {unknown} (voir maps.ITEM_ALIASES)")
+        return {identifier: ids[identifier] for identifier in identifiers}
+
+    def item_descriptions(self) -> dict[int, str]:
+        """Description française de chaque objet (texte du jeu le plus ancien qui en a une), sauf CT / CS."""
+        machines = {item for _, item, _ in self.machine_rows}
+        best: dict[int, tuple[int, str]] = {}
+        for row in self.api.table("item_flavor_text"):
+            if int(row["language_id"]) != 5:
+                continue
+            item_id = int(row["item_id"])
+            order = self.vg_order.get(int(row["version_group_id"]), 0)
+            if item_id not in machines and (item_id not in best or order < best[item_id][0]):
+                best[item_id] = (order, clean_text(row["flavor_text"]))
+        return {item_id: text for item_id, (_, text) in best.items()}
+
+    @cached_property
+    def move_ids(self) -> dict[str, int]:
+        """Identifiant d'attaque (sans tirets) -> id PokéAPI."""
+        return {row["identifier"].replace("-", ""): int(row["id"]) for row in self.api.table("moves")}
+
+    def move_id(self, identifier: str) -> int:
+        key = MOVE_ALIASES.get(identifier, identifier).replace("-", "")
+        if key not in self.move_ids:
+            raise ValueError(f"Attaque des dresseurs inconnue de PokéAPI : {identifier} (voir MOVE_ALIASES)")
+        return self.move_ids[key]
 
     @cached_property
     def _map_item_ids(self) -> dict[str, int]:
@@ -680,7 +720,7 @@ class DatabaseBuilder:
         area_ids = {key: area_id for area_id, key in self.area_keys.items()}
         species = {row["identifier"]: int(row["id"]) for row in self.species.values()}
         known_areas = {row[0] for row in self.location_area_table()}
-        maps, areas, warps, objects = [], [], [], []
+        maps, areas, warps, objects, parties, offers, spots = [], [], [], [], [], [], []
         for version_group, data in self.map_data.items():
             vg = vg_ids[version_group]
             ids = {row.const: vg * 1000 + row.number for row in data.maps}
@@ -700,8 +740,28 @@ class DatabaseBuilder:
                     (len(warps) + 1, ids[warp.map_const], warp.x, warp.y, target, warp.target_x, warp.target_y)
                 )
             for obj in data.objects:
-                if obj.pokemon and obj.pokemon not in species:
-                    raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {obj.pokemon}")
+                for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
+                    p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
+                ]:
+                    if name and name not in species:
+                        raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {name}")
+                object_id = len(objects) + 1
+                for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
+                    move_ids = [self.move_id(move) for move in moves] + [None] * (4 - len(moves))
+                    parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
+                for offer in obj.offers:
+                    offers.append(
+                        (
+                            len(offers) + 1,
+                            object_id,
+                            offer.kind,
+                            offer.item and self._offer_item_ids[offer.item],
+                            offer.pokemon and species[offer.pokemon],
+                            offer.quantity,
+                            offer.price,
+                            offer.wanted and species[offer.wanted],
+                        )
+                    )
                 objects.append(
                     (
                         len(objects) + 1,
@@ -716,12 +776,23 @@ class DatabaseBuilder:
                         obj.trainer_class,
                     )
                 )
-        return {"map": maps, "map_area": sorted(set(areas)), "map_warp": warps, "map_object": objects}
+            for spot in data.spots:
+                spots.append((len(spots) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
+        return {
+            "map": maps,
+            "map_area": sorted(set(areas)),
+            "map_warp": warps,
+            "map_object": objects,
+            "trainer_pokemon": parties,
+            "npc_offer": offers,
+            "map_spot": spots,
+        }
 
     # --- Écriture -------------------------------------------------------------
 
     def write(self, output: Path, item_sprites: set[str]) -> None:
         encounters, conditions = self.encounter_tables()
+        descriptions = self.item_descriptions()
         tables = {
             "generation": self.generation_table(),
             "region": self.region_table(),
@@ -739,7 +810,7 @@ class DatabaseBuilder:
             "pokemon_stat": self.pokemon_stat_table(),
             "move": self.move_table(),
             "move_version_group": self.move_version_group_table(),
-            "item": [(*row, int(row[1] in item_sprites)) for row in self.item_rows],
+            "item": [(*row, int(row[1] in item_sprites), descriptions.get(row[0])) for row in self.item_rows],
             "machine": self.machine_rows,
             "pokemon_move": self.pokemon_move_rows,
             "evolution": self.evolution_rows,

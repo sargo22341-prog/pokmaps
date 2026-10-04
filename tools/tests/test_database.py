@@ -282,3 +282,69 @@ def test_object_sprites_exist(db, assets):
     ).fetchall()
     missing = [row for row in rows if not (assets / "maps" / row[0] / "sprites" / f"{row[1]}.png").exists()]
     assert missing == []
+
+
+def _party(db, version_group, trainer_class):
+    return db.execute(
+        """SELECT p.name_fr, t.level, m1.name_fr, m2.name_fr, m3.name_fr, m4.name_fr FROM trainer_pokemon t
+           JOIN map_object o ON o.id = t.map_object_id JOIN map m ON m.id = o.map_id
+           JOIN pokemon p ON p.id = t.pokemon_id
+           LEFT JOIN move m1 ON m1.id = t.move1_id LEFT JOIN move m2 ON m2.id = t.move2_id
+           LEFT JOIN move m3 ON m3.id = t.move3_id LEFT JOIN move m4 ON m4.id = t.move4_id
+           WHERE m.version_group_id = ? AND o.trainer_class = ? ORDER BY o.id, t.slot""",
+        (version_group, trainer_class),
+    ).fetchall()
+
+
+def test_gym_leader_parties(db):
+    # Rouge / Bleu : Onix de Pierre avec Patience (LoneMoves) ; Jaune : attaques de SpecialTrainerMoves.
+    assert _party(db, RED_BLUE, "brock") == [
+        ("Racaillou", 12, "Charge", "Boul’Armure", None, None),
+        ("Onix", 14, "Charge", "Grincement", "Patience", None),
+    ]
+    assert _party(db, YELLOW_GROUP, "lt-surge") == [
+        ("Raichu", 28, "Tonnerre", "Ultimapoing", "Ultimawashi", "Rugissement")
+    ]
+
+
+def test_trainer_default_moves(db):
+    """Sans attaque spéciale, un Pokémon de dresseur connaît les 4 dernières attaques apprises à son niveau."""
+    party = _party(db, RED_BLUE, "bug-catcher")
+    assert ("Aspicot", 6, "Dard-Venin", "Sécrétion", None, None) in party
+    assert ("Chenipan", 6, "Charge", "Sécrétion", None, None) in party
+    # Seuls les rivaux (équipe selon le starter) n'ont pas d'équipe sur la carte.
+    without = db.execute(
+        """SELECT DISTINCT trainer_class FROM map_object WHERE kind = 'trainer'
+           AND id NOT IN (SELECT map_object_id FROM trainer_pokemon)"""
+    ).fetchall()
+    assert {row[0] for row in without} <= {"rival1", "rival2", "rival3"}
+
+
+def test_npc_offers(db):
+    offers = set(
+        db.execute(
+            """SELECT m.identifier, n.kind, i.identifier, p.identifier, n.quantity, n.price, w.identifier
+               FROM npc_offer n JOIN map_object o ON o.id = n.map_object_id JOIN map m ON m.id = o.map_id
+               LEFT JOIN item i ON i.id = n.item_id LEFT JOIN pokemon p ON p.id = n.pokemon_id
+               LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id WHERE m.version_group_id = ?""",
+            (RED_BLUE,),
+        )
+    )
+    assert ("route-1", "gift_item", "potion", None, 1, None, None) in offers
+    assert ("viridian-mart", "sale", "poke-ball", None, None, 200, None) in offers
+    assert ("celadon-mansion-roof-house", "gift_pokemon", None, "eevee", 25, None, None) in offers
+    assert ("vermilion-trade-house", "trade", None, "farfetchd", None, None, "spearow") in offers
+    assert ("pewter-gym", "gift_item", "tm34", None, 1, None, None) in offers  # CT Patience de Pierre
+
+
+def test_pokemon_spots(db):
+    spots = dict(
+        db.execute(
+            """SELECT m.identifier || '/' || s.kind, count(*) FROM map_spot s JOIN map m ON m.id = s.map_id
+               WHERE m.version_group_id = ? GROUP BY m.identifier, s.kind""",
+            (RED_BLUE,),
+        )
+    )
+    assert spots["route-1/grass"] == 12
+    assert spots["route-21/water"] == 12
+    assert spots["mt-moon-1f/floor"] == 12

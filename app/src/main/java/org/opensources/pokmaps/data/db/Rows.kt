@@ -93,3 +93,50 @@ data class MapObjectRow(
 )
 
 data class MapAreaRow(val mapId: Int, val areaId: Int, val name: String)
+
+data class TrainerPokemonRow(val slot: Int, val pokemonId: Int, val name: String, val level: Int)
+
+/** Attaque d'un Pokémon de dresseur (`moveSlot` de 1 à 4) avec ses caractéristiques dans le jeu. */
+data class TrainerMoveRow(
+    val slot: Int,
+    val moveSlot: Int,
+    val moveId: Int,
+    val name: String,
+    val power: Int?,
+    val accuracy: Int?,
+    val pp: Int,
+    val damageClass: String,
+    val typeId: Int,
+    val typeIdentifier: String,
+    val typeName: String
+)
+
+data class NpcOfferRow(
+    val kind: String,
+    val itemId: Int?,
+    val itemIdentifier: String?,
+    val itemName: String?,
+    val itemHasSprite: Boolean?,
+    val pokemonId: Int?,
+    val pokemonName: String?,
+    val quantity: Int?,
+    val price: Int?,
+    val wantedPokemonId: Int?,
+    val wantedPokemonName: String?
+)
+
+data class ItemDetailsRow(
+    val id: Int,
+    val identifier: String,
+    val name: String,
+    val hasSprite: Boolean,
+    val description: String?,
+    val moveName: String?,
+    val power: Int?,
+    val accuracy: Int?,
+    val pp: Int?,
+    val damageClass: String?,
+    val typeId: Int?,
+    val typeIdentifier: String?,
+    val typeName: String?
+)

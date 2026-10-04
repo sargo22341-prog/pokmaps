@@ -5,8 +5,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 
@@ -33,4 +36,13 @@ class GetPokemonMapsUseCase @Inject constructor(private val maps: MapRepository)
             .map { it.mapId }
         return (byArea + byObject).toSet()
     }
+}
+
+/** Ce qu'on apprend en touchant un objet ou un personnage de la carte. */
+class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapRepository) {
+    suspend fun trainerParty(game: Game, objectId: Int): List<TrainerPokemon> = maps.trainerParty(game, objectId)
+
+    suspend fun offers(objectId: Int): List<NpcOffer> = maps.offers(objectId)
+
+    suspend fun item(game: Game, itemId: Int): ItemDetails? = maps.item(game, itemId)
 }
