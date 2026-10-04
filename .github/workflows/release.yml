@@ -76,7 +76,8 @@ jobs:
         run: echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
 
       - name: Vérifications
-        run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintRelease testReleaseUnitTest
+        # Les tests unitaires ne tournent que sur la variante debug (comportement par défaut d'AGP 9).
+        run: ./gradlew --stacktrace ktlintCheck checkNoGoogleServices lintRelease testDebugUnitTest
 
       - name: Build APK release signé
         env:
