@@ -21,6 +21,7 @@ build/
 # Données générées par tools/build_data.py
 /app/src/main/assets/database/
 /app/src/main/assets/sprites/
+/app/src/main/assets/maps/
 /tools/.cache/
 
 # Python

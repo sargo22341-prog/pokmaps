@@ -5,10 +5,13 @@
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
 - PokeAPI/sprites : sprites des jeux (ex. Rouge/Bleu, Jaune).
 - msikma/pokesprite : icônes de boîte des Pokémon et icônes d'objets.
+- pret/pokered, pret/pokeyellow : désassemblages des jeux, uniquement pour générer les cartes.
 """
 
 from __future__ import annotations
 
+import shutil
+import subprocess
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -22,6 +25,13 @@ POKEAPI_SPRITES_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/{commit
 
 POKESPRITE_COMMIT = "c5aaa610ff2acdf7fd8e2dccd181bca8be9fcb3e"
 POKESPRITE_URL = "https://raw.githubusercontent.com/msikma/pokesprite/{commit}/{path}"
+
+# Désassemblages pret (https://github.com/pret) : cartes, tilesets, objets et palettes.
+PRET_COMMITS = {
+    "pokered": "d2704a63c26f9ba046ade877445216b3de0519a4",
+    "pokeyellow": "e89ead154b9968aa50eed9328ff2b38b6c194382",
+}
+PRET_URL = "https://github.com/pret/{repo}.git"
 
 POKEAPI_CSV_FILES = (
     "encounter_condition_value_map",
@@ -126,3 +136,24 @@ def pokeapi_sprite(cache: Path, path: str) -> tuple[str, Path]:
 def pokesprite(cache: Path, path: str) -> tuple[str, Path]:
     url = POKESPRITE_URL.format(commit=POKESPRITE_COMMIT, path=path)
     return url, cache / f"pokesprite-{POKESPRITE_COMMIT[:12]}" / path
+
+
+def fetch_pret(cache: Path, repo: str) -> Path:
+    """Récupère le dépôt pret `repo` au commit figé dans `cache/<repo>-<commit>` (sans l'historique git)."""
+    commit = PRET_COMMITS[repo]
+    target = cache / f"{repo}-{commit[:12]}"
+    if (target / ".complete").exists():
+        return target
+    if target.exists():
+        shutil.rmtree(target)
+    target.mkdir(parents=True)
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", "-C", str(target), *args], check=True, capture_output=True)
+
+    git("init", "-q")
+    git("fetch", "-q", "--depth", "1", PRET_URL.format(repo=repo), commit)
+    git("checkout", "-q", "FETCH_HEAD")
+    shutil.rmtree(target / ".git")
+    (target / ".complete").touch()
+    return target

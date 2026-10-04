@@ -193,3 +193,92 @@ def test_sprites(assets, db):
     ]
     assert missing == []
     assert scalar(db, "SELECT count(*) FROM item WHERE has_sprite = 0") == 0
+
+
+# --- Cartes -----------------------------------------------------------------------
+
+
+def test_world_map_contains_all_towns_and_routes(db):
+    for version_group in (RED_BLUE, YELLOW_GROUP):
+        world = db.execute(
+            "SELECT id FROM map WHERE identifier = 'kanto' AND version_group_id = ?", (version_group,)
+        ).fetchone()[0]
+        children = scalar(db, "SELECT count(*) FROM map WHERE parent_map_id = ?", world)
+        assert children == 11 + 25  # villes (dont le Plateau Indigo) et routes
+
+
+def test_connected_maps_are_adjacent(db):
+    """La Route 1 est juste au nord de Bourg Palette, centrée sur Jadielle."""
+    rows = dict(
+        (identifier, (x, y, w, h))
+        for identifier, x, y, w, h in db.execute(
+            "SELECT identifier, x, y, width, height FROM map WHERE version_group_id = ? AND parent_map_id IS NOT NULL",
+            (RED_BLUE,),
+        )
+    )
+    px, py, _, _ = rows["pallet-town"]
+    rx, ry, _, rh = rows["route-1"]
+    vx, vy, _, vh = rows["viridian-city"]
+    assert (rx, ry + rh) == (px, py)
+    assert vy + vh == ry and vx == rx - 5 * 32
+
+
+def test_static_pokemon_on_maps(db):
+    rows = set(
+        db.execute(
+            """SELECT m.identifier, p.name_fr, o.level FROM map_object o JOIN map m ON m.id = o.map_id
+               JOIN pokemon p ON p.id = o.pokemon_id WHERE m.version_group_id = ?""",
+            (RED_BLUE,),
+        )
+    )
+    assert ("cerulean-cave-b1f", "Mewtwo", 70) in rows
+    assert ("power-plant", "Électhor", 50) in rows
+
+
+def test_map_items(db):
+    # Pierre Lune de la Route 2 et CT du Mont Sélénite, objet caché de la Forêt de Jade.
+    items = set(
+        db.execute(
+            """SELECT m.identifier, i.identifier, o.kind FROM map_object o JOIN map m ON m.id = o.map_id
+               JOIN item i ON i.id = o.item_id WHERE m.version_group_id = ?""",
+            (RED_BLUE,),
+        )
+    )
+    assert ("route-2", "moon-stone", "item") in items
+    assert ("mt-moon-1f", "tm12", "item") in items
+    assert ("viridian-forest", "potion", "hidden_item") in items
+
+
+def test_warps_lead_back(db):
+    """La porte du Labo du Prof. Chen mène au labo, et sa sortie ramène devant la porte."""
+    lab, pallet = (
+        db.execute("SELECT id FROM map WHERE identifier = ? AND version_group_id = ?", (name, RED_BLUE)).fetchone()[0]
+        for name in ("oaks-lab", "pallet-town")
+    )
+    entrance = db.execute("SELECT x, y, target_map_id FROM map_warp WHERE map_id = ?", (pallet,)).fetchall()
+    assert any(target == lab for _, _, target in entrance)
+    exits = db.execute("SELECT target_map_id, target_x, target_y FROM map_warp WHERE map_id = ?", (lab,)).fetchall()
+    door = next((x, y) for x, y, target in entrance if target == lab)
+    assert (pallet, *door) in exits
+
+
+def test_tiles_exist_for_every_level(db, assets):
+    rows = db.execute(
+        """SELECT vg.identifier, m.identifier, m.level_count FROM map m
+           JOIN version_group vg ON vg.id = m.version_group_id WHERE m.parent_map_id IS NULL"""
+    ).fetchall()
+    for version_group, identifier, levels in rows:
+        folder = assets / "maps" / version_group / identifier
+        for level in range(levels):
+            assert any((folder / str(level)).glob("*.webp")), f"{folder}/{level}"
+        # Le niveau 0 tient dans une seule tuile.
+        assert [p.name for p in (folder / "0").iterdir()] == ["0_0.webp"]
+
+
+def test_object_sprites_exist(db, assets):
+    rows = db.execute(
+        """SELECT DISTINCT vg.identifier, o.sprite FROM map_object o JOIN map m ON m.id = o.map_id
+           JOIN version_group vg ON vg.id = m.version_group_id WHERE o.sprite IS NOT NULL"""
+    ).fetchall()
+    missing = [row for row in rows if not (assets / "maps" / row[0] / "sprites" / f"{row[1]}.png").exists()]
+    assert missing == []
