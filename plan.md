@@ -33,7 +33,7 @@ icons come from the pokesprite project; official artwork is served via PokeAPI/s
 | **[msikma/pokesprite](https://github.com/msikma/pokesprite)** | Icônes de boîte des Pokémon (`pokemon-gen8/regular`) et icônes d'objets (Poké Balls, pierres, CT/CS par type) | Code MIT ; images © Nintendo / Game Freak |
 | **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** | Sprites des jeux embarqués (`versions/generation-i/red-blue`, `yellow`) ; artworks officiels (`other/official-artwork`) chargés en ligne avec cache, en option | Images © Nintendo / Game Freak |
 | **`tools/data/`** (saisie manuelle, relue) | Couche de corrections : noms français corrigés (accents, étages), notes (prix du Casino, Pokémon à échanger, « un seul au choix »), doublons retirés | Ce projet |
-| **[pret/pokered](https://github.com/pret/pokered)**, **[pret/pokeyellow](https://github.com/pret/pokeyellow)** | **Uniquement pour les cartes** (phase 3) : blocs, tilesets, connexions, objets, PNJ, warps | Désassemblages communautaires |
+| **[pret/pokered](https://github.com/pret/pokered)**, **[pret/pokeyellow](https://github.com/pret/pokeyellow)** | **Uniquement pour les cartes** : blocs, tilesets, palettes, connexions, objets, PNJ, warps (fichiers sources du dépôt, aucune ROM) | Désassemblages communautaires |
 | Plus tard : [Bulbapedia](https://bulbapedia.bulbagarden.net) (CC BY-NC-SA), export de données PokeDB | Disponibilités des générations récentes absentes de PokéAPI, comme le fait pokemaps.net | À créditer dans l'app |
 
 Règles :
@@ -54,7 +54,7 @@ Règles :
 | Carte | MapCompose (`ovh.plrapps:mapcompose`), carte en tuiles |
 | Images | Coil (sprites depuis les assets, artworks en ligne avec cache disque) |
 | Navigation | Navigation Compose |
-| Pipeline de données | Script Python dans `tools/` (stdlib, pytest, ruff) |
+| Pipeline de données | Script Python dans `tools/` (stdlib + Pillow, pytest, ruff) |
 | CI/CD | GitHub Actions |
 
 ---
@@ -72,7 +72,7 @@ Règles :
 - [x] Workflow `ci.yml` (push et PR) : lint, tests unitaires, build de l'APK debug
 - [x] Mise en cache de Gradle et des sources de données
 - [x] Étape de génération des données (`tools/`) dans la CI
-- [ ] Générer un keystore de release et l'ajouter aux secrets GitHub (`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`) — **à faire par toi**, voir le README
+- [x] Générer un keystore de release et l'ajouter aux secrets GitHub (`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`)
 - [x] Workflow `release.yml` (sur tag `v*`) : build de l'APK release signé et publication dans **GitHub Releases**
 - [x] Versionnage automatique (`versionCode` et `versionName` depuis le tag)
 - [x] Documenter l'installation et les mises à jour via **Obtainium** (suivi des GitHub Releases sur GrapheneOS)
@@ -93,14 +93,17 @@ Règles :
 - [x] Images embarquées : icônes de boîte, sprites Rouge/Bleu et Jaune, icônes d'objets
 - [x] Tests de cohérence : références valides, probabilités à 100 %, chaque Pokémon obtenable, valeurs 1re génération vérifiées
 
-## Phase 3 — Génération des cartes pixel-art
-- [ ] Renderer : blocs et tilesets pret → PNG de chaque carte
-- [ ] Assembler la carte du monde de Kanto (villes et routes reliées via les connexions de cartes)
-- [ ] Générer les cartes intérieures (grottes, Tour Pokémon, Sylphe SARL, Manoir Pokémon, Parc Safari, Route Victoire, Caverne Azurée, bâtiments…)
-- [ ] Table de correspondance cartes pret ↔ zones PokéAPI (`tools/data/`), vérifiée par un test (toute zone avec des rencontres doit avoir sa carte)
-- [ ] Découper chaque carte en tuiles pour MapCompose (niveaux de zoom, `nearest-neighbor` pour garder des pixels nets)
-- [ ] Exporter les coordonnées (en pixels) de chaque zone, objet, PNJ et warp
-- [ ] Intégrer les tuiles dans les assets de l'app (surveiller la taille de l'APK)
+## Phase 3 — Génération des cartes pixel-art ✅
+- [x] Lecteur des désassemblages pret (`tools/pokemaps_data/pret.py`) : cartes, blocs, tilesets, connexions, warps, objets, PNJ, objets cachés, palettes Super Game Boy
+- [x] Renderer : blocs et tilesets pret → image de chaque carte, aux couleurs Super Game Boy (palette de chaque ville, bâtiments à la couleur de leur ville)
+- [x] Assembler la carte du monde de Kanto (villes et routes reliées via les connexions de cartes, bordure du jeu autour)
+- [x] Générer les cartes intérieures accessibles (grottes, Tour Pokémon, Sylphe SARL, Manoir Pokémon, Parc Safari, Route Victoire, Caverne Azurée, bâtiments…) — **une série par jeu** : Jaune a des cartes différentes (Centres Pokémon, Route 4, grottes…)
+- [x] Noms français de chaque carte (`tools/data/maps.csv`)
+- [x] Table de correspondance cartes pret ↔ zones PokéAPI (`tools/data/map_areas.csv`), vérifiée (toute zone avec des rencontres doit avoir sa carte dans chaque jeu)
+- [x] Découper chaque carte en tuiles WebP sans perte de 256 px pour MapCompose (niveaux de zoom, tuiles vides omises ; l'app agrandit sans lissage)
+- [x] Exporter les coordonnées (en pixels) de chaque carte, zone, objet, objet caché, dresseur, Pokémon fixe, PNJ et warp (avec sa destination) dans la base (`map`, `map_area`, `map_warp`, `map_object`)
+- [x] Sprites des PNJ et objets (vue de face) pour les calques de la carte
+- [x] Intégrer les tuiles dans les assets de l'app (~2 Mo pour les deux jeux)
 
 ## Phase 4 — Squelette de l'app
 - [ ] Mise en place de Hilt, Room (`createFromAsset`) et Navigation Compose

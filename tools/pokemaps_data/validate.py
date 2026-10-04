@@ -49,6 +49,41 @@ CHECKS = (
              (SELECT group_concat(condition_value_id) FROM encounter_condition c WHERE c.encounter_id = e.id)
            HAVING abs(total - 100) > 0.01""",
     ),
+    (
+        "zone avec des rencontres sans carte dans le jeu",
+        """SELECT DISTINCT e.location_area_id, v.version_group_id FROM encounter e JOIN version v ON v.id = e.version_id
+           WHERE NOT EXISTS (SELECT 1 FROM map_area ma JOIN map m ON m.id = ma.map_id
+             WHERE ma.location_area_id = e.location_area_id AND m.version_group_id = v.version_group_id)""",
+    ),
+    ("zone de carte inconnue", "SELECT * FROM map_area WHERE location_area_id NOT IN (SELECT id FROM location_area)"),
+    (
+        "carte parente invalide",
+        """SELECT m.id FROM map m JOIN map p ON p.id = m.parent_map_id
+           WHERE p.parent_map_id IS NOT NULL OR p.version_group_id != m.version_group_id
+             OR m.x < 0 OR m.y < 0 OR m.x + m.width > p.width OR m.y + m.height > p.height""",
+    ),
+    (
+        "carte affichable sans niveau de zoom",
+        "SELECT id FROM map WHERE (parent_map_id IS NULL) != (level_count > 0)",
+    ),
+    (
+        "warp hors de sa carte ou vers une carte inconnue",
+        """SELECT w.id FROM map_warp w JOIN map m ON m.id = w.map_id
+           JOIN map d ON d.id = coalesce(m.parent_map_id, m.id)
+           LEFT JOIN map t ON t.id = w.target_map_id
+           WHERE w.x NOT BETWEEN m.x AND m.x + m.width OR w.y NOT BETWEEN m.y AND m.y + m.height
+             OR (w.target_map_id IS NOT NULL AND (t.id IS NULL OR t.version_group_id != m.version_group_id))""",
+    ),
+    (
+        "objet de carte incohérent",
+        """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
+           WHERE o.kind NOT IN ('item', 'hidden_item', 'trainer', 'pokemon', 'npc')
+             OR (o.kind IN ('item', 'hidden_item')) != (o.item_id IS NOT NULL)
+             OR (o.kind = 'pokemon') != (o.pokemon_id IS NOT NULL AND o.level IS NOT NULL)
+             OR (o.kind = 'trainer') != (o.trainer_class IS NOT NULL)
+             OR o.item_id NOT IN (SELECT id FROM item) OR o.pokemon_id NOT IN (SELECT id FROM pokemon)
+             OR o.x NOT BETWEEN m.x AND m.x + m.width OR o.y NOT BETWEEN m.y AND m.y + m.height""",
+    ),
 )
 
 
