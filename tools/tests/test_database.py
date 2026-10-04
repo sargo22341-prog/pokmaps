@@ -345,6 +345,19 @@ def test_pokemon_spots(db):
             (RED_BLUE,),
         )
     )
-    assert spots["route-1/grass"] == 12
-    assert spots["route-21/water"] == 12
-    assert spots["mt-moon-1f/floor"] == 12
+    # Petits carrés d'herbes : quelques emplacements ; grandes étendues : le maximum, bien espacés.
+    assert 6 <= spots["route-1/grass"] <= 40
+    assert spots["route-21/water"] == 40
+    assert spots["mt-moon-1f/floor"] == 40
+    cells = db.execute(
+        """SELECT s.map_id, s.kind, s.x, s.y FROM map_spot s JOIN map m ON m.id = s.map_id
+           WHERE m.version_group_id = ?""",
+        (RED_BLUE,),
+    ).fetchall()
+    by_terrain = {}
+    for map_id, kind, x, y in cells:
+        by_terrain.setdefault((map_id, kind), []).append((x, y))
+    for points in by_terrain.values():
+        for i, (ax, ay) in enumerate(points):
+            for bx, by in points[i + 1 :]:
+                assert (ax - bx) ** 2 + (ay - by) ** 2 >= (3 * 16) ** 2

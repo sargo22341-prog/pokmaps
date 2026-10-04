@@ -17,6 +17,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.opensources.pokmaps.data.db.EvolutionPairRow
@@ -28,10 +29,14 @@ import org.opensources.pokmaps.data.db.PokemonTypeRow
 import org.opensources.pokmaps.data.db.TypeRow
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
+import org.opensources.pokmaps.data.settings.CollectionSettings
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.ObtainMethod
+import org.opensources.pokmaps.domain.pokedex.CaughtFilter
+import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokedexUseCase
+import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PokedexViewModelTest {
@@ -44,9 +49,15 @@ class PokedexViewModelTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        settings = GameSettings(FakeDataStore())
+        val dataStore = FakeDataStore()
+        settings = GameSettings(dataStore)
+        val collection = CollectionSettings(dataStore)
         val games = GameRepository(FakeGameDao(listOf(red, blue)), settings)
-        viewModel = PokedexViewModel(ObservePokedexUseCase(games, PokedexRepository(FakePokedexDao())))
+        viewModel = PokedexViewModel(
+            ObservePokedexUseCase(games, PokedexRepository(FakePokedexDao())),
+            ObserveCollectionUseCase(games, collection),
+            UpdateCollectionUseCase(collection)
+        )
     }
 
     @After
@@ -100,6 +111,28 @@ class PokedexViewModelTest {
         viewModel.resetFilters()
         assertNull(viewModel.state.value.filter.method)
         assertEquals("a", viewModel.state.value.filter.query)
+    }
+
+    @Test
+    fun caughtPokemonAreTrackedPerVersionAndFavoritesAcrossGames() = runTest {
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val abo = viewModel.state.value.entries.first { it.pokemonId == 23 }
+        viewModel.toggleCaught(abo)
+        viewModel.toggleFavorite(abo)
+        assertEquals(1, viewModel.state.value.caughtCount)
+        viewModel.filterCaught(CaughtFilter.CAUGHT)
+        assertEquals(listOf(23), ids())
+        viewModel.filterCaught(CaughtFilter.MISSING)
+        assertEquals(listOf(24, 27, 133, 134), ids())
+        viewModel.filterCaught(CaughtFilter.ALL)
+        viewModel.toggleFavoritesOnly()
+        assertEquals(listOf(23), ids())
+        // Bleu : rien de capturé dans cette version, mais les favoris sont communs à tous les jeux.
+        settings.selectVersion(blue.versionId)
+        assertEquals(0, viewModel.state.value.caughtCount)
+        assertEquals(listOf(23), ids())
+        assertFalse(viewModel.state.value.entries.single().caught)
+        assertTrue(viewModel.state.value.entries.single().favorite)
     }
 
     private class FakeGameDao(private val games: List<Game>) : GameDao {
