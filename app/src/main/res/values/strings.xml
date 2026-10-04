@@ -11,6 +11,107 @@
 
     <string name="pokedex_number">n° %1$03d</string>
 
+    <!-- Pokédex -->
+    <string name="pokedex_search">Rechercher un Pokémon (nom ou numéro)</string>
+    <string name="pokedex_clear_search">Effacer la recherche</string>
+    <string name="pokedex_count">%1$d Pokémon</string>
+    <string name="pokedex_empty">Aucun Pokémon ne correspond à ces critères.</string>
+    <string name="pokedex_filter_available">Disponible dans %1$s</string>
+    <string name="pokedex_filter_type">Type</string>
+    <string name="pokedex_filter_method">Obtention</string>
+    <string name="pokedex_filter_all">Tous</string>
+    <string name="pokedex_filter_reset">Réinitialiser</string>
+    <string name="pokedex_unavailable">Absent de cette version</string>
+
+    <string name="method_walk">Herbes et grottes</string>
+    <string name="method_fishing">Pêche</string>
+    <string name="method_surf">Surf</string>
+    <string name="method_gift">Don</string>
+    <string name="method_static">Pokémon fixe</string>
+    <string name="method_trade">Échange</string>
+    <string name="method_evolution">Évolution</string>
+
+    <!-- Fiche Pokémon -->
+    <string name="pokemon_title">Fiche Pokémon</string>
+    <string name="pokemon_not_found">Pokémon introuvable.</string>
+    <string name="pokemon_size">%1$s m · %2$s kg</string>
+    <string name="pokemon_growth">Expérience : courbe %1$s</string>
+    <string name="pokemon_capture_rate">Taux de capture : %1$d</string>
+    <string name="pokemon_show_artwork">Artwork officiel (en ligne)</string>
+    <string name="pokemon_show_sprite">Sprite du jeu</string>
+    <string name="pokemon_artwork_error">Artwork indisponible hors ligne</string>
+    <string name="pokemon_stats">Stats de base</string>
+    <string name="pokemon_stats_total">Total</string>
+    <string name="pokemon_weaknesses">Faiblesses et résistances</string>
+    <string name="pokemon_weaknesses_none">Aucune</string>
+    <string name="pokemon_evolutions">Évolutions</string>
+    <string name="pokemon_no_evolution">Ce Pokémon n\'évolue pas.</string>
+    <string name="evolution_level">N. %1$d</string>
+    <string name="evolution_trade">Échange</string>
+    <string name="evolution_level_up">Montée de niveau</string>
+    <string name="pokemon_locations">Lieux de capture</string>
+    <string name="pokemon_locations_in">Dans Pokémon %1$s</string>
+    <string name="pokemon_locations_none">Introuvable à l\'état sauvage dans Pokémon %1$s.</string>
+    <string name="pokemon_locations_evolution">Disponible par évolution.</string>
+    <string name="pokemon_locations_static">Pokémon fixe sur la carte.</string>
+    <string name="pokemon_locations_other_versions">Aussi dans : %1$s</string>
+    <string name="pokemon_show_on_map">Voir sur la carte</string>
+    <string name="pokemon_moves">Attaques</string>
+    <string name="pokemon_moves_level">Par niveau</string>
+    <string name="pokemon_moves_machine">CT / CS</string>
+    <string name="pokemon_moves_none">Aucune attaque.</string>
+    <string name="move_start">Départ</string>
+    <string name="move_level">N. %1$d</string>
+    <string name="move_power">Puiss.</string>
+    <string name="move_accuracy">Préc.</string>
+    <string name="move_pp">PP</string>
+    <string name="damage_physical">Physique</string>
+    <string name="damage_special">Spéciale</string>
+    <string name="damage_status">Statut</string>
+    <string name="no_value">—</string>
+
+    <string name="encounter_levels">N. %1$d</string>
+    <string name="encounter_level_range">N. %1$d à %2$d</string>
+    <string name="encounter_chance">%1$s %%</string>
+    <string name="encounter_quantity">× %1$d</string>
+
+    <string name="catch_title">Meilleure Poké Ball</string>
+    <string name="catch_level">Niveau %1$d</string>
+    <string name="catch_hp">PV restants</string>
+    <string name="catch_hp_full">Max</string>
+    <string name="catch_hp_half">½</string>
+    <string name="catch_hp_quarter">¼</string>
+    <string name="catch_hp_one">1 PV</string>
+    <string name="catch_status">Statut</string>
+    <string name="catch_status_none">Aucun</string>
+    <string name="catch_status_sleep">Sommeil / Gel</string>
+    <string name="catch_status_paralysis">Paralysie / Brûlure / Poison</string>
+    <string name="ball_poke">Poké Ball</string>
+    <string name="ball_great">Super Ball</string>
+    <string name="ball_ultra">Hyper Ball</string>
+    <string name="ball_safari">Safari Ball</string>
+    <string name="ball_master">Master Ball</string>
+    <string name="catch_best">Meilleur choix</string>
+    <string name="catch_note">Probabilité par lancer, formule de la 1re génération (DV des PV moyen). La Super Ball peut dépasser l\'Hyper Ball.</string>
+
+    <!-- Carte -->
+    <string name="map_layers">Calques</string>
+    <string name="map_layer_warps">Entrées</string>
+    <string name="map_layer_items">Objets</string>
+    <string name="map_layer_trainers">Dresseurs</string>
+    <string name="map_layer_pokemon">Pokémon fixes</string>
+    <string name="map_back_to">Retour : %1$s</string>
+    <string name="map_no_encounter">Aucun Pokémon sauvage.</string>
+    <string name="map_places">Lieux accessibles</string>
+    <string name="map_highlight">Lieux de %1$s</string>
+    <string name="map_highlight_none">%1$s est introuvable sur la carte de Pokémon %2$s.</string>
+    <string name="map_highlight_clear">Fin du surlignage</string>
+    <string name="map_item">Objet</string>
+    <string name="map_hidden_item">Objet caché</string>
+    <string name="map_trainer">Dresseur</string>
+    <string name="map_static_pokemon">Pokémon fixe, niveau %1$d</string>
+    <string name="map_open_pokemon">Fiche de %1$s</string>
+
     <string name="about_title">À propos</string>
     <string name="about_version">Version %1$s</string>
     <string name="about_description">Cartes interactives et Pokédex de Pokémon Rouge, Bleu et Jaune, entièrement hors ligne.</string>

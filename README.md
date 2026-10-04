@@ -5,7 +5,8 @@ carte de Kanto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques,
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
 - **Aucun service Google Play** : l'application fonctionne sur GrapheneOS
-- 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite
+- 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite (seul l'artwork officiel
+  d'un Pokémon, affiché à la demande, est chargé en ligne)
 - Identifiant de l'application : `org.opensources.pokmaps`
 
 Voir [plan.md](plan.md) pour la feuille de route.
