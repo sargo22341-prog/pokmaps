@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icône simple : une ball stylisée centrée dans la zone sûre (66dp) de l'icône adaptative. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Moitié haute -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,30a24,24 0,0 1,24 22h-15.2a9,9 0,0 0,-17.6 0h-15.2a24,24 0,0 1,24 -22z" />
+    <!-- Moitié basse -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.85"
+        android:pathData="M30,56h15.2a9,9 0,0 0,17.6 0h15.2a24,24 0,0 1,-48 0z" />
+    <!-- Bouton central -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,48.5a5.5,5.5 0,1 1,0 11a5.5,5.5 0,1 1,0 -11z" />
+</vector>

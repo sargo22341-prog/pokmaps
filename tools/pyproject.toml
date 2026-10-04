@@ -1,0 +1,16 @@
+[project]
+name = "pokemaps-data"
+version = "0.1.0"
+description = "Génération de la base de données de Pokémaps"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # caractères typographiques français (’, –, …)
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
