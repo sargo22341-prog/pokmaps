@@ -29,6 +29,7 @@ import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.WildPlacement
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterGroup
 import org.opensources.pokmaps.domain.model.Game
@@ -162,6 +163,12 @@ class MapViewModel @Inject constructor(
 
     /** Cartes où se trouve le Pokémon surligné, et entrée sur la carte du monde de chaque carte intérieure. */
     private var highlightedMaps: Set<Int> = emptySet()
+
+    /** Personnages qui donnent ou échangent le Pokémon surligné. */
+    private var highlightedObjects: Set<Int> = emptySet()
+
+    /** Objet ou personnage mis en évidence (ouvert depuis une fiche). */
+    private var focusedObjectId: Int? = null
     private var worldEntrances: Map<Int, MapWarp> = emptyMap()
 
     /** Pokémon sauvages dessinés pour le lieu sélectionné. */
@@ -182,17 +189,20 @@ class MapViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             observeCatalog().collect { gameMaps ->
+                val previous = loaded.value
+                // Changement de version : on reste là où on est si la carte existe aussi dans le nouveau jeu
+                // (Rouge et Bleu partagent leurs cartes, Jaune a presque toutes les mêmes), pour comparer.
+                val position = currentPosition()
                 loaded.value = gameMaps
                 worldEntrances = gameMaps.catalog.worldEntrances()
-                history.clear()
-                _state.update {
-                    it.copy(game = gameMaps.game, zone = null, detail = null, zoneListOpen = false, previous = null)
-                }
+                val sameMaps = previous?.catalog === gameMaps.catalog
+                if (!sameMaps) history.clear()
+                _state.update { it.copy(game = gameMaps.game, detail = null, zoneListOpen = false) }
+                val stayed = position != null && stay(gameMaps.catalog, position, sameMaps)
                 val current = _state.value.highlight
-                if (current != null) {
-                    highlight(current.pokemonId, current.name)
-                } else {
-                    gameMaps.catalog.world?.let { open(it.id, push = false) }
+                when {
+                    current != null -> highlight(current.pokemonId, current.name, move = !stayed)
+                    !stayed -> gameMaps.catalog.world?.let { open(it.id, push = false) }
                 }
             }
         }
@@ -201,6 +211,13 @@ class MapViewModel @Inject constructor(
                 loaded.filterNotNull().first()
                 when (request) {
                     is MapRequest.HighlightPokemon -> highlight(request.pokemonId, request.name)
+
+                    is MapRequest.OpenPlace -> catalog?.mapByIdentifier(request.mapIdentifier)?.let { map ->
+                        _state.update { it.copy(detail = null, zoneListOpen = false) }
+                        open(map.id, push = true)
+                    }
+
+                    is MapRequest.FocusObject -> catalog?.objectsById?.get(request.objectId)?.let { focusObject(it) }
                 }
                 mapRequests.consume(request)
             }
@@ -227,7 +244,13 @@ class MapViewModel @Inject constructor(
         if (zoneId != null) selectZone(catalog, zoneId) else clearZone()
     }
 
-    fun dismissDetail() = _state.update { it.copy(detail = null) }
+    fun dismissDetail() {
+        _state.update { it.copy(detail = null) }
+        if (focusedObjectId != null) {
+            focusedObjectId = null
+            refreshOverlays()
+        }
+    }
 
     fun openZoneList() = _state.update { it.copy(zoneListOpen = true, detail = null) }
 
@@ -251,6 +274,7 @@ class MapViewModel @Inject constructor(
 
     fun clearHighlight() {
         highlightedMaps = emptySet()
+        highlightedObjects = emptySet()
         _state.update { it.copy(highlight = null) }
         refreshOverlays()
     }
@@ -325,6 +349,7 @@ class MapViewModel @Inject constructor(
         }
         _state.value.mapState?.shutdown()
         wildMarkers = emptyList()
+        focusedObjectId = null
         _state.update {
             it.copy(
                 map = map,
@@ -426,43 +451,36 @@ class MapViewModel @Inject constructor(
     }
 
     /** Lieux accessibles depuis une ville, une route ou une carte intérieure (bâtiments, grottes, étages, sorties). */
-    private fun places(catalog: MapCatalog, zone: MapInfo): List<MapPlace> {
-        val warps = if (zone.parentId == null) catalog.entrancesOf(zone.id) else catalog.warps[zone.id].orEmpty()
-        return warps.mapNotNull { warp ->
+    private fun places(catalog: MapCatalog, zone: MapInfo): List<MapPlace> =
+        catalog.accessibleFrom(zone.id).mapNotNull { warp ->
             val target = warp.targetMapId?.let { catalog.maps[it] } ?: return@mapNotNull null
-            // Depuis une ville ou une route, seules les cartes intérieures sont des lieux à ouvrir.
-            if (target.id == zone.id || (zone.parentId != null && target.parentId != null)) return@mapNotNull null
             MapPlace(target.id, target.name, warp.targetX, warp.targetY)
-        }.distinctBy { it.mapId }
-    }
+        }
 
     /**
-     * Place chaque Pokémon sauvage du lieu sur un emplacement de son terrain : herbes (ou sol des grottes)
-     * en marchant, eau en surfant ou en pêchant. Un Pokémon apparaît une fois par façon de le rencontrer.
+     * Dessine les Pokémon sauvages du lieu sur leur terrain : herbes (ou sol des grottes) en marchant, eau en surfant
+     * ou en pêchant. Chacun apparaît plusieurs fois (les plus fréquents davantage), à des emplacements tirés au
+     * hasard sur tout le terrain, pour montrer qu'on le rencontre partout.
      */
     private fun wildMarkers(catalog: MapCatalog, zone: MapInfo, encounters: List<Encounter>): List<WildMarker> {
         val spots = catalog.spots[zone.id].orEmpty().groupBy { it.kind }
-        val result = mutableListOf<WildMarker>()
-        val byMethod = encounters.mapNotNull { e -> WildMethod.from(e.method)?.let { it to e } }
-            .groupBy({ it.first }, { it.second })
-        for ((method, list) in byMethod) {
-            val species = list.sortedByDescending { it.chance ?: 0.0 }.distinctBy { it.pokemonId }
-            val candidates = when (method) {
-                WildMethod.WALK -> spots[SpotKind.GRASS] ?: spots[SpotKind.FLOOR]
-
-                WildMethod.SURF -> spots[SpotKind.WATER]
-
-                // Pêche et surf partagent l'eau : la pêche prend les emplacements dans l'autre sens.
-                WildMethod.FISHING -> spots[SpotKind.WATER]?.reversed()
-            }.orEmpty().map { it.x to it.y }.ifEmpty { listOf(zone.centerInDisplay()) }
-            species.forEachIndexed { index, encounter ->
-                val (x, y) = candidates[index % candidates.size]
-                // Plus de Pokémon que d'emplacements : on décale les suivants.
-                val shift = (index / candidates.size) * OVERFLOW_SHIFT
-                result += WildMarker(encounter.pokemonId, encounter.pokemonName, method, x + shift, y + shift)
-            }
+        val wild = encounters.mapNotNull { e -> WildMethod.from(e.method)?.let { it to e } }
+        // Surf et pêche partagent l'eau : ils sont répartis ensemble pour ne pas se superposer.
+        return wild.groupBy { (method, _) -> method == WildMethod.WALK }.flatMap { (walking, list) ->
+            val terrain = if (walking) spots[SpotKind.GRASS] ?: spots[SpotKind.FLOOR] else spots[SpotKind.WATER]
+            val species = list.groupBy { (method, e) -> method to e.pokemonId }.map { (key, group) ->
+                val encounter = group.first().second
+                WildMarker(encounter.pokemonId, encounter.pokemonName, key.first, 0, 0) to
+                    group.sumOf { it.second.chance ?: 0.0 }
+            }.sortedByDescending { it.second }
+            WildPlacement.place(
+                items = species.map { it.first },
+                weights = species.map { it.second },
+                spots = terrain.orEmpty().map { it.x to it.y },
+                fallback = zone.centerInDisplay(),
+                seed = zone.id * 2 + if (walking) 0 else 1
+            ).map { it.item.copy(x = it.x, y = it.y) }
         }
-        return result
     }
 
     private fun MapInfo.centerInDisplay(): Pair<Int, Int> =
@@ -516,26 +534,84 @@ class MapViewModel @Inject constructor(
 
     // --- Surlignage ----------------------------------------------------------------------------
 
-    /** Surligne les lieux d'un Pokémon et recentre la carte du monde sur eux. */
-    private suspend fun highlight(pokemonId: Int, name: String) {
+    /**
+     * Surligne les lieux d'un Pokémon et recentre la carte du monde sur eux (`move`). Un Pokémon qu'on n'obtient
+     * qu'auprès d'un personnage (don, échange) : on entre directement chez lui.
+     */
+    private suspend fun highlight(pokemonId: Int, name: String, move: Boolean = true) {
         val gameMaps = loaded.value ?: return
         val catalog = gameMaps.catalog
         val world = catalog.world ?: return
-        highlightedMaps = getPokemonMaps(gameMaps.game, catalog, pokemonId)
+        val found = getPokemonMaps(gameMaps.game, catalog, pokemonId)
+        highlightedMaps = found.maps
+        highlightedObjects = found.givers.map { it.id }.toSet()
         if (highlightedMaps.isEmpty()) {
             _state.update { it.copy(highlight = null, notFound = name) }
         } else {
-            val maps = highlightedMaps.mapNotNull { catalog.maps[it] }.sortedBy { it.id }
-            val places = maps.map { MapPlace(it.id, it.name) }
+            val giverMaps = found.givers.map { it.mapId }.toSet()
+            val places = found.givers.mapNotNull { giver ->
+                catalog.maps[giver.mapId]?.let { MapPlace(it.id, it.name, giver.x, giver.y) }
+            } + highlightedMaps.filter { it !in giverMaps }.mapNotNull { catalog.maps[it] }.sortedBy { it.id }
+                .map { MapPlace(it.id, it.name) }
             _state.update { it.copy(highlight = MapHighlight(pokemonId, name, places), detail = null) }
         }
+        if (!move) {
+            refreshOverlays()
+            return
+        }
         history.clear()
+        if (found.onlyFromGivers) {
+            focusObject(found.givers.first())
+            return
+        }
         if (_state.value.map?.id == world.id) {
             clearZone()
         } else {
             show(world.id, null, null, null)
         }
         focusOnHighlight(catalog, world)
+    }
+
+    /** Ouvre la carte d'un objet ou d'un personnage (son bâtiment), centrée sur lui, avec sa fiche. */
+    private fun focusObject(obj: MapObject) {
+        _state.update { it.copy(detail = null, zoneListOpen = false) }
+        open(obj.mapId, obj.x, obj.y, push = true)
+        focusedObjectId = obj.id
+        showObject(obj)
+        refreshOverlays()
+    }
+
+    // --- Changement de version -----------------------------------------------------------------
+
+    /** Carte affichée, lieu sélectionné, centre de l'écran et zoom, par identifiants (communs aux jeux). */
+    private data class Position(
+        val mapIdentifier: String,
+        val zoneIdentifier: String?,
+        val x: Double,
+        val y: Double,
+        val scale: Double
+    )
+
+    private fun currentPosition(): Position? {
+        val catalog = catalog ?: return null
+        val map = _state.value.map ?: return null
+        val mapState = _state.value.mapState ?: return null
+        val zone = _state.value.zone?.let { catalog.maps[it.mapId]?.identifier }
+        return Position(map.identifier, zone, mapState.centroidX, mapState.centroidY, mapState.scale)
+    }
+
+    /** Reste à la même position dans le nouveau jeu ; false si la carte n'y existe pas. */
+    private fun stay(catalog: MapCatalog, position: Position, sameMaps: Boolean): Boolean {
+        val map = catalog.maps.values.firstOrNull { it.identifier == position.mapIdentifier && it.isDisplayable }
+            ?: return false
+        // Mêmes cartes (Rouge ↔ Bleu) : la carte affichée reste, seules les rencontres changent.
+        if (!sameMaps || _state.value.map?.id != map.id) {
+            show(map.id, position.x, position.y, position.scale)
+        }
+        val zone = position.zoneIdentifier?.let(catalog::mapByIdentifier)
+            ?.takeIf { catalog.displayedMapOf(it.id)?.id == map.id }
+        if (zone != null) selectZone(catalog, zone.id) else clearZone()
+        return true
     }
 
     /** Recentre la carte du monde sur les villes, routes et entrées surlignées. */
@@ -633,7 +709,13 @@ class MapViewModel @Inject constructor(
         }
         wildMarkers.forEachIndexed { index, wild ->
             mapState.marker("$WILD:${wild.pokemonId}:$index", wild.x, wild.y, lazy = false, zIndex = 1f) {
-                WildPokemonMarker(wild)
+                WildPokemonMarker(mapState, wild)
+            }
+        }
+
+        focusedObjectId?.let { catalog.objectsById[it] }?.takeIf { it.mapId in catalog.partsOf(map.id) }?.let { obj ->
+            mapState.marker("$HIGHLIGHT_OBJECT:${obj.id}", obj.x, obj.y, lazy = false, zIndex = 3f) {
+                HighlightMarker()
             }
         }
 
@@ -653,7 +735,10 @@ class MapViewModel @Inject constructor(
                 HighlightMarker()
             }
         }
-        objects.filter { it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId }.forEach { obj ->
+        objects.filter {
+            ((it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId) || it.id in highlightedObjects) &&
+                it.id != focusedObjectId
+        }.forEach { obj ->
             mapState.marker("$HIGHLIGHT_OBJECT:${obj.id}", obj.x, obj.y, lazy = false, zIndex = 3f) {
                 HighlightMarker()
             }
@@ -680,7 +765,6 @@ class MapViewModel @Inject constructor(
         const val MAX_SCALE = 12.0
         const val CENTER = 0.5
         const val ENTRANCE_MARGIN = 48
-        const val OVERFLOW_SHIFT = 6
         const val WARP_TOUCH_RADIUS_DP = 24f
         const val WARP_TOUCH_MIN_SCALE = 1.0
         const val LAZY_LOADER = "lazy"

@@ -64,7 +64,9 @@ import org.opensources.pokmaps.domain.pokemon.EvolutionNode
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.AssetImage
+import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.FavoriteButton
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.TypeBadge
@@ -75,6 +77,7 @@ import org.opensources.pokmaps.ui.common.label
 @Composable
 fun PokemonScreen(
     onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
     onShowOnMap: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PokemonViewModel = hiltViewModel()
@@ -95,7 +98,12 @@ fun PokemonScreen(
             game = game,
             details = details,
             catch = state.catch,
+            caught = state.caught,
+            favorite = state.favorite,
+            onToggleCaught = viewModel::toggleCaught,
+            onToggleFavorite = viewModel::toggleFavorite,
             onOpenPokemon = onOpenPokemon,
+            onOpenItem = onOpenItem,
             onShowOnMap = {
                 viewModel.showOnMap()
                 onShowOnMap()
@@ -113,7 +121,12 @@ private fun PokemonContent(
     game: Game,
     details: PokemonDetails,
     catch: CatchUiState?,
+    caught: Boolean,
+    favorite: Boolean,
+    onToggleCaught: () -> Unit,
+    onToggleFavorite: () -> Unit,
     onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
     onShowOnMap: () -> Unit,
     onCatchLevel: (Int) -> Unit,
     onCatchHp: (HpChoice) -> Unit,
@@ -122,10 +135,10 @@ private fun PokemonContent(
 ) {
     var movesTab by rememberSaveable(details.id) { mutableIntStateOf(0) }
     LazyColumn(modifier.fillMaxSize()) {
-        item { Header(details) }
+        item { Header(details, game, caught, favorite, onToggleCaught, onToggleFavorite) }
         section(R.string.pokemon_stats) { Stats(details.stats) }
         section(R.string.pokemon_weaknesses) { Weaknesses(details) }
-        section(R.string.pokemon_evolutions) { Evolutions(details, onOpenPokemon) }
+        section(R.string.pokemon_evolutions) { Evolutions(details, onOpenPokemon, onOpenItem) }
         section(R.string.pokemon_locations) { Locations(game, details, onShowOnMap) }
         catch?.let { section(R.string.catch_title) { CatchCalculator(it, onCatchLevel, onCatchHp, onCatchStatus) } }
         section(R.string.pokemon_moves) {
@@ -159,7 +172,14 @@ private fun LazyListScope.section(title: Int, content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun Header(details: PokemonDetails) {
+private fun Header(
+    details: PokemonDetails,
+    game: Game,
+    caught: Boolean,
+    favorite: Boolean,
+    onToggleCaught: () -> Unit,
+    onToggleFavorite: () -> Unit
+) {
     var showArtwork by rememberSaveable(details.id) { mutableStateOf(false) }
     var artworkFailed by remember(details.id) { mutableStateOf(false) }
     Column(
@@ -169,6 +189,20 @@ private fun Header(details: PokemonDetails) {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
+        // Capturé dans la version choisie, et favori (commun à tous les jeux).
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            CaughtButton(caught, onToggleCaught)
+            Text(
+                stringResource(
+                    if (caught) R.string.collection_caught_in else R.string.collection_not_caught_in,
+                    game.name
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f)
+            )
+            FavoriteButton(favorite, onToggleFavorite)
+        }
         Box(Modifier.size(SPRITE_SIZE), contentAlignment = Alignment.Center) {
             if (showArtwork && !artworkFailed) {
                 AsyncImage(
@@ -272,7 +306,7 @@ private fun Weaknesses(details: PokemonDetails) {
 }
 
 @Composable
-private fun Evolutions(details: PokemonDetails, onOpenPokemon: (Int) -> Unit) {
+private fun Evolutions(details: PokemonDetails, onOpenPokemon: (Int) -> Unit, onOpenItem: (String) -> Unit) {
     val single = details.evolutions.singleOrNull()
     if (details.evolutions.isEmpty() || (single != null && single.children.isEmpty())) {
         Text(stringResource(R.string.pokemon_no_evolution))
@@ -283,23 +317,33 @@ private fun Evolutions(details: PokemonDetails, onOpenPokemon: (Int) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
-        details.evolutions.forEach { EvolutionTreeNode(it, details.id, onOpenPokemon) }
+        details.evolutions.forEach { EvolutionTreeNode(it, details.id, onOpenPokemon, onOpenItem) }
     }
 }
 
 @Composable
-private fun EvolutionTreeNode(node: EvolutionNode, currentId: Int, onOpenPokemon: (Int) -> Unit) {
+private fun EvolutionTreeNode(
+    node: EvolutionNode,
+    currentId: Int,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         EvolutionMember(node, currentId, onOpenPokemon)
         if (node.children.isNotEmpty()) {
-            EvolutionBranches(node.children, currentId, onOpenPokemon)
+            EvolutionBranches(node.children, currentId, onOpenPokemon, onOpenItem)
         }
     }
 }
 
 /** Évolutions d'un Pokémon, l'une sous l'autre ; plusieurs (Évoli) sont reliées par un trait vertical. */
 @Composable
-private fun EvolutionBranches(children: List<EvolutionNode>, currentId: Int, onOpenPokemon: (Int) -> Unit) {
+private fun EvolutionBranches(
+    children: List<EvolutionNode>,
+    currentId: Int,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
+) {
     val branchColor = MaterialTheme.colorScheme.outline
     val count = children.size
     Column(
@@ -317,8 +361,8 @@ private fun EvolutionBranches(children: List<EvolutionNode>, currentId: Int, onO
     ) {
         children.forEach { child ->
             Row(verticalAlignment = Alignment.CenterVertically) {
-                EvolutionArrow(child.condition, branchColor)
-                EvolutionTreeNode(child, currentId, onOpenPokemon)
+                EvolutionArrow(child.condition, branchColor, onOpenItem)
+                EvolutionTreeNode(child, currentId, onOpenPokemon, onOpenItem)
             }
         }
     }
@@ -330,11 +374,11 @@ private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .widthIn(min = 72.dp)
+            .widthIn(min = 136.dp)
             .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
             .padding(4.dp)
     ) {
-        PixelArtImage(Sprites.pokemonIcon(node.pokemonId), PixelArt.POKEMON_ICON, 64.dp, contentDescription = null)
+        PixelArtImage(Sprites.pokemonIcon(node.pokemonId), PixelArt.POKEMON_ICON, 128.dp, contentDescription = null)
         Text(
             node.name,
             style = MaterialTheme.typography.bodyMedium,
@@ -344,16 +388,18 @@ private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: 
     }
 }
 
-/** Flèche vers une évolution, avec sa condition : niveau, pierre (avec son icône) ou échange. */
+/** Flèche vers une évolution, avec sa condition : niveau, pierre (avec son icône, vers sa fiche) ou échange. */
 @Composable
-private fun EvolutionArrow(condition: EvolutionCondition?, color: Color) {
+private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenItem: (String) -> Unit) {
+    val identifier = condition?.itemIdentifier
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(80.dp)
+        modifier = Modifier
+            .width(96.dp)
+            .clickable(enabled = identifier != null) { identifier?.let(onOpenItem) }
     ) {
-        val identifier = condition?.itemIdentifier
         if (condition != null && identifier != null && condition.itemHasSprite) {
-            PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 28.dp, contentDescription = null)
+            PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 56.dp, contentDescription = null)
         }
         val text = when {
             condition == null -> ""
@@ -451,11 +497,7 @@ private fun CatchCalculator(
         catch.probabilities.forEach { (ball, probability) ->
             val best = ball == catch.best
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                AssetImage(
-                    Sprites.item(ball.itemIdentifier),
-                    contentDescription = null,
-                    modifier = Modifier.size(32.dp)
-                )
+                PixelArtImage(Sprites.item(ball.itemIdentifier), PixelArt.ITEM_ICON, 64.dp, contentDescription = null)
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(ball.label), fontWeight = if (best) FontWeight.Bold else FontWeight.Normal)
                     if (best) {

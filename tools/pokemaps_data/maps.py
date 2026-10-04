@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import csv
 import math
+import random
 import shutil
 from collections import deque
 from dataclasses import dataclass, field
@@ -55,8 +56,12 @@ CEMETERY_TILESET, CAVERN_TILESET = "CEMETERY", "CAVERN"
 CAVE_MAPS = frozenset({"CERULEAN_CAVE_2F", "CERULEAN_CAVE_B1F", "CERULEAN_CAVE_1F", "BRUNOS_ROOM"})
 LORELEI_MAP = "LORELEIS_ROOM"
 
-# Emplacements où dessiner les Pokémon sauvages, par carte et par type de terrain (au plus SPOTS_PER_KIND).
-SPOTS_PER_KIND = 12
+# Emplacements où dessiner les Pokémon sauvages, par carte et par type de terrain (au plus SPOTS_PER_KIND),
+# espacés d'au moins SPOT_SPACING cases pour que les sprites ne se chevauchent pas.
+SPOTS_PER_KIND = 40
+SPOT_SPACING = 3
+# Case « intérieure » : au moins autant de voisines (sur 8) du même terrain.
+INTERIOR_NEIGHBORS = 7
 # Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
 
@@ -108,26 +113,28 @@ def _reachable(cells: list[tuple[int, int]], starts: set[tuple[int, int]], block
     return [cell for cell in cells if cell in seen]
 
 
-def spread(cells: list[tuple[int, int]], count: int) -> list[tuple[int, int]]:
-    """Échantillonnage du point le plus éloigné : `count` cases bien réparties (toutes les zones d'herbes…).
+def spread(cells: list[tuple[int, int]], count: int, seed: str) -> list[tuple[int, int]]:
+    """Jusqu'à `count` cases réparties au hasard sur tout le terrain, à `SPOT_SPACING` cases au moins les unes
+    des autres.
 
-    On part de la case la plus proche du centre ; le résultat ne dépend que des cases."""
-    if len(cells) <= count:
-        return sorted(cells)
-    cx = sum(x for x, _ in cells) / len(cells)
-    cy = sum(y for _, y in cells) / len(cells)
-    first = min(cells, key=lambda c: ((c[0] - cx) ** 2 + (c[1] - cy) ** 2, c))
-    chosen = [first]
-    distance = {cell: (cell[0] - first[0]) ** 2 + (cell[1] - first[1]) ** 2 for cell in cells}
-    while len(chosen) < count:
-        best = max(cells, key=lambda c: (distance[c], -c[1], -c[0]))
-        if distance[best] == 0:
+    Les cases à l'intérieur du terrain (entourées d'herbes, d'eau ou de sol) passent en premier : les Pokémon
+    ne sont pas collés aux bords des zones ni de la carte. Le tirage est déterministe (graine = nom de la carte)."""
+    free = set(cells)
+    rng = random.Random(seed)
+    order = sorted(cells)
+    rng.shuffle(order)
+
+    def neighbors(cell: tuple[int, int]) -> int:
+        x, y = cell
+        return sum((x + dx, y + dy) in free for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy)
+
+    order.sort(key=lambda c: -min(neighbors(c), INTERIOR_NEIGHBORS))
+    chosen: list[tuple[int, int]] = []
+    for cell in order:
+        if len(chosen) >= count:
             break
-        chosen.append(best)
-        for cell in cells:
-            d = (cell[0] - best[0]) ** 2 + (cell[1] - best[1]) ** 2
-            if d < distance[cell]:
-                distance[cell] = d
+        if all((cell[0] - x) ** 2 + (cell[1] - y) ** 2 >= SPOT_SPACING**2 for x, y in chosen):
+            chosen.append(cell)
     return chosen
 
 
@@ -242,7 +249,9 @@ class GameMaps:
 
     def spots(self, const: str) -> dict[str, list[tuple[int, int]]]:
         """Emplacements bien répartis de chaque terrain, pour dessiner les Pokémon sauvages."""
-        return {kind: spread(cells, SPOTS_PER_KIND) for kind, cells in self.cells(const).items() if cells}
+        return {
+            kind: spread(cells, SPOTS_PER_KIND, f"{const}/{kind}") for kind, cells in self.cells(const).items() if cells
+        }
 
     # --- Palettes -------------------------------------------------------------
 
