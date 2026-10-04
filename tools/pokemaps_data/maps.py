@@ -27,7 +27,7 @@ from pathlib import Path
 from PIL import Image
 
 from .games import GAMES, Game
-from .pret import BLOCK_PX, LAST_MAP, STEP_PX, TILE_PX, PretMap, PretRepo
+from .pret import BLOCK_PX, GYM_LEADERS, LAST_MAP, STEP_PX, TILE_PX, WATER_TILE, NpcOffer, PretMap, PretRepo
 from .sources import fetch_pret
 
 TILE_SIZE = 256
@@ -41,12 +41,24 @@ START_MAP = "PALLET_TOWN"
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # Objets dont l'identifiant PokéAPI ne se déduit pas de la constante pret.
-ITEM_ALIASES = {"ELIXER": "elixir", "MAX_ELIXER": "max-elixir", "X_SPECIAL": "x-sp-atk"}
+ITEM_ALIASES = {
+    "ELIXER": "elixir",
+    "MAX_ELIXER": "max-elixir",
+    "X_SPECIAL": "x-sp-atk",
+    "PARLYZ_HEAL": "paralyze-heal",
+    "S_S_TICKET": "ss-ticket",
+    "X_DEFEND": "x-defense",
+}
 
 # Palettes particulières (cf. SetPal_Overworld dans engine/gfx/palettes.asm).
 CEMETERY_TILESET, CAVERN_TILESET = "CEMETERY", "CAVERN"
 CAVE_MAPS = frozenset({"CERULEAN_CAVE_2F", "CERULEAN_CAVE_B1F", "CERULEAN_CAVE_1F", "BRUNOS_ROOM"})
 LORELEI_MAP = "LORELEIS_ROOM"
+
+# Emplacements où dessiner les Pokémon sauvages, par carte et par type de terrain (au plus SPOTS_PER_KIND).
+SPOTS_PER_KIND = 12
+# Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
+STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
 
 
 def identifier(const: str) -> str:
@@ -73,6 +85,50 @@ class DisplayMap:
     height: int
     level_count: int
     image: Image.Image = field(repr=False)
+
+
+def _reachable(cells: list[tuple[int, int]], starts: set[tuple[int, int]], blocked) -> list[tuple[int, int]]:
+    """Cases accessibles à pied depuis les warps (le bord des grottes est souvent praticable mais isolé)."""
+    free = set(cells)
+    if not starts:
+        return cells
+    seen: set[tuple[int, int]] = set()
+    queue = deque()
+    for x, y in starts:
+        for neighbor in ((x, y), (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if neighbor in free and neighbor not in seen:
+                seen.add(neighbor)
+                queue.append(neighbor)
+    while queue:
+        x, y = queue.popleft()
+        for neighbor in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if neighbor in free and neighbor not in seen and not blocked((x, y), neighbor):
+                seen.add(neighbor)
+                queue.append(neighbor)
+    return [cell for cell in cells if cell in seen]
+
+
+def spread(cells: list[tuple[int, int]], count: int) -> list[tuple[int, int]]:
+    """Échantillonnage du point le plus éloigné : `count` cases bien réparties (toutes les zones d'herbes…).
+
+    On part de la case la plus proche du centre ; le résultat ne dépend que des cases."""
+    if len(cells) <= count:
+        return sorted(cells)
+    cx = sum(x for x, _ in cells) / len(cells)
+    cy = sum(y for _, y in cells) / len(cells)
+    first = min(cells, key=lambda c: ((c[0] - cx) ** 2 + (c[1] - cy) ** 2, c))
+    chosen = [first]
+    distance = {cell: (cell[0] - first[0]) ** 2 + (cell[1] - first[1]) ** 2 for cell in cells}
+    while len(chosen) < count:
+        best = max(cells, key=lambda c: (distance[c], -c[1], -c[0]))
+        if distance[best] == 0:
+            break
+        chosen.append(best)
+        for cell in cells:
+            d = (cell[0] - best[0]) ** 2 + (cell[1] - best[1]) ** 2
+            if d < distance[cell]:
+                distance[cell] = d
+    return chosen
 
 
 def level_count(width: int, height: int) -> int:
@@ -152,6 +208,41 @@ class GameMaps:
     def display_maps(self) -> list[str]:
         indoor = sorted(self.indoor_parents, key=lambda c: self.maps[c].number)
         return [WORLD, *indoor]
+
+    # --- Terrain --------------------------------------------------------------
+
+    def cells(self, const: str) -> dict[str, list[tuple[int, int]]]:
+        """Cases (pas de 16 px) de chaque terrain : herbes (grass), eau (water) et sol praticable (floor).
+
+        Comme le jeu, on regarde la tuile en bas à gauche de chaque case."""
+        pret_map = self.maps[const]
+        tileset = self.repo.tilesets[pret_map.tileset]
+        warps = {(warp.x, warp.y) for warp in pret_map.warps}
+        result: dict[str, list[tuple[int, int]]] = {"grass": [], "water": [], "floor": []}
+        for y in range(pret_map.height * 2):
+            for x in range(pret_map.width * 2):
+                if (x, y) in warps:
+                    continue
+                tile = self.repo.tile_at(pret_map, x * 2, y * 2 + 1)
+                if tileset.grass_tile is not None and tile == tileset.grass_tile:
+                    result["grass"].append((x, y))
+                elif tileset.has_water and tile == WATER_TILE:
+                    result["water"].append((x, y))
+                elif tile in tileset.passable:
+                    result["floor"].append((x, y))
+        pairs = self.repo.land_pair_collisions.get(pret_map.tileset, set())
+
+        def blocked(a: tuple[int, int], b: tuple[int, int]) -> bool:
+            first = self.repo.tile_at(pret_map, a[0] * 2, a[1] * 2 + 1)
+            second = self.repo.tile_at(pret_map, b[0] * 2, b[1] * 2 + 1)
+            return frozenset((first, second)) in pairs
+
+        result["floor"] = _reachable(result["floor"], warps, blocked)
+        return result
+
+    def spots(self, const: str) -> dict[str, list[tuple[int, int]]]:
+        """Emplacements bien répartis de chaque terrain, pour dessiner les Pokémon sauvages."""
+        return {kind: spread(cells, SPOTS_PER_KIND) for kind, cells in self.cells(const).items() if cells}
 
     # --- Palettes -------------------------------------------------------------
 
@@ -344,6 +435,18 @@ class ObjectRow:
     pokemon: str | None  # identifiant PokéAPI
     level: int | None
     trainer_class: str | None
+    # Équipe d'un dresseur : (Pokémon, niveau, attaques), identifiants PokéAPI.
+    party: list[tuple[str, int, tuple[str, ...]]] = field(default_factory=list)
+    # Dons, ventes et échanges du personnage (identifiants PokéAPI).
+    offers: list[NpcOffer] = field(default_factory=list)
+
+
+@dataclass
+class SpotRow:
+    map_const: str
+    kind: str  # grass, water ou floor
+    x: int
+    y: int
 
 
 @dataclass
@@ -354,6 +457,7 @@ class GameMapData:
     areas: list[tuple[str, str]]
     warps: list[WarpRow]
     objects: list[ObjectRow]
+    spots: list[SpotRow] = field(default_factory=list)
 
 
 def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[str, str]], output: Path) -> GameMapData:
@@ -406,6 +510,16 @@ def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[st
                 continue  # hors de la carte, donc inaccessible (ex. une Pépite cachée de l'entrée du Parc Safari)
             if obj.sprite:
                 sprites.add(obj.sprite)
+            trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
+            party = []
+            if trainer_class and trainer_class not in STARTER_DEPENDENT_TRAINERS:
+                party = [
+                    (identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
+                    for mon in repo.trainer_parties.get((trainer_class, obj.trainer_number or 0), [])
+                ]
+            offers = repo.npc_offers(obj.text)
+            if trainer_class in GYM_LEADERS:
+                offers += [offer for offer in repo.leader_gifts(pret_map.label) if offer not in offers]
             objects.append(
                 ObjectRow(
                     const,
@@ -415,12 +529,32 @@ def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[st
                     obj.item and item_identifier(repo, obj.item),
                     obj.pokemon and identifier(obj.pokemon),
                     obj.level,
-                    obj.trainer_class and identifier(obj.trainer_class.removeprefix("OPP_")),
+                    trainer_class and identifier(trainer_class),
+                    party,
+                    [_offer_identifiers(repo, offer) for offer in offers],
                 )
             )
+    spots = [
+        SpotRow(const, kind, *point(const, x, y))
+        for const in sorted(placements, key=lambda c: maps[c].number)
+        for kind, cells in game_maps.spots(const).items()
+        for x, y in cells
+    ]
     write_sprites(repo, sprites, output / "sprites")
     game_areas = [(const, area) for const, area in areas if const in placements]
-    return GameMapData(rows, game_areas, warps, objects)
+    return GameMapData(rows, game_areas, warps, objects, spots)
+
+
+def _offer_identifiers(repo: PretRepo, offer: NpcOffer) -> NpcOffer:
+    """Offre avec les identifiants PokéAPI à la place des constantes pret."""
+    return NpcOffer(
+        offer.kind,
+        offer.item and item_identifier(repo, offer.item),
+        offer.pokemon and identifier(offer.pokemon),
+        offer.quantity,
+        offer.price,
+        offer.wanted and identifier(offer.wanted),
+    )
 
 
 def _warp_target(game_maps: GameMaps, source: str, target: str, number: int) -> tuple[str, int, int] | None:

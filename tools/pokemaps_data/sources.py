@@ -48,6 +48,7 @@ POKEAPI_CSV_FILES = (
     "growth_rate_prose",
     "growth_rates",
     "item_categories",
+    "item_flavor_text",
     "item_game_indices",
     "item_names",
     "items",

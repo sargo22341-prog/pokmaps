@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.ui.map
 
+import android.content.res.Resources
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -10,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,17 +20,23 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.data.map.MapTiles
+import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.MapWarp
+import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.SpotKind
+import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterGroup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
+import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 import org.opensources.pokmaps.domain.usecase.GetPokemonMapsUseCase
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
@@ -51,7 +59,7 @@ import ovh.plrapps.mapcompose.api.snapScrollTo
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 
-/** Calques activables de la carte. */
+/** Calques activables de la carte (en dehors du lieu sélectionné, dont tout le contenu est affiché). */
 enum class MapLayer {
     WARPS,
     ITEMS,
@@ -62,17 +70,54 @@ enum class MapLayer {
 /** Lieu vers lequel on peut aller : carte (ou ville, route) et point d'arrivée, en pixels de la carte affichée. */
 data class MapPlace(val mapId: Int, val name: String, val x: Int? = null, val y: Int? = null)
 
-/** Élément touché sur la carte, détaillé dans la fiche en bas d'écran. */
-sealed interface MapSelection {
-    data class Zone(
-        val mapId: Int,
-        val name: String,
-        val places: List<MapPlace>,
-        val loading: Boolean = true,
-        val encounters: List<EncounterGroup> = emptyList()
-    ) : MapSelection
+/** Façon de rencontrer un Pokémon sauvage, qui décide où le dessiner sur la carte. */
+enum class WildMethod {
+    /** Herbes hautes, ou sol des grottes et bâtiments. */
+    WALK,
+    SURF,
+    FISHING;
 
-    data class Object(val obj: MapObject) : MapSelection
+    companion object {
+        fun from(method: String): WildMethod? = when (method) {
+            "walk" -> WALK
+            "surf" -> SURF
+            "old-rod", "good-rod", "super-rod" -> FISHING
+            else -> null
+        }
+    }
+}
+
+/** Pokémon sauvage dessiné sur la carte, à un emplacement de son terrain (en pixels de la carte affichée). */
+data class WildMarker(val pokemonId: Int, val name: String, val method: WildMethod, val x: Int, val y: Int)
+
+/**
+ * Lieu sélectionné (ville, route ou carte intérieure) : son contenu est dessiné sur la carte
+ * (Pokémon sauvages, objets, personnages), la liste détaillée s'ouvre à la demande.
+ */
+data class MapZone(
+    val mapId: Int,
+    val name: String,
+    val places: List<MapPlace>,
+    val loading: Boolean = true,
+    val encounters: List<Encounter> = emptyList()
+) {
+    val groups: List<EncounterGroup> get() = encounters.groupByMethod()
+    val wildCount: Int get() = encounters.filter { WildMethod.from(it.method) != null }.distinctBy { it.pokemonId }.size
+}
+
+/** Élément touché sur la carte, détaillé dans la carte en bas d'écran. */
+sealed interface MapDetail {
+    data class WildPokemon(val pokemonId: Int, val name: String, val encounters: List<EncounterGroup>) : MapDetail
+
+    data class Item(val obj: MapObject, val details: ItemDetails? = null) : MapDetail
+
+    /** Dresseur, personnage ou Pokémon fixe ; `loading` tant que l'équipe et les offres ne sont pas lues. */
+    data class Character(
+        val obj: MapObject,
+        val loading: Boolean = true,
+        val party: List<TrainerPokemon> = emptyList(),
+        val offers: List<NpcOffer> = emptyList()
+    ) : MapDetail
 }
 
 /** Mode « surlignage » : lieux d'un Pokémon dans la version choisie. */
@@ -85,7 +130,10 @@ data class MapUiState(
     /** Carte précédente, pour le bouton retour. */
     val previous: MapPlace? = null,
     val layers: Set<MapLayer> = setOf(MapLayer.WARPS),
-    val selection: MapSelection? = null,
+    val zone: MapZone? = null,
+    val detail: MapDetail? = null,
+    /** Liste détaillée du lieu sélectionné ouverte. */
+    val zoneListOpen: Boolean = false,
     val highlight: MapHighlight? = null,
     /** Pokémon introuvable sur les cartes de la version (message à afficher une fois). */
     val notFound: String? = null
@@ -93,13 +141,14 @@ data class MapUiState(
 
 /**
  * Carte du jeu choisi, affichée avec MapCompose : carte du monde de Kanto et cartes intérieures,
- * zones cliquables, calques (entrées, objets, dresseurs, Pokémon fixes) et surlignage des lieux d'un Pokémon.
+ * lieux cliquables (leur contenu s'affiche sur la carte), calques et surlignage des lieux d'un Pokémon.
  */
 @HiltViewModel
 class MapViewModel @Inject constructor(
     observeCatalog: ObserveMapCatalogUseCase,
     private val getMapEncounters: GetMapEncountersUseCase,
     private val getPokemonMaps: GetPokemonMapsUseCase,
+    private val getObjectDetails: GetMapObjectDetailsUseCase,
     private val mapRequests: MapRequests,
     private val tiles: MapTiles
 ) : ViewModel() {
@@ -108,17 +157,27 @@ class MapViewModel @Inject constructor(
 
     private val loaded = MutableStateFlow<GameMaps?>(null)
 
-    /** Cartes visitées, pour revenir en arrière (carte, centre de l'écran et zoom au moment de la quitter). */
+    /** Cartes visitées, pour revenir en arrière (carte, lieu sélectionné, centre de l'écran et zoom). */
     private val history = ArrayDeque<Stop>()
 
     /** Cartes où se trouve le Pokémon surligné, et entrée sur la carte du monde de chaque carte intérieure. */
     private var highlightedMaps: Set<Int> = emptySet()
     private var worldEntrances: Map<Int, MapWarp> = emptyMap()
 
-    /** Chemins (surlignage) dessinés sur la carte affichée. */
+    /** Pokémon sauvages dessinés pour le lieu sélectionné. */
+    private var wildMarkers: List<WildMarker> = emptyList()
+
+    /** Chemins (surlignage, contour du lieu) dessinés sur la carte affichée. */
     private val drawnPaths = mutableListOf<String>()
 
-    private data class Stop(val mapId: Int, val x: Double, val y: Double, val scale: Double, val name: String)
+    private data class Stop(
+        val mapId: Int,
+        val zoneId: Int?,
+        val x: Double,
+        val y: Double,
+        val scale: Double,
+        val name: String
+    )
 
     init {
         viewModelScope.launch {
@@ -126,7 +185,9 @@ class MapViewModel @Inject constructor(
                 loaded.value = gameMaps
                 worldEntrances = gameMaps.catalog.worldEntrances()
                 history.clear()
-                _state.update { it.copy(game = gameMaps.game, selection = null, previous = null) }
+                _state.update {
+                    it.copy(game = gameMaps.game, zone = null, detail = null, zoneListOpen = false, previous = null)
+                }
                 val current = _state.value.highlight
                 if (current != null) {
                     highlight(current.pokemonId, current.name)
@@ -152,18 +213,34 @@ class MapViewModel @Inject constructor(
 
     /** Ouvre un lieu : carte intérieure, ou ville et route (sur la carte du monde). */
     fun openPlace(place: MapPlace) {
-        _state.update { it.copy(selection = null) }
+        _state.update { it.copy(detail = null, zoneListOpen = false) }
         open(place.mapId, place.x, place.y, push = true)
     }
 
     /** Revient à la carte précédente, là où on l'avait quittée. */
     fun back() {
         val stop = history.removeLastOrNull() ?: return
-        _state.update { it.copy(selection = null) }
+        _state.update { it.copy(detail = null, zoneListOpen = false) }
         show(stop.mapId, stop.x, stop.y, stop.scale)
+        val catalog = catalog ?: return
+        val zoneId = stop.zoneId
+        if (zoneId != null) selectZone(catalog, zoneId) else clearZone()
     }
 
-    fun dismissSelection() = _state.update { it.copy(selection = null) }
+    fun dismissDetail() = _state.update { it.copy(detail = null) }
+
+    fun openZoneList() = _state.update { it.copy(zoneListOpen = true, detail = null) }
+
+    fun closeZoneList() = _state.update { it.copy(zoneListOpen = false) }
+
+    /** Désélectionne la ville ou la route (une carte intérieure reste toujours sélectionnée). */
+    fun clearZone() {
+        val map = _state.value.map
+        if (map != null && map.identifier != GameMap.WORLD) return
+        wildMarkers = emptyList()
+        _state.update { it.copy(zone = null, detail = null, zoneListOpen = false) }
+        refreshOverlays()
+    }
 
     fun notFoundShown() = _state.update { it.copy(notFound = null) }
 
@@ -178,9 +255,17 @@ class MapViewModel @Inject constructor(
         refreshOverlays()
     }
 
+    /** Ouvre la fiche détaillée d'un Pokémon sauvage depuis la liste du lieu. */
+    fun showWildPokemon(pokemonId: Int) {
+        val zone = _state.value.zone ?: return
+        val encounters = zone.encounters.filter { it.pokemonId == pokemonId }
+        val name = encounters.firstOrNull()?.pokemonName ?: return
+        _state.update { it.copy(detail = MapDetail.WildPokemon(pokemonId, name, encounters.groupByMethod())) }
+    }
+
     /**
-     * Affiche la carte qui contient `mapId`, centrée sur (x, y) en pixels si donnés, sinon sur la ville ou la route.
-     * `push` : mémorise la carte actuelle pour le bouton retour.
+     * Affiche la carte qui contient `mapId`, centrée sur (x, y) en pixels si donnés, sinon sur la ville ou la route,
+     * et sélectionne ce lieu. `push` : mémorise la carte actuelle pour le bouton retour.
      */
     private fun open(mapId: Int, x: Int? = null, y: Int? = null, push: Boolean) {
         val catalog = catalog ?: return
@@ -193,7 +278,14 @@ class MapViewModel @Inject constructor(
         val currentState = current.mapState
         if (push && currentMap != null && currentState != null && currentMap.id != displayed.id) {
             history.addLast(
-                Stop(currentMap.id, currentState.centroidX, currentState.centroidY, currentState.scale, currentMap.name)
+                Stop(
+                    currentMap.id,
+                    current.zone?.mapId,
+                    currentState.centroidX,
+                    currentState.centroidY,
+                    currentState.scale,
+                    currentMap.name
+                )
             )
         }
         val nx = focusX?.let { it.toDouble() / displayed.width }
@@ -203,9 +295,11 @@ class MapViewModel @Inject constructor(
             if (nx != null && ny != null) {
                 viewModelScope.launch { currentState.scrollTo(nx, ny, max(currentState.scale, FOCUS_SCALE)) }
             }
-            return
+        } else {
+            show(displayed.id, nx, ny, if (nx != null) FOCUS_SCALE else null)
         }
-        show(displayed.id, nx, ny, if (nx != null) FOCUS_SCALE else null)
+        // Ville, route ou carte intérieure : son contenu s'affiche sur la carte.
+        if (target.id == catalog.world?.id) clearZone() else selectZone(catalog, target.id)
     }
 
     /** Crée la carte affichée (MapCompose) ; position et zoom normalisés, ou carte entière si absents. */
@@ -230,13 +324,15 @@ class MapViewModel @Inject constructor(
             onMarkerClick { id, _, _ -> handleMarkerClick(id) }
         }
         _state.value.mapState?.shutdown()
+        wildMarkers = emptyList()
         _state.update {
             it.copy(
                 map = map,
                 mapState = mapState,
-                previous = history.lastOrNull()?.let { stop ->
-                    MapPlace(stop.mapId, stop.name)
-                }
+                zone = null,
+                detail = null,
+                zoneListOpen = false,
+                previous = history.lastOrNull()?.let { stop -> MapPlace(stop.mapId, stop.name) }
             )
         }
         refreshOverlays()
@@ -251,26 +347,82 @@ class MapViewModel @Inject constructor(
     private fun handleTap(x: Double, y: Double) {
         val catalog = catalog ?: return
         val map = _state.value.map ?: return
+        val mapState = _state.value.mapState ?: return
         val px = (x * map.width).toInt()
         val py = (y * map.height).toInt()
-        val zone = if (map.regions.isEmpty()) map.id else map.regions.firstOrNull { it.contains(px, py) }?.id
-        if (zone == null) {
-            dismissSelection()
+        // Une entrée touchée à peu près (à un doigt près) fait entrer, sans viser exactement son marqueur.
+        val tolerance = WARP_TOUCH_RADIUS_DP * Resources.getSystem().displayMetrics.density / mapState.scale
+        // Vue très éloignée : la tolérance couvrirait plusieurs bâtiments, seuls les marqueurs touchés comptent.
+        val warp = visibleEntrances(catalog, map.id).minByOrNull { distance(it.x, it.y, px, py) }
+            ?.takeIf { mapState.scale >= WARP_TOUCH_MIN_SCALE }
+        if (warp != null && distance(warp.x, warp.y, px, py) <= tolerance) {
+            enter(catalog, warp)
             return
         }
-        selectZone(catalog, zone)
+        if (_state.value.detail != null) {
+            dismissDetail()
+            return
+        }
+        if (map.regions.isEmpty()) return
+        val zone = map.regions.firstOrNull { it.contains(px, py) }?.id
+        if (zone == null) {
+            clearZone()
+        } else if (zone != _state.value.zone?.mapId) {
+            selectZone(catalog, zone)
+            focusOnZone(catalog, zone)
+        }
+    }
+
+    private fun distance(ax: Int, ay: Int, bx: Int, by: Int): Double {
+        val dx = (ax - bx).toDouble()
+        val dy = (ay - by).toDouble()
+        return sqrt(dx * dx + dy * dy)
+    }
+
+    /** Entrées dessinées sur la carte : toutes si le calque est actif, sinon celles du lieu sélectionné. */
+    private fun visibleEntrances(catalog: MapCatalog, mapId: Int): List<MapWarp> {
+        val entrances = catalog.entrancesOf(mapId)
+        if (MapLayer.WARPS in _state.value.layers) return entrances
+        val zone = _state.value.zone?.mapId ?: return emptyList()
+        val parts = catalog.maps[zone]?.let { if (it.parentId == null) catalog.partsOf(it.id) else listOf(it.id) }
+        return entrances.filter { it.mapId in parts.orEmpty() }
+    }
+
+    private fun enter(catalog: MapCatalog, warp: MapWarp) {
+        val target = catalog.maps[warp.targetMapId ?: return] ?: return
+        openPlace(MapPlace(target.id, target.name, warp.targetX, warp.targetY))
     }
 
     private fun selectZone(catalog: MapCatalog, zoneId: Int) {
         val game = loaded.value?.game ?: return
         val info = catalog.maps[zoneId] ?: return
-        val selection = MapSelection.Zone(zoneId, info.name, places(catalog, info))
-        _state.update { it.copy(selection = selection) }
+        val zone = MapZone(zoneId, info.name, places(catalog, info))
+        wildMarkers = emptyList()
+        _state.update { it.copy(zone = zone, detail = null, zoneListOpen = false) }
+        refreshOverlays()
         viewModelScope.launch {
-            val encounters = getMapEncounters(game, catalog, zoneId).groupByMethod()
-            val ready = selection.copy(loading = false, encounters = encounters)
-            _state.update { if (it.selection == selection) it.copy(selection = ready) else it }
+            val encounters = getMapEncounters(game, catalog, zoneId)
+            val ready = zone.copy(loading = false, encounters = encounters)
+            if (_state.value.zone != zone) return@launch
+            wildMarkers = wildMarkers(catalog, info, encounters)
+            _state.update { it.copy(zone = ready) }
+            refreshOverlays()
         }
+    }
+
+    /** Rapproche la vue d'une ville ou d'une route touchée sur la carte du monde, pour voir son contenu. */
+    private fun focusOnZone(catalog: MapCatalog, zoneId: Int) {
+        val map = _state.value.map ?: return
+        val mapState = _state.value.mapState ?: return
+        val zone = catalog.maps[zoneId]?.takeIf { it.parentId != null } ?: return
+        if (mapState.scale >= ZONE_FOCUS_MIN_SCALE) return
+        val area = BoundingBox(
+            zone.x.toDouble() / map.width,
+            zone.y.toDouble() / map.height,
+            (zone.x + zone.width).toDouble() / map.width,
+            (zone.y + zone.height).toDouble() / map.height
+        )
+        viewModelScope.launch { mapState.scrollTo(area, Offset(0.1f, 0.1f)) }
     }
 
     /** Lieux accessibles depuis une ville, une route ou une carte intérieure (bâtiments, grottes, étages, sorties). */
@@ -284,20 +436,80 @@ class MapViewModel @Inject constructor(
         }.distinctBy { it.mapId }
     }
 
+    /**
+     * Place chaque Pokémon sauvage du lieu sur un emplacement de son terrain : herbes (ou sol des grottes)
+     * en marchant, eau en surfant ou en pêchant. Un Pokémon apparaît une fois par façon de le rencontrer.
+     */
+    private fun wildMarkers(catalog: MapCatalog, zone: MapInfo, encounters: List<Encounter>): List<WildMarker> {
+        val spots = catalog.spots[zone.id].orEmpty().groupBy { it.kind }
+        val result = mutableListOf<WildMarker>()
+        val byMethod = encounters.mapNotNull { e -> WildMethod.from(e.method)?.let { it to e } }
+            .groupBy({ it.first }, { it.second })
+        for ((method, list) in byMethod) {
+            val species = list.sortedByDescending { it.chance ?: 0.0 }.distinctBy { it.pokemonId }
+            val candidates = when (method) {
+                WildMethod.WALK -> spots[SpotKind.GRASS] ?: spots[SpotKind.FLOOR]
+
+                WildMethod.SURF -> spots[SpotKind.WATER]
+
+                // Pêche et surf partagent l'eau : la pêche prend les emplacements dans l'autre sens.
+                WildMethod.FISHING -> spots[SpotKind.WATER]?.reversed()
+            }.orEmpty().map { it.x to it.y }.ifEmpty { listOf(zone.centerInDisplay()) }
+            species.forEachIndexed { index, encounter ->
+                val (x, y) = candidates[index % candidates.size]
+                // Plus de Pokémon que d'emplacements : on décale les suivants.
+                val shift = (index / candidates.size) * OVERFLOW_SHIFT
+                result += WildMarker(encounter.pokemonId, encounter.pokemonName, method, x + shift, y + shift)
+            }
+        }
+        return result
+    }
+
+    private fun MapInfo.centerInDisplay(): Pair<Int, Int> =
+        if (parentId == null) width / 2 to height / 2 else x + width / 2 to y + height / 2
+
     private fun handleMarkerClick(id: String) {
         val catalog = catalog ?: return
-        val (prefix, value) = id.split(':', limit = 2).let { it[0] to it.getOrNull(1)?.toIntOrNull() }
-        value ?: return
+        val parts = id.split(':')
+        val prefix = parts[0]
+        val value = parts.getOrNull(1)?.toIntOrNull() ?: return
         when (prefix) {
             WARP, HIGHLIGHT_WARP -> {
                 val warp = catalog.warps.values.asSequence().flatten().firstOrNull { it.id == value } ?: return
-                val target = catalog.maps[warp.targetMapId ?: return] ?: return
-                openPlace(MapPlace(target.id, target.name, warp.targetX, warp.targetY))
+                enter(catalog, warp)
             }
 
             OBJECT, HIGHLIGHT_OBJECT -> {
                 val obj = catalog.objects.values.asSequence().flatten().firstOrNull { it.id == value } ?: return
-                _state.update { it.copy(selection = MapSelection.Object(obj)) }
+                showObject(obj)
+            }
+
+            WILD -> showWildPokemon(value)
+        }
+    }
+
+    private fun showObject(obj: MapObject) {
+        val game = loaded.value?.game ?: return
+        when (obj.kind) {
+            MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> {
+                val detail = MapDetail.Item(obj)
+                _state.update { it.copy(detail = detail, zoneListOpen = false) }
+                val itemId = obj.itemId ?: return
+                viewModelScope.launch {
+                    val details = getObjectDetails.item(game, itemId)
+                    _state.update { if (it.detail == detail) it.copy(detail = detail.copy(details = details)) else it }
+                }
+            }
+
+            else -> {
+                val detail = MapDetail.Character(obj)
+                _state.update { it.copy(detail = detail, zoneListOpen = false) }
+                viewModelScope.launch {
+                    val isTrainer = obj.kind == MapObjectKind.TRAINER
+                    val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
+                    val ready = detail.copy(loading = false, party = party, offers = getObjectDetails.offers(obj.id))
+                    _state.update { if (it.detail == detail) it.copy(detail = ready) else it }
+                }
             }
         }
     }
@@ -315,10 +527,14 @@ class MapViewModel @Inject constructor(
         } else {
             val maps = highlightedMaps.mapNotNull { catalog.maps[it] }.sortedBy { it.id }
             val places = maps.map { MapPlace(it.id, it.name) }
-            _state.update { it.copy(highlight = MapHighlight(pokemonId, name, places), selection = null) }
+            _state.update { it.copy(highlight = MapHighlight(pokemonId, name, places), detail = null) }
         }
         history.clear()
-        if (_state.value.map?.id == world.id) refreshOverlays() else show(world.id, null, null, null)
+        if (_state.value.map?.id == world.id) {
+            clearZone()
+        } else {
+            show(world.id, null, null, null)
+        }
         focusOnHighlight(catalog, world)
     }
 
@@ -353,68 +569,94 @@ class MapViewModel @Inject constructor(
 
     // --- Calques -------------------------------------------------------------------------------
 
-    /** Redessine marqueurs et surlignage de la carte affichée (calques ou surlignage modifiés). */
+    /** Redessine marqueurs, contour du lieu sélectionné et surlignage de la carte affichée. */
     private fun refreshOverlays() {
         val catalog = catalog ?: return
         val map = _state.value.map ?: return
         val mapState = _state.value.mapState ?: return
         val layers = _state.value.layers
+        val zone = _state.value.zone?.let { catalog.maps[it.mapId] }
         mapState.removeAllMarkers()
         drawnPaths.forEach { mapState.removePath(it) }
         drawnPaths.clear()
 
-        fun MapState.marker(id: String, x: Int, y: Int, lazy: Boolean = true, content: @Composable () -> Unit) =
-            addMarker(
-                id,
-                x.toDouble() / map.width,
-                y.toDouble() / map.height,
-                relativeOffset = Offset(-0.5f, -0.5f),
-                zIndex = if (lazy) 0f else 1f,
-                renderingStrategy = if (lazy) RenderingStrategy.LazyLoading(LAZY_LOADER) else RenderingStrategy.Default,
-                c = content
-            )
+        fun MapState.marker(
+            id: String,
+            x: Int,
+            y: Int,
+            lazy: Boolean = true,
+            zIndex: Float = 0f,
+            content: @Composable () -> Unit
+        ) = addMarker(
+            id,
+            x.toDouble() / map.width,
+            y.toDouble() / map.height,
+            relativeOffset = Offset(-0.5f, -0.5f),
+            zIndex = zIndex,
+            renderingStrategy = if (lazy) RenderingStrategy.LazyLoading(LAZY_LOADER) else RenderingStrategy.Default,
+            c = content
+        )
 
-        if (MapLayer.WARPS in layers) {
-            catalog.entrancesOf(map.id).forEach { warp ->
-                mapState.marker("$WARP:${warp.id}", warp.x, warp.y) { WarpMarker(mapState) }
-            }
-        }
-        val objects = catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() }
-        objects.filter { it.kind.layer in layers }.forEach { obj ->
-            mapState.marker("$OBJECT:${obj.id}", obj.x, obj.y) {
-                ObjectMarker(mapState, obj, catalog.versionGroupIdentifier)
-            }
-        }
-        val pokemonId = _state.value.highlight?.pokemonId ?: return
-        // Villes et routes surlignées sur la carte du monde, ou toute la carte intérieure.
-        catalog.partsOf(map.id).filter { it in highlightedMaps }.mapNotNull { catalog.maps[it] }.forEach { part ->
+        fun rectangle(id: String, part: MapInfo, color: Color, fillAlpha: Float) {
             val whole = part.parentId == null
             val left = if (whole) 0.0 else part.x.toDouble() / map.width
             val top = if (whole) 0.0 else part.y.toDouble() / map.height
             val right = if (whole) 1.0 else min(1.0, (part.x + part.width).toDouble() / map.width)
             val bottom = if (whole) 1.0 else min(1.0, (part.y + part.height).toDouble() / map.height)
-            val id = "$HIGHLIGHT_PATH:${part.id}"
-            mapState.addPath(
-                id,
-                width = 3.dp,
-                color = HIGHLIGHT_COLOR,
-                fillColor = HIGHLIGHT_COLOR.copy(alpha = 0.25f)
-            ) {
+            mapState.addPath(id, width = 3.dp, color = color, fillColor = color.copy(alpha = fillAlpha)) {
                 addPoints(listOf(left to top, right to top, right to bottom, left to bottom, left to top))
             }
             drawnPaths += id
         }
+
+        // Parties de la carte dont le contenu est entièrement affiché : le lieu sélectionné.
+        val zoneParts = when {
+            zone == null -> emptySet()
+            zone.parentId == null -> catalog.partsOf(zone.id).toSet()
+            else -> setOf(zone.id)
+        }
+        if (zone != null && zone.parentId != null) rectangle("$ZONE_PATH:${zone.id}", zone, ZONE_COLOR, 0f)
+
+        val entrances = catalog.entrancesOf(map.id)
+        entrances.filter { MapLayer.WARPS in layers || it.mapId in zoneParts }.forEach { warp ->
+            val always = warp.mapId in zoneParts
+            mapState.marker("$WARP:${warp.id}", warp.x, warp.y, lazy = !always, zIndex = 2f) {
+                WarpMarker(mapState, alwaysVisible = always)
+            }
+        }
+        val objects = catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() }
+        objects.filter { it.mapId in zoneParts || it.kind.layer in layers }.forEach { obj ->
+            val inZone = obj.mapId in zoneParts
+            mapState.marker("$OBJECT:${obj.id}", obj.x, obj.y, lazy = !inZone, zIndex = 1f) {
+                ObjectMarker(mapState, obj, catalog.versionGroupIdentifier, alwaysVisible = inZone)
+            }
+        }
+        wildMarkers.forEachIndexed { index, wild ->
+            mapState.marker("$WILD:${wild.pokemonId}:$index", wild.x, wild.y, lazy = false, zIndex = 1f) {
+                WildPokemonMarker(wild)
+            }
+        }
+
+        val pokemonId = _state.value.highlight?.pokemonId ?: return
+        // Villes et routes surlignées sur la carte du monde, ou toute la carte intérieure.
+        catalog.partsOf(map.id).filter { it in highlightedMaps }.mapNotNull { catalog.maps[it] }.forEach { part ->
+            rectangle("$HIGHLIGHT_PATH:${part.id}", part, HIGHLIGHT_COLOR, 0.25f)
+        }
         // Entrées menant aux cartes intérieures surlignées.
-        val entrances = if (map.identifier == GameMap.WORLD) {
+        val highlightedEntrances = if (map.identifier == GameMap.WORLD) {
             highlightedMaps.mapNotNull { worldEntrances[it] }
         } else {
-            catalog.entrancesOf(map.id).filter { it.targetMapId in highlightedMaps }
+            entrances.filter { it.targetMapId in highlightedMaps }
         }
-        entrances.distinctBy { it.id }.forEach { warp ->
-            mapState.marker("$HIGHLIGHT_WARP:${warp.id}", warp.x, warp.y, lazy = false) { HighlightMarker() }
+        highlightedEntrances.distinctBy { it.id }.forEach { warp ->
+            mapState.marker("$HIGHLIGHT_WARP:${warp.id}", warp.x, warp.y, lazy = false, zIndex = 3f) {
+                HighlightMarker()
+            }
         }
         objects.filter { it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId }.forEach { obj ->
-            mapState.marker("$HIGHLIGHT_OBJECT:${obj.id}", obj.x, obj.y, lazy = false) { HighlightMarker() }
+            mapState.marker("$HIGHLIGHT_OBJECT:${obj.id}", obj.x, obj.y, lazy = false, zIndex = 3f) {
+                HighlightMarker()
+            }
         }
     }
 
@@ -434,15 +676,22 @@ class MapViewModel @Inject constructor(
         const val START_REGION = "pallet-town"
         const val WORLD_SCALE = 2.0
         const val FOCUS_SCALE = 4.0
+        const val ZONE_FOCUS_MIN_SCALE = 3.0
         const val MAX_SCALE = 12.0
         const val CENTER = 0.5
         const val ENTRANCE_MARGIN = 48
+        const val OVERFLOW_SHIFT = 6
+        const val WARP_TOUCH_RADIUS_DP = 24f
+        const val WARP_TOUCH_MIN_SCALE = 1.0
         const val LAZY_LOADER = "lazy"
         const val WARP = "w"
         const val OBJECT = "o"
+        const val WILD = "p"
         const val HIGHLIGHT_WARP = "hw"
         const val HIGHLIGHT_OBJECT = "ho"
         const val HIGHLIGHT_PATH = "hp"
+        const val ZONE_PATH = "zp"
         val MAP_BACKGROUND = Color(0xFF202028)
+        val ZONE_COLOR = Color(0xFFFFFFFF)
     }
 }

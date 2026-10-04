@@ -20,6 +20,8 @@ from .sources import download, download_all, pokeapi_sprite, pokesprite
 
 # Icônes pokesprite des CT / CS : une par type d'attaque.
 MACHINE_ICON = "items/{kind}/{type}.png"
+# Objets sans icône dans pokesprite : icône d'un objet semblable.
+ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
 
 
 def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[str]:
@@ -86,4 +88,6 @@ def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:
             result[identifier] = MACHINE_ICON.format(kind=kind, type=types[machine_types[item_id]])
         elif f"item_{gen8_index.get(item_id, 0):04d}" in item_map:
             result[identifier] = f"items/{item_map[f'item_{gen8_index[item_id]:04d}']}.png"
+        elif identifier in ICON_FALLBACKS:
+            result[identifier] = ICON_FALLBACKS[identifier]
     return result
