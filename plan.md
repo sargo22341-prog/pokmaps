@@ -50,7 +50,7 @@ Règles :
 | UI | Jetpack Compose + Material 3 |
 | Architecture | MVVM (ViewModel + StateFlow), Hilt |
 | Données | Room, base SQLite pré-remplie (`createFromAsset`) |
-| Recherche | Room FTS4 (insensible aux accents) |
+| Recherche | En mémoire, insensible à la casse et aux accents (151 Pokémon par jeu : FTS inutile pour le Pokédex ; à reconsidérer pour la recherche globale) |
 | Carte | MapCompose (`ovh.plrapps:mapcompose`), carte en tuiles |
 | Images | Coil (sprites depuis les assets, artworks en ligne avec cache disque) |
 | Navigation | Navigation Compose |
@@ -114,29 +114,29 @@ Règles :
 - [x] Barre de navigation : Carte / Pokédex (carte du monde affichée avec MapCompose, pixels nets ; liste simple du Pokédex en attendant la phase 5)
 - [x] Écran « À propos » avec les crédits des sources
 
-## Phase 5 — Pokédex
-- [ ] Liste ou grille du Pokédex du jeu choisi (icône pokesprite, numéro régional, nom, types de la génération)
-- [ ] Recherche par nom (FTS, accents ignorés : « evoli » trouve « Évoli ») et par numéro
-- [ ] Filtres : type, disponible dans la version choisie, méthode d'obtention
-- [ ] Tests unitaires du ViewModel
+## Phase 5 — Pokédex ✅
+- [x] Grille du Pokédex du jeu choisi (icône pokesprite, numéro régional, nom, types de la génération) ; les Pokémon absents de la version sont estompés
+- [x] Recherche par nom français ou anglais (accents et casse ignorés : « evoli » trouve « Évoli », « nidoran f » trouve Nidoran♀) et par numéro (« 25 », « 025 », « n°25 »)
+- [x] Filtres : type, disponible dans la version choisie, méthode d'obtention (herbes et grottes, pêche, surf, don, Pokémon fixe, échange, évolution d'un Pokémon disponible)
+- [x] Tests unitaires du ViewModel (`PokedexViewModelTest`) et de la recherche (`PokedexSearchTest`)
 
-## Phase 6 — Fiche Pokémon
-- [ ] En-tête : sprite du jeu (ou artwork officiel en ligne si disponible), numéro, nom, catégorie, types
-- [ ] Stats de base de la génération (PV, Attaque, Défense, Vitesse, Spécial en 1re génération)
-- [ ] Faiblesses et résistances (table des types de la génération)
-- [ ] Chaîne d'évolution cliquable (niveau, pierre avec son icône, échange)
-- [ ] Attaques par niveau et CT/CS du jeu choisi (type, catégorie, puissance, précision, PP)
-- [ ] Lieux de capture (version, méthode, niveaux, probabilité, notes) et bouton « Voir sur la carte »
-- [ ] Meilleure Poké Ball : probabilité de capture selon la balle, les PV et le statut (formule de la génération, taux de capture PokéAPI)
+## Phase 6 — Fiche Pokémon ✅
+- [x] En-tête : sprite du jeu (ou artwork officiel en ligne, à la demande), numéro, nom, catégorie, types, taille, poids, description
+- [x] Stats de base de la génération (PV, Attaque, Défense, Vitesse, Spécial en 1re génération)
+- [x] Faiblesses et résistances (table des types de la génération, `TypeChart`)
+- [x] Chaîne d'évolution cliquable (niveau, pierre avec son icône, échange), branches multiples (Évoli)
+- [x] Attaques par niveau et CT/CS du jeu choisi (type, catégorie, puissance, précision, PP)
+- [x] Lieux de capture (méthode, niveaux, probabilité, notes, autres versions) et bouton « Voir sur la carte »
+- [x] Meilleure Poké Ball : probabilité de capture selon la balle, le niveau, les PV et le statut (formule de la 1re génération, `CatchRate`)
 
-## Phase 7 — Carte interactive
-- [ ] Afficher la carte de Kanto avec MapCompose (zoom, déplacement, limites)
-- [ ] Zones cliquables de chaque lieu
-- [ ] Fiche en bas d'écran au clic : nom de la zone et Pokémon par méthode, filtrés par version
-- [ ] Accès aux cartes intérieures depuis les entrées (grottes, bâtiments, étages)
-- [ ] Mode « surlignage » : zones d'un Pokémon mises en évidence, avec recentrage automatique
-- [ ] Calques activables : objets, dresseurs, warps
-- [ ] Clic sur un Pokémon de la fiche → fiche Pokémon
+## Phase 7 — Carte interactive ✅
+- [x] Afficher la carte de Kanto avec MapCompose (zoom, déplacement, limites)
+- [x] Zones cliquables de chaque lieu (villes et routes de la carte du monde, cartes intérieures entières)
+- [x] Fiche en bas d'écran au clic : nom de la zone et Pokémon par méthode, filtrés par version, et lieux accessibles
+- [x] Accès aux cartes intérieures depuis les entrées (grottes, bâtiments, étages), retour à la carte précédente
+- [x] Mode « surlignage » : zones d'un Pokémon mises en évidence (et entrées des cartes intérieures où il se trouve), avec recentrage automatique
+- [x] Calques activables : entrées (warps), objets et objets cachés, dresseurs, Pokémon fixes
+- [x] Clic sur un Pokémon de la fiche → fiche Pokémon
 
 ## Phase 8 — Finitions
 - [ ] Recherche globale (Pokémon et lieux)

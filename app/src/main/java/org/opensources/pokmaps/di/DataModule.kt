@@ -18,6 +18,7 @@ import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.PokedexDao
 import org.opensources.pokmaps.data.db.PokedexDatabase
+import org.opensources.pokmaps.data.db.PokemonDao
 
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -43,6 +44,9 @@ object DataModule {
 
     @Provides
     fun mapDao(database: PokedexDatabase): MapDao = database.mapDao()
+
+    @Provides
+    fun pokemonDao(database: PokedexDatabase): PokemonDao = database.pokemonDao()
 
     @Provides
     @Singleton
