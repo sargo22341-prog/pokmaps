@@ -202,7 +202,8 @@ data class ItemEntity(
     val identifier: String,
     @ColumnInfo(name = "name_fr") val nameFr: String,
     val category: String,
-    @ColumnInfo(name = "has_sprite") val hasSprite: Boolean
+    @ColumnInfo(name = "has_sprite") val hasSprite: Boolean,
+    @ColumnInfo(name = "description_fr") val descriptionFr: String?
 )
 
 @Entity(
@@ -406,4 +407,50 @@ data class MapObjectEntity(
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int?,
     val level: Int?,
     @ColumnInfo(name = "trainer_class") val trainerClass: String?
+)
+
+@Entity(
+    tableName = "trainer_pokemon",
+    primaryKeys = ["map_object_id", "slot"]
+)
+data class TrainerPokemonEntity(
+    @ColumnInfo(name = "map_object_id") val mapObjectId: Int,
+    val slot: Int,
+    @ColumnInfo(name = "pokemon_id") val pokemonId: Int,
+    val level: Int,
+    @ColumnInfo(name = "move1_id") val move1Id: Int?,
+    @ColumnInfo(name = "move2_id") val move2Id: Int?,
+    @ColumnInfo(name = "move3_id") val move3Id: Int?,
+    @ColumnInfo(name = "move4_id") val move4Id: Int?
+)
+
+@Entity(
+    tableName = "npc_offer",
+    indices = [
+        Index("map_object_id", name = "index_npc_offer_map_object_id")
+    ]
+)
+data class NpcOfferEntity(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "map_object_id") val mapObjectId: Int,
+    val kind: String,
+    @ColumnInfo(name = "item_id") val itemId: Int?,
+    @ColumnInfo(name = "pokemon_id") val pokemonId: Int?,
+    val quantity: Int?,
+    val price: Int?,
+    @ColumnInfo(name = "wanted_pokemon_id") val wantedPokemonId: Int?
+)
+
+@Entity(
+    tableName = "map_spot",
+    indices = [
+        Index("map_id", name = "index_map_spot_map_id")
+    ]
+)
+data class MapSpotEntity(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "map_id") val mapId: Int,
+    val kind: String,
+    val x: Int,
+    val y: Int
 )

@@ -138,6 +138,17 @@ Règles :
 - [x] Calques activables : entrées (warps), objets et objets cachés, dresseurs, Pokémon fixes
 - [x] Clic sur un Pokémon de la fiche → fiche Pokémon
 
+## Phase 7 bis — Carte façon pokemaps.net ✅
+- [x] Au clic sur une ville, une route ou une carte intérieure : ses Pokémon sauvages sont dessinés **sur la carte**, là où on les rencontre (herbes hautes, eau pour le surf et la pêche, sol des grottes), avec un bouton « Liste » pour la liste détaillée (niveaux, probabilités)
+- [x] Emplacements calculés depuis pret (`map_spot`) : tuiles d'herbes et d'eau de chaque tileset, sol praticable accessible depuis les entrées (collisions et différences de hauteur)
+- [x] Contenu du lieu affiché dès la sélection : objets (icônes des vrais objets, pastille « ? » pour les objets cachés), personnages, dresseurs (pastille « ! »), Pokémon fixes ; fiche au toucher (description de l'objet ou attaque de la CT/CS)
+- [x] Dresseurs : équipe avec niveaux et attaques (4 dernières apprises, attaques spéciales des champions et du Conseil 4, `trainer_pokemon`)
+- [x] Personnages : objets et Pokémon donnés, boutiques (prix du jeu), échanges (`npc_offer`, d'après les scripts pret)
+- [x] Entrées : toucher près d'une porte suffit pour entrer ; les cartes intérieures affichent directement leur contenu
+- [x] Marqueurs à taille fixe à l'écran, sprites agrandis d'un nombre entier de fois (pixels nets, sans déformation)
+- [x] Sprites des Pokémon plus grands (carte, Pokédex, fiche) ; recherche du Pokédex sur une ligne
+- [x] Fiche Pokémon : évolutions en arbre de gauche à droite (branches d'Évoli reliées à Évoli)
+
 ## Phase 8 — Finitions
 - [ ] Recherche globale (Pokémon et lieux)
 - [ ] Favoris ou Pokémon capturés (suivi de progression par version)
