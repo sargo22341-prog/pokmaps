@@ -37,4 +37,15 @@ class WildPlacementTest {
         assertEquals(3, placed.map { it.x to it.y }.toSet().size)
         assertEquals(100 to 100, placed.first().let { it.x to it.y })
     }
+
+    @Test
+    fun pokemonStayAwayFromObjectsAndCharacters() {
+        val grass = listOf(8 to 8, 24 to 8, 56 to 8, 104 to 8)
+        val npc = listOf(24 to 24)
+        // Assez de place : seuls les emplacements à deux cases au moins du personnage restent.
+        assertEquals(listOf(56 to 8, 104 to 8), WildPlacement.awayFrom(grass, npc, minimum = 2))
+        // Pas assez : les emplacements les moins encombrés complètent, pour dessiner chaque Pokémon.
+        assertEquals(listOf(56 to 8, 104 to 8, 8 to 8), WildPlacement.awayFrom(grass, npc, minimum = 3))
+        assertEquals(grass, WildPlacement.awayFrom(grass, emptyList(), minimum = 1))
+    }
 }

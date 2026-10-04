@@ -157,6 +157,17 @@ Règles :
 - [x] Pokémon donné ou reçu par échange (Excelangue…) : « Voir sur la carte » entre chez le personnage et le centre sur lui
 - [x] Sprites agrandis : évolutions, objets d'évolution et Poké Balls de la fiche (× 2), Pokédex (icônes aussi larges que la case)
 
+## Phase 7 quater — Étages, filtres et collection sur la carte ✅
+- [x] Pokémon centrés sur leur case : l'icône pokesprite dessine le Pokémon en bas de l'image, le marqueur est ancré sur le dessin (et ne se touche que sur lui)
+- [x] Pas de Pokémon sauvage dessiné à moins de deux cases d'un objet, d'un personnage ou d'une entrée (`WildPlacement.awayFrom`), pour ne pas toucher l'un à la place de l'autre
+- [x] Étages : sélecteur façon ascenseur (Toit, 2, 1, RdC, -1, Asc.) pour les bâtiments et grottes à plusieurs niveaux, déduits de l'identifiant des cartes (`FloorLevel`) ; même vue d'un étage à l'autre s'ils ont la même taille
+- [x] Retour hiérarchique : le bouton retour remonte au niveau du dessus (bâtiment, ville ou route, centré sur l'entrée), quel que soit le chemin suivi (`MapCatalog.parentEntrance`)
+- [x] Filtres de la carte qui s'appliquent partout, lieu sélectionné compris : entrées, objets, dresseurs, personnages, Pokémon fixes, Pokémon sauvages ; mémorisés (DataStore)
+- [x] « Voir sur la carte » affiche directement la carte (la carte, destination de départ, ne restaure plus les fiches ouvertes par-dessus)
+- [x] Liste du lieu : sprites agrandis (× 2) ; évolutions resserrées (icônes cadrées sur le Pokémon)
+- [x] Pokémon capturés : Poké Ball sur la carte et dans la liste ; barre du lieu avec la progression (Poké Ball 1/2) ou la Master Ball et une coche quand le lieu est terminé
+- [x] Animations : fondu entre les cartes, fiches du bas qui glissent, sélecteur d'étages, titre de la carte
+
 ## Phase 8 — Finitions
 - [x] Recherche globale : Pokémon, lieux, objets (et attaque des CT / CS), personnages (par leur nom ou ce qu'ils donnent, vendent ou échangent)
 - [x] Fiche objet : description, attaque de la CT / CS, Pokémon qu'il fait évoluer, où le trouver (objets visibles et cachés), où l'acheter (prix), qui le donne, avec « Voir sur la carte » qui centre la carte sur l'objet ou le personnage lui-même

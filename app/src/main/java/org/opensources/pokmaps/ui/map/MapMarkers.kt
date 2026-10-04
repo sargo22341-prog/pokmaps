@@ -3,6 +3,7 @@ package org.opensources.pokmaps.ui.map
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -62,7 +63,13 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
 
 /** Objet (avec son icône), objet caché, dresseur, personnage ou Pokémon fixe. */
 @Composable
-fun ObjectMarker(mapState: MapState, obj: MapObject, versionGroupIdentifier: String, alwaysVisible: Boolean = false) {
+fun ObjectMarker(
+    mapState: MapState,
+    obj: MapObject,
+    versionGroupIdentifier: String,
+    alwaysVisible: Boolean = false,
+    caught: Boolean = false
+) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     val sprite = obj.sprite
     val itemIdentifier = obj.itemIdentifier
@@ -95,12 +102,13 @@ fun ObjectMarker(mapState: MapState, obj: MapObject, versionGroupIdentifier: Str
             MapObjectKind.TRAINER -> Badge(mapState, "!", TRAINER_COLOR, Modifier.align(Alignment.TopEnd))
             else -> Unit
         }
+        if (caught) CaughtBall(mapState, Modifier.align(Alignment.BottomStart))
     }
 }
 
-/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes). */
+/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes) ; Poké Ball s'il est capturé. */
 @Composable
-fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
+fun WildPokemonMarker(mapState: MapState, wild: WildMarker, caught: Boolean) {
     Box {
         AssetImage(
             Sprites.pokemonIcon(wild.pokemonId),
@@ -112,7 +120,20 @@ fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
             WildMethod.SURF -> Badge(mapState, "🌊", WATER_COLOR, Modifier.align(Alignment.BottomEnd))
             WildMethod.WALK -> Unit
         }
+        if (caught) CaughtBall(mapState, Modifier.align(Alignment.BottomStart))
     }
+}
+
+/** Poké Ball d'un Pokémon déjà capturé, à côté de lui (le dessin du Pokémon occupe le centre de l'icône). */
+@Composable
+private fun CaughtBall(mapState: MapState, modifier: Modifier = Modifier) {
+    AssetImage(
+        Sprites.item(POKE_BALL),
+        contentDescription = null,
+        modifier = modifier
+            .padding(start = mapPixels(mapState, CAUGHT_BALL_INSET))
+            .size(mapPixels(mapState, PixelArt.ITEM_ICON.width * CAUGHT_BALL_SCALE))
+    )
 }
 
 @Composable
@@ -159,3 +180,8 @@ private const val WARP_PX = 9f
 private const val BADGE_PX = 8f
 private const val HIDDEN_ALPHA = 0.75f
 private const val MIN_MARKER_SCALE = 1.0
+private const val POKE_BALL = "poke-ball"
+
+/** Poké Ball des Pokémon capturés : icône d'objet réduite, en bas à gauche du Pokémon. */
+private const val CAUGHT_BALL_SCALE = 0.75f
+private const val CAUGHT_BALL_INSET = 4f

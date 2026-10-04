@@ -167,6 +167,56 @@ data class MapCatalog(
         return result
     }
 
+    /** Bâtiments et grottes à plusieurs niveaux (cartes affichables), étages rangés de haut en bas. */
+    private val buildings: Map<String, List<MapFloor>> by lazy {
+        maps.values.filter { it.isDisplayable }
+            .mapNotNull { map ->
+                FloorLevel.parse(map.identifier)?.let { (building, level) -> building to MapFloor(map.id, level) }
+            }
+            .groupBy({ it.first }, { it.second })
+            .filterValues { it.size > 1 }
+            .mapValues { (_, floors) -> floors.sortedByDescending { it.level.order } }
+    }
+
+    private val buildingOf: Map<Int, String> by lazy {
+        buildings.flatMap { (building, floors) -> floors.map { it.mapId to building } }.toMap()
+    }
+
+    /** Étages du bâtiment ou de la grotte d'une carte intérieure (vide si elle n'a qu'un niveau). */
+    fun floorsOf(mapId: Int): List<MapFloor> = buildingOf[mapId]?.let { buildings[it] }.orEmpty()
+
+    /** Pour chaque carte intérieure, le warp par lequel on l'atteint en premier en partant de l'extérieur. */
+    private val reachedBy: Map<Int, MapWarp> by lazy {
+        val world = world ?: return@lazy emptyMap()
+        val result = mutableMapOf<Int, MapWarp>()
+        val queue = ArrayDeque(partsOf(world.id))
+        while (queue.isNotEmpty()) {
+            for (warp in warps[queue.removeFirst()].orEmpty()) {
+                val target = warp.targetMapId ?: continue
+                if (maps[target]?.isDisplayable == true && target != world.id && target !in result) {
+                    result[target] = warp
+                    queue += target
+                }
+            }
+        }
+        result
+    }
+
+    /**
+     * Entrée d'une carte intérieure dans le niveau du dessus : le warp (sur la ville, la route ou la carte
+     * intérieure parente) qui y mène. Les étages d'un même bâtiment ont tous l'entrée du bâtiment : depuis le
+     * 2e sous-sol du Mont Sélénite, on remonte directement à l'entrée du Mont Sélénite sur la Route 3.
+     */
+    fun parentEntrance(mapId: Int): MapWarp? {
+        val building = buildingOf[mapId]
+        var warp = reachedBy[mapId] ?: return null
+        val seen = mutableSetOf(mapId)
+        while (building != null && buildingOf[warp.mapId] == building && seen.add(warp.mapId)) {
+            warp = reachedBy[warp.mapId] ?: return null
+        }
+        return warp
+    }
+
     private companion object {
         const val MERGE_DISTANCE = 32
     }
