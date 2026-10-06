@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ fun EncounterGroups(
     modifier: Modifier = Modifier,
     iconPath: ((Encounter) -> String)? = null,
     iconWidth: Dp = 56.dp,
+    animatedIcons: Boolean = false,
     caught: (Encounter) -> Boolean = { false },
     onClick: ((Encounter) -> Unit)? = null
 ) {
@@ -43,6 +45,7 @@ fun EncounterGroups(
                     title(encounter),
                     iconPath?.invoke(encounter),
                     iconWidth,
+                    animatedIcons,
                     caught(encounter),
                     onClick
                 )
@@ -57,6 +60,7 @@ private fun EncounterLine(
     title: String,
     iconPath: String?,
     iconWidth: Dp,
+    animatedIcon: Boolean,
     caught: Boolean,
     onClick: ((Encounter) -> Unit)?
 ) {
@@ -68,7 +72,24 @@ private fun EncounterLine(
             .then(if (onClick != null) Modifier.clickable { onClick(encounter) } else Modifier)
             .padding(vertical = 2.dp)
     ) {
-        if (iconPath != null) PokemonIconImage(iconPath, iconWidth, contentDescription = null)
+        when {
+            iconPath == null -> Unit
+
+            // Sprite animé dans la place qu'occuperait l'icône : les lignes restent alignées.
+            animatedIcon -> {
+                val size = pixelArtSize(PixelArt.POKEMON_ICON, iconWidth)
+                AnimatedPokemonSprite(
+                    encounter.pokemonId,
+                    contentDescription = null,
+                    modifier = Modifier.size(
+                        size.width * PixelArt.POKEMON_CONTENT_WIDTH,
+                        size.height * PixelArt.POKEMON_CONTENT_HEIGHT
+                    )
+                )
+            }
+
+            else -> PokemonIconImage(iconPath, iconWidth, contentDescription = null)
+        }
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(title, style = MaterialTheme.typography.bodyLarge)

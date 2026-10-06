@@ -74,6 +74,7 @@ import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.CaughtIcon
 import org.opensources.pokmaps.ui.common.CompleteIcon
@@ -90,6 +91,8 @@ fun MapScreen(
     viewModel: MapViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    // Retour sur la carte (après le Pokédex, une fiche…) : la carte est recréée pour que les touches remarchent.
+    LaunchedEffect(Unit) { viewModel.onScreenShown() }
     val snackbar = remember { SnackbarHostState() }
     val notFoundMessage = state.notFound?.let {
         stringResource(R.string.map_highlight_none, it, state.game?.name.orEmpty())
@@ -157,6 +160,7 @@ fun MapScreen(
                     is BottomCard.Detail -> DetailCard(
                         detail = card.detail,
                         versionGroupIdentifier = versionGroup,
+                        animated = state.animatedSprites,
                         onClose = viewModel::dismissDetail,
                         onOpenPokemon = onOpenPokemon,
                         onOpenItem = onOpenItem
@@ -182,6 +186,7 @@ fun MapScreen(
         ZoneListSheet(
             zone = zone,
             caught = state.caught,
+            animated = state.animatedSprites,
             onDismiss = viewModel::closeZoneList,
             onOpenPlace = viewModel::openPlace,
             onOpenPokemon = { id ->
@@ -343,6 +348,7 @@ private fun ZoneBar(zone: MapZone, caught: Set<Int>, closable: Boolean, onOpenLi
 private fun ZoneListSheet(
     zone: MapZone,
     caught: Set<Int>,
+    animated: Boolean,
     onDismiss: () -> Unit,
     onOpenPlace: (MapPlace) -> Unit,
     onOpenPokemon: (Int) -> Unit
@@ -369,6 +375,7 @@ private fun ZoneListSheet(
                     title = { it.pokemonName },
                     iconPath = { Sprites.pokemonIcon(it.pokemonId) },
                     iconWidth = LIST_ICON_WIDTH,
+                    animatedIcons = animated,
                     caught = { it.pokemonId in caught },
                     onClick = { onOpenPokemon(it.pokemonId) }
                 )
@@ -395,6 +402,7 @@ private fun ZoneListSheet(
 private fun DetailCard(
     detail: MapDetail,
     versionGroupIdentifier: String,
+    animated: Boolean,
     onClose: () -> Unit,
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit
@@ -416,13 +424,14 @@ private fun DetailCard(
                     .padding(16.dp)
             ) {
                 when (detail) {
-                    is MapDetail.WildPokemon -> WildPokemonDetails(detail, onOpenPokemon)
+                    is MapDetail.WildPokemon -> WildPokemonDetails(detail, animated, onOpenPokemon)
 
                     is MapDetail.Item -> ItemDetailsContent(detail, versionGroupIdentifier, onOpenItem)
 
                     is MapDetail.Character -> CharacterDetails(
                         detail,
                         versionGroupIdentifier,
+                        animated,
                         onOpenPokemon,
                         onOpenItem
                     )
@@ -458,9 +467,9 @@ private fun DetailHeader(label: String, title: String, image: @Composable () -> 
 }
 
 @Composable
-private fun WildPokemonDetails(detail: MapDetail.WildPokemon, onOpenPokemon: (Int) -> Unit) {
+private fun WildPokemonDetails(detail: MapDetail.WildPokemon, animated: Boolean, onOpenPokemon: (Int) -> Unit) {
     DetailHeader(stringResource(R.string.map_wild_pokemon), detail.name) {
-        PixelArtImage(Sprites.pokemonIcon(detail.pokemonId), PixelArt.POKEMON_ICON, 64.dp, null)
+        DetailPokemonImage(detail.pokemonId, animated)
     }
     EncounterGroups(detail.encounters, title = { it.areaName })
     Button(onClick = { onOpenPokemon(detail.pokemonId) }) {
@@ -511,6 +520,7 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
 private fun CharacterDetails(
     detail: MapDetail.Character,
     versionGroupIdentifier: String,
+    animated: Boolean,
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit
 ) {
@@ -521,7 +531,7 @@ private fun CharacterDetails(
             stringResource(R.string.map_static_pokemon, obj.level ?: 0),
             obj.pokemonName.orEmpty()
         ) {
-            if (pokemonId != null) PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 64.dp, null)
+            if (pokemonId != null) DetailPokemonImage(pokemonId, animated)
         }
 
         MapObjectKind.TRAINER -> DetailHeader(
@@ -552,7 +562,18 @@ private fun CharacterDetails(
     Offers(detail.offers, onOpenPokemon = onOpenPokemon, onOpenItem = onOpenItem)
 }
 
+/** Image d'un Pokémon dans sa fiche : icône, ou sprite animé (réglage « Sprites animés sur la carte »). */
+@Composable
+private fun DetailPokemonImage(pokemonId: Int, animated: Boolean) {
+    if (animated) {
+        AnimatedPokemonSprite(pokemonId, contentDescription = null, modifier = Modifier.size(DETAIL_ANIMATED_SIZE))
+    } else {
+        PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 64.dp, null)
+    }
+}
+
 private val DETAIL_MAX_HEIGHT = 360.dp
+private val DETAIL_ANIMATED_SIZE = 64.dp
 
 private val MapLayer.label: Int
     get() = when (this) {
