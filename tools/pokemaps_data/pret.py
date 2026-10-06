@@ -10,121 +10,47 @@ les coordonnées des événements (warps, PNJ, objets) sont en pas de 16 px (2 p
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
+
+from .pret_models import Connection, MapObject, NpcOffer, PretMap, Tileset, TrainerPokemon, Warp
+from .pret_source import macro_args, parse_int, source_lines
 
 BLOCK_PX = 32
 STEP_PX = 16
 TILE_PX = 8
 
+# Tuile d'eau ou l'on peut surfer (CollisionCheckOnWater dans home/overworld.asm).
+WATER_TILE = 0x14
+
 # Les cartes extérieures (villes et routes) précèdent la première carte intérieure.
 FIRST_INDOOR_MAP = "REDS_HOUSE_1F"
 LAST_MAP = "LAST_MAP"
 
-_COMMENT = re.compile(r";.*$")
 
 # Champions d'arène dans l'ordre de wGymLeaderNo (LoneMoves de Rouge / Bleu), avec leur équipe d'arène.
 GYM_LEADERS = ("BROCK", "MISTY", "LT_SURGE", "ERIKA", "KOGA", "SABRINA", "BLAINE", "GIOVANNI")
 GYM_LEADER_PARTIES = {(leader, 3 if leader == "GIOVANNI" else 1) for leader in GYM_LEADERS}
 
 
-def _lines(path: Path) -> list[str]:
-    """Lignes du fichier sans commentaires ni espaces superflus."""
-    return [line for line in (_COMMENT.sub("", raw).strip() for raw in path.read_text("utf-8").splitlines()) if line]
-
-
-def _args(line: str, macro: str) -> list[str]:
-    return [arg.strip() for arg in line[len(macro) :].split(",")]
-
-
-def _int(value: str) -> int:
-    value = value.strip()
-    if value.startswith("$"):
-        return int(value[1:], 16)
-    return int(value)
-
-
-@dataclass(frozen=True)
-class Connection:
-    direction: str  # north, south, west, east
-    target: str  # constante de la carte voisine (ex. ROUTE_1)
-    offset: int  # décalage de la carte voisine, en blocs (x pour nord/sud, y pour ouest/est)
-
-
-@dataclass(frozen=True)
-class Warp:
-    x: int
-    y: int
-    target: str  # constante de la carte d'arrivée, ou LAST_MAP (la carte d'où l'on vient)
-    target_warp: int  # numéro du warp d'arrivée, à partir de 1
-
-
-@dataclass(frozen=True)
-class MapObject:
-    x: int
-    y: int
-    kind: str  # npc, item, hidden_item, trainer, pokemon
-    sprite: str | None = None  # ex. SPRITE_YOUNGSTER
-    item: str | None = None  # ex. MOON_STONE, TM_MEGA_PUNCH
-    pokemon: str | None = None  # ex. ZAPDOS
-    level: int | None = None
-    trainer_class: str | None = None  # ex. OPP_YOUNGSTER
-    trainer_number: int | None = None  # numéro de l'équipe dans la classe (data/trainers/parties.asm)
-    text: str | None = None  # constante du texte affiché quand on parle au personnage (ex. TEXT_ROUTE1_YOUNGSTER1)
-
-
-@dataclass
-class PretMap:
-    const: str
-    number: int
-    label: str
-    width: int
-    height: int
-    tileset: str
-    blocks: bytes
-    border_block: int
-    is_outdoor: bool
-    connections: list[Connection] = field(default_factory=list)
-    warps: list[Warp] = field(default_factory=list)
-    signs: list[tuple[int, int]] = field(default_factory=list)
-    objects: list[MapObject] = field(default_factory=list)
-
-    def block(self, x: int, y: int) -> int:
-        return self.blocks[y * self.width + x]
-
-
-@dataclass(frozen=True)
-class Tileset:
-    const: str
-    gfx: Path  # image des tuiles (16 tuiles de 8 px par ligne, niveaux de gris sur 2 bits)
-    blockset: Path  # 16 octets par bloc : numéros des 4 × 4 tuiles
-    grass_tile: int | None = None  # tuile des hautes herbes (rencontres en marchant), None si aucune
-    passable: frozenset[int] = frozenset()  # tuiles où l'on peut marcher
-    has_water: bool = False  # tileset avec de l'eau où surfer (tuile WATER_TILE)
-
-
-# Tuile d'eau où l'on peut surfer (CollisionCheckOnWater dans home/overworld.asm).
-WATER_TILE = 0x14
-
-
-@dataclass(frozen=True)
-class TrainerPokemon:
-    species: str  # constante pret (ex. PIDGEY)
-    level: int
-    moves: tuple[str, ...]  # constantes des attaques (4 au plus)
-
-
-@dataclass(frozen=True)
-class NpcOffer:
-    """Ce que propose un personnage quand on lui parle (d'après le script de son texte)."""
-
-    kind: str  # gift_item, gift_pokemon, sale ou trade
-    item: str | None = None  # constante d'objet (gift_item, sale)
-    pokemon: str | None = None  # Pokémon donné (gift_pokemon) ou reçu lors d'un échange (trade)
-    quantity: int | None = None  # nombre d'objets donnés, ou niveau du Pokémon donné
-    price: int | None = None  # prix en magasin (sale)
-    wanted: str | None = None  # Pokémon demandé en échange (trade)
+__all__ = [
+    "BLOCK_PX",
+    "FIRST_INDOOR_MAP",
+    "GYM_LEADERS",
+    "GYM_LEADER_PARTIES",
+    "LAST_MAP",
+    "MapObject",
+    "NpcOffer",
+    "PretMap",
+    "PretRepo",
+    "STEP_PX",
+    "TILE_PX",
+    "Tileset",
+    "TrainerPokemon",
+    "WATER_TILE",
+    "Warp",
+    "Connection",
+]
 
 
 class PretRepo:
@@ -155,7 +81,7 @@ class PretRepo:
         """Constantes des tilesets dans l'ordre (index = numéro du tileset)."""
         consts = []
         started = False
-        for line in _lines(self.path("constants/tileset_constants.asm")):
+        for line in source_lines(self.path("constants/tileset_constants.asm")):
             if line == "const_def":
                 started = True
             elif started and line.startswith("const "):
@@ -167,8 +93,8 @@ class PretRepo:
     @cached_property
     def tilesets(self) -> dict[str, Tileset]:
         headers = [
-            _args(line, "tileset")
-            for line in _lines(self.path("data/tilesets/tileset_headers.asm"))
+            macro_args(line, "tileset")
+            for line in source_lines(self.path("data/tilesets/tileset_headers.asm"))
             if line.startswith("tileset ")
         ]
         labels = [header[0] for header in headers]
@@ -178,7 +104,7 @@ class PretRepo:
         pending: list[str] = []
         label_re = re.compile(r"^(\w+_(?:GFX|Block))::")
         incbin_re = re.compile(r'INCBIN\s+"([^"]+)"')
-        for line in _lines(self.path("gfx/tilesets.asm")):
+        for line in source_lines(self.path("gfx/tilesets.asm")):
             label = label_re.match(line)
             if label:
                 pending.append(label.group(1))
@@ -193,7 +119,7 @@ class PretRepo:
         for const, header in zip(self.tileset_order, headers, strict=True):
             label = header[0]
             gfx = files[f"{label}_GFX"].replace(".2bpp", ".png")
-            grass = _int(header[4]) if header[4] != "-1" else None
+            grass = parse_int(header[4]) if header[4] != "-1" else None
             result[const] = Tileset(
                 const,
                 self.path(gfx),
@@ -208,11 +134,11 @@ class PretRepo:
         """Label `<Tileset>_Coll` -> tuiles où l'on peut marcher (plusieurs labels peuvent partager une liste)."""
         result: dict[str, frozenset[int]] = {}
         pending: list[str] = []
-        for line in _lines(self.path("data/tilesets/collision_tile_ids.asm")):
+        for line in source_lines(self.path("data/tilesets/collision_tile_ids.asm")):
             if line.endswith("::"):
                 pending.append(line[:-2])
             elif line.startswith("coll_tiles") and pending:
-                tiles = frozenset(_int(arg) for arg in _args(line, "coll_tiles") if arg)
+                tiles = frozenset(parse_int(arg) for arg in macro_args(line, "coll_tiles") if arg)
                 for label in pending:
                     result[label] = tiles
                 pending = []
@@ -223,18 +149,18 @@ class PretRepo:
         """Tileset -> paires de tuiles entre lesquelles on ne peut pas marcher (différence de hauteur)."""
         result: dict[str, set[frozenset[int]]] = {}
         section = None
-        for line in _lines(self.path("data/tilesets/pair_collision_tile_ids.asm")):
+        for line in source_lines(self.path("data/tilesets/pair_collision_tile_ids.asm")):
             if line.endswith("::"):
                 section = line[:-2]
             elif section == "TilePairCollisionsLand" and line.startswith("db ") and line != "db -1":
-                tileset, first, second = _args(line, "db")
-                result.setdefault(tileset, set()).add(frozenset((_int(first), _int(second))))
+                tileset, first, second = macro_args(line, "db")
+                result.setdefault(tileset, set()).add(frozenset((parse_int(first), parse_int(second))))
         return result
 
     def _water_tilesets(self) -> set[str]:
         return {
             line.split()[1]
-            for line in _lines(self.path("data/tilesets/water_tilesets.asm"))
+            for line in source_lines(self.path("data/tilesets/water_tilesets.asm"))
             if line.startswith("db ") and line.split()[1] != "-1"
         }
 
@@ -255,7 +181,7 @@ class PretRepo:
         """Constante d'objet CT/CS (ex. TM_MEGA_PUNCH) -> identifiant PokéAPI (tm01)."""
         result = {}
         tm = hm = 0
-        for line in _lines(self.path("constants/item_constants.asm")):
+        for line in source_lines(self.path("constants/item_constants.asm")):
             if line.startswith("add_tm "):
                 tm += 1
                 result[f"TM_{line.split()[1]}"] = f"tm{tm:02d}"
@@ -283,7 +209,7 @@ class PretRepo:
         """Constantes PAL_* dans l'ordre (index = numéro de la palette)."""
         return [
             line.split()[1]
-            for line in _lines(self.path("constants/palette_constants.asm"))
+            for line in source_lines(self.path("constants/palette_constants.asm"))
             if line.startswith("const PAL_")
         ]
 
@@ -292,7 +218,7 @@ class PretRepo:
         """Sprite des PNJ (SPRITE_YOUNGSTER…) -> image (frames de 16 × 16 px, la première regarde vers le bas)."""
         files = {}
         pattern = re.compile(r'^(\w+)::\s*INCBIN\s+"([^"]+)\.2bpp"')
-        for line in _lines(self.path("gfx/sprites.asm")):
+        for line in source_lines(self.path("gfx/sprites.asm")):
             match = pattern.match(line)
             if match:
                 files[match.group(1)] = match.group(2) + ".png"
@@ -308,7 +234,7 @@ class PretRepo:
 
     def _consts(self, relative: str, macro: str = "const") -> list[str]:
         """Constantes d'un fichier `const_def` dans l'ordre (index = valeur)."""
-        return [line.split()[1] for line in _lines(self.path(relative)) if line.startswith(f"{macro} ")]
+        return [line.split()[1] for line in source_lines(self.path(relative)) if line.startswith(f"{macro} ")]
 
     @cached_property
     def base_moves(self) -> dict[str, tuple[str, ...]]:
@@ -330,7 +256,7 @@ class PretRepo:
     @cached_property
     def learnsets(self) -> dict[str, list[tuple[int, str]]]:
         """Pokémon -> attaques apprises par niveau, dans l'ordre (data/pokemon/evos_moves.asm)."""
-        lines = _lines(self.path("data/pokemon/evos_moves.asm"))
+        lines = source_lines(self.path("data/pokemon/evos_moves.asm"))
         # Les labels portent le nom du Pokémon (NidoranMEvosMoves -> NIDORAN_M).
         species = {const.replace("_", ""): const for const in self._consts("constants/pokemon_constants.asm")}
         by_label = {
@@ -346,13 +272,13 @@ class PretRepo:
                 current, zeros = by_label[line[:-1]], 0
                 result[current] = []
             elif current and line.startswith("db "):
-                args = _args(line, "db")
+                args = macro_args(line, "db")
                 if args == ["0"]:
                     zeros += 1
                     if zeros == 2:
                         current = None
                 elif zeros == 1 and len(args) == 2:
-                    result[current].append((_int(args[0]), args[1]))
+                    result[current].append((parse_int(args[0]), args[1]))
         return result
 
     def default_moves(self, species: str, level: int) -> list[str]:
@@ -369,7 +295,7 @@ class PretRepo:
     @cached_property
     def trainer_parties(self) -> dict[tuple[str, int], list[TrainerPokemon]]:
         """(classe, numéro) -> équipe, attaques comprises (data/trainers/parties.asm et special_moves.asm)."""
-        lines = _lines(self.path("data/trainers/parties.asm"))
+        lines = source_lines(self.path("data/trainers/parties.asm"))
         classes = self._consts("constants/trainer_constants.asm", "trainer_const")[1:]
         labels = [line.split()[1] for line in lines if line.startswith("dw ") and line.endswith("Data")]
         by_label = dict(zip(labels, classes, strict=True))
@@ -380,15 +306,15 @@ class PretRepo:
             if line.endswith(":") and line[:-1] in by_label:
                 current, number = by_label[line[:-1]], 0
             elif current and line.startswith("db "):
-                args = _args(line, "db")
+                args = macro_args(line, "db")
                 if args[-1] != "0":
                     raise ValueError(f"parties.asm : équipe non terminée par 0 : {line}")
                 number += 1
                 args = args[:-1]
                 if args[0] == "$FF":
-                    pairs = [(_int(args[i]), args[i + 1]) for i in range(1, len(args), 2)]
+                    pairs = [(parse_int(args[i]), args[i + 1]) for i in range(1, len(args), 2)]
                 else:
-                    pairs = [(_int(args[0]), species) for species in args[1:]]
+                    pairs = [(parse_int(args[0]), species) for species in args[1:]]
                 raw[(current, number)] = pairs
         parties = {
             key: [[species, level, self.default_moves(species, level)] for level, species in pairs]
@@ -410,18 +336,18 @@ class PretRepo:
                 moves.append("NO_MOVE")
             moves[slot] = move
 
-        lines = _lines(self.path("data/trainers/special_moves.asm"))
+        lines = source_lines(self.path("data/trainers/special_moves.asm"))
         if any(line.startswith("SpecialTrainerMoves") for line in lines):
             # Jaune : « db classe, numéro » puis « db Pokémon, emplacement, attaque » (à partir de 1), « db 0 ».
             key = None
             for line in lines:
                 if not line.startswith("db "):
                     continue
-                args = _args(line, "db")
+                args = macro_args(line, "db")
                 if len(args) == 2:
-                    key = (args[0], _int(args[1]))
+                    key = (args[0], parse_int(args[1]))
                 elif len(args) == 3 and key:
-                    put(key, _int(args[0]) - 1, _int(args[1]) - 1, args[2])
+                    put(key, parse_int(args[0]) - 1, parse_int(args[1]) - 1, args[2])
         else:
             # Rouge / Bleu : attaque unique d'un champion d'arène (LoneMoves, 3e attaque du Pokémon n + 1)
             # et attaque du Conseil 4 (TeamMoves, 3e attaque du 5e Pokémon).
@@ -432,9 +358,9 @@ class PretRepo:
                 if line.endswith(":"):
                     section = line[:-1]
                 elif line.startswith("db "):
-                    args = _args(line, "db")
+                    args = macro_args(line, "db")
                     if section == "LoneMoves" and len(args) == 2:
-                        lone.append((_int(args[0]), args[1]))
+                        lone.append((parse_int(args[0]), args[1]))
                     elif section == "TeamMoves" and len(args) == 2:
                         team[args[0]] = args[1]
             for leader, (mon, move) in zip(GYM_LEADERS, lone, strict=False):
@@ -459,7 +385,7 @@ class PretRepo:
         label_re = re.compile(r"^([A-Za-z_]\w*)::?$")
         for path in files:
             current = None
-            for line in _lines(path):
+            for line in source_lines(path):
                 match = label_re.match(line)
                 if match:
                     current = match.group(1)
@@ -473,9 +399,9 @@ class PretRepo:
         """Constante de texte (TEXT_…) -> label du texte (dw_const des scripts)."""
         result = {}
         for path in sorted(self.path("scripts").glob("*.asm")):
-            for line in _lines(path):
+            for line in source_lines(path):
                 if line.startswith("dw_const "):
-                    label, const = _args(line, "dw_const")[:2]
+                    label, const = macro_args(line, "dw_const")[:2]
                     result[const] = label
         return result
 
@@ -497,7 +423,7 @@ class PretRepo:
     @cached_property
     def _tm_numbers(self) -> dict[str, int]:
         numbers = {}
-        for line in _lines(self.path("constants/item_constants.asm")):
+        for line in source_lines(self.path("constants/item_constants.asm")):
             if line.startswith("add_tm "):
                 numbers[line.split()[1]] = len(numbers) + 1
         return numbers
@@ -506,8 +432,8 @@ class PretRepo:
     def trades(self) -> list[tuple[str, str]]:
         """Échanges en jeu (Pokémon demandé, Pokémon reçu), dans l'ordre des constantes TRADE_FOR_*."""
         return [
-            tuple(_args(line, "npctrade")[:2])
-            for line in _lines(self.path("data/events/trades.asm"))
+            tuple(macro_args(line, "npctrade")[:2])
+            for line in source_lines(self.path("data/events/trades.asm"))
             if line.startswith("npctrade ")
         ]
 
@@ -515,7 +441,7 @@ class PretRepo:
     def _trade_index(self) -> dict[str, int]:
         consts = [
             line.split()[1]
-            for line in _lines(self.path("constants/script_constants.asm"))
+            for line in source_lines(self.path("constants/script_constants.asm"))
             if line.startswith("const TRADE_FOR_")
         ]
         return {const: index for index, const in enumerate(consts)}
@@ -541,10 +467,10 @@ class PretRepo:
             return []
         offers = []
         pending = None
-        for line in _lines(path):
+        for line in source_lines(path):
             if line.startswith("lb bc,"):
-                args = _args(line, "lb bc,")
-                pending = (args[0], _int(args[1])) if len(args) == 2 and args[0].startswith("TM_") else None
+                args = macro_args(line, "lb bc,")
+                pending = (args[0], parse_int(args[1])) if len(args) == 2 and args[0].startswith("TM_") else None
             elif line == "call GiveItem" and pending:
                 offers.append(NpcOffer("gift_item", item=pending[0], quantity=pending[1]))
         return list(dict.fromkeys(offers))
@@ -557,11 +483,11 @@ class PretRepo:
         for line in self._expanded_body(label, depth=2):
             if line.startswith("script_mart "):
                 offers += [
-                    NpcOffer("sale", item=item, price=self.prices.get(item)) for item in _args(line, "script_mart")
+                    NpcOffer("sale", item=item, price=self.prices.get(item)) for item in macro_args(line, "script_mart")
                 ]
             elif line.startswith("lb bc,"):
-                args = _args(line, "lb bc,")
-                pending = (args[0], _int(args[1])) if len(args) == 2 and not args[1].startswith("[") else None
+                args = macro_args(line, "lb bc,")
+                pending = (args[0], parse_int(args[1])) if len(args) == 2 and not args[1].startswith("[") else None
             elif line == "call GiveItem" and pending:
                 offers.append(NpcOffer("gift_item", item=pending[0], quantity=pending[1]))
             elif line == "call GivePokemon" and pending:
@@ -577,100 +503,6 @@ class PretRepo:
 
     @cached_property
     def maps(self) -> dict[str, PretMap]:
-        """Toutes les cartes qui ont un en-tête, indexées par constante."""
-        blocks = self._block_files()
-        objects = self._objects()
-        hidden = self._hidden_items()
-        result = {}
-        for header in sorted(self.path("data/maps/headers").glob("*.asm")):
-            lines = _lines(header)
-            label, const, tileset = _args(lines[0], "map_header")[:3]
-            number, width, height = self.map_constants[const]
-            border, warps, signs, objs = objects[label]
-            data = self.path(blocks[label]).read_bytes()
-            if len(data) > width * height:
-                raise ValueError(f"{header.name} : {len(data)} blocs pour {width} × {height}")
-            # Quelques fichiers sont plus courts que la carte (le jeu lit alors les octets suivants de la ROM,
-            # hors de la zone accessible) : on complète avec le bloc de bordure.
-            data += bytes([border]) * (width * height - len(data))
-            outdoor = number < self.map_constants[FIRST_INDOOR_MAP][0]
-            pret_map = PretMap(
-                const, number, label, width, height, tileset, data, border, outdoor, [], warps, signs, objs
-            )
-            for line in lines[1:]:
-                if line.startswith("connection "):
-                    direction, _, target, offset = _args(line, "connection")
-                    pret_map.connections.append(Connection(direction, target, _int(offset)))
-            pret_map.objects += [MapObject(x, y, "hidden_item", item=item) for x, y, item in hidden.get(const, [])]
-            result[const] = pret_map
-        return result
+        from .pret_maps import maps
 
-    def _block_files(self) -> dict[str, str]:
-        """Label de carte -> fichier .blk (plusieurs cartes peuvent partager le même fichier)."""
-        files = {}
-        pending: list[str] = []
-        label_re = re.compile(r"^(\w+)_Blocks:")
-        incbin_re = re.compile(r'INCBIN\s+"([^"]+\.blk)"')
-        for line in _lines(self.path("maps.asm")):
-            label = label_re.match(line)
-            if label:
-                pending.append(label.group(1))
-            incbin = incbin_re.search(line)
-            if incbin:
-                for name in pending:
-                    files[name] = incbin.group(1)
-                pending = []
-        return files
-
-    def _objects(self) -> dict[str, tuple[int, list[Warp], list[tuple[int, int]], list[MapObject]]]:
-        result = {}
-        for path in sorted(self.path("data/maps/objects").glob("*.asm")):
-            label = None
-            border = 0
-            warps: list[Warp] = []
-            signs: list[tuple[int, int]] = []
-            objs: list[MapObject] = []
-            for line in _lines(path):
-                if line.endswith("_Object:"):
-                    label = line[: -len("_Object:")]
-                elif line.startswith("db $") and label and not warps and not objs:
-                    border = _int(line[3:])
-                elif line.startswith("warp_event "):
-                    x, y, target, target_warp = _args(line, "warp_event")
-                    warps.append(Warp(int(x), int(y), target, int(target_warp)))
-                elif line.startswith("bg_event "):
-                    x, y, _ = _args(line, "bg_event")
-                    signs.append((int(x), int(y)))
-                elif line.startswith("object_event "):
-                    objs.append(_object_event(_args(line, "object_event")))
-                elif line.startswith("def_warps_to"):
-                    break
-            if label is None:
-                raise ValueError(f"{path.name} : label _Object introuvable")
-            result[label] = (border, warps, signs, objs)
-        return result
-
-    def _hidden_items(self) -> dict[str, list[tuple[int, int, str]]]:
-        """Objets cachés (Cherch'Objet) : constante de carte -> [(x, y, objet)]."""
-        result: dict[str, list[tuple[int, int, str]]] = {}
-        current = None
-        for line in _lines(self.path("data/events/hidden_events.asm")):
-            if line.startswith("hidden_events_for "):
-                current = line.split()[1]
-            elif line.startswith("hidden_event ") and current:
-                x, y, function, argument = _args(line, "hidden_event")
-                if function == "HiddenItems":
-                    result.setdefault(current, []).append((int(x), int(y), argument))
-        return result
-
-
-def _object_event(args: list[str]) -> MapObject:
-    x, y, sprite = int(args[0]), int(args[1]), args[2]
-    text = args[5] if len(args) > 5 else None
-    if len(args) == 8:
-        if args[6].startswith("OPP_"):
-            return MapObject(x, y, "trainer", sprite, trainer_class=args[6], trainer_number=int(args[7]), text=text)
-        return MapObject(x, y, "pokemon", sprite, pokemon=args[6], level=int(args[7]), text=text)
-    if len(args) == 7 and args[6] != "0":
-        return MapObject(x, y, "item", sprite, item=args[6], text=text)
-    return MapObject(x, y, "npc", sprite, text=text)
+        return maps(self)
