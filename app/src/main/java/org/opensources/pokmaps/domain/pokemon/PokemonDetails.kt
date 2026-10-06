@@ -60,7 +60,8 @@ enum class DamageClass {
         fun from(identifier: String): DamageClass = when (identifier) {
             "physical" -> PHYSICAL
             "special" -> SPECIAL
-            else -> STATUS
+            "status" -> STATUS
+            else -> throw IllegalArgumentException("Catégorie d'attaque inconnue : $identifier")
         }
     }
 }

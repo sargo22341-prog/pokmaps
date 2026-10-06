@@ -1,9 +1,8 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.pokemon
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.opensources.pokmaps.domain.model.PokemonType
-import org.opensources.pokmaps.domain.pokemon.TypeChart
 
 class TypeChartTest {
     private val normal = PokemonType(1, "normal", "Normal")

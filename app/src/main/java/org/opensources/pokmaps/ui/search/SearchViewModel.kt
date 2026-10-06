@@ -22,8 +22,7 @@ import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.usecase.ObserveSearchIndexUseCase
 import org.opensources.pokmaps.domain.usecase.SearchIndex
-import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
-import org.opensources.pokmaps.ui.map.displayName
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 /** Lieu trouvé : ville, route ou carte intérieure. */
 data class PlaceResult(val identifier: String, val name: String, val outdoor: Boolean)
@@ -42,6 +41,11 @@ data class SearchUiState(
     val characters: List<CharacterResult> = emptyList()
 ) {
     val isEmpty: Boolean get() = pokemon.isEmpty() && places.isEmpty() && items.isEmpty() && characters.isEmpty()
+}
+
+/** Intentions de l'écran de recherche. */
+sealed interface SearchAction {
+    data class Query(val text: String) : SearchAction
 }
 
 /**
@@ -80,8 +84,10 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
         }.catch { emit(SearchUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchUiState())
 
-    fun search(text: String) {
-        query.value = text
+    fun onAction(action: SearchAction) {
+        when (action) {
+            is SearchAction.Query -> query.value = action.text
+        }
     }
 
     private fun <T> List<Pair<String, T>>.matching(text: String): List<T> =
@@ -104,7 +110,7 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
             .sortedBy { it.id }
             .map { obj ->
                 val links = offers[obj.id].orEmpty()
-                val result = CharacterResult(obj, obj.displayName(), catalog.maps[obj.mapId]?.name.orEmpty(), links)
+                val result = CharacterResult(obj, obj.name, catalog.maps[obj.mapId]?.name.orEmpty(), links)
                 val names = links.flatMap { listOfNotNull(it.itemName, it.pokemonName, it.wantedPokemonName) }
                 PokedexSearch.normalize((listOf(result.name) + names).joinToString(" ")) to result
             }

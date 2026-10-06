@@ -29,15 +29,27 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 
+@Composable
+fun SettingsRoute(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    SettingsScreen(state, viewModel::onAction, onOpenAbout)
+}
+
 /** Réglages : sprites animés (Pokédex et fiches, carte), et accès à l'écran « À propos ». */
 @Composable
-fun SettingsScreen(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, onOpenAbout: () -> Unit) {
     Column(
         Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        if (state.failed) {
+            Text(
+                stringResource(R.string.data_load_error),
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
         Text(
             stringResource(R.string.settings_display),
             style = MaterialTheme.typography.titleSmall,
@@ -48,13 +60,13 @@ fun SettingsScreen(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltV
             title = stringResource(R.string.settings_animated_sprites),
             summary = stringResource(R.string.settings_animated_sprites_summary),
             checked = state.animatedSprites,
-            onCheckedChange = viewModel::setAnimatedSprites
+            onCheckedChange = { onAction(SettingsAction.SetAnimatedSprites(it)) }
         )
         SwitchRow(
             title = stringResource(R.string.settings_map_animated_sprites),
             summary = stringResource(R.string.settings_map_animated_sprites_summary),
             checked = state.mapAnimatedSprites,
-            onCheckedChange = viewModel::setMapAnimatedSprites
+            onCheckedChange = { onAction(SettingsAction.SetMapAnimatedSprites(it)) }
         )
         if (state.animatedSprites || state.mapAnimatedSprites) {
             // Aperçu : Pikachu animé.

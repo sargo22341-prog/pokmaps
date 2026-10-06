@@ -1,13 +1,10 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.pokedex
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.PokemonType
-import org.opensources.pokmaps.domain.pokedex.PokedexFilter
-import org.opensources.pokmaps.domain.pokedex.PokedexSearch
-import org.opensources.pokmaps.domain.pokedex.obtainMethods
 
 class PokedexSearchTest {
     private val normal = PokemonType(1, "normal", "Normal")

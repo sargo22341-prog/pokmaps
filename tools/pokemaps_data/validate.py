@@ -80,7 +80,7 @@ CHECKS = (
            WHERE o.kind NOT IN ('item', 'hidden_item', 'trainer', 'pokemon', 'npc')
              OR (o.kind IN ('item', 'hidden_item')) != (o.item_id IS NOT NULL)
              OR (o.kind = 'pokemon') != (o.pokemon_id IS NOT NULL AND o.level IS NOT NULL)
-             OR (o.kind = 'trainer') != (o.trainer_class IS NOT NULL)
+             OR (o.kind = 'trainer') != (o.trainer_class IS NOT NULL) OR trim(o.name_fr) = ''
              OR o.item_id NOT IN (SELECT id FROM item) OR o.pokemon_id NOT IN (SELECT id FROM pokemon)
              OR o.x NOT BETWEEN m.x AND m.x + m.width OR o.y NOT BETWEEN m.y AND m.y + m.height""",
     ),

@@ -14,9 +14,15 @@ import org.opensources.pokmaps.domain.usecase.ItemPage
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
-import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class ItemUiState(val loading: Boolean = true, val page: ItemPage? = null, val failed: Boolean = false)
+
+/** Intentions de la fiche d'un objet. */
+sealed interface ItemAction {
+    /** Montre sur la carte un exemplaire de l'objet ou le personnage qui le vend ou le donne. */
+    data class ShowOnMap(val objectId: Int) : ItemAction
+}
 
 /** Fiche d'un objet du jeu choisi. */
 @HiltViewModel
@@ -32,8 +38,12 @@ class ItemViewModel @Inject constructor(
         .catch { emit(ItemUiState(loading = false, failed = true)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), ItemUiState())
 
-    /** Demande à la carte de montrer l'objet ou le personnage (dans son bâtiment). */
-    fun showOnMap(objectId: Int) = mapRequests.send(MapRequest.FocusObject(objectId))
+    fun onAction(action: ItemAction) {
+        when (action) {
+            // La carte montre l'objet ou le personnage, dans son bâtiment.
+            is ItemAction.ShowOnMap -> mapRequests.send(MapRequest.FocusObject(action.objectId))
+        }
+    }
 
     companion object {
         const val ITEM = "item"

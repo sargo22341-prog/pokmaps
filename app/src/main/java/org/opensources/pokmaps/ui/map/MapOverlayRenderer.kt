@@ -27,13 +27,8 @@ internal data class MapRenderState(
     val layers: Set<MapLayer>,
     val animated: Boolean,
     val zone: MapInfo?,
-    val wildMarkers: List<WildMarker>,
-    val focusedObjectId: Int?,
-    val highlightedPokemonId: Int?,
-    val highlightedMaps: Set<Int>,
-    val highlightedObjects: Set<Int>,
-    val worldEntrances: Map<Int, MapWarp>,
-    val objectScales: Map<Int, Float>
+    val overlays: MapOverlays,
+    val highlightedPokemonId: Int?
 )
 
 internal class MapOverlayRenderer {
@@ -84,7 +79,7 @@ internal class MapOverlayRenderer {
                     obj,
                     state.catalog.versionGroupIdentifier,
                     alwaysVisible = inZone,
-                    scale = state.objectScales[obj.id] ?: 1f,
+                    scale = state.overlays.objectScales[obj.id] ?: 1f,
                     animated = state.animated
                 )
             }
@@ -93,7 +88,7 @@ internal class MapOverlayRenderer {
 
     private fun drawWildMarkers(state: MapRenderState) {
         if (MapLayer.WILD_POKEMON !in state.layers) return
-        state.wildMarkers.forEachIndexed { index, wild ->
+        state.overlays.wildMarkers.forEachIndexed { index, wild ->
             drawMarker(
                 state = state,
                 id = "${MapMarkerIds.WILD}:${wild.pokemonId}:$index",
@@ -109,7 +104,7 @@ internal class MapOverlayRenderer {
     }
 
     private fun drawFocusedObject(state: MapRenderState) {
-        val focused = state.focusedObjectId?.let { state.catalog.objectsById[it] }
+        val focused = state.overlays.focusedObjectId?.let { state.catalog.objectsById[it] }
             ?.takeIf { it.mapId in state.catalog.partsOf(state.map.id) } ?: return
         drawMarker(
             state = state,
@@ -126,23 +121,24 @@ internal class MapOverlayRenderer {
     private fun drawHighlight(state: MapRenderState, entrances: List<MapWarp>, objects: List<MapObject>) {
         val pokemonId = state.highlightedPokemonId ?: return
         state.catalog.partsOf(state.map.id)
-            .filter { it in state.highlightedMaps }
+            .filter { it in state.overlays.highlightedMaps }
             .mapNotNull { state.catalog.maps[it] }
             .forEach { drawRectangle(state, "${MapMarkerIds.HIGHLIGHT_PATH}:${it.id}", it, HIGHLIGHT_COLOR, 0.25f) }
 
         val highlightedEntrances = if (state.map.identifier == GameMap.WORLD) {
-            state.highlightedMaps.mapNotNull { state.worldEntrances[it] }
+            state.overlays.highlightedMaps.mapNotNull { state.overlays.worldEntrances[it] }
         } else {
-            entrances.filter { it.targetMapId in state.highlightedMaps }
+            entrances.filter { it.targetMapId in state.overlays.highlightedMaps }
         }
         highlightedEntrances.distinctBy { it.id }.forEach { warp ->
             drawMarker(state, "${MapMarkerIds.HIGHLIGHT_WARP}:${warp.id}", warp.x, warp.y, lazy = false, zIndex = 3f) {
                 HighlightMarker()
             }
         }
+        val overlays = state.overlays
         objects.filter {
-            ((it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId) || it.id in state.highlightedObjects) &&
-                it.id != state.focusedObjectId
+            ((it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId) || it.id in overlays.highlightedObjects) &&
+                it.id != overlays.focusedObjectId
         }.forEach { obj ->
             drawMarker(state, "${MapMarkerIds.HIGHLIGHT_OBJECT}:${obj.id}", obj.x, obj.y, lazy = false, zIndex = 3f) {
                 HighlightMarker()

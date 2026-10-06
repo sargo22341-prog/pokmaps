@@ -15,6 +15,7 @@ import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Encounter
@@ -59,7 +60,7 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
             ItemSource(this, catalog.maps[mapId]?.name.orEmpty(), price, quantity)
 
         val offers = index.offers.filter { it.itemIdentifier == identifier }
-        fun offered(kind: String) = offers.filter { it.kind == kind }.mapNotNull { offer ->
+        fun offered(kind: OfferKind) = offers.filter { it.kind == kind }.mapNotNull { offer ->
             catalog.objectsById[offer.objectId]?.source(offer.price, offer.quantity)
         }.distinctBy { it.obj.id }
         ItemPage(
@@ -70,8 +71,8 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
                 .filter { it.itemId == item.id && it.kind in FOUND_KINDS }
                 .sortedBy { it.id }
                 .map { it.source() },
-            sold = offered(OfferLink.SALE),
-            given = offered(OfferLink.GIFT_ITEM),
+            sold = offered(OfferKind.SALE),
+            given = offered(OfferKind.GIFT_ITEM),
             evolutions = maps.itemEvolutions(game, item.id)
         )
     }

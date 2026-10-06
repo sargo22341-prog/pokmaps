@@ -26,15 +26,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.usecase.CharacterPage
+import org.opensources.pokmaps.ui.common.CharacterSprite
+import org.opensources.pokmaps.ui.common.Offers
+import org.opensources.pokmaps.ui.common.SectionTitle
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
-import org.opensources.pokmaps.ui.map.CharacterSprite
-import org.opensources.pokmaps.ui.map.Offers
-import org.opensources.pokmaps.ui.map.SectionTitle
-import org.opensources.pokmaps.ui.map.TrainerPokemonRow
-import org.opensources.pokmaps.ui.map.displayName
+import org.opensources.pokmaps.ui.common.TrainerPokemonRow
 
 @Composable
-fun CharacterScreen(
+fun CharacterRoute(
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
     onOpenPlace: (String) -> Unit,
@@ -43,6 +42,30 @@ fun CharacterScreen(
     viewModel: CharacterViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    CharacterScreen(
+        state,
+        onAction = { action ->
+            viewModel.onAction(action)
+            when (action) {
+                CharacterAction.ShowOnMap -> onShowOnMap()
+            }
+        },
+        onOpenPokemon = onOpenPokemon,
+        onOpenItem = onOpenItem,
+        onOpenPlace = onOpenPlace,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CharacterScreen(
+    state: CharacterUiState,
+    onAction: (CharacterAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    onOpenPlace: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val page = state.page
     if (page == null) {
         SheetPlaceholder(state.loading, stringResource(R.string.character_not_found), modifier, state.failed)
@@ -53,10 +76,7 @@ fun CharacterScreen(
         onOpenPokemon = onOpenPokemon,
         onOpenItem = onOpenItem,
         onOpenPlace = onOpenPlace,
-        onShowOnMap = {
-            viewModel.showOnMap()
-            onShowOnMap()
-        },
+        onShowOnMap = { onAction(CharacterAction.ShowOnMap) },
         modifier = modifier
     )
 }
@@ -87,7 +107,7 @@ private fun CharacterContent(
             if (obj.kind == MapObjectKind.TRAINER) {
                 Text(stringResource(R.string.map_trainer), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Text(obj.displayName(), style = MaterialTheme.typography.headlineMedium)
+            Text(obj.name, style = MaterialTheme.typography.headlineMedium)
             FilledTonalButton(onClick = { onOpenPlace(page.map.identifier) }) { Text(page.map.name) }
             Button(onClick = onShowOnMap) {
                 Icon(

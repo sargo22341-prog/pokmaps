@@ -67,6 +67,7 @@
     <string name="pokemon_evolutions">Évolutions</string>
     <string name="pokemon_no_evolution">Ce Pokémon n’évolue pas.</string>
     <string name="evolution_level_up">Montée de niveau</string>
+    <string name="evolution_arrow" translatable="false">⟶</string>
     <string name="pokemon_locations">Lieux de capture</string>
     <string name="pokemon_locations_in">Dans Pokémon %1$s</string>
     <string name="pokemon_locations_none">Introuvable à l’état sauvage dans Pokémon %1$s.</string>
@@ -123,6 +124,9 @@
     <string name="map_places">Lieux accessibles</string>
     <string name="map_highlight">Lieux de %1$s</string>
     <string name="map_highlight_none">%1$s est introuvable sur la carte de Pokémon %2$s.</string>
+    <string name="map_badge_hidden" translatable="false">?</string>
+    <string name="map_badge_trainer" translatable="false">!</string>
+    <string name="map_highlight_error">Impossible de lire les lieux de %1$s.</string>
     <string name="map_highlight_clear">Fin du surlignage</string>
     <string name="map_item">Objet</string>
     <string name="map_hidden_item">Objet caché</string>

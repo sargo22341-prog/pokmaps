@@ -23,7 +23,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokemonUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
-import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 /** PV restants du Pokémon sauvage, en fraction de ses PV max (0 = 1 PV). */
 enum class HpChoice(val fraction: Double) {
@@ -59,6 +59,23 @@ data class PokemonUiState(
     val favorite: Boolean = false
 )
 
+/** Intentions de la fiche d'un Pokémon. */
+sealed interface PokemonAction {
+    /** Coche ou décoche « capturé » dans la version choisie. */
+    data object ToggleCaught : PokemonAction
+
+    data object ToggleFavorite : PokemonAction
+
+    /** Surligne sur la carte les lieux du Pokémon. */
+    data object ShowOnMap : PokemonAction
+
+    data class SetCatchLevel(val level: Int) : PokemonAction
+
+    data class SetCatchHp(val hp: HpChoice) : PokemonAction
+
+    data class SetCatchStatus(val status: CatchStatus) : PokemonAction
+}
+
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -83,25 +100,36 @@ class PokemonViewModel @Inject constructor(
         }.catch { emit(PokemonUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
 
-    fun setCatchLevel(level: Int) = catchInput.update { it.copy(level = level.coerceIn(1, MAX_LEVEL)) }
+    fun onAction(action: PokemonAction) {
+        when (action) {
+            PokemonAction.ToggleCaught -> toggleCaught()
 
-    fun setCatchHp(hp: HpChoice) = catchInput.update { it.copy(hp = hp) }
+            PokemonAction.ToggleFavorite -> toggleFavorite()
 
-    fun setCatchStatus(status: CatchStatus) = catchInput.update { it.copy(status = status) }
+            PokemonAction.ShowOnMap -> showOnMap()
 
-    fun toggleCaught() {
+            is PokemonAction.SetCatchLevel ->
+                catchInput.update { it.copy(level = action.level.coerceIn(1, MAX_LEVEL)) }
+
+            is PokemonAction.SetCatchHp -> catchInput.update { it.copy(hp = action.hp) }
+
+            is PokemonAction.SetCatchStatus -> catchInput.update { it.copy(status = action.status) }
+        }
+    }
+
+    private fun toggleCaught() {
         val current = state.value
         val game = current.game ?: return
         viewModelScope.launch { updateCollection.setCaught(game, pokemonId, !current.caught) }
     }
 
-    fun toggleFavorite() {
+    private fun toggleFavorite() {
         val favorite = state.value.favorite
         viewModelScope.launch { updateCollection.setFavorite(pokemonId, !favorite) }
     }
 
     /** Demande à la carte de surligner les lieux du Pokémon. */
-    fun showOnMap() {
+    private fun showOnMap() {
         val details = state.value.details ?: return
         mapRequests.send(MapRequest.HighlightPokemon(details.id, details.name))
     }

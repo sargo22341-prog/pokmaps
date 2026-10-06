@@ -20,7 +20,7 @@ interface MapDao {
         """
         SELECT o.id, o.map_id AS mapId, o.kind, o.x, o.y, o.sprite, o.item_id AS itemId,
             i.identifier AS itemIdentifier, i.name_fr AS itemName, o.pokemon_id AS pokemonId,
-            p.name_fr AS pokemonName, o.level, o.trainer_class AS trainerClass
+            p.name_fr AS pokemonName, o.level, o.trainer_class AS trainerClass, o.name_fr AS name
         FROM map_object o
         JOIN map m ON m.id = o.map_id
         LEFT JOIN item i ON i.id = o.item_id

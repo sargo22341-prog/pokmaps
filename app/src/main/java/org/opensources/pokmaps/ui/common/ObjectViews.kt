@@ -1,5 +1,6 @@
-package org.opensources.pokmaps.ui.map
+package org.opensources.pokmaps.ui.common
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,35 +18,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObject
-import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.OfferKind
+import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
-import org.opensources.pokmaps.ui.common.PixelArt
-import org.opensources.pokmaps.ui.common.PixelArtImage
-import org.opensources.pokmaps.ui.common.TypeBadge
-import org.opensources.pokmaps.ui.common.label
 
-// Éléments communs aux fiches de la carte et aux fiches de la recherche (objets, personnages, dresseurs).
-
-/** Nom d'un personnage de la carte : classe du dresseur, Pokémon fixe ou nom d'après son sprite. */
-fun MapObject.displayName(): String = when (kind) {
-    MapObjectKind.TRAINER -> trainerClass?.let(::trainerClassName) ?: npcName(sprite)
-    MapObjectKind.POKEMON -> pokemonName ?: npcName(sprite)
-    MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> itemName ?: npcName(sprite)
-    MapObjectKind.NPC -> npcName(sprite)
-}
+// Éléments communs aux fiches de la carte, aux fiches et à la recherche (objets, personnages, dresseurs).
 
 @Composable
-internal fun CharacterSprite(obj: MapObject, versionGroupIdentifier: String, size: Int = 48) {
+fun CharacterSprite(obj: MapObject, versionGroupIdentifier: String, size: Int = 48) {
     val sprite = obj.sprite ?: return
     PixelArtImage(Sprites.mapSprite(versionGroupIdentifier, sprite), PixelArt.MAP_SPRITE, size.dp, null)
 }
 
 @Composable
-internal fun SectionTitle(text: String, modifier: Modifier = Modifier) {
+fun SectionTitle(text: String, modifier: Modifier = Modifier) {
     Text(
         text,
         style = MaterialTheme.typography.titleSmall,
@@ -56,7 +47,7 @@ internal fun SectionTitle(text: String, modifier: Modifier = Modifier) {
 
 /** Pokémon d'un dresseur : niveau et attaques qu'il utilisera. */
 @Composable
-internal fun TrainerPokemonRow(mon: TrainerPokemon, onOpenPokemon: (Int) -> Unit) {
+fun TrainerPokemonRow(mon: TrainerPokemon, onOpenPokemon: (Int) -> Unit) {
     Column(
         verticalArrangement = Arrangement.spacedBy(2.dp),
         modifier = Modifier
@@ -75,7 +66,7 @@ internal fun TrainerPokemonRow(mon: TrainerPokemon, onOpenPokemon: (Int) -> Unit
 
 /** Attaque : nom, type et caractéristiques (catégorie, puissance, précision, PP). */
 @Composable
-internal fun MoveLine(move: LearnedMove, modifier: Modifier = Modifier) {
+fun MoveLine(move: LearnedMove, modifier: Modifier = Modifier) {
     val none = stringResource(R.string.no_value)
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -101,11 +92,7 @@ internal fun MoveLine(move: LearnedMove, modifier: Modifier = Modifier) {
 
 /** Dons, ventes et échanges d'un personnage ; objets et Pokémon ouvrent leur fiche si demandé. */
 @Composable
-internal fun Offers(
-    offers: List<NpcOffer>,
-    onOpenPokemon: ((Int) -> Unit)? = null,
-    onOpenItem: ((String) -> Unit)? = null
-) {
+fun Offers(offers: List<NpcOffer>, onOpenPokemon: ((Int) -> Unit)? = null, onOpenItem: ((String) -> Unit)? = null) {
     val gifts = offers.filter { it is NpcOffer.GiftItem || it is NpcOffer.GiftPokemon }
     val sales = offers.filterIsInstance<NpcOffer.Sale>()
     val trades = offers.filterIsInstance<NpcOffer.Trade>()
@@ -130,7 +117,7 @@ internal fun Offers(
                     onOpenPokemon
                 )
 
-                else -> Unit
+                is NpcOffer.Sale, is NpcOffer.Trade -> Unit
             }
         }
     }
@@ -193,4 +180,34 @@ private fun OfferPokemonRow(pokemonId: Int, text: String, onOpenPokemon: ((Int) 
         PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 48.dp, null)
         Text(text, style = MaterialTheme.typography.bodyMedium)
     }
+}
+
+@get:StringRes
+val DamageClass.label: Int
+    get() = when (this) {
+        DamageClass.PHYSICAL -> R.string.damage_physical
+        DamageClass.SPECIAL -> R.string.damage_special
+        DamageClass.STATUS -> R.string.status_label
+    }
+
+/** « Donne CT28 · Vend Poké Ball, Potion · Échange Lippoutou » */
+@Composable
+fun offersSummary(offers: List<OfferLink>): String {
+    fun names(name: (OfferLink) -> String?) = offers.mapNotNull(name).distinct().joinToString(", ")
+
+    val byKind = offers.groupBy { it.kind }
+    val gifts = names { offer ->
+        when (offer.kind) {
+            OfferKind.GIFT_ITEM -> offer.itemName
+            OfferKind.GIFT_POKEMON -> offer.pokemonName
+            OfferKind.SALE, OfferKind.TRADE -> null
+        }
+    }
+    val sales = byKind[OfferKind.SALE].orEmpty().mapNotNull { it.itemName }.distinct().joinToString(", ")
+    val trades = byKind[OfferKind.TRADE].orEmpty().mapNotNull { it.pokemonName }.distinct().joinToString(", ")
+    return listOfNotNull(
+        gifts.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_gifts, it) },
+        sales.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_sales, it) },
+        trades.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_trades, it) }
+    ).joinToString(" · ")
 }

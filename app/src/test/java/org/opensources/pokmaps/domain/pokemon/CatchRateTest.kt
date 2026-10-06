@@ -1,10 +1,7 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.pokemon
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.opensources.pokmaps.domain.pokemon.Ball
-import org.opensources.pokmaps.domain.pokemon.CatchRate
-import org.opensources.pokmaps.domain.pokemon.CatchStatus
 
 class CatchRateTest {
     private fun probability(ball: Ball, rate: Int, hp: Int = 100, status: CatchStatus = CatchStatus.NONE) =

@@ -40,7 +40,10 @@ enum class MapObjectKind(val identifier: String) {
     NPC("npc");
 
     companion object {
-        fun from(identifier: String): MapObjectKind = entries.firstOrNull { it.identifier == identifier } ?: NPC
+        fun from(identifier: String): MapObjectKind =
+            requireNotNull(entries.firstOrNull { it.identifier == identifier }) {
+                "Type d'élément de carte inconnu : $identifier"
+            }
     }
 }
 
@@ -58,7 +61,9 @@ data class MapObject(
     val pokemonId: Int?,
     val pokemonName: String?,
     val level: Int?,
-    val trainerClass: String?
+    val trainerClass: String?,
+    /** Nom affiché : classe du dresseur, personnage d'après son sprite, Pokémon ou objet (tools/data/). */
+    val name: String
 )
 
 /** Zone de rencontre PokéAPI rattachée à une carte. */

@@ -13,16 +13,15 @@ import sqlite3
 import sys
 from pathlib import Path
 
+# Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
+from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.maps import build_maps
+from pokemaps_data.pokeapi import PokeApi
+from pokemaps_data.sources import fetch_pokeapi_csv
+from pokemaps_data.sprites import build_sprites
+from pokemaps_data.validate import validate
+
 ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT))
-
-from pokemaps_data.builder import DatabaseBuilder  # noqa: E402
-from pokemaps_data.maps import build_maps  # noqa: E402
-from pokemaps_data.pokeapi import PokeApi  # noqa: E402
-from pokemaps_data.sources import fetch_pokeapi_csv  # noqa: E402
-from pokemaps_data.sprites import build_sprites  # noqa: E402
-from pokemaps_data.validate import validate  # noqa: E402
-
 DEFAULT_ASSETS = ROOT.parent / "app/src/main/assets"
 
 

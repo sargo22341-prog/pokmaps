@@ -28,20 +28,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.usecase.PlacePage
+import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
-import org.opensources.pokmaps.ui.map.CharacterSprite
-import org.opensources.pokmaps.ui.map.displayName
-import org.opensources.pokmaps.ui.search.offersSummary
+import org.opensources.pokmaps.ui.common.offersSummary
 
 @Composable
-fun PlaceScreen(
+fun PlaceRoute(
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
     onOpenPlace: (String) -> Unit,
@@ -51,139 +49,161 @@ fun PlaceScreen(
     viewModel: PlaceViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    PlaceScreen(
+        state,
+        onAction = { action ->
+            viewModel.onAction(action)
+            when (action) {
+                PlaceAction.ShowPlace, is PlaceAction.ShowObject -> onShowOnMap()
+            }
+        },
+        onOpenPokemon = onOpenPokemon,
+        onOpenItem = onOpenItem,
+        onOpenPlace = onOpenPlace,
+        onOpenCharacter = onOpenCharacter,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun PlaceScreen(
+    state: PlaceUiState,
+    onAction: (PlaceAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    onOpenPlace: (String) -> Unit,
+    onOpenCharacter: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val page = state.page
     if (page == null) {
         SheetPlaceholder(state.loading, stringResource(R.string.place_not_found), modifier, state.failed)
         return
     }
-    PlaceContent(
-        page,
-        onOpenPokemon = onOpenPokemon,
-        onOpenItem = onOpenItem,
-        onOpenPlace = onOpenPlace,
-        onOpenCharacter = onOpenCharacter,
-        onShowPlace = {
-            viewModel.showOnMap()
-            onShowOnMap()
-        },
-        onShowObject = { objectId ->
-            viewModel.showObjectOnMap(objectId)
-            onShowOnMap()
-        },
-        modifier = modifier
-    )
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun PlaceContent(
-    page: PlacePage,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit,
-    onOpenPlace: (String) -> Unit,
-    onOpenCharacter: (Int) -> Unit,
-    onShowPlace: () -> Unit,
-    onShowObject: (Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val versionGroup = page.game.versionGroupIdentifier
+    val onShowObject = { objectId: Int -> onAction(PlaceAction.ShowObject(objectId)) }
     Column(
         modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(page.map.name, style = MaterialTheme.typography.headlineMedium)
-            Text(
-                stringResource(if (page.map.parentId != null) R.string.place_outdoor else R.string.place_indoor),
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Button(onClick = onShowPlace) {
-                Icon(
-                    painterResource(R.drawable.ic_map),
-                    contentDescription = null,
-                    modifier = Modifier.padding(end = 8.dp)
-                )
-                Text(stringResource(R.string.show_on_map))
-            }
-        }
+        PlaceHeader(page) { onAction(PlaceAction.ShowPlace) }
         SheetSection(stringResource(R.string.label_wild_pokemon)) {
-            if (page.encounters.isEmpty()) {
+            if (state.encounterGroups.isEmpty()) {
                 Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 EncounterGroups(
-                    page.encounters.groupByMethod(),
+                    state.encounterGroups,
                     title = { it.pokemonName },
                     iconPath = { Sprites.pokemonIcon(it.pokemonId) },
                     onClick = { onOpenPokemon(it.pokemonId) }
                 )
             }
         }
-        if (page.items.isNotEmpty()) {
-            SheetSection(stringResource(R.string.label_items)) {
-                page.items.forEach { obj ->
-                    val identifier = obj.itemIdentifier
-                    SheetRow(
-                        title = obj.itemName.orEmpty(),
-                        subtitle = stringResource(
-                            if (obj.kind == MapObjectKind.HIDDEN_ITEM) R.string.map_hidden_item else R.string.map_item
-                        ),
-                        onClick = identifier?.let { { onOpenItem(it) } },
-                        onShowOnMap = { onShowObject(obj.id) },
-                        content = {
-                            if (identifier != null) {
-                                PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
-                            }
-                        }
-                    )
-                }
-            }
+        ItemsSection(page, onOpenItem, onShowObject)
+        CharactersSection(page, onOpenPokemon, onOpenCharacter, onShowObject)
+        PlacesSection(page, onOpenPlace)
+        Spacer(Modifier.height(24.dp))
+    }
+}
+
+@Composable
+private fun PlaceHeader(page: PlacePage, onShowPlace: () -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(page.map.name, style = MaterialTheme.typography.headlineMedium)
+        Text(
+            stringResource(if (page.map.parentId != null) R.string.place_outdoor else R.string.place_indoor),
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Button(onClick = onShowPlace) {
+            Icon(
+                painterResource(R.drawable.ic_map),
+                contentDescription = null,
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Text(stringResource(R.string.show_on_map))
         }
-        if (page.characters.isNotEmpty()) {
-            SheetSection(stringResource(R.string.label_characters)) {
-                page.characters.forEach { obj ->
-                    val pokemonId = obj.pokemonId
-                    SheetRow(
-                        title = obj.displayName(),
-                        subtitle = when (obj.kind) {
-                            MapObjectKind.TRAINER -> stringResource(R.string.map_trainer)
-                            MapObjectKind.POKEMON -> stringResource(R.string.map_static_pokemon, obj.level ?: 0)
-                            else -> offersSummary(page.offers[obj.id].orEmpty())
-                        },
-                        onClick = {
-                            if (obj.kind == MapObjectKind.POKEMON && pokemonId != null) {
-                                onOpenPokemon(pokemonId)
-                            } else {
-                                onOpenCharacter(obj.id)
-                            }
-                        },
-                        onShowOnMap = { onShowObject(obj.id) },
-                        content = {
-                            if (obj.kind == MapObjectKind.POKEMON && pokemonId != null) {
-                                PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 52.dp, null)
-                            } else {
-                                CharacterSprite(obj, versionGroup)
-                            }
-                        }
-                    )
-                }
-            }
-        }
-        if (page.places.isNotEmpty()) {
-            SheetSection(stringResource(R.string.map_places)) {
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    page.places.forEach { place ->
-                        FilledTonalButton(onClick = { onOpenPlace(place.identifier) }) { Text(place.name) }
+    }
+}
+
+/** Objets posés dans le lieu, visibles ou cachés. */
+@Composable
+private fun ItemsSection(page: PlacePage, onOpenItem: (String) -> Unit, onShowObject: (Int) -> Unit) {
+    if (page.items.isEmpty()) return
+    SheetSection(stringResource(R.string.label_items)) {
+        page.items.forEach { obj ->
+            val identifier = obj.itemIdentifier
+            SheetRow(
+                title = obj.itemName.orEmpty(),
+                subtitle = stringResource(
+                    if (obj.kind == MapObjectKind.HIDDEN_ITEM) R.string.map_hidden_item else R.string.map_item
+                ),
+                onClick = identifier?.let { { onOpenItem(it) } },
+                onShowOnMap = { onShowObject(obj.id) },
+                content = {
+                    if (identifier != null) {
+                        PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
                     }
                 }
+            )
+        }
+    }
+}
+
+/** Dresseurs, personnages et Pokémon fixes du lieu. */
+@Composable
+private fun CharactersSection(
+    page: PlacePage,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenCharacter: (Int) -> Unit,
+    onShowObject: (Int) -> Unit
+) {
+    if (page.characters.isEmpty()) return
+    val versionGroup = page.game.versionGroupIdentifier
+    SheetSection(stringResource(R.string.label_characters)) {
+        page.characters.forEach { obj ->
+            val pokemonId = obj.pokemonId?.takeIf { obj.kind == MapObjectKind.POKEMON }
+            SheetRow(
+                title = obj.name,
+                subtitle = when (obj.kind) {
+                    MapObjectKind.TRAINER -> stringResource(R.string.map_trainer)
+
+                    MapObjectKind.POKEMON -> stringResource(R.string.map_static_pokemon, obj.level ?: 0)
+
+                    MapObjectKind.NPC, MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM ->
+                        offersSummary(page.offers[obj.id].orEmpty())
+                },
+                onClick = {
+                    if (pokemonId != null) onOpenPokemon(pokemonId) else onOpenCharacter(obj.id)
+                },
+                onShowOnMap = { onShowObject(obj.id) },
+                content = {
+                    if (pokemonId != null) {
+                        PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 52.dp, null)
+                    } else {
+                        CharacterSprite(obj, versionGroup)
+                    }
+                }
+            )
+        }
+    }
+}
+
+/** Lieux accessibles depuis celui-ci (bâtiments, grottes, étages, sorties). */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PlacesSection(page: PlacePage, onOpenPlace: (String) -> Unit) {
+    if (page.places.isEmpty()) return
+    SheetSection(stringResource(R.string.map_places)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            page.places.forEach { place ->
+                FilledTonalButton(onClick = { onOpenPlace(place.identifier) }) { Text(place.name) }
             }
         }
-        Spacer(Modifier.height(24.dp))
     }
 }

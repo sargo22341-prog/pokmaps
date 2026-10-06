@@ -31,16 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
-import org.opensources.pokmaps.ui.map.CharacterSprite
+import org.opensources.pokmaps.ui.common.offersSummary
 
 @Composable
-fun SearchScreen(
+fun SearchRoute(
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
     onOpenPlace: (String) -> Unit,
@@ -49,17 +49,30 @@ fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    SearchScreen(state, viewModel::onAction, onOpenPokemon, onOpenItem, onOpenPlace, onOpenCharacter, modifier)
+}
+
+@Composable
+fun SearchScreen(
+    state: SearchUiState,
+    onAction: (SearchAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    onOpenPlace: (String) -> Unit,
+    onOpenCharacter: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val focus = remember { FocusRequester() }
     LaunchedEffect(Unit) { focus.requestFocus() }
     Column(modifier.fillMaxSize()) {
         OutlinedTextField(
             value = state.query,
-            onValueChange = viewModel::search,
+            onValueChange = { onAction(SearchAction.Query(it)) },
             placeholder = { Text(stringResource(R.string.search_hint)) },
             leadingIcon = { Icon(painterResource(R.drawable.ic_search), contentDescription = null) },
             trailingIcon = {
                 if (state.query.isNotEmpty()) {
-                    IconButton(onClick = { viewModel.search("") }) {
+                    IconButton(onClick = { onAction(SearchAction.Query("")) }) {
                         Icon(painterResource(R.drawable.ic_close), stringResource(R.string.pokedex_clear_search))
                     }
                 }
@@ -109,7 +122,7 @@ private fun Results(
 ) {
     val versionGroup = state.game?.versionGroupIdentifier.orEmpty()
     LazyColumn(Modifier.fillMaxSize()) {
-        section(R.string.search_pokemon, state.pokemon) { entry ->
+        section(R.string.search_pokemon, state.pokemon, key = { "pokemon:${it.pokemonId}" }) { entry ->
             SheetRow(
                 title = entry.name,
                 subtitle = stringResource(R.string.pokedex_number, entry.number),
@@ -117,7 +130,7 @@ private fun Results(
                 content = { PixelArtImage(Sprites.pokemonIcon(entry.pokemonId), PixelArt.POKEMON_ICON, 52.dp, null) }
             )
         }
-        section(R.string.search_places, state.places) { place ->
+        section(R.string.search_places, state.places, key = { "place:${it.identifier}" }) { place ->
             SheetRow(
                 title = place.name,
                 subtitle = stringResource(if (place.outdoor) R.string.place_outdoor else R.string.place_indoor),
@@ -125,7 +138,7 @@ private fun Results(
                 content = { Icon(painterResource(R.drawable.ic_place), contentDescription = null) }
             )
         }
-        section(R.string.search_items, state.items) { item ->
+        section(R.string.search_items, state.items, key = { "item:${it.identifier}" }) { item ->
             SheetRow(
                 title = item.name,
                 subtitle = item.moveName,
@@ -137,7 +150,7 @@ private fun Results(
                 }
             )
         }
-        section(R.string.search_characters, state.characters) { character ->
+        section(R.string.search_characters, state.characters, key = { "character:${it.obj.id}" }) { character ->
             SheetRow(
                 title = character.name,
                 subtitle = listOf(character.mapName, offersSummary(character.offers))
@@ -150,34 +163,13 @@ private fun Results(
     }
 }
 
-private fun <T> LazyListScope.section(title: Int, results: List<T>, row: @Composable (T) -> Unit) {
+/** Section de résultats ; `key` identifie un résultat de façon unique dans toute la liste. */
+private fun <T> LazyListScope.section(title: Int, results: List<T>, key: (T) -> String, row: @Composable (T) -> Unit) {
     if (results.isEmpty()) return
     item(key = "title:$title") {
         SheetSection(stringResource(title, results.size)) {}
     }
-    items(results) { result ->
+    items(results, key = key) { result ->
         Column(Modifier.padding(horizontal = 16.dp)) { row(result) }
     }
-}
-
-/** « Donne CT28 · Vend Poké Ball, Potion · Échange Lippoutou » */
-@Composable
-fun offersSummary(offers: List<OfferLink>): String {
-    fun names(kind: String, name: (OfferLink) -> String?) =
-        offers.filter { it.kind == kind }.mapNotNull(name).distinct().joinToString(", ")
-
-    val gifts = offers.mapNotNull {
-        when (it.kind) {
-            OfferLink.GIFT_ITEM -> it.itemName
-            OfferLink.GIFT_POKEMON -> it.pokemonName
-            else -> null
-        }
-    }.distinct().joinToString(", ")
-    val sales = names(OfferLink.SALE) { it.itemName }
-    val trades = names(OfferLink.TRADE) { it.pokemonName }
-    return listOfNotNull(
-        gifts.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_gifts, it) },
-        sales.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_sales, it) },
-        trades.takeIf { it.isNotEmpty() }?.let { stringResource(R.string.offer_summary_trades, it) }
-    ).joinToString(" · ")
 }

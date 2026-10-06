@@ -1,10 +1,11 @@
-"""Assemblage des tables relatives aux cartes generees."""
+"""Assemblage des tables relatives aux cartes générées."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .maps import GameMapData, identifier
+from .maps import CharacterNames, GameMapData, ObjectRow, read_character_names
+from .maps_layout import identifier
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -12,10 +13,10 @@ if TYPE_CHECKING:
 
 def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     vg_ids = {row["identifier"]: int(row["id"]) for row in builder.vg_rows}
-    area_ids = {key: area_id for area_id, key in builder.area_keys.items()}
-    species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
-    known_areas = {row[0] for row in builder.location_area_table()}
-    maps, areas, warps, objects, parties, offers, spots = [], [], [], [], [], [], []
+    area_ids = {key: area_id for area_id, key in builder.encounters.area_keys.items()}
+    known_areas = {row[0] for row in builder.encounters.location_area_table()}
+    objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()))
+    maps, areas, warps, spots = [], [], [], []
     for version_group, data in builder.map_data.items():
         vg = vg_ids[version_group]
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
@@ -23,53 +24,70 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         areas.extend(game_areas)
         warps.extend(game_warps)
         for obj in data.objects:
-            for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
-                p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
-            ]:
-                if name and name not in species:
-                    raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {name}")
-            object_id = len(objects) + 1
-            for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
-                move_ids = [builder.move_id(move) for move in moves] + [None] * (4 - len(moves))
-                parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
-            for offer in obj.offers:
-                offers.append(
-                    (
-                        len(offers) + 1,
-                        object_id,
-                        offer.kind,
-                        offer.item and builder.offer_item_ids[offer.item],
-                        offer.pokemon and species[offer.pokemon],
-                        offer.quantity,
-                        offer.price,
-                        offer.wanted and species[offer.wanted],
-                    )
-                )
-            objects.append(
-                (
-                    len(objects) + 1,
-                    ids[obj.map_const],
-                    obj.kind,
-                    obj.x,
-                    obj.y,
-                    obj.sprite,
-                    obj.item and builder.map_item_ids[obj.item],
-                    obj.pokemon and species[obj.pokemon],
-                    obj.level,
-                    obj.trainer_class,
-                )
-            )
+            objects.add(obj, ids[obj.map_const])
         for spot in data.spots:
             spots.append((len(spots) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
     return {
         "map": maps,
         "map_area": sorted(set(areas)),
         "map_warp": warps,
-        "map_object": objects,
-        "trainer_pokemon": parties,
-        "npc_offer": offers,
+        "map_object": objects.objects,
+        "trainer_pokemon": objects.parties,
+        "npc_offer": objects.offers,
         "map_spot": spots,
     }
+
+
+class _ObjectRows:
+    """Lignes des objets de carte, des équipes de dresseurs et des offres de personnages."""
+
+    def __init__(self, builder: DatabaseBuilder, names: _ObjectNames) -> None:
+        self.builder = builder
+        self.names = names
+        self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
+        self.objects: list[tuple] = []
+        self.parties: list[tuple] = []
+        self.offers: list[tuple] = []
+
+    def add(self, obj: ObjectRow, map_id: int) -> None:
+        species = self.species
+        for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
+            p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
+        ]:
+            if name and name not in species:
+                raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {name}")
+        object_id = len(self.objects) + 1
+        for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
+            move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
+            self.parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
+        for offer in obj.offers:
+            self.offers.append(
+                (
+                    len(self.offers) + 1,
+                    object_id,
+                    offer.kind,
+                    offer.item and self.builder.items.offer_item_ids[offer.item],
+                    offer.pokemon and species[offer.pokemon],
+                    offer.quantity,
+                    offer.price,
+                    offer.wanted and species[offer.wanted],
+                )
+            )
+        self.objects.append(
+            (
+                object_id,
+                map_id,
+                obj.kind,
+                obj.x,
+                obj.y,
+                obj.sprite,
+                obj.item and self.builder.items.map_item_ids[obj.item],
+                obj.pokemon and species[obj.pokemon],
+                obj.level,
+                obj.trainer_class,
+                self.names.of(obj),
+            )
+        )
 
 
 def _map_rows(
@@ -109,4 +127,21 @@ def _map_rows(
     return maps, areas, warps, ids
 
 
-# --- Écriture -------------------------------------------------------------
+class _ObjectNames:
+    """Nom affiché de chaque objet de carte : un nom manquant arrête la génération."""
+
+    def __init__(self, builder: DatabaseBuilder, characters: CharacterNames) -> None:
+        self.characters = characters
+        self.pokemon = builder.api.names("pokemon_species_names", "pokemon_species_id")
+        self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
+        self.items = builder.api.names("item_names", "item_id")
+        self.item_ids = builder.items.map_item_ids
+
+    def of(self, obj: ObjectRow) -> str:
+        if obj.kind == "trainer" and obj.trainer_class:
+            return self.characters.trainer(obj.trainer_class)
+        if obj.kind == "pokemon" and obj.pokemon:
+            return self.pokemon[self.species[obj.pokemon]]
+        if obj.kind in ("item", "hidden_item") and obj.item:
+            return self.items[self.item_ids[obj.item]]
+        return self.characters.character(obj.sprite)

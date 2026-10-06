@@ -1,0 +1,82 @@
+package org.opensources.pokmaps.ui.place
+
+import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Rule
+import org.junit.Test
+import org.opensources.pokmaps.data.db.FakeGameDao
+import org.opensources.pokmaps.data.db.FakeMapDao
+import org.opensources.pokmaps.data.repository.GameRepository
+import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.data.settings.FakeDataStore
+import org.opensources.pokmaps.data.settings.GameSettings
+import org.opensources.pokmaps.domain.usecase.MapRequest
+import org.opensources.pokmaps.domain.usecase.MapRequests
+import org.opensources.pokmaps.domain.usecase.ObservePlacePageUseCase
+import org.opensources.pokmaps.ui.MainDispatcherRule
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class PlaceViewModelTest {
+    @get:Rule
+    val mainDispatcher = MainDispatcherRule()
+
+    private val requests = MapRequests()
+
+    private fun viewModel(identifier: String, failing: Boolean = false): PlaceViewModel {
+        val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
+        return PlaceViewModel(
+            SavedStateHandle(mapOf(PlaceViewModel.PLACE to identifier)),
+            ObservePlacePageUseCase(games, MapRepository(FakeMapDao(failing))),
+            requests
+        )
+    }
+
+    @Test
+    fun startsLoading() {
+        assertEquals(PlaceUiState(), viewModel("route-1").state.value)
+    }
+
+    @Test
+    fun placePageGroupsItsEncountersAndListsItsContent() = runTest {
+        val viewModel = viewModel("route-1")
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val state = viewModel.state.value
+        val page = checkNotNull(state.page)
+        assertEquals(listOf("Marche"), state.encounterGroups.map { it.methodName })
+        assertEquals(listOf(FakeMapDao.ITEM), page.items.map { it.id })
+        assertEquals(listOf(FakeMapDao.TRAINER), page.characters.map { it.id })
+        viewModel.onAction(PlaceAction.ShowPlace)
+        assertEquals(MapRequest.OpenPlace("route-1"), requests.pending.value)
+    }
+
+    @Test
+    fun aPlaceWithoutEncounterHasNoGroup() = runTest {
+        val viewModel = viewModel("viridian-mart")
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertTrue(viewModel.state.value.encounterGroups.isEmpty())
+        assertEquals(listOf(FakeMapDao.CLERK), checkNotNull(viewModel.state.value.page).characters.map { it.id })
+    }
+
+    @Test
+    fun anUnknownPlaceIsNotFoundNotAnError() = runTest {
+        val viewModel = viewModel("cinnabar-island")
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertNull(viewModel.state.value.page)
+        assertFalse(viewModel.state.value.failed)
+        assertFalse(viewModel.state.value.loading)
+    }
+
+    @Test
+    fun anUnreadableDatabaseIsAnError() = runTest {
+        val viewModel = viewModel("route-1", failing = true)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertTrue(viewModel.state.value.failed)
+    }
+}

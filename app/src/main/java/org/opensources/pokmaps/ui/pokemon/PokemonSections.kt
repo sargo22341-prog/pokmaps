@@ -200,7 +200,7 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
-        Text("⟶", color = color, style = MaterialTheme.typography.titleLarge)
+        Text(stringResource(R.string.evolution_arrow), color = color, style = MaterialTheme.typography.titleLarge)
     }
 }
 

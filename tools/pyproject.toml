@@ -9,9 +9,11 @@ line-length = 120
 target-version = "py311"
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "ANN"]
 ignore = ["RUF001", "RUF002", "RUF003"]  # caractères typographiques français (’, –, …)
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Les tests importent pokemaps_data depuis tools/, quel que soit le dossier de lancement.
+pythonpath = ["."]
 filterwarnings = ["error"]

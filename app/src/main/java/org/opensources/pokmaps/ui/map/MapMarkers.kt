@@ -3,6 +3,7 @@ package org.opensources.pokmaps.ui.map
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -18,6 +19,7 @@ import androidx.compose.ui.layout.FixedScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalResources
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
@@ -27,6 +29,7 @@ import coil3.asDrawable
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size as CoilSize
+import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Sprites
@@ -110,11 +113,31 @@ fun ObjectMarker(
 
             else -> Box(Modifier.size(mapPixels(mapState, TILE_PX / 2 * scale)).background(Color.White, CircleShape))
         }
-        when (obj.kind) {
-            MapObjectKind.HIDDEN_ITEM -> Badge(mapState, "?", HIDDEN_COLOR, Modifier.align(Alignment.BottomEnd), scale)
-            MapObjectKind.TRAINER -> Badge(mapState, "!", TRAINER_COLOR, Modifier.align(Alignment.TopEnd), scale)
-            else -> Unit
-        }
+        KindBadge(mapState, obj.kind, scale)
+    }
+}
+
+/** Repère d'un objet caché (« ? ») ou d'un dresseur (« ! »), dans un coin du marqueur. */
+@Composable
+private fun BoxScope.KindBadge(mapState: MapState, kind: MapObjectKind, scale: Float) {
+    when (kind) {
+        MapObjectKind.HIDDEN_ITEM -> Badge(
+            mapState,
+            stringResource(R.string.map_badge_hidden),
+            HIDDEN_COLOR,
+            Modifier.align(Alignment.BottomEnd),
+            scale
+        )
+
+        MapObjectKind.TRAINER -> Badge(
+            mapState,
+            stringResource(R.string.map_badge_trainer),
+            TRAINER_COLOR,
+            Modifier.align(Alignment.TopEnd),
+            scale
+        )
+
+        MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC -> Unit
     }
 }
 

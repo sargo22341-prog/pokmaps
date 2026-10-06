@@ -9,7 +9,9 @@ enum class SpotKind(val identifier: String) {
     FLOOR("floor");
 
     companion object {
-        fun from(identifier: String): SpotKind? = entries.firstOrNull { it.identifier == identifier }
+        fun from(identifier: String): SpotKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {
+            "Terrain inconnu : $identifier"
+        }
     }
 }
 
@@ -51,10 +53,24 @@ data class ItemSummary(
     val moveName: String?
 )
 
+/** Nature d'une offre de personnage (colonne npc_offer.kind). */
+enum class OfferKind(val identifier: String) {
+    GIFT_ITEM("gift_item"),
+    GIFT_POKEMON("gift_pokemon"),
+    SALE("sale"),
+    TRADE("trade");
+
+    companion object {
+        fun from(identifier: String): OfferKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {
+            "Type d'offre inconnu : $identifier"
+        }
+    }
+}
+
 /** Don, vente ou échange d'un personnage de la carte, avec les noms des objets et des Pokémon. */
 data class OfferLink(
     val objectId: Int,
-    val kind: String,
+    val kind: OfferKind,
     val itemIdentifier: String?,
     val itemName: String?,
     val pokemonId: Int?,
@@ -62,14 +78,7 @@ data class OfferLink(
     val wantedPokemonName: String?,
     val price: Int?,
     val quantity: Int?
-) {
-    companion object {
-        const val GIFT_ITEM = "gift_item"
-        const val GIFT_POKEMON = "gift_pokemon"
-        const val SALE = "sale"
-        const val TRADE = "trade"
-    }
-}
+)
 
 /** Objets et offres des personnages d'un jeu, parcourus par la recherche et les fiches. */
 data class GameIndex(val items: List<ItemSummary>, val offers: List<OfferLink>)

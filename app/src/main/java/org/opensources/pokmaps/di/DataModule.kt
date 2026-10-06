@@ -19,6 +19,8 @@ import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.PokedexDao
 import org.opensources.pokmaps.data.db.PokedexDatabase
 import org.opensources.pokmaps.data.db.PokemonDao
+import org.opensources.pokmaps.data.map.AssetFiles
+import org.opensources.pokmaps.data.map.AssetManagerFiles
 
 internal val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -54,6 +56,9 @@ object DataModule {
 
     @Provides
     fun assets(@ApplicationContext context: Context): AssetManager = context.assets
+
+    @Provides
+    fun assetFiles(files: AssetManagerFiles): AssetFiles = files
 }
 
 /**

@@ -306,6 +306,7 @@ CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 -- Objets et personnages d'une carte. kind : item (objet ramassable), hidden_item (objet caché),
 -- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau)
 -- ou npc. sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.png.
+-- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon ou objet).
 CREATE TABLE map_object (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,
@@ -316,7 +317,8 @@ CREATE TABLE map_object (
     item_id INTEGER,
     pokemon_id INTEGER,
     level INTEGER,
-    trainer_class TEXT
+    trainer_class TEXT,
+    name_fr TEXT NOT NULL
 );
 CREATE INDEX index_map_object_map_id ON map_object (map_id);
 CREATE INDEX index_map_object_item_id ON map_object (item_id);

@@ -68,6 +68,18 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        // Tout avertissement du compilateur bloque la build (AGENTS.md, règle 10).
+        allWarningsAsErrors.set(true)
+        // Valeur de retour ignorée d'une fonction marquée @MustUseReturnValue (bibliothèque standard comprise).
+        freeCompilerArgs.add("-Xreturn-value-checker=check")
+        // extraWarnings reste désactivé : il ne signale rien dans notre code, mais 30 avertissements dans le code
+        // généré par Room (CAN_BE_VAL, REDUNDANT_VISIBILITY_MODIFIER), qu'on ne peut ni corriger ni exclure
+        // localement ; les faire taire demanderait une suppression globale, interdite par la règle 10.
+    }
+}
+
 ksp {
     // Schéma exporté par Room : PokedexSchemaTest le compare à la base générée par tools/build_data.py.
     arg("room.schemaLocation", layout.buildDirectory.dir("room-schemas").get().asFile.path)

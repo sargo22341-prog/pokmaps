@@ -22,7 +22,7 @@ import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokedexUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
-import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class PokedexUiState(
     val loading: Boolean = true,
@@ -36,6 +36,29 @@ data class PokedexUiState(
     val types: List<PokemonType> = emptyList(),
     val filter: PokedexFilter = PokedexFilter()
 )
+
+/** Intentions de l'écran du Pokédex. */
+sealed interface PokedexAction {
+    data class Search(val query: String) : PokedexAction
+
+    data class FilterType(val typeId: Int?) : PokedexAction
+
+    data class FilterMethod(val method: ObtainMethod?) : PokedexAction
+
+    data class FilterCaught(val caught: CaughtFilter) : PokedexAction
+
+    data object ToggleAvailableOnly : PokedexAction
+
+    data object ToggleFavoritesOnly : PokedexAction
+
+    /** Efface les filtres, en gardant la recherche. */
+    data object ResetFilters : PokedexAction
+
+    /** Coche ou décoche « capturé » dans la version choisie. */
+    data class ToggleCaught(val entry: PokedexEntry) : PokedexAction
+
+    data class ToggleFavorite(val entry: PokedexEntry) : PokedexAction
+}
 
 @HiltViewModel
 class PokedexViewModel @Inject constructor(
@@ -66,27 +89,26 @@ class PokedexViewModel @Inject constructor(
         }.catch { emit(PokedexUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokedexUiState())
 
-    fun search(query: String) = filter.update { it.copy(query = query) }
+    fun onAction(action: PokedexAction) {
+        when (action) {
+            is PokedexAction.Search -> filter.update { it.copy(query = action.query) }
+            is PokedexAction.FilterType -> filter.update { it.copy(typeId = action.typeId) }
+            is PokedexAction.FilterMethod -> filter.update { it.copy(method = action.method) }
+            is PokedexAction.FilterCaught -> filter.update { it.copy(caught = action.caught) }
+            PokedexAction.ToggleAvailableOnly -> filter.update { it.copy(availableOnly = !it.availableOnly) }
+            PokedexAction.ToggleFavoritesOnly -> filter.update { it.copy(favoritesOnly = !it.favoritesOnly) }
+            PokedexAction.ResetFilters -> filter.update { PokedexFilter(query = it.query) }
+            is PokedexAction.ToggleCaught -> toggleCaught(action.entry)
+            is PokedexAction.ToggleFavorite -> toggleFavorite(action.entry)
+        }
+    }
 
-    fun filterType(typeId: Int?) = filter.update { it.copy(typeId = typeId) }
-
-    fun filterMethod(method: ObtainMethod?) = filter.update { it.copy(method = method) }
-
-    fun toggleAvailableOnly() = filter.update { it.copy(availableOnly = !it.availableOnly) }
-
-    fun filterCaught(caught: CaughtFilter) = filter.update { it.copy(caught = caught) }
-
-    fun toggleFavoritesOnly() = filter.update { it.copy(favoritesOnly = !it.favoritesOnly) }
-
-    /** Coche ou décoche « capturé » dans la version choisie. */
-    fun toggleCaught(entry: PokedexEntry) {
+    private fun toggleCaught(entry: PokedexEntry) {
         val game = state.value.game ?: return
         viewModelScope.launch { updateCollection.setCaught(game, entry.pokemonId, !entry.caught) }
     }
 
-    fun toggleFavorite(entry: PokedexEntry) {
+    private fun toggleFavorite(entry: PokedexEntry) {
         viewModelScope.launch { updateCollection.setFavorite(entry.pokemonId, !entry.favorite) }
     }
-
-    fun resetFilters() = filter.update { PokedexFilter(query = it.query) }
 }

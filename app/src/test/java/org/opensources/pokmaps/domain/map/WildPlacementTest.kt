@@ -1,12 +1,9 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.map
 
 import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.opensources.pokmaps.domain.map.Footprint
-import org.opensources.pokmaps.domain.map.MarkerSizing
-import org.opensources.pokmaps.domain.map.WildPlacement
 
 class WildPlacementTest {
     private val spots = (0 until 20).map { it * 48 to it * 32 }

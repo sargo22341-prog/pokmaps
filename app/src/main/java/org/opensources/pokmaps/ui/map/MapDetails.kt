@@ -27,9 +27,14 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
+import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.MoveLine
+import org.opensources.pokmaps.ui.common.Offers
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.SectionTitle
+import org.opensources.pokmaps.ui.common.TrainerPokemonRow
 
 /** Fiche de l'élément touché sur la carte, en bas d'écran (la carte reste utilisable). */
 @Composable
@@ -172,12 +177,12 @@ private fun CharacterDetails(
             if (pokemonId != null) DetailPokemonImage(pokemonId, animated)
         }
 
-        MapObjectKind.TRAINER -> DetailHeader(
-            stringResource(R.string.map_trainer),
-            obj.trainerClass?.let(::trainerClassName).orEmpty()
-        ) { CharacterSprite(obj, versionGroupIdentifier) }
+        MapObjectKind.TRAINER -> DetailHeader(stringResource(R.string.map_trainer), obj.name) {
+            CharacterSprite(obj, versionGroupIdentifier)
+        }
 
-        else -> DetailHeader("", npcName(obj.sprite)) { CharacterSprite(obj, versionGroupIdentifier) }
+        MapObjectKind.NPC, MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM ->
+            DetailHeader("", obj.name) { CharacterSprite(obj, versionGroupIdentifier) }
     }
     if (pokemonId != null) {
         Button(onClick = { onOpenPokemon(pokemonId) }) {

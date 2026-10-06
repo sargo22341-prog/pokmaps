@@ -11,15 +11,18 @@ enum class ObtainMethod {
     EVOLUTION;
 
     companion object {
-        /** Méthode de rencontre PokéAPI (encounter_method.identifier), null si inconnue. */
-        fun fromEncounterMethod(identifier: String): ObtainMethod? = when (identifier) {
+        /**
+         * Méthode de rencontre PokéAPI (encounter_method.identifier). Une méthode inconnue (nouveau jeu) est une
+         * erreur : elle doit être classée ici pour que ses Pokémon restent visibles dans les filtres.
+         */
+        fun fromEncounterMethod(identifier: String): ObtainMethod = when (identifier) {
             "walk" -> WALK
             "old-rod", "good-rod", "super-rod" -> FISHING
             "surf" -> SURF
             "gift", "gift-egg" -> GIFT
             "static", "pokeflute" -> STATIC
             "npc-trade" -> TRADE
-            else -> null
+            else -> throw IllegalArgumentException("Méthode de rencontre inconnue : $identifier")
         }
     }
 }

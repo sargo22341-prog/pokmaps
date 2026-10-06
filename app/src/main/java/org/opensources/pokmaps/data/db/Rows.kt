@@ -89,7 +89,8 @@ data class MapObjectRow(
     val pokemonId: Int?,
     val pokemonName: String?,
     val level: Int?,
-    val trainerClass: String?
+    val trainerClass: String?,
+    val name: String
 )
 
 data class MapAreaRow(val mapId: Int, val areaId: Int, val name: String)

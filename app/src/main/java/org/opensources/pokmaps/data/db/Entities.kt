@@ -406,7 +406,8 @@ data class MapObjectEntity(
     @ColumnInfo(name = "item_id") val itemId: Int?,
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int?,
     val level: Int?,
-    @ColumnInfo(name = "trainer_class") val trainerClass: String?
+    @ColumnInfo(name = "trainer_class") val trainerClass: String?,
+    @ColumnInfo(name = "name_fr") val nameFr: String
 )
 
 @Entity(

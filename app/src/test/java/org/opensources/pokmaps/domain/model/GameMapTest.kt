@@ -1,11 +1,9 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.model
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.opensources.pokmaps.domain.model.GameMap
-import org.opensources.pokmaps.domain.model.MapRegion
 
 class GameMapTest {
     private val map = GameMap(1999, "kanto", "Kanto", "red-blue", 5440, 5760, 6)

@@ -7,3 +7,4 @@ Voir la section publication de `README.md`.
 <!-- notes -->
 - Les écrans signalent désormais les erreurs de chargement des données.
 - Les textes suivent une typographie française cohérente et l’icône s’adapte aux masques ronds.
+- La carte et les réglages signalent aussi leurs erreurs de lecture au lieu de fermer l’application.

@@ -1,12 +1,8 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.map
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.opensources.pokmaps.domain.map.Footprint
-import org.opensources.pokmaps.domain.map.MapObject
-import org.opensources.pokmaps.domain.map.MapObjectKind
-import org.opensources.pokmaps.domain.map.MarkerSizing
 
 class MarkerSizingTest {
     @Test
@@ -48,7 +44,7 @@ class MarkerSizingTest {
     @Test
     fun objectsOfAPlaceAreSizedTogether() {
         fun obj(id: Int, mapId: Int, x: Int, item: String? = null) =
-            MapObject(id, mapId, MapObjectKind.ITEM, x, 0, null, null, item, null, null, null, null, null)
+            MapObject(id, mapId, MapObjectKind.ITEM, x, 0, null, null, item, null, null, null, null, null, "Potion")
         // Objets à une case l'un de l'autre dans un lieu, bien espacés dans l'autre.
         val tight = (0 until 4).map { obj(it, mapId = 1, x = it * 16, item = "potion") }
         val loose = (0 until 4).map { obj(10 + it, mapId = 2, x = it * 100, item = "potion") }

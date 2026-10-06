@@ -3,6 +3,7 @@ package org.opensources.pokmaps.domain.usecase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.settings.MapSettings
@@ -15,6 +16,8 @@ import org.opensources.pokmaps.domain.map.PokemonPlaces
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.GameMap
+import ovh.plrapps.mapcompose.core.TileStreamProvider
 
 /** Cartes du jeu choisi. */
 data class GameMaps(val game: Game, val catalog: MapCatalog)
@@ -60,6 +63,11 @@ class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapReposi
     suspend fun offers(objectId: Int): List<NpcOffer> = maps.offers(objectId)
 
     suspend fun item(game: Game, itemId: Int): ItemDetails? = maps.item(game, itemId)
+}
+
+/** Tuiles d'une carte affichable, lues dans les assets. */
+class GetMapTilesUseCase @Inject constructor(private val tiles: MapTiles) {
+    operator fun invoke(map: GameMap): TileStreamProvider = tiles.provider(map)
 }
 
 /** Filtres de la carte choisis par l'utilisateur (tous affichés par défaut). */

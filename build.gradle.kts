@@ -51,7 +51,3 @@ tasks.register<JavaExec>("ktlintFormat") {
     mainClass.set("com.pinterest.ktlint.Main")
     args = listOf("-F", "--relative") + ktlintPatterns
 }
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
-    compilerOptions.allWarningsAsErrors.set(true)
-}

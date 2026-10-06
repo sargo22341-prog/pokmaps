@@ -20,6 +20,7 @@ import org.opensources.pokmaps.domain.map.MapSpot
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
@@ -62,12 +63,13 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                     pokemonId = it.pokemonId,
                     pokemonName = it.pokemonName,
                     level = it.level,
-                    trainerClass = it.trainerClass
+                    trainerClass = it.trainerClass,
+                    name = it.name
                 )
             }.groupBy { it.mapId },
             areas = dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
-            spots = dao.spots(vg).mapNotNull { spot ->
-                SpotKind.from(spot.kind)?.let { MapSpot(spot.mapId, it, spot.x, spot.y) }
+            spots = dao.spots(vg).map { spot ->
+                MapSpot(spot.mapId, SpotKind.from(spot.kind), spot.x, spot.y)
             }.groupBy { it.mapId }
         )
     }
@@ -81,7 +83,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                 offers = dao.offerLinks(vg).map {
                     OfferLink(
                         objectId = it.objectId,
-                        kind = it.kind,
+                        kind = OfferKind.from(it.kind),
                         itemIdentifier = it.itemIdentifier,
                         itemName = it.itemName,
                         pokemonId = it.pokemonId,
@@ -138,36 +140,29 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     }
 
     /** Dons, ventes et échanges d'un personnage. */
-    suspend fun offers(objectId: Int): List<NpcOffer> = dao.offers(objectId).mapNotNull { it.toOffer() }
+    suspend fun offers(objectId: Int): List<NpcOffer> = dao.offers(objectId).map { it.toOffer() }
 
-    private fun NpcOfferRow.toOffer(): NpcOffer? {
-        val item = if (itemId != null && itemIdentifier != null && itemName != null) {
-            OfferItem(itemId, itemIdentifier, itemName, itemHasSprite == true)
-        } else {
-            null
-        }
-        return when (kind) {
-            "gift_item" -> item?.let { NpcOffer.GiftItem(it, quantity ?: 1) }
+    /** Offre lue dans la base ; une ligne incomplète est une erreur (la base est validée à la génération). */
+    private fun NpcOfferRow.toOffer(): NpcOffer = when (OfferKind.from(kind)) {
+        OfferKind.GIFT_ITEM -> NpcOffer.GiftItem(offerItem(), quantity ?: 1)
 
-            "sale" -> item?.let { NpcOffer.Sale(it, price) }
+        OfferKind.SALE -> NpcOffer.Sale(offerItem(), price)
 
-            "gift_pokemon" -> if (pokemonId != null && pokemonName != null) {
-                NpcOffer.GiftPokemon(pokemonId, pokemonName, quantity)
-            } else {
-                null
-            }
+        OfferKind.GIFT_POKEMON -> NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity)
 
-            "trade" -> if (pokemonId != null && pokemonName != null && wantedPokemonId != null &&
-                wantedPokemonName != null
-            ) {
-                NpcOffer.Trade(pokemonId, pokemonName, wantedPokemonId, wantedPokemonName)
-            } else {
-                null
-            }
-
-            else -> null
-        }
+        OfferKind.TRADE -> NpcOffer.Trade(
+            required(pokemonId),
+            required(pokemonName),
+            required(wantedPokemonId),
+            required(wantedPokemonName)
+        )
     }
+
+    private fun NpcOfferRow.offerItem() =
+        OfferItem(required(itemId), required(itemIdentifier), required(itemName), itemHasSprite == true)
+
+    private fun <T : Any> NpcOfferRow.required(value: T?): T =
+        checkNotNull(value) { "Offre $kind incomplète dans la base" }
 
     /** Description d'un objet, ou attaque de la CT / CS dans le jeu. */
     suspend fun item(game: Game, itemId: Int): ItemDetails? = dao.item(itemId, game.versionGroupId)?.let { row ->

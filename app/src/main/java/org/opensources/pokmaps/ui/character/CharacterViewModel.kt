@@ -14,9 +14,15 @@ import org.opensources.pokmaps.domain.usecase.CharacterPage
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCharacterPageUseCase
-import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class CharacterUiState(val loading: Boolean = true, val page: CharacterPage? = null, val failed: Boolean = false)
+
+/** Intentions de la fiche d'un personnage. */
+sealed interface CharacterAction {
+    /** Montre le personnage sur la carte, dans son bâtiment. */
+    data object ShowOnMap : CharacterAction
+}
 
 /** Fiche d'un personnage ou d'un dresseur. */
 @HiltViewModel
@@ -32,7 +38,11 @@ class CharacterViewModel @Inject constructor(
         .catch { emit(CharacterUiState(loading = false, failed = true)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), CharacterUiState())
 
-    fun showOnMap() = mapRequests.send(MapRequest.FocusObject(objectId))
+    fun onAction(action: CharacterAction) {
+        when (action) {
+            CharacterAction.ShowOnMap -> mapRequests.send(MapRequest.FocusObject(objectId))
+        }
+    }
 
     companion object {
         const val CHARACTER = "character"

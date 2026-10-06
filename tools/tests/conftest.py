@@ -1,19 +1,17 @@
 import sqlite3
-import sys
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
 
+from pokemaps_data import sources
+from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.maps import build_maps
+from pokemaps_data.pokeapi import PokeApi
+from pokemaps_data.sources import PRET_COMMITS, fetch_pokeapi_csv
+from pokemaps_data.sprites import build_sprites
+
 TOOLS = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(TOOLS))
-
-from pokemaps_data import sources  # noqa: E402
-from pokemaps_data.builder import DatabaseBuilder  # noqa: E402
-from pokemaps_data.maps import build_maps  # noqa: E402
-from pokemaps_data.pokeapi import PokeApi  # noqa: E402
-from pokemaps_data.sources import PRET_COMMITS, fetch_pokeapi_csv  # noqa: E402
-from pokemaps_data.sprites import build_sprites  # noqa: E402
-
 CACHE = TOOLS / ".cache"
 
 
@@ -26,12 +24,12 @@ def no_network(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 @pytest.fixture(scope="session")
-def assets_root(tmp_path_factory) -> Path:
+def assets_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return tmp_path_factory.mktemp("assets")
 
 
 @pytest.fixture(scope="session")
-def builder(assets_root, source_cache_ready) -> DatabaseBuilder:
+def builder(assets_root: Path, source_cache_ready: None) -> DatabaseBuilder:
     map_data = build_maps(CACHE, assets_root / "maps")
     return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), map_data=map_data)
 
@@ -49,7 +47,7 @@ def source_cache_ready() -> None:
 
 
 @pytest.fixture(scope="session")
-def assets(builder, assets_root) -> Path:
+def assets(builder: DatabaseBuilder, assets_root: Path) -> Path:
     root = assets_root
     item_sprites = build_sprites(builder, CACHE, root / "sprites")
     builder.write(root / "database/pokedex.db", item_sprites)
@@ -57,12 +55,12 @@ def assets(builder, assets_root) -> Path:
 
 
 @pytest.fixture(scope="session")
-def database(assets) -> Path:
+def database(assets: Path) -> Path:
     return assets / "database/pokedex.db"
 
 
 @pytest.fixture()
-def db(database):
+def db(database: Path) -> Iterator[sqlite3.Connection]:
     connection = sqlite3.connect(database)
     yield connection
     connection.close()

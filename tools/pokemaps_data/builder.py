@@ -1,56 +1,29 @@
-"""Construit les tables de pokedex.db à partir des CSV PokéAPI et des corrections de tools/data/."""
+"""Construit les tables de pokedex.db à partir des CSV PokéAPI et des corrections de tools/data/.
+
+`DatabaseBuilder` porte les référentiels communs (jeux, espèces, types, Pokédex) et coordonne
+l'écriture ; chaque famille de tables vit dans son module `builder_<sujet>.py`.
+"""
 
 from __future__ import annotations
 
-import csv
 import sqlite3
 from collections import defaultdict
-from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 
-from .games import GAMES, ONE_OFF_METHODS, Game
+from .builder_encounters import EncounterTables
+from .builder_items import ItemTables
+from .builder_maps import build_map_tables
+from .builder_moves import MoveTables
+from .builder_pokemon import PokemonTables
+from .games import GAMES, Game
 from .maps import GameMapData
-from .pokeapi import ENGLISH, PokeApi, clean_text, optional_int
+from .pokeapi import PokeApi, optional_int, value_at
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 SCHEMA = Path(__file__).with_name("schema.sql")
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-
-# Stats affichées par génération : la 1re génération a une seule stat « Spécial » (id 9).
-GEN1_STATS = (1, 2, 3, 6, 9)
-MODERN_STATS = (1, 2, 3, 4, 5, 6)
-STAT_NAME_FALLBACK = {9: "Spécial"}
-
-# Catégories d'objets toujours incluses (en plus des objets d'évolution et des CT/CS).
-BALL_CATEGORIES = ("standard-balls", "special-balls")
-
-# Jusqu'à la 3e génération, la catégorie physique / spéciale d'une attaque dépend de son type.
-LAST_TYPE_BASED_DAMAGE_CLASS_GENERATION = 3
-DAMAGE_CLASSES = {1: "status", 2: "physical", 3: "special"}
-
-# Attaques dont la constante pret ne correspond pas à l'identifiant PokéAPI (une fois les tirets retirés).
-MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick"}
-
-
-def _area_key(location_identifier: str, area_identifier: str) -> str:
-    return f"{location_identifier}/{area_identifier}" if area_identifier else location_identifier
-
-
-@dataclass
-class EncounterGroup:
-    version_id: int
-    location_area_id: int
-    pokemon_id: int
-    method_id: int
-    conditions: tuple[int, ...]
-    min_level: int
-    max_level: int
-    chance: float | None
-    quantity: int
-    notes: list[str] = field(default_factory=list)
 
 
 class DatabaseBuilder:
@@ -73,6 +46,12 @@ class DatabaseBuilder:
         self.max_generation = max(self.generations)
         self.version_rows = [row for row in api.table("versions") if int(row["version_group_id"]) in self.vg_ids]
         self.version_ids = [int(row["id"]) for row in self.version_rows]
+        # Familles de tables : elles lisent les référentiels ci-dessous et dépendent parfois l'une de l'autre
+        # (les objets reprennent les CT et les objets d'évolution).
+        self.pokemon = PokemonTables(self)
+        self.moves = MoveTables(self)
+        self.items = ItemTables(self)
+        self.encounters = EncounterTables(self)
 
     # --- Référentiels ---------------------------------------------------------
 
@@ -121,7 +100,8 @@ class DatabaseBuilder:
 
     def region_table(self) -> list[tuple]:
         names = self.api.names("region_names", "region_id")
-        used = {loc_region for loc_region in self._used_regions if loc_region is not None}
+        regions = {row[3] for row in self.encounters.location_rows} | {row[3] for row in self.pokedex_table()}
+        used = {region for region in regions if region is not None}
         return [
             (int(row["id"]), row["identifier"], names[int(row["id"])])
             for row in self.api.table("regions")
@@ -205,529 +185,18 @@ class DatabaseBuilder:
             for attacking in sorted(types):
                 for defending in sorted(types):
                     key = (attacking, defending)
-                    factor = _value_at(past.get(key, []), generation, current.get(key, 100))
+                    factor = value_at(past.get(key, []), generation, current.get(key, 100))
                     rows.append((generation, attacking, defending, factor))
         return rows
 
-    def stat_table(self) -> list[tuple]:
-        names = self.api.names("stat_names", "stat_id")
-        used = set(GEN1_STATS if 1 in self.generations else ()) | (
-            set(MODERN_STATS) if self.max_generation > 1 else set()
-        )
-        return [
-            (int(row["id"]), row["identifier"], names.get(int(row["id"])) or STAT_NAME_FALLBACK[int(row["id"])])
-            for row in self.api.table("stats")
-            if int(row["id"]) in used
-        ]
+    # --- Écriture -------------------------------------------------------------
 
-    def growth_rate_table(self) -> list[tuple]:
-        names = self.api.names("growth_rate_prose", "growth_rate_id")
-        return [(int(row["id"]), row["identifier"], names[int(row["id"])]) for row in self.api.table("growth_rates")]
-
-    # --- Pokémon --------------------------------------------------------------
-
-    def pokemon_table(self) -> list[tuple]:
-        names_fr = self.api.names("pokemon_species_names", "pokemon_species_id")
-        genus_fr = self.api.names("pokemon_species_names", "pokemon_species_id", column="genus")
-        names_en = self.api.names("pokemon_species_names", "pokemon_species_id", language=ENGLISH)
-        sizes = {int(row["id"]): row for row in self.api.table("pokemon")}
-        descriptions = self._descriptions()
-        rows = []
-        for species_id, row in sorted(self.species.items()):
-            size = sizes[self.default_pokemon[species_id]]
-            rows.append(
-                (
-                    species_id,
-                    row["identifier"],
-                    names_fr[species_id],
-                    names_en[species_id],
-                    genus_fr[species_id],
-                    int(row["generation_id"]),
-                    optional_int(row["evolves_from_species_id"]),
-                    int(row["evolution_chain_id"]),
-                    int(row["capture_rate"]),
-                    int(row["gender_rate"]),
-                    int(row["growth_rate_id"]),
-                    int(size["height"]),
-                    int(size["weight"]),
-                    int(row["is_legendary"]),
-                    int(row["is_mythical"]),
-                    int(row["is_baby"]),
-                    descriptions.get(species_id),
-                )
-            )
-        return rows
-
-    def _descriptions(self) -> dict[int, str]:
-        """Description française du Pokédex : celle d'un jeu configuré si elle existe, sinon la plus ancienne."""
-        preferred = set(self.version_ids)
-        best: dict[int, tuple[tuple[int, int], str]] = {}
-        for row in self.api.table("pokemon_species_flavor_text"):
-            if int(row["language_id"]) != 5:
-                continue
-            species_id, version = int(row["species_id"]), int(row["version_id"])
-            rank = (0 if version in preferred else 1, version)
-            if species_id not in best or rank < best[species_id][0]:
-                best[species_id] = (rank, clean_text(row["flavor_text"]))
-        return {species_id: text for species_id, (_, text) in best.items()}
-
-    def pokemon_type_table(self) -> list[tuple]:
-        current: dict[int, list[tuple[int, int]]] = defaultdict(list)
-        for row in self.api.table("pokemon_types"):
-            current[int(row["pokemon_id"])].append((int(row["slot"]), int(row["type_id"])))
-        past: dict[int, dict[int, list[tuple[int, int]]]] = defaultdict(lambda: defaultdict(list))
-        for row in self.api.table("pokemon_types_past"):
-            past[int(row["pokemon_id"])][int(row["generation_id"])].append((int(row["slot"]), int(row["type_id"])))
-        rows = []
-        for generation in self.generations:
-            for species_id, row in sorted(self.species.items()):
-                if int(row["generation_id"]) > generation:
-                    continue
-                pokemon_id = self.default_pokemon[species_id]
-                types = current[pokemon_id]
-                # Types passés : « jusqu'à la génération N, le Pokémon avait ces types ».
-                for until in sorted(past[pokemon_id]):
-                    if until >= generation:
-                        types = past[pokemon_id][until]
-                        break
-                rows += [(species_id, generation, slot, type_id) for slot, type_id in sorted(types)]
-        return rows
-
-    def pokemon_stat_table(self) -> list[tuple]:
-        current: dict[tuple[int, int], int] = {
-            (int(row["pokemon_id"]), int(row["stat_id"])): int(row["base_stat"])
-            for row in self.api.table("pokemon_stats")
-        }
-        past: dict[tuple[int, int], list[tuple[int, int]]] = defaultdict(list)
-        for row in self.api.table("pokemon_stats_past"):
-            key = (int(row["pokemon_id"]), int(row["stat_id"]))
-            past[key].append((int(row["generation_id"]), int(row["base_stat"])))
-        rows = []
-        for generation in self.generations:
-            stats = GEN1_STATS if generation == 1 else MODERN_STATS
-            for species_id, row in sorted(self.species.items()):
-                if int(row["generation_id"]) > generation:
-                    continue
-                pokemon_id = self.default_pokemon[species_id]
-                for stat in stats:
-                    value = _value_at(past.get((pokemon_id, stat), []), generation, current.get((pokemon_id, stat)))
-                    if value is None:
-                        raise ValueError(
-                            f"Stat {stat} manquante pour le Pokémon {species_id} (génération {generation})"
-                        )
-                    rows.append((species_id, generation, stat, value))
-        return rows
-
-    # --- Attaques -------------------------------------------------------------
-
-    @cached_property
-    def pokemon_move_rows(self) -> list[tuple]:
-        methods = {int(row["id"]): row["identifier"] for row in self.api.table("pokemon_move_methods")}
-        rows = set()
-        for row in self.api.table("pokemon_moves"):
-            vg = int(row["version_group_id"])
-            pokemon_id = int(row["pokemon_id"])
-            if vg not in self.vg_ids or pokemon_id not in self.species_of_pokemon:
-                continue
-            method = methods[int(row["pokemon_move_method_id"])]
-            level = int(row["level"]) if method == "level-up" else 0
-            rows.add((self.species_of_pokemon[pokemon_id], vg, int(row["move_id"]), method, level))
-        return sorted(rows)
-
-    @cached_property
-    def machine_rows(self) -> list[tuple]:
-        return sorted(
-            (int(row["version_group_id"]), int(row["item_id"]), int(row["move_id"]))
-            for row in self.api.table("machines")
-            if int(row["version_group_id"]) in self.vg_ids
-        )
-
-    @cached_property
-    def moves_by_version_group(self) -> dict[int, set[int]]:
-        result: dict[int, set[int]] = defaultdict(set)
-        for _, vg, move, _, _ in self.pokemon_move_rows:
-            result[vg].add(move)
-        for vg, _, move in self.machine_rows:
-            result[vg].add(move)
-        return result
-
-    def move_table(self) -> list[tuple]:
-        names = self.api.names("move_names", "move_id")
-        moves = self.api.by_id("moves")
-        used = set().union(*self.moves_by_version_group.values())
-        return [
-            (move, moves[move]["identifier"], names[move], int(moves[move]["generation_id"])) for move in sorted(used)
-        ]
-
-    def move_version_group_table(self) -> list[tuple]:
-        moves = self.api.by_id("moves")
-        # Historique : « avant le groupe de versions X, la valeur était V ».
-        changelog: dict[int, list[dict[str, str]]] = defaultdict(list)
-        for row in self.api.table("move_changelog"):
-            changelog[int(row["move_id"])].append(row)
-        rows = []
-        for vg in self.vg_ids:
-            order = self.vg_order[vg]
-            generation = self.vg_generation[vg]
-            for move_id in sorted(self.moves_by_version_group[vg]):
-                move = moves[move_id]
-                values = {name: move[name] for name in ("type_id", "power", "pp", "accuracy")}
-                later = sorted(
-                    (
-                        row
-                        for row in changelog[move_id]
-                        if self.vg_order[int(row["changed_in_version_group_id"])] > order
-                    ),
-                    key=lambda row: self.vg_order[int(row["changed_in_version_group_id"])],
-                    reverse=True,
-                )
-                # Du changement le plus récent au plus proche : la dernière valeur écrite est celle du jeu.
-                for change in later:
-                    for name in values:
-                        if change[name]:
-                            values[name] = change[name]
-                type_id = int(values["type_id"])
-                damage_class = DAMAGE_CLASSES[int(move["damage_class_id"])]
-                if generation <= LAST_TYPE_BASED_DAMAGE_CLASS_GENERATION and damage_class != "status":
-                    damage_class = DAMAGE_CLASSES[int(self.type_rows[type_id]["damage_class_id"])]
-                rows.append(
-                    (
-                        move_id,
-                        vg,
-                        type_id,
-                        optional_int(values["power"]),
-                        optional_int(values["accuracy"]),
-                        int(values["pp"]),
-                        damage_class,
-                    )
-                )
-        return rows
-
-    # --- Évolutions et objets -------------------------------------------------
-
-    @cached_property
-    def evolution_rows(self) -> list[tuple]:
-        triggers = {int(row["id"]): row["identifier"] for row in self.api.table("evolution_triggers")}
-        by_target: dict[int, list[dict[str, str]]] = defaultdict(list)
-        for row in self.api.table("pokemon_evolution"):
-            by_target[int(row["evolved_species_id"])].append(row)
-        rows = []
-        for vg in self.vg_ids:
-            order = self.vg_order[vg]
-            for target, candidates in sorted(by_target.items()):
-                source = self.species.get(target, {}).get("evolves_from_species_id")
-                if target not in self.species or not source:
-                    continue
-                if int(self.species[target]["generation_id"]) > self.vg_generation[vg]:
-                    continue
-                # Méthodes valables dans ce jeu : celles introduites au plus tard dans ce groupe de versions,
-                # en ne gardant que la plus récente (la méthode peut changer d'un jeu à l'autre).
-                valid = [row for row in candidates if self.vg_order[int(row["version_group_id"])] <= order]
-                if not valid:
-                    continue
-                latest = max(self.vg_order[int(row["version_group_id"])] for row in valid)
-                for row in valid:
-                    if self.vg_order[int(row["version_group_id"])] != latest:
-                        continue
-                    rows.append(
-                        (
-                            vg,
-                            int(source),
-                            target,
-                            triggers[int(row["evolution_trigger_id"])],
-                            optional_int(row["minimum_level"]),
-                            optional_int(row["trigger_item_id"]),
-                            optional_int(row["held_item_id"]),
-                            optional_int(row["minimum_happiness"]),
-                            row["time_of_day"] or None,
-                            optional_int(row["known_move_id"]),
-                            optional_int(row["trade_species_id"]),
-                        )
-                    )
-        return [(index, *row) for index, row in enumerate(rows, start=1)]
-
-    @cached_property
-    def item_rows(self) -> list[tuple[int, str, str, str]]:
-        names = self.api.names("item_names", "item_id")
-        items = self.api.by_id("items")
-        categories = {int(row["id"]): row["identifier"] for row in self.api.table("item_categories")}
-        used = {item for _, item, _ in self.machine_rows}
-        used |= set(self.map_item_ids.values())
-        used |= set(self.offer_item_ids.values())
-        for row in self.evolution_rows:
-            used |= {item for item in (row[6], row[7]) if item}
-        # Poké Balls existant dans au moins une des générations configurées.
-        ball_ids = {item_id for item_id, row in items.items() if categories[int(row["category_id"])] in BALL_CATEGORIES}
-        for row in self.api.table("item_game_indices"):
-            if int(row["item_id"]) in ball_ids and int(row["generation_id"]) in self.generations:
-                used.add(int(row["item_id"]))
-        return [
-            (item_id, items[item_id]["identifier"], names[item_id], categories[int(items[item_id]["category_id"])])
-            for item_id in sorted(used)
-        ]
-
-    @cached_property
-    def offer_item_ids(self) -> dict[str, int]:
-        """Objets donnés ou vendus par les personnages : identifiant PokéAPI -> id."""
-        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
-        identifiers = {
-            offer.item for data in self.map_data.values() for obj in data.objects for offer in obj.offers if offer.item
-        }
-        unknown = sorted(identifiers - ids.keys())
-        if unknown:
-            raise ValueError(f"Objets des personnages inconnus de PokéAPI : {unknown} (voir maps.ITEM_ALIASES)")
-        return {identifier: ids[identifier] for identifier in identifiers}
-
-    def item_descriptions(self) -> dict[int, str]:
-        """Description française de chaque objet (texte du jeu le plus ancien qui en a une), sauf CT / CS."""
-        machines = {item for _, item, _ in self.machine_rows}
-        best: dict[int, tuple[int, str]] = {}
-        for row in self.api.table("item_flavor_text"):
-            if int(row["language_id"]) != 5:
-                continue
-            item_id = int(row["item_id"])
-            order = self.vg_order.get(int(row["version_group_id"]), 0)
-            if item_id not in machines and (item_id not in best or order < best[item_id][0]):
-                best[item_id] = (order, clean_text(row["flavor_text"]))
-        return {item_id: text for item_id, (_, text) in best.items()}
-
-    @cached_property
-    def move_ids(self) -> dict[str, int]:
-        """Identifiant d'attaque (sans tirets) -> id PokéAPI."""
-        return {row["identifier"].replace("-", ""): int(row["id"]) for row in self.api.table("moves")}
-
-    def move_id(self, identifier: str) -> int:
-        key = MOVE_ALIASES.get(identifier, identifier).replace("-", "")
-        if key not in self.move_ids:
-            raise ValueError(f"Attaque des dresseurs inconnue de PokéAPI : {identifier} (voir MOVE_ALIASES)")
-        return self.move_ids[key]
-
-    @cached_property
-    def map_item_ids(self) -> dict[str, int]:
-        """Objets posés sur les cartes : identifiant PokéAPI -> id."""
-        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
-        identifiers = {obj.item for data in self.map_data.values() for obj in data.objects if obj.item}
-        unknown = sorted(identifiers - ids.keys())
-        if unknown:
-            raise ValueError(f"Objets des cartes inconnus de PokéAPI : {unknown} (voir maps.ITEM_ALIASES)")
-        return {identifier: ids[identifier] for identifier in identifiers}
-
-    # --- Lieux et rencontres --------------------------------------------------
-
-    @cached_property
-    def raw_encounters(self) -> list[dict[str, str]]:
-        return [row for row in self.api.table("encounters") if int(row["version_id"]) in self.version_ids]
-
-    @cached_property
-    def used_areas(self) -> set[int]:
-        return {int(row["location_area_id"]) for row in self.raw_encounters}
-
-    @cached_property
-    def name_fixes(self) -> dict[tuple[str, str], str]:
-        with (DATA_DIR / "name_fixes.csv").open(encoding="utf-8", newline="") as handle:
-            return {(row["kind"], row["key"]): row["name_fr"] for row in csv.DictReader(handle)}
-
-    @cached_property
-    def area_keys(self) -> dict[int, str]:
-        """Zone -> clé lisible `lieu/zone` utilisée par les fichiers de tools/data/."""
-        locations = self.api.by_id("locations")
+    def tables(self, item_sprites: set[str]) -> dict[str, list[tuple]]:
+        """Lignes de chaque table, dans l'ordre d'insertion imposé par les clés étrangères."""
+        encounters, conditions = self.encounters.encounter_tables()
+        descriptions = self.items.item_descriptions()
+        items = [(*row, int(row[1] in item_sprites), descriptions.get(row[0])) for row in self.items.item_rows]
         return {
-            int(row["id"]): _area_key(locations[int(row["location_id"])]["identifier"], row["identifier"])
-            for row in self.api.table("location_areas")
-        }
-
-    def location_area_table(self) -> list[tuple]:
-        names = self.api.names("location_area_prose", "location_area_id")
-        areas = self.api.by_id("location_areas")
-        locations = self.api.by_id("locations")
-        location_names = self.api.names("location_names", "location_id")
-        rows = []
-        for area_id in sorted(self.used_areas):
-            area = areas[area_id]
-            location = locations[int(area["location_id"])]
-            name = self.name_fixes.get(("area", self.area_keys[area_id])) or names.get(area_id)
-            if not name:
-                base = location_names.get(int(location["id"]), location["identifier"])
-                name = f"{base} ({area['identifier']})" if area["identifier"] else base
-            rows.append((area_id, int(area["location_id"]), area["identifier"], name))
-        return rows
-
-    def location_table(self) -> list[tuple]:
-        names = self.api.names("location_names", "location_id")
-        locations = self.api.by_id("locations")
-        areas = self.api.by_id("location_areas")
-        used = sorted({int(areas[area]["location_id"]) for area in self.used_areas})
-        rows = []
-        for location_id in used:
-            row = locations[location_id]
-            name = self.name_fixes.get(("location", row["identifier"])) or names.get(location_id)
-            if not name:
-                raise ValueError(f"Nom français manquant pour le lieu {row['identifier']} (tools/data/name_fixes.csv)")
-            rows.append((location_id, row["identifier"], name, optional_int(row["region_id"])))
-        return rows
-
-    @cached_property
-    def _used_regions(self) -> set[int | None]:
-        regions = {row[3] for row in self.location_table()}
-        regions |= {row[3] for row in self.pokedex_table()}
-        return regions
-
-    @cached_property
-    def encounter_groups(self) -> list[EncounterGroup]:
-        slots = self.api.by_id("encounter_slots")
-        methods = self.api.by_id("encounter_methods")
-        default_conditions = {
-            int(row["id"]) for row in self.api.table("encounter_condition_values") if row["is_default"] == "1"
-        }
-        conditions: dict[int, set[int]] = defaultdict(set)
-        for row in self.api.table("encounter_condition_value_map"):
-            value = int(row["encounter_condition_value_id"])
-            if value not in default_conditions:
-                conditions[int(row["encounter_id"])].add(value)
-
-        groups: dict[tuple, EncounterGroup] = {}
-        for row in self.raw_encounters:
-            slot = slots[int(row["encounter_slot_id"])]
-            method_id = int(slot["encounter_method_id"])
-            one_off = methods[method_id]["identifier"] in ONE_OFF_METHODS
-            key = (
-                int(row["version_id"]),
-                int(row["location_area_id"]),
-                int(row["pokemon_id"]),
-                method_id,
-                tuple(sorted(conditions[int(row["id"])])),
-            )
-            species = self.species_of_pokemon[int(row["pokemon_id"])]
-            low, high = int(row["min_level"]), int(row["max_level"])
-            group = groups.get(key)
-            if group is None:
-                groups[key] = EncounterGroup(
-                    key[0], key[1], species, method_id, key[4], low, high, None if one_off else 0.0, 0
-                )
-                group = groups[key]
-            group.min_level = min(group.min_level, low)
-            group.max_level = max(group.max_level, high)
-            if one_off:
-                group.quantity += 1
-            else:
-                group.chance += int(slot["rarity"])
-                group.quantity = 1
-        return self._apply_curation(list(groups.values()))
-
-    def _apply_curation(self, groups: list[EncounterGroup]) -> list[EncounterGroup]:
-        versions = {row["identifier"]: int(row["id"]) for row in self.api.table("versions")}
-        species = {row["identifier"]: int(row["id"]) for row in self.api.table("pokemon_species")}
-        methods = {row["identifier"]: int(row["id"]) for row in self.api.table("encounter_methods")}
-        areas = {key: area_id for area_id, key in self.area_keys.items()}
-        names_fr = self.api.names("pokemon_species_names", "pokemon_species_id")
-        excluded: set[int] = set()
-        with (DATA_DIR / "encounter_curation.csv").open(encoding="utf-8", newline="") as handle:
-            for line, row in enumerate(csv.DictReader(handle), start=2):
-                matched = False
-                for version in row["versions"].split("|"):
-                    if versions[version] not in self.version_ids:
-                        continue
-                    for index, group in enumerate(groups):
-                        if (
-                            group.version_id == versions[version]
-                            and group.location_area_id == areas[row["location_area"]]
-                            and group.pokemon_id == species[row["pokemon"]]
-                            and group.method_id == methods[row["method"]]
-                        ):
-                            matched = True
-                            if row["action"] == "exclude":
-                                excluded.add(index)
-                            elif row["action"] == "note":
-                                group.notes.append(row["value"])
-                            elif row["action"] == "trade_for":
-                                group.notes.append(f"Échange contre {names_fr[species[row['value']]]}")
-                            else:
-                                raise ValueError(f"encounter_curation.csv:{line} : action inconnue {row['action']}")
-                if not matched and any(versions[v] in self.version_ids for v in row["versions"].split("|")):
-                    raise ValueError(f"encounter_curation.csv:{line} ne correspond à aucune rencontre : {row}")
-        return [group for index, group in enumerate(groups) if index not in excluded]
-
-    @cached_property
-    def method_rank(self) -> dict[int, int]:
-        return {int(row["id"]): int(row["order"]) for row in self.api.table("encounter_methods")}
-
-    def encounter_tables(self) -> tuple[list[tuple], list[tuple]]:
-        groups = sorted(
-            self.encounter_groups,
-            key=lambda g: (
-                g.version_id,
-                g.location_area_id,
-                self.method_rank[g.method_id],
-                g.conditions,
-                -(g.chance or 0),
-                g.pokemon_id,
-            ),
-        )
-        encounters, conditions = [], []
-        for index, group in enumerate(groups, start=1):
-            encounters.append(
-                (
-                    index,
-                    group.version_id,
-                    group.location_area_id,
-                    group.pokemon_id,
-                    group.method_id,
-                    group.min_level,
-                    group.max_level,
-                    group.chance,
-                    group.quantity,
-                    " ; ".join(group.notes) or None,
-                )
-            )
-            conditions += [(index, value) for value in group.conditions]
-        return encounters, conditions
-
-    def encounter_method_table(self) -> list[tuple]:
-        names = self.api.names("encounter_method_prose", "encounter_method_id")
-        used = {group.method_id for group in self.encounter_groups}
-        return [
-            (
-                int(row["id"]),
-                row["identifier"],
-                names[int(row["id"])],
-                int(row["order"]),
-                int(row["identifier"] in ONE_OFF_METHODS),
-            )
-            for row in self.api.table("encounter_methods")
-            if int(row["id"]) in used
-        ]
-
-    def encounter_condition_value_table(self) -> list[tuple]:
-        names = self.api.names("encounter_condition_value_prose", "encounter_condition_value_id")
-        used = {value for group in self.encounter_groups for value in group.conditions}
-        return [
-            (int(row["id"]), row["identifier"], names[int(row["id"])])
-            for row in self.api.table("encounter_condition_values")
-            if int(row["id"]) in used
-        ]
-
-    def encounter_rate_table(self) -> list[tuple]:
-        return sorted(
-            (int(row["version_id"]), int(row["location_area_id"]), int(row["encounter_method_id"]), int(row["rate"]))
-            for row in self.api.table("location_area_encounter_rates")
-            if int(row["version_id"]) in self.version_ids and int(row["location_area_id"]) in self.used_areas
-        )
-
-    # --- Cartes ---------------------------------------------------------------
-
-    # --- Cartes ---------------------------------------------------------------
-
-    def map_tables(self) -> dict[str, list[tuple]]:
-        from .builder_maps import build_map_tables
-
-        return build_map_tables(self)
-
-    # --- Ecriture -------------------------------------------------------------
-
-    def write(self, output: Path, item_sprites: set[str]) -> None:
-        encounters, conditions = self.encounter_tables()
-        descriptions = self.item_descriptions()
-        tables = {
             "generation": self.generation_table(),
             "region": self.region_table(),
             "version_group": self.version_group_table(),
@@ -737,26 +206,29 @@ class DatabaseBuilder:
             "pokedex_entry": self.pokedex_entry_table(),
             "type": self.type_table(),
             "type_efficacy": self.type_efficacy_table(),
-            "stat": self.stat_table(),
-            "growth_rate": self.growth_rate_table(),
-            "pokemon": self.pokemon_table(),
-            "pokemon_type": self.pokemon_type_table(),
-            "pokemon_stat": self.pokemon_stat_table(),
-            "move": self.move_table(),
-            "move_version_group": self.move_version_group_table(),
-            "item": [(*row, int(row[1] in item_sprites), descriptions.get(row[0])) for row in self.item_rows],
-            "machine": self.machine_rows,
-            "pokemon_move": self.pokemon_move_rows,
-            "evolution": self.evolution_rows,
-            "location": self.location_table(),
-            "location_area": self.location_area_table(),
-            "encounter_method": self.encounter_method_table(),
-            "encounter_condition_value": self.encounter_condition_value_table(),
+            "stat": self.pokemon.stat_table(),
+            "growth_rate": self.pokemon.growth_rate_table(),
+            "pokemon": self.pokemon.pokemon_table(),
+            "pokemon_type": self.pokemon.pokemon_type_table(),
+            "pokemon_stat": self.pokemon.pokemon_stat_table(),
+            "move": self.moves.move_table(),
+            "move_version_group": self.moves.move_version_group_table(),
+            "item": items,
+            "machine": self.moves.machine_rows,
+            "pokemon_move": self.moves.pokemon_move_rows,
+            "evolution": self.pokemon.evolution_rows,
+            "location": self.encounters.location_rows,
+            "location_area": self.encounters.location_area_table(),
+            "encounter_method": self.encounters.encounter_method_table(),
+            "encounter_condition_value": self.encounters.encounter_condition_value_table(),
             "encounter": encounters,
             "encounter_condition": conditions,
-            "encounter_rate": self.encounter_rate_table(),
-            **self.map_tables(),
+            "encounter_rate": self.encounters.encounter_rate_table(),
+            **build_map_tables(self),
         }
+
+    def write(self, output: Path, item_sprites: set[str]) -> None:
+        tables = self.tables(item_sprites)
         output.parent.mkdir(parents=True, exist_ok=True)
         tmp = output.with_suffix(".tmp")
         tmp.unlink(missing_ok=True)
@@ -774,11 +246,3 @@ class DatabaseBuilder:
         finally:
             connection.close()
         tmp.replace(output)
-
-
-def _value_at(past: list[tuple[int, int]], generation: int, current: int | None) -> int | None:
-    """Valeur pour `generation` à partir d'un historique « jusqu'à la génération N : valeur »."""
-    for until, value in sorted(past):
-        if until >= generation:
-            return value
-    return current

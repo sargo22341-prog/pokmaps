@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -13,8 +14,10 @@ import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.usecase.ObserveGamesUseCase
 import org.opensources.pokmaps.domain.usecase.ObserveSelectedGameUseCase
 import org.opensources.pokmaps.domain.usecase.SelectGameUseCase
+import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
-data class GameUiState(val games: List<Game> = emptyList(), val selected: Game? = null)
+/** Jeux proposés et jeu choisi ; `failed` si la liste n'a pas pu être lue (le sélecteur est alors masqué). */
+data class GameUiState(val games: List<Game> = emptyList(), val selected: Game? = null, val failed: Boolean = false)
 
 /** Sélecteur de jeu global, affiché dans la barre du haut. */
 @HiltViewModel
@@ -25,11 +28,10 @@ class GameViewModel @Inject constructor(
 ) : ViewModel() {
     val state: StateFlow<GameUiState> =
         combine(observeGames(), observeSelectedGame()) { games, selected -> GameUiState(games, selected) }
+            .catch { emit(GameUiState(failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), GameUiState())
 
     fun select(game: Game) {
         viewModelScope.launch { selectGame(game) }
     }
 }
-
-const val STOP_TIMEOUT_MS = 5_000L

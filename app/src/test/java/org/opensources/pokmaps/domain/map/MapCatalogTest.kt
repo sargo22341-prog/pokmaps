@@ -1,13 +1,9 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.map
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.opensources.pokmaps.domain.map.FloorLevel
-import org.opensources.pokmaps.domain.map.MapCatalog
-import org.opensources.pokmaps.domain.map.MapInfo
-import org.opensources.pokmaps.domain.map.MapWarp
 
 class MapCatalogTest {
     private val world = MapInfo(1999, "kanto", "Kanto", null, 0, 0, 5440, 5760, 6)

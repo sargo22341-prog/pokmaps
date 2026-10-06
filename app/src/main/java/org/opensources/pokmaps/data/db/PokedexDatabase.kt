@@ -57,7 +57,7 @@ abstract class PokedexDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
     companion object {
-        const val VERSION = 4
+        const val VERSION = 5
         const val NAME = "pokedex.db"
         const val ASSET = "database/pokedex.db"
     }

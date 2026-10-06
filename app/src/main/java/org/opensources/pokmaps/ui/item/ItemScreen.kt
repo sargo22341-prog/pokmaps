@@ -24,17 +24,16 @@ import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.usecase.ItemPage
 import org.opensources.pokmaps.domain.usecase.ItemSource
+import org.opensources.pokmaps.ui.common.CharacterSprite
+import org.opensources.pokmaps.ui.common.MoveLine
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
-import org.opensources.pokmaps.ui.map.CharacterSprite
-import org.opensources.pokmaps.ui.map.MoveLine
-import org.opensources.pokmaps.ui.map.displayName
 
 @Composable
-fun ItemScreen(
+fun ItemRoute(
     onOpenPokemon: (Int) -> Unit,
     onOpenCharacter: (Int) -> Unit,
     onShowOnMap: () -> Unit,
@@ -42,114 +41,134 @@ fun ItemScreen(
     viewModel: ItemViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val page = state.page
-    if (page == null) {
-        SheetPlaceholder(state.loading, stringResource(R.string.item_not_found), modifier, state.failed)
-        return
-    }
-    ItemContent(
-        page,
+    ItemScreen(
+        state,
+        onAction = { action ->
+            viewModel.onAction(action)
+            when (action) {
+                is ItemAction.ShowOnMap -> onShowOnMap()
+            }
+        },
         onOpenPokemon = onOpenPokemon,
         onOpenCharacter = onOpenCharacter,
-        onShowOnMap = { objectId ->
-            viewModel.showOnMap(objectId)
-            onShowOnMap()
-        },
         modifier = modifier
     )
 }
 
 @Composable
-private fun ItemContent(
-    page: ItemPage,
+fun ItemScreen(
+    state: ItemUiState,
+    onAction: (ItemAction) -> Unit,
     onOpenPokemon: (Int) -> Unit,
     onOpenCharacter: (Int) -> Unit,
-    onShowOnMap: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val item = page.item
-    val details = page.details
-    val versionGroup = page.game.versionGroupIdentifier
+    val page = state.page
+    if (page == null) {
+        SheetPlaceholder(state.loading, stringResource(R.string.item_not_found), modifier, state.failed)
+        return
+    }
+    val onShowOnMap = { objectId: Int -> onAction(ItemAction.ShowOnMap(objectId)) }
     Column(
         modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            if (item.hasSprite) PixelArtImage(Sprites.item(item.identifier), PixelArt.ITEM_ICON, 96.dp, item.name)
-            Text(item.name, style = MaterialTheme.typography.headlineMedium)
-            details?.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
-        }
-        details?.move?.let { move ->
+        ItemHeader(page)
+        page.details?.move?.let { move ->
             SheetSection(stringResource(R.string.map_machine_move, move.name)) { MoveLine(move) }
         }
-        if (page.evolutions.isNotEmpty()) {
-            SheetSection(stringResource(R.string.item_evolutions)) {
-                page.evolutions.forEach { evolution ->
-                    SheetRow(
-                        title = stringResource(R.string.item_evolution, evolution.fromName, evolution.toName),
-                        onClick = { onOpenPokemon(evolution.toId) },
-                        content = {
-                            PixelArtImage(Sprites.pokemonIcon(evolution.toId), PixelArt.POKEMON_ICON, 52.dp, null)
-                        }
-                    )
-                }
-            }
-        }
-        if (page.found.isNotEmpty()) {
-            SheetSection(stringResource(R.string.item_found)) {
-                page.found.forEach { source ->
-                    SheetRow(
-                        title = source.mapName,
-                        subtitle = if (source.obj.kind == MapObjectKind.HIDDEN_ITEM) {
-                            stringResource(R.string.map_hidden_item)
-                        } else {
-                            stringResource(R.string.map_item)
-                        },
-                        onShowOnMap = { onShowOnMap(source.obj.id) },
-                        content = {
-                            PixelArtImage(
-                                Sprites.item(item.identifier),
-                                PixelArt.ITEM_ICON,
-                                48.dp,
-                                null,
-                                alpha = if (source.obj.kind == MapObjectKind.HIDDEN_ITEM) HIDDEN_ALPHA else 1f
-                            )
-                        }
-                    )
-                }
-            }
-        }
-        if (page.sold.isNotEmpty()) {
-            SheetSection(stringResource(R.string.item_sold)) {
-                page.sold.forEach { source ->
-                    SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
-                        source.price?.let { stringResource(R.string.map_offer_price, it) }
-                    }
-                }
-            }
-        }
-        if (page.given.isNotEmpty()) {
-            SheetSection(stringResource(R.string.item_given)) {
-                page.given.forEach { source ->
-                    SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
-                        source.quantity?.takeIf { it > 1 }?.let { "× $it" }
-                    }
-                }
-            }
-        }
+        EvolutionsSection(page, onOpenPokemon)
+        FoundSection(page, onShowOnMap)
+        SourcesSection(page, onOpenCharacter, onShowOnMap)
         if (page.found.isEmpty() && page.sold.isEmpty() && page.given.isEmpty()) {
             SheetSection(stringResource(R.string.item_where)) {
                 Text(stringResource(R.string.item_nowhere, page.game.name))
             }
         }
         Spacer(Modifier.height(24.dp))
+    }
+}
+
+@Composable
+private fun ItemHeader(page: ItemPage) {
+    val item = page.item
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        if (item.hasSprite) PixelArtImage(Sprites.item(item.identifier), PixelArt.ITEM_ICON, 96.dp, item.name)
+        Text(item.name, style = MaterialTheme.typography.headlineMedium)
+        page.details?.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+    }
+}
+
+/** Évolutions déclenchées par l'objet (pierres, échange en le tenant). */
+@Composable
+private fun EvolutionsSection(page: ItemPage, onOpenPokemon: (Int) -> Unit) {
+    if (page.evolutions.isEmpty()) return
+    SheetSection(stringResource(R.string.item_evolutions)) {
+        page.evolutions.forEach { evolution ->
+            SheetRow(
+                title = stringResource(R.string.item_evolution, evolution.fromName, evolution.toName),
+                onClick = { onOpenPokemon(evolution.toId) },
+                content = {
+                    PixelArtImage(Sprites.pokemonIcon(evolution.toId), PixelArt.POKEMON_ICON, 52.dp, null)
+                }
+            )
+        }
+    }
+}
+
+/** Exemplaires posés sur les cartes, visibles ou cachés. */
+@Composable
+private fun FoundSection(page: ItemPage, onShowOnMap: (Int) -> Unit) {
+    if (page.found.isEmpty()) return
+    SheetSection(stringResource(R.string.item_found)) {
+        page.found.forEach { source ->
+            val hidden = source.obj.kind == MapObjectKind.HIDDEN_ITEM
+            SheetRow(
+                title = source.mapName,
+                subtitle = stringResource(if (hidden) R.string.map_hidden_item else R.string.map_item),
+                onShowOnMap = { onShowOnMap(source.obj.id) },
+                content = {
+                    PixelArtImage(
+                        Sprites.item(page.item.identifier),
+                        PixelArt.ITEM_ICON,
+                        48.dp,
+                        null,
+                        alpha = if (hidden) HIDDEN_ALPHA else 1f
+                    )
+                }
+            )
+        }
+    }
+}
+
+/** Personnages qui vendent ou donnent l'objet. */
+@Composable
+private fun SourcesSection(page: ItemPage, onOpenCharacter: (Int) -> Unit, onShowOnMap: (Int) -> Unit) {
+    val versionGroup = page.game.versionGroupIdentifier
+    if (page.sold.isNotEmpty()) {
+        SheetSection(stringResource(R.string.item_sold)) {
+            page.sold.forEach { source ->
+                SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
+                    source.price?.let { stringResource(R.string.map_offer_price, it) }
+                }
+            }
+        }
+    }
+    if (page.given.isNotEmpty()) {
+        SheetSection(stringResource(R.string.item_given)) {
+            page.given.forEach { source ->
+                SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
+                    source.quantity?.takeIf { it > 1 }?.let { "× $it" }
+                }
+            }
+        }
     }
 }
 
@@ -164,7 +183,7 @@ private fun SourceRow(
 ) {
     SheetRow(
         title = source.mapName,
-        subtitle = source.obj.displayName(),
+        subtitle = source.obj.name,
         trailing = content(),
         onClick = { onOpenCharacter(source.obj.id) },
         onShowOnMap = { onShowOnMap(source.obj.id) },

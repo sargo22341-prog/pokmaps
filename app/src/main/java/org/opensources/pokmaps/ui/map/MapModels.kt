@@ -10,6 +10,7 @@ import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterGroup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
+import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.groupByMethod
 import ovh.plrapps.mapcompose.ui.state.MapState
 
@@ -24,11 +25,12 @@ enum class WildMethod {
     FISHING;
 
     companion object {
-        fun from(method: String): WildMethod? = when (method) {
-            "walk" -> WALK
-            "surf" -> SURF
-            "old-rod", "good-rod", "super-rod" -> FISHING
-            else -> null
+        /** Méthode de rencontre PokéAPI ; null pour un Pokémon qu'on ne croise pas à l'état sauvage. */
+        fun from(method: String): WildMethod? = when (ObtainMethod.fromEncounterMethod(method)) {
+            ObtainMethod.WALK -> WALK
+            ObtainMethod.SURF -> SURF
+            ObtainMethod.FISHING -> FISHING
+            ObtainMethod.GIFT, ObtainMethod.STATIC, ObtainMethod.TRADE, ObtainMethod.EVOLUTION -> null
         }
     }
 }
@@ -77,6 +79,15 @@ sealed interface MapDetail {
     ) : MapDetail
 }
 
+/** Message ponctuel affiché en bas de la carte. */
+sealed interface MapMessage {
+    /** Pokémon introuvable sur les cartes de la version. */
+    data class NotFound(val pokemonName: String) : MapMessage
+
+    /** Les lieux du Pokémon n'ont pas pu être lus. */
+    data class HighlightFailed(val pokemonName: String) : MapMessage
+}
+
 /** Mode « surlignage » : lieux d'un Pokémon dans la version choisie. */
 data class MapHighlight(val pokemonId: Int, val name: String, val places: List<MapPlace>)
 
@@ -96,12 +107,37 @@ data class MapUiState(
     /** Liste détaillée du lieu sélectionné ouverte. */
     val zoneListOpen: Boolean = false,
     val highlight: MapHighlight? = null,
-    /** Pokémon introuvable sur les cartes de la version (message à afficher une fois). */
-    val notFound: String? = null,
+    /** Message à afficher une fois (voir [MapAction.MessageShown]). */
+    val message: MapMessage? = null,
     /** Sprites animés sur la carte et dans la liste du lieu (réglage). */
     val animatedSprites: Boolean = false,
     val failed: Boolean = false
 )
+
+/** Intentions de l'écran de la carte, traitées par [MapViewModel]. */
+sealed interface MapAction {
+    /** Remonte d'un niveau, ou désélectionne le lieu sur la carte du monde. */
+    data object Back : MapAction
+
+    data class OpenPlace(val place: MapPlace) : MapAction
+
+    data class SelectFloor(val mapId: Int) : MapAction
+
+    data class ToggleLayer(val layer: MapLayer) : MapAction
+
+    data object ClearHighlight : MapAction
+
+    data object ClearZone : MapAction
+
+    data object OpenZoneList : MapAction
+
+    data object CloseZoneList : MapAction
+
+    data object DismissDetail : MapAction
+
+    /** Le message de [MapUiState.message] a été affiché. */
+    data object MessageShown : MapAction
+}
 
 internal object MapMarkerIds {
     const val LAZY_LOADER = "lazy"

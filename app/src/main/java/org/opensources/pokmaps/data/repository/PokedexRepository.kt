@@ -18,7 +18,7 @@ class PokedexRepository @Inject constructor(private val dao: PokedexDao) {
         }
         val encounters = (dao.encounterMethods(game.versionId) + dao.staticPokemon(game.versionGroupId))
             .groupBy({ it.pokemonId }) { ObtainMethod.fromEncounterMethod(it.method) }
-            .mapValues { (_, methods) -> methods.filterNotNull().toSet() }
+            .mapValues { (_, methods) -> methods.toSet() }
         val methods = obtainMethods(encounters, dao.evolutions(game.versionGroupId).map { it.fromId to it.toId })
         return dao.pokedex(game.versionGroupId).map { row ->
             PokedexEntry(

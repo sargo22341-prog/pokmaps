@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.ui.pokedex
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -55,15 +56,24 @@ import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtFill
 import org.opensources.pokmaps.ui.common.TypeBadge
-import org.opensources.pokmaps.ui.common.label
 
 @Composable
-fun PokedexScreen(
+fun PokedexRoute(
     onOpenPokemon: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PokedexViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    PokedexScreen(state, viewModel::onAction, onOpenPokemon, modifier)
+}
+
+@Composable
+fun PokedexScreen(
+    state: PokedexUiState,
+    onAction: (PokedexAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     if (state.loading) {
         Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
@@ -75,8 +85,8 @@ fun PokedexScreen(
         return
     }
     Column(modifier.fillMaxSize()) {
-        SearchField(state.filter.query, viewModel::search)
-        Filters(state, viewModel)
+        SearchField(state.filter.query) { onAction(PokedexAction.Search(it)) }
+        Filters(state, onAction)
         Text(
             pluralStringResource(
                 R.plurals.pokedex_count_caught,
@@ -99,8 +109,8 @@ fun PokedexScreen(
             PokedexGrid(
                 state.entries,
                 onOpenPokemon = onOpenPokemon,
-                onToggleCaught = viewModel::toggleCaught,
-                onToggleFavorite = viewModel::toggleFavorite
+                onToggleCaught = { onAction(PokedexAction.ToggleCaught(it)) },
+                onToggleFavorite = { onAction(PokedexAction.ToggleFavorite(it)) }
             )
         }
     }
@@ -129,7 +139,7 @@ private fun SearchField(query: String, onQueryChange: (String) -> Unit) {
 }
 
 @Composable
-private fun Filters(state: PokedexUiState, viewModel: PokedexViewModel) {
+private fun Filters(state: PokedexUiState, onAction: (PokedexAction) -> Unit) {
     val filter = state.filter
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -141,7 +151,7 @@ private fun Filters(state: PokedexUiState, viewModel: PokedexViewModel) {
     ) {
         FilterChip(
             selected = filter.availableOnly,
-            onClick = viewModel::toggleAvailableOnly,
+            onClick = { onAction(PokedexAction.ToggleAvailableOnly) },
             label = { Text(stringResource(R.string.pokedex_filter_available, state.game?.name.orEmpty())) }
         )
         DropdownChip(
@@ -150,14 +160,14 @@ private fun Filters(state: PokedexUiState, viewModel: PokedexViewModel) {
             selected = filter.typeId != null,
             options = listOf(null to stringResource(R.string.pokedex_filter_all)) +
                 state.types.map { it.id to it.name },
-            onSelect = viewModel::filterType
+            onSelect = { onAction(PokedexAction.FilterType(it)) }
         )
         DropdownChip(
             label = filter.method?.let { stringResource(it.label) } ?: stringResource(R.string.pokedex_filter_method),
             selected = filter.method != null,
             options = listOf(null to stringResource(R.string.pokedex_filter_all)) +
                 ObtainMethod.entries.map { it to stringResource(it.label) },
-            onSelect = viewModel::filterMethod
+            onSelect = { onAction(PokedexAction.FilterMethod(it)) }
         )
         DropdownChip(
             label = stringResource(
@@ -165,16 +175,18 @@ private fun Filters(state: PokedexUiState, viewModel: PokedexViewModel) {
             ),
             selected = filter.caught != CaughtFilter.ALL,
             options = CaughtFilter.entries.map { it to stringResource(it.label) },
-            onSelect = viewModel::filterCaught
+            onSelect = { onAction(PokedexAction.FilterCaught(it)) }
         )
         FilterChip(
             selected = filter.favoritesOnly,
-            onClick = viewModel::toggleFavoritesOnly,
+            onClick = { onAction(PokedexAction.ToggleFavoritesOnly) },
             label = { Text(stringResource(R.string.pokedex_filter_favorites)) },
             leadingIcon = { Icon(painterResource(R.drawable.ic_star), contentDescription = null) }
         )
         if (filter.isActive) {
-            TextButton(onClick = viewModel::resetFilters) { Text(stringResource(R.string.pokedex_filter_reset)) }
+            TextButton(onClick = {
+                onAction(PokedexAction.ResetFilters)
+            }) { Text(stringResource(R.string.pokedex_filter_reset)) }
         }
     }
 }
@@ -246,24 +258,7 @@ private fun PokedexCard(
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                if (LocalAnimatedSprites.current) {
-                    AnimatedPokemonSprite(
-                        entry.pokemonId,
-                        contentDescription = null,
-                        alpha = alpha,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(PixelArt.POKEMON_ICON.width / PixelArt.POKEMON_ICON.height.toFloat())
-                    )
-                } else {
-                    PixelArtFill(
-                        Sprites.pokemonIcon(entry.pokemonId),
-                        PixelArt.POKEMON_ICON,
-                        contentDescription = null,
-                        alpha = alpha,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+                CardSprite(entry.pokemonId, alpha)
                 Text(
                     stringResource(R.string.pokedex_number, entry.number),
                     style = MaterialTheme.typography.labelSmall,
@@ -291,6 +286,41 @@ private fun PokedexCard(
             CaughtButton(entry.caught, onToggleCaught, Modifier.align(Alignment.TopStart))
             FavoriteButton(entry.favorite, onToggleFavorite, Modifier.align(Alignment.TopEnd))
         }
+    }
+}
+
+@get:StringRes
+private val ObtainMethod.label: Int
+    get() = when (this) {
+        ObtainMethod.WALK -> R.string.method_walk
+        ObtainMethod.FISHING -> R.string.method_fishing
+        ObtainMethod.SURF -> R.string.method_surf
+        ObtainMethod.GIFT -> R.string.method_gift
+        ObtainMethod.STATIC -> R.string.method_static
+        ObtainMethod.TRADE -> R.string.method_trade
+        ObtainMethod.EVOLUTION -> R.string.method_evolution
+    }
+
+/** Sprite du Pokémon sur sa carte : animé (réglage) ou icône pixel-art. */
+@Composable
+private fun CardSprite(pokemonId: Int, alpha: Float) {
+    if (LocalAnimatedSprites.current) {
+        AnimatedPokemonSprite(
+            pokemonId,
+            contentDescription = null,
+            alpha = alpha,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(PixelArt.POKEMON_ICON.width / PixelArt.POKEMON_ICON.height.toFloat())
+        )
+    } else {
+        PixelArtFill(
+            Sprites.pokemonIcon(pokemonId),
+            PixelArt.POKEMON_ICON,
+            contentDescription = null,
+            alpha = alpha,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

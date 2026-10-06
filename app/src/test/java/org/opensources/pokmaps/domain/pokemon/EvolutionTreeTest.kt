@@ -1,11 +1,8 @@
-package org.opensources.pokmaps.domain
+package org.opensources.pokmaps.domain.pokemon
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
-import org.opensources.pokmaps.domain.pokemon.EvolutionEdge
-import org.opensources.pokmaps.domain.pokemon.EvolutionTree
 
 class EvolutionTreeTest {
     @Test

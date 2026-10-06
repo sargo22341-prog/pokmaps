@@ -84,13 +84,13 @@ def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:
         if row["generation_id"] == "8"
     }
     machine_types: dict[int, int] = {}
-    move_types = {(row[0], row[1]): row[2] for row in builder.move_version_group_table()}
-    for vg, item_id, move_id in builder.machine_rows:
+    move_types = {(row[0], row[1]): row[2] for row in builder.moves.move_version_group_table()}
+    for vg, item_id, move_id in builder.moves.machine_rows:
         machine_types.setdefault(item_id, move_types[(move_id, vg)])
     types = {type_id: row["identifier"] for type_id, row in builder.type_rows.items()}
 
     result = {}
-    for item_id, identifier, _, _ in builder.item_rows:
+    for item_id, identifier, _, _ in builder.items.item_rows:
         if item_id in machine_types:
             kind = "hm" if identifier.startswith("hm") else "tm"
             result[identifier] = MACHINE_ICON.format(kind=kind, type=types[machine_types[item_id]])

@@ -1,68 +1,51 @@
 package org.opensources.pokmaps.ui.pokedex
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.emptyPreferences
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.opensources.pokmaps.data.db.EvolutionPairRow
-import org.opensources.pokmaps.data.db.GameDao
+import org.opensources.pokmaps.data.db.FakeGameDao
+import org.opensources.pokmaps.data.db.FakePokedexDao
+import org.opensources.pokmaps.data.db.FakePokedexDao.Companion.POISON
 import org.opensources.pokmaps.data.db.PokedexDao
-import org.opensources.pokmaps.data.db.PokedexRow
-import org.opensources.pokmaps.data.db.PokemonMethodRow
-import org.opensources.pokmaps.data.db.PokemonTypeRow
-import org.opensources.pokmaps.data.db.TypeRow
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.data.settings.CollectionSettings
+import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
-import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.pokedex.CaughtFilter
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokedexUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
+import org.opensources.pokmaps.ui.MainDispatcherRule
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PokedexViewModelTest {
-    private val red = Game(1, "red", "Rouge", 1, "red-blue", 1)
-    private val blue = Game(2, "blue", "Bleu", 1, "red-blue", 1)
+    private val red = FakeGameDao.RED
+    private val blue = FakeGameDao.BLUE
 
-    private lateinit var settings: GameSettings
-    private lateinit var viewModel: PokedexViewModel
+    @get:Rule
+    val mainDispatcher = MainDispatcherRule()
 
-    @Before
-    fun setUp() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
-        val dataStore = FakeDataStore()
-        settings = GameSettings(dataStore)
+    private val dataStore = FakeDataStore()
+    private val settings = GameSettings(dataStore)
+    private val viewModel by lazy { pokedexViewModel(FakePokedexDao()) }
+
+    private fun pokedexViewModel(dao: PokedexDao): PokedexViewModel {
         val collection = CollectionSettings(dataStore)
-        val games = GameRepository(FakeGameDao(listOf(red, blue)), settings)
-        viewModel = PokedexViewModel(
-            ObservePokedexUseCase(games, PokedexRepository(FakePokedexDao())),
+        val games = GameRepository(FakeGameDao(), settings)
+        return PokedexViewModel(
+            ObservePokedexUseCase(games, PokedexRepository(dao)),
             ObserveCollectionUseCase(games, collection),
             UpdateCollectionUseCase(collection)
         )
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
     }
 
     private fun ids() = viewModel.state.value.entries.map { it.pokemonId }
@@ -82,16 +65,16 @@ class PokedexViewModelTest {
     @Test
     fun searchIgnoresAccents() = runTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        viewModel.search("evoli")
+        viewModel.onAction(PokedexAction.Search("evoli"))
         assertEquals(listOf(133), ids())
-        viewModel.search("134")
+        viewModel.onAction(PokedexAction.Search("134"))
         assertEquals(listOf(134), ids())
     }
 
     @Test
     fun availabilityDependsOnTheVersion() = runTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        viewModel.toggleAvailableOnly()
+        viewModel.onAction(PokedexAction.ToggleAvailableOnly)
         // Abo et Arbok en Rouge, Sabelette en Bleu ; Aquali évolue d'Évoli (don).
         assertEquals(listOf(23, 24, 133, 134), ids())
         settings.selectVersion(blue.versionId)
@@ -102,30 +85,57 @@ class PokedexViewModelTest {
     @Test
     fun filtersByTypeAndMethodThenResets() = runTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        viewModel.search("a")
-        viewModel.filterType(POISON)
+        viewModel.onAction(PokedexAction.Search("a"))
+        viewModel.onAction(PokedexAction.FilterType(POISON))
         assertEquals(listOf(23, 24), ids())
-        viewModel.filterType(null)
-        viewModel.filterMethod(ObtainMethod.EVOLUTION)
+        viewModel.onAction(PokedexAction.FilterType(null))
+        viewModel.onAction(PokedexAction.FilterMethod(ObtainMethod.EVOLUTION))
         assertEquals(listOf(24, 134), ids())
-        viewModel.resetFilters()
+        viewModel.onAction(PokedexAction.ResetFilters)
         assertNull(viewModel.state.value.filter.method)
         assertEquals("a", viewModel.state.value.filter.query)
+    }
+
+    @Test
+    fun startsLoading() {
+        val state = pokedexViewModel(FakePokedexDao()).state.value
+        assertTrue(state.loading)
+        assertFalse(state.failed)
+    }
+
+    @Test
+    fun aFilterWithoutMatchIsEmptyNotAnError() = runTest {
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(PokedexAction.Search("mewtwo"))
+        val state = viewModel.state.value
+        assertTrue(state.entries.isEmpty())
+        assertFalse(state.failed)
+        assertEquals(5, state.total)
+    }
+
+    @Test
+    fun anUnreadableDatabaseIsAnError() = runTest {
+        val failing = pokedexViewModel(FakePokedexDao(failing = true))
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { failing.state.collect {} }
+        val state = failing.state.value
+        assertTrue(state.failed)
+        assertFalse(state.loading)
+        assertTrue(state.entries.isEmpty())
     }
 
     @Test
     fun caughtPokemonAreTrackedPerVersionAndFavoritesAcrossGames() = runTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         val abo = viewModel.state.value.entries.first { it.pokemonId == 23 }
-        viewModel.toggleCaught(abo)
-        viewModel.toggleFavorite(abo)
+        viewModel.onAction(PokedexAction.ToggleCaught(abo))
+        viewModel.onAction(PokedexAction.ToggleFavorite(abo))
         assertEquals(1, viewModel.state.value.caughtCount)
-        viewModel.filterCaught(CaughtFilter.CAUGHT)
+        viewModel.onAction(PokedexAction.FilterCaught(CaughtFilter.CAUGHT))
         assertEquals(listOf(23), ids())
-        viewModel.filterCaught(CaughtFilter.MISSING)
+        viewModel.onAction(PokedexAction.FilterCaught(CaughtFilter.MISSING))
         assertEquals(listOf(24, 27, 133, 134), ids())
-        viewModel.filterCaught(CaughtFilter.ALL)
-        viewModel.toggleFavoritesOnly()
+        viewModel.onAction(PokedexAction.FilterCaught(CaughtFilter.ALL))
+        viewModel.onAction(PokedexAction.ToggleFavoritesOnly)
         assertEquals(listOf(23), ids())
         // Bleu : rien de capturé dans cette version, mais les favoris sont communs à tous les jeux.
         settings.selectVersion(blue.versionId)
@@ -133,56 +143,5 @@ class PokedexViewModelTest {
         assertEquals(listOf(23), ids())
         assertFalse(viewModel.state.value.entries.single().caught)
         assertTrue(viewModel.state.value.entries.single().favorite)
-    }
-
-    private class FakeGameDao(private val games: List<Game>) : GameDao {
-        override fun games(): Flow<List<Game>> = flowOf(games)
-    }
-
-    private class FakeDataStore : DataStore<Preferences> {
-        private val state = MutableStateFlow(emptyPreferences())
-        override val data: Flow<Preferences> = state
-
-        override suspend fun updateData(transform: suspend (t: Preferences) -> Preferences): Preferences =
-            transform(state.value).also { state.value = it }
-    }
-
-    private class FakePokedexDao : PokedexDao {
-        override suspend fun pokedex(versionGroupId: Int) = listOf(
-            PokedexRow(23, 23, "Abo", "Ekans"),
-            PokedexRow(24, 24, "Arbok", "Arbok"),
-            PokedexRow(27, 27, "Sabelette", "Sandshrew"),
-            PokedexRow(133, 133, "Évoli", "Eevee"),
-            PokedexRow(134, 134, "Aquali", "Vaporeon")
-        )
-
-        override suspend fun pokemonTypes(generationId: Int) = listOf(
-            PokemonTypeRow(23, 1, POISON, "poison", "Poison"),
-            PokemonTypeRow(24, 1, POISON, "poison", "Poison"),
-            PokemonTypeRow(27, 1, 5, "ground", "Sol"),
-            PokemonTypeRow(133, 1, 1, "normal", "Normal"),
-            PokemonTypeRow(134, 1, 11, "water", "Eau")
-        )
-
-        override suspend fun types(generationId: Int) = listOf(
-            TypeRow(1, "normal", "Normal"),
-            TypeRow(POISON, "poison", "Poison"),
-            TypeRow(5, "ground", "Sol"),
-            TypeRow(11, "water", "Eau")
-        )
-
-        override suspend fun encounterMethods(versionId: Int) = when (versionId) {
-            1 -> listOf(PokemonMethodRow(23, "walk"), PokemonMethodRow(133, "gift"))
-            else -> listOf(PokemonMethodRow(27, "walk"), PokemonMethodRow(133, "gift"))
-        }
-
-        override suspend fun staticPokemon(versionGroupId: Int) = emptyList<PokemonMethodRow>()
-
-        override suspend fun evolutions(versionGroupId: Int) =
-            listOf(EvolutionPairRow(23, 24), EvolutionPairRow(133, 134))
-    }
-
-    private companion object {
-        const val POISON = 4
     }
 }

@@ -78,7 +78,7 @@ import org.opensources.pokmaps.ui.common.formatNumber
 import org.opensources.pokmaps.ui.common.label
 
 @Composable
-fun PokemonScreen(
+fun PokemonRoute(
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
     onShowOnMap: () -> Unit,
@@ -86,6 +86,26 @@ fun PokemonScreen(
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    PokemonScreen(
+        state,
+        onAction = { action ->
+            viewModel.onAction(action)
+            if (action == PokemonAction.ShowOnMap) onShowOnMap()
+        },
+        onOpenPokemon = onOpenPokemon,
+        onOpenItem = onOpenItem,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun PokemonScreen(
+    state: PokemonUiState,
+    onAction: (PokemonAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val details = state.details
     val game = state.game
     when {
@@ -97,53 +117,37 @@ fun PokemonScreen(
             Text(stringResource(if (state.failed) R.string.data_load_error else R.string.pokemon_not_found))
         }
 
-        else -> PokemonContent(
-            game = game,
-            details = details,
-            catch = state.catch,
-            caught = state.caught,
-            favorite = state.favorite,
-            onToggleCaught = viewModel::toggleCaught,
-            onToggleFavorite = viewModel::toggleFavorite,
-            onOpenPokemon = onOpenPokemon,
-            onOpenItem = onOpenItem,
-            onShowOnMap = {
-                viewModel.showOnMap()
-                onShowOnMap()
-            },
-            onCatchLevel = viewModel::setCatchLevel,
-            onCatchHp = viewModel::setCatchHp,
-            onCatchStatus = viewModel::setCatchStatus,
-            modifier = modifier
-        )
+        else -> PokemonContent(state, game, details, onAction, onOpenPokemon, onOpenItem, modifier)
     }
 }
 
 @Composable
 private fun PokemonContent(
+    state: PokemonUiState,
     game: Game,
     details: PokemonDetails,
-    catch: CatchUiState?,
-    caught: Boolean,
-    favorite: Boolean,
-    onToggleCaught: () -> Unit,
-    onToggleFavorite: () -> Unit,
+    onAction: (PokemonAction) -> Unit,
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
-    onShowOnMap: () -> Unit,
-    onCatchLevel: (Int) -> Unit,
-    onCatchHp: (HpChoice) -> Unit,
-    onCatchStatus: (CatchStatus) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var movesTab by rememberSaveable(details.id) { mutableIntStateOf(0) }
     LazyColumn(modifier.fillMaxSize()) {
-        item { Header(details, game, caught, favorite, onToggleCaught, onToggleFavorite) }
+        item {
+            PokemonHeader(
+                details,
+                game,
+                state.caught,
+                state.favorite,
+                onToggleCaught = { onAction(PokemonAction.ToggleCaught) },
+                onToggleFavorite = { onAction(PokemonAction.ToggleFavorite) }
+            )
+        }
         section(R.string.pokemon_stats) { Stats(details.stats) }
         section(R.string.pokemon_weaknesses) { Weaknesses(details) }
         section(R.string.pokemon_evolutions) { Evolutions(details, onOpenPokemon, onOpenItem) }
-        section(R.string.pokemon_locations) { Locations(game, details, onShowOnMap) }
-        catch?.let { section(R.string.catch_title) { CatchCalculator(it, onCatchLevel, onCatchHp, onCatchStatus) } }
+        section(R.string.pokemon_locations) { Locations(game, details) { onAction(PokemonAction.ShowOnMap) } }
+        state.catch?.let { section(R.string.catch_title) { CatchCalculator(it, onAction) } }
         section(R.string.pokemon_moves) {
             PrimaryTabRow(selectedTabIndex = movesTab) {
                 MOVE_TABS.forEachIndexed { index, label ->
@@ -174,118 +178,21 @@ private fun LazyListScope.section(title: Int, content: @Composable () -> Unit) {
     }
 }
 
-@Composable
-private fun Header(
-    details: PokemonDetails,
-    game: Game,
-    caught: Boolean,
-    favorite: Boolean,
-    onToggleCaught: () -> Unit,
-    onToggleFavorite: () -> Unit
-) {
-    var showArtwork by rememberSaveable(details.id) { mutableStateOf(false) }
-    var artworkFailed by remember(details.id) { mutableStateOf(false) }
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        // Capturé dans la version choisie, et favori (commun à tous les jeux).
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-            CaughtButton(caught, onToggleCaught)
-            Text(
-                stringResource(
-                    if (caught) R.string.collection_caught_in else R.string.collection_not_caught_in,
-                    game.name
-                ),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.weight(1f)
-            )
-            FavoriteButton(favorite, onToggleFavorite)
-        }
-        Box(Modifier.size(SPRITE_SIZE), contentAlignment = Alignment.Center) {
-            if (showArtwork && !artworkFailed) {
-                AsyncImage(
-                    model = Sprites.officialArtwork(details.id),
-                    contentDescription = details.name,
-                    filterQuality = FilterQuality.Medium,
-                    onError = { artworkFailed = true },
-                    modifier = Modifier.fillMaxSize()
-                )
-            } else if (LocalAnimatedSprites.current) {
-                AnimatedPokemonSprite(details.id, details.name, Modifier.fillMaxSize())
-            } else {
-                AssetImage(details.spritePath ?: details.iconPath, details.name, Modifier.fillMaxSize())
-            }
-        }
-        TextButton(onClick = { showArtwork = !showArtwork }) {
-            Icon(
-                painterResource(R.drawable.ic_image),
-                contentDescription = null,
-                modifier = Modifier.padding(end = 8.dp)
-            )
-            Text(stringResource(if (showArtwork) R.string.pokemon_show_sprite else R.string.pokemon_show_artwork))
-        }
-        if (showArtwork && artworkFailed) {
-            Text(
-                stringResource(R.string.pokemon_artwork_error),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.error
-            )
-        }
-        details.number?.let {
-            Text(stringResource(R.string.pokedex_number, it), color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        Text(details.name, style = MaterialTheme.typography.headlineMedium)
-        Text(
-            details.genus,
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { details.types.forEach { TypeBadge(it) } }
-        Text(
-            stringResource(
-                R.string.pokemon_size,
-                formatNumber(details.heightDm / 10.0),
-                formatNumber(details.weightHg / 10.0)
-            ),
-            style = MaterialTheme.typography.bodyMedium
-        )
-        Text(
-            stringResource(R.string.pokemon_capture_rate, details.captureRate) + " · " +
-                stringResource(R.string.pokemon_growth, details.growthRate),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        details.description?.let {
-            Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
-        }
-    }
-}
-
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun CatchCalculator(
-    catch: CatchUiState,
-    onLevel: (Int) -> Unit,
-    onHp: (HpChoice) -> Unit,
-    onStatus: (CatchStatus) -> Unit
-) {
+private fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.catch_level, catch.level), style = MaterialTheme.typography.bodyMedium)
         Slider(
             value = catch.level.toFloat(),
-            onValueChange = { onLevel(it.toInt()) },
+            onValueChange = { onAction(PokemonAction.SetCatchLevel(it.toInt())) },
             valueRange = 1f..PokemonViewModel.MAX_LEVEL.toFloat()
         )
         Text(stringResource(R.string.catch_hp), style = MaterialTheme.typography.bodyMedium)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             HpChoice.entries.forEach { hp ->
                 FilterChip(selected = catch.hp == hp, onClick = {
-                    onHp(hp)
+                    onAction(PokemonAction.SetCatchHp(hp))
                 }, label = { Text(stringResource(hp.label)) })
             }
         }
@@ -294,7 +201,7 @@ private fun CatchCalculator(
             CatchStatus.entries.forEach { status ->
                 FilterChip(
                     selected = catch.status == status,
-                    onClick = { onStatus(status) },
+                    onClick = { onAction(PokemonAction.SetCatchStatus(status)) },
                     label = { Text(stringResource(status.label)) }
                 )
             }
@@ -400,7 +307,5 @@ private val Ball.label: Int
         Ball.MASTER -> R.string.ball_master
     }
 
-private val SPRITE_SIZE = 160.dp
-private val BRANCH_SPACING = 8.dp
 private val MOVE_TABS = listOf(R.string.pokemon_moves_level, R.string.pokemon_moves_machine)
 private const val PERCENT = 100

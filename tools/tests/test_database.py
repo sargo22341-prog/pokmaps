@@ -1,5 +1,8 @@
 """Contrôles de la base générée à partir des vraies sources (CSV PokéAPI + tools/data/)."""
 
+import sqlite3
+from pathlib import Path
+
 from pokemaps_data.builder import SCHEMA_VERSION
 from pokemaps_data.validate import validate
 
@@ -7,20 +10,23 @@ RED, BLUE, YELLOW = 1, 2, 3
 RED_BLUE, YELLOW_GROUP = 1, 2
 GEN1 = 1
 
+# Valeur d'une colonne SQLite telle que la renvoie sqlite3.
+SqlValue = int | float | str | bytes | None
 
-def scalar(db, query, *args):
+
+def scalar(db: sqlite3.Connection, query: str, *args: object) -> SqlValue:
     return db.execute(query, args).fetchone()[0]
 
 
-def test_validation_passes(database):
+def test_validation_passes(database: Path) -> None:
     assert validate(database) == []
 
 
-def test_schema_version(db):
+def test_schema_version(db: sqlite3.Connection) -> None:
     assert scalar(db, "PRAGMA user_version") == SCHEMA_VERSION
 
 
-def test_kanto_pokedex(db):
+def test_kanto_pokedex(db: sqlite3.Connection) -> None:
     assert (
         scalar(
             db,
@@ -31,13 +37,13 @@ def test_kanto_pokedex(db):
     assert scalar(db, "SELECT count(*) FROM pokemon") == 151
 
 
-def test_french_names(db):
+def test_french_names(db: sqlite3.Connection) -> None:
     names = dict(db.execute("SELECT id, name_fr FROM pokemon WHERE id IN (1, 25, 122, 133)"))
     assert names == {1: "Bulbizarre", 25: "Pikachu", 122: "M. Mime", 133: "Évoli"}
     assert dict(db.execute("SELECT id, name_fr FROM version")) == {RED: "Rouge", BLUE: "Bleu", YELLOW: "Jaune"}
 
 
-def test_gen1_special_stat(db):
+def test_gen1_special_stat(db: sqlite3.Connection) -> None:
     stats = dict(
         db.execute("SELECT stat_id, base_stat FROM pokemon_stat WHERE pokemon_id = 65 AND generation_id = ?", (GEN1,))
     )
@@ -45,8 +51,8 @@ def test_gen1_special_stat(db):
     assert stats == {1: 55, 2: 50, 3: 45, 6: 120, 9: 135}
 
 
-def test_gen1_types(db):
-    def types(pokemon_id):
+def test_gen1_types(db: sqlite3.Connection) -> None:
+    def types(pokemon_id: int) -> list[str]:
         return [
             row[0]
             for row in db.execute(
@@ -61,8 +67,8 @@ def test_gen1_types(db):
     assert scalar(db, "SELECT count(*) FROM type") == 15
 
 
-def test_gen1_type_chart(db):
-    def factor(attacking, defending):
+def test_gen1_type_chart(db: sqlite3.Connection) -> None:
+    def factor(attacking: str, defending: str) -> int:
         return scalar(
             db,
             """SELECT damage_factor FROM type_efficacy e JOIN type a ON a.id = e.attacking_type_id
@@ -78,8 +84,8 @@ def test_gen1_type_chart(db):
     assert factor("ice", "fire") == 100
 
 
-def test_gen1_moves(db):
-    def move(move_id):
+def test_gen1_moves(db: sqlite3.Connection) -> None:
+    def move(move_id: int) -> tuple[str, int | None, str]:
         return db.execute(
             """SELECT t.identifier, mvg.power, mvg.damage_class FROM move_version_group mvg
                JOIN type t ON t.id = mvg.type_id WHERE mvg.move_id = ? AND mvg.version_group_id = ?""",
@@ -91,7 +97,7 @@ def test_gen1_moves(db):
     assert move(57) == ("water", 95, "special")  # Surf
 
 
-def test_route_1_red(db):
+def test_route_1_red(db: sqlite3.Connection) -> None:
     rows = db.execute(
         """SELECT p.name_fr, e.min_level, e.max_level, e.chance FROM encounter e
            JOIN pokemon p ON p.id = e.pokemon_id JOIN location_area a ON a.id = e.location_area_id
@@ -103,8 +109,8 @@ def test_route_1_red(db):
     assert rows == [("Rattata", 2, 4, 50.0), ("Roucool", 2, 5, 50.0)]
 
 
-def test_version_exclusives(db):
-    def walk_versions(pokemon_id):
+def test_version_exclusives(db: sqlite3.Connection) -> None:
+    def walk_versions(pokemon_id: int) -> set[int]:
         return {
             row[0]
             for row in db.execute(
@@ -118,7 +124,7 @@ def test_version_exclusives(db):
     assert walk_versions(27) == {BLUE, YELLOW}  # Sabelette
 
 
-def test_one_off_encounters(db):
+def test_one_off_encounters(db: sqlite3.Connection) -> None:
     rows = db.execute(
         """SELECT a.identifier, m.identifier, e.quantity, e.note_fr FROM encounter e
            JOIN location_area a ON a.id = e.location_area_id JOIN encounter_method m ON m.id = e.method_id
@@ -128,7 +134,7 @@ def test_one_off_encounters(db):
     assert ("", "static", 6, "Déguisé en Poké Ball") in rows
 
 
-def test_curation(db):
+def test_curation(db: sqlite3.Connection) -> None:
     # Le doublon du Magicarpe vendu « Route 3 » est retiré, celui de la Route 4 annoté.
     magikarp = db.execute(
         """SELECT l.identifier, e.note_fr FROM encounter e JOIN encounter_method m ON m.id = e.method_id
@@ -142,7 +148,7 @@ def test_curation(db):
     assert scalar(db, "SELECT name_fr FROM location WHERE identifier = 'seafoam-islands'") == "Îles Écume"
 
 
-def test_fossils_have_conditions(db):
+def test_fossils_have_conditions(db: sqlite3.Connection) -> None:
     conditions = {
         row[0]
         for row in db.execute(
@@ -154,8 +160,8 @@ def test_fossils_have_conditions(db):
     assert conditions == {"item-helix-fossil"}
 
 
-def test_learnsets_differ_between_red_blue_and_yellow(db):
-    def learnset(group):
+def test_learnsets_differ_between_red_blue_and_yellow(db: sqlite3.Connection) -> None:
+    def learnset(group: int) -> list[tuple[int, int]]:
         return db.execute(
             """SELECT level, move_id FROM pokemon_move
                WHERE pokemon_id = 25 AND version_group_id = ? AND method = 'level-up' ORDER BY level, move_id""",
@@ -166,7 +172,7 @@ def test_learnsets_differ_between_red_blue_and_yellow(db):
     assert (9, 86) in learnset(RED_BLUE)  # Cage Éclair au niveau 9
 
 
-def test_gen1_evolutions(db):
+def test_gen1_evolutions(db: sqlite3.Connection) -> None:
     eevee = db.execute(
         """SELECT e.to_pokemon_id, e.trigger, i.identifier FROM evolution e LEFT JOIN item i ON i.id = e.item_id
            WHERE e.from_pokemon_id = 133 AND e.version_group_id = ? ORDER BY e.to_pokemon_id""",
@@ -180,7 +186,7 @@ def test_gen1_evolutions(db):
     ]
 
 
-def test_sprites(assets, db):
+def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
     sprites = assets / "sprites"
     for pokemon_id in (1, 25, 151):
         assert (sprites / "pokemon/icon" / f"{pokemon_id}.png").is_file()
@@ -199,7 +205,7 @@ def test_sprites(assets, db):
 # --- Cartes -----------------------------------------------------------------------
 
 
-def test_world_map_contains_all_towns_and_routes(db):
+def test_world_map_contains_all_towns_and_routes(db: sqlite3.Connection) -> None:
     for version_group in (RED_BLUE, YELLOW_GROUP):
         world = db.execute(
             "SELECT id FROM map WHERE identifier = 'kanto' AND version_group_id = ?", (version_group,)
@@ -208,7 +214,7 @@ def test_world_map_contains_all_towns_and_routes(db):
         assert children == 11 + 25  # villes (dont le Plateau Indigo) et routes
 
 
-def test_connected_maps_are_adjacent(db):
+def test_connected_maps_are_adjacent(db: sqlite3.Connection) -> None:
     """La Route 1 est juste au nord de Bourg Palette, centrée sur Jadielle."""
     rows = dict(
         (identifier, (x, y, w, h))
@@ -224,7 +230,7 @@ def test_connected_maps_are_adjacent(db):
     assert vy + vh == ry and vx == rx - 5 * 32
 
 
-def test_static_pokemon_on_maps(db):
+def test_static_pokemon_on_maps(db: sqlite3.Connection) -> None:
     rows = set(
         db.execute(
             """SELECT m.identifier, p.name_fr, o.level FROM map_object o JOIN map m ON m.id = o.map_id
@@ -236,7 +242,7 @@ def test_static_pokemon_on_maps(db):
     assert ("power-plant", "Électhor", 50) in rows
 
 
-def test_map_items(db):
+def test_map_items(db: sqlite3.Connection) -> None:
     # Pierre Lune de la Route 2 et CT du Mont Sélénite, objet caché de la Forêt de Jade.
     items = set(
         db.execute(
@@ -250,7 +256,7 @@ def test_map_items(db):
     assert ("viridian-forest", "potion", "hidden_item") in items
 
 
-def test_warps_lead_back(db):
+def test_warps_lead_back(db: sqlite3.Connection) -> None:
     """La porte du Labo du Prof. Chen mène au labo, et sa sortie ramène devant la porte."""
     lab, pallet = (
         db.execute("SELECT id FROM map WHERE identifier = ? AND version_group_id = ?", (name, RED_BLUE)).fetchone()[0]
@@ -263,7 +269,7 @@ def test_warps_lead_back(db):
     assert (pallet, *door) in exits
 
 
-def test_tiles_exist_for_every_level(db, assets):
+def test_tiles_exist_for_every_level(db: sqlite3.Connection, assets: Path) -> None:
     rows = db.execute(
         """SELECT vg.identifier, m.identifier, m.level_count FROM map m
            JOIN version_group vg ON vg.id = m.version_group_id WHERE m.parent_map_id IS NULL"""
@@ -276,7 +282,7 @@ def test_tiles_exist_for_every_level(db, assets):
         assert [p.name for p in (folder / "0").iterdir()] == ["0_0.webp"]
 
 
-def test_object_sprites_exist(db, assets):
+def test_object_sprites_exist(db: sqlite3.Connection, assets: Path) -> None:
     rows = db.execute(
         """SELECT DISTINCT vg.identifier, o.sprite FROM map_object o JOIN map m ON m.id = o.map_id
            JOIN version_group vg ON vg.id = m.version_group_id WHERE o.sprite IS NOT NULL"""
@@ -285,7 +291,7 @@ def test_object_sprites_exist(db, assets):
     assert missing == []
 
 
-def _party(db, version_group, trainer_class):
+def _party(db: sqlite3.Connection, version_group: int, trainer_class: str) -> list[tuple]:
     return db.execute(
         """SELECT p.name_fr, t.level, m1.name_fr, m2.name_fr, m3.name_fr, m4.name_fr FROM trainer_pokemon t
            JOIN map_object o ON o.id = t.map_object_id JOIN map m ON m.id = o.map_id
@@ -297,7 +303,7 @@ def _party(db, version_group, trainer_class):
     ).fetchall()
 
 
-def test_gym_leader_parties(db):
+def test_gym_leader_parties(db: sqlite3.Connection) -> None:
     # Rouge / Bleu : Onix de Pierre avec Patience (LoneMoves) ; Jaune : attaques de SpecialTrainerMoves.
     assert _party(db, RED_BLUE, "brock") == [
         ("Racaillou", 12, "Charge", "Boul’Armure", None, None),
@@ -308,7 +314,7 @@ def test_gym_leader_parties(db):
     ]
 
 
-def test_trainer_default_moves(db):
+def test_trainer_default_moves(db: sqlite3.Connection) -> None:
     """Sans attaque spéciale, un Pokémon de dresseur connaît les 4 dernières attaques apprises à son niveau."""
     party = _party(db, RED_BLUE, "bug-catcher")
     assert ("Aspicot", 6, "Dard-Venin", "Sécrétion", None, None) in party
@@ -321,7 +327,7 @@ def test_trainer_default_moves(db):
     assert {row[0] for row in without} <= {"rival1", "rival2", "rival3"}
 
 
-def test_npc_offers(db):
+def test_npc_offers(db: sqlite3.Connection) -> None:
     offers = set(
         db.execute(
             """SELECT m.identifier, n.kind, i.identifier, p.identifier, n.quantity, n.price, w.identifier
@@ -338,7 +344,7 @@ def test_npc_offers(db):
     assert ("pewter-gym", "gift_item", "tm34", None, 1, None, None) in offers  # CT Patience de Pierre
 
 
-def test_pokemon_spots(db):
+def test_pokemon_spots(db: sqlite3.Connection) -> None:
     spots = dict(
         db.execute(
             """SELECT m.identifier || '/' || s.kind, count(*) FROM map_spot s JOIN map m ON m.id = s.map_id
@@ -362,3 +368,21 @@ def test_pokemon_spots(db):
         for i, (ax, ay) in enumerate(points):
             for bx, by in points[i + 1 :]:
                 assert (ax - bx) ** 2 + (ay - by) ** 2 >= (3 * 16) ** 2
+
+
+def test_object_names(db: sqlite3.Connection) -> None:
+    def names(kind: str, map_identifier: str) -> set[str]:
+        return {
+            row[0]
+            for row in db.execute(
+                """SELECT o.name_fr FROM map_object o JOIN map m ON m.id = o.map_id
+                   WHERE m.version_group_id = ? AND o.kind = ? AND m.identifier = ?""",
+                (RED_BLUE, kind, map_identifier),
+            )
+        }
+
+    assert names("trainer", "viridian-forest") == {"Scout"}
+    assert "Vendeur" in names("npc", "viridian-mart")
+    assert names("pokemon", "power-plant") >= {"Électhor"}
+    assert names("item", "route-2") == {"PV Plus", "Pierre Lune"}
+    assert scalar(db, "SELECT count(*) FROM map_object WHERE trim(name_fr) = ''") == 0
