@@ -11,7 +11,7 @@ import dagger.hilt.android.HiltAndroidApp
 class PokemapsApplication :
     Application(),
     SingletonImageLoader.Factory {
-    /** Chargeur d'images de Coil, avec le décodeur des GIF animés (sprites animés des Pokémon). */
+    /** Chargeur d'images de Coil, avec le décodeur des images animées (sprites animés des Pokémon, en WebP). */
     override fun newImageLoader(context: PlatformContext): ImageLoader = ImageLoader.Builder(context)
         .components { add(AnimatedImageDecoder.Factory()) }
         .build()

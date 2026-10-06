@@ -24,7 +24,7 @@ CREATE TABLE version_group (
     name_fr TEXT NOT NULL,
     generation_id INTEGER NOT NULL,
     sort_order INTEGER NOT NULL,
-    -- Dossier des sprites du jeu dans les assets : sprites/pokemon/<identifier>/<pokemon_id>.png
+    -- Dossier des sprites du jeu dans les assets : sprites/pokemon/<identifier>/<pokemon_id>.webp
     has_sprites INTEGER NOT NULL
 );
 
@@ -151,7 +151,7 @@ CREATE TABLE item (
     identifier TEXT NOT NULL,
     name_fr TEXT NOT NULL,
     category TEXT NOT NULL,
-    -- Icône dans les assets : sprites/items/<identifier>.png
+    -- Icône dans les assets : sprites/items/<identifier>.webp
     has_sprite INTEGER NOT NULL,
     -- Description du Pokédex des objets (NULL pour les CT / CS : c'est l'attaque qui compte).
     description_fr TEXT
@@ -305,7 +305,7 @@ CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 
 -- Objets et personnages d'une carte. kind : item (objet ramassable), hidden_item (objet caché),
 -- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau)
--- ou npc. sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.png.
+-- ou npc. sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.webp.
 -- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon ou objet).
 CREATE TABLE map_object (
     id INTEGER NOT NULL PRIMARY KEY,

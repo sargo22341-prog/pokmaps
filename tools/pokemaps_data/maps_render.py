@@ -15,6 +15,7 @@ from PIL import Image
 
 from .maps_layout import WORLD, GameMaps, identifier
 from .pret import BLOCK_PX, TILE_PX, PretMap, PretRepo
+from .webp import WEBP_LOSSLESS
 
 TILE_SIZE = 256
 # Blocs de bordure dessinés autour des villes et routes (le jeu en affiche 4 à 5 au bord de l'écran).
@@ -169,6 +170,7 @@ def write_tiles(display: DisplayMap, output: Path) -> int:
                     continue  # tuile entièrement transparente : l'application n'affiche rien
                 path = output / str(level) / f"{row}_{column}.webp"
                 path.parent.mkdir(parents=True, exist_ok=True)
+                # method=4 et non 6 : 6 n'allège les tuiles que de 4 % (mesuré), pour un encodage 25 fois plus long.
                 tile.save(path, "WEBP", lossless=True, method=4)
                 count += 1
     return count
@@ -188,4 +190,4 @@ def write_sprites(repo: PretRepo, sprites: set[str], output: Path) -> None:
                 shade = 3 - round(gray.getpixel((x, y)) / 85)
                 image.putpixel((x, y), (*colors[shade], 0 if shade == 0 else 255))
         output.mkdir(parents=True, exist_ok=True)
-        image.save(output / f"{identifier(sprite.removeprefix('SPRITE_'))}.png", optimize=True)
+        image.save(output / f"{identifier(sprite.removeprefix('SPRITE_'))}.webp", "WEBP", **WEBP_LOSSLESS)

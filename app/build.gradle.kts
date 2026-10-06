@@ -60,6 +60,24 @@ android {
         buildConfig = true
     }
 
+    androidResources {
+        // Interface en français uniquement : les traductions des bibliothèques (Material, AndroidX) dans les autres
+        // langues ne seraient jamais affichées avec nos textes. Elles occupaient l'essentiel de resources.arsc.
+        localeFilters += "fr"
+    }
+
+    // Bloc chiffré des dépendances réservé à Google Play : inutile hors du Play Store, et illisible pour qui
+    // vérifie l'APK publié dans les GitHub Releases.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
+    testOptions {
+        // Tests UI Compose sous Robolectric : ressources, manifeste fusionné et assets (base, sprites, tuiles).
+        unitTests.isIncludeAndroidResources = true
+    }
+
     lint {
         abortOnError = true
         checkDependencies = true
@@ -88,6 +106,8 @@ ksp {
 tasks.withType<Test>().configureEach {
     // sqlite-jdbc utilise JNI pour contrôler le schéma de Room dans les tests JVM.
     jvmArgs("--enable-native-access=ALL-UNNAMED")
+    // Robolectric (API 37) crée la mémoire partagée de l'application via les descripteurs de fichier du JDK.
+    jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED")
     systemProperty("pokemaps.roomSchemas", layout.buildDirectory.dir("room-schemas").get().asFile.path)
     systemProperty("pokemaps.database", file("src/main/assets/database/pokedex.db").path)
 }
@@ -114,11 +134,23 @@ dependencies {
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    // Activité vide déclarée dans le manifeste debug, où les tests Compose affichent un écran seul.
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.sqlite.jdbc)
     testImplementation(libs.gson)
+    // Tests UI Compose exécutés sur la JVM (Robolectric) : en CI comme en local, sans appareil ni émulateur.
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    testImplementation(libs.robolectric)
+    // Versions imposées : celles tirées par Compose et Robolectric appellent InputManager.getInstance(), retiré
+    // de l'API 37.
+    testImplementation(libs.androidx.test.espresso.core)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.hilt.android.testing)
+    kspTest(libs.hilt.compiler)
 }
 
 // L'application doit fonctionner sans services Google Play (GrapheneOS) :

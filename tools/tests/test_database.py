@@ -3,6 +3,8 @@
 import sqlite3
 from pathlib import Path
 
+from PIL import Image
+
 from pokemaps_data.builder import SCHEMA_VERSION
 from pokemaps_data.validate import validate
 
@@ -189,14 +191,15 @@ def test_gen1_evolutions(db: sqlite3.Connection) -> None:
 def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
     sprites = assets / "sprites"
     for pokemon_id in (1, 25, 151):
-        assert (sprites / "pokemon/icon" / f"{pokemon_id}.png").is_file()
-        assert (sprites / "pokemon/red-blue" / f"{pokemon_id}.png").is_file()
-        assert (sprites / "pokemon/yellow" / f"{pokemon_id}.png").is_file()
-        assert (sprites / "pokemon/animated" / f"{pokemon_id}.gif").read_bytes().startswith(b"GIF8")
+        for folder in ("icon", "red-blue", "yellow"):
+            with Image.open(sprites / "pokemon" / folder / f"{pokemon_id}.webp") as image:
+                assert (image.format, getattr(image, "is_animated", False)) == ("WEBP", False)
+        with Image.open(sprites / "pokemon/animated" / f"{pokemon_id}.webp") as image:
+            assert (image.format, image.is_animated) == ("WEBP", True)
     missing = [
         identifier
         for identifier, has_sprite in db.execute("SELECT identifier, has_sprite FROM item")
-        if has_sprite != (sprites / "items" / f"{identifier}.png").is_file()
+        if has_sprite != (sprites / "items" / f"{identifier}.webp").is_file()
     ]
     assert missing == []
     assert scalar(db, "SELECT count(*) FROM item WHERE has_sprite = 0") == 0
@@ -287,7 +290,7 @@ def test_object_sprites_exist(db: sqlite3.Connection, assets: Path) -> None:
         """SELECT DISTINCT vg.identifier, o.sprite FROM map_object o JOIN map m ON m.id = o.map_id
            JOIN version_group vg ON vg.id = m.version_group_id WHERE o.sprite IS NOT NULL"""
     ).fetchall()
-    missing = [row for row in rows if not (assets / "maps" / row[0] / "sprites" / f"{row[1]}.png").exists()]
+    missing = [row for row in rows if not (assets / "maps" / row[0] / "sprites" / f"{row[1]}.webp").exists()]
     assert missing == []
 
 

@@ -6,6 +6,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.map.MapTiles
@@ -22,18 +23,23 @@ import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
 import org.opensources.pokmaps.domain.usecase.GetPokemonMapsUseCase
 import org.opensources.pokmaps.domain.usecase.MapLayersUseCase
+import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObserveMapCatalogUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
+import org.robolectric.RobolectricTestRunner
 
 /**
- * États de l'écran tant qu'aucune carte n'est affichée. Une carte MapCompose charge ses tuiles avec les API
- * graphiques d'Android, absentes des tests JVM : la sélection et les fiches sont testées dans [MapSelectionTest].
+ * Chargement de la carte et demandes des autres écrans. Robolectric fournit les API graphiques d'Android dont
+ * MapCompose a besoin ; la sélection et les fiches sont testées dans [MapSelectionTest].
  */
+@RunWith(RobolectricTestRunner::class)
 class MapViewModelTest {
     @get:Rule
     val mainDispatcher = MainDispatcherRule()
+
+    private val requests = MapRequests()
 
     private fun viewModel(games: FakeGameDao, maps: FakeMapDao = FakeMapDao()): MapViewModel {
         val dataStore = FakeDataStore()
@@ -44,7 +50,7 @@ class MapViewModelTest {
             GetMapEncountersUseCase(mapRepository),
             GetPokemonMapsUseCase(mapRepository),
             GetMapObjectDetailsUseCase(mapRepository),
-            MapRequests(),
+            requests,
             MapLayersUseCase(MapSettings(dataStore)),
             ObserveCollectionUseCase(gameRepository, CollectionSettings(dataStore)),
             DisplaySettingsUseCase(DisplaySettings(dataStore)),
@@ -69,5 +75,32 @@ class MapViewModelTest {
         assertTrue(state.failed)
         assertNull(state.mapState)
         assertNull(state.zone)
+    }
+
+    @Test
+    fun theMapIsCreatedOnceTheScreenIsShown() {
+        val viewModel = viewModel(FakeGameDao())
+        assertNull(viewModel.state.value.map)
+
+        viewModel.onScreenShown()
+        assertEquals("kanto", viewModel.state.value.map?.identifier)
+    }
+
+    @Test
+    fun aRequestSentWhileTheMapIsHiddenWaitsForTheScreen() {
+        val viewModel = viewModel(FakeGameDao())
+        viewModel.onScreenShown()
+        viewModel.onScreenHidden()
+
+        // « Voir sur la carte » depuis une fiche : traitée tout de suite, la carte serait recréée au retour de
+        // l'écran à son ancienne position, et le recentrage perdu.
+        val request = MapRequest.OpenPlace("viridian-mart")
+        requests.send(request)
+        assertEquals("kanto", viewModel.state.value.map?.identifier)
+        assertEquals(request, requests.pending.value)
+
+        viewModel.onScreenShown()
+        assertEquals("viridian-mart", viewModel.state.value.map?.identifier)
+        assertNull(requests.pending.value)
     }
 }

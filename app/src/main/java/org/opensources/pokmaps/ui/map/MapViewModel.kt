@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
@@ -60,6 +61,13 @@ class MapViewModel @Inject constructor(
     /** L'écran de la carte a déjà été affiché une fois (voir [onScreenShown]). */
     private var screenShown = false
 
+    /**
+     * L'écran de la carte est affiché. Changements de jeu et demandes des autres écrans attendent qu'il le soit :
+     * une carte MapCompose créée ou déplacée pendant qu'il est caché serait recréée à son retour
+     * ([onScreenShown]) à l'ancienne position, et le recentrage (« Voir sur la carte ») perdu.
+     */
+    private val screenVisible = MutableStateFlow(false)
+
     init {
         viewModelScope.launch { followCatalog() }
         viewModelScope.launch { followRequests() }
@@ -91,10 +99,17 @@ class MapViewModel @Inject constructor(
      * ses gestes gardent l'état de l'ancien affichage et les touches ne sélectionnent plus d'autre lieu.
      */
     fun onScreenShown() {
-        if (!screenShown) {
-            screenShown = true
-            return
-        }
+        if (screenShown) recreateMap()
+        screenShown = true
+        screenVisible.value = true
+    }
+
+    /** L'écran de la carte est quitté (Pokédex, fiche…). */
+    fun onScreenHidden() {
+        screenVisible.value = false
+    }
+
+    private fun recreateMap() {
         val current = session.current
         val map = current.map ?: return
         val mapState = current.mapState ?: return
@@ -109,6 +124,7 @@ class MapViewModel @Inject constructor(
 
     private suspend fun followCatalog() {
         observeCatalog().catch { session.update { it.copy(failed = true) } }.collect { gameMaps ->
+            awaitScreen()
             val previous = session.loaded.value
             // Changement de version : on reste là où on est si la carte existe aussi dans le nouveau jeu
             // (Rouge et Bleu partagent leurs cartes, Jaune a presque toutes les mêmes), pour comparer.
@@ -130,6 +146,7 @@ class MapViewModel @Inject constructor(
     /** Demandes venues des autres écrans (« Voir sur la carte »), traitées une fois le catalogue lu. */
     private suspend fun followRequests() {
         mapRequests.pending.filterNotNull().collect { request ->
+            awaitScreen()
             val gameMaps = withTimeoutOrNull(CATALOG_WAIT_MS) { session.loaded.filterNotNull().first() }
             if (gameMaps == null) {
                 session.update { it.copy(failed = true) }
@@ -138,6 +155,10 @@ class MapViewModel @Inject constructor(
             }
             mapRequests.consume(request)
         }
+    }
+
+    private suspend fun awaitScreen() {
+        screenVisible.first { it }
     }
 
     private suspend fun handle(request: MapRequest, gameMaps: GameMaps) {

@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import androidx.core.content.edit
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -21,8 +18,6 @@ import org.opensources.pokmaps.data.db.PokedexDatabase
 import org.opensources.pokmaps.data.db.PokemonDao
 import org.opensources.pokmaps.data.map.AssetFiles
 import org.opensources.pokmaps.data.map.AssetManagerFiles
-
-internal val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -49,10 +44,6 @@ object DataModule {
 
     @Provides
     fun pokemonDao(database: PokedexDatabase): PokemonDao = database.pokemonDao()
-
-    @Provides
-    @Singleton
-    fun settings(@ApplicationContext context: Context): DataStore<Preferences> = context.settingsDataStore
 
     @Provides
     fun assets(@ApplicationContext context: Context): AssetManager = context.assets

@@ -25,9 +25,9 @@ import org.opensources.pokmaps.domain.model.Sprites
 val LocalAnimatedSprites = compositionLocalOf { false }
 
 /**
- * Sprite animé d'un Pokémon (GIF de Noir et Blanc), agrandi d'un nombre entier de fois : pixels nets, et tailles
- * des Pokémon comparables entre eux (un Ronflex reste plus grand qu'un Chenipan). Les plus grands sont réduits
- * pour tenir dans la place disponible.
+ * Sprite animé d'un Pokémon (Noir et Blanc, en WebP animé), agrandi d'un nombre entier de fois : pixels nets, et
+ * tailles des Pokémon comparables entre eux (un Ronflex reste plus grand qu'un Chenipan). Les plus grands sont
+ * réduits pour tenir dans la place disponible.
  */
 @Composable
 fun AnimatedPokemonSprite(
@@ -48,7 +48,7 @@ fun AnimatedPokemonSprite(
             alpha = alpha,
             contentScale = scale,
             filterQuality = FilterQuality.None,
-            // Le GIF est dessiné par un Drawable animé : on lui demande aussi de ne pas lisser les pixels.
+            // L'animation est dessinée par un Drawable animé : on lui demande aussi de ne pas lisser les pixels.
             onSuccess = { it.result.image.asDrawable(resources).isFilterBitmap = false }
         )
     }

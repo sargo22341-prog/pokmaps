@@ -37,6 +37,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -65,8 +66,12 @@ fun MapRoute(
     viewModel: MapViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    // Retour sur la carte (après le Pokédex, une fiche…) : la carte est recréée pour que les touches remarchent.
-    LaunchedEffect(Unit) { viewModel.onScreenShown() }
+    // Retour sur la carte (après le Pokédex, une fiche…) : la carte est recréée pour que les touches remarchent,
+    // puis les demandes en attente (« Voir sur la carte ») sont traitées.
+    DisposableEffect(viewModel) {
+        viewModel.onScreenShown()
+        onDispose { viewModel.onScreenHidden() }
+    }
     MapScreen(state, viewModel::onAction, onOpenPokemon, onOpenItem, modifier)
 }
 

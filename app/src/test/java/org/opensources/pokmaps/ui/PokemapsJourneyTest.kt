@@ -1,0 +1,151 @@
+package org.opensources.pokmaps.ui
+
+import androidx.annotation.StringRes
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasScrollToNodeAction
+import androidx.compose.ui.test.hasSetTextAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTextInput
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
+import java.io.File
+import org.junit.Assume.assumeTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.opensources.pokmaps.MainActivity
+import org.opensources.pokmaps.R
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+
+/**
+ * Parcours principaux sur l'application complète : vraie base générée, navigation, ViewModels et Hilt ;
+ * seules les préférences sont neuves à chaque test (`TestSettingsModule`). Ignoré si la base n'a pas été générée.
+ */
+@HiltAndroidTest
+@RunWith(RobolectricTestRunner::class)
+@Config(application = HiltTestApplication::class, qualifiers = "w411dp-h891dp")
+class PokemapsJourneyTest {
+    @get:Rule(order = 0)
+    val hilt = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    val compose = createAndroidComposeRule<MainActivity>()
+
+    @Before
+    fun requireDatabase() {
+        assumeTrue(
+            "Base absente : lancer tools/build_data.py",
+            File(System.getProperty("pokemaps.database").orEmpty()).isFile
+        )
+    }
+
+    @Test
+    fun pokedexSearchOpensPokemonThenShowsItOnMap() {
+        click(hasText(text(R.string.nav_pokedex)))
+        type("pika")
+        click(hasText("Pikachu"))
+        await(hasScrollToNodeAction())
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+
+        // Retour sur la carte, avec les lieux de Pikachu surlignés.
+        await(hasText(text(R.string.map_highlight, "Pikachu")))
+        compose.onNode(hasText(text(R.string.pokemon_title))).assertDoesNotExist()
+    }
+
+    @Test
+    fun caughtPokemonIsCountedInThePokedex() {
+        click(hasText(text(R.string.nav_pokedex)))
+        type("pika")
+        click(hasText("Pikachu"))
+        click(hasContentDescription(text(R.string.collection_not_caught)))
+        await(hasContentDescription(text(R.string.collection_caught)))
+
+        click(hasContentDescription(text(R.string.back)))
+        // La recherche est gardée, et la capture comptée dans la version choisie (Rouge, le jeu par défaut).
+        await(hasText(compose.activity.resources.getQuantityString(R.plurals.pokedex_count_caught, 1, 1, 1, 151)))
+    }
+
+    @Test
+    fun globalSearchOpensPlaceThenShowsItOnMap() {
+        click(hasContentDescription(text(R.string.search_title)))
+        type("jadielle")
+        click(hasText("Jadielle"))
+        await(hasText(text(R.string.place_title)))
+
+        click(hasText(text(R.string.show_on_map)))
+        // La fiche est refermée et la carte s'ouvre sur la ville, dont elle affiche le nom.
+        await(hasContentDescription(text(R.string.map_layers)))
+        compose.onNode(hasText(text(R.string.place_title))).assertDoesNotExist()
+        compose.onNode(hasText("Jadielle")).assertExists()
+    }
+
+    @Test
+    fun globalSearchOpensItemSheet() {
+        click(hasContentDescription(text(R.string.search_title)))
+        type("pierre lune")
+        await(hasText(text(R.string.search_items, 1)))
+        click(hasText("Pierre Lune"))
+
+        await(hasText(text(R.string.item_title)))
+        // Pokémon que la Pierre Lune fait évoluer.
+        await(hasText(text(R.string.item_evolution, "Mélofée", "Mélodelfe")))
+    }
+
+    @Test
+    fun selectedGameAppliesToTheWholeApp() {
+        click(hasText(text(R.string.game_selector, "Rouge")))
+        click(hasText(text(R.string.game_name, "Jaune")))
+        await(hasText(text(R.string.game_selector, "Jaune")))
+
+        click(hasContentDescription(text(R.string.search_title)))
+        await(hasText(text(R.string.search_intro, "Jaune")))
+    }
+
+    @Test
+    fun settingsAreSavedAndOpenAbout() {
+        val animated = hasText(text(R.string.settings_animated_sprites))
+        click(hasContentDescription(text(R.string.settings_title)))
+        await(animated)
+        // Sprites animés activés par défaut ; le choix est mémorisé d'une visite des réglages à l'autre.
+        compose.onNode(animated).assertIsOn().performClick()
+        click(hasContentDescription(text(R.string.back)))
+        click(hasContentDescription(text(R.string.settings_title)))
+        await(animated)
+        compose.onNode(animated).assertIsOff()
+
+        click(hasText(text(R.string.about_title)))
+        await(hasText(text(R.string.about_credit_pokeapi_title)))
+    }
+
+    private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
+
+    /** Attend qu'un nœud apparaisse : les données sont lues hors du fil principal. */
+    private fun await(matcher: SemanticsMatcher) {
+        compose.waitUntil(TIMEOUT_MS) { compose.onAllNodes(matcher).fetchSemanticsNodes().isNotEmpty() }
+    }
+
+    private fun click(matcher: SemanticsMatcher) {
+        await(matcher)
+        compose.onNode(matcher).performClick()
+    }
+
+    /** Saisit du texte dans le seul champ de l'écran (recherche du Pokédex ou recherche globale). */
+    private fun type(query: String) {
+        await(hasSetTextAction())
+        compose.onNode(hasSetTextAction()).performTextInput(query)
+    }
+
+    private companion object {
+        const val TIMEOUT_MS = 10_000L
+    }
+}

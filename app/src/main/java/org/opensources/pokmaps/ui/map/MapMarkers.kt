@@ -180,7 +180,7 @@ private fun MapPokemon(
     val context = LocalContext.current
     val resources = LocalResources.current
     val mapScale by remember(mapState) { derivedStateOf { mapState.scale } }
-    // Le GIF est lu à sa taille d'origine, puis agrandi d'un facteur fixe (et non ajusté à son cadre).
+    // L'animation est lue à sa taille d'origine, puis agrandie d'un facteur fixe (et non ajusté à son cadre).
     val request = remember(pokemonId) {
         ImageRequest.Builder(context)
             .data(Sprites.assetUri(Sprites.pokemonAnimated(pokemonId)))
