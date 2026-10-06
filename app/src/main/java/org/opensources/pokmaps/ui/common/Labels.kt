@@ -24,7 +24,7 @@ val DamageClass.label: Int
     get() = when (this) {
         DamageClass.PHYSICAL -> R.string.damage_physical
         DamageClass.SPECIAL -> R.string.damage_special
-        DamageClass.STATUS -> R.string.damage_status
+        DamageClass.STATUS -> R.string.status_label
     }
 
 private val FRENCH = Locale.FRANCE

@@ -39,17 +39,17 @@ __all__ = [
     "GYM_LEADERS",
     "GYM_LEADER_PARTIES",
     "LAST_MAP",
+    "STEP_PX",
+    "TILE_PX",
+    "WATER_TILE",
+    "Connection",
     "MapObject",
     "NpcOffer",
     "PretMap",
     "PretRepo",
-    "STEP_PX",
-    "TILE_PX",
     "Tileset",
     "TrainerPokemon",
-    "WATER_TILE",
     "Warp",
-    "Connection",
 ]
 
 

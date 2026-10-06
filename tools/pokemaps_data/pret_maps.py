@@ -6,12 +6,11 @@ import re
 from typing import TYPE_CHECKING
 
 from .pret import FIRST_INDOOR_MAP
-from .pret_source import macro_args, parse_int, source_lines
 from .pret_models import Connection, MapObject, PretMap, Warp
+from .pret_source import macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
     from .pret import PretRepo
-
 
 
 def maps(repo: PretRepo) -> dict[str, PretMap]:
@@ -32,9 +31,7 @@ def maps(repo: PretRepo) -> dict[str, PretMap]:
         # hors de la zone accessible) : on complète avec le bloc de bordure.
         data += bytes([border]) * (width * height - len(data))
         outdoor = number < repo.map_constants[FIRST_INDOOR_MAP][0]
-        pret_map = PretMap(
-            const, number, label, width, height, tileset, data, border, outdoor, [], warps, signs, objs
-        )
+        pret_map = PretMap(const, number, label, width, height, tileset, data, border, outdoor, [], warps, signs, objs)
         for line in lines[1:]:
             if line.startswith("connection "):
                 direction, _, target, offset = macro_args(line, "connection")
@@ -103,7 +100,6 @@ def hidden_items(repo: PretRepo) -> dict[str, list[tuple[int, int, str]]]:
             if function == "HiddenItems":
                 result.setdefault(current, []).append((int(x), int(y), argument))
     return result
-
 
 
 def _object_event(args: list[str]) -> MapObject:

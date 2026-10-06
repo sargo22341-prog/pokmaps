@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
@@ -110,10 +110,10 @@ private fun PlaceContent(
                     contentDescription = null,
                     modifier = Modifier.padding(end = 8.dp)
                 )
-                Text(stringResource(R.string.sheet_show_on_map))
+                Text(stringResource(R.string.show_on_map))
             }
         }
-        SheetSection(stringResource(R.string.place_wild)) {
+        SheetSection(stringResource(R.string.label_wild_pokemon)) {
             if (page.encounters.isEmpty()) {
                 Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
@@ -126,7 +126,7 @@ private fun PlaceContent(
             }
         }
         if (page.items.isNotEmpty()) {
-            SheetSection(stringResource(R.string.place_items)) {
+            SheetSection(stringResource(R.string.label_items)) {
                 page.items.forEach { obj ->
                     val identifier = obj.itemIdentifier
                     SheetRow(
@@ -136,7 +136,7 @@ private fun PlaceContent(
                         ),
                         onClick = identifier?.let { { onOpenItem(it) } },
                         onShowOnMap = { onShowObject(obj.id) },
-                        image = {
+                        content = {
                             if (identifier != null) {
                                 PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
                             }
@@ -146,7 +146,7 @@ private fun PlaceContent(
             }
         }
         if (page.characters.isNotEmpty()) {
-            SheetSection(stringResource(R.string.place_characters)) {
+            SheetSection(stringResource(R.string.label_characters)) {
                 page.characters.forEach { obj ->
                     val pokemonId = obj.pokemonId
                     SheetRow(
@@ -164,7 +164,7 @@ private fun PlaceContent(
                             }
                         },
                         onShowOnMap = { onShowObject(obj.id) },
-                        image = {
+                        content = {
                             if (obj.kind == MapObjectKind.POKEMON && pokemonId != null) {
                                 PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 52.dp, null)
                             } else {

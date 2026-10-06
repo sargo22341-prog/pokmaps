@@ -471,13 +471,23 @@ class GameMapData:
 
 def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[str, str]], output: Path) -> GameMapData:
     """Rend les cartes du jeu dans `output` (tuiles et sprites) et renvoie les lignes de la base."""
-    repo, maps, placements = game_maps.repo, game_maps.maps, game_maps.placements
+    repo, placements = game_maps.repo, game_maps.placements
     missing = sorted(const for const in placements if const not in names)
     if missing:
         raise ValueError(f"Nom français manquant dans tools/data/maps.csv : {missing}")
     if output.exists():
         shutil.rmtree(output)
 
+    rows = _display_map_rows(game_maps, names, output)
+    warps, objects, sprites = _placed_map_rows(game_maps)
+    spots = _spot_rows(game_maps)
+    write_sprites(repo, sprites, output / "sprites")
+    game_areas = [(const, area) for const, area in areas if const in placements]
+    return GameMapData(rows, game_areas, warps, objects, spots)
+
+
+def _display_map_rows(game_maps: GameMaps, names: dict[str, str], output: Path) -> list[MapRow]:
+    maps = game_maps.maps
     rows: list[MapRow] = []
     cache: dict = {}
     for const in game_maps.display_maps:
@@ -500,6 +510,12 @@ def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[st
                 0,
             )
         )
+
+    return rows
+
+
+def _placed_map_rows(game_maps: GameMaps) -> tuple[list[WarpRow], list[ObjectRow], set[str]]:
+    repo, maps, placements = game_maps.repo, game_maps.maps, game_maps.placements
 
     def point(const: str, x: int, y: int) -> tuple[int, int]:
         placed = placements[const]
@@ -543,15 +559,22 @@ def export_game(game_maps: GameMaps, names: dict[str, str], areas: list[tuple[st
                     [_offer_identifiers(repo, offer) for offer in offers],
                 )
             )
-    spots = [
+    return warps, objects, sprites
+
+
+def _spot_rows(game_maps: GameMaps) -> list[SpotRow]:
+    maps, placements = game_maps.maps, game_maps.placements
+
+    def point(const: str, x: int, y: int) -> tuple[int, int]:
+        placed = placements[const]
+        return placed.x + x * STEP_PX + STEP_PX // 2, placed.y + y * STEP_PX + STEP_PX // 2
+
+    return [
         SpotRow(const, kind, *point(const, x, y))
         for const in sorted(placements, key=lambda c: maps[c].number)
         for kind, cells in game_maps.spots(const).items()
         for x, y in cells
     ]
-    write_sprites(repo, sprites, output / "sprites")
-    game_areas = [(const, area) for const, area in areas if const in placements]
-    return GameMapData(rows, game_areas, warps, objects, spots)
 
 
 def _offer_identifiers(repo: PretRepo, offer: NpcOffer) -> NpcOffer:

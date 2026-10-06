@@ -4,6 +4,11 @@
 
     <string name="nav_map">Carte</string>
     <string name="nav_pokedex">Pokédex</string>
+    <string name="show_on_map">Voir sur la carte</string>
+    <string name="label_items">Objets</string>
+    <string name="label_characters">Personnages</string>
+    <string name="label_wild_pokemon">Pokémon sauvages</string>
+    <string name="status_label">Statut</string>
     <string name="back">Retour</string>
 
     <string name="game_name">Pokémon %1$s</string>
@@ -14,7 +19,10 @@
     <!-- Pokédex -->
     <string name="pokedex_search">Rechercher</string>
     <string name="pokedex_clear_search">Effacer la recherche</string>
-    <string name="pokedex_count_caught">%1$d Pokémon · %2$d / %3$d capturés</string>
+    <plurals name="pokedex_count_caught">
+        <item quantity="one">%1$d Pokémon · %2$d / %3$d capturés</item>
+        <item quantity="other">%1$d Pokémon · %2$d / %3$d capturés</item>
+    </plurals>
     <string name="pokedex_empty">Aucun Pokémon ne correspond à ces critères.</string>
     <string name="pokedex_filter_available">Disponible dans %1$s</string>
     <string name="pokedex_filter_type">Type</string>
@@ -57,29 +65,24 @@
     <string name="pokemon_weaknesses">Faiblesses et résistances</string>
     <string name="pokemon_weaknesses_none">Aucune</string>
     <string name="pokemon_evolutions">Évolutions</string>
-    <string name="pokemon_no_evolution">Ce Pokémon n\'évolue pas.</string>
-    <string name="evolution_level">N. %1$d</string>
-    <string name="evolution_trade">Échange</string>
+    <string name="pokemon_no_evolution">Ce Pokémon n’évolue pas.</string>
     <string name="evolution_level_up">Montée de niveau</string>
     <string name="pokemon_locations">Lieux de capture</string>
     <string name="pokemon_locations_in">Dans Pokémon %1$s</string>
-    <string name="pokemon_locations_none">Introuvable à l\'état sauvage dans Pokémon %1$s.</string>
+    <string name="pokemon_locations_none">Introuvable à l’état sauvage dans Pokémon %1$s.</string>
     <string name="pokemon_locations_evolution">Disponible par évolution.</string>
     <string name="pokemon_locations_static">Pokémon fixe sur la carte.</string>
     <string name="pokemon_locations_other_versions">Aussi dans : %1$s</string>
-    <string name="pokemon_show_on_map">Voir sur la carte</string>
     <string name="pokemon_moves">Attaques</string>
     <string name="pokemon_moves_level">Par niveau</string>
     <string name="pokemon_moves_machine">CT / CS</string>
     <string name="pokemon_moves_none">Aucune attaque.</string>
     <string name="move_start">Départ</string>
-    <string name="move_level">N. %1$d</string>
     <string name="move_power">Puiss.</string>
     <string name="move_accuracy">Préc.</string>
     <string name="move_pp">PP</string>
     <string name="damage_physical">Physique</string>
     <string name="damage_special">Spéciale</string>
-    <string name="damage_status">Statut</string>
     <string name="no_value">—</string>
 
     <string name="encounter_levels">N. %1$d</string>
@@ -94,7 +97,6 @@
     <string name="catch_hp_half">½</string>
     <string name="catch_hp_quarter">¼</string>
     <string name="catch_hp_one">1 PV</string>
-    <string name="catch_status">Statut</string>
     <string name="catch_status_none">Aucun</string>
     <string name="catch_status_sleep">Sommeil / Gel</string>
     <string name="catch_status_paralysis">Paralysie / Brûlure / Poison</string>
@@ -104,16 +106,13 @@
     <string name="ball_safari">Safari Ball</string>
     <string name="ball_master">Master Ball</string>
     <string name="catch_best">Meilleur choix</string>
-    <string name="catch_note">Probabilité par lancer, formule de la 1re génération (DV des PV moyen). La Super Ball peut dépasser l\'Hyper Ball.</string>
+    <string name="catch_note">Probabilité par lancer, formule de la 1re génération (DV des PV moyen). La Super Ball peut dépasser l’Hyper Ball.</string>
 
     <!-- Carte -->
     <string name="map_layers">Calques</string>
     <string name="map_layer_warps">Entrées</string>
-    <string name="map_layer_items">Objets</string>
     <string name="map_layer_trainers">Dresseurs</string>
-    <string name="map_layer_npcs">Personnages</string>
     <string name="map_layer_static_pokemon">Pokémon fixes</string>
-    <string name="map_layer_wild_pokemon">Pokémon sauvages</string>
     <string name="map_back_to">Retour : %1$s</string>
     <string name="map_floor_ground">RdC</string>
     <string name="map_floor_storey">%1$d</string>
@@ -141,52 +140,46 @@
     <string name="map_zone_complete">Lieu terminé : tous ses Pokémon sauvages sont capturés</string>
     <string name="map_zone_none">Aucun Pokémon sauvage</string>
     <string name="map_close">Fermer</string>
-    <string name="map_hidden_badge">Caché</string>
-    <string name="map_hidden_item_hint">Invisible sur la carte : appuyez sur A face à cette case (ou utilisez le Cherch\'Objet).</string>
+    <string name="map_hidden_item_hint">Invisible sur la carte : appuyez sur A face à cette case (ou utilisez le Cherch’Objet).</string>
     <string name="map_machine_move">Enseigne %1$s</string>
     <string name="map_trainer_party">Équipe</string>
-    <string name="map_trainer_starter">L\'équipe du rival dépend du starter choisi.</string>
+    <string name="map_trainer_starter">L’équipe du rival dépend du starter choisi.</string>
     <string name="map_offer_gifts">Donne</string>
     <string name="map_offer_sales">Vend</string>
-    <string name="map_offer_trades">Échange</string>
     <string name="map_offer_quantity">%1$s × %2$d</string>
     <string name="map_offer_price">%1$d ₽</string>
     <string name="map_offer_pokemon_level">%1$s, niveau %2$d</string>
     <string name="map_offer_trade">Votre %2$s contre son %1$s</string>
     <string name="map_wild_pokemon">Pokémon sauvage</string>
-    <string name="map_open_item">Fiche de l\'objet %1$s</string>
+    <string name="map_open_item">Fiche de l’objet %1$s</string>
 
     <!-- Recherche et fiches -->
     <string name="search_title">Recherche</string>
     <string name="search_hint">Pokémon, lieu, objet, personnage…</string>
-    <string name="search_intro">Cherchez un Pokémon, un lieu, un objet (ou l\'attaque d\'une CT) ou un personnage de Pokémon %1$s.</string>
+    <string name="search_intro">Cherchez un Pokémon, un lieu, un objet (ou l’attaque d’une CT) ou un personnage de Pokémon %1$s.</string>
     <string name="search_empty">Aucun résultat.</string>
     <string name="search_pokemon">Pokémon (%1$d)</string>
     <string name="search_places">Lieux (%1$d)</string>
     <string name="search_items">Objets (%1$d)</string>
     <string name="search_characters">Personnages (%1$d)</string>
-    <string name="sheet_show_on_map">Voir sur la carte</string>
     <string name="offer_summary_gifts">Donne %1$s</string>
     <string name="offer_summary_sales">Vend %1$s</string>
     <string name="offer_summary_trades">Échange %1$s</string>
     <string name="item_title">Fiche objet</string>
-    <string name="item_not_found">Cet objet n\'existe pas dans ce jeu.</string>
+    <string name="item_not_found">Cet objet n’existe pas dans ce jeu.</string>
     <string name="item_evolutions">Fait évoluer</string>
     <string name="item_evolution">%1$s → %2$s</string>
     <string name="item_found">Où le trouver</string>
-    <string name="item_sold">Où l\'acheter</string>
+    <string name="item_sold">Où l’acheter</string>
     <string name="item_given">Qui le donne</string>
-    <string name="item_where">Où l\'obtenir</string>
+    <string name="item_where">Où l’obtenir</string>
     <string name="item_nowhere">Introuvable sur les cartes de Pokémon %1$s.</string>
     <string name="place_title">Fiche lieu</string>
-    <string name="place_not_found">Ce lieu n\'existe pas dans ce jeu.</string>
+    <string name="place_not_found">Ce lieu n’existe pas dans ce jeu.</string>
     <string name="place_outdoor">Ville ou route</string>
     <string name="place_indoor">Lieu intérieur</string>
-    <string name="place_wild">Pokémon sauvages</string>
-    <string name="place_items">Objets</string>
-    <string name="place_characters">Personnages</string>
     <string name="character_title">Fiche personnage</string>
-    <string name="character_not_found">Ce personnage n\'existe pas dans ce jeu.</string>
+    <string name="character_not_found">Ce personnage n’existe pas dans ce jeu.</string>
     <string name="data_load_error">Impossible de charger ces données. Revenez en arrière et réessayez.</string>
 
     <string name="about_title">À propos</string>
@@ -200,7 +193,7 @@
     <string name="about_description">Cartes interactives et Pokédex de Pokémon Rouge, Bleu et Jaune, entièrement hors ligne.</string>
     <string name="about_sources_title">Sources</string>
     <string name="about_credit_pokeapi_title">PokéAPI</string>
-    <string name="about_credit_pokeapi">Pokémon, attaques, évolutions, lieux et rencontres (pokeapi.co, licence BSD-3). Données embarquées : l\'application n\'appelle pas l\'API.</string>
+    <string name="about_credit_pokeapi">Pokémon, attaques, évolutions, lieux et rencontres (pokeapi.co, licence BSD-3). Données embarquées : l’application n’appelle pas l’API.</string>
     <string name="about_credit_pokesprite_title">pokesprite</string>
     <string name="about_credit_pokesprite">Icônes des Pokémon et des objets (msikma/pokesprite).</string>
     <string name="about_credit_sprites_title">PokeAPI/sprites</string>

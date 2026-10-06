@@ -11,8 +11,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ScaleFactor
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.min
 import coil3.asDrawable
 import coil3.compose.AsyncImage
@@ -36,7 +36,7 @@ fun AnimatedPokemonSprite(
     modifier: Modifier = Modifier,
     alpha: Float = 1f
 ) {
-    val resources = LocalContext.current.resources
+    val resources = LocalResources.current
     BoxWithConstraints(modifier, contentAlignment = Alignment.Center) {
         val side = with(LocalDensity.current) { min(maxWidth, maxHeight).toPx() }
         val factor = max(1, (side / ANIMATED_SPRITE_PX).toInt())

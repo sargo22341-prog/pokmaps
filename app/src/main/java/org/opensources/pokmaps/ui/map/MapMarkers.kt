@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.FixedScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
@@ -154,6 +155,7 @@ private fun MapPokemon(
         return
     }
     val context = LocalContext.current
+    val resources = LocalResources.current
     val mapScale by remember(mapState) { derivedStateOf { mapState.scale } }
     // Le GIF est lu à sa taille d'origine, puis agrandi d'un facteur fixe (et non ajusté à son cadre).
     val request = remember(pokemonId) {
@@ -169,7 +171,7 @@ private fun MapPokemon(
         modifier = Modifier.size(mapPixels(mapState, ANIMATED_FRAME_PX * ANIMATED_RATIO * scale)),
         contentScale = remember(factor) { FixedScale(factor) },
         filterQuality = FilterQuality.None,
-        onSuccess = { it.result.image.asDrawable(context.resources).isFilterBitmap = false }
+        onSuccess = { it.result.image.asDrawable(resources).isFilterBitmap = false }
     )
 }
 

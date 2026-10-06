@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
@@ -95,7 +95,7 @@ private fun ItemContent(
                     SheetRow(
                         title = stringResource(R.string.item_evolution, evolution.fromName, evolution.toName),
                         onClick = { onOpenPokemon(evolution.toId) },
-                        image = {
+                        content = {
                             PixelArtImage(Sprites.pokemonIcon(evolution.toId), PixelArt.POKEMON_ICON, 52.dp, null)
                         }
                     )
@@ -113,7 +113,7 @@ private fun ItemContent(
                             stringResource(R.string.map_item)
                         },
                         onShowOnMap = { onShowOnMap(source.obj.id) },
-                        image = {
+                        content = {
                             PixelArtImage(
                                 Sprites.item(item.identifier),
                                 PixelArt.ITEM_ICON,
@@ -160,15 +160,15 @@ private fun SourceRow(
     versionGroup: String,
     onOpenCharacter: (Int) -> Unit,
     onShowOnMap: (Int) -> Unit,
-    trailing: @Composable () -> String?
+    content: @Composable () -> String?
 ) {
     SheetRow(
         title = source.mapName,
         subtitle = source.obj.displayName(),
-        trailing = trailing(),
+        trailing = content(),
         onClick = { onOpenCharacter(source.obj.id) },
         onShowOnMap = { onShowOnMap(source.obj.id) },
-        image = { CharacterSprite(source.obj, versionGroup) }
+        content = { CharacterSprite(source.obj, versionGroup) }
     )
 }
 

@@ -49,7 +49,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import org.opensources.pokmaps.R
@@ -289,7 +289,7 @@ private fun CatchCalculator(
                 }, label = { Text(stringResource(hp.label)) })
             }
         }
-        Text(stringResource(R.string.catch_status), style = MaterialTheme.typography.bodyMedium)
+        Text(stringResource(R.string.status_label), style = MaterialTheme.typography.bodyMedium)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             CatchStatus.entries.forEach { status ->
                 FilterChip(
@@ -352,7 +352,7 @@ private fun MoveRow(move: LearnedMove) {
                     ) {
                         stringResource(R.string.move_start)
                     } else {
-                        stringResource(R.string.move_level, move.level)
+                        stringResource(R.string.encounter_levels, move.level)
                     },
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,

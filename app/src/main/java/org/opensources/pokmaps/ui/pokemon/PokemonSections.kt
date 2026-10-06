@@ -190,8 +190,8 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
         val text = when {
             condition == null -> ""
             condition.itemName != null -> condition.itemName
-            condition.trigger == "trade" -> stringResource(R.string.evolution_trade)
-            condition.minLevel != null -> stringResource(R.string.evolution_level, condition.minLevel)
+            condition.trigger == "trade" -> stringResource(R.string.method_trade)
+            condition.minLevel != null -> stringResource(R.string.encounter_levels, condition.minLevel)
             else -> stringResource(R.string.evolution_level_up)
         }
         Text(
@@ -238,7 +238,7 @@ internal fun Locations(game: Game, details: PokemonDetails, onShowOnMap: () -> U
                     contentDescription = null,
                     modifier = Modifier.padding(end = 8.dp)
                 )
-                Text(stringResource(R.string.pokemon_show_on_map))
+                Text(stringResource(R.string.show_on_map))
             }
         }
     }

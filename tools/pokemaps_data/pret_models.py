@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+
 @dataclass(frozen=True)
 class Connection:
     direction: str  # north, south, west, east
@@ -85,5 +86,3 @@ class NpcOffer:
     quantity: int | None = None  # nombre d'objets donnés, ou niveau du Pokémon donné
     price: int | None = None  # prix en magasin (sale)
     wanted: str | None = None  # Pokémon demandé en échange (trade)
-
-

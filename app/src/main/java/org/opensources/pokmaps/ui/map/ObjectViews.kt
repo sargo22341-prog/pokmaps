@@ -146,7 +146,7 @@ internal fun Offers(
         }
     }
     if (trades.isNotEmpty()) {
-        SectionTitle(stringResource(R.string.map_offer_trades))
+        SectionTitle(stringResource(R.string.method_trade))
         trades.forEach { trade ->
             OfferPokemonRow(
                 trade.pokemonId,

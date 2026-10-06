@@ -65,7 +65,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.FloorLevel
@@ -93,6 +93,17 @@ fun MapScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     // Retour sur la carte (après le Pokédex, une fiche…) : la carte est recréée pour que les touches remarchent.
     LaunchedEffect(Unit) { viewModel.onScreenShown() }
+    MapScreenContent(state, onOpenPokemon, onOpenItem, modifier, viewModel)
+}
+
+@Composable
+private fun MapScreenContent(
+    state: MapUiState,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    modifier: Modifier,
+    viewModel: MapViewModel
+) {
     val snackbar = remember { SnackbarHostState() }
     val notFoundMessage = state.notFound?.let {
         stringResource(R.string.map_highlight_none, it, state.game?.name.orEmpty())
@@ -370,6 +381,7 @@ private fun ZoneListSheet(
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
             when {
                 zone.loading -> CircularProgressIndicator(Modifier.padding(16.dp))
+
                 zone.failed -> Text(
                     stringResource(R.string.data_load_error),
                     color = MaterialTheme.colorScheme.error,
@@ -412,11 +424,11 @@ private fun ZoneListSheet(
 private val MapLayer.label: Int
     get() = when (this) {
         MapLayer.WARPS -> R.string.map_layer_warps
-        MapLayer.ITEMS -> R.string.map_layer_items
+        MapLayer.ITEMS -> R.string.label_items
         MapLayer.TRAINERS -> R.string.map_layer_trainers
-        MapLayer.NPCS -> R.string.map_layer_npcs
+        MapLayer.NPCS -> R.string.label_characters
         MapLayer.STATIC_POKEMON -> R.string.map_layer_static_pokemon
-        MapLayer.WILD_POKEMON -> R.string.map_layer_wild_pokemon
+        MapLayer.WILD_POKEMON -> R.string.label_wild_pokemon
     }
 
 /** Carte en bas d'écran : fiche de l'élément touché, ou lieu sélectionné. */

@@ -80,13 +80,13 @@ internal fun DetailCard(
 
 /** En-tête d'une fiche : image, petite ligne de catégorie et nom. */
 @Composable
-private fun DetailHeader(label: String, title: String, image: @Composable () -> Unit) {
+private fun DetailHeader(label: String, title: String, content: @Composable () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.padding(end = 40.dp)
     ) {
-        image()
+        content()
         Column {
             if (label.isNotEmpty()) {
                 Text(

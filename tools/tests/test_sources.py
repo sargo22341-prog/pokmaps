@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import stat
 from io import BytesIO
 from pathlib import Path
 
@@ -42,3 +43,15 @@ def test_download_rejects_oversized_response_and_removes_temporary_file(
 
     assert not target.exists()
     assert not target.with_name(target.name + ".tmp").exists()
+
+
+def test_remove_tree_handles_read_only_git_files(tmp_path: Path) -> None:
+    target = tmp_path / "source"
+    target.mkdir()
+    read_only = target / "pack.idx"
+    read_only.write_bytes(b"git pack index")
+    read_only.chmod(stat.S_IREAD)
+
+    sources._remove_tree(target)
+
+    assert not target.exists()

@@ -10,12 +10,17 @@
 
 from __future__ import annotations
 
+import os
 import shutil
+import stat
 import subprocess
 import urllib.error
 import urllib.request
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from types import TracebackType
+from typing import Any
 
 POKEAPI_COMMIT = "bc92d3b6029ef1abe9e7ad424c400b338f3c11fe"
 POKEAPI_CSV_URL = "https://raw.githubusercontent.com/PokeAPI/pokeapi/{commit}/data/v2/csv/{name}.csv"
@@ -162,7 +167,7 @@ def fetch_pret(cache: Path, repo: str) -> Path:
     if (target / ".complete").exists():
         return target
     if target.exists():
-        shutil.rmtree(target)
+        _remove_tree(target)
     target.mkdir(parents=True)
 
     def git(*args: str) -> None:
@@ -171,6 +176,20 @@ def fetch_pret(cache: Path, repo: str) -> Path:
     git("init", "-q")
     git("fetch", "-q", "--depth", "1", PRET_URL.format(repo=repo), commit)
     git("checkout", "-q", "FETCH_HEAD")
-    shutil.rmtree(target / ".git")
+    _remove_tree(target / ".git")
     (target / ".complete").touch()
     return target
+
+
+def _remove_tree(path: Path) -> None:
+    """Supprime aussi les fichiers en lecture seule créés par Git sous Windows."""
+
+    def retry_removal(
+        function: Callable[[str], Any],
+        failing_path: str,
+        _error: tuple[type[OSError], OSError, TracebackType | None],
+    ) -> None:
+        os.chmod(failing_path, stat.S_IREAD | stat.S_IWRITE)
+        function(failing_path)
+
+    shutil.rmtree(path, onerror=retry_removal)

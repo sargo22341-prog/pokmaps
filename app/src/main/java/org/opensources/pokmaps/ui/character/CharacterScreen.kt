@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
@@ -95,7 +95,7 @@ private fun CharacterContent(
                     contentDescription = null,
                     modifier = Modifier.padding(end = 8.dp)
                 )
-                Text(stringResource(R.string.sheet_show_on_map))
+                Text(stringResource(R.string.show_on_map))
             }
         }
         if (obj.kind == MapObjectKind.TRAINER) {

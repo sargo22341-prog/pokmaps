@@ -49,7 +49,7 @@ fun SheetRow(
     trailing: String? = null,
     onClick: (() -> Unit)? = null,
     onShowOnMap: (() -> Unit)? = null,
-    image: (@Composable () -> Unit)? = null
+    content: (@Composable () -> Unit)? = null
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -59,8 +59,8 @@ fun SheetRow(
             .clickable(enabled = onClick != null) { onClick?.invoke() }
             .padding(vertical = 4.dp)
     ) {
-        if (image != null) {
-            Box(Modifier.size(ROW_IMAGE_SIZE), contentAlignment = Alignment.Center) { image() }
+        if (content != null) {
+            Box(Modifier.size(ROW_IMAGE_SIZE), contentAlignment = Alignment.Center) { content() }
         }
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
@@ -77,7 +77,7 @@ fun SheetRow(
         trailing?.let { Text(it, style = MaterialTheme.typography.titleSmall) }
         if (onShowOnMap != null) {
             FilledTonalIconButton(onClick = onShowOnMap) {
-                Icon(painterResource(R.drawable.ic_map), stringResource(R.string.sheet_show_on_map))
+                Icon(painterResource(R.drawable.ic_map), stringResource(R.string.show_on_map))
             }
         }
     }

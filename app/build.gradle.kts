@@ -74,6 +74,8 @@ ksp {
 }
 
 tasks.withType<Test>().configureEach {
+    // sqlite-jdbc utilise JNI pour contrôler le schéma de Room dans les tests JVM.
+    jvmArgs("--enable-native-access=ALL-UNNAMED")
     systemProperty("pokemaps.roomSchemas", layout.buildDirectory.dir("room-schemas").get().asFile.path)
     systemProperty("pokemaps.database", file("src/main/assets/database/pokedex.db").path)
 }

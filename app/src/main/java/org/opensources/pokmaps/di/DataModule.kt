@@ -20,7 +20,7 @@ import org.opensources.pokmaps.data.db.PokedexDao
 import org.opensources.pokmaps.data.db.PokedexDatabase
 import org.opensources.pokmaps.data.db.PokemonDao
 
-private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+internal val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -61,7 +61,7 @@ object DataModule {
  * (nouvelles données à version de schéma égale), on supprime la copie pour que Room la recopie.
  * Les données de l'utilisateur ne sont jamais stockées dans cette base.
  */
-private fun refreshDatabaseAfterUpdate(context: Context) {
+internal fun refreshDatabaseAfterUpdate(context: Context) {
     val installedAt = context.packageManager
         .getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
         .lastUpdateTime

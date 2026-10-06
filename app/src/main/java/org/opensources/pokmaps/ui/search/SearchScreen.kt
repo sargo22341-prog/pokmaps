@@ -28,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.OfferLink
@@ -75,9 +75,13 @@ fun SearchScreen(
             state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
+
             state.failed -> Message(stringResource(R.string.data_load_error))
+
             state.query.isBlank() -> Message(stringResource(R.string.search_intro, state.game?.name.orEmpty()))
+
             state.isEmpty -> Message(stringResource(R.string.search_empty))
+
             else -> Results(state, onOpenPokemon, onOpenItem, onOpenPlace, onOpenCharacter)
         }
     }
@@ -110,7 +114,7 @@ private fun Results(
                 title = entry.name,
                 subtitle = stringResource(R.string.pokedex_number, entry.number),
                 onClick = { onOpenPokemon(entry.pokemonId) },
-                image = { PixelArtImage(Sprites.pokemonIcon(entry.pokemonId), PixelArt.POKEMON_ICON, 52.dp, null) }
+                content = { PixelArtImage(Sprites.pokemonIcon(entry.pokemonId), PixelArt.POKEMON_ICON, 52.dp, null) }
             )
         }
         section(R.string.search_places, state.places) { place ->
@@ -118,7 +122,7 @@ private fun Results(
                 title = place.name,
                 subtitle = stringResource(if (place.outdoor) R.string.place_outdoor else R.string.place_indoor),
                 onClick = { onOpenPlace(place.identifier) },
-                image = { Icon(painterResource(R.drawable.ic_place), contentDescription = null) }
+                content = { Icon(painterResource(R.drawable.ic_place), contentDescription = null) }
             )
         }
         section(R.string.search_items, state.items) { item ->
@@ -126,7 +130,7 @@ private fun Results(
                 title = item.name,
                 subtitle = item.moveName,
                 onClick = { onOpenItem(item.identifier) },
-                image = {
+                content = {
                     if (item.hasSprite) {
                         PixelArtImage(Sprites.item(item.identifier), PixelArt.ITEM_ICON, 48.dp, null)
                     }
@@ -140,7 +144,7 @@ private fun Results(
                     .filter { it.isNotEmpty() }
                     .joinToString(" · "),
                 onClick = { onOpenCharacter(character.obj.id) },
-                image = { CharacterSprite(character.obj, versionGroup) }
+                content = { CharacterSprite(character.obj, versionGroup) }
             )
         }
     }

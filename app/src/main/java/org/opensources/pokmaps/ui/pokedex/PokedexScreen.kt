@@ -35,12 +35,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.ObtainMethod
@@ -77,7 +78,13 @@ fun PokedexScreen(
         SearchField(state.filter.query, viewModel::search)
         Filters(state, viewModel)
         Text(
-            stringResource(R.string.pokedex_count_caught, state.entries.size, state.caughtCount, state.total),
+            pluralStringResource(
+                R.plurals.pokedex_count_caught,
+                state.entries.size,
+                state.entries.size,
+                state.caughtCount,
+                state.total
+            ),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
