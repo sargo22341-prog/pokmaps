@@ -45,7 +45,7 @@ fun CharacterScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val page = state.page
     if (page == null) {
-        SheetPlaceholder(state.loading, stringResource(R.string.character_not_found), modifier)
+        SheetPlaceholder(state.loading, stringResource(R.string.character_not_found), modifier, state.failed)
         return
     }
     CharacterContent(

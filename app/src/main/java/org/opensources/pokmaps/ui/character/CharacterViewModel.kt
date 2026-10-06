@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.opensources.pokmaps.domain.usecase.CharacterPage
@@ -15,7 +16,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCharacterPageUseCase
 import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
 
-data class CharacterUiState(val loading: Boolean = true, val page: CharacterPage? = null)
+data class CharacterUiState(val loading: Boolean = true, val page: CharacterPage? = null, val failed: Boolean = false)
 
 /** Fiche d'un personnage ou d'un dresseur. */
 @HiltViewModel
@@ -28,6 +29,7 @@ class CharacterViewModel @Inject constructor(
 
     val state: StateFlow<CharacterUiState> = observeCharacter(objectId)
         .map { CharacterUiState(loading = false, page = it) }
+        .catch { emit(CharacterUiState(loading = false, failed = true)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), CharacterUiState())
 
     fun showOnMap() = mapRequests.send(MapRequest.FocusObject(objectId))

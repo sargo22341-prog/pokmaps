@@ -8,6 +8,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -48,6 +49,7 @@ data class CatchUiState(
 
 data class PokemonUiState(
     val loading: Boolean = true,
+    val failed: Boolean = false,
     val game: Game? = null,
     val details: PokemonDetails? = null,
     /** Calcul de capture, seulement pour la 1re génération (formule propre à ces jeux). */
@@ -78,7 +80,8 @@ class PokemonViewModel @Inject constructor(
                 caught = collection.game == page.game && pokemonId in collection.caught,
                 favorite = pokemonId in collection.favorites
             )
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
+        }.catch { emit(PokemonUiState(loading = false, failed = true)) }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
 
     fun setCatchLevel(level: Int) = catchInput.update { it.copy(level = level.coerceIn(1, MAX_LEVEL)) }
 

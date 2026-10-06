@@ -67,6 +67,12 @@ fun PokedexScreen(
         Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
     }
+    if (state.failed) {
+        Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text(stringResource(R.string.data_load_error), textAlign = TextAlign.Center)
+        }
+        return
+    }
     Column(modifier.fillMaxSize()) {
         SearchField(state.filter.query, viewModel::search)
         Filters(state, viewModel)

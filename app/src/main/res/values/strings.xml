@@ -187,6 +187,7 @@
     <string name="place_characters">Personnages</string>
     <string name="character_title">Fiche personnage</string>
     <string name="character_not_found">Ce personnage n\'existe pas dans ce jeu.</string>
+    <string name="data_load_error">Impossible de charger ces données. Revenez en arrière et réessayez.</string>
 
     <string name="about_title">À propos</string>
     <string name="settings_title">Réglages</string>

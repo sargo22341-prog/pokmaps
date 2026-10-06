@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.opensources.pokmaps.domain.usecase.ItemPage
@@ -15,7 +16,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
 
-data class ItemUiState(val loading: Boolean = true, val page: ItemPage? = null)
+data class ItemUiState(val loading: Boolean = true, val page: ItemPage? = null, val failed: Boolean = false)
 
 /** Fiche d'un objet du jeu choisi. */
 @HiltViewModel
@@ -28,6 +29,7 @@ class ItemViewModel @Inject constructor(
 
     val state: StateFlow<ItemUiState> = observeItem(identifier)
         .map { ItemUiState(loading = false, page = it) }
+        .catch { emit(ItemUiState(loading = false, failed = true)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), ItemUiState())
 
     /** Demande à la carte de montrer l'objet ou le personnage (dans son bâtiment). */

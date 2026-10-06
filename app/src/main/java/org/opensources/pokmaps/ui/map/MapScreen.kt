@@ -113,7 +113,14 @@ fun MapScreen(
         Crossfade(targetState = state.mapState, animationSpec = tween(MAP_FADE_MS), label = "map") { mapState ->
             Box(Modifier.fillMaxSize()) {
                 if (mapState == null) {
-                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    if (state.failed) {
+                        Text(
+                            stringResource(R.string.data_load_error),
+                            modifier = Modifier.align(Alignment.Center).padding(24.dp)
+                        )
+                    } else {
+                        CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    }
                 } else {
                     MapUI(Modifier.fillMaxSize(), state = mapState)
                 }
@@ -363,6 +370,11 @@ private fun ZoneListSheet(
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
             when {
                 zone.loading -> CircularProgressIndicator(Modifier.padding(16.dp))
+                zone.failed -> Text(
+                    stringResource(R.string.data_load_error),
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
 
                 zone.encounters.isEmpty() -> Text(
                     stringResource(R.string.map_no_encounter),

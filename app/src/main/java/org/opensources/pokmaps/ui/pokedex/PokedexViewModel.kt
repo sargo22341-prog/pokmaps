@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ import org.opensources.pokmaps.ui.game.STOP_TIMEOUT_MS
 
 data class PokedexUiState(
     val loading: Boolean = true,
+    val failed: Boolean = false,
     val game: Game? = null,
     /** Pokémon correspondant à la recherche et aux filtres. */
     val entries: List<PokedexEntry> = emptyList(),
@@ -61,7 +63,8 @@ class PokedexViewModel @Inject constructor(
                 types = pokedex.types,
                 filter = activeFilter
             )
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokedexUiState())
+        }.catch { emit(PokedexUiState(loading = false, failed = true)) }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokedexUiState())
 
     fun search(query: String) = filter.update { it.copy(query = query) }
 

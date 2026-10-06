@@ -85,9 +85,13 @@ fun SheetRow(
 
 /** Fiche en cours de chargement, ou introuvable dans le jeu choisi. */
 @Composable
-fun SheetPlaceholder(loading: Boolean, message: String, modifier: Modifier = Modifier) {
+fun SheetPlaceholder(loading: Boolean, message: String, modifier: Modifier = Modifier, failed: Boolean = false) {
     Box(modifier.fillMaxSize().padding(32.dp), contentAlignment = Alignment.Center) {
-        if (loading) CircularProgressIndicator() else Text(message, textAlign = TextAlign.Center)
+        when {
+            loading -> CircularProgressIndicator()
+            failed -> Text(stringResource(R.string.data_load_error), textAlign = TextAlign.Center)
+            else -> Text(message, textAlign = TextAlign.Center)
+        }
     }
 }
 

@@ -26,6 +26,10 @@ POKEAPI_SPRITES_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/{commit
 POKESPRITE_COMMIT = "c5aaa610ff2acdf7fd8e2dccd181bca8be9fcb3e"
 POKESPRITE_URL = "https://raw.githubusercontent.com/msikma/pokesprite/{commit}/{path}"
 
+DOWNLOAD_TIMEOUT_SECONDS = 60
+MAX_DOWNLOAD_BYTES = 512 * 1024 * 1024
+DOWNLOAD_CHUNK_BYTES = 1024 * 1024
+
 # Désassemblages pret (https://github.com/pret) : cartes, tilesets, objets et palettes.
 PRET_COMMITS = {
     "pokered": "d2704a63c26f9ba046ade877445216b3de0519a4",
@@ -96,15 +100,27 @@ def download(url: str, path: Path) -> bool:
     if path.exists():
         return True
     path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
     try:
-        with urllib.request.urlopen(url, timeout=60) as response:
-            data = response.read()
+        with urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_SECONDS) as response:
+            content_length = response.headers.get("Content-Length")
+            if content_length is not None and int(content_length) > MAX_DOWNLOAD_BYTES:
+                raise ValueError(f"Ressource trop volumineuse ({content_length} octets) : {url}")
+            with tmp.open("wb") as output:
+                total = 0
+                while chunk := response.read(DOWNLOAD_CHUNK_BYTES):
+                    total += len(chunk)
+                    if total > MAX_DOWNLOAD_BYTES:
+                        raise ValueError(f"Ressource trop volumineuse (plus de {MAX_DOWNLOAD_BYTES} octets) : {url}")
+                    output.write(chunk)
     except urllib.error.HTTPError as error:
+        tmp.unlink(missing_ok=True)
         if error.code == 404:
             return False
         raise
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_bytes(data)
+    except Exception:
+        tmp.unlink(missing_ok=True)
+        raise
     tmp.replace(path)
     return True
 

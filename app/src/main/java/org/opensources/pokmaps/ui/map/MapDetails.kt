@@ -139,6 +139,10 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
+    if (detail.failed) {
+        Text(stringResource(R.string.data_load_error), color = MaterialTheme.colorScheme.error)
+        return
+    }
     val details = detail.details ?: return
     details.move?.let { move ->
         Text(stringResource(R.string.map_machine_move, move.name), style = MaterialTheme.typography.titleSmall)
@@ -182,6 +186,10 @@ private fun CharacterDetails(
     }
     if (detail.loading) {
         CircularProgressIndicator(Modifier.size(24.dp))
+        return
+    }
+    if (detail.failed) {
+        Text(stringResource(R.string.data_load_error), color = MaterialTheme.colorScheme.error)
         return
     }
     if (obj.kind == MapObjectKind.TRAINER) {

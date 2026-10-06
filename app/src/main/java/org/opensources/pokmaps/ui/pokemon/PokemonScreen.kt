@@ -94,7 +94,7 @@ fun PokemonScreen(
         }
 
         details == null || game == null -> Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(stringResource(R.string.pokemon_not_found))
+            Text(stringResource(if (state.failed) R.string.data_load_error else R.string.pokemon_not_found))
         }
 
         else -> PokemonContent(

@@ -52,7 +52,8 @@ data class MapZone(
     val name: String,
     val places: List<MapPlace>,
     val loading: Boolean = true,
-    val encounters: List<Encounter> = emptyList()
+    val encounters: List<Encounter> = emptyList(),
+    val failed: Boolean = false
 ) {
     val groups: List<EncounterGroup> get() = encounters.groupByMethod()
 
@@ -64,14 +65,15 @@ data class MapZone(
 sealed interface MapDetail {
     data class WildPokemon(val pokemonId: Int, val name: String, val encounters: List<EncounterGroup>) : MapDetail
 
-    data class Item(val obj: MapObject, val details: ItemDetails? = null) : MapDetail
+    data class Item(val obj: MapObject, val details: ItemDetails? = null, val failed: Boolean = false) : MapDetail
 
     /** Dresseur, personnage ou Pokémon fixe ; `loading` tant que l'équipe et les offres ne sont pas lues. */
     data class Character(
         val obj: MapObject,
         val loading: Boolean = true,
         val party: List<TrainerPokemon> = emptyList(),
-        val offers: List<NpcOffer> = emptyList()
+        val offers: List<NpcOffer> = emptyList(),
+        val failed: Boolean = false
     ) : MapDetail
 }
 
@@ -97,7 +99,8 @@ data class MapUiState(
     /** Pokémon introuvable sur les cartes de la version (message à afficher une fois). */
     val notFound: String? = null,
     /** Sprites animés sur la carte et dans la liste du lieu (réglage). */
-    val animatedSprites: Boolean = false
+    val animatedSprites: Boolean = false,
+    val failed: Boolean = false
 )
 
 internal object MapMarkerIds {

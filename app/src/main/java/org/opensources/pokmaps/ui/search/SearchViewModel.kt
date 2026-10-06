@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.opensources.pokmaps.domain.map.ItemSummary
@@ -32,6 +33,7 @@ data class CharacterResult(val obj: MapObject, val name: String, val mapName: St
 
 data class SearchUiState(
     val loading: Boolean = true,
+    val failed: Boolean = false,
     val game: Game? = null,
     val query: String = "",
     val pokemon: List<PokedexEntry> = emptyList(),
@@ -75,7 +77,8 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
                     characters = index.characters.matching(text)
                 )
             }
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchUiState())
+        }.catch { emit(SearchUiState(loading = false, failed = true)) }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchUiState())
 
     fun search(text: String) {
         query.value = text

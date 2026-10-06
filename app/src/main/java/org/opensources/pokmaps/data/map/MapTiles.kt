@@ -1,7 +1,7 @@
 package org.opensources.pokmaps.data.map
 
 import android.content.res.AssetManager
-import java.io.IOException
+import java.io.FileNotFoundException
 import javax.inject.Inject
 import org.opensources.pokmaps.domain.model.GameMap
 import ovh.plrapps.mapcompose.core.TileStreamProvider
@@ -11,7 +11,7 @@ class MapTiles @Inject constructor(private val assets: AssetManager) {
     fun provider(map: GameMap): TileStreamProvider = TileStreamProvider { row, column, level ->
         try {
             assets.open(map.tilePath(level, row, column))
-        } catch (_: IOException) {
+        } catch (_: FileNotFoundException) {
             null
         }
     }

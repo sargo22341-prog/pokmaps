@@ -12,14 +12,17 @@ import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.settings.DisplaySettings
 import org.opensources.pokmaps.domain.map.MapCatalog
@@ -103,7 +106,7 @@ class MapViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            observeCatalog().collect { gameMaps ->
+            observeCatalog().catch { _state.update { it.copy(failed = true) } }.collect { gameMaps ->
                 val previous = loaded.value
                 // Changement de version : on reste là où on est si la carte existe aussi dans le nouveau jeu
                 // (Rouge et Bleu partagent leurs cartes, Jaune a presque toutes les mêmes), pour comparer.
@@ -112,7 +115,7 @@ class MapViewModel @Inject constructor(
                 worldEntrances = gameMaps.catalog.worldEntrances()
                 val sameMaps = previous?.catalog === gameMaps.catalog
                 if (!sameMaps) scales.clear()
-                _state.update { it.copy(game = gameMaps.game, detail = null, zoneListOpen = false) }
+                _state.update { it.copy(game = gameMaps.game, detail = null, zoneListOpen = false, failed = false) }
                 val stayed = position != null && stay(gameMaps.catalog, position, sameMaps)
                 val current = _state.value.highlight
                 when {
@@ -123,7 +126,12 @@ class MapViewModel @Inject constructor(
         }
         viewModelScope.launch {
             mapRequests.pending.filterNotNull().collect { request ->
-                loaded.filterNotNull().first()
+                val gameMaps = withTimeoutOrNull(CATALOG_WAIT_MS) { loaded.filterNotNull().first() }
+                if (gameMaps == null) {
+                    _state.update { it.copy(failed = true) }
+                    mapRequests.consume(request)
+                    return@collect
+                }
                 when (request) {
                     is MapRequest.HighlightPokemon -> highlight(request.pokemonId, request.name)
 
@@ -409,12 +417,20 @@ class MapViewModel @Inject constructor(
         _state.update { it.copy(zone = zone, detail = null, zoneListOpen = false) }
         refreshOverlays()
         viewModelScope.launch {
-            val encounters = getMapEncounters(game, catalog, zoneId)
-            val ready = zone.copy(loading = false, encounters = encounters)
-            if (_state.value.zone != zone) return@launch
-            wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)
-            _state.update { it.copy(zone = ready) }
-            refreshOverlays()
+            try {
+                val encounters = getMapEncounters(game, catalog, zoneId)
+                val ready = zone.copy(loading = false, encounters = encounters)
+                if (_state.value.zone != zone) return@launch
+                wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)
+                _state.update { it.copy(zone = ready) }
+                refreshOverlays()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (_: Exception) {
+                _state.update { state ->
+                    if (state.zone == zone) state.copy(zone = zone.copy(loading = false, failed = true)) else state
+                }
+            }
         }
     }
 
@@ -461,8 +477,16 @@ class MapViewModel @Inject constructor(
                 _state.update { it.copy(detail = detail, zoneListOpen = false) }
                 val itemId = obj.itemId ?: return
                 viewModelScope.launch {
-                    val details = getObjectDetails.item(game, itemId)
-                    _state.update { if (it.detail == detail) it.copy(detail = detail.copy(details = details)) else it }
+                    try {
+                        val details = getObjectDetails.item(game, itemId)
+                        _state.update {
+                            if (it.detail == detail) it.copy(detail = detail.copy(details = details)) else it
+                        }
+                    } catch (error: CancellationException) {
+                        throw error
+                    } catch (_: Exception) {
+                        _state.update { if (it.detail == detail) it.copy(detail = detail.copy(failed = true)) else it }
+                    }
                 }
             }
 
@@ -470,10 +494,23 @@ class MapViewModel @Inject constructor(
                 val detail = MapDetail.Character(obj)
                 _state.update { it.copy(detail = detail, zoneListOpen = false) }
                 viewModelScope.launch {
-                    val isTrainer = obj.kind == MapObjectKind.TRAINER
-                    val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
-                    val ready = detail.copy(loading = false, party = party, offers = getObjectDetails.offers(obj.id))
-                    _state.update { if (it.detail == detail) it.copy(detail = ready) else it }
+                    try {
+                        val isTrainer = obj.kind == MapObjectKind.TRAINER
+                        val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
+                        val offers = getObjectDetails.offers(obj.id)
+                        val ready = detail.copy(loading = false, party = party, offers = offers)
+                        _state.update { if (it.detail == detail) it.copy(detail = ready) else it }
+                    } catch (error: CancellationException) {
+                        throw error
+                    } catch (_: Exception) {
+                        _state.update {
+                            if (it.detail == detail) {
+                                it.copy(detail = detail.copy(loading = false, failed = true))
+                            } else {
+                                it
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -633,6 +670,7 @@ class MapViewModel @Inject constructor(
         const val WARP_TOUCH_RADIUS_DP = 24f
         const val WARP_TOUCH_MIN_SCALE = 1.0
         const val SHUTDOWN_DELAY_MS = 600L
+        const val CATALOG_WAIT_MS = 30_000L
         val MAP_BACKGROUND = Color(0xFF202028)
     }
 }
