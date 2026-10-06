@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.data.map.MapTiles
+import org.opensources.pokmaps.data.settings.DisplaySettings
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapFloor
@@ -29,6 +30,7 @@ import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.MapWarp
+import org.opensources.pokmaps.domain.map.MarkerSizing
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
@@ -148,7 +150,9 @@ data class MapUiState(
     val zoneListOpen: Boolean = false,
     val highlight: MapHighlight? = null,
     /** Pokémon introuvable sur les cartes de la version (message à afficher une fois). */
-    val notFound: String? = null
+    val notFound: String? = null,
+    /** Sprites animés sur la carte et dans la liste du lieu (réglage). */
+    val animatedSprites: Boolean = false
 )
 
 /**
@@ -164,6 +168,7 @@ class MapViewModel @Inject constructor(
     private val mapRequests: MapRequests,
     private val mapLayers: MapLayersUseCase,
     observeCollection: ObserveCollectionUseCase,
+    displaySettings: DisplaySettings,
     private val tiles: MapTiles
 ) : ViewModel() {
     private val _state = MutableStateFlow(MapUiState())
@@ -189,6 +194,12 @@ class MapViewModel @Inject constructor(
 
     /** Chemins (surlignage, contour du lieu) dessinés sur la carte affichée. */
     private val drawnPaths = mutableListOf<String>()
+
+    /** Taille des objets, personnages et Pokémon fixes de la carte affichée, selon la place autour d'eux. */
+    private var objectScales: Map<Int, Float> = emptyMap()
+
+    /** L'écran de la carte a déjà été affiché une fois (voir [onScreenShown]). */
+    private var screenShown = false
 
     init {
         viewModelScope.launch {
@@ -238,6 +249,35 @@ class MapViewModel @Inject constructor(
                 _state.update { it.copy(caught = collection.caught) }
             }
         }
+        viewModelScope.launch {
+            displaySettings.mapAnimatedSprites.collect { animated ->
+                if (animated == _state.value.animatedSprites) return@collect
+                _state.update { it.copy(animatedSprites = animated) }
+                refreshOverlays()
+            }
+        }
+    }
+
+    /**
+     * L'écran de la carte revient (après le Pokédex, une fiche…) : la carte MapCompose, restée en mémoire alors
+     * que son affichage était détruit, est recréée à la même position, avec le même lieu sélectionné. Sans cela,
+     * ses gestes gardent l'état de l'ancien affichage et les touches ne sélectionnent plus d'autre lieu.
+     */
+    fun onScreenShown() {
+        if (!screenShown) {
+            screenShown = true
+            return
+        }
+        val current = _state.value
+        val map = current.map ?: return
+        val mapState = current.mapState ?: return
+        val markers = wildMarkers
+        val focused = focusedObjectId
+        show(map.id, mapState.centroidX, mapState.centroidY, mapState.scale)
+        wildMarkers = markers
+        focusedObjectId = focused
+        _state.update { it.copy(zone = current.zone, detail = current.detail, zoneListOpen = current.zoneListOpen) }
+        refreshOverlays()
     }
 
     private val catalog: MapCatalog? get() = loaded.value?.catalog
@@ -392,6 +432,7 @@ class MapViewModel @Inject constructor(
         }
         wildMarkers = emptyList()
         focusedObjectId = null
+        objectScales = MarkerSizing.objectScales(catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() })
         val parent = when {
             isWorld -> null
             else -> catalog.parentEntrance(map.id)?.let { catalog.maps[it.mapId] } ?: catalog.world
@@ -696,6 +737,7 @@ class MapViewModel @Inject constructor(
         val map = _state.value.map ?: return
         val mapState = _state.value.mapState ?: return
         val layers = _state.value.layers
+        val animated = _state.value.animatedSprites
         val zone = _state.value.zone?.let { catalog.maps[it.mapId] }
         mapState.removeAllMarkers()
         drawnPaths.forEach { mapState.removePath(it) }
@@ -713,11 +755,16 @@ class MapViewModel @Inject constructor(
             id,
             x.toDouble() / map.width,
             y.toDouble() / map.height,
-            // Une icône de Pokémon est centrée sur son dessin (en bas de l'image), et ne se touche que sur lui.
-            relativeOffset = if (pokemon) POKEMON_OFFSET else CENTERED,
+            // Une icône de Pokémon est centrée sur son dessin (en bas de l'image), et ne se touche que sur lui ; un
+            // sprite animé est centré dans son cadre.
+            relativeOffset = if (pokemon && !animated) POKEMON_OFFSET else CENTERED,
             zIndex = zIndex,
-            clickableAreaScale = if (pokemon) POKEMON_CLICK_SCALE else FULL_CLICK_SCALE,
-            clickableAreaCenterOffset = if (pokemon) POKEMON_CLICK_CENTER else NO_OFFSET,
+            clickableAreaScale = when {
+                !pokemon -> FULL_CLICK_SCALE
+                animated -> ANIMATED_CLICK_SCALE
+                else -> POKEMON_CLICK_SCALE
+            },
+            clickableAreaCenterOffset = if (pokemon && !animated) POKEMON_CLICK_CENTER else NO_OFFSET,
             renderingStrategy = if (lazy) RenderingStrategy.LazyLoading(LAZY_LOADER) else RenderingStrategy.Default,
             c = content
         )
@@ -757,7 +804,14 @@ class MapViewModel @Inject constructor(
             val inZone = obj.mapId in zoneParts
             val pokemon = obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null
             mapState.marker("$OBJECT:${obj.id}", obj.x, obj.y, lazy = !inZone, zIndex = 1f, pokemon = pokemon) {
-                ObjectMarker(mapState, obj, catalog.versionGroupIdentifier, alwaysVisible = inZone)
+                ObjectMarker(
+                    mapState,
+                    obj,
+                    catalog.versionGroupIdentifier,
+                    alwaysVisible = inZone,
+                    scale = objectScales[obj.id] ?: 1f,
+                    animated = animated
+                )
             }
         }
         if (MapLayer.WILD_POKEMON in layers) {
@@ -770,7 +824,7 @@ class MapViewModel @Inject constructor(
                     zIndex = 1f,
                     pokemon = true
                 ) {
-                    WildPokemonMarker(mapState, wild)
+                    WildPokemonMarker(mapState, wild, animated)
                 }
             }
         }
@@ -836,6 +890,7 @@ class MapViewModel @Inject constructor(
         val NO_OFFSET = Offset(0f, 0f)
         val POKEMON_CLICK_SCALE = Offset(PixelArt.POKEMON_CONTENT_WIDTH, 0.6f)
         val POKEMON_CLICK_CENTER = Offset(0f, PixelArt.POKEMON_CENTER_Y - 0.5f)
+        val ANIMATED_CLICK_SCALE = Offset(0.6f, 0.6f)
         val MAP_BACKGROUND = Color(0xFF202028)
         val ZONE_COLOR = Color(0xFFFFFFFF)
     }
