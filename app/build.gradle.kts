@@ -63,8 +63,8 @@ android {
     lint {
         abortOnError = true
         checkDependencies = true
-        // Les mises à jour de dépendances sont suivies à la main, pas par la CI.
-        disable += setOf("GradleDependency", "AndroidGradlePluginVersion", "NewerVersionAvailable")
+        checkAllWarnings = true
+        warningsAsErrors = true
     }
 }
 

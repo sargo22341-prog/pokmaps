@@ -1,22 +1,23 @@
 [versions]
-agp = "9.4.0"
+agp = "9.4.1"
 kotlin = "2.4.20"
 ksp = "2.3.12"
 composeBom = "2026.09.00"
 activityCompose = "1.13.0"
-lifecycle = "2.9.0"
-navigation = "2.9.0"
+lifecycle = "2.11.0"
+navigation = "2.10.2"
 hilt = "2.60.1"
-hiltNavigationCompose = "1.2.0"
-room = "2.8.4"
-datastore = "1.1.7"
+hiltNavigationCompose = "1.4.0"
+room = "2.8.5"
+datastore = "1.2.1"
 mapcompose = "3.2.8"
 coil = "3.6.3"
 junit = "4.13.2"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
 sqliteJdbc = "3.53.4.0"
 gson = "2.14.0"
 ktlint = "1.8.0"
+gradleVersions = "0.64.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -51,3 +52,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+gradle-versions = { id = "io.github.ben-manes.versions", version.ref = "gradleVersions" }

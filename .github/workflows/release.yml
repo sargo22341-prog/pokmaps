@@ -60,6 +60,16 @@ jobs:
           done
           exit $missing
 
+      - name: Préparer les notes de version
+        id: notes
+        run: |
+          scripts/release-notes.sh extract "$RUNNER_TEMP/release-notes.md"
+          if [[ -s "$RUNNER_TEMP/release-notes.md" ]]; then
+            echo "empty=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "empty=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Générer les données (base + images)
         uses: ./.github/actions/build-database
 
@@ -115,7 +125,32 @@ jobs:
           tag_name: ${{ steps.version.outputs.tag }}
           target_commitish: ${{ github.sha }}
           name: Pokémaps ${{ steps.version.outputs.name }}
-          generate_release_notes: true
+          body_path: ${{ runner.temp }}/release-notes.md
+          generate_release_notes: ${{ steps.notes.outputs.empty == 'true' }}
           files: |
             ${{ steps.files.outputs.apk }}
             ${{ steps.files.outputs.apk }}.sha256
+
+      - name: Vider les notes publiées sur main
+        if: steps.notes.outputs.empty == 'false'
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          git fetch origin main
+          tagged_notes=$(git show "$RELEASE_SHA:RELEASE_NOTES.md" | sha256sum | cut -d ' ' -f 1)
+          main_notes=$(git show origin/main:RELEASE_NOTES.md | sha256sum | cut -d ' ' -f 1)
+          if [[ "$tagged_notes" != "$main_notes" ]]; then
+            echo "main contient des notes plus récentes ; elles sont conservées."
+            exit 0
+          fi
+          git checkout -B main origin/main
+          scripts/release-notes.sh reset
+          if git diff --quiet -- RELEASE_NOTES.md; then
+            echo "Les notes sont déjà vides."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add RELEASE_NOTES.md
+          git commit -m "Docs : vider les notes de version publiées"
+          git push origin HEAD:main

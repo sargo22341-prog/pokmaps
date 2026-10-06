@@ -14,3 +14,4 @@ ignore = ["RUF001", "RUF002", "RUF003"]  # caractères typographiques français 
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = ["error"]

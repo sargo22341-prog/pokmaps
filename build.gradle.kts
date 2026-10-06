@@ -1,12 +1,30 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.gradle.versions)
+}
+
+private fun String.isNonStableVersion(): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase().contains(it) }
+    val stablePattern = "^[0-9,.v-]+(-r)?$".toRegex()
+    return !stableKeyword && !stablePattern.matches(this)
+}
+
+tasks.named<DependencyUpdatesTask>("dependencyUpdates") {
+    revision = "release"
+    gradleReleaseChannel = "current"
+    notCompatibleWithConfigurationCache(
+        "dependencyUpdates consulte les dépôts à chaque exécution."
+    )
+    rejectVersionIf { candidate.version.isNonStableVersion() }
 }
 
 // ktlint est lancé directement via sa CLI : pas de plugin Gradle tiers à maintenir.
-val ktlint: Configuration by configurations.creating
+val ktlint = configurations.create("ktlint")
 
 dependencies {
     ktlint(libs.ktlint.cli) {
@@ -32,4 +50,8 @@ tasks.register<JavaExec>("ktlintFormat") {
     classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
     args = listOf("-F", "--relative") + ktlintPatterns
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
+    compilerOptions.allWarningsAsErrors.set(true)
 }
