@@ -192,6 +192,8 @@
     <string name="settings_title">Réglages</string>
     <string name="settings_display">Affichage</string>
     <string name="settings_animated_sprites">Sprites animés</string>
+    <string name="settings_map_animated_sprites">Sprites animés sur la carte</string>
+    <string name="settings_map_animated_sprites_summary">Pokémon sauvages et fixes animés sur la carte, dans la liste du lieu et sa fiche.</string>
     <string name="settings_animated_sprites_summary">Pokémon animés (sprites de Noir et Blanc) dans le Pokédex et la fiche Pokémon, à la place des sprites fixes.</string>
     <string name="about_version">Version %1$s</string>
     <string name="about_description">Cartes interactives et Pokédex de Pokémon Rouge, Bleu et Jaune, entièrement hors ligne.</string>

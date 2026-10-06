@@ -21,8 +21,18 @@ class DisplaySettings @Inject constructor(private val dataStore: DataStore<Prefe
         dataStore.edit { it[ANIMATED_SPRITES] = enabled }
     }
 
+    /** Sprites animés sur la carte (Pokémon sauvages et fixes) et dans la liste du lieu ; désactivés par défaut. */
+    val mapAnimatedSprites: Flow<Boolean> =
+        dataStore.data.map { it[MAP_ANIMATED_SPRITES] ?: DEFAULT_MAP_ANIMATED_SPRITES }.distinctUntilChanged()
+
+    suspend fun setMapAnimatedSprites(enabled: Boolean) {
+        dataStore.edit { it[MAP_ANIMATED_SPRITES] = enabled }
+    }
+
     private companion object {
         val ANIMATED_SPRITES = booleanPreferencesKey("animated_sprites")
         const val DEFAULT_ANIMATED_SPRITES = true
+        val MAP_ANIMATED_SPRITES = booleanPreferencesKey("map_animated_sprites")
+        const val DEFAULT_MAP_ANIMATED_SPRITES = false
     }
 }

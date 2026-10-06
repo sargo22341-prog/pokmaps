@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 
-/** Réglages : sprites animés, et accès à l'écran « À propos ». */
+/** Réglages : sprites animés (Pokédex et fiches, carte), et accès à l'écran « À propos ». */
 @Composable
 fun SettingsScreen(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -44,25 +44,19 @@ fun SettingsScreen(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltV
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)
         )
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .toggleable(state.animatedSprites, role = Role.Switch, onValueChange = viewModel::setAnimatedSprites)
-                .padding(horizontal = 16.dp, vertical = 12.dp)
-        ) {
-            Column(Modifier.weight(1f)) {
-                Text(stringResource(R.string.settings_animated_sprites), style = MaterialTheme.typography.bodyLarge)
-                Text(
-                    stringResource(R.string.settings_animated_sprites_summary),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-            Switch(checked = state.animatedSprites, onCheckedChange = null)
-        }
-        if (state.animatedSprites) {
+        SwitchRow(
+            title = stringResource(R.string.settings_animated_sprites),
+            summary = stringResource(R.string.settings_animated_sprites_summary),
+            checked = state.animatedSprites,
+            onCheckedChange = viewModel::setAnimatedSprites
+        )
+        SwitchRow(
+            title = stringResource(R.string.settings_map_animated_sprites),
+            summary = stringResource(R.string.settings_map_animated_sprites_summary),
+            checked = state.mapAnimatedSprites,
+            onCheckedChange = viewModel::setMapAnimatedSprites
+        )
+        if (state.animatedSprites || state.mapAnimatedSprites) {
             // Aperçu : Pikachu animé.
             AnimatedPokemonSprite(
                 PREVIEW_POKEMON,
@@ -84,6 +78,29 @@ fun SettingsScreen(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltV
             Icon(painterResource(R.drawable.ic_info), contentDescription = null)
             Text(stringResource(R.string.about_title), style = MaterialTheme.typography.bodyLarge)
         }
+    }
+}
+
+/** Réglage activable : titre, explication et interrupteur (toute la ligne se touche). */
+@Composable
+private fun SwitchRow(title: String, summary: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .toggleable(checked, role = Role.Switch, onValueChange = onCheckedChange)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(
+                summary,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        Switch(checked = checked, onCheckedChange = null)
     }
 }
 
