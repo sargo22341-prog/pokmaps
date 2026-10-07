@@ -149,6 +149,7 @@ responsabilité réelle.
 | `app/src/test/java/...` | Tests JVM, **dans le même paquet** que le code testé |
 | `tools/pokemaps_data/` | Sources, transformations, assemblage et validation des données |
 | `tools/data/` | Corrections éditoriales maintenues à la main (CSV) |
+| `tools/spot_editor/` | Éditeur PC des emplacements sauvages (Tk), lancé par `tools/map_editor.py` |
 | `tools/tests/` | Tests du pipeline Python |
 
 Écrans existants dans `ui/` : `about`, `character`, `game`, `item`, `map`, `place`, `pokedex`,

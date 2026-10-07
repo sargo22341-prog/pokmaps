@@ -160,10 +160,15 @@ def pokesprite(cache: Path, path: str) -> tuple[str, Path]:
     return url, cache / f"pokesprite-{POKESPRITE_COMMIT[:12]}" / path
 
 
+def pret_dir(cache: Path, repo: str) -> Path:
+    """Dossier du dépôt pret `repo` dans le cache ; il ne contient la source complète que si `.complete` existe."""
+    return cache / f"{repo}-{PRET_COMMITS[repo][:12]}"
+
+
 def fetch_pret(cache: Path, repo: str) -> Path:
     """Récupère le dépôt pret `repo` au commit figé dans `cache/<repo>-<commit>` (sans l'historique git)."""
     commit = PRET_COMMITS[repo]
-    target = cache / f"{repo}-{commit[:12]}"
+    target = pret_dir(cache, repo)
     if (target / ".complete").exists():
         return target
     if target.exists():

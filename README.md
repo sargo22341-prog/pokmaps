@@ -81,6 +81,37 @@ exemple) demande :
 Les données générées ne sont pas versionnées : elles sont produites par la CI, ou en local avec la commande
 ci-dessous.
 
+## Éditeur des emplacements sauvages
+
+Après une génération des données, lancer `python tools/map_editor.py` sur le PC. Choisir les jeux (Rouge, Bleu et
+Jaune sont édités ensemble), la route ou le lieu, puis le terrain : herbes ou sol pour la marche, eau pour le surf et la
+pêche. Seuls les lieux qui ont des rencontres sauvages sont proposés, et seuls les terrains où le jeu fait apparaître un
+Pokémon : les herbes si la carte en a, le sol uniquement dans les grottes et bâtiments (pas dehors, ni dans la forêt de
+Jade ou le Parc Safari, où la marche ne compte que dans les herbes), l'eau s'il y a du surf ou de la pêche. La génération
+applique la même règle et refuse dans `map_spots.csv` un terrain où aucun Pokémon ne peut apparaître. La liste affiche les
+Pokémon à placer sur ce terrain, avec leur version, leurs niveaux et leur probabilité. Cliquer sur la carte ajoute un
+emplacement, centré sur la case de 16 px ; cliquer sur un emplacement le retire. « Vider ce terrain » retire tous ses
+emplacements.
+
+Les cases « Afficher sur la carte » dessinent, à la taille de l'application, ce que la carte finale montre autour des
+emplacements : entrées, objets et objets cachés, dresseurs, personnages et installations, Pokémon fixes. L'« aperçu des
+Pokémon sauvages » (décoché par défaut) pose un sprite du terrain sur chaque emplacement pour juger la place qu'ils
+prennent ; l'application, elle, choisit elle-même quel Pokémon va sur quel emplacement. L'éditeur lit les sources pret
+déjà téléchargées dans `tools/.cache` par la génération.
+
+Un avertissement apparaît quand un terrain a moins d'emplacements que de Pokémon à y dessiner (dans la version qui en
+demande le plus) : l'application les rangerait alors en grille au milieu du terrain. L'enregistrement demande une
+confirmation s'il reste de tels terrains.
+
+Les positions sont communes à tous les jeux d'une même famille de cartes (`map_family` dans
+`tools/pokemaps_data/games.py`) : un futur Or, Argent et Cristal aura sa propre famille, et ses emplacements ne se
+mélangeront pas à ceux de Kanto. Seuls les terrains réellement modifiés sont écrits dans `tools/data/map_spots.csv`
+(colonnes `family,map_identifier,kind,x,y`, une ligne sans coordonnées pour un terrain vide) ; les autres restent
+calculés par la génération. Le bouton « Enregistrer toutes les cartes » écrit ensemble les modifications de tous les
+lieux, puis lance `tools/build_data.py`, Ruff et les tests Python. Si Ruff ou pytest manque dans le Python qui exécute
+l'éditeur, leurs dépendances épinglées sont installées depuis `tools/requirements-dev.txt`. Une confirmation apparaît
+après la réussite de toutes les étapes ; une fenêtre d'erreur précise l'étape et la sortie en cas d'échec.
+
 ## Compiler en local
 
 Prérequis : JDK 21, Android SDK (API 37), Python 3.11 ou plus récent, git.

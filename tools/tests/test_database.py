@@ -3,9 +3,13 @@
 import sqlite3
 from pathlib import Path
 
+import pytest
 from PIL import Image
 
-from pokemaps_data.builder import SCHEMA_VERSION
+from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
+from pokemaps_data.builder_maps import _SpotRows
+from pokemaps_data.map_spots import TerrainKey, read_spots
+from pokemaps_data.maps_layout import identifier as map_identifier
 from pokemaps_data.validate import validate
 
 RED, BLUE, YELLOW = 1, 2, 3
@@ -352,30 +356,45 @@ def test_npc_offers(db: sqlite3.Connection) -> None:
     assert ("pewter-gym", "gift_item", "tm34", None, 1, None, None) in offers  # CT Patience de Pierre
 
 
-def test_pokemon_spots(db: sqlite3.Connection) -> None:
-    spots = dict(
-        db.execute(
-            """SELECT m.identifier || '/' || s.kind, count(*) FROM map_spot s JOIN map m ON m.id = s.map_id
-               WHERE m.version_group_id = ? GROUP BY m.identifier, s.kind""",
-            (RED_BLUE,),
-        )
-    )
+def test_generated_pokemon_spots(builder: DatabaseBuilder) -> None:
+    # Emplacements calculés par la génération, avant les retouches de map_spots.csv (testées à part) : le
+    # résultat ne dépend donc pas des modifications faites dans l'éditeur.
+    by_terrain: dict[tuple[str, str], list[tuple[int, int]]] = {}
+    for spot in builder.map_data["red-blue"].spots:
+        by_terrain.setdefault((map_identifier(spot.map_const), spot.kind), []).append((spot.x, spot.y))
     # Petits carrés d'herbes : quelques emplacements ; grandes étendues : le maximum, bien espacés.
-    assert 6 <= spots["route-1/grass"] <= 40
-    assert spots["route-21/water"] == 40
-    assert spots["mt-moon-1f/floor"] == 40
-    cells = db.execute(
-        """SELECT s.map_id, s.kind, s.x, s.y FROM map_spot s JOIN map m ON m.id = s.map_id
-           WHERE m.version_group_id = ?""",
-        (RED_BLUE,),
-    ).fetchall()
-    by_terrain = {}
-    for map_id, kind, x, y in cells:
-        by_terrain.setdefault((map_id, kind), []).append((x, y))
+    assert 6 <= len(by_terrain["route-1", "grass"]) <= 40
+    assert len(by_terrain["route-21", "water"]) == 40
+    assert len(by_terrain["mt-moon-1f", "floor"]) == 40
+    # Comme dans le jeu, marcher hors des herbes ne fait rien apparaître dehors ni en forêt (Parc Safari compris).
+    for outside in ("route-1", "viridian-forest", "safari-zone-center"):
+        assert (outside, "floor") not in by_terrain
+    assert ("cerulean-cave-1f", "grass") not in by_terrain
     for points in by_terrain.values():
         for i, (ax, ay) in enumerate(points):
             for bx, by in points[i + 1 :]:
                 assert (ax - bx) ** 2 + (ay - by) ** 2 >= (3 * 16) ** 2
+
+
+def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlite3.Connection) -> None:
+    curated = read_spots()
+    assert curated
+    for key, points in curated.items():
+        for group in (RED_BLUE, YELLOW_GROUP):
+            rows = db.execute(
+                """SELECT s.x, s.y FROM map_spot s JOIN map m ON m.id = s.map_id
+                   WHERE m.version_group_id = ? AND m.identifier = ? AND s.kind = ?""",
+                (group, key.map_identifier, key.kind),
+            ).fetchall()
+            assert set(rows) == points, (key, group)
+
+
+def test_curated_spots_must_be_on_a_wild_terrain(builder: DatabaseBuilder) -> None:
+    data = builder.map_data["red-blue"]
+    ids = {row.const: number for number, row in enumerate(data.maps, start=1)}
+    spots = _SpotRows({TerrainKey("red-blue-yellow", "route-1", "floor"): frozenset()})
+    with pytest.raises(ValueError, match="terrain floor de route-1"):
+        spots.add_game("red-blue", data, ids)
 
 
 def test_object_names(db: sqlite3.Connection) -> None:

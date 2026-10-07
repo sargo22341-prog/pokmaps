@@ -20,12 +20,24 @@ class Game:
     pret_repo: str
     # Versions PokéAPI du jeu et symbole qui les distingue dans pret (IF DEF(_RED) : propre à Rouge).
     pret_versions: tuple[tuple[str, str], ...]
+    # Famille de cartes : les jeux d'une même famille partagent leurs plans (Rouge, Bleu et Jaune ; plus tard
+    # Or, Argent et Cristal…), donc les emplacements de Pokémon retouchés dans tools/data/map_spots.csv.
+    map_family: str
 
 
 GAMES: tuple[Game, ...] = (
-    Game("red-blue", "pokered", (("red", "_RED"), ("blue", "_BLUE"))),
-    Game("yellow", "pokeyellow", (("yellow", "_YELLOW"),)),
+    Game("red-blue", "pokered", (("red", "_RED"), ("blue", "_BLUE")), "red-blue-yellow"),
+    Game("yellow", "pokeyellow", (("yellow", "_YELLOW"),), "red-blue-yellow"),
 )
+
+
+def map_families() -> dict[str, tuple[str, ...]]:
+    """Groupes de versions de chaque famille de cartes, dans l'ordre de GAMES."""
+    families: dict[str, tuple[str, ...]] = {}
+    for game in GAMES:
+        families[game.map_family] = (*families.get(game.map_family, ()), game.version_group)
+    return families
+
 
 # Méthodes de rencontre « uniques » (un Pokémon donné, fixe ou échangé) : pas de probabilité,
 # on compte le nombre d'exemplaires. Toutes les autres sont des rencontres aléatoires dont

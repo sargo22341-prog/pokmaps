@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from .games import GAMES
+from .map_spots import Point, TerrainKey, read_spots
 from .maps import GameMapData
 from .maps_characters import CharacterNames, ObjectRow, read_character_names
 from .maps_layout import identifier
@@ -22,7 +24,8 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     known_areas = {row[0] for row in builder.encounters.location_area_table()}
     versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
     objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions)
-    maps, areas, warps, spots = [], [], [], []
+    maps, areas, warps = [], [], []
+    spots = _SpotRows(read_spots())
     for version_group, data in builder.map_data.items():
         vg = vg_ids[version_group]
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
@@ -31,8 +34,8 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         warps.extend(game_warps)
         for obj in data.objects:
             objects.add(obj, ids[obj.map_const])
-        for spot in data.spots:
-            spots.append((len(spots) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
+        spots.add_game(version_group, data, ids)
+    spots.check_all_used()
     if unused := objects.names.unused_text_names():
         raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
     return {
@@ -42,8 +45,44 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         "map_object": objects.objects,
         "trainer_pokemon": objects.parties,
         "npc_offer": objects.offers,
-        "map_spot": spots,
+        "map_spot": spots.rows,
     }
+
+
+class _SpotRows:
+    """Emplacements des Pokémon sauvages : ceux de la génération, sauf les terrains retouchés dans map_spots.csv."""
+
+    def __init__(self, curated: dict[TerrainKey, frozenset[Point]]) -> None:
+        self.curated = curated
+        self.families = {game.version_group: game.map_family for game in GAMES}
+        self.used: set[TerrainKey] = set()
+        self.rows: list[tuple] = []
+
+    def add_game(self, version_group: str, data: GameMapData, ids: dict[str, int]) -> None:
+        family = self.families[version_group]
+        for spot in data.spots:
+            if TerrainKey(family, identifier(spot.map_const), spot.kind) not in self.curated:
+                self.rows.append((len(self.rows) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
+        bounds = {identifier(row.const): (ids[row.const], row) for row in data.maps}
+        # Un terrain n'a d'emplacements générés que si le jeu y fait apparaître des Pokémon sauvages.
+        terrains = {(identifier(spot.map_const), spot.kind) for spot in data.spots}
+        for key, points in sorted(self.curated.items()):
+            if key.family != family or key.map_identifier not in bounds:
+                continue
+            if (key.map_identifier, key.kind) not in terrains:
+                where = f"{key.kind} de {key.map_identifier} ({version_group})"
+                raise ValueError(f"map_spots.csv : aucun Pokémon sauvage n'apparaît sur le terrain {where}")
+            self.used.add(key)
+            map_id, row = bounds[key.map_identifier]
+            for x, y in sorted(points):
+                if not (row.x <= x <= row.x + row.width and row.y <= y <= row.y + row.height):
+                    where = f"{key.map_identifier} ({version_group})"
+                    raise ValueError(f"map_spots.csv : emplacement {(x, y)} hors de {where}")
+                self.rows.append((len(self.rows) + 1, map_id, key.kind, x, y))
+
+    def check_all_used(self) -> None:
+        if unknown := sorted(set(self.curated) - self.used):
+            raise ValueError(f"map_spots.csv : cartes absentes des jeux de leur famille : {unknown}")
 
 
 class _ObjectRows:

@@ -23,6 +23,9 @@ SPOTS_PER_KIND = 40
 SPOT_SPACING = 3
 # Case « intérieure » : au moins autant de voisines (sur 8) du même terrain.
 INTERIOR_NEIGHBORS = 7
+# Tileset de la forêt de Jade et du Parc Safari : comme dehors, on n'y rencontre des Pokémon qu'en marchant dans
+# les herbes (engine/battle/wild_encounters.asm, TryDoWildEncounter).
+FOREST_TILESET = "FOREST"
 
 Cell = tuple[int, int]
 
@@ -167,11 +170,14 @@ class GameMaps:
     # --- Terrain --------------------------------------------------------------
 
     def cells(self, const: str) -> dict[str, list[tuple[int, int]]]:
-        """Cases (pas de 16 px) de chaque terrain : herbes (grass), eau (water) et sol praticable (floor).
+        """Cases (pas de 16 px) de chaque terrain où le jeu fait apparaître des Pokémon sauvages : herbes (grass),
+        eau (water) et sol praticable (floor).
 
-        Comme le jeu, on regarde la tuile en bas à gauche de chaque case."""
+        Comme le jeu, on regarde la tuile en bas à gauche de chaque case. Le sol ne compte que dans les cartes
+        intérieures hors forêt : ailleurs, marcher hors des herbes ne déclenche aucune rencontre."""
         pret_map = self.maps[const]
         tileset = self.repo.tilesets[pret_map.tileset]
+        wild_floor = not pret_map.is_outdoor and pret_map.tileset != FOREST_TILESET
         warps = {(warp.x, warp.y) for warp in pret_map.warps}
         result: dict[str, list[tuple[int, int]]] = {"grass": [], "water": [], "floor": []}
         for y in range(pret_map.height * 2):
@@ -183,7 +189,7 @@ class GameMaps:
                     result["grass"].append((x, y))
                 elif tileset.has_water and tile == WATER_TILE:
                     result["water"].append((x, y))
-                elif tile in tileset.passable:
+                elif wild_floor and tile in tileset.passable:
                     result["floor"].append((x, y))
         pairs = self.repo.land_pair_collisions.get(pret_map.tileset, set())
 
@@ -194,6 +200,10 @@ class GameMaps:
 
         result["floor"] = _reachable(result["floor"], warps, blocked)
         return result
+
+    def wild_terrains(self, const: str) -> frozenset[str]:
+        """Terrains de la carte où le jeu fait apparaître des Pokémon sauvages."""
+        return frozenset(kind for kind, cells in self.cells(const).items() if cells)
 
     def spots(self, const: str) -> dict[str, list[tuple[int, int]]]:
         """Emplacements bien répartis de chaque terrain, pour dessiner les Pokémon sauvages."""
