@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les textes du choix de jeu et de la liste d’un lieu restent lisibles en thème sombre, et les Pokémon sont plus grands sur la carte.
 - Les cartes intérieures permettent de dézoomer davantage et la liste des lieux affiche les objets visibles et cachés.
 - L’application conserve son thème sombre et harmonise les retours par geste et par bouton.
 

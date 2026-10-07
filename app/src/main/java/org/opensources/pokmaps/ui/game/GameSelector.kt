@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.game
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
@@ -21,7 +22,10 @@ fun GameSelector(state: GameUiState, onSelect: (Game) -> Unit) {
     val selected = state.selected ?: return
     Box {
         TextButton(onClick = { expanded = true }) {
-            Text(stringResource(R.string.game_selector, selected.name))
+            Text(
+                stringResource(R.string.game_selector, selected.name),
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             state.games.forEach { game ->

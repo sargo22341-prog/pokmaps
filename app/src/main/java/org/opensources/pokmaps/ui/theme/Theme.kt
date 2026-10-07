@@ -5,8 +5,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val PokeRedDark = Color(0xFFFFB4A2)
-private val DarkColors = darkColorScheme(primary = PokeRedDark)
+private val DarkColors = darkColorScheme(primary = Color.White)
 
 /**
  * Thème sombre unique de l'application, indépendant du thème et des couleurs du système.

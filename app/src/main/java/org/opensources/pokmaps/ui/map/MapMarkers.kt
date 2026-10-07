@@ -242,10 +242,10 @@ private val FACILITY_COLOR = Color(0xFF00897B)
 private val WARP_MIN_SIZE = 8.dp
 
 /**
- * Taille d'un pixel des sprites des Pokémon, en pixels de la carte : 0,75 réduit de 30 %, pour que les sprites de
+ * Taille d'un pixel des sprites des Pokémon, en pixels de la carte : 0,75 augmenté de 30 %, pour que les sprites de
  * Noir et Blanc aient à peu près la taille des anciennes icônes fixes.
  */
-private const val POKEMON_RATIO = 0.525f
+private const val POKEMON_RATIO = 0.6825f
 
 /** Cadre des sprites de Noir et Blanc : le plus grand tient dans 128 × 128 pixels. */
 private const val POKEMON_FRAME_PX = 128f

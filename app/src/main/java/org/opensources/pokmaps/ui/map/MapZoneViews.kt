@@ -163,7 +163,7 @@ private fun ZoneItems(zone: MapZone, onOpenItem: (String) -> Unit, onShowObject:
     Text(
         stringResource(R.string.label_items),
         style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.primary,
+        color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
     )
     zone.items.forEach { obj -> ZoneItemRow(obj, onOpenItem, onShowObject) }
@@ -191,7 +191,7 @@ private fun ZonePlaces(zone: MapZone, onOpenPlace: (MapPlace) -> Unit) {
     Text(
         stringResource(R.string.map_places),
         style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.primary,
+        color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
     )
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
