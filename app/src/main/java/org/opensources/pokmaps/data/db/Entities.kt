@@ -225,10 +225,7 @@ data class MachineEntity(
 
 @Entity(
     tableName = "pokemon_move",
-    primaryKeys = ["pokemon_id", "version_group_id", "move_id", "method", "level"],
-    indices = [
-        Index("move_id", name = "index_pokemon_move_move_id")
-    ]
+    primaryKeys = ["pokemon_id", "version_group_id", "move_id", "method", "level"]
 )
 data class PokemonMoveEntity(
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int,

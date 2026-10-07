@@ -80,7 +80,11 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
         enterTransition = { navigationEnterTransition() },
         exitTransition = { navigationExitTransition() },
         popEnterTransition = { navigationEnterTransition() },
-        popExitTransition = { navigationExitTransition() }
+        popExitTransition = { navigationExitTransition() },
+        // Le retour par geste suit le doigt avec la même animation que le bouton Retour, au lieu de celle de
+        // Navigation (réduction à 70 % et fondu à ressort).
+        predictivePopEnterTransition = { _ -> navigationEnterTransition() },
+        predictivePopExitTransition = { _ -> navigationExitTransition() }
     ) {
         composable(TopLevelDestination.MAP.route) { MapRoute(onOpenPokemon = openPokemon, onOpenItem = openItem) }
         composable(TopLevelDestination.POKEDEX.route) { PokedexRoute(onOpenPokemon = openPokemon) }
@@ -89,7 +93,7 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
             PokemonRoute(PokemonLinks(openPokemon, openItem, openMove), onShowOnMap = showMap)
         }
         composable(MOVE_ROUTE, listOf(navArgument(MoveViewModel.MOVE_ID) { type = NavType.IntType })) {
-            MoveRoute(onOpenPokemon = openPokemon, onOpenItem = openItem)
+            MoveRoute(onOpenItem = openItem)
         }
         composable(SEARCH_ROUTE) {
             SearchRoute(openPokemon, openItem, openPlace, openCharacter)

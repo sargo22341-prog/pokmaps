@@ -21,7 +21,6 @@ class GenerationFeatureTest {
         assertEquals(8192, ShinyOdds.oneIn(2))
         assertEquals(8192, ShinyOdds.oneIn(5))
         assertEquals(4096, ShinyOdds.oneIn(6))
-        assertEquals(ShinyOdds.oneIn(2), ShinyOdds.FIRST_ODDS)
     }
 
     @Test

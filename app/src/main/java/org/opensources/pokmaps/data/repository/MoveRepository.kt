@@ -9,7 +9,6 @@ import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.Machine
 import org.opensources.pokmaps.domain.pokemon.MoveDetails
 import org.opensources.pokmaps.domain.pokemon.MoveEffect
-import org.opensources.pokmaps.domain.pokemon.MoveLearner
 
 @Singleton
 class MoveRepository @Inject constructor(private val dao: MoveDao) {
@@ -30,14 +29,7 @@ class MoveRepository @Inject constructor(private val dao: MoveDao) {
             accuracy = row.accuracy,
             pp = row.pp,
             effect = MoveEffect(row.effect, row.effectChance),
-            machine = machine,
-            learners = dao.learners(moveId, game.versionGroupId).map {
-                MoveLearner(it.pokemonId, it.name, level = if (it.method == LEVEL_UP) it.level else null)
-            }
+            machine = machine
         )
-    }
-
-    private companion object {
-        const val LEVEL_UP = "level-up"
     }
 }

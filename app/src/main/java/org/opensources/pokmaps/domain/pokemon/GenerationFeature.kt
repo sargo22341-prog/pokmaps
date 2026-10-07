@@ -2,7 +2,7 @@ package org.opensources.pokmaps.domain.pokemon
 
 /**
  * Mécaniques apparues après la 1re génération, avec la génération qui les introduit : la fiche d'un Pokémon ne
- * les montre que pour un jeu qui les connaît (ou explique leur absence).
+ * les montre que pour un jeu qui les connaît.
  */
 enum class GenerationFeature(val introducedIn: Int) {
     /** Objets tenus par les Pokémon sauvages. */
@@ -35,9 +35,6 @@ object ShinyOdds {
         generationId < MODERN_ODDS_GENERATION -> CLASSIC_ODDS
         else -> MODERN_ODDS
     }
-
-    /** Probabilité de la génération où les chromatiques apparaissent, pour expliquer leur absence avant. */
-    const val FIRST_ODDS: Int = CLASSIC_ODDS
 }
 
 /** Répartition des sexes : `femaleEighths` huitièmes de femelles (0 à 8), ou asexué. */

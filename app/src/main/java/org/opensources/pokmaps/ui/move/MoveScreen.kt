@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,43 +23,30 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.MoveDetails
-import org.opensources.pokmaps.domain.pokemon.MoveLearner
-import org.opensources.pokmaps.domain.usecase.MovePage
 import org.opensources.pokmaps.ui.common.MoveEffectText
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
-import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
-import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
 
 @Composable
-fun MoveRoute(
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: MoveViewModel = hiltViewModel()
-) {
+fun MoveRoute(onOpenItem: (String) -> Unit, modifier: Modifier = Modifier, viewModel: MoveViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    MoveScreen(state, onOpenPokemon, onOpenItem, modifier)
+    MoveScreen(state, onOpenItem, modifier)
 }
 
-/** Fiche d'une attaque : caractéristiques, effet, CT / CS qui l'enseigne et Pokémon qui l'apprennent. */
+/**
+ * Fiche d'une attaque : caractéristiques, effet et CT / CS qui l'enseigne. Les Pokémon qui l'apprennent ne sont
+ * pas listés (des centaines dans les générations récentes) : la fiche de chaque Pokémon donne ses attaques.
+ */
 @Composable
-fun MoveScreen(
-    state: MoveUiState,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val page = state.page
-    val move = page?.details
-    if (page == null || move == null) {
+fun MoveScreen(state: MoveUiState, onOpenItem: (String) -> Unit, modifier: Modifier = Modifier) {
+    val move = state.page?.details
+    if (move == null) {
         SheetPlaceholder(state.loading, stringResource(R.string.move_not_found), modifier, state.failed)
         return
     }
@@ -79,7 +65,6 @@ fun MoveScreen(
                 )
             }
         }
-        learners(page, move, onOpenPokemon)
         item(key = "end") { Box(Modifier.height(24.dp)) }
     }
 }
@@ -119,64 +104,16 @@ private fun MoveStat(label: String, value: String) {
     }
 }
 
-/** Pokémon qui l'apprennent en montant de niveau, puis avec la CT / CS ; vers leur fiche. */
-private fun LazyListScope.learners(page: MovePage, move: MoveDetails, onOpenPokemon: (Int) -> Unit) {
-    if (move.learners.isEmpty()) {
-        section("learners", R.string.move_learners) {
-            Text(stringResource(R.string.move_learners_none, page.game.name))
-        }
-        return
-    }
-    if (move.levelUpLearners.isNotEmpty()) {
-        item(key = "level-up-learners") { SectionTitle(stringResource(R.string.move_learners_level), TITLE_PADDING) }
-        items(move.levelUpLearners, key = { "level-${it.pokemonId}-${it.level}" }) { learner ->
-            LearnerRow(learner, onOpenPokemon)
-        }
-    }
-    val machine = move.machine
-    if (machine != null && move.machineLearners.isNotEmpty()) {
-        item(key = "machine-learners") {
-            SectionTitle(stringResource(R.string.move_learners_machine, machine.name), TITLE_PADDING)
-        }
-        items(move.machineLearners, key = { "machine-${it.pokemonId}" }) { learner ->
-            LearnerRow(learner, onOpenPokemon)
-        }
-    }
-}
-
-@Composable
-private fun LearnerRow(learner: MoveLearner, onOpenPokemon: (Int) -> Unit) {
-    val level = learner.level
-    SheetRow(
-        title = learner.name,
-        trailing = when {
-            level == null -> null
-            level <= 1 -> stringResource(R.string.move_start)
-            else -> stringResource(R.string.encounter_levels, level)
-        },
-        onClick = { onOpenPokemon(learner.pokemonId) },
-        modifier = Modifier.padding(horizontal = 16.dp),
-        content = {
-            PokemonSprite(learner.pokemonId, SpritePlace.SHEETS, SpriteSize.LIST, contentDescription = null)
-        }
-    )
-}
-
 private fun LazyListScope.section(key: String, title: Int, content: @Composable () -> Unit) {
     item(key = key) {
         Column(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-            SectionTitle(stringResource(title))
+            HorizontalDivider(Modifier.padding(bottom = 12.dp))
+            Text(
+                stringResource(title),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
             content()
         }
     }
 }
-
-@Composable
-private fun SectionTitle(text: String, modifier: Modifier = Modifier) {
-    Column(modifier) {
-        HorizontalDivider(Modifier.padding(bottom = 12.dp))
-        Text(text, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
-    }
-}
-
-private val TITLE_PADDING = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)

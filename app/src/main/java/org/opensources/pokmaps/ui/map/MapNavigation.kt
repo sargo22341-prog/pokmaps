@@ -6,12 +6,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlin.math.max
 import kotlin.math.sqrt
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.MarkerSizing
+import org.opensources.pokmaps.domain.map.WorldZoom
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
 import ovh.plrapps.mapcompose.api.BoundingBox
@@ -19,11 +21,14 @@ import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addLazyLoader
 import ovh.plrapps.mapcompose.api.centroidX
 import ovh.plrapps.mapcompose.api.centroidY
+import ovh.plrapps.mapcompose.api.getLayoutSizeFlow
+import ovh.plrapps.mapcompose.api.minimumScaleMode
 import ovh.plrapps.mapcompose.api.onMarkerClick
 import ovh.plrapps.mapcompose.api.onTap
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.api.setMapBackground
+import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.api.snapScrollTo
 import ovh.plrapps.mapcompose.ui.layout.Fit
 import ovh.plrapps.mapcompose.ui.layout.Forced
@@ -40,6 +45,9 @@ internal class MapNavigation(
 ) {
     /** Dernier zoom de chaque carte affichée, retrouvé en y revenant par le bouton retour. */
     private val scales = mutableMapOf<Int, Double>()
+
+    /** Suit la taille de la vue pour le zoom minimal de la carte du monde affichée ; arrêté à son remplacement. */
+    private var viewportJob: Job? = null
 
     /** Oublie les zooms mémorisés (les cartes du nouveau jeu sont différentes). */
     fun forgetScales() = scales.clear()
@@ -135,6 +143,7 @@ internal class MapNavigation(
         val isWorld = map.identifier == GameMap.WORLD
         val mapState = createMapState(map, x, y, scale ?: if (isWorld) WORLD_SCALE else FOCUS_SCALE)
         retire(session.current)
+        followViewport(map, mapState)
         val objects = catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() }
         session.updateOverlays {
             it.copy(
@@ -178,11 +187,32 @@ internal class MapNavigation(
             // Pixels nets en zoom avant ; lissage seulement quand la carte est réduite.
             bitmapFilteringEnabled { state -> state.scale < 1.0 }
         }.apply {
+            // Les bords de la carte peuvent venir jusqu'au milieu de l'écran : tout lieu peut y être centré.
+            setScrollOffsetRatio(EDGE_SCROLL_RATIO, EDGE_SCROLL_RATIO)
             addLayer(getMapTiles(map))
             setMapBackground(MAP_BACKGROUND)
             addLazyLoader(MapMarkerIds.LAZY_LOADER, padding = 64.dp)
             onTap { tapX, tapY -> handleTap(tapX, tapY) }
             onMarkerClick { id, _, _ -> handleMarkerClick(id) }
+        }
+    }
+
+    /**
+     * Carte du monde : son zoom minimal suit la taille de la vue (rotation, barres), un peu au-delà de la carte
+     * entière ([WorldZoom]). Avant la première mesure, la carte entière (Fit) sert de minimum.
+     */
+    private fun followViewport(map: GameMap, mapState: MapState) {
+        viewportJob?.cancel()
+        viewportJob = if (map.identifier == GameMap.WORLD) {
+            session.launch {
+                mapState.getLayoutSizeFlow().collect { size ->
+                    WorldZoom.minScale(size.width, size.height, map.width, map.height)?.let {
+                        mapState.minimumScaleMode = Forced(it)
+                    }
+                }
+            }
+        } else {
+            null
         }
     }
 
@@ -315,6 +345,7 @@ internal class MapNavigation(
         const val ZONE_FOCUS_MIN_SCALE = 3.0
         const val MAX_SCALE = 12.0
         const val CENTER = 0.5
+        const val EDGE_SCROLL_RATIO = 0.5f
         const val WARP_TOUCH_RADIUS_DP = 24f
         const val WARP_TOUCH_MIN_SCALE = 1.0
         const val SHUTDOWN_DELAY_MS = 600L

@@ -61,7 +61,7 @@ data class PokemonUiState(
     val caught: Boolean = false,
     val captureScope: CaptureScope = CaptureScope.DEFAULT,
     val favorite: Boolean = false,
-    /** Sprites en couleurs chromatiques (en-tête et ligne d'évolution). */
+    /** Sprites en couleurs chromatiques (en-tête et ligne d'évolution), jamais dans un jeu sans chromatiques. */
     val shiny: Boolean = false
 ) {
     /** Une rencontre sur [shinyOdds] est chromatique dans le jeu, null si le jeu n'a pas de chromatiques. */
@@ -113,7 +113,8 @@ class PokemonViewModel @Inject constructor(
                 caught = collection.game == page.game && pokemonId in collection.caught,
                 captureScope = collection.scope,
                 favorite = pokemonId in collection.favorites,
-                shiny = shiny
+                // Un jeu sans chromatiques montre toujours les couleurs normales.
+                shiny = shiny && GenerationFeature.SHINY.existsIn(page.game.generationId)
             )
         }.catch { emit(PokemonUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
@@ -124,7 +125,7 @@ class PokemonViewModel @Inject constructor(
 
             PokemonAction.ToggleFavorite -> toggleFavorite()
 
-            PokemonAction.ToggleShiny -> shiny.update { !it }
+            PokemonAction.ToggleShiny -> if (state.value.shinyOdds != null) shiny.update { !it }
 
             PokemonAction.ShowOnMap -> showOnMap()
 

@@ -116,8 +116,10 @@ private fun PokemonContent(
             Evolutions(details, state.shiny, links.onOpenPokemon, links.onOpenItem)
         }
         section(R.string.pokemon_locations) { Locations(game, details) { onAction(PokemonAction.ShowOnMap) } }
-        section(R.string.pokemon_held_items) { HeldItems(state, game, details.traits, links.onOpenItem) }
-        section(R.string.pokemon_shiny) { ShinyOddsText(state, game) }
+        if (state.has(GenerationFeature.HELD_ITEMS)) {
+            section(R.string.pokemon_held_items) { HeldItems(game, details.traits, links.onOpenItem) }
+        }
+        state.shinyOdds?.let { odds -> section(R.string.pokemon_shiny) { ShinyOddsText(odds, game) } }
         if (state.has(GenerationFeature.GENDER)) section(R.string.pokemon_gender) { Gender(details.traits) }
         if (state.has(GenerationFeature.BREEDING)) section(R.string.pokemon_breeding) { Breeding(details.traits) }
         state.catch?.let { section(R.string.catch_title) { CatchCalculator(it, onAction) } }

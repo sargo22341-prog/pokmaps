@@ -1,9 +1,6 @@
 package org.opensources.pokmaps.data.db
 
-/**
- * Attaques en mémoire : Tonnerre (CT24), apprise par Pikachu au niveau 26 et par CT, et Rugissement, que personne
- * n'apprend ; `failing` simule une base illisible.
- */
+/** Attaques en mémoire : Tonnerre (CT24) et Rugissement, sans CT ; `failing` simule une base illisible. */
 internal class FakeMoveDao(private val failing: Boolean = false) : MoveDao {
     override suspend fun move(moveId: Int, versionGroupId: Int) = read {
         when (moveId) {
@@ -17,17 +14,6 @@ internal class FakeMoveDao(private val failing: Boolean = false) : MoveDao {
             )
 
             else -> null
-        }
-    }
-
-    override suspend fun learners(moveId: Int, versionGroupId: Int) = read {
-        if (moveId == THUNDERBOLT) {
-            listOf(
-                MoveLearnerRow(FakePokemonDao.PIKACHU, "Pikachu", "machine", 0),
-                MoveLearnerRow(FakePokemonDao.PIKACHU, "Pikachu", "level-up", 26)
-            )
-        } else {
-            emptyList()
         }
     }
 

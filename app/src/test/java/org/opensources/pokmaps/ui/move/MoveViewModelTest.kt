@@ -13,14 +13,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMoveDao
-import org.opensources.pokmaps.data.db.FakePokemonDao
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MoveRepository
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.pokemon.Machine
 import org.opensources.pokmaps.domain.pokemon.MoveEffect
-import org.opensources.pokmaps.domain.pokemon.MoveLearner
 import org.opensources.pokmaps.domain.usecase.ObserveMoveUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 
@@ -43,24 +41,21 @@ class MoveViewModelTest {
     }
 
     @Test
-    fun effectMachineAndLearners() = runTest {
+    fun effectAndMachine() = runTest {
         val viewModel = viewModel(FakeMoveDao.THUNDERBOLT)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         val move = checkNotNull(viewModel.state.value.page?.details)
         assertEquals(MoveEffect(FakeMoveDao.PARALYSIS, FakeMoveDao.CHANCE), move.effect)
         assertEquals(Machine("tm24", "CT24"), move.machine)
-        assertEquals(listOf(MoveLearner(FakePokemonDao.PIKACHU, "Pikachu", 26)), move.levelUpLearners)
-        assertEquals(listOf(MoveLearner(FakePokemonDao.PIKACHU, "Pikachu", null)), move.machineLearners)
     }
 
     @Test
-    fun aMoveNobodyLearnsHasNoLearnersAndNoChance() = runTest {
+    fun aMoveWithoutMachineNorChance() = runTest {
         val viewModel = viewModel(FakeMoveDao.GROWL)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         val move = checkNotNull(viewModel.state.value.page?.details)
         assertNull(move.effect.chance)
         assertNull(move.machine)
-        assertEquals(emptyList<MoveLearner>(), move.learners)
     }
 
     @Test

@@ -22,7 +22,7 @@ from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 7
+SCHEMA_VERSION = 8
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 

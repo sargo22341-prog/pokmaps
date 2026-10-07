@@ -137,8 +137,6 @@ class PokemapsJourneyTest {
 
         await(hasText(text(R.string.move_title)))
         await(hasText("Baisse la Défense de la cible d’un niveau."))
-        // Salamèche fait partie des Pokémon qui l'apprennent, avec son niveau.
-        await(hasText(text(R.string.move_learners_level)))
     }
 
     @Test

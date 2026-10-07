@@ -49,7 +49,7 @@ internal fun PokemonHeader(
     }
 }
 
-/** Capturé (selon la portée des captures), chromatique, et favori (commun à tous les jeux). */
+/** Capturé (selon la portée des captures), chromatique si le jeu en a, et favori (commun à tous les jeux). */
 @Composable
 private fun CollectionRow(state: PokemonUiState, game: Game, onAction: (PokemonAction) -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
@@ -60,7 +60,7 @@ private fun CollectionRow(state: PokemonUiState, game: Game, onAction: (PokemonA
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f)
         )
-        ShinyButton(state.shiny, onToggle = { onAction(PokemonAction.ToggleShiny) })
+        if (state.shinyOdds != null) ShinyButton(state.shiny, onToggle = { onAction(PokemonAction.ToggleShiny) })
         FavoriteButton(state.favorite, onToggle = { onAction(PokemonAction.ToggleFavorite) })
     }
 }

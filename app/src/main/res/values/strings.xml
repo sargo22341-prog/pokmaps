@@ -90,10 +90,8 @@
     <string name="pokemon_shiny_show">Voir en chromatique</string>
     <string name="pokemon_shiny_hide">Voir les couleurs normales</string>
     <string name="pokemon_shiny_odds">Une rencontre sur %1$s est chromatique dans Pokémon %2$s. Touchez les étincelles en haut de la fiche pour le voir en chromatique.</string>
-    <string name="pokemon_shiny_absent">Pas de Pokémon chromatique dans Pokémon %1$s : ils apparaissent en 2e génération (une rencontre sur %2$s). Touchez les étincelles en haut de la fiche pour voir à quoi il ressemblera.</string>
     <string name="pokemon_held_items">Objets tenus</string>
     <string name="pokemon_held_items_none">Ne tient aucun objet à l’état sauvage dans Pokémon %1$s.</string>
-    <string name="pokemon_held_items_absent">Les Pokémon sauvages ne tiennent pas d’objet dans Pokémon %1$s : les objets tenus apparaissent en 2e génération.</string>
     <string name="pokemon_gender">Sexe</string>
     <string name="pokemon_gender_ratio">♂ %1$s %% · ♀ %2$s %%</string>
     <string name="pokemon_genderless">Asexué</string>
@@ -114,10 +112,6 @@
     <string name="move_effect_chance">Probabilité de l’effet : %1$s %%</string>
     <string name="move_machine">Enseignée par</string>
     <string name="move_open_machine">Voir la fiche de %1$s</string>
-    <string name="move_learners">Pokémon qui l’apprennent</string>
-    <string name="move_learners_level">Apprise en montant de niveau</string>
-    <string name="move_learners_machine">Apprise avec %1$s</string>
-    <string name="move_learners_none">Aucun Pokémon ne l’apprend dans Pokémon %1$s.</string>
     <string name="move_open">Voir la fiche de l’attaque</string>
     <string name="move_start">Départ</string>
     <string name="move_power">Puiss.</string>

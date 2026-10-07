@@ -18,28 +18,22 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
-import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.HeldItem
 import org.opensources.pokmaps.domain.pokemon.PokemonTraits
-import org.opensources.pokmaps.domain.pokemon.ShinyOdds
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.formatNumber
 
-// Sections des mécaniques apparues après la 1re génération (GenerationFeature) : objets tenus et chromatiques
-// sont toujours affichés (avec l'explication de leur absence), sexe, œufs et talents seulement si le jeu les connaît.
+// Sections des mécaniques apparues après la 1re génération (GenerationFeature) : la fiche ne les affiche que si le
+// jeu les connaît.
 
 /** Objets que tient le Pokémon sauvage dans la version, avec leur probabilité ; vers la fiche de l'objet. */
 @Composable
-internal fun HeldItems(state: PokemonUiState, game: Game, traits: PokemonTraits, onOpenItem: (String) -> Unit) {
-    when {
-        !state.has(
-            GenerationFeature.HELD_ITEMS
-        ) -> MutedText(stringResource(R.string.pokemon_held_items_absent, game.name))
-
-        traits.heldItems.isEmpty() -> Text(stringResource(R.string.pokemon_held_items_none, game.name))
-
-        else -> Column { traits.heldItems.forEach { HeldItemRow(it, onOpenItem) } }
+internal fun HeldItems(game: Game, traits: PokemonTraits, onOpenItem: (String) -> Unit) {
+    if (traits.heldItems.isEmpty()) {
+        Text(stringResource(R.string.pokemon_held_items_none, game.name))
+    } else {
+        Column { traits.heldItems.forEach { HeldItemRow(it, onOpenItem) } }
     }
 }
 
@@ -62,17 +56,10 @@ private fun HeldItemRow(item: HeldItem, onOpenItem: (String) -> Unit) {
     }
 }
 
-/** Probabilité de rencontrer le Pokémon en chromatique, ou absence des chromatiques dans le jeu. */
+/** Probabilité de rencontrer le Pokémon en chromatique : une rencontre sur [odds]. */
 @Composable
-internal fun ShinyOddsText(state: PokemonUiState, game: Game) {
-    val odds = state.shinyOdds
-    if (odds == null) {
-        MutedText(
-            stringResource(R.string.pokemon_shiny_absent, game.name, formatNumber(ShinyOdds.FIRST_ODDS.toDouble()))
-        )
-    } else {
-        Text(stringResource(R.string.pokemon_shiny_odds, formatNumber(odds.toDouble()), game.name))
-    }
+internal fun ShinyOddsText(odds: Int, game: Game) {
+    Text(stringResource(R.string.pokemon_shiny_odds, formatNumber(odds.toDouble()), game.name))
 }
 
 /** Proportion de mâles et de femelles, ou asexué. */

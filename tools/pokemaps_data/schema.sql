@@ -182,7 +182,6 @@ CREATE TABLE pokemon_move (
     level INTEGER NOT NULL,
     PRIMARY KEY (pokemon_id, version_group_id, move_id, method, level)
 );
-CREATE INDEX index_pokemon_move_move_id ON pokemon_move (move_id);
 
 -- Objets que tient un Pokémon sauvage dans une version : rarity = probabilité (%).
 -- Aucun en 1re génération : les objets tenus apparaissent en 2e génération.

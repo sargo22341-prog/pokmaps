@@ -197,5 +197,3 @@ data class MoveRow(
     val machineIdentifier: String?,
     val machineName: String?
 )
-
-data class MoveLearnerRow(val pokemonId: Int, val name: String, val method: String, val level: Int)

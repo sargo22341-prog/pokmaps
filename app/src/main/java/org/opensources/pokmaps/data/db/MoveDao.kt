@@ -21,16 +21,4 @@ interface MoveDao {
         """
     )
     suspend fun move(moveId: Int, versionGroupId: Int): MoveRow?
-
-    /** Pokémon qui apprennent l'attaque dans le jeu, en montant de niveau ou par CT / CS. */
-    @Query(
-        """
-        SELECT p.id AS pokemonId, p.name_fr AS name, pm.method, pm.level
-        FROM pokemon_move pm JOIN pokemon p ON p.id = pm.pokemon_id
-        WHERE pm.move_id = :moveId AND pm.version_group_id = :versionGroupId
-            AND pm.method IN ('level-up', 'machine')
-        ORDER BY pm.level, p.id
-        """
-    )
-    suspend fun learners(moveId: Int, versionGroupId: Int): List<MoveLearnerRow>
 }

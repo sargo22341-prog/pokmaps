@@ -42,7 +42,10 @@ class PokemonViewModelTest {
 
     private val requests = MapRequests()
     private val dataStore = FakeDataStore()
-    private val games = GameRepository(FakeGameDao(), GameSettings(dataStore))
+    private val games = GameRepository(
+        FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.BLUE, FakeGameDao.GOLD)),
+        GameSettings(dataStore)
+    )
     private val collection = CollectionSettings(dataStore)
 
     private fun viewModel(pokemonId: Int, failing: Boolean = false): PokemonViewModel {
@@ -85,11 +88,21 @@ class PokemonViewModelTest {
     }
 
     @Test
-    fun shinyTogglesTheSprites() = runTest {
+    fun shinyTogglesTheSpritesOnlyInAGameWithShinies() = runTest {
         val viewModel = viewModel(PIKACHU)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        // Rouge n'a pas de chromatiques : la demande est ignorée.
+        viewModel.onAction(PokemonAction.ToggleShiny)
+        assertFalse(viewModel.state.value.shiny)
+
+        games.select(FakeGameDao.GOLD)
         assertFalse(viewModel.state.value.shiny)
         viewModel.onAction(PokemonAction.ToggleShiny)
+        assertTrue(viewModel.state.value.shiny)
+        // Revenir à Rouge rend les couleurs normales ; Or retrouve le choix.
+        games.select(FakeGameDao.RED)
+        assertFalse(viewModel.state.value.shiny)
+        games.select(FakeGameDao.GOLD)
         assertTrue(viewModel.state.value.shiny)
         viewModel.onAction(PokemonAction.ToggleShiny)
         assertFalse(viewModel.state.value.shiny)
@@ -112,6 +125,13 @@ class PokemonViewModelTest {
         val blue = viewModel.state.value.details?.traits
         assertEquals(listOf(HeldItem("light-ball", "Ballon Lumière", true, 5)), blue?.heldItems)
         assertEquals(listOf("Terrestre", "Féerique"), blue?.eggGroups)
+
+        // 2e génération : chromatiques et objets tenus apparaissent, pas encore les talents.
+        games.select(FakeGameDao.GOLD)
+        val gold = viewModel.state.value
+        assertEquals(8192, gold.shinyOdds)
+        assertTrue(gold.has(GenerationFeature.HELD_ITEMS))
+        assertFalse(gold.has(GenerationFeature.ABILITIES))
     }
 
     @Test
