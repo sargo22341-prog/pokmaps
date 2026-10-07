@@ -2,6 +2,12 @@ package org.opensources.pokmaps.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -58,7 +64,15 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
     val openPlace = { identifier: String -> navController.navigate("place/$identifier") }
     val openCharacter = { objectId: Int -> navController.navigate("character/$objectId") }
     val showMap = { navController.showMap() }
-    NavHost(navController = navController, startDestination = TopLevelDestination.MAP.route, modifier = modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = TopLevelDestination.MAP.route,
+        modifier = modifier,
+        enterTransition = { navigationEnterTransition() },
+        exitTransition = { navigationExitTransition() },
+        popEnterTransition = { navigationEnterTransition() },
+        popExitTransition = { navigationExitTransition() }
+    ) {
         composable(TopLevelDestination.MAP.route) { MapRoute(onOpenPokemon = openPokemon, onOpenItem = openItem) }
         composable(TopLevelDestination.POKEDEX.route) { PokedexRoute(onOpenPokemon = openPokemon) }
         composable(POKEMON_ROUTE, listOf(navArgument(PokemonViewModel.POKEMON_ID) { type = NavType.IntType })) {
@@ -80,6 +94,17 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
         composable(ABOUT_ROUTE) { AboutScreen() }
     }
 }
+
+private fun AnimatedContentTransitionScope<*>.navigationEnterTransition() =
+    fadeIn(tween(NAVIGATION_TRANSITION_DURATION)) +
+        scaleIn(initialScale = NAVIGATION_TRANSITION_SCALE, animationSpec = tween(NAVIGATION_TRANSITION_DURATION))
+
+private fun AnimatedContentTransitionScope<*>.navigationExitTransition() =
+    fadeOut(tween(NAVIGATION_TRANSITION_DURATION)) +
+        scaleOut(targetScale = NAVIGATION_TRANSITION_SCALE, animationSpec = tween(NAVIGATION_TRANSITION_DURATION))
+
+private const val NAVIGATION_TRANSITION_DURATION = 300
+private const val NAVIGATION_TRANSITION_SCALE = 0.92f
 
 internal fun NavHostController.navigateToTopLevel(destination: TopLevelDestination) {
     navigate(destination.route) {

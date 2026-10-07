@@ -5,4 +5,5 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- L’application conserve son thème sombre et harmonise les retours par geste et par bouton.
 
