@@ -25,8 +25,10 @@ from .builder import DatabaseBuilder
 from .sources import download, download_all, pokeapi_sprite, pokesprite
 from .webp import encode_all
 
-# Icônes pokesprite des CT / CS : une par type d'attaque.
+# Icônes pokesprite des CT / CS : une par type d'attaque. pokesprite n'en a pas pour le type « ??? » (Malédiction,
+# CT03 d'Or et d'Argent) : elle prend l'icône d'une CT de type Normal.
 MACHINE_ICON = "items/{kind}/{type}.png"
+MACHINE_TYPE_FALLBACKS = {"unknown": "normal"}
 # Objets sans icône dans pokesprite : icône d'un objet semblable.
 ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
 # Sprites animés (GIF) de Noir et Blanc : les Pokémon des générations 1 à 5 (n° 1 à 649) seulement.
@@ -103,13 +105,14 @@ def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:
     move_types = {(row[0], row[1]): row[2] for row in builder.moves.move_version_group_table()}
     for vg, item_id, move_id in builder.moves.machine_rows:
         machine_types.setdefault(item_id, move_types[(move_id, vg)])
-    types = {type_id: row["identifier"] for type_id, row in builder.type_rows.items()}
+    types = {row[0]: row[1] for row in builder.type_table()}
 
     result = {}
     for item_id, identifier, _, _ in builder.items.item_rows:
         if item_id in machine_types:
             kind = "hm" if identifier.startswith("hm") else "tm"
-            result[identifier] = MACHINE_ICON.format(kind=kind, type=types[machine_types[item_id]])
+            move_type = types[machine_types[item_id]]
+            result[identifier] = MACHINE_ICON.format(kind=kind, type=MACHINE_TYPE_FALLBACKS.get(move_type, move_type))
         elif f"item_{gen8_index.get(item_id, 0):04d}" in item_map:
             result[identifier] = f"items/{item_map[f'item_{gen8_index[item_id]:04d}']}.png"
         elif identifier in ICON_FALLBACKS:

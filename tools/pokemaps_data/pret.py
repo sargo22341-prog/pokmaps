@@ -13,6 +13,7 @@ import re
 from functools import cached_property
 from pathlib import Path
 
+from .games import KANTO
 from .pret_models import Connection, MapObject, NpcOffer, PretMap, Tileset, TrainerPokemon, Warp
 from .pret_source import macro_args, parse_int, source_lines
 
@@ -514,6 +515,12 @@ class PretRepo:
         return list(dict.fromkeys(offers))
 
     # --- Cartes ---------------------------------------------------------------
+
+    def map_region(self, const: str) -> str:
+        """Région de la carte : toutes celles de Rouge, Bleu et Jaune sont en Kanto."""
+        if const not in self.maps:
+            raise ValueError(f"{self.root.name} : carte inconnue {const}")
+        return KANTO.const
 
     @cached_property
     def maps(self) -> dict[str, PretMap]:

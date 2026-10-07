@@ -5,7 +5,8 @@
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
 - PokeAPI/sprites : sprites animés de Noir et Blanc (normaux et chromatiques), seul style de sprite des Pokémon.
 - msikma/pokesprite : icônes d'objets.
-- pret/pokered, pret/pokeyellow : désassemblages des jeux, pour générer les cartes et lire les effets des attaques.
+- pret/pokered, pret/pokeyellow, pret/pokegold : désassemblages des jeux, pour générer les cartes et lire les
+  dresseurs, les effets des attaques et les objets tenus.
 """
 
 from __future__ import annotations
@@ -42,6 +43,7 @@ DOWNLOAD_CHUNK_BYTES = 1024 * 1024
 PRET_COMMITS = {
     "pokered": "d2704a63c26f9ba046ade877445216b3de0519a4",
     "pokeyellow": "e89ead154b9968aa50eed9328ff2b38b6c194382",
+    "pokegold": "ef0201d8daf47e8b3ea1518eacf890f37d4cd5e8",
 }
 PRET_URL = "https://github.com/pret/{repo}.git"
 

@@ -7,6 +7,10 @@ bg_event qui rendent un service (distributeur, comptoir des lots) ; leurs offres
 Un même personnage apparaît parfois plusieurs fois dans pret, un exemplaire par étape du scénario (le
 Prof. Chen qui vient chercher le joueur, puis dans son labo) : tools/data/npc_duplicates.csv écarte ces
 doublons pour qu'il n'en reste qu'un, celui avec qui l'on interagit vraiment.
+
+Les offres et installations sont lues pour la 1re génération. Celles de la 2e génération (dons, boutiques,
+échanges, arbres à baies, Casino…) le seront avec l'entrée d'Or et Argent dans games.GAMES : d'ici là, ses
+personnages sont exportés avec leur position, leur apparence et l'équipe des dresseurs, sans offre.
 """
 
 from __future__ import annotations
@@ -17,6 +21,8 @@ from dataclasses import dataclass, field
 from .games import Game
 from .maps_layout import GameMaps, identifier
 from .pret import GYM_LEADERS, PretRepo
+from .pret_gen2 import Gen2PretRepo
+from .pret_identifiers import item_identifier, species_identifier
 from .pret_models import MapObject, NpcOffer, PretMap, Sign
 from .pret_services import (
     PRIZE_VENDOR,
@@ -28,26 +34,12 @@ from .pret_services import (
 )
 from .sources import DATA_DIR
 
-# Objets dont l'identifiant PokéAPI ne se déduit pas de la constante pret.
-ITEM_ALIASES = {
-    "ELIXER": "elixir",
-    "MAX_ELIXER": "max-elixir",
-    "X_SPECIAL": "x-sp-atk",
-    "PARLYZ_HEAL": "paralyze-heal",
-    "S_S_TICKET": "ss-ticket",
-    "X_DEFEND": "x-defense",
-}
-
 # Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
 
 # Offres relues à la main (npc_offers.csv) : un échange remplace le don du même objet lu dans le script. Les
 # Pokémon de départ (gift_pokemon) sont choisis par un script propre au labo du Prof. Chen, pas par GivePokemon.
 CURATED_KINDS = frozenset({"exchange", "coin_sale", "gift_pokemon"})
-
-
-def item_identifier(repo: PretRepo, const: str) -> str:
-    return repo.machines.get(const) or ITEM_ALIASES.get(const) or identifier(const)
 
 
 @dataclass
@@ -61,11 +53,14 @@ class ObjectRow:
     pokemon: str | None  # identifiant PokéAPI
     level: int | None
     trainer_class: str | None
-    text: str | None = None  # texte du personnage dans pret (constante TEXT_…)
+    text: str | None = None  # ce qui identifie le personnage dans pret (constante TEXT_… ou label de script)
     # Équipe d'un dresseur : (Pokémon, niveau, attaques), identifiants PokéAPI.
     party: list[tuple[str, int, tuple[str, ...]]] = field(default_factory=list)
     # Dons, ventes, échanges et services (identifiants PokéAPI).
     offers: list[NpcOffer] = field(default_factory=list)
+    # Version PokéAPI où l'objet est ainsi (Ho-Oh et Lugia n'ont pas le même niveau en Or et en Argent), None s'il
+    # est le même dans toutes les versions du jeu.
+    version: str | None = None
 
 
 # --- Données relues à la main ---------------------------------------------------
@@ -185,7 +180,7 @@ def read_character_curation() -> CharacterCuration:
 # --- Export -----------------------------------------------------------------------
 
 
-def object_rows(game: Game, game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:
+def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:
     """Objets de toutes les cartes placées du jeu, et sprites de personnages à exporter."""
     objects: list[ObjectRow] = []
     sprites: set[str] = set()
@@ -198,47 +193,73 @@ def object_rows(game: Game, game_maps: GameMaps, curation: CharacterCuration) ->
                 continue
             if obj.sprite:
                 sprites.add(obj.sprite)
-            objects.append(_character_row(game, game_maps, pret_map, obj, curation))
-        objects += _facility_rows(game, game_maps, pret_map)
+            objects.append(_character_row(game_maps, pret_map, obj, curation))
+        objects += _facility_rows(game_maps, pret_map)
     return objects, sprites
 
 
-def _character_row(
-    game: Game, game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
-) -> ObjectRow:
+def _character_row(game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration) -> ObjectRow:
     repo = game_maps.repo
     trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
     party = []
     if trainer_class and trainer_class not in STARTER_DEPENDENT_TRAINERS:
         party = [
-            (identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
+            (species_identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
             for mon in repo.trainer_parties.get((trainer_class, obj.trainer_number or 0), [])
         ]
-    offers = repo.npc_offers(obj.text) + character_services(repo, obj.text)
-    if trainer_class in GYM_LEADERS:
-        offers += [offer for offer in repo.leader_gifts(pret_map.label) if offer not in offers]
-    curated = curation.offers_for(game.pret_repo, obj.text)
-    exchanged = {offer.item for offer in curated if offer.kind == "exchange"}
-    offers = [offer for offer in offers if not (offer.kind == "gift_item" and offer.item in exchanged)] + curated
+    offers = _character_offers(game_maps, pret_map, obj, curation)
     return ObjectRow(
         pret_map.const,
         obj.kind,
         *game_maps.point(pret_map.const, obj.x, obj.y),
         obj.sprite and identifier(obj.sprite.removeprefix("SPRITE_")),
-        obj.item and item_identifier(repo, obj.item),
-        obj.pokemon and identifier(obj.pokemon),
+        obj.item and item_identifier(obj.item, repo.machines),
+        obj.pokemon and species_identifier(obj.pokemon),
         obj.level,
         trainer_class and identifier(trainer_class),
         obj.text,
         party,
-        [_offer_identifiers(repo, offer) for offer in dict.fromkeys(offers)],
+        [_offer_identifiers(repo.machines, offer) for offer in dict.fromkeys(offers)],
+        obj.version,
     )
 
 
-def _facility_rows(game: Game, game_maps: GameMaps, pret_map: PretMap) -> list[ObjectRow]:
+def _character_offers(
+    game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
+) -> list[NpcOffer]:
+    """Dons, ventes, échanges et services du personnage (aucun pour la 2e génération, cf. en-tête du module)."""
+    match game_maps.repo:
+        case PretRepo() as repo:
+            return _gen1_character_offers(game_maps.game, repo, pret_map, obj, curation)
+        case Gen2PretRepo():
+            return []
+
+
+def _gen1_character_offers(
+    game: Game, repo: PretRepo, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
+) -> list[NpcOffer]:
+    """Offres lues dans le texte du personnage et relues à la main dans npc_offers.csv."""
+    trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
+    offers = repo.npc_offers(obj.text) + character_services(repo, obj.text)
+    if trainer_class in GYM_LEADERS:
+        offers += [offer for offer in repo.leader_gifts(pret_map.label) if offer not in offers]
+    curated = curation.offers_for(game.pret_repo, obj.text)
+    exchanged = {offer.item for offer in curated if offer.kind == "exchange"}
+    return [offer for offer in offers if not (offer.kind == "gift_item" and offer.item in exchanged)] + curated
+
+
+def _facility_rows(game_maps: GameMaps, pret_map: PretMap) -> list[ObjectRow]:
+    """Installations de la carte (aucune pour la 2e génération, cf. en-tête du module)."""
+    match game_maps.repo:
+        case PretRepo() as repo:
+            return _gen1_facility_rows(game_maps.game, game_maps, repo, pret_map)
+        case Gen2PretRepo():
+            return []
+
+
+def _gen1_facility_rows(game: Game, game_maps: GameMaps, repo: PretRepo, pret_map: PretMap) -> list[ObjectRow]:
     """Distributeurs et comptoirs des lots de la carte : une seule installation par service identique
     (les trois distributeurs côte à côte du toit du Centre Commercial vendent les mêmes boissons)."""
-    repo = game_maps.repo
     prize_signs = [sign for sign in pret_map.signs if facility_kind(repo, sign.text) == PRIZE_VENDOR]
     rows: list[ObjectRow] = []
     for sign in pret_map.signs:
@@ -262,18 +283,18 @@ def _facility_offers(game: Game, repo: PretRepo, kind: str, sign: Sign, prize_si
         offers = prize_offers(repo, window, game.pret_versions)
     else:
         raise ValueError(f"Installation inconnue : {kind}")
-    return [_offer_identifiers(repo, offer) for offer in offers]
+    return [_offer_identifiers(repo.machines, offer) for offer in offers]
 
 
-def _offer_identifiers(repo: PretRepo, offer: NpcOffer) -> NpcOffer:
+def _offer_identifiers(machines: dict[str, str], offer: NpcOffer) -> NpcOffer:
     """Offre avec les identifiants PokéAPI à la place des constantes pret."""
     return NpcOffer(
         offer.kind,
-        offer.item and item_identifier(repo, offer.item),
-        offer.pokemon and identifier(offer.pokemon),
+        offer.item and item_identifier(offer.item, machines),
+        offer.pokemon and species_identifier(offer.pokemon),
         offer.quantity,
         offer.price,
-        offer.wanted and identifier(offer.wanted),
-        offer.wanted_item and item_identifier(repo, offer.wanted_item),
+        offer.wanted and species_identifier(offer.wanted),
+        offer.wanted_item and item_identifier(offer.wanted_item, machines),
         offer.version,
     )

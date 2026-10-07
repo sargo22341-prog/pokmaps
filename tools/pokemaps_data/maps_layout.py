@@ -1,21 +1,28 @@
-"""Sélection et placement des cartes d'un jeu pret, et terrain où dessiner les Pokémon sauvages.
+"""Sélection et placement des cartes d'un jeu pret, et emplacements où dessiner les Pokémon sauvages.
 
-Les villes et routes sont placées dans la carte du monde grâce aux connexions entre cartes ; chaque carte
-intérieure accessible par les warps est une carte à part, rattachée à la ville ou route d'où l'on y entre.
+Chaque région du jeu (games.Region) a sa carte du monde : ses villes et routes y sont placées grâce aux connexions
+entre cartes, depuis la ville de départ de la région. Une carte extérieure qu'aucune connexion ne relie à la ville
+de départ peut y être ancrée à la main (tools/data/map_anchors.csv) ; sinon, comme une carte intérieure, c'est une
+carte à part, rattachée à la ville ou route d'où l'on y entre par un warp.
+
+Les connexions d'un jeu ne forment pas toujours un plan cohérent (Or et Argent décalent Céladopole d'une métatuile
+par rapport à la Route 7) : une connexion incohérente arrête la génération, sauf si elle est écartée à la main dans
+tools/data/map_connection_skips.csv ; les cartes qu'elle relie sont alors placées par leurs autres connexions.
 """
 
 from __future__ import annotations
 
+import csv
 import random
 from collections import deque
-from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cached_property
 
-from .pret import BLOCK_PX, LAST_MAP, STEP_PX, WATER_TILE, PretRepo
-
-WORLD = "KANTO"
-START_MAP = "PALLET_TOWN"
+from .games import Game, Region
+from .maps_terrain import Cell, wild_cells
+from .pret import BLOCK_PX, LAST_MAP, STEP_PX
+from .pret_reader import PretReader
+from .sources import DATA_DIR
 
 # Emplacements où dessiner les Pokémon sauvages, par carte et par type de terrain (au plus SPOTS_PER_KIND),
 # espacés d'au moins SPOT_SPACING cases pour que les sprites ne se chevauchent pas.
@@ -23,11 +30,6 @@ SPOTS_PER_KIND = 40
 SPOT_SPACING = 3
 # Case « intérieure » : au moins autant de voisines (sur 8) du même terrain.
 INTERIOR_NEIGHBORS = 7
-# Tileset de la forêt de Jade et du Parc Safari : comme dehors, on n'y rencontre des Pokémon qu'en marchant dans
-# les herbes (engine/battle/wild_encounters.asm, TryDoWildEncounter).
-FOREST_TILESET = "FOREST"
-
-Cell = tuple[int, int]
 
 
 def identifier(const: str) -> str:
@@ -38,33 +40,51 @@ def identifier(const: str) -> str:
 class Placed:
     """Position d'une carte pret dans la carte affichée qui la contient."""
 
-    display: str  # constante de la carte affichée (WORLD pour les villes et routes)
+    display: str  # constante de la carte affichée (celle de la région pour les villes et routes)
     x: int  # en pixels
     y: int
 
 
-def _reachable(cells: list[Cell], starts: set[Cell], blocked: Callable[[Cell, Cell], bool]) -> list[Cell]:
-    """Cases accessibles à pied depuis les warps (le bord des grottes est souvent praticable mais isolé)."""
-    free = set(cells)
-    if not starts:
-        return cells
-    seen: set[tuple[int, int]] = set()
-    queue: deque[Cell] = deque()
-    for x, y in starts:
-        for neighbor in ((x, y), (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
-            if neighbor in free and neighbor not in seen:
-                seen.add(neighbor)
-                queue.append(neighbor)
-    while queue:
-        x, y = queue.popleft()
-        for neighbor in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
-            if neighbor in free and neighbor not in seen and not blocked((x, y), neighbor):
-                seen.add(neighbor)
-                queue.append(neighbor)
-    return [cell for cell in cells if cell in seen]
+@dataclass(frozen=True)
+class MapAnchor:
+    """Carte extérieure placée dans la carte du monde par rapport à une autre, faute de connexion entre elles."""
+
+    family: str  # famille de cartes (games.Game.map_family)
+    map: str  # constante de la carte placée
+    anchor: str  # constante de la carte de référence, déjà placée
+    x: int  # position du coin haut gauche de `map` par rapport à celui de `anchor`, en métatuiles
+    y: int
 
 
-def spread(cells: list[tuple[int, int]], count: int, seed: str) -> list[tuple[int, int]]:
+@dataclass(frozen=True)
+class ConnectionSkip:
+    """Connexion entre deux cartes, dans les deux sens, que le placement ignore (connexion incohérente)."""
+
+    family: str
+    map: str
+    target: str
+
+
+@dataclass(frozen=True)
+class LayoutCuration:
+    """Ancrages (map_anchors.csv) et connexions écartées (map_connection_skips.csv), toutes familles confondues."""
+
+    anchors: tuple[MapAnchor, ...]
+    skips: tuple[ConnectionSkip, ...]
+
+
+def read_layout_curation() -> LayoutCuration:
+    with (DATA_DIR / "map_anchors.csv").open(encoding="utf-8", newline="") as handle:
+        anchors = tuple(
+            MapAnchor(row["family"], row["map"], row["anchor"], int(row["x"]), int(row["y"]))
+            for row in csv.DictReader(handle)
+        )
+    with (DATA_DIR / "map_connection_skips.csv").open(encoding="utf-8", newline="") as handle:
+        skips = tuple(ConnectionSkip(row["family"], row["map"], row["target"]) for row in csv.DictReader(handle))
+    return LayoutCuration(anchors, skips)
+
+
+def spread(cells: list[Cell], count: int, seed: str) -> list[Cell]:
     """Jusqu'à `count` cases réparties au hasard sur tout le terrain, à `SPOT_SPACING` cases au moins les unes
     des autres.
 
@@ -75,12 +95,12 @@ def spread(cells: list[tuple[int, int]], count: int, seed: str) -> list[tuple[in
     order = sorted(cells)
     rng.shuffle(order)
 
-    def neighbors(cell: tuple[int, int]) -> int:
+    def neighbors(cell: Cell) -> int:
         x, y = cell
         return sum((x + dx, y + dy) in free for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy)
 
     order.sort(key=lambda c: -min(neighbors(c), INTERIOR_NEIGHBORS))
-    chosen: list[tuple[int, int]] = []
+    chosen: list[Cell] = []
     for cell in order:
         if len(chosen) >= count:
             break
@@ -92,21 +112,58 @@ def spread(cells: list[tuple[int, int]], count: int, seed: str) -> list[tuple[in
 class GameMaps:
     """Cartes d'un jeu : sélection, placement et terrain."""
 
-    def __init__(self, repo: PretRepo) -> None:
+    def __init__(self, repo: PretReader, game: Game, curation: LayoutCuration) -> None:
         self.repo = repo
+        self.game = game
         self.maps = repo.maps
+        self.anchors = [anchor for anchor in curation.anchors if anchor.family == game.map_family]
+        skips = [skip for skip in curation.skips if skip.family == game.map_family]
+        for skip in skips:
+            if skip.map not in self.maps or skip.target not in {c.target for c in self.maps[skip.map].connections}:
+                raise ValueError(f"map_connection_skips.csv : connexion inconnue dans {game.version_group} : {skip}")
+        self.skipped = {pair for skip in skips for pair in ((skip.map, skip.target), (skip.target, skip.map))}
 
-    # --- Sélection et placement -------------------------------------------
+    # --- Cartes du monde ----------------------------------------------------
 
     @cached_property
-    def world_blocks(self) -> dict[str, tuple[int, int]]:
-        """Position (en blocs) de chaque ville et route dans la carte du monde, via les connexions."""
-        positions = {START_MAP: (0, 0)}
-        queue = deque([START_MAP])
+    def world_blocks(self) -> dict[str, dict[str, tuple[int, int]]]:
+        """Région -> position (en métatuiles) de chaque ville et route dans sa carte du monde."""
+        result = {region.const: self._place_region(region) for region in self.game.regions}
+        placed = [const for blocks in result.values() for const in blocks]
+        if duplicates := sorted({const for const in placed if placed.count(const) > 1}):
+            raise ValueError(f"Cartes dans plusieurs régions : {duplicates}")
+        if unused := [anchor for anchor in self.anchors if anchor.map not in placed]:
+            raise ValueError(f"map_anchors.csv : ancrages sans carte placée dans {self.game.version_group} : {unused}")
+        return result
+
+    def _place_region(self, region: Region) -> dict[str, tuple[int, int]]:
+        if region.start_map not in self.maps:
+            raise ValueError(f"Ville de départ inconnue pour {region.const} : {region.start_map}")
+        positions = {region.start_map: (0, 0)}
+        self._follow_connections(positions, region.start_map)
+        pending = list(self.anchors)
+        while placeable := [anchor for anchor in pending if anchor.anchor in positions]:
+            for anchor in placeable:
+                pending.remove(anchor)
+                if anchor.map in positions:
+                    raise ValueError(f"map_anchors.csv : {anchor.map} est déjà relié par une connexion")
+                x, y = positions[anchor.anchor]
+                positions[anchor.map] = (x + anchor.x, y + anchor.y)
+                self._follow_connections(positions, anchor.map)
+        self._check_region(region, positions)
+        min_x = min(x for x, _ in positions.values())
+        min_y = min(y for _, y in positions.values())
+        return {const: (x - min_x, y - min_y) for const, (x, y) in positions.items()}
+
+    def _follow_connections(self, positions: dict[str, tuple[int, int]], start: str) -> None:
+        """Place les cartes reliées à `start` par des connexions (parcours borné par le nombre de cartes)."""
+        queue = deque([start])
         while queue:
             current = self.maps[queue.popleft()]
             x, y = positions[current.const]
             for connection in current.connections:
+                if (current.const, connection.target) in self.skipped:
+                    continue
                 target = self.maps[connection.target]
                 position = {
                     "north": (x + connection.offset, y - target.height),
@@ -119,48 +176,76 @@ class GameMaps:
                     queue.append(target.const)
                 elif positions[target.const] != position:
                     raise ValueError(f"Connexion incohérente {current.const} -> {target.const}")
-        min_x = min(x for x, _ in positions.values())
-        min_y = min(y for _, y in positions.values())
-        outdoor = {const for const, pret_map in self.maps.items() if pret_map.is_outdoor}
-        if outdoor - positions.keys():
-            raise ValueError(f"Cartes extérieures non reliées à {START_MAP} : {sorted(outdoor - positions.keys())}")
-        return {const: (x - min_x, y - min_y) for const, (x, y) in positions.items()}
 
-    @cached_property
-    def world_size(self) -> tuple[int, int]:
-        """Taille de la carte du monde, en blocs."""
-        width = max(x + self.maps[const].width for const, (x, _) in self.world_blocks.items())
-        height = max(y + self.maps[const].height for const, (_, y) in self.world_blocks.items())
+    def _check_region(self, region: Region, positions: dict[str, tuple[int, int]]) -> None:
+        """Chaque carte placée est une carte extérieure de la région, et aucune n'en recouvre une autre."""
+        foreign = sorted(
+            const
+            for const in positions
+            if not self.maps[const].is_outdoor or self.repo.map_region(const) != region.const
+        )
+        if foreign:
+            raise ValueError(f"Cartes placées dans {region.const} sans en être des villes ou routes : {foreign}")
+        occupied: dict[tuple[int, int], str] = {}
+        for const, (x, y) in sorted(positions.items()):
+            pret_map = self.maps[const]
+            for cell in ((x + dx, y + dy) for dy in range(pret_map.height) for dx in range(pret_map.width)):
+                if cell in occupied:
+                    raise ValueError(f"{const} recouvre {occupied[cell]} dans la carte de {region.const}")
+                occupied[cell] = const
+
+    def world_size(self, region: str) -> tuple[int, int]:
+        """Taille de la carte du monde de la région, en métatuiles."""
+        blocks = self.world_blocks[region]
+        width = max(x + self.maps[const].width for const, (x, _) in blocks.items())
+        height = max(y + self.maps[const].height for const, (_, y) in blocks.items())
         return width, height
 
     @cached_property
-    def indoor_parents(self) -> dict[str, str]:
-        """Cartes intérieures accessibles depuis l'extérieur (par les warps) -> ville ou route d'origine."""
+    def world_region(self) -> dict[str, str]:
+        """Ville ou route placée dans une carte du monde -> région de cette carte."""
+        return {const: region for region, blocks in self.world_blocks.items() for const in blocks}
+
+    # --- Cartes à part --------------------------------------------------------
+
+    @cached_property
+    def parents(self) -> dict[str, str]:
+        """Cartes à part accessibles par les warps, ou par les scripts qui envoient le joueur ailleurs (intérieurs,
+        et villes ou routes hors des cartes du monde) -> ville ou route d'origine, dans une carte du monde."""
         parents: dict[str, str] = {}
         queue: deque[tuple[str, str]] = deque()
-        for const in sorted(self.world_blocks, key=lambda c: self.maps[c].number):
+        for const in sorted(self.world_region, key=lambda c: self.maps[c].number):
             queue.append((const, const))
         while queue:
             const, origin = queue.popleft()
-            for warp in self.maps[const].warps:
-                target = warp.target
-                if target == LAST_MAP or target not in self.maps or self.maps[target].is_outdoor:
+            pret_map = self.maps[const]
+            accessible = [warp.target for warp in pret_map.warps if warp.accessible]
+            for target in [*accessible, *pret_map.script_warps]:
+                if target == LAST_MAP or target not in self.maps or target in self.world_region:
                     continue
                 if target not in parents:
                     parents[target] = origin
                     queue.append((target, origin))
+        outdoor = {const for const, pret_map in self.maps.items() if pret_map.is_outdoor}
+        if orphans := sorted(outdoor - self.world_region.keys() - parents.keys()):
+            raise ValueError(f"Cartes extérieures reliées à aucune carte du monde : {orphans}")
         return parents
 
     @cached_property
     def placements(self) -> dict[str, Placed]:
-        placed = {const: Placed(WORLD, x * BLOCK_PX, y * BLOCK_PX) for const, (x, y) in self.world_blocks.items()}
-        placed |= {const: Placed(const, 0, 0) for const in self.indoor_parents}
+        placed = {
+            const: Placed(region, x * BLOCK_PX, y * BLOCK_PX)
+            for region, blocks in self.world_blocks.items()
+            for const, (x, y) in blocks.items()
+        }
+        placed |= {const: Placed(const, 0, 0) for const in self.parents}
         return placed
 
     @property
     def display_maps(self) -> list[str]:
-        indoor = sorted(self.indoor_parents, key=lambda c: self.maps[c].number)
-        return [WORLD, *indoor]
+        """Cartes affichées : les cartes du monde, puis les cartes à part."""
+        detached = sorted(self.parents, key=lambda c: self.maps[c].number)
+        return [*(region.const for region in self.game.regions), *detached]
 
     def point(self, const: str, x: int, y: int) -> tuple[int, int]:
         """Centre de la case (x, y) de la carte `const`, en pixels de la carte affichée qui la contient."""
@@ -169,43 +254,15 @@ class GameMaps:
 
     # --- Terrain --------------------------------------------------------------
 
-    def cells(self, const: str) -> dict[str, list[tuple[int, int]]]:
-        """Cases (pas de 16 px) de chaque terrain où le jeu fait apparaître des Pokémon sauvages : herbes (grass),
-        eau (water) et sol praticable (floor).
-
-        Comme le jeu, on regarde la tuile en bas à gauche de chaque case. Le sol ne compte que dans les cartes
-        intérieures hors forêt : ailleurs, marcher hors des herbes ne déclenche aucune rencontre."""
-        pret_map = self.maps[const]
-        tileset = self.repo.tilesets[pret_map.tileset]
-        wild_floor = not pret_map.is_outdoor and pret_map.tileset != FOREST_TILESET
-        warps = {(warp.x, warp.y) for warp in pret_map.warps}
-        result: dict[str, list[tuple[int, int]]] = {"grass": [], "water": [], "floor": []}
-        for y in range(pret_map.height * 2):
-            for x in range(pret_map.width * 2):
-                if (x, y) in warps:
-                    continue
-                tile = self.repo.tile_at(pret_map, x * 2, y * 2 + 1)
-                if tileset.grass_tile is not None and tile == tileset.grass_tile:
-                    result["grass"].append((x, y))
-                elif tileset.has_water and tile == WATER_TILE:
-                    result["water"].append((x, y))
-                elif wild_floor and tile in tileset.passable:
-                    result["floor"].append((x, y))
-        pairs = self.repo.land_pair_collisions.get(pret_map.tileset, set())
-
-        def blocked(a: tuple[int, int], b: tuple[int, int]) -> bool:
-            first = self.repo.tile_at(pret_map, a[0] * 2, a[1] * 2 + 1)
-            second = self.repo.tile_at(pret_map, b[0] * 2, b[1] * 2 + 1)
-            return frozenset((first, second)) in pairs
-
-        result["floor"] = _reachable(result["floor"], warps, blocked)
-        return result
+    def cells(self, const: str) -> dict[str, list[Cell]]:
+        """Cases (pas de 16 px) de chaque terrain où le jeu fait apparaître des Pokémon sauvages (maps_terrain)."""
+        return wild_cells(self.repo, self.maps[const])
 
     def wild_terrains(self, const: str) -> frozenset[str]:
         """Terrains de la carte où le jeu fait apparaître des Pokémon sauvages."""
         return frozenset(kind for kind, cells in self.cells(const).items() if cells)
 
-    def spots(self, const: str) -> dict[str, list[tuple[int, int]]]:
+    def spots(self, const: str) -> dict[str, list[Cell]]:
         """Emplacements bien répartis de chaque terrain, pour dessiner les Pokémon sauvages."""
         return {
             kind: spread(cells, SPOTS_PER_KIND, f"{const}/{kind}") for kind, cells in self.cells(const).items() if cells

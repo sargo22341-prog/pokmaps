@@ -4,7 +4,8 @@ import sqlite3
 
 import pytest
 
-from pokemaps_data.pret_moves import PretMove, move_effects
+from pokemaps_data.games import PretFormat
+from pokemaps_data.pret_moves import GameMoves, PretMove, move_effects
 
 RED_BLUE, YELLOW_GROUP = 1, 2
 FIRE_PUNCH, BODY_SLAM, TOXIC, PSYCHIC, DRAGON_RAGE, SLASH = 7, 34, 92, 94, 82, 163
@@ -43,9 +44,9 @@ def test_move_specific_texts(db: sqlite3.Connection, version_group: int) -> None
 
 def test_an_effect_without_text_stops_the_build() -> None:
     with pytest.raises(ValueError, match="UNKNOWN_EFFECT"):
-        move_effects({"red-blue": [PretMove("POUND", "UNKNOWN_EFFECT")]})
+        move_effects({"red-blue": GameMoves(PretFormat.GEN1, [PretMove("POUND", "UNKNOWN_EFFECT")])})
 
 
 def test_an_unused_effect_row_stops_the_build() -> None:
     with pytest.raises(ValueError, match="sans attaque correspondante"):
-        move_effects({"red-blue": [PretMove("POUND", "NO_ADDITIONAL_EFFECT")]})
+        move_effects({"red-blue": GameMoves(PretFormat.GEN1, [PretMove("POUND", "NO_ADDITIONAL_EFFECT")])})

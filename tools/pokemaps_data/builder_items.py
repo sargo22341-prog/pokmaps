@@ -6,13 +6,27 @@ from collections.abc import Iterable
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .games import Game
 from .pokeapi import FRENCH, clean_text
+from .pret_gen2 import Gen2PretRepo
+from .pret_identifiers import item_identifier, species_identifier
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
 
-# Catégories d'objets toujours incluses (en plus des objets d'évolution et des CT/CS).
-BALL_CATEGORIES = ("standard-balls", "special-balls")
+# Catégories d'objets toujours incluses (en plus des objets d'évolution et des CT/CS) : les Poké Balls, dont les
+# Balls fabriquées par Fargas avec des Noigrumes à partir de la 2e génération.
+BALL_CATEGORIES = ("standard-balls", "special-balls", "apricorn-balls")
+
+# Objets tenus des Pokémon sauvages de la 2e génération (LoadEnemyMon, engine/battle/core.asm) : pas d'objet si un
+# tirage sur 256 est inférieur à « 75 percent + 1 », puis l'objet 2 si un second tirage est inférieur à « 8 percent »,
+# « n percent » valant n * 255 // 100. Soit 23 % pour l'objet 1 et 2 % pour l'objet 2, comme le dit le moteur.
+_GEN2_HELD_ITEM_256 = 256 - (75 * 255 // 100 + 1)
+_GEN2_SECOND_ITEM_256 = 8 * 255 // 100
+_NO_ITEM = "NO_ITEM"
+# Objets tenus absents de PokéAPI, écartés parce qu'aucun Pokémon sauvage ne peut les tenir : la Berserk Gene n'est
+# tenue que par Mewtwo, qu'on ne rencontre pas dans Or et Argent. Une rencontre de ce Pokémon arrête la génération.
+_HELD_ITEMS_WITHOUT_WILD_HOLDER = frozenset({"BERSERK_GENE"})
 
 
 class ItemTables:
@@ -45,9 +59,20 @@ class ItemTables:
     def pokemon_item_rows(self) -> list[tuple[int, int, int, int]]:
         """Objets tenus par les Pokémon sauvages de chaque version : (espèce, version, objet, probabilité en %).
 
-        PokéAPI ne les donne qu'à partir de la 3e génération ; la 1re génération n'en a pas."""
+        La 1re génération n'en a pas ; ceux de la 2e sont lus dans pret (PokéAPI ne les donne qu'à partir de la 3e)."""
+        rows: list[tuple[int, int, int, int]] = []
+        for game in self.builder.games:
+            vg = next(int(row["id"]) for row in self.builder.vg_rows if row["identifier"] == game.version_group)
+            generation = self.builder.vg_generation[vg]
+            if generation == 2:
+                rows += self._pret_held_items(game, vg)
+            elif generation > 2:
+                rows += self._pokeapi_held_items(vg)
+        return sorted(rows)
+
+    def _pokeapi_held_items(self, vg: int) -> list[tuple[int, int, int, int]]:
         species_of_pokemon = self.builder.species_of_pokemon
-        versions = set(self.builder.version_ids)
+        versions = {int(row["id"]) for row in self.builder.version_rows if int(row["version_group_id"]) == vg}
         rows = []
         for row in self.api.table("pokemon_items"):
             pokemon_id, version = int(row["pokemon_id"]), int(row["version_id"])
@@ -56,7 +81,37 @@ class ItemTables:
                 if not 0 < rarity <= 100:
                     raise ValueError(f"Probabilité d'objet tenu invalide : {dict(row)}")
                 rows.append((species_of_pokemon[pokemon_id], version, int(row["item_id"]), rarity))
-        return sorted(rows)
+        return rows
+
+    def _pret_held_items(self, game: Game, vg: int) -> list[tuple[int, int, int, int]]:
+        """Objets 1 et 2 des données de base de chaque Pokémon (pret), avec les probabilités du moteur."""
+        if game.version_group not in self.builder.pret_roots:
+            raise ValueError(f"Désassemblage pret manquant pour lire les objets tenus : {game.version_group}")
+        repo = Gen2PretRepo(self.builder.pret_roots[game.version_group], game.pret_versions)
+        species = {row["identifier"]: species_id for species_id, row in self.builder.species.items()}
+        item_ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        versions = [int(row["id"]) for row in self.builder.version_rows if int(row["version_group_id"]) == vg]
+        wild = {
+            self.builder.species_of_pokemon[int(row["pokemon_id"])] for row in self.builder.encounters.raw_encounters
+        }
+        rows = []
+        for const, (first, second) in sorted(repo.wild_held_items.items()):
+            pokemon = species[species_identifier(const)]
+            chances: dict[int, float] = {}
+            for item, chance_256 in ((first, 256 - _GEN2_SECOND_ITEM_256), (second, _GEN2_SECOND_ITEM_256)):
+                if item in _HELD_ITEMS_WITHOUT_WILD_HOLDER and pokemon in wild:
+                    raise ValueError(f"{const} se rencontre dans {game.version_group} : son objet {item} doit exister")
+                if item == _NO_ITEM or item in _HELD_ITEMS_WITHOUT_WILD_HOLDER:
+                    continue
+                identifier = item_identifier(item, repo.machines)
+                if identifier not in item_ids:
+                    raise ValueError(f"Objet tenu inconnu de PokéAPI : {item} (voir pret_identifiers.ITEM_ALIASES)")
+                share = _GEN2_HELD_ITEM_256 * chance_256 / 256 / 256 * 100
+                chances[item_ids[identifier]] = chances.get(item_ids[identifier], 0) + share
+            rows += [
+                (pokemon, version, item, round(chance)) for item, chance in chances.items() for version in versions
+            ]
+        return rows
 
     def item_descriptions(self) -> dict[int, str]:
         """Description française de chaque objet (texte du jeu le plus ancien qui en a une), sauf CT / CS."""
@@ -94,5 +149,5 @@ class ItemTables:
         ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
         unknown = sorted(set(identifiers) - ids.keys())
         if unknown:
-            raise ValueError(f"{label} inconnus de PokéAPI : {unknown} (voir maps_characters.ITEM_ALIASES)")
+            raise ValueError(f"{label} inconnus de PokéAPI : {unknown} (voir pret_identifiers.ITEM_ALIASES)")
         return {identifier: ids[identifier] for identifier in identifiers}

@@ -7,7 +7,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .pokeapi import optional_int
-from .pret_moves import MoveEffect, move_effects, read_pret_moves
+from .pret_moves import GameMoves, MoveEffect, move_effects, read_pret_moves
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -17,7 +17,7 @@ LAST_TYPE_BASED_DAMAGE_CLASS_GENERATION = 3
 DAMAGE_CLASSES = {1: "status", 2: "physical", 3: "special"}
 
 # Attaques dont la constante pret ne correspond pas à l'identifiant PokéAPI (une fois les tirets retirés).
-MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick"}
+MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick", "faint-attack": "feint-attack"}
 
 _MOVE_FIELDS = ("type_id", "power", "pp", "accuracy")
 
@@ -67,6 +67,23 @@ class MoveTables:
             (move, moves[move]["identifier"], names[move], int(moves[move]["generation_id"])) for move in sorted(used)
         ]
 
+    @cached_property
+    def types_outside_the_chart(self) -> frozenset[int]:
+        """Types d'attaque absents du tableau des types (builder.type_rows) : « ??? », celui de Malédiction de la
+        2e à la 4e génération. Il n'a ni efficacité ni catégorie : Malédiction est une attaque de statut."""
+        moves = self.api.by_id("moves")
+        changelog: dict[int, list[dict[str, str]]] = defaultdict(list)
+        for row in self.api.table("move_changelog"):
+            changelog[int(row["move_id"])].append(row)
+        return (
+            frozenset(
+                int(self._values_in(vg, moves[move_id], changelog[move_id])["type_id"])
+                for vg, move_ids in self.moves_by_version_group.items()
+                for move_id in move_ids
+            )
+            - self.builder.type_rows.keys()
+        )
+
     def move_version_group_table(self) -> list[tuple]:
         moves = self.api.by_id("moves")
         # Historique : « avant le groupe de versions X, la valeur était V ».
@@ -106,8 +123,10 @@ class MoveTables:
         if missing:
             raise ValueError(f"Désassemblage pret manquant pour lire les effets des attaques : {missing}")
         pret_moves = {
-            row["identifier"]: read_pret_moves(self.builder.pret_roots[row["identifier"]])
-            for row in self.builder.vg_rows
+            game.version_group: GameMoves(
+                game.pret_format, read_pret_moves(self.builder.pret_roots[game.version_group], game.pret_format)
+            )
+            for game in self.builder.games
         }
         by_game = move_effects(pret_moves)
         return {

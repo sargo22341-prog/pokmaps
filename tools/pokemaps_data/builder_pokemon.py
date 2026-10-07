@@ -6,7 +6,9 @@ from collections import defaultdict
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .games import PretFormat
 from .pokeapi import ENGLISH, FRENCH, clean_text, optional_int, value_at
+from .pret_gen2 import Gen2PretRepo
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -164,6 +166,7 @@ class PokemonTables:
             by_target[int(row["evolved_species_id"])].append(row)
         rows = []
         for vg in self.builder.vg_ids:
+            happiness = self._happiness_to_evolve(vg)
             for target, candidates in sorted(by_target.items()):
                 source = self.builder.species.get(target, {}).get("evolves_from_species_id")
                 if target not in self.builder.species or not source:
@@ -171,10 +174,25 @@ class PokemonTables:
                 if int(self.builder.species[target]["generation_id"]) > self.builder.vg_generation[vg]:
                     continue
                 rows += [
-                    (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_evolution_conditions(row))
+                    (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_conditions(row, happiness))
                     for row in self._evolution_methods(vg, candidates)
                 ]
         return [(index, *row) for index, row in enumerate(rows, start=1)]
+
+    def _happiness_to_evolve(self, vg: int) -> int | None:
+        """Bonheur nécessaire pour évoluer dans ce jeu, lu dans pret pour la 2e génération ; None pour garder celui
+        de PokéAPI. PokéAPI donne pour Or et Argent le seuil des jeux récents (160) : le moteur y demande 220
+        (HAPPINESS_TO_EVOLVE, engine/pokemon/evolve.asm)."""
+        game = self.builder.game_of(vg)
+        match game.pret_format:
+            case PretFormat.GEN1:
+                return None
+            case PretFormat.GEN2:
+                if game.version_group not in self.builder.pret_roots:
+                    raise ValueError(
+                        f"Désassemblage pret manquant pour lire le bonheur d'évolution : {game.version_group}"
+                    )
+                return Gen2PretRepo(self.builder.pret_roots[game.version_group], game.pret_versions).happiness_to_evolve
 
     def _evolution_methods(self, vg: int, candidates: list[dict[str, str]]) -> list[dict[str, str]]:
         """Méthodes valables dans ce jeu : celles introduites au plus tard dans ce groupe de versions,
@@ -187,12 +205,16 @@ class PokemonTables:
         return [row for row in valid if order[int(row["version_group_id"])] == latest]
 
 
-def _evolution_conditions(row: dict[str, str]) -> tuple:
+def _conditions(row: dict[str, str], happiness: int | None) -> tuple:
+    """Conditions d'une évolution ; `happiness` remplace le bonheur de PokéAPI s'il est donné."""
+    minimum_happiness = optional_int(row["minimum_happiness"])
+    if minimum_happiness is not None and happiness is not None:
+        minimum_happiness = happiness
     return (
         optional_int(row["minimum_level"]),
         optional_int(row["trigger_item_id"]),
         optional_int(row["held_item_id"]),
-        optional_int(row["minimum_happiness"]),
+        minimum_happiness,
         row["time_of_day"] or None,
         optional_int(row["known_move_id"]),
         optional_int(row["trade_species_id"]),

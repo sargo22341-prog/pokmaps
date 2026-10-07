@@ -5,8 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from pokemaps_data.games import GAMES
-from pokemaps_data.maps_layout import GameMaps, identifier
-from pokemaps_data.pret import PretRepo
+from pokemaps_data.maps_layout import GameMaps, identifier, read_layout_curation
+from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.sources import pret_dir
 
 from .catalog import Family
@@ -32,10 +32,10 @@ class WildTerrains:
 
     def _game(self, version_group: str) -> tuple[GameMaps, dict[str, str]]:
         if version_group not in self._games:
-            repo = next(game.pret_repo for game in GAMES if game.version_group == version_group)
-            root = pret_dir(self.cache, repo)
+            game = next(game for game in GAMES if game.version_group == version_group)
+            root = pret_dir(self.cache, game.pret_repo)
             if not (root / ".complete").is_file():
                 raise FileNotFoundError(f"Sources pret absentes : lancer d'abord python tools/build_data.py ({root})")
-            game_maps = GameMaps(PretRepo(root))
+            game_maps = GameMaps(open_pret(game, root), game, read_layout_curation())
             self._games[version_group] = (game_maps, {identifier(const): const for const in game_maps.placements})
         return self._games[version_group]

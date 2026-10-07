@@ -18,7 +18,7 @@ from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import GAMES
 from pokemaps_data.maps import build_maps
 from pokemaps_data.pokeapi import PokeApi
-from pokemaps_data.sources import fetch_pokeapi_csv, fetch_pret
+from pokemaps_data.sources import PRET_COMMITS, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
 
@@ -33,11 +33,15 @@ def main() -> int:
     args = parser.parse_args()
     database = args.assets / "database/pokedex.db"
 
-    print("Génération des cartes (pret/pokered, pret/pokeyellow)…")
+    # Tous les dépôts épinglés, y compris ceux des jeux en cours d'intégration : les tests les lisent dans le cache.
+    print(f"Téléchargement des désassemblages pret ({', '.join(PRET_COMMITS)})…")
+    repos = {repo: fetch_pret(args.cache, repo) for repo in PRET_COMMITS}
+
+    print("Génération des cartes…")
     map_data = build_maps(args.cache, args.assets / "maps")
 
     print("Téléchargement des CSV PokéAPI…")
-    pret_roots = {game.version_group: fetch_pret(args.cache, game.pret_repo) for game in GAMES}
+    pret_roots = {game.version_group: repos[game.pret_repo] for game in GAMES}
     builder = DatabaseBuilder(PokeApi(fetch_pokeapi_csv(args.cache)), map_data=map_data, pret_roots=pret_roots)
 
     print("Téléchargement des images (pokesprite, PokeAPI/sprites)…")

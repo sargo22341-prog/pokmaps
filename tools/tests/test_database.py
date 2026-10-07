@@ -6,8 +6,9 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
-from pokemaps_data.builder_maps import _SpotRows
+from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.map_spots import TerrainKey, read_spots
+from pokemaps_data.maps_characters import ObjectRow, read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier
 from pokemaps_data.validate import validate
 
@@ -366,7 +367,7 @@ def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlit
 def test_curated_spots_must_be_on_a_wild_terrain(builder: DatabaseBuilder) -> None:
     data = builder.map_data["red-blue"]
     ids = {row.const: number for number, row in enumerate(data.maps, start=1)}
-    spots = _SpotRows({TerrainKey("red-blue-yellow", "route-1", "floor"): frozenset()})
+    spots = _SpotRows({TerrainKey("red-blue-yellow", "route-1", "floor"): frozenset()}, builder.games)
     with pytest.raises(ValueError, match="terrain floor de route-1"):
         spots.add_game("red-blue", data, ids)
 
@@ -387,3 +388,21 @@ def test_object_names(db: sqlite3.Connection) -> None:
     assert names("pokemon", "power-plant") >= {"Électhor"}
     assert names("item", "route-2") == {"PV Plus", "Pierre Lune"}
     assert scalar(db, "SELECT count(*) FROM map_object WHERE trim(name_fr) = ''") == 0
+
+
+def test_debug_warps_are_not_part_of_the_game(db: sqlite3.Connection) -> None:
+    # Jaune assemble avec _DEBUG des warps de test dans la chambre de Red (Mont Sélénite, Sylphe SARL…) : une ROM du
+    # commerce n'en a pas, la chambre n'a que son escalier.
+    targets = db.execute(
+        """SELECT t.identifier FROM map_warp w JOIN map m ON m.id = w.map_id LEFT JOIN map t ON t.id = w.target_map_id
+           WHERE m.identifier = 'reds-house-2f' AND m.version_group_id = ?""",
+        (YELLOW_GROUP,),
+    ).fetchall()
+    assert targets == [("reds-house-1f",)]
+
+
+def test_a_version_specific_map_object_needs_a_column(builder: DatabaseBuilder) -> None:
+    rows = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {})
+    ho_oh = ObjectRow("TIN_TOWER_ROOF", "pokemon", 152, 88, "ho-oh", None, "ho-oh", 40, None, version="gold")
+    with pytest.raises(ValueError, match="propre à la version gold"):
+        rows.add(ho_oh, 1)

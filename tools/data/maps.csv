@@ -1,223 +1,581 @@
-map,name_fr
-PALLET_TOWN,Bourg Palette
-VIRIDIAN_CITY,Jadielle
-PEWTER_CITY,Argenta
-CERULEAN_CITY,Azuria
-LAVENDER_TOWN,Lavanville
-VERMILION_CITY,Carmin sur Mer
-CELADON_CITY,Céladopole
-FUCHSIA_CITY,Parmanie
-CINNABAR_ISLAND,Cramois'Île
-INDIGO_PLATEAU,Plateau Indigo
-SAFFRON_CITY,Safrania
-ROUTE_1,Route 1
-ROUTE_2,Route 2
-ROUTE_3,Route 3
-ROUTE_4,Route 4
-ROUTE_5,Route 5
-ROUTE_6,Route 6
-ROUTE_7,Route 7
-ROUTE_8,Route 8
-ROUTE_9,Route 9
-ROUTE_10,Route 10
-ROUTE_11,Route 11
-ROUTE_12,Route 12
-ROUTE_13,Route 13
-ROUTE_14,Route 14
-ROUTE_15,Route 15
-ROUTE_16,Route 16
-ROUTE_17,Route 17
-ROUTE_18,Route 18
-ROUTE_19,Route 19
-ROUTE_20,Route 20
-ROUTE_21,Route 21
-ROUTE_22,Route 22
-ROUTE_23,Route 23
-ROUTE_24,Route 24
-ROUTE_25,Route 25
-REDS_HOUSE_1F,Maison du joueur (RdC)
-REDS_HOUSE_2F,Maison du joueur (1er étage)
-BLUES_HOUSE,Maison du rival
-OAKS_LAB,Labo du Prof. Chen
-VIRIDIAN_POKECENTER,Centre Pokémon de Jadielle
-VIRIDIAN_MART,Boutique de Jadielle
-VIRIDIAN_SCHOOL_HOUSE,École des dresseurs de Jadielle
-VIRIDIAN_NICKNAME_HOUSE,Maison de Jadielle (surnoms)
-VIRIDIAN_GYM,Arène de Jadielle
-DIGLETTS_CAVE_ROUTE_2,Cave Taupiqueur (entrée de la Route 2)
-VIRIDIAN_FOREST_NORTH_GATE,Poste de contrôle nord de la Forêt de Jade
-ROUTE_2_TRADE_HOUSE,Maison d'échange (Route 2)
-ROUTE_2_GATE,Poste de contrôle (Route 2)
-VIRIDIAN_FOREST_SOUTH_GATE,Poste de contrôle sud de la Forêt de Jade
-VIRIDIAN_FOREST,Forêt de Jade
-MUSEUM_1F,Musée d'Argenta (RdC)
-MUSEUM_2F,Musée d'Argenta (1er étage)
-PEWTER_GYM,Arène d'Argenta
-PEWTER_NIDORAN_HOUSE,Maison d'Argenta (Nidoran♂)
-PEWTER_MART,Boutique d'Argenta
-PEWTER_SPEECH_HOUSE,Maison d'Argenta
-PEWTER_POKECENTER,Centre Pokémon d'Argenta
-MT_MOON_1F,Mont Sélénite (RdC)
-MT_MOON_B1F,Mont Sélénite (1er sous-sol)
-MT_MOON_B2F,Mont Sélénite (2e sous-sol)
-CERULEAN_TRASHED_HOUSE,Maison cambriolée d'Azuria
-CERULEAN_TRADE_HOUSE,Maison d'échange d'Azuria
-CERULEAN_MELANIES_HOUSE,Maison de Mélanie (Azuria)
-CERULEAN_POKECENTER,Centre Pokémon d'Azuria
-CERULEAN_GYM,Arène d'Azuria
-BIKE_SHOP,Magasin de vélos d'Azuria
-CERULEAN_MART,Boutique d'Azuria
-MT_MOON_POKECENTER,Centre Pokémon (Route 4)
-ROUTE_5_GATE,Poste de contrôle (Route 5)
-UNDERGROUND_PATH_ROUTE_5,Souterrain (entrée de la Route 5)
-DAYCARE,Pension Pokémon (Route 5)
-ROUTE_6_GATE,Poste de contrôle (Route 6)
-UNDERGROUND_PATH_ROUTE_6,Souterrain (entrée de la Route 6)
-ROUTE_7_GATE,Poste de contrôle (Route 7)
-UNDERGROUND_PATH_ROUTE_7,Souterrain (entrée de la Route 7)
-ROUTE_8_GATE,Poste de contrôle (Route 8)
-UNDERGROUND_PATH_ROUTE_8,Souterrain (entrée de la Route 8)
-ROCK_TUNNEL_POKECENTER,Centre Pokémon (Route 10)
-ROCK_TUNNEL_1F,Grotte (RdC)
-POWER_PLANT,Centrale
-ROUTE_11_GATE_1F,"Poste de contrôle (Route 11, RdC)"
-DIGLETTS_CAVE_ROUTE_11,Cave Taupiqueur (entrée de la Route 11)
-ROUTE_11_GATE_2F,"Poste de contrôle (Route 11, 1er étage)"
-ROUTE_12_GATE_1F,"Poste de contrôle (Route 12, RdC)"
-BILLS_HOUSE,Cottage de Léo
-VERMILION_POKECENTER,Centre Pokémon de Carmin sur Mer
-POKEMON_FAN_CLUB,Club des fans de Pokémon
-VERMILION_MART,Boutique de Carmin sur Mer
-VERMILION_GYM,Arène de Carmin sur Mer
-VERMILION_PIDGEY_HOUSE,Maison de Carmin sur Mer (Roucool)
-VERMILION_DOCK,Port de Carmin sur Mer
-SS_ANNE_1F,L'Océane (1er pont)
-SS_ANNE_2F,L'Océane (2e pont)
-SS_ANNE_3F,L'Océane (3e pont)
-SS_ANNE_B1F,L'Océane (cale)
-SS_ANNE_BOW,L'Océane (proue)
-SS_ANNE_KITCHEN,L'Océane (cuisines)
-SS_ANNE_CAPTAINS_ROOM,L'Océane (cabine du capitaine)
-SS_ANNE_1F_ROOMS,L'Océane (cabines du 1er pont)
-SS_ANNE_2F_ROOMS,L'Océane (cabines du 2e pont)
-SS_ANNE_B1F_ROOMS,L'Océane (cabines de la cale)
-VICTORY_ROAD_1F,Route Victoire (RdC)
-LANCES_ROOM,Salle de Peter
-HALL_OF_FAME,Panthéon
-UNDERGROUND_PATH_NORTH_SOUTH,Souterrain (nord-sud)
-CHAMPIONS_ROOM,Salle du Maître
-UNDERGROUND_PATH_WEST_EAST,Souterrain (ouest-est)
-CELADON_MART_1F,Centre commercial de Céladopole (RdC)
-CELADON_MART_2F,Centre commercial de Céladopole (1er étage)
-CELADON_MART_3F,Centre commercial de Céladopole (2e étage)
-CELADON_MART_4F,Centre commercial de Céladopole (3e étage)
-CELADON_MART_ROOF,Centre commercial de Céladopole (toit)
-CELADON_MART_ELEVATOR,Centre commercial de Céladopole (ascenseur)
-CELADON_MANSION_1F,Résidence de Céladopole (RdC)
-CELADON_MANSION_2F,Résidence de Céladopole (1er étage)
-CELADON_MANSION_3F,Résidence de Céladopole (2e étage)
-CELADON_MANSION_ROOF,Résidence de Céladopole (toit)
-CELADON_MANSION_ROOF_HOUSE,Résidence de Céladopole (maison sur le toit)
-CELADON_POKECENTER,Centre Pokémon de Céladopole
-CELADON_GYM,Arène de Céladopole
-GAME_CORNER,Casino de Céladopole
-CELADON_MART_5F,Centre commercial de Céladopole (4e étage)
-GAME_CORNER_PRIZE_ROOM,Comptoir des lots du Casino
-CELADON_DINER,Restaurant de Céladopole
-CELADON_CHIEF_HOUSE,Maison du chef (Céladopole)
-CELADON_HOTEL,Hôtel de Céladopole
-LAVENDER_POKECENTER,Centre Pokémon de Lavanville
-POKEMON_TOWER_1F,Tour Pokémon (RdC)
-POKEMON_TOWER_2F,Tour Pokémon (1er étage)
-POKEMON_TOWER_3F,Tour Pokémon (2e étage)
-POKEMON_TOWER_4F,Tour Pokémon (3e étage)
-POKEMON_TOWER_5F,Tour Pokémon (4e étage)
-POKEMON_TOWER_6F,Tour Pokémon (5e étage)
-POKEMON_TOWER_7F,Tour Pokémon (6e étage)
-MR_FUJIS_HOUSE,Maison de M. Fuji
-LAVENDER_MART,Boutique de Lavanville
-LAVENDER_CUBONE_HOUSE,Maison de Lavanville (Osselait)
-FUCHSIA_MART,Boutique de Parmanie
-FUCHSIA_BILLS_GRANDPAS_HOUSE,Maison du grand-père de Léo
-FUCHSIA_POKECENTER,Centre Pokémon de Parmanie
-WARDENS_HOUSE,Maison du Gardien du Parc Safari
-SAFARI_ZONE_GATE,Entrée du Parc Safari
-FUCHSIA_GYM,Arène de Parmanie
-FUCHSIA_MEETING_ROOM,Salle de réunion du Parc Safari
-SEAFOAM_ISLANDS_B1F,Îles Écume (1er sous-sol)
-SEAFOAM_ISLANDS_B2F,Îles Écume (2e sous-sol)
-SEAFOAM_ISLANDS_B3F,Îles Écume (3e sous-sol)
-SEAFOAM_ISLANDS_B4F,Îles Écume (4e sous-sol)
-VERMILION_OLD_ROD_HOUSE,Maison du pêcheur de Carmin sur Mer (Canne)
-FUCHSIA_GOOD_ROD_HOUSE,Maison du pêcheur de Parmanie (Super Canne)
-POKEMON_MANSION_1F,Manoir Pokémon (RdC)
-CINNABAR_GYM,Arène de Cramois'Île
-CINNABAR_LAB,Labo Pokémon de Cramois'Île
-CINNABAR_LAB_TRADE_ROOM,Labo Pokémon de Cramois'Île (salle d'échange)
-CINNABAR_LAB_METRONOME_ROOM,Labo Pokémon de Cramois'Île (salle Métronome)
-CINNABAR_LAB_FOSSIL_ROOM,Labo Pokémon de Cramois'Île (salle des fossiles)
-CINNABAR_POKECENTER,Centre Pokémon de Cramois'Île
-CINNABAR_MART,Boutique de Cramois'Île
-INDIGO_PLATEAU_LOBBY,Plateau Indigo (hall)
-COPYCATS_HOUSE_1F,Maison de Copieuse (RdC)
-COPYCATS_HOUSE_2F,Maison de Copieuse (1er étage)
-FIGHTING_DOJO,Dojo de Safrania
-SAFFRON_GYM,Arène de Safrania
-SAFFRON_PIDGEY_HOUSE,Maison de Safrania (Roucool)
-SAFFRON_MART,Boutique de Safrania
-SILPH_CO_1F,Sylphe SARL (RdC)
-SAFFRON_POKECENTER,Centre Pokémon de Safrania
-MR_PSYCHICS_HOUSE,Maison de M. Psy
-ROUTE_15_GATE_1F,"Poste de contrôle (Route 15, RdC)"
-ROUTE_15_GATE_2F,"Poste de contrôle (Route 15, 1er étage)"
-ROUTE_16_GATE_1F,"Poste de contrôle (Route 16, RdC)"
-ROUTE_16_GATE_2F,"Poste de contrôle (Route 16, 1er étage)"
-ROUTE_16_FLY_HOUSE,Maison de la Route 16 (CS02 Vol)
-ROUTE_12_SUPER_ROD_HOUSE,"Maison du pêcheur (Route 12, Méga Canne)"
-ROUTE_18_GATE_1F,"Poste de contrôle (Route 18, RdC)"
-ROUTE_18_GATE_2F,"Poste de contrôle (Route 18, 1er étage)"
-SEAFOAM_ISLANDS_1F,Îles Écume (RdC)
-ROUTE_22_GATE,Poste de contrôle (Route 22)
-VICTORY_ROAD_2F,Route Victoire (1er étage)
-ROUTE_12_GATE_2F,"Poste de contrôle (Route 12, 1er étage)"
-VERMILION_TRADE_HOUSE,Maison d'échange de Carmin sur Mer
-DIGLETTS_CAVE,Cave Taupiqueur
-VICTORY_ROAD_3F,Route Victoire (2e étage)
-ROCKET_HIDEOUT_B1F,Repaire Rocket (1er sous-sol)
-ROCKET_HIDEOUT_B2F,Repaire Rocket (2e sous-sol)
-ROCKET_HIDEOUT_B3F,Repaire Rocket (3e sous-sol)
-ROCKET_HIDEOUT_B4F,Repaire Rocket (4e sous-sol)
-ROCKET_HIDEOUT_ELEVATOR,Repaire Rocket (ascenseur)
-SILPH_CO_2F,Sylphe SARL (1er étage)
-SILPH_CO_3F,Sylphe SARL (2e étage)
-SILPH_CO_4F,Sylphe SARL (3e étage)
-SILPH_CO_5F,Sylphe SARL (4e étage)
-SILPH_CO_6F,Sylphe SARL (5e étage)
-SILPH_CO_7F,Sylphe SARL (6e étage)
-SILPH_CO_8F,Sylphe SARL (7e étage)
-POKEMON_MANSION_2F,Manoir Pokémon (1er étage)
-POKEMON_MANSION_3F,Manoir Pokémon (2e étage)
-POKEMON_MANSION_B1F,Manoir Pokémon (sous-sol)
-SAFARI_ZONE_EAST,"Parc Safari (Zone 1, est)"
-SAFARI_ZONE_NORTH,"Parc Safari (Zone 2, nord)"
-SAFARI_ZONE_WEST,"Parc Safari (Zone 3, ouest)"
-SAFARI_ZONE_CENTER,Parc Safari (centre)
-SAFARI_ZONE_CENTER_REST_HOUSE,Parc Safari (maison de repos du centre)
-SAFARI_ZONE_SECRET_HOUSE,Parc Safari (maison secrète)
-SAFARI_ZONE_WEST_REST_HOUSE,Parc Safari (maison de repos de la zone 3)
-SAFARI_ZONE_EAST_REST_HOUSE,Parc Safari (maison de repos de la zone 1)
-SAFARI_ZONE_NORTH_REST_HOUSE,Parc Safari (maison de repos de la zone 2)
-CERULEAN_CAVE_2F,Caverne Azurée (1er étage)
-CERULEAN_CAVE_B1F,Caverne Azurée (sous-sol)
-CERULEAN_CAVE_1F,Caverne Azurée (RdC)
-NAME_RATERS_HOUSE,Maison de l'expert en surnoms
-CERULEAN_BADGE_HOUSE,Maison d'Azuria (badges)
-ROCK_TUNNEL_B1F,Grotte (sous-sol)
-SILPH_CO_9F,Sylphe SARL (8e étage)
-SILPH_CO_10F,Sylphe SARL (9e étage)
-SILPH_CO_11F,Sylphe SARL (10e étage)
-SILPH_CO_ELEVATOR,Sylphe SARL (ascenseur)
-LORELEIS_ROOM,Salle d'Olga
-BRUNOS_ROOM,Salle d'Aldo
-AGATHAS_ROOM,Salle d'Agatha
-SUMMER_BEACH_HOUSE,Maison de la plage (Route 19)
+family,map,name_fr
+red-blue-yellow,KANTO,Kanto
+red-blue-yellow,PALLET_TOWN,Bourg Palette
+red-blue-yellow,VIRIDIAN_CITY,Jadielle
+red-blue-yellow,PEWTER_CITY,Argenta
+red-blue-yellow,CERULEAN_CITY,Azuria
+red-blue-yellow,LAVENDER_TOWN,Lavanville
+red-blue-yellow,VERMILION_CITY,Carmin sur Mer
+red-blue-yellow,CELADON_CITY,Céladopole
+red-blue-yellow,FUCHSIA_CITY,Parmanie
+red-blue-yellow,CINNABAR_ISLAND,Cramois'Île
+red-blue-yellow,INDIGO_PLATEAU,Plateau Indigo
+red-blue-yellow,SAFFRON_CITY,Safrania
+red-blue-yellow,ROUTE_1,Route 1
+red-blue-yellow,ROUTE_2,Route 2
+red-blue-yellow,ROUTE_3,Route 3
+red-blue-yellow,ROUTE_4,Route 4
+red-blue-yellow,ROUTE_5,Route 5
+red-blue-yellow,ROUTE_6,Route 6
+red-blue-yellow,ROUTE_7,Route 7
+red-blue-yellow,ROUTE_8,Route 8
+red-blue-yellow,ROUTE_9,Route 9
+red-blue-yellow,ROUTE_10,Route 10
+red-blue-yellow,ROUTE_11,Route 11
+red-blue-yellow,ROUTE_12,Route 12
+red-blue-yellow,ROUTE_13,Route 13
+red-blue-yellow,ROUTE_14,Route 14
+red-blue-yellow,ROUTE_15,Route 15
+red-blue-yellow,ROUTE_16,Route 16
+red-blue-yellow,ROUTE_17,Route 17
+red-blue-yellow,ROUTE_18,Route 18
+red-blue-yellow,ROUTE_19,Route 19
+red-blue-yellow,ROUTE_20,Route 20
+red-blue-yellow,ROUTE_21,Route 21
+red-blue-yellow,ROUTE_22,Route 22
+red-blue-yellow,ROUTE_23,Route 23
+red-blue-yellow,ROUTE_24,Route 24
+red-blue-yellow,ROUTE_25,Route 25
+red-blue-yellow,REDS_HOUSE_1F,Maison du joueur (RdC)
+red-blue-yellow,REDS_HOUSE_2F,Maison du joueur (1er étage)
+red-blue-yellow,BLUES_HOUSE,Maison du rival
+red-blue-yellow,OAKS_LAB,Labo du Prof. Chen
+red-blue-yellow,VIRIDIAN_POKECENTER,Centre Pokémon de Jadielle
+red-blue-yellow,VIRIDIAN_MART,Boutique de Jadielle
+red-blue-yellow,VIRIDIAN_SCHOOL_HOUSE,École des dresseurs de Jadielle
+red-blue-yellow,VIRIDIAN_NICKNAME_HOUSE,Maison de Jadielle (surnoms)
+red-blue-yellow,VIRIDIAN_GYM,Arène de Jadielle
+red-blue-yellow,DIGLETTS_CAVE_ROUTE_2,Cave Taupiqueur (entrée de la Route 2)
+red-blue-yellow,VIRIDIAN_FOREST_NORTH_GATE,Poste de contrôle nord de la Forêt de Jade
+red-blue-yellow,ROUTE_2_TRADE_HOUSE,Maison d'échange (Route 2)
+red-blue-yellow,ROUTE_2_GATE,Poste de contrôle (Route 2)
+red-blue-yellow,VIRIDIAN_FOREST_SOUTH_GATE,Poste de contrôle sud de la Forêt de Jade
+red-blue-yellow,VIRIDIAN_FOREST,Forêt de Jade
+red-blue-yellow,MUSEUM_1F,Musée d'Argenta (RdC)
+red-blue-yellow,MUSEUM_2F,Musée d'Argenta (1er étage)
+red-blue-yellow,PEWTER_GYM,Arène d'Argenta
+red-blue-yellow,PEWTER_NIDORAN_HOUSE,Maison d'Argenta (Nidoran♂)
+red-blue-yellow,PEWTER_MART,Boutique d'Argenta
+red-blue-yellow,PEWTER_SPEECH_HOUSE,Maison d'Argenta
+red-blue-yellow,PEWTER_POKECENTER,Centre Pokémon d'Argenta
+red-blue-yellow,MT_MOON_1F,Mont Sélénite (RdC)
+red-blue-yellow,MT_MOON_B1F,Mont Sélénite (1er sous-sol)
+red-blue-yellow,MT_MOON_B2F,Mont Sélénite (2e sous-sol)
+red-blue-yellow,CERULEAN_TRASHED_HOUSE,Maison cambriolée d'Azuria
+red-blue-yellow,CERULEAN_TRADE_HOUSE,Maison d'échange d'Azuria
+red-blue-yellow,CERULEAN_MELANIES_HOUSE,Maison de Mélanie (Azuria)
+red-blue-yellow,CERULEAN_POKECENTER,Centre Pokémon d'Azuria
+red-blue-yellow,CERULEAN_GYM,Arène d'Azuria
+red-blue-yellow,BIKE_SHOP,Magasin de vélos d'Azuria
+red-blue-yellow,CERULEAN_MART,Boutique d'Azuria
+red-blue-yellow,MT_MOON_POKECENTER,Centre Pokémon (Route 4)
+red-blue-yellow,ROUTE_5_GATE,Poste de contrôle (Route 5)
+red-blue-yellow,UNDERGROUND_PATH_ROUTE_5,Souterrain (entrée de la Route 5)
+red-blue-yellow,DAYCARE,Pension Pokémon (Route 5)
+red-blue-yellow,ROUTE_6_GATE,Poste de contrôle (Route 6)
+red-blue-yellow,UNDERGROUND_PATH_ROUTE_6,Souterrain (entrée de la Route 6)
+red-blue-yellow,ROUTE_7_GATE,Poste de contrôle (Route 7)
+red-blue-yellow,UNDERGROUND_PATH_ROUTE_7,Souterrain (entrée de la Route 7)
+red-blue-yellow,ROUTE_8_GATE,Poste de contrôle (Route 8)
+red-blue-yellow,UNDERGROUND_PATH_ROUTE_8,Souterrain (entrée de la Route 8)
+red-blue-yellow,ROCK_TUNNEL_POKECENTER,Centre Pokémon (Route 10)
+red-blue-yellow,ROCK_TUNNEL_1F,Grotte (RdC)
+red-blue-yellow,POWER_PLANT,Centrale
+red-blue-yellow,ROUTE_11_GATE_1F,"Poste de contrôle (Route 11, RdC)"
+red-blue-yellow,DIGLETTS_CAVE_ROUTE_11,Cave Taupiqueur (entrée de la Route 11)
+red-blue-yellow,ROUTE_11_GATE_2F,"Poste de contrôle (Route 11, 1er étage)"
+red-blue-yellow,ROUTE_12_GATE_1F,"Poste de contrôle (Route 12, RdC)"
+red-blue-yellow,BILLS_HOUSE,Cottage de Léo
+red-blue-yellow,VERMILION_POKECENTER,Centre Pokémon de Carmin sur Mer
+red-blue-yellow,POKEMON_FAN_CLUB,Club des fans de Pokémon
+red-blue-yellow,VERMILION_MART,Boutique de Carmin sur Mer
+red-blue-yellow,VERMILION_GYM,Arène de Carmin sur Mer
+red-blue-yellow,VERMILION_PIDGEY_HOUSE,Maison de Carmin sur Mer (Roucool)
+red-blue-yellow,VERMILION_DOCK,Port de Carmin sur Mer
+red-blue-yellow,SS_ANNE_1F,L'Océane (1er pont)
+red-blue-yellow,SS_ANNE_2F,L'Océane (2e pont)
+red-blue-yellow,SS_ANNE_3F,L'Océane (3e pont)
+red-blue-yellow,SS_ANNE_B1F,L'Océane (cale)
+red-blue-yellow,SS_ANNE_BOW,L'Océane (proue)
+red-blue-yellow,SS_ANNE_KITCHEN,L'Océane (cuisines)
+red-blue-yellow,SS_ANNE_CAPTAINS_ROOM,L'Océane (cabine du capitaine)
+red-blue-yellow,SS_ANNE_1F_ROOMS,L'Océane (cabines du 1er pont)
+red-blue-yellow,SS_ANNE_2F_ROOMS,L'Océane (cabines du 2e pont)
+red-blue-yellow,SS_ANNE_B1F_ROOMS,L'Océane (cabines de la cale)
+red-blue-yellow,VICTORY_ROAD_1F,Route Victoire (RdC)
+red-blue-yellow,LANCES_ROOM,Salle de Peter
+red-blue-yellow,HALL_OF_FAME,Panthéon
+red-blue-yellow,UNDERGROUND_PATH_NORTH_SOUTH,Souterrain (nord-sud)
+red-blue-yellow,CHAMPIONS_ROOM,Salle du Maître
+red-blue-yellow,UNDERGROUND_PATH_WEST_EAST,Souterrain (ouest-est)
+red-blue-yellow,CELADON_MART_1F,Centre commercial de Céladopole (RdC)
+red-blue-yellow,CELADON_MART_2F,Centre commercial de Céladopole (1er étage)
+red-blue-yellow,CELADON_MART_3F,Centre commercial de Céladopole (2e étage)
+red-blue-yellow,CELADON_MART_4F,Centre commercial de Céladopole (3e étage)
+red-blue-yellow,CELADON_MART_ROOF,Centre commercial de Céladopole (toit)
+red-blue-yellow,CELADON_MART_ELEVATOR,Centre commercial de Céladopole (ascenseur)
+red-blue-yellow,CELADON_MANSION_1F,Résidence de Céladopole (RdC)
+red-blue-yellow,CELADON_MANSION_2F,Résidence de Céladopole (1er étage)
+red-blue-yellow,CELADON_MANSION_3F,Résidence de Céladopole (2e étage)
+red-blue-yellow,CELADON_MANSION_ROOF,Résidence de Céladopole (toit)
+red-blue-yellow,CELADON_MANSION_ROOF_HOUSE,Résidence de Céladopole (maison sur le toit)
+red-blue-yellow,CELADON_POKECENTER,Centre Pokémon de Céladopole
+red-blue-yellow,CELADON_GYM,Arène de Céladopole
+red-blue-yellow,GAME_CORNER,Casino de Céladopole
+red-blue-yellow,CELADON_MART_5F,Centre commercial de Céladopole (4e étage)
+red-blue-yellow,GAME_CORNER_PRIZE_ROOM,Comptoir des lots du Casino
+red-blue-yellow,CELADON_DINER,Restaurant de Céladopole
+red-blue-yellow,CELADON_CHIEF_HOUSE,Maison du chef (Céladopole)
+red-blue-yellow,CELADON_HOTEL,Hôtel de Céladopole
+red-blue-yellow,LAVENDER_POKECENTER,Centre Pokémon de Lavanville
+red-blue-yellow,POKEMON_TOWER_1F,Tour Pokémon (RdC)
+red-blue-yellow,POKEMON_TOWER_2F,Tour Pokémon (1er étage)
+red-blue-yellow,POKEMON_TOWER_3F,Tour Pokémon (2e étage)
+red-blue-yellow,POKEMON_TOWER_4F,Tour Pokémon (3e étage)
+red-blue-yellow,POKEMON_TOWER_5F,Tour Pokémon (4e étage)
+red-blue-yellow,POKEMON_TOWER_6F,Tour Pokémon (5e étage)
+red-blue-yellow,POKEMON_TOWER_7F,Tour Pokémon (6e étage)
+red-blue-yellow,MR_FUJIS_HOUSE,Maison de M. Fuji
+red-blue-yellow,LAVENDER_MART,Boutique de Lavanville
+red-blue-yellow,LAVENDER_CUBONE_HOUSE,Maison de Lavanville (Osselait)
+red-blue-yellow,FUCHSIA_MART,Boutique de Parmanie
+red-blue-yellow,FUCHSIA_BILLS_GRANDPAS_HOUSE,Maison du grand-père de Léo
+red-blue-yellow,FUCHSIA_POKECENTER,Centre Pokémon de Parmanie
+red-blue-yellow,WARDENS_HOUSE,Maison du Gardien du Parc Safari
+red-blue-yellow,SAFARI_ZONE_GATE,Entrée du Parc Safari
+red-blue-yellow,FUCHSIA_GYM,Arène de Parmanie
+red-blue-yellow,FUCHSIA_MEETING_ROOM,Salle de réunion du Parc Safari
+red-blue-yellow,SEAFOAM_ISLANDS_B1F,Îles Écume (1er sous-sol)
+red-blue-yellow,SEAFOAM_ISLANDS_B2F,Îles Écume (2e sous-sol)
+red-blue-yellow,SEAFOAM_ISLANDS_B3F,Îles Écume (3e sous-sol)
+red-blue-yellow,SEAFOAM_ISLANDS_B4F,Îles Écume (4e sous-sol)
+red-blue-yellow,VERMILION_OLD_ROD_HOUSE,Maison du pêcheur de Carmin sur Mer (Canne)
+red-blue-yellow,FUCHSIA_GOOD_ROD_HOUSE,Maison du pêcheur de Parmanie (Super Canne)
+red-blue-yellow,POKEMON_MANSION_1F,Manoir Pokémon (RdC)
+red-blue-yellow,CINNABAR_GYM,Arène de Cramois'Île
+red-blue-yellow,CINNABAR_LAB,Labo Pokémon de Cramois'Île
+red-blue-yellow,CINNABAR_LAB_TRADE_ROOM,Labo Pokémon de Cramois'Île (salle d'échange)
+red-blue-yellow,CINNABAR_LAB_METRONOME_ROOM,Labo Pokémon de Cramois'Île (salle Métronome)
+red-blue-yellow,CINNABAR_LAB_FOSSIL_ROOM,Labo Pokémon de Cramois'Île (salle des fossiles)
+red-blue-yellow,CINNABAR_POKECENTER,Centre Pokémon de Cramois'Île
+red-blue-yellow,CINNABAR_MART,Boutique de Cramois'Île
+red-blue-yellow,INDIGO_PLATEAU_LOBBY,Plateau Indigo (hall)
+red-blue-yellow,COPYCATS_HOUSE_1F,Maison de Copieuse (RdC)
+red-blue-yellow,COPYCATS_HOUSE_2F,Maison de Copieuse (1er étage)
+red-blue-yellow,FIGHTING_DOJO,Dojo de Safrania
+red-blue-yellow,SAFFRON_GYM,Arène de Safrania
+red-blue-yellow,SAFFRON_PIDGEY_HOUSE,Maison de Safrania (Roucool)
+red-blue-yellow,SAFFRON_MART,Boutique de Safrania
+red-blue-yellow,SILPH_CO_1F,Sylphe SARL (RdC)
+red-blue-yellow,SAFFRON_POKECENTER,Centre Pokémon de Safrania
+red-blue-yellow,MR_PSYCHICS_HOUSE,Maison de M. Psy
+red-blue-yellow,ROUTE_15_GATE_1F,"Poste de contrôle (Route 15, RdC)"
+red-blue-yellow,ROUTE_15_GATE_2F,"Poste de contrôle (Route 15, 1er étage)"
+red-blue-yellow,ROUTE_16_GATE_1F,"Poste de contrôle (Route 16, RdC)"
+red-blue-yellow,ROUTE_16_GATE_2F,"Poste de contrôle (Route 16, 1er étage)"
+red-blue-yellow,ROUTE_16_FLY_HOUSE,Maison de la Route 16 (CS02 Vol)
+red-blue-yellow,ROUTE_12_SUPER_ROD_HOUSE,"Maison du pêcheur (Route 12, Méga Canne)"
+red-blue-yellow,ROUTE_18_GATE_1F,"Poste de contrôle (Route 18, RdC)"
+red-blue-yellow,ROUTE_18_GATE_2F,"Poste de contrôle (Route 18, 1er étage)"
+red-blue-yellow,SEAFOAM_ISLANDS_1F,Îles Écume (RdC)
+red-blue-yellow,ROUTE_22_GATE,Poste de contrôle (Route 22)
+red-blue-yellow,VICTORY_ROAD_2F,Route Victoire (1er étage)
+red-blue-yellow,ROUTE_12_GATE_2F,"Poste de contrôle (Route 12, 1er étage)"
+red-blue-yellow,VERMILION_TRADE_HOUSE,Maison d'échange de Carmin sur Mer
+red-blue-yellow,DIGLETTS_CAVE,Cave Taupiqueur
+red-blue-yellow,VICTORY_ROAD_3F,Route Victoire (2e étage)
+red-blue-yellow,ROCKET_HIDEOUT_B1F,Repaire Rocket (1er sous-sol)
+red-blue-yellow,ROCKET_HIDEOUT_B2F,Repaire Rocket (2e sous-sol)
+red-blue-yellow,ROCKET_HIDEOUT_B3F,Repaire Rocket (3e sous-sol)
+red-blue-yellow,ROCKET_HIDEOUT_B4F,Repaire Rocket (4e sous-sol)
+red-blue-yellow,ROCKET_HIDEOUT_ELEVATOR,Repaire Rocket (ascenseur)
+red-blue-yellow,SILPH_CO_2F,Sylphe SARL (1er étage)
+red-blue-yellow,SILPH_CO_3F,Sylphe SARL (2e étage)
+red-blue-yellow,SILPH_CO_4F,Sylphe SARL (3e étage)
+red-blue-yellow,SILPH_CO_5F,Sylphe SARL (4e étage)
+red-blue-yellow,SILPH_CO_6F,Sylphe SARL (5e étage)
+red-blue-yellow,SILPH_CO_7F,Sylphe SARL (6e étage)
+red-blue-yellow,SILPH_CO_8F,Sylphe SARL (7e étage)
+red-blue-yellow,POKEMON_MANSION_2F,Manoir Pokémon (1er étage)
+red-blue-yellow,POKEMON_MANSION_3F,Manoir Pokémon (2e étage)
+red-blue-yellow,POKEMON_MANSION_B1F,Manoir Pokémon (sous-sol)
+red-blue-yellow,SAFARI_ZONE_EAST,"Parc Safari (Zone 1, est)"
+red-blue-yellow,SAFARI_ZONE_NORTH,"Parc Safari (Zone 2, nord)"
+red-blue-yellow,SAFARI_ZONE_WEST,"Parc Safari (Zone 3, ouest)"
+red-blue-yellow,SAFARI_ZONE_CENTER,Parc Safari (centre)
+red-blue-yellow,SAFARI_ZONE_CENTER_REST_HOUSE,Parc Safari (maison de repos du centre)
+red-blue-yellow,SAFARI_ZONE_SECRET_HOUSE,Parc Safari (maison secrète)
+red-blue-yellow,SAFARI_ZONE_WEST_REST_HOUSE,Parc Safari (maison de repos de la zone 3)
+red-blue-yellow,SAFARI_ZONE_EAST_REST_HOUSE,Parc Safari (maison de repos de la zone 1)
+red-blue-yellow,SAFARI_ZONE_NORTH_REST_HOUSE,Parc Safari (maison de repos de la zone 2)
+red-blue-yellow,CERULEAN_CAVE_2F,Caverne Azurée (1er étage)
+red-blue-yellow,CERULEAN_CAVE_B1F,Caverne Azurée (sous-sol)
+red-blue-yellow,CERULEAN_CAVE_1F,Caverne Azurée (RdC)
+red-blue-yellow,NAME_RATERS_HOUSE,Maison de l'expert en surnoms
+red-blue-yellow,CERULEAN_BADGE_HOUSE,Maison d'Azuria (badges)
+red-blue-yellow,ROCK_TUNNEL_B1F,Grotte (sous-sol)
+red-blue-yellow,SILPH_CO_9F,Sylphe SARL (8e étage)
+red-blue-yellow,SILPH_CO_10F,Sylphe SARL (9e étage)
+red-blue-yellow,SILPH_CO_11F,Sylphe SARL (10e étage)
+red-blue-yellow,SILPH_CO_ELEVATOR,Sylphe SARL (ascenseur)
+red-blue-yellow,LORELEIS_ROOM,Salle d'Olga
+red-blue-yellow,BRUNOS_ROOM,Salle d'Aldo
+red-blue-yellow,AGATHAS_ROOM,Salle d'Agatha
+red-blue-yellow,SUMMER_BEACH_HOUSE,Maison de la plage (Route 19)
+gold-silver-crystal,JOHTO,Johto
+gold-silver-crystal,KANTO,Kanto
+gold-silver-crystal,OLIVINE_POKECENTER_1F,Centre Pokémon d'Oliville
+gold-silver-crystal,OLIVINE_GYM,Arène d'Oliville
+gold-silver-crystal,OLIVINE_TIMS_HOUSE,Maison d'Oliville (échange)
+gold-silver-crystal,OLIVINE_PUNISHMENT_SPEECH_HOUSE,Maison d'Oliville
+gold-silver-crystal,OLIVINE_GOOD_ROD_HOUSE,Maison du pêcheur d'Oliville (Super Canne)
+gold-silver-crystal,OLIVINE_CAFE,Café d'Oliville
+gold-silver-crystal,OLIVINE_MART,Boutique d'Oliville
+gold-silver-crystal,ROUTE_38_ECRUTEAK_GATE,Poste de contrôle (Route 38)
+gold-silver-crystal,ROUTE_39_BARN,Étable (Route 39)
+gold-silver-crystal,ROUTE_39_FARMHOUSE,Ferme (Route 39)
+gold-silver-crystal,ROUTE_38,Route 38
+gold-silver-crystal,ROUTE_39,Route 39
+gold-silver-crystal,OLIVINE_CITY,Oliville
+gold-silver-crystal,MAHOGANY_RED_GYARADOS_SPEECH_HOUSE,Maison d'Acajou (Léviator rouge)
+gold-silver-crystal,MAHOGANY_GYM,Arène d'Acajou
+gold-silver-crystal,MAHOGANY_POKECENTER_1F,Centre Pokémon d'Acajou
+gold-silver-crystal,ROUTE_42_ECRUTEAK_GATE,Poste de contrôle (Route 42)
+gold-silver-crystal,ROUTE_42,Route 42
+gold-silver-crystal,ROUTE_44,Route 44
+gold-silver-crystal,MAHOGANY_TOWN,Acajou
+gold-silver-crystal,SPROUT_TOWER_1F,Tour Chétiflor (RdC)
+gold-silver-crystal,SPROUT_TOWER_2F,Tour Chétiflor (1er étage)
+gold-silver-crystal,SPROUT_TOWER_3F,Tour Chétiflor (2e étage)
+gold-silver-crystal,TIN_TOWER_1F,Tour Carillon (RdC)
+gold-silver-crystal,TIN_TOWER_2F,Tour Carillon (1er étage)
+gold-silver-crystal,TIN_TOWER_3F,Tour Carillon (2e étage)
+gold-silver-crystal,TIN_TOWER_4F,Tour Carillon (3e étage)
+gold-silver-crystal,TIN_TOWER_5F,Tour Carillon (4e étage)
+gold-silver-crystal,TIN_TOWER_6F,Tour Carillon (5e étage)
+gold-silver-crystal,TIN_TOWER_7F,Tour Carillon (6e étage)
+gold-silver-crystal,TIN_TOWER_8F,Tour Carillon (7e étage)
+gold-silver-crystal,TIN_TOWER_9F,Tour Carillon (8e étage)
+gold-silver-crystal,BURNED_TOWER_1F,Tour Cendrée (RdC)
+gold-silver-crystal,BURNED_TOWER_B1F,Tour Cendrée (sous-sol)
+gold-silver-crystal,NATIONAL_PARK,Parc Naturel
+gold-silver-crystal,NATIONAL_PARK_BUG_CONTEST,Parc Naturel (Concours de capture d'insectes)
+gold-silver-crystal,RADIO_TOWER_1F,Tour Radio de Doublonville (RdC)
+gold-silver-crystal,RADIO_TOWER_2F,Tour Radio de Doublonville (1er étage)
+gold-silver-crystal,RADIO_TOWER_3F,Tour Radio de Doublonville (2e étage)
+gold-silver-crystal,RADIO_TOWER_4F,Tour Radio de Doublonville (3e étage)
+gold-silver-crystal,RADIO_TOWER_5F,Tour Radio de Doublonville (4e étage)
+gold-silver-crystal,RUINS_OF_ALPH_OUTSIDE,Ruines d'Alpha (extérieur)
+gold-silver-crystal,RUINS_OF_ALPH_HO_OH_CHAMBER,Ruines d'Alpha (salle de Ho-Oh)
+gold-silver-crystal,RUINS_OF_ALPH_KABUTO_CHAMBER,Ruines d'Alpha (salle de Kabuto)
+gold-silver-crystal,RUINS_OF_ALPH_OMANYTE_CHAMBER,Ruines d'Alpha (salle d'Amonita)
+gold-silver-crystal,RUINS_OF_ALPH_AERODACTYL_CHAMBER,Ruines d'Alpha (salle de Ptéra)
+gold-silver-crystal,RUINS_OF_ALPH_INNER_CHAMBER,Ruines d'Alpha (salle intérieure)
+gold-silver-crystal,RUINS_OF_ALPH_RESEARCH_CENTER,Ruines d'Alpha (centre de recherche)
+gold-silver-crystal,UNION_CAVE_1F,Caves Jumelles (RdC)
+gold-silver-crystal,UNION_CAVE_B1F,Caves Jumelles (1er sous-sol)
+gold-silver-crystal,UNION_CAVE_B2F,Caves Jumelles (2e sous-sol)
+gold-silver-crystal,SLOWPOKE_WELL_B1F,Puits Ramoloss (1er sous-sol)
+gold-silver-crystal,SLOWPOKE_WELL_B2F,Puits Ramoloss (2e sous-sol)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_1F,Phare d'Oliville (RdC)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_2F,Phare d'Oliville (1er étage)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_3F,Phare d'Oliville (2e étage)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_4F,Phare d'Oliville (3e étage)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_5F,Phare d'Oliville (4e étage)
+gold-silver-crystal,OLIVINE_LIGHTHOUSE_6F,Phare d'Oliville (5e étage)
+gold-silver-crystal,MAHOGANY_MART_1F,Boutique de souvenirs d'Acajou
+gold-silver-crystal,TEAM_ROCKET_BASE_B1F,Repaire Rocket d'Acajou (1er sous-sol)
+gold-silver-crystal,TEAM_ROCKET_BASE_B2F,Repaire Rocket d'Acajou (2e sous-sol)
+gold-silver-crystal,TEAM_ROCKET_BASE_B3F,Repaire Rocket d'Acajou (3e sous-sol)
+gold-silver-crystal,ILEX_FOREST,Bois aux Chênes
+gold-silver-crystal,GOLDENROD_UNDERGROUND,Souterrain de Doublonville
+gold-silver-crystal,GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES,Souterrain de Doublonville (salle des interrupteurs)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_B1F,Centre commercial de Doublonville (sous-sol)
+gold-silver-crystal,GOLDENROD_UNDERGROUND_WAREHOUSE,Souterrain de Doublonville (entrepôt)
+gold-silver-crystal,MOUNT_MORTAR_1F_OUTSIDE,"Mont Creuset (RdC, extérieur)"
+gold-silver-crystal,MOUNT_MORTAR_1F_INSIDE,"Mont Creuset (RdC, intérieur)"
+gold-silver-crystal,MOUNT_MORTAR_2F_INSIDE,Mont Creuset (1er étage)
+gold-silver-crystal,MOUNT_MORTAR_B1F,Mont Creuset (sous-sol)
+gold-silver-crystal,ICE_PATH_1F,Route de Glace (RdC)
+gold-silver-crystal,ICE_PATH_B1F,Route de Glace (1er sous-sol)
+gold-silver-crystal,ICE_PATH_B2F_MAHOGANY_SIDE,"Route de Glace (2e sous-sol, côté Acajou)"
+gold-silver-crystal,ICE_PATH_B2F_BLACKTHORN_SIDE,"Route de Glace (2e sous-sol, côté Ébènelle)"
+gold-silver-crystal,ICE_PATH_B3F,Route de Glace (3e sous-sol)
+gold-silver-crystal,WHIRL_ISLAND_NW,Tourb'Îles (nord-ouest)
+gold-silver-crystal,WHIRL_ISLAND_NE,Tourb'Îles (nord-est)
+gold-silver-crystal,WHIRL_ISLAND_SW,Tourb'Îles (sud-ouest)
+gold-silver-crystal,WHIRL_ISLAND_CAVE,Tourb'Îles (grotte)
+gold-silver-crystal,WHIRL_ISLAND_SE,Tourb'Îles (sud-est)
+gold-silver-crystal,WHIRL_ISLAND_B1F,Tourb'Îles (1er sous-sol)
+gold-silver-crystal,WHIRL_ISLAND_B2F,Tourb'Îles (2e sous-sol)
+gold-silver-crystal,WHIRL_ISLAND_LUGIA_CHAMBER,Tourb'Îles (antre de Lugia)
+gold-silver-crystal,SILVER_CAVE_ROOM_1,Mont Argenté (salle 1)
+gold-silver-crystal,SILVER_CAVE_ROOM_2,Mont Argenté (salle 2)
+gold-silver-crystal,SILVER_CAVE_ROOM_3,Mont Argenté (sommet)
+gold-silver-crystal,SILVER_CAVE_ITEM_ROOMS,Mont Argenté (salles des objets)
+gold-silver-crystal,DARK_CAVE_VIOLET_ENTRANCE,Antre Noir (entrée de Mauville)
+gold-silver-crystal,DARK_CAVE_BLACKTHORN_ENTRANCE,Antre Noir (entrée d'Ébènelle)
+gold-silver-crystal,DRAGONS_DEN_1F,Antre du Dragon (entrée)
+gold-silver-crystal,DRAGONS_DEN_B1F,Antre du Dragon
+gold-silver-crystal,TOHJO_FALLS,Chutes Tohjo
+gold-silver-crystal,DIGLETTS_CAVE,Cave Taupiqueur
+gold-silver-crystal,MOUNT_MOON,Mont Sélénite
+gold-silver-crystal,UNDERGROUND_PATH,Souterrain
+gold-silver-crystal,ROCK_TUNNEL_1F,Grotte (RdC)
+gold-silver-crystal,ROCK_TUNNEL_B1F,Grotte (sous-sol)
+gold-silver-crystal,VICTORY_ROAD,Route Victoire
+gold-silver-crystal,ECRUTEAK_TIN_TOWER_ENTRANCE,Entrée de la Tour Carillon
+gold-silver-crystal,ECRUTEAK_TIN_TOWER_BACK_ENTRANCE,Entrée arrière de la Tour Carillon
+gold-silver-crystal,ECRUTEAK_POKECENTER_1F,Centre Pokémon de Rosalia
+gold-silver-crystal,ECRUTEAK_LUGIA_SPEECH_HOUSE,Maison de Rosalia (Lugia)
+gold-silver-crystal,DANCE_THEATER,Théâtre de danse de Rosalia
+gold-silver-crystal,ECRUTEAK_MART,Boutique de Rosalia
+gold-silver-crystal,ECRUTEAK_GYM,Arène de Rosalia
+gold-silver-crystal,ECRUTEAK_ITEMFINDER_HOUSE,Maison de Rosalia (Cherch'Objet)
+gold-silver-crystal,ECRUTEAK_CITY,Rosalia
+gold-silver-crystal,BLACKTHORN_GYM_1F,Arène d'Ébènelle (RdC)
+gold-silver-crystal,BLACKTHORN_GYM_2F,Arène d'Ébènelle (1er étage)
+gold-silver-crystal,BLACKTHORN_DRAGON_SPEECH_HOUSE,Maison d'Ébènelle (dragons)
+gold-silver-crystal,BLACKTHORN_EMYS_HOUSE,Maison d'Ébènelle (échange)
+gold-silver-crystal,BLACKTHORN_MART,Boutique d'Ébènelle
+gold-silver-crystal,BLACKTHORN_POKECENTER_1F,Centre Pokémon d'Ébènelle
+gold-silver-crystal,MOVE_DELETERS_HOUSE,Maison de l'Effaceur d'attaques
+gold-silver-crystal,ROUTE_45,Route 45
+gold-silver-crystal,ROUTE_46,Route 46
+gold-silver-crystal,BLACKTHORN_CITY,Ébènelle
+gold-silver-crystal,CINNABAR_POKECENTER_1F,Centre Pokémon de Cramois'Île
+gold-silver-crystal,ROUTE_19_FUCHSIA_GATE,Poste de contrôle (Route 19)
+gold-silver-crystal,SEAFOAM_GYM,Arène des Îles Écume
+gold-silver-crystal,ROUTE_19,Route 19
+gold-silver-crystal,ROUTE_20,Route 20
+gold-silver-crystal,ROUTE_21,Route 21
+gold-silver-crystal,CINNABAR_ISLAND,Cramois'Île
+gold-silver-crystal,CERULEAN_GYM_BADGE_SPEECH_HOUSE,Maison d'Azuria (badges)
+gold-silver-crystal,CERULEAN_POLICE_STATION,Poste de police d'Azuria
+gold-silver-crystal,CERULEAN_TRADE_SPEECH_HOUSE,Maison d'Azuria (échanges)
+gold-silver-crystal,CERULEAN_POKECENTER_1F,Centre Pokémon d'Azuria
+gold-silver-crystal,CERULEAN_GYM,Arène d'Azuria
+gold-silver-crystal,CERULEAN_MART,Boutique d'Azuria
+gold-silver-crystal,ROUTE_10_POKECENTER_1F,Centre Pokémon (Route 10)
+gold-silver-crystal,POWER_PLANT,Centrale
+gold-silver-crystal,BILLS_HOUSE,Cottage de Léo
+gold-silver-crystal,ROUTE_4,Route 4
+gold-silver-crystal,ROUTE_9,Route 9
+gold-silver-crystal,ROUTE_10_NORTH,Route 10 (nord)
+gold-silver-crystal,ROUTE_24,Route 24
+gold-silver-crystal,ROUTE_25,Route 25
+gold-silver-crystal,CERULEAN_CITY,Azuria
+gold-silver-crystal,AZALEA_POKECENTER_1F,Centre Pokémon d'Écorcia
+gold-silver-crystal,CHARCOAL_KILN,Charbonnerie d'Écorcia
+gold-silver-crystal,AZALEA_MART,Boutique d'Écorcia
+gold-silver-crystal,KURTS_HOUSE,Maison de Fargas
+gold-silver-crystal,AZALEA_GYM,Arène d'Écorcia
+gold-silver-crystal,ROUTE_33,Route 33
+gold-silver-crystal,AZALEA_TOWN,Écorcia
+gold-silver-crystal,LAKE_OF_RAGE_HIDDEN_POWER_HOUSE,Maison du Lac Colère (Puissance Cachée)
+gold-silver-crystal,LAKE_OF_RAGE_MAGIKARP_HOUSE,Maison du Lac Colère (Magicarpe)
+gold-silver-crystal,ROUTE_43_MAHOGANY_GATE,"Poste de contrôle (Route 43, côté Acajou)"
+gold-silver-crystal,ROUTE_43_GATE,Poste de contrôle (Route 43)
+gold-silver-crystal,ROUTE_43,Route 43
+gold-silver-crystal,LAKE_OF_RAGE,Lac Colère
+gold-silver-crystal,ROUTE_32,Route 32
+gold-silver-crystal,ROUTE_35,Route 35
+gold-silver-crystal,ROUTE_36,Route 36
+gold-silver-crystal,ROUTE_37,Route 37
+gold-silver-crystal,VIOLET_CITY,Mauville
+gold-silver-crystal,VIOLET_MART,Boutique de Mauville
+gold-silver-crystal,VIOLET_GYM,Arène de Mauville
+gold-silver-crystal,EARLS_POKEMON_ACADEMY,École Pokémon de Mauville
+gold-silver-crystal,VIOLET_NICKNAME_SPEECH_HOUSE,Maison de Mauville (surnoms)
+gold-silver-crystal,VIOLET_POKECENTER_1F,Centre Pokémon de Mauville
+gold-silver-crystal,VIOLET_KYLES_HOUSE,Maison de Mauville (échange)
+gold-silver-crystal,ROUTE_32_RUINS_OF_ALPH_GATE,"Poste de contrôle (Route 32, Ruines d'Alpha)"
+gold-silver-crystal,ROUTE_32_POKECENTER_1F,Centre Pokémon (Route 32)
+gold-silver-crystal,ROUTE_35_GOLDENROD_GATE,"Poste de contrôle (Route 35, côté Doublonville)"
+gold-silver-crystal,ROUTE_35_NATIONAL_PARK_GATE,"Poste de contrôle (Route 35, Parc Naturel)"
+gold-silver-crystal,ROUTE_36_RUINS_OF_ALPH_GATE,"Poste de contrôle (Route 36, Ruines d'Alpha)"
+gold-silver-crystal,ROUTE_36_NATIONAL_PARK_GATE,"Poste de contrôle (Route 36, Parc Naturel)"
+gold-silver-crystal,ROUTE_34,Route 34
+gold-silver-crystal,GOLDENROD_CITY,Doublonville
+gold-silver-crystal,GOLDENROD_GYM,Arène de Doublonville
+gold-silver-crystal,GOLDENROD_BIKE_SHOP,Magasin de vélos de Doublonville
+gold-silver-crystal,GOLDENROD_HAPPINESS_RATER,Maison de Doublonville (affection)
+gold-silver-crystal,BILLS_FAMILYS_HOUSE,Maison de la famille de Léo
+gold-silver-crystal,GOLDENROD_MAGNET_TRAIN_STATION,Gare de Doublonville
+gold-silver-crystal,GOLDENROD_FLOWER_SHOP,Fleuriste de Doublonville
+gold-silver-crystal,GOLDENROD_POKECENTER_1F,Centre Pokémon de Doublonville
+gold-silver-crystal,GOLDENROD_PP_SPEECH_HOUSE,Maison de Doublonville (PP)
+gold-silver-crystal,GOLDENROD_NAME_RATER,Maison de l'expert en surnoms (Doublonville)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_1F,Centre commercial de Doublonville (RdC)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_2F,Centre commercial de Doublonville (1er étage)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_3F,Centre commercial de Doublonville (2e étage)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_4F,Centre commercial de Doublonville (3e étage)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_5F,Centre commercial de Doublonville (4e étage)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_6F,Centre commercial de Doublonville (5e étage)
+gold-silver-crystal,GOLDENROD_DEPT_STORE_ELEVATOR,Centre commercial de Doublonville (ascenseur)
+gold-silver-crystal,GOLDENROD_GAME_CORNER,Casino de Doublonville
+gold-silver-crystal,ILEX_FOREST_AZALEA_GATE,Poste de contrôle du Bois aux Chênes (côté Écorcia)
+gold-silver-crystal,ROUTE_34_ILEX_FOREST_GATE,Poste de contrôle du Bois aux Chênes (Route 34)
+gold-silver-crystal,DAY_CARE,Pension Pokémon (Route 34)
+gold-silver-crystal,ROUTE_6,Route 6
+gold-silver-crystal,ROUTE_11,Route 11
+gold-silver-crystal,VERMILION_CITY,Carmin sur Mer
+gold-silver-crystal,VERMILION_FISHING_SPEECH_HOUSE,Maison de Carmin sur Mer (pêche)
+gold-silver-crystal,VERMILION_POKECENTER_1F,Centre Pokémon de Carmin sur Mer
+gold-silver-crystal,POKEMON_FAN_CLUB,Club des fans de Pokémon
+gold-silver-crystal,VERMILION_MAGNET_TRAIN_SPEECH_HOUSE,Maison de Carmin sur Mer (Train Magnétique)
+gold-silver-crystal,VERMILION_MART,Boutique de Carmin sur Mer
+gold-silver-crystal,VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE,Maison de Carmin sur Mer (Cave Taupiqueur)
+gold-silver-crystal,VERMILION_GYM,Arène de Carmin sur Mer
+gold-silver-crystal,ROUTE_6_SAFFRON_GATE,Poste de contrôle (Route 6)
+gold-silver-crystal,ROUTE_6_UNDERGROUND_PATH_ENTRANCE,Souterrain (entrée de la Route 6)
+gold-silver-crystal,ROUTE_1,Route 1
+gold-silver-crystal,PALLET_TOWN,Bourg Palette
+gold-silver-crystal,REDS_HOUSE_1F,Maison de Red (RdC)
+gold-silver-crystal,REDS_HOUSE_2F,Maison de Red (1er étage)
+gold-silver-crystal,BLUES_HOUSE,Maison de Blue
+gold-silver-crystal,OAKS_LAB,Labo du Prof. Chen
+gold-silver-crystal,ROUTE_3,Route 3
+gold-silver-crystal,PEWTER_CITY,Argenta
+gold-silver-crystal,PEWTER_NIDORAN_SPEECH_HOUSE,Maison d'Argenta (Nidoran♂)
+gold-silver-crystal,PEWTER_GYM,Arène d'Argenta
+gold-silver-crystal,PEWTER_MART,Boutique d'Argenta
+gold-silver-crystal,PEWTER_POKECENTER_1F,Centre Pokémon d'Argenta
+gold-silver-crystal,PEWTER_SNOOZE_SPEECH_HOUSE,Maison d'Argenta
+gold-silver-crystal,OLIVINE_PORT,Port d'Oliville
+gold-silver-crystal,VERMILION_PORT,Port de Carmin sur Mer
+gold-silver-crystal,FAST_SHIP_1F,M/S Aquaria (pont)
+gold-silver-crystal,FAST_SHIP_CABINS_NNW_NNE_NE,M/S Aquaria (cabines nord)
+gold-silver-crystal,FAST_SHIP_CABINS_SW_SSW_NW,M/S Aquaria (cabines ouest)
+gold-silver-crystal,FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,M/S Aquaria (cabines est et cabine du capitaine)
+gold-silver-crystal,FAST_SHIP_B1F,M/S Aquaria (cale)
+gold-silver-crystal,OLIVINE_PORT_PASSAGE,Port d'Oliville (passage)
+gold-silver-crystal,VERMILION_PORT_PASSAGE,Port de Carmin sur Mer (passage)
+gold-silver-crystal,MOUNT_MOON_SQUARE,Place du Mont Sélénite
+gold-silver-crystal,MOUNT_MOON_GIFT_SHOP,Boutique du Mont Sélénite
+gold-silver-crystal,TIN_TOWER_ROOF,Tour Carillon (toit)
+gold-silver-crystal,ROUTE_23,Route 23
+gold-silver-crystal,INDIGO_PLATEAU_POKECENTER_1F,Plateau Indigo (Centre Pokémon)
+gold-silver-crystal,WILLS_ROOM,Salle de Clément
+gold-silver-crystal,KOGAS_ROOM,Salle de Koga
+gold-silver-crystal,BRUNOS_ROOM,Salle d'Aldo
+gold-silver-crystal,KARENS_ROOM,Salle de Marion
+gold-silver-crystal,LANCES_ROOM,Salle de Peter
+gold-silver-crystal,HALL_OF_FAME,Panthéon
+gold-silver-crystal,ROUTE_13,Route 13
+gold-silver-crystal,ROUTE_14,Route 14
+gold-silver-crystal,ROUTE_15,Route 15
+gold-silver-crystal,ROUTE_18,Route 18
+gold-silver-crystal,FUCHSIA_CITY,Parmanie
+gold-silver-crystal,FUCHSIA_MART,Boutique de Parmanie
+gold-silver-crystal,SAFARI_ZONE_MAIN_OFFICE,Bureau du Parc Safari
+gold-silver-crystal,FUCHSIA_GYM,Arène de Parmanie
+gold-silver-crystal,BILLS_OLDER_SISTERS_HOUSE,Maison de la sœur de Léo
+gold-silver-crystal,FUCHSIA_POKECENTER_1F,Centre Pokémon de Parmanie
+gold-silver-crystal,SAFARI_ZONE_WARDENS_HOME,Maison du Gardien du Parc Safari
+gold-silver-crystal,ROUTE_15_FUCHSIA_GATE,Poste de contrôle (Route 15)
+gold-silver-crystal,ROUTE_8,Route 8
+gold-silver-crystal,ROUTE_12,Route 12
+gold-silver-crystal,ROUTE_10_SOUTH,Route 10 (sud)
+gold-silver-crystal,LAVENDER_TOWN,Lavanville
+gold-silver-crystal,LAVENDER_POKECENTER_1F,Centre Pokémon de Lavanville
+gold-silver-crystal,MR_FUJIS_HOUSE,Maison de M. Fuji
+gold-silver-crystal,LAVENDER_SPEECH_HOUSE,Maison de Lavanville
+gold-silver-crystal,LAVENDER_NAME_RATER,Maison de l'expert en surnoms (Lavanville)
+gold-silver-crystal,LAVENDER_MART,Boutique de Lavanville
+gold-silver-crystal,SOUL_HOUSE,Maison des Âmes
+gold-silver-crystal,LAV_RADIO_TOWER_1F,Tour Radio de Kanto (RdC)
+gold-silver-crystal,ROUTE_8_SAFFRON_GATE,Poste de contrôle (Route 8)
+gold-silver-crystal,ROUTE_12_SUPER_ROD_HOUSE,"Maison du pêcheur (Route 12, Méga Canne)"
+gold-silver-crystal,ROUTE_28,Route 28
+gold-silver-crystal,SILVER_CAVE_OUTSIDE,Mont Argenté (extérieur)
+gold-silver-crystal,SILVER_CAVE_POKECENTER_1F,Centre Pokémon du Mont Argenté
+gold-silver-crystal,ROUTE_28_STEEL_WING_HOUSE,Maison de la Route 28 (Aile d'Acier)
+gold-silver-crystal,POKECENTER_2F,Centre Pokémon (1er étage)
+gold-silver-crystal,TRADE_CENTER,Club Link (salle d'échange)
+gold-silver-crystal,COLOSSEUM,Club Link (Colisée)
+gold-silver-crystal,TIME_CAPSULE,Club Link (Capsule Temporelle)
+gold-silver-crystal,ROUTE_7,Route 7
+gold-silver-crystal,ROUTE_16,Route 16
+gold-silver-crystal,ROUTE_17,Route 17
+gold-silver-crystal,CELADON_CITY,Céladopole
+gold-silver-crystal,CELADON_DEPT_STORE_1F,Centre commercial de Céladopole (RdC)
+gold-silver-crystal,CELADON_DEPT_STORE_2F,Centre commercial de Céladopole (1er étage)
+gold-silver-crystal,CELADON_DEPT_STORE_3F,Centre commercial de Céladopole (2e étage)
+gold-silver-crystal,CELADON_DEPT_STORE_4F,Centre commercial de Céladopole (3e étage)
+gold-silver-crystal,CELADON_DEPT_STORE_5F,Centre commercial de Céladopole (4e étage)
+gold-silver-crystal,CELADON_DEPT_STORE_6F,Centre commercial de Céladopole (5e étage)
+gold-silver-crystal,CELADON_DEPT_STORE_ELEVATOR,Centre commercial de Céladopole (ascenseur)
+gold-silver-crystal,CELADON_MANSION_1F,Résidence de Céladopole (RdC)
+gold-silver-crystal,CELADON_MANSION_2F,Résidence de Céladopole (1er étage)
+gold-silver-crystal,CELADON_MANSION_3F,Résidence de Céladopole (2e étage)
+gold-silver-crystal,CELADON_MANSION_ROOF,Résidence de Céladopole (toit)
+gold-silver-crystal,CELADON_MANSION_ROOF_HOUSE,Résidence de Céladopole (maison sur le toit)
+gold-silver-crystal,CELADON_POKECENTER_1F,Centre Pokémon de Céladopole
+gold-silver-crystal,CELADON_GAME_CORNER,Casino de Céladopole
+gold-silver-crystal,CELADON_GAME_CORNER_PRIZE_ROOM,Comptoir des lots du Casino de Céladopole
+gold-silver-crystal,CELADON_GYM,Arène de Céladopole
+gold-silver-crystal,CELADON_CAFE,Café de Céladopole
+gold-silver-crystal,ROUTE_16_FUCHSIA_SPEECH_HOUSE,Maison de la Route 16
+gold-silver-crystal,ROUTE_16_GATE,Poste de contrôle (Route 16)
+gold-silver-crystal,ROUTE_7_SAFFRON_GATE,Poste de contrôle (Route 7)
+gold-silver-crystal,ROUTE_17_ROUTE_18_GATE,Poste de contrôle (Routes 17 et 18)
+gold-silver-crystal,ROUTE_40,Chenal 40
+gold-silver-crystal,ROUTE_41,Chenal 41
+gold-silver-crystal,CIANWOOD_CITY,Irisia
+gold-silver-crystal,MANIAS_HOUSE,Maison d'Irisia (Caratroc)
+gold-silver-crystal,CIANWOOD_GYM,Arène d'Irisia
+gold-silver-crystal,CIANWOOD_POKECENTER_1F,Centre Pokémon d'Irisia
+gold-silver-crystal,CIANWOOD_PHARMACY,Pharmacie d'Irisia
+gold-silver-crystal,CIANWOOD_PHOTO_STUDIO,Studio photo d'Irisia
+gold-silver-crystal,CIANWOOD_LUGIA_SPEECH_HOUSE,Maison d'Irisia (Lugia)
+gold-silver-crystal,ROUTE_2,Route 2
+gold-silver-crystal,ROUTE_22,Route 22
+gold-silver-crystal,VIRIDIAN_CITY,Jadielle
+gold-silver-crystal,VIRIDIAN_GYM,Arène de Jadielle
+gold-silver-crystal,VIRIDIAN_NICKNAME_SPEECH_HOUSE,Maison de Jadielle (surnoms)
+gold-silver-crystal,TRAINER_HOUSE_1F,Maison des Dresseurs (RdC)
+gold-silver-crystal,TRAINER_HOUSE_B1F,Maison des Dresseurs (sous-sol)
+gold-silver-crystal,VIRIDIAN_MART,Boutique de Jadielle
+gold-silver-crystal,VIRIDIAN_POKECENTER_1F,Centre Pokémon de Jadielle
+gold-silver-crystal,ROUTE_2_NUGGET_HOUSE,Maison de la Route 2 (Pépite)
+gold-silver-crystal,ROUTE_2_GATE,Poste de contrôle (Route 2)
+gold-silver-crystal,VICTORY_ROAD_GATE,Porte de la Route Victoire
+gold-silver-crystal,ROUTE_26,Route 26
+gold-silver-crystal,ROUTE_27,Route 27
+gold-silver-crystal,ROUTE_29,Route 29
+gold-silver-crystal,NEW_BARK_TOWN,Bourg Geon
+gold-silver-crystal,ELMS_LAB,Labo du Prof. Orme
+gold-silver-crystal,PLAYERS_HOUSE_1F,Maison du joueur (RdC)
+gold-silver-crystal,PLAYERS_HOUSE_2F,Maison du joueur (1er étage)
+gold-silver-crystal,PLAYERS_NEIGHBORS_HOUSE,Maison du voisin (Bourg Geon)
+gold-silver-crystal,ELMS_HOUSE,Maison du Prof. Orme
+gold-silver-crystal,ROUTE_26_HEAL_HOUSE,Maison de la Route 26 (repos)
+gold-silver-crystal,DAY_OF_WEEK_SIBLINGS_HOUSE,Maison de la Route 26 (jours de la semaine)
+gold-silver-crystal,ROUTE_27_SANDSTORM_HOUSE,Maison de la Route 27 (Tempête de Sable)
+gold-silver-crystal,ROUTE_29_ROUTE_46_GATE,Poste de contrôle (Routes 29 et 46)
+gold-silver-crystal,ROUTE_5,Route 5
+gold-silver-crystal,SAFFRON_CITY,Safrania
+gold-silver-crystal,FIGHTING_DOJO,Dojo de Safrania
+gold-silver-crystal,SAFFRON_GYM,Arène de Safrania
+gold-silver-crystal,SAFFRON_MART,Boutique de Safrania
+gold-silver-crystal,SAFFRON_POKECENTER_1F,Centre Pokémon de Safrania
+gold-silver-crystal,MR_PSYCHICS_HOUSE,Maison de M. Psy
+gold-silver-crystal,SAFFRON_MAGNET_TRAIN_STATION,Gare de Safrania
+gold-silver-crystal,SILPH_CO_1F,Sylphe SARL (RdC)
+gold-silver-crystal,COPYCATS_HOUSE_1F,Maison de Copieuse (RdC)
+gold-silver-crystal,COPYCATS_HOUSE_2F,Maison de Copieuse (1er étage)
+gold-silver-crystal,ROUTE_5_UNDERGROUND_PATH_ENTRANCE,Souterrain (entrée de la Route 5)
+gold-silver-crystal,ROUTE_5_SAFFRON_GATE,Poste de contrôle (Route 5)
+gold-silver-crystal,ROUTE_5_CLEANSE_TAG_HOUSE,Maison de la Route 5
+gold-silver-crystal,ROUTE_30,Route 30
+gold-silver-crystal,ROUTE_31,Route 31
+gold-silver-crystal,CHERRYGROVE_CITY,Ville Griotte
+gold-silver-crystal,CHERRYGROVE_MART,Boutique de Ville Griotte
+gold-silver-crystal,CHERRYGROVE_POKECENTER_1F,Centre Pokémon de Ville Griotte
+gold-silver-crystal,CHERRYGROVE_GYM_SPEECH_HOUSE,Maison de Ville Griotte (arènes)
+gold-silver-crystal,GUIDE_GENTS_HOUSE,Maison du guide (Ville Griotte)
+gold-silver-crystal,CHERRYGROVE_EVOLUTION_SPEECH_HOUSE,Maison de Ville Griotte (évolution)
+gold-silver-crystal,ROUTE_30_BERRY_HOUSE,Maison de la Route 30 (Baies)
+gold-silver-crystal,MR_POKEMONS_HOUSE,Maison de M. Pokémon
+gold-silver-crystal,ROUTE_31_VIOLET_GATE,Poste de contrôle (Route 31)

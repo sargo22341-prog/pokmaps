@@ -63,6 +63,13 @@ class DatabaseBuilder:
 
     # --- Référentiels ---------------------------------------------------------
 
+    def game_of(self, version_group_id: int) -> Game:
+        """Jeu configuré du groupe de versions `version_group_id`."""
+        for game, vg in zip(self.games, self.vg_ids, strict=True):
+            if vg == version_group_id:
+                return game
+        raise ValueError(f"Groupe de versions non configuré : {version_group_id}")
+
     @cached_property
     def species(self) -> dict[int, dict[str, str]]:
         """Espèces disponibles jusqu'à la génération la plus récente des jeux configurés."""
@@ -175,10 +182,14 @@ class DatabaseBuilder:
         )
 
     def type_table(self) -> list[tuple]:
+        """Types des Pokémon et des attaques : ceux de type_rows, plus les types hors du tableau des types qu'une
+        attaque des jeux configurés emploie (le type « ??? » de Malédiction en 2e génération)."""
         names = self.api.names("type_names", "type_id")
+        types = self.api.by_id("types")
+        rows = {**self.type_rows, **{type_id: types[type_id] for type_id in self.moves.types_outside_the_chart}}
         return [
             (type_id, row["identifier"], names[type_id], int(row["generation_id"]))
-            for type_id, row in sorted(self.type_rows.items())
+            for type_id, row in sorted(rows.items())
         ]
 
     def type_efficacy_table(self) -> list[tuple]:

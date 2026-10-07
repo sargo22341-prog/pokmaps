@@ -1,12 +1,13 @@
-"""Fonctions partagees pour lire les sources texte des desassemblages pret."""
+"""Fonctions partagées pour lire les sources texte des désassemblages pret."""
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 COMMENT = re.compile(r";.*$")
-_IF_DEF = re.compile(r"^IF DEF\((\w+)\)$")
+_IF_DEF = re.compile(r"^(?:IF|ELIF) DEF\((\w+)\)$", re.IGNORECASE)
 
 
 def source_lines(path: Path) -> list[str]:
@@ -24,29 +25,56 @@ def annotated_lines(path: Path) -> list[tuple[str, str]]:
     return result
 
 
-def conditional_lines(path: Path, defined: frozenset[str]) -> list[str]:
-    """Lignes d'un fichier dont les blocs IF DEF(…) / ELSE / ENDC sont résolus pour les symboles `defined`.
+@dataclass
+class _Branch:
+    """Bloc IF en cours : sa branche courante est-elle assemblée, et une branche précédente l'a-t-elle été ?"""
 
-    pokered assemble Rouge et Bleu depuis les mêmes sources : IF DEF(_RED) garde ce qui est propre à Rouge."""
-    result: list[str] = []
-    active: list[bool] = []
-    for line in source_lines(path):
-        if match := _IF_DEF.match(line):
-            active.append(match.group(1) in defined)
-        elif line.startswith("IF "):
-            raise ValueError(f"{path.name} : condition non prise en charge : {line}")
-        elif line in ("ELSE", "ENDC"):
-            if not active:
+    active: bool
+    taken: bool
+
+
+def conditional_lines(path: Path, defined: frozenset[str]) -> list[str]:
+    """Lignes d'un fichier dont les blocs IF DEF(…) / ELIF DEF(…) / ELSE / ENDC sont résolus pour les symboles
+    `defined` ; une autre forme de condition arrête la lecture.
+
+    pret assemble plusieurs versions depuis les mêmes sources : IF DEF(_RED) garde ce qui est propre à Rouge,
+    IF DEF(_GOLD) … ELIF DEF(_SILVER) choisit entre Or et Argent. Les mots-clés s'écrivent aussi en minuscules."""
+    return [code for code, _ in conditional_annotated_lines(path, defined)]
+
+
+def conditional_annotated_lines(path: Path, defined: frozenset[str]) -> list[tuple[str, str]]:
+    """Comme `conditional_lines`, chaque ligne avec son commentaire de fin de ligne (`annotated_lines`)."""
+    result: list[tuple[str, str]] = []
+    stack: list[_Branch] = []
+    for line, comment in annotated_lines(path):
+        keyword = line.split(maxsplit=1)[0].upper()
+        if keyword in ("IF", "ELIF"):
+            match = _IF_DEF.match(line)
+            if match is None:
+                raise ValueError(f"{path.name} : condition non prise en charge : {line}")
+            _open_branch(stack, keyword, match.group(1) in defined, path)
+        elif keyword in ("ELSE", "ENDC"):
+            if not stack:
                 raise ValueError(f"{path.name} : {line} sans IF")
-            if line == "ELSE":
-                active[-1] = not active[-1]
+            if keyword == "ELSE":
+                stack[-1] = _Branch(not stack[-1].taken, True)
             else:
-                active.pop()
-        elif all(active):
-            result.append(line)
-    if active:
+                stack.pop()
+        elif all(branch.active for branch in stack):
+            result.append((line, comment))
+    if stack:
         raise ValueError(f"{path.name} : bloc IF non terminé")
     return result
+
+
+def _open_branch(stack: list[_Branch], keyword: str, condition: bool, path: Path) -> None:
+    if keyword == "IF":
+        stack.append(_Branch(condition, condition))
+        return
+    if not stack:
+        raise ValueError(f"{path.name} : ELIF sans IF")
+    active = condition and not stack[-1].taken
+    stack[-1] = _Branch(active, stack[-1].taken or active)
 
 
 def macro_args(line: str, macro: str) -> list[str]:

@@ -7,14 +7,15 @@ Les jeux plus récents ne sont pas encore pris en charge (cartes) : on construit
 import sqlite3
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import Game
+from pokemaps_data.games import Game, PretFormat
 from pokemaps_data.pokeapi import PokeApi
 
 PIKACHU, RAICHU, CLEFAIRY = 25, 26, 35
 
 
 def _builder(api: PokeApi, version_group: str) -> DatabaseBuilder:
-    return DatabaseBuilder(api, games=(Game(version_group, "", (), "", ()),))
+    # Jeux sans cartes ni désassemblage : seules leurs tables de Pokémon sont construites.
+    return DatabaseBuilder(api, games=(Game(version_group, "", (), "", (), PretFormat.GEN1, ()),))
 
 
 def test_gen1_has_none_of_the_later_data(db: sqlite3.Connection) -> None:

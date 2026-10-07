@@ -43,7 +43,15 @@ class MapObject:
     level: int | None = None
     trainer_class: str | None = None  # ex. OPP_YOUNGSTER
     trainer_number: int | None = None  # numéro de l'équipe dans la classe (data/trainers/parties.asm)
-    text: str | None = None  # constante du texte affiché quand on parle au personnage (ex. TEXT_ROUTE1_YOUNGSTER1)
+    # Ce qui identifie le personnage dans pret : la constante du texte affiché quand on lui parle en 1re génération
+    # (ex. TEXT_ROUTE1_YOUNGSTER1), le label de son script en 2e (ex. Route30YoungsterScript).
+    text: str | None = None
+    # Version PokéAPI où l'objet est ainsi (ex. gold), None s'il est le même dans toutes les versions du jeu.
+    version: str | None = None
+    # 2e génération : moments de la journée où l'objet est là (MORN, DAY, NITE), vide s'il est toujours là.
+    times: frozenset[str] = frozenset()
+    # 2e génération : drapeau d'événement qui cache l'objet une fois levé (ex. EVENT_ROUTE_30_BATTLE).
+    event_flag: str | None = None
 
 
 @dataclass
@@ -61,6 +69,9 @@ class PretMap:
     warps: list[Warp] = field(default_factory=list)
     signs: list[Sign] = field(default_factory=list)
     objects: list[MapObject] = field(default_factory=list)
+    # Cartes où un script envoie le joueur sans warp de carte (commande warp de la 2e génération : inscription au
+    # Concours de capture d'insectes, traversées du M/S Aquaria…).
+    script_warps: list[str] = field(default_factory=list)
 
     def block(self, x: int, y: int) -> int:
         return self.blocks[y * self.width + x]
@@ -85,6 +96,7 @@ class TrainerPokemon:
     species: str  # constante pret (ex. PIDGEY)
     level: int
     moves: tuple[str, ...]  # constantes des attaques (4 au plus)
+    item: str | None = None  # objet tenu (2e génération), constante pret
 
 
 @dataclass(frozen=True)

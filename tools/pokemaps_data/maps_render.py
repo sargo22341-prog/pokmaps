@@ -1,33 +1,27 @@
 """Rendu des cartes en images pixel-art et découpage en tuiles pour MapCompose.
 
-Les couleurs sont celles du Super Game Boy : chaque ville a sa palette, les routes partagent la même, les
-bâtiments prennent celle de la ville ou de la route où ils se trouvent.
+Ce module assemble les cartes affichées (cartes du monde et cartes à part) et les découpe en tuiles ; les
+couleurs de chaque métatuile et des sprites viennent du rendu du format du jeu (`maps_render_gen1.py` : palettes
+du Super Game Boy ; `maps_render_gen2.py` : palettes de la Game Boy Color).
 """
 
 from __future__ import annotations
 
 import math
+from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from functools import cached_property
 from pathlib import Path
 
 from PIL import Image
 
-from .maps_layout import WORLD, GameMaps, identifier
-from .pret import BLOCK_PX, TILE_PX, PretMap, PretRepo
-from .webp import WEBP_LOSSLESS
+from .maps_layout import GameMaps
+from .pret import BLOCK_PX, TILE_PX, PretMap
 
 TILE_SIZE = 256
-# Blocs de bordure dessinés autour des villes et routes (le jeu en affiche 4 à 5 au bord de l'écran).
+# Métatuiles de bordure dessinées autour des villes et routes (le jeu en affiche 4 à 5 au bord de l'écran).
 BORDER_MARGIN = 4
-
-# Palettes particulières (cf. SetPal_Overworld dans engine/gfx/palettes.asm).
-CEMETERY_TILESET, CAVERN_TILESET = "CEMETERY", "CAVERN"
-CAVE_MAPS = frozenset({"CERULEAN_CAVE_2F", "CERULEAN_CAVE_B1F", "CERULEAN_CAVE_1F", "BRUNOS_ROOM"})
-LORELEI_MAP = "LORELEIS_ROOM"
-
-# Blocs déjà colorés, par (tileset, palette), partagés entre les cartes d'un même jeu.
-BlockCache = dict[tuple[str, str], list[Image.Image]]
+# Taille d'une image de sprite : la première image du fichier, de face.
+SPRITE_PX = 16
 
 
 @dataclass
@@ -44,91 +38,77 @@ def level_count(width: int, height: int) -> int:
     return 1 + max(0, math.ceil(math.log2(max(width, height) / TILE_SIZE)))
 
 
-class MapRenderer:
-    """Dessine les cartes d'un jeu avec les tilesets et palettes de son désassemblage."""
+def tile_shades(path: Path) -> Image.Image:
+    """Image en niveaux de gris 2 bits d'un fichier pret, en indices de couleur (0 = clair … 3 = foncé)."""
+    gray = Image.open(path).convert("L")
+    return gray.point(lambda v: 3 - round(v / 85))
+
+
+def paint_tile(block: Image.Image, tiles: Image.Image, tile: int, position: int) -> bool:
+    """Colle la tuile `tile` de l'image `tiles` à la place `position` (0 à 15) d'une métatuile de 4 × 4 tuiles.
+
+    Renvoie False si la tuile n'est pas dans l'image."""
+    columns = tiles.width // TILE_PX
+    if tile >= columns * (tiles.height // TILE_PX):
+        return False
+    source = ((tile % columns) * TILE_PX, (tile // columns) * TILE_PX)
+    crop = tiles.crop((*source, source[0] + TILE_PX, source[1] + TILE_PX))
+    block.paste(crop, ((position % 4) * TILE_PX, (position // 4) * TILE_PX))
+    return True
+
+
+class MapRenderer(ABC):
+    """Dessine les cartes d'un jeu ; chaque format fournit les images de ses métatuiles et de ses sprites."""
 
     def __init__(self, game_maps: GameMaps) -> None:
         self.game_maps = game_maps
-        self.repo = game_maps.repo
         self.maps = game_maps.maps
-        self._cache: BlockCache = {}
 
-    def palette_name(self, const: str) -> str:
-        pret_map = self.maps[const]
-        if pret_map.tileset == CEMETERY_TILESET:
-            return "PAL_GRAYMON"
-        if pret_map.tileset == CAVERN_TILESET or const in CAVE_MAPS:
-            return "PAL_CAVE"
-        if const == LORELEI_MAP:
-            return "PAL_PALLET"
-        if not pret_map.is_outdoor:
-            pret_map = self.maps[self.game_maps.indoor_parents[const]]
-        if pret_map.number < self.maps["ROUTE_1"].number:
-            return self.repo.palette_order[pret_map.number + 1]
-        return "PAL_ROUTE"
+    @abstractmethod
+    def blocks(self, pret_map: PretMap) -> list[Image.Image]:
+        """Images RVB (32 × 32 px) des métatuiles du tileset de la carte, dans les couleurs de la carte."""
 
-    # --- Rendu ----------------------------------------------------------------
-
-    @cached_property
-    def _tileset_images(self) -> dict[str, Image.Image]:
-        """Tilesets en indices de couleur (0 = clair … 3 = foncé)."""
-        result = {}
-        for const, tileset in self.repo.tilesets.items():
-            gray = Image.open(tileset.gfx).convert("L")
-            result[const] = gray.point(lambda v: 3 - round(v / 85))
-        return result
-
-    def _blocks(self, tileset: str, palette: str) -> list[Image.Image]:
-        key = (tileset, palette)
-        cache = self._cache
-        if key not in cache:
-            tiles = self._tileset_images[tileset]
-            columns = tiles.width // TILE_PX
-            data = self.repo.tilesets[tileset].blockset.read_bytes()
-            colors = [channel for color in self.repo.palettes[palette] for channel in color]
-            blocks = []
-            for index in range(len(data) // 16):
-                block = Image.new("P", (BLOCK_PX, BLOCK_PX))
-                for position, tile in enumerate(data[index * 16 : index * 16 + 16]):
-                    if tile >= columns * (tiles.height // TILE_PX):
-                        continue  # tuile hors du tileset (jamais affichée par le jeu)
-                    source = ((tile % columns) * TILE_PX, (tile // columns) * TILE_PX)
-                    crop = tiles.crop((*source, source[0] + TILE_PX, source[1] + TILE_PX))
-                    block.paste(crop, ((position % 4) * TILE_PX, (position // 4) * TILE_PX))
-                block.putpalette(colors)
-                blocks.append(block.convert("RGB"))
-            cache[key] = blocks
-        return cache[key]
-
-    def _paint(self, canvas: Image.Image, pret_map: PretMap, origin: tuple[int, int]) -> None:
-        blocks = self._blocks(pret_map.tileset, self.palette_name(pret_map.const))
-        for y in range(pret_map.height):
-            for x in range(pret_map.width):
-                position = (origin[0] + x * BLOCK_PX, origin[1] + y * BLOCK_PX)
-                canvas.paste(blocks[pret_map.block(x, y)], position)
+    @abstractmethod
+    def write_sprites(self, sprites: set[str], output: Path) -> None:
+        """Première image (de face) des sprites de personnages utilisés, fond transparent."""
 
     def render(self, const: str) -> DisplayMap:
-        if const == WORLD:
-            return self._render_world()
+        if const in self.game_maps.world_blocks:
+            return self._render_world(const)
         pret_map = self.maps[const]
         width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
         canvas = Image.new("RGB", (width, height))
         self._paint(canvas, pret_map, (0, 0))
         return DisplayMap(const, width, height, level_count(width, height), canvas)
 
-    def _render_world(self) -> DisplayMap:
-        columns, rows = self.game_maps.world_size
+    def _paint(self, canvas: Image.Image, pret_map: PretMap, origin: tuple[int, int]) -> None:
+        blocks = self.blocks(pret_map)
+        for y in range(pret_map.height):
+            for x in range(pret_map.width):
+                position = (origin[0] + x * BLOCK_PX, origin[1] + y * BLOCK_PX)
+                canvas.paste(blocks[pret_map.block(x, y)], position)
+
+    def _render_world(self, region: str) -> DisplayMap:
+        world = self.game_maps.world_blocks[region]
+        columns, rows = self.game_maps.world_size(region)
         canvas = Image.new("RGBA", (columns * BLOCK_PX, rows * BLOCK_PX))
         owner: list[list[str | None]] = [[None] * columns for _ in range(rows)]
-        for const, (bx, by) in self.game_maps.world_blocks.items():
+        for const, (bx, by) in world.items():
             pret_map = self.maps[const]
             self._paint(canvas, pret_map, (bx * BLOCK_PX, by * BLOCK_PX))
             for y in range(pret_map.height):
                 for x in range(pret_map.width):
                     owner[by + y][bx + x] = const
-        # Autour des cartes : le bloc de bordure de la carte la plus proche, sur la largeur visible à l'écran
-        # dans le jeu. Au-delà, la carte du monde reste transparente.
-        rects = [(*self.game_maps.world_blocks[const], self.maps[const]) for const in self.game_maps.world_blocks]
+        self._paint_borders(canvas, world, owner)
+        width, height = canvas.size
+        return DisplayMap(region, width, height, level_count(width, height), canvas)
+
+    def _paint_borders(
+        self, canvas: Image.Image, world: dict[str, tuple[int, int]], owner: list[list[str | None]]
+    ) -> None:
+        """Autour des cartes : la métatuile de bordure de la carte la plus proche, sur la largeur visible à l'écran
+        dans le jeu. Au-delà, la carte du monde reste transparente."""
+        rects = [(*world[const], self.maps[const]) for const in world]
 
         def distance(rect: tuple[int, int, PretMap], x: int, y: int) -> int:
             left, top, pret_map = rect
@@ -136,18 +116,15 @@ class MapRenderer:
             dy = max(top - y, 0, y - (top + pret_map.height - 1))
             return max(dx, dy)
 
-        for y in range(rows):
-            for x in range(columns):
-                if owner[y][x] is not None:
+        for y, row in enumerate(owner):
+            for x, const in enumerate(row):
+                if const is not None:
                     continue
                 nearest = min(rects, key=lambda rect: distance(rect, x, y))
                 if distance(nearest, x, y) > BORDER_MARGIN:
                     continue
                 pret_map = nearest[2]
-                blocks = self._blocks(pret_map.tileset, self.palette_name(pret_map.const))
-                canvas.paste(blocks[pret_map.border_block], (x * BLOCK_PX, y * BLOCK_PX))
-        width, height = canvas.size
-        return DisplayMap(WORLD, width, height, level_count(width, height), canvas)
+                canvas.paste(self.blocks(pret_map)[pret_map.border_block], (x * BLOCK_PX, y * BLOCK_PX))
 
 
 def write_tiles(display: DisplayMap, output: Path) -> int:
@@ -176,18 +153,12 @@ def write_tiles(display: DisplayMap, output: Path) -> int:
     return count
 
 
-def write_sprites(repo: PretRepo, sprites: set[str], output: Path) -> None:
-    """Première image (de face) des sprites de PNJ utilisés, couleur 0 transparente."""
-    colors = repo.palettes["PAL_ROUTE"]
-    for sprite in sorted(sprites):
-        path = repo.sprites.get(sprite)
-        if path is None:
-            continue
-        gray = Image.open(path).convert("L").crop((0, 0, 16, 16))
-        image = Image.new("RGBA", gray.size)
-        for y in range(gray.height):
-            for x in range(gray.width):
-                shade = 3 - round(gray.getpixel((x, y)) / 85)
-                image.putpixel((x, y), (*colors[shade], 0 if shade == 0 else 255))
-        output.mkdir(parents=True, exist_ok=True)
-        image.save(output / f"{identifier(sprite.removeprefix('SPRITE_'))}.webp", "WEBP", **WEBP_LOSSLESS)
+def sprite_image(path: Path, colors: tuple[tuple[int, int, int], ...]) -> Image.Image:
+    """Première image (de face) d'un sprite, dans les 4 couleurs `colors` ; la couleur 0 est transparente."""
+    shades = tile_shades(path).crop((0, 0, SPRITE_PX, SPRITE_PX))
+    image = Image.new("RGBA", shades.size)
+    for y in range(shades.height):
+        for x in range(shades.width):
+            shade = shades.getpixel((x, y))
+            image.putpixel((x, y), (*colors[shade], 0 if shade == 0 else 255))
+    return image

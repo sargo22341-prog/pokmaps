@@ -1,15 +1,24 @@
 """Jeux pris en charge par l'application.
 
-Ajouter un jeu (ex. Or/Argent) revient à ajouter une entrée ici : toutes les données
-(Pokémon, attaques, rencontres, lieux…) sont ensuite extraites de PokéAPI pour ce groupe
-de versions. Les identifiants sont ceux de PokéAPI (table version_groups).
-Les cartes sont générées depuis le désassemblage pret du jeu (le lecteur de pret.py est
-écrit pour la 1re génération : un autre jeu demandera d'adapter la lecture de ses cartes).
+Ajouter un jeu revient à ajouter une entrée ici : toutes les données (Pokémon, attaques, rencontres,
+lieux…) sont ensuite extraites de PokéAPI pour ce groupe de versions. Les identifiants sont ceux de
+PokéAPI (table version_groups). Les cartes sont générées depuis le désassemblage pret du jeu, avec le
+lecteur de son format (`PretFormat`).
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
+
+
+class PretFormat(Enum):
+    """Format des sources d'un désassemblage pret : chaque format a son lecteur."""
+
+    # pokered, pokeyellow : en-têtes data/maps/headers, objets data/maps/objects, textes TEXT_…
+    GEN1 = "gen1"
+    # pokegold, pokecrystal : en-têtes data/maps/maps.asm, événements maps/<Carte>.asm, scripts d'événements.
+    GEN2 = "gen2"
 
 
 @dataclass(frozen=True)
@@ -25,6 +34,22 @@ class VersionCover:
 
 
 @dataclass(frozen=True)
+class Region:
+    """Région d'un jeu : ses villes et routes forment une carte du monde, construite depuis `start_map`."""
+
+    # Constante de la carte du monde (ex. "KANTO") ; son nom français est dans tools/data/maps.csv.
+    const: str
+    # Ville d'où partent les connexions qui assemblent la carte du monde.
+    start_map: str
+    # Numéro de la carte du monde dans la base, hors de la plage des numéros des cartes pret.
+    number: int
+
+
+KANTO = Region("KANTO", "PALLET_TOWN", 999)
+JOHTO = Region("JOHTO", "NEW_BARK_TOWN", 998)
+
+
+@dataclass(frozen=True)
 class Game:
     # Identifiant PokéAPI du groupe de versions (ex. "red-blue").
     version_group: str
@@ -32,11 +57,15 @@ class Game:
     pret_repo: str
     # Versions PokéAPI du jeu et symbole qui les distingue dans pret (IF DEF(_RED) : propre à Rouge).
     pret_versions: tuple[tuple[str, str], ...]
-    # Famille de cartes : les jeux d'une même famille partagent leurs plans (Rouge, Bleu et Jaune ; plus tard
-    # Or, Argent et Cristal…), donc les emplacements de Pokémon retouchés dans tools/data/map_spots.csv.
+    # Famille de cartes : les jeux d'une même famille partagent leurs plans (Rouge, Bleu et Jaune ; Or, Argent et
+    # Cristal), donc les emplacements de Pokémon retouchés dans tools/data/map_spots.csv.
     map_family: str
     # Jaquette de chaque version du jeu, dans l'ordre de pret_versions.
     covers: tuple[VersionCover, ...]
+    # Format des sources pret, qui choisit le lecteur des cartes, des dresseurs et des attaques.
+    pret_format: PretFormat
+    # Régions du jeu, une carte du monde chacune.
+    regions: tuple[Region, ...]
 
 
 GAMES: tuple[Game, ...] = (
@@ -46,6 +75,8 @@ GAMES: tuple[Game, ...] = (
         (("red", "_RED"), ("blue", "_BLUE")),
         "red-blue-yellow",
         (VersionCover("red", "charizard", 0xD8302A), VersionCover("blue", "blastoise", 0x2A63C4)),
+        PretFormat.GEN1,
+        (KANTO,),
     ),
     Game(
         "yellow",
@@ -53,14 +84,28 @@ GAMES: tuple[Game, ...] = (
         (("yellow", "_YELLOW"),),
         "red-blue-yellow",
         (VersionCover("yellow", "pikachu", 0xF2C21B),),
+        PretFormat.GEN1,
+        (KANTO,),
     ),
 )
 
+# Or et Argent : pas encore dans GAMES tant que leurs rencontres et leurs personnages ne sont pas relus
+# (plan_gen_2.md, phases 4 et 5). Le pipeline les construit déjà avec games=(GOLD_SILVER,).
+GOLD_SILVER = Game(
+    "gold-silver",
+    "pokegold",
+    (("gold", "_GOLD"), ("silver", "_SILVER")),
+    "gold-silver-crystal",
+    (VersionCover("gold", "ho-oh", 0xC9A227), VersionCover("silver", "lugia", 0x9DA9B5)),
+    PretFormat.GEN2,
+    (JOHTO, KANTO),
+)
 
-def map_families() -> dict[str, tuple[str, ...]]:
-    """Groupes de versions de chaque famille de cartes, dans l'ordre de GAMES."""
+
+def map_families(games: tuple[Game, ...] = GAMES) -> dict[str, tuple[str, ...]]:
+    """Groupes de versions de chaque famille de cartes, dans l'ordre de `games`."""
     families: dict[str, tuple[str, ...]] = {}
-    for game in GAMES:
+    for game in games:
         families[game.map_family] = (*families.get(game.map_family, ()), game.version_group)
     return families
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .games import GAMES
+from .games import Game
 from .map_spots import Point, TerrainKey, read_spots
 from .maps import GameMapData
 from .maps_characters import CharacterNames, ObjectRow, read_character_names
@@ -25,7 +25,7 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
     objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions)
     maps, areas, warps = [], [], []
-    spots = _SpotRows(read_spots())
+    spots = _SpotRows(read_spots(), builder.games)
     for version_group, data in builder.map_data.items():
         vg = vg_ids[version_group]
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
@@ -52,9 +52,9 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
 class _SpotRows:
     """Emplacements des Pokémon sauvages : ceux de la génération, sauf les terrains retouchés dans map_spots.csv."""
 
-    def __init__(self, curated: dict[TerrainKey, frozenset[Point]]) -> None:
+    def __init__(self, curated: dict[TerrainKey, frozenset[Point]], games: tuple[Game, ...]) -> None:
         self.curated = curated
-        self.families = {game.version_group: game.map_family for game in GAMES}
+        self.families = {game.version_group: game.map_family for game in games}
         self.used: set[TerrainKey] = set()
         self.rows: list[tuple] = []
 
@@ -98,6 +98,10 @@ class _ObjectRows:
         self.offers: list[tuple] = []
 
     def add(self, obj: ObjectRow, map_id: int) -> None:
+        if obj.version:
+            # La table map_object n'a pas de version : un objet propre à une version (Ho-Oh et Lugia d'Or et
+            # d'Argent) demande d'abord d'étendre le schéma, sinon les deux exemplaires se superposeraient.
+            raise ValueError(f"Objet de carte propre à la version {obj.version}, sans colonne pour l'écrire : {obj}")
         species = self.species
         for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
             p for offer in obj.offers for p in (offer.pokemon, offer.wanted)

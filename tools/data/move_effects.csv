@@ -1,89 +1,246 @@
-effect,move,chance_256,description_fr
-NO_ADDITIONAL_EFFECT,,,Inflige des dégâts sans effet supplémentaire.
-NO_ADDITIONAL_EFFECT,KARATE_CHOP,,Inflige des dégâts. Taux de coups critiques élevé.
-NO_ADDITIONAL_EFFECT,RAZOR_LEAF,,Inflige des dégâts. Taux de coups critiques élevé.
-NO_ADDITIONAL_EFFECT,CRABHAMMER,,Inflige des dégâts. Taux de coups critiques élevé.
-NO_ADDITIONAL_EFFECT,SLASH,,Inflige des dégâts. Taux de coups critiques élevé.
-NO_ADDITIONAL_EFFECT,QUICK_ATTACK,,Inflige des dégâts en frappant toujours en premier (attaque prioritaire).
-NO_ADDITIONAL_EFFECT,COUNTER,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il était de type Normal ou Combat."
-NO_ADDITIONAL_EFFECT,CUT,,Inflige des dégâts. Hors combat : coupe les arbustes qui bloquent le passage.
-NO_ADDITIONAL_EFFECT,SURF,,Inflige des dégâts. Hors combat : permet de se déplacer sur l’eau.
-NO_ADDITIONAL_EFFECT,STRENGTH,,Inflige des dégâts. Hors combat : permet de pousser les rochers.
-ACCURACY_DOWN1_EFFECT,,,Baisse la Précision de la cible d’un niveau.
-ACCURACY_DOWN1_EFFECT,FLASH,,Baisse la Précision de la cible d’un niveau. Hors combat : éclaire les grottes sombres.
-ATTACK_DOWN1_EFFECT,,,Baisse l’Attaque de la cible d’un niveau.
-ATTACK_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser l’Attaque de la cible d’un niveau.
-ATTACK_TWICE_EFFECT,,,Frappe deux fois de suite.
-ATTACK_UP1_EFFECT,,,Augmente l’Attaque du lanceur d’un niveau.
-ATTACK_UP2_EFFECT,,,Augmente l’Attaque du lanceur de deux niveaux.
-BIDE_EFFECT,,,"Le lanceur encaisse les coups pendant 2 ou 3 tours, puis rend le double des dégâts reçus."
-BURN_SIDE_EFFECT1,,26,Inflige des dégâts et peut brûler la cible (sauf un Pokémon du même type que l’attaque).
-BURN_SIDE_EFFECT2,,77,Inflige des dégâts et peut brûler la cible (sauf un Pokémon du même type que l’attaque).
-CHARGE_EFFECT,,,"Le lanceur se concentre pendant un tour, puis frappe au tour suivant."
-CHARGE_EFFECT,DIG,,"Le lanceur creuse un trou au premier tour, où il est hors d’atteinte, puis frappe au tour suivant. Hors combat : fait sortir d’une grotte ou d’un donjon et ramène au dernier Centre Pokémon visité."
-CONFUSION_EFFECT,,,Rend la cible confuse pendant 2 à 5 tours.
-CONFUSION_SIDE_EFFECT,,25,Inflige des dégâts et peut rendre la cible confuse.
-CONVERSION_EFFECT,,,Le lanceur prend les types de la cible.
-DEFENSE_DOWN1_EFFECT,,,Baisse la Défense de la cible d’un niveau.
-DEFENSE_DOWN2_EFFECT,,,Baisse la Défense de la cible de deux niveaux.
-DEFENSE_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser la Défense de la cible d’un niveau.
-DEFENSE_UP1_EFFECT,,,Augmente la Défense du lanceur d’un niveau.
-DEFENSE_UP2_EFFECT,,,Augmente la Défense du lanceur de deux niveaux.
-DISABLE_EFFECT,,,Bloque au hasard une attaque de la cible pendant quelques tours.
-DRAIN_HP_EFFECT,,,Inflige des dégâts ; le lanceur récupère la moitié des dégâts infligés.
-DREAM_EATER_EFFECT,,,Ne fonctionne que sur une cible endormie ; le lanceur récupère la moitié des dégâts infligés.
-EVASION_UP1_EFFECT,,,Augmente l’Esquive du lanceur d’un niveau.
-EXPLODE_EFFECT,,,Le lanceur est mis K.O. ; la Défense de la cible est divisée par deux pour le calcul des dégâts.
-FLINCH_SIDE_EFFECT1,,26,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
-FLINCH_SIDE_EFFECT2,,77,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
-FLY_EFFECT,,,"Le lanceur s’envole au premier tour, où il est hors d’atteinte, puis frappe au tour suivant. Hors combat : permet de voler vers une ville déjà visitée."
-FOCUS_ENERGY_EFFECT,,,"Censée augmenter le taux de coups critiques : à cause d’un bug de ces jeux, elle le divise en réalité par quatre."
-FREEZE_SIDE_EFFECT1,,26,Inflige des dégâts et peut geler la cible (sauf un Pokémon du même type que l’attaque).
-HAZE_EFFECT,,,"Annule les changements de statistiques et les effets en cours des deux Pokémon (confusion, Vampigraine, Protection…), et soigne le statut de l’adversaire."
-HEAL_EFFECT,,,Le lanceur récupère la moitié de ses PV max.
-HEAL_EFFECT,SOFTBOILED,,Le lanceur récupère la moitié de ses PV max. Hors combat : donne une partie de ses PV à un autre Pokémon de l’équipe.
-HEAL_EFFECT,REST,,"Le lanceur récupère tous ses PV et soigne son statut, puis s’endort pendant 2 tours."
-HYPER_BEAM_EFFECT,,,"Le lanceur doit se reposer au tour suivant, sauf si la cible est mise K.O. ou si l’attaque échoue."
-JUMP_KICK_EFFECT,,,"Si l’attaque échoue, le lanceur se blesse et perd 1 PV."
-LEECH_SEED_EFFECT,,,"La cible perd 1/16 de ses PV max à chaque tour, que le lanceur récupère. Sans effet sur les Pokémon de type Plante."
-LIGHT_SCREEN_EFFECT,,,"Double le Spécial du lanceur face aux attaques spéciales, jusqu’à ce qu’il quitte le combat."
-METRONOME_EFFECT,,,Lance une attaque choisie au hasard.
-MIMIC_EFFECT,,,"Copie une attaque de la cible, qui remplace Copie jusqu’à la fin du combat."
-MIRROR_MOVE_EFFECT,,,Relance la dernière attaque utilisée par la cible.
-MIST_EFFECT,,,Protège le lanceur des baisses de statistiques infligées par l’adversaire.
-OHKO_EFFECT,,,Met la cible K.O. en un coup ; échoue si elle est plus rapide que le lanceur.
-PARALYZE_EFFECT,,,Paralyse la cible.
-PARALYZE_SIDE_EFFECT1,,26,Inflige des dégâts et peut paralyser la cible (sauf un Pokémon du même type que l’attaque).
-PARALYZE_SIDE_EFFECT2,,77,Inflige des dégâts et peut paralyser la cible (sauf un Pokémon du même type que l’attaque).
-PAY_DAY_EFFECT,,,"Fait gagner de l’argent à la fin du combat, à chaque utilisation : deux fois le niveau du lanceur."
-POISON_EFFECT,,,Empoisonne la cible (sauf un Pokémon de type Poison).
-POISON_EFFECT,TOXIC,,Empoisonne gravement la cible : les dégâts du poison augmentent à chaque tour (sauf un Pokémon de type Poison).
-POISON_SIDE_EFFECT1,,52,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison).
-POISON_SIDE_EFFECT2,,103,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison).
-RAGE_EFFECT,,,"Le lanceur ne peut plus changer d’attaque, et son Attaque augmente chaque fois qu’il est touché."
-RECOIL_EFFECT,,,Inflige des dégâts ; le lanceur subit en contrecoup un quart des dégâts infligés.
-RECOIL_EFFECT,STRUGGLE,,Utilisée quand le lanceur n’a plus de PP. Inflige des dégâts ; le lanceur subit en contrecoup la moitié des dégâts infligés.
-REFLECT_EFFECT,,,"Double la Défense du lanceur face aux attaques physiques, jusqu’à ce qu’il quitte le combat."
-SLEEP_EFFECT,,,Endort la cible pendant 1 à 7 tours.
-SPECIAL_DAMAGE_EFFECT,SEISMIC_TOSS,,Inflige autant de dégâts que le niveau du lanceur.
-SPECIAL_DAMAGE_EFFECT,NIGHT_SHADE,,Inflige autant de dégâts que le niveau du lanceur.
-SPECIAL_DAMAGE_EFFECT,SONICBOOM,,Inflige toujours 20 PV de dégâts.
-SPECIAL_DAMAGE_EFFECT,DRAGON_RAGE,,Inflige toujours 40 PV de dégâts.
-SPECIAL_DAMAGE_EFFECT,PSYWAVE,,"Inflige des dégâts aléatoires, d’1 PV à une fois et demie le niveau du lanceur."
-SPECIAL_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser le Spécial de la cible d’un niveau.
-SPECIAL_UP1_EFFECT,,,Augmente le Spécial du lanceur d’un niveau.
-SPECIAL_UP2_EFFECT,,,Augmente le Spécial du lanceur de deux niveaux.
-SPEED_DOWN1_EFFECT,,,Baisse la Vitesse de la cible d’un niveau.
-SPEED_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser la Vitesse de la cible d’un niveau.
-SPEED_UP2_EFFECT,,,Augmente la Vitesse du lanceur de deux niveaux.
-SPLASH_EFFECT,,,N’a aucun effet.
-SUBSTITUTE_EFFECT,,,Le lanceur sacrifie un quart de ses PV max pour créer un clone qui encaisse les attaques à sa place.
-SUPER_FANG_EFFECT,,,Divise par deux les PV restants de la cible.
-SWIFT_EFFECT,,,Inflige des dégâts sans jamais rater.
-SWITCH_AND_TELEPORT_EFFECT,,,Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur.
-SWITCH_AND_TELEPORT_EFFECT,TELEPORT,,"Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur. Hors combat, à l’extérieur : ramène au dernier Centre Pokémon visité."
-THRASH_PETAL_DANCE_EFFECT,,,"Le lanceur attaque sans pouvoir s’arrêter pendant plusieurs tours, puis devient confus."
-TRANSFORM_EFFECT,,,"Le lanceur prend l’apparence, les types, les statistiques et les attaques de la cible."
-TRAPPING_EFFECT,,,Piège la cible pendant 2 à 5 tours : elle ne peut pas attaquer et subit des dégâts à chaque tour.
-TWINEEDLE_EFFECT,,52,Frappe deux fois de suite et peut empoisonner la cible (sauf un Pokémon de type Poison).
-TWO_TO_FIVE_ATTACKS_EFFECT,,,Frappe 2 à 5 fois de suite.
+format,effect,move,chance_256,description_fr
+gen1,NO_ADDITIONAL_EFFECT,,,Inflige des dégâts sans effet supplémentaire.
+gen1,NO_ADDITIONAL_EFFECT,KARATE_CHOP,,Inflige des dégâts. Taux de coups critiques élevé.
+gen1,NO_ADDITIONAL_EFFECT,RAZOR_LEAF,,Inflige des dégâts. Taux de coups critiques élevé.
+gen1,NO_ADDITIONAL_EFFECT,CRABHAMMER,,Inflige des dégâts. Taux de coups critiques élevé.
+gen1,NO_ADDITIONAL_EFFECT,SLASH,,Inflige des dégâts. Taux de coups critiques élevé.
+gen1,NO_ADDITIONAL_EFFECT,QUICK_ATTACK,,Inflige des dégâts en frappant toujours en premier (attaque prioritaire).
+gen1,NO_ADDITIONAL_EFFECT,COUNTER,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il était de type Normal ou Combat."
+gen1,NO_ADDITIONAL_EFFECT,CUT,,Inflige des dégâts. Hors combat : coupe les arbustes qui bloquent le passage.
+gen1,NO_ADDITIONAL_EFFECT,SURF,,Inflige des dégâts. Hors combat : permet de se déplacer sur l’eau.
+gen1,NO_ADDITIONAL_EFFECT,STRENGTH,,Inflige des dégâts. Hors combat : permet de pousser les rochers.
+gen1,ACCURACY_DOWN1_EFFECT,,,Baisse la Précision de la cible d’un niveau.
+gen1,ACCURACY_DOWN1_EFFECT,FLASH,,Baisse la Précision de la cible d’un niveau. Hors combat : éclaire les grottes sombres.
+gen1,ATTACK_DOWN1_EFFECT,,,Baisse l’Attaque de la cible d’un niveau.
+gen1,ATTACK_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser l’Attaque de la cible d’un niveau.
+gen1,ATTACK_TWICE_EFFECT,,,Frappe deux fois de suite.
+gen1,ATTACK_UP1_EFFECT,,,Augmente l’Attaque du lanceur d’un niveau.
+gen1,ATTACK_UP2_EFFECT,,,Augmente l’Attaque du lanceur de deux niveaux.
+gen1,BIDE_EFFECT,,,"Le lanceur encaisse les coups pendant 2 ou 3 tours, puis rend le double des dégâts reçus."
+gen1,BURN_SIDE_EFFECT1,,26,Inflige des dégâts et peut brûler la cible (sauf un Pokémon du même type que l’attaque).
+gen1,BURN_SIDE_EFFECT2,,77,Inflige des dégâts et peut brûler la cible (sauf un Pokémon du même type que l’attaque).
+gen1,CHARGE_EFFECT,,,"Le lanceur se concentre pendant un tour, puis frappe au tour suivant."
+gen1,CHARGE_EFFECT,DIG,,"Le lanceur creuse un trou au premier tour, où il est hors d’atteinte, puis frappe au tour suivant. Hors combat : fait sortir d’une grotte ou d’un donjon et ramène au dernier Centre Pokémon visité."
+gen1,CONFUSION_EFFECT,,,Rend la cible confuse pendant 2 à 5 tours.
+gen1,CONFUSION_SIDE_EFFECT,,25,Inflige des dégâts et peut rendre la cible confuse.
+gen1,CONVERSION_EFFECT,,,Le lanceur prend les types de la cible.
+gen1,DEFENSE_DOWN1_EFFECT,,,Baisse la Défense de la cible d’un niveau.
+gen1,DEFENSE_DOWN2_EFFECT,,,Baisse la Défense de la cible de deux niveaux.
+gen1,DEFENSE_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser la Défense de la cible d’un niveau.
+gen1,DEFENSE_UP1_EFFECT,,,Augmente la Défense du lanceur d’un niveau.
+gen1,DEFENSE_UP2_EFFECT,,,Augmente la Défense du lanceur de deux niveaux.
+gen1,DISABLE_EFFECT,,,Bloque au hasard une attaque de la cible pendant quelques tours.
+gen1,DRAIN_HP_EFFECT,,,Inflige des dégâts ; le lanceur récupère la moitié des dégâts infligés.
+gen1,DREAM_EATER_EFFECT,,,Ne fonctionne que sur une cible endormie ; le lanceur récupère la moitié des dégâts infligés.
+gen1,EVASION_UP1_EFFECT,,,Augmente l’Esquive du lanceur d’un niveau.
+gen1,EXPLODE_EFFECT,,,Le lanceur est mis K.O. ; la Défense de la cible est divisée par deux pour le calcul des dégâts.
+gen1,FLINCH_SIDE_EFFECT1,,26,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
+gen1,FLINCH_SIDE_EFFECT2,,77,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
+gen1,FLY_EFFECT,,,"Le lanceur s’envole au premier tour, où il est hors d’atteinte, puis frappe au tour suivant. Hors combat : permet de voler vers une ville déjà visitée."
+gen1,FOCUS_ENERGY_EFFECT,,,"Censée augmenter le taux de coups critiques : à cause d’un bug de ces jeux, elle le divise en réalité par quatre."
+gen1,FREEZE_SIDE_EFFECT1,,26,Inflige des dégâts et peut geler la cible (sauf un Pokémon du même type que l’attaque).
+gen1,HAZE_EFFECT,,,"Annule les changements de statistiques et les effets en cours des deux Pokémon (confusion, Vampigraine, Protection…), et soigne le statut de l’adversaire."
+gen1,HEAL_EFFECT,,,Le lanceur récupère la moitié de ses PV max.
+gen1,HEAL_EFFECT,SOFTBOILED,,Le lanceur récupère la moitié de ses PV max. Hors combat : donne une partie de ses PV à un autre Pokémon de l’équipe.
+gen1,HEAL_EFFECT,REST,,"Le lanceur récupère tous ses PV et soigne son statut, puis s’endort pendant 2 tours."
+gen1,HYPER_BEAM_EFFECT,,,"Le lanceur doit se reposer au tour suivant, sauf si la cible est mise K.O. ou si l’attaque échoue."
+gen1,JUMP_KICK_EFFECT,,,"Si l’attaque échoue, le lanceur se blesse et perd 1 PV."
+gen1,LEECH_SEED_EFFECT,,,"La cible perd 1/16 de ses PV max à chaque tour, que le lanceur récupère. Sans effet sur les Pokémon de type Plante."
+gen1,LIGHT_SCREEN_EFFECT,,,"Double le Spécial du lanceur face aux attaques spéciales, jusqu’à ce qu’il quitte le combat."
+gen1,METRONOME_EFFECT,,,Lance une attaque choisie au hasard.
+gen1,MIMIC_EFFECT,,,"Copie une attaque de la cible, qui remplace Copie jusqu’à la fin du combat."
+gen1,MIRROR_MOVE_EFFECT,,,Relance la dernière attaque utilisée par la cible.
+gen1,MIST_EFFECT,,,Protège le lanceur des baisses de statistiques infligées par l’adversaire.
+gen1,OHKO_EFFECT,,,Met la cible K.O. en un coup ; échoue si elle est plus rapide que le lanceur.
+gen1,PARALYZE_EFFECT,,,Paralyse la cible.
+gen1,PARALYZE_SIDE_EFFECT1,,26,Inflige des dégâts et peut paralyser la cible (sauf un Pokémon du même type que l’attaque).
+gen1,PARALYZE_SIDE_EFFECT2,,77,Inflige des dégâts et peut paralyser la cible (sauf un Pokémon du même type que l’attaque).
+gen1,PAY_DAY_EFFECT,,,"Fait gagner de l’argent à la fin du combat, à chaque utilisation : deux fois le niveau du lanceur."
+gen1,POISON_EFFECT,,,Empoisonne la cible (sauf un Pokémon de type Poison).
+gen1,POISON_EFFECT,TOXIC,,Empoisonne gravement la cible : les dégâts du poison augmentent à chaque tour (sauf un Pokémon de type Poison).
+gen1,POISON_SIDE_EFFECT1,,52,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison).
+gen1,POISON_SIDE_EFFECT2,,103,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison).
+gen1,RAGE_EFFECT,,,"Le lanceur ne peut plus changer d’attaque, et son Attaque augmente chaque fois qu’il est touché."
+gen1,RECOIL_EFFECT,,,Inflige des dégâts ; le lanceur subit en contrecoup un quart des dégâts infligés.
+gen1,RECOIL_EFFECT,STRUGGLE,,Utilisée quand le lanceur n’a plus de PP. Inflige des dégâts ; le lanceur subit en contrecoup la moitié des dégâts infligés.
+gen1,REFLECT_EFFECT,,,"Double la Défense du lanceur face aux attaques physiques, jusqu’à ce qu’il quitte le combat."
+gen1,SLEEP_EFFECT,,,Endort la cible pendant 1 à 7 tours.
+gen1,SPECIAL_DAMAGE_EFFECT,SEISMIC_TOSS,,Inflige autant de dégâts que le niveau du lanceur.
+gen1,SPECIAL_DAMAGE_EFFECT,NIGHT_SHADE,,Inflige autant de dégâts que le niveau du lanceur.
+gen1,SPECIAL_DAMAGE_EFFECT,SONICBOOM,,Inflige toujours 20 PV de dégâts.
+gen1,SPECIAL_DAMAGE_EFFECT,DRAGON_RAGE,,Inflige toujours 40 PV de dégâts.
+gen1,SPECIAL_DAMAGE_EFFECT,PSYWAVE,,"Inflige des dégâts aléatoires, d’1 PV à une fois et demie le niveau du lanceur."
+gen1,SPECIAL_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser le Spécial de la cible d’un niveau.
+gen1,SPECIAL_UP1_EFFECT,,,Augmente le Spécial du lanceur d’un niveau.
+gen1,SPECIAL_UP2_EFFECT,,,Augmente le Spécial du lanceur de deux niveaux.
+gen1,SPEED_DOWN1_EFFECT,,,Baisse la Vitesse de la cible d’un niveau.
+gen1,SPEED_DOWN_SIDE_EFFECT,,85,Inflige des dégâts et peut baisser la Vitesse de la cible d’un niveau.
+gen1,SPEED_UP2_EFFECT,,,Augmente la Vitesse du lanceur de deux niveaux.
+gen1,SPLASH_EFFECT,,,N’a aucun effet.
+gen1,SUBSTITUTE_EFFECT,,,Le lanceur sacrifie un quart de ses PV max pour créer un clone qui encaisse les attaques à sa place.
+gen1,SUPER_FANG_EFFECT,,,Divise par deux les PV restants de la cible.
+gen1,SWIFT_EFFECT,,,Inflige des dégâts sans jamais rater.
+gen1,SWITCH_AND_TELEPORT_EFFECT,,,Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur.
+gen1,SWITCH_AND_TELEPORT_EFFECT,TELEPORT,,"Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur. Hors combat, à l’extérieur : ramène au dernier Centre Pokémon visité."
+gen1,THRASH_PETAL_DANCE_EFFECT,,,"Le lanceur attaque sans pouvoir s’arrêter pendant plusieurs tours, puis devient confus."
+gen1,TRANSFORM_EFFECT,,,"Le lanceur prend l’apparence, les types, les statistiques et les attaques de la cible."
+gen1,TRAPPING_EFFECT,,,Piège la cible pendant 2 à 5 tours : elle ne peut pas attaquer et subit des dégâts à chaque tour.
+gen1,TWINEEDLE_EFFECT,,52,Frappe deux fois de suite et peut empoisonner la cible (sauf un Pokémon de type Poison).
+gen1,TWO_TO_FIVE_ATTACKS_EFFECT,,,Frappe 2 à 5 fois de suite.
+gen2,EFFECT_NORMAL_HIT,,,Inflige des dégâts sans effet supplémentaire.
+gen2,EFFECT_NORMAL_HIT,KARATE_CHOP,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,RAZOR_LEAF,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,CRABHAMMER,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,SLASH,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,AEROBLAST,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,CROSS_CHOP,,Inflige des dégâts. Taux de coups critiques élevé.
+gen2,EFFECT_NORMAL_HIT,CUT,,Inflige des dégâts. Hors combat : coupe les arbustes qui bloquent le passage.
+gen2,EFFECT_NORMAL_HIT,SURF,,Inflige des dégâts. Hors combat : permet de se déplacer sur l’eau.
+gen2,EFFECT_NORMAL_HIT,STRENGTH,,Inflige des dégâts. Hors combat : permet de pousser les rochers.
+gen2,EFFECT_NORMAL_HIT,WATERFALL,,Inflige des dégâts. Hors combat : permet de remonter les cascades.
+gen2,EFFECT_ACCURACY_DOWN,,,Baisse la Précision de la cible d’un niveau.
+gen2,EFFECT_ACCURACY_DOWN,FLASH,,Baisse la Précision de la cible d’un niveau. Hors combat : éclaire les grottes sombres.
+gen2,EFFECT_ACCURACY_DOWN_HIT,,,Inflige des dégâts et peut baisser la Précision de la cible d’un niveau.
+gen2,EFFECT_ALL_UP_HIT,,,"Inflige des dégâts et peut augmenter l’Attaque, la Défense, la Vitesse, l’Attaque Spéciale et la Défense Spéciale du lanceur d’un niveau."
+gen2,EFFECT_ALWAYS_HIT,,,Inflige des dégâts sans jamais rater.
+gen2,EFFECT_ATTACK_DOWN,,,Baisse l’Attaque de la cible d’un niveau.
+gen2,EFFECT_ATTACK_DOWN_2,,,Baisse l’Attaque de la cible de deux niveaux.
+gen2,EFFECT_ATTACK_DOWN_HIT,,,Inflige des dégâts et peut baisser l’Attaque de la cible d’un niveau.
+gen2,EFFECT_ATTACK_UP,,,Augmente l’Attaque du lanceur d’un niveau.
+gen2,EFFECT_ATTACK_UP_2,,,Augmente l’Attaque du lanceur de deux niveaux.
+gen2,EFFECT_ATTACK_UP_HIT,,,Inflige des dégâts et peut augmenter l’Attaque du lanceur d’un niveau.
+gen2,EFFECT_ATTRACT,,,"Rend amoureuse une cible du sexe opposé : à chaque tour, elle a une chance sur deux de ne pas attaquer."
+gen2,EFFECT_BATON_PASS,,,"Le lanceur est remplacé par un autre Pokémon de l’équipe, qui garde ses changements de statistiques et certains de ses effets (Clonage, confusion, Vampigraine…)."
+gen2,EFFECT_BEAT_UP,,,Chaque Pokémon de l’équipe du lanceur en état de se battre frappe la cible une fois.
+gen2,EFFECT_BELLY_DRUM,,,Le lanceur sacrifie la moitié de ses PV max pour monter son Attaque au maximum.
+gen2,EFFECT_BIDE,,,"Le lanceur encaisse les coups pendant 2 ou 3 tours, puis rend le double des dégâts reçus."
+gen2,EFFECT_BURN_HIT,,,Inflige des dégâts et peut brûler la cible (sauf un Pokémon de type Feu).
+gen2,EFFECT_CONFUSE,,,Rend la cible confuse pendant 2 à 5 tours.
+gen2,EFFECT_CONFUSE_HIT,,,Inflige des dégâts et peut rendre la cible confuse.
+gen2,EFFECT_CONVERSION,,,"Le lanceur prend le type d’une de ses attaques, choisie au hasard parmi celles qui ne sont pas de son type."
+gen2,EFFECT_CONVERSION2,,,Le lanceur prend un type qui résiste à la dernière attaque utilisée par la cible.
+gen2,EFFECT_COUNTER,,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il venait d’une attaque physique."
+gen2,EFFECT_CURSE,,,"Lancée par un Pokémon de type Spectre : il perd la moitié de ses PV max et maudit la cible, qui perd un quart de ses PV max à chaque tour. Sinon : baisse la Vitesse du lanceur d’un niveau et augmente son Attaque et sa Défense d’un niveau."
+gen2,EFFECT_DEFENSE_CURL,,,Augmente la Défense du lanceur d’un niveau ; Roulade inflige ensuite le double de dégâts.
+gen2,EFFECT_DEFENSE_DOWN,,,Baisse la Défense de la cible d’un niveau.
+gen2,EFFECT_DEFENSE_DOWN_2,,,Baisse la Défense de la cible de deux niveaux.
+gen2,EFFECT_DEFENSE_DOWN_HIT,,,Inflige des dégâts et peut baisser la Défense de la cible d’un niveau.
+gen2,EFFECT_DEFENSE_DOWN_HIT,ROCK_SMASH,,Inflige des dégâts et peut baisser la Défense de la cible d’un niveau. Hors combat : brise les rochers qui bloquent le passage.
+gen2,EFFECT_DEFENSE_UP,,,Augmente la Défense du lanceur d’un niveau.
+gen2,EFFECT_DEFENSE_UP_2,,,Augmente la Défense du lanceur de deux niveaux.
+gen2,EFFECT_DEFENSE_UP_HIT,,,Inflige des dégâts et peut augmenter la Défense du lanceur d’un niveau.
+gen2,EFFECT_DESTINY_BOND,,,"Si le lanceur est mis K.O. avant d’agir de nouveau, le Pokémon qui l’a mis K.O. l’est aussi."
+gen2,EFFECT_DISABLE,,,Bloque la dernière attaque utilisée par la cible pendant 2 à 8 tours.
+gen2,EFFECT_DOUBLE_HIT,,,Frappe deux fois de suite.
+gen2,EFFECT_DREAM_EATER,,,Ne fonctionne que sur une cible endormie ; le lanceur récupère la moitié des dégâts infligés.
+gen2,EFFECT_EARTHQUAKE,,,"Inflige des dégâts, doublés si la cible est sous terre (Tunnel)."
+gen2,EFFECT_ENCORE,,,"Pendant 3 à 6 tours, la cible ne peut utiliser que sa dernière attaque."
+gen2,EFFECT_ENDURE,,,Agit en premier : le lanceur résiste à toutes les attaques du tour en gardant au moins 1 PV. Réussit de moins en moins souvent si elle est utilisée plusieurs fois de suite.
+gen2,EFFECT_EVASION_DOWN,SWEET_SCENT,,"Baisse l’Esquive de la cible d’un niveau. Hors combat : attire un Pokémon sauvage, dans les herbes, sur l’eau ou dans une grotte."
+gen2,EFFECT_EVASION_UP,,,Augmente l’Esquive du lanceur d’un niveau.
+gen2,EFFECT_EVASION_UP,MINIMIZE,,Augmente l’Esquive du lanceur d’un niveau ; Écrasement lui inflige ensuite le double de dégâts.
+gen2,EFFECT_FALSE_SWIPE,,,Inflige des dégâts sans jamais mettre la cible K.O. : elle garde au moins 1 PV.
+gen2,EFFECT_FLAME_WHEEL,,,Inflige des dégâts et peut brûler la cible (sauf un Pokémon de type Feu). Dégèle le lanceur s’il est gelé.
+gen2,EFFECT_FLINCH_HIT,,,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
+gen2,EFFECT_FLINCH_HIT,HEADBUTT,,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci. Hors combat : secoue les arbres pour en faire tomber des Pokémon sauvages."
+gen2,EFFECT_FLY,FLY,,"Le lanceur s’envole au premier tour, où seules Fatal-Foudre, Ouragan et Tornade peuvent l’atteindre, puis frappe au tour suivant. Hors combat : permet de voler vers une ville déjà visitée."
+gen2,EFFECT_FLY,DIG,,"Le lanceur creuse un trou au premier tour, où seules Séisme et Ampleur peuvent l’atteindre, puis frappe au tour suivant. Hors combat : fait sortir d’une grotte ou d’un donjon."
+gen2,EFFECT_FOCUS_ENERGY,,,Augmente le taux de coups critiques du lanceur.
+gen2,EFFECT_FORCE_SWITCH,,,"Agit en dernier : met fin à un combat contre un Pokémon sauvage, ou force le dresseur adverse à changer de Pokémon."
+gen2,EFFECT_FORESIGHT,,,Annule l’Esquive de la cible et permet aux attaques Normal et Combat de toucher un Pokémon de type Spectre.
+gen2,EFFECT_FREEZE_HIT,,,Inflige des dégâts et peut geler la cible (sauf un Pokémon de type Glace ou par temps ensoleillé).
+gen2,EFFECT_FRUSTRATION,,,Inflige des dégâts d’autant plus forts que le Pokémon est peu attaché à son Dresseur.
+gen2,EFFECT_FURY_CUTTER,,,Inflige des dégâts dont la puissance double à chaque utilisation réussie consécutive.
+gen2,EFFECT_FUTURE_SIGHT,,,La cible subit les dégâts deux tours plus tard.
+gen2,EFFECT_GUST,,,"Inflige des dégâts, doublés si la cible est dans les airs (Vol)."
+gen2,EFFECT_HEAL,,,Le lanceur récupère la moitié de ses PV max.
+gen2,EFFECT_HEAL,SOFTBOILED,,Le lanceur récupère la moitié de ses PV max. Hors combat : donne une partie de ses PV à un autre Pokémon de l’équipe.
+gen2,EFFECT_HEAL,MILK_DRINK,,Le lanceur récupère la moitié de ses PV max. Hors combat : donne une partie de ses PV à un autre Pokémon de l’équipe.
+gen2,EFFECT_HEAL,REST,,"Le lanceur récupère tous ses PV et soigne son statut, puis s’endort pendant 2 tours."
+gen2,EFFECT_HEAL_BELL,,,Soigne le statut de tous les Pokémon de l’équipe du lanceur.
+gen2,EFFECT_HIDDEN_POWER,,,Inflige des dégâts dont le type et la puissance dépendent des valeurs individuelles du lanceur.
+gen2,EFFECT_HYPER_BEAM,,,Le lanceur doit se reposer au tour suivant.
+gen2,EFFECT_JUMP_KICK,,,"Si l’attaque rate, le lanceur se blesse et perd un huitième des dégâts qu’il aurait infligés."
+gen2,EFFECT_LEECH_HIT,,,Inflige des dégâts ; le lanceur récupère la moitié des dégâts infligés.
+gen2,EFFECT_LEECH_SEED,,,"La cible perd un huitième de ses PV max à chaque tour, que le lanceur récupère. Sans effet sur les Pokémon de type Plante."
+gen2,EFFECT_LEVEL_DAMAGE,,,Inflige autant de dégâts que le niveau du lanceur.
+gen2,EFFECT_LIGHT_SCREEN,,,"Pendant 5 tours, double la Défense Spéciale des Pokémon du lanceur face aux attaques spéciales."
+gen2,EFFECT_LOCK_ON,,,"Au tour suivant, la prochaine attaque du lanceur touche la cible à coup sûr."
+gen2,EFFECT_MAGNITUDE,,,"Inflige des dégâts de puissance aléatoire, de 10 à 150, doublés si la cible est sous terre (Tunnel)."
+gen2,EFFECT_MEAN_LOOK,,,"Empêche la cible de fuir ou d’être remplacée, tant que le lanceur reste au combat."
+gen2,EFFECT_METRONOME,,,Lance une attaque choisie au hasard.
+gen2,EFFECT_MIMIC,,,"Copie la dernière attaque utilisée par la cible, qui remplace Copie jusqu’à la fin du combat."
+gen2,EFFECT_MIRROR_COAT,,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il venait d’une attaque spéciale."
+gen2,EFFECT_MIRROR_MOVE,,,Relance la dernière attaque utilisée par la cible.
+gen2,EFFECT_MIST,,,"Protège le lanceur des baisses de statistiques infligées par l’adversaire, tant qu’il reste au combat."
+gen2,EFFECT_MOONLIGHT,,,"Le lanceur récupère la moitié de ses PV max la nuit, le quart le reste du temps ; deux fois plus par temps ensoleillé, deux fois moins sous la pluie ou dans une tempête de sable."
+gen2,EFFECT_MORNING_SUN,,,"Le lanceur récupère la moitié de ses PV max le matin, le quart le reste du temps ; deux fois plus par temps ensoleillé, deux fois moins sous la pluie ou dans une tempête de sable."
+gen2,EFFECT_MULTI_HIT,,,Frappe 2 à 5 fois de suite.
+gen2,EFFECT_NIGHTMARE,,,"Une cible endormie perd un quart de ses PV max à chaque tour, tant qu’elle dort."
+gen2,EFFECT_OHKO,,,Met la cible K.O. en un coup. Échoue si la cible a un niveau plus élevé que le lanceur ; touche d’autant plus souvent que le lanceur la dépasse en niveau.
+gen2,EFFECT_PAIN_SPLIT,,,"Additionne les PV du lanceur et ceux de la cible, puis les partage entre eux à parts égales."
+gen2,EFFECT_PARALYZE,,,Paralyse la cible.
+gen2,EFFECT_PARALYZE_HIT,,,Inflige des dégâts et peut paralyser la cible.
+gen2,EFFECT_PAY_DAY,,,"Inflige des dégâts et fait gagner de l’argent à la fin du combat, à chaque utilisation : deux fois le niveau du lanceur."
+gen2,EFFECT_PERISH_SONG,,,"Les Pokémon au combat sont mis K.O. au bout de 3 tours, sauf ceux qui sont remplacés entre-temps."
+gen2,EFFECT_POISON,,,Empoisonne la cible (sauf un Pokémon de type Poison).
+gen2,EFFECT_POISON,POISON_GAS,,Empoisonne la cible (sauf un Pokémon de type Poison ou Acier).
+gen2,EFFECT_POISON_HIT,,,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison ou Acier).
+gen2,EFFECT_POISON_MULTI_HIT,,,Frappe deux fois de suite et peut empoisonner la cible (sauf un Pokémon de type Poison).
+gen2,EFFECT_PRESENT,,,"Inflige des dégâts de puissance aléatoire : 40 (40 % des cas), 80 (30 %) ou 120 (10 %). Sinon, rend un quart de ses PV max à la cible."
+gen2,EFFECT_PRIORITY_HIT,,,Inflige des dégâts en frappant en premier (attaque prioritaire).
+gen2,EFFECT_PROTECT,,,Agit en premier : le lanceur se protège de toutes les attaques du tour. Réussit de moins en moins souvent si elle est utilisée plusieurs fois de suite.
+gen2,EFFECT_PSYCH_UP,,,Le lanceur copie les changements de statistiques de la cible.
+gen2,EFFECT_PSYWAVE,,,"Inflige des dégâts aléatoires, d’1 PV à une fois et demie le niveau du lanceur."
+gen2,EFFECT_PURSUIT,,,"Inflige des dégâts ; si la cible est remplacée ce tour-ci, la frappe avant son départ avec une puissance doublée."
+gen2,EFFECT_RAGE,,,"Tant que le lanceur continue d’utiliser Frénésie, ses dégâts augmentent chaque fois qu’il est touché."
+gen2,EFFECT_RAIN_DANCE,,,"Fait tomber la pluie pendant 5 tours : les attaques Eau sont plus puissantes, les attaques Feu plus faibles."
+gen2,EFFECT_RAMPAGE,,,"Le lanceur attaque sans pouvoir s’arrêter pendant 2 ou 3 tours, puis devient confus."
+gen2,EFFECT_RAPID_SPIN,,,"Inflige des dégâts et libère le lanceur des Picots, de Vampigraine et des attaques qui le piègent."
+gen2,EFFECT_RAZOR_WIND,,,"Le lanceur se prépare pendant un tour, puis frappe au tour suivant. Taux de coups critiques élevé."
+gen2,EFFECT_RECOIL_HIT,,,Inflige des dégâts ; le lanceur subit en contrecoup un quart des dégâts infligés.
+gen2,EFFECT_RECOIL_HIT,STRUGGLE,,Utilisée quand le lanceur n’a plus de PP. Inflige des dégâts ; le lanceur subit en contrecoup un quart des dégâts infligés.
+gen2,EFFECT_REFLECT,,,"Pendant 5 tours, double la Défense des Pokémon du lanceur face aux attaques physiques."
+gen2,EFFECT_RESET_STATS,,,Annule les changements de statistiques des deux Pokémon.
+gen2,EFFECT_RETURN,,,Inflige des dégâts d’autant plus forts que le Pokémon est attaché à son Dresseur.
+gen2,EFFECT_REVERSAL,,,Inflige des dégâts d’autant plus forts que les PV du lanceur sont bas.
+gen2,EFFECT_ROLLOUT,,,"Le lanceur attaque 5 tours de suite sans pouvoir s’arrêter ; la puissance double à chaque coup réussi, et elle est encore doublée après Boul’Armure."
+gen2,EFFECT_SACRED_FIRE,,,Inflige des dégâts et peut brûler la cible (sauf un Pokémon de type Feu). Dégèle le lanceur s’il est gelé.
+gen2,EFFECT_SAFEGUARD,,,"Pendant 5 tours, protège les Pokémon du lanceur des altérations de statut et de la confusion."
+gen2,EFFECT_SANDSTORM,,,"Déclenche une tempête de sable pendant 5 tours : à chaque tour, les Pokémon qui ne sont ni de type Roche, ni Sol, ni Acier perdent un huitième de leurs PV max."
+gen2,EFFECT_SELFDESTRUCT,,,Le lanceur est mis K.O. ; la Défense de la cible est divisée par deux pour le calcul des dégâts.
+gen2,EFFECT_SKETCH,,,"Copie définitivement la dernière attaque utilisée par la cible, qui remplace Gribouille."
+gen2,EFFECT_SKULL_BASH,,,"Le lanceur rentre la tête au premier tour, ce qui augmente sa Défense d’un niveau, puis frappe au tour suivant."
+gen2,EFFECT_SKY_ATTACK,,,"Le lanceur se concentre pendant un tour, puis frappe au tour suivant."
+gen2,EFFECT_SLEEP,,,Endort la cible pendant 1 à 6 tours.
+gen2,EFFECT_SLEEP_TALK,,,Ne fonctionne que si le lanceur dort : lance une autre de ses attaques choisie au hasard.
+gen2,EFFECT_SNORE,,,Ne fonctionne que si le lanceur dort. Inflige des dégâts et peut apeurer la cible.
+gen2,EFFECT_SOLARBEAM,,,"Le lanceur absorbe la lumière pendant un tour, puis frappe au tour suivant ; frappe dès le premier tour par temps ensoleillé."
+gen2,EFFECT_SPEED_DOWN,,,Baisse la Vitesse de la cible d’un niveau.
+gen2,EFFECT_SPEED_DOWN_2,,,Baisse la Vitesse de la cible de deux niveaux.
+gen2,EFFECT_SPEED_DOWN_HIT,,,Inflige des dégâts et peut baisser la Vitesse de la cible d’un niveau.
+gen2,EFFECT_SPEED_UP_2,,,Augmente la Vitesse du lanceur de deux niveaux.
+gen2,EFFECT_SPIKES,,,Disperse des picots chez l’adversaire : chaque Pokémon qui entre au combat perd un huitième de ses PV max (sauf un Pokémon de type Vol).
+gen2,EFFECT_SPITE,,,Retire 2 à 5 PP à la dernière attaque utilisée par la cible.
+gen2,EFFECT_SPLASH,,,N’a aucun effet.
+gen2,EFFECT_SP_ATK_UP,,,Augmente l’Attaque Spéciale du lanceur d’un niveau.
+gen2,EFFECT_SP_DEF_DOWN_HIT,,,Inflige des dégâts et peut baisser la Défense Spéciale de la cible d’un niveau.
+gen2,EFFECT_SP_DEF_UP_2,,,Augmente la Défense Spéciale du lanceur de deux niveaux.
+gen2,EFFECT_STATIC_DAMAGE,SONICBOOM,,Inflige toujours 20 PV de dégâts.
+gen2,EFFECT_STATIC_DAMAGE,DRAGON_RAGE,,Inflige toujours 40 PV de dégâts.
+gen2,EFFECT_STOMP,,,"Inflige des dégâts, doublés si la cible a utilisé Lilliput, et peut l’apeurer."
+gen2,EFFECT_SUBSTITUTE,,,Le lanceur sacrifie un quart de ses PV max pour créer un clone qui encaisse les attaques à sa place.
+gen2,EFFECT_SUNNY_DAY,,,"Fait briller le soleil pendant 5 tours : les attaques Feu sont plus puissantes, les attaques Eau plus faibles."
+gen2,EFFECT_SUPER_FANG,,,Divise par deux les PV restants de la cible.
+gen2,EFFECT_SWAGGER,,,Augmente l’Attaque de la cible de deux niveaux et la rend confuse.
+gen2,EFFECT_SYNTHESIS,,,"Le lanceur récupère la moitié de ses PV max le jour, le quart le reste du temps ; deux fois plus par temps ensoleillé, deux fois moins sous la pluie ou dans une tempête de sable."
+gen2,EFFECT_TELEPORT,,,"Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur. Hors combat, à l’extérieur : ramène au dernier Centre Pokémon visité."
+gen2,EFFECT_THIEF,,,"Inflige des dégâts et peut voler l’objet tenu par la cible, si le lanceur n’en tient pas."
+gen2,EFFECT_THUNDER,,,"Inflige des dégâts et peut paralyser la cible. Atteint un Pokémon dans les airs (Vol) ; ne rate jamais sous la pluie, mais touche environ une fois sur deux par temps ensoleillé."
+gen2,EFFECT_TOXIC,,,Empoisonne gravement la cible : les dégâts du poison augmentent à chaque tour (sauf un Pokémon de type Poison ou Acier).
+gen2,EFFECT_TRANSFORM,,,"Le lanceur prend l’apparence, les types, les statistiques et les attaques de la cible."
+gen2,EFFECT_TRAP_TARGET,,,Inflige des dégâts et piège la cible pendant 2 à 5 tours : elle ne peut pas fuir et perd un seizième de ses PV max à chaque tour.
+gen2,EFFECT_TRAP_TARGET,WHIRLPOOL,,Inflige des dégâts et piège la cible pendant 2 à 5 tours : elle ne peut pas fuir et perd un seizième de ses PV max à chaque tour. Hors combat : permet de franchir les tourbillons.
+gen2,EFFECT_TRIPLE_KICK,,,"Frappe 1 à 3 fois de suite, plus fort à chaque coup."
+gen2,EFFECT_TRI_ATTACK,,,"Inflige des dégâts et peut brûler, geler ou paralyser la cible."
+gen2,EFFECT_TWISTER,,,"Inflige des dégâts, doublés si la cible est dans les airs (Vol), et peut l’apeurer."

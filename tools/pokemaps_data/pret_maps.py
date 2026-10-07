@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from .pret import FIRST_INDOOR_MAP
 from .pret_models import Connection, MapObject, PretMap, Sign, Warp
-from .pret_source import annotated_lines, macro_args, parse_int, source_lines
+from .pret_source import conditional_annotated_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
     from .pret import PretRepo
@@ -67,7 +67,8 @@ def read_objects(repo: PretRepo) -> dict[str, tuple[int, list[Warp], list[Sign],
         warps: list[Warp] = []
         signs: list[Sign] = []
         objs: list[MapObject] = []
-        for line, comment in annotated_lines(path):
+        # Une ROM du commerce n'est pas assemblée avec _DEBUG : Jaune ajoute des warps de test dans la chambre de Red.
+        for line, comment in conditional_annotated_lines(path, frozenset()):
             if line.endswith("_Object:"):
                 label = line[: -len("_Object:")]
             elif line.startswith("db $") and label and not warps and not objs:
