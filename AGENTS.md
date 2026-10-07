@@ -100,7 +100,10 @@ conçue pour accueillir ensuite d'autres jeux. Carte et Pokédex sont liés dans
   rapport. Toute version passe par `gradle/libs.versions.toml`, jamais en dur.
 - Utiliser directement les API Android 17 : pas de `Build.VERSION`, pas de compat superflue.
 - Mises à jour : `.\gradlew.bat dependencyUpdates` liste les versions stables sans rien modifier ;
-  toute montée de version reste manuelle et passe les contrôles du §8.
+  toute montée de version reste manuelle et passe les contrôles du §8. C'est pourquoi les contrôles
+  Lint de versions publiées (`AndroidGradlePluginVersion`, `GradleDependency`,
+  `NewerVersionAvailable`) sont désactivés dans `app/build.gradle.kts` : seule exception globale
+  admise à la règle 10, car leur résultat dépend du jour du build, pas du dépôt.
 - Python : dépendances épinglées dans `tools/requirements.txt` et `tools/requirements-dev.txt`.
 
 ---

@@ -83,6 +83,9 @@ android {
         checkDependencies = true
         checkAllWarnings = true
         warningsAsErrors = true
+        // Ces contrôles comparent nos versions à celles publiées en ligne : la CI cassait à chaque sortie
+        // de Gradle, d'AGP ou d'une bibliothèque, sans changement du dépôt. `dependencyUpdates` les remplace.
+        disable += setOf("AndroidGradlePluginVersion", "GradleDependency", "NewerVersionAvailable")
     }
 }
 
