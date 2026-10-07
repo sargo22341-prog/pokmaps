@@ -57,6 +57,7 @@ data class MapZone(
     val mapId: Int,
     val name: String,
     val places: List<MapPlace>,
+    val items: List<MapObject> = emptyList(),
     val loading: Boolean = true,
     val encounters: List<Encounter> = emptyList(),
     val failed: Boolean = false

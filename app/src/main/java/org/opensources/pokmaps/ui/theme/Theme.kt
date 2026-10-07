@@ -12,5 +12,6 @@ private val DarkColors = darkColorScheme(primary = PokeRedDark)
  * Thème sombre unique de l'application, indépendant du thème et des couleurs du système.
  */
 @Composable
-fun PokemapsTheme(content: @Composable () -> Unit) =
+fun PokemapsTheme(content: @Composable () -> Unit) {
     MaterialTheme(colorScheme = DarkColors, content = content)
+}

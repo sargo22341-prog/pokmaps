@@ -21,7 +21,15 @@ internal class MapSelection(
     fun selectZone(catalog: MapCatalog, zoneId: Int) {
         val game = session.loaded.value?.game ?: return
         val info = catalog.maps[zoneId] ?: return
-        val zone = MapZone(zoneId, info.name, MapZoneContent.places(catalog, info))
+        val items = catalog.objects[zoneId].orEmpty().filter {
+            it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM
+        }
+        val zone = MapZone(
+            mapId = zoneId,
+            name = info.name,
+            places = MapZoneContent.places(catalog, info),
+            items = items
+        )
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
         session.update { it.copy(zone = zone, detail = null, zoneListOpen = false) }
         session.refreshOverlays()

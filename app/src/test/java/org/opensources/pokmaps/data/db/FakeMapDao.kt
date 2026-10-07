@@ -7,8 +7,11 @@ package org.opensources.pokmaps.data.db
  * coûte plus cher dans Rouge que dans Bleu. `failing` simule une base illisible, `encountersFailing` une erreur
  * limitée à la lecture des rencontres.
  */
-internal class FakeMapDao(private val failing: Boolean = false, private val encountersFailing: Boolean = false) :
-    MapDao {
+internal class FakeMapDao(
+    private val failing: Boolean = false,
+    private val encountersFailing: Boolean = false,
+    private val includeHiddenItem: Boolean = false
+) : MapDao {
     override suspend fun maps(versionGroupId: Int) = read {
         listOf(
             MapEntity(WORLD, versionGroupId, "kanto", "Kanto", null, 0, 0, 480, 432, 2),
@@ -31,11 +34,18 @@ internal class FakeMapDao(private val failing: Boolean = false, private val enco
             mapObject(TRAINER, ROUTE_1, 200 to 100, "trainer", "Gamin", "youngster", trainerClass = "youngster"),
             mapObject(CLERK, MART, 40 to 40, "npc", "Vendeur", "clerk"),
             mapObject(ITEM, ROUTE_1, 220 to 120, "item", "Potion", item = POTION),
+            *hiddenItems(),
             mapObject(FOSSIL, LAB, 24 to 24, "npc_object", "Fossile", "fossil"),
             mapObject(REVIVER, LAB, 56 to 24, "npc", "Scientifique", "scientist"),
             mapObject(NURSE, LAB, 88 to 24, "npc", "Infirmière", "nurse"),
             mapObject(PRIZES, LAB, 56 to 88, "prize_vendor", "Comptoir des lots")
         )
+    }
+
+    private fun hiddenItems(): Array<MapObjectRow> = if (includeHiddenItem) {
+        arrayOf(mapObject(HIDDEN_ITEM, ROUTE_1, 240 to 120, "hidden_item", "Super Potion", item = POTION))
+    } else {
+        emptyArray()
     }
 
     private fun mapObject(
@@ -181,6 +191,7 @@ internal class FakeMapDao(private val failing: Boolean = false, private val enco
         const val TRAINER = 10
         const val CLERK = 11
         const val ITEM = 12
+        const val HIDDEN_ITEM = 18
         const val FOSSIL = 13
         const val REVIVER = 14
         const val NURSE = 15

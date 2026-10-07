@@ -32,8 +32,11 @@ class MapSelectionTest {
     }
 
     /** Session avec le catalogue du petit monde ; `details` sert les rencontres et les fiches. */
-    private suspend fun TestScope.fixture(details: FakeMapDao = FakeMapDao()): Fixture {
-        val catalog = MapRepository(FakeMapDao()).catalog(FakeGameDao.RED)
+    private suspend fun TestScope.fixture(
+        details: FakeMapDao = FakeMapDao(),
+        catalogData: FakeMapDao = FakeMapDao()
+    ): Fixture {
+        val catalog = MapRepository(catalogData).catalog(FakeGameDao.RED)
         return Fixture(CoroutineScope(UnconfinedTestDispatcher(testScheduler)), details).apply {
             session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         }
@@ -61,6 +64,15 @@ class MapSelectionTest {
         assertTrue(zone.encounters.isEmpty())
         assertFalse(zone.failed)
         assertEquals(listOf("Jadielle"), zone.places.map { it.name })
+    }
+
+    @Test
+    fun aZoneListsVisibleAndHiddenItems() = runTest {
+        val fixture = fixture(catalogData = FakeMapDao(includeHiddenItem = true))
+        fixture.select(FakeMapDao.ROUTE_1)
+        val items = checkNotNull(fixture.session.current.zone).items
+        assertEquals(listOf(FakeMapDao.ITEM, FakeMapDao.HIDDEN_ITEM), items.map { it.id })
+        assertEquals(listOf("ITEM", "HIDDEN_ITEM"), items.map { it.kind.name })
     }
 
     @Test

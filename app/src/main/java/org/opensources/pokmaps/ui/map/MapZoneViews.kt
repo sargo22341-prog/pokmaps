@@ -28,9 +28,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.map.MapObject
+import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.PixelArt
+import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SpriteSize
 
 // Lieu sélectionné sur la carte : barre du bas et liste détaillée.
@@ -104,7 +110,9 @@ internal fun ZoneListSheet(
     caught: Set<Int>,
     onDismiss: () -> Unit,
     onOpenPlace: (MapPlace) -> Unit,
-    onOpenPokemon: (Int) -> Unit
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit,
+    onShowObject: (Int) -> Unit
 ) {
     ModalBottomSheet(onDismissRequest = onDismiss) {
         Column(
@@ -114,43 +122,81 @@ internal fun ZoneListSheet(
                 .padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
         ) {
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
-            when {
-                zone.loading -> CircularProgressIndicator(Modifier.padding(16.dp))
+            ZoneEncounters(zone, caught, onOpenPokemon)
+            ZoneItems(zone, onOpenItem, onShowObject)
+            ZonePlaces(zone, onOpenPlace)
+        }
+    }
+}
 
-                zone.failed -> Text(
-                    stringResource(R.string.data_load_error),
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+@Composable
+private fun ZoneEncounters(zone: MapZone, caught: Set<Int>, onOpenPokemon: (Int) -> Unit) {
+    when {
+        zone.loading -> CircularProgressIndicator(Modifier.padding(16.dp))
 
-                zone.encounters.isEmpty() -> Text(
-                    stringResource(R.string.map_no_encounter),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+        zone.failed -> Text(
+            stringResource(R.string.data_load_error),
+            color = MaterialTheme.colorScheme.error,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
 
-                else -> EncounterGroups(
-                    zone.groups,
-                    title = { it.pokemonName },
-                    spritePlace = SpritePlace.MAP_LIST,
-                    spriteSize = SpriteSize.LIST,
-                    caught = { it.pokemonId in caught },
-                    onClick = { onOpenPokemon(it.pokemonId) }
-                )
-            }
-            if (zone.places.isNotEmpty()) {
-                Text(
-                    stringResource(R.string.map_places),
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
-                )
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    zone.places.forEach { place ->
-                        FilledTonalButton(onClick = { onOpenPlace(place) }) { Text(place.name) }
-                    }
-                }
-            }
+        zone.encounters.isEmpty() -> Text(
+            stringResource(R.string.map_no_encounter),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+
+        else -> EncounterGroups(
+            zone.groups,
+            title = { it.pokemonName },
+            spritePlace = SpritePlace.MAP_LIST,
+            spriteSize = SpriteSize.LIST,
+            caught = { it.pokemonId in caught },
+            onClick = { onOpenPokemon(it.pokemonId) }
+        )
+    }
+}
+
+@Composable
+private fun ZoneItems(zone: MapZone, onOpenItem: (String) -> Unit, onShowObject: (Int) -> Unit) {
+    if (zone.items.isEmpty()) return
+    Text(
+        stringResource(R.string.label_items),
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+    )
+    zone.items.forEach { obj -> ZoneItemRow(obj, onOpenItem, onShowObject) }
+}
+
+@Composable
+private fun ZoneItemRow(obj: MapObject, onOpenItem: (String) -> Unit, onShowObject: (Int) -> Unit) {
+    val identifier = obj.itemIdentifier
+    SheetRow(
+        title = obj.itemName.orEmpty(),
+        subtitle = stringResource(
+            if (obj.kind == MapObjectKind.HIDDEN_ITEM) R.string.map_hidden_item else R.string.map_item
+        ),
+        onClick = identifier?.let { { onOpenItem(it) } },
+        onShowOnMap = { onShowObject(obj.id) },
+        content = {
+            if (identifier != null) PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
+        }
+    )
+}
+
+@Composable
+private fun ZonePlaces(zone: MapZone, onOpenPlace: (MapPlace) -> Unit) {
+    if (zone.places.isEmpty()) return
+    Text(
+        stringResource(R.string.map_places),
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+    )
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        zone.places.forEach { place ->
+            FilledTonalButton(onClick = { onOpenPlace(place) }) { Text(place.name) }
         }
     }
 }

@@ -25,6 +25,8 @@ import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.api.setMapBackground
 import ovh.plrapps.mapcompose.api.snapScrollTo
+import ovh.plrapps.mapcompose.ui.layout.Fit
+import ovh.plrapps.mapcompose.ui.layout.Forced
 import ovh.plrapps.mapcompose.ui.state.MapState
 
 /**
@@ -45,7 +47,12 @@ internal class MapNavigation(
     /** Ouvre un lieu : carte intérieure, ou ville et route (sur la carte du monde). */
     fun openPlace(place: MapPlace) {
         session.update { it.copy(detail = null, zoneListOpen = false) }
-        open(place.mapId, place.x, place.y)
+        val target = session.catalog?.maps?.get(place.mapId)
+        if (target != null && target.parentId == null && target.identifier != GameMap.WORLD) {
+            open(place.mapId)
+        } else {
+            open(place.mapId, place.x, place.y)
+        }
     }
 
     /**
@@ -166,6 +173,7 @@ internal class MapNavigation(
         return MapState(map.levelCount, map.width, map.height, GameMap.TILE_SIZE) {
             scroll(startX, startY)
             scale(scale)
+            minimumScaleMode(if (map.identifier == GameMap.WORLD) Fit else Forced(MIN_INDOOR_SCALE))
             maxScale(MAX_SCALE)
             // Pixels nets en zoom avant ; lissage seulement quand la carte est réduite.
             bitmapFilteringEnabled { state -> state.scale < 1.0 }
@@ -303,6 +311,7 @@ internal class MapNavigation(
         const val START_REGION = "pallet-town"
         const val WORLD_SCALE = 2.0
         const val FOCUS_SCALE = 4.0
+        const val MIN_INDOOR_SCALE = 0.5
         const val ZONE_FOCUS_MIN_SCALE = 3.0
         const val MAX_SCALE = 12.0
         const val CENTER = 0.5

@@ -117,6 +117,14 @@ fun MapScreen(
             onOpenPokemon = { id ->
                 onAction(MapAction.CloseZoneList)
                 onOpenPokemon(id)
+            },
+            onOpenItem = { identifier ->
+                onAction(MapAction.CloseZoneList)
+                onOpenItem(identifier)
+            },
+            onShowObject = { id ->
+                onAction(MapAction.CloseZoneList)
+                onAction(MapAction.FocusObject(id))
             }
         )
     }
