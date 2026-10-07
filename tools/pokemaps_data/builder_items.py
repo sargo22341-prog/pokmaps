@@ -6,9 +6,8 @@ from collections.abc import Iterable
 from functools import cached_property
 from typing import TYPE_CHECKING
 
-from .games import Game
+from .games import Game, PretFormat
 from .pokeapi import FRENCH, clean_text
-from .pret_gen2 import Gen2PretRepo
 from .pret_identifiers import item_identifier, species_identifier
 
 if TYPE_CHECKING:
@@ -24,6 +23,8 @@ BALL_CATEGORIES = ("standard-balls", "special-balls", "apricorn-balls")
 _GEN2_HELD_ITEM_256 = 256 - (75 * 255 // 100 + 1)
 _GEN2_SECOND_ITEM_256 = 8 * 255 // 100
 _NO_ITEM = "NO_ITEM"
+# Première génération dont PokéAPI donne les objets tenus (pokemon_items).
+_POKEAPI_HELD_ITEMS_GENERATION = 3
 # Objets tenus absents de PokéAPI, écartés parce qu'aucun Pokémon sauvage ne peut les tenir : la Berserk Gene n'est
 # tenue que par Mewtwo, qu'on ne rencontre pas dans Or et Argent. Une rencontre de ce Pokémon arrête la génération.
 _HELD_ITEMS_WITHOUT_WILD_HOLDER = frozenset({"BERSERK_GENE"})
@@ -59,15 +60,18 @@ class ItemTables:
     def pokemon_item_rows(self) -> list[tuple[int, int, int, int]]:
         """Objets tenus par les Pokémon sauvages de chaque version : (espèce, version, objet, probabilité en %).
 
-        La 1re génération n'en a pas ; ceux de la 2e sont lus dans pret (PokéAPI ne les donne qu'à partir de la 3e)."""
+        PokéAPI ne les donne qu'à partir de la 3e génération ; avant, le format pret du jeu décide : la 1re génération
+        n'en a pas, ceux de la 2e sont lus dans pret."""
         rows: list[tuple[int, int, int, int]] = []
-        for game in self.builder.games:
-            vg = next(int(row["id"]) for row in self.builder.vg_rows if row["identifier"] == game.version_group)
-            generation = self.builder.vg_generation[vg]
-            if generation == 2:
-                rows += self._pret_held_items(game, vg)
-            elif generation > 2:
+        for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
+            if self.builder.vg_generation[vg] >= _POKEAPI_HELD_ITEMS_GENERATION:
                 rows += self._pokeapi_held_items(vg)
+                continue
+            match game.pret_format:
+                case PretFormat.GEN1:
+                    pass
+                case PretFormat.GEN2:
+                    rows += self._pret_held_items(game, vg)
         return sorted(rows)
 
     def _pokeapi_held_items(self, vg: int) -> list[tuple[int, int, int, int]]:
@@ -85,9 +89,7 @@ class ItemTables:
 
     def _pret_held_items(self, game: Game, vg: int) -> list[tuple[int, int, int, int]]:
         """Objets 1 et 2 des données de base de chaque Pokémon (pret), avec les probabilités du moteur."""
-        if game.version_group not in self.builder.pret_roots:
-            raise ValueError(f"Désassemblage pret manquant pour lire les objets tenus : {game.version_group}")
-        repo = Gen2PretRepo(self.builder.pret_roots[game.version_group], game.pret_versions)
+        repo = self.builder.gen2_repo(game, "les objets tenus")
         species = {row["identifier"]: species_id for species_id, row in self.builder.species.items()}
         item_ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
         versions = [int(row["id"]) for row in self.builder.version_rows if int(row["version_group_id"]) == vg]

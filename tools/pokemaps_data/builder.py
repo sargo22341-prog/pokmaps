@@ -17,9 +17,10 @@ from .builder_items import ItemTables
 from .builder_maps import build_map_tables
 from .builder_moves import MoveTables
 from .builder_pokemon import PokemonTables
-from .games import GAMES, Game
+from .games import GAMES, Game, PretFormat
 from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
+from .pret_gen2 import Gen2PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
 SCHEMA_VERSION = 8
@@ -41,6 +42,7 @@ class DatabaseBuilder:
         self.map_data = map_data or {}
         # Désassemblage pret de chaque groupe de versions (effets des attaques), aucun si None.
         self.pret_roots = pret_roots or {}
+        self._gen2_repos: dict[str, Gen2PretRepo] = {}
         groups = {row["identifier"]: row for row in api.table("version_groups")}
         missing = [game.version_group for game in games if game.version_group not in groups]
         if missing:
@@ -69,6 +71,18 @@ class DatabaseBuilder:
             if vg == version_group_id:
                 return game
         raise ValueError(f"Groupe de versions non configuré : {version_group_id}")
+
+    def gen2_repo(self, game: Game, purpose: str) -> Gen2PretRepo:
+        """Désassemblage pret du jeu de la 2e génération `game`, lu une seule fois pour toutes les tables.
+
+        `purpose` nomme ce qu'on y lit, pour le message d'erreur si le dépôt manque."""
+        if game.pret_format is not PretFormat.GEN2:
+            raise ValueError(f"{game.version_group} n'a pas de sources pret de la 2e génération ({purpose})")
+        if game.version_group not in self.pret_roots:
+            raise ValueError(f"Désassemblage pret manquant pour lire {purpose} : {game.version_group}")
+        if game.version_group not in self._gen2_repos:
+            self._gen2_repos[game.version_group] = Gen2PretRepo(self.pret_roots[game.version_group], game.pret_versions)
+        return self._gen2_repos[game.version_group]
 
     @cached_property
     def species(self) -> dict[int, dict[str, str]]:

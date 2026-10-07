@@ -66,11 +66,22 @@ class ConnectionSkip:
 
 
 @dataclass(frozen=True)
+class MapParent:
+    """Carte à part atteinte depuis plusieurs villes ou routes : celle d'où l'on y entre normalement."""
+
+    family: str
+    map: str
+    parent: str  # ville ou route d'une carte du monde, d'où un warp mène directement à `map`
+
+
+@dataclass(frozen=True)
 class LayoutCuration:
-    """Ancrages (map_anchors.csv) et connexions écartées (map_connection_skips.csv), toutes familles confondues."""
+    """Ancrages (map_anchors.csv), connexions écartées (map_connection_skips.csv) et origines choisies des cartes à
+    part (map_parents.csv), toutes familles confondues."""
 
     anchors: tuple[MapAnchor, ...]
     skips: tuple[ConnectionSkip, ...]
+    parents: tuple[MapParent, ...]
 
 
 def read_layout_curation() -> LayoutCuration:
@@ -81,7 +92,9 @@ def read_layout_curation() -> LayoutCuration:
         )
     with (DATA_DIR / "map_connection_skips.csv").open(encoding="utf-8", newline="") as handle:
         skips = tuple(ConnectionSkip(row["family"], row["map"], row["target"]) for row in csv.DictReader(handle))
-    return LayoutCuration(anchors, skips)
+    with (DATA_DIR / "map_parents.csv").open(encoding="utf-8", newline="") as handle:
+        parents = tuple(MapParent(row["family"], row["map"], row["parent"]) for row in csv.DictReader(handle))
+    return LayoutCuration(anchors, skips, parents)
 
 
 def spread(cells: list[Cell], count: int, seed: str) -> list[Cell]:
@@ -122,6 +135,7 @@ class GameMaps:
             if skip.map not in self.maps or skip.target not in {c.target for c in self.maps[skip.map].connections}:
                 raise ValueError(f"map_connection_skips.csv : connexion inconnue dans {game.version_group} : {skip}")
         self.skipped = {pair for skip in skips for pair in ((skip.map, skip.target), (skip.target, skip.map))}
+        self.chosen_parents = [parent for parent in curation.parents if parent.family == game.map_family]
 
     # --- Cartes du monde ----------------------------------------------------
 
@@ -211,25 +225,42 @@ class GameMaps:
     @cached_property
     def parents(self) -> dict[str, str]:
         """Cartes à part accessibles par les warps, ou par les scripts qui envoient le joueur ailleurs (intérieurs,
-        et villes ou routes hors des cartes du monde) -> ville ou route d'origine, dans une carte du monde."""
+        et villes ou routes hors des cartes du monde) -> ville ou route d'origine, dans une carte du monde.
+
+        Une carte atteinte depuis plusieurs villes ou routes prend la première dans l'ordre des cartes pret, sauf si
+        tools/data/map_parents.csv en choisit une ; les cartes qu'on atteint par elle suivent ce choix."""
+        chosen = self._chosen_parents()
         parents: dict[str, str] = {}
         queue: deque[tuple[str, str]] = deque()
         for const in sorted(self.world_region, key=lambda c: self.maps[c].number):
             queue.append((const, const))
         while queue:
             const, origin = queue.popleft()
-            pret_map = self.maps[const]
-            accessible = [warp.target for warp in pret_map.warps if warp.accessible]
-            for target in [*accessible, *pret_map.script_warps]:
-                if target == LAST_MAP or target not in self.maps or target in self.world_region:
-                    continue
-                if target not in parents:
-                    parents[target] = origin
-                    queue.append((target, origin))
+            for target in self._exits(const):
+                if target not in self.world_region and target not in parents:
+                    parents[target] = chosen.get(target, origin)
+                    queue.append((target, parents[target]))
         outdoor = {const for const, pret_map in self.maps.items() if pret_map.is_outdoor}
         if orphans := sorted(outdoor - self.world_region.keys() - parents.keys()):
             raise ValueError(f"Cartes extérieures reliées à aucune carte du monde : {orphans}")
         return parents
+
+    def _exits(self, const: str) -> list[str]:
+        """Cartes où le joueur peut aller depuis `const` : warps accessibles et warps de script."""
+        pret_map = self.maps[const]
+        targets = [*(warp.target for warp in pret_map.warps if warp.accessible), *pret_map.script_warps]
+        return [target for target in targets if target != LAST_MAP and target in self.maps]
+
+    def _chosen_parents(self) -> dict[str, str]:
+        """Origines imposées par map_parents.csv : chacune est une ville ou route d'où un warp mène à la carte."""
+        result = {}
+        for chosen in self.chosen_parents:
+            if chosen.map in self.world_region or chosen.parent not in self.world_region:
+                raise ValueError(f"map_parents.csv : {chosen.parent} -> {chosen.map} ne mène pas d'une carte du monde")
+            if chosen.map not in self._exits(chosen.parent):
+                raise ValueError(f"map_parents.csv : aucun warp de {chosen.parent} vers {chosen.map}")
+            result[chosen.map] = chosen.parent
+        return result
 
     @cached_property
     def placements(self) -> dict[str, Placed]:

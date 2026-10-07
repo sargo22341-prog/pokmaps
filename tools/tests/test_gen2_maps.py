@@ -7,7 +7,14 @@ from PIL import Image
 
 from pokemaps_data.games import GOLD_SILVER
 from pokemaps_data.maps import GameMapData
-from pokemaps_data.maps_layout import ConnectionSkip, GameMaps, LayoutCuration, MapAnchor, read_layout_curation
+from pokemaps_data.maps_layout import (
+    ConnectionSkip,
+    GameMaps,
+    LayoutCuration,
+    MapAnchor,
+    MapParent,
+    read_layout_curation,
+)
 from pokemaps_data.maps_render_gen2 import Gen2Renderer
 from pokemaps_data.pret_gen2 import Gen2PretRepo
 from pokemaps_data.pret_source import macro_args, source_lines
@@ -51,11 +58,21 @@ def test_detached_outdoor_maps_are_reached_by_warps(gold_silver_maps: GameMaps) 
     assert len(gold_silver_maps.placements) == 355
 
 
+def test_victory_road_is_entered_from_route_26(gold_silver_maps: GameMaps) -> None:
+    # La porte s'ouvre aussi sur la Route 28 (n° de carte plus petit), atteinte seulement après la Ligue.
+    parents = gold_silver_maps.parents
+    reached = ("VICTORY_ROAD_GATE", "VICTORY_ROAD", "ROUTE_23", "INDIGO_PLATEAU_POKECENTER_1F")
+    assert {const: parents[const] for const in reached} == dict.fromkeys(reached, "ROUTE_26")
+    assert parents["ROUTE_28_STEEL_WING_HOUSE"] == "ROUTE_28"
+
+
 def test_layout_curation_is_checked(gold_silver_repo: Gen2PretRepo) -> None:
     curation = read_layout_curation()
 
-    def layout(anchors: tuple[MapAnchor, ...], skips: tuple[ConnectionSkip, ...]) -> GameMaps:
-        return GameMaps(gold_silver_repo, GOLD_SILVER, LayoutCuration(anchors, skips))
+    def layout(
+        anchors: tuple[MapAnchor, ...], skips: tuple[ConnectionSkip, ...], parents: tuple[MapParent, ...] = ()
+    ) -> GameMaps:
+        return GameMaps(gold_silver_repo, GOLD_SILVER, LayoutCuration(anchors, skips, parents))
 
     with pytest.raises(ValueError, match="Connexion incohérente CELADON_CITY"):
         _ = layout(curation.anchors, ()).world_blocks
@@ -67,6 +84,10 @@ def test_layout_curation_is_checked(gold_silver_repo: Gen2PretRepo) -> None:
         layout(curation.anchors, (*curation.skips, ConnectionSkip(FAMILY, "ROUTE_29", "PALLET_TOWN")))
     with pytest.raises(ValueError, match="reliées à aucune carte du monde"):
         _ = layout((), curation.skips).parents
+    with pytest.raises(ValueError, match="aucun warp de ROUTE_29 vers VICTORY_ROAD_GATE"):
+        _ = layout(curation.anchors, curation.skips, (MapParent(FAMILY, "VICTORY_ROAD_GATE", "ROUTE_29"),)).parents
+    with pytest.raises(ValueError, match="ne mène pas d'une carte du monde"):
+        _ = layout(curation.anchors, curation.skips, (MapParent(FAMILY, "VICTORY_ROAD", "VICTORY_ROAD_GATE"),)).parents
 
 
 def _reference_interior(repo: Gen2PretRepo, const: str) -> Image.Image:

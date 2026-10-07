@@ -70,8 +70,11 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI (`map_areas.csv`),
   personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
   que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus, Pokémon de départ du
-  labo du Prof. Chen) et texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
-  attaque particulière, avec sa probabilité en chances sur 256 relevée dans `engine/battle/effects.asm`).
+  labo du Prof. Chen), texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
+  attaque particulière, avec sa probabilité en chances sur 256 relevée dans `engine/battle/effects.asm`) et placement
+  des cartes là où les connexions ne suffisent pas : cartes ancrées dans une carte du monde (`map_anchors.csv`),
+  connexions incohérentes écartées (`map_connection_skips.csv`) et ville ou route d'origine d'une carte atteinte de
+  plusieurs côtés (`map_parents.csv`).
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre

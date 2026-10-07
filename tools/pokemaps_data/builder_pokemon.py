@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING
 
 from .games import PretFormat
 from .pokeapi import ENGLISH, FRENCH, clean_text, optional_int, value_at
-from .pret_gen2 import Gen2PretRepo
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -188,11 +187,7 @@ class PokemonTables:
             case PretFormat.GEN1:
                 return None
             case PretFormat.GEN2:
-                if game.version_group not in self.builder.pret_roots:
-                    raise ValueError(
-                        f"Désassemblage pret manquant pour lire le bonheur d'évolution : {game.version_group}"
-                    )
-                return Gen2PretRepo(self.builder.pret_roots[game.version_group], game.pret_versions).happiness_to_evolve
+                return self.builder.gen2_repo(game, "le bonheur d'évolution").happiness_to_evolve
 
     def _evolution_methods(self, vg: int, candidates: list[dict[str, str]]) -> list[dict[str, str]]:
         """Méthodes valables dans ce jeu : celles introduites au plus tard dans ce groupe de versions,
