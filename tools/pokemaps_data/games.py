@@ -16,15 +16,15 @@ from dataclasses import dataclass
 class Game:
     # Identifiant PokéAPI du groupe de versions (ex. "red-blue").
     version_group: str
-    # Dossier des sprites du jeu dans PokeAPI/sprites (sprites/pokemon/<dossier>/<numéro>.png).
-    sprite_folder: str
     # Désassemblage pret d'où sont générées les cartes (cf. sources.PRET_COMMITS).
     pret_repo: str
+    # Versions PokéAPI du jeu et symbole qui les distingue dans pret (IF DEF(_RED) : propre à Rouge).
+    pret_versions: tuple[tuple[str, str], ...]
 
 
 GAMES: tuple[Game, ...] = (
-    Game("red-blue", "versions/generation-i/red-blue/transparent", "pokered"),
-    Game("yellow", "versions/generation-i/yellow/transparent", "pokeyellow"),
+    Game("red-blue", "pokered", (("red", "_RED"), ("blue", "_BLUE"))),
+    Game("yellow", "pokeyellow", (("yellow", "_YELLOW"),)),
 )
 
 # Méthodes de rencontre « uniques » (un Pokémon donné, fixe ou échangé) : pas de probabilité,

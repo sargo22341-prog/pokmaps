@@ -55,13 +55,14 @@ class ItemTables:
 
     @cached_property
     def offer_item_ids(self) -> dict[str, int]:
-        """Objets donnés ou vendus par les personnages : identifiant PokéAPI -> id."""
+        """Objets donnés, vendus, gagnés ou demandés en échange par les personnages : identifiant PokéAPI -> id."""
         identifiers = {
-            offer.item
+            item
             for data in self.builder.map_data.values()
             for obj in data.objects
             for offer in obj.offers
-            if offer.item
+            for item in (offer.item, offer.wanted_item)
+            if item
         }
         return self._known_items(identifiers, "Objets des personnages")
 
@@ -75,5 +76,5 @@ class ItemTables:
         ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
         unknown = sorted(set(identifiers) - ids.keys())
         if unknown:
-            raise ValueError(f"{label} inconnus de PokéAPI : {unknown} (voir maps.ITEM_ALIASES)")
+            raise ValueError(f"{label} inconnus de PokéAPI : {unknown} (voir maps_characters.ITEM_ALIASES)")
         return {identifier: ids[identifier] for identifier in identifiers}

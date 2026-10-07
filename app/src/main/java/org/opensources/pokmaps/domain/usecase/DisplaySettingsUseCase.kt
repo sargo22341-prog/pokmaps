@@ -3,14 +3,14 @@ package org.opensources.pokmaps.domain.usecase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import org.opensources.pokmaps.data.settings.DisplaySettings
+import org.opensources.pokmaps.domain.model.SpritePlace
 
-/** Réglages d'affichage des sprites animés : Pokédex et fiches d'un côté, carte de l'autre. */
+/** Sprites animés ou fixes, endroit par endroit (carte, liste du lieu, Pokédex, fiches, évolutions…). */
 class DisplaySettingsUseCase @Inject constructor(private val settings: DisplaySettings) {
-    val animatedSprites: Flow<Boolean> = settings.animatedSprites
+    val animatedPlaces: Flow<Set<SpritePlace>> = settings.animatedPlaces
 
-    val mapAnimatedSprites: Flow<Boolean> = settings.mapAnimatedSprites
+    suspend fun setAnimated(place: SpritePlace, enabled: Boolean) = settings.setAnimated(setOf(place), enabled)
 
-    suspend fun setAnimatedSprites(enabled: Boolean) = settings.setAnimatedSprites(enabled)
-
-    suspend fun setMapAnimatedSprites(enabled: Boolean) = settings.setMapAnimatedSprites(enabled)
+    /** Anime ou fige les sprites partout. */
+    suspend fun setAllAnimated(enabled: Boolean) = settings.setAnimated(SpritePlace.entries.toSet(), enabled)
 }

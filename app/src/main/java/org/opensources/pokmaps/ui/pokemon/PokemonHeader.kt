@@ -1,39 +1,25 @@
 package org.opensources.pokmaps.ui.pokemon
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
-import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
-import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
-import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.FavoriteButton
-import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.formatNumber
 
@@ -81,41 +67,10 @@ private fun CollectionRow(
     }
 }
 
-/** Sprite du jeu (animé selon le réglage) ou artwork officiel, chargé en ligne à la demande. */
+/** Sprite du Pokémon, animé selon le réglage. */
 @Composable
 private fun PokemonImage(details: PokemonDetails) {
-    var showArtwork by rememberSaveable(details.id) { mutableStateOf(false) }
-    var artworkFailed by remember(details.id) { mutableStateOf(false) }
-    Box(Modifier.size(SPRITE_SIZE), contentAlignment = Alignment.Center) {
-        if (showArtwork && !artworkFailed) {
-            AsyncImage(
-                model = Sprites.officialArtwork(details.id),
-                contentDescription = details.name,
-                filterQuality = FilterQuality.Medium,
-                onError = { artworkFailed = true },
-                modifier = Modifier.fillMaxSize()
-            )
-        } else if (LocalAnimatedSprites.current) {
-            AnimatedPokemonSprite(details.id, details.name, Modifier.fillMaxSize())
-        } else {
-            AssetImage(details.spritePath ?: details.iconPath, details.name, Modifier.fillMaxSize())
-        }
-    }
-    TextButton(onClick = { showArtwork = !showArtwork }) {
-        Icon(
-            painterResource(R.drawable.ic_image),
-            contentDescription = null,
-            modifier = Modifier.padding(end = 8.dp)
-        )
-        Text(stringResource(if (showArtwork) R.string.pokemon_show_sprite else R.string.pokemon_show_artwork))
-    }
-    if (showArtwork && artworkFailed) {
-        Text(
-            stringResource(R.string.pokemon_artwork_error),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.error
-        )
-    }
+    PokemonSprite(details.id, SpritePlace.POKEMON_SHEET, SpriteSize.HEADER, details.name)
 }
 
 /** Numéro, nom, catégorie, types, mensurations, capture, croissance et description. */
@@ -149,5 +104,3 @@ private fun Identity(details: PokemonDetails) {
         Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
     }
 }
-
-private val SPRITE_SIZE = 160.dp

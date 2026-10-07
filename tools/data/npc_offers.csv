@@ -1,0 +1,7 @@
+repos,text,kind,item,wanted_item,quantity,price
+pokered|pokeyellow,TEXT_BIKESHOP_CLERK,exchange,BICYCLE,BIKE_VOUCHER,,
+pokered|pokeyellow,TEXT_CELADONMARTROOF_LITTLE_GIRL,exchange,TM_ICE_BEAM,FRESH_WATER,,
+pokered|pokeyellow,TEXT_CELADONMARTROOF_LITTLE_GIRL,exchange,TM_ROCK_SLIDE,SODA_POP,,
+pokered|pokeyellow,TEXT_CELADONMARTROOF_LITTLE_GIRL,exchange,TM_TRI_ATTACK,LEMONADE,,
+pokered,TEXT_GAMECORNER_CLERK1,coin_sale,,,50,1000
+pokeyellow,TEXT_GAMECORNER_CLERK,coin_sale,,,50,1000

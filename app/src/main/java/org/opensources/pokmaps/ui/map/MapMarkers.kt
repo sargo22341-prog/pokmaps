@@ -1,11 +1,14 @@
 package org.opensources.pokmaps.ui.map
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -19,6 +22,7 @@ import androidx.compose.ui.layout.FixedScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalResources
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -32,9 +36,12 @@ import coil3.size.Size as CoilSize
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.AssetImage
+import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
 import org.opensources.pokmaps.ui.common.PixelArt
+import org.opensources.pokmaps.ui.common.facilityIcon
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.ui.state.MapState
 
@@ -72,8 +79,8 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
 }
 
 /**
- * Objet (avec son icône), objet caché, dresseur, personnage ou Pokémon fixe, à la taille `scale` choisie selon la
- * place autour de lui (voir MarkerSizing) ; Pokémon animé si `animated`.
+ * Objet (avec son icône), objet caché, dresseur, personnage, Pokémon fixe ou installation, à la taille `scale`
+ * choisie selon la place autour de lui (voir MarkerSizing).
  */
 @Composable
 fun ObjectMarker(
@@ -81,13 +88,13 @@ fun ObjectMarker(
     obj: MapObject,
     versionGroupIdentifier: String,
     alwaysVisible: Boolean = false,
-    scale: Float = 1f,
-    animated: Boolean = false
+    scale: Float = 1f
 ) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     val sprite = obj.sprite
     val itemIdentifier = obj.itemIdentifier
     val pokemonId = obj.pokemonId
+    val facility = obj.kind.facilityIcon
     Box {
         when {
             itemIdentifier != null -> AssetImage(
@@ -97,19 +104,16 @@ fun ObjectMarker(
                 alpha = if (obj.kind == MapObjectKind.HIDDEN_ITEM) HIDDEN_ALPHA else 1f
             )
 
-            obj.kind == MapObjectKind.POKEMON && pokemonId != null -> MapPokemon(
-                mapState,
-                pokemonId,
-                obj.pokemonName,
-                scale,
-                animated
-            )
+            obj.kind == MapObjectKind.POKEMON && pokemonId != null ->
+                MapPokemon(mapState, pokemonId, obj.pokemonName, scale)
 
             sprite != null -> AssetImage(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),
                 contentDescription = null,
                 modifier = Modifier.size(mapPixels(mapState, PixelArt.MAP_SPRITE, scale))
             )
+
+            facility != null -> FacilityMarker(mapState, facility, obj.name, scale)
 
             else -> Box(Modifier.size(mapPixels(mapState, TILE_PX / 2 * scale)).background(Color.White, CircleShape))
         }
@@ -137,61 +141,62 @@ private fun BoxScope.KindBadge(mapState: MapState, kind: MapObjectKind, scale: F
             scale
         )
 
-        MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC -> Unit
+        MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT,
+        MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR -> Unit
     }
 }
 
-/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes) ; animé si `animated`. */
+/** Installation (distributeur, comptoir des lots) : son icône sur une pastille, de la taille d'une case. */
 @Composable
-fun WildPokemonMarker(mapState: MapState, wild: WildMarker, animated: Boolean = false) {
-    Box {
-        MapPokemon(mapState, wild.pokemonId, wild.name, wild.scale, animated)
-        val corner = Modifier.align(Alignment.BottomEnd)
-        when (wild.method) {
-            WildMethod.FISHING -> Badge(mapState, "🎣", WATER_COLOR, corner, wild.scale)
-            WildMethod.SURF -> Badge(mapState, "🌊", WATER_COLOR, corner, wild.scale)
-            WildMethod.WALK -> Unit
-        }
+private fun FacilityMarker(mapState: MapState, @DrawableRes icon: Int, name: String, scale: Float) {
+    val size = mapPixels(mapState, TILE_PX * scale)
+    val shape = RoundedCornerShape(size / 4)
+    Box(
+        Modifier
+            .size(size)
+            .background(FACILITY_COLOR, shape)
+            .border(size / 16, Color.White, shape),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            painterResource(icon),
+            contentDescription = name,
+            tint = Color.White,
+            modifier = Modifier.size(size * 0.7f)
+        )
     }
+}
+
+/** Pokémon sauvage, dessiné là où on le rencontre (herbes, eau, sol des grottes). */
+@Composable
+fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
+    MapPokemon(mapState, wild.pokemonId, wild.name, wild.scale)
 }
 
 /**
- * Pokémon dessiné à l'échelle de la carte : son icône de boîte, ou son sprite animé de Noir et Blanc. Un pixel du
- * sprite animé vaut [ANIMATED_RATIO] pixel de la carte : les Pokémon gardent leurs tailles relatives (un Ronflex
- * reste plus grand qu'un Chenipan) et occupent à peu près la place de leur icône. Le sprite est centré dans son
- * cadre (de la taille du plus grand sprite).
+ * Pokémon dessiné à l'échelle de la carte : son sprite de Noir et Blanc, animé ou fixe selon le réglage de la carte
+ * (même image, même taille). Un pixel du sprite vaut [POKEMON_RATIO] pixel de la carte : les Pokémon gardent leurs
+ * tailles relatives (un Ronflex reste plus grand qu'un Chenipan). Le sprite est centré dans son cadre, de la taille
+ * du plus grand sprite.
  */
 @Composable
-private fun MapPokemon(
-    mapState: MapState,
-    pokemonId: Int,
-    contentDescription: String?,
-    scale: Float,
-    animated: Boolean
-) {
-    if (!animated) {
-        AssetImage(
-            Sprites.pokemonIcon(pokemonId),
-            contentDescription = contentDescription,
-            modifier = Modifier.size(mapPixels(mapState, PixelArt.POKEMON_ICON, scale))
-        )
-        return
-    }
+private fun MapPokemon(mapState: MapState, pokemonId: Int, contentDescription: String?, scale: Float) {
     val context = LocalContext.current
     val resources = LocalResources.current
+    val animated = SpritePlace.MAP in LocalAnimatedPlaces.current
     val mapScale by remember(mapState) { derivedStateOf { mapState.scale } }
-    // L'animation est lue à sa taille d'origine, puis agrandie d'un facteur fixe (et non ajusté à son cadre).
-    val request = remember(pokemonId) {
+    // Le sprite est lu à sa taille d'origine, puis agrandi d'un facteur fixe (et non ajusté à son cadre).
+    val request = remember(pokemonId, animated) {
         ImageRequest.Builder(context)
-            .data(Sprites.assetUri(Sprites.pokemonAnimated(pokemonId)))
+            .data(Sprites.assetUri(Sprites.pokemon(pokemonId, animated)))
             .size(CoilSize.ORIGINAL)
             .build()
     }
-    val factor = (mapScale * ANIMATED_RATIO * scale).toFloat()
+    val factor = (mapScale * POKEMON_RATIO * scale).toFloat()
     AsyncImage(
         model = request,
         contentDescription = contentDescription,
-        modifier = Modifier.size(mapPixels(mapState, ANIMATED_FRAME_PX * ANIMATED_RATIO * scale)),
+        modifier = Modifier.size(mapPixels(mapState, POKEMON_FRAME_PX * POKEMON_RATIO * scale)),
         contentScale = remember(factor) { FixedScale(factor) },
         filterQuality = FilterQuality.None,
         onSuccess = { it.result.image.asDrawable(resources).isFilterBitmap = false }
@@ -233,14 +238,17 @@ val HIGHLIGHT_COLOR = Color(0xFFFF1744)
 private val WARP_COLOR = Color(0xFF2962FF)
 private val HIDDEN_COLOR = Color(0xFF6A1B9A)
 private val TRAINER_COLOR = Color(0xFFD32F2F)
-private val WATER_COLOR = Color(0xFF0277BD)
+private val FACILITY_COLOR = Color(0xFF00897B)
 private val WARP_MIN_SIZE = 8.dp
 
-/** Taille d'un pixel des sprites animés, en pixels de la carte : leur dessin a à peu près la taille d'une icône. */
-private const val ANIMATED_RATIO = 0.75f
+/**
+ * Taille d'un pixel des sprites des Pokémon, en pixels de la carte : 0,75 réduit de 30 %, pour que les sprites de
+ * Noir et Blanc aient à peu près la taille des anciennes icônes fixes.
+ */
+private const val POKEMON_RATIO = 0.525f
 
-/** Cadre des sprites animés de Noir et Blanc (le plus grand tient dans 96 × 96 pixels). */
-private const val ANIMATED_FRAME_PX = 96f
+/** Cadre des sprites de Noir et Blanc : le plus grand tient dans 128 × 128 pixels. */
+private const val POKEMON_FRAME_PX = 128f
 
 /** Tailles en pixels de la carte (une case du jeu fait 16 pixels). */
 private const val TILE_PX = 16f

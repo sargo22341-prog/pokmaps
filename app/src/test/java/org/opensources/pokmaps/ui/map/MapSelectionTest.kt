@@ -13,6 +13,8 @@ import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.domain.map.CharacterRole
+import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -84,6 +86,20 @@ class MapSelectionTest {
         assertEquals("Soigne 20 PV.", item.details?.description)
         fixture.selection.dismissDetail()
         assertNull(fixture.session.current.detail)
+    }
+
+    @Test
+    fun touchingAFossilSaysWhatItBecomesAndAFacilityWhatItOffers() = runTest {
+        val fixture = fixture()
+        val catalog = checkNotNull(fixture.session.catalog)
+        fixture.selection.showObject(checkNotNull(catalog.objectsById[FakeMapDao.FOSSIL]))
+        val fossil = fixture.session.current.detail as MapDetail.Character
+        assertEquals("Kabuto", fossil.fossilUses.getValue("dome-fossil").pokemonName)
+        assertEquals(listOf(CharacterRole.OBJECT, CharacterRole.GIFT), fossil.roles)
+        fixture.selection.showObject(checkNotNull(catalog.objectsById[FakeMapDao.PRIZES]))
+        val prizes = fixture.session.current.detail as MapDetail.Character
+        assertEquals(FakeMapDao.RED_ABRA_COINS, (prizes.offers.single() as NpcOffer.PrizePokemon).coins)
+        assertEquals(listOf(CharacterRole.PRIZES), prizes.roles)
     }
 
     @Test

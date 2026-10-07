@@ -8,7 +8,6 @@ import org.opensources.pokmaps.data.db.PokemonDao
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokemonType
-import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.BaseStat
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
@@ -54,9 +53,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             levelUpMoves = moves.filter { it.machine == null }.sortedWith(compareBy({ it.level }, { it.name })),
             machineMoves = moves.filter { it.machine != null }.sortedWith(compareBy({ it.isHm() }, { it.machine })),
             encounters = dao.encounters(pokemonId).map { it.toEncounter() },
-            staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
-            spritePath = Sprites.pokemonSprite(game.versionGroupIdentifier, pokemonId),
-            iconPath = Sprites.pokemonIcon(pokemonId)
+            staticEncounters = dao.staticCount(pokemonId, game.versionGroupId)
         )
     }
 

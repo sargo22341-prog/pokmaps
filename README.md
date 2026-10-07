@@ -5,8 +5,8 @@ carte de Kanto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques,
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
 - **Aucun service Google Play** : l'application fonctionne sur GrapheneOS
-- 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite (seul l'artwork officiel
-  d'un Pokémon, affiché à la demande, est chargé en ligne)
+- 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite et les assets ; l'application n'a pas
+  la permission Internet
 - Identifiant de l'application : `org.opensources.pokmaps`
 
 ## Captures d'écran
@@ -32,7 +32,7 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 `tools/build_data.py` génère, dans `app/src/main/assets/` :
 
 - `database/pokedex.db` : la base SQLite de l'application ;
-- `sprites/` : icônes de boîte des Pokémon, sprites des jeux, sprites animés et icônes d'objets ;
+- `sprites/` : sprites des Pokémon (un seul style partout, animé ou fixe) et icônes d'objets ;
 - `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
   et sprites des PNJ.
 
@@ -45,16 +45,21 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
   lieux et rencontres de chaque version. Les CSV sont téléchargés une seule fois au build, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
-- **[pokesprite](https://github.com/msikma/pokesprite)** : icônes de boîte des Pokémon et icônes d'objets.
-- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites de Rouge/Bleu et Jaune, et sprites animés
-  de Noir/Blanc (activables dans les Réglages).
+- **[pokesprite](https://github.com/msikma/pokesprite)** : icônes d'objets.
+- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, seul style de sprite des
+  Pokémon (carte, listes, fiches, Pokédex, évolutions). Le sprite fixe est la première image du sprite animé : même
+  dessin, même taille. Les Réglages choisissent, endroit par endroit, où ils sont animés. Ces sprites n'existent que
+  pour les Pokémon n° 1 à 649 (5 premières générations) : la génération s'arrête si un jeu en demande d'autres.
 - **[pret/pokered](https://github.com/pret/pokered)** et **[pret/pokeyellow](https://github.com/pret/pokeyellow)**
   (désassemblages des jeux) : uniquement pour dessiner les cartes, à partir des blocs, tilesets, palettes Super Game Boy,
-  connexions, warps, objets et PNJ. Aucune ROM n'est utilisée.
+  connexions, warps, objets et PNJ, et ce que proposent les personnages (soins, boutiques, dons, échanges,
+  lots du Casino et leur prix en jetons, distributeurs, fossiles ranimés). Aucune ROM n'est utilisée.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
-  dresseurs (`trainer_classes.csv`) et des personnages (`npc_names.csv`), et lien entre cartes et zones de
-  rencontre PokéAPI (`map_areas.csv`).
+  dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
+  des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI (`map_areas.csv`),
+  personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario) et offres
+  que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus).
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
@@ -63,7 +68,9 @@ qui totalisent 100 %, chaque Pokémon obtenable…).
 Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajouter un jeu (Or/Argent, par
 exemple) demande :
 
-- une ligne dans `games.py` : Pokémon, attaques, objets et rencontres sont alors extraits de PokéAPI ;
+- une ligne dans `games.py` : Pokémon, attaques, objets et rencontres sont alors extraits de PokéAPI (avec les
+  symboles pret qui distinguent ses versions, comme `_RED` et `_BLUE` pour les lots du Casino) ;
+- une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
 - d'adapter la lecture des cartes pret (`pret*.py`, écrite pour la 1re génération), la carte du monde

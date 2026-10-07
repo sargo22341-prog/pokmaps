@@ -4,18 +4,24 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .maps import CharacterNames, GameMapData, ObjectRow, read_character_names
+from .maps import GameMapData
+from .maps_characters import CharacterNames, ObjectRow, read_character_names
 from .maps_layout import identifier
+from .pret_services import PRIZE_VENDOR, VENDING_MACHINE
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
+
+# Installations (panneaux qui rendent un service) : elles n'ont pas de sprite, leur nom vient de leur type.
+FACILITY_KINDS = frozenset({VENDING_MACHINE, PRIZE_VENDOR})
 
 
 def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     vg_ids = {row["identifier"]: int(row["id"]) for row in builder.vg_rows}
     area_ids = {key: area_id for area_id, key in builder.encounters.area_keys.items()}
     known_areas = {row[0] for row in builder.encounters.location_area_table()}
-    objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()))
+    versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
+    objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions)
     maps, areas, warps, spots = [], [], [], []
     for version_group, data in builder.map_data.items():
         vg = vg_ids[version_group]
@@ -27,6 +33,8 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
             objects.add(obj, ids[obj.map_const])
         for spot in data.spots:
             spots.append((len(spots) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
+    if unused := objects.names.unused_text_names():
+        raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
     return {
         "map": maps,
         "map_area": sorted(set(areas)),
@@ -41,9 +49,10 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
 class _ObjectRows:
     """Lignes des objets de carte, des équipes de dresseurs et des offres de personnages."""
 
-    def __init__(self, builder: DatabaseBuilder, names: _ObjectNames) -> None:
+    def __init__(self, builder: DatabaseBuilder, names: _ObjectNames, versions: dict[str, int]) -> None:
         self.builder = builder
         self.names = names
+        self.versions = versions
         self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
         self.objects: list[tuple] = []
         self.parties: list[tuple] = []
@@ -60,24 +69,29 @@ class _ObjectRows:
         for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
             move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
             self.parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
+        item_ids = self.builder.items.offer_item_ids
         for offer in obj.offers:
+            if offer.version and offer.version not in self.versions:
+                raise ValueError(f"Offre d'une version inconnue de PokéAPI : {offer}")
             self.offers.append(
                 (
                     len(self.offers) + 1,
                     object_id,
                     offer.kind,
-                    offer.item and self.builder.items.offer_item_ids[offer.item],
+                    offer.item and item_ids[offer.item],
                     offer.pokemon and species[offer.pokemon],
                     offer.quantity,
                     offer.price,
                     offer.wanted and species[offer.wanted],
+                    offer.wanted_item and item_ids[offer.wanted_item],
+                    offer.version and self.versions[offer.version],
                 )
             )
         self.objects.append(
             (
                 object_id,
                 map_id,
-                obj.kind,
+                self.names.characters.npc_kind(obj.sprite) if obj.kind == "npc" else obj.kind,
                 obj.x,
                 obj.y,
                 obj.sprite,
@@ -136,12 +150,21 @@ class _ObjectNames:
         self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
         self.items = builder.api.names("item_names", "item_id")
         self.item_ids = builder.items.map_item_ids
+        self.used_texts: set[str] = set()
+
+    def unused_text_names(self) -> list[str]:
+        return sorted(set(self.characters.by_text) - self.used_texts)
 
     def of(self, obj: ObjectRow) -> str:
+        if obj.kind == "npc" and obj.text in self.characters.by_text:
+            self.used_texts.add(obj.text)
+            return self.characters.by_text[obj.text]
         if obj.kind == "trainer" and obj.trainer_class:
             return self.characters.trainer(obj.trainer_class)
         if obj.kind == "pokemon" and obj.pokemon:
             return self.pokemon[self.species[obj.pokemon]]
         if obj.kind in ("item", "hidden_item") and obj.item:
             return self.items[self.item_ids[obj.item]]
+        if obj.kind in FACILITY_KINDS:
+            return self.characters.facility(obj.kind)
         return self.characters.character(obj.sprite)

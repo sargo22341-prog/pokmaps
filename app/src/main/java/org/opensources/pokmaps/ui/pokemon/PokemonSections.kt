@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.pokemon.BaseStat
@@ -40,7 +41,8 @@ import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
-import org.opensources.pokmaps.ui.common.PokemonIconImage
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.formatFactor
 
@@ -163,8 +165,7 @@ private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: 
             .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
             .padding(4.dp)
     ) {
-        // Icône cadrée sur le Pokémon : ses marges transparentes n'écartent plus les flèches.
-        PokemonIconImage(Sprites.pokemonIcon(node.pokemonId), 128.dp, contentDescription = null)
+        PokemonSprite(node.pokemonId, SpritePlace.EVOLUTIONS, SpriteSize.SHEET, contentDescription = null)
         Text(
             node.name,
             style = MaterialTheme.typography.bodyMedium,

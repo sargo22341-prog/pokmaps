@@ -23,9 +23,7 @@ CREATE TABLE version_group (
     identifier TEXT NOT NULL,
     name_fr TEXT NOT NULL,
     generation_id INTEGER NOT NULL,
-    sort_order INTEGER NOT NULL,
-    -- Dossier des sprites du jeu dans les assets : sprites/pokemon/<identifier>/<pokemon_id>.webp
-    has_sprites INTEGER NOT NULL
+    sort_order INTEGER NOT NULL
 );
 
 CREATE TABLE version (
@@ -304,9 +302,12 @@ CREATE TABLE map_warp (
 CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 
 -- Objets et personnages d'une carte. kind : item (objet ramassable), hidden_item (objet caché),
--- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau)
--- ou npc. sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.webp.
--- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon ou objet).
+-- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau),
+-- personnage : npc (une personne), npc_object (objet du décor qui parle ou donne : Fossile, Poké Ball, rocher…) ou
+-- npc_pokemon (Pokémon qui n'est pas à combattre), ou une installation sans sprite : vending_machine (distributeur)
+-- ou prize_vendor (comptoir des lots du Casino).
+-- sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.webp.
+-- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon, objet ou installation).
 CREATE TABLE map_object (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,
@@ -338,9 +339,14 @@ CREATE TABLE trainer_pokemon (
     PRIMARY KEY (map_object_id, slot)
 );
 
--- Ce que propose un personnage (map_object) quand on lui parle. kind : gift_item (objet donné, quantity),
--- gift_pokemon (Pokémon donné, quantity = niveau), sale (objet vendu, price) ou trade (échange :
--- pokemon_id reçu contre wanted_pokemon_id).
+-- Ce que propose un personnage ou une installation (map_object) quand on lui parle. kind :
+--   gift_item (objet donné, quantity), gift_pokemon (Pokémon donné, quantity = niveau), sale (objet vendu, price),
+--   trade (pokemon_id reçu contre wanted_pokemon_id), exchange (item_id reçu contre wanted_item_id),
+--   prize_item et prize_pokemon (lot du Casino, price en jetons, quantity = niveau du Pokémon),
+--   coin_sale (quantity jetons pour price ¥), coin_gift (quantity jetons donnés),
+--   fossil (fossile item_id ranimé en pokemon_id, quantity = niveau),
+--   heal, cable_club, name_rater, daycare (services : soins, Club Link, Mme Notation, pension).
+-- version_id : version où l'offre existe (lots du Casino de Rouge ou de Bleu), NULL pour toutes celles du jeu.
 CREATE TABLE npc_offer (
     id INTEGER NOT NULL PRIMARY KEY,
     map_object_id INTEGER NOT NULL,
@@ -349,7 +355,9 @@ CREATE TABLE npc_offer (
     pokemon_id INTEGER,
     quantity INTEGER,
     price INTEGER,
-    wanted_pokemon_id INTEGER
+    wanted_pokemon_id INTEGER,
+    wanted_item_id INTEGER,
+    version_id INTEGER
 );
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
 

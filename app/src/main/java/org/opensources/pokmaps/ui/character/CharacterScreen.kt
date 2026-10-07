@@ -25,9 +25,11 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.usecase.CharacterPage
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.Offers
+import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SectionTitle
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.TrainerPokemonRow
@@ -47,7 +49,7 @@ fun CharacterRoute(
         onAction = { action ->
             viewModel.onAction(action)
             when (action) {
-                CharacterAction.ShowOnMap -> onShowOnMap()
+                CharacterAction.ShowOnMap, is CharacterAction.ShowObject -> onShowOnMap()
             }
         },
         onOpenPokemon = onOpenPokemon,
@@ -77,6 +79,7 @@ fun CharacterScreen(
         onOpenItem = onOpenItem,
         onOpenPlace = onOpenPlace,
         onShowOnMap = { onAction(CharacterAction.ShowOnMap) },
+        onShowObject = { onAction(CharacterAction.ShowObject(it)) },
         modifier = modifier
     )
 }
@@ -88,6 +91,7 @@ private fun CharacterContent(
     onOpenItem: (String) -> Unit,
     onOpenPlace: (String) -> Unit,
     onShowOnMap: () -> Unit,
+    onShowObject: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val obj = page.obj
@@ -104,9 +108,7 @@ private fun CharacterContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             CharacterSprite(obj, page.game.versionGroupIdentifier, size = 96)
-            if (obj.kind == MapObjectKind.TRAINER) {
-                Text(stringResource(R.string.map_trainer), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+            RoleIcons(page.roles, size = 28.dp)
             Text(obj.name, style = MaterialTheme.typography.headlineMedium)
             FilledTonalButton(onClick = { onOpenPlace(page.map.identifier) }) { Text(page.map.name) }
             Button(onClick = onShowOnMap) {
@@ -123,10 +125,17 @@ private fun CharacterContent(
                 Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
             } else {
                 SectionTitle(stringResource(R.string.map_trainer_party))
-                page.party.forEach { TrainerPokemonRow(it, onOpenPokemon) }
+                page.party.forEach { TrainerPokemonRow(it, SpritePlace.SHEETS, onOpenPokemon) }
             }
         }
-        Offers(page.offers, onOpenPokemon = onOpenPokemon, onOpenItem = onOpenItem)
+        Offers(
+            page.offers,
+            SpritePlace.SHEETS,
+            page.fossilUses,
+            onOpenPokemon = onOpenPokemon,
+            onOpenItem = onOpenItem,
+            onShowObject = onShowObject
+        )
         Spacer(Modifier.height(24.dp))
     }
 }

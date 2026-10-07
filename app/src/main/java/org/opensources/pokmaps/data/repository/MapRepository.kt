@@ -7,6 +7,7 @@ import kotlinx.coroutines.sync.withLock
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MapEntity
 import org.opensources.pokmaps.data.db.NpcOfferRow
+import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.GameIndex
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.ItemEvolution
@@ -74,13 +75,17 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         )
     }
 
-    /** Objets et offres des personnages du jeu (gardés en mémoire comme les cartes). */
+    /**
+     * Objets et offres des personnages du jeu, dans la version (les lots du Casino diffèrent entre Rouge et Bleu) :
+     * gardés en mémoire comme les cartes.
+     */
     suspend fun index(game: Game): GameIndex = mutex.withLock {
-        indexes.getOrPut(game.versionGroupId) {
-            val vg = game.versionGroupId
+        indexes.getOrPut(game.versionId) {
             GameIndex(
-                items = dao.items(vg).map { ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName) },
-                offers = dao.offerLinks(vg).map {
+                items = dao.items(game.versionGroupId).map {
+                    ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName)
+                },
+                offers = dao.offerLinks(game.versionId).map {
                     OfferLink(
                         objectId = it.objectId,
                         kind = OfferKind.from(it.kind),
@@ -90,7 +95,9 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                         pokemonName = it.pokemonName,
                         wantedPokemonName = it.wantedPokemonName,
                         price = it.price,
-                        quantity = it.quantity
+                        quantity = it.quantity,
+                        wantedItemIdentifier = it.wantedItemIdentifier,
+                        wantedItemName = it.wantedItemName
                     )
                 }
             )
@@ -107,8 +114,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     suspend fun pokemonAreaMethods(game: Game, pokemonId: Int): List<Pair<Int, String>> =
         dao.pokemonAreaMethods(game.versionId, pokemonId).map { it.areaId to it.method }
 
-    /** Personnages qui donnent ou échangent un Pokémon. */
-    suspend fun pokemonGivers(game: Game, pokemonId: Int): List<Int> = dao.pokemonGivers(game.versionGroupId, pokemonId)
+    /** Personnages et comptoirs qui donnent, échangent, raniment ou font gagner un Pokémon dans la version. */
+    suspend fun pokemonGivers(game: Game, pokemonId: Int): List<Int> = dao.pokemonGivers(game.versionId, pokemonId)
 
     /** Pokémon qui évoluent grâce à un objet. */
     suspend fun itemEvolutions(game: Game, itemId: Int): List<ItemEvolution> =
@@ -139,8 +146,9 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         }
     }
 
-    /** Dons, ventes et échanges d'un personnage. */
-    suspend fun offers(objectId: Int): List<NpcOffer> = dao.offers(objectId).map { it.toOffer() }
+    /** Offres d'un personnage ou d'une installation dans la version du jeu. */
+    suspend fun offers(game: Game, objectId: Int): List<NpcOffer> =
+        dao.offers(objectId, game.versionId).map { it.toOffer() }
 
     /** Offre lue dans la base ; une ligne incomplète est une erreur (la base est validée à la génération). */
     private fun NpcOfferRow.toOffer(): NpcOffer = when (OfferKind.from(kind)) {
@@ -156,10 +164,39 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
             required(wantedPokemonId),
             required(wantedPokemonName)
         )
+
+        OfferKind.EXCHANGE -> NpcOffer.Exchange(offerItem(), wantedItem())
+
+        OfferKind.PRIZE_ITEM -> NpcOffer.PrizeItem(offerItem(), required(price))
+
+        OfferKind.PRIZE_POKEMON ->
+            NpcOffer.PrizePokemon(required(pokemonId), required(pokemonName), required(quantity), required(price))
+
+        OfferKind.COIN_SALE -> NpcOffer.CoinSale(required(quantity), required(price))
+
+        OfferKind.COIN_GIFT -> NpcOffer.CoinGift(required(quantity))
+
+        OfferKind.FOSSIL ->
+            NpcOffer.FossilRevival(offerItem(), required(pokemonId), required(pokemonName), required(quantity))
+
+        OfferKind.HEAL -> NpcOffer.Service(CharacterService.HEAL)
+
+        OfferKind.CABLE_CLUB -> NpcOffer.Service(CharacterService.CABLE_CLUB)
+
+        OfferKind.NAME_RATER -> NpcOffer.Service(CharacterService.NAME_RATER)
+
+        OfferKind.DAYCARE -> NpcOffer.Service(CharacterService.DAYCARE)
     }
 
     private fun NpcOfferRow.offerItem() =
         OfferItem(required(itemId), required(itemIdentifier), required(itemName), itemHasSprite == true)
+
+    private fun NpcOfferRow.wantedItem() = OfferItem(
+        required(wantedItemId),
+        required(wantedItemIdentifier),
+        required(wantedItemName),
+        wantedItemHasSprite == true
+    )
 
     private fun <T : Any> NpcOfferRow.required(value: T?): T =
         checkNotNull(value) { "Offre $kind incomplète dans la base" }

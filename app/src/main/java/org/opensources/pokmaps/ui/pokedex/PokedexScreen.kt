@@ -47,14 +47,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
-import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.pokedex.CaughtFilter
-import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.FavoriteButton
-import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
-import org.opensources.pokmaps.ui.common.PixelArt
-import org.opensources.pokmaps.ui.common.PixelArtFill
+import org.opensources.pokmaps.ui.common.PokemonSpriteFill
 import org.opensources.pokmaps.ui.common.TypeBadge
 
 @Composable
@@ -301,27 +298,18 @@ private val ObtainMethod.label: Int
         ObtainMethod.EVOLUTION -> R.string.method_evolution
     }
 
-/** Sprite du Pokémon sur sa carte : animé (réglage) ou icône pixel-art. */
+/** Sprite du Pokémon sur sa carte, animé ou fixe selon le réglage du Pokédex. */
 @Composable
 private fun CardSprite(pokemonId: Int, alpha: Float) {
-    if (LocalAnimatedSprites.current) {
-        AnimatedPokemonSprite(
-            pokemonId,
-            contentDescription = null,
-            alpha = alpha,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(PixelArt.POKEMON_ICON.width / PixelArt.POKEMON_ICON.height.toFloat())
-        )
-    } else {
-        PixelArtFill(
-            Sprites.pokemonIcon(pokemonId),
-            PixelArt.POKEMON_ICON,
-            contentDescription = null,
-            alpha = alpha,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+    PokemonSpriteFill(
+        pokemonId,
+        SpritePlace.POKEDEX,
+        contentDescription = null,
+        alpha = alpha,
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(CARD_SPRITE_RATIO)
+    )
 }
 
 private val CaughtFilter.label: Int
@@ -332,3 +320,6 @@ private val CaughtFilter.label: Int
     }
 
 private const val UNAVAILABLE_ALPHA = 0.45f
+
+/** Proportions de la place du sprite sur une carte du Pokédex (plus large que haute). */
+private const val CARD_SPRITE_RATIO = 1.2f

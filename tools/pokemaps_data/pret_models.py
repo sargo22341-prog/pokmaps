@@ -1,4 +1,4 @@
-"""Modeles des donnees extraites des depots pret."""
+"""Modèles des données extraites des dépôts pret."""
 
 from __future__ import annotations
 
@@ -19,6 +19,17 @@ class Warp:
     y: int
     target: str  # constante de la carte d'arrivée, ou LAST_MAP (la carte d'où l'on vient)
     target_warp: int  # numéro du warp d'arrivée, à partir de 1
+    # Faux si pret le signale inaccessible (« ; inaccessible ») : on ne peut pas s'y tenir dans le jeu.
+    accessible: bool = True
+
+
+@dataclass(frozen=True)
+class Sign:
+    """Panneau, distributeur ou comptoir (bg_event) : le joueur le lit en se tenant devant."""
+
+    x: int
+    y: int
+    text: str  # constante du texte affiché (ex. TEXT_CELADONMARTROOF_VENDING_MACHINE1)
 
 
 @dataclass(frozen=True)
@@ -48,7 +59,7 @@ class PretMap:
     is_outdoor: bool
     connections: list[Connection] = field(default_factory=list)
     warps: list[Warp] = field(default_factory=list)
-    signs: list[tuple[int, int]] = field(default_factory=list)
+    signs: list[Sign] = field(default_factory=list)
     objects: list[MapObject] = field(default_factory=list)
 
     def block(self, x: int, y: int) -> int:
@@ -78,11 +89,18 @@ class TrainerPokemon:
 
 @dataclass(frozen=True)
 class NpcOffer:
-    """Ce que propose un personnage quand on lui parle (d'après le script de son texte)."""
+    """Ce que propose un personnage quand on lui parle (d'après le script de son texte).
 
-    kind: str  # gift_item, gift_pokemon, sale ou trade
-    item: str | None = None  # constante d'objet (gift_item, sale)
-    pokemon: str | None = None  # Pokémon donné (gift_pokemon) ou reçu lors d'un échange (trade)
-    quantity: int | None = None  # nombre d'objets donnés, ou niveau du Pokémon donné
-    price: int | None = None  # prix en magasin (sale)
+    kind : gift_item, gift_pokemon, sale, trade (Pokémon contre Pokémon), exchange (objet contre objet),
+    prize_item et prize_pokemon (lots du Casino, prix en jetons), coin_sale (jetons vendus), coin_gift
+    (jetons donnés), fossil (fossile ranimé), ou un service sans objet : heal, cable_club, name_rater, daycare.
+    """
+
+    kind: str
+    item: str | None = None  # objet donné, vendu, gagné ou obtenu par échange ; fossile à ranimer
+    pokemon: str | None = None  # Pokémon donné, gagné, reçu lors d'un échange ou ranimé
+    quantity: int | None = None  # nombre d'objets ou de jetons, ou niveau du Pokémon donné, gagné ou ranimé
+    price: int | None = None  # prix en ¥ (sale, coin_sale) ou en jetons (prize_item, prize_pokemon)
     wanted: str | None = None  # Pokémon demandé en échange (trade)
+    wanted_item: str | None = None  # objet demandé en échange (exchange)
+    version: str | None = None  # version PokéAPI où l'offre existe (ex. red), None pour toutes celles du jeu

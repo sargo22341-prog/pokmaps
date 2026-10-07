@@ -1,7 +1,10 @@
 package org.opensources.pokmaps.ui.item
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,22 +18,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.map.ItemEvolution
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.usecase.ItemPage
 import org.opensources.pokmaps.domain.usecase.ItemSource
 import org.opensources.pokmaps.ui.common.CharacterSprite
+import org.opensources.pokmaps.ui.common.FossilRevivalLine
 import org.opensources.pokmaps.ui.common.MoveLine
+import org.opensources.pokmaps.ui.common.OfferLinks
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
+import org.opensources.pokmaps.ui.common.SpriteSize
 
 @Composable
 fun ItemRoute(
@@ -69,6 +80,7 @@ fun ItemScreen(
         return
     }
     val onShowOnMap = { objectId: Int -> onAction(ItemAction.ShowOnMap(objectId)) }
+    val sources = SourceLinks(page.game.versionGroupIdentifier, onOpenCharacter, onShowOnMap)
     Column(
         modifier
             .fillMaxSize()
@@ -79,9 +91,11 @@ fun ItemScreen(
             SheetSection(stringResource(R.string.map_machine_move, move.name)) { MoveLine(move) }
         }
         EvolutionsSection(page, onOpenPokemon)
+        FossilSection(page, sources, onOpenPokemon)
         FoundSection(page, onShowOnMap)
-        SourcesSection(page, onOpenCharacter, onShowOnMap)
-        if (page.found.isEmpty() && page.sold.isEmpty() && page.given.isEmpty()) {
+        SourcesSection(page, sources)
+        ExchangesSection(page, sources)
+        if (page.nowhere) {
             SheetSection(stringResource(R.string.item_where)) {
                 Text(stringResource(R.string.item_nowhere, page.game.name))
             }
@@ -89,6 +103,13 @@ fun ItemScreen(
         Spacer(Modifier.height(24.dp))
     }
 }
+
+/** Fiche et position sur la carte des personnages liés à l'objet. */
+private data class SourceLinks(
+    val versionGroup: String,
+    val onOpenCharacter: (Int) -> Unit,
+    val onShowOnMap: (Int) -> Unit
+)
 
 @Composable
 private fun ItemHeader(page: ItemPage) {
@@ -106,20 +127,50 @@ private fun ItemHeader(page: ItemPage) {
     }
 }
 
-/** Évolutions déclenchées par l'objet (pierres, échange en le tenant). */
+/** Évolutions déclenchées par l'objet (pierres), comme une ligne d'évolution : Pokémon → évolution. */
 @Composable
 private fun EvolutionsSection(page: ItemPage, onOpenPokemon: (Int) -> Unit) {
     if (page.evolutions.isEmpty()) return
     SheetSection(stringResource(R.string.item_evolutions)) {
-        page.evolutions.forEach { evolution ->
-            SheetRow(
-                title = stringResource(R.string.item_evolution, evolution.fromName, evolution.toName),
-                onClick = { onOpenPokemon(evolution.toId) },
-                content = {
-                    PixelArtImage(Sprites.pokemonIcon(evolution.toId), PixelArt.POKEMON_ICON, 52.dp, null)
-                }
-            )
+        page.evolutions.forEach { EvolutionLine(it, onOpenPokemon) }
+    }
+}
+
+@Composable
+private fun EvolutionLine(evolution: ItemEvolution, onOpenPokemon: (Int) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onOpenPokemon(evolution.toId) }
+            .padding(vertical = 4.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            PokemonSprite(evolution.fromId, SpritePlace.EVOLUTIONS, SpriteSize.SHEET, contentDescription = null)
+            Text(stringResource(R.string.evolution_arrow), style = MaterialTheme.typography.titleLarge)
+            PokemonSprite(evolution.toId, SpritePlace.EVOLUTIONS, SpriteSize.SHEET, contentDescription = null)
         }
+        Text(
+            stringResource(R.string.item_evolution, evolution.fromName, evolution.toName),
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
+}
+
+/** Fossile : le Pokémon qu'il devient (comme une évolution), et le personnage qui le ranime. */
+@Composable
+private fun FossilSection(page: ItemPage, sources: SourceLinks, onOpenPokemon: (Int) -> Unit) {
+    val fossil = page.fossil ?: return
+    val item = page.item
+    SheetSection(stringResource(R.string.item_fossil)) {
+        FossilRevivalLine(
+            fossil = OfferItem(item.id, item.identifier, item.name, item.hasSprite),
+            pokemonId = fossil.pokemonId,
+            text = stringResource(R.string.map_offer_pokemon_level, fossil.pokemonName, fossil.level),
+            links = OfferLinks(SpritePlace.EVOLUTIONS, onOpenPokemon, onOpenItem = null)
+        )
+    }
+    SheetSection(stringResource(R.string.item_fossil_where)) {
+        SourceRow(ItemSource(fossil.reviver, fossil.reviverMapName), sources, trailing = null)
     }
 }
 
@@ -148,46 +199,57 @@ private fun FoundSection(page: ItemPage, onShowOnMap: (Int) -> Unit) {
     }
 }
 
-/** Personnages qui vendent ou donnent l'objet. */
+/** Personnages qui vendent, donnent ou font gagner l'objet (lots du Casino). */
 @Composable
-private fun SourcesSection(page: ItemPage, onOpenCharacter: (Int) -> Unit, onShowOnMap: (Int) -> Unit) {
-    val versionGroup = page.game.versionGroupIdentifier
-    if (page.sold.isNotEmpty()) {
-        SheetSection(stringResource(R.string.item_sold)) {
-            page.sold.forEach { source ->
-                SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
-                    source.price?.let { stringResource(R.string.map_offer_price, it) }
-                }
-            }
-        }
-    }
-    if (page.given.isNotEmpty()) {
-        SheetSection(stringResource(R.string.item_given)) {
-            page.given.forEach { source ->
-                SourceRow(source, versionGroup, onOpenCharacter, onShowOnMap) {
-                    source.quantity?.takeIf { it > 1 }?.let { "× $it" }
-                }
-            }
-        }
+private fun SourcesSection(page: ItemPage, sources: SourceLinks) {
+    SourceList(R.string.item_sold, page.sold, sources, SourceDetail.PRICE)
+    SourceList(R.string.item_given, page.given, sources, SourceDetail.QUANTITY)
+    SourceList(R.string.item_prizes, page.prizes, sources, SourceDetail.COINS)
+}
+
+/** Échanges d'objets : contre quoi on l'obtient, et ce qu'on obtient en le donnant. */
+@Composable
+private fun ExchangesSection(page: ItemPage, sources: SourceLinks) {
+    SourceList(R.string.item_exchange_get, page.exchangedFor, sources, SourceDetail.WANTED_ITEM)
+    SourceList(R.string.item_exchange_give, page.exchangeableFor, sources, SourceDetail.RECEIVED_ITEM)
+}
+
+/** Ce qu'affiche une source à droite : prix, quantité, jetons ou objet de l'échange. */
+private enum class SourceDetail {
+    PRICE,
+    QUANTITY,
+    COINS,
+    WANTED_ITEM,
+    RECEIVED_ITEM
+}
+
+@Composable
+private fun SourceList(@StringRes title: Int, list: List<ItemSource>, sources: SourceLinks, detail: SourceDetail) {
+    if (list.isEmpty()) return
+    SheetSection(stringResource(title)) {
+        list.forEach { source -> SourceRow(source, sources, detailText(source, detail)) }
     }
 }
 
-/** Personnage qui vend ou donne l'objet : sa fiche au toucher, sa position sur la carte avec le bouton. */
 @Composable
-private fun SourceRow(
-    source: ItemSource,
-    versionGroup: String,
-    onOpenCharacter: (Int) -> Unit,
-    onShowOnMap: (Int) -> Unit,
-    content: @Composable () -> String?
-) {
+private fun detailText(source: ItemSource, detail: SourceDetail): String? = when (detail) {
+    SourceDetail.PRICE -> source.price?.let { stringResource(R.string.map_offer_price, it) }
+    SourceDetail.QUANTITY -> source.quantity?.takeIf { it > 1 }?.let { "× $it" }
+    SourceDetail.COINS -> source.price?.let { pluralStringResource(R.plurals.coins, it, it) }
+    SourceDetail.WANTED_ITEM -> source.otherItemName?.let { stringResource(R.string.item_exchange_for, it) }
+    SourceDetail.RECEIVED_ITEM -> source.otherItemName
+}
+
+/** Personnage lié à l'objet : sa fiche au toucher, sa position sur la carte avec le bouton. */
+@Composable
+private fun SourceRow(source: ItemSource, sources: SourceLinks, trailing: String?) {
     SheetRow(
         title = source.mapName,
         subtitle = source.obj.name,
-        trailing = content(),
-        onClick = { onOpenCharacter(source.obj.id) },
-        onShowOnMap = { onShowOnMap(source.obj.id) },
-        content = { CharacterSprite(source.obj, versionGroup) }
+        trailing = trailing,
+        onClick = { sources.onOpenCharacter(source.obj.id) },
+        onShowOnMap = { sources.onShowOnMap(source.obj.id) },
+        content = { CharacterSprite(source.obj, sources.versionGroup) }
     )
 }
 

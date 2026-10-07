@@ -12,7 +12,6 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.model.GameMap
-import org.opensources.pokmaps.ui.common.PixelArt
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.addPath
 import ovh.plrapps.mapcompose.api.removeAllMarkers
@@ -25,7 +24,6 @@ internal data class MapRenderState(
     val map: GameMap,
     val mapState: MapState,
     val layers: Set<MapLayer>,
-    val animated: Boolean,
     val zone: MapInfo?,
     val overlays: MapOverlays,
     val highlightedPokemonId: Int?
@@ -79,8 +77,7 @@ internal class MapOverlayRenderer {
                     obj,
                     state.catalog.versionGroupIdentifier,
                     alwaysVisible = inZone,
-                    scale = state.overlays.objectScales[obj.id] ?: 1f,
-                    animated = state.animated
+                    scale = state.overlays.objectScales[obj.id] ?: 1f
                 )
             }
         }
@@ -98,7 +95,7 @@ internal class MapOverlayRenderer {
                 zIndex = 1f,
                 pokemon = true
             ) {
-                WildPokemonMarker(state.mapState, wild, state.animated)
+                WildPokemonMarker(state.mapState, wild)
             }
         }
     }
@@ -160,14 +157,10 @@ internal class MapOverlayRenderer {
             id,
             x.toDouble() / state.map.width,
             y.toDouble() / state.map.height,
-            relativeOffset = if (pokemon && !state.animated) POKEMON_OFFSET else CENTERED,
+            relativeOffset = CENTERED,
             zIndex = zIndex,
-            clickableAreaScale = when {
-                !pokemon -> FULL_CLICK_SCALE
-                state.animated -> ANIMATED_CLICK_SCALE
-                else -> POKEMON_CLICK_SCALE
-            },
-            clickableAreaCenterOffset = if (pokemon && !state.animated) POKEMON_CLICK_CENTER else NO_OFFSET,
+            // Le sprite d'un Pokémon est centré dans un cadre fait pour le plus grand : on touche son centre.
+            clickableAreaScale = if (pokemon) POKEMON_CLICK_SCALE else FULL_CLICK_SCALE,
             renderingStrategy =
                 if (lazy) RenderingStrategy.LazyLoading(MapMarkerIds.LAZY_LOADER) else RenderingStrategy.Default,
             c = content
@@ -188,12 +181,8 @@ internal class MapOverlayRenderer {
 
     private companion object {
         val CENTERED = Offset(-0.5f, -0.5f)
-        val POKEMON_OFFSET = Offset(-0.5f, -PixelArt.POKEMON_CENTER_Y)
         val FULL_CLICK_SCALE = Offset(1f, 1f)
-        val NO_OFFSET = Offset(0f, 0f)
-        val POKEMON_CLICK_SCALE = Offset(PixelArt.POKEMON_CONTENT_WIDTH, 0.6f)
-        val POKEMON_CLICK_CENTER = Offset(0f, PixelArt.POKEMON_CENTER_Y - 0.5f)
-        val ANIMATED_CLICK_SCALE = Offset(0.6f, 0.6f)
+        val POKEMON_CLICK_SCALE = Offset(0.6f, 0.6f)
         val ZONE_COLOR = Color(0xFFFFFFFF)
         val HIGHLIGHT_COLOR = Color(0xFFFFD600)
     }

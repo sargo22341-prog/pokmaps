@@ -123,7 +123,11 @@ data class NpcOfferRow(
     val quantity: Int?,
     val price: Int?,
     val wantedPokemonId: Int?,
-    val wantedPokemonName: String?
+    val wantedPokemonName: String?,
+    val wantedItemId: Int?,
+    val wantedItemIdentifier: String?,
+    val wantedItemName: String?,
+    val wantedItemHasSprite: Boolean?
 )
 
 data class ItemDetailsRow(
@@ -162,7 +166,9 @@ data class OfferLinkRow(
     val pokemonName: String?,
     val wantedPokemonName: String?,
     val price: Int?,
-    val quantity: Int?
+    val quantity: Int?,
+    val wantedItemIdentifier: String?,
+    val wantedItemName: String?
 )
 
 data class ItemEvolutionRow(val fromId: Int, val fromName: String, val toId: Int, val toName: String)

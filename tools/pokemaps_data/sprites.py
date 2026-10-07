@@ -1,12 +1,13 @@
 """Récupère les images embarquées dans l'application.
 
-- Icônes de boîte des Pokémon et icônes d'objets : msikma/pokesprite.
-- Sprites des jeux (ex. Rouge/Bleu, Jaune) et sprites animés (Noir/Blanc) : PokeAPI/sprites.
+- Pokémon : un seul style partout (carte, listes, fiches, Pokédex, évolutions), les sprites animés de
+  Noir et Blanc (PokeAPI/sprites). Le sprite fixe est la première image du sprite animé : mêmes dessin,
+  pose et taille, que l'animation soit activée ou non.
+- Icônes d'objets : msikma/pokesprite.
 
 Les images sont embarquées en WebP sans perte (`webp.py`). Arborescence produite dans les assets :
-    sprites/pokemon/icon/<pokemon_id>.webp
-    sprites/pokemon/<version_group>/<pokemon_id>.webp
     sprites/pokemon/animated/<pokemon_id>.webp
+    sprites/pokemon/static/<pokemon_id>.webp
     sprites/items/<item_identifier>.webp
 """
 
@@ -16,6 +17,8 @@ import json
 import shutil
 from pathlib import Path
 
+from PIL import Image
+
 from .builder import DatabaseBuilder
 from .sources import download, download_all, pokeapi_sprite, pokesprite
 from .webp import encode_all
@@ -24,53 +27,58 @@ from .webp import encode_all
 MACHINE_ICON = "items/{kind}/{type}.png"
 # Objets sans icône dans pokesprite : icône d'un objet semblable.
 ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
-# Sprites animés (GIF) de Noir et Blanc, les seuls animés pour toute la 1re génération (affichage en option).
+# Sprites animés (GIF) de Noir et Blanc : les Pokémon des générations 1 à 5 (n° 1 à 649) seulement.
 ANIMATED_SPRITES = "pokemon/versions/generation-v/black-white/animated/{id}.gif"
+LAST_ANIMATED_SPECIES = 649
 
 
 def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[str]:
     """Télécharge les images dans le cache, les encode en WebP puis les copie dans `output`.
 
     Renvoie les identifiants des objets qui ont une icône."""
-    jobs: list[tuple[str, Path, Path]] = []  # (url, cache, destination)
-
-    # Icônes des Pokémon (pokesprite, noms de fichier = slug anglais).
-    url, path = pokesprite(cache, "data/pokemon.json")
-    download(url, path)
-    slugs = {int(number): entry["slug"]["eng"] for number, entry in json.loads(path.read_text("utf-8")).items()}
-    for species_id in builder.species:
-        url, path = pokesprite(cache, f"pokemon-gen8/regular/{slugs[species_id]}.png")
-        jobs.append((url, path, output / "pokemon/icon" / f"{species_id}.webp"))
-
-    # Sprites des jeux configurés.
-    vg_identifiers = {int(row["id"]): row["identifier"] for row in builder.vg_rows}
-    for game, vg in zip(builder.games, builder.vg_ids, strict=True):
-        for species_id in sorted(builder.pokemon_by_version_group[vg]):
-            url, path = pokeapi_sprite(cache, f"pokemon/{game.sprite_folder}/{species_id}.png")
-            jobs.append((url, path, output / "pokemon" / vg_identifiers[vg] / f"{species_id}.webp"))
-
-    # Sprites animés.
-    for species_id in builder.species:
-        url, path = pokeapi_sprite(cache, ANIMATED_SPRITES.format(id=species_id))
-        jobs.append((url, path, output / "pokemon/animated" / f"{species_id}.webp"))
-
-    # Icônes des objets.
-    item_paths = _item_icon_paths(builder, cache)
-    for identifier, sprite_path in item_paths.items():
-        url, path = pokesprite(cache, sprite_path)
-        jobs.append((url, path, output / "items" / f"{identifier}.webp"))
-
-    missing = download_all([(url, path) for url, path, _ in jobs])
+    missing = sorted(species for species in builder.species if species > LAST_ANIMATED_SPECIES)
     if missing:
-        raise RuntimeError("Images introuvables :\n" + "\n".join(missing))
+        raise RuntimeError(
+            f"Pas de sprite animé Noir et Blanc pour les Pokémon n° {missing[0]} à {missing[-1]} : "
+            "choisir une autre source de sprites pour ces générations (sprites.py)"
+        )
+    animated = []  # (url, cache, numéro)
+    for species_id in sorted(builder.species):
+        url, path = pokeapi_sprite(cache, ANIMATED_SPRITES.format(id=species_id))
+        animated.append((url, path, species_id))
+    item_paths = _item_icon_paths(builder, cache)
+    items = [(*pokesprite(cache, sprite_path), identifier) for identifier, sprite_path in item_paths.items()]
 
-    encoded = encode_all([path for _, path, _ in jobs])
+    not_found = download_all([(url, path) for url, path, _ in animated + items])
+    if not_found:
+        raise RuntimeError("Images introuvables :\n" + "\n".join(not_found))
+
+    jobs: list[tuple[Path, Path]] = []  # (image en cache, destination)
+    for _, path, species_id in animated:
+        jobs.append((path, output / "pokemon/animated" / f"{species_id}.webp"))
+        jobs.append((_first_frame(path), output / "pokemon/static" / f"{species_id}.webp"))
+    jobs += [(path, output / "items" / f"{identifier}.webp") for _, path, identifier in items]
+
+    encoded = encode_all([path for path, _ in jobs])
     if output.exists():
         shutil.rmtree(output)
-    for _, path, destination in jobs:
+    for path, destination in jobs:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(encoded[path], destination)
     return set(item_paths)
+
+
+def _first_frame(animation: Path) -> Path:
+    """Première image d'un sprite animé, enregistrée en PNG à côté de lui dans le cache."""
+    target = animation.with_name(f"{animation.stem}.first-frame.png")
+    if not target.is_file():
+        with Image.open(animation) as image:
+            image.seek(0)
+            frame = image.convert("RGBA")
+        partial = target.with_name(f"{target.name}.part")
+        frame.save(partial, "PNG")
+        partial.replace(target)
+    return target
 
 
 def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:

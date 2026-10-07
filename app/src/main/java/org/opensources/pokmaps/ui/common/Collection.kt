@@ -1,9 +1,18 @@
 package org.opensources.pokmaps.ui.common
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -67,6 +76,40 @@ fun CompleteIcon(size: Dp, modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * Pokémon sauvages capturés : Poké Ball et « 1/2 », ou Master Ball et coche quand le lieu est terminé
+ * (tous capturés), avec une petite animation au moment où il le devient.
+ */
+@Composable
+fun CaughtProgress(caught: Int, total: Int, modifier: Modifier = Modifier) {
+    AnimatedContent(
+        targetState = caught >= total,
+        transitionSpec = { (scaleIn() + fadeIn()) togetherWith fadeOut() },
+        label = "progress"
+    ) { complete ->
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
+            if (complete) {
+                CompleteIcon(PROGRESS_ICON)
+                Icon(
+                    painterResource(R.drawable.ic_check),
+                    contentDescription = stringResource(R.string.map_zone_complete),
+                    tint = COMPLETE_COLOR,
+                    modifier = Modifier.size(16.dp)
+                )
+            } else {
+                CaughtIcon(PROGRESS_ICON)
+                Text(
+                    stringResource(R.string.map_zone_caught, caught, total),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+private val PROGRESS_ICON = 24.dp
+private val COMPLETE_COLOR = Color(0xFF43A047)
 private const val POKE_BALL = "poke-ball"
 private const val MASTER_BALL = "master-ball"
 private const val NOT_CAUGHT_ALPHA = 0.25f

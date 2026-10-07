@@ -11,6 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.opensources.pokmaps.data.settings.DisplaySettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 
@@ -26,17 +27,34 @@ class SettingsViewModelTest {
     fun defaultsBeforeAnyChange() = runTest {
         val viewModel = viewModel()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        assertEquals(SettingsUiState(animatedSprites = true, mapAnimatedSprites = false), viewModel.state.value)
+        val state = viewModel.state.value
+        assertEquals(SettingsUiState(animatedPlaces = SpritePlace.DEFAULT_ANIMATED), state)
+        assertTrue(state.partlyAnimated)
+        assertFalse(state.allAnimated)
     }
 
     @Test
-    fun actionsChangeTheSettings() = runTest {
+    fun theMainSwitchAnimatesOrFreezesEveryPlace() = runTest {
         val viewModel = viewModel()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        viewModel.onAction(SettingsAction.SetAnimatedSprites(false))
-        viewModel.onAction(SettingsAction.SetMapAnimatedSprites(true))
-        assertFalse(viewModel.state.value.animatedSprites)
-        assertTrue(viewModel.state.value.mapAnimatedSprites)
+        viewModel.onAction(SettingsAction.SetAllAnimated(true))
+        assertTrue(viewModel.state.value.allAnimated)
+        viewModel.onAction(SettingsAction.SetAllAnimated(false))
+        assertEquals(emptySet<SpritePlace>(), viewModel.state.value.animatedPlaces)
+        assertFalse(viewModel.state.value.partlyAnimated)
+    }
+
+    @Test
+    fun eachPlaceIsAnimatedOnItsOwn() = runTest {
+        val viewModel = viewModel()
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        // Exemple demandé : fixes sur la carte, la liste et le Pokédex, animés sur les lignes d'évolution.
+        viewModel.onAction(SettingsAction.SetAllAnimated(false))
+        viewModel.onAction(SettingsAction.SetAnimated(SpritePlace.EVOLUTIONS, true))
+        assertEquals(setOf(SpritePlace.EVOLUTIONS), viewModel.state.value.animatedPlaces)
+        viewModel.onAction(SettingsAction.SetAnimated(SpritePlace.MAP, true))
+        viewModel.onAction(SettingsAction.SetAnimated(SpritePlace.EVOLUTIONS, false))
+        assertEquals(setOf(SpritePlace.MAP), viewModel.state.value.animatedPlaces)
     }
 
     @Test

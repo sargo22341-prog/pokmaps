@@ -56,6 +56,19 @@ class ItemViewModelTest {
     }
 
     @Test
+    fun aFossilPageShowsWhatItBecomesAndWhereToReviveIt() = runTest {
+        val viewModel = viewModel("dome-fossil")
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val page = checkNotNull(viewModel.state.value.page)
+        val fossil = checkNotNull(page.fossil)
+        assertEquals(listOf("Kabuto", "Scientifique"), listOf(fossil.pokemonName, fossil.reviver.name))
+        assertEquals("Labo Pokémon", fossil.reviverMapName)
+        // Le Fossile Dôme se ramasse dans le labo : on l'y obtient.
+        assertEquals(listOf(FakeMapDao.FOSSIL), page.given.map { it.obj.id })
+        assertFalse(page.nowhere)
+    }
+
+    @Test
     fun anUnknownItemIsNotFoundNotAnError() = runTest {
         val viewModel = viewModel("master-ball")
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }

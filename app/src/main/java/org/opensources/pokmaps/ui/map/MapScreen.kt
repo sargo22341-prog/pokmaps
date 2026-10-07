@@ -54,8 +54,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.model.GameMap
-import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.ui.common.AssetImage
+import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.SpriteSize
 import ovh.plrapps.mapcompose.ui.MapUI
 
 @Composable
@@ -111,7 +112,6 @@ fun MapScreen(
         ZoneListSheet(
             zone = zone,
             caught = state.caught,
-            animated = state.animatedSprites,
             onDismiss = { onAction(MapAction.CloseZoneList) },
             onOpenPlace = { onAction(MapAction.OpenPlace(it)) },
             onOpenPokemon = { id ->
@@ -207,10 +207,10 @@ private fun BoxScope.BottomPanel(
                 is BottomCard.Detail -> DetailCard(
                     detail = card.detail,
                     versionGroupIdentifier = state.map?.versionGroupIdentifier.orEmpty(),
-                    animated = state.animatedSprites,
                     onClose = { onAction(MapAction.DismissDetail) },
                     onOpenPokemon = onOpenPokemon,
-                    onOpenItem = onOpenItem
+                    onOpenItem = onOpenItem,
+                    onShowObject = { onAction(MapAction.FocusObject(it)) }
                 )
 
                 is BottomCard.Zone -> ZoneBar(
@@ -288,11 +288,7 @@ private fun HighlightBanner(highlight: MapHighlight, onOpen: (MapPlace) -> Unit,
     ) {
         Column(Modifier.padding(vertical = 8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 16.dp)) {
-                AssetImage(
-                    Sprites.pokemonIcon(highlight.pokemonId),
-                    contentDescription = null,
-                    modifier = Modifier.size(32.dp)
-                )
+                PokemonSprite(highlight.pokemonId, SpritePlace.MAP_LIST, SpriteSize.SMALL, contentDescription = null)
                 Text(
                     stringResource(R.string.map_highlight, highlight.name),
                     style = MaterialTheme.typography.titleSmall,

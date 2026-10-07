@@ -37,7 +37,21 @@ enum class MapObjectKind(val identifier: String) {
     HIDDEN_ITEM("hidden_item"),
     TRAINER("trainer"),
     POKEMON("pokemon"),
-    NPC("npc");
+
+    /** Personnage : une personne. */
+    NPC("npc"),
+
+    /** Objet du décor qui parle ou donne quelque chose (Fossile, Poké Ball, rocher…). */
+    NPC_OBJECT("npc_object"),
+
+    /** Pokémon qui n'est pas à combattre (Otaria du Fan Club, Pokémon des maisons…). */
+    NPC_POKEMON("npc_pokemon"),
+
+    /** Distributeur de boissons (sans sprite : il fait partie du décor). */
+    VENDING_MACHINE("vending_machine"),
+
+    /** Comptoir des lots du Casino (sans sprite). */
+    PRIZE_VENDOR("prize_vendor");
 
     companion object {
         fun from(identifier: String): MapObjectKind =
@@ -47,7 +61,7 @@ enum class MapObjectKind(val identifier: String) {
     }
 }
 
-/** Objet, dresseur, Pokémon fixe ou PNJ d'une carte (centre de sa case, en pixels de la carte affichée). */
+/** Objet, dresseur, Pokémon fixe, PNJ ou installation d'une carte (centre de sa case, en pixels de la carte). */
 data class MapObject(
     val id: Int,
     val mapId: Int,

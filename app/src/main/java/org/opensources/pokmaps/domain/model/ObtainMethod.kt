@@ -10,6 +10,13 @@ enum class ObtainMethod {
     TRADE,
     EVOLUTION;
 
+    /** Pokémon rencontré à l'état sauvage (herbes, grottes, surf, pêche), qu'on peut capturer sur place. */
+    val isWild: Boolean
+        get() = when (this) {
+            WALK, FISHING, SURF -> true
+            GIFT, STATIC, TRADE, EVOLUTION -> false
+        }
+
     companion object {
         /**
          * Méthode de rencontre PokéAPI (encounter_method.identifier). Une méthode inconnue (nouveau jeu) est une

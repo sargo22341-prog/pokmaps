@@ -1,69 +1,69 @@
-sprite,name_fr
-balding-guy,Monsieur
-beauty,Canon
-bike-shop-clerk,Vendeur de vélos
-bird,Pokémon oiseau
-blue,Rival
-boulder,Rocher
-brunette-girl,Jeune femme
-bulbasaur,Bulbizarre
-captain,Capitaine
-channeler,Exorciste
-chansey,Leveinard
-clefairy,Mélofée
-clerk,Vendeur
-clipboard,Bloc-notes
-cook,Cuisinier
-cooltrainer-f,Topdresseuse
-cooltrainer-m,Topdresseur
-daisy,Sœur du rival
-fairy,Pokémon
-fisher,Pêcheur
-fishing-guru,Maître pêcheur
-fossil,Fossile
-gambler,Parieur
-gambler-asleep,Parieur endormi
-gameboy-kid,Enfant
-gentleman,Gentleman
-girl,Fille
-gramps,Vieil homme
-granny,Vieille dame
-guard,Garde
-gym-guide,Guide de l'arène
-hiker,Montagnard
-james,James
-jessie,Jessie
-jigglypuff,Rondoudou
-link-receptionist,Hôtesse du Club Link
-little-boy,Petit garçon
-little-girl,Petite fille
-middle-aged-man,Homme
-middle-aged-woman,Femme
-mom,Maman
-monster,Pokémon
-mr-fuji,M. Fuji
-nurse,Infirmière
-oak,Prof. Chen
-oddish,Mystherbe
-officer-jenny,Agent Jenny
-old-amber,Vieil Ambre
-paper,Papier
-pikachu,Pikachu
-poke-ball,Poké Ball
-pokedex,Pokédex
-rocker,Rockeur
-rocket,Sbire Rocket
-safari-zone-worker,Employé du Parc Safari
-sailor,Marin
-sandshrew,Sabelette
-scientist,Scientifique
-seel,Otaria
-silph-president,Président de Sylphe SARL
-silph-worker-f,Employée de Sylphe SARL
-silph-worker-m,Employé de Sylphe SARL
-snorlax,Ronflex
-super-nerd,Intello
-swimmer,Nageur
-waiter,Serveur
-warden,Gardien du Parc Safari
-youngster,Gamin
+sprite,name_fr,appearance
+balding-guy,Monsieur,person
+beauty,Canon,person
+bike-shop-clerk,Vendeur de vélos,person
+bird,Pokémon oiseau,pokemon
+blue,Rival,person
+boulder,Rocher,object
+brunette-girl,Jeune femme,person
+bulbasaur,Bulbizarre,pokemon
+captain,Capitaine,person
+channeler,Exorciste,person
+chansey,Leveinard,pokemon
+clefairy,Mélofée,pokemon
+clerk,Vendeur,person
+clipboard,Bloc-notes,object
+cook,Cuisinier,person
+cooltrainer-f,Topdresseuse,person
+cooltrainer-m,Topdresseur,person
+daisy,Sœur du rival,person
+fairy,Pokémon,pokemon
+fisher,Pêcheur,person
+fishing-guru,Maître pêcheur,person
+fossil,Fossile,object
+gambler,Parieur,person
+gambler-asleep,Parieur endormi,person
+gameboy-kid,Enfant,person
+gentleman,Gentleman,person
+girl,Fille,person
+gramps,Vieil homme,person
+granny,Vieille dame,person
+guard,Garde,person
+gym-guide,Guide de l'arène,person
+hiker,Montagnard,person
+james,James,person
+jessie,Jessie,person
+jigglypuff,Rondoudou,pokemon
+link-receptionist,Hôtesse du Club Link,person
+little-boy,Petit garçon,person
+little-girl,Petite fille,person
+middle-aged-man,Homme,person
+middle-aged-woman,Femme,person
+mom,Maman,person
+monster,Pokémon,pokemon
+mr-fuji,M. Fuji,person
+nurse,Infirmière,person
+oak,Prof. Chen,person
+oddish,Mystherbe,pokemon
+officer-jenny,Agent Jenny,person
+old-amber,Vieil Ambre,object
+paper,Papier,object
+pikachu,Pikachu,pokemon
+poke-ball,Poké Ball,object
+pokedex,Pokédex,object
+rocker,Rockeur,person
+rocket,Sbire Rocket,person
+safari-zone-worker,Employé du Parc Safari,person
+sailor,Marin,person
+sandshrew,Sabelette,pokemon
+scientist,Scientifique,person
+seel,Otaria,pokemon
+silph-president,Président de Sylphe SARL,person
+silph-worker-f,Employée de Sylphe SARL,person
+silph-worker-m,Employé de Sylphe SARL,person
+snorlax,Ronflex,pokemon
+super-nerd,Intello,person
+swimmer,Nageur,person
+waiter,Serveur,person
+warden,Gardien du Parc Safari,person
+youngster,Gamin,person

@@ -13,11 +13,9 @@ import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.settings.CollectionSettings
-import org.opensources.pokmaps.data.settings.DisplaySettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.data.settings.MapSettings
-import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
@@ -53,7 +51,6 @@ class MapViewModelTest {
             requests,
             MapLayersUseCase(MapSettings(dataStore)),
             ObserveCollectionUseCase(gameRepository, CollectionSettings(dataStore)),
-            DisplaySettingsUseCase(DisplaySettings(dataStore)),
             GetMapTilesUseCase(MapTiles { null })
         )
     }

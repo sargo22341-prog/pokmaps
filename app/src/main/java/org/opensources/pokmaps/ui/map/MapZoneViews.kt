@@ -1,10 +1,5 @@
 package org.opensources.pokmaps.ui.map
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -27,17 +22,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.ui.common.CaughtIcon
-import org.opensources.pokmaps.ui.common.CompleteIcon
+import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.SpriteSize
 
 // Lieu sélectionné sur la carte : barre du bas et liste détaillée.
 
@@ -75,7 +69,11 @@ internal fun ZoneBar(zone: MapZone, caught: Set<Int>, closable: Boolean, onOpenL
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     if (!zone.loading && wild.isNotEmpty()) {
-                        CaughtProgress(caught = wild.count { it in caught }, total = wild.size)
+                        CaughtProgress(
+                            caught = wild.count { it in caught },
+                            total = wild.size,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     }
                 }
             }
@@ -104,7 +102,6 @@ internal fun ZoneBar(zone: MapZone, caught: Set<Int>, closable: Boolean, onOpenL
 internal fun ZoneListSheet(
     zone: MapZone,
     caught: Set<Int>,
-    animated: Boolean,
     onDismiss: () -> Unit,
     onOpenPlace: (MapPlace) -> Unit,
     onOpenPokemon: (Int) -> Unit
@@ -135,9 +132,8 @@ internal fun ZoneListSheet(
                 else -> EncounterGroups(
                     zone.groups,
                     title = { it.pokemonName },
-                    iconPath = { Sprites.pokemonIcon(it.pokemonId) },
-                    iconWidth = LIST_ICON_WIDTH,
-                    animatedIcons = animated,
+                    spritePlace = SpritePlace.MAP_LIST,
+                    spriteSize = SpriteSize.LIST,
                     caught = { it.pokemonId in caught },
                     onClick = { onOpenPokemon(it.pokemonId) }
                 )
@@ -158,39 +154,3 @@ internal fun ZoneListSheet(
         }
     }
 }
-
-/**
- * Pokémon sauvages capturés : Poké Ball et « 1/2 », ou Master Ball et coche quand le lieu est terminé
- * (tous capturés), avec une petite animation au moment où il le devient.
- */
-@Composable
-private fun CaughtProgress(caught: Int, total: Int) {
-    AnimatedContent(
-        targetState = caught >= total,
-        transitionSpec = { (scaleIn() + fadeIn()) togetherWith fadeOut() },
-        label = "progress"
-    ) { complete ->
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 8.dp)) {
-            if (complete) {
-                CompleteIcon(PROGRESS_ICON)
-                Icon(
-                    painterResource(R.drawable.ic_check),
-                    contentDescription = stringResource(R.string.map_zone_complete),
-                    tint = COMPLETE_COLOR,
-                    modifier = Modifier.size(16.dp)
-                )
-            } else {
-                CaughtIcon(PROGRESS_ICON)
-                Text(
-                    stringResource(R.string.map_zone_caught, caught, total),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-    }
-}
-
-private val LIST_ICON_WIDTH = 112.dp
-private val PROGRESS_ICON = 24.dp
-private val COMPLETE_COLOR = Color(0xFF43A047)

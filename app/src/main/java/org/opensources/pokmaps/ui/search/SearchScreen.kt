@@ -31,12 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
+import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.offersSummary
 
 @Composable
@@ -127,7 +131,9 @@ private fun Results(
                 title = entry.name,
                 subtitle = stringResource(R.string.pokedex_number, entry.number),
                 onClick = { onOpenPokemon(entry.pokemonId) },
-                content = { PixelArtImage(Sprites.pokemonIcon(entry.pokemonId), PixelArt.POKEMON_ICON, 52.dp, null) }
+                content = {
+                    PokemonSprite(entry.pokemonId, SpritePlace.SEARCH, SpriteSize.LIST, contentDescription = null)
+                }
             )
         }
         section(R.string.search_places, state.places, key = { "place:${it.identifier}" }) { place ->
@@ -153,10 +159,11 @@ private fun Results(
         section(R.string.search_characters, state.characters, key = { "character:${it.obj.id}" }) { character ->
             SheetRow(
                 title = character.name,
-                subtitle = listOf(character.mapName, offersSummary(character.offers))
+                subtitle = listOf(character.mapName, offersSummary(character.offers, state.fossilUses))
                     .filter { it.isNotEmpty() }
                     .joinToString(" · "),
                 onClick = { onOpenCharacter(character.obj.id) },
+                labels = { RoleIcons(character.roles) },
                 content = { CharacterSprite(character.obj, versionGroup) }
             )
         }

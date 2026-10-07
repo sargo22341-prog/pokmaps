@@ -1,17 +1,21 @@
 package org.opensources.pokmaps.ui.map
 
+import org.opensources.pokmaps.domain.map.CharacterRole
+import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapFloor
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterGroup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.groupByMethod
+import org.opensources.pokmaps.domain.model.wildPokemonIds
 import ovh.plrapps.mapcompose.ui.state.MapState
 
 /** Lieu vers lequel on peut aller : carte (ou ville, route) et point d'arrivée, en pixels de la carte affichée. */
@@ -60,7 +64,7 @@ data class MapZone(
     val groups: List<EncounterGroup> get() = encounters.groupByMethod()
 
     /** Pokémon sauvages du lieu (herbes, grottes, surf, pêche). */
-    val wildIds: Set<Int> get() = encounters.filter { WildMethod.from(it.method) != null }.map { it.pokemonId }.toSet()
+    val wildIds: Set<Int> get() = encounters.wildPokemonIds()
 }
 
 /** Élément touché sur la carte, détaillé dans la carte en bas d'écran. */
@@ -69,14 +73,20 @@ sealed interface MapDetail {
 
     data class Item(val obj: MapObject, val details: ItemDetails? = null, val failed: Boolean = false) : MapDetail
 
-    /** Dresseur, personnage ou Pokémon fixe ; `loading` tant que l'équipe et les offres ne sont pas lues. */
+    /**
+     * Dresseur, personnage, Pokémon fixe ou installation ; `loading` tant que l'équipe et les offres ne sont pas
+     * lues. `fossilUses` : ce que deviennent les fossiles du jeu, pour un personnage qui en donne.
+     */
     data class Character(
         val obj: MapObject,
         val loading: Boolean = true,
         val party: List<TrainerPokemon> = emptyList(),
         val offers: List<NpcOffer> = emptyList(),
+        val fossilUses: Map<String, FossilUse> = emptyMap(),
         val failed: Boolean = false
-    ) : MapDetail
+    ) : MapDetail {
+        val roles: List<CharacterRole> get() = CharacterRole.of(obj.kind, offers.map { it.kind })
+    }
 }
 
 /** Message ponctuel affiché en bas de la carte. */
@@ -109,8 +119,6 @@ data class MapUiState(
     val highlight: MapHighlight? = null,
     /** Message à afficher une fois (voir [MapAction.MessageShown]). */
     val message: MapMessage? = null,
-    /** Sprites animés sur la carte et dans la liste du lieu (réglage). */
-    val animatedSprites: Boolean = false,
     val failed: Boolean = false
 )
 
@@ -134,6 +142,9 @@ sealed interface MapAction {
     data object CloseZoneList : MapAction
 
     data object DismissDetail : MapAction
+
+    /** Montre un objet ou un personnage, dans sa carte (ex. le scientifique qui ranime un fossile). */
+    data class FocusObject(val objectId: Int) : MapAction
 
     /** Le message de [MapUiState.message] a été affiché. */
     data object MessageShown : MapAction

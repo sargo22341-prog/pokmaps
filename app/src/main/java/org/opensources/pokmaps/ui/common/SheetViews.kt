@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.HorizontalDivider
@@ -38,8 +38,9 @@ fun SheetSection(title: String, modifier: Modifier = Modifier, content: @Composa
 }
 
 /**
- * Ligne d'une fiche ou d'un résultat : image, titre, sous-titre, texte à droite, et bouton « Voir sur la carte ».
- * Toucher la ligne ouvre la fiche de l'élément (`onClick`).
+ * Ligne d'une fiche ou d'un résultat : image, titre, icônes (rôles d'un personnage), sous-titre, texte à droite, et
+ * bouton « Voir sur la carte ». Toucher la ligne ouvre la fiche de l'élément (`onClick`). L'image garde au moins la
+ * place d'une icône ; un sprite de Pokémon peut être plus grand.
  */
 @Composable
 fun SheetRow(
@@ -49,6 +50,7 @@ fun SheetRow(
     trailing: String? = null,
     onClick: (() -> Unit)? = null,
     onShowOnMap: (() -> Unit)? = null,
+    labels: (@Composable () -> Unit)? = null,
     content: (@Composable () -> Unit)? = null
 ) {
     Row(
@@ -60,10 +62,11 @@ fun SheetRow(
             .padding(vertical = 4.dp)
     ) {
         if (content != null) {
-            Box(Modifier.size(ROW_IMAGE_SIZE), contentAlignment = Alignment.Center) { content() }
+            Box(Modifier.sizeIn(minWidth = ROW_IMAGE_SIZE, minHeight = ROW_IMAGE_SIZE), Alignment.Center) { content() }
         }
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            labels?.invoke()
             if (!subtitle.isNullOrEmpty()) {
                 Text(
                     subtitle,

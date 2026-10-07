@@ -106,6 +106,14 @@ ksp {
     arg("room.schemaLocation", layout.buildDirectory.dir("room-schemas").get().asFile.path)
 }
 
+// Lint lit les sources Java générées par Hilt (build/generated/hilt/component_sources/<variante>). En build
+// parallèle, lintAnalyzeDebugUnitTest les lisait pendant que hiltJavaCompileDebugUnitTest les réécrivait, et
+// échouait sur DaggerDefault_HiltComponents_SingletonC.java introuvable dès qu'un test changeait.
+tasks.matching { it.name.startsWith("lintAnalyze") }.configureEach {
+    val variant = name.removePrefix("lintAnalyze")
+    mustRunAfter(tasks.matching { it.name == "hiltJavaCompile$variant" })
+}
+
 tasks.withType<Test>().configureEach {
     // sqlite-jdbc utilise JNI pour contrôler le schéma de Room dans les tests JVM.
     jvmArgs("--enable-native-access=ALL-UNNAMED")
@@ -132,7 +140,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.mapcompose)
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
     implementation(libs.coil.gif)
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)

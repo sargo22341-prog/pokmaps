@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
+import org.opensources.pokmaps.domain.map.CharacterRole
+import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.GameIndex
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.ItemEvolution
@@ -18,6 +20,7 @@ import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokedexEntry
@@ -35,10 +38,19 @@ class ObserveSearchIndexUseCase @Inject constructor(
     }
 }
 
-/** Objet ou personnage de la carte lié à un objet, avec le nom de sa carte (et le prix ou la quantité). */
-data class ItemSource(val obj: MapObject, val mapName: String, val price: Int? = null, val quantity: Int? = null)
+/**
+ * Objet ou personnage de la carte lié à un objet, avec le nom de sa carte, le prix (en ₽, ou en jetons pour un
+ * lot du Casino), la quantité, et l'autre objet d'un échange.
+ */
+data class ItemSource(
+    val obj: MapObject,
+    val mapName: String,
+    val price: Int? = null,
+    val quantity: Int? = null,
+    val otherItemName: String? = null
+)
 
-/** Fiche d'un objet : où le trouver, l'acheter ou le recevoir, et sur quels Pokémon l'utiliser. */
+/** Fiche d'un objet : où le trouver, l'acheter, le recevoir ou le gagner, et ce qu'il devient. */
 data class ItemPage(
     val game: Game,
     val item: ItemSummary,
@@ -47,8 +59,20 @@ data class ItemPage(
     val found: List<ItemSource>,
     val sold: List<ItemSource>,
     val given: List<ItemSource>,
-    val evolutions: List<ItemEvolution>
-)
+    val evolutions: List<ItemEvolution>,
+    /** Personnages qui le donnent contre un autre objet (`otherItemName` : l'objet demandé). */
+    val exchangedFor: List<ItemSource> = emptyList(),
+    /** Personnages qui donnent un autre objet contre celui-ci (`otherItemName` : l'objet reçu). */
+    val exchangeableFor: List<ItemSource> = emptyList(),
+    /** Comptoirs du Casino où on le gagne (`price` en jetons). */
+    val prizes: List<ItemSource> = emptyList(),
+    /** Fossile : le Pokémon qu'il devient et le personnage qui le ranime. */
+    val fossil: FossilUse? = null
+) {
+    /** On ne peut l'obtenir nulle part sur les cartes du jeu. */
+    val nowhere: Boolean get() = found.isEmpty() && sold.isEmpty() && given.isEmpty() && exchangedFor.isEmpty() &&
+        prizes.isEmpty()
+}
 
 class ObserveItemPageUseCase @Inject constructor(private val games: GameRepository, private val maps: MapRepository) {
     /** Fiche de l'objet dans le jeu choisi, null s'il n'y existe pas. */
@@ -56,13 +80,16 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
         val catalog = maps.catalog(game)
         val index = maps.index(game)
         val item = index.items.firstOrNull { it.identifier == identifier } ?: return@map null
-        fun MapObject.source(price: Int? = null, quantity: Int? = null) =
-            ItemSource(this, catalog.maps[mapId]?.name.orEmpty(), price, quantity)
+        fun MapObject.source(price: Int? = null, quantity: Int? = null, other: String? = null) =
+            ItemSource(this, catalog.maps[mapId]?.name.orEmpty(), price, quantity, other)
 
-        val offers = index.offers.filter { it.itemIdentifier == identifier }
-        fun offered(kind: OfferKind) = offers.filter { it.kind == kind }.mapNotNull { offer ->
-            catalog.objectsById[offer.objectId]?.source(offer.price, offer.quantity)
-        }.distinctBy { it.obj.id }
+        fun offered(kind: OfferKind, wanted: Boolean = false) = index.offers
+            .filter { it.kind == kind && (if (wanted) it.wantedItemIdentifier else it.itemIdentifier) == identifier }
+            .mapNotNull { offer ->
+                val other = if (wanted) offer.itemName else offer.wantedItemName
+                catalog.objectsById[offer.objectId]?.source(offer.price, offer.quantity, other)
+            }
+            .distinctBy { it.obj.id to it.otherItemName }
         ItemPage(
             game = game,
             item = item,
@@ -73,7 +100,11 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
                 .map { it.source() },
             sold = offered(OfferKind.SALE),
             given = offered(OfferKind.GIFT_ITEM),
-            evolutions = maps.itemEvolutions(game, item.id)
+            evolutions = maps.itemEvolutions(game, item.id),
+            exchangedFor = offered(OfferKind.EXCHANGE),
+            exchangeableFor = offered(OfferKind.EXCHANGE, wanted = true),
+            prizes = offered(OfferKind.PRIZE_ITEM),
+            fossil = FossilUse.of(index, catalog)[identifier]
         )
     }
 
@@ -91,8 +122,14 @@ data class PlacePage(
     /** Dresseurs, Pokémon fixes et personnages qui donnent, vendent ou échangent quelque chose. */
     val characters: List<MapObject>,
     val offers: Map<Int, List<OfferLink>>,
-    val places: List<MapInfo>
-)
+    val places: List<MapInfo>,
+    /** Ce que deviennent les fossiles du jeu (pour un personnage du lieu qui en donne). */
+    val fossilUses: Map<String, FossilUse> = emptyMap()
+) {
+    /** Rôles d'un personnage du lieu (dresseur, personnage, ses fonctions). */
+    fun rolesOf(obj: MapObject): List<CharacterRole> =
+        CharacterRole.of(obj.kind, offers[obj.id].orEmpty().map { it.kind })
+}
 
 class ObservePlacePageUseCase @Inject constructor(private val games: GameRepository, private val maps: MapRepository) {
     /** Fiche du lieu dans le jeu choisi (d'après l'identifiant de sa carte), null s'il n'y existe pas. */
@@ -100,7 +137,8 @@ class ObservePlacePageUseCase @Inject constructor(private val games: GameReposit
         val catalog = maps.catalog(game)
         val map = catalog.mapByIdentifier(identifier) ?: return@map null
         val objects = catalog.objects[map.id].orEmpty()
-        val offers = maps.index(game).offers.groupBy { it.objectId }.filterKeys { id -> objects.any { it.id == id } }
+        val index = maps.index(game)
+        val offers = index.offers.groupBy { it.objectId }.filterKeys { id -> objects.any { it.id == id } }
         PlacePage(
             game = game,
             map = map,
@@ -110,7 +148,8 @@ class ObservePlacePageUseCase @Inject constructor(private val games: GameReposit
                 it.kind == MapObjectKind.TRAINER || it.kind == MapObjectKind.POKEMON || it.id in offers
             },
             offers = offers,
-            places = catalog.accessibleFrom(map.id).mapNotNull { warp -> warp.targetMapId?.let { catalog.maps[it] } }
+            places = catalog.accessibleFrom(map.id).mapNotNull { warp -> warp.targetMapId?.let { catalog.maps[it] } },
+            fossilUses = FossilUse.of(index, catalog)
         )
     }
 }
@@ -121,8 +160,12 @@ data class CharacterPage(
     val obj: MapObject,
     val map: MapInfo,
     val party: List<TrainerPokemon>,
-    val offers: List<NpcOffer>
-)
+    val offers: List<NpcOffer>,
+    /** Ce que deviennent les fossiles du jeu (pour un personnage qui en donne). */
+    val fossilUses: Map<String, FossilUse> = emptyMap()
+) {
+    val roles: List<CharacterRole> get() = CharacterRole.of(obj.kind, offers.map { it.kind })
+}
 
 class ObserveCharacterPageUseCase @Inject constructor(
     private val games: GameRepository,
@@ -134,6 +177,6 @@ class ObserveCharacterPageUseCase @Inject constructor(
         val obj = catalog.objectsById[objectId] ?: return@map null
         val map = catalog.maps[obj.mapId] ?: return@map null
         val party = if (obj.kind == MapObjectKind.TRAINER) maps.trainerParty(game, obj.id) else emptyList()
-        CharacterPage(game, obj, map, party, maps.offers(obj.id))
+        CharacterPage(game, obj, map, party, maps.offers(game, obj.id), FossilUse.of(maps.index(game), catalog))
     }
 }

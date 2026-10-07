@@ -16,7 +16,6 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
-import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -49,7 +48,6 @@ class MapViewModel @Inject constructor(
     private val mapRequests: MapRequests,
     private val mapLayers: MapLayersUseCase,
     private val observeCollection: ObserveCollectionUseCase,
-    private val displaySettings: DisplaySettingsUseCase,
     getMapTiles: GetMapTilesUseCase
 ) : ViewModel() {
     private val session = MapSession(viewModelScope)
@@ -72,7 +70,6 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch { followCatalog() }
         viewModelScope.launch { followRequests() }
         viewModelScope.launch { followLayers() }
-        viewModelScope.launch { followAnimatedSprites() }
         viewModelScope.launch {
             observeCollection().collect { collection -> session.update { it.copy(caught = collection.caught) } }
         }
@@ -81,14 +78,26 @@ class MapViewModel @Inject constructor(
     fun onAction(action: MapAction) {
         when (action) {
             MapAction.Back -> navigation.back()
+
             is MapAction.OpenPlace -> navigation.openPlace(action.place)
+
             is MapAction.SelectFloor -> navigation.selectFloor(action.mapId)
+
             is MapAction.ToggleLayer -> toggleLayer(action.layer)
+
             MapAction.ClearHighlight -> clearHighlight()
+
             MapAction.ClearZone -> selection.clearZone()
+
             MapAction.OpenZoneList -> session.update { it.copy(zoneListOpen = true, detail = null) }
+
             MapAction.CloseZoneList -> session.update { it.copy(zoneListOpen = false) }
+
             MapAction.DismissDetail -> selection.dismissDetail()
+
+            is MapAction.FocusObject -> session.loaded.value?.catalog?.objectsById?.get(action.objectId)
+                ?.let(navigation::focusObject)
+
             MapAction.MessageShown -> session.update { it.copy(message = null) }
         }
     }
@@ -179,14 +188,6 @@ class MapViewModel @Inject constructor(
         mapLayers.layers.collect { layers ->
             if (layers == session.current.layers) return@collect
             session.update { it.copy(layers = layers) }
-            session.refreshOverlays()
-        }
-    }
-
-    private suspend fun followAnimatedSprites() {
-        displaySettings.mapAnimatedSprites.collect { animated ->
-            if (animated == session.current.animatedSprites) return@collect
-            session.update { it.copy(animatedSprites = animated) }
             session.refreshOverlays()
         }
     }

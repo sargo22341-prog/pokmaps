@@ -24,10 +24,7 @@ data class PokemonDetails(
     val machineMoves: List<LearnedMove>,
     val encounters: List<Encounter>,
     /** Pokémon fixes (Ronflex, oiseaux légendaires…) placés sur les cartes du jeu. */
-    val staticEncounters: Int,
-    /** Sprite du jeu dans les assets, null si absent. */
-    val spritePath: String?,
-    val iconPath: String
+    val staticEncounters: Int
 )
 
 data class BaseStat(val identifier: String, val name: String, val value: Int) {

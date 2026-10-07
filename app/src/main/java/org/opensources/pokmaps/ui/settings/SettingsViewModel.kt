@@ -7,39 +7,47 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class SettingsUiState(
-    val animatedSprites: Boolean = true,
-    val mapAnimatedSprites: Boolean = false,
+    /** Endroits où les sprites des Pokémon sont animés. */
+    val animatedPlaces: Set<SpritePlace> = SpritePlace.DEFAULT_ANIMATED,
     /** Réglages illisibles : les valeurs par défaut sont affichées. */
     val failed: Boolean = false
-)
+) {
+    /** Sprites animés partout (interrupteur général). */
+    val allAnimated: Boolean get() = animatedPlaces.containsAll(SpritePlace.entries)
+
+    /** Animés à certains endroits seulement. */
+    val partlyAnimated: Boolean get() = animatedPlaces.isNotEmpty() && !allAnimated
+}
 
 /** Intentions de l'écran Réglages. */
 sealed interface SettingsAction {
-    data class SetAnimatedSprites(val enabled: Boolean) : SettingsAction
+    /** Anime ou fige les sprites partout. */
+    data class SetAllAnimated(val enabled: Boolean) : SettingsAction
 
-    data class SetMapAnimatedSprites(val enabled: Boolean) : SettingsAction
+    data class SetAnimated(val place: SpritePlace, val enabled: Boolean) : SettingsAction
 }
 
 /** Réglages de l'application (écran Réglages, et sprites animés lus partout). */
 @HiltViewModel
 class SettingsViewModel @Inject constructor(private val settings: DisplaySettingsUseCase) : ViewModel() {
-    val state: StateFlow<SettingsUiState> = combine(settings.animatedSprites, settings.mapAnimatedSprites) { app, map ->
-        SettingsUiState(animatedSprites = app, mapAnimatedSprites = map)
-    }.catch { emit(SettingsUiState(failed = true)) }
+    val state: StateFlow<SettingsUiState> = settings.animatedPlaces
+        .map { SettingsUiState(animatedPlaces = it) }
+        .catch { emit(SettingsUiState(failed = true)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SettingsUiState())
 
     fun onAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                is SettingsAction.SetAnimatedSprites -> settings.setAnimatedSprites(action.enabled)
-                is SettingsAction.SetMapAnimatedSprites -> settings.setMapAnimatedSprites(action.enabled)
+                is SettingsAction.SetAllAnimated -> settings.setAllAnimated(action.enabled)
+                is SettingsAction.SetAnimated -> settings.setAnimated(action.place, action.enabled)
             }
         }
     }

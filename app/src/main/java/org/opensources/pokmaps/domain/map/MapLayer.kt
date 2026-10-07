@@ -16,9 +16,13 @@ enum class MapLayer {
         /** Calque d'un objet ou d'un personnage de la carte. */
         fun of(kind: MapObjectKind): MapLayer = when (kind) {
             MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> ITEMS
+
             MapObjectKind.TRAINER -> TRAINERS
+
             MapObjectKind.POKEMON -> STATIC_POKEMON
-            MapObjectKind.NPC -> NPCS
+
+            MapObjectKind.NPC, MapObjectKind.NPC_OBJECT, MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE,
+            MapObjectKind.PRIZE_VENDOR -> NPCS
         }
     }
 }

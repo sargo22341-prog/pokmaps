@@ -88,7 +88,6 @@ internal class MapSession(private val scope: CoroutineScope) {
                 map = map,
                 mapState = mapState,
                 layers = current.layers,
-                animated = current.animatedSprites,
                 zone = current.zone?.let { catalog.maps[it.mapId] },
                 overlays = overlays,
                 highlightedPokemonId = current.highlight?.pokemonId

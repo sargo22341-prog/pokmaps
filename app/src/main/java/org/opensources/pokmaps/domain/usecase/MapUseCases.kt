@@ -7,6 +7,7 @@ import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.settings.MapSettings
+import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapLayer
@@ -60,7 +61,11 @@ class GetPokemonMapsUseCase @Inject constructor(private val maps: MapRepository)
 class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapRepository) {
     suspend fun trainerParty(game: Game, objectId: Int): List<TrainerPokemon> = maps.trainerParty(game, objectId)
 
-    suspend fun offers(objectId: Int): List<NpcOffer> = maps.offers(objectId)
+    suspend fun offers(game: Game, objectId: Int): List<NpcOffer> = maps.offers(game, objectId)
+
+    /** Ce que deviennent les fossiles du jeu (Pokémon ranimé et personnage qui le ranime). */
+    suspend fun fossilUses(game: Game, catalog: MapCatalog): Map<String, FossilUse> =
+        FossilUse.of(maps.index(game), catalog)
 
     suspend fun item(game: Game, itemId: Int): ItemDetails? = maps.item(game, itemId)
 }

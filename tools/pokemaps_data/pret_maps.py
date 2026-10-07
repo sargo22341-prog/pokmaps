@@ -1,4 +1,4 @@
-"""Parsing des en-tetes, blocs et evenements de cartes des depots pret."""
+"""Lecture des en-têtes, blocs et événements des cartes des dépôts pret."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ import re
 from typing import TYPE_CHECKING
 
 from .pret import FIRST_INDOOR_MAP
-from .pret_models import Connection, MapObject, PretMap, Warp
-from .pret_source import macro_args, parse_int, source_lines
+from .pret_models import Connection, MapObject, PretMap, Sign, Warp
+from .pret_source import annotated_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
     from .pret import PretRepo
@@ -59,25 +59,26 @@ def block_files(repo: PretRepo) -> dict[str, str]:
     return files
 
 
-def read_objects(repo: PretRepo) -> dict[str, tuple[int, list[Warp], list[tuple[int, int]], list[MapObject]]]:
+def read_objects(repo: PretRepo) -> dict[str, tuple[int, list[Warp], list[Sign], list[MapObject]]]:
     result = {}
     for path in sorted(repo.path("data/maps/objects").glob("*.asm")):
         label = None
         border = 0
         warps: list[Warp] = []
-        signs: list[tuple[int, int]] = []
+        signs: list[Sign] = []
         objs: list[MapObject] = []
-        for line in source_lines(path):
+        for line, comment in annotated_lines(path):
             if line.endswith("_Object:"):
                 label = line[: -len("_Object:")]
             elif line.startswith("db $") and label and not warps and not objs:
                 border = parse_int(line[3:])
             elif line.startswith("warp_event "):
                 x, y, target, target_warp = macro_args(line, "warp_event")
-                warps.append(Warp(int(x), int(y), target, int(target_warp)))
+                # Les warps gardent leur rang même inaccessibles : les autres cartes s'y réfèrent par leur numéro.
+                warps.append(Warp(int(x), int(y), target, int(target_warp), comment != "inaccessible"))
             elif line.startswith("bg_event "):
-                x, y, _ = macro_args(line, "bg_event")
-                signs.append((int(x), int(y)))
+                x, y, text = macro_args(line, "bg_event")
+                signs.append(Sign(int(x), int(y), text))
             elif line.startswith("object_event "):
                 objs.append(_object_event(macro_args(line, "object_event")))
             elif line.startswith("def_warps_to"):

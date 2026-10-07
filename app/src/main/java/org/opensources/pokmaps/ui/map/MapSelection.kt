@@ -61,7 +61,9 @@ internal class MapSelection(
     fun showObject(obj: MapObject) {
         when (obj.kind) {
             MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> showItem(obj)
-            MapObjectKind.TRAINER, MapObjectKind.NPC, MapObjectKind.POKEMON -> showCharacter(obj)
+
+            MapObjectKind.TRAINER, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT, MapObjectKind.NPC_POKEMON,
+            MapObjectKind.POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR -> showCharacter(obj)
         }
     }
 
@@ -84,16 +86,25 @@ internal class MapSelection(
         ) { details -> replaceDetail(detail, detail.copy(details = details)) }
     }
 
-    /** Dresseur, personnage ou Pokémon fixe : son équipe (dresseur) et ce qu'il donne, vend ou échange. */
+    /**
+     * Dresseur, personnage, Pokémon fixe ou installation : son équipe (dresseur), ce qu'il propose, et ce que
+     * deviennent les fossiles qu'il donne.
+     */
     private fun showCharacter(obj: MapObject) {
-        val game = session.loaded.value?.game ?: return
+        val loaded = session.loaded.value ?: return
+        val game = loaded.game
         val detail = MapDetail.Character(obj)
         session.update { it.copy(detail = detail, zoneListOpen = false) }
         session.load(
             block = {
                 val isTrainer = obj.kind == MapObjectKind.TRAINER
                 val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
-                detail.copy(loading = false, party = party, offers = getObjectDetails.offers(obj.id))
+                detail.copy(
+                    loading = false,
+                    party = party,
+                    offers = getObjectDetails.offers(game, obj.id),
+                    fossilUses = getObjectDetails.fossilUses(game, loaded.catalog)
+                )
             },
             onFailure = { replaceDetail(detail, detail.copy(loading = false, failed = true)) }
         ) { ready -> replaceDetail(detail, ready) }

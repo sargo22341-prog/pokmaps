@@ -12,7 +12,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cached_property
 
-from .pret import BLOCK_PX, LAST_MAP, WATER_TILE, PretRepo
+from .pret import BLOCK_PX, LAST_MAP, STEP_PX, WATER_TILE, PretRepo
 
 WORLD = "KANTO"
 START_MAP = "PALLET_TOWN"
@@ -158,6 +158,11 @@ class GameMaps:
     def display_maps(self) -> list[str]:
         indoor = sorted(self.indoor_parents, key=lambda c: self.maps[c].number)
         return [WORLD, *indoor]
+
+    def point(self, const: str, x: int, y: int) -> tuple[int, int]:
+        """Centre de la case (x, y) de la carte `const`, en pixels de la carte affichée qui la contient."""
+        placed = self.placements[const]
+        return placed.x + x * STEP_PX + STEP_PX // 2, placed.y + y * STEP_PX + STEP_PX // 2
 
     # --- Terrain --------------------------------------------------------------
 

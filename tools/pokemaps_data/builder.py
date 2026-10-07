@@ -21,7 +21,7 @@ from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 
@@ -114,7 +114,7 @@ class DatabaseBuilder:
         for row in self.vg_rows:
             vg = int(row["id"])
             versions = [names[int(v["id"])] for v in self.version_rows if int(v["version_group_id"]) == vg]
-            rows.append((vg, row["identifier"], " / ".join(versions), self.vg_generation[vg], self.vg_order[vg], 1))
+            rows.append((vg, row["identifier"], " / ".join(versions), self.vg_generation[vg], self.vg_order[vg]))
         return rows
 
     def version_table(self) -> list[tuple]:
@@ -150,17 +150,6 @@ class DatabaseBuilder:
             for row in self.api.table("pokemon_dex_numbers")
             if int(row["pokedex_id"]) in used and int(row["species_id"]) in self.species
         )
-
-    @cached_property
-    def pokemon_by_version_group(self) -> dict[int, set[int]]:
-        """Espèces présentes dans le Pokédex de chaque jeu (utilisé pour les sprites)."""
-        by_pokedex: dict[int, set[int]] = defaultdict(set)
-        for pokedex, species, _ in self.pokedex_entry_table():
-            by_pokedex[pokedex].add(species)
-        result: dict[int, set[int]] = defaultdict(set)
-        for vg, pokedex in self.pokedex_links:
-            result[vg] |= by_pokedex[pokedex]
-        return result
 
     def type_table(self) -> list[tuple]:
         names = self.api.names("type_names", "type_id")

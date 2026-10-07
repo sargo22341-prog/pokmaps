@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import org.opensources.pokmaps.domain.map.CharacterRole
+import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.ItemSummary
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
@@ -27,8 +29,10 @@ import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 /** Lieu trouvé : ville, route ou carte intérieure. */
 data class PlaceResult(val identifier: String, val name: String, val outdoor: Boolean)
 
-/** Personnage trouvé : dresseur, ou personnage qui donne, vend ou échange quelque chose. */
-data class CharacterResult(val obj: MapObject, val name: String, val mapName: String, val offers: List<OfferLink>)
+/** Personnage trouvé : dresseur, personnage ou installation qui donne, vend, échange quelque chose ou rend un service. */
+data class CharacterResult(val obj: MapObject, val name: String, val mapName: String, val offers: List<OfferLink>) {
+    val roles: List<CharacterRole> get() = CharacterRole.of(obj.kind, offers.map { it.kind })
+}
 
 data class SearchUiState(
     val loading: Boolean = true,
@@ -38,7 +42,9 @@ data class SearchUiState(
     val pokemon: List<PokedexEntry> = emptyList(),
     val places: List<PlaceResult> = emptyList(),
     val items: List<ItemSummary> = emptyList(),
-    val characters: List<CharacterResult> = emptyList()
+    val characters: List<CharacterResult> = emptyList(),
+    /** Ce que deviennent les fossiles du jeu, pour un personnage trouvé qui en donne. */
+    val fossilUses: Map<String, FossilUse> = emptyMap()
 ) {
     val isEmpty: Boolean get() = pokemon.isEmpty() && places.isEmpty() && items.isEmpty() && characters.isEmpty()
 }
@@ -61,7 +67,8 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
         val source: SearchIndex,
         val places: List<Pair<String, PlaceResult>>,
         val items: List<Pair<String, ItemSummary>>,
-        val characters: List<Pair<String, CharacterResult>>
+        val characters: List<Pair<String, CharacterResult>>,
+        val fossilUses: Map<String, FossilUse>
     )
 
     val state: StateFlow<SearchUiState> =
@@ -78,7 +85,8 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
                         .take(MAX_RESULTS),
                     places = index.places.matching(text),
                     items = index.items.matching(text),
-                    characters = index.characters.matching(text)
+                    characters = index.characters.matching(text),
+                    fossilUses = index.fossilUses
                 )
             }
         }.catch { emit(SearchUiState(loading = false, failed = true)) }
@@ -106,18 +114,29 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
         }
         val offers = source.index.offers.groupBy { it.objectId }
         val characters = catalog.objectsById.values
-            .filter { it.kind == MapObjectKind.TRAINER || (it.kind == MapObjectKind.NPC && it.id in offers) }
+            .filter { it.kind == MapObjectKind.TRAINER || (it.kind in OFFERING_KINDS && it.id in offers) }
             .sortedBy { it.id }
             .map { obj ->
                 val links = offers[obj.id].orEmpty()
                 val result = CharacterResult(obj, obj.name, catalog.maps[obj.mapId]?.name.orEmpty(), links)
-                val names = links.flatMap { listOfNotNull(it.itemName, it.pokemonName, it.wantedPokemonName) }
+                val names = links.flatMap {
+                    listOfNotNull(it.itemName, it.pokemonName, it.wantedPokemonName, it.wantedItemName)
+                }
                 PokedexSearch.normalize((listOf(result.name) + names).joinToString(" ")) to result
             }
-        return Index(source, places, items, characters)
+        return Index(source, places, items, characters, FossilUse.of(source.index, catalog))
     }
 
     private companion object {
         const val MAX_RESULTS = 50
+
+        /** Personnages et installations listés quand ils proposent quelque chose. */
+        val OFFERING_KINDS = setOf(
+            MapObjectKind.NPC,
+            MapObjectKind.NPC_OBJECT,
+            MapObjectKind.NPC_POKEMON,
+            MapObjectKind.VENDING_MACHINE,
+            MapObjectKind.PRIZE_VENDOR
+        )
     }
 }

@@ -35,8 +35,7 @@ data class VersionGroupEntity(
     val identifier: String,
     @ColumnInfo(name = "name_fr") val nameFr: String,
     @ColumnInfo(name = "generation_id") val generationId: Int,
-    @ColumnInfo(name = "sort_order") val sortOrder: Int,
-    @ColumnInfo(name = "has_sprites") val hasSprites: Boolean
+    @ColumnInfo(name = "sort_order") val sortOrder: Int
 )
 
 @Entity(
@@ -439,7 +438,9 @@ data class NpcOfferEntity(
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int?,
     val quantity: Int?,
     val price: Int?,
-    @ColumnInfo(name = "wanted_pokemon_id") val wantedPokemonId: Int?
+    @ColumnInfo(name = "wanted_pokemon_id") val wantedPokemonId: Int?,
+    @ColumnInfo(name = "wanted_item_id") val wantedItemId: Int?,
+    @ColumnInfo(name = "version_id") val versionId: Int?
 )
 
 @Entity(

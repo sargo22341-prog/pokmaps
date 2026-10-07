@@ -3,8 +3,8 @@
 - PokéAPI : export CSV du dépôt PokeAPI/pokeapi (mêmes données que l'API https://pokeapi.co).
   On télécharge les CSV une fois au build : l'application n'appelle jamais l'API
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
-- PokeAPI/sprites : sprites des jeux (ex. Rouge/Bleu, Jaune).
-- msikma/pokesprite : icônes de boîte des Pokémon et icônes d'objets.
+- PokeAPI/sprites : sprites animés de Noir et Blanc, seul style de sprite des Pokémon.
+- msikma/pokesprite : icônes d'objets.
 - pret/pokered, pret/pokeyellow : désassemblages des jeux, uniquement pour générer les cartes.
 """
 

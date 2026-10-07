@@ -32,6 +32,10 @@ LAST_MAP = "LAST_MAP"
 GYM_LEADERS = ("BROCK", "MISTY", "LT_SURGE", "ERIKA", "KOGA", "SABRINA", "BLAINE", "GIOVANNI")
 GYM_LEADER_PARTIES = {(leader, 3 if leader == "GIOVANNI" else 1) for leader in GYM_LEADERS}
 
+# Instructions d'appel suivies pour lire tout ce que fait un texte, et profondeur maximale suivie.
+CALLS = frozenset({"farcall", "callfar", "call", "jp"})
+TEXT_CALL_DEPTH = 2
+
 
 __all__ = [
     "BLOCK_PX",
@@ -232,7 +236,7 @@ class PretRepo:
 
     # --- Dresseurs --------------------------------------------------------------
 
-    def _consts(self, relative: str, macro: str = "const") -> list[str]:
+    def consts(self, relative: str, macro: str = "const") -> list[str]:
         """Constantes d'un fichier `const_def` dans l'ordre (index = valeur)."""
         return [line.split()[1] for line in source_lines(self.path(relative)) if line.startswith(f"{macro} ")]
 
@@ -258,7 +262,7 @@ class PretRepo:
         """Pokémon -> attaques apprises par niveau, dans l'ordre (data/pokemon/evos_moves.asm)."""
         lines = source_lines(self.path("data/pokemon/evos_moves.asm"))
         # Les labels portent le nom du Pokémon (NidoranMEvosMoves -> NIDORAN_M).
-        species = {const.replace("_", ""): const for const in self._consts("constants/pokemon_constants.asm")}
+        species = {const.replace("_", ""): const for const in self.consts("constants/pokemon_constants.asm")}
         by_label = {
             label: species[label.removesuffix("EvosMoves").upper()]
             for label in (line.split()[1] for line in lines if line.startswith("dw ") and line.endswith("EvosMoves"))
@@ -296,7 +300,7 @@ class PretRepo:
     def trainer_parties(self) -> dict[tuple[str, int], list[TrainerPokemon]]:
         """(classe, numéro) -> équipe, attaques comprises (data/trainers/parties.asm et special_moves.asm)."""
         lines = source_lines(self.path("data/trainers/parties.asm"))
-        classes = self._consts("constants/trainer_constants.asm", "trainer_const")[1:]
+        classes = self.consts("constants/trainer_constants.asm", "trainer_const")[1:]
         labels = [line.split()[1] for line in lines if line.startswith("dw ") and line.endswith("Data")]
         by_label = dict(zip(labels, classes, strict=True))
         raw: dict[tuple[str, int], list[tuple[int, str]]] = {}
@@ -447,7 +451,8 @@ class PretRepo:
         return {const: index for index, const in enumerate(consts)}
 
     def _expanded_body(self, label: str | None, depth: int) -> list[str]:
-        """Lignes d'un texte, en suivant les appels vers d'autres textes ou scripts (farcall Route1PrintText…)."""
+        """Lignes d'un texte, en suivant les appels vers d'autres textes ou scripts (farcall Route1PrintText,
+        jp nz, RedsHouse1FMomHealScript…). `depth` borne la profondeur des appels suivis."""
         body = self._script_bodies.get(label or "", [])
         if depth == 0:
             return body
@@ -456,9 +461,19 @@ class PretRepo:
             result.append(line)
             parts = line.replace(",", " ").split()
             target = parts[-1] if parts else None
-            if parts and parts[0] in ("farcall", "callfar") and target in self._script_bodies and target != label:
+            if parts and parts[0] in CALLS and target in self._script_bodies and target != label:
                 result += self._expanded_body(target, depth - 1)
         return result
+
+    def text_body(self, text: str | None) -> list[str]:
+        """Lignes exécutées quand le joueur lit ce texte (constante TEXT_…), appels compris."""
+        return self._expanded_body(self._text_labels.get(text or ""), depth=TEXT_CALL_DEPTH)
+
+    def script_body(self, label: str) -> list[str]:
+        """Lignes d'un label des scripts (ex. FossilsList), sans suivre ses appels."""
+        if label not in self._script_bodies:
+            raise ValueError(f"{self.root.name} : label {label} introuvable dans scripts/")
+        return self._script_bodies[label]
 
     def leader_gifts(self, map_label: str) -> list[NpcOffer]:
         """CT donnée par le champion d'une arène après le combat (script de la carte, pas de son texte)."""
@@ -477,10 +492,9 @@ class PretRepo:
 
     def npc_offers(self, text: str | None) -> list[NpcOffer]:
         """Objets donnés ou vendus, Pokémon donnés ou échangés par le personnage qui affiche ce texte."""
-        label = self._text_labels.get(text or "")
         offers: list[NpcOffer] = []
         pending: tuple[str, int] | None = None
-        for line in self._expanded_body(label, depth=2):
+        for line in self.text_body(text):
             if line.startswith("script_mart "):
                 offers += [
                     NpcOffer("sale", item=item, price=self.prices.get(item)) for item in macro_args(line, "script_mart")

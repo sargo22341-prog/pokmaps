@@ -21,7 +21,7 @@ data class MapSpot(val mapId: Int, val kind: SpotKind, val x: Int, val y: Int)
 /** Pokémon de l'équipe d'un dresseur, avec les attaques qu'il utilise en combat. */
 data class TrainerPokemon(val pokemonId: Int, val name: String, val level: Int, val moves: List<LearnedMove>)
 
-/** Ce que propose un personnage quand on lui parle. */
+/** Ce que propose un personnage ou une installation quand on lui parle. */
 sealed interface NpcOffer {
     data class GiftItem(val item: OfferItem, val quantity: Int) : NpcOffer
 
@@ -30,6 +30,63 @@ sealed interface NpcOffer {
     data class GiftPokemon(val pokemonId: Int, val name: String, val level: Int?) : NpcOffer
 
     data class Trade(val pokemonId: Int, val name: String, val wantedId: Int, val wantedName: String) : NpcOffer
+
+    /** Objet donné contre un autre (Bicyclette contre le Bon Commande, CT contre une boisson). */
+    data class Exchange(val item: OfferItem, val wanted: OfferItem) : NpcOffer
+
+    /** Lot du Casino, contre des jetons. */
+    data class PrizeItem(val item: OfferItem, val coins: Int) : NpcOffer
+
+    data class PrizePokemon(val pokemonId: Int, val name: String, val level: Int, val coins: Int) : NpcOffer
+
+    /** Jetons du Casino vendus (`coins` jetons pour `price` ₽) ou donnés. */
+    data class CoinSale(val coins: Int, val price: Int) : NpcOffer
+
+    data class CoinGift(val coins: Int) : NpcOffer
+
+    /** Fossile ranimé en Pokémon. */
+    data class FossilRevival(val fossil: OfferItem, val pokemonId: Int, val name: String, val level: Int) : NpcOffer
+
+    data class Service(val service: CharacterService) : NpcOffer
+}
+
+/** Nature d'une offre lue dans la base. */
+val NpcOffer.kind: OfferKind
+    get() = when (this) {
+        is NpcOffer.GiftItem -> OfferKind.GIFT_ITEM
+
+        is NpcOffer.Sale -> OfferKind.SALE
+
+        is NpcOffer.GiftPokemon -> OfferKind.GIFT_POKEMON
+
+        is NpcOffer.Trade -> OfferKind.TRADE
+
+        is NpcOffer.Exchange -> OfferKind.EXCHANGE
+
+        is NpcOffer.PrizeItem -> OfferKind.PRIZE_ITEM
+
+        is NpcOffer.PrizePokemon -> OfferKind.PRIZE_POKEMON
+
+        is NpcOffer.CoinSale -> OfferKind.COIN_SALE
+
+        is NpcOffer.CoinGift -> OfferKind.COIN_GIFT
+
+        is NpcOffer.FossilRevival -> OfferKind.FOSSIL
+
+        is NpcOffer.Service -> when (service) {
+            CharacterService.HEAL -> OfferKind.HEAL
+            CharacterService.CABLE_CLUB -> OfferKind.CABLE_CLUB
+            CharacterService.NAME_RATER -> OfferKind.NAME_RATER
+            CharacterService.DAYCARE -> OfferKind.DAYCARE
+        }
+    }
+
+/** Service rendu par un personnage, sans objet ni Pokémon. */
+enum class CharacterService {
+    HEAL,
+    CABLE_CLUB,
+    NAME_RATER,
+    DAYCARE
 }
 
 data class OfferItem(val id: Int, val identifier: String, val name: String, val hasSprite: Boolean)
@@ -58,7 +115,17 @@ enum class OfferKind(val identifier: String) {
     GIFT_ITEM("gift_item"),
     GIFT_POKEMON("gift_pokemon"),
     SALE("sale"),
-    TRADE("trade");
+    TRADE("trade"),
+    EXCHANGE("exchange"),
+    PRIZE_ITEM("prize_item"),
+    PRIZE_POKEMON("prize_pokemon"),
+    COIN_SALE("coin_sale"),
+    COIN_GIFT("coin_gift"),
+    FOSSIL("fossil"),
+    HEAL("heal"),
+    CABLE_CLUB("cable_club"),
+    NAME_RATER("name_rater"),
+    DAYCARE("daycare");
 
     companion object {
         fun from(identifier: String): OfferKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {
@@ -67,7 +134,7 @@ enum class OfferKind(val identifier: String) {
     }
 }
 
-/** Don, vente ou échange d'un personnage de la carte, avec les noms des objets et des Pokémon. */
+/** Offre d'un personnage ou d'une installation de la carte, avec les noms des objets et des Pokémon. */
 data class OfferLink(
     val objectId: Int,
     val kind: OfferKind,
@@ -77,7 +144,9 @@ data class OfferLink(
     val pokemonName: String?,
     val wantedPokemonName: String?,
     val price: Int?,
-    val quantity: Int?
+    val quantity: Int?,
+    val wantedItemIdentifier: String? = null,
+    val wantedItemName: String? = null
 )
 
 /** Objets et offres des personnages d'un jeu, parcourus par la recherche et les fiches. */

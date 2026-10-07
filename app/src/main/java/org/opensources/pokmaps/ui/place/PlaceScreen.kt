@@ -27,15 +27,20 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.usecase.PlacePage
+import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
+import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.offersSummary
 
 @Composable
@@ -86,7 +91,7 @@ fun PlaceScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        PlaceHeader(page) { onAction(PlaceAction.ShowPlace) }
+        PlaceHeader(state, page) { onAction(PlaceAction.ShowPlace) }
         SheetSection(stringResource(R.string.label_wild_pokemon)) {
             if (state.encounterGroups.isEmpty()) {
                 Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -94,7 +99,9 @@ fun PlaceScreen(
                 EncounterGroups(
                     state.encounterGroups,
                     title = { it.pokemonName },
-                    iconPath = { Sprites.pokemonIcon(it.pokemonId) },
+                    spritePlace = SpritePlace.SHEETS,
+                    spriteSize = SpriteSize.SHEET,
+                    caught = { it.pokemonId in state.caught },
                     onClick = { onOpenPokemon(it.pokemonId) }
                 )
             }
@@ -106,8 +113,9 @@ fun PlaceScreen(
     }
 }
 
+/** Nom du lieu, capture de ses Pokémon sauvages (« 1/3 », ou terminé) et bouton « Voir sur la carte ». */
 @Composable
-private fun PlaceHeader(page: PlacePage, onShowPlace: () -> Unit) {
+private fun PlaceHeader(state: PlaceUiState, page: PlacePage, onShowPlace: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -120,6 +128,7 @@ private fun PlaceHeader(page: PlacePage, onShowPlace: () -> Unit) {
             stringResource(if (page.map.parentId != null) R.string.place_outdoor else R.string.place_indoor),
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        if (state.wildIds.isNotEmpty()) CaughtProgress(caught = state.caughtWild, total = state.wildIds.size)
         Button(onClick = onShowPlace) {
             Icon(
                 painterResource(R.drawable.ic_map),
@@ -170,21 +179,19 @@ private fun CharactersSection(
             val pokemonId = obj.pokemonId?.takeIf { obj.kind == MapObjectKind.POKEMON }
             SheetRow(
                 title = obj.name,
-                subtitle = when (obj.kind) {
-                    MapObjectKind.TRAINER -> stringResource(R.string.map_trainer)
-
-                    MapObjectKind.POKEMON -> stringResource(R.string.map_static_pokemon, obj.level ?: 0)
-
-                    MapObjectKind.NPC, MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM ->
-                        offersSummary(page.offers[obj.id].orEmpty())
+                subtitle = if (obj.kind == MapObjectKind.POKEMON) {
+                    stringResource(R.string.map_static_pokemon, obj.level ?: 0)
+                } else {
+                    offersSummary(page.offers[obj.id].orEmpty(), page.fossilUses)
                 },
                 onClick = {
                     if (pokemonId != null) onOpenPokemon(pokemonId) else onOpenCharacter(obj.id)
                 },
                 onShowOnMap = { onShowObject(obj.id) },
+                labels = { RoleIcons(page.rolesOf(obj)) },
                 content = {
                     if (pokemonId != null) {
-                        PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 52.dp, null)
+                        PokemonSprite(pokemonId, SpritePlace.SHEETS, SpriteSize.SHEET, contentDescription = null)
                     } else {
                         CharacterSprite(obj, versionGroup)
                     }

@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -15,6 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -22,7 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
-import org.opensources.pokmaps.ui.common.LocalAnimatedSprites
+import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
 import org.opensources.pokmaps.ui.game.GameSelector
 import org.opensources.pokmaps.ui.game.GameUiState
 import org.opensources.pokmaps.ui.game.GameViewModel
@@ -35,7 +38,7 @@ fun PokemapsApp(
 ) {
     val settings by settingsViewModel.state.collectAsStateWithLifecycle()
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
-    CompositionLocalProvider(LocalAnimatedSprites provides settings.animatedSprites) {
+    CompositionLocalProvider(LocalAnimatedPlaces provides settings.animatedPlaces) {
         PokemapsContent(gameState, gameViewModel::select)
     }
 }
@@ -67,7 +70,15 @@ private fun PokemapsTopBar(
 ) {
     val detailTitle = DETAIL_TITLES[route]
     TopAppBar(
-        title = { Text(stringResource(detailTitle ?: R.string.app_name)) },
+        // Une ligne, réduite si besoin : avec le choix du jeu, « Fiche personnage » se coupait sur trois lignes.
+        title = {
+            Text(
+                stringResource(detailTitle ?: R.string.app_name),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                autoSize = TextAutoSize.StepBased(minFontSize = TITLE_MIN_SIZE, maxFontSize = TITLE_MAX_SIZE)
+            )
+        },
         navigationIcon = {
             if (detailTitle != null) {
                 IconButton(onClick = { navController.popBackStack() }) {
@@ -106,3 +117,6 @@ private fun PokemapsBottomBar(route: String?, navController: NavHostController) 
         }
     }
 }
+
+private val TITLE_MIN_SIZE = 14.sp
+private val TITLE_MAX_SIZE = 22.sp

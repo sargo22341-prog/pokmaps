@@ -25,10 +25,16 @@ data class Encounter(
     /** Les échanges n'ont pas de niveau significatif (le Pokémon garde celui de l'échange). */
     val isTrade: Boolean get() = method == TRADE
 
+    /** Rencontre à l'état sauvage (herbes, grottes, surf, pêche), et non don, échange ou Pokémon fixe. */
+    val isWild: Boolean get() = ObtainMethod.fromEncounterMethod(method).isWild
+
     private companion object {
         const val TRADE = "npc-trade"
     }
 }
+
+/** Pokémon qu'on rencontre à l'état sauvage parmi ces rencontres. */
+fun List<Encounter>.wildPokemonIds(): Set<Int> = filter { it.isWild }.map { it.pokemonId }.toSet()
 
 /** Rencontres d'une zone (ou d'un Pokémon) regroupées par méthode, dans l'ordre du jeu. */
 data class EncounterGroup(val methodName: String, val encounters: List<Encounter>)

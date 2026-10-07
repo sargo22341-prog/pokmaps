@@ -189,13 +189,18 @@ def test_gen1_evolutions(db: sqlite3.Connection) -> None:
 
 
 def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
+    """Un seul style de sprite : le sprite fixe est la première image du sprite animé (même taille, même pose)."""
     sprites = assets / "sprites"
-    for pokemon_id in (1, 25, 151):
-        for folder in ("icon", "red-blue", "yellow"):
-            with Image.open(sprites / "pokemon" / folder / f"{pokemon_id}.webp") as image:
-                assert (image.format, getattr(image, "is_animated", False)) == ("WEBP", False)
-        with Image.open(sprites / "pokemon/animated" / f"{pokemon_id}.webp") as image:
-            assert (image.format, image.is_animated) == ("WEBP", True)
+    assert sorted(path.name for path in (sprites / "pokemon").iterdir()) == ["animated", "static"]
+    for pokemon_id in range(1, 152):
+        with Image.open(sprites / "pokemon/animated" / f"{pokemon_id}.webp") as animated:
+            assert (animated.format, animated.is_animated) == ("WEBP", True)
+            animated.seek(0)
+            first = animated.convert("RGBA")
+        with Image.open(sprites / "pokemon/static" / f"{pokemon_id}.webp") as static:
+            assert (static.format, getattr(static, "is_animated", False)) == ("WEBP", False)
+            assert static.size == first.size
+            assert static.convert("RGBA").getchannel("A").tobytes() == first.getchannel("A").tobytes()
     missing = [
         identifier
         for identifier, has_sprite in db.execute("SELECT identifier, has_sprite FROM item")

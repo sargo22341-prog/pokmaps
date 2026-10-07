@@ -57,9 +57,6 @@
     <string name="pokemon_size">%1$s m · %2$s kg</string>
     <string name="pokemon_growth">Expérience : courbe %1$s</string>
     <string name="pokemon_capture_rate">Taux de capture : %1$d</string>
-    <string name="pokemon_show_artwork">Artwork officiel (en ligne)</string>
-    <string name="pokemon_show_sprite">Sprite du jeu</string>
-    <string name="pokemon_artwork_error">Artwork indisponible hors ligne</string>
     <string name="pokemon_stats">Stats de base</string>
     <string name="pokemon_stats_total">Total</string>
     <string name="pokemon_weaknesses">Faiblesses et résistances</string>
@@ -130,7 +127,6 @@
     <string name="map_highlight_clear">Fin du surlignage</string>
     <string name="map_item">Objet</string>
     <string name="map_hidden_item">Objet caché</string>
-    <string name="map_trainer">Dresseur</string>
     <string name="map_static_pokemon">Pokémon fixe, niveau %1$d</string>
     <string name="map_open_pokemon">Fiche de %1$s</string>
     <string name="map_zone_list">Liste</string>
@@ -154,6 +150,27 @@
     <string name="map_offer_price">%1$d ₽</string>
     <string name="map_offer_pokemon_level">%1$s, niveau %2$d</string>
     <string name="map_offer_trade">Votre %2$s contre son %1$s</string>
+    <string name="map_offer_services">Services</string>
+    <string name="map_offer_exchange">%1$s contre %2$s</string>
+    <string name="map_offer_prizes">Lots, contre des jetons</string>
+    <string name="map_offer_fossils">Ranime les fossiles</string>
+    <string name="service_heal">Soigne tous vos Pokémon.</string>
+    <string name="service_cable_club">Club Link : échanges et combats avec un autre joueur.</string>
+    <string name="service_name_rater">Juge et change le surnom de vos Pokémon.</string>
+    <string name="service_daycare">Garde un Pokémon, qui gagne de l’expérience (à payer en le reprenant).</string>
+    <string name="fossil_use">À faire ranimer par : %1$s, %2$s.</string>
+    <string name="fossil_show_reviver">Voir où le ranimer</string>
+    <string name="role_battle">Dresseur : combat</string>
+    <string name="role_character">Personnage</string>
+    <string name="role_pokemon">Pokémon</string>
+    <string name="role_heal">Soins</string>
+    <string name="role_shop">Boutique</string>
+    <string name="role_gift">Donne quelque chose</string>
+    <string name="role_prizes">Lots du Casino</string>
+    <string name="role_coins">Jetons du Casino</string>
+    <string name="role_daycare">Pension</string>
+    <string name="role_name_rater">Surnoms</string>
+    <string name="role_cable_club">Club Link</string>
     <string name="map_wild_pokemon">Pokémon sauvage</string>
     <string name="map_open_item">Fiche de l’objet %1$s</string>
 
@@ -169,6 +186,9 @@
     <string name="offer_summary_gifts">Donne %1$s</string>
     <string name="offer_summary_sales">Vend %1$s</string>
     <string name="offer_summary_trades">Échange %1$s</string>
+    <string name="offer_summary_prizes">Lots : %1$s</string>
+    <string name="offer_summary_fossils">Ranime %1$s</string>
+    <string name="offer_summary_fossil_gift">%1$s (→ %2$s)</string>
     <string name="item_title">Fiche objet</string>
     <string name="item_not_found">Cet objet n’existe pas dans ce jeu.</string>
     <string name="item_evolutions">Fait évoluer</string>
@@ -177,6 +197,12 @@
     <string name="item_sold">Où l’acheter</string>
     <string name="item_given">Qui le donne</string>
     <string name="item_where">Où l’obtenir</string>
+    <string name="item_exchange_get">Obtenu en échange</string>
+    <string name="item_exchange_give">S’échange contre</string>
+    <string name="item_exchange_for">contre %1$s</string>
+    <string name="item_prizes">Lot du Casino</string>
+    <string name="item_fossil">Ranimé en Pokémon</string>
+    <string name="item_fossil_where">Où le ranimer</string>
     <string name="item_nowhere">Introuvable sur les cartes de Pokémon %1$s.</string>
     <string name="place_title">Fiche lieu</string>
     <string name="place_not_found">Ce lieu n’existe pas dans ce jeu.</string>
@@ -190,9 +216,20 @@
     <string name="settings_title">Réglages</string>
     <string name="settings_display">Affichage</string>
     <string name="settings_animated_sprites">Sprites animés</string>
-    <string name="settings_map_animated_sprites">Sprites animés sur la carte</string>
-    <string name="settings_map_animated_sprites_summary">Pokémon sauvages et fixes animés sur la carte, dans la liste du lieu et sa fiche.</string>
-    <string name="settings_animated_sprites_summary">Pokémon animés (sprites de Noir et Blanc) dans le Pokédex et la fiche Pokémon, à la place des sprites fixes.</string>
+    <string name="settings_animated_everywhere">Pokémon animés partout</string>
+    <string name="settings_animated_nowhere">Pokémon fixes partout</string>
+    <string name="settings_animated_expand">Choisir les endroits animés</string>
+    <string name="settings_animated_collapse">Masquer les endroits</string>
+    <string name="sprite_place_map_summary">Pokémon sauvages et fixes dessinés sur la carte.</string>
+    <string name="sprite_place_map_list">Liste et fiches de la carte</string>
+    <string name="sprite_place_map_list_summary">Liste des Pokémon du lieu et fiche de ce qu’on touche sur la carte.</string>
+    <string name="sprite_place_pokedex_summary">Liste des Pokémon du Pokédex.</string>
+    <string name="sprite_place_pokemon_sheet_summary">Grande image en haut de la fiche d’un Pokémon.</string>
+    <string name="sprite_place_evolutions">Lignes d’évolution</string>
+    <string name="sprite_place_evolutions_summary">Évolutions de la fiche Pokémon, Pokémon d’une pierre ou d’un fossile.</string>
+    <string name="sprite_place_sheets">Fiches</string>
+    <string name="sprite_place_sheets_summary">Fiches des lieux, des personnages, des dresseurs et des objets.</string>
+    <string name="sprite_place_search_summary">Pokémon trouvés par la recherche.</string>
     <string name="about_version">Version %1$s</string>
     <string name="about_description">Cartes interactives et Pokédex de Pokémon Rouge, Bleu et Jaune, entièrement hors ligne.</string>
     <string name="about_sources_title">Sources</string>
@@ -206,4 +243,14 @@
     <string name="about_credit_pret">Cartes dessinées à partir des désassemblages pret/pokered et pret/pokeyellow.</string>
     <string name="about_legal_title">Mentions légales</string>
     <string name="about_legal">Projet de fan, personnel et non commercial. Pokémon et les noms associés sont des marques de Nintendo, Game Freak et The Pokémon Company. Images © Nintendo / Creatures / GAME FREAK.</string>
+    <plurals name="coins">
+        <item quantity="one">%1$d jeton</item>
+        <item quantity="many">%1$d jetons</item>
+        <item quantity="other">%1$d jetons</item>
+    </plurals>
+    <plurals name="settings_animated_some">
+        <item quantity="one">Animés à %1$d endroit sur %2$d</item>
+        <item quantity="many">Animés à %1$d endroits sur %2$d</item>
+        <item quantity="other">Animés à %1$d endroits sur %2$d</item>
+    </plurals>
 </resources>

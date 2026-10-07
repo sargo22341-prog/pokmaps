@@ -8,8 +8,10 @@ import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollToNodeAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isOff
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -116,14 +118,24 @@ class PokemapsJourneyTest {
         val animated = hasText(text(R.string.settings_animated_sprites))
         click(hasContentDescription(text(R.string.settings_title)))
         await(animated)
-        // Sprites animés activés par défaut ; le choix est mémorisé d'une visite des réglages à l'autre.
-        compose.onNode(animated).assertIsOn().performClick()
+        // Animés au Pokédex et sur la fiche Pokémon par défaut : l'interrupteur général anime tout, et le choix est
+        // mémorisé d'une visite des réglages à l'autre.
+        compose.onNode(animated).assertIsOff().performClick()
         click(hasContentDescription(text(R.string.back)))
         click(hasContentDescription(text(R.string.settings_title)))
         await(animated)
+        compose.onNode(animated).assertIsOn()
+        // Le sous-menu choisit endroit par endroit : la carte seule redevient fixe.
+        click(hasContentDescription(text(R.string.settings_animated_expand)))
+        val map = hasText(text(R.string.nav_map))
+        await(map)
+        compose.onNode(map).assertIsOn().performClick()
+        compose.waitUntil(TIMEOUT_MS) { compose.onAllNodes(map and isOff()).fetchSemanticsNodes().isNotEmpty() }
         compose.onNode(animated).assertIsOff()
 
-        click(hasText(text(R.string.about_title)))
+        // Le sous-menu ouvert pousse « À propos » plus bas dans l'écran.
+        await(hasText(text(R.string.about_title)))
+        compose.onNode(hasText(text(R.string.about_title))).performScrollTo().performClick()
         await(hasText(text(R.string.about_credit_pokeapi_title)))
     }
 

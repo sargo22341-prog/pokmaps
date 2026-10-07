@@ -22,6 +22,9 @@ data class CharacterUiState(val loading: Boolean = true, val page: CharacterPage
 sealed interface CharacterAction {
     /** Montre le personnage sur la carte, dans son bâtiment. */
     data object ShowOnMap : CharacterAction
+
+    /** Montre un autre personnage sur la carte (ex. le scientifique qui ranime le fossile donné). */
+    data class ShowObject(val objectId: Int) : CharacterAction
 }
 
 /** Fiche d'un personnage ou d'un dresseur. */
@@ -41,6 +44,7 @@ class CharacterViewModel @Inject constructor(
     fun onAction(action: CharacterAction) {
         when (action) {
             CharacterAction.ShowOnMap -> mapRequests.send(MapRequest.FocusObject(objectId))
+            is CharacterAction.ShowObject -> mapRequests.send(MapRequest.FocusObject(action.objectId))
         }
     }
 

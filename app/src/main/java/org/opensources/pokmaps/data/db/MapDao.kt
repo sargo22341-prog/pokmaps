@@ -59,18 +59,20 @@ interface MapDao {
     )
     suspend fun pokemonAreaMethods(versionId: Int, pokemonId: Int): List<AreaMethodRow>
 
-    /** Personnages des cartes du jeu qui donnent ou échangent un Pokémon. */
+    /** Personnages et comptoirs des cartes de la version qui donnent, échangent, raniment ou font gagner un Pokémon. */
     @Query(
         """
         SELECT DISTINCT n.map_object_id FROM npc_offer n
         JOIN map_object o ON o.id = n.map_object_id
         JOIN map m ON m.id = o.map_id
-        WHERE m.version_group_id = :versionGroupId AND n.pokemon_id = :pokemonId
-            AND n.kind IN ('gift_pokemon', 'trade')
+        JOIN version v ON v.version_group_id = m.version_group_id
+        WHERE v.id = :versionId AND n.pokemon_id = :pokemonId
+            AND n.kind IN ('gift_pokemon', 'trade', 'prize_pokemon', 'fossil')
+            AND (n.version_id IS NULL OR n.version_id = :versionId)
         ORDER BY n.map_object_id
         """
     )
-    suspend fun pokemonGivers(versionGroupId: Int, pokemonId: Int): List<Int>
+    suspend fun pokemonGivers(versionId: Int, pokemonId: Int): List<Int>
 
     /** Objets du jeu : ramassables ou cachés, donnés, vendus, CT / CS et objets d'évolution. */
     @Query(
@@ -89,6 +91,10 @@ interface MapDao {
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId
+                UNION SELECT n.wanted_item_id FROM npc_offer n
+                JOIN map_object o ON o.id = n.map_object_id
+                JOIN map m ON m.id = o.map_id
+                WHERE m.version_group_id = :versionGroupId
             )
             OR i.id IN (SELECT e.item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
         ORDER BY i.id
@@ -96,22 +102,25 @@ interface MapDao {
     )
     suspend fun items(versionGroupId: Int): List<ItemRow>
 
-    /** Dons, ventes et échanges de tous les personnages du jeu. */
+    /** Offres de tous les personnages et installations du jeu, dans la version (lots du Casino). */
     @Query(
         """
         SELECT n.map_object_id AS objectId, n.kind, i.identifier AS itemIdentifier, i.name_fr AS itemName,
-            n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, w.name_fr AS wantedPokemonName, n.price, n.quantity
+            n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, w.name_fr AS wantedPokemonName, n.price, n.quantity,
+            wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName
         FROM npc_offer n
         JOIN map_object o ON o.id = n.map_object_id
         JOIN map m ON m.id = o.map_id
+        JOIN version v ON v.version_group_id = m.version_group_id
         LEFT JOIN item i ON i.id = n.item_id
         LEFT JOIN pokemon p ON p.id = n.pokemon_id
         LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id
-        WHERE m.version_group_id = :versionGroupId
+        LEFT JOIN item wi ON wi.id = n.wanted_item_id
+        WHERE v.id = :versionId AND (n.version_id IS NULL OR n.version_id = :versionId)
         ORDER BY n.id
         """
     )
-    suspend fun offerLinks(versionGroupId: Int): List<OfferLinkRow>
+    suspend fun offerLinks(versionId: Int): List<OfferLinkRow>
 
     /** Pokémon qui évoluent grâce à un objet dans le jeu. */
     @Query(
@@ -165,20 +174,23 @@ interface MapDao {
     )
     suspend fun trainerMoves(objectId: Int, versionGroupId: Int): List<TrainerMoveRow>
 
-    /** Dons, ventes et échanges d'un personnage. */
+    /** Offres d'un personnage ou d'une installation dans la version (lots du Casino de Rouge ou de Bleu). */
     @Query(
         """
         SELECT n.kind, n.item_id AS itemId, i.identifier AS itemIdentifier, i.name_fr AS itemName,
             i.has_sprite AS itemHasSprite, n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, n.quantity, n.price,
-            n.wanted_pokemon_id AS wantedPokemonId, w.name_fr AS wantedPokemonName
+            n.wanted_pokemon_id AS wantedPokemonId, w.name_fr AS wantedPokemonName,
+            n.wanted_item_id AS wantedItemId, wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName,
+            wi.has_sprite AS wantedItemHasSprite
         FROM npc_offer n
         LEFT JOIN item i ON i.id = n.item_id
         LEFT JOIN pokemon p ON p.id = n.pokemon_id
         LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id
-        WHERE n.map_object_id = :objectId ORDER BY n.id
+        LEFT JOIN item wi ON wi.id = n.wanted_item_id
+        WHERE n.map_object_id = :objectId AND (n.version_id IS NULL OR n.version_id = :versionId) ORDER BY n.id
         """
     )
-    suspend fun offers(objectId: Int): List<NpcOfferRow>
+    suspend fun offers(objectId: Int, versionId: Int): List<NpcOfferRow>
 
     /** Objet : description, ou attaque de la CT / CS dans le jeu. */
     @Query(

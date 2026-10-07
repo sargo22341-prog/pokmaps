@@ -24,16 +24,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
-import org.opensources.pokmaps.ui.common.AnimatedPokemonSprite
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.MoveLine
 import org.opensources.pokmaps.ui.common.Offers
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokemonSprite
+import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SectionTitle
+import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TrainerPokemonRow
 
 /** Fiche de l'élément touché sur la carte, en bas d'écran (la carte reste utilisable). */
@@ -41,10 +45,10 @@ import org.opensources.pokmaps.ui.common.TrainerPokemonRow
 internal fun DetailCard(
     detail: MapDetail,
     versionGroupIdentifier: String,
-    animated: Boolean,
     onClose: () -> Unit,
     onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit
+    onOpenItem: (String) -> Unit,
+    onShowObject: (Int) -> Unit
 ) {
     Surface(
         shape = MaterialTheme.shapes.large,
@@ -63,16 +67,14 @@ internal fun DetailCard(
                     .padding(16.dp)
             ) {
                 when (detail) {
-                    is MapDetail.WildPokemon -> WildPokemonDetails(detail, animated, onOpenPokemon)
+                    is MapDetail.WildPokemon -> WildPokemonDetails(detail, onOpenPokemon)
 
                     is MapDetail.Item -> ItemDetailsContent(detail, versionGroupIdentifier, onOpenItem)
 
                     is MapDetail.Character -> CharacterDetails(
                         detail,
                         versionGroupIdentifier,
-                        animated,
-                        onOpenPokemon,
-                        onOpenItem
+                        DetailLinks(onOpenPokemon, onOpenItem, onShowObject)
                     )
                 }
             }
@@ -83,16 +85,29 @@ internal fun DetailCard(
     }
 }
 
-/** En-tête d'une fiche : image, petite ligne de catégorie et nom. */
+/** Fiches et carte ouvertes depuis la fiche d'un personnage. */
+private data class DetailLinks(
+    val onOpenPokemon: (Int) -> Unit,
+    val onOpenItem: (String) -> Unit,
+    val onShowObject: (Int) -> Unit
+)
+
+/** En-tête d'une fiche : image, icônes de ce qu'est l'élément (dresseur, personnage…), petite ligne et nom. */
 @Composable
-private fun DetailHeader(label: String, title: String, content: @Composable () -> Unit) {
+private fun DetailHeader(
+    label: String,
+    title: String,
+    roles: List<CharacterRole> = emptyList(),
+    content: @Composable () -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.padding(end = 40.dp)
     ) {
         content()
-        Column {
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            RoleIcons(roles, size = 24.dp)
             if (label.isNotEmpty()) {
                 Text(
                     label,
@@ -106,9 +121,9 @@ private fun DetailHeader(label: String, title: String, content: @Composable () -
 }
 
 @Composable
-private fun WildPokemonDetails(detail: MapDetail.WildPokemon, animated: Boolean, onOpenPokemon: (Int) -> Unit) {
+private fun WildPokemonDetails(detail: MapDetail.WildPokemon, onOpenPokemon: (Int) -> Unit) {
     DetailHeader(stringResource(R.string.map_wild_pokemon), detail.name) {
-        DetailPokemonImage(detail.pokemonId, animated)
+        PokemonSprite(detail.pokemonId, SpritePlace.MAP_LIST, SpriteSize.SHEET, contentDescription = null)
     }
     EncounterGroups(detail.encounters, title = { it.areaName })
     Button(onClick = { onOpenPokemon(detail.pokemonId) }) {
@@ -160,32 +175,24 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
 }
 
 @Composable
-private fun CharacterDetails(
-    detail: MapDetail.Character,
-    versionGroupIdentifier: String,
-    animated: Boolean,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit
-) {
+private fun CharacterDetails(detail: MapDetail.Character, versionGroupIdentifier: String, links: DetailLinks) {
     val obj = detail.obj
     val pokemonId = obj.pokemonId
-    when (obj.kind) {
-        MapObjectKind.POKEMON -> DetailHeader(
+    if (obj.kind == MapObjectKind.POKEMON) {
+        DetailHeader(
             stringResource(R.string.map_static_pokemon, obj.level ?: 0),
-            obj.pokemonName.orEmpty()
+            obj.pokemonName.orEmpty(),
+            detail.roles
         ) {
-            if (pokemonId != null) DetailPokemonImage(pokemonId, animated)
+            if (pokemonId != null) {
+                PokemonSprite(pokemonId, SpritePlace.MAP_LIST, SpriteSize.SHEET, contentDescription = null)
+            }
         }
-
-        MapObjectKind.TRAINER -> DetailHeader(stringResource(R.string.map_trainer), obj.name) {
-            CharacterSprite(obj, versionGroupIdentifier)
-        }
-
-        MapObjectKind.NPC, MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM ->
-            DetailHeader("", obj.name) { CharacterSprite(obj, versionGroupIdentifier) }
+    } else {
+        DetailHeader("", obj.name, detail.roles) { CharacterSprite(obj, versionGroupIdentifier) }
     }
     if (pokemonId != null) {
-        Button(onClick = { onOpenPokemon(pokemonId) }) {
+        Button(onClick = { links.onOpenPokemon(pokemonId) }) {
             Text(stringResource(R.string.map_open_pokemon, obj.pokemonName.orEmpty()))
         }
     }
@@ -202,22 +209,18 @@ private fun CharacterDetails(
             Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
         } else {
             SectionTitle(stringResource(R.string.map_trainer_party))
-            detail.party.forEach { TrainerPokemonRow(it, onOpenPokemon) }
+            detail.party.forEach { TrainerPokemonRow(it, SpritePlace.MAP_LIST, links.onOpenPokemon) }
         }
     }
     // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
-    Offers(detail.offers, onOpenPokemon = onOpenPokemon, onOpenItem = onOpenItem)
-}
-
-/** Image d'un Pokémon dans sa fiche : icône, ou sprite animé (réglage « Sprites animés sur la carte »). */
-@Composable
-private fun DetailPokemonImage(pokemonId: Int, animated: Boolean) {
-    if (animated) {
-        AnimatedPokemonSprite(pokemonId, contentDescription = null, modifier = Modifier.size(DETAIL_ANIMATED_SIZE))
-    } else {
-        PixelArtImage(Sprites.pokemonIcon(pokemonId), PixelArt.POKEMON_ICON, 64.dp, null)
-    }
+    Offers(
+        detail.offers,
+        SpritePlace.MAP_LIST,
+        detail.fossilUses,
+        onOpenPokemon = links.onOpenPokemon,
+        onOpenItem = links.onOpenItem,
+        onShowObject = links.onShowObject
+    )
 }
 
 private val DETAIL_MAX_HEIGHT = 360.dp
-private val DETAIL_ANIMATED_SIZE = 64.dp
