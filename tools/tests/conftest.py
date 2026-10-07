@@ -6,9 +6,10 @@ import pytest
 
 from pokemaps_data import sources
 from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.games import GAMES
 from pokemaps_data.maps import build_maps
 from pokemaps_data.pokeapi import PokeApi
-from pokemaps_data.sources import PRET_COMMITS, fetch_pokeapi_csv
+from pokemaps_data.sources import PRET_COMMITS, fetch_pokeapi_csv, pret_dir
 from pokemaps_data.sprites import build_sprites
 
 TOOLS = Path(__file__).resolve().parent.parent
@@ -31,7 +32,8 @@ def assets_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
 @pytest.fixture(scope="session")
 def builder(assets_root: Path, source_cache_ready: None) -> DatabaseBuilder:
     map_data = build_maps(CACHE, assets_root / "maps")
-    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), map_data=map_data)
+    pret_roots = {game.version_group: pret_dir(CACHE, game.pret_repo) for game in GAMES}
+    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), map_data=map_data, pret_roots=pret_roots)
 
 
 @pytest.fixture(scope="session")

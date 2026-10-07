@@ -1,13 +1,19 @@
 # Pokémaps
 
 Application Android de **cartes interactives pour Pokémon Rouge, Bleu et Jaune**, entièrement en français :
-carte de Kanto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS) et Pokédex.
+carte de Kanto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
+attaques (effet et probabilité de l'effet) et Pokédex.
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
 - **Aucun service Google Play** : l'application fonctionne sur GrapheneOS
 - 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite et les assets ; l'application n'a pas
   la permission Internet
 - Identifiant de l'application : `org.opensources.pokmaps`
+
+Le jeu se choisit dans l'onglet « Jeu » de la barre du bas, classé par génération, et reste mémorisé. Dans les
+Réglages, « Captures comptées » fait compter un Pokémon capturé pour le jeu choisi, pour sa génération ou pour tous
+les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
+rien.
 
 ## Captures d'écran
 
@@ -32,7 +38,8 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 `tools/build_data.py` génère, dans `app/src/main/assets/` :
 
 - `database/pokedex.db` : la base SQLite de l'application ;
-- `sprites/` : sprites des Pokémon (un seul style partout, animé ou fixe) et icônes d'objets ;
+- `sprites/` : sprites des Pokémon (un seul style partout, animé ou fixe, normal ou chromatique) et icônes
+  d'objets ;
 - `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
   et sprites des PNJ.
 
@@ -43,23 +50,28 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
 
 - **[PokéAPI](https://pokeapi.co)**, via l'export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi) :
   Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
-  lieux et rencontres de chaque version. Les CSV sont téléchargés une seule fois au build, avec cache ;
+  lieux et rencontres de chaque version ; objets tenus, groupes d'œufs et talents, préparés pour les générations
+  suivantes (vides en 1re génération). Les CSV sont téléchargés une seule fois au build, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
 - **[pokesprite](https://github.com/msikma/pokesprite)** : icônes d'objets.
-- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, seul style de sprite des
-  Pokémon (carte, listes, fiches, Pokédex, évolutions). Le sprite fixe est la première image du sprite animé : même
+- **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, normaux et chromatiques,
+  seul style de sprite des Pokémon (carte, listes, fiches, Pokédex, évolutions, jaquettes dessinées de l'écran de
+  choix du jeu). Le sprite fixe est la première image du sprite animé : même
   dessin, même taille. Les Réglages choisissent, endroit par endroit, où ils sont animés. Ces sprites n'existent que
   pour les Pokémon n° 1 à 649 (5 premières générations) : la génération s'arrête si un jeu en demande d'autres.
 - **[pret/pokered](https://github.com/pret/pokered)** et **[pret/pokeyellow](https://github.com/pret/pokeyellow)**
-  (désassemblages des jeux) : uniquement pour dessiner les cartes, à partir des blocs, tilesets, palettes Super Game Boy,
+  (désassemblages des jeux) : pour dessiner les cartes, à partir des blocs, tilesets, palettes Super Game Boy,
   connexions, warps, objets et PNJ, et ce que proposent les personnages (soins, boutiques, dons, échanges,
-  lots du Casino et leur prix en jetons, distributeurs, fossiles ranimés). Aucune ROM n'est utilisée.
+  lots du Casino et leur prix en jetons, distributeurs, fossiles ranimés) ; pour l'effet de chaque attaque, tel que
+  le moteur de combat l'exécute (`data/moves/moves.asm`). Aucune ROM n'est utilisée.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
   des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI (`map_areas.csv`),
-  personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario) et offres
-  que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus).
+  personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
+  que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus, Pokémon de départ du
+  labo du Prof. Chen) et texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
+  attaque particulière, avec sa probabilité en chances sur 256 relevée dans `engine/battle/effects.asm`).
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
@@ -69,14 +81,23 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
 exemple) demande :
 
 - une ligne dans `games.py` : Pokémon, attaques, objets et rencontres sont alors extraits de PokéAPI (avec les
-  symboles pret qui distinguent ses versions, comme `_RED` et `_BLUE` pour les lots du Casino) ;
+  symboles pret qui distinguent ses versions, comme `_RED` et `_BLUE` pour les lots du Casino), et la jaquette de
+  chaque version (`VersionCover` : Pokémon de la jaquette et couleur) ;
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
 - d'adapter la lecture des cartes pret (`pret*.py`, écrite pour la 1re génération), la carte du monde
   (`maps_layout.py` : `WORLD`, `START_MAP`) et les palettes (`maps_render.py`) ;
 - de classer ses nouvelles méthodes de rencontre (ex. `headbutt`) dans `ObtainMethod` : une méthode inconnue
-  fait échouer le chargement au lieu de disparaître en silence des filtres et de la carte.
+  fait échouer le chargement au lieu de disparaître en silence des filtres et de la carte ;
+- de lire les effets de ses attaques (`pret_moves.py` et `move_effects.csv`, écrits pour la 1re génération) : une
+  attaque sans effet arrête la génération.
+
+Les mécaniques des générations suivantes sont déjà prévues, et la fiche d'un Pokémon les affiche dès qu'un jeu les
+connaît (`GenerationFeature` dans l'application) : objets tenus (2e génération ; PokéAPI ne les donne qu'à partir de la
+3e, ceux de la 2e seraient à relever dans `tools/data/`), chromatiques (1 chance sur 8 192, puis 1 sur 4 096 à partir
+de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
+(3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
 Les données générées ne sont pas versionnées : elles sont produites par la CI, ou en local avec la commande
 ci-dessous.

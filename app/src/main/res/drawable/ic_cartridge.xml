@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cartouche de jeu Game Boy : coin coupé, stries et étiquette. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:tint="?android:attr/colorControlNormal"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M7,2H16L19,5V20A2,2 0,0 1,17 22H7A2,2 0,0 1,5 20V4A2,2 0,0 1,7 2ZM8,9H16V17H8ZM8,4H9V7H8ZM10.5,4H11.5V7H10.5ZM13,4H14V7H13Z" />
+</vector>

@@ -30,6 +30,7 @@ import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokemonType
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
+import org.opensources.pokmaps.domain.pokemon.MoveEffect
 
 @Singleton
 class MapRepository @Inject constructor(private val dao: MapDao) {
@@ -203,11 +204,11 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
     /** Description d'un objet, ou attaque de la CT / CS dans le jeu. */
     suspend fun item(game: Game, itemId: Int): ItemDetails? = dao.item(itemId, game.versionGroupId)?.let { row ->
-        val move = if (row.moveName != null && row.typeId != null && row.typeIdentifier != null &&
-            row.typeName != null && row.pp != null && row.damageClass != null
+        val move = if (row.moveId != null && row.moveName != null && row.typeId != null &&
+            row.typeIdentifier != null && row.typeName != null && row.pp != null && row.damageClass != null
         ) {
             LearnedMove(
-                moveId = 0,
+                moveId = row.moveId,
                 name = row.moveName,
                 type = PokemonType(row.typeId, row.typeIdentifier, row.typeName),
                 damageClass = DamageClass.from(row.damageClass),
@@ -218,6 +219,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         } else {
             null
         }
-        ItemDetails(row.id, row.identifier, row.name, row.hasSprite, row.description, move)
+        val effect = row.effect?.let { MoveEffect(it, row.effectChance) }
+        ItemDetails(row.id, row.identifier, row.name, row.hasSprite, row.description, move, effect)
     }
 }

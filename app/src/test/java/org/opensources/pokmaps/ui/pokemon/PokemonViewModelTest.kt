@@ -21,8 +21,13 @@ import org.opensources.pokmaps.data.repository.PokemonRepository
 import org.opensources.pokmaps.data.settings.CollectionSettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
+import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
+import org.opensources.pokmaps.domain.pokemon.GenderRatio
+import org.opensources.pokmaps.domain.pokemon.GenerationFeature
+import org.opensources.pokmaps.domain.pokemon.HeldItem
+import org.opensources.pokmaps.domain.pokemon.Machine
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
@@ -36,17 +41,17 @@ class PokemonViewModelTest {
     val mainDispatcher = MainDispatcherRule()
 
     private val requests = MapRequests()
+    private val dataStore = FakeDataStore()
+    private val games = GameRepository(FakeGameDao(), GameSettings(dataStore))
+    private val collection = CollectionSettings(dataStore)
 
     private fun viewModel(pokemonId: Int, failing: Boolean = false): PokemonViewModel {
-        val dataStore = FakeDataStore()
-        val games = GameRepository(FakeGameDao(), GameSettings(dataStore))
-        val collection = CollectionSettings(dataStore)
         val repository = PokemonRepository(FakePokemonDao(failing), PokedexRepository(FakePokedexDao()))
         return PokemonViewModel(
             SavedStateHandle(mapOf(PokemonViewModel.POKEMON_ID to pokemonId)),
             ObservePokemonUseCase(games, repository),
             ObserveCollectionUseCase(games, collection),
-            UpdateCollectionUseCase(collection),
+            UpdateCollectionUseCase(games, collection),
             requests
         )
     }
@@ -67,6 +72,68 @@ class PokemonViewModelTest {
         assertTrue(viewModel.state.value.favorite)
         viewModel.onAction(PokemonAction.ShowOnMap)
         assertEquals(MapRequest.HighlightPokemon(PIKACHU, "Pikachu"), requests.pending.value)
+    }
+
+    @Test
+    fun movesLinkToTheirSheetOrToTheirMachine() = runTest {
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val details = checkNotNull(viewModel.state.value.details)
+        assertEquals(listOf(FakePokemonDao.THUNDER_SHOCK), details.levelUpMoves.map { it.moveId })
+        assertNull(details.levelUpMoves.single().machine)
+        assertEquals(Machine("tm24", "CT24"), details.machineMoves.single().machine)
+    }
+
+    @Test
+    fun shinyTogglesTheSprites() = runTest {
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertFalse(viewModel.state.value.shiny)
+        viewModel.onAction(PokemonAction.ToggleShiny)
+        assertTrue(viewModel.state.value.shiny)
+        viewModel.onAction(PokemonAction.ToggleShiny)
+        assertFalse(viewModel.state.value.shiny)
+    }
+
+    @Test
+    fun laterGenerationDataFollowsTheChosenGame() = runTest {
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val red = viewModel.state.value
+        // 1re génération : ni chromatiques, ni objets tenus, ni talents dans le jeu.
+        assertNull(red.shinyOdds)
+        assertFalse(red.has(GenerationFeature.HELD_ITEMS))
+        assertFalse(red.has(GenerationFeature.ABILITIES))
+        assertEquals(emptyList<HeldItem>(), red.details?.traits?.heldItems)
+        assertEquals(GenderRatio.Gendered(4), red.details?.traits?.gender)
+
+        // Les objets tenus sont ceux de la version choisie.
+        games.select(FakeGameDao.BLUE)
+        val blue = viewModel.state.value.details?.traits
+        assertEquals(listOf(HeldItem("light-ball", "Ballon Lumière", true, 5)), blue?.heldItems)
+        assertEquals(listOf("Terrestre", "Féerique"), blue?.eggGroups)
+    }
+
+    @Test
+    fun caughtFollowsTheCaptureScope() = runTest {
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(PokemonAction.ToggleCaught)
+        assertTrue(viewModel.state.value.caught)
+
+        // Capturé dans Rouge seulement : pas dans Bleu tant que la portée est le jeu…
+        games.select(FakeGameDao.BLUE)
+        assertFalse(viewModel.state.value.caught)
+        // … mais dans Bleu aussi quand elle couvre la génération, sans rien migrer.
+        collection.setCaptureScope(CaptureScope.GENERATION)
+        assertTrue(viewModel.state.value.caught)
+        assertEquals(CaptureScope.GENERATION, viewModel.state.value.captureScope)
+        // Le décocher depuis Bleu le retire de toute la génération, donc de Rouge.
+        viewModel.onAction(PokemonAction.ToggleCaught)
+        assertFalse(viewModel.state.value.caught)
+        collection.setCaptureScope(CaptureScope.GAME)
+        games.select(FakeGameDao.RED)
+        assertFalse(viewModel.state.value.caught)
     }
 
     @Test

@@ -92,45 +92,49 @@ internal fun Weaknesses(details: PokemonDetails) {
     }
 }
 
+/** Ce qu'il faut pour dessiner une ligne d'évolution : Pokémon de la fiche, couleurs et liens vers les fiches. */
+private data class EvolutionView(
+    val currentId: Int,
+    val shiny: Boolean,
+    val onOpenPokemon: (Int) -> Unit,
+    val onOpenItem: (String) -> Unit
+)
+
 @Composable
-internal fun Evolutions(details: PokemonDetails, onOpenPokemon: (Int) -> Unit, onOpenItem: (String) -> Unit) {
+internal fun Evolutions(
+    details: PokemonDetails,
+    shiny: Boolean,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
+) {
     val single = details.evolutions.singleOrNull()
     if (details.evolutions.isEmpty() || (single != null && single.children.isEmpty())) {
         Text(stringResource(R.string.pokemon_no_evolution))
         return
     }
+    val view = EvolutionView(details.id, shiny, onOpenPokemon, onOpenItem)
     // Arbre de gauche à droite : chaque évolution part de son Pokémon d'origine, avec sa condition sur la flèche.
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
-        details.evolutions.forEach { EvolutionTreeNode(it, details.id, onOpenPokemon, onOpenItem) }
+        details.evolutions.forEach { EvolutionTreeNode(it, view) }
     }
 }
 
 @Composable
-private fun EvolutionTreeNode(
-    node: EvolutionNode,
-    currentId: Int,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit
-) {
+private fun EvolutionTreeNode(node: EvolutionNode, view: EvolutionView) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        EvolutionMember(node, currentId, onOpenPokemon)
+        EvolutionMember(node, view)
         if (node.children.isNotEmpty()) {
-            EvolutionBranches(node.children, currentId, onOpenPokemon, onOpenItem)
+            EvolutionBranches(node.children, view)
         }
     }
 }
 
 /** Évolutions d'un Pokémon, l'une sous l'autre ; plusieurs (Évoli) sont reliées par un trait vertical. */
 @Composable
-private fun EvolutionBranches(
-    children: List<EvolutionNode>,
-    currentId: Int,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit
-) {
+private fun EvolutionBranches(children: List<EvolutionNode>, view: EvolutionView) {
     val branchColor = MaterialTheme.colorScheme.outline
     val count = children.size
     Column(
@@ -148,24 +152,30 @@ private fun EvolutionBranches(
     ) {
         children.forEach { child ->
             Row(verticalAlignment = Alignment.CenterVertically) {
-                EvolutionArrow(child.condition, branchColor, onOpenItem)
-                EvolutionTreeNode(child, currentId, onOpenPokemon, onOpenItem)
+                EvolutionArrow(child.condition, branchColor, view.onOpenItem)
+                EvolutionTreeNode(child, view)
             }
         }
     }
 }
 
 @Composable
-private fun EvolutionMember(node: EvolutionNode, currentId: Int, onOpenPokemon: (Int) -> Unit) {
-    val current = node.pokemonId == currentId
+private fun EvolutionMember(node: EvolutionNode, view: EvolutionView) {
+    val current = node.pokemonId == view.currentId
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .widthIn(min = 72.dp)
-            .clickable(enabled = !current) { onOpenPokemon(node.pokemonId) }
+            .clickable(enabled = !current) { view.onOpenPokemon(node.pokemonId) }
             .padding(4.dp)
     ) {
-        PokemonSprite(node.pokemonId, SpritePlace.EVOLUTIONS, SpriteSize.SHEET, contentDescription = null)
+        PokemonSprite(
+            node.pokemonId,
+            SpritePlace.EVOLUTIONS,
+            SpriteSize.SHEET,
+            contentDescription = null,
+            shiny = view.shiny
+        )
         Text(
             node.name,
             style = MaterialTheme.typography.bodyMedium,

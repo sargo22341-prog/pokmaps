@@ -152,7 +152,7 @@ responsabilité réelle.
 | `tools/spot_editor/` | Éditeur PC des emplacements sauvages (Tk), lancé par `tools/map_editor.py` |
 | `tools/tests/` | Tests du pipeline Python |
 
-Écrans existants dans `ui/` : `about`, `character`, `game`, `item`, `map`, `place`, `pokedex`,
+Écrans existants dans `ui/` : `about`, `character`, `game`, `item`, `map`, `move`, `place`, `pokedex`,
 `pokemon`, `search`, `settings`. Un nouvel écran crée son dossier ; un nouveau sujet métier crée
 son dossier dans `domain`.
 

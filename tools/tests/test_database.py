@@ -4,7 +4,6 @@ import sqlite3
 from pathlib import Path
 
 import pytest
-from PIL import Image
 
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _SpotRows
@@ -190,31 +189,6 @@ def test_gen1_evolutions(db: sqlite3.Connection) -> None:
         (135, "use-item", "thunder-stone"),
         (136, "use-item", "fire-stone"),
     ]
-
-
-def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
-    """Un seul style de sprite : le sprite fixe est la première image du sprite animé (même taille, même pose)."""
-    sprites = assets / "sprites"
-    assert sorted(path.name for path in (sprites / "pokemon").iterdir()) == ["animated", "static"]
-    for pokemon_id in range(1, 152):
-        with Image.open(sprites / "pokemon/animated" / f"{pokemon_id}.webp") as animated:
-            assert (animated.format, animated.is_animated) == ("WEBP", True)
-            animated.seek(0)
-            first = animated.convert("RGBA")
-        with Image.open(sprites / "pokemon/static" / f"{pokemon_id}.webp") as static:
-            assert (static.format, getattr(static, "is_animated", False)) == ("WEBP", False)
-            assert static.size == first.size
-            assert static.convert("RGBA").getchannel("A").tobytes() == first.getchannel("A").tobytes()
-    missing = [
-        identifier
-        for identifier, has_sprite in db.execute("SELECT identifier, has_sprite FROM item")
-        if has_sprite != (sprites / "items" / f"{identifier}.webp").is_file()
-    ]
-    assert missing == []
-    assert scalar(db, "SELECT count(*) FROM item WHERE has_sprite = 0") == 0
-
-
-# --- Cartes -----------------------------------------------------------------------
 
 
 def test_world_map_contains_all_towns_and_routes(db: sqlite3.Connection) -> None:

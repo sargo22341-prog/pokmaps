@@ -6,16 +6,15 @@ import csv
 from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import cached_property
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from .games import ONE_OFF_METHODS
 from .pokeapi import optional_int
+from .sources import DATA_DIR
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 _CURATION_ACTIONS = frozenset({"exclude", "note", "trade_for"})
 

@@ -1,13 +1,15 @@
 """Récupère les images embarquées dans l'application.
 
 - Pokémon : un seul style partout (carte, listes, fiches, Pokédex, évolutions), les sprites animés de
-  Noir et Blanc (PokeAPI/sprites). Le sprite fixe est la première image du sprite animé : mêmes dessin,
-  pose et taille, que l'animation soit activée ou non.
+  Noir et Blanc (PokeAPI/sprites), normaux et chromatiques. Le sprite fixe est la première image du sprite
+  animé : mêmes dessin, pose et taille, que l'animation soit activée ou non.
 - Icônes d'objets : msikma/pokesprite.
 
 Les images sont embarquées en WebP sans perte (`webp.py`). Arborescence produite dans les assets :
     sprites/pokemon/animated/<pokemon_id>.webp
     sprites/pokemon/static/<pokemon_id>.webp
+    sprites/pokemon/shiny/animated/<pokemon_id>.webp
+    sprites/pokemon/shiny/static/<pokemon_id>.webp
     sprites/items/<item_identifier>.webp
 """
 
@@ -29,6 +31,9 @@ MACHINE_ICON = "items/{kind}/{type}.png"
 ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
 # Sprites animés (GIF) de Noir et Blanc : les Pokémon des générations 1 à 5 (n° 1 à 649) seulement.
 ANIMATED_SPRITES = "pokemon/versions/generation-v/black-white/animated/{id}.gif"
+SHINY_SPRITES = "pokemon/versions/generation-v/black-white/animated/shiny/{id}.gif"
+# Dossier de chaque style dans les assets (sprites/pokemon/<dossier>/animated et /static).
+POKEMON_STYLES = ((ANIMATED_SPRITES, "pokemon"), (SHINY_SPRITES, "pokemon/shiny"))
 LAST_ANIMATED_SPECIES = 649
 
 
@@ -42,21 +47,22 @@ def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[st
             f"Pas de sprite animé Noir et Blanc pour les Pokémon n° {missing[0]} à {missing[-1]} : "
             "choisir une autre source de sprites pour ces générations (sprites.py)"
         )
-    animated = []  # (url, cache, numéro)
-    for species_id in sorted(builder.species):
-        url, path = pokeapi_sprite(cache, ANIMATED_SPRITES.format(id=species_id))
-        animated.append((url, path, species_id))
+    animated = []  # (url, cache, dossier des assets, numéro)
+    for sprite_path, folder in POKEMON_STYLES:
+        for species_id in sorted(builder.species):
+            url, path = pokeapi_sprite(cache, sprite_path.format(id=species_id))
+            animated.append((url, path, folder, species_id))
     item_paths = _item_icon_paths(builder, cache)
     items = [(*pokesprite(cache, sprite_path), identifier) for identifier, sprite_path in item_paths.items()]
 
-    not_found = download_all([(url, path) for url, path, _ in animated + items])
+    not_found = download_all([(url, path) for url, path, *_ in animated + items])
     if not_found:
         raise RuntimeError("Images introuvables :\n" + "\n".join(not_found))
 
     jobs: list[tuple[Path, Path]] = []  # (image en cache, destination)
-    for _, path, species_id in animated:
-        jobs.append((path, output / "pokemon/animated" / f"{species_id}.webp"))
-        jobs.append((_first_frame(path), output / "pokemon/static" / f"{species_id}.webp"))
+    for _, path, folder, species_id in animated:
+        jobs.append((path, output / folder / "animated" / f"{species_id}.webp"))
+        jobs.append((_first_frame(path), output / folder / "static" / f"{species_id}.webp"))
     jobs += [(path, output / "items" / f"{identifier}.webp") for _, path, identifier in items]
 
     encoded = encode_all([path for path, _ in jobs])

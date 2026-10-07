@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.map
 
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
+import org.opensources.pokmaps.domain.pokemon.MoveEffect
 
 /** Terrain d'un emplacement de Pokémon sauvage. */
 enum class SpotKind(val identifier: String) {
@@ -91,14 +92,15 @@ enum class CharacterService {
 
 data class OfferItem(val id: Int, val identifier: String, val name: String, val hasSprite: Boolean)
 
-/** Objet : description, ou attaque enseignée par une CT / CS. */
+/** Objet : description, ou attaque enseignée par une CT / CS et ce qu'elle fait. */
 data class ItemDetails(
     val id: Int,
     val identifier: String,
     val name: String,
     val hasSprite: Boolean,
     val description: String?,
-    val move: LearnedMove?
+    val move: LearnedMove?,
+    val moveEffect: MoveEffect? = null
 )
 
 /** Objet du jeu (pour la recherche), avec l'attaque enseignée pour une CT / CS. */

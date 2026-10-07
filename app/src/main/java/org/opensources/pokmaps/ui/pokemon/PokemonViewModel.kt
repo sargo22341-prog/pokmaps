@@ -14,10 +14,13 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.CatchRate
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
+import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.ShinyOdds
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
@@ -54,10 +57,19 @@ data class PokemonUiState(
     val details: PokemonDetails? = null,
     /** Calcul de capture, seulement pour la 1re génération (formule propre à ces jeux). */
     val catch: CatchUiState? = null,
-    /** Capturé dans la version choisie. */
+    /** Capturé, selon la portée des captures (le jeu choisi, sa génération ou tous les jeux). */
     val caught: Boolean = false,
-    val favorite: Boolean = false
-)
+    val captureScope: CaptureScope = CaptureScope.DEFAULT,
+    val favorite: Boolean = false,
+    /** Sprites en couleurs chromatiques (en-tête et ligne d'évolution). */
+    val shiny: Boolean = false
+) {
+    /** Une rencontre sur [shinyOdds] est chromatique dans le jeu, null si le jeu n'a pas de chromatiques. */
+    val shinyOdds: Int? get() = game?.let { ShinyOdds.oneIn(it.generationId) }
+
+    /** Le jeu connaît cette mécanique (objets tenus, sexe, œufs, talents…). */
+    fun has(feature: GenerationFeature): Boolean = game?.let { feature.existsIn(it.generationId) } == true
+}
 
 /** Intentions de la fiche d'un Pokémon. */
 sealed interface PokemonAction {
@@ -65,6 +77,9 @@ sealed interface PokemonAction {
     data object ToggleCaught : PokemonAction
 
     data object ToggleFavorite : PokemonAction
+
+    /** Montre le Pokémon et sa ligne d'évolution en chromatique, ou en couleurs normales. */
+    data object ToggleShiny : PokemonAction
 
     /** Surligne sur la carte les lieux du Pokémon. */
     data object ShowOnMap : PokemonAction
@@ -86,16 +101,19 @@ class PokemonViewModel @Inject constructor(
 ) : ViewModel() {
     private val pokemonId: Int = checkNotNull(savedStateHandle[POKEMON_ID])
     private val catchInput = MutableStateFlow(CatchInput())
+    private val shiny = MutableStateFlow(false)
 
     val state: StateFlow<PokemonUiState> =
-        combine(observePokemon(pokemonId), observeCollection(), catchInput) { page, collection, input ->
+        combine(observePokemon(pokemonId), observeCollection(), catchInput, shiny) { page, collection, input, shiny ->
             PokemonUiState(
                 loading = false,
                 game = page.game,
                 details = page.details,
                 catch = page.details?.takeIf { page.game.generationId == 1 }?.let { catchState(page.game, it, input) },
                 caught = collection.game == page.game && pokemonId in collection.caught,
-                favorite = pokemonId in collection.favorites
+                captureScope = collection.scope,
+                favorite = pokemonId in collection.favorites,
+                shiny = shiny
             )
         }.catch { emit(PokemonUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
@@ -105,6 +123,8 @@ class PokemonViewModel @Inject constructor(
             PokemonAction.ToggleCaught -> toggleCaught()
 
             PokemonAction.ToggleFavorite -> toggleFavorite()
+
+            PokemonAction.ToggleShiny -> shiny.update { !it }
 
             PokemonAction.ShowOnMap -> showOnMap()
 

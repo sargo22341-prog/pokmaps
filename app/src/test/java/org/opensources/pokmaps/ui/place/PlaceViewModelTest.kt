@@ -67,7 +67,7 @@ class PlaceViewModelTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         assertEquals(setOf(FakeMapDao.PIDGEY), viewModel.state.value.wildIds)
         assertEquals(0, viewModel.state.value.caughtWild)
-        collection.setCaught(FakeGameDao.RED.versionId, FakeMapDao.PIDGEY, caught = true)
+        collection.setCaught(setOf(FakeGameDao.RED.versionId), FakeMapDao.PIDGEY, caught = true)
         assertEquals(1, viewModel.state.value.caughtWild)
         assertTrue(FakeMapDao.PIDGEY in viewModel.state.value.caught)
     }

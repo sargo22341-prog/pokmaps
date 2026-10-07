@@ -1,4 +1,4 @@
-"""Tables des Pokémon : fiches, types, statistiques et évolutions par génération."""
+"""Tables des Pokémon : fiches, types, statistiques, évolutions et groupes d'œufs."""
 
 from __future__ import annotations
 
@@ -15,6 +15,8 @@ if TYPE_CHECKING:
 GEN1_STATS = (1, 2, 3, 6, 9)
 MODERN_STATS = (1, 2, 3, 4, 5, 6)
 STAT_NAME_FALLBACK = {9: "Spécial"}
+# Les œufs (et donc les groupes d'œufs) apparaissent en 2e génération.
+BREEDING_GENERATION = 2
 
 
 class PokemonTables:
@@ -65,9 +67,30 @@ class PokemonTables:
                     int(row["is_mythical"]),
                     int(row["is_baby"]),
                     descriptions.get(species_id),
+                    int(row["hatch_counter"]),
                 )
             )
         return rows
+
+    @cached_property
+    def egg_group_rows(self) -> list[tuple[int, int]]:
+        """(espèce, groupe d'œufs), seulement si un jeu configuré connaît la reproduction."""
+        if self.builder.max_generation < BREEDING_GENERATION:
+            return []
+        return sorted(
+            (int(row["species_id"]), int(row["egg_group_id"]))
+            for row in self.api.table("pokemon_egg_groups")
+            if int(row["species_id"]) in self.builder.species
+        )
+
+    def egg_group_table(self) -> list[tuple]:
+        names = self.api.names("egg_group_prose", "egg_group_id")
+        used = {group for _, group in self.egg_group_rows}
+        return [
+            (int(row["id"]), row["identifier"], names[int(row["id"])])
+            for row in self.api.table("egg_groups")
+            if int(row["id"]) in used
+        ]
 
     def _descriptions(self) -> dict[int, str]:
         """Description française du Pokédex : celle d'un jeu configuré si elle existe, sinon la plus ancienne."""

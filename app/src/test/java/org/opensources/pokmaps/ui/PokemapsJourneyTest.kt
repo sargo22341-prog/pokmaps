@@ -2,6 +2,8 @@ package org.opensources.pokmaps.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.hasContentDescription
@@ -9,6 +11,7 @@ import androidx.compose.ui.test.hasScrollToNodeAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isOff
+import androidx.compose.ui.test.isSelected
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -105,12 +108,52 @@ class PokemapsJourneyTest {
 
     @Test
     fun selectedGameAppliesToTheWholeApp() {
-        click(hasText(text(R.string.game_selector, "Rouge")))
-        click(hasText(text(R.string.game_name, "Jaune")))
-        await(hasText(text(R.string.game_selector, "Jaune")))
+        // Le jeu se choisit dans l'onglet « Jeu » de la barre du bas ; la barre du haut affiche le jeu choisi.
+        await(hasText(text(R.string.game_name, "Rouge")))
+        click(hasText(text(R.string.nav_game)))
+        await(hasText(text(R.string.game_generation, 1)))
+        val yellow = hasText(text(R.string.game_name, "Jaune"))
+        compose.onNode(yellow).assertIsNotSelected().performClick()
+        await(yellow and isSelected())
+        // Le titre de la barre du haut suit le jeu choisi : « Pokémon Jaune » y est, à côté de sa ligne.
+        compose.onAllNodes(yellow).assertCountEquals(2)
+        compose.onNode(hasText(text(R.string.game_name, "Rouge"))).assertIsNotSelected()
 
         click(hasContentDescription(text(R.string.search_title)))
         await(hasText(text(R.string.search_intro, "Jaune")))
+
+        // Revenir à l'onglet « Jeu » depuis une fiche ouverte par-dessus affiche la liste des jeux, pas la fiche.
+        click(hasText(text(R.string.nav_game)))
+        await(hasText(text(R.string.game_generation, 1)))
+        val search = hasText(text(R.string.search_intro, "Jaune"))
+        compose.waitUntil(TIMEOUT_MS) { compose.onAllNodes(search).fetchSemanticsNodes().isEmpty() }
+    }
+
+    @Test
+    fun aLevelUpMoveOpensItsSheet() {
+        openPokemon("salam", "Salamèche")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("Groz’Yeux"))
+        click(hasText("Groz’Yeux"))
+
+        await(hasText(text(R.string.move_title)))
+        await(hasText("Baisse la Défense de la cible d’un niveau."))
+        // Salamèche fait partie des Pokémon qui l'apprennent, avec son niveau.
+        await(hasText(text(R.string.move_learners_level)))
+    }
+
+    @Test
+    fun aMachineMoveOpensTheMachineSheetWithItsEffect() {
+        openPokemon("salam", "Salamèche")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_moves_machine)))
+        click(hasText(text(R.string.pokemon_moves_machine)))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("Plaquage"))
+        click(hasText("Plaquage"))
+
+        await(hasText(text(R.string.item_title)))
+        await(hasText(text(R.string.map_machine_move, "Plaquage")))
+        await(hasText(text(R.string.move_effect_chance, "30,1")))
+        click(hasText(text(R.string.move_open)))
+        await(hasText(text(R.string.move_title)))
     }
 
     @Test
@@ -140,6 +183,14 @@ class PokemapsJourneyTest {
     }
 
     private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
+
+    /** Ouvre la fiche d'un Pokémon depuis le Pokédex. */
+    private fun openPokemon(query: String, name: String) {
+        click(hasText(text(R.string.nav_pokedex)))
+        type(query)
+        click(hasText(name))
+        await(hasScrollToNodeAction())
+    }
 
     /** Attend qu'un nœud apparaisse : les données sont lues hors du fil principal. */
     private fun await(matcher: SemanticsMatcher) {

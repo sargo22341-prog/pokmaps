@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.FossilUse
@@ -29,6 +30,7 @@ import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
+import org.opensources.pokmaps.domain.pokemon.MoveEffect
 
 // Éléments communs aux fiches de la carte, aux fiches et à la recherche (objets, personnages, dresseurs).
 
@@ -112,6 +114,21 @@ fun MoveLine(move: LearnedMove, modifier: Modifier = Modifier) {
                 ).joinToString(" · "),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+/** Ce que fait une attaque, et la probabilité de son effet quand il n'est pas systématique. */
+@Composable
+fun MoveEffectText(effect: MoveEffect, modifier: Modifier = Modifier) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(effect.description, style = MaterialTheme.typography.bodyMedium)
+        effect.chance?.let {
+            Text(
+                stringResource(R.string.move_effect_chance, formatNumber(it)),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold
             )
         }
     }

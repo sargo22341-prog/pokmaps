@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Trois étincelles, le symbole des Pokémon chromatiques. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:tint="?android:attr/colorControlNormal"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M10,7Q10,14 17,14Q10,14 10,21Q10,14 3,14Q10,14 10,7ZM18.5,2Q18.5,6 22.5,6Q18.5,6 18.5,10Q18.5,6 14.5,6Q18.5,6 18.5,2ZM5,2Q5,4.5 7.5,4.5Q5,4.5 5,7Q5,4.5 2.5,4.5Q5,4.5 5,2Z" />
+</vector>

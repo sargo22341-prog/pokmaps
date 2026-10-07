@@ -5,16 +5,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.FavoriteButton
@@ -23,15 +28,13 @@ import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.formatNumber
 
-/** En-tête de la fiche : collection, image, identité et description du Pokémon. */
+/** En-tête de la fiche : collection, image (normale ou chromatique), identité et description du Pokémon. */
 @Composable
 internal fun PokemonHeader(
-    details: PokemonDetails,
+    state: PokemonUiState,
     game: Game,
-    caught: Boolean,
-    favorite: Boolean,
-    onToggleCaught: () -> Unit,
-    onToggleFavorite: () -> Unit
+    details: PokemonDetails,
+    onAction: (PokemonAction) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,37 +43,57 @@ internal fun PokemonHeader(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        CollectionRow(game, caught, favorite, onToggleCaught, onToggleFavorite)
-        PokemonImage(details)
+        CollectionRow(state, game, onAction)
+        PokemonSprite(details.id, SpritePlace.POKEMON_SHEET, SpriteSize.HEADER, details.name, shiny = state.shiny)
         Identity(details)
     }
 }
 
-/** Capturé dans la version choisie, et favori (commun à tous les jeux). */
+/** Capturé (selon la portée des captures), chromatique, et favori (commun à tous les jeux). */
 @Composable
-private fun CollectionRow(
-    game: Game,
-    caught: Boolean,
-    favorite: Boolean,
-    onToggleCaught: () -> Unit,
-    onToggleFavorite: () -> Unit
-) {
+private fun CollectionRow(state: PokemonUiState, game: Game, onAction: (PokemonAction) -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-        CaughtButton(caught, onToggleCaught)
+        CaughtButton(state.caught, onToggle = { onAction(PokemonAction.ToggleCaught) })
         Text(
-            stringResource(if (caught) R.string.collection_caught_in else R.string.collection_not_caught_in, game.name),
+            caughtText(state.caught, state.captureScope, game),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f)
         )
-        FavoriteButton(favorite, onToggleFavorite)
+        ShinyButton(state.shiny, onToggle = { onAction(PokemonAction.ToggleShiny) })
+        FavoriteButton(state.favorite, onToggle = { onAction(PokemonAction.ToggleFavorite) })
     }
 }
 
-/** Sprite du Pokémon, animé selon le réglage. */
 @Composable
-private fun PokemonImage(details: PokemonDetails) {
-    PokemonSprite(details.id, SpritePlace.POKEMON_SHEET, SpriteSize.HEADER, details.name)
+private fun caughtText(caught: Boolean, scope: CaptureScope, game: Game): String = when (scope) {
+    CaptureScope.GAME -> stringResource(
+        if (caught) R.string.collection_caught_in else R.string.collection_not_caught_in,
+        game.name
+    )
+
+    CaptureScope.GENERATION -> stringResource(
+        if (caught) R.string.collection_caught_in_generation else R.string.collection_not_caught_in_generation,
+        game.generationId
+    )
+
+    CaptureScope.ALL -> stringResource(
+        if (caught) R.string.collection_caught_anywhere else R.string.collection_not_caught_anywhere
+    )
+}
+
+/** Étincelles des Pokémon chromatiques : montre le sprite (et la ligne d'évolution) en chromatique. */
+@Composable
+private fun ShinyButton(shiny: Boolean, onToggle: () -> Unit) {
+    IconToggleButton(checked = shiny, onCheckedChange = { onToggle() }) {
+        Icon(
+            painterResource(R.drawable.ic_shiny),
+            contentDescription = stringResource(
+                if (shiny) R.string.pokemon_shiny_hide else R.string.pokemon_shiny_show
+            ),
+            tint = if (shiny) SHINY_COLOR else MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }
 
 /** Numéro, nom, catégorie, types, mensurations, capture, croissance et description. */
@@ -104,3 +127,6 @@ private fun Identity(details: PokemonDetails) {
         Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
     }
 }
+
+/** Doré des étincelles chromatiques. */
+private val SHINY_COLOR = Color(0xFFFFC83D)

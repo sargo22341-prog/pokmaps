@@ -9,7 +9,8 @@ interface PokemonDao {
         """
         SELECT p.id, p.name_fr AS name, p.name_en AS nameEn, p.genus_fr AS genus, p.description_fr AS description,
             p.height_dm AS heightDm, p.weight_hg AS weightHg, p.capture_rate AS captureRate,
-            g.name_fr AS growthRate, p.evolution_chain_id AS evolutionChainId
+            g.name_fr AS growthRate, p.evolution_chain_id AS evolutionChainId, p.gender_rate AS genderRate,
+            p.hatch_counter AS hatchCounter
         FROM pokemon p JOIN growth_rate g ON g.id = p.growth_rate_id
         WHERE p.id = :pokemonId
         """
@@ -104,6 +105,37 @@ interface PokemonDao {
         """
     )
     suspend fun staticCount(pokemonId: Int, versionGroupId: Int): Int
+
+    /** Objets que tient le Pokémon sauvage dans la version, du plus fréquent au plus rare. */
+    @Query(
+        """
+        SELECT i.identifier, i.name_fr AS name, i.has_sprite AS hasSprite, pi.rarity
+        FROM pokemon_item pi JOIN item i ON i.id = pi.item_id
+        WHERE pi.pokemon_id = :pokemonId AND pi.version_id = :versionId
+        ORDER BY pi.rarity DESC, i.name_fr
+        """
+    )
+    suspend fun heldItems(pokemonId: Int, versionId: Int): List<HeldItemRow>
+
+    @Query(
+        """
+        SELECT eg.name_fr FROM pokemon_egg_group peg JOIN egg_group eg ON eg.id = peg.egg_group_id
+        WHERE peg.pokemon_id = :pokemonId ORDER BY eg.id
+        """
+    )
+    suspend fun eggGroups(pokemonId: Int): List<String>
+
+    /** Talents de la génération, avec leur description dans le jeu. */
+    @Query(
+        """
+        SELECT a.name_fr AS name, av.description_fr AS description, pa.is_hidden AS hidden
+        FROM pokemon_ability pa JOIN ability a ON a.id = pa.ability_id
+        LEFT JOIN ability_version_group av ON av.ability_id = a.id AND av.version_group_id = :versionGroupId
+        WHERE pa.pokemon_id = :pokemonId AND pa.generation_id = :generationId
+        ORDER BY pa.slot
+        """
+    )
+    suspend fun abilities(pokemonId: Int, generationId: Int, versionGroupId: Int): List<AbilityRow>
 }
 
 const val ENCOUNTER_COLUMNS = """

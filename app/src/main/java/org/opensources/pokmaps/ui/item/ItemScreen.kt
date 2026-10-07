@@ -33,6 +33,7 @@ import org.opensources.pokmaps.domain.usecase.ItemPage
 import org.opensources.pokmaps.domain.usecase.ItemSource
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.FossilRevivalLine
+import org.opensources.pokmaps.ui.common.MoveEffectText
 import org.opensources.pokmaps.ui.common.MoveLine
 import org.opensources.pokmaps.ui.common.OfferLinks
 import org.opensources.pokmaps.ui.common.PixelArt
@@ -43,10 +44,16 @@ import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
 import org.opensources.pokmaps.ui.common.SpriteSize
 
+/** Fiches ouvertes depuis la fiche d'un objet : Pokémon, personnage, ou attaque enseignée par la CT / CS. */
+data class ItemLinks(
+    val onOpenPokemon: (Int) -> Unit,
+    val onOpenCharacter: (Int) -> Unit,
+    val onOpenMove: (Int) -> Unit
+)
+
 @Composable
 fun ItemRoute(
-    onOpenPokemon: (Int) -> Unit,
-    onOpenCharacter: (Int) -> Unit,
+    links: ItemLinks,
     onShowOnMap: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ItemViewModel = hiltViewModel()
@@ -60,38 +67,29 @@ fun ItemRoute(
                 is ItemAction.ShowOnMap -> onShowOnMap()
             }
         },
-        onOpenPokemon = onOpenPokemon,
-        onOpenCharacter = onOpenCharacter,
+        links = links,
         modifier = modifier
     )
 }
 
 @Composable
-fun ItemScreen(
-    state: ItemUiState,
-    onAction: (ItemAction) -> Unit,
-    onOpenPokemon: (Int) -> Unit,
-    onOpenCharacter: (Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun ItemScreen(state: ItemUiState, onAction: (ItemAction) -> Unit, links: ItemLinks, modifier: Modifier = Modifier) {
     val page = state.page
     if (page == null) {
         SheetPlaceholder(state.loading, stringResource(R.string.item_not_found), modifier, state.failed)
         return
     }
     val onShowOnMap = { objectId: Int -> onAction(ItemAction.ShowOnMap(objectId)) }
-    val sources = SourceLinks(page.game.versionGroupIdentifier, onOpenCharacter, onShowOnMap)
+    val sources = SourceLinks(page.game.versionGroupIdentifier, links.onOpenCharacter, onShowOnMap)
     Column(
         modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
         ItemHeader(page)
-        page.details?.move?.let { move ->
-            SheetSection(stringResource(R.string.map_machine_move, move.name)) { MoveLine(move) }
-        }
-        EvolutionsSection(page, onOpenPokemon)
-        FossilSection(page, sources, onOpenPokemon)
+        MachineMoveSection(page, links.onOpenMove)
+        EvolutionsSection(page, links.onOpenPokemon)
+        FossilSection(page, sources, links.onOpenPokemon)
         FoundSection(page, onShowOnMap)
         SourcesSection(page, sources)
         ExchangesSection(page, sources)
@@ -124,6 +122,30 @@ private fun ItemHeader(page: ItemPage) {
         if (item.hasSprite) PixelArtImage(Sprites.item(item.identifier), PixelArt.ITEM_ICON, 96.dp, item.name)
         Text(item.name, style = MaterialTheme.typography.headlineMedium)
         page.details?.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+    }
+}
+
+/** CT / CS : l'attaque enseignée, ce qu'elle fait (avec la probabilité de son effet) et un lien vers sa fiche. */
+@Composable
+private fun MachineMoveSection(page: ItemPage, onOpenMove: (Int) -> Unit) {
+    val details = page.details ?: return
+    val move = details.move ?: return
+    SheetSection(stringResource(R.string.map_machine_move, move.name)) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClickLabel = stringResource(R.string.move_open)) { onOpenMove(move.moveId) }
+                .padding(vertical = 4.dp)
+        ) {
+            MoveLine(move)
+            details.moveEffect?.let { MoveEffectText(it) }
+            Text(
+                stringResource(R.string.move_open),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }
 

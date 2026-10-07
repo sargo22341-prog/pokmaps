@@ -161,3 +161,14 @@ def test_characters_are_people_objects_or_pokemon(db: sqlite3.Connection) -> Non
         )
     )
     assert kinds == {"fossil": "npc_object", "seel": "npc_pokemon", "nurse": "npc"}
+
+
+def test_starters_in_professor_oaks_lab(db: sqlite3.Connection) -> None:
+    """Rouge et Bleu : une Poké Ball par Pokémon de départ ; Jaune : Pikachu, donné par le Prof. Chen."""
+    red_blue = {offer for offer in _offers(db, RED_BLUE, "oaks-lab") if offer[2] == "gift_pokemon"}
+    assert red_blue == {
+        ("npc_object", "Poké Ball", "gift_pokemon", None, starter, 5, None, None, None)
+        for starter in ("bulbasaur", "charmander", "squirtle")
+    }
+    yellow = {offer for offer in _offers(db, YELLOW_GROUP, "oaks-lab") if offer[2] == "gift_pokemon"}
+    assert yellow == {("npc", "Prof. Chen", "gift_pokemon", None, "pikachu", 5, None, None, None)}

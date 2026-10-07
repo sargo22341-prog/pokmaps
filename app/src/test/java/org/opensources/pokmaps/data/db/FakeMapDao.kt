@@ -173,7 +173,8 @@ internal class FakeMapDao(
     override suspend fun item(itemId: Int, versionGroupId: Int) = read {
         if (itemId == POTION) {
             ItemDetailsRow(
-                POTION, "potion", "Potion", true, "Soigne 20 PV.", null, null, null, null, null, null, null, null
+                POTION, "potion", "Potion", true, "Soigne 20 PV.", null, null, null, null, null, null, null, null,
+                null, null, null
             )
         } else {
             null

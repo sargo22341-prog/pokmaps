@@ -55,7 +55,7 @@ data class SpriteSize(val pixel: Dp, val frame: Int) {
     }
 }
 
-/** Sprite d'un Pokémon, animé si les réglages l'animent à cet endroit (`place`). */
+/** Sprite d'un Pokémon, animé si les réglages l'animent à cet endroit (`place`), chromatique si `shiny`. */
 @Composable
 fun PokemonSprite(
     pokemonId: Int,
@@ -63,12 +63,14 @@ fun PokemonSprite(
     size: SpriteSize,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    alpha: Float = 1f
+    alpha: Float = 1f,
+    shiny: Boolean = false
 ) {
     val density = LocalDensity.current
     val factor = max(1, floor(size.pixel.value * density.density).toInt())
     val side = with(density) { (size.frame * factor).toDp() }
-    SpriteImage(pokemonId, place in LocalAnimatedPlaces.current, factor, contentDescription, modifier.size(side), alpha)
+    val path = Sprites.pokemon(pokemonId, place in LocalAnimatedPlaces.current, shiny)
+    SpriteImage(path, factor, contentDescription, modifier.size(side), alpha)
 }
 
 /** Sprite d'un Pokémon aussi grand que possible dans la place disponible (cartes du Pokédex). */
@@ -80,27 +82,31 @@ fun PokemonSpriteFill(
     modifier: Modifier = Modifier,
     alpha: Float = 1f
 ) {
+    PokemonSpriteFill(pokemonId, place in LocalAnimatedPlaces.current, contentDescription, modifier, alpha)
+}
+
+/** Sprite d'un Pokémon aussi grand que possible, animé ou fixe quel que soit le réglage (jaquettes des jeux). */
+@Composable
+fun PokemonSpriteFill(
+    pokemonId: Int,
+    animated: Boolean,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    alpha: Float = 1f
+) {
     BoxWithConstraints(modifier, contentAlignment = Alignment.Center) {
         val side = with(LocalDensity.current) { min(maxWidth, maxHeight).toPx() }
         val factor = max(1, (side / FILL_FRAME).toInt())
-        val animated = place in LocalAnimatedPlaces.current
-        SpriteImage(pokemonId, animated, factor, contentDescription, Modifier.fillMaxSize(), alpha)
+        SpriteImage(Sprites.pokemon(pokemonId, animated), factor, contentDescription, Modifier.fillMaxSize(), alpha)
     }
 }
 
 @Composable
-private fun SpriteImage(
-    pokemonId: Int,
-    animated: Boolean,
-    factor: Int,
-    contentDescription: String?,
-    modifier: Modifier,
-    alpha: Float
-) {
+private fun SpriteImage(path: String, factor: Int, contentDescription: String?, modifier: Modifier, alpha: Float) {
     val resources = LocalResources.current
     val scale = remember(factor) { IntegerScale(factor.toFloat()) }
     AsyncImage(
-        model = Sprites.assetUri(Sprites.pokemon(pokemonId, animated)),
+        model = Sprites.assetUri(path),
         contentDescription = contentDescription,
         modifier = modifier,
         alpha = alpha,

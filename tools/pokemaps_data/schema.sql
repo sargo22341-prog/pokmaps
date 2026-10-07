@@ -26,11 +26,14 @@ CREATE TABLE version_group (
     sort_order INTEGER NOT NULL
 );
 
+-- Jaquette dessinée par l'application : Pokémon de la jaquette du jeu et couleur de la version (0xRRGGBB).
 CREATE TABLE version (
     id INTEGER NOT NULL PRIMARY KEY,
     identifier TEXT NOT NULL,
     name_fr TEXT NOT NULL,
-    version_group_id INTEGER NOT NULL
+    version_group_id INTEGER NOT NULL,
+    mascot_pokemon_id INTEGER NOT NULL,
+    color INTEGER NOT NULL
 );
 CREATE INDEX index_version_version_group_id ON version (version_group_id);
 
@@ -102,7 +105,9 @@ CREATE TABLE pokemon (
     is_legendary INTEGER NOT NULL,
     is_mythical INTEGER NOT NULL,
     is_baby INTEGER NOT NULL,
-    description_fr TEXT
+    description_fr TEXT,
+    -- Cycles d'éclosion de l'œuf (à partir de la 2e génération ; le nombre de pas d'un cycle dépend du jeu).
+    hatch_counter INTEGER NOT NULL
 );
 CREATE INDEX index_pokemon_evolution_chain_id ON pokemon (evolution_chain_id);
 
@@ -133,6 +138,8 @@ CREATE TABLE move (
 
 -- Caractéristiques d'une attaque dans un jeu donné (elles ont changé au fil des générations).
 -- damage_class : physical, special ou status (jusqu'à la 3e génération, elle dépend du type).
+-- effect_fr : ce que fait l'attaque dans ce jeu ; effect_chance : probabilité de son effet (%), NULL s'il est
+-- systématique (en 1re génération, elle vient du moteur de combat : tant de chances sur 256).
 CREATE TABLE move_version_group (
     move_id INTEGER NOT NULL,
     version_group_id INTEGER NOT NULL,
@@ -141,6 +148,8 @@ CREATE TABLE move_version_group (
     accuracy INTEGER,
     pp INTEGER NOT NULL,
     damage_class TEXT NOT NULL,
+    effect_fr TEXT NOT NULL,
+    effect_chance REAL,
     PRIMARY KEY (move_id, version_group_id)
 );
 
@@ -174,6 +183,55 @@ CREATE TABLE pokemon_move (
     PRIMARY KEY (pokemon_id, version_group_id, move_id, method, level)
 );
 CREATE INDEX index_pokemon_move_move_id ON pokemon_move (move_id);
+
+-- Objets que tient un Pokémon sauvage dans une version : rarity = probabilité (%).
+-- Aucun en 1re génération : les objets tenus apparaissent en 2e génération.
+CREATE TABLE pokemon_item (
+    pokemon_id INTEGER NOT NULL,
+    version_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    rarity INTEGER NOT NULL,
+    PRIMARY KEY (pokemon_id, version_id, item_id)
+);
+
+-- Groupes d'œufs (reproduction, à partir de la 2e génération).
+CREATE TABLE egg_group (
+    id INTEGER NOT NULL PRIMARY KEY,
+    identifier TEXT NOT NULL,
+    name_fr TEXT NOT NULL
+);
+
+CREATE TABLE pokemon_egg_group (
+    pokemon_id INTEGER NOT NULL,
+    egg_group_id INTEGER NOT NULL,
+    PRIMARY KEY (pokemon_id, egg_group_id)
+);
+
+-- Talents (à partir de la 3e génération).
+CREATE TABLE ability (
+    id INTEGER NOT NULL PRIMARY KEY,
+    identifier TEXT NOT NULL,
+    name_fr TEXT NOT NULL,
+    generation_id INTEGER NOT NULL
+);
+
+-- Description d'un talent dans un jeu (NULL si le jeu n'en a pas en français).
+CREATE TABLE ability_version_group (
+    ability_id INTEGER NOT NULL,
+    version_group_id INTEGER NOT NULL,
+    description_fr TEXT,
+    PRIMARY KEY (ability_id, version_group_id)
+);
+
+-- Talents d'un Pokémon dans une génération : slot 1 et 2, et talent caché (is_hidden, 5e génération).
+CREATE TABLE pokemon_ability (
+    pokemon_id INTEGER NOT NULL,
+    generation_id INTEGER NOT NULL,
+    slot INTEGER NOT NULL,
+    ability_id INTEGER NOT NULL,
+    is_hidden INTEGER NOT NULL,
+    PRIMARY KEY (pokemon_id, generation_id, slot)
+);
 
 -- trigger : identifiant PokéAPI (level-up, use-item, trade…). Conditions NULL si non requises.
 CREATE TABLE evolution (

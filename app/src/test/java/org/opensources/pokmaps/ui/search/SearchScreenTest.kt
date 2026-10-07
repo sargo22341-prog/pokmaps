@@ -12,7 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.data.db.FakeGameDao
 import org.robolectric.RobolectricTestRunner
 
 /** Messages de la recherche globale (invitation, aucun résultat, erreur) et ouverture d'un résultat. */
@@ -24,7 +24,7 @@ class SearchScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val actions = mutableListOf<SearchAction>()
     private val openedPlaces = mutableListOf<String>()
-    private val red = Game(1, "red", "Rouge", 1, "red-blue", 1)
+    private val red = FakeGameDao.RED
 
     private fun show(state: SearchUiState) {
         compose.setContent {

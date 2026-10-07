@@ -24,8 +24,27 @@ data class PokemonDetails(
     val machineMoves: List<LearnedMove>,
     val encounters: List<Encounter>,
     /** Pokémon fixes (Ronflex, oiseaux légendaires…) placés sur les cartes du jeu. */
-    val staticEncounters: Int
+    val staticEncounters: Int,
+    val traits: PokemonTraits
 )
+
+/**
+ * Données des générations suivantes (voir [GenerationFeature]) : objets tenus dans la version du jeu, sexe, œufs et
+ * talents. La fiche ne montre que ce que le jeu connaît.
+ */
+data class PokemonTraits(
+    val heldItems: List<HeldItem>,
+    val gender: GenderRatio,
+    val eggGroups: List<String>,
+    val hatchCycles: Int,
+    val abilities: List<PokemonAbility>
+)
+
+/** Objet que tient un Pokémon sauvage, avec sa probabilité (%). */
+data class HeldItem(val identifier: String, val name: String, val hasSprite: Boolean, val rarity: Int)
+
+/** Talent d'un Pokémon : emplacement 1 ou 2, ou talent caché. */
+data class PokemonAbility(val name: String, val description: String?, val hidden: Boolean)
 
 data class BaseStat(val identifier: String, val name: String, val value: Int) {
     companion object {
@@ -35,7 +54,16 @@ data class BaseStat(val identifier: String, val name: String, val value: Int) {
 
 data class TypeMatchup(val type: PokemonType, val factor: Int)
 
-/** Attaque apprise : par niveau (`level`) ou par CT/CS (`machine`, ex. « CT01 »). */
+/** CT ou CS d'un jeu : identifiant de l'objet (« tm01 ») et nom affiché (« CT01 »). */
+data class Machine(val identifier: String, val name: String) {
+    val isHm: Boolean get() = identifier.startsWith(HM_PREFIX)
+
+    private companion object {
+        const val HM_PREFIX = "hm"
+    }
+}
+
+/** Attaque apprise : par niveau (`level`) ou par CT/CS (`machine`). */
 data class LearnedMove(
     val moveId: Int,
     val name: String,
@@ -45,7 +73,7 @@ data class LearnedMove(
     val accuracy: Int?,
     val pp: Int,
     val level: Int = 0,
-    val machine: String? = null
+    val machine: Machine? = null
 )
 
 enum class DamageClass {

@@ -196,7 +196,8 @@ interface MapDao {
     @Query(
         """
         SELECT i.id, i.identifier, i.name_fr AS name, i.has_sprite AS hasSprite, i.description_fr AS description,
-            m.name_fr AS moveName, v.power, v.accuracy, v.pp, v.damage_class AS damageClass,
+            m.id AS moveId, m.name_fr AS moveName, v.effect_fr AS effect, v.effect_chance AS effectChance,
+            v.power, v.accuracy, v.pp, v.damage_class AS damageClass,
             t.id AS typeId, t.identifier AS typeIdentifier, t.name_fr AS typeName
         FROM item i
         LEFT JOIN machine ma ON ma.item_id = i.id AND ma.version_group_id = :versionGroupId

@@ -3,9 +3,9 @@
 - PokéAPI : export CSV du dépôt PokeAPI/pokeapi (mêmes données que l'API https://pokeapi.co).
   On télécharge les CSV une fois au build : l'application n'appelle jamais l'API
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
-- PokeAPI/sprites : sprites animés de Noir et Blanc, seul style de sprite des Pokémon.
+- PokeAPI/sprites : sprites animés de Noir et Blanc (normaux et chromatiques), seul style de sprite des Pokémon.
 - msikma/pokesprite : icônes d'objets.
-- pret/pokered, pret/pokeyellow : désassemblages des jeux, uniquement pour générer les cartes.
+- pret/pokered, pret/pokeyellow : désassemblages des jeux, pour générer les cartes et lire les effets des attaques.
 """
 
 from __future__ import annotations
@@ -21,6 +21,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import TracebackType
 from typing import Any
+
+# Corrections et compléments relus à la main (CSV versionnés avec le dépôt).
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 POKEAPI_COMMIT = "bc92d3b6029ef1abe9e7ad424c400b338f3c11fe"
 POKEAPI_CSV_URL = "https://raw.githubusercontent.com/PokeAPI/pokeapi/{commit}/data/v2/csv/{name}.csv"
@@ -43,6 +46,11 @@ PRET_COMMITS = {
 PRET_URL = "https://github.com/pret/{repo}.git"
 
 POKEAPI_CSV_FILES = (
+    "abilities",
+    "ability_flavor_text",
+    "ability_names",
+    "egg_group_prose",
+    "egg_groups",
     "encounter_condition_value_map",
     "encounter_condition_value_prose",
     "encounter_condition_values",
@@ -74,8 +82,12 @@ POKEAPI_CSV_FILES = (
     "pokedex_version_groups",
     "pokedexes",
     "pokemon",
+    "pokemon_abilities",
+    "pokemon_abilities_past",
     "pokemon_dex_numbers",
+    "pokemon_egg_groups",
     "pokemon_evolution",
+    "pokemon_items",
     "pokemon_move_methods",
     "pokemon_move_method_prose",
     "pokemon_moves",

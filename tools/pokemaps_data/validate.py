@@ -17,6 +17,12 @@ CHECKS = (
         """SELECT pm.* FROM pokemon_move pm LEFT JOIN move_version_group mvg
            ON mvg.move_id = pm.move_id AND mvg.version_group_id = pm.version_group_id WHERE mvg.move_id IS NULL""",
     ),
+    (
+        "attaque apprise par CT/CS sans CT/CS dans le jeu",
+        """SELECT pm.* FROM pokemon_move pm LEFT JOIN machine ma
+           ON ma.move_id = pm.move_id AND ma.version_group_id = pm.version_group_id
+           WHERE pm.method = 'machine' AND ma.item_id IS NULL""",
+    ),
     ("type d'attaque inconnu", "SELECT * FROM move_version_group WHERE type_id NOT IN (SELECT id FROM type)"),
     ("CT/CS inconnue", "SELECT * FROM machine WHERE item_id NOT IN (SELECT id FROM item)"),
     ("Pokémon inconnu dans evolution", "SELECT * FROM evolution WHERE to_pokemon_id NOT IN (SELECT id FROM pokemon)"),
@@ -125,6 +131,43 @@ CHECKS = (
                (SELECT v.id FROM version v WHERE v.version_group_id = m.version_group_id))
              OR n.item_id NOT IN (SELECT id FROM item) OR n.wanted_item_id NOT IN (SELECT id FROM item)
              OR n.pokemon_id NOT IN (SELECT id FROM pokemon)""",
+    ),
+    (
+        "jaquette de version incohérente",
+        """SELECT id FROM version
+           WHERE mascot_pokemon_id NOT IN (SELECT id FROM pokemon) OR color NOT BETWEEN 0 AND 16777215""",
+    ),
+    (
+        "effet d'attaque vide ou probabilité invalide",
+        """SELECT move_id, version_group_id FROM move_version_group
+           WHERE trim(effect_fr) = ''
+             OR (effect_chance IS NOT NULL AND (effect_chance <= 0 OR effect_chance >= 100))""",
+    ),
+    (
+        "objet tenu incohérent",
+        """SELECT pi.* FROM pokemon_item pi LEFT JOIN version v ON v.id = pi.version_id
+           LEFT JOIN version_group vg ON vg.id = v.version_group_id
+           WHERE vg.id IS NULL OR vg.generation_id < 2 OR pi.rarity NOT BETWEEN 1 AND 100
+             OR pi.pokemon_id NOT IN (SELECT id FROM pokemon) OR pi.item_id NOT IN (SELECT id FROM item)""",
+    ),
+    (
+        "groupe d'œufs incohérent",
+        """SELECT * FROM pokemon_egg_group WHERE pokemon_id NOT IN (SELECT id FROM pokemon)
+           OR egg_group_id NOT IN (SELECT id FROM egg_group)""",
+    ),
+    (
+        "talent incohérent",
+        """SELECT pa.* FROM pokemon_ability pa LEFT JOIN ability a ON a.id = pa.ability_id
+           WHERE a.id IS NULL OR pa.generation_id < 3 OR a.generation_id > pa.generation_id
+             OR pa.generation_id NOT IN (SELECT generation_id FROM version_group)
+             OR pa.pokemon_id NOT IN (SELECT id FROM pokemon) OR trim(a.name_fr) = ''
+             OR (pa.is_hidden = 1 AND pa.generation_id < 5)""",
+    ),
+    (
+        "description de talent incohérente",
+        """SELECT avg.* FROM ability_version_group avg LEFT JOIN version_group vg ON vg.id = avg.version_group_id
+           LEFT JOIN ability a ON a.id = avg.ability_id
+           WHERE vg.id IS NULL OR a.id IS NULL OR vg.generation_id < a.generation_id""",
     ),
     (
         "emplacement de Pokémon hors de sa carte",

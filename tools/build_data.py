@@ -15,9 +15,10 @@ from pathlib import Path
 
 # Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
 from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.games import GAMES
 from pokemaps_data.maps import build_maps
 from pokemaps_data.pokeapi import PokeApi
-from pokemaps_data.sources import fetch_pokeapi_csv
+from pokemaps_data.sources import fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
 
@@ -36,7 +37,8 @@ def main() -> int:
     map_data = build_maps(args.cache, args.assets / "maps")
 
     print("Téléchargement des CSV PokéAPI…")
-    builder = DatabaseBuilder(PokeApi(fetch_pokeapi_csv(args.cache)), map_data=map_data)
+    pret_roots = {game.version_group: fetch_pret(args.cache, game.pret_repo) for game in GAMES}
+    builder = DatabaseBuilder(PokeApi(fetch_pokeapi_csv(args.cache)), map_data=map_data, pret_roots=pret_roots)
 
     print("Téléchargement des images (pokesprite, PokeAPI/sprites)…")
     item_sprites = build_sprites(builder, args.cache, args.assets / "sprites")

@@ -28,6 +28,12 @@ import androidx.room.RoomDatabase
         ItemEntity::class,
         MachineEntity::class,
         PokemonMoveEntity::class,
+        PokemonItemEntity::class,
+        EggGroupEntity::class,
+        PokemonEggGroupEntity::class,
+        AbilityEntity::class,
+        AbilityVersionGroupEntity::class,
+        PokemonAbilityEntity::class,
         EvolutionEntity::class,
         LocationEntity::class,
         LocationAreaEntity::class,
@@ -56,8 +62,10 @@ abstract class PokedexDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
 
+    abstract fun moveDao(): MoveDao
+
     companion object {
-        const val VERSION = 6
+        const val VERSION = 7
         const val NAME = "pokedex.db"
         const val ASSET = "database/pokedex.db"
     }

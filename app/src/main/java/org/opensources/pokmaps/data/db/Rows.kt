@@ -24,7 +24,9 @@ data class PokemonRow(
     val weightHg: Int,
     val captureRate: Int,
     val growthRate: String,
-    val evolutionChainId: Int
+    val evolutionChainId: Int,
+    val genderRate: Int,
+    val hatchCounter: Int
 )
 
 data class StatRow(val identifier: String, val name: String, val value: Int)
@@ -136,7 +138,10 @@ data class ItemDetailsRow(
     val name: String,
     val hasSprite: Boolean,
     val description: String?,
+    val moveId: Int?,
     val moveName: String?,
+    val effect: String?,
+    val effectChance: Double?,
     val power: Int?,
     val accuracy: Int?,
     val pp: Int?,
@@ -172,3 +177,25 @@ data class OfferLinkRow(
 )
 
 data class ItemEvolutionRow(val fromId: Int, val fromName: String, val toId: Int, val toName: String)
+
+data class HeldItemRow(val identifier: String, val name: String, val hasSprite: Boolean, val rarity: Int)
+
+data class AbilityRow(val name: String, val description: String?, val hidden: Boolean)
+
+data class MoveRow(
+    val id: Int,
+    val name: String,
+    val power: Int?,
+    val accuracy: Int?,
+    val pp: Int,
+    val damageClass: String,
+    val effect: String,
+    val effectChance: Double?,
+    val typeId: Int,
+    val typeIdentifier: String,
+    val typeName: String,
+    val machineIdentifier: String?,
+    val machineName: String?
+)
+
+data class MoveLearnerRow(val pokemonId: Int, val name: String, val method: String, val level: Int)

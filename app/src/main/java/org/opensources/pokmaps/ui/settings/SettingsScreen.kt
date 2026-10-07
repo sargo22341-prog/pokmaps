@@ -46,7 +46,7 @@ fun SettingsRoute(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltVi
     SettingsScreen(state, viewModel::onAction, onOpenAbout)
 }
 
-/** Réglages : sprites animés (partout, ou endroit par endroit), et accès à l'écran « À propos ». */
+/** Réglages : sprites animés (partout, ou endroit par endroit), captures comptées, et écran « À propos ». */
 @Composable
 fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, onOpenAbout: () -> Unit) {
     Column(
@@ -61,13 +61,11 @@ fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, o
                 modifier = Modifier.padding(16.dp)
             )
         }
-        Text(
-            stringResource(R.string.settings_display),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)
-        )
+        SettingsTitle(stringResource(R.string.settings_display))
         AnimatedSpritesSetting(state, onAction)
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+        SettingsTitle(stringResource(R.string.settings_collection))
+        CaptureScopeSetting(state.captureScope) { onAction(SettingsAction.SetCaptureScope(it)) }
         HorizontalDivider(Modifier.padding(vertical = 8.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -81,6 +79,16 @@ fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, o
             Text(stringResource(R.string.about_title), style = MaterialTheme.typography.bodyLarge)
         }
     }
+}
+
+@Composable
+private fun SettingsTitle(text: String) {
+    Text(
+        text,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)
+    )
 }
 
 /**

@@ -4,10 +4,12 @@ package org.opensources.pokmaps.domain.model
 object Sprites {
     /**
      * Sprite d'un Pokémon (Noir et Blanc, PokeAPI/sprites), le même partout : animé, ou sa première image fixe,
-     * de même taille.
+     * de même taille ; en couleurs normales ou chromatiques (`shiny`).
      */
-    fun pokemon(pokemonId: Int, animated: Boolean) =
-        if (animated) "sprites/pokemon/animated/$pokemonId.webp" else "sprites/pokemon/static/$pokemonId.webp"
+    fun pokemon(pokemonId: Int, animated: Boolean, shiny: Boolean = false): String {
+        val style = if (shiny) "sprites/pokemon/shiny" else "sprites/pokemon"
+        return if (animated) "$style/animated/$pokemonId.webp" else "$style/static/$pokemonId.webp"
+    }
 
     /** Icône d'un objet (pokesprite), ex. « fire-stone ». */
     fun item(identifier: String) = "sprites/items/$identifier.webp"

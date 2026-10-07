@@ -24,9 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
-import org.opensources.pokmaps.ui.game.GameSelector
 import org.opensources.pokmaps.ui.game.GameUiState
 import org.opensources.pokmaps.ui.game.GameViewModel
 import org.opensources.pokmaps.ui.settings.SettingsViewModel
@@ -39,41 +37,40 @@ fun PokemapsApp(
     val settings by settingsViewModel.state.collectAsStateWithLifecycle()
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
     CompositionLocalProvider(LocalAnimatedPlaces provides settings.animatedPlaces) {
-        PokemapsContent(gameState, gameViewModel::select)
+        PokemapsContent(gameState)
     }
 }
 
 @Composable
-private fun PokemapsContent(gameState: GameUiState, onSelectGame: (Game) -> Unit) {
+private fun PokemapsContent(gameState: GameUiState) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val route = backStackEntry?.destination?.route
-    // Réglages et « À propos » : ni sélecteur de jeu ni barre de navigation.
+    // Réglages et « À propos » : ni recherche ni barre de navigation.
     val isAbout = route == ABOUT_ROUTE || route == SETTINGS_ROUTE
     Scaffold(
-        topBar = { PokemapsTopBar(route, isAbout, gameState, onSelectGame, navController) },
+        topBar = { PokemapsTopBar(route, isAbout, gameState, navController) },
         bottomBar = { if (!isAbout) PokemapsBottomBar(route, navController) }
     ) { padding ->
         PokemapsNavHost(navController, Modifier.padding(padding))
     }
 }
 
-/** Titre (ou retour depuis une fiche), recherche, choix du jeu et réglages. */
+/** Titre (le jeu choisi, ou le titre de la fiche avec un retour), recherche et réglages. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PokemapsTopBar(
-    route: String?,
-    isAbout: Boolean,
-    gameState: GameUiState,
-    onSelectGame: (Game) -> Unit,
-    navController: NavHostController
-) {
+private fun PokemapsTopBar(route: String?, isAbout: Boolean, gameState: GameUiState, navController: NavHostController) {
     val detailTitle = DETAIL_TITLES[route]
+    val game = gameState.selected
     TopAppBar(
-        // Une ligne, réduite si besoin : avec le choix du jeu, « Fiche personnage » se coupait sur trois lignes.
+        // Une ligne, réduite si besoin : un titre long (« Fiche personnage ») ne se coupe pas sur plusieurs lignes.
         title = {
             Text(
-                stringResource(detailTitle ?: R.string.app_name),
+                when {
+                    detailTitle != null -> stringResource(detailTitle)
+                    game != null -> stringResource(R.string.game_name, game.name)
+                    else -> stringResource(R.string.app_name)
+                },
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 autoSize = TextAutoSize.StepBased(minFontSize = TITLE_MIN_SIZE, maxFontSize = TITLE_MAX_SIZE)
@@ -93,7 +90,6 @@ private fun PokemapsTopBar(
                         Icon(painterResource(R.drawable.ic_search), stringResource(R.string.search_title))
                     }
                 }
-                GameSelector(gameState, onSelectGame)
                 IconButton(onClick = { navController.navigate(SETTINGS_ROUTE) { launchSingleTop = true } }) {
                     Icon(painterResource(R.drawable.ic_settings), stringResource(R.string.settings_title))
                 }
@@ -102,7 +98,7 @@ private fun PokemapsTopBar(
     )
 }
 
-/** Carte et Pokédex ; la fiche d'un Pokémon reste rattachée au Pokédex. */
+/** Carte, Pokédex et choix du jeu ; la fiche d'un Pokémon reste rattachée au Pokédex. */
 @Composable
 private fun PokemapsBottomBar(route: String?, navController: NavHostController) {
     NavigationBar {

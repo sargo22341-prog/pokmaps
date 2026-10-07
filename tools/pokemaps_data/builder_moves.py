@@ -7,6 +7,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .pokeapi import optional_int
+from .pret_moves import MoveEffect, move_effects, read_pret_moves
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -74,9 +75,13 @@ class MoveTables:
             changelog[int(row["move_id"])].append(row)
         rows = []
         for vg in self.builder.vg_ids:
+            effects = self.effects[vg]
             for move_id in sorted(self.moves_by_version_group[vg]):
                 values = self._values_in(vg, moves[move_id], changelog[move_id])
                 type_id = int(values["type_id"])
+                effect = effects.get(move_id)
+                if effect is None:
+                    raise ValueError(f"Attaque {moves[move_id]['identifier']} absente des attaques pret du jeu {vg}")
                 rows.append(
                     (
                         move_id,
@@ -86,9 +91,32 @@ class MoveTables:
                         optional_int(values["accuracy"]),
                         int(values["pp"]),
                         self._damage_class(vg, moves[move_id], type_id),
+                        effect.description_fr,
+                        effect.chance,
                     )
                 )
         return rows
+
+    @cached_property
+    def effects(self) -> dict[int, dict[int, MoveEffect]]:
+        """Effet de chaque attaque, par groupe de versions (id) puis par attaque (id PokéAPI), lu dans pret."""
+        missing = [
+            row["identifier"] for row in self.builder.vg_rows if row["identifier"] not in self.builder.pret_roots
+        ]
+        if missing:
+            raise ValueError(f"Désassemblage pret manquant pour lire les effets des attaques : {missing}")
+        pret_moves = {
+            row["identifier"]: read_pret_moves(self.builder.pret_roots[row["identifier"]])
+            for row in self.builder.vg_rows
+        }
+        by_game = move_effects(pret_moves)
+        return {
+            int(row["id"]): {
+                self.move_id(const.lower().replace("_", "-")): effect
+                for const, effect in by_game[row["identifier"]].items()
+            }
+            for row in self.builder.vg_rows
+        }
 
     def _values_in(self, vg: int, move: dict[str, str], changes: list[dict[str, str]]) -> dict[str, str]:
         """Type, puissance, PP et précision de l'attaque dans le groupe de versions `vg`."""
@@ -120,5 +148,5 @@ class MoveTables:
     def move_id(self, identifier: str) -> int:
         key = MOVE_ALIASES.get(identifier, identifier).replace("-", "")
         if key not in self.move_ids:
-            raise ValueError(f"Attaque des dresseurs inconnue de PokéAPI : {identifier} (voir MOVE_ALIASES)")
+            raise ValueError(f"Attaque pret inconnue de PokéAPI : {identifier} (voir MOVE_ALIASES)")
         return self.move_ids[key]

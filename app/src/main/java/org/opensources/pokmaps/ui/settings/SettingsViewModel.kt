@@ -7,16 +7,20 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.domain.pokedex.CaptureScope
+import org.opensources.pokmaps.domain.usecase.CaptureScopeUseCase
 import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class SettingsUiState(
     /** Endroits où les sprites des Pokémon sont animés. */
     val animatedPlaces: Set<SpritePlace> = SpritePlace.DEFAULT_ANIMATED,
+    /** Portée des captures : le jeu choisi, sa génération ou tous les jeux. */
+    val captureScope: CaptureScope = CaptureScope.DEFAULT,
     /** Réglages illisibles : les valeurs par défaut sont affichées. */
     val failed: Boolean = false
 ) {
@@ -33,21 +37,27 @@ sealed interface SettingsAction {
     data class SetAllAnimated(val enabled: Boolean) : SettingsAction
 
     data class SetAnimated(val place: SpritePlace, val enabled: Boolean) : SettingsAction
+
+    data class SetCaptureScope(val scope: CaptureScope) : SettingsAction
 }
 
 /** Réglages de l'application (écran Réglages, et sprites animés lus partout). */
 @HiltViewModel
-class SettingsViewModel @Inject constructor(private val settings: DisplaySettingsUseCase) : ViewModel() {
-    val state: StateFlow<SettingsUiState> = settings.animatedPlaces
-        .map { SettingsUiState(animatedPlaces = it) }
-        .catch { emit(SettingsUiState(failed = true)) }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SettingsUiState())
+class SettingsViewModel @Inject constructor(
+    private val settings: DisplaySettingsUseCase,
+    private val captureScope: CaptureScopeUseCase
+) : ViewModel() {
+    val state: StateFlow<SettingsUiState> =
+        combine(settings.animatedPlaces, captureScope.scope) { places, scope -> SettingsUiState(places, scope) }
+            .catch { emit(SettingsUiState(failed = true)) }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SettingsUiState())
 
     fun onAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
                 is SettingsAction.SetAllAnimated -> settings.setAllAnimated(action.enabled)
                 is SettingsAction.SetAnimated -> settings.setAnimated(action.place, action.enabled)
+                is SettingsAction.SetCaptureScope -> captureScope.set(action.scope)
             }
         }
     }

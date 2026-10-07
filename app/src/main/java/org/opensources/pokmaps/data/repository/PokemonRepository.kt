@@ -13,8 +13,13 @@ import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
 import org.opensources.pokmaps.domain.pokemon.EvolutionEdge
 import org.opensources.pokmaps.domain.pokemon.EvolutionTree
+import org.opensources.pokmaps.domain.pokemon.GenderRatio
+import org.opensources.pokmaps.domain.pokemon.HeldItem
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
+import org.opensources.pokmaps.domain.pokemon.Machine
+import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.PokemonTraits
 import org.opensources.pokmaps.domain.pokemon.TypeChart
 
 @Singleton
@@ -51,13 +56,26 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             weaknesses = TypeChart.defensive(pokedex.types(game), types.map { it.id }, factors),
             evolutions = EvolutionTree.build(members, edges),
             levelUpMoves = moves.filter { it.machine == null }.sortedWith(compareBy({ it.level }, { it.name })),
-            machineMoves = moves.filter { it.machine != null }.sortedWith(compareBy({ it.isHm() }, { it.machine })),
+            machineMoves = moves.filter { it.machine != null }
+                .sortedWith(compareBy({ it.machine?.isHm }, { it.machine?.name })),
             encounters = dao.encounters(pokemonId).map { it.toEncounter() },
-            staticEncounters = dao.staticCount(pokemonId, game.versionGroupId)
+            staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
+            traits = traits(game, pokemonId, pokemon.genderRate, pokemon.hatchCounter)
         )
     }
 
-    private fun LearnedMove.isHm() = machine?.startsWith("CS") == true
+    /** Objets tenus, sexe, œufs et talents : vides pour un jeu qui ne les connaît pas (base sans ces données). */
+    private suspend fun traits(game: Game, pokemonId: Int, genderRate: Int, hatchCounter: Int) = PokemonTraits(
+        heldItems = dao.heldItems(pokemonId, game.versionId).map {
+            HeldItem(it.identifier, it.name, it.hasSprite, it.rarity)
+        },
+        gender = GenderRatio.from(genderRate),
+        eggGroups = dao.eggGroups(pokemonId),
+        hatchCycles = hatchCounter,
+        abilities = dao.abilities(pokemonId, game.generationId, game.versionGroupId).map {
+            PokemonAbility(it.name, it.description, it.hidden)
+        }
+    )
 
     private fun LearnedMoveRow.toLearnedMove() = LearnedMove(
         moveId = moveId,
@@ -68,8 +86,19 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         accuracy = accuracy,
         pp = pp,
         level = level,
-        machine = if (method == "machine") machine ?: "CT/CS" else null
+        machine = if (method == MACHINE) {
+            Machine(
+                checkNotNull(machineIdentifier) { "CT/CS absente pour l'attaque $moveId" },
+                checkNotNull(machine) { "CT/CS absente pour l'attaque $moveId" }
+            )
+        } else {
+            null
+        }
     )
+
+    private companion object {
+        const val MACHINE = "machine"
+    }
 }
 
 fun EncounterRow.toEncounter() = Encounter(

@@ -44,7 +44,7 @@ class PokedexViewModelTest {
         return PokedexViewModel(
             ObservePokedexUseCase(games, PokedexRepository(dao)),
             ObserveCollectionUseCase(games, collection),
-            UpdateCollectionUseCase(collection)
+            UpdateCollectionUseCase(games, collection)
         )
     }
 

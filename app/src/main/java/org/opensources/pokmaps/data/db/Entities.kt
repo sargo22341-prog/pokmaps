@@ -48,7 +48,9 @@ data class VersionEntity(
     @PrimaryKey val id: Int,
     val identifier: String,
     @ColumnInfo(name = "name_fr") val nameFr: String,
-    @ColumnInfo(name = "version_group_id") val versionGroupId: Int
+    @ColumnInfo(name = "version_group_id") val versionGroupId: Int,
+    @ColumnInfo(name = "mascot_pokemon_id") val mascotPokemonId: Int,
+    val color: Int
 )
 
 @Entity(
@@ -141,7 +143,8 @@ data class PokemonEntity(
     @ColumnInfo(name = "is_legendary") val isLegendary: Boolean,
     @ColumnInfo(name = "is_mythical") val isMythical: Boolean,
     @ColumnInfo(name = "is_baby") val isBaby: Boolean,
-    @ColumnInfo(name = "description_fr") val descriptionFr: String?
+    @ColumnInfo(name = "description_fr") val descriptionFr: String?,
+    @ColumnInfo(name = "hatch_counter") val hatchCounter: Int
 )
 
 @Entity(
@@ -190,7 +193,9 @@ data class MoveVersionGroupEntity(
     val power: Int?,
     val accuracy: Int?,
     val pp: Int,
-    @ColumnInfo(name = "damage_class") val damageClass: String
+    @ColumnInfo(name = "damage_class") val damageClass: String,
+    @ColumnInfo(name = "effect_fr") val effectFr: String,
+    @ColumnInfo(name = "effect_chance") val effectChance: Double?
 )
 
 @Entity(

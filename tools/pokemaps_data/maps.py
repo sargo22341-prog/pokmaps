@@ -23,11 +23,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .games import GAMES, Game
-from .maps_characters import DATA_DIR, CharacterCuration, ObjectRow, object_rows, read_character_curation
+from .maps_characters import CharacterCuration, ObjectRow, object_rows, read_character_curation
 from .maps_layout import WORLD, GameMaps, identifier
 from .maps_render import MapRenderer, write_sprites, write_tiles
 from .pret import BLOCK_PX, LAST_MAP, PretRepo
-from .sources import fetch_pret
+from .sources import DATA_DIR, fetch_pret
 
 # Numéro donné à la carte du monde (les cartes pret sont numérotées de 0 à 255).
 WORLD_NUMBER = 999

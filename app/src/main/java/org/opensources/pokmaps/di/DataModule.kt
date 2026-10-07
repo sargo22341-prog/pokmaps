@@ -13,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.data.db.MapDao
+import org.opensources.pokmaps.data.db.MoveDao
 import org.opensources.pokmaps.data.db.PokedexDao
 import org.opensources.pokmaps.data.db.PokedexDatabase
 import org.opensources.pokmaps.data.db.PokemonDao
@@ -44,6 +45,9 @@ object DataModule {
 
     @Provides
     fun pokemonDao(database: PokedexDatabase): PokemonDao = database.pokemonDao()
+
+    @Provides
+    fun moveDao(database: PokedexDatabase): MoveDao = database.moveDao()
 
     @Provides
     fun assets(@ApplicationContext context: Context): AssetManager = context.assets

@@ -9,9 +9,12 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import org.opensources.pokmaps.data.settings.CollectionSettings
 import org.opensources.pokmaps.data.settings.DisplaySettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.domain.pokedex.CaptureScope
+import org.opensources.pokmaps.domain.usecase.CaptureScopeUseCase
 import org.opensources.pokmaps.domain.usecase.DisplaySettingsUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 
@@ -20,15 +23,20 @@ class SettingsViewModelTest {
     @get:Rule
     val mainDispatcher = MainDispatcherRule()
 
-    private fun viewModel(failing: Boolean = false) =
-        SettingsViewModel(DisplaySettingsUseCase(DisplaySettings(FakeDataStore(failing))))
+    private fun viewModel(failing: Boolean = false): SettingsViewModel {
+        val dataStore = FakeDataStore(failing)
+        return SettingsViewModel(
+            DisplaySettingsUseCase(DisplaySettings(dataStore)),
+            CaptureScopeUseCase(CollectionSettings(dataStore))
+        )
+    }
 
     @Test
     fun defaultsBeforeAnyChange() = runTest {
         val viewModel = viewModel()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         val state = viewModel.state.value
-        assertEquals(SettingsUiState(animatedPlaces = SpritePlace.DEFAULT_ANIMATED), state)
+        assertEquals(SettingsUiState(SpritePlace.DEFAULT_ANIMATED, captureScope = CaptureScope.GAME), state)
         assertTrue(state.partlyAnimated)
         assertFalse(state.allAnimated)
     }
@@ -55,6 +63,16 @@ class SettingsViewModelTest {
         viewModel.onAction(SettingsAction.SetAnimated(SpritePlace.MAP, true))
         viewModel.onAction(SettingsAction.SetAnimated(SpritePlace.EVOLUTIONS, false))
         assertEquals(setOf(SpritePlace.MAP), viewModel.state.value.animatedPlaces)
+    }
+
+    @Test
+    fun captureScopeIsSaved() = runTest {
+        val viewModel = viewModel()
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(SettingsAction.SetCaptureScope(CaptureScope.GENERATION))
+        assertEquals(CaptureScope.GENERATION, viewModel.state.value.captureScope)
+        viewModel.onAction(SettingsAction.SetCaptureScope(CaptureScope.ALL))
+        assertEquals(CaptureScope.ALL, viewModel.state.value.captureScope)
     }
 
     @Test

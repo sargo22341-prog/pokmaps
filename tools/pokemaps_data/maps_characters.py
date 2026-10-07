@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import csv
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from .games import Game
 from .maps_layout import GameMaps, identifier
@@ -27,8 +26,7 @@ from .pret_services import (
     prize_offers,
     vending_offers,
 )
-
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+from .sources import DATA_DIR
 
 # Objets dont l'identifiant PokéAPI ne se déduit pas de la constante pret.
 ITEM_ALIASES = {
@@ -43,8 +41,9 @@ ITEM_ALIASES = {
 # Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
 
-# Offres relues à la main (npc_offers.csv) : un échange remplace le don du même objet lu dans le script.
-CURATED_KINDS = frozenset({"exchange", "coin_sale"})
+# Offres relues à la main (npc_offers.csv) : un échange remplace le don du même objet lu dans le script. Les
+# Pokémon de départ (gift_pokemon) sont choisis par un script propre au labo du Prof. Chen, pas par GivePokemon.
+CURATED_KINDS = frozenset({"exchange", "coin_sale", "gift_pokemon"})
 
 
 def item_identifier(repo: PretRepo, const: str) -> str:
@@ -174,6 +173,7 @@ def read_character_curation() -> CharacterCuration:
         offer = NpcOffer(
             row["kind"],
             item=row["item"] or None,
+            pokemon=row["pokemon"] or None,
             quantity=int(row["quantity"]) if row["quantity"] else None,
             price=int(row["price"]) if row["price"] else None,
             wanted_item=row["wanted_item"] or None,

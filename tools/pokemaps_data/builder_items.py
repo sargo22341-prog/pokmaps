@@ -1,4 +1,4 @@
-"""Table des objets : CT / CS, objets d'évolution, Poké Balls et objets présents sur les cartes."""
+"""Tables des objets : CT / CS, objets d'évolution, Poké Balls, objets des cartes et objets tenus."""
 
 from __future__ import annotations
 
@@ -28,6 +28,7 @@ class ItemTables:
         used = {item for _, item, _ in self.builder.moves.machine_rows}
         used |= set(self.map_item_ids.values())
         used |= set(self.offer_item_ids.values())
+        used |= {item for _, _, item, _ in self.pokemon_item_rows}
         for row in self.builder.pokemon.evolution_rows:
             used |= {item for item in (row[6], row[7]) if item}
         # Poké Balls existant dans au moins une des générations configurées.
@@ -39,6 +40,23 @@ class ItemTables:
             (item_id, items[item_id]["identifier"], names[item_id], categories[int(items[item_id]["category_id"])])
             for item_id in sorted(used)
         ]
+
+    @cached_property
+    def pokemon_item_rows(self) -> list[tuple[int, int, int, int]]:
+        """Objets tenus par les Pokémon sauvages de chaque version : (espèce, version, objet, probabilité en %).
+
+        PokéAPI ne les donne qu'à partir de la 3e génération ; la 1re génération n'en a pas."""
+        species_of_pokemon = self.builder.species_of_pokemon
+        versions = set(self.builder.version_ids)
+        rows = []
+        for row in self.api.table("pokemon_items"):
+            pokemon_id, version = int(row["pokemon_id"]), int(row["version_id"])
+            if version in versions and pokemon_id in species_of_pokemon:
+                rarity = int(row["rarity"])
+                if not 0 < rarity <= 100:
+                    raise ValueError(f"Probabilité d'objet tenu invalide : {dict(row)}")
+                rows.append((species_of_pokemon[pokemon_id], version, int(row["item_id"]), rarity))
+        return sorted(rows)
 
     def item_descriptions(self) -> dict[int, str]:
         """Description française de chaque objet (texte du jeu le plus ancien qui en a une), sauf CT / CS."""

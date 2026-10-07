@@ -4,6 +4,7 @@
 
     <string name="nav_map">Carte</string>
     <string name="nav_pokedex">Pokédex</string>
+    <string name="nav_game">Jeu</string>
     <string name="show_on_map">Voir sur la carte</string>
     <string name="label_items">Objets</string>
     <string name="label_characters">Personnages</string>
@@ -12,7 +13,13 @@
     <string name="back">Retour</string>
 
     <string name="game_name">Pokémon %1$s</string>
-    <string name="game_selector">Pokémon %1$s ▾</string>
+
+    <!-- Choix du jeu -->
+    <string name="game_generation">Génération %1$d</string>
+    <string name="game_intro">Le jeu choisi s’applique à toute l’application et reste mémorisé à sa réouverture.</string>
+    <string name="game_selected">Jeu choisi</string>
+    <string name="game_cover">Jaquette de Pokémon %1$s</string>
+    <string name="games_empty">Aucun jeu disponible.</string>
 
     <string name="pokedex_number">n° %1$03d</string>
 
@@ -42,6 +49,10 @@
     <string name="collection_not_favorite">Ajouter aux favoris</string>
     <string name="collection_caught_in">Capturé dans Pokémon %1$s</string>
     <string name="collection_not_caught_in">Pas encore capturé dans Pokémon %1$s</string>
+    <string name="collection_caught_in_generation">Capturé dans un jeu de la génération %1$d</string>
+    <string name="collection_not_caught_in_generation">Pas encore capturé dans la génération %1$d</string>
+    <string name="collection_caught_anywhere">Capturé dans un des jeux</string>
+    <string name="collection_not_caught_anywhere">Pas encore capturé dans aucun jeu</string>
 
     <string name="method_walk">Herbes et grottes</string>
     <string name="method_fishing">Pêche</string>
@@ -75,6 +86,39 @@
     <string name="pokemon_moves_level">Par niveau</string>
     <string name="pokemon_moves_machine">CT / CS</string>
     <string name="pokemon_moves_none">Aucune attaque.</string>
+    <string name="pokemon_shiny">Chromatique</string>
+    <string name="pokemon_shiny_show">Voir en chromatique</string>
+    <string name="pokemon_shiny_hide">Voir les couleurs normales</string>
+    <string name="pokemon_shiny_odds">Une rencontre sur %1$s est chromatique dans Pokémon %2$s. Touchez les étincelles en haut de la fiche pour le voir en chromatique.</string>
+    <string name="pokemon_shiny_absent">Pas de Pokémon chromatique dans Pokémon %1$s : ils apparaissent en 2e génération (une rencontre sur %2$s). Touchez les étincelles en haut de la fiche pour voir à quoi il ressemblera.</string>
+    <string name="pokemon_held_items">Objets tenus</string>
+    <string name="pokemon_held_items_none">Ne tient aucun objet à l’état sauvage dans Pokémon %1$s.</string>
+    <string name="pokemon_held_items_absent">Les Pokémon sauvages ne tiennent pas d’objet dans Pokémon %1$s : les objets tenus apparaissent en 2e génération.</string>
+    <string name="pokemon_gender">Sexe</string>
+    <string name="pokemon_gender_ratio">♂ %1$s %% · ♀ %2$s %%</string>
+    <string name="pokemon_genderless">Asexué</string>
+    <string name="pokemon_breeding">Œufs</string>
+    <string name="pokemon_egg_groups">Groupes d’œufs : %1$s</string>
+    <string name="pokemon_no_egg_group">Aucun groupe d’œufs.</string>
+    <string name="pokemon_hatch_cycles">Cycles d’éclosion : %1$d</string>
+    <string name="pokemon_abilities">Talents</string>
+    <string name="pokemon_ability_hidden">%1$s (talent caché)</string>
+    <string name="pokemon_abilities_none">Aucun talent.</string>
+
+    <!-- Fiche attaque -->
+    <string name="move_title">Fiche attaque</string>
+    <string name="move_not_found">Attaque introuvable dans ce jeu.</string>
+    <string name="move_power_full">Puissance</string>
+    <string name="move_accuracy_full">Précision</string>
+    <string name="move_effect">Effet</string>
+    <string name="move_effect_chance">Probabilité de l’effet : %1$s %%</string>
+    <string name="move_machine">Enseignée par</string>
+    <string name="move_open_machine">Voir la fiche de %1$s</string>
+    <string name="move_learners">Pokémon qui l’apprennent</string>
+    <string name="move_learners_level">Apprise en montant de niveau</string>
+    <string name="move_learners_machine">Apprise avec %1$s</string>
+    <string name="move_learners_none">Aucun Pokémon ne l’apprend dans Pokémon %1$s.</string>
+    <string name="move_open">Voir la fiche de l’attaque</string>
     <string name="move_start">Départ</string>
     <string name="move_power">Puiss.</string>
     <string name="move_accuracy">Préc.</string>
@@ -215,6 +259,14 @@
     <string name="about_title">À propos</string>
     <string name="settings_title">Réglages</string>
     <string name="settings_display">Affichage</string>
+    <string name="settings_collection">Collection</string>
+    <string name="settings_capture_scope">Captures comptées</string>
+    <string name="settings_capture_scope_generation">Génération</string>
+    <string name="settings_capture_scope_all">Tout</string>
+    <string name="settings_capture_scope_game_summary">Un Pokémon capturé ne compte que pour le jeu choisi.</string>
+    <string name="settings_capture_scope_generation_summary">Un Pokémon capturé compte pour tous les jeux de la même génération (Rouge, Bleu et Jaune pour la 1re génération).</string>
+    <string name="settings_capture_scope_all_summary">Un Pokémon capturé compte pour tous les jeux.</string>
+    <string name="settings_capture_scope_note">Chaque capture reste mémorisée dans le jeu où elle a été cochée : changer ce réglage ne perd rien.</string>
     <string name="settings_animated_sprites">Sprites animés</string>
     <string name="settings_animated_everywhere">Pokémon animés partout</string>
     <string name="settings_animated_nowhere">Pokémon fixes partout</string>

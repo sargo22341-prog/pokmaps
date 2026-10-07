@@ -10,7 +10,8 @@ interface GameDao {
     @Query(
         """
         SELECT v.id AS versionId, v.identifier AS versionIdentifier, v.name_fr AS name,
-            vg.id AS versionGroupId, vg.identifier AS versionGroupIdentifier, vg.generation_id AS generationId
+            vg.id AS versionGroupId, vg.identifier AS versionGroupIdentifier, vg.generation_id AS generationId,
+            v.mascot_pokemon_id AS mascotPokemonId, v.color
         FROM version v JOIN version_group vg ON vg.id = v.version_group_id
         ORDER BY vg.sort_order, v.id
         """

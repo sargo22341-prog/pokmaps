@@ -11,6 +11,7 @@ from collections import defaultdict
 from functools import cached_property
 from pathlib import Path
 
+from .builder_abilities import AbilityTables
 from .builder_encounters import EncounterTables
 from .builder_items import ItemTables
 from .builder_maps import build_map_tables
@@ -21,19 +22,25 @@ from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 
 
 class DatabaseBuilder:
     def __init__(
-        self, api: PokeApi, games: tuple[Game, ...] = GAMES, map_data: dict[str, GameMapData] | None = None
+        self,
+        api: PokeApi,
+        games: tuple[Game, ...] = GAMES,
+        map_data: dict[str, GameMapData] | None = None,
+        pret_roots: dict[str, Path] | None = None,
     ) -> None:
         self.api = api
         self.games = games
         # Cartes générées par maps.build_maps, par groupe de versions (aucune si None).
         self.map_data = map_data or {}
+        # Désassemblage pret de chaque groupe de versions (effets des attaques), aucun si None.
+        self.pret_roots = pret_roots or {}
         groups = {row["identifier"]: row for row in api.table("version_groups")}
         missing = [game.version_group for game in games if game.version_group not in groups]
         if missing:
@@ -52,6 +59,7 @@ class DatabaseBuilder:
         self.moves = MoveTables(self)
         self.items = ItemTables(self)
         self.encounters = EncounterTables(self)
+        self.abilities = AbilityTables(self)
 
     # --- Référentiels ---------------------------------------------------------
 
@@ -119,8 +127,23 @@ class DatabaseBuilder:
 
     def version_table(self) -> list[tuple]:
         names = self.api.names("version_names", "version_id")
+        covers = {cover.version: cover for game in self.games for cover in game.covers}
+        missing = [row["identifier"] for row in self.version_rows if row["identifier"] not in covers]
+        if missing:
+            raise ValueError(f"Jaquette manquante dans games.py pour les versions : {missing}")
+        species = {row["identifier"]: species_id for species_id, row in self.species.items()}
+        unknown = sorted({cover.mascot for cover in covers.values()} - species.keys())
+        if unknown:
+            raise ValueError(f"Pokémon de jaquette inconnus (games.py) : {unknown}")
         return [
-            (int(row["id"]), row["identifier"], names[int(row["id"])], int(row["version_group_id"]))
+            (
+                int(row["id"]),
+                row["identifier"],
+                names[int(row["id"])],
+                int(row["version_group_id"]),
+                species[covers[row["identifier"]].mascot],
+                covers[row["identifier"]].color,
+            )
             for row in self.version_rows
         ]
 
@@ -205,6 +228,12 @@ class DatabaseBuilder:
             "item": items,
             "machine": self.moves.machine_rows,
             "pokemon_move": self.moves.pokemon_move_rows,
+            "pokemon_item": self.items.pokemon_item_rows,
+            "egg_group": self.pokemon.egg_group_table(),
+            "pokemon_egg_group": self.pokemon.egg_group_rows,
+            "ability": self.abilities.ability_table(),
+            "ability_version_group": self.abilities.ability_version_group_table(),
+            "pokemon_ability": self.abilities.pokemon_ability_rows,
             "evolution": self.pokemon.evolution_rows,
             "location": self.encounters.location_rows,
             "location_area": self.encounters.location_area_table(),

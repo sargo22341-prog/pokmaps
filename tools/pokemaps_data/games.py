@@ -13,6 +13,18 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class VersionCover:
+    """Jaquette dessinée par l'application pour une version : le Pokémon de sa jaquette et sa couleur."""
+
+    # Identifiant PokéAPI de la version (ex. "red").
+    version: str
+    # Identifiant PokéAPI de l'espèce mise en avant sur la jaquette (ex. "charizard").
+    mascot: str
+    # Couleur de la version, 0xRRGGBB.
+    color: int
+
+
+@dataclass(frozen=True)
 class Game:
     # Identifiant PokéAPI du groupe de versions (ex. "red-blue").
     version_group: str
@@ -23,11 +35,25 @@ class Game:
     # Famille de cartes : les jeux d'une même famille partagent leurs plans (Rouge, Bleu et Jaune ; plus tard
     # Or, Argent et Cristal…), donc les emplacements de Pokémon retouchés dans tools/data/map_spots.csv.
     map_family: str
+    # Jaquette de chaque version du jeu, dans l'ordre de pret_versions.
+    covers: tuple[VersionCover, ...]
 
 
 GAMES: tuple[Game, ...] = (
-    Game("red-blue", "pokered", (("red", "_RED"), ("blue", "_BLUE")), "red-blue-yellow"),
-    Game("yellow", "pokeyellow", (("yellow", "_YELLOW"),), "red-blue-yellow"),
+    Game(
+        "red-blue",
+        "pokered",
+        (("red", "_RED"), ("blue", "_BLUE")),
+        "red-blue-yellow",
+        (VersionCover("red", "charizard", 0xD8302A), VersionCover("blue", "blastoise", 0x2A63C4)),
+    ),
+    Game(
+        "yellow",
+        "pokeyellow",
+        (("yellow", "_YELLOW"),),
+        "red-blue-yellow",
+        (VersionCover("yellow", "pikachu", 0xF2C21B),),
+    ),
 )
 
 
