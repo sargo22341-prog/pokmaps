@@ -8,7 +8,7 @@ from pokemaps_data.map_spots import TerrainKey
 from spot_editor.catalog import EditorCatalog, EditorMap, EncounterLine, required_spots, used_by_app
 from spot_editor.session import SpotSession, Toggle
 from spot_editor.terrain import WildTerrains
-from spot_editor.validation import Step, StepEvent, StepState, run_steps
+from spot_editor.validation import Step, StepEvent, StepState, run_steps, validation_plan
 
 CACHE = Path(__file__).resolve().parent.parent / ".cache"
 
@@ -180,3 +180,9 @@ def test_validation_reports_success(tmp_path: Path) -> None:
     events: queue.Queue[StepEvent] = queue.Queue()
     run_steps((Step("ok", tmp_path, (sys.executable, "-c", "pass")),), events)
     assert [events.get_nowait().state for _ in range(events.qsize())] == [StepState.PROGRESS, StepState.SUCCESS]
+
+
+def test_editor_runs_both_asset_and_pipeline_tests(tmp_path: Path) -> None:
+    commands = [step.command for step in validation_plan(tmp_path)]
+    assert (sys.executable, "-m", "pytest", "-q") in commands
+    assert (sys.executable, "-m", "pytest", "-q", "-m", "pipeline") in commands

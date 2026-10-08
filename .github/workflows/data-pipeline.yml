@@ -1,0 +1,18 @@
+name: Vérification explicite du pipeline de données
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - name: Générer et tester les données depuis les sources épinglées
+        uses: ./.github/actions/build-database
+      - name: Vérifier les assets générés
+        run: python tools/check_assets.py

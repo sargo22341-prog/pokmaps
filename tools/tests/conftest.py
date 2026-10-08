@@ -1,3 +1,4 @@
+import shutil
 import sqlite3
 from collections.abc import Iterator
 from pathlib import Path
@@ -18,12 +19,15 @@ TOOLS = Path(__file__).resolve().parent.parent
 CACHE = TOOLS / ".cache"
 
 
-@pytest.fixture(autouse=True)
-def no_network(monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.fixture(scope="session", autouse=True)
+def no_network() -> Iterator[None]:
     def reject_network(*_args: object, **_kwargs: object) -> None:
         pytest.fail("Les tests ne doivent pas accéder au réseau ; exécutez tools/build_data.py d'abord.")
 
-    monkeypatch.setattr(sources.urllib.request, "urlopen", reject_network)
+    # Le blocage doit précéder aussi les fixtures de session qui construisent les données.
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(sources.urllib.request, "urlopen", reject_network)
+        yield
 
 
 @pytest.fixture(scope="session")
@@ -51,11 +55,8 @@ def source_cache_ready() -> None:
 
 
 @pytest.fixture(scope="session")
-def assets(builder: DatabaseBuilder, assets_root: Path) -> Path:
-    root = assets_root
-    item_sprites = build_sprites(builder, CACHE, root / "sprites")
-    builder.write(root / "database/pokedex.db", item_sprites)
-    return root
+def assets() -> Path:
+    return TOOLS.parent / "app/src/main/assets"
 
 
 @pytest.fixture(scope="session")
@@ -64,10 +65,20 @@ def database(assets: Path) -> Path:
 
 
 @pytest.fixture()
-def db(database: Path) -> Iterator[sqlite3.Connection]:
-    connection = sqlite3.connect(database)
+def db(database: Path, tmp_path: Path) -> Iterator[sqlite3.Connection]:
+    # Les tests de validation modifient parfois la base : protéger l'instantané versionné.
+    copy = tmp_path / "pokedex.db"
+    shutil.copyfile(database, copy)
+    connection = sqlite3.connect(copy)
     yield connection
     connection.close()
+
+
+def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
+    # La fermeture des fixtures inclut source_cache_ready pour chaque lecteur de sources.
+    for item in items:
+        if isinstance(item, pytest.Function) and "source_cache_ready" in item.fixturenames:
+            item.add_marker(pytest.mark.pipeline)
 
 
 # --- Données propres à Or/Argent et Cristal, isolées pour les tests de la 2e génération ---------------

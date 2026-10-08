@@ -221,7 +221,13 @@ Suivre la densité de commentaires du code voisin.
 
 ## 6. Génération des données
 
-- `tools/build_data.py` est le point d'entrée ; suivre ses étapes existantes.
+### Données externes
+
+Les données et ressources finales récupérées ou produites depuis des sources externes sont stockées dans le dépôt.
+Les builds et publications utilisent ces assets versionnés, même si les sources deviennent indisponibles.
+La génération est explicite ; caches et sources brutes restent hors de Git, sans Git LFS.
+
+- `tools/build_data.py` est le point d'entrée explicite pour modifier les données ; jamais lancé par un build Android.
 - `tools/pokemaps_data/` sépare sources (`sources.py`, `pret_source.py`), lecture (`pokeapi.py`,
   `pret*.py`), assemblage (`builder*.py`, `maps*.py`, `sprites.py`) et validation (`validate.py`).
 - Les corrections maintenues à la main restent dans `tools/data/`, jamais dans les sorties générées.
@@ -229,7 +235,7 @@ Suivre la densité de commentaires du code voisin.
   temps et en taille, validations explicites, erreurs visibles.
 - Toute modification d'une table, de `schema.sql` ou d'un asset généré met à jour la validation et
   son test, et garde `PokedexSchemaTest` vert (schéma Room = base générée).
-- Ne pas committer les caches (`tools/.cache`), les sources téléchargées ni les assets ignorés.
+- Versionner les assets finaux et leur inventaire `assets.sha256`, jamais les caches (`tools/.cache`) ni les sources brutes.
 
 ---
 
@@ -241,7 +247,8 @@ Suivre la densité de commentaires du code voisin.
   limites concernés. Chaque ViewModel modifié teste au moins ses états vide et erreur.
 - Un défaut corrigé et reproductible = un test de non-régression.
 - Les tests ne dépendent jamais du réseau réel ni de données externes variables. Les tests Python
-  réutilisent les sources épinglées préparées par `build_data.py`.
+  ordinaires utilisent les assets versionnés ; les tests marqués `pipeline` réutilisent les sources épinglées
+  préparées par `build_data.py`, uniquement lors d'une mise à jour explicite des données.
 - Utiliser des faux en mémoire plutôt qu'un framework de mock supplémentaire.
 - Quand un test échoue, corriger le **code**, pas l'attente du test, sauf si l'attente est fausse,
   et le dire.
@@ -256,8 +263,11 @@ Lancer ce qui couvre la partie touchée ; tout doit passer :
 # Android
 .\gradlew.bat ktlintCheck checkNoGoogleServices lintDebug testDebugUnitTest assembleDebug
 
-# Python (après python tools/build_data.py)
+# Python (sans génération ni cache)
+python tools/check_assets.py
 cd tools; ruff check .; ruff format --check .; python -m pytest -q
+# Après modification des données : génération explicite, puis tests des sources
+python -m pytest -q -m pipeline
 ```
 
 - Zéro erreur, zéro avertissement : Kotlin (`allWarningsAsErrors`), Lint (`checkAllWarnings`,
@@ -308,7 +318,7 @@ cd tools; ruff check .; ruff format --check .; python -m pytest -q
 - Modifier uniquement les fichiers liés à la tâche ; petits changements cohérents.
 - **Aucun commit sans demande explicite.** Jamais de `git reset --hard` ni de suppression de travail
   existant pour résoudre un conflit.
-- Ne pas versionner : `build/`, `local.properties`, caches, sources téléchargées, secrets, keystores,
+- Ne pas versionner : `build/`, `local.properties`, caches, sources brutes téléchargées, secrets, keystores,
   binaires générés hors assets attendus.
 - Fichiers temporaires de session : dans le scratchpad, jamais à la racine du dépôt.
 - Mettre à jour la documentation (`README.md`) qui décrit un comportement modifié.

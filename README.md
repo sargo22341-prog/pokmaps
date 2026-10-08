@@ -139,7 +139,7 @@ Pokémon Cristal, sur le même émulateur Android 17 (Pixel 9 Pro XL).
 
 Les jeux en cours d'intégration (`GAMES_IN_PROGRESS` dans `tools/pokemaps_data/games.py`, actuellement vide)
 ne sont pas embarqués : `tools/build_data.py` les génère avec tous les autres dans un aperçu,
-`tools/build/preview/` (même organisation, hors de Git), validé de la même façon. Les tests et l'éditeur des
+`tools/build/preview/` (même organisation, hors de Git), validé de la même façon. Les tests du pipeline et l'éditeur des
 emplacements le lisent.
 
 Toutes les images sont embarquées en WebP sans perte, plus léger que PNG et GIF à pixels identiques ; chaque
@@ -150,7 +150,7 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
 - **[PokéAPI](https://pokeapi.co)**, via l'export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi) :
   Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
   lieux et rencontres de chaque version ; objets tenus, groupes d'œufs et talents, préparés pour les générations
-  suivantes (vides en 1re génération). Les CSV sont téléchargés une seule fois au build, avec cache ;
+  suivantes (vides en 1re génération). Les CSV sont téléchargés lors d'une génération explicite, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
 - **[pokesprite](https://github.com/msikma/pokesprite)** : icônes d'objets.
 - **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, normaux et chromatiques,
@@ -237,8 +237,11 @@ connaît (`GenerationFeature` dans l'application) : objets tenus (2e génératio
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
-Les données générées ne sont pas versionnées : elles sont produites par la CI, ou en local avec la commande
-ci-dessous.
+Les ressources finales de `app/src/main/assets/` sont versionnées avec Git classique, sans Git LFS :
+base, sprites fixes et animés (normaux, chromatiques et formes de Zarbi), icônes d'objets, tuiles, sprites de PNJ
+et licences. `assets.sha256` inventorie leurs chemins et empreintes. Les guides, succès traduits et vecteurs
+Meteocons sont déjà conservés dans les sources Kotlin et ressources Android du dépôt.
+Les caches, sources brutes et aperçus restent ignorés. Aucun build Android ne télécharge de contenu Pokémon.
 
 ## Éditeur des emplacements sauvages
 
@@ -277,7 +280,8 @@ après la réussite de toutes les étapes ; une fenêtre d'erreur précise l'ét
 
 ## Compiler en local
 
-Prérequis : Android SDK (API 37), Python 3.11 ou plus récent, git, et un JDK pour lancer `gradlew`.
+Prérequis : Android SDK (API 37), git, et un JDK pour lancer `gradlew`. Python est nécessaire seulement
+pour les contrôles Python et la mise à jour explicite des données.
 
 Gradle exécute toujours la build sur **Temurin 21**, le JDK de la CI, quel que soit le JDK qui lance `gradlew`
 (celui d'Android Studio, par exemple) : `gradle/gradle-daemon-jvm.properties` fixe ce critère et Gradle télécharge
@@ -285,11 +289,7 @@ ce JDK une fois s'il n'est pas installé. Sur un JDK 24 ou plus récent, ktlint 
 protobuf de DataStore dans les tests JVM appellent `sun.misc.Unsafe`, que ces JDK signalent par un avertissement.
 
 ```bash
-# 1. Générer la base de données, les images et les cartes (télécharge les sources dans tools/.cache)
-pip install -r tools/requirements.txt
-python3 tools/build_data.py
-
-# 2. Compiler et installer l'APK debug
+# Compiler et installer avec les assets du dépôt, sans tools/.cache
 ./gradlew installDebug
 ```
 
@@ -302,15 +302,39 @@ Vérifications lancées par la CI :
 cd tools
 pip install -r requirements-dev.txt
 ruff check . && ruff format --check .   # style Python
-python -m pytest                        # tests du pipeline
+python -m pytest                        # tests sans cache ni téléchargement de contenu
 ```
 
-Les tests Python réutilisent les sources épinglées préparées par `tools/build_data.py` et bloquent tout accès
-réseau. Générer les données avant de lancer `pytest` localement.
+`./gradlew checkAssets` vérifie chaque fichier de l'inventaire et son SHA-256 ; ce contrôle précède
+la compilation et les tests JVM. Un fichier absent ou modifié provoque une erreur qui nomme le fichier.
+`python tools/check_assets.py` vérifie aussi les références aux images et la cohérence de la base.
+Ces commandes utilisent uniquement les ressources finales du dépôt, même si `tools/.cache` est absent et
+les sources de contenu Pokémon sont hors ligne. Les outils Android, JDK et dépendances de compilation
+peuvent toujours nécessiter un téléchargement.
+
+### Mettre à jour les données
+
+Exécuter la génération seulement pour modifier des données, des corrections éditoriales ou ajouter du contenu :
+
+```bash
+pip install -r tools/requirements-dev.txt
+python tools/build_data.py
+python tools/check_assets.py
+cd tools
+ruff check . && ruff format --check .
+python -m pytest -q
+python -m pytest -q -m pipeline
+```
+
+La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
+elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.
+Les tests `pipeline` lisent ces sources et restent séparés des contrôles ordinaires ; ils sont exclus par défaut.
+Relire puis versionner ensemble les changements éditoriaux, scripts concernés et assets finaux, y compris
+`assets.sha256`. Ne pas ajouter `tools/.cache`, `tools/build/preview` ni les fichiers temporaires à Git.
 
 Les tests UI Compose tournent sur la JVM avec Robolectric, dans `testDebugUnitTest` : ni appareil ni émulateur.
 Ils parcourent l'application complète sur la base générée (Pokédex → fiche → carte, recherche → lieu ou objet,
-choix du jeu, réglages) et sont ignorés si elle n'a pas été générée.
+choix du jeu, réglages) ; une base versionnée absente fait échouer les contrôles.
 
 `checkNoGoogleServices` fait échouer la build si une dépendance tire les services Google Play
 (`com.google.android.gms`), Firebase ou Play Core.
@@ -333,16 +357,16 @@ notes différentes de celles du tag, elles sont conservées pour la release suiv
 
 ## CI/CD
 
-- **CI** (`.github/workflows/ci.yml`), à chaque push et pull request : génération et tests des données,
+- **CI** (`.github/workflows/ci.yml`), à chaque push et pull request : validation des assets versionnés, tests sans sources,
   ktlint, vérification sans Google Play, Android Lint, tests unitaires et APK debug
   (téléchargeable dans les artefacts du workflow pendant 14 jours).
 - **Release** (`.github/workflows/release.yml`), à chaque tag `vX.Y.Z` : APK release signé publié dans
   [GitHub Releases](../../releases), avec son empreinte SHA-256.
 
-Les deux workflows réutilisent le cache `tools/.cache` : CSV PokéAPI, sprites, sources de pokered,
-pokeyellow, pokegold et pokecrystal, et conversions WebP. La clé dépend des commits épinglés dans
-`sources.py` et du convertisseur `webp.py`. Le résumé de chaque exécution indique la durée de génération
-des données et la taille exacte de l'APK produit (debug en CI, signé en release).
+Les workflows CI et release utilisent les assets du checkout : aucune génération, aucun cache de contenu
+et aucun téléchargement de sources Pokémon. Le résumé indique la taille exacte de l'APK produit.
+Le workflow manuel `data-pipeline.yml` génère et teste séparément les données depuis les sources épinglées,
+avec cache ; il ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
 
 Mesure locale du 8 octobre 2026, avec les six versions et les sources déjà en cache : génération et validation
 en 50,7 s ; APK debug de 62 760 138 octets (59,85 Mio). Les cartes représentent 5 903 Kio pour 5 732 tuiles.
@@ -374,7 +398,8 @@ Dans GitHub, *Settings → Secrets and variables → Actions → New repository 
 ⚠️ Conservez `pokemaps-release.jks` et ses mots de passe en lieu sûr, **hors du dépôt** : sans eux, il est
 impossible de publier une mise à jour installable par-dessus l'application existante.
 
-**À chaque version**, au choix :
+**À chaque version**, vérifier que les assets finaux et leur inventaire font partie du commit à publier.
+Une mise à jour du code seule réutilise ces données sans les régénérer. Puis, au choix :
 
 - pousser un tag :
   ```bash

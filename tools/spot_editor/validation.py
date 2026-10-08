@@ -45,6 +45,7 @@ def validation_plan(root: Path) -> tuple[Step, ...]:
         Step("Contrôle Ruff", tools, (sys.executable, "-m", "ruff", "check", ".")),
         Step("Format Ruff", tools, (sys.executable, "-m", "ruff", "format", "--check", ".")),
         Step("Tests Python", tools, (sys.executable, "-m", "pytest", "-q")),
+        Step("Tests du pipeline", tools, (sys.executable, "-m", "pytest", "-q", "-m", "pipeline")),
     ]
     if any(importlib.util.find_spec(module) is None for module in ("ruff", "pytest")):
         install = (sys.executable, "-m", "pip", "install", "-r", "tools/requirements-dev.txt")

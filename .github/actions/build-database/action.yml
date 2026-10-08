@@ -36,7 +36,12 @@ runs:
         python tools/build_data.py
         echo "Génération des données (cache restauré selon disponibilité) : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
 
-    - name: Tests du pipeline
+    - name: Tests des assets générés
       shell: bash
       working-directory: tools
       run: python -m pytest -q
+
+    - name: Tests du pipeline
+      shell: bash
+      working-directory: tools
+      run: python -m pytest -q -m pipeline

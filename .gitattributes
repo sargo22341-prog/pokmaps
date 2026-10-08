@@ -1,0 +1,5 @@
+# Garder les empreintes identiques entre les checkouts Windows et Linux.
+/app/src/main/assets/**/*.webp binary
+/app/src/main/assets/database/*.db binary
+/app/src/main/assets/licenses/*.txt text eol=lf
+/app/src/main/assets/assets.sha256 text eol=lf

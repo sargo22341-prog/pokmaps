@@ -70,8 +70,8 @@ jobs:
             echo "empty=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Générer les données (base + images)
-        uses: ./.github/actions/build-database
+      - name: Vérifier les assets versionnés
+        uses: ./.github/actions/check-assets
 
       - uses: actions/setup-java@v5
         with:

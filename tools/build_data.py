@@ -12,11 +12,13 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import shutil
 import sqlite3
 import sys
 from pathlib import Path
 
 # Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
+from pokemaps_data.asset_manifest import write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import ALL_GAMES, GAMES, GAMES_IN_PROGRESS, Game
 from pokemaps_data.maps import build_maps
@@ -45,6 +47,9 @@ def main() -> int:
     print(f"Données de l'application ({', '.join(game.version_group for game in GAMES)}) : {args.assets}")
     if not _build(api, args.cache, repos, args.assets, GAMES):
         return 1
+    if args.assets.resolve() != DEFAULT_ASSETS.resolve():
+        shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
+    write_manifest(args.assets)
     if GAMES_IN_PROGRESS:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)
         print(f"Aperçu avec les jeux en cours d'intégration ({names}) : {args.preview}")

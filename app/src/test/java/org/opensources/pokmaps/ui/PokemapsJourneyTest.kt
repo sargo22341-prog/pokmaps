@@ -23,7 +23,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
 import java.io.File
-import org.junit.Assume.assumeTrue
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +35,7 @@ import org.robolectric.annotation.Config
 
 /**
  * Parcours principaux sur l'application complète : vraie base générée, navigation, ViewModels et Hilt ;
- * seules les préférences sont neuves à chaque test (`TestSettingsModule`). Ignoré si la base n'a pas été générée.
+ * seules les préférences sont neuves à chaque test (`TestSettingsModule`). La base versionnée doit être présente.
  */
 @HiltAndroidTest
 @RunWith(RobolectricTestRunner::class)
@@ -49,8 +49,8 @@ class PokemapsJourneyTest {
 
     @Before
     fun requireDatabase() {
-        assumeTrue(
-            "Base absente : lancer tools/build_data.py",
+        assertTrue(
+            "Asset versionné absent : database/pokedex.db",
             File(System.getProperty("pokemaps.database").orEmpty()).isFile
         )
     }

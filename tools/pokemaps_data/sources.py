@@ -1,7 +1,7 @@
 """Sources de données, figées sur des commits précis pour des builds reproductibles.
 
 - PokéAPI : export CSV du dépôt PokeAPI/pokeapi (mêmes données que l'API https://pokeapi.co).
-  On télécharge les CSV une fois au build : l'application n'appelle jamais l'API
+  On télécharge les CSV manquants lors d'une génération explicite : l'application n'appelle jamais l'API
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
 - PokeAPI/sprites : sprites animés de Noir et Blanc (normaux et chromatiques), seul style de sprite des Pokémon.
 - msikma/pokesprite : icônes d'objets.

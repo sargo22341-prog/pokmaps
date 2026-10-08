@@ -5,14 +5,13 @@ import java.sql.Connection
 import java.sql.DriverManager
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Assume.assumeTrue
 import org.junit.Test
 
 class GeneratedMapSectionsTest {
     @Test
     fun everyBuildingHasOnlyOneBadgePerLevelAndSafariHousesStaySeparate() {
         val database = File(System.getProperty("pokemaps.database").orEmpty())
-        assumeTrue("Base absente : lancer tools/build_data.py", database.isFile)
+        assertTrue("Asset versionné absent : database/pokedex.db", database.isFile)
         DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)

@@ -17,3 +17,5 @@ testpaths = ["tests"]
 # Les tests importent pokemaps_data depuis tools/, quel que soit le dossier de lancement.
 pythonpath = ["."]
 filterwarnings = ["error"]
+addopts = "-m 'not pipeline' --strict-markers"
+markers = ["pipeline: génération ou lecture des sources épinglées ; nécessite tools/.cache"]

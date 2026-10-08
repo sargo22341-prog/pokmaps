@@ -18,11 +18,11 @@ build/
 # OS
 .DS_Store
 
-# Données générées par tools/build_data.py
-/app/src/main/assets/database/
-/app/src/main/assets/sprites/
-/app/src/main/assets/maps/
+# Sources brutes et cache de génération (les assets finaux sont versionnés)
 /tools/.cache/
+/app/src/main/assets/**/*.tmp*
+/app/src/main/assets/**/*.part
+/app/src/main/assets/**/*.db-*
 
 # Python
 __pycache__/

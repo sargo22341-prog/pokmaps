@@ -1,3 +1,4 @@
+import java.security.MessageDigest
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 
 plugins {
@@ -198,5 +199,58 @@ tasks.register("checkNoGoogleServices") {
 }
 
 tasks.named("check") {
-    dependsOn("checkNoGoogleServices")
+    dependsOn("checkNoGoogleServices", "checkAssets")
+}
+
+val bundledAssets = layout.projectDirectory.dir("src/main/assets")
+
+tasks.register("checkAssets") {
+    group = "verification"
+    description = "Vérifie les assets versionnés indispensables, sans générer ni télécharger de contenu."
+    inputs.dir(bundledAssets)
+    doLast {
+        val root = bundledAssets.asFile
+        val manifest = root.resolve("assets.sha256")
+        check(manifest.isFile) { "Inventaire des assets absent : $manifest. Restaurer les assets depuis Git." }
+        val entries = manifest.readLines()
+        check(entries.isNotEmpty() && entries.size <= 20000) { "Inventaire des assets vide ou trop volumineux." }
+        val paths = mutableSetOf<String>()
+        entries.forEach { entry ->
+            val parts = entry.split("  ", limit = 2)
+            check(parts.size == 2 && parts[0].matches(Regex("[0-9a-f]{64}"))) {
+                "Entrée d'inventaire invalide : $entry"
+            }
+            val asset = root.resolve(parts[1])
+            check(asset.canonicalFile.toPath().startsWith(root.canonicalFile.toPath())) {
+                "Chemin d'asset invalide : ${parts[1]}"
+            }
+            check(paths.add(parts[1])) { "Asset en double : ${parts[1]}" }
+            check(asset.isFile) { "Asset indispensable absent : $asset. Restaurer ce fichier depuis Git." }
+            val digest = MessageDigest.getInstance("SHA-256")
+            asset.inputStream().use { stream ->
+                val buffer = ByteArray(65536)
+                var count = stream.read(buffer)
+                while (count != -1) {
+                    digest.update(buffer, 0, count)
+                    count = stream.read(buffer)
+                }
+            }
+            val actual = digest.digest().joinToString("") { "%02x".format(it) }
+            check(actual == parts[0]) {
+                "Asset différent de l'inventaire : $asset. Vérifier la mise à jour des données."
+            }
+        }
+        check("database/pokedex.db" in paths && "licenses/meteocons.txt" in paths) {
+            "Base ou licence indispensable absente de l'inventaire."
+        }
+        logger.lifecycle("OK : ${paths.size} assets versionnés vérifiés.")
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn("checkAssets")
+}
+
+tasks.withType<Test>().configureEach {
+    dependsOn("checkAssets")
 }

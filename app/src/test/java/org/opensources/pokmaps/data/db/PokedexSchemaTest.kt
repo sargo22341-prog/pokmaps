@@ -7,14 +7,14 @@ import java.sql.Connection
 import java.sql.DriverManager
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assume.assumeTrue
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
 /**
  * Vérifie que la base générée par tools/build_data.py correspond exactement aux entités Room
  * (tables, colonnes, types, NOT NULL, clés primaires, index), comme Room le contrôle à l'ouverture
- * de la base pré-remplie. Ignoré si la base n'a pas été générée.
+ * de la base pré-remplie. La base versionnée doit être présente.
  */
 class PokedexSchemaTest {
     private lateinit var connection: Connection
@@ -27,7 +27,7 @@ class PokedexSchemaTest {
             System.getProperty("pokemaps.roomSchemas").orEmpty(),
             "${PokedexDatabase::class.java.name}/${PokedexDatabase.VERSION}.json"
         )
-        assumeTrue("Base absente : lancer tools/build_data.py", database.isFile)
+        assertTrue("Asset versionné absent : database/pokedex.db", database.isFile)
         assertEquals("Schéma Room introuvable : $schemaFile", true, schemaFile.isFile)
         schema = JsonParser.parseString(schemaFile.readText()).asJsonObject.getAsJsonObject("database")
         connection = DriverManager.getConnection("jdbc:sqlite:${database.path}")

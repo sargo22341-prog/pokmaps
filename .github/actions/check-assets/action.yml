@@ -1,0 +1,27 @@
+name: Vérifier les assets versionnés
+description: Valide les ressources finales et les tests sans sources téléchargées ni génération.
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.13"
+        cache: pip
+        cache-dependency-path: tools/requirements*.txt
+
+    - name: Installer les outils de vérification
+      shell: bash
+      run: pip install -r tools/requirements-dev.txt
+
+    - name: Vérifier les assets embarqués
+      shell: bash
+      run: python tools/check_assets.py
+
+    - name: Lint et tests sans sources externes
+      shell: bash
+      working-directory: tools
+      run: |
+        ruff check .
+        ruff format --check .
+        python -m pytest -q
