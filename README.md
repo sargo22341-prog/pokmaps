@@ -259,6 +259,22 @@ Pokémon à placer sur ce terrain, avec leur version, leurs niveaux et leur prob
 emplacement, centré sur la case de 16 px ; cliquer sur un emplacement le retire. « Vider ce terrain » retire tous ses
 emplacements.
 
+« Carte affichée » permet de basculer entre Rouge/Bleu et Jaune, ou entre Or/Argent et Cristal. Le plan,
+les rencontres et les calques suivent ce choix. La case « Points uniquement pour … » est cochée automatiquement
+pour le groupe affiché : les ajouts et retraits ne concernent que ce groupe. La décocher permet de retoucher
+les emplacements communs à la famille. Lors de la première retouche propre à un groupe, les points communs
+servent de départ ; la liste obtenue remplace ensuite les points communs pour ce terrain dans ce groupe.
+Les modifications restent en attente pendant les changements de carte.
+
+Les coordonnées du curseur et du centre de la case survolée s'affichent en bas à droite. Les boutons « + »,
+« − » et la molette permettent de zoomer et dézoomer ; « Ajuster » remet la carte à la taille de la fenêtre.
+Glisser avec le bouton droit déplace la carte agrandie. Les points invalides sont signalés en jaune avec « ! ».
+La section « Erreurs à corriger » recense tous les problèmes : cliquer sur une erreur ouvre les jeux, le lieu
+et le terrain concernés, puis centre la carte sur le point. « Retirer le point sélectionné » le supprime
+des modifications en attente, même s'il est hors du lieu. Les corrections sont sauvegardées par
+« Enregistrer toutes les cartes ». Le rapport local `tools/build/map_spot_errors.json` est actualisé
+au démarrage, après chaque modification et lors de la validation ; aucune donnée n'est téléchargée.
+
 Les cases « Afficher sur la carte » dessinent, à la taille de l'application, ce que la carte finale montre autour des
 emplacements : entrées, objets et objets cachés, dresseurs, personnages et installations, Pokémon fixes. L'« aperçu des
 Pokémon sauvages » (décoché par défaut) pose un sprite du terrain sur chaque emplacement pour juger la place qu'ils
@@ -269,14 +285,22 @@ Un avertissement apparaît quand un terrain a moins d'emplacements que de Pokém
 demande le plus) : l'application les rangerait alors en grille au milieu du terrain. L'enregistrement demande une
 confirmation s'il reste de tels terrains.
 
-Les positions sont communes à tous les jeux d'une même famille de cartes (`map_family` dans
+Les positions peuvent être communes à tous les jeux d'une même famille de cartes (`map_family` dans
 `tools/pokemaps_data/games.py`) : Or, Argent et Cristal ont leur propre famille, et leurs emplacements ne se
 mélangent pas à ceux de Rouge, Bleu et Jaune. Seuls les terrains réellement modifiés sont écrits dans `tools/data/map_spots.csv`
-(colonnes `family,map_identifier,kind,x,y`, une ligne sans coordonnées pour un terrain vide) ; les autres restent
-calculés par la génération. Le bouton « Enregistrer toutes les cartes » écrit ensemble les modifications de tous les
-lieux, puis lance `tools/build_data.py`, Ruff et les tests Python. Si Ruff ou pytest manque dans le Python qui exécute
-l'éditeur, leurs dépendances épinglées sont installées depuis `tools/requirements-dev.txt`. Une confirmation apparaît
-après la réussite de toutes les étapes ; une fenêtre d'erreur précise l'étape et la sortie en cas d'échec.
+(colonnes `family,map_identifier,kind,x,y`, puis `version_group` dès qu'un groupe est ciblé ; une valeur vide
+conserve la portée commune, une ligne sans coordonnées marque un terrain vide) ; les autres restent
+calculés par la génération. Le bouton « Enregistrer toutes les cartes » valide localement les terrains et les
+coordonnées, puis écrit les modifications dans `tools/data/map_spots.csv`. Il ne lance aucune génération,
+installation, aucun téléchargement ni test. Les clics hors du terrain choisi sont refusés ; les points doivent
+appartenir à ce terrain dans les jeux ciblés qui contiennent le lieu. Les anciens points invalides
+restent visibles pour pouvoir les retirer ; ils bloquent l'enregistrement avec un message indiquant le lieu
+et les coordonnées. L'éditeur utilise la base, les images et les sources pret déjà présentes sur le PC.
+Le sol des grottes tient compte des zones accessibles avec Surf, même si aucun chemin terrestre ne les relie
+à l'entrée. Or/Argent et Cristal ont parfois des plans différents : les erreurs précisent les versions qui
+refusent la case, et le choix « Carte affichée » permet d'examiner les deux plans.
+Pour intégrer ensuite les emplacements dans l'application, lancer explicitement `python tools/build_data.py`
+puis les contrôles décrits ci-dessous.
 
 ## Compiler en local
 

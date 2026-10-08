@@ -8,8 +8,8 @@ Les cases sont en pas de 16 px. Chaque format pret a sa règle, celle de son mot
   glace, ailleurs seulement les collisions d'herbe et d'eau de CheckGrassCollision. Les arbres (CheckHeadbuttTreeTile)
   ne comptent que dans les cartes de TreeMonMaps, les rochers (objets SmashRockScript) dans celles de RockMonMaps.
 
-Le sol est restreint aux cases accessibles à pied depuis les warps : le bord des grottes est souvent praticable
-mais isolé.
+Le sol est restreint aux cases accessibles depuis les warps : à pied en première génération, à pied ou
+avec Surf en deuxième génération. La glace peut être traversée sans accueillir de rencontre.
 """
 
 from __future__ import annotations
@@ -41,9 +41,23 @@ def wild_cells(repo: PretReader, pret_map: PretMap) -> dict[str, list[Cell]]:
     match repo:
         case PretRepo():
             cells, blocked = _gen1_cells(repo, pret_map, warps)
+            cells["floor"] = reachable(cells["floor"], warps, blocked)
         case Gen2PretRepo():
             cells, blocked = _gen2_cells(repo, pret_map, warps)
-    cells["floor"] = reachable(cells["floor"], warps, blocked)
+            accessible = set(reachable(_gen2_passable(repo, pret_map), warps, blocked))
+            cells["floor"] = [cell for cell in cells["floor"] if cell in accessible]
+    return cells
+
+
+def _gen2_passable(repo: Gen2PretRepo, pret_map: PretMap) -> list[Cell]:
+    """Surf et glace relient les zones terrestres ; les murs restent infranchissables."""
+    tileset = repo.tilesets[pret_map.tileset]
+    cells = []
+    for y in range(pret_map.height * 2):
+        for x in range(pret_map.width * 2):
+            collision = tileset.collisions[pret_map.block(x // 2, y // 2)][(y % 2) * 2 + x % 2]
+            if repo.collisions.permissions[collision] in (_LAND, _WATER):
+                cells.append((x, y))
     return cells
 
 

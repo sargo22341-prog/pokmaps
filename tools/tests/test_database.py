@@ -8,7 +8,7 @@ import pytest
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.games import map_families
-from pokemaps_data.map_spots import TerrainKey, read_spots
+from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key
 from pokemaps_data.maps_characters import ObjectRow
 from pokemaps_data.maps_characters_data import read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier
@@ -366,6 +366,10 @@ def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlit
     families = map_families()
     for key, points in curated.items():
         for identifier in families[key.family]:
+            if key.version_group and key.version_group != identifier:
+                continue
+            if selected_key(curated, key, identifier) != key:
+                continue
             group = groups[identifier]
             rows = db.execute(
                 """SELECT s.x, s.y FROM map_spot s JOIN map m ON m.id = s.map_id

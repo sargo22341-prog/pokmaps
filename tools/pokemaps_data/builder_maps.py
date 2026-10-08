@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from .games import Game, complete_families
-from .map_spots import Point, TerrainKey, read_spots
+from .map_spots import Point, TerrainKey, read_spots, selected_key
 from .maps import GameMapData
 from .maps_characters import ObjectRow
 from .maps_characters_data import CharacterNames, read_character_names
@@ -73,13 +73,19 @@ class _SpotRows:
     def add_game(self, version_group: str, data: GameMapData, ids: dict[str, int]) -> None:
         family = self.families[version_group]
         for spot in data.spots:
-            if TerrainKey(family, identifier(spot.map_const), spot.kind) not in self.curated:
+            key = TerrainKey(family, identifier(spot.map_const), spot.kind)
+            if selected_key(self.curated, key, version_group) not in self.curated:
                 self.rows.append((len(self.rows) + 1, ids[spot.map_const], spot.kind, spot.x, spot.y))
         bounds = {identifier(row.const): (ids[row.const], row) for row in data.maps}
         # Un terrain n'a d'emplacements générés que si le jeu y fait apparaître des Pokémon sauvages.
         terrains = {(identifier(spot.map_const), spot.kind) for spot in data.spots}
         for key, points in sorted(self.curated.items()):
             if key.family != family or key.map_identifier not in bounds:
+                continue
+            if key.version_group and key.version_group != version_group:
+                continue
+            if selected_key(self.curated, key, version_group) != key:
+                self.used.add(key)
                 continue
             if (key.map_identifier, key.kind) not in terrains:
                 where = f"{key.kind} de {key.map_identifier} ({version_group})"

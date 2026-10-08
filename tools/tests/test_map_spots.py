@@ -7,7 +7,7 @@ import pytest
 
 from pokemaps_data.builder_maps import _SpotRows
 from pokemaps_data.games import GAMES
-from pokemaps_data.map_spots import TerrainKey, read_spots, write_spots
+from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key, write_spots
 
 if TYPE_CHECKING:
     from pokemaps_data.maps_layout import GameMaps
@@ -78,7 +78,7 @@ def test_trees_and_rocks_of_a_game_in_progress(tmp_path: Path) -> None:
         rows.check_all_used({"red-blue-yellow", "gold-silver-crystal"})
 
 
-def test_gen2_curated_kanto_points_stay_on_their_terrain(
+def test_gen2_curated_points_stay_on_their_target_terrain(
     gold_silver_maps: "GameMaps", crystal_repo: "Gen2PretRepo"
 ) -> None:
     from pokemaps_data.games import CRYSTAL
@@ -90,7 +90,10 @@ def test_gen2_curated_kanto_points_stay_on_their_terrain(
     for key, points in curated.items():
         const = key.map_identifier.upper().replace("-", "_")
         for maps in (gold_silver_maps, crystal_maps):
-            placed = maps.placements[const]
-            assert placed.display == "KANTO"
+            group = maps.game.version_group
+            if key.version_group and key.version_group != group:
+                continue
+            if selected_key(curated, key, group) != key:
+                continue
             valid = {maps.point(const, x, y) for x, y in maps.cells(const)[key.kind]}
             assert points <= valid, key

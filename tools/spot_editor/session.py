@@ -6,7 +6,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 
-from pokemaps_data.map_spots import Point, TerrainKey
+from pokemaps_data.map_spots import Point, TerrainKey, selected_key
 
 
 class Toggle(Enum):
@@ -45,6 +45,9 @@ class SpotSession:
             return self.pending[key]
         return self.curated.get(key, generated)
 
+    def effective_points(self, key: TerrainKey, generated: frozenset[Point]) -> frozenset[Point]:
+        return self.points(selected_key(self.merged(), key, key.version_group), generated)
+
     def toggle(
         self, key: TerrainKey, generated: frozenset[Point], point: Point, hit: Callable[[Point], bool]
     ) -> Toggle:
@@ -59,6 +62,9 @@ class SpotSession:
 
     def clear(self, key: TerrainKey, generated: frozenset[Point]) -> None:
         self._set(key, generated, frozenset())
+
+    def remove(self, key: TerrainKey, generated: frozenset[Point], point: Point) -> None:
+        self._set(key, generated, self.points(key, generated) - {point})
 
     def merged(self) -> dict[TerrainKey, frozenset[Point]]:
         """Contenu complet de map_spots.csv une fois les modifications appliquées."""

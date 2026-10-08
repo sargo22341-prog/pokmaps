@@ -168,6 +168,11 @@ class EditorCatalog:
                 )
         return sorted(found.values(), key=lambda editor_map: editor_map.name)
 
+    def version_map(self, family: Family, identifier: str, version_group: str) -> EditorMap | None:
+        """Plan et identifiants du seul groupe choisi, pour ses tuiles, rencontres et calques."""
+        selected = Family(family.identifier, family.label, (version_group,))
+        return next((found for found in self.maps(selected) if found.identifier == identifier), None)
+
     def world_names(self, family: Family) -> dict[str, str]:
         """Cartes du monde des jeux de la famille (une par région) : identifiant -> nom (« johto » -> « Johto »)."""
         groups = family.version_groups

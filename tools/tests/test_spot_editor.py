@@ -1,14 +1,14 @@
 """Règles de l'éditeur d'emplacements, sans fenêtre : catalogue, état d'édition et contrôles."""
 
-import queue
-import sys
 from pathlib import Path
 
-from pokemaps_data.map_spots import TerrainKey
-from spot_editor.catalog import EditorCatalog, EditorMap, EncounterLine, required_spots, used_by_app
+import pytest
+
+from pokemaps_data.map_spots import TerrainKey, read_spots
+from spot_editor.catalog import EditorCatalog, EditorMap, EncounterLine, Family, required_spots, used_by_app
 from spot_editor.session import SpotSession, Toggle
 from spot_editor.terrain import WildTerrains
-from spot_editor.validation import Step, StepEvent, StepState, run_steps, validation_plan
+from spot_editor.validation import save_spots
 
 CACHE = Path(__file__).resolve().parent.parent / ".cache"
 
@@ -159,30 +159,78 @@ def test_every_place_belongs_to_a_region(preview_database: Path) -> None:
     assert (regions["victory-road"], regions["silver-cave-room-1"]) == ("johto", "johto")
 
 
-def test_validation_stops_at_the_first_failing_step(tmp_path: Path) -> None:
-    events: queue.Queue[StepEvent] = queue.Queue()
-    steps = (
-        Step("ok", tmp_path, (sys.executable, "-c", "pass")),
-        Step("ko", tmp_path, (sys.executable, "-c", "import sys; print('détail'); sys.exit(3)")),
-        Step("jamais", tmp_path, (sys.executable, "-c", "pass")),
+class LocalTerrains:
+    def rejected_versions(
+        self, _family: Family, _identifier: str, _kind: str, _point: tuple[int, int]
+    ) -> tuple[str, ...]:
+        return ("Rouge/Bleu",)
+
+    def kinds(self, _family: Family, _identifier: str) -> frozenset[str]:
+        return frozenset({"grass"})
+
+    def points(self, _family: Family, _identifier: str, _kind: str) -> frozenset[tuple[int, int]]:
+        return GENERATED
+
+
+def test_save_only_writes_csv(tmp_path: Path) -> None:
+    family = Family(KEY.family, "Rouge, Bleu et Jaune", ("red-blue", "yellow"))
+    session = SpotSession({})
+    session.clear(KEY, GENERATED)
+    path = tmp_path / "map_spots.csv"
+    save_spots(session, [family], LocalTerrains(), path)
+    assert read_spots(path) == {KEY: frozenset()}
+    assert not session.has_changes
+    assert list(tmp_path.iterdir()) == [path]
+
+
+def test_invalid_points_keep_file_and_pending_changes(tmp_path: Path) -> None:
+    family = Family(KEY.family, "Rouge, Bleu et Jaune", ("red-blue", "yellow"))
+    session = SpotSession({})
+    session.toggle(KEY, GENERATED, (488, 456), never)
+    path = tmp_path / "map_spots.csv"
+    path.write_text("original", encoding="utf-8")
+    with pytest.raises(ValueError, match="rencontres sauvages dans Rouge/Bleu"):
+        save_spots(session, [family], LocalTerrains(), path)
+    assert path.read_text(encoding="utf-8") == "original"
+    assert session.has_changes
+
+
+@pytest.mark.usefixtures("source_cache_ready")
+def test_dark_cave_points_are_rejected_locally() -> None:
+    terrains = WildTerrains(CACHE)
+    family = Family("gold-silver-crystal", "Or, Argent et Cristal", ("gold-silver", "crystal"))
+    valid = terrains.points(family, "dark-cave-violet-entrance", "floor")
+    assert valid
+    assert not valid & {(488, 456), (504, 312), (504, 376)}
+
+
+@pytest.mark.usefixtures("source_cache_ready")
+def test_floor_reached_with_surf_is_valid_in_all_versions() -> None:
+    terrains = WildTerrains(CACHE)
+    family = Family("gold-silver-crystal", "Or, Argent et Cristal", ("gold-silver", "crystal"))
+    assert {(56, 40), (56, 104), (152, 72), (184, 104)} <= terrains.points(family, "slowpoke-well-b2f", "floor")
+    assert {(40, 376), (56, 280), (216, 360), (248, 264), (264, 72), (264, 104)} <= terrains.points(
+        family, "union-cave-b2f", "floor"
     )
-    run_steps(steps, events)
-    received = [events.get_nowait() for _ in range(events.qsize())]
-    assert [(event.state, event.label) for event in received] == [
-        (StepState.PROGRESS, "ok"),
-        (StepState.PROGRESS, "ko"),
-        (StepState.FAILURE, "ko"),
-    ]
-    assert "détail" in received[-1].output
 
 
-def test_validation_reports_success(tmp_path: Path) -> None:
-    events: queue.Queue[StepEvent] = queue.Queue()
-    run_steps((Step("ok", tmp_path, (sys.executable, "-c", "pass")),), events)
-    assert [events.get_nowait().state for _ in range(events.qsize())] == [StepState.PROGRESS, StepState.SUCCESS]
+@pytest.mark.usefixtures("source_cache_ready")
+def test_changed_crystal_map_names_the_version_rejecting_the_point() -> None:
+    terrains = WildTerrains(CACHE)
+    family = Family("gold-silver-crystal", "Or, Argent et Cristal", ("gold-silver", "crystal"))
+    assert terrains.rejected_versions(family, "mount-mortar-2f-inside", "water", (216, 152)) == ("Cristal",)
+    session = SpotSession({TerrainKey(family.identifier, "mount-mortar-2f-inside", "water"): frozenset({(216, 152)})})
+    from spot_editor.validation import spot_errors
+
+    [error] = spot_errors(session, [family], terrains)
+    assert "dans Cristal" in error.message
 
 
-def test_editor_runs_both_asset_and_pipeline_tests(tmp_path: Path) -> None:
-    commands = [step.command for step in validation_plan(tmp_path)]
-    assert (sys.executable, "-m", "pytest", "-q") in commands
-    assert (sys.executable, "-m", "pytest", "-q", "-m", "pipeline") in commands
+@pytest.mark.usefixtures("source_cache_ready")
+def test_gold_silver_only_point_is_not_validated_against_crystal() -> None:
+    from spot_editor.validation import spot_errors
+
+    terrains = WildTerrains(CACHE)
+    family = Family("gold-silver-crystal", "Or, Argent et Cristal", ("gold-silver", "crystal"))
+    key = TerrainKey(family.identifier, "mount-mortar-2f-inside", "water", "gold-silver")
+    assert spot_errors(SpotSession({key: frozenset({(216, 152)})}), [family], terrains) == []

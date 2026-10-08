@@ -1,81 +1,78 @@
-"""Génération des données et contrôles Python lancés après un enregistrement, dans un fil séparé."""
+"""Validation locale des emplacements avant écriture, sans génération ni réseau."""
 
-from __future__ import annotations
-
-import importlib.util
-import os
-import queue
-import subprocess
-import sys
+import json
 from dataclasses import dataclass
-from enum import Enum
 from pathlib import Path
 
-# Une étape bloquée (réseau, disque) ne doit pas figer l'éditeur indéfiniment.
-_STEP_TIMEOUT_S = 1800
-# Fin de sortie gardée pour la fenêtre d'erreur : l'erreur utile est à la fin.
-_OUTPUT_TAIL = 6000
+from pokemaps_data.map_spots import Point, TerrainKey, selected_key, write_spots
 
-
-class StepState(Enum):
-    PROGRESS = "progress"
-    SUCCESS = "success"
-    FAILURE = "failure"
+from .catalog import Family
+from .session import SpotSession
+from .terrain import WildTerrains
 
 
 @dataclass(frozen=True)
-class Step:
-    label: str
-    cwd: Path
-    command: tuple[str, ...]
+class SpotError:
+    key: TerrainKey
+    point: Point | None
+    message: str
+
+    @property
+    def label(self) -> str:
+        location = f"{self.point[0]}, {self.point[1]}" if self.point else "terrain"
+        scope = f" · {self.key.version_group}" if self.key.version_group else ""
+        return f"{self.key.map_identifier}{scope} · {self.key.kind} · {location} : {self.message}"
 
 
-@dataclass(frozen=True)
-class StepEvent:
-    state: StepState
-    label: str
-    output: str = ""
+def spot_errors(session: SpotSession, families: list[Family], terrains: WildTerrains) -> list[SpotError]:
+    """Recense toutes les erreurs pour pouvoir les corriger sans recommencer une validation par point."""
+    by_family = {family.identifier: family for family in families}
+    errors = []
+    merged = session.merged()
+    for key, points in sorted(merged.items()):
+        family = by_family.get(key.family)
+        if family is None:
+            continue
+        groups = tuple(
+            group
+            for group in family.version_groups
+            if (not key.version_group or key.version_group == group) and selected_key(merged, key, group) == key
+        )
+        if not groups:
+            continue
+        family = Family(family.identifier, family.label, groups)
+        if key.kind not in terrains.kinds(family, key.map_identifier):
+            errors.append(SpotError(key, None, "Aucun Pokémon sauvage sur ce terrain"))
+            continue
+        for point in sorted(points - terrains.points(family, key.map_identifier, key.kind)):
+            versions = ", ".join(terrains.rejected_versions(family, key.map_identifier, key.kind, point))
+            errors.append(SpotError(key, point, f"Case non retenue pour les rencontres sauvages dans {versions}"))
+    return errors
 
 
-def validation_plan(root: Path) -> tuple[Step, ...]:
-    """Étapes à lancer ; Ruff et pytest sont d'abord installés (versions épinglées) s'ils manquent."""
-    tools = root / "tools"
-    steps = [
-        Step("Génération des données", root, (sys.executable, "tools/build_data.py")),
-        Step("Contrôle Ruff", tools, (sys.executable, "-m", "ruff", "check", ".")),
-        Step("Format Ruff", tools, (sys.executable, "-m", "ruff", "format", "--check", ".")),
-        Step("Tests Python", tools, (sys.executable, "-m", "pytest", "-q")),
-        Step("Tests du pipeline", tools, (sys.executable, "-m", "pytest", "-q", "-m", "pipeline")),
+def write_errors(errors: list[SpotError], path: Path) -> None:
+    """Rapport local remplaçable, conservé entre les ouvertures de l'éditeur."""
+    rows = [
+        {
+            "family": item.key.family,
+            "map": item.key.map_identifier,
+            "kind": item.key.kind,
+            "version_group": item.key.version_group,
+            "point": item.point,
+            "message": item.message,
+        }
+        for item in errors
     ]
-    if any(importlib.util.find_spec(module) is None for module in ("ruff", "pytest")):
-        install = (sys.executable, "-m", "pip", "install", "-r", "tools/requirements-dev.txt")
-        steps.insert(0, Step("Installation des outils manquants", root, install))
-    return tuple(steps)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(path)
 
 
-def run_steps(steps: tuple[Step, ...], events: queue.Queue[StepEvent]) -> None:
-    """Lance les étapes dans l'ordre et s'arrête à la première qui échoue ; publie chaque avancée dans `events`."""
-    for step in steps:
-        events.put(StepEvent(StepState.PROGRESS, step.label))
-        try:
-            result = subprocess.run(
-                step.command,
-                cwd=step.cwd,
-                stdin=subprocess.DEVNULL,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                # Sous Windows, Python écrit sinon dans la page de code de la console : accents illisibles.
-                env={**os.environ, "PYTHONIOENCODING": "utf-8"},
-                timeout=_STEP_TIMEOUT_S,
-                check=False,
-            )
-        except (OSError, subprocess.TimeoutExpired) as error:
-            events.put(StepEvent(StepState.FAILURE, step.label, str(error)))
-            return
-        if result.returncode != 0:
-            output = (result.stdout + result.stderr).strip()[-_OUTPUT_TAIL:]
-            events.put(StepEvent(StepState.FAILURE, step.label, output or f"Code de sortie {result.returncode}"))
-            return
-    events.put(StepEvent(StepState.SUCCESS, "Terminé"))
+def save_spots(session: SpotSession, families: list[Family], terrains: WildTerrains, path: Path) -> None:
+    """Refuse les points invalides avant de remplacer le CSV ; conserve les changements en cas d'échec."""
+    errors = spot_errors(session, families, terrains)
+    if errors:
+        raise ValueError(f"{len(errors)} erreur(s). {errors[0].label}. Consultez la liste des erreurs.")
+    write_spots(session.merged(), path)
+    session.mark_written()

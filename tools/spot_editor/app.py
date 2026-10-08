@@ -6,9 +6,7 @@ généré par build_data.py, et non les assets de l'application qui ne les conti
 
 from __future__ import annotations
 
-import queue
 import sqlite3
-import threading
 import tkinter as tk
 from collections.abc import Callable
 from pathlib import Path
@@ -17,21 +15,25 @@ from tkinter import messagebox, ttk
 from PIL import Image
 
 from pokemaps_data.games import GAMES_IN_PROGRESS
-from pokemaps_data.map_spots import SPOTS_CSV, Point, TerrainKey, read_spots, write_spots
+from pokemaps_data.map_spots import SPOTS_CSV, Point, TerrainKey, read_spots, selected_key
 from pokemaps_data.sources import PREVIEW_DIR
 
 from .canvas import SpotCanvas
-from .catalog import EditorCatalog, EditorMap, EncounterLine, MapMark, required_spots, used_by_app
+from .catalog import EditorCatalog, EditorMap, EncounterLine, Family, MapMark, required_spots, used_by_app
+from .error_panel import ErrorPanel
 from .overlays import Layer, OverlayPainter, wild_preview
+from .placement_requirements import placement_shortfalls, shortfall_text
 from .rendering import MapImages
-from .session import Shortfall, SpotSession
+from .session import SpotSession
 from .terrain import WildTerrains
-from .validation import StepEvent, StepState, run_steps, validation_plan
+from .validation import SpotError, save_spots, spot_errors, write_errors
+from .version_choice import VersionChoice
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = PREVIEW_DIR if GAMES_IN_PROGRESS else ROOT / "app/src/main/assets"
 DATABASE = ASSETS / "database/pokedex.db"
 CACHE = ROOT / "tools/.cache"
+ERROR_REPORT = ROOT / "tools/build/map_spot_errors.json"
 TERRAIN_LABELS = {
     "grass": "Herbes hautes (marche)",
     "floor": "Sol des grottes et bâtiments (marche)",
@@ -40,7 +42,6 @@ TERRAIN_LABELS = {
     "rock": "Rochers (Éclate-Roc)",
 }
 ALL_REGIONS = "Toutes les régions"
-_POLL_MS = 100
 _WARNING_COLOR = "#b3261e"
 
 
@@ -67,10 +68,11 @@ class MapEditor:
         self.layers = {layer: tk.BooleanVar(value=layer is not Layer.WILD_PREVIEW) for layer in Layer}
         self.generated: dict[str, frozenset[Point]] = {}
         self.terrains: list[str] = []
-        self.events: queue.Queue[StepEvent] = queue.Queue()
-        self.running = False
+        self.errors: list[SpotError] = []
         self._build_window()
         self._load_family()
+        self._update_errors()
+        self._refresh()
 
     # --- Construction -----------------------------------------------------------
 
@@ -82,13 +84,18 @@ class MapEditor:
         self.root.rowconfigure(0, weight=1)
         self.root.protocol("WM_DELETE_WINDOW", self._close)
         self._build_sidebar(ttk.Frame(self.root, padding=10))
-        self.canvas = SpotCanvas(self.root, self._click)
-        self.canvas.widget.grid(row=0, column=1, sticky="nsew")
+        right = ttk.Frame(self.root)
+        right.grid(row=0, column=1, sticky="nsew")
+        self.error_panel = ErrorPanel(right, self._go_to_error, self._remove_error)
+        self.error_panel.widget.pack(fill="x", pady=(0, 4))
+        self.canvas = SpotCanvas(right, self._click)
+        self.canvas.widget.pack(fill="both", expand=True)
 
     def _build_sidebar(self, side: ttk.Frame) -> None:
         side.grid(row=0, column=0, sticky="ns")
         self.family_choice = self._combobox(side, "Jeux", [family.label for family in self.families])
         self.family_choice.bind("<<ComboboxSelected>>", lambda _event: self._choose_family())
+        self.version_choice = VersionChoice(side, self._select_map, self._refresh)
         self.region_choice = self._combobox(side, "Région", [])
         self.region_choice.bind("<<ComboboxSelected>>", lambda _event: self._show_region())
         self.map_choice = self._combobox(side, "Route, lieu ou étage", [])
@@ -96,7 +103,7 @@ class MapEditor:
         self.terrain_choice = self._combobox(side, "Terrain", [])
         self.terrain_choice.bind("<<ComboboxSelected>>", lambda _event: self._select_terrain())
         ttk.Label(side, text="Pokémon à placer sur ce terrain").pack(anchor="w")
-        self.encounters = tk.Listbox(side, width=52, height=12, activestyle="none")
+        self.encounters = tk.Listbox(side, width=52, height=7, activestyle="none")
         self.encounters.pack(fill="both", expand=True, pady=(4, 8))
         ttk.Label(side, text="Afficher sur la carte").pack(anchor="w")
         for layer, shown in self.layers.items():
@@ -128,6 +135,7 @@ class MapEditor:
 
     def _load_family(self, keep: str | None = None) -> None:
         """Lieux de la famille, et régions où les ranger (le lieu `keep` reste choisi s'il existe encore)."""
+        self.version_choice.show(self.family)
         self.family_maps = self.catalog.maps(self.family)
         self.map_regions = {
             found.identifier: self.wild_terrains.region(self.family, found.identifier) for found in self.family_maps
@@ -161,13 +169,17 @@ class MapEditor:
         self._show(self.maps[index])
 
     def _show(self, editor_map: EditorMap | None) -> None:
+        if editor_map is not None:
+            editor_map = self.catalog.version_map(self.family, editor_map.identifier, self.version_choice.group)
         previous = self.terrain_choice.current()
         previous_kind = self.terrains[previous] if 0 <= previous < len(self.terrains) else None
         self.current = editor_map
         self.lines = self.catalog.encounters(editor_map) if editor_map else []
         self.generated = self.catalog.generated_spots(editor_map) if editor_map else {}
         self.marks = self.catalog.marks(editor_map) if editor_map else []
-        possible = self.wild_terrains.kinds(self.family, editor_map.identifier) if editor_map else frozenset()
+        possible = (
+            self.wild_terrains.kinds(self._editing_family(), editor_map.identifier) if editor_map else frozenset()
+        )
         self.terrains = [
             kind for kind in TERRAIN_LABELS if kind in possible and any(kind in line.terrains for line in self.lines)
         ]
@@ -204,40 +216,66 @@ class MapEditor:
     def _key(self, kind: str) -> TerrainKey | None:
         if self.current is None:
             return None
-        return TerrainKey(self.family.identifier, self.current.identifier, kind)
+        group = self.version_choice.group if self.version_choice.only_displayed.get() else ""
+        return TerrainKey(self.family.identifier, self.current.identifier, kind, group)
+
+    def _editing_family(self) -> Family:
+        groups = (
+            (self.version_choice.group,) if self.version_choice.only_displayed.get() else self.family.version_groups
+        )
+        return Family(self.family.identifier, self.family.label, groups)
+
+    def _generated(self, kind: str) -> frozenset[Point]:
+        if self.current is None:
+            return frozenset()
+        common = TerrainKey(self.family.identifier, self.current.identifier, kind)
+        return self.session.points(common, self.generated.get(kind, frozenset()))
 
     def _points(self, kind: str) -> frozenset[Point]:
         key = self._key(kind)
-        return frozenset() if key is None else self.session.points(key, self.generated.get(kind, frozenset()))
+        return frozenset() if key is None else self.session.points(key, self._generated(kind))
 
     def _used(self, kind: str) -> bool:
         return used_by_app(kind, bool(self._points("grass")), bool(self._points("floor")))
 
     def _click(self, x: float, y: float, hit: Callable[[Point], bool]) -> None:
         kind = self._kind()
-        if self.running or self.current is None or kind is None:
+        if self.current is None or kind is None:
             return
         point = self.current.snap(x, y)
         key = self._key(kind)
         if point is None or key is None:
             return
-        self.session.toggle(key, self.generated.get(kind, frozenset()), point, hit)
+        points = self._points(kind)
+        removing = any(hit(existing) for existing in points)
+        if not removing and point not in self.wild_terrains.points(
+            self._editing_family(), self.current.identifier, kind
+        ):
+            self.status.configure(text="Cette case n'appartient pas au terrain choisi dans les jeux ciblés.")
+            return
+        self.session.toggle(key, self._generated(kind), point, hit)
+        self._update_errors()
         self._refresh()
 
     def _clear_terrain(self) -> None:
         kind = self._kind()
         key = self._key(kind) if kind else None
-        if self.running or key is None or kind is None:
+        if key is None or kind is None:
             return
         name = TERRAIN_LABELS[kind].lower()
         if messagebox.askyesno("Vider ce terrain", f"Retirer tous les emplacements « {name} » de ce lieu ?"):
-            self.session.clear(key, self.generated.get(kind, frozenset()))
+            self.session.clear(key, self._generated(kind))
+            self._update_errors()
             self._refresh()
 
     def _refresh(self) -> None:
         kind = self._kind()
         points = self._points(kind) if kind else frozenset()
-        self.canvas.show(self.current, self._image(kind, points) if kind else None, points)
+        key = self._key(kind) if kind else None
+        if key is not None and key.version_group:
+            key = selected_key(self.session.merged(), key, key.version_group)
+        invalid = frozenset(error.point for error in self.errors if error.key == key and error.point)
+        self.canvas.show(self.current, self._image(kind, points) if kind else None, points, invalid)
         self.warning.configure(text=self._warning(kind, len(points)) if kind else "")
         if self.current is None or kind is None:
             self.status.configure(text="")
@@ -269,121 +307,77 @@ class MapEditor:
 
     # --- Enregistrement et vérifications ------------------------------------------
 
+    def _update_errors(self) -> None:
+        self.errors = spot_errors(self.session, self.families, self.wild_terrains)
+        self.error_panel.show(self.errors)
+        try:
+            write_errors(self.errors, ERROR_REPORT)
+        except OSError as error:
+            messagebox.showerror("Rapport d'erreurs non enregistré", f"{ERROR_REPORT}\n\n{error}")
+
+    def _go_to_error(self, error: SpotError) -> None:
+        index = next((i for i, family in enumerate(self.families) if family.identifier == error.key.family), None)
+        if index is None:
+            return
+        self.family_choice.current(index)
+        self.family = self.families[index]
+        self._load_family(error.key.map_identifier)
+        if error.key.version_group:
+            self.version_choice.select(error.key.version_group)
+            self._select_map()
+        else:
+            self.version_choice.only_displayed.set(False)
+        if self.current is None or self.current.identifier != error.key.map_identifier:
+            self.status.configure(text="Cette carte est absente de la base de l'éditeur.")
+            return
+        if error.key.kind not in self.terrains:
+            self.terrains.append(error.key.kind)
+            self.terrain_choice["values"] = [TERRAIN_LABELS[kind] for kind in self.terrains]
+        self.terrain_choice.current(self.terrains.index(error.key.kind))
+        self._select_terrain()
+        if error.point is not None:
+            self.canvas.focus(error.point)
+        self.status.configure(text=error.label)
+
+    def _remove_error(self, error: SpotError) -> None:
+        if error.point is None:
+            self._go_to_error(error)
+            return
+        self.session.remove(error.key, frozenset(), error.point)
+        self._update_errors()
+        self._refresh()
+
     def _save(self) -> None:
-        if self.running:
+        self._update_errors()
+        if self.errors:
+            self.status.configure(text=f"{len(self.errors)} erreur(s) : cliquez dans la liste pour les corriger.")
             return
         if not self.session.has_changes:
             self.status.configure(text="Aucune modification à enregistrer.")
             return
-        shortfalls = self._shortfalls()
-        if shortfalls and not messagebox.askyesno("Emplacements insuffisants", _shortfall_text(shortfalls)):
-            return
-        try:
-            write_spots(self.session.merged())
-        except OSError as error:
-            messagebox.showerror("Enregistrement impossible", f"{SPOTS_CSV}\n\n{error}")
-            return
-        self.session.mark_written()
-        self._start_validation()
-
-    def _shortfalls(self) -> list[Shortfall]:
-        """Terrains modifiés, de tous les jeux, qui ont moins d'emplacements que de Pokémon à placer."""
-        maps = {
-            (family.identifier, found.identifier): found
-            for family in self.families
-            for found in self.catalog.maps(family)
-        }
-        return self.session.shortfalls(lambda key: self._required(maps.get((key.family, key.map_identifier)), key))
-
-    def _required(self, editor_map: EditorMap | None, key: TerrainKey) -> tuple[str, int]:
-        """Nom du lieu et nombre de Pokémon à placer sur ce terrain (0 si l'application ne l'utilise pas)."""
-        if editor_map is None:
-            return key.map_identifier, 0
-        generated = self.catalog.generated_spots(editor_map)
-
-        def has(kind: str) -> bool:
-            terrain = TerrainKey(key.family, key.map_identifier, kind)
-            return bool(self.session.points(terrain, generated[kind]))
-
-        if not used_by_app(key.kind, has("grass"), has("floor")):
-            return editor_map.name, 0
-        return editor_map.name, required_spots(self.catalog.encounters(editor_map), key.kind)
-
-    def _start_validation(self) -> None:
-        self.running = True
-        self._set_enabled(False)
-        self.status.configure(text="Emplacements enregistrés. Génération et vérifications en cours…")
-        # La génération remplace pokedex.db : la base ne doit pas rester ouverte (verrou sous Windows).
-        self.catalog.close()
-        steps = validation_plan(ROOT)
-        threading.Thread(target=run_steps, args=(steps, self.events), daemon=True).start()
-        self.root.after(_POLL_MS, self._poll_validation)
-
-    def _poll_validation(self) -> None:
-        try:
-            event = self.events.get_nowait()
-        except queue.Empty:
-            self.root.after(_POLL_MS, self._poll_validation)
-            return
-        if event.state is StepState.PROGRESS:
-            self.status.configure(text=f"En cours : {event.label}…")
-            self.root.after(_POLL_MS, self._poll_validation)
-            return
-        self._finish_validation(event)
-
-    def _finish_validation(self, event: StepEvent) -> None:
-        keep = self.current.identifier if self.current else None
-        try:
-            self.catalog = EditorCatalog(DATABASE)
-            self.families = self.catalog.families()
-            self.family = next(family for family in self.families if family.identifier == self.family.identifier)
-        except (OSError, sqlite3.Error, StopIteration) as error:
-            messagebox.showerror("Base illisible", f"Impossible de rouvrir la base après la génération :\n{error}")
-            self.root.destroy()
-            return
-        self.running = False
-        self._set_enabled(True)
-        self._load_family(keep)
-        if event.state is StepState.SUCCESS:
-            self.status.configure(text="Génération et vérifications réussies.")
-            messagebox.showinfo("Validation terminée", "Les données ont été générées et vérifiées.")
-            return
-        self.status.configure(text=f"Échec pendant : {event.label}")
-        messagebox.showerror(
-            "Validation échouée",
-            f"Les emplacements sont enregistrés dans map_spots.csv, mais une étape a échoué.\n\n"
-            f"Étape : {event.label}\n\n{event.output}",
-        )
-
-    def _set_enabled(self, enabled: bool) -> None:
-        for box in (self.family_choice, self.region_choice, self.map_choice, self.terrain_choice):
-            box.configure(state="readonly" if enabled else tk.DISABLED)
-        for button in (self.save_button, self.clear_button):
-            button.configure(state=tk.NORMAL if enabled else tk.DISABLED)
-
-    def _close(self) -> None:
-        if self.running and not messagebox.askyesno(
-            "Vérifications en cours", "La génération est en cours. Fermer quand même l'éditeur ?"
+        shortfalls = placement_shortfalls(self.catalog, self.families, self.session)
+        if shortfalls and not messagebox.askyesno(
+            "Emplacements insuffisants", shortfall_text(shortfalls, TERRAIN_LABELS)
         ):
             return
+        try:
+            save_spots(self.session, self.families, self.wild_terrains, SPOTS_CSV)
+        except (OSError, ValueError) as error:
+            messagebox.showerror("Enregistrement impossible", f"{SPOTS_CSV}\n\n{error}")
+            return
+        self._refresh()
+        self.status.configure(text="Emplacements enregistrés dans map_spots.csv.")
+        messagebox.showinfo(
+            "Enregistrement terminé", "Les emplacements ont été enregistrés, sans génération de données."
+        )
+
+    def _close(self) -> None:
         if self.session.has_changes and not messagebox.askyesno(
             "Modifications non enregistrées",
             "Des emplacements modifiés ne sont pas enregistrés. Fermer sans enregistrer ?",
         ):
             return
         self.root.destroy()
-
-
-def _shortfall_text(shortfalls: list[Shortfall]) -> str:
-    lines = "\n".join(
-        f"• {item.map_name} — {TERRAIN_LABELS[item.key.kind]} : "
-        f"{item.points} emplacement(s) pour {item.required} Pokémon"
-        for item in shortfalls
-    )
-    return (
-        f"Ces terrains ont moins d'emplacements que de Pokémon à placer :\n\n{lines}\n\n"
-        "L'application les rangera en grille au milieu du terrain. Enregistrer quand même ?"
-    )
 
 
 def main() -> None:
