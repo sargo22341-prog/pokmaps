@@ -33,6 +33,12 @@ salles des Ruines d'Alpha, Sanctuaire du Dragon), ses rencontres et échanges, l
 Pension, Suicune à la Tour Ferraille et les attaques par tuteur. Le tuteur coûte 4 000 jetons ; les récompenses de
 Buena affichent leur prix en points de la Carte Bleue.
 
+Le menu des régions distingue la région sélectionnée. En deuxième génération, le bouton de la carte affiche
+une icône animée au changement de moment (matin, jour, nuit ou tout). La liste des Pokémon d'une route ou d'un
+bâtiment reprend ce choix à l'ouverture ; ses filtres de moment et de capture (tout, marche, pêche, surf)
+restent locaux à la liste. Les points de Kanto retouchés en première génération sont repris en deuxième
+génération lorsqu'ils correspondent encore au même terrain, avec des emplacements supplémentaires au besoin.
+
 ## Captures d'écran
 
 | Carte et Pokémon sauvages | Pokédex | Fiche Pokémon | Lieux d'un Pokémon |

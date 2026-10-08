@@ -342,4 +342,7 @@
     <string name="unown_form">Zarbi %1$s</string>
     <string name="unown_progress">Formes capturées : %1$d / %2$d</string>
     <string name="unown_empty">Aucune forme disponible dans cette génération.</string>
+    <string name="map_choose_world">Choisir une région</string>
+    <string name="map_selected_world">Région sélectionnée</string>
+    <string name="map_method_walk">Marche</string>
 </resources>

@@ -32,6 +32,7 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
@@ -109,6 +110,7 @@ internal fun ZoneListSheet(
     zone: MapZone,
     caught: Set<Int>,
     timed: Boolean = false,
+    initialTime: TimeFilter = TimeFilter.ALL,
     onDismiss: () -> Unit,
     onOpenPlace: (MapPlace) -> Unit,
     onOpenPokemon: (Int) -> Unit,
@@ -124,9 +126,9 @@ internal fun ZoneListSheet(
         ) {
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
             if (timed && !zone.loading && !zone.failed) {
-                TimedZoneEncounters(zone, caught, onOpenPokemon)
+                TimedZoneEncounters(zone, caught, initialTime, onOpenPokemon)
             } else {
-                ZoneEncounters(zone, caught, onOpenPokemon)
+                FilteredZoneEncounters(zone, caught, onOpenPokemon)
             }
             ZoneItems(zone, onOpenItem, onShowObject)
             ZonePlaces(zone, onOpenPlace)
@@ -135,7 +137,7 @@ internal fun ZoneListSheet(
 }
 
 @Composable
-private fun ZoneEncounters(zone: MapZone, caught: Set<Int>, onOpenPokemon: (Int) -> Unit) {
+internal fun ZoneEncounters(zone: MapZone, caught: Set<Int>, onOpenPokemon: (Int) -> Unit) {
     when {
         zone.loading -> CircularProgressIndicator(Modifier.padding(16.dp))
 

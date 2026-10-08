@@ -1,12 +1,17 @@
 """Lecture et écriture de tools/data/map_spots.csv."""
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
 from pokemaps_data.builder_maps import _SpotRows
 from pokemaps_data.games import GAMES
 from pokemaps_data.map_spots import TerrainKey, read_spots, write_spots
+
+if TYPE_CHECKING:
+    from pokemaps_data.maps_layout import GameMaps
+    from pokemaps_data.pret_gen2 import Gen2PretRepo
 
 HEADER = "family,map_identifier,kind,x,y\n"
 ROUTE_1 = TerrainKey("red-blue-yellow", "route-1", "grass")
@@ -71,3 +76,21 @@ def test_trees_and_rocks_of_a_game_in_progress(tmp_path: Path) -> None:
     rows.check_all_used({"red-blue-yellow"})
     with pytest.raises(ValueError, match="cartes absentes des jeux de leur famille"):
         rows.check_all_used({"red-blue-yellow", "gold-silver-crystal"})
+
+
+def test_gen2_curated_kanto_points_stay_on_their_terrain(
+    gold_silver_maps: "GameMaps", crystal_repo: "Gen2PretRepo"
+) -> None:
+    from pokemaps_data.games import CRYSTAL
+    from pokemaps_data.maps_layout import GameMaps, read_layout_curation
+
+    crystal_maps = GameMaps(crystal_repo, CRYSTAL, read_layout_curation())
+    curated = {key: points for key, points in read_spots().items() if key.family == "gold-silver-crystal"}
+    assert len(curated) >= 26
+    for key, points in curated.items():
+        const = key.map_identifier.upper().replace("-", "_")
+        for maps in (gold_silver_maps, crystal_maps):
+            placed = maps.placements[const]
+            assert placed.display == "KANTO"
+            valid = {maps.point(const, x, y) for x, y in maps.cells(const)[key.kind]}
+            assert points <= valid, key

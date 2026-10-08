@@ -91,33 +91,49 @@ fun MapScreen(
 
     Box(modifier.fillMaxSize()) {
         MapCanvas(state)
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            if (state.worlds.size > 1) {
-                WorldSelector(state, onAction, Modifier.weight(1f))
-            } else {
-                MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
-            }
-            if ((state.game?.generationId ?: 0) >= 2) {
-                TimeButton(state.time) { onAction(MapAction.CycleTime) }
-            }
-            LayersButton(state.layers) { onAction(MapAction.ToggleLayer(it)) }
-        }
+        MapToolbar(state, onAction)
         Floors(state, onAction)
         BottomPanel(state, snackbar, onAction, onOpenPokemon, onOpenItem)
     }
 
+    MapZoneSheet(state, onAction, onOpenPokemon, onOpenItem)
+}
+
+@Composable
+private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .align(Alignment.TopStart)
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        if (state.worlds.size > 1) {
+            WorldSelector(state, onAction, Modifier.weight(1f))
+        } else {
+            MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
+        }
+        if ((state.game?.generationId ?: 0) >= 2) {
+            TimeButton(state.time, iconOnly = true) { onAction(MapAction.CycleTime) }
+        }
+        LayersButton(state.layers) { onAction(MapAction.ToggleLayer(it)) }
+    }
+}
+
+@Composable
+private fun MapZoneSheet(
+    state: MapUiState,
+    onAction: (MapAction) -> Unit,
+    onOpenPokemon: (Int) -> Unit,
+    onOpenItem: (String) -> Unit
+) {
     val zone = state.zone
     if (state.zoneListOpen && zone != null) {
         ZoneListSheet(
             zone = zone,
             timed = (state.game?.generationId ?: 0) >= 2,
+            initialTime = state.time,
             caught = state.caught,
             onDismiss = { onAction(MapAction.CloseZoneList) },
             onOpenPlace = { onAction(MapAction.OpenPlace(it)) },
