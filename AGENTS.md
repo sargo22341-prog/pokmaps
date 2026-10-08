@@ -72,7 +72,9 @@ conçue pour accueillir ensuite d'autres jeux. Carte et Pokédex sont liés dans
 
 - Package : `org.opensources.pokmaps` ; le debug s'installe sous `org.opensources.pokmaps.debug`.
 - **100 % hors ligne** : base `pokedex.db`, cartes et sprites sont générés par `tools/` et embarqués
-  dans les assets. L'application ne fait aucune requête réseau pour ses données.
+  dans les assets, ainsi que les guides et listes de succès. Exception explicitement demandée : connexion
+  facultative à RetroAchievements, uniquement en lecture et sur synchronisation manuelle dans les Réglages.
+  La clé reste chiffrée localement, exclue des sauvegardes ; aucun succès n'est modifié.
 - Interface **en français uniquement** : tout texte visible vient de `res/values/strings.xml`.
 - Distribution par GitHub Releases uniquement, usage personnel, pas de Play Store.
 - Ne rien récupérer de pokemaps.net : utiliser les mêmes sources que lui (`README.md`).

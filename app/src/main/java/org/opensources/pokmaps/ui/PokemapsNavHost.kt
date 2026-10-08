@@ -17,10 +17,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.ui.about.AboutScreen
 import org.opensources.pokmaps.ui.character.CharacterRoute
 import org.opensources.pokmaps.ui.character.CharacterViewModel
 import org.opensources.pokmaps.ui.game.GameRoute
+import org.opensources.pokmaps.ui.guide.GuideLinks
+import org.opensources.pokmaps.ui.guide.GuideRoute
 import org.opensources.pokmaps.ui.item.ItemLinks
 import org.opensources.pokmaps.ui.item.ItemRoute
 import org.opensources.pokmaps.ui.item.ItemViewModel
@@ -40,6 +43,7 @@ import org.opensources.pokmaps.ui.settings.SettingsRoute
 enum class TopLevelDestination(val route: String, @StringRes val label: Int, @DrawableRes val icon: Int) {
     MAP("map", R.string.nav_map, R.drawable.ic_map),
     POKEDEX("pokedex", R.string.nav_pokedex, R.drawable.ic_pokedex),
+    GUIDES("guides", R.string.nav_guides, R.drawable.ic_guide),
     GAME("game", R.string.nav_game, R.drawable.ic_cartridge)
 }
 
@@ -89,6 +93,7 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
         composable(TopLevelDestination.MAP.route) { MapRoute(onOpenPokemon = openPokemon, onOpenItem = openItem) }
         composable(TopLevelDestination.POKEDEX.route) { PokedexRoute(onOpenPokemon = openPokemon) }
         composable(TopLevelDestination.GAME.route) { GameRoute() }
+        composable(TopLevelDestination.GUIDES.route) { GuideDestination(navController) }
         composable(POKEMON_ROUTE, listOf(navArgument(PokemonViewModel.POKEMON_ID) { type = NavType.IntType })) {
             PokemonRoute(PokemonLinks(openPokemon, openItem, openMove), onShowOnMap = showMap)
         }
@@ -112,6 +117,25 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
     }
 }
 
+@Composable
+private fun GuideDestination(navController: NavHostController) {
+    GuideRoute(
+        GuideLinks(
+            open = { target ->
+                val route = when (target) {
+                    is GuideTarget.Pokemon -> "pokemon/${target.id}"
+                    is GuideTarget.Place -> "place/${target.identifier}"
+                    is GuideTarget.Item -> "item/${target.identifier}"
+                    is GuideTarget.Character -> "character/${target.id}"
+                }
+                navController.navigate(route)
+            },
+            showMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) },
+            openPokedex = { navController.navigateToTopLevel(TopLevelDestination.POKEDEX) }
+        )
+    )
+}
+
 private fun AnimatedContentTransitionScope<*>.navigationEnterTransition() =
     fadeIn(tween(NAVIGATION_TRANSITION_DURATION)) +
         scaleIn(initialScale = NAVIGATION_TRANSITION_SCALE, animationSpec = tween(NAVIGATION_TRANSITION_DURATION))
@@ -132,7 +156,7 @@ internal fun NavHostController.navigateToTopLevel(destination: TopLevelDestinati
         // d'afficher la carte ; de même, l'onglet « Jeu » affiche toujours la liste des jeux.
         restoreState = when (destination) {
             TopLevelDestination.MAP, TopLevelDestination.GAME -> false
-            TopLevelDestination.POKEDEX -> true
+            TopLevelDestination.POKEDEX, TopLevelDestination.GUIDES -> true
         }
     }
 }

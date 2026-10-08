@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Ajoute les Guides des six jeux, astuces, événements, reproduction, bonheur, suivi des Pokémon errants, sauvegarde de collection et 519 succès français avec connexion RetroAchievements facultative en lecture seule.
 - Le sbire des caméras du repaire Rocket n'apparaît plus dans le mur de la carte.
 - Les offres des personnages indiquent les jours, moments et étapes du scénario qu'elles exigent ; Cristal ne liste plus une CT12 jamais donnée.
 - Masque les filtres de capture sans rencontre et adopte les icônes colorées Meteocons pour le matin, le jour et la nuit.

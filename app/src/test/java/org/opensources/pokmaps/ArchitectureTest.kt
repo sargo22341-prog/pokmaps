@@ -59,7 +59,7 @@ class ArchitectureTest {
     private companion object {
         const val PACKAGE = "org.opensources.pokmaps"
         const val MAX_FILE_LINES = 600
-        val PURE_DOMAIN = listOf("model", "map", "pokemon", "pokedex")
+        val PURE_DOMAIN = listOf("model", "map", "pokemon", "pokedex", "guide")
         val IGNORED_DIRECTORIES = setOf("build", ".venv", ".cache", "__pycache__", ".ruff_cache", ".pytest_cache")
         val RULE_LINE = Regex("""^\s*([-*+|]|\d+\.|##)""")
     }

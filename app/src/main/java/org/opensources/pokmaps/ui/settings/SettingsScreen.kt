@@ -43,12 +43,21 @@ import org.opensources.pokmaps.ui.common.SpriteSize
 @Composable
 fun SettingsRoute(onOpenAbout: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    SettingsScreen(state, viewModel::onAction, onOpenAbout)
+    SettingsScreen(state, viewModel::onAction, onOpenAbout) {
+        CollectionBackupRoute()
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+        RetroSettingsRoute()
+    }
 }
 
 /** Réglages : sprites animés (partout, ou endroit par endroit), captures comptées, et écran « À propos ». */
 @Composable
-fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, onOpenAbout: () -> Unit) {
+fun SettingsScreen(
+    state: SettingsUiState,
+    onAction: (SettingsAction) -> Unit,
+    onOpenAbout: () -> Unit,
+    content: @Composable () -> Unit = {}
+) {
     Column(
         Modifier
             .fillMaxSize()
@@ -66,6 +75,8 @@ fun SettingsScreen(state: SettingsUiState, onAction: (SettingsAction) -> Unit, o
         HorizontalDivider(Modifier.padding(vertical = 8.dp))
         SettingsTitle(stringResource(R.string.settings_collection))
         CaptureScopeSetting(state.captureScope) { onAction(SettingsAction.SetCaptureScope(it)) }
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+        content()
         HorizontalDivider(Modifier.padding(vertical = 8.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,

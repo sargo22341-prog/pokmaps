@@ -51,13 +51,16 @@ les offres des personnages, les règles de capture et la concordance Room/SQLite
 ## Compléments utiles, selon le périmètre souhaité
 
 - **Guide de reproduction et de bonheur, génération 2.** Les groupes d'œufs, cycles, attaques par
-  œuf et seuils d'évolution sont présents. Un outil de compatibilité des parents, d'héritage des
-  attaques et un guide des gains de bonheur compléteraient les fiches ; ils ne sont pas implémentés.
-- **Suivi des Pokémon errants, génération 2.** Les routes possibles sont disponibles ; il n'y a
-  pas de suivi de leur position ou de leur déplacement au cours d'une partie.
-- **Sauvegarde de collection.** Les captures et favoris sont mémorisés localement ; aucun parcours
-  d'export/import utilisateur n'est proposé. Un format validé et versionné faciliterait leur transfert
-  quand la collection couvrira davantage de générations.
+  œuf et seuils d'évolution sont présents. L'onglet Guides ajoute un outil de compatibilité des parents
+  (groupes, sexes et DV), une simulation des quatre attaques à l'éclosion à partir des attaques cochées
+  des parents et un calculateur des gains et pertes de bonheur selon les seuils du jeu.
+- **Suivi des Pokémon errants, génération 2.** L'onglet Guides conserve le dernier lieu observé
+  de Raikou, Entei et, dans Or/Argent, Suicune. Les routes proposées suivent pret et sont reliées à la carte.
+  Le suivi est manuel ; il ne prédit pas un déplacement et ne lit pas la sauvegarde du jeu.
+- **Sauvegarde de collection.** Les Réglages proposent un export/import JSON versionné et validé,
+  qui fusionne captures par version, favoris, étapes de guide et observations des Pokémon errants.
+  Les clés API, connexions et autres réglages sont exclus.
 
-Ces compléments ne sont pas des défauts de la carte actuelle. Ils doivent être choisis explicitement
-avant de transformer l'application en guide de progression ou en simulateur de partie.
+Ces compléments ont été demandés explicitement, ainsi que les soluces, quêtes annexes, événements hebdomadaires,
+astuces, glitches et 519 succès traduits. Une connexion facultative RetroAchievements lit uniquement
+la progression, sur demande ; le suivi manuel et les guides restent utilisables hors ligne.

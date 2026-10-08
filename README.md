@@ -6,14 +6,54 @@ attaques (effet et probabilité de l'effet) et Pokédex.
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
 - **Aucun service Google Play** : l'application fonctionne sur GrapheneOS
-- 100 % hors-ligne : toutes les données sont embarquées dans une base SQLite et les assets ; l'application n'a pas
-  la permission Internet
+- Cartes, Pokédex, guides et listes de succès entièrement hors ligne : toutes leurs données sont embarquées.
+  Une connexion RetroAchievements facultative lit la progression du compte, uniquement sur demande dans les Réglages.
 - Identifiant de l'application : `org.opensources.pokmaps`
 
 Le jeu se choisit dans l'onglet « Jeu » de la barre du bas, classé par génération, et reste mémorisé. Dans les
 Réglages, « Captures comptées » fait compter un Pokémon capturé pour le jeu choisi, pour sa génération ou pour tous
 les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
 rien.
+
+L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuces, bugs et succès du jeu choisi.
+Or, Argent et Cristal ajoutent les événements hebdomadaires, le suivi manuel du dernier lieu observé des bêtes
+légendaires, un vérificateur de reproduction (sexes, groupes d'œufs, DV et héritage des attaques) et un calculateur
+de gains de bonheur. Les noms dans les textes ouvrent des fiches compactes reliées au Pokédex et à la carte.
+Les sprites et leur réglage d'animation sont réutilisés. Les chapitres proposent les succès liés, en signalant
+les objectifs manquables avant de poursuivre.
+
+Les 519 succès officiels sont un instantané traduit en français du 8 octobre 2026 : Rouge (93), Bleu (90),
+Jaune (76), Or (72), Argent (75) et Cristal (113). Le suivi manuel est local et indépendant des succès acquis
+sur le compte. Le compteur de captures utilise uniquement les captures de la version choisie ; les objectifs
+de collection utilisent leur véritable objectif (124, 124, 129, 199, 199 ou 206) et excluent les espèces nécessitant
+un échange externe ou un événement externe. Les choix de Pokémon de départ, de fossile, du Dojo, d'évolution
+d'Évoli en génération 1 et de pierres élémentaires limitées dans Or/Argent sont comptés par alternative,
+sans additionner des branches incompatibles. Les autres restrictions du succès restent à respecter dans le jeu.
+Les textes ne constituent pas une lecture de la sauvegarde de l'émulateur.
+
+Dans les Réglages, renseigner le nom d'utilisateur et la **clé API web** RetroAchievements, enregistrer puis
+choisir « Synchroniser ». Seul l'endpoint GET
+[`API_GetGameInfoAndUserProgress.php`](https://api-docs.retroachievements.org/v1/get-game-info-and-user-progress.html)
+est appelé, une fois par jeu ; aucun succès ni compte n'est modifié. Aucune requête ne part au lancement ou
+lors du choix d'un jeu. Les résultats acquis et hardcore restent disponibles hors ligne ; un échec de lecture
+conserve la dernière synchronisation. La clé est chiffrée avec Android Keystore dans `noBackupFilesDir`, sans
+trace dans les journaux ni export. « Déconnecter » supprime la connexion et son cache, sans toucher au suivi manuel.
+Sur GrapheneOS, autoriser « Network » dans les permissions de Pokémaps pour cette connexion.
+La permission Internet sert à cette option ; les cartes et le Pokédex n'utilisent aucune API réseau.
+
+« Sauvegarde de collection » exporte un JSON `pokmaps-collection`, schéma 1, avec captures par version, favoris,
+formes de Zarbi, étapes cochées et observations des Pokémon errants. L'import valide le document entier (taille maximale 1 Mo)
+avant une fusion atomique : captures, favoris et étapes sont réunis ; une observation importée remplace celle du
+même Pokémon. Les autres réglages et les identifiants RetroAchievements sont exclus. Le sélecteur de documents
+Android choisit le fichier, sans permission de stockage générale.
+
+Pour ajouter ou retirer un guide : modifier les définitions de `data/guide/` et les textes français de
+`res/values/strings.xml`. Les listes de succès sont séparées par jeu, avec identifiant officiel, points,
+caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`, `[[place:route-1|Route 1]]`,
+`[[item:potion|Potion]]` et `[[character:oaks-lab:Prof. Chen|Professeur Chen]]` sont validées au chargement.
+Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les six bibliothèques
+contre la base générée et vérifie leurs liens et nombres de succès. Les soluces sont des textes originaux ;
+leurs sources éditoriales et les désassemblages pret sont accessibles depuis chaque article.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
 Le bouton à droite défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
