@@ -7,6 +7,20 @@ import androidx.room.Query
 interface PokemonDao {
     @Query(
         """
+        SELECT DISTINCT p.id AS pokemonId, p.gender_rate AS genderRate, eg.name_fr AS groupName
+        FROM pokemon p
+        JOIN pokedex_entry pe ON pe.pokemon_id = p.id
+        JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+        LEFT JOIN pokemon_egg_group peg ON peg.pokemon_id = p.id
+        LEFT JOIN egg_group eg ON eg.id = peg.egg_group_id
+        WHERE vgp.version_group_id = :versionGroupId
+        ORDER BY p.id, eg.id
+        """
+    )
+    suspend fun breedingProfiles(versionGroupId: Int): List<BreedingRow>
+
+    @Query(
+        """
         SELECT p.id, p.name_fr AS name, p.name_en AS nameEn, p.genus_fr AS genus, p.description_fr AS description,
             p.height_dm AS heightDm, p.weight_hg AS weightHg, p.capture_rate AS captureRate,
             g.name_fr AS growthRate, p.evolution_chain_id AS evolutionChainId, p.gender_rate AS genderRate,

@@ -26,7 +26,11 @@ class BreedingUseCase @Inject constructor(
     private val pokemon: PokemonRepository
 ) : BreedingTools {
     override fun observe(): Flow<BreedingCatalog> = games.selectedGame.map {
-        BreedingCatalog(it, if (it.generationId == 2) pokedex.pokedex(it) else emptyList())
+        if (it.generationId == 2) {
+            BreedingCatalog(it, pokedex.pokedex(it), pokemon.breedingProfiles(it))
+        } else {
+            BreedingCatalog(it, emptyList())
+        }
     }.flowOn(Dispatchers.IO)
 
     override suspend fun pair(game: Game, firstId: Int, secondId: Int, firstSex: ParentSex): BreedingPair =
@@ -41,7 +45,7 @@ class BreedingUseCase @Inject constructor(
                 else -> second
             }
             val root = requireNotNull(mother.evolutions.singleOrNull())
-            val ids = if (mother.id == 29) listOf(29, 32) else listOf(root.pokemonId)
+            val ids = if (root.pokemonId == 29) listOf(29, 32) else listOf(root.pokemonId)
             val babies = ids.map { requireNotNull(pokemon.details(game, it)) }
             BreedingPair(first, second, babies)
         }

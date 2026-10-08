@@ -35,6 +35,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -93,6 +94,7 @@ fun MapScreen(
         MapCanvas(state)
         MapToolbar(state, onAction)
         Floors(state, onAction)
+        ConnectionSwitch(state, onAction)
         BottomPanel(state, snackbar, onAction, onOpenPokemon, onOpenItem)
     }
 
@@ -118,6 +120,25 @@ private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit
             TimeButton(state.time, iconOnly = true) { onAction(MapAction.CycleTime) }
         }
         LayersButton(state.layers, (state.game?.generationId ?: 0) >= 2) { onAction(MapAction.ToggleLayer(it)) }
+    }
+}
+
+@Composable
+private fun BoxScope.ConnectionSwitch(state: MapUiState, onAction: (MapAction) -> Unit) {
+    if (!state.hasConnections || MapLayer.WARPS !in state.layers) return
+    Surface(
+        modifier = Modifier.align(Alignment.TopStart).padding(top = FLOORS_TOP, start = 8.dp),
+        shape = MaterialTheme.shapes.medium,
+        tonalElevation = 3.dp
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(horizontal = 12.dp)
+        ) {
+            Text(stringResource(R.string.map_connection_lines))
+            Switch(checked = state.showConnections, onCheckedChange = { onAction(MapAction.ToggleConnections) })
+        }
     }
 }
 

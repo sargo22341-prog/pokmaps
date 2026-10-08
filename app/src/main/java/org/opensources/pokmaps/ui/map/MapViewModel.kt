@@ -94,6 +94,11 @@ class MapViewModel @Inject constructor(
 
             is MapAction.ToggleLayer -> toggleLayer(action.layer)
 
+            MapAction.ToggleConnections -> {
+                session.update { it.copy(showConnections = !it.showConnections) }
+                session.refreshOverlays()
+            }
+
             MapAction.ClearHighlight -> clearHighlight()
 
             MapAction.ClearZone -> selection.clearZone()

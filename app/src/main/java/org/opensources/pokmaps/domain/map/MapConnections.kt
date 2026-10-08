@@ -3,7 +3,14 @@ package org.opensources.pokmaps.domain.map
 import kotlin.math.abs
 
 /** Liaison entre deux zones affichées ensemble, avec les coordonnées exactes de leurs passages. */
-data class MapConnection(val warpId: Int, val x: Int, val y: Int, val targetX: Int, val targetY: Int)
+data class MapConnection(
+    val warpId: Int,
+    val x: Int,
+    val y: Int,
+    val targetX: Int,
+    val targetY: Int,
+    val warpIds: Set<Int> = setOf(warpId)
+)
 
 internal object MapConnections {
     fun build(catalog: MapCatalog, mapId: Int): List<MapConnection> {
@@ -15,7 +22,13 @@ internal object MapConnections {
             val tx = warp.targetX ?: continue
             val ty = warp.targetY ?: continue
             val connection = MapConnection(warp.id, warp.x, warp.y, tx, ty)
-            if (connections.none { samePassage(it, connection) }) connections += connection
+            val index = connections.indexOfFirst { samePassage(it, connection) }
+            if (index < 0) {
+                connections += connection
+            } else {
+                val previous = connections[index]
+                connections[index] = previous.copy(warpIds = previous.warpIds + warp.id)
+            }
         }
         return connections
     }

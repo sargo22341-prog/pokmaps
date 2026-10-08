@@ -61,6 +61,17 @@ class MapViewModelTest {
     }
 
     @Test
+    fun connectionLinesAreInitiallyHiddenAndCanBeToggled() {
+        val model = viewModel(FakeGameDao())
+        model.onScreenShown()
+        assertFalse(model.state.value.showConnections)
+        model.onAction(MapAction.ToggleConnections)
+        assertTrue(model.state.value.showConnections)
+        model.onAction(MapAction.ToggleConnections)
+        assertFalse(model.state.value.showConnections)
+    }
+
+    @Test
     fun aHiddenMapAppliesTheLatestGameBeforeItsPendingRequest() {
         val dataStore = FakeDataStore()
         val viewModel = viewModel(FakeGameDao(), dataStore = dataStore)

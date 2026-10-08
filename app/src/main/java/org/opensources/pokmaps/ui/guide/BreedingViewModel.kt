@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.guide.BreedingCatalog
 import org.opensources.pokmaps.domain.guide.BreedingPair
+import org.opensources.pokmaps.domain.guide.BreedingPartners
 import org.opensources.pokmaps.domain.guide.BreedingRules
 import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.ParentSex
@@ -30,11 +31,19 @@ data class BreedingUiState(
     val catalog: BreedingCatalog? = null,
     val pair: BreedingPair? = null,
     val firstId: Int = 1,
-    val secondId: Int = BreedingRules.DITTO,
+    val secondId: Int = 1,
+    val firstSelected: Boolean = false,
     val first: ParentValues = ParentValues(ParentSex.FEMALE),
     val second: ParentValues = ParentValues(ParentSex.GENDERLESS),
     val query: String = ""
 ) {
+    val partners: List<PokedexEntry> = catalog?.let { catalog ->
+        val profile = catalog.profiles[firstId] ?: return@let emptyList()
+        catalog.pokemon.filter { entry ->
+            catalog.profiles[entry.pokemonId]?.let { BreedingPartners.compatible(profile, first.sex, it) } == true
+        }
+    }.orEmpty()
+    val partnerChoices: List<PokedexEntry> = PokedexSearch.filter(partners, PokedexFilter(query = query))
     val choices: List<PokedexEntry> = PokedexSearch.filter(catalog?.pokemon.orEmpty(), PokedexFilter(query = query))
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
@@ -49,7 +58,9 @@ data class BreedingUiState(
         }.sortedBy { move -> move.name }
     }.orEmpty()
     val firstSexes: List<ParentSex> = pair?.first?.let(BreedingRules::sexes).orEmpty()
-    val secondSexes: List<ParentSex> = pair?.second?.let(BreedingRules::sexes).orEmpty()
+    val secondSexes: List<ParentSex> = pair?.second?.let(BreedingRules::sexes).orEmpty().filter {
+        firstId == BreedingRules.DITTO || secondId == BreedingRules.DITTO || it == BreedingPartners.opposite(first.sex)
+    }
     val offspringMoves: List<Pair<Int, List<LearnedMove>>> = if (possible) {
         pair?.babies.orEmpty().map { child ->
             val firstDonor = BreedingRules.donorIsFirst(requireNotNull(pair), first, second)
@@ -86,39 +97,48 @@ class BreedingViewModel internal constructor(private val tools: BreedingTools) :
 
     fun onAction(action: BreedingAction) {
         when (action) {
-            is BreedingAction.Species -> {
-                if (state.value.catalog?.pokemon?.none { it.pokemonId == action.id } != false) return
-                mutableState.update {
-                    if (action.first) {
-                        it.copy(firstId = action.id, first = ParentValues(it.first.sex), pair = null)
-                    } else {
-                        it.copy(secondId = action.id, second = ParentValues(it.second.sex), pair = null)
-                    }
-                }
-                loadPair()
-            }
-
-            is BreedingAction.Values -> {
-                val previous = if (action.first) state.value.first else state.value.second
-                if (previous.sex != action.values.sex) {
-                    mutableState.update {
-                        if (action.first) {
-                            it.copy(first = action.values, pair = null)
-                        } else {
-                            it.copy(second = action.values, pair = null)
-                        }
-                    }
-                    loadPair()
-                } else {
-                    mutableState.update {
-                        if (action.first) it.copy(first = action.values) else it.copy(second = action.values)
-                    }
-                }
-            }
-
+            is BreedingAction.Species -> selectSpecies(action)
+            is BreedingAction.Values -> changeValues(action)
             is BreedingAction.Search -> mutableState.update { it.copy(query = action.query.take(100)) }
-
             BreedingAction.Retry -> load()
+        }
+    }
+
+    private fun selectSpecies(action: BreedingAction.Species) {
+        val allowed = if (action.first) state.value.catalog?.pokemon.orEmpty() else state.value.partners
+        if (allowed.none { it.pokemonId == action.id }) return
+        mutableState.update {
+            if (action.first) {
+                val sex = it.catalog?.profiles?.get(action.id)?.sexes?.let { sexes ->
+                    if (ParentSex.FEMALE in sexes) ParentSex.FEMALE else sexes.first()
+                } ?: ParentSex.FEMALE
+                it.copy(firstId = action.id, firstSelected = true, first = ParentValues(sex), pair = null)
+            } else {
+                it.copy(secondId = action.id, second = ParentValues(it.second.sex), pair = null)
+            }
+        }
+        if (action.first) resetPartner()
+        loadPair()
+    }
+
+    private fun changeValues(action: BreedingAction.Values) {
+        val sexes = if (action.first) state.value.firstSexes else state.value.secondSexes
+        if (action.values.sex !in sexes) return
+        val previous = if (action.first) state.value.first else state.value.second
+        if (previous.sex != action.values.sex) {
+            mutableState.update {
+                if (action.first) {
+                    it.copy(first = action.values, pair = null)
+                } else {
+                    it.copy(second = action.values, pair = null)
+                }
+            }
+            if (action.first) resetPartner()
+            loadPair()
+        } else {
+            mutableState.update {
+                if (action.first) it.copy(first = action.values) else it.copy(second = action.values)
+            }
         }
     }
 
@@ -128,10 +148,27 @@ class BreedingViewModel internal constructor(private val tools: BreedingTools) :
             attempt {
                 tools.observe().collect { catalog ->
                     pairJob?.cancel()
-                    mutableState.value = BreedingUiState(loading = false, catalog = catalog)
-                    if (catalog.pokemon.isNotEmpty()) loadPair()
+                    val current = state.value
+                    val retained = current.firstSelected && current.catalog?.game == catalog.game
+                    mutableState.value = if (retained) {
+                        current.copy(catalog = catalog, loading = false, failed = false)
+                    } else {
+                        BreedingUiState(loading = false, catalog = catalog)
+                    }
+                    if (retained) loadPair()
                 }
             }
+        }
+    }
+
+    private fun resetPartner() {
+        mutableState.update { current ->
+            val id = BreedingPartners.defaultPartner(current.firstId, current.partners.map { it.pokemonId })
+                ?: current.firstId
+            val sexes = current.catalog?.profiles?.get(id)?.sexes.orEmpty()
+            val opposite = BreedingPartners.opposite(current.first.sex)
+            val sex = if (opposite in sexes) opposite else sexes.firstOrNull() ?: ParentSex.GENDERLESS
+            current.copy(secondId = id, second = ParentValues(sex))
         }
     }
 
@@ -144,7 +181,14 @@ class BreedingViewModel internal constructor(private val tools: BreedingTools) :
             attempt {
                 var pair = tools.pair(game, snapshot.firstId, snapshot.secondId, snapshot.first.sex)
                 val first = snapshot.first.copy(sex = validSex(pair.first, snapshot.first.sex))
-                val second = snapshot.second.copy(sex = validSex(pair.second, snapshot.second.sex))
+                val preferred = if (snapshot.firstId == BreedingRules.DITTO ||
+                    snapshot.secondId == BreedingRules.DITTO
+                ) {
+                    snapshot.second.sex
+                } else {
+                    BreedingPartners.opposite(first.sex)
+                }
+                val second = snapshot.second.copy(sex = validSex(pair.second, preferred))
                 if (first.sex !=
                     snapshot.first.sex
                 ) {

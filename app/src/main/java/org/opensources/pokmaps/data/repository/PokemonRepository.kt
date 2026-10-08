@@ -5,6 +5,7 @@ import javax.inject.Singleton
 import org.opensources.pokmaps.data.db.EncounterRow
 import org.opensources.pokmaps.data.db.LearnedMoveRow
 import org.opensources.pokmaps.data.db.PokemonDao
+import org.opensources.pokmaps.domain.guide.BreedingProfile
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
@@ -25,6 +26,15 @@ import org.opensources.pokmaps.domain.pokemon.TypeChart
 
 @Singleton
 class PokemonRepository @Inject constructor(private val dao: PokemonDao, private val pokedex: PokedexRepository) {
+    suspend fun breedingProfiles(game: Game): Map<Int, BreedingProfile> =
+        dao.breedingProfiles(game.versionGroupId).groupBy { it.pokemonId }.mapValues { (id, rows) ->
+            BreedingProfile(
+                id,
+                GenderRatio.from(rows.first().genderRate),
+                rows.mapNotNull { it.groupName }.toSet()
+            )
+        }
+
     suspend fun details(game: Game, pokemonId: Int): PokemonDetails? {
         val pokemon = dao.pokemon(pokemonId) ?: return null
         val types = dao.types(pokemonId, game.generationId).map { PokemonType(it.id, it.identifier, it.name) }

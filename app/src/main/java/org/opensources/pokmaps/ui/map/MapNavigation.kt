@@ -190,6 +190,7 @@ internal class MapNavigation(
         session.update {
             it.copy(
                 map = map,
+                hasConnections = catalog.connectionsOf(map.id).isNotEmpty(),
                 worldId = catalog.worldOf(map.id)?.id,
                 mapState = mapState,
                 zone = null,

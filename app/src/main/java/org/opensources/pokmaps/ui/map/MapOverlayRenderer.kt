@@ -24,6 +24,7 @@ internal data class MapRenderState(
     val map: GameMap,
     val mapState: MapState,
     val layers: Set<MapLayer>,
+    val showConnections: Boolean,
     val zone: MapInfo?,
     val overlays: MapOverlays,
     val highlightedPokemonId: Int?
@@ -56,10 +57,10 @@ internal class MapOverlayRenderer {
     }
 
     private fun drawConnections(state: MapRenderState) {
-        if (MapLayer.WARPS !in state.layers) return
-        state.catalog.connectionsOf(state.map.id).forEach { connection ->
+        if (MapLayer.WARPS !in state.layers || !state.showConnections) return
+        state.catalog.connectionsOf(state.map.id).forEachIndexed { index, connection ->
             val id = "connection:${connection.warpId}"
-            state.mapState.addPath(id, width = 2.dp, color = CONNECTION_COLOR) {
+            state.mapState.addPath(id, width = 2.dp, color = passageColor(index)) {
                 addPoints(
                     listOf(
                         connection.x.toDouble() / state.map.width to connection.y.toDouble() / state.map.height,
@@ -81,7 +82,8 @@ internal class MapOverlayRenderer {
         entrances.forEach { warp ->
             val always = warp.mapId in zoneParts
             drawMarker(state, "${MapMarkerIds.WARP}:${warp.id}", warp.x, warp.y, !always, 2f) {
-                WarpMarker(state.mapState, alwaysVisible = always)
+                val index = state.catalog.connectionsOf(state.map.id).indexOfFirst { warp.id in it.warpIds }
+                WarpMarker(state.mapState, alwaysVisible = always || index >= 0, color = passageColor(index))
             }
         }
     }
@@ -215,6 +217,5 @@ internal class MapOverlayRenderer {
         val POKEMON_CLICK_SCALE = Offset(0.6f, 0.6f)
         val ZONE_COLOR = Color(0xFFFFFFFF)
         val HIGHLIGHT_COLOR = Color(0xFFFFD600)
-        val CONNECTION_COLOR = Color(0xFFB0BEC5)
     }
 }

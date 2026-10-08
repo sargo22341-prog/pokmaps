@@ -129,6 +129,8 @@ data class MapUiState(
     val parent: MapPlace? = null,
     /** Étages du bâtiment ou de la grotte affiché, de haut en bas (vide s'il n'a qu'un niveau). */
     val floors: List<MapFloor> = emptyList(),
+    val hasConnections: Boolean = false,
+    val showConnections: Boolean = false,
     val layers: Set<MapLayer> = MapLayer.entries.toSet(),
     /** Pokémon capturés dans la version. */
     val caught: Set<Int> = emptySet(),
@@ -158,6 +160,8 @@ sealed interface MapAction {
     data class SelectFloor(val mapId: Int) : MapAction
 
     data class ToggleLayer(val layer: MapLayer) : MapAction
+
+    data object ToggleConnections : MapAction
 
     data object ClearHighlight : MapAction
 

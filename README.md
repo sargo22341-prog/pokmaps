@@ -19,7 +19,11 @@ L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuc
 Les guides se lisent sans case de fin de lecture ni liens de sources. Dojo et fossiles, Lugia et Ho-Oh ont chacun
 leur article. Or, Argent et Cristal ajoutent les événements hebdomadaires, un vérificateur de reproduction
 (sexes, groupes d'œufs, DV et héritage des attaques), avec recherche des parents par nom ou numéro, et un calculateur
-de gains de bonheur. Le nom de chaque parent est un sélecteur avec recherche ; son sprite à droite ouvre sa fiche,
+de gains de bonheur. Le premier parent se choisit dans une fenêtre avec numéros, sprites et recherche ; le second
+est proposé automatiquement (même espèce de sexe opposé, sinon Métamorph ou un partenaire compatible).
+La liste du second parent contient uniquement les partenaires compatibles selon les groupes d’œufs et le sexe,
+avec les exceptions pour Métamorph et les Pokémon sans sexe. Les espèces stériles affichent un avertissement.
+Le sprite à droite ouvre la fiche,
 et le résultat affiche aussi le sprite du Pokémon qui éclora. Les noms dans les textes ouvrent des fiches compactes
 reliées au Pokédex et à la carte.
 Les sprites et leur réglage d'animation sont réutilisés. Les chapitres proposent les succès liés, en signalant
@@ -62,7 +66,8 @@ leurs sources éditoriales et les désassemblages pret restent documentés dans 
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
 Dans les six jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
-s'affichent ensemble sur un plan, avec des traits reliant leurs passages lorsque leurs plans ne se raccordent pas.
+s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
+par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.
 Les maisons restent séparées, accessibles par leurs portes ; le Parc Safari réunit ainsi ses quatre zones.
 Les assemblages et leurs positions sont relus dans `tools/data/map_plans.csv` (coordonnées en cases de 16 pixels).
 Les passages viennent de pret ; les niveaux sans numéro explicite sont vérifiés dans les plans de

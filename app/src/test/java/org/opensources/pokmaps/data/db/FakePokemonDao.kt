@@ -5,6 +5,8 @@ package org.opensources.pokmaps.data.db
  * dans Bleu seulement, pour vérifier que les objets tenus sont ceux de la version choisie.
  */
 internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao {
+    override suspend fun breedingProfiles(versionGroupId: Int): List<BreedingRow> = emptyList()
+
     override suspend fun pokemon(pokemonId: Int) = read {
         if (pokemonId == PIKACHU) {
             PokemonRow(PIKACHU, "Pikachu", "Pikachu", "Souris", null, 4, 60, 190, "Moyenne", 10, HALF_FEMALE, 10)

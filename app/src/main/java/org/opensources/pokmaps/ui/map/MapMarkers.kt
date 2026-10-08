@@ -64,7 +64,7 @@ private fun visibleAtScale(mapState: MapState): Boolean {
 
 /** Entrée (porte, escalier, grotte) : on la touche pour entrer (une case autour du point suffit). */
 @Composable
-fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
+fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false, color: Color = WARP_COLOR) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     val tile = mapPixels(mapState, TILE_PX)
     val dot = max(mapPixels(mapState, WARP_PX), WARP_MIN_SIZE)
@@ -72,7 +72,7 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false) {
         Box(
             Modifier
                 .size(dot)
-                .background(WARP_COLOR.copy(alpha = 0.85f), CircleShape)
+                .background(color.copy(alpha = 0.85f), CircleShape)
                 .border(dot / 7, Color.White, CircleShape)
         )
     }

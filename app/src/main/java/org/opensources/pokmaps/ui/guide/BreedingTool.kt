@@ -46,7 +46,9 @@ internal fun BreedingTool(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(stringResource(R.string.breeding_tool), style = MaterialTheme.typography.titleLarge)
-        if (state.loading || state.failed || state.pair == null) {
+        if (!state.firstSelected && !state.loading && !state.failed && state.catalog?.pokemon?.isNotEmpty() == true) {
+            BreedingSpeciesSelector(0, stringResource(R.string.breeding_choose), state, true, onAction, onPreview)
+        } else if (state.loading || state.failed || state.pair == null) {
             SheetPlaceholder(state.loading, stringResource(R.string.guide_empty), failed = state.failed)
             if (state.failed) {
                 TextButton(onClick = {
@@ -55,8 +57,14 @@ internal fun BreedingTool(
             }
         } else {
             BreedingParent(state, true, onAction, onPreview)
-            BreedingParent(state, false, onAction, onPreview)
-            state.status?.let { Text(stringResource(it.label()), style = MaterialTheme.typography.titleMedium) }
+            if (state.partners.isNotEmpty()) BreedingParent(state, false, onAction, onPreview)
+            state.status?.let {
+                Text(
+                    stringResource(it.label()),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (state.possible) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error
+                )
+            }
             if (state.possible) {
                 Text(stringResource(R.string.breeding_offspring), style = MaterialTheme.typography.titleSmall)
                 state.pair.babies.forEach { child ->

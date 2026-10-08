@@ -3599,4 +3599,6 @@
     <string name="retro_manual_totals">Succès validés : %1$d/%2$d</string>
     <string name="breeding_search">Nom ou numéro du Pokémon</string>
     <string name="map_layer_fruit_trees">Baies et Noigrumes</string>
+    <string name="breeding_choose">Choisir un Pokémon</string>
+    <string name="map_connection_lines">Liaisons</string>
 </resources>

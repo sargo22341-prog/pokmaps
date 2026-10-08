@@ -9,7 +9,11 @@ import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 enum class ParentSex { MALE, FEMALE, GENDERLESS }
 enum class BreedingStatus { NO_EGGS, DIFFERENT_GROUPS, SAME_SEX, RELATED_DVS, POSSIBLE, COMPATIBLE }
 
-data class BreedingCatalog(val game: Game, val pokemon: List<PokedexEntry>)
+data class BreedingCatalog(
+    val game: Game,
+    val pokemon: List<PokedexEntry>,
+    val profiles: Map<Int, BreedingProfile> = emptyMap()
+)
 
 data class BreedingPair(val first: PokemonDetails, val second: PokemonDetails, val babies: List<PokemonDetails>)
 

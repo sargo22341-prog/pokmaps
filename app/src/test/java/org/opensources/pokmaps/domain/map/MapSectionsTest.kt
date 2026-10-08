@@ -66,7 +66,7 @@ class MapSectionsTest {
         assertEquals(setOf(2, 3), catalog.gameMap(1)?.regions?.map { it.id }?.toSet())
         assertTrue(catalog.floorsOf(1).isEmpty())
         assertTrue(catalog.floorsOf(4).isEmpty())
-        assertEquals(listOf(MapConnection(1, 312, 100, 360, 100)), catalog.connectionsOf(1))
+        assertEquals(listOf(MapConnection(1, 312, 100, 360, 100, setOf(1, 2, 3))), catalog.connectionsOf(1))
         assertTrue(catalog.entrancesOf(1).any { it.targetMapId == 4 })
     }
 
