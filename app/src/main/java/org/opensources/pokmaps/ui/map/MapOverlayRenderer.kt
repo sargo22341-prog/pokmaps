@@ -122,8 +122,15 @@ internal class MapOverlayRenderer {
             .mapNotNull { state.catalog.maps[it] }
             .forEach { drawRectangle(state, "${MapMarkerIds.HIGHLIGHT_PATH}:${it.id}", it, HIGHLIGHT_COLOR, 0.25f) }
 
-        val highlightedEntrances = if (state.map.identifier == GameMap.WORLD) {
-            state.overlays.highlightedMaps.mapNotNull { state.overlays.worldEntrances[it] }
+        state.overlays.highlightedMaps.filter { it !in state.overlays.worldEntrances }
+            .mapNotNull { state.catalog.maps[it]?.originMapId }
+            .distinct().mapNotNull { state.catalog.maps[it] }
+            .filter { it.parentId == state.map.id }
+            .forEach { drawRectangle(state, "${MapMarkerIds.HIGHLIGHT_PATH}:${it.id}", it, HIGHLIGHT_COLOR, 0.25f) }
+
+        val highlightedEntrances = if (state.map.isWorld) {
+            state.overlays.highlightedMaps.filter { state.catalog.worldOf(it)?.id == state.map.id }
+                .mapNotNull { state.overlays.worldEntrances[it] }
         } else {
             entrances.filter { it.targetMapId in state.overlays.highlightedMaps }
         }

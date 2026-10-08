@@ -25,7 +25,9 @@ data class PokemonDetails(
     val encounters: List<Encounter>,
     /** Pokémon fixes (Ronflex, oiseaux légendaires…) placés sur les cartes du jeu. */
     val staticEncounters: Int,
-    val traits: PokemonTraits
+    val traits: PokemonTraits,
+    val eggMoves: List<LearnedMove> = emptyList(),
+    val tutorMoves: List<LearnedMove> = emptyList()
 )
 
 /**

@@ -40,7 +40,9 @@ data class EvolutionRow(
     val minLevel: Int?,
     val itemName: String?,
     val itemIdentifier: String?,
-    val itemHasSprite: Boolean?
+    val itemHasSprite: Boolean?,
+    val minHappiness: Int? = null,
+    val timeOfDay: String? = null
 )
 
 data class LearnedMoveRow(
@@ -75,7 +77,8 @@ data class EncounterRow(
     val chance: Double?,
     val quantity: Int,
     val note: String?,
-    val conditions: String?
+    val conditions: String?,
+    val conditionIdentifiers: String? = null
 )
 
 data class MapObjectRow(
@@ -92,7 +95,8 @@ data class MapObjectRow(
     val pokemonName: String?,
     val level: Int?,
     val trainerClass: String?,
-    val name: String
+    val name: String,
+    val itemHasSprite: Boolean = true
 )
 
 data class MapAreaRow(val mapId: Int, val areaId: Int, val name: String)

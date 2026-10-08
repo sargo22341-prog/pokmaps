@@ -11,6 +11,7 @@ import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterGroup
+import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.ObtainMethod
@@ -26,7 +27,9 @@ enum class WildMethod {
     /** Herbes hautes, ou sol des grottes et bâtiments. */
     WALK,
     SURF,
-    FISHING;
+    FISHING,
+    HEADBUTT,
+    ROCK_SMASH;
 
     companion object {
         /** Méthode de rencontre PokéAPI ; null pour un Pokémon qu'on ne croise pas à l'état sauvage. */
@@ -34,6 +37,8 @@ enum class WildMethod {
             ObtainMethod.WALK -> WALK
             ObtainMethod.SURF -> SURF
             ObtainMethod.FISHING -> FISHING
+            ObtainMethod.HEADBUTT -> HEADBUTT
+            ObtainMethod.ROCK_SMASH -> ROCK_SMASH
             ObtainMethod.GIFT, ObtainMethod.STATIC, ObtainMethod.TRADE, ObtainMethod.EVOLUTION -> null
         }
     }
@@ -104,6 +109,9 @@ data class MapHighlight(val pokemonId: Int, val name: String, val places: List<M
 
 data class MapUiState(
     val game: Game? = null,
+    val worlds: List<MapPlace> = emptyList(),
+    val worldId: Int? = null,
+    val times: Set<EncounterTime> = EncounterTime.entries.toSet(),
     val map: GameMap? = null,
     val mapState: MapState? = null,
     /** Niveau du dessus (bâtiment, ville ou route qui contient la carte intérieure), pour le bouton retour. */
@@ -129,6 +137,10 @@ sealed interface MapAction {
     data object Back : MapAction
 
     data class OpenPlace(val place: MapPlace) : MapAction
+
+    data class SelectWorld(val mapId: Int) : MapAction
+
+    data class ToggleTime(val time: EncounterTime) : MapAction
 
     data class SelectFloor(val mapId: Int) : MapAction
 

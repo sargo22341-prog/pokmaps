@@ -18,7 +18,6 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.model.Game
-import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
@@ -104,7 +103,7 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
     private fun index(source: SearchIndex): Index {
         val catalog = source.catalog
         val places = catalog.maps.values
-            .filter { it.identifier != GameMap.WORLD }
+            .filter { !catalog.isWorld(it.id) }
             .sortedWith(compareBy({ it.parentId == null }, { it.id }))
             .map { map ->
                 PokedexSearch.normalize(map.name) to PlaceResult(map.identifier, map.name, map.parentId != null)

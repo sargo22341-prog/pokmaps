@@ -53,7 +53,7 @@ class GetPokemonMapsUseCase @Inject constructor(private val maps: MapRepository)
     }
 
     private companion object {
-        val NPC_METHODS = setOf("gift", "npc-trade")
+        val NPC_METHODS = setOf("gift", "gift-egg", "npc-trade")
     }
 }
 

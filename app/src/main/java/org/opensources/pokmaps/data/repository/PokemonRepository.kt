@@ -6,6 +6,7 @@ import org.opensources.pokmaps.data.db.EncounterRow
 import org.opensources.pokmaps.data.db.LearnedMoveRow
 import org.opensources.pokmaps.data.db.PokemonDao
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokemonType
 import org.opensources.pokmaps.domain.pokemon.BaseStat
@@ -31,15 +32,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             (it.attackingTypeId to it.defendingTypeId) to
                 it.factor
         }
-        val members = dao.chainMembers(pokemon.evolutionChainId).associate { it.id to it.name }
-        val edges = dao.evolutions(pokemon.evolutionChainId, game.versionGroupId).map {
-            EvolutionEdge(
-                it.fromId,
-                it.toId,
-                EvolutionCondition(it.trigger, it.minLevel, it.itemName, it.itemIdentifier, it.itemHasSprite == true)
-            )
-        }
-        val moves = dao.moves(pokemonId, game.versionGroupId).map { it.toLearnedMove() }
+        val moves = dao.moves(pokemonId, game.versionGroupId).groupBy { it.method }
         return PokemonDetails(
             id = pokemon.id,
             number = dao.number(pokemonId, game.versionGroupId),
@@ -54,14 +47,41 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             types = types,
             stats = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) },
             weaknesses = TypeChart.defensive(pokedex.types(game), types.map { it.id }, factors),
-            evolutions = EvolutionTree.build(members, edges),
-            levelUpMoves = moves.filter { it.machine == null }.sortedWith(compareBy({ it.level }, { it.name })),
-            machineMoves = moves.filter { it.machine != null }
+            evolutions = evolutions(game, pokemon.evolutionChainId),
+            levelUpMoves = moves["level-up"].orEmpty().map {
+                it.toLearnedMove()
+            }.sortedWith(compareBy({ it.level }, { it.name })),
+            machineMoves = moves["machine"].orEmpty().map { it.toLearnedMove() }
                 .sortedWith(compareBy({ it.machine?.isHm }, { it.machine?.name })),
             encounters = dao.encounters(pokemonId).map { it.toEncounter() },
             staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
-            traits = traits(game, pokemonId, pokemon.genderRate, pokemon.hatchCounter)
+            traits = traits(game, pokemonId, pokemon.genderRate, pokemon.hatchCounter),
+            eggMoves = moves["egg"].orEmpty().map { it.toLearnedMove() }.sortedBy { it.name },
+            tutorMoves = moves["tutor"].orEmpty().map { it.toLearnedMove() }.sortedBy { it.name }
         )
+    }
+
+    private suspend fun evolutions(
+        game: Game,
+        chainId: Int
+    ): List<org.opensources.pokmaps.domain.pokemon.EvolutionNode> {
+        val members = dao.chainMembers(chainId).associate { it.id to it.name }
+        val edges = dao.evolutions(chainId, game.versionGroupId).map {
+            EvolutionEdge(
+                it.fromId,
+                it.toId,
+                EvolutionCondition(
+                    it.trigger,
+                    it.minLevel,
+                    it.itemName,
+                    it.itemIdentifier,
+                    it.itemHasSprite == true,
+                    it.minHappiness,
+                    it.timeOfDay
+                )
+            )
+        }
+        return EvolutionTree.build(members, edges)
     }
 
     /** Objets tenus, sexe, œufs et talents : vides pour un jeu qui ne les connaît pas (base sans ces données). */
@@ -117,5 +137,6 @@ fun EncounterRow.toEncounter() = Encounter(
     chance = chance,
     quantity = quantity,
     note = note,
-    conditions = conditions
+    conditions = conditions,
+    times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet()
 )

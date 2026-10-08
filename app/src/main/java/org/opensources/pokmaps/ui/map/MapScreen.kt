@@ -53,7 +53,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapLayer
-import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
@@ -87,7 +86,7 @@ fun MapScreen(
     val snackbar = remember { SnackbarHostState() }
     MessageEffect(state, snackbar, onAction)
     // Retour : vers le niveau du dessus (bâtiment, ville ou route), ou désélection du lieu sur la carte du monde.
-    val isWorld = state.map?.identifier == GameMap.WORLD
+    val isWorld = state.map?.isWorld == true
     BackHandler(enabled = state.parent != null || (isWorld && state.zone != null)) { onAction(MapAction.Back) }
 
     Box(modifier.fillMaxSize()) {
@@ -103,6 +102,7 @@ fun MapScreen(
             MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
             LayersButton(state.layers) { onAction(MapAction.ToggleLayer(it)) }
         }
+        MapFilters(state, onAction, Modifier.align(Alignment.TopStart).padding(start = 8.dp, top = 64.dp))
         Floors(state, onAction)
         BottomPanel(state, snackbar, onAction, onOpenPokemon, onOpenItem)
     }
@@ -159,6 +159,11 @@ private fun MapCanvas(state: MapUiState) {
 
                 state.failed -> Text(
                     stringResource(R.string.data_load_error),
+                    modifier = Modifier.align(Alignment.Center).padding(24.dp)
+                )
+
+                state.game != null -> Text(
+                    stringResource(R.string.map_empty),
                     modifier = Modifier.align(Alignment.Center).padding(24.dp)
                 )
 
@@ -224,7 +229,7 @@ private fun BoxScope.BottomPanel(
                 is BottomCard.Zone -> ZoneBar(
                     zone = card.zone,
                     caught = state.caught,
-                    closable = state.map?.identifier == GameMap.WORLD,
+                    closable = state.map?.isWorld == true,
                     onOpenList = { onAction(MapAction.OpenZoneList) },
                     onClose = { onAction(MapAction.ClearZone) }
                 )

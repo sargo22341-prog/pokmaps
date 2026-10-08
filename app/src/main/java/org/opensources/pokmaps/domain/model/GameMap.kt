@@ -13,7 +13,9 @@ data class GameMap(
     val height: Int,
     val levelCount: Int,
     /** Villes et routes, pour la carte du monde. */
-    val regions: List<MapRegion> = emptyList()
+    val regions: List<MapRegion> = emptyList(),
+    val isWorld: Boolean = false,
+    val startRegionId: Int? = null
 ) {
     /** Chemin d'une tuile dans les assets (niveau 0 = carte entière dans une seule tuile). */
     fun tilePath(level: Int, row: Int, column: Int): String =
@@ -21,7 +23,6 @@ data class GameMap(
 
     companion object {
         const val TILE_SIZE = 256
-        const val WORLD = "kanto"
     }
 }
 

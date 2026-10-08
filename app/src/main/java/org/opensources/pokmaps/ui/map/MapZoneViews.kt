@@ -180,7 +180,9 @@ private fun ZoneItemRow(obj: MapObject, onOpenItem: (String) -> Unit, onShowObje
         onClick = identifier?.let { { onOpenItem(it) } },
         onShowOnMap = { onShowObject(obj.id) },
         content = {
-            if (identifier != null) PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
+            if (identifier != null && obj.itemHasSprite) {
+                PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
+            }
         }
     )
 }

@@ -175,6 +175,9 @@ def _map_rows(
                 row.width,
                 row.height,
                 row.level_count,
+                int(row.is_world),
+                ids[row.origin] if row.origin else None,
+                ids[row.start] if row.start else None,
             )
         )
     areas = []

@@ -69,7 +69,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                     pokemonName = it.pokemonName,
                     level = it.level,
                     trainerClass = it.trainerClass,
-                    name = it.name
+                    name = it.name,
+                    itemHasSprite = it.itemHasSprite
                 )
             }.groupBy { it.mapId },
             areas = dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
@@ -108,7 +109,9 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         }
     }
 
-    private fun MapEntity.toInfo() = MapInfo(id, identifier, nameFr, parentMapId, x, y, width, height, levelCount)
+    private fun MapEntity.toInfo() = MapInfo(
+        id, identifier, nameFr, parentMapId, x, y, width, height, levelCount, isWorld, originMapId, startMapId
+    )
 
     /** Rencontres des zones dans la version du jeu. */
     suspend fun encounters(game: Game, areaIds: List<Int>): List<Encounter> =

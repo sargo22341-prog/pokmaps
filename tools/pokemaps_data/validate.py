@@ -70,6 +70,21 @@ CHECKS = (
     ),
     ("zone de carte inconnue", "SELECT * FROM map_area WHERE location_area_id NOT IN (SELECT id FROM location_area)"),
     (
+        "région ou origine de carte invalide",
+        """SELECT m.id FROM map m
+           LEFT JOIN map o ON o.id = m.origin_map_id
+           LEFT JOIN map s ON s.id = m.start_map_id
+           LEFT JOIN map p ON p.id = m.parent_map_id
+           WHERE m.is_world NOT IN (0, 1)
+             OR (m.is_world = 1 AND (m.parent_map_id IS NOT NULL OR m.origin_map_id IS NOT NULL
+                 OR s.id IS NULL OR s.parent_map_id IS NULL OR s.parent_map_id != m.id))
+             OR (m.is_world = 0 AND m.start_map_id IS NOT NULL)
+             OR (m.parent_map_id IS NOT NULL AND (p.id IS NULL OR p.is_world != 1))
+             OR (m.origin_map_id IS NOT NULL AND (o.id IS NULL OR o.parent_map_id IS NULL
+                 OR o.version_group_id != m.version_group_id))
+             OR (m.is_world = 0 AND m.parent_map_id IS NULL AND m.origin_map_id IS NULL)""",
+    ),
+    (
         "carte parente invalide",
         """SELECT m.id FROM map m JOIN map p ON p.id = m.parent_map_id
            WHERE p.parent_map_id IS NOT NULL OR p.version_group_id != m.version_group_id

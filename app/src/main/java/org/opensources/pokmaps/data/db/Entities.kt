@@ -358,7 +358,10 @@ data class MapEntity(
     val y: Int,
     val width: Int,
     val height: Int,
-    @ColumnInfo(name = "level_count") val levelCount: Int
+    @ColumnInfo(name = "level_count") val levelCount: Int,
+    @ColumnInfo(name = "is_world") val isWorld: Boolean = false,
+    @ColumnInfo(name = "origin_map_id") val originMapId: Int? = null,
+    @ColumnInfo(name = "start_map_id") val startMapId: Int? = null
 )
 
 @Entity(

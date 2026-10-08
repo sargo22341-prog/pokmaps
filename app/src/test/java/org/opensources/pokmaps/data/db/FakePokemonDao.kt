@@ -31,7 +31,15 @@ internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao
     override suspend fun moves(pokemonId: Int, versionGroupId: Int) = read {
         listOf(
             electricMove(LEVEL_UP, 1, THUNDER_SHOCK, "Éclair", power = 40, pp = 30, machine = null),
-            electricMove(MACHINE, 0, THUNDERBOLT, "Tonnerre", power = 95, pp = 15, machine = "CT24" to "tm24")
+            electricMove(MACHINE, 0, THUNDERBOLT, "Tonnerre", power = 95, pp = 15, machine = "CT24" to "tm24"),
+            *if (versionGroupId == FakeGameDao.GOLD.versionGroupId) {
+                arrayOf(
+                    electricMove("egg", 0, 117, "Patience", power = null, pp = 10, machine = null),
+                    electricMove("tutor", 0, 87, "Fatal-Foudre", power = 120, pp = 10, machine = null)
+                )
+            } else {
+                emptyArray()
+            }
         )
     }
 
@@ -57,7 +65,7 @@ internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao
         level: Int,
         moveId: Int,
         name: String,
-        power: Int,
+        power: Int?,
         pp: Int,
         machine: Pair<String, String>?
     ) = LearnedMoveRow(

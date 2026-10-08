@@ -155,7 +155,7 @@ private fun ItemsSection(page: PlacePage, onOpenItem: (String) -> Unit, onShowOb
                 onClick = identifier?.let { { onOpenItem(it) } },
                 onShowOnMap = { onShowObject(obj.id) },
                 content = {
-                    if (identifier != null) {
+                    if (identifier != null && obj.itemHasSprite) {
                         PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
                     }
                 }

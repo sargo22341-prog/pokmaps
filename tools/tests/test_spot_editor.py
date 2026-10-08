@@ -115,7 +115,7 @@ def test_snap_centers_points_on_cells_inside_the_place() -> None:
 def test_catalog_merges_the_games_of_a_family(database: Path) -> None:
     catalog = EditorCatalog(database)
     try:
-        [family] = catalog.families()
+        family = next(found for found in catalog.families() if found.identifier == "red-blue-yellow")
         assert family.label == "Rouge, Bleu et Jaune"
         assert family.version_groups == ("red-blue", "yellow")
         route = next(found for found in catalog.maps(family) if found.identifier == "route-1")

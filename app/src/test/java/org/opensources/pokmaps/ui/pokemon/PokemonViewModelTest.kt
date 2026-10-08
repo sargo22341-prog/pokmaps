@@ -132,6 +132,9 @@ class PokemonViewModelTest {
         assertEquals(8192, gold.shinyOdds)
         assertTrue(gold.has(GenerationFeature.HELD_ITEMS))
         assertFalse(gold.has(GenerationFeature.ABILITIES))
+        assertEquals(listOf(117), gold.details?.eggMoves?.map { it.moveId })
+        assertEquals(listOf(87), gold.details?.tutorMoves?.map { it.moveId })
+        assertEquals(listOf(FakePokemonDao.THUNDER_SHOCK), gold.details?.levelUpMoves?.map { it.moveId })
     }
 
     @Test
@@ -166,6 +169,24 @@ class PokemonViewModelTest {
         val catch = checkNotNull(viewModel.state.value.catch)
         assertEquals(PokemonViewModel.MAX_LEVEL, catch.level)
         assertEquals(1.0, catch.probabilities.toMap().getValue(Ball.MASTER), 0.0)
+    }
+
+    @Test
+    fun johtoCaptureCalculatorFollowsTheBallContext() = runTest {
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        games.select(FakeGameDao.GOLD)
+        viewModel.onAction(PokemonAction.SetCatchLevel(10))
+        viewModel.onAction(PokemonAction.SetPlayerLevel(44))
+        viewModel.onAction(PokemonAction.ToggleFishing)
+        viewModel.onAction(PokemonAction.ToggleLoveBonus)
+        val catch = checkNotNull(viewModel.state.value.catch)
+        assertEquals(44, catch.playerLevel)
+        assertTrue(catch.fishing)
+        assertTrue(catch.sameSpeciesAndGender)
+        assertEquals(1.0, catch.probabilities.toMap().getValue(Ball.LEVEL), 0.0)
+        assertTrue(catch.probabilities.any { it.first == Ball.PARK })
+        assertFalse(catch.probabilities.any { it.first == Ball.SAFARI })
     }
 
     @Test

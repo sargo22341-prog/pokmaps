@@ -23,7 +23,7 @@ class CatchRateTest {
 
     @Test
     fun superBallBeatsHyperBallAtFullHealth() {
-        val probabilities = Ball.entries.associateWith { probability(it, rate = 45) } - Ball.SAFARI
+        val probabilities = CaptureGeneration.GEN1.balls.associateWith { probability(it, rate = 45) } - Ball.SAFARI
         assertEquals(Ball.GREAT, CatchRate.bestBall(probabilities))
     }
 

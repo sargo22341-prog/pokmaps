@@ -4,8 +4,6 @@ Les jeux plus récents ne sont pas encore pris en charge (cartes) : on construit
 à partir des mêmes CSV PokéAPI, pour vérifier qu'il suffira de les ajouter dans games.py.
 """
 
-import sqlite3
-
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import Game, PretFormat
 from pokemaps_data.pokeapi import PokeApi
@@ -18,16 +16,14 @@ def _builder(api: PokeApi, version_group: str) -> DatabaseBuilder:
     return DatabaseBuilder(api, games=(Game(version_group, "", (), "", (), PretFormat.GEN1, ()),))
 
 
-def test_gen1_has_none_of_the_later_data(db: sqlite3.Connection) -> None:
-    for table in (
-        "pokemon_item",
-        "egg_group",
-        "pokemon_egg_group",
-        "ability",
-        "ability_version_group",
-        "pokemon_ability",
-    ):
-        assert db.execute(f"SELECT count(*) FROM {table}").fetchone()[0] == 0, table
+def test_gen1_has_none_of_the_later_data(builder: DatabaseBuilder) -> None:
+    gen1 = _builder(builder.api, "red-blue")
+    assert gen1.items.pokemon_item_rows == []
+    assert gen1.pokemon.egg_group_table() == []
+    assert gen1.pokemon.egg_group_rows == []
+    assert gen1.abilities.ability_table() == []
+    assert gen1.abilities.ability_version_group_table() == []
+    assert gen1.abilities.pokemon_ability_rows == []
 
 
 def test_held_items_of_a_later_game(builder: DatabaseBuilder) -> None:
@@ -68,4 +64,4 @@ def test_egg_groups_from_the_second_generation(builder: DatabaseBuilder) -> None
         "Féerique",
         "Terrestre",
     ]
-    assert builder.pokemon.egg_group_rows == []
+    assert _builder(builder.api, "red-blue").pokemon.egg_group_rows == []

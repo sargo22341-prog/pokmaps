@@ -67,6 +67,15 @@ class MapViewModelTest {
     }
 
     @Test
+    fun aGameWithoutMapsIsEmptyNotAnError() {
+        val viewModel = viewModel(FakeGameDao(), FakeMapDao(emptyMaps = true))
+        viewModel.onScreenShown()
+        assertEquals(FakeGameDao.RED, viewModel.state.value.game)
+        assertNull(viewModel.state.value.map)
+        assertFalse(viewModel.state.value.failed)
+    }
+
+    @Test
     fun anUnreadableDatabaseIsAnError() {
         val state = viewModel(FakeGameDao(), FakeMapDao(failing = true)).state.value
         assertTrue(state.failed)

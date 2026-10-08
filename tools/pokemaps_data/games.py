@@ -68,7 +68,7 @@ class Game:
     regions: tuple[Region, ...]
 
 
-GAMES: tuple[Game, ...] = (
+_GEN1_GAMES: tuple[Game, ...] = (
     Game(
         "red-blue",
         "pokered",
@@ -102,7 +102,8 @@ GOLD_SILVER = Game(
 # Jeux en cours d'intégration : absents de l'application tant qu'elle ne sait pas les afficher (plan_gen_2.md,
 # phase 6), mais générés et validés avec les autres dans un aperçu hors des assets (build_data.py, --preview), que
 # lisent les tests et l'éditeur des emplacements.
-GAMES_IN_PROGRESS: tuple[Game, ...] = (GOLD_SILVER,)
+GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER)
+GAMES_IN_PROGRESS: tuple[Game, ...] = ()
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
 

@@ -56,7 +56,7 @@ def test_missing_asset_names_the_file(tmp_path: Path) -> None:
 def test_catalog_lists_objects_and_warps(database: Path) -> None:
     catalog = EditorCatalog(database)
     try:
-        [family] = catalog.families()
+        family = next(found for found in catalog.families() if found.identifier == "red-blue-yellow")
         route = next(found for found in catalog.maps(family) if found.identifier == "route-2")
         kinds = {found.kind for found in catalog.marks(route)}
         assert {"warp", "item"} <= kinds

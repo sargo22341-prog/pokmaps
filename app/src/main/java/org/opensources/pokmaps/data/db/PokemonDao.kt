@@ -36,7 +36,7 @@ interface PokemonDao {
     )
     suspend fun types(pokemonId: Int, generationId: Int): List<TypeRow>
 
-    /** Stats de base de la génération, dans l'ordre des jeux (PV, Attaque, Défense, Vitesse, Spécial). */
+    /** Stats de base : Spécial en première génération, Atq. Spé. et Déf. Spé. à partir de la deuxième. */
     @Query(
         """
         SELECT s.identifier, s.name_fr AS name, ps.base_stat AS value
@@ -61,16 +61,19 @@ interface PokemonDao {
     @Query(
         """
         SELECT e.from_pokemon_id AS fromId, e.to_pokemon_id AS toId, e.`trigger` AS `trigger`, e.min_level AS minLevel,
-            i.name_fr AS itemName, i.identifier AS itemIdentifier, i.has_sprite AS itemHasSprite
+            coalesce(i.name_fr, hi.name_fr) AS itemName, coalesce(i.identifier, hi.identifier) AS itemIdentifier,
+            coalesce(i.has_sprite, hi.has_sprite) AS itemHasSprite, e.min_happiness AS minHappiness,
+            e.time_of_day AS timeOfDay
         FROM evolution e
         JOIN pokemon p ON p.id = e.from_pokemon_id
         LEFT JOIN item i ON i.id = e.item_id
+        LEFT JOIN item hi ON hi.id = e.held_item_id
         WHERE e.version_group_id = :versionGroupId AND p.evolution_chain_id = :chainId
         """
     )
     suspend fun evolutions(chainId: Int, versionGroupId: Int): List<EvolutionRow>
 
-    /** Attaques apprises par niveau et par CT/CS dans le jeu, avec leurs caractéristiques dans ce jeu. */
+    /** Attaques par niveau, CT/CS, œuf et tuteur, avec leurs caractéristiques dans le jeu. */
     @Query(
         """
         SELECT pm.method, pm.level, m.id AS moveId, m.name_fr AS name, mv.power, mv.accuracy, mv.pp,
@@ -84,7 +87,7 @@ interface PokemonDao {
             AND ma.version_group_id = pm.version_group_id
         LEFT JOIN item i ON i.id = ma.item_id
         WHERE pm.pokemon_id = :pokemonId AND pm.version_group_id = :versionGroupId
-            AND pm.method IN ('level-up', 'machine')
+            AND pm.method IN ('level-up', 'machine', 'egg', 'tutor')
         """
     )
     suspend fun moves(pokemonId: Int, versionGroupId: Int): List<LearnedMoveRow>
@@ -144,7 +147,10 @@ const val ENCOUNTER_COLUMNS = """
     m.sort_order AS methodOrder, m.is_one_off AS isOneOff, e.min_level AS minLevel, e.max_level AS maxLevel,
     e.chance, e.quantity, e.note_fr AS note,
     (SELECT group_concat(cv.name_fr, ', ') FROM encounter_condition ec
-        JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id WHERE ec.encounter_id = e.id) AS conditions
+        JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id WHERE ec.encounter_id = e.id) AS conditions,
+    (SELECT group_concat(cv.identifier, ',') FROM encounter_condition ec
+        JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id
+        WHERE ec.encounter_id = e.id) AS conditionIdentifiers
 """
 
 const val ENCOUNTER_TABLES = """

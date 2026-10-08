@@ -5,6 +5,8 @@ enum class ObtainMethod {
     WALK,
     FISHING,
     SURF,
+    HEADBUTT,
+    ROCK_SMASH,
     GIFT,
     STATIC,
     TRADE,
@@ -13,7 +15,7 @@ enum class ObtainMethod {
     /** Pokémon rencontré à l'état sauvage (herbes, grottes, surf, pêche), qu'on peut capturer sur place. */
     val isWild: Boolean
         get() = when (this) {
-            WALK, FISHING, SURF -> true
+            WALK, FISHING, SURF, HEADBUTT, ROCK_SMASH -> true
             GIFT, STATIC, TRADE, EVOLUTION -> false
         }
 
@@ -26,8 +28,10 @@ enum class ObtainMethod {
             "walk" -> WALK
             "old-rod", "good-rod", "super-rod" -> FISHING
             "surf" -> SURF
+            "headbutt", "headbutt-low", "headbutt-normal", "headbutt-high" -> HEADBUTT
+            "rock-smash" -> ROCK_SMASH
             "gift", "gift-egg" -> GIFT
-            "static", "pokeflute" -> STATIC
+            "static", "pokeflute", "squirt-bottle", "roaming-grass" -> STATIC
             "npc-trade" -> TRADE
             else -> throw IllegalArgumentException("Méthode de rencontre inconnue : $identifier")
         }

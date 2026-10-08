@@ -19,7 +19,8 @@ interface MapDao {
     @Query(
         """
         SELECT o.id, o.map_id AS mapId, o.kind, o.x, o.y, o.sprite, o.item_id AS itemId,
-            i.identifier AS itemIdentifier, i.name_fr AS itemName, o.pokemon_id AS pokemonId,
+            i.identifier AS itemIdentifier, i.name_fr AS itemName, coalesce(i.has_sprite, 0) AS itemHasSprite,
+            o.pokemon_id AS pokemonId,
             p.name_fr AS pokemonName, o.level, o.trainer_class AS trainerClass, o.name_fr AS name
         FROM map_object o
         JOIN map m ON m.id = o.map_id
@@ -67,7 +68,7 @@ interface MapDao {
         JOIN map m ON m.id = o.map_id
         JOIN version v ON v.version_group_id = m.version_group_id
         WHERE v.id = :versionId AND n.pokemon_id = :pokemonId
-            AND n.kind IN ('gift_pokemon', 'trade', 'prize_pokemon', 'fossil')
+            AND n.kind IN ('gift_pokemon', 'gift_egg', 'trade', 'prize_pokemon', 'fossil')
             AND (n.version_id IS NULL OR n.version_id = :versionId)
             AND (o.version_id IS NULL OR o.version_id = :versionId)
         ORDER BY n.map_object_id
@@ -92,12 +93,16 @@ interface MapDao {
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
+                    AND (n.version_id IS NULL OR n.version_id = :versionId)
                 UNION SELECT n.wanted_item_id FROM npc_offer n
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
+                    AND (n.version_id IS NULL OR n.version_id = :versionId)
             )
             OR i.id IN (SELECT e.item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
+            OR i.id IN (SELECT e.held_item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
+            OR i.id IN (SELECT pi.item_id FROM pokemon_item pi WHERE pi.version_id = :versionId)
         ORDER BY i.id
         """
     )
@@ -131,7 +136,7 @@ interface MapDao {
         FROM evolution e
         JOIN pokemon f ON f.id = e.from_pokemon_id
         JOIN pokemon t ON t.id = e.to_pokemon_id
-        WHERE e.version_group_id = :versionGroupId AND e.item_id = :itemId
+        WHERE e.version_group_id = :versionGroupId AND (e.item_id = :itemId OR e.held_item_id = :itemId)
         ORDER BY e.from_pokemon_id
         """
     )

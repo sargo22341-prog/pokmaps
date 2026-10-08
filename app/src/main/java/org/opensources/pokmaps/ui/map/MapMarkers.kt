@@ -97,7 +97,7 @@ fun ObjectMarker(
     val facility = obj.kind.facilityIcon
     Box {
         when {
-            itemIdentifier != null -> AssetImage(
+            itemIdentifier != null && obj.itemHasSprite -> AssetImage(
                 Sprites.item(itemIdentifier),
                 contentDescription = obj.itemName,
                 modifier = Modifier.size(mapPixels(mapState, PixelArt.ITEM_ICON, scale)),

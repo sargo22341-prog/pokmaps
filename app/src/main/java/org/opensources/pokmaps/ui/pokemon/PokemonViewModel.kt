@@ -16,8 +16,11 @@ import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
+import org.opensources.pokmaps.domain.pokemon.BallContext
+import org.opensources.pokmaps.domain.pokemon.CaptureGeneration
 import org.opensources.pokmaps.domain.pokemon.CatchRate
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
+import org.opensources.pokmaps.domain.pokemon.Gen2CatchRate
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.ShinyOdds
@@ -39,7 +42,10 @@ enum class HpChoice(val fraction: Double) {
 data class CatchInput(
     val level: Int? = null,
     val hp: HpChoice = HpChoice.FULL,
-    val status: CatchStatus = CatchStatus.NONE
+    val status: CatchStatus = CatchStatus.NONE,
+    val playerLevel: Int = 30,
+    val fishing: Boolean = false,
+    val sameSpeciesAndGender: Boolean = false
 )
 
 data class CatchUiState(
@@ -47,7 +53,12 @@ data class CatchUiState(
     val hp: HpChoice,
     val status: CatchStatus,
     val probabilities: List<Pair<Ball, Double>>,
-    val best: Ball?
+    val best: Ball?,
+    val generation: CaptureGeneration = CaptureGeneration.GEN1,
+    val playerLevel: Int = 30,
+    val fishing: Boolean = false,
+    val sameSpeciesAndGender: Boolean = false,
+    val blockedBalls: Set<Ball> = emptySet()
 )
 
 data class PokemonUiState(
@@ -55,7 +66,7 @@ data class PokemonUiState(
     val failed: Boolean = false,
     val game: Game? = null,
     val details: PokemonDetails? = null,
-    /** Calcul de capture, seulement pour la 1re génération (formule propre à ces jeux). */
+    /** Calcul de capture avec la formule de la génération du jeu. */
     val catch: CatchUiState? = null,
     /** Capturé, selon la portée des captures (le jeu choisi, sa génération ou tous les jeux). */
     val caught: Boolean = false,
@@ -89,6 +100,12 @@ sealed interface PokemonAction {
     data class SetCatchHp(val hp: HpChoice) : PokemonAction
 
     data class SetCatchStatus(val status: CatchStatus) : PokemonAction
+
+    data class SetPlayerLevel(val level: Int) : PokemonAction
+
+    data object ToggleFishing : PokemonAction
+
+    data object ToggleLoveBonus : PokemonAction
 }
 
 @HiltViewModel
@@ -109,7 +126,8 @@ class PokemonViewModel @Inject constructor(
                 loading = false,
                 game = page.game,
                 details = page.details,
-                catch = page.details?.takeIf { page.game.generationId == 1 }?.let { catchState(page.game, it, input) },
+                catch = page.details?.takeIf { CaptureGeneration.from(page.game.generationId) != null }
+                    ?.let { catchState(page.game, it, input) },
                 caught = collection.game == page.game && pokemonId in collection.caught,
                 captureScope = collection.scope,
                 favorite = pokemonId in collection.favorites,
@@ -135,6 +153,14 @@ class PokemonViewModel @Inject constructor(
             is PokemonAction.SetCatchHp -> catchInput.update { it.copy(hp = action.hp) }
 
             is PokemonAction.SetCatchStatus -> catchInput.update { it.copy(status = action.status) }
+
+            is PokemonAction.SetPlayerLevel ->
+                catchInput.update { it.copy(playerLevel = action.level.coerceIn(1, MAX_LEVEL)) }
+
+            PokemonAction.ToggleFishing -> catchInput.update { it.copy(fishing = !it.fishing) }
+
+            PokemonAction.ToggleLoveBonus ->
+                catchInput.update { it.copy(sameSpeciesAndGender = !it.sameSpeciesAndGender) }
         }
     }
 
@@ -163,10 +189,27 @@ class PokemonViewModel @Inject constructor(
         val baseHp = details.stats.firstOrNull { it.identifier == HP }?.value ?: 0
         val maxHp = CatchRate.maxHp(baseHp, level)
         val currentHp = CatchRate.currentHp(maxHp, input.hp.fraction)
-        val probabilities = BALLS.associateWith {
-            CatchRate.probability(it, details.captureRate, maxHp, currentHp, input.status)
+        val generation = checkNotNull(CaptureGeneration.from(game.generationId))
+        val context = BallContext(
+            details.id,
+            details.weightHg,
+            level,
+            input.playerLevel,
+            input.fishing,
+            input.sameSpeciesAndGender
+        )
+        val blocked = if (generation == CaptureGeneration.GEN2 && Gen2CatchRate.blocksEngine(maxHp)) {
+            generation.balls.filter { it != Ball.MASTER && it != Ball.LEVEL }.toSet()
+        } else {
+            emptySet()
         }
-        return CatchUiState(level, input.hp, input.status, probabilities.toList(), CatchRate.bestBall(probabilities))
+        val probabilities = generation.balls.filter { it !in blocked }.associateWith {
+            generation.probability(it, details.captureRate, maxHp, currentHp, input.status, context)
+        }
+        return CatchUiState(
+            level, input.hp, input.status, probabilities.toList(), CatchRate.bestBall(probabilities),
+            generation, input.playerLevel, input.fishing, input.sameSpeciesAndGender, blocked
+        )
     }
 
     companion object {
@@ -174,6 +217,5 @@ class PokemonViewModel @Inject constructor(
         private const val HP = "hp"
         private const val DEFAULT_LEVEL = 30
         const val MAX_LEVEL = 100
-        private val BALLS = listOf(Ball.POKE, Ball.GREAT, Ball.ULTRA, Ball.MASTER)
     }
 }

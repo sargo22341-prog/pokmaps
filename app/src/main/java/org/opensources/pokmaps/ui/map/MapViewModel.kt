@@ -33,7 +33,7 @@ import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.scrollTo
 
 /**
- * Carte du jeu choisi, affichée avec MapCompose : carte du monde de Kanto et cartes intérieures,
+ * Cartes du jeu choisi, affichées avec MapCompose : cartes du monde par région et cartes intérieures,
  * lieux cliquables (leur contenu s'affiche sur la carte), calques et surlignage des lieux d'un Pokémon.
  *
  * Les déplacements entre cartes sont confiés à [MapNavigation], le lieu sélectionné et les fiches à
@@ -80,6 +80,10 @@ class MapViewModel @Inject constructor(
             MapAction.Back -> navigation.back()
 
             is MapAction.OpenPlace -> navigation.openPlace(action.place)
+
+            is MapAction.SelectWorld -> navigation.selectWorld(action.mapId)
+
+            is MapAction.ToggleTime -> selection.toggleTime(action.time)
 
             is MapAction.SelectFloor -> navigation.selectFloor(action.mapId)
 
@@ -142,12 +146,20 @@ class MapViewModel @Inject constructor(
             session.updateOverlays { it.copy(worldEntrances = gameMaps.catalog.worldEntrances()) }
             val sameMaps = previous?.catalog === gameMaps.catalog
             if (!sameMaps) navigation.forgetScales()
-            session.update { it.copy(game = gameMaps.game, detail = null, zoneListOpen = false, failed = false) }
+            session.update {
+                it.copy(
+                    game = gameMaps.game,
+                    detail = null,
+                    zoneListOpen = false,
+                    failed = false,
+                    worlds = gameMaps.catalog.worlds.map { world -> MapPlace(world.id, world.name) }
+                )
+            }
             val stayed = position != null && navigation.stay(gameMaps.catalog, position, sameMaps)
             val current = session.current.highlight
             when {
                 current != null -> highlight(current.pokemonId, current.name, move = !stayed)
-                !stayed -> gameMaps.catalog.world?.let { navigation.open(it.id) }
+                !stayed -> gameMaps.catalog.defaultWorld?.let { navigation.open(it.id) }
             }
         }
     }
@@ -214,7 +226,6 @@ class MapViewModel @Inject constructor(
     private suspend fun highlight(pokemonId: Int, name: String, move: Boolean = true) {
         val gameMaps = session.loaded.value ?: return
         val catalog = gameMaps.catalog
-        val world = catalog.world ?: return
         val found = session.attempt { getPokemonMaps(gameMaps.game, catalog, pokemonId) }.getOrElse {
             session.update { it.copy(highlight = null, message = MapMessage.HighlightFailed(name)) }
             return
@@ -232,6 +243,9 @@ class MapViewModel @Inject constructor(
             session.refreshOverlays()
             return
         }
+        val foundWorlds = found.maps.mapNotNull { catalog.worldOf(it) }.distinctBy { it.id }
+        val world = foundWorlds.firstOrNull { it.id == session.current.map?.id }
+            ?: foundWorlds.firstOrNull() ?: catalog.defaultWorld ?: return
         if (found.onlyFromGivers) {
             navigation.focusObject(found.givers.first())
             return
@@ -261,10 +275,14 @@ class MapViewModel @Inject constructor(
         val boxes = overlays.highlightedMaps.mapNotNull { catalog.maps[it] }.mapNotNull { map ->
             if (map.parentId == world.id) {
                 Box(map.x, map.y, map.x + map.width, map.y + map.height)
-            } else {
+            } else if (catalog.worldOf(map.id)?.id == world.id) {
                 overlays.worldEntrances[map.id]?.let {
                     Box(it.x - ENTRANCE_MARGIN, it.y - ENTRANCE_MARGIN, it.x + ENTRANCE_MARGIN, it.y + ENTRANCE_MARGIN)
+                } ?: catalog.maps[map.originMapId]?.let { origin ->
+                    Box(origin.x, origin.y, origin.x + origin.width, origin.y + origin.height)
                 }
+            } else {
+                null
             }
         }
         if (boxes.isEmpty()) return

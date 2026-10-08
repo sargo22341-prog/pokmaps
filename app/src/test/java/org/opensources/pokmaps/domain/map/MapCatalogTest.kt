@@ -6,7 +6,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MapCatalogTest {
-    private val world = MapInfo(1999, "kanto", "Kanto", null, 0, 0, 5440, 5760, 6)
+    private val world = MapInfo(1999, "kanto", "Kanto", null, 0, 0, 5440, 5760, 6, isWorld = true)
     private val pewter = MapInfo(1002, "pewter-city", "Argenta", 1999, 1280, 1280, 640, 576, 0)
     private val route3 = MapInfo(1014, "route-3", "Route 3", 1999, 1280, 992, 1120, 288, 0)
     private val moon1 = MapInfo(1059, "mt-moon-1f", "Mont Sélénite (1er niveau)", null, 0, 0, 640, 576, 3)
@@ -32,7 +32,7 @@ class MapCatalogTest {
 
     @Test
     fun displayedMapOfRegionIsTheWorld() {
-        assertEquals(world, catalog.world)
+        assertEquals(world, catalog.defaultWorld)
         assertEquals(world, catalog.displayedMapOf(pewter.id))
         assertEquals(moon2, catalog.displayedMapOf(moon2.id))
         assertNull(catalog.gameMap(pewter.id))

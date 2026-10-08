@@ -198,13 +198,7 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
         if (condition != null && identifier != null && condition.itemHasSprite) {
             PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 56.dp, contentDescription = null)
         }
-        val text = when {
-            condition == null -> ""
-            condition.itemName != null -> condition.itemName
-            condition.trigger == "trade" -> stringResource(R.string.method_trade)
-            condition.minLevel != null -> stringResource(R.string.encounter_levels, condition.minLevel)
-            else -> stringResource(R.string.evolution_level_up)
-        }
+        val text = evolutionText(condition)
         Text(
             text,
             style = MaterialTheme.typography.labelSmall,
@@ -213,6 +207,24 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
         )
         Text(stringResource(R.string.evolution_arrow), color = color, style = MaterialTheme.typography.titleLarge)
     }
+}
+
+@Composable
+private fun evolutionText(condition: EvolutionCondition?): String {
+    if (condition == null) return ""
+    val parts = listOfNotNull(
+        if (condition.trigger == "trade") stringResource(R.string.method_trade) else null,
+        condition.itemName,
+        condition.minLevel?.let { stringResource(R.string.encounter_levels, it) },
+        condition.minHappiness?.let { stringResource(R.string.evolution_happiness, it) },
+        when (condition.timeOfDay) {
+            null, "" -> null
+            "day" -> stringResource(R.string.evolution_day)
+            "night" -> stringResource(R.string.evolution_night)
+            else -> error("Moment d’évolution inconnu : ${condition.timeOfDay}")
+        }
+    )
+    return parts.joinToString(" · ").ifEmpty { stringResource(R.string.evolution_level_up) }
 }
 
 @Composable

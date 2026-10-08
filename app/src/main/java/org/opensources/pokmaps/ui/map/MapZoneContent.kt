@@ -27,8 +27,8 @@ internal object MapZoneContent {
             catalog.entrancesOf(displayed).map { it.x to it.y }
         val wild = encounters.mapNotNull { e -> WildMethod.from(e.method)?.let { it to e } }
         // Surf et pêche partagent l'eau : ils sont répartis ensemble pour ne pas se superposer.
-        return wild.groupBy { (method, _) -> method == WildMethod.WALK }.flatMap { (walking, list) ->
-            val terrain = if (walking) spots[SpotKind.GRASS] ?: spots[SpotKind.FLOOR] else spots[SpotKind.WATER]
+        return wild.groupBy { (method, _) -> terrain(method) }.flatMap { (kind, list) ->
+            val terrain = if (kind == SpotKind.GRASS) spots[kind] ?: spots[SpotKind.FLOOR] else spots[kind]
             val species = list.groupBy { (method, e) -> method to e.pokemonId }.map { (key, group) ->
                 val encounter = group.first().second
                 WildMarker(encounter.pokemonId, encounter.pokemonName, key.first, 0, 0) to
@@ -39,9 +39,16 @@ internal object MapZoneContent {
                 weights = species.map { it.second },
                 spots = WildPlacement.awayFrom(terrain.orEmpty().map { it.x to it.y }, obstacles, species.size),
                 fallback = zone.centerInDisplay(),
-                seed = zone.id * 2 + if (walking) 0 else 1
+                seed = zone.id * SpotKind.entries.size + kind.ordinal
             ).map { it.item.copy(x = it.x, y = it.y, scale = it.scale) }
         }
+    }
+
+    private fun terrain(method: WildMethod): SpotKind = when (method) {
+        WildMethod.WALK -> SpotKind.GRASS
+        WildMethod.SURF, WildMethod.FISHING -> SpotKind.WATER
+        WildMethod.HEADBUTT -> SpotKind.TREE
+        WildMethod.ROCK_SMASH -> SpotKind.ROCK
     }
 
     private fun MapInfo.centerInDisplay(): Pair<Int, Int> =

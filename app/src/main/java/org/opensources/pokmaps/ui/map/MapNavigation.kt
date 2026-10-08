@@ -52,11 +52,17 @@ internal class MapNavigation(
     /** Oublie les zooms mémorisés (les cartes du nouveau jeu sont différentes). */
     fun forgetScales() = scales.clear()
 
+    fun selectWorld(mapId: Int) {
+        val catalog = session.catalog ?: return
+        if (!catalog.isWorld(mapId)) return
+        show(mapId, null, null, scales[mapId])
+    }
+
     /** Ouvre un lieu : carte intérieure, ou ville et route (sur la carte du monde). */
     fun openPlace(place: MapPlace) {
         session.update { it.copy(detail = null, zoneListOpen = false) }
         val target = session.catalog?.maps?.get(place.mapId)
-        if (target != null && target.parentId == null && target.identifier != GameMap.WORLD) {
+        if (target != null && target.parentId == null && session.catalog?.isWorld(target.id) != true) {
             open(place.mapId)
         } else {
             open(place.mapId, place.x, place.y)
@@ -72,13 +78,14 @@ internal class MapNavigation(
         val catalog = session.catalog ?: return
         val map = session.current.map ?: return
         session.update { it.copy(detail = null, zoneListOpen = false) }
-        if (map.identifier == GameMap.WORLD) {
+        if (map.isWorld) {
             selection.clearZone()
             return
         }
         val entrance = catalog.parentEntrance(map.id)
         if (entrance == null) {
-            catalog.world?.let { open(it.id) }
+            val origin = catalog.maps[map.id]?.originMapId ?: catalog.worldOf(map.id)?.id
+            origin?.let { open(it) }
             return
         }
         val displayed = catalog.displayedMapOf(entrance.mapId) ?: return
@@ -133,14 +140,14 @@ internal class MapNavigation(
             show(displayed.id, nx, ny, if (nx != null) scale ?: FOCUS_SCALE else null)
         }
         // Ville, route ou carte intérieure : son contenu s'affiche sur la carte.
-        if (target.id == catalog.world?.id) selection.clearZone() else selection.selectZone(catalog, target.id)
+        if (catalog.isWorld(target.id)) selection.clearZone() else selection.selectZone(catalog, target.id)
     }
 
     /** Crée la carte affichée (MapCompose) ; position et zoom normalisés, ou carte entière si absents. */
     fun show(mapId: Int, x: Double?, y: Double?, scale: Double?) {
         val catalog = session.catalog ?: return
         val map = catalog.gameMap(mapId) ?: return
-        val isWorld = map.identifier == GameMap.WORLD
+        val isWorld = map.isWorld
         val mapState = createMapState(map, x, y, scale ?: if (isWorld) WORLD_SCALE else FOCUS_SCALE)
         retire(session.current)
         followViewport(map, mapState)
@@ -155,11 +162,13 @@ internal class MapNavigation(
         val parent = if (isWorld) {
             null
         } else {
-            catalog.parentEntrance(map.id)?.let { catalog.maps[it.mapId] } ?: catalog.world
+            catalog.parentEntrance(map.id)?.let { catalog.maps[it.mapId] }
+                ?: catalog.maps[catalog.maps[map.id]?.originMapId] ?: catalog.worldOf(map.id)
         }
         session.update {
             it.copy(
                 map = map,
+                worldId = catalog.worldOf(map.id)?.id,
                 mapState = mapState,
                 zone = null,
                 detail = null,
@@ -176,13 +185,13 @@ internal class MapNavigation(
     }
 
     private fun createMapState(map: GameMap, x: Double?, y: Double?, scale: Double): MapState {
-        val start = map.regions.firstOrNull { it.identifier == START_REGION }
+        val start = map.regions.firstOrNull { it.id == map.startRegionId }
         val startX = x ?: start?.let { it.centerX.toDouble() / map.width } ?: CENTER
         val startY = y ?: start?.let { it.centerY.toDouble() / map.height } ?: CENTER
         return MapState(map.levelCount, map.width, map.height, GameMap.TILE_SIZE) {
             scroll(startX, startY)
             scale(scale)
-            minimumScaleMode(if (map.identifier == GameMap.WORLD) Fit else Forced(MIN_INDOOR_SCALE))
+            minimumScaleMode(if (map.isWorld) Fit else Forced(MIN_INDOOR_SCALE))
             maxScale(MAX_SCALE)
             // Pixels nets en zoom avant ; lissage seulement quand la carte est réduite.
             bitmapFilteringEnabled { state -> state.scale < 1.0 }
@@ -203,7 +212,7 @@ internal class MapNavigation(
      */
     private fun followViewport(map: GameMap, mapState: MapState) {
         viewportJob?.cancel()
-        viewportJob = if (map.identifier == GameMap.WORLD) {
+        viewportJob = if (map.isWorld) {
             session.launch {
                 mapState.getLayoutSizeFlow().collect { size ->
                     WorldZoom.minScale(size.width, size.height, map.width, map.height)?.let {
@@ -338,7 +347,6 @@ internal class MapNavigation(
     }
 
     private companion object {
-        const val START_REGION = "pallet-town"
         const val WORLD_SCALE = 2.0
         const val FOCUS_SCALE = 4.0
         const val MIN_INDOOR_SCALE = 0.5

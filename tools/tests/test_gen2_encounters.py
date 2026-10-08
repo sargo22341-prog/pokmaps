@@ -228,6 +228,5 @@ def test_stale_transfer_only_rows_are_reported(preview_database: Path, tmp_path:
     assert "transfer_only.csv : Pokémon obtenables dans la génération 2 : [1, 2, 3]" in validate(copy)
 
 
-def test_gold_silver_are_not_in_the_app(builder: DatabaseBuilder) -> None:
-    # Or et Argent n'entrent dans l'application qu'avec la phase 6 de plan_gen_2.md.
-    assert GOLD_SILVER not in builder.games
+def test_gold_silver_are_in_the_app(builder: DatabaseBuilder) -> None:
+    assert GOLD_SILVER in builder.games

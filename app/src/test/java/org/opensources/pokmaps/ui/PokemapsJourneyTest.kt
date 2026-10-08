@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollToNodeAction
 import androidx.compose.ui.test.hasSetTextAction
@@ -51,6 +52,55 @@ class PokemapsJourneyTest {
             "Base absente : lancer tools/build_data.py",
             File(System.getProperty("pokemaps.database").orEmpty()).isFile
         )
+    }
+
+    @Test
+    fun goldShowsBothRegionsAndTheNightFilter() {
+        selectGold()
+        click(hasText(text(R.string.nav_map)))
+        await(hasText("Johto"))
+        await(hasText("Kanto"))
+        click(hasText("Kanto") and hasClickAction())
+        compose.onNode(hasText("Kanto") and isSelected()).assertExists()
+        click(hasText("Johto") and hasClickAction())
+        click(hasText(text(R.string.time_morning)))
+        click(hasText(text(R.string.time_day)))
+        compose.onNode(hasText(text(R.string.time_night)) and isSelected()).assertExists()
+        openPokemon("hoot", "Hoothoot")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+        await(hasText(text(R.string.map_highlight, "Hoothoot")))
+    }
+
+    @Test
+    fun goldShowsEggMovesAndOpensTheirDetails() {
+        selectGold()
+        openPokemon("pichu", "Pichu")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_moves_egg)))
+        click(hasText(text(R.string.pokemon_moves_egg)))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("Encore"))
+        click(hasText("Encore"))
+        await(hasText(text(R.string.move_title)))
+    }
+
+    @Test
+    fun goldShowsHeldItemsAndBreeding() {
+        selectGold()
+        openPokemon("pika", "Pikachu")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_held_items)))
+        await(hasText("Baie Oran"))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_breeding)))
+        await(hasText(text(R.string.pokemon_hatch_cycles, 10)))
+    }
+
+    @Test
+    fun goldShowsFriendshipAndTimeOfDayForEevee() {
+        selectGold()
+        openPokemon("evoli", "Évoli")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_evolutions)))
+        await(hasText(text(R.string.evolution_happiness, 220), substring = true))
+        compose.onNode(hasText(text(R.string.evolution_day), substring = true)).assertExists()
+        compose.onNode(hasText(text(R.string.evolution_night), substring = true)).assertExists()
     }
 
     @Test
@@ -181,6 +231,13 @@ class PokemapsJourneyTest {
     }
 
     private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
+
+    private fun selectGold() {
+        click(hasText(text(R.string.nav_game)))
+        await(hasScrollToNodeAction())
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.game_name, "Or")))
+        click(hasText(text(R.string.game_name, "Or")))
+    }
 
     /** Ouvre la fiche d'un Pokémon depuis le Pokédex. */
     private fun openPokemon(query: String, name: String) {

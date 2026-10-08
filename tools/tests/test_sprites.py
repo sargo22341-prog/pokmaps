@@ -13,7 +13,7 @@ def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
     assert sorted(path.name for path in (sprites / "pokemon").iterdir()) == ["animated", "shiny", "static"]
     assert sorted(path.name for path in (sprites / "pokemon/shiny").iterdir()) == ["animated", "static"]
     for folder in (sprites / "pokemon", sprites / "pokemon/shiny"):
-        for pokemon_id in range(1, 152):
+        for (pokemon_id,) in db.execute("SELECT id FROM pokemon ORDER BY id"):
             with Image.open(folder / "animated" / f"{pokemon_id}.webp") as animated:
                 assert (animated.format, animated.is_animated) == ("WEBP", True)
                 animated.seek(0)
@@ -34,7 +34,15 @@ def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
         if has_sprite != (sprites / "items" / f"{identifier}.webp").is_file()
     ]
     assert missing == []
-    assert db.execute("SELECT count(*) FROM item WHERE has_sprite = 0").fetchone()[0] == 0
+    assert {row[0] for row in db.execute("SELECT identifier FROM item WHERE has_sprite = 0")} == {
+        "berserk-gene",
+        "flower-mail",
+        "surf-mail",
+        "liteblue-mail",
+        "portrait-mail",
+        "lovely-mail",
+        "exp-share",
+    }
 
 
 # --- Cartes -----------------------------------------------------------------------

@@ -41,13 +41,17 @@ def test_kanto_pokedex(db: sqlite3.Connection) -> None:
         )
         == 151
     )
-    assert scalar(db, "SELECT count(*) FROM pokemon") == 151
+    assert scalar(db, "SELECT count(*) FROM pokemon WHERE generation_id = 1") == 151
 
 
 def test_french_names(db: sqlite3.Connection) -> None:
     names = dict(db.execute("SELECT id, name_fr FROM pokemon WHERE id IN (1, 25, 122, 133)"))
     assert names == {1: "Bulbizarre", 25: "Pikachu", 122: "M. Mime", 133: "Évoli"}
-    assert dict(db.execute("SELECT id, name_fr FROM version")) == {RED: "Rouge", BLUE: "Bleu", YELLOW: "Jaune"}
+    assert dict(db.execute("SELECT id, name_fr FROM version WHERE version_group_id IN (1, 2)")) == {
+        RED: "Rouge",
+        BLUE: "Bleu",
+        YELLOW: "Jaune",
+    }
 
 
 def test_gen1_special_stat(db: sqlite3.Connection) -> None:
@@ -71,7 +75,7 @@ def test_gen1_types(db: sqlite3.Connection) -> None:
 
     assert types(35) == ["normal"]  # Mélofée, Fée seulement depuis la 6e génération
     assert types(81) == ["electric"]  # Magnéti, Acier depuis la 2e génération
-    assert scalar(db, "SELECT count(*) FROM type") == 15
+    assert scalar(db, "SELECT count(*) FROM type WHERE generation_id = 1") == 15
 
 
 def test_gen1_type_chart(db: sqlite3.Connection) -> None:
@@ -122,7 +126,7 @@ def test_version_exclusives(db: sqlite3.Connection) -> None:
             row[0]
             for row in db.execute(
                 """SELECT e.version_id FROM encounter e JOIN encounter_method m ON m.id = e.method_id
-                   WHERE e.pokemon_id = ? AND m.identifier = 'walk'""",
+                   WHERE e.pokemon_id = ? AND m.identifier = 'walk' AND e.version_id IN (1, 2, 3)""",
                 (pokemon_id,),
             )
         }
@@ -309,8 +313,9 @@ def test_trainer_default_moves(db: sqlite3.Connection) -> None:
     assert ("Chenipan", 6, "Charge", "Sécrétion", None, None) in party
     # Seuls les rivaux (équipe selon le starter) n'ont pas d'équipe sur la carte.
     without = db.execute(
-        """SELECT DISTINCT trainer_class FROM map_object WHERE kind = 'trainer'
-           AND id NOT IN (SELECT map_object_id FROM trainer_pokemon)"""
+        """SELECT DISTINCT o.trainer_class FROM map_object o JOIN map m ON m.id = o.map_id
+           WHERE o.kind = 'trainer' AND m.version_group_id IN (1, 2)
+           AND o.id NOT IN (SELECT map_object_id FROM trainer_pokemon)"""
     ).fetchall()
     assert {row[0] for row in without} <= {"rival1", "rival2", "rival3"}
 

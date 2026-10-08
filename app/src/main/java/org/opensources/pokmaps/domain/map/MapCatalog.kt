@@ -14,7 +14,10 @@ data class MapInfo(
     val y: Int,
     val width: Int,
     val height: Int,
-    val levelCount: Int
+    val levelCount: Int,
+    val isWorld: Boolean = false,
+    val originMapId: Int? = null,
+    val startMapId: Int? = null
 ) {
     val isDisplayable: Boolean get() = parentId == null && levelCount > 0
 
@@ -80,7 +83,8 @@ data class MapObject(
     val level: Int?,
     val trainerClass: String?,
     /** Nom affiché : classe du dresseur, personnage d'après son sprite, Pokémon ou objet (tools/data/). */
-    val name: String
+    val name: String,
+    val itemHasSprite: Boolean = true
 )
 
 /** Zone de rencontre PokéAPI rattachée à une carte. */
@@ -96,7 +100,17 @@ data class MapCatalog(
     /** Emplacements des Pokémon sauvages de chaque carte (ville, route ou carte intérieure). */
     val spots: Map<Int, List<MapSpot>> = emptyMap()
 ) {
-    val world: MapInfo? = maps.values.firstOrNull { it.identifier == GameMap.WORLD && it.isDisplayable }
+    val worlds: List<MapInfo> = maps.values.filter { it.isDisplayable && isWorld(it.id) }.sortedBy { it.id }
+    val defaultWorld: MapInfo? = worlds.firstOrNull()
+
+    fun isWorld(mapId: Int): Boolean = maps[mapId]?.isWorld == true
+
+    fun worldOf(mapId: Int): MapInfo? {
+        val map = maps[mapId] ?: return null
+        if (isWorld(map.id)) return map
+        val origin = maps[map.originMapId]
+        return maps[map.parentId ?: origin?.parentId]?.takeIf { isWorld(it.id) }
+    }
 
     /** Carte affichable qui contient `mapId` : elle-même, ou la carte du monde pour une ville ou une route. */
     fun displayedMapOf(mapId: Int): MapInfo? {
@@ -120,7 +134,9 @@ data class MapCatalog(
             width = map.width,
             height = map.height,
             levelCount = map.levelCount,
-            regions = regionsOf(map.id).map { it.toRegion() }
+            regions = regionsOf(map.id).map { it.toRegion() },
+            isWorld = isWorld(map.id),
+            startRegionId = map.startMapId
         )
     }
 
@@ -166,25 +182,14 @@ data class MapCatalog(
      * on l'atteint en passant par le moins de cartes (Mont Sélénite sous-sol 2 → entrée du Mont Sélénite).
      */
     fun worldEntrances(): Map<Int, MapWarp> {
-        val world = world ?: return emptyMap()
         val result = mutableMapOf<Int, MapWarp>()
-        val queue = ArrayDeque<Pair<Int, MapWarp>>()
-        for (warp in partsOf(world.id).flatMap { warps[it].orEmpty() }) {
-            val target = warp.targetMapId ?: continue
-            if (maps[target]?.isDisplayable == true && target != world.id && target !in result) {
-                result[target] = warp
-                queue += target to warp
+        for ((target, entrance) in reachedBy) {
+            var root = entrance
+            val seen = mutableSetOf(target)
+            while (!isWorld(displayedMapOf(root.mapId)?.id ?: root.mapId) && seen.add(root.mapId)) {
+                root = reachedBy[root.mapId] ?: break
             }
-        }
-        while (queue.isNotEmpty()) {
-            val (mapId, entrance) = queue.removeFirst()
-            for (warp in warps[mapId].orEmpty()) {
-                val target = warp.targetMapId ?: continue
-                if (maps[target]?.isDisplayable == true && target != world.id && target !in result) {
-                    result[target] = entrance
-                    queue += target to entrance
-                }
-            }
+            if (isWorld(displayedMapOf(root.mapId)?.id ?: root.mapId)) result[target] = root
         }
         return result
     }
@@ -209,16 +214,20 @@ data class MapCatalog(
 
     /** Pour chaque carte intérieure, le warp par lequel on l'atteint en premier en partant de l'extérieur. */
     private val reachedBy: Map<Int, MapWarp> by lazy {
-        val world = world ?: return@lazy emptyMap()
         val result = mutableMapOf<Int, MapWarp>()
-        val queue = ArrayDeque(partsOf(world.id))
+        val queue = ArrayDeque(worlds.flatMap { partsOf(it.id) })
+        val seen = mutableSetOf<Int>()
         while (queue.isNotEmpty()) {
-            for (warp in warps[queue.removeFirst()].orEmpty()) {
-                val target = warp.targetMapId ?: continue
-                if (maps[target]?.isDisplayable == true && target != world.id && target !in result) {
-                    result[target] = warp
-                    queue += target
-                }
+            val source = queue.removeFirst()
+            if (!seen.add(source)) continue
+            for (warp in warps[source].orEmpty()) {
+                val target = maps[warp.targetMapId] ?: continue
+                if (!target.isDisplayable || isWorld(target.id) || target.id in result) continue
+                val origin = target.originMapId
+                val sourceOrigin = maps[source]?.originMapId ?: source
+                if (origin != null && sourceOrigin != origin) continue
+                result[target.id] = warp
+                queue += target.id
             }
         }
         result

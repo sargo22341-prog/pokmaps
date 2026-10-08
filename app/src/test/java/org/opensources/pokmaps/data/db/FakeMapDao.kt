@@ -12,11 +12,14 @@ internal class FakeMapDao(
     private val failing: Boolean = false,
     private val encountersFailing: Boolean = false,
     private val includeHiddenItem: Boolean = false,
-    private val includeVersionPokemon: Boolean = false
+    private val includeVersionPokemon: Boolean = false,
+    private val timedEncounters: Boolean = false,
+    private val emptyMaps: Boolean = false
 ) : MapDao {
     override suspend fun maps(versionGroupId: Int) = read {
+        if (emptyMaps) return@read emptyList()
         listOf(
-            MapEntity(WORLD, versionGroupId, "kanto", "Kanto", null, 0, 0, 480, 432, 2),
+            MapEntity(WORLD, versionGroupId, "kanto", "Kanto", null, 0, 0, 480, 432, 2, isWorld = true),
             MapEntity(ROUTE_1, versionGroupId, "route-1", "Route 1", WORLD, 160, 0, 160, 288, 0),
             MapEntity(VIRIDIAN, versionGroupId, "viridian-city", "Jadielle", WORLD, 160, 288, 160, 144, 0),
             MapEntity(MART, versionGroupId, "viridian-mart", "Boutique de Jadielle", null, 0, 0, 128, 128, 1),
@@ -91,7 +94,20 @@ internal class FakeMapDao(
 
     override suspend fun encounters(versionId: Int, areaIds: List<Int>) = read {
         check(!encountersFailing) { FakeGameDao.BROKEN }
-        if (AREA in areaIds) listOf(PIDGEY_ENCOUNTER) else emptyList()
+        if (AREA !in areaIds) return@read emptyList()
+        if (timedEncounters) {
+            listOf(
+                PIDGEY_ENCOUNTER.copy(conditions = "La journée", conditionIdentifiers = "time-day"),
+                PIDGEY_ENCOUNTER.copy(
+                    pokemonId = 163,
+                    pokemonName = "Hoothoot",
+                    conditions = "La nuit",
+                    conditionIdentifiers = "time-night"
+                )
+            )
+        } else {
+            listOf(PIDGEY_ENCOUNTER)
+        }
     }
 
     override suspend fun pokemonAreaMethods(versionId: Int, pokemonId: Int) =

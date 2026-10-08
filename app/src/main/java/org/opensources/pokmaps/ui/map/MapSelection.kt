@@ -3,8 +3,10 @@ package org.opensources.pokmaps.ui.map
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
-import org.opensources.pokmaps.domain.model.GameMap
+import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.groupByMethod
+import org.opensources.pokmaps.domain.model.matchesTimes
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 
@@ -17,6 +19,8 @@ internal class MapSelection(
     private val getMapEncounters: GetMapEncountersUseCase,
     private val getObjectDetails: GetMapObjectDetailsUseCase
 ) {
+    private var loadedEncounters: List<Encounter> = emptyList()
+
     /** Sélectionne une ville, une route ou une carte intérieure et charge ses rencontres. */
     fun selectZone(catalog: MapCatalog, zoneId: Int) {
         val game = session.loaded.value?.game ?: return
@@ -24,6 +28,7 @@ internal class MapSelection(
         val items = catalog.objects[zoneId].orEmpty().filter {
             it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM
         }
+        loadedEncounters = emptyList()
         val zone = MapZone(
             mapId = zoneId,
             name = info.name,
@@ -42,17 +47,31 @@ internal class MapSelection(
             }
         ) { encounters ->
             if (session.current.zone != zone) return@load
-            val wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)
-            session.updateOverlays { it.copy(wildMarkers = wildMarkers) }
-            session.update { it.copy(zone = zone.copy(loading = false, encounters = encounters)) }
-            session.refreshOverlays()
+            loadedEncounters = encounters
+            applyTimes(catalog, zone)
         }
+    }
+
+    fun toggleTime(time: EncounterTime) {
+        val selected = session.current.times
+        session.update { it.copy(times = if (time in selected) selected - time else selected + time, detail = null) }
+        val catalog = session.catalog ?: return
+        val zone = session.current.zone?.takeIf { !it.loading && !it.failed } ?: return
+        applyTimes(catalog, zone)
+    }
+
+    private fun applyTimes(catalog: MapCatalog, zone: MapZone) {
+        val info = catalog.maps[zone.mapId] ?: return
+        val encounters = loadedEncounters.filter { it.matchesTimes(session.current.times) }
+        session.updateOverlays { it.copy(wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)) }
+        session.update { it.copy(zone = zone.copy(loading = false, encounters = encounters)) }
+        session.refreshOverlays()
     }
 
     /** Désélectionne la ville ou la route (une carte intérieure reste toujours sélectionnée). */
     fun clearZone() {
         val map = session.current.map
-        if (map != null && map.identifier != GameMap.WORLD) return
+        if (map != null && !map.isWorld) return
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
         session.update { it.copy(zone = null, detail = null, zoneListOpen = false) }
         session.refreshOverlays()

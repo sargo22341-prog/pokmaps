@@ -142,7 +142,8 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
         val identifier = obj.itemIdentifier
         val sprite = obj.sprite
         when {
-            identifier != null -> PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
+            identifier != null && obj.itemHasSprite ->
+                PixelArtImage(Sprites.item(identifier), PixelArt.ITEM_ICON, 48.dp, null)
 
             sprite != null -> PixelArtImage(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),

@@ -84,6 +84,9 @@ class MapRow:
     width: int
     height: int
     level_count: int
+    is_world: bool = False
+    origin: str | None = None
+    start: str | None = None
 
 
 @dataclass
@@ -168,7 +171,23 @@ def _display_map_rows(
         display = map_renderer.render(const)
         write_tiles(display, output / identifier(const))
         number = numbers[const] if const in numbers else maps[const].number
-        rows.append(MapRow(const, number, names[const], None, 0, 0, display.width, display.height, display.level_count))
+        start = next((region.start_map for region in game_maps.game.regions if region.const == const), None)
+        rows.append(
+            MapRow(
+                const,
+                number,
+                names[const],
+                None,
+                0,
+                0,
+                display.width,
+                display.height,
+                display.level_count,
+                const in numbers,
+                game_maps.parents.get(const),
+                start,
+            )
+        )
     for region, blocks in game_maps.world_blocks.items():
         for const, (bx, by) in sorted(blocks.items(), key=lambda item: maps[item[0]].number):
             pret_map = maps[const]

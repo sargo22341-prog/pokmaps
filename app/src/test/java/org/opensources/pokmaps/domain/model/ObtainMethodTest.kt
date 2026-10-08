@@ -25,10 +25,21 @@ class ObtainMethodTest {
         )
     }
 
-    /** Une méthode d'un nouveau jeu (ex. Coup d'Boule dans Or/Argent) ne doit pas disparaître des filtres. */
+    @Test
+    fun johtoMethodsAreClassified() {
+        listOf("headbutt", "headbutt-low", "headbutt-normal", "headbutt-high").forEach {
+            assertEquals(ObtainMethod.HEADBUTT, ObtainMethod.fromEncounterMethod(it))
+        }
+        assertEquals(ObtainMethod.ROCK_SMASH, ObtainMethod.fromEncounterMethod("rock-smash"))
+        assertEquals(ObtainMethod.GIFT, ObtainMethod.fromEncounterMethod("gift-egg"))
+        assertEquals(ObtainMethod.STATIC, ObtainMethod.fromEncounterMethod("squirt-bottle"))
+        assertEquals(ObtainMethod.STATIC, ObtainMethod.fromEncounterMethod("roaming-grass"))
+    }
+
+    /** Une méthode inconnue ne doit pas disparaître des filtres. */
     @Test
     fun anUnknownMethodIsAnError() {
-        val error = assertThrows(IllegalArgumentException::class.java) { ObtainMethod.fromEncounterMethod("headbutt") }
-        assertEquals("Méthode de rencontre inconnue : headbutt", error.message)
+        val error = assertThrows(IllegalArgumentException::class.java) { ObtainMethod.fromEncounterMethod("unknown") }
+        assertEquals("Méthode de rencontre inconnue : unknown", error.message)
     }
 }

@@ -7,7 +7,9 @@ import org.opensources.pokmaps.domain.pokemon.MoveEffect
 enum class SpotKind(val identifier: String) {
     GRASS("grass"),
     WATER("water"),
-    FLOOR("floor");
+    FLOOR("floor"),
+    TREE("tree"),
+    ROCK("rock");
 
     companion object {
         fun from(identifier: String): SpotKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

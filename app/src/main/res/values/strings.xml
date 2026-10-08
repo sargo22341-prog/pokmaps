@@ -308,4 +308,28 @@
         <item quantity="many">Animés à %1$d endroits sur %2$d</item>
         <item quantity="other">Animés à %1$d endroits sur %2$d</item>
     </plurals>
+    <string name="method_headbutt">Coup d’Boule</string>
+    <string name="method_rock_smash">Éclate-Roc</string>
+    <string name="time_morning">Matin</string>
+    <string name="time_day">Jour</string>
+    <string name="time_night">Nuit</string>
+    <string name="pokemon_moves_egg">Œuf</string>
+    <string name="pokemon_moves_tutor">Tuteur</string>
+    <string name="evolution_happiness">Bonheur ≥ %1$d</string>
+    <string name="evolution_day">De jour</string>
+    <string name="evolution_night">De nuit</string>
+    <string name="ball_level">Niveau Ball</string>
+    <string name="ball_lure">Appât Ball</string>
+    <string name="ball_moon">Lune Ball</string>
+    <string name="ball_friend">Copain Ball</string>
+    <string name="ball_love">Love Ball</string>
+    <string name="ball_heavy">Masse Ball</string>
+    <string name="ball_fast">Rapide Ball</string>
+    <string name="ball_park">Parc Ball</string>
+    <string name="catch_player_level">Niveau de votre Pokémon : %1$d</string>
+    <string name="catch_fishing">Rencontre par pêche</string>
+    <string name="catch_love_bonus">Même espèce et même sexe (Love Ball)</string>
+    <string name="catch_note_gen2">Probabilité par lancer dans Or et Argent, avec un DV des PV moyen. Le sommeil et le gel aident ; les autres statuts n’aident pas. La Niveau Ball ignore les PV et le statut, la Lune Ball n’a aucun bonus et la Rapide Ball aide seulement pour Magnéti, Tadmorv et Saquedeneu. La Copain Ball augmente le bonheur après la capture. La Parc Ball est réservée au Concours.</string>
+    <string name="catch_engine_blocked">Avec ces PV maximum, le moteur d’Or/Argent se bloque avec les Balls autres que la Master Ball et la Niveau Ball. Leurs probabilités ne peuvent pas être calculées.</string>
+    <string name="map_empty">Ce jeu n’a aucune carte.</string>
 </resources>

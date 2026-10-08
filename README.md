@@ -1,7 +1,7 @@
 # Pokémaps
 
-Application Android de **cartes interactives pour Pokémon Rouge, Bleu et Jaune**, entièrement en français :
-carte de Kanto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
+Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or et Argent**, entièrement en français :
+cartes de Kanto et de Johto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
 attaques (effet et probabilité de l'effet) et Pokédex.
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
@@ -14,6 +14,17 @@ Le jeu se choisit dans l'onglet « Jeu » de la barre du bas, classé par géné
 Réglages, « Captures comptées » fait compter un Pokémon capturé pour le jeu choisi, pour sa génération ou pour tous
 les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
 rien.
+
+Or et Argent proposent les cartes de Johto et de Kanto : les boutons de région permettent de passer de l'une à
+l'autre. Les filtres Matin, Jour et Nuit de la carte sont tous activés par défaut ; ils filtrent les marqueurs et
+la liste du lieu sélectionné. Chaque rencontre précise aussi ses conditions (heure, essaim, concours…). Les
+cartes conservent les couleurs de jour du jeu, indépendamment de ce filtre. Coup d'Boule et Éclate-Roc placent les
+Pokémon sur les arbres et les rochers correspondants.
+
+Les fiches d'Or et d'Argent affichent les six statistiques, les objets tenus, le sexe, les groupes d'œufs,
+les cycles d'éclosion et les attaques par œuf. Les évolutions précisent le bonheur, l'heure et les objets tenus.
+Le calculateur de capture reproduit la formule et les Balls du jeu, avec ses défauts d'origine ; le niveau du
+Pokémon de l'équipe, la pêche et le contexte de la Love Ball sont réglables. Cristal reste à intégrer.
 
 ## Captures d'écran
 
@@ -43,8 +54,8 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 - `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
   et sprites des PNJ.
 
-Les jeux en cours d'intégration (`GAMES_IN_PROGRESS` dans `tools/pokemaps_data/games.py`, aujourd'hui Or et
-Argent) ne sont pas embarqués : `tools/build_data.py` les génère avec tous les autres dans un aperçu,
+Les jeux en cours d'intégration (`GAMES_IN_PROGRESS` dans `tools/pokemaps_data/games.py`, actuellement vide)
+ne sont pas embarqués : `tools/build_data.py` les génère avec tous les autres dans un aperçu,
 `tools/build/preview/` (même organisation, hors de Git), validé de la même façon. Les tests et l'éditeur des
 emplacements le lisent.
 
@@ -94,8 +105,7 @@ reproductible. La base est vérifiée après chaque génération (références c
 qui totalisent 100 % pour chaque moment de la journée, chaque Pokémon obtenable par rencontre, évolution ou
 reproduction…).
 
-Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajouter un jeu (Or/Argent, par
-exemple) demande :
+Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajouter un jeu demande :
 
 - une ligne dans `games.py`, d'abord dans `GAMES_IN_PROGRESS` (le jeu est généré et validé dans l'aperçu sans entrer
   dans l'application), puis dans `GAMES` quand l'application sait l'afficher : Pokémon, attaques, objets et
@@ -105,14 +115,14 @@ exemple) demande :
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
-- d'adapter la lecture des cartes pret (`pret*.py`, écrite pour la 1re génération), la carte du monde
-  (`maps_layout.py` : `WORLD`, `START_MAP`) et les palettes (`maps_render.py`) ;
+- de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`), ses régions et villes
+  de départ (`Game.regions`), ses palettes et son rendu (`maps_render*.py`) ;
 - de classer ses nouvelles méthodes de rencontre (ex. `headbutt`) dans `ObtainMethod` : une méthode inconnue
   fait échouer le chargement au lieu de disparaître en silence des filtres et de la carte ;
-- de lire les effets de ses attaques (`pret_moves.py` et `move_effects.csv`, écrits pour la 1re génération) : une
+- de lire les effets de ses attaques (`pret_moves.py`, `pret_gen2_moves.py` et `move_effects.csv`) : une
   attaque sans effet arrête la génération.
 
-Les mécaniques des générations suivantes sont déjà prévues, et la fiche d'un Pokémon les affiche dès qu'un jeu les
+Les mécaniques propres aux générations suivantes sont prévues, et la fiche d'un Pokémon les affiche dès qu'un jeu les
 connaît (`GenerationFeature` dans l'application) : objets tenus (2e génération ; PokéAPI ne les donne qu'à partir de la
 3e, ceux de la 2e sont lus dans pret), chromatiques (1 chance sur 8 192, puis 1 sur 4 096 à partir
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché

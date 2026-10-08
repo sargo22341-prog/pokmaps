@@ -6,7 +6,9 @@ data class EvolutionCondition(
     val minLevel: Int? = null,
     val itemName: String? = null,
     val itemIdentifier: String? = null,
-    val itemHasSprite: Boolean = false
+    val itemHasSprite: Boolean = false,
+    val minHappiness: Int? = null,
+    val timeOfDay: String? = null
 )
 
 /** Pokémon d'une famille d'évolution, avec la condition pour l'obtenir (null pour le Pokémon de base). */
