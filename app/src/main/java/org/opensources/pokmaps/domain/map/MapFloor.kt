@@ -26,14 +26,15 @@ sealed interface FloorLevel {
     companion object {
         /** Bâtiment et niveau d'une carte (« mt-moon-b2f » → « mt-moon », 2e sous-sol), null sans niveau. */
         fun parse(identifier: String): Pair<String, FloorLevel>? {
-            NUMBERED.matchEntire(identifier)?.let { match ->
+            val floor = identifier.removeSuffix("-plan")
+            NUMBERED.matchEntire(floor)?.let { match ->
                 val (building, basement, number) = match.destructured
                 val n = number.toInt()
                 return building to if (basement.isEmpty()) Storey(n - 1) else Basement(n)
             }
             return when {
-                identifier.endsWith(ROOF) -> identifier.removeSuffix(ROOF) to Roof
-                identifier.endsWith(ELEVATOR) -> identifier.removeSuffix(ELEVATOR) to Elevator
+                floor.endsWith(ROOF) -> floor.removeSuffix(ROOF) to Roof
+                floor.endsWith(ELEVATOR) -> floor.removeSuffix(ELEVATOR) to Elevator
                 else -> null
             }
         }
@@ -47,4 +48,4 @@ private const val ROOF_ORDER = 1_000
 private const val ELEVATOR_ORDER = -1_000
 
 /** Étage d'un bâtiment ou d'une grotte à plusieurs niveaux (carte intérieure affichable). */
-data class MapFloor(val mapId: Int, val level: FloorLevel)
+data class MapFloor(val mapId: Int, val level: FloorLevel, val name: String = "")

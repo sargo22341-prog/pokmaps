@@ -1,0 +1,72 @@
+family,plan,number,name_fr,map,x,y
+red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_NORTH,26,0
+red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_WEST,0,38
+red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_CENTER,32,38
+red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_EAST,68,26
+red-blue-yellow,SS_ANNE_1F_PLAN,901,L'Océane (1er pont),SS_ANNE_1F,0,0
+red-blue-yellow,SS_ANNE_1F_PLAN,901,L'Océane (1er pont),SS_ANNE_1F_ROOMS,44,0
+red-blue-yellow,SS_ANNE_1F_PLAN,901,L'Océane (1er pont),SS_ANNE_KITCHEN,72,0
+red-blue-yellow,SS_ANNE_2F_PLAN,902,L'Océane (2e pont),SS_ANNE_2F,0,0
+red-blue-yellow,SS_ANNE_2F_PLAN,902,L'Océane (2e pont),SS_ANNE_2F_ROOMS,44,0
+red-blue-yellow,SS_ANNE_3F_PLAN,903,L'Océane (3e pont),SS_ANNE_CAPTAINS_ROOM,48,0
+red-blue-yellow,SS_ANNE_3F_PLAN,903,L'Océane (3e pont),SS_ANNE_3F,0,0
+red-blue-yellow,SS_ANNE_3F_PLAN,903,L'Océane (3e pont),SS_ANNE_BOW,24,0
+red-blue-yellow,SS_ANNE_B1F_PLAN,904,L'Océane (cale),SS_ANNE_B1F,0,0
+red-blue-yellow,SS_ANNE_B1F_PLAN,904,L'Océane (cale),SS_ANNE_B1F_ROOMS,34,0
+red-blue-yellow,CINNABAR_LAB_PLAN,905,Labo Pokémon de Cramois'Île,CINNABAR_LAB,0,0
+red-blue-yellow,CINNABAR_LAB_PLAN,905,Labo Pokémon de Cramois'Île,CINNABAR_LAB_TRADE_ROOM,22,0
+red-blue-yellow,CINNABAR_LAB_PLAN,905,Labo Pokémon de Cramois'Île,CINNABAR_LAB_METRONOME_ROOM,34,0
+red-blue-yellow,CINNABAR_LAB_PLAN,905,Labo Pokémon de Cramois'Île,CINNABAR_LAB_FOSSIL_ROOM,0,12
+red-blue-yellow,INDIGO_LEAGUE_PLAN,906,Ligue Pokémon,LORELEIS_ROOM,0,0
+red-blue-yellow,INDIGO_LEAGUE_PLAN,906,Ligue Pokémon,BRUNOS_ROOM,14,0
+red-blue-yellow,INDIGO_LEAGUE_PLAN,906,Ligue Pokémon,AGATHAS_ROOM,28,0
+red-blue-yellow,INDIGO_LEAGUE_PLAN,906,Ligue Pokémon,LANCES_ROOM,0,16
+red-blue-yellow,INDIGO_LEAGUE_PLAN,906,Ligue Pokémon,CHAMPIONS_ROOM,30,16
+gold-silver-crystal,MOUNT_MORTAR_1F_PLAN,900,Mont Creuset (RdC),MOUNT_MORTAR_1F_OUTSIDE,0,0
+gold-silver-crystal,MOUNT_MORTAR_1F_PLAN,900,Mont Creuset (RdC),MOUNT_MORTAR_1F_INSIDE,44,0
+gold-silver-crystal,MOUNT_MORTAR_2F_PLAN,901,Mont Creuset (1er étage),MOUNT_MORTAR_2F_INSIDE,0,0
+gold-silver-crystal,ICE_PATH_B2F_PLAN,902,Route de Glace (2e sous-sol),ICE_PATH_B2F_MAHOGANY_SIDE,0,0
+gold-silver-crystal,ICE_PATH_B2F_PLAN,902,Route de Glace (2e sous-sol),ICE_PATH_B2F_BLACKTHORN_SIDE,24,0
+gold-silver-crystal,WHIRL_ISLAND_1F_PLAN,903,Tourb'Îles (RdC),WHIRL_ISLAND_NW,0,0
+gold-silver-crystal,WHIRL_ISLAND_1F_PLAN,903,Tourb'Îles (RdC),WHIRL_ISLAND_NE,14,0
+gold-silver-crystal,WHIRL_ISLAND_1F_PLAN,903,Tourb'Îles (RdC),WHIRL_ISLAND_SW,38,0
+gold-silver-crystal,WHIRL_ISLAND_1F_PLAN,903,Tourb'Îles (RdC),WHIRL_ISLAND_CAVE,0,22
+gold-silver-crystal,WHIRL_ISLAND_1F_PLAN,903,Tourb'Îles (RdC),WHIRL_ISLAND_SE,14,22
+gold-silver-crystal,WHIRL_ISLAND_B3F_PLAN,904,Tourb'Îles (antre de Lugia),WHIRL_ISLAND_LUGIA_CHAMBER,0,0
+gold-silver-crystal,SILVER_CAVE_1F_PLAN,905,Mont Argenté (RdC),SILVER_CAVE_ROOM_1,0,0
+gold-silver-crystal,SILVER_CAVE_2F_PLAN,906,Mont Argenté (1er étage),SILVER_CAVE_ROOM_2,0,0
+gold-silver-crystal,SILVER_CAVE_2F_PLAN,906,Mont Argenté (1er étage),SILVER_CAVE_ITEM_ROOMS,34,0
+gold-silver-crystal,SILVER_CAVE_3F_PLAN,907,Mont Argenté (sommet),SILVER_CAVE_ROOM_3,0,0
+gold-silver-crystal,DARK_CAVE_PLAN,908,Antre Noir,DARK_CAVE_VIOLET_ENTRANCE,0,0
+gold-silver-crystal,DARK_CAVE_PLAN,908,Antre Noir,DARK_CAVE_BLACKTHORN_ENTRANCE,44,0
+gold-silver-crystal,FAST_SHIP_1F_PLAN,909,M/S Aquaria (pont),FAST_SHIP_1F,0,0
+gold-silver-crystal,FAST_SHIP_1F_PLAN,909,M/S Aquaria (pont),FAST_SHIP_CABINS_NNW_NNE_NE,36,0
+gold-silver-crystal,FAST_SHIP_1F_PLAN,909,M/S Aquaria (pont),FAST_SHIP_CABINS_SW_SSW_NW,48,0
+gold-silver-crystal,FAST_SHIP_1F_PLAN,909,M/S Aquaria (pont),FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN,0,36
+gold-silver-crystal,INDIGO_LEAGUE_PLAN,910,Ligue Pokémon,WILLS_ROOM,0,0
+gold-silver-crystal,INDIGO_LEAGUE_PLAN,910,Ligue Pokémon,KOGAS_ROOM,14,0
+gold-silver-crystal,INDIGO_LEAGUE_PLAN,910,Ligue Pokémon,BRUNOS_ROOM,28,0
+gold-silver-crystal,INDIGO_LEAGUE_PLAN,910,Ligue Pokémon,KARENS_ROOM,0,22
+gold-silver-crystal,INDIGO_LEAGUE_PLAN,910,Ligue Pokémon,LANCES_ROOM,14,22
+gold-silver-crystal,POKECENTER_2F_PLAN,911,Centre Pokémon (1er étage),POKECENTER_2F,0,0
+gold-silver-crystal,POKECENTER_2F_PLAN,911,Centre Pokémon (1er étage),TRADE_CENTER,20,0
+gold-silver-crystal,POKECENTER_2F_PLAN,911,Centre Pokémon (1er étage),COLOSSEUM,34,0
+gold-silver-crystal,POKECENTER_2F_PLAN,911,Centre Pokémon (1er étage),TIME_CAPSULE,0,12
+gold-silver-crystal,BATTLE_TOWER_2F_PLAN,912,Tour de Combat (1er étage),BATTLE_TOWER_HALLWAY,0,0
+gold-silver-crystal,BATTLE_TOWER_2F_PLAN,912,Tour de Combat (1er étage),BATTLE_TOWER_BATTLE_ROOM,26,0
+gold-silver-crystal,GOLDENROD_UNDERGROUND_B1F_PLAN,913,Souterrain de Doublonville (1er sous-sol),GOLDENROD_UNDERGROUND,0,0
+gold-silver-crystal,GOLDENROD_UNDERGROUND_B2F_PLAN,914,Souterrain de Doublonville (2e sous-sol),GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES,0,0
+gold-silver-crystal,GOLDENROD_UNDERGROUND_B2F_PLAN,914,Souterrain de Doublonville (2e sous-sol),GOLDENROD_UNDERGROUND_WAREHOUSE,34,0
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_HO_OH_CHAMBER,0,0
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_HO_OH_ITEM_ROOM,12,0
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_KABUTO_CHAMBER,24,0
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_KABUTO_ITEM_ROOM,0,14
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_OMANYTE_CHAMBER,12,14
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_OMANYTE_ITEM_ROOM,24,14
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_AERODACTYL_CHAMBER,0,28
+gold-silver-crystal,RUINS_OF_ALPH_1F_PLAN,915,Ruines d'Alpha (salles des puzzles),RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM,12,28
+gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_INNER_CHAMBER,0,0
+gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_HO_OH_WORD_ROOM,24,0
+gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_KABUTO_WORD_ROOM,48,0
+gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_OMANYTE_WORD_ROOM,0,32
+gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_AERODACTYL_WORD_ROOM,24,32

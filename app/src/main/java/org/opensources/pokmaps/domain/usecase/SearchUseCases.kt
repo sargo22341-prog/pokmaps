@@ -124,7 +124,8 @@ data class PlacePage(
     val offers: Map<Int, List<OfferLink>>,
     val places: List<MapInfo>,
     /** Ce que deviennent les fossiles du jeu (pour un personnage du lieu qui en donne). */
-    val fossilUses: Map<String, FossilUse> = emptyMap()
+    val fossilUses: Map<String, FossilUse> = emptyMap(),
+    val outdoor: Boolean = false
 ) {
     /** Rôles d'un personnage du lieu (dresseur, personnage, ses fonctions). */
     fun rolesOf(obj: MapObject): List<CharacterRole> =
@@ -136,20 +137,27 @@ class ObservePlacePageUseCase @Inject constructor(private val games: GameReposit
     operator fun invoke(identifier: String): Flow<PlacePage?> = games.selectedGame.map { game ->
         val catalog = maps.catalog(game)
         val map = catalog.mapByIdentifier(identifier) ?: return@map null
-        val objects = catalog.objects[map.id].orEmpty()
+        val parts = if (map.isDisplayable) catalog.partsOf(map.id) else listOf(map.id)
+        val objects = parts.flatMap { catalog.objects[it].orEmpty() }
         val index = maps.index(game)
         val offers = index.offers.groupBy { it.objectId }.filterKeys { id -> objects.any { it.id == id } }
         PlacePage(
             game = game,
             map = map,
-            encounters = maps.encounters(game, catalog.areas[map.id].orEmpty().map { it.areaId }),
+            encounters = maps.encounters(
+                game,
+                parts.flatMap {
+                    catalog.areas[it].orEmpty()
+                }.map { it.areaId }.distinct()
+            ),
             items = objects.filter { it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM },
             characters = objects.filter {
                 it.kind == MapObjectKind.TRAINER || it.kind == MapObjectKind.POKEMON || it.id in offers
             },
             offers = offers,
             places = catalog.accessibleFrom(map.id).mapNotNull { warp -> warp.targetMapId?.let { catalog.maps[it] } },
-            fossilUses = FossilUse.of(index, catalog)
+            fossilUses = FossilUse.of(index, catalog),
+            outdoor = catalog.displayedMapOf(map.id)?.isWorld == true
         )
     }
 }

@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Ajoute la recherche et les sprites des parents dans les astuces, le Léviator chromatique du Lac Colère et les plans réunissant les zones d'un même niveau, avec des liaisons et des badges réservés aux étages.
 - Simplification des guides, succès manuels ou RetroAchievements, recherche des parents et affichage des baies sur la carte.
 - Ajoute les Guides des six jeux, astuces, événements, reproduction, bonheur, suivi des Pokémon errants, sauvegarde de collection et 519 succès français avec connexion RetroAchievements facultative en lecture seule.
 - Le sbire des caméras du repaire Rocket n'apparaît plus dans le mur de la carte.

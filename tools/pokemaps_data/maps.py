@@ -3,8 +3,8 @@
 Pour chaque jeu :
 - les villes et routes de chaque région sont assemblées en une carte du monde (« kanto », « johto ») grâce aux
   connexions entre cartes ;
-- chaque carte intérieure accessible (grottes, bâtiments, étages…), et chaque ville ou route hors d'une carte du
-  monde, est une carte à part ;
+- les zones d'un même niveau sont réunies selon map_plans.csv ; les autres intérieurs accessibles et les maisons
+  restent des cartes à part ;
 - chaque carte affichable est découpée en tuiles de 256 px pour MapCompose, sur plusieurs niveaux de zoom :
   assets/maps/<groupe de versions>/<carte>/<niveau>/<ligne>_<colonne>.webp
   (le dernier niveau est à la taille réelle du jeu, 1 px = 1 pixel Game Boy ; l'application agrandit sans lissage).
@@ -139,6 +139,7 @@ def export_game(
 ) -> GameMapData:
     """Rend les cartes du jeu dans `output` (tuiles et sprites) et renvoie les lignes de la base."""
     placements = game_maps.placements
+    names = names | {const: plan.name for const, plan in game_maps.plans.items()}
     named = [*placements, *(region.const for region in game_maps.game.regions)]
     if missing := sorted(const for const in named if const not in names):
         raise ValueError(f"Nom français manquant dans tools/data/maps.csv : {missing}")
@@ -169,11 +170,12 @@ def _display_map_rows(
 ) -> list[MapRow]:
     maps = game_maps.maps
     numbers = {region.const: region.number for region in game_maps.game.regions}
+    plan_numbers = {const: plan.number for const, plan in game_maps.plans.items()}
     rows: list[MapRow] = []
     for const in game_maps.display_maps:
         display = map_renderer.render(const)
         write_tiles(display, output / identifier(const))
-        number = numbers[const] if const in numbers else maps[const].number
+        number = numbers.get(const) or plan_numbers.get(const) or maps[const].number
         start = next((region.start_map for region in game_maps.game.regions if region.const == const), None)
         rows.append(
             MapRow(
@@ -187,18 +189,35 @@ def _display_map_rows(
                 display.height,
                 display.level_count,
                 const in numbers,
-                game_maps.parents.get(const),
+                game_maps.parents.get(const) or _plan_origin(game_maps, const),
                 start,
             )
         )
-    for region, blocks in game_maps.world_blocks.items():
-        for const, (bx, by) in sorted(blocks.items(), key=lambda item: maps[item[0]].number):
-            pret_map = maps[const]
-            width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
-            rows.append(
-                MapRow(const, pret_map.number, names[const], region, bx * BLOCK_PX, by * BLOCK_PX, width, height, 0)
+    for const, placed in game_maps.placements.items():
+        if placed.display == const:
+            continue
+        pret_map = maps[const]
+        width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
+        rows.append(
+            MapRow(
+                const,
+                pret_map.number,
+                names[const],
+                placed.display,
+                placed.x,
+                placed.y,
+                width,
+                height,
+                0,
+                origin=game_maps.parents.get(const),
             )
+        )
     return rows
+
+
+def _plan_origin(game_maps: GameMaps, const: str) -> str | None:
+    plan = game_maps.plans.get(const)
+    return game_maps.parents[plan.parts[0].map] if plan else None
 
 
 def _warp_rows(game_maps: GameMaps) -> list[WarpRow]:
@@ -275,6 +294,9 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
         result[game.version_group] = export_game(game_maps, family_names, family_areas, curation, output_game)
     for family, version_groups in complete_families(games).items():
         _check_family_used(family, names.get(family, {}), areas.get(family, []), version_groups, result)
+        placed = {row.const for group in version_groups for row in result[group].maps}
+        if unknown := sorted({part.map for part in layout.plans if part.family == family} - placed):
+            raise ValueError(f"map_plans.csv : zones absentes des jeux {family} : {unknown}")
     families, repos = set(complete_families(games)), {game.pret_repo for game in games}
     if unused := curation.unused(families, repos):
         raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")

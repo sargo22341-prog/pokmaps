@@ -25,16 +25,30 @@ class SearchViewModelTest {
     @get:Rule
     val mainDispatcher = MainDispatcherRule()
 
-    private fun viewModel(failing: Boolean = false): SearchViewModel {
+    private fun viewModel(failing: Boolean = false, composite: Boolean = false): SearchViewModel {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return SearchViewModel(
-            ObserveSearchIndexUseCase(games, PokedexRepository(FakePokedexDao()), MapRepository(FakeMapDao(failing)))
+            ObserveSearchIndexUseCase(
+                games,
+                PokedexRepository(FakePokedexDao()),
+                MapRepository(FakeMapDao(failing, includeCompositeInterior = composite))
+            )
         )
     }
 
     @Test
     fun startsLoading() {
         assertTrue(viewModel().state.value.loading)
+    }
+
+    @Test
+    fun aRoomOnAComposedFloorIsAnInteriorSearchResult() = runTest {
+        val viewModel = viewModel(composite = true)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(SearchAction.Query("jadielle"))
+        val places = viewModel.state.value.places
+        assertTrue(places.single { it.identifier == "viridian-city" }.outdoor)
+        assertFalse(places.single { it.identifier == "viridian-mart" }.outdoor)
     }
 
     @Test

@@ -12,8 +12,8 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapWarp
+import org.opensources.pokmaps.domain.map.MapZoom
 import org.opensources.pokmaps.domain.map.MarkerSizing
-import org.opensources.pokmaps.domain.map.WorldZoom
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
 import ovh.plrapps.mapcompose.api.BoundingBox
@@ -50,9 +50,13 @@ internal class MapNavigation(
     private var viewportJob: Job? = null
     private var initialPosition: Position? = null
     private var positioned = false
+    private var centerGroundId: Int? = null
 
     /** Oublie les zooms mémorisés (les cartes du nouveau jeu sont différentes). */
-    fun forgetScales() = scales.clear()
+    fun forgetScales() {
+        scales.clear()
+        centerGroundId = null
+    }
 
     fun selectWorld(mapId: Int) {
         val catalog = session.catalog ?: return
@@ -63,8 +67,8 @@ internal class MapNavigation(
     /** Ouvre un lieu : carte intérieure, ou ville et route (sur la carte du monde). */
     fun openPlace(place: MapPlace) {
         session.update { it.copy(detail = null, zoneListOpen = false) }
-        val target = session.catalog?.maps?.get(place.mapId)
-        if (target != null && target.parentId == null && session.catalog?.isWorld(target.id) != true) {
+        val target = session.catalog?.displayedMapOf(place.mapId)
+        if (target != null && !target.isWorld && target.id != session.current.map?.id) {
             open(place.mapId)
         } else {
             open(place.mapId, place.x, place.y)
@@ -84,6 +88,10 @@ internal class MapNavigation(
             selection.clearZone()
             return
         }
+        if (map.identifier == "pokecenter-2f-plan" && centerGroundId != null) {
+            centerGroundId?.let { open(it) }
+            return
+        }
         val entrance = catalog.parentEntrance(map.id)
         if (entrance == null) {
             val origin = catalog.maps[map.id]?.originMapId ?: catalog.worldOf(map.id)?.id
@@ -91,7 +99,11 @@ internal class MapNavigation(
             return
         }
         val displayed = catalog.displayedMapOf(entrance.mapId) ?: return
-        open(entrance.mapId, entrance.x, entrance.y, scale = scales[displayed.id])
+        if (!displayed.isWorld && catalog.regionsOf(displayed.id).isNotEmpty()) {
+            open(entrance.mapId)
+        } else {
+            open(entrance.mapId, entrance.x, entrance.y, scale = scales[displayed.id])
+        }
     }
 
     /** Change d'étage : même vue si les deux étages ont la même taille, sinon l'étage entier. */
@@ -127,8 +139,8 @@ internal class MapNavigation(
         val catalog = session.catalog ?: return
         val displayed = catalog.displayedMapOf(mapId) ?: return
         val target = catalog.maps[mapId] ?: return
-        val focusX = x ?: (if (target.parentId != null) target.x + target.width / 2 else null)
-        val focusY = y ?: (if (target.parentId != null) target.y + target.height / 2 else null)
+        val focusX = x ?: (if (target.parentId != null && displayed.isWorld) target.x + target.width / 2 else null)
+        val focusY = y ?: (if (target.parentId != null && displayed.isWorld) target.y + target.height / 2 else null)
         val currentMap = session.current.map
         val currentState = session.current.mapState
         val nx = focusX?.let { it.toDouble() / displayed.width }
@@ -149,6 +161,10 @@ internal class MapNavigation(
     fun show(mapId: Int, x: Double?, y: Double?, scale: Double?) {
         val catalog = session.catalog ?: return
         val map = catalog.gameMap(mapId) ?: return
+        if (map.identifier == "pokecenter-2f-plan") {
+            val previous = session.current.map
+            centerGroundId = previous?.takeIf { it.identifier.endsWith("pokecenter-1f") }?.id
+        }
         val isWorld = map.isWorld
         val arrival = startingPosition(map, x, y, scale)
         val mapState = createMapState(map, arrival)
@@ -167,7 +183,8 @@ internal class MapNavigation(
         val parent = if (isWorld) {
             null
         } else {
-            catalog.parentEntrance(map.id)?.let { catalog.maps[it.mapId] }
+            centerGroundId?.takeIf { map.identifier == "pokecenter-2f-plan" }?.let { catalog.maps[it] }
+                ?: catalog.parentEntrance(map.id)?.let { catalog.maps[it.mapId] }
                 ?: catalog.maps[catalog.maps[map.id]?.originMapId] ?: catalog.worldOf(map.id)
         }
         session.update {
@@ -179,7 +196,7 @@ internal class MapNavigation(
                 detail = null,
                 zoneListOpen = false,
                 parent = parent?.let { place -> MapPlace(place.id, place.name) },
-                floors = catalog.floorsOf(map.id)
+                floors = catalog.floorsOf(map.id, centerGroundId)
             )
         }
         session.refreshOverlays()
@@ -204,7 +221,13 @@ internal class MapNavigation(
         MapState(map.levelCount, map.width, map.height, GameMap.TILE_SIZE) {
             scroll(position.x, position.y)
             scale(position.scale)
-            minimumScaleMode(if (map.isWorld) Fit else Forced(MIN_INDOOR_SCALE))
+            minimumScaleMode(
+                when {
+                    map.isWorld -> Fit
+                    map.regions.isNotEmpty() -> Forced(MIN_PLAN_SCALE)
+                    else -> Forced(MIN_INDOOR_SCALE)
+                }
+            )
             maxScale(MAX_SCALE)
             // Pixels nets en zoom avant ; lissage seulement quand la carte est réduite.
             bitmapFilteringEnabled { state -> state.scale < 1.0 }
@@ -220,15 +243,15 @@ internal class MapNavigation(
 
     /**
      * Carte du monde : son zoom minimal suit la taille de la vue (rotation, barres), un peu au-delà de la carte
-     * entière ([WorldZoom]). Avant la première mesure, la carte entière (Fit) sert de minimum.
+     * entière ([MapZoom]). Avant la première mesure, la carte entière (Fit) sert de minimum.
      */
     private fun followViewport(map: GameMap, mapState: MapState) {
         viewportJob?.cancel()
         viewportJob = session.launch {
             mapState.getLayoutSizeFlow().collect { size ->
                 if (size.width <= 0 || size.height <= 0) return@collect
-                if (map.isWorld) {
-                    WorldZoom.minScale(size.width, size.height, map.width, map.height)?.let {
+                if (map.isWorld || map.regions.isNotEmpty()) {
+                    MapZoom.minScale(size.width, size.height, map.width, map.height)?.let {
                         mapState.minimumScaleMode = Forced(it)
                     }
                 }
@@ -297,6 +320,7 @@ internal class MapNavigation(
     /** Rapproche la vue d'une ville ou d'une route touchée sur la carte du monde, pour voir son contenu. */
     private fun focusOnZone(catalog: MapCatalog, zoneId: Int) {
         val map = session.current.map ?: return
+        if (!map.isWorld) return
         val mapState = session.current.mapState ?: return
         val zone = catalog.maps[zoneId]?.takeIf { it.parentId != null } ?: return
         if (mapState.scale >= ZONE_FOCUS_MIN_SCALE) return
@@ -324,7 +348,11 @@ internal class MapNavigation(
                 selection.showObject(obj)
             }
 
-            MapMarkerIds.WILD -> selection.showWildPokemon(value)
+            MapMarkerIds.WILD -> {
+                val index = parts.getOrNull(2)?.toIntOrNull() ?: return
+                val marker = session.overlays.wildMarkers.getOrNull(index) ?: return
+                selection.showWildPokemon(value, marker.mapId)
+            }
         }
     }
 
@@ -366,6 +394,7 @@ internal class MapNavigation(
         const val WORLD_SCALE = 2.0
         const val FOCUS_SCALE = 4.0
         const val MIN_INDOOR_SCALE = 0.5
+        const val MIN_PLAN_SCALE = 0.05
         const val ZONE_FOCUS_MIN_SCALE = 3.0
         const val MAX_SCALE = 12.0
         const val CENTER = 0.5

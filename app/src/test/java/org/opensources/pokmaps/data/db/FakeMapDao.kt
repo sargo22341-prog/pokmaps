@@ -16,7 +16,8 @@ internal class FakeMapDao(
     private val includeVersionPokemon: Boolean = false,
     private val timedEncounters: Boolean = false,
     private val emptyMaps: Boolean = false,
-    private val includeFruitTree: Boolean = false
+    private val includeFruitTree: Boolean = false,
+    private val includeCompositeInterior: Boolean = false
 ) : MapDao {
     override suspend fun maps(versionGroupId: Int) = read {
         if (emptyMaps) return@read emptyList()
@@ -26,14 +27,46 @@ internal class FakeMapDao(
             MapEntity(VIRIDIAN, versionGroupId, "viridian-city", "Jadielle", WORLD, 160, 288, 160, 144, 0),
             MapEntity(MART, versionGroupId, "viridian-mart", "Boutique de Jadielle", null, 0, 0, 128, 128, 1),
             MapEntity(LAB, versionGroupId, "pokemon-lab", "Labo Pokémon", null, 0, 0, 128, 128, 1)
-        )
+        ).let { maps ->
+            if (!includeCompositeInterior) return@let maps
+            maps.map { map ->
+                if (map.id == LAB || map.id == MART) {
+                    map.copy(
+                        parentMapId = PLAN,
+                        x = if (map.id ==
+                            MART
+                        ) {
+                            160
+                        } else {
+                            0
+                        },
+                        levelCount = 0,
+                        originMapId = VIRIDIAN
+                    )
+                } else {
+                    map
+                }
+            } + MapEntity(
+                PLAN, versionGroupId, "pokemon-lab-plan", "Labo composé", null, 0, 0, 288, 128, 2,
+                originMapId = VIRIDIAN
+            )
+        }
     }
 
     override suspend fun warps(versionGroupId: Int) = read {
         listOf(
             MapWarpEntity(1, VIRIDIAN, 200, 330, MART, 64, 112),
             MapWarpEntity(2, MART, 64, 120, VIRIDIAN, 200, 338)
-        )
+        ).map { warp ->
+            if (!includeCompositeInterior) {
+                warp
+            } else {
+                warp.copy(
+                    x = warp.x + if (warp.mapId == MART) 160 else 0,
+                    targetX = warp.targetX?.let { it + if (warp.targetMapId == MART) 160 else 0 }
+                )
+            }
+        }
     }
 
     override suspend fun objects(versionGroupId: Int, versionId: Int) = read {
@@ -48,7 +81,7 @@ internal class FakeMapDao(
             mapObject(PRIZES, LAB, 56 to 88, "prize_vendor", "Comptoir des lots"),
             *versionPokemon(versionId),
             *fruitObjects()
-        )
+        ).map { obj -> if (includeCompositeInterior && obj.mapId == MART) obj.copy(x = obj.x + 160) else obj }
     }
 
     private fun fruitObjects(): Array<MapObjectRow> = if (includeFruitTree) {
@@ -99,7 +132,13 @@ internal class FakeMapDao(
         name = name
     )
 
-    override suspend fun areas(versionGroupId: Int) = read { listOf(MapAreaRow(ROUTE_1, AREA, "Route 1")) }
+    override suspend fun areas(versionGroupId: Int) = read {
+        listOf(MapAreaRow(ROUTE_1, AREA, "Route 1")) + if (includeCompositeInterior) {
+            listOf(MapAreaRow(LAB, AREA, "Labo"), MapAreaRow(MART, AREA, "Boutique"))
+        } else {
+            emptyList()
+        }
+    }
 
     override suspend fun encounters(versionId: Int, areaIds: List<Int>) = read {
         check(!encountersFailing) { FakeGameDao.BROKEN }
@@ -280,6 +319,7 @@ internal class FakeMapDao(
     private fun <T> read(rows: () -> T): T = if (failing) throw IllegalStateException(FakeGameDao.BROKEN) else rows()
 
     companion object {
+        const val PLAN = 1900
         const val WORLD = 1000
         const val ROUTE_1 = 1001
         const val VIRIDIAN = 1002

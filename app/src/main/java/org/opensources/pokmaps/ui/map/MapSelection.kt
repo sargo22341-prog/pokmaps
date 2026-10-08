@@ -20,17 +20,28 @@ internal class MapSelection(
     private val getObjectDetails: GetMapObjectDetailsUseCase
 ) {
     private var loadedEncounters: List<Encounter> = emptyList()
+    private var loadedZones: Map<Int, List<Encounter>> = emptyMap()
 
     /** Sélectionne une ville, une route ou une carte intérieure et charge ses rencontres. */
     fun selectZone(catalog: MapCatalog, zoneId: Int) {
         val game = session.loaded.value?.game ?: return
-        val info = catalog.maps[zoneId] ?: return
-        val items = catalog.objects[zoneId].orEmpty().filter {
+        val info = catalog.regionsOf(zoneId).firstOrNull()?.takeIf { !catalog.isWorld(zoneId) }
+            ?: catalog.maps[zoneId] ?: return
+        val selectedId = info.id
+        val display = catalog.displayedMapOf(selectedId) ?: return
+        val zoneIds = if (display.isWorld) {
+            listOf(selectedId)
+        } else {
+            catalog.regionsOf(display.id).map { it.id }
+                .ifEmpty { listOf(selectedId) }
+        }
+        val items = catalog.objects[selectedId].orEmpty().filter {
             it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM
         }
         loadedEncounters = emptyList()
+        loadedZones = emptyMap()
         val zone = MapZone(
-            mapId = zoneId,
+            mapId = selectedId,
             name = info.name,
             places = MapZoneContent.places(catalog, info),
             items = items
@@ -39,7 +50,7 @@ internal class MapSelection(
         session.update { it.copy(zone = zone, detail = null, zoneListOpen = false) }
         session.refreshOverlays()
         session.load(
-            block = { getMapEncounters(game, catalog, zoneId) },
+            block = { zoneIds.associateWith { getMapEncounters(game, catalog, it) } },
             onFailure = {
                 session.update { state ->
                     if (state.zone == zone) state.copy(zone = zone.copy(loading = false, failed = true)) else state
@@ -47,7 +58,8 @@ internal class MapSelection(
             }
         ) { encounters ->
             if (session.current.zone != zone) return@load
-            loadedEncounters = encounters
+            loadedZones = encounters
+            loadedEncounters = encounters[selectedId].orEmpty()
             applyTimes(catalog, zone)
         }
     }
@@ -60,9 +72,12 @@ internal class MapSelection(
     }
 
     private fun applyTimes(catalog: MapCatalog, zone: MapZone) {
-        val info = catalog.maps[zone.mapId] ?: return
         val encounters = loadedEncounters.filter { it.matchesTimes(session.current.times) }
-        session.updateOverlays { it.copy(wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)) }
+        val markers = loadedZones.flatMap { (id, all) ->
+            val info = catalog.maps[id] ?: return@flatMap emptyList()
+            MapZoneContent.wildMarkers(catalog, info, all.filter { it.matchesTimes(session.current.times) })
+        }
+        session.updateOverlays { it.copy(wildMarkers = markers) }
         session.update {
             it.copy(zone = zone.copy(loading = false, encounters = encounters, allEncounters = loadedEncounters))
         }
@@ -79,9 +94,9 @@ internal class MapSelection(
     }
 
     /** Ouvre la fiche détaillée d'un Pokémon sauvage du lieu sélectionné. */
-    fun showWildPokemon(pokemonId: Int) {
-        val zone = session.current.zone ?: return
-        val encounters = zone.encounters.filter { it.pokemonId == pokemonId }
+    fun showWildPokemon(pokemonId: Int, mapId: Int? = session.current.zone?.mapId) {
+        val encounters = loadedZones[mapId].orEmpty()
+            .filter { it.pokemonId == pokemonId && it.matchesTimes(session.current.times) }
         val name = encounters.firstOrNull()?.pokemonName ?: return
         session.update { it.copy(detail = MapDetail.WildPokemon(pokemonId, name, encounters.groupByMethod())) }
     }

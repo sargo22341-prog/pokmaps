@@ -31,7 +31,7 @@ internal object MapZoneContent {
             val terrain = if (kind == SpotKind.GRASS) spots[kind] ?: spots[SpotKind.FLOOR] else spots[kind]
             val species = list.groupBy { (method, e) -> method to e.pokemonId }.map { (key, group) ->
                 val encounter = group.first().second
-                WildMarker(encounter.pokemonId, encounter.pokemonName, key.first, 0, 0) to
+                WildMarker(encounter.pokemonId, encounter.pokemonName, key.first, 0, 0, mapId = zone.id) to
                     group.sumOf { it.second.chance ?: 0.0 }
             }.sortedByDescending { it.second }
             WildPlacement.place(

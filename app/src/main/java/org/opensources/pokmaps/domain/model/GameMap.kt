@@ -12,7 +12,7 @@ data class GameMap(
     val width: Int,
     val height: Int,
     val levelCount: Int,
-    /** Villes et routes, pour la carte du monde. */
+    /** Villes et routes de la carte du monde, ou zones et salles d'un niveau composé. */
     val regions: List<MapRegion> = emptyList(),
     val isWorld: Boolean = false,
     val startRegionId: Int? = null
@@ -26,7 +26,7 @@ data class GameMap(
     }
 }
 
-/** Partie d'une carte affichable (ville ou route de la carte du monde), en pixels. */
+/** Partie d'une carte affichable (ville, route, zone ou salle), en pixels. */
 data class MapRegion(
     val id: Int,
     val identifier: String,

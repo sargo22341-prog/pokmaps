@@ -75,11 +75,20 @@ class MapRenderer(ABC):
     def render(self, const: str) -> DisplayMap:
         if const in self.game_maps.world_blocks:
             return self._render_world(const)
+        if const in self.game_maps.plans:
+            return self._render_plan(const)
         pret_map = self.maps[const]
         width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
         canvas = Image.new("RGB", (width, height))
         self._paint(canvas, pret_map, (0, 0))
         return DisplayMap(const, width, height, level_count(width, height), canvas)
+
+    def _render_plan(self, const: str) -> DisplayMap:
+        plan = self.game_maps.plans[const]
+        canvas = Image.new("RGBA", (plan.width, plan.height))
+        for part in plan.parts:
+            self._paint(canvas, self.maps[part.map], (part.x, part.y))
+        return DisplayMap(const, plan.width, plan.height, level_count(plan.width, plan.height), canvas)
 
     def _paint(self, canvas: Image.Image, pret_map: PretMap, origin: tuple[int, int]) -> None:
         blocks = self.blocks(pret_map)

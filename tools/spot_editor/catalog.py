@@ -175,7 +175,7 @@ class EditorCatalog:
             f"""SELECT DISTINCT world.identifier, world.name_fr FROM map world
                 JOIN version_group vg ON vg.id = world.version_group_id
                 WHERE vg.identifier IN ({", ".join("?" * len(groups))})
-                  AND EXISTS (SELECT 1 FROM map part WHERE part.parent_map_id = world.id)
+                  AND world.is_world = 1
                 ORDER BY world.id""",
             groups,
         )

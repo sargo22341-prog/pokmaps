@@ -186,7 +186,13 @@ private fun CharacterDetails(detail: MapDetail.Character, versionGroupIdentifier
             detail.roles
         ) {
             if (pokemonId != null) {
-                PokemonSprite(pokemonId, SpritePlace.MAP_LIST, SpriteSize.SHEET, contentDescription = null)
+                PokemonSprite(
+                    pokemonId,
+                    SpritePlace.MAP_LIST,
+                    SpriteSize.SHEET,
+                    contentDescription = null,
+                    shiny = obj.shiny
+                )
             }
         }
     } else {

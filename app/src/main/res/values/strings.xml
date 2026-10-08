@@ -3397,9 +3397,6 @@
         <string name="breeding_parent_two">
         Second parent
     </string>
-        <string name="breeding_choose">
-        Choisir un Pokémon
-    </string>
         <string name="breeding_defense">
         DV Défense (0–15)
     </string>
@@ -3601,6 +3598,5 @@
     <string name="retro_automatic_totals">RetroAchievements : %1$d/%2$d</string>
     <string name="retro_manual_totals">Succès validés : %1$d/%2$d</string>
     <string name="breeding_search">Nom ou numéro du Pokémon</string>
-    <string name="breeding_number">#%1$03d</string>
     <string name="map_layer_fruit_trees">Baies et Noigrumes</string>
 </resources>

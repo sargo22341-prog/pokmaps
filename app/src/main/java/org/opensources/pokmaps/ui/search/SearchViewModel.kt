@@ -102,11 +102,14 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
 
     private fun index(source: SearchIndex): Index {
         val catalog = source.catalog
-        val places = catalog.maps.values
-            .filter { !catalog.isWorld(it.id) }
+        val places = catalog.searchableMaps()
             .sortedWith(compareBy({ it.parentId == null }, { it.id }))
             .map { map ->
-                PokedexSearch.normalize(map.name) to PlaceResult(map.identifier, map.name, map.parentId != null)
+                PokedexSearch.normalize(map.name) to PlaceResult(
+                    map.identifier,
+                    map.name,
+                    catalog.displayedMapOf(map.id)?.isWorld == true
+                )
             }
         val items = source.index.items.sortedBy { it.name }.map { item ->
             PokedexSearch.normalize(listOfNotNull(item.name, item.moveName).joinToString(" ")) to item

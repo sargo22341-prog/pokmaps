@@ -85,7 +85,8 @@ data class MapObject(
     /** Nom affiché : classe du dresseur, personnage d'après son sprite, Pokémon ou objet (tools/data/). */
     val name: String,
     val itemHasSprite: Boolean = true,
-    val fruit: OfferItem? = null
+    val fruit: OfferItem? = null,
+    val shiny: Boolean = false
 )
 
 /** Zone de rencontre PokéAPI rattachée à une carte. */
@@ -109,8 +110,10 @@ data class MapCatalog(
     fun worldOf(mapId: Int): MapInfo? {
         val map = maps[mapId] ?: return null
         if (isWorld(map.id)) return map
-        val origin = maps[map.originMapId]
-        return maps[map.parentId ?: origin?.parentId]?.takeIf { isWorld(it.id) }
+        val display = displayedMapOf(mapId) ?: return null
+        if (display.isWorld) return display
+        val origin = maps[map.originMapId ?: display.originMapId]
+        return maps[origin?.parentId]?.takeIf { isWorld(it.id) }
     }
 
     /** Carte affichable qui contient `mapId` : elle-même, ou la carte du monde pour une ville ou une route. */
@@ -124,6 +127,11 @@ data class MapCatalog(
 
     /** Cartes (elle-même et ses villes ou routes) dont les objets et warps se dessinent sur la carte affichable. */
     fun partsOf(mapId: Int): List<Int> = listOf(mapId) + regionsOf(mapId).map { it.id }
+
+    fun connectionsOf(mapId: Int): List<MapConnection> = connections[mapId].orEmpty()
+
+    private val connections: Map<Int, List<MapConnection>> = maps.values.filter { it.isDisplayable && !it.isWorld }
+        .associate { it.id to MapConnections.build(this, it.id) }
 
     fun gameMap(mapId: Int): GameMap? {
         val map = maps[mapId]?.takeIf { it.isDisplayable } ?: return null
@@ -149,7 +157,7 @@ data class MapCatalog(
         val kept = mutableListOf<MapWarp>()
         for (warp in partsOf(mapId).flatMap { warps[it].orEmpty() }) {
             val target = warp.targetMapId ?: continue
-            if (displayedMapOf(target)?.id == mapId && maps[target]?.parentId != null) continue
+            if (isWorld(mapId) && displayedMapOf(target)?.id == mapId) continue
             val duplicate = kept.any {
                 it.targetMapId == target && abs(it.x - warp.x) <= MERGE_DISTANCE &&
                     abs(it.y - warp.y) <= MERGE_DISTANCE
@@ -168,7 +176,8 @@ data class MapCatalog(
         val candidates = if (zone.parentId == null) entrancesOf(zone.id) else warps[zone.id].orEmpty()
         return candidates.filter { warp ->
             val target = warp.targetMapId?.let { maps[it] } ?: return@filter false
-            target.id != zone.id && (zone.parentId == null || target.parentId == null)
+            target.id != zone.id &&
+                (displayedMapOf(zone.id)?.isWorld != true || displayedMapOf(target.id)?.isWorld != true)
         }.distinctBy { it.targetMapId }
     }
 
@@ -193,6 +202,17 @@ data class MapCatalog(
     /** Carte (affichable ou ville, route) d'après son identifiant. */
     fun mapByIdentifier(identifier: String): MapInfo? = maps.values.firstOrNull { it.identifier == identifier }
 
+    /** Une entrée de recherche par lieu nommé, sans répéter une salle et le plan qui ne contient qu'elle. */
+    fun searchableMaps(): List<MapInfo> = maps.values.filter { map ->
+        if (map.isWorld) return@filter false
+        val parent = maps[map.parentId]
+        when {
+            parent == null -> regionsOf(map.id).size != 1
+            parent.isWorld -> true
+            else -> regionsOf(parent.id).size == 1 || map.name != parent.name
+        }
+    }
+
     /**
      * Entrée sur la carte du monde de chaque carte intérieure : le warp de la carte du monde par lequel
      * on l'atteint en passant par le moins de cartes (Mont Sélénite sous-sol 2 → entrée du Mont Sélénite).
@@ -203,30 +223,38 @@ data class MapCatalog(
             var root = entrance
             val seen = mutableSetOf(target)
             while (!isWorld(displayedMapOf(root.mapId)?.id ?: root.mapId) && seen.add(root.mapId)) {
-                root = reachedBy[root.mapId] ?: break
+                root = reachedBy[displayedMapOf(root.mapId)?.id] ?: break
             }
-            if (isWorld(displayedMapOf(root.mapId)?.id ?: root.mapId)) result[target] = root
+            if (isWorld(displayedMapOf(root.mapId)?.id ?: root.mapId)) {
+                partsOf(target).forEach { result[it] = root }
+            }
         }
         return result
     }
 
-    /** Bâtiments et grottes à plusieurs niveaux (cartes affichables), étages rangés de haut en bas. */
-    private val buildings: Map<String, List<MapFloor>> by lazy {
-        maps.values.filter { it.isDisplayable }
-            .mapNotNull { map ->
-                FloorLevel.parse(map.identifier)?.let { (building, level) -> building to MapFloor(map.id, level) }
-            }
-            .groupBy({ it.first }, { it.second })
-            .filterValues { it.size > 1 }
-            .mapValues { (_, floors) -> floors.sortedByDescending { it.level.order } }
-    }
-
     private val buildingOf: Map<Int, String> by lazy {
-        buildings.flatMap { (building, floors) -> floors.map { it.mapId to building } }.toMap()
+        sections.keys.associateWith { id -> checkNotNull(FloorLevel.parse(maps.getValue(id).identifier)).first }
     }
 
-    /** Étages du bâtiment ou de la grotte d'une carte intérieure (vide si elle n'a qu'un niveau). */
-    fun floorsOf(mapId: Int): List<MapFloor> = buildingOf[mapId]?.let { buildings[it] }.orEmpty()
+    /** Étages uniquement : les maisons et les zones d'un même niveau ne deviennent pas des badges. */
+    fun floorsOf(mapId: Int, centerGroundId: Int? = null): List<MapFloor> {
+        val display = displayedMapOf(mapId) ?: return emptyList()
+        val upstairs = mapByIdentifier("pokecenter-2f-plan")
+        val ground = if (display.id == upstairs?.id) {
+            maps[centerGroundId ?: reachedBy[display.id]?.mapId]
+        } else {
+            display
+        }
+        if (upstairs != null && ground?.identifier?.endsWith("pokecenter-1f") == true) {
+            return listOf(
+                MapFloor(upstairs.id, FloorLevel.Storey(1), upstairs.name),
+                MapFloor(ground.id, FloorLevel.Storey(0), ground.name)
+            )
+        }
+        return sections[display.id].orEmpty()
+    }
+
+    private val sections: Map<Int, List<MapFloor>> by lazy { MapSections.build(maps) }
 
     /** Pour chaque carte intérieure, le warp par lequel on l'atteint en premier en partant de l'extérieur. */
     private val reachedBy: Map<Int, MapWarp> by lazy {
@@ -237,13 +265,13 @@ data class MapCatalog(
             val source = queue.removeFirst()
             if (!seen.add(source)) continue
             for (warp in warps[source].orEmpty()) {
-                val target = maps[warp.targetMapId] ?: continue
+                val target = warp.targetMapId?.let(::displayedMapOf) ?: continue
                 if (!target.isDisplayable || isWorld(target.id) || target.id in result) continue
                 val origin = target.originMapId
-                val sourceOrigin = maps[source]?.originMapId ?: source
+                val sourceOrigin = maps[source]?.originMapId ?: displayedMapOf(source)?.originMapId ?: source
                 if (origin != null && sourceOrigin != origin) continue
                 result[target.id] = warp
-                queue += target.id
+                queue += partsOf(target.id)
             }
         }
         result
@@ -255,11 +283,12 @@ data class MapCatalog(
      * 2e sous-sol du Mont Sélénite, on remonte directement à l'entrée du Mont Sélénite sur la Route 3.
      */
     fun parentEntrance(mapId: Int): MapWarp? {
-        val building = buildingOf[mapId]
-        var warp = reachedBy[mapId] ?: return null
+        val displayId = displayedMapOf(mapId)?.id ?: return null
+        val building = buildingOf[displayId]
+        var warp = reachedBy[displayId] ?: return null
         val seen = mutableSetOf(mapId)
-        while (building != null && buildingOf[warp.mapId] == building && seen.add(warp.mapId)) {
-            warp = reachedBy[warp.mapId] ?: return null
+        while (building != null && buildingOf[displayedMapOf(warp.mapId)?.id] == building && seen.add(warp.mapId)) {
+            warp = reachedBy[displayedMapOf(warp.mapId)?.id] ?: return null
         }
         return warp
     }

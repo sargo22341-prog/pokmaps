@@ -17,6 +17,24 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class MapNavigationTest {
     @Test
+    fun enteringAComposedRoomCentersTheWholeFloor() = runTest {
+        val repository = MapRepository(FakeMapDao(includeCompositeInterior = true))
+        val catalog = repository.catalog(FakeGameDao.RED)
+        val session = MapSession(backgroundScope)
+        session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        val selection =
+            MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
+        val navigation = MapNavigation(session, selection, GetMapTilesUseCase(MapTiles { null }))
+        navigation.openPlace(MapPlace(FakeMapDao.MART, "Boutique", 224, 112))
+        assertEquals(FakeMapDao.PLAN, session.current.map?.id)
+        val position = checkNotNull(navigation.currentPosition())
+        assertEquals(0.5, position.x, 0.0001)
+        assertEquals(0.5, position.y, 0.0001)
+        assertEquals(FakeMapDao.MART, session.current.zone?.mapId)
+        session.current.mapState?.shutdown()
+    }
+
+    @Test
     fun aRecreatedViewKeepsItsRequestedCenterBeforeLayout() = runTest {
         val repository = MapRepository(FakeMapDao())
         val catalog = repository.catalog(FakeGameDao.RED)

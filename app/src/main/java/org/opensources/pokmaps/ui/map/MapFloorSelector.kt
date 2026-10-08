@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
@@ -47,10 +49,13 @@ internal fun FloorSelector(floors: List<MapFloor>, currentId: Int?, onSelect: (I
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(FLOOR_SIZE)
+                        .heightIn(min = 48.dp)
+                        .widthIn(min = 48.dp, max = 64.dp)
                         .clip(CircleShape)
                         .background(background)
+                        .semantics { contentDescription = floor.name }
                         .clickable(enabled = !selected) { onSelect(floor.mapId) }
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
                         floorLabel(floor.level),
@@ -83,5 +88,4 @@ private fun floorLabel(level: FloorLevel): String = when (level) {
     FloorLevel.Elevator -> stringResource(R.string.map_floor_elevator)
 }
 
-private val FLOOR_SIZE = 40.dp
 private val FLOORS_MAX_HEIGHT = 360.dp

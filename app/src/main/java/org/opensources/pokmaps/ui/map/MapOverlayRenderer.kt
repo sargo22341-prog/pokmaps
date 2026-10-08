@@ -40,6 +40,7 @@ internal class MapOverlayRenderer {
         val zoneParts = zoneParts(state.catalog, state.zone)
         val entrances = state.catalog.entrancesOf(state.map.id)
         val objects = state.catalog.partsOf(state.map.id).flatMap { state.catalog.objects[it].orEmpty() }
+        drawConnections(state)
         drawEntrances(state, zoneParts, entrances)
         drawObjects(state, zoneParts, objects)
         drawWildMarkers(state)
@@ -49,8 +50,26 @@ internal class MapOverlayRenderer {
 
     private fun zoneParts(catalog: MapCatalog, zone: MapInfo?): Set<Int> = when {
         zone == null -> emptySet()
+        catalog.displayedMapOf(zone.id)?.isWorld == false -> catalog.partsOf(zone.parentId ?: zone.id).toSet()
         zone.parentId == null -> catalog.partsOf(zone.id).toSet()
         else -> setOf(zone.id)
+    }
+
+    private fun drawConnections(state: MapRenderState) {
+        if (MapLayer.WARPS !in state.layers) return
+        state.catalog.connectionsOf(state.map.id).forEach { connection ->
+            val id = "connection:${connection.warpId}"
+            state.mapState.addPath(id, width = 2.dp, color = CONNECTION_COLOR) {
+                addPoints(
+                    listOf(
+                        connection.x.toDouble() / state.map.width to connection.y.toDouble() / state.map.height,
+                        (connection.targetX.toDouble() / state.map.width) to
+                            (connection.targetY.toDouble() / state.map.height)
+                    )
+                )
+            }
+            drawnPaths += id
+        }
     }
 
     private fun drawEntrances(state: MapRenderState, zoneParts: Set<Int>, entrances: List<MapWarp>) {
@@ -196,5 +215,6 @@ internal class MapOverlayRenderer {
         val POKEMON_CLICK_SCALE = Offset(0.6f, 0.6f)
         val ZONE_COLOR = Color(0xFFFFFFFF)
         val HIGHLIGHT_COLOR = Color(0xFFFFD600)
+        val CONNECTION_COLOR = Color(0xFFB0BEC5)
     }
 }

@@ -19,7 +19,9 @@ L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuc
 Les guides se lisent sans case de fin de lecture ni liens de sources. Dojo et fossiles, Lugia et Ho-Oh ont chacun
 leur article. Or, Argent et Cristal ajoutent les événements hebdomadaires, un vérificateur de reproduction
 (sexes, groupes d'œufs, DV et héritage des attaques), avec recherche des parents par nom ou numéro, et un calculateur
-de gains de bonheur. Les noms dans les textes ouvrent des fiches compactes reliées au Pokédex et à la carte.
+de gains de bonheur. Le nom de chaque parent est un sélecteur avec recherche ; son sprite à droite ouvre sa fiche,
+et le résultat affiche aussi le sprite du Pokémon qui éclora. Les noms dans les textes ouvrent des fiches compactes
+reliées au Pokédex et à la carte.
 Les sprites et leur réglage d'animation sont réutilisés. Les chapitres proposent les succès liés, en signalant
 les objectifs manquables avant de poursuivre.
 
@@ -59,6 +61,14 @@ contre la base générée et vérifie leurs liens et nombres de succès. Les sol
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
+Dans les six jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
+s'affichent ensemble sur un plan, avec des traits reliant leurs passages lorsque leurs plans ne se raccordent pas.
+Les maisons restent séparées, accessibles par leurs portes ; le Parc Safari réunit ainsi ses quatre zones.
+Les assemblages et leurs positions sont relus dans `tools/data/map_plans.csv` (coordonnées en cases de 16 pixels).
+Les passages viennent de pret ; les niveaux sans numéro explicite sont vérifiés dans les plans de
+[L'Océane](https://bulbapedia.bulbagarden.net/wiki/S.S._Anne) et du
+[Souterrain de Doublonville](https://bulbapedia.bulbagarden.net/wiki/Goldenrod_Tunnel).
+Le Léviator fixe du Lac Colère utilise son sprite chromatique.
 Le bouton à droite défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
 Tout conserve les couleurs originales. La liste du lieu a son propre filtre et regroupe les
 rencontres identiques sur toute la journée sous « Tout le temps ».

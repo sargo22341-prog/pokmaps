@@ -8,6 +8,7 @@ import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MapEntity
 import org.opensources.pokmaps.data.db.NpcOfferRow
 import org.opensources.pokmaps.domain.map.CharacterService
+import org.opensources.pokmaps.domain.map.FixedPokemon
 import org.opensources.pokmaps.domain.map.GameIndex
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.ItemEvolution
@@ -50,9 +51,10 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     private suspend fun loadCatalog(game: Game): MapCatalog {
         val vg = game.versionGroupId
         val fruits = loadFruits(game)
+        val maps = dao.maps(vg).map { it.toInfo() }.associateBy { it.id }
         return MapCatalog(
             versionGroupIdentifier = game.versionGroupIdentifier,
-            maps = dao.maps(vg).map { it.toInfo() }.associateBy { it.id },
+            maps = maps,
             warps = dao.warps(vg)
                 .map { MapWarp(it.id, it.mapId, it.x, it.y, it.targetMapId, it.targetX, it.targetY) }
                 .groupBy { it.mapId },
@@ -73,7 +75,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                     trainerClass = it.trainerClass,
                     name = it.name,
                     itemHasSprite = it.itemHasSprite,
-                    fruit = fruits[it.id]
+                    fruit = fruits[it.id],
+                    shiny = FixedPokemon.isShiny(maps[it.mapId]?.identifier, it.pokemonId)
                 )
             }.groupBy { it.mapId },
             areas = dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },

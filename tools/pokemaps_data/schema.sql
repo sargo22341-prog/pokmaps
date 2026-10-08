@@ -320,7 +320,7 @@ CREATE TABLE encounter_rate (
 -- Une carte affichable (parent_map_id NULL) a ses tuiles dans les assets :
 --   maps/<version_group.identifier>/<map.identifier>/<niveau>/<ligne>_<colonne>.webp
 -- tuiles de 256 px, niveaux 0 à level_count - 1, le dernier à la taille réelle (1 px = 1 pixel Game Boy).
--- Les villes et routes sont des parties de la carte du monde de leur région : parent_map_id la désigne,
+-- Les villes, routes et zones d'un même niveau sont des parties d'un plan : parent_map_id le désigne,
 -- (x, y, width, height) est leur rectangle dans cette carte et level_count vaut 0.
 -- Toutes les coordonnées (x, y) sont en pixels de la carte affichée.
 -- is_world identifie les régions sans dépendre de leur nom ; start_map_id désigne leur ville de départ.

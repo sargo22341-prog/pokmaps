@@ -3,7 +3,6 @@ package org.opensources.pokmaps.ui.guide
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -30,7 +29,6 @@ import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
-import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 
@@ -62,7 +60,10 @@ internal fun BreedingTool(
             if (state.possible) {
                 Text(stringResource(R.string.breeding_offspring), style = MaterialTheme.typography.titleSmall)
                 state.pair.babies.forEach { child ->
-                    TextButton(onClick = { onPreview(GuideTarget.Pokemon(child.id)) }) { Text(child.name) }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(child.name, modifier = Modifier.weight(1f))
+                        BreedingPokemonSprite(child.id, child.name, onPreview)
+                    }
                     state.offspringMoves.firstOrNull {
                         it.first == child.id
                     }?.second.orEmpty().forEach { Text(it.name) }
@@ -85,28 +86,13 @@ private fun BreedingParent(
     val values = if (first) state.first else state.second
     val sexes = if (first) state.firstSexes else state.secondSexes
     val moves = if (first) state.firstMoves else state.secondMoves
-    var selecting by remember { mutableStateOf(false) }
     var selectingMoves by remember { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(if (first) R.string.breeding_parent_one else R.string.breeding_parent_two))
-        Row {
-            TextButton(onClick = {
-                onAction(BreedingAction.Search(""))
-                selecting = true
-            }) { Text(stringResource(R.string.breeding_choose)) }
-            TextButton(onClick = { onPreview(GuideTarget.Pokemon(parent.id)) }) { Text(parent.name) }
-        }
+        BreedingSpeciesSelector(parent.id, parent.name, state, first, onAction, onPreview)
         BreedingParentValues(sexes, values, first, onAction)
         TextButton(onClick = { selectingMoves = true }) {
             Text(stringResource(R.string.breeding_known_moves, values.moves.size))
-        }
-    }
-    if (selecting) {
-        PokemonChoiceDialog(state.choices, state.query, {
-            onAction(BreedingAction.Search(it))
-        }, { selecting = false }) {
-            selecting = false
-            onAction(BreedingAction.Species(first, it))
         }
     }
     if (selectingMoves) {
@@ -156,44 +142,6 @@ private fun BreedingDv(value: Int?, label: Int, modifier: Modifier, onValue: (In
                 text.toIntOrNull()?.takeIf { it in 0..15 }?.let(onValue)
             }
         }
-    )
-}
-
-@Composable
-internal fun PokemonChoiceDialog(
-    pokemon: List<PokedexEntry>,
-    query: String,
-    onQuery: (String) -> Unit,
-    onClose: () -> Unit,
-    onSelect: (Int) -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onClose,
-        title = { Text(stringResource(R.string.breeding_choose)) },
-        text = {
-            Column {
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = onQuery,
-                    singleLine = true,
-                    label = { Text(stringResource(R.string.breeding_search)) }
-                )
-                if (pokemon.isEmpty()) Text(stringResource(R.string.guide_empty))
-                LazyColumn(Modifier.heightIn(max = 360.dp)) {
-                    items(pokemon, key = { it.pokemonId }) { entry ->
-                        TextButton(onClick = {
-                            onSelect(entry.pokemonId)
-                        }, modifier = Modifier.fillMaxWidth()) {
-                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                Text(stringResource(R.string.breeding_number, entry.number))
-                                Text(entry.name)
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = { TextButton(onClick = onClose) { Text(stringResource(R.string.guide_close)) } }
     )
 }
 

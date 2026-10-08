@@ -54,7 +54,8 @@ data class WildMarker(
     val method: WildMethod,
     val x: Int,
     val y: Int,
-    val scale: Float = 1f
+    val scale: Float = 1f,
+    val mapId: Int = 0
 )
 
 /**

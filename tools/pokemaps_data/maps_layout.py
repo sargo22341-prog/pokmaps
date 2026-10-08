@@ -2,8 +2,8 @@
 
 Chaque région du jeu (games.Region) a sa carte du monde : ses villes et routes y sont placées grâce aux connexions
 entre cartes, depuis la ville de départ de la région. Une carte extérieure qu'aucune connexion ne relie à la ville
-de départ peut y être ancrée à la main (tools/data/map_anchors.csv) ; sinon, comme une carte intérieure, c'est une
-carte à part, rattachée à la ville ou route d'où l'on y entre par un warp.
+de départ peut y être ancrée à la main (tools/data/map_anchors.csv) ; les zones d'un même niveau sont réunies dans
+map_plans.csv. Les autres intérieurs restent à part, rattachés à la ville ou route d'où l'on y entre par un warp.
 
 Les connexions d'un jeu ne forment pas toujours un plan cohérent (Or et Argent décalent Céladopole d'une métatuile
 par rapport à la Route 7) : une connexion incohérente arrête la génération, sauf si elle est écartée à la main dans
@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from functools import cached_property
 
 from .games import Game, Region
+from .maps_plans import MapPlan, PlanPart, build_plans, read_plans
 from .maps_terrain import ROCK, Cell, wild_cells
 from .pret import BLOCK_PX, LAST_MAP, STEP_PX
 from .pret_models import HIDDEN_ITEM
@@ -83,6 +84,7 @@ class LayoutCuration:
     anchors: tuple[MapAnchor, ...]
     skips: tuple[ConnectionSkip, ...]
     parents: tuple[MapParent, ...]
+    plans: tuple[PlanPart, ...] = ()
 
 
 def read_layout_curation() -> LayoutCuration:
@@ -95,7 +97,7 @@ def read_layout_curation() -> LayoutCuration:
         skips = tuple(ConnectionSkip(row["family"], row["map"], row["target"]) for row in csv.DictReader(handle))
     with (DATA_DIR / "map_parents.csv").open(encoding="utf-8", newline="") as handle:
         parents = tuple(MapParent(row["family"], row["map"], row["parent"]) for row in csv.DictReader(handle))
-    return LayoutCuration(anchors, skips, parents)
+    return LayoutCuration(anchors, skips, parents, read_plans())
 
 
 def spread(cells: list[Cell], count: int, seed: str, occupied: frozenset[Cell] = frozenset()) -> list[Cell]:
@@ -140,6 +142,7 @@ class GameMaps:
                 raise ValueError(f"map_connection_skips.csv : connexion inconnue dans {game.version_group} : {skip}")
         self.skipped = {pair for skip in skips for pair in ((skip.map, skip.target), (skip.target, skip.map))}
         self.chosen_parents = [parent for parent in curation.parents if parent.family == game.map_family]
+        self.plan_parts = tuple(part for part in curation.plans if part.family == game.map_family)
 
     # --- Cartes du monde ----------------------------------------------------
 
@@ -267,6 +270,10 @@ class GameMaps:
         return result
 
     @cached_property
+    def plans(self) -> dict[str, MapPlan]:
+        return build_plans(self.plan_parts, self.maps, set(self.parents))
+
+    @cached_property
     def placements(self) -> dict[str, Placed]:
         placed = {
             const: Placed(region, x * BLOCK_PX, y * BLOCK_PX)
@@ -274,13 +281,18 @@ class GameMaps:
             for const, (x, y) in blocks.items()
         }
         placed |= {const: Placed(const, 0, 0) for const in self.parents}
+        for plan in self.plans.values():
+            placed |= {part.map: Placed(plan.const, part.x, part.y) for part in plan.parts}
         return placed
 
     @property
     def display_maps(self) -> list[str]:
         """Cartes affichées : les cartes du monde, puis les cartes à part."""
-        detached = sorted(self.parents, key=lambda c: self.maps[c].number)
-        return [*(region.const for region in self.game.regions), *detached]
+        detached = sorted(
+            (const for const in self.parents if self.placements[const].display == const),
+            key=lambda c: self.maps[c].number,
+        )
+        return [*(region.const for region in self.game.regions), *detached, *self.plans]
 
     def point(self, const: str, x: int, y: int) -> tuple[int, int]:
         """Centre de la case (x, y) de la carte `const`, en pixels de la carte affichée qui la contient."""

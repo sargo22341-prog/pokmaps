@@ -14,6 +14,7 @@ import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.domain.map.CharacterRole
+import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GameMaps
@@ -44,6 +45,61 @@ class MapSelectionTest {
     }
 
     private fun Fixture.select(mapId: Int) = selection.selectZone(checkNotNull(session.catalog), mapId)
+
+    private fun Fixture.useCompositePlan(empty: Boolean = false): MapCatalog {
+        val original = checkNotNull(session.catalog)
+        val route = original.maps.getValue(FakeMapDao.ROUTE_1)
+        val room = original.maps.getValue(FakeMapDao.MART)
+        val plan = room.copy(id = PLAN, identifier = "test-1f-plan", name = "Niveau", width = 512, height = 512)
+        val catalog = original.copy(
+            maps = original.maps + listOf(
+                plan,
+                route.copy(parentId = PLAN),
+                room.copy(parentId = PLAN, x = 352, levelCount = 0)
+            ).associateBy { it.id },
+            areas = if (empty) {
+                emptyMap()
+            } else {
+                original.areas +
+                    (room.id to original.areas.getValue(route.id).map { it.copy(mapId = room.id) })
+            }
+        )
+        session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        return catalog
+    }
+
+    @Test
+    fun everyZoneOfTheFloorHasMarkersAndItsOwnPokemonDetails() = runTest {
+        val fixture = fixture()
+        fixture.useCompositePlan()
+        fixture.select(PLAN)
+        val markers = fixture.session.overlays.wildMarkers
+        assertEquals(setOf(FakeMapDao.ROUTE_1, FakeMapDao.MART), markers.map { it.mapId }.toSet())
+        assertEquals(1, checkNotNull(fixture.session.current.zone).encounters.size)
+        fixture.selection.showWildPokemon(FakeMapDao.PIDGEY, FakeMapDao.MART)
+        val detail = fixture.session.current.detail as MapDetail.WildPokemon
+        assertEquals(1, detail.encounters.single().encounters.size)
+    }
+
+    @Test
+    fun aCompositeWithoutEncountersRemainsEmpty() = runTest {
+        val fixture = fixture()
+        fixture.useCompositePlan(empty = true)
+        fixture.select(PLAN)
+        assertTrue(checkNotNull(fixture.session.current.zone).encounters.isEmpty())
+        assertFalse(checkNotNull(fixture.session.current.zone).failed)
+        assertTrue(fixture.session.overlays.wildMarkers.isEmpty())
+    }
+
+    @Test
+    fun aCompositeWithUnreadableEncountersShowsAnError() = runTest {
+        val fixture = fixture(FakeMapDao(encountersFailing = true))
+        fixture.useCompositePlan()
+        fixture.select(PLAN)
+        assertTrue(checkNotNull(fixture.session.current.zone).failed)
+        assertFalse(checkNotNull(fixture.session.current.zone).loading)
+        assertTrue(fixture.session.overlays.wildMarkers.isEmpty())
+    }
 
     @Test
     fun aRouteShowsItsWildPokemonOnTheMap() = runTest {
@@ -149,5 +205,9 @@ class MapSelectionTest {
         fixture.selection.clearZone()
         assertNull(fixture.session.current.zone)
         assertTrue(fixture.session.overlays.wildMarkers.isEmpty())
+    }
+
+    private companion object {
+        const val PLAN = 1900
     }
 }

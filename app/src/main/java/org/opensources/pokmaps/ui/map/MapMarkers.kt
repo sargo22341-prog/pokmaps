@@ -105,7 +105,7 @@ fun ObjectMarker(
             )
 
             obj.kind == MapObjectKind.POKEMON && pokemonId != null ->
-                MapPokemon(mapState, pokemonId, obj.pokemonName, scale)
+                MapPokemon(mapState, pokemonId, obj.pokemonName, scale, obj.shiny)
 
             sprite != null -> AssetImage(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),
@@ -181,15 +181,21 @@ fun WildPokemonMarker(mapState: MapState, wild: WildMarker) {
  * du plus grand sprite.
  */
 @Composable
-private fun MapPokemon(mapState: MapState, pokemonId: Int, contentDescription: String?, scale: Float) {
+private fun MapPokemon(
+    mapState: MapState,
+    pokemonId: Int,
+    contentDescription: String?,
+    scale: Float,
+    shiny: Boolean = false
+) {
     val context = LocalContext.current
     val resources = LocalResources.current
     val animated = SpritePlace.MAP in LocalAnimatedPlaces.current
     val mapScale by remember(mapState) { derivedStateOf { mapState.scale } }
     // Le sprite est lu à sa taille d'origine, puis agrandi d'un facteur fixe (et non ajusté à son cadre).
-    val request = remember(pokemonId, animated) {
+    val request = remember(pokemonId, animated, shiny) {
         ImageRequest.Builder(context)
-            .data(Sprites.assetUri(Sprites.pokemon(pokemonId, animated)))
+            .data(Sprites.assetUri(Sprites.pokemon(pokemonId, animated, shiny)))
             .size(CoilSize.ORIGINAL)
             .build()
     }

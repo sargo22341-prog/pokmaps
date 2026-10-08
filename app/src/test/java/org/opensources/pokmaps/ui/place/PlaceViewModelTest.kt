@@ -33,11 +33,11 @@ class PlaceViewModelTest {
     private val requests = MapRequests()
     private val collection = CollectionSettings(FakeDataStore())
 
-    private fun viewModel(identifier: String, failing: Boolean = false): PlaceViewModel {
+    private fun viewModel(identifier: String, failing: Boolean = false, composite: Boolean = false): PlaceViewModel {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return PlaceViewModel(
             SavedStateHandle(mapOf(PlaceViewModel.PLACE to identifier)),
-            ObservePlacePageUseCase(games, MapRepository(FakeMapDao(failing))),
+            ObservePlacePageUseCase(games, MapRepository(FakeMapDao(failing, includeCompositeInterior = composite))),
             ObserveCollectionUseCase(games, collection),
             requests
         )
@@ -46,6 +46,20 @@ class PlaceViewModelTest {
     @Test
     fun startsLoading() {
         assertEquals(PlaceUiState(), viewModel("route-1").state.value)
+    }
+
+    @Test
+    fun aComposedFloorListsAllItsRoomsWithoutCallingThemCities() = runTest {
+        val plan = viewModel("pokemon-lab-plan", composite = true)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { plan.state.collect {} }
+        val page = checkNotNull(plan.state.value.page)
+        assertFalse(page.outdoor)
+        assertEquals(1, page.encounters.size)
+        assertTrue(page.characters.any { it.id == FakeMapDao.CLERK })
+        assertTrue(page.characters.any { it.id == FakeMapDao.REVIVER })
+        val room = viewModel("viridian-mart", composite = true)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { room.state.collect {} }
+        assertFalse(checkNotNull(room.state.value.page).outdoor)
     }
 
     @Test

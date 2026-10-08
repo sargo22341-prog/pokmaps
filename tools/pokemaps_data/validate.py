@@ -79,7 +79,7 @@ CHECKS = (
              OR (m.is_world = 1 AND (m.parent_map_id IS NOT NULL OR m.origin_map_id IS NOT NULL
                  OR s.id IS NULL OR s.parent_map_id IS NULL OR s.parent_map_id != m.id))
              OR (m.is_world = 0 AND m.start_map_id IS NOT NULL)
-             OR (m.parent_map_id IS NOT NULL AND (p.id IS NULL OR p.is_world != 1))
+             OR (m.parent_map_id IS NOT NULL AND (p.id IS NULL OR p.level_count <= 0))
              OR (m.origin_map_id IS NOT NULL AND (o.id IS NULL OR o.parent_map_id IS NULL
                  OR o.version_group_id != m.version_group_id))
              OR (m.is_world = 0 AND m.parent_map_id IS NULL AND m.origin_map_id IS NULL)""",
