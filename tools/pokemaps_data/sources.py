@@ -11,10 +11,12 @@
 
 from __future__ import annotations
 
+import http.client
 import os
 import shutil
 import stat
 import subprocess
+import time
 import urllib.error
 import urllib.request
 from collections.abc import Callable
@@ -40,6 +42,8 @@ POKESPRITE_URL = "https://raw.githubusercontent.com/msikma/pokesprite/{commit}/{
 DOWNLOAD_TIMEOUT_SECONDS = 60
 MAX_DOWNLOAD_BYTES = 512 * 1024 * 1024
 DOWNLOAD_CHUNK_BYTES = 1024 * 1024
+_DOWNLOAD_ATTEMPTS = 4
+_RETRY_HTTP_CODES = (408, 429, 500, 502, 503, 504)
 
 # Désassemblages pret (https://github.com/pret) : cartes, tilesets, objets et palettes.
 PRET_COMMITS = {
@@ -121,6 +125,26 @@ def download(url: str, path: Path) -> bool:
     """Télécharge `url` dans `path` s'il n'est pas déjà en cache. Renvoie False si la ressource n'existe pas."""
     if path.exists():
         return True
+    for attempt in range(1, _DOWNLOAD_ATTEMPTS + 1):
+        try:
+            return _download_once(url, path)
+        except urllib.error.HTTPError as error:
+            if error.code not in _RETRY_HTTP_CODES:
+                raise
+            failure = error
+        except (urllib.error.URLError, ConnectionError, TimeoutError, http.client.IncompleteRead) as error:
+            failure = error
+        if attempt == _DOWNLOAD_ATTEMPTS:
+            raise RuntimeError(f"Téléchargement échoué après {attempt} tentatives : {url}") from failure
+        delay = 2 ** (attempt - 1)
+        print(
+            f"Téléchargement interrompu ({attempt}/{_DOWNLOAD_ATTEMPTS}) : {url} ; reprise dans {delay} s : {failure}"
+        )
+        time.sleep(delay)
+    raise AssertionError("Nombre de tentatives de téléchargement invalide")
+
+
+def _download_once(url: str, path: Path) -> bool:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + ".tmp")
     try:
@@ -136,6 +160,7 @@ def download(url: str, path: Path) -> bool:
                         raise ValueError(f"Ressource trop volumineuse (plus de {MAX_DOWNLOAD_BYTES} octets) : {url}")
                     output.write(chunk)
     except urllib.error.HTTPError as error:
+        error.close()
         tmp.unlink(missing_ok=True)
         if error.code == 404:
             return False

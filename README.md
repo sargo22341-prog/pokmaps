@@ -348,6 +348,10 @@ Mesure locale du 8 octobre 2026, avec les six versions et les sources déjà en 
 en 50,7 s ; APK debug de 62 760 138 octets (59,85 Mio). Les cartes représentent 5 903 Kio pour 5 732 tuiles.
 Ces mesures Windows ne prédisent pas la durée d'un premier téléchargement ni la taille de l'APK release.
 
+Les téléchargements HTTP réessaient jusqu'à quatre fois en cas de coupure réseau, de délai dépassé ou de réponse
+HTTP temporaire (408, 429, 500, 502, 503, 504), avec des pauses de 1, 2 puis 4 secondes. Les fichiers incomplets
+sont supprimés à chaque échec ; un échec persistant arrête la génération en indiquant l'URL concernée.
+
 ### Publier une version
 
 **Une seule fois** : créer la clé de signature et l'ajouter aux secrets du dépôt.
