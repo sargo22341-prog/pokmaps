@@ -25,12 +25,19 @@ internal fun TimedZoneEncounters(
 ) {
     var filter by rememberSaveable(zone.mapId) { mutableStateOf(initialTime) }
     var method by rememberSaveable(zone.mapId) { mutableStateOf(EncounterFilter.ALL) }
-    val sections = remember(zone.allEncounters, filter, method) {
-        zone.allEncounters.filter { method.matches(it) }.byTime(filter)
+    val methods = zone.availableMethods(filter)
+    val selected = method.takeIf { it in methods } ?: EncounterFilter.ALL
+    val sections = remember(zone.allEncounters, filter, selected) {
+        zone.allEncounters.filter { selected.matches(it) }.byTime(filter).filter { it.groups.isNotEmpty() }
     }
-    TimeButton(filter) { filter = filter.next() }
-    EncounterFilterRow(method) { method = it }
-    if (sections.isEmpty() || sections.all { it.groups.isEmpty() }) {
+    if (zone.allEncounters.isNotEmpty()) {
+        TimeButton(filter) {
+            filter = filter.next()
+            if (method !in zone.availableMethods(filter)) method = EncounterFilter.ALL
+        }
+    }
+    if (methods.isNotEmpty()) EncounterFilterRow(methods, selected) { method = it }
+    if (sections.isEmpty()) {
         Text(stringResource(R.string.map_no_encounter))
     }
     sections.forEach { section ->

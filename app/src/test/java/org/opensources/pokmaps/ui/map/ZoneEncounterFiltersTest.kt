@@ -73,4 +73,84 @@ class ZoneEncounterFiltersTest {
     private fun click(label: Int) {
         compose.onNode(hasText(context.getString(label)) and hasClickAction()).performClick()
     }
+
+    @Test
+    fun walkingZoneHidesFishingAndSurf() {
+        val encounters = listOf(encounter("Roucool", "walk", EncounterTime.DAY))
+        val zone = MapZone(1, "Route", emptyList(), loading = false, encounters = encounters)
+        compose.setContent { Column { FilteredZoneEncounters(zone, emptySet()) {} } }
+        compose.onNode(hasText(context.getString(R.string.map_method_walk))).assertExists()
+        assertNoChip(R.string.method_fishing)
+        assertNoChip(R.string.method_surf)
+    }
+
+    @Test
+    fun emptyZoneHidesAllFilters() {
+        val zone = MapZone(1, "Route", emptyList(), loading = false)
+        compose.setContent { Column { FilteredZoneEncounters(zone, emptySet()) {} } }
+        assertNoCaptureChips()
+        compose.onNode(hasText(context.getString(R.string.map_no_encounter))).assertExists()
+    }
+
+    @Test
+    fun emptyTimedZoneHidesTimeAndCaptureFilters() {
+        val zone = MapZone(1, "Route", emptyList(), loading = false)
+        compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), TimeFilter.MORNING) {} } }
+        assertNoCaptureChips()
+        assertNoChip(R.string.time_morning)
+        compose.onNode(hasText(context.getString(R.string.time_morning))).assertDoesNotExist()
+    }
+
+    @Test
+    fun timeChangeHidesUnavailableMethodAndReturnsToAll() {
+        val encounters = listOf(
+            encounter("Roucool", "walk", EncounterTime.MORNING),
+            encounter("Magicarpe", "old-rod", EncounterTime.DAY)
+        )
+        val zone = MapZone(1, "Route", emptyList(), loading = false, allEncounters = encounters)
+        compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), TimeFilter.MORNING) {} } }
+        click(R.string.map_method_walk)
+        assertNoChip(R.string.method_fishing)
+        click(R.string.time_morning)
+        assertNoChip(R.string.map_method_walk)
+        compose.onNode(hasText("Magicarpe")).assertExists()
+        click(R.string.method_fishing)
+        click(R.string.time_day)
+        assertNoCaptureChips()
+        click(R.string.time_night)
+        compose.onNode(hasText("Roucool")).assertExists()
+        compose.onNode(hasText("Magicarpe")).assertExists()
+    }
+
+    @Test
+    fun loadingAndFailedZonesHideCaptureFilters() {
+        val encounters = listOf(encounter("Roucool", "walk", EncounterTime.DAY))
+        val loading = MapZone(1, "Route", emptyList(), encounters = encounters)
+        val failed = loading.copy(loading = false, failed = true)
+        assertEquals(emptyList<Any>(), loading.availableMethods())
+        assertEquals(emptyList<Any>(), failed.availableMethods())
+    }
+
+    @Test
+    fun giftOnlyZoneKeepsAllAndHidesWildMethods() {
+        val encounters = listOf(encounter("Évoli", "gift", EncounterTime.DAY))
+        val zone = MapZone(1, "Route", emptyList(), loading = false, encounters = encounters)
+        compose.setContent { Column { FilteredZoneEncounters(zone, emptySet()) {} } }
+        compose.onNode(hasText("Évoli")).assertExists()
+        compose.onNode(hasText(context.getString(R.string.time_all)) and hasClickAction()).assertExists()
+        assertNoChip(R.string.map_method_walk)
+        assertNoChip(R.string.method_fishing)
+        assertNoChip(R.string.method_surf)
+    }
+
+    private fun assertNoCaptureChips() {
+        assertNoChip(R.string.time_all)
+        assertNoChip(R.string.map_method_walk)
+        assertNoChip(R.string.method_fishing)
+        assertNoChip(R.string.method_surf)
+    }
+
+    private fun assertNoChip(label: Int) {
+        compose.onNode(hasText(context.getString(label)) and hasClickAction()).assertDoesNotExist()
+    }
 }

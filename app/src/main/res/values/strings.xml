@@ -345,4 +345,9 @@
     <string name="map_choose_world">Choisir une région</string>
     <string name="map_selected_world">Région sélectionnée</string>
     <string name="map_method_walk">Marche</string>
+    <string name="about_credit_meteocons_title">Meteocons — Bas Milius</string>
+    <string name="about_credit_meteocons">
+        Icônes matin, jour et nuit adaptées pour Android (meteocons.com, licence MIT).
+        Licence incluse dans les assets de l’application.
+    </string>
 </resources>

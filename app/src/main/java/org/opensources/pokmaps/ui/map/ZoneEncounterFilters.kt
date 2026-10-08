@@ -20,17 +20,23 @@ import org.opensources.pokmaps.domain.model.EncounterFilter
 @Composable
 internal fun FilteredZoneEncounters(zone: MapZone, caught: Set<Int>, onOpenPokemon: (Int) -> Unit) {
     var method by rememberSaveable(zone.mapId) { mutableStateOf(EncounterFilter.ALL) }
-    val filtered = remember(zone, method) {
-        zone.copy(encounters = zone.allEncounters.filter { method.matches(it) })
+    val methods = zone.availableMethods()
+    val selected = method.takeIf { it in methods } ?: EncounterFilter.ALL
+    val filtered = remember(zone, selected) {
+        zone.copy(encounters = zone.allEncounters.filter { selected.matches(it) })
     }
-    if (!zone.loading && !zone.failed) EncounterFilterRow(method) { method = it }
+    if (methods.isNotEmpty()) EncounterFilterRow(methods, selected) { method = it }
     ZoneEncounters(filtered, caught, onOpenPokemon)
 }
 
 @Composable
-internal fun EncounterFilterRow(selected: EncounterFilter, onSelect: (EncounterFilter) -> Unit) {
+internal fun EncounterFilterRow(
+    methods: List<EncounterFilter>,
+    selected: EncounterFilter,
+    onSelect: (EncounterFilter) -> Unit
+) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp), contentPadding = PaddingValues(vertical = 4.dp)) {
-        items(EncounterFilter.entries, key = { it.name }) { method ->
+        items(methods, key = { it.name }) { method ->
             FilterChip(
                 selected = selected == method,
                 onClick = { onSelect(method) },

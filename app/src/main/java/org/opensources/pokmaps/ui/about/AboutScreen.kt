@@ -37,6 +37,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
         Credit(R.string.about_credit_pokesprite_title, R.string.about_credit_pokesprite)
         Credit(R.string.about_credit_sprites_title, R.string.about_credit_sprites)
         Credit(R.string.about_credit_pret_title, R.string.about_credit_pret)
+        Credit(R.string.about_credit_meteocons_title, R.string.about_credit_meteocons)
         Text(stringResource(R.string.about_legal_title), style = MaterialTheme.typography.titleMedium)
         Text(stringResource(R.string.about_legal), style = MaterialTheme.typography.bodyMedium)
     }

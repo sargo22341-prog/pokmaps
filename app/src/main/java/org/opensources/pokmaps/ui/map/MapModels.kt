@@ -10,6 +10,7 @@ import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterFilter
 import org.opensources.pokmaps.domain.model.EncounterGroup
 import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
@@ -17,6 +18,7 @@ import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.groupByMethod
+import org.opensources.pokmaps.domain.model.matchesTimes
 import org.opensources.pokmaps.domain.model.wildPokemonIds
 import ovh.plrapps.mapcompose.ui.state.MapState
 
@@ -69,6 +71,12 @@ data class MapZone(
     val allEncounters: List<Encounter> = encounters,
     val failed: Boolean = false
 ) {
+    fun availableMethods(time: TimeFilter = TimeFilter.ALL): List<EncounterFilter> {
+        if (loading || failed) return emptyList()
+        val available = allEncounters.filter { it.matchesTimes(time.times) }
+        return EncounterFilter.entries.filter { method -> available.any { method.matches(it) } }
+    }
+
     val groups: List<EncounterGroup> get() = encounters.groupByMethod()
 
     /** Pokémon sauvages du lieu (herbes, grottes, surf, pêche). */

@@ -39,6 +39,11 @@ bâtiment reprend ce choix à l'ouverture ; ses filtres de moment et de capture 
 restent locaux à la liste. Les points de Kanto retouchés en première génération sont repris en deuxième
 génération lorsqu'ils correspondent encore au même terrain, avec des emplacements supplémentaires au besoin.
 
+Les filtres de capture apparaissent seulement si la méthode possède des rencontres au moment choisi.
+Une liste sans Pokémon ne propose aucun filtre. Les icônes matin, jour et nuit utilisent les dessins
+Meteocons de Bas Milius, adaptés en vecteurs Android (version 3.0.0-next.10, style Flat, licence MIT
+embarquée dans `app/src/main/assets/licenses/meteocons.txt`).
+
 ## Captures d'écran
 
 | Carte et Pokémon sauvages | Pokédex | Fiche Pokémon | Lieux d'un Pokémon |
