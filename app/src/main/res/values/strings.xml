@@ -17,7 +17,6 @@
     <!-- Choix du jeu -->
     <string name="game_generation">Génération %1$d</string>
     <string name="game_intro">Le jeu choisi s’applique à toute l’application et reste mémorisé à sa réouverture.</string>
-    <string name="game_selected">Jeu choisi</string>
     <string name="game_cover">Jaquette de Pokémon %1$s</string>
     <string name="games_empty">Aucun jeu disponible.</string>
 
@@ -337,4 +336,10 @@
         <item quantity="one">%1$d point de la Carte Bleue</item>
         <item quantity="other">%1$d points de la Carte Bleue</item>
     </plurals>
+    <string name="time_all">@string/settings_capture_scope_all</string>
+    <string name="time_always">Tout le temps</string>
+    <string name="unown_title">Pokédex des Zarbi</string>
+    <string name="unown_form">Zarbi %1$s</string>
+    <string name="unown_progress">Formes capturées : %1$d / %2$d</string>
+    <string name="unown_empty">Aucune forme disponible dans cette génération.</string>
 </resources>

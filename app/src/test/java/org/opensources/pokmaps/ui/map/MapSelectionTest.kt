@@ -15,7 +15,7 @@ import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.NpcOffer
-import org.opensources.pokmaps.domain.model.EncounterTime
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -62,13 +62,13 @@ class MapSelectionTest {
         val fixture = fixture(details = FakeMapDao(timedEncounters = true))
         fixture.select(FakeMapDao.ROUTE_1)
         assertEquals(setOf(FakeMapDao.PIDGEY, 163), fixture.session.current.zone?.wildIds)
-        fixture.selection.toggleTime(EncounterTime.DAY)
+        fixture.selection.selectTime(TimeFilter.NIGHT)
         assertEquals(setOf(163), fixture.session.current.zone?.wildIds)
         assertEquals(setOf(163), fixture.session.overlays.wildMarkers.map { it.pokemonId }.toSet())
-        fixture.selection.toggleTime(EncounterTime.NIGHT)
+        fixture.selection.selectTime(TimeFilter.MORNING)
         assertTrue(checkNotNull(fixture.session.current.zone).encounters.isEmpty())
         assertFalse(checkNotNull(fixture.session.current.zone).failed)
-        fixture.selection.toggleTime(EncounterTime.DAY)
+        fixture.selection.selectTime(TimeFilter.DAY)
         assertEquals(setOf(FakeMapDao.PIDGEY), fixture.session.current.zone?.wildIds)
     }
 

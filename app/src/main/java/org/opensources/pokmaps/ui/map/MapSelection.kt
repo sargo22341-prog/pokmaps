@@ -4,7 +4,7 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Encounter
-import org.opensources.pokmaps.domain.model.EncounterTime
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.model.matchesTimes
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
@@ -52,9 +52,8 @@ internal class MapSelection(
         }
     }
 
-    fun toggleTime(time: EncounterTime) {
-        val selected = session.current.times
-        session.update { it.copy(times = if (time in selected) selected - time else selected + time, detail = null) }
+    fun selectTime(time: TimeFilter) {
+        session.update { it.copy(time = time, detail = null) }
         val catalog = session.catalog ?: return
         val zone = session.current.zone?.takeIf { !it.loading && !it.failed } ?: return
         applyTimes(catalog, zone)
@@ -64,7 +63,9 @@ internal class MapSelection(
         val info = catalog.maps[zone.mapId] ?: return
         val encounters = loadedEncounters.filter { it.matchesTimes(session.current.times) }
         session.updateOverlays { it.copy(wildMarkers = MapZoneContent.wildMarkers(catalog, info, encounters)) }
-        session.update { it.copy(zone = zone.copy(loading = false, encounters = encounters)) }
+        session.update {
+            it.copy(zone = zone.copy(loading = false, encounters = encounters, allEncounters = loadedEncounters))
+        }
         session.refreshOverlays()
     }
 

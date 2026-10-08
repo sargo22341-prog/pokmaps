@@ -78,7 +78,8 @@ data class EncounterRow(
     val quantity: Int,
     val note: String?,
     val conditions: String?,
-    val conditionIdentifiers: String? = null
+    val conditionIdentifiers: String? = null,
+    val nonTimeConditions: String? = conditions
 )
 
 data class MapObjectRow(

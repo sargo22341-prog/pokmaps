@@ -1,14 +1,11 @@
 package org.opensources.pokmaps.ui.game
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.CircularProgressIndicator
@@ -35,7 +32,7 @@ fun GameRoute(modifier: Modifier = Modifier, viewModel: GameViewModel = hiltView
     GameScreen(state, viewModel::onAction, modifier)
 }
 
-/** Choix du jeu, par génération : jaquette, nom du jeu et coche sur le jeu choisi. */
+/** Choix du jeu : une rangée de jaquettes par génération. */
 @Composable
 fun GameScreen(state: GameUiState, onAction: (GameAction) -> Unit, modifier: Modifier = Modifier) {
     when {
@@ -75,8 +72,12 @@ private fun LazyListScope.generation(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp)
         )
     }
-    items(games, key = { it.versionId }) { game ->
-        GameRow(game, selected = game == state.selected, onSelect = { onAction(GameAction.Select(game)) })
+    item(key = "games-$generation") {
+        LazyRow {
+            items(games, key = { it.versionId }) { game ->
+                GameRow(game, selected = game == state.selected, onSelect = { onAction(GameAction.Select(game)) })
+            }
+        }
     }
 }
 
@@ -86,32 +87,17 @@ private fun GameRow(game: Game, selected: Boolean, onSelect: () -> Unit) {
         color = if (selected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface,
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
-            .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .selectable(selected = selected, role = Role.RadioButton, onClick = onSelect)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.padding(8.dp)
-        ) {
+        Box(Modifier.padding(8.dp)) {
             GameCover(game)
-            Column(Modifier.weight(1f)) {
-                Text(stringResource(R.string.game_name, game.name), style = MaterialTheme.typography.titleMedium)
-                if (selected) {
-                    Text(
-                        stringResource(R.string.game_selected),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
             if (selected) {
                 Icon(
                     painterResource(R.drawable.ic_check),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(end = 8.dp)
+                    modifier = Modifier.align(Alignment.TopEnd)
                 )
             }
         }

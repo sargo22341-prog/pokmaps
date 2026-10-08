@@ -108,6 +108,7 @@ internal fun ZoneBar(zone: MapZone, caught: Set<Int>, closable: Boolean, onOpenL
 internal fun ZoneListSheet(
     zone: MapZone,
     caught: Set<Int>,
+    timed: Boolean = false,
     onDismiss: () -> Unit,
     onOpenPlace: (MapPlace) -> Unit,
     onOpenPokemon: (Int) -> Unit,
@@ -122,7 +123,11 @@ internal fun ZoneListSheet(
                 .padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
         ) {
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
-            ZoneEncounters(zone, caught, onOpenPokemon)
+            if (timed && !zone.loading && !zone.failed) {
+                TimedZoneEncounters(zone, caught, onOpenPokemon)
+            } else {
+                ZoneEncounters(zone, caught, onOpenPokemon)
+            }
             ZoneItems(zone, onOpenItem, onShowObject)
             ZonePlaces(zone, onOpenPlace)
         }

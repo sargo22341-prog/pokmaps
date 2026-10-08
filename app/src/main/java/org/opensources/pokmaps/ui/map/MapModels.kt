@@ -15,6 +15,7 @@ import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.ObtainMethod
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.model.wildPokemonIds
 import ovh.plrapps.mapcompose.ui.state.MapState
@@ -65,6 +66,7 @@ data class MapZone(
     val items: List<MapObject> = emptyList(),
     val loading: Boolean = true,
     val encounters: List<Encounter> = emptyList(),
+    val allEncounters: List<Encounter> = encounters,
     val failed: Boolean = false
 ) {
     val groups: List<EncounterGroup> get() = encounters.groupByMethod()
@@ -111,7 +113,7 @@ data class MapUiState(
     val game: Game? = null,
     val worlds: List<MapPlace> = emptyList(),
     val worldId: Int? = null,
-    val times: Set<EncounterTime> = EncounterTime.entries.toSet(),
+    val time: TimeFilter = TimeFilter.ALL,
     val map: GameMap? = null,
     val mapState: MapState? = null,
     /** Niveau du dessus (bâtiment, ville ou route qui contient la carte intérieure), pour le bouton retour. */
@@ -129,7 +131,9 @@ data class MapUiState(
     /** Message à afficher une fois (voir [MapAction.MessageShown]). */
     val message: MapMessage? = null,
     val failed: Boolean = false
-)
+) {
+    val times: Set<EncounterTime> get() = time.times
+}
 
 /** Intentions de l'écran de la carte, traitées par [MapViewModel]. */
 sealed interface MapAction {
@@ -140,7 +144,7 @@ sealed interface MapAction {
 
     data class SelectWorld(val mapId: Int) : MapAction
 
-    data class ToggleTime(val time: EncounterTime) : MapAction
+    data object CycleTime : MapAction
 
     data class SelectFloor(val mapId: Int) : MapAction
 

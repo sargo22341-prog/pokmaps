@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.map
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -16,6 +17,7 @@ import org.opensources.pokmaps.data.settings.CollectionSettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.data.settings.MapSettings
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
@@ -123,5 +125,22 @@ class MapViewModelTest {
         viewModel.onScreenShown()
         assertEquals("viridian-mart", viewModel.state.value.map?.identifier)
         assertNull(requests.pending.value)
+    }
+
+    @Test
+    fun changingGenerationResetsTheWorldAndClearsTimeAndHighlight() {
+        val dataStore = FakeDataStore()
+        val games = FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.GOLD))
+        val viewModel = viewModel(games, dataStore = dataStore)
+        viewModel.onScreenShown()
+        viewModel.onAction(MapAction.CycleTime)
+        requests.send(MapRequest.HighlightPokemon(FakeMapDao.PIDGEY, "Roucool"))
+        assertEquals(TimeFilter.MORNING, viewModel.state.value.time)
+        val previousMap = viewModel.state.value.mapState
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.GOLD.versionId) }
+        assertEquals(FakeGameDao.GOLD, viewModel.state.value.game)
+        assertEquals(TimeFilter.ALL, viewModel.state.value.time)
+        assertNull(viewModel.state.value.highlight)
+        assertNotSame(previousMap, viewModel.state.value.mapState)
     }
 }

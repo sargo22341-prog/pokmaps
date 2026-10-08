@@ -150,7 +150,11 @@ const val ENCOUNTER_COLUMNS = """
         JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id WHERE ec.encounter_id = e.id) AS conditions,
     (SELECT group_concat(cv.identifier, ',') FROM encounter_condition ec
         JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id
-        WHERE ec.encounter_id = e.id) AS conditionIdentifiers
+        WHERE ec.encounter_id = e.id) AS conditionIdentifiers,
+    (SELECT group_concat(cv.name_fr, ', ') FROM encounter_condition ec
+        JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id
+        WHERE ec.encounter_id = e.id AND cv.identifier NOT IN ('time-morning', 'time-day', 'time-night'))
+        AS nonTimeConditions
 """
 
 const val ENCOUNTER_TABLES = """

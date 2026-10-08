@@ -17,6 +17,7 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
+import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -87,7 +88,7 @@ class MapViewModel @Inject constructor(
 
             is MapAction.SelectWorld -> navigation.selectWorld(action.mapId)
 
-            is MapAction.ToggleTime -> selection.toggleTime(action.time)
+            MapAction.CycleTime -> selection.selectTime(session.current.time.next())
 
             is MapAction.SelectFloor -> navigation.selectFloor(action.mapId)
 
@@ -129,9 +130,10 @@ class MapViewModel @Inject constructor(
     private fun recreateMap() {
         val current = session.current
         val map = current.map ?: return
-        val mapState = current.mapState ?: return
+        if (current.mapState == null) return
         val overlays = session.overlays
-        navigation.show(map.id, mapState.centroidX, mapState.centroidY, mapState.scale)
+        val position = navigation.currentPosition() ?: return
+        navigation.show(map.id, position.x, position.y, position.scale)
         session.updateOverlays {
             it.copy(wildMarkers = overlays.wildMarkers, focusedObjectId = overlays.focusedObjectId)
         }
@@ -150,21 +152,27 @@ class MapViewModel @Inject constructor(
             session.setLoaded(gameMaps)
             session.updateOverlays { it.copy(worldEntrances = gameMaps.catalog.worldEntrances()) }
             val sameMaps = previous?.catalog === gameMaps.catalog
+            val sameGeneration = previous?.game?.generationId == gameMaps.game.generationId
+            if (!sameGeneration) {
+                session.updateOverlays { it.copy(highlightedMaps = emptySet(), highlightedObjects = emptySet()) }
+            }
             if (!sameMaps) navigation.forgetScales()
             session.update {
                 it.copy(
                     game = gameMaps.game,
+                    time = if (sameGeneration) it.time else TimeFilter.ALL,
+                    highlight = if (sameGeneration) it.highlight else null,
                     detail = null,
                     zoneListOpen = false,
                     failed = false,
                     worlds = gameMaps.catalog.worlds.map { world -> MapPlace(world.id, world.name) }
                 )
             }
-            val stayed = position != null && navigation.stay(gameMaps.catalog, position, sameMaps)
+            val stayed = sameGeneration && position != null && navigation.stay(gameMaps.catalog, position, sameMaps)
             val current = session.current.highlight
             when {
                 current != null -> highlight(current.pokemonId, current.name, move = !stayed)
-                !stayed -> gameMaps.catalog.defaultWorld?.let { navigation.open(it.id) }
+                !stayed -> gameMaps.catalog.defaultWorld?.let { navigation.selectWorld(it.id) }
             }
             readyCatalog.value = gameMaps
         }

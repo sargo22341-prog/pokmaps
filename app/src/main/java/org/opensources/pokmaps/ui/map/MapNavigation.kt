@@ -48,6 +48,8 @@ internal class MapNavigation(
 
     /** Suit la taille de la vue pour le zoom minimal de la carte du monde affichée ; arrêté à son remplacement. */
     private var viewportJob: Job? = null
+    private var initialPosition: Position? = null
+    private var positioned = false
 
     /** Oublie les zooms mémorisés (les cartes du nouveau jeu sont différentes). */
     fun forgetScales() = scales.clear()
@@ -148,8 +150,11 @@ internal class MapNavigation(
         val catalog = session.catalog ?: return
         val map = catalog.gameMap(mapId) ?: return
         val isWorld = map.isWorld
-        val mapState = createMapState(map, x, y, scale ?: if (isWorld) WORLD_SCALE else FOCUS_SCALE)
+        val arrival = startingPosition(map, x, y, scale)
+        val mapState = createMapState(map, arrival)
         retire(session.current)
+        initialPosition = arrival
+        positioned = false
         followViewport(map, mapState)
         val objects = catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() }
         session.updateOverlays {
@@ -184,13 +189,21 @@ internal class MapNavigation(
         }
     }
 
-    private fun createMapState(map: GameMap, x: Double?, y: Double?, scale: Double): MapState {
+    private fun startingPosition(map: GameMap, x: Double?, y: Double?, scale: Double?): Position {
         val start = map.regions.firstOrNull { it.id == map.startRegionId }
-        val startX = x ?: start?.let { it.centerX.toDouble() / map.width } ?: CENTER
-        val startY = y ?: start?.let { it.centerY.toDouble() / map.height } ?: CENTER
-        return MapState(map.levelCount, map.width, map.height, GameMap.TILE_SIZE) {
-            scroll(startX, startY)
-            scale(scale)
+        return Position(
+            map.identifier,
+            null,
+            x ?: start?.let { it.centerX.toDouble() / map.width } ?: CENTER,
+            y ?: start?.let { it.centerY.toDouble() / map.height } ?: CENTER,
+            scale ?: if (map.isWorld) WORLD_SCALE else FOCUS_SCALE
+        )
+    }
+
+    private fun createMapState(map: GameMap, position: Position): MapState =
+        MapState(map.levelCount, map.width, map.height, GameMap.TILE_SIZE) {
+            scroll(position.x, position.y)
+            scale(position.scale)
             minimumScaleMode(if (map.isWorld) Fit else Forced(MIN_INDOOR_SCALE))
             maxScale(MAX_SCALE)
             // Pixels nets en zoom avant ; lissage seulement quand la carte est réduite.
@@ -204,7 +217,6 @@ internal class MapNavigation(
             onTap { tapX, tapY -> handleTap(tapX, tapY) }
             onMarkerClick { id, _, _ -> handleMarkerClick(id) }
         }
-    }
 
     /**
      * Carte du monde : son zoom minimal suit la taille de la vue (rotation, barres), un peu au-delà de la carte
@@ -212,16 +224,19 @@ internal class MapNavigation(
      */
     private fun followViewport(map: GameMap, mapState: MapState) {
         viewportJob?.cancel()
-        viewportJob = if (map.isWorld) {
-            session.launch {
-                mapState.getLayoutSizeFlow().collect { size ->
+        viewportJob = session.launch {
+            mapState.getLayoutSizeFlow().collect { size ->
+                if (size.width <= 0 || size.height <= 0) return@collect
+                if (map.isWorld) {
                     WorldZoom.minScale(size.width, size.height, map.width, map.height)?.let {
                         mapState.minimumScaleMode = Forced(it)
                     }
                 }
+                if (!positioned) {
+                    initialPosition?.let { mapState.snapScrollTo(it.x, it.y) }
+                    positioned = true
+                }
             }
-        } else {
-            null
         }
     }
 
@@ -329,6 +344,7 @@ internal class MapNavigation(
         val map = session.current.map ?: return null
         val mapState = session.current.mapState ?: return null
         val zone = session.current.zone?.let { catalog.maps[it.mapId]?.identifier }
+        if (!positioned) return initialPosition?.copy(zoneIdentifier = zone)
         return Position(map.identifier, zone, mapState.centroidX, mapState.centroidY, mapState.scale)
     }
 

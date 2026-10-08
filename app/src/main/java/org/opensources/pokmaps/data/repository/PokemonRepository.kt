@@ -138,5 +138,6 @@ fun EncounterRow.toEncounter() = Encounter(
     quantity = quantity,
     note = note,
     conditions = conditions,
+    nonTimeConditions = nonTimeConditions,
     times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet()
 )

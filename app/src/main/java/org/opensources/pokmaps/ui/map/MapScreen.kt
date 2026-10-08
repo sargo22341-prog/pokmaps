@@ -99,10 +99,16 @@ fun MapScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-            MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
+            if (state.worlds.size > 1) {
+                WorldSelector(state, onAction, Modifier.weight(1f))
+            } else {
+                MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
+            }
+            if ((state.game?.generationId ?: 0) >= 2) {
+                TimeButton(state.time) { onAction(MapAction.CycleTime) }
+            }
             LayersButton(state.layers) { onAction(MapAction.ToggleLayer(it)) }
         }
-        MapFilters(state, onAction, Modifier.align(Alignment.TopStart).padding(start = 8.dp, top = 64.dp))
         Floors(state, onAction)
         BottomPanel(state, snackbar, onAction, onOpenPokemon, onOpenItem)
     }
@@ -111,6 +117,7 @@ fun MapScreen(
     if (state.zoneListOpen && zone != null) {
         ZoneListSheet(
             zone = zone,
+            timed = (state.game?.generationId ?: 0) >= 2,
             caught = state.caught,
             onDismiss = { onAction(MapAction.CloseZoneList) },
             onOpenPlace = { onAction(MapAction.OpenPlace(it)) },
@@ -155,7 +162,10 @@ private fun MapCanvas(state: MapUiState) {
     Crossfade(targetState = state.mapState, animationSpec = tween(MAP_FADE_MS), label = "map") { mapState ->
         Box(Modifier.fillMaxSize()) {
             when {
-                mapState != null -> MapUI(Modifier.fillMaxSize(), state = mapState)
+                mapState != null -> {
+                    MapUI(Modifier.fillMaxSize(), state = mapState)
+                    if ((state.game?.generationId ?: 0) >= 2) MapDaylight(state.time)
+                }
 
                 state.failed -> Text(
                     stringResource(R.string.data_load_error),

@@ -15,11 +15,15 @@ Réglages, « Captures comptées » fait compter un Pokémon capturé pour le je
 les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
 rien.
 
-Or, Argent et Cristal proposent les cartes de Johto et de Kanto : les boutons de région permettent de passer de l'une à
-l'autre. Les filtres Matin, Jour et Nuit de la carte sont tous activés par défaut ; ils filtrent les marqueurs et
-la liste du lieu sélectionné. Chaque rencontre précise aussi ses conditions (heure, essaim, concours…). Les
-cartes conservent les couleurs de jour du jeu, indépendamment de ce filtre. Coup d'Boule et Éclate-Roc placent les
-Pokémon sur les arbres et les rochers correspondants.
+Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
+Le bouton à droite défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
+Tout conserve les couleurs originales. La liste du lieu a son propre filtre et regroupe les
+rencontres identiques sur toute la journée sous « Tout le temps ».
+Le Pokédex des formes capturées de Zarbi est accessible depuis sa fiche.
+
+La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
+Le [catalogue de provenance des sprites](docs/donnees/sprites-pokemon.md) couvre les 1 025 espèces
+de la source épinglée, y compris celles des jeux à venir.
 
 Les fiches d'Or et d'Argent affichent les six statistiques, les objets tenus, le sexe, les groupes d'œufs,
 les cycles d'éclosion et les attaques par œuf. Les évolutions précisent le bonheur, l'heure et les objets tenus.

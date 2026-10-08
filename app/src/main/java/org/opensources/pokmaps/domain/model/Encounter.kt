@@ -21,7 +21,8 @@ data class Encounter(
     val quantity: Int,
     val note: String?,
     val conditions: String?,
-    val times: Set<EncounterTime> = emptySet()
+    val times: Set<EncounterTime> = emptySet(),
+    val nonTimeConditions: String? = conditions
 ) {
     /** Les échanges n'ont pas de niveau significatif (le Pokémon garde celui de l'échange). */
     val isTrade: Boolean get() = method == TRADE

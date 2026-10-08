@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui
 
 import androidx.annotation.StringRes
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsNotSelected
@@ -77,6 +78,7 @@ class PokemapsJourneyTest {
         click(hasText(text(R.string.show_on_map)))
         await(hasText(text(R.string.map_highlight, "Suicune")))
         await(hasText("Johto"))
+        click(hasText("Johto") and hasClickAction())
         await(hasText("Kanto"))
     }
 
@@ -97,13 +99,15 @@ class PokemapsJourneyTest {
         selectGold()
         click(hasText(text(R.string.nav_map)))
         await(hasText("Johto"))
-        await(hasText("Kanto"))
-        click(hasText("Kanto") and hasClickAction())
-        compose.onNode(hasText("Kanto") and isSelected()).assertExists()
         click(hasText("Johto") and hasClickAction())
+        click(hasText("Kanto") and hasClickAction())
+        compose.onNode(hasText("Kanto") and hasClickAction()).assertExists()
+        click(hasText("Kanto") and hasClickAction())
+        click(hasText("Johto") and hasClickAction())
+        click(hasText(text(R.string.time_all)))
         click(hasText(text(R.string.time_morning)))
         click(hasText(text(R.string.time_day)))
-        compose.onNode(hasText(text(R.string.time_night)) and isSelected()).assertExists()
+        compose.onNode(hasText(text(R.string.time_night)) and hasClickAction()).assertExists()
         openPokemon("hoot", "Hoothoot")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
         click(hasText(text(R.string.show_on_map)))
@@ -200,12 +204,13 @@ class PokemapsJourneyTest {
         await(hasText(text(R.string.game_name, "Rouge")))
         click(hasText(text(R.string.nav_game)))
         await(hasText(text(R.string.game_generation, 1)))
-        val yellow = hasText(text(R.string.game_name, "Jaune"))
+        val yellow = hasContentDescription(text(R.string.game_cover, "Jaune"))
         compose.onNode(yellow).assertIsNotSelected().performClick()
         await(yellow and isSelected())
-        // Le titre de la barre du haut suit le jeu choisi : « Pokémon Jaune » y est, à côté de sa ligne.
-        compose.onAllNodes(yellow).assertCountEquals(2)
-        compose.onNode(hasText(text(R.string.game_name, "Rouge"))).assertIsNotSelected()
+        // Une seule jaquette, sans titre dupliqué ; la barre du haut suit le choix.
+        compose.onAllNodes(yellow).assertCountEquals(1)
+        await(hasText(text(R.string.game_name, "Jaune")))
+        compose.onNode(hasContentDescription(text(R.string.game_cover, "Rouge"))).assertIsNotSelected()
 
         click(hasContentDescription(text(R.string.search_title)))
         await(hasText(text(R.string.search_intro, "Jaune")))
@@ -268,6 +273,18 @@ class PokemapsJourneyTest {
         await(hasText(text(R.string.about_credit_pokeapi_title)))
     }
 
+    @Test
+    fun unownFormsAreAccessibleFromTheirSheetAndPersist() {
+        selectGold()
+        openPokemon("zarbi", "Zarbi")
+        click(hasText(text(R.string.unown_title)))
+        await(hasText(text(R.string.unown_progress, 0, 26)))
+        val form = hasContentDescription(text(R.string.unown_form, "A")) and hasClickAction()
+        compose.onNode(form).assertIsOff().performClick()
+        await(hasText(text(R.string.unown_progress, 1, 26)))
+        compose.onNode(hasText(text(R.string.unown_form, "!"))).assertDoesNotExist()
+    }
+
     private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
 
     private fun selectGold() {
@@ -277,10 +294,12 @@ class PokemapsJourneyTest {
     private fun selectGame(name: String) {
         click(hasText(text(R.string.nav_game)))
         await(hasScrollToNodeAction())
-        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.game_name, name)))
-        click(hasText(text(R.string.game_name, name)))
+        compose.onNode(
+            hasScrollToNodeAction() and SemanticsMatcher.keyIsDefined(SemanticsProperties.VerticalScrollAxisRange)
+        ).performScrollToNode(hasContentDescription(text(R.string.game_cover, name)))
+        click(hasContentDescription(text(R.string.game_cover, name)))
         compose.waitUntil(TIMEOUT_MS) {
-            compose.onAllNodes(hasText(text(R.string.game_name, name))).fetchSemanticsNodes().size == 2
+            compose.onAllNodes(hasText(text(R.string.game_name, name))).fetchSemanticsNodes().size == 1
         }
     }
 

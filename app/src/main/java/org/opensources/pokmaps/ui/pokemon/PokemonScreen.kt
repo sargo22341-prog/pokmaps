@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,6 +37,7 @@ import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
 
@@ -42,7 +45,8 @@ import org.opensources.pokmaps.ui.common.label
 data class PokemonLinks(
     val onOpenPokemon: (Int) -> Unit,
     val onOpenItem: (String) -> Unit,
-    val onOpenMove: (Int) -> Unit
+    val onOpenMove: (Int) -> Unit,
+    val onOpenUnown: () -> Unit = {}
 )
 
 @Composable
@@ -53,13 +57,17 @@ fun PokemonRoute(
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var unownOpen by rememberSaveable { mutableStateOf(false) }
+    if (unownOpen && state.details?.id == UnownForm.POKEMON_ID && (state.game?.generationId ?: 0) >= 2) {
+        UnownRoute(onDismiss = { unownOpen = false }, shiny = state.shiny)
+    }
     PokemonScreen(
         state,
         onAction = { action ->
             viewModel.onAction(action)
             if (action == PokemonAction.ShowOnMap) onShowOnMap()
         },
-        links = links,
+        links = links.copy(onOpenUnown = { unownOpen = true }),
         modifier = modifier
     )
 }
@@ -98,6 +106,13 @@ private fun PokemonContent(
     var movesTab by rememberSaveable(details.id, game.versionGroupId) { mutableIntStateOf(0) }
     LazyColumn(modifier.fillMaxSize()) {
         item { PokemonHeader(state, game, details, onAction) }
+        if (details.id == UnownForm.POKEMON_ID && game.generationId >= 2) {
+            item(key = "unown") {
+                FilledTonalButton(onClick = links.onOpenUnown, modifier = Modifier.padding(horizontal = 16.dp)) {
+                    Text(stringResource(R.string.unown_title))
+                }
+            }
+        }
         section(R.string.pokemon_stats) { Stats(details.stats) }
         if (state.has(GenerationFeature.ABILITIES)) section(R.string.pokemon_abilities) { Abilities(details.traits) }
         section(R.string.pokemon_weaknesses) { Weaknesses(details) }

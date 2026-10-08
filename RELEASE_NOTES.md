@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Jeux en rangées, menus de carte compacts, lumière animée, rencontres regroupées, position conservée et Pokédex des formes de Zarbi.
 - Corrige « Voir sur la carte » après un changement de jeu pendant que la carte était cachée.
 - Cristal est disponible : nouvelles cartes, Suicune à la Tour Ferraille, œuf de la Pension, échanges et lots spécifiques, tuteur d'attaques et récompenses de Buena en points de la Carte Bleue.
 - Or et Argent sont disponibles : cartes de Johto et Kanto, rencontres selon l'heure, Coup d'Boule et Éclate-Roc, fiches Pokémon et calcul de capture adaptés à la deuxième génération.

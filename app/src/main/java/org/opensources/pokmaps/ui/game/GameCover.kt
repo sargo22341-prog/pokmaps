@@ -4,12 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,12 +14,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
@@ -30,12 +24,11 @@ import org.opensources.pokmaps.ui.common.PokemonSpriteFill
 
 /**
  * Jaquette d'un jeu, dessinée aux couleurs de la version avec le Pokémon de sa jaquette (Dracaufeu, Tortank,
- * Pikachu…) au-dessus du nom de la version.
+ * Pikachu…), sans titre visible.
  */
 @Composable
 internal fun GameCover(game: Game, modifier: Modifier = Modifier) {
     val color = Color(COLOR_ALPHA or game.color)
-    val text = if (color.luminance() > LIGHT_COLOR) Color.Black else Color.White
     val description = stringResource(R.string.game_cover, game.name)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -50,27 +43,12 @@ internal fun GameCover(game: Game, modifier: Modifier = Modifier) {
     ) {
         // Une jaquette est une image : le Pokémon y reste fixe.
         PokemonSpriteFill(game.mascotPokemonId, animated = false, contentDescription = null, Modifier.weight(1f))
-        CoverLabel(game.name, text)
     }
-}
-
-@Composable
-private fun CoverLabel(label: String, color: Color) {
-    Text(
-        label.uppercase(),
-        color = color,
-        style = MaterialTheme.typography.labelSmall,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-        maxLines = 1,
-        modifier = Modifier.fillMaxWidth()
-    )
 }
 
 private val COVER_WIDTH = 88.dp
 private val COVER_HEIGHT = 104.dp
 private val COVER_SHAPE = RoundedCornerShape(6.dp)
 private const val COLOR_ALPHA = 0xFF000000.toInt()
-private const val LIGHT_COLOR = 0.5f
 private const val LIGHTEN = 0.35f
 private const val DARKEN = 0.4f

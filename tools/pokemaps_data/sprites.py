@@ -23,6 +23,7 @@ from PIL import Image
 
 from .builder import DatabaseBuilder
 from .sources import download, download_all, pokeapi_sprite, pokesprite
+from .unown_sprites import unown_jobs, validate_unown_sprites
 from .webp import encode_all
 
 # Icônes pokesprite des CT / CS : une par type d'attaque. pokesprite n'en a pas pour le type « ??? » (Malédiction,
@@ -67,12 +68,16 @@ def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[st
         jobs.append((_first_frame(path), output / folder / "static" / f"{species_id}.webp"))
     jobs += [(path, output / "items" / f"{identifier}.webp") for _, path, identifier in items]
 
+    if 201 in builder.species:
+        jobs += unown_jobs(cache, output)
     encoded = encode_all([path for path, _ in jobs])
     if output.exists():
         shutil.rmtree(output)
     for path, destination in jobs:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(encoded[path], destination)
+    if 201 in builder.species:
+        validate_unown_sprites(output)
     return set(item_paths)
 
 
