@@ -120,8 +120,8 @@ def test_wild_held_items_follow_the_battle_engine(gold_silver_builder: DatabaseB
     # Objet 1 : 23 % ; quand les deux objets sont les mêmes, les deux probabilités s'ajoutent (25 %).
     rarities = {rarity for _, _, _, rarity in gold_silver_builder.items.pokemon_item_rows}
     assert rarities <= {2, 23, 25}
-    # Berserk Gene, objet de Mewtwo absent de PokéAPI : écartée, Mewtwo n'étant jamais sauvage.
-    assert not [row for row in gold_silver_builder.items.pokemon_item_rows if row[0] == MEWTWO]
+    # ADN Berzerk, objet 2 de Mewtwo absent de PokéAPI : ajouté par tools/data/extra_items.csv.
+    assert held[(MEWTWO, GOLD, "berserk-gene")] == 2
 
 
 def test_move_effect_chances_come_from_the_move_table(gold_silver_builder: DatabaseBuilder) -> None:
@@ -175,6 +175,9 @@ def test_every_item_has_an_icon(gold_silver_builder: DatabaseBuilder, tmp_path_f
     cache = Path(__file__).resolve().parent.parent / ".cache"
     assert (cache / f"pokesprite-{POKESPRITE_COMMIT[:12]}/data/item-map.json").is_file()
     icons = _item_icon_paths(gold_silver_builder, cache)
-    assert {row[1] for row in gold_silver_builder.items.item_rows} <= icons.keys()
+    # Les objets absents de PokéAPI (extra_items.csv : ADN Berzerk) n'existent que dans des jeux sans icônes d'objets.
+    extra = {item.identifier for item in gold_silver_builder.items.extra_items.values()}
+    assert {row[1] for row in gold_silver_builder.items.item_rows} - extra <= icons.keys()
+    assert not extra & icons.keys()
     # CT03 Malédiction, de type « ??? » : pokesprite n'a pas d'icône de CT pour ce type.
     assert icons["tm03"] == "items/tm/normal.png"

@@ -25,11 +25,11 @@ interface MapDao {
         JOIN map m ON m.id = o.map_id
         LEFT JOIN item i ON i.id = o.item_id
         LEFT JOIN pokemon p ON p.id = o.pokemon_id
-        WHERE m.version_group_id = :versionGroupId
+        WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
         ORDER BY o.id
         """
     )
-    suspend fun objects(versionGroupId: Int): List<MapObjectRow>
+    suspend fun objects(versionGroupId: Int, versionId: Int): List<MapObjectRow>
 
     @Query(
         """
@@ -69,12 +69,13 @@ interface MapDao {
         WHERE v.id = :versionId AND n.pokemon_id = :pokemonId
             AND n.kind IN ('gift_pokemon', 'trade', 'prize_pokemon', 'fossil')
             AND (n.version_id IS NULL OR n.version_id = :versionId)
+            AND (o.version_id IS NULL OR o.version_id = :versionId)
         ORDER BY n.map_object_id
         """
     )
     suspend fun pokemonGivers(versionId: Int, pokemonId: Int): List<Int>
 
-    /** Objets du jeu : ramassables ou cachés, donnés, vendus, CT / CS et objets d'évolution. */
+    /** Objets du jeu dans la version : ramassables ou cachés, donnés, vendus, CT / CS et objets d'évolution. */
     @Query(
         """
         SELECT i.id, i.identifier, i.name_fr AS name, i.has_sprite AS hasSprite, i.category, mv.name_fr AS moveName
@@ -84,23 +85,23 @@ interface MapDao {
         WHERE ma.item_id IS NOT NULL
             OR i.id IN (
                 SELECT o.item_id FROM map_object o JOIN map m ON m.id = o.map_id
-                WHERE m.version_group_id = :versionGroupId
+                WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
             )
             OR i.id IN (
                 SELECT n.item_id FROM npc_offer n
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
-                WHERE m.version_group_id = :versionGroupId
+                WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
                 UNION SELECT n.wanted_item_id FROM npc_offer n
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
-                WHERE m.version_group_id = :versionGroupId
+                WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
             )
             OR i.id IN (SELECT e.item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
         ORDER BY i.id
         """
     )
-    suspend fun items(versionGroupId: Int): List<ItemRow>
+    suspend fun items(versionGroupId: Int, versionId: Int): List<ItemRow>
 
     /** Offres de tous les personnages et installations du jeu, dans la version (lots du Casino). */
     @Query(
@@ -117,6 +118,7 @@ interface MapDao {
         LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id
         LEFT JOIN item wi ON wi.id = n.wanted_item_id
         WHERE v.id = :versionId AND (n.version_id IS NULL OR n.version_id = :versionId)
+            AND (o.version_id IS NULL OR o.version_id = :versionId)
         ORDER BY n.id
         """
     )

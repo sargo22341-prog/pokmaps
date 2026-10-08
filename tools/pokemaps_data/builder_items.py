@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
+import csv
 from collections.abc import Iterable
+from dataclasses import dataclass
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .games import Game, PretFormat
 from .pokeapi import FRENCH, clean_text
 from .pret_identifiers import item_identifier, species_identifier
+from .sources import DATA_DIR
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -25,9 +28,17 @@ _GEN2_SECOND_ITEM_256 = 8 * 255 // 100
 _NO_ITEM = "NO_ITEM"
 # Première génération dont PokéAPI donne les objets tenus (pokemon_items).
 _POKEAPI_HELD_ITEMS_GENERATION = 3
-# Objets tenus absents de PokéAPI, écartés parce qu'aucun Pokémon sauvage ne peut les tenir : la Berserk Gene n'est
-# tenue que par Mewtwo, qu'on ne rencontre pas dans Or et Argent. Une rencontre de ce Pokémon arrête la génération.
-_HELD_ITEMS_WITHOUT_WILD_HOLDER = frozenset({"BERSERK_GENE"})
+
+
+@dataclass(frozen=True)
+class ExtraItem:
+    """Objet absent de PokéAPI (tools/data/extra_items.csv), avec un identifiant hors de la plage de PokéAPI."""
+
+    id: int
+    identifier: str
+    name_fr: str
+    category: str
+    description_fr: str
 
 
 class ItemTables:
@@ -36,8 +47,37 @@ class ItemTables:
         self.api = builder.api
 
     @cached_property
+    def extra_items(self) -> dict[int, ExtraItem]:
+        items = self.api.by_id("items")
+        known = {row["identifier"] for row in items.values()}
+        categories = {row["identifier"] for row in self.api.table("item_categories")}
+        result: dict[int, ExtraItem] = {}
+        with (DATA_DIR / "extra_items.csv").open(encoding="utf-8", newline="") as handle:
+            for line, row in enumerate(csv.DictReader(handle), start=2):
+                item = ExtraItem(
+                    int(row["id"]), row["identifier"], row["name_fr"], row["category"], row["description_fr"]
+                )
+                taken = item.id in items or item.id in result or item.identifier in known
+                if taken or item.category not in categories or not item.name_fr.strip():
+                    raise ValueError(f"extra_items.csv:{line} : objet connu, catégorie inconnue ou nom vide : {row}")
+                result[item.id] = item
+        return result
+
+    @cached_property
+    def ids(self) -> dict[str, int]:
+        """Identifiant -> id de chaque objet : ceux de PokéAPI et ceux de extra_items.csv."""
+        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        return ids | {item.identifier: item.id for item in self.extra_items.values()}
+
+    def name_of(self, identifier: str) -> str:
+        """Nom français de l'objet `identifier`."""
+        item_id = self.ids[identifier]
+        if item_id in self.extra_items:
+            return self.extra_items[item_id].name_fr
+        return self.api.names("item_names", "item_id")[item_id]
+
+    @cached_property
     def item_rows(self) -> list[tuple[int, str, str, str]]:
-        names = self.api.names("item_names", "item_id")
         items = self.api.by_id("items")
         categories = {int(row["id"]): row["identifier"] for row in self.api.table("item_categories")}
         used = {item for _, item, _ in self.builder.moves.machine_rows}
@@ -51,10 +91,14 @@ class ItemTables:
         for row in self.api.table("item_game_indices"):
             if int(row["item_id"]) in ball_ids and int(row["generation_id"]) in self.builder.generations:
                 used.add(int(row["item_id"]))
-        return [
-            (item_id, items[item_id]["identifier"], names[item_id], categories[int(items[item_id]["category_id"])])
-            for item_id in sorted(used)
-        ]
+        return [self._item_row(item_id, categories) for item_id in sorted(used)]
+
+    def _item_row(self, item_id: int, categories: dict[int, str]) -> tuple[int, str, str, str]:
+        if item_id in self.extra_items:
+            extra = self.extra_items[item_id]
+            return item_id, extra.identifier, extra.name_fr, extra.category
+        row = self.api.by_id("items")[item_id]
+        return item_id, row["identifier"], self.name_of(row["identifier"]), categories[int(row["category_id"])]
 
     @cached_property
     def pokemon_item_rows(self) -> list[tuple[int, int, int, int]]:
@@ -91,23 +135,18 @@ class ItemTables:
         """Objets 1 et 2 des données de base de chaque Pokémon (pret), avec les probabilités du moteur."""
         repo = self.builder.gen2_repo(game, "les objets tenus")
         species = {row["identifier"]: species_id for species_id, row in self.builder.species.items()}
-        item_ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        item_ids = self.ids
         versions = [int(row["id"]) for row in self.builder.version_rows if int(row["version_group_id"]) == vg]
-        wild = {
-            self.builder.species_of_pokemon[int(row["pokemon_id"])] for row in self.builder.encounters.raw_encounters
-        }
         rows = []
         for const, (first, second) in sorted(repo.wild_held_items.items()):
             pokemon = species[species_identifier(const)]
             chances: dict[int, float] = {}
             for item, chance_256 in ((first, 256 - _GEN2_SECOND_ITEM_256), (second, _GEN2_SECOND_ITEM_256)):
-                if item in _HELD_ITEMS_WITHOUT_WILD_HOLDER and pokemon in wild:
-                    raise ValueError(f"{const} se rencontre dans {game.version_group} : son objet {item} doit exister")
-                if item == _NO_ITEM or item in _HELD_ITEMS_WITHOUT_WILD_HOLDER:
+                if item == _NO_ITEM:
                     continue
                 identifier = item_identifier(item, repo.machines)
                 if identifier not in item_ids:
-                    raise ValueError(f"Objet tenu inconnu de PokéAPI : {item} (voir pret_identifiers.ITEM_ALIASES)")
+                    raise ValueError(f"Objet tenu inconnu : {item} (pret_identifiers.ITEM_ALIASES, extra_items.csv)")
                 share = _GEN2_HELD_ITEM_256 * chance_256 / 256 / 256 * 100
                 chances[item_ids[identifier]] = chances.get(item_ids[identifier], 0) + share
             rows += [
@@ -126,7 +165,8 @@ class ItemTables:
             order = self.builder.vg_order.get(int(row["version_group_id"]), 0)
             if item_id not in machines and (item_id not in best or order < best[item_id][0]):
                 best[item_id] = (order, clean_text(row["flavor_text"]))
-        return {item_id: text for item_id, (_, text) in best.items()}
+        extra = {item.id: item.description_fr for item in self.extra_items.values()}
+        return {item_id: text for item_id, (_, text) in best.items()} | extra
 
     @cached_property
     def offer_item_ids(self) -> dict[str, int]:
@@ -148,8 +188,8 @@ class ItemTables:
         return self._known_items(identifiers, "Objets des cartes")
 
     def _known_items(self, identifiers: Iterable[str], label: str) -> dict[str, int]:
-        ids = {row["identifier"]: int(row["id"]) for row in self.api.table("items")}
+        ids = self.ids
         unknown = sorted(set(identifiers) - ids.keys())
         if unknown:
-            raise ValueError(f"{label} inconnus de PokéAPI : {unknown} (voir pret_identifiers.ITEM_ALIASES)")
+            raise ValueError(f"{label} inconnus : {unknown} (pret_identifiers.ITEM_ALIASES, extra_items.csv)")
         return {identifier: ids[identifier] for identifier in identifiers}

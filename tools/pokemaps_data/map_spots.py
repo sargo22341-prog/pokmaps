@@ -16,7 +16,7 @@ from pathlib import Path
 from .games import map_families
 
 SPOTS_CSV = Path(__file__).resolve().parents[1] / "data/map_spots.csv"
-SPOT_KINDS = ("grass", "water", "floor")
+SPOT_KINDS = ("grass", "water", "floor", "tree", "rock")
 _HEADER = ("family", "map_identifier", "kind", "x", "y")
 
 Point = tuple[int, int]
@@ -24,7 +24,7 @@ Point = tuple[int, int]
 
 @dataclass(frozen=True, order=True)
 class TerrainKey:
-    """Un terrain d'une carte : herbes (grass), eau (water) ou sol (floor)."""
+    """Un terrain d'une carte : herbes (grass), eau (water), sol (floor), arbres (tree) ou rochers (rock)."""
 
     family: str
     map_identifier: str

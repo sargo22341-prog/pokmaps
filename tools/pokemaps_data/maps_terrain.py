@@ -1,10 +1,12 @@
-"""Terrain où le jeu fait apparaître des Pokémon sauvages : herbes (grass), eau (water) et sol (floor).
+"""Terrain où le jeu fait apparaître des Pokémon sauvages : herbes (grass), eau (water), sol (floor), arbres de
+Coup d'Boule (tree) et rochers d'Éclate-Roc (rock).
 
 Les cases sont en pas de 16 px. Chaque format pret a sa règle, celle de son moteur :
 - 1re génération : la tuile en bas à gauche de la case (tuile d'herbe du tileset, tuile d'eau) ; le sol ne compte
-  que dans les cartes intérieures hors forêt (TryDoWildEncounter) ;
+  que dans les cartes intérieures hors forêt (TryDoWildEncounter) ; ni arbres ni rochers ;
 - 2e génération : la collision de la case (CanEncounterWildMon) ; en grotte ou en donjon, chaque pas hors de la
-  glace, ailleurs seulement les collisions d'herbe et d'eau de CheckGrassCollision.
+  glace, ailleurs seulement les collisions d'herbe et d'eau de CheckGrassCollision. Les arbres (CheckHeadbuttTreeTile)
+  ne comptent que dans les cartes de TreeMonMaps, les rochers (objets SmashRockScript) dans celles de RockMonMaps.
 
 Le sol est restreint aux cases accessibles à pied depuis les warps : le bord des grottes est souvent praticable
 mais isolé.
@@ -17,11 +19,12 @@ from collections.abc import Callable
 
 from .pret import WATER_TILE, PretRepo
 from .pret_gen2 import Gen2PretRepo
+from .pret_gen2_wild import smash_rocks
 from .pret_models import PretMap
 from .pret_reader import PretReader
 
 Cell = tuple[int, int]
-TERRAINS = ("grass", "water", "floor")
+TERRAINS = ("grass", "water", "floor", "tree", "rock")
 
 # 1re génération : tileset de la forêt de Jade et du Parc Safari, où l'on ne rencontre des Pokémon qu'en marchant
 # dans les herbes, comme dehors (engine/battle/wild_encounters.asm, TryDoWildEncounter).
@@ -113,7 +116,21 @@ def _gen2_cells(
                 result["grass"].append((x, y))
             elif permission == _LAND and everywhere:
                 result["floor"].append((x, y))
+    if pret_map.const in repo.headbutt_maps:
+        result["tree"] = _tree_cells(repo, pret_map)
+    if pret_map.const in repo.rock_smash_maps:
+        result["rock"] = smash_rocks(repo, pret_map)
     return result, _never_blocked
+
+
+def _tree_cells(repo: Gen2PretRepo, pret_map: PretMap) -> list[Cell]:
+    tileset = repo.tilesets[pret_map.tileset]
+    return [
+        (x, y)
+        for y in range(pret_map.height * 2)
+        for x in range(pret_map.width * 2)
+        if tileset.collisions[pret_map.block(x // 2, y // 2)][(y % 2) * 2 + x % 2] in repo.collisions.headbutt_trees
+    ]
 
 
 def _never_blocked(_a: Cell, _b: Cell) -> bool:

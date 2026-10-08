@@ -43,6 +43,11 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 - `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
   et sprites des PNJ.
 
+Les jeux en cours d'intégration (`GAMES_IN_PROGRESS` dans `tools/pokemaps_data/games.py`, aujourd'hui Or et
+Argent) ne sont pas embarqués : `tools/build_data.py` les génère avec tous les autres dans un aperçu,
+`tools/build/preview/` (même organisation, hors de Git), validé de la même façon. Les tests et l'éditeur des
+emplacements le lisent.
+
 Toutes les images sont embarquées en WebP sans perte, plus léger que PNG et GIF à pixels identiques ; chaque
 image convertie est relue et comparée à sa source, et la génération s'arrête si elle diffère.
 
@@ -64,10 +69,17 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   connexions, warps, objets et PNJ, et ce que proposent les personnages (soins, boutiques, dons, échanges,
   lots du Casino et leur prix en jetons, distributeurs, fossiles ranimés) ; pour l'effet de chaque attaque, tel que
   le moteur de combat l'exécute (`data/moves/moves.asm`). Aucune ROM n'est utilisée.
+- **[pret/pokegold](https://github.com/pret/pokegold)** (Or et Argent) : cartes de Johto et de Kanto, et rencontres
+  aléatoires lues comme le moteur les tire (herbes et grottes par moment de la journée, surf, pêche, Coup d'Boule,
+  Éclate-Roc, essaims, Concours de capture d'insectes, `data/wild/`), PokéAPI les décrivant mal pour ces jeux
+  (moments de la journée perdus, emplacements d'essaim manquants) ; dons, Pokémon fixes et échanges restent ceux de
+  PokéAPI.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
-  des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI (`map_areas.csv`),
+  des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI, par famille de cartes
+  (`map_areas.csv`), zones et objets absents de PokéAPI (`extra_areas.csv`, `extra_items.csv` : l'ADN Berzerk
+  d'Or et d'Argent), Pokémon qu'un jeu n'obtient que par échange avec un autre (`transfer_only.csv`),
   personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
   que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus, Pokémon de départ du
   labo du Prof. Chen), texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
@@ -78,12 +90,15 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
-qui totalisent 100 %, chaque Pokémon obtenable…).
+qui totalisent 100 % pour chaque moment de la journée, chaque Pokémon obtenable par rencontre, évolution ou
+reproduction…).
 
 Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajouter un jeu (Or/Argent, par
 exemple) demande :
 
-- une ligne dans `games.py` : Pokémon, attaques, objets et rencontres sont alors extraits de PokéAPI (avec les
+- une ligne dans `games.py`, d'abord dans `GAMES_IN_PROGRESS` (le jeu est généré et validé dans l'aperçu sans entrer
+  dans l'application), puis dans `GAMES` quand l'application sait l'afficher : Pokémon, attaques, objets et
+  rencontres sont alors extraits de PokéAPI (avec les
   symboles pret qui distinguent ses versions, comme `_RED` et `_BLUE` pour les lots du Casino), et la jaquette de
   chaque version (`VersionCover` : Pokémon de la jaquette et couleur) ;
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
@@ -98,7 +113,7 @@ exemple) demande :
 
 Les mécaniques des générations suivantes sont déjà prévues, et la fiche d'un Pokémon les affiche dès qu'un jeu les
 connaît (`GenerationFeature` dans l'application) : objets tenus (2e génération ; PokéAPI ne les donne qu'à partir de la
-3e, ceux de la 2e seraient à relever dans `tools/data/`), chromatiques (1 chance sur 8 192, puis 1 sur 4 096 à partir
+3e, ceux de la 2e sont lus dans pret), chromatiques (1 chance sur 8 192, puis 1 sur 4 096 à partir
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
@@ -107,11 +122,15 @@ ci-dessous.
 
 ## Éditeur des emplacements sauvages
 
-Après une génération des données, lancer `python tools/map_editor.py` sur le PC. Choisir les jeux (Rouge, Bleu et
-Jaune sont édités ensemble), la route ou le lieu, puis le terrain : herbes ou sol pour la marche, eau pour le surf et la
-pêche. Seuls les lieux qui ont des rencontres sauvages sont proposés, et seuls les terrains où le jeu fait apparaître un
+Après une génération des données, lancer `python tools/map_editor.py` sur le PC. Tant que des jeux sont en cours
+d'intégration, l'éditeur lit l'aperçu de tous les jeux (`tools/build/preview/`), sinon les assets de l'application.
+Choisir les jeux (Rouge, Bleu et Jaune sont édités ensemble), la région (Johto ou Kanto pour Or et Argent ; un
+bâtiment est rangé dans la région de la ville ou route d'où l'on y entre), la route ou le lieu, puis le terrain :
+herbes ou sol pour la marche, eau pour le surf et la pêche, arbres pour Coup d'Boule et rochers pour Éclate-Roc (2e
+génération). Seuls les lieux qui ont des rencontres sauvages sont proposés, et seuls les terrains où le jeu fait apparaître un
 Pokémon : les herbes si la carte en a, le sol uniquement dans les grottes et bâtiments (pas dehors, ni dans la forêt de
-Jade ou le Parc Safari, où la marche ne compte que dans les herbes), l'eau s'il y a du surf ou de la pêche. La génération
+Jade ou le Parc Safari, où la marche ne compte que dans les herbes), l'eau s'il y a du surf ou de la pêche, les arbres et
+rochers seulement dans les cartes où le jeu en fait tomber ou surgir des Pokémon. La génération
 applique la même règle et refuse dans `map_spots.csv` un terrain où aucun Pokémon ne peut apparaître. La liste affiche les
 Pokémon à placer sur ce terrain, avec leur version, leurs niveaux et leur probabilité. Cliquer sur la carte ajoute un
 emplacement, centré sur la case de 16 px ; cliquer sur un emplacement le retire. « Vider ce terrain » retire tous ses
@@ -128,8 +147,8 @@ demande le plus) : l'application les rangerait alors en grille au milieu du terr
 confirmation s'il reste de tels terrains.
 
 Les positions sont communes à tous les jeux d'une même famille de cartes (`map_family` dans
-`tools/pokemaps_data/games.py`) : un futur Or, Argent et Cristal aura sa propre famille, et ses emplacements ne se
-mélangeront pas à ceux de Kanto. Seuls les terrains réellement modifiés sont écrits dans `tools/data/map_spots.csv`
+`tools/pokemaps_data/games.py`) : Or, Argent et Cristal ont leur propre famille, et leurs emplacements ne se
+mélangent pas à ceux de Rouge, Bleu et Jaune. Seuls les terrains réellement modifiés sont écrits dans `tools/data/map_spots.csv`
 (colonnes `family,map_identifier,kind,x,y`, une ligne sans coordonnées pour un terrain vide) ; les autres restent
 calculés par la génération. Le bouton « Enregistrer toutes les cartes » écrit ensemble les modifications de tous les
 lieux, puis lance `tools/build_data.py`, Ruff et les tests Python. Si Ruff ou pytest manque dans le Python qui exécute

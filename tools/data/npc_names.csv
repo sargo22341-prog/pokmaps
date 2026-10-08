@@ -2,14 +2,20 @@ sprite,name_fr,appearance
 balding-guy,Monsieur,person
 beauty,Canon,person
 bike-shop-clerk,Vendeur de vélos,person
+bill,Léo,person
 bird,Pokémon oiseau,pokemon
+black-belt,Karatéka,person
 blue,Rival,person
 boulder,Rocher,object
 brunette-girl,Jeune femme,person
+bug-catcher,Scout,person
 bulbasaur,Bulbizarre,pokemon
+butterfree,Papilusion,pokemon
 captain,Capitaine,person
 channeler,Exorciste,person
 chansey,Leveinard,pokemon
+chris,Ami,person
+clair,Sandra,person
 clefairy,Mélofée,pokemon
 clerk,Vendeur,person
 clipboard,Bloc-notes,object
@@ -17,10 +23,15 @@ cook,Cuisinier,person
 cooltrainer-f,Topdresseuse,person
 cooltrainer-m,Topdresseur,person
 daisy,Sœur du rival,person
+diglett,Taupiqueur,pokemon
+dragon,Dracolosse,pokemon
+ekans,Minidraco,pokemon
+elm,Prof. Orme,person
 fairy,Pokémon,pokemon
 fisher,Pêcheur,person
 fishing-guru,Maître pêcheur,person
 fossil,Fossile,object
+fruit-tree,Arbre fruitier,object
 gambler,Parieur,person
 gambler-asleep,Parieur endormi,person
 gameboy-kid,Enfant,person
@@ -28,32 +39,52 @@ gentleman,Gentleman,person
 girl,Fille,person
 gramps,Vieil homme,person
 granny,Vieille dame,person
+growlithe,Pokémon légendaire,pokemon
 guard,Garde,person
 gym-guide,Guide de l'arène,person
 hiker,Montagnard,person
 james,James,person
+jasmine,Jasmine,person
 jessie,Jessie,person
 jigglypuff,Rondoudou,pokemon
+jynx,Abra,pokemon
+kurt,Fargas,person
+lance,Peter,person
+lass,Fillette,person
 link-receptionist,Hôtesse du Club Link,person
 little-boy,Petit garçon,person
 little-girl,Petite fille,person
+machop,Machoc,pokemon
 middle-aged-man,Homme,person
 middle-aged-woman,Femme,person
+misty,Ondine,person
+moltres,Pokémon oiseau,pokemon
 mom,Maman,person
 monster,Pokémon,pokemon
 mr-fuji,M. Fuji,person
 nurse,Infirmière,person
 oak,Prof. Chen,person
 oddish,Mystherbe,pokemon
+officer,Policier,person
 officer-jenny,Agent Jenny,person
 old-amber,Vieil Ambre,object
 paper,Papier,object
+pharmacist,Pharmacien,person
 pikachu,Pikachu,pokemon
 poke-ball,Poké Ball,object
 pokedex,Pokédex,object
+pokefan-f,Pokéfan,person
+pokefan-m,Pokéfan,person
+poliwag,Tartard,pokemon
+receptionist,Réceptionniste,person
+reds-mom,Mère de Red,person
+rhydon,Rhinoféros,pokemon
+rival,Rival,person
+rock,Rocher fragile,object
 rocker,Rockeur,person
 rocket,Sbire Rocket,person
 safari-zone-worker,Employé du Parc Safari,person
+sage,Sage,person
 sailor,Marin,person
 sandshrew,Sabelette,pokemon
 scientist,Scientifique,person
@@ -61,9 +92,15 @@ seel,Otaria,pokemon
 silph-president,Président de Sylphe SARL,person
 silph-worker-f,Employée de Sylphe SARL,person
 silph-worker-m,Employé de Sylphe SARL,person
+slowpoke,Ramoloss,pokemon
 snorlax,Ronflex,pokemon
 super-nerd,Intello,person
 swimmer,Nageur,person
+tauros,Écrémeuh,pokemon
+teacher,Institutrice,person
+twin,Jumelle,person
+voltorb,Électrode,pokemon
 waiter,Serveur,person
 warden,Gardien du Parc Safari,person
 youngster,Gamin,person
+zubat,Nosferapti,pokemon

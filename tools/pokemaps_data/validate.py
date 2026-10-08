@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 
+import csv
 import sqlite3
 from pathlib import Path
+
+from .builder_pokemon import BREEDING_GENERATION
+from .sources import DATA_DIR
+
+# Groupe d'œufs des Pokémon qui ne se reproduisent pas (légendaires, bébés).
+_NO_EGGS = "no-eggs"
 
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
@@ -92,7 +99,9 @@ CHECKS = (
              OR (o.kind = 'pokemon') != (o.pokemon_id IS NOT NULL AND o.level IS NOT NULL)
              OR (o.kind = 'trainer') != (o.trainer_class IS NOT NULL) OR trim(o.name_fr) = ''
              OR o.item_id NOT IN (SELECT id FROM item) OR o.pokemon_id NOT IN (SELECT id FROM pokemon)
-             OR o.x NOT BETWEEN m.x AND m.x + m.width OR o.y NOT BETWEEN m.y AND m.y + m.height""",
+             OR o.x NOT BETWEEN m.x AND m.x + m.width OR o.y NOT BETWEEN m.y AND m.y + m.height
+             OR (o.version_id IS NOT NULL AND o.version_id NOT IN
+               (SELECT v.id FROM version v WHERE v.version_group_id = m.version_group_id))""",
     ),
     (
         "équipe de dresseur incohérente",
@@ -172,7 +181,7 @@ CHECKS = (
     (
         "emplacement de Pokémon hors de sa carte",
         """SELECT s.id FROM map_spot s JOIN map m ON m.id = s.map_id
-           WHERE s.kind NOT IN ('grass', 'water', 'floor')
+           WHERE s.kind NOT IN ('grass', 'water', 'floor', 'tree', 'rock')
              OR s.x NOT BETWEEN m.x AND m.x + m.width OR s.y NOT BETWEEN m.y AND m.y + m.height""",
     ),
 )
@@ -195,9 +204,10 @@ def validate(path: Path) -> list[str]:
 
 def _check_obtainable(connection: sqlite3.Connection) -> list[str]:
     """Chaque Pokémon du Pokédex d'une génération doit être obtenable dans au moins une de ses versions
-    (rencontre ou évolution), sauf les Pokémon fabuleux, distribués lors d'événements."""
+    (rencontre, évolution ou, à partir de la 2e génération, reproduction), sauf les Pokémon fabuleux, distribués lors
+    d'événements, et ceux qu'on n'obtient que par échange avec un autre jeu (tools/data/transfer_only.csv)."""
     errors = []
-    evolutions = connection.execute("SELECT version_group_id, from_pokemon_id, to_pokemon_id FROM evolution").fetchall()
+    transfers = _transfer_only(connection)
     for (generation,) in connection.execute("SELECT DISTINCT generation_id FROM version_group").fetchall():
         expected = {
             row[0]
@@ -210,25 +220,58 @@ def _check_obtainable(connection: sqlite3.Connection) -> list[str]:
                 (generation,),
             )
         }
-        obtainable = {
-            row[0]
-            for row in connection.execute(
-                """SELECT DISTINCT e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
-                   JOIN version_group vg ON vg.id = v.version_group_id WHERE vg.generation_id = ?""",
-                (generation,),
-            )
-        }
-        groups = {
-            row[0] for row in connection.execute("SELECT id FROM version_group WHERE generation_id = ?", (generation,))
-        }
-        changed = True
-        while changed:
-            changed = False
-            for group, source, target in evolutions:
-                if group in groups and source in obtainable and target not in obtainable:
-                    obtainable.add(target)
-                    changed = True
-        missing = expected - obtainable
-        if missing:
+        obtainable = _obtainable(connection, generation)
+        allowed = transfers.get(generation, set())
+        if missing := expected - obtainable - allowed:
             errors.append(f"Génération {generation} : Pokémon impossibles à obtenir : {sorted(missing)}")
+        if stale := sorted(allowed & obtainable):
+            errors.append(f"transfer_only.csv : Pokémon obtenables dans la génération {generation} : {stale}")
     return errors
+
+
+def _obtainable(connection: sqlite3.Connection, generation: int) -> set[int]:
+    """Pokémon rencontrés dans les versions de la génération, puis, jusqu'à stabilité, leurs évolutions et (à partir
+    de BREEDING_GENERATION) le Pokémon de base de la famille de ceux qui peuvent pondre un œuf."""
+    obtainable = {
+        row[0]
+        for row in connection.execute(
+            """SELECT DISTINCT e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
+               JOIN version_group vg ON vg.id = v.version_group_id WHERE vg.generation_id = ?""",
+            (generation,),
+        )
+    }
+    links = connection.execute(
+        """SELECT DISTINCT e.from_pokemon_id, e.to_pokemon_id FROM evolution e
+           JOIN version_group vg ON vg.id = e.version_group_id WHERE vg.generation_id = ?""",
+        (generation,),
+    ).fetchall()
+    if generation >= BREEDING_GENERATION:
+        links += connection.execute(
+            """SELECT p.id, base.id FROM pokemon p
+               JOIN pokemon base ON base.evolution_chain_id = p.evolution_chain_id AND base.evolves_from_id IS NULL
+               WHERE NOT EXISTS (SELECT 1 FROM pokemon_egg_group peg JOIN egg_group g ON g.id = peg.egg_group_id
+                                 WHERE peg.pokemon_id = p.id AND g.identifier = ?)""",
+            (_NO_EGGS,),
+        ).fetchall()
+    changed = True
+    while changed:
+        changed = False
+        for source, target in links:
+            if source in obtainable and target not in obtainable:
+                obtainable.add(target)
+                changed = True
+    return obtainable
+
+
+def _transfer_only(connection: sqlite3.Connection) -> dict[int, set[int]]:
+    """Génération -> Pokémon qu'on n'obtient qu'en les échangeant avec un autre jeu (tools/data/transfer_only.csv)."""
+    generations = dict(connection.execute("SELECT identifier, generation_id FROM version_group"))
+    species = dict(connection.execute("SELECT identifier, id FROM pokemon"))
+    result: dict[int, set[int]] = {}
+    with (DATA_DIR / "transfer_only.csv").open(encoding="utf-8", newline="") as handle:
+        for line, row in enumerate(csv.DictReader(handle), start=2):
+            if row["pokemon"] not in species or not row["reason"].strip():
+                raise ValueError(f"transfer_only.csv:{line} : Pokémon inconnu ou raison manquante : {row}")
+            if row["version_group"] in generations:
+                result.setdefault(generations[row["version_group"]], set()).add(species[row["pokemon"]])
+    return result

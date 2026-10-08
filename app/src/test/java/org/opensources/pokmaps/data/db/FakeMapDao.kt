@@ -5,12 +5,14 @@ package org.opensources.pokmaps.data.db
  * a un dresseur, une Potion et des Roucool ; le vendeur de la boutique vend des Potions. Dans le labo, un Fossile
  * Dôme à ramasser, le scientifique qui le ranime en Kabuto, une infirmière et un comptoir des lots dont l'Abra
  * coûte plus cher dans Rouge que dans Bleu. `failing` simule une base illisible, `encountersFailing` une erreur
- * limitée à la lecture des rencontres.
+ * limitée à la lecture des rencontres. `includeVersionPokemon` ajoute sur la Route 1 un Pokémon fixe dont le niveau
+ * dépend de la version, comme la requête qui ne garde que les objets de la version demandée.
  */
 internal class FakeMapDao(
     private val failing: Boolean = false,
     private val encountersFailing: Boolean = false,
-    private val includeHiddenItem: Boolean = false
+    private val includeHiddenItem: Boolean = false,
+    private val includeVersionPokemon: Boolean = false
 ) : MapDao {
     override suspend fun maps(versionGroupId: Int) = read {
         listOf(
@@ -29,7 +31,7 @@ internal class FakeMapDao(
         )
     }
 
-    override suspend fun objects(versionGroupId: Int) = read {
+    override suspend fun objects(versionGroupId: Int, versionId: Int) = read {
         listOf(
             mapObject(TRAINER, ROUTE_1, 200 to 100, "trainer", "Gamin", "youngster", trainerClass = "youngster"),
             mapObject(CLERK, MART, 40 to 40, "npc", "Vendeur", "clerk"),
@@ -38,8 +40,19 @@ internal class FakeMapDao(
             mapObject(FOSSIL, LAB, 24 to 24, "npc_object", "Fossile", "fossil"),
             mapObject(REVIVER, LAB, 56 to 24, "npc", "Scientifique", "scientist"),
             mapObject(NURSE, LAB, 88 to 24, "npc", "Infirmière", "nurse"),
-            mapObject(PRIZES, LAB, 56 to 88, "prize_vendor", "Comptoir des lots")
+            mapObject(PRIZES, LAB, 56 to 88, "prize_vendor", "Comptoir des lots"),
+            *versionPokemon(versionId)
         )
+    }
+
+    private fun versionPokemon(versionId: Int): Array<MapObjectRow> = if (includeVersionPokemon) {
+        val level = if (versionId == FakeGameDao.RED.versionId) RED_SNORLAX_LEVEL else BLUE_SNORLAX_LEVEL
+        arrayOf(
+            mapObject(SNORLAX_OBJECT, ROUTE_1, 280 to 120, "pokemon", "Ronflex")
+                .copy(pokemonId = SNORLAX, pokemonName = "Ronflex", level = level)
+        )
+    } else {
+        emptyArray()
     }
 
     private fun hiddenItems(): Array<MapObjectRow> = if (includeHiddenItem) {
@@ -92,7 +105,7 @@ internal class FakeMapDao(
         }
     }
 
-    override suspend fun items(versionGroupId: Int) = read {
+    override suspend fun items(versionGroupId: Int, versionId: Int) = read {
         listOf(
             ItemRow(POTION, "potion", "Potion", true, "healing", null),
             ItemRow(DOME_FOSSIL, "dome-fossil", "Fossile Dôme", true, "dex-completion", null)
@@ -205,6 +218,10 @@ internal class FakeMapDao(
         const val KABUTO = 140
         const val RED_ABRA_COINS = 180
         const val BLUE_ABRA_COINS = 120
+        const val SNORLAX_OBJECT = 19
+        const val SNORLAX = 143
+        const val RED_SNORLAX_LEVEL = 30
+        const val BLUE_SNORLAX_LEVEL = 50
 
         private val PIDGEY_ENCOUNTER = EncounterRow(
             versionId = 1,

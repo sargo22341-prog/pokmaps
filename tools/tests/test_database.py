@@ -401,8 +401,12 @@ def test_debug_warps_are_not_part_of_the_game(db: sqlite3.Connection) -> None:
     assert targets == [("reds-house-1f",)]
 
 
-def test_a_version_specific_map_object_needs_a_column(builder: DatabaseBuilder) -> None:
-    rows = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {})
+def test_a_version_specific_map_object_has_its_version(preview_builder: DatabaseBuilder) -> None:
+    builder = preview_builder
     ho_oh = ObjectRow("TIN_TOWER_ROOF", "pokemon", 152, 88, "ho-oh", None, "ho-oh", 40, None, version="gold")
-    with pytest.raises(ValueError, match="propre à la version gold"):
-        rows.add(ho_oh, 1)
+    rows = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {"gold": 4})
+    rows.add(ho_oh, 1)
+    assert rows.objects[-1][-1] == 4
+    unknown = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {})
+    with pytest.raises(ValueError, match="version inconnue"):
+        unknown.add(ho_oh, 1)

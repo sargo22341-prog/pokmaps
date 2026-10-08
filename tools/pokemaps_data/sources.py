@@ -25,6 +25,8 @@ from typing import Any
 
 # Corrections et compléments relus à la main (CSV versionnés avec le dépôt).
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+# Aperçu de tous les jeux, y compris ceux en cours d'intégration (build_data.py), hors des assets et de Git.
+PREVIEW_DIR = Path(__file__).resolve().parent.parent / "build/preview"
 
 POKEAPI_COMMIT = "bc92d3b6029ef1abe9e7ad424c400b338f3c11fe"
 POKEAPI_CSV_URL = "https://raw.githubusercontent.com/PokeAPI/pokeapi/{commit}/data/v2/csv/{name}.csv"

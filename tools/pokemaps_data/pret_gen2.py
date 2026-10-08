@@ -19,6 +19,7 @@ from typing import TYPE_CHECKING
 
 from .pret_gen2_scripts import ScriptFile
 from .pret_gen2_tilesets import CollisionRules, Gen2Tileset, read_collision_rules, read_tilesets
+from .pret_gen2_wild import headbutt_maps, rock_smash_maps
 from .pret_source import annotated_lines, conditional_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
@@ -51,6 +52,7 @@ class MapHeader:
     environment: str  # TOWN, ROUTE, INDOOR, CAVE, ENVIRONMENT_5, GATE ou DUNGEON
     landmark: str
     palette: str  # PALETTE_AUTO, PALETTE_DAY, PALETTE_NITE, PALETTE_MORN ou PALETTE_DARK
+    fishing_group: str  # FISHGROUP_… : Pokémon pêchés dans l'eau de la carte (FISHGROUP_NONE : aucun)
     border_block: int
 
     @property
@@ -105,9 +107,9 @@ class Gen2PretRepo:
         for label, args in self._map_header_args().items():
             const, border = attributes[label]
             number, group, width, height = sizes[const]
-            tileset, environment, landmark, palette = args[1], args[2], args[3], args[6]
+            tileset, environment, landmark, palette, fishing = args[1], args[2], args[3], args[6], args[7]
             header = MapHeader(
-                const, label, number, group, width, height, tileset, environment, landmark, palette, border
+                const, label, number, group, width, height, tileset, environment, landmark, palette, fishing, border
             )
             result[const] = header
         if missing := sorted(set(sizes) - result.keys()):
@@ -212,6 +214,18 @@ class Gen2PretRepo:
         if landmark == _FAST_SHIP or index < kanto or index >= landmarks.index(_VICTORY_ROAD):
             return JOHTO
         return KANTO
+
+    # --- Rencontres --------------------------------------------------------------
+
+    @cached_property
+    def headbutt_maps(self) -> frozenset[str]:
+        """Cartes où Coup d'Boule fait tomber des Pokémon des arbres."""
+        return headbutt_maps(self)
+
+    @cached_property
+    def rock_smash_maps(self) -> frozenset[str]:
+        """Cartes où Éclate-Roc fait surgir des Pokémon des rochers."""
+        return rock_smash_maps(self)
 
     # --- Tilesets ---------------------------------------------------------------
 

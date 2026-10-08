@@ -38,9 +38,12 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     private val catalogs = mutableMapOf<Int, MapCatalog>()
     private val indexes = mutableMapOf<Int, GameIndex>()
 
-    /** Cartes du jeu avec leurs warps, objets et zones (gardées en mémoire : la base ne change pas). */
+    /**
+     * Cartes du jeu avec leurs warps, objets et zones, dans la version (Ho-Oh et Lugia n'ont pas le même niveau en Or
+     * et en Argent) : gardées en mémoire, la base ne change pas.
+     */
     suspend fun catalog(game: Game): MapCatalog = mutex.withLock {
-        catalogs.getOrPut(game.versionGroupId) { loadCatalog(game) }
+        catalogs.getOrPut(game.versionId) { loadCatalog(game) }
     }
 
     private suspend fun loadCatalog(game: Game): MapCatalog {
@@ -51,7 +54,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
             warps = dao.warps(vg)
                 .map { MapWarp(it.id, it.mapId, it.x, it.y, it.targetMapId, it.targetX, it.targetY) }
                 .groupBy { it.mapId },
-            objects = dao.objects(vg).map {
+            objects = dao.objects(vg, game.versionId).map {
                 MapObject(
                     id = it.id,
                     mapId = it.mapId,
@@ -83,7 +86,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     suspend fun index(game: Game): GameIndex = mutex.withLock {
         indexes.getOrPut(game.versionId) {
             GameIndex(
-                items = dao.items(game.versionGroupId).map {
+                items = dao.items(game.versionGroupId, game.versionId).map {
                     ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName)
                 },
                 offers = dao.offerLinks(game.versionId).map {

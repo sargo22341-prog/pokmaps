@@ -1,4 +1,8 @@
-"""Tables des lieux et des rencontres, corrigées par les fichiers maintenus dans tools/data/."""
+"""Tables des rencontres, corrigées par les fichiers maintenus dans tools/data/.
+
+Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des jeux de la 2e génération, lues dans pret
+(builder_wild_gen2.py). Les lieux et zones sont dans builder_locations.py.
+"""
 
 from __future__ import annotations
 
@@ -8,19 +12,19 @@ from dataclasses import dataclass, field
 from functools import cached_property
 from typing import TYPE_CHECKING
 
-from .games import ONE_OFF_METHODS
-from .pokeapi import optional_int
+from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
+from .games import ONE_OFF_METHODS, PretFormat
 from .sources import DATA_DIR
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
 
 
-_CURATION_ACTIONS = frozenset({"exclude", "note", "trade_for"})
-
-
-def _area_key(location_identifier: str, area_identifier: str) -> str:
-    return f"{location_identifier}/{area_identifier}" if area_identifier else location_identifier
+_CURATION_ACTIONS = frozenset({"exclude", "note", "trade_for", "move_to"})
+# Valeurs par défaut de PokéAPI qui restreignent pourtant la rencontre : « time-day » est la valeur par défaut du
+# moment de la journée, mais c'est l'une des trois tables des jeux de la 2e génération. Les autres valeurs par défaut
+# (pas d'essaim, progression ordinaire, jetons, Pokémon demandé en échange) ne restreignent rien.
+_RESTRICTING_DEFAULTS = frozenset({"time-day"})
 
 
 @dataclass
@@ -53,129 +57,181 @@ class EncounterTables:
         self.api = builder.api
 
     @cached_property
-    def raw_encounters(self) -> list[dict[str, str]]:
-        return [row for row in self.api.table("encounters") if int(row["version_id"]) in self.builder.version_ids]
-
-    @cached_property
     def used_areas(self) -> set[int]:
-        return {int(row["location_area_id"]) for row in self.raw_encounters}
+        """Zones des rencontres, y compris celles dont la curation écarte ou déplace toutes les rencontres : leur
+        carte reste reliée à la zone (map_areas.csv)."""
+        before = {group.location_area_id for group in self._uncurated_groups}
+        return before | {group.location_area_id for group in self.encounter_groups}
+
+    # --- Rencontres -------------------------------------------------------------
 
     @cached_property
-    def name_fixes(self) -> dict[tuple[str, str], str]:
-        with (DATA_DIR / "name_fixes.csv").open(encoding="utf-8", newline="") as handle:
-            return {(row["kind"], row["key"]): row["name_fr"] for row in csv.DictReader(handle)}
+    def _pret_versions(self) -> frozenset[int]:
+        """Versions dont les rencontres aléatoires sont lues dans pret (jeux de la 2e génération)."""
+        versions: set[int] = set()
+        for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
+            match game.pret_format:
+                case PretFormat.GEN1:
+                    pass
+                case PretFormat.GEN2:
+                    rows = self.builder.version_rows
+                    versions |= {int(row["id"]) for row in rows if int(row["version_group_id"]) == vg}
+        return frozenset(versions)
 
     @cached_property
-    def area_keys(self) -> dict[int, str]:
-        """Zone -> clé lisible `lieu/zone` utilisée par les fichiers de tools/data/."""
-        locations = self.api.by_id("locations")
-        return {
-            int(row["id"]): _area_key(locations[int(row["location_id"])]["identifier"], row["identifier"])
-            for row in self.api.table("location_areas")
-        }
-
-    def location_area_table(self) -> list[tuple]:
-        names = self.api.names("location_area_prose", "location_area_id")
-        areas = self.api.by_id("location_areas")
-        locations = self.api.by_id("locations")
-        location_names = self.api.names("location_names", "location_id")
-        rows = []
-        for area_id in sorted(self.used_areas):
-            area = areas[area_id]
-            location = locations[int(area["location_id"])]
-            name = self.name_fixes.get(("area", self.area_keys[area_id])) or names.get(area_id)
-            if not name:
-                base = location_names.get(int(location["id"]), location["identifier"])
-                name = f"{base} ({area['identifier']})" if area["identifier"] else base
-            rows.append((area_id, int(area["location_id"]), area["identifier"], name))
-        return rows
-
-    @cached_property
-    def location_rows(self) -> list[tuple]:
-        names = self.api.names("location_names", "location_id")
-        locations = self.api.by_id("locations")
-        areas = self.api.by_id("location_areas")
-        used = sorted({int(areas[area]["location_id"]) for area in self.used_areas})
-        rows = []
-        for location_id in used:
-            row = locations[location_id]
-            name = self.name_fixes.get(("location", row["identifier"])) or names.get(location_id)
-            if not name:
-                raise ValueError(f"Nom français manquant pour le lieu {row['identifier']} (tools/data/name_fixes.csv)")
-            rows.append((location_id, row["identifier"], name, optional_int(row["region_id"])))
-        return rows
+    def raw_encounters(self) -> list[dict[str, str]]:
+        """Rencontres PokéAPI des jeux configurés, sans celles que pret remplace."""
+        slots = self.api.by_id("encounter_slots")
+        methods = self.api.by_id("encounter_methods")
+        return [
+            row
+            for row in self.api.table("encounters")
+            if int(row["version_id"]) in self.builder.version_ids
+            and not (
+                int(row["version_id"]) in self._pret_versions
+                and methods[int(slots[int(row["encounter_slot_id"])]["encounter_method_id"])]["identifier"]
+                in REPLACED_METHODS
+            )
+        ]
 
     @cached_property
     def encounter_groups(self) -> list[EncounterGroup]:
-        slots = self.api.by_id("encounter_slots")
-        methods = self.api.by_id("encounter_methods")
-        conditions = self._non_default_conditions()
+        groups = self._apply_curation(list(self._uncurated_groups))
+        for note in self._battle_notes:
+            _add_battle_note(groups, note)
+        return groups
+
+    @cached_property
+    def _uncurated_groups(self) -> list[EncounterGroup]:
         groups: dict[tuple, EncounterGroup] = {}
-        for row in self.raw_encounters:
-            slot = slots[int(row["encounter_slot_id"])]
-            method_id = int(slot["encounter_method_id"])
+        for encounter in self._pokeapi_encounters() + self._pret_encounters():
             key = (
+                encounter.version_id,
+                encounter.area_id,
+                encounter.species_id,
+                encounter.method_id,
+                encounter.conditions,
+            )
+            low, high = encounter.min_level, encounter.max_level
+            if key not in groups:
+                one_off = self.method_identifiers[encounter.method_id] in ONE_OFF_METHODS
+                groups[key] = EncounterGroup(*key, low, high, None if one_off else 0.0, 0)
+            groups[key].add(low, high, encounter.chance)
+        return list(groups.values())
+
+    @cached_property
+    def method_identifiers(self) -> dict[int, str]:
+        return {int(row["id"]): row["identifier"] for row in self.api.table("encounter_methods")}
+
+    def _pokeapi_encounters(self) -> list[WildEncounter]:
+        slots = self.api.by_id("encounter_slots")
+        conditions = self._restricting_conditions()
+        return [
+            WildEncounter(
                 int(row["version_id"]),
                 int(row["location_area_id"]),
-                int(row["pokemon_id"]),
-                method_id,
+                self.builder.species_of_pokemon[int(row["pokemon_id"])],
+                int(slots[int(row["encounter_slot_id"])]["encounter_method_id"]),
                 tuple(sorted(conditions[int(row["id"])])),
+                int(row["min_level"]),
+                int(row["max_level"]),
+                int(slots[int(row["encounter_slot_id"])]["rarity"]),
             )
-            low, high = int(row["min_level"]), int(row["max_level"])
-            if key not in groups:
-                one_off = methods[method_id]["identifier"] in ONE_OFF_METHODS
-                species = self.builder.species_of_pokemon[int(row["pokemon_id"])]
-                groups[key] = EncounterGroup(
-                    key[0], key[1], species, method_id, key[4], low, high, None if one_off else 0.0, 0
-                )
-            groups[key].add(low, high, int(slot["rarity"]))
-        return self._apply_curation(list(groups.values()))
+            for row in self.raw_encounters
+        ]
 
-    def _non_default_conditions(self) -> dict[int, set[int]]:
-        """Rencontre -> conditions qui la restreignent (heure, saison…), hors valeurs par défaut."""
-        default_conditions = {
-            int(row["id"]) for row in self.api.table("encounter_condition_values") if row["is_default"] == "1"
+    def _pret_encounters(self) -> list[WildEncounter]:
+        encounters: list[WildEncounter] = []
+        for game in self.builder.games:
+            match game.pret_format:
+                case PretFormat.GEN1:
+                    pass
+                case PretFormat.GEN2:
+                    encounters += gen2_wild_encounters(self.builder, game)
+        return encounters
+
+    @cached_property
+    def _battle_notes(self) -> list[BattleNote]:
+        notes: list[BattleNote] = []
+        for game in self.builder.games:
+            match game.pret_format:
+                case PretFormat.GEN1:
+                    pass
+                case PretFormat.GEN2:
+                    notes += gen2_battle_notes(self.builder, game)
+        return notes
+
+    def _restricting_conditions(self) -> dict[int, set[int]]:
+        """Rencontre -> conditions qui la restreignent (heure, essaim…), hors valeurs par défaut sans effet."""
+        ignored = {
+            int(row["id"])
+            for row in self.api.table("encounter_condition_values")
+            if row["is_default"] == "1" and row["identifier"] not in _RESTRICTING_DEFAULTS
         }
         conditions: dict[int, set[int]] = defaultdict(set)
         for row in self.api.table("encounter_condition_value_map"):
             value = int(row["encounter_condition_value_id"])
-            if value not in default_conditions:
+            if value not in ignored:
                 conditions[int(row["encounter_id"])].add(value)
         return conditions
 
     def _apply_curation(self, groups: list[EncounterGroup]) -> list[EncounterGroup]:
-        versions = {row["identifier"]: int(row["id"]) for row in self.api.table("versions")}
-        species = {row["identifier"]: int(row["id"]) for row in self.api.table("pokemon_species")}
-        methods = {row["identifier"]: int(row["id"]) for row in self.api.table("encounter_methods")}
-        areas = {key: area_id for area_id, key in self.area_keys.items()}
-        names_fr = self.api.names("pokemon_species_names", "pokemon_species_id")
         excluded: set[int] = set()
         with (DATA_DIR / "encounter_curation.csv").open(encoding="utf-8", newline="") as handle:
             for line, row in enumerate(csv.DictReader(handle), start=2):
                 if row["action"] not in _CURATION_ACTIONS:
                     raise ValueError(f"encounter_curation.csv:{line} : action inconnue {row['action']}")
-                version_ids = [
-                    versions[v] for v in row["versions"].split("|") if versions[v] in self.builder.version_ids
-                ]
-                if not version_ids:
-                    continue
-                target = (areas[row["location_area"]], species[row["pokemon"]], methods[row["method"]])
-                matches = [
-                    index
-                    for index, group in enumerate(groups)
-                    if group.version_id in version_ids
-                    and (group.location_area_id, group.pokemon_id, group.method_id) == target
-                ]
-                if not matches:
-                    raise ValueError(f"encounter_curation.csv:{line} ne correspond à aucune rencontre : {row}")
+                matches = self._curation_matches(groups, row, line)
                 if row["action"] == "exclude":
                     excluded.update(matches)
                 for index in matches:
-                    if row["action"] == "note":
-                        groups[index].notes.append(row["value"])
-                    elif row["action"] == "trade_for":
-                        groups[index].notes.append(f"Échange contre {names_fr[species[row['value']]]}")
+                    self._curate(groups[index], row, line)
         return [group for index, group in enumerate(groups) if index not in excluded]
+
+    @cached_property
+    def _ids(self) -> dict[str, dict[str, int]]:
+        """Table PokéAPI (versions, pokemon_species, encounter_methods) -> identifiant -> id."""
+        return {
+            table: {row["identifier"]: int(row["id"]) for row in self.api.table(table)}
+            for table in ("versions", "pokemon_species", "encounter_methods")
+        }
+
+    def _curation_matches(self, groups: list[EncounterGroup], row: dict[str, str], line: int) -> list[int]:
+        versions, species = self._ids["versions"], self._ids["pokemon_species"]
+        version_ids = [versions[v] for v in row["versions"].split("|") if versions[v] in self.builder.version_ids]
+        if not version_ids:
+            return []
+        if row["location_area"] not in self.builder.locations.area_ids:
+            raise ValueError(f"encounter_curation.csv:{line} : zone inconnue {row['location_area']}")
+        target = (
+            self.builder.locations.area_ids[row["location_area"]],
+            species[row["pokemon"]],
+            self._ids["encounter_methods"][row["method"]],
+        )
+        matches = [
+            index
+            for index, group in enumerate(groups)
+            if group.version_id in version_ids and (group.location_area_id, group.pokemon_id, group.method_id) == target
+        ]
+        if not matches:
+            raise ValueError(f"encounter_curation.csv:{line} ne correspond à aucune rencontre : {row}")
+        return matches
+
+    def _curate(self, group: EncounterGroup, row: dict[str, str], line: int) -> None:
+        match row["action"]:
+            case "exclude":
+                pass
+            case "note":
+                group.notes.append(row["value"])
+            case "trade_for":
+                names_fr = self.api.names("pokemon_species_names", "pokemon_species_id")
+                group.notes.append(f"Échange contre {names_fr[self._ids['pokemon_species'][row['value']]]}")
+            case "move_to":
+                if row["value"] not in self.builder.locations.area_ids:
+                    raise ValueError(f"encounter_curation.csv:{line} : zone inconnue {row['value']}")
+                group.location_area_id = self.builder.locations.area_ids[row["value"]]
+            case _:
+                raise ValueError(f"encounter_curation.csv:{line} : action inconnue {row['action']}")
 
     @cached_property
     def method_rank(self) -> dict[int, int]:
@@ -230,11 +286,16 @@ class EncounterTables:
     def encounter_condition_value_table(self) -> list[tuple]:
         names = self.api.names("encounter_condition_value_prose", "encounter_condition_value_id")
         used = {value for group in self.encounter_groups for value in group.conditions}
-        return [
-            (int(row["id"]), row["identifier"], names[int(row["id"])])
-            for row in self.api.table("encounter_condition_values")
-            if int(row["id"]) in used
-        ]
+        rows = []
+        for row in self.api.table("encounter_condition_values"):
+            value = int(row["id"])
+            if value not in used:
+                continue
+            name = self.builder.locations.name_fixes.get(("condition", row["identifier"])) or names.get(value)
+            if not name:
+                raise ValueError(f"Nom français manquant pour la condition {row['identifier']} (name_fixes.csv)")
+            rows.append((value, row["identifier"], name))
+        return rows
 
     def encounter_rate_table(self) -> list[tuple]:
         version_ids, used_areas = self.builder.version_ids, self.used_areas
@@ -243,3 +304,19 @@ class EncounterTables:
             for row in self.api.table("location_area_encounter_rates")
             if int(row["version_id"]) in version_ids and int(row["location_area_id"]) in used_areas
         )
+
+
+def _add_battle_note(groups: list[EncounterGroup], note: BattleNote) -> None:
+    """Ajoute la note d'un combat scripté à la rencontre unique du même Pokémon dans les zones de sa carte."""
+    matches = [
+        group
+        for group in groups
+        if group.version_id in note.version_ids
+        and group.location_area_id in note.area_ids
+        and group.pokemon_id == note.species_id
+        and group.chance is None
+    ]
+    if not matches:
+        raise ValueError(f"Combat scripté sans rencontre fixe correspondante : {note}")
+    for group in matches:
+        group.notes.append(note.note)

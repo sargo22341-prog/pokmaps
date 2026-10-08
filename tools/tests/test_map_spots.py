@@ -4,6 +4,8 @@ from pathlib import Path
 
 import pytest
 
+from pokemaps_data.builder_maps import _SpotRows
+from pokemaps_data.games import GAMES
 from pokemaps_data.map_spots import TerrainKey, read_spots, write_spots
 
 HEADER = "family,map_identifier,kind,x,y\n"
@@ -35,6 +37,7 @@ def test_round_trip_keeps_points_and_empty_terrains(tmp_path: Path) -> None:
     [
         ("gold-silver,route-1,grass,1,2\n", "famille de cartes inconnue"),
         ("red-blue-yellow,route-1,sand,1,2\n", "terrain inconnu"),
+        ("red-blue-yellow,route-1,headbutt,1,2\n", "terrain inconnu"),
         ("red-blue-yellow,,grass,1,2\n", "carte manquante"),
         ("red-blue-yellow,route-1,grass,1,\n", "coordonnées invalides"),
         ("red-blue-yellow,route-1,grass,a,2\n", "coordonnées invalides"),
@@ -55,4 +58,16 @@ def test_old_header_is_rejected(tmp_path: Path) -> None:
 
 
 def test_repository_file_is_valid() -> None:
-    assert all(key.family == "red-blue-yellow" for key in read_spots())
+    assert read_spots()
+
+
+def test_trees_and_rocks_of_a_game_in_progress(tmp_path: Path) -> None:
+    body = "gold-silver-crystal,route-29,tree,104,40\ngold-silver-crystal,cianwood-city,rock,,\n"
+    spots = read_spots(write(tmp_path, body))
+    assert spots[TerrainKey("gold-silver-crystal", "route-29", "tree")] == {(104, 40)}
+    assert spots[TerrainKey("gold-silver-crystal", "cianwood-city", "rock")] == frozenset()
+    # L'application ne construit pas Or et Argent : leurs emplacements retouchés n'y sont pas vérifiés.
+    rows = _SpotRows(spots, GAMES)
+    rows.check_all_used({"red-blue-yellow"})
+    with pytest.raises(ValueError, match="cartes absentes des jeux de leur famille"):
+        rows.check_all_used({"red-blue-yellow", "gold-silver-crystal"})

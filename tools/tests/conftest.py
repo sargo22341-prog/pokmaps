@@ -6,7 +6,7 @@ import pytest
 
 from pokemaps_data import sources
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import GAMES, GOLD_SILVER
+from pokemaps_data.games import ALL_GAMES, GAMES, GAMES_IN_PROGRESS, GOLD_SILVER
 from pokemaps_data.maps import GameMapData, build_maps
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
 from pokemaps_data.pokeapi import PokeApi
@@ -70,7 +70,7 @@ def db(database: Path) -> Iterator[sqlite3.Connection]:
     connection.close()
 
 
-# --- Or et Argent (hors de GAMES : construits à part, cf. games.GOLD_SILVER) ------------------------------
+# --- Jeux en cours d'intégration (hors de GAMES, cf. games.GAMES_IN_PROGRESS) -------------------------
 
 
 @pytest.fixture(scope="session")
@@ -91,8 +91,41 @@ def gold_silver_maps(gold_silver_repo: Gen2PretRepo) -> GameMaps:
 
 
 @pytest.fixture(scope="session")
-def gold_silver_export(tmp_path_factory: pytest.TempPathFactory, source_cache_ready: None) -> tuple[GameMapData, Path]:
+def in_progress_export(
+    tmp_path_factory: pytest.TempPathFactory, source_cache_ready: None
+) -> tuple[dict[str, GameMapData], Path]:
+    """Cartes des jeux en cours d'intégration générées (lignes de la base par groupe de versions, dossier)."""
+    output = tmp_path_factory.mktemp("in-progress-maps")
+    return build_maps(CACHE, output, games=GAMES_IN_PROGRESS), output
+
+
+@pytest.fixture(scope="session")
+def gold_silver_export(in_progress_export: tuple[dict[str, GameMapData], Path]) -> tuple[GameMapData, Path]:
     """Cartes d'Or et d'Argent générées (lignes de la base et dossier des tuiles)."""
-    output = tmp_path_factory.mktemp("gold-silver-maps")
-    data = build_maps(CACHE, output, games=(GOLD_SILVER,))[GOLD_SILVER.version_group]
-    return data, output / GOLD_SILVER.version_group
+    data, output = in_progress_export
+    return data[GOLD_SILVER.version_group], output / GOLD_SILVER.version_group
+
+
+@pytest.fixture(scope="session")
+def preview_builder(
+    builder: DatabaseBuilder, in_progress_export: tuple[dict[str, GameMapData], Path]
+) -> DatabaseBuilder:
+    """Tous les jeux, y compris ceux en cours d'intégration, comme l'aperçu de build_data.py."""
+    map_data = {**builder.map_data, **in_progress_export[0]}
+    pret_roots = {game.version_group: pret_dir(CACHE, game.pret_repo) for game in ALL_GAMES}
+    return DatabaseBuilder(builder.api, ALL_GAMES, map_data=map_data, pret_roots=pret_roots)
+
+
+@pytest.fixture(scope="session")
+def preview_database(preview_builder: DatabaseBuilder, tmp_path_factory: pytest.TempPathFactory) -> Path:
+    root = tmp_path_factory.mktemp("preview")
+    item_sprites = build_sprites(preview_builder, CACHE, root / "sprites")
+    preview_builder.write(root / "database/pokedex.db", item_sprites)
+    return root / "database/pokedex.db"
+
+
+@pytest.fixture()
+def preview_db(preview_database: Path) -> Iterator[sqlite3.Connection]:
+    connection = sqlite3.connect(preview_database)
+    yield connection
+    connection.close()

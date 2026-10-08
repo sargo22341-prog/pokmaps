@@ -1,0 +1,5 @@
+location,area,id,name_fr,reason
+mt-silver,item-rooms,100001,Mont Argenté (salles des objets),"Or et Argent : salles où l'on trouve les objets, avec leur propre table de rencontres ; PokéAPI ne les distingue pas du 1er étage"
+goldenrod-city,,100002,Doublonville,"Or et Argent : on pêche dans le canal de la ville ; PokéAPI n'a de zones que pour ses bâtiments"
+cerulean-city,gym,100003,Arène d'Azuria,"Or et Argent : on pêche dans le bassin de l'Arène ; PokéAPI ne la distingue pas de la ville"
+olivine-city,port,100004,Port d'Oliville,"Or et Argent : on pêche et surfe au port ; PokéAPI ne le distingue pas de la ville"

@@ -141,12 +141,15 @@ def test_wild_terrains_follow_the_collisions(gold_silver_maps: GameMaps) -> None
     def terrains(const: str) -> dict[str, int]:
         return {kind: len(cells) for kind, cells in gold_silver_maps.cells(const).items()}
 
-    assert terrains("ROUTE_29") == {"grass": 160, "water": 0, "floor": 0}
+    assert terrains("ROUTE_29") == {"grass": 160, "water": 0, "floor": 0, "tree": 87, "rock": 0}
     # En grotte et en donjon, chaque pas déclenche une rencontre ; dehors, seulement les herbes et l'eau.
     assert terrains("UNION_CAVE_1F")["floor"] > 0
     assert terrains("NEW_BARK_TOWN")["floor"] == 0
     # Le Lac Colère n'a pas de hautes herbes dans Or et Argent (PokéAPI n'y donne pas de rencontre en marchant).
-    assert terrains("LAKE_OF_RAGE") == {"grass": 0, "water": 300, "floor": 0}
+    assert terrains("LAKE_OF_RAGE") == {"grass": 0, "water": 300, "floor": 0, "tree": 323, "rock": 0}
+    # Rochers d'Éclate-Roc : objets dont le script est SmashRockScript, seulement dans les cartes de RockMonMaps.
+    assert terrains("CIANWOOD_CITY")["rock"] == 6
+    assert terrains("BURNED_TOWER_1F")["rock"] == 0
     # Pas de rencontre sur la glace de la Route de Glace.
     repo = gold_silver_maps.repo
     ice_path = repo.maps["ICE_PATH_1F"]

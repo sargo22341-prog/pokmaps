@@ -1,4 +1,8 @@
-"""Fenêtre de l'éditeur : choix du jeu, du lieu et du terrain, édition des emplacements et enregistrement."""
+"""Fenêtre de l'éditeur : choix du jeu, de la région, du lieu et du terrain, édition des emplacements et
+enregistrement.
+
+Tant que des jeux sont en cours d'intégration (games.GAMES_IN_PROGRESS), l'éditeur lit l'aperçu de tous les jeux
+généré par build_data.py, et non les assets de l'application qui ne les contiennent pas."""
 
 from __future__ import annotations
 
@@ -12,7 +16,9 @@ from tkinter import messagebox, ttk
 
 from PIL import Image
 
+from pokemaps_data.games import GAMES_IN_PROGRESS
 from pokemaps_data.map_spots import SPOTS_CSV, Point, TerrainKey, read_spots, write_spots
+from pokemaps_data.sources import PREVIEW_DIR
 
 from .canvas import SpotCanvas
 from .catalog import EditorCatalog, EditorMap, EncounterLine, MapMark, required_spots, used_by_app
@@ -23,14 +29,17 @@ from .terrain import WildTerrains
 from .validation import StepEvent, StepState, run_steps, validation_plan
 
 ROOT = Path(__file__).resolve().parents[2]
-DATABASE = ROOT / "app/src/main/assets/database/pokedex.db"
-ASSETS = ROOT / "app/src/main/assets"
+ASSETS = PREVIEW_DIR if GAMES_IN_PROGRESS else ROOT / "app/src/main/assets"
+DATABASE = ASSETS / "database/pokedex.db"
 CACHE = ROOT / "tools/.cache"
 TERRAIN_LABELS = {
     "grass": "Herbes hautes (marche)",
     "floor": "Sol des grottes et bâtiments (marche)",
     "water": "Eau (surf et pêche)",
+    "tree": "Arbres (Coup d'Boule)",
+    "rock": "Rochers (Éclate-Roc)",
 }
+ALL_REGIONS = "Toutes les régions"
 _POLL_MS = 100
 _WARNING_COLOR = "#b3261e"
 
@@ -47,6 +56,9 @@ class MapEditor:
         if not self.families:
             raise ValueError("Aucun jeu de la base n'appartient à une famille de cartes connue.")
         self.family = self.families[0]
+        self.family_maps: list[EditorMap] = []
+        self.map_regions: dict[str, str | None] = {}
+        self.regions: list[str | None] = []
         self.maps: list[EditorMap] = []
         self.current: EditorMap | None = None
         self.lines: list[EncounterLine] = []
@@ -77,6 +89,8 @@ class MapEditor:
         side.grid(row=0, column=0, sticky="ns")
         self.family_choice = self._combobox(side, "Jeux", [family.label for family in self.families])
         self.family_choice.bind("<<ComboboxSelected>>", lambda _event: self._choose_family())
+        self.region_choice = self._combobox(side, "Région", [])
+        self.region_choice.bind("<<ComboboxSelected>>", lambda _event: self._show_region())
         self.map_choice = self._combobox(side, "Route, lieu ou étage", [])
         self.map_choice.bind("<<ComboboxSelected>>", lambda _event: self._select_map())
         self.terrain_choice = self._combobox(side, "Terrain", [])
@@ -113,7 +127,23 @@ class MapEditor:
         self._load_family()
 
     def _load_family(self, keep: str | None = None) -> None:
-        self.maps = self.catalog.maps(self.family)
+        """Lieux de la famille, et régions où les ranger (le lieu `keep` reste choisi s'il existe encore)."""
+        self.family_maps = self.catalog.maps(self.family)
+        self.map_regions = {
+            found.identifier: self.wild_terrains.region(self.family, found.identifier) for found in self.family_maps
+        }
+        worlds = self.catalog.world_names(self.family)
+        self.regions = [None, *worlds]
+        self.region_choice["values"] = [ALL_REGIONS, *worlds.values()]
+        region = self.map_regions.get(keep) if keep else None
+        self.region_choice.current(self.regions.index(region) if region in self.regions else 0)
+        self._show_region(keep)
+
+    def _show_region(self, keep: str | None = None) -> None:
+        region = self.regions[self.region_choice.current()]
+        self.maps = [
+            found for found in self.family_maps if region is None or self.map_regions[found.identifier] == region
+        ]
         self.map_choice["values"] = [editor_map.name for editor_map in self.maps]
         if not self.maps:
             self.map_choice.set("")
@@ -326,7 +356,7 @@ class MapEditor:
         )
 
     def _set_enabled(self, enabled: bool) -> None:
-        for box in (self.family_choice, self.map_choice, self.terrain_choice):
+        for box in (self.family_choice, self.region_choice, self.map_choice, self.terrain_choice):
             box.configure(state="readonly" if enabled else tk.DISABLED)
         for button in (self.save_button, self.clear_button):
             button.configure(state=tk.NORMAL if enabled else tk.DISABLED)

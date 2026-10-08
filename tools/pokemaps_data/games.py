@@ -89,8 +89,6 @@ GAMES: tuple[Game, ...] = (
     ),
 )
 
-# Or et Argent : pas encore dans GAMES tant que leurs rencontres et leurs personnages ne sont pas relus
-# (plan_gen_2.md, phases 4 et 5). Le pipeline les construit déjà avec games=(GOLD_SILVER,).
 GOLD_SILVER = Game(
     "gold-silver",
     "pokegold",
@@ -101,8 +99,15 @@ GOLD_SILVER = Game(
     (JOHTO, KANTO),
 )
 
+# Jeux en cours d'intégration : absents de l'application tant qu'elle ne sait pas les afficher (plan_gen_2.md,
+# phase 6), mais générés et validés avec les autres dans un aperçu hors des assets (build_data.py, --preview), que
+# lisent les tests et l'éditeur des emplacements.
+GAMES_IN_PROGRESS: tuple[Game, ...] = (GOLD_SILVER,)
+# Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
+ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
 
-def map_families(games: tuple[Game, ...] = GAMES) -> dict[str, tuple[str, ...]]:
+
+def map_families(games: tuple[Game, ...] = ALL_GAMES) -> dict[str, tuple[str, ...]]:
     """Groupes de versions de chaque famille de cartes, dans l'ordre de `games`."""
     families: dict[str, tuple[str, ...]] = {}
     for game in games:
@@ -110,7 +115,14 @@ def map_families(games: tuple[Game, ...] = GAMES) -> dict[str, tuple[str, ...]]:
     return families
 
 
-# Méthodes de rencontre « uniques » (un Pokémon donné, fixe ou échangé) : pas de probabilité,
+def complete_families(games: tuple[Game, ...]) -> dict[str, tuple[str, ...]]:
+    """Familles de cartes dont tous les jeux sont dans `games` : leurs fichiers relus se vérifient en entier."""
+    families = map_families((*ALL_GAMES, *(game for game in games if game not in ALL_GAMES)))
+    built = {game.version_group for game in games}
+    return {family: groups for family, groups in families.items() if set(groups) <= built}
+
+
+# Méthodes de rencontre « uniques » (un Pokémon donné, fixe, échangé ou errant) : pas de probabilité,
 # on compte le nombre d'exemplaires. Toutes les autres sont des rencontres aléatoires dont
 # les probabilités (rarity) d'une zone totalisent 100 %.
-ONE_OFF_METHODS = frozenset({"gift", "gift-egg", "static", "pokeflute", "npc-trade"})
+ONE_OFF_METHODS = frozenset({"gift", "gift-egg", "static", "pokeflute", "npc-trade", "squirt-bottle", "roaming-grass"})

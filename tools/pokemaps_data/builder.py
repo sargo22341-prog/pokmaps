@@ -14,6 +14,7 @@ from pathlib import Path
 from .builder_abilities import AbilityTables
 from .builder_encounters import EncounterTables
 from .builder_items import ItemTables
+from .builder_locations import LocationTables
 from .builder_maps import build_map_tables
 from .builder_moves import MoveTables
 from .builder_pokemon import PokemonTables
@@ -23,7 +24,7 @@ from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 8
+SCHEMA_VERSION = 9
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 
@@ -60,6 +61,7 @@ class DatabaseBuilder:
         self.pokemon = PokemonTables(self)
         self.moves = MoveTables(self)
         self.items = ItemTables(self)
+        self.locations = LocationTables(api)
         self.encounters = EncounterTables(self)
         self.abilities = AbilityTables(self)
 
@@ -129,7 +131,8 @@ class DatabaseBuilder:
 
     def region_table(self) -> list[tuple]:
         names = self.api.names("region_names", "region_id")
-        regions = {row[3] for row in self.encounters.location_rows} | {row[3] for row in self.pokedex_table()}
+        locations = self.locations.location_rows(self.encounters.used_areas)
+        regions = {row[3] for row in locations} | {row[3] for row in self.pokedex_table()}
         used = {region for region in regions if region is not None}
         return [
             (int(row["id"]), row["identifier"], names[int(row["id"])])
@@ -260,8 +263,8 @@ class DatabaseBuilder:
             "ability_version_group": self.abilities.ability_version_group_table(),
             "pokemon_ability": self.abilities.pokemon_ability_rows,
             "evolution": self.pokemon.evolution_rows,
-            "location": self.encounters.location_rows,
-            "location_area": self.encounters.location_area_table(),
+            "location": self.locations.location_rows(self.encounters.used_areas),
+            "location_area": self.locations.location_area_table(self.encounters.used_areas),
             "encounter_method": self.encounters.encounter_method_table(),
             "encounter_condition_value": self.encounters.encounter_condition_value_table(),
             "encounter": encounters,

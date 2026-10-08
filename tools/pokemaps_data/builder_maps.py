@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from .games import Game
+from .games import Game, complete_families
 from .map_spots import Point, TerrainKey, read_spots
 from .maps import GameMapData
 from .maps_characters import CharacterNames, ObjectRow, read_character_names
@@ -20,8 +20,8 @@ FACILITY_KINDS = frozenset({VENDING_MACHINE, PRIZE_VENDOR})
 
 def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     vg_ids = {row["identifier"]: int(row["id"]) for row in builder.vg_rows}
-    area_ids = {key: area_id for area_id, key in builder.encounters.area_keys.items()}
-    known_areas = {row[0] for row in builder.encounters.location_area_table()}
+    area_ids = builder.locations.area_ids
+    known_areas = builder.encounters.used_areas
     versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
     objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions)
     maps, areas, warps = [], [], []
@@ -35,8 +35,9 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         for obj in data.objects:
             objects.add(obj, ids[obj.map_const])
         spots.add_game(version_group, data, ids)
-    spots.check_all_used()
-    if unused := objects.names.unused_text_names():
+    families = set(complete_families(builder.games))
+    spots.check_all_used(families)
+    if unused := objects.names.unused_text_names(families):
         raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
     return {
         "map": maps,
@@ -80,8 +81,9 @@ class _SpotRows:
                     raise ValueError(f"map_spots.csv : emplacement {(x, y)} hors de {where}")
                 self.rows.append((len(self.rows) + 1, map_id, key.kind, x, y))
 
-    def check_all_used(self) -> None:
-        if unknown := sorted(set(self.curated) - self.used):
+    def check_all_used(self, families: set[str]) -> None:
+        """Chaque terrain retouché d'une famille dont tous les jeux sont construits doit servir à l'un d'eux."""
+        if unknown := sorted(key for key in set(self.curated) - self.used if key.family in families):
             raise ValueError(f"map_spots.csv : cartes absentes des jeux de leur famille : {unknown}")
 
 
@@ -98,10 +100,8 @@ class _ObjectRows:
         self.offers: list[tuple] = []
 
     def add(self, obj: ObjectRow, map_id: int) -> None:
-        if obj.version:
-            # La table map_object n'a pas de version : un objet propre à une version (Ho-Oh et Lugia d'Or et
-            # d'Argent) demande d'abord d'étendre le schéma, sinon les deux exemplaires se superposeraient.
-            raise ValueError(f"Objet de carte propre à la version {obj.version}, sans colonne pour l'écrire : {obj}")
+        if obj.version and obj.version not in self.versions:
+            raise ValueError(f"Objet de carte d'une version inconnue de PokéAPI : {obj}")
         species = self.species
         for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
             p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
@@ -143,6 +143,7 @@ class _ObjectRows:
                 obj.level,
                 obj.trainer_class,
                 self.names.of(obj),
+                obj.version and self.versions[obj.version],
             )
         )
 
@@ -191,12 +192,13 @@ class _ObjectNames:
         self.characters = characters
         self.pokemon = builder.api.names("pokemon_species_names", "pokemon_species_id")
         self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
-        self.items = builder.api.names("item_names", "item_id")
-        self.item_ids = builder.items.map_item_ids
+        self.items = builder.items
         self.used_texts: set[str] = set()
 
-    def unused_text_names(self) -> list[str]:
-        return sorted(set(self.characters.by_text) - self.used_texts)
+    def unused_text_names(self, families: set[str]) -> list[str]:
+        """Personnages nommés par leur texte, d'une famille de `families`, qu'aucun objet de carte n'a employés."""
+        texts = {text for text, family in self.characters.text_families.items() if family in families}
+        return sorted(texts - self.used_texts)
 
     def of(self, obj: ObjectRow) -> str:
         if obj.kind == "npc" and obj.text in self.characters.by_text:
@@ -207,7 +209,7 @@ class _ObjectNames:
         if obj.kind == "pokemon" and obj.pokemon:
             return self.pokemon[self.species[obj.pokemon]]
         if obj.kind in ("item", "hidden_item") and obj.item:
-            return self.items[self.item_ids[obj.item]]
+            return self.items.name_of(obj.item)
         if obj.kind in FACILITY_KINDS:
             return self.characters.facility(obj.kind)
         return self.characters.character(obj.sprite)

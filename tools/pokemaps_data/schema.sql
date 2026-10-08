@@ -365,6 +365,8 @@ CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 -- ou prize_vendor (comptoir des lots du Casino).
 -- sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.webp.
 -- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon, objet ou installation).
+-- version_id : version où l'objet est ainsi (Ho-Oh et Lugia n'ont pas le même niveau en Or et en Argent), NULL s'il
+-- est le même dans toutes les versions du jeu.
 CREATE TABLE map_object (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,
@@ -376,7 +378,8 @@ CREATE TABLE map_object (
     pokemon_id INTEGER,
     level INTEGER,
     trainer_class TEXT,
-    name_fr TEXT NOT NULL
+    name_fr TEXT NOT NULL,
+    version_id INTEGER
 );
 CREATE INDEX index_map_object_map_id ON map_object (map_id);
 CREATE INDEX index_map_object_item_id ON map_object (item_id);
@@ -419,7 +422,8 @@ CREATE TABLE npc_offer (
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
 
 -- Emplacements où dessiner les Pokémon sauvages d'une carte (ville, route ou carte intérieure), bien répartis :
--- kind grass (hautes herbes), water (eau : surf et pêche) ou floor (sol des grottes et bâtiments).
+-- kind grass (hautes herbes), water (eau : surf et pêche), floor (sol des grottes et bâtiments), tree (arbres de
+-- Coup d'Boule) ou rock (rochers d'Éclate-Roc), à partir de la 2e génération pour les deux derniers.
 CREATE TABLE map_spot (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,

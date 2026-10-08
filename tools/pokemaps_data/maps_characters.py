@@ -82,6 +82,8 @@ class CharacterNames:
     facilities: dict[str, str] = field(default_factory=dict)
     by_text: dict[str, str] = field(default_factory=dict)
     appearances: dict[str, str] = field(default_factory=dict)
+    # Famille de cartes de chaque personnage nommé par son texte (npc_text_names.csv).
+    text_families: dict[str, str] = field(default_factory=dict)
 
     def trainer(self, trainer_class: str) -> str:
         if trainer_class not in self.trainers:
@@ -114,12 +116,14 @@ def _read_csv(name: str) -> list[dict[str, str]]:
 def read_character_names() -> CharacterNames:
     """Noms français des classes de dresseurs, des personnages (d'après leur sprite) et des installations."""
     characters = _read_csv("npc_names.csv")
+    texts = _read_csv("npc_text_names.csv")
     return CharacterNames(
         {row["trainer_class"]: row["name_fr"] for row in _read_csv("trainer_classes.csv")},
         {row["sprite"]: row["name_fr"] for row in characters},
         {row["kind"]: row["name_fr"] for row in _read_csv("facility_names.csv")},
-        {row["text"]: row["name_fr"] for row in _read_csv("npc_text_names.csv")},
+        {row["text"]: row["name_fr"] for row in texts},
         {row["sprite"]: row["appearance"] for row in characters},
+        {row["text"]: row["family"] for row in texts},
     )
 
 

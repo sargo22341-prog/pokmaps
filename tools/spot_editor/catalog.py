@@ -11,16 +11,26 @@ from pokemaps_data.map_spots import SPOT_KINDS, Point
 from pokemaps_data.pret import STEP_PX
 
 # Méthode sous laquelle l'application regroupe une rencontre sauvage (ui/map/MapZoneContent.kt) : un même
-# Pokémon pêché à l'Ancienne, à la Super ou à la Méga Canne n'a qu'un marqueur, mais un de plus s'il surfe.
+# Pokémon pêché à l'Ancienne, à la Super ou à la Méga Canne n'a qu'un marqueur, mais un de plus s'il surfe. Coup
+# d'Boule réunit de même les arbres ordinaires et les arbres rares (2e génération).
 _PLACEMENT_METHODS = {
     "walk": "walk",
     "surf": "surf",
     "old-rod": "fishing",
     "good-rod": "fishing",
     "super-rod": "fishing",
+    "headbutt": "headbutt",
+    "headbutt-high": "headbutt",
+    "rock-smash": "rock-smash",
 }
 # Terrain sur lequel l'application dessine chaque méthode : la marche utilise les herbes, ou le sol sans herbes.
-_TERRAINS = {"walk": ("grass", "floor"), "surf": ("water",), "fishing": ("water",)}
+_TERRAINS = {
+    "walk": ("grass", "floor"),
+    "surf": ("water",),
+    "fishing": ("water",),
+    "headbutt": ("tree",),
+    "rock-smash": ("rock",),
+}
 _WILD = tuple(_PLACEMENT_METHODS)
 _IN_WILD = f"({', '.join('?' * len(_WILD))})"
 CELL_PX = STEP_PX
@@ -108,7 +118,7 @@ def required_spots(lines: list[EncounterLine], kind: str) -> int:
 
 def used_by_app(kind: str, has_grass: bool, has_floor: bool) -> bool:
     """Vrai si l'application dessine sur ce terrain : en marchant, elle prend les herbes s'il y en a, sinon le sol."""
-    if kind == "water":
+    if kind not in ("grass", "floor"):
         return True
     walking = "floor" if has_floor and not has_grass else "grass"
     return kind == walking
@@ -158,6 +168,19 @@ class EditorCatalog:
                 )
         return sorted(found.values(), key=lambda editor_map: editor_map.name)
 
+    def world_names(self, family: Family) -> dict[str, str]:
+        """Cartes du monde des jeux de la famille (une par région) : identifiant -> nom (« johto » -> « Johto »)."""
+        groups = family.version_groups
+        rows = self.connection.execute(
+            f"""SELECT DISTINCT world.identifier, world.name_fr FROM map world
+                JOIN version_group vg ON vg.id = world.version_group_id
+                WHERE vg.identifier IN ({", ".join("?" * len(groups))})
+                  AND EXISTS (SELECT 1 FROM map part WHERE part.parent_map_id = world.id)
+                ORDER BY world.id""",
+            groups,
+        )
+        return dict(rows)
+
     def encounters(self, editor_map: EditorMap) -> list[EncounterLine]:
         ids = editor_map.map_ids
         rows = self.connection.execute(
@@ -184,10 +207,13 @@ class EditorCatalog:
         return {kind: frozenset(found) for kind, found in points.items()}
 
     def marks(self, editor_map: EditorMap) -> list[MapMark]:
-        """Objets, personnages et entrées du lieu, pour le premier jeu de la famille qui le contient."""
+        """Objets, personnages et entrées du lieu, pour la première version du premier jeu de la famille qui le
+        contient."""
         rows = self.connection.execute(
             """SELECT o.kind, o.x, o.y, o.sprite, CASE WHEN item.has_sprite THEN item.identifier END, o.pokemon_id
-               FROM map_object o LEFT JOIN item ON item.id = o.item_id WHERE o.map_id = :map
+               FROM map_object o LEFT JOIN item ON item.id = o.item_id JOIN map m ON m.id = o.map_id
+               WHERE o.map_id = :map AND (o.version_id IS NULL OR o.version_id =
+                 (SELECT min(v.id) FROM version v WHERE v.version_group_id = m.version_group_id))
                UNION ALL
                SELECT 'warp', x, y, NULL, NULL, NULL FROM map_warp WHERE map_id = :map""",
             {"map": editor_map.map_ids[0]},

@@ -18,3 +18,38 @@ area,celadon-city/celadon-mansion,Résidence de Céladopole (maison sur le toit)
 area,celadon-city/prize-corner,Comptoir des lots du Casino,le Casino et son comptoir sont deux lieux différents
 area,cinnabar-island/cinnabar-lab,Labo Pokémon de Cramois'Île,traduction plus fidèle au jeu
 area,saffron-city/fighting-dojo,Dojo de Safrania,traduction plus fidèle au jeu
+location,sprout-tower,Tour Chétiflor,majuscules dans PokéAPI
+location,slowpoke-well,Puits Ramoloss,majuscules dans PokéAPI
+location,azalea-town,Écorcia,accent manquant dans PokéAPI
+location,blackthorn-city,Ébènelle,accents manquants dans PokéAPI
+location,whirl-islands,Tourb'Îles,accent manquant dans PokéAPI
+area,azalea-town/area,Écorcia,accent manquant dans PokéAPI
+area,blackthorn-city,Ébènelle,accents manquants dans PokéAPI
+area,sprout-tower/2f,Tour Chétiflor (1er étage),majuscules et abréviation dans PokéAPI
+area,sprout-tower/3f,Tour Chétiflor (2e étage),majuscules et abréviation dans PokéAPI
+area,slowpoke-well/1f,Puits Ramoloss (1er sous-sol),PokéAPI décale les étages du Puits : cette zone est le 1er sous-sol dans Or et Argent
+area,slowpoke-well/b1f,Puits Ramoloss (2e sous-sol),PokéAPI décale les étages du Puits : cette zone est le 2e sous-sol dans Or et Argent
+area,whirl-islands/1f,Tourb'Îles (RdC),accent manquant dans PokéAPI
+area,whirl-islands/b1f,Tourb'Îles (1er sous-sol),accent et abréviation dans PokéAPI
+area,whirl-islands/b2f,Tourb'Îles (2e sous-sol),accent et abréviation dans PokéAPI
+area,whirl-islands/b3f,Tourb'Îles (antre de Lugia),dans Or et Argent cette zone est la salle de Lugia
+area,ice-path/b1f,Route de Glace (1er sous-sol),abréviation dans PokéAPI
+area,ice-path/b2f,Route de Glace (2e sous-sol),abréviation dans PokéAPI
+area,ice-path/b3f,Route de Glace (3e sous-sol),abréviation dans PokéAPI
+area,union-cave/b1f,Caves Jumelles (1er sous-sol),abréviation dans PokéAPI
+area,union-cave/b2f,Caves Jumelles (2e sous-sol),abréviation dans PokéAPI
+area,bell-tower/2f,Tour Carillon (1er étage),abréviation dans PokéAPI
+area,bell-tower/3f,Tour Carillon (2e étage),abréviation dans PokéAPI
+area,bell-tower/4f,Tour Carillon (3e étage),abréviation dans PokéAPI
+area,bell-tower/5f,Tour Carillon (4e étage),abréviation dans PokéAPI
+area,bell-tower/6f,Tour Carillon (5e étage),abréviation dans PokéAPI
+area,bell-tower/7f,Tour Carillon (6e étage),abréviation dans PokéAPI
+area,bell-tower/8f,Tour Carillon (7e étage),abréviation dans PokéAPI
+area,bell-tower/9f,Tour Carillon (8e étage),abréviation dans PokéAPI
+area,mt-silver/top,Mont Argenté (sommet),faute de frappe dans PokéAPI (« Mon Argenté »)
+area,johto-sea-route-40,Route 40,PokéAPI nomme cette zone « Route 4 »
+area,ruins-of-alph/interior-a,Ruines d'Alpha (salle intérieure),une seule salle à Zarbi dans Or et Argent
+area,kanto-victory-road-1/1f,Route Victoire,une seule carte dans Or et Argent ; « Route Victoire 1 » est un nom interne à PokéAPI
+area,goldenrod-city/department-store-5f,Centre Commercial de Doublonville (4e étage),abréviation dans PokéAPI
+condition,swarm-yes,Pendant un essaim,PokéAPI traduit « swarm » par « tempête »
+condition,bug-catching-contest-yes,"Concours de capture d'insectes (mardi, jeudi et samedi)",nom français absent de PokéAPI ; jours du Concours dans Or et Argent

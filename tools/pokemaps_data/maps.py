@@ -24,7 +24,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .games import GAMES, Game, map_families
+from .games import GAMES, Game, complete_families
 from .maps_characters import CharacterCuration, ObjectRow, object_rows, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
 from .maps_render import MapRenderer, write_tiles
@@ -32,9 +32,12 @@ from .maps_render_gen1 import Gen1Renderer
 from .maps_render_gen2 import Gen2Renderer
 from .pret import BLOCK_PX, LAST_MAP, PretRepo
 from .pret_gen2 import Gen2PretRepo
+from .pret_gen2_wild import roaming_maps
 from .pret_reader import open_pret
 from .sources import DATA_DIR, fetch_pret
 
+# Zone PokéAPI des Pokémon errants de Johto (Raikou, Entei, Suicune), qui parcourent les cartes de RoamMaps.
+GEN2_ROAMING_AREA = "roaming-johto/area"
 # Numéro de warp de la 2e génération : « le warp par lequel on est arrivé », celui de la carte d'arrivée qui
 # ramène à la carte de départ (ascenseurs, M/S Aquaria).
 RETURN_WARP = -1
@@ -54,10 +57,16 @@ def read_map_names() -> dict[str, dict[str, str]]:
     return names
 
 
-def read_map_areas() -> list[tuple[str, str]]:
-    """(constante de carte, zone PokéAPI « lieu/zone »)."""
+def read_map_areas() -> dict[str, list[tuple[str, str]]]:
+    """Famille de cartes -> (constante de carte, zone PokéAPI « lieu/zone »)."""
+    areas: dict[str, list[tuple[str, str]]] = {}
     with (DATA_DIR / "map_areas.csv").open(encoding="utf-8", newline="") as handle:
-        return [(row["map"], row["location_area"]) for row in csv.DictReader(handle)]
+        for line, row in enumerate(csv.DictReader(handle), start=2):
+            pair = (row["map"], row["location_area"])
+            if pair in areas.get(row["family"], []):
+                raise ValueError(f"map_areas.csv:{line} : zone en double pour {row['family']} {row['map']}")
+            areas.setdefault(row["family"], []).append(pair)
+    return areas
 
 
 # --- Export -----------------------------------------------------------------------
@@ -89,7 +98,7 @@ class WarpRow:
 @dataclass
 class SpotRow:
     map_const: str
-    kind: str  # grass, water ou floor
+    kind: str  # grass, water, floor, tree ou rock (map_spots.SPOT_KINDS)
     x: int
     y: int
 
@@ -135,8 +144,17 @@ def export_game(
     objects, sprites = object_rows(game_maps, curation)
     spots = _spot_rows(game_maps)
     map_renderer.write_sprites(sprites, output / "sprites")
-    game_areas = [(const, area) for const, area in areas if const in placements]
+    game_areas = [(const, area) for const, area in [*areas, *_roaming_areas(game_maps)] if const in placements]
     return GameMapData(rows, game_areas, warps, objects, spots)
+
+
+def _roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
+    """Cartes que parcourent les Pokémon errants (2e génération), rattachées à la zone PokéAPI des errants."""
+    match game_maps.repo:
+        case PretRepo():
+            return []
+        case Gen2PretRepo() as repo:
+            return [(const, GEN2_ROAMING_AREA) for const in roaming_maps(repo)]
 
 
 def _display_map_rows(
@@ -219,27 +237,26 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
     result = {}
     for game in games:
         game_maps = GameMaps(open_pret(game, fetch_pret(cache, game.pret_repo)), game, layout)
-        family_names = names.get(game.map_family, {})
-        result[game.version_group] = export_game(game_maps, family_names, areas, curation, output / game.version_group)
-    _check_names_used(games, names, result)
-    if games == GAMES:
-        placed = {row.const for data in result.values() for row in data.maps}
-        if unknown := sorted({c for c, _ in areas if c not in placed}):
-            raise ValueError(f"Cartes de tools/data/map_areas.csv absentes des jeux : {unknown}")
-        if unused := curation.unused():
-            raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")
+        family_names, family_areas = names.get(game.map_family, {}), areas.get(game.map_family, [])
+        output_game = output / game.version_group
+        result[game.version_group] = export_game(game_maps, family_names, family_areas, curation, output_game)
+    for family, version_groups in complete_families(games).items():
+        _check_family_used(family, names.get(family, {}), areas.get(family, []), version_groups, result)
+    if set(GAMES) <= set(games) and (unused := curation.unused()):
+        raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")
     return result
 
 
-def _check_names_used(
-    games: tuple[Game, ...], names: dict[str, dict[str, str]], result: dict[str, GameMapData]
+def _check_family_used(
+    family: str,
+    names: dict[str, str],
+    areas: list[tuple[str, str]],
+    version_groups: tuple[str, ...],
+    result: dict[str, GameMapData],
 ) -> None:
-    """Chaque nom de maps.csv d'une famille dont tous les jeux sont construits doit servir à l'un d'eux."""
-    families = map_families((*GAMES, *(game for game in games if game not in GAMES)))
-    built = {game.version_group for game in games}
-    for family, version_groups in families.items():
-        if not set(version_groups) <= built:
-            continue
-        placed = {row.const for group in version_groups for row in result[group].maps}
-        if unknown := sorted(set(names.get(family, {})) - placed):
-            raise ValueError(f"Cartes de tools/data/maps.csv absentes des jeux {family} : {unknown}")
+    """Chaque nom de maps.csv et chaque carte de map_areas.csv de la famille doit servir à l'un de ses jeux."""
+    placed = {row.const for group in version_groups for row in result[group].maps}
+    if unknown := sorted(set(names) - placed):
+        raise ValueError(f"Cartes de tools/data/maps.csv absentes des jeux {family} : {unknown}")
+    if unknown := sorted({const for const, _ in areas} - placed):
+        raise ValueError(f"Cartes de tools/data/map_areas.csv absentes des jeux {family} : {unknown}")

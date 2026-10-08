@@ -37,6 +37,7 @@ class CollisionRules:
     permissions: tuple[str, ...]
     grass: frozenset[int]  # où l'on rencontre des Pokémon hors des grottes : herbes et eau (CheckGrassCollision)
     ice: frozenset[int]  # glace, où l'on ne rencontre aucun Pokémon (CheckIceTile)
+    headbutt_trees: frozenset[int]  # arbres où Coup d'Boule peut faire tomber un Pokémon (CheckHeadbuttTreeTile)
 
 
 def read_collision_rules(root: Path) -> CollisionRules:
@@ -53,11 +54,13 @@ def read_collision_rules(root: Path) -> CollisionRules:
     )
     grass = _routine_args(root / "engine/overworld/tile_events.asm", "CheckGrassCollision::", "db")
     ice = _routine_args(root / "home/map_objects.asm", "CheckIceTile::", "cp")
+    trees = _routine_args(root / "home/map_objects.asm", "CheckHeadbuttTreeTile::", "cp")
     return CollisionRules(
         values,
         permissions,
         frozenset(values[name] for name in grass if name != "-1"),
         frozenset(values[name] for name in ice),
+        frozenset(values[name] for name in trees),
     )
 
 

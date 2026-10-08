@@ -408,7 +408,9 @@ data class MapObjectEntity(
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int?,
     val level: Int?,
     @ColumnInfo(name = "trainer_class") val trainerClass: String?,
-    @ColumnInfo(name = "name_fr") val nameFr: String
+    @ColumnInfo(name = "name_fr") val nameFr: String,
+    /** Version où l'objet est ainsi (Ho-Oh et Lugia d'Or et d'Argent), null s'il vaut pour tout le jeu. */
+    @ColumnInfo(name = "version_id") val versionId: Int?
 )
 
 @Entity(
