@@ -64,12 +64,13 @@ fun PokemonSprite(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     alpha: Float = 1f,
-    shiny: Boolean = false
+    shiny: Boolean = false,
+    animated: Boolean = place in LocalAnimatedPlaces.current
 ) {
     val density = LocalDensity.current
     val factor = max(1, floor(size.pixel.value * density.density).toInt())
     val side = with(density) { (size.frame * factor).toDp() }
-    val path = Sprites.pokemon(pokemonId, place in LocalAnimatedPlaces.current, shiny)
+    val path = Sprites.pokemon(pokemonId, animated, shiny)
     SpriteImage(path, factor, contentDescription, modifier.size(side), alpha)
 }
 

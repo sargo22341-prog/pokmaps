@@ -26,9 +26,10 @@ data class GuideArticle(
     val captureIds: Set<Int> = emptySet(),
     val achievementId: Int? = null,
     val points: Int = 0,
-    val captureGoal: CaptureGoal? = null
+    val captureGoal: CaptureGoal? = null,
+    val shiny: Boolean = false
 ) {
-    val sourceHosts: List<String> = sources.map { java.net.URI(it).host }
+    val summary: String = paragraphs.joinToString(" ") { spans -> spans.joinToString("") { it.text } }
     val unownGoal: Boolean = achievementId in setOf(5091, 5117, 5955)
 }
 

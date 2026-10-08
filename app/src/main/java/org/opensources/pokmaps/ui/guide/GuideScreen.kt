@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -29,6 +28,7 @@ import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SpriteSize
@@ -38,7 +38,6 @@ data class GuideLinks(val open: (GuideTarget) -> Unit, val showMap: () -> Unit, 
 @Composable
 fun GuideRoute(links: GuideLinks, modifier: Modifier = Modifier, viewModel: GuideViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val uriHandler = LocalUriHandler.current
     GuideScreen(
         state,
         onAction = { action ->
@@ -46,7 +45,6 @@ fun GuideRoute(links: GuideLinks, modifier: Modifier = Modifier, viewModel: Guid
             if (action is GuideAction.ShowPlace || action is GuideAction.ShowObject) links.showMap()
         },
         links = links,
-        onOpenSource = uriHandler::openUri,
         modifier = modifier,
         breedingTool = { BreedingRoute(onPreview = { viewModel.onAction(GuideAction.Preview(it)) }) },
         friendshipTool = { FriendshipRoute(state.library?.game?.versionId == 6) }
@@ -58,7 +56,6 @@ fun GuideScreen(
     state: GuideUiState,
     onAction: (GuideAction) -> Unit,
     links: GuideLinks,
-    onOpenSource: (String) -> Unit,
     modifier: Modifier = Modifier,
     breedingTool: @Composable () -> Unit = {},
     friendshipTool: @Composable () -> Unit = {}
@@ -80,7 +77,7 @@ fun GuideScreen(
         if (article == null) {
             GuideIndex(screen, onAction, modifier)
         } else {
-            GuideArticleContent(screen, article, onAction, links, onOpenSource, modifier, breedingTool, friendshipTool)
+            GuideArticleContent(screen, article, onAction, links, modifier, breedingTool, friendshipTool)
         }
     }
     if (state.previewTarget != null) GuidePreviewSheet(state, onAction, links)
@@ -106,7 +103,6 @@ private fun GuideIndex(state: GuideUiState, onAction: (GuideAction) -> Unit, mod
             items(state.articles, key = { it.id }) { article -> GuideArticleCard(state, article, onAction) }
             if (state.articles.isEmpty()) item("empty") { Text(stringResource(R.string.guide_empty)) }
         }
-        item("end") { Text(stringResource(R.string.guide_offline), Modifier.padding(vertical = 16.dp)) }
     }
 }
 
@@ -122,13 +118,11 @@ internal fun GuideHeading(state: GuideUiState, onAction: (GuideAction) -> Unit) 
         )
         state.library?.game?.let { Text(stringResource(R.string.game_name, it.name)) }
         if (state.category == GuideCategory.ACHIEVEMENT) {
-            Text(stringResource(R.string.guide_achievement_notice))
             Text(
                 stringResource(
-                    R.string.retro_totals,
-                    state.earnedCount,
-                    state.achievements.size,
-                    state.manuallyCompleted
+                    if (state.automaticAchievements) R.string.retro_automatic_totals else R.string.retro_manual_totals,
+                    state.completedAchievements,
+                    state.achievements.size
                 )
             )
         }
@@ -140,16 +134,30 @@ internal fun GuideHeading(state: GuideUiState, onAction: (GuideAction) -> Unit) 
 internal fun GuideArticleCard(state: GuideUiState, article: GuideArticle, onAction: (GuideAction) -> Unit) {
     Card(onClick = { onAction(GuideAction.Article(article.id)) }, modifier = Modifier.fillMaxWidth()) {
         Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            PokemonSprite(article.pokemonId, SpritePlace.POKEMON_SHEET, SpriteSize.LIST, null)
+            PokemonSprite(
+                article.pokemonId,
+                SpritePlace.POKEMON_SHEET,
+                SpriteSize.LIST,
+                null,
+                shiny = article.shiny,
+                animated = article.shiny || SpritePlace.POKEMON_SHEET in LocalAnimatedPlaces.current
+            )
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(article.title, style = MaterialTheme.typography.titleMedium)
+                if (article.achievementId != null) {
+                    Text(article.summary, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                }
                 if (article.missable) {
                     Text(
                         stringResource(R.string.guide_missable),
                         color = MaterialTheme.colorScheme.error
                     )
                 }
-                if (article.id in state.progress.completed) Text(stringResource(R.string.guide_completed))
+                if (article.achievementId != null && !state.automaticAchievements &&
+                    article.id in state.progress.completed
+                ) {
+                    Text(stringResource(R.string.guide_completed))
+                }
                 RetroAchievementStatus(state, article)
                 if (article.captureIds.isNotEmpty() || article.unownGoal) {
                     Text(

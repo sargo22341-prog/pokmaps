@@ -68,7 +68,7 @@ internal class MapOverlayRenderer {
     }
 
     private fun drawObjects(state: MapRenderState, zoneParts: Set<Int>, objects: List<MapObject>) {
-        objects.filter { MapLayer.of(it.kind) in state.layers }.forEach { obj ->
+        objects.filter { MapLayer.of(it) in state.layers }.forEach { obj ->
             val inZone = obj.mapId in zoneParts
             val pokemon = obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null
             val position = state.catalog.markerPosition(obj)

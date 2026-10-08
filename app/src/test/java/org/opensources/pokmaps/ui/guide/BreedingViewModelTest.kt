@@ -49,6 +49,21 @@ class BreedingViewModelTest {
     }
 
     @Test
+    fun parentSearchAcceptsAccentsAndNumbersAndLeavesThePairUntouched() = runTest {
+        val tools = MemoryBreeding()
+        val model = BreedingViewModel(tools)
+        model.onAction(BreedingAction.Search("metamorph"))
+        assertEquals(listOf(132), model.state.value.choices.map { it.pokemonId })
+        model.onAction(BreedingAction.Search("#002"))
+        assertEquals(listOf(2), model.state.value.choices.map { it.pokemonId })
+        model.onAction(BreedingAction.Search("introuvable"))
+        assertTrue(model.state.value.choices.isEmpty())
+        model.onAction(BreedingAction.Search(""))
+        assertEquals(3, model.state.value.choices.size)
+        assertEquals(1, tools.pairCalls)
+    }
+
+    @Test
     fun changingSpeciesClearsOnlyItsDvsAndPreservesTheOtherParent() = runTest {
         val model = BreedingViewModel(MemoryBreeding())
         model.onAction(BreedingAction.Values(true, ParentValues(ParentSex.FEMALE, 1, 2)))

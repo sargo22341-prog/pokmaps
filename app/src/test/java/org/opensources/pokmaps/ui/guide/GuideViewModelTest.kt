@@ -84,10 +84,36 @@ class GuideViewModelTest {
     @Test
     fun writeFailureLeavesCompletionUntouched() = runTest {
         val guides = MemoryGuides()
+        val achievement = article("ra-1").copy(category = GuideCategory.ACHIEVEMENT, achievementId = 1)
+        guides.value.value = GuideLibrary(FakeGameDao.RED, listOf(achievement)) to GuideProgress()
         val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
-        model.onAction(GuideAction.Complete("kanto-start", true))
+        model.onAction(GuideAction.Complete("ra-1", true))
         assertTrue(model.state.value.writeFailed)
         assertTrue(model.state.value.progress.completed.isEmpty())
+    }
+
+    @Test
+    fun connectionSelectsOnlyRemoteProgressAndBlocksManualWrites() = runTest {
+        val guides = MemoryGuides()
+        val articles = listOf(article("ra-1").copy(achievementId = 1), article("ra-2").copy(achievementId = 2))
+        val library = GuideLibrary(FakeGameDao.RED, articles)
+        val progress = GuideProgress(completed = setOf("ra-1", "ra-2"))
+        guides.value.value = library to progress
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        assertEquals(2, model.state.value.completedAchievements)
+        guides.value.value = library.copy(
+            retro = org.opensources.pokmaps.domain.guide.RetroProgress(
+                username = "Joueur",
+                earned = mapOf(1 to setOf(1))
+            )
+        ) to progress
+        assertEquals(1, model.state.value.completedAchievements)
+        model.onAction(GuideAction.Complete("ra-2", true))
+        assertFalse(model.state.value.writeFailed)
+        guides.value.value = library to progress
+        assertEquals(2, model.state.value.completedAchievements)
+        model.onAction(GuideAction.Complete("missing", true))
+        assertFalse(model.state.value.writeFailed)
     }
 
     private fun article(id: String) =
@@ -105,6 +131,4 @@ private class MemoryGuides : Guides {
         value
     }
     override suspend fun complete(versionId: Int, id: String, completed: Boolean): Unit = error("Écriture impossible")
-    override suspend fun observeRoamer(versionId: Int, pokemonId: Int, place: String?): Unit =
-        error("Écriture impossible")
 }

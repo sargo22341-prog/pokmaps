@@ -718,34 +718,31 @@
         revenir vous entraîner et réorganiser l’équipe avant ce combat facultatif.
     </string>
     <string name="guide_johto_roamers_title">
-        Les bêtes légendaires et leur suivi
+        Les bêtes légendaires · Rencontre et capture
     </string>
     <string name="guide_johto_roamers_text">
         Dans le sous-sol de la [[place:burned-tower-b1f|Tour Cendrée]], les trois bêtes quittent leur refuge.
         Dans Or/Argent, [[pokemon:243|Raikou]], [[pokemon:244|Entei]] et [[pokemon:245|Suicune]] errent dans
         Johto. Dans Cristal, seuls les deux premiers errent : la quête du troisième conduit à un combat
         fixe.\n\nAprès une première rencontre, le Pokédex du jeu montre leur zone actuelle. Ils peuvent changer
-        de route lors de vos déplacements ; Vol peut bouleverser leur position. Notez ci-dessous le dernier lieu
-        réellement constaté, puis ouvrez-le sur la carte. Ce carnet ne prédit pas leur déplacement et ne lit pas
-        votre sauvegarde.\n\nIls sont au niveau 40. Un premier Pokémon de niveau 40 et un Repousse peuvent
+        de route lors de vos déplacements ; Vol peut bouleverser leur position. Consultez régulièrement le Pokédex
+        du jeu pour retrouver leur route actuelle.\n\nIls sont au niveau 40. Un premier Pokémon de niveau 40 et un Repousse peuvent
         filtrer les rencontres ordinaires, sous réserve des niveaux de la route. Une attaque de blocage peut
         limiter la fuite, mais Hurlement reste un risque ; sommeil, vitesse et Balls adaptées aident. Les dégâts
         et statuts déjà infligés sont conservés d’une rencontre à l’autre.
     </string>
     <string name="guide_johto_legends_title">
-        Lugia, Ho-Oh et les quêtes annexes
+        Lugia · Les Tourb’Îles
     </string>
     <string name="guide_johto_legends_text">
-        Dans Or, l’Arcenci’Aile obtenue après la Tour Radio permet de chercher [[pokemon:250|Ho-Oh]] au niveau
-        40 à la [[place:tin-tower-1f|Tour Ferraille]]. Dans Argent, l’Aile Argent ouvre la capture de
-        [[pokemon:249|Lugia]] au niveau 40 dans les [[place:whirl-island-nw|Tourb’Îles]]. L’autre aile est
-        donnée à Argenta après la Ligue ; l’autre légendaire y est alors au niveau 70.\n\nDans Cristal, Lugia
-        est au niveau 60. Pour Ho-Oh, capturez les trois bêtes légendaires dans votre partie puis parlez aux
-        sages de la Tour Ferraille : il est également au niveau 60. Des échanges ne remplacent pas cette
-        condition du scénario.\n\nLes Tourb’Îles demandent Surf, Siphon et un trajet par les grottes ; Flash
-        rend l’exploration plus lisible. Sauvegardez avant chaque combat fixe. Les Ruines d’Alpha, le
-        [[place:union-cave-b2f|Lokhlass du vendredi]] et les rencontres par Coup d’Boule complètent les quêtes
-        de collection, en dehors des badges.
+        Dans Argent, l’Aile Argent obtenue après la libération de la Tour Radio permet de capturer
+        [[pokemon:249|Lugia]] au niveau 40. Dans Or, obtenez cette aile auprès d’un habitant
+        d’[[place:pewter-city|Argenta]] après la Ligue ; Lugia est alors au niveau 70. Dans Cristal, le même
+        habitant donne l’aile et Lugia est au niveau 60.\n\nRejoignez les [[place:whirl-island-nw|Tourb’Îles]]
+        depuis la Route 41. Surf et Siphon permettent de franchir l’eau et les tourbillons ; Flash facilite
+        le trajet dans les grottes. Explorez les passages jusqu’à l’antre de Lugia.\n\nPréparez des Balls et
+        une attaque de statut, puis sauvegardez avant le combat fixe. Consultez les conditions des succès
+        liés avant la capture.
     </string>
     <string name="guide_crystal_suicune_title">
         Cristal · La quête de Suicune
@@ -759,7 +756,7 @@
         progresser vers la [[place:tin-tower-1f|Tour Ferraille]] après leurs combats. Une scène avec les trois
         bêtes y conduit au combat contre Suicune, niveau 40.\n\nSauvegardez avant de déclencher cette scène.
         Préparez des Balls et une attaque de statut, et vérifiez les conditions des succès avant de capturer le
-        Pokémon. N’utilisez pas le carnet des errants pour lui dans Cristal : sa capture est fixe.
+        Pokémon. Sa capture est fixe dans Cristal.
     </string>
     <string name="guide_breeding_title">
         Reproduction · Parents et attaques
@@ -1002,9 +999,6 @@
         <string name="guide_open_details">
         Ouvrir la fiche complète
     </string>
-        <string name="guide_offline">
-        Articles et suivi disponibles hors ligne. Les sources s’ouvrent dans votre navigateur.
-    </string>
         <string name="guide_walkthrough">
         Soluce
     </string>
@@ -1027,7 +1021,7 @@
         Du premier partenaire aux derniers combats, étape par étape.
     </string>
         <string name="guide_side_quests_description">
-        Légendaires, rencontres uniques et carnet des errants.
+        Légendaires, rencontres uniques et quêtes de collection.
     </string>
         <string name="guide_tips_description">
         Préparer son équipe et comprendre les mécaniques.
@@ -1041,20 +1035,11 @@
         <string name="guide_achievements_description">
         Objectifs RetroAchievements et suivi local par jeu.
     </string>
-        <string name="guide_achievement_notice">
-        Listes officielles traduites en français. Le suivi manuel est local ; la connexion facultative des
-        Réglages lit les succès acquis sur RetroAchievements. Les captures comptent pour cette version
-        uniquement. Les autres conditions du succès restent à respecter dans le jeu et la version émulée doit
-        être prise en charge par RetroAchievements.
-    </string>
         <string name="guide_missable">
         À préparer avant l’événement · Manquable
     </string>
         <string name="guide_completed">
         Terminé
-    </string>
-        <string name="guide_mark_completed">
-        Marquer comme terminé
     </string>
         <string name="guide_save_error">
         L’enregistrement a échoué. Réessayez votre action.
@@ -1062,35 +1047,8 @@
         <string name="guide_capture_progress">
         Captures locales : %1$d / %2$d
     </string>
-        <string name="guide_sources">
-        Sources et références
-    </string>
-        <string name="guide_source_number">
-        Référence %1$d · %2$s
-    </string>
         <string name="guide_stat">
         %1$s : %2$d
-    </string>
-        <string name="guide_roamer_heading">
-        Dernière observation · Saisie manuelle
-    </string>
-        <string name="guide_roamer_unknown">
-        Noter une route
-    </string>
-        <string name="guide_roamer_clear">
-        Effacer l’observation
-    </string>
-        <string name="guide_route_number">
-        Route %1$s
-    </string>
-        <string name="guide_raikou">
-        Raikou
-    </string>
-        <string name="guide_entei">
-        Entei
-    </string>
-        <string name="guide_suicune">
-        Suicune
     </string>
     <!-- Succès RetroAchievements : conditions traduites, instantané du 8 octobre 2026. -->
         <string name="ra_108020_title">
@@ -3399,9 +3357,6 @@
         <string name="retro_manual">
         Suivi manuel local
     </string>
-        <string name="retro_totals">
-        RetroAchievements : %1$d / %2$d · Suivi manuel : %3$d
-    </string>
         <string name="retro_collection_hint">
         Ce compteur utilise les captures de cette version et limite les choix exclusifs : Pokémon de départ,
         fossile, Dojo et, dans Or/Argent, évolutions avec une même pierre élémentaire. Il ne déverrouille aucun
@@ -3612,14 +3567,17 @@
         entraînement.
     </string>
         <string name="guide_dojo_title">
-        Dojo et fossiles · Des choix pour la collection
+        Dojo de Safrania · Kicklee ou Tygnon
     </string>
         <string name="guide_dojo_text">
         Le [[place:fighting-dojo|Dojo de Safrania]] est une salle de combat indépendante de l’Arène de
         [[character:saffron-gym:Morgane|Morgane]]. Vainquez les Karatékas puis leur maître pour pouvoir choisir
         [[pokemon:106|Kicklee]] ou [[pokemon:107|Tygnon]]. Kicklee favorise l’Attaque, Tygnon propose notamment
         des poings élémentaires. Le choix est unique sur une cartouche : le compteur du succès de collection
-        retient un seul des deux, sans vous demander un échange externe.\n\nAu [[place:mt-moon-b2f|Mont
+        retient un seul des deux, sans vous demander un échange externe.
+    </string>
+    <string name="guide_fossils_title">Fossiles · Amonita, Kabuto et Ptéra</string>
+    <string name="guide_fossils_text">Au [[place:mt-moon-b2f|Mont
         Sélénite]], choisissez le [[item:helix-fossil|Fossile Nautile]] pour [[pokemon:138|Amonita]], ou le
         [[item:dome-fossil|Fossile Dôme]] pour [[pokemon:140|Kabuto]]. Conservez le fossile jusqu’à pouvoir
         atteindre le [[place:cinnabar-lab-fossil-room|Laboratoire de Cramois’Île]]. Remettez-le au scientifique,
@@ -3629,6 +3587,20 @@
         pour le recevoir. Faites-le ranimer au même laboratoire pour obtenir [[pokemon:142|Ptéra]]. Les Pokémon
         fossiles apparaissent au niveau 30 dans ces versions ; Amonita et Kabuto évoluent au niveau 40. Gardez
         chaque espèce jusqu’à l’avoir enregistrée, puis entraînez-la : relâcher un cadeau ou un fossile avant
-        son évolution peut compromettre le succès de collection.
+        son évolution peut compromettre le succès de collection.</string>
+    <string name="guide_hooh_title">Ho-Oh · La Tour Ferraille</string>
+    <string name="guide_hooh_text">
+        Dans Or, l’Arcenci’Aile obtenue après la libération de la Tour Radio permet de rejoindre
+        [[pokemon:250|Ho-Oh]] au sommet de la [[place:tin-tower-1f|Tour Ferraille]], au niveau 40. Dans Argent,
+        obtenez cette aile auprès d’un habitant d’[[place:pewter-city|Argenta]] après la Ligue ; Ho-Oh est
+        alors au niveau 70.\n\nDans Cristal, capturez Raikou, Entei et Suicune dans votre partie, puis parlez
+        aux sages de la Tour Ferraille pour recevoir l’Arcenci’Aile. Des échanges ne remplacent pas ces
+        captures. Ho-Oh est au niveau 60.\n\nPréparez des Balls et une attaque de statut, puis sauvegardez
+        avant le combat fixe. Consultez les conditions des succès liés avant la capture.
     </string>
+    <string name="retro_automatic_totals">RetroAchievements : %1$d/%2$d</string>
+    <string name="retro_manual_totals">Succès validés : %1$d/%2$d</string>
+    <string name="breeding_search">Nom ou numéro du Pokémon</string>
+    <string name="breeding_number">#%1$03d</string>
+    <string name="map_layer_fruit_trees">Baies et Noigrumes</string>
 </resources>

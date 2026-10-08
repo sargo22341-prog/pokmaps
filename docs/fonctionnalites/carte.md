@@ -14,3 +14,5 @@ Les filtres Tout, Marche, Pêche et Surf ne proposent que les méthodes présent
 Si la méthode sélectionnée disparaît en changeant de moment, la liste revient à Tout. Une liste
 sans Pokémon masque tous ses filtres. Les icônes colorées des moments proviennent de Meteocons
 (Bas Milius, licence MIT), adaptées en vecteurs Android et animées au changement de moment.
+
+En génération 2, le calque « Baies et Noigrumes » affiche le sprite du fruit donné chaque jour par chaque arbre, indépendamment du calque des personnages. Toucher le fruit ouvre la fiche de l’arbre et son offre.

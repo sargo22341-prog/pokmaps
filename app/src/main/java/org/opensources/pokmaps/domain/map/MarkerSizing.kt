@@ -110,7 +110,7 @@ object MarkerSizing {
 
     /** Place occupée par le dessin d'un objet de la carte : icône d'objet, de Pokémon, ou sprite d'une case. */
     fun footprintOf(obj: MapObject): Footprint = when {
-        obj.itemIdentifier != null -> Footprint.ITEM
+        obj.itemIdentifier != null || obj.fruit != null -> Footprint.ITEM
         obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null -> Footprint.POKEMON
         else -> Footprint.CHARACTER
     }

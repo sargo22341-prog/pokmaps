@@ -84,7 +84,8 @@ data class MapObject(
     val trainerClass: String?,
     /** Nom affiché : classe du dresseur, personnage d'après son sprite, Pokémon ou objet (tools/data/). */
     val name: String,
-    val itemHasSprite: Boolean = true
+    val itemHasSprite: Boolean = true,
+    val fruit: OfferItem? = null
 )
 
 /** Zone de rencontre PokéAPI rattachée à une carte. */

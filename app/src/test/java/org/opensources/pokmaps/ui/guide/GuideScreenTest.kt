@@ -1,6 +1,9 @@
 package org.opensources.pokmaps.ui.guide
 
 import android.content.Context
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isToggleable
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -26,7 +29,7 @@ class GuideScreenTest {
 
     private fun show(state: GuideUiState) {
         compose.setContent {
-            GuideScreen(state, { actions += it }, GuideLinks({}, {}, {}), {})
+            GuideScreen(state, { actions += it }, GuideLinks({}, {}, {}))
         }
     }
 
@@ -46,7 +49,40 @@ class GuideScreenTest {
     }
 
     @Test
-    fun relatedTrophyOpensTheObjectiveAndCheckboxRemainsManual() {
+    fun achievementCheckboxExistsOnlyWithoutConnectedAccount() {
+        val achievement = GuideArticle(
+            "ra-1",
+            "Objectif",
+            GuideCategory.ACHIEVEMENT,
+            listOf(listOf(GuideSpan("Condition"))),
+            25,
+            emptyList(),
+            achievementId = 1
+        )
+        var state by androidx.compose.runtime.mutableStateOf(
+            GuideUiState(
+                loading = false,
+                library = GuideLibrary(FakeGameDao.RED, listOf(achievement)),
+                category = GuideCategory.ACHIEVEMENT,
+                articleId = "ra-1"
+            )
+        )
+        compose.setContent { GuideScreen(state, { actions += it }, GuideLinks({}, {}, {})) }
+        compose.onNode(isToggleable()).performClick()
+        assertEquals(listOf(GuideAction.Complete("ra-1", true)), actions)
+        compose.runOnIdle {
+            state = state.copy(
+                library = state.library?.copy(
+                    retro = org.opensources.pokmaps.domain.guide.RetroProgress(username = "Joueur")
+                )
+            )
+        }
+        compose.onNode(isToggleable()).assertDoesNotExist()
+        compose.onAllNodes(hasText("Listes officielles", substring = true)).assertCountEquals(0)
+    }
+
+    @Test
+    fun relatedTrophyOpensTheObjectiveAndChapterHasNoCompletionCheckbox() {
         val objective = GuideArticle(
             "ra-1",
             "Objectif lié",
@@ -76,7 +112,7 @@ class GuideScreenTest {
         )
         compose.onNode(hasText(context.getString(R.string.guide_related_achievements, 1, 1))).performClick()
         compose.onNode(hasText("Objectif lié")).performClick()
-        compose.onNode(isToggleable()).performClick()
-        assertEquals(listOf(GuideAction.Article("ra-1"), GuideAction.Complete("chapter", true)), actions)
+        compose.onNode(isToggleable()).assertDoesNotExist()
+        assertEquals(listOf(GuideAction.Article("ra-1")), actions)
     }
 }

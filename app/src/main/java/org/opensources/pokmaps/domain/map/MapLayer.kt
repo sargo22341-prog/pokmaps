@@ -7,12 +7,15 @@ package org.opensources.pokmaps.domain.map
 enum class MapLayer {
     WARPS,
     ITEMS,
+    FRUIT_TREES,
     TRAINERS,
     NPCS,
     STATIC_POKEMON,
     WILD_POKEMON;
 
     companion object {
+        fun of(obj: MapObject): MapLayer = if (obj.fruit != null) FRUIT_TREES else of(obj.kind)
+
         /** Calque d'un objet ou d'un personnage de la carte. */
         fun of(kind: MapObjectKind): MapLayer = when (kind) {
             MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> ITEMS

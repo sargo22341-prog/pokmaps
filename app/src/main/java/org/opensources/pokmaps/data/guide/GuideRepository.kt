@@ -47,7 +47,8 @@ class GuideRepository @Inject constructor(
                 definition.captureIds,
                 definition.achievementId,
                 definition.points,
-                definition.achievementId?.let(CaptureGoals::forAchievement)
+                definition.achievementId?.let(CaptureGoals::forAchievement),
+                shiny = definition.shiny
             )
         }
         GuideLibrary(game, articles)

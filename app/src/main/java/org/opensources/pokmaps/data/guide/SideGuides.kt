@@ -30,6 +30,15 @@ private val DEFINITIONS = listOf(
         R.string.guide_dojo_text,
         GuideCategory.SIDE_QUEST,
         KANTO_VERSIONS,
+        106,
+        listOf(KANTO_SOURCE)
+    ),
+    GuideDefinition(
+        "kanto-fossils",
+        R.string.guide_fossils_title,
+        R.string.guide_fossils_text,
+        GuideCategory.SIDE_QUEST,
+        KANTO_VERSIONS,
         142,
         listOf(KANTO_SOURCE)
     )

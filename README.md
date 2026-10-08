@@ -16,15 +16,18 @@ les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée
 rien.
 
 L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuces, bugs et succès du jeu choisi.
-Or, Argent et Cristal ajoutent les événements hebdomadaires, le suivi manuel du dernier lieu observé des bêtes
-légendaires, un vérificateur de reproduction (sexes, groupes d'œufs, DV et héritage des attaques) et un calculateur
+Les guides se lisent sans case de fin de lecture ni liens de sources. Dojo et fossiles, Lugia et Ho-Oh ont chacun
+leur article. Or, Argent et Cristal ajoutent les événements hebdomadaires, un vérificateur de reproduction
+(sexes, groupes d'œufs, DV et héritage des attaques), avec recherche des parents par nom ou numéro, et un calculateur
 de gains de bonheur. Les noms dans les textes ouvrent des fiches compactes reliées au Pokédex et à la carte.
 Les sprites et leur réglage d'animation sont réutilisés. Les chapitres proposent les succès liés, en signalant
 les objectifs manquables avant de poursuivre.
 
 Les 519 succès officiels sont un instantané traduit en français du 8 octobre 2026 : Rouge (93), Bleu (90),
-Jaune (76), Or (72), Argent (75) et Cristal (113). Le suivi manuel est local et indépendant des succès acquis
-sur le compte. Le compteur de captures utilise uniquement les captures de la version choisie ; les objectifs
+Jaune (76), Or (72), Argent (75) et Cristal (113). Sans connexion configurée, les cases et le compteur suivent les
+validations manuelles locales. Avec une connexion configurée, seuls le compteur RetroAchievements et les succès
+synchronisés sont affichés ; les coches manuelles sont conservées pour une déconnexion ultérieure.
+Le compteur de captures utilise uniquement les captures de la version choisie ; les objectifs
 de collection utilisent leur véritable objectif (124, 124, 129, 199, 199 ou 206) et excluent les espèces nécessitant
 un échange externe ou un événement externe. Les choix de Pokémon de départ, de fossile, du Dojo, d'évolution
 d'Évoli en génération 1 et de pierres élémentaires limitées dans Or/Argent sont comptés par alternative,
@@ -53,12 +56,13 @@ caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`,
 `[[item:potion|Potion]]` et `[[character:oaks-lab:Prof. Chen|Professeur Chen]]` sont validées au chargement.
 Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les six bibliothèques
 contre la base générée et vérifie leurs liens et nombres de succès. Les soluces sont des textes originaux ;
-leurs sources éditoriales et les désassemblages pret sont accessibles depuis chaque article.
+leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
 Le bouton à droite défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
 Tout conserve les couleurs originales. La liste du lieu a son propre filtre et regroupe les
 rencontres identiques sur toute la journée sous « Tout le temps ».
+Le filtre « Baies et Noigrumes » affiche les fruits correspondant à chaque arbre, avec leur sprite d'objet.
 Le Pokédex des formes capturées de Zarbi est accessible depuis sa fiche.
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.

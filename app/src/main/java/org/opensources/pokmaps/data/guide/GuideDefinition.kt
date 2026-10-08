@@ -16,7 +16,8 @@ internal data class GuideDefinition(
     val captureIds: Set<Int> = emptySet(),
     val achievementId: Int? = null,
     val points: Int = 0,
-    val chapter: String? = null
+    val chapter: String? = null,
+    val shiny: Boolean = false
 )
 
 internal val KANTO_VERSIONS = setOf(1, 2, 3)

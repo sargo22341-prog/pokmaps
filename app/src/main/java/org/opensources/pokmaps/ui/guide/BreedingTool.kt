@@ -90,32 +90,21 @@ private fun BreedingParent(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(if (first) R.string.breeding_parent_one else R.string.breeding_parent_two))
         Row {
-            TextButton(onClick = { selecting = true }) { Text(stringResource(R.string.breeding_choose)) }
+            TextButton(onClick = {
+                onAction(BreedingAction.Search(""))
+                selecting = true
+            }) { Text(stringResource(R.string.breeding_choose)) }
             TextButton(onClick = { onPreview(GuideTarget.Pokemon(parent.id)) }) { Text(parent.name) }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            sexes.forEach { sex ->
-                FilterChip(
-                    selected = values.sex == sex,
-                    label = { Text(stringResource(sex.label())) },
-                    onClick = { onAction(BreedingAction.Values(first, values.copy(sex = sex))) }
-                )
-            }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            BreedingDv(values.defense, R.string.breeding_defense, Modifier.weight(1f)) {
-                onAction(BreedingAction.Values(first, values.copy(defense = it)))
-            }
-            BreedingDv(values.special, R.string.breeding_special, Modifier.weight(1f)) {
-                onAction(BreedingAction.Values(first, values.copy(special = it)))
-            }
-        }
+        BreedingParentValues(sexes, values, first, onAction)
         TextButton(onClick = { selectingMoves = true }) {
             Text(stringResource(R.string.breeding_known_moves, values.moves.size))
         }
     }
     if (selecting) {
-        PokemonChoiceDialog(state.catalog?.pokemon.orEmpty(), { selecting = false }) {
+        PokemonChoiceDialog(state.choices, state.query, {
+            onAction(BreedingAction.Search(it))
+        }, { selecting = false }) {
             selecting = false
             onAction(BreedingAction.Species(first, it))
         }
@@ -123,6 +112,32 @@ private fun BreedingParent(
     if (selectingMoves) {
         ParentMovesDialog(moves, values, { selectingMoves = false }) {
             onAction(BreedingAction.Values(first, it))
+        }
+    }
+}
+
+@Composable
+private fun BreedingParentValues(
+    sexes: List<ParentSex>,
+    values: ParentValues,
+    first: Boolean,
+    onAction: (BreedingAction) -> Unit
+) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        sexes.forEach { sex ->
+            FilterChip(
+                selected = values.sex == sex,
+                label = { Text(stringResource(sex.label())) },
+                onClick = { onAction(BreedingAction.Values(first, values.copy(sex = sex))) }
+            )
+        }
+    }
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        BreedingDv(values.defense, R.string.breeding_defense, Modifier.weight(1f)) {
+            onAction(BreedingAction.Values(first, values.copy(defense = it)))
+        }
+        BreedingDv(values.special, R.string.breeding_special, Modifier.weight(1f)) {
+            onAction(BreedingAction.Values(first, values.copy(special = it)))
         }
     }
 }
@@ -145,16 +160,36 @@ private fun BreedingDv(value: Int?, label: Int, modifier: Modifier, onValue: (In
 }
 
 @Composable
-private fun PokemonChoiceDialog(pokemon: List<PokedexEntry>, onClose: () -> Unit, onSelect: (Int) -> Unit) {
+internal fun PokemonChoiceDialog(
+    pokemon: List<PokedexEntry>,
+    query: String,
+    onQuery: (String) -> Unit,
+    onClose: () -> Unit,
+    onSelect: (Int) -> Unit
+) {
     AlertDialog(
         onDismissRequest = onClose,
         title = { Text(stringResource(R.string.breeding_choose)) },
         text = {
-            LazyColumn(Modifier.heightIn(max = 360.dp)) {
-                items(pokemon, key = { it.pokemonId }) { entry ->
-                    TextButton(onClick = {
-                        onSelect(entry.pokemonId)
-                    }, modifier = Modifier.fillMaxWidth()) { Text(entry.name) }
+            Column {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = onQuery,
+                    singleLine = true,
+                    label = { Text(stringResource(R.string.breeding_search)) }
+                )
+                if (pokemon.isEmpty()) Text(stringResource(R.string.guide_empty))
+                LazyColumn(Modifier.heightIn(max = 360.dp)) {
+                    items(pokemon, key = { it.pokemonId }) { entry ->
+                        TextButton(onClick = {
+                            onSelect(entry.pokemonId)
+                        }, modifier = Modifier.fillMaxWidth()) {
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                Text(stringResource(R.string.breeding_number, entry.number))
+                                Text(entry.name)
+                            }
+                        }
+                    }
                 }
             }
         },

@@ -49,6 +49,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
     private suspend fun loadCatalog(game: Game): MapCatalog {
         val vg = game.versionGroupId
+        val fruits = loadFruits(game)
         return MapCatalog(
             versionGroupIdentifier = game.versionGroupIdentifier,
             maps = dao.maps(vg).map { it.toInfo() }.associateBy { it.id },
@@ -71,7 +72,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                     level = it.level,
                     trainerClass = it.trainerClass,
                     name = it.name,
-                    itemHasSprite = it.itemHasSprite
+                    itemHasSprite = it.itemHasSprite,
+                    fruit = fruits[it.id]
                 )
             }.groupBy { it.mapId },
             areas = dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
@@ -79,6 +81,18 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                 MapSpot(spot.mapId, SpotKind.from(spot.kind), spot.x, spot.y)
             }.groupBy { it.mapId }
         )
+    }
+
+    private suspend fun loadFruits(game: Game): Map<Int, OfferItem> {
+        val trees = dao.offerLinks(game.versionId).filter { it.kind == OfferKind.FRUIT_TREE.identifier }
+        if (trees.isEmpty()) return emptyMap()
+        val items = dao.items(game.versionGroupId, game.versionId).associateBy { it.identifier }
+        require(trees.map { it.objectId }.distinct().size == trees.size) { "Arbre avec plusieurs fruits" }
+        return trees.associate { tree ->
+            val item = requireNotNull(items[tree.itemIdentifier]) { "Fruit absent : ${tree.itemIdentifier}" }
+            require(item.hasSprite) { "Sprite du fruit absent : ${item.identifier}" }
+            tree.objectId to OfferItem(item.id, item.identifier, item.name, item.hasSprite)
+        }
     }
 
     /**

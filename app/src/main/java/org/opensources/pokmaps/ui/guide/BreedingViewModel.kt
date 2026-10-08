@@ -17,6 +17,9 @@ import org.opensources.pokmaps.domain.guide.BreedingRules
 import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
+import org.opensources.pokmaps.domain.model.PokedexEntry
+import org.opensources.pokmaps.domain.pokedex.PokedexFilter
+import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.usecase.BreedingTools
 import org.opensources.pokmaps.domain.usecase.BreedingUseCase
@@ -29,8 +32,10 @@ data class BreedingUiState(
     val firstId: Int = 1,
     val secondId: Int = BreedingRules.DITTO,
     val first: ParentValues = ParentValues(ParentSex.FEMALE),
-    val second: ParentValues = ParentValues(ParentSex.GENDERLESS)
+    val second: ParentValues = ParentValues(ParentSex.GENDERLESS),
+    val query: String = ""
 ) {
+    val choices: List<PokedexEntry> = PokedexSearch.filter(catalog?.pokemon.orEmpty(), PokedexFilter(query = query))
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
     val firstMoves: List<LearnedMove> = pair?.first?.let {
@@ -62,6 +67,7 @@ data class BreedingUiState(
 sealed interface BreedingAction {
     data class Species(val first: Boolean, val id: Int) : BreedingAction
     data class Values(val first: Boolean, val values: ParentValues) : BreedingAction
+    data class Search(val query: String) : BreedingAction
     data object Retry : BreedingAction
 }
 
@@ -109,6 +115,8 @@ class BreedingViewModel internal constructor(private val tools: BreedingTools) :
                     }
                 }
             }
+
+            is BreedingAction.Search -> mutableState.update { it.copy(query = action.query.take(100)) }
 
             BreedingAction.Retry -> load()
         }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,6 +33,7 @@ import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideSpan
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
 
@@ -43,7 +43,6 @@ internal fun GuideArticleContent(
     article: GuideArticle,
     onAction: (GuideAction) -> Unit,
     links: GuideLinks,
-    onOpenSource: (String) -> Unit,
     modifier: Modifier,
     breedingTool: @Composable () -> Unit,
     friendshipTool: @Composable () -> Unit
@@ -64,18 +63,8 @@ internal fun GuideArticleContent(
         items(article.paragraphs.indices.toList(), key = { "paragraph-$it" }) { index ->
             GuideParagraph(article.paragraphs[index]) { onAction(GuideAction.Preview(it)) }
         }
-        if (article.id == "johto-roamers") item("roamers") { RoamerTracker(state, onAction) }
         if (article.id == "breeding") item("breeding") { breedingTool() }
         if (article.id == "friendship") item("friendship") { friendshipTool() }
-        item("sources") {
-            HorizontalDivider()
-            Text(stringResource(R.string.guide_sources), style = MaterialTheme.typography.titleSmall)
-            article.sources.forEachIndexed { index, source ->
-                TextButton(onClick = { onOpenSource(source) }) {
-                    Text(stringResource(R.string.guide_source_number, index + 1, article.sourceHosts[index]))
-                }
-            }
-        }
     }
 }
 
@@ -98,7 +87,14 @@ private fun GuideArticleHeader(
         }
     }
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-        PokemonSprite(article.pokemonId, SpritePlace.POKEMON_SHEET, SpriteSize.HEADER, article.title)
+        PokemonSprite(
+            article.pokemonId,
+            SpritePlace.POKEMON_SHEET,
+            SpriteSize.HEADER,
+            article.title,
+            shiny = article.shiny,
+            animated = article.shiny || SpritePlace.POKEMON_SHEET in LocalAnimatedPlaces.current
+        )
     }
     GuideCompletion(article, state, onAction)
     GuideCaptureProgress(article, state, links.openPokedex)
@@ -131,22 +127,14 @@ private fun GuideCompletion(article: GuideArticle, state: GuideUiState, onAction
             Text(stringResource(R.string.retro_points, article.points, article.achievementId))
             RetroAchievementStatus(state, article)
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(
-                checked = article.id in state.progress.completed,
-                onCheckedChange = { onAction(GuideAction.Complete(article.id, it)) }
-            )
-            Text(
-                stringResource(
-                    if (article.achievementId ==
-                        null
-                    ) {
-                        R.string.guide_mark_completed
-                    } else {
-                        R.string.retro_manual
-                    }
+        if (article.achievementId != null && !state.automaticAchievements) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(
+                    checked = article.id in state.progress.completed,
+                    onCheckedChange = { onAction(GuideAction.Complete(article.id, it)) }
                 )
-            )
+                Text(stringResource(R.string.retro_manual))
+            }
         }
     }
 }
@@ -169,7 +157,7 @@ internal fun GuideCaptureProgress(article: GuideArticle, state: GuideUiState, on
 
 @Composable
 internal fun RetroAchievementStatus(state: GuideUiState, article: GuideArticle) {
-    if (article.achievementId in state.earned) {
+    if (state.automaticAchievements && article.achievementId in state.earned) {
         Text(
             stringResource(
                 if (article.achievementId in

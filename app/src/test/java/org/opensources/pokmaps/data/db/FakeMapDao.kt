@@ -15,7 +15,8 @@ internal class FakeMapDao(
     private val includeHiddenItem: Boolean = false,
     private val includeVersionPokemon: Boolean = false,
     private val timedEncounters: Boolean = false,
-    private val emptyMaps: Boolean = false
+    private val emptyMaps: Boolean = false,
+    private val includeFruitTree: Boolean = false
 ) : MapDao {
     override suspend fun maps(versionGroupId: Int) = read {
         if (emptyMaps) return@read emptyList()
@@ -45,8 +46,15 @@ internal class FakeMapDao(
             mapObject(REVIVER, LAB, 56 to 24, "npc", "Scientifique", "scientist"),
             mapObject(NURSE, LAB, 88 to 24, "npc", "Infirmière", "nurse"),
             mapObject(PRIZES, LAB, 56 to 88, "prize_vendor", "Comptoir des lots"),
-            *versionPokemon(versionId)
+            *versionPokemon(versionId),
+            *fruitObjects()
         )
+    }
+
+    private fun fruitObjects(): Array<MapObjectRow> = if (includeFruitTree) {
+        arrayOf(mapObject(SECOND_GENERATION, ROUTE_1, 264 to 136, "npc_object", "Arbre à Baies", "fruit_tree"))
+    } else {
+        emptyArray()
     }
 
     private fun versionPokemon(versionId: Int): Array<MapObjectRow> = if (includeVersionPokemon) {
@@ -124,6 +132,7 @@ internal class FakeMapDao(
 
     override suspend fun items(versionGroupId: Int, versionId: Int) = read {
         listOf(
+            ItemRow(BERRY, "oran-berry", "Baie Oran", true, "berries", null),
             ItemRow(POTION, "potion", "Potion", true, "healing", null),
             ItemRow(DOME_FOSSIL, "dome-fossil", "Fossile Dôme", true, "dex-completion", null)
         )
@@ -131,6 +140,16 @@ internal class FakeMapDao(
 
     override suspend fun offerLinks(versionId: Int) = read {
         listOf(
+            *if (includeFruitTree) {
+                arrayOf(
+                    OfferLinkRow(
+                        SECOND_GENERATION, "fruit_tree", "oran-berry", "Baie Oran",
+                        null, null, null, null, null, null, null
+                    )
+                )
+            } else {
+                emptyArray()
+            },
             OfferLinkRow(CLERK, "sale", "potion", "Potion", null, null, null, 300, null, null, null),
             OfferLinkRow(FOSSIL, "gift_item", "dome-fossil", "Fossile Dôme", null, null, null, null, 1, null, null),
             OfferLinkRow(

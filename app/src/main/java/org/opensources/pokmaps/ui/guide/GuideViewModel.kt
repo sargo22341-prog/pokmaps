@@ -48,6 +48,8 @@ data class GuideUiState(
     val earned: Set<Int> = library?.retro?.earned?.get(library.game.versionId).orEmpty()
     val hardcore: Set<Int> = library?.retro?.hardcore?.get(library.game.versionId).orEmpty()
     val achievements: List<GuideArticle> = library?.articles.orEmpty().filter { it.achievementId != null }
+    val automaticAchievements: Boolean = library?.retro?.username != null
+    val completedAchievements: Int get() = if (automaticAchievements) earnedCount else manuallyCompleted
     val earnedCount: Int = achievements.count { it.achievementId in earned }
     val manuallyCompleted: Int = achievements.count { it.id in progress.completed }
     val captureCounts: Map<String, Int> = library?.articles.orEmpty().associate {
@@ -74,7 +76,6 @@ sealed interface GuideAction {
     data object ClosePreview : GuideAction
     data class ShowPlace(val identifier: String) : GuideAction
     data class ShowObject(val id: Int) : GuideAction
-    data class ObserveRoamer(val pokemonId: Int, val place: String?) : GuideAction
     data object Retry : GuideAction
 }
 
@@ -143,11 +144,7 @@ class GuideViewModel internal constructor(
 
             GuideAction.Back -> back()
 
-            is GuideAction.Complete -> write { version -> guides.complete(version, action.id, action.completed) }
-
-            is GuideAction.ObserveRoamer -> write { version ->
-                guides.observeRoamer(version, action.pokemonId, action.place)
-            }
+            is GuideAction.Complete -> complete(action)
 
             is GuideAction.Preview -> openPreview(action.target)
 
@@ -168,6 +165,12 @@ class GuideViewModel internal constructor(
                 load()
             }
         }
+    }
+
+    private fun complete(action: GuideAction.Complete) {
+        val article = state.value.library?.articles?.firstOrNull { it.id == action.id } ?: return
+        if (article.achievementId == null || state.value.automaticAchievements) return
+        write { version -> guides.complete(version, action.id, action.completed) }
     }
 
     private fun select(category: GuideCategory?, articleId: String?, rememberPrevious: Boolean = true) {

@@ -34,7 +34,7 @@ private val DEFINITIONS = listOf(
     AchievementDefinition(163157, 5, R.string.ra_155176_title, R.string.ra_155176_text, 5, true, "johto-blackthorn"),
     AchievementDefinition(163158, 5, R.string.ra_163158_title, R.string.ra_163158_text, 10, true, "johto-blackthorn"),
     AchievementDefinition(5114, 5, R.string.ra_5087_title, R.string.ra_5087_text, 25, true, "johto-roamers"),
-    AchievementDefinition(5116, 5, R.string.ra_5089_title, R.string.ra_5089_text, 10, true, "johto-legends"),
+    AchievementDefinition(5116, 5, R.string.ra_5089_title, R.string.ra_5089_text, 10, true, "johto-hooh"),
     AchievementDefinition(5117, 5, R.string.ra_5091_title, R.string.ra_5091_text, 10, false, "johto-alph"),
     AchievementDefinition(5520, 5, R.string.ra_5509_title, R.string.ra_5509_text, 10, false, "johto-league"),
     AchievementDefinition(5521, 5, R.string.ra_4422_title, R.string.ra_5511_text, 25, false, "johto-league"),

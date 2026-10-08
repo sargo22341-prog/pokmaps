@@ -92,14 +92,14 @@ fun ObjectMarker(
 ) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     val sprite = obj.sprite
-    val itemIdentifier = obj.itemIdentifier
+    val itemIdentifier = obj.fruit?.identifier ?: obj.itemIdentifier
     val pokemonId = obj.pokemonId
     val facility = obj.kind.facilityIcon
     Box {
         when {
-            itemIdentifier != null && obj.itemHasSprite -> AssetImage(
+            itemIdentifier != null && (obj.fruit?.hasSprite ?: obj.itemHasSprite) -> AssetImage(
                 Sprites.item(itemIdentifier),
-                contentDescription = obj.itemName,
+                contentDescription = obj.fruit?.name ?: obj.itemName,
                 modifier = Modifier.size(mapPixels(mapState, PixelArt.ITEM_ICON, scale)),
                 alpha = if (obj.kind == MapObjectKind.HIDDEN_ITEM) HIDDEN_ALPHA else 1f
             )

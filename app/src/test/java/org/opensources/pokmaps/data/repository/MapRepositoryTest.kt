@@ -15,6 +15,23 @@ import org.opensources.pokmaps.domain.model.EncounterTime
 
 class MapRepositoryTest {
     @Test
+    fun fruitTreesUseTheirOwnLayerAndMatchingItemSprite() = runTest {
+        val catalog = MapRepository(FakeMapDao(includeFruitTree = true)).catalog(FakeGameDao.GOLD)
+        val tree = catalog.objects.getValue(FakeMapDao.ROUTE_1).single { it.id == FakeMapDao.SECOND_GENERATION }
+        assertEquals(OfferItem(FakeMapDao.BERRY, "oran-berry", "Baie Oran", true), tree.fruit)
+        assertEquals(
+            org.opensources.pokmaps.domain.map.MapLayer.FRUIT_TREES,
+            org.opensources.pokmaps.domain.map.MapLayer.of(tree)
+        )
+        assertEquals(
+            org.opensources.pokmaps.domain.map.Footprint.ITEM,
+            org.opensources.pokmaps.domain.map.MarkerSizing.footprintOf(tree)
+        )
+        assertEquals(264, tree.x)
+        assertEquals(136, tree.y)
+    }
+
+    @Test
     fun catalogKeepsTheObjectsOfEachVersion() = runTest {
         val repository = MapRepository(FakeMapDao(includeVersionPokemon = true))
 

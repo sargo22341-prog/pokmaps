@@ -67,7 +67,8 @@ private val DEFINITIONS = listOf(
         GuideCategory.WALKTHROUGH,
         JOHTO_VERSIONS,
         130,
-        listOf(JOHTO_SOURCE)
+        listOf(JOHTO_SOURCE),
+        shiny = true
     ),
     GuideDefinition(
         "johto-radio",
@@ -130,6 +131,15 @@ private val DEFINITIONS = listOf(
         GuideCategory.SIDE_QUEST,
         JOHTO_VERSIONS,
         249,
+        listOf(JOHTO_SOURCE)
+    ),
+    GuideDefinition(
+        "johto-hooh",
+        R.string.guide_hooh_title,
+        R.string.guide_hooh_text,
+        GuideCategory.SIDE_QUEST,
+        JOHTO_VERSIONS,
+        250,
         listOf(JOHTO_SOURCE)
     ),
     GuideDefinition(
