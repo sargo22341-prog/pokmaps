@@ -37,6 +37,7 @@ def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
     assert {row[0] for row in db.execute("SELECT identifier FROM item WHERE has_sprite = 0")} == {
         "berserk-gene",
         "flower-mail",
+        "eon-mail",
         "surf-mail",
         "liteblue-mail",
         "portrait-mail",

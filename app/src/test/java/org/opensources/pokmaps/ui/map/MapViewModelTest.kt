@@ -39,8 +39,11 @@ class MapViewModelTest {
 
     private val requests = MapRequests()
 
-    private fun viewModel(games: FakeGameDao, maps: FakeMapDao = FakeMapDao()): MapViewModel {
-        val dataStore = FakeDataStore()
+    private fun viewModel(
+        games: FakeGameDao,
+        maps: FakeMapDao = FakeMapDao(),
+        dataStore: FakeDataStore = FakeDataStore()
+    ): MapViewModel {
         val gameRepository = GameRepository(games, GameSettings(dataStore))
         val mapRepository = MapRepository(maps)
         return MapViewModel(
@@ -53,6 +56,18 @@ class MapViewModelTest {
             ObserveCollectionUseCase(gameRepository, CollectionSettings(dataStore)),
             GetMapTilesUseCase(MapTiles { null })
         )
+    }
+
+    @Test
+    fun aHiddenMapAppliesTheLatestGameBeforeItsPendingRequest() {
+        val dataStore = FakeDataStore()
+        val viewModel = viewModel(FakeGameDao(), dataStore = dataStore)
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.BLUE.versionId) }
+        requests.send(MapRequest.OpenPlace("viridian-mart"))
+        viewModel.onScreenShown()
+        assertEquals(FakeGameDao.BLUE, viewModel.state.value.game)
+        assertEquals("viridian-mart", viewModel.state.value.map?.identifier)
+        assertNull(requests.pending.value)
     }
 
     @Test

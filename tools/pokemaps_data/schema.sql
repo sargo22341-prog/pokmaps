@@ -412,7 +412,8 @@ CREATE TABLE trainer_pokemon (
 --   coin_sale (quantity jetons pour price ¥), coin_gift (quantity jetons donnés),
 --   fossil (fossile item_id ranimé en pokemon_id, quantity = niveau), fruit_tree (item_id donné chaque jour),
 --   heal, cable_club, name_rater, daycare, move_deleter (services : soins, Club Link, Expert en surnoms, pension,
---   Effaceur de capacités), grooming (toilettage qui rend un Pokémon plus heureux, price en ¥ s'il est payant).
+--   Effaceur de capacités), grooming (toilettage, price en ¥), move_tutor (tuteur de Cristal, price en jetons),
+--   point_prize (récompense de Buena, item_id et price en points de la Carte Bleue).
 -- version_id : version où l'offre existe (lots du Casino de Rouge ou de Bleu), NULL pour toutes celles du jeu.
 CREATE TABLE npc_offer (
     id INTEGER NOT NULL PRIMARY KEY,

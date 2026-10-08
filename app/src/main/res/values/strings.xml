@@ -190,7 +190,7 @@
     <string name="map_offer_trade">Votre %2$s contre son %1$s</string>
     <string name="map_offer_services">Services</string>
     <string name="map_offer_exchange">%1$s contre %2$s</string>
-    <string name="map_offer_prizes">Lots, contre des jetons</string>
+    <string name="map_offer_prizes">Récompenses</string>
     <string name="map_offer_fossils">Ranime les fossiles</string>
     <string name="map_offer_fruit_tree">Donne chaque jour</string>
     <string name="map_offer_egg">Œuf de %1$s, éclôt au niveau %2$d</string>
@@ -209,7 +209,6 @@
     <string name="role_heal">Soins</string>
     <string name="role_shop">Boutique</string>
     <string name="role_gift">Donne quelque chose</string>
-    <string name="role_prizes">Lots du Casino</string>
     <string name="role_coins">Jetons du Casino</string>
     <string name="role_daycare">Pension</string>
     <string name="role_name_rater">Surnoms</string>
@@ -329,7 +328,13 @@
     <string name="catch_player_level">Niveau de votre Pokémon : %1$d</string>
     <string name="catch_fishing">Rencontre par pêche</string>
     <string name="catch_love_bonus">Même espèce et même sexe (Love Ball)</string>
-    <string name="catch_note_gen2">Probabilité par lancer dans Or et Argent, avec un DV des PV moyen. Le sommeil et le gel aident ; les autres statuts n’aident pas. La Niveau Ball ignore les PV et le statut, la Lune Ball n’a aucun bonus et la Rapide Ball aide seulement pour Magnéti, Tadmorv et Saquedeneu. La Copain Ball augmente le bonheur après la capture. La Parc Ball est réservée au Concours.</string>
-    <string name="catch_engine_blocked">Avec ces PV maximum, le moteur d’Or/Argent se bloque avec les Balls autres que la Master Ball et la Niveau Ball. Leurs probabilités ne peuvent pas être calculées.</string>
+    <string name="catch_note_gen2">Probabilité par lancer dans Or, Argent et Cristal, avec un DV des PV moyen. Le sommeil et le gel aident ; les autres statuts n’aident pas. La Niveau Ball ignore les PV et le statut, la Lune Ball n’a aucun bonus et la Rapide Ball aide seulement pour Magnéti, Tadmorv et Saquedeneu. La Copain Ball augmente le bonheur après la capture. La Parc Ball est réservée au Concours.</string>
+    <string name="catch_engine_blocked">Avec ces PV maximum, le moteur d’Or/Argent/Cristal se bloque avec les Balls autres que la Master Ball et la Niveau Ball. Leurs probabilités ne peuvent pas être calculées.</string>
     <string name="map_empty">Ce jeu n’a aucune carte.</string>
+    <string name="role_move_tutor">Tuteur de capacités</string>
+    <string name="service_move_tutor">Enseigne Lance-Flammes, Tonnerre ou Laser Glace, le mercredi et le samedi après la Ligue</string>
+    <plurals name="map_offer_blue_card_points">
+        <item quantity="one">%1$d point de la Carte Bleue</item>
+        <item quantity="other">%1$d points de la Carte Bleue</item>
+    </plurals>
 </resources>

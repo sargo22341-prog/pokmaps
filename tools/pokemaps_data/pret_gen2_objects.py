@@ -111,6 +111,15 @@ def scene_opponents(script_file: ScriptFile) -> dict[str, set[Battle]]:
         trainers = {
             Battle("trainer", *macro_args(line, "loadtrainer")[:2]) for line in lines if line.startswith("loadtrainer ")
         }
+        wild = {
+            Battle("pokemon", *macro_args(line, "loadwildmon")[:2]) for line in lines if line.startswith("loadwildmon ")
+        }
+        for line in lines:
+            if line.startswith("applymovement "):
+                target = macro_args(line, "applymovement")[0]
+                for battle in wild:
+                    if target.endswith(f"_{battle.name}"):
+                        result.setdefault(target, set()).add(battle)
         if not trainers:
             continue
         for line in lines:
@@ -121,13 +130,13 @@ def scene_opponents(script_file: ScriptFile) -> dict[str, set[Battle]]:
 
 def _scene_opponent(repo: Gen2PretRepo, base: MapObject, battles: set[Battle]) -> MapObject:
     """Personnage, ou dresseur si un script de scène le combat (équipe inconnue s'il en choisit plusieurs)."""
+    if len(battles) == 1:
+        return _with_battle(repo, base, next(iter(battles)))
     classes = {battle.name for battle in battles}
     if not classes:
         return base
     if len(classes) > 1:
         raise ValueError(f"{repo.root.name} : {base.text} combat plusieurs classes de dresseurs : {sorted(classes)}")
-    if len(battles) == 1:
-        return _with_battle(repo, base, next(iter(battles)))
     return replace(base, kind="trainer", trainer_class=classes.pop())
 
 

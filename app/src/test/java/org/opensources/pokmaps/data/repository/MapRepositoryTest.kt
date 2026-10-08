@@ -38,7 +38,9 @@ class MapRepositoryTest {
                 NpcOffer.Trade(FakeMapDao.ABRA, "Abra", FakeMapDao.PIDGEY, "Roucool", heldItem = berry),
                 NpcOffer.FruitTree(berry),
                 NpcOffer.Service(CharacterService.GROOMING, price = 500),
-                NpcOffer.Service(CharacterService.MOVE_DELETER)
+                NpcOffer.Service(CharacterService.MOVE_DELETER),
+                NpcOffer.Service(CharacterService.MOVE_TUTOR, price = 4000),
+                NpcOffer.PointPrize(berry, points = 2)
             ),
             offers
         )

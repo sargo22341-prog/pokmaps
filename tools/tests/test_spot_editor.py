@@ -132,7 +132,7 @@ def test_catalog_of_gold_and_silver_in_the_preview(preview_database: Path) -> No
     catalog = EditorCatalog(preview_database)
     try:
         family = next(found for found in catalog.families() if found.identifier == "gold-silver-crystal")
-        assert (family.label, family.version_groups) == ("Or et Argent", ("gold-silver",))
+        assert (family.label, family.version_groups) == ("Or, Argent et Cristal", ("gold-silver", "crystal"))
         assert catalog.world_names(family) == {"johto": "Johto", "kanto": "Kanto"}
         route = next(found for found in catalog.maps(family) if found.identifier == "route-29")
         assert route.displayed == "johto"

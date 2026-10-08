@@ -55,6 +55,44 @@ class PokemapsJourneyTest {
     }
 
     @Test
+    fun crystalShowsTutorMovesAndTheirDetails() {
+        selectGame("Cristal")
+        openPokemon("pika", "Pikachu")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_moves_tutor)))
+        click(hasText(text(R.string.pokemon_moves_tutor)))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("Tonnerre"))
+        click(hasText("Tonnerre"))
+        await(hasText(text(R.string.move_title)))
+    }
+
+    @Test
+    fun crystalShowsBothRegionsAndItsLegendaryEncounter() {
+        selectGame("Cristal")
+        click(hasText(text(R.string.nav_pokedex)))
+        await(hasText(text(R.string.pokedex_filter_available, "Cristal")))
+        type("suicune")
+        click(hasText("Suicune"))
+        await(hasScrollToNodeAction())
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+        await(hasText(text(R.string.map_highlight, "Suicune")))
+        await(hasText("Johto"))
+        await(hasText("Kanto"))
+    }
+
+    @Test
+    fun crystalBuenaPrizesUseBlueCardPoints() {
+        selectGame("Cristal")
+        click(hasContentDescription(text(R.string.search_title)))
+        type("buena")
+        click(hasText("Récompenses de Buena"))
+        await(hasText(text(R.string.character_title)))
+        await(hasText("Récompenses"))
+        compose.onAllNodes(hasText("2 points de la Carte Bleue")).assertCountEquals(2)
+        compose.onNode(hasText("Lots, contre des jetons")).assertDoesNotExist()
+    }
+
+    @Test
     fun goldShowsBothRegionsAndTheNightFilter() {
         selectGold()
         click(hasText(text(R.string.nav_map)))
@@ -233,10 +271,17 @@ class PokemapsJourneyTest {
     private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
 
     private fun selectGold() {
+        selectGame("Or")
+    }
+
+    private fun selectGame(name: String) {
         click(hasText(text(R.string.nav_game)))
         await(hasScrollToNodeAction())
-        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.game_name, "Or")))
-        click(hasText(text(R.string.game_name, "Or")))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.game_name, name)))
+        click(hasText(text(R.string.game_name, name)))
+        compose.waitUntil(TIMEOUT_MS) {
+            compose.onAllNodes(hasText(text(R.string.game_name, name))).fetchSemanticsNodes().size == 2
+        }
     }
 
     /** Ouvre la fiche d'un Pokémon depuis le Pokédex. */

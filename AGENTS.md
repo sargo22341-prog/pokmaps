@@ -67,7 +67,7 @@ Le but commun : un code prévisible, qu'un outil peut vérifier et qu'un humain 
 
 ## 1. Le projet
 
-Application Android de cartes interactives et de Pokédex pour **Pokémon Rouge, Bleu, Jaune, Or et Argent**,
+Application Android de cartes interactives et de Pokédex pour **Pokémon Rouge, Bleu, Jaune, Or, Argent et Cristal**,
 conçue pour accueillir ensuite d'autres jeux. Carte et Pokédex sont liés dans les deux sens.
 
 - Package : `org.opensources.pokmaps` ; le debug s'installe sous `org.opensources.pokmaps.debug`.

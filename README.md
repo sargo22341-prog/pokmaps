@@ -1,6 +1,6 @@
 # Pokémaps
 
-Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or et Argent**, entièrement en français :
+Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or, Argent et Cristal**, en français :
 cartes de Kanto et de Johto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
 attaques (effet et probabilité de l'effet) et Pokédex.
 
@@ -24,7 +24,10 @@ Pokémon sur les arbres et les rochers correspondants.
 Les fiches d'Or et d'Argent affichent les six statistiques, les objets tenus, le sexe, les groupes d'œufs,
 les cycles d'éclosion et les attaques par œuf. Les évolutions précisent le bonheur, l'heure et les objets tenus.
 Le calculateur de capture reproduit la formule et les Balls du jeu, avec ses défauts d'origine ; le niveau du
-Pokémon de l'équipe, la pêche et le contexte de la Love Ball sont réglables. Cristal reste à intégrer.
+Pokémon de l'équipe, la pêche et le contexte de la Love Ball sont réglables. Cristal ajoute ses cartes (Tour de Combat,
+salles des Ruines d'Alpha, Sanctuaire du Dragon), ses rencontres et échanges, les sept possibilités de l'œuf de la
+Pension, Suicune à la Tour Ferraille et les attaques par tuteur. Le tuteur coûte 4 000 jetons ; les récompenses de
+Buena affichent leur prix en points de la Carte Bleue.
 
 ## Captures d'écran
 
@@ -80,7 +83,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   connexions, warps, objets et PNJ, et ce que proposent les personnages (soins, boutiques, dons, échanges,
   lots du Casino et leur prix en jetons, distributeurs, fossiles ranimés) ; pour l'effet de chaque attaque, tel que
   le moteur de combat l'exécute (`data/moves/moves.asm`). Aucune ROM n'est utilisée.
-- **[pret/pokegold](https://github.com/pret/pokegold)** (Or et Argent) : cartes de Johto et de Kanto, et rencontres
+- **[pret/pokegold](https://github.com/pret/pokegold)** (Or et Argent) et
+  **[pret/pokecrystal](https://github.com/pret/pokecrystal)** (Cristal) : cartes de Johto et de Kanto, et rencontres
   aléatoires lues comme le moteur les tire (herbes et grottes par moment de la journée, surf, pêche, Coup d'Boule,
   Éclate-Roc, essaims, Concours de capture d'insectes, `data/wild/`), PokéAPI les décrivant mal pour ces jeux
   (moments de la journée perdus, emplacements d'essaim manquants) ; dons, Pokémon fixes et échanges restent ceux de
@@ -117,6 +121,10 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
   manquant arrête la génération) ;
 - de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`), ses régions et villes
   de départ (`Game.regions`), ses palettes et son rendu (`maps_render*.py`) ;
+- de vérifier ses variantes de format même s’il partage un lecteur : Cristal ajoute une seconde banque
+  de tuiles, des scripts conditionnels et `warpfacing`, ainsi que des tables sauvages `map_id` ;
+- de lire et valider ses nouvelles offres (ex. tuteur payé en jetons et récompenses de Buena payées en
+  points), puis de les représenter dans les modèles du domaine et les ressources françaises ;
 - de classer ses nouvelles méthodes de rencontre (ex. `headbutt`) dans `ObtainMethod` : une méthode inconnue
   fait échouer le chargement au lieu de disparaître en silence des filtres et de la carte ;
 - de lire les effets de ses attaques (`pret_moves.py`, `pret_gen2_moves.py` et `move_effects.csv`) : une

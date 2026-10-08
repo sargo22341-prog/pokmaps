@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 
-from .pret_source import macro_args, parse_int, source_lines
+from .pret_source import conditional_lines, macro_args, parse_int
 
 _LABEL = re.compile(r"^(\.?[A-Za-z_]\w*):{1,2}$")
 _CONSTANT = re.compile(r"^DEF (\w+)\s+EQU\s+(\$[0-9A-Fa-f]+|\d+)$")
@@ -70,15 +70,16 @@ class _Block:
 class ScriptFile:
     """Blocs de script d'un fichier de carte, et lignes atteignables depuis un label."""
 
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, defined: frozenset[str] = frozenset()) -> None:
         self.path = path
+        self.defined = defined
 
     @cached_property
     def blocks(self) -> dict[str, _Block]:
         names: list[str] = []
         lines: dict[str, list[str]] = {}
         current_global = ""
-        for line in source_lines(self.path):
+        for line in conditional_lines(self.path, self.defined):
             check_unconditional(line, self.path)
             match = _LABEL.match(line)
             if match is None:
@@ -135,7 +136,7 @@ class ScriptFile:
     def constants(self) -> dict[str, int]:
         """Constantes numériques définies dans le fichier (« DEF GOLDENRODGAMECORNER_ABRA_COINS EQU 200 »)."""
         result = {}
-        for line in source_lines(self.path):
+        for line in conditional_lines(self.path, self.defined):
             if match := _CONSTANT.match(line):
                 result[match.group(1)] = parse_int(match.group(2))
         return result

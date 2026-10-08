@@ -180,6 +180,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
         OfferKind.PRIZE_ITEM -> NpcOffer.PrizeItem(offerItem(), required(price))
 
+        OfferKind.POINT_PRIZE -> NpcOffer.PointPrize(offerItem(), required(price))
+
         OfferKind.PRIZE_POKEMON ->
             NpcOffer.PrizePokemon(required(pokemonId), required(pokemonName), required(quantity), required(price))
 
@@ -203,6 +205,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         OfferKind.MOVE_DELETER -> NpcOffer.Service(CharacterService.MOVE_DELETER)
 
         OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price)
+
+        OfferKind.MOVE_TUTOR -> NpcOffer.Service(CharacterService.MOVE_TUTOR, required(price))
     }
 
     private fun NpcOfferRow.offerItem() =

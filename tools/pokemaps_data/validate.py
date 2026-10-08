@@ -145,21 +145,23 @@ CHECKS = (
            WHERE o.id IS NULL
              OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'gift_egg', 'sale', 'trade', 'exchange', 'prize_item',
                'prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'fruit_tree', 'heal', 'cable_club', 'name_rater',
-               'daycare', 'move_deleter', 'grooming')
-             OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'fossil', 'fruit_tree')
+               'daycare', 'move_deleter', 'grooming', 'move_tutor', 'point_prize')
+             OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree')
                AND n.item_id IS NULL)
-             OR (n.kind NOT IN ('gift_item', 'sale', 'exchange', 'prize_item', 'fossil', 'fruit_tree', 'gift_pokemon',
-               'trade') AND n.item_id IS NOT NULL)
+             OR (n.kind NOT IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree',
+               'gift_pokemon', 'trade') AND n.item_id IS NOT NULL)
              OR (n.kind IN ('gift_pokemon', 'gift_egg', 'trade', 'prize_pokemon', 'fossil'))
                != (n.pokemon_id IS NOT NULL)
              OR (n.kind = 'trade') != (n.wanted_pokemon_id IS NOT NULL)
              OR (n.kind = 'exchange') != (n.wanted_item_id IS NOT NULL)
-             OR (n.kind IN ('prize_item', 'prize_pokemon', 'coin_sale') AND coalesce(n.price, 0) <= 0)
+             OR (n.kind IN ('prize_item', 'prize_pokemon', 'point_prize', 'coin_sale', 'move_tutor')
+               AND coalesce(n.price, 0) <= 0)
              OR (n.kind IN ('prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'gift_egg')
                AND coalesce(n.quantity, 0) <= 0)
              OR (n.kind IN ('fruit_tree', 'heal', 'cable_club', 'name_rater', 'daycare', 'move_deleter')
                AND coalesce(n.pokemon_id, n.quantity, n.price) IS NOT NULL)
              OR (n.kind = 'grooming' AND (coalesce(n.pokemon_id, n.quantity) IS NOT NULL OR n.price <= 0))
+             OR (n.kind = 'move_tutor' AND coalesce(n.pokemon_id, n.quantity) IS NOT NULL)
              OR (n.version_id IS NOT NULL AND n.version_id NOT IN
                (SELECT v.id FROM version v WHERE v.version_group_id = m.version_group_id))
              OR n.item_id NOT IN (SELECT id FROM item) OR n.wanted_item_id NOT IN (SELECT id FROM item)

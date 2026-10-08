@@ -63,6 +63,7 @@ val CharacterRole.icon: Int
         CharacterRole.DAYCARE -> R.drawable.ic_role_daycare
         CharacterRole.NAME_RATER -> R.drawable.ic_role_name_rater
         CharacterRole.MOVE_DELETER -> R.drawable.ic_role_move_deleter
+        CharacterRole.MOVE_TUTOR -> R.drawable.ic_role_move_tutor
         CharacterRole.GROOMING -> R.drawable.ic_role_grooming
         CharacterRole.CABLE_CLUB -> R.drawable.ic_role_cable_club
     }
@@ -78,13 +79,14 @@ val CharacterRole.label: Int
         CharacterRole.SHOP -> R.string.role_shop
         CharacterRole.GIFT -> R.string.role_gift
         CharacterRole.TRADE -> R.string.method_trade
-        CharacterRole.PRIZES -> R.string.role_prizes
+        CharacterRole.PRIZES -> R.string.map_offer_prizes
         CharacterRole.COINS -> R.string.role_coins
         CharacterRole.FOSSIL -> R.string.map_offer_fossils
         CharacterRole.FRUIT_TREE -> R.string.role_fruit_tree
         CharacterRole.DAYCARE -> R.string.role_daycare
         CharacterRole.NAME_RATER -> R.string.role_name_rater
         CharacterRole.MOVE_DELETER -> R.string.role_move_deleter
+        CharacterRole.MOVE_TUTOR -> R.string.role_move_tutor
         CharacterRole.GROOMING -> R.string.role_grooming
         CharacterRole.CABLE_CLUB -> R.string.role_cable_club
     }
@@ -106,6 +108,7 @@ private val CharacterRole.color: Color?
         CharacterRole.DAYCARE -> Color(0xFF26A69A)
         CharacterRole.NAME_RATER -> Color(0xFF8E24AA)
         CharacterRole.MOVE_DELETER -> Color(0xFF78909C)
+        CharacterRole.MOVE_TUTOR -> Color(0xFF00897B)
         CharacterRole.GROOMING -> Color(0xFFF06292)
         CharacterRole.CABLE_CLUB -> Color(0xFF5C6BC0)
     }

@@ -24,6 +24,8 @@ from dataclasses import dataclass
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .pret_crystal_offers import NO_OFFER_SPECIALS as CRYSTAL_NO_OFFER_SPECIALS
+from .pret_crystal_offers import buena_prizes, move_tutor_price, odd_eggs, rooftop_sales
 from .pret_gen2_offer_data import NpcTrade, bargain_shop, fruit_trees, item_prices, marts, npc_trades
 from .pret_gen2_scripts import ScriptFile
 from .pret_models import NpcOffer
@@ -36,8 +38,9 @@ if TYPE_CHECKING:
 # Services rendus par les commandes special (engine/events/specials.asm).
 HEAL, CABLE_CLUB, NAME_RATER, DAYCARE = "heal", "cable_club", "name_rater", "daycare"
 MOVE_DELETER, GROOMING = "move_deleter", "grooming"
-SERVICE_KINDS = frozenset({HEAL, CABLE_CLUB, NAME_RATER, DAYCARE, MOVE_DELETER, GROOMING})
+SERVICE_KINDS = frozenset({HEAL, CABLE_CLUB, NAME_RATER, DAYCARE, MOVE_DELETER, GROOMING, "move_tutor"})
 SPECIAL_SERVICES = {
+    "MoveTutor": "move_tutor",
     "HealParty": HEAL,
     "NameRater": NAME_RATER,
     "DayCareMan": DAYCARE,
@@ -305,6 +308,8 @@ def _trade(block: _Block, args: list[str]) -> list[NpcOffer]:
 
 def _mart(block: _Block, args: list[str]) -> list[NpcOffer]:
     mart_type, mart = args[0], args[1]
+    if mart_type == "MARTTYPE_ROOFTOP":
+        return rooftop_sales(block.reader.repo)
     if mart_type == _BARGAIN_MART:
         return [NpcOffer("sale", item=item, price=price) for item, price in block.reader.bargain_shop]
     if mart_type not in _PRICED_MARTS or mart not in block.reader.marts:
@@ -327,10 +332,17 @@ def _coins(block: _Block, args: list[str]) -> list[NpcOffer]:
 
 def _special(block: _Block, args: list[str]) -> list[NpcOffer]:
     name = args[0]
+    if name == "GiveOddEgg":
+        return odd_eggs(block.reader.repo)
+    if name == "BuenaPrize":
+        return buena_prizes(block.reader.repo)
     if name in SPECIAL_SERVICES:
         service = SPECIAL_SERVICES[name]
-        return [NpcOffer(service, price=block.money if service == GROOMING else None)]
-    if name in CURATED_SPECIALS or name in NO_OFFER_SPECIALS:
+        price = (
+            move_tutor_price(block.source) if service == "move_tutor" else block.money if service == GROOMING else None
+        )
+        return [NpcOffer(service, price=price)]
+    if name in CURATED_SPECIALS or name in NO_OFFER_SPECIALS or name in CRYSTAL_NO_OFFER_SPECIALS:
         return []
     raise ValueError(f"{block.where()} : commande special non classée : {name} (pret_gen2_offers)")
 

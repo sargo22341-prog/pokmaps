@@ -21,7 +21,7 @@ class Gen2Tileset:
     metatiles: bytes  # 16 octets par métatuile : numéros des 4 × 4 tuiles
     # Collision de chaque quart de métatuile (haut gauche, haut droite, bas gauche, bas droite).
     collisions: tuple[tuple[int, int, int, int], ...]
-    palettes: tuple[str, ...]  # palette de chaque tuile (GRAY, RED, GREEN, WATER, YELLOW, BROWN, ROOF ou TEXT)
+    palettes: tuple[str | None, ...]  # palette par numéro VRAM ; None pour les emplacements de la police
 
     def metatile_count(self) -> int:
         return len(self.metatiles) // 16
@@ -92,13 +92,20 @@ def _tileset(repo: Gen2PretRepo, const: str, label: str, files: dict[str, str]) 
     if len(metatiles) % 16 or len(collisions) < len(metatiles) // 16:
         count = len(metatiles) // 16
         raise ValueError(f"{repo.root.name} : {const} a {count} métatuiles et {len(collisions)} collisions")
-    palettes = tuple(
-        name
-        for line in source_lines(repo.path(files[f"{label}PalMap"]))
-        if line.startswith("tilepal ")
-        for name in macro_args(line, "tilepal")[1:]
-    )
+    palettes = _tile_palettes(repo.path(files[f"{label}PalMap"]))
     return Gen2Tileset(const, gfx, metatiles, collisions, palettes)
+
+
+def _tile_palettes(path: Path) -> tuple[str | None, ...]:
+    """Cristal charge 96 tuiles par banque ; les numéros $60 à $7f restent réservés à la police."""
+    banks: dict[int, list[str]] = {}
+    for line in source_lines(path):
+        if line.startswith("tilepal "):
+            bank, *names = macro_args(line, "tilepal")
+            banks.setdefault(parse_int(bank), []).extend(names)
+    if set(banks) not in ({0}, {0, 1}) or any(len(names) != 96 for names in banks.values()):
+        raise ValueError(f"{path.name} : banques de palettes invalides")
+    return (*banks[0], *((None,) * 32 + tuple(banks[1]) if 1 in banks else ()))
 
 
 def _quarters(values: list[int]) -> tuple[int, int, int, int]:

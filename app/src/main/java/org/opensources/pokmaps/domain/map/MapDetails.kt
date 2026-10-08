@@ -52,6 +52,9 @@ sealed interface NpcOffer {
     /** Lot du Casino, contre des jetons. */
     data class PrizeItem(val item: OfferItem, val coins: Int) : NpcOffer
 
+    /** Récompense de Buena contre les points de la Carte Bleue. */
+    data class PointPrize(val item: OfferItem, val points: Int) : NpcOffer
+
     data class PrizePokemon(val pokemonId: Int, val name: String, val level: Int, val coins: Int) : NpcOffer
 
     /** Jetons du Casino vendus (`coins` jetons pour `price` ₽) ou donnés. */
@@ -65,7 +68,7 @@ sealed interface NpcOffer {
     /** Baie ou Noigrume que donne un arbre, une fois par jour. */
     data class FruitTree(val item: OfferItem) : NpcOffer
 
-    /** Service rendu, gratuit ou payant (`price` en ₽ : toilettage des frères coiffeurs). */
+    /** Service rendu, gratuit ou payant (`price` en ₽ pour le toilettage, en jetons pour le tuteur). */
     data class Service(val service: CharacterService, val price: Int? = null) : NpcOffer
 }
 
@@ -86,6 +89,8 @@ val NpcOffer.kind: OfferKind
 
         is NpcOffer.PrizeItem -> OfferKind.PRIZE_ITEM
 
+        is NpcOffer.PointPrize -> OfferKind.POINT_PRIZE
+
         is NpcOffer.PrizePokemon -> OfferKind.PRIZE_POKEMON
 
         is NpcOffer.CoinSale -> OfferKind.COIN_SALE
@@ -103,6 +108,7 @@ val NpcOffer.kind: OfferKind
             CharacterService.DAYCARE -> OfferKind.DAYCARE
             CharacterService.MOVE_DELETER -> OfferKind.MOVE_DELETER
             CharacterService.GROOMING -> OfferKind.GROOMING
+            CharacterService.MOVE_TUTOR -> OfferKind.MOVE_TUTOR
         }
     }
 
@@ -117,7 +123,10 @@ enum class CharacterService {
     MOVE_DELETER,
 
     /** Toilettage qui rend un Pokémon plus heureux. */
-    GROOMING
+    GROOMING,
+
+    /** Tuteur de Cristal : Lance-Flammes, Tonnerre et Laser Glace, prix en jetons. */
+    MOVE_TUTOR
 }
 
 data class OfferItem(val id: Int, val identifier: String, val name: String, val hasSprite: Boolean)
@@ -161,7 +170,9 @@ enum class OfferKind(val identifier: String) {
     NAME_RATER("name_rater"),
     DAYCARE("daycare"),
     MOVE_DELETER("move_deleter"),
-    GROOMING("grooming");
+    GROOMING("grooming"),
+    MOVE_TUTOR("move_tutor"),
+    POINT_PRIZE("point_prize");
 
     companion object {
         fun from(identifier: String): OfferKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

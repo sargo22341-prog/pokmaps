@@ -202,8 +202,8 @@ def test_script_reading_follows_branches_and_checkver(tmp_path: Path) -> None:
 
 def test_unsupported_assembly_conditions_stop_the_reading(tmp_path: Path) -> None:
     path = tmp_path / "Conditional.asm"
-    path.write_text("Script:\nIF DEF(_GOLD)\n\tgiveitem POTION\nENDC\n\tend\n", encoding="utf-8")
-    with pytest.raises(ValueError, match="condition d'assemblage"):
+    path.write_text("Script:\nIF UNKNOWN\n\tgiveitem POTION\nENDC\n\tend\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="condition non prise en charge"):
         ScriptFile(path).has_label("Script")
 
 

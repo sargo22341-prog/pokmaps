@@ -179,7 +179,9 @@ internal class FakeMapDao(
         offer("trade", BERRY, "oran-berry", "Baie Oran", ABRA, "Abra", wanted = PIDGEY to "Roucool"),
         offer("fruit_tree", BERRY, "oran-berry", "Baie Oran"),
         offer("grooming", price = 500),
-        offer("move_deleter")
+        offer("move_deleter"),
+        offer("move_tutor", price = 4000),
+        offer("point_prize", BERRY, "oran-berry", "Baie Oran", price = 2)
     )
 
     private fun offer(

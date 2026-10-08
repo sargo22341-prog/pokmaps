@@ -1,4 +1,4 @@
-"""Lecture des désassemblages pret de la 2e génération (pokegold) : constantes, en-têtes de cartes, tilesets,
+"""Lecture des désassemblages pret de la 2e génération (pokegold et pokecrystal) : constantes, cartes, tilesets,
 régions, données des Pokémon et sprites.
 
 Seuls les fichiers sources texte (.asm), les blocs (.blk, .bin) et les images (.png) du dépôt sont lus : aucune

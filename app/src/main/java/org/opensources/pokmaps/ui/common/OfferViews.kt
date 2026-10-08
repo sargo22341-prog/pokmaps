@@ -32,7 +32,8 @@ import org.opensources.pokmaps.domain.model.Sprites
 
 /**
  * Ce que propose un personnage ou une installation : services, dons, ventes, échanges, lots du Casino, fossiles
- * ranimés et baies d'un arbre. Objets et Pokémon ouvrent leur fiche si demandé ; un fossile donné dit en quoi il se ranime, et où.
+ * ranimés et baies d’un arbre. Objets et Pokémon ouvrent leur fiche si demandé ; un fossile donné dit
+ * en quoi il se ranime, et où.
  */
 @Composable
 fun Offers(
@@ -73,7 +74,12 @@ private fun Services(services: List<NpcOffer.Service>) {
                 modifier = Modifier.weight(1f)
             )
             offer.price?.let {
-                Text(stringResource(R.string.map_offer_price, it), style = MaterialTheme.typography.titleSmall)
+                val price = if (offer.service == CharacterService.MOVE_TUTOR) {
+                    pluralStringResource(R.plurals.coins, it, it)
+                } else {
+                    stringResource(R.string.map_offer_price, it)
+                }
+                Text(price, style = MaterialTheme.typography.titleSmall)
             }
         }
     }
@@ -162,7 +168,9 @@ private fun Trades(offers: List<NpcOffer>, links: OfferLinks) {
 
 @Composable
 private fun Prizes(offers: List<NpcOffer>, links: OfferLinks) {
-    val prizes = offers.filter { it is NpcOffer.PrizePokemon || it is NpcOffer.PrizeItem }
+    val prizes = offers.filter {
+        it is NpcOffer.PrizePokemon || it is NpcOffer.PrizeItem || it is NpcOffer.PointPrize
+    }
     if (prizes.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_prizes))
     prizes.forEach { offer ->
@@ -181,7 +189,24 @@ private fun Prizes(offers: List<NpcOffer>, links: OfferLinks) {
                 links.onOpenItem
             )
 
-            else -> Unit
+            is NpcOffer.PointPrize -> OfferItemRow(
+                offer.item,
+                offer.item.name,
+                pluralStringResource(R.plurals.map_offer_blue_card_points, offer.points, offer.points),
+                links.onOpenItem
+            )
+
+            is NpcOffer.GiftItem,
+            is NpcOffer.GiftPokemon,
+            is NpcOffer.GiftEgg,
+            is NpcOffer.Sale,
+            is NpcOffer.Trade,
+            is NpcOffer.Exchange,
+            is NpcOffer.CoinSale,
+            is NpcOffer.CoinGift,
+            is NpcOffer.FossilRevival,
+            is NpcOffer.FruitTree,
+            is NpcOffer.Service -> Unit
         }
     }
 }
@@ -359,6 +384,7 @@ private val CharacterService.role: CharacterRole
         CharacterService.DAYCARE -> CharacterRole.DAYCARE
         CharacterService.MOVE_DELETER -> CharacterRole.MOVE_DELETER
         CharacterService.GROOMING -> CharacterRole.GROOMING
+        CharacterService.MOVE_TUTOR -> CharacterRole.MOVE_TUTOR
     }
 
 @get:StringRes
@@ -370,6 +396,7 @@ private val CharacterService.description: Int
         CharacterService.DAYCARE -> R.string.service_daycare
         CharacterService.MOVE_DELETER -> R.string.service_move_deleter
         CharacterService.GROOMING -> R.string.service_grooming
+        CharacterService.MOVE_TUTOR -> R.string.service_move_tutor
     }
 
 private val ITEM_ICON_SIZE = 32.dp

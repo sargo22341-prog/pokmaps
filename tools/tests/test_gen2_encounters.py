@@ -56,7 +56,9 @@ def test_random_encounters_total_100_for_each_time_of_day(preview_db: sqlite3.Co
 
 
 def test_a_pokemon_only_at_night(preview_db: sqlite3.Connection) -> None:
-    hoothoot = _encounters(preview_db, "p.identifier = 'hoothoot' AND l.identifier = 'johto-route-29'")
+    hoothoot = _encounters(
+        preview_db, "v.version_group_id = 3 AND p.identifier = 'hoothoot' AND l.identifier = 'johto-route-29'"
+    )
     assert {(row[0], row[3], row[6], row[8]) for row in hoothoot} == {
         ("gold", "walk", 85.0, "time-night"),
         ("silver", "walk", 85.0, "time-night"),
@@ -133,7 +135,7 @@ def test_one_off_encounters_and_notes(preview_db: sqlite3.Connection) -> None:
     assert notes[("gold", "onix")] == "Échange contre Chétiflor"
     assert notes[("silver", "sandshrew")] == "700 jetons"
     # Lugia est dans sa salle (PokéAPI le range au 2e sous-sol), à 70 dans Or et 40 dans Argent.
-    lugia = _encounters(preview_db, "p.identifier = 'lugia'")
+    lugia = _encounters(preview_db, "v.version_group_id = 3 AND p.identifier = 'lugia'")
     assert {(row[0], row[1], row[4]) for row in lugia} == {
         ("gold", "whirl-islands/b3f", 70),
         ("silver", "whirl-islands/b3f", 40),
@@ -172,7 +174,7 @@ def test_items_and_areas_absent_from_pokeapi(preview_db: sqlite3.Connection) -> 
     assert item == (100001, "ADN Berzerk", "held-items", "Booste l'attaque mais rend confus.")
     hidden = preview_db.execute(
         """SELECT m.identifier FROM map_object o JOIN map m ON m.id = o.map_id
-           WHERE o.item_id = 100001 AND o.kind = 'hidden_item'"""
+           WHERE m.version_group_id = 3 AND o.item_id = 100001 AND o.kind = 'hidden_item'"""
     ).fetchall()
     assert hidden == [("cerulean-city",)]
     areas = dict(preview_db.execute("SELECT identifier, name_fr FROM location_area WHERE id >= 100000"))

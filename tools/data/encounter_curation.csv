@@ -1,4 +1,25 @@
 versions,location_area,pokemon,method,action,value
+crystal,goldenrod-city/game-corner,abra,gift,note,100 jetons
+crystal,goldenrod-city/game-corner,cubone,gift,note,800 jetons
+crystal,goldenrod-city/game-corner,wobbuffet,gift,note,1500 jetons
+crystal,celadon-city/prize-corner,pikachu,gift,note,2222 jetons
+crystal,celadon-city/prize-corner,porygon,gift,note,5555 jetons
+crystal,celadon-city/prize-corner,larvitar,gift,note,8888 jetons
+crystal,goldenrod-city/department-store-5f,machop,npc-trade,trade_for,abra
+crystal,blackthorn-city,dodrio,npc-trade,trade_for,dragonair
+crystal,blackthorn-city,dodrio,npc-trade,note,Demande un Draco femelle
+crystal,pewter-city,xatu,npc-trade,trade_for,haunter
+crystal,kanto-power-plant,magneton,npc-trade,trade_for,dugtrio
+crystal,bell-tower/1f,suicune,static,note,Rencontre à la Tour Ferraille après avoir obtenu le Glas Transparent
+crystal,dragons-den,dratini,gift,note,Donné par le maître du Sanctuaire du Dragon ; connaît Vitesse Extrême si toutes les réponses étaient correctes
+crystal,johto-route-34,pichu,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,cleffa,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,igglybuff,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,tyrogue,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,smoochum,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,elekid,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,johto-route-34,magby,gift-egg,note,Œuf offert à la Pension (un seul au hasard parmi sept espèces ; peut être chromatique)
+crystal,ilex-forest,celebi,static,note,Événement de la GS Ball (distribution spéciale ou version Console Virtuelle)
 red|blue|yellow,kanto-route-3/pokemon-center,magikarp,gift,exclude,Doublon : le marchand de Magicarpe se trouve au Centre Pokémon de la Route 4
 red|blue,pallet-town,bulbasaur,gift,note,Pokémon de départ (un seul au choix parmi les trois)
 red|blue,pallet-town,charmander,gift,note,Pokémon de départ (un seul au choix parmi les trois)
@@ -53,14 +74,14 @@ yellow,kanto-route-18,parasect,npc-trade,trade_for,tangela
 yellow,cinnabar-island/cinnabar-lab,rhydon,npc-trade,trade_for,golduck
 yellow,cinnabar-island/cinnabar-lab,dewgong,npc-trade,trade_for,growlithe
 yellow,cinnabar-island/cinnabar-lab,muk,npc-trade,trade_for,kangaskhan
-gold|silver,new-bark-town,chikorita,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
-gold|silver,new-bark-town,cyndaquil,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
-gold|silver,new-bark-town,totodile,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
-gold|silver,violet-city,togepi,gift-egg,note,Œuf Mystère confié par l'assistant du Prof. Orme au Centre Pokémon de Mauville
-gold|silver,goldenrod-city/north-gate,spearow,gift,note,Piafabec porteur d'une lettre à remettre à un garçon de la Route 31
-gold|silver,goldenrod-city/bills-house,eevee,gift,note,Donné par Léo une fois rentré chez lui
-gold|silver,mt-mortar/b1f,tyrogue,gift,note,Donné par le Karatéka une fois battu
-gold|silver,cianwood-city/manias-house,shuckle,gift,note,Confié par le Pokémaniac de la maison
+gold|silver|crystal,new-bark-town,chikorita,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
+gold|silver|crystal,new-bark-town,cyndaquil,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
+gold|silver|crystal,new-bark-town,totodile,gift,note,Pokémon de départ donné par le Prof. Orme (un seul au choix parmi les trois)
+gold|silver|crystal,violet-city,togepi,gift-egg,note,Œuf Mystère confié par l'assistant du Prof. Orme au Centre Pokémon de Mauville
+gold|silver|crystal,goldenrod-city/north-gate,spearow,gift,note,Piafabec porteur d'une lettre à remettre à un garçon de la Route 31
+gold|silver|crystal,goldenrod-city/bills-house,eevee,gift,note,Donné par Léo une fois rentré chez lui
+gold|silver|crystal,mt-mortar/b1f,tyrogue,gift,note,Donné par le Karatéka une fois battu
+gold|silver|crystal,cianwood-city/manias-house,shuckle,gift,note,Confié par le Pokémaniac de la maison
 gold|silver,goldenrod-city/game-corner,abra,gift,note,200 jetons
 gold,goldenrod-city/game-corner,ekans,gift,note,700 jetons
 silver,goldenrod-city/game-corner,sandshrew,gift,note,700 jetons
@@ -68,19 +89,19 @@ gold|silver,goldenrod-city/game-corner,dratini,gift,note,2100 jetons
 gold|silver,celadon-city/prize-corner,mr-mime,gift,note,3333 jetons
 gold|silver,celadon-city/prize-corner,eevee,gift,note,6666 jetons
 gold|silver,celadon-city/prize-corner,porygon,gift,note,9999 jetons
-gold|silver,violet-city/southwest-house,onix,npc-trade,trade_for,bellsprout
+gold|silver|crystal,violet-city/southwest-house,onix,npc-trade,trade_for,bellsprout
 gold|silver,goldenrod-city/department-store-5f,machop,npc-trade,trade_for,drowzee
-gold|silver,olivine-city,voltorb,npc-trade,trade_for,krabby
+gold|silver|crystal,olivine-city,voltorb,npc-trade,trade_for,krabby
 gold|silver,blackthorn-city,rhydon,npc-trade,trade_for,dragonair
 gold|silver,pewter-city,rapidash,npc-trade,trade_for,gloom
-gold|silver,kanto-route-14,aerodactyl,npc-trade,trade_for,chansey
-gold|silver,johto-route-36,sudowoodo,squirt-bottle,note,Bloque la route : arrosez-le avec la Carapuce à O
-gold|silver,vermilion-city,snorlax,pokeflute,note,Dort devant la Cave Taupiqueur : réveillez-le avec la Pokéflûte de la radio
-gold|silver,team-rocket-hq,voltorb,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
-gold|silver,team-rocket-hq,geodude,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
-gold|silver,team-rocket-hq,koffing,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
-gold|silver,team-rocket-hq,electrode,static,note,Alimente le générateur du 2e sous-sol
-gold|silver,whirl-islands/b2f,lugia,static,move_to,whirl-islands/b3f
-gold|silver,roaming-johto/area,raikou,roaming-grass,note,Erre d'une route de Johto à l'autre
-gold|silver,roaming-johto/area,entei,roaming-grass,note,Erre d'une route de Johto à l'autre
+gold|silver|crystal,kanto-route-14,aerodactyl,npc-trade,trade_for,chansey
+gold|silver|crystal,johto-route-36,sudowoodo,squirt-bottle,note,Bloque la route : arrosez-le avec la Carapuce à O
+gold|silver|crystal,vermilion-city,snorlax,pokeflute,note,Dort devant la Cave Taupiqueur : réveillez-le avec la Pokéflûte de la radio
+gold|silver|crystal,team-rocket-hq,voltorb,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
+gold|silver|crystal,team-rocket-hq,geodude,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
+gold|silver|crystal,team-rocket-hq,koffing,static,note,Piège du 1er sous-sol : surgit quand on marche sur une case piégée
+gold|silver|crystal,team-rocket-hq,electrode,static,note,Alimente le générateur du 2e sous-sol
+gold|silver|crystal,whirl-islands/b2f,lugia,static,move_to,whirl-islands/b3f
+gold|silver|crystal,roaming-johto/area,raikou,roaming-grass,note,Erre d'une route de Johto à l'autre
+gold|silver|crystal,roaming-johto/area,entei,roaming-grass,note,Erre d'une route de Johto à l'autre
 gold|silver,roaming-johto/area,suicune,roaming-grass,note,Erre d'une route de Johto à l'autre

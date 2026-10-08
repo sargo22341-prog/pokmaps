@@ -6,7 +6,7 @@ import pytest
 
 from pokemaps_data import sources
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import ALL_GAMES, GAMES, GOLD_SILVER
+from pokemaps_data.games import ALL_GAMES, CRYSTAL, GAMES, GOLD_SILVER
 from pokemaps_data.maps import GameMapData, build_maps
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
 from pokemaps_data.pokeapi import PokeApi
@@ -96,7 +96,12 @@ def in_progress_export(
 ) -> tuple[dict[str, GameMapData], Path]:
     """Cartes des jeux en cours d'intégration générées (lignes de la base par groupe de versions, dossier)."""
     output = tmp_path_factory.mktemp("in-progress-maps")
-    return build_maps(CACHE, output, games=(GOLD_SILVER,)), output
+    return build_maps(CACHE, output, games=(GOLD_SILVER, CRYSTAL)), output
+
+
+@pytest.fixture(scope="session")
+def crystal_repo(source_cache_ready: None) -> Gen2PretRepo:
+    return Gen2PretRepo(pret_dir(CACHE, CRYSTAL.pret_repo), CRYSTAL.pret_versions)
 
 
 @pytest.fixture(scope="session")

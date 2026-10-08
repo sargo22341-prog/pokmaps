@@ -20,6 +20,7 @@ enum class CharacterRole {
     DAYCARE,
     NAME_RATER,
     MOVE_DELETER,
+    MOVE_TUTOR,
     GROOMING,
     CABLE_CLUB;
 
@@ -42,7 +43,7 @@ enum class CharacterRole {
             OfferKind.SALE -> SHOP
             OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON, OfferKind.GIFT_EGG -> GIFT
             OfferKind.TRADE, OfferKind.EXCHANGE -> TRADE
-            OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON -> PRIZES
+            OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON, OfferKind.POINT_PRIZE -> PRIZES
             OfferKind.COIN_SALE, OfferKind.COIN_GIFT -> COINS
             OfferKind.FOSSIL -> FOSSIL
             OfferKind.FRUIT_TREE -> FRUIT_TREE
@@ -52,6 +53,7 @@ enum class CharacterRole {
             OfferKind.DAYCARE -> DAYCARE
             OfferKind.MOVE_DELETER -> MOVE_DELETER
             OfferKind.GROOMING -> GROOMING
+            OfferKind.MOVE_TUTOR -> MOVE_TUTOR
         }
     }
 }

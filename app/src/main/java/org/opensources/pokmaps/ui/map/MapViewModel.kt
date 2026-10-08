@@ -8,6 +8,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -65,6 +66,9 @@ class MapViewModel @Inject constructor(
      * ([onScreenShown]) à l'ancienne position, et le recentrage (« Voir sur la carte ») perdu.
      */
     private val screenVisible = MutableStateFlow(false)
+
+    /** Catalogue prêt à recevoir une demande, après application du dernier jeu choisi. */
+    private val readyCatalog = MutableStateFlow<GameMaps?>(null)
 
     init {
         viewModelScope.launch { followCatalog() }
@@ -136,7 +140,8 @@ class MapViewModel @Inject constructor(
     }
 
     private suspend fun followCatalog() {
-        observeCatalog().catch { session.update { it.copy(failed = true) } }.collect { gameMaps ->
+        observeCatalog().catch { session.update { it.copy(failed = true) } }.collectLatest { gameMaps ->
+            readyCatalog.value = null
             awaitScreen()
             val previous = session.loaded.value
             // Changement de version : on reste là où on est si la carte existe aussi dans le nouveau jeu
@@ -161,6 +166,7 @@ class MapViewModel @Inject constructor(
                 current != null -> highlight(current.pokemonId, current.name, move = !stayed)
                 !stayed -> gameMaps.catalog.defaultWorld?.let { navigation.open(it.id) }
             }
+            readyCatalog.value = gameMaps
         }
     }
 
@@ -168,7 +174,7 @@ class MapViewModel @Inject constructor(
     private suspend fun followRequests() {
         mapRequests.pending.filterNotNull().collect { request ->
             awaitScreen()
-            val gameMaps = withTimeoutOrNull(CATALOG_WAIT_MS) { session.loaded.filterNotNull().first() }
+            val gameMaps = withTimeoutOrNull(CATALOG_WAIT_MS) { readyCatalog.filterNotNull().first() }
             if (gameMaps == null) {
                 session.update { it.copy(failed = true) }
             } else {

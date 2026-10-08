@@ -187,12 +187,12 @@ def _wildmons(repo: Gen2PretRepo, relative: str, kind: str, defined: frozenset[s
     result: dict[str, list[WildSlot]] = {}
     current: str | None = None
     for line in conditional_lines(repo.path(relative), defined):
-        if line.startswith(f"def_{kind}_wildmons "):
+        if line.startswith(f"def_{kind}_wildmons ") or line.startswith("map_id "):
             current = line.split()[1]
             if current in result:
                 raise ValueError(f"{relative} : {current} a deux tables")
             result[current] = []
-        elif line == f"end_{kind}_wildmons":
+        elif line in (f"end_{kind}_wildmons", "db -1"):
             current = None
         elif current and line.startswith("db ") and "percent" not in line:
             level, species = macro_args(line, "db")
@@ -361,7 +361,8 @@ def _tree_sets(repo: Gen2PretRepo, lines: list[str]) -> dict[str, list[tuple[Wil
     consts = [
         const for const in repo.consts("constants/pokemon_data_constants.asm") if const.startswith("TREEMON_SET_")
     ]
-    pointers = [macro_args(line, "dw")[0] for line in lines if line.startswith("dw ")]
+    end = next((i for i, line in enumerate(lines) if line == "assert_table_length NUM_TREEMON_SETS"), len(lines))
+    pointers = [macro_args(line, "dw")[0] for line in lines[:end] if line.startswith("dw ")]
     if len(pointers) != len(consts):
         raise ValueError(f"{repo.root.name} : {len(pointers)} tables d'arbres pour {len(consts)} ensembles")
     tables: dict[str, list[tuple[WildSlot, ...]]] = {}

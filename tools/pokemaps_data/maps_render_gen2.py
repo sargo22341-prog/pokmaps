@@ -38,7 +38,7 @@ TILE_PALETTES = ("GRAY", "RED", "GREEN", "WATER", "YELLOW", "BROWN", "ROOF", "TE
 ROOF_PALETTE = TILE_PALETTES.index("ROOF")
 # Tilesets dont les tuiles de toit dépendent du groupe de la carte, et place de ces tuiles (LoadTilesetGFX,
 # LoadMapGroupRoof : ROOF_LENGTH tuiles à partir de la tuile $0a).
-ROOF_TILESETS = frozenset({"TILESET_JOHTO", "TILESET_JOHTO_MODERN"})
+ROOF_TILESETS = frozenset({"TILESET_JOHTO", "TILESET_JOHTO_MODERN", "TILESET_BATTLE_TOWER_OUTSIDE"})
 ROOF_FIRST_TILE, ROOF_LENGTH = 0x0A, 9
 # Tuile « espace » de la police, chargée à la fin de la VRAM des tuiles (LoadFrame) : entièrement de la couleur 0.
 SPACE_TILE = 0x7F
@@ -62,7 +62,7 @@ def _color(red: int, green: int, blue: int) -> Color:
 
 
 class Gen2Renderer(MapRenderer):
-    """Dessine les cartes d'Or et d'Argent avec les tilesets et les palettes Game Boy Color de leur désassemblage."""
+    """Dessine les cartes d'Or, d'Argent et de Cristal avec leurs tilesets et palettes Game Boy Color."""
 
     def __init__(self, game_maps: GameMaps, repo: Gen2PretRepo) -> None:
         super().__init__(game_maps)
@@ -191,13 +191,16 @@ class Gen2Renderer(MapRenderer):
         return (position % 4) * 8, (position // 4) * 8
 
     def _tile(
-        self, tiles: Image.Image, tile_palettes: tuple[str, ...], palettes: tuple[Palette, ...], tile: int
+        self, tiles: Image.Image, tile_palettes: tuple[str | None, ...], palettes: tuple[Palette, ...], tile: int
     ) -> Image.Image | None:
         """Tuile 8 × 8 en couleurs ; la tuile espace de la police est de la couleur 0 de la palette TEXT. None pour
         une autre tuile hors du tileset."""
         image = Image.new("P", (8, 8))
-        if tile < len(tile_palettes):
-            paint_tile(image, tiles, tile, 0)
+        if tile < len(tile_palettes) and tile_palettes[tile] is not None:
+            # La seconde banque de Cristal suit les 96 premières tuiles dans l'image source.
+            source_tile = tile - 32 if tile >= 0x80 else tile
+            if not paint_tile(image, tiles, source_tile, 0):
+                return None
             palette = palettes[TILE_PALETTES.index(tile_palettes[tile])]
         elif tile == SPACE_TILE:
             palette = palettes[TILE_PALETTES.index("TEXT")]

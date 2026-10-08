@@ -1,4 +1,7 @@
 family,text,name_fr
+gold-silver-crystal,GOLDENRODCITY_MOVETUTOR,Tuteur de capacités
+gold-silver-crystal,RADIOTOWER2F_BUENA,Buena
+gold-silver-crystal,DRAGONSHRINE_ELDER1,Maître du Sanctuaire du Dragon
 red-blue-yellow,TEXT_NAMERATERSHOUSE_NAME_RATER,Expert en surnoms
 red-blue-yellow,TEXT_BILLSHOUSE_BILL_SS_TICKET,Léo
 gold-silver-crystal,BURNEDTOWERB1F_RAIKOU1,Raikou
@@ -29,3 +32,5 @@ gold-silver-crystal,ROUTE30_MONSTER1,Rattata
 gold-silver-crystal,ROUTE30_MONSTER2,Rattata
 gold-silver-crystal,TEAMROCKETBASEB3F_MOLTRES,Cornèbre
 gold-silver-crystal,CINNABARISLAND_BLUE,Blue
+gold-silver-crystal,RADIOTOWER2F_RECEPTIONIST,Récompenses de Buena
+gold-silver-crystal,BATTLETOWER1F_RECEPTIONIST,Réceptionniste de la Tour de Combat

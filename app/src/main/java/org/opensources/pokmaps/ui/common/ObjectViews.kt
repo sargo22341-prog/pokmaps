@@ -185,6 +185,6 @@ private fun offerNames(
 private val GIFTS = setOf(OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON, OfferKind.GIFT_EGG, OfferKind.COIN_GIFT)
 private val SALES = setOf(OfferKind.SALE, OfferKind.COIN_SALE)
 private val TRADES = setOf(OfferKind.TRADE, OfferKind.EXCHANGE)
-private val PRIZES = setOf(OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON)
+private val PRIZES = setOf(OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON, OfferKind.POINT_PRIZE)
 private val FOSSILS = setOf(OfferKind.FOSSIL)
 private val TREES = setOf(OfferKind.FRUIT_TREE)

@@ -5,7 +5,7 @@
   (cf. la politique d'usage équitable : https://pokeapi.co/docs/v2#fairuse).
 - PokeAPI/sprites : sprites animés de Noir et Blanc (normaux et chromatiques), seul style de sprite des Pokémon.
 - msikma/pokesprite : icônes d'objets.
-- pret/pokered, pret/pokeyellow, pret/pokegold : désassemblages des jeux, pour générer les cartes et lire les
+- pret/pokered, pret/pokeyellow, pret/pokegold, pret/pokecrystal : désassemblages des jeux, pour les cartes et les
   dresseurs, les effets des attaques et les objets tenus.
 """
 
@@ -46,6 +46,7 @@ PRET_COMMITS = {
     "pokered": "d2704a63c26f9ba046ade877445216b3de0519a4",
     "pokeyellow": "e89ead154b9968aa50eed9328ff2b38b6c194382",
     "pokegold": "ef0201d8daf47e8b3ea1518eacf890f37d4cd5e8",
+    "pokecrystal": "3bc8daa4173e96a7f4011dad3922eb6fa5dad5c6",
 }
 PRET_URL = "https://github.com/pret/{repo}.git"
 
@@ -192,7 +193,7 @@ def fetch_pret(cache: Path, repo: str) -> Path:
     target.mkdir(parents=True)
 
     def git(*args: str) -> None:
-        subprocess.run(["git", "-C", str(target), *args], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(target), *args], check=True, capture_output=True, timeout=120)
 
     git("init", "-q")
     git("fetch", "-q", "--depth", "1", PRET_URL.format(repo=repo), commit)

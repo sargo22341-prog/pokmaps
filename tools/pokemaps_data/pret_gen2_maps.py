@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 from .pret_gen2_objects import ObjectEvent, classify_object, scene_opponents
 from .pret_gen2_scripts import ScriptFile, check_unconditional
 from .pret_models import Connection, MapObject, PretMap, Sign, Warp
-from .pret_source import annotated_lines, macro_args, parse_int, source_lines
+from .pret_source import conditional_annotated_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
     from .pret_gen2 import Gen2PretRepo, MapHeader
@@ -78,10 +78,11 @@ def read_maps(repo: Gen2PretRepo) -> dict[str, PretMap]:
 def _script_warps(repo: Gen2PretRepo, script_file: ScriptFile) -> list[str]:
     """Cartes où les scripts de la carte envoient le joueur (« warp CARTE, x, y »)."""
     targets = {
-        macro_args(line, _SCRIPT_WARP)[0]
+        macro_args(line, command)[position]
         for block in script_file.blocks.values()
         for line in block.lines
-        if line.startswith(f"{_SCRIPT_WARP} ")
+        for command, position in ((_SCRIPT_WARP, 0), ("warpfacing", 1))
+        if line.startswith(f"{command} ")
     }
     targets.discard(_NO_MAP)
     if unknown := sorted(targets - repo.headers.keys()):
@@ -152,7 +153,7 @@ def _events(
 
 def _event_lines(script_file: ScriptFile, label: str) -> list[tuple[str, str]]:
     """Lignes du bloc <Carte>_MapEvents, avec leur commentaire (« inaccessible » pour certains warps)."""
-    lines = annotated_lines(script_file.path)
+    lines = conditional_annotated_lines(script_file.path, script_file.defined)
     start = next((i for i, (code, _) in enumerate(lines) if code == f"{label}_MapEvents:"), None)
     if start is None:
         raise ValueError(f"{script_file.path.name} : label {label}_MapEvents introuvable")
