@@ -15,7 +15,7 @@ Réglages, « Captures comptées » fait compter un Pokémon capturé pour le je
 les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
 rien.
 
-Or et Argent proposent les cartes de Johto et de Kanto : les boutons de région permettent de passer de l'une à
+Or, Argent et Cristal proposent les cartes de Johto et de Kanto : les boutons de région permettent de passer de l'une à
 l'autre. Les filtres Matin, Jour et Nuit de la carte sont tous activés par défaut ; ils filtrent les marqueurs et
 la liste du lieu sélectionné. Chaque rencontre précise aussi ses conditions (heure, essaim, concours…). Les
 cartes conservent les couleurs de jour du jeu, indépendamment de ce filtre. Coup d'Boule et Éclate-Roc placent les
@@ -37,6 +37,12 @@ Buena affichent leur prix en points de la Carte Bleue.
 
 Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 
+| Carte de Johto dans Pokémon Cristal |
+|---|
+| ![Bourg Geon sur la carte de Johto, dans Pokémon Cristal](docs/screenshots/johto.webp) |
+
+Pokémon Cristal, sur le même émulateur Android 17 (Pixel 9 Pro XL).
+
 ## Structure
 
 | Dossier | Contenu |
@@ -54,7 +60,7 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 - `database/pokedex.db` : la base SQLite de l'application ;
 - `sprites/` : sprites des Pokémon (un seul style partout, animé ou fixe, normal ou chromatique) et icônes
   d'objets ;
-- `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (carte du monde de Kanto et cartes intérieures),
+- `maps/` : cartes pixel-art de chaque jeu découpées en tuiles (cartes du monde de Kanto et de Johto et lieux à part),
   et sprites des PNJ.
 
 Les jeux en cours d'intégration (`GAMES_IN_PROGRESS` dans `tools/pokemaps_data/games.py`, actuellement vide)
@@ -108,6 +114,8 @@ Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.p
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
 qui totalisent 100 % pour chaque moment de la journée, chaque Pokémon obtenable par rencontre, évolution ou
 reproduction…).
+
+### Ajouter un jeu
 
 Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajouter un jeu demande :
 
@@ -226,6 +234,15 @@ notes différentes de celles du tag, elles sont conservées pour la release suiv
   (téléchargeable dans les artefacts du workflow pendant 14 jours).
 - **Release** (`.github/workflows/release.yml`), à chaque tag `vX.Y.Z` : APK release signé publié dans
   [GitHub Releases](../../releases), avec son empreinte SHA-256.
+
+Les deux workflows réutilisent le cache `tools/.cache` : CSV PokéAPI, sprites, sources de pokered,
+pokeyellow, pokegold et pokecrystal, et conversions WebP. La clé dépend des commits épinglés dans
+`sources.py` et du convertisseur `webp.py`. Le résumé de chaque exécution indique la durée de génération
+des données et la taille exacte de l'APK produit (debug en CI, signé en release).
+
+Mesure locale du 8 octobre 2026, avec les six versions et les sources déjà en cache : génération et validation
+en 50,7 s ; APK debug de 62 760 138 octets (59,85 Mio). Les cartes représentent 5 903 Kio pour 5 732 tuiles.
+Ces mesures Windows ne prédisent pas la durée d'un premier téléchargement ni la taille de l'APK release.
 
 ### Publier une version
 

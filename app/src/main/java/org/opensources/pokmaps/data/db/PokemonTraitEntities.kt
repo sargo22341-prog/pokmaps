@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// Données des générations suivantes (objets tenus, œufs, talents), calquées sur tools/pokemaps_data/schema.sql
-// comme Entities.kt. Elles restent vides tant que seuls des jeux de 1re génération sont générés.
+// Objets tenus et œufs dès la 2e génération, talents dès la 3e : ces entités suivent
+// tools/pokemaps_data/schema.sql comme Entities.kt.
 
 @Entity(
     tableName = "pokemon_item",

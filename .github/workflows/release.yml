@@ -110,6 +110,8 @@ jobs:
         run: |
           apk="pokemaps-v${{ steps.version.outputs.name }}.apk"
           cp app/build/outputs/apk/release/app-release.apk "$apk"
+          size=$(stat --format=%s "$apk")
+          echo "APK release signé : ${size} octets" >> "$GITHUB_STEP_SUMMARY"
           sha256sum "$apk" > "$apk.sha256"
           apksigner="$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -n 1)"
           "$apksigner" verify --print-certs "$apk"

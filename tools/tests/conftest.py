@@ -70,7 +70,7 @@ def db(database: Path) -> Iterator[sqlite3.Connection]:
     connection.close()
 
 
-# --- Jeux en cours d'intégration (hors de GAMES, cf. games.GAMES_IN_PROGRESS) -------------------------
+# --- Données propres à Or/Argent et Cristal, isolées pour les tests de la 2e génération ---------------
 
 
 @pytest.fixture(scope="session")

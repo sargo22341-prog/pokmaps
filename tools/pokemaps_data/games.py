@@ -1,9 +1,10 @@
 """Jeux pris en charge par l'application.
 
-Ajouter un jeu revient à ajouter une entrée ici : toutes les données (Pokémon, attaques, rencontres,
-lieux…) sont ensuite extraites de PokéAPI pour ce groupe de versions. Les identifiants sont ceux de
-PokéAPI (table version_groups). Les cartes sont générées depuis le désassemblage pret du jeu, avec le
-lecteur de son format (`PretFormat`).
+Chaque entrée choisit les versions PokéAPI, le format pret, les régions et les jaquettes du jeu.
+PokéAPI fournit les données Pokémon et les lieux ; les sources pret complètent les mécaniques et
+offres du jeu, génèrent ses cartes et fournissent les rencontres aléatoires de la 2e génération.
+Les identifiants des groupes de versions sont ceux de PokéAPI (table version_groups).
+Un nouveau jeu reste dans GAMES_IN_PROGRESS jusqu'à sa validation complète (voir README.md).
 """
 
 from __future__ import annotations

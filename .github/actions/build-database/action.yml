@@ -15,6 +15,7 @@ runs:
       with:
         path: tools/.cache
         # Les images encodées en WebP (webp.py) sont gardées dans ce cache, à côté de leurs sources.
+        # sources.py épingle aussi pokegold et pokecrystal : leur mise à jour invalide ce cache.
         key: data-sources-${{ hashFiles('tools/pokemaps_data/sources.py', 'tools/pokemaps_data/webp.py') }}
 
     - name: Installer les dépendances
@@ -30,7 +31,10 @@ runs:
 
     - name: Générer la base et les images
       shell: bash
-      run: python tools/build_data.py
+      run: |
+        SECONDS=0
+        python tools/build_data.py
+        echo "Génération des données (cache restauré selon disponibilité) : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
 
     - name: Tests du pipeline
       shell: bash

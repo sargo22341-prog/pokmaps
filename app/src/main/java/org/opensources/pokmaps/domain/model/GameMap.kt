@@ -1,7 +1,7 @@
 package org.opensources.pokmaps.domain.model
 
 /**
- * Carte affichable d'un jeu (carte du monde ou carte intérieure), découpée en tuiles dans les assets.
+ * Carte affichable d'un jeu (carte du monde d'une région ou lieu à part), découpée en tuiles dans les assets.
  * Les dimensions sont en pixels Game Boy, à la taille réelle du jeu (dernier niveau de zoom).
  */
 data class GameMap(
