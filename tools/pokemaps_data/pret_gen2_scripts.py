@@ -17,13 +17,20 @@ from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 
-from .pret_source import macro_args, source_lines
+from .pret_source import macro_args, parse_int, source_lines
 
 _LABEL = re.compile(r"^(\.?[A-Za-z_]\w*):{1,2}$")
-# Commandes après lesquelles l'exécution ne continue pas dans le bloc suivant du fichier.
+_CONSTANT = re.compile(r"^DEF (\w+)\s+EQU\s+(\$[0-9A-Fa-f]+|\d+)$")
+# Commandes après lesquelles l'exécution ne continue pas dans le bloc suivant du fichier. fruittree et
+# describedecoration passent la main à un script du moteur (ScriptJump dans engine/overworld/scripting.asm) ;
+# itemball et hiddenitem sont des données lues par le moteur, pas des commandes.
 _TERMINATORS = frozenset(
     {
         "end",
+        "fruittree",
+        "describedecoration",
+        "itemball",
+        "hiddenitem",
         "sjump",
         "farsjump",
         "jumptext",
@@ -103,19 +110,34 @@ class ScriptFile:
 
         `checkver` est la valeur de la commande checkver dans la version lue (vrai en Argent), ou None pour garder
         les deux branches."""
+        return [line for block in self.reachable_blocks(label, checkver) for line in block]
+
+    def reachable_blocks(self, label: str, checkver: bool | None) -> list[list[str]]:
+        """Lignes exécutables depuis `label`, bloc par bloc dans l'ordre de découverte (cf. `reachable_lines`).
+
+        Un bloc regroupe ce que fait une branche : choisir un lot, le donner, puis prendre les jetons."""
         if label not in self.blocks:
             raise ValueError(f"{self.path.name} : label {label} introuvable")
-        result: list[str] = []
+        result: list[list[str]] = []
         seen = {label}
         queue = deque([label])
         while queue:
             name = queue.popleft()
             lines, targets = self._run(name, checkver)
-            result.extend(lines)
+            result.append(lines)
             for target in targets:
                 if target not in seen:
                     seen.add(target)
                     queue.append(target)
+        return result
+
+    @cached_property
+    def constants(self) -> dict[str, int]:
+        """Constantes numériques définies dans le fichier (« DEF GOLDENRODGAMECORNER_ABRA_COINS EQU 200 »)."""
+        result = {}
+        for line in source_lines(self.path):
+            if match := _CONSTANT.match(line):
+                result[match.group(1)] = parse_int(match.group(2))
         return result
 
     def _run(self, name: str, checkver: bool | None) -> tuple[list[str], list[str]]:

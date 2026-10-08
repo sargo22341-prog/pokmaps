@@ -160,13 +160,17 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
         OfferKind.SALE -> NpcOffer.Sale(offerItem(), price)
 
-        OfferKind.GIFT_POKEMON -> NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity)
+        OfferKind.GIFT_POKEMON ->
+            NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity, heldItem())
+
+        OfferKind.GIFT_EGG -> NpcOffer.GiftEgg(required(pokemonId), required(pokemonName), required(quantity))
 
         OfferKind.TRADE -> NpcOffer.Trade(
             required(pokemonId),
             required(pokemonName),
             required(wantedPokemonId),
-            required(wantedPokemonName)
+            required(wantedPokemonName),
+            heldItem()
         )
 
         OfferKind.EXCHANGE -> NpcOffer.Exchange(offerItem(), wantedItem())
@@ -183,6 +187,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         OfferKind.FOSSIL ->
             NpcOffer.FossilRevival(offerItem(), required(pokemonId), required(pokemonName), required(quantity))
 
+        OfferKind.FRUIT_TREE -> NpcOffer.FruitTree(offerItem())
+
         OfferKind.HEAL -> NpcOffer.Service(CharacterService.HEAL)
 
         OfferKind.CABLE_CLUB -> NpcOffer.Service(CharacterService.CABLE_CLUB)
@@ -190,10 +196,17 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         OfferKind.NAME_RATER -> NpcOffer.Service(CharacterService.NAME_RATER)
 
         OfferKind.DAYCARE -> NpcOffer.Service(CharacterService.DAYCARE)
+
+        OfferKind.MOVE_DELETER -> NpcOffer.Service(CharacterService.MOVE_DELETER)
+
+        OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price)
     }
 
     private fun NpcOfferRow.offerItem() =
         OfferItem(required(itemId), required(itemIdentifier), required(itemName), itemHasSprite == true)
+
+    /** Objet que tient le Pokémon donné ou reçu lors d'un échange, s'il en tient un. */
+    private fun NpcOfferRow.heldItem(): OfferItem? = itemId?.let { offerItem() }
 
     private fun NpcOfferRow.wantedItem() = OfferItem(
         required(wantedItemId),

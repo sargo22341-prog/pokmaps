@@ -180,7 +180,7 @@ def test_exported_maps(gold_silver_export: tuple[GameMapData, Path]) -> None:
     assert (output / "sprites/youngster.webp").is_file()
     legendaries = {(row.pokemon, row.level, row.version) for row in data.objects if row.kind == "pokemon"}
     assert {("ho-oh", 40, "gold"), ("ho-oh", 70, "silver"), ("snorlax", 50, None)} <= legendaries
-    joey = next(row for row in data.objects if row.text == "TrainerYoungsterJoey")
+    joey = next(row for row in data.objects if row.key == "ROUTE30_YOUNGSTER2")
     assert (joey.trainer_class, joey.party) == ("youngster", [("rattata", 4, ("tackle", "tail-whip"))])
     # Le warp -1 de l'ascenseur arrive au warp du Centre commercial qui y mène.
     elevator = [row for row in data.warps if row.map_const == "CELADON_DEPT_STORE_ELEVATOR"]

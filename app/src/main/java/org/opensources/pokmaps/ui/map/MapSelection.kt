@@ -71,7 +71,8 @@ internal class MapSelection(
             MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> showItem(obj)
 
             MapObjectKind.TRAINER, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT, MapObjectKind.NPC_POKEMON,
-            MapObjectKind.POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR -> showCharacter(obj)
+            MapObjectKind.POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR,
+            MapObjectKind.HEAL_SPOT -> showCharacter(obj)
         }
     }
 

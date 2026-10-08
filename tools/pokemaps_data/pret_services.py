@@ -8,6 +8,7 @@ des lots. Les lots diffèrent entre Rouge et Bleu : ils sont lus pour chaque ver
 from __future__ import annotations
 
 import re
+from dataclasses import replace
 from itertools import pairwise
 from typing import TYPE_CHECKING
 
@@ -28,9 +29,11 @@ SERVICE_MARKERS: tuple[tuple[str, str], ...] = (
 FOSSIL_REVIVAL = "farcall GiveFossilToCinnabarLab"
 _COIN_GIFT = re.compile(r"^SetEvent EVENT_GOT_(\d+)_COINS(?:_\d+)?$")
 
-# Installations (panneaux) : macro de leur texte -> type d'installation.
+# Installations (panneaux) : macro de leur texte -> type d'installation. Le lit ou la machine de soins (heal_spot)
+# n'existe qu'en 2e génération (labo du Prof. Orme, cabines du M/S Aquaria).
 VENDING_MACHINE = "vending_machine"
 PRIZE_VENDOR = "prize_vendor"
+HEAL_SPOT = "heal_spot"
 FACILITY_MACROS = {"script_vending_machine": VENDING_MACHINE, "script_prize_vendor": PRIZE_VENDOR}
 
 
@@ -111,20 +114,21 @@ def prize_offers(repo: PretRepo, window: int, versions: tuple[tuple[str, str], .
     """Lots du comptoir `window` (0 à 2) du Casino, avec leur prix en jetons et le niveau des Pokémon.
 
     Un lot propre à une version (ex. Insécateur dans Rouge) porte cette version ; un lot commun n'en a pas."""
-    by_version = {version: _prizes(repo, window, frozenset({symbol})) for version, symbol in versions}
-    all_prizes = list(dict.fromkeys(prize for prizes in by_version.values() for prize in prizes))
-    offers = []
-    for prize in all_prizes:
-        present = [version for version, prizes in by_version.items() if prize in prizes]
-        if len(present) == len(versions):
-            offers.append(prize)
+    return version_offers({version: _prizes(repo, window, frozenset({symbol})) for version, symbol in versions})
+
+
+def version_offers(by_version: dict[str, list[NpcOffer]]) -> list[NpcOffer]:
+    """Offres de chaque version du jeu réunies : une offre de toutes les versions n'en porte aucune, une offre
+    propre à certaines versions est répétée pour chacune d'elles. L'ordre est celui de la première apparition."""
+    all_offers = list(dict.fromkeys(offer for offers in by_version.values() for offer in offers))
+    result = []
+    for offer in all_offers:
+        present = [version for version, offers in by_version.items() if offer in offers]
+        if len(present) == len(by_version):
+            result.append(offer)
         else:
-            offers += [_with_version(prize, version) for version in present]
-    return offers
-
-
-def _with_version(offer: NpcOffer, version: str) -> NpcOffer:
-    return NpcOffer(offer.kind, offer.item, offer.pokemon, offer.quantity, offer.price, version=version)
+            result += [replace(offer, version=version) for version in present]
+    return result
 
 
 def _prizes(repo: PretRepo, window: int, defined: frozenset[str]) -> list[NpcOffer]:

@@ -63,10 +63,18 @@ def classify_object(
     `opponents` donne les combats de dresseur que les scripts de scène lancent contre chaque objet."""
     if event.sprite not in repo.sprites:
         raise ValueError(f"{script_file.path.name} : sprite sans image {event.sprite} ({event.script})")
-    base = MapObject(
-        event.x, event.y, "npc", event.sprite, text=event.script, times=event.times, event_flag=event.event_flag
-    )
     own_script = script_file.has_label(event.script)
+    base = MapObject(
+        event.x,
+        event.y,
+        "npc",
+        event.sprite,
+        text=event.script,
+        times=event.times,
+        event_flag=event.event_flag,
+        const=event.const,
+        cry=_cry(script_file, event.script) if own_script else None,
+    )
     if event.object_type == _ITEMBALL:
         return [replace(base, kind="item", item=_itemball(script_file, event.script))]
     if event.object_type == _TRAINER and own_script:
@@ -84,6 +92,13 @@ def classify_object(
     if len(battles) == 1:
         return [_with_battle(repo, base, battles.pop())]
     return [replace(_with_battle(repo, base, battle), version=version) for version, battle in by_version.items()]
+
+
+def _cry(script_file: ScriptFile, script: str) -> str | None:
+    """Pokémon dont le script fait entendre le cri, s'il n'y en a qu'un."""
+    lines = script_file.reachable_lines(script, checkver=None)
+    cries = {macro_args(line, "cry")[0] for line in lines if line.startswith("cry ")}
+    return cries.pop() if len(cries) == 1 else None
 
 
 def scene_opponents(script_file: ScriptFile) -> dict[str, set[Battle]]:

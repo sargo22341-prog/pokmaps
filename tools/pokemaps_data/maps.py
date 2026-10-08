@@ -25,7 +25,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .games import GAMES, Game, complete_families
-from .maps_characters import CharacterCuration, ObjectRow, object_rows, read_character_curation
+from .maps_characters import ObjectRow, object_rows
+from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
 from .maps_render import MapRenderer, write_tiles
 from .maps_render_gen1 import Gen1Renderer
@@ -242,7 +243,8 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
         result[game.version_group] = export_game(game_maps, family_names, family_areas, curation, output_game)
     for family, version_groups in complete_families(games).items():
         _check_family_used(family, names.get(family, {}), areas.get(family, []), version_groups, result)
-    if set(GAMES) <= set(games) and (unused := curation.unused()):
+    families, repos = set(complete_families(games)), {game.pret_repo for game in games}
+    if unused := curation.unused(families, repos):
         raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")
     return result
 

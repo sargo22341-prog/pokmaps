@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from pokemaps_data.maps_characters import CharacterCuration, CuratedOffer, read_character_curation
+from pokemaps_data.maps_characters_data import CharacterCuration, CuratedOffer, read_character_curation
 from pokemaps_data.pret_models import NpcOffer
 from pokemaps_data.pret_source import conditional_lines
 
@@ -143,12 +143,30 @@ def test_conditional_lines(tmp_path: Path) -> None:
 
 def test_curation_rows_must_match_a_character() -> None:
     curation = read_character_curation()
-    assert "TEXT_PALLETTOWN_OAK" in curation.duplicates
+    assert curation.duplicates["TEXT_PALLETTOWN_OAK"] == "red-blue-yellow"
     stale = CharacterCuration(
-        frozenset({"TEXT_NOBODY"}),
-        [CuratedOffer(frozenset({"pokered"}), "TEXT_NOBODY_ELSE", NpcOffer("coin_sale", quantity=50, price=1000))],
+        {"TEXT_NOBODY": "red-blue-yellow", "NOBODY_2": "gold-silver-crystal"},
+        [
+            CuratedOffer(
+                frozenset({"pokered"}), "TEXT_NOBODY_ELSE", "add", NpcOffer("coin_sale", quantity=50, price=1000)
+            ),
+            CuratedOffer(frozenset({"pokegold"}), "NOBODY_3", "remove", NpcOffer("gift_item", item="NUGGET")),
+        ],
     )
-    assert stale.unused() == ["doublon:TEXT_NOBODY", "offre:pokered:TEXT_NOBODY_ELSE"]
+    assert stale.unused({"red-blue-yellow"}, {"pokered"}) == ["doublon:TEXT_NOBODY", "offre:pokered:TEXT_NOBODY_ELSE"]
+    # Les lignes d'une famille ou d'un dépôt qui n'est pas généré ne sont pas vérifiées.
+    assert stale.unused({"gold-silver-crystal"}, {"pokegold"}) == ["doublon:NOBODY_2", "retrait:pokegold:NOBODY_3"]
+
+
+def test_curation_removes_only_offers_read_in_the_script() -> None:
+    curation = CharacterCuration(
+        {}, [CuratedOffer(frozenset({"pokegold"}), "LANCE", "remove", NpcOffer("gift_item", item="HM_WHIRLPOOL"))]
+    )
+    read = [NpcOffer("gift_item", item="HM_WHIRLPOOL", quantity=1), NpcOffer("gift_item", item="NUGGET", quantity=1)]
+    assert curation.without_removed("pokegold", "LANCE", read) == [read[1]]
+    assert curation.without_removed("pokecrystal", "LANCE", read) == read
+    with pytest.raises(ValueError, match="ne fait pas l'offre à retirer"):
+        curation.without_removed("pokegold", "LANCE", [read[1]])
 
 
 def test_characters_are_people_objects_or_pokemon(db: sqlite3.Connection) -> None:

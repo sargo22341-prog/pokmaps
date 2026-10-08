@@ -1,12 +1,30 @@
-text,reason
-TEXT_PALLETTOWN_OAK,"Le Prof. Chen ne sort que pour arrêter le joueur devant les hautes herbes : on lui parle dans son labo"
-TEXT_OAKSLAB_OAK2,"Prof. Chen à l'entrée du labo pendant la scène d'arrivée : il donne le Pokémon de départ au fond du labo"
-TEXT_VIRIDIANCITY_OLD_MAN_SLEEPY,"Le vieil homme couché qui bloque la route est celui qui montre ensuite comment capturer un Pokémon"
-TEXT_VIRIDIANCITY_OLD_MAN2,"Jaune : le vieil homme pendant la démonstration de capture, puis au même endroit que dans Rouge et Bleu"
-TEXT_BLUESHOUSE_DAISY_WALKING,"La sœur du rival debout après la Ligue : c'est assise qu'elle donne la Carte"
-TEXT_BILLSHOUSE_BILL_POKEMON,"Léo changé en Pokémon : on lui parle ensuite redevenu humain, quand il donne le Passe Bateau"
-TEXT_BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON,"Léo à côté de sa machine après le don du Passe Bateau"
-TEXT_CERULEANCITY_GUARD1,"Le garde de la maison cambriolée, décalé d'une case après la visite chez Léo"
-TEXT_ROUTE22_RIVAL2,"Le rival au même endroit pour le second combat de la Route 22"
-TEXT_SAFFRONCITY_ROCKET9,"Rouge et Bleu : sbire jamais affiché, à côté du garde de Sylphe SARL"
-TEXT_POKEMONTOWER7F_MR_FUJI,"M. Fuji délivré en haut de la Tour Pokémon : il donne la Pokéflûte chez lui, dans le même village"
+family,text,reason
+red-blue-yellow,TEXT_PALLETTOWN_OAK,Le Prof. Chen ne sort que pour arrêter le joueur devant les hautes herbes : on lui parle dans son labo
+red-blue-yellow,TEXT_OAKSLAB_OAK2,Prof. Chen à l'entrée du labo pendant la scène d'arrivée : il donne le Pokémon de départ au fond du labo
+red-blue-yellow,TEXT_VIRIDIANCITY_OLD_MAN_SLEEPY,Le vieil homme couché qui bloque la route est celui qui montre ensuite comment capturer un Pokémon
+red-blue-yellow,TEXT_VIRIDIANCITY_OLD_MAN2,"Jaune : le vieil homme pendant la démonstration de capture, puis au même endroit que dans Rouge et Bleu"
+red-blue-yellow,TEXT_BLUESHOUSE_DAISY_WALKING,La sœur du rival debout après la Ligue : c'est assise qu'elle donne la Carte
+red-blue-yellow,TEXT_BILLSHOUSE_BILL_POKEMON,"Léo changé en Pokémon : on lui parle ensuite redevenu humain, quand il donne le Passe Bateau"
+red-blue-yellow,TEXT_BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON,Léo à côté de sa machine après le don du Passe Bateau
+red-blue-yellow,TEXT_CERULEANCITY_GUARD1,"Le garde de la maison cambriolée, décalé d'une case après la visite chez Léo"
+red-blue-yellow,TEXT_ROUTE22_RIVAL2,Le rival au même endroit pour le second combat de la Route 22
+red-blue-yellow,TEXT_SAFFRONCITY_ROCKET9,"Rouge et Bleu : sbire jamais affiché, à côté du garde de Sylphe SARL"
+red-blue-yellow,TEXT_POKEMONTOWER7F_MR_FUJI,"M. Fuji délivré en haut de la Tour Pokémon : il donne la Pokéflûte chez lui, dans le même village"
+gold-silver-crystal,KURTSHOUSE_KURT2,"Fargas à son établi pendant qu'il fabrique une Ball : on lui parle à l'entrée, où il donne les Balls"
+gold-silver-crystal,BURNEDTOWERB1F_RAIKOU2,"Raikou réveillé à la place de Raikou endormi, juste avant de s'enfuir"
+gold-silver-crystal,BURNEDTOWERB1F_ENTEI2,"Entei réveillé à la place d'Entei endormi, juste avant de s'enfuir"
+gold-silver-crystal,BURNEDTOWERB1F_SUICUNE2,"Suicune réveillé à la place de Suicune endormi, juste avant de s'enfuir"
+gold-silver-crystal,BURNEDTOWER1F_FIREBREATHER_DICK_ASHES,Le Cracheur de feu Dick une case plus haut à l'étape suivante du scénario : c'est le même dresseur
+gold-silver-crystal,TEAMROCKETBASEB2F_ELECTRODE4,Le premier Électrode dessiné une seconde fois plus loin : il disparaît avec celui que l'on combat
+gold-silver-crystal,TEAMROCKETBASEB2F_ELECTRODE5,Le deuxième Électrode dessiné une seconde fois plus loin : il disparaît avec celui que l'on combat
+gold-silver-crystal,TEAMROCKETBASEB2F_ELECTRODE6,Le troisième Électrode dessiné une seconde fois plus loin : il disparaît avec celui que l'on combat
+gold-silver-crystal,TRADECENTER_CHRIS2,"L'ami relié par le Câble Link, assis d'un côté ou de l'autre de la table selon qui a lancé la liaison"
+gold-silver-crystal,COLOSSEUM_CHRIS2,"L'ami relié par le Câble Link, d'un côté ou de l'autre de l'arène selon qui a lancé la liaison"
+gold-silver-crystal,TIMECAPSULE_CHRIS2,"L'ami relié par le Câble Link, d'un côté ou de l'autre de la table selon qui a lancé la liaison"
+gold-silver-crystal,BLACKTHORNCITY_SUPER_NERD2,L'Intello décalé d'une case quand il ne bloque plus l'Arène
+gold-silver-crystal,BLACKTHORNCITY_GRAMPS2,Le vieil homme décalé d'une case quand il ne bloque plus l'Antre du Dragon
+gold-silver-crystal,ECRUTEAKTINTOWERENTRANCE_SAGE2,Le Sage décalé d'une case quand il laisse passer vers la Tour Ferraille
+gold-silver-crystal,FASTSHIPB1F_SAILOR2,Le même marin une case à côté selon l'étape du voyage
+gold-silver-crystal,FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1,"La petite-fille retrouvée, près de son grand-père : on lui parle d'abord dans la cabine du capitaine"
+gold-silver-crystal,ROUTE35NATIONALPARKGATE_OFFICER2,"L'agent de la porte les jours sans Concours de capture : c'est le même que celui qui inscrit au Concours"
+gold-silver-crystal,ROUTE36NATIONALPARKGATE_OFFICER2,"L'agent de la porte les jours sans Concours de capture : c'est le même que celui qui remet les prix du Concours"

@@ -1,30 +1,29 @@
 """Personnages, dresseurs, objets et installations des cartes, avec ce qu'ils proposent.
 
 Les objets de carte viennent des object_event pret (personnages, dresseurs, objets, Pokémon fixes) et des
-bg_event qui rendent un service (distributeur, comptoir des lots) ; leurs offres viennent des scripts pret
-(`pret.py`, `pret_services.py`) et, quand le script ne se lit pas simplement, de tools/data/npc_offers.csv.
+bg_event qui rendent un service (distributeur, comptoir des lots, lit) ; leurs offres viennent des scripts pret
+(1re génération : `pret.py`, `pret_services.py` ; 2e : `pret_gen2_offers.py`) et, quand le script ne se lit pas
+simplement, de tools/data/npc_offers.csv (maps_characters_data).
 
 Un même personnage apparaît parfois plusieurs fois dans pret, un exemplaire par étape du scénario (le
 Prof. Chen qui vient chercher le joueur, puis dans son labo) : tools/data/npc_duplicates.csv écarte ces
 doublons pour qu'il n'en reste qu'un, celui avec qui l'on interagit vraiment.
-
-Les offres et installations sont lues pour la 1re génération. Celles de la 2e génération (dons, boutiques,
-échanges, arbres à baies, Casino…) le seront avec l'entrée d'Or et Argent dans games.GAMES : d'ici là, ses
-personnages sont exportés avec leur position, leur apparence et l'équipe des dresseurs, sans offre.
 """
 
 from __future__ import annotations
 
-import csv
 from dataclasses import dataclass, field
 
 from .games import Game
+from .maps_characters_data import CharacterCuration, character_key
 from .maps_layout import GameMaps, identifier
 from .pret import GYM_LEADERS, PretRepo
 from .pret_gen2 import Gen2PretRepo
+from .pret_gen2_offers import SERVICE_KINDS
 from .pret_identifiers import item_identifier, species_identifier
 from .pret_models import MapObject, NpcOffer, PretMap, Sign
 from .pret_services import (
+    HEAL_SPOT,
     PRIZE_VENDOR,
     VENDING_MACHINE,
     character_services,
@@ -32,20 +31,18 @@ from .pret_services import (
     prize_offers,
     vending_offers,
 )
-from .sources import DATA_DIR
 
 # Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
-
-# Offres relues à la main (npc_offers.csv) : un échange remplace le don du même objet lu dans le script. Les
-# Pokémon de départ (gift_pokemon) sont choisis par un script propre au labo du Prof. Chen, pas par GivePokemon.
-CURATED_KINDS = frozenset({"exchange", "coin_sale", "gift_pokemon"})
+HIDDEN_ITEM = "hidden_item"
+# Objets à ramasser : leur « script » est l'objet lui-même (itemball, hiddenitem), sans offre.
+_PICKED_UP = frozenset({"item", HIDDEN_ITEM})
 
 
 @dataclass
 class ObjectRow:
     map_const: str
-    kind: str  # npc, item, hidden_item, trainer, pokemon, vending_machine ou prize_vendor
+    kind: str  # npc, item, hidden_item, trainer, pokemon, vending_machine, prize_vendor ou heal_spot
     x: int
     y: int
     sprite: str | None
@@ -53,7 +50,9 @@ class ObjectRow:
     pokemon: str | None  # identifiant PokéAPI
     level: int | None
     trainer_class: str | None
-    text: str | None = None  # ce qui identifie le personnage dans pret (constante TEXT_… ou label de script)
+    # Ce qui désigne le personnage ou l'installation dans tools/data/ (maps_characters_data.character_key ; label du
+    # script pour une installation de la 2e génération).
+    key: str | None = None
     # Équipe d'un dresseur : (Pokémon, niveau, attaques), identifiants PokéAPI.
     party: list[tuple[str, int, tuple[str, ...]]] = field(default_factory=list)
     # Dons, ventes, échanges et services (identifiants PokéAPI).
@@ -61,127 +60,9 @@ class ObjectRow:
     # Version PokéAPI où l'objet est ainsi (Ho-Oh et Lugia n'ont pas le même niveau en Or et en Argent), None s'il
     # est le même dans toutes les versions du jeu.
     version: str | None = None
-
-
-# --- Données relues à la main ---------------------------------------------------
-
-
-# Apparence d'un personnage d'après son sprite (npc_names.csv) -> type de l'objet de carte : une personne, un objet
-# du décor qui parle ou donne quelque chose (Fossile, Poké Ball, rocher…), ou un Pokémon qui n'est pas à combattre.
-NPC_KINDS = {"person": "npc", "object": "npc_object", "pokemon": "npc_pokemon"}
-
-
-@dataclass(frozen=True)
-class CharacterNames:
-    """Noms affichés des dresseurs (par classe), des personnages (par sprite, ou par texte pour un personnage
-    unique dessiné avec un sprite commun : Léo a celui d'un Intello) et des installations (par type), et apparence
-    des personnages (par sprite)."""
-
-    trainers: dict[str, str]
-    characters: dict[str, str]
-    facilities: dict[str, str] = field(default_factory=dict)
-    by_text: dict[str, str] = field(default_factory=dict)
-    appearances: dict[str, str] = field(default_factory=dict)
-    # Famille de cartes de chaque personnage nommé par son texte (npc_text_names.csv).
-    text_families: dict[str, str] = field(default_factory=dict)
-
-    def trainer(self, trainer_class: str) -> str:
-        if trainer_class not in self.trainers:
-            raise ValueError(f"Classe de dresseur sans nom français : {trainer_class} (tools/data/trainer_classes.csv)")
-        return self.trainers[trainer_class]
-
-    def character(self, sprite: str | None) -> str:
-        if sprite not in self.characters:
-            raise ValueError(f"Personnage sans nom français : sprite {sprite} (tools/data/npc_names.csv)")
-        return self.characters[sprite]
-
-    def npc_kind(self, sprite: str | None) -> str:
-        """Type d'objet de carte d'un personnage d'après son apparence (npc, npc_object ou npc_pokemon)."""
-        appearance = self.appearances.get(sprite or "")
-        if appearance not in NPC_KINDS:
-            raise ValueError(f"Apparence inconnue pour le sprite {sprite} : {appearance} (tools/data/npc_names.csv)")
-        return NPC_KINDS[appearance]
-
-    def facility(self, kind: str) -> str:
-        if kind not in self.facilities:
-            raise ValueError(f"Installation sans nom français : {kind} (tools/data/facility_names.csv)")
-        return self.facilities[kind]
-
-
-def _read_csv(name: str) -> list[dict[str, str]]:
-    with (DATA_DIR / name).open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
-
-
-def read_character_names() -> CharacterNames:
-    """Noms français des classes de dresseurs, des personnages (d'après leur sprite) et des installations."""
-    characters = _read_csv("npc_names.csv")
-    texts = _read_csv("npc_text_names.csv")
-    return CharacterNames(
-        {row["trainer_class"]: row["name_fr"] for row in _read_csv("trainer_classes.csv")},
-        {row["sprite"]: row["name_fr"] for row in characters},
-        {row["kind"]: row["name_fr"] for row in _read_csv("facility_names.csv")},
-        {row["text"]: row["name_fr"] for row in texts},
-        {row["sprite"]: row["appearance"] for row in characters},
-        {row["text"]: row["family"] for row in texts},
-    )
-
-
-@dataclass(frozen=True)
-class CuratedOffer:
-    repos: frozenset[str]  # dépôts pret concernés (pokered, pokeyellow)
-    text: str  # texte du personnage (constante TEXT_…)
-    offer: NpcOffer  # constantes pret
-
-
-@dataclass
-class CharacterCuration:
-    """Doublons écartés (npc_duplicates.csv) et offres relues à la main (npc_offers.csv).
-
-    Une ligne qui ne correspond à aucun personnage des jeux arrête la génération (`unused`)."""
-
-    duplicates: frozenset[str]
-    offers: list[CuratedOffer]
-    used: set[str] = field(default_factory=set)
-
-    def offers_for(self, repo_name: str, text: str | None) -> list[NpcOffer]:
-        found = [curated.offer for curated in self.offers if curated.text == text and repo_name in curated.repos]
-        if found and text:
-            self.used.add(f"offre:{repo_name}:{text}")
-        return found
-
-    def is_duplicate(self, text: str | None) -> bool:
-        if text in self.duplicates:
-            self.used.add(f"doublon:{text}")
-            return True
-        return False
-
-    def unused(self) -> list[str]:
-        expected = {f"doublon:{text}" for text in self.duplicates} | {
-            f"offre:{repo}:{curated.text}" for curated in self.offers for repo in curated.repos
-        }
-        return sorted(expected - self.used)
-
-
-def read_character_curation() -> CharacterCuration:
-    duplicates = frozenset(row["text"] for row in _read_csv("npc_duplicates.csv"))
-    offers = []
-    for row in _read_csv("npc_offers.csv"):
-        if row["kind"] not in CURATED_KINDS:
-            raise ValueError(f"npc_offers.csv : type d'offre non pris en charge : {row['kind']}")
-        offer = NpcOffer(
-            row["kind"],
-            item=row["item"] or None,
-            pokemon=row["pokemon"] or None,
-            quantity=int(row["quantity"]) if row["quantity"] else None,
-            price=int(row["price"]) if row["price"] else None,
-            wanted_item=row["wanted_item"] or None,
-        )
-        offers.append(CuratedOffer(frozenset(row["repos"].split("|")), row["text"], offer))
-    return CharacterCuration(duplicates, offers)
-
-
-# --- Export -----------------------------------------------------------------------
+    # Pokémon dont le personnage pousse le cri (identifiant PokéAPI) : il nomme un personnage à l'apparence d'un
+    # Pokémon (2e génération).
+    cry: str | None = None
 
 
 def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:
@@ -193,7 +74,7 @@ def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[
         for obj in pret_map.objects:
             if not (0 <= obj.x < pret_map.width * 2 and 0 <= obj.y < pret_map.height * 2):
                 continue  # hors de la carte, donc inaccessible (ex. une Pépite cachée de l'entrée du Parc Safari)
-            if curation.is_duplicate(obj.text):
+            if curation.is_duplicate(character_key(obj)):
                 continue
             if obj.sprite:
                 sprites.add(obj.sprite)
@@ -221,22 +102,23 @@ def _character_row(game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curat
         obj.pokemon and species_identifier(obj.pokemon),
         obj.level,
         trainer_class and identifier(trainer_class),
-        obj.text,
+        character_key(obj),
         party,
         [_offer_identifiers(repo.machines, offer) for offer in dict.fromkeys(offers)],
         obj.version,
+        obj.cry and species_identifier(obj.cry),
     )
 
 
 def _character_offers(
     game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
 ) -> list[NpcOffer]:
-    """Dons, ventes, échanges et services du personnage (aucun pour la 2e génération, cf. en-tête du module)."""
+    """Dons, ventes, échanges et services du personnage."""
     match game_maps.repo:
         case PretRepo() as repo:
             return _gen1_character_offers(game_maps.game, repo, pret_map, obj, curation)
-        case Gen2PretRepo():
-            return []
+        case Gen2PretRepo() as repo:
+            return _gen2_character_offers(game_maps.game, repo, pret_map, obj, curation)
 
 
 def _gen1_character_offers(
@@ -247,23 +129,54 @@ def _gen1_character_offers(
     offers = repo.npc_offers(obj.text) + character_services(repo, obj.text)
     if trainer_class in GYM_LEADERS:
         offers += [offer for offer in repo.leader_gifts(pret_map.label) if offer not in offers]
-    curated = curation.offers_for(game.pret_repo, obj.text)
+    return _with_curated(offers, curation.offers_for(game.pret_repo, character_key(obj)))
+
+
+def _gen2_character_offers(
+    game: Game, repo: Gen2PretRepo, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
+) -> list[NpcOffer]:
+    """Offres lues dans le script du personnage, corrigées par npc_offers.csv.
+
+    Un dresseur ne rend pas de service : les soins qui suivent son combat remettent l'équipe en état pour la suite
+    de la scène (le marin paresseux du M/S Aquaria, Red au sommet du Mont Argenté)."""
+    key = character_key(obj)
+    added = curation.offers_for(game.pret_repo, key)
+    script_file = repo.script_files[pret_map.label]
+    if obj.kind in _PICKED_UP or obj.text is None or not script_file.has_label(obj.text):
+        return added
+    read = repo.offers.script_offers(script_file, obj.text)
+    if read.curated_specials and not added:
+        specials = sorted(read.curated_specials)
+        raise ValueError(f"npc_offers.csv : offre de {key} ({pret_map.const}) à relire, faite par {specials}")
+    offers = [offer for offer in read.offers if not (obj.kind == "trainer" and offer.kind in SERVICE_KINDS)]
+    return _with_curated(curation.without_removed(game.pret_repo, key, offers), added)
+
+
+def _with_curated(offers: list[NpcOffer], curated: list[NpcOffer]) -> list[NpcOffer]:
+    """Offres lues et offres ajoutées à la main : un échange remplace le don du même objet lu dans le script."""
     exchanged = {offer.item for offer in curated if offer.kind == "exchange"}
     return [offer for offer in offers if not (offer.kind == "gift_item" and offer.item in exchanged)] + curated
 
 
 def _facility_rows(game_maps: GameMaps, pret_map: PretMap) -> list[ObjectRow]:
-    """Installations de la carte (aucune pour la 2e génération, cf. en-tête du module)."""
+    """Installations de la carte : une seule par service identique (les distributeurs côte à côte du toit du
+    Centre Commercial vendent les mêmes boissons)."""
     match game_maps.repo:
         case PretRepo() as repo:
-            return _gen1_facility_rows(game_maps.game, game_maps, repo, pret_map)
-        case Gen2PretRepo():
-            return []
+            rows = _gen1_facility_rows(game_maps.game, game_maps, repo, pret_map)
+        case Gen2PretRepo() as repo:
+            rows = _gen2_facility_rows(game_maps, repo, pret_map)
+    unique: list[ObjectRow] = []
+    for row in rows:
+        if not any(
+            other.kind == row.kind and other.offers == row.offers and other.item == row.item for other in unique
+        ):
+            unique.append(row)
+    return unique
 
 
 def _gen1_facility_rows(game: Game, game_maps: GameMaps, repo: PretRepo, pret_map: PretMap) -> list[ObjectRow]:
-    """Distributeurs et comptoirs des lots de la carte : une seule installation par service identique
-    (les trois distributeurs côte à côte du toit du Centre Commercial vendent les mêmes boissons)."""
+    """Distributeurs et comptoirs des lots de la carte."""
     prize_signs = [sign for sign in pret_map.signs if facility_kind(repo, sign.text) == PRIZE_VENDOR]
     rows: list[ObjectRow] = []
     for sign in pret_map.signs:
@@ -271,8 +184,6 @@ def _gen1_facility_rows(game: Game, game_maps: GameMaps, repo: PretRepo, pret_ma
         if kind is None:
             continue
         offers = _facility_offers(game, repo, kind, sign, prize_signs)
-        if any(row.kind == kind and row.offers == offers for row in rows):
-            continue
         x, y = game_maps.point(pret_map.const, sign.x, sign.y)
         rows.append(ObjectRow(pret_map.const, kind, x, y, None, None, None, None, None, offers=offers))
     return rows
@@ -288,6 +199,45 @@ def _facility_offers(game: Game, repo: PretRepo, kind: str, sign: Sign, prize_si
     else:
         raise ValueError(f"Installation inconnue : {kind}")
     return [_offer_identifiers(repo.machines, offer) for offer in offers]
+
+
+def _gen2_facility_rows(game_maps: GameMaps, repo: Gen2PretRepo, pret_map: PretMap) -> list[ObjectRow]:
+    """Panneaux dont le script rend un service : distributeurs, comptoirs des lots, lits et machines de soins. Une
+    poubelle qui donne un objet une seule fois (les Restes du Café de Céladopole) est un objet caché."""
+    script_file = repo.script_files[pret_map.label]
+    rows: list[ObjectRow] = []
+    for sign in pret_map.signs:
+        if not script_file.has_label(sign.text):
+            continue
+        read = repo.offers.script_offers(script_file, sign.text)
+        if read.curated_specials:
+            raise ValueError(f"{pret_map.const} : installation {sign.text} à relire ({sorted(read.curated_specials)})")
+        kind = _gen2_facility_kind(pret_map, sign, list(read.offers))
+        if kind is None:
+            continue
+        x, y = game_maps.point(pret_map.const, sign.x, sign.y)
+        offers = [_offer_identifiers(repo.machines, offer) for offer in read.offers]
+        if kind == HIDDEN_ITEM:
+            rows.append(ObjectRow(pret_map.const, kind, x, y, None, offers[0].item, None, None, None, sign.text))
+        else:
+            rows.append(ObjectRow(pret_map.const, kind, x, y, None, None, None, None, None, sign.text, offers=offers))
+    return rows
+
+
+def _gen2_facility_kind(pret_map: PretMap, sign: Sign, offers: list[NpcOffer]) -> str | None:
+    """Type d'installation d'après ce que propose son script, None pour un simple panneau."""
+    kinds = {offer.kind for offer in offers}
+    if not kinds:
+        return None
+    if kinds == {"sale"}:
+        return VENDING_MACHINE
+    if kinds <= {"prize_item", "prize_pokemon"}:
+        return PRIZE_VENDOR
+    if kinds == {"heal"}:
+        return HEAL_SPOT
+    if kinds == {"gift_item"} and len(offers) == 1 and offers[0].quantity == 1:
+        return HIDDEN_ITEM
+    raise ValueError(f"{pret_map.const} : installation {sign.text} non prise en charge : {sorted(kinds)}")
 
 
 def _offer_identifiers(machines: dict[str, str], offer: NpcOffer) -> NpcOffer:

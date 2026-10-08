@@ -142,11 +142,12 @@ private fun BoxScope.KindBadge(mapState: MapState, kind: MapObjectKind, scale: F
         )
 
         MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT,
-        MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR -> Unit
+        MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR,
+        MapObjectKind.HEAL_SPOT -> Unit
     }
 }
 
-/** Installation (distributeur, comptoir des lots) : son icône sur une pastille, de la taille d'une case. */
+/** Installation (distributeur, comptoir des lots, soins) : son icône sur une pastille, de la taille d'une case. */
 @Composable
 private fun FacilityMarker(mapState: MapState, @DrawableRes icon: Int, name: String, scale: Float) {
     val size = mapPixels(mapState, TILE_PX * scale)

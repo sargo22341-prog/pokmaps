@@ -2,7 +2,7 @@
 
 import pytest
 
-from pokemaps_data.maps_characters import CharacterNames, read_character_names
+from pokemaps_data.maps_characters_data import CharacterNames, read_character_names
 
 
 def test_known_names_are_read() -> None:

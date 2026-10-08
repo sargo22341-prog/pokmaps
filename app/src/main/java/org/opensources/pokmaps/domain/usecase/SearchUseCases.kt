@@ -99,7 +99,7 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
                 .sortedBy { it.id }
                 .map { it.source() },
             sold = offered(OfferKind.SALE),
-            given = offered(OfferKind.GIFT_ITEM),
+            given = offered(OfferKind.GIFT_ITEM) + offered(OfferKind.FRUIT_TREE),
             evolutions = maps.itemEvolutions(game, item.id),
             exchangedFor = offered(OfferKind.EXCHANGE),
             exchangeableFor = offered(OfferKind.EXCHANGE, wanted = true),

@@ -28,9 +28,21 @@ sealed interface NpcOffer {
 
     data class Sale(val item: OfferItem, val price: Int?) : NpcOffer
 
-    data class GiftPokemon(val pokemonId: Int, val name: String, val level: Int?) : NpcOffer
+    /** Pokémon donné, avec l'objet qu'il tient (2e génération : Baie Oran des Pokémon de départ). */
+    data class GiftPokemon(val pokemonId: Int, val name: String, val level: Int?, val heldItem: OfferItem? = null) :
+        NpcOffer
 
-    data class Trade(val pokemonId: Int, val name: String, val wantedId: Int, val wantedName: String) : NpcOffer
+    /** Œuf donné, qui éclot au niveau `level` (Togepi de l'assistant du Prof. Orme). */
+    data class GiftEgg(val pokemonId: Int, val name: String, val level: Int) : NpcOffer
+
+    /** Pokémon reçu contre un autre, avec l'objet qu'il tient (2e génération). */
+    data class Trade(
+        val pokemonId: Int,
+        val name: String,
+        val wantedId: Int,
+        val wantedName: String,
+        val heldItem: OfferItem? = null
+    ) : NpcOffer
 
     /** Objet donné contre un autre (Bicyclette contre le Bon Commande, CT contre une boisson). */
     data class Exchange(val item: OfferItem, val wanted: OfferItem) : NpcOffer
@@ -48,7 +60,11 @@ sealed interface NpcOffer {
     /** Fossile ranimé en Pokémon. */
     data class FossilRevival(val fossil: OfferItem, val pokemonId: Int, val name: String, val level: Int) : NpcOffer
 
-    data class Service(val service: CharacterService) : NpcOffer
+    /** Baie ou Noigrume que donne un arbre, une fois par jour. */
+    data class FruitTree(val item: OfferItem) : NpcOffer
+
+    /** Service rendu, gratuit ou payant (`price` en ₽ : toilettage des frères coiffeurs). */
+    data class Service(val service: CharacterService, val price: Int? = null) : NpcOffer
 }
 
 /** Nature d'une offre lue dans la base. */
@@ -59,6 +75,8 @@ val NpcOffer.kind: OfferKind
         is NpcOffer.Sale -> OfferKind.SALE
 
         is NpcOffer.GiftPokemon -> OfferKind.GIFT_POKEMON
+
+        is NpcOffer.GiftEgg -> OfferKind.GIFT_EGG
 
         is NpcOffer.Trade -> OfferKind.TRADE
 
@@ -74,11 +92,15 @@ val NpcOffer.kind: OfferKind
 
         is NpcOffer.FossilRevival -> OfferKind.FOSSIL
 
+        is NpcOffer.FruitTree -> OfferKind.FRUIT_TREE
+
         is NpcOffer.Service -> when (service) {
             CharacterService.HEAL -> OfferKind.HEAL
             CharacterService.CABLE_CLUB -> OfferKind.CABLE_CLUB
             CharacterService.NAME_RATER -> OfferKind.NAME_RATER
             CharacterService.DAYCARE -> OfferKind.DAYCARE
+            CharacterService.MOVE_DELETER -> OfferKind.MOVE_DELETER
+            CharacterService.GROOMING -> OfferKind.GROOMING
         }
     }
 
@@ -87,7 +109,13 @@ enum class CharacterService {
     HEAL,
     CABLE_CLUB,
     NAME_RATER,
-    DAYCARE
+    DAYCARE,
+
+    /** Effaceur de capacités : fait oublier une attaque, même une CS. */
+    MOVE_DELETER,
+
+    /** Toilettage qui rend un Pokémon plus heureux. */
+    GROOMING
 }
 
 data class OfferItem(val id: Int, val identifier: String, val name: String, val hasSprite: Boolean)
@@ -116,6 +144,7 @@ data class ItemSummary(
 enum class OfferKind(val identifier: String) {
     GIFT_ITEM("gift_item"),
     GIFT_POKEMON("gift_pokemon"),
+    GIFT_EGG("gift_egg"),
     SALE("sale"),
     TRADE("trade"),
     EXCHANGE("exchange"),
@@ -124,10 +153,13 @@ enum class OfferKind(val identifier: String) {
     COIN_SALE("coin_sale"),
     COIN_GIFT("coin_gift"),
     FOSSIL("fossil"),
+    FRUIT_TREE("fruit_tree"),
     HEAL("heal"),
     CABLE_CLUB("cable_club"),
     NAME_RATER("name_rater"),
-    DAYCARE("daycare");
+    DAYCARE("daycare"),
+    MOVE_DELETER("move_deleter"),
+    GROOMING("grooming");
 
     companion object {
         fun from(identifier: String): OfferKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

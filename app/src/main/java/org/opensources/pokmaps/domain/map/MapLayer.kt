@@ -22,7 +22,7 @@ enum class MapLayer {
             MapObjectKind.POKEMON -> STATIC_POKEMON
 
             MapObjectKind.NPC, MapObjectKind.NPC_OBJECT, MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE,
-            MapObjectKind.PRIZE_VENDOR -> NPCS
+            MapObjectKind.PRIZE_VENDOR, MapObjectKind.HEAL_SPOT -> NPCS
         }
     }
 }

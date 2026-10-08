@@ -51,7 +51,10 @@ enum class MapObjectKind(val identifier: String) {
     VENDING_MACHINE("vending_machine"),
 
     /** Comptoir des lots du Casino (sans sprite). */
-    PRIZE_VENDOR("prize_vendor");
+    PRIZE_VENDOR("prize_vendor"),
+
+    /** Lit ou machine qui soigne l'équipe (sans sprite : labo du Prof. Orme, cabines du M/S Aquaria). */
+    HEAL_SPOT("heal_spot");
 
     companion object {
         fun from(identifier: String): MapObjectKind =

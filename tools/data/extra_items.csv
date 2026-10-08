@@ -1,2 +1,7 @@
 identifier,id,name_fr,category,description_fr,reason
 berserk-gene,100001,ADN Berzerk,held-items,Booste l'attaque mais rend confus.,"Objet tenu de la 2e génération absent de PokéAPI : caché à Azuria dans Or et Argent, et objet de Mewtwo (données de base)"
+flower-mail,100002,Letr Fleur,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue dans la plupart des magasins
+surf-mail,100003,Letr Surf,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue dans la plupart des magasins
+liteblue-mail,100004,Letrbleuciel,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue à Carmin sur Mer
+portrait-mail,100005,Letrportrait,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue à l'aire de repos du Mont Sélénite
+lovely-mail,100006,Letrcharm.,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue au Centre Commercial de Céladopole

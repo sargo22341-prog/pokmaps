@@ -136,7 +136,8 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
             MapObjectKind.NPC_OBJECT,
             MapObjectKind.NPC_POKEMON,
             MapObjectKind.VENDING_MACHINE,
-            MapObjectKind.PRIZE_VENDOR
+            MapObjectKind.PRIZE_VENDOR,
+            MapObjectKind.HEAL_SPOT
         )
     }
 }

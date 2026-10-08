@@ -8,6 +8,7 @@ un objet au sol (itemball), un dresseur (trainer, ou loadtrainer pour un champio
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import TYPE_CHECKING
 
 from .pret_gen2_objects import ObjectEvent, classify_object, scene_opponents
@@ -40,6 +41,9 @@ _SCRIPT_WARP, _NO_MAP = "warp", "NONE"
 # Valeur « toujours » des horaires et du drapeau d'un object_event, et moments de la journée (shift_const MORN…).
 _ALWAYS = "-1"
 _TIMES_OF_DAY = frozenset({"MORN", "DAY", "NITE"})
+_DAY = "DAY"
+# Objets que l'on ne fusionne pas : chacun est une rencontre ou un objet à ramasser.
+_ALWAYS_SINGLE = frozenset({"item", "hidden_item", "trainer", "pokemon"})
 
 
 def read_maps(repo: Gen2PretRepo) -> dict[str, PretMap]:
@@ -189,7 +193,49 @@ def _objects(
         event_flag = None if flag == _ALWAYS else flag
         event = ObjectEvent(x, y, sprites.get(sprite, sprite), object_type, script, const, times, event_flag)
         objects += classify_object(repo, script_file, event, opponents)
-    return objects
+    return _daytime_objects(objects, script_file)
+
+
+def _daytime_objects(objects: list[MapObject], script_file: ScriptFile) -> list[MapObject]:
+    """Un personnage par script là où il est la journée, comme la carte, rendue de jour.
+
+    Un même script sert parfois plusieurs object_event selon le moment de la journée : au même endroit (le
+    pharmacien du Casino, le jour et la nuit), ils ne font qu'un ; ailleurs (Maman, le matin à la cuisine), seuls
+    ceux présents la journée restent, si le script en a un. Les objets sans script à eux (ObjectEvent du moteur)
+    sont des personnages différents."""
+    by_script: dict[str, list[MapObject]] = {}
+    for obj in objects:
+        if obj.text and script_file.has_label(obj.text) and obj.kind not in _ALWAYS_SINGLE:
+            by_script.setdefault(obj.text, []).append(obj)
+    # Objet d'origine -> ce qu'il devient (None : écarté).
+    outcome: dict[int, MapObject | None] = {}
+    for group in by_script.values():
+        if len(group) < 2 or not any(obj.times for obj in group):
+            continue
+        outcome |= dict.fromkeys(map(id, group))
+        places: dict[tuple[int, int, str, str | None], list[MapObject]] = {}
+        for obj in group:
+            places.setdefault((obj.x, obj.y, obj.kind, obj.sprite), []).append(obj)
+        by_day = [same for same in places.values() if any(_present_by_day(obj) for obj in same)]
+        for same_place in by_day or list(places.values()):
+            outcome[id(same_place[0])] = replace(same_place[0], times=_union_times(same_place))
+    result = []
+    for obj in objects:
+        kept = outcome.get(id(obj), obj)
+        if kept is not None:
+            result.append(kept)
+    return result
+
+
+def _present_by_day(obj: MapObject) -> bool:
+    return not obj.times or _DAY in obj.times
+
+
+def _union_times(objects: list[MapObject]) -> frozenset[str]:
+    """Moments de présence réunis (vide : toujours là, si l'un des objets l'est)."""
+    if any(not obj.times for obj in objects):
+        return frozenset()
+    return frozenset().union(*(obj.times for obj in objects))
 
 
 def _appearance_times(first: str, second: str, script_file: ScriptFile) -> frozenset[str]:

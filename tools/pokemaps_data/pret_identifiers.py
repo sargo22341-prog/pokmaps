@@ -38,6 +38,10 @@ ITEM_ALIASES = {
     "WHT_APRICORN": "white-apricorn",
     "BLK_APRICORN": "black-apricorn",
     "PNK_APRICORN": "pink-apricorn",
+    "ENERGYPOWDER": "energy-powder",
+    # Lettres de la 2e génération absentes de PokéAPI (tools/data/extra_items.csv).
+    "LITEBLUEMAIL": "liteblue-mail",
+    "PORTRAITMAIL": "portrait-mail",
     # 2e génération : baies fusionnées par PokéAPI avec celles de la 3e génération.
     "BERRY": "oran-berry",
     "GOLD_BERRY": "sitrus-berry",
@@ -49,6 +53,8 @@ ITEM_ALIASES = {
     "MINT_BERRY": "chesto-berry",
     "MIRACLEBERRY": "lum-berry",
     "MYSTERYBERRY": "leppa-berry",
+    # 2e génération : Ruban Rose, que PokéAPI fusionne avec le Mouchoir Soie qui le remplace (item_game_indices).
+    "PINK_BOW": "silk-scarf",
 }
 
 # Pokémon dont la constante pret ne donne pas l'identifiant PokéAPI (orthographe de la 2e génération).

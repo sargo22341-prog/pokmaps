@@ -52,6 +52,12 @@ class MapObject:
     times: frozenset[str] = frozenset()
     # 2e génération : drapeau d'événement qui cache l'objet une fois levé (ex. EVENT_ROUTE_30_BATTLE).
     event_flag: str | None = None
+    # 2e génération : constante de l'objet (object_const_def, ex. KURTSHOUSE_KURT1). Plusieurs objets partagent
+    # parfois un même script (Fargas à deux étapes du scénario) : elle les distingue dans tools/data/.
+    const: str | None = None
+    # 2e génération : Pokémon dont le personnage pousse le cri quand on lui parle (« cry PSYDUCK ») ; il nomme un
+    # personnage qui a l'apparence d'un Pokémon mieux que son sprite, partagé par plusieurs espèces.
+    cry: str | None = None
 
 
 @dataclass
@@ -103,16 +109,21 @@ class TrainerPokemon:
 class NpcOffer:
     """Ce que propose un personnage quand on lui parle (d'après le script de son texte).
 
-    kind : gift_item, gift_pokemon, sale, trade (Pokémon contre Pokémon), exchange (objet contre objet),
-    prize_item et prize_pokemon (lots du Casino, prix en jetons), coin_sale (jetons vendus), coin_gift
-    (jetons donnés), fossil (fossile ranimé), ou un service sans objet : heal, cable_club, name_rater, daycare.
+    kind : gift_item, gift_pokemon, gift_egg (œuf donné), sale, trade (Pokémon contre Pokémon), exchange (objet
+    contre objet), prize_item et prize_pokemon (lots du Casino, prix en jetons), coin_sale (jetons vendus), coin_gift
+    (jetons donnés), fossil (fossile ranimé), fruit_tree (baie ou Noigrume que donne chaque jour un arbre), ou un
+    service sans objet : heal, cable_club, name_rater, daycare, move_deleter (Effaceur de capacités), grooming
+    (toilettage qui rend un Pokémon plus heureux, payant ou non).
     """
 
     kind: str
-    item: str | None = None  # objet donné, vendu, gagné ou obtenu par échange ; fossile à ranimer
-    pokemon: str | None = None  # Pokémon donné, gagné, reçu lors d'un échange ou ranimé
-    quantity: int | None = None  # nombre d'objets ou de jetons, ou niveau du Pokémon donné, gagné ou ranimé
-    price: int | None = None  # prix en ¥ (sale, coin_sale) ou en jetons (prize_item, prize_pokemon)
+    # Objet donné, vendu, gagné ou obtenu par échange ; fossile à ranimer ; objet que tient le Pokémon donné ou reçu
+    # lors d'un échange (2e génération).
+    item: str | None = None
+    pokemon: str | None = None  # Pokémon donné (ou dans l'œuf donné), gagné, reçu lors d'un échange ou ranimé
+    # Nombre d'objets ou de jetons, ou niveau du Pokémon donné, gagné ou ranimé (à l'éclosion pour un œuf).
+    quantity: int | None = None
+    price: int | None = None  # prix en ¥ (sale, coin_sale, grooming) ou en jetons (prize_item, prize_pokemon)
     wanted: str | None = None  # Pokémon demandé en échange (trade)
     wanted_item: str | None = None  # objet demandé en échange (exchange)
     version: str | None = None  # version PokéAPI où l'offre existe (ex. red), None pour toutes celles du jeu

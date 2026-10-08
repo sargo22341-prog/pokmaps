@@ -3,7 +3,8 @@ régions, données des Pokémon et sprites.
 
 Seuls les fichiers sources texte (.asm), les blocs (.blk, .bin) et les images (.png) du dépôt sont lus : aucune
 ROM n'est nécessaire. Les cartes sont lues dans `pret_gen2_maps.py`, les dresseurs dans `pret_gen2_trainers.py`,
-les tilesets et collisions dans `pret_gen2_tilesets.py` et les scripts d'événements dans `pret_gen2_scripts.py`.
+les tilesets et collisions dans `pret_gen2_tilesets.py`, les scripts d'événements dans `pret_gen2_scripts.py` et
+les offres des personnages dans `pret_gen2_offers.py`.
 
 Unités (comme en 1re génération) : une carte fait `width` × `height` métatuiles ; une métatuile fait 4 × 4 tuiles
 de 8 px (32 px) ; les coordonnées des événements sont en pas de 16 px, et chaque pas a sa propre collision.
@@ -17,6 +18,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from .pret_gen2_offers import Gen2Offers
 from .pret_gen2_scripts import ScriptFile
 from .pret_gen2_tilesets import CollisionRules, Gen2Tileset, read_collision_rules, read_tilesets
 from .pret_gen2_wild import headbutt_maps, rock_smash_maps
@@ -214,6 +216,11 @@ class Gen2PretRepo:
         if landmark == _FAST_SHIP or index < kanto or index >= landmarks.index(_VICTORY_ROAD):
             return JOHTO
         return KANTO
+
+    @cached_property
+    def offers(self) -> Gen2Offers:
+        """Offres des personnages et des installations, lues dans leurs scripts (pret_gen2_offers)."""
+        return Gen2Offers(self)
 
     # --- Rencontres --------------------------------------------------------------
 

@@ -35,6 +35,19 @@ class CharacterRoleTest {
             listOf(CharacterRole.SHOP),
             CharacterRole.of(MapObjectKind.VENDING_MACHINE, listOf(OfferKind.SALE))
         )
+        assertEquals(listOf(CharacterRole.HEAL), CharacterRole.of(MapObjectKind.HEAL_SPOT, listOf(OfferKind.HEAL)))
+    }
+
+    @Test
+    fun secondGenerationOffersHaveTheirOwnRoles() {
+        assertEquals(
+            listOf(CharacterRole.OBJECT, CharacterRole.FRUIT_TREE),
+            CharacterRole.of(MapObjectKind.NPC_OBJECT, listOf(OfferKind.FRUIT_TREE))
+        )
+        assertEquals(
+            listOf(CharacterRole.CHARACTER, CharacterRole.GIFT, CharacterRole.MOVE_DELETER, CharacterRole.GROOMING),
+            CharacterRole.of(MapObjectKind.NPC, listOf(OfferKind.GROOMING, OfferKind.GIFT_EGG, OfferKind.MOVE_DELETER))
+        )
     }
 
     @Test

@@ -16,8 +16,11 @@ enum class CharacterRole {
     PRIZES,
     COINS,
     FOSSIL,
+    FRUIT_TREE,
     DAYCARE,
     NAME_RATER,
+    MOVE_DELETER,
+    GROOMING,
     CABLE_CLUB;
 
     companion object {
@@ -29,7 +32,7 @@ enum class CharacterRole {
                 MapObjectKind.NPC_OBJECT -> OBJECT
                 MapObjectKind.POKEMON, MapObjectKind.NPC_POKEMON -> POKEMON
                 MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM -> return emptyList()
-                MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR -> null
+                MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR, MapObjectKind.HEAL_SPOT -> null
             }
             val functions = offers.map { offer -> roleOf(offer) }.toSet()
             return listOfNotNull(identity) + entries.filter { it in functions }
@@ -37,15 +40,18 @@ enum class CharacterRole {
 
         private fun roleOf(offer: OfferKind): CharacterRole = when (offer) {
             OfferKind.SALE -> SHOP
-            OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON -> GIFT
+            OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON, OfferKind.GIFT_EGG -> GIFT
             OfferKind.TRADE, OfferKind.EXCHANGE -> TRADE
             OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON -> PRIZES
             OfferKind.COIN_SALE, OfferKind.COIN_GIFT -> COINS
             OfferKind.FOSSIL -> FOSSIL
+            OfferKind.FRUIT_TREE -> FRUIT_TREE
             OfferKind.HEAL -> HEAL
             OfferKind.CABLE_CLUB -> CABLE_CLUB
             OfferKind.NAME_RATER -> NAME_RATER
             OfferKind.DAYCARE -> DAYCARE
+            OfferKind.MOVE_DELETER -> MOVE_DELETER
+            OfferKind.GROOMING -> GROOMING
         }
     }
 }

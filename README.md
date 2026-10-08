@@ -79,10 +79,11 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
   des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI, par famille de cartes
   (`map_areas.csv`), zones et objets absents de PokéAPI (`extra_areas.csv`, `extra_items.csv` : l'ADN Berzerk
-  d'Or et d'Argent), Pokémon qu'un jeu n'obtient que par échange avec un autre (`transfer_only.csv`),
+  et les lettres d'Or et d'Argent), Pokémon qu'un jeu n'obtient que par échange avec un autre (`transfer_only.csv`),
   personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
-  que les scripts ne disent pas simplement (`npc_offers.csv` : échanges d'objets, jetons vendus, Pokémon de départ du
-  labo du Prof. Chen), texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
+  que les scripts ne disent pas simplement (`npc_offers.csv`, action `add` : échanges d'objets, jetons vendus,
+  Pokémon de départ du labo du Prof. Chen, Balls de Fargas ; action `remove` : don qu'un autre personnage fait
+  pendant la scène), texte de l'effet de chaque attaque (`move_effects.csv`, une ligne par effet du moteur ou par
   attaque particulière, avec sa probabilité en chances sur 256 relevée dans `engine/battle/effects.asm`) et placement
   des cartes là où les connexions ne suffisent pas : cartes ancrées dans une carte du monde (`map_anchors.csv`),
   connexions incohérentes écartées (`map_connection_skips.csv`) et ville ou route d'origine d'une carte atteinte de

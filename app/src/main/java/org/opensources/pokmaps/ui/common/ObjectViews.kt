@@ -60,6 +60,8 @@ val MapObjectKind.facilityIcon: Int?
 
         MapObjectKind.PRIZE_VENDOR -> R.drawable.ic_role_prizes
 
+        MapObjectKind.HEAL_SPOT -> R.drawable.ic_role_heal
+
         MapObjectKind.ITEM, MapObjectKind.HIDDEN_ITEM, MapObjectKind.TRAINER, MapObjectKind.POKEMON,
         MapObjectKind.NPC, MapObjectKind.NPC_OBJECT, MapObjectKind.NPC_POKEMON -> null
     }
@@ -152,6 +154,7 @@ fun offersSummary(offers: List<OfferLink>, fossilUses: Map<String, FossilUse> = 
     offerNames(offers, fossilUses, coins, TRADES)?.let { parts += stringResource(R.string.offer_summary_trades, it) }
     offerNames(offers, fossilUses, coins, PRIZES)?.let { parts += stringResource(R.string.offer_summary_prizes, it) }
     offerNames(offers, fossilUses, coins, FOSSILS)?.let { parts += stringResource(R.string.offer_summary_fossils, it) }
+    offerNames(offers, fossilUses, coins, TREES)?.let { parts += stringResource(R.string.offer_summary_fruit_tree, it) }
     return parts.joinToString(" · ")
 }
 
@@ -179,8 +182,9 @@ private fun offerNames(
     return names.takeIf { it.isNotEmpty() }?.joinToString(", ")
 }
 
-private val GIFTS = setOf(OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON, OfferKind.COIN_GIFT)
+private val GIFTS = setOf(OfferKind.GIFT_ITEM, OfferKind.GIFT_POKEMON, OfferKind.GIFT_EGG, OfferKind.COIN_GIFT)
 private val SALES = setOf(OfferKind.SALE, OfferKind.COIN_SALE)
 private val TRADES = setOf(OfferKind.TRADE, OfferKind.EXCHANGE)
 private val PRIZES = setOf(OfferKind.PRIZE_ITEM, OfferKind.PRIZE_POKEMON)
 private val FOSSILS = setOf(OfferKind.FOSSIL)
+private val TREES = setOf(OfferKind.FRUIT_TREE)

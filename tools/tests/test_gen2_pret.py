@@ -65,13 +65,19 @@ def test_events_of_route_30(gold_silver_repo: Gen2PretRepo) -> None:
 
 def test_objects_present_at_some_times_of_day(gold_silver_repo: Gen2PretRepo) -> None:
     # La mère du joueur : au début de la partie (cachée par EVENT_PLAYERS_HOUSE_MOM_1), puis à un endroit différent
-    # le matin, le jour et la nuit.
+    # le matin, le jour et la nuit. La carte est rendue de jour : il reste celle de la journée, au même endroit que
+    # celle du début de la partie.
     mom = [obj for obj in gold_silver_repo.maps["PLAYERS_HOUSE_1F"].objects if obj.text == "MomScript"]
-    assert [(sorted(obj.times), obj.event_flag) for obj in mom] == [
-        ([], "EVENT_PLAYERS_HOUSE_MOM_1"),
-        (["MORN"], "EVENT_PLAYERS_HOUSE_MOM_2"),
-        (["DAY"], "EVENT_PLAYERS_HOUSE_MOM_2"),
-        (["NITE"], "EVENT_PLAYERS_HOUSE_MOM_2"),
+    assert [(obj.const, obj.x, obj.y, obj.times) for obj in mom] == [("PLAYERSHOUSE1F_MOM1", 7, 3, frozenset())]
+    # Le pharmacien du Casino de Doublonville, au même endroit le jour et la nuit : un seul personnage.
+    corner = gold_silver_repo.maps["GOLDENROD_GAME_CORNER"].objects
+    pharmacist = [obj for obj in corner if obj.text == "GoldenrodGameCornerPharmacistScript"]
+    assert [obj.times for obj in pharmacist] == [frozenset({"DAY", "NITE"})]
+    # Au magasin de souvenirs du Mont Sélénite, le vendeur et la fillette changent de place le matin.
+    shop = gold_silver_repo.maps["MOUNT_MOON_GIFT_SHOP"].objects
+    assert [(obj.const, obj.times) for obj in shop if obj.kind == "npc"] == [
+        ("MOUNTMOONGIFTSHOP_GRAMPS2", frozenset({"DAY"})),
+        ("MOUNTMOONGIFTSHOP_LASS2", frozenset({"DAY"})),
     ]
     joey = next(obj for obj in gold_silver_repo.maps["ROUTE_30"].objects if obj.text == "TrainerYoungsterJoey")
     assert (joey.times, joey.event_flag) == (frozenset(), "EVENT_ROUTE_30_YOUNGSTER_JOEY")

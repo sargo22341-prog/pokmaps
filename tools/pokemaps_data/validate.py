@@ -91,11 +91,13 @@ CHECKS = (
         "objet de carte incohérent",
         """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
            WHERE o.kind NOT IN ('item', 'hidden_item', 'trainer', 'pokemon', 'npc', 'npc_object', 'npc_pokemon',
-               'vending_machine', 'prize_vendor')
+               'vending_machine', 'prize_vendor', 'heal_spot')
              OR (o.kind IN ('npc', 'npc_object', 'npc_pokemon') AND (o.sprite IS NULL OR o.trainer_class IS NOT NULL))
              OR (o.kind IN ('item', 'hidden_item')) != (o.item_id IS NOT NULL)
-             OR (o.kind IN ('vending_machine', 'prize_vendor') AND (o.sprite IS NOT NULL
+             OR (o.kind IN ('vending_machine', 'prize_vendor', 'heal_spot') AND (o.sprite IS NOT NULL
                OR NOT EXISTS (SELECT 1 FROM npc_offer n WHERE n.map_object_id = o.id)))
+             OR (o.kind = 'heal_spot' AND EXISTS (SELECT 1 FROM npc_offer n WHERE n.map_object_id = o.id
+               AND n.kind != 'heal'))
              OR (o.kind = 'pokemon') != (o.pokemon_id IS NOT NULL AND o.level IS NOT NULL)
              OR (o.kind = 'trainer') != (o.trainer_class IS NOT NULL) OR trim(o.name_fr) = ''
              OR o.item_id NOT IN (SELECT id FROM item) OR o.pokemon_id NOT IN (SELECT id FROM pokemon)
@@ -126,16 +128,23 @@ CHECKS = (
         """SELECT n.* FROM npc_offer n LEFT JOIN map_object o ON o.id = n.map_object_id
            LEFT JOIN map m ON m.id = o.map_id
            WHERE o.id IS NULL
-             OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'sale', 'trade', 'exchange', 'prize_item',
-               'prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'heal', 'cable_club', 'name_rater', 'daycare')
-             OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'fossil')) != (n.item_id IS NOT NULL)
-             OR (n.kind IN ('gift_pokemon', 'trade', 'prize_pokemon', 'fossil')) != (n.pokemon_id IS NOT NULL)
+             OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'gift_egg', 'sale', 'trade', 'exchange', 'prize_item',
+               'prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'fruit_tree', 'heal', 'cable_club', 'name_rater',
+               'daycare', 'move_deleter', 'grooming')
+             OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'fossil', 'fruit_tree')
+               AND n.item_id IS NULL)
+             OR (n.kind NOT IN ('gift_item', 'sale', 'exchange', 'prize_item', 'fossil', 'fruit_tree', 'gift_pokemon',
+               'trade') AND n.item_id IS NOT NULL)
+             OR (n.kind IN ('gift_pokemon', 'gift_egg', 'trade', 'prize_pokemon', 'fossil'))
+               != (n.pokemon_id IS NOT NULL)
              OR (n.kind = 'trade') != (n.wanted_pokemon_id IS NOT NULL)
              OR (n.kind = 'exchange') != (n.wanted_item_id IS NOT NULL)
              OR (n.kind IN ('prize_item', 'prize_pokemon', 'coin_sale') AND coalesce(n.price, 0) <= 0)
-             OR (n.kind IN ('prize_pokemon', 'coin_sale', 'coin_gift', 'fossil') AND coalesce(n.quantity, 0) <= 0)
-             OR (n.kind IN ('heal', 'cable_club', 'name_rater', 'daycare')
-               AND coalesce(n.item_id, n.pokemon_id, n.quantity, n.price) IS NOT NULL)
+             OR (n.kind IN ('prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'gift_egg')
+               AND coalesce(n.quantity, 0) <= 0)
+             OR (n.kind IN ('fruit_tree', 'heal', 'cable_club', 'name_rater', 'daycare', 'move_deleter')
+               AND coalesce(n.pokemon_id, n.quantity, n.price) IS NOT NULL)
+             OR (n.kind = 'grooming' AND (coalesce(n.pokemon_id, n.quantity) IS NOT NULL OR n.price <= 0))
              OR (n.version_id IS NOT NULL AND n.version_id NOT IN
                (SELECT v.id FROM version v WHERE v.version_group_id = m.version_group_id))
              OR n.item_id NOT IN (SELECT id FROM item) OR n.wanted_item_id NOT IN (SELECT id FROM item)

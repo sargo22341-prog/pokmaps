@@ -145,6 +145,8 @@ internal class FakeMapDao(
 
             NURSE -> listOf(offer("heal"))
 
+            SECOND_GENERATION -> secondGenerationOffers()
+
             PRIZES -> listOf(
                 offer("prize_pokemon", pokemon = ABRA, pokemonName = "Abra", quantity = 9, price = abraCoins(versionId))
             )
@@ -152,6 +154,17 @@ internal class FakeMapDao(
             else -> emptyList()
         }
     }
+
+    /** Offres propres à la 2e génération : objet tenu, œuf, arbre à baies et services. */
+    private fun secondGenerationOffers() = listOf(
+        offer("gift_pokemon", BERRY, "oran-berry", "Baie Oran", CYNDAQUIL, "Héricendre", 5),
+        offer("gift_pokemon", pokemon = PIDGEY, pokemonName = "Roucool", quantity = 10),
+        offer("gift_egg", pokemon = TOGEPI, pokemonName = "Togepi", quantity = 5),
+        offer("trade", BERRY, "oran-berry", "Baie Oran", ABRA, "Abra", wanted = PIDGEY to "Roucool"),
+        offer("fruit_tree", BERRY, "oran-berry", "Baie Oran"),
+        offer("grooming", price = 500),
+        offer("move_deleter")
+    )
 
     private fun offer(
         kind: String,
@@ -161,7 +174,8 @@ internal class FakeMapDao(
         pokemon: Int? = null,
         pokemonName: String? = null,
         quantity: Int? = null,
-        price: Int? = null
+        price: Int? = null,
+        wanted: Pair<Int, String>? = null
     ) = NpcOfferRow(
         kind = kind,
         itemId = item,
@@ -172,8 +186,8 @@ internal class FakeMapDao(
         pokemonName = pokemonName,
         quantity = quantity,
         price = price,
-        wantedPokemonId = null,
-        wantedPokemonName = null,
+        wantedPokemonId = wanted?.first,
+        wantedPokemonName = wanted?.second,
         wantedItemId = null,
         wantedItemIdentifier = null,
         wantedItemName = null,
@@ -222,6 +236,10 @@ internal class FakeMapDao(
         const val SNORLAX = 143
         const val RED_SNORLAX_LEVEL = 30
         const val BLUE_SNORLAX_LEVEL = 50
+        const val SECOND_GENERATION = 20
+        const val BERRY = 132
+        const val CYNDAQUIL = 155
+        const val TOGEPI = 175
 
         private val PIDGEY_ENCOUNTER = EncounterRow(
             versionId = 1,

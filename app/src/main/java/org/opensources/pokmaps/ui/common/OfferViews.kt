@@ -31,8 +31,8 @@ import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 
 /**
- * Ce que propose un personnage ou une installation : services, dons, ventes, échanges, lots du Casino et fossiles
- * ranimés. Objets et Pokémon ouvrent leur fiche si demandé ; un fossile donné dit en quoi il se ranime, et où.
+ * Ce que propose un personnage ou une installation : services, dons, ventes, échanges, lots du Casino, fossiles
+ * ranimés et baies d'un arbre. Objets et Pokémon ouvrent leur fiche si demandé ; un fossile donné dit en quoi il se ranime, et où.
  */
 @Composable
 fun Offers(
@@ -50,6 +50,7 @@ fun Offers(
     Trades(offers, links)
     Prizes(offers, links)
     Fossils(offers.filterIsInstance<NpcOffer.FossilRevival>(), links)
+    FruitTrees(offers.filterIsInstance<NpcOffer.FruitTree>(), links)
 }
 
 /** Où sont dessinés les Pokémon (réglage des sprites animés) et quelles fiches s'ouvrent au toucher. */
@@ -60,9 +61,20 @@ private fun Services(services: List<NpcOffer.Service>) {
     if (services.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_services))
     services.forEach { offer ->
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
             RoleIcon(offer.service.role, size = 24.dp)
-            Text(stringResource(offer.service.description), style = MaterialTheme.typography.bodyMedium)
+            Text(
+                stringResource(offer.service.description),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.weight(1f)
+            )
+            offer.price?.let {
+                Text(stringResource(R.string.map_offer_price, it), style = MaterialTheme.typography.titleSmall)
+            }
         }
     }
 }
@@ -74,7 +86,9 @@ private fun Gifts(
     fossilUses: Map<String, FossilUse>,
     onShowObject: ((Int) -> Unit)?
 ) {
-    val gifts = offers.filter { it is NpcOffer.GiftItem || it is NpcOffer.GiftPokemon || it is NpcOffer.CoinGift }
+    val gifts = offers.filter {
+        it is NpcOffer.GiftItem || it is NpcOffer.GiftPokemon || it is NpcOffer.GiftEgg || it is NpcOffer.CoinGift
+    }
     if (gifts.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_gifts))
     gifts.forEach { offer ->
@@ -87,8 +101,12 @@ private fun Gifts(
             is NpcOffer.GiftPokemon -> OfferPokemonRow(
                 offer.pokemonId,
                 offer.level?.let { stringResource(R.string.map_offer_pokemon_level, offer.name, it) } ?: offer.name,
-                links
+                links,
+                offer.heldItem?.let { stringResource(R.string.map_offer_held_item, it.name) }
             )
+
+            is NpcOffer.GiftEgg ->
+                OfferPokemonRow(offer.pokemonId, stringResource(R.string.map_offer_egg, offer.name, offer.level), links)
 
             is NpcOffer.CoinGift -> CoinRow(pluralStringResource(R.plurals.coins, offer.coins, offer.coins))
 
@@ -131,7 +149,8 @@ private fun Trades(offers: List<NpcOffer>, links: OfferLinks) {
             is NpcOffer.Trade -> OfferPokemonRow(
                 offer.pokemonId,
                 stringResource(R.string.map_offer_trade, offer.name, offer.wantedName),
-                links
+                links,
+                offer.heldItem?.let { stringResource(R.string.map_offer_held_item, it.name) }
             )
 
             is NpcOffer.Exchange -> ExchangeRow(offer, links.onOpenItem)
@@ -180,6 +199,14 @@ private fun Fossils(revivals: List<NpcOffer.FossilRevival>, links: OfferLinks) {
             links = links
         )
     }
+}
+
+/** Baies ou Noigrumes que donne l'arbre, une fois par jour. */
+@Composable
+private fun FruitTrees(trees: List<NpcOffer.FruitTree>, links: OfferLinks) {
+    if (trees.isEmpty()) return
+    SectionTitle(stringResource(R.string.map_offer_fruit_tree))
+    trees.forEach { tree -> OfferItemRow(tree.item, tree.item.name, onOpenItem = links.onOpenItem) }
 }
 
 /**
@@ -330,6 +357,8 @@ private val CharacterService.role: CharacterRole
         CharacterService.CABLE_CLUB -> CharacterRole.CABLE_CLUB
         CharacterService.NAME_RATER -> CharacterRole.NAME_RATER
         CharacterService.DAYCARE -> CharacterRole.DAYCARE
+        CharacterService.MOVE_DELETER -> CharacterRole.MOVE_DELETER
+        CharacterService.GROOMING -> CharacterRole.GROOMING
     }
 
 @get:StringRes
@@ -339,6 +368,8 @@ private val CharacterService.description: Int
         CharacterService.CABLE_CLUB -> R.string.service_cable_club
         CharacterService.NAME_RATER -> R.string.service_name_rater
         CharacterService.DAYCARE -> R.string.service_daycare
+        CharacterService.MOVE_DELETER -> R.string.service_move_deleter
+        CharacterService.GROOMING -> R.string.service_grooming
     }
 
 private val ITEM_ICON_SIZE = 32.dp

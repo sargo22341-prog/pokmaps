@@ -8,7 +8,8 @@ import pytest
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.map_spots import TerrainKey, read_spots
-from pokemaps_data.maps_characters import ObjectRow, read_character_names
+from pokemaps_data.maps_characters import ObjectRow
+from pokemaps_data.maps_characters_data import read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier
 from pokemaps_data.validate import validate
 

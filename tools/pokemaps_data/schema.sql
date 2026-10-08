@@ -361,8 +361,8 @@ CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 -- Objets et personnages d'une carte. kind : item (objet ramassable), hidden_item (objet caché),
 -- trainer (dresseur, trainer_class = classe pret, ex. youngster), pokemon (Pokémon fixe, avec son niveau),
 -- personnage : npc (une personne), npc_object (objet du décor qui parle ou donne : Fossile, Poké Ball, rocher…) ou
--- npc_pokemon (Pokémon qui n'est pas à combattre), ou une installation sans sprite : vending_machine (distributeur)
--- ou prize_vendor (comptoir des lots du Casino).
+-- npc_pokemon (Pokémon qui n'est pas à combattre), ou une installation sans sprite : vending_machine (distributeur),
+-- prize_vendor (comptoir des lots du Casino) ou heal_spot (lit ou machine de soins, 2e génération).
 -- sprite : image dans les assets, maps/<version_group.identifier>/sprites/<sprite>.webp.
 -- name_fr : nom affiché (classe du dresseur, personnage d'après son sprite, Pokémon, objet ou installation).
 -- version_id : version où l'objet est ainsi (Ho-Oh et Lugia n'ont pas le même niveau en Or et en Argent), NULL s'il
@@ -400,12 +400,14 @@ CREATE TABLE trainer_pokemon (
 );
 
 -- Ce que propose un personnage ou une installation (map_object) quand on lui parle. kind :
---   gift_item (objet donné, quantity), gift_pokemon (Pokémon donné, quantity = niveau), sale (objet vendu, price),
---   trade (pokemon_id reçu contre wanted_pokemon_id), exchange (item_id reçu contre wanted_item_id),
+--   gift_item (objet donné, quantity), gift_pokemon (Pokémon donné, quantity = niveau, item_id = objet tenu),
+--   gift_egg (œuf de pokemon_id, quantity = niveau à l'éclosion), sale (objet vendu, price),
+--   trade (pokemon_id reçu, tenant item_id, contre wanted_pokemon_id), exchange (item_id reçu contre wanted_item_id),
 --   prize_item et prize_pokemon (lot du Casino, price en jetons, quantity = niveau du Pokémon),
 --   coin_sale (quantity jetons pour price ¥), coin_gift (quantity jetons donnés),
---   fossil (fossile item_id ranimé en pokemon_id, quantity = niveau),
---   heal, cable_club, name_rater, daycare (services : soins, Club Link, Mme Notation, pension).
+--   fossil (fossile item_id ranimé en pokemon_id, quantity = niveau), fruit_tree (item_id donné chaque jour),
+--   heal, cable_club, name_rater, daycare, move_deleter (services : soins, Club Link, Expert en surnoms, pension,
+--   Effaceur de capacités), grooming (toilettage qui rend un Pokémon plus heureux, price en ¥ s'il est payant).
 -- version_id : version où l'offre existe (lots du Casino de Rouge ou de Bleu), NULL pour toutes celles du jeu.
 CREATE TABLE npc_offer (
     id INTEGER NOT NULL PRIMARY KEY,

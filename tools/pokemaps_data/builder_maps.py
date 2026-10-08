@@ -7,15 +7,19 @@ from typing import TYPE_CHECKING
 from .games import Game, complete_families
 from .map_spots import Point, TerrainKey, read_spots
 from .maps import GameMapData
-from .maps_characters import CharacterNames, ObjectRow, read_character_names
+from .maps_characters import ObjectRow
+from .maps_characters_data import CharacterNames, read_character_names
 from .maps_layout import identifier
-from .pret_services import PRIZE_VENDOR, VENDING_MACHINE
+from .pret_services import HEAL_SPOT, PRIZE_VENDOR, VENDING_MACHINE
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
 
-# Installations (panneaux qui rendent un service) : elles n'ont pas de sprite, leur nom vient de leur type.
-FACILITY_KINDS = frozenset({VENDING_MACHINE, PRIZE_VENDOR})
+# Installations (panneaux qui rendent un service) : elles n'ont pas de sprite, leur nom vient de leur clé
+# (npc_text_names.csv) ou de leur type (facility_names.csv).
+FACILITY_KINDS = frozenset({VENDING_MACHINE, PRIZE_VENDOR, HEAL_SPOT})
+# Apparence d'un personnage qui est un Pokémon (npc_names.csv) : son cri le nomme mieux que son sprite.
+_POKEMON_CHARACTER = "npc_pokemon"
 
 
 def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
@@ -103,7 +107,7 @@ class _ObjectRows:
         if obj.version and obj.version not in self.versions:
             raise ValueError(f"Objet de carte d'une version inconnue de PokéAPI : {obj}")
         species = self.species
-        for name in [obj.pokemon, *(mon[0] for mon in obj.party)] + [
+        for name in [obj.pokemon, obj.cry, *(mon[0] for mon in obj.party)] + [
             p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
         ]:
             if name and name not in species:
@@ -201,9 +205,11 @@ class _ObjectNames:
         return sorted(texts - self.used_texts)
 
     def of(self, obj: ObjectRow) -> str:
-        if obj.kind == "npc" and obj.text in self.characters.by_text:
-            self.used_texts.add(obj.text)
-            return self.characters.by_text[obj.text]
+        """Nom relu par clé, sinon d'après la nature de l'objet : classe du dresseur, Pokémon, objet, type
+        d'installation, cri du Pokémon pour un personnage qui en a l'apparence, ou sprite du personnage."""
+        if obj.kind in ("npc", *FACILITY_KINDS) and obj.key in self.characters.by_text:
+            self.used_texts.add(obj.key)
+            return self.characters.by_text[obj.key]
         if obj.kind == "trainer" and obj.trainer_class:
             return self.characters.trainer(obj.trainer_class)
         if obj.kind == "pokemon" and obj.pokemon:
@@ -212,4 +218,6 @@ class _ObjectNames:
             return self.items.name_of(obj.item)
         if obj.kind in FACILITY_KINDS:
             return self.characters.facility(obj.kind)
+        if obj.cry and self.characters.npc_kind(obj.sprite) == _POKEMON_CHARACTER:
+            return self.pokemon[self.species[obj.cry]]
         return self.characters.character(obj.sprite)
