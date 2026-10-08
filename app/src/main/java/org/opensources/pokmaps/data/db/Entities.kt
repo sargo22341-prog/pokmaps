@@ -447,7 +447,19 @@ data class NpcOfferEntity(
     val price: Int?,
     @ColumnInfo(name = "wanted_pokemon_id") val wantedPokemonId: Int?,
     @ColumnInfo(name = "wanted_item_id") val wantedItemId: Int?,
-    @ColumnInfo(name = "version_id") val versionId: Int?
+    @ColumnInfo(name = "version_id") val versionId: Int?,
+    @ColumnInfo(name = "time_mask") val timeMask: Int?,
+    @ColumnInfo(name = "weekday_mask") val weekdayMask: Int?
+)
+
+@Entity(
+    tableName = "npc_offer_story",
+    primaryKeys = ["npc_offer_id", "slot"]
+)
+data class NpcOfferStoryEntity(
+    @ColumnInfo(name = "npc_offer_id") val npcOfferId: Int,
+    val slot: Int,
+    @ColumnInfo(name = "description_fr") val descriptionFr: String
 )
 
 @Entity(

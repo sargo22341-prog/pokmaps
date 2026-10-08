@@ -123,7 +123,26 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   attaque particulière, avec sa probabilité en chances sur 256 relevée dans `engine/battle/effects.asm`) et placement
   des cartes là où les connexions ne suffisent pas : cartes ancrées dans une carte du monde (`map_anchors.csv`),
   connexions incohérentes écartées (`map_connection_skips.csv`) et ville ou route d'origine d'une carte atteinte de
-  plusieurs côtés (`map_parents.csv`).
+  plusieurs côtés (`map_parents.csv`), et sens des drapeaux du scénario qu'exigent les offres
+  (`story_events.csv`, voir ci-dessous).
+
+Les objets temporaires sans position fixe sont aussi écartés dans `npc_duplicates.csv` : le sbire des caméras
+du repaire Rocket est masqué à l'entrée, puis déplacé par chaque alarme ; sa position initiale dans le mur
+n'est jamais affichée par le jeu.
+
+Chaque offre de personnage dit aussi quand elle est possible : moments de la journée, jours de la semaine et étapes
+du scénario. Ces conditions sont lues dans les scripts pret par une analyse de flot (`offer_conditions.py`,
+`pret_conditions.py` pour Rouge, Bleu et Jaune, `pret_gen2_conditions.py` et `pret_gen2_presence.py` pour la 2e
+génération) : une offre n'exige que ce qu'exigent tous les chemins du script qui y mènent, avec la présence du
+personnage (moments de son object_event, rappels de la carte selon le jour ou le moment, drapeau qui le cache,
+objets masqués au départ de la 1re génération, table de textes choisie par le script de la carte). Les tests faits
+dans les routines du moteur (`engine/`), hors des scripts de carte, ne sont pas lus : l'hôtesse du Club Link de la
+1re génération attend le Pokédex sans que l'application le dise. Le nom d'un drapeau ne suffit pas à dire ce qu'il
+signifie (`EVENT_MET_BILL` est levé au début de Cristal et baissé quand on rencontre Léo) : `story_events.csv`
+donne, pour chaque drapeau rencontré, la phrase à afficher quand il est levé ou baissé (vide s'il ne s'agit pas
+d'une étape : drapeau du jour, appel téléphonique, détail de scène) et l'endroit de pret qui le change. Un drapeau
+absent du fichier, une ligne inutilisée ou une offre jamais possible arrêtent la génération ; une offre que le jeu
+ne permet jamais se retire dans `npc_offers.csv` (la CT12 de l'institutrice du passage, dans Cristal).
 
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
@@ -199,7 +218,12 @@ après la réussite de toutes les étapes ; une fenêtre d'erreur précise l'ét
 
 ## Compiler en local
 
-Prérequis : JDK 21, Android SDK (API 37), Python 3.11 ou plus récent, git.
+Prérequis : Android SDK (API 37), Python 3.11 ou plus récent, git, et un JDK pour lancer `gradlew`.
+
+Gradle exécute toujours la build sur **Temurin 21**, le JDK de la CI, quel que soit le JDK qui lance `gradlew`
+(celui d'Android Studio, par exemple) : `gradle/gradle-daemon-jvm.properties` fixe ce critère et Gradle télécharge
+ce JDK une fois s'il n'est pas installé. Sur un JDK 24 ou plus récent, ktlint (compilateur Kotlin embarqué) et le
+protobuf de DataStore dans les tests JVM appellent `sun.misc.Unsafe`, que ces JDK signalent par un avertissement.
 
 ```bash
 # 1. Générer la base de données, les images et les cartes (télécharge les sources dans tools/.cache)
@@ -236,6 +260,12 @@ choix du jeu, réglages) et sont ignorés si elle n'a pas été générée.
 
 `.\gradlew.bat dependencyUpdates` liste les versions stables disponibles sans modifier le
 catalogue. Toute mise à jour reste manuelle et doit être vérifiée avec les contrôles du projet.
+
+Seul avertissement restant : `Configuration.setVisible(boolean) method has been deprecated`, à la configuration
+du projet. Il vient d'AGP lui-même (`BasePlugin` et `SourceSetManager`, appelés à l'application du plugin), pas
+de notre build : Gradle le déprécie depuis la 9.1, AGP 9.4.1 exige Gradle 9.6 ou plus récent, et AGP 9.5.0-alpha08
+l'appelle encore. Il reste affiché (`org.gradle.warning.mode=all`) ; vérifier sa disparition à chaque montée d'AGP,
+et monter AGP avant que Gradle 11 ne retire la méthode.
 
 Pour une prochaine release, ajouter une ligne française sous le marqueur `<!-- notes -->` dans
 [`RELEASE_NOTES.md`](RELEASE_NOTES.md). Le workflow inclut ces notes dans la GitHub Release et,

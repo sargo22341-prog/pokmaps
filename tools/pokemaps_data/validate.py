@@ -165,7 +165,19 @@ CHECKS = (
              OR (n.version_id IS NOT NULL AND n.version_id NOT IN
                (SELECT v.id FROM version v WHERE v.version_group_id = m.version_group_id))
              OR n.item_id NOT IN (SELECT id FROM item) OR n.wanted_item_id NOT IN (SELECT id FROM item)
-             OR n.pokemon_id NOT IN (SELECT id FROM pokemon)""",
+             OR n.pokemon_id NOT IN (SELECT id FROM pokemon)
+             OR n.time_mask NOT BETWEEN 1 AND 6 OR n.weekday_mask NOT BETWEEN 1 AND 126
+             OR (coalesce(n.time_mask, n.weekday_mask) IS NOT NULL AND m.version_group_id IN
+               (SELECT vg.id FROM version_group vg JOIN generation g ON g.id = vg.generation_id
+                WHERE g.identifier = 'generation-i'))""",
+    ),
+    (
+        "étape du scénario d'une offre incohérente",
+        """SELECT s.* FROM npc_offer_story s LEFT JOIN npc_offer n ON n.id = s.npc_offer_id
+           WHERE n.id IS NULL OR trim(s.description_fr) = '' OR s.slot < 1
+             OR s.slot > (SELECT count(*) FROM npc_offer_story o WHERE o.npc_offer_id = s.npc_offer_id)
+             OR EXISTS (SELECT 1 FROM npc_offer_story o WHERE o.npc_offer_id = s.npc_offer_id
+               AND o.slot != s.slot AND o.description_fr = s.description_fr)""",
     ),
     (
         "jaquette de version incohérente",

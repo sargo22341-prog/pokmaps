@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from .pret_gen2_offers import Gen2Offers
+from .pret_gen2_presence import Gen2Presence
 from .pret_gen2_scripts import ScriptFile
 from .pret_gen2_tilesets import CollisionRules, Gen2Tileset, read_collision_rules, read_tilesets
 from .pret_gen2_wild import headbutt_maps, rock_smash_maps
@@ -221,6 +222,11 @@ class Gen2PretRepo:
     def offers(self) -> Gen2Offers:
         """Offres des personnages et des installations, lues dans leurs scripts (pret_gen2_offers)."""
         return Gen2Offers(self)
+
+    @cached_property
+    def presence(self) -> Gen2Presence:
+        """Ce qu'exige la présence des personnages sur leur carte (pret_gen2_presence)."""
+        return Gen2Presence(self, self.offers.conditions, self.offers.std_scripts)
 
     # --- Rencontres --------------------------------------------------------------
 

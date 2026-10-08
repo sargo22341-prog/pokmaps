@@ -24,7 +24,7 @@ from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 11
+SCHEMA_VERSION = 12
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 

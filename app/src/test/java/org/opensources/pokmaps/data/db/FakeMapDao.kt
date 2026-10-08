@@ -6,7 +6,8 @@ package org.opensources.pokmaps.data.db
  * Dôme à ramasser, le scientifique qui le ranime en Kabuto, une infirmière et un comptoir des lots dont l'Abra
  * coûte plus cher dans Rouge que dans Bleu. `failing` simule une base illisible, `encountersFailing` une erreur
  * limitée à la lecture des rencontres. `includeVersionPokemon` ajoute sur la Route 1 un Pokémon fixe dont le niveau
- * dépend de la version, comme la requête qui ne garde que les objets de la version demandée.
+ * dépend de la version, comme la requête qui ne garde que les objets de la version demandée. Un personnage d'un
+ * jour de la semaine (`SIBLING`) donne une baie le lundi soir, après deux étapes du scénario.
  */
 internal class FakeMapDao(
     private val failing: Boolean = false,
@@ -163,11 +164,36 @@ internal class FakeMapDao(
 
             SECOND_GENERATION -> secondGenerationOffers()
 
+            SIBLING -> listOf(
+                offer(
+                    "gift_item",
+                    BERRY,
+                    "oran-berry",
+                    "Baie Oran",
+                    quantity = 1,
+                    id = SIBLING_GIFT,
+                    timeMask = 4,
+                    weekdayMask = 2
+                ),
+                offer("gift_item", POTION, "potion", "Potion", quantity = 1, id = SIBLING_POTION)
+            )
+
             PRIZES -> listOf(
                 offer("prize_pokemon", pokemon = ABRA, pokemonName = "Abra", quantity = 9, price = abraCoins(versionId))
             )
 
             else -> emptyList()
+        }
+    }
+
+    override suspend fun offerStories(objectId: Int) = read {
+        if (objectId == SIBLING) {
+            listOf(
+                OfferStoryRow(SIBLING_GIFT, "Après le badge Zéphyr"),
+                OfferStoryRow(SIBLING_GIFT, "Après la libération de la Tour Radio")
+            )
+        } else {
+            emptyList()
         }
     }
 
@@ -193,8 +219,12 @@ internal class FakeMapDao(
         pokemonName: String? = null,
         quantity: Int? = null,
         price: Int? = null,
-        wanted: Pair<Int, String>? = null
+        wanted: Pair<Int, String>? = null,
+        id: Int = 0,
+        timeMask: Int? = null,
+        weekdayMask: Int? = null
     ) = NpcOfferRow(
+        id = id,
         kind = kind,
         itemId = item,
         itemIdentifier = itemIdentifier,
@@ -209,7 +239,9 @@ internal class FakeMapDao(
         wantedItemId = null,
         wantedItemIdentifier = null,
         wantedItemName = null,
-        wantedItemHasSprite = null
+        wantedItemHasSprite = null,
+        timeMask = timeMask,
+        weekdayMask = weekdayMask
     )
 
     /** Les lots du Casino diffèrent entre Rouge (version 1) et Bleu. */
@@ -258,6 +290,11 @@ internal class FakeMapDao(
         const val BERRY = 132
         const val CYNDAQUIL = 155
         const val TOGEPI = 175
+
+        /** Personnage d'un jour de la semaine : une baie le lundi soir après deux étapes, une Potion toujours. */
+        const val SIBLING = 21
+        const val SIBLING_GIFT = 1
+        const val SIBLING_POTION = 2
 
         private val PIDGEY_ENCOUNTER = EncounterRow(
             versionId = 1,

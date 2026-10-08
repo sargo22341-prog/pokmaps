@@ -71,7 +71,8 @@ internal class MapOverlayRenderer {
         objects.filter { MapLayer.of(it.kind) in state.layers }.forEach { obj ->
             val inZone = obj.mapId in zoneParts
             val pokemon = obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null
-            drawMarker(state, "${MapMarkerIds.OBJECT}:${obj.id}", obj.x, obj.y, !inZone, 1f, pokemon) {
+            val position = state.catalog.markerPosition(obj)
+            drawMarker(state, "${MapMarkerIds.OBJECT}:${obj.id}", position.x, position.y, !inZone, 1f, pokemon) {
                 ObjectMarker(
                     state.mapState,
                     obj,
@@ -103,11 +104,12 @@ internal class MapOverlayRenderer {
     private fun drawFocusedObject(state: MapRenderState) {
         val focused = state.overlays.focusedObjectId?.let { state.catalog.objectsById[it] }
             ?.takeIf { it.mapId in state.catalog.partsOf(state.map.id) } ?: return
+        val position = state.catalog.markerPosition(focused)
         drawMarker(
             state = state,
             id = "${MapMarkerIds.HIGHLIGHT_OBJECT}:${focused.id}",
-            x = focused.x,
-            y = focused.y,
+            x = position.x,
+            y = position.y,
             lazy = false,
             zIndex = 3f
         ) {
@@ -144,7 +146,9 @@ internal class MapOverlayRenderer {
             ((it.kind == MapObjectKind.POKEMON && it.pokemonId == pokemonId) || it.id in overlays.highlightedObjects) &&
                 it.id != overlays.focusedObjectId
         }.forEach { obj ->
-            drawMarker(state, "${MapMarkerIds.HIGHLIGHT_OBJECT}:${obj.id}", obj.x, obj.y, lazy = false, zIndex = 3f) {
+            val position = state.catalog.markerPosition(obj)
+            val id = "${MapMarkerIds.HIGHLIGHT_OBJECT}:${obj.id}"
+            drawMarker(state, id, position.x, position.y, lazy = false, zIndex = 3f) {
                 HighlightMarker()
             }
         }

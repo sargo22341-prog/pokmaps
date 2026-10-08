@@ -14,7 +14,19 @@ from functools import cached_property
 from pathlib import Path
 
 from .games import KANTO
-from .pret_models import Connection, MapObject, NpcOffer, PretMap, Tileset, TrainerPokemon, Warp
+from .pret_conditions import Gen1Conditions
+from .pret_models import (
+    Connection,
+    LocatedLine,
+    MapObject,
+    NpcOffer,
+    PretMap,
+    ScriptIndex,
+    Tileset,
+    TrainerPokemon,
+    Warp,
+    merged_offers,
+)
 from .pret_source import macro_args, parse_int, source_lines
 
 BLOCK_PX = 32
@@ -383,21 +395,29 @@ class PretRepo:
     # --- Personnages : dons, boutiques, échanges --------------------------------
 
     @cached_property
-    def _script_bodies(self) -> dict[str, list[str]]:
-        """Label de texte ou de script -> ses lignes, jusqu'au label suivant (scripts/ et data/items/marts.asm)."""
+    def script_index(self) -> ScriptIndex:
+        """Labels de texte ou de script, leurs lignes jusqu'au label suivant et ce label suivant, où l'exécution
+        continue faute de saut (scripts/ et data/items/marts.asm)."""
         files = [*sorted(self.path("scripts").glob("*.asm")), self.path("data/items/marts.asm")]
         bodies: dict[str, list[str]] = {}
+        following: dict[str, str] = {}
         label_re = re.compile(r"^([A-Za-z_]\w*)::?$")
         for path in files:
             current = None
             for line in source_lines(path):
                 match = label_re.match(line)
                 if match:
+                    if current:
+                        following[current] = match.group(1)
                     current = match.group(1)
                     bodies[current] = []
                 elif current:
                     bodies[current].append(line)
-        return bodies
+        return ScriptIndex(bodies, following)
+
+    @property
+    def _script_bodies(self) -> dict[str, list[str]]:
+        return self.script_index.bodies
 
     @cached_property
     def _text_labels(self) -> dict[str, str]:
@@ -451,30 +471,38 @@ class PretRepo:
         ]
         return {const: index for index, const in enumerate(consts)}
 
-    def _expanded_body(self, label: str | None, depth: int) -> list[str]:
+    def _expanded_body(self, label: str | None, depth: int) -> list[LocatedLine]:
         """Lignes d'un texte, en suivant les appels vers d'autres textes ou scripts (farcall Route1PrintText,
         jp nz, RedsHouse1FMomHealScript…). `depth` borne la profondeur des appels suivis."""
         body = self._script_bodies.get(label or "", [])
-        if depth == 0:
-            return body
-        result = []
-        for line in body:
-            result.append(line)
+        result: list[LocatedLine] = []
+        for index, line in enumerate(body):
+            result.append(LocatedLine(label or "", index, line))
+            if depth == 0:
+                continue
             parts = line.replace(",", " ").split()
             target = parts[-1] if parts else None
             if parts and parts[0] in CALLS and target in self._script_bodies and target != label:
                 result += self._expanded_body(target, depth - 1)
         return result
 
+    def located_text_body(self, text: str | None) -> list[LocatedLine]:
+        """Lignes exécutées quand le joueur lit ce texte (constante TEXT_…), appels compris, avec leur place."""
+        return self._expanded_body(self._text_labels.get(text or ""), depth=TEXT_CALL_DEPTH)
+
     def text_body(self, text: str | None) -> list[str]:
         """Lignes exécutées quand le joueur lit ce texte (constante TEXT_…), appels compris."""
-        return self._expanded_body(self._text_labels.get(text or ""), depth=TEXT_CALL_DEPTH)
+        return [located.line for located in self.located_text_body(text)]
 
     def script_body(self, label: str) -> list[str]:
         """Lignes d'un label des scripts (ex. FossilsList), sans suivre ses appels."""
         if label not in self._script_bodies:
             raise ValueError(f"{self.root.name} : label {label} introuvable dans scripts/")
         return self._script_bodies[label]
+
+    def text_label(self, text: str | None) -> str | None:
+        """Label du texte affiché pour la constante TEXT_…, None s'il n'est dans aucun script."""
+        return self._text_labels.get(text or "")
 
     def leader_gifts(self, map_label: str) -> list[NpcOffer]:
         """CT donnée par le champion d'une arène après le combat (script de la carte, pas de son texte)."""
@@ -491,28 +519,36 @@ class PretRepo:
                 offers.append(NpcOffer("gift_item", item=pending[0], quantity=pending[1]))
         return list(dict.fromkeys(offers))
 
+    @cached_property
+    def conditions(self) -> Gen1Conditions:
+        return Gen1Conditions(self)
+
     def npc_offers(self, text: str | None) -> list[NpcOffer]:
-        """Objets donnés ou vendus, Pokémon donnés ou échangés par le personnage qui affiche ce texte."""
+        """Objets donnés ou vendus, Pokémon donnés ou échangés par le personnage qui affiche ce texte, chacun avec
+        ce qu'exige le texte pour le proposer."""
+        place = self.conditions.offer_place(text)
         offers: list[NpcOffer] = []
         pending: tuple[str, int] | None = None
-        for line in self.text_body(text):
+        for located in self.located_text_body(text):
+            line = located.line
             if line.startswith("script_mart "):
                 offers += [
-                    NpcOffer("sale", item=item, price=self.prices.get(item)) for item in macro_args(line, "script_mart")
+                    place.at(located, NpcOffer("sale", item=item, price=self.prices.get(item)))
+                    for item in macro_args(line, "script_mart")
                 ]
             elif line.startswith("lb bc,"):
                 args = macro_args(line, "lb bc,")
                 pending = (args[0], parse_int(args[1])) if len(args) == 2 and not args[1].startswith("[") else None
             elif line == "call GiveItem" and pending:
-                offers.append(NpcOffer("gift_item", item=pending[0], quantity=pending[1]))
+                offers.append(place.at(located, NpcOffer("gift_item", item=pending[0], quantity=pending[1])))
             elif line == "call GivePokemon" and pending:
-                offers.append(NpcOffer("gift_pokemon", pokemon=pending[0], quantity=pending[1]))
+                offers.append(place.at(located, NpcOffer("gift_pokemon", pokemon=pending[0], quantity=pending[1])))
             elif line.startswith("ld a, TRADE_FOR_"):
                 index = self._trade_index.get(line.split(",")[1].strip())
                 if index is not None and index < len(self.trades):
                     wanted, given = self.trades[index]
-                    offers.append(NpcOffer("trade", pokemon=given, wanted=wanted))
-        return list(dict.fromkeys(offers))
+                    offers.append(place.at(located, NpcOffer("trade", pokemon=given, wanted=wanted)))
+        return merged_offers(offers)
 
     # --- Cartes ---------------------------------------------------------------
 

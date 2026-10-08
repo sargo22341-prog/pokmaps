@@ -24,18 +24,41 @@ data class MapSpot(val mapId: Int, val kind: SpotKind, val x: Int, val y: Int)
 /** Pokémon de l'équipe d'un dresseur, avec les attaques qu'il utilise en combat. */
 data class TrainerPokemon(val pokemonId: Int, val name: String, val level: Int, val moves: List<LearnedMove>)
 
-/** Ce que propose un personnage ou une installation quand on lui parle. */
+/**
+ * Ce que propose un personnage ou une installation quand on lui parle, et ce qu'exige l'offre pour être possible
+ * (`condition` : moments, jours, étapes du scénario).
+ */
 sealed interface NpcOffer {
-    data class GiftItem(val item: OfferItem, val quantity: Int) : NpcOffer
+    val condition: OfferCondition
 
-    data class Sale(val item: OfferItem, val price: Int?) : NpcOffer
+    data class GiftItem(
+        val item: OfferItem,
+        val quantity: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
+
+    data class Sale(
+        val item: OfferItem,
+        val price: Int?,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Pokémon donné, avec l'objet qu'il tient (2e génération : Baie Oran des Pokémon de départ). */
-    data class GiftPokemon(val pokemonId: Int, val name: String, val level: Int?, val heldItem: OfferItem? = null) :
-        NpcOffer
+    data class GiftPokemon(
+        val pokemonId: Int,
+        val name: String,
+        val level: Int?,
+        val heldItem: OfferItem? = null,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Œuf donné, qui éclot au niveau `level` (Togepi de l'assistant du Prof. Orme). */
-    data class GiftEgg(val pokemonId: Int, val name: String, val level: Int) : NpcOffer
+    data class GiftEgg(
+        val pokemonId: Int,
+        val name: String,
+        val level: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Pokémon reçu contre un autre, avec l'objet qu'il tient (2e génération). */
     data class Trade(
@@ -43,33 +66,66 @@ sealed interface NpcOffer {
         val name: String,
         val wantedId: Int,
         val wantedName: String,
-        val heldItem: OfferItem? = null
+        val heldItem: OfferItem? = null,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
     ) : NpcOffer
 
     /** Objet donné contre un autre (Bicyclette contre le Bon Commande, CT contre une boisson). */
-    data class Exchange(val item: OfferItem, val wanted: OfferItem) : NpcOffer
+    data class Exchange(
+        val item: OfferItem,
+        val wanted: OfferItem,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Lot du Casino, contre des jetons. */
-    data class PrizeItem(val item: OfferItem, val coins: Int) : NpcOffer
+    data class PrizeItem(
+        val item: OfferItem,
+        val coins: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Récompense de Buena contre les points de la Carte Bleue. */
-    data class PointPrize(val item: OfferItem, val points: Int) : NpcOffer
+    data class PointPrize(
+        val item: OfferItem,
+        val points: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
-    data class PrizePokemon(val pokemonId: Int, val name: String, val level: Int, val coins: Int) : NpcOffer
+    data class PrizePokemon(
+        val pokemonId: Int,
+        val name: String,
+        val level: Int,
+        val coins: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Jetons du Casino vendus (`coins` jetons pour `price` ₽) ou donnés. */
-    data class CoinSale(val coins: Int, val price: Int) : NpcOffer
+    data class CoinSale(
+        val coins: Int,
+        val price: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
-    data class CoinGift(val coins: Int) : NpcOffer
+    data class CoinGift(val coins: Int, override val condition: OfferCondition = OfferCondition.ALWAYS) : NpcOffer
 
     /** Fossile ranimé en Pokémon. */
-    data class FossilRevival(val fossil: OfferItem, val pokemonId: Int, val name: String, val level: Int) : NpcOffer
+    data class FossilRevival(
+        val fossil: OfferItem,
+        val pokemonId: Int,
+        val name: String,
+        val level: Int,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 
     /** Baie ou Noigrume que donne un arbre, une fois par jour. */
-    data class FruitTree(val item: OfferItem) : NpcOffer
+    data class FruitTree(val item: OfferItem, override val condition: OfferCondition = OfferCondition.ALWAYS) : NpcOffer
 
     /** Service rendu, gratuit ou payant (`price` en ₽ pour le toilettage, en jetons pour le tuteur). */
-    data class Service(val service: CharacterService, val price: Int? = null) : NpcOffer
+    data class Service(
+        val service: CharacterService,
+        val price: Int? = null,
+        override val condition: OfferCondition = OfferCondition.ALWAYS
+    ) : NpcOffer
 }
 
 /** Nature d'une offre lue dans la base. */

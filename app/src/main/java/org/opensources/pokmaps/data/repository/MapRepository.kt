@@ -20,6 +20,7 @@ import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.MapSpot
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.OfferCondition
 import org.opensources.pokmaps.domain.map.OfferItem
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
@@ -153,61 +154,78 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
         }
     }
 
-    /** Offres d'un personnage ou d'une installation dans la version du jeu. */
-    suspend fun offers(game: Game, objectId: Int): List<NpcOffer> =
-        dao.offers(objectId, game.versionId).map { it.toOffer() }
+    /** Offres d'un personnage ou d'une installation dans la version du jeu, avec ce qu'exige chacune. */
+    suspend fun offers(game: Game, objectId: Int): List<NpcOffer> {
+        val stories = dao.offerStories(objectId).groupBy({ it.offerId }, { it.description })
+        return dao.offers(objectId, game.versionId).map { row ->
+            row.toOffer(OfferCondition.fromMasks(row.timeMask, row.weekdayMask, stories[row.id].orEmpty()))
+        }
+    }
 
     /** Offre lue dans la base ; une ligne incomplète est une erreur (la base est validée à la génération). */
-    private fun NpcOfferRow.toOffer(): NpcOffer = when (OfferKind.from(kind)) {
-        OfferKind.GIFT_ITEM -> NpcOffer.GiftItem(offerItem(), quantity ?: 1)
+    private fun NpcOfferRow.toOffer(condition: OfferCondition): NpcOffer = when (OfferKind.from(kind)) {
+        OfferKind.GIFT_ITEM -> NpcOffer.GiftItem(offerItem(), quantity ?: 1, condition)
 
-        OfferKind.SALE -> NpcOffer.Sale(offerItem(), price)
+        OfferKind.SALE -> NpcOffer.Sale(offerItem(), price, condition)
 
         OfferKind.GIFT_POKEMON ->
-            NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity, heldItem())
+            NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity, heldItem(), condition)
 
-        OfferKind.GIFT_EGG -> NpcOffer.GiftEgg(required(pokemonId), required(pokemonName), required(quantity))
+        OfferKind.GIFT_EGG ->
+            NpcOffer.GiftEgg(required(pokemonId), required(pokemonName), required(quantity), condition)
 
-        OfferKind.TRADE -> NpcOffer.Trade(
-            required(pokemonId),
-            required(pokemonName),
-            required(wantedPokemonId),
-            required(wantedPokemonName),
-            heldItem()
-        )
+        OfferKind.TRADE -> trade(condition)
 
-        OfferKind.EXCHANGE -> NpcOffer.Exchange(offerItem(), wantedItem())
+        OfferKind.EXCHANGE -> NpcOffer.Exchange(offerItem(), wantedItem(), condition)
 
-        OfferKind.PRIZE_ITEM -> NpcOffer.PrizeItem(offerItem(), required(price))
+        OfferKind.PRIZE_ITEM -> NpcOffer.PrizeItem(offerItem(), required(price), condition)
 
-        OfferKind.POINT_PRIZE -> NpcOffer.PointPrize(offerItem(), required(price))
+        OfferKind.POINT_PRIZE -> NpcOffer.PointPrize(offerItem(), required(price), condition)
 
-        OfferKind.PRIZE_POKEMON ->
-            NpcOffer.PrizePokemon(required(pokemonId), required(pokemonName), required(quantity), required(price))
+        OfferKind.PRIZE_POKEMON -> prizePokemon(condition)
 
-        OfferKind.COIN_SALE -> NpcOffer.CoinSale(required(quantity), required(price))
+        OfferKind.COIN_SALE -> NpcOffer.CoinSale(required(quantity), required(price), condition)
 
-        OfferKind.COIN_GIFT -> NpcOffer.CoinGift(required(quantity))
+        OfferKind.COIN_GIFT -> NpcOffer.CoinGift(required(quantity), condition)
 
-        OfferKind.FOSSIL ->
-            NpcOffer.FossilRevival(offerItem(), required(pokemonId), required(pokemonName), required(quantity))
+        OfferKind.FOSSIL -> fossilRevival(condition)
 
-        OfferKind.FRUIT_TREE -> NpcOffer.FruitTree(offerItem())
+        OfferKind.FRUIT_TREE -> NpcOffer.FruitTree(offerItem(), condition)
 
-        OfferKind.HEAL -> NpcOffer.Service(CharacterService.HEAL)
+        OfferKind.HEAL -> NpcOffer.Service(CharacterService.HEAL, condition = condition)
 
-        OfferKind.CABLE_CLUB -> NpcOffer.Service(CharacterService.CABLE_CLUB)
+        OfferKind.CABLE_CLUB -> NpcOffer.Service(CharacterService.CABLE_CLUB, condition = condition)
 
-        OfferKind.NAME_RATER -> NpcOffer.Service(CharacterService.NAME_RATER)
+        OfferKind.NAME_RATER -> NpcOffer.Service(CharacterService.NAME_RATER, condition = condition)
 
-        OfferKind.DAYCARE -> NpcOffer.Service(CharacterService.DAYCARE)
+        OfferKind.DAYCARE -> NpcOffer.Service(CharacterService.DAYCARE, condition = condition)
 
-        OfferKind.MOVE_DELETER -> NpcOffer.Service(CharacterService.MOVE_DELETER)
+        OfferKind.MOVE_DELETER -> NpcOffer.Service(CharacterService.MOVE_DELETER, condition = condition)
 
-        OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price)
+        OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price, condition)
 
-        OfferKind.MOVE_TUTOR -> NpcOffer.Service(CharacterService.MOVE_TUTOR, required(price))
+        OfferKind.MOVE_TUTOR -> NpcOffer.Service(CharacterService.MOVE_TUTOR, required(price), condition)
     }
+
+    private fun NpcOfferRow.trade(condition: OfferCondition) = NpcOffer.Trade(
+        required(pokemonId),
+        required(pokemonName),
+        required(wantedPokemonId),
+        required(wantedPokemonName),
+        heldItem(),
+        condition
+    )
+
+    private fun NpcOfferRow.prizePokemon(condition: OfferCondition) = NpcOffer.PrizePokemon(
+        required(pokemonId),
+        required(pokemonName),
+        required(quantity),
+        required(price),
+        condition
+    )
+
+    private fun NpcOfferRow.fossilRevival(condition: OfferCondition) =
+        NpcOffer.FossilRevival(offerItem(), required(pokemonId), required(pokemonName), required(quantity), condition)
 
     private fun NpcOfferRow.offerItem() =
         OfferItem(required(itemId), required(itemIdentifier), required(itemName), itemHasSprite == true)

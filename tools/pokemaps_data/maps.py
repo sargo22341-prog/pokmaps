@@ -116,6 +116,9 @@ class GameMapData:
     warps: list[WarpRow]
     objects: list[ObjectRow]
     spots: list[SpotRow] = field(default_factory=list)
+    # Toutes les cases de chaque terrain sauvage, (identifiant de carte, terrain) -> centres en pixels de la carte
+    # affichée : un emplacement retouché à la main (map_spots.csv) doit en faire partie dans chaque jeu.
+    terrain: dict[tuple[str, str], frozenset[tuple[int, int]]] = field(default_factory=dict)
 
 
 def renderer(game_maps: GameMaps) -> MapRenderer:
@@ -149,7 +152,7 @@ def export_game(
     spots = _spot_rows(game_maps)
     map_renderer.write_sprites(sprites, output / "sprites")
     game_areas = [(const, area) for const, area in [*areas, *_roaming_areas(game_maps)] if const in placements]
-    return GameMapData(rows, game_areas, warps, objects, spots)
+    return GameMapData(rows, game_areas, warps, objects, spots, _terrain(game_maps))
 
 
 def _roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
@@ -220,6 +223,16 @@ def _spot_rows(game_maps: GameMaps) -> list[SpotRow]:
         for kind, cells in game_maps.spots(const).items()
         for x, y in cells
     ]
+
+
+def _terrain(game_maps: GameMaps) -> dict[tuple[str, str], frozenset[tuple[int, int]]]:
+    """Centres des cases de chaque terrain sauvage des cartes placées où un Pokémon dessiné ne masque rien."""
+    return {
+        (identifier(const), kind): frozenset(game_maps.point(const, x, y) for x, y in cells)
+        for const in game_maps.placements
+        for kind, cells in game_maps.free_cells(const).items()
+        if cells
+    }
 
 
 def _warp_target(game_maps: GameMaps, source: str, target: str, number: int) -> tuple[str, int, int] | None:

@@ -174,6 +174,21 @@ data class MapCatalog(
     /** Tous les objets et personnages du jeu, par identifiant. */
     val objectsById: Map<Int, MapObject> by lazy { objects.values.flatten().associateBy { it.id } }
 
+    /**
+     * Où dessiner chaque objet : le centre de sa case, sauf quand plusieurs objets partagent une case de la même
+     * carte affichée (personnages de deux étapes du scénario, objet caché sous un rocher) ; ils s'y écartent alors
+     * côte à côte pour rester visibles et se toucher chacun.
+     */
+    val markerPositions: Map<Int, MarkerPosition> by lazy {
+        objects.values.flatten()
+            .groupBy { Triple(displayedMapOf(it.mapId)?.id, it.x, it.y) }
+            .values
+            .flatMap { shared -> spreadInCell(shared.sortedBy { it.id }) }
+            .toMap()
+    }
+
+    fun markerPosition(obj: MapObject): MarkerPosition = markerPositions[obj.id] ?: MarkerPosition(obj.x, obj.y)
+
     /** Carte (affichable ou ville, route) d'après son identifiant. */
     fun mapByIdentifier(identifier: String): MapInfo? = maps.values.firstOrNull { it.identifier == identifier }
 

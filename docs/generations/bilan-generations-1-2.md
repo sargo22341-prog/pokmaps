@@ -18,23 +18,38 @@ les offres des personnages, les règles de capture et la concordance Room/SQLite
 
 ## À fermer avant d'étendre les jeux
 
-- **Outillage sans avertissement.** La validation Android réussit, mais l'environnement local émet
-  des dépréciations Gradle (`Configuration.setVisible`) et JVM (`sun.misc.Unsafe`, ktlint et
-  DataStore). Identifier l'origine et valider une combinaison d'outils compatible, sans suppression
-  globale d'avertissements. Les changements de dépendances demandent une validation distincte.
-- **Relecture visuelle des six versions.** Les validations structurelles ne prouvent pas que chaque
-  entrée, objet, personnage et emplacement sauvage est visuellement bien placé. Revoir les variantes
-  de Jaune, Johto et Kanto dans Or/Argent/Cristal, puis corriger les éventuels écarts dans `tools/data/`.
-- **Conditions des scripts.** Le modèle des offres (`npc_offer`) ne représente pas de condition
-  d'horaire, de jour ou de progression. Les rencontres gardent des conditions textuelles comme les
-  essaims et le Concours, mais la liste n'est pas un simulateur de partie. Si le but est d'indiquer
-  quand une offre devient disponible, il faut ajouter cette information et la vérifier contre pret.
+- **Outillage : analyse terminée, avertissement AGP toujours présent.** Gradle utilise Temurin 21
+  comme la CI (`gradle/gradle-daemon-jvm.properties`) : les avertissements `sun.misc.Unsafe` de
+  ktlint et DataStore ont disparu. `Configuration.setVisible` vient d'AGP lui-même ; l'origine et
+  les versions examinées sont documentées dans le README. Aucun avertissement n'est masqué.
+  Ce point reste à surveiller lors des mises à jour d'AGP ; le dépôt n'est donc pas déclaré sans
+  avertissement d'outillage.
+- **Relecture visuelle restante : terminée sur les rendus générés du PC.** Les six assemblages
+  du monde ont été examinés : Kanto de Rouge/Bleu et de Jaune, Johto et Kanto d'Or/Argent et de
+  Cristal. Les 796 positions d'entrées de ces assemblages ont été revues sur des extraits agrandis,
+  marqueur superposé au décor, sans nouvel écart confirmé. Les plans de Rouge/Bleu et d'Or/Argent
+  sont communs aux deux versions de chaque groupe.
+  Les cas signalés par l'audit des cases infranchissables sont légitimes : les 16 objets des salles
+  des Ruines d'Alpha de Cristal sont sur des socles ; l'institutrice et le Persian du Parc Naturel,
+  le capitaine du M/S Aquaria et la Pokéfan du Centre Pokémon de Doublonville sont assis ; le vendeur
+  du toit du Centre Commercial est derrière son étal. Ils restent aux coordonnées de pret.
+  Le sbire des caméras du repaire d'Acajou est en revanche écarté dans `npc_duplicates.csv`, avec
+  un test sur Or/Argent et Cristal : le callback le masque, puis chaque alarme le déplace avant son
+  apparition ; il n'est jamais visible en (0, 0). Les corrections antérieures des emplacements
+  sauvages de Jaune et des 76 superpositions, leur validation à la génération et l'écartement des
+  marqueurs de personnages qui partagent une case restent en place. Cette passe complète les
+  contrôles déjà faits sur téléphone ; elle ne constitue pas une nouvelle passe sur téléphone ni
+  une certification de chaque intérieur et de chaque état du scénario.
+- **Conditions des offres : terminé.** Les offres des six jeux affichent leurs jours, moments et
+  étapes du scénario dans la fiche du personnage. L'analyse suit les chemins des scripts pret et
+  la présence du personnage ; les 83 drapeaux rencontrés sont relus dans `story_events.csv`.
+  La CT12 impossible de Cristal est retirée et les labels locaux sans deux-points sont lus.
+  Limite explicite : les tests des routines du moteur, hors scripts de carte, ne sont pas analysés
+  (par exemple le Pokédex exigé par l'hôtesse du Club Link de la première génération). Le README
+  décrit ce périmètre ; la liste des offres reste un guide et ne simule pas une sauvegarde.
 
 ## Compléments utiles, selon le périmètre souhaité
 
-- **Capture plus précise, générations 1 et 2.** Le calculateur emploie un DV de PV moyen de 8.
-  Une saisie des PV maximum réels ou du DV permettrait d'éviter cette approximation, déjà annoncée
-  dans l'interface. La formule du domaine accepte un DV, mais l'écran ne propose pas ce réglage.
 - **Guide de reproduction et de bonheur, génération 2.** Les groupes d'œufs, cycles, attaques par
   œuf et seuils d'évolution sont présents. Un outil de compatibilité des parents, d'héritage des
   attaques et un guide des gains de bonheur compléteraient les fiches ; ils ne sont pas implémentés.

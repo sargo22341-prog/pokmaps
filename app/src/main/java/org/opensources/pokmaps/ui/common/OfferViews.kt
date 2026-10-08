@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -27,13 +28,15 @@ import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.sharedCondition
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 
 /**
  * Ce que propose un personnage ou une installation : services, dons, ventes, échanges, lots du Casino, fossiles
  * ranimés et baies d’un arbre. Objets et Pokémon ouvrent leur fiche si demandé ; un fossile donné dit
- * en quoi il se ranime, et où.
+ * en quoi il se ranime, et où. Ce qu'exigent les offres (jours, moments, étapes du scénario) se lit une fois en
+ * tête quand elles l'exigent toutes, sous chaque offre sinon.
  */
 @Composable
 fun Offers(
@@ -45,20 +48,26 @@ fun Offers(
     onShowObject: ((Int) -> Unit)? = null
 ) {
     val links = OfferLinks(place, onOpenPokemon, onOpenItem)
-    Services(offers.filterIsInstance<NpcOffer.Service>())
-    Gifts(offers, links, fossilUses, onShowObject)
-    Sales(offers, links)
-    Trades(offers, links)
-    Prizes(offers, links)
-    Fossils(offers.filterIsInstance<NpcOffer.FossilRevival>(), links)
-    FruitTrees(offers.filterIsInstance<NpcOffer.FruitTree>(), links)
+    val shared = remember(offers) { offers.sharedCondition() }
+    if (shared != null) {
+        SectionTitle(stringResource(R.string.map_offer_conditions))
+        OfferConditionLines(shared)
+    }
+    val rowConditions = shared == null
+    Services(offers.filterIsInstance<NpcOffer.Service>(), rowConditions)
+    Gifts(offers, links, fossilUses, onShowObject, rowConditions)
+    Sales(offers, links, rowConditions)
+    Trades(offers, links, rowConditions)
+    Prizes(offers, links, rowConditions)
+    Fossils(offers.filterIsInstance<NpcOffer.FossilRevival>(), links, rowConditions)
+    FruitTrees(offers.filterIsInstance<NpcOffer.FruitTree>(), links, rowConditions)
 }
 
 /** Où sont dessinés les Pokémon (réglage des sprites animés) et quelles fiches s'ouvrent au toucher. */
 data class OfferLinks(val place: SpritePlace, val onOpenPokemon: ((Int) -> Unit)?, val onOpenItem: ((String) -> Unit)?)
 
 @Composable
-private fun Services(services: List<NpcOffer.Service>) {
+private fun Services(services: List<NpcOffer.Service>, rowConditions: Boolean) {
     if (services.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_services))
     services.forEach { offer ->
@@ -82,6 +91,7 @@ private fun Services(services: List<NpcOffer.Service>) {
                 Text(price, style = MaterialTheme.typography.titleSmall)
             }
         }
+        OfferRowCondition(offer, rowConditions)
     }
 }
 
@@ -90,7 +100,8 @@ private fun Gifts(
     offers: List<NpcOffer>,
     links: OfferLinks,
     fossilUses: Map<String, FossilUse>,
-    onShowObject: ((Int) -> Unit)?
+    onShowObject: ((Int) -> Unit)?,
+    rowConditions: Boolean
 ) {
     val gifts = offers.filter {
         it is NpcOffer.GiftItem || it is NpcOffer.GiftPokemon || it is NpcOffer.GiftEgg || it is NpcOffer.CoinGift
@@ -118,11 +129,12 @@ private fun Gifts(
 
             else -> Unit
         }
+        OfferRowCondition(offer, rowConditions)
     }
 }
 
 @Composable
-private fun Sales(offers: List<NpcOffer>, links: OfferLinks) {
+private fun Sales(offers: List<NpcOffer>, links: OfferLinks, rowConditions: Boolean) {
     val sales = offers.filter { it is NpcOffer.Sale || it is NpcOffer.CoinSale }
     if (sales.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_sales))
@@ -142,11 +154,12 @@ private fun Sales(offers: List<NpcOffer>, links: OfferLinks) {
 
             else -> Unit
         }
+        OfferRowCondition(offer, rowConditions)
     }
 }
 
 @Composable
-private fun Trades(offers: List<NpcOffer>, links: OfferLinks) {
+private fun Trades(offers: List<NpcOffer>, links: OfferLinks, rowConditions: Boolean) {
     val trades = offers.filter { it is NpcOffer.Trade || it is NpcOffer.Exchange }
     if (trades.isEmpty()) return
     SectionTitle(stringResource(R.string.method_trade))
@@ -163,11 +176,12 @@ private fun Trades(offers: List<NpcOffer>, links: OfferLinks) {
 
             else -> Unit
         }
+        OfferRowCondition(offer, rowConditions)
     }
 }
 
 @Composable
-private fun Prizes(offers: List<NpcOffer>, links: OfferLinks) {
+private fun Prizes(offers: List<NpcOffer>, links: OfferLinks, rowConditions: Boolean) {
     val prizes = offers.filter {
         it is NpcOffer.PrizePokemon || it is NpcOffer.PrizeItem || it is NpcOffer.PointPrize
     }
@@ -208,12 +222,13 @@ private fun Prizes(offers: List<NpcOffer>, links: OfferLinks) {
             is NpcOffer.FruitTree,
             is NpcOffer.Service -> Unit
         }
+        OfferRowCondition(offer, rowConditions)
     }
 }
 
 /** Fossiles que ranime le personnage, comme une ligne d'évolution : fossile → Pokémon. */
 @Composable
-private fun Fossils(revivals: List<NpcOffer.FossilRevival>, links: OfferLinks) {
+private fun Fossils(revivals: List<NpcOffer.FossilRevival>, links: OfferLinks, rowConditions: Boolean) {
     if (revivals.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_fossils))
     revivals.forEach { revival ->
@@ -223,15 +238,19 @@ private fun Fossils(revivals: List<NpcOffer.FossilRevival>, links: OfferLinks) {
             text = stringResource(R.string.map_offer_pokemon_level, revival.name, revival.level),
             links = links
         )
+        OfferRowCondition(revival, rowConditions)
     }
 }
 
 /** Baies ou Noigrumes que donne l'arbre, une fois par jour. */
 @Composable
-private fun FruitTrees(trees: List<NpcOffer.FruitTree>, links: OfferLinks) {
+private fun FruitTrees(trees: List<NpcOffer.FruitTree>, links: OfferLinks, rowConditions: Boolean) {
     if (trees.isEmpty()) return
     SectionTitle(stringResource(R.string.map_offer_fruit_tree))
-    trees.forEach { tree -> OfferItemRow(tree.item, tree.item.name, onOpenItem = links.onOpenItem) }
+    trees.forEach { tree ->
+        OfferItemRow(tree.item, tree.item.name, onOpenItem = links.onOpenItem)
+        OfferRowCondition(tree, rowConditions)
+    }
 }
 
 /**

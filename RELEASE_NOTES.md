@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Le sbire des caméras du repaire Rocket n'apparaît plus dans le mur de la carte.
+- Les offres des personnages indiquent les jours, moments et étapes du scénario qu'elles exigent ; Cristal ne liste plus une CT12 jamais donnée.
 - Masque les filtres de capture sans rencontre et adopte les icônes colorées Meteocons pour le matin, le jour et la nuit.
 - Améliore le choix de région, les icônes des moments et les filtres locaux des rencontres ; reprend les points compatibles de Kanto en deuxième génération.
 - Jeux en rangées, menus de carte compacts, lumière animée, rencontres regroupées, position conservée et Pokédex des formes de Zarbi.

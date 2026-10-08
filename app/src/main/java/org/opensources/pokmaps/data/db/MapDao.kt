@@ -184,11 +184,11 @@ interface MapDao {
     /** Offres d'un personnage ou d'une installation dans la version (lots du Casino de Rouge ou de Bleu). */
     @Query(
         """
-        SELECT n.kind, n.item_id AS itemId, i.identifier AS itemIdentifier, i.name_fr AS itemName,
+        SELECT n.id, n.kind, n.item_id AS itemId, i.identifier AS itemIdentifier, i.name_fr AS itemName,
             i.has_sprite AS itemHasSprite, n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, n.quantity, n.price,
             n.wanted_pokemon_id AS wantedPokemonId, w.name_fr AS wantedPokemonName,
             n.wanted_item_id AS wantedItemId, wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName,
-            wi.has_sprite AS wantedItemHasSprite
+            wi.has_sprite AS wantedItemHasSprite, n.time_mask AS timeMask, n.weekday_mask AS weekdayMask
         FROM npc_offer n
         LEFT JOIN item i ON i.id = n.item_id
         LEFT JOIN pokemon p ON p.id = n.pokemon_id
@@ -198,6 +198,16 @@ interface MapDao {
         """
     )
     suspend fun offers(objectId: Int, versionId: Int): List<NpcOfferRow>
+
+    /** Étapes du scénario qu'exigent les offres d'un personnage ou d'une installation, dans l'ordre. */
+    @Query(
+        """
+        SELECT s.npc_offer_id AS offerId, s.description_fr AS description
+        FROM npc_offer_story s JOIN npc_offer n ON n.id = s.npc_offer_id
+        WHERE n.map_object_id = :objectId ORDER BY s.npc_offer_id, s.slot
+        """
+    )
+    suspend fun offerStories(objectId: Int): List<OfferStoryRow>
 
     /** Objet : description, ou attaque de la CT / CS dans le jeu. */
     @Query(

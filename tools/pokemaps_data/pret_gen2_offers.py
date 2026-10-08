@@ -20,15 +20,16 @@ Casino de Doublonville : Abo dans Or, Sabelette dans Argent).
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .pret_crystal_offers import NO_OFFER_SPECIALS as CRYSTAL_NO_OFFER_SPECIALS
 from .pret_crystal_offers import buena_prizes, move_tutor_price, odd_eggs, rooftop_sales
+from .pret_gen2_conditions import Gen2Conditions, Point
 from .pret_gen2_offer_data import NpcTrade, bargain_shop, fruit_trees, item_prices, marts, npc_trades
 from .pret_gen2_scripts import ScriptFile
-from .pret_models import NpcOffer
+from .pret_models import NpcOffer, merged_offers
 from .pret_services import version_offers
 from .pret_source import macro_args, parse_int, source_lines
 
@@ -146,6 +147,10 @@ class ScriptOffers:
 
     offers: tuple[NpcOffer, ...]
     curated_specials: frozenset[str]
+    # Drapeaux et objets que le script lève, baisse, montre ou cache lui-même (Gen2Conditions.own_flags).
+    own: frozenset[str] = frozenset()
+    # Lignes que le script peut exécuter (pret_gen2_conditions.Point), toutes versions réunies.
+    points: frozenset[Point] = frozenset()
 
 
 class Gen2Offers:
@@ -179,6 +184,11 @@ class Gen2Offers:
         return ScriptFile(self.repo.path("engine/events/std_scripts.asm"))
 
     @cached_property
+    def conditions(self) -> Gen2Conditions:
+        """Lecteur des conditions, sur les mêmes scripts communs que les offres (les points en dépendent)."""
+        return Gen2Conditions(self.std_scripts)
+
+    @cached_property
     def constants(self) -> dict[str, int]:
         """Constantes numériques des fichiers constants/ (EGG_LEVEL…)."""
         result = {}
@@ -193,29 +203,40 @@ class Gen2Offers:
         """Offres du script `label` de `script_file`, dans l'ordre où le script les fait."""
         by_version: dict[str, list[NpcOffer]] = {}
         curated: set[str] = set()
+        own: set[str] = set()
+        points: set[Point] = set()
         for version, symbol in self.repo.versions:
-            offers, specials = self._version_offers(script_file, label, self.repo.checkver(symbol))
-            by_version[version] = offers
-            curated |= specials
-        return ScriptOffers(tuple(version_offers(by_version)), frozenset(curated))
+            read = self._version_offers(script_file, label, self.repo.checkver(symbol))
+            by_version[version] = list(read.offers)
+            curated |= read.curated_specials
+            own |= read.own
+            points |= read.points
+        return ScriptOffers(tuple(version_offers(by_version)), frozenset(curated), frozenset(own), frozenset(points))
 
-    def _version_offers(self, script_file: ScriptFile, label: str, checkver: bool) -> tuple[list[NpcOffer], set[str]]:
-        """Offres et commandes special à relire, en suivant les scripts communs appelés (chacun une fois)."""
+    def _version_offers(self, script_file: ScriptFile, label: str, checkver: bool) -> ScriptOffers:
+        """Offres et commandes special à relire, en suivant les scripts communs appelés (chacun une fois). Chaque
+        offre porte ce qu'exige le chemin du script qui y mène (pret_gen2_conditions)."""
+        points = self.conditions.script_conditions(script_file, label, checkver)
+        own = self.conditions.own_flags(points)
         pending = [(script_file, label)]
         seen = {label}
         offers: list[NpcOffer] = []
         curated: set[str] = set()
         while pending:
             source, name = pending.pop(0)
-            for lines in source.reachable_blocks(name, checkver):
+            for block_name, lines in source.reachable_named_blocks(name, checkver):
                 block = _Block(self, source, lines)
-                offers += block.offers()
+                for index, offer in block.offers():
+                    condition = points.get((source, block_name, index))
+                    if condition is None:
+                        raise ValueError(f"{source.path.name} : offre {offer} hors des chemins analysés ({block_name})")
+                    offers.append(replace(offer, condition=condition.without(own)))
                 curated |= block.curated_specials()
                 for std in block.std_calls():
                     if std not in seen:
                         seen.add(std)
                         pending.append((self.std_scripts, std))
-        return list(dict.fromkeys(offers)), curated
+        return ScriptOffers(tuple(merged_offers(offers)), frozenset(curated), own, frozenset(points))
 
 
 def _is_number(value: str) -> bool:
@@ -253,12 +274,13 @@ class _Block:
             raise ValueError(f"{self.source.path.name} : plusieurs montants dans un même bloc : {sorted(values)}")
         return next(iter(values), None)
 
-    def offers(self) -> list[NpcOffer]:
-        result: list[NpcOffer] = []
-        for line in self.lines:
+    def offers(self) -> list[tuple[int, NpcOffer]]:
+        """Offres du bloc, chacune avec le rang de la ligne qui la fait."""
+        result: list[tuple[int, NpcOffer]] = []
+        for index, line in enumerate(self.lines):
             command, _, rest = line.partition(" ")
             if command in _HANDLERS:
-                result += _HANDLERS[command](self, macro_args(rest, ""))
+                result += [(index, offer) for offer in _HANDLERS[command](self, macro_args(rest, ""))]
         return result
 
     def curated_specials(self) -> set[str]:

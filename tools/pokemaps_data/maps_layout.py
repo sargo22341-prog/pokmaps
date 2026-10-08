@@ -19,8 +19,9 @@ from dataclasses import dataclass
 from functools import cached_property
 
 from .games import Game, Region
-from .maps_terrain import Cell, wild_cells
+from .maps_terrain import ROCK, Cell, wild_cells
 from .pret import BLOCK_PX, LAST_MAP, STEP_PX
+from .pret_models import HIDDEN_ITEM
 from .pret_reader import PretReader
 from .sources import DATA_DIR
 
@@ -97,12 +98,13 @@ def read_layout_curation() -> LayoutCuration:
     return LayoutCuration(anchors, skips, parents)
 
 
-def spread(cells: list[Cell], count: int, seed: str) -> list[Cell]:
+def spread(cells: list[Cell], count: int, seed: str, occupied: frozenset[Cell] = frozenset()) -> list[Cell]:
     """Jusqu'à `count` cases réparties au hasard sur tout le terrain, à `SPOT_SPACING` cases au moins les unes
-    des autres.
+    des autres, hors des cases `occupied` (personnage, objet ou entrée qu'un Pokémon dessiné là masquerait).
 
     Les cases à l'intérieur du terrain (entourées d'herbes, d'eau ou de sol) passent en premier : les Pokémon
-    ne sont pas collés aux bords des zones ni de la carte. Le tirage est déterministe (graine = nom de la carte)."""
+    ne sont pas collés aux bords des zones ni de la carte. Le tirage est déterministe (graine = nom de la carte) et
+    ne dépend pas des cases occupées : écarter une case ne déplace pas les autres emplacements."""
     free = set(cells)
     rng = random.Random(seed)
     order = sorted(cells)
@@ -117,6 +119,8 @@ def spread(cells: list[Cell], count: int, seed: str) -> list[Cell]:
     for cell in order:
         if len(chosen) >= count:
             break
+        if cell in occupied:
+            continue
         if all((cell[0] - x) ** 2 + (cell[1] - y) ** 2 >= SPOT_SPACING**2 for x, y in chosen):
             chosen.append(cell)
     return chosen
@@ -296,5 +300,23 @@ class GameMaps:
     def spots(self, const: str) -> dict[str, list[Cell]]:
         """Emplacements bien répartis de chaque terrain, pour dessiner les Pokémon sauvages."""
         return {
-            kind: spread(cells, SPOTS_PER_KIND, f"{const}/{kind}") for kind, cells in self.cells(const).items() if cells
+            kind: spread(cells, SPOTS_PER_KIND, f"{const}/{kind}", self.occupied(const, kind))
+            for kind, cells in self.cells(const).items()
+            if cells
         }
+
+    def free_cells(self, const: str) -> dict[str, list[Cell]]:
+        """Cases de chaque terrain où un Pokémon sauvage peut être dessiné sans rien masquer (`occupied`)."""
+        return {
+            kind: [cell for cell in cells if cell not in self.occupied(const, kind)]
+            for kind, cells in self.cells(const).items()
+        }
+
+    def occupied(self, const: str, kind: str) -> frozenset[Cell]:
+        """Cases où un Pokémon dessiné masquerait un personnage, un objet visible ou une entrée. Le terrain des
+        rochers d'Éclate-Roc est fait des rochers eux-mêmes : rien n'y est écarté."""
+        if kind == ROCK:
+            return frozenset()
+        pret_map = self.maps[const]
+        objects = {(obj.x, obj.y) for obj in pret_map.objects if obj.kind != HIDDEN_ITEM}
+        return frozenset(objects | {(warp.x, warp.y) for warp in pret_map.warps})

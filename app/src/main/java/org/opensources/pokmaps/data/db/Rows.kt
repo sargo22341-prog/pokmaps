@@ -120,6 +120,7 @@ data class TrainerMoveRow(
 )
 
 data class NpcOfferRow(
+    val id: Int,
     val kind: String,
     val itemId: Int?,
     val itemIdentifier: String?,
@@ -134,8 +135,13 @@ data class NpcOfferRow(
     val wantedItemId: Int?,
     val wantedItemIdentifier: String?,
     val wantedItemName: String?,
-    val wantedItemHasSprite: Boolean?
+    val wantedItemHasSprite: Boolean?,
+    val timeMask: Int?,
+    val weekdayMask: Int?
 )
+
+/** Étape du scénario qu'exige une offre (npc_offer_story), dans l'ordre de `slot`. */
+data class OfferStoryRow(val offerId: Int, val description: String)
 
 data class ItemDetailsRow(
     val id: Int,

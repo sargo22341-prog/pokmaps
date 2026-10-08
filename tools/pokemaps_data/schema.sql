@@ -415,6 +415,9 @@ CREATE TABLE trainer_pokemon (
 --   Effaceur de capacités), grooming (toilettage, price en ¥), move_tutor (tuteur de Cristal, price en jetons),
 --   point_prize (récompense de Buena, item_id et price en points de la Carte Bleue).
 -- version_id : version où l'offre existe (lots du Casino de Rouge ou de Bleu), NULL pour toutes celles du jeu.
+-- time_mask : moments où l'offre est possible (bit 0 matin, 1 jour, 2 nuit), NULL à tout moment.
+-- weekday_mask : jours où l'offre est possible (bit 0 dimanche … bit 6 samedi), NULL tous les jours.
+-- Ces conditions, et les étapes de npc_offer_story, sont nécessaires : lues sur tous les chemins du script.
 CREATE TABLE npc_offer (
     id INTEGER NOT NULL PRIMARY KEY,
     map_object_id INTEGER NOT NULL,
@@ -425,9 +428,20 @@ CREATE TABLE npc_offer (
     price INTEGER,
     wanted_pokemon_id INTEGER,
     wanted_item_id INTEGER,
-    version_id INTEGER
+    version_id INTEGER,
+    time_mask INTEGER,
+    weekday_mask INTEGER
 );
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
+
+-- Étapes du scénario qu'exige une offre, dans l'ordre (tools/data/story_events.csv) : « Après la libération de la
+-- Tour Radio », « Avant la remise de l'Œuf Mystère au Prof. Orme ».
+CREATE TABLE npc_offer_story (
+    npc_offer_id INTEGER NOT NULL,
+    slot INTEGER NOT NULL,
+    description_fr TEXT NOT NULL,
+    PRIMARY KEY (npc_offer_id, slot)
+);
 
 -- Emplacements où dessiner les Pokémon sauvages d'une carte (ville, route ou carte intérieure), bien répartis :
 -- kind grass (hautes herbes), water (eau : surf et pêche), floor (sol des grottes et bâtiments), tree (arbres de

@@ -8,7 +8,10 @@ import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.OfferCondition
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.Weekday
+import org.opensources.pokmaps.domain.model.EncounterTime
 
 class MapRepositoryTest {
     @Test
@@ -44,5 +47,27 @@ class MapRepositoryTest {
             ),
             offers
         )
+    }
+
+    @Test
+    fun offersCarryTheirTimesDaysAndStorySteps() = runTest {
+        val repository = MapRepository(FakeMapDao())
+
+        val (berry, potion) = repository.offers(FakeGameDao.RED, FakeMapDao.SIBLING)
+
+        assertEquals(
+            OfferCondition(
+                times = setOf(EncounterTime.NIGHT),
+                weekdays = setOf(Weekday.MONDAY),
+                story = listOf("Après le badge Zéphyr", "Après la libération de la Tour Radio")
+            ),
+            berry.condition
+        )
+        assertEquals(OfferCondition.ALWAYS, potion.condition)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun unreadableOffersAreAnError() = runTest {
+        MapRepository(FakeMapDao(failing = true)).offers(FakeGameDao.RED, FakeMapDao.SIBLING)
     }
 }

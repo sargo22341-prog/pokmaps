@@ -19,12 +19,13 @@ from pathlib import Path
 
 from .pret_source import conditional_lines, macro_args, parse_int
 
-_LABEL = re.compile(r"^(\.?[A-Za-z_]\w*):{1,2}$")
+# Label global « Script: » ; label local « .Suite: », que pret écrit aussi sans deux-points (« .morn »).
+_LABEL = re.compile(r"^(\.[A-Za-z_]\w*):{0,2}$|^([A-Za-z_]\w*):{1,2}$")
 _CONSTANT = re.compile(r"^DEF (\w+)\s+EQU\s+(\$[0-9A-Fa-f]+|\d+)$")
 # Commandes après lesquelles l'exécution ne continue pas dans le bloc suivant du fichier. fruittree et
 # describedecoration passent la main à un script du moteur (ScriptJump dans engine/overworld/scripting.asm) ;
 # itemball et hiddenitem sont des données lues par le moteur, pas des commandes.
-_TERMINATORS = frozenset(
+TERMINATORS = frozenset(
     {
         "end",
         "fruittree",
@@ -86,7 +87,7 @@ class ScriptFile:
                 if names:
                     lines[names[-1]].append(line)
                 continue
-            label = match.group(1)
+            label = match.group(1) or match.group(2)
             if label.startswith("."):
                 label = f"{current_global}{label}"
             else:
@@ -98,7 +99,7 @@ class ScriptFile:
         result = {}
         for index, name in enumerate(names):
             body = tuple(lines[name])
-            ends = bool(body) and body[-1].split()[0] in _TERMINATORS
+            ends = bool(body) and body[-1].split()[0] in TERMINATORS
             following = names[index + 1] if index + 1 < len(names) and not ends else None
             result[name] = _Block(body, following)
         return result
@@ -117,15 +118,19 @@ class ScriptFile:
         """Lignes exécutables depuis `label`, bloc par bloc dans l'ordre de découverte (cf. `reachable_lines`).
 
         Un bloc regroupe ce que fait une branche : choisir un lot, le donner, puis prendre les jetons."""
+        return [lines for _, lines in self.reachable_named_blocks(label, checkver)]
+
+    def reachable_named_blocks(self, label: str, checkver: bool | None) -> list[tuple[str, list[str]]]:
+        """Comme `reachable_blocks`, chaque bloc avec son label (ses lignes gardent leur rang dans le bloc)."""
         if label not in self.blocks:
             raise ValueError(f"{self.path.name} : label {label} introuvable")
-        result: list[list[str]] = []
+        result: list[tuple[str, list[str]]] = []
         seen = {label}
         queue = deque([label])
         while queue:
             name = queue.popleft()
             lines, targets = self._run(name, checkver)
-            result.append(lines)
+            result.append((name, lines))
             for target in targets:
                 if target not in seen:
                     seen.add(target)

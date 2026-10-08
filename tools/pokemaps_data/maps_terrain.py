@@ -24,7 +24,8 @@ from .pret_models import PretMap
 from .pret_reader import PretReader
 
 Cell = tuple[int, int]
-TERRAINS = ("grass", "water", "floor", "tree", "rock")
+ROCK = "rock"
+TERRAINS = ("grass", "water", "floor", "tree", ROCK)
 
 # 1re génération : tileset de la forêt de Jade et du Parc Safari, où l'on ne rencontre des Pokémon qu'en marchant
 # dans les herbes, comme dehors (engine/battle/wild_encounters.asm, TryDoWildEncounter).
@@ -119,7 +120,7 @@ def _gen2_cells(
     if pret_map.const in repo.headbutt_maps:
         result["tree"] = _tree_cells(repo, pret_map)
     if pret_map.const in repo.rock_smash_maps:
-        result["rock"] = smash_rocks(repo, pret_map)
+        result[ROCK] = smash_rocks(repo, pret_map)
     return result, _never_blocked
 
 

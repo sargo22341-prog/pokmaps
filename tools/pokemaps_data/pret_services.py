@@ -12,7 +12,7 @@ from dataclasses import replace
 from itertools import pairwise
 from typing import TYPE_CHECKING
 
-from .pret_models import NpcOffer
+from .pret_models import NpcOffer, merged_offers
 from .pret_source import conditional_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
@@ -39,14 +39,21 @@ FACILITY_MACROS = {"script_vending_machine": VENDING_MACHINE, "script_prize_vend
 
 def character_services(repo: PretRepo, text: str | None) -> list[NpcOffer]:
     """Services rendus par le personnage qui affiche ce texte : soins, Club Link, pension, fossiles, jetons…"""
-    body = repo.text_body(text)
-    offers = [NpcOffer(service) for marker, service in SERVICE_MARKERS if marker in body]
+    located = repo.located_text_body(text)
+    body = [line.line for line in located]
+    place = repo.conditions.offer_place(text)
+    offers = [
+        place.where([line for line in located if line.line == marker], NpcOffer(service))
+        for marker, service in SERVICE_MARKERS
+        if marker in body
+    ]
     if FOSSIL_REVIVAL in body:
-        offers += fossil_revivals(repo, body)
-    for line in body:
-        if match := _COIN_GIFT.match(line):
-            offers.append(NpcOffer("coin_gift", quantity=int(match.group(1))))
-    return list(dict.fromkeys(offers))
+        revival = [line for line in located if line.line == FOSSIL_REVIVAL]
+        offers += [place.where(revival, offer) for offer in fossil_revivals(repo, body)]
+    for line in located:
+        if match := _COIN_GIFT.match(line.line):
+            offers.append(place.at(line, NpcOffer("coin_gift", quantity=int(match.group(1)))))
+    return merged_offers(offers)
 
 
 def fossil_revivals(repo: PretRepo, body: list[str]) -> list[NpcOffer]:

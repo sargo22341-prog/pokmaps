@@ -12,16 +12,17 @@ doublons pour qu'il n'en reste qu'un, celui avec qui l'on interagit vraiment.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 from .games import Game
 from .maps_characters_data import CharacterCuration, character_key
 from .maps_layout import GameMaps, identifier
+from .offer_conditions import Condition
 from .pret import GYM_LEADERS, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_offers import SERVICE_KINDS
 from .pret_identifiers import item_identifier, species_identifier
-from .pret_models import MapObject, NpcOffer, PretMap, Sign
+from .pret_models import HIDDEN_ITEM, MapObject, NpcOffer, PretMap, Sign
 from .pret_services import (
     HEAL_SPOT,
     PRIZE_VENDOR,
@@ -34,7 +35,6 @@ from .pret_services import (
 
 # Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
-HIDDEN_ITEM = "hidden_item"
 # Objets à ramasser : leur « script » est l'objet lui-même (itemball, hiddenitem), sans offre.
 _PICKED_UP = frozenset({"item", HIDDEN_ITEM})
 
@@ -71,19 +71,21 @@ def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[
     sprites: set[str] = set()
     for const in sorted(game_maps.placements, key=lambda c: game_maps.maps[c].number):
         pret_map = game_maps.maps[const]
-        for obj in pret_map.objects:
+        for position, obj in enumerate(pret_map.objects):
             if not (0 <= obj.x < pret_map.width * 2 and 0 <= obj.y < pret_map.height * 2):
                 continue  # hors de la carte, donc inaccessible (ex. une Pépite cachée de l'entrée du Parc Safari)
             if curation.is_duplicate(character_key(obj)):
                 continue
             if obj.sprite:
                 sprites.add(obj.sprite)
-            objects.append(_character_row(game_maps, pret_map, obj, curation))
+            objects.append(_character_row(game_maps, pret_map, position, obj, curation))
         objects += _facility_rows(game_maps, pret_map)
     return objects, sprites
 
 
-def _character_row(game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration) -> ObjectRow:
+def _character_row(
+    game_maps: GameMaps, pret_map: PretMap, position: int, obj: MapObject, curation: CharacterCuration
+) -> ObjectRow:
     repo = game_maps.repo
     trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
     party = []
@@ -92,7 +94,7 @@ def _character_row(game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curat
             (species_identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
             for mon in repo.trainer_parties.get((trainer_class, obj.trainer_number or 0), [])
         ]
-    offers = _character_offers(game_maps, pret_map, obj, curation)
+    offers = _character_offers(game_maps, pret_map, position, obj, curation)
     return ObjectRow(
         pret_map.const,
         obj.kind,
@@ -111,31 +113,34 @@ def _character_row(game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curat
 
 
 def _character_offers(
-    game_maps: GameMaps, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
+    game_maps: GameMaps, pret_map: PretMap, position: int, obj: MapObject, curation: CharacterCuration
 ) -> list[NpcOffer]:
-    """Dons, ventes, échanges et services du personnage."""
+    """Dons, ventes, échanges et services du personnage (`position` : rang de son object_event dans la carte)."""
     match game_maps.repo:
         case PretRepo() as repo:
-            return _gen1_character_offers(game_maps.game, repo, pret_map, obj, curation)
+            return _gen1_character_offers(game_maps.game, repo, pret_map, position, obj, curation)
         case Gen2PretRepo() as repo:
             return _gen2_character_offers(game_maps.game, repo, pret_map, obj, curation)
 
 
 def _gen1_character_offers(
-    game: Game, repo: PretRepo, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
+    game: Game, repo: PretRepo, pret_map: PretMap, position: int, obj: MapObject, curation: CharacterCuration
 ) -> list[NpcOffer]:
-    """Offres lues dans le texte du personnage et relues à la main dans npc_offers.csv."""
+    """Offres lues dans le texte du personnage et relues à la main dans npc_offers.csv, avec ce qu'exige sa
+    présence (pret_conditions)."""
     trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
     offers = repo.npc_offers(obj.text) + character_services(repo, obj.text)
     if trainer_class in GYM_LEADERS:
         offers += [offer for offer in repo.leader_gifts(pret_map.label) if offer not in offers]
-    return _with_curated(offers, curation.offers_for(game.pret_repo, character_key(obj)))
+    presence = repo.conditions.presence(pret_map.label, position, repo.conditions.offer_place(obj.text))
+    offers = _with_curated(offers, curation.offers_for(game.pret_repo, character_key(obj)))
+    return _present(offers, presence)
 
 
 def _gen2_character_offers(
     game: Game, repo: Gen2PretRepo, pret_map: PretMap, obj: MapObject, curation: CharacterCuration
 ) -> list[NpcOffer]:
-    """Offres lues dans le script du personnage, corrigées par npc_offers.csv.
+    """Offres lues dans le script du personnage, corrigées par npc_offers.csv, avec ce qu'exige sa présence.
 
     Un dresseur ne rend pas de service : les soins qui suivent son combat remettent l'équipe en état pour la suite
     de la scène (le marin paresseux du M/S Aquaria, Red au sommet du Mont Argenté)."""
@@ -143,13 +148,19 @@ def _gen2_character_offers(
     added = curation.offers_for(game.pret_repo, key)
     script_file = repo.script_files[pret_map.label]
     if obj.kind in _PICKED_UP or obj.text is None or not script_file.has_label(obj.text):
-        return added
+        return _present(added, repo.presence.condition(pret_map, obj, frozenset()))
     read = repo.offers.script_offers(script_file, obj.text)
     if read.curated_specials and not added:
         specials = sorted(read.curated_specials)
         raise ValueError(f"npc_offers.csv : offre de {key} ({pret_map.const}) à relire, faite par {specials}")
     offers = [offer for offer in read.offers if not (obj.kind == "trainer" and offer.kind in SERVICE_KINDS)]
-    return _with_curated(curation.without_removed(game.pret_repo, key, offers), added)
+    offers = _with_curated(curation.without_removed(game.pret_repo, key, offers), added)
+    return _present(offers, repo.presence.condition(pret_map, obj, read.points))
+
+
+def _present(offers: list[NpcOffer], presence: Condition) -> list[NpcOffer]:
+    """Offres du personnage, chacune exigeant aussi ce qu'exige sa présence."""
+    return [replace(offer, condition=offer.condition.meet(presence)) for offer in offers]
 
 
 def _with_curated(offers: list[NpcOffer], curated: list[NpcOffer]) -> list[NpcOffer]:
@@ -251,4 +262,5 @@ def _offer_identifiers(machines: dict[str, str], offer: NpcOffer) -> NpcOffer:
         offer.wanted and species_identifier(offer.wanted),
         offer.wanted_item and item_identifier(offer.wanted_item, machines),
         offer.version,
+        offer.condition,
     )

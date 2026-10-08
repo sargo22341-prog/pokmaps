@@ -10,7 +10,10 @@ from .maps import GameMapData
 from .maps_characters import ObjectRow
 from .maps_characters_data import CharacterNames, read_character_names
 from .maps_layout import identifier
+from .offer_conditions import ALL_TIMES, ALL_WEEKDAYS
+from .pret_models import NpcOffer
 from .pret_services import HEAL_SPOT, PRIZE_VENDOR, VENDING_MACHINE
+from .story_events import StoryEvents, read_story_events
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -27,9 +30,10 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     area_ids = builder.locations.area_ids
     known_areas = builder.encounters.used_areas
     versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
-    objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions)
+    objects = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), versions, read_story_events())
     maps, areas, warps = [], [], []
     spots = _SpotRows(read_spots(), builder.games)
+    repos = {game.version_group: game.pret_repo for game in builder.games}
     for version_group, data in builder.map_data.items():
         vg = vg_ids[version_group]
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
@@ -37,12 +41,14 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         areas.extend(game_areas)
         warps.extend(game_warps)
         for obj in data.objects:
-            objects.add(obj, ids[obj.map_const])
+            objects.add(obj, ids[obj.map_const], repos[version_group])
         spots.add_game(version_group, data, ids)
     families = set(complete_families(builder.games))
     spots.check_all_used(families)
     if unused := objects.names.unused_text_names(families):
         raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
+    if unused := objects.story.unused(set(repos.values())):
+        raise ValueError(f"story_events.csv : drapeaux qu'aucune offre n'exige : {unused}")
     return {
         "map": maps,
         "map_area": sorted(set(areas)),
@@ -50,6 +56,7 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         "map_object": objects.objects,
         "trainer_pokemon": objects.parties,
         "npc_offer": objects.offers,
+        "npc_offer_story": objects.stories,
         "map_spot": spots.rows,
     }
 
@@ -78,11 +85,13 @@ class _SpotRows:
                 where = f"{key.kind} de {key.map_identifier} ({version_group})"
                 raise ValueError(f"map_spots.csv : aucun Pokémon sauvage n'apparaît sur le terrain {where}")
             self.used.add(key)
-            map_id, row = bounds[key.map_identifier]
+            map_id, _ = bounds[key.map_identifier]
+            # Les jeux d'une famille partagent leurs retouches, pas toujours leurs plans (la Caverne Azurée de Jaune) :
+            # chaque emplacement doit tomber au centre d'une case du terrain dans chacun d'eux.
+            if outside := sorted(points - data.terrain.get((key.map_identifier, key.kind), frozenset())):
+                where = f"{key.kind} de {key.map_identifier} ({version_group})"
+                raise ValueError(f"map_spots.csv : emplacements hors des cases du terrain {where} : {outside}")
             for x, y in sorted(points):
-                if not (row.x <= x <= row.x + row.width and row.y <= y <= row.y + row.height):
-                    where = f"{key.map_identifier} ({version_group})"
-                    raise ValueError(f"map_spots.csv : emplacement {(x, y)} hors de {where}")
                 self.rows.append((len(self.rows) + 1, map_id, key.kind, x, y))
 
     def check_all_used(self, families: set[str]) -> None:
@@ -94,16 +103,20 @@ class _SpotRows:
 class _ObjectRows:
     """Lignes des objets de carte, des équipes de dresseurs et des offres de personnages."""
 
-    def __init__(self, builder: DatabaseBuilder, names: _ObjectNames, versions: dict[str, int]) -> None:
+    def __init__(
+        self, builder: DatabaseBuilder, names: _ObjectNames, versions: dict[str, int], story: StoryEvents
+    ) -> None:
         self.builder = builder
         self.names = names
         self.versions = versions
+        self.story = story
         self.species = {row["identifier"]: int(row["id"]) for row in builder.species.values()}
         self.objects: list[tuple] = []
         self.parties: list[tuple] = []
         self.offers: list[tuple] = []
+        self.stories: list[tuple] = []
 
-    def add(self, obj: ObjectRow, map_id: int) -> None:
+    def add(self, obj: ObjectRow, map_id: int, repo: str) -> None:
         if obj.version and obj.version not in self.versions:
             raise ValueError(f"Objet de carte d'une version inconnue de PokéAPI : {obj}")
         species = self.species
@@ -116,24 +129,8 @@ class _ObjectRows:
         for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
             move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
             self.parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
-        item_ids = self.builder.items.offer_item_ids
         for offer in obj.offers:
-            if offer.version and offer.version not in self.versions:
-                raise ValueError(f"Offre d'une version inconnue de PokéAPI : {offer}")
-            self.offers.append(
-                (
-                    len(self.offers) + 1,
-                    object_id,
-                    offer.kind,
-                    offer.item and item_ids[offer.item],
-                    offer.pokemon and species[offer.pokemon],
-                    offer.quantity,
-                    offer.price,
-                    offer.wanted and species[offer.wanted],
-                    offer.wanted_item and item_ids[offer.wanted_item],
-                    offer.version and self.versions[offer.version],
-                )
-            )
+            self._add_offer(obj, object_id, offer, repo)
         self.objects.append(
             (
                 object_id,
@@ -150,6 +147,35 @@ class _ObjectRows:
                 obj.version and self.versions[obj.version],
             )
         )
+
+    def _add_offer(self, obj: ObjectRow, object_id: int, offer: NpcOffer, repo: str) -> None:
+        """Ligne de l'offre, avec ses moments, ses jours et les étapes du scénario qu'elle exige."""
+        if offer.version and offer.version not in self.versions:
+            raise ValueError(f"Offre d'une version inconnue de PokéAPI : {offer}")
+        condition = offer.condition
+        where = f"{obj.map_const}, {obj.key}, {offer.kind} {offer.item or offer.pokemon or ''}".rstrip()
+        if not condition.possible:
+            raise ValueError(f"Offre jamais possible d'après ses conditions ({where}) : {condition}")
+        offer_id = len(self.offers) + 1
+        item_ids = self.builder.items.offer_item_ids
+        self.offers.append(
+            (
+                offer_id,
+                object_id,
+                offer.kind,
+                offer.item and item_ids[offer.item],
+                offer.pokemon and self.species[offer.pokemon],
+                offer.quantity,
+                offer.price,
+                offer.wanted and self.species[offer.wanted],
+                offer.wanted_item and item_ids[offer.wanted_item],
+                offer.version and self.versions[offer.version],
+                None if condition.times == ALL_TIMES else condition.times,
+                None if condition.weekdays == ALL_WEEKDAYS else condition.weekdays,
+            )
+        )
+        for slot, phrase in enumerate(self.story.phrases(repo, condition, where), start=1):
+            self.stories.append((offer_id, slot, phrase))
 
 
 def _map_rows(

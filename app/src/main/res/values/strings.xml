@@ -194,6 +194,20 @@
     <string name="map_offer_fruit_tree">Donne chaque jour</string>
     <string name="map_offer_egg">Œuf de %1$s, éclôt au niveau %2$d</string>
     <string name="map_offer_held_item">tient %1$s</string>
+    <string name="map_offer_conditions">Disponible</string>
+    <string name="offer_when_morning">le matin</string>
+    <string name="offer_when_day">en journée</string>
+    <string name="offer_when_night">la nuit</string>
+    <string name="offer_when_monday">le lundi</string>
+    <string name="offer_when_tuesday">le mardi</string>
+    <string name="offer_when_wednesday">le mercredi</string>
+    <string name="offer_when_thursday">le jeudi</string>
+    <string name="offer_when_friday">le vendredi</string>
+    <string name="offer_when_saturday">le samedi</string>
+    <string name="offer_when_sunday">le dimanche</string>
+    <!-- Énumération (« le lundi, le mercredi et le samedi »), et jours puis moments (« le lundi, le matin »). -->
+    <string name="offer_when_list_next">%1$s, %2$s</string>
+    <string name="offer_when_list_last">%1$s et %2$s</string>
     <string name="service_heal">Soigne tous vos Pokémon.</string>
     <string name="service_cable_club">Club Link : échanges et combats avec un autre joueur.</string>
     <string name="service_name_rater">Juge et change le surnom de vos Pokémon.</string>

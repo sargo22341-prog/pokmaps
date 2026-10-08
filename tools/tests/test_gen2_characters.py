@@ -141,6 +141,19 @@ def test_pokemon_characters_named_by_their_cry(preview_db: sqlite3.Connection) -
     assert beasts == {"Raikou", "Entei", "Suicune"}
 
 
+@pytest.mark.parametrize("group", [3, 4])
+def test_security_camera_grunt_has_no_marker_in_the_wall(preview_db: sqlite3.Connection, group: int) -> None:
+    # Le callback masque cet objet ; chaque alarme le déplace avant de le faire apparaître.
+    objects = preview_db.execute(
+        """SELECT o.x, o.y FROM map_object o JOIN map m ON m.id = o.map_id
+           WHERE m.version_group_id = ? AND m.identifier = 'team-rocket-base-b1f'""",
+        (group,),
+    ).fetchall()
+    assert objects
+    assert (8, 8) not in objects
+    assert (40, 72) in objects  # Le sbire permanent reste à sa position (2, 4).
+
+
 def test_script_prices_and_unknown_specials(gold_silver_repo: Gen2PretRepo, tmp_path: Path) -> None:
     script = tmp_path / "Test.asm"
     script.write_text(

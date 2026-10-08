@@ -12,6 +12,7 @@ from pokemaps_data.map_spots import TerrainKey, read_spots
 from pokemaps_data.maps_characters import ObjectRow
 from pokemaps_data.maps_characters_data import read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier
+from pokemaps_data.story_events import read_story_events
 from pokemaps_data.validate import validate
 
 RED, BLUE, YELLOW = 1, 2, 3
@@ -414,9 +415,10 @@ def test_debug_warps_are_not_part_of_the_game(db: sqlite3.Connection) -> None:
 def test_a_version_specific_map_object_has_its_version(preview_builder: DatabaseBuilder) -> None:
     builder = preview_builder
     ho_oh = ObjectRow("TIN_TOWER_ROOF", "pokemon", 152, 88, "ho-oh", None, "ho-oh", 40, None, version="gold")
-    rows = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {"gold": 4})
-    rows.add(ho_oh, 1)
+    names = _ObjectNames(builder, read_character_names())
+    rows = _ObjectRows(builder, names, {"gold": 4}, read_story_events())
+    rows.add(ho_oh, 1, "pokegold")
     assert rows.objects[-1][-1] == 4
-    unknown = _ObjectRows(builder, _ObjectNames(builder, read_character_names()), {})
+    unknown = _ObjectRows(builder, names, {}, read_story_events())
     with pytest.raises(ValueError, match="version inconnue"):
-        unknown.add(ho_oh, 1)
+        unknown.add(ho_oh, 1, "pokegold")

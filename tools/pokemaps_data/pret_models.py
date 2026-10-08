@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
+
+from .offer_conditions import ALWAYS, Condition
 
 
 @dataclass(frozen=True)
@@ -30,6 +32,10 @@ class Sign:
     x: int
     y: int
     text: str  # constante du texte affiché (ex. TEXT_CELADONMARTROOF_VENDING_MACHINE1)
+
+
+# Objet caché (Cherch'Objet) : invisible sur la carte du jeu.
+HIDDEN_ITEM = "hidden_item"
 
 
 @dataclass(frozen=True)
@@ -127,3 +133,32 @@ class NpcOffer:
     wanted: str | None = None  # Pokémon demandé en échange (trade)
     wanted_item: str | None = None  # objet demandé en échange (exchange)
     version: str | None = None  # version PokéAPI où l'offre existe (ex. red), None pour toutes celles du jeu
+    # Ce qu'exige l'offre : moments, jours et drapeaux pret du scénario (offer_conditions) ; toujours possible sinon.
+    condition: Condition = ALWAYS
+
+
+@dataclass(frozen=True)
+class LocatedLine:
+    """Ligne d'un script de la 1re génération, avec sa place : label global et rang dans ce label."""
+
+    label: str
+    index: int
+    line: str
+
+
+@dataclass(frozen=True)
+class ScriptIndex:
+    """Scripts de la 1re génération : lignes de chaque label global, et label qui le suit dans son fichier."""
+
+    bodies: dict[str, list[str]]
+    following: dict[str, str]
+
+
+def merged_offers(offers: list[NpcOffer]) -> list[NpcOffer]:
+    """Offres sans doublon, dans l'ordre de leur première apparition. Une même offre lue sur plusieurs chemins du
+    script n'exige que ce qu'exigent tous ces chemins (Condition.join)."""
+    merged: dict[NpcOffer, Condition] = {}
+    for offer in offers:
+        key = replace(offer, condition=ALWAYS)
+        merged[key] = merged[key].join(offer.condition) if key in merged else offer.condition
+    return [replace(offer, condition=condition) for offer, condition in merged.items()]
