@@ -254,9 +254,11 @@ Les données Pokémon de la 3e génération sont préparées séparément pour H
 les espèces nécessitant un transfert, les noms français et les objets clés sur des bases réduites sans cartes.
 Les tables événementielles B à I de la Grotte Métamo restent listées avec la mention « Événement externe » et
 ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
-Les cartes Hoenn préparatoires sont dans `assets/maps/emerald` et `assets/maps/ruby-sapphire` ; les jeux
-entreront dans l'aperçu complet avec leurs rencontres et personnages. Ils ne sont pas encore sélectionnables
-dans l'application. Le [bilan des cartes Hoenn](docs/generations/cartes-hoenn.md) décrit les variantes et mesures.
+Les cartes préparatoires sont dans `assets/maps/emerald`, `assets/maps/ruby-sapphire` et
+`assets/maps/firered-leafgreen` (Kanto et Îles Sevii) ; les jeux entreront dans l'aperçu complet avec leurs
+rencontres et personnages. Ils ne sont pas encore sélectionnables dans l'application.
+Les bilans des [cartes Hoenn](docs/generations/cartes-hoenn.md) et des
+[cartes des remakes](docs/generations/cartes-remake-1g.md) décrivent les assemblages, variantes et mesures.
 
 Les ressources finales de `app/src/main/assets/` sont versionnées avec Git classique, sans Git LFS :
 base, sprites fixes et animés (normaux, chromatiques et formes de Zarbi), icônes d'objets, tuiles, sprites de PNJ
@@ -377,6 +379,9 @@ python -m pytest -q -m pipeline
 Pour modifier uniquement les cartes Hoenn préparatoires, utiliser
 `python tools/build_data.py --hoenn-maps-only`, puis les mêmes validations et tests du pipeline.
 Cette commande régénère les deux variantes et leur inventaire SHA-256 sans modifier la base Room.
+Pour les cartes préparatoires de Rouge Feu/Vert Feuille, utiliser
+`python tools/build_data.py --remake-maps-only`, puis les mêmes validations et tests du pipeline.
+La génération complète inclut les trois groupes de cartes GBA ; les options ciblées sont exclusives.
 
 La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
 elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.

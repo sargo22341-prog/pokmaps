@@ -11,7 +11,7 @@ class GeneratedMapSectionsTest {
     @Test
     fun hoennPlansKeepRoomsTogetherAndVariantsSeparate() {
         for (group in listOf("emerald", "ruby-sapphire")) {
-            val catalog = GeneratedHoennCatalog.load(group)
+            val catalog = GeneratedGbaCatalog.load(group)
             assertEquals(setOf("hoenn", "hoenn-underwater"), catalog.worlds.map { it.identifier }.toSet())
             listOf(
                 "granite-cave-1f-plan",
@@ -33,6 +33,39 @@ class GeneratedMapSectionsTest {
                 assertEquals(map.identifier, floors.size, floors.map { it.level }.distinct().size)
             }
             assertTrue(catalog.mapByIdentifier("route130-mirage-island")?.isDisplayable == true)
+        }
+    }
+
+    @Test
+    fun remakePlansKeepKantoSeviiAndBranchFloorsSeparate() {
+        val catalog = GeneratedGbaCatalog.load("firered-leafgreen")
+        assertEquals(setOf("kanto", "sevii"), catalog.worlds.map { it.identifier }.toSet())
+        val requiredPlans = listOf(
+            "silph-co-1f-plan", "pokemon-tower-1f-plan", "cerulean-cave-1f-plan", "victory-road-1f-plan",
+            "seafoam-islands-1f-plan", "mt-ember-ruby-path-b1f-plan", "mt-ember-summit-path-1f-plan",
+            "tanoby-ruins-plan", "navel-rock-1f-plan", "navel-rock-summit-path-2f-plan",
+            "navel-rock-base-path-b1f-plan"
+        )
+        requiredPlans.forEach { assertTrue(it, catalog.mapByIdentifier(it) != null) }
+        assertPlan(catalog, "silph-co-1f-plan", 1, 12)
+        assertPlan(catalog, "pokemon-tower-1f-plan", 1, 7)
+        assertPlan(catalog, "cerulean-cave-1f-plan", 1, 3)
+        assertPlan(catalog, "victory-road-1f-plan", 1, 3)
+        assertPlan(catalog, "seafoam-islands-1f-plan", 1, 5)
+        assertPlan(catalog, "mt-ember-ruby-path-b1f-plan", 2, 6)
+        assertPlan(catalog, "mt-ember-summit-path-1f-plan", 1, 4)
+        assertPlan(catalog, "tanoby-ruins-plan", 7, 0)
+        assertPlan(catalog, "navel-rock-1f-plan", 1, 3)
+        assertPlan(catalog, "navel-rock-summit-path-2f-plan", 1, 5)
+        assertPlan(catalog, "navel-rock-base-path-b1f-plan", 1, 12)
+        val island = requireNotNull(catalog.mapByIdentifier("four-island"))
+        assertEquals("sevii", catalog.worldOf(island.id)?.identifier)
+        val town = requireNotNull(catalog.mapByIdentifier("pallet-town"))
+        assertEquals("kanto", catalog.worldOf(town.id)?.identifier)
+        assertTrue(catalog.maps.values.none { "prototype" in it.identifier || "unused" in it.identifier })
+        catalog.maps.values.filter { it.isDisplayable && !it.isWorld }.forEach { map ->
+            val floors = catalog.floorsOf(map.id)
+            assertEquals(map.identifier, floors.size, floors.map { it.level }.distinct().size)
         }
     }
 

@@ -428,11 +428,19 @@ embarqués ; l’activation dans Room et l’aperçu complet attend les phases r
 
 Branche Remake 1G :
 
-- [ ] Carte du monde de Kanto depuis Bourg Palette (38 cartes) ; région « Îles Sevii » : 7 ensembles placés par
+- [x] Carte du monde de Kanto depuis Bourg Palette (37 cartes connectées, plus Safrania réelle séparée) ;
+      région « Îles Sevii » : 7 ensembles placés par
       `map_anchors.csv`, cartes `PROTOTYPE_SEVII_ISLE_*` écartées.
-- [ ] `map_plans.csv` : Sylphe SARL, Tour Pokémon, Grotte Azurée, Route Victoire de Kanto, Îles Écume, Mont
+- [x] `map_plans.csv` : Sylphe SARL, Tour Pokémon, Grotte Azurée, Route Victoire de Kanto, Îles Écume, Mont
       Braise, Ruines Tanoby, Roc Nombri (événement).
-- [ ] `maps.csv` : noms français des cartes de `firered-leafgreen` (un nom manquant reste bloquant).
+- [x] `maps.csv` : noms français des cartes de `firered-leafgreen` (un nom manquant reste bloquant).
+
+Bilan : [cartes Remake 1G](generations/cartes-remake-1g.md). Les 417 cartes utilisées, 85 plans et deux
+mondes sont exportés dans les assets avec leurs catalogues, événements et sprites ; Room reste inchangée.
+Safrania réelle (66 × 55 cases) est atteinte par les portes, tandis que sa bordure de connexion (48 × 40)
+fait partie du monde. Le retour Route 6 vers cette bordure est décalé de 12 cases dans pret : la connexion
+est écartée au profit des autres routes. Les huit cartes inutilisées, dont les quatre prototypes Sevii,
+sont exclues. Les journaux invisibles du Memorydex conservent leurs événements sans sprite affiché.
 
 ## Phase 4 — Rencontres, terrains et emplacements
 

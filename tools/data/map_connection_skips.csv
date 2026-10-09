@@ -3,3 +3,6 @@ ruby-sapphire-emerald,MAP_ROUTE116,MAP_RUSTBORO_CITY,Émeraude décale la Route 
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN,MAP_ROUTE114,Émeraude décale la Route 114 de deux cases ; placement depuis la Route 115
 ruby-sapphire-emerald,MAP_ROUTE107,MAP_DEWFORD_TOWN,Émeraude décale la Route 107 de deux cases ; placement depuis la Route 108
 gold-silver-crystal,CELADON_CITY,ROUTE_7,"Les connexions placent la Route 7 une métatuile plus haut depuis Safrania que depuis Céladopole ; elle est placée depuis Safrania"
+firered-leafgreen,MAP_ROUTE6,MAP_SAFFRON_CITY_CONNECTION,Le retour Route 6 décale la bordure de Safrania de 12 cases ; placement par les Routes 5 et 7
+firered-leafgreen,MAP_PROTOTYPE_SEVII_ISLE_6,MAP_THREE_ISLAND,Prototype inutilisé
+firered-leafgreen,MAP_PROTOTYPE_SEVII_ISLE_7,MAP_THREE_ISLAND,Prototype inutilisé

@@ -20,9 +20,9 @@ from pathlib import Path
 # Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
 from pokemaps_data.asset_manifest import write_manifest
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import ALL_GAMES, GAMES, GAMES_IN_PROGRESS, Game
+from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, Game
 from pokemaps_data.maps import build_maps
-from pokemaps_data.maps_gen3 import build_hoenn_maps
+from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pokeapi import PokeApi
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
@@ -37,12 +37,17 @@ def main() -> int:
     parser.add_argument("--assets", type=Path, default=DEFAULT_ASSETS, help="dossier des assets de l'application")
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
-    parser.add_argument(
+    maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument(
         "--hoenn-maps-only", action="store_true", help="régénérer seulement les cartes Hoenn préparatoires"
     )
+    maps_only.add_argument(
+        "--remake-maps-only", action="store_true", help="régénérer seulement les cartes Rouge Feu/Vert Feuille"
+    )
     args = parser.parse_args()
-    if args.hoenn_maps_only:
-        build_hoenn_maps(args.cache, args.assets / "maps")
+    if args.hoenn_maps_only or args.remake_maps_only:
+        games = HOENN_MAP_GAMES if args.hoenn_maps_only else (FIRERED_LEAFGREEN,)
+        build_gen3_maps(args.cache, args.assets / "maps", games)
         write_manifest(args.assets)
         return 0
 
@@ -57,7 +62,7 @@ def main() -> int:
         return 1
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
-    build_hoenn_maps(args.cache, args.assets / "maps")
+    build_gen3_maps(args.cache, args.assets / "maps")
     write_manifest(args.assets)
     if GAMES_IN_PROGRESS:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)

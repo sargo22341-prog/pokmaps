@@ -1,4 +1,4 @@
-"""Assemblage GBA de Hoenn, avec un niveau sous-marin aligné sur la surface."""
+"""Assemblage GBA, avec les variantes propres à Hoenn et aux remakes de Kanto."""
 
 from __future__ import annotations
 
@@ -21,21 +21,23 @@ class Gen3GameMaps(GameMaps):
 
     @property
     def world_numbers(self) -> dict[str, int]:
-        return super().world_numbers | {UNDERWATER: 994}
+        return super().world_numbers if self.repo.remake else super().world_numbers | {UNDERWATER: 994}
 
     def __init__(self, repo: Gen3PretRepo, game: Game, curation: LayoutCuration) -> None:
-        if repo.remake:
-            raise ValueError("L’assemblage des remakes appartient à la branche Remake 1G")
         regions = tuple(replace(region, start_map=f"MAP_{region.start_map}") for region in game.regions)
-        curation = replace(
-            curation,
-            anchors=tuple(anchor for anchor in curation.anchors if anchor.map in repo.maps),
-            skips=tuple(skip for skip in curation.skips if skip.map in repo.maps and skip.target in repo.maps),
-            parents=tuple(
-                parent
-                for parent in curation.parents
-                if parent.map in repo.maps or parent.map == "MAP_ROUTE130_MIRAGE_ISLAND"
-            ),
+        curation = (
+            curation
+            if repo.remake
+            else replace(
+                curation,
+                anchors=tuple(anchor for anchor in curation.anchors if anchor.map in repo.maps),
+                skips=tuple(skip for skip in curation.skips if skip.map in repo.maps and skip.target in repo.maps),
+                parents=tuple(
+                    parent
+                    for parent in curation.parents
+                    if parent.map in repo.maps or parent.map == "MAP_ROUTE130_MIRAGE_ISLAND"
+                ),
+            )
         )
         super().__init__(repo, replace(game, regions=regions), curation)
         # Ces layouts ne sont jamais utilisés par le moteur commercial ; aucun prototype n'est affiché.
@@ -44,6 +46,11 @@ class Gen3GameMaps(GameMaps):
             for const, current in repo.maps.items()
             if not any(marker in const for marker in ("UNUSED", "PROTOTYPE", "UNKNOWN_MAP"))
         }
+        if repo.remake:
+            curated = {entry.map for entry in (*self.anchors, *self.chosen_parents, *self.plan_parts)}
+            if missing := sorted(curated - self.maps.keys()):
+                raise ValueError(f"Cartes de remake éditoriales absentes ou inutilisées : {missing}")
+            return
         self.maps["MAP_ROUTE130_MIRAGE_ISLAND"] = replace(
             self.maps["MAP_ROUTE130"],
             const="MAP_ROUTE130_MIRAGE_ISLAND",
@@ -97,6 +104,8 @@ class Gen3GameMaps(GameMaps):
     @cached_property
     def world_blocks(self) -> dict[str, dict[str, tuple[int, int]]]:
         surface = super().world_blocks
+        if self.repo.remake:
+            return surface
         underwater: dict[str, tuple[int, int]] = {}
         for positions in surface.values():
             for const, position in positions.items():
@@ -131,8 +140,8 @@ class Gen3GameMaps(GameMaps):
     def parents(self) -> dict[str, str]:
         roots = self.world_region
         parents = {entry.map: entry.parent for entry in self.chosen_parents}
-        if any(parent not in roots or const in roots for const, parent in parents.items()):
-            raise ValueError("map_parents.csv : origine Hoenn absente ou carte déjà dans le monde")
+        if any(const not in self.maps or parent not in roots or const in roots for const, parent in parents.items()):
+            raise ValueError("map_parents.csv : origine GBA absente ou carte déjà dans le monde")
         queue = deque([*((const, const) for const in roots), *parents.items()])
         visited: set[str] = set()
         while queue:
@@ -145,9 +154,9 @@ class Gen3GameMaps(GameMaps):
                     parents[target] = origin
                     queue.append((target, origin))
         if missing := sorted(self.maps.keys() - roots.keys() - parents.keys()):
-            raise ValueError(f"Cartes Hoenn sans origine (map_parents.csv) : {missing}")
+            raise ValueError(f"Cartes GBA sans origine (map_parents.csv) : {missing}")
         return parents
 
     @property
     def display_maps(self) -> list[str]:
-        return [*super().display_maps, UNDERWATER]
+        return super().display_maps if self.repo.remake else [*super().display_maps, UNDERWATER]

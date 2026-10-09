@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
-from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, validate_catalog
+from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
 
 
@@ -16,7 +16,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
-        for game in HOENN_MAP_GAMES:
+        for game in GEN3_MAP_GAMES:
             validate_catalog(args.assets / "maps" / game.version_group)
         errors = validate(args.assets / "database/pokedex.db")
         if errors:
