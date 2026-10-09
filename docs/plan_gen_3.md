@@ -334,10 +334,19 @@ Branche Remake 1G :
 
 - [x] Régions Kanto de Rouge Feu (départ `PALLET_TOWN`) et `SEVII` (départ `ONE_ISLAND`), numéros libres (996, 995) :
       déclarées avec les jeux.
-- [ ] `transfer_only.csv` : espèces de Hoenn et de Johto absentes de Rouge Feu/Vert Feuille (contrôle par branche,
-      comme Hoenn ; les exclusivités Rouge Feu ↔ Vert Feuille n'ont pas de ligne). D'ici là,
-      `test_every_pokemon_of_both_hoenn_dexes_can_be_obtained` ne vérifie que la branche Hoenn.
-- [ ] `name_fixes.csv` : lieux de Kanto de Rouge Feu et des Îles Sevii. `extra_items.csv` : objets clés.
+- [x] `transfer_only.csv` : 170 espèces nécessitent un transfert depuis une autre branche, dont Mentali et Noctali
+      (pas d'horloge), Lugia et Ho-Oh (événement au Roc Nombri). Les exclusivités Rouge Feu ↔ Vert Feuille n'ont
+      aucune ligne. `test_every_pokemon_of_both_dexes_of_each_branch_can_be_obtained` contrôle les deux branches.
+      Les tables B à I de la Grotte Métamo sont marquées « Événement externe » et exclues de l'obtention : le
+      Cadeau Mystère prévu n'a jamais été distribué ([Poképédia](https://www.pokepedia.fr/Grotte_M%C3%A9tamo)),
+      et `src/event_data.c` initialise `VAR_ALTERING_CAVE_WILD_SET` à zéro dans le moteur épinglé.
+- [x] `name_fixes.csv` : Kanto et Îles Sevii relus (accents, chenaux, étages sans abréviation, Centre Pokémon).
+      `extra_areas.csv` distingue le sous-sol de la Grotte du remake : PokéAPI réutilise `rock-tunnel/b1f`
+      pour le RdC de Rouge/Bleu/Jaune. Les rencontres et leur taux suivent la correction, sans déplacer celles
+      des jeux d'origine. `extra_items.csv` : aucun ajout, tous les objets du moteur de `pokefirered` existent
+      dans PokéAPI, vérifié par `test_every_gen3_item_constant_is_known_to_pokeapi`.
+      `test_remake_pokemon.py` couvre les noms, événements et erreurs de transfert sur la base Pokémon réduite ;
+      l'aperçu complet avec cartes attend le lecteur de la phase 2, comme pour Hoenn.
 
 ## Phase 2 — Lecteur pret de la 3e génération
 

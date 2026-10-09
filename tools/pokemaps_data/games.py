@@ -209,4 +209,9 @@ ONE_OFF_METHODS = frozenset(
 # mention EXTERNAL_EVENT_NOTE, mais ne rendent pas le Pokémon obtenable dans le jeu (validate._check_obtainable).
 EXTERNAL_EVENT_METHODS = frozenset({"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal"})
 EXTERNAL_EVENT_LOCATIONS = frozenset({"navel-rock", "birth-island", "faraway-island", "southern-island"})
+# Métamo : seule la table A (Nosferapti) est accessible sans distribution externe ; les tables B à I
+# étaient prévues pour le Cadeau Mystère, jamais distribué. Garder les rencontres, sans les compter.
+EXTERNAL_EVENT_AREAS = frozenset(
+    f"{location}/{table}" for location in ("kanto-altering-cave", "hoenn-altering-cave") for table in "bcdefghi"
+)
 EXTERNAL_EVENT_NOTE = "Événement externe"

@@ -7,7 +7,7 @@ import sqlite3
 from pathlib import Path
 
 from .builder_pokemon import BREEDING_GENERATION
-from .games import DECLARED_GAMES, EXTERNAL_EVENT_LOCATIONS, EXTERNAL_EVENT_METHODS
+from .games import DECLARED_GAMES, EXTERNAL_EVENT_AREAS, EXTERNAL_EVENT_LOCATIONS, EXTERNAL_EVENT_METHODS
 from .sources import DATA_DIR
 
 # Groupe d'œufs des Pokémon qui ne se reproduisent pas (légendaires, bébés).
@@ -315,6 +315,7 @@ def _obtainable(connection: sqlite3.Connection, generation: int, groups: tuple[i
     leurs évolutions et (à partir de BREEDING_GENERATION) le Pokémon de base de la famille de ceux qui peuvent pondre
     un œuf."""
     methods, places = sorted(EXTERNAL_EVENT_METHODS), sorted(EXTERNAL_EVENT_LOCATIONS)
+    areas = sorted(EXTERNAL_EVENT_AREAS)
     obtainable = {
         row[0]
         for row in connection.execute(
@@ -323,8 +324,9 @@ def _obtainable(connection: sqlite3.Connection, generation: int, groups: tuple[i
                 JOIN location_area la ON la.id = e.location_area_id JOIN location l ON l.id = la.location_id
                 WHERE v.version_group_id IN ({", ".join("?" * len(groups))})
                   AND m.identifier NOT IN ({", ".join("?" * len(methods))})
-                  AND l.identifier NOT IN ({", ".join("?" * len(places))})""",
-            (*groups, *methods, *places),
+                  AND l.identifier NOT IN ({", ".join("?" * len(places))})
+                  AND l.identifier || '/' || la.identifier NOT IN ({", ".join("?" * len(areas))})""",
+            (*groups, *methods, *places, *areas),
         )
     }
     links = _obtention_links(connection, generation, groups)

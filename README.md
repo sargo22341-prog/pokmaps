@@ -238,6 +238,13 @@ connaît (`GenerationFeature` dans l'application) : objets tenus (2e génératio
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
+Les données Pokémon de la 3e génération sont préparées séparément pour Hoenn et Rouge Feu/Vert Feuille
+([plan d'intégration](docs/plan_gen_3.md)). Les tests du pipeline vérifient les Pokédex régional et National,
+les espèces nécessitant un transfert, les noms français et les objets clés sur des bases réduites sans cartes.
+Les tables événementielles B à I de la Grotte Métamo restent listées avec la mention « Événement externe » et
+ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
+Ces jeux entreront dans l'aperçu complet avec le lecteur de cartes GBA ; ils ne sont pas encore dans l'application.
+
 Les ressources finales de `app/src/main/assets/` sont versionnées avec Git classique, sans Git LFS :
 base, sprites fixes et animés (normaux, chromatiques et formes de Zarbi), icônes d'objets, tuiles, sprites de PNJ
 et licences. `assets.sha256` inventorie leurs chemins et empreintes. Les guides, succès traduits et vecteurs

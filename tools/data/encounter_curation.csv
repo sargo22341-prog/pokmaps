@@ -106,3 +106,10 @@ gold|silver|crystal,roaming-johto/area,raikou,roaming-grass,note,Erre d'une rout
 gold|silver|crystal,roaming-johto/area,entei,roaming-grass,note,Erre d'une route de Johto à l'autre
 gold|silver,roaming-johto/area,suicune,roaming-grass,note,Erre d'une route de Johto à l'autre
 ruby|sapphire|emerald,hoenn-route-119,feebas,feebas-tile-fishing,note,"50 % à chaque pêche, sur six cases de la route tirées au hasard"
+firered|leafgreen,rock-tunnel/b1f,geodude,walk,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,zubat,walk,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,mankey,walk,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,machop,walk,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,onix,walk,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,geodude,rock-smash,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,rock-tunnel/b1f,graveler,rock-smash,move_to,rock-tunnel/remake-b1f
