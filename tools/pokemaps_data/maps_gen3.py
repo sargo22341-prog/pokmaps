@@ -1,4 +1,4 @@
-"""Génération explicite des cartes Hoenn avant l'intégration des rencontres et personnages."""
+"""Cartes GBA préparatoires, avant l'intégration des rencontres et personnages."""
 
 from __future__ import annotations
 
@@ -9,17 +9,26 @@ import time
 from dataclasses import asdict
 from pathlib import Path
 
-from .games import EMERALD, EXTERNAL_EVENT_NOTE, RUBY_SAPPHIRE, Game
+from .games import EMERALD, EXTERNAL_EVENT_NOTE, FIRERED_LEAFGREEN, RUBY_SAPPHIRE, Game
 from .maps import MapRow, WarpRow, display_map_rows, read_map_names
 from .maps_layout import identifier, read_layout_curation
 from .maps_layout_gen3 import Gen3GameMaps
 from .maps_render_gen3 import Gen3Renderer
 from .pret_gen3 import Gen3PretRepo
-from .pret_gen3_maps import Gen3Map
+from .pret_gen3_maps import Gen3Event, Gen3Map
 from .pret_gen3_source import read_json
 from .sources import fetch_pret
 
 HOENN_MAP_GAMES = (EMERALD, RUBY_SAPPHIRE)
+GEN3_MAP_GAMES = (*HOENN_MAP_GAMES, FIRERED_LEAFGREEN)
+
+
+def _static_sprite(obj: Gen3Event) -> str | None:
+    # Les journaux du Memorydex sont des objets interactifs invisibles, pas des personnages.
+    if obj.value("movement_type") == "MOVEMENT_TYPE_INVISIBLE":
+        return None
+    sprite = str(obj.value("graphics_id"))
+    return None if sprite.startswith("OBJ_EVENT_GFX_VAR_") else sprite
 
 
 def _warps(game_maps: Gen3GameMaps) -> list[WarpRow]:
@@ -92,14 +101,14 @@ def _map_notes(current: Gen3Map) -> tuple[str, ...]:
     return tuple(notes)
 
 
-def export_hoenn_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, int]:
+def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, int]:
     repo = Gen3PretRepo(fetch_pret(cache, game.pret_repo), game.pret_versions)
     game_maps = Gen3GameMaps(repo, game, read_layout_curation())
     names = read_map_names()[game.map_family] | {const: plan.name for const, plan in game_maps.plans.items()}
     if missing := sorted((set(game_maps.placements) | set(game_maps.world_blocks)) - names.keys()):
-        raise ValueError(f"maps.csv : noms français Hoenn manquants : {missing}")
+        raise ValueError(f"maps.csv : noms français GBA manquants : {missing}")
     if output.name != game.version_group or output.is_symlink():
-        raise ValueError(f"Dossier de cartes Hoenn invalide : {output}")
+        raise ValueError(f"Dossier de cartes GBA invalide : {output}")
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -107,10 +116,10 @@ def export_hoenn_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, 
     rows = display_map_rows(game_maps, names, renderer, output)
     warps = _warps(game_maps)
     sprites = {
-        str(obj.value("graphics_id"))
+        sprite
         for current in game_maps.maps.values()
         for obj in current.objects
-        if not str(obj.value("graphics_id")).startswith("OBJ_EVENT_GFX_VAR_")
+        if (sprite := _static_sprite(obj)) is not None
     }
     renderer.write_sprites(sprites, output / "sprites")
     _write_catalog(rows, warps, output)
@@ -120,12 +129,12 @@ def export_hoenn_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, 
     return len(rows), len(tiles), sum(path.stat().st_size for path in output.rglob("*") if path.is_file())
 
 
-def build_hoenn_maps(cache: Path, output: Path) -> None:
+def build_gen3_maps(cache: Path, output: Path, games: tuple[Game, ...] = GEN3_MAP_GAMES) -> None:
     started = time.monotonic()
-    for game in HOENN_MAP_GAMES:
-        maps, tiles, size = export_hoenn_maps(cache, output / game.version_group, game)
+    for game in games:
+        maps, tiles, size = export_gen3_maps(cache, output / game.version_group, game)
         print(f"  {game.version_group} : {maps} cartes/zones, {tiles} tuiles, {size / 1024 / 1024:.2f} Mio")
-    print(f"Cartes Hoenn générées en {time.monotonic() - started:.1f} s")
+    print(f"Cartes GBA générées en {time.monotonic() - started:.1f} s")
 
 
 def validate_catalog(output: Path) -> None:
@@ -150,7 +159,10 @@ def _validate_events(output: Path, maps: dict[str, dict[str, str]]) -> None:
         raise ValueError(f"{output} : événements absents ou étrangers au catalogue")
     for const, current in events.items():
         for obj in current["objects"]:
-            sprite = str(dict(obj["fields"])["graphics_id"])
+            fields = dict(obj["fields"])
+            if fields["movement_type"] == "MOVEMENT_TYPE_INVISIBLE":
+                continue
+            sprite = str(fields["graphics_id"])
             if sprite.startswith("OBJ_EVENT_GFX_VAR_"):
                 if "L’apparence de certains personnages dépend du scénario." not in current["notes"]:
                     raise ValueError(f"{output} : apparence variable non signalée : {const}")

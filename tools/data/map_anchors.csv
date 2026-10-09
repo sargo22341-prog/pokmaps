@@ -3,3 +3,9 @@ ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTHWEST,MAP_ROUTE121,0,-100,Parc Safari 
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_OUTSIDE_WEST,MAP_LILYCOVE_CITY,0,450,Zone de Combat atteinte en bateau ; île indépendante au sud de Hoenn
 gold-silver-crystal,ROUTE_28,ROUTE_26,-20,0,"Aucune connexion ne relie la Route 28 : on y entre par la Porte de la Route Victoire, au nord de la Route 26. Placée à l’ouest du haut de la Route 26, ses portes à la même hauteur ; le Mont Argenté suit par sa connexion"
 ruby-sapphire-emerald,MAP_BATTLE_TOWER_OUTSIDE,MAP_LILYCOVE_CITY,0,450,Tour de Combat de Rubis et Saphir atteinte en bateau ; même ancrage que la Zone de Combat
+firered-leafgreen,MAP_TWO_ISLAND,MAP_ONE_ISLAND,180,0,Île 2 indépendante ; trajet en bateau
+firered-leafgreen,MAP_THREE_ISLAND,MAP_ONE_ISLAND,420,0,Île 3 indépendante ; trajet en bateau
+firered-leafgreen,MAP_FOUR_ISLAND,MAP_ONE_ISLAND,0,200,Île 4 indépendante ; trajet en bateau
+firered-leafgreen,MAP_FIVE_ISLAND,MAP_ONE_ISLAND,180,200,Île 5 indépendante ; trajet en bateau
+firered-leafgreen,MAP_SIX_ISLAND,MAP_ONE_ISLAND,420,200,Île 6 indépendante ; trajet en bateau
+firered-leafgreen,MAP_SEVEN_ISLAND,MAP_ONE_ISLAND,180,420,Île 7 indépendante ; trajet en bateau

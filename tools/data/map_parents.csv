@@ -51,3 +51,9 @@ ruby-sapphire-emerald,MAP_BATTLE_COLOSSEUM_2P,MAP_LITTLEROOT_TOWN,Salle multijou
 ruby-sapphire-emerald,MAP_BATTLE_COLOSSEUM_4P,MAP_LITTLEROOT_TOWN,Salle multijoueur du Centre Pokémon ; origine variable
 ruby-sapphire-emerald,MAP_RECORD_CORNER,MAP_LITTLEROOT_TOWN,Salle de mixage de données du Centre Pokémon ; origine variable
 ruby-sapphire-emerald,MAP_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM,MAP_ROUTE125,Variante de layout à marée haute ; mêmes événements que la salle à marée basse
+firered-leafgreen,MAP_NAVEL_ROCK_HARBOR,MAP_ONE_ISLAND,Bateau des Îles Sevii ; événement externe avec le Ticket Mystik
+firered-leafgreen,MAP_BIRTH_ISLAND_HARBOR,MAP_ONE_ISLAND,Bateau des Îles Sevii ; événement externe avec le Ticket Aurore
+firered-leafgreen,MAP_BATTLE_COLOSSEUM_2P,MAP_PALLET_TOWN,Salle de communication accessible depuis les Centres Pokémon ; destination dynamique
+firered-leafgreen,MAP_BATTLE_COLOSSEUM_4P,MAP_PALLET_TOWN,Salle de communication accessible depuis les Centres Pokémon ; destination dynamique
+firered-leafgreen,MAP_RECORD_CORNER,MAP_PALLET_TOWN,Salle de communication accessible depuis les Centres Pokémon ; destination dynamique
+firered-leafgreen,MAP_SAFFRON_CITY,MAP_ROUTE5,Safrania réelle atteinte par la porte ; la carte de connexion ne montre que sa bordure

@@ -1146,3 +1146,422 @@ ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_WANDAS_HOUSE,Vergazon (maison de la co
 ruby-sapphire-emerald,MAP_VICTORY_ROAD_1F,Route Victoire (rez-de-chaussée)
 ruby-sapphire-emerald,MAP_VICTORY_ROAD_B1F,Route Victoire (1er sous-sol)
 ruby-sapphire-emerald,MAP_VICTORY_ROAD_B2F,Route Victoire (2e sous-sol)
+firered-leafgreen,KANTO,Kanto
+firered-leafgreen,SEVII,Îles Sevii
+firered-leafgreen,MAP_BATTLE_COLOSSEUM_2P,Colisée (deux joueurs)
+firered-leafgreen,MAP_TRADE_CENTER,Centre Troc
+firered-leafgreen,MAP_RECORD_CORNER,Coin des Records
+firered-leafgreen,MAP_BATTLE_COLOSSEUM_4P,Colisée (quatre joueurs)
+firered-leafgreen,MAP_UNION_ROOM,Salle Union
+firered-leafgreen,MAP_VIRIDIAN_FOREST,Forêt de Jade
+firered-leafgreen,MAP_MT_MOON_1F,Mont Sélénite — rez-de-chaussée
+firered-leafgreen,MAP_MT_MOON_B1F,Mont Sélénite — sous-sol 1
+firered-leafgreen,MAP_MT_MOON_B2F,Mont Sélénite — sous-sol 2
+firered-leafgreen,MAP_SSANNE_EXTERIOR,L’Océane — Extérieur
+firered-leafgreen,MAP_SSANNE_1F_CORRIDOR,"L’Océane — rez-de-chaussée, Couloir"
+firered-leafgreen,MAP_SSANNE_2F_CORRIDOR,"L’Océane — 1er étage, Couloir"
+firered-leafgreen,MAP_SSANNE_3F_CORRIDOR,"L’Océane — 2e étage, Couloir"
+firered-leafgreen,MAP_SSANNE_B1F_CORRIDOR,"L’Océane — sous-sol 1, Couloir"
+firered-leafgreen,MAP_SSANNE_DECK,L’Océane — Pont
+firered-leafgreen,MAP_SSANNE_KITCHEN,L’Océane — Cuisine
+firered-leafgreen,MAP_SSANNE_CAPTAINS_OFFICE,L’Océane — Cabine du Capitaine
+firered-leafgreen,MAP_SSANNE_1F_ROOM1,"L’Océane — rez-de-chaussée, Salle 1"
+firered-leafgreen,MAP_SSANNE_1F_ROOM2,"L’Océane — rez-de-chaussée, Salle 2"
+firered-leafgreen,MAP_SSANNE_1F_ROOM3,"L’Océane — rez-de-chaussée, Salle 3"
+firered-leafgreen,MAP_SSANNE_1F_ROOM4,"L’Océane — rez-de-chaussée, Salle 4"
+firered-leafgreen,MAP_SSANNE_1F_ROOM5,"L’Océane — rez-de-chaussée, Salle 5"
+firered-leafgreen,MAP_SSANNE_1F_ROOM7,"L’Océane — rez-de-chaussée, Salle 7"
+firered-leafgreen,MAP_SSANNE_2F_ROOM1,"L’Océane — 1er étage, Salle 1"
+firered-leafgreen,MAP_SSANNE_2F_ROOM2,"L’Océane — 1er étage, Salle 2"
+firered-leafgreen,MAP_SSANNE_2F_ROOM3,"L’Océane — 1er étage, Salle 3"
+firered-leafgreen,MAP_SSANNE_2F_ROOM4,"L’Océane — 1er étage, Salle 4"
+firered-leafgreen,MAP_SSANNE_2F_ROOM5,"L’Océane — 1er étage, Salle 5"
+firered-leafgreen,MAP_SSANNE_2F_ROOM6,"L’Océane — 1er étage, Salle 6"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM1,"L’Océane — sous-sol 1, Salle 1"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM2,"L’Océane — sous-sol 1, Salle 2"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM3,"L’Océane — sous-sol 1, Salle 3"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM4,"L’Océane — sous-sol 1, Salle 4"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM5,"L’Océane — sous-sol 1, Salle 5"
+firered-leafgreen,MAP_SSANNE_1F_ROOM6,"L’Océane — rez-de-chaussée, Salle 6"
+firered-leafgreen,MAP_UNDERGROUND_PATH_NORTH_ENTRANCE,Souterrain (nord–sud) — Entrée nord
+firered-leafgreen,MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL,Souterrain (nord–sud) — Galerie
+firered-leafgreen,MAP_UNDERGROUND_PATH_SOUTH_ENTRANCE,Souterrain (nord–sud) — Entrée sud
+firered-leafgreen,MAP_UNDERGROUND_PATH_WEST_ENTRANCE,Souterrain (est–ouest) — Entrée ouest
+firered-leafgreen,MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL,Souterrain (est–ouest) — Galerie
+firered-leafgreen,MAP_UNDERGROUND_PATH_EAST_ENTRANCE,Souterrain (est–ouest) — Entrée est
+firered-leafgreen,MAP_DIGLETTS_CAVE_NORTH_ENTRANCE,Cave Taupiqueur — Entrée nord
+firered-leafgreen,MAP_DIGLETTS_CAVE_B1F,Cave Taupiqueur — sous-sol 1
+firered-leafgreen,MAP_DIGLETTS_CAVE_SOUTH_ENTRANCE,Cave Taupiqueur — Entrée sud
+firered-leafgreen,MAP_VICTORY_ROAD_1F,Route Victoire — rez-de-chaussée
+firered-leafgreen,MAP_VICTORY_ROAD_2F,Route Victoire — 1er étage
+firered-leafgreen,MAP_VICTORY_ROAD_3F,Route Victoire — 2e étage
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B1F,Repaire Rocket — sous-sol 1
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B2F,Repaire Rocket — sous-sol 2
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B3F,Repaire Rocket — sous-sol 3
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B4F,Repaire Rocket — sous-sol 4
+firered-leafgreen,MAP_ROCKET_HIDEOUT_ELEVATOR,Repaire Rocket — Ascenseur
+firered-leafgreen,MAP_SILPH_CO_1F,Sylphe SARL — rez-de-chaussée
+firered-leafgreen,MAP_SILPH_CO_2F,Sylphe SARL — 1er étage
+firered-leafgreen,MAP_SILPH_CO_3F,Sylphe SARL — 2e étage
+firered-leafgreen,MAP_SILPH_CO_4F,Sylphe SARL — 3e étage
+firered-leafgreen,MAP_SILPH_CO_5F,Sylphe SARL — 4e étage
+firered-leafgreen,MAP_SILPH_CO_6F,Sylphe SARL — 5e étage
+firered-leafgreen,MAP_SILPH_CO_7F,Sylphe SARL — 6e étage
+firered-leafgreen,MAP_SILPH_CO_8F,Sylphe SARL — 7e étage
+firered-leafgreen,MAP_SILPH_CO_9F,Sylphe SARL — 8e étage
+firered-leafgreen,MAP_SILPH_CO_10F,Sylphe SARL — 9e étage
+firered-leafgreen,MAP_SILPH_CO_11F,Sylphe SARL — 10e étage
+firered-leafgreen,MAP_SILPH_CO_ELEVATOR,Sylphe SARL — Ascenseur
+firered-leafgreen,MAP_POKEMON_MANSION_1F,Manoir Pokémon — rez-de-chaussée
+firered-leafgreen,MAP_POKEMON_MANSION_2F,Manoir Pokémon — 1er étage
+firered-leafgreen,MAP_POKEMON_MANSION_3F,Manoir Pokémon — 2e étage
+firered-leafgreen,MAP_POKEMON_MANSION_B1F,Manoir Pokémon — sous-sol 1
+firered-leafgreen,MAP_SAFARI_ZONE_CENTER,Parc Safari — Zone centrale
+firered-leafgreen,MAP_SAFARI_ZONE_EAST,Parc Safari — Zone est
+firered-leafgreen,MAP_SAFARI_ZONE_NORTH,Parc Safari — Nord
+firered-leafgreen,MAP_SAFARI_ZONE_WEST,Parc Safari — Zone ouest
+firered-leafgreen,MAP_SAFARI_ZONE_CENTER_REST_HOUSE,Parc Safari — Aire de repos centrale
+firered-leafgreen,MAP_SAFARI_ZONE_EAST_REST_HOUSE,Parc Safari — Aire de repos est
+firered-leafgreen,MAP_SAFARI_ZONE_NORTH_REST_HOUSE,Parc Safari — Aire de repos nord
+firered-leafgreen,MAP_SAFARI_ZONE_WEST_REST_HOUSE,Parc Safari — Aire de repos ouest
+firered-leafgreen,MAP_SAFARI_ZONE_SECRET_HOUSE,Parc Safari — Cabane Secrète
+firered-leafgreen,MAP_CERULEAN_CAVE_1F,Grotte Azurée — rez-de-chaussée
+firered-leafgreen,MAP_CERULEAN_CAVE_2F,Grotte Azurée — 1er étage
+firered-leafgreen,MAP_CERULEAN_CAVE_B1F,Grotte Azurée — sous-sol 1
+firered-leafgreen,MAP_POKEMON_LEAGUE_LORELEIS_ROOM,Ligue Pokémon — Salle d’Olga
+firered-leafgreen,MAP_POKEMON_LEAGUE_BRUNOS_ROOM,Ligue Pokémon — Salle d’Aldo
+firered-leafgreen,MAP_POKEMON_LEAGUE_AGATHAS_ROOM,Ligue Pokémon — Salle d’Agatha
+firered-leafgreen,MAP_POKEMON_LEAGUE_LANCES_ROOM,Ligue Pokémon — Salle de Peter
+firered-leafgreen,MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM,Ligue Pokémon — Salle du Maître
+firered-leafgreen,MAP_POKEMON_LEAGUE_HALL_OF_FAME,Ligue Pokémon — Panthéon
+firered-leafgreen,MAP_ROCK_TUNNEL_1F,Grotte — rez-de-chaussée
+firered-leafgreen,MAP_ROCK_TUNNEL_B1F,Grotte — sous-sol 1
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_1F,Îles Écume — rez-de-chaussée
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B1F,Îles Écume — sous-sol 1
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B2F,Îles Écume — sous-sol 2
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B3F,Îles Écume — sous-sol 3
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B4F,Îles Écume — sous-sol 4
+firered-leafgreen,MAP_POKEMON_TOWER_1F,Tour Pokémon — rez-de-chaussée
+firered-leafgreen,MAP_POKEMON_TOWER_2F,Tour Pokémon — 1er étage
+firered-leafgreen,MAP_POKEMON_TOWER_3F,Tour Pokémon — 2e étage
+firered-leafgreen,MAP_POKEMON_TOWER_4F,Tour Pokémon — 3e étage
+firered-leafgreen,MAP_POKEMON_TOWER_5F,Tour Pokémon — 4e étage
+firered-leafgreen,MAP_POKEMON_TOWER_6F,Tour Pokémon — 5e étage
+firered-leafgreen,MAP_POKEMON_TOWER_7F,Tour Pokémon — 6e étage
+firered-leafgreen,MAP_POWER_PLANT,Centrale
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B4F,"Mont Braise — Chemin du Rubis, sous-sol 4"
+firered-leafgreen,MAP_MT_EMBER_EXTERIOR,Mont Braise — Extérieur
+firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_1F,"Mont Braise — Chemin du sommet, rez-de-chaussée"
+firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_2F,"Mont Braise — Chemin du sommet, 1er étage"
+firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_3F,"Mont Braise — Chemin du sommet, 2e étage"
+firered-leafgreen,MAP_MT_EMBER_SUMMIT,Mont Braise — Sommet
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B5F,"Mont Braise — Chemin du Rubis, sous-sol 5"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_1F,"Mont Braise — Chemin du Rubis, rez-de-chaussée"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F,"Mont Braise — Chemin du Rubis, sous-sol 1"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F,"Mont Braise — Chemin du Rubis, sous-sol 2"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B3F,"Mont Braise — Chemin du Rubis, sous-sol 3"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS,"Mont Braise — Chemin du Rubis, sous-sol 1, Escalier"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS,"Mont Braise — Chemin du Rubis, sous-sol 2, Escalier"
+firered-leafgreen,MAP_THREE_ISLAND_BERRY_FOREST,Bois aux Baies
+firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE,Grotte de Glace — Entrée
+firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_1F,Grotte de Glace — rez-de-chaussée
+firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F,Grotte de Glace — sous-sol 1
+firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK,Grotte de Glace — Salle du fond
+firered-leafgreen,MAP_FIVE_ISLAND_ROCKET_WAREHOUSE,Entrepôt Rocket
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_1F,Trou Percé — rez-de-chaussée
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B1F,Trou Percé — sous-sol 1
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B2F,Trou Percé — sous-sol 2
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B3F,Trou Percé — sous-sol 3
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B4F,Trou Percé — sous-sol 4
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM,Trou Percé — Salle du Saphir
+firered-leafgreen,MAP_SIX_ISLAND_PATTERN_BUSH,Forbuissons
+firered-leafgreen,MAP_SIX_ISLAND_ALTERING_CAVE,Grotte Métamo
+firered-leafgreen,MAP_NAVEL_ROCK_EXTERIOR,Roc Nombri — Extérieur
+firered-leafgreen,MAP_TRAINER_TOWER_1F,Tour des Dresseurs — rez-de-chaussée
+firered-leafgreen,MAP_TRAINER_TOWER_2F,Tour des Dresseurs — 1er étage
+firered-leafgreen,MAP_TRAINER_TOWER_3F,Tour des Dresseurs — 2e étage
+firered-leafgreen,MAP_TRAINER_TOWER_4F,Tour des Dresseurs — 3e étage
+firered-leafgreen,MAP_TRAINER_TOWER_5F,Tour des Dresseurs — 4e étage
+firered-leafgreen,MAP_TRAINER_TOWER_6F,Tour des Dresseurs — 5e étage
+firered-leafgreen,MAP_TRAINER_TOWER_7F,Tour des Dresseurs — 6e étage
+firered-leafgreen,MAP_TRAINER_TOWER_8F,Tour des Dresseurs — 7e étage
+firered-leafgreen,MAP_TRAINER_TOWER_ROOF,Tour des Dresseurs — Toit
+firered-leafgreen,MAP_TRAINER_TOWER_LOBBY,Tour des Dresseurs — Hall
+firered-leafgreen,MAP_TRAINER_TOWER_ELEVATOR,Tour des Dresseurs — Ascenseur
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE,Grotte Perdue — Entrée
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM1,Grotte Perdue — Salle 1
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM2,Grotte Perdue — Salle 2
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM3,Grotte Perdue — Salle 3
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM4,Grotte Perdue — Salle 4
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM5,Grotte Perdue — Salle 5
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM6,Grotte Perdue — Salle 6
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM7,Grotte Perdue — Salle 7
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM8,Grotte Perdue — Salle 8
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM9,Grotte Perdue — Salle 9
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM10,Grotte Perdue — Salle 10
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM11,Grotte Perdue — Salle 11
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM12,Grotte Perdue — Salle 12
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM13,Grotte Perdue — Salle 13
+firered-leafgreen,MAP_FIVE_ISLAND_LOST_CAVE_ROOM14,Grotte Perdue — Salle 14
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,Ruines Tanoby (Chambre Anémune)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_LIPTOO_CHAMBER,Ruines Tanoby (Chambre Deulipe)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_WEEPTH_CHAMBER,Ruines Tanoby (Chambre Prois)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER,Ruines Tanoby (Chambre Jonquatr)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_SCUFIB_CHAMBER,Ruines Tanoby (Chambre Hibicinq)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER,Ruines Tanoby (Chambre Irix)
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER,Ruines Tanoby (Chambre Poinsept)
+firered-leafgreen,MAP_THREE_ISLAND_DUNSPARCE_TUNNEL,Chemin Île 3
+firered-leafgreen,MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY,Clé Tanoby
+firered-leafgreen,MAP_NAVEL_ROCK_1F,Roc Nombri — rez-de-chaussée
+firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT,Roc Nombri — Sommet
+firered-leafgreen,MAP_NAVEL_ROCK_BASE,Roc Nombri — Profondeurs
+firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_2F,"Roc Nombri — Chemin du sommet, 1er étage"
+firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_3F,"Roc Nombri — Chemin du sommet, 2e étage"
+firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_4F,"Roc Nombri — Chemin du sommet, 3e étage"
+firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_5F,"Roc Nombri — Chemin du sommet, 4e étage"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B1F,"Roc Nombri — Chemin des profondeurs, sous-sol 1"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B2F,"Roc Nombri — Chemin des profondeurs, sous-sol 2"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B3F,"Roc Nombri — Chemin des profondeurs, sous-sol 3"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B4F,"Roc Nombri — Chemin des profondeurs, sous-sol 4"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B5F,"Roc Nombri — Chemin des profondeurs, sous-sol 5"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B6F,"Roc Nombri — Chemin des profondeurs, sous-sol 6"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B7F,"Roc Nombri — Chemin des profondeurs, sous-sol 7"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B8F,"Roc Nombri — Chemin des profondeurs, sous-sol 8"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B9F,"Roc Nombri — Chemin des profondeurs, sous-sol 9"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B10F,"Roc Nombri — Chemin des profondeurs, sous-sol 10"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B11F,"Roc Nombri — Chemin des profondeurs, sous-sol 11"
+firered-leafgreen,MAP_NAVEL_ROCK_B1F,Roc Nombri — sous-sol 1
+firered-leafgreen,MAP_NAVEL_ROCK_FORK,Roc Nombri — Bifurcation
+firered-leafgreen,MAP_BIRTH_ISLAND_EXTERIOR,Île Aurore — Extérieur
+firered-leafgreen,MAP_ONE_ISLAND_KINDLE_ROAD_EMBER_SPA,Source Braise
+firered-leafgreen,MAP_BIRTH_ISLAND_HARBOR,Île Aurore — Embarcadère
+firered-leafgreen,MAP_NAVEL_ROCK_HARBOR,Roc Nombri — Embarcadère
+firered-leafgreen,MAP_PALLET_TOWN,Bourg Palette
+firered-leafgreen,MAP_VIRIDIAN_CITY,Jadielle
+firered-leafgreen,MAP_PEWTER_CITY,Argenta
+firered-leafgreen,MAP_CERULEAN_CITY,Azuria
+firered-leafgreen,MAP_LAVENDER_TOWN,Lavanville
+firered-leafgreen,MAP_VERMILION_CITY,Carmin sur Mer
+firered-leafgreen,MAP_CELADON_CITY,Céladopole
+firered-leafgreen,MAP_FUCHSIA_CITY,Parmanie
+firered-leafgreen,MAP_CINNABAR_ISLAND,Cramois’Île
+firered-leafgreen,MAP_INDIGO_PLATEAU_EXTERIOR,Plateau Indigo — Extérieur
+firered-leafgreen,MAP_SAFFRON_CITY,Safrania
+firered-leafgreen,MAP_SAFFRON_CITY_CONNECTION,Safrania — Bordure de connexion
+firered-leafgreen,MAP_ONE_ISLAND,Île 1
+firered-leafgreen,MAP_TWO_ISLAND,Île 2
+firered-leafgreen,MAP_THREE_ISLAND,Île 3
+firered-leafgreen,MAP_FOUR_ISLAND,Île 4
+firered-leafgreen,MAP_FIVE_ISLAND,Île 5
+firered-leafgreen,MAP_SEVEN_ISLAND,Île 7
+firered-leafgreen,MAP_SIX_ISLAND,Île 6
+firered-leafgreen,MAP_ROUTE1,Route 1
+firered-leafgreen,MAP_ROUTE2,Route 2
+firered-leafgreen,MAP_ROUTE3,Route 3
+firered-leafgreen,MAP_ROUTE4,Route 4
+firered-leafgreen,MAP_ROUTE5,Route 5
+firered-leafgreen,MAP_ROUTE6,Route 6
+firered-leafgreen,MAP_ROUTE7,Route 7
+firered-leafgreen,MAP_ROUTE8,Route 8
+firered-leafgreen,MAP_ROUTE9,Route 9
+firered-leafgreen,MAP_ROUTE10,Route 10
+firered-leafgreen,MAP_ROUTE11,Route 11
+firered-leafgreen,MAP_ROUTE12,Route 12
+firered-leafgreen,MAP_ROUTE13,Route 13
+firered-leafgreen,MAP_ROUTE14,Route 14
+firered-leafgreen,MAP_ROUTE15,Route 15
+firered-leafgreen,MAP_ROUTE16,Route 16
+firered-leafgreen,MAP_ROUTE17,Route 17
+firered-leafgreen,MAP_ROUTE18,Route 18
+firered-leafgreen,MAP_ROUTE19,Route 19
+firered-leafgreen,MAP_ROUTE20,Route 20
+firered-leafgreen,MAP_ROUTE21_NORTH,Route 21 — Nord
+firered-leafgreen,MAP_ROUTE21_SOUTH,Route 21 — Sud
+firered-leafgreen,MAP_ROUTE22,Route 22
+firered-leafgreen,MAP_ROUTE23,Route 23
+firered-leafgreen,MAP_ROUTE24,Route 24
+firered-leafgreen,MAP_ROUTE25,Route 25
+firered-leafgreen,MAP_ONE_ISLAND_KINDLE_ROAD,Route Tison
+firered-leafgreen,MAP_ONE_ISLAND_TREASURE_BEACH,Plage Trésor
+firered-leafgreen,MAP_TWO_ISLAND_CAPE_BRINK,Cap Falaise
+firered-leafgreen,MAP_THREE_ISLAND_BOND_BRIDGE,Pont du Lien
+firered-leafgreen,MAP_THREE_ISLAND_PORT,Port Île 3
+firered-leafgreen,MAP_FIVE_ISLAND_RESORT_GORGEOUS,Camp de Vacances
+firered-leafgreen,MAP_FIVE_ISLAND_WATER_LABYRINTH,Labyrinthe d’O
+firered-leafgreen,MAP_FIVE_ISLAND_MEADOW,Pré Île 5
+firered-leafgreen,MAP_FIVE_ISLAND_MEMORIAL_PILLAR,Mémorial
+firered-leafgreen,MAP_SIX_ISLAND_OUTCAST_ISLAND,Île du Lointain
+firered-leafgreen,MAP_SIX_ISLAND_GREEN_PATH,Chemin Vert
+firered-leafgreen,MAP_SIX_ISLAND_WATER_PATH,Agualcanal
+firered-leafgreen,MAP_SIX_ISLAND_RUIN_VALLEY,Vallée Ruine
+firered-leafgreen,MAP_SEVEN_ISLAND_TRAINER_TOWER,Tour des Dresseurs (extérieur)
+firered-leafgreen,MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE,Entrée Canyon
+firered-leafgreen,MAP_SEVEN_ISLAND_SEVAULT_CANYON,Canyon Sesor
+firered-leafgreen,MAP_SEVEN_ISLAND_TANOBY_RUINS,Ruines Tanoby
+firered-leafgreen,MAP_PALLET_TOWN_PLAYERS_HOUSE_1F,"Bourg Palette — Maison du joueur, rez-de-chaussée"
+firered-leafgreen,MAP_PALLET_TOWN_PLAYERS_HOUSE_2F,"Bourg Palette — Maison du joueur, 1er étage"
+firered-leafgreen,MAP_PALLET_TOWN_RIVALS_HOUSE,Bourg Palette — Maison du rival
+firered-leafgreen,MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB,Bourg Palette — Laboratoire du Professeur Chen
+firered-leafgreen,MAP_VIRIDIAN_CITY_HOUSE,Jadielle — Maison
+firered-leafgreen,MAP_VIRIDIAN_CITY_GYM,Jadielle — Arène
+firered-leafgreen,MAP_VIRIDIAN_CITY_SCHOOL,Jadielle — École
+firered-leafgreen,MAP_VIRIDIAN_CITY_MART,Jadielle — Boutique Pokémon
+firered-leafgreen,MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F,"Jadielle — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F,"Jadielle — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_PEWTER_CITY_MUSEUM_1F,"Argenta — Musée des Sciences, rez-de-chaussée"
+firered-leafgreen,MAP_PEWTER_CITY_MUSEUM_2F,"Argenta — Musée des Sciences, 1er étage"
+firered-leafgreen,MAP_PEWTER_CITY_GYM,Argenta — Arène
+firered-leafgreen,MAP_PEWTER_CITY_MART,Argenta — Boutique Pokémon
+firered-leafgreen,MAP_PEWTER_CITY_HOUSE1,Argenta — Maison 1
+firered-leafgreen,MAP_PEWTER_CITY_POKEMON_CENTER_1F,"Argenta — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_PEWTER_CITY_POKEMON_CENTER_2F,"Argenta — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_PEWTER_CITY_HOUSE2,Argenta — Maison 2
+firered-leafgreen,MAP_CERULEAN_CITY_HOUSE1,Azuria — Maison 1
+firered-leafgreen,MAP_CERULEAN_CITY_HOUSE2,Azuria — Maison 2
+firered-leafgreen,MAP_CERULEAN_CITY_HOUSE3,Azuria — Maison 3
+firered-leafgreen,MAP_CERULEAN_CITY_POKEMON_CENTER_1F,"Azuria — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_CERULEAN_CITY_POKEMON_CENTER_2F,"Azuria — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_CERULEAN_CITY_GYM,Azuria — Arène
+firered-leafgreen,MAP_CERULEAN_CITY_BIKE_SHOP,Azuria — Boutique de Vélos
+firered-leafgreen,MAP_CERULEAN_CITY_MART,Azuria — Boutique Pokémon
+firered-leafgreen,MAP_CERULEAN_CITY_HOUSE4,Azuria — Maison 4
+firered-leafgreen,MAP_CERULEAN_CITY_HOUSE5,Azuria — Maison 5
+firered-leafgreen,MAP_LAVENDER_TOWN_POKEMON_CENTER_1F,"Lavanville — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_LAVENDER_TOWN_POKEMON_CENTER_2F,"Lavanville — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE,Lavanville — Maison Pokémon
+firered-leafgreen,MAP_LAVENDER_TOWN_HOUSE1,Lavanville — Maison 1
+firered-leafgreen,MAP_LAVENDER_TOWN_HOUSE2,Lavanville — Maison 2
+firered-leafgreen,MAP_LAVENDER_TOWN_MART,Lavanville — Boutique Pokémon
+firered-leafgreen,MAP_VERMILION_CITY_HOUSE1,Carmin sur Mer — Maison 1
+firered-leafgreen,MAP_VERMILION_CITY_POKEMON_CENTER_1F,"Carmin sur Mer — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_VERMILION_CITY_POKEMON_CENTER_2F,"Carmin sur Mer — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_VERMILION_CITY_POKEMON_FAN_CLUB,Carmin sur Mer — Fan Club Pokémon
+firered-leafgreen,MAP_VERMILION_CITY_HOUSE2,Carmin sur Mer — Maison 2
+firered-leafgreen,MAP_VERMILION_CITY_MART,Carmin sur Mer — Boutique Pokémon
+firered-leafgreen,MAP_VERMILION_CITY_GYM,Carmin sur Mer — Arène
+firered-leafgreen,MAP_VERMILION_CITY_HOUSE3,Carmin sur Mer — Maison 3
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_1F,"Céladopole — Centre Commercial, rez-de-chaussée"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_2F,"Céladopole — Centre Commercial, 1er étage"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_3F,"Céladopole — Centre Commercial, 2e étage"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_4F,"Céladopole — Centre Commercial, 3e étage"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_5F,"Céladopole — Centre Commercial, 4e étage"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_ROOF,"Céladopole — Centre Commercial, Toit"
+firered-leafgreen,MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR,"Céladopole — Centre Commercial, Ascenseur"
+firered-leafgreen,MAP_CELADON_CITY_CONDOMINIUMS_1F,"Céladopole — Manoir Céladon, rez-de-chaussée"
+firered-leafgreen,MAP_CELADON_CITY_CONDOMINIUMS_2F,"Céladopole — Manoir Céladon, 1er étage"
+firered-leafgreen,MAP_CELADON_CITY_CONDOMINIUMS_3F,"Céladopole — Manoir Céladon, 2e étage"
+firered-leafgreen,MAP_CELADON_CITY_CONDOMINIUMS_ROOF,"Céladopole — Manoir Céladon, Toit"
+firered-leafgreen,MAP_CELADON_CITY_CONDOMINIUMS_ROOF_ROOM,"Céladopole — Manoir Céladon, Maison sur le toit"
+firered-leafgreen,MAP_CELADON_CITY_POKEMON_CENTER_1F,"Céladopole — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_CELADON_CITY_POKEMON_CENTER_2F,"Céladopole — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_CELADON_CITY_GAME_CORNER,Céladopole — Casino
+firered-leafgreen,MAP_CELADON_CITY_GAME_CORNER_PRIZE_ROOM,Céladopole — Casino (salle des prix)
+firered-leafgreen,MAP_CELADON_CITY_GYM,Céladopole — Arène
+firered-leafgreen,MAP_CELADON_CITY_RESTAURANT,Céladopole — Restaurant
+firered-leafgreen,MAP_CELADON_CITY_HOUSE1,Céladopole — Maison 1
+firered-leafgreen,MAP_CELADON_CITY_HOTEL,Céladopole — Hôtel
+firered-leafgreen,MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE,Parmanie — Entrée du Parc Safari
+firered-leafgreen,MAP_FUCHSIA_CITY_MART,Parmanie — Boutique Pokémon
+firered-leafgreen,MAP_FUCHSIA_CITY_SAFARI_ZONE_OFFICE,Parmanie — Bureau du Parc Safari
+firered-leafgreen,MAP_FUCHSIA_CITY_GYM,Parmanie — Arène
+firered-leafgreen,MAP_FUCHSIA_CITY_HOUSE1,Parmanie — Maison 1
+firered-leafgreen,MAP_FUCHSIA_CITY_POKEMON_CENTER_1F,"Parmanie — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_FUCHSIA_CITY_POKEMON_CENTER_2F,"Parmanie — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_FUCHSIA_CITY_WARDENS_HOUSE,Parmanie — Maison du Gardien
+firered-leafgreen,MAP_FUCHSIA_CITY_HOUSE2,Parmanie — Maison 2
+firered-leafgreen,MAP_FUCHSIA_CITY_HOUSE3,Parmanie — Maison 3
+firered-leafgreen,MAP_CINNABAR_ISLAND_GYM,Cramois’Île — Arène
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE,Cramois’Île — Laboratoire Pokémon (entrée)
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_LAB_LOUNGE,Cramois’Île — Laboratoire Pokémon (salon)
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_LAB_RESEARCH_ROOM,Cramois’Île — Laboratoire Pokémon (recherche)
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM,Cramois’Île — Laboratoire Pokémon (expériences)
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F,"Cramois’Île — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_CINNABAR_ISLAND_POKEMON_CENTER_2F,"Cramois’Île — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_CINNABAR_ISLAND_MART,Cramois’Île — Boutique Pokémon
+firered-leafgreen,MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F,"Plateau Indigo — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_INDIGO_PLATEAU_POKEMON_CENTER_2F,"Plateau Indigo — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F,"Safrania — Maison de la Copieuse, rez-de-chaussée"
+firered-leafgreen,MAP_SAFFRON_CITY_COPYCATS_HOUSE_2F,"Safrania — Maison de la Copieuse, 1er étage"
+firered-leafgreen,MAP_SAFFRON_CITY_DOJO,Safrania — Dojo
+firered-leafgreen,MAP_SAFFRON_CITY_GYM,Safrania — Arène
+firered-leafgreen,MAP_SAFFRON_CITY_HOUSE,Safrania — Maison
+firered-leafgreen,MAP_SAFFRON_CITY_MART,Safrania — Boutique Pokémon
+firered-leafgreen,MAP_SAFFRON_CITY_POKEMON_CENTER_1F,"Safrania — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_SAFFRON_CITY_POKEMON_CENTER_2F,"Safrania — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE,Safrania — Maison de M. Psy
+firered-leafgreen,MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB,Safrania — Fan Club des Dresseurs
+firered-leafgreen,MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE,Route 2 — Porte sud de la Forêt de Jade
+firered-leafgreen,MAP_ROUTE2_HOUSE,Route 2 — Maison
+firered-leafgreen,MAP_ROUTE2_EAST_BUILDING,Route 2 — Porte est
+firered-leafgreen,MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE,Route 2 — Porte nord de la Forêt de Jade
+firered-leafgreen,MAP_ROUTE4_POKEMON_CENTER_1F,"Route 4 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE4_POKEMON_CENTER_2F,"Route 4 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_ROUTE5_POKEMON_DAY_CARE,Route 5 — Pension Pokémon
+firered-leafgreen,MAP_ROUTE5_SOUTH_ENTRANCE,Route 5 — Entrée sud
+firered-leafgreen,MAP_ROUTE6_NORTH_ENTRANCE,Route 6 — Entrée nord
+firered-leafgreen,MAP_ROUTE7_EAST_ENTRANCE,Route 7 — Entrée est
+firered-leafgreen,MAP_ROUTE8_WEST_ENTRANCE,Route 8 — Entrée ouest
+firered-leafgreen,MAP_ROUTE10_POKEMON_CENTER_1F,"Route 10 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE10_POKEMON_CENTER_2F,"Route 10 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_ROUTE11_EAST_ENTRANCE_1F,"Route 11 — Entrée est, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE11_EAST_ENTRANCE_2F,"Route 11 — Entrée est, 1er étage"
+firered-leafgreen,MAP_ROUTE12_NORTH_ENTRANCE_1F,"Route 12 — Entrée nord, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE12_NORTH_ENTRANCE_2F,"Route 12 — Entrée nord, 1er étage"
+firered-leafgreen,MAP_ROUTE12_FISHING_HOUSE,Route 12 — Maison du pêcheur
+firered-leafgreen,MAP_ROUTE15_WEST_ENTRANCE_1F,"Route 15 — Entrée ouest, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE15_WEST_ENTRANCE_2F,"Route 15 — Entrée ouest, 1er étage"
+firered-leafgreen,MAP_ROUTE16_HOUSE,Route 16 — Maison
+firered-leafgreen,MAP_ROUTE16_NORTH_ENTRANCE_1F,"Route 16 — Entrée nord, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE16_NORTH_ENTRANCE_2F,"Route 16 — Entrée nord, 1er étage"
+firered-leafgreen,MAP_ROUTE18_EAST_ENTRANCE_1F,"Route 18 — Entrée est, rez-de-chaussée"
+firered-leafgreen,MAP_ROUTE18_EAST_ENTRANCE_2F,"Route 18 — Entrée est, 1er étage"
+firered-leafgreen,MAP_ROUTE22_NORTH_ENTRANCE,Route 22 — Entrée nord
+firered-leafgreen,MAP_ROUTE25_SEA_COTTAGE,Route 25 — Villa de Léo
+firered-leafgreen,MAP_SEVEN_ISLAND_HOUSE_ROOM1,Île 7 — Maison (salle 1)
+firered-leafgreen,MAP_SEVEN_ISLAND_HOUSE_ROOM2,Île 7 — Maison (salle 2)
+firered-leafgreen,MAP_SEVEN_ISLAND_MART,Île 7 — Boutique Pokémon
+firered-leafgreen,MAP_SEVEN_ISLAND_POKEMON_CENTER_1F,"Île 7 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_SEVEN_ISLAND_POKEMON_CENTER_2F,"Île 7 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_SEVEN_ISLAND_HARBOR,Île 7 — Embarcadère
+firered-leafgreen,MAP_ONE_ISLAND_POKEMON_CENTER_1F,"Île 1 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_ONE_ISLAND_POKEMON_CENTER_2F,"Île 1 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_ONE_ISLAND_HOUSE1,Île 1 — Maison 1
+firered-leafgreen,MAP_ONE_ISLAND_HOUSE2,Île 1 — Maison 2
+firered-leafgreen,MAP_ONE_ISLAND_HARBOR,Île 1 — Embarcadère
+firered-leafgreen,MAP_TWO_ISLAND_JOYFUL_GAME_CORNER,Île 2 — Salle de Jeux
+firered-leafgreen,MAP_TWO_ISLAND_HOUSE,Île 2 — Maison
+firered-leafgreen,MAP_TWO_ISLAND_POKEMON_CENTER_1F,"Île 2 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_TWO_ISLAND_POKEMON_CENTER_2F,"Île 2 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_TWO_ISLAND_HARBOR,Île 2 — Embarcadère
+firered-leafgreen,MAP_THREE_ISLAND_HOUSE1,Île 3 — Maison 1
+firered-leafgreen,MAP_THREE_ISLAND_POKEMON_CENTER_1F,"Île 3 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_THREE_ISLAND_POKEMON_CENTER_2F,"Île 3 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_THREE_ISLAND_MART,Île 3 — Boutique Pokémon
+firered-leafgreen,MAP_THREE_ISLAND_HOUSE2,Île 3 — Maison 2
+firered-leafgreen,MAP_THREE_ISLAND_HOUSE3,Île 3 — Maison 3
+firered-leafgreen,MAP_THREE_ISLAND_HOUSE4,Île 3 — Maison 4
+firered-leafgreen,MAP_THREE_ISLAND_HOUSE5,Île 3 — Maison 5
+firered-leafgreen,MAP_FOUR_ISLAND_POKEMON_DAY_CARE,Île 4 — Pension Pokémon
+firered-leafgreen,MAP_FOUR_ISLAND_POKEMON_CENTER_1F,"Île 4 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_FOUR_ISLAND_POKEMON_CENTER_2F,"Île 4 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_FOUR_ISLAND_HOUSE1,Île 4 — Maison 1
+firered-leafgreen,MAP_FOUR_ISLAND_LORELEIS_HOUSE,Île 4 — Maison d’Olga
+firered-leafgreen,MAP_FOUR_ISLAND_HARBOR,Île 4 — Embarcadère
+firered-leafgreen,MAP_FOUR_ISLAND_HOUSE2,Île 4 — Maison 2
+firered-leafgreen,MAP_FOUR_ISLAND_MART,Île 4 — Boutique Pokémon
+firered-leafgreen,MAP_FIVE_ISLAND_POKEMON_CENTER_1F,"Île 5 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_FIVE_ISLAND_POKEMON_CENTER_2F,"Île 5 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_FIVE_ISLAND_HARBOR,Île 5 — Embarcadère
+firered-leafgreen,MAP_FIVE_ISLAND_HOUSE1,Île 5 — Maison 1
+firered-leafgreen,MAP_FIVE_ISLAND_HOUSE2,Île 5 — Maison 2
+firered-leafgreen,MAP_SIX_ISLAND_POKEMON_CENTER_1F,"Île 6 — Centre Pokémon, rez-de-chaussée"
+firered-leafgreen,MAP_SIX_ISLAND_POKEMON_CENTER_2F,"Île 6 — Centre Pokémon, 1er étage"
+firered-leafgreen,MAP_SIX_ISLAND_HARBOR,Île 6 — Embarcadère
+firered-leafgreen,MAP_SIX_ISLAND_HOUSE,Île 6 — Maison
+firered-leafgreen,MAP_SIX_ISLAND_MART,Île 6 — Boutique Pokémon
+firered-leafgreen,MAP_THREE_ISLAND_HARBOR,Port Île 3 — Embarcadère
+firered-leafgreen,MAP_FIVE_ISLAND_RESORT_GORGEOUS_HOUSE,Camp de Vacances — Maison
+firered-leafgreen,MAP_TWO_ISLAND_CAPE_BRINK_HOUSE,Cap Falaise — Maison
+firered-leafgreen,MAP_SIX_ISLAND_WATER_PATH_HOUSE1,Agualcanal — Maison 1
+firered-leafgreen,MAP_SIX_ISLAND_WATER_PATH_HOUSE2,Agualcanal — Maison 2
+firered-leafgreen,MAP_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE,Canyon Sesor — Maison

@@ -37,7 +37,9 @@ def _tables(repo: Gen3PretRepo) -> tuple[dict[str, str], dict[str, dict[str, str
             graphics,
         )
     )
-    tables = read_text(directory / "object_event_pic_tables.h") + read_text(directory / "berry_tree_graphics_tables.h")
+    tables = read_text(directory / "object_event_pic_tables.h")
+    if not repo.remake:
+        tables += read_text(directory / "berry_tree_graphics_tables.h")
     return pointers, info, paths, tables
 
 
@@ -54,8 +56,9 @@ def sprite_image(repo: Gen3PretRepo, sprite: str) -> Image.Image:
     width, height = int(fields["width"]), int(fields["height"])
     index = int(frame[4]) if frame else 0
     name = frame[1] if frame else single[1]
-    if frame and (int(frame[2]) * 8, int(frame[3]) * 8) != (width, height):
-        raise ValueError(f"{sprite} : dimensions ou image de face incohérentes")
+    # overworld_frame ne fournit qu'une taille DMA ; les bateaux utilisent des facteurs non géométriques.
+    if frame and int(frame[2]) * int(frame[3]) * 64 != width * height:
+        raise ValueError(f"{sprite} : taille de la première image incohérente")
     colors = _sprite_palette(repo, fields["paletteTag"], paths)
     if name not in paths:
         raise ValueError(f"{sprite} : graphisme absent : {name}")
