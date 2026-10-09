@@ -117,7 +117,7 @@ natures, IV, sprites des espèces 252 à 386.
       (14 dans Émeraude, 8 dans Rubis) et ont la taille de la route qu'elles doublent.
 - [x] **`SHOAL_CAVE` et ses marées** : deux niveaux, marée haute (`ShoalCave_HighTide*`) et marée basse
       (`ShoalCave_LowTide*`).
-- [x] **Contenus d'événement** (Île Lointaine, Île Aurore, Nombril de la Mer, Billet Éon, e-Reader, Mystery
+- [x] **Contenus d'événement** (Île Lointaine, Île Aurore, Roc Nombri, Billet Éon, e-Reader, Mystery
       Gift, Pokémon Box, Colosseum) : affichés avec la mention « événement externe », sans compter dans les
       objectifs de capture. Les méthodes `colosseum-bonus-disc-*` et `pokemon-channel-pal` suivent la même règle.
 - [x] **Zone de Combat / Pyramide / Butte d'Entraînement (Émeraude)** : cartes affichées, contenu aléatoire
@@ -277,9 +277,9 @@ Communs :
 - [x] `ONE_OFF_METHODS` : `roaming-water`, `devon-scope`, `wailmer-pail`, et `feebas-tile-fishing` (statué : rencontre
       unique, car 50 % sur six cases tirées au hasard ne complètent aucune table ; note dans `encounter_curation.csv`).
 - [x] Événements externes (`games.EXTERNAL_EVENT_METHODS` : `colosseum-bonus-disc-*`, `pokemon-channel-pal` ;
-      `EXTERNAL_EVENT_LOCATIONS` : Nombril de la Mer, Île Aurore, Île Lointaine, Île du Sud) : rencontres gardées avec
+      `EXTERNAL_EVENT_LOCATIONS` : Roc Nombri, Île Aurore, Île Lointaine, Île du Sud) : rencontres gardées avec
       la note « Événement externe », exclues de l'obtention dans `validate._check_obtainable`. Lugia et Ho-Oh, qui
-      ne sont qu'au Nombril de la Mer, passent dans `transfer_only.csv` (Colosseum, XD).
+      ne sont qu'au Roc Nombri, passent dans `transfer_only.csv` (Colosseum, XD).
 - [x] Espèces 252 à 386 : stats, types, talents (aucun talent caché), objets tenus (PokéAPI ; Pikachu ne tient rien
       dans Rouge Feu/Vert Feuille, comme dans pokefirered), groupes d'œufs, évolutions. Schéma 13 : `evolution` gagne
       `min_beauty` (Barpau), `relative_physical_stats` (Debugant, perdu jusqu'ici en 2e génération) et
@@ -307,20 +307,36 @@ Communs :
 - [x] `test_future_generations.py` : Rubis/Saphir construit avec le vrai `RUBY_SAPPHIRE`.
 - [x] Tests (`test_gen3_pokemon.py`, `test_form_sprites.py`, `test_sprites.py`) : talents de Hoenn, objets tenus,
       deux Pokédex par jeu, conditions d'évolution et règles du moteur, méthodes classées et refusées, rencontres
-      uniques et d'événement, obtention complète des deux Pokédex sur une base réduite.
+      uniques et d'événement, obtention complète des deux Pokédex de Hoenn sur une base réduite.
 
 Branche Hoenn :
 
 - [x] Région `HOENN` (départ `LITTLEROOT_TOWN`), numéro de carte du monde libre (997) : déclarée avec les jeux.
-- [ ] `transfer_only.csv` : exclusivités Rubis ↔ Saphir, espèces de Johto et de Kanto absentes de Hoenn,
-      Colosseum/XD.
-- [ ] `name_fixes.csv` : lieux de Hoenn. `extra_items.csv` : objets clés de scénario absents de PokéAPI.
+- [x] Obtention vérifiée **par branche** (`validate._check_obtainable`, branche = famille de cartes de
+      `games.DECLARED_GAMES`) et non plus par génération : sinon les espèces des Îles Sevii compteraient pour Hoenn.
+      Les exclusivités Rubis ↔ Saphir (et Rubis/Saphir ↔ Émeraude) s'obtiennent dans un jeu de la branche : aucune
+      ligne. La reproduction donne la plus petite espèce de la famille qui existe dans la génération (Marill pond
+      Marill en 2e génération, Azurill en 3e). Un jeu inconnu ou une colonne en trop dans `transfer_only.csv` arrête
+      le contrôle.
+- [x] `transfer_only.csv` : 138 espèces de Kanto et de Johto absentes de Hoenn, pour Rubis/Saphir et Émeraude ;
+      136 s'obtiennent dans Rouge Feu/Vert Feuille (calculé sur les données), Mentali et Noctali par un Évoli échangé
+      (ou Pokémon Colosseum), Lugia et Ho-Oh par Colosseum/XD (Roc Nombri, événement).
+- [x] `name_fixes.csv` : lieux de Hoenn relus d'après Poképédia. Chenaux 105-109, 122, 124-134 (PokéAPI dit « Route »
+      pour les zones), étages et sous-sols sans abréviation, marée haute de la Grotte Tréfonds, extension du Parc
+      Safari, Centre Météo, Île Lointaine, Grotte de l'Îlot, zone du Centre Pokémon (Hoenn), objet « Lettre ». Le
+      Roc Nombri (et non « Nombril de la Mer ») et la Grotte Métamo gardent le nom de PokéAPI. Toute clé inconnue
+      de PokéAPI ou colonne en trop arrête la génération.
+- [x] `extra_items.csv` : aucun ajout. Tous les objets de `include/constants/items.h` de pokeruby et pokeemerald
+      existent dans PokéAPI (test `test_every_hoenn_item_constant_is_known_to_pokeapi`) ; Clés Salle 1/2/4/6,
+      Ticketmystik et Ticketaurora y sont reliés par `pret_identifiers.ITEM_ALIASES`.
 
 Branche Remake 1G :
 
 - [x] Régions Kanto de Rouge Feu (départ `PALLET_TOWN`) et `SEVII` (départ `ONE_ISLAND`), numéros libres (996, 995) :
       déclarées avec les jeux.
-- [ ] `transfer_only.csv` : exclusivités Rouge Feu ↔ Vert Feuille, espèces de Hoenn.
+- [ ] `transfer_only.csv` : espèces de Hoenn et de Johto absentes de Rouge Feu/Vert Feuille (contrôle par branche,
+      comme Hoenn ; les exclusivités Rouge Feu ↔ Vert Feuille n'ont pas de ligne). D'ici là,
+      `test_every_pokemon_of_both_hoenn_dexes_can_be_obtained` ne vérifie que la branche Hoenn.
 - [ ] `name_fixes.csv` : lieux de Kanto de Rouge Feu et des Îles Sevii. `extra_items.csv` : objets clés.
 
 ## Phase 2 — Lecteur pret de la 3e génération
@@ -371,7 +387,7 @@ Branche Remake 1G :
 - [ ] Carte du monde de Kanto depuis Bourg Palette (38 cartes) ; région « Îles Sevii » : 7 ensembles placés par
       `map_anchors.csv`, cartes `PROTOTYPE_SEVII_ISLE_*` écartées.
 - [ ] `map_plans.csv` : Sylphe SARL, Tour Pokémon, Grotte Azurée, Route Victoire de Kanto, Îles Écume, Mont
-      Braise, Ruines Tanoby, Nombril de la Mer (événement).
+      Braise, Ruines Tanoby, Roc Nombri (événement).
 - [ ] `maps.csv` : noms français des cartes de `firered-leafgreen` (un nom manquant reste bloquant).
 
 ## Phase 4 — Rencontres, terrains et emplacements
@@ -392,7 +408,7 @@ Communs :
 Branche Hoenn :
 
 - [ ] Plongée (`water_mons` des cartes `Underwater_*`, méthode PokéAPI `seaweed`).
-- [ ] Barpau (six cases de la Route 119, impossibles à placer : note explicite), Grotte Altération
+- [ ] Barpau (six cases de la Route 119, impossibles à placer : note explicite), Grotte Métamo
       (Émeraude), Parc Safari et son extension d'Émeraude (après la Ligue), épidémies de la TV si retenues,
       Pokémon cachés (Kecleon : `devon-scope`, Simularbre : `wailmer-pail`).
 - [ ] `TERRA_CAVE` et `MARINE_CAVE` d'Émeraude (Groudon et Kyogre, entrée qui change de route) : lieux
@@ -406,7 +422,7 @@ Branche Hoenn :
 
 Branche Remake 1G :
 
-- [ ] Ruines Tanoby (lettres de Zarbi par salle), Îles Sevii après le Pokédex National, Grotte Altération (Île 6).
+- [ ] Ruines Tanoby (lettres de Zarbi par salle), Îles Sevii après le Pokédex National, Grotte Métamo (Île 6).
 - [ ] Errants Raikou/Entei/Suicune selon le starter.
 - [ ] `maps_terrain.py` : terrains d'après le **type de rencontre** de l'attribut (u32), pas le comportement.
 - [ ] Placer et relire les emplacements de `firered-leafgreen` dans `map_spots.csv` ; zéro avertissement de

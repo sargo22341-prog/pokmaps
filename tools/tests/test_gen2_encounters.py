@@ -227,7 +227,7 @@ def test_stale_transfer_only_rows_are_reported(preview_database: Path, tmp_path:
         connection.commit()
     finally:
         connection.close()
-    assert "transfer_only.csv : Pokémon obtenables dans la génération 2 : [1, 2, 3]" in validate(copy)
+    assert "transfer_only.csv : Pokémon obtenables dans la branche gold-silver-crystal : [1, 2, 3]" in validate(copy)
 
 
 def test_gold_silver_are_in_the_app(builder: DatabaseBuilder) -> None:

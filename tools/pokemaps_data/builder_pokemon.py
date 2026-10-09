@@ -73,6 +73,8 @@ class PokemonTables:
         rows = []
         for species_id, row in sorted(self.builder.species.items()):
             size = sizes[self.builder.default_pokemon[species_id]]
+            # L'espèce d'origine d'une génération ultérieure (Ptiravi pour Leveinard) n'est pas dans la base.
+            evolves_from = optional_int(row["evolves_from_species_id"])
             rows.append(
                 (
                     species_id,
@@ -81,7 +83,7 @@ class PokemonTables:
                     names_en[species_id],
                     genus_fr[species_id],
                     int(row["generation_id"]),
-                    optional_int(row["evolves_from_species_id"]),
+                    evolves_from if evolves_from in self.builder.species else None,
                     int(row["evolution_chain_id"]),
                     int(row["capture_rate"]),
                     int(row["gender_rate"]),
