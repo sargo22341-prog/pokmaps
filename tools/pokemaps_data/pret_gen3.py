@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .maps_terrain_gen3 import TerrainRules, terrain_rules
 from .pret_gen3_maps import Gen3Layout, Gen3Map, read_layouts, read_maps
+from .pret_gen3_offers import Gen3Offers
 from .pret_gen3_rematches import TrainerRematches, read_rematches
 from .pret_gen3_source import conditional_text, source_path
 from .pret_gen3_tilesets import Gen3Tileset, read_tilesets
@@ -83,3 +84,7 @@ class Gen3PretRepo:
     @cached_property
     def rematches(self) -> dict[str, tuple[TrainerRematches, ...]]:
         return {version: read_rematches(self, version, self.trainers[version]) for version, _ in self.versions}
+
+    @cached_property
+    def offers(self) -> dict[str, Gen3Offers]:
+        return {version: Gen3Offers(self, version) for version, _ in self.versions}

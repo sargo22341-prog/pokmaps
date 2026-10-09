@@ -6,13 +6,31 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from .pret_gen3_source import read_text
-from .pret_models import TrainerPokemon
+from .pret_gen3_script_values import script_constants
+from .pret_gen3_source import balanced_bodies, read_text
 
 if TYPE_CHECKING:
     from .pret_gen3 import Gen3PretRepo
 
 _MAX_TRAINERS = 4096
+
+
+@dataclass(frozen=True)
+class Gen3TrainerPokemon:
+    species: str
+    level: int
+    move_slots: tuple[str, ...]
+    item: str | None
+    iv: int
+    custom_moves: bool
+
+    @property
+    def moves(self) -> tuple[str, ...]:
+        return tuple(move for move in self.move_slots if move != "MOVE_NONE")
+
+    @property
+    def fixed_iv(self) -> int:
+        return self.iv * 31 // 255
 
 
 @dataclass(frozen=True)
@@ -22,26 +40,15 @@ class Gen3Trainer:
     name: str
     double_battle: bool
     items: tuple[str, ...]
-    party: tuple[TrainerPokemon, ...]
+    party: tuple[Gen3TrainerPokemon, ...]
 
 
 def _blocks(text: str, pattern: str) -> dict[str, str]:
     result: dict[str, str] = {}
-    for match in re.finditer(pattern, text):
-        depth = 1
-        end = match.end()
-        for position in range(end, len(text)):
-            depth += (text[position] == "{") - (text[position] == "}")
-            if depth == 0:
-                end = position
-                break
-        else:
-            raise ValueError(f"Initialiseur non terminé : {match[1]}")
-        if match[1] in result or len(result) >= _MAX_TRAINERS:
-            raise ValueError(f"Initialiseur répété ou trop nombreux : {match[1]}")
-        result[match[1]] = text[match.end() : end]
-    if not result:
-        raise ValueError(f"Initialiseurs absents : {pattern}")
+    for name, body in balanced_bodies(text, pattern, _MAX_TRAINERS):
+        if name in result:
+            raise ValueError(f"Initialiseur répété : {name}")
+        result[name] = body
     return result
 
 
@@ -94,7 +101,7 @@ def default_moves(learnset: tuple[tuple[int, str], ...], level: int) -> tuple[st
     return tuple(moves)
 
 
-def _party(body: str, learnsets: dict[str, tuple[tuple[int, str], ...]], label: str) -> tuple[TrainerPokemon, ...]:
+def _party(body: str, learnsets: dict[str, tuple[tuple[int, str], ...]], label: str) -> tuple[Gen3TrainerPokemon, ...]:
     # Les accolades des attaques sont retirées pour isoler les initialiseurs de Pokémon.
     flattened = re.sub(r"(\.moves\s*=\s*)\{([^{}]*)\}", r"\1\2", body)
     mons = re.findall(r"\{([^{}]*)\}", flattened, re.S)
@@ -103,28 +110,39 @@ def _party(body: str, learnsets: dict[str, tuple[tuple[int, str], ...]], label: 
     return tuple(_pokemon(mon, learnsets, label) for mon in mons)
 
 
-def _pokemon(body: str, learnsets: dict[str, tuple[tuple[int, str], ...]], label: str) -> TrainerPokemon:
+def _pokemon(body: str, learnsets: dict[str, tuple[tuple[int, str], ...]], label: str) -> Gen3TrainerPokemon:
     fields = re.findall(r"\.(\w+)\s*=", body)
     if len(fields) != len(set(fields)) or set(fields) - {"iv", "lvl", "level", "species", "heldItem", "moves"}:
         raise ValueError(f"{label} : champs de Pokémon inconnus ou répétés : {fields}")
-    species = re.search(r"\.species\s*=\s*(SPECIES_\w+)", body)
-    level = re.search(r"\.(?:lvl|level)\s*=\s*(\d+)", body)
+    species = re.search(r"\.species\s*=\s*(SPECIES_\w+)\s*(?:,|$)", body)
+    level = re.search(r"\.(?:lvl|level)\s*=\s*(\d+)\s*(?:,|$)", body)
+    iv = re.search(r"\.iv\s*=\s*(\d+)\s*(?:,|$)", body)
     if not species or not level or species[1] not in learnsets:
         raise ValueError(f"{label} : Pokémon illisible : {body}")
+    if ("iv" in fields and not iv) or (iv and not 0 <= int(iv[1]) <= 255):
+        raise ValueError(f"{label} : IV de dresseur invalide : {body}")
     moves_field = re.search(r"\.moves\s*=\s*(.*?)(?=\.\w+\s*=|$)", body, re.S)
     if moves_field:
-        raw_moves = re.findall(r"MOVE_\w+", moves_field[1])
-        if len(raw_moves) != 4:
+        raw_moves = tuple(value.strip() for value in moves_field[1].strip().rstrip(",").split(","))
+        if len(raw_moves) != 4 or any(not re.fullmatch(r"MOVE_\w+", value) for value in raw_moves):
             raise ValueError(f"{label} : quatre attaques explicites attendues : {body}")
-        moves = tuple(move for move in raw_moves if move != "MOVE_NONE")
+        moves = tuple(raw_moves)
     else:
         moves = default_moves(learnsets[species[1]], int(level[1]))
-    held = re.search(r"\.heldItem\s*=\s*(ITEM_\w+)", body)
+        moves += ("MOVE_NONE",) * (4 - len(moves))
+    held = re.search(r"\.heldItem\s*=\s*(ITEM_\w+)\s*(?:,|$)", body)
     if "heldItem" in fields and not held:
         raise ValueError(f"{label} : objet tenu illisible : {body}")
-    if not 1 <= int(level[1]) <= 100 or not moves:
+    if not 1 <= int(level[1]) <= 100 or not any(move != "MOVE_NONE" for move in moves):
         raise ValueError(f"{label} : niveau ou attaques invalides : {body}")
-    return TrainerPokemon(species[1], int(level[1]), moves, held[1] if held and held[1] != "ITEM_NONE" else None)
+    return Gen3TrainerPokemon(
+        species[1],
+        int(level[1]),
+        moves,
+        held[1] if held and held[1] != "ITEM_NONE" else None,
+        int(iv[1]) if iv else 0,
+        moves_field is not None,
+    )
 
 
 def read_trainers(repo: Gen3PretRepo, version: str) -> dict[str, Gen3Trainer]:
@@ -142,10 +160,22 @@ def read_trainers(repo: Gen3PretRepo, version: str) -> dict[str, Gen3Trainer]:
         if const == "TRAINER_NONE":
             continue
         result[const] = _trainer(const, body, parties)
+    _validate_references(result, script_constants(repo.root))
     return result
 
 
-def _trainer(const: str, body: str, parties: dict[str, tuple[TrainerPokemon, ...]]) -> Gen3Trainer:
+def _validate_references(trainers: dict[str, Gen3Trainer], constants: dict[str, int]) -> None:
+    for trainer in trainers.values():
+        references = list(trainer.items)
+        for mon in trainer.party:
+            references.extend(mon.moves)
+            if mon.item:
+                references.append(mon.item)
+        if unknown := sorted(set(references) - constants.keys()):
+            raise ValueError(f"{trainer.const} : attaques ou objets inconnus : {unknown}")
+
+
+def _trainer(const: str, body: str, parties: dict[str, tuple[Gen3TrainerPokemon, ...]]) -> Gen3Trainer:
     trainer_class = re.search(r"\.trainerClass\s*=\s*(TRAINER_CLASS_\w+)", body)
     name = re.search(r'\.trainerName\s*=\s*_\("([^"]*)"\)', body)
     double = re.search(r"\.doubleBattle\s*=\s*(TRUE|FALSE)", body)
@@ -159,11 +189,14 @@ def _trainer(const: str, body: str, parties: dict[str, tuple[TrainerPokemon, ...
     size = re.search(r"\.partySize\s*=\s*(\d+)", body)
     if size and int(size[1]) != len(parties[party_label]):
         raise ValueError(f"{const} : taille de l'équipe incohérente")
+    trainer_items = tuple(value.strip() for value in items[1].split(",") if value.strip())
+    if len(trainer_items) > 4 or any(not re.fullmatch(r"ITEM_\w+", value) for value in trainer_items):
+        raise ValueError(f"{const} : objets de combat illisibles : {items[1]}")
     return Gen3Trainer(
         const,
         trainer_class[1],
         name[1],
         double[1] == "TRUE",
-        tuple(item for item in re.findall(r"ITEM_\w+", items[1]) if item != "ITEM_NONE"),
+        tuple(item for item in trainer_items if item != "ITEM_NONE"),
         parties[party_label],
     )

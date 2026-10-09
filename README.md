@@ -179,7 +179,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   inconnues ou incohérentes arrêtent la lecture. Les cartes Hoenn sont rendues et embarquées séparément pour
   Rubis/Saphir et Émeraude, avec catalogues TSV, événements JSON et sprites de PNJ. L'intégration à Room et
   l'activation des jeux suivent les phases rencontres, personnages et application du
-  [plan génération 3](docs/plan_gen_3.md) ; la branche Rouge Feu/Vert Feuille reste à traiter.
+  [plan génération 3](docs/plan_gen_3.md). Rouge Feu/Vert Feuille disposent également de cartes préparatoires
+  et d'un aperçu des rencontres et des objets à position fixe.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
@@ -399,6 +400,35 @@ sont téléchargés aux versions épinglées, puis réutilisés depuis le cache.
 niveaux ou probabilités diffèrent de PokéAPI ; le [bilan des rencontres communes](docs/generations/rencontres-gen3-communs.md)
 explique les écarts. `map_areas.csv` accepte une colonne facultative `version_group` : les lignes d'un groupe
 remplacent les lignes communes de la même carte, notamment pour le Parc Safari d'Émeraude.
+
+Pour examiner aussi les objets au sol et cachés de la phase 5 :
+
+```bash
+python tools/build_data.py --gen3-items-only --preview tools/build/preview/gen3-items
+python tools/map_editor.py --assets tools/build/preview/gen3-items
+```
+
+Les positions et versions des objets sont exportées dans la base de l'aperçu ; `map_items.json` conserve en plus
+les quantités, élévations, scripts et drapeaux de retrait. Les jetons cachés du Casino de Céladopole sont
+conservés dans ce JSON ; leur calque attend la prise en charge du domaine. Les objets calculés de la Pyramide
+relèvent de la branche Hoenn, pas des objets à position fixe.
+
+Les équipes et revanches des cinq versions GBA se génèrent explicitement dans un catalogue préparatoire :
+
+```bash
+python tools/build_data.py --gen3-trainers-only --preview tools/build/preview/gen3-trainers
+```
+
+`trainers.json` conserve les 3 724 équipes, les quatre emplacements d'attaques calculées ou explicites,
+les IV, objets tenus, objets de combat, combats doubles et les 632 séries de revanches avec leurs conditions.
+Il indique les commits sources et relie les équipes aux événements des cartes. Cette commande inclut
+aussi les rencontres et objets fixes de l'aperçu. Les noms restent ceux des sources ; leur traduction,
+l'assemblage des fiches de personnages et leur affichage Android relèvent des cases suivantes du plan.
+
+Les fiches de personnages et leurs services restent à intégrer.
+Le [bilan de la phase 5](docs/generations/personnages-gen3-communs.md) décrit l'export et les conditions du National
+relues dans les sources. Cette commande conserve les assets de l'application et son inventaire.
+
 Les [rencontres de Hoenn](docs/generations/rencontres-hoenn.md) ajoutent un terrain distinct de Plongée,
 les routes possibles des grottes Terra/Marine et les notes des rencontres particulières. Les emplacements
 relus de Rubis/Saphir et d'Émeraude sont conservés dans `map_spots.csv` ; six petits terrains gardent des

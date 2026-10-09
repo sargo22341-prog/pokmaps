@@ -106,8 +106,11 @@ natures, IV, sprites des espèces 252 à 386.
 - [x] **Pokédex affiché : comme dans les jeux.** Chaque jeu a son Pokédex régional (Hoenn 202, Kanto 151, ordre
       régional) puis le Pokédex National (1 à 386), que le jeu débloque : Émeraude par le Prof. Seko après la
       Ligue (`LittlerootTown_ProfessorBirchsLab`), Rouge Feu/Vert Feuille par le Prof. Chen
-      (`PalletTown_ProfessorOaksLab`), Rubis/Saphir par l'échange d'un Pokémon hors Hoenn (`src/pokemon_3.c`).
-      Conditions exactes à relire dans pret en phase 5. Le National est ajouté à la génération (absent de
+      (`PalletTown_ProfessorOaksLab`), après la Ligue, 60 espèces capturées et une visite à l'Île 1.
+      Rubis/Saphir l'activent après un échange dont le partenaire transmet le marqueur `0x8000`
+      (`src/trade.c` ; transmis par Émeraude et Rouge Feu/Vert Feuille), sans test sur l'espèce reçue.
+      Les conditions sont relues en phase 5 dans le [bilan commun](generations/personnages-gen3-communs.md).
+      Le National est ajouté à la génération (absent de
       `pokedex_version_groups` pour ces groupes).
 - [x] **Îles Sevii** : une seule région « Îles Sevii ». Les îles forment 7 ensembles non reliés (Îles 1, 2, 3,
       5, 6, 7 reliées chacune à leurs routes, Île 4 seule) placés par `map_anchors.csv`. Les cartes
@@ -500,22 +503,35 @@ ses 28 formes et probabilités par chambre ; les errants apparaissent après la 
 
 Communs :
 
-Avancement partiel : les lecteurs `pret_gen3_trainers.py` et `pret_gen3_rematches.py` sont accessibles
-par `Gen3PretRepo.trainers` et `Gen3PretRepo.rematches`, par version. Ils lisent les équipes, leurs attaques
-initiales, objets tenus, combats doubles et tables de revanches des trois dépôts. Les rangs `SKIP` des remakes
-restent distincts et les conditions du Cherche VS sont contrôlées contre le moteur. Ces données ne sont pas
-encore exportées dans la base ou l'aperçu des personnages ; la partie « Communs » reste ouverte.
+Les équipes et revanches des trois dépôts sont exportées par version dans `trainers.json` de l'aperçu,
+avec `--gen3-trainers-only`. Les quatre emplacements d'attaques, IV, objets tenus, combats doubles,
+rangs sautés ou répétés et conditions de progression sont conservés. Les règles de revanche de Hoenn
+et les conditions du Cherche VS sont contrôlées contre les moteurs épinglés. Le catalogue contient
+3 724 équipes, 632 séries de revanches et les liens aux événements des cartes. Les noms français,
+la présence et les offres des personnages restent à intégrer ; la partie « Communs » reste ouverte.
 
-- [ ] `pret_gen3_trainers.py` : équipes, attaques par défaut (calculées comme le moteur), objets tenus,
+Les lecteurs `pret_gen3_scripts.py`, `pret_gen3_conditions.py` et `pret_gen3_offers.py` sont également
+accessibles par `Gen3PretRepo.offers[version]`. Ils suivent les appels, les variables, les branches et
+les écritures possibles du C, et lisent les offres explicites, boutiques, échanges, tuteurs ordinaires
+et plages de baies. Les expressions et appels C encore à relire bloquent la certification d'export.
+La reprise corrige l'ordre des arguments de `giveitem_msg` des remakes, suit les scènes de victoire
+référencées par les commandes de combat et reconnaît les services de capacités de Rubis/Saphir.
+Le [bilan de la partie commune](generations/personnages-gen3-communs.md) détaille les garanties et le travail
+restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, et sa validation complète.
+
+- [x] `pret_gen3_trainers.py` : équipes, attaques par défaut (calculées comme le moteur), objets tenus,
       combats doubles, toutes les équipes de revanche avec leur condition (table propre à chaque dépôt).
 - [ ] `trainer_classes.csv`, `npc_names.csv`, `npc_text_names.csv`, `facility_names.csv` : nouveaux noms
       français (un nom manquant arrête la génération).
-- [ ] Objets au sol (Poké Balls de carte) et objets cachés, avec le drapeau qui les retire.
+- [x] Objets au sol (Poké Balls de carte) et objets cachés, avec le drapeau qui les retire :
+      `--gen3-items-only` exporte les positions dans la base de l'aperçu et les métadonnées dans `map_items.json`.
+      Les jetons cachés restent dans le JSON ; les objets calculés de la Pyramide relèvent de la branche Hoenn.
 - [ ] `pret_gen3_scripts.py` + `pret_gen3_offers.py` : dons d'objets et de Pokémon, œufs, boutiques (dont les
       listes qui changent avec les badges), échanges, tuteurs, soins, baies offertes.
 - [ ] `pret_gen3_conditions.py` : analyse de flot des scripts (`goto_if_set`, `goto_if_eq` sur les `VAR_…`,
       présence des personnages) ; étendre `story_events.csv` aux variables de scénario à valeur.
-- [ ] Déblocage du Pokédex National relu dans les scripts de chaque jeu (décision « comme dans les jeux »).
+- [x] Déblocage du Pokédex National relu dans les scripts et le moteur de chaque jeu, documenté et testé
+      sur les sources épinglées (décision « comme dans les jeux » ; correction du déclencheur Rubis/Saphir).
 - [ ] `npc_duplicates.csv`, `npc_offers.csv` : personnages présents à plusieurs étapes, offres non lisibles.
 - [ ] Tests : offres, conditions, drapeaux et variables relus, dresseurs.
 
