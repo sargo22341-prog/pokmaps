@@ -7,6 +7,8 @@
 - msikma/pokesprite : icônes d'objets.
 - pret/pokered, pret/pokeyellow, pret/pokegold, pret/pokecrystal : désassemblages des jeux, pour les cartes et les
   dresseurs, les effets des attaques et les objets tenus.
+- pret/pokeruby, pret/pokeemerald, pret/pokefirered : désassemblages de la 3e génération, épinglés pour son
+  intégration (docs/plan_gen_3.md) ; aucun jeu ne les lit encore.
 """
 
 from __future__ import annotations
@@ -51,8 +53,14 @@ PRET_COMMITS = {
     "pokeyellow": "e89ead154b9968aa50eed9328ff2b38b6c194382",
     "pokegold": "ef0201d8daf47e8b3ea1518eacf890f37d4cd5e8",
     "pokecrystal": "3bc8daa4173e96a7f4011dad3922eb6fa5dad5c6",
+    "pokeruby": "5784633ce4ef7ade1a7f2d2d0c288e3d5e6cdd7f",
+    "pokeemerald": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+    "pokefirered": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
 }
 PRET_URL = "https://github.com/pret/{repo}.git"
+# Délai de chaque commande git. Mesure du 9 octobre 2026 : le plus lourd (pokeemerald) se récupère en moins de
+# 5 s, pour un paquet de 12 Mio et 60 Mio de sources extraites.
+PRET_GIT_TIMEOUT_SECONDS = 120
 
 POKEAPI_CSV_FILES = (
     "abilities",
@@ -218,7 +226,9 @@ def fetch_pret(cache: Path, repo: str) -> Path:
     target.mkdir(parents=True)
 
     def git(*args: str) -> None:
-        subprocess.run(["git", "-C", str(target), *args], check=True, capture_output=True, timeout=120)
+        subprocess.run(
+            ["git", "-C", str(target), *args], check=True, capture_output=True, timeout=PRET_GIT_TIMEOUT_SECONDS
+        )
 
     git("init", "-q")
     git("fetch", "-q", "--depth", "1", PRET_URL.format(repo=repo), commit)
