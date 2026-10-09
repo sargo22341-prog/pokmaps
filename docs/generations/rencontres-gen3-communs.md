@@ -76,3 +76,7 @@ compilation ; paquets Git : **36 149 Kio**. Aucune dépendance ajoutée.
 
 Les branches de phase 4 gardent les contenus particuliers, le placement éditorial et sa relecture visuelle.
 Les séries de la Pyramide et du Reptile restent réservées à la branche Hoenn, conformément au plan.
+
+La [branche Hoenn](rencontres-hoenn.md) est maintenant réalisée : terrain Plongée distinct, rencontres
+particulières, grottes mobiles, séries de combat et emplacements relus. Ses corrections de rattachement
+de Fondmer ajoutent des écarts de granularité au bilan historique des 29 tables ci-dessus.

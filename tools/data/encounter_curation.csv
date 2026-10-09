@@ -105,7 +105,18 @@ gold|silver|crystal,whirl-islands/b2f,lugia,static,move_to,whirl-islands/b3f
 gold|silver|crystal,roaming-johto/area,raikou,roaming-grass,note,Erre d'une route de Johto à l'autre
 gold|silver|crystal,roaming-johto/area,entei,roaming-grass,note,Erre d'une route de Johto à l'autre
 gold|silver,roaming-johto/area,suicune,roaming-grass,note,Erre d'une route de Johto à l'autre
-ruby|sapphire|emerald,hoenn-route-119,feebas,feebas-tile-fishing,note,"50 % à chaque pêche, sur six cases de la route tirées au hasard"
+ruby|sapphire|emerald,hoenn-route-119,feebas,feebas-tile-fishing,note,"50 % avec toute canne sur six cases tirées au hasard selon la sauvegarde et la phrase à la mode de Myokara ; tirages pouvant coïncider, impossibles à placer sur une carte fixe"
+ruby|sapphire|emerald,hoenn-route-119,kecleon,devon-scope,note,Invisible : utiliser le Devon Scope pour déclencher le combat
+ruby|sapphire|emerald,hoenn-route-120,kecleon,devon-scope,note,Invisible : utiliser le Devon Scope pour déclencher le combat
+emerald,hoenn-battle-frontier/area,sudowoodo,wailmer-pail,note,Après la Ligue : arroser le Simularbre avec le Wailmerrosoir
+ruby,roaming-hoenn/area,latios,roaming-grass,note,Après la Ligue : erre entre les vingt routes de Hoenn indiquées sur la carte
+ruby,roaming-hoenn/area,latios,roaming-water,note,Après la Ligue : erre entre les vingt routes de Hoenn indiquées sur la carte
+sapphire,roaming-hoenn/area,latias,roaming-grass,note,Après la Ligue : erre entre les vingt routes de Hoenn indiquées sur la carte
+sapphire,roaming-hoenn/area,latias,roaming-water,note,Après la Ligue : erre entre les vingt routes de Hoenn indiquées sur la carte
+emerald,roaming-hoenn/area,latias,roaming-grass,note,Après la Ligue : choisir Rouge à la télévision ; erre entre les vingt routes de Hoenn
+emerald,roaming-hoenn/area,latias,roaming-water,note,Après la Ligue : choisir Rouge à la télévision ; erre entre les vingt routes de Hoenn
+emerald,roaming-hoenn/area,latios,roaming-grass,note,Après la Ligue : choisir Bleu à la télévision ; erre entre les vingt routes de Hoenn
+emerald,roaming-hoenn/area,latios,roaming-water,note,Après la Ligue : choisir Bleu à la télévision ; erre entre les vingt routes de Hoenn
 firered|leafgreen,rock-tunnel/b1f,geodude,walk,move_to,rock-tunnel/remake-b1f
 firered|leafgreen,rock-tunnel/b1f,zubat,walk,move_to,rock-tunnel/remake-b1f
 firered|leafgreen,rock-tunnel/b1f,mankey,walk,move_to,rock-tunnel/remake-b1f

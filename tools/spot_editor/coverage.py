@@ -14,8 +14,7 @@ from pokemaps_data.map_spots import SPOT_KINDS, Point, TerrainKey, selected_key
 
 from .catalog import EditorCatalog, Family, required_spots, used_by_app
 from .session import SpotSession
-
-_VERSION_LABELS = {"red-blue": "Rouge/Bleu", "yellow": "Jaune", "gold-silver": "Or/Argent", "crystal": "Cristal"}
+from .version_choice import VERSION_LABELS
 
 
 class TerrainKinds(Protocol):
@@ -48,7 +47,7 @@ class Shortfall:
 
     @property
     def label(self) -> str:
-        version = _VERSION_LABELS.get(self.version_group, self.version_group)
+        version = VERSION_LABELS[self.version_group]
         return f"{self.map_name} · {version} · {self.key.kind} : {self.message}"
 
 

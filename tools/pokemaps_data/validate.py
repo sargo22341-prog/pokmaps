@@ -250,7 +250,7 @@ CHECKS = (
     (
         "emplacement de Pokémon hors de sa carte",
         """SELECT s.id FROM map_spot s JOIN map m ON m.id = s.map_id
-           WHERE s.kind NOT IN ('grass', 'water', 'floor', 'tree', 'rock')
+           WHERE s.kind NOT IN ('grass', 'water', 'floor', 'tree', 'rock', 'underwater')
              OR s.x NOT BETWEEN m.x AND m.x + m.width OR s.y NOT BETWEEN m.y AND m.y + m.height""",
     ),
 )

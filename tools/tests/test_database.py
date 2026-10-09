@@ -7,7 +7,7 @@ import pytest
 
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
-from pokemaps_data.games import map_families
+from pokemaps_data.games import DECLARED_GAMES, map_families
 from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key
 from pokemaps_data.maps_characters import ObjectRow
 from pokemaps_data.maps_characters_data import read_character_names
@@ -363,9 +363,11 @@ def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlit
     curated = read_spots()
     assert curated
     groups = dict(db.execute("SELECT identifier, id FROM version_group"))
-    families = map_families()
+    families = map_families(DECLARED_GAMES)
     for key, points in curated.items():
         for identifier in families[key.family]:
+            if identifier not in groups:
+                continue  # Les retouches préparatoires sont contrôlées dans les tests du pipeline de leur famille.
             if key.version_group and key.version_group != identifier:
                 continue
             if selected_key(curated, key, identifier) != key:

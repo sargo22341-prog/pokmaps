@@ -17,7 +17,7 @@ from pathlib import Path
 from .games import DECLARED_GAMES, map_families
 
 SPOTS_CSV = Path(__file__).resolve().parents[1] / "data/map_spots.csv"
-SPOT_KINDS = ("grass", "water", "floor", "tree", "rock")
+SPOT_KINDS = ("grass", "water", "floor", "tree", "rock", "underwater")
 _HEADER = ("family", "map_identifier", "kind", "x", "y")
 _SCOPED_HEADER = (*_HEADER, "version_group")
 

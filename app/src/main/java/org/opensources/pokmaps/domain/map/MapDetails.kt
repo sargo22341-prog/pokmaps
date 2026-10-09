@@ -9,7 +9,8 @@ enum class SpotKind(val identifier: String) {
     WATER("water"),
     FLOOR("floor"),
     TREE("tree"),
-    ROCK("rock");
+    ROCK("rock"),
+    UNDERWATER("underwater");
 
     companion object {
         fun from(identifier: String): SpotKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {
