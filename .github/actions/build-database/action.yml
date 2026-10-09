@@ -15,7 +15,8 @@ runs:
       with:
         path: tools/.cache
         # Les images encodées en WebP (webp.py) sont gardées dans ce cache, à côté de leurs sources.
-        # sources.py épingle aussi pokegold et pokecrystal : leur mise à jour invalide ce cache.
+        # sources.py épingle tous les dépôts pret (y compris ceux des jeux en cours d'intégration) :
+        # toute mise à jour d'un commit invalide ce cache.
         key: data-sources-${{ hashFiles('tools/pokemaps_data/sources.py', 'tools/pokemaps_data/webp.py') }}
 
     - name: Installer les dépendances

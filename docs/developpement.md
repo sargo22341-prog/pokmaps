@@ -52,8 +52,8 @@ notes différentes de celles du tag, elles sont conservées pour la release suiv
   [GitHub Releases](../../releases), avec son empreinte SHA-256.
 
 Les deux workflows réutilisent le cache `tools/.cache` : CSV PokéAPI, sprites, sources de pokered,
-pokeyellow, pokegold et pokecrystal, et conversions WebP. La clé dépend des commits épinglés dans
-`sources.py` et du convertisseur `webp.py`. Le résumé de chaque exécution indique la durée de génération
+pokeyellow, pokegold, pokecrystal, pokeruby, pokeemerald et pokefirered, et conversions WebP. La clé dépend des
+commits épinglés dans `sources.py` et du convertisseur `webp.py`. Le résumé de chaque exécution indique la durée de génération
 des données et la taille exacte de l'APK produit (debug en CI, signé en release).
 
 Mesure locale du 8 octobre 2026, avec les six versions et les sources déjà en cache : génération et validation
