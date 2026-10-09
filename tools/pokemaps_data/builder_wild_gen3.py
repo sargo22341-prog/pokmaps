@@ -98,6 +98,7 @@ def _conditions(game: Game, const: str) -> tuple[str, ...]:
         const.startswith(("MAP_FOUR_ISLAND", "MAP_FIVE_ISLAND", "MAP_SIX_ISLAND", "MAP_SEVEN_ISLAND"))
         or "RUBY_PATH" in const
         or const.startswith("MAP_CERULEAN_CAVE")
+        or const == "MAP_THREE_ISLAND_PORT"
     ):
         return ("story-progress-hall-of-fame", "story-progress-national-dex")
     return ()

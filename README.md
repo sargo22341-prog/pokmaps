@@ -404,6 +404,10 @@ les routes possibles des grottes Terra/Marine et les notes des rencontres partic
 relus de Rubis/Saphir et d'Émeraude sont conservés dans `map_spots.csv` ; six petits terrains gardent des
 avertissements de capacité documentés. Les séries non capturables de la Pyramide et du Reptile sont conservées
 hors ligne dans `maps/emerald/facility_encounters.json`, régénéré par `--hoenn-maps-only`.
+Les [rencontres des remakes](docs/generations/rencontres-remake-1g.md) conservent les lettres et probabilités
+de Zarbi par chambre de Tanoby, les conditions d'accès aux Îles Sevii et les errants selon le starter,
+après la remise du Saphir à Ciléo, à pied et pendant Surf. Les 3 294 emplacements de Rouge Feu/Vert Feuille
+sont relus et conservés dans `map_spots.csv` ; quatorze petits terrains gardent des avertissements de capacité documentés.
 
 La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
 elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.

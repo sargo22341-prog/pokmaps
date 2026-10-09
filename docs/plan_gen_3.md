@@ -485,11 +485,16 @@ contiennent des indices d'espèces. Les jeux restent en aperçu jusqu'à la phas
 
 Branche Remake 1G :
 
-- [ ] Ruines Tanoby (lettres de Zarbi par salle), Îles Sevii après le Pokédex National, Grotte Métamo (Île 6).
-- [ ] Errants Raikou/Entei/Suicune selon le starter.
-- [ ] `maps_terrain.py` : terrains d'après le **type de rencontre** de l'attribut (u32), pas le comportement.
-- [ ] Placer et relire les emplacements de `firered-leafgreen` dans `map_spots.csv` ; zéro avertissement de
+- [x] Ruines Tanoby (lettres de Zarbi par salle), Îles Sevii après le Pokédex National, Grotte Métamo (Île 6).
+- [x] Errants Raikou/Entei/Suicune selon le starter.
+- [x] `maps_terrain.py` : terrains d'après le **type de rencontre** de l'attribut (u32), pas le comportement.
+- [x] Placer et relire les emplacements de `firered-leafgreen` dans `map_spots.csv` ; zéro avertissement de
       terrain trop petit, ou décision écrite.
+
+Bilan : [rencontres Remake 1G](generations/rencontres-remake-1g.md). Les 3 294 points couvrent 124 lieux
+et 168 terrains, avec quatorze décisions écrites de capacité et aucun terrain sans point. Tanoby garde
+ses 28 formes et probabilités par chambre ; les errants apparaissent après la remise du Saphir à Ciléo,
+à pied et pendant Surf, sans exiger une seconde Ligue. Les jeux restent en aperçu jusqu'à la phase 6.
 
 ## Phase 5 — Dresseurs, personnages, installations et offres
 

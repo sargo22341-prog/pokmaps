@@ -75,7 +75,8 @@ def wild_cells(repo: Gen3PretRepo, current: Gen3Map) -> dict[str, list[tuple[int
             land = tile.encounter_type == 1 if repo.remake else tile.behavior in rules.land
             water = tile.encounter_type == 2 if repo.remake else tile.behavior in rules.water
             if "walk" in methods and land:
-                kind = "grass" if tile.behavior in (2, 3, 0x24) else "floor"
+                grass = (2, 0xD1) if repo.remake else (2, 3, 0x24)
+                kind = "grass" if tile.behavior in grass else "floor"
                 result[kind].append((x, y))
             fishing = bool(methods & {"old-rod", "good-rod", "super-rod"})
             if water and "seaweed" in methods:
