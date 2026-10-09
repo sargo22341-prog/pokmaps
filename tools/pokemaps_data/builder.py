@@ -22,6 +22,7 @@ from .games import GAMES, Game, PretFormat
 from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
+from .pret_gen3 import Gen3PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
 SCHEMA_VERSION = 13
@@ -47,6 +48,7 @@ class DatabaseBuilder:
         # Désassemblage pret de chaque groupe de versions (effets des attaques), aucun si None.
         self.pret_roots = pret_roots or {}
         self._gen2_repos: dict[str, Gen2PretRepo] = {}
+        self._gen3_repos: dict[str, Gen3PretRepo] = {}
         groups = {row["identifier"]: row for row in api.table("version_groups")}
         missing = [game.version_group for game in games if game.version_group not in groups]
         if missing:
@@ -92,6 +94,14 @@ class DatabaseBuilder:
         if game.version_group not in self._gen2_repos:
             self._gen2_repos[game.version_group] = Gen2PretRepo(self.pret_root(game, purpose), game.pret_versions)
         return self._gen2_repos[game.version_group]
+
+    def gen3_repo(self, game: Game, purpose: str) -> Gen3PretRepo:
+        """Lecteur GBA partagé par les tables du jeu."""
+        if game.pret_format is not PretFormat.GEN3:
+            raise ValueError(f"{game.version_group} n'a pas de sources GBA ({purpose})")
+        if game.version_group not in self._gen3_repos:
+            self._gen3_repos[game.version_group] = Gen3PretRepo(self.pret_root(game, purpose), game.pret_versions)
+        return self._gen3_repos[game.version_group]
 
     @cached_property
     def species(self) -> dict[int, dict[str, str]]:

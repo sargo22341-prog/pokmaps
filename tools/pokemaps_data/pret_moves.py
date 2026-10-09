@@ -28,6 +28,12 @@ RANDOM_RANGE = 256
 # Commandes des scripts d'effet de la 2e génération qui tirent la probabilité de l'attaque.
 _CHANCE_COMMANDS = frozenset({"effectchance", "tristatuschance"})
 _LABEL = re.compile(r"^(\w+):$")
+# Rubis nomme autrement trois effets dont les numéros d’effet sont identiques dans les trois moteurs GBA.
+_GEN3_EFFECT_ALIASES = {
+    "EFFECT_FLY": "EFFECT_SEMI_INVULNERABLE",
+    "EFFECT_SOLARBEAM": "EFFECT_SOLAR_BEAM",
+    "EFFECT_FLINCH_HIT_2": "EFFECT_FLINCH_MINIMIZE_HIT",
+}
 
 
 @dataclass(frozen=True)
@@ -37,6 +43,14 @@ class PretMove:
     # Probabilité de l'effet sur 256 lue dans moves.asm (2e génération) ; None si elle vient de move_effects.csv
     # (1re génération) ou si l'effet se produit à chaque fois.
     chance_256: int | None = None
+    # GBA : seuil sur Random() % 100, sans conversion vers les chances sur 256 des générations précédentes.
+    chance_percent: int | None = None
+
+    def __post_init__(self) -> None:
+        if self.chance_percent is not None and self.chance_256 is not None:
+            raise ValueError(f"{self.const} : deux unités de probabilité")
+        if self.chance_percent is not None and not 0 < self.chance_percent < 100:
+            raise ValueError(f"{self.const} : probabilité en pourcentage invalide")
 
 
 @dataclass(frozen=True)
@@ -63,7 +77,9 @@ def read_pret_moves(root: Path, pret_format: PretFormat) -> list[PretMove]:
             chance_effects = _chance_effects(root)
             return [_gen2_move(args, chance_effects) for args in _move_macros(root)]
         case PretFormat.GEN3:
-            raise ValueError(f"Effets des attaques de la 3e génération pas encore lus dans pret : {root.name}")
+            from .pret_gen3_moves import read_moves
+
+            return read_moves(root)
 
 
 def _move_macros(root: Path) -> list[list[str]]:
@@ -154,13 +170,18 @@ def move_effects(games: dict[str, GameMoves]) -> dict[str, dict[str, MoveEffect]
         effects = result.setdefault(game, {})
         pret_format = game_moves.pret_format
         for move in game_moves.moves:
-            row = by_move.get((pret_format, move.effect, move.const)) or by_effect.get((pret_format, move.effect))
+            effect_key = (
+                _GEN3_EFFECT_ALIASES.get(move.effect, move.effect) if pret_format is PretFormat.GEN3 else move.effect
+            )
+            row = by_move.get((pret_format, effect_key, move.const)) or by_effect.get((pret_format, effect_key))
             if row is None:
                 missing.append(f"{pret_format.value} {move.const} ({move.effect})")
                 continue
             used.add(row)
             chance_256 = move.chance_256 if move.chance_256 is not None else row.chance_256
-            chance = None if chance_256 is None else chance_256 * 100 / RANDOM_RANGE
+            chance = move.chance_percent
+            if chance_256 is not None:
+                chance = chance_256 * 100 / RANDOM_RANGE
             effects[move.const] = MoveEffect(row.description_fr, chance)
     if missing:
         raise ValueError(f"Effet d'attaque sans texte dans tools/data/move_effects.csv : {sorted(set(missing))}")
