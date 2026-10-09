@@ -25,8 +25,15 @@ class ExtraArea:
     name_fr: str
 
 
-# Sortes de noms corrigés dans name_fixes.csv.
-NAME_FIX_KINDS = frozenset({"location", "area", "condition", "method", "item"})
+# Sortes de noms corrigés dans name_fixes.csv, et table PokéAPI des identifiants de chacune (les zones ont leur clé
+# `lieu/zone`).
+_NAME_FIX_TABLES = {
+    "location": "locations",
+    "condition": "encounter_condition_values",
+    "method": "encounter_methods",
+    "item": "items",
+}
+NAME_FIX_KINDS = frozenset({*_NAME_FIX_TABLES, "area"})
 
 
 class LocationTables:
@@ -78,13 +85,19 @@ class LocationTables:
     @cached_property
     def name_fixes(self) -> dict[tuple[str, str], str]:
         """(sorte, identifiant PokéAPI) -> nom français corrigé : lieux, zones, conditions et méthodes de rencontre,
-        objets."""
+        objets. Un identifiant inconnu de PokéAPI arrête la génération : la correction ne s'appliquerait jamais."""
+        known = {kind: {row["identifier"] for row in self.api.table(table)} for kind, table in _NAME_FIX_TABLES.items()}
+        known["area"] = set(self.area_keys.values())
         fixes: dict[tuple[str, str], str] = {}
         with (DATA_DIR / "name_fixes.csv").open(encoding="utf-8", newline="") as handle:
             for line, row in enumerate(csv.DictReader(handle), start=2):
                 key = (row["kind"], row["key"])
-                if row["kind"] not in NAME_FIX_KINDS or key in fixes or not row["name_fr"].strip():
-                    raise ValueError(f"name_fixes.csv:{line} : sorte inconnue, doublon ou nom vide : {row}")
+                # Une colonne en trop (virgule non protégée dans la raison) est rangée sous la clé None.
+                if None in row or row["kind"] not in NAME_FIX_KINDS or key in fixes or not row["name_fr"].strip():
+                    problem = "sorte inconnue, doublon, nom vide ou colonne en trop"
+                    raise ValueError(f"name_fixes.csv:{line} : {problem} : {row}")
+                if row["key"] not in known[row["kind"]]:
+                    raise ValueError(f"name_fixes.csv:{line} : identifiant inconnu de PokéAPI : {row}")
                 fixes[key] = row["name_fr"]
         return fixes
 

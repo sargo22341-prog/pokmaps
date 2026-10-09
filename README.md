@@ -174,7 +174,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
   des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI, par famille de cartes
   (`map_areas.csv`), zones et objets absents de PokéAPI (`extra_areas.csv`, `extra_items.csv` : l'ADN Berzerk
-  et les lettres d'Or et d'Argent), Pokémon qu'un jeu n'obtient que par échange avec un autre (`transfer_only.csv`),
+  et les lettres d'Or et d'Argent), Pokémon que les jeux d'une famille de cartes n'obtiennent que par échange avec
+  un autre jeu (`transfer_only.csv`, contrôlé par famille : Hoenn et Rouge Feu/Vert Feuille séparément),
   personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
   que les scripts ne disent pas simplement (`npc_offers.csv`, action `add` : échanges d'objets, jetons vendus,
   Pokémon de départ du labo du Prof. Chen, Balls de Fargas ; action `remove` : don qu'un autre personnage fait

@@ -65,3 +65,48 @@ location,mirage-island,Île Mirage,nom français absent de PokéAPI
 area,shoal-cave/low-tide,Grotte Tréfonds (marée basse),nom français absent de PokéAPI
 area,shoal-cave/b2f,Grotte Tréfonds (2e sous-sol),nom français absent de PokéAPI
 area,shoal-cave/b3f,Grotte Tréfonds (3e sous-sol),nom français absent de PokéAPI
+area,hoenn-route-105,Chenal 105,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-106,Chenal 106,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-107,Chenal 107,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-108,Chenal 108,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-109,Chenal 109,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-122,Chenal 122,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-124,Chenal 124,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-125,Chenal 125,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-126,Chenal 126,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-127,Chenal 127,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-128,Chenal 128,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-129,Chenal 129,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-130,Chenal 130,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-131,Chenal 131,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-132,Chenal 132,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-133,Chenal 133,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-134,Chenal 134,nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-124/underwater,Chenal 124 (sous l'eau),nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,hoenn-route-126/underwater,Chenal 126 (sous l'eau),nom du jeu français : chenal maritime (PokéAPI dit « Route »)
+area,granite-cave/b1f,Grotte Granite (1er sous-sol),abréviation dans PokéAPI
+area,granite-cave/b2f,Grotte Granite (2e sous-sol),abréviation dans PokéAPI
+area,mt-pyre/2f,Mont Mémoria (1er étage),abréviation dans PokéAPI
+area,mt-pyre/3f,Mont Mémoria (2e étage),abréviation dans PokéAPI
+area,mt-pyre/4f,Mont Mémoria (3e étage),abréviation dans PokéAPI
+area,mt-pyre/5f,Mont Mémoria (4e étage),abréviation dans PokéAPI
+area,mt-pyre/6f,Mont Mémoria (5e étage),abréviation dans PokéAPI
+area,cave-of-origin/b1f,Grotte Origine (1er sous-sol),abréviation dans PokéAPI
+area,cave-of-origin/b2f,Grotte Origine (2e sous-sol),abréviation dans PokéAPI
+area,cave-of-origin/b3f,Grotte Origine (3e sous-sol),abréviation dans PokéAPI
+area,cave-of-origin/b4f,Grotte Origine (4e sous-sol),abréviation dans PokéAPI
+area,hoenn-victory-road/b1f,Route Victoire (1er sous-sol),abréviation dans PokéAPI
+area,hoenn-victory-road/b2f,Route Victoire (2e sous-sol),abréviation dans PokéAPI
+area,sky-pillar/3f,Pilier Céleste (2e étage),abréviation dans PokéAPI
+area,sky-pillar/5f,Pilier Céleste (4e étage),abréviation dans PokéAPI
+area,shoal-cave/b1f,Grotte Tréfonds (1er sous-sol),aligné sur les 2e et 3e sous-sols
+area,shoal-cave/high-tide,Grotte Tréfonds (marée haute),PokéAPI ne nomme pas la marée ; la marée basse est une autre zone
+area,hoenn-safari-zone/expansion-north,Parc Safari (extension nord),abréviations dans PokéAPI ; extension d'Émeraude
+area,hoenn-safari-zone/expansion-south,Parc Safari (extension sud),abréviations dans PokéAPI ; extension d'Émeraude
+area,hoenn-route-119/weather-institute,Centre Météo (Route 119),majuscule dans PokéAPI
+location,faraway-island,Île Lointaine,majuscule dans PokéAPI
+area,faraway-island/area,Île Lointaine,majuscule dans PokéAPI
+location,island-cave,Grotte de l'Îlot,apostrophe typographique dans PokéAPI ; apostrophe droite comme les autres noms
+area,island-cave/area,Grotte de l'Îlot,apostrophe typographique dans PokéAPI ; apostrophe droite comme les autres noms
+area,hoenn-pokecenter,Centre Pokémon (Hoenn),PokéAPI donne l'identifiant pour nom ; lieu des Pokémon reçus d'un autre jeu
+item,letter,Lettre,"nom de Rubis, Saphir et Émeraude ; PokéAPI donne celui de Rubis Oméga et Saphir Alpha (Lettre à Pierre)"

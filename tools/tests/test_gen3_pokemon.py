@@ -1,27 +1,37 @@
 """Données Pokémon des jeux de la 3e génération (PokéAPI et règles du moteur lues dans pret), sans cartes."""
 
+import re
+import shutil
 import sqlite3
 from collections import defaultdict
 from pathlib import Path
 
 import pytest
 
+from pokemaps_data import builder_locations, validate
 from pokemaps_data.builder import SCHEMA, DatabaseBuilder
+from pokemaps_data.builder_locations import LocationTables
 from pokemaps_data.games import EXTERNAL_EVENT_NOTE, ONE_OFF_METHODS
 from pokemaps_data.pokeapi import PokeApi
 from pokemaps_data.pret_gen3_evolution import read_evolution_rules
-from pokemaps_data.sources import pret_dir
-from pokemaps_data.validate import CHECKS, _check_obtainable
+from pokemaps_data.pret_identifiers import item_identifier
+from pokemaps_data.sources import DATA_DIR, pret_dir
+from pokemaps_data.validate import CHECKS, _branches, _check_obtainable, _obtainable, _obtention_links, _transfer_only
 
 from .conftest import CACHE
 
 RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN = 5, 6, 7
 RUBY, SAPPHIRE, FIRERED = 7, 8, 10
+HOENN_VERSIONS = (RUBY, SAPPHIRE, 9)
 NATIONAL, KANTO, HOENN = 1, 2, 4
 PIKACHU, EEVEE, ESPEON, UMBREON, PICHU, MARILL, JIRACHI, LUGIA = 25, 133, 196, 197, 172, 183, 385, 249
 TREECKO, WURMPLE, SILCOON, CASCOON, GARDEVOIR, NINCADA, NINJASK, SHEDINJA = 252, 265, 266, 268, 282, 290, 291, 292
 AZURILL, FEEBAS, MILOTIC = 298, 349, 350
 VOLT_TACKLE = 344
+CHANSEY, BLISSEY, SENTRET = 113, 242, 161
+# Emplacements vides des tables d'objets pret (ITEM_034, baies inutilisées), modes d'usage du sac, et CT / CS :
+# celles-ci sont reliées à leur identifiant par la table des machines du jeu, pas par leur constante.
+_PLACEHOLDER_ITEM = re.compile(r"[0-9A-F]{3}|NONE|UNUSED_BERRY_\d|(B_)?USE_\w+|[TH]M\d\d\w*")
 
 
 def test_each_game_has_its_regional_dex_then_the_national_dex(gen3_builder: DatabaseBuilder) -> None:
@@ -139,15 +149,81 @@ def test_one_off_and_external_event_encounters(gen3_builder: DatabaseBuilder) ->
     assert gen3_builder.items.name_of("vs-seeker") == "Cherche VS"
 
 
-def test_every_pokemon_of_both_dexes_can_be_obtained(gen3_builder: DatabaseBuilder, tmp_path: Path) -> None:
+def test_every_pokemon_of_both_hoenn_dexes_can_be_obtained(gen3_builder: DatabaseBuilder, tmp_path: Path) -> None:
     connection = _pokemon_database(gen3_builder, tmp_path / "gen3.db")
     try:
-        assert _check_obtainable(connection) == []
+        # La branche Remake 1G aura ses propres lignes de transfer_only.csv (docs/plan_gen_3.md) : Hoenn seule ici.
+        assert [error for error in _check_obtainable(connection) if "ruby-sapphire-emerald" in error] == []
         for description, query in CHECKS:
-            if "Pokédex" in description:
+            if "Pokédex" in description or "origine" in description:
                 assert connection.execute(query).fetchall() == [], description
     finally:
         connection.close()
+
+
+def test_branches_are_checked_separately(gen3_builder: DatabaseBuilder, tmp_path: Path) -> None:
+    connection = _pokemon_database(gen3_builder, tmp_path / "gen3.db")
+    try:
+        assert _branches(connection) == {
+            "ruby-sapphire-emerald": (3, (RUBY_SAPPHIRE, EMERALD)),
+            "firered-leafgreen": (3, (FIRERED_LEAFGREEN,)),
+        }
+        # Fouinette ne vit qu'aux Îles Sevii : obtenable dans Rouge Feu, pas dans Hoenn.
+        assert SENTRET in _obtainable(connection, 3, (FIRERED_LEAFGREEN,))
+        assert SENTRET not in _obtainable(connection, 3, (RUBY_SAPPHIRE, EMERALD))
+        assert SENTRET in _transfer_only(connection)["ruby-sapphire-emerald"]
+    finally:
+        connection.close()
+
+
+def test_eggs_hatch_into_the_smallest_species_of_the_generation(gen3_builder: DatabaseBuilder, tmp_path: Path) -> None:
+    connection = _pokemon_database(gen3_builder, tmp_path / "gen3.db")
+    try:
+        # Azurill (3e génération) n'existe pas encore en 2e génération : Marill y pond Marill.
+        assert (MARILL, AZURILL) in _obtention_links(connection, 3, (EMERALD,))
+        assert (MARILL, MARILL) in _obtention_links(connection, 2, ())
+        assert (MARILL, AZURILL) not in _obtention_links(connection, 2, ())
+    finally:
+        connection.close()
+
+
+def test_evolves_from_only_species_of_the_database(gen3_builder: DatabaseBuilder) -> None:
+    evolves_from = {row[0]: row[6] for row in gen3_builder.pokemon.pokemon_table()}
+    assert evolves_from[MARILL] == AZURILL
+    # Leveinard évolue de Ptiravi (4e génération), absent de la base.
+    assert evolves_from[CHANSEY] is None
+    assert evolves_from[BLISSEY] == CHANSEY
+
+
+def test_hoenn_place_names_are_those_of_the_games(gen3_builder: DatabaseBuilder) -> None:
+    builder = gen3_builder
+    groups = builder.encounters.encounter_groups
+    used = {group.location_area_id for group in groups if group.version_id in HOENN_VERSIONS}
+    keys = builder.locations.area_keys
+    areas = {keys[row[0]]: row[3] for row in builder.locations.location_area_table(used)}
+    places = {row[1]: row[2] for row in builder.locations.location_rows(used)}
+    assert areas["hoenn-route-105"] == "Chenal 105"
+    assert areas["hoenn-route-124/underwater"] == "Chenal 124 (sous l'eau)"
+    assert areas["hoenn-route-110"] == "Route 110"
+    assert areas["mt-pyre/2f"] == "Mont Mémoria (1er étage)"
+    assert areas["hoenn-pokecenter"] == "Centre Pokémon (Hoenn)"
+    assert places["faraway-island"] == "Île Lointaine"
+    names = [*areas.values(), *places.values()]
+    assert [name for name in names if any(mark in name for mark in ("ét.", " s-sol", "ext.", "’"))] == []
+    assert [name for name in names if name == name.lower()] == []
+    assert builder.items.name_of("letter") == "Lettre"
+
+
+@pytest.mark.parametrize("repo", ["pokeruby", "pokeemerald"])
+def test_every_hoenn_item_constant_is_known_to_pokeapi(repo: str, gen3_builder: DatabaseBuilder) -> None:
+    # Les objets clés du scénario de Hoenn existent tous dans PokéAPI : extra_items.csv n'en a pas besoin.
+    header = (pret_dir(CACHE, repo) / "include/constants/items.h").read_text(encoding="utf-8")
+    # pokeruby : « #define ITEM_X 12 » ; pokeemerald : énumération « ITEM_X, » ou « ITEM_X = 12, ».
+    constants = re.findall(r"^(?:#define\s+ITEM_(\w+)\s+\d+\s*$|\s+ITEM_(\w+)(?:\s*=\s*\d+)?,)", header, re.MULTILINE)
+    real = [const for pair in constants for const in pair if const and not _PLACEHOLDER_ITEM.fullmatch(const)]
+    assert len(real) > 200
+    unknown = [const for const in real if item_identifier(const, {}) not in gen3_builder.items.ids]
+    assert unknown == []
 
 
 def _pokemon_database(builder: DatabaseBuilder, path: Path) -> sqlite3.Connection:
@@ -184,3 +260,38 @@ class _ApiWith(PokeApi):
 
     def table(self, name: str) -> tuple[dict[str, str], ...]:
         return self._rows if name == self._replaced else super().table(name)
+
+
+def test_a_name_fix_unknown_to_pokeapi_stops_the_build(
+    gen3_builder: DatabaseBuilder, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    data = _data_copy(tmp_path)
+    with (data / "name_fixes.csv").open("a", encoding="utf-8") as handle:
+        handle.write("area,hoenn-route-135,Chenal 135,route inexistante\n")
+    monkeypatch.setattr(builder_locations, "DATA_DIR", data)
+    with pytest.raises(ValueError, match="identifiant inconnu de PokéAPI"):
+        _ = LocationTables(gen3_builder.api).name_fixes
+
+
+@pytest.mark.parametrize(
+    "row",
+    ["rubis-saphir,sentret,faute de frappe dans le groupe de versions", "emerald,sentret,raison, avec une virgule"],
+)
+def test_a_malformed_transfer_row_stops_the_check(
+    row: str, gen3_builder: DatabaseBuilder, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    data = _data_copy(tmp_path)
+    with (data / "transfer_only.csv").open("a", encoding="utf-8") as handle:
+        handle.write(f"{row}\n")
+    monkeypatch.setattr(validate, "DATA_DIR", data)
+    connection = _pokemon_database(gen3_builder, tmp_path / "gen3.db")
+    try:
+        with pytest.raises(ValueError, match=r"transfer_only\.csv:\d+ : jeu inconnu, .* colonne en trop"):
+            _transfer_only(connection)
+    finally:
+        connection.close()
+
+
+def _data_copy(tmp_path: Path) -> Path:
+    """Copie de tools/data, que le test peut modifier."""
+    return Path(shutil.copytree(DATA_DIR, tmp_path / "data"))

@@ -55,6 +55,13 @@ ITEM_ALIASES = {
     "MYSTERYBERRY": "leppa-berry",
     # 2e génération : Ruban Rose, que PokéAPI fusionne avec le Mouchoir Soie qui le remplace (item_game_indices).
     "PINK_BOW": "silk-scarf",
+    # 3e génération : clés de l'Épave et billets d'événement, abrégés ou attachés dans PokéAPI.
+    "ROOM_1_KEY": "rm-1-key",
+    "ROOM_2_KEY": "rm-2-key",
+    "ROOM_4_KEY": "rm-4-key",
+    "ROOM_6_KEY": "rm-6-key",
+    "MYSTIC_TICKET": "mysticticket",
+    "AURORA_TICKET": "auroraticket",
 }
 
 # Pokémon dont la constante pret ne donne pas l'identifiant PokéAPI (orthographe de la 2e génération).

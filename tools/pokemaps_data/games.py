@@ -161,6 +161,9 @@ FIRERED_LEAFGREEN = Game(
 GEN3_GAMES: tuple[Game, ...] = (RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
+# Tous les jeux déclarés, générés ou non. La famille de cartes d'un jeu est aussi sa branche, que les contrôles
+# d'obtention traitent comme une génération à part (validate._check_obtainable).
+DECLARED_GAMES: tuple[Game, ...] = tuple(dict.fromkeys((*ALL_GAMES, *GEN3_GAMES)))
 
 
 def map_families(games: tuple[Game, ...] = ALL_GAMES) -> dict[str, tuple[str, ...]]:
@@ -202,7 +205,7 @@ ONE_OFF_METHODS = frozenset(
     }
 )
 # Événements externes : un autre jeu ou une distribution donne le Pokémon (méthodes), ou le billet qui ouvre le lieu
-# (lieux PokéAPI : Nombril de la Mer, Île Aurore, Île Lointaine, Île du Sud). Ces rencontres sont gardées avec la
+# (lieux PokéAPI : Roc Nombri, Île Aurore, Île Lointaine, Île du Sud). Ces rencontres sont gardées avec la
 # mention EXTERNAL_EVENT_NOTE, mais ne rendent pas le Pokémon obtenable dans le jeu (validate._check_obtainable).
 EXTERNAL_EVENT_METHODS = frozenset({"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal"})
 EXTERNAL_EVENT_LOCATIONS = frozenset({"navel-rock", "birth-island", "faraway-island", "southern-island"})
