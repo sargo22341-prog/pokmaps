@@ -17,7 +17,8 @@ internal object MapZoneContent {
     /**
      * Dessine les Pokémon sauvages du lieu sur leur terrain : herbes (ou sol des grottes) en marchant, eau en surfant
      * ou en pêchant. Chacun apparaît au moins une fois (les plus fréquents parfois deux), à des emplacements bien
-     * répartis sur le terrain ; sur un terrain étroit, ils sont rangés côte à côte, plus petits.
+     * répartis sur le terrain. Un terrain qui a moins d'emplacements que de Pokémon n'en montre qu'un par
+     * emplacement ; les autres restent dans la liste du lieu.
      */
     fun wildMarkers(catalog: MapCatalog, zone: MapInfo, encounters: List<Encounter>): List<WildMarker> {
         val spots = catalog.spots[zone.id].orEmpty().groupBy { it.kind }
@@ -38,7 +39,6 @@ internal object MapZoneContent {
                 items = species.map { it.first },
                 weights = species.map { it.second },
                 spots = WildPlacement.awayFrom(terrain.orEmpty().map { it.x to it.y }, obstacles, species.size),
-                fallback = zone.centerInDisplay(),
                 seed = zone.id * SpotKind.entries.size + kind.ordinal
             ).map { it.item.copy(x = it.x, y = it.y, scale = it.scale) }
         }
@@ -50,7 +50,4 @@ internal object MapZoneContent {
         WildMethod.HEADBUTT -> SpotKind.TREE
         WildMethod.ROCK_SMASH -> SpotKind.ROCK
     }
-
-    private fun MapInfo.centerInDisplay(): Pair<Int, Int> =
-        if (parentId == null) width / 2 to height / 2 else x + width / 2 to y + height / 2
 }

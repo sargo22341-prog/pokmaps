@@ -260,9 +260,9 @@ emplacement, centré sur la case de 16 px ; cliquer sur un emplacement le retire
 emplacements.
 
 « Carte affichée » permet de basculer entre Rouge/Bleu et Jaune, ou entre Or/Argent et Cristal. Le plan,
-les rencontres et les calques suivent ce choix. La case « Points uniquement pour … » est cochée automatiquement
-pour le groupe affiché : les ajouts et retraits ne concernent que ce groupe. La décocher permet de retoucher
-les emplacements communs à la famille. Lors de la première retouche propre à un groupe, les points communs
+les rencontres et les calques suivent ce choix. La case « Points uniquement pour … » est décochée par défaut :
+les ajouts et retraits concernent les emplacements communs à la famille. La cocher, rarement, limite la
+retouche au groupe affiché. Lors de la première retouche propre à un groupe, les points communs
 servent de départ ; la liste obtenue remplace ensuite les points communs pour ce terrain dans ce groupe.
 Les modifications restent en attente pendant les changements de carte.
 
@@ -281,9 +281,12 @@ Pokémon sauvages » (décoché par défaut) pose un sprite du terrain sur chaqu
 prennent ; l'application, elle, choisit elle-même quel Pokémon va sur quel emplacement. L'éditeur lit les sources pret
 déjà téléchargées dans `tools/.cache` par la génération.
 
-Un avertissement apparaît quand un terrain a moins d'emplacements que de Pokémon à y dessiner (dans la version qui en
-demande le plus) : l'application les rangerait alors en grille au milieu du terrain. L'enregistrement demande une
-confirmation s'il reste de tels terrains.
+Quand un terrain a moins d'emplacements que de Pokémon à y dessiner (dans la version qui en demande le plus),
+l'application dessine un Pokémon tiré au hasard par emplacement ; les autres ne sont visibles que dans la liste du
+lieu. La section repliable « Avertissements », sous les erreurs, recense ces terrains sur toutes les cartes ; cliquer
+sur une ligne ouvre le lieu et le terrain concernés. Ces avertissements ne bloquent pas l'enregistrement. Un terrain
+qui a des Pokémon à dessiner mais aucun emplacement est en revanche une erreur bloquante : aucun Pokémon n'y serait
+affiché.
 
 Les positions peuvent être communes à tous les jeux d'une même famille de cartes (`map_family` dans
 `tools/pokemaps_data/games.py`) : Or, Argent et Cristal ont leur propre famille, et leurs emplacements ne se

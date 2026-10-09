@@ -143,9 +143,14 @@ def test_editor_opens_error_location_and_updates_report(
         assert editor._kind() == "grass"
         assert editor.canvas.view.center == (INVALID[0] - editor.current.x, INVALID[1] - editor.current.y)
         editor._remove_error(error)
-        assert editor.errors == []
+        # Le terrain n'a plus aucun point : aucun Pokémon ne serait affiché, ce qui bloque l'enregistrement.
+        [empty] = editor.errors
+        assert (empty.key, empty.point, empty.version_group) == (KEY, None, "red-blue")
         assert editor.session.has_changes
-        assert json.loads(report.read_text(encoding="utf-8")) == []
+        assert [row["point"] for row in json.loads(report.read_text(encoding="utf-8"))] == [None]
+        editor._go_to_error(empty)
+        assert editor._kind() == "grass"
+        assert not editor.version_choice.only_displayed.get()
     finally:
         editor.catalog.close()
 
@@ -170,16 +175,17 @@ def test_editor_switches_map_and_selects_matching_point_scope(
         editor._choose_family()
         identifier = editor.current.identifier
         old_id = editor.current.map_ids[0]
-        editor.version_choice.only_displayed.set(False)
+        # Les points propres à un groupe sont l'exception : la case reste décochée en changeant de plan.
+        assert not editor.version_choice.only_displayed.get()
         editor.version_choice.choice.current(1)
         editor.version_choice._changed(SimpleNamespace())
         assert editor.current.identifier == identifier
         assert editor.current.version_group == groups[1]
         assert editor.current.map_ids[0] != old_id
-        assert editor.version_choice.only_displayed.get()
-        assert editor._key("grass").version_group == groups[1]
-        editor.version_choice.only_displayed.set(False)
+        assert not editor.version_choice.only_displayed.get()
         assert editor._key("grass").version_group == ""
+        editor.version_choice.only_displayed.set(True)
+        assert editor._key("grass").version_group == groups[1]
         editor.version_choice.choice.current(0)
         editor.version_choice._changed(SimpleNamespace())
         assert editor.current.version_group == groups[0]
@@ -198,6 +204,7 @@ def test_editor_adds_a_point_only_for_the_displayed_group(
     try:
         editor._load_family("route-1")
         editor.generated = {kind: frozenset() for kind in ("grass", "floor", "water", "tree", "rock")}
+        editor.version_choice.only_displayed.set(True)
         editor._click(*VALID, lambda _point: False)
         key = TerrainKey(KEY.family, KEY.map_identifier, KEY.kind, "red-blue")
         assert editor.session.merged() == {key: frozenset({VALID})}

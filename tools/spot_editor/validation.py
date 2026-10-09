@@ -16,6 +16,8 @@ class SpotError:
     key: TerrainKey
     point: Point | None
     message: str
+    # Groupe dont le plan montre l'erreur quand `key` est commune à la famille (vide : le groupe affiché).
+    version_group: str = ""
 
     @property
     def label(self) -> str:

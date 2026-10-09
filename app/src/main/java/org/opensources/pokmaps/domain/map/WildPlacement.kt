@@ -1,11 +1,8 @@
 package org.opensources.pokmaps.domain.map
 
 import kotlin.math.abs
-import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.roundToInt
-import kotlin.math.sqrt
 import kotlin.random.Random
 
 /**
@@ -19,8 +16,9 @@ data class Placed<T>(val item: T, val x: Int, val y: Int, val scale: Float = 1f)
  * dessiné une fois au moins, les plus fréquents parfois davantage s'il y a de la place, à des emplacements bien
  * répartis, sans surcharger la carte. Le nombre et la taille des marqueurs s'adaptent à la surface du terrain
  * ([MarkerSizing]) : beaucoup de place et peu de Pokémon, ils sont grands et parfois en double ; peu de place ou
- * beaucoup de Pokémon, ils sont uniques et plus petits. Le tirage est déterministe : un lieu s'affiche toujours de
- * la même façon. Rien ici ne dépend d'un jeu en particulier.
+ * beaucoup de Pokémon, ils sont uniques et plus petits. Avec moins d'emplacements que de Pokémon, chaque
+ * emplacement reçoit un Pokémon tiré au hasard ; les autres ne sont visibles que dans la liste du lieu. Le tirage
+ * est déterministe : un lieu s'affiche toujours de la même façon. Rien ici ne dépend d'un jeu en particulier.
  */
 object WildPlacement {
     /** Nombre maximal de marqueurs d'un même Pokémon sur un terrain. */
@@ -28,12 +26,6 @@ object WildPlacement {
 
     /** Nombre maximal de marqueurs d'un terrain (sauf s'il y a davantage de Pokémon différents). */
     const val MAX_MARKERS = 8
-
-    /** Taille des Pokémon rangés en grille faute de terrain connu (aucun emplacement). */
-    private const val GRID_SCALE = 0.6f
-
-    /** Marge (en pixels) entre deux Pokémon rangés en grille. */
-    private const val GRID_GAP = 2.0
 
     /**
      * Écart minimal (en pixels, deux cases) entre un Pokémon et un objet, un personnage ou une entrée, sur l'un
@@ -82,23 +74,18 @@ object WildPlacement {
     /**
      * Place les éléments (dans l'ordre de leurs poids décroissants de préférence) sur les emplacements du terrain,
      * à une taille adaptée à sa surface `area` (estimée d'après ses emplacements par défaut) et à la place
-     * occupée par chaque marqueur (`footprint`). Sans assez d'emplacements pour tous, ils sont rangés en grille au
-     * milieu du terrain (ou autour de `fallback`).
+     * occupée par chaque marqueur (`footprint`). Sans assez d'emplacements pour tous, voir [onePerSpot].
      */
     fun <T> place(
         items: List<T>,
         weights: List<Double>,
         spots: List<Pair<Int, Int>>,
-        fallback: Pair<Int, Int>,
         seed: Int,
         footprint: Footprint = Footprint.POKEMON,
         area: Double = MarkerSizing.terrainArea(spots.size)
     ): List<Placed<T>> {
-        if (items.isEmpty()) return emptyList()
-        if (spots.size < items.size) {
-            val scale = if (spots.isEmpty()) GRID_SCALE else MarkerSizing.coverageScale(area, items.size, footprint)
-            return grid(items, middle(spots) ?: fallback, footprint, scale)
-        }
+        if (items.isEmpty() || spots.isEmpty()) return emptyList()
+        if (spots.size < items.size) return onePerSpot(items, spots, seed, footprint, area)
         val room = min(spots.size, MarkerSizing.capacity(area, footprint))
         val copies = copies(weights, room)
         val cells = spread(spots.shuffled(Random(seed)), copies.sum())
@@ -130,33 +117,23 @@ object WildPlacement {
         return chosen
     }
 
-    /** Emplacement le plus proche du centre du terrain. */
-    private fun middle(spots: List<Pair<Int, Int>>): Pair<Int, Int>? {
-        if (spots.isEmpty()) return null
-        val center = spots.sumOf { it.first } / spots.size to spots.sumOf { it.second } / spots.size
-        return spots.minBy { distance2(it, center) }
-    }
-
     /**
-     * Un marqueur réduit par élément, en grille presque carrée centrée sur `center` (la dernière ligne centrée),
-     * côte à côte sans se chevaucher.
+     * Moins d'emplacements que de Pokémon : un Pokémon tiré au hasard (de façon reproductible) sur chaque
+     * emplacement. Les autres ne sont pas dessinés, pour ne pas entasser la carte.
      */
-    private fun <T> grid(items: List<T>, center: Pair<Int, Int>, footprint: Footprint, scale: Float): List<Placed<T>> {
-        val columns = ceil(sqrt(items.size.toDouble())).toInt()
-        val rows = ceil(items.size / columns.toDouble()).toInt()
-        val stepX = footprint.width * scale + GRID_GAP
-        val stepY = footprint.height * scale + GRID_GAP
-        return items.mapIndexed { index, item ->
-            val row = index / columns
-            val inRow = min(columns, items.size - row * columns)
-            val column = index % columns
-            Placed(
-                item,
-                center.first + ((column - (inRow - 1) / 2.0) * stepX).roundToInt(),
-                center.second + ((row - (rows - 1) / 2.0) * stepY).roundToInt(),
-                scale
-            )
-        }
+    private fun <T> onePerSpot(
+        items: List<T>,
+        spots: List<Pair<Int, Int>>,
+        seed: Int,
+        footprint: Footprint,
+        area: Double
+    ): List<Placed<T>> {
+        val chosen = items.shuffled(Random(seed)).take(spots.size)
+        val scale = min(
+            MarkerSizing.coverageScale(area, spots.size, footprint),
+            MarkerSizing.spacingScale(spots, footprint)
+        )
+        return chosen.zip(spots) { item, (x, y) -> Placed(item, x, y, scale) }
     }
 
     private fun distance2(a: Pair<Int, Int>, b: Pair<Int, Int>): Int {
