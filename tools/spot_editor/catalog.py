@@ -6,7 +6,7 @@ import sqlite3
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-from pokemaps_data.games import map_families
+from pokemaps_data.games import DECLARED_GAMES, map_families
 from pokemaps_data.map_spots import SPOT_KINDS, Point
 from pokemaps_data.pret import STEP_PX
 
@@ -22,6 +22,7 @@ _PLACEMENT_METHODS = {
     "headbutt": "headbutt",
     "headbutt-high": "headbutt",
     "rock-smash": "rock-smash",
+    "seaweed": "surf",
 }
 # Terrain sur lequel l'application dessine chaque méthode : la marche utilise les herbes, ou le sol sans herbes.
 _TERRAINS = {
@@ -144,7 +145,7 @@ class EditorCatalog:
             )
         )
         result = []
-        for family, groups in map_families().items():
+        for family, groups in map_families(DECLARED_GAMES).items():
             present = tuple(group for group in groups if group in names)
             versions = [name for group in present for name in names[group].split("|")]
             if versions:

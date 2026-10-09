@@ -129,7 +129,7 @@ def _map_areas(builder: DatabaseBuilder, game: Game) -> dict[str, list[int]]:
     placed = {row.const for row in builder.map_data[game.version_group].maps}
     area_ids = builder.locations.area_ids
     result: dict[str, list[int]] = defaultdict(list)
-    for const, key in read_map_areas().get(game.map_family, []):
+    for const, key in read_map_areas(game.version_group).get(game.map_family, []):
         if const not in placed:
             continue
         if key not in area_ids:

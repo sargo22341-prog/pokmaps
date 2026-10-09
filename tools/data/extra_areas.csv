@@ -4,3 +4,16 @@ goldenrod-city,,100002,Doublonville,"Or et Argent : on pêche dans le canal de l
 cerulean-city,gym,100003,Arène d'Azuria,"Or et Argent : on pêche dans le bassin de l'Arène ; PokéAPI ne la distingue pas de la ville"
 olivine-city,port,100004,Port d'Oliville,"Or et Argent : on pêche et surfe au port ; PokéAPI ne le distingue pas de la ville"
 rock-tunnel,remake-b1f,100005,Grotte (1er sous-sol),Rouge Feu et Vert Feuille : b1f est le sous-sol ; PokéAPI réutilise cette zone pour le RdC de Rouge/Bleu/Jaune
+hoenn-altering-cave,a,100006,Grotte M?tamo (table A),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,b,100007,Grotte M?tamo (table B),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,c,100008,Grotte M?tamo (table C),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,d,100009,Grotte M?tamo (table D),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,e,100010,Grotte M?tamo (table E),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,f,100011,Grotte M?tamo (table F),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,g,100012,Grotte M?tamo (table G),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,h,100013,Grotte M?tamo (table H),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+hoenn-altering-cave,i,100014,Grotte M?tamo (table I),Tables du moteur GBA ; A normale et B ? I ?v?nementielles
+meteor-falls,stevens-cave,100015,Site Météore (grotte de Pierre),Table moteur GBA distincte ; absente de Pok?API
+mt-ember,summit-path-3f,100016,"Mont Braise — Chemin du sommet, 2e étage",Table moteur GBA distincte ; absente de Pok?API
+mt-ember,ruby-path-b1f-stairs,100017,"Mont Braise — Chemin du Rubis, sous-sol 1, Escalier",Table moteur GBA distincte ; absente de Pok?API
+mt-ember,ruby-path-b2f-stairs,100018,"Mont Braise — Chemin du Rubis, sous-sol 2, Escalier",Table moteur GBA distincte ; absente de Pok?API

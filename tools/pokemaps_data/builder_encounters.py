@@ -1,7 +1,7 @@
 """Tables des rencontres, corrigées par les fichiers maintenus dans tools/data/.
 
-Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des jeux de la 2e génération, lues dans pret
-(builder_wild_gen2.py). Les rencontres d'événement externe (méthodes et lieux de games.py) portent la mention
+Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des 2e et 3e générations, lues dans pret
+(builder_wild_gen2.py et builder_wild_gen3.py). Les rencontres d'événement externe portent la mention
 EXTERNAL_EVENT_NOTE. Les lieux et zones sont dans builder_locations.py.
 """
 
@@ -14,6 +14,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
+from .builder_wild_gen3 import WildData, gen3_wild_data
 from .games import (
     EXTERNAL_EVENT_AREAS,
     EXTERNAL_EVENT_LOCATIONS,
@@ -22,6 +23,7 @@ from .games import (
     ONE_OFF_METHODS,
     PretFormat,
 )
+from .pret_gen3_wild import REPLACED_METHODS as GEN3_REPLACED_METHODS
 from .sources import DATA_DIR
 
 if TYPE_CHECKING:
@@ -76,13 +78,13 @@ class EncounterTables:
 
     @cached_property
     def _pret_versions(self) -> frozenset[int]:
-        """Versions dont les rencontres aléatoires sont lues dans pret (jeux de la 2e génération)."""
+        """Versions dont les rencontres aléatoires sont lues dans pret."""
         versions: set[int] = set()
         for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
             match game.pret_format:
-                case PretFormat.GEN1 | PretFormat.GEN3:
+                case PretFormat.GEN1:
                     pass
-                case PretFormat.GEN2:
+                case PretFormat.GEN2 | PretFormat.GEN3:
                     rows = self.builder.version_rows
                     versions |= {int(row["id"]) for row in rows if int(row["version_group_id"]) == vg}
         return frozenset(versions)
@@ -99,13 +101,14 @@ class EncounterTables:
             and not (
                 int(row["version_id"]) in self._pret_versions
                 and methods[int(slots[int(row["encounter_slot_id"])]["encounter_method_id"])]["identifier"]
-                in REPLACED_METHODS
+                in self._replaced_methods(int(row["version_id"]))
             )
         ]
 
     @cached_property
     def encounter_groups(self) -> list[EncounterGroup]:
         groups = self._apply_curation([replace(group, notes=list(group.notes)) for group in self._uncurated_groups])
+        _roaming_conditions(groups, self.method_identifiers)
         for note in self._battle_notes:
             _add_battle_note(groups, note)
         locations = self.builder.locations.area_locations
@@ -159,11 +162,26 @@ class EncounterTables:
         encounters: list[WildEncounter] = []
         for game in self.builder.games:
             match game.pret_format:
-                case PretFormat.GEN1 | PretFormat.GEN3:
+                case PretFormat.GEN1:
                     pass
                 case PretFormat.GEN2:
                     encounters += gen2_wild_encounters(self.builder, game)
+                case PretFormat.GEN3:
+                    encounters += list(self.gen3_wild[game.version_group].encounters)
         return encounters
+
+    def _replaced_methods(self, version: int) -> frozenset[str]:
+        row = next(row for row in self.builder.version_rows if int(row["id"]) == version)
+        game = self.builder.game_of(int(row["version_group_id"]))
+        return GEN3_REPLACED_METHODS if game.pret_format is PretFormat.GEN3 else REPLACED_METHODS
+
+    @cached_property
+    def gen3_wild(self) -> dict[str, WildData]:
+        return {
+            game.version_group: gen3_wild_data(self.builder, game)
+            for game in self.builder.games
+            if game.pret_format is PretFormat.GEN3
+        }
 
     @cached_property
     def _battle_notes(self) -> list[BattleNote]:
@@ -181,7 +199,9 @@ class EncounterTables:
         ignored = {
             int(row["id"])
             for row in self.api.table("encounter_condition_values")
-            if row["is_default"] == "1" and row["identifier"] not in _RESTRICTING_DEFAULTS
+            if row["is_default"] == "1"
+            and row["identifier"] not in _RESTRICTING_DEFAULTS
+            and row["identifier"] != "tv-option-blue"
         }
         conditions: dict[int, set[int]] = defaultdict(set)
         for row in self.api.table("encounter_condition_value_map"):
@@ -323,12 +343,21 @@ class EncounterTables:
             version, area, method = (int(row[key]) for key in ("version_id", "location_area_id", "encounter_method_id"))
             if version not in version_ids or area not in used_areas:
                 continue
+            if version in self._pret_versions and self.method_identifiers[method] in self._replaced_methods(version):
+                continue
             key = (version, area, method)
             targets = self._rate_moves.get(key, set())
             # Le taux suit une zone déplacée ; si des rencontres restent à l'origine, elles gardent aussi leur taux.
             if not targets or key in present:
                 rates.add((version, area, method, int(row["rate"])))
             rates.update((version, target, method, int(row["rate"])) for target in targets)
+        for data in self.gen3_wild.values():
+            for version, area, method, rate in data.rates:
+                key = (version, area, method)
+                targets = self._rate_moves.get(key, set())
+                if not targets or key in present:
+                    rates.add((version, area, method, rate))
+                rates.update((version, target, method, rate) for target in targets)
         return sorted(rates)
 
 
@@ -346,3 +375,16 @@ def _add_battle_note(groups: list[EncounterGroup], note: BattleNote) -> None:
         raise ValueError(f"Combat scripté sans rencontre fixe correspondante : {note}")
     for group in matches:
         group.notes.append(note.note)
+
+
+def _roaming_conditions(groups: list[EncounterGroup], methods: dict[int, str]) -> None:
+    """L'activation d'un errant est commune au sol et à l'eau ; PokéAPI répartit ses conditions entre les deux."""
+    conditions: dict[tuple[int, int, int], set[int]] = defaultdict(set)
+    for row in groups:
+        if methods[row.method_id] not in {"roaming-grass", "roaming-water"}:
+            continue
+        key = (row.version_id, row.location_area_id, row.pokemon_id)
+        conditions[key].update(row.conditions)
+    for row in groups:
+        if methods[row.method_id] in {"roaming-grass", "roaming-water"}:
+            row.conditions = tuple(sorted(conditions[(row.version_id, row.location_area_id, row.pokemon_id)]))

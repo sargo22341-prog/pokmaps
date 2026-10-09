@@ -24,6 +24,7 @@ from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PR
 from pokemaps_data.maps import build_maps
 from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pokeapi import PokeApi
+from pokemaps_data.preview_wild_gen3 import build_wild_preview
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
@@ -44,7 +45,15 @@ def main() -> int:
     maps_only.add_argument(
         "--remake-maps-only", action="store_true", help="régénérer seulement les cartes Rouge Feu/Vert Feuille"
     )
+    maps_only.add_argument(
+        "--gen3-encounters-only",
+        action="store_true",
+        help="générer l'aperçu PC des rencontres GBA, sans personnages ni activation Android",
+    )
     args = parser.parse_args()
+    if args.gen3_encounters_only:
+        build_wild_preview(args.cache, args.assets, args.preview)
+        return 0
     if args.hoenn_maps_only or args.remake_maps_only:
         games = HOENN_MAP_GAMES if args.hoenn_maps_only else (FIRERED_LEAFGREEN,)
         build_gen3_maps(args.cache, args.assets / "maps", games)

@@ -24,7 +24,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .games import GAMES, Game, complete_families
+from .games import DECLARED_GAMES, GAMES, Game, complete_families
 from .maps_characters import ObjectRow, object_rows
 from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
@@ -34,11 +34,17 @@ from .maps_render_gen2 import Gen2Renderer
 from .pret import LAST_MAP, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import roaming_maps
+from .pret_gen3 import Gen3PretRepo
+from .pret_gen3_wild import roaming_maps as gen3_roaming_maps
 from .pret_reader import open_pret
 from .sources import DATA_DIR, fetch_pret
 
-# Zone PokéAPI des Pokémon errants de Johto (Raikou, Entei, Suicune), qui parcourent les cartes de RoamMaps.
-GEN2_ROAMING_AREA = "roaming-johto/area"
+# Zone PokéAPI des errants propre à chaque famille de cartes.
+ROAMING_AREAS = {
+    "gold-silver-crystal": "roaming-johto/area",
+    "ruby-sapphire-emerald": "roaming-hoenn/area",
+    "firered-leafgreen": "roaming-kanto/area",
+}
 # Numéro de warp de la 2e génération : « le warp par lequel on est arrivé », celui de la carte d'arrivée qui
 # ramène à la carte de départ (ascenseurs, M/S Aquaria).
 RETURN_WARP = -1
@@ -58,15 +64,33 @@ def read_map_names() -> dict[str, dict[str, str]]:
     return names
 
 
-def read_map_areas() -> dict[str, list[tuple[str, str]]]:
+def read_map_areas(version_group: str | None = None) -> dict[str, list[tuple[str, str]]]:
     """Famille de cartes -> (constante de carte, zone PokéAPI « lieu/zone »)."""
     areas: dict[str, list[tuple[str, str]]] = {}
+    entries: list[tuple[str, str, str, str]] = []
+    families = {game.version_group: game.map_family for game in DECLARED_GAMES}
     with (DATA_DIR / "map_areas.csv").open(encoding="utf-8", newline="") as handle:
         for line, row in enumerate(csv.DictReader(handle), start=2):
-            pair = (row["map"], row["location_area"])
-            if pair in areas.get(row["family"], []):
-                raise ValueError(f"map_areas.csv:{line} : zone en double pour {row['family']} {row['map']}")
-            areas.setdefault(row["family"], []).append(pair)
+            scope = row.get("version_group") or ""
+            entry = (row["family"], row["map"], row["location_area"], scope)
+            required = ("family", "map", "location_area", "note")
+            if (
+                None in row
+                or any(row.get(key) is None for key in required)
+                or entry in entries
+                or (scope and families.get(scope) != row["family"])
+            ):
+                raise ValueError(f"map_areas.csv:{line} : colonnes, doublon ou groupe de versions invalide : {row}")
+            entries.append(entry)
+    overrides = {(family, const) for family, const, _, scope in entries if scope and scope == version_group}
+    for family, const, key, scope in entries:
+        if version_group is not None and (
+            (scope and scope != version_group) or (not scope and (family, const) in overrides)
+        ):
+            continue
+        pair = (const, key)
+        if pair not in areas.get(family, []):
+            areas.setdefault(family, []).append(pair)
     return areas
 
 
@@ -152,17 +176,20 @@ def export_game(
     objects, sprites = object_rows(game_maps, curation)
     spots = _spot_rows(game_maps)
     map_renderer.write_sprites(sprites, output / "sprites")
-    game_areas = [(const, area) for const, area in [*areas, *_roaming_areas(game_maps)] if const in placements]
+    game_areas = [(const, area) for const, area in [*areas, *roaming_areas(game_maps)] if const in placements]
     return GameMapData(rows, game_areas, warps, objects, spots, _terrain(game_maps))
 
 
-def _roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
-    """Cartes que parcourent les Pokémon errants (2e génération), rattachées à la zone PokéAPI des errants."""
+def roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
+    """Routes du moteur rattachées à la zone PokéAPI des errants de leur famille."""
     match game_maps.repo:
         case PretRepo():
             return []
         case Gen2PretRepo() as repo:
-            return [(const, GEN2_ROAMING_AREA) for const in roaming_maps(repo)]
+            routes = roaming_maps(repo)
+        case Gen3PretRepo() as repo:
+            routes = gen3_roaming_maps(repo)
+    return [(const, ROAMING_AREAS[game_maps.game.map_family]) for const in routes]
 
 
 def display_map_rows(
@@ -289,7 +316,8 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
     result = {}
     for game in games:
         game_maps = GameMaps(open_pret(game, fetch_pret(cache, game.pret_repo)), game, layout)
-        family_names, family_areas = names.get(game.map_family, {}), areas.get(game.map_family, [])
+        family_names = names.get(game.map_family, {})
+        family_areas = read_map_areas(game.version_group).get(game.map_family, [])
         output_game = output / game.version_group
         result[game.version_group] = export_game(game_maps, family_names, family_areas, curation, output_game)
     for family, version_groups in complete_families(games).items():

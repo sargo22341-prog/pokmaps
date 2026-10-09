@@ -6,7 +6,15 @@ from tkinter import ttk
 
 from .catalog import Family
 
-_VERSION_LABELS = {"red-blue": "Rouge / Bleu", "yellow": "Jaune", "gold-silver": "Or / Argent", "crystal": "Cristal"}
+VERSION_LABELS = {
+    "red-blue": "Rouge / Bleu",
+    "yellow": "Jaune",
+    "gold-silver": "Or / Argent",
+    "crystal": "Cristal",
+    "ruby-sapphire": "Rubis / Saphir",
+    "emerald": "Émeraude",
+    "firered-leafgreen": "Rouge Feu / Vert Feuille",
+}
 
 
 class VersionChoice:
@@ -29,12 +37,12 @@ class VersionChoice:
     def show(self, family: Family) -> None:
         previous = self.group if self.groups else ""
         self.groups = family.version_groups
-        self.choice["values"] = [_VERSION_LABELS[group] for group in self.groups]
+        self.choice["values"] = [VERSION_LABELS[group] for group in self.groups]
         self.select(previous if previous in self.groups else self.groups[0])
 
     def select(self, group: str) -> None:
         self.choice.current(self.groups.index(group))
-        self.check.configure(text=f"Points uniquement pour {_VERSION_LABELS[group]}")
+        self.check.configure(text=f"Points uniquement pour {VERSION_LABELS[group]}")
 
     def _changed(self, _event: tk.Event) -> None:
         self.select(self.group)

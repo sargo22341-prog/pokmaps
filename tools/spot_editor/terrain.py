@@ -4,13 +4,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from pokemaps_data.games import ALL_GAMES
+from pokemaps_data.games import DECLARED_GAMES, PretFormat
 from pokemaps_data.map_spots import Point
 from pokemaps_data.maps_layout import GameMaps, identifier, read_layout_curation
+from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
+from pokemaps_data.pret_gen3 import Gen3PretRepo
 from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.sources import pret_dir
 
 from .catalog import Family
+from .version_choice import VERSION_LABELS
 
 
 class WildTerrains:
@@ -43,7 +46,7 @@ class WildTerrains:
                 if map_identifier not in consts:
                     continue
                 const = consts[map_identifier]
-                cells = {game_maps.point(const, x, y) for x, y in game_maps.cells(const)[kind]}
+                cells = {game_maps.point(const, x, y) for x, y in game_maps.free_cells(const)[kind]}
                 common = cells if common is None else common & cells
             self._points[key] = frozenset(common or ())
         return self._points[key]
@@ -60,24 +63,26 @@ class WildTerrains:
 
     def rejected_versions(self, family: Family, map_identifier: str, kind: str, point: Point) -> tuple[str, ...]:
         """Versions qui refusent un point : le plan affiché peut différer de celui d'un autre jeu."""
-        names = {"red-blue": "Rouge/Bleu", "yellow": "Jaune", "gold-silver": "Or/Argent", "crystal": "Cristal"}
         rejected = []
         for group in family.version_groups:
             maps, consts = self._game(group)
             if map_identifier not in consts:
                 continue
             const = consts[map_identifier]
-            valid = {maps.point(const, x, y) for x, y in maps.cells(const)[kind]}
+            valid = {maps.point(const, x, y) for x, y in maps.free_cells(const)[kind]}
             if point not in valid:
-                rejected.append(names[group])
+                rejected.append(VERSION_LABELS[group])
         return tuple(rejected)
 
     def _game(self, version_group: str) -> tuple[GameMaps, dict[str, str]]:
         if version_group not in self._games:
-            game = next(game for game in ALL_GAMES if game.version_group == version_group)
+            game = next(game for game in DECLARED_GAMES if game.version_group == version_group)
             root = pret_dir(self.cache, game.pret_repo)
             if not (root / ".complete").is_file():
                 raise FileNotFoundError(f"Sources pret absentes : lancer d'abord python tools/build_data.py ({root})")
-            game_maps = GameMaps(open_pret(game, root), game, read_layout_curation())
+            if game.pret_format is PretFormat.GEN3:
+                game_maps = Gen3GameMaps(Gen3PretRepo(root, game.pret_versions), game, read_layout_curation())
+            else:
+                game_maps = GameMaps(open_pret(game, root), game, read_layout_curation())
             self._games[version_group] = (game_maps, {identifier(const): const for const in game_maps.placements})
         return self._games[version_group]

@@ -79,6 +79,13 @@ CHECKS = (
              OR NOT EXISTS (SELECT 1 FROM pokemon_stat s WHERE s.pokemon_id = p.id AND s.generation_id = g.id))""",
     ),
     (
+        "rencontre avec niveaux, quantité ou probabilité invalides",
+        """SELECT e.id FROM encounter e JOIN encounter_method m ON m.id = e.method_id
+           WHERE e.min_level NOT BETWEEN 1 AND 100 OR e.max_level NOT BETWEEN e.min_level AND 100
+             OR e.quantity < 1 OR (m.is_one_off = 0 AND (e.chance IS NULL OR e.chance <= 0 OR e.chance > 100))
+             OR (m.is_one_off = 1 AND e.chance IS NOT NULL)""",
+    ),
+    (
         "probabilités de rencontre aléatoire différentes de 100 %",
         """SELECT e.version_id, e.location_area_id, e.method_id, sum(e.chance) AS total FROM encounter e
            JOIN encounter_method m ON m.id = e.method_id WHERE m.is_one_off = 0

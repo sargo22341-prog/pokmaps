@@ -446,16 +446,21 @@ sont exclues. Les journaux invisibles du Memorydex conservent leurs événements
 
 Communs :
 
-- [ ] `pret_gen3_wild.py` + `builder_wild_gen3.py` : herbe, eau, Éclate-Roc, pêche (Canne, Super Canne,
+- [x] `pret_gen3_wild.py` + `builder_wild_gen3.py` : herbe, eau, Éclate-Roc, pêche (Canne, Super Canne,
       Méga Canne) ; taux par emplacement du moteur ; tables par version (suffixes fixés en phase 0).
-- [ ] Conditions de scénario des rencontres (après la Ligue, Pokédex National) : représentées, pas ignorées.
-- [ ] `map_areas.csv` : relier aux cartes les zones PokéAPI encore utilisées (dons, fixes, échanges, errants),
+- [x] Conditions de scénario des rencontres (après la Ligue, Pokédex National) : représentées, pas ignorées.
+- [x] `map_areas.csv` : relier aux cartes les zones PokéAPI encore utilisées (dons, fixes, échanges, errants),
       par famille ; `extra_areas.csv` pour les zones absentes.
-- [ ] Errants : généraliser `GEN2_ROAMING_AREA` et lire les routes possibles dans `sRoamerLocations`.
-- [ ] Éditeur PC (`tools/spot_editor/`) : libellés des nouveaux groupes (`version_choice.py`), terrains, choix
+- [x] Errants : généraliser `GEN2_ROAMING_AREA` et lire les routes possibles dans `sRoamerLocations`.
+- [x] Éditeur PC (`tools/spot_editor/`) : libellés des nouveaux groupes (`version_choice.py`), terrains, choix
       de région Hoenn / Kanto / Sevii.
-- [ ] `validate.py` : probabilités à 100 % par méthode, chaque Pokémon du Pokédex obtenable.
-- [ ] Tests : tables lues, probabilités, terrains, comparaison PokéAPI ↔ pret.
+- [x] `validate.py` : probabilités à 100 % par méthode, chaque Pokémon du Pokédex obtenable.
+- [x] Tests : tables lues, probabilités, terrains, comparaison PokéAPI ↔ pret.
+
+Bilan commun : [rencontres de génération 3](generations/rencontres-gen3-communs.md).
+L'aperçu `--gen3-encounters-only` permet d'éditer les emplacements avant l'intégration des personnages.
+Les terrains GBA élémentaires suivent déjà les règles des deux moteurs ; le terrain Plongée distinct,
+les contenus particuliers et la relecture des emplacements restent dans les branches ci-dessous.
 
 Branche Hoenn :
 
