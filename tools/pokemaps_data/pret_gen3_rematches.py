@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 
+from .pret_gen3_rematch_rules import validate_hoenn_rules
 from .pret_gen3_source import read_text
 
 if TYPE_CHECKING:
@@ -34,6 +35,7 @@ class RematchTeam:
     stage: int
     flags: tuple[str, ...]
     conditions: tuple[str, ...]
+    previous_trainers: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -49,8 +51,10 @@ def read_rematches(repo: Gen3PretRepo, version: str, trainers: dict[str, Gen3Tra
         rows = re.findall(r"\{\s*\{([^{}]+)\},\s*MAP\((MAP_\w+)\)\s*\}", text)
         _validate_remake_conditions(text)
     elif repo.ruby:
+        validate_hoenn_rules(repo)
         rows = re.findall(r"\{\s*\{([^{}]+)\},\s*MAP_GROUP\((MAP_\w+)\),\s*MAP_NUM\(\2\),\s*\}", text)
     else:
+        validate_hoenn_rules(repo)
         rows = [(parties, const) for parties, const in re.findall(r"= REMATCH\(([^()]+),\s*(MAP_\w+)\)", text)]
     if not 1 <= len(rows) <= 1024:
         raise ValueError(f"{repo.root} : table de revanches absente ou trop grande")
@@ -66,6 +70,10 @@ def read_rematches(repo: Gen3PretRepo, version: str, trainers: dict[str, Gen3Tra
         if not 2 <= len(slots) <= maximum or any(value not in trainers and value != "SKIP" for value in slots):
             raise ValueError(f"{const} : équipes de revanche invalides : {slots}")
         teams = tuple(_team(repo, trainer, stage) for stage, trainer in enumerate(slots) if trainer != "SKIP")
+        teams = tuple(replace(team, previous_trainers=tuple(dict.fromkeys(slots[: team.stage]))) for team in teams)
+        teams = tuple(
+            replace(team, previous_trainers=tuple(t for t in team.previous_trainers if t != "SKIP")) for team in teams
+        )
         result.append(TrainerRematches(const, teams))
     if len({row.teams[0].trainer for row in result}) != len(result):
         raise ValueError(f"{repo.root} : dresseur répété dans les revanches")
@@ -95,7 +103,12 @@ def _team(repo: Gen3PretRepo, trainer: str, stage: int) -> RematchTeam:
     if stage == 0:
         return RematchTeam(trainer, stage, (), ())
     if repo.remake:
-        return RematchTeam(trainer, stage, (_FRLG_FLAGS[stage - 1],), (_FRLG_PHRASES[stage - 1], "Cherche VS chargé"))
+        return RematchTeam(
+            trainer,
+            stage,
+            (_FRLG_FLAGS[stage - 1],),
+            (_FRLG_PHRASES[stage - 1], "Cherche VS chargé après 100 pas, dresseur à portée et acceptant la revanche"),
+        )
     if not repo.ruby and trainer.startswith(
         ("TRAINER_SIDNEY", "TRAINER_PHOEBE", "TRAINER_GLACIA", "TRAINER_DRAKE", "TRAINER_WALLACE")
     ):
@@ -118,13 +131,22 @@ def _team(repo: Gen3PretRepo, trainer: str, stage: int) -> RematchTeam:
             flags += ("FLAG_WATTSON_REMATCH_AVAILABLE",)
         phrases = (
             "Après la Ligue",
-            "Appel de revanche du Champion, après 20 combats de dresseurs ou 60 combats sauvages",
+            "Lorsque le Champion propose une revanche",
+            "Tirage de 31 % tous les 20 combats de dresseurs ou 60 combats sauvages (compteurs totaux)",
+            "Le moteur privilégie les Champions ayant le moins de revanches gagnées",
         )
         if "FLAG_WATTSON_REMATCH_AVAILABLE" in flags:
             phrases += ("Après la quête de New Lavandia",)
     else:
         flags = ("FLAG_DEFEATED_WALLY_VICTORY_ROAD",) if trainer.startswith("TRAINER_WALLY_VR_") else ()
-        phrases = ("Au moins cinq badges, après 255 pas, lorsque le dresseur propose une revanche",)
+        phrases = ("Au moins cinq badges, lorsque le dresseur propose une revanche",)
+        if repo.ruby:
+            phrases += ("Dresseur déjà vaincu, tirage de 31 % sur sa carte après 255 pas",)
+        else:
+            phrases += (
+                "Dresseur enregistré : tirage de 31 % sur sa carte après 255 pas, ou appel depuis une autre route",
+                "L'appel dépend du jour, de l'identifiant du joueur, de Myokara et des combats effectués",
+            )
     if stage > 1:
         phrases += ("Après la victoire contre l'équipe précédente",)
     return RematchTeam(trainer, stage, flags, phrases)

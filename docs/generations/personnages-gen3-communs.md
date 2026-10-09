@@ -1,0 +1,157 @@
+# Personnages de génération 3 — état du socle de lecture
+
+La partie « Communs » de la phase 5 **reste ouverte**. Les équipes et revanches sont exportées dans
+`trainers.json` avec `--gen3-trainers-only`. L'export complet des personnages reste à construire.
+Les objets à position fixe sont maintenant exportés dans la base
+de l'aperçu avec `--gen3-items-only`. Les assets de l'application et son
+comportement restent ceux des phases précédentes.
+
+## Lecteurs disponibles
+
+`Gen3PretRepo.trainers` et `rematches` conservent les équipes par version, leurs attaques initiales
+calculées comme le moteur, les objets tenus, les combats doubles et les rangs de revanche.
+Les alias de dresseurs de `pokeruby/constants/version.inc` sont sélectionnés pour Rubis ou Saphir.
+
+`Gen3PretRepo.offers[version].read(label)` donne une lecture des actions du script :
+
+- dons explicites d'objets, de Pokémon et d'œufs ;
+- listes des boutiques, avec leurs branches de scénario ;
+- échanges internes, avec les espèces demandées et reçues et l'objet tenu de la version ;
+- références des attaques des tuteurs ordinaires ;
+- services explicitement reconnus et dons aléatoires de baies définis par une plage d'objets ;
+- drapeaux, dresseurs et appels C rencontrés, ainsi que la provenance des offres.
+
+Les appels et retours gardent leur contexte et leurs variables. Les comparaisons de scénario
+conservent les chemins alternatifs, sans les confondre avec une condition cumulative.
+Les intervalles numériques contradictoires sont écartés. Les parcours et la profondeur des appels
+sont bornés ; un label absent ou une donnée exécutée comme un script provoque une erreur.
+
+Les écritures possibles des appels C sont propagées à travers leurs sous-appels. Cette lecture
+prend l'union des variantes de compilation : elle peut oublier une valeur ou une exigence de trop,
+mais ne doit pas conserver une ancienne valeur susceptible de cacher une branche.
+Elle ne constitue pas une interprétation du moteur C.
+
+## Frontière d'export
+
+### Catalogue des dresseurs vérifié
+
+`python tools/build_data.py --gen3-trainers-only --preview tools/build/preview/gen3-trainers` produit
+`trainers.json` et valide toutes ses références. Le JSON conserve les constantes sources et les commits
+épinglés ; les noms français et l'assemblage des fiches Android restent des tâches distinctes.
+
+| Version | Équipes | Séries de revanches | Liens aux événements | Équipes doubles |
+|---|---:|---:|---:|---:|
+| Rubis | 693 | 56 | 387 | 45 |
+| Saphir | 693 | 56 | 387 | 45 |
+| Émeraude | 854 | 78 | 595 | 77 |
+| Rouge Feu | 742 | 221 | 450 | 33 |
+| Vert Feuille | 742 | 221 | 450 | 33 |
+
+Les attaques initiales suivent `GiveBoxMonInitialMoveset` : ordre d'apprentissage, doublons encore
+connus ignorés et remplacement de la plus ancienne attaque après quatre capacités. Les attaques
+explicites gardent leurs quatre emplacements, même avec `MOVE_NONE` au milieu. Les IV sources sont
+conservés (le moteur calcule `iv * 31 // 255`) ; un IV omis vaut zéro comme l'initialisation C.
+
+Chaque série conserve les rangs originaux, y compris les trous `SKIP` et les équipes répétées.
+`previous_trainers` indique les équipes à avoir vaincues ; `flags` conserve les conditions de scénario
+et `conditions` décrit en français la proposition de revanche. Le rang zéro est la première entrée
+de la table du moteur, pas nécessairement le tout premier combat du personnage : Timmy à la Route
+Victoire dans Émeraude en est un exemple. Les entrées répétées de la Ligue restent exportées.
+
+Rubis/Saphir utilisent le PokéNav : cinq badges, 255 pas et un tirage de 31 % sur la carte du dresseur.
+Émeraude conserve cette voie et celle des appels à distance, sans exiger 255 pas pour ces appels.
+Ses Champions suivent leur routine propre après la Ligue, avec les restrictions de New Lavandia et
+les compteurs de combats. Rouge Feu/Vert Feuille utilisent le Cherche VS et les cinq étapes de scénario
+contrôlées dans `TryGetRematchTrainerIdGivenGameState`. Une modification des règles contrôlées du moteur,
+une attaque ou un objet inconnu, une référence absente ou une progression incohérente arrête la génération.
+
+Les liens aux événements gardent carte, script, identifiant local, coordonnées, élévation, graphisme et
+drapeau de retrait. Toutes les équipes sources sont présentes, même sans objet sur une carte ; les
+événements de cartes non placées gardent leurs coordonnées locales et une projection mondiale nulle.
+Le catalogue est une sortie de l'aperçu local, comme les données de phase 4.
+
+Une expression calculée par le C reste explicitement dans `ScriptOffers.unresolved`. Les appels C
+restent tous recensés dans `specials`. `require_resolved(label)` refuse l'export tant qu'il subsiste
+une expression non résolue ou un appel C à relire. Une offre absente des primitives reconnues ne
+peut donc pas être certifiée comme une liste vide lorsque son script appelle du C.
+
+Cela concerne notamment la loterie, certaines récompenses variables de Nénucrique et de Selphy,
+les objets aléatoires de la Pyramide et le tuteur des capacités ultimes. Les capacités de renommage
+durant un don sont des actions `rename_pokemon` ; elles ne deviennent pas automatiquement un
+service d'Évaluateur de noms.
+
+## Travail restant dans « Communs »
+
+- Assemblage des personnages avec leurs équipes et revanches déjà exportées, sans perdre les métadonnées.
+- Noms français et validation des quatre CSV de noms.
+- Complément des offres calculées par le moteur et curation de `npc_offers.csv`.
+- Présence des personnages et variables de scénario dans `story_events.csv`.
+- Curation des doublons et validation de l'ensemble exporté.
+
+Les cases du plan ne sont pas cochées sur la seule existence des lecteurs. Les tests unitaires
+utilisent des scripts en mémoire ; les tests `pipeline` parcourent les scripts des objets des cinq
+versions épinglées et contrôlent les références des dresseurs ainsi que les variantes des échanges.
+
+## Corrections du lecteur lors de la reprise
+
+La macro `giveitem_msg` des remakes reçoit le texte avant l'objet et la quantité. Le lecteur respecte
+maintenant cet ordre ; un test sur Pierre vérifie la CT39 dans les deux versions. Les commandes de
+combat suivent également leur script de victoire, y compris les combats doubles et les variantes
+numériques de Rubis/Saphir. `gotopostbattlescript` reprend le dialogue correspondant au contexte d'appel.
+Un script de victoire absent provoque une erreur, comme un appel ordinaire absent.
+
+Les services `DeleteMonMove` et `DisplayMoveTutorMenu` de Rubis/Saphir sont reconnus respectivement
+comme Effaceur et Maître des Capacités. Leur présence ne dispense pas de la relecture des appels C
+exigée par la frontière d'export. Ces corrections sont couvertes par des tests de régression ; elles
+ne constituent pas l'export complet des personnages ni la curation française demandée en phase 5.
+
+## Objets à position fixe exportés
+
+`pret_gen3_items.py` lit les Balls ramassables et les événements cachés. Un objet, une quantité ou un drapeau
+inconnu, un contenu ambigu ou conditionnel et un appel C non relu arrêtent l'export. Les Balls contenant
+Terhal, les Électrode et les Balls du décor ne deviennent pas des objets ramassables. Les carrés de la Pyramide
+sont des modèles assemblés par le moteur : leurs objets variables restent dans la branche Hoenn.
+Les alias des CT/CS nommées d'Émeraude sont reliés aux constantes numérotées de `tms_hms.h`.
+
+`maps_items_gen3.py` projette les coordonnées sur les cartes placées, y compris les variantes de marée et
+l'Île Mirage. La commande `python tools/build_data.py --gen3-items-only --preview tools/build/preview/gen3-items`
+génère et valide une base de l'aperçu. `map_items.json` garde les versions, quantités, élévations, scripts,
+drapeaux de retrait et la propriété `underfoot`. Le schéma Room actuel ne stocke pas ces métadonnées et
+n'affiche pas les jetons cachés : les 24 lignes de jetons sont conservées dans le JSON pour la phase 6.
+
+Export vérifié le 9 octobre 2026 :
+
+| Version | Objets au sol | Objets cachés | Jetons cachés (JSON) |
+|---|---:|---:|---:|
+| Rubis | 137 | 98 | 0 |
+| Saphir | 137 | 98 | 0 |
+| Émeraude | 164 | 112 | 0 |
+| Rouge Feu | 170 | 171 | 12 |
+| Vert Feuille | 170 | 171 | 12 |
+
+La base contient 1 428 objets ; le JSON contient 1 452 entrées. Les douze emplacements du Casino donnent
+260 jetons dans chaque remake. Ces sorties restent dans l'aperçu local, comme celles de la phase 4.
+
+## Déblocage du Pokédex National relu
+
+Les trois groupes gardent `national_dex=True` : ils proposent le National de 386 espèces en plus du régional.
+L'application n'est pas synchronisée avec la sauvegarde du jeu ; les conditions décrivent le déblocage dans le jeu.
+
+- **Émeraude** : la première entrée au Panthéon met `VAR_DEX_UPGRADE_JOHTO_STARTER_STATE` de 0 à 1
+  (`data/scripts/hall_of_fame.inc`). Dans le laboratoire de Seko, le script de trame sélectionne alors
+  `UpgradeToNationalDex`, active le National et passe la variable à 2. Aucun nombre d'espèces capturées n'est requis.
+- **Rouge Feu/Vert Feuille** : le dialogue de Chen vérifie `FLAG_SYS_GAME_CLEAR`, puis au moins 60 espèces
+  capturées et `FLAG_WORLD_MAP_ONE_ISLAND`. L'évaluation renseigne `VAR_0x8009` avec le nombre de captures
+  de Kanto (`data/scripts/pokedex_rating.inc`). La scène automatique au retour du Panthéon vérifie également
+  les captures et la visite à l'Île 1 (`data/maps/PalletTown/scripts.inc`). Les Îles 4 à 7 ne sont pas nécessaires.
+- **Rubis/Saphir** : après un échange, `sub_804BA94` appelle `sub_804BA64` si le partenaire est connecté.
+  Cette routine active le National quand `gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000` (`src/trade.c`).
+  Émeraude et Rouge Feu/Vert Feuille transmettent ce marqueur dans `src/link.c` ; Rubis/Saphir transmettent 0.
+  La routine ne teste ni l'espèce reçue ni la victoire à la Ligue. Un échange autorisé avec ces partenaires
+  peut donc activer le National même si l'espèce appartient au Pokédex de Hoenn. Les restrictions d'échange
+  du jeu partenaire continuent de s'appliquer. Le don événementiel peut aussi l'activer
+  (`src/mystery_event_script.c`, `MEScrCmd_givenationaldex`).
+
+Le plan attribuait auparavant le déclencheur Rubis/Saphir à une espèce hors Hoenn et à `src/pokemon_3.c`.
+La relecture corrige cette affirmation. Les tests `test_gen3_national_dex.py` contrôlent les points de
+déblocage et les marqueurs sur les trois révisions épinglées, sans réseau.

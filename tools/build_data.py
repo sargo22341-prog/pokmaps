@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_ASSETS = ROOT.parent / "app/src/main/assets"
 
 
-def main() -> int:
+def _arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--assets", type=Path, default=DEFAULT_ASSETS, help="dossier des assets de l'application")
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
@@ -50,9 +50,25 @@ def main() -> int:
         action="store_true",
         help="générer l'aperçu PC des rencontres GBA, sans personnages ni activation Android",
     )
-    args = parser.parse_args()
-    if args.gen3_encounters_only:
-        build_wild_preview(args.cache, args.assets, args.preview)
+    maps_only.add_argument(
+        "--gen3-items-only", action="store_true", help="générer l'aperçu GBA avec les objets au sol et cachés"
+    )
+    maps_only.add_argument(
+        "--gen3-trainers-only", action="store_true", help="générer l'aperçu GBA et le catalogue complet des dresseurs"
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = _arguments()
+    if args.gen3_encounters_only or args.gen3_items_only or args.gen3_trainers_only:
+        build_wild_preview(
+            args.cache,
+            args.assets,
+            args.preview,
+            include_items=args.gen3_items_only or args.gen3_trainers_only,
+            include_trainers=args.gen3_trainers_only,
+        )
         return 0
     if args.hoenn_maps_only or args.remake_maps_only:
         games = HOENN_MAP_GAMES if args.hoenn_maps_only else (FIRERED_LEAFGREEN,)

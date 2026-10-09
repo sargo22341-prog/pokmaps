@@ -29,6 +29,27 @@ _SYMBOLS = frozenset(
 )
 
 
+def balanced_bodies(text: str, pattern: str, maximum: int) -> list[tuple[str, str]]:
+    """Blocs C nommés avec accolades équilibrées ; les variantes conditionnelles peuvent répéter un nom."""
+    result = []
+    for match in re.finditer(pattern, text):
+        depth = 1
+        end = match.end()
+        for position in range(end, len(text)):
+            depth += (text[position] == "{") - (text[position] == "}")
+            if depth == 0:
+                end = position
+                break
+        else:
+            raise ValueError(f"Initialiseur non terminé : {match[1]}")
+        if len(result) >= maximum:
+            raise ValueError(f"Initialiseurs trop nombreux : {match[1]}")
+        result.append((match[1], text[match.end() : end]))
+    if not result:
+        raise ValueError(f"Initialiseurs absents : {pattern}")
+    return result
+
+
 def read_text(path: Path) -> str:
     if path.stat().st_size > MAX_SOURCE_BYTES:
         raise ValueError(f"{path} : source trop volumineuse")
@@ -123,9 +144,10 @@ def conditional_text(path: Path, defined: frozenset[str]) -> str:
     result: list[str] = []
     for raw in text.splitlines():
         line = raw.split("//", 1)[0].split("@", 1)[0].strip()
-        directive = re.match(r"^(?:#|\.)(ifn?def|if|elif|else|endif)\b\s*(.*)", line)
+        directive = re.match(r"^(?:#|\.)(ifn?def|if|elif|else|endif|endc)\b\s*(.*)", line)
         if directive:
-            _directive(stack, directive[1], directive[2], defined, path)
+            command = "endif" if directive[1] == "endc" else directive[1]
+            _directive(stack, command, directive[2], defined, path)
         elif re.match(r"^(?:#|\.)(?:if|elif|else|endif)", line):
             raise ValueError(f"{path} : directive conditionnelle inconnue : {line}")
         elif not stack or stack[-1].active:
