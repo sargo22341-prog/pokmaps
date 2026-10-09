@@ -24,6 +24,7 @@ from spot_editor.terrain import WildTerrains
 from spot_editor.version_choice import VERSION_LABELS
 
 from .conftest import CACHE
+from .test_remake_encounters import assert_remake_coverage
 
 
 def test_all_probabilities_rates_and_versions(gen3_builder: DatabaseBuilder) -> None:
@@ -151,6 +152,7 @@ def test_preview_can_be_browsed(gen3_builder: DatabaseBuilder, tmp_path: Path, a
             )
         _check_hoenn_editor_methods(catalog)
         _check_hoenn_coverage(catalog)
+        assert_remake_coverage(catalog)
     finally:
         catalog.connection.close()
 
