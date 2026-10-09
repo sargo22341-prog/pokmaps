@@ -500,6 +500,12 @@ ses 28 formes et probabilités par chambre ; les errants apparaissent après la 
 
 Communs :
 
+Avancement partiel : les lecteurs `pret_gen3_trainers.py` et `pret_gen3_rematches.py` sont accessibles
+par `Gen3PretRepo.trainers` et `Gen3PretRepo.rematches`, par version. Ils lisent les équipes, leurs attaques
+initiales, objets tenus, combats doubles et tables de revanches des trois dépôts. Les rangs `SKIP` des remakes
+restent distincts et les conditions du Cherche VS sont contrôlées contre le moteur. Ces données ne sont pas
+encore exportées dans la base ou l'aperçu des personnages ; la partie « Communs » reste ouverte.
+
 - [ ] `pret_gen3_trainers.py` : équipes, attaques par défaut (calculées comme le moteur), objets tenus,
       combats doubles, toutes les équipes de revanche avec leur condition (table propre à chaque dépôt).
 - [ ] `trainer_classes.csv`, `npc_names.csv`, `npc_text_names.csv`, `facility_names.csv` : nouveaux noms
