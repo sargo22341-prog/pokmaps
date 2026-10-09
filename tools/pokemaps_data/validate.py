@@ -7,6 +7,7 @@ import sqlite3
 from pathlib import Path
 
 from .builder_pokemon import BREEDING_GENERATION
+from .games import EXTERNAL_EVENT_LOCATIONS, EXTERNAL_EVENT_METHODS
 from .sources import DATA_DIR
 
 # Groupe d'œufs des Pokémon qui ne se reproduisent pas (légendaires, bébés).
@@ -43,6 +44,21 @@ CHECKS = (
     ("Pokémon inconnu dans encounter", "SELECT * FROM encounter WHERE pokemon_id NOT IN (SELECT id FROM pokemon)"),
     ("méthode inconnue", "SELECT * FROM encounter WHERE method_id NOT IN (SELECT id FROM encounter_method)"),
     ("Pokémon du Pokédex inconnu", "SELECT * FROM pokedex_entry WHERE pokemon_id NOT IN (SELECT id FROM pokemon)"),
+    (
+        "Pokémon d'un Pokédex postérieur à la génération du jeu",
+        """SELECT vg.identifier, pe.pokedex_id, p.id FROM pokedex_entry pe
+           JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+           JOIN version_group vg ON vg.id = vgp.version_group_id JOIN pokemon p ON p.id = pe.pokemon_id
+           WHERE p.generation_id > vg.generation_id""",
+    ),
+    (
+        "Pokémon rencontré absent des Pokédex de son jeu",
+        """SELECT DISTINCT vg.identifier, e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
+           JOIN version_group vg ON vg.id = v.version_group_id
+           WHERE NOT EXISTS (SELECT 1 FROM pokedex_entry pe
+                             JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+                             WHERE vgp.version_group_id = vg.id AND pe.pokemon_id = e.pokemon_id)""",
+    ),
     ("nom français vide", "SELECT id FROM pokemon WHERE trim(name_fr) = '' OR trim(genus_fr) = ''"),
     ("nom d'attaque vide", "SELECT id FROM move WHERE trim(name_fr) = ''"),
     ("nom de zone vide", "SELECT id FROM location_area WHERE trim(name_fr) = ''"),
@@ -241,9 +257,10 @@ def validate(path: Path) -> list[str]:
 
 
 def _check_obtainable(connection: sqlite3.Connection) -> list[str]:
-    """Chaque Pokémon du Pokédex d'une génération doit être obtenable dans au moins une de ses versions
-    (rencontre, évolution ou, à partir de la 2e génération, reproduction), sauf les Pokémon fabuleux, distribués lors
-    d'événements, et ceux qu'on n'obtient que par échange avec un autre jeu (tools/data/transfer_only.csv)."""
+    """Chaque Pokémon des Pokédex (régional et, s'il y en a un, National) d'une génération doit être obtenable dans au
+    moins une de ses versions (rencontre hors événement externe, évolution ou, à partir de la 2e génération,
+    reproduction), sauf les Pokémon fabuleux, distribués lors d'événements, et ceux qu'on n'obtient que par échange
+    avec un autre jeu (tools/data/transfer_only.csv)."""
     errors = []
     transfers = _transfer_only(connection)
     for (generation,) in connection.execute("SELECT DISTINCT generation_id FROM version_group").fetchall():
@@ -268,14 +285,19 @@ def _check_obtainable(connection: sqlite3.Connection) -> list[str]:
 
 
 def _obtainable(connection: sqlite3.Connection, generation: int) -> set[int]:
-    """Pokémon rencontrés dans les versions de la génération, puis, jusqu'à stabilité, leurs évolutions et (à partir
-    de BREEDING_GENERATION) le Pokémon de base de la famille de ceux qui peuvent pondre un œuf."""
+    """Pokémon rencontrés dans les versions de la génération (hors événements externes), puis, jusqu'à stabilité,
+    leurs évolutions et (à partir de BREEDING_GENERATION) le Pokémon de base de la famille de ceux qui peuvent pondre
+    un œuf."""
+    methods, places = sorted(EXTERNAL_EVENT_METHODS), sorted(EXTERNAL_EVENT_LOCATIONS)
     obtainable = {
         row[0]
         for row in connection.execute(
-            """SELECT DISTINCT e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
-               JOIN version_group vg ON vg.id = v.version_group_id WHERE vg.generation_id = ?""",
-            (generation,),
+            f"""SELECT DISTINCT e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
+                JOIN version_group vg ON vg.id = v.version_group_id JOIN encounter_method m ON m.id = e.method_id
+                JOIN location_area la ON la.id = e.location_area_id JOIN location l ON l.id = la.location_id
+                WHERE vg.generation_id = ? AND m.identifier NOT IN ({", ".join("?" * len(methods))})
+                  AND l.identifier NOT IN ({", ".join("?" * len(places))})""",
+            (generation, *methods, *places),
         )
     }
     links = connection.execute(

@@ -330,6 +330,14 @@
     <string name="evolution_happiness">Bonheur ≥ %1$d</string>
     <string name="evolution_day">De jour</string>
     <string name="evolution_night">De nuit</string>
+    <string name="evolution_beauty">Beauté ≥ %1$d</string>
+    <string name="evolution_attack_higher">Attaque &gt; Défense</string>
+    <string name="evolution_stats_equal">Attaque = Défense</string>
+    <string name="evolution_defense_higher">Attaque &lt; Défense</string>
+    <string name="evolution_personality">Selon la personnalité (%1$d %%)</string>
+    <string name="evolution_shed">Place libre et Poké Ball</string>
+    <string name="move_note_light_ball">Parent tenant un Ballon Lumière</string>
+    <string name="move_note_external_event">Événement externe</string>
     <string name="ball_level">Niveau Ball</string>
     <string name="ball_lure">Appât Ball</string>
     <string name="ball_moon">Lune Ball</string>

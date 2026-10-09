@@ -24,7 +24,10 @@ from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 12
+SCHEMA_VERSION = 13
+
+# Pokédex National de PokéAPI, ajouté aux jeux qui le débloquent (games.Game.national_dex).
+NATIONAL_DEX = "national"
 
 SCHEMA = Path(__file__).with_name("schema.sql")
 
@@ -74,16 +77,20 @@ class DatabaseBuilder:
                 return game
         raise ValueError(f"Groupe de versions non configuré : {version_group_id}")
 
+    def pret_root(self, game: Game, purpose: str) -> Path:
+        """Dossier du désassemblage pret de `game` ; `purpose` nomme ce qu'on y lit, pour le message d'erreur."""
+        if game.version_group not in self.pret_roots:
+            raise ValueError(f"Désassemblage pret manquant pour lire {purpose} : {game.version_group}")
+        return self.pret_roots[game.version_group]
+
     def gen2_repo(self, game: Game, purpose: str) -> Gen2PretRepo:
         """Désassemblage pret du jeu de la 2e génération `game`, lu une seule fois pour toutes les tables.
 
         `purpose` nomme ce qu'on y lit, pour le message d'erreur si le dépôt manque."""
         if game.pret_format is not PretFormat.GEN2:
             raise ValueError(f"{game.version_group} n'a pas de sources pret de la 2e génération ({purpose})")
-        if game.version_group not in self.pret_roots:
-            raise ValueError(f"Désassemblage pret manquant pour lire {purpose} : {game.version_group}")
         if game.version_group not in self._gen2_repos:
-            self._gen2_repos[game.version_group] = Gen2PretRepo(self.pret_roots[game.version_group], game.pret_versions)
+            self._gen2_repos[game.version_group] = Gen2PretRepo(self.pret_root(game, purpose), game.pret_versions)
         return self._gen2_repos[game.version_group]
 
     @cached_property
@@ -173,13 +180,19 @@ class DatabaseBuilder:
 
     @cached_property
     def pokedex_links(self) -> list[tuple[int, int]]:
-        return sorted(
-            {
-                (int(row["version_group_id"]), int(row["pokedex_id"]))
-                for row in self.api.table("pokedex_version_groups")
-                if int(row["version_group_id"]) in self.vg_ids
-            }
-        )
+        """(groupe de versions, Pokédex) : le Pokédex régional de PokéAPI, plus le National si le jeu le débloque."""
+        links = {
+            (int(row["version_group_id"]), int(row["pokedex_id"]))
+            for row in self.api.table("pokedex_version_groups")
+            if int(row["version_group_id"]) in self.vg_ids
+        }
+        national = next(int(row["id"]) for row in self.api.table("pokedexes") if row["identifier"] == NATIONAL_DEX)
+        for game, vg in zip(self.games, self.vg_ids, strict=True):
+            if not any(group == vg for group, _ in links):
+                raise ValueError(f"Aucun Pokédex régional dans PokéAPI pour {game.version_group}")
+            if game.national_dex:
+                links.add((vg, national))
+        return sorted(links)
 
     def pokedex_table(self) -> list[tuple]:
         names = self.api.names("pokedex_prose", "pokedex_id")

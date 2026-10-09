@@ -1,19 +1,22 @@
 """Données prévues pour les générations suivantes : vides en 1re génération, remplies pour un jeu plus récent.
 
-Les jeux plus récents ne sont pas encore pris en charge (cartes) : on construit seulement leurs tables de Pokémon,
-à partir des mêmes CSV PokéAPI, pour vérifier qu'il suffira de les ajouter dans games.py.
+On construit seulement les tables de Pokémon, à partir des mêmes CSV PokéAPI : celles de Rubis et Saphir (déclarés
+dans games.py), et celles de jeux encore absents de games.py, pour vérifier qu'il suffira de les y ajouter.
 """
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import Game, PretFormat
+from pokemaps_data.games import GEN3_GAMES, Game, PretFormat
 from pokemaps_data.pokeapi import PokeApi
 
-PIKACHU, RAICHU, CLEFAIRY = 25, 26, 35
+RAICHU, CLEFAIRY = 26, 35
 
 
 def _builder(api: PokeApi, version_group: str) -> DatabaseBuilder:
-    # Jeux sans cartes ni désassemblage : seules leurs tables de Pokémon sont construites.
-    return DatabaseBuilder(api, games=(Game(version_group, "", (), "", (), PretFormat.GEN1, ()),))
+    # Sans cartes ni désassemblage : seules les tables qui ne lisent pas pret sont construites. Un jeu absent de
+    # games.py prend un format pret quelconque, qu'aucune de ces tables ne lit.
+    declared = {game.version_group: game for game in GEN3_GAMES}
+    game = declared.get(version_group) or Game(version_group, "", (), "", (), PretFormat.GEN1, ())
+    return DatabaseBuilder(api, games=(game,))
 
 
 def test_gen1_has_none_of_the_later_data(builder: DatabaseBuilder) -> None:
@@ -24,15 +27,6 @@ def test_gen1_has_none_of_the_later_data(builder: DatabaseBuilder) -> None:
     assert gen1.abilities.ability_table() == []
     assert gen1.abilities.ability_version_group_table() == []
     assert gen1.abilities.pokemon_ability_rows == []
-
-
-def test_held_items_of_a_later_game(builder: DatabaseBuilder) -> None:
-    ruby_sapphire = _builder(builder.api, "ruby-sapphire")
-    rows = [row for row in ruby_sapphire.items.pokemon_item_rows if row[0] == PIKACHU]
-    items = {row[0]: row[1] for row in ruby_sapphire.items.item_rows}
-    # Pikachu sauvage : Baie Oran (50 %) et Ballon Lumière (5 %), dans Rubis comme dans Saphir.
-    assert {(items[item], rarity) for _, _, item, rarity in rows} == {("oran-berry", 50), ("light-ball", 5)}
-    assert {version for _, version, _, _ in rows} == {7, 8}
 
 
 def test_abilities_follow_their_generation(builder: DatabaseBuilder) -> None:

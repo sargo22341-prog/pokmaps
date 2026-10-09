@@ -26,8 +26,6 @@ BALL_CATEGORIES = ("standard-balls", "special-balls", "apricorn-balls")
 _GEN2_HELD_ITEM_256 = 256 - (75 * 255 // 100 + 1)
 _GEN2_SECOND_ITEM_256 = 8 * 255 // 100
 _NO_ITEM = "NO_ITEM"
-# Première génération dont PokéAPI donne les objets tenus (pokemon_items).
-_POKEAPI_HELD_ITEMS_GENERATION = 3
 
 
 @dataclass(frozen=True)
@@ -74,7 +72,8 @@ class ItemTables:
         item_id = self.ids[identifier]
         if item_id in self.extra_items:
             return self.extra_items[item_id].name_fr
-        return self.api.names("item_names", "item_id")[item_id]
+        fixed = self.builder.locations.name_fixes.get(("item", identifier))
+        return fixed or self.api.names("item_names", "item_id")[item_id]
 
     @cached_property
     def item_rows(self) -> list[tuple[int, str, str, str]]:
@@ -108,14 +107,13 @@ class ItemTables:
         n'en a pas, ceux de la 2e sont lus dans pret."""
         rows: list[tuple[int, int, int, int]] = []
         for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
-            if self.builder.vg_generation[vg] >= _POKEAPI_HELD_ITEMS_GENERATION:
-                rows += self._pokeapi_held_items(vg)
-                continue
             match game.pret_format:
                 case PretFormat.GEN1:
                     pass
                 case PretFormat.GEN2:
                     rows += self._pret_held_items(game, vg)
+                case PretFormat.GEN3:
+                    rows += self._pokeapi_held_items(vg)
         return sorted(rows)
 
     def _pokeapi_held_items(self, vg: int) -> list[tuple[int, int, int, int]]:

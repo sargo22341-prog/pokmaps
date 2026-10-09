@@ -268,39 +268,58 @@ remplace le repli de `bike-voucher`.
 
 Communs :
 
-- [ ] `games.py` : ajouter `PretFormat.GEN3` et les jeux dans `GAMES_IN_PROGRESS` avec leurs `VersionCover` et
-      les symboles de `pret_versions` fixés en phase 0.
-- [ ] `ONE_OFF_METHODS` : ajouter `roaming-water`, `devon-scope`, `wailmer-pail` ; statuer sur
-      `feebas-tile-fishing` (aléatoire sur six cases).
-- [ ] Méthodes d'événement externe (`colosseum-bonus-disc-*`, `pokemon-channel-pal`) : gardées avec la mention
-      « événement externe » (décision), jamais perdues en silence.
-- [ ] Espèces 252 à 386 : stats, types, talents (talent caché absent en 3e génération), objets tenus,
-      groupes d'œufs, évolutions (nouveaux déclencheurs : Ningale/Munja, Barpau par Beauté, Chenipotte selon la
-      personnalité) ; vérifier que `evolution` sait les représenter, sinon étendre le schéma.
-- [ ] Bonheur d'évolution de la 3e génération : vérifier le seuil réel (220) contre pret, comme
-      `_happiness_to_evolve` le fait pour la 2e génération.
-- [ ] Méthodes d'apprentissage : classer `light-ball-egg` et refuser toute méthode inconnue (côté Python et
-      Kotlin) au lieu de la perdre.
-- [ ] Pokédex : deux Pokédex par jeu (régional, puis National 1-386 ajouté à la génération) dans `builder.py`
-      et `validate._check_obtainable` ; une espèce obtenable doit figurer dans l'un des deux.
-- [ ] `name_fixes.csv` : relire les noms français des nouveaux objets, attaques, talents et des versions
-      (Rubis, Saphir, Émeraude, Rouge Feu, Vert Feuille) affichés sous les jaquettes.
-- [ ] `sprites.py` : sprites 252 à 386 (normal, chromatique, animé, fixe) ; formes retenues (Deoxys, Morphéo) ;
-      icônes d'objets cherchées aussi par `items/<catégorie>/<identifiant>.png` (33 objets, phase 0).
-- [ ] Mettre à jour `test_future_generations.py` (il construit `ruby-sapphire` avec un faux `PretFormat.GEN1`).
-- [ ] Tests : talents d'une espèce de Hoenn, objets tenus, deux Pokédex par jeu, méthodes classées, obtention
-      complète.
+- [x] `games.py` : `PretFormat.GEN3`, jeux `RUBY_SAPPHIRE`, `EMERALD`, `FIRERED_LEAFGREEN` (`GEN3_GAMES`) avec leurs
+      `VersionCover`, les symboles de `pret_versions` fixés en phase 0 et `national_dex`. Ils restent **hors de
+      `GAMES_IN_PROGRESS`** (décision du 9 octobre 2026) : l'aperçu génère aussi cartes, rencontres pret et effets
+      d'attaques de chaque jeu en cours, que lisent seulement les phases 2 à 4. Ils y entrent avec le lecteur pret
+      GEN3 ; d'ici là, `open_pret` et `read_pret_moves` refusent explicitement le format GEN3, et les tests
+      construisent leurs tables de Pokémon avec la fixture `gen3_builder`.
+- [x] `ONE_OFF_METHODS` : `roaming-water`, `devon-scope`, `wailmer-pail`, et `feebas-tile-fishing` (statué : rencontre
+      unique, car 50 % sur six cases tirées au hasard ne complètent aucune table ; note dans `encounter_curation.csv`).
+- [x] Événements externes (`games.EXTERNAL_EVENT_METHODS` : `colosseum-bonus-disc-*`, `pokemon-channel-pal` ;
+      `EXTERNAL_EVENT_LOCATIONS` : Nombril de la Mer, Île Aurore, Île Lointaine, Île du Sud) : rencontres gardées avec
+      la note « Événement externe », exclues de l'obtention dans `validate._check_obtainable`. Lugia et Ho-Oh, qui
+      ne sont qu'au Nombril de la Mer, passent dans `transfer_only.csv` (Colosseum, XD).
+- [x] Espèces 252 à 386 : stats, types, talents (aucun talent caché), objets tenus (PokéAPI ; Pikachu ne tient rien
+      dans Rouge Feu/Vert Feuille, comme dans pokefirered), groupes d'œufs, évolutions. Schéma 13 : `evolution` gagne
+      `min_beauty` (Barpau), `relative_physical_stats` (Debugant, perdu jusqu'ici en 2e génération) et
+      `personality_chance` (Chenipotte) ; Munja garde son déclencheur `shed`. Toute autre condition de PokéAPI
+      arrête la génération (formes par défaut tolérées, table `pokemon_forms`).
+- [x] Bonheur d'évolution : 220 lu dans `GetEvolutionTargetSpecies` des trois dépôts (`pret_gen3_evolution.py`).
+      Rouge Feu/Vert Feuille n'ont pas d'horloge : leurs évolutions de jour et de nuit sont en commentaire dans
+      pokefirered, donc Évoli n'y devient ni Mentali ni Noctali (à reporter dans `transfer_only.csv` de la branche).
+- [x] Méthodes d'apprentissage : `builder_moves.LEARN_METHODS` et `LearnMethod` (Kotlin) ; `light-ball-egg` dans
+      l'onglet Œuf avec sa mention, `stadium-surfing-pikachu` (déjà présent en 1re génération et perdu en silence par
+      l'application) dans l'onglet Tuteur, mention « Événement externe ». Toute autre méthode arrête la génération
+      ou met la fiche en erreur.
+- [x] Pokédex : régional (PokéAPI) puis National (`national_dex`) dans `builder.pokedex_links` ; `validate` vérifie
+      qu'un Pokémon rencontré figure dans un Pokédex de son jeu et qu'aucun Pokédex ne dépasse la génération du jeu.
+      L'application lit encore un seul Pokédex par jeu (`PokedexDao.pokedex`, `min(number)`) : à revoir en phase 6.
+- [x] `name_fixes.csv` (nouvelles sortes `method` et `item`, sortes validées) : noms PokéAPI des versions, attaques,
+      talents et objets relus ; corrigés : Cherche VS (Rouge Feu/Vert Feuille), cinq méthodes de rencontre, et les
+      lieux sans nom nécessaires aux tables (Centres Pokémon des événements, Île Mirage, trois zones de la Grotte
+      Tréfonds). Les autres lieux de Hoenn et de Kanto restent à relire dans leur branche.
+- [x] `sprites.py` : les espèces 252 à 386 passent par le chemin existant (Noir et Blanc, jusqu'au n° 649) ;
+      `form_sprites.py` (ex-`unown_sprites.py`) ajoute Morphéo (soleil, pluie, neige) et Deoxys (Attaque, Défense,
+      Vitesse). Icônes d'objets cherchées aussi par identifiant (`data/item-unlinked.json` de pokesprite) : les 33
+      objets de la phase 0 sont trouvés, et la Multi Exp et le Bon Commande de l'application ont leur icône.
+      Les images 252 à 386 seront téléchargées quand les jeux entreront dans l'aperçu.
+- [x] `test_future_generations.py` : Rubis/Saphir construit avec le vrai `RUBY_SAPPHIRE`.
+- [x] Tests (`test_gen3_pokemon.py`, `test_form_sprites.py`, `test_sprites.py`) : talents de Hoenn, objets tenus,
+      deux Pokédex par jeu, conditions d'évolution et règles du moteur, méthodes classées et refusées, rencontres
+      uniques et d'événement, obtention complète des deux Pokédex sur une base réduite.
 
 Branche Hoenn :
 
-- [ ] Région `HOENN` (départ `LITTLEROOT_TOWN`), numéro de carte du monde libre (997).
+- [x] Région `HOENN` (départ `LITTLEROOT_TOWN`), numéro de carte du monde libre (997) : déclarée avec les jeux.
 - [ ] `transfer_only.csv` : exclusivités Rubis ↔ Saphir, espèces de Johto et de Kanto absentes de Hoenn,
       Colosseum/XD.
 - [ ] `name_fixes.csv` : lieux de Hoenn. `extra_items.csv` : objets clés de scénario absents de PokéAPI.
 
 Branche Remake 1G :
 
-- [ ] Régions Kanto de Rouge Feu (départ `PALLET_TOWN`) et `SEVII`, numéros libres (996, 995).
+- [x] Régions Kanto de Rouge Feu (départ `PALLET_TOWN`) et `SEVII` (départ `ONE_ISLAND`), numéros libres (996, 995) :
+      déclarées avec les jeux.
 - [ ] `transfer_only.csv` : exclusivités Rouge Feu ↔ Vert Feuille, espèces de Hoenn.
 - [ ] `name_fixes.csv` : lieux de Kanto de Rouge Feu et des Îles Sevii. `extra_items.csv` : objets clés.
 

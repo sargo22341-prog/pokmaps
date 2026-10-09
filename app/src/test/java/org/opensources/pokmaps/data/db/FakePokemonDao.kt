@@ -1,10 +1,12 @@
 package org.opensources.pokmaps.data.db
 
 /**
- * Fiche de Pikachu en mémoire (seul Pokémon connu) ; `failing` simule une base illisible. Il tient un Ballon Lumière
- * dans Bleu seulement, pour vérifier que les objets tenus sont ceux de la version choisie.
+ * Fiche de Pikachu en mémoire (seul Pokémon connu) ; `failing` simule une base illisible et `unknownLearnMethod` une
+ * attaque apprise d'une façon inconnue de l'application. Il tient un Ballon Lumière dans Bleu seulement, pour vérifier
+ * que les objets tenus sont ceux de la version choisie, et apprend Surf de Pokémon Stadium dans Rouge et Bleu.
  */
-internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao {
+internal class FakePokemonDao(private val failing: Boolean = false, private val unknownLearnMethod: Boolean = false) :
+    PokemonDao {
     override suspend fun breedingProfiles(versionGroupId: Int): List<BreedingRow> = emptyList()
 
     override suspend fun pokemon(pokemonId: Int) = read {
@@ -39,6 +41,11 @@ internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao
                     electricMove("egg", 0, 117, "Patience", power = null, pp = 10, machine = null),
                     electricMove("tutor", 0, 87, "Fatal-Foudre", power = 120, pp = 10, machine = null)
                 )
+            } else {
+                arrayOf(electricMove("stadium-surfing-pikachu", 0, SURF, "Surf", power = 90, pp = 15, machine = null))
+            },
+            *if (unknownLearnMethod) {
+                arrayOf(electricMove("xd-shadow", 0, 87, "Fatal-Foudre", power = 120, pp = 10, machine = null))
             } else {
                 emptyArray()
             }
@@ -82,6 +89,7 @@ internal class FakePokemonDao(private val failing: Boolean = false) : PokemonDao
         const val PIKACHU = 25
         const val THUNDER_SHOCK = 84
         const val THUNDERBOLT = 85
+        const val SURF = 57
         private const val HALF_FEMALE = 4
         private const val LEVEL_UP = "level-up"
         private const val MACHINE = "machine"

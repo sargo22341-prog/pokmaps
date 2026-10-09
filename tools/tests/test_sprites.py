@@ -1,9 +1,39 @@
 """Images embarquées : sprites des Pokémon (normaux et chromatiques) et icônes d'objets."""
 
+import json
 import sqlite3
 from pathlib import Path
 
 from PIL import Image
+
+from pokemaps_data.sources import pokesprite
+from pokemaps_data.sprites import icons_by_identifier
+
+from .conftest import CACHE
+
+# Objets de la 3e génération sans numéro de 8e génération dans pokesprite (docs/plan_gen_3.md, phase 0).
+GEN3_UNLINKED_ITEMS = (
+    "exp-share",
+    "vs-seeker",
+    *(f"{name}-mail" for name in ("orange", "harbor", "glitter", "mech", "wood", "wave", "bead", "shadow")),
+    *(f"{name}-mail" for name in ("tropic", "dream", "fab", "retro")),
+    "devon-goods",
+    "pokeblock-case",
+    *(f"rm-{room}-key" for room in (1, 2, 4, 6)),
+    "bike-voucher",
+    "fame-checker",
+    "berry-pouch",
+    "teachy-tv",
+    "tri-pass",
+    "rainbow-pass",
+    "mysticticket",
+    "auroraticket",
+    "powder-jar",
+    "ruby",
+    "sapphire",
+    "magma-emblem",
+    "old-sea-map",
+)
 
 
 def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
@@ -42,8 +72,27 @@ def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
         "liteblue-mail",
         "portrait-mail",
         "lovely-mail",
-        "exp-share",
     }
+
+
+def test_icons_are_found_by_identifier_when_unambiguous() -> None:
+    item_map = {"item_0001": "ball/master", "item_0233": "hold-item/metal-coat"}
+    unlinked = {"key-item/devon-goods": {}, "evo-item/metal-coat": {}}
+    assert icons_by_identifier(item_map, unlinked) == {
+        "master": "items/ball/master.png",
+        "devon-goods": "items/key-item/devon-goods.png",
+    }
+
+
+def test_every_unlinked_item_of_the_third_generation_has_an_icon(source_cache_ready: None) -> None:
+    data = [
+        json.loads(pokesprite(CACHE, f"data/{name}.json")[1].read_text("utf-8"))
+        for name in ("item-map", "item-unlinked")
+    ]
+    icons = icons_by_identifier(*data)
+    assert len(GEN3_UNLINKED_ITEMS) == 33
+    assert {item: icons.get(item) for item in GEN3_UNLINKED_ITEMS if item not in icons} == {}
+    assert icons["orange-mail"] == "items/mail/orange-mail.png"
 
 
 # --- Cartes -----------------------------------------------------------------------

@@ -1,7 +1,8 @@
 """Tables des rencontres, corrigées par les fichiers maintenus dans tools/data/.
 
 Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des jeux de la 2e génération, lues dans pret
-(builder_wild_gen2.py). Les lieux et zones sont dans builder_locations.py.
+(builder_wild_gen2.py). Les rencontres d'événement externe (méthodes et lieux de games.py) portent la mention
+EXTERNAL_EVENT_NOTE. Les lieux et zones sont dans builder_locations.py.
 """
 
 from __future__ import annotations
@@ -13,7 +14,13 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
-from .games import ONE_OFF_METHODS, PretFormat
+from .games import (
+    EXTERNAL_EVENT_LOCATIONS,
+    EXTERNAL_EVENT_METHODS,
+    EXTERNAL_EVENT_NOTE,
+    ONE_OFF_METHODS,
+    PretFormat,
+)
 from .sources import DATA_DIR
 
 if TYPE_CHECKING:
@@ -71,7 +78,7 @@ class EncounterTables:
         versions: set[int] = set()
         for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
             match game.pret_format:
-                case PretFormat.GEN1:
+                case PretFormat.GEN1 | PretFormat.GEN3:
                     pass
                 case PretFormat.GEN2:
                     rows = self.builder.version_rows
@@ -99,6 +106,11 @@ class EncounterTables:
         groups = self._apply_curation(list(self._uncurated_groups))
         for note in self._battle_notes:
             _add_battle_note(groups, note)
+        locations = self.builder.locations.area_locations
+        for group in groups:
+            method, location = self.method_identifiers[group.method_id], locations[group.location_area_id]
+            if method in EXTERNAL_EVENT_METHODS or location in EXTERNAL_EVENT_LOCATIONS:
+                group.notes.insert(0, EXTERNAL_EVENT_NOTE)
         return groups
 
     @cached_property
@@ -144,7 +156,7 @@ class EncounterTables:
         encounters: list[WildEncounter] = []
         for game in self.builder.games:
             match game.pret_format:
-                case PretFormat.GEN1:
+                case PretFormat.GEN1 | PretFormat.GEN3:
                     pass
                 case PretFormat.GEN2:
                     encounters += gen2_wild_encounters(self.builder, game)
@@ -155,7 +167,7 @@ class EncounterTables:
         notes: list[BattleNote] = []
         for game in self.builder.games:
             match game.pret_format:
-                case PretFormat.GEN1:
+                case PretFormat.GEN1 | PretFormat.GEN3:
                     pass
                 case PretFormat.GEN2:
                     notes += gen2_battle_notes(self.builder, game)
@@ -270,12 +282,13 @@ class EncounterTables:
 
     def encounter_method_table(self) -> list[tuple]:
         names = self.api.names("encounter_method_prose", "encounter_method_id")
+        fixes = self.builder.locations.name_fixes
         used = {group.method_id for group in self.encounter_groups}
         return [
             (
                 int(row["id"]),
                 row["identifier"],
-                names[int(row["id"])],
+                fixes.get(("method", row["identifier"])) or names[int(row["id"])],
                 int(row["order"]),
                 int(row["identifier"] in ONE_OFF_METHODS),
             )

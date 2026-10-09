@@ -18,3 +18,5 @@ def open_pret(game: Game, root: Path) -> PretReader:
             return PretRepo(root)
         case PretFormat.GEN2:
             return Gen2PretRepo(root, game.pret_versions)
+        case PretFormat.GEN3:
+            raise ValueError(f"Cartes de la 3e génération pas encore lues dans pret : {game.version_group}")

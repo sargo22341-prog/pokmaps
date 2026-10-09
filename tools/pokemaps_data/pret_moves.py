@@ -56,15 +56,22 @@ class MoveEffect:
 
 def read_pret_moves(root: Path, pret_format: PretFormat) -> list[PretMove]:
     """Attaques du jeu dans l'ordre de moves.asm, avec la constante de leur effet."""
+    match pret_format:
+        case PretFormat.GEN1:
+            return [PretMove(args[0], args[1]) for args in _move_macros(root)]
+        case PretFormat.GEN2:
+            chance_effects = _chance_effects(root)
+            return [_gen2_move(args, chance_effects) for args in _move_macros(root)]
+        case PretFormat.GEN3:
+            raise ValueError(f"Effets des attaques de la 3e génération pas encore lus dans pret : {root.name}")
+
+
+def _move_macros(root: Path) -> list[list[str]]:
+    """Arguments de chaque macro « move » de moves.asm (1re et 2e générations)."""
     moves = [macro_args(line, "move") for line in source_lines(root / MOVES_FILE) if line.startswith("move ")]
     if not moves:
         raise ValueError(f"Aucune attaque lue dans {root / MOVES_FILE}")
-    match pret_format:
-        case PretFormat.GEN1:
-            return [PretMove(args[0], args[1]) for args in moves]
-        case PretFormat.GEN2:
-            chance_effects = _chance_effects(root)
-            return [_gen2_move(args, chance_effects) for args in moves]
+    return moves
 
 
 def _gen2_move(args: list[str], chance_effects: frozenset[str]) -> PretMove:

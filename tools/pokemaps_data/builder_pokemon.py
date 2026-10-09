@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 
 from .games import PretFormat
 from .pokeapi import ENGLISH, FRENCH, clean_text, optional_int, value_at
+from .pret_gen3_evolution import EvolutionRules, read_evolution_rules
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -18,6 +19,29 @@ MODERN_STATS = (1, 2, 3, 4, 5, 6)
 STAT_NAME_FALLBACK = {9: "Spécial"}
 # Les œufs (et donc les groupes d'œufs) apparaissent en 2e génération.
 BREEDING_GENERATION = 2
+
+# Colonnes de pokemon_evolution (PokéAPI) : identification de la ligne, puis conditions écrites dans la base. Toute
+# autre condition renseignée dans un jeu configuré arrête la génération plutôt que d'être perdue.
+_EVOLUTION_KEYS = frozenset({"id", "evolved_species_id", "evolution_trigger_id", "version_group_id", "is_default"})
+_EVOLUTION_CONDITIONS = frozenset(
+    {
+        "minimum_level",
+        "trigger_item_id",
+        "held_item_id",
+        "minimum_happiness",
+        "time_of_day",
+        "known_move_id",
+        "trade_species_id",
+        "minimum_beauty",
+        "relative_physical_stats",
+        "condition_expression",
+        "percentage_chance",
+    }
+)
+# Formes avant et après l'évolution : sans effet quand c'est la forme par défaut de l'espèce.
+_FORM_COLUMNS = frozenset({"required_pokemon_form_id", "evolved_pokemon_form_id"})
+# Conditions de PokéAPI qui départagent selon la personnalité du Pokémon (Chenipotte : Armulys ou Blindalys).
+PERSONALITY_EXPRESSIONS = frozenset({"PID 16 >> 10 % 4 <=", "PID 16 >> 10 % 5 >="})
 
 
 class PokemonTables:
@@ -165,29 +189,47 @@ class PokemonTables:
             by_target[int(row["evolved_species_id"])].append(row)
         rows = []
         for vg in self.builder.vg_ids:
-            happiness = self._happiness_to_evolve(vg)
+            rules = self._evolution_rules(vg)
             for target, candidates in sorted(by_target.items()):
                 source = self.builder.species.get(target, {}).get("evolves_from_species_id")
                 if target not in self.builder.species or not source:
                     continue
                 if int(self.builder.species[target]["generation_id"]) > self.builder.vg_generation[vg]:
                     continue
+                methods = self._evolution_methods(vg, candidates)
+                for row in methods:
+                    _check_represented(row, self._default_forms)
                 rows += [
-                    (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_conditions(row, happiness))
-                    for row in self._evolution_methods(vg, candidates)
+                    (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_conditions(row, rules))
+                    for row in methods
+                    if rules is None or rules.time_of_day or not row["time_of_day"]
                 ]
         return [(index, *row) for index, row in enumerate(rows, start=1)]
 
-    def _happiness_to_evolve(self, vg: int) -> int | None:
-        """Bonheur nécessaire pour évoluer dans ce jeu, lu dans pret pour la 2e génération ; None pour garder celui
-        de PokéAPI. PokéAPI donne pour Or et Argent le seuil des jeux récents (160) : le moteur y demande 220
-        (HAPPINESS_TO_EVOLVE, engine/pokemon/evolve.asm)."""
+    @cached_property
+    def _default_forms(self) -> frozenset[str]:
+        """Formes par défaut des espèces (PokéAPI les cite parfois comme forme requise d'une évolution)."""
+        defaults = set(self.builder.default_pokemon.values())
+        return frozenset(
+            row["id"]
+            for row in self.api.table("pokemon_forms")
+            if row["is_default"] == "1" and int(row["pokemon_id"]) in defaults
+        )
+
+    def _evolution_rules(self, vg: int) -> EvolutionRules | None:
+        """Règles du moteur de ce jeu, lues dans pret ; None pour garder les conditions de PokéAPI.
+
+        PokéAPI donne le seuil de bonheur des jeux récents (160) : le moteur de la 2e génération demande 220
+        (HAPPINESS_TO_EVOLVE, engine/pokemon/evolve.asm), comme celui de la 3e (pret_gen3_evolution.py), où Rouge Feu
+        et Vert Feuille n'ont en plus aucune évolution de jour ou de nuit."""
         game = self.builder.game_of(vg)
         match game.pret_format:
             case PretFormat.GEN1:
                 return None
             case PretFormat.GEN2:
-                return self.builder.gen2_repo(game, "le bonheur d'évolution").happiness_to_evolve
+                return EvolutionRules(self.builder.gen2_repo(game, "le bonheur d'évolution").happiness_to_evolve, True)
+            case PretFormat.GEN3:
+                return read_evolution_rules(self.builder.pret_root(game, "les règles d'évolution"), game.pret_repo)
 
     def _evolution_methods(self, vg: int, candidates: list[dict[str, str]]) -> list[dict[str, str]]:
         """Méthodes valables dans ce jeu : celles introduites au plus tard dans ce groupe de versions,
@@ -200,11 +242,24 @@ class PokemonTables:
         return [row for row in valid if order[int(row["version_group_id"])] == latest]
 
 
-def _conditions(row: dict[str, str], happiness: int | None) -> tuple:
-    """Conditions d'une évolution ; `happiness` remplace le bonheur de PokéAPI s'il est donné."""
+def _check_represented(row: dict[str, str], default_forms: frozenset[str]) -> None:
+    """Arrête la génération si l'évolution a une condition de PokéAPI que la base ne sait pas écrire."""
+    unknown = sorted(
+        column
+        for column, value in row.items()
+        if column not in _EVOLUTION_KEYS | _EVOLUTION_CONDITIONS
+        and value not in ("", "0")
+        and not (column in _FORM_COLUMNS and value in default_forms)
+    )
+    if unknown:
+        raise ValueError(f"Conditions d'évolution non représentées dans la base : {unknown} ({dict(row)})")
+
+
+def _conditions(row: dict[str, str], rules: EvolutionRules | None) -> tuple:
+    """Conditions d'une évolution ; le bonheur des règles du moteur remplace celui de PokéAPI s'il est donné."""
     minimum_happiness = optional_int(row["minimum_happiness"])
-    if minimum_happiness is not None and happiness is not None:
-        minimum_happiness = happiness
+    if minimum_happiness is not None and rules is not None:
+        minimum_happiness = rules.happiness
     return (
         optional_int(row["minimum_level"]),
         optional_int(row["trigger_item_id"]),
@@ -213,4 +268,17 @@ def _conditions(row: dict[str, str], happiness: int | None) -> tuple:
         row["time_of_day"] or None,
         optional_int(row["known_move_id"]),
         optional_int(row["trade_species_id"]),
+        optional_int(row["minimum_beauty"]),
+        optional_int(row["relative_physical_stats"]),
+        _personality_chance(row),
     )
+
+
+def _personality_chance(row: dict[str, str]) -> int | None:
+    """Probabilité (%) d'une évolution que fixe la personnalité du Pokémon, None si elle n'en dépend pas."""
+    expression, chance = row["condition_expression"], optional_int(row["percentage_chance"])
+    if not expression and chance is None:
+        return None
+    if expression not in PERSONALITY_EXPRESSIONS or chance is None or not 0 < chance < 100:
+        raise ValueError(f"Condition d'évolution inconnue : {expression!r} ({chance} %) pour {dict(row)}")
+    return chance
