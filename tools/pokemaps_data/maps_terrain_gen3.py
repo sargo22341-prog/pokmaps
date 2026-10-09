@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from .map_spots import SPOT_KINDS
 from .pret_gen3_source import read_text
 
 if TYPE_CHECKING:
@@ -55,7 +56,7 @@ def _table(text: str, name: str) -> str:
 
 
 def wild_cells(repo: Gen3PretRepo, current: Gen3Map) -> dict[str, list[tuple[int, int]]]:
-    result: dict[str, list[tuple[int, int]]] = {kind: [] for kind in ("grass", "floor", "water", "tree", "rock")}
+    result: dict[str, list[tuple[int, int]]] = {kind: [] for kind in SPOT_KINDS}
     methods = repo.wild_methods.get(current.const, frozenset())
     if not methods:
         return result
@@ -77,7 +78,9 @@ def wild_cells(repo: Gen3PretRepo, current: Gen3Map) -> dict[str, list[tuple[int
                 kind = "grass" if tile.behavior in (2, 3, 0x24) else "floor"
                 result[kind].append((x, y))
             fishing = bool(methods & {"old-rod", "good-rod", "super-rod"})
-            if (water and methods & {"surf", "seaweed"}) or (fishing and tile.behavior in rules.surfable):
+            if water and "seaweed" in methods:
+                result["underwater"].append((x, y))
+            if (water and "surf" in methods) or (fishing and tile.behavior in rules.surfable):
                 result["water"].append((x, y))
     if "rock-smash" in methods:
         result["rock"] = [

@@ -399,6 +399,11 @@ sont téléchargés aux versions épinglées, puis réutilisés depuis le cache.
 niveaux ou probabilités diffèrent de PokéAPI ; le [bilan des rencontres communes](docs/generations/rencontres-gen3-communs.md)
 explique les écarts. `map_areas.csv` accepte une colonne facultative `version_group` : les lignes d'un groupe
 remplacent les lignes communes de la même carte, notamment pour le Parc Safari d'Émeraude.
+Les [rencontres de Hoenn](docs/generations/rencontres-hoenn.md) ajoutent un terrain distinct de Plongée,
+les routes possibles des grottes Terra/Marine et les notes des rencontres particulières. Les emplacements
+relus de Rubis/Saphir et d'Émeraude sont conservés dans `map_spots.csv` ; six petits terrains gardent des
+avertissements de capacité documentés. Les séries non capturables de la Pyramide et du Reptile sont conservées
+hors ligne dans `maps/emerald/facility_encounters.json`, régénéré par `--hoenn-maps-only`.
 
 La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
 elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.

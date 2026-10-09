@@ -88,7 +88,11 @@ def _area_key(table: WildTable, mappings: dict[str, list[str]]) -> str:
 
 
 def _conditions(game: Game, const: str) -> tuple[str, ...]:
-    if game.version_group == "emerald" and const in {"MAP_SAFARI_ZONE_NORTHEAST", "MAP_SAFARI_ZONE_SOUTHEAST"}:
+    if game.version_group == "emerald" and const in {
+        "MAP_SAFARI_ZONE_NORTHEAST",
+        "MAP_SAFARI_ZONE_SOUTHEAST",
+        "MAP_ALTERING_CAVE",
+    }:
         return ("story-progress-hall-of-fame",)
     if game.version_group == "firered-leafgreen" and (
         const.startswith(("MAP_FOUR_ISLAND", "MAP_FIVE_ISLAND", "MAP_SIX_ISLAND", "MAP_SEVEN_ISLAND"))

@@ -17,6 +17,7 @@ from .maps_render_gen3 import Gen3Renderer
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Event, Gen3Map
 from .pret_gen3_source import read_json
+from .pret_hoenn_facilities import validate_facility_series, write_facility_series
 from .sources import fetch_pret
 
 HOENN_MAP_GAMES = (EMERALD, RUBY_SAPPHIRE)
@@ -124,6 +125,7 @@ def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, i
     renderer.write_sprites(sprites, output / "sprites")
     _write_catalog(rows, warps, output)
     _write_events(game_maps, output)
+    write_facility_series(repo, output)
     validate_catalog(output)
     tiles = [path for path in output.rglob("*.webp") if path.parent.name.isdecimal()]
     return len(rows), len(tiles), sum(path.stat().st_size for path in output.rglob("*") if path.is_file())
@@ -151,6 +153,8 @@ def validate_catalog(output: Path) -> None:
         for warp in csv.DictReader(handle, delimiter="\t"):
             _validate_warp(output, warp, maps)
     _validate_events(output, maps)
+    if output.name == "emerald":
+        validate_facility_series(output)
 
 
 def _validate_events(output: Path, maps: dict[str, dict[str, str]]) -> None:

@@ -17,6 +17,7 @@ from __future__ import annotations
 from collections import deque
 from collections.abc import Callable
 
+from .map_spots import SPOT_KINDS
 from .pret import WATER_TILE, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import smash_rocks
@@ -25,7 +26,7 @@ from .pret_reader import PretReader
 
 Cell = tuple[int, int]
 ROCK = "rock"
-TERRAINS = ("grass", "water", "floor", "tree", ROCK)
+TERRAINS = SPOT_KINDS
 
 # 1re génération : tileset de la forêt de Jade et du Parc Safari, où l'on ne rencontre des Pokémon qu'en marchant
 # dans les herbes, comme dehors (engine/battle/wild_encounters.asm, TryDoWildEncounter).

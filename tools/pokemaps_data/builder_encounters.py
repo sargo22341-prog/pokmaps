@@ -13,6 +13,7 @@ from dataclasses import dataclass, field, replace
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .builder_hoenn_encounters import complete_hoenn_encounters
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
 from .builder_wild_gen3 import WildData, gen3_wild_data
 from .games import (
@@ -108,6 +109,7 @@ class EncounterTables:
     @cached_property
     def encounter_groups(self) -> list[EncounterGroup]:
         groups = self._apply_curation([replace(group, notes=list(group.notes)) for group in self._uncurated_groups])
+        complete_hoenn_encounters(self.builder, groups)
         _roaming_conditions(groups, self.method_identifiers)
         for note in self._battle_notes:
             _add_battle_note(groups, note)

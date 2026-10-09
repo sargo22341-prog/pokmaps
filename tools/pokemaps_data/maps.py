@@ -36,6 +36,7 @@ from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import roaming_maps
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_wild import roaming_maps as gen3_roaming_maps
+from .pret_hoenn_caves import moving_cave_areas
 from .pret_reader import open_pret
 from .sources import DATA_DIR, fetch_pret
 
@@ -189,7 +190,10 @@ def roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
             routes = roaming_maps(repo)
         case Gen3PretRepo() as repo:
             routes = gen3_roaming_maps(repo)
-    return [(const, ROAMING_AREAS[game_maps.game.map_family]) for const in routes]
+    areas = [(const, ROAMING_AREAS[game_maps.game.map_family]) for const in routes]
+    if isinstance(game_maps.repo, Gen3PretRepo):
+        areas.extend(moving_cave_areas(game_maps.repo))
+    return areas
 
 
 def display_map_rows(

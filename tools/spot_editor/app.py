@@ -39,6 +39,7 @@ TERRAIN_LABELS = {
     "grass": "Herbes hautes (marche)",
     "floor": "Sol des grottes et bâtiments (marche)",
     "water": "Eau (surf et pêche)",
+    "underwater": "Algues sous-marines (Plongée)",
     "tree": "Arbres (Coup d'Boule)",
     "rock": "Rochers (Éclate-Roc)",
 }

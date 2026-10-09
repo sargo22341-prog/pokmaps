@@ -8,6 +8,7 @@ import pytest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.compare_wild_gen3 import compare_wild_tables
 from pokemaps_data.games import GEN3_GAMES, Game
+from pokemaps_data.map_spots import read_spots
 from pokemaps_data.maps import ROAMING_AREAS, roaming_areas
 from pokemaps_data.maps_layout import identifier, read_layout_curation
 from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
@@ -17,6 +18,8 @@ from pokemaps_data.preview_wild_gen3 import _map_data
 from pokemaps_data.sources import pret_dir
 from pokemaps_data.validate import validate
 from spot_editor.catalog import EditorCatalog, EncounterLine, Family
+from spot_editor.coverage import PlacementNeeds
+from spot_editor.session import SpotSession
 from spot_editor.terrain import WildTerrains
 from spot_editor.version_choice import VERSION_LABELS
 
@@ -81,7 +84,7 @@ def test_roaming_routes_and_editor_regions(game: Game, source_cache_ready: None)
     routes = roaming_maps(repo)
     assert len(routes) == (25 if repo.remake else 20)
     assert all(repo.maps[const].is_outdoor and const in maps.placements for const in routes)
-    assert roaming_areas(maps) == [(const, ROAMING_AREAS[game.map_family]) for const in routes]
+    assert roaming_areas(maps)[: len(routes)] == [(const, ROAMING_AREAS[game.map_family]) for const in routes]
     assert game.version_group in VERSION_LABELS
     assert set(maps.world_region.values()) >= ({"KANTO", "SEVII"} if repo.remake else {"HOENN"})
 
@@ -107,7 +110,7 @@ def test_terrain_placement_and_editor_consistency(game: Game, assets: Path, sour
 
 def test_editor_accepts_underwater_encounters() -> None:
     line = EncounterLine("Émeraude", "seaweed", "Plongée", 366, "Coquiperl", 20, 30, 65)
-    assert line.terrains == ("water",)
+    assert line.terrains == ("underwater",)
 
 
 def test_preview_can_be_browsed(gen3_builder: DatabaseBuilder, tmp_path: Path, assets: Path) -> None:
@@ -134,7 +137,8 @@ def test_preview_can_be_browsed(gen3_builder: DatabaseBuilder, tmp_path: Path, a
                  WHERE ma.location_area_id = e.location_area_id AND m.version_group_id = v.version_group_id
                    AND ((method.identifier = 'walk' AND s.kind IN ('grass', 'floor'))
                      OR (method.identifier = 'rock-smash' AND s.kind = 'rock')
-                     OR (method.identifier IN ('surf', 'seaweed', 'old-rod', 'good-rod', 'super-rod')
+                     OR (method.identifier = 'seaweed' AND s.kind = 'underwater')
+                     OR (method.identifier IN ('surf', 'old-rod', 'good-rod', 'super-rod')
                          AND s.kind = 'water')))"""
         ).fetchall()
         assert missing == []
@@ -145,5 +149,48 @@ def test_preview_can_be_browsed(gen3_builder: DatabaseBuilder, tmp_path: Path, a
             assert set(catalog.world_names(family)) >= (
                 {"kanto", "sevii"} if family.identifier == "firered-leafgreen" else {"hoenn"}
             )
+        _check_hoenn_editor_methods(catalog)
+        _check_hoenn_coverage(catalog)
     finally:
         catalog.connection.close()
+
+
+def _check_hoenn_editor_methods(catalog: EditorCatalog) -> None:
+    for game in GEN3_GAMES:
+        if game.map_family != "ruby-sapphire-emerald":
+            continue
+        repo = Gen3PretRepo(pret_dir(CACHE, game.pret_repo), game.pret_versions)
+        family = Family(game.map_family, game.version_group, (game.version_group,))
+        found = catalog.maps(family)
+        assert all(current.identifier != "seafloor-cavern-room9" for current in found)
+        for current in found:
+            const = "MAP_" + current.identifier.upper().replace("-", "_")
+            methods = {line.method for line in catalog.encounters(current)}
+            assert methods == repo.wild_methods[const], (game.version_group, const, methods)
+
+
+def _check_hoenn_coverage(catalog: EditorCatalog) -> None:
+    families = [family for family in catalog.families() if family.identifier == "ruby-sapphire-emerald"]
+    needs = PlacementNeeds(catalog, families, WildTerrains(CACHE))
+    shortfalls = needs.shortfalls(SpotSession(read_spots()))
+    assert all(not row.blocking for row in shortfalls)
+    actual = {(row.key.map_identifier, row.key.kind, row.version_group, row.points, row.required) for row in shortfalls}
+    # Décisions de place relues dans docs/generations/rencontres-hoenn.md ; aucun autre manque n'est admis.
+    shared = {
+        (name, kind, group, points, required)
+        for group in ("ruby-sapphire", "emerald")
+        for name, kind, points, required in (
+            ("dewford-town", "water", 5, 6),
+            ("route102", "water", 3, 5),
+            ("route115", "grass", 2, 5),
+        )
+    }
+    ruby = {
+        (name, "water", "ruby-sapphire", points, required)
+        for name, points, required in (
+            ("abandoned-ship-hidden-floor-corridors", 1, 5),
+            ("abandoned-ship-rooms-b1f", 1, 5),
+            ("meteor-falls-b1f-2r", 5, 6),
+        )
+    }
+    assert actual == shared | ruby

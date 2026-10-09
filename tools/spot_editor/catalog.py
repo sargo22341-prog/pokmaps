@@ -22,12 +22,13 @@ _PLACEMENT_METHODS = {
     "headbutt": "headbutt",
     "headbutt-high": "headbutt",
     "rock-smash": "rock-smash",
-    "seaweed": "surf",
+    "seaweed": "dive",
 }
 # Terrain sur lequel l'application dessine chaque méthode : la marche utilise les herbes, ou le sol sans herbes.
 _TERRAINS = {
     "walk": ("grass", "floor"),
     "surf": ("water",),
+    "dive": ("underwater",),
     "fishing": ("water",),
     "headbutt": ("tree",),
     "rock-smash": ("rock",),

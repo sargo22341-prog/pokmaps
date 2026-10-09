@@ -474,16 +474,15 @@ ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTHWEST,hoenn-safari-zone/nwmach-bike-ar
 ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTH,hoenn-safari-zone/expansion-south,Tables et rencontres GBA
 ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTHEAST,hoenn-safari-zone/se,Tables et rencontres GBA
 ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTHWEST,hoenn-safari-zone/sw,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ENTRANCE,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM1,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM2,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM3,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM4,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM5,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM6,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM7,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM8,seafloor-cavern,Tables et rencontres GBA
-ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM9,seafloor-cavern,Tables et rencontres GBA
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ENTRANCE,seafloor-cavern/entrance,Entrée aquatique sans rencontre au sol
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM1,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM2,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM3,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM4,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM5,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM6,seafloor-cavern/flooded-rooms,Salles avec rencontres au sol et dans l'eau
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM7,seafloor-cavern/flooded-rooms,Salles avec rencontres au sol et dans l'eau
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM8,seafloor-cavern/dry-rooms,Salles sans rencontre aquatique
 ruby-sapphire-emerald,MAP_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM,shoal-cave/high-tide,Tables et rencontres GBA
 ruby-sapphire-emerald,MAP_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM,shoal-cave/high-tide,Tables et rencontres GBA
 ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM,shoal-cave/low-tide,Tables et rencontres GBA

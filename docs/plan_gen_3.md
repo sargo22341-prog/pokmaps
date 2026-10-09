@@ -464,18 +464,24 @@ les contenus particuliers et la relecture des emplacements restent dans les bran
 
 Branche Hoenn :
 
-- [ ] Plongée (`water_mons` des cartes `Underwater_*`, méthode PokéAPI `seaweed`).
-- [ ] Barpau (six cases de la Route 119, impossibles à placer : note explicite), Grotte Métamo
+- [x] Plongée (`water_mons` des cartes `Underwater_*`, méthode PokéAPI `seaweed`).
+- [x] Barpau (six cases de la Route 119, impossibles à placer : note explicite), Grotte Métamo
       (Émeraude), Parc Safari et son extension d'Émeraude (après la Ligue), épidémies de la TV si retenues,
       Pokémon cachés (Kecleon : `devon-scope`, Simularbre : `wailmer-pail`).
-- [ ] `TERRA_CAVE` et `MARINE_CAVE` d'Émeraude (Groudon et Kyogre, entrée qui change de route) : lieux
+- [x] `TERRA_CAVE` et `MARINE_CAVE` d'Émeraude (Groudon et Kyogre, entrée qui change de route) : lieux
       possibles listés, comme les errants.
-- [ ] Errants Latios/Latias (selon la version).
-- [ ] `maps_terrain.py` : terrains d'après le **comportement** des cases (hautes herbes, herbes cendrées, sable
+- [x] Errants Latios/Latias (selon la version).
+- [x] `maps_terrain.py` : terrains d'après le **comportement** des cases (hautes herbes, herbes cendrées, sable
       du désert, sol des grottes, eau, algues sous-marines) ; rochers d'Éclate-Roc = objets de carte. Nouveau
       terrain sous-marin : `SpotKind` (Kotlin), `TERRAINS` (Python), validation, éditeur des emplacements.
-- [ ] Placer et relire les emplacements de `ruby-sapphire-emerald` dans `map_spots.csv` (colonne `version_group`
+- [x] Placer et relire les emplacements de `ruby-sapphire-emerald` dans `map_spots.csv` (colonne `version_group`
       pour les cartes qui diffèrent) ; zéro avertissement de terrain trop petit, ou décision écrite.
+
+Bilan : [rencontres Hoenn](generations/rencontres-hoenn.md). Les 4 523 points sont relus et validés ;
+six terrains étroits conservent neuf avertissements de capacité au total, avec décision écrite et test
+de couverture. Les épidémies TV facultatives ne sont pas retenues. Les vraies séries C non capturables de
+Pyramide/Reptile sont conservées dans un catalogue hors ligne (48 séries) ; les tables JSON de Pyramide
+contiennent des indices d'espèces. Les jeux restent en aperçu jusqu'à la phase 6.
 
 Branche Remake 1G :
 

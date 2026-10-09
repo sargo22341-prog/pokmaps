@@ -451,7 +451,7 @@ CREATE TABLE npc_offer_story (
 
 -- Emplacements où dessiner les Pokémon sauvages d'une carte (ville, route ou carte intérieure), bien répartis :
 -- kind grass (hautes herbes), water (eau : surf et pêche), floor (sol des grottes et bâtiments), tree (arbres de
--- Coup d'Boule) ou rock (rochers d'Éclate-Roc), à partir de la 2e génération pour les deux derniers.
+-- Coup d'Boule), rock (rochers d'Éclate-Roc) ou underwater (algues de Plongée, 3e génération).
 CREATE TABLE map_spot (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,
