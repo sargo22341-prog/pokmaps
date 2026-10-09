@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import re
 import struct
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .pret_gen3_source import read_json, source_path
+from .pret_gen3_source import read_json, read_text, source_path
 from .pret_gen3_validation import validate_layout, validate_map
 from .pret_models import Connection
 
@@ -35,6 +36,7 @@ class Gen3Warp:
     # Numérotation commune, à partir de 1 ; 0 = aucun, 127 = Base Secrète, 128 = destination dynamique.
     target_warp: int
     elevation: int
+    accessible: bool = True
 
 
 @dataclass(frozen=True)
@@ -75,6 +77,17 @@ class Gen3Map:
     settings: tuple[tuple[str, str | int | bool], ...]
 
     @property
+    def width(self) -> int:
+        return self.layout.width
+
+    @property
+    def height(self) -> int:
+        return self.layout.height
+
+    def block(self, x: int, y: int) -> int:
+        return self.layout.block(x, y)
+
+    @property
     def is_outdoor(self) -> bool:
         return self.map_type in {
             "MAP_TYPE_TOWN",
@@ -97,6 +110,7 @@ def read_layouts(root: Path) -> dict[str, Gen3Layout]:
         raise ValueError(f"{root} : nombre de layouts invalide")
     labels = read_groups(root)
     used = {read_json(source_path(root, f"data/maps/{label}/map.json"))["layout"] for _, _, label in labels}
+    used.update(_mirage_layouts(root, rows))
     result: dict[str, Gen3Layout] = {}
     for row in rows:
         if row == {}:
@@ -122,6 +136,24 @@ def read_layouts(root: Path) -> dict[str, Gen3Layout]:
             bh,
             _words(source_path(root, row["border_filepath"]), bw * bh),
         )
+    return result
+
+
+def _mirage_layouts(root: Path, rows: list[dict[str, Any]]) -> set[str]:
+    script = root / "data/maps/Route130/scripts.inc"
+    if not script.is_file():
+        return set()
+    references = re.findall(r"^\s*setmaplayoutindex\s+(\w+)", read_text(script), re.M)
+    if len(set(references)) != 2:
+        raise ValueError(f"{script} : deux layouts attendus pour l’Île Mirage")
+    result = set()
+    for reference in references:
+        if reference.isdecimal():
+            index = int(reference) - 1
+            if not 0 <= index < len(rows) or not rows[index]:
+                raise ValueError(f"{script} : layout absent : {reference}")
+            reference = rows[index]["id"]
+        result.add(reference)
     return result
 
 

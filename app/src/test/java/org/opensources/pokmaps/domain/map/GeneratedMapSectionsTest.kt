@@ -9,6 +9,34 @@ import org.junit.Test
 
 class GeneratedMapSectionsTest {
     @Test
+    fun hoennPlansKeepRoomsTogetherAndVariantsSeparate() {
+        for (group in listOf("emerald", "ruby-sapphire")) {
+            val catalog = GeneratedHoennCatalog.load(group)
+            assertEquals(setOf("hoenn", "hoenn-underwater"), catalog.worlds.map { it.identifier }.toSet())
+            listOf(
+                "granite-cave-1f-plan",
+                "seafloor-cavern-1f-plan",
+                "shoal-cave-high-tide-1f-plan",
+                "shoal-cave-low-tide-1f-plan",
+                "sky-pillar-1f-plan"
+            ).forEach { assertTrue(it, catalog.mapByIdentifier(it) != null) }
+            assertPlan(catalog, "granite-cave-1f-plan", 2, 3)
+            assertPlan(catalog, "seafloor-cavern-1f-plan", 10, 0)
+            assertPlan(catalog, "shoal-cave-high-tide-1f-plan", 2, 0)
+            assertPlan(catalog, "shoal-cave-low-tide-1f-plan", 4, 2)
+            assertPlan(catalog, "sky-pillar-1f-plan", 1, 6)
+            val origin = catalog.mapByIdentifier("cave-of-origin-1f-plan")
+            requireNotNull(origin)
+            assertEquals(if (group == "emerald") 2 else 5, catalog.floorsOf(origin.id).size)
+            catalog.maps.values.filter { it.isDisplayable && !it.isWorld }.forEach { map ->
+                val floors = catalog.floorsOf(map.id)
+                assertEquals(map.identifier, floors.size, floors.map { it.level }.distinct().size)
+            }
+            assertTrue(catalog.mapByIdentifier("route130-mirage-island")?.isDisplayable == true)
+        }
+    }
+
+    @Test
     fun everyBuildingHasOnlyOneBadgePerLevelAndSafariHousesStaySeparate() {
         val database = File(System.getProperty("pokemaps.database").orEmpty())
         assertTrue("Asset versionné absent : database/pokedex.db", database.isFile)

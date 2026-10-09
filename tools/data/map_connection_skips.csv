@@ -1,2 +1,5 @@
 family,map,target,reason
+ruby-sapphire-emerald,MAP_ROUTE116,MAP_RUSTBORO_CITY,Émeraude décale la Route 116 de deux cases depuis Mérouville ; placement depuis Vergazon sans recouvrir la ville
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN,MAP_ROUTE114,Émeraude décale la Route 114 de deux cases ; placement depuis la Route 115
+ruby-sapphire-emerald,MAP_ROUTE107,MAP_DEWFORD_TOWN,Émeraude décale la Route 107 de deux cases ; placement depuis la Route 108
 gold-silver-crystal,CELADON_CITY,ROUTE_7,"Les connexions placent la Route 7 une métatuile plus haut depuis Safrania que depuis Céladopole ; elle est placée depuis Safrania"

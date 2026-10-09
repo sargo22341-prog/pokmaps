@@ -1,4 +1,5 @@
 family,plan,number,name_fr,map,x,y
+ruby-sapphire-emerald,SKY_PILLAR_ROOF_PLAN,941,Pilier Céleste (sommet),MAP_SKY_PILLAR_TOP,0,0
 red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_NORTH,26,0
 red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_WEST,0,38
 red-blue-yellow,SAFARI_ZONE_PLAN,900,Parc Safari,SAFARI_ZONE_CENTER,32,38
@@ -70,3 +71,63 @@ gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterrain
 gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_KABUTO_WORD_ROOM,48,0
 gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_OMANYTE_WORD_ROOM,0,32
 gold-silver-crystal,RUINS_OF_ALPH_B1F_PLAN,916,Ruines d'Alpha (salles souterraines),RUINS_OF_ALPH_AERODACTYL_WORD_ROOM,24,32
+ruby-sapphire-emerald,AQUA_HIDEOUT_1F_PLAN,900,Planque Aqua (rez-de-chaussée),MAP_AQUA_HIDEOUT_1F,0,0
+ruby-sapphire-emerald,AQUA_HIDEOUT_B1F_PLAN,901,Planque Aqua (1er sous-sol),MAP_AQUA_HIDEOUT_B1F,0,0
+ruby-sapphire-emerald,AQUA_HIDEOUT_B2F_PLAN,902,Planque Aqua (2e sous-sol),MAP_AQUA_HIDEOUT_B2F,0,0
+ruby-sapphire-emerald,BATTLE_PYRAMID_1F_PLAN,903,Pyramide de Combat (modèle d’étage),MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR,0,0
+ruby-sapphire-emerald,BATTLE_PYRAMID_ROOF_PLAN,904,Pyramide de Combat (sommet),MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP,0,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_1F_PLAN,905,Grotte Origine (rez-de-chaussée),MAP_CAVE_OF_ORIGIN_1F,0,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_1F_PLAN,905,Grotte Origine (rez-de-chaussée),MAP_CAVE_OF_ORIGIN_ENTRANCE,25,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_B1F_PLAN,906,Grotte Origine (1er sous-sol),MAP_CAVE_OF_ORIGIN_B1F,0,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_B2F_PLAN,907,Grotte Origine (2e sous-sol),MAP_CAVE_OF_ORIGIN_B2F,0,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_B3F_PLAN,908,Grotte Origine (3e sous-sol),MAP_CAVE_OF_ORIGIN_B3F,0,0
+ruby-sapphire-emerald,CAVE_OF_ORIGIN_B4F_PLAN,909,Grotte Origine (4e sous-sol),MAP_CAVE_OF_ORIGIN_B4F,0,0
+ruby-sapphire-emerald,GRANITE_CAVE_1F_PLAN,910,Grotte Granite (rez-de-chaussée),MAP_GRANITE_CAVE_1F,0,0
+ruby-sapphire-emerald,GRANITE_CAVE_1F_PLAN,910,Grotte Granite (rez-de-chaussée),MAP_GRANITE_CAVE_STEVENS_ROOM,44,0
+ruby-sapphire-emerald,GRANITE_CAVE_B1F_PLAN,911,Grotte Granite (1er sous-sol),MAP_GRANITE_CAVE_B1F,0,0
+ruby-sapphire-emerald,GRANITE_CAVE_B2F_PLAN,912,Grotte Granite (2e sous-sol),MAP_GRANITE_CAVE_B2F,0,0
+ruby-sapphire-emerald,HOENN_VICTORY_ROAD_1F_PLAN,913,Route Victoire (rez-de-chaussée),MAP_VICTORY_ROAD_1F,0,0
+ruby-sapphire-emerald,HOENN_VICTORY_ROAD_B1F_PLAN,914,Route Victoire (1er sous-sol),MAP_VICTORY_ROAD_B1F,0,0
+ruby-sapphire-emerald,HOENN_VICTORY_ROAD_B2F_PLAN,915,Route Victoire (2e sous-sol),MAP_VICTORY_ROAD_B2F,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_1F_PLAN,916,Planque Magma (rez-de-chaussée),MAP_MAGMA_HIDEOUT_1F,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_1R,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_2R,35,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_3R,0,41
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_1R,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_2R,30,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_3R,0,26
+ruby-sapphire-emerald,MAGMA_HIDEOUT_4F_PLAN,919,Planque Magma (étage 3),MAP_MAGMA_HIDEOUT_4F,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_B1F_PLAN,920,Planque Magma (1er sous-sol),MAP_MAGMA_HIDEOUT_B1F,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_B2F_PLAN,921,Planque Magma (2e sous-sol),MAP_MAGMA_HIDEOUT_B2F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_1F_PLAN,922,Tour Mirage (rez-de-chaussée),MAP_MIRAGE_TOWER_1F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_2F_PLAN,923,Tour Mirage (étage 1),MAP_MIRAGE_TOWER_2F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_3F_PLAN,924,Tour Mirage (étage 2),MAP_MIRAGE_TOWER_3F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_4F_PLAN,925,Tour Mirage (étage 3),MAP_MIRAGE_TOWER_4F,0,0
+ruby-sapphire-emerald,MT_CHIMNEY_PLAN,926,Mont Chimnée,MAP_MT_CHIMNEY,0,0
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ENTRANCE,0,0
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM1,22,0
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM2,44,0
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM3,64,0
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM4,0,23
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM5,20,23
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM6,42,23
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM7,68,23
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM8,0,50
+ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM9,13,50
+ruby-sapphire-emerald,SHOAL_CAVE_HIGH_TIDE_1F_PLAN,928,Grotte Tréfonds (marée haute),MAP_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM,0,0
+ruby-sapphire-emerald,SHOAL_CAVE_HIGH_TIDE_1F_PLAN,928,Grotte Tréfonds (marée haute),MAP_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM,37,0
+ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée basse),MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM,0,0
+ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée basse),MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM,37,0
+ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée basse),MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM,0,40
+ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée basse),MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM,33,40
+ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_B1F_PLAN,930,"Grotte Tréfonds (marée basse, salle de glace)",MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM,0,0
+ruby-sapphire-emerald,SKY_PILLAR_1F_PLAN,931,Pilier Céleste (rez-de-chaussée),MAP_SKY_PILLAR_1F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_2F_PLAN,932,Pilier Céleste (étage 1),MAP_SKY_PILLAR_2F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_3F_PLAN,933,Pilier Céleste (étage 2),MAP_SKY_PILLAR_3F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_4F_PLAN,934,Pilier Céleste (étage 3),MAP_SKY_PILLAR_4F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_5F_PLAN,935,Pilier Céleste (étage 4),MAP_SKY_PILLAR_5F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_1F_PLAN,936,Colline Dresseurs (rez-de-chaussée),MAP_TRAINER_HILL_1F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_2F_PLAN,937,Colline Dresseurs (étage 1),MAP_TRAINER_HILL_2F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_3F_PLAN,938,Colline Dresseurs (étage 2),MAP_TRAINER_HILL_3F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_4F_PLAN,939,Colline Dresseurs (étage 3),MAP_TRAINER_HILL_4F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_ROOF_PLAN,940,Colline Dresseurs (toit),MAP_TRAINER_HILL_ROOF,0,0
