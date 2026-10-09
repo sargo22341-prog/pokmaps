@@ -42,7 +42,7 @@ jobs:
           echo "APK debug : ${size} octets" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publier l'APK debug
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: pokemaps-debug-apk
           path: app/build/outputs/apk/debug/*.apk
@@ -51,7 +51,7 @@ jobs:
 
       - name: Publier les rapports en cas d'échec
         if: failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: rapports
           path: |

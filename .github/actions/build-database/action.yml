@@ -39,7 +39,8 @@ runs:
     - name: Tests des assets générés
       shell: bash
       working-directory: tools
-      run: python -m pytest -q
+      # L'éditeur des emplacements (Tk) a besoin d'un affichage : écran virtuel sur le runner.
+      run: xvfb-run -a python -m pytest -q
 
     - name: Tests du pipeline
       shell: bash
