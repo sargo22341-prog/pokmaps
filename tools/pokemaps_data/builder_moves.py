@@ -6,8 +6,9 @@ from collections import defaultdict
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .games import Game, PretFormat
 from .pokeapi import optional_int
-from .pret_moves import GameMoves, MoveEffect, move_effects, read_pret_moves
+from .pret_moves import GameMoves, MoveEffect, PretMove, move_effects, read_pret_moves
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -17,7 +18,12 @@ LAST_TYPE_BASED_DAMAGE_CLASS_GENERATION = 3
 DAMAGE_CLASSES = {1: "status", 2: "physical", 3: "special"}
 
 # Attaques dont la constante pret ne correspond pas à l'identifiant PokéAPI (une fois les tirets retirés).
-MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick", "faint-attack": "feint-attack"}
+MOVE_ALIASES = {
+    "psychic-m": "psychic",
+    "hi-jump-kick": "high-jump-kick",
+    "faint-attack": "feint-attack",
+    "smelling-salt": "smelling-salts",
+}
 
 _MOVE_FIELDS = ("type_id", "power", "pp", "accuracy")
 
@@ -150,10 +156,7 @@ class MoveTables:
         if missing:
             raise ValueError(f"Désassemblage pret manquant pour lire les effets des attaques : {missing}")
         pret_moves = {
-            game.version_group: GameMoves(
-                game.pret_format, read_pret_moves(self.builder.pret_roots[game.version_group], game.pret_format)
-            )
-            for game in self.builder.games
+            game.version_group: GameMoves(game.pret_format, self._pret_moves(game)) for game in self.builder.games
         }
         by_game = move_effects(pret_moves)
         return {
@@ -163,6 +166,11 @@ class MoveTables:
             }
             for row in self.builder.vg_rows
         }
+
+    def _pret_moves(self, game: Game) -> list[PretMove]:
+        if game.pret_format is PretFormat.GEN3:
+            return self.builder.gen3_repo(game, "les effets des attaques").moves
+        return read_pret_moves(self.builder.pret_roots[game.version_group], game.pret_format)
 
     def _values_in(self, vg: int, move: dict[str, str], changes: list[dict[str, str]]) -> dict[str, str]:
         """Type, puissance, PP et précision de l'attaque dans le groupe de versions `vg`."""

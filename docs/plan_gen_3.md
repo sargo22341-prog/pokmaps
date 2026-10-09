@@ -353,20 +353,52 @@ Branche Remake 1G :
 Nouveaux modules, chacun sous 600 lignes et nommés par responsabilité (sur le modèle de `pret_gen2*.py`).
 Le format est commun, mais chaque lecteur choisit sa variante par dépôt (tableaux de la phase 0) :
 
-- [ ] `pret_gen3.py` : façade `Gen3PretRepo`, branchée dans `pret_reader.open_pret` et
+- [x] `pret_gen3.py` : façade `Gen3PretRepo`, branchée dans `pret_reader.open_pret` et
       `DatabaseBuilder` (équivalent de `gen2_repo`).
-- [ ] `pret_gen3_source.py` : lecture bornée et validée du JSON et des initialiseurs C simples
+- [x] `pret_gen3_source.py` : lecture bornée et validée du JSON et des initialiseurs C simples
       (`[MOVE_X] = { .effect = …, }`), avec résolution des `#if` / `.ifdef` de version ; toute forme inconnue
       arrête la lecture (même principe que `conditional_lines`).
-- [ ] `pret_gen3_maps.py` : en-têtes, layouts, connexions (dont `dive` / `emerge`), warps, événements
+- [x] `pret_gen3_maps.py` : en-têtes, layouts, connexions (dont `dive` / `emerge`), warps, événements
       (`object_events` hors clones, `warp_events`, `coord_events`, `bg_events` dont objets cachés),
       `shared_events_map`, drapeaux qui cachent les objets.
-- [ ] `pret_gen3_tilesets.py` : tiles 4 bpp indexées, palettes JASC, métatiles à deux couches ; attributs u16
+- [x] `pret_gen3_tilesets.py` : tiles 4 bpp indexées, palettes JASC, métatiles à deux couches ; attributs u16
       (Hoenn) ou u32 (Remake 1G) ; palettes primaires 0-5 / secondaires 6-12 (Hoenn), 0-6 / 7-12 (Remake 1G) ;
       tables de tilesets en assembleur (Rubis) ou en C (Émeraude, Rouge Feu).
-- [ ] `pret_gen3_moves.py` : effets et probabilités des attaques ; `move_effects.csv` au format `gen3`.
-- [ ] Tests unitaires de chaque lecteur sur des extraits des trois dépôts ; tests `pipeline` sur les sources
+- [x] `pret_gen3_moves.py` : effets et probabilités des attaques ; `move_effects.csv` au format `gen3`.
+- [x] Tests unitaires de chaque lecteur sur des extraits des trois dépôts ; tests `pipeline` sur les sources
       épinglées.
+
+### Résultats de la phase 2
+
+- Lecteur branché dans `open_pret` et mis en cache par `DatabaseBuilder.gen3_repo` ; les effets d'attaques
+  du générateur réutilisent ce lecteur. Les jeux restent dans `GEN3_GAMES` : leur rendu et leur aperçu complet
+  arrivent en phase 3, avant l'ajout à `GAMES_IN_PROGRESS`.
+- Lecture des cartes : Rubis/Saphir **394**, Émeraude **518**, Rouge Feu/Vert Feuille **425**. Les événements
+  partagés sont résolus sans récursion ; les clones du remake sont exclus explicitement. Connexions Plongée,
+  métadonnées des en-têtes, élévations, déclencheurs, météo, objets cachés, quantités et drapeaux sont conservés.
+  `shared_scripts_map` est un label de script, pas nécessairement le nom d'une carte (ex. `SecretBase`).
+- Seuls les layouts référencés par les cartes sont chargés : les sources contiennent des prototypes inutilisés
+  de taille incohérente et des entrées vides. Les fichiers utilisés sont validés contre leurs dimensions.
+- Tilesets : **58 / 75 / 68** en comptant les variantes de pointeurs de Rubis et d'Émeraude. Les références
+  des en-têtes sont suivies séparément pour les images, palettes et métatuiles partagées. Les callbacks
+  d'animation sont conservés ; `map_palettes` combine 0–5 / 6–12 (Hoenn) et 0–6 / 7–12 (remakes).
+- **354 attaques par dépôt**, reliées à PokéAPI, avec **198 effets français**. Trois effets portent des noms
+  différents dans Rubis mais les mêmes identifiants numériques : seule la recherche de leur texte est normalisée.
+  `SMELLING_SALT` est relié à `smelling-salts`. Les probabilités GBA restent en pourcentage, sans conversion
+  vers les chances sur 256 des générations précédentes. Les soins ne dépendent plus de l'heure en génération 3.
+- Tests autonomes sur extraits C, assembleur, JSON, images et binaires réduits ; tests `pipeline` sur les trois
+  sources épinglées, leurs cartes, leurs tilesets et toutes leurs attaques. Aucun asset de troisième génération
+  n'est embarqué à cette phase ; aucun changement Android ni essai sur téléphone n'est nécessaire.
+- Contrôles : Ruff et formatage verts, **224 tests ordinaires**, **123 tests pipeline** ; les dix tests
+  pipeline GBA sont reconfirmés après la relecture finale. La génération des six jeux actuels dans
+  `tools/build/preview/gen3-phase2-validation` et sa validation passent : inventaire SHA-256 identique aux
+  assets versionnés. Les limites de 600 lignes par fichier et 60 par fonction sont vérifiées par AST.
+- Mesures locales du 9 octobre 2026 : lecture complète des trois dépôts en **2,63 s** avec les sources en cache ;
+  cartes embarquées inchangées : **6 140 602 octets**, **5 765 fichiers WebP**. APK debug existant, sans nouvelle
+  compilation : **65 052 300 octets** (62,04 Mio). Objets Git : **23 394 Kio** (`git count-objects -v`,
+  objets libres et paquets). Aucun nouvel asset final ni dépendance ; la durée de la génération de vérification
+  n'a pas été chronométrée. Les restrictions Windows sur les dossiers temporaires de pytest ont nécessité
+  une exécution hors sandbox ; les essais finaux passent sans avertissement.
 
 ## Phase 3 — Cartes
 

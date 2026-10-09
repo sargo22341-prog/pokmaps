@@ -169,6 +169,15 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   Éclate-Roc, essaims, Concours de capture d'insectes, `data/wild/`), PokéAPI les décrivant mal pour ces jeux
   (moments de la journée perdus, emplacements d'essaim manquants) ; dons, Pokémon fixes et échanges restent ceux de
   PokéAPI.
+- **[pret/pokeruby](https://github.com/pret/pokeruby)**, **[pret/pokeemerald](https://github.com/pret/pokeemerald)**
+  et **[pret/pokefirered](https://github.com/pret/pokefirered)** : lecteurs préparatoires de la troisième génération,
+  testés sur leurs commits épinglés. `Gen3PretRepo` lit les cartes et événements JSON, les layouts de 16 px,
+  les pixels indexés 4 bpp, palettes JASC et attributs de métatuiles u16 (Hoenn) ou u32 (remakes), ainsi que
+  les effets d'attaques et leurs probabilités en pourcentage. Les sources C et assembleur sont sélectionnées
+  par version, en anglais, révision 0, sans options de correction. Les effets français sont dans
+  `move_effects.csv`, format `gen3`. Les layouts inutilisés ne sont pas chargés ; les données utilisées
+  inconnues ou incohérentes arrêtent la lecture. Le rendu des cartes et l'intégration de ces jeux à l'aperçu
+  complet restent dans les phases suivantes du [plan génération 3](docs/plan_gen_3.md).
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et

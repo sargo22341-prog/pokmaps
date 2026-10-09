@@ -7,8 +7,9 @@ from pathlib import Path
 from .games import Game, PretFormat
 from .pret import PretRepo
 from .pret_gen2 import Gen2PretRepo
+from .pret_gen3 import Gen3PretRepo
 
-PretReader = PretRepo | Gen2PretRepo
+PretReader = PretRepo | Gen2PretRepo | Gen3PretRepo
 
 
 def open_pret(game: Game, root: Path) -> PretReader:
@@ -19,4 +20,4 @@ def open_pret(game: Game, root: Path) -> PretReader:
         case PretFormat.GEN2:
             return Gen2PretRepo(root, game.pret_versions)
         case PretFormat.GEN3:
-            raise ValueError(f"Cartes de la 3e génération pas encore lues dans pret : {game.version_group}")
+            return Gen3PretRepo(root, game.pret_versions)
