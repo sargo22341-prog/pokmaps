@@ -14,7 +14,8 @@ class VersionChoice:
         ttk.Label(parent, text="Carte affichée").pack(anchor="w")
         self.choice = ttk.Combobox(parent, state="readonly", width=44)
         self.choice.pack(fill="x", pady=(0, 4))
-        self.only_displayed = tk.BooleanVar(value=True)
+        # Les points propres à un groupe restent rares : par défaut, on édite les points communs à la famille.
+        self.only_displayed = tk.BooleanVar(value=False)
         self.check = ttk.Checkbutton(parent, variable=self.only_displayed, command=on_scope)
         self.check.pack(anchor="w", pady=(0, 8))
         self.groups: tuple[str, ...] = ()
@@ -33,7 +34,6 @@ class VersionChoice:
 
     def select(self, group: str) -> None:
         self.choice.current(self.groups.index(group))
-        self.only_displayed.set(True)
         self.check.configure(text=f"Points uniquement pour {_VERSION_LABELS[group]}")
 
     def _changed(self, _event: tk.Event) -> None:

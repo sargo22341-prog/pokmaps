@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass
 from enum import Enum
 
 from pokemaps_data.map_spots import Point, TerrainKey, selected_key
@@ -14,16 +13,6 @@ class Toggle(Enum):
 
     ADDED = "added"
     REMOVED = "removed"
-
-
-@dataclass(frozen=True)
-class Shortfall:
-    """Terrain qui a moins d'emplacements que de Pokémon à y dessiner."""
-
-    key: TerrainKey
-    map_name: str
-    points: int
-    required: int
 
 
 class SpotSession:
@@ -73,15 +62,6 @@ class SpotSession:
     def mark_written(self) -> None:
         self.curated = self.merged()
         self.pending = {}
-
-    def shortfalls(self, required: Callable[[TerrainKey], tuple[str, int]]) -> list[Shortfall]:
-        """Terrains modifiés qui n'ont pas assez d'emplacements ; `required` donne le nom du lieu et le besoin."""
-        result = []
-        for key, points in sorted(self.pending.items()):
-            name, needed = required(key)
-            if len(points) < needed:
-                result.append(Shortfall(key, name, len(points), needed))
-        return result
 
     def _set(self, key: TerrainKey, generated: frozenset[Point], points: frozenset[Point]) -> None:
         # Revenir à l'état enregistré annule la modification : le terrain n'est pas figé sans raison.

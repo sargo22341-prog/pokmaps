@@ -57,14 +57,6 @@ def test_only_edited_terrains_are_written() -> None:
     assert session.points(KEY, GENERATED) == frozenset()
 
 
-def test_shortfalls_list_edited_terrains_with_too_few_points() -> None:
-    session = SpotSession({})
-    session.toggle(KEY, GENERATED, (904, 3272), never)
-    assert session.shortfalls(lambda _key: ("Route 1", 3)) == []
-    [shortfall] = session.shortfalls(lambda _key: ("Route 1", 4))
-    assert (shortfall.map_name, shortfall.points, shortfall.required) == ("Route 1", 3, 4)
-
-
 def test_required_spots_follow_the_app_grouping() -> None:
     lines = [
         line("Rouge", "walk", 16),

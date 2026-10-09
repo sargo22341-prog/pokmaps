@@ -15,7 +15,9 @@ import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapCatalog
+import org.opensources.pokmaps.domain.map.MapSpot
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
@@ -62,7 +64,9 @@ class MapSelectionTest {
             } else {
                 original.areas +
                     (room.id to original.areas.getValue(route.id).map { it.copy(mapId = room.id) })
-            }
+            },
+            // Un emplacement d'herbe dans la pièce : sans emplacement, aucun Pokémon n'y serait dessiné.
+            spots = original.spots + (room.id to listOf(MapSpot(room.id, SpotKind.GRASS, 400, 60)))
         )
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         return catalog

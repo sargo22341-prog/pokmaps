@@ -20,14 +20,15 @@ from pokemaps_data.sources import PREVIEW_DIR
 
 from .canvas import SpotCanvas
 from .catalog import EditorCatalog, EditorMap, EncounterLine, Family, MapMark, required_spots, used_by_app
+from .coverage import PlacementNeeds, Shortfall
 from .error_panel import ErrorPanel
 from .overlays import Layer, OverlayPainter, wild_preview
-from .placement_requirements import placement_shortfalls, shortfall_text
 from .rendering import MapImages
 from .session import SpotSession
 from .terrain import WildTerrains
 from .validation import SpotError, save_spots, spot_errors, write_errors
 from .version_choice import VersionChoice
+from .warning_panel import WarningPanel
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = PREVIEW_DIR if GAMES_IN_PROGRESS else ROOT / "app/src/main/assets"
@@ -69,6 +70,8 @@ class MapEditor:
         self.generated: dict[str, frozenset[Point]] = {}
         self.terrains: list[str] = []
         self.errors: list[SpotError] = []
+        self.warnings: list[Shortfall] = []
+        self.needs = PlacementNeeds(self.catalog, self.families, self.wild_terrains)
         self._build_window()
         self._load_family()
         self._update_errors()
@@ -88,6 +91,8 @@ class MapEditor:
         right.grid(row=0, column=1, sticky="nsew")
         self.error_panel = ErrorPanel(right, self._go_to_error, self._remove_error)
         self.error_panel.widget.pack(fill="x", pady=(0, 4))
+        self.warning_panel = WarningPanel(right, self._go_to_warning)
+        self.warning_panel.widget.pack(fill="x", pady=(0, 4))
         self.canvas = SpotCanvas(right, self._click)
         self.canvas.widget.pack(fill="both", expand=True)
 
@@ -298,46 +303,59 @@ class MapEditor:
         if not self._used(kind):
             return "Les herbes de ce lieu ont des emplacements : l'application n'utilise pas son sol."
         needed = required_spots(self.lines, kind)
+        if needed and not count:
+            return f"Erreur : aucun emplacement pour {needed} Pokémon à placer, aucun ne serait affiché."
         if count < needed:
             return (
-                f"Attention : {count} emplacement(s) pour {needed} Pokémon à placer. "
-                "L'application les rangera en grille au milieu du terrain."
+                f"Attention : {count} emplacement(s) pour {needed} Pokémon à placer. L'application affichera un "
+                "Pokémon tiré au hasard par emplacement ; les autres seront visibles dans la liste seulement."
             )
         return ""
 
     # --- Enregistrement et vérifications ------------------------------------------
 
     def _update_errors(self) -> None:
-        self.errors = spot_errors(self.session, self.families, self.wild_terrains)
+        shortfalls = self.needs.shortfalls(self.session)
+        self.warnings = [item for item in shortfalls if not item.blocking]
+        empty = [SpotError(item.key, None, item.message, item.version_group) for item in shortfalls if item.blocking]
+        self.errors = spot_errors(self.session, self.families, self.wild_terrains) + empty
         self.error_panel.show(self.errors)
+        self.warning_panel.show(self.warnings)
         try:
             write_errors(self.errors, ERROR_REPORT)
         except OSError as error:
             messagebox.showerror("Rapport d'erreurs non enregistré", f"{ERROR_REPORT}\n\n{error}")
 
     def _go_to_error(self, error: SpotError) -> None:
-        index = next((i for i, family in enumerate(self.families) if family.identifier == error.key.family), None)
+        self._go_to(error.key, error.version_group, error.point, error.label)
+
+    def _go_to_warning(self, warning: Shortfall) -> None:
+        self._go_to(warning.key, warning.version_group, None, warning.label)
+
+    def _go_to(self, key: TerrainKey, version_group: str, point: Point | None, label: str) -> None:
+        """Ouvre le lieu et le terrain de `key`, sur le plan de `version_group` (ou du groupe de `key`)."""
+        index = next((i for i, family in enumerate(self.families) if family.identifier == key.family), None)
         if index is None:
             return
         self.family_choice.current(index)
         self.family = self.families[index]
-        self._load_family(error.key.map_identifier)
-        if error.key.version_group:
-            self.version_choice.select(error.key.version_group)
+        self._load_family(key.map_identifier)
+        shown = key.version_group or version_group
+        if shown:
+            self.version_choice.select(shown)
             self._select_map()
-        else:
-            self.version_choice.only_displayed.set(False)
-        if self.current is None or self.current.identifier != error.key.map_identifier:
+        self.version_choice.only_displayed.set(bool(key.version_group))
+        if self.current is None or self.current.identifier != key.map_identifier:
             self.status.configure(text="Cette carte est absente de la base de l'éditeur.")
             return
-        if error.key.kind not in self.terrains:
-            self.terrains.append(error.key.kind)
+        if key.kind not in self.terrains:
+            self.terrains.append(key.kind)
             self.terrain_choice["values"] = [TERRAIN_LABELS[kind] for kind in self.terrains]
-        self.terrain_choice.current(self.terrains.index(error.key.kind))
+        self.terrain_choice.current(self.terrains.index(key.kind))
         self._select_terrain()
-        if error.point is not None:
-            self.canvas.focus(error.point)
-        self.status.configure(text=error.label)
+        if point is not None:
+            self.canvas.focus(point)
+        self.status.configure(text=label)
 
     def _remove_error(self, error: SpotError) -> None:
         if error.point is None:
@@ -354,11 +372,6 @@ class MapEditor:
             return
         if not self.session.has_changes:
             self.status.configure(text="Aucune modification à enregistrer.")
-            return
-        shortfalls = placement_shortfalls(self.catalog, self.families, self.session)
-        if shortfalls and not messagebox.askyesno(
-            "Emplacements insuffisants", shortfall_text(shortfalls, TERRAIN_LABELS)
-        ):
             return
         try:
             save_spots(self.session, self.families, self.wild_terrains, SPOTS_CSV)
