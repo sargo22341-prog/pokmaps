@@ -7,3 +7,4 @@ Voir la section publication de `README.md`.
 <!-- notes -->
 
 - Carte : quand un terrain manque de place, un Pokémon tiré au hasard s'affiche par emplacement et les autres restent visibles dans la liste du lieu.
+- Carte : les emplacements des Pokémon sauvages retouchés dans les six jeux sont désormais pris en compte.
