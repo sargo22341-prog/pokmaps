@@ -9,6 +9,7 @@ from functools import cached_property
 
 from .games import Game, Region
 from .maps_layout import GameMaps, LayoutCuration
+from .maps_terrain_gen3 import wild_cells
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Map
 from .pret_gen3_source import read_text
@@ -18,6 +19,9 @@ UNDERWATER = "HOENN_UNDERWATER"
 
 class Gen3GameMaps(GameMaps):
     block_px = 16
+
+    def cells(self, const: str) -> dict[str, list[tuple[int, int]]]:
+        return wild_cells(self.repo, self.maps[const])
 
     @property
     def world_numbers(self) -> dict[str, int]:

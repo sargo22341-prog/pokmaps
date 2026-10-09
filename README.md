@@ -256,7 +256,8 @@ Les tables événementielles B à I de la Grotte Métamo restent listées avec l
 ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
 Les cartes préparatoires sont dans `assets/maps/emerald`, `assets/maps/ruby-sapphire` et
 `assets/maps/firered-leafgreen` (Kanto et Îles Sevii) ; les jeux entreront dans l'aperçu complet avec leurs
-rencontres et personnages. Ils ne sont pas encore sélectionnables dans l'application.
+personnages. Un aperçu PC des rencontres est déjà disponible pour préparer les emplacements (commande ci-dessous).
+Ils ne sont pas encore sélectionnables dans l'application.
 Les bilans des [cartes Hoenn](docs/generations/cartes-hoenn.md) et des
 [cartes des remakes](docs/generations/cartes-remake-1g.md) décrivent les assemblages, variantes et mesures.
 
@@ -382,6 +383,22 @@ Cette commande régénère les deux variantes et leur inventaire SHA-256 sans mo
 Pour les cartes préparatoires de Rouge Feu/Vert Feuille, utiliser
 `python tools/build_data.py --remake-maps-only`, puis les mêmes validations et tests du pipeline.
 La génération complète inclut les trois groupes de cartes GBA ; les options ciblées sont exclusives.
+
+Pour préparer uniquement les rencontres de troisième génération sur les cartes versionnées :
+
+```bash
+python tools/build_data.py --gen3-encounters-only --preview tools/build/preview/gen3-encounters
+python tools/map_editor.py --assets tools/build/preview/gen3-encounters
+```
+
+Cet aperçu contient les cinq versions, les rencontres pret, les taux du moteur, les conditions de scénario,
+les errants et les terrains. Les personnages et offres seront intégrés en phase 5 ; leurs calques restent vides
+dans cet aperçu. Les cartes préparatoires doivent déjà être présentes dans les assets. Les sprites manquants
+sont téléchargés aux versions épinglées, puis réutilisés depuis le cache. L'application et son inventaire
+`assets.sha256` restent inchangés. `encounter_comparison.json`, dans l'aperçu, signale chaque table dont les espèces,
+niveaux ou probabilités diffèrent de PokéAPI ; le [bilan des rencontres communes](docs/generations/rencontres-gen3-communs.md)
+explique les écarts. `map_areas.csv` accepte une colonne facultative `version_group` : les lignes d'un groupe
+remplacent les lignes communes de la même carte, notamment pour le Parc Safari d'Émeraude.
 
 La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
 elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.

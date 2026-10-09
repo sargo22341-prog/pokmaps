@@ -5,9 +5,11 @@ from __future__ import annotations
 from functools import cached_property
 from pathlib import Path
 
+from .maps_terrain_gen3 import TerrainRules, terrain_rules
 from .pret_gen3_maps import Gen3Layout, Gen3Map, read_layouts, read_maps
 from .pret_gen3_source import conditional_text, source_path
 from .pret_gen3_tilesets import Gen3Tileset, read_tilesets
+from .pret_gen3_wild import WildTable, wild_tables
 from .pret_moves import PretMove
 
 
@@ -55,3 +57,19 @@ class Gen3PretRepo:
         from .pret_gen3_moves import read_moves
 
         return read_moves(self.root)
+
+    @cached_property
+    def wild_tables(self) -> dict[str, tuple[WildTable, ...]]:
+        return {version: wild_tables(self, version) for version, _ in self.versions}
+
+    @cached_property
+    def wild_methods(self) -> dict[str, frozenset[str]]:
+        methods: dict[str, frozenset[str]] = {}
+        for tables in self.wild_tables.values():
+            for table in tables:
+                methods[table.map_const] = methods.get(table.map_const, frozenset()) | {table.method}
+        return methods
+
+    @cached_property
+    def terrain_rules(self) -> TerrainRules:
+        return terrain_rules(self)

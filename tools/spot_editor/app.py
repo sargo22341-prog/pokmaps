@@ -6,6 +6,7 @@ généré par build_data.py, et non les assets de l'application qui ne les conti
 
 from __future__ import annotations
 
+import argparse
 import sqlite3
 import tkinter as tk
 from collections.abc import Callable
@@ -32,7 +33,6 @@ from .warning_panel import WarningPanel
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = PREVIEW_DIR if GAMES_IN_PROGRESS else ROOT / "app/src/main/assets"
-DATABASE = ASSETS / "database/pokedex.db"
 CACHE = ROOT / "tools/.cache"
 ERROR_REPORT = ROOT / "tools/build/map_spot_errors.json"
 TERRAIN_LABELS = {
@@ -47,11 +47,11 @@ _WARNING_COLOR = "#b3261e"
 
 
 class MapEditor:
-    def __init__(self, root: tk.Tk) -> None:
+    def __init__(self, root: tk.Tk, assets: Path = ASSETS) -> None:
         self.root = root
-        self.catalog = EditorCatalog(DATABASE)
-        self.images = MapImages(ASSETS / "maps")
-        self.painter = OverlayPainter(ASSETS)
+        self.catalog = EditorCatalog(assets / "database/pokedex.db")
+        self.images = MapImages(assets / "maps")
+        self.painter = OverlayPainter(assets)
         self.wild_terrains = WildTerrains(CACHE)
         self.session = SpotSession(read_spots())
         self.families = self.catalog.families()
@@ -394,9 +394,12 @@ class MapEditor:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--assets", type=Path, default=ASSETS, help="assets ou aperçu à éditer")
+    args = parser.parse_args()
     root = tk.Tk()
     try:
-        MapEditor(root)
+        MapEditor(root, args.assets)
     except (OSError, sqlite3.Error, ValueError) as error:
         root.destroy()
         raise SystemExit(str(error)) from error

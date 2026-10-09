@@ -14,7 +14,7 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
-from .games import map_families
+from .games import DECLARED_GAMES, map_families
 
 SPOTS_CSV = Path(__file__).resolve().parents[1] / "data/map_spots.csv"
 SPOT_KINDS = ("grass", "water", "floor", "tree", "rock")
@@ -86,14 +86,15 @@ def _parse_row(row: dict[str, str], where: str) -> tuple[TerrainKey, Point | Non
     if None in row or any(value is None for value in row.values()):
         raise ValueError(f"{where} : nombre de colonnes invalide")
     family, kind = row["family"], row["kind"]
-    if family not in map_families():
+    families = map_families(DECLARED_GAMES)
+    if family not in families:
         raise ValueError(f"{where} : famille de cartes inconnue {family!r}")
     if kind not in SPOT_KINDS:
         raise ValueError(f"{where} : terrain inconnu {kind!r}")
     if not row["map_identifier"]:
         raise ValueError(f"{where} : carte manquante")
     group = row.get("version_group", "")
-    if group and group not in map_families()[family]:
+    if group and group not in families[family]:
         raise ValueError(f"{where} : groupe de versions incompatible avec la famille {group!r}")
     key = TerrainKey(family, row["map_identifier"], kind, group)
     if not row["x"] and not row["y"]:
