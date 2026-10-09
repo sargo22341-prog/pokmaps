@@ -28,7 +28,14 @@ data class PokemonDetails(
     val traits: PokemonTraits,
     val eggMoves: List<LearnedMove> = emptyList(),
     val tutorMoves: List<LearnedMove> = emptyList()
-)
+) {
+    fun moves(tab: MoveTab): List<LearnedMove> = when (tab) {
+        MoveTab.LEVEL_UP -> levelUpMoves
+        MoveTab.MACHINE -> machineMoves
+        MoveTab.EGG -> eggMoves
+        MoveTab.TUTOR -> tutorMoves
+    }
+}
 
 /**
  * Données des générations suivantes (voir [GenerationFeature]) : objets tenus dans la version du jeu, sexe, œufs et
@@ -65,7 +72,7 @@ data class Machine(val identifier: String, val name: String) {
     }
 }
 
-/** Attaque apprise : par niveau (`level`) ou par CT/CS (`machine`). */
+/** Attaque apprise : par niveau (`level`) ou par CT/CS (`machine`), avec une précision si besoin (`note`). */
 data class LearnedMove(
     val moveId: Int,
     val name: String,
@@ -75,7 +82,8 @@ data class LearnedMove(
     val accuracy: Int?,
     val pp: Int,
     val level: Int = 0,
-    val machine: Machine? = null
+    val machine: Machine? = null,
+    val note: MoveNote? = null
 )
 
 enum class DamageClass {

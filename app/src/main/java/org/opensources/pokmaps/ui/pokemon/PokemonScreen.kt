@@ -36,6 +36,8 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
+import org.opensources.pokmaps.domain.pokemon.MoveNote
+import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.ui.common.TypeBadge
@@ -127,27 +129,19 @@ private fun PokemonContent(
         if (state.has(GenerationFeature.GENDER)) section(R.string.pokemon_gender) { Gender(details.traits) }
         if (state.has(GenerationFeature.BREEDING)) section(R.string.pokemon_breeding) { Breeding(details.traits) }
         state.catch?.let { section(R.string.catch_title) { CatchCalculator(it, onAction) } }
+        val tabs = state.moveTabs
         section(R.string.pokemon_moves) {
             PrimaryTabRow(selectedTabIndex = movesTab) {
-                (if (game.generationId >= 2) MOVE_TABS else MOVE_TABS.take(2)).forEachIndexed { index, label ->
+                tabs.forEachIndexed { index, tab ->
                     Tab(
                         selected = movesTab == index,
                         onClick = { movesTab = index },
-                        text = { Text(stringResource(label)) }
+                        text = { Text(stringResource(moveTabLabel(tab))) }
                     )
                 }
             }
         }
-        moves(
-            when (movesTab) {
-                0 -> details.levelUpMoves
-                1 -> details.machineMoves
-                2 -> details.eggMoves
-                3 -> details.tutorMoves
-                else -> error("Onglet inconnu : $movesTab")
-            },
-            links
-        )
+        moves(details.moves(tabs[movesTab]), links)
         item { Box(Modifier.height(24.dp)) }
     }
 }
@@ -219,12 +213,25 @@ private fun MoveRow(move: LearnedMove, clickLabel: String, onClick: () -> Unit) 
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 64.dp)
         )
+        move.note?.let { note ->
+            Text(
+                stringResource(moveNoteText(note)),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.tertiary,
+                modifier = Modifier.padding(start = 64.dp)
+            )
+        }
     }
 }
 
-private val MOVE_TABS = listOf(
-    R.string.pokemon_moves_level,
-    R.string.pokemon_moves_machine,
-    R.string.pokemon_moves_egg,
-    R.string.pokemon_moves_tutor
-)
+private fun moveTabLabel(tab: MoveTab): Int = when (tab) {
+    MoveTab.LEVEL_UP -> R.string.pokemon_moves_level
+    MoveTab.MACHINE -> R.string.pokemon_moves_machine
+    MoveTab.EGG -> R.string.pokemon_moves_egg
+    MoveTab.TUTOR -> R.string.pokemon_moves_tutor
+}
+
+private fun moveNoteText(note: MoveNote): Int = when (note) {
+    MoveNote.LIGHT_BALL_PARENT -> R.string.move_note_light_ball
+    MoveNote.EXTERNAL_EVENT -> R.string.move_note_external_event
+}

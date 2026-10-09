@@ -21,6 +21,20 @@ MOVE_ALIASES = {"psychic-m": "psychic", "hi-jump-kick": "high-jump-kick", "faint
 
 _MOVE_FIELDS = ("type_id", "power", "pp", "accuracy")
 
+# Méthodes d'apprentissage écrites dans la base (pokemon_move.method) : toute autre arrête la génération.
+LEARN_METHODS = frozenset(
+    {
+        "level-up",
+        "machine",
+        "egg",
+        "tutor",
+        # Électacle de Pichu, né d'un parent qui tient un Ballon Lumière (Émeraude).
+        "light-ball-egg",
+        # Surf du Pikachu Surfeur de Pokémon Stadium : événement externe (Rouge, Bleu et Jaune).
+        "stadium-surfing-pikachu",
+    }
+)
+
 
 class MoveTables:
     def __init__(self, builder: DatabaseBuilder) -> None:
@@ -38,6 +52,8 @@ class MoveTables:
             if vg not in self.builder.vg_ids or pokemon_id not in species_of_pokemon:
                 continue
             method = methods[int(row["pokemon_move_method_id"])]
+            if method not in LEARN_METHODS:
+                raise ValueError(f"Méthode d'apprentissage inconnue : {method} ({dict(row)})")
             level = int(row["level"]) if method == "level-up" else 0
             rows.add((species_of_pokemon[pokemon_id], vg, int(row["move_id"]), method, level))
         return sorted(rows)
@@ -72,24 +88,35 @@ class MoveTables:
         """Types d'attaque absents du tableau des types (builder.type_rows) : « ??? », celui de Malédiction de la
         2e à la 4e génération. Il n'a ni efficacité ni catégorie : Malédiction est une attaque de statut."""
         moves = self.api.by_id("moves")
-        changelog: dict[int, list[dict[str, str]]] = defaultdict(list)
-        for row in self.api.table("move_changelog"):
-            changelog[int(row["move_id"])].append(row)
         return (
             frozenset(
-                int(self._values_in(vg, moves[move_id], changelog[move_id])["type_id"])
+                int(self._values_in(vg, moves[move_id], self._changelog[move_id])["type_id"])
                 for vg, move_ids in self.moves_by_version_group.items()
                 for move_id in move_ids
             )
             - self.builder.type_rows.keys()
         )
 
-    def move_version_group_table(self) -> list[tuple]:
-        moves = self.api.by_id("moves")
-        # Historique : « avant le groupe de versions X, la valeur était V ».
+    @cached_property
+    def _changelog(self) -> dict[int, list[dict[str, str]]]:
+        """Historique de chaque attaque : « avant le groupe de versions X, la valeur était V »."""
         changelog: dict[int, list[dict[str, str]]] = defaultdict(list)
         for row in self.api.table("move_changelog"):
             changelog[int(row["move_id"])].append(row)
+        return changelog
+
+    def machine_types(self) -> dict[int, int]:
+        """CT / CS -> type de son attaque dans le premier jeu configuré qui l'a (icône de l'objet)."""
+        moves = self.api.by_id("moves")
+        types: dict[int, int] = {}
+        for vg, item_id, move_id in self.machine_rows:
+            values = self._values_in(vg, moves[move_id], self._changelog[move_id])
+            types.setdefault(item_id, int(values["type_id"]))
+        return types
+
+    def move_version_group_table(self) -> list[tuple]:
+        moves = self.api.by_id("moves")
+        changelog = self._changelog
         rows = []
         for vg in self.builder.vg_ids:
             effects = self.effects[vg]

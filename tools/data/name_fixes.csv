@@ -53,3 +53,15 @@ area,kanto-victory-road-1/1f,Route Victoire,une seule carte dans Or et Argent ; 
 area,goldenrod-city/department-store-5f,Centre Commercial de Doublonville (4e étage),abréviation dans PokéAPI
 condition,swarm-yes,Pendant un essaim,PokéAPI traduit « swarm » par « tempête »
 condition,bug-catching-contest-yes,"Concours de capture d'insectes (mardi, jeudi et samedi)",nom français absent de PokéAPI ; jours du Concours dans Or et Argent
+method,feebas-tile-fishing,En pêchant sur une case à Barpau,PokéAPI dit « tuile »
+method,wailmer-pail,En arrosant un Simularbre avec le Wailmerrosoir,PokéAPI mêle le nom anglais et le nom français de l'objet
+method,colosseum-bonus-disc-jpn,Reçu du disque bonus de Pokémon Colosseum (Japon),accent manquant dans PokéAPI
+method,colosseum-bonus-disc-us,Reçu du disque bonus de Pokémon Colosseum (États-Unis),aligné sur le disque japonais
+method,pokemon-channel-pal,Reçu de Pokémon Channel (version européenne),PokéAPI dit « version PAL »
+item,vs-seeker,Cherche VS,nom de Rouge Feu et Vert Feuille ; PokéAPI donne celui des jeux récents (Cherch'Combat)
+location,hoenn-pokecenter,Centre Pokémon (Hoenn),nom français absent de PokéAPI ; lieu des Pokémon reçus d'un autre jeu
+location,kanto-pokecenter,Centre Pokémon (Kanto),nom français absent de PokéAPI ; lieu des Pokémon reçus d'un autre jeu
+location,mirage-island,Île Mirage,nom français absent de PokéAPI
+area,shoal-cave/low-tide,Grotte Tréfonds (marée basse),nom français absent de PokéAPI
+area,shoal-cave/b2f,Grotte Tréfonds (2e sous-sol),nom français absent de PokéAPI
+area,shoal-cave/b3f,Grotte Tréfonds (3e sous-sol),nom français absent de PokéAPI

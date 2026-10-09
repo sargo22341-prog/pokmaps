@@ -3,7 +3,9 @@
 - Pokémon : un seul style partout (carte, listes, fiches, Pokédex, évolutions), les sprites animés de
   Noir et Blanc (PokeAPI/sprites), normaux et chromatiques. Le sprite fixe est la première image du sprite
   animé : mêmes dessin, pose et taille, que l'animation soit activée ou non.
-- Icônes d'objets : msikma/pokesprite.
+- Formes embarquées à part (Zarbi, Morphéo, Deoxys) : mêmes sprites et variantes (`form_sprites.py`).
+- Icônes d'objets : msikma/pokesprite, trouvées par le numéro de l'objet dans les jeux de 8e génération, sinon par
+  son identifiant parmi les icônes que pokesprite ne relie à aucun numéro (data/item-unlinked.json).
 
 Les images sont embarquées en WebP sans perte (`webp.py`). Arborescence produite dans les assets :
     sprites/pokemon/animated/<pokemon_id>.webp
@@ -22,16 +24,14 @@ from pathlib import Path
 from PIL import Image
 
 from .builder import DatabaseBuilder
+from .form_sprites import form_jobs, form_sprites_of, validate_form_sprites
 from .sources import download, download_all, pokeapi_sprite, pokesprite
-from .unown_sprites import unown_jobs, validate_unown_sprites
 from .webp import encode_all
 
 # Icônes pokesprite des CT / CS : une par type d'attaque. pokesprite n'en a pas pour le type « ??? » (Malédiction,
 # CT03 d'Or et d'Argent) : elle prend l'icône d'une CT de type Normal.
 MACHINE_ICON = "items/{kind}/{type}.png"
 MACHINE_TYPE_FALLBACKS = {"unknown": "normal"}
-# Objets sans icône dans pokesprite : icône d'un objet semblable.
-ICON_FALLBACKS = {"bike-voucher": "items/key-item/ss-ticket.png"}
 # Sprites animés (GIF) de Noir et Blanc : les Pokémon des générations 1 à 5 (n° 1 à 649) seulement.
 ANIMATED_SPRITES = "pokemon/versions/generation-v/black-white/animated/{id}.gif"
 SHINY_SPRITES = "pokemon/versions/generation-v/black-white/animated/shiny/{id}.gif"
@@ -68,16 +68,17 @@ def build_sprites(builder: DatabaseBuilder, cache: Path, output: Path) -> set[st
         jobs.append((_first_frame(path), output / folder / "static" / f"{species_id}.webp"))
     jobs += [(path, output / "items" / f"{identifier}.webp") for _, path, identifier in items]
 
-    if 201 in builder.species:
-        jobs += unown_jobs(cache, output)
+    forms = form_sprites_of(set(builder.species))
+    for sprites in forms:
+        jobs += form_jobs(cache, output, sprites)
     encoded = encode_all([path for path, _ in jobs])
     if output.exists():
         shutil.rmtree(output)
     for path, destination in jobs:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(encoded[path], destination)
-    if 201 in builder.species:
-        validate_unown_sprites(output)
+    for sprites in forms:
+        validate_form_sprites(output, sprites)
     return set(item_paths)
 
 
@@ -96,20 +97,15 @@ def _first_frame(animation: Path) -> Path:
 
 def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:
     """Identifiant d'objet -> chemin de son icône dans pokesprite."""
-    url, path = pokesprite(cache, "data/item-map.json")
-    download(url, path)
-    item_map: dict[str, str] = json.loads(path.read_text("utf-8"))
-
+    item_map: dict[str, str] = _pokesprite_data(cache, "data/item-map.json")
+    by_identifier = icons_by_identifier(item_map, _pokesprite_data(cache, "data/item-unlinked.json"))
     # pokesprite indexe les objets par leur numéro dans les jeux de 8e génération.
     gen8_index = {
         int(row["item_id"]): int(row["game_index"])
         for row in builder.api.table("item_game_indices")
         if row["generation_id"] == "8"
     }
-    machine_types: dict[int, int] = {}
-    move_types = {(row[0], row[1]): row[2] for row in builder.moves.move_version_group_table()}
-    for vg, item_id, move_id in builder.moves.machine_rows:
-        machine_types.setdefault(item_id, move_types[(move_id, vg)])
+    machine_types = builder.moves.machine_types()
     types = {row[0]: row[1] for row in builder.type_table()}
 
     result = {}
@@ -120,6 +116,21 @@ def _item_icon_paths(builder: DatabaseBuilder, cache: Path) -> dict[str, str]:
             result[identifier] = MACHINE_ICON.format(kind=kind, type=MACHINE_TYPE_FALLBACKS.get(move_type, move_type))
         elif f"item_{gen8_index.get(item_id, 0):04d}" in item_map:
             result[identifier] = f"items/{item_map[f'item_{gen8_index[item_id]:04d}']}.png"
-        elif identifier in ICON_FALLBACKS:
-            result[identifier] = ICON_FALLBACKS[identifier]
+        elif identifier in by_identifier:
+            result[identifier] = by_identifier[identifier]
     return result
+
+
+def icons_by_identifier(item_map: dict[str, str], unlinked: dict[str, object]) -> dict[str, str]:
+    """Nom de fichier d'une icône pokesprite (« mail/orange-mail » -> « orange-mail ») -> chemin de l'icône, pour les
+    icônes reliées à un numéro puis pour les autres. Un nom porté par deux icônes différentes n'est pas retenu."""
+    candidates: dict[str, set[str]] = {}
+    for icon in (*item_map.values(), *unlinked):
+        candidates.setdefault(icon.rsplit("/", 1)[-1], set()).add(f"items/{icon}.png")
+    return {name: paths.pop() for name, paths in candidates.items() if len(paths) == 1}
+
+
+def _pokesprite_data(cache: Path, path: str) -> dict:
+    url, local = pokesprite(cache, path)
+    download(url, local)
+    return json.loads(local.read_text("utf-8"))

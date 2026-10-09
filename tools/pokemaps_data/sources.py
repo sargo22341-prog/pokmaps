@@ -104,6 +104,7 @@ POKEAPI_CSV_FILES = (
     "pokemon_dex_numbers",
     "pokemon_egg_groups",
     "pokemon_evolution",
+    "pokemon_forms",
     "pokemon_items",
     "pokemon_move_methods",
     "pokemon_move_method_prose",

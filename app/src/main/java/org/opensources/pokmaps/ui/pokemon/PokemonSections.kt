@@ -37,7 +37,9 @@ import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.pokemon.BaseStat
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
 import org.opensources.pokmaps.domain.pokemon.EvolutionNode
+import org.opensources.pokmaps.domain.pokemon.EvolutionTrigger
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
@@ -213,10 +215,13 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
 private fun evolutionText(condition: EvolutionCondition?): String {
     if (condition == null) return ""
     val parts = listOfNotNull(
-        if (condition.trigger == "trade") stringResource(R.string.method_trade) else null,
+        evolutionTriggerText(condition.trigger)?.let { stringResource(it) },
         condition.itemName,
         condition.minLevel?.let { stringResource(R.string.encounter_levels, it) },
         condition.minHappiness?.let { stringResource(R.string.evolution_happiness, it) },
+        condition.minBeauty?.let { stringResource(R.string.evolution_beauty, it) },
+        condition.relativeStats?.let { stringResource(relativeStatsText(it)) },
+        condition.personalityChance?.let { stringResource(R.string.evolution_personality, it) },
         when (condition.timeOfDay) {
             null, "" -> null
             "day" -> stringResource(R.string.evolution_day)
@@ -225,6 +230,18 @@ private fun evolutionText(condition: EvolutionCondition?): String {
         }
     )
     return parts.joinToString(" · ").ifEmpty { stringResource(R.string.evolution_level_up) }
+}
+
+private fun evolutionTriggerText(trigger: EvolutionTrigger): Int? = when (trigger) {
+    EvolutionTrigger.LEVEL_UP, EvolutionTrigger.USE_ITEM -> null
+    EvolutionTrigger.TRADE -> R.string.method_trade
+    EvolutionTrigger.SHED -> R.string.evolution_shed
+}
+
+private fun relativeStatsText(stats: RelativeStats): Int = when (stats) {
+    RelativeStats.ATTACK_HIGHER -> R.string.evolution_attack_higher
+    RelativeStats.EQUAL -> R.string.evolution_stats_equal
+    RelativeStats.DEFENSE_HIGHER -> R.string.evolution_defense_higher
 }
 
 @Composable

@@ -20,6 +20,8 @@ class PretFormat(Enum):
     GEN1 = "gen1"
     # pokegold, pokecrystal : en-têtes data/maps/maps.asm, événements maps/<Carte>.asm, scripts d'événements.
     GEN2 = "gen2"
+    # pokeruby, pokeemerald, pokefirered : data/maps/<Carte>/map.json, sources C et JSON, variantes par dépôt.
+    GEN3 = "gen3"
 
 
 @dataclass(frozen=True)
@@ -48,6 +50,11 @@ class Region:
 
 KANTO = Region("KANTO", "PALLET_TOWN", 999)
 JOHTO = Region("JOHTO", "NEW_BARK_TOWN", 998)
+HOENN = Region("HOENN", "LITTLEROOT_TOWN", 997)
+# Kanto de Rouge Feu et Vert Feuille : d'autres cartes que celles de Rouge, Bleu et Jaune, donc un autre numéro.
+FIRERED_KANTO = Region("KANTO", "PALLET_TOWN", 996)
+# Les Îles Sevii forment sept ensembles non reliés, placés par map_anchors.csv autour de l'Île 1.
+SEVII = Region("SEVII", "ONE_ISLAND", 995)
 
 
 @dataclass(frozen=True)
@@ -67,6 +74,9 @@ class Game:
     pret_format: PretFormat
     # Régions du jeu, une carte du monde chacune.
     regions: tuple[Region, ...]
+    # Le jeu débloque le Pokédex National après son Pokédex régional (3e génération) ; PokéAPI ne relie ces jeux
+    # qu'à leur Pokédex régional.
+    national_dex: bool = False
 
 
 _GEN1_GAMES: tuple[Game, ...] = (
@@ -112,6 +122,43 @@ CRYSTAL = Game(
 GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL)
 # Les futurs jeux restent dans l’aperçu jusqu’à leur prise en charge par l’application.
 GAMES_IN_PROGRESS: tuple[Game, ...] = ()
+
+# 3e génération, en deux branches qui ne partagent que le moteur (docs/plan_gen_3.md) : Hoenn (Rubis, Saphir,
+# Émeraude) et le remake de la 1re génération (Rouge Feu, Vert Feuille). Leurs données Pokémon se construisent déjà ;
+# ils entrent dans GAMES_IN_PROGRESS avec le lecteur pret de la 3e génération, qui génère leurs cartes.
+RUBY_SAPPHIRE = Game(
+    "ruby-sapphire",
+    "pokeruby",
+    (("ruby", "RUBY"), ("sapphire", "SAPPHIRE")),
+    "ruby-sapphire-emerald",
+    (VersionCover("ruby", "groudon", 0xA8243A), VersionCover("sapphire", "kyogre", 0x2F4FB0)),
+    PretFormat.GEN3,
+    (HOENN,),
+    national_dex=True,
+)
+
+EMERALD = Game(
+    "emerald",
+    "pokeemerald",
+    (("emerald", "EMERALD"),),
+    "ruby-sapphire-emerald",
+    (VersionCover("emerald", "rayquaza", 0x2E9A5A),),
+    PretFormat.GEN3,
+    (HOENN,),
+    national_dex=True,
+)
+
+FIRERED_LEAFGREEN = Game(
+    "firered-leafgreen",
+    "pokefirered",
+    (("firered", "FIRERED"), ("leafgreen", "LEAFGREEN")),
+    "firered-leafgreen",
+    (VersionCover("firered", "charizard", 0xE8642A), VersionCover("leafgreen", "venusaur", 0x6DB33F)),
+    PretFormat.GEN3,
+    (FIRERED_KANTO, SEVII),
+    national_dex=True,
+)
+GEN3_GAMES: tuple[Game, ...] = (RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
 
@@ -131,7 +178,32 @@ def complete_families(games: tuple[Game, ...]) -> dict[str, tuple[str, ...]]:
     return {family: groups for family, groups in families.items() if set(groups) <= built}
 
 
-# Méthodes de rencontre « uniques » (un Pokémon donné, fixe, échangé ou errant) : pas de probabilité,
+# Méthodes de rencontre « uniques » (un Pokémon donné, fixe, échangé, errant ou caché) : pas de probabilité,
 # on compte le nombre d'exemplaires. Toutes les autres sont des rencontres aléatoires dont
 # les probabilités (rarity) d'une zone totalisent 100 %.
-ONE_OFF_METHODS = frozenset({"gift", "gift-egg", "static", "pokeflute", "npc-trade", "squirt-bottle", "roaming-grass"})
+# La pêche de Barpau en fait partie : 50 % sur six cases de la Route 119 tirées au hasard, en plus de la table de la
+# route ; elle ne complète aucune table et ne se place sur aucune case fixe.
+ONE_OFF_METHODS = frozenset(
+    {
+        "gift",
+        "gift-egg",
+        "static",
+        "pokeflute",
+        "npc-trade",
+        "squirt-bottle",
+        "roaming-grass",
+        "roaming-water",
+        "devon-scope",
+        "wailmer-pail",
+        "feebas-tile-fishing",
+        "colosseum-bonus-disc-jpn",
+        "colosseum-bonus-disc-us",
+        "pokemon-channel-pal",
+    }
+)
+# Événements externes : un autre jeu ou une distribution donne le Pokémon (méthodes), ou le billet qui ouvre le lieu
+# (lieux PokéAPI : Nombril de la Mer, Île Aurore, Île Lointaine, Île du Sud). Ces rencontres sont gardées avec la
+# mention EXTERNAL_EVENT_NOTE, mais ne rendent pas le Pokémon obtenable dans le jeu (validate._check_obtainable).
+EXTERNAL_EVENT_METHODS = frozenset({"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal"})
+EXTERNAL_EVENT_LOCATIONS = frozenset({"navel-rock", "birth-island", "faraway-island", "southern-island"})
+EXTERNAL_EVENT_NOTE = "Événement externe"

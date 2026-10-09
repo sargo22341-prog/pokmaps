@@ -42,7 +42,10 @@ data class EvolutionRow(
     val itemIdentifier: String?,
     val itemHasSprite: Boolean?,
     val minHappiness: Int? = null,
-    val timeOfDay: String? = null
+    val timeOfDay: String? = null,
+    val minBeauty: Int? = null,
+    val relativePhysicalStats: Int? = null,
+    val personalityChance: Int? = null
 )
 
 data class LearnedMoveRow(

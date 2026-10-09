@@ -7,7 +7,7 @@ import org.junit.Test
 class EvolutionTreeTest {
     @Test
     fun branchingEvolutions() {
-        val stone = { name: String -> EvolutionCondition("use-item", itemName = name) }
+        val stone = { name: String -> EvolutionCondition(EvolutionTrigger.USE_ITEM, itemName = name) }
         val trees = EvolutionTree.build(
             members = mapOf(133 to "Évoli", 134 to "Aquali", 135 to "Voltali", 136 to "Pyroli"),
             edges = listOf(
@@ -28,8 +28,8 @@ class EvolutionTreeTest {
         val trees = EvolutionTree.build(
             members = mapOf(25 to "Pikachu", 26 to "Raichu"),
             edges = listOf(
-                EvolutionEdge(172, 25, EvolutionCondition("level-up")),
-                EvolutionEdge(25, 26, EvolutionCondition("use-item", itemName = "Pierre Foudre"))
+                EvolutionEdge(172, 25, EvolutionCondition(EvolutionTrigger.LEVEL_UP)),
+                EvolutionEdge(25, 26, EvolutionCondition(EvolutionTrigger.USE_ITEM, itemName = "Pierre Foudre"))
             )
         )
         assertEquals(listOf(25), trees.map { it.pokemonId })

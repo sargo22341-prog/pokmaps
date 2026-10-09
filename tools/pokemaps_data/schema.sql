@@ -245,7 +245,13 @@ CREATE TABLE evolution (
     min_happiness INTEGER,
     time_of_day TEXT,
     known_move_id INTEGER,
-    trade_species_id INTEGER
+    trade_species_id INTEGER,
+    -- Beauté minimale (Barpau en Milobellus, 3e génération).
+    min_beauty INTEGER,
+    -- Attaque comparée à la Défense : 1 plus grande, 0 égale, -1 plus petite (Debugant).
+    relative_physical_stats INTEGER,
+    -- Probabilité (%) fixée par la personnalité du Pokémon (Chenipotte en Armulys ou en Blindalys).
+    personality_chance INTEGER
 );
 CREATE INDEX index_evolution_from_pokemon_id ON evolution (from_pokemon_id);
 CREATE INDEX index_evolution_to_pokemon_id ON evolution (to_pokemon_id);

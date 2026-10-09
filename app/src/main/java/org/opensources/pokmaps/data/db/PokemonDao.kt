@@ -77,7 +77,8 @@ interface PokemonDao {
         SELECT e.from_pokemon_id AS fromId, e.to_pokemon_id AS toId, e.`trigger` AS `trigger`, e.min_level AS minLevel,
             coalesce(i.name_fr, hi.name_fr) AS itemName, coalesce(i.identifier, hi.identifier) AS itemIdentifier,
             coalesce(i.has_sprite, hi.has_sprite) AS itemHasSprite, e.min_happiness AS minHappiness,
-            e.time_of_day AS timeOfDay
+            e.time_of_day AS timeOfDay, e.min_beauty AS minBeauty, e.relative_physical_stats AS relativePhysicalStats,
+            e.personality_chance AS personalityChance
         FROM evolution e
         JOIN pokemon p ON p.id = e.from_pokemon_id
         LEFT JOIN item i ON i.id = e.item_id

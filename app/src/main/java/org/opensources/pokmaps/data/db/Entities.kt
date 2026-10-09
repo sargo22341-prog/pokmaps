@@ -254,7 +254,10 @@ data class EvolutionEntity(
     @ColumnInfo(name = "min_happiness") val minHappiness: Int?,
     @ColumnInfo(name = "time_of_day") val timeOfDay: String?,
     @ColumnInfo(name = "known_move_id") val knownMoveId: Int?,
-    @ColumnInfo(name = "trade_species_id") val tradeSpeciesId: Int?
+    @ColumnInfo(name = "trade_species_id") val tradeSpeciesId: Int?,
+    @ColumnInfo(name = "min_beauty") val minBeauty: Int?,
+    @ColumnInfo(name = "relative_physical_stats") val relativePhysicalStats: Int?,
+    @ColumnInfo(name = "personality_chance") val personalityChance: Int?
 )
 
 @Entity(

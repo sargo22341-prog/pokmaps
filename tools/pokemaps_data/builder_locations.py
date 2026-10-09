@@ -25,6 +25,10 @@ class ExtraArea:
     name_fr: str
 
 
+# Sortes de noms corrigés dans name_fixes.csv.
+NAME_FIX_KINDS = frozenset({"location", "area", "condition", "method", "item"})
+
+
 class LocationTables:
     def __init__(self, api: PokeApi) -> None:
         self.api = api
@@ -59,13 +63,30 @@ class LocationTables:
         return keys
 
     @cached_property
+    def area_locations(self) -> dict[int, str]:
+        """Zone -> identifiant PokéAPI de son lieu."""
+        locations = self.api.by_id("locations")
+        result = {
+            int(row["id"]): locations[int(row["location_id"])]["identifier"] for row in self.api.table("location_areas")
+        }
+        return result | {area.id: locations[area.location_id]["identifier"] for area in self.extra_areas.values()}
+
+    @cached_property
     def area_ids(self) -> dict[str, int]:
         return {key: area_id for area_id, key in self.area_keys.items()}
 
     @cached_property
     def name_fixes(self) -> dict[tuple[str, str], str]:
+        """(sorte, identifiant PokéAPI) -> nom français corrigé : lieux, zones, conditions et méthodes de rencontre,
+        objets."""
+        fixes: dict[tuple[str, str], str] = {}
         with (DATA_DIR / "name_fixes.csv").open(encoding="utf-8", newline="") as handle:
-            return {(row["kind"], row["key"]): row["name_fr"] for row in csv.DictReader(handle)}
+            for line, row in enumerate(csv.DictReader(handle), start=2):
+                key = (row["kind"], row["key"])
+                if row["kind"] not in NAME_FIX_KINDS or key in fixes or not row["name_fr"].strip():
+                    raise ValueError(f"name_fixes.csv:{line} : sorte inconnue, doublon ou nom vide : {row}")
+                fixes[key] = row["name_fr"]
+        return fixes
 
     def location_area_table(self, used_areas: set[int]) -> list[tuple]:
         """Zones `used_areas`, avec leur nom français (corrigé par name_fixes.csv ou donné par extra_areas.csv)."""

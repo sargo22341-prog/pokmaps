@@ -22,6 +22,7 @@ import org.opensources.pokmaps.domain.pokemon.CatchRate
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.domain.pokemon.Gen2CatchRate
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
+import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.ShinyOdds
 import org.opensources.pokmaps.domain.usecase.MapRequest
@@ -77,6 +78,20 @@ data class PokemonUiState(
 ) {
     /** Une rencontre sur [shinyOdds] est chromatique dans le jeu, null si le jeu n'a pas de chromatiques. */
     val shinyOdds: Int? get() = game?.let { ShinyOdds.oneIn(it.generationId) }
+
+    /**
+     * Onglets d'attaques : œuf et tuteur dans les jeux qui ont des œufs, ou dès qu'une attaque y figure (Surf du
+     * Pikachu Surfeur, enseigné par Pokémon Stadium dans Rouge, Bleu et Jaune).
+     */
+    val moveTabs: List<MoveTab>
+        get() = MoveTab.entries.filter { tab ->
+            when (tab) {
+                MoveTab.LEVEL_UP, MoveTab.MACHINE -> true
+
+                MoveTab.EGG, MoveTab.TUTOR ->
+                    has(GenerationFeature.BREEDING) || details?.moves(tab).orEmpty().isNotEmpty()
+            }
+        }
 
     /** Le jeu connaît cette mécanique (objets tenus, sexe, œufs, talents…). */
     fun has(feature: GenerationFeature): Boolean = game?.let { feature.existsIn(it.generationId) } == true

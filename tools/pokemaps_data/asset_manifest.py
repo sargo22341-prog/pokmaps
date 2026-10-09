@@ -6,7 +6,8 @@ import hashlib
 import sqlite3
 from contextlib import closing
 from pathlib import Path
-from string import ascii_lowercase
+
+from .form_sprites import UNOWN
 
 MANIFEST = "assets.sha256"
 _MAX_FILES = 20_000
@@ -41,11 +42,9 @@ def _required_paths(assets: Path) -> set[str]:
                 if not tiles:
                     raise ValueError(f"Tuiles indispensables absentes : {folder}")
                 paths.update(tile.relative_to(assets).as_posix() for tile in tiles)
-    for style in ("unown", "unown/shiny"):
+    for style in (UNOWN.folder, f"{UNOWN.folder}/shiny"):
         for variant in ("static", "animated"):
-            paths.update(
-                f"sprites/{style}/{variant}/{form}.webp" for form in (*ascii_lowercase, "exclamation", "question")
-            )
+            paths.update(f"sprites/{style}/{variant}/{form}.webp" for form in UNOWN.forms)
     return paths
 
 

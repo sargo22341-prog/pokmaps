@@ -20,7 +20,7 @@ GOLD, SILVER = 4, 5
 GEN2 = 2
 STATS = ("hp", "attack", "defense", "speed", "special-attack", "special-defense")  # ordre des données de base pret
 PIKACHU, CHANSEY, EEVEE, ESPEON, UMBREON, BLISSEY, STEELIX, ONIX, MEWTWO = 25, 113, 133, 196, 197, 242, 208, 95, 150
-PICHU, CLEFFA, IGGLYBUFF, CHIKORITA, CHARIZARD = 172, 173, 174, 152, 6
+PICHU, CLEFFA, IGGLYBUFF, CHIKORITA, CHARIZARD, TYROGUE = 172, 173, 174, 152, 6, 236
 FIRE_PUNCH, ZAP_CANNON, SWAGGER, THIEF, PROTECT, ICY_WIND, CURSE = 7, 192, 207, 168, 182, 196, 174
 
 
@@ -91,12 +91,19 @@ def test_second_generation_types_and_chart(gold_silver_builder: DatabaseBuilder)
 def test_evolutions_of_the_second_generation(gold_silver_builder: DatabaseBuilder) -> None:
     items = {row[0]: row[1] for row in gold_silver_builder.items.item_rows}
     rows = {(row[2], row[3]): row[4:] for row in gold_silver_builder.pokemon.evolution_rows}
-    # (déclencheur, niveau, objet utilisé, objet tenu, bonheur, moment, attaque connue, échange contre)
-    assert rows[(EEVEE, ESPEON)] == ("level-up", None, None, None, 220, "day", None, None)
-    assert rows[(EEVEE, UMBREON)] == ("level-up", None, None, None, 220, "night", None, None)
-    assert rows[(CHANSEY, BLISSEY)] == ("level-up", None, None, None, 220, None, None, None)
-    trigger, *_, held, _happiness, _time, _move, _trade = rows[(ONIX, STEELIX)]
+    # (déclencheur, niveau, objet utilisé, objet tenu, bonheur, moment, attaque connue, échange contre, beauté,
+    # Attaque comparée à la Défense, probabilité selon la personnalité)
+    assert rows[(EEVEE, ESPEON)] == ("level-up", None, None, None, 220, "day", None, None, None, None, None)
+    assert rows[(EEVEE, UMBREON)] == ("level-up", None, None, None, 220, "night", None, None, None, None, None)
+    assert rows[(CHANSEY, BLISSEY)] == ("level-up", None, None, None, 220, None, None, None, None, None, None)
+    trigger, _level, _item, held, *_ = rows[(ONIX, STEELIX)]
     assert (trigger, items[held]) == ("trade", "metal-coat")
+    # Debugant : Kicklee si l'Attaque dépasse la Défense, Tygnon si elle est plus faible, Kapoera si elles sont égales.
+    assert [rows[(TYROGUE, adult)][1:2] + rows[(TYROGUE, adult)][9:10] for adult in (106, 107, 237)] == [
+        (20, 1),
+        (20, -1),
+        (20, 0),
+    ]
     # Bébés : ils évoluent par bonheur vers un Pokémon de la 1re génération.
     for baby, adult in ((PICHU, PIKACHU), (CLEFFA, 35), (IGGLYBUFF, 39)):
         assert rows[(baby, adult)][0] == "level-up"

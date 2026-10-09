@@ -28,6 +28,8 @@ import org.opensources.pokmaps.domain.pokemon.GenderRatio
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.HeldItem
 import org.opensources.pokmaps.domain.pokemon.Machine
+import org.opensources.pokmaps.domain.pokemon.MoveNote
+import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
@@ -48,8 +50,13 @@ class PokemonViewModelTest {
     )
     private val collection = CollectionSettings(dataStore)
 
-    private fun viewModel(pokemonId: Int, failing: Boolean = false): PokemonViewModel {
-        val repository = PokemonRepository(FakePokemonDao(failing), PokedexRepository(FakePokedexDao()))
+    private fun viewModel(
+        pokemonId: Int,
+        failing: Boolean = false,
+        unknownLearnMethod: Boolean = false
+    ): PokemonViewModel {
+        val dao = FakePokemonDao(failing, unknownLearnMethod)
+        val repository = PokemonRepository(dao, PokedexRepository(FakePokedexDao()))
         return PokemonViewModel(
             SavedStateHandle(mapOf(PokemonViewModel.POKEMON_ID to pokemonId)),
             ObservePokemonUseCase(games, repository),
@@ -119,6 +126,10 @@ class PokemonViewModelTest {
         assertFalse(red.has(GenerationFeature.ABILITIES))
         assertEquals(emptyList<HeldItem>(), red.details?.traits?.heldItems)
         assertEquals(GenderRatio.Gendered(4), red.details?.traits?.gender)
+        // Ni œufs ni tuteurs en 1re génération, mais le Surf de Pokémon Stadium a son onglet et sa mention.
+        assertEquals(listOf(MoveTab.LEVEL_UP, MoveTab.MACHINE, MoveTab.TUTOR), red.moveTabs)
+        val surf = red.details?.moves(MoveTab.TUTOR)?.single()
+        assertEquals(FakePokemonDao.SURF to MoveNote.EXTERNAL_EVENT, surf?.moveId to surf?.note)
 
         // Les objets tenus sont ceux de la version choisie.
         games.select(FakeGameDao.BLUE)
@@ -134,6 +145,7 @@ class PokemonViewModelTest {
         assertFalse(gold.has(GenerationFeature.ABILITIES))
         assertEquals(listOf(117), gold.details?.eggMoves?.map { it.moveId })
         assertEquals(listOf(87), gold.details?.tutorMoves?.map { it.moveId })
+        assertEquals(MoveTab.entries, gold.moveTabs)
         assertEquals(listOf(FakePokemonDao.THUNDER_SHOCK), gold.details?.levelUpMoves?.map { it.moveId })
     }
 
@@ -198,6 +210,14 @@ class PokemonViewModelTest {
         assertNull(state.catch)
         assertFalse(state.loading)
         assertFalse(state.failed)
+    }
+
+    @Test
+    fun anUnknownLearnMethodIsAnErrorNotAMissingMove() = runTest {
+        val viewModel = viewModel(PIKACHU, unknownLearnMethod = true)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertTrue(viewModel.state.value.failed)
+        assertNull(viewModel.state.value.details)
     }
 
     @Test

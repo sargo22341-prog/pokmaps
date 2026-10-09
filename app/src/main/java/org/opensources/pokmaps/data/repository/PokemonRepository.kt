@@ -15,13 +15,17 @@ import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
 import org.opensources.pokmaps.domain.pokemon.EvolutionEdge
 import org.opensources.pokmaps.domain.pokemon.EvolutionTree
+import org.opensources.pokmaps.domain.pokemon.EvolutionTrigger
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
 import org.opensources.pokmaps.domain.pokemon.HeldItem
+import org.opensources.pokmaps.domain.pokemon.LearnMethod
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.Machine
+import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.PokemonTraits
+import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.domain.pokemon.TypeChart
 
 @Singleton
@@ -42,7 +46,8 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             (it.attackingTypeId to it.defendingTypeId) to
                 it.factor
         }
-        val moves = dao.moves(pokemonId, game.versionGroupId).groupBy { it.method }
+        val moves = dao.moves(pokemonId, game.versionGroupId).map { LearnMethod.from(it.method) to it }
+            .groupBy({ (method, _) -> method.tab }) { (method, row) -> row.toLearnedMove(method) }
         return PokemonDetails(
             id = pokemon.id,
             number = dao.number(pokemonId, game.versionGroupId),
@@ -58,16 +63,14 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             stats = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) },
             weaknesses = TypeChart.defensive(pokedex.types(game), types.map { it.id }, factors),
             evolutions = evolutions(game, pokemon.evolutionChainId),
-            levelUpMoves = moves["level-up"].orEmpty().map {
-                it.toLearnedMove()
-            }.sortedWith(compareBy({ it.level }, { it.name })),
-            machineMoves = moves["machine"].orEmpty().map { it.toLearnedMove() }
+            levelUpMoves = moves[MoveTab.LEVEL_UP].orEmpty().sortedWith(compareBy({ it.level }, { it.name })),
+            machineMoves = moves[MoveTab.MACHINE].orEmpty()
                 .sortedWith(compareBy({ it.machine?.isHm }, { it.machine?.name })),
             encounters = dao.encounters(pokemonId).map { it.toEncounter() },
             staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
             traits = traits(game, pokemonId, pokemon.genderRate, pokemon.hatchCounter),
-            eggMoves = moves["egg"].orEmpty().map { it.toLearnedMove() }.sortedBy { it.name },
-            tutorMoves = moves["tutor"].orEmpty().map { it.toLearnedMove() }.sortedBy { it.name }
+            eggMoves = moves[MoveTab.EGG].orEmpty().sortedBy { it.name },
+            tutorMoves = moves[MoveTab.TUTOR].orEmpty().sortedBy { it.name }
         )
     }
 
@@ -81,13 +84,16 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
                 it.fromId,
                 it.toId,
                 EvolutionCondition(
-                    it.trigger,
+                    EvolutionTrigger.from(it.trigger),
                     it.minLevel,
                     it.itemName,
                     it.itemIdentifier,
                     it.itemHasSprite == true,
                     it.minHappiness,
-                    it.timeOfDay
+                    it.timeOfDay,
+                    it.minBeauty,
+                    it.relativePhysicalStats?.let(RelativeStats::from),
+                    it.personalityChance
                 )
             )
         }
@@ -107,7 +113,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         }
     )
 
-    private fun LearnedMoveRow.toLearnedMove() = LearnedMove(
+    private fun LearnedMoveRow.toLearnedMove(method: LearnMethod) = LearnedMove(
         moveId = moveId,
         name = name,
         type = PokemonType(typeId, typeIdentifier, typeName),
@@ -116,19 +122,16 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         accuracy = accuracy,
         pp = pp,
         level = level,
-        machine = if (method == MACHINE) {
+        machine = if (method == LearnMethod.MACHINE) {
             Machine(
                 checkNotNull(machineIdentifier) { "CT/CS absente pour l'attaque $moveId" },
                 checkNotNull(machine) { "CT/CS absente pour l'attaque $moveId" }
             )
         } else {
             null
-        }
+        },
+        note = method.note
     )
-
-    private companion object {
-        const val MACHINE = "machine"
-    }
 }
 
 fun EncounterRow.toEncounter() = Encounter(
