@@ -110,3 +110,40 @@ location,island-cave,Grotte de l'Îlot,apostrophe typographique dans PokéAPI ; 
 area,island-cave/area,Grotte de l'Îlot,apostrophe typographique dans PokéAPI ; apostrophe droite comme les autres noms
 area,hoenn-pokecenter,Centre Pokémon (Hoenn),PokéAPI donne l'identifiant pour nom ; lieu des Pokémon reçus d'un autre jeu
 item,letter,Lettre,"nom de Rubis, Saphir et Émeraude ; PokéAPI donne celui de Rubis Oméga et Saphir Alpha (Lettre à Pierre)"
+area,mt-moon/b1f,Mont Sélénite (1er sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,mt-moon/b2f,Mont Sélénite (2e sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,cerulean-cave/2f,Caverne Azurée (1er étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,cerulean-cave/b1f,Caverne Azurée (1er sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-mansion/2f,Manoir Pokémon (1er étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-mansion/3f,Manoir Pokémon (2e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-mansion/b1f,Manoir Pokémon (1er sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,saffron-city/silph-co-7f,Sylphe SARL (6e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,icefall-cave/b1f,Grotte de Glace (1er sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,kanto-pokecenter,Centre Pokémon (Kanto),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-tower/3f,Tour Pokémon (2e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-tower/4f,Tour Pokémon (3e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-tower/5f,Tour Pokémon (4e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-tower/6f,Tour Pokémon (5e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,pokemon-tower/7f,Tour Pokémon (6e étage),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,mt-ember/b1f,Mont Braise (1er sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,mt-ember/b2f,Mont Braise (2e sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,mt-ember/b3f,Mont Braise (3e sous-sol),nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,kanto-sea-route-19,Chenal 19,nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,kanto-sea-route-20,Chenal 20,nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+area,kanto-sea-route-21,Chenal 21,nom français relu pour Kanto et les Îles Sevii ; étages sans abréviation
+location,three-isle-port,Port Île 3,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,three-isle-port,Port Île 3,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,five-isle-meadow,Pré Île 5,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,five-isle-meadow,Pré Île 5,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,outcast-island,Île du Lointain,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,outcast-island,Île du Lointain,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,one-island,Île 1,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,one-island,Île 1,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,two-island,Île 2,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,three-island,Île 3,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,four-island,Île 4,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,four-island,Île 4,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,five-island,Île 5,accent manquant dans PokéAPI ; nom relu sur Poképédia
+area,five-island,Île 5,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,six-island,Île 6,accent manquant dans PokéAPI ; nom relu sur Poképédia
+location,seven-island,Île 7,accent manquant dans PokéAPI ; nom relu sur Poképédia

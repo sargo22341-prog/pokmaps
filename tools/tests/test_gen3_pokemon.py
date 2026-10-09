@@ -149,11 +149,12 @@ def test_one_off_and_external_event_encounters(gen3_builder: DatabaseBuilder) ->
     assert gen3_builder.items.name_of("vs-seeker") == "Cherche VS"
 
 
-def test_every_pokemon_of_both_hoenn_dexes_can_be_obtained(gen3_builder: DatabaseBuilder, tmp_path: Path) -> None:
+def test_every_pokemon_of_both_dexes_of_each_branch_can_be_obtained(
+    gen3_builder: DatabaseBuilder, tmp_path: Path
+) -> None:
     connection = _pokemon_database(gen3_builder, tmp_path / "gen3.db")
     try:
-        # La branche Remake 1G aura ses propres lignes de transfer_only.csv (docs/plan_gen_3.md) : Hoenn seule ici.
-        assert [error for error in _check_obtainable(connection) if "ruby-sapphire-emerald" in error] == []
+        assert _check_obtainable(connection) == []
         for description, query in CHECKS:
             if "Pokédex" in description or "origine" in description:
                 assert connection.execute(query).fetchall() == [], description
@@ -214,9 +215,9 @@ def test_hoenn_place_names_are_those_of_the_games(gen3_builder: DatabaseBuilder)
     assert builder.items.name_of("letter") == "Lettre"
 
 
-@pytest.mark.parametrize("repo", ["pokeruby", "pokeemerald"])
-def test_every_hoenn_item_constant_is_known_to_pokeapi(repo: str, gen3_builder: DatabaseBuilder) -> None:
-    # Les objets clés du scénario de Hoenn existent tous dans PokéAPI : extra_items.csv n'en a pas besoin.
+@pytest.mark.parametrize("repo", ["pokeruby", "pokeemerald", "pokefirered"])
+def test_every_gen3_item_constant_is_known_to_pokeapi(repo: str, gen3_builder: DatabaseBuilder) -> None:
+    # Les objets clés des deux branches existent tous dans PokéAPI : extra_items.csv n'en a pas besoin.
     header = (pret_dir(CACHE, repo) / "include/constants/items.h").read_text(encoding="utf-8")
     # pokeruby : « #define ITEM_X 12 » ; pokeemerald : énumération « ITEM_X, » ou « ITEM_X = 12, ».
     constants = re.findall(r"^(?:#define\s+ITEM_(\w+)\s+\d+\s*$|\s+ITEM_(\w+)(?:\s*=\s*\d+)?,)", header, re.MULTILINE)

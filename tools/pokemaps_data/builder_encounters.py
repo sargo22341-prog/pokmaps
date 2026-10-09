@@ -9,12 +9,13 @@ from __future__ import annotations
 
 import csv
 from collections import defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
 from .games import (
+    EXTERNAL_EVENT_AREAS,
     EXTERNAL_EVENT_LOCATIONS,
     EXTERNAL_EVENT_METHODS,
     EXTERNAL_EVENT_NOTE,
@@ -62,6 +63,7 @@ class EncounterTables:
     def __init__(self, builder: DatabaseBuilder) -> None:
         self.builder = builder
         self.api = builder.api
+        self._rate_moves: dict[tuple[int, int, int], set[int]] = defaultdict(set)
 
     @cached_property
     def used_areas(self) -> set[int]:
@@ -103,13 +105,14 @@ class EncounterTables:
 
     @cached_property
     def encounter_groups(self) -> list[EncounterGroup]:
-        groups = self._apply_curation(list(self._uncurated_groups))
+        groups = self._apply_curation([replace(group, notes=list(group.notes)) for group in self._uncurated_groups])
         for note in self._battle_notes:
             _add_battle_note(groups, note)
         locations = self.builder.locations.area_locations
         for group in groups:
             method, location = self.method_identifiers[group.method_id], locations[group.location_area_id]
-            if method in EXTERNAL_EVENT_METHODS or location in EXTERNAL_EVENT_LOCATIONS:
+            area = self.builder.locations.area_keys[group.location_area_id]
+            if method in EXTERNAL_EVENT_METHODS or location in EXTERNAL_EVENT_LOCATIONS or area in EXTERNAL_EVENT_AREAS:
                 group.notes.insert(0, EXTERNAL_EVENT_NOTE)
         return groups
 
@@ -241,7 +244,9 @@ class EncounterTables:
             case "move_to":
                 if row["value"] not in self.builder.locations.area_ids:
                     raise ValueError(f"encounter_curation.csv:{line} : zone inconnue {row['value']}")
-                group.location_area_id = self.builder.locations.area_ids[row["value"]]
+                target = self.builder.locations.area_ids[row["value"]]
+                self._rate_moves[(group.version_id, group.location_area_id, group.method_id)].add(target)
+                group.location_area_id = target
             case _:
                 raise ValueError(f"encounter_curation.csv:{line} : action inconnue {row['action']}")
 
@@ -312,11 +317,19 @@ class EncounterTables:
 
     def encounter_rate_table(self) -> list[tuple]:
         version_ids, used_areas = self.builder.version_ids, self.used_areas
-        return sorted(
-            (int(row["version_id"]), int(row["location_area_id"]), int(row["encounter_method_id"]), int(row["rate"]))
-            for row in self.api.table("location_area_encounter_rates")
-            if int(row["version_id"]) in version_ids and int(row["location_area_id"]) in used_areas
-        )
+        present = {(g.version_id, g.location_area_id, g.method_id) for g in self.encounter_groups}
+        rates: set[tuple[int, int, int, int]] = set()
+        for row in self.api.table("location_area_encounter_rates"):
+            version, area, method = (int(row[key]) for key in ("version_id", "location_area_id", "encounter_method_id"))
+            if version not in version_ids or area not in used_areas:
+                continue
+            key = (version, area, method)
+            targets = self._rate_moves.get(key, set())
+            # Le taux suit une zone déplacée ; si des rencontres restent à l'origine, elles gardent aussi leur taux.
+            if not targets or key in present:
+                rates.add((version, area, method, int(row["rate"])))
+            rates.update((version, target, method, int(row["rate"])) for target in targets)
+        return sorted(rates)
 
 
 def _add_battle_note(groups: list[EncounterGroup], note: BattleNote) -> None:
