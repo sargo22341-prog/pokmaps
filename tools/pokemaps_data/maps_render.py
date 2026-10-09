@@ -15,7 +15,7 @@ from pathlib import Path
 from PIL import Image
 
 from .maps_layout import GameMaps
-from .pret import BLOCK_PX, TILE_PX, PretMap
+from .pret import TILE_PX, PretMap
 
 TILE_SIZE = 256
 # Métatuiles de bordure dessinées autour des villes et routes (le jeu en affiche 4 à 5 au bord de l'écran).
@@ -78,7 +78,7 @@ class MapRenderer(ABC):
         if const in self.game_maps.plans:
             return self._render_plan(const)
         pret_map = self.maps[const]
-        width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
+        width, height = pret_map.width * self.game_maps.block_px, pret_map.height * self.game_maps.block_px
         canvas = Image.new("RGB", (width, height))
         self._paint(canvas, pret_map, (0, 0))
         return DisplayMap(const, width, height, level_count(width, height), canvas)
@@ -94,17 +94,18 @@ class MapRenderer(ABC):
         blocks = self.blocks(pret_map)
         for y in range(pret_map.height):
             for x in range(pret_map.width):
-                position = (origin[0] + x * BLOCK_PX, origin[1] + y * BLOCK_PX)
+                position = (origin[0] + x * self.game_maps.block_px, origin[1] + y * self.game_maps.block_px)
                 canvas.paste(blocks[pret_map.block(x, y)], position)
 
     def _render_world(self, region: str) -> DisplayMap:
         world = self.game_maps.world_blocks[region]
         columns, rows = self.game_maps.world_size(region)
-        canvas = Image.new("RGBA", (columns * BLOCK_PX, rows * BLOCK_PX))
+        size = self.game_maps.block_px
+        canvas = Image.new("RGBA", (columns * size, rows * size))
         owner: list[list[str | None]] = [[None] * columns for _ in range(rows)]
         for const, (bx, by) in world.items():
             pret_map = self.maps[const]
-            self._paint(canvas, pret_map, (bx * BLOCK_PX, by * BLOCK_PX))
+            self._paint(canvas, pret_map, (bx * size, by * size))
             for y in range(pret_map.height):
                 for x in range(pret_map.width):
                     owner[by + y][bx + x] = const
@@ -117,23 +118,26 @@ class MapRenderer(ABC):
     ) -> None:
         """Autour des cartes : la métatuile de bordure de la carte la plus proche, sur la largeur visible à l'écran
         dans le jeu. Au-delà, la carte du monde reste transparente."""
-        rects = [(*world[const], self.maps[const]) for const in world]
+        borders: dict[tuple[int, int], tuple[int, str]] = {}
+        rows, columns = len(owner), len(owner[0])
+        for const, (left, top) in world.items():
+            current = self.maps[const]
+            right, bottom = left + current.width - 1, top + current.height - 1
+            for y in range(max(0, top - BORDER_MARGIN), min(rows, bottom + BORDER_MARGIN + 1)):
+                for x in range(max(0, left - BORDER_MARGIN), min(columns, right + BORDER_MARGIN + 1)):
+                    if owner[y][x] is not None:
+                        continue
+                    distance = max(left - x, 0, x - right, top - y, y - bottom)
+                    previous = borders.get((x, y))
+                    if previous is None or distance < previous[0]:
+                        borders[x, y] = (distance, const)
+        size = self.game_maps.block_px
+        for (x, y), (_, const) in borders.items():
+            left, top = world[const]
+            canvas.paste(self.border(self.maps[const], x - left, y - top), (x * size, y * size))
 
-        def distance(rect: tuple[int, int, PretMap], x: int, y: int) -> int:
-            left, top, pret_map = rect
-            dx = max(left - x, 0, x - (left + pret_map.width - 1))
-            dy = max(top - y, 0, y - (top + pret_map.height - 1))
-            return max(dx, dy)
-
-        for y, row in enumerate(owner):
-            for x, const in enumerate(row):
-                if const is not None:
-                    continue
-                nearest = min(rects, key=lambda rect: distance(rect, x, y))
-                if distance(nearest, x, y) > BORDER_MARGIN:
-                    continue
-                pret_map = nearest[2]
-                canvas.paste(self.blocks(pret_map)[pret_map.border_block], (x * BLOCK_PX, y * BLOCK_PX))
+    def border(self, pret_map: PretMap, x: int, y: int) -> Image.Image:
+        return self.blocks(pret_map)[pret_map.border_block]
 
 
 def write_tiles(display: DisplayMap, output: Path) -> int:

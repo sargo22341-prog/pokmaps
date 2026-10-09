@@ -600,3 +600,549 @@ gold-silver-crystal,RUINS_OF_ALPH_KABUTO_ITEM_ROOM,Ruines d’Alpha (salle des o
 gold-silver-crystal,RUINS_OF_ALPH_KABUTO_WORD_ROOM,Ruines d’Alpha (inscription de Kabuto)
 gold-silver-crystal,RUINS_OF_ALPH_OMANYTE_ITEM_ROOM,Ruines d’Alpha (salle des objets d'Amonita)
 gold-silver-crystal,RUINS_OF_ALPH_OMANYTE_WORD_ROOM,Ruines d’Alpha (inscription d'Amonita)
+ruby-sapphire-emerald,HOENN,Hoenn
+ruby-sapphire-emerald,HOENN_UNDERWATER,Hoenn (sous l’eau)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_CAPTAINS_OFFICE,Épave (bureau du Capitaine Poupe)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_CORRIDORS_1F,"Épave (couloirs, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_CORRIDORS_B1F,"Épave (couloirs, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_DECK,Épave (pont)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS,Épave (couloir sous-marin)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS,Épave (salles sous-marines)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_ROOMS2_1F,"Épave (salles 2, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_ROOMS2_B1F,"Épave (salles 2, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_ROOMS_1F,"Épave (salles, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_ROOMS_B1F,"Épave (salles, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_ROOM_B1F,"Épave (salle, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_UNDERWATER1,Épave (sous l’eau 1)
+ruby-sapphire-emerald,MAP_ABANDONED_SHIP_UNDERWATER2,Épave (sous l’eau 2)
+ruby-sapphire-emerald,MAP_ALTERING_CAVE,Grotte Métamo
+ruby-sapphire-emerald,MAP_ANCIENT_TOMB,Tombeau Antique
+ruby-sapphire-emerald,MAP_AQUA_HIDEOUT_1F,Planque Aqua (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_AQUA_HIDEOUT_B1F,Planque Aqua (1er sous-sol)
+ruby-sapphire-emerald,MAP_AQUA_HIDEOUT_B2F,Planque Aqua (2e sous-sol)
+ruby-sapphire-emerald,MAP_ARTISAN_CAVE_1F,Grotte Atelier (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_ARTISAN_CAVE_B1F,Grotte Atelier (1er sous-sol)
+ruby-sapphire-emerald,MAP_BATTLE_COLOSSEUM_2P,Colisée de combat (2 joueurs)
+ruby-sapphire-emerald,MAP_BATTLE_COLOSSEUM_4P,Colisée de combat (4 joueurs)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM,"Zone de Combat (Dojo de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR,"Zone de Combat (Dojo de Combat, couloir)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY,"Zone de Combat (Dojo de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM,"Zone de Combat (Dôme de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR,"Zone de Combat (Dôme de Combat, couloir)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY,"Zone de Combat (Dôme de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM,"Zone de Combat (Dôme de Combat, salle de préparation)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM,"Zone de Combat (Usine de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY,"Zone de Combat (Usine de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM,"Zone de Combat (Usine de Combat, salle de préparation)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM,"Zone de Combat (Palace de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR,"Zone de Combat (Palace de Combat, couloir)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY,"Zone de Combat (Palace de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR,"Zone de Combat (Reptile de Combat, couloir)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY,"Zone de Combat (Reptile de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL,"Zone de Combat (Reptile de Combat, salle finale)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL,"Zone de Combat (Reptile de Combat, salle normale)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS,"Zone de Combat (Reptile de Combat, salle des Pokémon sauvages)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM,"Zone de Combat (Reptile de Combat, salle des trois chemins)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR,"Zone de Combat (Pyramide de Combat, étage généré)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY,"Zone de Combat (Pyramide de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP,"Zone de Combat (Pyramide de Combat, sommet)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM,"Zone de Combat (Tour de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR,"Zone de Combat (Tour de Combat, couloir)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR,"Zone de Combat (Tour de Combat, ascenseur)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY,"Zone de Combat (Tour de Combat, accueil)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM,"Zone de Combat (Tour de Combat, salle de combat multi)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR,"Zone de Combat (Tour de Combat, couloir multi)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM,"Zone de Combat (Tour de Combat, salle des partenaires)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER,Zone de Combat (service d’échange)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE1,Zone de Combat (salon 1)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE2,Zone de Combat (salon 2)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE3,Zone de Combat (salon 3)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE4,Zone de Combat (salon 4)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE5,Zone de Combat (salon 5)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE6,Zone de Combat (salon 6)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE7,Zone de Combat (salon 7)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE8,Zone de Combat (salon 8)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_LOUNGE9,Zone de Combat (salon 9)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_MART,Zone de Combat (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_OUTSIDE_EAST,Zone de Combat (extérieur est)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_OUTSIDE_WEST,Zone de Combat (extérieur ouest)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,"Zone de Combat (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F,"Zone de Combat (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_RANKING_HALL,Zone de Combat (Salle des Classements)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_RECEPTION_GATE,Zone de Combat (porte d’accueil)
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_SCOTTS_HOUSE,Zone de Combat (maison de Scott)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE01,Pyramide de Combat (modèle de salle 1)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE02,Pyramide de Combat (modèle de salle 2)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE03,Pyramide de Combat (modèle de salle 3)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE04,Pyramide de Combat (modèle de salle 4)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE05,Pyramide de Combat (modèle de salle 5)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE06,Pyramide de Combat (modèle de salle 6)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE07,Pyramide de Combat (modèle de salle 7)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE08,Pyramide de Combat (modèle de salle 8)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE09,Pyramide de Combat (modèle de salle 9)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE10,Pyramide de Combat (modèle de salle 10)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE11,Pyramide de Combat (modèle de salle 11)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE12,Pyramide de Combat (modèle de salle 12)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE13,Pyramide de Combat (modèle de salle 13)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE14,Pyramide de Combat (modèle de salle 14)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE15,Pyramide de Combat (modèle de salle 15)
+ruby-sapphire-emerald,MAP_BATTLE_PYRAMID_SQUARE16,Pyramide de Combat (modèle de salle 16)
+ruby-sapphire-emerald,MAP_BATTLE_TOWER_BATTLE_ROOM,Tour de Combat (salle de combat)
+ruby-sapphire-emerald,MAP_BATTLE_TOWER_CORRIDOR,Tour de Combat (couloir)
+ruby-sapphire-emerald,MAP_BATTLE_TOWER_ELEVATOR,Tour de Combat (ascenseur)
+ruby-sapphire-emerald,MAP_BATTLE_TOWER_LOBBY,Tour de Combat (accueil)
+ruby-sapphire-emerald,MAP_BATTLE_TOWER_OUTSIDE,Tour de Combat (extérieur)
+ruby-sapphire-emerald,MAP_BIRTH_ISLAND_EXTERIOR,Île Aurore (extérieur)
+ruby-sapphire-emerald,MAP_BIRTH_ISLAND_HARBOR,Île Aurore (embarcadère)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_1F,Grotte Origine (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_B1F,Grotte Origine (1er sous-sol)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_B2F,Grotte Origine (2e sous-sol)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_B3F,Grotte Origine (3e sous-sol)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_B4F,Grotte Origine (4e sous-sol)
+ruby-sapphire-emerald,MAP_CAVE_OF_ORIGIN_ENTRANCE,Grotte Origine (entrée)
+ruby-sapphire-emerald,MAP_CONTEST_HALL,Salle de Concours (multijoueur)
+ruby-sapphire-emerald,MAP_CONTEST_HALL_BEAUTY,Salle de Concours (beauté)
+ruby-sapphire-emerald,MAP_CONTEST_HALL_COOL,Salle de Concours (sang-froid)
+ruby-sapphire-emerald,MAP_CONTEST_HALL_CUTE,Salle de Concours (grâce)
+ruby-sapphire-emerald,MAP_CONTEST_HALL_SMART,Salle de Concours (intelligence)
+ruby-sapphire-emerald,MAP_CONTEST_HALL_TOUGH,Salle de Concours (robustesse)
+ruby-sapphire-emerald,MAP_DESERT_RUINS,Ruines Désert
+ruby-sapphire-emerald,MAP_DESERT_UNDERPASS,Voie du Désert
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN,Myokara
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_GYM,Myokara (Arène)
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HALL,Myokara (hall)
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HOUSE1,Myokara (maison 1)
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HOUSE2,Myokara (maison 2)
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,"Myokara (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_POKEMON_CENTER_2F,"Myokara (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_DOUBLE_BATTLE_COLOSSEUM,Colisée de combat double
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY,Éternara
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CHAMPIONS_ROOM,Éternara (salle du Maître)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CORRIDOR1,Éternara (couloir 1)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CORRIDOR2,Éternara (couloir 2)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CORRIDOR3,Éternara (couloir 3)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CORRIDOR4,Éternara (couloir 4)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CORRIDOR5,Éternara (couloir 5)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_DRAKES_ROOM,Éternara (salle d’Aragon)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_GLACIAS_ROOM,Éternara (salle de Glacia)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL1,Éternara (hall 1)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL2,Éternara (hall 2)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL3,Éternara (hall 3)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL4,Éternara (hall 4)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL5,Éternara (hall 5)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL_OF_FAME,Éternara (Panthéon)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_PHOEBES_ROOM,Éternara (salle de Spectra)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,"Éternara (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_CENTER_2F,"Éternara (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE,Éternara (Ligue Pokémon)
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,"Éternara (Ligue Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F,"Éternara (Ligue Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM,Éternara (salle de Damien)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN,Autéquia
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM,"Autéquia (Tente de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR,"Autéquia (Tente de Combat, couloir)"
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY,"Autéquia (Tente de Combat, accueil)"
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_CONTEST_HALL,Autéquia (salle de Concours)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_CONTEST_LOBBY,Autéquia (accueil des Concours)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_COZMOS_HOUSE,Autéquia (maison du Prof. Kosmo)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_HOUSE1,Autéquia (maison 1)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_HOUSE2,Autéquia (maison 2)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_MART,Autéquia (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE,Autéquia (maison du Maître des Capacités)
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,"Autéquia (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_POKEMON_CENTER_2F,"Autéquia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_FARAWAY_ISLAND_ENTRANCE,Île lointaine (entrée)
+ruby-sapphire-emerald,MAP_FARAWAY_ISLAND_INTERIOR,Île lointaine (intérieur)
+ruby-sapphire-emerald,MAP_FIERY_PATH,Chemin Ardent
+ruby-sapphire-emerald,MAP_FORTREE_CITY,Cimetronelle
+ruby-sapphire-emerald,MAP_FORTREE_CITY_DECORATION_SHOP,Cimetronelle (boutique de décorations)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_GYM,Cimetronelle (Arène)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE1,Cimetronelle (maison 1)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE2,Cimetronelle (maison 2)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE3,Cimetronelle (maison 3)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE4,Cimetronelle (maison 4)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE5,Cimetronelle (maison 5)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_MART,Cimetronelle (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_FORTREE_CITY_POKEMON_CENTER_1F,"Cimetronelle (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_FORTREE_CITY_POKEMON_CENTER_2F,"Cimetronelle (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_GRANITE_CAVE_1F,Grotte Granite (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_GRANITE_CAVE_B1F,Grotte Granite (1er sous-sol)
+ruby-sapphire-emerald,MAP_GRANITE_CAVE_B2F,Grotte Granite (2e sous-sol)
+ruby-sapphire-emerald,MAP_GRANITE_CAVE_STEVENS_ROOM,Grotte Granite (salle de Pierre)
+ruby-sapphire-emerald,MAP_INSIDE_OF_TRUCK,Camion de déménagement
+ruby-sapphire-emerald,MAP_ISLAND_CAVE,Grotte de l’Îlot
+ruby-sapphire-emerald,MAP_JAGGED_PASS,Sentier Sinuroc
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN,Vermilava
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_GYM_1F,"Vermilava (Arène, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_GYM_B1F,"Vermilava (Arène, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_HERB_SHOP,Vermilava (Herboristerie)
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_HOUSE,Vermilava (maison)
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_MART,Vermilava (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,"Vermilava (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_POKEMON_CENTER_2F,"Vermilava (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY,Nénucrique
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_CONTEST_HALL,Nénucrique (salle de Concours)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_CONTEST_LOBBY,Nénucrique (accueil des Concours)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F,"Nénucrique (Hôtel du Grand Lac, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_2F,"Nénucrique (Hôtel du Grand Lac, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F,"Nénucrique (Centre Commercial, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F,"Nénucrique (Centre Commercial, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F,"Nénucrique (Centre Commercial, étage 2)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F,"Nénucrique (Centre Commercial, étage 3)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F,"Nénucrique (Centre Commercial, étage 4)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR,"Nénucrique (Centre Commercial, ascenseur)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP,"Nénucrique (Centre Commercial, toit)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_EMPTY_MAP,Nénucrique (salle vide)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HARBOR,Nénucrique (embarcadère)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE1,Nénucrique (maison 1)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE2,Nénucrique (maison 2)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE3,Nénucrique (maison 3)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE4,Nénucrique (maison 4)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F,"Nénucrique (Musée de Nénucrique, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F,"Nénucrique (Musée de Nénucrique, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_MOVE_DELETERS_HOUSE,Nénucrique (maison de l’Effaceur de Capacités)
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_CENTER_1F,"Nénucrique (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_CENTER_2F,"Nénucrique (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB,Nénucrique (Fan Club des Dresseurs)
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM1,Salle de Concours multijoueur 1
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM2,Salle de Concours multijoueur 2
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM3,Salle de Concours multijoueur 3
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM4,Salle de Concours multijoueur 4
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM5,Salle de Concours multijoueur 5
+ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM6,Salle de Concours multijoueur 6
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN,Bourg-en-Vol
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F,"Bourg-en-Vol (maison de Brice, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,"Bourg-en-Vol (maison de Brice, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F,"Bourg-en-Vol (maison de Flora, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F,"Bourg-en-Vol (maison de Flora, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB,Bourg-en-Vol (laboratoire du Prof. Seko)
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_1F,Planque Magma (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_1R,"Planque Magma (étage 1, salle 1)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_2R,"Planque Magma (étage 1, salle 2)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_3R,"Planque Magma (étage 1, salle 3)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_1R,"Planque Magma (étage 2, salle 1)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_2R,"Planque Magma (étage 2, salle 2)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_3R,"Planque Magma (étage 2, salle 3)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_4F,Planque Magma (étage 3)
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_B1F,Planque Magma (1er sous-sol)
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_B2F,Planque Magma (2e sous-sol)
+ruby-sapphire-emerald,MAP_MARINE_CAVE_END,Grotte Marine (salle finale)
+ruby-sapphire-emerald,MAP_MARINE_CAVE_ENTRANCE,Grotte Marine (entrée)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY,Lavandia
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_BIKE_SHOP,Lavandia (Cycles Rodolphe)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_GAME_CORNER,Lavandia (Casino)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_GYM,Lavandia (Arène)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_HOUSE1,Lavandia (maison 1)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_HOUSE2,Lavandia (maison 2)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_MART,Lavandia (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_POKEMON_CENTER_1F,"Lavandia (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_POKEMON_CENTER_2F,"Lavandia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_METEOR_FALLS_1F_1R,"Site Météore (rez-de-chaussée, salle 1)"
+ruby-sapphire-emerald,MAP_METEOR_FALLS_1F_2R,"Site Météore (rez-de-chaussée, salle 2)"
+ruby-sapphire-emerald,MAP_METEOR_FALLS_B1F_1R,"Site Météore (1er sous-sol, salle 1)"
+ruby-sapphire-emerald,MAP_METEOR_FALLS_B1F_2R,"Site Météore (1er sous-sol, salle 2)"
+ruby-sapphire-emerald,MAP_METEOR_FALLS_STEVENS_CAVE,Site Météore (grotte de Pierre)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_1F,Tour Mirage (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_2F,Tour Mirage (étage 1)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_3F,Tour Mirage (étage 2)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_4F,Tour Mirage (étage 3)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY,Algatia
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_GAME_CORNER_1F,"Algatia (Casino, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_GAME_CORNER_B1F,"Algatia (Casino, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_GYM,Algatia (Arène)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE1,Algatia (maison 1)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE2,Algatia (maison 2)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE3,Algatia (maison 3)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE4,Algatia (maison 4)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_MART,Algatia (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F,"Algatia (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_POKEMON_CENTER_2F,"Algatia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_SPACE_CENTER_1F,"Algatia (Centre Spatial, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_SPACE_CENTER_2F,"Algatia (Centre Spatial, étage 1)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_STEVENS_HOUSE,Algatia (maison de Pierre)
+ruby-sapphire-emerald,MAP_MT_CHIMNEY,Mont Chimnée
+ruby-sapphire-emerald,MAP_MT_CHIMNEY_CABLE_CAR_STATION,Mont Chimnée (station du téléphérique)
+ruby-sapphire-emerald,MAP_MT_PYRE_1F,Mont Mémoria (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_MT_PYRE_2F,Mont Mémoria (étage 1)
+ruby-sapphire-emerald,MAP_MT_PYRE_3F,Mont Mémoria (étage 2)
+ruby-sapphire-emerald,MAP_MT_PYRE_4F,Mont Mémoria (étage 3)
+ruby-sapphire-emerald,MAP_MT_PYRE_5F,Mont Mémoria (étage 4)
+ruby-sapphire-emerald,MAP_MT_PYRE_6F,Mont Mémoria (étage 5)
+ruby-sapphire-emerald,MAP_MT_PYRE_EXTERIOR,Mont Mémoria (extérieur)
+ruby-sapphire-emerald,MAP_MT_PYRE_SUMMIT,Mont Mémoria (sommet)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_B1F,Roc Nombri (1er sous-sol)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_BOTTOM,Roc Nombri (fond)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN01,Roc Nombri (descente 1)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN02,Roc Nombri (descente 2)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN03,Roc Nombri (descente 3)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN04,Roc Nombri (descente 4)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN05,Roc Nombri (descente 5)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN06,Roc Nombri (descente 6)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN07,Roc Nombri (descente 7)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN08,Roc Nombri (descente 8)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN09,Roc Nombri (descente 9)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN10,Roc Nombri (descente 10)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_DOWN11,Roc Nombri (descente 11)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_ENTRANCE,Roc Nombri (entrée)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_EXTERIOR,Roc Nombri (extérieur)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_FORK,Roc Nombri (embranchement)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_HARBOR,Roc Nombri (embarcadère)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_TOP,Roc Nombri (sommet)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_UP1,Roc Nombri (montée 1)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_UP2,Roc Nombri (montée 2)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_UP3,Roc Nombri (montée 3)
+ruby-sapphire-emerald,MAP_NAVEL_ROCK_UP4,Roc Nombri (montée 4)
+ruby-sapphire-emerald,MAP_NEW_MAUVILLE_ENTRANCE,New Lavandia (entrée)
+ruby-sapphire-emerald,MAP_NEW_MAUVILLE_INSIDE,New Lavandia (intérieur)
+ruby-sapphire-emerald,MAP_OLDALE_TOWN,Rosyères
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_HOUSE1,Rosyères (maison 1)
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_HOUSE2,Rosyères (maison 2)
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_MART,Rosyères (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_POKEMON_CENTER_1F,"Rosyères (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_POKEMON_CENTER_2F,"Rosyères (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN,Pacifiville
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE1,Pacifiville (maison 1)
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE2,Pacifiville (maison 2)
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE3,Pacifiville (maison 3)
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE4,Pacifiville (maison 4)
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE5,Pacifiville (maison 5)
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F,"Pacifiville (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_2F,"Pacifiville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_PETALBURG_CITY,Clémenti-Ville
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_GYM,Clémenti-Ville (Arène)
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_HOUSE1,Clémenti-Ville (maison 1)
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_HOUSE2,Clémenti-Ville (maison 2)
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_MART,Clémenti-Ville (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_POKEMON_CENTER_1F,"Clémenti-Ville (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_POKEMON_CENTER_2F,"Clémenti-Ville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_WALLYS_HOUSE,Clémenti-Ville (maison de Timmy)
+ruby-sapphire-emerald,MAP_PETALBURG_WOODS,Bois Clémenti
+ruby-sapphire-emerald,MAP_RECORD_CORNER,Centre de mixage de données
+ruby-sapphire-emerald,MAP_ROUTE101,Route 101
+ruby-sapphire-emerald,MAP_ROUTE102,Route 102
+ruby-sapphire-emerald,MAP_ROUTE103,Route 103
+ruby-sapphire-emerald,MAP_ROUTE104,Route 104
+ruby-sapphire-emerald,MAP_ROUTE104_MR_BRINEYS_HOUSE,Route 104 (maison de M. Marco)
+ruby-sapphire-emerald,MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP,Route 104 (Fleuriste Jolie Fleur)
+ruby-sapphire-emerald,MAP_ROUTE105,Chenal 105
+ruby-sapphire-emerald,MAP_ROUTE106,Chenal 106
+ruby-sapphire-emerald,MAP_ROUTE107,Chenal 107
+ruby-sapphire-emerald,MAP_ROUTE108,Chenal 108
+ruby-sapphire-emerald,MAP_ROUTE109,Chenal 109
+ruby-sapphire-emerald,MAP_ROUTE109_SEASHORE_HOUSE,Chenal 109 (maison du bord de mer)
+ruby-sapphire-emerald,MAP_ROUTE110,Route 110
+ruby-sapphire-emerald,MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE,Route 110 (entrée nord de la piste cyclable)
+ruby-sapphire-emerald,MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE,Route 110 (entrée sud de la piste cyclable)
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_CORRIDOR,"Route 110 (Maison des Pièges, couloir)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_END,"Route 110 (Maison des Pièges, salle finale)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_ENTRANCE,"Route 110 (Maison des Pièges, entrée)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE1,"Route 110 (Maison des Pièges, épreuve 1)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE2,"Route 110 (Maison des Pièges, épreuve 2)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE3,"Route 110 (Maison des Pièges, épreuve 3)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE4,"Route 110 (Maison des Pièges, épreuve 4)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE5,"Route 110 (Maison des Pièges, épreuve 5)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE6,"Route 110 (Maison des Pièges, épreuve 6)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE7,"Route 110 (Maison des Pièges, épreuve 7)"
+ruby-sapphire-emerald,MAP_ROUTE110_TRICK_HOUSE_PUZZLE8,"Route 110 (Maison des Pièges, épreuve 8)"
+ruby-sapphire-emerald,MAP_ROUTE111,Route 111
+ruby-sapphire-emerald,MAP_ROUTE111_OLD_LADYS_REST_STOP,Route 111 (maison de repos)
+ruby-sapphire-emerald,MAP_ROUTE111_WINSTRATE_FAMILYS_HOUSE,Route 111 (maison de la famille Stratège)
+ruby-sapphire-emerald,MAP_ROUTE112,Route 112
+ruby-sapphire-emerald,MAP_ROUTE112_CABLE_CAR_STATION,Route 112 (station du téléphérique)
+ruby-sapphire-emerald,MAP_ROUTE113,Route 113
+ruby-sapphire-emerald,MAP_ROUTE113_GLASS_WORKSHOP,Route 113 (Atelier du Verre)
+ruby-sapphire-emerald,MAP_ROUTE114,Route 114
+ruby-sapphire-emerald,MAP_ROUTE114_FOSSIL_MANIACS_HOUSE,Route 114 (maison du Maniaque des Fossiles)
+ruby-sapphire-emerald,MAP_ROUTE114_FOSSIL_MANIACS_TUNNEL,Route 114 (tunnel du Maniaque des Fossiles)
+ruby-sapphire-emerald,MAP_ROUTE114_LANETTES_HOUSE,Route 114 (maison d’Annette)
+ruby-sapphire-emerald,MAP_ROUTE115,Route 115
+ruby-sapphire-emerald,MAP_ROUTE116,Route 116
+ruby-sapphire-emerald,MAP_ROUTE116_TUNNELERS_REST_HOUSE,Route 116 (maison de repos des ouvriers)
+ruby-sapphire-emerald,MAP_ROUTE117,Route 117
+ruby-sapphire-emerald,MAP_ROUTE117_POKEMON_DAY_CARE,Route 117 (Pension Pokémon)
+ruby-sapphire-emerald,MAP_ROUTE118,Route 118
+ruby-sapphire-emerald,MAP_ROUTE119,Route 119
+ruby-sapphire-emerald,MAP_ROUTE119_HOUSE,Route 119 (maison)
+ruby-sapphire-emerald,MAP_ROUTE119_WEATHER_INSTITUTE_1F,"Route 119 (Centre Météo, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_ROUTE119_WEATHER_INSTITUTE_2F,"Route 119 (Centre Météo, étage 1)"
+ruby-sapphire-emerald,MAP_ROUTE120,Route 120
+ruby-sapphire-emerald,MAP_ROUTE121,Route 121
+ruby-sapphire-emerald,MAP_ROUTE121_SAFARI_ZONE_ENTRANCE,Route 121 (entrée du Parc Safari)
+ruby-sapphire-emerald,MAP_ROUTE122,Chenal 122
+ruby-sapphire-emerald,MAP_ROUTE123,Route 123
+ruby-sapphire-emerald,MAP_ROUTE123_BERRY_MASTERS_HOUSE,Route 123 (maison du Maître des Baies)
+ruby-sapphire-emerald,MAP_ROUTE124,Chenal 124
+ruby-sapphire-emerald,MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE,Chenal 124 (maison du chercheur de trésors sous-marins)
+ruby-sapphire-emerald,MAP_ROUTE125,Chenal 125
+ruby-sapphire-emerald,MAP_ROUTE126,Chenal 126
+ruby-sapphire-emerald,MAP_ROUTE127,Chenal 127
+ruby-sapphire-emerald,MAP_ROUTE128,Chenal 128
+ruby-sapphire-emerald,MAP_ROUTE129,Chenal 129
+ruby-sapphire-emerald,MAP_ROUTE130,Chenal 130
+ruby-sapphire-emerald,MAP_ROUTE130_MIRAGE_ISLAND,Île Mirage (Chenal 130)
+ruby-sapphire-emerald,MAP_ROUTE131,Chenal 131
+ruby-sapphire-emerald,MAP_ROUTE132,Chenal 132
+ruby-sapphire-emerald,MAP_ROUTE133,Chenal 133
+ruby-sapphire-emerald,MAP_ROUTE134,Chenal 134
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY,Mérouville
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_CUTTERS_HOUSE,Mérouville (maison du Coupeur)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_1F,"Mérouville (Devon SARL, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_2F,"Mérouville (Devon SARL, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_3F,"Mérouville (Devon SARL, étage 2)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT1_1F,"Mérouville (immeuble 1, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT1_2F,"Mérouville (immeuble 1, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_1F,"Mérouville (immeuble 2, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_2F,"Mérouville (immeuble 2, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_3F,"Mérouville (immeuble 2, étage 2)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_GYM,Mérouville (Arène)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE1,Mérouville (maison 1)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE2,Mérouville (maison 2)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE3,Mérouville (maison 3)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_MART,Mérouville (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_CENTER_1F,"Mérouville (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_CENTER_2F,"Mérouville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_SCHOOL,Mérouville (École des Dresseurs)
+ruby-sapphire-emerald,MAP_RUSTURF_TUNNEL,Tunnel Mérazon
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTH,Parc Safari (nord)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTHEAST,Parc Safari (nord-est)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTHWEST,Parc Safari (nord-ouest)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_REST_HOUSE,Parc Safari (maison de repos)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTH,Parc Safari (sud)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTHEAST,Parc Safari (sud-est)
+ruby-sapphire-emerald,MAP_SAFARI_ZONE_SOUTHWEST,Parc Safari (sud-ouest)
+ruby-sapphire-emerald,MAP_SCORCHED_SLAB,Grotte Zénith
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ENTRANCE,Caverne Fondmer (entrée)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM1,Caverne Fondmer (salle 1)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM2,Caverne Fondmer (salle 2)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM3,Caverne Fondmer (salle 3)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM4,Caverne Fondmer (salle 4)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM5,Caverne Fondmer (salle 5)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM6,Caverne Fondmer (salle 6)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM7,Caverne Fondmer (salle 7)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM8,Caverne Fondmer (salle 8)
+ruby-sapphire-emerald,MAP_SEAFLOOR_CAVERN_ROOM9,Caverne Fondmer (salle 9)
+ruby-sapphire-emerald,MAP_SEALED_CHAMBER_INNER_ROOM,Sanctuaire (salle intérieure)
+ruby-sapphire-emerald,MAP_SEALED_CHAMBER_OUTER_ROOM,Sanctuaire (salle extérieure)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BLUE_CAVE1,Base Secrète (grotte bleue 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BLUE_CAVE2,Base Secrète (grotte bleue 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BLUE_CAVE3,Base Secrète (grotte bleue 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BLUE_CAVE4,Base Secrète (grotte bleue 4)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BROWN_CAVE1,Base Secrète (grotte brune 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BROWN_CAVE2,Base Secrète (grotte brune 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BROWN_CAVE3,Base Secrète (grotte brune 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_BROWN_CAVE4,Base Secrète (grotte brune 4)
+ruby-sapphire-emerald,MAP_SECRET_BASE_RED_CAVE1,Base Secrète (grotte rouge 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_RED_CAVE2,Base Secrète (grotte rouge 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_RED_CAVE3,Base Secrète (grotte rouge 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_RED_CAVE4,Base Secrète (grotte rouge 4)
+ruby-sapphire-emerald,MAP_SECRET_BASE_SHRUB1,Base Secrète (buisson 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_SHRUB2,Base Secrète (buisson 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_SHRUB3,Base Secrète (buisson 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_SHRUB4,Base Secrète (buisson 4)
+ruby-sapphire-emerald,MAP_SECRET_BASE_TREE1,Base Secrète (arbre 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_TREE2,Base Secrète (arbre 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_TREE3,Base Secrète (arbre 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_TREE4,Base Secrète (arbre 4)
+ruby-sapphire-emerald,MAP_SECRET_BASE_YELLOW_CAVE1,Base Secrète (grotte jaune 1)
+ruby-sapphire-emerald,MAP_SECRET_BASE_YELLOW_CAVE2,Base Secrète (grotte jaune 2)
+ruby-sapphire-emerald,MAP_SECRET_BASE_YELLOW_CAVE3,Base Secrète (grotte jaune 3)
+ruby-sapphire-emerald,MAP_SECRET_BASE_YELLOW_CAVE4,Base Secrète (grotte jaune 4)
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM,"Grotte Tréfonds (marée haute, entrée)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM,"Grotte Tréfonds (marée haute, salle intérieure)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM,"Grotte Tréfonds (marée basse, entrée)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM,"Grotte Tréfonds (marée basse, salle de glace)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM,"Grotte Tréfonds (marée basse, salle intérieure)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM,"Grotte Tréfonds (marée basse, salle inférieure)"
+ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM,"Grotte Tréfonds (marée basse, escaliers)"
+ruby-sapphire-emerald,MAP_SINGLE_BATTLE_COLOSSEUM,Colisée de combat simple
+ruby-sapphire-emerald,MAP_SKY_PILLAR_1F,Pilier Céleste (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_2F,Pilier Céleste (étage 1)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_3F,Pilier Céleste (étage 2)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_4F,Pilier Céleste (étage 3)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_5F,Pilier Céleste (étage 4)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_ENTRANCE,Pilier Céleste (entrée)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_OUTSIDE,Pilier Céleste (extérieur)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_TOP,Pilier Céleste (sommet)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY,Poivressel
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM,"Poivressel (Tente de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR,"Poivressel (Tente de Combat, couloir)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY,"Poivressel (Tente de Combat, accueil)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_CONTEST_HALL,Poivressel (salle de Concours)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_CONTEST_LOBBY,Poivressel (accueil des Concours)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_HARBOR,Poivressel (embarcadère)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_HOUSE,Poivressel (maison)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_HOUSE1,Poivressel (maison 1)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_HOUSE2,Poivressel (maison 2)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_MART,Poivressel (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_NAME_RATERS_HOUSE,Poivressel (maison du Spécialiste des Noms)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F,"Poivressel (Musée Océanographique, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F,"Poivressel (Musée Océanographique, étage 1)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_CENTER_1F,"Poivressel (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_CENTER_2F,"Poivressel (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB,Poivressel (Fan Club Pokémon)
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_STERNS_SHIPYARD_1F,"Poivressel (Chantier Naval de Poupe, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_STERNS_SHIPYARD_2F,"Poivressel (Chantier Naval de Poupe, étage 1)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY,Atalanopolis
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_GYM_1F,"Atalanopolis (Arène, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_GYM_B1F,"Atalanopolis (Arène, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE1,Atalanopolis (maison 1)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE2,Atalanopolis (maison 2)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE3,Atalanopolis (maison 3)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE4,Atalanopolis (maison 4)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE5,Atalanopolis (maison 5)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE6,Atalanopolis (maison 6)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE7,Atalanopolis (maison 7)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_HOUSE8,Atalanopolis (maison 8)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE,Atalanopolis (maison de Nénupiot et Grainipiot)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MART,Atalanopolis (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F,"Atalanopolis (maison des événements mystère, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F,"Atalanopolis (maison des événements mystère, 1er sous-sol)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F,"Atalanopolis (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_2F,"Atalanopolis (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_SOUTHERN_ISLAND_EXTERIOR,Île du Sud (extérieur)
+ruby-sapphire-emerald,MAP_SOUTHERN_ISLAND_INTERIOR,Île du Sud (intérieur)
+ruby-sapphire-emerald,MAP_SS_TIDAL_CORRIDOR,Le Marina (couloir)
+ruby-sapphire-emerald,MAP_SS_TIDAL_LOWER_DECK,Le Marina (pont inférieur)
+ruby-sapphire-emerald,MAP_SS_TIDAL_ROOMS,Le Marina (cabines)
+ruby-sapphire-emerald,MAP_TERRA_CAVE_END,Grotte Terra (salle finale)
+ruby-sapphire-emerald,MAP_TERRA_CAVE_ENTRANCE,Grotte Terra (entrée)
+ruby-sapphire-emerald,MAP_TRADE_CENTER,Centre de Troc
+ruby-sapphire-emerald,MAP_TRAINER_HILL_1F,Colline Dresseurs (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_2F,Colline Dresseurs (étage 1)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_3F,Colline Dresseurs (étage 2)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_4F,Colline Dresseurs (étage 3)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_ELEVATOR,Colline Dresseurs (ascenseur)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_ENTRANCE,Colline Dresseurs (entrée)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_ROOF,Colline Dresseurs (toit)
+ruby-sapphire-emerald,MAP_UNDERWATER1,Fond marin du Chenal 124
+ruby-sapphire-emerald,MAP_UNDERWATER2,Fond marin du Chenal 126
+ruby-sapphire-emerald,MAP_UNDERWATER3,Fond marin du Chenal 127
+ruby-sapphire-emerald,MAP_UNDERWATER4,Fond marin du Chenal 128
+ruby-sapphire-emerald,MAP_UNDERWATER_MARINE_CAVE,Fond marin (Grotte Marine)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE105,Fond marin (chenal 105)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE124,Fond marin (chenal 124)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE125,Fond marin (chenal 125)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE126,Fond marin (chenal 126)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE127,Fond marin (chenal 127)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE128,Fond marin (chenal 128)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE129,Fond marin (chenal 129)
+ruby-sapphire-emerald,MAP_UNDERWATER_ROUTE134,Fond marin (chenal 134)
+ruby-sapphire-emerald,MAP_UNDERWATER_SEAFLOOR_CAVERN,Fond marin (Caverne Fondmer)
+ruby-sapphire-emerald,MAP_UNDERWATER_SEALED_CHAMBER,Fond marin (Sanctuaire)
+ruby-sapphire-emerald,MAP_UNDERWATER_SOOTOPOLIS_CITY,Fond marin (Atalanopolis)
+ruby-sapphire-emerald,MAP_UNION_ROOM,Salle Union
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN,Vergazon
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM,"Vergazon (Tente de Combat, salle de combat)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR,"Vergazon (Tente de Combat, couloir)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY,"Vergazon (Tente de Combat, accueil)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_CONTEST_HALL,Vergazon (salle de Concours)
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_CONTEST_LOBBY,Vergazon (accueil des Concours)
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE,Vergazon (maison de l’évaluatrice du bonheur)
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_HOUSE,Vergazon (maison)
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_MART,Vergazon (Boutique Pokémon)
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F,"Vergazon (Centre Pokémon, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_POKEMON_CENTER_2F,"Vergazon (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_WANDAS_HOUSE,Vergazon (maison de la cousine de Timmy)
+ruby-sapphire-emerald,MAP_VICTORY_ROAD_1F,Route Victoire (rez-de-chaussée)
+ruby-sapphire-emerald,MAP_VICTORY_ROAD_B1F,Route Victoire (1er sous-sol)
+ruby-sapphire-emerald,MAP_VICTORY_ROAD_B2F,Route Victoire (2e sous-sol)

@@ -31,7 +31,7 @@ from .maps_layout import GameMaps, identifier, read_layout_curation
 from .maps_render import MapRenderer, write_tiles
 from .maps_render_gen1 import Gen1Renderer
 from .maps_render_gen2 import Gen2Renderer
-from .pret import BLOCK_PX, LAST_MAP, PretRepo
+from .pret import LAST_MAP, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import roaming_maps
 from .pret_reader import open_pret
@@ -147,7 +147,7 @@ def export_game(
         shutil.rmtree(output)
 
     map_renderer = renderer(game_maps)
-    rows = _display_map_rows(game_maps, names, map_renderer, output)
+    rows = display_map_rows(game_maps, names, map_renderer, output)
     warps = _warp_rows(game_maps)
     objects, sprites = object_rows(game_maps, curation)
     spots = _spot_rows(game_maps)
@@ -165,11 +165,11 @@ def _roaming_areas(game_maps: GameMaps) -> list[tuple[str, str]]:
             return [(const, GEN2_ROAMING_AREA) for const in roaming_maps(repo)]
 
 
-def _display_map_rows(
+def display_map_rows(
     game_maps: GameMaps, names: dict[str, str], map_renderer: MapRenderer, output: Path
 ) -> list[MapRow]:
     maps = game_maps.maps
-    numbers = {region.const: region.number for region in game_maps.game.regions}
+    numbers = game_maps.world_numbers
     plan_numbers = {const: plan.number for const, plan in game_maps.plans.items()}
     rows: list[MapRow] = []
     for const in game_maps.display_maps:
@@ -197,7 +197,7 @@ def _display_map_rows(
         if placed.display == const:
             continue
         pret_map = maps[const]
-        width, height = pret_map.width * BLOCK_PX, pret_map.height * BLOCK_PX
+        width, height = pret_map.width * game_maps.block_px, pret_map.height * game_maps.block_px
         rows.append(
             MapRow(
                 const,

@@ -35,7 +35,7 @@ INTERIOR_NEIGHBORS = 7
 
 
 def identifier(const: str) -> str:
-    return const.lower().replace("_", "-")
+    return const.removeprefix("MAP_").lower().replace("_", "-")
 
 
 @dataclass
@@ -144,6 +144,12 @@ class GameMaps:
         self.chosen_parents = [parent for parent in curation.parents if parent.family == game.map_family]
         self.plan_parts = tuple(part for part in curation.plans if part.family == game.map_family)
 
+    block_px = BLOCK_PX
+
+    @property
+    def world_numbers(self) -> dict[str, int]:
+        return {region.const: region.number for region in self.game.regions}
+
     # --- Cartes du monde ----------------------------------------------------
 
     @cached_property
@@ -183,6 +189,8 @@ class GameMaps:
             current = self.maps[queue.popleft()]
             x, y = positions[current.const]
             for connection in current.connections:
+                if connection.direction in {"dive", "emerge"}:
+                    continue
                 if (current.const, connection.target) in self.skipped:
                     continue
                 target = self.maps[connection.target]
@@ -271,12 +279,12 @@ class GameMaps:
 
     @cached_property
     def plans(self) -> dict[str, MapPlan]:
-        return build_plans(self.plan_parts, self.maps, set(self.parents))
+        return build_plans(self.plan_parts, self.maps, set(self.parents), self.block_px)
 
     @cached_property
     def placements(self) -> dict[str, Placed]:
         placed = {
-            const: Placed(region, x * BLOCK_PX, y * BLOCK_PX)
+            const: Placed(region, x * self.block_px, y * self.block_px)
             for region, blocks in self.world_blocks.items()
             for const, (x, y) in blocks.items()
         }

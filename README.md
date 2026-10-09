@@ -176,8 +176,10 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   les effets d'attaques et leurs probabilités en pourcentage. Les sources C et assembleur sont sélectionnées
   par version, en anglais, révision 0, sans options de correction. Les effets français sont dans
   `move_effects.csv`, format `gen3`. Les layouts inutilisés ne sont pas chargés ; les données utilisées
-  inconnues ou incohérentes arrêtent la lecture. Le rendu des cartes et l'intégration de ces jeux à l'aperçu
-  complet restent dans les phases suivantes du [plan génération 3](docs/plan_gen_3.md).
+  inconnues ou incohérentes arrêtent la lecture. Les cartes Hoenn sont rendues et embarquées séparément pour
+  Rubis/Saphir et Émeraude, avec catalogues TSV, événements JSON et sprites de PNJ. L'intégration à Room et
+  l'activation des jeux suivent les phases rencontres, personnages et application du
+  [plan génération 3](docs/plan_gen_3.md) ; la branche Rouge Feu/Vert Feuille reste à traiter.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
@@ -252,7 +254,9 @@ Les données Pokémon de la 3e génération sont préparées séparément pour H
 les espèces nécessitant un transfert, les noms français et les objets clés sur des bases réduites sans cartes.
 Les tables événementielles B à I de la Grotte Métamo restent listées avec la mention « Événement externe » et
 ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
-Ces jeux entreront dans l'aperçu complet avec le lecteur de cartes GBA ; ils ne sont pas encore dans l'application.
+Les cartes Hoenn préparatoires sont dans `assets/maps/emerald` et `assets/maps/ruby-sapphire` ; les jeux
+entreront dans l'aperçu complet avec leurs rencontres et personnages. Ils ne sont pas encore sélectionnables
+dans l'application. Le [bilan des cartes Hoenn](docs/generations/cartes-hoenn.md) décrit les variantes et mesures.
 
 Les ressources finales de `app/src/main/assets/` sont versionnées avec Git classique, sans Git LFS :
 base, sprites fixes et animés (normaux, chromatiques et formes de Zarbi), icônes d'objets, tuiles, sprites de PNJ
@@ -369,6 +373,10 @@ ruff check . && ruff format --check .
 python -m pytest -q
 python -m pytest -q -m pipeline
 ```
+
+Pour modifier uniquement les cartes Hoenn préparatoires, utiliser
+`python tools/build_data.py --hoenn-maps-only`, puis les mêmes validations et tests du pipeline.
+Cette commande régénère les deux variantes et leur inventaire SHA-256 sans modifier la base Room.
 
 La génération réutilise les CSV, désassemblages, images et conversions déjà présents dans `tools/.cache` ;
 elle ne télécharge que les sources manquantes aux commits épinglés. Les tests bloquent les accès réseau.

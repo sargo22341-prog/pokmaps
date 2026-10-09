@@ -404,24 +404,27 @@ Le format est commun, mais chaque lecteur choisit sa variante par dépôt (table
 
 Communs :
 
-- [ ] `maps_render_gen3.py` : rendu des métatiles (couches basse et haute), bordures, première image des
+- [x] `maps_render_gen3.py` : rendu des métatiles (couches basse et haute), bordures, première image des
       tuiles animées ; sprites des PNJ (image de face) avec leur palette.
-- [ ] Mesurer tuiles, taille des assets, durée de génération et APK ; signaler tout asset de plus de 5 Mio.
-- [ ] Relire visuellement les assemblages (comme la passe « 796 positions d'entrées » des générations 1-2).
-- [ ] Tests : régions assemblées sans recouvrement, warps cohérents, plans, `GeneratedMapSectionsTest`.
+- [x] Mesurer tuiles, taille des assets, durée de génération et APK ; signaler tout asset de plus de 5 Mio.
+- [x] Relire visuellement les assemblages (comme la passe « 796 positions d'entrées » des générations 1-2).
+- [x] Tests : régions assemblées sans recouvrement, warps cohérents, plans, `GeneratedMapSectionsTest`.
 
 Branche Hoenn :
 
-- [ ] Carte du monde de Hoenn depuis Bourg-en-Vol (49 cartes) ; niveau « Sous l'eau » relié par `dive` /
+- [x] Carte du monde de Hoenn depuis Bourg-en-Vol (49 cartes) ; niveau « Sous l'eau » relié par `dive` /
       `emerge` ; Parc Safari et extérieur de la Zone de Combat ancrés (`map_anchors.csv`).
-- [ ] `map_connection_skips.csv`, `map_parents.csv`, `map_anchors.csv` : Zone de Combat atteinte en bateau,
+- [x] `map_connection_skips.csv`, `map_parents.csv`, `map_anchors.csv` : Zone de Combat atteinte en bateau,
       Atalanopolis atteinte par Plongée, Pacifiville, Île Mirage, îles d'événement.
-- [ ] `map_plans.csv` : Mont Chimnée, Grotte Granite, Tour Céleste, `SHOAL_CAVE` (marée haute / marée basse),
+- [x] `map_plans.csv` : Mont Chimnée, Grotte Granite, Tour Céleste, `SHOAL_CAVE` (marée haute / marée basse),
       `SEAFLOOR_CAVERN`, `CAVE_OF_ORIGIN` (étages différents entre Rubis et Émeraude), repaires Magma/Aqua,
       Route Victoire de Hoenn, Tour Mirage, Pyramide.
-- [ ] `maps.csv` : noms français des cartes de `ruby-sapphire-emerald` (préremplis d'après
+- [x] `maps.csv` : noms français des cartes de `ruby-sapphire-emerald` (préremplis d'après
       `region_map_section` et PokéAPI, puis relus ; un nom manquant reste bloquant).
-- [ ] Différences Rubis/Saphir ↔ Émeraude : cartes propres à un jeu, 113 cartes aux blocs différents.
+- [x] Différences Rubis/Saphir ↔ Émeraude : cartes propres à un jeu, 113 cartes aux blocs différents.
+
+Bilan : [cartes Hoenn](generations/cartes-hoenn.md). Les assets finaux et catalogues autonomes sont
+embarqués ; l’activation dans Room et l’aperçu complet attend les phases rencontres et personnages.
 
 Branche Remake 1G :
 
