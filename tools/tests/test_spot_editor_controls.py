@@ -133,6 +133,8 @@ def test_editor_opens_error_location_and_updates_report(
     monkeypatch.setattr(app, "ERROR_REPORT", report)
     monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
     monkeypatch.setattr(app, "read_spots", lambda: {KEY: frozenset({INVALID})})
+    # Le faux terrain ne décrit que la famille R/B/J, pas les nouvelles cartes GBA.
+    monkeypatch.setattr(app.EditorCatalog, "families", lambda _catalog: [FAMILY])
     editor = app.MapEditor(window)
     try:
         [error] = editor.errors

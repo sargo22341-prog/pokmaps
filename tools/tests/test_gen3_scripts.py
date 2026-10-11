@@ -19,6 +19,13 @@ def _scripts(text: str, constants: dict[str, int] | None = None) -> Gen3Scripts:
     return Gen3Scripts(parse_scripts(text, "test.inc"), constants or {})
 
 
+def test_numeric_equ_aliases_keep_fossil_conditions_local_to_each_file() -> None:
+    first = parse_scripts(".equ HELIX_FOSSIL, 1\nEntry:\ncheckitem HELIX_FOSSIL\nend", "first.inc")
+    second = parse_scripts(".equ HELIX_FOSSIL, 2\nOther:\ncheckitem HELIX_FOSSIL\nend", "second.inc")
+    assert first["Entry"].lines[0].args == ("1",)
+    assert second["Other"].lines[0].args == ("2",)
+
+
 def test_bit_shift_constants_are_bounded() -> None:
     assert number_value("(1 << 7)", {}) == 128
     assert number_value("(1 << 65535)", {}) is None

@@ -1,17 +1,17 @@
-"""Validation hors ligne des catalogues de personnages des jeux Hoenn activés."""
+"""Validation hors ligne des catalogues de personnages des jeux GBA activés."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from .games import EMERALD, RUBY_SAPPHIRE, Game
+from .games import GEN3_GAMES, Game
 from .pret_gen3_source import read_json
 from .sources import PRET_COMMITS
 
 
 def validate_character_catalog(folder: Path, game: Game) -> None:
-    if game not in (RUBY_SAPPHIRE, EMERALD):
-        raise ValueError(f"{folder} : catalogue de personnages hors Hoenn")
+    if game not in GEN3_GAMES:
+        raise ValueError(f"{folder} : catalogue de personnages hors GBA")
     data = read_json(folder / "characters.json")
     versions = {version for version, _ in game.pret_versions}
     if data.get("schema") != 1 or data.get("commit") != PRET_COMMITS[game.pret_repo]:

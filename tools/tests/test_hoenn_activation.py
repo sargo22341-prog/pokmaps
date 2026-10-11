@@ -6,14 +6,18 @@ from pathlib import Path
 
 import pytest
 
-from pokemaps_data.games import EMERALD, FIRERED_LEAFGREEN, GAMES, RUBY_SAPPHIRE, Game
+from pokemaps_data.games import EMERALD, GAMES, RUBY_SAPPHIRE, Game
 from pokemaps_data.validate import CHECKS
-from pokemaps_data.validate_hoenn_characters import validate_character_catalog
+from pokemaps_data.validate_gen3_characters import validate_character_catalog
 
 
 def test_hoenn_versions_and_both_pokedexes_are_shipped(db: sqlite3.Connection) -> None:
-    assert RUBY_SAPPHIRE in GAMES and EMERALD in GAMES and FIRERED_LEAFGREEN not in GAMES
-    assert dict(db.execute("SELECT id, name_fr FROM version WHERE id >= 7")) == {7: "Rubis", 8: "Saphir", 9: "Émeraude"}
+    assert RUBY_SAPPHIRE in GAMES and EMERALD in GAMES
+    assert dict(db.execute("SELECT id, name_fr FROM version WHERE id BETWEEN 7 AND 9")) == {
+        7: "Rubis",
+        8: "Saphir",
+        9: "Émeraude",
+    }
     for group in (5, 6):
         rows = db.execute(
             """SELECT p.identifier, count(*) FROM version_group_pokedex vgp
@@ -25,12 +29,14 @@ def test_hoenn_versions_and_both_pokedexes_are_shipped(db: sqlite3.Connection) -
 
 
 def test_hoenn_map_and_fixed_pokemon_differences(db: sqlite3.Connection) -> None:
-    counts = dict(db.execute("SELECT version_group_id, count(*) FROM map WHERE version_group_id >= 5 GROUP BY 1"))
+    counts = dict(
+        db.execute("SELECT version_group_id, count(*) FROM map WHERE version_group_id BETWEEN 5 AND 6 GROUP BY 1")
+    )
     assert counts[6] > counts[5] > 390
     assert db.execute("SELECT count(*) FROM map_spot WHERE kind = 'underwater'").fetchone()[0] > 0
     rows = db.execute(
         """SELECT o.version_id, o.pokemon_id, o.level FROM map_object o JOIN map m ON m.id = o.map_id
-           WHERE o.kind = 'pokemon' AND o.pokemon_id IN (382, 383) AND m.version_group_id >= 5"""
+           WHERE o.kind = 'pokemon' AND o.pokemon_id IN (382, 383) AND m.version_group_id BETWEEN 5 AND 6"""
     ).fetchall()
     assert (7, 383, 45) in rows and (8, 382, 45) in rows
     assert (9, 383, 70) in rows and (9, 382, 70) in rows
@@ -39,7 +45,7 @@ def test_hoenn_map_and_fixed_pokemon_differences(db: sqlite3.Connection) -> None
 def test_hoenn_services_and_currency_are_preserved(db: sqlite3.Connection) -> None:
     rows = db.execute(
         """SELECT n.kind, n.price, n.currency FROM npc_offer n JOIN map_object o ON o.id = n.map_object_id
-           JOIN map m ON m.id = o.map_id WHERE m.version_group_id >= 5"""
+           JOIN map m ON m.id = o.map_id WHERE m.version_group_id BETWEEN 5 AND 6"""
     ).fetchall()
     kinds = {kind for kind, _, _ in rows}
     assert {"fossil", "daycare", "daycare_egg", "daycare_withdrawal", "move_relearner", "fruit_tree"} <= kinds
@@ -51,7 +57,7 @@ def test_hoenn_services_and_currency_are_preserved(db: sqlite3.Connection) -> No
         db.execute(
             """SELECT count(*) FROM npc_offer n JOIN map_object o ON o.id = n.map_object_id
            JOIN map m ON m.id = o.map_id WHERE n.kind = 'move_relearner' AND n.wanted_item_id IS NOT NULL
-           AND m.version_group_id >= 5"""
+           AND m.version_group_id BETWEEN 5 AND 6"""
         ).fetchone()[0]
         > 0
     )

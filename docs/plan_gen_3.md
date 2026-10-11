@@ -667,8 +667,8 @@ Intégration des jeux :
 - [x] Branche Hoenn : passer **Émeraude** de `GAMES_IN_PROGRESS` à `GAMES` (régénération explicite,
       `assets.sha256`).
 - [x] Puis **Rubis/Saphir** : variantes de format de pokeruby, différences de cartes et de scénario.
-- [ ] Branche Remake 1G : **Rouge Feu/Vert Feuille**.
-- [ ] Tests JVM : chaque ViewModel modifié teste vide et erreur ; `PokemapsJourneyTest` couvre un jeu de chaque
+- [x] Branche Remake 1G : **Rouge Feu/Vert Feuille**.
+- [x] Tests JVM : chaque ViewModel modifié teste vide et erreur ; `PokemapsJourneyTest` couvre un jeu de chaque
       branche ; `MapViewModelTest` couvre le passage Émeraude → Rouge Feu ; tests de capture GEN3.
 - [ ] Essai sur appareil ou émulateur (mémoire `emulator-for-device-checks`) : carte de Hoenn, Plongée, Îles
       Sevii, Pokédex régional et National, fiche, capture ; installation `-r` sans perte des collections.
@@ -687,6 +687,29 @@ Les 198 tests du pipeline sont validés : 194 réussites dans la suite complète
 tests corrigés réussis en relance ciblée (requêtes d’Or/Argent limitées à leur périmètre et rendu GBA).
 Aucun essai sur téléphone dans cette passe. L’avertissement AGP `Configuration.setVisible(boolean)`
 déjà documenté reste affiché.
+
+Activation Remake 1G (12 octobre 2026) : Rouge Feu et Vert Feuille sont dans `GAMES`, avec Kanto,
+les Îles Sevii, les Pokédex régional et National, rencontres, personnages et services.
+La génération explicite met à jour la base, le catalogue des personnages et `assets.sha256`
+(15 441 fichiers), avec dix nouvelles icônes d’objets. Les prix JSON, alias numériques des scripts,
+conditions de scénario, paiement du casino, champignons du Maître des Capacités et récompense
+du Mémorial de Tectonix sont validés. Les événements invisibles du Memorydex restent au catalogue
+sans acteur sur la carte.
+
+Les parcours JVM couvrent Émeraude et Rouge Feu, les liens Pokédex → carte, la bascule Kanto/Sevii
+et les 28 formes de Zarbi. `MapViewModelTest` vérifie le changement de branche et la remise à zéro
+du lieu, de l’horaire et de la surbrillance ; ses états vide et erreur restent couverts.
+Les tests de capture GEN3 vérifient aussi l’aiguillage vers la formule des quatre secousses.
+Les tests Room lisent directement les deux branches distribuées, sans ajouter de données préparatoires.
+
+Contrôles Android complets réussis : 347 tests JVM, ktlint, Lint, absence de services Google et APK debug
+(102 891 184 octets, 98,12 Mio). Ruff et intégrité des assets réussis ; 445 tests Python ordinaires réussis.
+Les 200 tests du pipeline sont validés : 198 réussites dans la suite complète, puis les deux tests
+corrigés réussis en relance ciblée (zones limitées à Or/Argent et alias CT10 propre à pokefirered).
+Les anciennes attentes de neuf jeux et les insertions préparatoires des remakes ont été adaptées
+à la base distribuée ; les attentes métier d’Or/Argent sont conservées.
+Aucun essai sur téléphone ou émulateur dans cette passe ; la case correspondante reste ouverte.
+L’avertissement AGP `Configuration.setVisible(boolean)` déjà documenté reste affiché.
 
 ## Phase 7 — Guides, succès et outils
 

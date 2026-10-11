@@ -22,7 +22,13 @@ def test_bundled_assets_are_complete(assets: Path) -> None:
 
 
 @pytest.mark.parametrize(
-    "relative", ["database/pokedex.db", "sprites/pokemon/static/25.webp", "maps/crystal/johto/0/0_0.webp"]
+    "relative",
+    [
+        "database/pokedex.db",
+        "sprites/pokemon/static/25.webp",
+        "maps/crystal/johto/0/0_0.webp",
+        "maps/firered-leafgreen/characters.json",
+    ],
 )
 def test_missing_asset_names_the_file(assets: Path, tmp_path: Path, relative: str) -> None:
     # L'inventaire suffit à détecter l'absence avant toute lecture de la base.

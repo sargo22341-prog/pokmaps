@@ -1,7 +1,7 @@
 # Pokémaps
 
-Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or, Argent, Cristal, Rubis, Saphir
-et Émeraude**, en français : cartes de Kanto, Johto et Hoenn, Pokémon de chaque lieu,
+Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or, Argent, Cristal, Rubis, Saphir,
+Émeraude, Rouge Feu et Vert Feuille**, en français : cartes de Kanto, Johto, Hoenn et des Îles Sevii, Pokémon de chaque lieu,
 fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
 attaques (effet et probabilité de l'effet) et Pokédex.
 
@@ -460,13 +460,13 @@ Il indique les commits sources et relie les équipes aux événements des cartes
 aussi les rencontres et objets fixes de l'aperçu. Les noms du catalogue restent ceux des sources.
 Les quatre CSV de noms français sont préparés ; les noms vides, les clés répétées, les classes et les sprites fixes
 sans traduction arrêtent cet export. Les fiches Hoenn sont assemblées dans la base distribuée ;
-les fiches de Rouge Feu/Vert Feuille restent à intégrer.
+les fiches de Rouge Feu/Vert Feuille sont également intégrées à la base distribuée.
 
 Les briques Android du Pokédex GBA proposent le régional en premier (Hoenn ou Kanto), puis une bascule
 vers le National. Les filtres et coches sont conservés entre les deux listes ; la fiche privilégie le numéro
 régional et utilise le National pour les espèces hors région. Les talents ont leurs noms français et leurs
 descriptions disponibles dans le jeu ; six talents n’ont pas de description française GBA dans PokéAPI.
-Ces fonctions sont disponibles pour les trois jeux Hoenn dans l’application distribuée.
+Ces fonctions sont disponibles pour les cinq jeux GBA dans l’application distribuée.
 Le schéma 15 reste commun au générateur et à Room ; les offres portent leur monnaie explicite.
 
 Les fiches de personnages Hoenn incluent leurs offres et conditions de scénario. Le domaine et les ressources
@@ -487,7 +487,7 @@ niveau 30, deux Électrode niveau 34, les trois oiseaux niveau 50, Mewtwo niveau
 Ho-Oh et Lugia niveau 70, Deoxys niveau 30. Les positions viennent des objets Pokémon,
 même si un autre événement déclenche le combat. Scripts, conditions et drapeaux de retrait sont conservés ;
 le Roc Nombri exige le Ticketevent et l'Île Aurore le Ticketaurore, distribués par événement externe.
-Ce catalogue entre aussi dans `character_curation.json` ; l'affichage Android attend la phase 6.
+Ce catalogue entre aussi dans `character_curation.json` ; les rencontres fixes sont affichées sur les cartes Android.
 
 Les services de Hoenn sont intégrés à la base et conservés dans le catalogue `character_curation.json`, généré par
 `python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
@@ -495,14 +495,16 @@ fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Ca
 comptoirs de la Zone de Combat. Les tarifs, monnaies et objets requis sont conservés ; le
 [bilan des services Hoenn](docs/generations/services-hoenn.md) décrit cette préparation.
 
-La génération complète écrit aussi `maps/ruby-sapphire/characters.json` et `maps/emerald/characters.json` :
+La génération complète écrit les catalogues `characters.json` de Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille :
 personnages par version, objets fixes et conditions des scènes automatiques, avec leur commit source.
 Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
 personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
-Les guides et succès Hoenn relèvent de la phase 7 ; les bibliothèques actuelles couvrent les six anciens jeux.
+Les guides et succès GBA relèvent de la phase 7 ; les bibliothèques actuelles couvrent les six anciens jeux.
 
-Le même export prépare les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
+Le même export intègre les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.
+Les prix sont lus dans le JSON de pokefirered ; les conditions de scénario, le choix des fossiles
+et la récompense du Mémorial de Tectonix sont conservés dans la base distribuée.
 Le [bilan des services Remake 1G](docs/generations/services-remake-1g.md) détaille les tarifs et niveaux par version.
 
 Les lecteurs d'offres GBA appliquent les drapeaux de présence des événements avant le parcours des scripts.

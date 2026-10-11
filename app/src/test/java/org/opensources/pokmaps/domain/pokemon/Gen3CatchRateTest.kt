@@ -67,6 +67,16 @@ class Gen3CatchRateTest {
     }
 
     @Test
+    fun generationDispatchUsesFourShakeFormula() {
+        val generation = CaptureGeneration.from(3)
+        assertEquals(CaptureGeneration.GEN3, generation)
+        assertEquals(
+            probability(Ball.TIMER, input = context.copy(elapsedTurns = 30)),
+            generation?.probability(Ball.TIMER, 45, 100, 100, CatchStatus.NONE, context.copy(elapsedTurns = 30))
+        )
+    }
+
+    @Test
     fun generationAvailabilityAndWildHp() {
         assertEquals(CaptureGeneration.GEN3, CaptureGeneration.from(3))
         assertEquals(11, CaptureGeneration.GEN3.balls.size)

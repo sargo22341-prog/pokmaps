@@ -15,6 +15,8 @@ if TYPE_CHECKING:
 
 def describe_remake_offer(offer: Gen3Offer, state: ScriptState, scripts: Gen3Scripts) -> Gen3Offer:
     label = state.point[0]
+    if label.startswith("FiveIsland_MemorialPillar_") and offer.item == "ITEM_TM42":
+        return replace(offer, conditions=("Après avoir déposé une Limonade au Mémorial de Tectonix.",))
     if label.startswith("CinnabarIsland_PokemonLab_ExperimentRoom_") and offer.kind == "gift_pokemon":
         fossils = {
             "SPECIES_OMANYTE": "ITEM_HELIX_FOSSIL",
@@ -32,6 +34,12 @@ def describe_remake_offer(offer: Gen3Offer, state: ScriptState, scripts: Gen3Scr
         return _casino_offer(offer, state, scripts)
     if label.startswith("FourIsland_"):
         return _daycare_offer(offer)
+    if label.startswith("TwoIsland_House_") and offer.kind == "move_relearner":
+        return replace(
+            offer,
+            required_item="ITEM_BIG_MUSHROOM",
+            conditions=("Un Gros Champi ou deux Petits Champi par capacité réapprise.",),
+        )
     if offer.item == "ITEM_VS_SEEKER":
         return replace(offer, conditions=("Charger le Cherche VS en faisant 100 pas pour demander une revanche.",))
     return offer

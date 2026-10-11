@@ -1,8 +1,9 @@
 # Services de Rouge Feu et Vert Feuille
 
-Les sources pret épinglées de `pokefirered` alimentent le catalogue préparatoire
-`character_curation.json`, généré par `--gen3-curation-only`. Les jeux restent en cours
-d'intégration ; l'assemblage Room et l'affichage Android relèvent de la phase 6.
+Les sources pret épinglées de `pokefirered` alimentent la base Room distribuée et les fiches Android
+de Rouge Feu et Vert Feuille. La génération complète conserve le catalogue
+`maps/firered-leafgreen/characters.json` ; `--gen3-curation-only` produit aussi l'aperçu
+éditorial `character_curation.json`.
 
 | Lieu | Contenu conservé |
 |---|---|
@@ -12,6 +13,8 @@ d'intégration ; l'assemblage Room et l'affichage Android relèvent de la phase 
 | Guichet du Casino | 50 jetons pour 1 000 ₽ ou 500 pour 10 000 ₽ ; dons gratuits distincts |
 | Tuteurs | Capacités et drapeaux d'utilisation unique conservés dans les chemins des scripts |
 | Effaceur de Parmanie | Service d'effacement des capacités |
+| Maître des Capacités de l'Île 2 | Une capacité réapprise contre un Gros Champi ou deux Petits Champi |
+| Mémorial de Tectonix | CT42 après avoir déposé une Limonade |
 | Centre Pokémon de Carmin sur Mer | Don du Cherche VS, recharge après 100 pas |
 
 Les fossiles demandent de quitter le laboratoire puis de revenir. Leur objet requis est distinct
