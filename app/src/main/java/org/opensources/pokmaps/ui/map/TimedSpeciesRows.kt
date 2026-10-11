@@ -66,6 +66,11 @@ private fun encounterCaption(encounter: Encounter, period: TimeFilter): String {
         encounter.chance?.let { stringResource(R.string.encounter_chance, formatNumber(it)) },
         encounter.quantity.takeIf { it > 1 }?.let { stringResource(R.string.encounter_quantity, it) },
         encounter.conditions,
-        encounter.note
+        encounter.note,
+        if (encounter.needsExternalEventLabel) {
+            stringResource(R.string.external_event)
+        } else {
+            null
+        }
     ).joinToString(" · ")
 }

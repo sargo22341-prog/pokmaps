@@ -40,6 +40,7 @@ import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.AssetImage
 import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
+import org.opensources.pokmaps.ui.common.LocalSpriteVersion
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.facilityIcon
 import ovh.plrapps.mapcompose.api.scale
@@ -191,11 +192,12 @@ private fun MapPokemon(
     val context = LocalContext.current
     val resources = LocalResources.current
     val animated = SpritePlace.MAP in LocalAnimatedPlaces.current
+    val version = LocalSpriteVersion.current
     val mapScale by remember(mapState) { derivedStateOf { mapState.scale } }
     // Le sprite est lu à sa taille d'origine, puis agrandi d'un facteur fixe (et non ajusté à son cadre).
-    val request = remember(pokemonId, animated, shiny) {
+    val request = remember(pokemonId, animated, shiny, version) {
         ImageRequest.Builder(context)
-            .data(Sprites.assetUri(Sprites.pokemon(pokemonId, animated, shiny)))
+            .data(Sprites.assetUri(Sprites.pokemon(pokemonId, animated, shiny, version)))
             .size(CoilSize.ORIGINAL)
             .build()
     }

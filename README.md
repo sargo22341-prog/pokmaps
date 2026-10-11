@@ -40,6 +40,12 @@ d'Évoli en génération 1 et de pierres élémentaires limitées dans Or/Argent
 sans additionner des branches incompatibles. Les autres restrictions du succès restent à respecter dans le jeu.
 Les textes ne constituent pas une lecture de la sauvegarde de l'émulateur.
 
+Les sauvegardes de collection gardent le schéma JSON 1 et acceptent jusqu'à 386 espèces et 28 formes de Zarbi.
+L'import vérifie les versions contre les jeux de la base embarquée, puis les espèces et formes contre le jeu.
+Les anciens fichiers, même sans champ `unown`, restent importables et fusionnent avec la collection existante.
+La fiche de Deoxys et ses sprites suivent la forme du jeu ; Morphéo présente ses quatre formes météorologiques.
+Les cartes, rencontres et offres de distribution portent la mention « événement externe ».
+
 Dans les Réglages, renseigner le nom d'utilisateur et la **clé API web** RetroAchievements, enregistrer puis
 choisir « Synchroniser ». Seul l'endpoint GET
 [`API_GetGameInfoAndUserProgress.php`](https://api-docs.retroachievements.org/v1/get-game-info-and-user-progress.html)

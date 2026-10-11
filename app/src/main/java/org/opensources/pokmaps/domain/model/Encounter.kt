@@ -24,6 +24,12 @@ data class Encounter(
     val times: Set<EncounterTime> = emptySet(),
     val nonTimeConditions: String? = conditions
 ) {
+    val isExternalEvent: Boolean
+        get() = ExternalEvent.method(method) || ExternalEvent.mentioned(note) || ExternalEvent.mentioned(conditions)
+
+    val needsExternalEventLabel: Boolean
+        get() = isExternalEvent && !ExternalEvent.mentioned(note) && !ExternalEvent.mentioned(conditions)
+
     /** Les échanges n'ont pas de niveau significatif (le Pokémon garde celui de l'échange). */
     val isTrade: Boolean get() = method == TRADE
 

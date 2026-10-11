@@ -80,6 +80,7 @@ private fun EncounterLine(
                 Text(title, style = MaterialTheme.typography.bodyLarge)
                 if (caught) CaughtIcon(28.dp)
             }
+            if (encounter.needsExternalEventLabel) ExternalEventLabel()
             val details = encounterDetails(encounter)
             if (details.isNotEmpty()) {
                 Text(

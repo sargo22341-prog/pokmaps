@@ -625,12 +625,15 @@ Domaine et données :
 - [x] Natures : besoin évalué ; aucune table ajoutée à ce stade. Les fiches montrent les statistiques
       de base des espèces, indépendantes de la nature ; le vérificateur de reproduction reste en génération 2.
       La transmission des natures d’Émeraude sera traitée avec la reproduction GBA en phase 8.
-- [ ] Formes retenues (Deoxys selon le jeu, Morphéo) sur la fiche et dans les sprites.
-- [ ] Mention « événement externe » sur les cartes, rencontres et offres concernées.
-- [ ] Généraliser les plages de versions : `CollectionBackup`, `BackupJson` (386 espèces, 28 formes),
+- [x] Formes retenues (Deoxys selon le jeu, Morphéo) sur la fiche et dans les sprites.
+- [x] Mention « événement externe » sur les cartes, rencontres et offres concernées.
+- [x] Généraliser les plages de versions : `CollectionBackup`, `BackupJson` (386 espèces, 28 formes),
       `CollectionBackupRepository`, `GuideSettings`, en validant contre les jeux de la base plutôt que `1..6`.
       Sauvegarde : rester au schéma 1 (plages élargies) ou passer au schéma 2, avec test d'import d'un ancien
       fichier.
+      Schéma 1 conservé : structure inchangée, limites élargies ; les versions sont validées contre le catalogue
+      de la base et les captures/formes contre la génération et le jeu. Un test importe un ancien fichier sans
+      champ `unown` et conserve les captures déjà présentes dans les nouveaux jeux.
 - [x] Schéma de la base : `SCHEMA_VERSION` (`builder.py`) et version Room alignés, `PokedexSchemaTest` vert.
       Le schéma 14 existant suffit : aucune nouvelle table ni colonne pour la bascule ou les talents.
       Un test Python contrôle l’égalité des constantes ; `PokedexSchemaTest` passe sur la base versionnée

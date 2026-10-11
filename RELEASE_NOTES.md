@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les fiches affichent les formes de Morphéo et Deoxys, les événements externes sont signalés et les sauvegardes prennent en charge la génération 3.
 - Préparation du calculateur de capture GBA avec les nouvelles Balls et leurs contextes.
 - Le Pokédex prend en charge une bascule régional/National, avec une numérotation propre à chaque liste.
 - Les onglets d'attaques par œuf et tuteur suivent les données du Pokémon ; la carte conserve sa sélection par famille de jeux.

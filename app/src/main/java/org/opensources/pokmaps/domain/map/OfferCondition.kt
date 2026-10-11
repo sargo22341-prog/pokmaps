@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.map
 
 import org.opensources.pokmaps.domain.model.EncounterTime
+import org.opensources.pokmaps.domain.model.ExternalEvent
 
 /** Jour de la semaine du jeu (2e génération), avec son bit dans npc_offer.weekday_mask (dimanche : bit 0). */
 enum class Weekday(val bit: Int) {
@@ -22,6 +23,8 @@ data class OfferCondition(
     val weekdays: Set<Weekday> = emptySet(),
     val story: List<String> = emptyList()
 ) {
+    val isExternalEvent: Boolean get() = story.any(ExternalEvent::mentioned)
+
     /** Vrai si l'offre est possible à tout moment, tous les jours et sans étape préalable. */
     val isAlways: Boolean get() = times.isEmpty() && weekdays.isEmpty() && story.isEmpty()
 

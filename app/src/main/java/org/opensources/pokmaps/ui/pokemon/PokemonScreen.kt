@@ -232,5 +232,5 @@ private fun moveTabLabel(tab: MoveTab): Int = when (tab) {
 
 private fun moveNoteText(note: MoveNote): Int = when (note) {
     MoveNote.LIGHT_BALL_PARENT -> R.string.move_note_light_ball
-    MoveNote.EXTERNAL_EVENT -> R.string.move_note_external_event
+    MoveNote.EXTERNAL_EVENT -> R.string.external_event
 }

@@ -25,6 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
+import org.opensources.pokmaps.ui.common.LocalSpriteVersion
 import org.opensources.pokmaps.ui.game.GameUiState
 import org.opensources.pokmaps.ui.game.GameViewModel
 import org.opensources.pokmaps.ui.settings.SettingsViewModel
@@ -36,7 +37,10 @@ fun PokemapsApp(
 ) {
     val settings by settingsViewModel.state.collectAsStateWithLifecycle()
     val gameState by gameViewModel.state.collectAsStateWithLifecycle()
-    CompositionLocalProvider(LocalAnimatedPlaces provides settings.animatedPlaces) {
+    CompositionLocalProvider(
+        LocalAnimatedPlaces provides settings.animatedPlaces,
+        LocalSpriteVersion provides gameState.selected?.versionIdentifier.orEmpty()
+    ) {
         PokemapsContent(gameState)
     }
 }

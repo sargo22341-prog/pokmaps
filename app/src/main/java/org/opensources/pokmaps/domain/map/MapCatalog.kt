@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.map
 
 import kotlin.math.abs
+import org.opensources.pokmaps.domain.model.ExternalEvent
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.MapRegion
 
@@ -19,6 +20,8 @@ data class MapInfo(
     val originMapId: Int? = null,
     val startMapId: Int? = null
 ) {
+    val isExternalEvent: Boolean get() = ExternalEvent.map(identifier)
+
     val isDisplayable: Boolean get() = parentId == null && levelCount > 0
 
     fun toRegion() = MapRegion(id, identifier, name, x, y, width, height)

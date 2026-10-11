@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.RetroProgress
 
 class RetroSettingsTest {
@@ -12,7 +13,7 @@ class RetroSettingsTest {
     fun disconnectClearsOnlyRemoteProgressAndKeepsLocalCollectionAndGuides() = runTest {
         val store = FakeDataStore()
         val collection = CollectionSettings(store)
-        val guide = GuideSettings(store)
+        val guide = GuideSettings(store, FakeGameDao())
         val retro = RetroSettings(store)
         collection.setCaught(setOf(1), 25, true)
         guide.complete(1, "ra-4401", true)

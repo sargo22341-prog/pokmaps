@@ -6,12 +6,14 @@ import org.opensources.pokmaps.data.json.JsonLimits
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.RoamerObservation
+import org.opensources.pokmaps.domain.guide.validateCollectionBackup
+import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 
 internal object BackupJson {
     fun encode(backup: CollectionBackup): String {
         val games = JSONArray()
-        for (version in 1..6) {
+        for (version in (backup.caught.keys + backup.guides.keys + backup.unown.keys).sorted()) {
             val progress = backup.guides[version] ?: GuideProgress()
             val roamers = JSONArray(
                 progress.roamers.sortedBy { it.pokemonId }.map {
@@ -29,13 +31,13 @@ internal object BackupJson {
             .put("favorites", JSONArray(backup.favorites.sorted())).put("games", games).toString(2)
     }
 
-    fun decode(text: String): CollectionBackup {
+    fun decode(text: String, gamesInDatabase: List<Game>): CollectionBackup {
         JsonLimits.validate(text, MAX_CHARACTERS)
         val json = JSONObject(text)
         require(json.getString("format") == "pokmaps-collection" && integer(json, "schema") == 1)
         val favorites = ids(json.getJSONArray("favorites"))
         val games = json.getJSONArray("games")
-        require(games.length() <= 6)
+        require(games.length() <= gamesInDatabase.size)
         val caught = mutableMapOf<Int, Set<Int>>()
         val guides = mutableMapOf<Int, GuideProgress>()
         val unown = mutableMapOf<Int, Set<UnownForm>>()
@@ -56,16 +58,18 @@ internal object BackupJson {
             }
             guides[version] = GuideProgress(articles, observations)
             val forms = if (game.has("unown")) game.getJSONArray("unown") else JSONArray()
-            require(forms.length() <= 26)
+            require(forms.length() <= UnownForm.entries.size)
             val alphabet = (0 until forms.length()).map { UnownForm.from(forms.getString(it)) }.toSet()
             require(alphabet.size == forms.length())
             if (alphabet.isNotEmpty()) unown[version] = alphabet
         }
-        return CollectionBackup(favorites, caught.toMap(), guides.toMap(), unown.toMap())
+        return CollectionBackup(favorites, caught.toMap(), guides.toMap(), unown.toMap()).also {
+            validateCollectionBackup(it, gamesInDatabase)
+        }
     }
 
     private fun ids(array: JSONArray): Set<Int> {
-        require(array.length() <= 251)
+        require(array.length() <= 386)
         val ids = (0 until array.length()).map { requireNotNull(array.get(it) as? Int) }.toSet()
         require(ids.size == array.length())
         return ids
