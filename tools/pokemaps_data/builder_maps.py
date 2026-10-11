@@ -45,7 +45,8 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         spots.add_game(version_group, data, ids)
     families = set(complete_families(builder.games))
     spots.check_all_used(families)
-    if unused := objects.names.unused_text_names(families):
+    character_families = _complete_character_families(builder.games, builder.map_data)
+    if unused := objects.names.unused_text_names(character_families):
         raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
     if unused := objects.story.unused(set(repos.values())):
         raise ValueError(f"story_events.csv : drapeaux qu'aucune offre n'exige : {unused}")
@@ -59,6 +60,11 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         "npc_offer_story": objects.stories,
         "map_spot": spots.rows,
     }
+
+
+def _complete_character_families(games: tuple[Game, ...], data: dict[str, GameMapData]) -> set[str]:
+    incomplete = {game.map_family for game in games if not data[game.version_group].characters_complete}
+    return set(complete_families(games)) - incomplete
 
 
 class _SpotRows:

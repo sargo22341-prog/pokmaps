@@ -144,6 +144,8 @@ class GameMapData:
     # Toutes les cases de chaque terrain sauvage, (identifiant de carte, terrain) -> centres en pixels de la carte
     # affichée : un emplacement retouché à la main (map_spots.csv) doit en faire partie dans les jeux ciblés.
     terrain: dict[tuple[str, str], frozenset[tuple[int, int]]] = field(default_factory=dict)
+    # Les aperçus partiels n'exportent pas encore les personnages ; leurs noms se valident dans les sources.
+    characters_complete: bool = True
 
 
 def renderer(game_maps: GameMaps) -> MapRenderer:

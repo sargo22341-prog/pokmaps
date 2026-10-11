@@ -83,7 +83,6 @@ service d'Évaluateur de noms.
 ## Travail restant dans « Communs »
 
 - Assemblage des personnages avec leurs équipes et revanches déjà exportées, sans perdre les métadonnées.
-- Noms français et validation des quatre CSV de noms.
 - Complément des offres calculées par le moteur et curation de `npc_offers.csv`.
 - Présence des personnages et variables de scénario dans `story_events.csv`.
 - Curation des doublons et validation de l'ensemble exporté.
@@ -93,6 +92,22 @@ utilisent des scripts en mémoire ; les tests `pipeline` parcourent les scripts 
 versions épinglées et contrôlent les références des dresseurs ainsi que les variantes des échanges.
 
 ## Corrections du lecteur lors de la reprise
+
+Les quatre CSV de noms français sont préparés : 124 classes GBA, 393 sprites fixes, 15 installations
+supplémentaires et 55 noms par script (Annette, M. Marco, Capitaine Poupe, Léo, Themis, Lostelle, services et familles).
+Les ajouts de classes, sprites et installations déjà présents dans le travail local ont été conservés.
+La lecture refuse les noms vides, clés répétées et apparences inconnues. L'export des dresseurs vérifie
+les classes des cinq versions et tous les sprites fixes déclarés par les sources épinglées.
+Les références `OBJ_EVENT_GFX_VAR_*` désignent des sprites variables et ne reçoivent pas un nom fixe ;
+leur résolution appartient à l'assemblage des personnages. Les tests des sources vérifient aussi que chaque
+nom par script existe dans sa famille. Les noms individuels des équipes restent ceux des sources dans
+`trainers.json` ; ces CSV suivent le modèle actuel, qui nomme les dresseurs par leur classe.
+
+Les noms de [M. Marco et Piko](https://www.pokepedia.fr/M._Marco), du
+[Capitaine Poupe](https://www.pokepedia.fr/Capitaine_Poupe) et d'Archibald
+([Le Marina](https://www.pokepedia.fr/Le_Marina)) ont été vérifiés dans les références françaises.
+La correspondance Selphy/Themis vient du [tableau des traductions](https://bulbapedia.bulbagarden.net/wiki/Selphy) ;
+[Lostelle](https://www.pokemon-france.com/guides/rouge-feu-vert-feuille/soluce-14/) conserve son nom.
 
 La macro `giveitem_msg` des remakes reçoit le texte avant l'objet et la quantité. Le lecteur respecte
 maintenant cet ordre ; un test sur Pierre vérifie la CT39 dans les deux versions. Les commandes de

@@ -6,6 +6,7 @@ import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from .character_names_gen3 import validate_gen3_names
 from .maps_layout_gen3 import Gen3GameMaps
 from .pret_gen3_maps import Gen3Event, Gen3Map
 from .pret_gen3_rematches import TrainerRematches
@@ -41,6 +42,7 @@ class TrainerCatalog:
 
 def trainer_catalogs(maps: Gen3GameMaps) -> tuple[TrainerCatalog, ...]:
     repo, game = maps.repo, maps.game
+    validate_gen3_names(repo, game.map_family)
     result = []
     for version, _ in game.pret_versions:
         bindings = []
