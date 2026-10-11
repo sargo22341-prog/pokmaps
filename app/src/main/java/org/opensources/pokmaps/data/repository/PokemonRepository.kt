@@ -24,6 +24,7 @@ import org.opensources.pokmaps.domain.pokemon.Machine
 import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.PokemonForm
 import org.opensources.pokmaps.domain.pokemon.PokemonTraits
 import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.domain.pokemon.TypeChart
@@ -60,7 +61,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             captureRate = pokemon.captureRate,
             growthRate = pokemon.growthRate,
             types = types,
-            stats = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) },
+            stats = stats(game, pokemonId),
             weaknesses = TypeChart.defensive(pokedex.types(game), types.map { it.id }, factors),
             evolutions = evolutions(game, pokemon.evolutionChainId),
             levelUpMoves = moves[MoveTab.LEVEL_UP].orEmpty().sortedWith(compareBy({ it.level }, { it.name })),
@@ -72,6 +73,11 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             eggMoves = moves[MoveTab.EGG].orEmpty().sortedBy { it.name },
             tutorMoves = moves[MoveTab.TUTOR].orEmpty().sortedBy { it.name }
         )
+    }
+
+    private suspend fun stats(game: Game, pokemonId: Int): List<BaseStat> {
+        val original = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) }
+        return if (pokemonId == 386) PokemonForm.deoxys(game.versionIdentifier).stats(original) else original
     }
 
     private suspend fun evolutions(

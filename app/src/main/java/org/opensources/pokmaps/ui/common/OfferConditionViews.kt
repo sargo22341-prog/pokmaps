@@ -26,6 +26,7 @@ fun OfferConditionLines(condition: OfferCondition, modifier: Modifier = Modifier
     if (condition.isAlways) return
     val lines = listOfNotNull(scheduleText(condition)) + condition.story
     Column(modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        if (condition.isExternalEvent) ExternalEventLabel()
         lines.forEach { line ->
             Text(line, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }

@@ -17,6 +17,8 @@ data class GameMap(
     val isWorld: Boolean = false,
     val startRegionId: Int? = null
 ) {
+    val isExternalEvent: Boolean get() = ExternalEvent.map(identifier)
+
     /** Chemin d'une tuile dans les assets (niveau 0 = carte entière dans une seule tuile). */
     fun tilePath(level: Int, row: Int, column: Int): String =
         "maps/$versionGroupIdentifier/$identifier/$level/${row}_$column.webp"

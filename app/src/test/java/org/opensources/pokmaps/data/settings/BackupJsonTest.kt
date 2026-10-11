@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.RoamerObservation
@@ -23,7 +24,7 @@ class BackupJsonTest {
         )
         val withForms = backup.copy(unown = mapOf(4 to setOf(UnownForm.A, UnownForm.Z)))
         val text = BackupJson.encode(withForms)
-        val decoded = BackupJson.decode(text)
+        val decoded = decode(text)
         assertEquals(backup.favorites, decoded.favorites)
         assertEquals(backup.caught[1], decoded.caught[1])
         assertEquals(backup.caught[2], decoded.caught[2])
@@ -65,12 +66,12 @@ class BackupJsonTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun unknownSchemaIsRejected() {
-        BackupJson.decode("""{"format":"pokmaps-collection","schema":2,"favorites":[],"games":[]}""")
+        decode("""{"format":"pokmaps-collection","schema":2,"favorites":[],"games":[]}""")
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun outOfGenerationPokemonIsRejected() {
-        BackupJson.decode(
+        decode(
             """{"format":"pokmaps-collection","schema":1,"favorites":[],"games":[
             {"version":1,"caught":[251],"completed":[],"roamers":[]}
         ]}"""
@@ -79,15 +80,71 @@ class BackupJsonTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun fractionalPokemonIdsAreRejected() {
-        BackupJson.decode("""{"format":"pokmaps-collection","schema":1,"favorites":[25.5],"games":[]}""")
+        decode("""{"format":"pokmaps-collection","schema":1,"favorites":[25.5],"games":[]}""")
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun punctuationUnownCannotBeImportedIntoGenerationTwo() {
-        BackupJson.decode(
+        decode(
             """{"format":"pokmaps-collection","schema":1,"favorites":[],"games":[
             {"version":4,"caught":[],"completed":[],"roamers":[],"unown":["question"]}
         ]}"""
+        )
+    }
+
+    @Test
+    fun generationThreeRoundTripPreserves386SpeciesAnd28Forms() {
+        val backup = CollectionBackup(
+            (1..386).toSet(),
+            mapOf(10 to (1..386).toSet()),
+            mapOf(9 to GuideProgress(setOf("hoenn-start"))),
+            mapOf(10 to UnownForm.entries.toSet())
+        )
+        val restored = decode(BackupJson.encode(backup))
+        assertEquals(backup.favorites, restored.favorites)
+        assertEquals(backup.caught[10], restored.caught[10])
+        assertEquals(backup.unown, restored.unown)
+        assertEquals(backup.guides[9], restored.guides[9])
+    }
+
+    @Test
+    fun oldSchemaOneWithoutUnownMergesWithoutLosingNewGames() {
+        val old =
+            decode(
+                """{"format":"pokmaps-collection","schema":1,"favorites":[25],"games":[
+            {"version":1,"caught":[25],"completed":["kanto-start"],"roamers":[]}
+        ]}"""
+            )
+        val current = CollectionBackup(setOf(386), mapOf(9 to setOf(386)), emptyMap())
+        val restored = merge(current, old)
+        assertEquals(setOf(25, 386), restored.favorites)
+        assertEquals(setOf(25), restored.caught[1])
+        assertEquals(setOf(386), restored.caught[9])
+        assertEquals(setOf("kanto-start"), restored.guides[1]?.completed)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun versionAbsentFromDatabaseIsRejected() {
+        BackupJson.decode(
+            BackupJson.encode(CollectionBackup(emptySet(), mapOf(9 to setOf(386)), emptyMap())),
+            listOf(FakeGameDao.RED)
+        )
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun hoennCannotImportUnownCollection() {
+        decode(BackupJson.encode(CollectionBackup(emptySet(), emptyMap(), emptyMap(), mapOf(9 to setOf(UnownForm.A)))))
+    }
+
+    private fun decode(text: String): CollectionBackup = BackupJson.decode(text, GAMES)
+
+    private companion object {
+        val GAMES = listOf(
+            FakeGameDao.RED,
+            FakeGameDao.BLUE,
+            FakeGameDao.GOLD,
+            FakeGameDao.EMERALD,
+            FakeGameDao.FIRERED
         )
     }
 }

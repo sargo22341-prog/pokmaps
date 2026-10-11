@@ -55,6 +55,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.model.SpritePlace
+import org.opensources.pokmaps.ui.common.ExternalEventLabel
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
 import ovh.plrapps.mapcompose.ui.MapUI
@@ -304,13 +305,16 @@ private fun MapTitle(state: MapUiState, onBack: () -> Unit, modifier: Modifier =
                     Box(Modifier.size(12.dp))
                 }
                 AnimatedContent(targetState = map.name, label = "title") { name ->
-                    Text(
-                        name,
-                        style = MaterialTheme.typography.titleSmall,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    )
+                    Column {
+                        Text(
+                            name,
+                            style = MaterialTheme.typography.titleSmall,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.padding(vertical = 10.dp)
+                        )
+                        if (map.isExternalEvent) ExternalEventLabel()
+                    }
                 }
             }
         }

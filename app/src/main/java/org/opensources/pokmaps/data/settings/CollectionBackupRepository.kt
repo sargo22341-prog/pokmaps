@@ -12,17 +12,21 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.RoamerObservation
+import org.opensources.pokmaps.domain.guide.validateCollectionBackup
+import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 
 class CollectionBackupRepository @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val store: DataStore<Preferences>
+    private val store: DataStore<Preferences>,
+    private val gamesDao: GameDao
 ) {
     suspend fun export(address: String) = withContext(Dispatchers.IO) {
-        val text = BackupJson.encode(snapshot(store.data.first()))
+        val text = BackupJson.encode(snapshot(store.data.first(), gamesDao.games().first()))
         requireNotNull(context.contentResolver.openOutputStream(document(address), "wt")).use {
             it.write(text.toByteArray(Charsets.UTF_8))
         }
@@ -33,18 +37,20 @@ class CollectionBackupRepository @Inject constructor(
             it.readNBytes(MAX_BYTES + 1)
         }
         require(bytes.size <= MAX_BYTES)
-        val imported = BackupJson.decode(String(bytes, Charsets.UTF_8))
+        val games = gamesDao.games().first()
+        val imported = BackupJson.decode(String(bytes, Charsets.UTF_8), games)
         store.edit { preferences ->
-            val merged = merge(snapshot(preferences), imported)
+            val merged = merge(snapshot(preferences, games), imported)
             preferences[key("favorite_pokemon")] = merged.favorites.map { it.toString() }.toSet()
-            for (version in 1..6) {
+            for (game in games) {
+                val version = game.versionId
                 preferences[key("caught_pokemon_$version")] =
                     merged.caught[version].orEmpty().map { it.toString() }.toSet()
                 val progress = merged.guides[version] ?: GuideProgress()
                 preferences[key("guide_completed_$version")] = progress.completed
                 preferences[key("guide_roamers_$version")] =
                     progress.roamers.map { "${it.pokemonId}:${it.place}" }.toSet()
-                if (version >= 4) {
+                if (UnownForm.available(game).isNotEmpty()) {
                     preferences[key("caught_unown_$version")] =
                         merged.unown[version].orEmpty().map { it.identifier }.toSet()
                 }
@@ -52,12 +58,12 @@ class CollectionBackupRepository @Inject constructor(
         }
     }
 
-    private fun snapshot(preferences: Preferences): CollectionBackup {
+    private fun snapshot(preferences: Preferences, games: List<Game>): CollectionBackup {
         val favorites = preferences[key("favorite_pokemon")].orEmpty().map { it.toInt() }.toSet()
-        val caught = (1..6).associateWith { version ->
+        val caught = games.map { it.versionId }.associateWith { version ->
             preferences[key("caught_pokemon_$version")].orEmpty().map { it.toInt() }.toSet()
         }
-        val guides = (1..6).associateWith { version ->
+        val guides = games.map { it.versionId }.associateWith { version ->
             val roamers = preferences[key("guide_roamers_$version")].orEmpty().map {
                 val pieces = it.split(":", limit = 2)
                 require(pieces.size == 2)
@@ -65,10 +71,12 @@ class CollectionBackupRepository @Inject constructor(
             }
             GuideProgress(preferences[key("guide_completed_$version")].orEmpty(), roamers)
         }
-        val unown = (4..6).associateWith { version ->
+        val unown = games.filter {
+            UnownForm.available(it).isNotEmpty()
+        }.map { it.versionId }.associateWith { version ->
             preferences[key("caught_unown_$version")].orEmpty().map(UnownForm::from).toSet()
         }
-        return CollectionBackup(favorites, caught, guides, unown)
+        return CollectionBackup(favorites, caught, guides, unown).also { validateCollectionBackup(it, games) }
     }
 
     private fun document(address: String): Uri = address.toUri().also { require(it.scheme == "content") }
@@ -80,13 +88,19 @@ class CollectionBackupRepository @Inject constructor(
 }
 
 internal fun merge(current: CollectionBackup, imported: CollectionBackup): CollectionBackup {
-    val caught = (1..6).associateWith { current.caught[it].orEmpty() + imported.caught[it].orEmpty() }
-    val guides = (1..6).associateWith {
+    val caught = (current.caught.keys + imported.caught.keys).associateWith {
+        current.caught[it].orEmpty() +
+            imported.caught[it].orEmpty()
+    }
+    val guides = (current.guides.keys + imported.guides.keys).associateWith {
         val existing = current.guides[it] ?: GuideProgress()
         val incoming = imported.guides[it] ?: GuideProgress()
         val observations = (existing.roamers + incoming.roamers).associateBy { it.pokemonId }.values.toList()
         GuideProgress(existing.completed + incoming.completed, observations)
     }
-    val unown = (4..6).associateWith { current.unown[it].orEmpty() + imported.unown[it].orEmpty() }
+    val unown = (current.unown.keys + imported.unown.keys).associateWith {
+        current.unown[it].orEmpty() +
+            imported.unown[it].orEmpty()
+    }
     return CollectionBackup(current.favorites + imported.favorites, caught, guides, unown)
 }

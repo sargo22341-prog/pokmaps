@@ -25,9 +25,13 @@ import kotlin.math.max
 import kotlin.math.min
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.pokemon.PokemonForm
 
 /** Endroits où les sprites des Pokémon sont animés (réglages). */
 val LocalAnimatedPlaces = compositionLocalOf { SpritePlace.DEFAULT_ANIMATED }
+
+/** Version qui fixe la forme de Deoxys dans tous les sprites. */
+val LocalSpriteVersion = compositionLocalOf { "" }
 
 /**
  * Taille d'un sprite de Pokémon : au plus `pixel` dp par pixel du sprite, arrondi au nombre entier de pixels de
@@ -65,12 +69,14 @@ fun PokemonSprite(
     modifier: Modifier = Modifier,
     alpha: Float = 1f,
     shiny: Boolean = false,
-    animated: Boolean = place in LocalAnimatedPlaces.current
+    animated: Boolean = place in LocalAnimatedPlaces.current,
+    form: PokemonForm? = null,
+    version: String = LocalSpriteVersion.current
 ) {
     val density = LocalDensity.current
     val factor = max(1, floor(size.pixel.value * density.density).toInt())
     val side = with(density) { (size.frame * factor).toDp() }
-    val path = Sprites.pokemon(pokemonId, animated, shiny)
+    val path = form?.sprite(animated, shiny) ?: Sprites.pokemon(pokemonId, animated, shiny, version)
     SpriteImage(path, factor, contentDescription, modifier.size(side), alpha)
 }
 
@@ -98,7 +104,13 @@ fun PokemonSpriteFill(
     BoxWithConstraints(modifier, contentAlignment = Alignment.Center) {
         val side = with(LocalDensity.current) { min(maxWidth, maxHeight).toPx() }
         val factor = max(1, (side / FILL_FRAME).toInt())
-        SpriteImage(Sprites.pokemon(pokemonId, animated), factor, contentDescription, Modifier.fillMaxSize(), alpha)
+        SpriteImage(
+            Sprites.pokemon(pokemonId, animated, version = LocalSpriteVersion.current),
+            factor,
+            contentDescription,
+            Modifier.fillMaxSize(),
+            alpha
+        )
     }
 }
 

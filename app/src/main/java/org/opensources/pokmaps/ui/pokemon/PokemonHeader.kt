@@ -44,7 +44,15 @@ internal fun PokemonHeader(
             .padding(16.dp)
     ) {
         CollectionRow(state, game, onAction)
-        PokemonSprite(details.id, SpritePlace.POKEMON_SHEET, SpriteSize.HEADER, details.name, shiny = state.shiny)
+        PokemonSprite(
+            details.id,
+            SpritePlace.POKEMON_SHEET,
+            SpriteSize.HEADER,
+            details.name,
+            shiny = state.shiny,
+            version = game.versionIdentifier
+        )
+        PokemonForms(details.id, game.versionIdentifier, state.shiny)
         Identity(details)
     }
 }

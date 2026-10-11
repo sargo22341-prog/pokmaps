@@ -1,12 +1,15 @@
 package org.opensources.pokmaps.domain.model
 
+import org.opensources.pokmaps.domain.pokemon.PokemonForm
+
 /** Chemins des images dans les assets, en WebP sans perte (générées par tools/build_data.py). */
 object Sprites {
     /**
      * Sprite d'un Pokémon (Noir et Blanc, PokeAPI/sprites), le même partout : animé, ou sa première image fixe,
      * de même taille ; en couleurs normales ou chromatiques (`shiny`).
      */
-    fun pokemon(pokemonId: Int, animated: Boolean, shiny: Boolean = false): String {
+    fun pokemon(pokemonId: Int, animated: Boolean, shiny: Boolean = false, version: String = ""): String {
+        if (pokemonId == 386) return PokemonForm.deoxys(version).sprite(animated, shiny)
         val style = if (shiny) "sprites/pokemon/shiny" else "sprites/pokemon"
         return if (animated) "$style/animated/$pokemonId.webp" else "$style/static/$pokemonId.webp"
     }

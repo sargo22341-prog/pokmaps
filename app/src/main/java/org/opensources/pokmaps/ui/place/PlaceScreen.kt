@@ -33,6 +33,7 @@ import org.opensources.pokmaps.domain.usecase.PlacePage
 import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.ExternalEventLabel
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.PokemonSprite
@@ -124,6 +125,7 @@ private fun PlaceHeader(state: PlaceUiState, page: PlacePage, onShowPlace: () ->
             .padding(16.dp)
     ) {
         Text(page.map.name, style = MaterialTheme.typography.headlineMedium)
+        if (page.map.isExternalEvent) ExternalEventLabel()
         Text(
             stringResource(if (page.outdoor) R.string.place_outdoor else R.string.place_indoor),
             color = MaterialTheme.colorScheme.onSurfaceVariant
