@@ -56,6 +56,49 @@ class PokemapsJourneyTest {
     }
 
     @Test
+    fun emeraldOpensItsRegionalPokemonAndHighlightsHoenn() {
+        selectGame("Émeraude")
+        openPokemon("arcko", "Arcko")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.pokemon_abilities)))
+        await(hasText("Engrais"))
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+        await(hasText(text(R.string.map_highlight, "Arcko")))
+        await(hasText("Hoenn"))
+    }
+
+    @Test
+    fun fireredOpensNationalPokemonAndShowsSevii() {
+        selectGame("Rouge Feu")
+        click(hasText(text(R.string.nav_pokedex)))
+        click(hasText("National") and hasClickAction())
+        type("zarbi")
+        click(hasText("Zarbi"))
+        await(hasScrollToNodeAction())
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+        await(hasText(text(R.string.map_highlight, "Zarbi")))
+        await(hasText("Îles Sevii"))
+        click(hasText("Îles Sevii") and hasClickAction())
+        click(hasText("Kanto") and hasClickAction())
+        click(hasText("Kanto") and hasClickAction())
+        await(hasText("Îles Sevii"))
+        click(hasText("Îles Sevii") and hasClickAction())
+        await(hasContentDescription(text(R.string.map_layers)))
+    }
+
+    @Test
+    fun fireredShowsTwentyEightUnownForms() {
+        selectGame("Rouge Feu")
+        click(hasText(text(R.string.nav_pokedex)))
+        click(hasText("National") and hasClickAction())
+        type("zarbi")
+        click(hasText("Zarbi"))
+        click(hasText(text(R.string.unown_title)))
+        await(hasText(text(R.string.unown_progress, 0, 28)))
+    }
+
+    @Test
     fun crystalShowsTutorMovesAndTheirDetails() {
         selectGame("Cristal")
         openPokemon("pika", "Pikachu")

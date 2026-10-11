@@ -5,10 +5,24 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data.games import GEN3_GAMES
+from pokemaps_data.maps_facilities_gen3 import _facility
 from pokemaps_data.pret_gen3 import Gen3PretRepo
 from pokemaps_data.pret_gen3_offers import Gen3Offer, script_offers
 from pokemaps_data.pret_gen3_scripts import Gen3Scripts, parse_scripts
 from pokemaps_data.sources import pret_dir
+
+
+def test_memorial_reward_keeps_its_lemonade_requirement() -> None:
+    scripts = Gen3Scripts(
+        parse_scripts("FiveIsland_MemorialPillar_Test:\nremoveitem ITEM_LEMONADE\ngiveitem ITEM_TM42\nend", "test.inc"),
+        {},
+    )
+    result = script_offers(scripts, "FiveIsland_MemorialPillar_Test")
+    assert result.offers[0].conditions == ("Après avoir déposé une Limonade au Mémorial de Tectonix.",)
+    assert _facility("FiveIsland_MemorialPillar_EventScript_Memorial", result.offers) == (
+        "npc_object",
+        "memorial_pillar",
+    )
 
 
 def test_casino_does_not_turn_coin_gifts_into_purchases() -> None:
@@ -23,6 +37,13 @@ def test_casino_does_not_turn_coin_gifts_into_purchases() -> None:
             Gen3Scripts(parse_scripts(text.replace("1000", "VAR_UNKNOWN"), "test.inc"), {}),
             "CeladonCity_GameCorner_Test",
         )
+
+
+def test_remake_move_relearner_describes_both_mushroom_payments() -> None:
+    scripts = Gen3Scripts(parse_scripts("TwoIsland_House_Test:\nspecial DisplayMoveTutorMenu\nend", "test.inc"), {})
+    offer = script_offers(scripts, "TwoIsland_House_Test").offers[0]
+    assert offer.required_item == "ITEM_BIG_MUSHROOM"
+    assert offer.conditions == ("Un Gros Champi ou deux Petits Champi par capacité réapprise.",)
 
 
 def _offers(repo: Gen3PretRepo, version: str, label: str) -> tuple[Gen3Offer, ...]:

@@ -201,7 +201,8 @@ CHECKS = (
                (SELECT id FROM version_group WHERE generation_id = 3))
              OR n.currency NOT IN ('money', 'coins', 'battle_points', 'ashes')
              OR (n.currency IS NOT NULL AND n.kind NOT IN
-               ('sale', 'prize_item', 'coin_sale', 'daycare_withdrawal', 'move_tutor'))
+               ('sale', 'prize_item', 'prize_pokemon', 'coin_sale', 'daycare_withdrawal', 'move_tutor'))
+             OR (n.kind = 'prize_pokemon' AND n.currency IS NOT NULL AND n.currency != 'coins')
              OR (n.kind = 'sale' AND n.currency IS NOT NULL AND coalesce(n.price, 0) <= 0)
              OR (n.kind IN ('daycare_egg', 'daycare_withdrawal', 'move_relearner')
                AND coalesce(n.quantity, n.pokemon_id) IS NOT NULL)

@@ -13,7 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
-/** Requêtes Room sur Hoenn activé, avec le catalogue des remakes encore préparatoire. */
+/** Requêtes Room sur les deux branches GBA activées dans la base distribuée. */
 @RunWith(RobolectricTestRunner::class)
 class Gen3PokemonDataTest {
     private lateinit var database: PokedexDatabase
@@ -25,17 +25,6 @@ class Gen3PokemonDataTest {
             .createFromFile(File(requireNotNull(System.getProperty("pokemaps.database"))))
             .allowMainThreadQueries()
             .build()
-        val sql = database.openHelper.writableDatabase
-        sql.execSQL("INSERT INTO version_group_pokedex VALUES (7, 2), (7, 1)")
-        seedRemakeAbilities()
-    }
-
-    private fun seedRemakeAbilities() {
-        val sql = database.openHelper.writableDatabase
-        sql.execSQL(
-            "INSERT INTO ability_version_group VALUES (?, ?, ?), (?, ?, ?)",
-            arrayOf<Any>(28, 7, "Transfère statuts.", 36, 7, "Imite la capacité spéciale.")
-        )
     }
 
     @After

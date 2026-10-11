@@ -50,6 +50,8 @@ def facility_rows(maps: Gen3GameMaps, version: str, api: PokeApi, story: StoryEv
 
 
 def _facility(script: str, offers: tuple[Gen3Offer, ...]) -> tuple[str, str]:
+    if script == "FiveIsland_MemorialPillar_EventScript_Memorial":
+        return "npc_object", "memorial_pillar"
     if "VendingMachine" in script:
         return "vending_machine", "vending_machine"
     if {offer.kind for offer in offers} == {"heal"}:

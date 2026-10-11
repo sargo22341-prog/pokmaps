@@ -76,10 +76,10 @@ class GeneratedMapSectionsTest {
         DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)
-            assertEquals(setOf(1, 2, 3, 4, 5, 6), versions.keys)
+            assertEquals(setOf(1, 2, 3, 4, 5, 6, 7), versions.keys)
             versions.forEach { (group, entries) ->
                 val maps = entries.map { it.second }.associateBy { it.id }
-                val identifier = mapOf(5 to "ruby-sapphire", 6 to "emerald")[group] ?: "test"
+                val identifier = mapOf(5 to "ruby-sapphire", 6 to "emerald", 7 to "firered-leafgreen")[group] ?: "test"
                 val catalog = MapCatalog(identifier, maps, warps, emptyMap(), emptyMap())
                 maps.values.filter { it.isDisplayable && !it.isWorld }.forEach { current ->
                     val sections = catalog.floorsOf(current.id)

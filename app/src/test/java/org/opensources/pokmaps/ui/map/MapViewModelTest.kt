@@ -147,7 +147,12 @@ class MapViewModelTest {
         requests.send(MapRequest.OpenPlace("viridian-mart"))
         requests.send(MapRequest.HighlightPokemon(FakeMapDao.PIDGEY, "Roucool"))
         model.onAction(MapAction.CycleTime)
+        assertEquals(FakeGameDao.EMERALD, model.state.value.game)
+        assertEquals(FakeMapDao.PIDGEY, model.state.value.highlight?.pokemonId)
+        val previousMap = model.state.value.mapState
         kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.FIRERED.versionId) }
+        assertEquals(FakeGameDao.FIRERED, model.state.value.game)
+        assertNotSame(previousMap, model.state.value.mapState)
         assertEquals("kanto", model.state.value.map?.identifier)
         assertEquals(TimeFilter.ALL, model.state.value.time)
         assertNull(model.state.value.highlight)

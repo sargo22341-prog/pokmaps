@@ -181,7 +181,8 @@ def test_items_and_areas_absent_from_pokeapi(preview_db: sqlite3.Connection) -> 
     areas = dict(
         preview_db.execute(
             """SELECT la.identifier, la.name_fr FROM location_area la JOIN location l ON l.id = la.location_id
-               WHERE la.id >= 100000 AND l.region_id IN (1, 2)"""
+               WHERE la.id >= 100000 AND l.region_id IN (1, 2)
+               AND EXISTS (SELECT 1 FROM encounter e WHERE e.location_area_id = la.id AND e.version_id IN (4, 5))"""
         )
     )
     assert areas == {

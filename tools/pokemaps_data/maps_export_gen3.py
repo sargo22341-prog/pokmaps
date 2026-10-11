@@ -1,4 +1,4 @@
-"""Export des cartes et personnages Hoenn vers la base embarquée."""
+"""Export des cartes et personnages GBA vers la base embarquée."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from .pokeapi import PokeApi
 from .pret_gen3 import Gen3PretRepo
 from .sources import fetch_pokeapi_csv, fetch_pret
 from .story_events import read_story_events
-from .validate_hoenn_characters import validate_character_catalog
+from .validate_gen3_characters import validate_character_catalog
 
 
 def export_game(cache: Path, output: Path, game: Game) -> GameMapData:

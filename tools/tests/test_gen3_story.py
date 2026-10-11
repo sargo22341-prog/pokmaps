@@ -58,6 +58,20 @@ def test_story_variable_is_translated_and_tracked() -> None:
         events.script_phrases("pokeemerald", frozenset({ScriptRequirement("VAR_UNKNOWN", "eq", "1")}), "test")
 
 
+def test_remake_fossil_and_unique_tutor_conditions_are_translated() -> None:
+    events = read_story_events()
+    requirements = frozenset(
+        {
+            ScriptRequirement("VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL", "eq", "2"),
+            ScriptRequirement("FLAG_TUTOR_DOUBLE_EDGE", "ne", "TRUE"),
+        }
+    )
+    assert events.script_phrases("pokefirered", requirements, "test") == (
+        "Avant cet enseignement unique",
+        "Fossile Dôme confié au laboratoire",
+    )
+
+
 def test_hexadecimal_script_values_use_the_reviewed_decimal_comparison() -> None:
     events = read_story_events()
     assert events.script_phrases(

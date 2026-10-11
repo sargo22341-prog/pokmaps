@@ -1,4 +1,4 @@
-"""Personnages Hoenn, Pokémon fixes et catalogue des données de scénario."""
+"""Personnages GBA, Pokémon fixes et catalogue des données de scénario."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
     catalog: list[dict[str, object]] = []
     for version, _ in maps.game.pret_versions:
         reader = maps.repo.offers[version]
-        berries = initial_berries(maps.repo, version)
+        berries = initial_berries(maps.repo, version) if maps.game.map_family == "ruby-sapphire-emerald" else {}
         for const in sorted(maps.placements, key=lambda key: maps.maps[key].number):
             current = maps.maps[const]
             for index, event in enumerate(current.objects, 1):
@@ -63,6 +63,9 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
                     if event.value("movement_type") != "MOVEMENT_TYPE_BERRY_TREE_GROWTH"
                     else _berry_offers(event, berries, reader.scripts.constants, version)
                 )
+                # Les journaux du Memorydex restent au catalogue, sans acteur ni service à afficher sur la carte.
+                if event.value("movement_type") == "MOVEMENT_TYPE_INVISIBLE" and not result.trainers and not offers:
+                    continue
                 rows.extend(_actor_rows(maps, current, event, version, result.trainers, offers))
         rows = _replace_fixed_actors(rows, maps, version)
         rows.extend(facility_rows(maps, version, api, story))

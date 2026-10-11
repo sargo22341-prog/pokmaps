@@ -15,6 +15,7 @@ import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
+import org.opensources.pokmaps.domain.model.Game
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -32,13 +33,13 @@ class GuideRepositoryTest {
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
                 if (game.generationId == 3) {
-                    // Les bibliothèques Hoenn sont prévues en phase 7 ; elles doivent rester lisibles et vides.
+                    // Les bibliothèques GBA sont prévues en phase 7 ; elles doivent rester lisibles et vides.
                     assertTrue(library.articles.isEmpty())
-                    checkFruitSprites(context, maps.catalog(game), game.generationId)
+                    checkFruitSprites(context, maps.catalog(game), game)
                     continue
                 }
                 checkSeparateQuests(library)
-                checkFruitSprites(context, maps.catalog(game), game.generationId)
+                checkFruitSprites(context, maps.catalog(game), game)
                 val achievements = library.articles.filter { it.category == GuideCategory.ACHIEVEMENT }
                 assertEquals(expected[game.versionId - 1], achievements.size)
                 val categories = GuideCategory.entries.toSet() -
@@ -80,10 +81,10 @@ class GuideRepositoryTest {
     private fun checkFruitSprites(
         context: Context,
         catalog: org.opensources.pokmaps.domain.map.MapCatalog,
-        generation: Int
+        game: Game
     ) {
         val trees = catalog.objects.values.flatten().filter { it.fruit != null }
-        if (generation == 1) {
+        if (game.generationId == 1 || game.remakeGenerationId == 1) {
             assertTrue(trees.isEmpty())
             return
         }

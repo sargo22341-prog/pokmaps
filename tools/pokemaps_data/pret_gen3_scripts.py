@@ -32,7 +32,9 @@ class ScriptBlock:
 
 def parse_scripts(text: str, source: str, predefined: dict[str, str] | None = None) -> dict[str, ScriptBlock]:
     """Les données (textes, mouvements et boutiques) gardent leur label, sans devenir exécutables."""
-    aliases = (predefined or {}) | dict(re.findall(r"^\s*\.(?:equ|set)\s+(\w+),\s*([A-Z_]\w*)\s*$", text, re.M))
+    aliases = (predefined or {}) | dict(
+        re.findall(r"^\s*\.(?:equ|set)\s+(\w+),\s*([A-Z_]\w*|0x[\da-fA-F]+|-?\d+)\s*$", text, re.M)
+    )
     for name, value in aliases.items():
         text = re.sub(r"\b" + name + r"\b", value, text)
     bodies: dict[str, list[Instruction]] = {}
