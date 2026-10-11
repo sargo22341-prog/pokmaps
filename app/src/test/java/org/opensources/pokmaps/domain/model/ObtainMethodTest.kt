@@ -36,6 +36,18 @@ class ObtainMethodTest {
         assertEquals(ObtainMethod.STATIC, ObtainMethod.fromEncounterMethod("roaming-grass"))
     }
 
+    @Test
+    fun gen3MethodsAreClassifiedWithoutLosingSpecialEncounters() {
+        assertEquals(ObtainMethod.DIVE, ObtainMethod.fromEncounterMethod("seaweed"))
+        assertEquals(ObtainMethod.FISHING, ObtainMethod.fromEncounterMethod("feebas-tile-fishing"))
+        listOf("roaming-water", "devon-scope", "wailmer-pail").forEach {
+            assertEquals(ObtainMethod.STATIC, ObtainMethod.fromEncounterMethod(it))
+        }
+        listOf("colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal").forEach {
+            assertEquals(ObtainMethod.GIFT, ObtainMethod.fromEncounterMethod(it))
+        }
+    }
+
     /** Une méthode inconnue ne doit pas disparaître des filtres. */
     @Test
     fun anUnknownMethodIsAnError() {

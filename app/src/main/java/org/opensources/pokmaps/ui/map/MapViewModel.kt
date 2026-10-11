@@ -157,23 +157,23 @@ class MapViewModel @Inject constructor(
             session.setLoaded(gameMaps)
             session.updateOverlays { it.copy(worldEntrances = gameMaps.catalog.worldEntrances()) }
             val sameMaps = previous?.catalog === gameMaps.catalog
-            val sameGeneration = previous?.game?.generationId == gameMaps.game.generationId
-            if (!sameGeneration) {
+            val sameFamily = previous?.game?.mapFamily == gameMaps.game.mapFamily
+            if (!sameFamily) {
                 session.updateOverlays { it.copy(highlightedMaps = emptySet(), highlightedObjects = emptySet()) }
             }
             if (!sameMaps) navigation.forgetScales()
             session.update {
                 it.copy(
                     game = gameMaps.game,
-                    time = if (sameGeneration) it.time else TimeFilter.ALL,
-                    highlight = if (sameGeneration) it.highlight else null,
+                    time = if (sameFamily && gameMaps.game.hasTimeOfDay) it.time else TimeFilter.ALL,
+                    highlight = if (sameFamily) it.highlight else null,
                     detail = null,
                     zoneListOpen = false,
                     failed = false,
                     worlds = gameMaps.catalog.worlds.map { world -> MapPlace(world.id, world.name) }
                 )
             }
-            val stayed = sameGeneration && position != null && navigation.stay(gameMaps.catalog, position, sameMaps)
+            val stayed = sameFamily && position != null && navigation.stay(gameMaps.catalog, position, sameMaps)
             val current = session.current.highlight
             when {
                 current != null -> highlight(current.pokemonId, current.name, move = !stayed)

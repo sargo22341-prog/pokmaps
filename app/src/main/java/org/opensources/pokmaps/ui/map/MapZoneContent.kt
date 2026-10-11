@@ -47,6 +47,7 @@ internal object MapZoneContent {
     private fun terrain(method: WildMethod): SpotKind = when (method) {
         WildMethod.WALK -> SpotKind.GRASS
         WildMethod.SURF, WildMethod.FISHING -> SpotKind.WATER
+        WildMethod.DIVE -> SpotKind.UNDERWATER
         WildMethod.HEADBUTT -> SpotKind.TREE
         WildMethod.ROCK_SMASH -> SpotKind.ROCK
     }

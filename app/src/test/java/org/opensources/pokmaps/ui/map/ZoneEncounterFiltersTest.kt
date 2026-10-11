@@ -48,6 +48,27 @@ class ZoneEncounterFiltersTest {
     }
 
     @Test
+    fun divingAndFeebasFishingHaveSeparateFilters() {
+        val encounters = listOf(
+            encounter("Coquiperl", "seaweed", EncounterTime.DAY),
+            encounter("Barpau", "feebas-tile-fishing", EncounterTime.DAY),
+            encounter("Tentacool", "surf", EncounterTime.DAY),
+            encounter("Kecleon", "devon-scope", EncounterTime.DAY)
+        )
+        val zone = MapZone(1, "Route", emptyList(), loading = false, encounters = encounters)
+        compose.setContent { Column { FilteredZoneEncounters(zone, emptySet()) {} } }
+        click(R.string.method_dive)
+        compose.onNode(hasText("Coquiperl")).assertExists()
+        compose.onNode(hasText("Barpau")).assertDoesNotExist()
+        compose.onNode(hasText("Tentacool")).assertDoesNotExist()
+        click(R.string.method_fishing)
+        compose.onNode(hasText("Barpau")).assertExists()
+        compose.onNode(hasText("Coquiperl")).assertDoesNotExist()
+        click(R.string.time_all)
+        compose.onNode(hasText("Kecleon")).assertExists()
+    }
+
+    @Test
     fun captureFilterCanReturnToAllWithoutChangingZone() {
         val encounters = listOf(
             encounter("Roucool", "walk", EncounterTime.DAY),

@@ -73,6 +73,27 @@ class MapSelectionTest {
     }
 
     @Test
+    fun divingMarkersUseOnlyUnderwaterSpots() = runTest {
+        val fixture = fixture()
+        val original = checkNotNull(fixture.session.catalog)
+        val route = original.maps.getValue(FakeMapDao.ROUTE_1)
+        val getEncounters = GetMapEncountersUseCase(MapRepository(FakeMapDao()))
+        val encounter = getEncounters(FakeGameDao.RED, original, route.id).single()
+            .copy(method = "seaweed")
+        val catalog = original.copy(
+            spots = mapOf(
+                route.id to listOf(
+                    MapSpot(route.id, SpotKind.UNDERWATER, 80, 80),
+                    MapSpot(route.id, SpotKind.WATER, 400, 400)
+                )
+            )
+        )
+        val marker = MapZoneContent.wildMarkers(catalog, route, listOf(encounter)).single()
+        assertEquals(WildMethod.DIVE, marker.method)
+        assertEquals(80 to 80, marker.x to marker.y)
+    }
+
+    @Test
     fun everyZoneOfTheFloorHasMarkersAndItsOwnPokemonDetails() = runTest {
         val fixture = fixture()
         fixture.useCompositePlan()

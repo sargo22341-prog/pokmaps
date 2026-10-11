@@ -16,4 +16,13 @@ data class Game(
     val color: Int,
     val remakeGenerationId: Int? = null,
     val hasTimeOfDay: Boolean = false
-)
+) {
+    /** Familles de plans communes, également utilisées par le pipeline pour les emplacements relus. */
+    val mapFamily: String
+        get() = when (versionGroupIdentifier) {
+            "red-blue", "yellow" -> "red-blue-yellow"
+            "gold-silver", "crystal" -> "gold-silver-crystal"
+            "ruby-sapphire", "emerald" -> "ruby-sapphire-emerald"
+            else -> versionGroupIdentifier
+        }
+}

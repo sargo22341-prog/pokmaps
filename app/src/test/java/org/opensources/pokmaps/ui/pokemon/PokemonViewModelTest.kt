@@ -45,7 +45,7 @@ class PokemonViewModelTest {
     private val requests = MapRequests()
     private val dataStore = FakeDataStore()
     private val games = GameRepository(
-        FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.BLUE, FakeGameDao.GOLD)),
+        FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.BLUE, FakeGameDao.GOLD, FakeGameDao.RUBY, FakeGameDao.EMERALD)),
         GameSettings(dataStore)
     )
     private val collection = CollectionSettings(dataStore)
@@ -147,6 +147,19 @@ class PokemonViewModelTest {
         assertEquals(listOf(87), gold.details?.tutorMoves?.map { it.moveId })
         assertEquals(MoveTab.entries, gold.moveTabs)
         assertEquals(listOf(FakePokemonDao.THUNDER_SHOCK), gold.details?.levelUpMoves?.map { it.moveId })
+    }
+
+    @Test
+    fun gen3MoveTabsFollowDataAndKeepTheLightBallNote() = runTest {
+        val model = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        games.select(FakeGameDao.EMERALD)
+        assertEquals(listOf(MoveTab.LEVEL_UP, MoveTab.MACHINE, MoveTab.EGG), model.state.value.moveTabs)
+        assertEquals(MoveNote.LIGHT_BALL_PARENT, model.state.value.details?.eggMoves?.single()?.note)
+        games.select(FakeGameDao.RUBY)
+        assertEquals(listOf(MoveTab.LEVEL_UP, MoveTab.MACHINE), model.state.value.moveTabs)
+        games.select(FakeGameDao.GOLD)
+        assertEquals(MoveTab.entries, model.state.value.moveTabs)
     }
 
     @Test

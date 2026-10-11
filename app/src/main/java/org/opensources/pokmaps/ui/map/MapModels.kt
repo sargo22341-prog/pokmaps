@@ -30,6 +30,7 @@ enum class WildMethod {
     /** Herbes hautes, ou sol des grottes et bâtiments. */
     WALK,
     SURF,
+    DIVE,
     FISHING,
     HEADBUTT,
     ROCK_SMASH;
@@ -39,6 +40,7 @@ enum class WildMethod {
         fun from(method: String): WildMethod? = when (ObtainMethod.fromEncounterMethod(method)) {
             ObtainMethod.WALK -> WALK
             ObtainMethod.SURF -> SURF
+            ObtainMethod.DIVE -> DIVE
             ObtainMethod.FISHING -> FISHING
             ObtainMethod.HEADBUTT -> HEADBUTT
             ObtainMethod.ROCK_SMASH -> ROCK_SMASH

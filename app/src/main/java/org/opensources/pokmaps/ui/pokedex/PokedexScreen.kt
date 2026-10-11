@@ -292,6 +292,7 @@ private val ObtainMethod.label: Int
         ObtainMethod.WALK -> R.string.method_walk
         ObtainMethod.FISHING -> R.string.method_fishing
         ObtainMethod.SURF -> R.string.method_surf
+        ObtainMethod.DIVE -> R.string.method_dive
         ObtainMethod.HEADBUTT -> R.string.method_headbutt
         ObtainMethod.ROCK_SMASH -> R.string.method_rock_smash
         ObtainMethod.GIFT -> R.string.method_gift

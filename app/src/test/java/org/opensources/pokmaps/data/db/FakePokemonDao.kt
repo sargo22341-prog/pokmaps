@@ -41,6 +41,10 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
                     electricMove("egg", 0, 117, "Patience", power = null, pp = 10, machine = null),
                     electricMove("tutor", 0, 87, "Fatal-Foudre", power = 120, pp = 10, machine = null)
                 )
+            } else if (versionGroupId == FakeGameDao.EMERALD.versionGroupId) {
+                arrayOf(electricMove("light-ball-egg", 0, 344, "Électacle", power = 120, pp = 15, machine = null))
+            } else if (versionGroupId == FakeGameDao.RUBY.versionGroupId) {
+                emptyArray()
             } else {
                 arrayOf(electricMove("stadium-surfing-pikachu", 0, SURF, "Surf", power = 90, pp = 15, machine = null))
             },

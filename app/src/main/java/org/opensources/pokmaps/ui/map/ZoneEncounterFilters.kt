@@ -52,4 +52,5 @@ private val EncounterFilter.label: Int
         EncounterFilter.WALK -> R.string.map_method_walk
         EncounterFilter.FISHING -> R.string.method_fishing
         EncounterFilter.SURF -> R.string.method_surf
+        EncounterFilter.DIVE -> R.string.method_dive
     }
