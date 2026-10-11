@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Préparation du calculateur de capture GBA avec les nouvelles Balls et leurs contextes.
 - Le Pokédex prend en charge une bascule régional/National, avec une numérotation propre à chaque liste.
 - Les onglets d'attaques par œuf et tuteur suivent les données du Pokémon ; la carte conserve sa sélection par famille de jeux.
 - Le choix des jeux distingue les remakes ; les filtres horaires et le calque Baies suivent les données du jeu et de la carte.

@@ -3626,4 +3626,15 @@
         <item quantity="other">%1$d cendres</item>
     </plurals>
     <string name="game_remake_generation">Remake %1$dG</string>
+    <string name="ball_net">Filet Ball</string>
+    <string name="ball_dive">Scuba Ball</string>
+    <string name="ball_nest">Faiblo Ball</string>
+    <string name="ball_repeat">Bis Ball</string>
+    <string name="ball_timer">Chrono Ball</string>
+    <string name="ball_luxury">Luxe Ball</string>
+    <string name="ball_premier">Honor Ball</string>
+    <string name="catch_underwater">Sous l’eau (Plongée)</string>
+    <string name="catch_already_caught">Espèce déjà capturée dans le Pokédex du jeu</string>
+    <string name="catch_elapsed_turns">Tours écoulés : %1$d (bonus maximal à 30)</string>
+    <string name="catch_note_gen3">Probabilité par lancer dans Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille, avec un IV des PV moyen et quatre contrôles de capture. Sommeil et gel : ×2 ; autres statuts : ×1,5. Filet Ball : ×3 pour Eau ou Insecte ; Scuba Ball : ×3,5 uniquement sous l’eau ; Bis Ball : ×3 si l’espèce est déjà capturée. Faiblo Ball aide aux faibles niveaux ; Chrono Ball passe de ×1 à ×4 après 30 tours écoulés. Luxe Ball et Honor Ball ont le taux d’une Poké Ball ; Luxe Ball facilite ensuite les gains de bonheur. Hors Parc Safari.</string>
 </resources>

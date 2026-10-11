@@ -21,6 +21,7 @@ import org.opensources.pokmaps.domain.pokemon.CaptureGeneration
 import org.opensources.pokmaps.domain.pokemon.CatchRate
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.domain.pokemon.Gen2CatchRate
+import org.opensources.pokmaps.domain.pokemon.Gen3CatchRate
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
@@ -47,7 +48,10 @@ data class CatchInput(
     val status: CatchStatus = CatchStatus.NONE,
     val playerLevel: Int = 30,
     val fishing: Boolean = false,
-    val sameSpeciesAndGender: Boolean = false
+    val sameSpeciesAndGender: Boolean = false,
+    val underwater: Boolean = false,
+    val elapsedTurns: Int = 0,
+    val alreadyCaught: Boolean = false
 )
 
 data class CatchUiState(
@@ -60,6 +64,9 @@ data class CatchUiState(
     val playerLevel: Int = 30,
     val fishing: Boolean = false,
     val sameSpeciesAndGender: Boolean = false,
+    val underwater: Boolean = false,
+    val elapsedTurns: Int = 0,
+    val alreadyCaught: Boolean = false,
     val blockedBalls: Set<Ball> = emptySet()
 )
 
@@ -125,6 +132,12 @@ sealed interface PokemonAction {
     data object ToggleFishing : PokemonAction
 
     data object ToggleLoveBonus : PokemonAction
+
+    data object ToggleUnderwater : PokemonAction
+
+    data object ToggleAlreadyCaught : PokemonAction
+
+    data class SetElapsedTurns(val turns: Int) : PokemonAction
 }
 
 @HiltViewModel
@@ -176,6 +189,13 @@ class PokemonViewModel @Inject constructor(
             is PokemonAction.SetPlayerLevel ->
                 catchInput.update { it.copy(playerLevel = action.level.coerceIn(1, MAX_LEVEL)) }
 
+            PokemonAction.ToggleUnderwater -> catchInput.update { it.copy(underwater = !it.underwater) }
+
+            PokemonAction.ToggleAlreadyCaught -> catchInput.update { it.copy(alreadyCaught = !it.alreadyCaught) }
+
+            is PokemonAction.SetElapsedTurns ->
+                catchInput.update { it.copy(elapsedTurns = action.turns.coerceIn(0, 30)) }
+
             PokemonAction.ToggleFishing -> catchInput.update { it.copy(fishing = !it.fishing) }
 
             PokemonAction.ToggleLoveBonus ->
@@ -206,7 +226,11 @@ class PokemonViewModel @Inject constructor(
             ?: details.encounters.filter { it.versionId == game.versionId && !it.isTrade }.minOfOrNull { it.minLevel }
             ?: DEFAULT_LEVEL
         val baseHp = details.stats.firstOrNull { it.identifier == HP }?.value ?: 0
-        val maxHp = CatchRate.maxHp(baseHp, level)
+        val maxHp = if (game.generationId == 3) {
+            Gen3CatchRate.maxHp(details.id, baseHp, level)
+        } else {
+            CatchRate.maxHp(baseHp, level)
+        }
         val currentHp = CatchRate.currentHp(maxHp, input.hp.fraction)
         val generation = checkNotNull(CaptureGeneration.from(game.generationId))
         val context = BallContext(
@@ -215,7 +239,11 @@ class PokemonViewModel @Inject constructor(
             level,
             input.playerLevel,
             input.fishing,
-            input.sameSpeciesAndGender
+            input.sameSpeciesAndGender,
+            input.underwater,
+            input.elapsedTurns,
+            input.alreadyCaught,
+            details.types.any { it.identifier == "water" || it.identifier == "bug" }
         )
         val blocked = if (generation == CaptureGeneration.GEN2 && Gen2CatchRate.blocksEngine(maxHp)) {
             generation.balls.filter { it != Ball.MASTER && it != Ball.LEVEL }.toSet()
@@ -227,7 +255,8 @@ class PokemonViewModel @Inject constructor(
         }
         return CatchUiState(
             level, input.hp, input.status, probabilities.toList(), CatchRate.bestBall(probabilities),
-            generation, input.playerLevel, input.fishing, input.sameSpeciesAndGender, blocked
+            generation, input.playerLevel, input.fishing, input.sameSpeciesAndGender,
+            input.underwater, input.elapsedTurns, input.alreadyCaught, blocked
         )
     }
 

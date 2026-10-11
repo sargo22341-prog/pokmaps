@@ -604,7 +604,7 @@ Domaine et données :
       `feebas-tile-fishing`, méthodes d'événement externe ; filtres de la liste du lieu (`ZoneEncounterFilters`).
       Filtre Plongée dans le lieu et le Pokédex, marqueurs sur le terrain `underwater`, Barpau dans Pêche ;
       errants et Pokémon révélés restent des rencontres fixes, distributions externes classées comme dons.
-- [ ] Capture : `CaptureGeneration.GEN3` (formule à quatre secousses), nouvelles Balls (Filet, Scuba, Faiblo,
+- [x] Capture : `CaptureGeneration.GEN3` (formule à quatre secousses), nouvelles Balls (Filet, Scuba, Faiblo,
       Bis, Chrono, Luxe, Honor) et leur contexte (sous l'eau, tours, déjà capturé) ; contrôles propres à la 3e
       génération à la place de `JohtoBallControls` ; texte `catch_note_gen3`.
 - [x] Pokédex : régional puis National, comme dans les jeux ; bascule entre les deux dans l'écran Pokédex.
@@ -622,7 +622,9 @@ Domaine et données :
       Comparaisons aux trois moteurs pret, descriptions par groupe, requête Room et affichage Compose vérifiés.
       Six talents n’ont pas de description française GBA dans PokéAPI (18 lignes sur les trois groupes) :
       leur nom reste visible, sans emprunter une description d’une génération ultérieure.
-- [ ] Natures : nouvelle table (`natures` PokéAPI) si la reproduction ou les fiches en ont besoin.
+- [x] Natures : besoin évalué ; aucune table ajoutée à ce stade. Les fiches montrent les statistiques
+      de base des espèces, indépendantes de la nature ; le vérificateur de reproduction reste en génération 2.
+      La transmission des natures d’Émeraude sera traitée avec la reproduction GBA en phase 8.
 - [ ] Formes retenues (Deoxys selon le jeu, Morphéo) sur la fiche et dans les sprites.
 - [ ] Mention « événement externe » sur les cartes, rencontres et offres concernées.
 - [ ] Généraliser les plages de versions : `CollectionBackup`, `BackupJson` (386 espèces, 28 formes),
