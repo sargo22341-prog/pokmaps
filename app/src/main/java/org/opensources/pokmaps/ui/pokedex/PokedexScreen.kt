@@ -82,6 +82,7 @@ fun PokedexScreen(
         return
     }
     Column(modifier.fillMaxSize()) {
+        PokedexSelector(state, onAction)
         SearchField(state.filter.query) { onAction(PokedexAction.Search(it)) }
         Filters(state, onAction)
         Text(
@@ -108,6 +109,23 @@ fun PokedexScreen(
                 onOpenPokemon = onOpenPokemon,
                 onToggleCaught = { onAction(PokedexAction.ToggleCaught(it)) },
                 onToggleFavorite = { onAction(PokedexAction.ToggleFavorite(it)) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun PokedexSelector(state: PokedexUiState, onAction: (PokedexAction) -> Unit) {
+    if (state.catalogs.size < 2) return
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.horizontalScroll(rememberScrollState()).padding(horizontal = 16.dp)
+    ) {
+        state.catalogs.forEach { catalog ->
+            FilterChip(
+                selected = catalog.id == state.selectedPokedexId,
+                onClick = { onAction(PokedexAction.SelectPokedex(catalog.id)) },
+                label = { Text(catalog.name) }
             )
         }
     }

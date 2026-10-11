@@ -33,9 +33,11 @@ interface PokemonDao {
 
     @Query(
         """
-        SELECT min(pe.number) FROM pokedex_entry pe
+        SELECT pe.number FROM pokedex_entry pe
         JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
         WHERE vgp.version_group_id = :versionGroupId AND pe.pokemon_id = :pokemonId
+        ORDER BY (pe.pokedex_id IN (SELECT id FROM pokedex WHERE identifier = 'national')), pe.pokedex_id
+        LIMIT 1
         """
     )
     suspend fun number(pokemonId: Int, versionGroupId: Int): Int?

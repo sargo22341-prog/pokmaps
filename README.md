@@ -449,6 +449,13 @@ aussi les rencontres et objets fixes de l'aperçu. Les noms du catalogue restent
 Les quatre CSV de noms français sont préparés ; les noms vides, les clés répétées, les classes et les sprites fixes
 sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
 
+Les briques Android du Pokédex GBA proposent le régional en premier (Hoenn ou Kanto), puis une bascule
+vers le National. Les filtres et coches sont conservés entre les deux listes ; la fiche privilégie le numéro
+régional et utilise le National pour les espèces hors région. Les talents ont leurs noms français et leurs
+descriptions disponibles dans le jeu ; six talents n’ont pas de description française GBA dans PokéAPI.
+Ces fonctions sont vérifiées sur l’aperçu, sans activer les cinq nouveaux jeux dans l’application distribuée.
+Le schéma 14 reste commun au générateur et à Room.
+
 Les fiches de personnages restent à assembler pour la troisième génération. Le domaine et les ressources
 françaises prennent en charge les tarifs en Points Combat et en cendres, le Maître des Capacités et les
 services d’œuf et de retrait de la Pension ; la monnaie est explicite pour les ventes et les tuteurs.
