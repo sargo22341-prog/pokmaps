@@ -50,7 +50,7 @@ internal fun FloorSelector(floors: List<MapFloor>, currentId: Int?, onSelect: (I
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .heightIn(min = 48.dp)
-                        .widthIn(min = 48.dp, max = 64.dp)
+                        .widthIn(min = 48.dp, max = 112.dp)
                         .clip(CircleShape)
                         .background(background)
                         .semantics { contentDescription = floor.name }
@@ -86,6 +86,16 @@ private fun floorLabel(level: FloorLevel): String = when (level) {
     FloorLevel.Roof -> stringResource(R.string.map_floor_roof)
 
     FloorLevel.Elevator -> stringResource(R.string.map_floor_elevator)
+
+    is FloorLevel.Landscape -> stringResource(
+        when (level) {
+            FloorLevel.Landscape.SURFACE -> R.string.map_floor_surface
+            FloorLevel.Landscape.UNDERWATER -> R.string.map_floor_underwater
+            FloorLevel.Landscape.HIGH_TIDE -> R.string.map_floor_high_tide
+            FloorLevel.Landscape.LOW_TIDE -> R.string.map_floor_low_tide
+            FloorLevel.Landscape.LOW_TIDE_BASEMENT -> R.string.map_floor_low_tide_basement
+        }
+    )
 }
 
 private val FLOORS_MAX_HEIGHT = 360.dp

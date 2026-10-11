@@ -3645,4 +3645,9 @@
     <string name="pokemon_form_defense">Forme Défense</string>
     <string name="pokemon_form_speed">Forme Vitesse</string>
     <string name="pokemon_forms_weather">Morphéo change de forme selon la météo du combat.</string>
+    <string name="map_floor_surface">Surface</string>
+    <string name="map_floor_underwater">Sous l’eau</string>
+    <string name="map_floor_high_tide">Marée haute</string>
+    <string name="map_floor_low_tide">Marée basse</string>
+    <string name="map_floor_low_tide_basement">Marée basse · Sous-sol</string>
 </resources>

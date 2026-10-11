@@ -22,8 +22,8 @@ class GeneratedMapSectionsTest {
             ).forEach { assertTrue(it, catalog.mapByIdentifier(it) != null) }
             assertPlan(catalog, "granite-cave-1f-plan", 2, 3)
             assertPlan(catalog, "seafloor-cavern-1f-plan", 10, 0)
-            assertPlan(catalog, "shoal-cave-high-tide-1f-plan", 2, 0)
-            assertPlan(catalog, "shoal-cave-low-tide-1f-plan", 4, 2)
+            assertPlan(catalog, "shoal-cave-high-tide-1f-plan", 2, 3)
+            assertPlan(catalog, "shoal-cave-low-tide-1f-plan", 4, 3)
             assertPlan(catalog, "sky-pillar-1f-plan", 1, 6)
             val origin = catalog.mapByIdentifier("cave-of-origin-1f-plan")
             requireNotNull(origin)

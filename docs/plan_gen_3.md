@@ -640,6 +640,19 @@ Domaine et données :
       et sur l’aperçu des cinq versions GBA régénéré explicitement.
 - [ ] Carte : menu des régions avec Hoenn, Kanto, Îles Sevii ; sélecteur d'étage pour le monde sous-marin et les
       marées ; performances mesurées sur la plus grande carte du monde (règle 3).
+  - [x] Menu par région : Hoenn regroupe ses deux niveaux ; Kanto et les Îles Sevii restent séparés.
+  - [x] Sélecteur : Surface / Sous l’eau à Hoenn ; marée haute / marée basse / salle de glace à la Grotte Tréfonds.
+        Tests JVM sur les catalogues versionnés Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille.
+  - [x] Mesure du décodage des tuiles de la plus grande carte : Hoenn d’Émeraude, 12 800 × 9 792 pixels
+        (125,34 Mpx), 7 niveaux. Sur PC, Python/Pillow, parcours séquentiel des 828 tuiles WebP du niveau 6
+        (2 189 970 octets) : médiane 0,616 ms, p95 0,770 ms, maximum 2,832 ms, total 503,7 ms.
+        Mesure du 11 octobre 2026 ; chaque image est décodée puis fermée avant la suivante.
+  - [ ] Mesurer les temps de trame et la mémoire pendant zoom et déplacement sur Hoenn au téléphone.
+        Les cartes GBA sont versionnées, mais leurs jeux ne sont pas encore activés dans la base Room embarquée.
+        La mesure PC ci-dessus ne valide pas la fluidité du rendu Android ; la case principale reste ouverte.
+        Contrôles de cette passe : ktlint, absence de services Google, Lint, 342 tests JVM et APK debug réussis ;
+        inventaire des assets et limites de taille du code vérifiés. Avertissement de dépréciation Gradle
+        existant sur `Configuration.setVisible(boolean)` ; aucun avertissement Kotlin ni Android Lint.
 
 Validation de cette passe (11 octobre 2026) : contrôles Android complets réussis (317 tests JVM),
 Ruff et inventaire des assets réussis, 419 tests Python ordinaires et 192 tests du pipeline réussis.

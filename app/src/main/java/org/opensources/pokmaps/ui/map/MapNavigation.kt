@@ -192,7 +192,7 @@ internal class MapNavigation(
                 map = map,
                 hasConnections = catalog.connectionsOf(map.id).isNotEmpty(),
                 hasFruitTrees = objects.any { it.fruit != null },
-                worldId = catalog.worldOf(map.id)?.id,
+                worldId = catalog.regionWorldOf(map.id)?.id,
                 mapState = mapState,
                 zone = null,
                 detail = null,

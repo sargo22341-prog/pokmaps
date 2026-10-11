@@ -71,6 +71,9 @@ contre la base générée et vérifie leurs liens et nombres de succès. Les sol
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
+La préparation des cartes GBA regroupe Hoenn et son monde sous-marin dans le sélecteur de niveaux.
+La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les remakes proposent
+Kanto et les Îles Sevii dans le menu des régions.
 Dans les six jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
 s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
 par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.
