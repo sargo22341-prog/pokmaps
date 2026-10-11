@@ -537,8 +537,18 @@ restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, 
       par le C et des autres phrases de scénario reste dans `npc_offers.csv` et l'assemblage des personnages.
 - [x] Déblocage du Pokédex National relu dans les scripts et le moteur de chaque jeu, documenté et testé
       sur les sources épinglées (décision « comme dans les jeux » ; correction du déclencheur Rubis/Saphir).
-- [ ] `npc_duplicates.csv`, `npc_offers.csv` : personnages présents à plusieurs étapes, offres non lisibles.
-- [ ] Tests : offres, conditions, drapeaux et variables relus, dresseurs.
+- [x] `npc_duplicates.csv`, `npc_offers.csv` : personnages présents à plusieurs étapes, offres non lisibles.
+      Exemplaires de scène relus et écartés sans retirer les emplacements interactifs ni les combats.
+      Loterie, Themis, Dame de Nénucrique (dont les quiz personnalisés), Bulletin Pokémon, objets de la
+      Pyramide et tuteurs variables résolus. Quantités, provenance et chemins sont conservés ; conditions
+      du moteur, prix en Points de Combat et Pokémon compatibles sont explicités.
+      `--gen3-curation-only` assemble et vérifie tous les objets des cinq versions : aucune expression
+      d'offre non résolue et aucune ligne éditoriale inutilisée. Positions générées de la Pyramide signalées.
+- [x] Tests : offres, conditions, drapeaux et variables relus, dresseurs.
+      Tests en mémoire et sur les sources épinglées : résolutions isolées par dépôt/personnage,
+      conservation des chemins, quantités et dresseurs, lignes inutilisées refusées, tables C de récompenses
+      contrôlées, prix et restrictions des tuteurs vérifiés, traduction des conditions relues et parcours
+      intégral des cinq versions. Les autres effets C restent distincts de cette validation des offres.
 
 Branche Hoenn :
 

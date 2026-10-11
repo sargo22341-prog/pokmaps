@@ -17,7 +17,7 @@ def script_constants(root: Path) -> dict[str, int]:
         text = re.sub(r"//[^\n]*", "", text)
         if path.name == "items.h":
             values.update(_item_enums(text))
-        for name, expression in re.findall(r"^#define\s+(\w+)\s+([^\n]+)", text, re.M):
+        for name, expression in re.findall(r"^#define[ \t]+(\w+)[ \t]+([^\n]+)", text, re.M):
             expression = expression.split("//", 1)[0].strip()
             if re.fullmatch(r"[\w\s()+\-]+", expression):
                 expressions[name] = expression
