@@ -9,7 +9,7 @@ import pytest
 from pokemaps_data.asset_manifest import MANIFEST, check_manifest, write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.maps_gen3 import build_gen3_maps
-from pokemaps_data.pret_hoenn_fixed import build_fixed_catalog
+from pokemaps_data.pret_gen3_fixed import build_fixed_catalog
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
 

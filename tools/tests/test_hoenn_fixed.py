@@ -7,7 +7,7 @@ import pytest
 
 from pokemaps_data.games import GEN3_GAMES
 from pokemaps_data.pret_gen3 import Gen3PretRepo
-from pokemaps_data.pret_hoenn_fixed import fixed_encounters
+from pokemaps_data.pret_gen3_fixed import fixed_encounters
 from pokemaps_data.sources import PRET_COMMITS, pret_dir
 
 _ROOT = Path(__file__).resolve().parents[2]
