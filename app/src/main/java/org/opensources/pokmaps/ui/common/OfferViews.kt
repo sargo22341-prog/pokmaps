@@ -1,6 +1,5 @@
 package org.opensources.pokmaps.ui.common
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.CharacterRole
-import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferItem
@@ -65,35 +63,6 @@ fun Offers(
 
 /** Où sont dessinés les Pokémon (réglage des sprites animés) et quelles fiches s'ouvrent au toucher. */
 data class OfferLinks(val place: SpritePlace, val onOpenPokemon: ((Int) -> Unit)?, val onOpenItem: ((String) -> Unit)?)
-
-@Composable
-private fun Services(services: List<NpcOffer.Service>, rowConditions: Boolean) {
-    if (services.isEmpty()) return
-    SectionTitle(stringResource(R.string.map_offer_services))
-    services.forEach { offer ->
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            RoleIcon(offer.service.role, size = 24.dp)
-            Text(
-                stringResource(offer.service.description),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.weight(1f)
-            )
-            offer.price?.let {
-                val price = if (offer.service == CharacterService.MOVE_TUTOR) {
-                    pluralStringResource(R.plurals.coins, it, it)
-                } else {
-                    stringResource(R.string.map_offer_price, it)
-                }
-                Text(price, style = MaterialTheme.typography.titleSmall)
-            }
-        }
-        OfferRowCondition(offer, rowConditions)
-    }
-}
 
 @Composable
 private fun Gifts(
@@ -143,7 +112,7 @@ private fun Sales(offers: List<NpcOffer>, links: OfferLinks, rowConditions: Bool
             is NpcOffer.Sale -> OfferItemRow(
                 offer.item,
                 offer.item.name,
-                offer.price?.let { stringResource(R.string.map_offer_price, it) },
+                offer.price?.let { offerPrice(it, offer.currency) },
                 links.onOpenItem
             )
 
@@ -394,29 +363,6 @@ private fun ItemIcon(item: OfferItem, modifier: Modifier = Modifier, size: Dp = 
 @Composable
 private fun quantityText(name: String, quantity: Int): String =
     if (quantity > 1) stringResource(R.string.map_offer_quantity, name, quantity) else name
-
-private val CharacterService.role: CharacterRole
-    get() = when (this) {
-        CharacterService.HEAL -> CharacterRole.HEAL
-        CharacterService.CABLE_CLUB -> CharacterRole.CABLE_CLUB
-        CharacterService.NAME_RATER -> CharacterRole.NAME_RATER
-        CharacterService.DAYCARE -> CharacterRole.DAYCARE
-        CharacterService.MOVE_DELETER -> CharacterRole.MOVE_DELETER
-        CharacterService.GROOMING -> CharacterRole.GROOMING
-        CharacterService.MOVE_TUTOR -> CharacterRole.MOVE_TUTOR
-    }
-
-@get:StringRes
-private val CharacterService.description: Int
-    get() = when (this) {
-        CharacterService.HEAL -> R.string.service_heal
-        CharacterService.CABLE_CLUB -> R.string.service_cable_club
-        CharacterService.NAME_RATER -> R.string.service_name_rater
-        CharacterService.DAYCARE -> R.string.service_daycare
-        CharacterService.MOVE_DELETER -> R.string.service_move_deleter
-        CharacterService.GROOMING -> R.string.service_grooming
-        CharacterService.MOVE_TUTOR -> R.string.service_move_tutor
-    }
 
 private val ITEM_ICON_SIZE = 32.dp
 

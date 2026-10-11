@@ -41,7 +41,8 @@ sealed interface NpcOffer {
     data class Sale(
         val item: OfferItem,
         val price: Int?,
-        override val condition: OfferCondition = OfferCondition.ALWAYS
+        override val condition: OfferCondition = OfferCondition.ALWAYS,
+        val currency: OfferCurrency = OfferCurrency.MONEY
     ) : NpcOffer
 
     /** Pokémon donné, avec l'objet qu'il tient (2e génération : Baie Oran des Pokémon de départ). */
@@ -121,11 +122,17 @@ sealed interface NpcOffer {
     /** Baie ou Noigrume que donne un arbre, une fois par jour. */
     data class FruitTree(val item: OfferItem, override val condition: OfferCondition = OfferCondition.ALWAYS) : NpcOffer
 
-    /** Service rendu, gratuit ou payant (`price` en ₽ pour le toilettage, en jetons pour le tuteur). */
+    /** Service rendu, avec sa monnaie et éventuellement un objet requis. */
     data class Service(
         val service: CharacterService,
         val price: Int? = null,
-        override val condition: OfferCondition = OfferCondition.ALWAYS
+        override val condition: OfferCondition = OfferCondition.ALWAYS,
+        val currency: OfferCurrency = if (service == CharacterService.MOVE_TUTOR) {
+            OfferCurrency.COINS
+        } else {
+            OfferCurrency.MONEY
+        },
+        val requiredItem: OfferItem? = null
     ) : NpcOffer
 }
 
@@ -159,6 +166,9 @@ val NpcOffer.kind: OfferKind
         is NpcOffer.FruitTree -> OfferKind.FRUIT_TREE
 
         is NpcOffer.Service -> when (service) {
+            CharacterService.DAYCARE_EGG -> OfferKind.DAYCARE_EGG
+            CharacterService.DAYCARE_WITHDRAWAL -> OfferKind.DAYCARE_WITHDRAWAL
+            CharacterService.MOVE_RELEARNER -> OfferKind.MOVE_RELEARNER
             CharacterService.HEAL -> OfferKind.HEAL
             CharacterService.CABLE_CLUB -> OfferKind.CABLE_CLUB
             CharacterService.NAME_RATER -> OfferKind.NAME_RATER
@@ -174,6 +184,9 @@ enum class CharacterService {
     HEAL,
     CABLE_CLUB,
     NAME_RATER,
+    DAYCARE_EGG,
+    DAYCARE_WITHDRAWAL,
+    MOVE_RELEARNER,
     DAYCARE,
 
     /** Effaceur de capacités : fait oublier une attaque, même une CS. */
@@ -182,7 +195,7 @@ enum class CharacterService {
     /** Toilettage qui rend un Pokémon plus heureux. */
     GROOMING,
 
-    /** Tuteur de Cristal : Lance-Flammes, Tonnerre et Laser Glace, prix en jetons. */
+    /** Tuteur de capacités, gratuit ou payé dans la monnaie indiquée par l’offre. */
     MOVE_TUTOR
 }
 
@@ -225,6 +238,9 @@ enum class OfferKind(val identifier: String) {
     HEAL("heal"),
     CABLE_CLUB("cable_club"),
     NAME_RATER("name_rater"),
+    DAYCARE_EGG("daycare_egg"),
+    DAYCARE_WITHDRAWAL("daycare_withdrawal"),
+    MOVE_RELEARNER("move_relearner"),
     DAYCARE("daycare"),
     MOVE_DELETER("move_deleter"),
     GROOMING("grooming"),

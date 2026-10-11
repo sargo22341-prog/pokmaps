@@ -209,6 +209,13 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
         OfferKind.FRUIT_TREE -> NpcOffer.FruitTree(offerItem(), condition)
 
+        OfferKind.DAYCARE_EGG -> NpcOffer.Service(CharacterService.DAYCARE_EGG, condition = condition)
+
+        OfferKind.DAYCARE_WITHDRAWAL -> NpcOffer.Service(CharacterService.DAYCARE_WITHDRAWAL, price, condition)
+
+        OfferKind.MOVE_RELEARNER ->
+            NpcOffer.Service(CharacterService.MOVE_RELEARNER, condition = condition, requiredItem = wantedItem())
+
         OfferKind.HEAL -> NpcOffer.Service(CharacterService.HEAL, condition = condition)
 
         OfferKind.CABLE_CLUB -> NpcOffer.Service(CharacterService.CABLE_CLUB, condition = condition)

@@ -559,7 +559,7 @@ Branche Hoenn :
       et en Points de Combat. Les décorations achetées sont distinctes des dons ; les lots différés de
       l'Atelier restent déjà payés. Voir le [bilan des services Hoenn](generations/services-hoenn.md).
       Le domaine et l'affichage Android restent dans la case suivante et la phase 6.
-- [ ] Nouvelles monnaies et services dans le domaine et les ressources françaises : Points Combat, cendres
+- [x] Nouvelles monnaies et services dans le domaine et les ressources françaises : Points Combat, cendres
       (`CharacterService`, `OfferKind`, `CharacterRole`, prix affichés).
 - [ ] Pokémon fixes : Regis, Groudon, Kyogre, Rayquaza, Électrode, Kecleon, Latios/Latias de l'Île du Sud
       (événement).

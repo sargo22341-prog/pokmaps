@@ -3,7 +3,9 @@
 Les lecteurs des trois versions Hoenn alimentent `character_curation.json` de l'aperçu
 `--gen3-curation-only`. Les sources sont les commits épinglés de `pokeruby` et `pokeemerald` ;
 aucun changement des assets Android ni activation des jeux n'est nécessaire à cette préparation.
-Les monnaies et services du domaine Android restent à intégrer dans la case suivante du plan.
+Le domaine Android et les ressources françaises prennent en charge les monnaies `money`, `coins`,
+`battle_points` et `ashes`, ainsi que `daycare_egg`, `daycare_withdrawal` et `move_relearner`.
+L’assemblage de ce catalogue dans la base embarquée reste l’étape suivante du plan.
 
 ## Offres relues
 

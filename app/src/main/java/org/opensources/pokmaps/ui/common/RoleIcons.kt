@@ -64,6 +64,7 @@ val CharacterRole.icon: Int
         CharacterRole.NAME_RATER -> R.drawable.ic_role_name_rater
         CharacterRole.MOVE_DELETER -> R.drawable.ic_role_move_deleter
         CharacterRole.MOVE_TUTOR -> R.drawable.ic_role_move_tutor
+        CharacterRole.MOVE_RELEARNER -> R.drawable.ic_role_move_tutor
         CharacterRole.GROOMING -> R.drawable.ic_role_grooming
         CharacterRole.CABLE_CLUB -> R.drawable.ic_role_cable_club
     }
@@ -87,6 +88,7 @@ val CharacterRole.label: Int
         CharacterRole.NAME_RATER -> R.string.role_name_rater
         CharacterRole.MOVE_DELETER -> R.string.role_move_deleter
         CharacterRole.MOVE_TUTOR -> R.string.role_move_tutor
+        CharacterRole.MOVE_RELEARNER -> R.string.role_move_relearner
         CharacterRole.GROOMING -> R.string.role_grooming
         CharacterRole.CABLE_CLUB -> R.string.role_cable_club
     }
@@ -109,6 +111,7 @@ private val CharacterRole.color: Color?
         CharacterRole.NAME_RATER -> Color(0xFF8E24AA)
         CharacterRole.MOVE_DELETER -> Color(0xFF78909C)
         CharacterRole.MOVE_TUTOR -> Color(0xFF00897B)
+        CharacterRole.MOVE_RELEARNER -> Color(0xFF00897B)
         CharacterRole.GROOMING -> Color(0xFFF06292)
         CharacterRole.CABLE_CLUB -> Color(0xFF5C6BC0)
     }

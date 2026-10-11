@@ -3609,4 +3609,18 @@
     <string name="map_layer_fruit_trees">Baies et Noigrumes</string>
     <string name="breeding_choose">Choisir un Pokémon</string>
     <string name="map_connection_lines">Liaisons</string>
+    <string name="role_move_relearner">Maître des Capacités</string>
+    <string name="service_move_relearner">Réapprend une capacité à un Pokémon.</string>
+    <string name="service_daycare_egg">Remet un œuf issu des Pokémon compatibles confiés à la Pension.</string>
+    <string name="service_daycare_withdrawal">Rend un Pokémon de la Pension : 100 ₽ plus 100 ₽ par niveau gagné.</string>
+    <string name="service_move_tutor_generic">Enseigne une capacité à un Pokémon.</string>
+    <string name="map_offer_required_item">Objet requis : %1$s</string>
+    <plurals name="map_offer_battle_points">
+        <item quantity="one">%1$d Point Combat</item>
+        <item quantity="other">%1$d Points Combat</item>
+    </plurals>
+    <plurals name="map_offer_ashes">
+        <item quantity="one">%1$d cendre</item>
+        <item quantity="other">%1$d cendres</item>
+    </plurals>
 </resources>
