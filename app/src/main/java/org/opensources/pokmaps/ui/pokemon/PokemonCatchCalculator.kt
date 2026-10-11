@@ -43,10 +43,12 @@ internal fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> U
                 }, label = { Text(stringResource(hp.label)) })
             }
         }
-        Text(stringResource(R.string.status_label), style = MaterialTheme.typography.bodyMedium)
-        if (catch.generation == CaptureGeneration.GEN2) {
-            JohtoBallControls(catch, onAction)
+        when (catch.generation) {
+            CaptureGeneration.GEN1 -> Unit
+            CaptureGeneration.GEN2 -> JohtoBallControls(catch, onAction)
+            CaptureGeneration.GEN3 -> Gen3BallControls(catch, onAction)
         }
+        Text(stringResource(R.string.status_label), style = MaterialTheme.typography.bodyMedium)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             CatchStatus.entries.forEach { status ->
                 FilterChip(
@@ -60,14 +62,23 @@ internal fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> U
         if (catch.blockedBalls.isNotEmpty()) {
             Text(stringResource(R.string.catch_engine_blocked), color = MaterialTheme.colorScheme.error)
         }
-        Text(
-            stringResource(
-                if (catch.generation == CaptureGeneration.GEN1) R.string.catch_note else R.string.catch_note_gen2
-            ),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        CatchNote(catch.generation)
     }
+}
+
+@Composable
+private fun CatchNote(generation: CaptureGeneration) {
+    Text(
+        stringResource(
+            when (generation) {
+                CaptureGeneration.GEN1 -> R.string.catch_note
+                CaptureGeneration.GEN2 -> R.string.catch_note_gen2
+                CaptureGeneration.GEN3 -> R.string.catch_note_gen3
+            }
+        ),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
 }
 
 @Composable
@@ -126,6 +137,13 @@ private val Ball.label: Int
         Ball.HEAVY -> R.string.ball_heavy
         Ball.FAST -> R.string.ball_fast
         Ball.PARK -> R.string.ball_park
+        Ball.NET -> R.string.ball_net
+        Ball.DIVE -> R.string.ball_dive
+        Ball.NEST -> R.string.ball_nest
+        Ball.REPEAT -> R.string.ball_repeat
+        Ball.TIMER -> R.string.ball_timer
+        Ball.LUXURY -> R.string.ball_luxury
+        Ball.PREMIER -> R.string.ball_premier
     }
 
 private const val PERCENT = 100

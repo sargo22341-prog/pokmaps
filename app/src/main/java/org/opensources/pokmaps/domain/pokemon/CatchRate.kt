@@ -4,7 +4,7 @@ import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.min
 
-/** Poké Balls des deux premières générations ; randomMax et hpDivisor servent à la formule de la première. */
+/** Poké Balls des trois premières générations ; randomMax et hpDivisor servent à la formule de la première. */
 enum class Ball(val itemIdentifier: String, val randomMax: Int, val hpDivisor: Int) {
     POKE("poke-ball", randomMax = 255, hpDivisor = 12),
     GREAT("great-ball", randomMax = 200, hpDivisor = 8),
@@ -18,7 +18,14 @@ enum class Ball(val itemIdentifier: String, val randomMax: Int, val hpDivisor: I
     LOVE("love-ball", 255, 12),
     HEAVY("heavy-ball", 255, 12),
     FAST("fast-ball", 255, 12),
-    PARK("park-ball", 255, 12)
+    PARK("park-ball", 255, 12),
+    NET("net-ball", 255, 12),
+    DIVE("dive-ball", 255, 12),
+    NEST("nest-ball", 255, 12),
+    REPEAT("repeat-ball", 255, 12),
+    TIMER("timer-ball", 255, 12),
+    LUXURY("luxury-ball", 255, 12),
+    PREMIER("premier-ball", 255, 12)
 }
 
 /** Statut du Pokémon sauvage : sommeil et gel facilitent le plus la capture. */

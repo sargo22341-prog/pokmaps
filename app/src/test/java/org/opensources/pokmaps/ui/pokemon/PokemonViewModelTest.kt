@@ -215,6 +215,30 @@ class PokemonViewModelTest {
     }
 
     @Test
+    fun gen3CaptureContextsAndGenerationSwitch() = runTest {
+        games.select(FakeGameDao.RUBY)
+        val viewModel = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        val original = checkNotNull(viewModel.state.value.catch).probabilities.toMap()
+        viewModel.onAction(PokemonAction.ToggleUnderwater)
+        viewModel.onAction(PokemonAction.ToggleAlreadyCaught)
+        viewModel.onAction(PokemonAction.SetElapsedTurns(500))
+        val catch = checkNotNull(viewModel.state.value.catch)
+        assertTrue(catch.underwater)
+        assertTrue(catch.alreadyCaught)
+        assertEquals(30, catch.elapsedTurns)
+        val updated = catch.probabilities.toMap()
+        assertTrue(updated.getValue(Ball.DIVE) > original.getValue(Ball.DIVE))
+        assertTrue(updated.getValue(Ball.REPEAT) > original.getValue(Ball.REPEAT))
+        assertTrue(updated.getValue(Ball.TIMER) > original.getValue(Ball.TIMER))
+        assertFalse(Ball.LEVEL in updated)
+        viewModel.onAction(PokemonAction.SetElapsedTurns(-1))
+        assertEquals(0, viewModel.state.value.catch?.elapsedTurns)
+        games.select(FakeGameDao.GOLD)
+        assertFalse(checkNotNull(viewModel.state.value.catch).probabilities.any { it.first == Ball.NET })
+    }
+
+    @Test
     fun anUnknownPokemonIsNotFoundNotAnError() = runTest {
         val viewModel = viewModel(pokemonId = 999)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }

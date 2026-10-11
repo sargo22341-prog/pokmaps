@@ -1,40 +1,5 @@
 package org.opensources.pokmaps.domain.pokemon
 
-/** Contexte des Balls de Johto ; la Love Ball d'Or/Argent favorise le même sexe, contrairement à son texte. */
-data class BallContext(
-    val pokemonId: Int,
-    val weightHg: Int,
-    val wildLevel: Int,
-    val playerLevel: Int = 30,
-    val fishing: Boolean = false,
-    val sameSpeciesAndGender: Boolean = false
-)
-
-enum class CaptureGeneration {
-    GEN1,
-    GEN2;
-
-    val balls: List<Ball>
-        get() = when (this) {
-            GEN1 -> listOf(Ball.POKE, Ball.GREAT, Ball.ULTRA, Ball.MASTER)
-            GEN2 -> Ball.entries.filter { it != Ball.SAFARI }
-        }
-
-    fun probability(ball: Ball, rate: Int, maxHp: Int, hp: Int, status: CatchStatus, context: BallContext): Double =
-        when (this) {
-            GEN1 -> CatchRate.probability(ball, rate, maxHp, hp, status)
-            GEN2 -> Gen2CatchRate.probability(ball, rate, maxHp, hp, status, context)
-        }
-
-    companion object {
-        fun from(generation: Int): CaptureGeneration? = when (generation) {
-            1 -> GEN1
-            2 -> GEN2
-            else -> null
-        }
-    }
-}
-
 /** Calcul entier de PokeBallEffect dans pret/pokegold, y compris les défauts du moteur d'origine. */
 object Gen2CatchRate {
     fun probability(ball: Ball, rate: Int, maxHp: Int, hp: Int, status: CatchStatus, context: BallContext): Double {
@@ -67,12 +32,22 @@ object Gen2CatchRate {
     internal fun modifiedRate(ball: Ball, rate: Int, context: BallContext): Int {
         val adjusted = when (ball) {
             Ball.POKE, Ball.MASTER, Ball.MOON, Ball.FRIEND -> rate
+
             Ball.GREAT, Ball.SAFARI, Ball.PARK -> rate + rate / 2
+
             Ball.ULTRA -> rate * 2
+
             Ball.LEVEL -> rate * levelMultiplier(context)
+
             Ball.LURE -> rate * if (context.fishing) 3 else 1
+
             Ball.LOVE -> rate * if (context.sameSpeciesAndGender) 8 else 1
+
             Ball.FAST -> rate * if (context.pokemonId in FAST_SPECIES) 4 else 1
+
+            Ball.NET, Ball.DIVE, Ball.NEST, Ball.REPEAT, Ball.TIMER, Ball.LUXURY, Ball.PREMIER ->
+                error("Ball indisponible en génération 2 : $ball")
+
             Ball.HEAVY -> (rate + weightBonus(context.weightHg)).let { if (it < 0) 1 else it }
         }
         return adjusted.coerceAtMost(255)

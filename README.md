@@ -86,6 +86,8 @@ Les onglets d'attaques par œuf et par tuteur apparaissent seulement si la fiche
 Lors d'un changement de jeu, la carte conserve le lieu et la surbrillance au sein d'une même famille de cartes.
 La préparation Android de la troisième génération ajoute le filtre Plongée et ses marqueurs sous-marins,
 la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
+Le calculateur GBA reproduit les quatre contrôles entiers et les sept nouvelles Balls, avec réglages de
+Plongée, de tours écoulés et d’espèce déjà capturée ; il exclut le Parc Safari et utilise un IV des PV moyen.
 Les cinq jeux GBA attendent encore leur intégration aux données embarquées avant d'être sélectionnables.
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
