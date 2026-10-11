@@ -16,6 +16,12 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "génération d'origine du remake invalide",
+        """SELECT * FROM version_group WHERE remake_generation_id IS NOT NULL
+           AND (remake_generation_id >= generation_id
+                OR remake_generation_id NOT IN (SELECT id FROM generation))""",
+    ),
+    (
         "Pokémon inconnu dans pokemon_move",
         "SELECT * FROM pokemon_move WHERE pokemon_id NOT IN (SELECT id FROM pokemon)",
     ),

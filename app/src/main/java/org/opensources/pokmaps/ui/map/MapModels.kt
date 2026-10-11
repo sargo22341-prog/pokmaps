@@ -130,6 +130,7 @@ data class MapUiState(
     /** Étages du bâtiment ou de la grotte affiché, de haut en bas (vide s'il n'a qu'un niveau). */
     val floors: List<MapFloor> = emptyList(),
     val hasConnections: Boolean = false,
+    val hasFruitTrees: Boolean = false,
     val showConnections: Boolean = false,
     val layers: Set<MapLayer> = MapLayer.entries.toSet(),
     /** Pokémon capturés dans la version. */

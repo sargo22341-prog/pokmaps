@@ -116,10 +116,10 @@ private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit
         } else {
             MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
         }
-        if ((state.game?.generationId ?: 0) >= 2) {
+        if (state.game?.hasTimeOfDay == true) {
             TimeButton(state.time, iconOnly = true) { onAction(MapAction.CycleTime) }
         }
-        LayersButton(state.layers, (state.game?.generationId ?: 0) >= 2) { onAction(MapAction.ToggleLayer(it)) }
+        LayersButton(state.layers, state.hasFruitTrees) { onAction(MapAction.ToggleLayer(it)) }
     }
 }
 
@@ -153,7 +153,7 @@ private fun MapZoneSheet(
     if (state.zoneListOpen && zone != null) {
         ZoneListSheet(
             zone = zone,
-            timed = (state.game?.generationId ?: 0) >= 2,
+            timed = state.game?.hasTimeOfDay == true,
             initialTime = state.time,
             caught = state.caught,
             onDismiss = { onAction(MapAction.CloseZoneList) },
@@ -201,7 +201,7 @@ private fun MapCanvas(state: MapUiState) {
             when {
                 mapState != null -> {
                     MapUI(Modifier.fillMaxSize(), state = mapState)
-                    if ((state.game?.generationId ?: 0) >= 2) MapDaylight(state.time)
+                    if (state.game?.hasTimeOfDay == true) MapDaylight(state.time)
                 }
 
                 state.failed -> Text(

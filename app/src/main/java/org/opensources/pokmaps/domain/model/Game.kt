@@ -13,5 +13,7 @@ data class Game(
     val versionGroupIdentifier: String,
     val generationId: Int,
     val mascotPokemonId: Int,
-    val color: Int
+    val color: Int,
+    val remakeGenerationId: Int? = null,
+    val hasTimeOfDay: Boolean = false
 )

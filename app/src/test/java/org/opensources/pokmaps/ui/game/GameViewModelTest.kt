@@ -31,6 +31,21 @@ class GameViewModelTest {
     }
 
     @Test
+    fun remakesFollowTheOriginalGamesInTheirGeneration() {
+        val original = FakeGameDao.RED.copy(generationId = 3, versionId = 7)
+        val remake = FakeGameDao.BLUE.copy(generationId = 3, versionId = 10, remakeGenerationId = 1)
+        val state = GameUiState(games = listOf(FakeGameDao.RED, remake, original))
+        assertEquals(
+            listOf(
+                GameChoiceRow(1, null, listOf(FakeGameDao.RED)),
+                GameChoiceRow(3, null, listOf(original)),
+                GameChoiceRow(3, 1, listOf(remake))
+            ),
+            state.rows
+        )
+    }
+
+    @Test
     fun startsLoading() {
         assertTrue(viewModel(FakeGameDao()).state.value.loading)
     }
@@ -54,7 +69,10 @@ class GameViewModelTest {
     fun gamesAreGroupedByGeneration() = runTest {
         val viewModel = viewModel(FakeGameDao())
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        assertEquals(listOf(1 to listOf(FakeGameDao.RED, FakeGameDao.BLUE)), viewModel.state.value.byGeneration)
+        assertEquals(
+            listOf(GameChoiceRow(1, null, listOf(FakeGameDao.RED, FakeGameDao.BLUE))),
+            viewModel.state.value.rows
+        )
     }
 
     @Test

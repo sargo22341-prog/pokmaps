@@ -203,7 +203,7 @@ class PokemapsJourneyTest {
         // Le jeu se choisit dans l'onglet « Jeu » de la barre du bas ; la barre du haut affiche le jeu choisi.
         await(hasText(text(R.string.game_name, "Rouge")))
         click(hasText(text(R.string.nav_game)))
-        await(hasText(text(R.string.game_generation, 1)))
+        await(hasText(text(R.string.game_first_generation)))
         val yellow = hasContentDescription(text(R.string.game_cover, "Jaune"))
         compose.onNode(yellow).assertIsNotSelected().performClick()
         await(yellow and isSelected())
@@ -217,7 +217,7 @@ class PokemapsJourneyTest {
 
         // Revenir à l'onglet « Jeu » depuis une fiche ouverte par-dessus affiche la liste des jeux, pas la fiche.
         click(hasText(text(R.string.nav_game)))
-        await(hasText(text(R.string.game_generation, 1)))
+        await(hasText(text(R.string.game_first_generation)))
         val search = hasText(text(R.string.search_intro, "Jaune"))
         compose.waitUntil(TIMEOUT_MS) { compose.onAllNodes(search).fetchSemanticsNodes().isEmpty() }
     }

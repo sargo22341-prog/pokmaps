@@ -35,7 +35,8 @@ data class VersionGroupEntity(
     val identifier: String,
     @ColumnInfo(name = "name_fr") val nameFr: String,
     @ColumnInfo(name = "generation_id") val generationId: Int,
-    @ColumnInfo(name = "sort_order") val sortOrder: Int
+    @ColumnInfo(name = "sort_order") val sortOrder: Int,
+    @ColumnInfo(name = "remake_generation_id") val remakeGenerationId: Int?
 )
 
 @Entity(

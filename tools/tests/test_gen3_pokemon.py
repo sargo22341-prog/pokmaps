@@ -231,6 +231,7 @@ def _pokemon_database(builder: DatabaseBuilder, path: Path) -> sqlite3.Connectio
     """Base réduite aux tables que lit le contrôle d'obtention (les effets des attaques ne sont pas encore lus)."""
     encounters, _ = builder.encounters.encounter_tables()
     tables = {
+        "generation": builder.generation_table(),
         "version_group": builder.version_group_table(),
         "version": builder.version_table(),
         "pokedex": builder.pokedex_table(),

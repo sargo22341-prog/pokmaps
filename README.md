@@ -74,7 +74,10 @@ Les passages viennent de pret ; les niveaux sans numéro explicite sont vérifi�
 [L'Océane](https://bulbapedia.bulbagarden.net/wiki/S.S._Anne) et du
 [Souterrain de Doublonville](https://bulbapedia.bulbagarden.net/wiki/Goldenrod_Tunnel).
 Le Léviator fixe du Lac Colère utilise son sprite chromatique.
-Le bouton à droite défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
+Le choix des jeux distingue les remakes par leur génération d’origine.
+Le calque « Baies et Noigrumes » apparaît sur les cartes contenant des arbres à fruits.
+Le bouton horaire apparaît si les rencontres du jeu ont des conditions horaires.
+Il défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
 Tout conserve les couleurs originales. La liste du lieu a son propre filtre et regroupe les
 rencontres identiques sur toute la journée sous « Tout le temps ».
 Le filtre « Baies et Noigrumes » affiche les fruits correspondant à chaque arbre, avec leur sprite d'objet.

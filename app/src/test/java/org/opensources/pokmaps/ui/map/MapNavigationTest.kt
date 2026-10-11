@@ -2,6 +2,8 @@ package org.opensources.pokmaps.ui.map
 
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.FakeGameDao
@@ -16,6 +18,25 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MapNavigationTest {
+    @Test
+    fun fruitLayerFollowsTheDisplayedMapContents() = runTest {
+        val repository = MapRepository(FakeMapDao(includeFruitTree = true))
+        val catalog = repository.catalog(FakeGameDao.RED)
+        val session = MapSession(backgroundScope)
+        session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        val selection = MapSelection(
+            session,
+            GetMapEncountersUseCase(repository),
+            GetMapObjectDetailsUseCase(repository)
+        )
+        val navigation = MapNavigation(session, selection, GetMapTilesUseCase(MapTiles { null }))
+        navigation.show(checkNotNull(catalog.defaultWorld).id, null, null, null)
+        assertTrue(session.current.hasFruitTrees)
+        navigation.openPlace(MapPlace(FakeMapDao.MART, "Boutique"))
+        assertFalse(session.current.hasFruitTrees)
+        session.current.mapState?.shutdown()
+    }
+
     @Test
     fun enteringAComposedRoomCentersTheWholeFloor() = runTest {
         val repository = MapRepository(FakeMapDao(includeCompositeInterior = true))

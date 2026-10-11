@@ -586,10 +586,17 @@ Branche Remake 1G :
 
 Domaine et données :
 
-- [ ] Choix du jeu : section « 3e génération » puis ligne « Remake 1G » (donnée du jeu, pas un test sur
+- [x] Choix du jeu : section « 3e génération » puis ligne « Remake 1G » (donnée du jeu, pas un test sur
       l'identifiant) ; jaquettes relues à l'écran.
-- [ ] Remplacer les tests `generationId >= 2` par une capacité du jeu : moments de la journée présents ou non
+      `games.py.remake_generation` est exporté dans `version_group.remake_generation_id` (schéma 14).
+      Les cinq jaquettes ont été relues sur téléphone le 11 octobre 2026 dans un aperçu temporaire du choix
+      du jeu : Groudon, Kyogre, Rayquaza, Dracaufeu et Florizarre, avec les couleurs décidées en phase 0.
+      Les jeux GBA restent hors de `GAMES` jusqu'aux étapes d'intégration ci-dessous.
+- [x] Remplacer les tests `generationId >= 2` par une capacité du jeu : moments de la journée présents ou non
       (dérivé des rencontres ou d'une colonne de `version_group`), calque Baies présent si la carte en a.
+      `Game.hasTimeOfDay` est dérivé des conditions matin/jour/nuit des rencontres de la version ; bouton,
+      filtre de la liste et voile lumineux suivent cette capacité. Le calque Baies dépend des arbres présents
+      sur la carte affichée, y compris ses parties assemblées, et se recalcule à chaque changement de carte.
 - [ ] `MapViewModel` : conserver lieu, filtre et surbrillance selon la famille de cartes, pas selon la génération.
 - [ ] `ObtainMethod` : `seaweed` (Plongée), `roaming-water`, `devon-scope`, `wailmer-pail`,
       `feebas-tile-fishing`, méthodes d'événement externe ; filtres de la liste du lieu (`ZoneEncounterFilters`).

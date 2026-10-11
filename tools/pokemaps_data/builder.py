@@ -25,7 +25,7 @@ from .pret_gen2 import Gen2PretRepo
 from .pret_gen3 import Gen3PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 13
+SCHEMA_VERSION = 14
 
 # Pokédex National de PokéAPI, ajouté aux jeux qui le débloquent (games.Game.national_dex).
 NATIONAL_DEX = "national"
@@ -163,7 +163,16 @@ class DatabaseBuilder:
         for row in self.vg_rows:
             vg = int(row["id"])
             versions = [names[int(v["id"])] for v in self.version_rows if int(v["version_group_id"]) == vg]
-            rows.append((vg, row["identifier"], " / ".join(versions), self.vg_generation[vg], self.vg_order[vg]))
+            rows.append(
+                (
+                    vg,
+                    row["identifier"],
+                    " / ".join(versions),
+                    self.vg_generation[vg],
+                    self.vg_order[vg],
+                    self.game_of(vg).remake_generation,
+                )
+            )
         return rows
 
     def version_table(self) -> list[tuple]:

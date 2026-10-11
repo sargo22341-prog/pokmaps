@@ -26,9 +26,14 @@ data class GameUiState(
     val selected: Game? = null,
     val failed: Boolean = false
 ) {
-    /** Jeux regroupés par génération, dans l'ordre des jeux. */
-    val byGeneration: List<Pair<Int, List<Game>>> get() = games.groupBy { it.generationId }.toList()
+    val rows: List<GameChoiceRow> = games.groupBy { it.generationId }.flatMap { (generation, games) ->
+        games.groupBy { it.remakeGenerationId }.entries.sortedBy { it.key ?: 0 }.map { (remake, versions) ->
+            GameChoiceRow(generation, remake, versions)
+        }
+    }
 }
+
+data class GameChoiceRow(val generation: Int, val remakeGeneration: Int?, val games: List<Game>)
 
 /** Intentions de l'écran de choix du jeu. */
 sealed interface GameAction {

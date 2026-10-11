@@ -15,7 +15,8 @@
     <string name="game_name">Pokémon %1$s</string>
 
     <!-- Choix du jeu -->
-    <string name="game_generation">Génération %1$d</string>
+    <string name="game_generation">%1$de génération</string>
+    <string name="game_first_generation">1re génération</string>
     <string name="game_intro">Le jeu choisi s’applique à toute l’application et reste mémorisé à sa réouverture.</string>
     <string name="game_cover">Jaquette de Pokémon %1$s</string>
     <string name="games_empty">Aucun jeu disponible.</string>
@@ -3623,4 +3624,5 @@
         <item quantity="one">%1$d cendre</item>
         <item quantity="other">%1$d cendres</item>
     </plurals>
+    <string name="game_remake_generation">Remake %1$dG</string>
 </resources>
