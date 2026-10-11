@@ -53,28 +53,33 @@ fun GameScreen(state: GameUiState, onAction: (GameAction) -> Unit, modifier: Mod
                     modifier = Modifier.padding(16.dp)
                 )
             }
-            state.byGeneration.forEach { (generation, games) -> generation(generation, games, state, onAction) }
+            state.rows.forEach { row -> generation(row, state, onAction) }
         }
     }
 }
 
-private fun LazyListScope.generation(
-    generation: Int,
-    games: List<Game>,
-    state: GameUiState,
-    onAction: (GameAction) -> Unit
-) {
-    item(key = "generation-$generation") {
+private fun LazyListScope.generation(row: GameChoiceRow, state: GameUiState, onAction: (GameAction) -> Unit) {
+    val generation = row.generation
+    val remake = row.remakeGeneration
+    item(key = "generation-$generation-$remake") {
         Text(
-            stringResource(R.string.game_generation, generation),
+            if (remake == null) {
+                if (generation == 1) {
+                    stringResource(R.string.game_first_generation)
+                } else {
+                    stringResource(R.string.game_generation, generation)
+                }
+            } else {
+                stringResource(R.string.game_remake_generation, remake)
+            },
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp)
         )
     }
-    item(key = "games-$generation") {
+    item(key = "games-$generation-$remake") {
         LazyRow {
-            items(games, key = { it.versionId }) { game ->
+            items(row.games, key = { it.versionId }) { game ->
                 GameRow(game, selected = game == state.selected, onSelect = { onAction(GameAction.Select(game)) })
             }
         }

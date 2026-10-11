@@ -191,6 +191,7 @@ internal class MapNavigation(
             it.copy(
                 map = map,
                 hasConnections = catalog.connectionsOf(map.id).isNotEmpty(),
+                hasFruitTrees = objects.any { it.fruit != null },
                 worldId = catalog.worldOf(map.id)?.id,
                 mapState = mapState,
                 zone = null,

@@ -23,7 +23,8 @@ CREATE TABLE version_group (
     identifier TEXT NOT NULL,
     name_fr TEXT NOT NULL,
     generation_id INTEGER NOT NULL,
-    sort_order INTEGER NOT NULL
+    sort_order INTEGER NOT NULL,
+    remake_generation_id INTEGER
 );
 
 -- Jaquette dessinée par l'application : Pokémon de la jaquette du jeu et couleur de la version (0xRRGGBB).

@@ -77,6 +77,8 @@ class Game:
     # Le jeu débloque le Pokédex National après son Pokédex régional (3e génération) ; PokéAPI ne relie ces jeux
     # qu'à leur Pokédex régional.
     national_dex: bool = False
+    # Génération des jeux originaux, pour la ligne des remakes dans le choix du jeu.
+    remake_generation: int | None = None
 
 
 _GEN1_GAMES: tuple[Game, ...] = (
@@ -157,6 +159,7 @@ FIRERED_LEAFGREEN = Game(
     PretFormat.GEN3,
     (FIRERED_KANTO, SEVII),
     national_dex=True,
+    remake_generation=1,
 )
 GEN3_GAMES: tuple[Game, ...] = (RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
