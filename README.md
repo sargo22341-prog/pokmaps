@@ -427,6 +427,9 @@ Les quatre CSV de noms français sont préparés ; les noms vides, les clés ré
 sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
 
 Les fiches de personnages et leurs services restent à intégrer.
+Les lecteurs d'offres GBA appliquent les drapeaux de présence des événements avant le parcours des scripts.
+`story_events.csv` accepte aussi les comparaisons de variables (`operator,value,phrase`) ; une comparaison
+non relue arrête sa traduction. Les six états du National et du starter de Johto d'Émeraude sont décrits.
 Le [bilan de la phase 5](docs/generations/personnages-gen3-communs.md) décrit l'export et les conditions du National
 relues dans les sources. Cette commande conserve les assets de l'application et son inventaire.
 

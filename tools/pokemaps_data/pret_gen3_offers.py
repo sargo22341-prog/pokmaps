@@ -12,6 +12,7 @@ from .pret_gen3_scripts import Gen3Scripts, Instruction
 
 if TYPE_CHECKING:
     from .pret_gen3 import Gen3PretRepo
+    from .pret_gen3_maps import Gen3Event
 
 
 @dataclass(frozen=True)
@@ -146,10 +147,12 @@ def _special(name: str, state: ScriptState, source: str) -> list[Gen3Offer]:
     return []
 
 
-def script_offers(scripts: Gen3Scripts, label: str) -> ScriptOffers:
+def script_offers(
+    scripts: Gen3Scripts, label: str, requirements: frozenset[ScriptRequirement] = frozenset()
+) -> ScriptOffers:
     offers: dict[Gen3Offer, set[frozenset[ScriptRequirement]]] = {}
     trainers, flags, specials = set(), set(), set()
-    for state in script_states(scripts, label):
+    for state in script_states(scripts, label, requirements):
         instruction = scripts.instruction(state.point)
         if instruction is None:
             raise ValueError(f"{label} : instruction disparue")
@@ -185,6 +188,22 @@ class Gen3Offers:
             result = script_offers(self.scripts, label)
             self._cache[label] = replace(result, offers=tuple(self._resolve(offer) for offer in result.offers))
         return self._cache[label]
+
+    def read_object(self, event: Gen3Event) -> ScriptOffers:
+        """Un drapeau de retrait levé masque l'objet ; ses offres exigent donc qu'il soit baissé."""
+        label, flag = str(event.value("script")), str(event.value("flag"))
+        if label in {"NULL", "0", "0x0"}:
+            return ScriptOffers((), (), (), ())
+        if number_value(flag, self.scripts.constants) == 0:
+            return self.read(label)
+        if not flag.startswith("FLAG_") or flag not in self.scripts.constants:
+            raise ValueError(f"{label} : drapeau de présence inconnu : {flag}")
+        result = script_offers(self.scripts, label, frozenset({ScriptRequirement(flag, "eq", "FALSE")}))
+        return replace(
+            result,
+            offers=tuple(self._resolve(offer) for offer in result.offers),
+            flags=tuple(sorted(set(result.flags) | {flag})),
+        )
 
     def _resolve(self, offer: Gen3Offer) -> Gen3Offer:
         if offer.kind == "trade":
