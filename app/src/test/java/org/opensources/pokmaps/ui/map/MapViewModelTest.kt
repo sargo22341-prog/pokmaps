@@ -139,6 +139,52 @@ class MapViewModelTest {
     }
 
     @Test
+    fun changingGen3BranchResetsPlaceTimeAndHighlight() {
+        val dataStore = FakeDataStore()
+        val games = FakeGameDao(listOf(FakeGameDao.EMERALD, FakeGameDao.FIRERED))
+        val model = viewModel(games, dataStore = dataStore)
+        model.onScreenShown()
+        requests.send(MapRequest.OpenPlace("viridian-mart"))
+        requests.send(MapRequest.HighlightPokemon(FakeMapDao.PIDGEY, "Roucool"))
+        model.onAction(MapAction.CycleTime)
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.FIRERED.versionId) }
+        assertEquals("kanto", model.state.value.map?.identifier)
+        assertEquals(TimeFilter.ALL, model.state.value.time)
+        assertNull(model.state.value.highlight)
+        assertNull(model.state.value.zone)
+    }
+
+    @Test
+    fun aSharedFamilyPreservesSelectedZoneAndAvailableTimeFilter() {
+        val dataStore = FakeDataStore()
+        val gold = FakeGameDao.GOLD.copy(hasTimeOfDay = true)
+        val crystal = gold.copy(versionId = 6, versionGroupId = 4, versionGroupIdentifier = "crystal")
+        val model = viewModel(FakeGameDao(listOf(gold, crystal)), dataStore = dataStore)
+        model.onScreenShown()
+        model.onAction(MapAction.OpenPlace(MapPlace(FakeMapDao.ROUTE_1, "Route 1")))
+        model.onAction(MapAction.CycleTime)
+        assertEquals(FakeMapDao.ROUTE_1, model.state.value.zone?.mapId)
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(crystal.versionId) }
+        assertEquals(FakeMapDao.ROUTE_1, model.state.value.zone?.mapId)
+        assertEquals(TimeFilter.MORNING, model.state.value.time)
+        assertFalse(model.state.value.failed)
+    }
+
+    @Test
+    fun hoennVersionsPreservePlaceAndHighlight() {
+        val dataStore = FakeDataStore()
+        val games = FakeGameDao(listOf(FakeGameDao.EMERALD, FakeGameDao.RUBY))
+        val model = viewModel(games, dataStore = dataStore)
+        model.onScreenShown()
+        requests.send(MapRequest.OpenPlace("viridian-mart"))
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.RUBY.versionId) }
+        assertEquals("viridian-mart", model.state.value.map?.identifier)
+        requests.send(MapRequest.HighlightPokemon(FakeMapDao.PIDGEY, "Roucool"))
+        kotlinx.coroutines.test.runTest { GameSettings(dataStore).selectVersion(FakeGameDao.EMERALD.versionId) }
+        assertEquals(FakeMapDao.PIDGEY, model.state.value.highlight?.pokemonId)
+    }
+
+    @Test
     fun changingGenerationResetsTheWorldAndClearsTimeAndHighlight() {
         val dataStore = FakeDataStore()
         val games = FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.GOLD))

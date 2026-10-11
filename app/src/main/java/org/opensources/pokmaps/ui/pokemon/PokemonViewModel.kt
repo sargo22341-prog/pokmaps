@@ -25,6 +25,7 @@ import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.ShinyOdds
+import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
@@ -80,8 +81,7 @@ data class PokemonUiState(
     val shinyOdds: Int? get() = game?.let { ShinyOdds.oneIn(it.generationId) }
 
     /**
-     * Onglets d'attaques : œuf et tuteur dans les jeux qui ont des œufs, ou dès qu'une attaque y figure (Surf du
-     * Pikachu Surfeur, enseigné par Pokémon Stadium dans Rouge, Bleu et Jaune).
+     * Les onglets œuf et tuteur apparaissent seulement si le Pokémon a des attaques dans le jeu choisi.
      */
     val moveTabs: List<MoveTab>
         get() = MoveTab.entries.filter { tab ->
@@ -89,12 +89,16 @@ data class PokemonUiState(
                 MoveTab.LEVEL_UP, MoveTab.MACHINE -> true
 
                 MoveTab.EGG, MoveTab.TUTOR ->
-                    has(GenerationFeature.BREEDING) || details?.moves(tab).orEmpty().isNotEmpty()
+                    details?.moves(tab).orEmpty().isNotEmpty()
             }
         }
 
     /** Le jeu connaît cette mécanique (objets tenus, sexe, œufs, talents…). */
     fun has(feature: GenerationFeature): Boolean = game?.let { feature.existsIn(it.generationId) } == true
+
+    val hasUnownForms: Boolean
+        get() = details?.id == UnownForm.POKEMON_ID &&
+            game?.let { UnownForm.available(it).isNotEmpty() } == true
 }
 
 /** Intentions de la fiche d'un Pokémon. */

@@ -27,7 +27,10 @@ class UnownViewModelTest {
 
     private val dataStore = FakeDataStore()
     private val settings = CollectionSettings(dataStore)
-    private val games = GameRepository(FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.GOLD)), GameSettings(dataStore))
+    private val games = GameRepository(
+        FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.GOLD, FakeGameDao.EMERALD, FakeGameDao.FIRERED)),
+        GameSettings(dataStore)
+    )
 
     private fun viewModel(failing: Boolean = false): UnownViewModel = UnownViewModel(
         UnownUseCase(games, UnownSettings(if (failing) FakeDataStore(true) else dataStore), settings)
@@ -39,6 +42,27 @@ class UnownViewModelTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         assertTrue(checkNotNull(viewModel.state.value.collection).forms.isEmpty())
         assertFalse(viewModel.state.value.failed)
+    }
+
+    @Test
+    fun remakePunctuationPersistsAndHoennStaysEmpty() = runTest {
+        games.select(FakeGameDao.FIRERED)
+        val model = viewModel()
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        assertEquals(28, model.state.value.collection?.forms?.size)
+        model.toggle(UnownForm.QUESTION)
+        model.toggle(UnownForm.EXCLAMATION)
+        val punctuation = setOf(UnownForm.QUESTION, UnownForm.EXCLAMATION)
+        assertEquals(punctuation, model.state.value.collection?.caught)
+        settings.setCaptureScope(CaptureScope.ALL)
+        games.select(FakeGameDao.EMERALD)
+        assertTrue(checkNotNull(model.state.value.collection).forms.isEmpty())
+        assertTrue(checkNotNull(model.state.value.collection).caught.isEmpty())
+        assertFalse(model.state.value.failed)
+        games.select(FakeGameDao.GOLD)
+        assertTrue(checkNotNull(model.state.value.collection).caught.isEmpty())
+        games.select(FakeGameDao.FIRERED)
+        assertEquals(punctuation, model.state.value.collection?.caught)
     }
 
     @Test

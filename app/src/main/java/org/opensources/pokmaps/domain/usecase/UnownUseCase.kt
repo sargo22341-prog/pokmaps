@@ -22,13 +22,13 @@ class UnownUseCase @Inject constructor(
             caught,
             scope
         ->
-        val forms = UnownForm.available(game.generationId)
+        val forms = UnownForm.available(game)
         val recorded = scope.versionsFor(game, allGames, caught.keys).flatMap { caught[it].orEmpty() }.toSet()
         UnownCollection(game, forms, recorded.intersect(forms.toSet()))
     }
 
     suspend fun setCaught(game: Game, form: UnownForm, caught: Boolean) {
-        require(form in UnownForm.available(game.generationId))
+        require(form in UnownForm.available(game))
         val versions = if (caught) {
             setOf(game.versionId)
         } else {

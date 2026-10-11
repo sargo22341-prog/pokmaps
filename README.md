@@ -82,6 +82,11 @@ Tout conserve les couleurs originales. La liste du lieu a son propre filtre et r
 rencontres identiques sur toute la journée sous « Tout le temps ».
 Le filtre « Baies et Noigrumes » affiche les fruits correspondant à chaque arbre, avec leur sprite d'objet.
 Le Pokédex des formes capturées de Zarbi est accessible depuis sa fiche.
+Les onglets d'attaques par œuf et par tuteur apparaissent seulement si la fiche contient des attaques correspondantes.
+Lors d'un changement de jeu, la carte conserve le lieu et la surbrillance au sein d'une même famille de cartes.
+La préparation Android de la troisième génération ajoute le filtre Plongée et ses marqueurs sous-marins,
+la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
+Les cinq jeux GBA attendent encore leur intégration aux données embarquées avant d'être sélectionnables.
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
 Le [catalogue de provenance des sprites](docs/donnees/sprites-pokemon.md) couvre les 1 025 espèces

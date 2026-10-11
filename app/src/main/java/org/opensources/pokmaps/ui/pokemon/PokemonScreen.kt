@@ -39,7 +39,6 @@ import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.MoveNote
 import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
-import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
 
@@ -60,7 +59,7 @@ fun PokemonRoute(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var unownOpen by rememberSaveable { mutableStateOf(false) }
-    if (unownOpen && state.details?.id == UnownForm.POKEMON_ID && (state.game?.generationId ?: 0) >= 2) {
+    if (unownOpen && state.hasUnownForms) {
         UnownRoute(onDismiss = { unownOpen = false }, shiny = state.shiny)
     }
     PokemonScreen(
@@ -108,7 +107,7 @@ private fun PokemonContent(
     var movesTab by rememberSaveable(details.id, game.versionGroupId) { mutableIntStateOf(0) }
     LazyColumn(modifier.fillMaxSize()) {
         item { PokemonHeader(state, game, details, onAction) }
-        if (details.id == UnownForm.POKEMON_ID && game.generationId >= 2) {
+        if (state.hasUnownForms) {
             item(key = "unown") {
                 FilledTonalButton(onClick = links.onOpenUnown, modifier = Modifier.padding(horizontal = 16.dp)) {
                     Text(stringResource(R.string.unown_title))

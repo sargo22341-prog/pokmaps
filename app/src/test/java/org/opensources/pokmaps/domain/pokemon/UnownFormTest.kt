@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.data.db.FakeGameDao
 
 class UnownFormTest {
     @Test
@@ -13,6 +14,15 @@ class UnownFormTest {
         assertFalse(UnownForm.EXCLAMATION in UnownForm.available(2))
         assertEquals(28, UnownForm.available(3).size)
         assertEquals(UnownForm.entries, UnownForm.available(9))
+    }
+
+    @Test
+    fun hoennHasNoFormCollectionAndTheRemakesHaveAllTwentyEight() {
+        assertTrue(UnownForm.available(FakeGameDao.RUBY).isEmpty())
+        assertTrue(UnownForm.available(FakeGameDao.EMERALD).isEmpty())
+        assertEquals(UnownForm.entries, UnownForm.available(FakeGameDao.FIRERED))
+        assertEquals(26, UnownForm.available(FakeGameDao.GOLD).size)
+        assertTrue(UnownForm.available(FakeGameDao.RED).isEmpty())
     }
 
     @Test

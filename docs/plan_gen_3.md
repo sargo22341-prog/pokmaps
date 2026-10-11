@@ -597,15 +597,22 @@ Domaine et données :
       `Game.hasTimeOfDay` est dérivé des conditions matin/jour/nuit des rencontres de la version ; bouton,
       filtre de la liste et voile lumineux suivent cette capacité. Le calque Baies dépend des arbres présents
       sur la carte affichée, y compris ses parties assemblées, et se recalcule à chaque changement de carte.
-- [ ] `MapViewModel` : conserver lieu, filtre et surbrillance selon la famille de cartes, pas selon la génération.
-- [ ] `ObtainMethod` : `seaweed` (Plongée), `roaming-water`, `devon-scope`, `wailmer-pail`,
+- [x] `MapViewModel` : conserver lieu, filtre et surbrillance selon la famille de cartes, pas selon la génération.
+      `Game.mapFamily` reprend les familles du pipeline ; Hoenn → Remake 1G réinitialise la sélection,
+      même dans la même génération. Le moment est conservé seulement si le nouveau jeu le propose.
+- [x] `ObtainMethod` : `seaweed` (Plongée), `roaming-water`, `devon-scope`, `wailmer-pail`,
       `feebas-tile-fishing`, méthodes d'événement externe ; filtres de la liste du lieu (`ZoneEncounterFilters`).
+      Filtre Plongée dans le lieu et le Pokédex, marqueurs sur le terrain `underwater`, Barpau dans Pêche ;
+      errants et Pokémon révélés restent des rencontres fixes, distributions externes classées comme dons.
 - [ ] Capture : `CaptureGeneration.GEN3` (formule à quatre secousses), nouvelles Balls (Filet, Scuba, Faiblo,
       Bis, Chrono, Luxe, Honor) et leur contexte (sous l'eau, tours, déjà capturé) ; contrôles propres à la 3e
       génération à la place de `JohtoBallControls` ; texte `catch_note_gen3`.
 - [ ] Pokédex : régional puis National, comme dans les jeux ; bascule entre les deux dans l'écran Pokédex.
-- [ ] Zarbi : formes disponibles par jeu (Rouge Feu/Vert Feuille seulement), 28 formes dans le Pokédex.
-- [ ] Onglets d'attaques : œuf, tuteur et `light-ball-egg` affichés selon les données du jeu.
+- [x] Zarbi : formes disponibles par jeu (Rouge Feu/Vert Feuille seulement), 28 formes dans le Pokédex.
+      Hoenn ne propose ni bouton ni formes ; les remakes proposent les 28, Johto conserve les 26 lettres.
+      La portée des captures filtre les formes disponibles sans effacer les coches des autres jeux.
+- [x] Onglets d'attaques : œuf, tuteur et `light-ball-egg` affichés selon les données du jeu.
+      Les onglets œuf et tuteur vides sont masqués ; Électacle garde la mention du Ballon Lumière.
 - [ ] Talents : section déjà prête (`GenerationFeature.ABILITIES`) à vérifier avec de vraies données.
 - [ ] Natures : nouvelle table (`natures` PokéAPI) si la reproduction ou les fiches en ont besoin.
 - [ ] Formes retenues (Deoxys selon le jeu, Morphéo) sur la fiche et dans les sprites.
