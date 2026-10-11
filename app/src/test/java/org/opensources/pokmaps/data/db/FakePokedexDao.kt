@@ -1,8 +1,19 @@
 package org.opensources.pokmaps.data.db
 
 /** Petit Pokédex en mémoire (Abo, Arbok, Sabelette, Évoli, Aquali) ; `failing` simule une base illisible. */
-internal class FakePokedexDao(private val failing: Boolean = false) : PokedexDao {
-    override suspend fun pokedex(versionGroupId: Int) = read {
+internal class FakePokedexDao(private val failing: Boolean = false, private val national: Boolean = false) :
+    PokedexDao {
+    override suspend fun catalogs(versionGroupId: Int) = read {
+        if (national && versionGroupId >= 5) {
+            val regional = if (versionGroupId == 7) PokedexCatalogRow(2, "Kanto") else PokedexCatalogRow(4, "Hoenn")
+            listOf(regional, PokedexCatalogRow(1, "National"))
+        } else {
+            listOf(PokedexCatalogRow(2, "Kanto"))
+        }
+    }
+
+    override suspend fun pokedex(versionGroupId: Int, pokedexId: Int) = read {
+        if (pokedexId == 4) return@read listOf(PokedexRow(1, 252, "Arcko", "Treecko"))
         listOf(
             PokedexRow(23, 23, "Abo", "Ekans"),
             PokedexRow(24, 24, "Arbok", "Arbok"),

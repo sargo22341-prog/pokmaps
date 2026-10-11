@@ -17,6 +17,7 @@ import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.PokemonType
 import org.opensources.pokmaps.domain.pokedex.CaughtFilter
+import org.opensources.pokmaps.domain.pokedex.PokedexCatalog
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
@@ -30,6 +31,8 @@ data class PokedexUiState(
     val game: Game? = null,
     /** Pokémon correspondant à la recherche et aux filtres. */
     val entries: List<PokedexEntry> = emptyList(),
+    val catalogs: List<PokedexCatalog> = emptyList(),
+    val selectedPokedexId: Int? = null,
     val total: Int = 0,
     /** Pokémon capturés dans la version choisie. */
     val caughtCount: Int = 0,
@@ -39,6 +42,8 @@ data class PokedexUiState(
 
 /** Intentions de l'écran du Pokédex. */
 sealed interface PokedexAction {
+    data class SelectPokedex(val id: Int) : PokedexAction
+
     data class Search(val query: String) : PokedexAction
 
     data class FilterType(val typeId: Int?) : PokedexAction
@@ -66,10 +71,11 @@ class PokedexViewModel @Inject constructor(
     observeCollection: ObserveCollectionUseCase,
     private val updateCollection: UpdateCollectionUseCase
 ) : ViewModel() {
+    private val selection = MutableStateFlow<Pair<Int, Int>?>(null)
     private val filter = MutableStateFlow(PokedexFilter())
 
     val state: StateFlow<PokedexUiState> =
-        combine(observePokedex(), observeCollection(), filter) { pokedex, collection, filter ->
+        combine(observePokedex(selection), observeCollection(), filter) { pokedex, collection, filter ->
             // Un type absent de la génération du nouveau jeu n'a plus de sens comme filtre.
             val activeFilter = if (pokedex.types.any { it.id == filter.typeId }) filter else filter.copy(typeId = null)
             // Captures de la version affichée (la collection peut avoir un temps de retard au changement de jeu).
@@ -81,6 +87,8 @@ class PokedexViewModel @Inject constructor(
                 loading = false,
                 game = pokedex.game,
                 entries = PokedexSearch.filter(entries, activeFilter),
+                catalogs = pokedex.catalogs,
+                selectedPokedexId = pokedex.selectedId,
                 total = pokedex.entries.size,
                 caughtCount = entries.count { it.caught },
                 types = pokedex.types,
@@ -91,6 +99,7 @@ class PokedexViewModel @Inject constructor(
 
     fun onAction(action: PokedexAction) {
         when (action) {
+            is PokedexAction.SelectPokedex -> selectPokedex(action.id)
             is PokedexAction.Search -> filter.update { it.copy(query = action.query) }
             is PokedexAction.FilterType -> filter.update { it.copy(typeId = action.typeId) }
             is PokedexAction.FilterMethod -> filter.update { it.copy(method = action.method) }
@@ -101,6 +110,13 @@ class PokedexViewModel @Inject constructor(
             is PokedexAction.ToggleCaught -> toggleCaught(action.entry)
             is PokedexAction.ToggleFavorite -> toggleFavorite(action.entry)
         }
+    }
+
+    private fun selectPokedex(id: Int) {
+        val current = state.value
+        val game = current.game ?: return
+        if (current.catalogs.none { it.id == id }) return
+        selection.value = game.versionId to id
     }
 
     private fun toggleCaught(entry: PokedexEntry) {

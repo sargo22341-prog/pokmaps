@@ -15,6 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.pokedex.PokedexCatalog
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.robolectric.RobolectricTestRunner
 
@@ -55,5 +56,19 @@ class PokedexScreenTest {
         compose.onNode(hasText(context.getString(R.string.pokedex_filter_reset))).performScrollTo().performClick()
         compose.onNode(hasSetTextAction()).performTextInput("evoli")
         assertEquals(listOf(PokedexAction.ResetFilters, PokedexAction.Search("evoli")), actions)
+    }
+
+    @Test
+    fun nationalDexButtonEmitsSelection() {
+        show(
+            PokedexUiState(
+                loading = false,
+                catalogs = listOf(PokedexCatalog(4, "Hoenn"), PokedexCatalog(1, "National")),
+                selectedPokedexId = 4
+            )
+        )
+        compose.onNode(hasText("Hoenn")).assertExists()
+        compose.onNode(hasText("National")).performClick()
+        assertEquals(listOf(PokedexAction.SelectPokedex(1)), actions)
     }
 }

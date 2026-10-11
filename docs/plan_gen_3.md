@@ -607,13 +607,21 @@ Domaine et données :
 - [ ] Capture : `CaptureGeneration.GEN3` (formule à quatre secousses), nouvelles Balls (Filet, Scuba, Faiblo,
       Bis, Chrono, Luxe, Honor) et leur contexte (sous l'eau, tours, déjà capturé) ; contrôles propres à la 3e
       génération à la place de `JohtoBallControls` ; texte `catch_note_gen3`.
-- [ ] Pokédex : régional puis National, comme dans les jeux ; bascule entre les deux dans l'écran Pokédex.
+- [x] Pokédex : régional puis National, comme dans les jeux ; bascule entre les deux dans l'écran Pokédex.
+      Les catalogues liés au jeu sont lus dans l’ordre régional/National, sans fusion des numéros.
+      La bascule conserve filtres et captures ; une fiche préfère le numéro régional, puis le National.
+      Tests ViewModel (vide, erreur, sélection et changement de branche), Compose et requêtes Room.
+      L’aperçu GBA régénéré contient Hoenn 202, Kanto 151 et National 386 ; les jeux restent en aperçu.
 - [x] Zarbi : formes disponibles par jeu (Rouge Feu/Vert Feuille seulement), 28 formes dans le Pokédex.
       Hoenn ne propose ni bouton ni formes ; les remakes proposent les 28, Johto conserve les 26 lettres.
       La portée des captures filtre les formes disponibles sans effacer les coches des autres jeux.
 - [x] Onglets d'attaques : œuf, tuteur et `light-ball-egg` affichés selon les données du jeu.
       Les onglets œuf et tuteur vides sont masqués ; Électacle garde la mention du Ballon Lumière.
-- [ ] Talents : section déjà prête (`GenerationFeature.ABILITIES`) à vérifier avec de vraies données.
+- [x] Talents : section déjà prête (`GenerationFeature.ABILITIES`) à vérifier avec de vraies données.
+      Les tables épinglées couvrent les 386 espèces et 76 talents sans talent caché en génération 3.
+      Comparaisons aux trois moteurs pret, descriptions par groupe, requête Room et affichage Compose vérifiés.
+      Six talents n’ont pas de description française GBA dans PokéAPI (18 lignes sur les trois groupes) :
+      leur nom reste visible, sans emprunter une description d’une génération ultérieure.
 - [ ] Natures : nouvelle table (`natures` PokéAPI) si la reproduction ou les fiches en ont besoin.
 - [ ] Formes retenues (Deoxys selon le jeu, Morphéo) sur la fiche et dans les sprites.
 - [ ] Mention « événement externe » sur les cartes, rencontres et offres concernées.
@@ -621,9 +629,20 @@ Domaine et données :
       `CollectionBackupRepository`, `GuideSettings`, en validant contre les jeux de la base plutôt que `1..6`.
       Sauvegarde : rester au schéma 1 (plages élargies) ou passer au schéma 2, avec test d'import d'un ancien
       fichier.
-- [ ] Schéma de la base : `SCHEMA_VERSION` (`builder.py`) et version Room alignés, `PokedexSchemaTest` vert.
+- [x] Schéma de la base : `SCHEMA_VERSION` (`builder.py`) et version Room alignés, `PokedexSchemaTest` vert.
+      Le schéma 14 existant suffit : aucune nouvelle table ni colonne pour la bascule ou les talents.
+      Un test Python contrôle l’égalité des constantes ; `PokedexSchemaTest` passe sur la base versionnée
+      et sur l’aperçu des cinq versions GBA régénéré explicitement.
 - [ ] Carte : menu des régions avec Hoenn, Kanto, Îles Sevii ; sélecteur d'étage pour le monde sous-marin et les
       marées ; performances mesurées sur la plus grande carte du monde (règle 3).
+
+Validation de cette passe (11 octobre 2026) : contrôles Android complets réussis (317 tests JVM),
+Ruff et inventaire des assets réussis, 419 tests Python ordinaires et 192 tests du pipeline réussis.
+L’aperçu GBA des rencontres est régénéré explicitement et validé ; son schéma passe les quatre
+contrôles de `PokedexSchemaTest`. Aucun essai sur téléphone dans cette passe.
+APK debug : 88 689 787 octets (84,58 Mio) ; cartes versionnées : 31 679 649 octets (30,21 Mio).
+Stockage des objets Git : 40 783 Kio (paquets et objets libres). Les assets de l’application sont inchangés.
+L’avertissement AGP `Configuration.setVisible(boolean)` déjà documenté reste affiché.
 
 Intégration des jeux :
 

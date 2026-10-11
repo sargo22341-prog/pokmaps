@@ -13,7 +13,9 @@ import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakePokedexDao
 import org.opensources.pokmaps.data.db.FakePokedexDao.Companion.POISON
+import org.opensources.pokmaps.data.db.PokedexCatalogRow
 import org.opensources.pokmaps.data.db.PokedexDao
+import org.opensources.pokmaps.data.db.PokedexRow
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.data.settings.CollectionSettings
@@ -38,9 +40,9 @@ class PokedexViewModelTest {
     private val settings = GameSettings(dataStore)
     private val viewModel by lazy { pokedexViewModel(FakePokedexDao()) }
 
-    private fun pokedexViewModel(dao: PokedexDao): PokedexViewModel {
+    private fun pokedexViewModel(dao: PokedexDao, availableGames: FakeGameDao = FakeGameDao()): PokedexViewModel {
         val collection = CollectionSettings(dataStore)
-        val games = GameRepository(FakeGameDao(), settings)
+        val games = GameRepository(availableGames, settings)
         return PokedexViewModel(
             ObservePokedexUseCase(games, PokedexRepository(dao)),
             ObserveCollectionUseCase(games, collection),
@@ -143,5 +145,46 @@ class PokedexViewModelTest {
         assertEquals(listOf(23), ids())
         assertFalse(viewModel.state.value.entries.single().caught)
         assertTrue(viewModel.state.value.entries.single().favorite)
+    }
+
+    @Test
+    fun switchesDexWithoutLosingFiltersOrCollectionAndResetsWhenChangingGame() = runTest {
+        val games = FakeGameDao(listOf(FakeGameDao.EMERALD, FakeGameDao.FIRERED, red))
+        val model = pokedexViewModel(FakePokedexDao(national = true), games)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        assertEquals(4, model.state.value.selectedPokedexId)
+        assertEquals(listOf(252), model.state.value.entries.map { it.pokemonId })
+        model.onAction(PokedexAction.Search("a"))
+        model.onAction(PokedexAction.ToggleCaught(model.state.value.entries.single()))
+        model.onAction(PokedexAction.SelectPokedex(1))
+        assertEquals(1, model.state.value.selectedPokedexId)
+        assertEquals("a", model.state.value.filter.query)
+        assertEquals(listOf(23, 24, 27, 134), model.state.value.entries.map { it.pokemonId })
+        model.onAction(PokedexAction.SelectPokedex(999))
+        assertEquals(1, model.state.value.selectedPokedexId)
+        model.onAction(PokedexAction.SelectPokedex(4))
+        assertTrue(model.state.value.entries.single().caught)
+        model.onAction(PokedexAction.SelectPokedex(1))
+        settings.selectVersion(FakeGameDao.FIRERED.versionId)
+        assertEquals(2, model.state.value.selectedPokedexId)
+        settings.selectVersion(red.versionId)
+        assertEquals(2, model.state.value.selectedPokedexId)
+    }
+
+    @Test
+    fun missingDexIsAnErrorAndEmptyDexRemainsValid() = runTest {
+        val missing = object : PokedexDao by FakePokedexDao() {
+            override suspend fun catalogs(versionGroupId: Int) = emptyList<PokedexCatalogRow>()
+        }
+        val model = pokedexViewModel(missing)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        assertTrue(model.state.value.failed)
+        val empty = object : PokedexDao by FakePokedexDao() {
+            override suspend fun pokedex(versionGroupId: Int, pokedexId: Int) = emptyList<PokedexRow>()
+        }
+        val emptyModel = pokedexViewModel(empty)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { emptyModel.state.collect {} }
+        assertFalse(emptyModel.state.value.failed)
+        assertEquals(0, emptyModel.state.value.total)
     }
 }

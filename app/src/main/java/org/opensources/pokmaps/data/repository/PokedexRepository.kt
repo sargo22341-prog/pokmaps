@@ -7,12 +7,19 @@ import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.model.PokemonType
+import org.opensources.pokmaps.domain.pokedex.PokedexCatalog
 import org.opensources.pokmaps.domain.pokedex.obtainMethods
 
 @Singleton
 class PokedexRepository @Inject constructor(private val dao: PokedexDao) {
-    /** Pokédex du jeu : types de la génération et façons d'obtenir chaque Pokémon dans la version. */
-    suspend fun pokedex(game: Game): List<PokedexEntry> {
+    suspend fun catalogs(game: Game): List<PokedexCatalog> =
+        dao.catalogs(game.versionGroupId).map { PokedexCatalog(it.id, it.name) }
+
+    /** Pokédex choisi, régional par défaut, avec les façons d’obtenir chaque Pokémon dans la version. */
+    suspend fun pokedex(game: Game, pokedexId: Int? = null): List<PokedexEntry> {
+        val catalogs = catalogs(game)
+        val selected = if (pokedexId == null) catalogs.firstOrNull() else catalogs.firstOrNull { it.id == pokedexId }
+        checkNotNull(selected) { "Pokédex absent du jeu ${game.versionIdentifier} : $pokedexId" }
         val types = dao.pokemonTypes(game.generationId).groupBy({ it.pokemonId }) {
             PokemonType(it.id, it.identifier, it.name)
         }
@@ -20,7 +27,7 @@ class PokedexRepository @Inject constructor(private val dao: PokedexDao) {
             .groupBy({ it.pokemonId }) { ObtainMethod.fromEncounterMethod(it.method) }
             .mapValues { (_, methods) -> methods.toSet() }
         val methods = obtainMethods(encounters, dao.evolutions(game.versionGroupId).map { it.fromId to it.toId })
-        return dao.pokedex(game.versionGroupId).map { row ->
+        return dao.pokedex(game.versionGroupId, selected.id).map { row ->
             PokedexEntry(
                 number = row.number,
                 pokemonId = row.pokemonId,

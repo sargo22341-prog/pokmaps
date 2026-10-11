@@ -2,6 +2,8 @@ package org.opensources.pokmaps.data.db
 
 // Résultats de requêtes (jointures) : les noms des propriétés sont ceux des colonnes renvoyées.
 
+data class PokedexCatalogRow(val id: Int, val name: String)
+
 data class PokedexRow(val number: Int, val pokemonId: Int, val name: String, val nameEn: String)
 
 data class TypeRow(val id: Int, val identifier: String, val name: String)

@@ -5,19 +5,28 @@ import androidx.room.Query
 
 @Dao
 interface PokedexDao {
+    @Query(
+        """
+        SELECT pd.id, pd.name_fr AS name
+        FROM pokedex pd JOIN version_group_pokedex vgp ON vgp.pokedex_id = pd.id
+        WHERE vgp.version_group_id = :versionGroupId
+        ORDER BY (pd.identifier = 'national'), pd.id
+        """
+    )
+    suspend fun catalogs(versionGroupId: Int): List<PokedexCatalogRow>
+
     /** Pokédex régional du groupe de versions (Kanto pour Rouge/Bleu/Jaune). */
     @Query(
         """
-        SELECT min(pe.number) AS number, p.id AS pokemonId, p.name_fr AS name, p.name_en AS nameEn
+        SELECT pe.number AS number, p.id AS pokemonId, p.name_fr AS name, p.name_en AS nameEn
         FROM pokedex_entry pe
         JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
         JOIN pokemon p ON p.id = pe.pokemon_id
-        WHERE vgp.version_group_id = :versionGroupId
-        GROUP BY p.id
+        WHERE vgp.version_group_id = :versionGroupId AND pe.pokedex_id = :pokedexId
         ORDER BY number
         """
     )
-    suspend fun pokedex(versionGroupId: Int): List<PokedexRow>
+    suspend fun pokedex(versionGroupId: Int, pokedexId: Int): List<PokedexRow>
 
     /** Types de chaque Pokémon dans une génération (types d'origine, ex. Magnéti sans le type Acier). */
     @Query(
