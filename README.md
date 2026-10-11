@@ -1,7 +1,8 @@
 # Pokémaps
 
-Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or, Argent et Cristal**, en français :
-cartes de Kanto et de Johto, Pokémon de chaque lieu, fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
+Application Android de **cartes interactives pour Pokémon Rouge, Bleu, Jaune, Or, Argent, Cristal, Rubis, Saphir
+et Émeraude**, en français : cartes de Kanto, Johto et Hoenn, Pokémon de chaque lieu,
+fiches Pokémon (évolutions, attaques, CT/CS, chromatique), fiches des
 attaques (effet et probabilité de l'effet) et Pokédex.
 
 - Kotlin + Jetpack Compose, **Android 17 (API 37) minimum**
@@ -71,10 +72,10 @@ contre la base générée et vérifie leurs liens et nombres de succès. Les sol
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
-La préparation des cartes GBA regroupe Hoenn et son monde sous-marin dans le sélecteur de niveaux.
+Les cartes de Rubis, Saphir et Émeraude regroupent Hoenn et son monde sous-marin dans le sélecteur de niveaux.
 La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les remakes proposent
 Kanto et les Îles Sevii dans le menu des régions.
-Dans les six jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
+Dans les neuf jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
 s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
 par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.
 Les maisons restent séparées, accessibles par leurs portes ; le Parc Safari réunit ainsi ses quatre zones.
@@ -97,7 +98,7 @@ La préparation Android de la troisième génération ajoute le filtre Plongée 
 la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
 Le calculateur GBA reproduit les quatre contrôles entiers et les sept nouvelles Balls, avec réglages de
 Plongée, de tours écoulés et d’espèce déjà capturée ; il exclut le Parc Safari et utilise un IV des PV moyen.
-Les cinq jeux GBA attendent encore leur intégration aux données embarquées avant d'être sélectionnables.
+Rubis, Saphir et Émeraude sont sélectionnables. Rouge Feu et Vert Feuille restent en préparation.
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
 Le [catalogue de provenance des sprites](docs/donnees/sprites-pokemon.md) couvre les 1 025 espèces
@@ -196,8 +197,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   par version, en anglais, révision 0, sans options de correction. Les effets français sont dans
   `move_effects.csv`, format `gen3`. Les layouts inutilisés ne sont pas chargés ; les données utilisées
   inconnues ou incohérentes arrêtent la lecture. Les cartes Hoenn sont rendues et embarquées séparément pour
-  Rubis/Saphir et Émeraude, avec catalogues TSV, événements JSON et sprites de PNJ. L'intégration à Room et
-  l'activation des jeux suivent les phases rencontres, personnages et application du
+  Rubis/Saphir et Émeraude, avec catalogues TSV, événements JSON et sprites de PNJ. Leurs rencontres,
+  personnages et services sont intégrés à Room, conformément au
   [plan génération 3](docs/plan_gen_3.md). Rouge Feu/Vert Feuille disposent également de cartes préparatoires
   et d'un aperçu des rencontres et des objets à position fixe.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
@@ -289,10 +290,9 @@ Les données Pokémon de la 3e génération sont préparées séparément pour H
 les espèces nécessitant un transfert, les noms français et les objets clés sur des bases réduites sans cartes.
 Les tables événementielles B à I de la Grotte Métamo restent listées avec la mention « Événement externe » et
 ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
-Les cartes préparatoires sont dans `assets/maps/emerald`, `assets/maps/ruby-sapphire` et
-`assets/maps/firered-leafgreen` (Kanto et Îles Sevii) ; les jeux entreront dans l'aperçu complet avec leurs
-personnages. Un aperçu PC des rencontres est déjà disponible pour préparer les emplacements (commande ci-dessous).
-Ils ne sont pas encore sélectionnables dans l'application.
+Les cartes actives sont dans `assets/maps/emerald` et `assets/maps/ruby-sapphire` ;
+`assets/maps/firered-leafgreen` (Kanto et Îles Sevii) reste préparatoire.
+Un aperçu PC des rencontres permet de préparer les emplacements (commande ci-dessous).
 Les bilans des [cartes Hoenn](docs/generations/cartes-hoenn.md) et des
 [cartes des remakes](docs/generations/cartes-remake-1g.md) décrivent les assemblages, variantes et mesures.
 
@@ -412,9 +412,10 @@ python -m pytest -q
 python -m pytest -q -m pipeline
 ```
 
-Pour modifier uniquement les cartes Hoenn préparatoires, utiliser
+Pour modifier uniquement les cartes Hoenn, utiliser
 `python tools/build_data.py --hoenn-maps-only`, puis les mêmes validations et tests du pipeline.
-Cette commande régénère les deux variantes et leur inventaire SHA-256 sans modifier la base Room.
+Cette commande régénère les deux variantes, leurs catalogues de personnages et Pokémon fixes, et leur
+inventaire SHA-256 sans modifier la base Room. Une modification des données ou de la curation exige la génération complète.
 Pour les cartes préparatoires de Rouge Feu/Vert Feuille, utiliser
 `python tools/build_data.py --remake-maps-only`, puis les mêmes validations et tests du pipeline.
 La génération complète inclut les trois groupes de cartes GBA ; les options ciblées sont exclusives.
@@ -458,16 +459,17 @@ les IV, objets tenus, objets de combat, combats doubles et les 632 séries de re
 Il indique les commits sources et relie les équipes aux événements des cartes. Cette commande inclut
 aussi les rencontres et objets fixes de l'aperçu. Les noms du catalogue restent ceux des sources.
 Les quatre CSV de noms français sont préparés ; les noms vides, les clés répétées, les classes et les sprites fixes
-sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
+sans traduction arrêtent cet export. Les fiches Hoenn sont assemblées dans la base distribuée ;
+les fiches de Rouge Feu/Vert Feuille restent à intégrer.
 
 Les briques Android du Pokédex GBA proposent le régional en premier (Hoenn ou Kanto), puis une bascule
 vers le National. Les filtres et coches sont conservés entre les deux listes ; la fiche privilégie le numéro
 régional et utilise le National pour les espèces hors région. Les talents ont leurs noms français et leurs
 descriptions disponibles dans le jeu ; six talents n’ont pas de description française GBA dans PokéAPI.
-Ces fonctions sont vérifiées sur l’aperçu, sans activer les cinq nouveaux jeux dans l’application distribuée.
-Le schéma 14 reste commun au générateur et à Room.
+Ces fonctions sont disponibles pour les trois jeux Hoenn dans l’application distribuée.
+Le schéma 15 reste commun au générateur et à Room ; les offres portent leur monnaie explicite.
 
-Les fiches de personnages restent à assembler pour la troisième génération. Le domaine et les ressources
+Les fiches de personnages Hoenn incluent leurs offres et conditions de scénario. Le domaine et les ressources
 françaises prennent en charge les tarifs en Points Combat et en cendres, le Maître des Capacités et les
 services d’œuf et de retrait de la Pension ; la monnaie est explicite pour les ventes et les tuteurs.
 
@@ -475,7 +477,7 @@ Les Pokémon fixes de Hoenn se régénèrent avec `python tools/build_data.py --
 Les catalogues versionnés `maps/ruby-sapphire/fixed_encounters.json` et `maps/emerald/fixed_encounters.json`
 conservent les Regis, Groudon/Kyogre, Rayquaza, Électrode, Kecleon et les Latios/Latias de l'Île du Sud :
 positions des Pokémon, niveaux, objets tenus, scripts, conditions et drapeaux de retrait.
-Ils sont également inclus dans l'export de curation ; leur affichage Android attend la phase 6.
+Ils sont également inclus dans l'export de curation et affichés sur les cartes Android de Hoenn.
 Kecleon exige le Devon Scope ; l'Île du Sud exige le Passe Éon distribué par événement.
 
 Les Pokémon fixes de Rouge Feu/Vert Feuille se régénèrent avec
@@ -487,11 +489,17 @@ même si un autre événement déclenche le combat. Scripts, conditions et drape
 le Roc Nombri exige le Ticketevent et l'Île Aurore le Ticketaurore, distribués par événement externe.
 Ce catalogue entre aussi dans `character_curation.json` ; l'affichage Android attend la phase 6.
 
-Les services de Hoenn sont préparés dans le catalogue `character_curation.json`, généré par
+Les services de Hoenn sont intégrés à la base et conservés dans le catalogue `character_curation.json`, généré par
 `python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
 fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Capacités, tuteurs et
 comptoirs de la Zone de Combat. Les tarifs, monnaies et objets requis sont conservés ; le
 [bilan des services Hoenn](docs/generations/services-hoenn.md) décrit cette préparation.
+
+La génération complète écrit aussi `maps/ruby-sapphire/characters.json` et `maps/emerald/characters.json` :
+personnages par version, objets fixes et conditions des scènes automatiques, avec leur commit source.
+Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
+personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
+Les guides et succès Hoenn relèvent de la phase 7 ; les bibliothèques actuelles couvrent les six anciens jeux.
 
 Le même export prépare les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.

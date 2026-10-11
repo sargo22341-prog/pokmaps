@@ -113,7 +113,7 @@ interface MapDao {
         """
         SELECT n.map_object_id AS objectId, n.kind, i.identifier AS itemIdentifier, i.name_fr AS itemName,
             n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, w.name_fr AS wantedPokemonName, n.price, n.quantity,
-            wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName
+            wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName, n.currency
         FROM npc_offer n
         JOIN map_object o ON o.id = n.map_object_id
         JOIN map m ON m.id = o.map_id
@@ -188,7 +188,7 @@ interface MapDao {
             i.has_sprite AS itemHasSprite, n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, n.quantity, n.price,
             n.wanted_pokemon_id AS wantedPokemonId, w.name_fr AS wantedPokemonName,
             n.wanted_item_id AS wantedItemId, wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName,
-            wi.has_sprite AS wantedItemHasSprite, n.time_mask AS timeMask, n.weekday_mask AS weekdayMask
+            wi.has_sprite AS wantedItemHasSprite, n.time_mask AS timeMask, n.weekday_mask AS weekdayMask, n.currency
         FROM npc_offer n
         LEFT JOIN item i ON i.id = n.item_id
         LEFT JOIN pokemon p ON p.id = n.pokemon_id

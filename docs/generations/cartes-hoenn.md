@@ -1,13 +1,15 @@
 # Cartes Hoenn — phase 3
 
 La branche Hoenn de la phase 3 produit les assets finaux des cartes de Rubis/Saphir et d'Émeraude.
-Les jeux restent déclarés mais non activés : rencontres, personnages, base Room et interface sont traités
-dans les phases suivantes. Les catalogues autonomes permettent de valider les cartes dès maintenant,
-y compris les sections d'étages du domaine Android, sans annoncer des jeux jouables incomplets.
+Ce bilan décrit la préparation de la phase 3. Rubis, Saphir et Émeraude sont désormais activés
+en phase 6 : rencontres, personnages et services sont intégrés à la base Room et à l'interface.
+Les catalogues autonomes restent utilisés pour valider les cartes et les sections d'étages du domaine Android.
 
 ## Génération et fichiers
 
 `python tools/build_data.py` génère aussi Hoenn. `--hoenn-maps-only` régénère seulement cette branche.
+Cette option recrée aussi les catalogues des personnages et Pokémon fixes supprimés par le rendu.
+Une modification des données ou de leur curation exige la génération complète, qui reconstruit la base.
 Les sources pret restent épinglées et mises en cache ; aucun build Android ne lance la génération.
 Chaque groupe possède `catalog.tsv`, `warps.tsv`, `events.json`, des tuiles WebP de 256 px par niveau de
 zoom et ses sprites transparents dans `app/src/main/assets/maps/`. `assets.sha256` inventorie tout.

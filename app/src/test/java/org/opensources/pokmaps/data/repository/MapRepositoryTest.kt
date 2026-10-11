@@ -1,19 +1,60 @@
 package org.opensources.pokmaps.data.repository
 
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
+import org.opensources.pokmaps.data.db.MapDao
+import org.opensources.pokmaps.data.settings.FakeDataStore
+import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferCondition
+import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferItem
 import org.opensources.pokmaps.domain.map.Weekday
 import org.opensources.pokmaps.domain.model.EncounterTime
+import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 
 class MapRepositoryTest {
+    @Test
+    fun hoennSalesKeepTheirCurrencyAndTutorsCanBeFree() = runTest {
+        val delegate = FakeMapDao()
+        val sale = delegate.offers(FakeMapDao.CLERK, FakeGameDao.RED.versionId).single()
+        val freeTutor = sale.copy(
+            kind = "move_tutor",
+            itemId = null,
+            itemIdentifier = null,
+            itemName = null,
+            itemHasSprite = null,
+            price = null
+        )
+        val rows = listOf(sale.copy(currency = "battle_points"), sale.copy(currency = "ashes"), freeTutor)
+        val link = delegate.offerLinks(FakeGameDao.RED.versionId).first { it.kind == "sale" }
+        val dao = object : MapDao by delegate {
+            override suspend fun offers(objectId: Int, versionId: Int) = rows
+            override suspend fun offerLinks(versionId: Int) = listOf(link.copy(currency = "ashes"))
+        }
+        val repository = MapRepository(dao)
+        val offers = repository.offers(FakeGameDao.RED, FakeMapDao.CLERK)
+        assertEquals(OfferCurrency.ASHES, repository.index(FakeGameDao.RED).offers.single().currency)
+        val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
+        val page = checkNotNull(ObserveItemPageUseCase(games, repository)("potion").first())
+        assertEquals(OfferCurrency.ASHES, page.sold.single().currency)
+        val item = OfferItem(FakeMapDao.POTION, "potion", "Potion", true)
+        assertEquals(
+            listOf(
+                NpcOffer.Sale(item, 300, currency = OfferCurrency.BATTLE_POINTS),
+                NpcOffer.Sale(item, 300, currency = OfferCurrency.ASHES),
+                NpcOffer.Service(CharacterService.MOVE_TUTOR)
+            ),
+            offers
+        )
+    }
+
     @Test
     fun fruitTreesUseTheirOwnLayerAndMatchingItemSprite() = runTest {
         val catalog = MapRepository(FakeMapDao(includeFruitTree = true)).catalog(FakeGameDao.GOLD)

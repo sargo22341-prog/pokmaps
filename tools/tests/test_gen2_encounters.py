@@ -162,6 +162,7 @@ def test_roaming_pokemon_are_on_johto_routes(preview_db: sqlite3.Connection) -> 
 def test_version_specific_map_objects(preview_db: sqlite3.Connection) -> None:
     rows = preview_db.execute(
         """SELECT o.name_fr, o.level, v.identifier FROM map_object o JOIN version v ON v.id = o.version_id
+           WHERE v.version_group_id = 3
            ORDER BY o.name_fr, v.identifier"""
     ).fetchall()
     assert rows == [("Ho-Oh", 40, "gold"), ("Ho-Oh", 70, "silver"), ("Lugia", 70, "gold"), ("Lugia", 40, "silver")]
@@ -177,7 +178,12 @@ def test_items_and_areas_absent_from_pokeapi(preview_db: sqlite3.Connection) -> 
            WHERE m.version_group_id = 3 AND o.item_id = 100001 AND o.kind = 'hidden_item'"""
     ).fetchall()
     assert hidden == [("cerulean-city",)]
-    areas = dict(preview_db.execute("SELECT identifier, name_fr FROM location_area WHERE id >= 100000"))
+    areas = dict(
+        preview_db.execute(
+            """SELECT la.identifier, la.name_fr FROM location_area la JOIN location l ON l.id = la.location_id
+               WHERE la.id >= 100000 AND l.region_id IN (1, 2)"""
+        )
+    )
     assert areas == {
         "item-rooms": "Mont Argenté (salles des objets)",
         "": "Doublonville",

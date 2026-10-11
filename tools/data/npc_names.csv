@@ -504,3 +504,4 @@ OBJ_EVENT_GFX_ZIGZAGOON,Zigzaton,pokemon
 OBJ_EVENT_GFX_ZIGZAGOON_1,Zigzaton,pokemon
 OBJ_EVENT_GFX_ZIGZAGOON_2,Zigzaton,pokemon
 OBJ_EVENT_GFX_ZIGZAG_CUSHION,Coussin Zigzag,object
+DYNAMIC_CHARACTER,Personnage à l’apparence variable,person

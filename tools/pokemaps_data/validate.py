@@ -144,7 +144,9 @@ CHECKS = (
         """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
            WHERE o.kind NOT IN ('item', 'hidden_item', 'trainer', 'pokemon', 'npc', 'npc_object', 'npc_pokemon',
                'vending_machine', 'prize_vendor', 'heal_spot')
-             OR (o.kind IN ('npc', 'npc_object', 'npc_pokemon') AND (o.sprite IS NULL OR o.trainer_class IS NOT NULL))
+             OR (o.kind IN ('npc', 'npc_object', 'npc_pokemon') AND (o.trainer_class IS NOT NULL
+               OR (o.sprite IS NULL AND m.version_group_id NOT IN
+                   (SELECT id FROM version_group WHERE generation_id = 3))))
              OR (o.kind IN ('item', 'hidden_item')) != (o.item_id IS NOT NULL)
              OR (o.kind IN ('vending_machine', 'prize_vendor', 'heal_spot') AND (o.sprite IS NOT NULL
                OR NOT EXISTS (SELECT 1 FROM npc_offer n WHERE n.map_object_id = o.id)))
@@ -182,7 +184,8 @@ CHECKS = (
            WHERE o.id IS NULL
              OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'gift_egg', 'sale', 'trade', 'exchange', 'prize_item',
                'prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'fruit_tree', 'heal', 'cable_club', 'name_rater',
-               'daycare', 'move_deleter', 'grooming', 'move_tutor', 'point_prize')
+               'daycare', 'daycare_egg', 'daycare_withdrawal', 'move_relearner',
+               'move_deleter', 'grooming', 'move_tutor', 'point_prize')
              OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree')
                AND n.item_id IS NULL)
              OR (n.kind NOT IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree',
@@ -190,9 +193,18 @@ CHECKS = (
              OR (n.kind IN ('gift_pokemon', 'gift_egg', 'trade', 'prize_pokemon', 'fossil'))
                != (n.pokemon_id IS NOT NULL)
              OR (n.kind = 'trade') != (n.wanted_pokemon_id IS NOT NULL)
-             OR (n.kind = 'exchange') != (n.wanted_item_id IS NOT NULL)
-             OR (n.kind IN ('prize_item', 'prize_pokemon', 'point_prize', 'coin_sale', 'move_tutor')
+             OR (n.kind IN ('exchange', 'move_relearner')) != (n.wanted_item_id IS NOT NULL)
+             OR (n.kind IN ('prize_item', 'prize_pokemon', 'point_prize', 'coin_sale')
                AND coalesce(n.price, 0) <= 0)
+             OR (n.kind = 'move_tutor' AND n.price IS NOT NULL AND n.price <= 0)
+             OR (n.kind = 'move_tutor' AND n.price IS NULL AND m.version_group_id NOT IN
+               (SELECT id FROM version_group WHERE generation_id = 3))
+             OR n.currency NOT IN ('money', 'coins', 'battle_points', 'ashes')
+             OR (n.currency IS NOT NULL AND n.kind NOT IN
+               ('sale', 'prize_item', 'coin_sale', 'daycare_withdrawal', 'move_tutor'))
+             OR (n.kind = 'sale' AND n.currency IS NOT NULL AND coalesce(n.price, 0) <= 0)
+             OR (n.kind IN ('daycare_egg', 'daycare_withdrawal', 'move_relearner')
+               AND coalesce(n.quantity, n.pokemon_id) IS NOT NULL)
              OR (n.kind IN ('prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'gift_egg')
                AND coalesce(n.quantity, 0) <= 0)
              OR (n.kind IN ('fruit_tree', 'heal', 'cable_club', 'name_rater', 'daycare', 'move_deleter')

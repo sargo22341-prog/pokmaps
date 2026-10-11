@@ -142,7 +142,8 @@ data class NpcOfferRow(
     val wantedItemName: String?,
     val wantedItemHasSprite: Boolean?,
     val timeMask: Int?,
-    val weekdayMask: Int?
+    val weekdayMask: Int?,
+    val currency: String? = null
 )
 
 /** Étape du scénario qu'exige une offre (npc_offer_story), dans l'ordre de `slot`. */
@@ -189,7 +190,8 @@ data class OfferLinkRow(
     val price: Int?,
     val quantity: Int?,
     val wantedItemIdentifier: String?,
-    val wantedItemName: String?
+    val wantedItemName: String?,
+    val currency: String? = null
 )
 
 data class ItemEvolutionRow(val fromId: Int, val fromName: String, val toId: Int, val toName: String)

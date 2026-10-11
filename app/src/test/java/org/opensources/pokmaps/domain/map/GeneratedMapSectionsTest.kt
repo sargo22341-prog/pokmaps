@@ -76,10 +76,11 @@ class GeneratedMapSectionsTest {
         DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)
-            assertEquals(setOf(1, 2, 3, 4), versions.keys)
-            versions.forEach { (_, entries) ->
+            assertEquals(setOf(1, 2, 3, 4, 5, 6), versions.keys)
+            versions.forEach { (group, entries) ->
                 val maps = entries.map { it.second }.associateBy { it.id }
-                val catalog = MapCatalog("test", maps, warps, emptyMap(), emptyMap())
+                val identifier = mapOf(5 to "ruby-sapphire", 6 to "emerald")[group] ?: "test"
+                val catalog = MapCatalog(identifier, maps, warps, emptyMap(), emptyMap())
                 maps.values.filter { it.isDisplayable && !it.isWorld }.forEach { current ->
                     val sections = catalog.floorsOf(current.id)
                     assertTrue(current.identifier, sections.all { it.name.isNotBlank() })
@@ -87,7 +88,7 @@ class GeneratedMapSectionsTest {
                     val parsed = FloorLevel.parse(current.identifier)
                     if (sections.isNotEmpty()) {
                         assertTrue(current.identifier, sections.any { it.mapId == current.id })
-                        if (!current.identifier.endsWith("pokecenter-1f") &&
+                        if (group <= 4 && !current.identifier.endsWith("pokecenter-1f") &&
                             current.identifier != "pokecenter-2f-plan"
                         ) {
                             assertTrue(
@@ -127,7 +128,9 @@ class GeneratedMapSectionsTest {
                         rows.getInt("version_group_id") to MapInfo(
                             rows.getInt("id"), rows.getString("identifier"), rows.getString("name_fr"), parent,
                             rows.getInt("x"), rows.getInt("y"), rows.getInt("width"), rows.getInt("height"),
-                            rows.getInt("level_count"), rows.getBoolean("is_world")
+                            rows.getInt("level_count"), rows.getBoolean("is_world"),
+                            originMapId = rows.getInt("origin_map_id").let { if (rows.wasNull()) null else it },
+                            startMapId = rows.getInt("start_map_id").let { if (rows.wasNull()) null else it }
                         )
                     )
                 }

@@ -43,6 +43,7 @@ import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
 import org.opensources.pokmaps.ui.common.SpriteSize
+import org.opensources.pokmaps.ui.common.offerPrice
 
 /** Fiches ouvertes depuis la fiche d'un objet : Pokémon, personnage, ou attaque enseignée par la CT / CS. */
 data class ItemLinks(
@@ -255,7 +256,7 @@ private fun SourceList(@StringRes title: Int, list: List<ItemSource>, sources: S
 
 @Composable
 private fun detailText(source: ItemSource, detail: SourceDetail): String? = when (detail) {
-    SourceDetail.PRICE -> source.price?.let { stringResource(R.string.map_offer_price, it) }
+    SourceDetail.PRICE -> source.price?.let { offerPrice(it, source.currency) }
     SourceDetail.QUANTITY -> source.quantity?.takeIf { it > 1 }?.let { "× $it" }
     SourceDetail.COINS -> source.price?.let { pluralStringResource(R.plurals.coins, it, it) }
     SourceDetail.WANTED_ITEM -> source.otherItemName?.let { stringResource(R.string.item_exchange_for, it) }

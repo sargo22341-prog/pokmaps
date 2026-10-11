@@ -15,6 +15,8 @@ if TYPE_CHECKING:
 
 def describe_hoenn_offer(offer: Gen3Offer, state: ScriptState, scripts: Gen3Scripts) -> Gen3Offer:
     label = state.point[0]
+    if label == "LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink" and offer.kind == "gift_item":
+        return _vending_offer(offer, state, scripts)
     if label.startswith("MauvilleCity_GameCorner_"):
         return _casino_offer(offer, state, scripts)
     if label.startswith("BattleFrontier_ExchangeServiceCorner_") and offer.kind in {"gift_item", "gift_decoration"}:
@@ -107,3 +109,18 @@ def _service_offer(offer: Gen3Offer) -> Gen3Offer:
             )
         case _:
             return offer
+
+
+def _vending_offer(offer: Gen3Offer, state: ScriptState, scripts: Gen3Scripts) -> Gen3Offer:
+    block = scripts.blocks[state.point[0]]
+    gifts = [line for line in block.lines if line.command == "additem"]
+    if len(gifts) != 3:
+        raise ValueError(f"{offer.source} : distribution de boissons inattendue")
+    if offer.source != gifts[0].source:
+        return replace(offer, conditions=("Boisson supplémentaire offerte au hasard après un achat.",))
+    suffix = {"ITEM_FRESH_WATER": "FreshWater", "ITEM_SODA_POP": "SodaPop", "ITEM_LEMONADE": "Lemonade"}
+    label = "LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoney" + suffix[offer.item]
+    payments = [line for line in scripts.blocks[label].lines if line.command == "removemoney"]
+    if len(payments) != 1:
+        raise ValueError(f"{offer.source} : paiement de boisson absent ou ambigu")
+    return _purchase(offer, payments[0].args[0], "money", scripts)

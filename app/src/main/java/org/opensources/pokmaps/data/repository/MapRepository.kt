@@ -22,6 +22,7 @@ import org.opensources.pokmaps.domain.map.MapSpot
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferCondition
+import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferItem
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
@@ -120,7 +121,8 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
                         price = it.price,
                         quantity = it.quantity,
                         wantedItemIdentifier = it.wantedItemIdentifier,
-                        wantedItemName = it.wantedItemName
+                        wantedItemName = it.wantedItemName,
+                        currency = it.currency?.let(OfferCurrency::from) ?: OfferCurrency.MONEY
                     )
                 }
             )
@@ -183,7 +185,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
     private fun NpcOfferRow.toOffer(condition: OfferCondition): NpcOffer = when (OfferKind.from(kind)) {
         OfferKind.GIFT_ITEM -> NpcOffer.GiftItem(offerItem(), quantity ?: 1, condition)
 
-        OfferKind.SALE -> NpcOffer.Sale(offerItem(), price, condition)
+        OfferKind.SALE -> sale(condition)
 
         OfferKind.GIFT_POKEMON ->
             NpcOffer.GiftPokemon(required(pokemonId), required(pokemonName), quantity, heldItem(), condition)
@@ -228,8 +230,22 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
 
         OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price, condition)
 
-        OfferKind.MOVE_TUTOR -> NpcOffer.Service(CharacterService.MOVE_TUTOR, required(price), condition)
+        OfferKind.MOVE_TUTOR -> moveTutor(condition)
     }
+
+    private fun NpcOfferRow.sale(condition: OfferCondition) = NpcOffer.Sale(
+        offerItem(),
+        price,
+        condition,
+        currency?.let(OfferCurrency::from) ?: OfferCurrency.MONEY
+    )
+
+    private fun NpcOfferRow.moveTutor(condition: OfferCondition) = NpcOffer.Service(
+        CharacterService.MOVE_TUTOR,
+        price,
+        condition,
+        currency?.let(OfferCurrency::from) ?: OfferCurrency.COINS
+    )
 
     private fun NpcOfferRow.trade(condition: OfferCondition) = NpcOffer.Trade(
         required(pokemonId),

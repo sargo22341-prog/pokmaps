@@ -121,13 +121,9 @@ CRYSTAL = Game(
     PretFormat.GEN2,
     (JOHTO, KANTO),
 )
-GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL)
-# Les futurs jeux restent dans l’aperçu jusqu’à leur prise en charge par l’application.
-GAMES_IN_PROGRESS: tuple[Game, ...] = ()
-
 # 3e génération, en deux branches qui ne partagent que le moteur (docs/plan_gen_3.md) : Hoenn (Rubis, Saphir,
-# Émeraude) et le remake de la 1re génération (Rouge Feu, Vert Feuille). Leurs données Pokémon se construisent déjà ;
-# ils entrent dans GAMES_IN_PROGRESS avec le lecteur pret de la 3e génération, qui génère leurs cartes.
+# Émeraude) et le remake de la 1re génération (Rouge Feu, Vert Feuille). Hoenn est activé ;
+# les remakes conservent leurs catalogues préparatoires jusqu'à leur intégration Android.
 RUBY_SAPPHIRE = Game(
     "ruby-sapphire",
     "pokeruby",
@@ -162,6 +158,8 @@ FIRERED_LEAFGREEN = Game(
     remake_generation=1,
 )
 GEN3_GAMES: tuple[Game, ...] = (RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
+GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, RUBY_SAPPHIRE, EMERALD)
+GAMES_IN_PROGRESS: tuple[Game, ...] = ()
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
 # Tous les jeux déclarés, générés ou non. La famille de cartes d'un jeu est aussi sa branche, que les contrôles

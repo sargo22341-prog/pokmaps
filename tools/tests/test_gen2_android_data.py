@@ -14,7 +14,7 @@ from pokemaps_data.validate import CHECKS
 def test_gold_silver_is_shipped(db: sqlite3.Connection) -> None:
     assert GOLD_SILVER in GAMES
     assert dict(db.execute("SELECT id, name_fr FROM version WHERE version_group_id = 3")) == {4: "Or", 5: "Argent"}
-    assert db.execute("SELECT count(*) FROM pokemon").fetchone()[0] == 251
+    assert db.execute("SELECT count(*) FROM pokemon WHERE generation_id <= 2").fetchone()[0] == 251
 
 
 def test_regions_starts_and_curated_origins_are_exported(db: sqlite3.Connection) -> None:

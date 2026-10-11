@@ -8,10 +8,13 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data import maps_plans
-from pokemaps_data.games import GAMES, Game
+from pokemaps_data.games import GAMES, GEN3_GAMES, Game
 from pokemaps_data.maps import renderer
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
+from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
 from pokemaps_data.maps_plans import build_plans, read_plans
+from pokemaps_data.maps_render_gen3 import Gen3Renderer
+from pokemaps_data.pret_gen3 import Gen3PretRepo
 from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.sources import pret_dir
 
@@ -20,8 +23,14 @@ CACHE = Path(__file__).resolve().parent.parent / ".cache"
 
 @pytest.mark.parametrize("game", GAMES, ids=lambda game: game.version_group)
 def test_plan_preserves_every_source_pixel_and_coordinate(game: Game, source_cache_ready: None) -> None:
-    layout = GameMaps(open_pret(game, pret_dir(CACHE, game.pret_repo)), game, read_layout_curation())
-    painter = renderer(layout)
+    root = pret_dir(CACHE, game.pret_repo)
+    if game in GEN3_GAMES:
+        repo = Gen3PretRepo(root, game.pret_versions)
+        layout = Gen3GameMaps(repo, game, read_layout_curation())
+        painter = Gen3Renderer(layout, repo)
+    else:
+        layout = GameMaps(open_pret(game, root), game, read_layout_curation())
+        painter = renderer(layout)
     assert layout.plans
     for plan in layout.plans.values():
         image = painter.render(plan.const).image

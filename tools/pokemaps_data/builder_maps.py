@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import TYPE_CHECKING
 
-from .games import Game, complete_families
+from .games import Game, PretFormat, complete_families
 from .map_spots import Point, TerrainKey, read_spots, selected_key
 from .maps import GameMapData
 from .maps_characters import ObjectRow
@@ -35,7 +36,12 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     spots = _SpotRows(read_spots(), builder.games)
     repos = {game.version_group: game.pret_repo for game in builder.games}
     for version_group, data in builder.map_data.items():
+        if data.story is not None:
+            objects.story.used.update(data.story.used)
+            objects.story.used_values.update(data.story.used_values)
         vg = vg_ids[version_group]
+        if builder.game_of(vg).pret_format is PretFormat.GEN3:
+            data = _encounter_areas(data, area_ids, known_areas)
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
         maps.extend(game_maps)
         areas.extend(game_areas)
@@ -51,7 +57,7 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     # Un aperçu sans personnages ne peut pas consommer les conditions éditoriales de leurs offres.
     story_repos = {repos[group] for group, data in builder.map_data.items() if data.characters_complete}
     if unused := objects.story.unused(story_repos):
-        raise ValueError(f"story_events.csv : drapeaux qu'aucune offre n'exige : {unused}")
+        raise ValueError(f"story_events.csv : conditions inutilisées des offres et scènes : {unused}")
     return {
         "map": maps,
         "map_area": sorted(set(areas)),
@@ -62,6 +68,13 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         "npc_offer_story": objects.stories,
         "map_spot": spots.rows,
     }
+
+
+def _encounter_areas(data: GameMapData, area_ids: dict[str, int], known: set[int]) -> GameMapData:
+    # Les catalogues GBA partagent des zones ; seules les tables actives des jeux construits les relient.
+    if unknown := {area for _, area in data.areas} - area_ids.keys():
+        raise ValueError(f"map_areas.csv : zones GBA inconnues : {sorted(unknown)}")
+    return replace(data, areas=[(const, area) for const, area in data.areas if area_ids[area] in known])
 
 
 def _complete_character_families(games: tuple[Game, ...], data: dict[str, GameMapData]) -> set[str]:
@@ -149,7 +162,7 @@ class _ObjectRows:
             (
                 object_id,
                 map_id,
-                self.names.characters.npc_kind(obj.sprite) if obj.kind == "npc" else obj.kind,
+                obj.appearance or (self.names.characters.npc_kind(obj.sprite) if obj.kind == "npc" else obj.kind),
                 obj.x,
                 obj.y,
                 obj.sprite,
@@ -186,9 +199,11 @@ class _ObjectRows:
                 offer.version and self.versions[offer.version],
                 None if condition.times == ALL_TIMES else condition.times,
                 None if condition.weekdays == ALL_WEEKDAYS else condition.weekdays,
+                offer.currency,
             )
         )
-        for slot, phrase in enumerate(self.story.phrases(repo, condition, where), start=1):
+        phrases = tuple(dict.fromkeys((*self.story.phrases(repo, condition, where), *offer.stories)))
+        for slot, phrase in enumerate(phrases, start=1):
             self.stories.append((offer_id, slot, phrase))
 
 
@@ -196,7 +211,7 @@ def _map_rows(
     data: GameMapData,
     version_group_id: int,
     area_ids: dict[str, int],
-    known_areas: set[str],
+    known_areas: set[int],
     first_warp_id: int,
 ) -> tuple[list[tuple], list[tuple[int, int]], list[tuple], dict[str, int]]:
     ids = {row.const: version_group_id * 1000 + row.number for row in data.maps}
@@ -250,6 +265,10 @@ class _ObjectNames:
     def of(self, obj: ObjectRow) -> str:
         """Nom relu par clé, sinon d'après la nature de l'objet : classe du dresseur, Pokémon, objet, type
         d'installation, cri du Pokémon pour un personnage qui en a l'apparence, ou sprite du personnage."""
+        if obj.name_fr:
+            if obj.key in self.characters.by_text:
+                self.used_texts.add(obj.key)
+            return obj.name_fr
         if obj.kind in ("npc", *FACILITY_KINDS) and obj.key in self.characters.by_text:
             self.used_texts.add(obj.key)
             return self.characters.by_text[obj.key]
