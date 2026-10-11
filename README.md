@@ -445,6 +445,13 @@ Les fiches de personnages restent à assembler pour la troisième génération. 
 françaises prennent en charge les tarifs en Points Combat et en cendres, le Maître des Capacités et les
 services d’œuf et de retrait de la Pension ; la monnaie est explicite pour les ventes et les tuteurs.
 
+Les Pokémon fixes de Hoenn se régénèrent avec `python tools/build_data.py --hoenn-fixed-only`.
+Les catalogues versionnés `maps/ruby-sapphire/fixed_encounters.json` et `maps/emerald/fixed_encounters.json`
+conservent les Regis, Groudon/Kyogre, Rayquaza, Électrode, Kecleon et les Latios/Latias de l'Île du Sud :
+positions des Pokémon, niveaux, objets tenus, scripts, conditions et drapeaux de retrait.
+Ils sont également inclus dans l'export de curation ; leur affichage Android attend la phase 6.
+Kecleon exige le Devon Scope ; l'Île du Sud exige le Passe Éon distribué par événement.
+
 Les services de Hoenn sont préparés dans le catalogue `character_curation.json`, généré par
 `python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
 fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Capacités, tuteurs et

@@ -24,6 +24,7 @@ from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PR
 from pokemaps_data.maps import build_maps
 from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pokeapi import PokeApi
+from pokemaps_data.pret_hoenn_fixed import build_fixed_catalog
 from pokemaps_data.preview_curation_gen3 import build_curation_preview
 from pokemaps_data.preview_wild_gen3 import build_wild_preview
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
@@ -40,6 +41,7 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
     maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument("--hoenn-fixed-only", action="store_true", help="exporter les Pokémon fixes de Hoenn")
     maps_only.add_argument(
         "--hoenn-maps-only", action="store_true", help="régénérer seulement les cartes Hoenn préparatoires"
     )
@@ -65,6 +67,10 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.hoenn_fixed_only:
+        build_fixed_catalog(args.cache, args.assets)
+        write_manifest(args.assets)
+        return 0
     if args.gen3_curation_only:
         build_curation_preview(args.cache, args.preview)
         return 0
@@ -95,6 +101,7 @@ def main() -> int:
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
     build_gen3_maps(args.cache, args.assets / "maps")
+    build_fixed_catalog(args.cache, args.assets)
     write_manifest(args.assets)
     if GAMES_IN_PROGRESS:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)

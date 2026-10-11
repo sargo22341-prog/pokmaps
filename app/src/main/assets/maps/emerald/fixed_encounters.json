@@ -1,0 +1,449 @@
+{
+  "schema": 1,
+  "repo": "pokeemerald",
+  "commit": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
+  "versions": {
+    "emerald": [
+      {
+        "map": "Route119",
+        "x": 31,
+        "y": 6,
+        "elevation": 3,
+        "script": "Route119_EventScript_Kecleon1",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_119_KECLEON_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_119_KECLEON_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route119",
+        "x": 25,
+        "y": 15,
+        "elevation": 3,
+        "script": "Route119_EventScript_Kecleon2",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_119_KECLEON_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_119_KECLEON_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 13,
+        "y": 15,
+        "elevation": 4,
+        "script": "Route120_EventScript_Steven",
+        "source": "data/maps/Route120/scripts.inc:190",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_STEVEN",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_STEVEN",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_NOT_READY_FOR_BATTLE_ROUTE_120",
+            "operator": "eq",
+            "value": "TRUE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 13,
+        "y": 15,
+        "elevation": 4,
+        "script": "Route120_EventScript_Steven",
+        "source": "data/maps/Route120/scripts.inc:190",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_STEVEN",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_STEVEN",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_NOT_READY_FOR_BATTLE_ROUTE_120",
+            "operator": "ne",
+            "value": "TRUE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 20,
+        "y": 11,
+        "elevation": 3,
+        "script": "Route120_EventScript_Kecleon1",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 27,
+        "y": 2,
+        "elevation": 3,
+        "script": "Route120_EventScript_Kecleon2",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 4,
+        "y": 77,
+        "elevation": 3,
+        "script": "Route120_EventScript_Kecleon3",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_3",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_3",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 7,
+        "y": 51,
+        "elevation": 3,
+        "script": "Route120_EventScript_Kecleon5",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_5",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_5",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "Route120",
+        "x": 19,
+        "y": 48,
+        "elevation": 3,
+        "script": "Route120_EventScript_Kecleon4",
+        "source": "data/scripts/kecleon.inc:72",
+        "pokemon": "SPECIES_KECLEON",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_4",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_4",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "DesertRuins",
+        "x": 8,
+        "y": 7,
+        "elevation": 3,
+        "script": "DesertRuins_EventScript_Regirock",
+        "source": "data/maps/DesertRuins/scripts.inc:64",
+        "pokemon": "SPECIES_REGIROCK",
+        "level": 40,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_REGIROCK",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_REGIROCK",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "AquaHideout_B1F",
+        "x": 16,
+        "y": 9,
+        "elevation": 3,
+        "script": "AquaHideout_B1F_EventScript_Electrode1",
+        "source": "data/maps/AquaHideout_B1F/scripts.inc:32",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "AquaHideout_B1F",
+        "x": 16,
+        "y": 10,
+        "elevation": 3,
+        "script": "AquaHideout_B1F_EventScript_Electrode2",
+        "source": "data/maps/AquaHideout_B1F/scripts.inc:56",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "IslandCave",
+        "x": 8,
+        "y": 7,
+        "elevation": 3,
+        "script": "IslandCave_EventScript_Regice",
+        "source": "data/maps/IslandCave/scripts.inc:97",
+        "pokemon": "SPECIES_REGICE",
+        "level": 40,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_REGICE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_REGICE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "AncientTomb",
+        "x": 8,
+        "y": 7,
+        "elevation": 3,
+        "script": "AncientTomb_EventScript_Registeel",
+        "source": "data/maps/AncientTomb/scripts.inc:64",
+        "pokemon": "SPECIES_REGISTEEL",
+        "level": 40,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_REGISTEEL",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_REGISTEEL",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "SkyPillar_Top",
+        "x": 14,
+        "y": 6,
+        "elevation": 3,
+        "script": "SkyPillar_Top_EventScript_Rayquaza",
+        "source": "data/maps/SkyPillar_Top/scripts.inc:49",
+        "pokemon": "SPECIES_RAYQUAZA",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "MarineCave_End",
+        "x": 9,
+        "y": 22,
+        "elevation": 1,
+        "script": "MarineCave_End_EventScript_Kyogre",
+        "source": "data/maps/MarineCave_End/scripts.inc:34",
+        "pokemon": "SPECIES_KYOGRE",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_MARINE_CAVE_KYOGRE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_MARINE_CAVE_KYOGRE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "TerraCave_End",
+        "x": 17,
+        "y": 22,
+        "elevation": 1,
+        "script": "TerraCave_End_EventScript_Groudon",
+        "source": "data/maps/TerraCave_End/scripts.inc:34",
+        "pokemon": "SPECIES_GROUDON",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_TERRA_CAVE_GROUDON",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_TERRA_CAVE_GROUDON",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "SouthernIsland_Interior",
+        "x": 13,
+        "y": 2,
+        "elevation": 0,
+        "script": "SouthernIsland_Interior_EventScript_TryLatiEncounter",
+        "source": "data/maps/SouthernIsland_Interior/scripts.inc:104",
+        "pokemon": "SPECIES_LATIOS",
+        "level": 50,
+        "held_item": "ITEM_SOUL_DEW",
+        "removal_flag": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_CAUGHT_LATIAS_OR_LATIOS",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_DEFEATED_LATIAS_OR_LATIOS",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_TEMP_2",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "VAR_ROAMER_POKEMON",
+            "operator": "eq",
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "map": "SouthernIsland_Interior",
+        "x": 13,
+        "y": 2,
+        "elevation": 0,
+        "script": "SouthernIsland_Interior_EventScript_TryLatiEncounter",
+        "source": "data/maps/SouthernIsland_Interior/scripts.inc:108",
+        "pokemon": "SPECIES_LATIAS",
+        "level": 50,
+        "held_item": "ITEM_SOUL_DEW",
+        "removal_flag": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_CAUGHT_LATIAS_OR_LATIOS",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_DEFEATED_LATIAS_OR_LATIOS",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_TEMP_2",
+            "operator": "ne",
+            "value": "TRUE"
+          },
+          {
+            "subject": "VAR_ROAMER_POKEMON",
+            "operator": "ne",
+            "value": "0"
+          }
+        ]
+      }
+    ]
+  }
+}

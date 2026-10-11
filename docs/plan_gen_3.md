@@ -561,8 +561,12 @@ Branche Hoenn :
       Le domaine et l'affichage Android restent dans la case suivante et la phase 6.
 - [x] Nouvelles monnaies et services dans le domaine et les ressources françaises : Points Combat, cendres
       (`CharacterService`, `OfferKind`, `CharacterRole`, prix affichés).
-- [ ] Pokémon fixes : Regis, Groudon, Kyogre, Rayquaza, Électrode, Kecleon, Latios/Latias de l'Île du Sud
+- [x] Pokémon fixes : Regis, Groudon, Kyogre, Rayquaza, Électrode, Kecleon, Latios/Latias de l'Île du Sud
       (événement).
+      Catalogues `fixed_encounters.json` versionnés pour Rubis/Saphir et Émeraude : positions,
+      niveaux, Rosée Âme, scripts, conditions et drapeaux de retrait ; export explicite par
+      `--hoenn-fixed-only` et dans `character_curation.json`. Validation contre les sources épinglées.
+      L'activation Room et les calques Android restent en phase 6.
 
 Branche Remake 1G :
 
