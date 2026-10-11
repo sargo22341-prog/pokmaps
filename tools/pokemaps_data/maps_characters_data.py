@@ -185,6 +185,9 @@ def read_character_curation() -> CharacterCuration:
     duplicates = {row["text"]: row["family"] for row in _read_csv("npc_duplicates.csv")}
     offers = []
     for row in _read_csv("npc_offers.csv"):
+        # Les résolutions GBA gardent leurs chemins de script dans le lecteur dédié.
+        if row["action"] == "resolve" and set(row["repos"].split("|")) <= {"pokeruby", "pokeemerald", "pokefirered"}:
+            continue
         if row["action"] not in (ADD, REMOVE) or (row["action"] == ADD and row["kind"] not in CURATED_KINDS):
             raise ValueError(f"npc_offers.csv : action ou type d'offre non pris en charge : {row}")
         offer = NpcOffer(

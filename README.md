@@ -216,6 +216,21 @@ d'une étape : drapeau du jour, appel téléphonique, détail de scène) et l'en
 absent du fichier, une ligne inutilisée ou une offre jamais possible arrêtent la génération ; une offre que le jeu
 ne permet jamais se retire dans `npc_offers.csv` (la CT12 de l'institutrice du passage, dans Cristal).
 
+En troisième génération, la clé éditoriale d'un personnage est `Carte:local_id` (ou son numéro d'événement
+si la source ne nomme pas l'identifiant local). `read_curated_object` applique les doublons puis les résolutions
+de `npc_offers.csv` : l'action `resolve` remplace l'expression d'objet ou de capacité indiquée dans `expression`,
+en gardant provenance, chemins de scénario et quantités du script. `@script:Nom` cible un script partagé ;
+`source` distingue ses branches. Les conditions relues dans le moteur, les prix en Points de Combat et
+les Pokémon compatibles sont conservés. Un lot de quiz choisi par un autre joueur est explicitement
+personnalisé. `reason` indique la source relue. La commande suivante vérifie tous les objets des cinq versions
+et produit `character_curation.json` avec leurs positions, exclusions et offres. Une expression non résolue
+ou une correction inutilisée arrête la génération. Les autres effets des appels C restent à vérifier avant
+l'export vers l'application ; ce rapport ne modifie pas les assets Android :
+
+```powershell
+python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation
+```
+
 Les sources sont figées sur des commits précis (`tools/pokemaps_data/sources.py`), la génération est donc
 reproductible. La base est vérifiée après chaque génération (références cohérentes, probabilités de rencontre
 qui totalisent 100 % pour chaque moment de la journée, chaque Pokémon obtenable par rencontre, évolution ou

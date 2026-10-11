@@ -95,9 +95,48 @@ service d'Évaluateur de noms.
 ## Travail restant dans « Communs »
 
 - Assemblage des personnages avec leurs équipes et revanches déjà exportées, sans perdre les métadonnées.
-- Complément des offres calculées par le moteur et curation de `npc_offers.csv`.
 - Assemblage des conditions de présence et curation des autres variables de scénario dans `story_events.csv`.
-- Curation des doublons et validation de l'ensemble exporté.
+
+## Curation commune ajoutée
+
+`character_curation_gen3.py` applique les corrections au lecteur `read_curated_object` sans changer
+la lecture brute utilisée par le catalogue des équipes. Une clé associe la carte et l'identifiant local
+de l'objet ; faute d'identifiant nommé, elle utilise son rang à partir de 1. Les 35 exemplaires de scène
+de Seko, Chen, M. Fuji, Maman, Norman, Pierre, Scott, Flora/Brice, Léo et du rival sont écartés dans
+`npc_duplicates.csv`. Les emplacements interactifs et les acteurs des combats sont conservés, même
+si leur script d'objet est vide : certains combats sont déclenchés par des événements de coordonnées.
+
+L'action `resolve` de `npc_offers.csv` décrit les objets ou capacités possibles d'une expression calculée
+par le C. Elle couvre la loterie, immédiate ou différée, les sept récompenses de Themis, les six lots
+de la Dame des faveurs, les treize lots distincts des quiz du jeu, les baies du Bulletin Pokémon,
+les deux tables d'objets de la Pyramide et les tuteurs variables. `@script:BattlePyramid_FindItemBall`
+cible tous les objets des seize modèles de salle ; leur quantité est fixée à un par `SetPickupItem`.
+Le rapport signale leurs positions comme générées par le jeu.
+
+Le lot d'un quiz reçu par échange de données est choisi par son auteur : `gift_custom_item` le représente
+explicitement, sans lui attribuer un objet fixe. Les conditions distinguent ce quiz des questions du jeu.
+La colonne `source` sépare les quatre branches du Bulletin : quinze baies possibles après réception,
+quinze autres après envoi, avec les quantités de un ou quatre du script. Les cinq lots avant attente de
+500 pas, le Cadeau Mystère et la validité du Bulletin sont décrits comme conditions du moteur.
+
+Les vingt capacités des tuteurs de la Zone de Combat gardent leur prix de 16, 24 ou 48 Points de Combat.
+Au Cap Falaise, les trois capacités gardent leur espèce compatible, l'amitié maximale du Pokémon en tête
+et le drapeau d'enseignement unique. Les tables C, les prix et les restrictions sont contrôlés par les tests.
+Il s'agit des résultats possibles, sans simulation du tirage ni de sa probabilité. Quantités, chemins,
+provenance, drapeaux et références des dresseurs restent ceux de la lecture du script ; les conditions
+relues dans le C s'ajoutent explicitement.
+
+Les conditions du tirage quotidien, du lot en attente, des présentations des tuteurs et du Cap Falaise
+sont relues dans `story_events.csv` et traduites dans les tests. `FLAG_TEMP_2` est réutilisé localement :
+sa phrase reste commune aux visites chez Themis et au Cap Falaise, avec les précisions propres à l'offre.
+Les autres effets C ne sont pas certifiés par la résolution
+d'une expression : `require_resolved` continue de les refuser.
+
+`python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` génère
+`character_curation.json`, avec les commits, positions, raisons d'exclusion et offres de tous les objets
+des cinq versions. Toute expression non résolue ou ligne sans personnage ou expression correspondante
+arrête cette génération. Ce rapport local reste hors de Git. Les deux cases communes de curation et de
+tests sont terminées ; l'intégration du catalogue dans l'application relève toujours de la phase 6.
 
 Les lecteurs d'offres et de conditions sont validés indépendamment de l'assemblage. Les tests unitaires
 utilisent des scripts en mémoire ; les tests `pipeline` parcourent les scripts des objets des cinq
@@ -105,6 +144,10 @@ versions épinglées, appliquent les drapeaux de présence et contrôlent les r�
 ainsi que les variantes des échanges.
 
 ## Corrections du lecteur lors de la reprise
+
+Le parcours intégral résout aussi les codes numériques des boutiques de décorations de Rubis/Saphir.
+La lecture des `#define` reste sur une seule ligne : une garde d'en-tête sans valeur ne peut plus absorber
+le premier drapeau du fichier. Ce défaut est couvert par un test de non-régression en mémoire.
 
 Les quatre CSV de noms français sont préparés : 124 classes GBA, 393 sprites fixes, 15 installations
 supplémentaires et 55 noms par script (Annette, M. Marco, Capitaine Poupe, Léo, Themis, Lostelle, services et familles).
@@ -131,7 +174,7 @@ Un script de victoire absent provoque une erreur, comme un appel ordinaire absen
 Les services `DeleteMonMove` et `DisplayMoveTutorMenu` de Rubis/Saphir sont reconnus respectivement
 comme Effaceur et Maître des Capacités. Leur présence ne dispense pas de la relecture des appels C
 exigée par la frontière d'export. Ces corrections sont couvertes par des tests de régression ; elles
-ne constituent pas l'export complet des personnages ni la curation française demandée en phase 5.
+ne constituent pas l'intégration du catalogue des personnages dans l'application.
 
 ## Objets à position fixe exportés
 

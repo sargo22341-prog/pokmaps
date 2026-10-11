@@ -24,6 +24,7 @@ from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PR
 from pokemaps_data.maps import build_maps
 from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pokeapi import PokeApi
+from pokemaps_data.preview_curation_gen3 import build_curation_preview
 from pokemaps_data.preview_wild_gen3 import build_wild_preview
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
@@ -56,11 +57,17 @@ def _arguments() -> argparse.Namespace:
     maps_only.add_argument(
         "--gen3-trainers-only", action="store_true", help="générer l'aperçu GBA et le catalogue complet des dresseurs"
     )
+    maps_only.add_argument(
+        "--gen3-curation-only", action="store_true", help="valider et exporter les corrections des personnages GBA"
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = _arguments()
+    if args.gen3_curation_only:
+        build_curation_preview(args.cache, args.preview)
+        return 0
     if args.gen3_encounters_only or args.gen3_items_only or args.gen3_trainers_only:
         build_wild_preview(
             args.cache,

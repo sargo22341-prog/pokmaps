@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 
+from .character_curation_gen3 import character_key, read_gen3_curation
 from .pret_gen3_conditions import ScriptRequirement, ScriptState, script_states
 from .pret_gen3_offer_tables import trade_table, tutor_moves
 from .pret_gen3_script_values import number_value, range_values
@@ -25,6 +26,10 @@ class Gen3Offer:
     wanted: str | None = None
     source: str = ""
     paths: tuple[frozenset[ScriptRequirement], ...] = (frozenset(),)
+    conditions: tuple[str, ...] = ()
+    price: int | None = None
+    currency: str | None = None
+    eligible_pokemon: str | None = None
 
 
 @dataclass(frozen=True)
@@ -180,6 +185,31 @@ class Gen3Offers:
         self._trades = trade_table(repo, version)
         self._tutors = tutor_moves(repo)
         self._cache: dict[str, ScriptOffers] = {}
+        self._curation = read_gen3_curation()
+        self._repo_name = {
+            "ruby": "pokeruby",
+            "sapphire": "pokeruby",
+            "emerald": "pokeemerald",
+            "firered": "pokefirered",
+            "leafgreen": "pokefirered",
+        }[version]
+
+    def read_curated_object(self, map_label: str, event: Gen3Event, index: int, family: str) -> ScriptOffers:
+        key = character_key(map_label, event, index)
+        if self._curation.is_duplicate(family, key):
+            if self.read_object(event).trainers:
+                raise ValueError(f"npc_duplicates.csv : {key} : exclusion d'un combat")
+            return ScriptOffers((), (), (), ())
+        result = self._curation.apply(self._repo_name, key, self.read_object(event), str(event.value("script")))
+        for offer in result.offers:
+            for value in (offer.item, offer.move, offer.eligible_pokemon):
+                if value and value not in self.scripts.constants:
+                    raise ValueError(f"npc_offers.csv : {key} : constante inconnue : {value}")
+        rows = self._curation.rows_for(self._repo_name, key, str(event.value("script")))
+        for row in rows:
+            if row.required_flag and row.required_flag not in self.scripts.constants:
+                raise ValueError(f"npc_offers.csv : {key} : condition inconnue : {row.required_flag}")
+        return result
 
     def read(self, label: str) -> ScriptOffers:
         if label in {"NULL", "0", "0x0"}:
@@ -206,6 +236,18 @@ class Gen3Offers:
         )
 
     def _resolve(self, offer: Gen3Offer) -> Gen3Offer:
+        if offer.kind in {"sale_decoration", "gift_decoration"} and offer.item:
+            if offer.item.startswith("DECOR_") and offer.item in self.scripts.constants:
+                return offer
+            number = number_value(offer.item, self.scripts.constants)
+            names = tuple(
+                name
+                for name, value in self.scripts.constants.items()
+                if name.startswith("DECOR_") and value == number and name not in {"DECOR_NONE", "DECOR_COUNT"}
+            )
+            if len(names) != 1:
+                raise ValueError(f"{offer.source} : décoration inconnue : {offer.item}")
+            return replace(offer, item=names[0])
         if offer.kind == "trade":
             index = number_value(offer.quantity or "", self.scripts.constants)
             if index is None or not 0 <= index < len(self._trades):
