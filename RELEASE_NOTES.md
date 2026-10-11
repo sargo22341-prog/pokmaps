@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les tarifs et services prennent en charge les Points Combat et les cendres de Hoenn.
 - Les noms des lieux de Kanto précisent les étages sans abréviation et harmonisent les chenaux.
 - Fiche Pokémon : l'évolution de Debugant précise la comparaison entre Attaque et Défense.
 - Fiche Pokémon : le Surf de Pikachu, enseigné par Pokémon Stadium, apparaît dans Rouge, Bleu et Jaune avec la mention « Événement externe ».

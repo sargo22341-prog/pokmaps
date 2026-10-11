@@ -21,6 +21,7 @@ enum class CharacterRole {
     NAME_RATER,
     MOVE_DELETER,
     MOVE_TUTOR,
+    MOVE_RELEARNER,
     GROOMING,
     CABLE_CLUB;
 
@@ -50,10 +51,11 @@ enum class CharacterRole {
             OfferKind.HEAL -> HEAL
             OfferKind.CABLE_CLUB -> CABLE_CLUB
             OfferKind.NAME_RATER -> NAME_RATER
-            OfferKind.DAYCARE -> DAYCARE
+            OfferKind.DAYCARE, OfferKind.DAYCARE_EGG, OfferKind.DAYCARE_WITHDRAWAL -> DAYCARE
             OfferKind.MOVE_DELETER -> MOVE_DELETER
             OfferKind.GROOMING -> GROOMING
             OfferKind.MOVE_TUTOR -> MOVE_TUTOR
+            OfferKind.MOVE_RELEARNER -> MOVE_RELEARNER
         }
     }
 }

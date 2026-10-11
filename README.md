@@ -441,7 +441,9 @@ aussi les rencontres et objets fixes de l'aperçu. Les noms du catalogue restent
 Les quatre CSV de noms français sont préparés ; les noms vides, les clés répétées, les classes et les sprites fixes
 sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
 
-Les fiches de personnages et leurs services restent à intégrer.
+Les fiches de personnages restent à assembler pour la troisième génération. Le domaine et les ressources
+françaises prennent en charge les tarifs en Points Combat et en cendres, le Maître des Capacités et les
+services d’œuf et de retrait de la Pension ; la monnaie est explicite pour les ventes et les tuteurs.
 
 Les services de Hoenn sont préparés dans le catalogue `character_curation.json`, généré par
 `python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
