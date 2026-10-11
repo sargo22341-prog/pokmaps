@@ -91,18 +91,20 @@ def _refine(
     ):
         return None
     requirements = state.requirements if _temporary(subject) else state.requirements | {requirement}
-    if not _possible(requirements):
+    if not _possible(requirements, constants):
         return None
     refined = replace(state, requirements=requirements)
     return refined.assigning(subject, value) if operator == "eq" else refined
 
 
-def _possible(requirements: frozenset[ScriptRequirement]) -> bool:
+def _possible(requirements: frozenset[ScriptRequirement], constants: dict[str, int]) -> bool:
     for subject in {requirement.subject for requirement in requirements}:
         minimum, maximum = 0, 65535
         excluded = set()
         for requirement in requirements:
             number = _number(requirement.value)
+            if number is None and not requirement.value.startswith(("VAR_", "FLAG_")):
+                number = number_value(requirement.value, constants)
             if requirement.subject != subject or number is None:
                 continue
             match requirement.operator:
@@ -267,9 +269,17 @@ def _arithmetic(state: ScriptState, instruction: Instruction, constants: dict[st
     return state.assigning(args[0], value)
 
 
-def script_states(scripts: Gen3Scripts, label: str) -> tuple[ScriptState, ...]:
+def script_states(
+    scripts: Gen3Scripts, label: str, requirements: frozenset[ScriptRequirement] = frozenset()
+) -> tuple[ScriptState, ...]:
     """Chaque contexte d'appel conserve ses variables ; aucun retour n'est relié à un autre appel."""
-    pending = [ScriptState(scripts.target(label))]
+    initial = ScriptState(scripts.target(label))
+    for requirement in sorted(requirements):
+        refined = _refine(initial, requirement.subject, requirement.operator, requirement.value, scripts.constants)
+        if refined is None:
+            return ()
+        initial = refined
+    pending = [initial]
     seen: set[ScriptState] = set()
     result: list[ScriptState] = []
     for _ in range(_MAX_STEPS):

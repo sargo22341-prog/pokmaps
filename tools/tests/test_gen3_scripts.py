@@ -36,6 +36,25 @@ def test_calls_keep_each_item_in_its_own_context() -> None:
     assert [(offer.item, offer.quantity) for offer in offers] == [("ITEM_POTION", "2"), ("ITEM_ANTIDOTE", "2")]
 
 
+def test_pokemon_egg_and_healing_keep_their_script_values() -> None:
+    scripts = _scripts(
+        "Entry:\nsetvar VAR_0x8000, SPECIES_BELDUM\ngivemon VAR_0x8000, 5, ITEM_ORAN_BERRY\n"
+        "giveegg SPECIES_WYNAUT\nspecial HealPlayerParty\nend"
+    )
+    offers = script_offers(scripts, "Entry").offers
+    assert [(offer.kind, offer.pokemon, offer.item, offer.quantity) for offer in offers] == [
+        ("gift_pokemon", "SPECIES_BELDUM", "ITEM_ORAN_BERRY", "5"),
+        ("gift_egg", "SPECIES_WYNAUT", None, "5"),
+        ("heal", None, None, None),
+    ]
+
+
+def test_tutor_keeps_the_attack_selected_before_the_call() -> None:
+    scripts = _scripts("Entry:\nsetvar VAR_0x8005, TUTOR_MOVE_ROLLOUT\nspecial TeachMoveTutorMove\nend")
+    offer = script_offers(scripts, "Entry").offers[0]
+    assert (offer.kind, offer.move) == ("move_tutor", "TUTOR_MOVE_ROLLOUT")
+
+
 @pytest.mark.parametrize("amount", ["", ", 5", ", 5, MUS_LEVEL_UP"])
 def test_remake_giveitem_message_keeps_item_and_quantity(amount: str) -> None:
     scripts = _scripts(f"Entry:\ngiveitem_msg ReceivedText, ITEM_POKE_BALL{amount}\nend")
@@ -256,6 +275,19 @@ def test_all_pinned_object_scripts_are_read(source_cache_ready: None, game: Game
             result = reader.read(label)
             assert all(offer.paths for offer in result.offers)
             assert set(result.trainers) <= repo.trainers[version].keys()
+
+
+@pytest.mark.parametrize("game", GEN3_GAMES, ids=lambda game: game.version_group)
+def test_all_pinned_objects_apply_their_presence(source_cache_ready: None, game: Game) -> None:
+    root = pret_dir(Path(__file__).resolve().parents[1] / ".cache", game.pret_repo)
+    repo = Gen3PretRepo(root, game.pret_versions)
+    for version, _ in game.pret_versions:
+        for current in repo.maps.values():
+            for obj in current.objects:
+                if obj.kind == "clone":
+                    continue
+                result = repo.offers[version].read_object(obj)
+                assert all(offer.paths for offer in result.offers)
 
 
 def test_pinned_trades_keep_version_differences(source_cache_ready: None) -> None:

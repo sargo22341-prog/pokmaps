@@ -526,10 +526,15 @@ restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, 
 - [x] Objets au sol (Poké Balls de carte) et objets cachés, avec le drapeau qui les retire :
       `--gen3-items-only` exporte les positions dans la base de l'aperçu et les métadonnées dans `map_items.json`.
       Les jetons cachés restent dans le JSON ; les objets calculés de la Pyramide relèvent de la branche Hoenn.
-- [ ] `pret_gen3_scripts.py` + `pret_gen3_offers.py` : dons d'objets et de Pokémon, œufs, boutiques (dont les
+- [x] `pret_gen3_scripts.py` + `pret_gen3_offers.py` : dons d'objets et de Pokémon, œufs, boutiques (dont les
       listes qui changent avec les badges), échanges, tuteurs, soins, baies offertes.
-- [ ] `pret_gen3_conditions.py` : analyse de flot des scripts (`goto_if_set`, `goto_if_eq` sur les `VAR_…`,
+- [x] `pret_gen3_conditions.py` : analyse de flot des scripts (`goto_if_set`, `goto_if_eq` sur les `VAR_…`,
       présence des personnages) ; étendre `story_events.csv` aux variables de scénario à valeur.
+      `read_object` applique le drapeau de retrait avant le parcours, éliminant les offres incompatibles.
+      Le CSV décrit une comparaison par ligne (`operator,value,phrase`) ; les six états du déblocage du
+      National et du starter de Johto d'Émeraude sont relus. Toute comparaison non décrite bloque sa traduction.
+      Les primitives et tables sont validées sur les cinq versions ; la curation des récompenses calculées
+      par le C et des autres phrases de scénario reste dans `npc_offers.csv` et l'assemblage des personnages.
 - [x] Déblocage du Pokédex National relu dans les scripts et le moteur de chaque jeu, documenté et testé
       sur les sources épinglées (décision « comme dans les jeux » ; correction du déclencheur Rubis/Saphir).
 - [ ] `npc_duplicates.csv`, `npc_offers.csv` : personnages présents à plusieurs étapes, offres non lisibles.

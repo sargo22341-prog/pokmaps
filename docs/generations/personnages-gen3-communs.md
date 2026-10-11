@@ -26,6 +26,18 @@ conservent les chemins alternatifs, sans les confondre avec une condition cumula
 Les intervalles numériques contradictoires sont écartés. Les parcours et la profondeur des appels
 sont bornés ; un label absent ou une donnée exécutée comme un script provoque une erreur.
 
+`Gen3PretRepo.offers[version].read_object(event)` lit le dialogue sous la condition de présence de
+l'événement : son drapeau de retrait doit être baissé. Cette condition est appliquée à l'entrée du
+parcours, avant les branches ; les chemins incompatibles sont écartés. Un drapeau inconnu arrête la lecture.
+`read(label)` reste la lecture du script seul, indépendante de son emplacement sur une carte.
+
+`story_events.csv` conserve les colonnes des drapeaux et ajoute `operator,value,phrase` pour les variables.
+Une ligne `VAR_…` décrit une comparaison numérique (`eq`, `ne`, `lt`, `le`, `gt`, `ge`) et laisse les deux
+phrases booléennes vides. `StoryEvents.script_phrases` traduit un chemin, refuse les comparaisons non relues
+et suit les lignes utilisées. Les six états du National et du starter de Johto de Seko sont décrits selon
+les commentaires et affectations des sources épinglées. Les autres variables restent à relire au fil de
+l'assemblage ; une phrase ne se déduit jamais du seul nom d'une variable.
+
 Les écritures possibles des appels C sont propagées à travers leurs sous-appels. Cette lecture
 prend l'union des variantes de compilation : elle peut oublier une valeur ou une exigence de trop,
 mais ne doit pas conserver une ancienne valeur susceptible de cacher une branche.
@@ -84,12 +96,13 @@ service d'Évaluateur de noms.
 
 - Assemblage des personnages avec leurs équipes et revanches déjà exportées, sans perdre les métadonnées.
 - Complément des offres calculées par le moteur et curation de `npc_offers.csv`.
-- Présence des personnages et variables de scénario dans `story_events.csv`.
+- Assemblage des conditions de présence et curation des autres variables de scénario dans `story_events.csv`.
 - Curation des doublons et validation de l'ensemble exporté.
 
-Les cases du plan ne sont pas cochées sur la seule existence des lecteurs. Les tests unitaires
+Les lecteurs d'offres et de conditions sont validés indépendamment de l'assemblage. Les tests unitaires
 utilisent des scripts en mémoire ; les tests `pipeline` parcourent les scripts des objets des cinq
-versions épinglées et contrôlent les références des dresseurs ainsi que les variantes des échanges.
+versions épinglées, appliquent les drapeaux de présence et contrôlent les références des dresseurs
+ainsi que les variantes des échanges.
 
 ## Corrections du lecteur lors de la reprise
 

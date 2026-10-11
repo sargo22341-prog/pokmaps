@@ -48,7 +48,9 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     character_families = _complete_character_families(builder.games, builder.map_data)
     if unused := objects.names.unused_text_names(character_families):
         raise ValueError(f"npc_text_names.csv : personnages absents des jeux : {unused}")
-    if unused := objects.story.unused(set(repos.values())):
+    # Un aperçu sans personnages ne peut pas consommer les conditions éditoriales de leurs offres.
+    story_repos = {repos[group] for group, data in builder.map_data.items() if data.characters_complete}
+    if unused := objects.story.unused(story_repos):
         raise ValueError(f"story_events.csv : drapeaux qu'aucune offre n'exige : {unused}")
     return {
         "map": maps,
