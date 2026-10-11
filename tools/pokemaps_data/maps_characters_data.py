@@ -52,12 +52,12 @@ class CharacterNames:
     text_families: dict[str, str] = field(default_factory=dict)
 
     def trainer(self, trainer_class: str) -> str:
-        if trainer_class not in self.trainers:
+        if not self.trainers.get(trainer_class, "").strip():
             raise ValueError(f"Classe de dresseur sans nom français : {trainer_class} (tools/data/trainer_classes.csv)")
         return self.trainers[trainer_class]
 
     def character(self, sprite: str | None) -> str:
-        if sprite not in self.characters:
+        if not self.characters.get(sprite or "", "").strip():
             raise ValueError(f"Personnage sans nom français : sprite {sprite} (tools/data/npc_names.csv)")
         return self.characters[sprite]
 
@@ -69,14 +69,43 @@ class CharacterNames:
         return NPC_KINDS[appearance]
 
     def facility(self, kind: str) -> str:
-        if kind not in self.facilities:
+        if not self.facilities.get(kind, "").strip():
             raise ValueError(f"Installation sans nom français : {kind} (tools/data/facility_names.csv)")
         return self.facilities[kind]
+
+    def text_name(self, key: str) -> str:
+        if not self.by_text.get(key, "").strip():
+            raise ValueError(f"Personnage sans nom français : {key} (tools/data/npc_text_names.csv)")
+        return self.by_text[key]
 
 
 def _read_csv(name: str) -> list[dict[str, str]]:
     with (DATA_DIR / name).open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
+        rows = list(csv.DictReader(handle))
+    if name in {"trainer_classes.csv", "npc_names.csv", "npc_text_names.csv", "facility_names.csv"}:
+        _validate_name_rows(name, rows)
+    return rows
+
+
+def _validate_name_rows(name: str, rows: list[dict[str, str]]) -> None:
+    keys = {
+        "trainer_classes.csv": "trainer_class",
+        "npc_names.csv": "sprite",
+        "npc_text_names.csv": "text",
+        "facility_names.csv": "kind",
+    }
+    seen: set[str] = set()
+    for line, row in enumerate(rows, 2):
+        key = row.get(keys[name], "")
+        if not key or not (row.get("name_fr") or "").strip():
+            raise ValueError(f"{name}:{line} : clé ou nom français manquant : {key}")
+        if key in seen:
+            raise ValueError(f"{name}:{line} : clé répétée : {key}")
+        seen.add(key)
+        if name == "npc_names.csv" and row.get("appearance") not in NPC_KINDS:
+            raise ValueError(f"{name}:{line} : apparence inconnue : {key}")
+        if name == "npc_text_names.csv" and not (row.get("family") or "").strip():
+            raise ValueError(f"{name}:{line} : famille manquante : {key}")
 
 
 def read_character_names() -> CharacterNames:

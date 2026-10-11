@@ -521,7 +521,7 @@ restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, 
 
 - [x] `pret_gen3_trainers.py` : équipes, attaques par défaut (calculées comme le moteur), objets tenus,
       combats doubles, toutes les équipes de revanche avec leur condition (table propre à chaque dépôt).
-- [ ] `trainer_classes.csv`, `npc_names.csv`, `npc_text_names.csv`, `facility_names.csv` : nouveaux noms
+- [x] `trainer_classes.csv`, `npc_names.csv`, `npc_text_names.csv`, `facility_names.csv` : nouveaux noms
       français (un nom manquant arrête la génération).
 - [x] Objets au sol (Poké Balls de carte) et objets cachés, avec le drapeau qui les retire :
       `--gen3-items-only` exporte les positions dans la base de l'aperçu et les métadonnées dans `map_items.json`.

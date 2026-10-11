@@ -120,7 +120,7 @@ def _map_data(
         items.extend(metadata)
     if trainers is not None:
         trainers.extend(trainer_catalogs(maps))
-    return GameMapData(rows, areas, warps, objects, spots, terrain)
+    return GameMapData(rows, areas, warps, objects, spots, terrain, characters_complete=False)
 
 
 def _map_row(row: dict[str, str]) -> MapRow:

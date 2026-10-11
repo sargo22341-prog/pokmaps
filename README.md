@@ -422,8 +422,9 @@ python tools/build_data.py --gen3-trainers-only --preview tools/build/preview/ge
 `trainers.json` conserve les 3 724 équipes, les quatre emplacements d'attaques calculées ou explicites,
 les IV, objets tenus, objets de combat, combats doubles et les 632 séries de revanches avec leurs conditions.
 Il indique les commits sources et relie les équipes aux événements des cartes. Cette commande inclut
-aussi les rencontres et objets fixes de l'aperçu. Les noms restent ceux des sources ; leur traduction,
-l'assemblage des fiches de personnages et leur affichage Android relèvent des cases suivantes du plan.
+aussi les rencontres et objets fixes de l'aperçu. Les noms du catalogue restent ceux des sources.
+Les quatre CSV de noms français sont préparés ; les noms vides, les clés répétées, les classes et les sprites fixes
+sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
 
 Les fiches de personnages et leurs services restent à intégrer.
 Le [bilan de la phase 5](docs/generations/personnages-gen3-communs.md) décrit l'export et les conditions du National
