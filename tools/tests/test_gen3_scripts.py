@@ -19,6 +19,12 @@ def _scripts(text: str, constants: dict[str, int] | None = None) -> Gen3Scripts:
     return Gen3Scripts(parse_scripts(text, "test.inc"), constants or {})
 
 
+def test_bit_shift_constants_are_bounded() -> None:
+    assert number_value("(1 << 7)", {}) == 128
+    assert number_value("(1 << 65535)", {}) is None
+    assert number_value("(-1 << 2)", {}) is None
+
+
 def test_calls_keep_each_item_in_its_own_context() -> None:
     scripts = _scripts(
         """Entry:

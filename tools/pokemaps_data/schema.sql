@@ -437,7 +437,8 @@ CREATE TABLE npc_offer (
     wanted_item_id INTEGER,
     version_id INTEGER,
     time_mask INTEGER,
-    weekday_mask INTEGER
+    weekday_mask INTEGER,
+    currency TEXT
 );
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
 

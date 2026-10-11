@@ -6,8 +6,10 @@ import sys
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
+from pokemaps_data.games import EMERALD, RUBY_SAPPHIRE
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
+from pokemaps_data.validate_hoenn_characters import validate_character_catalog
 from pokemaps_data.validate_remake_fixed import validate_remake_fixed
 
 
@@ -20,6 +22,8 @@ def main() -> int:
         validate_remake_fixed(args.assets)
         for game in GEN3_MAP_GAMES:
             validate_catalog(args.assets / "maps" / game.version_group)
+        for game in (RUBY_SAPPHIRE, EMERALD):
+            validate_character_catalog(args.assets / "maps" / game.version_group, game)
         errors = validate(args.assets / "database/pokedex.db")
         if errors:
             raise ValueError("Base incohérente :\n" + "\n".join(errors))

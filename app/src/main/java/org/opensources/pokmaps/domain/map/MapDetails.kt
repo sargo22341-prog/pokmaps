@@ -266,7 +266,8 @@ data class OfferLink(
     val price: Int?,
     val quantity: Int?,
     val wantedItemIdentifier: String? = null,
-    val wantedItemName: String? = null
+    val wantedItemName: String? = null,
+    val currency: OfferCurrency = OfferCurrency.MONEY
 )
 
 /** Objets et offres des personnages d'un jeu, parcourus par la recherche et les fiches. */

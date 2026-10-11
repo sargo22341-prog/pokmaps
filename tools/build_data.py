@@ -90,6 +90,7 @@ def main() -> int:
     if args.hoenn_maps_only or args.remake_maps_only:
         games = HOENN_MAP_GAMES if args.hoenn_maps_only else (FIRERED_LEAFGREEN,)
         build_gen3_maps(args.cache, args.assets / "maps", games)
+        _map_catalogs(args.cache, args.assets, games)
         write_manifest(args.assets)
         return 0
 
@@ -99,13 +100,14 @@ def main() -> int:
     print("Téléchargement des CSV PokéAPI…")
     api = PokeApi(fetch_pokeapi_csv(args.cache))
 
+    build_gen3_maps(args.cache, args.assets / "maps")
+    build_fixed_catalog(args.cache, args.assets)
+
     print(f"Données de l'application ({', '.join(game.version_group for game in GAMES)}) : {args.assets}")
     if not _build(api, args.cache, repos, args.assets, GAMES):
         return 1
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
-    build_gen3_maps(args.cache, args.assets / "maps")
-    build_fixed_catalog(args.cache, args.assets)
     write_manifest(args.assets)
     if GAMES_IN_PROGRESS:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)
@@ -113,6 +115,17 @@ def main() -> int:
         if not _build(api, args.cache, repos, args.preview, ALL_GAMES):
             return 1
     return 0
+
+
+def _map_catalogs(cache: Path, assets: Path, games: tuple[Game, ...]) -> None:
+    # Le rendu remplace le dossier : recréer les catalogues indépendants avec les mêmes sources épinglées.
+    from pokemaps_data.maps_export_gen3 import export_game
+
+    for game in games:
+        if game in GAMES:
+            export_game(cache, assets / "maps" / game.version_group, game)
+    branch = "firered-leafgreen" if games == (FIRERED_LEAFGREEN,) else "hoenn"
+    build_fixed_catalog(cache, assets, branch)
 
 
 def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, games: tuple[Game, ...]) -> bool:
@@ -123,7 +136,6 @@ def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, game
 
     pret_roots = {game.version_group: repos[game.pret_repo] for game in games}
     builder = DatabaseBuilder(api, games, map_data=map_data, pret_roots=pret_roots)
-
     print("Téléchargement des images (pokesprite, PokeAPI/sprites)…")
     item_sprites = build_sprites(builder, cache, assets / "sprites")
 

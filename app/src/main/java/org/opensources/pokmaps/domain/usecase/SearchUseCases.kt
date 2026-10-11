@@ -17,6 +17,7 @@ import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.TrainerPokemon
@@ -39,15 +40,16 @@ class ObserveSearchIndexUseCase @Inject constructor(
 }
 
 /**
- * Objet ou personnage de la carte lié à un objet, avec le nom de sa carte, le prix (en ₽, ou en jetons pour un
- * lot du Casino), la quantité, et l'autre objet d'un échange.
+ * Objet ou personnage de la carte lié à un objet, avec le nom de sa carte, le prix et sa monnaie,
+ * la quantité, et l'autre objet d'un échange.
  */
 data class ItemSource(
     val obj: MapObject,
     val mapName: String,
     val price: Int? = null,
     val quantity: Int? = null,
-    val otherItemName: String? = null
+    val otherItemName: String? = null,
+    val currency: OfferCurrency = OfferCurrency.MONEY
 )
 
 /** Fiche d'un objet : où le trouver, l'acheter, le recevoir ou le gagner, et ce qu'il devient. */
@@ -80,14 +82,18 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
         val catalog = maps.catalog(game)
         val index = maps.index(game)
         val item = index.items.firstOrNull { it.identifier == identifier } ?: return@map null
-        fun MapObject.source(price: Int? = null, quantity: Int? = null, other: String? = null) =
-            ItemSource(this, catalog.maps[mapId]?.name.orEmpty(), price, quantity, other)
+        fun MapObject.source(
+            price: Int? = null,
+            quantity: Int? = null,
+            other: String? = null,
+            currency: OfferCurrency = OfferCurrency.MONEY
+        ) = ItemSource(this, catalog.maps[mapId]?.name.orEmpty(), price, quantity, other, currency)
 
         fun offered(kind: OfferKind, wanted: Boolean = false) = index.offers
             .filter { it.kind == kind && (if (wanted) it.wantedItemIdentifier else it.itemIdentifier) == identifier }
             .mapNotNull { offer ->
                 val other = if (wanted) offer.itemName else offer.wantedItemName
-                catalog.objectsById[offer.objectId]?.source(offer.price, offer.quantity, other)
+                catalog.objectsById[offer.objectId]?.source(offer.price, offer.quantity, other, offer.currency)
             }
             .distinctBy { it.obj.id to it.otherItemName }
         ItemPage(

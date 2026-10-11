@@ -63,6 +63,8 @@ class ObjectRow:
     # Pokémon dont le personnage pousse le cri (identifiant PokéAPI) : il nomme un personnage à l'apparence d'un
     # Pokémon (2e génération).
     cry: str | None = None
+    name_fr: str | None = None
+    appearance: str | None = None
 
 
 def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:

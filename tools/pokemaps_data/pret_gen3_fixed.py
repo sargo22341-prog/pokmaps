@@ -158,7 +158,7 @@ def build_fixed_catalog(cache: Path, assets: Path, group: str | None = None) -> 
         target = assets / "maps" / game.version_group / "fixed_encounters.json"
         target.parent.mkdir(parents=True, exist_ok=True)
         content = {"schema": 1, "repo": game.pret_repo, "commit": PRET_COMMITS[game.pret_repo], "versions": versions}
-        target.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        target.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def _access_item(label: str) -> str | None:

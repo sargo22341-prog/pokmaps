@@ -664,14 +664,29 @@ L’avertissement AGP `Configuration.setVisible(boolean)` déjà documenté rest
 
 Intégration des jeux :
 
-- [ ] Branche Hoenn : passer **Émeraude** de `GAMES_IN_PROGRESS` à `GAMES` (régénération explicite,
+- [x] Branche Hoenn : passer **Émeraude** de `GAMES_IN_PROGRESS` à `GAMES` (régénération explicite,
       `assets.sha256`).
-- [ ] Puis **Rubis/Saphir** : variantes de format de pokeruby, différences de cartes et de scénario.
+- [x] Puis **Rubis/Saphir** : variantes de format de pokeruby, différences de cartes et de scénario.
 - [ ] Branche Remake 1G : **Rouge Feu/Vert Feuille**.
 - [ ] Tests JVM : chaque ViewModel modifié teste vide et erreur ; `PokemapsJourneyTest` couvre un jeu de chaque
       branche ; `MapViewModelTest` couvre le passage Émeraude → Rouge Feu ; tests de capture GEN3.
 - [ ] Essai sur appareil ou émulateur (mémoire `emulator-for-device-checks`) : carte de Hoenn, Plongée, Îles
       Sevii, Pokédex régional et National, fiche, capture ; installation `-r` sans perte des collections.
+
+Activation Hoenn (11 octobre 2026) : les trois versions sont dans `GAMES`, avec leurs cartes,
+rencontres, Pokémon fixes, personnages, services et conditions de scénario. La génération explicite
+met à jour la base et `assets.sha256` (15 430 fichiers). Les catalogues `characters.json` conservent
+les différences de versions et le commit source ; les formats et prix de pokeruby et pokeemerald
+sont vérifiés séparément. Le schéma 15 porte la monnaie des offres, y compris les Points Combat et
+les cendres ; les tuteurs gratuits restent sans prix. Les guides et succès Hoenn restent en phase 7.
+
+Contrôles Android complets réussis : 343 tests JVM, dont les quatre contrôles du schéma Room,
+Lint, ktlint, absence de services Google et APK debug (99 728 980 octets, 95,11 Mio).
+Ruff et intégrité des assets réussis ; 429 tests Python ordinaires réussis.
+Les 198 tests du pipeline sont validés : 194 réussites dans la suite complète, puis les quatre
+tests corrigés réussis en relance ciblée (requêtes d’Or/Argent limitées à leur périmètre et rendu GBA).
+Aucun essai sur téléphone dans cette passe. L’avertissement AGP `Configuration.setVisible(boolean)`
+déjà documenté reste affiché.
 
 ## Phase 7 — Guides, succès et outils
 

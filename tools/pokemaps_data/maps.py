@@ -24,7 +24,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .games import DECLARED_GAMES, GAMES, Game, complete_families
+from .games import DECLARED_GAMES, GAMES, Game, PretFormat, complete_families
 from .maps_characters import ObjectRow, object_rows
 from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
@@ -39,6 +39,7 @@ from .pret_gen3_wild import roaming_maps as gen3_roaming_maps
 from .pret_hoenn_caves import moving_cave_areas
 from .pret_reader import open_pret
 from .sources import DATA_DIR, fetch_pret
+from .story_events import StoryEvents
 
 # Zone PokéAPI des errants propre à chaque famille de cartes.
 ROAMING_AREAS = {
@@ -146,6 +147,7 @@ class GameMapData:
     terrain: dict[tuple[str, str], frozenset[tuple[int, int]]] = field(default_factory=dict)
     # Les aperçus partiels n'exportent pas encore les personnages ; leurs noms se valident dans les sources.
     characters_complete: bool = True
+    story: StoryEvents | None = None
 
 
 def renderer(game_maps: GameMaps) -> MapRenderer:
@@ -321,6 +323,11 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
     layout = read_layout_curation()
     result = {}
     for game in games:
+        if game.pret_format == PretFormat.GEN3:
+            from .maps_export_gen3 import export_game as export_gen3_game
+
+            result[game.version_group] = export_gen3_game(cache, output / game.version_group, game)
+            continue
         game_maps = GameMaps(open_pret(game, fetch_pret(cache, game.pret_repo)), game, layout)
         family_names = names.get(game.map_family, {})
         family_areas = read_map_areas(game.version_group).get(game.map_family, [])
@@ -331,7 +338,8 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
         placed = {row.const for group in version_groups for row in result[group].maps}
         if unknown := sorted({part.map for part in layout.plans if part.family == family} - placed):
             raise ValueError(f"map_plans.csv : zones absentes des jeux {family} : {unknown}")
-    families, repos = set(complete_families(games)), {game.pret_repo for game in games}
+    legacy = tuple(game for game in games if game.pret_format != PretFormat.GEN3)
+    families, repos = set(complete_families(legacy)), {game.pret_repo for game in legacy}
     if unused := curation.unused(families, repos):
         raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")
     return result

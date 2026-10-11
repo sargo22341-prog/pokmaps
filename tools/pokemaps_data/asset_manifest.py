@@ -31,6 +31,8 @@ def _required_paths(assets: Path) -> set[str]:
                JOIN version_group vg ON vg.id = m.version_group_id WHERE o.sprite IS NOT NULL"""
         )
         paths.update(f"maps/{group}/sprites/{sprite}.webp" for group, sprite in rows)
+        groups = {row[0] for row in connection.execute("SELECT identifier FROM version_group")}
+        paths.update(f"maps/{group}/characters.json" for group in groups & {"ruby-sapphire", "emerald"})
         rows = connection.execute(
             """SELECT vg.identifier, m.identifier, m.level_count FROM map m
                JOIN version_group vg ON vg.id = m.version_group_id WHERE m.parent_map_id IS NULL"""

@@ -31,6 +31,12 @@ class GuideRepositoryTest {
             val expected = listOf(93, 90, 76, 72, 75, 113)
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
+                if (game.generationId == 3) {
+                    // Les bibliothèques Hoenn sont prévues en phase 7 ; elles doivent rester lisibles et vides.
+                    assertTrue(library.articles.isEmpty())
+                    checkFruitSprites(context, maps.catalog(game), game.generationId)
+                    continue
+                }
                 checkSeparateQuests(library)
                 checkFruitSprites(context, maps.catalog(game), game.generationId)
                 val achievements = library.articles.filter { it.category == GuideCategory.ACHIEVEMENT }

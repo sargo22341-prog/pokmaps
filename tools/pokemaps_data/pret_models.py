@@ -135,6 +135,8 @@ class NpcOffer:
     version: str | None = None  # version PokéAPI où l'offre existe (ex. red), None pour toutes celles du jeu
     # Ce qu'exige l'offre : moments, jours et drapeaux pret du scénario (offer_conditions) ; toujours possible sinon.
     condition: Condition = ALWAYS
+    currency: str | None = None
+    stories: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

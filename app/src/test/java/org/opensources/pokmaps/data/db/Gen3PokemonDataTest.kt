@@ -13,7 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
-/** Requêtes Room sur une copie de la base, enrichie avec des données GBA des sources épinglées. */
+/** Requêtes Room sur Hoenn activé, avec le catalogue des remakes encore préparatoire. */
 @RunWith(RobolectricTestRunner::class)
 class Gen3PokemonDataTest {
     private lateinit var database: PokedexDatabase
@@ -26,22 +26,16 @@ class Gen3PokemonDataTest {
             .allowMainThreadQueries()
             .build()
         val sql = database.openHelper.writableDatabase
-        sql.execSQL("INSERT INTO pokedex VALUES (1, 'national', 'National', NULL), (4, 'hoenn', 'Hoenn', 3)")
-        sql.execSQL("INSERT INTO version_group_pokedex VALUES (5, 4), (5, 1), (6, 4), (6, 1), (7, 2), (7, 1)")
-        sql.execSQL("INSERT INTO pokedex_entry VALUES (4, 25, 156), (1, 25, 25), (1, 133, 133)")
-        seedAbilities()
+        sql.execSQL("INSERT INTO version_group_pokedex VALUES (7, 2), (7, 1)")
+        seedRemakeAbilities()
     }
 
-    private fun seedAbilities() {
+    private fun seedRemakeAbilities() {
         val sql = database.openHelper.writableDatabase
-        sql.execSQL("INSERT INTO ability VALUES (28, 'synchronize', 'Synchro', 3), (36, 'trace', 'Calque', 3)")
-        sql.execSQL("INSERT INTO pokemon_ability VALUES (282, 3, 1, 28, 0), (282, 3, 2, 36, 0)")
-        for (group in 5..7) {
-            sql.execSQL(
-                "INSERT INTO ability_version_group VALUES (?, ?, ?), (?, ?, ?)",
-                arrayOf<Any>(28, group, "Transfère statuts.", 36, group, "Imite la capacité spéciale.")
-            )
-        }
+        sql.execSQL(
+            "INSERT INTO ability_version_group VALUES (?, ?, ?), (?, ?, ?)",
+            arrayOf<Any>(28, 7, "Transfère statuts.", 36, 7, "Imite la capacité spéciale.")
+        )
     }
 
     @After
@@ -55,8 +49,9 @@ class Gen3PokemonDataTest {
         assertEquals(listOf(4, 1), dao.catalogs(5).map { it.id })
         assertEquals(listOf(4, 1), dao.catalogs(6).map { it.id })
         assertEquals(listOf(2, 1), dao.catalogs(7).map { it.id })
-        assertEquals(listOf(156), dao.pokedex(6, 4).map { it.number })
-        assertEquals(listOf(25, 133), dao.pokedex(6, 1).map { it.number })
+        assertEquals(202, dao.pokedex(6, 4).size)
+        assertEquals(386, dao.pokedex(6, 1).size)
+        assertEquals(156, dao.pokedex(6, 4).single { it.pokemonId == 25 }.number)
         assertTrue(dao.pokedex(6, 2).isEmpty())
     }
 
@@ -71,15 +66,18 @@ class Gen3PokemonDataTest {
     @Test
     fun abilitiesKeepBothSlotsAndFrenchGameDescriptions() = runBlocking {
         val dao = database.pokemonDao()
-        for (group in 5..7) {
-            assertEquals(
-                listOf(
-                    AbilityRow("Synchro", "Transfère statuts.", false),
-                    AbilityRow("Calque", "Imite la capacité spéciale.", false)
-                ),
-                dao.abilities(282, 3, group)
-            )
+        for (group in 5..6) {
+            val abilities = dao.abilities(282, 3, group)
+            assertEquals(listOf("Synchro", "Calque"), abilities.map { it.name })
+            assertTrue(abilities.all { !it.hidden && !it.description.isNullOrBlank() })
         }
+        assertEquals(
+            listOf(
+                AbilityRow("Synchro", "Transfère statuts.", false),
+                AbilityRow("Calque", "Imite la capacité spéciale.", false)
+            ),
+            dao.abilities(282, 3, 7)
+        )
         assertTrue(dao.abilities(282, 2, 3).isEmpty())
     }
 }

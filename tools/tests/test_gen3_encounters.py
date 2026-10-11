@@ -10,11 +10,11 @@ from pokemaps_data.compare_wild_gen3 import compare_wild_tables
 from pokemaps_data.games import GEN3_GAMES, Game
 from pokemaps_data.map_spots import read_spots
 from pokemaps_data.maps import ROAMING_AREAS, roaming_areas
+from pokemaps_data.maps_catalog_gen3 import map_data
 from pokemaps_data.maps_layout import identifier, read_layout_curation
 from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
 from pokemaps_data.pret_gen3 import Gen3PretRepo
 from pokemaps_data.pret_gen3_wild import roaming_maps
-from pokemaps_data.preview_wild_gen3 import _map_data
 from pokemaps_data.sources import pret_dir
 from pokemaps_data.validate import validate
 from spot_editor.catalog import EditorCatalog, EncounterLine, Family
@@ -92,7 +92,7 @@ def test_roaming_routes_and_editor_regions(game: Game, source_cache_ready: None)
 
 @pytest.mark.parametrize("game", GEN3_GAMES, ids=lambda game: game.version_group)
 def test_terrain_placement_and_editor_consistency(game: Game, assets: Path, source_cache_ready: None) -> None:
-    data = _map_data(assets / "maps" / game.version_group, pret_dir(CACHE, game.pret_repo), game)
+    data = map_data(assets / "maps" / game.version_group, pret_dir(CACHE, game.pret_repo), game)
     assert data.spots
     assert all((spot.x, spot.y) in data.terrain[(identifier(spot.map_const), spot.kind)] for spot in data.spots)
     terrains = WildTerrains(CACHE)
@@ -116,7 +116,7 @@ def test_editor_accepts_underwater_encounters() -> None:
 
 def test_preview_can_be_browsed(gen3_builder: DatabaseBuilder, tmp_path: Path, assets: Path) -> None:
     data = {
-        game.version_group: _map_data(assets / "maps" / game.version_group, pret_dir(CACHE, game.pret_repo), game)
+        game.version_group: map_data(assets / "maps" / game.version_group, pret_dir(CACHE, game.pret_repo), game)
         for game in GEN3_GAMES
     }
     b = DatabaseBuilder(gen3_builder.api, GEN3_GAMES, data, gen3_builder.pret_roots)

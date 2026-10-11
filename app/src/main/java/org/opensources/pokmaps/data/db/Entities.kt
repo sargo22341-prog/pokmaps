@@ -453,7 +453,8 @@ data class NpcOfferEntity(
     @ColumnInfo(name = "wanted_item_id") val wantedItemId: Int?,
     @ColumnInfo(name = "version_id") val versionId: Int?,
     @ColumnInfo(name = "time_mask") val timeMask: Int?,
-    @ColumnInfo(name = "weekday_mask") val weekdayMask: Int?
+    @ColumnInfo(name = "weekday_mask") val weekdayMask: Int?,
+    val currency: String?
 )
 
 @Entity(

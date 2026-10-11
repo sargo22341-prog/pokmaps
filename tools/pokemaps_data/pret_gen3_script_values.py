@@ -19,7 +19,7 @@ def script_constants(root: Path) -> dict[str, int]:
             values.update(_item_enums(text))
         for name, expression in re.findall(r"^#define[ \t]+(\w+)[ \t]+([^\n]+)", text, re.M):
             expression = expression.split("//", 1)[0].strip()
-            if re.fullmatch(r"[\w\s()+\-]+", expression):
+            if re.fullmatch(r"[\w\s()+\-<>]+", expression):
                 expressions[name] = expression
     for _ in range(32):
         added = {
@@ -100,6 +100,12 @@ def _number_expression(node: ast.expr, constants: dict[str, int], depth: int) ->
             if a is None or b is None:
                 return None
             return a + b if isinstance(operator, ast.Add) else a - b
+        case ast.BinOp(left=left, op=ast.LShift(), right=right):
+            a = _number_expression(left, constants, depth + 1)
+            b = _number_expression(right, constants, depth + 1)
+            if a is None or b is None or not 0 <= a <= 65535 or not 0 <= b <= 15:
+                return None
+            return a << b
         case _:
             return None
 
