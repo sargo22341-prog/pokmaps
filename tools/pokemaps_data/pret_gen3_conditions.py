@@ -218,6 +218,12 @@ def _next(state: ScriptState, instruction: Instruction, scripts: Gen3Scripts) ->
     if command in {"special", "specialvar"}:
         modified = scripts.writes.get(args[-1], frozenset()) | {args[0] if command == "specialvar" else "VAR_RESULT"}
         return [_invalidate(after, modified)]
+    if command == "msgbox" and len(args) > 1 and number_value(args[1], scripts.constants) == 5:
+        return [_invalidate(after, frozenset({"VAR_RESULT"}))]
+    if command == "msgbox" and len(args) > 1 and args[1] == "MSGBOX_YESNO":
+        return [_invalidate(after, frozenset({"VAR_RESULT"}))]
+    if command == "checkcoins":
+        return [_invalidate(after, frozenset({args[0]}))]
     if command in _RESULT_WRITES:
         return [replace(after, values=tuple((key, value) for key, value in after.values if key != "VAR_RESULT"))]
     return [after]
@@ -251,6 +257,8 @@ _RESULT_WRITES = frozenset(
         "checkmoney",
         "checkcoins",
         "givedecoration",
+        "adddecoration",
+        "checkdecorspace",
     }
 )
 

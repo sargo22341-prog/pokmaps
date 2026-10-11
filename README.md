@@ -442,6 +442,13 @@ Les quatre CSV de noms français sont préparés ; les noms vides, les clés ré
 sans traduction arrêtent cet export. L'assemblage des fiches et leur affichage Android restent à intégrer.
 
 Les fiches de personnages et leurs services restent à intégrer.
+
+Les services de Hoenn sont préparés dans le catalogue `character_curation.json`, généré par
+`python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
+fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Capacités, tuteurs et
+comptoirs de la Zone de Combat. Les tarifs, monnaies et objets requis sont conservés ; le
+[bilan des services Hoenn](docs/generations/services-hoenn.md) décrit cette préparation.
+
 Les lecteurs d'offres GBA appliquent les drapeaux de présence des événements avant le parcours des scripts.
 `story_events.csv` accepte aussi les comparaisons de variables (`operator,value,phrase`) ; une comparaison
 non relue arrête sa traduction. Les six états du National et du starter de Johto d'Émeraude sont décrits.

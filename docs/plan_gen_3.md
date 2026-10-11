@@ -552,8 +552,13 @@ restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, 
 
 Branche Hoenn :
 
-- [ ] Fossiles ranimés (Devon à Mérouville), Pension (Route 117), Casino de Lavandia, Atelier du Verre (cendres),
+- [x] Fossiles ranimés (Devon à Mérouville), Pension (Route 117), Casino de Lavandia, Atelier du Verre (cendres),
       Maître des Capacités et tuteurs d'Émeraude, échanges de la Zone de Combat (PC).
+      Offres et services relus dans les sources épinglées et exportés dans `character_curation.json` :
+      fossile requis, Écaille Cœur, retrait et œufs de la Pension, lots et achats de jetons, tarifs en cendres
+      et en Points de Combat. Les décorations achetées sont distinctes des dons ; les lots différés de
+      l'Atelier restent déjà payés. Voir le [bilan des services Hoenn](generations/services-hoenn.md).
+      Le domaine et l'affichage Android restent dans la case suivante et la phase 6.
 - [ ] Nouvelles monnaies et services dans le domaine et les ressources françaises : Points Combat, cendres
       (`CharacterService`, `OfferKind`, `CharacterRole`, prix affichés).
 - [ ] Pokémon fixes : Regis, Groudon, Kyogre, Rayquaza, Électrode, Kecleon, Latios/Latias de l'Île du Sud
