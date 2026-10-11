@@ -8,6 +8,7 @@ from pathlib import Path
 from pokemaps_data.asset_manifest import check_manifest
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
+from pokemaps_data.validate_remake_fixed import validate_remake_fixed
 
 
 def main() -> int:
@@ -16,6 +17,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
+        validate_remake_fixed(args.assets)
         for game in GEN3_MAP_GAMES:
             validate_catalog(args.assets / "maps" / game.version_group)
         errors = validate(args.assets / "database/pokedex.db")

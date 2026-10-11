@@ -452,6 +452,15 @@ positions des Pokémon, niveaux, objets tenus, scripts, conditions et drapeaux d
 Ils sont également inclus dans l'export de curation ; leur affichage Android attend la phase 6.
 Kecleon exige le Devon Scope ; l'Île du Sud exige le Passe Éon distribué par événement.
 
+Les Pokémon fixes de Rouge Feu/Vert Feuille se régénèrent avec
+`python tools/build_data.py --remake-fixed-only`. Le catalogue versionné
+`maps/firered-leafgreen/fixed_encounters.json` conserve onze rencontres par version : deux Ronflex
+niveau 30, deux Électrode niveau 34, les trois oiseaux niveau 50, Mewtwo niveau 70,
+Ho-Oh et Lugia niveau 70, Deoxys niveau 30. Les positions viennent des objets Pokémon,
+même si un autre événement déclenche le combat. Scripts, conditions et drapeaux de retrait sont conservés ;
+le Roc Nombri exige le Ticketevent et l'Île Aurore le Ticketaurore, distribués par événement externe.
+Ce catalogue entre aussi dans `character_curation.json` ; l'affichage Android attend la phase 6.
+
 Les services de Hoenn sont préparés dans le catalogue `character_curation.json`, généré par
 `python tools/build_data.py --gen3-curation-only --preview tools/build/preview/gen3-curation` :
 fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Capacités, tuteurs et

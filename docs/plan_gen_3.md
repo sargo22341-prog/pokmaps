@@ -576,7 +576,11 @@ Branche Remake 1G :
       chaque version, achats et dons de jetons distincts, retrait et œufs de la Pension, drapeaux des
       tuteurs uniques et don du Cherche VS. Voir le [bilan des services Remake 1G](generations/services-remake-1g.md).
       L'assemblage Room et l'affichage des nouveaux jeux restent en phase 6.
-- [ ] Pokémon fixes : Ronflex, Électrode, oiseaux légendaires, Mewtwo, Ho-Oh/Lugia/Deoxys (événement).
+- [x] Pokémon fixes : Ronflex, Électrode, oiseaux légendaires, Mewtwo, Ho-Oh/Lugia/Deoxys (événement).
+      Catalogue `maps/firered-leafgreen/fixed_encounters.json` versionné : onze rencontres par version,
+      positions des Pokémon, niveaux, scripts, conditions, drapeaux de retrait et tickets d'événement.
+      Export explicite par `--remake-fixed-only` et dans `character_curation.json`, validé contre pret.
+      L'activation Room et les calques Android restent en phase 6.
 
 ## Phase 6 — Application : prise en charge générale de la 3e génération
 

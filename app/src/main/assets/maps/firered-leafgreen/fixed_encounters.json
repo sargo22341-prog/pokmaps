@@ -1,0 +1,533 @@
+{
+  "schema": 1,
+  "repo": "pokefirered",
+  "commit": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "versions": {
+    "firered": [
+      {
+        "map": "CeruleanCave_B1F",
+        "x": 7,
+        "y": 12,
+        "elevation": 3,
+        "script": "CeruleanCave_B1F_EventScript_Mewtwo",
+        "source": "data/maps/CeruleanCave_B1F/scripts.inc:37",
+        "pokemon": "SPECIES_MEWTWO",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_MEWTWO",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_MEWTWO",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "SeafoamIslands_B4F",
+        "x": 9,
+        "y": 2,
+        "elevation": 4,
+        "script": "SeafoamIslands_B4F_EventScript_Articuno",
+        "source": "data/maps/SeafoamIslands_B4F/scripts.inc:159",
+        "pokemon": "SPECIES_ARTICUNO",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ARTICUNO",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ARTICUNO",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 5,
+        "y": 11,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Zapdos",
+        "source": "data/maps/PowerPlant/scripts.inc:40",
+        "pokemon": "SPECIES_ZAPDOS",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ZAPDOS",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ZAPDOS",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 36,
+        "y": 5,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Electrode2",
+        "source": "data/maps/PowerPlant/scripts.inc:101",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 34,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 30,
+        "y": 38,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Electrode1",
+        "source": "data/maps/PowerPlant/scripts.inc:75",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 34,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "MtEmber_Summit",
+        "x": 9,
+        "y": 6,
+        "elevation": 3,
+        "script": "MtEmber_Summit_EventScript_Moltres",
+        "source": "data/maps/MtEmber_Summit/scripts.inc:29",
+        "pokemon": "SPECIES_MOLTRES",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_MOLTRES",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_MOLTRES",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "NavelRock_Summit",
+        "x": 9,
+        "y": 6,
+        "elevation": 0,
+        "script": "NavelRock_Summit_EventScript_HoOh",
+        "source": "data/maps/NavelRock_Summit/scripts.inc:60",
+        "pokemon": "SPECIES_HO_OH",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_HO_OH",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_NAVEL_ROCK",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_HO_OH",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_MYSTIC_TICKET"
+      },
+      {
+        "map": "NavelRock_Base",
+        "x": 10,
+        "y": 15,
+        "elevation": 3,
+        "script": "NavelRock_Base_EventScript_Lugia",
+        "source": "data/maps/NavelRock_Base/scripts.inc:56",
+        "pokemon": "SPECIES_LUGIA",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_LUGIA",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_NAVEL_ROCK",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_LUGIA",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_MYSTIC_TICKET"
+      },
+      {
+        "map": "BirthIsland_Exterior",
+        "x": 15,
+        "y": 3,
+        "elevation": 3,
+        "script": "BirthIsland_Exterior_EventScript_Triangle",
+        "source": "data/maps/BirthIsland_Exterior/scripts.inc:83",
+        "pokemon": "SPECIES_DEOXYS",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_DEOXYS",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_BIRTH_ISLAND",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_BIRTH_ISLAND_METEORITE",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_DEOXYS",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_AURORA_TICKET"
+      },
+      {
+        "map": "Route12",
+        "x": 14,
+        "y": 70,
+        "elevation": 3,
+        "script": "Route12_EventScript_Snorlax",
+        "source": "data/maps/Route12/scripts.inc:22",
+        "pokemon": "SPECIES_SNORLAX",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_12_SNORLAX",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_GOT_POKE_FLUTE",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_ROUTE_12_SNORLAX",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "Route16",
+        "x": 31,
+        "y": 13,
+        "elevation": 3,
+        "script": "Route16_EventScript_Snorlax",
+        "source": "data/maps/Route16/scripts.inc:40",
+        "pokemon": "SPECIES_SNORLAX",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_16_SNORLAX",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_GOT_POKE_FLUTE",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_ROUTE_16_SNORLAX",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      }
+    ],
+    "leafgreen": [
+      {
+        "map": "CeruleanCave_B1F",
+        "x": 7,
+        "y": 12,
+        "elevation": 3,
+        "script": "CeruleanCave_B1F_EventScript_Mewtwo",
+        "source": "data/maps/CeruleanCave_B1F/scripts.inc:37",
+        "pokemon": "SPECIES_MEWTWO",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_MEWTWO",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_MEWTWO",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "SeafoamIslands_B4F",
+        "x": 9,
+        "y": 2,
+        "elevation": 4,
+        "script": "SeafoamIslands_B4F_EventScript_Articuno",
+        "source": "data/maps/SeafoamIslands_B4F/scripts.inc:159",
+        "pokemon": "SPECIES_ARTICUNO",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ARTICUNO",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ARTICUNO",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 5,
+        "y": 11,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Zapdos",
+        "source": "data/maps/PowerPlant/scripts.inc:40",
+        "pokemon": "SPECIES_ZAPDOS",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ZAPDOS",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ZAPDOS",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 36,
+        "y": 5,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Electrode2",
+        "source": "data/maps/PowerPlant/scripts.inc:101",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 34,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "PowerPlant",
+        "x": 30,
+        "y": 38,
+        "elevation": 3,
+        "script": "PowerPlant_EventScript_Electrode1",
+        "source": "data/maps/PowerPlant/scripts.inc:75",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 34,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "MtEmber_Summit",
+        "x": 9,
+        "y": 6,
+        "elevation": 3,
+        "script": "MtEmber_Summit_EventScript_Moltres",
+        "source": "data/maps/MtEmber_Summit/scripts.inc:29",
+        "pokemon": "SPECIES_MOLTRES",
+        "level": 50,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_MOLTRES",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_MOLTRES",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "NavelRock_Summit",
+        "x": 9,
+        "y": 6,
+        "elevation": 0,
+        "script": "NavelRock_Summit_EventScript_HoOh",
+        "source": "data/maps/NavelRock_Summit/scripts.inc:60",
+        "pokemon": "SPECIES_HO_OH",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_HO_OH",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_NAVEL_ROCK",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_HO_OH",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_MYSTIC_TICKET"
+      },
+      {
+        "map": "NavelRock_Base",
+        "x": 10,
+        "y": 15,
+        "elevation": 3,
+        "script": "NavelRock_Base_EventScript_Lugia",
+        "source": "data/maps/NavelRock_Base/scripts.inc:56",
+        "pokemon": "SPECIES_LUGIA",
+        "level": 70,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_LUGIA",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_NAVEL_ROCK",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_LUGIA",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_MYSTIC_TICKET"
+      },
+      {
+        "map": "BirthIsland_Exterior",
+        "x": 15,
+        "y": 3,
+        "elevation": 3,
+        "script": "BirthIsland_Exterior_EventScript_Triangle",
+        "source": "data/maps/BirthIsland_Exterior/scripts.inc:83",
+        "pokemon": "SPECIES_DEOXYS",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_DEOXYS",
+        "event": true,
+        "requirements": [
+          {
+            "subject": "FLAG_ENABLE_SHIP_BIRTH_ISLAND",
+            "operator": "eq",
+            "value": "TRUE"
+          },
+          {
+            "subject": "FLAG_HIDE_BIRTH_ISLAND_METEORITE",
+            "operator": "eq",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_DEOXYS",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": "ITEM_AURORA_TICKET"
+      },
+      {
+        "map": "Route12",
+        "x": 14,
+        "y": 70,
+        "elevation": 3,
+        "script": "Route12_EventScript_Snorlax",
+        "source": "data/maps/Route12/scripts.inc:22",
+        "pokemon": "SPECIES_SNORLAX",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_12_SNORLAX",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_GOT_POKE_FLUTE",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_ROUTE_12_SNORLAX",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "Route16",
+        "x": 31,
+        "y": 13,
+        "elevation": 3,
+        "script": "Route16_EventScript_Snorlax",
+        "source": "data/maps/Route16/scripts.inc:40",
+        "pokemon": "SPECIES_SNORLAX",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ROUTE_16_SNORLAX",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_GOT_POKE_FLUTE",
+            "operator": "ne",
+            "value": "FALSE"
+          },
+          {
+            "subject": "FLAG_HIDE_ROUTE_16_SNORLAX",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      }
+    ]
+  }
+}
