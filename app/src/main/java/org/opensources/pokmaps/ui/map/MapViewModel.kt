@@ -170,7 +170,7 @@ class MapViewModel @Inject constructor(
                     detail = null,
                     zoneListOpen = false,
                     failed = false,
-                    worlds = gameMaps.catalog.worlds.map { world -> MapPlace(world.id, world.name) }
+                    worlds = gameMaps.catalog.regionWorlds.map { world -> MapPlace(world.id, world.name) }
                 )
             }
             val stayed = sameFamily && position != null && navigation.stay(gameMaps.catalog, position, sameMaps)

@@ -106,7 +106,13 @@ data class MapCatalog(
     val spots: Map<Int, List<MapSpot>> = emptyMap()
 ) {
     val worlds: List<MapInfo> = maps.values.filter { it.isDisplayable && isWorld(it.id) }.sortedBy { it.id }
-    val defaultWorld: MapInfo? = worlds.firstOrNull()
+    val regionWorlds: List<MapInfo> = worlds.filter { it.identifier != "hoenn-underwater" }
+
+    fun regionWorldOf(mapId: Int): MapInfo? = worldOf(mapId)?.let { world ->
+        if (world.identifier == "hoenn-underwater") mapByIdentifier("hoenn") else world
+    }
+
+    val defaultWorld: MapInfo? = regionWorlds.firstOrNull()
 
     fun isWorld(mapId: Int): Boolean = maps[mapId]?.isWorld == true
 
@@ -254,8 +260,10 @@ data class MapCatalog(
                 MapFloor(ground.id, FloorLevel.Storey(0), ground.name)
             )
         }
-        return sections[display.id].orEmpty()
+        return landscapeFloors[display.id] ?: sections[display.id].orEmpty()
     }
+
+    private val landscapeFloors = MapLandscape.floors(maps)
 
     private val sections: Map<Int, List<MapFloor>> by lazy { MapSections.build(maps) }
 

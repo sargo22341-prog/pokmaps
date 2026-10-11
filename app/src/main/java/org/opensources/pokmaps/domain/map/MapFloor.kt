@@ -23,6 +23,14 @@ sealed interface FloorLevel {
         override val order: Int get() = ELEVATOR_ORDER
     }
 
+    enum class Landscape(override val order: Int) : FloorLevel {
+        SURFACE(0),
+        UNDERWATER(-1),
+        HIGH_TIDE(2),
+        LOW_TIDE(1),
+        LOW_TIDE_BASEMENT(0)
+    }
+
     companion object {
         /** Bâtiment et niveau d'une carte (« mt-moon-b2f » → « mt-moon », 2e sous-sol), null sans niveau. */
         fun parse(identifier: String): Pair<String, FloorLevel>? {

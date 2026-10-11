@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.map.FloorLevel
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.ui.common.ExternalEventLabel
@@ -112,7 +113,7 @@ private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        if (state.worlds.size > 1) {
+        if (state.worlds.size > 1 || state.floors.any { it.level == FloorLevel.Landscape.SURFACE }) {
             WorldSelector(state, onAction, Modifier.weight(1f))
         } else {
             MapTitle(state, onBack = { onAction(MapAction.Back) }, Modifier.weight(1f))
