@@ -10,6 +10,7 @@ from .character_curation_gen3 import Gen3Curation, OfferResolution, character_ke
 from .games import GEN3_GAMES, Game
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_offers import ScriptOffers
+from .pret_hoenn_fixed import fixed_encounters
 from .sources import PRET_COMMITS, fetch_pret
 
 
@@ -79,6 +80,7 @@ def _game_rows(
                 "repo": game.pret_repo,
                 "commit": PRET_COMMITS[game.pret_repo],
                 "characters": characters,
+                "fixed_encounters": fixed_encounters(repo, version) if not repo.remake else [],
             }
         )
     return versions

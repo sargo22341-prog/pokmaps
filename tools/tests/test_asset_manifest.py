@@ -9,6 +9,7 @@ import pytest
 from pokemaps_data.asset_manifest import MANIFEST, check_manifest, write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.maps_gen3 import build_gen3_maps
+from pokemaps_data.pret_hoenn_fixed import build_fixed_catalog
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
 
@@ -55,6 +56,7 @@ def test_missing_manifest_is_rejected(tmp_path: Path) -> None:
 
 def test_pipeline_reproduces_bundled_assets(builder: DatabaseBuilder, assets_root: Path, assets: Path) -> None:
     build_gen3_maps(CACHE, assets_root / "maps")
+    build_fixed_catalog(CACHE, assets_root)
     icons = build_sprites(builder, CACHE, assets_root / "sprites")
     builder.write(assets_root / "database/pokedex.db", icons)
     assert validate(assets_root / "database/pokedex.db") == []

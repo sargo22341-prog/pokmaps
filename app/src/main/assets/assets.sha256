@@ -2120,6 +2120,7 @@ a6ed2b68aebfb75f16c3d78211e3ff90a3a86318339a5ce6292f00b61c7488c0  maps/emerald/f
 198f4ad6f2789990be41b41fd704ca162c350b6a40cba150dff25bb045f04c24  maps/emerald/fiery-path/2/2_0.webp
 3ea82e99108009ceaa72b605b983600d500c9341953d8c140562805240af19ab  maps/emerald/fiery-path/2/2_1.webp
 fb4410598550ce59b9af1526902153db03358bd88b1c34fff03bc83a3604fca4  maps/emerald/fiery-path/2/2_2.webp
+63c538f0066a065aed00599362d9035b587a1dd66edcc57779a042c53849800b  maps/emerald/fixed_encounters.json
 23e2ca45c32f6e9ea9f6db8ffd0c3fc70d0c86eab689ef53452840fd330232e4  maps/emerald/fortree-city-decoration-shop/0/0_0.webp
 3467c7fa383827d34810a90c6f40e9eb28d8a954fb1c73563ef65c3b6b1cfa66  maps/emerald/fortree-city-gym/0/0_0.webp
 a8c341d3462f77972dd3d59374c27352c335627fbc5fc1ef5fe3b8ecf21cb462  maps/emerald/fortree-city-gym/1/0_0.webp
@@ -10085,6 +10086,7 @@ ae2b7a09ae481dac11e462a8dae7b6fd8edc6194a153b5bc79f22253da9e05cb  maps/ruby-sapp
 198f4ad6f2789990be41b41fd704ca162c350b6a40cba150dff25bb045f04c24  maps/ruby-sapphire/fiery-path/2/2_0.webp
 3ea82e99108009ceaa72b605b983600d500c9341953d8c140562805240af19ab  maps/ruby-sapphire/fiery-path/2/2_1.webp
 fb4410598550ce59b9af1526902153db03358bd88b1c34fff03bc83a3604fca4  maps/ruby-sapphire/fiery-path/2/2_2.webp
+184965dde0ee7666ac1d77ee9ccf7eaa0dd12d645e314abd725fd4fd9b17c85a  maps/ruby-sapphire/fixed_encounters.json
 3f7c64a36a299435508bc930a4ad688649c34df767c491bbfac8e5efc55a6863  maps/ruby-sapphire/fortree-city-decoration-shop/0/0_0.webp
 1fa749dc633519fa36b002fb4bc76d0b221f53ae5b55c19c8a26dde3ea540ea0  maps/ruby-sapphire/fortree-city-gym/0/0_0.webp
 b62be7de56088054e71c1139ae11cec7989ae635cb3e31e20716d88e0211c771  maps/ruby-sapphire/fortree-city-gym/1/0_0.webp
