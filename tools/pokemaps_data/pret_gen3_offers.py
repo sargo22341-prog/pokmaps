@@ -11,6 +11,7 @@ from .pret_gen3_offer_tables import trade_table, tutor_moves
 from .pret_gen3_script_values import number_value, range_values
 from .pret_gen3_scripts import Gen3Scripts, Instruction
 from .pret_hoenn_services import describe_hoenn_offer
+from .pret_remake_services import describe_remake_offer
 
 if TYPE_CHECKING:
     from .pret_gen3 import Gen3PretRepo
@@ -170,6 +171,7 @@ def script_offers(
             raise ValueError(f"{label} : instruction disparue")
         for raw_offer in _direct(instruction, state, scripts):
             offer = describe_hoenn_offer(raw_offer, state, scripts)
+            offer = describe_remake_offer(offer, state, scripts)
             key = replace(offer, paths=())
             offers.setdefault(key, set()).add(state.requirements)
         command, args = instruction.command, instruction.args

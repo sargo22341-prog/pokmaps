@@ -458,6 +458,10 @@ fossiles de Devon, Pension, Casino de Lavandia, Atelier du Verre, Maître des Ca
 comptoirs de la Zone de Combat. Les tarifs, monnaies et objets requis sont conservés ; le
 [bilan des services Hoenn](docs/generations/services-hoenn.md) décrit cette préparation.
 
+Le même export prépare les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
+de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.
+Le [bilan des services Remake 1G](docs/generations/services-remake-1g.md) détaille les tarifs et niveaux par version.
+
 Les lecteurs d'offres GBA appliquent les drapeaux de présence des événements avant le parcours des scripts.
 `story_events.csv` accepte aussi les comparaisons de variables (`operator,value,phrase`) ; une comparaison
 non relue arrête sa traduction. Les six états du National et du starter de Johto d'Émeraude sont décrits.
