@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_remake_start_title">1 · Bourg Palette et le Pokédex</string>
+    <string name="guide_remake_start_text">
+        Quittez le [[place:pallet-town|Bourg Palette]] vers le nord : le Professeur Chen vous conduit
+        à son laboratoire.
+        Choisissez [[pokemon:1|Bulbizarre]], [[pokemon:4|Salamèche]] ou [[pokemon:7|Carapuce]], puis affrontez
+        le rival. Ce partenaire reste votre choix de départ sans échange externe.
+        \n\nRemontez la Route 1 jusqu’à Jadielle, prenez le colis à la Boutique et rapportez-le à Chen.
+        Vous recevez le Pokédex et des Balls ; la sœur du rival remet la carte. Revenez à Jadielle,
+        regardez la démonstration de capture et explorez la Route 22 avant la Forêt de Jade.
+        \n\nLe combat du rival sur la Route 22 est facultatif à ce stade. Capturez plusieurs espèces et
+        entraînez une réponse aux Pokémon Roche avant Argenta. La collection de l’application reste manuelle,
+        indépendante des espèces vues ou possédées dans votre sauvegarde.
+    </string>
+    <string name="guide_remake_brock_title">2 · Argenta et le Mont Sélénite</string>
+    <string name="guide_remake_brock_text">
+        Traversez la Forêt de Jade, soignez l’équipe à Argenta et affrontez Pierre. Les attaques Eau et
+        Plante sont utiles ; Salamèche peut apprendre Griffe Acier dans ces remakes. Après le Badge Roche,
+        un assistant vous remet les Chaussures de Sport à la sortie est.
+        \n\nSuivez la Route 3 jusqu’au Mont Sélénite. Les Rocket occupent ses sous-sols ; au terme du combat
+        contre le scientifique, choisissez le Nautile pour [[pokemon:138|Amonita]] ou le Dôme pour
+        [[pokemon:140|Kabuto]]. Le second fossile n’est pas disponible dans cette même partie sans échange.
+        \n\nConservez le fossile jusqu’au laboratoire de Cramois’Île. Sortez sur la Route 4 et explorez
+        avant de sauter les rebords : le passage vers Azuria est à sens unique jusqu’à l’ouverture d’autres accès.
+        Les tuteurs de cette route sont uniques ; n’utilisez pas leur offre par réflexe.
+    </string>
+    <string name="guide_remake_misty_title">3 · Azuria, Ondine et le billet de Léo</string>
+    <string name="guide_remake_misty_text">
+        À Azuria, affrontez le rival au nord puis les cinq dresseurs du Pont Pépite. Suivez les Routes 24
+        et 25 jusqu’à la maison de Léo ; aidez-le avec son téléporteur pour recevoir le Passe Bateau.
+        Revenez combattre Ondine avec une réponse aux types Eau.
+        \n\nLa maison cambriolée donne accès à la Route 5 après le combat contre le Rocket. Le souterrain
+        mène à la Route 6, puis à Carmin sur Mer ; le poste de Safrania n’accepte pas encore votre passage.
+        La Pension de la Route 5 entraîne un seul Pokémon et ne produit pas d’œufs.
+        \n\nAvant de quitter Azuria, équipez-vous en soins et utilisez les captures des routes au nord
+        pour compléter l’équipe. Les attaques apprises et les CT sont celles de Rouge Feu/Vert Feuille,
+        pas celles de Rouge/Bleu : consultez la fiche du jeu choisi.
+    </string>
+    <string name="guide_remake_ship_title">4 · L’Océane et le Badge Foudre</string>
+    <string name="guide_remake_ship_text">
+        À Carmin sur Mer, visitez le Fan Club Pokémon pour le Bon de Commande, à échanger contre la
+        Bicyclette à Azuria. Une femme du Centre Pokémon donne le Cherche VS pour les revanches de dresseurs
+        extérieurs ; marchez pour le recharger.
+        \n\nMontez à bord de L’Océane avec le Passe Bateau. Explorez les cabines, affrontez le rival et
+        aidez le capitaine pour recevoir Coupe. Faites vos détours avant de quitter définitivement le bateau.
+        Le Badge Cascade d’Ondine permet d’utiliser Coupe pour ouvrir l’accès à l’Arène de Major Bob.
+        \n\nSes poubelles cachent deux interrupteurs adjacents ; un mauvais second choix réinitialise
+        la recherche. Après le Badge Foudre, revenez sur la Route 2 avec Coupe : l’assistant remet Flash
+        si vous avez capturé dix espèces. Le Tunnel Taupiqueur relie Carmin à cette route.
+    </string>
+    <string name="guide_remake_celadon_title">5 · Lavanville, Céladopole et le Scope Sylphe</string>
+    <string name="guide_remake_celadon_text">
+        Passez par les Routes 9 et 10, puis traversez la Grotte avec Flash pour rejoindre Lavanville.
+        La Tour Pokémon restera bloquée par un spectre non identifiable tant que vous n’avez pas le Scope
+        Sylphe. Partez à l’ouest par la Route 8 et le souterrain vers Céladopole.
+        \n\nÀ Céladopole, Erika attend derrière un arbre à couper. Explorez aussi le Manoir : l’entrée
+        arrière conduit au [[pokemon:133|Évoli]] offert, et la vieille dame donne le Thé qui ouvre les postes
+        de Safrania. Une boisson du distributeur ne remplace pas le Thé dans ces remakes.
+        \n\nAu Casino, battez le Rocket devant l’affiche et actionnez l’interrupteur. Descendez dans
+        le repaire, récupérez la Clé Ascenseur puis affrontez Giovanni. Prenez le Scope Sylphe après sa défaite
+        et revenez à la Tour Pokémon de Lavanville.
+    </string>
+    <string name="guide_remake_flute_title">6 · Poké Flûte, Parmanie et Parc Safari</string>
+    <string name="guide_remake_flute_text">
+        Dans la Tour Pokémon, le Scope Sylphe révèle le spectre d’Ossatueur : vous devez le vaincre,
+        vous ne pouvez pas le capturer. Libérez M. Fuji des Rocket au sommet, puis parlez-lui chez lui
+        pour recevoir la Poké Flûte.
+        \n\nRéveillez les deux [[pokemon:143|Ronflex]] des Routes 12 et 16 après avoir sauvegardé devant eux.
+        La piste cyclable demande la Bicyclette ; l’itinéraire côtier passe par les Routes 12 à 15.
+        Les deux chemins rejoignent Parmanie. Battez Koga pour autoriser Surf.
+        \n\nDans le Parc Safari, atteignez la cabane de la dernière zone pour Surf et ramassez la Dent d’Or.
+        Rapportez-la au gardien de Parmanie pour Force, utilisable avec le Badge Prisme d’Erika.
+        Au Safari, les Balls et la fuite obéissent à un système particulier : le calculateur de capture ordinaire
+        ne représente pas ces rencontres.
+    </string>
+    <string name="guide_remake_saffron_title">7 · Safrania : Sylphe et Morgane</string>
+    <string name="guide_remake_saffron_text">
+        Donnez le Thé à un garde pour ouvrir tous les postes de Safrania. La Sylphe SARL est occupée
+        par les Rocket : cherchez la Carte Magnétique au cinquième étage, puis utilisez les portes et
+        téléporteurs pour progresser. Préparez les combats du rival et de Giovanni.
+        \n\nUn employé offre [[pokemon:131|Lokhlass]] sur le chemin du bureau du président. Gardez une
+        place libre et récupérez la Master Ball du président après la libération. Ce cadeau n’oblige pas
+        à dépenser immédiatement la Ball sur le prochain Pokémon fixe.
+        \n\nBattez Morgane dans l’Arène Psy. Le Dojo voisin est une quête séparée : après son maître,
+        choisissez [[pokemon:106|Kicklee]] ou [[pokemon:107|Tygnon]]. Un seul des deux est offert.
+        Avec Surf et Force, préparez maintenant la route maritime et Cramois’Île.
+    </string>
+    <string name="guide_remake_cinnabar_title">8 · Cramois’Île et le Badge Volcan</string>
+    <string name="guide_remake_cinnabar_text">
+        Vous pouvez rejoindre Cramois’Île depuis le Bourg Palette par Surf, ou depuis Parmanie en
+        traversant les Îles Écume. Leur énigme de rochers demande Force ; le détour vers Artikodin reste
+        facultatif pour l’histoire.
+        \n\nAu laboratoire, faites ranimer le fossile du Mont Sélénite et le Vieil Ambre récupéré au Musée
+        d’Argenta avec Coupe. Sortez puis revenez chercher chaque Pokémon avec une place libre.
+        Explorez ensuite le Manoir Pokémon : ses statues changent l’état des portes, et la Clé Secrète
+        du sous-sol ouvre l’Arène d’Auguste.
+        \n\nPassez les questionnaires ou affrontez les dresseurs avant Auguste. Après le Badge Volcan,
+        Léo propose un voyage aux Îles Sevii. Si vous le remettez à plus tard, retrouvez-le au Centre Pokémon
+        de Cramois’Île ; cette visite fait partie des conditions de progression du National.
+    </string>
+    <string name="guide_remake_sevii_title">9 · Première visite des Îles Sevii</string>
+    <string name="guide_remake_sevii_text">
+        Léo vous présente Ciléo au Centre Pokémon de l’Île 1. Avec le Tri-Passe, les îles 1, 2 et 3
+        deviennent accessibles depuis le bateau. Sur l’Île 2, le responsable de la Salle de Jeu demande
+        de retrouver sa fille, Lostelle.
+        \n\nSur l’Île 3, battez les motards qui occupent la ville. Traversez le Pont du Lien vers le Bois
+        Baies, trouvez Lostelle et affrontez l’[[pokemon:97|Hypnomade]] qui l’effraie. Revenez avec elle
+        sur l’Île 2 pour remettre aussi le colis de Léo, puis retrouvez Léo et Ciléo sur l’Île 1.
+        \n\nProfitez de cette visite pour explorer la Route Tison et les Sources Braise : Éclate-Roc y
+        est offert. Le Mont Braise abrite Sulfura. Les îles 4 à 7 ne sont pas ouvertes par le Tri-Passe ;
+        elles exigent le Pokédex National et la mission des pierres de Ciléo.
+    </string>
+    <string name="guide_remake_league_title">10 · Giovanni, Route Victoire et Panthéon</string>
+    <string name="guide_remake_league_text">
+        Revenez à Jadielle pour le dernier badge : Giovanni dirige son Arène Sol. Après sa défaite,
+        passez par la Route 22, préparez le combat du rival et franchissez les contrôles de badges de la Route 23.
+        Dans la Route Victoire, poussez les rochers sur les interrupteurs pour retirer les barrières.
+        \n\nLa Ligue enchaîne Olga, Aldo, Agatha et Peter, puis le rival. Prévoyez des soins et des
+        réserves de PP pour cinq combats ; ses équipes dépendent notamment du partenaire choisi au départ.
+        Le Panthéon termine la première partie de l’histoire.
+        \n\nPour recevoir le National de Chen, capturez au moins soixante espèces et terminez aussi
+        la première visite des Sevii. Les évolutions comptent comme espèces distinctes.
+        Le National n’ouvre pas à lui seul la Grotte Azurée : poursuivez la réparation de la machine de Ciléo.
+    </string>
+    <string name="guide_remake_ruby_title">11 · Le Rubis et l’Île 4</string>
+    <string name="guide_remake_ruby_text">
+        Avec le National, reparlez à Ciléo sur l’Île 1 pour la machine réseau. Au Mont Braise,
+        affrontez les Rocket devant la nouvelle entrée, descendez dans le passage et récupérez le Rubis.
+        Leur conversation fournit aussi un des mots de passe de l’Entrepôt Rocket.
+        \n\nRapportez le Rubis à Ciléo : il échange votre Tri-Passe contre le Passe Prisme et vous demande
+        le Saphir. Les îles 4 à 7 sont maintenant accessibles. Sur l’Île 4, la Pension accueille deux parents
+        et produit des œufs, contrairement à celle de la Route 5.
+        \n\nDans la Grotte de Glace, traversez les sols fragiles pour récupérer Cascade. Remontez ensuite
+        la chute de l’entrée et aidez Olga contre les Rocket dans la salle du fond. Terminez cette scène
+        avant de chercher le Saphir sur l’Île 6.
+    </string>
+    <string name="guide_remake_sapphire_title">12 · Saphir, Entrepôt Rocket et fin de mission</string>
+    <string name="guide_remake_sapphire_text">
+        Sur l’Île 6, traversez la Vallée Ruine vers le Trou Percé. Utilisez Coupe devant la porte
+        portant le braille. Après le premier trou, suivez les passages du haut, de gauche, de droite puis
+        du bas. Au fond, un scientifique vole le Saphir et révèle le second mot de passe de l’Entrepôt Rocket.
+        \n\nGagnez l’Île 5 et ouvrez l’entrepôt dans le Pré Île 5 avec les deux mots de passe.
+        Traversez les tapis, affrontez les Rocket puis le scientifique et récupérez le Saphir.
+        Rapportez-le à Ciléo pour achever la machine réseau et les conditions d’échange avec Hoenn.
+        \n\nLa Grotte Azurée devient accessible pour [[pokemon:150|Mewtwo]], et la Ligue propose des
+        équipes renforcées. Le Pokémon errant dépend du starter : Entei avec Bulbizarre, Raikou avec Carapuce,
+        Suicune avec Salamèche. Il apparaît à Kanto, pas aux Sevii ; évitez de le mettre K.O.
+    </string>
+    <string name="guide_remake_legends_title">Oiseaux légendaires, Mewtwo et tickets</string>
+    <string name="guide_remake_legends_text">
+        [[pokemon:145|Électhor]] vous attend à la Centrale, accessible par Surf depuis la Route 10.
+        [[pokemon:144|Artikodin]] se trouve aux Îles Écume : poussez les rochers pour arrêter les courants.
+        [[pokemon:146|Sulfura]] est au Mont Braise sur l’Île 1, et non sur la Route Victoire de Rouge/Bleu.
+        Les trois oiseaux sont au niveau 50.
+        \n\nAprès la mission du Rubis et du Saphir, explorez la Grotte Azurée avec Surf pour atteindre
+        Mewtwo au niveau 70. Sauvegardez avant chaque rencontre fixe et préparez une attaque de statut et
+        des Balls. Un Pokémon vaincu ne revient pas simplement lors d’une nouvelle entrée.
+        \n\nLe Roc Nombri pour Ho-Oh et Lugia exige le Ticketevent, et l’Île Aurore pour Deoxys le
+        Ticketaurore. Ce sont des événements externes. Deoxys prend la forme Attaque dans Rouge Feu et
+        Défense dans Vert Feuille ; les tickets ne sont pas des récompenses ordinaires de la Ligue.
+    </string>
+    <string name="guide_remake_collections_title">Zarbi, fossiles et détours des Sevii</string>
+    <string name="guide_remake_collections_text">
+        Sur l’Île 7, résolvez la Clé Tanoby avec Force pour activer les rencontres des ruines au sud.
+        Les sept chambres ne proposent pas les mêmes [[pokemon:201|Zarbi]] : consultez leurs rencontres
+        et probabilités sur la carte. Rouge Feu/Vert Feuille possèdent vingt-huit formes, dont ! et ?,
+        contre vingt-six lettres dans les jeux de Johto.
+        \n\nLe fossile du Mont Sélénite et le choix Kicklee/Tygnon du Dojo restent exclusifs, mais Évoli
+        peut se reproduire à la Pension de l’Île 4 pour obtenir plusieurs évolutions. Le National autorise
+        les évolutions en espèces extérieures à Kanto ; les échanges et leurs objets requis restent nécessaires.
+        \n\nExplorez le Mémorial de Tectonix sur l’Île 5 et présentez une Limonade pour sa récompense.
+        Les tuteurs, le Maître des Capacités de l’Île 2 et les quêtes des Sevii complètent la collection.
+        Une forme cochée dans l’application reste une observation manuelle et ne lit pas les boîtes du jeu.
+    </string>
+    <string name="guide_remake_preparation_title">Cherche VS, tuteurs et reproduction des remakes</string>
+    <string name="guide_remake_preparation_text">
+        Le Cherche VS se recharge après cent pas et sollicite les dresseurs extérieurs à portée.
+        Une utilisation ne garantit pas que chaque dresseur accepte ; certaines équipes de revanche dépendent
+        de la progression. Les dresseurs d’Arène et les salles intérieures ne sont pas des cibles ordinaires.
+        \n\nLes CT sont consommées. Les tuteurs uniques ne peuvent pas être réutilisés librement, tandis
+        que le Maître des Capacités de l’Île 2 demande deux Petits Champis ou un Gros Champi pour une attaque
+        de niveau. Consultez sa fiche avant de retirer une attaque que vous voudrez réapprendre.
+        \n\nLa reproduction se fait à l’Île 4 après le National. Métamorph simplifie les partenaires,
+        mais les espèces stériles ne deviennent pas fertiles. La Pierre Stase n’y transmet pas les natures
+        comme dans Émeraude ; le Ballon Lumière n’y ajoute pas Électacle à Pichu. Utilisez l’outil du jeu choisi,
+        sans appliquer aux remakes toutes les règles de Hoenn.
+    </string>
+    <string name="guide_remake_bugs_title">Errants · Défauts des IV et de Hurlement</string>
+    <string name="guide_remake_bugs_text">
+        La restitution des IV de l’errant est tronquée dans Rouge Feu/Vert Feuille : seuls les PV restent
+        complets, l’Attaque est limitée, les autres IV sont nuls. Ce défaut vient du moteur ; les revoir
+        dans une nouvelle rencontre ne les régénère pas.
+        \n\n[[pokemon:243|Raikou]] et [[pokemon:244|Entei]] peuvent utiliser Hurlement. Si l’errant termine
+        ainsi le combat, un défaut peut le retirer définitivement de la partie. Suicune n’a pas cette attaque.
+        La Master Ball évite ce risque en garantissant une capture dès le premier lancer ; sinon préparez
+        une stratégie empêchant Hurlement plutôt que de seulement empêcher une fuite ordinaire.
+        \n\nNe transposez pas le glitch de duplication de la Tour de Combat d’Émeraude : cette installation
+        n’existe pas dans les remakes. Conservez une sauvegarde indépendante avant de tester des manipulations
+        et vérifiez les restrictions des succès. Pokémaps n’exécute aucun glitch ni modification de sauvegarde.
+    </string>
+</resources>

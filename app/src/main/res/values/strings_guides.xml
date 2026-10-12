@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_kanto_start_title">
+        1 · Départ et Pokédex
+    </string>
+    <string name="guide_kanto_start_text">
+        Choisissez votre partenaire au [[place:pallet-town|Bourg Palette]]. Dans Rouge et Bleu,
+        [[pokemon:1|Bulbizarre]] facilite les deux premières Arènes ; [[pokemon:7|Carapuce]] dispose aussi d’un
+        bon départ. Jaune vous confie [[pokemon:25|Pikachu]] : préparez une solution contre les types
+        Sol.\n\nRemontez la [[place:route-1|Route 1]] jusqu’à [[place:viridian-city|Jadielle]], entrez à la
+        Boutique et ramenez le colis au laboratoire. Vous recevez le Pokédex. Reparlez au professeur pour ses
+        Balls avant de partir ; la carte se trouve chez votre rival.\n\nAchetez des Balls et des soins. Capturez
+        plusieurs espèces et gardez une place libre dans les boîtes. Le suivi du Pokédex dans l’application est
+        manuel : cochez vos captures dans la version jouée.
+    </string>
+    <string name="guide_kanto_brock_title">
+        2 · Forêt de Jade et Badge Roche
+    </string>
+    <string name="guide_kanto_brock_text">
+        Traversez la [[place:route-2|Route 2]] et la [[place:viridian-forest|Forêt de Jade]] jusqu’à
+        [[place:pewter-city|Argenta]]. Explorez les branches pour récupérer les objets et entraîner votre
+        équipe. Le poison peut encore coûter des PV en marchant : prévoyez un
+        [[item:antidote|Antidote]].\n\nContre [[character:pewter-gym:Pierre|Pierre]], privilégiez Eau, Plante ou
+        Combat. Les attaques Électrik de [[pokemon:25|Pikachu]] ne touchent pas ses Pokémon Sol. Dans Jaune,
+        [[pokemon:56|Férosinge]] près de [[place:route-22|la Route 22]] ou [[pokemon:32|Nidoran♂]] avec Double
+        Pied constituent des solutions. Vérifiez leurs niveaux d’apprentissage dans leur fiche.\n\nAprès le
+        badge, achetez des soins puis prenez la [[place:route-3|Route 3]]. Avant chaque Champion, consultez les
+        succès associés si vous cherchez à réussir un défi de niveau ou de composition d’équipe.
+    </string>
+    <string name="guide_kanto_moon_title">
+        3 · Mont Sélénite et Azuria
+    </string>
+    <string name="guide_kanto_moon_text">
+        La [[place:route-3|Route 3]] mène au [[place:mt-moon-1f|Mont Sélénite]]. Traversez le rez-de-chaussée
+        puis les sous-sols ; les échelles intermédiaires desservent aussi des objets. Gardez une
+        [[item:moon-stone|Pierre Lune]] pour une évolution choisie plutôt que de l’utiliser immédiatement.\n\nAu
+        dernier sous-sol, battez le scientifique et choisissez un fossile : vous ne pouvez prendre que l’un des
+        deux. L’autre espèce s’obtient par échange. La sortie débouche sur la [[place:route-4|Route 4]], dont
+        les rebords vous conduisent à [[place:cerulean-city|Azuria]].\n\nContre
+        [[character:cerulean-gym:Ondine|Ondine]], les attaques Plante ou Électrik sont utiles.
+        [[pokemon:25|Pikachu]] aide dans Jaune ; dans Rouge/Bleu, regardez les rencontres des routes du nord
+        pour compléter l’équipe. Les types Poison ne résistent pas à Psy : [[pokemon:121|Staross]] peut être
+        dangereux.
+    </string>
+    <string name="guide_kanto_bill_title">
+        4 · Léo, ticket et Carmin
+    </string>
+    <string name="guide_kanto_bill_text">
+        À [[place:cerulean-city|Azuria]], soignez-vous avant le rival au nord. Franchissez le Pont Pépite de la
+        [[place:route-24|Route 24]] puis la [[place:route-25|Route 25]]. Aidez [[character:bills-house:Léo|Léo]]
+        dans sa maison : il vous remet le Passe Bateau.\n\nRetournez en ville et passez par la maison
+        cambriolée. Descendez la [[place:route-5|Route 5]], empruntez le Souterrain puis la
+        [[place:route-6|Route 6]] pour atteindre [[place:vermilion-city|Carmin sur Mer]]. Le Fan Club donne le
+        Bon Commande à échanger contre une bicyclette à Azuria ; la maison du pêcheur donne une canne.\n\nSi
+        vous souhaitez exploiter le bug de [[pokemon:151|Mew]], lisez son article avant de vaincre tous les
+        dresseurs des Routes 24 et 25. Ce bug n’est pas nécessaire au scénario et peut contredire les conditions
+        de certains succès.
+    </string>
+    <string name="guide_kanto_ship_title">
+        5 · L’Océane et Badge Foudre
+    </string>
+    <string name="guide_kanto_ship_text">
+        Montez à bord de [[place:ss-anne-1f|l’Océane]] depuis [[place:vermilion-city|Carmin sur Mer]]. Explorez
+        les cabines, les étages et les cuisines avant de soigner le capitaine. Une fois Coupe reçue et le bateau
+        quitté, l’Océane part définitivement : ses objets et dresseurs deviennent inaccessibles.\n\nApprenez
+        [[item:hm01|Coupe]] à un membre de l’équipe. Elle permet d’entrer dans l’Arène. Ses poubelles cachent
+        deux interrupteurs ; le second se trouve à côté du premier, et un échec réinitialise le
+        mécanisme.\n\n[[character:vermilion-gym:Major Bob|Major Bob]] utilise le type Électrik.
+        [[pokemon:50|Taupiqueur]], dans la [[place:digletts-cave|Cave Taupiqueur]], y est immunisé. Cette grotte
+        permet aussi de rejoindre la Route 2 et de récupérer [[item:hm05|Flash]] auprès de l’assistant si vous
+        avez assez d’espèces capturées.
+    </string>
+    <string name="guide_kanto_rock_title">
+        6 · Grotte et arrivée à Lavanville
+    </string>
+    <string name="guide_kanto_rock_text">
+        Revenez vers [[place:cerulean-city|Azuria]] et utilisez Coupe sur la [[place:route-9|Route 9]]. La
+        [[place:route-10|Route 10]] donne accès à la [[place:rock-tunnel-1f|Grotte]]. Flash éclaire les lieux ;
+        emportez des soins et suivez les échelles entre les deux niveaux.\n\nLa sortie rejoint
+        [[place:lavender-town|Lavanville]]. La Tour Pokémon ne peut pas encore être terminée : il faut
+        identifier le fantôme avec le Scope Sylphe. Prenez la [[place:route-8|Route 8]], puis le passage
+        souterrain vers la [[place:route-7|Route 7]] et [[place:celadon-city|Céladopole]].\n\nNe gaspillez pas
+        vos CT : elles sont à usage unique. Les fiches des Pokémon indiquent les attaques par niveau et les CT
+        compatibles ; conservez notamment les attaques couvrant un type que votre équipe gère mal.
+    </string>
+    <string name="guide_kanto_celadon_title">
+        7 · Céladopole et repaire Rocket
+    </string>
+    <string name="guide_kanto_celadon_text">
+        À [[place:celadon-city|Céladopole]], récupérez [[pokemon:133|Évoli]] en entrant à l’arrière du manoir.
+        Le Centre Commercial vend des objets d’évolution. Achetez aussi une boisson au dernier étage pour les
+        gardes de [[place:saffron-city|Safrania]] : dans ces jeux, il n’y a pas de Thé.\n\nContre
+        [[character:celadon-gym:Érika|Érika]], Feu et Vol sont efficaces ; attention aux altérations de statut.
+        [[pokemon:16|Roucool]] ou un partenaire Feu peuvent aider. Coupe ouvre le passage vers l’Arène.\n\nAu
+        Casino, battez le sbire devant l’affiche et examinez celle-ci. Dans le repaire, les tapis roulants
+        imposent leur direction. Récupérez la clé de l’ascenseur auprès du sbire qui la laisse tomber, puis
+        affrontez [[character:rocket-hideout-b4f:Giovanni|Giovanni]] pour obtenir le Scope Sylphe.
+    </string>
+    <string name="guide_kanto_flute_title">
+        8 · Tour Pokémon et Poké Flûte
+    </string>
+    <string name="guide_kanto_flute_text">
+        Retournez à [[place:lavender-town|Lavanville]] avec le Scope Sylphe. Gravissez la
+        [[place:pokemon-tower-3f|Tour Pokémon]], utilisez l’aire de soin et affrontez le fantôme identifié avant
+        les derniers sbires. Ce fantôme ne peut pas être capturé.\n\nLibérez [[character:mr-fujis-house:M.
+        Fuji|M. Fuji]], puis reparlez-lui dans sa maison pour recevoir la [[item:poke-flute|Poké Flûte]]. Elle
+        réveille les [[pokemon:143|Ronflex]] des Routes 12 et 16 ; sauvegardez avant leur combat et préparez
+        sommeil ou paralysie.\n\nPour rejoindre [[place:fuchsia-city|Parmanie]], choisissez la
+        [[place:route-12|Route 12]] puis les Routes 13 à 15, ou la piste cyclable des Routes 16 à 18. Une maison
+        à l’ouest de Céladopole donne [[item:hm02|Vol]] ; cette capacité accélère les allers-retours.
+    </string>
+    <string name="guide_kanto_safari_title">
+        9 · Parc Safari et Badge Âme
+    </string>
+    <string name="guide_kanto_safari_text">
+        À [[place:fuchsia-city|Parmanie]], allez au [[place:safari-zone-center|Parc Safari]]. Chaque entrée
+        limite votre nombre de pas. Pour le scénario, privilégiez le trajet jusqu’à la maison secrète de la zone
+        la plus éloignée : vous y obtenez [[item:hm03|Surf]]. Ramassez les Dents d’Or à proximité.\n\nRapportez
+        les Dents d’Or au gardien dans sa maison pour recevoir [[item:hm04|Force]]. Les Balls du Safari
+        obéissent à des règles particulières : les appâts et les cailloux changent à la fois les chances de
+        fuite et de capture. Les espèces rares peuvent demander plusieurs
+        visites.\n\n[[character:fuchsia-gym:Koga|Koga]] utilise surtout Poison dans Rouge/Bleu, mais une équipe
+        différente dans Jaune. Consultez sa fiche et privilégiez une attaque Psy ; Sol est utile contre les
+        Pokémon Poison qui ne sont pas Vol. Les murs invisibles de son Arène imposent un détour.
+    </string>
+    <string name="guide_kanto_silph_title">
+        10 · Sylphe et Badge Marais
+    </string>
+    <string name="guide_kanto_silph_text">
+        La boisson de Céladopole ouvre [[place:saffron-city|Safrania]]. Dans la [[place:silph-co-5f|Sylphe
+        SARL]], cherchez la Carte Magnétique au cinquième étage ; elle ouvre les portes verrouillées. Les
+        téléporteurs raccordent ensuite les salles : le septième étage mène au rival et au don de
+        [[pokemon:131|Lokhlass]].\n\nBattez [[character:silph-co-11f:Giovanni|Giovanni]] au dernier étage pour
+        libérer l’entreprise. Le président vous donne une [[item:master-ball|Master Ball]]. Gardez-la pour une
+        capture difficile et vérifiez les succès qui imposent de ne pas l’utiliser.\n\nL’Arène de
+        [[character:saffron-gym:Morgane|Morgane]] devient accessible. En première génération, les attaques
+        Spectre ne touchent pas les types Psy à cause d’un bug, et beaucoup de Pokémon Spectre sont aussi
+        Poison. Préférez des dégâts physiques puissants plutôt qu’une stratégie importée des jeux récents. Le
+        Dojo voisin offre un choix unique entre [[pokemon:106|Kicklee]] et [[pokemon:107|Tygnon]].
+    </string>
+    <string name="guide_kanto_cinnabar_title">
+        11 · Cramois’Île et Badge Volcan
+    </string>
+    <string name="guide_kanto_cinnabar_text">
+        Surfez au sud du [[place:pallet-town|Bourg Palette]], ou traversez les [[place:seafoam-islands-1f|Îles
+        Écume]], pour rejoindre [[place:cinnabar-island|Cramois’Île]]. Le laboratoire ranime vos fossiles ;
+        prenez aussi le Vieil Ambre au musée d’Argenta si vous souhaitez [[pokemon:142|Ptéra]].\n\nExplorez le
+        [[place:pokemon-mansion-1f|Manoir Pokémon]]. Les statues actionnent des portes : modifiez les
+        interrupteurs pour atteindre le sous-sol et récupérer la Clé Secrète. Elle ouvre l’Arène.\n\nContre
+        [[character:cinnabar-gym:Auguste|Auguste]], Surf et les attaques Sol conviennent bien. Dans l’Arène,
+        répondre correctement aux quiz permet d’éviter certains combats ; si un objectif exige de battre chaque
+        dresseur, ne les sautez pas. Soignez l’équipe avant de repartir pour [[place:viridian-city|Jadielle]].
+    </string>
+    <string name="guide_kanto_league_title">
+        12 · Dernier badge et Ligue
+    </string>
+    <string name="guide_kanto_league_text">
+        L’Arène de [[place:viridian-city|Jadielle]] est désormais ouverte.
+        [[character:viridian-gym:Giovanni|Giovanni]] y utilise des Pokémon majoritairement Sol : Eau et Plante
+        font de bons choix. Son badge permet de traverser les contrôles de la [[place:route-23|Route 23]] après
+        la [[place:route-22|Route 22]].\n\nDans la [[place:victory-road-1f|Route Victoire]], poussez les rochers
+        sur les interrupteurs avec Force. Emportez aussi Surf. La sortie mène au [[place:indigo-plateau|Plateau
+        Indigo]], où il faut affronter les quatre membres du Conseil puis le rival sans retour en ville entre
+        les combats.\n\nPrévoyez des soins, des Rappels et de quoi restaurer les PP. Une couverture Électrik,
+        Glace, Eau et Psy aide contre les équipes successives. [[pokemon:131|Lokhlass]] couvre Eau et Glace ;
+        [[pokemon:143|Ronflex]] apporte une bonne endurance. Examinez les défis RetroAchievements avant de
+        franchir la porte.
+    </string>
+    <string name="guide_kanto_legends_title">
+        Oiseaux légendaires et Mewtwo
+    </string>
+    <string name="guide_kanto_legends_text">
+        Les trois oiseaux sont des rencontres fixes uniques. Sauvegardez devant chacun, gardez une place pour la
+        capture et évitez de les mettre K.O. [[pokemon:144|Artikodin]] attend dans les
+        [[place:seafoam-islands-b4f|Îles Écume]] : poussez les rochers pour bloquer les courants.
+        [[pokemon:145|Électhor]] se trouve dans la [[place:power-plant|Centrale]], accessible en Surf depuis la
+        Route 10.\n\n[[pokemon:146|Sulfura]] se trouve dans la [[place:victory-road-2f|Route Victoire]], dans
+        ces versions originales. Après la Ligue, la [[place:cerulean-cave-1f|Caverne Azurée]] devient accessible
+        au nord-ouest d’Azuria. Cherchez [[pokemon:150|Mewtwo]] au fond de la grotte, avec Surf.\n\nAffaiblissez
+        la cible et infligez sommeil ou paralysie. Le calculateur de sa fiche tient compte des règles de capture
+        de la génération. Les succès peuvent exiger une Ball précise ou interdire la Master Ball : vérifiez-les
+        avant le premier lancer.
+    </string>
+    <string name="guide_johto_start_title">
+        1 · Bourg Geon et mission d’Orme
+    </string>
+    <string name="guide_johto_start_text">
+        Au [[place:new-bark-town|Bourg Geon]], choisissez votre partenaire au laboratoire.
+        [[pokemon:155|Héricendre]] dispose d’un bon début contre Insecte ; [[pokemon:158|Kaiminus]] est robuste
+        ; [[pokemon:152|Germignon]] demande plus de préparation contre les premières Arènes.\n\nSuivez les
+        [[place:route-29|Routes 29]] et 30 jusqu’à la maison de M. Pokémon. Après l’appel reçu en sortant,
+        revenez au laboratoire, affrontez le rival sur le chemin et terminez les dialogues. Vous pouvez ensuite
+        partir avec des Balls et le Pokédex.\n\nL’horloge du jeu détermine les rencontres et les événements.
+        L’application propose des filtres Matin, Jour et Nuit, mais ne lit pas votre sauvegarde. Les captures,
+        étapes et observations que vous cochez restent propres à la version choisie.
+    </string>
+    <string name="guide_johto_violet_title">
+        2 · Mauville et premier badge
+    </string>
+    <string name="guide_johto_violet_text">
+        Traversez les [[place:route-30|Routes 30]] et 31 pour atteindre [[place:violet-city|Mauville]]. La
+        [[place:sprout-tower-1f|Tour Chétiflor]] constitue un bon entraînement et permet d’obtenir Flash auprès
+        de son sage.\n\nÀ l’Arène, [[character:violet-gym:Albert|Albert]] utilise des Pokémon Vol.
+        [[pokemon:74|Racaillou]], disponible dans les grottes voisines, résiste à leurs attaques ;
+        [[pokemon:179|Wattouat]] aide dans Or/Argent, mais n’est pas capturable dans Cristal. N’importez pas les
+        rencontres d’une version dans une autre.\n\nAprès le badge, appelez ou écoutez le professeur puis
+        récupérez l’œuf au Centre Pokémon. Faites éclore [[pokemon:175|Togepi]] en marchant et montrez-le au
+        laboratoire si vous suivez cet objectif. Descendez la [[place:route-32|Route 32]] et explorez les Ruines
+        d’Alpha lorsque vous souhaitez une pause.
+    </string>
+    <string name="guide_johto_azalea_title">
+        3 · Écorcia, puits et Bois aux Chênes
+    </string>
+    <string name="guide_johto_azalea_text">
+        La [[place:union-cave-1f|Cave Jumelles]] relie la Route 32 à la [[place:route-33|Route 33]] et à
+        [[place:azalea-town|Écorcia]]. Parlez à [[character:kurts-house:Fargas|Fargas]] puis descendez dans le
+        [[place:slowpoke-well-b1f|Puits Ramoloss]]. Battez les sbires et leur chef pour libérer les
+        Pokémon.\n\n[[character:azalea-gym:Hector|Hector]] utilise Insecte. Roche et Feu aident contre
+        [[pokemon:123|Insécateur]], qui devient dangereux si vous le laissez enchaîner ses attaques.
+        Soignez-vous avant le rival à la sortie ouest de la ville.\n\nDans le [[place:ilex-forest|Bois aux
+        Chênes]], faites revenir [[pokemon:83|Canarticho]] vers son propriétaire pour obtenir Coupe. Utilisez-la
+        sur l’arbuste central, puis gagnez la [[place:route-34|Route 34]] et
+        [[place:goldenrod-city|Doublonville]]. La Pension peut accueillir deux parents compatibles.
+    </string>
+    <string name="guide_johto_goldenrod_title">
+        4 · Doublonville et Badge Plaine
+    </string>
+    <string name="guide_johto_goldenrod_text">
+        À [[place:goldenrod-city|Doublonville]], récupérez gratuitement la bicyclette, faites le quiz de la Tour
+        Radio pour la Carte Radio et visitez le Souterrain. Les coiffeurs peuvent augmenter le bonheur d’un
+        Pokémon selon le jour ; leurs détails sont dans l’agenda.\n\n[[character:goldenrod-gym:Blanche|Blanche]]
+        possède [[pokemon:241|Écrémeuh]], dont Roulade devient de plus en plus forte. Combat est efficace ;
+        l’échange contre [[pokemon:66|Machoc]] au Centre Commercial peut aider. Une femelle évite Attraction de
+        cette adversaire. Évitez de lui laisser plusieurs tours pour se soigner et accumuler les
+        dégâts.\n\nAprès la victoire, reparlez à Blanche pour recevoir le badge. Récupérez la
+        [[item:squirt-bottle|Carapuce à O]] au fleuriste ; dans Cristal, une visite préalable auprès de sa sœur
+        sur la Route 36 intervient dans la quête. Gardez des Balls avant d’arroser l’arbre étrange.
+    </string>
+    <string name="guide_johto_ecruteak_title">
+        5 · Simularbre et Rosalia
+    </string>
+    <string name="guide_johto_ecruteak_text">
+        Allez au nord via les [[place:route-35|Routes 35]] et 36. Utilisez la Carapuce à O sur
+        [[pokemon:185|Simularbre]] : ce Pokémon unique n’est pas de type Plante mais Roche. Sauvegardez avant de
+        le provoquer, puis capturez-le. La [[place:route-37|Route 37]] mène à
+        [[place:ecruteak-city|Rosalia]].\n\nAu théâtre de danse, battez les cinq danseuses pour obtenir Surf.
+        Dans la [[place:burned-tower-1f|Tour Cendrée]], la rencontre au sous-sol libère les bêtes légendaires.
+        Consultez leur quête et commencez à noter vos observations si vous les
+        croisez.\n\n[[character:ecruteak-gym:Mortimer|Mortimer]] utilise Spectre. Les attaques Normal et Combat
+        n’affectent pas ses Pokémon, sauf effets particuliers ; leurs doubles types Poison rendent Psy efficace.
+        Une stratégie reposant uniquement sur Sol échoue contre les immunités introduites plus tard, mais il n’y
+        a pas de talents dans ces jeux : consultez les faiblesses de cette génération.
+    </string>
+    <string name="guide_johto_coast_title">
+        6 · Phare, Irisia et Oliville
+    </string>
+    <string name="guide_johto_coast_text">
+        Prenez les [[place:route-38|Routes 38]] et 39 vers [[place:olivine-city|Oliville]]. Gravissez le
+        [[place:olivine-lighthouse-1f|Phare]] : le Pokémon malade a besoin d’un médicament
+        d’[[place:cianwood-city|Irisia]]. Utilisez Surf sur les Routes 40 et 41, sans devoir traverser les
+        Tourb’Îles.\n\nLa pharmacie donne la Potionsecret. [[character:cianwood-gym:Chuck|Chuck]] attend à
+        l’Arène ; son équipe Combat se gère avec Psy ou Vol, mais [[pokemon:62|Tartard]] résiste à plusieurs
+        attaques et craint aussi Électrik. Après le badge, sa femme vous donne Vol.\n\nRapportez le médicament
+        au sommet du Phare, puis affrontez [[character:olivine-gym:Jasmine|Jasmine]]. Feu aide contre ses types
+        Acier, Eau et Sol contre [[pokemon:208|Steelix]]. [[pokemon:81|Magnéti]] possède une double faiblesse
+        Sol. N’utilisez pas la même stratégie contre toute l’équipe sans vérifier les doubles types.
+    </string>
+    <string name="guide_johto_mahogany_title">
+        7 · Lac Colère et repaire d’Acajou
+    </string>
+    <string name="guide_johto_mahogany_text">
+        Revenez à Rosalia et traversez la [[place:route-42|Route 42]] jusqu’à [[place:mahogany-town|Acajou]].
+        Gagnez le [[place:lake-of-rage|Lac Colère]] par la Route 43 ; le bâtiment Rocket demande un péage, qu’on
+        peut éviter par le passage dans les herbes.\n\nSauvegardez avant [[pokemon:130|Léviator]] rouge, puis
+        capturez-le si vous le souhaitez. L’Écaille Rouge peut être échangée contre un Multi Exp. Parlez à
+        [[character:lake-of-rage:Peter|Peter]] et rejoignez-le dans la boutique d’Acajou pour ouvrir le repaire.
+        Désactivez le système de surveillance, recueillez les mots de passe et neutralisez la
+        machine.\n\nL’Arène de [[character:mahogany-gym:Frédo|Frédo]] devient accessible. Feu convient aux
+        Pokémon Glace purs ; [[pokemon:221|Cochignon]] craint aussi Eau et Plante. Vérifiez les objectifs du
+        repaire avant de battre son responsable : des sbires disparaissent après l’événement.
+    </string>
+    <string name="guide_johto_radio_title">
+        8 · Sauver la Tour Radio
+    </string>
+    <string name="guide_johto_radio_text">
+        Après sept badges, la Team Rocket occupe la [[place:goldenrod-city|Tour Radio de Doublonville]].
+        Gravissez-la et battez le faux directeur ; sa clé ouvre la porte du Souterrain. Le rival vous attend
+        aussi dans cette partie de l’histoire.\n\nDans le sous-sol du Souterrain, activez les trois
+        interrupteurs dans l’ordre 3, 2, 1 pour dégager le passage, puis rejoignez l’entrepôt du Centre
+        Commercial. Libérez le directeur et recevez la Carte Magnétique. Revenez à la Tour Radio pour ouvrir les
+        portes du haut.\n\nBattez les derniers responsables. Faites le tour des objets et dresseurs avant la fin
+        de l’occupation si vous visez les succès associés. Retournez ensuite à [[place:mahogany-town|Acajou]]
+        pour poursuivre vers l’est : les [[place:route-44|Routes 44]] et la Route de Glace sont désormais
+        l’objectif.
+    </string>
+    <string name="guide_johto_blackthorn_title">
+        9 · Route de Glace et Ébènelle
+    </string>
+    <string name="guide_johto_blackthorn_text">
+        La [[place:ice-path-1f|Route de Glace]] relie la Route 44 à [[place:blackthorn-city|Ébènelle]]. Les
+        plaques de glace obligent à glisser jusqu’à un obstacle. Récupérez Cascade et poussez les rochers avec
+        Force dans les trous pour créer des points d’arrêt au niveau inférieur.\n\nÀ l’Arène,
+        [[character:blackthorn-gym-1f:Sandra|Sandra]] utilise Dragon. Glace aide contre ses dragons classiques ;
+        [[pokemon:230|Hyporoi]], de types Eau/Dragon, ne possède pas cette faiblesse. Préparez une attaque
+        neutre fiable et des soins. Après la victoire, le badge n’est pas donné immédiatement.\n\nEntrez dans
+        [[place:dragons-den-1f|l’Antre du Dragon]] avec Surf et Siphon. Or/Argent demandent de rapporter le Croc
+        Dragon ; Cristal ajoute un questionnaire au sanctuaire. Les réponses respectueuses déterminent l’attaque
+        spéciale du [[pokemon:147|Minidraco]] offert : considérez les Pokémon comme des compagnons, et cherchez
+        à vous améliorer sans privilégier seulement les plus forts.
+    </string>
+    <string name="guide_johto_league_title">
+        10 · Ligue et ouverture de Kanto
+    </string>
+    <string name="guide_johto_league_text">
+        Retournez au [[place:new-bark-town|Bourg Geon]] pour recevoir la Master Ball. Traversez les
+        [[place:route-27|Routes 27]] et 26 avec Surf et Cascade, puis la [[place:victory-road|Route Victoire]].
+        Le rival vous affronte avant la sortie ; préparez l’équipe avant ce dernier détour.\n\nAu
+        [[place:indigo-plateau-pokecenter-1f|Plateau Indigo]], il faut battre le Conseil des Quatre puis
+        [[character:lances-room:Maître|Peter]]. Prévoyez notamment Glace contre ses dragons, Électrik contre
+        [[pokemon:130|Léviator]] et Eau contre les adversaires qui le craignent. Les CT restent à usage unique ;
+        gardez une couverture variée.\n\nAprès la Ligue, récupérez le Passe Bateau au laboratoire et montez sur
+        le [[place:fast-ship-1f|M/S Aquaria]] depuis Oliville. Cherchez la petite-fille du passager pour
+        terminer la traversée. Vous arrivez à [[place:vermilion-city|Carmin sur Mer]] et pouvez commencer les
+        huit badges de Kanto.
+    </string>
+    <string name="guide_johto_kanto_title">
+        11 · Kanto et réparation de la Centrale
+    </string>
+    <string name="guide_johto_kanto_text">
+        Kanto est plus libre que Johto. Visitez les Arènes accessibles, puis allez à la
+        [[place:power-plant|Centrale]] pour apprendre le vol d’une pièce. Un sbire fuit à
+        [[place:cerulean-city|Azuria]] ; poursuivez-le vers le Pont Pépite. Fouillez l’Arène d’Azuria pour
+        récupérer la pièce, puis rapportez-la à la Centrale.\n\nRencontrez [[character:route-25:Ondine|Ondine]]
+        sur la Route 25 pour qu’elle retourne à son Arène. À [[place:lavender-town|Lavanville]], obtenez
+        l’extension de la radio après la réparation. Près de [[place:vermilion-city|Carmin sur Mer]], réglez la
+        radio sur la Poké Flûte et interagissez avec [[pokemon:143|Ronflex]] pour ouvrir la Cave
+        Taupiqueur.\n\nLa Copieuse de Safrania et le Fan Club de Carmin vous permettent d’obtenir le Passe du
+        Train Magnétique. Son service nécessite la Centrale réparée. Les rencontres de Kanto diffèrent des
+        versions Rouge/Bleu : consultez les lieux dans le jeu actuellement sélectionné.
+    </string>
+    <string name="guide_johto_red_title">
+        12 · Seize badges et Mont Argenté
+    </string>
+    <string name="guide_johto_red_text">
+        Passez par la [[place:digletts-cave|Cave Taupiqueur]] pour rejoindre l’ouest de Kanto. Le Champion de
+        Cramois’Île a déplacé son Arène aux [[place:seafoam-gym|Îles Écume]]. Parlez à
+        [[character:cinnabar-island:Blue|Blue]] à Cramois’Île pour qu’il retourne à [[place:viridian-gym|l’Arène
+        de Jadielle]].\n\nQuand vous avez seize badges, rendez visite au professeur au [[place:pallet-town|Bourg
+        Palette]]. Il ouvre l’accès au [[place:silver-cave-room-1|Mont Argenté]] via la Route 28. Préparez
+        Flash, Surf et une équipe entraînée ; les rencontres de cette zone permettent notamment de chercher
+        [[pokemon:246|Embrylex]].\n\n[[character:silver-cave-room-3:Red|Red]] vous attend au sommet avec des
+        Pokémon de très haut niveau. Sol est utile contre [[pokemon:25|Pikachu]], Combat contre
+        [[pokemon:143|Ronflex]], et des attaques adaptées aux autres membres sont essentielles. Vous pouvez
+        revenir vous entraîner et réorganiser l’équipe avant ce combat facultatif.
+    </string>
+    <string name="guide_johto_roamers_title">
+        Les bêtes légendaires · Rencontre et capture
+    </string>
+    <string name="guide_johto_roamers_text">
+        Dans le sous-sol de la [[place:burned-tower-b1f|Tour Cendrée]], les trois bêtes quittent leur refuge.
+        Dans Or/Argent, [[pokemon:243|Raikou]], [[pokemon:244|Entei]] et [[pokemon:245|Suicune]] errent dans
+        Johto. Dans Cristal, seuls les deux premiers errent : la quête du troisième conduit à un combat
+        fixe.\n\nAprès une première rencontre, le Pokédex du jeu montre leur zone actuelle. Ils peuvent changer
+        de route lors de vos déplacements ; Vol peut bouleverser leur position. Consultez régulièrement le Pokédex
+        du jeu pour retrouver leur route actuelle.\n\nIls sont au niveau 40. Un premier Pokémon de niveau 40 et un Repousse peuvent
+        filtrer les rencontres ordinaires, sous réserve des niveaux de la route. Une attaque de blocage peut
+        limiter la fuite, mais Hurlement reste un risque ; sommeil, vitesse et Balls adaptées aident. Les dégâts
+        et statuts déjà infligés sont conservés d’une rencontre à l’autre.
+    </string>
+    <string name="guide_johto_legends_title">
+        Lugia · Les Tourb’Îles
+    </string>
+    <string name="guide_johto_legends_text">
+        Dans Argent, l’Aile Argent obtenue après la libération de la Tour Radio permet de capturer
+        [[pokemon:249|Lugia]] au niveau 40. Dans Or, obtenez cette aile auprès d’un habitant
+        d’[[place:pewter-city|Argenta]] après la Ligue ; Lugia est alors au niveau 70. Dans Cristal, le même
+        habitant donne l’aile et Lugia est au niveau 60.\n\nRejoignez les [[place:whirl-island-nw|Tourb’Îles]]
+        depuis la Route 41. Surf et Siphon permettent de franchir l’eau et les tourbillons ; Flash facilite
+        le trajet dans les grottes. Explorez les passages jusqu’à l’antre de Lugia.\n\nPréparez des Balls et
+        une attaque de statut, puis sauvegardez avant le combat fixe. Consultez les conditions des succès
+        liés avant la capture.
+    </string>
+    <string name="guide_crystal_suicune_title">
+        Cristal · La quête de Suicune
+    </string>
+    <string name="guide_crystal_suicune_text">
+        Dans Cristal, [[pokemon:245|Suicune]] ne participe pas aux rencontres errantes. Après la
+        [[place:burned-tower-b1f|Tour Cendrée]], vous pouvez le voir au nord d’[[place:cianwood-city|Irisia]],
+        sur la [[place:route-42|Route 42]] et à la sortie du [[place:route-36|Bois aux Chênes, Route 36]]. Ces
+        scènes intéressent les succès : faites-les avant la capture finale.\n\nTerminez l’occupation de la Tour
+        Radio pour obtenir le Glas Transparent. À [[place:ecruteak-city|Rosalia]], les sages vous laissent
+        progresser vers la [[place:tin-tower-1f|Tour Ferraille]] après leurs combats. Une scène avec les trois
+        bêtes y conduit au combat contre Suicune, niveau 40.\n\nSauvegardez avant de déclencher cette scène.
+        Préparez des Balls et une attaque de statut, et vérifiez les conditions des succès avant de capturer le
+        Pokémon. Sa capture est fixe dans Cristal.
+    </string>
+    <string name="guide_breeding_title">
+        Reproduction · Parents et attaques
+    </string>
+    <string name="guide_breeding_text">
+        Déposez deux parents à la [[place:day-care|Pension de la Route 34]]. Il faut un groupe d’œufs commun et
+        des sexes opposés ; [[pokemon:132|Métamorph]] remplace un partenaire, y compris pour certaines espèces
+        asexuées. Les bébés et les légendaires du groupe Inconnu ne produisent pas d’œufs, et deux Métamorph non
+        plus.\n\nEn génération 2, des valeurs individuelles de Défense identiques et de Spécial égales ou
+        séparées de 8 rendent aussi les parents incompatibles. Sans connaître ces valeurs, un outil fondé sur
+        les espèces ne peut garantir un œuf. Des espèces identiques et des Dresseurs d’origine différents
+        accélèrent généralement la production.\n\nL’espèce de l’œuf vient de la mère, ou du parent autre que
+        Métamorph. Le père transmet ses attaques par œuf et ses CT/CS compatibles avec le bébé ; une attaque par
+        niveau peut être transmise si les deux parents la connaissent. Consultez les attaques par œuf de la
+        fiche du bébé. Les quatre emplacements limitent les attaques conservées.\n\nLes œufs éclosent au niveau
+        5 après des pas, par cycles de 256. Gardez une place libre dans l’équipe. Les talents qui accélèrent
+        l’éclosion, les natures, le Nœud Destin et la transmission moderne des objets n’existent pas encore.
+    </string>
+    <string name="guide_friendship_title">
+        Bonheur · Évolutions et bonnes habitudes
+    </string>
+    <string name="guide_friendship_text">
+        En génération 2, le bonheur va de 0 à 255. Une évolution par bonheur demande au moins 220, puis un gain
+        de niveau. [[pokemon:133|Évoli]] devient [[pokemon:196|Mentali]] entre 4 h et 17 h 59, ou
+        [[pokemon:197|Noctali]] entre 18 h et 3 h 59 ; [[pokemon:175|Togepi]] et [[pokemon:42|Nosferalto]]
+        évoluent sans condition d’heure.\n\nMarchez avec le Pokémon dans l’équipe, faites-le progresser en
+        niveau et utilisez les services des coiffeurs du [[place:goldenrod-underground|Souterrain de
+        Doublonville]]. Les vitamines augmentent aussi le bonheur lorsqu’elles peuvent être utilisées. Évitez
+        les K.O. et les remèdes amers vendus dans ce Souterrain.\n\nLa dame de
+        [[place:goldenrod-happiness-rater|Doublonville]] donne une appréciation, pas une valeur exacte. Dans
+        Cristal, gagner un niveau au lieu de capture augmente davantage le bonheur. Une
+        [[item:friend-ball|Copain Ball]] fixe le bonheur initial à 200 ; il faut encore l’augmenter et gagner un
+        niveau.
+    </string>
+    <string name="guide_yellow_gifts_title">
+        Jaune · Trois partenaires offerts
+    </string>
+    <string name="guide_yellow_gifts_text">
+        Dans Jaune, vous pouvez recevoir les trois partenaires des versions Rouge/Bleu sans les choisir au
+        départ. Une maison d’[[place:cerulean-city|Azuria]] offre [[pokemon:1|Bulbizarre]] si le bonheur de
+        votre [[pokemon:25|Pikachu]] atteint 147.\n\nSur la [[place:route-24|Route 24]], un personnage offre
+        [[pokemon:4|Salamèche]]. À [[place:vermilion-city|Carmin sur Mer]], [[pokemon:7|Carapuce]] est offert
+        après le Badge Foudre. Gardez une place dans l’équipe et ouvrez les fiches des personnages sur la carte
+        pour retrouver le don.\n\nLe bonheur de Pikachu dans Jaune est un mécanisme spécifique, différent de
+        celui de la génération 2. Le faire progresser, marcher avec lui et éviter de le déposer ou de l’échanger
+        aide. Il refuse la Pierre Foudre dans sa partie d’origine.
+    </string>
+    <string name="guide_kanto_preparation_title">
+        Captures, CT et choix définitifs
+    </string>
+    <string name="guide_kanto_preparation_text">
+        Avant une capture fixe, sauvegardez et vérifiez vos Balls. [[pokemon:63|Abra]] peut fuir avec Téléport :
+        sommeil et une action rapide peuvent aider. Certains Pokémon apprennent des attaques plus tard que leur
+        évolution, et les pierres d’évolution peuvent réduire les futures possibilités : examinez la fiche avant
+        de décider.\n\nLes CT ne servent qu’une fois dans ces six jeux. Les CS servent plusieurs fois, mais en
+        génération 1 elles ne s’effacent pas normalement. Évitez de disperser vos meilleures CT sur des Pokémon
+        que vous ne comptez pas garder.\n\nLe fossile du Mont Sélénite, le partenaire initial et le Pokémon du
+        Dojo sont des choix exclusifs dans une partie normale. Les échanges complètent ces choix. La boîte
+        active doit avoir de la place : changez-la au PC avant qu’elle soit pleine, surtout avant de partir
+        chercher un légendaire.
+    </string>
+    <string name="guide_johto_balls_title">
+        Les Balls de Fargas et leurs défauts
+    </string>
+    <string name="guide_johto_balls_text">
+        Apportez les Noigrumes à [[character:kurts-house:Fargas|Fargas]], à [[place:azalea-town|Écorcia]], après
+        la libération du puits. Il fabrique des Balls que vous récupérez plus tard. Dans Or/Argent, il ne traite
+        qu’un Noigrume à la fois ; Cristal permet plusieurs exemplaires d’une même couleur.\n\nPlusieurs effets
+        ne correspondent pas à leur description moderne. La Speed Ball ne favorise réellement que
+        [[pokemon:81|Magnéti]], [[pokemon:88|Tadmorv]] et [[pokemon:114|Saquedeneu]]. La Love Ball favorise la
+        même espèce et le même sexe à cause d’un bug. La Moon Ball ne reconnaît pas les évolutions par Pierre
+        Lune.\n\nLe calculateur de capture des fiches reproduit ces règles de génération 2. Réglez le contexte
+        et le niveau de votre Pokémon pour comparer les Balls avant une rencontre unique ; n’appliquez pas les
+        règles des remakes.
+    </string>
+    <string name="guide_mew_glitch_title">
+        Mew · Le bug du dresseur à distance
+    </string>
+    <string name="guide_mew_glitch_text">
+        Préparez Vol, des Balls et une copie de votre sauvegarde. Laissez invaincus le
+        [[character:route-8:Parieur~4376~2008|Parieur]] près du Souterrain de la [[place:route-8|Route 8]] et le
+        [[character:route-25:Gamin~4296~88|Gamin]] de la [[place:route-25|Route 25]] qui possède
+        [[pokemon:79|Ramoloss]].\n\nSortez du Souterrain face au Parieur, faites le pas qui entre dans son champ
+        de vision et ouvrez immédiatement START. Utilisez Vol vers Azuria avant que le combat démarre ; le menu
+        devient ensuite temporairement indisponible.\n\nSur la Route 25, laissez le Gamin marcher vers vous : il
+        faut une case libre entre vous. Battez-le, utilisez Vol vers Lavanville puis entrez sur la Route 8. Le
+        menu s’ouvre seul ; refermez-le pour rencontrer [[pokemon:151|Mew]] au niveau 7.\n\nCette manipulation
+        fonctionne dans Rouge, Bleu et Jaune, mais un dresseur déjà vaincu empêche cette variante. Certains
+        succès verrouillent leur validation après des Pokémon obtenus par bug ou échange : consultez leurs
+        règles avant l’essai.
+    </string>
+    <string name="guide_cinnabar_glitch_title">
+        Cramois’Île · Niveaux élevés et duplication
+    </string>
+    <string name="guide_cinnabar_glitch_text">
+        Dans Rouge/Bleu, la démonstration de capture du vieil homme de [[place:viridian-city|Jadielle]], suivie
+        d’un Vol vers [[place:cinnabar-island|Cramois’Île]] et de Surf le long de sa rive est, peut produire des
+        rencontres qui dépendent du nom du joueur, parfois au-delà du niveau 100.\n\nCertaines rencontres de
+        Pokémon bugs modifient le sixième objet du Sac et permettent la duplication. Ce résultat dépend de la
+        langue et des caractères du nom : il n’est pas garanti de rencontrer [[pokemon:150|Mewtwo]] ou un niveau
+        précis. Jaune corrige cette variante.\n\nAttention aux versions françaises : une rencontre de MissingNo.
+        ou ’M peut figer le jeu. Une sauvegarde copiée hors du jeu est indispensable pour expérimenter ; ne
+        considérez pas la procédure anglophone comme fiable sur une cartouche française. Une rencontre à niveau
+        élevé peut aussi modifier son niveau après gain d’expérience.
+    </string>
+    <string name="guide_clone_gen2_title">
+        Dupliquer un Pokémon et son objet tenu
+    </string>
+    <string name="guide_clone_gen2_text">
+        Cette manipulation interrompt une écriture de sauvegarde : utilisez une copie de test. Au PC, choisissez
+        une boîte avec de la place et sauvegardez avec le Pokémon dans l’équipe. Faites-lui tenir l’objet voulu,
+        puis déposez-le dans la boîte.\n\nChangez de boîte, acceptez la sauvegarde et réinitialisez pendant
+        l’intervalle où la boîte est enregistrée mais pas encore l’équipe. En Or/Argent, cet intervalle se situe
+        au tout début de l’affichage de sauvegarde ; dans Cristal, il est plus tardif, après l’affichage complet
+        du message et avant le son de sauvegarde. Le minutage dépend de la version et du support : compter
+        arbitrairement des secondes n’est pas fiable.\n\nSi l’essai réussit, le Pokémon et l’objet existent dans
+        l’équipe et dans la boîte. Un mauvais minutage peut perdre le Pokémon ou créer un clone invalide.
+        Restaurer la copie de test reste le moyen sûr de revenir à l’état précédent.
+    </string>
+    <string name="guide_glitch_combat_title">
+        Combat · Pièges de la première génération
+    </string>
+    <string name="guide_glitch_combat_text">
+        La table des types diffère de celle des jeux modernes : les attaques Spectre ne touchent pas Psy à cause
+        d’un bug. Les attaques Insecte et Poison sont super efficaces l’une sur l’autre ; Glace est neutre sur
+        Feu dans ces versions.\n\nPuissance réduit la fréquence des coups critiques au lieu de l’augmenter. Les
+        coups critiques s’appuient notamment sur la Vitesse de base et ignorent plusieurs modifications de
+        statistiques. Une attaque rapide à fort taux de critique peut donc avoir un comportement
+        surprenant.\n\nLes capacités de blocage, comme Ligotage, empêchent la cible d’agir pendant la séquence.
+        Un changement de Pokémon peut interrompre la situation. Les fiches des attaques et les faiblesses de
+        l’application affichent les règles du jeu choisi : utilisez-les avant de bâtir une stratégie.
+    </string>
+    <string name="guide_day_monday_title">
+        Lundi · Lucie et mont Sélénite
+    </string>
+    <string name="guide_day_monday_text">
+        [[character:route-40:@sharp-beak|Lucie]] apparaît sur la [[place:route-40|Route 40]] et donne un
+        [[item:sharp-beak|Bec Pointu]] lors de la première rencontre.\n\nLe lundi soir, une danse de
+        [[pokemon:35|Mélofée]] a lieu au [[place:mount-moon-square|Mont Sélénite]] de Kanto. Après leur fuite,
+        brisez le rocher pour trouver une Pierre Lune. Les coiffeurs du Souterrain sont fermés le lundi.\n\nLe
+        [[place:fast-ship-1f|M/S Aquaria]] repart d’Oliville vers Carmin sur Mer les lundis et vendredis, après
+        la première traversée.
+    </string>
+    <string name="guide_day_tuesday_title">
+        Mardi · Concours et Marie
+    </string>
+    <string name="guide_day_tuesday_text">
+        [[character:route-29:@silk-scarf|Marie]] se trouve sur la [[place:route-29|Route 29]] et donne un
+        [[item:silk-scarf|Ruban Rose]] une première fois.\n\nLe [[place:national-park|Parc Naturel]] organise le
+        Concours de capture d’insectes les mardis, jeudis et samedis. Vous conservez un seul Pokémon ; sa
+        rareté, son niveau, ses statistiques et ses PV restants influencent le résultat. Le premier prix est une
+        [[item:sun-stone|Pierre Soleil]].\n\nLe coiffeur aîné du [[place:goldenrod-underground|Souterrain de
+        Doublonville]] travaille les mardis, jeudis et samedis. Sa prestation coûte plus cher que celle du
+        cadet.
+    </string>
+    <string name="guide_day_wednesday_title">
+        Mercredi · Homer et traversée
+    </string>
+    <string name="guide_day_wednesday_text">
+        [[character:lake-of-rage:@black-belt|Homer]] apparaît au [[place:lake-of-rage|Lac Colère]] et donne une
+        [[item:black-belt|Ceinture Noire]] une première fois. Des accès au lac changent selon le jour ; explorez
+        aussi les chemins du nord-ouest.\n\nLe [[place:fast-ship-1f|M/S Aquaria]] quitte Carmin sur Mer pour
+        Oliville les mercredis et dimanches après la première traversée. Le coiffeur cadet travaille au
+        [[place:goldenrod-underground|Souterrain]] les mercredis, vendredis et dimanches.\n\nDans Cristal, le
+        tuteur près du Casino de Doublonville apparaît les mercredis et samedis après la Ligue ; chaque attaque
+        enseignée coûte 4 000 jetons.
+    </string>
+    <string name="guide_day_thursday_title">
+        Jeudi · Jérôme et Concours
+    </string>
+    <string name="guide_day_thursday_text">
+        [[character:route-36:@hard-stone|Jérôme]] attend sur la [[place:route-36|Route 36]] et donne une
+        [[item:hard-stone|Pierre Dure]] lors de la première visite.\n\nC’est aussi un jour de Concours au
+        [[place:national-park|Parc Naturel]]. Préparez un Pokémon capable d’affaiblir ou d’endormir sans mettre
+        K.O. ; les Balls et le temps sont limités. [[pokemon:123|Insécateur]] et [[pokemon:127|Scarabrute]] sont
+        des cibles possibles, mais le résultat dépend du spécimen capturé.\n\nLe coiffeur aîné du
+        [[place:goldenrod-underground|Souterrain]] est disponible aujourd’hui. Vous ne pouvez faire qu’une coupe
+        par jour.
+    </string>
+    <string name="guide_day_friday_title">
+        Vendredi · Vanessa et Lokhlass
+    </string>
+    <string name="guide_day_friday_text">
+        [[character:route-32:@poison-barb|Vanessa]] se trouve au nord de la [[place:route-32|Route 32]] après le
+        premier badge et donne un [[item:poison-barb|Pic Venin]].\n\n[[pokemon:131|Lokhlass]] apparaît chaque
+        vendredi au deuxième sous-sol de la [[place:union-cave-b2f|Cave Jumelles]]. Surf est nécessaire pour
+        atteindre son bassin. Sauvegardez devant lui et préparez des Balls : cette rencontre hebdomadaire
+        revient même après une capture.\n\nLa traversée [[place:fast-ship-1f|Oliville → Carmin sur Mer]] est
+        disponible après le voyage initial. Le coiffeur cadet du Souterrain est également présent.
+    </string>
+    <string name="guide_day_saturday_title">
+        Samedi · Samuel, marché et Concours
+    </string>
+    <string name="guide_day_saturday_text">
+        [[character:blackthorn-city:@spell-tag|Samuel]] apparaît à [[place:blackthorn-city|Ébènelle]] et donne
+        un [[item:spell-tag|Rune Sort]] une première fois.\n\nLe [[place:national-park|Concours de capture
+        d’insectes]] est ouvert. Dans le [[place:goldenrod-underground|Souterrain de Doublonville]], le marchand
+        de remèdes amers est présent le week-end. Ces remèdes coûtent moins cher mais réduisent le bonheur :
+        évitez-les pour une évolution par bonheur.\n\nLe coiffeur aîné travaille aujourd’hui. Dans Cristal, le
+        tuteur près du Casino est aussi disponible après la Ligue, contre 4 000 jetons.
+    </string>
+    <string name="guide_day_sunday_title">
+        Dimanche · Dimitri, CT et bonnes affaires
+    </string>
+    <string name="guide_day_sunday_text">
+        [[character:route-37:@magnet|Dimitri]] apparaît sur la [[place:route-37|Route 37]] et donne un
+        [[item:magnet|Aimant]] une première fois.\n\nAu [[place:goldenrod-dept-store-5f|Centre Commercial de
+        Doublonville]], une dame examine le bonheur de votre premier Pokémon : un bonheur élevé donne la CT
+        Retour, un faible bonheur la CT Frustration. Les offres du personnage précisent les conditions.\n\nLe
+        marchand d’objets du [[place:goldenrod-underground|Souterrain]] est disponible le dimanche matin ; les
+        remèdes amers et le coiffeur cadet sont présents. Le [[place:fast-ship-1f|M/S Aquaria]] quitte Carmin
+        sur Mer pour Oliville après la première traversée.
+    </string>
+    <string name="guide_crystal_buena_title">
+        Cristal · Radio, Buena et œuf de la Pension
+    </string>
+    <string name="guide_crystal_buena_text">
+        Chaque soir entre 18 h et 23 h 59, écoutez le mot de passe de Buena à la radio, puis donnez-le au
+        [[place:radio-tower-2f|deuxième étage de la Tour Radio]]. La Carte Bleue mémorise les points, qui
+        servent à acheter des récompenses. Conserver 30 points permet de demander son numéro de téléphone.\n\nÀ
+        la [[place:day-care|Pension]], Cristal offre un œuf particulier, une seule fois : il peut donner
+        [[pokemon:172|Pichu]], [[pokemon:173|Mélo]], [[pokemon:174|Toudoudou]], [[pokemon:236|Debugant]],
+        [[pokemon:238|Lippouti]], [[pokemon:239|Élekid]] ou [[pokemon:240|Magby]]. Ce choix aléatoire ne doit
+        pas être confondu avec l’œuf de Togepi.\n\nLa [[place:battle-tower-1f|Tour de Combat]], sur la Route 40,
+        propose des séries de combats avec une équipe de trois Pokémon. Préparez les objets tenus et une
+        couverture variée ; les règles et les catégories de niveau diffèrent des générations ultérieures.
+    </string>
+    <string name="guide_retry">
+        Réessayer
+    </string>
+    <string name="guide_empty">
+        Aucun article pour ce jeu.
+    </string>
+    <string name="guide_preview_empty">
+        Information indisponible dans ce jeu.
+    </string>
+    <string name="guide_open_details">
+        Ouvrir la fiche complète
+    </string>
+    <string name="guide_walkthrough">
+        Soluce
+    </string>
+    <string name="guide_side_quests">
+        Quêtes annexes
+    </string>
+    <string name="guide_tips">
+        Astuces
+    </string>
+    <string name="guide_glitches">
+        Bugs
+    </string>
+    <string name="guide_calendar">
+        Agenda
+    </string>
+    <string name="guide_achievements">
+        Succès
+    </string>
+    <string name="guide_walkthrough_description">
+        Du premier partenaire aux derniers combats, étape par étape.
+    </string>
+    <string name="guide_side_quests_description">
+        Légendaires, rencontres uniques et quêtes de collection.
+    </string>
+    <string name="guide_tips_description">
+        Préparer son équipe et comprendre les mécaniques.
+    </string>
+    <string name="guide_glitches_description">
+        Manipulations, versions concernées et précautions.
+    </string>
+    <string name="guide_calendar_description">
+        Les rendez-vous quotidiens, hebdomadaires et liés à l’horloge du jeu.
+    </string>
+    <string name="guide_achievements_description">
+        Objectifs RetroAchievements et suivi local par jeu.
+    </string>
+    <string name="guide_missable">
+        À préparer avant l’événement · Manquable
+    </string>
+    <string name="guide_completed">
+        Terminé
+    </string>
+    <string name="guide_save_error">
+        L’enregistrement a échoué. Réessayez votre action.
+    </string>
+    <string name="guide_capture_progress">
+        Captures locales : %1$d / %2$d
+    </string>
+    <string name="guide_stat">
+        %1$s : %2$d
+    </string>
+    <string name="guide_close">
+        Fermer
+    </string>
+    <string name="guide_related_achievements">
+        Succès liés : %1$d · Manquables : %2$d
+    </string>
+    <string name="guide_unown_progress">
+        Alphabet local : %1$d / %2$d
+    </string>
+    <string name="guide_alph_title">
+        Ruines d’Alpha · Quatre puzzles et 26 lettres
+    </string>
+    <string name="guide_alph_text">
+        Les [[place:ruins-of-alph-outside|Ruines d’Alpha]] se trouvent au sud-ouest de
+        [[place:violet-city|Mauville]]. La première salle propose de reconstituer [[pokemon:140|Kabuto]] :
+        remettez la silhouette complète en place, puis laissez la trappe vous conduire à la salle intérieure.
+        Les ruines ne sont pas un simple détour : chaque puzzle résolu ouvre un nouveau groupe de formes de
+        [[pokemon:201|Zarbi]]. Capturez-en plusieurs, puis revenez au
+        [[place:ruins-of-alph-research-center|centre de recherche]] pour faire développer le mode consacré à
+        leur alphabet.\n\nQuatre silhouettes sont proposées à votre équipe : [[pokemon:140|Kabuto]],
+        [[pokemon:142|Ptéra]], [[pokemon:138|Amonita]] et [[pokemon:250|Ho-Oh]]. Visitez leurs salles depuis les
+        ruines et les accès des [[place:union-cave-1f|Caves Jumelles]]. Surf permet d’atteindre les passages
+        éloignés ; Force sert sur certains trajets. Un seul puzzle ne permet pas de rencontrer les 26 lettres.
+        Après chaque résolution, redescendez capturer les lettres nouvellement libérées et cochez leurs formes
+        dans la fiche de Zarbi.\n\nDans Cristal, l’inscription du fond de chaque salle révèle aussi un passage
+        secret : « ESCAPE » demande une [[item:escape-rope|Corde Sortie]] dans la salle de Kabuto ; « LIGHT »
+        demande Flash dans celle de Ptéra ; « WATER » demande de posséder une [[item:water-stone|Pierre Eau]] en
+        entrant dans celle d’Amonita ; « HO OH » demande Ho-Oh en tête d’équipe dans sa salle. Revenez chercher
+        les objets des pièces ouvertes. Pour le succès des chambres, résolvez les quatre puzzles et ramassez
+        tous ces objets ; pour celui de l’alphabet, suivez les 26 formes séparément.
+    </string>
+    <string name="guide_gifts_title">
+        Johto · Les Pokémon confiés aux voyageurs
+    </string>
+    <string name="guide_gifts_text">
+        Votre voyage commence par un [[pokemon:175|Togepi]] encore dans son œuf. Gardez une place dans l’équipe
+        pour le recevoir après le premier badge, puis marchez jusqu’à l’éclosion. Montrez-le au
+        [[character:elms-lab:Prof. Orme|Professeur Orme]] pour obtenir la [[item:everstone|Pierre Stase]]. L’Œuf
+        Bizarre de la [[place:day-care|Pension]] est un cadeau supplémentaire propre à Cristal ; ses sept
+        espèces possibles ne constituent pas sept cadeaux distincts.\n\nÀ
+        [[place:ecruteak-pokecenter-1f|Rosalia]], rencontrez [[character:ecruteak-pokecenter-1f:Léo|Léo]]. Il
+        rentre ensuite dans sa [[place:bills-familys-house|maison de Doublonville]] et vous confie
+        [[pokemon:133|Évoli]]. Gardez-le jusqu’à avoir décidé de son évolution : bonheur et heure déterminent
+        [[pokemon:196|Mentali]] ou [[pokemon:197|Noctali]], tandis que les pierres donnent les trois évolutions
+        élémentaires. La reproduction avec [[pokemon:132|Métamorph]] permet de conserver une souche d’Évoli et
+        de préparer d’autres évolutions.\n\nÀ [[place:cianwood-city|Irisia]], un habitant effrayé confie son
+        [[pokemon:213|Caratroc]]. Si vous voulez le garder et compléter le succès de Cristal, augmentez son
+        bonheur avant de revenir voir son propriétaire. À l’entrée nord de
+        [[place:goldenrod-city|Doublonville]], le [[pokemon:21|Piafabec]] portant une lettre est une autre
+        livraison : apportez la lettre au destinataire de la [[place:route-31|Route 31]] pour recevoir une CT.
+        Enfin, après avoir atteint les parties profondes du [[place:mount-mortar-b1f|Mont Creuset]], le maître
+        du Karaté vous offre [[pokemon:236|Debugant]] si une place est libre. Ses évolutions dépendent de ses
+        statistiques d’Attaque et de Défense au niveau 20 ; consultez sa fiche avant de choisir son
+        entraînement.
+    </string>
+    <string name="guide_dojo_title">
+        Dojo de Safrania · Kicklee ou Tygnon
+    </string>
+    <string name="guide_dojo_text">
+        Le [[place:fighting-dojo|Dojo de Safrania]] est une salle de combat indépendante de l’Arène de
+        [[character:saffron-gym:Morgane|Morgane]]. Vainquez les Karatékas puis leur maître pour pouvoir choisir
+        [[pokemon:106|Kicklee]] ou [[pokemon:107|Tygnon]]. Kicklee favorise l’Attaque, Tygnon propose notamment
+        des poings élémentaires. Le choix est unique sur une cartouche : le compteur du succès de collection
+        retient un seul des deux, sans vous demander un échange externe.
+    </string>
+    <string name="guide_fossils_title">Fossiles · Amonita, Kabuto et Ptéra</string>
+    <string name="guide_fossils_text">Au [[place:mt-moon-b2f|Mont
+        Sélénite]], choisissez le [[item:helix-fossil|Fossile Nautile]] pour [[pokemon:138|Amonita]], ou le
+        [[item:dome-fossil|Fossile Dôme]] pour [[pokemon:140|Kabuto]]. Conservez le fossile jusqu’à pouvoir
+        atteindre le [[place:cinnabar-lab-fossil-room|Laboratoire de Cramois’Île]]. Remettez-le au scientifique,
+        quittez la salle puis revenez chercher le Pokémon ranimé. L’autre fossile et son évolution ne sont pas
+        exigés par le succès de collection de cette sauvegarde.\n\nLe [[item:old-amber|Vieil Ambre]] suit un
+        autre parcours : revenez à [[place:museum-1f|Argenta]] avec Coupe et utilisez l’accès latéral du Musée
+        pour le recevoir. Faites-le ranimer au même laboratoire pour obtenir [[pokemon:142|Ptéra]]. Les Pokémon
+        fossiles apparaissent au niveau 30 dans ces versions ; Amonita et Kabuto évoluent au niveau 40. Gardez
+        chaque espèce jusqu’à l’avoir enregistrée, puis entraînez-la : relâcher un cadeau ou un fossile avant
+        son évolution peut compromettre le succès de collection.</string>
+    <string name="guide_hooh_title">Ho-Oh · La Tour Ferraille</string>
+    <string name="guide_hooh_text">
+        Dans Or, l’Arcenci’Aile obtenue après la libération de la Tour Radio permet de rejoindre
+        [[pokemon:250|Ho-Oh]] au sommet de la [[place:tin-tower-1f|Tour Ferraille]], au niveau 40. Dans Argent,
+        obtenez cette aile auprès d’un habitant d’[[place:pewter-city|Argenta]] après la Ligue ; Ho-Oh est
+        alors au niveau 70.\n\nDans Cristal, capturez Raikou, Entei et Suicune dans votre partie, puis parlez
+        aux sages de la Tour Ferraille pour recevoir l’Arcenci’Aile. Des échanges ne remplacent pas ces
+        captures. Ho-Oh est au niveau 60.\n\nPréparez des Balls et une attaque de statut, puis sauvegardez
+        avant le combat fixe. Consultez les conditions des succès liés avant la capture.
+    </string>
+</resources>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_hoenn_start_title">1 · Bourg-en-Vol et le premier partenaire</string>
+    <string name="guide_hoenn_start_text">
+        Réglez la pendule de votre chambre à [[place:littleroot-town|Bourg-en-Vol]].
+        Sur la Route 101, ouvrez le sac du Professeur Seko
+        pour choisir [[pokemon:252|Arcko]], [[pokemon:255|Poussifeu]] ou [[pokemon:258|Gobou]], puis sauvez-le.
+        Ce choix est définitif sans échange.\n\nPassez par Rosyères et remontez la Route 103 pour affronter
+        votre rival. Revenez au laboratoire : Seko remet le Pokédex et votre rival donne des Balls.
+        Votre mère vous offre les Chaussures de Sport au départ.\n\nPartez à l’ouest par la Route 102 vers
+        Clémenti-Ville. Rencontrez Norman et accompagnez Timmy pour sa capture ; cette Arène attendra quatre
+        autres badges. Continuez par la Route 104 vers le Bois Clémenti.
+    </string>
+    <string name="guide_hoenn_rustboro_title">2 · Mérouville et la mission de Devon</string>
+    <string name="guide_hoenn_rustboro_text">
+        Traversez le Bois Clémenti et aidez le chercheur de Devon contre un sbire : Magma dans Rubis,
+        Aqua dans Saphir et Émeraude. Rejoignez Mérouville par la Route 104. Roxanne utilise des Pokémon
+        Roche ; une attaque Eau, Plante ou Combat facilite le premier badge.\n\nUn employé est ensuite
+        dépouillé des biens de Devon. Suivez le voleur par la Route 116 jusqu’au Tunnel Mérazon,
+        récupérez les biens et libérez le Goélise de M. Marco. Revenez à Devon pour recevoir vos missions,
+        la lettre pour Pierre et le PokéNav.\n\nCoupe vient de la maison de Mérouville et peut être utilisée
+        après le Badge Roche. Retrouvez M. Marco dans sa maison de la Route 104 : il vous conduit à Myokara,
+        puis à Poivressel. Gardez la lettre et les biens jusqu’à leur remise.
+    </string>
+    <string name="guide_hoenn_dewford_title">3 · Myokara, Pierre et Poivressel</string>
+    <string name="guide_hoenn_dewford_text">
+        À Myokara, le pêcheur donne la Canne. Entraînez un partenaire capable de résister au type Combat
+        avant l’Arène de Bastien. Le Badge Poing autorise Flash ; un montagnard remet cette CS à l’entrée
+        de la Grotte Granite.\n\nDescendez dans la grotte et remettez la lettre à Pierre. Revenez ensuite
+        à Devon pour recevoir le Multi Exp, utile pour entraîner une nouvelle capture. Demandez à M. Marco
+        de vous emmener à Poivressel.\n\nCherchez le Capitaine Poupe au chantier naval, puis au Musée
+        Océanographique. Livrez les biens et battez les sbires qui interviennent. La Route 110 est alors
+        votre prochaine étape ; préparez l’équipe et ses soins avant le combat du rival.
+    </string>
+    <string name="guide_hoenn_mauville_title">4 · Lavandia, vélo et Éclate-Roc</string>
+    <string name="guide_hoenn_mauville_text">
+        Remontez la Route 110, affrontez le rival et rejoignez Lavandia. Le magasin de Rodolphe prête un
+        Vélo Course ou un Vélo Cross : revenez le voir pour changer gratuitement. Les passages rapides et
+        les dalles fissurées demandent le Course ; les sauts et rails demandent le Cross.\n\nBattez Timmy
+        devant l’Arène, puis Voltère pour le Badge Dynamo. Une maison de Lavandia donne Éclate-Roc ;
+        le badge permet de briser les rochers sur le terrain.\n\nRepassez au Tunnel Mérazon pour libérer
+        le passage entre Mérouville et Vergazon et recevoir Force. Remontez ensuite la Route 111.
+        Le désert reste inaccessible sans Lunettes Sable : contournez-le par le Chemin Ardent et la Route 113.
+    </string>
+    <string name="guide_hoenn_volcano_title">5 · Le volcan et le Badge Chaleur</string>
+    <string name="guide_hoenn_volcano_text">
+        Traversez les cendres de la Route 113 vers Autéquia, puis la Route 114 jusqu’au Site Météore.
+        Après la scène du météorite, revenez au téléphérique du Mont Chimnée. Dans Rubis, combattez Magma ;
+        dans Saphir, Aqua ; dans Émeraude, Magma occupe le sommet.\n\nDésactivez la machine après le combat
+        et récupérez le Météorite. Vous pouvez le rendre au Professeur Kosmo à Autéquia. Descendez le Sentier
+        Sinuroc pour rejoindre Vermilava et affronter Adriane. Le Badge Chaleur autorise Force.\n\nLe rival
+        vous remet les Lunettes Sable après l’Arène : explorez maintenant le désert de la Route 111.
+        La vieille dame près des sources offre un œuf si une place est libre ; il donne [[pokemon:360|Okéoké]].
+        Votre prochain badge se trouve chez Norman, à Clémenti-Ville.
+    </string>
+    <string name="guide_hoenn_petalburg_title">6 · Norman et les nouveaux passages de Surf</string>
+    <string name="guide_hoenn_petalburg_text">
+        Revenez à Clémenti-Ville avec quatre badges. Les salles de l’Arène annoncent leurs spécialités :
+        adaptez vos attaques avant chaque porte. Contre [[pokemon:289|Monaflèmit]], profitez des tours
+        perdus par Absentéisme pour vous soigner ou vous protéger.\n\nAprès Norman, recevez Surf auprès
+        du père de Timmy ; le Badge Balancier permet de l’utiliser. Traversez l’eau de la Route 118 depuis
+        Lavandia, puis montez vers la Route 119.\n\nAvant de repartir loin, faites les détours rendus
+        possibles par Surf : New Lavandia avec la mission de Voltère, la maison de la Route 123 et les routes
+        maritimes. Ces détours ne remplacent pas la progression vers l’Institut Météo.
+    </string>
+    <string name="guide_hoenn_fortree_title">7 · Institut Météo et Cimetronelle</string>
+    <string name="guide_hoenn_fortree_text">
+        Sur la Route 119, libérez l’Institut Météo des sbires. Une place libre permet de recevoir
+        [[pokemon:351|Morphéo]]. Au-delà du pont, le rival vous affronte puis remet Vol.
+        Continuez jusqu’à Cimetronelle.\n\nUne présence invisible bloque l’accès à l’Arène. Cherchez Pierre
+        sur la Route 120 : utilisez le Devon Scope pour révéler [[pokemon:352|Kecleon]], puis revenez retirer
+        l’obstacle. Préparez des attaques efficaces contre les types Vol d’Alizée ; son Badge Plume autorise Vol.
+        \n\nPoursuivez par les Routes 120 et 121 vers Nénucrique. Le Parc Safari est facultatif.
+        Pour avancer dans l’histoire, gagnez le Mont Mémoria par Surf depuis la Route 122.
+    </string>
+    <string name="guide_hoenn_hideouts_title">8 · Mont Mémoria et les repaires</string>
+    <string name="guide_hoenn_hideouts_text">
+        Montez au sommet extérieur du Mont Mémoria. Dans Rubis et Saphir, suivez ensuite le vol du sous-marin
+        à Poivressel, puis le repaire de la team à Nénucrique. Dans Émeraude, recevez d’abord le Badge Magma
+        au sommet et ouvrez le repaire Magma sur le Sentier Sinuroc ; la scène de Groudon précède le vol
+        du sous-marin à Poivressel et le repaire Aqua de Nénucrique.\n\nDans le repaire de Nénucrique,
+        explorez les téléporteurs avant le dernier combat. Récupérez la Master Ball et distinguez les objets
+        des [[pokemon:101|Électrode]] qui les imitent. Sauvegardez avant ces combats fixes.\n\nUne fois
+        le sous-marin parti, le passage maritime à l’est est libre. Traversez le Chenal 124 vers Algatia.
+        Les deux repaires d’Émeraude ne doivent pas être remplacés par l’itinéraire plus court de Rubis/Saphir.
+    </string>
+    <string name="guide_hoenn_mossdeep_title">9 · Algatia et la Caverne Fondmer</string>
+    <string name="guide_hoenn_mossdeep_text">
+        Lévy et Tatia livrent un combat double à l’Arène d’Algatia. Préparez deux partenaires complémentaires
+        et évitez de ne compter que sur une attaque Sol : les talents et types adverses peuvent la neutraliser.
+        Le Badge Esprit autorise Plongée.\n\nDans Rubis/Saphir, Pierre remet la CS chez lui. Dans Émeraude,
+        aidez-le d’abord au Centre Spatial contre Magma, puis retrouvez-le dans sa maison pour Plongée.
+        Utilisez les zones d’eau sombre ; les niveaux sous-marins de l’application permettent de repérer les accès.
+        \n\nSur le Chenal 128, cherchez le sous-marin et remontez dans la Caverne Fondmer. Emportez Surf,
+        Plongée, Force et Éclate-Roc pour ses passages. Le chef adverse réveille le légendaire ; après la scène,
+        rejoignez Atalanopolis par l’accès sous-marin du Chenal 126.
+    </string>
+    <string name="guide_hoenn_sootopolis_title">10 · Atalanopolis et la crise climatique</string>
+    <string name="guide_hoenn_sootopolis_text">
+        Dans Rubis/Saphir, entrez dans la Grotte Origine et affrontez [[pokemon:383|Groudon]] dans Rubis
+        ou [[pokemon:382|Kyogre]] dans Saphir. Sauvegardez avant le combat et préparez des Balls et un statut
+        sans mettre la cible K.O. La fin de la crise ouvre l’Arène de Marc.\n\nDans Émeraude, Groudon et
+        Kyogre s’affrontent en ville : parlez à Marc dans la Grotte Origine, indiquez le Pilier Céleste,
+        puis gagnez-le depuis le Chenal 131. Réveillez [[pokemon:384|Rayquaza]] au sommet et revenez
+        à Atalanopolis pour la scène qui apaise les deux légendaires. L’Arène est alors celle de Juan.
+        \n\nFranchissez les dalles de glace en passant une fois sur chaque dalle du palier avant les escaliers.
+        Le huitième badge autorise Cascade : la CS se ramasse dans la Grotte Origine dans Rubis/Saphir,
+        et se reçoit auprès de Marc dans Émeraude.
+        Groudon et Kyogre n’y sont pas capturés pendant cette scène : leurs grottes viennent après la Ligue.
+    </string>
+    <string name="guide_hoenn_league_title">11 · Route Victoire et Ligue de Hoenn</string>
+    <string name="guide_hoenn_league_text">
+        Rejoignez Éternara depuis le Chenal 128 et remontez la chute avec Cascade. Soignez l’équipe avant
+        la Route Victoire ; Surf, Force et Éclate-Roc servent dans la traversée, et Flash aide à s’orienter.
+        Préparez le combat de Timmy et rejoignez la sortie nord.\n\nLa Ligue enchaîne Damien (Ténèbres),
+        Spectra (Spectre), Glacia (Glace) et Aragon (Dragon), sans retour au Centre Pokémon entre les combats.
+        Achetez de quoi soigner, ranimer et restaurer les PP ; répartissez les réponses aux types sur plusieurs
+        partenaires plutôt que sur une seule attaque.\n\nLe Maître est Pierre dans Rubis/Saphir, avec une
+        équipe dominée par Roche et Acier, et Marc dans Émeraude, avec une équipe Eau. Après la victoire,
+        l’enregistrement au Panthéon ouvre les activités de fin de jeu et la chasse au Pokémon errant.
+    </string>
+    <string name="guide_hoenn_postgame_title">12 · Après la Ligue : National et défis</string>
+    <string name="guide_hoenn_postgame_text">
+        Dans Rubis, [[pokemon:381|Latios]] devient errant ; dans Saphir, [[pokemon:380|Latias]]. Dans Émeraude,
+        la réponse rouge ou bleue à votre mère choisit Latias ou Latios. L’autre exige l’événement externe
+        du Passe Éon : il ne constitue pas une rencontre ordinaire.\n\nDans Émeraude, Seko remet le
+        Pokédex National après la Ligue. Dans Rubis/Saphir, il se débloque par un échange avec un partenaire
+        qui transmet son activation, notamment Émeraude ou Rouge Feu/Vert Feuille. Revenez chez Pierre
+        à Algatia pour le [[pokemon:374|Terhal]] offert.\n\nLe bateau dessert la Tour de Combat dans
+        Rubis/Saphir et la Zone de Combat dans Émeraude. Dans cette dernière, l’Institut Météo signale les
+        grottes Terra et Marine de Groudon et Kyogre ; Pierre propose aussi un combat au Site Météore.
+        Retournez au Pilier Céleste avec le Vélo Course pour ses sols fissurés et la capture de Rayquaza.
+    </string>
+    <string name="guide_hoenn_regis_title">Les trois golems et le Sanctuaire</string>
+    <string name="guide_hoenn_regis_text">
+        Préparez [[pokemon:369|Relicanth]], [[pokemon:321|Wailord]], Surf, Plongée et Tunnel.
+        Depuis Pacifiville, naviguez dans les courants vers la zone de Plongée du Chenal 134, puis remontez
+        devant l’inscription sous-marine. Dans le Sanctuaire, utilisez Tunnel devant le texte du fond.
+        \n\nDans la seconde salle, placez Relicanth en tête et Wailord en dernier dans Rubis/Saphir ;
+        inversez ces deux positions dans Émeraude. Lisez le texte du fond pour ouvrir les trois ruines.
+        Sauvegardez avant chaque combat : [[pokemon:377|Regirock]], [[pokemon:378|Regice]] et
+        [[pokemon:379|Registeel]] sont au niveau 40.\n\nRuines Désert : depuis l’inscription, deux pas
+        à droite et deux vers le bas puis Force dans Rubis/Saphir ; deux à gauche et deux vers le bas puis
+        Éclate-Roc dans Émeraude. Grotte Island : attendez environ deux minutes après lecture dans
+        Rubis/Saphir ; longez une fois les parois dans Émeraude. Tombeau Antique : au centre, utilisez
+        Vol dans Rubis/Saphir et Flash dans Émeraude.
+    </string>
+    <string name="guide_hoenn_fossils_title">Fossiles du désert : Lilia et Anorith</string>
+    <string name="guide_hoenn_fossils_text">
+        Les Lunettes Sable permettent d’explorer le désert après Adriane. Dans Rubis/Saphir, choisissez
+        directement le Fossile Racine ou le Fossile Griffe : l’autre disparaît. Dans Émeraude,
+        montez la Tour Mirage avec le Vélo Course et Éclate-Roc ; le choix au sommet fait s’effondrer la tour.
+        \n\nDevon à Mérouville ranime la Racine en [[pokemon:345|Lilia]] et la Griffe en [[pokemon:347|Anorith]].
+        Remettez le fossile au scientifique, sortez puis revenez avec une place libre. Les deux espèces
+        évoluent au niveau 40 ; conservez-les pour enregistrer aussi Vacilys ou Armaldo.\n\nÉmeraude permet
+        de retrouver le fossile non choisi dans la Voie du Désert, accessible après la Ligue depuis la maison
+        du maniaque des fossiles sur la Route 114. Cette seconde récupération n’existe pas dans Rubis/Saphir.
+    </string>
+    <string name="guide_hoenn_optional_title">Détours : Barpau, New Lavandia et événements</string>
+    <string name="guide_hoenn_optional_text">
+        [[pokemon:349|Barpau]] se pêche sur seulement six cases de la Route 119, déterminées par le jeu.
+        Testez méthodiquement chaque case d’eau avec plusieurs lancers : un échec isolé ne prouve pas son absence.
+        Le changement de phrase à la mode à Myokara peut renouveler ces cases. Augmentez sa beauté avec
+        des Pokéblocs adaptés avant de lui faire gagner un niveau pour obtenir [[pokemon:350|Milobellus]].
+        \n\nAprès Surf, acceptez la mission de Voltère, gagnez New Lavandia et coupez le générateur.
+        Revenez chercher sa récompense. Explorez aussi le bateau abandonné ; Plongée permet d’atteindre
+        ses pièces submergées, ses clés et le Scanner, à remettre au Capitaine Poupe.\n\nLe Passe Éon
+        donne l’Île du Sud. Émeraude possède en plus l’Île lointaine, le Roc Nombri et l’Île Aurore.
+        Ces destinations exigent des objets d’événement externe et ne se débloquent pas simplement en terminant
+        l’histoire. L’application décrit les lieux sans distribuer les tickets ni simuler un événement.
+    </string>
+    <string name="guide_hoenn_preparation_title">Préparer une équipe et les captures de Hoenn</string>
+    <string name="guide_hoenn_preparation_text">
+        Consultez les attaques du jeu avant d’utiliser une CT : elle est consommée en génération 3.
+        Le Maître des Capacités d’Autéquia réapprend une attaque de niveau contre une Écaille Cœur ;
+        l’Effaceur de Nénucrique permet notamment de retirer une CS. Gardez les tuteurs uniques pour une
+        espèce que vous comptez conserver.\n\nPour les captures fixes, sauvegardez avant de parler au Pokémon,
+        réduisez ses PV et appliquez sommeil ou paralysie. Vérifiez qu’une attaque résiduelle ou un statut
+        n’achèvera pas la cible. Le calculateur tient compte des tours pour la Chrono Ball et d’une espèce déjà
+        enregistrée pour la Bis Ball ; les règles du Parc Safari sont différentes.\n\nLe National ne rend
+        pas toutes les espèces capturables dans une seule version. Les échanges d’évolution, exclusivités et
+        événements restent nécessaires. Cochez chaque capture dans le jeu où elle a eu lieu ; les outils de
+        reproduction et de bonheur servent à préparer les évolutions sans lire votre sauvegarde.
+    </string>
+    <string name="guide_hoenn_bugs_title">Défauts GBA et prudence avec les glitches</string>
+    <string name="guide_hoenn_bugs_text">
+        Dans Rubis/Saphir, les IV du Pokémon errant sont tronqués lors de leur restitution : les PV gardent leur
+        valeur, l’Attaque est limitée et les autres IV sont nuls. Émeraude corrige ce défaut. Ce problème du jeu
+        ne se corrige pas en recommençant simplement une rencontre avec le même errant.\n\nLe glitch de
+        duplication de la Tour de Combat d’Émeraude exploite une sauvegarde partielle entre boîtes et équipe.
+        Une mauvaise séquence peut supprimer des Pokémon ou endommager une sauvegarde ; les transferts d’objets
+        et les manipulations de sauvegarde ne sont pas automatisés par l’application. Gardez une copie indépendante
+        avant toute expérimentation. Ce procédé ne vaut pas pour la Tour de Combat de Rubis/Saphir.
+        \n\nLes manipulations de Baie Grena et d’œufs corrompus peuvent altérer des données au-delà du
+        Pokémon visé. Elles ne font pas partie d’une progression normale. Les conditions d’un succès peuvent
+        interdire ces procédés : une collection cochée dans Pokémaps ne prouve pas leur conformité.
+    </string>
+</resources>

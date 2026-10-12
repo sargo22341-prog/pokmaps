@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Guides GBA : soluces de Hoenn, Kanto et Sevii, quêtes, astuces, bugs et calendrier de Hoenn.
 - Les cinq jeux GBA proposent les outils de reproduction et de bonheur, avec encens, Électacle et Pierre Stase d’Émeraude.
 - Les cartes donnent accès à l’Île Mirage et aux îles événementielles ; les remakes démarrent à Bourg Palette et les Îles Sevii ont un fond océan.
 - Les niveaux sous-marins de Hoenn apparaissent uniquement pour le chenal sélectionné possédant un accès de Plongée.

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_hoenn_mirage_title">Île Mirage · Un tirage quotidien</string>
+    <string name="guide_hoenn_mirage_text">
+        À [[place:pacifidlog-town|Pacifiville]], interrogez le vieil homme qui regarde au-dehors.
+        L’Île Mirage apparaît sur le Chenal 130
+        si le nombre du jour correspond aux seize bits de poids faible de la personnalité d’un Pokémon de
+        votre équipe. Les Pokémon dans les boîtes ne sont pas testés : changez l’équipe et reparlez-lui.
+        \n\nLe tirage évolue avec les jours de l’horloge du jeu ; ce n’est ni un jour fixe de la semaine
+        ni une garantie après un nombre de visites. Pokémaps ne connaît pas les personnalités ni le tirage de
+        votre sauvegarde : son plan conditionnel indique le lieu, pas sa disponibilité réelle.
+        \n\nQuand l’île est visible, gagnez-la avec Surf. Vous pouvez y rencontrer [[pokemon:360|Okéoké]]
+        et y ramasser la Baie Lichii. Ne confondez pas cette île avec la Tour Mirage du désert d’Émeraude,
+        qui possède d’autres conditions et abrite les fossiles.
+    </string>
+    <string name="guide_hoenn_tides_title">Grotte Tréfonds · Les marées</string>
+    <string name="guide_hoenn_tides_text">
+        Sur le Chenal 125, la Grotte Tréfonds suit l’heure réglée dans la partie. La marée est haute de
+        9 h à 14 h 59 et de 21 h à 2 h 59 ; elle est basse de 3 h à 8 h 59 et de 15 h à 20 h 59.
+        Sortez à l’extérieur puis rentrez pour faire appliquer un changement de marée.
+        \n\nÀ marée haute, rassemblez quatre Coquillages ; à marée basse, quatre Sels Tréfonds.
+        Le vieil homme à l’entrée échange ces matériaux contre un Grelot Zen. La salle de glace est accessible
+        seulement à marée basse : prenez aussi Force pour les passages qui l’exigent.
+        \n\nLe sélecteur de niveaux de la carte permet d’examiner les deux plans indépendamment de l’heure
+        du téléphone. Il ne change pas l’horloge de votre partie et ne certifie pas la disponibilité des objets.
+    </string>
+    <string name="guide_hoenn_lottery_title">Nénucrique · La loterie du jour</string>
+    <string name="guide_hoenn_lottery_text">
+        Au rez-de-chaussée du Centre Commercial de Nénucrique, faites vérifier le numéro quotidien.
+        Le jeu compare ses chiffres de droite à gauche aux identifiants des dresseurs d’origine des Pokémon
+        de l’équipe et des boîtes ; les œufs sont exclus. Des Pokémon échangés avec plusieurs dresseurs
+        donnent donc davantage d’identifiants à comparer.
+        \n\nDeux chiffres concordants donnent un PP Plus, trois un Multi Exp, quatre un Rappel Max et
+        cinq une Master Ball. Une concordance d’un seul chiffre ne donne pas de lot dans ces jeux.
+        Un même numéro ne garantit rien pour votre collection : le meilleur résultat dépend des identifiants
+        présents dans votre sauvegarde.
+        \n\nRevenez lors d’un nouveau jour du jeu. Il ne s’agit pas de la loterie hebdomadaire de Johto ;
+        aucune synchronisation avec l’heure du téléphone ni lecture automatique des boîtes n’est nécessaire.
+    </string>
+    <string name="guide_hoenn_clock_title">Horloge de Hoenn · Baies et rendez-vous</string>
+    <string name="guide_hoenn_clock_text">
+        Hoenn possède une horloge pour les baies, les tirages quotidiens et les marées, mais pas les
+        rencontres matin/jour/nuit de Johto. Revenez voir les personnages donnant une baie quotidienne,
+        notamment le Maître des Baies de la Route 123, et surveillez les arbres plantés : arrosage et récolte
+        suivent le temps du jeu.
+        \n\nSur cartouche, une pile épuisée arrête les événements temporels sans empêcher de charger la
+        sauvegarde. Sur émulateur, vérifiez le fonctionnement de l’horloge temps réel et conservez une copie
+        avant de modifier les réglages ; l’heure du téléphone n’est pas forcément celle de la partie.
+        \n\nLa Maison Piège dépend des badges et du Panthéon, pas d’un lendemain. Les remakes n’ont
+        pas ce calendrier de Hoenn. Les articles décrivent les conditions : Pokémaps ne prédit ni le numéro
+        gagnant ni l’apparition de l’Île Mirage et ne modifie aucune horloge.
+    </string>
+    <string name="guide_hoenn_trick_house_title">Maison Piège · Huit défis de scénario</string>
+    <string name="guide_hoenn_trick_house_text">
+        Entrez dans la Maison Piège sur la Route 110 et repérez l’endroit où le Maître des Pièges s’est caché.
+        Dans chaque salle, cherchez le parchemin portant le mot de passe, puis utilisez-le à la porte du fond.
+        Préparez les capacités de terrain demandées et revenez parler au maître après la sortie.
+        \n\nLe premier défi est disponible dès votre arrivée. Les défis deux à sept demandent respectivement
+        les troisième, quatrième, cinquième, sixième, septième et huitième badges ; le dernier attend la victoire
+        à la Ligue. Attendre une journée ne remplace pas ces conditions.
+        \n\nLes salles et récompenses diffèrent entre Rubis/Saphir et Émeraude. La dernière récompense est
+        une décoration de Base Secrète. Ce lieu complète l’histoire sans condition de jour de la semaine :
+        revenez après vos nouveaux badges, plutôt qu’à une heure particulière.
+    </string>
+</resources>
