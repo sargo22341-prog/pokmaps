@@ -1,0 +1,450 @@
+{
+  "game_id": 791,
+  "title": "Pokémon Sapphire Version",
+  "console": "Game Boy Advance",
+  "source": "https://retroachievements.org/game/791",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 31146,
+      "Title": "Rivalry by the River",
+      "Description": "Defeat Brendan or May for the first time",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:18:49"
+    },
+    {
+      "ID": 31147,
+      "Title": "Off the Beaten Path",
+      "Description": "Defeat Brendan or May for the second time",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:51"
+    },
+    {
+      "ID": 31148,
+      "Title": "Tensions in the Tropics",
+      "Description": "Defeat Brendan or May for the third time",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:45"
+    },
+    {
+      "ID": 31149,
+      "Title": "Coastal Conclusion",
+      "Description": "Defeat Brendan or May for the fourth time",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 05:19:41"
+    },
+    {
+      "ID": 31151,
+      "Title": "Probing the Integration of Nature and Science",
+      "Description": "Defeat the Gym Leader in Rustboro City and earn the Stone Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:34"
+    },
+    {
+      "ID": 31152,
+      "Title": "A Tiny Island in the Blue Sea",
+      "Description": "Defeat the Gym Leader in Dewford Town and earn the Knuckle Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:29"
+    },
+    {
+      "ID": 31153,
+      "Title": "The Bright and Shiny City of Fun",
+      "Description": "Defeat the Gym Leader in Mauville City and earn the Dynamo Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:25"
+    },
+    {
+      "ID": 31154,
+      "Title": "An Excellent Place for Relaxing",
+      "Description": "Defeat the Gym Leader in Lavaridge Town and earn the Heat Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:20"
+    },
+    {
+      "ID": 31155,
+      "Title": "Where People Mingle with Nature",
+      "Description": "Defeat the Gym Leader in Petalburg City and earn the Balance Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:16"
+    },
+    {
+      "ID": 31156,
+      "Title": "The Treetop City That Frolics with Nature",
+      "Description": "Defeat the Gym Leader in Fortree City and earn the Feather Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:11"
+    },
+    {
+      "ID": 31157,
+      "Title": "Our Slogan? Cherish Pokémon!",
+      "Description": "Defeat the Gym Leaders in Mossdeep City and earn the Mind Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:06"
+    },
+    {
+      "ID": 31158,
+      "Title": "The Mystical City Where History Slumbers",
+      "Description": "Defeat the Gym Leader in Sootopolis City and earn the Rain Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:19:02"
+    },
+    {
+      "ID": 31159,
+      "Title": "Heated Confrontation",
+      "Description": "Defeat Archie on Mt. Chimney",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:18:57"
+    },
+    {
+      "ID": 31160,
+      "Title": "Clearing the Air",
+      "Description": "Defeat Shelly at the Weather Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:18:53"
+    },
+    {
+      "ID": 31161,
+      "Title": "Hidden in Plain Sight",
+      "Description": "Defeat Matt in the Aqua Hideout",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:17:50"
+    },
+    {
+      "ID": 31162,
+      "Title": "Depths of Despair",
+      "Description": "Defeat Archie in the Seafloor Cavern",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:18:44"
+    },
+    {
+      "ID": 31163,
+      "Title": "One Ball to Rule Them All",
+      "Description": "Obtain the Master Ball in the Aqua Hideout",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2019-12-25 05:18:40"
+    },
+    {
+      "ID": 31164,
+      "Title": "Air of Determination",
+      "Description": "Defeat Wally in Victory Road",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-25 05:18:35"
+    },
+    {
+      "ID": 31169,
+      "Title": "Champion of Hoenn",
+      "Description": "Become the new Pokémon League Champion",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "win_condition",
+      "DateModified": "2019-12-25 05:18:28"
+    },
+    {
+      "ID": 31171,
+      "Title": "Lord of the Sea",
+      "Description": "Catch Kyogre without using the Master Ball",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2020-04-03 11:39:31"
+    },
+    {
+      "ID": 31172,
+      "Title": "Lord of the Skies",
+      "Description": "Catch Rayquaza without using the Master Ball",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2020-04-03 11:39:30"
+    },
+    {
+      "ID": 31173,
+      "Title": "Stone Sentinel",
+      "Description": "Catch Regirock without using the Master Ball",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2020-04-03 11:39:29"
+    },
+    {
+      "ID": 31174,
+      "Title": "Sub-Zero Sentinel",
+      "Description": "Catch Regice without using the Master Ball",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2020-04-03 11:39:28"
+    },
+    {
+      "ID": 31175,
+      "Title": "Steel Sentinel",
+      "Description": "Catch Registeel without using the Master Ball",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2020-04-03 11:39:28"
+    },
+    {
+      "ID": 31176,
+      "Title": "Scarlet Soul",
+      "Description": "Catch Latias",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 05:17:55"
+    },
+    {
+      "ID": 92019,
+      "Title": "That's Watt Friends Are For",
+      "Description": "Obtain Wattson's reward after helping him with New Mauville's generator",
+      "Points": 5,
+      "DisplayOrder": 1,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:52"
+    },
+    {
+      "ID": 92012,
+      "Title": "Breaking the Illusion",
+      "Description": "Obtain the final reward from the Trick Master",
+      "Points": 10,
+      "DisplayOrder": 2,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:30"
+    },
+    {
+      "ID": 92021,
+      "Title": "For Whom the Shell Tolls",
+      "Description": "Obtain a Shell Bell from the old man in Shoal Cave",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:59"
+    },
+    {
+      "ID": 92020,
+      "Title": "Echoes from the Deep",
+      "Description": "Return the Scanner to Captain Stern",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:56"
+    },
+    {
+      "ID": 92024,
+      "Title": "The Calm Beyond",
+      "Description": "Return the Blue Orb to its original resting place at Mt. Pyre",
+      "Points": 3,
+      "DisplayOrder": 5,
+      "type": null,
+      "DateModified": "2019-12-25 18:32:56"
+    },
+    {
+      "ID": 92023,
+      "Title": "Exclusive Excellence",
+      "Description": "Defeat the Pokémon League in a single session with a team of six non-legendary, version-exclusive Pokémon",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": null,
+      "DateModified": "2021-10-12 13:15:44"
+    },
+    {
+      "ID": 92006,
+      "Title": "Going All Out",
+      "Description": "Achieve a time of 9.5 seconds or less with no collisions on the Cycling Road",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": null,
+      "DateModified": "2019-12-25 18:29:56"
+    },
+    {
+      "ID": 92018,
+      "Title": "Pray to RNGsus",
+      "Description": "Win any prize at the Lottery Corner",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:48"
+    },
+    {
+      "ID": 92017,
+      "Title": "Heaven's Door",
+      "Description": "See your name displayed on a specific section of the wall in the Dewford Gym",
+      "Points": 1,
+      "DisplayOrder": 9,
+      "type": null,
+      "DateModified": "2020-06-02 17:07:44"
+    },
+    {
+      "ID": 92008,
+      "Title": "This Place Is So Comfy",
+      "Description": "Fully furnish your Secret Base",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:13"
+    },
+    {
+      "ID": 92009,
+      "Title": "GBA Orchestra",
+      "Description": "Play the first 15 notes of the Pallet Town theme on Note Mats, keeping to the song's rhythm",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:18"
+    },
+    {
+      "ID": 92013,
+      "Title": "Chairman of the Board",
+      "Description": "Obtain all of the chairs, desks, and cushions for the Secret Base",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:34"
+    },
+    {
+      "ID": 92014,
+      "Title": "I Need Some Fresh Air In Here",
+      "Description": "Obtain all of the mats, plants, and posters for the Secret Base",
+      "Points": 5,
+      "DisplayOrder": 13,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:37"
+    },
+    {
+      "ID": 92015,
+      "Title": "This Dollhouse Is Looking Good",
+      "Description": "Obtain most of the dolls for the Secret Base",
+      "Points": 5,
+      "DisplayOrder": 14,
+      "type": null,
+      "DateModified": "2020-04-11 06:15:03"
+    },
+    {
+      "ID": 92016,
+      "Title": "It's Beginning to Look a Lot Like Christmas",
+      "Description": "Obtain most of the ornaments for the Secret Base",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": null,
+      "DateModified": "2020-04-11 06:14:57"
+    },
+    {
+      "ID": 92022,
+      "Title": "Berry Maniac",
+      "Description": "Collect every variety of Berry, excluding Wiki, Mago, Aguav, Durin, and Liechi",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": null,
+      "DateModified": "2025-01-02 10:19:41"
+    },
+    {
+      "ID": 92007,
+      "Title": "Blending the Blender",
+      "Description": "Make a level 51 or higher Pokéblock",
+      "Points": 5,
+      "DisplayOrder": 17,
+      "type": null,
+      "DateModified": "2019-12-25 18:30:17"
+    },
+    {
+      "ID": 92011,
+      "Title": "Contest Star",
+      "Description": "Win your first Master Rank Contest",
+      "Points": 10,
+      "DisplayOrder": 18,
+      "type": null,
+      "DateModified": "2019-12-25 18:31:26"
+    },
+    {
+      "ID": 92028,
+      "Title": "Cool! Cooler! Coolest!",
+      "Description": "Have one of your Pokémon stand for a portrait after winning a Master Rank Cool Contest",
+      "Points": 25,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2019-12-25 18:33:13"
+    },
+    {
+      "ID": 92027,
+      "Title": "Cute as a Button",
+      "Description": "Have one of your Pokémon stand for a portrait after winning a Master Rank Cute Contest",
+      "Points": 25,
+      "DisplayOrder": 20,
+      "type": null,
+      "DateModified": "2019-12-25 18:33:08"
+    },
+    {
+      "ID": 92029,
+      "Title": "Stunning Beauty",
+      "Description": "Have one of your Pokémon stand for a portrait after winning a Master Rank Beauty Contest",
+      "Points": 25,
+      "DisplayOrder": 21,
+      "type": null,
+      "DateModified": "2019-12-25 18:33:17"
+    },
+    {
+      "ID": 92025,
+      "Title": "Unparalleled Cleverness",
+      "Description": "Have one of your Pokémon stand for a portrait after winning a Master Rank Smart Contest",
+      "Points": 25,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2019-12-25 18:33:00"
+    },
+    {
+      "ID": 92026,
+      "Title": "World's Toughest Pokemon",
+      "Description": "Have one of your Pokémon stand for a portrait after winning a Master Rank Tough Contest",
+      "Points": 25,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2019-12-25 18:33:04"
+    },
+    {
+      "ID": 92010,
+      "Title": "Ribbon Master",
+      "Description": "Obtain all 25 Ribbons on a single Pokémon and check them in the PokéNav",
+      "Points": 50,
+      "DisplayOrder": 24,
+      "type": null,
+      "DateModified": "2020-05-07 19:48:12"
+    }
+  ]
+}

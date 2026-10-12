@@ -21,6 +21,7 @@ import org.opensources.pokmaps.domain.guide.GuideProgress
 interface Guides {
     fun observe(): Flow<Pair<GuideLibrary, GuideProgress>>
     suspend fun complete(versionId: Int, id: String, completed: Boolean)
+    suspend fun observeRoamer(versionId: Int, pokemonId: Int, place: String?)
 }
 
 class GuideUseCase @Inject constructor(
@@ -48,4 +49,7 @@ class GuideUseCase @Inject constructor(
 
     override suspend fun complete(versionId: Int, id: String, completed: Boolean) =
         settings.complete(versionId, id, completed)
+
+    override suspend fun observeRoamer(versionId: Int, pokemonId: Int, place: String?) =
+        settings.observeRoamer(versionId, pokemonId, place)
 }

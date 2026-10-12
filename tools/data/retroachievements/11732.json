@@ -1,0 +1,918 @@
+{
+  "game_id": 11732,
+  "title": "Pokémon Platinum Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/11732",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 91200,
+      "Title": "Mine Diamonds",
+      "Description": "Defeat Roark in Oreburgh City and earn the Coal Badge.",
+      "Points": 10,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:38"
+    },
+    {
+      "ID": 91201,
+      "Title": "Like Clockwork",
+      "Description": "Defeat Gardenia in Eterna City and earn the Forest Badge.",
+      "Points": 10,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:39"
+    },
+    {
+      "ID": 91202,
+      "Title": "Gone to the Gym",
+      "Description": "Defeat Maylene in Veilstone City and earn the Cobble Badge.",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:46"
+    },
+    {
+      "ID": 91203,
+      "Title": "Wrangling with Wake",
+      "Description": "Defeat Crasher Wake in Pastoria City and earn the Fen Badge.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:48"
+    },
+    {
+      "ID": 91204,
+      "Title": "Fear of the Dark",
+      "Description": "Defeat Fantina in Hearthome City and earn the Relic Badge.",
+      "Points": 10,
+      "DisplayOrder": 10,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:49"
+    },
+    {
+      "ID": 91205,
+      "Title": "Mine All Day",
+      "Description": "Defeat Byron in Canalave City and earn the Mine Badge.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:51"
+    },
+    {
+      "ID": 91206,
+      "Title": "Candice What?!",
+      "Description": "Defeat Candice in Snowpoint City and earn the Icicle Badge.",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:03:56"
+    },
+    {
+      "ID": 91207,
+      "Title": "High Voltage",
+      "Description": "Defeat Volkner in Sunyshore City and earn the Beacon Badge.",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": "progression",
+      "DateModified": "2021-02-23 13:04:19"
+    },
+    {
+      "ID": 91208,
+      "Title": "And the Winner is...",
+      "Description": "Defeat the Elite Four and Cynthia at the Pokémon League, crowning yourself the new Pokémon League Champion.",
+      "Points": 25,
+      "DisplayOrder": 18,
+      "type": "win_condition",
+      "DateModified": "2021-02-23 14:45:24"
+    },
+    {
+      "ID": 95752,
+      "Title": "Killing Two Rocks with One Bird",
+      "Description": "Defeat Roark in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:19"
+    },
+    {
+      "ID": 95751,
+      "Title": "The Grass Is Greener on the Other Side",
+      "Description": "Defeat Gardenia in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:20"
+    },
+    {
+      "ID": 95753,
+      "Title": "Barefoot Fighting Face Off",
+      "Description": "Defeat Maylene in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:20"
+    },
+    {
+      "ID": 95754,
+      "Title": "Masked Master Matchup",
+      "Description": "Defeat Crasher Wake in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:20"
+    },
+    {
+      "ID": 95755,
+      "Title": "Not a Ghost of a Chance",
+      "Description": "Defeat Fantina in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:20"
+    },
+    {
+      "ID": 95756,
+      "Title": "Diamond Pickaxe",
+      "Description": "Defeat Byron in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:21"
+    },
+    {
+      "ID": 95757,
+      "Title": "Let It Go",
+      "Description": "Defeat Candice in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:21"
+    },
+    {
+      "ID": 95758,
+      "Title": "Riding the Lightning",
+      "Description": "Defeat Volkner in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:21"
+    },
+    {
+      "ID": 95759,
+      "Title": "A Natural Cure to Your Problems",
+      "Description": "Defeat Cheryl in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:21"
+    },
+    {
+      "ID": 95760,
+      "Title": "Buck Bumble",
+      "Description": "Defeat Buck in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:22"
+    },
+    {
+      "ID": 95761,
+      "Title": "Marley and Me",
+      "Description": "Defeat Marley in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:22"
+    },
+    {
+      "ID": 95762,
+      "Title": "All Riled Up",
+      "Description": "Defeat Riley in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:22"
+    },
+    {
+      "ID": 95763,
+      "Title": "Mira Match",
+      "Description": "Defeat Mira in a rematch at the Battleground.",
+      "Points": 5,
+      "DisplayOrder": 46,
+      "type": null,
+      "DateModified": "2025-06-19 07:48:22"
+    },
+    {
+      "ID": 95749,
+      "Title": "Let's Show the World How Good We Are",
+      "Description": "Defeat your rival in the Survival Area.",
+      "Points": 5,
+      "DisplayOrder": 47,
+      "type": null,
+      "DateModified": "2020-02-09 20:08:07"
+    },
+    {
+      "ID": 91209,
+      "Title": "Rematch of the Century",
+      "Description": "Be crowned as the new Pokémon League Champion... again.",
+      "Points": 25,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2020-02-06 21:00:36"
+    },
+    {
+      "ID": 95750,
+      "Title": "Thanks for Playing, I Guess...",
+      "Description": "Defeat your rival in the Survival Area while battling against his final team.",
+      "Points": 10,
+      "DisplayOrder": 49,
+      "type": null,
+      "DateModified": "2020-02-09 20:08:10"
+    },
+    {
+      "ID": 91472,
+      "Title": "Catch These Palms!",
+      "Description": "Defeat Tower Tycoon Palmer to earn the Battle Tower Silver Print.",
+      "Points": 25,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:29"
+    },
+    {
+      "ID": 91473,
+      "Title": "Competitive Champ",
+      "Description": "Rematch and defeat Tower Tycoon Palmer to earn the Battle Tower Gold Print.",
+      "Points": 50,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:30"
+    },
+    {
+      "ID": 381776,
+      "Title": "Your Future Holds Infinite Promise",
+      "Description": "Earn a streak of 100 wins in the Battle Tower Single Mode to unlock a trainer star.",
+      "Points": 50,
+      "DisplayOrder": 53,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:30"
+    },
+    {
+      "ID": 91474,
+      "Title": "Luck and Skill",
+      "Description": "Defeat Factory Head Thorton to earn the Battle Factory Silver Print.",
+      "Points": 25,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:30"
+    },
+    {
+      "ID": 91475,
+      "Title": "Save Me RNGsus",
+      "Description": "Rematch and defeat Factory Head Thorton to earn the Battle Factory Gold Print.",
+      "Points": 50,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:30"
+    },
+    {
+      "ID": 91476,
+      "Title": "Stop 'n Swap",
+      "Description": "Reach a streak of 30 swaps in the Battle Factory.",
+      "Points": 10,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2025-07-15 15:29:20"
+    },
+    {
+      "ID": 91477,
+      "Title": "Hall of Fame Contender",
+      "Description": "Defeat Hall Matron Argenta and earn the Battle Hall Silver Print.",
+      "Points": 25,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:31"
+    },
+    {
+      "ID": 91478,
+      "Title": "Conquered the Gauntlet",
+      "Description": "Rematch and defeat Hall Matron Argenta and earn the Battle Hall Gold Print.",
+      "Points": 50,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:31"
+    },
+    {
+      "ID": 91479,
+      "Title": "Battle Royal",
+      "Description": "Defeat Castle Valet Darach and earn the Battle Castle Silver Print.",
+      "Points": 25,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:31"
+    },
+    {
+      "ID": 91480,
+      "Title": "King for a Day",
+      "Description": "Rematch and defeat Castle Valet Darach and earn the Battle Castle Gold Print.",
+      "Points": 50,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:31"
+    },
+    {
+      "ID": 91481,
+      "Title": "Gold Rush",
+      "Description": "Save up at least 1,500 C.P. at once in the Battle Castle.",
+      "Points": 25,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:32"
+    },
+    {
+      "ID": 91482,
+      "Title": "Let the Games Begin",
+      "Description": "Defeat Arcade Star Dahlia and earn the Battle Arcade Silver Print.",
+      "Points": 25,
+      "DisplayOrder": 70,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:32"
+    },
+    {
+      "ID": 91483,
+      "Title": "1CC Clear",
+      "Description": "Rematch and defeat Arcade Star Dahlia and earn the Battle Arcade Gold Print.",
+      "Points": 50,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2025-06-15 07:22:32"
+    },
+    {
+      "ID": 91487,
+      "Title": "The Embodiment of Antimatter",
+      "Description": "Capture Giratina at the end of the Distortion World after defeating Cyrus, or after solving the room puzzle in Turnback Cave.",
+      "Points": 10,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2021-03-11 14:34:12"
+    },
+    {
+      "ID": 91488,
+      "Title": "Time Lord",
+      "Description": "Capture Dialga by interacting with the blue portal atop Spear Pillar.",
+      "Points": 5,
+      "DisplayOrder": 76,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:01"
+    },
+    {
+      "ID": 91489,
+      "Title": "Infinite Space",
+      "Description": "Capture Palkia by interacting with the pink portal atop Spear Pillar.",
+      "Points": 5,
+      "DisplayOrder": 78,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:04"
+    },
+    {
+      "ID": 91493,
+      "Title": "Throwdown with the Lava Dome!",
+      "Description": "Capture Heatran, located in the deepest chamber of Stark Mountain.",
+      "Points": 10,
+      "DisplayOrder": 80,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:08"
+    },
+    {
+      "ID": 91490,
+      "Title": "Knowledge Is Power",
+      "Description": "Capture Uxie in the cave at Lake Acuity.",
+      "Points": 5,
+      "DisplayOrder": 82,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:11"
+    },
+    {
+      "ID": 91491,
+      "Title": "Emotional Support",
+      "Description": "Capture Mesprit after tracking it down.",
+      "Points": 10,
+      "DisplayOrder": 84,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:14"
+    },
+    {
+      "ID": 91492,
+      "Title": "Filled with Determination",
+      "Description": "Capture Azelf in the cave at Lake Valor.",
+      "Points": 5,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:18"
+    },
+    {
+      "ID": 91494,
+      "Title": "Sweet Dreams",
+      "Description": "Capture Cresselia after tracking it down.",
+      "Points": 10,
+      "DisplayOrder": 88,
+      "type": null,
+      "DateModified": "2021-03-26 20:33:22"
+    },
+    {
+      "ID": 91495,
+      "Title": "Cold Turkey",
+      "Description": "Capture Articuno after tracking it down.",
+      "Points": 10,
+      "DisplayOrder": 90,
+      "type": null,
+      "DateModified": "2020-02-08 02:39:43"
+    },
+    {
+      "ID": 91496,
+      "Title": "An Electrifying Encounter",
+      "Description": "Capture Zapdos after tracking it down.",
+      "Points": 10,
+      "DisplayOrder": 92,
+      "type": null,
+      "DateModified": "2020-02-08 02:39:49"
+    },
+    {
+      "ID": 91497,
+      "Title": "Kanto Fried Chicken",
+      "Description": "Capture Moltres after tracking it down.",
+      "Points": 10,
+      "DisplayOrder": 94,
+      "type": null,
+      "DateModified": "2020-02-08 02:40:00"
+    },
+    {
+      "ID": 91628,
+      "Title": "Balloon Boy",
+      "Description": "Capture Drifloon by going outside of Valley Windworks on a Friday.",
+      "Points": 5,
+      "DisplayOrder": 96,
+      "type": null,
+      "DateModified": "2020-02-08 02:40:07"
+    },
+    {
+      "ID": 91629,
+      "Title": "totally_not_a_virus.exe",
+      "Description": "Capture Rotom by interacting with the possessed TV in the Old Chateau.",
+      "Points": 5,
+      "DisplayOrder": 98,
+      "type": null,
+      "DateModified": "2020-02-08 02:40:11"
+    },
+    {
+      "ID": 94103,
+      "Title": "Royal Reel-In",
+      "Description": "Capture a level 100 Magikarp while fishing at the Resort Area.",
+      "Points": 10,
+      "DisplayOrder": 102,
+      "type": null,
+      "DateModified": "2020-02-10 19:52:24"
+    },
+    {
+      "ID": 91631,
+      "Title": "Not You Again!",
+      "Description": "Capture a Feebas while fishing in Mt. Coronet.",
+      "Points": 10,
+      "DisplayOrder": 103,
+      "type": null,
+      "DateModified": "2020-02-08 02:40:24"
+    },
+    {
+      "ID": 91630,
+      "Title": "Glutton for Honey",
+      "Description": "Capture a Munchlax from a honey tree.",
+      "Points": 25,
+      "DisplayOrder": 104,
+      "type": null,
+      "DateModified": "2020-02-09 03:34:02"
+    },
+    {
+      "ID": 97651,
+      "Title": "Shiny Hunter",
+      "Description": "Find and capture a Shiny Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 106,
+      "type": null,
+      "DateModified": "2021-02-23 14:02:16"
+    },
+    {
+      "ID": 98167,
+      "Title": "Learning to Interrobang",
+      "Description": "Capture an ! or ? Unown.",
+      "Points": 10,
+      "DisplayOrder": 107,
+      "type": null,
+      "DateModified": "2020-02-11 20:11:31"
+    },
+    {
+      "ID": 95988,
+      "Title": "Wait a Few More Levels!",
+      "Description": "Trade a Machop for Abra in Oreburgh City.",
+      "Points": 5,
+      "DisplayOrder": 108,
+      "type": null,
+      "DateModified": "2020-02-07 02:34:08"
+    },
+    {
+      "ID": 95989,
+      "Title": "The Pitch Perfect Bird",
+      "Description": "Trade a Buizel for Chatot in the Eterna Condominiums.",
+      "Points": 5,
+      "DisplayOrder": 109,
+      "type": null,
+      "DateModified": "2020-02-07 02:34:11"
+    },
+    {
+      "ID": 95990,
+      "Title": "Can't Wait to Have a Gengar... Right?",
+      "Description": "Trade a Medicham for Haunter in Snowpoint City.",
+      "Points": 5,
+      "DisplayOrder": 110,
+      "type": null,
+      "DateModified": "2020-02-07 02:34:15"
+    },
+    {
+      "ID": 95991,
+      "Title": "Omelette du Fromage",
+      "Description": "Trade a Finneon for a German Magikarp on Route 226.",
+      "Points": 5,
+      "DisplayOrder": 111,
+      "type": null,
+      "DateModified": "2020-02-07 02:34:18"
+    },
+    {
+      "ID": 96044,
+      "Title": "Evolution Methods Not Included!",
+      "Description": "Obtain an Eevee from Bebe in Hearthome City.",
+      "Points": 5,
+      "DisplayOrder": 112,
+      "type": null,
+      "DateModified": "2021-12-02 09:49:45"
+    },
+    {
+      "ID": 96045,
+      "Title": "No Gambling Required",
+      "Description": "Obtain a free Porygon in Veilstone City.",
+      "Points": 5,
+      "DisplayOrder": 113,
+      "type": null,
+      "DateModified": "2021-03-11 14:39:13"
+    },
+    {
+      "ID": 96046,
+      "Title": "An Aura is Emanating",
+      "Description": "Obtain an Egg from Riley on Iron Island.",
+      "Points": 5,
+      "DisplayOrder": 114,
+      "type": null,
+      "DateModified": "2021-03-11 16:24:07"
+    },
+    {
+      "ID": 96071,
+      "Title": "Memory of Regirock",
+      "Description": "\"Solve\" Regirock's puzzle in a special cave on Route 228...",
+      "Points": 3,
+      "DisplayOrder": 116,
+      "type": null,
+      "DateModified": "2020-02-06 21:04:09"
+    },
+    {
+      "ID": 96070,
+      "Title": "Memory of Regice",
+      "Description": "\"Solve\" Regice's puzzle in a special cave in Mt. Coronet...",
+      "Points": 3,
+      "DisplayOrder": 117,
+      "type": null,
+      "DateModified": "2020-02-06 21:04:07"
+    },
+    {
+      "ID": 96048,
+      "Title": "Memory of Registeel",
+      "Description": "\"Solve\" Registeel's puzzle in a special cave on Iron Island...",
+      "Points": 3,
+      "DisplayOrder": 118,
+      "type": null,
+      "DateModified": "2020-02-06 21:04:04"
+    },
+    {
+      "ID": 96072,
+      "Title": "Memory of Regigigas",
+      "Description": "\"It's the statue of a Pokemon... It seems to exude power...\"",
+      "Points": 3,
+      "DisplayOrder": 119,
+      "type": null,
+      "DateModified": "2021-12-02 09:44:35"
+    },
+    {
+      "ID": 96084,
+      "Title": "Memory of Shaymin",
+      "Description": "\"Without any further ado, I'd like you to examine this stone tablet...\"",
+      "Points": 3,
+      "DisplayOrder": 120,
+      "type": null,
+      "DateModified": "2021-12-02 09:44:35"
+    },
+    {
+      "ID": 96083,
+      "Title": "Memory of Darkrai",
+      "Description": "\"The door is tightly shut... It appears impossible to open.\"",
+      "Points": 1,
+      "DisplayOrder": 121,
+      "type": null,
+      "DateModified": "2021-12-02 09:44:36"
+    },
+    {
+      "ID": 96085,
+      "Title": "Memory of Arceus",
+      "Description": "\"The flute is making a sound... but it failed!\"",
+      "Points": 5,
+      "DisplayOrder": 122,
+      "type": null,
+      "DateModified": "2020-06-11 21:33:11"
+    },
+    {
+      "ID": 97408,
+      "Title": "Memory of Spiritomb",
+      "Description": "\"There is a broken, crumbling tower... There seems to be a spot that would be a perfect fit for the Odd Keystone.\"",
+      "Points": 3,
+      "DisplayOrder": 123,
+      "type": null,
+      "DateModified": "2021-12-02 09:38:07"
+    },
+    {
+      "ID": 96086,
+      "Title": "Memories of Hoenn and Kanto",
+      "Description": "\"Pokémon from around the country can be brought here...\"",
+      "Points": 2,
+      "DisplayOrder": 124,
+      "type": null,
+      "DateModified": "2021-12-02 09:49:49"
+    },
+    {
+      "ID": 95623,
+      "Title": "Luck of the Draw",
+      "Description": "Win any prize from the Jubilife TV Lottery.",
+      "Points": 5,
+      "DisplayOrder": 200,
+      "type": null,
+      "DateModified": "2021-12-02 09:53:54"
+    },
+    {
+      "ID": 95624,
+      "Title": "Getting the Scoop",
+      "Description": "Show a Pokemon to The Newspaper Company in Solaceon Town.",
+      "Points": 5,
+      "DisplayOrder": 205,
+      "type": null,
+      "DateModified": "2021-11-25 13:13:08"
+    },
+    {
+      "ID": 97650,
+      "Title": "The Starlys and the Combees",
+      "Description": "Obtain a Macho Brace from a house in Pastoria City.",
+      "Points": 3,
+      "DisplayOrder": 210,
+      "type": null,
+      "DateModified": "2021-12-02 09:54:20"
+    },
+    {
+      "ID": 96042,
+      "Title": "Friendship Is Great",
+      "Description": "Obtain a free Great Ball in Celestic Town for having a Pokemon with high Happiness.",
+      "Points": 5,
+      "DisplayOrder": 215,
+      "type": null,
+      "DateModified": "2021-12-02 09:54:39"
+    },
+    {
+      "ID": 96087,
+      "Title": "Lucky Number",
+      "Description": "Show the guy on Route 221 the correct level Pokémon to obtain a Black Belt.",
+      "Points": 3,
+      "DisplayOrder": 220,
+      "type": null,
+      "DateModified": "2021-12-02 09:57:01"
+    },
+    {
+      "ID": 97352,
+      "Title": "Mysterious Plates",
+      "Description": "Obtain every Plate at least once.",
+      "Points": 5,
+      "DisplayOrder": 225,
+      "type": null,
+      "DateModified": "2023-01-15 05:22:49"
+    },
+    {
+      "ID": 97649,
+      "Title": "An Explosion of Luck",
+      "Description": "Obtain TM64 Explosion from the Game Corner.",
+      "Points": 10,
+      "DisplayOrder": 230,
+      "type": null,
+      "DateModified": "2022-09-19 01:12:00"
+    },
+    {
+      "ID": 95625,
+      "Title": "Seven Star Special",
+      "Description": "Win five battles in the Seven Stars Restaurant in one session without leaving the area.",
+      "Points": 5,
+      "DisplayOrder": 245,
+      "type": null,
+      "DateModified": "2020-02-06 21:02:17"
+    },
+    {
+      "ID": 95748,
+      "Title": "Clefairy Used Protect!",
+      "Description": "Defeat either Rich Boy Liam or Rich Girl Celeste in the Trophy House.",
+      "Points": 10,
+      "DisplayOrder": 250,
+      "type": null,
+      "DateModified": "2020-02-06 21:02:50"
+    },
+    {
+      "ID": 95743,
+      "Title": "Footprints in the Sand",
+      "Description": "Obtain a Footprint Ribbon from Mr. Footstep.",
+      "Points": 5,
+      "DisplayOrder": 280,
+      "type": null,
+      "DateModified": "2021-12-02 09:55:04"
+    },
+    {
+      "ID": 95744,
+      "Title": "Smogon Approved",
+      "Description": "Obtain an Effort Ribbon from the Sunyshore Seal Shop.",
+      "Points": 5,
+      "DisplayOrder": 285,
+      "type": null,
+      "DateModified": "2021-12-02 09:55:22"
+    },
+    {
+      "ID": 95746,
+      "Title": "Mood Swings",
+      "Description": "Obtain every Daily Ribbon given by Julia on a single Pokémon and view them in the Summary screen.",
+      "Points": 10,
+      "DisplayOrder": 290,
+      "type": null,
+      "DateModified": "2024-07-20 18:57:04"
+    },
+    {
+      "ID": 95745,
+      "Title": "Sinnoh's Got Talent",
+      "Description": "Obtain every Contest Ribbon on a single Pokémon and view them in the Summary screen.",
+      "Points": 10,
+      "DisplayOrder": 295,
+      "type": null,
+      "DateModified": "2024-07-20 18:57:04"
+    },
+    {
+      "ID": 97394,
+      "Title": "Jack of All Trades",
+      "Description": "Obtain every Battle Tower Ribbon possible on a single Pokémon and view them in the Summary screen.",
+      "Points": 10,
+      "DisplayOrder": 297,
+      "type": null,
+      "DateModified": "2024-07-20 18:57:05"
+    },
+    {
+      "ID": 95747,
+      "Title": "Top Percent",
+      "Description": "Obtain the Gorgeous Royal Ribbon from the Ribbon Society and view it in the Summary screen while there.",
+      "Points": 25,
+      "DisplayOrder": 300,
+      "type": null,
+      "DateModified": "2024-07-20 18:57:06"
+    },
+    {
+      "ID": 97622,
+      "Title": "Fortune IV",
+      "Description": "Mine four items in a single wall in the Underground.",
+      "Points": 5,
+      "DisplayOrder": 350,
+      "type": null,
+      "DateModified": "2020-05-31 20:10:39"
+    },
+    {
+      "ID": 97666,
+      "Title": "Home Away from Home",
+      "Description": "Fully furnish your Secret Base.",
+      "Points": 5,
+      "DisplayOrder": 355,
+      "type": null,
+      "DateModified": "2021-02-26 01:44:08"
+    },
+    {
+      "ID": 97615,
+      "Title": "Secret Squares",
+      "Description": "Have at least one of every trap in your Underground inventory, excluding multiplayer traps and the Digger Drill.",
+      "Points": 10,
+      "DisplayOrder": 360,
+      "type": null,
+      "DateModified": "2020-09-08 21:43:55"
+    },
+    {
+      "ID": 95622,
+      "Title": "Millions Well Spent",
+      "Description": "Buy every piece of furniture for your Resort Area Villa.",
+      "Points": 25,
+      "DisplayOrder": 365,
+      "type": null,
+      "DateModified": "2021-12-23 15:40:42"
+    },
+    {
+      "ID": 113671,
+      "Title": "Beauty Queen",
+      "Description": "Obtain at least one of every possible Accessory based on your Starter Pokemon.",
+      "Points": 50,
+      "DisplayOrder": 366,
+      "type": null,
+      "DateModified": "2021-05-18 11:57:36"
+    },
+    {
+      "ID": 97721,
+      "Title": "App Enthusiast",
+      "Description": "Obtain every possible Pokétch App.",
+      "Points": 10,
+      "DisplayOrder": 367,
+      "type": null,
+      "DateModified": "2026-01-23 22:57:06"
+    },
+    {
+      "ID": 113672,
+      "Title": "Gotta Customize 'Em All!",
+      "Description": "Obtain one of every Seal, excluding Liquid, Burst, and Twinkle Seals.",
+      "Points": 25,
+      "DisplayOrder": 367,
+      "type": null,
+      "DateModified": "2024-12-06 17:24:19"
+    },
+    {
+      "ID": 97520,
+      "Title": "Gotta Catch 'Em All - Platinum",
+      "Description": "Catch all 374 possible Pokemon which are obtainable in the game without external devices.",
+      "Points": 100,
+      "DisplayOrder": 370,
+      "type": null,
+      "DateModified": "2020-03-02 17:56:29"
+    },
+    {
+      "ID": 91210,
+      "Title": "Running for the Hills",
+      "Description": "Reach 99,999 steps on the Pokétch Step Counter app.",
+      "Points": 2,
+      "DisplayOrder": 400,
+      "type": null,
+      "DateModified": "2026-01-23 22:51:16"
+    },
+    {
+      "ID": 96047,
+      "Title": "Cleanliness Is Next to Champion-ess",
+      "Description": "Reach the maximum level of shine on all 8 of your Gym Badges.",
+      "Points": 3,
+      "DisplayOrder": 410,
+      "type": null,
+      "DateModified": "2021-12-23 11:20:50"
+    },
+    {
+      "ID": 97734,
+      "Title": "You've Met a Terrible Fate...",
+      "Description": "Encounter a ghost in the Old Chateau.",
+      "Points": 2,
+      "DisplayOrder": 415,
+      "type": null,
+      "DateModified": "2021-11-22 16:42:56"
+    },
+    {
+      "ID": 101234,
+      "Title": "Swamp Advertising",
+      "Description": "Get laughed at by a Croagunk.",
+      "Points": 1,
+      "DisplayOrder": 416,
+      "type": null,
+      "DateModified": "2021-03-11 15:26:43"
+    },
+    {
+      "ID": 91623,
+      "Title": "Where's My Cake At?",
+      "Description": "After defeating the Elite Four, talk to Lucas or Dawn in Sandgem Town on your birthday.",
+      "Points": 2,
+      "DisplayOrder": 420,
+      "type": null,
+      "DateModified": "2023-01-16 20:27:50"
+    },
+    {
+      "ID": 91624,
+      "Title": "A Special Occasion",
+      "Description": "Stay in Snowpoint City for at least two minutes during Diamond Dust.",
+      "Points": 2,
+      "DisplayOrder": 425,
+      "type": null,
+      "DateModified": "2020-02-08 22:30:20"
+    }
+  ]
+}

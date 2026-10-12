@@ -16,11 +16,17 @@ internal data class AchievementDefinition(
 
 internal fun achievementGuides(): List<GuideDefinition> = (
     redAchievements() + blueAchievements() + yellowAchievements() + goldAchievements() + silverAchievements() +
-        crystalAchievements()
+        crystalAchievements() + rubyAchievements() + sapphireAchievements() + emeraldAchievements() +
+        fireRedAchievements() + leafGreenAchievements()
     ).map {
     GuideDefinition(
         "ra-${it.id}", it.title, it.text, GuideCategory.ACHIEVEMENT, setOf(it.version),
-        if (it.version <= 3) 25 else 175,
+        when (it.version) {
+            in 1..3, 10, 11 -> 25
+            in 4..6 -> 175
+            7, 8, 9 -> 252
+            else -> error("Version de succès inconnue : ${it.version}")
+        },
         listOf("https://retroachievements.org/achievement/${it.id}"),
         missable = it.missable, achievementId = it.id, points = it.points, chapter = it.chapter,
         captureIds = CaptureGoals.forAchievement(it.id)?.species.orEmpty()

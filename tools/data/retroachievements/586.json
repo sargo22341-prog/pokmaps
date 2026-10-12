@@ -1,0 +1,819 @@
+{
+  "game_id": 586,
+  "title": "Pokémon Blue Version",
+  "console": "Game Boy",
+  "source": "https://retroachievements.org/game/586",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 540248,
+      "Title": "Smell Ya Later!",
+      "Description": "Obtain the Pokédex. (Pokémon that can only be obtained by glitches or trading will lock achievements.)",
+      "Points": 2,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2025-08-31 03:59:12"
+    },
+    {
+      "ID": 540268,
+      "Title": "Actually Asking For Directions",
+      "Description": "Obtain a map of the Kanto region.",
+      "Points": 2,
+      "DisplayOrder": 1,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:23"
+    },
+    {
+      "ID": 540258,
+      "Title": "Free Ballin'",
+      "Description": "Obtain 5 Poké Balls from Prof. Oak.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "missable",
+      "DateModified": "2025-08-30 15:18:23"
+    },
+    {
+      "ID": 540267,
+      "Title": "100% Discount",
+      "Description": "Get a free sample courtesy of the Viridian City Pokémon Mart.",
+      "Points": 1,
+      "DisplayOrder": 2,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:23"
+    },
+    {
+      "ID": 540249,
+      "Title": "Rock On",
+      "Description": "Defeat Brock and earn the Boulder Badge in Pewter City.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:21"
+    },
+    {
+      "ID": 540306,
+      "Title": "I've Trained For This",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Pewter City Gym.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:39"
+    },
+    {
+      "ID": 540298,
+      "Title": "Just Normal Enough",
+      "Description": "Defeat Brock while only using Normal Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 4,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:32:41"
+    },
+    {
+      "ID": 540250,
+      "Title": "Misty Falls",
+      "Description": "Defeat Misty and earn the Cascade Badge in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:21"
+    },
+    {
+      "ID": 540307,
+      "Title": "Clearing the Waters",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Cerulean City Gym.",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2025-09-16 14:03:29"
+    },
+    {
+      "ID": 540299,
+      "Title": "Bugged Out",
+      "Description": "Defeat Misty while only using  Bug Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 7,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:32:41"
+    },
+    {
+      "ID": 540251,
+      "Title": "Power Outage",
+      "Description": "Defeat Lt. Surge and earn the Thunder Badge in Vermilion City.",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:21"
+    },
+    {
+      "ID": 540265,
+      "Title": "Yeah Buoy",
+      "Description": "Collect every optional item and defeat every optional trainer on the S.S. Anne.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2025-08-30 00:45:16"
+    },
+    {
+      "ID": 540308,
+      "Title": "Brighten Up",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Vermilion City Gym.",
+      "Points": 10,
+      "DisplayOrder": 9,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:39"
+    },
+    {
+      "ID": 540300,
+      "Title": "Electrical Fire",
+      "Description": "Defeat Lt. Surge while only using Fire Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 10,
+      "type": "missable",
+      "DateModified": "2025-10-22 12:25:05"
+    },
+    {
+      "ID": 540259,
+      "Title": "Get Whacked",
+      "Description": "Find every item and defeat every trainer in the Rocket Hideout.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:15"
+    },
+    {
+      "ID": 540252,
+      "Title": "Have Some Pride",
+      "Description": "Defeat Erika and earn the Rainbow Badge in Celadon City.",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:21"
+    },
+    {
+      "ID": 540309,
+      "Title": "Lady Killer",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Celadon City Gym.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:40"
+    },
+    {
+      "ID": 540301,
+      "Title": "Power Plant",
+      "Description": "Defeat Erika while only using Electric Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 13,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:32:42"
+    },
+    {
+      "ID": 540253,
+      "Title": "Secret Ninja Arts; Fullheal",
+      "Description": "Defeat Koga and earn the Soul Badge in Fuchsia City.",
+      "Points": 5,
+      "DisplayOrder": 14,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:22"
+    },
+    {
+      "ID": 540310,
+      "Title": "Whose Footprints Are These?",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Fuchsia City Gym.",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:40"
+    },
+    {
+      "ID": 540302,
+      "Title": "Natural Antidote",
+      "Description": "Defeat Koga while only using Grass Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:50:55"
+    },
+    {
+      "ID": 540264,
+      "Title": "Happy Trails",
+      "Description": "Find every item, defeat every trainer, and open every door in Silph Co.",
+      "Points": 25,
+      "DisplayOrder": 17,
+      "type": "missable",
+      "DateModified": "2025-08-30 00:45:15"
+    },
+    {
+      "ID": 540254,
+      "Title": "Out of the Dollhouse",
+      "Description": "Defeat Sabrina and earn the Marsh Badge in Saffron City.",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:22"
+    },
+    {
+      "ID": 540311,
+      "Title": "Mind Crush",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Saffron City Gym.",
+      "Points": 10,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:40"
+    },
+    {
+      "ID": 540303,
+      "Title": "No Scientific Explanation",
+      "Description": "Defeat Sabrina while only using Ghost type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 19,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:32:42"
+    },
+    {
+      "ID": 540255,
+      "Title": "Too Hot, Too Hot!",
+      "Description": "Defeat Blaine and earn the Volcano Badge at Cinnabar Island.",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:22"
+    },
+    {
+      "ID": 540312,
+      "Title": "Get Those Nerds!",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Cinnabar Island Gym.",
+      "Points": 10,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:40"
+    },
+    {
+      "ID": 540304,
+      "Title": "Fire Punch",
+      "Description": "Defeat Blaine while only using Fighting Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2025-10-19 15:44:11"
+    },
+    {
+      "ID": 540256,
+      "Title": "You're Grounded!",
+      "Description": "Defeat Giovanni and earn the Earth Badge in Viridian City.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": "progression",
+      "DateModified": "2025-08-30 15:18:22"
+    },
+    {
+      "ID": 540313,
+      "Title": "Leave the Poké Ball, Take the Badge",
+      "Description": "Without resetting or leaving the gym, defeat every trainer and the gym leader of the Viridian City Gym.",
+      "Points": 10,
+      "DisplayOrder": 24,
+      "type": "missable",
+      "DateModified": "2025-09-03 22:37:41"
+    },
+    {
+      "ID": 540305,
+      "Title": "Mind Games",
+      "Description": "Defeat Giovanni while only using Psychic Type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 25,
+      "type": "missable",
+      "DateModified": "2025-08-30 02:32:43"
+    },
+    {
+      "ID": 540257,
+      "Title": "The Very Best",
+      "Description": "Beat the Elite Four and the Champion of the Pokémon League.",
+      "Points": 25,
+      "DisplayOrder": 26,
+      "type": "win_condition",
+      "DateModified": "2025-09-05 12:13:13"
+    },
+    {
+      "ID": 540269,
+      "Title": "Unidentified Aerial Phenomenon",
+      "Description": "Glance at a mysterious bird in the distance using the binoculars.",
+      "Points": 2,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:11"
+    },
+    {
+      "ID": 540270,
+      "Title": "Squad Rollin' Deep",
+      "Description": "Assemble a full team of Pokémon.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:11"
+    },
+    {
+      "ID": 540273,
+      "Title": "Personal Trainer",
+      "Description": "Obtain an Exp. All from Prof. Oak's aide in Fuchsia City.",
+      "Points": 5,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:24"
+    },
+    {
+      "ID": 540276,
+      "Title": "Can I Have Some?",
+      "Description": "Find all the free coins in the Celadon City Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:11"
+    },
+    {
+      "ID": 540282,
+      "Title": "One Man's Trash...",
+      "Description": "Obtain the Itemfinder from Prof. Oak's aide on Route 11.",
+      "Points": 5,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:24"
+    },
+    {
+      "ID": 540283,
+      "Title": "Races Are Coming Your Way",
+      "Description": "Obtain the Bicycle from the Bike Shop in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:24"
+    },
+    {
+      "ID": 540290,
+      "Title": "Professor Oak Challenge; Junior Edition",
+      "Description": "Catch a Weedle or Caterpie in Viridian Forest and, without leaving, evolve it to Beedrill or Butterfree.",
+      "Points": 5,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2025-09-09 14:52:24"
+    },
+    {
+      "ID": 540260,
+      "Title": "Waking Nightmare",
+      "Description": "Use the Poké Flute to awaken and catch a Snorlax.",
+      "Points": 5,
+      "DisplayOrder": 40,
+      "type": "missable",
+      "DateModified": "2025-08-30 00:45:12"
+    },
+    {
+      "ID": 540263,
+      "Title": "To Be Oh So Blue",
+      "Description": "Catch all of the Pokémon exclusive to Blue version.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2025-08-30 00:46:29"
+    },
+    {
+      "ID": 540287,
+      "Title": "Funga Safari",
+      "Description": "Without resetting, catch 10 Pokémon in a single Safari Hunt.",
+      "Points": 10,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:13"
+    },
+    {
+      "ID": 540289,
+      "Title": "No Threats Detected",
+      "Description": "Defeat or catch every stationary Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:13"
+    },
+    {
+      "ID": 540292,
+      "Title": "Fish Fear Me",
+      "Description": "On Cinnabar Island, catch Magikarp, Poliwag, Goldeen, Shellder, Horsea, and Staryu in one session without leaving the island.",
+      "Points": 5,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2025-08-31 03:35:56"
+    },
+    {
+      "ID": 540261,
+      "Title": "Bird Up!",
+      "Description": "Catch the three legendary birds.",
+      "Points": 25,
+      "DisplayOrder": 45,
+      "type": "missable",
+      "DateModified": "2025-08-30 00:45:14"
+    },
+    {
+      "ID": 540262,
+      "Title": "The Most Powerful Pokémon of All",
+      "Description": "Catch the fabled Mewtwo.",
+      "Points": 10,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2025-08-30 00:45:15"
+    },
+    {
+      "ID": 540348,
+      "Title": "Gotta Catch 'Em All",
+      "Description": "Catch all 124 Pokémon that are available in Blue Version without outside trading and without acquiring any other Pokémon through any method.",
+      "Points": 50,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2025-08-30 14:41:03"
+    },
+    {
+      "ID": 540275,
+      "Title": "Severance Package",
+      "Description": "Obtain the Master Ball from the President of Silph Co.",
+      "Points": 5,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:24"
+    },
+    {
+      "ID": 540274,
+      "Title": "Way of the Dragon",
+      "Description": "Claim your prize from the Saffron City Dojo.",
+      "Points": 5,
+      "DisplayOrder": 51,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:16"
+    },
+    {
+      "ID": 540271,
+      "Title": "The Dad Who Stepped Up",
+      "Description": "Receive 6 Pokémon as gifts.",
+      "Points": 5,
+      "DisplayOrder": 53,
+      "type": null,
+      "DateModified": "2025-09-04 12:14:30"
+    },
+    {
+      "ID": 540272,
+      "Title": "Gone Fishin'",
+      "Description": "Obtain all 3 Fishing Rods.",
+      "Points": 5,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:17"
+    },
+    {
+      "ID": 540266,
+      "Title": "Finders Keepers",
+      "Description": "Find the item hidden inside of the Viridian Gym.",
+      "Points": 2,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:25"
+    },
+    {
+      "ID": 540277,
+      "Title": "I'm Not Licensed",
+      "Description": "Rub the Captain's back on the S.S. Anne and obtain HM01 Cut.",
+      "Points": 5,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:25"
+    },
+    {
+      "ID": 540278,
+      "Title": "Solar Flare!",
+      "Description": "Obtain HM05 Flash from Prof. Oak's aide on Route 2.",
+      "Points": 5,
+      "DisplayOrder": 57,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:25"
+    },
+    {
+      "ID": 540279,
+      "Title": "I Can See My House From Here",
+      "Description": "Obtain HM02 Fly from the secret house on Route 16.",
+      "Points": 5,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:25"
+    },
+    {
+      "ID": 540280,
+      "Title": "Over the Deep Blue",
+      "Description": "Obtain HM03 Surf from the Safari Zone.",
+      "Points": 5,
+      "DisplayOrder": 59,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:26"
+    },
+    {
+      "ID": 540281,
+      "Title": "I Choose You, Chris Redfield",
+      "Description": "Obtain HM04 Strength from the Safari Zone Warden in Fuchsia City.",
+      "Points": 5,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:26"
+    },
+    {
+      "ID": 540284,
+      "Title": "Fossils, Da Da Da",
+      "Description": "Choose the Helix Fossil or the Dome Fossil at the end of Mt. Moon.",
+      "Points": 5,
+      "DisplayOrder": 61,
+      "type": null,
+      "DateModified": "2025-09-05 12:10:23"
+    },
+    {
+      "ID": 540285,
+      "Title": "Fairy Flute or Poké Flute",
+      "Description": "Save Mr. Fuji and obtain the Poké Flute.",
+      "Points": 5,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:26"
+    },
+    {
+      "ID": 540336,
+      "Title": "Lunch Money",
+      "Description": "Generate over $2000 in a single battle using Pay Day.",
+      "Points": 5,
+      "DisplayOrder": 63,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:36"
+    },
+    {
+      "ID": 540286,
+      "Title": "CD Case",
+      "Description": "Find all 50 unmissable TMs and HMs on the overworld.",
+      "Points": 25,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2025-09-28 16:30:33"
+    },
+    {
+      "ID": 540288,
+      "Title": "I Love Reading",
+      "Description": "Without resetting and without leaving the building, read every journal in the Cinnabar Mansion.",
+      "Points": 5,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:21"
+    },
+    {
+      "ID": 540291,
+      "Title": "Gambling Really Does Pay Off!",
+      "Description": "Obtain a Porygon.",
+      "Points": 10,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2025-09-09 21:12:45"
+    },
+    {
+      "ID": 540293,
+      "Title": "Beaten Black and Blue",
+      "Description": "Without resetting, beat the Pokémon League with a party of Pokémon exclusive to Blue.",
+      "Points": 10,
+      "DisplayOrder": 67,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:21"
+    },
+    {
+      "ID": 540294,
+      "Title": "Professor Irwin",
+      "Description": "Without resetting, beat the Pokémon League with a party of Pokémon that can be found in the Safari Zone (and their respective evolutions).",
+      "Points": 10,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2025-08-31 13:30:38"
+    },
+    {
+      "ID": 540295,
+      "Title": "Believe in Fairy Boy",
+      "Description": "Without resetting, beat the Pokémon League with a party of \"Fairy\" type pokemon (Clefairy, Clefable, Jigglypuff, Wigglytuff, Mr Mime).",
+      "Points": 10,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2025-08-30 04:02:15"
+    },
+    {
+      "ID": 540296,
+      "Title": "Babies \"R\" Us",
+      "Description": "Without resetting, beat the Pokémon League with a party of Pokémon that can be evolved.",
+      "Points": 10,
+      "DisplayOrder": 70,
+      "type": null,
+      "DateModified": "2025-09-05 02:54:04"
+    },
+    {
+      "ID": 540297,
+      "Title": "Power Wash",
+      "Description": "Without resetting, beat the Pokémon League with a party of Water type Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2025-09-01 01:28:44"
+    },
+    {
+      "ID": 540314,
+      "Title": "Taken Out of the Invisible Box",
+      "Description": "Trade an Abra for a Mr. Mime on Route 2.",
+      "Points": 1,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:27"
+    },
+    {
+      "ID": 540315,
+      "Title": "Tit for Tat, Rat for Rat",
+      "Description": "Trade a NidoranM for a NidoranF on Route 5.",
+      "Points": 1,
+      "DisplayOrder": 73,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:28"
+    },
+    {
+      "ID": 540316,
+      "Title": "Twice the Poison",
+      "Description": "Trade a Nidorino for a Nidorina on Route 11.",
+      "Points": 1,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:28"
+    },
+    {
+      "ID": 540317,
+      "Title": "A Slow Sendoff",
+      "Description": "Trade a Slowbro for a Lickitung on Route 18.",
+      "Points": 1,
+      "DisplayOrder": 75,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:28"
+    },
+    {
+      "ID": 540318,
+      "Title": "A Water Punch for an Ice Punch",
+      "Description": "Trade a Poliwhirl for a Jynx in Cerulean City.",
+      "Points": 1,
+      "DisplayOrder": 76,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:28"
+    },
+    {
+      "ID": 540319,
+      "Title": "No One Will Believe You",
+      "Description": "Trade a Spearow for a Farfetch'd in Vermilion City.",
+      "Points": 1,
+      "DisplayOrder": 77,
+      "type": null,
+      "DateModified": "2025-11-23 20:19:51"
+    },
+    {
+      "ID": 540320,
+      "Title": "Totally Shocking",
+      "Description": "Trade a Raichu for an Electrode on Cinnabar Island.",
+      "Points": 1,
+      "DisplayOrder": 78,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:29"
+    },
+    {
+      "ID": 540321,
+      "Title": "Bugs Through the Net",
+      "Description": "Trade a Venonat for a Tangela on Cinnabar Island.",
+      "Points": 1,
+      "DisplayOrder": 79,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:29"
+    },
+    {
+      "ID": 540322,
+      "Title": "Treading Water",
+      "Description": "Trade a Ponyta for a Seel on Cinnabar Island.",
+      "Points": 1,
+      "DisplayOrder": 80,
+      "type": null,
+      "DateModified": "2025-08-30 15:18:29"
+    },
+    {
+      "ID": 540323,
+      "Title": "Routine Check",
+      "Description": "Find all unmissable items, including hidden items, on Routes 4, 9, 10, 11, 12, 13, 17, 23, and  25",
+      "Points": 10,
+      "DisplayOrder": 81,
+      "type": null,
+      "DateModified": "2025-08-31 03:21:50"
+    },
+    {
+      "ID": 540324,
+      "Title": "Spelunker",
+      "Description": "Find all unmissable items, including hidden items, in Cerulean Cave, Cinnabar Mansion, Mt. Moon, and Seafoam Islands",
+      "Points": 10,
+      "DisplayOrder": 82,
+      "type": null,
+      "DateModified": "2025-08-31 14:03:39"
+    },
+    {
+      "ID": 540325,
+      "Title": "Man-Made Materials",
+      "Description": "Find all unmissable items, including hidden items, in each Underground Path, Silph Co, and Power Plant",
+      "Points": 5,
+      "DisplayOrder": 83,
+      "type": null,
+      "DateModified": "2025-08-31 03:21:50"
+    },
+    {
+      "ID": 540326,
+      "Title": "Gifts for the Jizō",
+      "Description": "Find all unmissable items, including hidden items, in Viridian Forest, Safari Zone, Pokemon Tower, and Victory Road",
+      "Points": 10,
+      "DisplayOrder": 84,
+      "type": null,
+      "DateModified": "2025-08-31 03:21:51"
+    },
+    {
+      "ID": 540327,
+      "Title": "Palette Cleanser",
+      "Description": "Find all unmissable items, including hidden items, in Cerulean, Vermilion, Celadon, Viridian, Saffron, and Fuchsia City",
+      "Points": 5,
+      "DisplayOrder": 85,
+      "type": null,
+      "DateModified": "2025-11-23 16:13:02"
+    },
+    {
+      "ID": 540328,
+      "Title": "Humble Beginnings",
+      "Description": "Defeat every unmissable trainer from the Viridian Forest, Route 3, Mt. Moon, and Route 4",
+      "Points": 10,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-08-30 14:46:00"
+    },
+    {
+      "ID": 540329,
+      "Title": "Stuck in the Middle With You",
+      "Description": "Defeat every unmissable trainer from Route 24, Route 25, and Route 6",
+      "Points": 5,
+      "DisplayOrder": 87,
+      "type": null,
+      "DateModified": "2025-08-31 23:42:41"
+    },
+    {
+      "ID": 540330,
+      "Title": "Eastern Cleanup",
+      "Description": "Defeat every unmissable trainer from Route 11, Route 9, and Route 10",
+      "Points": 5,
+      "DisplayOrder": 88,
+      "type": null,
+      "DateModified": "2025-09-05 19:21:43"
+    },
+    {
+      "ID": 540331,
+      "Title": "Enemies in the Dark",
+      "Description": "Defeat every unmissable trainer from Rock Tunnel, Route 8, and Pokemon Tower",
+      "Points": 10,
+      "DisplayOrder": 89,
+      "type": null,
+      "DateModified": "2026-03-17 01:58:13"
+    },
+    {
+      "ID": 540332,
+      "Title": "Through the Fields",
+      "Description": "Defeat every unmissable trainer from Route 12, Route 13, Route 14, and Route 15",
+      "Points": 10,
+      "DisplayOrder": 90,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:34"
+    },
+    {
+      "ID": 540333,
+      "Title": "Rollin' Rollin' Rollin'",
+      "Description": "Defeat every unmissable trainer from Route 16, Route 17, and Route 18",
+      "Points": 5,
+      "DisplayOrder": 91,
+      "type": null,
+      "DateModified": "2025-10-21 19:11:20"
+    },
+    {
+      "ID": 540334,
+      "Title": "Water Works",
+      "Description": "Defeat every unmissable trainer from Route 19 and Route 20",
+      "Points": 5,
+      "DisplayOrder": 92,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:35"
+    },
+    {
+      "ID": 540335,
+      "Title": "Last Surprise",
+      "Description": "Defeat every unmissable trainer in Cinnabar Mansion, Route 21, and Victory Road",
+      "Points": 10,
+      "DisplayOrder": 93,
+      "type": null,
+      "DateModified": "2025-08-30 00:45:36"
+    }
+  ]
+}

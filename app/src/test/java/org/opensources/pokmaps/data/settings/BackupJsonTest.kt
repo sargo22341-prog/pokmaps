@@ -64,6 +64,28 @@ class BackupJsonTest {
         assertEquals("route-30", merged.guides[4]?.roamers?.single { it.pokemonId == 244 }?.place)
     }
 
+    @Test
+    fun importedGbaObservationReplacesTheExclusiveChoiceAndSurvivesRoundTrip() {
+        val current = CollectionBackup(
+            emptySet(),
+            emptyMap(),
+            mapOf(
+                9 to GuideProgress(roamers = listOf(RoamerObservation(380, "route110")))
+            )
+        )
+        val imported = CollectionBackup(
+            emptySet(),
+            emptyMap(),
+            mapOf(
+                9 to GuideProgress(roamers = listOf(RoamerObservation(381, "route134"))),
+                10 to GuideProgress(roamers = listOf(RoamerObservation(243, "route21-north")))
+            )
+        )
+        val merged = merge(current, imported)
+        assertEquals(imported.guides, merged.guides)
+        assertEquals(merged.guides, decode(BackupJson.encode(merged)).guides.filterKeys { it >= 9 })
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun unknownSchemaIsRejected() {
         decode("""{"format":"pokmaps-collection","schema":2,"favorites":[],"games":[]}""")

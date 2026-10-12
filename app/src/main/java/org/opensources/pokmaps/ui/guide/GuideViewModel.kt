@@ -17,6 +17,10 @@ import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideLibrary
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideTarget
+import org.opensources.pokmaps.domain.guide.RoamerChoice
+import org.opensources.pokmaps.domain.guide.RoamerLocation
+import org.opensources.pokmaps.domain.guide.Roamers
+import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.GuidePreview
 import org.opensources.pokmaps.domain.usecase.GuidePreviewUseCase
 import org.opensources.pokmaps.domain.usecase.GuideUseCase
@@ -38,6 +42,11 @@ data class GuideUiState(
     val writeFailed: Boolean = false
 ) {
     val article: GuideArticle? = library?.articles?.firstOrNull { it.id == articleId }
+    val roamers: List<RoamerChoice> = library?.game?.let { Roamers.choices(it.versionId) }.orEmpty()
+    val roamerLocations: List<RoamerLocation> = library?.game?.let { Roamers.locations(it.versionId) }.orEmpty()
+    val observedRoamers: Map<Int, RoamerLocation> = progress.roamers.associate { observation ->
+        observation.pokemonId to roamerLocations.first { it.identifier == observation.place }
+    }
     val articles: List<GuideArticle> = library?.articles.orEmpty().filter { it.category == category }
     val related: List<GuideArticle> = library?.articles.orEmpty().filter { it.id in article?.relatedIds.orEmpty() }
         .sortedByDescending { it.missable }
@@ -63,7 +72,11 @@ data class GuideUiState(
         }
     }
     val captureTotals: Map<String, Int> = library?.articles.orEmpty().associate {
-        it.id to if (it.unownGoal) 26 else (it.captureGoal?.total ?: it.captureIds.size)
+        it.id to if (it.unownGoal) {
+            library?.game?.let { game -> UnownForm.available(game).size } ?: 0
+        } else {
+            it.captureGoal?.total ?: it.captureIds.size
+        }
     }
 }
 
@@ -72,6 +85,7 @@ sealed interface GuideAction {
     data class Article(val id: String) : GuideAction
     data object Back : GuideAction
     data class Complete(val id: String, val completed: Boolean) : GuideAction
+    data class ObserveRoamer(val pokemonId: Int, val place: String?) : GuideAction
     data class Preview(val target: GuideTarget) : GuideAction
     data object ClosePreview : GuideAction
     data class ShowPlace(val identifier: String) : GuideAction
@@ -145,6 +159,10 @@ class GuideViewModel internal constructor(
             GuideAction.Back -> back()
 
             is GuideAction.Complete -> complete(action)
+
+            is GuideAction.ObserveRoamer -> write { version ->
+                guides.observeRoamer(version, action.pokemonId, action.place)
+            }
 
             is GuideAction.Preview -> openPreview(action.target)
 

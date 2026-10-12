@@ -1,0 +1,1071 @@
+{
+  "game_id": 3887,
+  "title": "Pokémon Black Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/3887",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 511885,
+      "Title": "Bedroom Blitz",
+      "Description": "Battle against Bianca and Cheren after receiving your first Pokémon",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:23"
+    },
+    {
+      "ID": 511886,
+      "Title": "A Mysterious Trainer",
+      "Description": "Defeat N after attending the Team Plasma speech in Accumula Town",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:23"
+    },
+    {
+      "ID": 511887,
+      "Title": "Ready or Not, Here I Come!",
+      "Description": "Defeat Bianca on Route 2",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:23"
+    },
+    {
+      "ID": 511888,
+      "Title": "Taking Cheren to School",
+      "Description": "Defeat Cheren in a class session at the Trainers' School in Striaton City",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:24"
+    },
+    {
+      "ID": 511889,
+      "Title": "Time to be Waited On",
+      "Description": "Earn the Trio Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:24"
+    },
+    {
+      "ID": 511890,
+      "Title": "Who Has the Better Badge?",
+      "Description": "Defeat Cheren after earning the Trio Badge on Route 3",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:24"
+    },
+    {
+      "ID": 511891,
+      "Title": "Protective Determination",
+      "Description": "Defeat N in front of Nacrene City Pokémon Gym",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:24"
+    },
+    {
+      "ID": 511892,
+      "Title": "Directorial Research",
+      "Description": "Earn the Basic Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:25"
+    },
+    {
+      "ID": 511893,
+      "Title": "Blocking the Artist",
+      "Description": "Earn the Insect Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:25"
+    },
+    {
+      "ID": 511894,
+      "Title": "Just Don't Break the Sign",
+      "Description": "Defeat Bianca at the northern gate of Castelia City",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:25"
+    },
+    {
+      "ID": 511895,
+      "Title": "Duel in the Desert",
+      "Description": "Defeat Cheren after earning the Insect Badge on Route 4",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:25"
+    },
+    {
+      "ID": 511896,
+      "Title": "Plasma Sovereign",
+      "Description": "Defeat N after discovering his secret in Nimbasa City",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:26"
+    },
+    {
+      "ID": 511897,
+      "Title": "A Shockingly Model Leader",
+      "Description": "Earn the Bolt Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:26"
+    },
+    {
+      "ID": 511898,
+      "Title": "Watt? Another Battle?",
+      "Description": "Defeat Cheren after earning the Bolt Badge on Route 5",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:26"
+    },
+    {
+      "ID": 511899,
+      "Title": "This Town Ain't Big Enough",
+      "Description": "Earn the Quake Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:27"
+    },
+    {
+      "ID": 511900,
+      "Title": "Earn Your Wings",
+      "Description": "Defeat Bianca in Driftveil City",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:27"
+    },
+    {
+      "ID": 511901,
+      "Title": "Pursing Ideals...Is It Worth It?",
+      "Description": "Defeat N near the exit of Chargestone Cave",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:27"
+    },
+    {
+      "ID": 511902,
+      "Title": "Precious Cargo",
+      "Description": "Earn the Jet Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:27"
+    },
+    {
+      "ID": 511903,
+      "Title": "Time to Step Up",
+      "Description": "Defeat Cheren after earning the Jet Badge in Twist Mountain",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:28"
+    },
+    {
+      "ID": 511904,
+      "Title": "Cold Faced Actor",
+      "Description": "Earn the Freeze Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:28"
+    },
+    {
+      "ID": 511905,
+      "Title": "Figuring Out the Future",
+      "Description": "Defeat Bianca on the way to Tubeline Bridge",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:28"
+    },
+    {
+      "ID": 511906,
+      "Title": "Never Fight Your Constituents",
+      "Description": "Earn the Legend Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:29"
+    },
+    {
+      "ID": 511907,
+      "Title": "Can You Handle What Lies Ahead?",
+      "Description": "Defeat Cheren after earning the Legend Badge",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-10 19:52:29"
+    },
+    {
+      "ID": 511908,
+      "Title": "The Ultimate Truth",
+      "Description": "Catch Reshiram",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:00"
+    },
+    {
+      "ID": 511909,
+      "Title": "Truth Over Ideals",
+      "Description": "Defeat N in his castle, opposing his ideals for good",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2026-04-14 13:14:43"
+    },
+    {
+      "ID": 511910,
+      "Title": "Truth and Ideals Versus Blind Ambition",
+      "Description": "Defeat Ghetsis in N's Castle and counter his conquering ambition",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "win_condition",
+      "DateModified": "2025-04-10 21:12:51"
+    },
+    {
+      "ID": 511911,
+      "Title": "Our Important Friends",
+      "Description": "Defeat Cheren in Victory Road",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:01"
+    },
+    {
+      "ID": 511912,
+      "Title": "Welcome To the Top",
+      "Description": "Earn your place in the Hall of Fame in the Pokémon League",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-10 21:12:28"
+    },
+    {
+      "ID": 511913,
+      "Title": "An Amazing Assistant",
+      "Description": "Defeat Bianca in Nuvema Town",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:02"
+    },
+    {
+      "ID": 511914,
+      "Title": "Beauty in Black",
+      "Description": "Defeat Cynthia in Undella Town",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:02"
+    },
+    {
+      "ID": 511915,
+      "Title": "Genuine (Game) Freak",
+      "Description": "Defeat Morimoto in Castelia City",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:03"
+    },
+    {
+      "ID": 511916,
+      "Title": "The Ironed Willed Leader",
+      "Description": "Catch Cobalion",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:03"
+    },
+    {
+      "ID": 511917,
+      "Title": "The Siege Engine",
+      "Description": "Catch Terrakion",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:03"
+    },
+    {
+      "ID": 511918,
+      "Title": "The Blade of Grass",
+      "Description": "Catch Virizion",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:03"
+    },
+    {
+      "ID": 511919,
+      "Title": "The Wrathful Cyclos",
+      "Description": "Catch Tornadus",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:04"
+    },
+    {
+      "ID": 511920,
+      "Title": "The Empty Husk",
+      "Description": "Catch Kyurem",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:04"
+    },
+    {
+      "ID": 511921,
+      "Title": "Mind Meld",
+      "Description": "Catch a Musharna with the Telepathy ability",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:04"
+    },
+    {
+      "ID": 511922,
+      "Title": "Cooling the Fires",
+      "Description": "Catch a Darmanitan with the Zen Mode ability",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-02 12:34:43"
+    },
+    {
+      "ID": 511923,
+      "Title": "The Volcano is Waking",
+      "Description": "Catch Volcarona in Relic Castle without having obtained it before",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2026-04-04 15:16:35"
+    },
+    {
+      "ID": 511924,
+      "Title": "Fossil Extractor",
+      "Description": "Revive a Pokémon from a Cover Fossil or Plume Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:06"
+    },
+    {
+      "ID": 511925,
+      "Title": "A Non Enemy",
+      "Description": "Revive a Pokémon from a Root Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:06"
+    },
+    {
+      "ID": 511926,
+      "Title": "You Old Shrimp!",
+      "Description": "Revive a Pokémon from a Claw Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:06"
+    },
+    {
+      "ID": 511927,
+      "Title": "Praise Helix",
+      "Description": "Revive a Pokémon from a Helix Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:07"
+    },
+    {
+      "ID": 511928,
+      "Title": "Dome In a Rock",
+      "Description": "Revive a Pokémon from a Dome Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:07"
+    },
+    {
+      "ID": 511929,
+      "Title": "Rock Wyvern of Old",
+      "Description": "Revive a Pokémon from an Old Amber",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:07"
+    },
+    {
+      "ID": 511930,
+      "Title": "Defending Champ",
+      "Description": "Revive a Pokémon from an Armor Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:07"
+    },
+    {
+      "ID": 511931,
+      "Title": "Splitting Headache",
+      "Description": "Revive a Pokémon from a Skull Fossil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:08"
+    },
+    {
+      "ID": 511932,
+      "Title": "Monkey See, Monkey Take",
+      "Description": "Obtain one of the three elemental monkeys as a gift in the Dreamyard",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:08"
+    },
+    {
+      "ID": 511933,
+      "Title": "An Eggscellent Gift",
+      "Description": "Obtain an egg from a Ranger on Route 18",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:08"
+    },
+    {
+      "ID": 511934,
+      "Title": "Rare, Huh?",
+      "Description": "Obtain a rare Pokémon from a man on the Marvelous Bridge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:10"
+    },
+    {
+      "ID": 511935,
+      "Title": "Grass for Grass",
+      "Description": "Trade Cottonee for Petilil",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:10"
+    },
+    {
+      "ID": 511936,
+      "Title": "Come On Ladies, One Pound Fish",
+      "Description": "Trade Minccino for Basculin",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:10"
+    },
+    {
+      "ID": 511937,
+      "Title": "Getting Squirrely",
+      "Description": "Trade Boldore for Emolga",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:11"
+    },
+    {
+      "ID": 511938,
+      "Title": "Upgrades",
+      "Description": "Trade Ditto for Rotom",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:11"
+    },
+    {
+      "ID": 511939,
+      "Title": "Much Easier Than Before!",
+      "Description": "Trade Cinccino for Munchlax",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:11"
+    },
+    {
+      "ID": 511940,
+      "Title": "A Fluffy Upgrade; Part 1",
+      "Description": "Fight the trainer with whom you traded Cottonee",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:11"
+    },
+    {
+      "ID": 511941,
+      "Title": "A Fluffy Upgrade; Part 2",
+      "Description": "Fight the trainer with whom you traded Minccino",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:12"
+    },
+    {
+      "ID": 511942,
+      "Title": "Oh! That's a Baseball!",
+      "Description": "Defeat each unique trainer specific to the baseball event in the Big Stadium in Nimbasa City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:12"
+    },
+    {
+      "ID": 511943,
+      "Title": "It's Called Soccer Here",
+      "Description": "Defeat each unique trainer specific to the soccer event in the Big Stadium in Nimbasa City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:12"
+    },
+    {
+      "ID": 511944,
+      "Title": "One Compound Word; Football",
+      "Description": "Defeat each unique trainer specific to the football event in the Big Stadium in Nimbasa City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:13"
+    },
+    {
+      "ID": 511945,
+      "Title": "Singles Event",
+      "Description": "Defeat each unique trainer specific to the Tennis event in the Small Court in Nimbasa City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:13"
+    },
+    {
+      "ID": 511946,
+      "Title": "Get Dunked On",
+      "Description": "Defeat each unique trainer specific to the basketball event in the Small Court in Nimbasa City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-02 12:40:49"
+    },
+    {
+      "ID": 511947,
+      "Title": "Single Battle Institute: Normal Rank",
+      "Description": "Obtain Normal Rank or higher in Single Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:14"
+    },
+    {
+      "ID": 511948,
+      "Title": "Single Battle Institute: Super Rank",
+      "Description": "Obtain Super Rank or higher in Single Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:14"
+    },
+    {
+      "ID": 511949,
+      "Title": "Single Battle Institute: Hyper Rank",
+      "Description": "Obtain Hyper Rank or higher in Single Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:14"
+    },
+    {
+      "ID": 511950,
+      "Title": "Single Battle Institute: Elite Rank",
+      "Description": "Obtain Elite Rank or higher in Single Battle Institute",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:14"
+    },
+    {
+      "ID": 511951,
+      "Title": "Single Battle Institute: Master Rank",
+      "Description": "Obtain Master Rank in Single Battle Institute",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:15"
+    },
+    {
+      "ID": 511952,
+      "Title": "Battle Subway: Single Subway",
+      "Description": "Defeat Master Ingo in a Single Subway",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:15"
+    },
+    {
+      "ID": 511953,
+      "Title": "Battle Subway: Super Single Subway",
+      "Description": "Defeat Master Ingo in a Super Single Subway",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-12-17 13:25:01"
+    },
+    {
+      "ID": 511954,
+      "Title": "Battle Subway: Double",
+      "Description": "Defeat Master Emmet in a Double Subway",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:16"
+    },
+    {
+      "ID": 511955,
+      "Title": "Battle Subway: Super Double Subway",
+      "Description": "Defeat Master Emmet in a Super Double Subway",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-03 12:41:34"
+    },
+    {
+      "ID": 511956,
+      "Title": "Battle Subway: Multi Train",
+      "Description": "Defeat Master Ingo and Master Emmet in a Multi Train",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:16"
+    },
+    {
+      "ID": 511957,
+      "Title": "Battle Subway: Super Multi Train",
+      "Description": "Defeat Master Ingo and Master Emmet in a Super Multi Train",
+      "Points": 50,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:17"
+    },
+    {
+      "ID": 511958,
+      "Title": "Spiritual Encounter",
+      "Description": "Encounter a ghost on Marvelous Bridge",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:17"
+    },
+    {
+      "ID": 511959,
+      "Title": "Seven Scrimmages On the Seas",
+      "Description": "Defeat all 7 trainers aboard the Royal Unova on a Sunday",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-06-27 03:22:23"
+    },
+    {
+      "ID": 511960,
+      "Title": "Here's Looking At You, Kid",
+      "Description": "Assist Looker in locating the Team Plasma Sages",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:17"
+    },
+    {
+      "ID": 511961,
+      "Title": "Oni-baku Gang",
+      "Description": "Rename the Black Empoleon Gang",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:18"
+    },
+    {
+      "ID": 511962,
+      "Title": "True Riches are the Bonds We Share",
+      "Description": "Defeat all members of the Riches family",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:18"
+    },
+    {
+      "ID": 511963,
+      "Title": "Catch'em All - Unova",
+      "Description": "Catch all 130 obtainable Unova Pokémon in the game without external trades [Does not include National Pokédex]",
+      "Points": 50,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:19"
+    },
+    {
+      "ID": 511964,
+      "Title": "Catch'em All - National",
+      "Description": "Catch all 201 obtainable National Pokémon in the game without external trades [Does not include Unova Pokédex]",
+      "Points": 50,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:19"
+    },
+    {
+      "ID": 511965,
+      "Title": "Treasures That Lie in the Deep",
+      "Description": "Collect all treasures in the Abyssal Ruins",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-05-15 12:23:38"
+    },
+    {
+      "ID": 511966,
+      "Title": "Double Battle Institude: Normal Rank",
+      "Description": "Obtain Normal Rank or higher in Double Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:20"
+    },
+    {
+      "ID": 511967,
+      "Title": "Double Battle Institude: Super Rank",
+      "Description": "Obtain Super Rank or higher in Double Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:20"
+    },
+    {
+      "ID": 511968,
+      "Title": "Double Battle Institude: Hyper Rank",
+      "Description": "Obtain Hyper Rank or higher in Double Battle Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:21"
+    },
+    {
+      "ID": 511969,
+      "Title": "Double Battle Institude: Elite Rank",
+      "Description": "Obtain Elite Rank or higher in Double Battle Institute",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:21"
+    },
+    {
+      "ID": 511970,
+      "Title": "Double Battle Institude: Master Rank",
+      "Description": "Obtain Master Rank in Double Battle Institute",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-09 16:04:21"
+    },
+    {
+      "ID": 507379,
+      "Title": "C-C-C-Changes",
+      "Description": "Show all four variants of Deerling to a Scientist in the Season Research Lab on Route 6",
+      "Points": 3,
+      "DisplayOrder": 85,
+      "type": null,
+      "DateModified": "2025-03-27 02:18:05"
+    },
+    {
+      "ID": 506352,
+      "Title": "With These Hands...!",
+      "Description": "Have one of your Pokémon massaged in Castelia City",
+      "Points": 1,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-08-23 19:58:18"
+    },
+    {
+      "ID": 506353,
+      "Title": "Sweet, Sweet Cone",
+      "Description": "Purchase a Casteliacone in Castelia City",
+      "Points": 2,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-03-26 14:55:28"
+    },
+    {
+      "ID": 506354,
+      "Title": "The Only Language I Speak Is Dance",
+      "Description": "Round up the three dancers in Castelia City",
+      "Points": 1,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:37"
+    },
+    {
+      "ID": 506803,
+      "Title": "OH WAITER!",
+      "Description": "Serve all four sandwiches correctly for the Chef on Village Bridge",
+      "Points": 2,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:38"
+    },
+    {
+      "ID": 506804,
+      "Title": "Keep Your Eye on the Rat",
+      "Description": "Successfully find the Patrat holding the Big Mushroom on the Marvelous Bridge",
+      "Points": 2,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:38"
+    },
+    {
+      "ID": 507539,
+      "Title": "I Know A Spot",
+      "Description": "Defeat all four trainers on the Ferris Wheel of Nimbasa City",
+      "Points": 4,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2025-03-26 16:11:56"
+    },
+    {
+      "ID": 506844,
+      "Title": "Machine Maniac",
+      "Description": "Obtain all available TMs and HMs",
+      "Points": 25,
+      "DisplayOrder": 88,
+      "type": null,
+      "DateModified": "2025-04-11 02:50:35"
+    },
+    {
+      "ID": 506373,
+      "Title": "Battler Beginnings",
+      "Description": "Defeat every trainer from Route 2, the Dreamyard, and Route 3",
+      "Points": 3,
+      "DisplayOrder": 100,
+      "type": null,
+      "DateModified": "2025-03-27 02:41:34"
+    },
+    {
+      "ID": 506374,
+      "Title": "From Forests to Cities",
+      "Description": "Defeat every trainer from Pinwheel Forest and Battle Company Building",
+      "Points": 5,
+      "DisplayOrder": 101,
+      "type": null,
+      "DateModified": "2025-03-26 15:02:17"
+    },
+    {
+      "ID": 506375,
+      "Title": "Weathering the Storm",
+      "Description": "Defeat every trainer from Route 4, the Desert Resort, and Relic Castle",
+      "Points": 4,
+      "DisplayOrder": 102,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:42"
+    },
+    {
+      "ID": 506376,
+      "Title": "Street Fights in the Rain and Snow",
+      "Description": "Defeat every trainer from Route 5, Cold Storage, and Route 6",
+      "Points": 3,
+      "DisplayOrder": 103,
+      "type": null,
+      "DateModified": "2025-03-26 14:54:29"
+    },
+    {
+      "ID": 506377,
+      "Title": "Charged and Ready to Fight",
+      "Description": "Defeat every trainer from Chargestone Cave, Route 7, and the Celestial Tower",
+      "Points": 10,
+      "DisplayOrder": 104,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:43"
+    },
+    {
+      "ID": 506378,
+      "Title": "Clean-Up Action",
+      "Description": "Defeat every trainer from Route 1, Route 17, Route 18, P2 Laboratory, and Mistralton Cave",
+      "Points": 5,
+      "DisplayOrder": 105,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:43"
+    },
+    {
+      "ID": 506379,
+      "Title": "Swamp Life to Mall Life",
+      "Description": "Defeat every trainer from Twist Mountain, Route 8, Route 9, and the Moor of Icirrus",
+      "Points": 5,
+      "DisplayOrder": 106,
+      "type": null,
+      "DateModified": "2025-06-23 23:58:17"
+    },
+    {
+      "ID": 506380,
+      "Title": "On the Road to Victory",
+      "Description": "Defeat every trainer from Route 10 and Victory Road",
+      "Points": 5,
+      "DisplayOrder": 107,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:44"
+    },
+    {
+      "ID": 506381,
+      "Title": "Dreaming of Challenges",
+      "Description": "Defeat every trainer from the Dreamyard's Basement and Challenger's Cave",
+      "Points": 5,
+      "DisplayOrder": 108,
+      "type": null,
+      "DateModified": "2025-06-21 17:29:28"
+    },
+    {
+      "ID": 506555,
+      "Title": "Hiking Through the Fields",
+      "Description": "Defeat every trainer from Route 11, Village Bridge, Route 12, and Route 13",
+      "Points": 5,
+      "DisplayOrder": 109,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:44"
+    },
+    {
+      "ID": 506556,
+      "Title": "Fog of War",
+      "Description": "Defeat every trainer from Undella Bay, Route 14, and the Abundant Shrine",
+      "Points": 3,
+      "DisplayOrder": 110,
+      "type": null,
+      "DateModified": "2025-08-08 12:55:31"
+    },
+    {
+      "ID": 506557,
+      "Title": "The Final Bridge",
+      "Description": "Defeat every trainer from Route 15, the Marvelous Bridge, and Route 16",
+      "Points": 3,
+      "DisplayOrder": 111,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:45"
+    },
+    {
+      "ID": 506841,
+      "Title": "Item Finder Beginnings",
+      "Description": "Obtain every overworld item, including hidden items, on Route 2, Striaton City, and Route 3",
+      "Points": 3,
+      "DisplayOrder": 130,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:45"
+    },
+    {
+      "ID": 506972,
+      "Title": "City Inspection",
+      "Description": "Obtain every overworld item, including hidden items, in Nacrene City, Pinwheel Forest, and Castelia City",
+      "Points": 3,
+      "DisplayOrder": 131,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:45"
+    },
+    {
+      "ID": 507362,
+      "Title": "Desert Relics",
+      "Description": "Obtain every overworld item, including hidden items, Route 4, Desert Resort, Relic Castle, and Nimbasa City",
+      "Points": 5,
+      "DisplayOrder": 132,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:45"
+    },
+    {
+      "ID": 507380,
+      "Title": "Gone Mining",
+      "Description": "Obtain every overworld item, including hidden items, in Route 5, Driftveil City, Cold Storage, Route 6, and Chargestone Cave",
+      "Points": 10,
+      "DisplayOrder": 133,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:46"
+    },
+    {
+      "ID": 507432,
+      "Title": "A Hitchhiker's Guide",
+      "Description": "Obtain every overworld item, including hidden items, in Mistralton City, Route 7, Celestial Tower, and Twist Mountain",
+      "Points": 5,
+      "DisplayOrder": 134,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:46"
+    },
+    {
+      "ID": 507433,
+      "Title": "Wetland Wonders",
+      "Description": "Obtain every overworld item, including hidden items, in Icirrus City, Dragonspiral Tower, Route 8, and the Moor of Icirrus",
+      "Points": 3,
+      "DisplayOrder": 135,
+      "type": null,
+      "DateModified": "2025-04-03 17:05:56"
+    },
+    {
+      "ID": 507436,
+      "Title": "Items Close to Victory",
+      "Description": "Obtain every overworld item, including hidden items, in Route 9, Challenger's Cave, Opelucid City,  Route 10, and Victory Road",
+      "Points": 10,
+      "DisplayOrder": 136,
+      "type": null,
+      "DateModified": "2025-04-08 14:28:53"
+    },
+    {
+      "ID": 507437,
+      "Title": "Post Game Easter Eggs",
+      "Description": "Obtain every overworld item, including hidden items, in Route 11, Village Bridge, Route 12, and Lacunosa Town",
+      "Points": 5,
+      "DisplayOrder": 137,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:47"
+    },
+    {
+      "ID": 507438,
+      "Title": "Stealing From the Shrines",
+      "Description": "Obtain every overworld item, including hidden items, in Route 13, Route 14, Giant Chasm, Abundant Shrine, Undella Town, and Undella Bay",
+      "Points": 10,
+      "DisplayOrder": 137,
+      "type": null,
+      "DateModified": "2025-10-31 13:05:29"
+    },
+    {
+      "ID": 507528,
+      "Title": "Small Scavenger Hunt",
+      "Description": "Obtain every overworld item, including hidden items, in Route 15, Route 16, and Lostlorn Forest",
+      "Points": 2,
+      "DisplayOrder": 138,
+      "type": null,
+      "DateModified": "2025-03-26 14:31:47"
+    },
+    {
+      "ID": 507529,
+      "Title": "Heading the Ocean's Call",
+      "Description": "Obtain every overworld item, including hidden items, in Route 17, Route 18, and Mistralton Cave",
+      "Points": 3,
+      "DisplayOrder": 139,
+      "type": null,
+      "DateModified": "2025-10-31 13:31:09"
+    },
+    {
+      "ID": 507536,
+      "Title": "Part of the Cleanup",
+      "Description": "Obtain every overworld item, including hidden items, on Route 1, the Dreamyard, and Wellspring Cave",
+      "Points": 5,
+      "DisplayOrder": 140,
+      "type": null,
+      "DateModified": "2025-10-31 12:39:48"
+    }
+  ]
+}

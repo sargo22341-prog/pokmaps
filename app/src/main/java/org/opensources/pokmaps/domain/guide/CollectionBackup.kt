@@ -23,16 +23,11 @@ fun validateGuideProgress(version: Int, progress: GuideProgress) {
     require(version > 0)
     require(progress.completed.size <= 500 && progress.completed.all { it.matches(ARTICLE_ID) })
     require(
-        progress.roamers.size <= 3 && progress.roamers.map {
+        progress.roamers.size <= Roamers.maximumObservations(version) && progress.roamers.map {
             it.pokemonId
         }.distinct().size == progress.roamers.size
     )
-    require(
-        progress.roamers.all {
-            version in 4..6 && it.pokemonId in Roamers.pokemonIds && it.place in Roamers.places &&
-                (version != 6 || it.pokemonId != 245)
-        }
-    )
+    require(progress.roamers.all { Roamers.valid(version, it) })
 }
 
 private val ARTICLE_ID = Regex("[a-z0-9-]{1,100}")

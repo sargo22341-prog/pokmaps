@@ -18,7 +18,9 @@ import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideLibrary
+import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideSpan
+import org.opensources.pokmaps.domain.guide.RoamerObservation
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -31,6 +33,22 @@ class GuideScreenTest {
         compose.setContent {
             GuideScreen(state, { actions += it }, GuideLinks({}, {}, {}))
         }
+    }
+
+    @Test
+    fun observedGbaRoamerOpensItsRouteAndCanBeForgotten() {
+        val state = GuideUiState(
+            loading = false,
+            library = GuideLibrary(FakeGameDao.RUBY, emptyList()),
+            progress = GuideProgress(roamers = listOf(RoamerObservation(381, "route110")))
+        )
+        compose.setContent { RoamerTool(state) { actions += it } }
+        compose.onNode(hasText(context.getString(R.string.guide_roamers_title))).performClick()
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_latios))).assertExists()
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_latias))).assertDoesNotExist()
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_map))).performClick()
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_forget))).performClick()
+        assertEquals(listOf(GuideAction.ShowPlace("route110"), GuideAction.ObserveRoamer(381, null)), actions)
     }
 
     @Test

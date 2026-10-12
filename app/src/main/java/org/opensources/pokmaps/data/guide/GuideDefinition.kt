@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.data.guide
 
 import androidx.annotation.StringRes
+import org.opensources.pokmaps.domain.guide.CaptureGoal
 import org.opensources.pokmaps.domain.guide.GuideCategory
 
 internal data class GuideDefinition(
@@ -17,7 +18,9 @@ internal data class GuideDefinition(
     val achievementId: Int? = null,
     val points: Int = 0,
     val chapter: String? = null,
-    val shiny: Boolean = false
+    val shiny: Boolean = false,
+    val captureGoal: CaptureGoal? = null,
+    val unownGoal: Boolean = false
 )
 
 internal val RED_BLUE_YELLOW_VERSIONS = setOf(1, 2, 3)

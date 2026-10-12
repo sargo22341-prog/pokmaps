@@ -1,0 +1,165 @@
+{
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "games": [
+    {
+      "game_id": 515,
+      "title": "Pokémon FireRed Version",
+      "console": "Game Boy Advance",
+      "source": "https://retroachievements.org/game/515",
+      "achievement_count": 61,
+      "sha256": "28b875c215bb82aa62e7a54f9fb3d3b7b212dab1505198c7b41663cd15e9b638"
+    },
+    {
+      "game_id": 576,
+      "title": "Pokémon Gold Version",
+      "console": "Game Boy Color",
+      "source": "https://retroachievements.org/game/576",
+      "achievement_count": 72,
+      "sha256": "9492f0707890f67f2b7d429579117464256f47f139bf68f9e2124b40fd43dfaa"
+    },
+    {
+      "game_id": 586,
+      "title": "Pokémon Blue Version",
+      "console": "Game Boy",
+      "source": "https://retroachievements.org/game/586",
+      "achievement_count": 90,
+      "sha256": "0033b637a32dc64dfc8cdcb829c17e2b5507c094197e81fba93705b7cdc93af3"
+    },
+    {
+      "game_id": 668,
+      "title": "Pokémon Emerald Version",
+      "console": "Game Boy Advance",
+      "source": "https://retroachievements.org/game/668",
+      "achievement_count": 197,
+      "sha256": "4040791dafadf602941e1326c0188403ba93f06332eeff347bdcc95652e1784b"
+    },
+    {
+      "game_id": 722,
+      "title": "Pokémon Silver Version",
+      "console": "Game Boy Color",
+      "source": "https://retroachievements.org/game/722",
+      "achievement_count": 75,
+      "sha256": "caf4977aa2f0b06d07b96e03d2a2cb11b3726328d80a11de784ee4d959727282"
+    },
+    {
+      "game_id": 723,
+      "title": "Pokémon Yellow Version: Special Pikachu Edition",
+      "console": "Game Boy",
+      "source": "https://retroachievements.org/game/723",
+      "achievement_count": 76,
+      "sha256": "a943c4d0d669caf5e4c8bd3c7ffd6421f8673ee5077c5be890e842275fb2fda8"
+    },
+    {
+      "game_id": 724,
+      "title": "Pokémon Red Version",
+      "console": "Game Boy",
+      "source": "https://retroachievements.org/game/724",
+      "achievement_count": 93,
+      "sha256": "19ddc8f9155cf297f71cf1967a53ebd593a573e51c9110bc51d421e4f9b4ee9a"
+    },
+    {
+      "game_id": 788,
+      "title": "Pokémon LeafGreen Version",
+      "console": "Game Boy Advance",
+      "source": "https://retroachievements.org/game/788",
+      "achievement_count": 128,
+      "sha256": "1ce93cb6e4bd5afcf61234b30e28750ea216ef5d834900e1bfb1e0a8e605a2be"
+    },
+    {
+      "game_id": 790,
+      "title": "Pokémon Ruby Version",
+      "console": "Game Boy Advance",
+      "source": "https://retroachievements.org/game/790",
+      "achievement_count": 49,
+      "sha256": "c94f17e141557ca3a905aeb1ce86f9a438b5a8abe9622b9c5c03d83130735def"
+    },
+    {
+      "game_id": 791,
+      "title": "Pokémon Sapphire Version",
+      "console": "Game Boy Advance",
+      "source": "https://retroachievements.org/game/791",
+      "achievement_count": 49,
+      "sha256": "574517ecbbdfda348867441b1f030f9cff42a4008a592a953e31722921008e4a"
+    },
+    {
+      "game_id": 810,
+      "title": "Pokémon Crystal Version",
+      "console": "Game Boy Color",
+      "source": "https://retroachievements.org/game/810",
+      "achievement_count": 113,
+      "sha256": "da1258bb76f21e9600da36a36fd893b7761411c38cf4f562124f96c648587fcb"
+    },
+    {
+      "game_id": 3887,
+      "title": "Pokémon Black Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/3887",
+      "achievement_count": 118,
+      "sha256": "d3998756ab6ecbdfe8945dc6d9e1f60e12214850150d62d26355d614e18b2c74"
+    },
+    {
+      "game_id": 5853,
+      "title": "Pokémon Black Version 2",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/5853",
+      "achievement_count": 187,
+      "sha256": "1883776cb94b29422a72b67bf35ab3f27d1618185f57d05068032d1d57d8f8cb"
+    },
+    {
+      "game_id": 7212,
+      "title": "Pokémon HeartGold Version | Pokémon SoulSilver Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/7212",
+      "achievement_count": 136,
+      "sha256": "5d950464a50d0afd9deed7b4a09ee6dd1a2c0367c69adbdbc299ada158afb04b"
+    },
+    {
+      "game_id": 9852,
+      "title": "Pokémon Diamond Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/9852",
+      "achievement_count": 121,
+      "sha256": "63e4c42466c0102512655d7ebe3e04c4a9446d208114874df5bdbda46d4dbd3e"
+    },
+    {
+      "game_id": 11732,
+      "title": "Pokémon Platinum Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/11732",
+      "achievement_count": 101,
+      "sha256": "915166098cf249ceb44f092956f9e1dad1449929db3340f9b11452fa661765aa"
+    },
+    {
+      "game_id": 16197,
+      "title": "Pokémon White Version 2",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/16197",
+      "achievement_count": 151,
+      "sha256": "82f2269a6eb63c05ef04a304ef18907e3d7ac12b14c1fb83e8e37f3880e29c2d"
+    },
+    {
+      "game_id": 16211,
+      "title": "Pokémon White Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/16211",
+      "achievement_count": 73,
+      "sha256": "1bbafff4d81613e4dfc338a5f3c429f05c3e3726e701a614cb64362036297dd6"
+    },
+    {
+      "game_id": 25369,
+      "title": "Pokémon Pearl Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/25369",
+      "achievement_count": 210,
+      "sha256": "cd07e7fc84e465616605ea8e1b554b006ae66df568b4bc82f15f50ae9c6f014d"
+    },
+    {
+      "game_id": 39076,
+      "title": "Pokémon SoulSilver Version",
+      "console": "Nintendo DS",
+      "source": "https://retroachievements.org/game/39076",
+      "achievement_count": 0,
+      "sha256": "22c693aeeb658554ae5c4cb2c42c3afb8dbeaed1fb6ac18e69e21e4a8ada397b"
+    }
+  ]
+}

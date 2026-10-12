@@ -1,0 +1,657 @@
+{
+  "game_id": 576,
+  "title": "Pokémon Gold Version",
+  "console": "Game Boy Color",
+  "source": "https://retroachievements.org/game/576",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 5086,
+      "Title": "Be Nice",
+      "Description": "Give your new rival a name.",
+      "Points": 1,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:26"
+    },
+    {
+      "ID": 5070,
+      "Title": "Flying Monk",
+      "Description": "Defeat Falkner and gain the Zephyr Badge.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:27"
+    },
+    {
+      "ID": 155162,
+      "Title": "Gale Force Winds",
+      "Description": "Defeat Falkner and gain the Zephyr Badge. [Set Mode, <= Lv.9]",
+      "Points": 10,
+      "DisplayOrder": 3,
+      "type": "missable",
+      "DateModified": "2024-10-06 10:12:33"
+    },
+    {
+      "ID": 5092,
+      "Title": "Rocket Slowpoke",
+      "Description": "Defeat the newly formed Team Rocket in Slowpoke Well.",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:27"
+    },
+    {
+      "ID": 5071,
+      "Title": "Bug Catcher",
+      "Description": "Defeat Bugsy and gain the Hive Badge.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:27"
+    },
+    {
+      "ID": 155163,
+      "Title": "Crawling in My Skin",
+      "Description": "Defeat Bugsy and gain the Hive Badge. [Set Mode, <= Lv.16]",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:18"
+    },
+    {
+      "ID": 5072,
+      "Title": "Milk Maid",
+      "Description": "Defeat Whitney and gain the Plain Badge.",
+      "Points": 10,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:28"
+    },
+    {
+      "ID": 155168,
+      "Title": "A Normal Brat",
+      "Description": "Defeat Whitney and gain the Plain Badge. [Set Mode, <= Lv.20]",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:23"
+    },
+    {
+      "ID": 5073,
+      "Title": "Friendly Ghost",
+      "Description": "Defeat Morty and gain the Fog Badge.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:28"
+    },
+    {
+      "ID": 155170,
+      "Title": "A Nightmare",
+      "Description": "Defeat Morty and gain the Fog Badge. [Set Mode, <= Lv.25]",
+      "Points": 10,
+      "DisplayOrder": 10,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:27"
+    },
+    {
+      "ID": 5074,
+      "Title": "Karate Island",
+      "Description": "Defeat Chuck and gain the Storm Badge.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:28"
+    },
+    {
+      "ID": 155173,
+      "Title": "One Inch Punch",
+      "Description": "Defeat Chuck and gain the Storm Badge. [Set Mode, <= Lv.30]",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:31"
+    },
+    {
+      "ID": 5075,
+      "Title": "Iron Maiden",
+      "Description": "Defeat Jasmine and gain the Mineral Badge.",
+      "Points": 5,
+      "DisplayOrder": 13,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:29"
+    },
+    {
+      "ID": 155174,
+      "Title": "Brazen Bull",
+      "Description": "Defeat Jasmine and gain the Mineral Badge. [Set Mode, <= Lv.35]",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:35"
+    },
+    {
+      "ID": 5093,
+      "Title": "Rocket Rage",
+      "Description": "Defeat Team Rocket in Mahagony Town.",
+      "Points": 5,
+      "DisplayOrder": 15,
+      "type": "progression",
+      "DateModified": "2021-05-29 12:45:31"
+    },
+    {
+      "ID": 5076,
+      "Title": "Old Man Winters",
+      "Description": "Defeat Pryce and gain the Glacier Badge.",
+      "Points": 5,
+      "DisplayOrder": 16,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:29"
+    },
+    {
+      "ID": 155175,
+      "Title": "Bone Chilling",
+      "Description": "Defeat Pryce and gain the Glacier Badge. [Set Mode, <= Lv.31]",
+      "Points": 10,
+      "DisplayOrder": 17,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:41"
+    },
+    {
+      "ID": 5497,
+      "Title": "Rocket Radio",
+      "Description": "Defeat Team Rocket in the Radio Tower.",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:30"
+    },
+    {
+      "ID": 5077,
+      "Title": "Training Dragon",
+      "Description": "Defeat Clair and gain the Rising Badge.",
+      "Points": 5,
+      "DisplayOrder": 19,
+      "type": "progression",
+      "DateModified": "2021-05-23 17:50:30"
+    },
+    {
+      "ID": 155176,
+      "Title": "Mythical Beasts",
+      "Description": "Defeat Clair in her Gym. [Set Mode, <= Lv.40]",
+      "Points": 10,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:45"
+    },
+    {
+      "ID": 5087,
+      "Title": "Runaway Trio",
+      "Description": "Catch Entei, Suicune and Raikou.",
+      "Points": 25,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2024-10-06 10:12:52"
+    },
+    {
+      "ID": 5089,
+      "Title": "Sacred Ash",
+      "Description": "Catch Ho-Oh.",
+      "Points": 10,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2024-10-06 10:12:44"
+    },
+    {
+      "ID": 5091,
+      "Title": "All Unown",
+      "Description": "Catch all 26 types of Unown.",
+      "Points": 10,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2022-08-06 04:05:09"
+    },
+    {
+      "ID": 5509,
+      "Title": "Elite Five",
+      "Description": "Defeat the Elite four and the Champion Lance for the first time.",
+      "Points": 10,
+      "DisplayOrder": 24,
+      "type": "win_condition",
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 5511,
+      "Title": "Five Chumps",
+      "Description": "Defeat the Elite Four and the Champion with only one Pokemon in your party.",
+      "Points": 25,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2022-08-06 03:26:11"
+    },
+    {
+      "ID": 155164,
+      "Title": "A Little Baby Pigeon",
+      "Description": "Obtain a free Spearow.",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:43"
+    },
+    {
+      "ID": 155165,
+      "Title": "Rocky Balboa",
+      "Description": "Trade a Bellsprout for an Onix in Violet City.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:44"
+    },
+    {
+      "ID": 155166,
+      "Title": "Mr. Muscle",
+      "Description": "Trade a Drowzee for a Machop in Goldenrod City.",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:44"
+    },
+    {
+      "ID": 155167,
+      "Title": "It Kept the Shell",
+      "Description": "Hatch the Mystery Egg and obtain the Pokemon within.",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": null,
+      "DateModified": "2021-05-25 20:39:14"
+    },
+    {
+      "ID": 155169,
+      "Title": "Wow! Thanks Bill!",
+      "Description": "Obtain the Eevee from Bill.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2021-05-23 17:51:17"
+    },
+    {
+      "ID": 155171,
+      "Title": "A Shocking Swap",
+      "Description": "Trade a Krabby for a Voltorb in Olivine City.",
+      "Points": 5,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:45"
+    },
+    {
+      "ID": 155172,
+      "Title": "I Did It for the Easy Pokedex Entry",
+      "Description": "Obtain the Shuckle from Cianwood City",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:45"
+    },
+    {
+      "ID": 155177,
+      "Title": "No... I'd Rather Have the Dragonair",
+      "Description": "Trade a Dragonair for a Rhydon in Blackthorn City.",
+      "Points": 5,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:45"
+    },
+    {
+      "ID": 155178,
+      "Title": "The Chad Tyrogue",
+      "Description": "Obtain a free Tyrogue.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:46"
+    },
+    {
+      "ID": 155179,
+      "Title": "Dad Got Me That Fade",
+      "Description": "Give one of your Pokemon a sweet haircut.",
+      "Points": 4,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2021-09-10 23:14:47"
+    },
+    {
+      "ID": 155180,
+      "Title": "Kurt's Balls",
+      "Description": "Obtain a new Pokeball from Kurt.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-05-23 17:51:21"
+    },
+    {
+      "ID": 5080,
+      "Title": "Volt Military",
+      "Description": "Defeat Lt. Surge and gain the Thunder Badge.",
+      "Points": 5,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 155181,
+      "Title": "Danger, Danger! High Voltage!",
+      "Description": "Defeat Lt. Surge and gain the Thunder Badge. [Set Mode, <= Lv.46]",
+      "Points": 10,
+      "DisplayOrder": 38,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:48"
+    },
+    {
+      "ID": 5083,
+      "Title": "Twisted Spoons",
+      "Description": "Defeat Sabrina and gain the Marsh Badge.",
+      "Points": 5,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 155182,
+      "Title": "Uri Geller Lifted the Ban on My Pokemon",
+      "Description": "Defeat Sabrina and gain the Marsh Badge. [Set Mode, <= Lv.48]",
+      "Points": 10,
+      "DisplayOrder": 40,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:52"
+    },
+    {
+      "ID": 5081,
+      "Title": "Aromatherapists",
+      "Description": "Defeat Erika and gain the Rainbow Badge.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 155183,
+      "Title": "There's a Boy in My Gym",
+      "Description": "Defeat Erika and gain the Rainbow Badge. [Set Mode, <= Lv.46]",
+      "Points": 10,
+      "DisplayOrder": 42,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:55"
+    },
+    {
+      "ID": 5082,
+      "Title": "Poisonous Ninja",
+      "Description": "Defeat Janine and gain the Soul Badge.",
+      "Points": 5,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 155184,
+      "Title": "Toxicity",
+      "Description": "Defeat Janine and gain the Soul Badge. [Set Mode, <= Lv.39]",
+      "Points": 10,
+      "DisplayOrder": 44,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:38:59"
+    },
+    {
+      "ID": 5079,
+      "Title": "Watery Love",
+      "Description": "Defeat Misty and gain the Cascade Badge.",
+      "Points": 5,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:13"
+    },
+    {
+      "ID": 155187,
+      "Title": "Davy Jones' Locker",
+      "Description": "Defeat Misty and gain the Cascade Badge. [Set Mode, <= Lv.47]",
+      "Points": 10,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:39:03"
+    },
+    {
+      "ID": 5078,
+      "Title": "Rock Hard Defense",
+      "Description": "Defeat Brock and gain the Boulder Badge.",
+      "Points": 5,
+      "DisplayOrder": 47,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:14"
+    },
+    {
+      "ID": 155190,
+      "Title": "My Trusty Frying Pan Into a Drying Pan!",
+      "Description": "Defeat Brock and gain the Boulder Badge. [Set Mode, <= Lv.44]",
+      "Points": 10,
+      "DisplayOrder": 48,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:39:07"
+    },
+    {
+      "ID": 5084,
+      "Title": "Seclusive Flame",
+      "Description": "Defeat Blaine and gain the Volcano Badge.",
+      "Points": 5,
+      "DisplayOrder": 49,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:14"
+    },
+    {
+      "ID": 155191,
+      "Title": "Might Want to Put a Burn Heal on Cinnabar Island",
+      "Description": "Defeat Blaine and gain the Volcano Badge. [Set Mode, <= Lv.50]",
+      "Points": 10,
+      "DisplayOrder": 50,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:39:11"
+    },
+    {
+      "ID": 5085,
+      "Title": "One Time Champ",
+      "Description": "Defeat Blue and gain the Earth Badge.",
+      "Points": 5,
+      "DisplayOrder": 51,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:14"
+    },
+    {
+      "ID": 155192,
+      "Title": "Smell Ya Later!",
+      "Description": "Defeat Blue and gain the Earth Badge. [Set Mode, <= Lv.58]",
+      "Points": 10,
+      "DisplayOrder": 52,
+      "type": "missable",
+      "DateModified": "2025-03-04 21:39:15"
+    },
+    {
+      "ID": 5088,
+      "Title": "Master of Whirlwind",
+      "Description": "Catch Lugia.",
+      "Points": 5,
+      "DisplayOrder": 53,
+      "type": "missable",
+      "DateModified": "2024-10-06 10:12:48"
+    },
+    {
+      "ID": 5523,
+      "Title": "Battle On the Mountain",
+      "Description": "Defeat Red and become the new Pokemon Master.",
+      "Points": 10,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2025-10-15 16:54:14"
+    },
+    {
+      "ID": 5524,
+      "Title": "Seeing Red",
+      "Description": "Defeat Red with only one Pokemon in your party.",
+      "Points": 25,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2021-05-23 17:50:35"
+    },
+    {
+      "ID": 155185,
+      "Title": "Strong Very Much Be You!",
+      "Description": "Defeat the Team Rocket Grunt on Route 24 and then find the Machine Part.",
+      "Points": 5,
+      "DisplayOrder": 57,
+      "type": "missable",
+      "DateModified": "2025-04-21 22:15:30"
+    },
+    {
+      "ID": 155186,
+      "Title": "Such a Sweet Old Man",
+      "Description": "Show all the requested Pokemon to Bill's Grandpa.",
+      "Points": 10,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2021-05-23 17:51:23"
+    },
+    {
+      "ID": 155188,
+      "Title": "Big Boy",
+      "Description": "Catch the Snorlax in front of Diglett's Cave.",
+      "Points": 10,
+      "DisplayOrder": 59,
+      "type": "missable",
+      "DateModified": "2021-05-23 18:20:46"
+    },
+    {
+      "ID": 155189,
+      "Title": "My Own Noble Steed",
+      "Description": "Trade a Gloom for a Rapidash in Pewter City.",
+      "Points": 5,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:46"
+    },
+    {
+      "ID": 155193,
+      "Title": "I Hope You're Stronger Someday",
+      "Description": "Have one last battle with your Rival at Mt. Moon.",
+      "Points": 5,
+      "DisplayOrder": 61,
+      "type": null,
+      "DateModified": "2021-08-13 16:19:08"
+    },
+    {
+      "ID": 155194,
+      "Title": "Calendar Man",
+      "Description": "Speak to and receive all items from the Weekly Siblings.",
+      "Points": 10,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2021-05-23 17:51:26"
+    },
+    {
+      "ID": 155195,
+      "Title": "Wow! A Fossil!",
+      "Description": "Trade a Chansey for an Aerodactyl on Route 14.",
+      "Points": 5,
+      "DisplayOrder": 63,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:47"
+    },
+    {
+      "ID": 155196,
+      "Title": "Gotta Learn 'em' All",
+      "Description": "Found every Overworld TM & TMs gifted by NPCs.",
+      "Points": 25,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2021-12-14 03:03:07"
+    },
+    {
+      "ID": 155197,
+      "Title": "Ooh, Piece of Candy - Part 1",
+      "Description": "Found 50% of items across Johto and Kanto.",
+      "Points": 10,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2021-05-27 01:27:16"
+    },
+    {
+      "ID": 155198,
+      "Title": "Ooh, Piece of Candy - Part 2",
+      "Description": "Found 100% of items across Johto and Kanto.",
+      "Points": 25,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2021-05-27 01:33:37"
+    },
+    {
+      "ID": 155199,
+      "Title": "I'll Need My Glasses - Part 1",
+      "Description": "Found 50% of hidden items across Johto and Kanto.",
+      "Points": 10,
+      "DisplayOrder": 67,
+      "type": null,
+      "DateModified": "2021-08-01 23:55:32"
+    },
+    {
+      "ID": 155200,
+      "Title": "I'll Need My Glasses - Part 2",
+      "Description": "Found 100% of hidden items across Johto and Kanto.",
+      "Points": 25,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2022-01-07 11:06:10"
+    },
+    {
+      "ID": 155201,
+      "Title": "I'll Become Even Stronger - Part 1",
+      "Description": "Won against 50% of the Trainers in Johto.",
+      "Points": 10,
+      "DisplayOrder": 69,
+      "type": "missable",
+      "DateModified": "2021-06-12 00:26:56"
+    },
+    {
+      "ID": 155202,
+      "Title": "I'll Become Even Stronger - Part 2",
+      "Description": "Won against 100% of the Trainers in Johto.",
+      "Points": 25,
+      "DisplayOrder": 70,
+      "type": "missable",
+      "DateModified": "2021-06-12 00:26:57"
+    },
+    {
+      "ID": 155203,
+      "Title": "I'll Become Even Stronger - Part 3",
+      "Description": "Won against all of the Trainers in Kanto.",
+      "Points": 10,
+      "DisplayOrder": 71,
+      "type": "missable",
+      "DateModified": "2025-10-22 12:20:30"
+    },
+    {
+      "ID": 155204,
+      "Title": "Thanks For the Free Stuff!",
+      "Description": "Obtain all Gift items given by the people of Johto and Kanto.",
+      "Points": 10,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2021-05-23 18:20:47"
+    },
+    {
+      "ID": 5090,
+      "Title": "Gotta Catch 'em All - Gold",
+      "Description": "Catch all obtainable Pokemon.",
+      "Points": 50,
+      "DisplayOrder": 73,
+      "type": "missable",
+      "DateModified": "2024-10-06 10:12:57"
+    }
+  ]
+}

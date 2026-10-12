@@ -1,0 +1,846 @@
+{
+  "game_id": 724,
+  "title": "Pokémon Red Version",
+  "console": "Game Boy",
+  "source": "https://retroachievements.org/game/724",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 108020,
+      "Title": "Free Points",
+      "Description": "Get a free sample courtesy of the Viridian City Pokémon Mart.",
+      "Points": 1,
+      "DisplayOrder": 1,
+      "type": null,
+      "DateModified": "2021-02-13 09:44:36"
+    },
+    {
+      "ID": 108021,
+      "Title": "The United Cities of Kanto",
+      "Description": "Obtain a map of the Kanto region.",
+      "Points": 2,
+      "DisplayOrder": 2,
+      "type": null,
+      "DateModified": "2021-02-13 09:44:41"
+    },
+    {
+      "ID": 108022,
+      "Title": "Journey Has Started",
+      "Description": "Obtain the Pokédex.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:44:45"
+    },
+    {
+      "ID": 108023,
+      "Title": "Parting Gift",
+      "Description": "Obtain 5 Poké Balls from Prof. Oak.",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "missable",
+      "DateModified": "2021-02-13 09:44:49"
+    },
+    {
+      "ID": 108024,
+      "Title": "Setting the Forest Ablaze",
+      "Description": "Find every item and defeat every trainer in Viridian Forest.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": null,
+      "DateModified": "2021-02-13 09:44:52"
+    },
+    {
+      "ID": 108026,
+      "Title": "Anybody Home?",
+      "Description": "Without resetting, and without using Repels or Cut, get from one entrance of Viridian Forest to the other without initiating any wild encounters.",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": null,
+      "DateModified": "2024-08-14 09:31:36"
+    },
+    {
+      "ID": 4401,
+      "Title": "Rock-Solid Boulder Badge",
+      "Description": "Defeat Brock and earn the Boulder Badge in Pewter City.",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:45:01"
+    },
+    {
+      "ID": 108058,
+      "Title": "Rock Smash",
+      "Description": "Defeat Brock on Set Mode without using items in battle and without using Pokémon above level 14 at the beginning of the battle.",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:13:56"
+    },
+    {
+      "ID": 4414,
+      "Title": "Only Take One",
+      "Description": "Choose the Helix Fossil or the Dome Fossil at the end of Mt. Moon.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:08"
+    },
+    {
+      "ID": 108025,
+      "Title": "Shoot for the Moon",
+      "Description": "Find every item and defeat every trainer in Mt. Moon.",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": null,
+      "DateModified": "2023-09-16 23:14:09"
+    },
+    {
+      "ID": 4402,
+      "Title": "Raindrop Cascade Badge",
+      "Description": "Defeat Misty and earn the Cascade Badge in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:45:15"
+    },
+    {
+      "ID": 108059,
+      "Title": "Pool's Closed",
+      "Description": "Defeat Misty on Set Mode without using items in battle and without using Pokémon above level 21 at the beginning of the battle.",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:13:57"
+    },
+    {
+      "ID": 108138,
+      "Title": "Sleeping Giant",
+      "Description": "Be told about a legendary Pokémon that sleeps a lot.",
+      "Points": 2,
+      "DisplayOrder": 13,
+      "type": "missable",
+      "DateModified": "2021-02-13 09:45:20"
+    },
+    {
+      "ID": 108030,
+      "Title": "A Boatload of Fun",
+      "Description": "Rub the Captain's back on the S.S. Anne and obtain HM01 Cut.",
+      "Points": 5,
+      "DisplayOrder": 14,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:23"
+    },
+    {
+      "ID": 108029,
+      "Title": "My Heart Will Go On",
+      "Description": "Collect every optional item and defeat every optional trainer on the S.S. Anne.",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": "missable",
+      "DateModified": "2021-07-20 20:22:07"
+    },
+    {
+      "ID": 108028,
+      "Title": "Flashing Lights Warning",
+      "Description": "Obtain HM05 Flash from Prof. Oak's aide on Route 2.",
+      "Points": 5,
+      "DisplayOrder": 16,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:28"
+    },
+    {
+      "ID": 108027,
+      "Title": "Metal Detector",
+      "Description": "Obtain the Itemfinder from Prof. Oak's aide on Route 11.",
+      "Points": 5,
+      "DisplayOrder": 17,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:31"
+    },
+    {
+      "ID": 4403,
+      "Title": "Sunny Thunder Badge",
+      "Description": "Defeat Lt. Surge and earn the Thunder Badge in Vermilion City.",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:45:36"
+    },
+    {
+      "ID": 108060,
+      "Title": "One Man Army",
+      "Description": "Defeat Lt. Surge on Set Mode without using items in battle and without using Pokémon above level 24 at the beginning of the battle.",
+      "Points": 5,
+      "DisplayOrder": 19,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:13:58"
+    },
+    {
+      "ID": 108049,
+      "Title": "I Like to Ride It",
+      "Description": "Obtain the Bicycle from the Bike Shop in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:43"
+    },
+    {
+      "ID": 108037,
+      "Title": "Pleading Face",
+      "Description": "Find all the free coins in the Celadon City Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 21,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:46"
+    },
+    {
+      "ID": 108179,
+      "Title": "Second Place Isn't Bad",
+      "Description": "Win a bar at the Celadon City Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:52"
+    },
+    {
+      "ID": 108180,
+      "Title": "7 Grand",
+      "Description": "Win a jackpot at the Celadon City Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2021-02-13 09:45:56"
+    },
+    {
+      "ID": 108182,
+      "Title": "So Rich...",
+      "Description": "Have 9,999 coins at once.",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:02"
+    },
+    {
+      "ID": 108038,
+      "Title": "Ghost Buster",
+      "Description": "Obtain the Silph Scope from the Rocket Hideout.",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:05"
+    },
+    {
+      "ID": 108039,
+      "Title": "Raiding the Vault",
+      "Description": "Find every item and defeat every trainer in the Rocket Hideout.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:08"
+    },
+    {
+      "ID": 4404,
+      "Title": "Floral Rainbow Badge",
+      "Description": "Defeat Erika and earn the Rainbow Badge in Celadon City.",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:46:11"
+    },
+    {
+      "ID": 108061,
+      "Title": "Kicking Some Grass",
+      "Description": "Defeat Erika on Set Mode without using items in battle and without using Pokémon above level 29 at the beginning of the battle.",
+      "Points": 10,
+      "DisplayOrder": 29,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:13:59"
+    },
+    {
+      "ID": 108036,
+      "Title": "Prepare For Liftoff",
+      "Description": "Obtain HM02 Fly from the secret house on Route 16.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:16"
+    },
+    {
+      "ID": 4418,
+      "Title": "GHOST!?",
+      "Description": "Save Mr. Fuji and obtain the Poké Flute.",
+      "Points": 5,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:19"
+    },
+    {
+      "ID": 108040,
+      "Title": "Dearly Beloved",
+      "Description": "Gift the Ghost at the top of Lavender Tower a Poké Doll to calm it without using the Silph Scope.",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": "missable",
+      "DateModified": "2023-07-04 21:10:25"
+    },
+    {
+      "ID": 108041,
+      "Title": "Grave Robbing",
+      "Description": "Find every item and defeat every trainer in the Pokémon Tower.",
+      "Points": 5,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:24"
+    },
+    {
+      "ID": 108046,
+      "Title": "Too Much Water",
+      "Description": "Obtain HM03 Surf from the Safari Zone.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:26"
+    },
+    {
+      "ID": 108045,
+      "Title": "No Item Left Behind",
+      "Description": "Without resetting, collect all optional items in the Safari Zone within a single Safari Hunt.",
+      "Points": 10,
+      "DisplayOrder": 35,
+      "type": "missable",
+      "DateModified": "2024-08-14 09:32:33"
+    },
+    {
+      "ID": 108048,
+      "Title": "Performance Enhancement Disk",
+      "Description": "Obtain HM04 Strength from the Safari Zone Warden in Fuchsia City.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:32"
+    },
+    {
+      "ID": 108047,
+      "Title": "Getting Your Money's Worth",
+      "Description": "Without resetting, catch 10 Pokémon in a single Safari Hunt.",
+      "Points": 5,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2024-08-14 09:33:20"
+    },
+    {
+      "ID": 618978,
+      "Title": "Lucky Egg",
+      "Description": "Catch Chansey in the Safari Zone.",
+      "Points": 10,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2026-06-24 19:40:20"
+    },
+    {
+      "ID": 618979,
+      "Title": "Caring Mother",
+      "Description": "Catch Kangaskhan in the Safari Zone.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2026-06-24 19:40:21"
+    },
+    {
+      "ID": 618980,
+      "Title": "Bull Rush",
+      "Description": "Catch Tauros in the Safari Zone.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2026-06-24 19:40:21"
+    },
+    {
+      "ID": 618981,
+      "Title": "Bug Ninja",
+      "Description": "Catch Scyther in the Safari Zone.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2026-06-24 19:40:21"
+    },
+    {
+      "ID": 4405,
+      "Title": "Heart and Soul Badge",
+      "Description": "Defeat Koga and earn the Soul Badge in Fuchsia City.",
+      "Points": 10,
+      "DisplayOrder": 39,
+      "type": "progression",
+      "DateModified": "2021-02-22 20:40:26"
+    },
+    {
+      "ID": 108062,
+      "Title": "Ninja Gaiden",
+      "Description": "Defeat Koga on Set Mode without using items in battle and without using Pokémon above level 43 at the beginning of the battle.",
+      "Points": 10,
+      "DisplayOrder": 40,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:14:00"
+    },
+    {
+      "ID": 108057,
+      "Title": "Ace of the Maze",
+      "Description": "Starting from the gym entrance, navigate through the Fuchsia City Gym without hitting any walls.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:47"
+    },
+    {
+      "ID": 108043,
+      "Title": "Froggy!",
+      "Description": "Obtain all 3 Fishing Rods.",
+      "Points": 5,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:50"
+    },
+    {
+      "ID": 108139,
+      "Title": "Unidentified Flying Object",
+      "Description": "Glance at a mysterious bird in the distance using the binoculars.",
+      "Points": 2,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2021-09-08 14:11:15"
+    },
+    {
+      "ID": 108044,
+      "Title": "Sharing Is Caring",
+      "Description": "Obtain an Exp. All from Prof. Oak's aide in Fuchsia City.",
+      "Points": 5,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:56"
+    },
+    {
+      "ID": 108050,
+      "Title": "Biggest Balls in Kanto",
+      "Description": "Obtain the Master Ball from the President of Silph Co.",
+      "Points": 5,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2021-02-13 09:46:58"
+    },
+    {
+      "ID": 108069,
+      "Title": "Ekans Dilos",
+      "Description": "Reach the Rival in Silph Co. without defeating more than 1 trainer.",
+      "Points": 5,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2021-10-07 04:11:14"
+    },
+    {
+      "ID": 108051,
+      "Title": "Hostage Situation",
+      "Description": "Find every item, defeat every trainer, and open every door in Silph Co.",
+      "Points": 25,
+      "DisplayOrder": 47,
+      "type": "missable",
+      "DateModified": "2021-02-13 09:47:06"
+    },
+    {
+      "ID": 4416,
+      "Title": "Enter the Dragon",
+      "Description": "Claim your prize from the Saffron City Dojo.",
+      "Points": 5,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2021-02-13 09:47:08"
+    },
+    {
+      "ID": 4406,
+      "Title": "Golden Marsh Badge",
+      "Description": "Defeat Sabrina and earn the Marsh Badge in Saffron City.",
+      "Points": 10,
+      "DisplayOrder": 49,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:47:11"
+    },
+    {
+      "ID": 108063,
+      "Title": "Brawn Over Brains",
+      "Description": "Defeat Sabrina on Set Mode without using items in battle and without using Pokémon above level 43 at the beginning of the battle.",
+      "Points": 10,
+      "DisplayOrder": 50,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:14:01"
+    },
+    {
+      "ID": 108064,
+      "Title": "Monkey's Tounge",
+      "Description": "Starting from the gym entrance, navigate through the Saffron City Gym using only 4 warps.",
+      "Points": 5,
+      "DisplayOrder": 51,
+      "type": null,
+      "DateModified": "2021-02-13 09:47:16"
+    },
+    {
+      "ID": 108054,
+      "Title": "GB Bungaku Zenshuu",
+      "Description": "Without resetting and without leaving the building, read every journal in the Cinnabar Mansion.",
+      "Points": 5,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2024-08-14 09:33:58"
+    },
+    {
+      "ID": 4407,
+      "Title": "Fiery Volcano Badge",
+      "Description": "Defeat Blaine and earn the Volcano Badge at Cinnabar Island.",
+      "Points": 10,
+      "DisplayOrder": 53,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:47:23"
+    },
+    {
+      "ID": 108065,
+      "Title": "Fire Fighter",
+      "Description": "Defeat Blaine on Set Mode without using items in battle and without using Pokémon above level 47 at the beginning of the battle.",
+      "Points": 10,
+      "DisplayOrder": 54,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:14:02"
+    },
+    {
+      "ID": 108056,
+      "Title": "2000 IQ Super Quiz",
+      "Description": "Without resetting and without leaving the building, complete all of the quizzes in the Cinnabar Island Gym without fighting any trainers.",
+      "Points": 5,
+      "DisplayOrder": 55,
+      "type": "missable",
+      "DateModified": "2021-06-18 04:01:30"
+    },
+    {
+      "ID": 4408,
+      "Title": "Feathered Earth Badge",
+      "Description": "Defeat Giovanni and earn the Earth Badge in Viridian City.",
+      "Points": 10,
+      "DisplayOrder": 56,
+      "type": "progression",
+      "DateModified": "2021-02-13 09:47:31"
+    },
+    {
+      "ID": 108068,
+      "Title": "Blasting off Again",
+      "Description": "Defeat Giovanni in the Viridian Gym on Set Mode without using items in battle and without using Pokémon above level 50 at the beginning of the battle.",
+      "Points": 10,
+      "DisplayOrder": 57,
+      "type": "missable",
+      "DateModified": "2025-11-09 23:14:03"
+    },
+    {
+      "ID": 108067,
+      "Title": "Spin to Lose",
+      "Description": "Starting from the gym entrance, navigate through the Viridian City Gym without using any spin tiles.",
+      "Points": 5,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2021-02-13 09:47:35"
+    },
+    {
+      "ID": 108066,
+      "Title": "One of a Kind",
+      "Description": "Grab the only item in the game that is inside of a Gym.",
+      "Points": 2,
+      "DisplayOrder": 59,
+      "type": null,
+      "DateModified": "2021-02-13 09:47:38"
+    },
+    {
+      "ID": 108140,
+      "Title": "Victory Lap",
+      "Description": "Find every item and defeat every trainer in Victory Road.",
+      "Points": 10,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2021-02-13 09:47:41"
+    },
+    {
+      "ID": 4410,
+      "Title": "Pokémon Master!",
+      "Description": "Beat the Elite Four and the Champion of the Pokémon League.",
+      "Points": 25,
+      "DisplayOrder": 61,
+      "type": "win_condition",
+      "DateModified": "2021-02-13 09:47:47"
+    },
+    {
+      "ID": 4422,
+      "Title": "Elite Stomp",
+      "Description": "Without resetting, beat the Pokémon League with only one Pokémon in your party; it cannot be Mew or Mewtwo. ",
+      "Points": 10,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2024-08-14 09:34:21"
+    },
+    {
+      "ID": 108169,
+      "Title": "Brand Loyalty",
+      "Description": "Without resetting, beat the Pokémon League with a full party of Pokémon exclusive to Red.",
+      "Points": 10,
+      "DisplayOrder": 63,
+      "type": null,
+      "DateModified": "2025-08-30 00:30:15"
+    },
+    {
+      "ID": 108170,
+      "Title": "Prof. Perfect",
+      "Description": "Without resetting, beat the Pokémon League without having any Pokémon faint and without using Pokémon above level 60 at the beginning of the League.",
+      "Points": 10,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2024-08-14 09:29:33"
+    },
+    {
+      "ID": 108171,
+      "Title": "Smogon",
+      "Description": "In a single session, enter the Pokémon League and beat it on Set Mode without using items in battle and without using Pokémon above level 50 at the beginning of the League.",
+      "Points": 10,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2024-08-14 09:29:10"
+    },
+    {
+      "ID": 4419,
+      "Title": "The Sleeper Awakens",
+      "Description": "Use the Poké Flute to awaken and catch a Snorlax.",
+      "Points": 5,
+      "DisplayOrder": 66,
+      "type": "missable",
+      "DateModified": "2021-05-23 08:49:25"
+    },
+    {
+      "ID": 4420,
+      "Title": "Uno, Dos, Tres!",
+      "Description": "Catch the three legendary birds.",
+      "Points": 25,
+      "DisplayOrder": 67,
+      "type": "missable",
+      "DateModified": "2021-02-13 09:48:04"
+    },
+    {
+      "ID": 4421,
+      "Title": "The Strongest Pokémon Ever!",
+      "Description": "Catch the fabled Mewtwo.",
+      "Points": 10,
+      "DisplayOrder": 68,
+      "type": "missable",
+      "DateModified": "2021-06-18 06:15:58"
+    },
+    {
+      "ID": 108175,
+      "Title": "Area Unknown",
+      "Description": "Without resetting and without leaving the cave, catch one of every Pokémon available in Cerulean Cave besides Mewtwo and fishing Pokémon without using the Master Ball.",
+      "Points": 10,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2024-08-14 09:26:30"
+    },
+    {
+      "ID": 108176,
+      "Title": "A Fair Fight",
+      "Description": "Catch Mewtwo without using the Master Ball.",
+      "Points": 10,
+      "DisplayOrder": 70,
+      "type": "missable",
+      "DateModified": "2021-06-10 03:12:52"
+    },
+    {
+      "ID": 108052,
+      "Title": "No Balls Necessary",
+      "Description": "Receive 6 Pokémon as gifts.",
+      "Points": 5,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2022-09-28 10:59:57"
+    },
+    {
+      "ID": 108053,
+      "Title": "No ~Multi~ Set Required",
+      "Description": "Complete all 9 in-game trades.",
+      "Points": 5,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2021-02-13 09:48:15"
+    },
+    {
+      "ID": 108183,
+      "Title": "This Is Illegal, You Know",
+      "Description": "In a single session, buy all of the Game Corner Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 73,
+      "type": null,
+      "DateModified": "2026-02-14 00:36:43"
+    },
+    {
+      "ID": 108174,
+      "Title": "Now It Is 100 Percent Safe",
+      "Description": "Defeat or catch every stationary Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2021-02-13 09:48:20"
+    },
+    {
+      "ID": 108141,
+      "Title": "cOmPlEtElY dIfFeReNt GaMeS",
+      "Description": "Catch all of the Pokémon exclusive to Red version.",
+      "Points": 5,
+      "DisplayOrder": 75,
+      "type": null,
+      "DateModified": "2025-08-30 00:30:16"
+    },
+    {
+      "ID": 4425,
+      "Title": "Gotta Catch 'em All",
+      "Description": "Catch all 124 Pokémon that are available in Red Version",
+      "Points": 50,
+      "DisplayOrder": 76,
+      "type": "missable",
+      "DateModified": "2026-03-07 16:42:45"
+    },
+    {
+      "ID": 108365,
+      "Title": "Disk Collector",
+      "Description": "Find all 50 unmissable TMs and HMs on the overworld.",
+      "Points": 25,
+      "DisplayOrder": 81,
+      "type": null,
+      "DateModified": "2021-02-22 20:58:55"
+    },
+    {
+      "ID": 108366,
+      "Title": "Disk Buyer",
+      "Description": "In a single session and without resetting, buy 1 of every TM possible from the Department Store and Game Corner.",
+      "Points": 10,
+      "DisplayOrder": 82,
+      "type": null,
+      "DateModified": "2024-08-14 09:28:21"
+    },
+    {
+      "ID": 108367,
+      "Title": "Living Itemfinder",
+      "Description": "Find all unmissable items, including hidden items, on the overworld.",
+      "Points": 25,
+      "DisplayOrder": 90,
+      "type": null,
+      "DateModified": "2023-05-04 19:52:55"
+    },
+    {
+      "ID": 108368,
+      "Title": "Genocide Route",
+      "Description": "Defeat all unmissable trainers in the Kanto region.",
+      "Points": 50,
+      "DisplayOrder": 100,
+      "type": null,
+      "DateModified": "2022-10-03 20:03:06"
+    },
+    {
+      "ID": 4409,
+      "Title": "Preparing to Be the Very Best",
+      "Description": "Assemble a full team of Pokémon.",
+      "Points": 5,
+      "DisplayOrder": 110,
+      "type": null,
+      "DateModified": "2021-02-13 09:48:40"
+    },
+    {
+      "ID": 108370,
+      "Title": "Anti-Darwinism",
+      "Description": "Prevent your Pokémon from evolving.",
+      "Points": 2,
+      "DisplayOrder": 111,
+      "type": null,
+      "DateModified": "2021-02-13 09:48:43"
+    },
+    {
+      "ID": 4411,
+      "Title": "Halfway (Solo)",
+      "Description": "Get the Pokémon in Slot 1 from Level 49 to Level 50.",
+      "Points": 5,
+      "DisplayOrder": 112,
+      "type": null,
+      "DateModified": "2022-04-06 22:58:56"
+    },
+    {
+      "ID": 4412,
+      "Title": "Halfway (Party)",
+      "Description": "In a party of five Pokémon of level 50 or greater, get your final Pokémon to level 50.",
+      "Points": 10,
+      "DisplayOrder": 113,
+      "type": null,
+      "DateModified": "2024-08-19 00:26:53"
+    },
+    {
+      "ID": 108033,
+      "Title": "Gone Critical!",
+      "Description": "In a single battle, land five critical hits in a row.",
+      "Points": 5,
+      "DisplayOrder": 141,
+      "type": null,
+      "DateModified": "2024-07-11 05:50:58"
+    },
+    {
+      "ID": 108034,
+      "Title": "Target Acquired",
+      "Description": "In a single battle, land five one-hit KO moves in a row.",
+      "Points": 5,
+      "DisplayOrder": 142,
+      "type": null,
+      "DateModified": "2025-12-27 22:56:25"
+    },
+    {
+      "ID": 108042,
+      "Title": "Stalemate",
+      "Description": "Enter a battle with full HP and survive 20 turns without switching out or having either Pokémon take damage.",
+      "Points": 2,
+      "DisplayOrder": 143,
+      "type": null,
+      "DateModified": "2022-10-31 10:12:42"
+    },
+    {
+      "ID": 108172,
+      "Title": "Surprise Mechanics",
+      "Description": "Use Metronome and go out with a bang!",
+      "Points": 3,
+      "DisplayOrder": 144,
+      "type": null,
+      "DateModified": "2021-12-11 09:13:08"
+    },
+    {
+      "ID": 108173,
+      "Title": "I Found You, Faker!",
+      "Description": "As Ditto, use Transform on another Ditto.",
+      "Points": 2,
+      "DisplayOrder": 146,
+      "type": null,
+      "DateModified": "2022-10-31 10:13:20"
+    },
+    {
+      "ID": 108364,
+      "Title": "I Was Frozen Today",
+      "Description": "Be cured of being Frozen in battle without using an item in that battle.",
+      "Points": 5,
+      "DisplayOrder": 147,
+      "type": null,
+      "DateModified": "2024-12-26 01:36:09"
+    },
+    {
+      "ID": 108035,
+      "Title": "Lawn Mower",
+      "Description": "Cut the grass.",
+      "Points": 2,
+      "DisplayOrder": 151,
+      "type": null,
+      "DateModified": "2023-02-24 08:06:40"
+    }
+  ]
+}

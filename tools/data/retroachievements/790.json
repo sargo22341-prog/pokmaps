@@ -1,0 +1,450 @@
+{
+  "game_id": 790,
+  "title": "Pokémon Ruby Version",
+  "console": "Game Boy Advance",
+  "source": "https://retroachievements.org/game/790",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 31199,
+      "Title": "Just Heating Up",
+      "Description": "Defeat Brendan or May for the first time.",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:16:00"
+    },
+    {
+      "ID": 31200,
+      "Title": "You Aren't Half Bad",
+      "Description": "Defeat Brendan or May for the second time.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:06:33"
+    },
+    {
+      "ID": 31201,
+      "Title": "You Are Pretty Decent Actually",
+      "Description": "Defeat Brendan or May for the third time.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:16:10"
+    },
+    {
+      "ID": 31202,
+      "Title": "You're Pretty Good",
+      "Description": "Defeat Brendan or May for the fourth time.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-24 17:06:39"
+    },
+    {
+      "ID": 31205,
+      "Title": "The Ultimate Ball",
+      "Description": "Find the Master Ball in the Team Magma Hideout.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2019-12-24 17:06:46"
+    },
+    {
+      "ID": 31206,
+      "Title": "The Rock-Loving Honors Student",
+      "Description": "Earn the Stone Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:06:51"
+    },
+    {
+      "ID": 31207,
+      "Title": "A Big Wave in Fighting",
+      "Description": "Earn the Knuckle Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:06:27"
+    },
+    {
+      "ID": 31208,
+      "Title": "The Cheerfully Electrifying Man",
+      "Description": "Earn the Dynamo Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:06:56"
+    },
+    {
+      "ID": 31209,
+      "Title": "One with a Fiery Passion That Burns",
+      "Description": "Earn the Heat Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:07:01"
+    },
+    {
+      "ID": 31210,
+      "Title": "A Man in Pursuit of Power",
+      "Description": "Earn the Balance Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:07:06"
+    },
+    {
+      "ID": 31211,
+      "Title": "The Bird User Taking Flight into the World",
+      "Description": "Earn the Feather Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:16:48"
+    },
+    {
+      "ID": 31212,
+      "Title": "The Mystic Combination",
+      "Description": "Earn the Mind Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:16:53"
+    },
+    {
+      "ID": 31213,
+      "Title": "Artist, and Lover of Water",
+      "Description": "Earn the Rain Badge.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:16:58"
+    },
+    {
+      "ID": 31214,
+      "Title": "Volcanic Showdown",
+      "Description": "Defeat Maxie at Mt. Chimney.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:07:13"
+    },
+    {
+      "ID": 31215,
+      "Title": "Panic at the Institute",
+      "Description": "Defeat Courtney at the Weather Institute.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:05:59"
+    },
+    {
+      "ID": 31216,
+      "Title": "Not-So-Secret Hideout",
+      "Description": "Defeat Tabitha in the Team Magma Hideout.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:05:39"
+    },
+    {
+      "ID": 31217,
+      "Title": "Awaken, My Master!",
+      "Description": "Defeat Maxie in the Seafloor Cavern.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-24 17:05:45"
+    },
+    {
+      "ID": 31218,
+      "Title": "From Zero to Hero",
+      "Description": "Defeat Wally in Victory Road.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2019-12-15 18:15:05"
+    },
+    {
+      "ID": 31223,
+      "Title": "The Birth of a New Champion",
+      "Description": "Become the new Hoenn Champion.",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "win_condition",
+      "DateModified": "2019-12-24 17:05:52"
+    },
+    {
+      "ID": 31224,
+      "Title": "Heavy Weather",
+      "Description": "Catch Groudon.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 09:59:59"
+    },
+    {
+      "ID": 31225,
+      "Title": "Sky High",
+      "Description": "Catch Rayquaza.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 10:00:13"
+    },
+    {
+      "ID": 31226,
+      "Title": "The Stone Titan",
+      "Description": "Catch Regirock.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 10:00:22"
+    },
+    {
+      "ID": 31227,
+      "Title": "The Ice Titan",
+      "Description": "Catch Regice.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 10:00:28"
+    },
+    {
+      "ID": 31228,
+      "Title": "The Iron Titan",
+      "Description": "Catch Registeel.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 10:00:36"
+    },
+    {
+      "ID": 31229,
+      "Title": "Roaming for Eons",
+      "Description": "Catch Latios.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-09-17 10:00:44"
+    },
+    {
+      "ID": 91983,
+      "Title": "Eco-Friendly Trainer",
+      "Description": "Turn off the generator in New Mauville and claim your reward.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:24:56"
+    },
+    {
+      "ID": 91984,
+      "Title": "Dethroning the Trick Master",
+      "Description": "Clear all the puzzles in the Trick House and claim the last reward.",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:25:01"
+    },
+    {
+      "ID": 91985,
+      "Title": "Ancient Crafting",
+      "Description": "Obtain the ingredients needed and craft a Shell Bell.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:25:35"
+    },
+    {
+      "ID": 91986,
+      "Title": "Treasure Deliverer",
+      "Description": "Return the Scanner to Captain Stern.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:25:42"
+    },
+    {
+      "ID": 91987,
+      "Title": "Farewell",
+      "Description": "Return the Red Orb to the place where it came from.",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:26:04"
+    },
+    {
+      "ID": 91988,
+      "Title": "Pickpocket",
+      "Description": "Acquire a Black Belt.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:26:13"
+    },
+    {
+      "ID": 91989,
+      "Title": "Pilferer",
+      "Description": "Acquire a Silver Powder.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2019-12-25 18:26:22"
+    },
+    {
+      "ID": 91990,
+      "Title": "Hoard Lord",
+      "Description": "Acquire a Dragon Fang.",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-11-16 16:11:18"
+    },
+    {
+      "ID": 89506,
+      "Title": "Machine Collector",
+      "Description": "Acquire every TM - overworld ones are freely usable, but purchasable ones must all be held simultaneously.",
+      "Points": 10,
+      "DisplayOrder": 1,
+      "type": null,
+      "DateModified": "2022-11-23 18:23:21"
+    },
+    {
+      "ID": 92002,
+      "Title": "Not Totally Scammed",
+      "Description": "Acquire all Pokémon that are obtainable via Gifts or in-game trades.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": null,
+      "DateModified": "2025-11-15 22:19:50"
+    },
+    {
+      "ID": 92005,
+      "Title": "Pest Control",
+      "Description": "Interact with all of the stationary Pokémon in Hoenn.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "missable",
+      "DateModified": "2020-02-13 14:42:46"
+    },
+    {
+      "ID": 91997,
+      "Title": "Successful Transition",
+      "Description": "The gender of Azurill just changed!",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": null,
+      "DateModified": "2019-12-25 18:27:06"
+    },
+    {
+      "ID": 91995,
+      "Title": "Size Does Matter",
+      "Description": "Show a big Pokémon to two competitive brothers.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": null,
+      "DateModified": "2019-12-25 18:27:16"
+    },
+    {
+      "ID": 92001,
+      "Title": "Chain of My Chains",
+      "Description": "Breed an Absol with Baton Pass and enter a battle with it.",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": null,
+      "DateModified": "2026-02-22 03:08:53"
+    },
+    {
+      "ID": 91996,
+      "Title": "Mysterious Feature",
+      "Description": "Become a member of the Mystery Event Club.",
+      "Points": 1,
+      "DisplayOrder": 7,
+      "type": null,
+      "DateModified": "2019-12-25 18:27:29"
+    },
+    {
+      "ID": 91991,
+      "Title": "Renowned Trainer",
+      "Description": "Completely fill the Trainer's Eyes list.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": null,
+      "DateModified": "2021-05-15 13:23:09"
+    },
+    {
+      "ID": 92004,
+      "Title": "Owning Wally",
+      "Description": "Win the fourth rematch onwards against Wally in Victory Road using only a single Pokémon that is not a Legendary or a pseudo-Legendary.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": null,
+      "DateModified": "2024-12-04 22:28:48"
+    },
+    {
+      "ID": 92000,
+      "Title": "Epic Sweep",
+      "Description": "Win the Pokémon League using a team of 6 non-legendary version-exclusive Pokémon in one session.",
+      "Points": 10,
+      "DisplayOrder": 10,
+      "type": null,
+      "DateModified": "2021-10-12 13:15:56"
+    },
+    {
+      "ID": 91992,
+      "Title": "Master",
+      "Description": "Win 50 times in a row in the Battle Tower on Level 50 mode.",
+      "Points": 25,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2020-02-13 14:37:10"
+    },
+    {
+      "ID": 91993,
+      "Title": "Grandmaster",
+      "Description": "Win 50 times in a row in the Battle Tower on Level 100 mode.",
+      "Points": 25,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2020-02-13 14:38:19"
+    },
+    {
+      "ID": 91994,
+      "Title": "Champion of Champions",
+      "Description": "Win 100 times in a row in the Battle Tower on any mode.",
+      "Points": 50,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2020-02-13 14:37:48"
+    },
+    {
+      "ID": 91999,
+      "Title": "Squishy Son of a Fish",
+      "Description": "Catch a Feebas.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": null,
+      "DateModified": "2019-12-25 18:28:19"
+    },
+    {
+      "ID": 92003,
+      "Title": "Professional Catcher",
+      "Description": "Catch Latios without using a Master Ball.",
+      "Points": 25,
+      "DisplayOrder": 13,
+      "type": "missable",
+      "DateModified": "2019-12-25 18:28:25"
+    },
+    {
+      "ID": 91998,
+      "Title": "Gotta Catch 'Em All - Ruby",
+      "Description": "Catch all 177 Pokémon that are obtainable outside of external trading.",
+      "Points": 50,
+      "DisplayOrder": 14,
+      "type": "missable",
+      "DateModified": "2020-02-13 14:35:54"
+    }
+  ]
+}

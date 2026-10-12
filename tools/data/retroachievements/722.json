@@ -1,0 +1,684 @@
+{
+  "game_id": 722,
+  "title": "Pokémon Silver Version",
+  "console": "Game Boy Color",
+  "source": "https://retroachievements.org/game/722",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 5113,
+      "Title": "Be Nice",
+      "Description": "Give your new rival a name.",
+      "Points": 1,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:33"
+    },
+    {
+      "ID": 5097,
+      "Title": "Flying Monk",
+      "Description": "Defeat Falkner and gain the Zephyr Badge.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:33"
+    },
+    {
+      "ID": 163143,
+      "Title": "It Is a Bird, It Is a Plane!",
+      "Description": "Defeat Falkner and gain the Zephyr Badge. [Set Mode, <= Lv.9]",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:16"
+    },
+    {
+      "ID": 163144,
+      "Title": "True Flying Type Master",
+      "Description": "Defeat Falkner using only Flying type Pokemon [Set Mode, <= Lv.9]",
+      "Points": 10,
+      "DisplayOrder": 2,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:45:24"
+    },
+    {
+      "ID": 5118,
+      "Title": "Rocket Slowpoke",
+      "Description": "Defeat the newly formed Team Rocket in Slowpoke Well.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:33"
+    },
+    {
+      "ID": 5098,
+      "Title": "Bug Catcher",
+      "Description": "Defeat Bugsy and gain the Hive Badge.",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:34"
+    },
+    {
+      "ID": 163145,
+      "Title": "Bug Kid Wonder",
+      "Description": "Defeat Bugsy and gain the Hive Badge. [Set Mode, <= Lv.16]",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:15"
+    },
+    {
+      "ID": 163146,
+      "Title": "Bug Type Master",
+      "Description": "Defeat Bugsy using only Bug type Pokemon [Set Mode, <= Lv.16]",
+      "Points": 10,
+      "DisplayOrder": 4,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:15"
+    },
+    {
+      "ID": 5099,
+      "Title": "Milk Maid",
+      "Description": "Defeat Whitney and gain the Plain Badge.",
+      "Points": 10,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:34"
+    },
+    {
+      "ID": 163147,
+      "Title": "Make Joey Proud",
+      "Description": "Defeat Whitney and gain the Plain Badge. [Set Mode, <= Lv.20]",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:14"
+    },
+    {
+      "ID": 163148,
+      "Title": "Normal Type Master",
+      "Description": "Defeat Whitney using only Normal type Pokemon [Set Mode, <= Lv.20]",
+      "Points": 10,
+      "DisplayOrder": 5,
+      "type": "missable",
+      "DateModified": "2022-04-10 16:44:15"
+    },
+    {
+      "ID": 5100,
+      "Title": "Friendly Ghost",
+      "Description": "Defeat Morty and gain the Fog Badge.",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:34"
+    },
+    {
+      "ID": 163149,
+      "Title": "Sight Unseen",
+      "Description": "Defeat Morty and gain the Fog Badge. [Set Mode, <= Lv.25]",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:14"
+    },
+    {
+      "ID": 163150,
+      "Title": "A Ghastly Encounter",
+      "Description": "Defeat Morty using only Ghost/Dark type Pokemon [Set Mode, <= Lv.25]",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:13"
+    },
+    {
+      "ID": 5101,
+      "Title": "Karate Island",
+      "Description": "Defeat Chuck and gain the Storm Badge.",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:35"
+    },
+    {
+      "ID": 163153,
+      "Title": "One Hit KO",
+      "Description": "Defeat Chuck and gain the Storm Badge. [Set Mode, <= Lv.30]",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:06"
+    },
+    {
+      "ID": 163154,
+      "Title": "Fighter Type Master",
+      "Description": "Defeat Chuck using only Fighting type Pokemon [Set Mode, <= Lv.30]",
+      "Points": 10,
+      "DisplayOrder": 7,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:06"
+    },
+    {
+      "ID": 5102,
+      "Title": "Iron Maiden",
+      "Description": "Defeat Jasmine and gain the Mineral Badge.",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:35"
+    },
+    {
+      "ID": 163151,
+      "Title": "Stronger Than Steel",
+      "Description": "Defeat Jasmine and gain the Mineral Badge. [Set Mode, <= Lv.35]",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:13"
+    },
+    {
+      "ID": 163152,
+      "Title": "Steel Type Master",
+      "Description": "Defeat Jasmine using only Steel type Pokemon [Set Mode, <= Lv.35]",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:10"
+    },
+    {
+      "ID": 5119,
+      "Title": "Rocket Rage",
+      "Description": "Defeat Team Rocket in Mahagony Town.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:35"
+    },
+    {
+      "ID": 5103,
+      "Title": "Old Man Winters",
+      "Description": "Defeat Pryce and gain the Glacier Badge.",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:36"
+    },
+    {
+      "ID": 163155,
+      "Title": "A Sub Zero Encounter",
+      "Description": "Defeat Pryce and gain the Glacier Badge. [Set Mode, <= Lv.31]",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:06"
+    },
+    {
+      "ID": 163156,
+      "Title": "Ice Type Master",
+      "Description": "Defeat Pryce using only Ice type Pokemon [Set Mode, <= Lv.31]",
+      "Points": 10,
+      "DisplayOrder": 10,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:05"
+    },
+    {
+      "ID": 5498,
+      "Title": "Rocket Radio",
+      "Description": "Defeat Team Rocket in the Radio Tower.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:36"
+    },
+    {
+      "ID": 5104,
+      "Title": "Training Dragon",
+      "Description": "Defeat Clair and gain the Rising Badge.",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": "progression",
+      "DateModified": "2021-07-30 02:56:36"
+    },
+    {
+      "ID": 163157,
+      "Title": "Dungeons and Dragons",
+      "Description": "Defeat Clair the Blackthorn City Gym Leader [Set Mode, <= Lv.40]",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:05"
+    },
+    {
+      "ID": 163158,
+      "Title": "Dragon Type Master",
+      "Description": "Defeat Clair using only Dragon type Pokemon [Set Mode, <= Lv.40]",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:05"
+    },
+    {
+      "ID": 5114,
+      "Title": "Runaway Trio",
+      "Description": "Catch Entei, Suicune and Raikou.",
+      "Points": 25,
+      "DisplayOrder": 13,
+      "type": "missable",
+      "DateModified": "2021-12-14 21:19:14"
+    },
+    {
+      "ID": 5116,
+      "Title": "Sacred Ash",
+      "Description": "Catch Ho-Oh.",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": "missable",
+      "DateModified": "2021-09-02 14:38:38"
+    },
+    {
+      "ID": 5117,
+      "Title": "All Unown",
+      "Description": "Catch all 26 types of Unown.",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:38"
+    },
+    {
+      "ID": 5520,
+      "Title": "Elite Five",
+      "Description": "Defeat the Elite Four and the Champion Lance for the first time.",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": "win_condition",
+      "DateModified": "2021-07-30 02:56:38"
+    },
+    {
+      "ID": 5521,
+      "Title": "Five Chumps",
+      "Description": "Defeat the Elite Four and the Champion with only one Pokemon in your party.",
+      "Points": 25,
+      "DisplayOrder": 17,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:38"
+    },
+    {
+      "ID": 5105,
+      "Title": "Rock Hard Defense",
+      "Description": "Defeat Brock and gain the Boulder Badge.",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:39"
+    },
+    {
+      "ID": 163169,
+      "Title": "I Am Gonna Teach You How to Be Successful in Love, Just Like Me!",
+      "Description": "Defeat Brock and gain the Boulder Badge. [Set Mode, <= Lv.44]",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:01"
+    },
+    {
+      "ID": 163170,
+      "Title": "Rock Type Master",
+      "Description": "Defeat Brock using only Rock type Pokemon [Set Mode, <= Lv.44]",
+      "Points": 10,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:01"
+    },
+    {
+      "ID": 5106,
+      "Title": "Watery Love",
+      "Description": "Defeat Misty and gain the Cascade Badge.",
+      "Points": 5,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:39"
+    },
+    {
+      "ID": 163167,
+      "Title": "Love Is All About Who Lands the First Punch!",
+      "Description": "Defeat Misty and gain the Cascade Badge. [Set Mode, <= Lv.47]",
+      "Points": 5,
+      "DisplayOrder": 19,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:02"
+    },
+    {
+      "ID": 163168,
+      "Title": "Water Type Master",
+      "Description": "Defeat Misty using only Water type Pokemon [Set Mode, <= Lv.47]",
+      "Points": 10,
+      "DisplayOrder": 19,
+      "type": "missable",
+      "DateModified": "2025-01-14 05:26:03"
+    },
+    {
+      "ID": 5107,
+      "Title": "Volt Military",
+      "Description": "Defeat Lt. Surge and gain the Thunder Badge.",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:39"
+    },
+    {
+      "ID": 163165,
+      "Title": "I'll Shock You Into Surrender!",
+      "Description": "Defeat Lt.Surge and gain the Thunder Badge. [Set Mode, <= Lv.46]",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:02"
+    },
+    {
+      "ID": 163166,
+      "Title": "Electric Type Master",
+      "Description": "Defeat Lt.Surge using only Electric type Pokemon [Set Mode, <= Lv.46]",
+      "Points": 10,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:02"
+    },
+    {
+      "ID": 5108,
+      "Title": "Aromatherapists",
+      "Description": "Defeat Erika and gain the Rainbow Badge.",
+      "Points": 5,
+      "DisplayOrder": 21,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:40"
+    },
+    {
+      "ID": 163173,
+      "Title": "Lovely Weather Is It Not?",
+      "Description": "Defeat Erika and gain the Rainbow Badge. [Set Mode, <= Lv.46]",
+      "Points": 5,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:12"
+    },
+    {
+      "ID": 163174,
+      "Title": "Grass Type Master",
+      "Description": "Defeat Erika using only Grass type Pokemon [Set Mode, <= Lv.46]",
+      "Points": 10,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2021-08-04 16:04:16"
+    },
+    {
+      "ID": 5109,
+      "Title": "Poisonous Ninja",
+      "Description": "Defeat Janine and gain the Soul Badge.",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:40"
+    },
+    {
+      "ID": 163171,
+      "Title": "I Am a Modern Ninja!",
+      "Description": "Defeat Janine and gain the Soul Badge. [Set Mode, <= Lv.39]",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:04"
+    },
+    {
+      "ID": 163172,
+      "Title": "Poison Type Master",
+      "Description": "Defeat Janine using only Poison type Pokemon [Set Mode, <= Lv.39]",
+      "Points": 10,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2021-08-04 17:08:37"
+    },
+    {
+      "ID": 5110,
+      "Title": "Twisted Spoons",
+      "Description": "Defeat Sabrina and gain the Marsh Badge.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2021-07-30 02:56:40"
+    },
+    {
+      "ID": 163163,
+      "Title": "Psychic Type Master",
+      "Description": "Defeat Sabrina using only Psychic type Pokemon [Set Mode, <= Lv.48]",
+      "Points": 10,
+      "DisplayOrder": 23,
+      "type": "missable",
+      "DateModified": "2021-08-15 23:29:19"
+    },
+    {
+      "ID": 163164,
+      "Title": "I Knew You Would Say That",
+      "Description": "Defeat Sabrina and gain the Marsh Badge. [Set Mode, <= Lv.48]",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:03"
+    },
+    {
+      "ID": 5111,
+      "Title": "Seclusive Flame",
+      "Description": "Defeat Blaine and gain the Volcano Badge.",
+      "Points": 5,
+      "DisplayOrder": 24,
+      "type": null,
+      "DateModified": "2021-08-06 04:38:14"
+    },
+    {
+      "ID": 163175,
+      "Title": "When You Are Hot, You Are Hot",
+      "Description": "Defeat Blaine and gain the Volcano Badge. [Set Mode, <= Lv.50]",
+      "Points": 5,
+      "DisplayOrder": 24,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:12"
+    },
+    {
+      "ID": 163176,
+      "Title": "Fire Type Master",
+      "Description": "Defeat Blaine using only Fire type Pokemon [Set Mode, <= Lv.50]",
+      "Points": 10,
+      "DisplayOrder": 24,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:11"
+    },
+    {
+      "ID": 5112,
+      "Title": "One Time Champ",
+      "Description": "Defeat Blue and gain the Earth Badge.",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2021-08-06 04:39:43"
+    },
+    {
+      "ID": 163187,
+      "Title": "A Terrible Achievement",
+      "Description": "Defeat Blue using a team of: Delibird, Corsola, Lickitung, Aipom, Farfetch'd, Onix. [Set Mode, <= Lv.58]",
+      "Points": 10,
+      "DisplayOrder": 25,
+      "type": "missable",
+      "DateModified": "2024-06-13 14:00:14"
+    },
+    {
+      "ID": 163188,
+      "Title": "A Short Lived Champion",
+      "Description": "Defeat Blue and gain the Earth Badge. [Set Mode, <= Lv.58]",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": "missable",
+      "DateModified": "2021-07-30 02:44:07"
+    },
+    {
+      "ID": 5115,
+      "Title": "Master of Whirlwind",
+      "Description": "Catch Lugia.",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": "missable",
+      "DateModified": "2021-09-02 14:38:44"
+    },
+    {
+      "ID": 5525,
+      "Title": "Battle on the Mountain",
+      "Description": "Defeat Red and become the new Pokemon Master.",
+      "Points": 10,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2022-08-06 04:35:52"
+    },
+    {
+      "ID": 5526,
+      "Title": "Seeing Red",
+      "Description": "Defeat Red with only one Pokemon in your party.",
+      "Points": 25,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2023-09-24 10:51:50"
+    },
+    {
+      "ID": 163177,
+      "Title": "Mom Loves Me!",
+      "Description": "Have your mom buy you all 4 collectible dolls for your room!",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:11"
+    },
+    {
+      "ID": 163189,
+      "Title": "Popularity Contest",
+      "Description": "Fill all 10 phone number slots in your phone",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:07"
+    },
+    {
+      "ID": 163162,
+      "Title": "Who Left This Here?",
+      "Description": "Found 25% of hidden items across Johto and Kanto.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2025-02-15 19:56:47"
+    },
+    {
+      "ID": 163160,
+      "Title": "I Have Dropped My Glasses...",
+      "Description": "Found 50% of hidden items across Johto and Kanto.",
+      "Points": 10,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2025-02-15 19:56:49"
+    },
+    {
+      "ID": 163161,
+      "Title": "I Sure Am Glad I Have This Item Finder.",
+      "Description": "Found 100% of hidden items across Johto and Kanto.",
+      "Points": 25,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2025-03-23 01:10:10"
+    },
+    {
+      "ID": 163178,
+      "Title": "Limited Potential?",
+      "Description": "Found half of every Overworld TM & TMs gifted by NPCs.",
+      "Points": 10,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2021-08-11 02:50:29"
+    },
+    {
+      "ID": 163159,
+      "Title": "Unlimited Potential!",
+      "Description": "Found every Overworld TM & TMs gifted by NPCs.",
+      "Points": 25,
+      "DisplayOrder": 34,
+      "type": "missable",
+      "DateModified": "2021-12-14 03:00:56"
+    },
+    {
+      "ID": 163185,
+      "Title": "A Lucky Egg",
+      "Description": "Hatch the Mystery Egg and obtain the Pokemon within.",
+      "Points": 2,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:08"
+    },
+    {
+      "ID": 163179,
+      "Title": "Rock Solid",
+      "Description": "Trade a Bellsprout for an Onix in Violet City.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:10"
+    },
+    {
+      "ID": 163180,
+      "Title": "Brawn Over Brains",
+      "Description": "Trade a Drowzee for a Machop in Goldenrod City.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:07"
+    },
+    {
+      "ID": 163181,
+      "Title": "A Crab for a Pokeball",
+      "Description": "Trade a Krabby for a Voltorb in Olivine City.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:10"
+    },
+    {
+      "ID": 163182,
+      "Title": "A Dragon for a Rock",
+      "Description": "Trade a Dragonair for a Rhydon in Blackthorn City.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:09"
+    },
+    {
+      "ID": 163183,
+      "Title": "A Gloomy Time",
+      "Description": "Trade a Gloom for a Rapidash in Pewter City.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:09"
+    },
+    {
+      "ID": 163184,
+      "Title": "An Egg for a Fossil",
+      "Description": "Trade a Chansey for an Aerodactyl on Route 14.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2021-07-30 02:44:09"
+    },
+    {
+      "ID": 5120,
+      "Title": "Gotta Catch 'em All - Silver",
+      "Description": "Catch 199 Pokemon without external trading or glitch to get more starters-stones",
+      "Points": 50,
+      "DisplayOrder": 40,
+      "type": "missable",
+      "DateModified": "2022-08-06 17:13:09"
+    }
+  ]
+}

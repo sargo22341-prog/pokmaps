@@ -16,7 +16,7 @@ data class CaptureGoal(val fixed: Set<Int>, val choices: List<CaptureChoice>) {
     val total: Int = fixed.size + choices.sumOf { it.total }
 
     init {
-        require(species.all { it in 1..251 })
+        require(species.all { it in 1..386 })
         require(species.size == fixed.size + choices.sumOf { it.alternatives.sumOf { option -> option.size } })
     }
 
@@ -32,6 +32,10 @@ object CaptureGoals {
         5090 -> johto(GOLD_MISSING, fire = listOf(59, 136))
         5120 -> johto(SILVER_MISSING, fire = listOf(38, 136))
         5954 -> goal((1..251).toSet() - CRYSTAL_MISSING, listOf(JOHTO_STARTERS))
+        91998 -> Gen3CaptureGoals.forVersion(7)
+        57275 -> Gen3CaptureGoals.forVersion(9)
+        33625 -> Gen3CaptureGoals.forVersion(10)
+        34809 -> Gen3CaptureGoals.forVersion(11)
         else -> null
     }
 

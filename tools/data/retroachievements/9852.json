@@ -1,0 +1,1098 @@
+{
+  "game_id": 9852,
+  "title": "Pokémon Diamond Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/9852",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 360974,
+      "Title": "Wannabe Ranger Certificate",
+      "Description": "Defeat the Starly encountered at Lake Verity while only using the touch screen",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:21:55"
+    },
+    {
+      "ID": 360975,
+      "Title": "The Journey Starts Today!",
+      "Description": "Obtain the Pokédex",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-03 16:37:13"
+    },
+    {
+      "ID": 360976,
+      "Title": "Can It Run DOOM?",
+      "Description": "Obtain the Pokétch",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-03 16:37:38"
+    },
+    {
+      "ID": 360977,
+      "Title": "Out of Fossil Fuel",
+      "Description": "Defeat Roark and obtain the Coal Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-17 17:26:17"
+    },
+    {
+      "ID": 360978,
+      "Title": "Perfectly Crafted for Success",
+      "Description": "Defeat Roark using a maximum team of 3 Pokémon at level 14 or less",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:27:01"
+    },
+    {
+      "ID": 360979,
+      "Title": "Straightforward Excavation Project",
+      "Description": "Defeat every trainer in the Oreburgh City Gym without leaving in one session",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:31"
+    },
+    {
+      "ID": 360980,
+      "Title": "Past Winds Whisper Discontent",
+      "Description": "Defeat Mars in Valley Windworks",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2025-04-18 20:42:17"
+    },
+    {
+      "ID": 360981,
+      "Title": "Eggs Are Best Enjoyed Scrambled",
+      "Description": "Knock out Cheryl's Chansey in one turn in Eterna Forest",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:22:25"
+    },
+    {
+      "ID": 360982,
+      "Title": "Abundant Overgrowth",
+      "Description": "Defeat Gardenia and obtain the Forest Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-18 19:31:00"
+    },
+    {
+      "ID": 360983,
+      "Title": "Alone in the Garden of Hopeful Plans",
+      "Description": "Defeat Gardenia using a maximum team of 3 Pokémon at level 20 or less",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:27:07"
+    },
+    {
+      "ID": 360984,
+      "Title": "Deforestation Day",
+      "Description": "Defeat every trainer in the Eterna City Gym without leaving in one session",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:31"
+    },
+    {
+      "ID": 360985,
+      "Title": "Scuffle for the Living History",
+      "Description": "Obtain every item and defeat every trainer in Eterna City",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:22:59"
+    },
+    {
+      "ID": 360986,
+      "Title": "To Lead One's Own Way",
+      "Description": "Reach Celestic Town without ever obtaining the HM for Defog",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:23:10"
+    },
+    {
+      "ID": 360987,
+      "Title": "Shattering Every Expectation with Brutal Blows",
+      "Description": "Defeat Maylene and obtain the Cobble Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-18 19:31:13"
+    },
+    {
+      "ID": 360988,
+      "Title": "Punching Through the Grand Finale",
+      "Description": "Defeat Maylene using a maximum team of 3 Pokémon at level 28 or less",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:27:13"
+    },
+    {
+      "ID": 360989,
+      "Title": "Special Sparring Session",
+      "Description": "Defeat every trainer in the Veilstone City Gym without leaving in one session",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:31"
+    },
+    {
+      "ID": 360990,
+      "Title": "Tide Goes Out",
+      "Description": "Defeat Crasher Wake and obtain the Fen Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-17 17:26:17"
+    },
+    {
+      "ID": 360991,
+      "Title": "The Bell Tolls on the Water",
+      "Description": "Defeat Crasher Wake using a maximum team of 3 Pokémon at level 28 or less",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:27:19"
+    },
+    {
+      "ID": 360992,
+      "Title": "Washing Away the Competition",
+      "Description": "Defeat every trainer in the Pastoria City Gym without leaving in one session",
+      "Points": 4,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:31"
+    },
+    {
+      "ID": 360993,
+      "Title": "Headache Remedy",
+      "Description": "Obtain a special healing item",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-18 19:31:30"
+    },
+    {
+      "ID": 360994,
+      "Title": "Surrender Not Your Dreams to the Night",
+      "Description": "Defeat Fantina and obtain the Relic Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-17 17:26:17"
+    },
+    {
+      "ID": 360995,
+      "Title": "One Final Bow for a Grandiose Curtain Fall",
+      "Description": "Defeat Fantina using a maximum team of 3 Pokémon at level 34 or less",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:24:01"
+    },
+    {
+      "ID": 360996,
+      "Title": "One, Two, Many Stooges on the Stage",
+      "Description": "Defeat every trainer in the Hearthome City Gym without leaving in one session",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:32"
+    },
+    {
+      "ID": 360997,
+      "Title": "Like Son, Like Father",
+      "Description": "Defeat Byron and obtain the Mine Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-17 17:26:18"
+    },
+    {
+      "ID": 360998,
+      "Title": "Dented by Solid Resolve",
+      "Description": "Defeat Byron using a maximum team of 3 Pokémon at level 37 or less",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:24:24"
+    },
+    {
+      "ID": 360999,
+      "Title": "Out of Commission",
+      "Description": "Defeat every trainer in the Canalave City Gym without leaving in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:32"
+    },
+    {
+      "ID": 361000,
+      "Title": "Culmination of Determination",
+      "Description": "Obtain every item and defeat every trainer in Lake Valor",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:24:42"
+    },
+    {
+      "ID": 361001,
+      "Title": "Chilly Reception",
+      "Description": "Defeat Candice and obtain the Icicle Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-18 19:30:24"
+    },
+    {
+      "ID": 361002,
+      "Title": "Breaking the Ice",
+      "Description": "Defeat Candice using a maximum team of 4 Pokémon at level 40 or less",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:24:53"
+    },
+    {
+      "ID": 361003,
+      "Title": "A One-Way Road to Slide On",
+      "Description": "Defeat every trainer in the Snowpoint City Gym without leaving in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:32"
+    },
+    {
+      "ID": 361004,
+      "Title": "Time Will Have to Wait",
+      "Description": "Obtain every item and defeat every trainer in Veilstone City before defeating Saturn at Team Galactic HQ",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:25:17"
+    },
+    {
+      "ID": 361005,
+      "Title": "Trainer, Come Pick Me Up I'm Scared",
+      "Description": "Witness an alternate animation featuring Drifloon during Dialga's appearance",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:25:25"
+    },
+    {
+      "ID": 361006,
+      "Title": "Beaming Towards a Brighter Future",
+      "Description": "Defeat Volkner and obtain the Beacon Badge",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-10-18 19:30:44"
+    },
+    {
+      "ID": 361007,
+      "Title": "Interference on Identical Wavelength",
+      "Description": "Defeat Volkner using a maximum of 4 Pokémon at level 47 or less",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:25:34"
+    },
+    {
+      "ID": 361008,
+      "Title": "Regularly Scheduled Maintenance",
+      "Description": "Defeat every trainer in the Sunyshore City Gym without leaving in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-06-04 17:14:32"
+    },
+    {
+      "ID": 361009,
+      "Title": "Stardom Born from Myth",
+      "Description": "Defeat the Elite Four and Cynthia to become the new Champion of the Sinnoh region",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "win_condition",
+      "DateModified": "2023-10-03 16:44:02"
+    },
+    {
+      "ID": 361010,
+      "Title": "Crown to the Faerie Court",
+      "Description": "Defeat Cynthia using a team of only Fairy-type Pokémon: the Clefairy line, the Jigglypuff line, the Mr. Mime line, the Togekiss line, the Marill line, the Granbull line, the Gardevoir line, and Mawile",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-05-17 18:27:27"
+    },
+    {
+      "ID": 361012,
+      "Title": "Border to the Ultimate Challenge",
+      "Description": "Have Professor Oak upgrade your Pokédex to the National Pokédex",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:44:50"
+    },
+    {
+      "ID": 361013,
+      "Title": "Foundations of Heart and Soul",
+      "Description": "Catch Uxie at Lake Acuity, a roaming Mesprit, and Azelf at Lake Valor",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-10-03 16:45:24"
+    },
+    {
+      "ID": 361014,
+      "Title": "Partners in Every Time",
+      "Description": "Catch Dialga at Spear Pillar",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-17 17:15:36"
+    },
+    {
+      "ID": 361015,
+      "Title": "Phantom of a Journey's End",
+      "Description": "Catch Giratina in Turnback Cave",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-10-03 16:45:51"
+    },
+    {
+      "ID": 361016,
+      "Title": "Victor Before the Dawn",
+      "Description": "Catch a roaming Cresselia",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-10-03 16:46:06"
+    },
+    {
+      "ID": 361017,
+      "Title": "Melty Molten Monster",
+      "Description": "Catch Heatran in Stark Mountain",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-10-03 16:46:29"
+    },
+    {
+      "ID": 361018,
+      "Title": "Delving into the Unown",
+      "Description": "See 10 different forms of Unown",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:46:59"
+    },
+    {
+      "ID": 361019,
+      "Title": "Extraordinary Vocabulary",
+      "Description": "See all 28 forms of Unown",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:47:00"
+    },
+    {
+      "ID": 361020,
+      "Title": "Gotta Catch 'Em All! - Diamond",
+      "Description": "Catch every obtainable Pokémon in the Sinnoh Pokédex",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2024-05-17 18:27:42"
+    },
+    {
+      "ID": 361021,
+      "Title": "Gotta Watch 'Em All!",
+      "Description": "See every possible Pokémon of the National Pokédex",
+      "Points": 50,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-05-17 18:27:54"
+    },
+    {
+      "ID": 361022,
+      "Title": "Jack of All Trades",
+      "Description": "Complete every in-game trade",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:48:24"
+    },
+    {
+      "ID": 361023,
+      "Title": "No Loot Left Behind",
+      "Description": "Pick up every item and defeat every trainer in Canalave City and Iron Island",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-17 18:07:14"
+    },
+    {
+      "ID": 361024,
+      "Title": "A Guiding Glow from the Dark",
+      "Description": "Pick up every item and defeat every trainer in Eterna Forest and Old Chateau",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:16"
+    },
+    {
+      "ID": 361025,
+      "Title": "Ironing Out the Ironworks",
+      "Description": "Pick up every item and defeat every trainer in Fuego Ironworks",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:17"
+    },
+    {
+      "ID": 361026,
+      "Title": "Open Heart of the Arts",
+      "Description": "Pick up every item and defeat every trainer in Hearthome City",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:17"
+    },
+    {
+      "ID": 361027,
+      "Title": "Secrets Preserved in the Ice",
+      "Description": "Pick up every item and defeat every trainer in Lake Acuity and Snowpoint City",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:17"
+    },
+    {
+      "ID": 361028,
+      "Title": "Knowing Home Like the Back of My Hand",
+      "Description": "Pick up every item and defeat every trainer in Lake Verity and Twinleaf Town",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:18"
+    },
+    {
+      "ID": 361029,
+      "Title": "A Legacy to Carry On",
+      "Description": "Pick up every item and defeat every trainer in the Lost Tower",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:18"
+    },
+    {
+      "ID": 361030,
+      "Title": "Holy Temple of Sinnoh's Courtesy",
+      "Description": "Pick up every item and defeat every trainer in Mt. Coronet",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:18"
+    },
+    {
+      "ID": 361031,
+      "Title": "We Need to Go Deeper",
+      "Description": "Pick up every item and defeat every trainer in Oreburgh Gate, Oreburgh City, and Oreburgh Mine",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:19"
+    },
+    {
+      "ID": 361032,
+      "Title": "Trekking and Tripping Through the Mud",
+      "Description": "Pick up every item and defeat every trainer in Pastoria City and Great Marsh",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:19"
+    },
+    {
+      "ID": 361033,
+      "Title": "City of Color Uncovered",
+      "Description": "Pick up every item and defeat every trainer on Route 202 and Jubilife City",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:23"
+    },
+    {
+      "ID": 361034,
+      "Title": "Gift of Calm Past Bustling Streets",
+      "Description": "Pick up every item and defeat every trainer on Route 203",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:23"
+    },
+    {
+      "ID": 361035,
+      "Title": "Going up to Greener Pastures",
+      "Description": "Pick up every item and defeat every trainer on Route 204 and Ravaged Path",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:23"
+    },
+    {
+      "ID": 361036,
+      "Title": "Breath for Adventure's Offerings",
+      "Description": "Pick up every item and defeat every trainer on Route 205",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:23"
+    },
+    {
+      "ID": 361037,
+      "Title": "Mapping Out the Mystery Zone",
+      "Description": "Pick up every item and defeat every trainer on Route 206",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:23"
+    },
+    {
+      "ID": 361038,
+      "Title": "Setting Foot to an Outskirts' Leftovers",
+      "Description": "Pick up every item and defeat every trainer on Route 207",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:24"
+    },
+    {
+      "ID": 361039,
+      "Title": "Passing the Light at the End of the Tunnel",
+      "Description": "Pick up every item and defeat every trainer on Route 208",
+      "Points": 4,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:24"
+    },
+    {
+      "ID": 361040,
+      "Title": "Rustic Ruins Require Reading",
+      "Description": "Pick up every item and defeat every trainer on Route 209, Solaceon Town, and Solaceon Ruins",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:24"
+    },
+    {
+      "ID": 361041,
+      "Title": "Topping Off the Hazy Canyon Maze",
+      "Description": "Pick up every item and defeat every trainer on Route 210",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:24"
+    },
+    {
+      "ID": 361042,
+      "Title": "Reflection of an Ancient Age",
+      "Description": "Pick up every item and defeat every trainer on Route 211",
+      "Points": 4,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:25"
+    },
+    {
+      "ID": 361043,
+      "Title": "First Come, First Served",
+      "Description": "Pick up every item and defeat every trainer on Route 212 and the Pokémon Mansion",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:25"
+    },
+    {
+      "ID": 361044,
+      "Title": "Unofficial Housekeeper Volunteer",
+      "Description": "Pick up every item and defeat every trainer on Route 213",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:25"
+    },
+    {
+      "ID": 361045,
+      "Title": "Self-Rewarded Gardening Work",
+      "Description": "Pick up every item and defeat every trainer on Route 214 and the Maniac Tunnel",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:25"
+    },
+    {
+      "ID": 361046,
+      "Title": "Running Up and Down and All Around",
+      "Description": "Pick up every item and defeat every trainer on Route 215",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:26"
+    },
+    {
+      "ID": 361047,
+      "Title": "Scouring the Snowbound Scatter",
+      "Description": "Pick up every item and defeat every trainer on Route 216",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:56"
+    },
+    {
+      "ID": 361048,
+      "Title": "Besting the Biting Blizzard",
+      "Description": "Pick up every item and defeat every trainer on Route 217",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:56"
+    },
+    {
+      "ID": 361049,
+      "Title": "Taking Turns off the Beaten Bridge",
+      "Description": "Pick up every item and defeat every trainer on Route 218",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:26"
+    },
+    {
+      "ID": 361050,
+      "Title": "Finding Sea Beyond the Shore",
+      "Description": "Pick up every item and defeat every trainer on Route 219",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:56"
+    },
+    {
+      "ID": 361051,
+      "Title": "Cruising Along Gentle Marine",
+      "Description": "Pick up every item and defeat every trainer on Route 220",
+      "Points": 4,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:56"
+    },
+    {
+      "ID": 361052,
+      "Title": "Dedicated Bonding Experience",
+      "Description": "Pick up every item and defeat every trainer on Route 221",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:56"
+    },
+    {
+      "ID": 361053,
+      "Title": "Fishing for Another Adventure",
+      "Description": "Pick up every item and defeat every trainer on Route 222",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361054,
+      "Title": "Sailing to Clear the Waterways",
+      "Description": "Pick up every item and defeat every trainer on Route 223 and Sunyshore City",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361055,
+      "Title": "Blooming a World to Cherish",
+      "Description": "Pick up every item and defeat every trainer on Route 224",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361056,
+      "Title": "Fighting to Survive the Unknown",
+      "Description": "Pick up every item and defeat every trainer on Route 225",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361057,
+      "Title": "Heeding Every Cliff's Call",
+      "Description": "Pick up every item and defeat every trainer on Route 226 and the Survival Area",
+      "Points": 4,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:26"
+    },
+    {
+      "ID": 361058,
+      "Title": "A Rugged Path's Ashes",
+      "Description": "Pick up every item and defeat every trainer on Route 227",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:17:26"
+    },
+    {
+      "ID": 361059,
+      "Title": "Shadow of the Lone Desert's Force",
+      "Description": "Pick up every item and defeat every trainer on Route 228",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361060,
+      "Title": "Scavenger of Verdant and Aquatic",
+      "Description": "Pick up every item and defeat every trainer on Route 229",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:57"
+    },
+    {
+      "ID": 361061,
+      "Title": "Achieving Victory on the Grandest Stage of All",
+      "Description": "Pick up every item and defeat every trainer on Route 230 and Battle Park",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:23:58"
+    },
+    {
+      "ID": 361062,
+      "Title": "Seeing Through the Mountain Smoke",
+      "Description": "Pick up every item and defeat every trainer in Stark Mountain",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:29"
+    },
+    {
+      "ID": 361063,
+      "Title": "Chasing Petals on a Tailwind",
+      "Description": "Pick up every item and defeat every trainer in Valley Windworks and Floaroma Meadow",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:30"
+    },
+    {
+      "ID": 361064,
+      "Title": "Closing the Final Chapter's Curtain",
+      "Description": "Pick up every item and defeat every trainer in Victory Road and the Pokémon League",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:30"
+    },
+    {
+      "ID": 361065,
+      "Title": "Undeceived Beyond Plain Sight",
+      "Description": "Pick up every item and defeat every trainer in Wayward Cave",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:30"
+    },
+    {
+      "ID": 361066,
+      "Title": "Early Trainer Gets the Magikarp",
+      "Description": "Starting from Route 219, reach a tile below the fisherman on Route 221 in 95 steps or less",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:48"
+    },
+    {
+      "ID": 361067,
+      "Title": "Berry Watching",
+      "Description": "Stand in front of every berry location in Sinnoh in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:50:55"
+    },
+    {
+      "ID": 361068,
+      "Title": "Just Like Mama",
+      "Description": "Cook your first Poffin",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:09"
+    },
+    {
+      "ID": 361069,
+      "Title": "Cute as a... Barrette?",
+      "Description": "Win a Cute Contest on Normal Rank to earn a Pink Barrette",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:36"
+    },
+    {
+      "ID": 361070,
+      "Title": "Startup Stunter",
+      "Description": "Win a Cool Contest on Normal Rank to earn a Red Barrette",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:36"
+    },
+    {
+      "ID": 361071,
+      "Title": "Pretty Pretty",
+      "Description": "Win a Beauty Contest on Normal Rank to earn a Blue Barrette",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:37"
+    },
+    {
+      "ID": 361072,
+      "Title": "One Tough Cookie",
+      "Description": "Win a Tough Contest on Normal Rank to earn a Yellow Barrette",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:37"
+    },
+    {
+      "ID": 361073,
+      "Title": "Straight A Student",
+      "Description": "Win a Smart Contest on Normal Rank to earn a Green Barrette",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:37"
+    },
+    {
+      "ID": 361074,
+      "Title": "Put Your Heart into It",
+      "Description": "Win a Cute Contest on Great Rank to earn a Pink Balloon",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:38"
+    },
+    {
+      "ID": 361075,
+      "Title": "Looking Highly Fresh",
+      "Description": "Win a Cool Contest on Great Rank to earn Red Balloons",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:38"
+    },
+    {
+      "ID": 361076,
+      "Title": "Light Steps to Glory",
+      "Description": "Win a Beauty Contest on Great Rank to earn Blue Balloons",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:38"
+    },
+    {
+      "ID": 361077,
+      "Title": "New Punching Bag Unlocked",
+      "Description": "Win a Tough Contest on Great Rank to earn a Yellow Balloon",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:38"
+    },
+    {
+      "ID": 361078,
+      "Title": "Perfectly Calculated",
+      "Description": "Win a Smart Contest on Great Rank to earn Green Balloons",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:39"
+    },
+    {
+      "ID": 361079,
+      "Title": "Served to Sweet Taste",
+      "Description": "Win a Cute Contest on Ultra Rank to earn a Lace Headress",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:40"
+    },
+    {
+      "ID": 361080,
+      "Title": "Top of the Charts Show Off",
+      "Description": "Win a Cool Contest on Ultra Rank to earn a Top Hat",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:40"
+    },
+    {
+      "ID": 361081,
+      "Title": "A Strut Smoother than Silk",
+      "Description": "Win a Beauty Contest on Ultra Rank to earn a Silk Veil",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:40"
+    },
+    {
+      "ID": 361082,
+      "Title": "Based on Real Events",
+      "Description": "Win a Tough Contest on Ultra Rank to earn a Heroic Headband",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:40"
+    },
+    {
+      "ID": 361083,
+      "Title": "Memorized the Pokédex Award",
+      "Description": "Win a Smart Contest on Ultra Rank to earn a Professor Hat",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:41"
+    },
+    {
+      "ID": 361084,
+      "Title": "Worth a Thousand Thornless Roses",
+      "Description": "Win a Cute Contest on Master Rank to earn a Flower Stage",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:41"
+    },
+    {
+      "ID": 361085,
+      "Title": "High Value Influencer Material",
+      "Description": "Win a Cool Contest on Master Rank to earn a Gold Pedestal",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:41"
+    },
+    {
+      "ID": 361086,
+      "Title": "Reflected in the Eye of the Beholder",
+      "Description": "Win a Beauty Contest on Master Rank to earn a Glass Stage",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:42"
+    },
+    {
+      "ID": 361087,
+      "Title": "Strongest of 'Em All!",
+      "Description": "Win a Tough Contest on Master Rank to earn an Award Podium",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:42"
+    },
+    {
+      "ID": 361088,
+      "Title": "Master Class's Sharpest Graduate",
+      "Description": "Win a Smart Contest on Master Rank to earn a Cube Stage",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:51:42"
+    },
+    {
+      "ID": 361089,
+      "Title": "Conquering New Frontiers",
+      "Description": "Defeat Palmer at the Battle Tower after winning 20 battles in the Single Battle Room",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-05-17 18:28:29"
+    },
+    {
+      "ID": 361090,
+      "Title": "High and Mighty Altitude",
+      "Description": "Defeat Palmer in a rematch at the Battle Tower after winning 48 battles in the Single Battle Room",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-05-17 18:28:36"
+    },
+    {
+      "ID": 361091,
+      "Title": "Out of Storage...",
+      "Description": "Obtain every possible application for your Pokétch",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:52:14"
+    },
+    {
+      "ID": 361092,
+      "Title": "How Do You Do, Fellow Youngsters?",
+      "Description": "Hear about half of the trendy words from an elderly man in Snowpoint City",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-17 17:18:53"
+    },
+    {
+      "ID": 361093,
+      "Title": "Chatot's Best Friend",
+      "Description": "Hear about every trendy word from an elderly man in Snowpoint City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-17 17:18:57"
+    },
+    {
+      "ID": 361094,
+      "Title": "All Your Flags Are Belong to Us",
+      "Description": "Create your secret base in the Underground",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-03 16:52:15"
+    },
+    {
+      "ID": 361095,
+      "Title": "Can't Fine Me If You Can't Catch Me",
+      "Description": "Hop on your bike without using it from your bag or registering it to a button in Eterna City",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-07-30 17:32:27"
+    }
+  ]
+}
