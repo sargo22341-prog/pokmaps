@@ -141,11 +141,14 @@ Le filtre « Baies et Noigrumes » affiche les fruits correspondant à chaque ar
 Le Pokédex des formes capturées de Zarbi est accessible depuis sa fiche.
 Les onglets d'attaques par œuf et par tuteur apparaissent seulement si la fiche contient des attaques correspondantes.
 Lors d'un changement de jeu, la carte conserve le lieu et la surbrillance au sein d'une même famille de cartes.
-La préparation Android de la troisième génération ajoute le filtre Plongée et ses marqueurs sous-marins,
+La troisième génération propose le filtre Plongée et ses marqueurs sous-marins,
 la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
 Le calculateur GBA reproduit les quatre contrôles entiers et les sept nouvelles Balls, avec réglages de
 Plongée, de tours écoulés et d’espèce déjà capturée ; il exclut le Parc Safari et utilise un IV des PV moyen.
 Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille sont sélectionnables.
+
+Hoenn et Remake 1G constituent deux branches distinctes : voir la
+[génération 3](docs/generations/generation-3.md) et le [bilan avant Sinnoh](docs/generations/bilan-generations-1-2-3.md).
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
 Le [catalogue de provenance des sprites](docs/donnees/sprites-pokemon.md) couvre les 1 025 espèces
@@ -183,6 +186,12 @@ Pokémon Rouge, sur l'émulateur Android 17 (Pixel 9 Pro XL).
 | ![Bourg Geon sur la carte de Johto, dans Pokémon Cristal](docs/screenshots/johto.webp) |
 
 Pokémon Cristal, sur le même émulateur Android 17 (Pixel 9 Pro XL).
+
+| Hoenn dans Émeraude | Îles Sevii dans Rouge Feu |
+|---|---|
+| ![Bourg-en-Vol et Route 101](docs/screenshots/hoenn.webp) | ![Îles Sevii](docs/screenshots/sevii.webp) |
+
+Captures sur le même émulateur Android 17 (Pixel 9 Pro XL), le 12 octobre 2026.
 
 ## Structure
 
@@ -237,7 +246,7 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   (moments de la journée perdus, emplacements d'essaim manquants) ; dons, Pokémon fixes et échanges restent ceux de
   PokéAPI.
 - **[pret/pokeruby](https://github.com/pret/pokeruby)**, **[pret/pokeemerald](https://github.com/pret/pokeemerald)**
-  et **[pret/pokefirered](https://github.com/pret/pokefirered)** : lecteurs préparatoires de la troisième génération,
+  et **[pret/pokefirered](https://github.com/pret/pokefirered)** : lecteurs de la troisième génération,
   testés sur leurs commits épinglés. `Gen3PretRepo` lit les cartes et événements JSON, les layouts de 16 px,
   les pixels indexés 4 bpp, palettes JASC et attributs de métatuiles u16 (Hoenn) ou u32 (remakes), ainsi que
   les effets d'attaques et leurs probabilités en pourcentage. Les sources C et assembleur sont sélectionnées
@@ -246,8 +255,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   inconnues ou incohérentes arrêtent la lecture. Les cartes Hoenn sont rendues et embarquées séparément pour
   Rubis/Saphir et Émeraude, avec catalogues TSV, événements JSON et sprites de PNJ. Leurs rencontres,
   personnages et services sont intégrés à Room, conformément au
-  [plan génération 3](docs/plan_gen_3.md). Rouge Feu/Vert Feuille disposent également de cartes préparatoires
-  et d'un aperçu des rencontres et des objets à position fixe.
+  [plan génération 3](docs/plan_gen_3.md). Rouge Feu/Vert Feuille disposent également de leurs cartes,
+  rencontres, personnages et services distribués.
 - **`tools/data/`** : quelques corrections et compléments relus à la main (accents, étages mal nommés,
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
@@ -315,7 +324,8 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
-- de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`), ses régions et villes
+- de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`, `pret_gen3*.py`),
+  avec `PretFormat.GEN3` pour pokeruby, pokeemerald et pokefirered, ses régions et villes
   de départ (`Game.regions`), ses palettes et son rendu (`maps_render*.py`) ;
 - de vérifier ses variantes de format même s’il partage un lecteur : Cristal ajoute une seconde banque
   de tuiles, des scripts conditionnels et `warpfacing`, ainsi que des tables sauvages `map_id` ;
@@ -332,14 +342,14 @@ connaît (`GenerationFeature` dans l'application) : objets tenus (2e génératio
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
-Les données Pokémon de la 3e génération sont préparées séparément pour Hoenn et Rouge Feu/Vert Feuille
+Les données Pokémon de la 3e génération sont intégrées séparément pour Hoenn et Rouge Feu/Vert Feuille
 ([plan d'intégration](docs/plan_gen_3.md)). Les tests du pipeline vérifient les Pokédex régional et National,
 les espèces nécessitant un transfert, les noms français et les objets clés sur des bases réduites sans cartes.
 Les tables événementielles B à I de la Grotte Métamo restent listées avec la mention « Événement externe » et
 ne comptent pas dans l'obtention ; seule la table normale à Nosferapti est accessible sans distribution.
-Les cartes actives sont dans `assets/maps/emerald` et `assets/maps/ruby-sapphire` ;
-`assets/maps/firered-leafgreen` (Kanto et Îles Sevii) reste préparatoire.
-Un aperçu PC des rencontres permet de préparer les emplacements (commande ci-dessous).
+Les cartes distribuées sont dans `assets/maps/emerald` et `assets/maps/ruby-sapphire` ;
+`assets/maps/firered-leafgreen` (Kanto et Îles Sevii) est également distribué.
+Un aperçu PC des rencontres permet de modifier les emplacements (commande ci-dessous).
 Les bilans des [cartes Hoenn](docs/generations/cartes-hoenn.md) et des
 [cartes des remakes](docs/generations/cartes-remake-1g.md) décrivent les assemblages, variantes et mesures.
 
@@ -463,7 +473,7 @@ Pour modifier uniquement les cartes Hoenn, utiliser
 `python tools/build_data.py --hoenn-maps-only`, puis les mêmes validations et tests du pipeline.
 Cette commande régénère les deux variantes, leurs catalogues de personnages et Pokémon fixes, et leur
 inventaire SHA-256 sans modifier la base Room. Une modification des données ou de la curation exige la génération complète.
-Pour les cartes préparatoires de Rouge Feu/Vert Feuille, utiliser
+Pour les cartes de Rouge Feu/Vert Feuille, utiliser
 `python tools/build_data.py --remake-maps-only`, puis les mêmes validations et tests du pipeline.
 La génération complète inclut les trois groupes de cartes GBA ; les options ciblées sont exclusives.
 
@@ -475,8 +485,9 @@ python tools/map_editor.py --assets tools/build/preview/gen3-encounters
 ```
 
 Cet aperçu contient les cinq versions, les rencontres pret, les taux du moteur, les conditions de scénario,
-les errants et les terrains. Les personnages et offres seront intégrés en phase 5 ; leurs calques restent vides
-dans cet aperçu. Les cartes préparatoires doivent déjà être présentes dans les assets. Les sprites manquants
+les errants et les terrains. Cet export ciblé laisse les calques des personnages et offres vides ;
+leur intégration distribuée est terminée. Les cartes versionnées doivent déjà être présentes dans les assets.
+Les sprites manquants
 sont téléchargés aux versions épinglées, puis réutilisés depuis le cache. L'application et son inventaire
 `assets.sha256` restent inchangés. `encounter_comparison.json`, dans l'aperçu, signale chaque table dont les espèces,
 niveaux ou probabilités diffèrent de PokéAPI ; le [bilan des rencontres communes](docs/generations/rencontres-gen3-communs.md)
@@ -620,9 +631,12 @@ et aucun téléchargement de sources Pokémon. Le résumé indique la taille exa
 Le workflow manuel `data-pipeline.yml` génère et teste séparément les données depuis les sources épinglées,
 avec cache ; il ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
 
-Mesure locale du 8 octobre 2026, avec les six versions et les sources déjà en cache : génération et validation
-en 50,7 s ; APK debug de 62 760 138 octets (59,85 Mio). Les cartes représentent 5 903 Kio pour 5 732 tuiles.
-Ces mesures Windows ne prédisent pas la durée d'un premier téléchargement ni la taille de l'APK release.
+Mesure locale Windows du 12 octobre 2026, onze versions et sources en cache : génération complète et
+validation en 398,85 s, pendant une exécution parallèle des tests du pipeline (mesure non isolée).
+APK debug : 102 891 337 octets (98,12 Mio) ; cartes : 41 841 493 octets (39,90 Mio).
+Cache des sources et conversions : 5 660 286 413 octets (5,27 Gio) ; objets Git : 56 811 Kio.
+Ces mesures ne prédisent ni un premier téléchargement, ni une exécution CI, ni la taille de l'APK release.
+Le workflow manuel du pipeline rapporte durée de génération, cache, assets et APK après génération.
 
 Les téléchargements HTTP réessaient jusqu'à quatre fois en cas de coupure réseau, de délai dépassé ou de réponse
 HTTP temporaire (408, 429, 500, 502, 503, 504), avec des pauses de 1, 2 puis 4 secondes. Les fichiers incomplets

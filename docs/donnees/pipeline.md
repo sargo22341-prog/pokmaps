@@ -21,7 +21,7 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
 - **[PokéAPI](https://pokeapi.co)**, via l'export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi) :
   Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
   lieux et rencontres de chaque version ; objets tenus, groupes d'œufs et talents, préparés pour les générations
-  suivantes (vides en 1re génération). Les CSV sont téléchargés une seule fois au build, avec cache ;
+  suivantes (vides en 1re génération). Les CSV sont téléchargés lors de la génération explicite, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
 - **[pokesprite](https://github.com/msikma/pokesprite)** : icônes d'objets.
 - **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, normaux et chromatiques,
@@ -73,7 +73,7 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
-- de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`), ses régions et villes
+- de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`, `pret_gen3*.py`), ses régions et villes
   de départ (`Game.regions`), ses palettes et son rendu (`maps_render*.py`) ;
 - de vérifier ses variantes de format même s’il partage un lecteur : Cristal ajoute une seconde banque
   de tuiles, des scripts conditionnels et `warpfacing`, ainsi que des tables sauvages `map_id` ;
@@ -90,6 +90,23 @@ connaît (`GenerationFeature` dans l'application) : objets tenus (2e génératio
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
 
-Les données générées ne sont pas versionnées : elles sont produites par la CI, ou en local avec la commande
-ci-dessous.
+Les assets finaux sont versionnés avec `assets.sha256`. Les builds utilisent le checkout sans génération.
+Les sources brutes, caches et aperçus restent hors Git. La génération est une opération explicite.
 
+La génération 3 utilise pokeruby, pokeemerald et pokefirered aux commits de `sources.py`.
+Hoenn et Remake 1G restent deux familles de cartes. `PretFormat.GEN3` distingue leurs
+attributs, scripts et événements ; les rencontres aléatoires viennent de `wild_encounters.json`.
+Les contenus de Hoenn sont dans `hoenn.json`, sans changement du schéma Room 15.
+
+L’éditeur `python tools/map_editor.py` lit les assets distribués ; `--assets` sélectionne un aperçu.
+Les placements relus restent dans `tools/data/map_spots.csv`, par famille et `version_group`.
+Les groupes Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille sont distincts, avec le terrain Plongée.
+
+
+## Vérifications et publication
+
+`python tools/check_assets.py` vérifie inventaire, images et base. Les tests ordinaires
+`python -m pytest -q` utilisent les assets versionnés, sans cache ni réseau. Après génération explicite,
+`python -m pytest -q -m pipeline` relit les sources épinglées et vérifie la reproduction des assets.
+La CI et la release ne régénèrent rien ; le workflow manuel `data-pipeline.yml` mesure durée,
+cache, assets et APK debug. Voir [développement](../developpement.md) et [README](../../README.md).

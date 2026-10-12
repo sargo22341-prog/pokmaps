@@ -1,10 +1,10 @@
 # Générations suivantes
 
-Ces jeux ne sont pas encore proposés. Les règles exactes seront validées par jeu lors de leur intégration.
+Les générations 1 à 3 sont distribuées. Les jeux ci-dessous ne sont pas encore proposés.
+Les règles exactes seront validées par jeu lors de leur intégration.
 
 | Génération | Nouvelles espèces nationales | Spécificités à distinguer |
 |---|---|---|
-| 3 | 252–386 | Talents ; Zarbi ! et ? |
 | 4 | 387–493 | Catégorie physique/spéciale par attaque |
 | 5 | 494–649 | Talents cachés ; sprites Noir/Blanc actuels |
 | 6 | 650–721 | Fée ; taux chromatique de base 1/4 096 |

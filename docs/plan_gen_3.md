@@ -895,42 +895,81 @@ décrit les sources, les règles et les limites des contenus.
 
 ## Phase 9 — Documentation, publication et bilan
 
-- [ ] `README.md` : présentation (onze jeux, deux branches), sources pret de la 3e génération, « Ajouter un jeu »
+- [x] `README.md` : présentation (onze jeux, deux branches), sources pret de la 3e génération, « Ajouter un jeu »
       (format GEN3), éditeur des emplacements, mesures de génération et d'APK, procédure inchangée.
-- [ ] `docs/generations/generation-3.md` (nouveau), `generations-suivantes.md`, nouveau bilan avant la
-      génération 4, `docs/fonctionnalites/*.md`, `docs/donnees/pipeline.md` (déjà en retard sur le README :
-      il dit encore que les données ne sont pas versionnées), `docs/developpement.md`.
-- [ ] `docs/donnees/sprites-pokemon.md` régénéré (`tools/build_sprite_catalog.py`) : 1 à 386 embarqués.
-- [ ] `AGENTS.md` §1 (liste des jeux) ; `about_credit_pret` (tous les dépôts pret utilisés).
-- [ ] Captures d'écran du README (Hoenn, Îles Sevii), sur l'émulateur Android 17.
-- [ ] `RELEASE_NOTES.md` : une phrase française par changement visible, sous `<!-- notes -->`.
-- [ ] CI : durée de la génération, taille du cache et de l'APK dans le résumé ; workflow `data-pipeline.yml`.
-- [ ] Relecture visuelle finale des cartes, des emplacements et des offres ; bilan écrit des limites connues.
+- [x] `docs/generations/generation-3.md` (nouveau), `generations-suivantes.md`, nouveau bilan avant la
+      génération 4, `docs/fonctionnalites/*.md`, `docs/donnees/pipeline.md` (corrige la mention obsolète de données non versionnées),
+      `docs/developpement.md`.
+- [x] `docs/donnees/sprites-pokemon.md` régénéré (`tools/build_sprite_catalog.py`) : 1 à 386 embarqués.
+- [x] `AGENTS.md` §1 (liste des jeux) ; `about_credit_pret` (tous les dépôts pret utilisés).
+- [x] Captures d'écran du README (Hoenn, Îles Sevii), sur l'émulateur Android 17.
+- [x] `RELEASE_NOTES.md` : une phrase française par changement visible, sous `<!-- notes -->`.
+- [x] CI : durée de la génération, taille du cache et de l'APK dans le résumé ; workflow `data-pipeline.yml`.
+- [x] Relecture visuelle finale des cartes, des emplacements et des offres ; bilan écrit des limites connues.
 
 ---
 
+Clôture documentaire du 12 octobre 2026 : les onze jeux et les deux branches sont décrits dans le README,
+les pages de fonctionnalités, le pipeline et le développement. Le nouveau [dossier de génération 3](generations/generation-3.md)
+et le [bilan avant Sinnoh](generations/bilan-generations-1-2-3.md) relient les bilans détaillés des phases précédentes.
+Le catalogue des sprites est régénéré : 1 à 386 embarqués, 387 à 649 prévus, aucune source au-delà.
+AGENTS.md §1 citait déjà les onze jeux : vérifié et conservé. Les crédits affichés citent désormais les sept dépôts pret.
+Les notes existantes sont conservées ; une phrase couvre ce changement visible.
+
+Le workflow manuel `data-pipeline.yml` ajoute la mesure du cache, des assets et de l’APK après génération.
+La CI et la release continuent d’utiliser les assets versionnés. YAML relu et chargé localement ; aucune
+exécution GitHub distante, aucun tag, publication ni commit. La procédure de release reste inchangée.
+
+Captures ajoutées au README depuis l’émulateur Pixel 9 Pro XL, API 37 confirmée par ADB : Hoenn dans Émeraude
+et Île 1 dans Rouge Feu. Installation par-dessus réussie, sans effacement. Les cartes, sprites et entrées visibles,
+la liste de rencontres de l’Île 1, les dons conditionnels de Chen et le service du sac de Seko
+sont relus sur cet échantillon.
+Cette passe complète les relectures des phases précédentes ; elle ne certifie pas tous les intérieurs,
+chaque emplacement sauvage ni chaque état de scénario. Les limites explicites sont dans le bilan avant Sinnoh.
+
+Mesures Windows, sources en cache : génération complète et validation en 398,85 s, pendant les tests pipeline
+(mesure non isolée) ; APK debug 102 891 337 octets (98,12 Mio), cartes 41 841 493 octets (39,90 Mio),
+cache 5 660 286 413 octets (5,27 Gio), objets Git 56 811 Kio. Les assets régénérés sont identiques à Git.
+Seul asset dépassant 5 Mio : `pokedex.db`, 8 884 224 octets (8,47 Mio), justifié par les données relationnelles
+et index des onze jeux ; aucune image unitaire disproportionnée. Aucun cache ni aperçu ajouté au suivi Git.
+
+Contrôles Android réussis : ktlint, absence de GMS (191 dépendances), Lint, 387 tests JVM et APK debug.
+Inventaire des 15 442 assets, cohérence de la base, Ruff et format des 195 fichiers Python réussis ;
+469 tests ordinaires et 204 tests pipeline passent (617,65 s pour le pipeline, réseau bloqué),
+y compris la reproduction des assets et le catalogue de sprites. Limites des deux fichiers Python modifiés vérifiées (600/60/120), XML valide,
+liens locaux nouveaux présents et diff relu. La synchronisation réelle RetroAchievements et les imports
+sur appareil ne sont pas relancés : les tests JVM couvrent leur comportement ; la liste finale distingue ces essais.
+
+Incidents : accès initial au cache Gradle et aux fichiers temporaires pytest refusé dans le bac à sable ;
+relances autorisées réussies. `ruff` absent du PATH, résolu avec `python -m ruff`.
+Une erreur d’encodage du script documentaire et une insertion dans la phrase d’en-tête des notes sont corrigées ;
+l’en-tête et le marqueur restent inchangés. La dépréciation AGP déjà documentée demeure affichée.
+
 ## Contrôle final : ce qui pourrait être oublié
+
+Les cases ouvertes ci-dessous désignent un contrôle exhaustif ou un essai réel encore non certifié.
+Les contrôles automatisés et l’échantillon visuel réalisés en phase 9 sont décrits dans sa clôture.
 
 Liste relue à la fin, une fois toutes les phases cochées :
 
-- [ ] Plus aucun `generationId >= 2`, `== 2`, `1..6`, `4..6`, `251`, `26` restant sans justification
-      (`grep` sur `app/src/main/java`).
+- [x] Plus aucun `generationId >= 2`, `== 2`, `1..6`, `4..6`, `251`, `26` restant sans justification
+      (`rg` sur `app/src/main/java` : limites de Johto, identifiants d’espèces et jaquettes par version).
 - [ ] Aucune méthode de rencontre, méthode d'apprentissage, classe de dresseur, drapeau ou variable de scénario
       ignoré en silence : chaque inconnu arrête la génération ou le chargement.
 - [ ] Aucun fait d'une branche supposé vrai pour l'autre : Pokédex, régions, terrains, offres et guides relus
       séparément pour Hoenn et pour le Remake 1G.
-- [ ] Bascule entre deux jeux de la même génération mais de régions différentes testée (lieu, surbrillance).
-- [ ] Le filtre et le voile horaires n'apparaissent pas en 3e génération ; ils restent en 2e.
-- [ ] Le calculateur de capture apparaît en 3e génération avec les bonnes Balls.
-- [ ] Pokédex régional puis National, comme dans chaque jeu.
+- [x] Bascule entre deux jeux de la même génération mais de régions différentes testée (lieu, surbrillance).
+- [x] Le filtre et le voile horaires n'apparaissent pas en 3e génération ; ils restent en 2e.
+- [x] Le calculateur de capture apparaît en 3e génération avec les bonnes Balls.
+- [x] Pokédex régional puis National, comme dans chaque jeu.
 - [ ] Sauvegarde de collection : export/import avec les versions 7 à 11, 386 espèces et 28 formes ; import
       d'un ancien fichier de schéma 1.
 - [ ] RetroAchievements : synchronisation des cinq nouveaux jeux, une requête par jeu, aucune au lancement.
-- [ ] Recherche, fiches objet/attaque/lieu/personnage, liens carte ↔ Pokédex pour les nouveaux jeux.
-- [ ] Sprites : espèces 252-386, chromatiques, formes, icônes d'objets, PNJ ; aucun chemin d'image cassé
+- [x] Recherche, fiches objet/attaque/lieu/personnage, liens carte ↔ Pokédex pour les nouveaux jeux.
+- [x] Sprites : espèces 252-386, chromatiques, formes, icônes d'objets, PNJ ; aucun chemin d'image cassé
       (`python tools/check_assets.py`).
 - [ ] Fichiers sous 600 lignes et fonctions sous 60 lignes, Python comme Kotlin, tests compris.
-- [ ] `assets.sha256` à jour, aucun cache ni aperçu versionné, aucun asset disproportionné, tailles rapportées.
-- [ ] Aucun service Google Play (`checkNoGoogleServices`), interface entièrement en français.
-- [ ] Documentation et `AGENTS.md` cohérents avec le comportement réel.
-- [ ] Contrôles de `AGENTS.md` §8 tous verts, y compris `pytest -m pipeline` après génération.
+- [x] `assets.sha256` à jour, aucun cache ni aperçu versionné, aucun asset disproportionné, tailles rapportées.
+- [x] Aucun service Google Play (`checkNoGoogleServices`), interface entièrement en français.
+- [x] Documentation et `AGENTS.md` cohérents avec le comportement réel.
+- [x] Contrôles de `AGENTS.md` §8 tous verts, y compris `pytest -m pipeline` après génération.

@@ -16,3 +16,13 @@ jobs:
         uses: ./.github/actions/build-database
       - name: Vérifier les assets générés
         run: python tools/check_assets.py
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Mesurer l’APK debug avec les assets générés
+        run: |
+          ./gradlew --stacktrace assembleDebug
+          size=$(stat --format=%s app/build/outputs/apk/debug/app-debug.apk)
+          echo "APK debug après génération : ${size} octets" >> "$GITHUB_STEP_SUMMARY"
