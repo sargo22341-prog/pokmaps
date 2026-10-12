@@ -6,7 +6,7 @@ import org.junit.Test
 
 class MapLandscapeTest {
     @Test
-    fun underwaterSharesHoennRegionAndBothWorldLevels() {
+    fun underwaterLevelsBelongOnlyToDiveRoutes() {
         for (group in listOf("emerald", "ruby-sapphire")) {
             val catalog = GeneratedGbaCatalog.load(group)
             val surface = requireNotNull(catalog.mapByIdentifier("hoenn"))
@@ -14,10 +14,27 @@ class MapLandscapeTest {
             assertEquals(listOf(surface), catalog.regionWorlds)
             assertEquals(surface, catalog.defaultWorld)
             assertEquals(surface, catalog.regionWorldOf(underwater.id))
-            val floors = catalog.floorsOf(surface.id)
-            assertEquals(listOf(surface.id, underwater.id), floors.map { it.mapId })
-            assertEquals(floors, catalog.floorsOf(underwater.id))
-            assertEquals(listOf(FloorLevel.Landscape.SURFACE, FloorLevel.Landscape.UNDERWATER), floors.map { it.level })
+            assertTrue(catalog.floorsOf(surface.id).isEmpty())
+            assertTrue(catalog.floorsOf(underwater.id).isEmpty())
+            for (number in listOf(124, 126, 127, 128, 134)) {
+                val route = requireNotNull(catalog.mapByIdentifier("route$number"))
+                val floors = catalog.floorsOf(route.id)
+                assertEquals(route.id, floors.first().mapId)
+                assertEquals(2, floors.size)
+                assertEquals(floors, catalog.floorsOf(floors.last().mapId))
+                assertEquals(
+                    listOf(FloorLevel.Landscape.SURFACE, FloorLevel.Landscape.UNDERWATER),
+                    floors.map { it.level }
+                )
+            }
+            for (number in listOf(130, 131, 132, 133)) {
+                assertTrue(catalog.floorsOf(requireNotNull(catalog.mapByIdentifier("route$number")).id).isEmpty())
+            }
+            assertEquals(if (group == "emerald") 7 else 4, catalog.regionsOf(underwater.id).size)
+            for (number in listOf(105, 125, 129)) {
+                val route = requireNotNull(catalog.mapByIdentifier("route$number"))
+                assertEquals(if (group == "emerald") 2 else 0, catalog.floorsOf(route.id).size)
+            }
         }
     }
 

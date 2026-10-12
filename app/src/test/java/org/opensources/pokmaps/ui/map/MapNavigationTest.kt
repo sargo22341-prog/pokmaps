@@ -10,6 +10,7 @@ import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.domain.map.GeneratedGbaCatalog
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -18,6 +19,39 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MapNavigationTest {
+    @Test
+    fun diveLevelsFollowTheSelectedRouteAndDisappearOnDeselect() = runTest {
+        val repository = MapRepository(FakeMapDao())
+        val catalog = GeneratedGbaCatalog.load("ruby-sapphire")
+        val session = MapSession(backgroundScope)
+        session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        val selection =
+            MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
+        val navigation = MapNavigation(session, selection, GetMapTilesUseCase(MapTiles { null }))
+        navigation.selectWorld(checkNotNull(catalog.defaultWorld).id)
+        assertTrue(session.current.floors.isEmpty())
+        val route = checkNotNull(catalog.mapByIdentifier("route124"))
+        navigation.open(route.id)
+        val floors = session.current.floors
+        assertEquals(2, floors.size)
+        navigation.selectFloor(floors.last().mapId)
+        assertEquals("hoenn-underwater", session.current.map?.identifier)
+        assertEquals(floors.last().mapId, session.current.zone?.mapId)
+        assertEquals(floors, session.current.floors)
+        navigation.selectFloor(route.id)
+        assertEquals("hoenn", session.current.map?.identifier)
+        assertEquals(route.id, session.current.zone?.mapId)
+        navigation.back()
+        assertTrue(session.current.floors.isEmpty())
+        navigation.open(checkNotNull(catalog.mapByIdentifier("route133")).id)
+        assertTrue(session.current.floors.isEmpty())
+        navigation.open(checkNotNull(catalog.mapByIdentifier("route134")).id)
+        navigation.selectFloor(session.current.floors.last().mapId)
+        assertEquals("underwater-route134", session.current.map?.identifier)
+        assertEquals(2, session.current.floors.size)
+        session.current.mapState?.shutdown()
+    }
+
     @Test
     fun fruitLayerFollowsTheDisplayedMapContents() = runTest {
         val repository = MapRepository(FakeMapDao(includeFruitTree = true))

@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les niveaux sous-marins de Hoenn apparaissent uniquement pour le chenal sélectionné possédant un accès de Plongée.
 - Rouge Feu et Vert Feuille sont disponibles avec Kanto, les Îles Sevii, leurs Pokédex, personnages et services.
 - Rubis, Saphir et Émeraude sont disponibles avec les cartes de Hoenn, leurs Pokédex, personnages et services.
 - Les cartes GBA regroupent le monde sous-marin avec Hoenn et proposent les marées de la Grotte Tréfonds dans le sélecteur de niveaux.

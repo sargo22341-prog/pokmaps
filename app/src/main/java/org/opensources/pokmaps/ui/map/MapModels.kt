@@ -147,6 +147,7 @@ data class MapUiState(
     val failed: Boolean = false
 ) {
     val times: Set<EncounterTime> get() = time.times
+    val selectedFloorId: Int? get() = zone?.mapId?.takeIf { id -> floors.any { it.mapId == id } } ?: map?.id
 }
 
 /** Intentions de l'écran de la carte, traitées par [MapViewModel]. */
