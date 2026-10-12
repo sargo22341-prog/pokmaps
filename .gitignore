@@ -29,3 +29,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+
+#temp
+audit.md

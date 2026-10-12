@@ -42,7 +42,15 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
 
     suspend fun details(game: Game, pokemonId: Int): PokemonDetails? {
         val pokemon = dao.pokemon(pokemonId) ?: return null
+        if (pokemon.generationId > game.generationId) return null
+        val number = checkNotNull(dao.number(pokemonId, game.versionGroupId)) {
+            "Numéro absent pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+        }
+        check(number > 0) { "Numéro invalide pour le Pokémon $pokemonId dans ${game.versionIdentifier}" }
         val types = dao.types(pokemonId, game.generationId).map { PokemonType(it.id, it.identifier, it.name) }
+        check(types.size in 1..2 && types.map { it.id }.distinct().size == types.size) {
+            "Types invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+        }
         val factors = dao.typeFactors(game.generationId).associate {
             (it.attackingTypeId to it.defendingTypeId) to
                 it.factor
@@ -51,7 +59,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             .groupBy({ (method, _) -> method.tab }) { (method, row) -> row.toLearnedMove(method) }
         return PokemonDetails(
             id = pokemon.id,
-            number = dao.number(pokemonId, game.versionGroupId),
+            number = number,
             name = pokemon.name,
             nameEn = pokemon.nameEn,
             genus = pokemon.genus,
@@ -77,6 +85,17 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
 
     private suspend fun stats(game: Game, pokemonId: Int): List<BaseStat> {
         val original = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) }
+        val required = if (game.generationId == 1) {
+            setOf("hp", "attack", "defense", "special", "speed")
+        } else {
+            setOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
+        }
+        check(
+            original.size == required.size && original.map { it.identifier }.toSet() == required &&
+                original.all { it.value in 1..BaseStat.MAX }
+        ) {
+            "Statistiques invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+        }
         return if (pokemonId == 386) PokemonForm.deoxys(game.versionIdentifier).stats(original) else original
     }
 
@@ -84,7 +103,8 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         game: Game,
         chainId: Int
     ): List<org.opensources.pokmaps.domain.pokemon.EvolutionNode> {
-        val members = dao.chainMembers(chainId).associate { it.id to it.name }
+        // Le National reste représenté ; une évolution bloquée garde son membre sans inventer d'arête.
+        val members = dao.chainMembers(chainId, game.generationId).associate { it.id to it.name }
         val edges = dao.evolutions(chainId, game.versionGroupId).map {
             EvolutionEdge(
                 it.fromId,
@@ -114,10 +134,18 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         gender = GenderRatio.from(genderRate),
         eggGroups = dao.eggGroups(pokemonId),
         hatchCycles = hatchCounter,
-        abilities = dao.abilities(pokemonId, game.generationId, game.versionGroupId).map {
-            PokemonAbility(it.name, it.description, it.hidden)
-        }
+        abilities = abilities(game, pokemonId)
     )
+
+    private suspend fun abilities(game: Game, pokemonId: Int): List<PokemonAbility> {
+        val abilities = dao.abilities(pokemonId, game.generationId, game.versionGroupId)
+        if (game.generationId == 3) {
+            check(abilities.size in 1..2 && abilities.none { it.hidden }) {
+                "Talents invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+            }
+        }
+        return abilities.map { PokemonAbility(it.name, it.description, it.hidden) }
+    }
 
     private fun LearnedMoveRow.toLearnedMove(method: LearnMethod) = LearnedMove(
         moveId = moveId,

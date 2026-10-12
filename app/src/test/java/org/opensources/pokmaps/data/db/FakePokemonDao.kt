@@ -11,7 +11,7 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
 
     override suspend fun pokemon(pokemonId: Int) = read {
         if (pokemonId == PIKACHU) {
-            PokemonRow(PIKACHU, "Pikachu", "Pikachu", "Souris", null, 4, 60, 190, "Moyenne", 10, HALF_FEMALE, 10)
+            PokemonRow(PIKACHU, "Pikachu", "Pikachu", "Souris", null, 4, 60, 190, "Moyenne", 10, HALF_FEMALE, 10, 1)
         } else {
             null
         }
@@ -21,12 +21,19 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
 
     override suspend fun types(pokemonId: Int, generationId: Int) = read { listOf(TypeRow(13, "electric", "Électrik")) }
 
-    override suspend fun stats(pokemonId: Int, generationId: Int) =
-        read { listOf(StatRow("hp", "PV", 35), StatRow("speed", "Vitesse", 90)) }
+    override suspend fun stats(pokemonId: Int, generationId: Int) = read {
+        val special = if (generationId == 1) {
+            listOf(StatRow("special", "Spécial", 50))
+        } else {
+            listOf(StatRow("special-attack", "Atq. Spé.", 50), StatRow("special-defense", "Déf. Spé.", 40))
+        }
+        listOf(StatRow("hp", "PV", 35), StatRow("attack", "Attaque", 55), StatRow("defense", "Défense", 30)) +
+            special + StatRow("speed", "Vitesse", 90)
+    }
 
     override suspend fun typeFactors(generationId: Int) = read { emptyList<TypeFactorRow>() }
 
-    override suspend fun chainMembers(chainId: Int) =
+    override suspend fun chainMembers(chainId: Int, generationId: Int) =
         read { listOf(ChainMemberRow(PIKACHU, "Pikachu"), ChainMemberRow(26, "Raichu")) }
 
     override suspend fun evolutions(chainId: Int, versionGroupId: Int) =

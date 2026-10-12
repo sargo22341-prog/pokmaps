@@ -17,18 +17,7 @@ enum class PokemonForm(val folder: String, val identifier: String) {
         return "sprites/$folder/$style$motion/$identifier.webp"
     }
 
-    /** Valeurs des formes dans la PokéAPI épinglée ; la base conserve celles de la forme Normale. */
-    fun stats(original: List<BaseStat>): List<BaseStat> {
-        val values = when (this) {
-            CASTFORM_NORMAL, CASTFORM_SUNNY, CASTFORM_RAINY, CASTFORM_SNOWY, DEOXYS_NORMAL -> return original
-            DEOXYS_ATTACK -> listOf(50, 180, 20, 180, 20, 150)
-            DEOXYS_DEFENSE -> listOf(50, 70, 160, 70, 160, 90)
-            DEOXYS_SPEED -> listOf(50, 95, 90, 95, 90, 180)
-        }
-        val identifiers = listOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
-        val stats = identifiers.zip(values).toMap()
-        return original.map { it.copy(value = stats.getValue(it.identifier)) }
-    }
+    fun stats(original: List<BaseStat>): List<BaseStat> = PokemonFormProfile.stats(this, original)
 
     companion object {
         fun available(pokemonId: Int, version: String): List<PokemonForm> = when (pokemonId) {
@@ -37,11 +26,6 @@ enum class PokemonForm(val folder: String, val identifier: String) {
             else -> emptyList()
         }
 
-        fun deoxys(version: String): PokemonForm = when (version) {
-            "emerald" -> DEOXYS_SPEED
-            "firered" -> DEOXYS_ATTACK
-            "leafgreen" -> DEOXYS_DEFENSE
-            else -> DEOXYS_NORMAL
-        }
+        fun deoxys(version: String): PokemonForm = PokemonFormProfile.deoxys(version)
     }
 }

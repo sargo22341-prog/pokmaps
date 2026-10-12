@@ -24,7 +24,7 @@ interface PokemonDao {
         SELECT p.id, p.name_fr AS name, p.name_en AS nameEn, p.genus_fr AS genus, p.description_fr AS description,
             p.height_dm AS heightDm, p.weight_hg AS weightHg, p.capture_rate AS captureRate,
             g.name_fr AS growthRate, p.evolution_chain_id AS evolutionChainId, p.gender_rate AS genderRate,
-            p.hatch_counter AS hatchCounter
+            p.hatch_counter AS hatchCounter, p.generation_id AS generationId
         FROM pokemon p JOIN growth_rate g ON g.id = p.growth_rate_id
         WHERE p.id = :pokemonId
         """
@@ -71,8 +71,14 @@ interface PokemonDao {
     )
     suspend fun typeFactors(generationId: Int): List<TypeFactorRow>
 
-    @Query("SELECT id, name_fr AS name FROM pokemon WHERE evolution_chain_id = :chainId ORDER BY id")
-    suspend fun chainMembers(chainId: Int): List<ChainMemberRow>
+    @Query(
+        """
+        SELECT id, name_fr AS name FROM pokemon
+        WHERE evolution_chain_id = :chainId AND generation_id <= :generationId
+        ORDER BY id
+        """
+    )
+    suspend fun chainMembers(chainId: Int, generationId: Int): List<ChainMemberRow>
 
     @Query(
         """

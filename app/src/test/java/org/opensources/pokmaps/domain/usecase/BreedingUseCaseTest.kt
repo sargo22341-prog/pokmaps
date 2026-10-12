@@ -52,6 +52,8 @@ class BreedingUseCaseTest {
             assertEquals(listOf(32), tools.pair(catalog.game, 34, 132, ParentSex.MALE).babies.map { it.id })
             assertEquals(listOf(172), tools.pair(catalog.game, 25, 132, ParentSex.FEMALE).babies.map { it.id })
             assertEquals(listOf(81), tools.pair(catalog.game, 81, 132, ParentSex.GENDERLESS).babies.map { it.id })
+            assertEquals(listOf(183), tools.pair(catalog.game, 183, 132, ParentSex.FEMALE).babies.map { it.id })
+            assertEquals(listOf(202), tools.pair(catalog.game, 202, 132, ParentSex.FEMALE).babies.map { it.id })
         } finally {
             database.close()
         }
