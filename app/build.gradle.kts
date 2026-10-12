@@ -149,6 +149,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
+    // Le PSI vérifie les limites des fonctions sans parser Kotlin avec des expressions régulières.
+    testImplementation(libs.kotlin.compiler.embeddable)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.sqlite.jdbc)
     testImplementation(libs.gson)
