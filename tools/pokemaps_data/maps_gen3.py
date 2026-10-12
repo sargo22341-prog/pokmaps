@@ -50,7 +50,24 @@ def _warps(game_maps: Gen3GameMaps) -> list[WarpRow]:
                     if 0 <= arrival.x < destination.width and 0 <= arrival.y < destination.height:
                         point = game_maps.point(target, arrival.x, arrival.y)
             result.append(WarpRow(const, *game_maps.point(const, warp.x, warp.y), target, *point))
-    return result
+    return result + _mirage_passages(game_maps)
+
+
+def _mirage_passages(game_maps: Gen3GameMaps) -> list[WarpRow]:
+    if game_maps.repo.remake:
+        return []
+    island = "MAP_ROUTE130_MIRAGE_ISLAND"
+    grass = game_maps.cells(island)["grass"]
+    if not grass:
+        raise ValueError("Île Mirage : terrain herbeux absent")
+    x, y = grass[len(grass) // 2]
+    source = game_maps.point("MAP_ROUTE130", x, y)
+    target = game_maps.point(island, x, y)
+    # Accès de navigation au layout conditionnel, sans inventer une porte dans le jeu.
+    return [
+        WarpRow("MAP_ROUTE130", *source, island, *target),
+        WarpRow(island, *target, "MAP_ROUTE130", *source),
+    ]
 
 
 def _write_catalog(rows: list[MapRow], warps: list[WarpRow], output: Path) -> None:
@@ -150,11 +167,31 @@ def validate_catalog(output: Path) -> None:
     for row in rows:
         _validate_row(output, row, maps)
     with (output / "warps.tsv").open(encoding="utf-8", newline="") as handle:
-        for warp in csv.DictReader(handle, delimiter="\t"):
+        warps = list(csv.DictReader(handle, delimiter="\t"))
+        for warp in warps:
             _validate_warp(output, warp, maps)
+    _validate_mirage_access(output, maps, warps)
     _validate_events(output, maps)
     if output.name == "emerald":
         validate_facility_series(output)
+
+
+def _validate_mirage_access(output: Path, maps: dict[str, dict[str, str]], warps: list[dict[str, str]]) -> None:
+    island = "MAP_ROUTE130_MIRAGE_ISLAND"
+    if island not in maps:
+        return
+    outward = [warp for warp in warps if warp["target"] == island]
+    returning = [warp for warp in warps if warp["map_const"] == island]
+    if len(outward) != 1 or len(returning) != 1:
+        raise ValueError(f"{output} : Île Mirage : accès aller-retour absent ou répété")
+    entrance, exit_warp = outward[0], returning[0]
+    if entrance["map_const"] != "MAP_ROUTE130" or exit_warp["target"] != "MAP_ROUTE130":
+        raise ValueError(f"{output} : Île Mirage : accès hors du Chenal 130")
+    if any(
+        entrance[source] != exit_warp[target]
+        for source, target in (("x", "target_x"), ("y", "target_y"), ("target_x", "x"), ("target_y", "y"))
+    ):
+        raise ValueError(f"{output} : Île Mirage : coordonnées aller-retour incohérentes")
 
 
 def _validate_events(output: Path, maps: dict[str, dict[str, str]]) -> None:

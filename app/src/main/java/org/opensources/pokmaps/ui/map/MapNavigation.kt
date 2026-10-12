@@ -60,7 +60,11 @@ internal class MapNavigation(
 
     fun selectWorld(mapId: Int) {
         val catalog = session.catalog ?: return
-        if (!catalog.isWorld(mapId)) return
+        if (catalog.regionWorlds.none { it.id == mapId }) return
+        if (!catalog.isWorld(mapId)) {
+            open(mapId)
+            return
+        }
         show(mapId, null, null, scales[mapId])
     }
 
@@ -238,7 +242,7 @@ internal class MapNavigation(
             // Les bords de la carte peuvent venir jusqu'au milieu de l'écran : tout lieu peut y être centré.
             setScrollOffsetRatio(EDGE_SCROLL_RATIO, EDGE_SCROLL_RATIO)
             addLayer(getMapTiles(map))
-            setMapBackground(MAP_BACKGROUND)
+            setMapBackground(if (map.identifier == "sevii") SEVII_BACKGROUND else MAP_BACKGROUND)
             addLazyLoader(MapMarkerIds.LAZY_LOADER, padding = 64.dp)
             onTap { tapX, tapY -> handleTap(tapX, tapY) }
             onMarkerClick { id, _, _ -> handleMarkerClick(id) }
@@ -406,5 +410,6 @@ internal class MapNavigation(
         const val WARP_TOUCH_MIN_SCALE = 1.0
         const val SHUTDOWN_DELAY_MS = 600L
         val MAP_BACKGROUND = Color(0xFF202028)
+        val SEVII_BACKGROUND = Color(0xFF386898)
     }
 }

@@ -62,6 +62,18 @@ def test_catalog_rejects_a_missing_parent(assets: Path, tmp_path: Path) -> None:
         validate_catalog(target)
 
 
+def test_catalog_rejects_a_missing_mirage_access(assets: Path, tmp_path: Path) -> None:
+    target = tmp_path / "ruby-sapphire"
+    shutil.copytree(assets / "maps/ruby-sapphire", target)
+    path = target / "warps.tsv"
+    lines = path.read_text("utf-8").splitlines()
+    path.write_text(
+        "\n".join(line for line in lines if "MAP_ROUTE130_MIRAGE_ISLAND" not in line) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="Île Mirage : accès aller-retour"):
+        validate_catalog(target)
+
+
 @pytest.mark.pipeline
 @pytest.mark.parametrize("game", HOENN_MAP_GAMES, ids=lambda game: game.version_group)
 def test_hoenn_sources_place_regions_warps_and_tides(game: Game, source_cache_ready: None, assets: Path) -> None:
@@ -111,3 +123,23 @@ def test_hoenn_curation_entries_are_used_by_a_family_member(source_cache_ready: 
     assert {entry.map for entry in curation.anchors if entry.family == family} <= maps
     assert {entry.map for entry in curation.skips if entry.family == family} <= maps
     assert maps | {"HOENN", UNDERWATER} == read_map_names()[family].keys()
+
+
+@pytest.mark.parametrize("game", HOENN_MAP_GAMES, ids=lambda game: game.version_group)
+def test_mirage_island_has_a_round_trip_navigation_access(assets: Path, game: Game) -> None:
+    folder = assets / "maps" / game.version_group
+    maps = _catalog(folder)
+    with (folder / "warps.tsv").open(encoding="utf-8", newline="") as handle:
+        warps = list(csv.DictReader(handle, delimiter="\t"))
+    outward = [row for row in warps if row["target"] == "MAP_ROUTE130_MIRAGE_ISLAND"]
+    returning = [row for row in warps if row["map_const"] == "MAP_ROUTE130_MIRAGE_ISLAND"]
+    assert len(outward) == len(returning) == 1
+    assert outward[0]["map_const"] == returning[0]["target"] == "MAP_ROUTE130"
+    assert outward[0]["x"] == returning[0]["target_x"]
+    assert outward[0]["y"] == returning[0]["target_y"]
+    assert outward[0]["target_x"] == returning[0]["x"]
+    assert outward[0]["target_y"] == returning[0]["y"]
+    for row in [outward[0], returning[0]]:
+        source = maps[row["map_const"]]
+        assert int(source["x"]) <= int(row["x"]) < int(source["x"]) + int(source["width"])
+        assert int(source["y"]) <= int(row["y"]) < int(source["y"]) + int(source["height"])

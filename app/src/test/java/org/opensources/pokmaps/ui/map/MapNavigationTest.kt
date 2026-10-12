@@ -20,6 +20,26 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class MapNavigationTest {
     @Test
+    fun regionMenuOpensEventIslandsAndReturnsToTheMainRegion() = runTest {
+        val repository = MapRepository(FakeMapDao())
+        val catalog = GeneratedGbaCatalog.load("emerald")
+        val session = MapSession(backgroundScope)
+        session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        val selection =
+            MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
+        val navigation = MapNavigation(session, selection, GetMapTilesUseCase(MapTiles { null }))
+        for (destination in catalog.regionWorlds) {
+            navigation.selectWorld(destination.id)
+            assertEquals(destination.identifier, session.current.map?.identifier)
+            assertEquals(destination.id, session.current.worldId)
+            if (destination.isExternalEvent) assertEquals(destination.id, session.current.zone?.mapId)
+        }
+        navigation.selectWorld(checkNotNull(catalog.defaultWorld).id)
+        assertEquals("hoenn", session.current.map?.identifier)
+        session.current.mapState?.shutdown()
+    }
+
+    @Test
     fun diveLevelsFollowTheSelectedRouteAndDisappearOnDeselect() = runTest {
         val repository = MapRepository(FakeMapDao())
         val catalog = GeneratedGbaCatalog.load("ruby-sapphire")

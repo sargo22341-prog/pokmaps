@@ -76,7 +76,11 @@ Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaisse
 d’un chenal avec un accès de Plongée. Les Chenaux 124, 126, 127, 128 et 134 sont concernés ; Émeraude ajoute
 les Chenaux 105, 125 et 129. Le Chenal 133 ne possède pas de zone sous-marine.
 La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les remakes proposent
-Kanto et les Îles Sevii dans le menu des régions.
+Kanto et les Îles Sevii dans le menu des régions, avec un départ à Bourg Palette.
+Le menu donne aussi accès aux îles événementielles présentes dans chaque jeu : Île du Sud pour Rubis/Saphir,
+puis Île Aurore, Roc Nombri et Île lointaine en plus pour Émeraude ; Île Aurore et Roc Nombri pour les remakes.
+Un marqueur « Île Mirage » sur le Chenal 130 ouvre son plan conditionnel dans les trois jeux de Hoenn.
+Le fond transparent des Îles Sevii utilise un bleu océan fixe, sans filtre animé ni tuiles supplémentaires.
 Dans les onze jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
 s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
 par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.

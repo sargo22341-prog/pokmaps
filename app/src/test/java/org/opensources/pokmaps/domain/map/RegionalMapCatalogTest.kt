@@ -45,4 +45,41 @@ class RegionalMapCatalogTest {
         assertEquals(entrance, catalog.worldEntrances()[road.id])
         assertEquals(kantoEntrance, catalog.worldEntrances()[house.id])
     }
+
+    @Test
+    fun remakeStartsInKantoAndKeepsBothEventIslandsInTheMenu() {
+        val maps = GeneratedGbaCatalog.load("firered-leafgreen")
+        val start = checkNotNull(maps.defaultWorld)
+        assertEquals("kanto", start.identifier)
+        assertEquals("pallet-town", maps.maps[start.startMapId]?.identifier)
+        assertEquals(
+            listOf("kanto", "sevii", "birth-island-exterior", "navel-rock-exterior"),
+            maps.regionWorlds.map { it.identifier }
+        )
+        val summit = checkNotNull(maps.mapByIdentifier("navel-rock-summit"))
+        assertEquals("navel-rock-exterior", maps.regionWorldOf(summit.id)?.identifier)
+    }
+
+    @Test
+    fun hoennMenuOffersOnlyTheIslandsPresentInEachGame() {
+        val ruby = GeneratedGbaCatalog.load("ruby-sapphire")
+        assertEquals(listOf("hoenn", "southern-island-exterior"), ruby.regionWorlds.map { it.identifier })
+        val emerald = GeneratedGbaCatalog.load("emerald")
+        assertEquals(
+            listOf(
+                "hoenn",
+                "southern-island-exterior",
+                "birth-island-exterior",
+                "navel-rock-exterior",
+                "faraway-island-entrance"
+            ),
+            emerald.regionWorlds.map { it.identifier }
+        )
+        for (maps in listOf(ruby, emerald)) {
+            val route = checkNotNull(maps.mapByIdentifier("route130"))
+            val island = checkNotNull(maps.mapByIdentifier("route130-mirage-island"))
+            assertEquals(island.id, maps.accessibleFrom(route.id).single { it.targetMapId == island.id }.targetMapId)
+            assertEquals(route.id, maps.parentEntrance(island.id)?.mapId)
+        }
+    }
 }

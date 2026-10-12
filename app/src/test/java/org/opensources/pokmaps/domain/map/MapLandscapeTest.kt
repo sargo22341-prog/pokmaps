@@ -11,7 +11,8 @@ class MapLandscapeTest {
             val catalog = GeneratedGbaCatalog.load(group)
             val surface = requireNotNull(catalog.mapByIdentifier("hoenn"))
             val underwater = requireNotNull(catalog.mapByIdentifier("hoenn-underwater"))
-            assertEquals(listOf(surface), catalog.regionWorlds)
+            assertEquals(listOf(surface), catalog.regionWorlds.filter { it.isWorld })
+            assertTrue(catalog.regionWorlds.none { it.id == underwater.id })
             assertEquals(surface, catalog.defaultWorld)
             assertEquals(surface, catalog.regionWorldOf(underwater.id))
             assertTrue(catalog.floorsOf(surface.id).isEmpty())
@@ -60,7 +61,7 @@ class MapLandscapeTest {
     @Test
     fun otherRegionsAndMissingLevelsRemainIndependent() {
         val remake = GeneratedGbaCatalog.load("firered-leafgreen")
-        assertEquals(setOf("kanto", "sevii"), remake.regionWorlds.map { it.identifier }.toSet())
+        assertEquals(setOf("kanto", "sevii"), remake.regionWorlds.filter { it.isWorld }.map { it.identifier }.toSet())
         val empty = MapCatalog("empty", emptyMap(), emptyMap(), emptyMap(), emptyMap())
         assertTrue(empty.regionWorlds.isEmpty())
         assertTrue(empty.floorsOf(1).isEmpty())
