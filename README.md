@@ -132,6 +132,8 @@ Les passages viennent de pret ; les niveaux sans numéro explicite sont vérifi�
 [Souterrain de Doublonville](https://bulbapedia.bulbagarden.net/wiki/Goldenrod_Tunnel).
 Le Léviator fixe du Lac Colère utilise son sprite chromatique.
 Le choix des jeux distingue les remakes par leur génération d’origine.
+Les personnages et objets dessinés avec leurs sprites de carte gardent leurs dimensions d’origine au zoom courant,
+y compris les personnages de 16 × 32 pixels des jeux GBA.
 Le calque « Baies et Noigrumes » apparaît sur les cartes contenant des arbres à fruits.
 Le bouton horaire apparaît si les rencontres du jeu ont des conditions horaires.
 Il défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;

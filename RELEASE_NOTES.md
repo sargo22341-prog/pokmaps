@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les personnages et autres sprites des cartes GBA s’affichent à leur taille d’origine, proportionnelle au décor.
 - À propos : les crédits citent les sept dépôts pret utilisés pour les cartes et données.
 - Hoenn : fiches des baies et des Concours, recettes de Pokéblocs et catalogue des décorations avec leurs lieux d’obtention.
 - Guides GBA : 484 succès officiels en français, collections par cartouche, 28 formes de Zarbi et suivi des errants.
