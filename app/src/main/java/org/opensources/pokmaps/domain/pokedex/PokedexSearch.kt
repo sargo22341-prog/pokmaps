@@ -29,10 +29,19 @@ data class PokedexFilter(
  * par nom français ou anglais, ou par numéro (« 25 », « 025 », « n°25 », « #25 »).
  */
 object PokedexSearch {
-    fun filter(entries: List<PokedexEntry>, filter: PokedexFilter): List<PokedexEntry> {
+    fun filter(entries: List<PokedexEntry>, filter: PokedexFilter): List<PokedexEntry> =
+        filter(entries, filter, null, Int.MAX_VALUE)
+
+    internal fun filter(
+        entries: List<PokedexEntry>,
+        filter: PokedexFilter,
+        names: Map<Int, Pair<String, String>>?,
+        limit: Int
+    ): List<PokedexEntry> {
+        require(limit >= 0) { "Limite de recherche négative" }
         val query = normalize(filter.query)
         val number = query.removePrefix("n°").removePrefix("no").removePrefix("#").trim().toIntOrNull()
-        return entries.filter { entry ->
+        return entries.asSequence().filter { entry ->
             (filter.typeId == null || entry.types.any { it.id == filter.typeId }) &&
                 (!filter.availableOnly || entry.isAvailable) &&
                 (filter.method == null || filter.method in entry.obtainMethods) &&
@@ -42,14 +51,18 @@ object PokedexSearch {
                     CaughtFilter.CAUGHT -> entry.caught
                     CaughtFilter.MISSING -> !entry.caught
                 } &&
-                (query.isEmpty() || entry.matches(query, number))
-        }
+                (query.isEmpty() || entry.matches(query, number, names))
+        }.take(limit).toList()
     }
 
-    private fun PokedexEntry.matches(query: String, number: Int?): Boolean = if (number != null) {
-        this.number == number
-    } else {
-        normalize(name).contains(query) || normalize(nameEn).contains(query)
+    private fun PokedexEntry.matches(query: String, number: Int?, names: Map<Int, Pair<String, String>>?): Boolean {
+        if (number != null) return this.number == number
+        val normalized = if (names == null) {
+            normalize(name) to normalize(nameEn)
+        } else {
+            checkNotNull(names[pokemonId]) { "Pokémon absent de l’index : $pokemonId" }
+        }
+        return normalized.first.contains(query) || normalized.second.contains(query)
     }
 
     /** Minuscules sans accents ni espaces superflus ; ♀ et ♂ deviennent « f » et « m » (« nidoran f »). */

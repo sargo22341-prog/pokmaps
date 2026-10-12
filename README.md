@@ -18,6 +18,9 @@ rien.
 
 Dans le Pokédex et les fiches Pokémon, un échec d’enregistrement d’une capture ou d’un favori affiche un message.
 La collection conserve ses valeurs précédentes ; toucher à nouveau le bouton permet de réessayer.
+Des identifiants ou valeurs de collection corrompus provoquent une erreur de lecture sans effacer les préférences.
+Les identifiants positifs dans leur format décimal canonique restent acceptés pour conserver les sauvegardes de versions futures ; une portée de
+captures inconnue revient toujours au réglage par défaut. Un catalogue de jeux vide signale également une erreur.
 
 L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuces, bugs et succès du jeu choisi.
 Les guides se lisent sans case de fin de lecture ni liens de sources. Dojo et fossiles, Lugia et Ho-Oh ont chacun

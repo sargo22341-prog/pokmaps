@@ -24,10 +24,16 @@ class CollectionSettings @Inject constructor(private val dataStore: DataStore<Pr
 
     /** Pokémon capturés, par version (identifiant PokéAPI) : une clé de préférences par version. */
     val caughtByVersion: Flow<Map<Int, Set<Int>>> = dataStore.data.map { preferences ->
-        preferences.asMap().mapNotNull { (key, value) ->
-            val versionId = key.name.takeIf { it.startsWith(CAUGHT_PREFIX) }?.removePrefix(CAUGHT_PREFIX)?.toIntOrNull()
-            val ids = (value as? Set<*>)?.filterIsInstance<String>()?.toSet()
-            if (versionId == null || ids == null) null else versionId to ids.toIds()
+        preferences.asMap().filterKeys { it.name.startsWith(CAUGHT_PREFIX) }.map { (key, value) ->
+            val versionId = requireNotNull(key.name.removePrefix(CAUGHT_PREFIX).toIntOrNull()) {
+                "Version de collection invalide : ${key.name}"
+            }
+            require(versionId > 0 && key.name == "$CAUGHT_PREFIX$versionId") {
+                "Version de collection invalide : ${key.name}"
+            }
+            val ids = requireNotNull(value as? Set<*>) { "Collection invalide : ${key.name}" }
+            require(ids.all { it is String }) { "Collection invalide : ${key.name}" }
+            versionId to ids.map { it.toString() }.toSet().toIds()
         }.toMap()
     }.distinctUntilChanged()
 
@@ -37,11 +43,13 @@ class CollectionSettings @Inject constructor(private val dataStore: DataStore<Pr
     }.distinctUntilChanged()
 
     suspend fun setFavorite(pokemonId: Int, favorite: Boolean) {
+        require(pokemonId > 0) { "Identifiant Pokémon invalide : $pokemonId" }
         dataStore.edit { it[FAVORITES] = it[FAVORITES].orEmpty().with(pokemonId, favorite) }
     }
 
     /** Coche (ou décoche) le Pokémon dans chacune de ces versions, en une seule écriture. */
     suspend fun setCaught(versionIds: Set<Int>, pokemonId: Int, caught: Boolean) {
+        require(pokemonId > 0 && versionIds.all { it > 0 }) { "Identifiants de collection invalides" }
         dataStore.edit { preferences -> versionIds.forEach { preferences.setCaught(it, pokemonId, caught) } }
     }
 
@@ -55,7 +63,11 @@ class CollectionSettings @Inject constructor(private val dataStore: DataStore<Pr
         if (ids.isEmpty()) remove(key) else this[key] = ids
     }
 
-    private fun Set<String>?.toIds(): Set<Int> = orEmpty().mapNotNull { it.toIntOrNull() }.toSet()
+    private fun Set<String>?.toIds(): Set<Int> = orEmpty().map { value ->
+        val id = requireNotNull(value.toIntOrNull()) { "Identifiant Pokémon invalide : $value" }
+        require(id > 0 && value == id.toString()) { "Identifiant Pokémon invalide : $value" }
+        id
+    }.toSet()
 
     private fun Set<String>.with(pokemonId: Int, present: Boolean): Set<String> =
         if (present) this + pokemonId.toString() else this - pokemonId.toString()

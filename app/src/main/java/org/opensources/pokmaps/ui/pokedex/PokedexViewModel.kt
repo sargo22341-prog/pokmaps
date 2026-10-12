@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import org.opensources.pokmaps.domain.model.Game
@@ -18,7 +19,7 @@ import org.opensources.pokmaps.domain.model.PokemonType
 import org.opensources.pokmaps.domain.pokedex.CaughtFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexCatalog
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
-import org.opensources.pokmaps.domain.pokedex.PokedexSearch
+import org.opensources.pokmaps.domain.pokedex.PokedexSearchIndex
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokedexUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
@@ -77,12 +78,20 @@ class PokedexViewModel @Inject constructor(
     private val filter = MutableStateFlow(PokedexFilter())
 
     val state: StateFlow<PokedexUiState> =
-        combine(observePokedex(selection), observeCollection(), filter, collectionWrites.failed) {
-                pokedex,
+        combine(
+            observePokedex(selection).map {
+                it to PokedexSearchIndex(it.entries)
+            },
+            observeCollection(),
+            filter,
+            collectionWrites.failed
+        ) {
+                indexed,
                 collection,
                 filter,
                 writeFailed
             ->
+            val (pokedex, search) = indexed
             // Un type absent de la génération du nouveau jeu n'a plus de sens comme filtre.
             val activeFilter = if (pokedex.types.any { it.id == filter.typeId }) filter else filter.copy(typeId = null)
             // Captures de la version affichée (la collection peut avoir un temps de retard au changement de jeu).
@@ -94,7 +103,7 @@ class PokedexViewModel @Inject constructor(
                 loading = false,
                 writeFailed = writeFailed,
                 game = pokedex.game,
-                entries = PokedexSearch.filter(entries, activeFilter),
+                entries = search.filter(entries, activeFilter),
                 catalogs = pokedex.catalogs,
                 selectedPokedexId = pokedex.selectedId,
                 total = pokedex.entries.size,

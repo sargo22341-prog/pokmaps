@@ -76,7 +76,9 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch { followRequests() }
         viewModelScope.launch { followLayers() }
         viewModelScope.launch {
-            observeCollection().collect { collection -> session.update { it.copy(caught = collection.caught) } }
+            observeCollection().catch {
+                session.update { it.copy(message = MapMessage.CollectionFailed) }
+            }.collect { collection -> session.update { it.copy(caught = collection.caught) } }
         }
     }
 

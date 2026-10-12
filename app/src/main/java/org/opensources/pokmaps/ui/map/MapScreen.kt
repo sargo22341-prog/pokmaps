@@ -185,6 +185,8 @@ private fun MessageEffect(state: MapUiState, snackbar: SnackbarHostState, onActi
         is MapMessage.NotFound ->
             stringResource(R.string.map_highlight_none, message.pokemonName, state.game?.name.orEmpty())
 
+        MapMessage.CollectionFailed -> stringResource(R.string.collection_load_error)
+
         is MapMessage.HighlightFailed -> stringResource(R.string.map_highlight_error, message.pokemonName)
     }
     LaunchedEffect(text) {

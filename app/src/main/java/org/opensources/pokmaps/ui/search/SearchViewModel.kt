@@ -21,6 +21,7 @@ import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
+import org.opensources.pokmaps.domain.pokedex.PokedexSearchIndex
 import org.opensources.pokmaps.domain.usecase.ObserveSearchIndexUseCase
 import org.opensources.pokmaps.domain.usecase.SearchIndex
 import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
@@ -28,7 +29,7 @@ import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 /** Lieu trouvé : ville, route ou carte intérieure. */
 data class PlaceResult(val identifier: String, val name: String, val outdoor: Boolean)
 
-/** Personnage trouvé : dresseur, personnage ou installation qui donne, vend, échange quelque chose ou rend un service. */
+/** Personnage trouvé : dresseur, personnage ou installation proposant des offres ou des services. */
 data class CharacterResult(val obj: MapObject, val name: String, val mapName: String, val offers: List<OfferLink>) {
     val roles: List<CharacterRole> get() = CharacterRole.of(obj.kind, offers.map { it.kind })
 }
@@ -64,6 +65,7 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
     /** Textes normalisés de chaque élément, calculés une fois par jeu. */
     private class Index(
         val source: SearchIndex,
+        val pokemon: PokedexSearchIndex,
         val places: List<Pair<String, PlaceResult>>,
         val items: List<Pair<String, ItemSummary>>,
         val characters: List<Pair<String, CharacterResult>>,
@@ -80,8 +82,7 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
                     loading = false,
                     game = index.source.game,
                     query = query,
-                    pokemon = PokedexSearch.filter(index.source.pokedex, PokedexFilter(query = query))
-                        .take(MAX_RESULTS),
+                    pokemon = index.pokemon.filter(index.source.pokedex, PokedexFilter(query = query), MAX_RESULTS),
                     places = index.places.matching(text),
                     items = index.items.matching(text),
                     characters = index.characters.matching(text),
@@ -98,7 +99,7 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
     }
 
     private fun <T> List<Pair<String, T>>.matching(text: String): List<T> =
-        filter { (key, _) -> key.contains(text) }.take(MAX_RESULTS).map { it.second }
+        asSequence().filter { (key, _) -> key.contains(text) }.take(MAX_RESULTS).map { it.second }.toList()
 
     private fun index(source: SearchIndex): Index {
         val catalog = source.catalog
@@ -126,7 +127,14 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
                 }
                 PokedexSearch.normalize((listOf(result.name) + names).joinToString(" ")) to result
             }
-        return Index(source, places, items, characters, FossilUse.of(source.index, catalog))
+        return Index(
+            source,
+            PokedexSearchIndex(source.pokedex),
+            places,
+            items,
+            characters,
+            FossilUse.of(source.index, catalog)
+        )
     }
 
     private companion object {
