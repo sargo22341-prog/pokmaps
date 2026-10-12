@@ -47,7 +47,7 @@ class GameViewModel @Inject constructor(
     observeSelectedGame: ObserveSelectedGameUseCase,
     private val selectGame: SelectGameUseCase
 ) : ViewModel() {
-    // Sans aucun jeu, le jeu choisi n'est jamais émis : on part donc d'« aucun jeu choisi ».
+    // Le catalogue peut arriver avant la sélection : on part donc d’« aucun jeu choisi ».
     private val selected: Flow<Game?> = observeSelectedGame().map<Game, Game?> { it }.onStart { emit(null) }
 
     val state: StateFlow<GameUiState> =

@@ -110,6 +110,8 @@ sealed interface MapDetail {
 
 /** Message ponctuel affiché en bas de la carte. */
 sealed interface MapMessage {
+    data object CollectionFailed : MapMessage
+
     /** Pokémon introuvable sur les cartes de la version. */
     data class NotFound(val pokemonName: String) : MapMessage
 

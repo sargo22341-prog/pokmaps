@@ -1,5 +1,8 @@
 package org.opensources.pokmaps.ui.map
 
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringSetPreferencesKey
+import kotlinx.coroutines.flow.emptyFlow
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotSame
@@ -10,6 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
+import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
@@ -42,7 +46,7 @@ class MapViewModelTest {
     private val requests = MapRequests()
 
     private fun viewModel(
-        games: FakeGameDao,
+        games: GameDao,
         maps: FakeMapDao = FakeMapDao(),
         dataStore: FakeDataStore = FakeDataStore()
     ): MapViewModel {
@@ -85,13 +89,41 @@ class MapViewModelTest {
 
     @Test
     fun waitsForTheSelectedGame() {
-        val viewModel = viewModel(FakeGameDao(games = emptyList()))
+        val pending = object : GameDao {
+            override fun games() = emptyFlow<List<org.opensources.pokmaps.domain.model.Game>>()
+        }
+        val viewModel = viewModel(pending)
         val state = viewModel.state.value
         assertNull(state.mapState)
         assertNull(state.game)
         assertFalse(state.failed)
         viewModel.onAction(MapAction.Back)
         assertEquals(state, viewModel.state.value)
+    }
+
+    @Test
+    fun anEmptyGameCatalogIsAnError() {
+        val state = viewModel(FakeGameDao(games = emptyList())).state.value
+        assertTrue(state.failed)
+        assertNull(state.mapState)
+    }
+
+    @Test
+    fun aCorruptCollectionKeepsItsPreviousValuesAndReportsFailure() {
+        val store = FakeDataStore()
+        val collection = CollectionSettings(store)
+        kotlinx.coroutines.test.runTest { collection.setCaught(setOf(1), 25, true) }
+        val model = viewModel(FakeGameDao(), dataStore = store)
+        model.onScreenShown()
+        assertEquals(setOf(25), model.state.value.caught)
+        kotlinx.coroutines.test.runTest {
+            store.edit { it[stringSetPreferencesKey("favorite_pokemon")] = setOf("invalid") }
+        }
+        assertEquals(setOf(25), model.state.value.caught)
+        assertEquals(MapMessage.CollectionFailed, model.state.value.message)
+        assertFalse(model.state.value.failed)
+        model.onAction(MapAction.MessageShown)
+        assertNull(model.state.value.message)
     }
 
     @Test

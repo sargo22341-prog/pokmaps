@@ -76,11 +76,10 @@ class GameViewModelTest {
     }
 
     @Test
-    fun noGameIsEmptyNotAnError() = runTest {
+    fun anEmptyGameCatalogIsAnError() = runTest {
         val viewModel = viewModel(FakeGameDao(games = emptyList()))
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
-        assertEquals(GameUiState(loading = false), viewModel.state.value)
-        assertFalse(viewModel.state.value.failed)
+        assertEquals(GameUiState(loading = false, failed = true), viewModel.state.value)
     }
 
     @Test

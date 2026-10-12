@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.ui.pokedex
 
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import java.io.IOException
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,6 +55,22 @@ class PokedexViewModelTest {
     }
 
     private fun ids() = viewModel.state.value.entries.map { it.pokemonId }
+
+    @Test
+    fun corruptCollectionBecomesAReadError() = runTest {
+        dataStore.edit { it[stringSetPreferencesKey("caught_pokemon_1")] = setOf("23", "invalid") }
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertTrue(viewModel.state.value.failed)
+        assertFalse(viewModel.state.value.loading)
+    }
+
+    @Test
+    fun anEmptyGameCatalogBecomesAnError() = runTest {
+        val model = pokedexViewModel(FakePokedexDao(), FakeGameDao(emptyList()))
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        assertTrue(model.state.value.failed)
+        assertFalse(model.state.value.loading)
+    }
 
     @Test
     fun loadsThePokedexOfTheSelectedGame() = runTest {

@@ -629,6 +629,7 @@
     <string name="map_floor_low_tide">Marée basse</string>
     <string name="map_floor_low_tide_basement">Marée basse · Sous-sol</string>
     <string name="map_mirage_island">Île Mirage</string>
+    <string name="collection_load_error">Impossible de lire les captures et favoris enregistrés.</string>
     <string name="collection_save_error">
         Enregistrement impossible. Réessayez en touchant à nouveau la capture ou le favori.
     </string>

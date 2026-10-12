@@ -23,6 +23,38 @@ class PokedexSearchTest {
     private fun search(filter: PokedexFilter) = PokedexSearch.filter(entries, filter).map { it.pokemonId }
 
     @Test
+    fun indexedSearchKeepsTheFirstFiftyMatches() {
+        val many = (1..75).map { entries.first().copy(number = it, pokemonId = it) }
+        val guarded = object : AbstractList<PokedexEntry>() {
+            override val size = many.size
+
+            override fun get(index: Int): PokedexEntry {
+                check(index < 50) { "Parcours au-delà du plafond" }
+                return many[index]
+            }
+        }
+        assertEquals(many.take(50), PokedexSearchIndex(many).filter(guarded, PokedexFilter(query = "pika"), 50))
+    }
+
+    @Test
+    fun indexedSearchPreservesResultsOrderAndDynamicCollection() {
+        val index = PokedexSearchIndex(entries)
+        for (query in listOf("", "ÉVO", "eevee", "025", "n°25", "no25", "#25", "nidoran f", "zzz")) {
+            val filter = PokedexFilter(query = query)
+            assertEquals(PokedexSearch.filter(entries, filter), index.filter(entries, filter))
+        }
+        assertEquals(entries.take(2), index.filter(entries, PokedexFilter(), 2))
+        assertEquals(emptyList<PokedexEntry>(), index.filter(entries, PokedexFilter(), 0))
+        val caught = entries.map { it.copy(caught = it.pokemonId == 133, favorite = it.pokemonId == 133) }
+        assertEquals(
+            listOf(133),
+            index.filter(caught, PokedexFilter(caught = CaughtFilter.CAUGHT))
+                .map { it.pokemonId }
+        )
+        assertEquals(listOf(133), index.filter(caught, PokedexFilter(favoritesOnly = true)).map { it.pokemonId })
+    }
+
+    @Test
     fun searchIgnoresAccentsAndCase() {
         assertEquals(listOf(133), search(PokedexFilter(query = "evoli")))
         assertEquals(listOf(133), search(PokedexFilter(query = "  ÉVO ")))
