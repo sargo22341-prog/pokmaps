@@ -42,7 +42,9 @@ class MapRepositoryTest {
         val offers = repository.offers(FakeGameDao.RED, FakeMapDao.CLERK)
         assertEquals(OfferCurrency.ASHES, repository.index(FakeGameDao.RED).offers.single().currency)
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
-        val page = checkNotNull(ObserveItemPageUseCase(games, repository)("potion").first())
+        val page = checkNotNull(
+            ObserveItemPageUseCase(games, repository, HoennRepository { error("Hors Hoenn") })("potion").first()
+        )
         assertEquals(OfferCurrency.ASHES, page.sold.single().currency)
         val item = OfferItem(FakeMapDao.POTION, "potion", "Potion", true)
         assertEquals(

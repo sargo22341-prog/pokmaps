@@ -4,6 +4,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.repository.GameRepository
+import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.map.CharacterRole
@@ -69,14 +70,19 @@ data class ItemPage(
     /** Comptoirs du Casino où on le gagne (`price` en jetons). */
     val prizes: List<ItemSource> = emptyList(),
     /** Fossile : le Pokémon qu'il devient et le personnage qui le ranime. */
-    val fossil: FossilUse? = null
+    val fossil: FossilUse? = null,
+    val berry: org.opensources.pokmaps.domain.hoenn.Berry? = null
 ) {
     /** On ne peut l'obtenir nulle part sur les cartes du jeu. */
     val nowhere: Boolean get() = found.isEmpty() && sold.isEmpty() && given.isEmpty() && exchangedFor.isEmpty() &&
         prizes.isEmpty()
 }
 
-class ObserveItemPageUseCase @Inject constructor(private val games: GameRepository, private val maps: MapRepository) {
+class ObserveItemPageUseCase @Inject constructor(
+    private val games: GameRepository,
+    private val maps: MapRepository,
+    private val hoenn: HoennRepository
+) {
     /** Fiche de l'objet dans le jeu choisi, null s'il n'y existe pas. */
     operator fun invoke(identifier: String): Flow<ItemPage?> = games.selectedGame.map { game ->
         val catalog = maps.catalog(game)
@@ -110,7 +116,8 @@ class ObserveItemPageUseCase @Inject constructor(private val games: GameReposito
             exchangedFor = offered(OfferKind.EXCHANGE),
             exchangeableFor = offered(OfferKind.EXCHANGE, wanted = true),
             prizes = offered(OfferKind.PRIZE_ITEM),
-            fossil = FossilUse.of(index, catalog)[identifier]
+            fossil = FossilUse.of(index, catalog)[identifier],
+            berry = hoenn.content(game)?.berries?.get(identifier)
         )
     }
 

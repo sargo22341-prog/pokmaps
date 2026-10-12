@@ -11,8 +11,8 @@ from .pret_identifiers import species_identifier
 from .pret_models import NpcOffer
 from .story_events import StoryEvents
 
-# Les décorations et la Baie Enigma personnalisée sont conservées dans le catalogue,
-# leur interface dédiée relève de la phase 8 du plan génération 3.
+# Les décorations alimentent le catalogue Hoenn et ses guides plutôt que les offres d'objets Room.
+# La Baie Enigma personnalisée reste distincte de ses propriétés par défaut.
 CATALOG_ONLY_KINDS = frozenset({"sale_decoration", "gift_decoration", "gift_custom_item", "national_dex"})
 _KINDS = {"rename_pokemon": "name_rater", "sale_coins": "coin_sale", "gift_coins": "coin_gift"}
 _SERVICES = frozenset({"heal", "name_rater", "daycare", "daycare_egg", "daycare_withdrawal", "move_deleter"})

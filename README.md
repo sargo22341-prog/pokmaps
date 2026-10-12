@@ -544,8 +544,15 @@ comptoirs de la Zone de Combat. Les tarifs, monnaies et objets requis sont conse
 
 La génération complète écrit les catalogues `characters.json` de Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille :
 personnages par version, objets fixes et conditions des scènes automatiques, avec leur commit source.
-Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
-personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
+Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les jeux Hoenn proposent les caractéristiques
+des baies sur leurs fiches d’objet et les profils des 43 baies dans le guide, les effets et enchaînements de Concours sur les fiches d’attaque,
+des guides de culture et de Concours, des recettes de Pokéblocs et le catalogue des 120 décorations.
+Ce dernier relie leurs boutiques et dons aux cartes, avec leurs prix en argent, jetons, cendres ou Points Combat.
+Les propriétés d’une Baie Enigma personnalisée par événement ne peuvent pas être prédites.
+`python tools/build_data.py --hoenn-content-only` régénère explicitement `hoenn.json` depuis les sources
+épinglées et les catalogues de personnages versionnés, puis met à jour `assets.sha256`.
+Les données GBA de pret font autorité ; les écarts avec les CSV PokéAPI des baies et des Concours restent
+dans ce catalogue. Le [bilan des contenus Hoenn](docs/generations/contenus-hoenn.md) décrit leur portée.
 Les bibliothèques couvrent les onze jeux : les cinq jeux GBA proposent les outils de reproduction et de bonheur.
 Leurs soluces, succès officiels, objectifs de collection et observations des errants sont disponibles.
 

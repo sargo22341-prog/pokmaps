@@ -859,14 +859,39 @@ sans exclusion de contrôle. La dépréciation AGP `Configuration.setVisible(boo
 
 ## Phase 8 — Contenus propres à Hoenn : baies, concours, Pokéblocs, décorations
 
-- [ ] Arbres à baies (sol meuble et baie initiale lus dans `setberrytree` de `new_game.inc`) : calque « Baies »
+- [x] Arbres à baies (sol meuble et baie initiale lus dans `setberrytree` de `new_game.inc`) : calque « Baies »
       et `OfferKind.FRUIT_TREE`, données des baies (`src/berry.c`, PokéAPI `berries`, `berry_flavors`).
-- [ ] Concours : salles et rangs, catégories et effets de concours des attaques (`src/data/contest_moves.h`,
+- [x] Concours : salles et rangs, catégories et effets de concours des attaques (`src/data/contest_moves.h`,
       PokéAPI `contest_effects`, `contest_combos`), affichés sur la fiche d'attaque.
-- [ ] Pokéblocs : recettes et saveurs selon les baies, Mélangeur, Boîte Pokéblocs, usage au Parc Safari.
-- [ ] Décorations des Bases Secrètes : nouvelle entité (`src/data/decoration/`), noms français relus dans un CSV,
+- [x] Pokéblocs : recettes et saveurs selon les baies, Mélangeur, Boîte Pokéblocs, usage au Parc Safari.
+- [x] Décorations des Bases Secrètes : nouvelle entité (`src/data/decoration/`), noms français relus dans un CSV,
       où les obtenir (Cimetronelle, Centre Commercial de Nénucrique, dons, lots).
-- [ ] Tests du pipeline et JVM de chacune de ces données ; `RELEASE_NOTES.md`.
+- [x] Tests du pipeline et JVM de chacune de ces données ; `RELEASE_NOTES.md`.
+
+Bilan du 12 octobre 2026 : phase terminée. Le [bilan détaillé](generations/contenus-hoenn.md)
+décrit les sources, les règles et les limites des contenus.
+
+- Les 81 plantations initiales de chacun des trois jeux Hoenn restent dans le calque Baies et les offres
+  `FRUIT_TREE`, avec un contrôle JVM des emplacements et sprites.
+- `hoenn.json` contient deux groupes séparés : 43 baies, 354 attaques de Concours et 120 décorations chacun.
+  Les fiches disponibles sont enrichies ; les 43 profils de baies et recettes sont accessibles dans les guides.
+  Les cinq nouveaux articles portent chaque bibliothèque Hoenn à 31 articles hors succès.
+- Décision : l’entité métier `Decoration` et le catalogue JSON complètent Room sans modifier son schéma 15.
+  Les lieux d’obtention viennent des scénarios versionnés ; prix et monnaies restent distincts.
+  Les données pret priment sur PokéAPI, dont les écarts sont conservés dans le catalogue.
+- Export explicite `--hoenn-content-only` exécuté ; catalogue de 317 161 octets, inventaire de 15 442 assets.
+  APK debug assemblé : 102 891 337 octets. Aucun ajout de dépendance.
+- Contrôles Android complets réussis : ktlint, absence de GMS, Lint, 387 tests JVM et assemblage debug.
+  Contrôles Python réussis : inventaire, Ruff, format, 469 tests ordinaires ; 203 tests pipeline dans la suite
+  complète, puis le test de reproduction des assets réussi après correction, soit les 204 tests validés.
+  Limites de taille des fichiers et fonctions touchés vérifiées ; diff relu.
+- Incidents corrigés : encodage initial des traductions, style Kotlin, expression inutilisée sous
+  `allWarningsAsErrors`, attente erronée d’onctuosité dans un nouveau test, formats et pluriels signalés par
+  Lint, et omission du nouveau catalogue dans le test de reproduction. Les relances concernées réussissent.
+  L’avertissement Gradle/AGP existant sur `Configuration.setVisible(boolean)` demeure, déjà documenté au README.
+- Aucun essai sur téléphone dans cette phase. Les propriétés d’une Baie Enigma personnalisée et le tirage
+  des saveurs d’un bloc noir restent explicitement indéterminés ; aucune sauvegarde de cartouche n’est simulée.
+- README, bilan et notes de version mis à jour ; aucun commit créé.
 
 ## Phase 9 — Documentation, publication et bilan
 

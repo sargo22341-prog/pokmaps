@@ -5,6 +5,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.guide.CaptureGoals
@@ -19,7 +20,8 @@ import org.opensources.pokmaps.domain.model.Game
 class GuideRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val maps: MapRepository,
-    private val pokedex: PokedexRepository
+    private val pokedex: PokedexRepository,
+    private val hoenn: HoennRepository
 ) {
     suspend fun library(game: Game): GuideLibrary = withContext(Dispatchers.IO) {
         val catalog = maps.catalog(game)
@@ -29,7 +31,8 @@ class GuideRepository @Inject constructor(
         val mentions = GuideMentions(entries, catalog, index)
         val definitions =
             kantoGuides() + johtoGuides() + sideGuides() + tipGuides() + gbaToolGuides() +
-                hoennGuides() + hoennCalendarGuides() + remakeGuides() + gbaCollectionGuides() + achievementGuides()
+                hoennGuides() + hoennCalendarGuides() + hoennContentGuides() + remakeGuides() +
+                gbaCollectionGuides() + achievementGuides()
         val selected = definitions.filter { game.versionId in it.versions }
         val articles = selected.map { definition ->
             require(definition.pokemonId in pokemonIds) { "Sprite absent : ${definition.id}" }
@@ -54,7 +57,10 @@ class GuideRepository @Inject constructor(
                 unownGoal = definition.unownGoal || definition.achievementId in setOf(5091, 5117, 5955)
             )
         }
-        GuideLibrary(game, articles)
+        val extras = hoenn.content(game)?.let {
+            listOf(decorationGuide(context, game, catalog, it), pokeblockRecipes(context, it, index))
+        }.orEmpty()
+        GuideLibrary(game, articles + extras)
     }
 
     private fun resolve(

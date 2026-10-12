@@ -1,0 +1,49 @@
+identifier,description_fr
+CONTEST_EFFECT_HIGHLY_APPEALING,Très séduisante.
+CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,"Très séduisante, mais le lanceur devient plus facile à déstabiliser."
+CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,"Très séduisante, mais le lanceur ne peut plus agir jusqu’à la fin du concours."
+CONTEST_EFFECT_REPETITION_NOT_BORING,Peut être répétée sans ennuyer le juge.
+CONTEST_EFFECT_AVOID_STARTLE_ONCE,Protège une fois contre la déstabilisation.
+CONTEST_EFFECT_AVOID_STARTLE,Protège contre la déstabilisation pendant ce tour.
+CONTEST_EFFECT_AVOID_STARTLE_SLIGHTLY,Réduit légèrement la déstabilisation.
+CONTEST_EFFECT_USER_LESS_EASILY_STARTLED,Rend le lanceur moins facile à déstabiliser.
+CONTEST_EFFECT_STARTLE_FRONT_MON,Déstabilise légèrement le Pokémon juste devant.
+CONTEST_EFFECT_SLIGHTLY_STARTLE_PREV_MONS,Déstabilise légèrement tous les Pokémon ayant déjà joué.
+CONTEST_EFFECT_STARTLE_PREV_MON,Déstabilise le Pokémon ayant joué juste avant.
+CONTEST_EFFECT_STARTLE_PREV_MONS,Déstabilise tous les Pokémon ayant déjà joué.
+CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON,Déstabilise fortement le Pokémon juste devant.
+CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,Déstabilise fortement tous les Pokémon ayant déjà joué.
+CONTEST_EFFECT_STARTLE_PREV_MON_2,Déstabilise le Pokémon ayant joué juste avant.
+CONTEST_EFFECT_STARTLE_PREV_MONS_2,Déstabilise tous les Pokémon ayant déjà joué.
+CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION,Détourne l’attention du juge des autres Pokémon.
+CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION,Déstabilise le Pokémon qui retient l’attention du juge.
+CONTEST_EFFECT_JAMS_OTHERS_BUT_MISS_ONE_TURN,"Déstabilise les autres, mais impose de passer le prochain tour."
+CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL,Déstabilise les Pokémon ayant utilisé la même catégorie.
+CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL,Déstabilise fortement les Pokémon ayant utilisé une attaque de Sang-froid.
+CONTEST_EFFECT_STARTLE_MONS_BEAUTY_APPEAL,Déstabilise fortement les Pokémon ayant utilisé une attaque de Beauté.
+CONTEST_EFFECT_STARTLE_MONS_CUTE_APPEAL,Déstabilise fortement les Pokémon ayant utilisé une attaque de Grâce.
+CONTEST_EFFECT_STARTLE_MONS_SMART_APPEAL,Déstabilise fortement les Pokémon ayant utilisé une attaque d’Intelligence.
+CONTEST_EFFECT_STARTLE_MONS_TOUGH_APPEAL,Déstabilise fortement les Pokémon ayant utilisé une attaque de Robustesse.
+CONTEST_EFFECT_MAKE_FOLLOWING_MON_NERVOUS,Rend nerveux le Pokémon qui joue juste après.
+CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS,Rend nerveux tous les Pokémon qui jouent après.
+CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS,Dégrade la condition des Pokémon ayant déjà joué.
+CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION,Déstabilise fortement les Pokémon en bonne condition.
+CONTEST_EFFECT_BETTER_IF_FIRST,Plus séduisante si elle est utilisée en premier.
+CONTEST_EFFECT_BETTER_IF_LAST,Plus séduisante si elle est utilisée en dernier.
+CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONES,Séduit autant que la moyenne des prestations précédentes.
+CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONE,Séduit autant que la prestation juste précédente.
+CONTEST_EFFECT_BETTER_WHEN_LATER,Plus séduisante quand elle est utilisée tard dans le tour.
+CONTEST_EFFECT_QUALITY_DEPENDS_ON_TIMING,Le charme varie selon le moment où elle est utilisée.
+CONTEST_EFFECT_BETTER_IF_SAME_TYPE,Plus efficace après une attaque de même catégorie.
+CONTEST_EFFECT_BETTER_IF_DIFF_TYPE,Plus efficace après une attaque de catégorie différente.
+CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL,Le charme dépend de la prestation juste précédente.
+CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS,Améliore la condition et évite la nervosité.
+CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION,Plus séduisante lorsque le lanceur est en bonne condition.
+CONTEST_EFFECT_NEXT_APPEAL_EARLIER,Permet de jouer plus tôt au prochain tour.
+CONTEST_EFFECT_NEXT_APPEAL_LATER,Permet de jouer plus tard au prochain tour.
+CONTEST_EFFECT_MAKE_SCRAMBLING_TURN_ORDER_EASIER,Facilite le changement d’ordre au prochain tour.
+CONTEST_EFFECT_SCRAMBLE_NEXT_TURN_ORDER,Mélange l’ordre de passage au prochain tour.
+CONTEST_EFFECT_EXCITE_AUDIENCE_IN_ANY_CONTEST,Enthousiasme le public dans toutes les catégories.
+CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS,Déstabilise fortement les Pokémon qui ont bien séduit.
+CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED,Plus séduisante lorsque le public est enthousiaste.
+CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,Empêche temporairement le public de s’enthousiasmer.

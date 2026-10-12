@@ -88,6 +88,7 @@ fun ItemScreen(state: ItemUiState, onAction: (ItemAction) -> Unit, links: ItemLi
             .verticalScroll(rememberScrollState())
     ) {
         ItemHeader(page)
+        BerrySection(page.berry)
         MachineMoveSection(page, links.onOpenMove)
         EvolutionsSection(page, links.onOpenPokemon)
         FossilSection(page, sources, links.onOpenPokemon)
