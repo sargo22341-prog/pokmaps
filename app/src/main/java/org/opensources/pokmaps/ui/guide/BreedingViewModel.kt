@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.guide.BreedingCatalog
+import org.opensources.pokmaps.domain.guide.BreedingItem
 import org.opensources.pokmaps.domain.guide.BreedingPair
 import org.opensources.pokmaps.domain.guide.BreedingPartners
 import org.opensources.pokmaps.domain.guide.BreedingRules
 import org.opensources.pokmaps.domain.guide.BreedingStatus
+import org.opensources.pokmaps.domain.guide.GbaBreeding
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
 import org.opensources.pokmaps.domain.model.PokedexEntry
@@ -47,6 +49,14 @@ data class BreedingUiState(
     val choices: List<PokedexEntry> = PokedexSearch.filter(catalog?.pokemon.orEmpty(), PokedexFilter(query = query))
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
+    val gba: Boolean = catalog?.game?.generationId == 3
+    val babies = pair?.let { if (gba) GbaBreeding.babies(it, first, second) else it.babies }.orEmpty()
+    val babyAbilities: List<Pair<String, String>> = babies.map { child ->
+        child.name to child.traits.abilities.joinToString { it.name }
+    }
+    val natureParent: Int? = pair?.let {
+        GbaBreeding.natureParent(it, first, second, catalog?.game?.versionIdentifier == "emerald")
+    }
     val firstMoves: List<LearnedMove> = pair?.first?.let {
         (it.levelUpMoves + it.machineMoves + it.eggMoves + it.tutorMoves).distinctBy { move ->
             move.moveId
@@ -62,13 +72,15 @@ data class BreedingUiState(
         firstId == BreedingRules.DITTO || secondId == BreedingRules.DITTO || it == BreedingPartners.opposite(first.sex)
     }
     val offspringMoves: List<Pair<Int, List<LearnedMove>>> = if (possible) {
-        pair?.babies.orEmpty().map { child ->
+        babies.map { child ->
             val firstDonor = BreedingRules.donorIsFirst(requireNotNull(pair), first, second)
-            child.id to BreedingRules.inherited(
-                child,
-                if (firstDonor) first.moves else second.moves,
-                if (firstDonor) second.moves else first.moves
-            )
+            val donor = if (firstDonor) first.moves else second.moves
+            val other = if (firstDonor) second.moves else first.moves
+            child.id to if (gba) {
+                GbaBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))
+            } else {
+                BreedingRules.inherited(child, donor, other)
+            }
         }
     } else {
         emptyList()

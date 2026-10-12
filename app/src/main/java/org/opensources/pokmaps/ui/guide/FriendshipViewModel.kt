@@ -8,23 +8,28 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import org.opensources.pokmaps.domain.guide.FriendshipEvent
+import org.opensources.pokmaps.domain.guide.FriendshipRules
 
 data class FriendshipUiState(
     val value: Int = 70,
     val event: FriendshipEvent = FriendshipEvent.LEVEL,
-    val crystal: Boolean = false
+    val rules: FriendshipRules = FriendshipRules.GOLD_SILVER,
+    val sootheBell: Boolean = false,
+    val luxuryBall: Boolean = false,
+    val capturePlace: Boolean = false
 ) {
-    val result: Int = event.apply(value)
+    val result: Int = rules.apply(event, value, sootheBell, luxuryBall, capturePlace)
     val delta: Int = result - value
-    val events: List<FriendshipEvent> = FriendshipEvent.entries.filter {
-        crystal || it != FriendshipEvent.LEVEL_AT_CAPTURE_PLACE
-    }
+    val events: List<FriendshipEvent> = rules.events
 }
 
 sealed interface FriendshipAction {
     data class Value(val value: Int) : FriendshipAction
     data class Event(val event: FriendshipEvent) : FriendshipAction
-    data class Crystal(val enabled: Boolean) : FriendshipAction
+    data class Rules(val rules: FriendshipRules) : FriendshipAction
+    data class SootheBell(val enabled: Boolean) : FriendshipAction
+    data class LuxuryBall(val enabled: Boolean) : FriendshipAction
+    data class CapturePlace(val enabled: Boolean) : FriendshipAction
 }
 
 @HiltViewModel
@@ -45,14 +50,17 @@ class FriendshipViewModel @Inject constructor() : ViewModel() {
                     state
                 }
 
-                is FriendshipAction.Crystal -> state.copy(
-                    crystal = action.enabled,
-                    event = if (!action.enabled && state.event == FriendshipEvent.LEVEL_AT_CAPTURE_PLACE) {
-                        FriendshipEvent.LEVEL
-                    } else {
-                        state.event
-                    }
+                is FriendshipAction.Rules -> FriendshipUiState(
+                    value = state.value,
+                    rules = action.rules,
+                    event = state.event.takeIf { it in action.rules.events } ?: FriendshipEvent.LEVEL
                 )
+
+                is FriendshipAction.SootheBell -> state.copy(sootheBell = action.enabled)
+
+                is FriendshipAction.LuxuryBall -> state.copy(luxuryBall = action.enabled)
+
+                is FriendshipAction.CapturePlace -> state.copy(capturePlace = action.enabled)
             }
         }
     }

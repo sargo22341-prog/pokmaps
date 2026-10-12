@@ -15,18 +15,26 @@ data class BreedingCatalog(
     val profiles: Map<Int, BreedingProfile> = emptyMap()
 )
 
-data class BreedingPair(val first: PokemonDetails, val second: PokemonDetails, val babies: List<PokemonDetails>)
+data class BreedingPair(
+    val first: PokemonDetails,
+    val second: PokemonDetails,
+    val babies: List<PokemonDetails>,
+    val generationId: Int = 2
+)
 
 data class ParentValues(
     val sex: ParentSex,
     val defense: Int? = null,
     val special: Int? = null,
-    val moves: List<Int> = emptyList()
+    val moves: List<Int> = emptyList(),
+    val item: BreedingItem = BreedingItem.NONE,
+    val ivs: List<Int?> = List(6) { null }
 ) {
     init {
         require(defense == null || defense in 0..15)
         require(special == null || special in 0..15)
         require(moves.size <= 4 && moves.distinct().size == moves.size)
+        require(ivs.size == 6 && ivs.all { it == null || it in 0..31 })
     }
 }
 
@@ -53,6 +61,7 @@ object BreedingRules {
         if (!ditto && (first.sex == second.sex || ParentSex.GENDERLESS in setOf(first.sex, second.sex))) {
             return BreedingStatus.SAME_SEX
         }
+        if (pair.generationId == 3) return BreedingStatus.COMPATIBLE
         if (first.defense == null || second.defense == null || first.special == null || second.special == null) {
             return BreedingStatus.POSSIBLE
         }

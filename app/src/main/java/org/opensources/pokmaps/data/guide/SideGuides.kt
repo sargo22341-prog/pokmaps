@@ -11,7 +11,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_alph_title,
         R.string.guide_alph_text,
         GuideCategory.SIDE_QUEST,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         201,
         listOf("https://github.com/pret/pokecrystal")
     ),
@@ -20,7 +20,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_gifts_title,
         R.string.guide_gifts_text,
         GuideCategory.SIDE_QUEST,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         175,
         listOf(JOHTO_SOURCE)
     ),
@@ -29,7 +29,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_dojo_title,
         R.string.guide_dojo_text,
         GuideCategory.SIDE_QUEST,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         106,
         listOf(KANTO_SOURCE)
     ),
@@ -38,7 +38,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_fossils_title,
         R.string.guide_fossils_text,
         GuideCategory.SIDE_QUEST,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         142,
         listOf(KANTO_SOURCE)
     )

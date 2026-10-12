@@ -11,7 +11,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_breeding_title,
         R.string.guide_breeding_text,
         GuideCategory.TIP,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         132,
         listOf("https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_breeding")
     ),
@@ -20,7 +20,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_friendship_title,
         R.string.guide_friendship_text,
         GuideCategory.TIP,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         175,
         listOf("https://bulbapedia.bulbagarden.net/wiki/Friendship")
     ),
@@ -38,7 +38,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_preparation_title,
         R.string.guide_kanto_preparation_text,
         GuideCategory.TIP,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         63,
         listOf("https://github.com/pret/pokered")
     ),
@@ -47,7 +47,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_balls_title,
         R.string.guide_johto_balls_text,
         GuideCategory.TIP,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         214,
         listOf("https://github.com/pret/pokecrystal")
     ),
@@ -56,7 +56,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_mew_glitch_title,
         R.string.guide_mew_glitch_text,
         GuideCategory.GLITCH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         151,
         listOf("https://www.pokemontrash.com/rouge-bleu-jaune/avoir-mew")
     ),
@@ -74,7 +74,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_clone_gen2_title,
         R.string.guide_clone_gen2_text,
         GuideCategory.GLITCH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         132,
         listOf("https://bulbapedia.bulbagarden.net/wiki/Cloning_glitches")
     ),
@@ -83,7 +83,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_glitch_combat_title,
         R.string.guide_glitch_combat_text,
         GuideCategory.GLITCH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         93,
         listOf("https://github.com/pret/pokered")
     ),
@@ -92,7 +92,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_monday_title,
         R.string.guide_day_monday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         35,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -101,7 +101,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_tuesday_title,
         R.string.guide_day_tuesday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         123,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -110,7 +110,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_wednesday_title,
         R.string.guide_day_wednesday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         130,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -119,7 +119,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_thursday_title,
         R.string.guide_day_thursday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         127,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -128,7 +128,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_friday_title,
         R.string.guide_day_friday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         131,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -137,7 +137,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_saturday_title,
         R.string.guide_day_saturday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         12,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),
@@ -146,7 +146,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_day_sunday_title,
         R.string.guide_day_sunday_text,
         GuideCategory.CALENDAR,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         133,
         listOf("https://github.com/pret/pokecrystal", "https://bulbapedia.bulbagarden.net/wiki/Week_Siblings")
     ),

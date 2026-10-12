@@ -11,7 +11,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_start_title,
         R.string.guide_kanto_start_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         25,
         listOf(KANTO_SOURCE)
     ),
@@ -20,7 +20,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_brock_title,
         R.string.guide_kanto_brock_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         32,
         listOf(KANTO_SOURCE)
     ),
@@ -29,7 +29,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_moon_title,
         R.string.guide_kanto_moon_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         35,
         listOf(KANTO_SOURCE)
     ),
@@ -38,7 +38,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_bill_title,
         R.string.guide_kanto_bill_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         43,
         listOf(KANTO_SOURCE)
     ),
@@ -47,7 +47,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_ship_title,
         R.string.guide_kanto_ship_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         50,
         listOf(KANTO_SOURCE)
     ),
@@ -56,7 +56,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_rock_title,
         R.string.guide_kanto_rock_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         74,
         listOf(KANTO_SOURCE)
     ),
@@ -65,7 +65,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_celadon_title,
         R.string.guide_kanto_celadon_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         133,
         listOf(KANTO_SOURCE)
     ),
@@ -74,7 +74,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_flute_title,
         R.string.guide_kanto_flute_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         92,
         listOf(KANTO_SOURCE)
     ),
@@ -83,7 +83,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_safari_title,
         R.string.guide_kanto_safari_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         54,
         listOf(KANTO_SOURCE)
     ),
@@ -92,7 +92,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_silph_title,
         R.string.guide_kanto_silph_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         64,
         listOf(KANTO_SOURCE)
     ),
@@ -101,7 +101,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_cinnabar_title,
         R.string.guide_kanto_cinnabar_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         138,
         listOf(KANTO_SOURCE)
     ),
@@ -110,7 +110,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_league_title,
         R.string.guide_kanto_league_text,
         GuideCategory.WALKTHROUGH,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         143,
         listOf(KANTO_SOURCE)
     ),
@@ -119,7 +119,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_kanto_legends_title,
         R.string.guide_kanto_legends_text,
         GuideCategory.SIDE_QUEST,
-        KANTO_VERSIONS,
+        RED_BLUE_YELLOW_VERSIONS,
         150,
         listOf(KANTO_SOURCE)
     )

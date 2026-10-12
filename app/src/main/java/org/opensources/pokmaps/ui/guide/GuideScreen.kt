@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.guide.FriendshipRules
 import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
@@ -47,7 +48,7 @@ fun GuideRoute(links: GuideLinks, modifier: Modifier = Modifier, viewModel: Guid
         links = links,
         modifier = modifier,
         breedingTool = { BreedingRoute(onPreview = { viewModel.onAction(GuideAction.Preview(it)) }) },
-        friendshipTool = { FriendshipRoute(state.library?.game?.versionId == 6) }
+        friendshipTool = { state.library?.game?.let { FriendshipRoute(FriendshipRules.forGame(it)) } }
     )
 }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_breeding_gba_text">La Pension produit un œuf si les parents partagent un groupe d’œufs et sont de sexes opposés. Métamorph remplace un parent, y compris pour une espèce sans sexe. Les bébés, les légendaires et deux Métamorph ne produisent pas d’œuf. Les IV identiques ne bloquent plus la reproduction.\n\nL’œuf éclot au niveau 5. Le père transmet les attaques par œuf et les CT/CS compatibles, puis les attaques par niveau connues des deux parents ; les nouvelles attaques remplacent les plus anciennes au-delà de quatre. Avec une femelle et Métamorph, Métamorph occupe le rôle du père pour les attaques.\n\nUn parent doit tenir l’Encens Mer pour obtenir Azurill, sinon l’œuf donne Marill ; l’Encens Doux permet Okéoké, sinon Qulbutoké. Illumise peut produire Illumise ou Muciole. Dans Émeraude, un parent de Pichu tenant un Ballon Lumière lui donne Électacle. Les talents du bébé sont tirés indépendamment de ceux des parents.\n\nLa Pierre Stase transmet la nature seulement dans Émeraude : la femelle, ou Métamorph s’il est présent, doit la tenir. L’autre parent ne déclenche pas cet effet. Le vérificateur indique les résultats possibles ; il ne lit pas la sauvegarde du jeu.</string>
+    <string name="guide_friendship_gba_text">Le bonheur varie de 0 à 255 ; une évolution par bonheur demande au moins 220 et un gain de niveau. Les gains dépendent du palier actuel : 0–99, 100–199 ou 200–255. Les montées de niveau et vitamines donnent 5, 3 ou 2 points ; une CT/CS ou un objet de combat donne 1, 1 ou 0. Un combat contre un Champion d’Arène, le Conseil 4 ou le Maître donne 3, 2 ou 1.\n\nLe Grelot Zen multiplie un gain positif par 1,5, arrondi à l’entier inférieur. La Luxe Ball et le lieu de rencontre ajoutent ensuite chacun un point, seulement si le gain de base est positif. Les pertes ne sont pas amplifiées.\n\nTous les 128 pas, un tirage sur deux donne un point avant les bonus. Émeraude ajoute les baies qui réduisent les EV : 10, 5 ou 2 points. Rouge Feu et Vert Feuille proposent le massage de Nina à Bourg Palette : 3 points à chaque palier. Les poudres amères, la Racine Énergie et l’Herbe Rappel diminuent le bonheur.\n\nLe calculateur simule un événement réussi. Les conditions d’utilisation des objets et de présence de Nina restent à respecter dans le jeu ; aucun bonheur réel n’est lu dans la sauvegarde.</string>
+    <string name="breeding_iv">IV %1$s (0–31)</string>
+    <string name="breeding_held_item">Objet tenu : %1$s</string>
+    <string name="breeding_sea_incense">Encens Mer</string>
+    <string name="breeding_lax_incense">Encens Doux</string>
+    <string name="breeding_light_ball">Ballon Lumière</string>
+    <string name="breeding_everstone">Pierre Stase</string>
+    <string name="breeding_iv_hp">PV</string>
+    <string name="breeding_iv_attack">Attaque</string>
+    <string name="breeding_iv_defense">Défense</string>
+    <string name="breeding_iv_speed">Vitesse</string>
+    <string name="breeding_iv_special_attack">Attaque Spé.</string>
+    <string name="breeding_iv_special_defense">Défense Spé.</string>
+    <string name="breeding_unknown_iv">inconnu</string>
+    <string name="breeding_gba_ivs">Trois tirages d’IV prennent chacun la valeur d’un parent choisi au hasard. Une statistique peut être tirée plusieurs fois : le dernier tirage remplace les précédents. Les autres IV sont aléatoires entre 0 et 31. Émeraude retire les PV après le premier tirage et la Défense après le deuxième ; Rubis/Saphir et les remakes ont un autre défaut de retrait. Il n’y a donc pas toujours trois IV distincts hérités.</string>
+    <string name="breeding_iv_values">%1$s : parent 1 = %2$s ; parent 2 = %3$s ; sinon tirage 0–31.</string>
+    <string name="breeding_gba_abilities">Le talent ne se transmet pas : chaque emplacement de talent du bébé a environ une chance sur deux ; avec un seul talent, il est garanti.</string>
+    <string name="breeding_child_abilities">%1$s : %2$s</string>
+    <string name="breeding_random_nature">Nature aléatoire parmi les 25 natures ; aucun effet de Pierre Stase.</string>
+    <string name="breeding_everstone_nature">Émeraude (parent %1$d) : la Pierre Stase impose sa nature dans environ 50 %% des tirages ; sinon la nature est aléatoire. Cela donne environ 52 %% de chances d’avoir la même nature. Métamorph est prioritaire sur la femelle.</string>
+    <string name="friendship_walking">Marche : tirage réussi après 128 pas</string>
+    <string name="friendship_massage">Massage de Nina</string>
+    <string name="friendship_ev_berry">Baie réduisant les EV (Émeraude)</string>
+    <string name="friendship_soothe_bell">Grelot Zen</string>
+    <string name="friendship_luxury_ball">Capturé dans une Luxe Ball</string>
+    <string name="friendship_capture_place">Au lieu de rencontre</string>
+    <string name="friendship_gba_note">Bonus appliqués après le barème : Grelot Zen × 1,5 arrondi, puis +1 pour la Luxe Ball et +1 au lieu de rencontre. Aucun bonus sur les pertes ni sur un gain de base nul.</string>
+    <string name="friendship_gba_simulation">Simulation manuelle : la valeur réelle reste cachée. Le bonheur à la capture dépend de l’espèce ; à l’éclosion, il est de 120. Les valeurs proposées sont des repères, pas une lecture du jeu.</string>
+    <string name="friendship_gba_random">La marche donne un gain avec une chance sur deux tous les 128 pas. Le calcul simule ce tirage réussi. Les autres événements dépendent de leurs conditions en jeu. Une évolution par bonheur exige au moins 220 et un gain de niveau.</string>
+</resources>
