@@ -115,7 +115,9 @@ natures, IV, sprites des espèces 252 à 386.
 - [x] **Îles Sevii** : une seule région « Îles Sevii ». Les îles forment 7 ensembles non reliés (Îles 1, 2, 3,
       5, 6, 7 reliées chacune à leurs routes, Île 4 seule) placés par `map_anchors.csv`. Les cartes
       `PROTOTYPE_SEVII_ISLE_6/7`, reliées à l'Île 3 mais inutilisées, sont écartées (`map_connection_skips.csv`).
-- [x] **Monde sous-marin (Plongée)** : niveau « Sous l'eau » de la carte du monde de Hoenn (sélecteur d'étage).
+- [x] **Monde sous-marin (Plongée)** : niveaux Surface / Sous les eaux du chenal sélectionné, comme des étages.
+      Aucun sélecteur sur Hoenn sans lieu sélectionné ni sur un chenal sans Plongée. Le Chenal 134
+      donne accès au Sanctuaire ; le Chenal 133 ne possède pas de carte sous-marine.
       Les cartes `Underwater_*` sont reliées à la surface par les connexions `dive` / `emerge` de `map.json`
       (14 dans Émeraude, 8 dans Rubis) et ont la taille de la route qu'elles doublent.
 - [x] **`SHOAL_CAVE` et ses marées** : deux niveaux, marée haute (`ShoalCave_HighTide*`) et marée basse
@@ -642,7 +644,8 @@ Domaine et données :
 - [x] Carte : menu des régions avec Hoenn, Kanto, Îles Sevii ; sélecteur d'étage pour le monde sous-marin et les
       marées ; performances mesurées sur la plus grande carte du monde (règle 3).
   - [x] Menu par région : Hoenn regroupe ses deux niveaux ; Kanto et les Îles Sevii restent séparés.
-  - [x] Sélecteur : Surface / Sous l’eau à Hoenn ; marée haute / marée basse / salle de glace à la Grotte Tréfonds.
+  - [x] Sélecteur : Surface / Sous les eaux uniquement pour un chenal de Hoenn avec Plongée sélectionné ;
+        marée haute / marée basse / salle de glace à la Grotte Tréfonds.
         Tests JVM sur les catalogues versionnés Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille.
   - [x] Mesure du décodage des tuiles de la plus grande carte : Hoenn d’Émeraude, 12 800 × 9 792 pixels
         (125,34 Mpx), 7 niveaux. Sur PC, Python/Pillow, parcours séquentiel des 828 tuiles WebP du niveau 6

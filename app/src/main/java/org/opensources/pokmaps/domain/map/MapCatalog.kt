@@ -247,6 +247,7 @@ data class MapCatalog(
 
     /** Étages uniquement : les maisons et les zones d'un même niveau ne deviennent pas des badges. */
     fun floorsOf(mapId: Int, centerGroundId: Int? = null): List<MapFloor> {
+        landscapeFloors[mapId]?.let { return it }
         val display = displayedMapOf(mapId) ?: return emptyList()
         val upstairs = mapByIdentifier("pokecenter-2f-plan")
         val ground = if (display.id == upstairs?.id) {

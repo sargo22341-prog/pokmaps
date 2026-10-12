@@ -47,7 +47,14 @@ internal class MapSelection(
             items = items
         )
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
-        session.update { it.copy(zone = zone, detail = null, zoneListOpen = false) }
+        session.update {
+            it.copy(
+                zone = zone,
+                detail = null,
+                zoneListOpen = false,
+                floors = if (display.isWorld) catalog.floorsOf(selectedId) else it.floors
+            )
+        }
         session.refreshOverlays()
         session.load(
             block = { zoneIds.associateWith { getMapEncounters(game, catalog, it) } },
@@ -89,7 +96,7 @@ internal class MapSelection(
         val map = session.current.map
         if (map != null && !map.isWorld) return
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
-        session.update { it.copy(zone = null, detail = null, zoneListOpen = false) }
+        session.update { it.copy(zone = null, detail = null, zoneListOpen = false, floors = emptyList()) }
         session.refreshOverlays()
     }
 

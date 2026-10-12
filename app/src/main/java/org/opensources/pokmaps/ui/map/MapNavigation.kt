@@ -111,14 +111,15 @@ internal class MapNavigation(
         val catalog = session.catalog ?: return
         val map = session.current.map ?: return
         val mapState = session.current.mapState ?: return
-        if (mapId == map.id) return
-        val target = catalog.maps[mapId]?.takeIf { it.isDisplayable } ?: return
+        if (mapId == map.id || mapId == session.current.zone?.mapId) return
+        if (session.current.floors.none { it.mapId == mapId }) return
+        val target = catalog.displayedMapOf(mapId) ?: return
         session.update { it.copy(detail = null, zoneListOpen = false) }
         if (target.width == map.width && target.height == map.height) {
             show(target.id, mapState.centroidX, mapState.centroidY, mapState.scale)
-            selection.selectZone(catalog, target.id)
+            selection.selectZone(catalog, mapId)
         } else {
-            open(target.id)
+            open(mapId)
         }
     }
 

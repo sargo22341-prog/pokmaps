@@ -235,7 +235,9 @@ private fun BoxScope.Floors(state: MapUiState, onAction: (MapAction) -> Unit) {
             .padding(top = FLOORS_TOP, end = 8.dp),
         label = "floors"
     ) { floors ->
-        if (floors.isNotEmpty()) FloorSelector(floors, state.map?.id) { onAction(MapAction.SelectFloor(it)) }
+        if (floors.isNotEmpty()) {
+            FloorSelector(floors, state.selectedFloorId) { onAction(MapAction.SelectFloor(it)) }
+        }
     }
 }
 

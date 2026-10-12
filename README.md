@@ -72,7 +72,9 @@ contre la base générée et vérifie leurs liens et nombres de succès. Les sol
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
-Les cartes de Rubis, Saphir et Émeraude regroupent Hoenn et son monde sous-marin dans le sélecteur de niveaux.
+Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
+d’un chenal avec un accès de Plongée. Les Chenaux 124, 126, 127, 128 et 134 sont concernés ; Émeraude ajoute
+les Chenaux 105, 125 et 129. Le Chenal 133 ne possède pas de zone sous-marine.
 La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les remakes proposent
 Kanto et les Îles Sevii dans le menu des régions.
 Dans les onze jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
