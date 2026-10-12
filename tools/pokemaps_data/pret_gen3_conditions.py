@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 
+from .pret_gen3_commands import SCRIPT_COMMANDS
+from .pret_gen3_facility_commands import FACILITY_COMMANDS
 from .pret_gen3_script_values import number_value, range_values, shifted_value
 from .pret_gen3_scripts import Gen3Scripts, Instruction
 
 _MAX_STEPS = 100_000
 _MAX_CALL_DEPTH = 24
+_SCRIPT_COMMANDS = SCRIPT_COMMANDS | FACILITY_COMMANDS
 _TEMPORARY = frozenset({"VAR_RESULT", "VAR_FACING", "VAR_LAST_TALKED", "VAR_TEMP_0"})
 _INVERSE = {"eq": "ne", "ne": "eq", "lt": "ge", "ge": "lt", "le": "gt", "gt": "le"}
 _COMPARISONS = frozenset(_INVERSE)
@@ -187,6 +190,8 @@ def _battle_edges(state: ScriptState, instruction: Instruction, scripts: Gen3Scr
 
 def _next(state: ScriptState, instruction: Instruction, scripts: Gen3Scripts) -> list[ScriptState]:
     command, args = instruction.command, instruction.args
+    if command not in _SCRIPT_COMMANDS:
+        raise ValueError(f"{instruction.source} : commande GBA inconnue : {command}")
     after = replace(state, point=(state.point[0], state.point[1] + 1))
     if command in {"end", "endram", "returnram", "gotobeatenscript"}:
         return []

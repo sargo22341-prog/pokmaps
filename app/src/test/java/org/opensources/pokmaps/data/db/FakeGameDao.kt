@@ -23,6 +23,13 @@ internal class FakeGameDao(private val games: List<Game> = listOf(RED, BLUE), pr
         val RUBY = Game(7, "ruby", "Rubis", 5, "ruby-sapphire", 3, 383, 0xA8243A)
         val EMERALD = Game(9, "emerald", "Émeraude", 6, "emerald", 3, 384, 0x2E9A5A)
         val FIRERED = Game(10, "firered", "Rouge Feu", 7, "firered-leafgreen", 3, CHARIZARD, 0xE8642A)
+        val GBA_GAMES = listOf(
+            RUBY,
+            RUBY.copy(versionId = 8, versionIdentifier = "sapphire", name = "Saphir"),
+            EMERALD,
+            FIRERED,
+            FIRERED.copy(versionId = 11, versionIdentifier = "leafgreen", name = "Vert Feuille")
+        )
         const val BROKEN = "Base illisible"
         private const val CHARIZARD = 6
         private const val BLASTOISE = 9

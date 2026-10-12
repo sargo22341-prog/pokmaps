@@ -1,11 +1,12 @@
 # Services de Hoenn — phase 5
 
-Les lecteurs des trois versions Hoenn alimentent `character_curation.json` de l'aperçu
-`--gen3-curation-only`. Les sources sont les commits épinglés de `pokeruby` et `pokeemerald` ;
-aucun changement des assets Android ni activation des jeux n'est nécessaire à cette préparation.
+Les lecteurs des trois versions Hoenn alimentent la base Room distribuée et les fiches Android.
+La génération complète conserve les catalogues `maps/ruby-sapphire/characters.json` et
+`maps/emerald/characters.json` ; `--gen3-curation-only` produit aussi l’aperçu éditorial
+`character_curation.json`. Les sources sont les commits épinglés de `pokeruby` et `pokeemerald`.
 Le domaine Android et les ressources françaises prennent en charge les monnaies `money`, `coins`,
 `battle_points` et `ashes`, ainsi que `daycare_egg`, `daycare_withdrawal` et `move_relearner`.
-L’assemblage de ce catalogue dans la base embarquée reste l’étape suivante du plan.
+Ces services sont assemblés dans la base embarquée depuis l’intégration de la branche Hoenn.
 
 ## Offres relues
 
@@ -47,6 +48,6 @@ la réponse aux dialogues oui/non, les résultats de vérification des décorati
 Les tests vérifient les trois versions sur les sources locales épinglées, les objets requis,
 les sept créations du verrier, les cinq CT, les trois poupées, les achats de jetons, la Pension,
 le Maître des Capacités et les comptoirs et tuteurs de la Zone de Combat. Le parcours complet des
-cinq versions dans l'export reste soumis aux contrôles de curation commune.
-`require_resolved` continue de refuser les appels C non certifiés : cette préparation ne certifie
-pas tous les effets du moteur et ne constitue pas l'assemblage des fiches Android.
+cinq versions dans l'export est soumis aux contrôles de curation commune.
+`require_resolved` continue de refuser les appels C non certifiés : l’assemblage des fiches
+Android ne simule pas tous les effets du moteur ni l’état d’une sauvegarde de cartouche.

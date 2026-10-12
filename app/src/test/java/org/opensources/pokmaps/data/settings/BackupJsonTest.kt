@@ -118,13 +118,13 @@ class BackupJsonTest {
     fun generationThreeRoundTripPreserves386SpeciesAnd28Forms() {
         val backup = CollectionBackup(
             (1..386).toSet(),
-            mapOf(10 to (1..386).toSet()),
+            (7..11).associateWith { (1..386).toSet() },
             mapOf(9 to GuideProgress(setOf("hoenn-start"))),
-            mapOf(10 to UnownForm.entries.toSet())
+            (10..11).associateWith { UnownForm.entries.toSet() }
         )
         val restored = decode(BackupJson.encode(backup))
         assertEquals(backup.favorites, restored.favorites)
-        assertEquals(backup.caught[10], restored.caught[10])
+        for (version in 7..11) assertEquals(backup.caught[version], restored.caught[version])
         assertEquals(backup.unown, restored.unown)
         assertEquals(backup.guides[9], restored.guides[9])
     }
@@ -164,9 +164,7 @@ class BackupJsonTest {
         val GAMES = listOf(
             FakeGameDao.RED,
             FakeGameDao.BLUE,
-            FakeGameDao.GOLD,
-            FakeGameDao.EMERALD,
-            FakeGameDao.FIRERED
-        )
+            FakeGameDao.GOLD
+        ) + FakeGameDao.GBA_GAMES
     }
 }

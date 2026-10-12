@@ -1,12 +1,15 @@
 """Scripts GBA : retours contextualisés, offres explicites et conditions contradictoires."""
 
+import re
 from pathlib import Path
 
 import pytest
 
 from pokemaps_data.games import GEN3_GAMES, Game
 from pokemaps_data.pret_gen3 import Gen3PretRepo
+from pokemaps_data.pret_gen3_commands import SCRIPT_COMMANDS
 from pokemaps_data.pret_gen3_conditions import ScriptRequirement, script_states
+from pokemaps_data.pret_gen3_facility_commands import FACILITY_COMMANDS
 from pokemaps_data.pret_gen3_offers import script_offers
 from pokemaps_data.pret_gen3_script_effects import special_writes
 from pokemaps_data.pret_gen3_script_values import number_value
@@ -231,6 +234,29 @@ def test_missing_script_and_recursive_calls_stop_reading(text: str) -> None:
 def test_duplicate_label_is_rejected() -> None:
     with pytest.raises(ValueError, match="label répété"):
         parse_scripts("Entry:\nend\nEntry:\nend", "test.inc")
+
+
+def test_unknown_command_cannot_silently_skip_a_story_effect() -> None:
+    scripts = _scripts("Entry:\nunknown_story_effect VAR_STORY\ngiveitem ITEM_POTION\nend")
+    with pytest.raises(ValueError, match=r"test\.inc:2 : commande GBA inconnue : unknown_story_effect"):
+        script_offers(scripts, "Entry")
+
+
+def test_command_catalog_matches_the_three_pinned_engines(source_cache_ready: None) -> None:
+    commands: set[str] = set()
+    for game in GEN3_GAMES:
+        root = pret_dir(Path(__file__).resolve().parents[1] / ".cache", game.pret_repo)
+        relative = "include/macros/event.inc" if game.pret_repo == "pokeruby" else "asm/macros/event.inc"
+        paths = [root / relative]
+        paths += [
+            path
+            for path in (root / "asm/macros").glob("*.inc")
+            if path.stem in {"battle_tent", "trainer_tower", "trainer_hill"}
+        ]
+        paths += list((root / "asm/macros/battle_frontier").glob("*.inc"))
+        for path in paths:
+            commands.update(re.findall(r"^\s*\.macro\s+(\w+)", path.read_text(encoding="utf-8"), re.M))
+    assert commands == SCRIPT_COMMANDS | FACILITY_COMMANDS
 
 
 def test_assembler_endc_selects_the_correct_version(tmp_path: Path) -> None:
