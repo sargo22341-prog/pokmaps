@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.PokedexEntry
@@ -23,11 +22,13 @@ import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokedexUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
+import org.opensources.pokmaps.ui.common.CollectionWrites
 import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 data class PokedexUiState(
     val loading: Boolean = true,
     val failed: Boolean = false,
+    val writeFailed: Boolean = false,
     val game: Game? = null,
     /** Pokémon correspondant à la recherche et aux filtres. */
     val entries: List<PokedexEntry> = emptyList(),
@@ -72,10 +73,16 @@ class PokedexViewModel @Inject constructor(
     private val updateCollection: UpdateCollectionUseCase
 ) : ViewModel() {
     private val selection = MutableStateFlow<Pair<Int, Int>?>(null)
+    private val collectionWrites = CollectionWrites(viewModelScope)
     private val filter = MutableStateFlow(PokedexFilter())
 
     val state: StateFlow<PokedexUiState> =
-        combine(observePokedex(selection), observeCollection(), filter) { pokedex, collection, filter ->
+        combine(observePokedex(selection), observeCollection(), filter, collectionWrites.failed) {
+                pokedex,
+                collection,
+                filter,
+                writeFailed
+            ->
             // Un type absent de la génération du nouveau jeu n'a plus de sens comme filtre.
             val activeFilter = if (pokedex.types.any { it.id == filter.typeId }) filter else filter.copy(typeId = null)
             // Captures de la version affichée (la collection peut avoir un temps de retard au changement de jeu).
@@ -85,6 +92,7 @@ class PokedexViewModel @Inject constructor(
             }
             PokedexUiState(
                 loading = false,
+                writeFailed = writeFailed,
                 game = pokedex.game,
                 entries = PokedexSearch.filter(entries, activeFilter),
                 catalogs = pokedex.catalogs,
@@ -121,10 +129,10 @@ class PokedexViewModel @Inject constructor(
 
     private fun toggleCaught(entry: PokedexEntry) {
         val game = state.value.game ?: return
-        viewModelScope.launch { updateCollection.setCaught(game, entry.pokemonId, !entry.caught) }
+        collectionWrites.launch { updateCollection.setCaught(game, entry.pokemonId, !entry.caught) }
     }
 
     private fun toggleFavorite(entry: PokedexEntry) {
-        viewModelScope.launch { updateCollection.setFavorite(entry.pokemonId, !entry.favorite) }
+        collectionWrites.launch { updateCollection.setFavorite(entry.pokemonId, !entry.favorite) }
     }
 }

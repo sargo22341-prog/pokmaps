@@ -5,5 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- La carte écarte les anciens chargements après une nouvelle sélection ou un changement de jeu.
+- Les échecs d’enregistrement des captures et favoris sont signalés et permettent de réessayer.
 - Les fiches et familles d’évolution respectent la génération du jeu choisi, notamment pour la reproduction à Johto.
 

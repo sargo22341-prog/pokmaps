@@ -10,11 +10,14 @@ import kotlinx.coroutines.flow.flow
 
 /** Préférences en mémoire ; `failing` simule un fichier de préférences illisible. */
 internal class FakeDataStore(private val failing: Boolean = false) : DataStore<Preferences> {
+    var writeError: Exception? = null
+
     private val state = MutableStateFlow(emptyPreferences())
 
     override val data: Flow<Preferences> = if (failing) flow { throw IOException("Préférences illisibles") } else state
 
     override suspend fun updateData(transform: suspend (t: Preferences) -> Preferences): Preferences {
+        writeError?.let { throw it }
         if (failing) throw IOException("Préférences illisibles")
         return transform(state.value).also { state.value = it }
     }

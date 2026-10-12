@@ -14,11 +14,20 @@ internal data class AchievementDefinition(
     val chapter: String
 )
 
-internal fun achievementGuides(): List<GuideDefinition> = (
-    redAchievements() + blueAchievements() + yellowAchievements() + goldAchievements() + silverAchievements() +
-        crystalAchievements() + rubyAchievements() + sapphireAchievements() + emeraldAchievements() +
-        fireRedAchievements() + leafGreenAchievements()
-    ).map {
+internal fun achievementGuides(versionId: Int): List<GuideDefinition> = when (versionId) {
+    1 -> redAchievements()
+    2 -> blueAchievements()
+    3 -> yellowAchievements()
+    4 -> goldAchievements()
+    5 -> silverAchievements()
+    6 -> crystalAchievements()
+    7 -> rubyAchievements()
+    8 -> sapphireAchievements()
+    9 -> emeraldAchievements()
+    10 -> fireRedAchievements()
+    11 -> leafGreenAchievements()
+    else -> error("Version de succès inconnue : $versionId")
+}.map {
     GuideDefinition(
         "ra-${it.id}", it.title, it.text, GuideCategory.ACHIEVEMENT, setOf(it.version),
         when (it.version) {

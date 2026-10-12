@@ -4,7 +4,8 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.guide.Gen3CaptureGoals
 import org.opensources.pokmaps.domain.guide.GuideCategory
 
-internal fun gbaCollectionGuides(): List<GuideDefinition> = (7..11).flatMap { version ->
+internal fun gbaCollectionGuides(version: Int): List<GuideDefinition> {
+    require(version in 7..11) { "Version GBA inconnue : $version" }
     val hoenn = version <= 9
     val prefix = if (hoenn) "hoenn" else "remake"
     val source = when (version) {
@@ -13,7 +14,7 @@ internal fun gbaCollectionGuides(): List<GuideDefinition> = (7..11).flatMap { ve
         10, 11 -> "https://github.com/pret/pokefirered/tree/037335f4c725/src/data/pokemon"
         else -> error("Version GBA inconnue : $version")
     }
-    listOf(
+    return listOf(
         GuideDefinition(
             "$prefix-regional-collection",
             R.string.guide_gba_regional_title,

@@ -106,6 +106,11 @@ private fun PokemonContent(
 ) {
     var movesTab by rememberSaveable(details.id, game.versionGroupId) { mutableIntStateOf(0) }
     LazyColumn(modifier.fillMaxSize()) {
+        if (state.writeFailed) {
+            item(key = "write-error") {
+                Text(stringResource(R.string.collection_save_error), color = MaterialTheme.colorScheme.error)
+            }
+        }
         item { PokemonHeader(state, game, details, onAction) }
         if (state.hasUnownForms) {
             item(key = "unown") {

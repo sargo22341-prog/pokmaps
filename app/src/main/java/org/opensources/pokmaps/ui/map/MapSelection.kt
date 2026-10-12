@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.ui.map
 
+import kotlinx.coroutines.Job
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
@@ -7,6 +8,7 @@ import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.model.matchesTimes
+import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 
@@ -19,12 +21,27 @@ internal class MapSelection(
     private val getMapEncounters: GetMapEncountersUseCase,
     private val getObjectDetails: GetMapObjectDetailsUseCase
 ) {
+    private var zoneJob: Job? = null
+    private var detailJob: Job? = null
+
+    // L'identité du jeton distingue aussi deux demandes identiques A → B → A.
+    private var zoneRequest: Any? = null
+    private var detailRequest: Any? = null
+
+    fun invalidateLoads() {
+        zoneRequest = null
+        zoneJob?.cancel()
+        cancelDetailLoad()
+        loadedEncounters = emptyList()
+        loadedZones = emptyMap()
+    }
+
     private var loadedEncounters: List<Encounter> = emptyList()
     private var loadedZones: Map<Int, List<Encounter>> = emptyMap()
 
     /** Sélectionne une ville, une route ou une carte intérieure et charge ses rencontres. */
     fun selectZone(catalog: MapCatalog, zoneId: Int) {
-        val game = session.loaded.value?.game ?: return
+        val loaded = session.loaded.value ?: return
         val info = catalog.regionsOf(zoneId).firstOrNull()?.takeIf { !catalog.isWorld(zoneId) }
             ?: catalog.maps[zoneId] ?: return
         val selectedId = info.id
@@ -38,8 +55,7 @@ internal class MapSelection(
         val items = catalog.objects[selectedId].orEmpty().filter {
             it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM
         }
-        loadedEncounters = emptyList()
-        loadedZones = emptyMap()
+        invalidateLoads()
         val zone = MapZone(
             mapId = selectedId,
             name = info.name,
@@ -56,22 +72,32 @@ internal class MapSelection(
             )
         }
         session.refreshOverlays()
-        session.load(
-            block = { zoneIds.associateWith { getMapEncounters(game, catalog, it) } },
+        loadZone(loaded, catalog, zone, zoneIds)
+    }
+
+    private fun loadZone(loaded: GameMaps, catalog: MapCatalog, zone: MapZone, zoneIds: List<Int>) {
+        val request = Any()
+        zoneRequest = request
+        zoneJob = session.load(
+            block = { zoneIds.associateWith { getMapEncounters(loaded.game, catalog, it) } },
             onFailure = {
-                session.update { state ->
-                    if (state.zone == zone) state.copy(zone = zone.copy(loading = false, failed = true)) else state
+                if (isCurrent(loaded, request, zoneRequest)) {
+                    session.update { it.copy(zone = zone.copy(loading = false, failed = true)) }
                 }
             }
         ) { encounters ->
-            if (session.current.zone != zone) return@load
+            if (!isCurrent(loaded, request, zoneRequest)) return@load
             loadedZones = encounters
-            loadedEncounters = encounters[selectedId].orEmpty()
+            loadedEncounters = encounters[zone.mapId].orEmpty()
             applyTimes(catalog, zone)
         }
     }
 
+    private fun isCurrent(loaded: GameMaps, request: Any, current: Any?): Boolean =
+        session.loaded.value === loaded && current === request
+
     fun selectTime(time: TimeFilter) {
+        cancelDetailLoad()
         session.update { it.copy(time = time, detail = null) }
         val catalog = session.catalog ?: return
         val zone = session.current.zone?.takeIf { !it.loading && !it.failed } ?: return
@@ -95,6 +121,7 @@ internal class MapSelection(
     fun clearZone() {
         val map = session.current.map
         if (map != null && !map.isWorld) return
+        invalidateLoads()
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
         session.update { it.copy(zone = null, detail = null, zoneListOpen = false, floors = emptyList()) }
         session.refreshOverlays()
@@ -105,6 +132,7 @@ internal class MapSelection(
         val encounters = loadedZones[mapId].orEmpty()
             .filter { it.pokemonId == pokemonId && it.matchesTimes(session.current.times) }
         val name = encounters.firstOrNull()?.pokemonName ?: return
+        cancelDetailLoad()
         session.update { it.copy(detail = MapDetail.WildPokemon(pokemonId, name, encounters.groupByMethod())) }
     }
 
@@ -119,6 +147,7 @@ internal class MapSelection(
     }
 
     fun dismissDetail() {
+        cancelDetailLoad()
         session.update { it.copy(detail = null) }
         if (session.overlays.focusedObjectId != null) {
             session.updateOverlays { it.copy(focusedObjectId = null) }
@@ -127,14 +156,15 @@ internal class MapSelection(
     }
 
     private fun showItem(obj: MapObject) {
-        val game = session.loaded.value?.game ?: return
+        val loaded = session.loaded.value ?: return
         val detail = MapDetail.Item(obj)
+        val request = beginDetail()
         session.update { it.copy(detail = detail, zoneListOpen = false) }
         val itemId = obj.itemId ?: return
-        session.load(
-            block = { getObjectDetails.item(game, itemId) },
-            onFailure = { replaceDetail(detail, detail.copy(failed = true)) }
-        ) { details -> replaceDetail(detail, detail.copy(details = details)) }
+        detailJob = session.load(
+            block = { getObjectDetails.item(loaded.game, itemId) },
+            onFailure = { replaceDetail(loaded, request, detail.copy(failed = true)) }
+        ) { details -> replaceDetail(loaded, request, detail.copy(details = details)) }
     }
 
     /**
@@ -145,8 +175,9 @@ internal class MapSelection(
         val loaded = session.loaded.value ?: return
         val game = loaded.game
         val detail = MapDetail.Character(obj)
+        val request = beginDetail()
         session.update { it.copy(detail = detail, zoneListOpen = false) }
-        session.load(
+        detailJob = session.load(
             block = {
                 val isTrainer = obj.kind == MapObjectKind.TRAINER
                 val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
@@ -157,12 +188,22 @@ internal class MapSelection(
                     fossilUses = getObjectDetails.fossilUses(game, loaded.catalog)
                 )
             },
-            onFailure = { replaceDetail(detail, detail.copy(loading = false, failed = true)) }
-        ) { ready -> replaceDetail(detail, ready) }
+            onFailure = { replaceDetail(loaded, request, detail.copy(loading = false, failed = true)) }
+        ) { ready -> replaceDetail(loaded, request, ready) }
     }
 
-    /** Remplace la fiche affichée, sauf si l'utilisateur en a ouvert une autre entre-temps. */
-    private fun replaceDetail(shown: MapDetail, replacement: MapDetail) {
-        session.update { if (it.detail == shown) it.copy(detail = replacement) else it }
+    private fun cancelDetailLoad() {
+        detailRequest = null
+        detailJob?.cancel()
+    }
+
+    private fun beginDetail(): Any {
+        cancelDetailLoad()
+        return Any().also { detailRequest = it }
+    }
+
+    /** Seule la demande active dans le catalogue courant peut remplacer la fiche. */
+    private fun replaceDetail(loaded: GameMaps, request: Any, replacement: MapDetail) {
+        if (isCurrent(loaded, request, detailRequest)) session.update { it.copy(detail = replacement) }
     }
 }

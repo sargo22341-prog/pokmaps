@@ -1,17 +1,26 @@
 package org.opensources.pokmaps.ui.map
 
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.data.db.EncounterRow
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
+import org.opensources.pokmaps.data.db.ItemDetailsRow
+import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapCatalog
@@ -26,7 +35,7 @@ import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 /** Lieu sélectionné et fiches de la carte, sans carte MapCompose affichée. */
 @OptIn(ExperimentalCoroutinesApi::class)
 class MapSelectionTest {
-    private class Fixture(scope: CoroutineScope, details: FakeMapDao) {
+    private class Fixture(scope: CoroutineScope, details: MapDao) {
         val session = MapSession(scope)
         val selection = MapSelection(
             session,
@@ -37,7 +46,7 @@ class MapSelectionTest {
 
     /** Session avec le catalogue du petit monde ; `details` sert les rencontres et les fiches. */
     private suspend fun TestScope.fixture(
-        details: FakeMapDao = FakeMapDao(),
+        details: MapDao = FakeMapDao(),
         catalogData: FakeMapDao = FakeMapDao()
     ): Fixture {
         val catalog = MapRepository(catalogData).catalog(FakeGameDao.RED)
@@ -70,6 +79,120 @@ class MapSelectionTest {
         )
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         return catalog
+    }
+
+    private class DelayedEncounters : MapDao by FakeMapDao() {
+        val requests = mutableListOf<Pair<Job, CompletableDeferred<Int>>>()
+
+        override suspend fun encounters(versionId: Int, areaIds: List<Int>): List<EncounterRow> {
+            val request = checkNotNull(currentCoroutineContext()[Job]) to CompletableDeferred<Int>()
+            requests += request
+            // Simule aussi une lecture qui termine malgré l'annulation.
+            val level = withContext(NonCancellable) { withTimeout(1_000) { request.second.await() } }
+            return FakeMapDao().encounters(versionId, areaIds).map { it.copy(minLevel = level, maxLevel = level) }
+        }
+    }
+
+    @Test
+    fun repeatedZoneSelectionCancelsOldRequestsAndRejectsTheirResults() = runTest {
+        val dao = DelayedEncounters()
+        val fixture = fixture(dao)
+        val original = checkNotNull(fixture.session.catalog)
+        val catalog = original.copy(
+            areas = original.areas + (
+                FakeMapDao.VIRIDIAN to original.areas.getValue(FakeMapDao.ROUTE_1)
+                    .map { it.copy(mapId = FakeMapDao.VIRIDIAN) }
+                )
+        )
+        fixture.session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
+        fixture.select(FakeMapDao.ROUTE_1)
+        fixture.select(FakeMapDao.VIRIDIAN)
+        fixture.select(FakeMapDao.ROUTE_1)
+        assertTrue(dao.requests[0].first.isCancelled)
+        assertTrue(dao.requests[1].first.isCancelled)
+        dao.requests[2].second.complete(30)
+        dao.requests[0].second.complete(10)
+        dao.requests[1].second.complete(20)
+        val zone = checkNotNull(fixture.session.current.zone)
+        assertEquals(FakeMapDao.ROUTE_1, zone.mapId)
+        assertEquals(30, zone.encounters.single().minLevel)
+    }
+
+    @Test
+    fun sameZoneInAnotherVersionRejectsThePreviousResult() = runTest {
+        val dao = DelayedEncounters()
+        val fixture = fixture(dao)
+        fixture.select(FakeMapDao.ROUTE_1)
+        fixture.session.setLoaded(GameMaps(FakeGameDao.BLUE, checkNotNull(fixture.session.catalog)))
+        fixture.select(FakeMapDao.ROUTE_1)
+        assertTrue(dao.requests[0].first.isCancelled)
+        dao.requests[1].second.complete(20)
+        dao.requests[0].second.complete(10)
+        assertEquals(20, checkNotNull(fixture.session.current.zone).encounters.single().minLevel)
+    }
+
+    private class DelayedItems : MapDao by FakeMapDao() {
+        val requests = mutableListOf<Pair<Job, CompletableDeferred<String>>>()
+
+        override suspend fun item(itemId: Int, versionGroupId: Int): ItemDetailsRow? {
+            val request = checkNotNull(currentCoroutineContext()[Job]) to CompletableDeferred<String>()
+            requests += request
+            val description = withContext(NonCancellable) { withTimeout(1_000) { request.second.await() } }
+            if (description == "error") error("Lecture impossible")
+            return FakeMapDao().item(itemId, versionGroupId)?.copy(description = description)
+        }
+    }
+
+    @Test
+    fun repeatedItemSelectionRejectsOldSuccessAndFailure() = runTest {
+        val dao = DelayedItems()
+        val fixture = fixture(dao)
+        val item = checkNotNull(fixture.session.catalog).objectsById.getValue(FakeMapDao.ITEM)
+        val trainer = checkNotNull(fixture.session.catalog).objectsById.getValue(FakeMapDao.TRAINER)
+        fixture.selection.showObject(item)
+        fixture.selection.showObject(trainer)
+        fixture.selection.showObject(item)
+        assertTrue(dao.requests[0].first.isCancelled)
+        dao.requests[1].second.complete("Latest")
+        dao.requests[0].second.complete("error")
+        val detail = fixture.session.current.detail as MapDetail.Item
+        assertEquals("Latest", detail.details?.description)
+        assertFalse(detail.failed)
+    }
+
+    @Test
+    fun gameChangeInvalidatesPendingDetail() = runTest {
+        val dao = DelayedItems()
+        val fixture = fixture(dao)
+        val item = checkNotNull(fixture.session.catalog).objectsById.getValue(FakeMapDao.ITEM)
+        fixture.selection.showObject(item)
+        fixture.selection.invalidateLoads()
+        fixture.session.setLoaded(GameMaps(FakeGameDao.BLUE, checkNotNull(fixture.session.catalog)))
+        fixture.selection.showObject(item)
+        assertTrue(dao.requests[0].first.isCancelled)
+        dao.requests[1].second.complete("Blue")
+        dao.requests[0].second.complete("Red")
+        assertEquals("Blue", (fixture.session.current.detail as MapDetail.Item).details?.description)
+    }
+
+    @Test
+    fun dismissedItemAndClearedZoneCannotReappear() = runTest {
+        val items = DelayedItems()
+        val fixture = fixture(items)
+        val item = checkNotNull(fixture.session.catalog).objectsById.getValue(FakeMapDao.ITEM)
+        fixture.selection.showObject(item)
+        fixture.selection.dismissDetail()
+        assertTrue(items.requests[0].first.isCancelled)
+        items.requests[0].second.complete("Old")
+        assertNull(fixture.session.current.detail)
+        val encounters = DelayedEncounters()
+        val zones = fixture(encounters)
+        zones.select(FakeMapDao.ROUTE_1)
+        zones.selection.clearZone()
+        assertTrue(encounters.requests[0].first.isCancelled)
+        encounters.requests[0].second.complete(10)
+        assertNull(zones.session.current.zone)
+        assertTrue(zones.session.overlays.wildMarkers.isEmpty())
     }
 
     @Test

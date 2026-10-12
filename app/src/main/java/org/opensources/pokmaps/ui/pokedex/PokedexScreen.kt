@@ -82,6 +82,9 @@ fun PokedexScreen(
         return
     }
     Column(modifier.fillMaxSize()) {
+        if (state.writeFailed) {
+            Text(stringResource(R.string.collection_save_error), color = MaterialTheme.colorScheme.error)
+        }
         PokedexSelector(state, onAction)
         SearchField(state.filter.query) { onAction(PokedexAction.Search(it)) }
         Filters(state, onAction)

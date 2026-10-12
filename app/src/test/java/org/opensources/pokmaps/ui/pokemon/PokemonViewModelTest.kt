@@ -1,6 +1,8 @@
 package org.opensources.pokmaps.ui.pokemon
 
 import androidx.lifecycle.SavedStateHandle
+import java.io.IOException
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -263,5 +265,41 @@ class PokemonViewModelTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         assertTrue(viewModel.state.value.failed)
         assertNull(viewModel.state.value.details)
+    }
+
+    @Test
+    fun failedCollectionWritesKeepPreviousValuesAndCanBeRetried() = runTest {
+        val model = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        dataStore.writeError = IOException("Écriture impossible")
+        model.onAction(PokemonAction.ToggleCaught)
+        assertTrue(model.state.value.writeFailed)
+        assertFalse(model.state.value.caught)
+        assertFalse(model.state.value.failed)
+        dataStore.writeError = null
+        model.onAction(PokemonAction.ToggleCaught)
+        assertTrue(model.state.value.caught)
+        assertFalse(model.state.value.writeFailed)
+        dataStore.writeError = IOException("Écriture impossible")
+        model.onAction(PokemonAction.ToggleFavorite)
+        assertTrue(model.state.value.writeFailed)
+        assertFalse(model.state.value.favorite)
+        assertTrue(model.state.value.caught)
+        dataStore.writeError = null
+        model.onAction(PokemonAction.ToggleFavorite)
+        assertTrue(model.state.value.favorite)
+        assertFalse(model.state.value.writeFailed)
+    }
+
+    @Test
+    fun cancelledCollectionWriteDoesNotBecomeAnError() = runTest {
+        val model = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        dataStore.writeError = CancellationException("Annulation")
+        model.onAction(PokemonAction.ToggleCaught)
+        model.onAction(PokemonAction.ToggleFavorite)
+        assertFalse(model.state.value.writeFailed)
+        assertFalse(model.state.value.caught)
+        assertFalse(model.state.value.favorite)
     }
 }

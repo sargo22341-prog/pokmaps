@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
@@ -32,6 +31,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObservePokemonUseCase
 import org.opensources.pokmaps.domain.usecase.UpdateCollectionUseCase
+import org.opensources.pokmaps.ui.common.CollectionWrites
 import org.opensources.pokmaps.ui.common.STOP_TIMEOUT_MS
 
 /** PV restants du Pokémon sauvage, en fraction de ses PV max (0 = 1 PV). */
@@ -73,6 +73,7 @@ data class CatchUiState(
 data class PokemonUiState(
     val loading: Boolean = true,
     val failed: Boolean = false,
+    val writeFailed: Boolean = false,
     val game: Game? = null,
     val details: PokemonDetails? = null,
     /** Calcul de capture avec la formule de la génération du jeu. */
@@ -150,12 +151,20 @@ class PokemonViewModel @Inject constructor(
 ) : ViewModel() {
     private val pokemonId: Int = checkNotNull(savedStateHandle[POKEMON_ID])
     private val catchInput = MutableStateFlow(CatchInput())
+    private val collectionWrites = CollectionWrites(viewModelScope)
     private val shiny = MutableStateFlow(false)
 
     val state: StateFlow<PokemonUiState> =
-        combine(observePokemon(pokemonId), observeCollection(), catchInput, shiny) { page, collection, input, shiny ->
+        combine(observePokemon(pokemonId), observeCollection(), catchInput, shiny, collectionWrites.failed) {
+                page,
+                collection,
+                input,
+                shiny,
+                writeFailed
+            ->
             PokemonUiState(
                 loading = false,
+                writeFailed = writeFailed,
                 game = page.game,
                 details = page.details,
                 catch = page.details?.takeIf { CaptureGeneration.from(page.game.generationId) != null }
@@ -206,12 +215,12 @@ class PokemonViewModel @Inject constructor(
     private fun toggleCaught() {
         val current = state.value
         val game = current.game ?: return
-        viewModelScope.launch { updateCollection.setCaught(game, pokemonId, !current.caught) }
+        collectionWrites.launch { updateCollection.setCaught(game, pokemonId, !current.caught) }
     }
 
     private fun toggleFavorite() {
         val favorite = state.value.favorite
-        viewModelScope.launch { updateCollection.setFavorite(pokemonId, !favorite) }
+        collectionWrites.launch { updateCollection.setFavorite(pokemonId, !favorite) }
     }
 
     /** Demande à la carte de surligner les lieux du Pokémon. */
