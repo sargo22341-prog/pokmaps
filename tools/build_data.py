@@ -21,6 +21,7 @@ from pathlib import Path
 from pokemaps_data.asset_manifest import write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, Game
+from pokemaps_data.hoenn_catalog import build_hoenn_catalog
 from pokemaps_data.maps import build_maps
 from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pokeapi import PokeApi
@@ -41,6 +42,7 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
     maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
     maps_only.add_argument(
         "--remake-fixed-only", action="store_true", help="exporter les Pokémon fixes Rouge Feu/Vert Feuille"
     )
@@ -70,6 +72,10 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.hoenn_content_only:
+        build_hoenn_catalog(args.cache, args.assets)
+        write_manifest(args.assets)
+        return 0
     if args.hoenn_fixed_only or args.remake_fixed_only:
         group = "firered-leafgreen" if args.remake_fixed_only else "hoenn"
         build_fixed_catalog(args.cache, args.assets, group)
@@ -91,6 +97,8 @@ def main() -> int:
         games = HOENN_MAP_GAMES if args.hoenn_maps_only else (FIRERED_LEAFGREEN,)
         build_gen3_maps(args.cache, args.assets / "maps", games)
         _map_catalogs(args.cache, args.assets, games)
+        if args.hoenn_maps_only:
+            build_hoenn_catalog(args.cache, args.assets)
         write_manifest(args.assets)
         return 0
 
@@ -106,6 +114,7 @@ def main() -> int:
     print(f"Données de l'application ({', '.join(game.version_group for game in GAMES)}) : {args.assets}")
     if not _build(api, args.cache, repos, args.assets, GAMES):
         return 1
+    build_hoenn_catalog(args.cache, args.assets)
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
     write_manifest(args.assets)

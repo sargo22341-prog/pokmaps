@@ -11,7 +11,7 @@ import org.opensources.pokmaps.domain.pokemon.MoveDetails
 import org.opensources.pokmaps.domain.pokemon.MoveEffect
 
 @Singleton
-class MoveRepository @Inject constructor(private val dao: MoveDao) {
+class MoveRepository @Inject constructor(private val dao: MoveDao, private val hoenn: HoennRepository) {
     /** Fiche de l'attaque dans le jeu, null si le jeu ne la connaît pas. */
     suspend fun details(game: Game, moveId: Int): MoveDetails? {
         val row = dao.move(moveId, game.versionGroupId) ?: return null
@@ -29,7 +29,8 @@ class MoveRepository @Inject constructor(private val dao: MoveDao) {
             accuracy = row.accuracy,
             pp = row.pp,
             effect = MoveEffect(row.effect, row.effectChance),
-            machine = machine
+            machine = machine,
+            contest = hoenn.content(game)?.moves?.get(moveId)
         )
     }
 }

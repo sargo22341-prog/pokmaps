@@ -53,6 +53,9 @@ fun MoveScreen(state: MoveUiState, onOpenItem: (String) -> Unit, modifier: Modif
     LazyColumn(modifier.fillMaxSize()) {
         item(key = "header") { MoveHeader(move) }
         section("effect", R.string.move_effect) { MoveEffectText(move.effect) }
+        move.contest?.let { contest ->
+            section("contest", R.string.contest_title) { ContestSection(contest) }
+        }
         move.machine?.let { machine ->
             section("machine", R.string.move_machine) {
                 SheetRow(

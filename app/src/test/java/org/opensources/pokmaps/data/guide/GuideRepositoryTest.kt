@@ -11,6 +11,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.PokedexDatabase
+import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.guide.GuideCategory
@@ -29,12 +30,17 @@ class GuideRepositoryTest {
             .build()
         try {
             val maps = MapRepository(database.mapDao())
-            val repository = GuideRepository(context, maps, PokedexRepository(database.pokedexDao()))
+            val repository =
+                GuideRepository(context, maps, PokedexRepository(database.pokedexDao()), HoennRepository(context))
             val expected = listOf(93, 90, 76, 72, 75, 113)
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
                 if (game.generationId == 3) {
                     checkGbaArticles(library)
+                    val itemIds = maps.index(game).items.map { it.identifier }.toSet()
+                    val itemLinks = library.articles.flatMap { it.paragraphs.flatten() }
+                        .mapNotNull { it.target as? GuideTarget.Item }
+                    assertTrue(itemLinks.all { it.identifier in itemIds })
                     checkFruitSprites(context, maps.catalog(game), game)
                     continue
                 }
@@ -67,7 +73,7 @@ class GuideRepositoryTest {
         val articles = library.articles.filter { it.achievementId == null }
         val hoenn = library.game.versionId in 7..9
         val prefix = if (hoenn) "hoenn-" else "remake-"
-        assertEquals(if (hoenn) 26 else 20, articles.size)
+        assertEquals(if (hoenn) 31 else 20, articles.size)
         assertEquals(articles.size, articles.map { it.id }.distinct().size)
         assertTrue(articles.all { it.id in setOf("breeding", "friendship") || it.id.startsWith(prefix) })
         assertTrue(articles.all { it.paragraphs.size >= 3 && it.sources.isNotEmpty() && it.title.isNotBlank() })
@@ -122,6 +128,7 @@ class GuideRepositoryTest {
             return
         }
         assertTrue(trees.isNotEmpty())
+        if (game.mapFamily == "ruby-sapphire-emerald") assertEquals(81, trees.size)
         trees.forEach { tree ->
             val fruit = requireNotNull(tree.fruit)
             assertEquals(

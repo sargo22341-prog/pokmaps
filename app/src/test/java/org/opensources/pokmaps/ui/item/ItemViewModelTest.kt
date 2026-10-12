@@ -14,6 +14,7 @@ import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.GameRepository
+import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
@@ -33,7 +34,7 @@ class ItemViewModelTest {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return ItemViewModel(
             SavedStateHandle(mapOf(ItemViewModel.ITEM to identifier)),
-            ObserveItemPageUseCase(games, MapRepository(FakeMapDao(failing))),
+            ObserveItemPageUseCase(games, MapRepository(FakeMapDao(failing)), HoennRepository { error("Hors Hoenn") }),
             requests
         )
     }
