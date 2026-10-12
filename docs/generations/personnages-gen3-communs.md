@@ -1,10 +1,10 @@
 # Personnages de génération 3 — état du socle de lecture
 
-La partie « Communs » de la phase 5 **reste ouverte**. Les équipes et revanches sont exportées dans
-`trainers.json` avec `--gen3-trainers-only`. L'export complet des personnages reste à construire.
-Les objets à position fixe sont maintenant exportés dans la base
-de l'aperçu avec `--gen3-items-only`. Les assets de l'application et son
-comportement restent ceux des phases précédentes.
+La phase 5 est terminée. Les équipes et revanches sont exportées dans `trainers.json` avec
+`--gen3-trainers-only`. Les personnages, équipes, offres et services des cinq versions sont intégrés
+à la base distribuée depuis les activations Hoenn et Remake 1G des 11 et 12 octobre 2026.
+Les catalogues versionnés `characters.json` conservent les objets fixes, leurs métadonnées et les scènes
+automatiques ; ils sont validés hors ligne. Les sections suivantes retracent la préparation de ces données.
 
 ## Lecteurs disponibles
 
@@ -92,10 +92,17 @@ les objets aléatoires de la Pyramide et le tuteur des capacités ultimes. Les c
 durant un don sont des actions `rename_pokemon` ; elles ne deviennent pas automatiquement un
 service d'Évaluateur de noms.
 
-## Travail restant dans « Communs »
+## Assemblage commun intégré
 
-- Assemblage des personnages avec leurs équipes et revanches déjà exportées, sans perdre les métadonnées.
-- Assemblage des conditions de présence et curation des autres variables de scénario dans `story_events.csv`.
+- `maps_characters_gen3.py` assemble les personnages et équipes dans la base et conserve les résultats
+  des scripts dans `characters.json` ; le catalogue préparatoire des dresseurs garde les métadonnées
+  complètes et les séries de revanches.
+- `maps_offers_gen3.py` traduit les conditions relues dans `story_events.csv` ; `maps_scenes_gen3.py`
+  conserve les conditions des scènes automatiques dans le catalogue distribué.
+
+Les jetons cachés restent conservés dans le catalogue des objets, sans calque Android dédié.
+Les décorations et objets personnalisés restent au catalogue pour leur interface de phase 8.
+Ces limites ne doivent pas être confondues avec un objet ordinaire absent ou une offre vide.
 
 ## Curation commune ajoutée
 

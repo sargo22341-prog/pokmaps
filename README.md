@@ -75,7 +75,7 @@ Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à
 Les cartes de Rubis, Saphir et Émeraude regroupent Hoenn et son monde sous-marin dans le sélecteur de niveaux.
 La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les remakes proposent
 Kanto et les Îles Sevii dans le menu des régions.
-Dans les neuf jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
+Dans les onze jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
 s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
 par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.
 Les maisons restent séparées, accessibles par leurs portes ; le Parc Safari réunit ainsi ses quatre zones.
@@ -98,7 +98,7 @@ La préparation Android de la troisième génération ajoute le filtre Plongée 
 la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
 Le calculateur GBA reproduit les quatre contrôles entiers et les sept nouvelles Balls, avec réglages de
 Plongée, de tours écoulés et d’espèce déjà capturée ; il exclut le Parc Safari et utilise un IV des PV moyen.
-Rubis, Saphir et Émeraude sont sélectionnables. Rouge Feu et Vert Feuille restent en préparation.
+Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille sont sélectionnables.
 
 La [documentation complète](docs/README.md) est organisée par fonctionnalité et génération.
 Le [catalogue de provenance des sprites](docs/donnees/sprites-pokemon.md) couvre les 1 025 espèces

@@ -508,16 +508,17 @@ avec `--gen3-trainers-only`. Les quatre emplacements d'attaques, IV, objets tenu
 rangs sautés ou répétés et conditions de progression sont conservés. Les règles de revanche de Hoenn
 et les conditions du Cherche VS sont contrôlées contre les moteurs épinglés. Le catalogue contient
 3 724 équipes, 632 séries de revanches et les liens aux événements des cartes. Les noms français,
-la présence et les offres des personnages restent à intégrer ; la partie « Communs » reste ouverte.
+la présence et les offres des personnages sont intégrés à la base distribuée depuis les activations
+Hoenn et Remake 1G décrites en phase 6. La partie « Communs » est terminée.
 
 Les lecteurs `pret_gen3_scripts.py`, `pret_gen3_conditions.py` et `pret_gen3_offers.py` sont également
 accessibles par `Gen3PretRepo.offers[version]`. Ils suivent les appels, les variables, les branches et
 les écritures possibles du C, et lisent les offres explicites, boutiques, échanges, tuteurs ordinaires
-et plages de baies. Les expressions et appels C encore à relire bloquent la certification d'export.
+et plages de baies. Une expression non résolue ou un appel C non relu bloque la certification d'export.
 La reprise corrige l'ordre des arguments de `giveitem_msg` des remakes, suit les scènes de victoire
 référencées par les commandes de combat et reconnaît les services de capacités de Rubis/Saphir.
-Le [bilan de la partie commune](generations/personnages-gen3-communs.md) détaille les garanties et le travail
-restant ; chaque case n'est cochée qu'après son intégration ou sa relecture, et sa validation complète.
+Le [bilan de la partie commune](generations/personnages-gen3-communs.md) détaille les garanties et les étapes
+d'intégration ; chaque case est cochée après sa relecture et sa validation.
 
 - [x] `pret_gen3_trainers.py` : équipes, attaques par défaut (calculées comme le moteur), objets tenus,
       combats doubles, toutes les équipes de revanche avec leur condition (table propre à chaque dépôt).
@@ -638,7 +639,7 @@ Domaine et données :
       Le schéma 14 existant suffit : aucune nouvelle table ni colonne pour la bascule ou les talents.
       Un test Python contrôle l’égalité des constantes ; `PokedexSchemaTest` passe sur la base versionnée
       et sur l’aperçu des cinq versions GBA régénéré explicitement.
-- [ ] Carte : menu des régions avec Hoenn, Kanto, Îles Sevii ; sélecteur d'étage pour le monde sous-marin et les
+- [x] Carte : menu des régions avec Hoenn, Kanto, Îles Sevii ; sélecteur d'étage pour le monde sous-marin et les
       marées ; performances mesurées sur la plus grande carte du monde (règle 3).
   - [x] Menu par région : Hoenn regroupe ses deux niveaux ; Kanto et les Îles Sevii restent séparés.
   - [x] Sélecteur : Surface / Sous l’eau à Hoenn ; marée haute / marée basse / salle de glace à la Grotte Tréfonds.
@@ -647,12 +648,13 @@ Domaine et données :
         (125,34 Mpx), 7 niveaux. Sur PC, Python/Pillow, parcours séquentiel des 828 tuiles WebP du niveau 6
         (2 189 970 octets) : médiane 0,616 ms, p95 0,770 ms, maximum 2,832 ms, total 503,7 ms.
         Mesure du 11 octobre 2026 ; chaque image est décodée puis fermée avant la suivante.
-  - [ ] Mesurer les temps de trame et la mémoire pendant zoom et déplacement sur Hoenn au téléphone.
-        Les cartes GBA sont versionnées, mais leurs jeux ne sont pas encore activés dans la base Room embarquée.
-        La mesure PC ci-dessus ne valide pas la fluidité du rendu Android ; la case principale reste ouverte.
-        Contrôles de cette passe : ktlint, absence de services Google, Lint, 342 tests JVM et APK debug réussis ;
-        inventaire des assets et limites de taille du code vérifiés. Avertissement de dépréciation Gradle
-        existant sur `Configuration.setVisible(boolean)` ; aucun avertissement Kotlin ni Android Lint.
+  - [x] Mesurer les temps de trame et la mémoire pendant zoom et déplacement sur Hoenn au téléphone.
+        Mesure du 12 octobre 2026 sur Pixel 6 Pro, Android 17 (API 37), APK debug distribuant les onze jeux :
+        après remise à zéro de `dumpsys gfxinfo`, quatre déplacements de 500 ms et un double toucher sur Hoenn
+        d’Émeraude : 137 trames, médiane 9 ms, p90 22 ms, p95 30 ms, p99 65 ms ; 8 trames en retard (5,84 %).
+        Après les gestes : PSS 236 524 Kio, RSS 405 744 Kio, swap 56 Kio (`dumpsys meminfo`).
+        Ces mesures ponctuelles de l’APK debug ne sont ni un benchmark release ni une garantie sur d’autres
+        appareils ; les retards observés sont conservés dans le bilan.
 
 Validation de cette passe (11 octobre 2026) : contrôles Android complets réussis (317 tests JVM),
 Ruff et inventaire des assets réussis, 419 tests Python ordinaires et 192 tests du pipeline réussis.
@@ -670,7 +672,7 @@ Intégration des jeux :
 - [x] Branche Remake 1G : **Rouge Feu/Vert Feuille**.
 - [x] Tests JVM : chaque ViewModel modifié teste vide et erreur ; `PokemapsJourneyTest` couvre un jeu de chaque
       branche ; `MapViewModelTest` couvre le passage Émeraude → Rouge Feu ; tests de capture GEN3.
-- [ ] Essai sur appareil ou émulateur (mémoire `emulator-for-device-checks`) : carte de Hoenn, Plongée, Îles
+- [x] Essai sur appareil ou émulateur (mémoire `emulator-for-device-checks`) : carte de Hoenn, Plongée, Îles
       Sevii, Pokédex régional et National, fiche, capture ; installation `-r` sans perte des collections.
 
 Activation Hoenn (11 octobre 2026) : les trois versions sont dans `GAMES`, avec leurs cartes,
@@ -710,6 +712,25 @@ Les anciennes attentes de neuf jeux et les insertions préparatoires des remakes
 à la base distribuée ; les attentes métier d’Or/Argent sont conservées.
 Aucun essai sur téléphone ou émulateur dans cette passe ; la case correspondante reste ouverte.
 L’avertissement AGP `Configuration.setVisible(boolean)` déjà documenté reste affiché.
+
+Clôture des phases 5 et 6 (12 octobre 2026) : essai sur Pixel 6 Pro sous Android 17, avec installation
+`adb install -r -d` réussie. Hoenn et son niveau sous-marin, Kanto et les Îles Sevii sont affichés et relus
+sur captures d’écran ; le changement Émeraude → Rouge Feu est essayé sur appareil.
+Le Pokédex d’Émeraude bascule de 202 à 386 espèces, celui de Rouge Feu de 151 à 386 ; la fiche d’Arcko
+affiche Engrais et le calculateur GBA avec Plongée, espèce déjà capturée et tours écoulés.
+Une seconde installation par-dessus conserve exactement l’empreinte SHA-256 du fichier DataStore :
+les préférences et collections restent intactes. Aucun effacement ni désinstallation.
+Les mesures Android de Hoenn figurent dans la case Carte ci-dessus. APK debug : 102 891 184 octets
+(98,12 Mio) ; dossier des cartes : 41 841 261 octets (39,90 Mio) ; objets Git : 51 515 Kio.
+Cette clôture modifie uniquement le plan, son bilan commun et les mentions obsolètes du README ;
+aucune régénération des assets ni modification du comportement de l’application.
+Contrôles de clôture : ktlint, absence de services Google, Lint et APK debug réussis ; les résultats
+des 347 tests JVM sont à jour (tâche Gradle `UP-TO-DATE`). Inventaire des 15 441 assets et cohérence
+de la base, Ruff et formatage Python réussis ; 445 tests ordinaires et 200 tests du pipeline réussis
+en une passe complète chacun. Le pipeline prend 542,54 s et n’accède pas au réseau.
+Les premiers lancements Gradle/pytest ont rencontré les restrictions d’accès au cache et aux fichiers
+temporaires du bac à sable ; leurs relances autorisées réussissent. La dépréciation AGP déjà documentée
+reste affichée. Aucun code source modifié : les limites de fonctions et fichiers source sont inchangées.
 
 ## Phase 7 — Guides, succès et outils
 
