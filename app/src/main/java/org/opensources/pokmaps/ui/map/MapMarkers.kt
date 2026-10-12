@@ -48,8 +48,8 @@ import org.opensources.pokmaps.ui.common.facilityIcon
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.ui.state.MapState
 
-// Les marqueurs sont dessinés à l'échelle de la carte : un pixel d'un sprite vaut un pixel Game Boy de la carte,
-// ils grandissent et rapetissent avec elle (un personnage occupe une case, comme dans le jeu).
+// Les marqueurs sont dessinés à l'échelle de la carte : un pixel d'un sprite vaut un pixel de la carte,
+// ils grandissent et rapetissent avec elle, en conservant les dimensions propres à chaque jeu.
 
 /** Taille à l'écran de `pixels` pixels de la carte, au zoom actuel. */
 @Composable
@@ -125,10 +125,10 @@ fun ObjectMarker(
             obj.kind == MapObjectKind.POKEMON && pokemonId != null ->
                 MapPokemon(mapState, pokemonId, obj.pokemonName, scale, obj.shiny)
 
-            sprite != null -> AssetImage(
+            sprite != null -> MapSprite(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),
-                contentDescription = null,
-                modifier = Modifier.size(mapPixels(mapState, PixelArt.MAP_SPRITE, scale))
+                contentDescription = obj.name,
+                pixelScale = (mapState.scale * scale).toFloat()
             )
 
             facility != null -> FacilityMarker(mapState, facility, obj.name, scale)
