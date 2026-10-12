@@ -74,6 +74,10 @@ Les sauvegardes de collection gardent le schéma JSON 1 et acceptent jusqu'à 38
 L'import vérifie les versions contre les jeux de la base embarquée, puis les espèces et formes contre le jeu.
 Les anciens fichiers, même sans champ `unown`, restent importables et fusionnent avec la collection existante.
 La fiche de Deoxys et ses sprites suivent la forme du jeu ; Morphéo présente ses quatre formes météorologiques.
+Les familles d’évolution excluent les espèces apparues après la génération du jeu choisi, sans se limiter au
+Pokédex régional. Les évolutions suivent les conditions du groupe de versions ; une espèce historiquement présente
+reste consultable même si son obtention exige un échange ou un événement externe. Après un changement de jeu,
+une espèce qui n’existe pas encore est indiquée comme absente ; un profil incomplet provoque une erreur de lecture.
 Les cartes, rencontres et offres de distribution portent la mention « événement externe ».
 
 Dans les Réglages, renseigner le nom d'utilisateur et la **clé API web** RetroAchievements, enregistrer puis

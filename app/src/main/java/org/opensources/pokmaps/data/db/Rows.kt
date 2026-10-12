@@ -28,7 +28,8 @@ data class PokemonRow(
     val growthRate: String,
     val evolutionChainId: Int,
     val genderRate: Int,
-    val hatchCounter: Int
+    val hatchCounter: Int,
+    val generationId: Int
 )
 
 data class StatRow(val identifier: String, val name: String, val value: Int)
