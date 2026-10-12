@@ -19,6 +19,12 @@ _EXPORTS = _ROOT / "tools/data/retroachievements"
 _GBA = {7: (790, "ruby"), 8: (791, "sapphire"), 9: (668, "emerald"), 10: (515, "firered"), 11: (788, "leafgreen")}
 
 
+def test_snapshot_writer_uses_utf8_and_lf_on_every_platform(tmp_path: Path) -> None:
+    path = tmp_path / "snapshot.json"
+    export_retroachievements._write(path, {"title": "Pokémon"})
+    assert path.read_bytes() == '{\n  "title": "Pokémon"\n}\n'.encode()
+
+
 def test_public_inventory_is_complete_and_contains_no_account_data() -> None:
     index = json.loads((_EXPORTS / "index.json").read_text(encoding="utf-8"))
     assert len(index["games"]) == 20
