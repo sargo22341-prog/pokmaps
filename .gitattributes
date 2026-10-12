@@ -5,3 +5,4 @@
 /app/src/main/assets/assets.sha256 text eol=lf
 /app/src/main/assets/maps/**/*.json text eol=lf
 /app/src/main/assets/maps/**/*.tsv text eol=lf
+/tools/data/retroachievements/*.json text eol=lf

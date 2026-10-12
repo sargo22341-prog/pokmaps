@@ -630,6 +630,8 @@ notes différentes de celles du tag, elles sont conservées pour la release suiv
 
 Les workflows CI et release utilisent les assets du checkout : aucune génération, aucun cache de contenu
 et aucun téléchargement de sources Pokémon. Le résumé indique la taille exacte de l'APK produit.
+Les instantanés JSON RetroAchievements sont exportés et conservés en UTF-8 avec des fins de ligne LF,
+afin que leurs empreintes SHA-256 restent identiques sur Windows et Linux.
 Le workflow manuel `data-pipeline.yml` génère et teste séparément les données depuis les sources épinglées,
 avec cache ; il ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
 

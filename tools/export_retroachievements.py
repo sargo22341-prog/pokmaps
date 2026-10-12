@@ -106,7 +106,7 @@ def _valid_achievement(row: dict[str, Any]) -> bool:
 
 
 def _write(path: Path, content: dict[str, Any]) -> None:
-    path.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def export(output: Path, key: str) -> None:
