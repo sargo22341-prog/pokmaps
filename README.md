@@ -464,6 +464,12 @@ ruff check . && ruff format --check .   # style Python
 python -m pytest                        # tests sans cache ni téléchargement de contenu
 ```
 
+Les tests d’architecture contrôlent les limites de 600 lignes par fichier et de 60 lignes par fonction
+(PSI du compilateur Kotlin et AST Python), ainsi que les imports des couches, y compris le domaine Hoenn.
+Le compilateur Kotlin est une dépendance de test uniquement, pour analyser la syntaxe sans heuristique textuelle.
+Les contrôles Ruff des caractères ambigus restent actifs ; seuls l’apostrophe typographique, le tiret demi-cadratin,
+le signe de multiplication et le signe moins sont autorisés pour les textes français et les formules.
+
 `./gradlew checkAssets` vérifie chaque fichier de l'inventaire et son SHA-256 ; ce contrôle précède
 la compilation et les tests JVM. Un fichier absent ou modifié provoque une erreur qui nomme le fichier.
 `python tools/check_assets.py` vérifie aussi les références aux images et la cohérence de la base.
