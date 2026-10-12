@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.ui.pokedex
 
+import java.io.IOException
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -186,5 +188,41 @@ class PokedexViewModelTest {
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { emptyModel.state.collect {} }
         assertFalse(emptyModel.state.value.failed)
         assertEquals(0, emptyModel.state.value.total)
+    }
+
+    @Test
+    fun failedCollectionWritesKeepPreviousValuesAndCanBeRetried() = runTest {
+        val model = viewModel
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        dataStore.writeError = IOException("Écriture impossible")
+        model.onAction(PokedexAction.ToggleCaught(model.state.value.entries.first()))
+        assertTrue(model.state.value.writeFailed)
+        assertFalse(model.state.value.entries.first().caught)
+        assertFalse(model.state.value.failed)
+        dataStore.writeError = null
+        model.onAction(PokedexAction.ToggleCaught(model.state.value.entries.first()))
+        assertTrue(model.state.value.entries.first().caught)
+        assertFalse(model.state.value.writeFailed)
+        dataStore.writeError = IOException("Écriture impossible")
+        model.onAction(PokedexAction.ToggleFavorite(model.state.value.entries.first()))
+        assertTrue(model.state.value.writeFailed)
+        assertFalse(model.state.value.entries.first().favorite)
+        assertTrue(model.state.value.entries.first().caught)
+        dataStore.writeError = null
+        model.onAction(PokedexAction.ToggleFavorite(model.state.value.entries.first()))
+        assertTrue(model.state.value.entries.first().favorite)
+        assertFalse(model.state.value.writeFailed)
+    }
+
+    @Test
+    fun cancelledCollectionWriteDoesNotBecomeAnError() = runTest {
+        val model = viewModel
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        dataStore.writeError = CancellationException("Annulation")
+        model.onAction(PokedexAction.ToggleCaught(model.state.value.entries.first()))
+        model.onAction(PokedexAction.ToggleFavorite(model.state.value.entries.first()))
+        assertFalse(model.state.value.writeFailed)
+        assertFalse(model.state.value.entries.first().caught)
+        assertFalse(model.state.value.entries.first().favorite)
     }
 }

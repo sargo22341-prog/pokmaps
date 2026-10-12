@@ -16,6 +16,9 @@ Réglages, « Captures comptées » fait compter un Pokémon capturé pour le je
 les jeux ; chaque capture reste mémorisée dans le jeu où elle a été cochée, si bien que changer ce réglage ne perd
 rien.
 
+Dans le Pokédex et les fiches Pokémon, un échec d’enregistrement d’une capture ou d’un favori affiche un message.
+La collection conserve ses valeurs précédentes ; toucher à nouveau le bouton permet de réessayer.
+
 L'onglet « Guides » rassemble les étapes de la soluce, quêtes annexes, astuces, bugs et succès du jeu choisi.
 Les guides se lisent sans case de fin de lecture ni liens de sources. Dojo et fossiles, Lugia et Ho-Oh ont chacun
 leur article. Or, Argent et Cristal ajoutent les événements hebdomadaires, un vérificateur de reproduction
@@ -108,6 +111,8 @@ caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`,
 Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les onze bibliothèques
 contre la base générée et vérifie leurs liens et nombres de succès. Les soluces sont des textes originaux ;
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
+Les fournisseurs de guides sont choisis par branche avant leur construction ; seuls les succès du jeu choisi
+sont construits. Les progressions et captures restent séparées des définitions éditoriales.
 
 Les ensembles publics RetroAchievements des générations 1 à 5 sont archivés dans
 [`tools/data/retroachievements/`](tools/data/retroachievements/README.md), avec inventaire SHA-256 et
@@ -147,6 +152,8 @@ Le filtre « Baies et Noigrumes » affiche les fruits correspondant à chaque ar
 Le Pokédex des formes capturées de Zarbi est accessible depuis sa fiche.
 Les onglets d'attaques par œuf et par tuteur apparaissent seulement si la fiche contient des attaques correspondantes.
 Lors d'un changement de jeu, la carte conserve le lieu et la surbrillance au sein d'une même famille de cartes.
+Une nouvelle sélection annule le chargement précédent. Chaque résultat reste lié à sa demande et au catalogue
+du jeu ; un ancien chargement ne peut pas remplacer le lieu ou la fiche actuellement sélectionnés.
 La troisième génération propose le filtre Plongée et ses marqueurs sous-marins,
 la pêche de Barpau et les 28 formes de Zarbi pour Rouge Feu/Vert Feuille ; Hoenn ne propose pas ce suivi de formes.
 Le calculateur GBA reproduit les quatre contrôles entiers et les sept nouvelles Balls, avec réglages de

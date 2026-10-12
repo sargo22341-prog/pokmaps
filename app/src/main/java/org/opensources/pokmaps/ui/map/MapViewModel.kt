@@ -149,6 +149,7 @@ class MapViewModel @Inject constructor(
     private suspend fun followCatalog() {
         observeCatalog().catch { session.update { it.copy(failed = true) } }.collectLatest { gameMaps ->
             readyCatalog.value = null
+            selection.invalidateLoads()
             awaitScreen()
             val previous = session.loaded.value
             // Changement de version : on reste là où on est si la carte existe aussi dans le nouveau jeu
