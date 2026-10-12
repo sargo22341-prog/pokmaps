@@ -30,6 +30,14 @@ reliées au Pokédex et à la carte.
 Les sprites et leur réglage d'animation sont réutilisés. Les chapitres proposent les succès liés, en signalant
 les objectifs manquables avant de poursuivre.
 
+Les cinq jeux GBA proposent les outils de reproduction et de bonheur dans « Guides » → « Astuces ».
+La reproduction utilise les parents du Pokédex National, six IV de 0 à 31, les talents possibles du bébé,
+les attaques transmises dans l’ordre du moteur et les objets tenus : encens, Ballon Lumière et Pierre Stase.
+Les IV affichés sont les valeurs parentales possibles, avec le tirage aléatoire restant ; aucun œuf précis
+n’est prédit. Émeraude applique la Pierre Stase à la femelle, ou à Métamorph en priorité, et ajoute Électacle
+à Pichu avec un Ballon Lumière. Les bonus de bonheur suivent le Grelot Zen, la Luxe Ball et le lieu de rencontre ;
+les baies réduisant les EV sont propres à Émeraude et le massage de Nina aux remakes.
+
 Les 519 succès officiels sont un instantané traduit en français du 8 octobre 2026 : Rouge (93), Bleu (90),
 Jaune (76), Or (72), Argent (75) et Cristal (113). Sans connexion configurée, les cases et le compteur suivent les
 validations manuelles locales. Avec une connexion configurée, seuls le compteur RetroAchievements et les succès
@@ -64,10 +72,11 @@ même Pokémon. Les autres réglages et les identifiants RetroAchievements sont 
 Android choisit le fichier, sans permission de stockage générale.
 
 Pour ajouter ou retirer un guide : modifier les définitions de `data/guide/` et les textes français de
-`res/values/strings.xml`. Les listes de succès sont séparées par jeu, avec identifiant officiel, points,
+`res/values/strings.xml` ou un fichier de ressources dédié, comme `strings_guides_gen3.xml` pour les outils GBA.
+Les listes de succès sont séparées par jeu, avec identifiant officiel, points,
 caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`, `[[place:route-1|Route 1]]`,
 `[[item:potion|Potion]]` et `[[character:oaks-lab:Prof. Chen|Professeur Chen]]` sont validées au chargement.
-Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les six bibliothèques
+Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les onze bibliothèques
 contre la base générée et vérifie leurs liens et nombres de succès. Les soluces sont des textes originaux ;
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
 
@@ -505,7 +514,8 @@ La génération complète écrit les catalogues `characters.json` de Rubis/Saphi
 personnages par version, objets fixes et conditions des scènes automatiques, avec leur commit source.
 Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
 personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
-Les guides et succès GBA relèvent de la phase 7 ; les bibliothèques actuelles couvrent les six anciens jeux.
+Les bibliothèques couvrent les onze jeux : les cinq jeux GBA proposent les outils de reproduction et de bonheur.
+Leurs soluces, autres articles et succès restent prévus dans la suite de la phase 7.
 
 Le même export intègre les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.

@@ -13,7 +13,10 @@ enum class FriendshipEvent(val low: Int, val medium: Int, val high: Int) {
     ENERGY_ROOT(-10, -10, -15),
     REVIVAL_HERB(-15, -15, -20),
     GROOMING(3, 3, 1),
-    LEVEL_AT_CAPTURE_PLACE(10, 6, 4);
+    LEVEL_AT_CAPTURE_PLACE(10, 6, 4),
+    WALKING(1, 1, 1),
+    MASSAGE(3, 3, 3),
+    EV_BERRY(10, 5, 2);
 
     fun delta(value: Int): Int {
         require(value in 0..255)

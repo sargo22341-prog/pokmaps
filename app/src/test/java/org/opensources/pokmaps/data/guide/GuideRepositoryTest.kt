@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class GuideRepositoryTest {
     @Test
-    fun sixLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
+    fun elevenLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val database = Room.databaseBuilder(context, PokedexDatabase::class.java, "guides-test.db")
             .createFromFile(File(requireNotNull(System.getProperty("pokemaps.database"))))
@@ -33,8 +33,9 @@ class GuideRepositoryTest {
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
                 if (game.generationId == 3) {
-                    // Les bibliothèques GBA sont prévues en phase 7 ; elles doivent rester lisibles et vides.
-                    assertTrue(library.articles.isEmpty())
+                    // Les soluces et succès GBA restent séparés de cette première passe des outils.
+                    assertEquals(setOf("breeding", "friendship"), library.articles.map { it.id }.toSet())
+                    assertTrue(library.articles.all { it.paragraphs.isNotEmpty() && it.sources.isNotEmpty() })
                     checkFruitSprites(context, maps.catalog(game), game)
                     continue
                 }

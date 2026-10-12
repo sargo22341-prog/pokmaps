@@ -25,10 +25,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlin.math.roundToInt
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.guide.FriendshipEvent
+import org.opensources.pokmaps.domain.guide.FriendshipRules
 
 @Composable
-internal fun FriendshipRoute(crystal: Boolean, viewModel: FriendshipViewModel = hiltViewModel()) {
-    LaunchedEffect(crystal) { viewModel.onAction(FriendshipAction.Crystal(crystal)) }
+internal fun FriendshipRoute(rules: FriendshipRules, viewModel: FriendshipViewModel = hiltViewModel()) {
+    LaunchedEffect(rules) { viewModel.onAction(FriendshipAction.Rules(rules)) }
     val state by viewModel.state.collectAsStateWithLifecycle()
     FriendshipTool(state, viewModel::onAction)
 }
@@ -38,7 +39,10 @@ internal fun FriendshipTool(state: FriendshipUiState, onAction: (FriendshipActio
     var expanded by remember { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.friendship_tool), style = MaterialTheme.typography.titleLarge)
-        Text(stringResource(R.string.friendship_simulation), style = MaterialTheme.typography.bodySmall)
+        Text(
+            stringResource(if (state.rules.gba) R.string.friendship_gba_simulation else R.string.friendship_simulation),
+            style = MaterialTheme.typography.bodySmall
+        )
         Text(stringResource(R.string.friendship_value, state.value))
         Slider(
             value = state.value.toFloat(),
@@ -70,7 +74,11 @@ internal fun FriendshipTool(state: FriendshipUiState, onAction: (FriendshipActio
             style = MaterialTheme.typography.titleMedium
         )
         Text(stringResource(R.string.friendship_bands, state.event.low, state.event.medium, state.event.high))
-        Text(stringResource(R.string.friendship_random), style = MaterialTheme.typography.bodySmall)
+        if (state.rules.gba) GbaFriendshipOptions(state, onAction)
+        Text(
+            stringResource(if (state.rules.gba) R.string.friendship_gba_random else R.string.friendship_random),
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 }
 
@@ -88,4 +96,7 @@ private fun FriendshipEvent.label(): Int = when (this) {
     FriendshipEvent.REVIVAL_HERB -> R.string.friendship_herb
     FriendshipEvent.GROOMING -> R.string.friendship_grooming
     FriendshipEvent.LEVEL_AT_CAPTURE_PLACE -> R.string.friendship_home
+    FriendshipEvent.WALKING -> R.string.friendship_walking
+    FriendshipEvent.MASSAGE -> R.string.friendship_massage
+    FriendshipEvent.EV_BERRY -> R.string.friendship_ev_berry
 }

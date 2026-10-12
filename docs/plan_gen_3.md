@@ -741,14 +741,24 @@ Communs :
 
 - [ ] Textes dans des fichiers de ressources séparés (`strings.xml` dépasse 3 600 lignes) ; balises
       `[[pokemon:…]]`, `[[place:…]]` validées par `GuideRepositoryTest` (qui charge alors 11 bibliothèques).
-- [ ] Sources éditoriales dans `GuideDefinition.kt` : remplacer `KANTO_VERSIONS`/`JOHTO_VERSIONS` par des
+- [x] Sources éditoriales dans `GuideDefinition.kt` : remplacer `KANTO_VERSIONS`/`JOHTO_VERSIONS` par des
       ensembles nommés par jeu.
+      Ensembles Rouge/Bleu/Jaune, Or/Argent/Cristal, Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille ;
+      les deux articles d’outils GBA citent les fichiers pret aux commits épinglés.
 - [ ] Succès RetroAchievements des cinq jeux : instantané traduit, identifiants officiels relevés sur le site
       (ne pas les deviner), `RetroGames.ids`, `CaptureGoals`, `unownGoal` et objectif de 28 formes.
 - [ ] Errants : `Roamers` par jeu (routes, espèces, dépendance à la version ou au starter) et réglages.
-- [ ] Reproduction de la 3e génération : IV au lieu des DV, talents, CT du père ; `BreedingUseCase` ne doit plus
+- [x] Reproduction de la 3e génération : IV au lieu des DV, talents, CT du père ; `BreedingUseCase` ne doit plus
       exiger la génération 2.
-- [ ] Bonheur de la 3e génération : barème propre, à la place du paramètre `versionId == 6`.
+      Parents du National (386 espèces), six IV de 0 à 31 et compatibilité sans blocage par DV ;
+      attaques par œuf, CT/CS du père puis niveaux communs, dans l’ordre des passes du moteur.
+      Encens Mer/Doux, alternatives d’Illumise et Électacle de Pichu avec un Ballon Lumière dans Émeraude.
+      Les talents possibles du bébé sont affichés, sans transmission du talent parental.
+      Les valeurs d’IV parentales et le tirage aléatoire restant sont expliqués ; aucun œuf précis n’est prédit.
+- [x] Bonheur de la 3e génération : barème propre, à la place du paramètre `versionId == 6`.
+      Règles par groupe de jeux ; Grelot Zen arrondi avant les bonus de Luxe Ball et de lieu de rencontre.
+      Marche tous les 128 pas (tirage réussi), baies réduisant les EV seulement dans Émeraude,
+      massage de Nina seulement dans les remakes ; les événements et bonus se réinitialisent au changement de règles.
 
 Branche Hoenn :
 
@@ -756,12 +766,26 @@ Branche Hoenn :
 - [ ] Événements quotidiens (Île Mirage, marées, loterie, Maison Piège) à la place des événements
       hebdomadaires de Johto.
 - [ ] `CaptureGoals` : Pokédex de Hoenn, choix exclusifs (starter, fossiles Lilia/Anorith, Kecleon…).
-- [ ] Pierre Stase (Émeraude) dans la reproduction.
+- [x] Pierre Stase (Émeraude) dans la reproduction.
+      Objet tenu sélectionnable ; effet réservé à la femelle ou à Métamorph, prioritaire s’il est présent.
+      Environ 50 % de transmission imposée de la nature, sinon tirage aléatoire (environ 52 % de même nature).
+      Aucun effet dans Rubis/Saphir ni Rouge Feu/Vert Feuille.
 
 Branche Remake 1G :
 
 - [ ] Soluces originales de Kanto de Rouge Feu/Vert Feuille et des Îles Sevii, quêtes annexes, astuces, bugs.
 - [ ] `CaptureGoals` : Pokédex de Kanto puis National, choix exclusifs (starter, fossiles, Kicklee/Tygnon…).
+
+Première passe de phase 7 (12 octobre 2026) : quatre tâches terminées, avec deux articles d’outils GBA
+dans un fichier de ressources dédié. `GuideRepositoryTest` charge les onze bibliothèques ; les six anciennes
+conservent leurs 519 succès. Contrôles Android complets réussis : ktlint, absence de services Google, Lint,
+363 tests JVM (dont Compose et Room) et APK debug ; validation des assets et limites du code réussies.
+APK : 102 891 274 octets (98,12 Mio) ; cartes : 41 841 493 octets (39,90 Mio) ; objets Git : 55 539 Kio.
+Aucune génération ni modification du pipeline Python ; Ruff, pytest et essais sur téléphone non lancés.
+Les erreurs initiales de style, de disposition des composants dans les tests et de ressources Lint sont corrigées.
+L’accès au cache Gradle a nécessité une relance autorisée ; un verrou Windows entre deux contrôles a nécessité
+l’arrêt du précédent lancement puis une relance seule. La dépréciation AGP déjà documentée reste affichée.
+Les règles sont relues dans les sources pret locales épinglées ; leur lecture web était indisponible.
 
 ## Phase 8 — Contenus propres à Hoenn : baies, concours, Pokéblocs, décorations
 

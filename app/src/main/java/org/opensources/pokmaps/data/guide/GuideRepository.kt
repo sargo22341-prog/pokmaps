@@ -23,11 +23,12 @@ class GuideRepository @Inject constructor(
 ) {
     suspend fun library(game: Game): GuideLibrary = withContext(Dispatchers.IO) {
         val catalog = maps.catalog(game)
-        val entries = pokedex.pokedex(game)
+        val entries = pokedex.pokedex(game, pokedex.catalogs(game).last().id)
         val pokemonIds = entries.map { it.pokemonId }.toSet()
         val index = maps.index(game)
         val mentions = GuideMentions(entries, catalog, index)
-        val definitions = kantoGuides() + johtoGuides() + sideGuides() + tipGuides() + achievementGuides()
+        val definitions =
+            kantoGuides() + johtoGuides() + sideGuides() + tipGuides() + gbaToolGuides() + achievementGuides()
         val selected = definitions.filter { game.versionId in it.versions }
         val articles = selected.map { definition ->
             require(definition.pokemonId in pokemonIds) { "Sprite absent : ${definition.id}" }

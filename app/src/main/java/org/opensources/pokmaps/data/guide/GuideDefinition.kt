@@ -20,7 +20,10 @@ internal data class GuideDefinition(
     val shiny: Boolean = false
 )
 
-internal val KANTO_VERSIONS = setOf(1, 2, 3)
-internal val JOHTO_VERSIONS = setOf(4, 5, 6)
+internal val RED_BLUE_YELLOW_VERSIONS = setOf(1, 2, 3)
+internal val GOLD_SILVER_CRYSTAL_VERSIONS = setOf(4, 5, 6)
+internal val RUBY_SAPPHIRE_VERSIONS = setOf(7, 8)
+internal val EMERALD_VERSIONS = setOf(9)
+internal val FIRERED_LEAFGREEN_VERSIONS = setOf(10, 11)
 internal const val KANTO_SOURCE = "https://www.eternia.fr/dossier/pokemon-version-rouge-pokemon-version-bleue"
 internal const val JOHTO_SOURCE = "https://www.eternia.fr/dossier/pokemon-version-or-pokemon-version-argent"

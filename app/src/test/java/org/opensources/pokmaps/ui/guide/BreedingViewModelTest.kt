@@ -130,6 +130,31 @@ class BreedingViewModelTest {
         assertEquals(2, model.state.value.secondId)
         assertEquals(ParentSex.MALE, model.state.value.second.sex)
     }
+
+    @Test
+    fun gbaUsesIvsAndEverstoneAndChangingGameClearsParentValues() = runTest {
+        val tools = MemoryBreeding()
+        tools.catalog.value = tools.catalog.value.copy(game = FakeGameDao.EMERALD)
+        val model = BreedingViewModel(tools)
+        model.onAction(BreedingAction.Species(true, 1))
+        model.onAction(
+            BreedingAction.Values(
+                true,
+                ParentValues(
+                    ParentSex.FEMALE,
+                    item = org.opensources.pokmaps.domain.guide.BreedingItem.EVERSTONE,
+                    ivs = List(6) { 31 }
+                )
+            )
+        )
+        assertTrue(model.state.value.gba)
+        assertEquals(0, model.state.value.natureParent)
+        assertEquals(List(6) { 31 }, model.state.value.first.ivs)
+        tools.catalog.value = tools.catalog.value.copy(game = FakeGameDao.FIRERED)
+        assertFalse(model.state.value.firstSelected)
+        assertEquals(List<Int?>(6) { null }, model.state.value.first.ivs)
+        assertEquals(null, model.state.value.natureParent)
+    }
 }
 
 private class MemoryBreeding : BreedingTools {
@@ -162,7 +187,8 @@ private class MemoryBreeding : BreedingTools {
             } else {
                 breedingPokemon(secondId)
             },
-            listOf(breedingPokemon(1))
+            listOf(breedingPokemon(1)),
+            game.generationId
         )
     }
 }

@@ -11,7 +11,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_start_title,
         R.string.guide_johto_start_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         155,
         listOf(JOHTO_SOURCE)
     ),
@@ -20,7 +20,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_violet_title,
         R.string.guide_johto_violet_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         74,
         listOf(JOHTO_SOURCE)
     ),
@@ -29,7 +29,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_azalea_title,
         R.string.guide_johto_azalea_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         214,
         listOf(JOHTO_SOURCE)
     ),
@@ -38,7 +38,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_goldenrod_title,
         R.string.guide_johto_goldenrod_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         66,
         listOf(JOHTO_SOURCE)
     ),
@@ -47,7 +47,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_ecruteak_title,
         R.string.guide_johto_ecruteak_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         185,
         listOf(JOHTO_SOURCE)
     ),
@@ -56,7 +56,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_coast_title,
         R.string.guide_johto_coast_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         170,
         listOf(JOHTO_SOURCE)
     ),
@@ -65,7 +65,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_mahogany_title,
         R.string.guide_johto_mahogany_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         130,
         listOf(JOHTO_SOURCE),
         shiny = true
@@ -75,7 +75,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_radio_title,
         R.string.guide_johto_radio_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         95,
         listOf(JOHTO_SOURCE)
     ),
@@ -84,7 +84,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_blackthorn_title,
         R.string.guide_johto_blackthorn_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         220,
         listOf(JOHTO_SOURCE)
     ),
@@ -93,7 +93,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_league_title,
         R.string.guide_johto_league_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         131,
         listOf(JOHTO_SOURCE)
     ),
@@ -102,7 +102,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_kanto_title,
         R.string.guide_johto_kanto_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         143,
         listOf(JOHTO_SOURCE)
     ),
@@ -111,7 +111,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_red_title,
         R.string.guide_johto_red_text,
         GuideCategory.WALKTHROUGH,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         246,
         listOf(JOHTO_SOURCE)
     ),
@@ -120,7 +120,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_roamers_title,
         R.string.guide_johto_roamers_text,
         GuideCategory.SIDE_QUEST,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         243,
         listOf(JOHTO_SOURCE)
     ),
@@ -129,7 +129,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_johto_legends_title,
         R.string.guide_johto_legends_text,
         GuideCategory.SIDE_QUEST,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         249,
         listOf(JOHTO_SOURCE)
     ),
@@ -138,7 +138,7 @@ private val DEFINITIONS = listOf(
         R.string.guide_hooh_title,
         R.string.guide_hooh_text,
         GuideCategory.SIDE_QUEST,
-        JOHTO_VERSIONS,
+        GOLD_SILVER_CRYSTAL_VERSIONS,
         250,
         listOf(JOHTO_SOURCE)
     ),

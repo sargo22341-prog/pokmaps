@@ -4,15 +4,32 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.opensources.pokmaps.domain.guide.FriendshipEvent
+import org.opensources.pokmaps.domain.guide.FriendshipRules
 
 class FriendshipViewModelTest {
     @Test
+    fun changingBranchDropsUnavailableEventsAndBonuses() {
+        val model = FriendshipViewModel()
+        model.onAction(FriendshipAction.Rules(FriendshipRules.EMERALD))
+        model.onAction(FriendshipAction.Event(FriendshipEvent.EV_BERRY))
+        model.onAction(FriendshipAction.SootheBell(true))
+        model.onAction(FriendshipAction.LuxuryBall(true))
+        model.onAction(FriendshipAction.CapturePlace(true))
+        assertEquals(87, model.state.value.result)
+        model.onAction(FriendshipAction.Rules(FriendshipRules.FIRERED_LEAFGREEN))
+        assertEquals(FriendshipEvent.LEVEL, model.state.value.event)
+        assertEquals(75, model.state.value.result)
+        model.onAction(FriendshipAction.Event(FriendshipEvent.EV_BERRY))
+        assertEquals(FriendshipEvent.LEVEL, model.state.value.event)
+    }
+
+    @Test
     fun crystalSpecificEventCannotLeakIntoGoldAndSilver() {
         val model = FriendshipViewModel()
-        model.onAction(FriendshipAction.Crystal(true))
+        model.onAction(FriendshipAction.Rules(FriendshipRules.CRYSTAL))
         model.onAction(FriendshipAction.Event(FriendshipEvent.LEVEL_AT_CAPTURE_PLACE))
         assertEquals(FriendshipEvent.LEVEL_AT_CAPTURE_PLACE, model.state.value.event)
-        model.onAction(FriendshipAction.Crystal(false))
+        model.onAction(FriendshipAction.Rules(FriendshipRules.GOLD_SILVER))
         assertEquals(FriendshipEvent.LEVEL, model.state.value.event)
         assertFalse(FriendshipEvent.LEVEL_AT_CAPTURE_PLACE in model.state.value.events)
     }
