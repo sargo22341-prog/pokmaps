@@ -83,7 +83,11 @@ internal class MapOverlayRenderer {
             val always = warp.mapId in zoneParts
             drawMarker(state, "${MapMarkerIds.WARP}:${warp.id}", warp.x, warp.y, !always, 2f) {
                 val index = state.catalog.connectionsOf(state.map.id).indexOfFirst { warp.id in it.warpIds }
-                WarpMarker(state.mapState, alwaysVisible = always || index >= 0, color = passageColor(index))
+                if (state.catalog.maps[warp.targetMapId]?.identifier == "route130-mirage-island") {
+                    MirageIslandMarker(state.mapState, alwaysVisible = always)
+                } else {
+                    WarpMarker(state.mapState, alwaysVisible = always || index >= 0, color = passageColor(index))
+                }
             }
         }
     }

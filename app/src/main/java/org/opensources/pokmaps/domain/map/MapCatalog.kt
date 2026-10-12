@@ -106,13 +106,16 @@ data class MapCatalog(
     val spots: Map<Int, List<MapSpot>> = emptyMap()
 ) {
     val worlds: List<MapInfo> = maps.values.filter { it.isDisplayable && isWorld(it.id) }.sortedBy { it.id }
-    val regionWorlds: List<MapInfo> = worlds.filter { it.identifier != "hoenn-underwater" }
+    val regionWorlds: List<MapInfo> = MapDestinations.menu(worlds, maps.values)
 
-    fun regionWorldOf(mapId: Int): MapInfo? = worldOf(mapId)?.let { world ->
-        if (world.identifier == "hoenn-underwater") mapByIdentifier("hoenn") else world
-    }
+    fun regionWorldOf(mapId: Int): MapInfo? = MapDestinations.eventOf(maps[mapId], regionWorlds)
+        ?: worldOf(mapId)?.let { world ->
+            if (world.identifier == "hoenn-underwater") mapByIdentifier("hoenn") else world
+        }
 
-    val defaultWorld: MapInfo? = regionWorlds.firstOrNull()
+    val defaultWorld: MapInfo? = worlds.firstOrNull {
+        it.identifier == MapDestinations.startRegion(versionGroupIdentifier)
+    } ?: worlds.firstOrNull { it.identifier != "hoenn-underwater" }
 
     fun isWorld(mapId: Int): Boolean = maps[mapId]?.isWorld == true
 

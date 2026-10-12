@@ -5,10 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -76,6 +78,21 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false, color: Color 
                 .background(color.copy(alpha = 0.85f), CircleShape)
                 .border(dot / 7, Color.White, CircleShape)
         )
+    }
+}
+
+/** Accès au layout conditionnel du Chenal 130. */
+@Composable
+internal fun MirageIslandMarker(mapState: MapState, alwaysVisible: Boolean) {
+    if (!alwaysVisible && !visibleAtScale(mapState)) return
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            stringResource(R.string.map_mirage_island),
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)),
+            style = MaterialTheme.typography.labelSmall
+        )
+        WarpMarker(mapState, alwaysVisible = true)
     }
 }
 
