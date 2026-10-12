@@ -947,29 +947,84 @@ l’en-tête et le marqueur restent inchangés. La dépréciation AGP déjà doc
 
 ## Contrôle final : ce qui pourrait être oublié
 
-Les cases ouvertes ci-dessous désignent un contrôle exhaustif ou un essai réel encore non certifié.
-Les contrôles automatisés et l’échantillon visuel réalisés en phase 9 sont décrits dans sa clôture.
+Les validations ci-dessous reposent sur les assets versionnés, les sources pret épinglées
+et les tests Python/JVM. RetroAchievements est vérifié exclusivement hors ligne, à la demande
+de l’utilisateur ; aucune synchronisation réseau réelle n’est revendiquée.
 
 Liste relue à la fin, une fois toutes les phases cochées :
 
 - [x] Plus aucun `generationId >= 2`, `== 2`, `1..6`, `4..6`, `251`, `26` restant sans justification
       (`rg` sur `app/src/main/java` : limites de Johto, identifiants d’espèces et jaquettes par version).
-- [ ] Aucune méthode de rencontre, méthode d'apprentissage, classe de dresseur, drapeau ou variable de scénario
+- [x] Aucune méthode de rencontre, méthode d'apprentissage, classe de dresseur, drapeau ou variable de scénario
       ignoré en silence : chaque inconnu arrête la génération ou le chargement.
-- [ ] Aucun fait d'une branche supposé vrai pour l'autre : Pokédex, régions, terrains, offres et guides relus
+- [x] Aucun fait d'une branche supposé vrai pour l'autre : Pokédex, régions, terrains, offres et guides relus
       séparément pour Hoenn et pour le Remake 1G.
 - [x] Bascule entre deux jeux de la même génération mais de régions différentes testée (lieu, surbrillance).
 - [x] Le filtre et le voile horaires n'apparaissent pas en 3e génération ; ils restent en 2e.
 - [x] Le calculateur de capture apparaît en 3e génération avec les bonnes Balls.
 - [x] Pokédex régional puis National, comme dans chaque jeu.
-- [ ] Sauvegarde de collection : export/import avec les versions 7 à 11, 386 espèces et 28 formes ; import
+- [x] Sauvegarde de collection : export/import avec les versions 7 à 11, 386 espèces et 28 formes ; import
       d'un ancien fichier de schéma 1.
-- [ ] RetroAchievements : synchronisation des cinq nouveaux jeux, une requête par jeu, aucune au lancement.
+- [x] RetroAchievements : synchronisation des cinq nouveaux jeux vérifiée hors ligne, une lecture par jeu,
+      aucune au lancement ; résultats vides et erreurs couverts.
 - [x] Recherche, fiches objet/attaque/lieu/personnage, liens carte ↔ Pokédex pour les nouveaux jeux.
 - [x] Sprites : espèces 252-386, chromatiques, formes, icônes d'objets, PNJ ; aucun chemin d'image cassé
       (`python tools/check_assets.py`).
-- [ ] Fichiers sous 600 lignes et fonctions sous 60 lignes, Python comme Kotlin, tests compris.
+- [x] Fichiers sous 600 lignes et fonctions sous 60 lignes, Python comme Kotlin, tests compris.
 - [x] `assets.sha256` à jour, aucun cache ni aperçu versionné, aucun asset disproportionné, tailles rapportées.
 - [x] Aucun service Google Play (`checkNoGoogleServices`), interface entièrement en français.
 - [x] Documentation et `AGENTS.md` cohérents avec le comportement réel.
 - [x] Contrôles de `AGENTS.md` §8 tous verts, y compris `pytest -m pipeline` après génération.
+
+### Portée du contrôle final
+
+Les méthodes de rencontre sont relues contre `ObtainMethod`, les méthodes d’apprentissage contre
+`LearnMethod` et le générateur. La validation SQL refuse désormais un identifiant inconnu même si
+la table référencée existe. Les tests injectent des méthodes invalides et vérifient leur détection.
+Les classes françaises, drapeaux de présence et comparaisons de scénario conservent leurs contrôles
+bloquants et leurs tests ; les textes volontairement absents portent une raison éditoriale explicite.
+
+Le parcours GBA refuse aussi une commande inconnue en nommant son fichier et sa ligne.
+Deux catalogues séparent les 299 commandes de terrain des 222 macros des installations de combat.
+Un test les compare aux trois sources épinglées ; les tests parcourent les scripts des personnages
+des cinq versions. Recenser une macro ne simule pas les parcours aléatoires des installations.
+
+Hoenn et Remake 1G sont relus séparément à travers les bilans et tests des Pokédex, régions,
+terrains, offres et guides. Les tests des sources conservent notamment les conditions distinctes
+du National, du Parc Safari d’Émeraude et de l’accès aux Îles Sevii.
+
+`BackupJsonTest` couvre les cinq versions GBA simultanément, 386 espèces, les 28 formes dans chacun
+des remakes et l’ancien schéma 1 sans `unown`. `CollectionBackupRepositoryTest` passe aussi par
+le ContentResolver Android pour importer, exporter et réimporter ces collections ; il vérifie
+la conservation de la collection GBA lors d’un import ancien et l’absence de modification après
+un document invalide. Ces essais utilisent Robolectric et des préférences en mémoire.
+
+La synchronisation manuelle RetroAchievements est testée avec une lecture par jeu parmi les onze,
+dont les cinq jeux GBA, ainsi que des réponses vides et un échec avant sauvegarde du résultat.
+L’observation des préférences et le démarrage du ViewModel n’appellent pas l’API ; les tests existants
+vérifient l’absence de requête au lancement et la conservation du cache en cas d’erreur.
+À la demande de l’utilisateur, aucun appel réel ni compte connecté n’est nécessaire à cette clôture.
+Le sélecteur de documents sur téléphone n’est pas manipulé ; l’export/import est testé sur la JVM.
+
+Clôture du 12 octobre 2026 : ktlint, absence de GMS (191 dépendances), Lint, 393 tests JVM
+et assemblage debug réussis. Inventaire des 15 442 assets, cohérence de la base, Ruff et format
+des 197 fichiers Python réussis ; 472 tests ordinaires et 205 tests pipeline passent.
+La suite pipeline finale dure 529,33 s, réseau bloqué, et reproduit les assets distribués.
+Les 514 fichiers source sont sous 600 lignes ; les fonctions Python et les corps Kotlin,
+y compris les tests de coroutines, sont sous 60 lignes. Lignes des sources touchées sous 120,
+diff complet relu et contrôle d’espacement réussi. Aucun asset ni schéma Room modifié.
+
+APK debug : 102 891 337 octets (98,12 Mio) ; cartes : 41 841 493 octets (39,90 Mio) ;
+objets Git : 57 061 Kio. ADB voit le téléphone ; installation par-dessus réussie, sans effacement.
+L’intention de lancement est remise à l’activité déjà au premier plan ; cet essai ne constitue
+pas un parcours visuel complet des onze jeux. Aucun tag, publication, commit ni dépendance ajoutée.
+Les changements sont internes aux contrôles et tests : aucune nouvelle note de version nécessaire.
+
+Incidents corrigés : accès aux caches Gradle et temporaires pytest bloqués puis relancés avec
+autorisation ; erreurs de style et d’encodage des commandes de session ; catalogue initial incomplet
+pour les macros des installations de combat ; omission initiale de la méthode déjà supportée
+du Pikachu Surfeur ; document invalide construit trop tôt dans un nouveau test.
+Un chargement Tk a échoué transitoirement, puis la suite ordinaire complète a réussi.
+Deux lancements Gradle se sont chevauchés et ont signalé plusieurs sessions Kotlin ; la dernière
+relance seule réussit. Tous les échecs concernés sont corrigés et les suites finales passent.
+La dépréciation AGP `Configuration.setVisible(boolean)` déjà documentée reste affichée.

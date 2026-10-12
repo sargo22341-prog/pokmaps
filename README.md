@@ -451,6 +451,8 @@ python -m pytest                        # tests sans cache ni téléchargement d
 `./gradlew checkAssets` vérifie chaque fichier de l'inventaire et son SHA-256 ; ce contrôle précède
 la compilation et les tests JVM. Un fichier absent ou modifié provoque une erreur qui nomme le fichier.
 `python tools/check_assets.py` vérifie aussi les références aux images et la cohérence de la base.
+La validation refuse les méthodes de rencontre ou d’apprentissage que l’application ne sait pas afficher.
+Le parcours des scripts GBA refuse les commandes absentes des catalogues des moteurs épinglés.
 Ces commandes utilisent uniquement les ressources finales du dépôt, même si `tools/.cache` est absent et
 les sources de contenu Pokémon sont hors ligne. Les outils Android, JDK et dépendances de compilation
 peuvent toujours nécessiter un téléchargement.

@@ -16,6 +16,21 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "méthode de rencontre non prise en charge",
+        """SELECT id, identifier FROM encounter_method WHERE identifier NOT IN
+           ('walk', 'old-rod', 'good-rod', 'super-rod', 'feebas-tile-fishing', 'surf', 'seaweed',
+            'headbutt', 'headbutt-low', 'headbutt-normal', 'headbutt-high', 'rock-smash',
+            'gift', 'gift-egg', 'colosseum-bonus-disc-jpn', 'colosseum-bonus-disc-us', 'pokemon-channel-pal',
+            'static', 'pokeflute', 'squirt-bottle', 'roaming-grass', 'roaming-water',
+            'devon-scope', 'wailmer-pail', 'npc-trade')""",
+    ),
+    (
+        "méthode d'apprentissage non prise en charge",
+        """SELECT pokemon_id, method FROM pokemon_move
+           WHERE method NOT IN
+           ('level-up', 'machine', 'egg', 'tutor', 'light-ball-egg', 'stadium-surfing-pikachu')""",
+    ),
+    (
         "génération d'origine du remake invalide",
         """SELECT * FROM version_group WHERE remake_generation_id IS NOT NULL
            AND (remake_generation_id >= generation_id

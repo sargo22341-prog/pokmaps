@@ -54,15 +54,20 @@ class RetroRepository @Inject constructor(
 
     suspend fun synchronize() = mutex.withLock {
         val account = requireNotNull(credentials.read())
-        val earned = mutableMapOf<Int, Set<Int>>()
-        val hardcore = mutableMapOf<Int, Set<Int>>()
-        for ((version, gameId) in RetroGames.ids) {
-            val unlocks = api.progress(account, gameId)
-            earned[version] = unlocks.earned
-            hardcore[version] = unlocks.hardcore
-        }
-        settings.save(RetroProgress(account.username, earned.toMap(), hardcore.toMap(), System.currentTimeMillis()))
+        val progress = readAllRetroProgress(account.username) { gameId -> api.progress(account, gameId) }
+        settings.save(progress)
         username.value = account.username
         initialized = true
     }
+}
+
+internal suspend fun readAllRetroProgress(username: String, read: suspend (Int) -> RetroUnlocks): RetroProgress {
+    val earned = mutableMapOf<Int, Set<Int>>()
+    val hardcore = mutableMapOf<Int, Set<Int>>()
+    for ((version, gameId) in RetroGames.ids) {
+        val unlocks = read(gameId)
+        earned[version] = unlocks.earned
+        hardcore[version] = unlocks.hardcore
+    }
+    return RetroProgress(username, earned.toMap(), hardcore.toMap(), System.currentTimeMillis())
 }
