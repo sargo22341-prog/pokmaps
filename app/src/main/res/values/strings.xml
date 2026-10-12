@@ -309,7 +309,7 @@
     <string name="about_credit_sprites_title">PokeAPI/sprites</string>
     <string name="about_credit_sprites">Sprites des Pokémon de Rouge, Bleu et Jaune, et sprites animés de Noir et Blanc.</string>
     <string name="about_credit_pret_title">pret</string>
-    <string name="about_credit_pret">Cartes dessinées à partir des désassemblages pret/pokered et pret/pokeyellow.</string>
+    <string name="about_credit_pret">Cartes et données lues dans les désassemblages pret/pokered, pret/pokeyellow, pret/pokegold, pret/pokecrystal, pret/pokeruby, pret/pokeemerald et pret/pokefirered.</string>
     <string name="about_legal_title">Mentions légales</string>
     <string name="about_legal">Projet de fan, personnel et non commercial. Pokémon et les noms associés sont des marques de Nintendo, Game Freak et The Pokémon Company. Images © Nintendo / Creatures / GAME FREAK.</string>
     <plurals name="coins">

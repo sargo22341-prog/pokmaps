@@ -36,6 +36,10 @@ runs:
         SECONDS=0
         python tools/build_data.py
         echo "Génération des données (cache restauré selon disponibilité) : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
+        cache_size=$(du -sb tools/.cache | cut -f1)
+        assets_size=$(du -sb app/src/main/assets | cut -f1)
+        echo "Cache des sources : ${cache_size} octets" >> "$GITHUB_STEP_SUMMARY"
+        echo "Assets générés : ${assets_size} octets" >> "$GITHUB_STEP_SUMMARY"
 
     - name: Tests des assets générés
       shell: bash

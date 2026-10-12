@@ -22,7 +22,7 @@ def sprite_catalog(api: PokeApi) -> str:
         "",
         f"Images : PokeAPI/sprites, commit `{POKEAPI_SPRITES_COMMIT}`.",
         "",
-        "Les espèces 1 à 251 sont embarquées. De 252 à 649, les chemins décrivent la source prévue,",
+        "Les espèces 1 à 386 sont embarquées. De 387 à 649, les chemins décrivent la source prévue,",
         "sans affirmer que les images sont embarquées. Après 649, aucune source n'est configurée ;",
         "le pipeline refuse un jeu qui en aurait besoin. Les fixes sont la première image du GIF",
         "normal ou chromatique, encodée en WebP sans perte, comme les animations.",
