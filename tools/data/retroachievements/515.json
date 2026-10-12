@@ -1,0 +1,558 @@
+{
+  "game_id": 515,
+  "title": "Pokémon FireRed Version",
+  "console": "Game Boy Advance",
+  "source": "https://retroachievements.org/game/515",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 33592,
+      "Title": "I Choose You!",
+      "Description": "Defeat your rival in Professor Oak's Lab.",
+      "Points": 1,
+      "DisplayOrder": 1,
+      "type": "missable",
+      "DateModified": "2022-04-27 23:29:46"
+    },
+    {
+      "ID": 33593,
+      "Title": "Champ In The Making!",
+      "Description": "Win the optional battle against your rival on Route 22.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "missable",
+      "DateModified": "2025-11-16 06:10:20"
+    },
+    {
+      "ID": 33601,
+      "Title": "The Rock-Solid Trainer!",
+      "Description": "Defeat Brock and earn the Boulder Badge.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:51"
+    },
+    {
+      "ID": 195143,
+      "Title": "A Rocky Battle",
+      "Description": "Defeat Brock in Set Mode using 2 or fewer Pokémon at level 14 or less.",
+      "Points": 10,
+      "DisplayOrder": 5,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:01:30"
+    },
+    {
+      "ID": 33594,
+      "Title": "Always Plodding Behind",
+      "Description": "Defeat your rival in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": null,
+      "DateModified": "2025-02-11 20:19:52"
+    },
+    {
+      "ID": 33602,
+      "Title": "The Tomboyish Mermaid!",
+      "Description": "Defeat Misty and earn the Cascade Badge.",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:52"
+    },
+    {
+      "ID": 195146,
+      "Title": "Stealing the Star",
+      "Description": "Defeat Misty in Set Mode using 2 or fewer Pokémon at level 21 or less.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:01:52"
+    },
+    {
+      "ID": 33595,
+      "Title": "Smell Ya Later!",
+      "Description": "Defeat your rival on the S.S. Anne.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": null,
+      "DateModified": "2022-04-27 23:29:49"
+    },
+    {
+      "ID": 33603,
+      "Title": "The Lightning American!",
+      "Description": "Defeat Lt. Surge and earn the Thunder Badge.",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:52"
+    },
+    {
+      "ID": 195147,
+      "Title": "Dodging Thunderbolts",
+      "Description": "Defeat Lt. Surge in Set Mode using 3 or fewer Pokémon at level 24 or less.",
+      "Points": 10,
+      "DisplayOrder": 11,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:02:36"
+    },
+    {
+      "ID": 33596,
+      "Title": "Make Them Faint!",
+      "Description": "Defeat your rival in the Pokémon Tower.",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": null,
+      "DateModified": "2024-12-08 19:01:38"
+    },
+    {
+      "ID": 33604,
+      "Title": "The Nature-Loving Princess!",
+      "Description": "Defeat Erika and earn the Rainbow Badge.",
+      "Points": 5,
+      "DisplayOrder": 13,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:52"
+    },
+    {
+      "ID": 195153,
+      "Title": "Plants are no Problem",
+      "Description": "Defeat Erika in Set Mode using 3 or fewer Pokémon at level 29 or less.",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:03:05"
+    },
+    {
+      "ID": 33599,
+      "Title": "Rigged Slots",
+      "Description": "Stop Team Rocket in Celadon City.",
+      "Points": 5,
+      "DisplayOrder": 15,
+      "type": null,
+      "DateModified": "2022-04-27 23:29:51"
+    },
+    {
+      "ID": 33605,
+      "Title": "The Poisonous Ninja Master!",
+      "Description": "Defeat Koga and earn the Soul Badge.",
+      "Points": 5,
+      "DisplayOrder": 16,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:53"
+    },
+    {
+      "ID": 195157,
+      "Title": "Don't Get Poisoned",
+      "Description": "Defeat Koga in Set Mode using 4 or fewer Pokémon at level 43 or less.",
+      "Points": 10,
+      "DisplayOrder": 17,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:03:38"
+    },
+    {
+      "ID": 33597,
+      "Title": "Don't Sweat It!",
+      "Description": "Defeat your rival in Saffron City.",
+      "Points": 5,
+      "DisplayOrder": 18,
+      "type": null,
+      "DateModified": "2024-11-17 03:52:02"
+    },
+    {
+      "ID": 33600,
+      "Title": "One Ball to Catch 'em All",
+      "Description": "Stop Team Rocket in Saffron City.",
+      "Points": 10,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2024-11-17 03:48:42"
+    },
+    {
+      "ID": 33606,
+      "Title": "The Mistress of Psychic Pokemon!",
+      "Description": "Defeat Sabrina and earn the Marsh Badge.",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:53"
+    },
+    {
+      "ID": 195159,
+      "Title": "Her Psychic Powers Are Not Strong Enough",
+      "Description": "Defeat Sabrina in Set Mode using 4 or fewer Pokémon at level 43 or less.",
+      "Points": 10,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:03:46"
+    },
+    {
+      "ID": 33607,
+      "Title": "The Hotheaded Quiz Master!",
+      "Description": "Defeat Blaine and earn the Volcano Badge.",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:54"
+    },
+    {
+      "ID": 195160,
+      "Title": "When You're Hot, You're Hot",
+      "Description": "Defeat Blaine in Set Mode using 4 or fewer Pokémon at level 47 or less.",
+      "Points": 10,
+      "DisplayOrder": 23,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:03:50"
+    },
+    {
+      "ID": 33626,
+      "Title": "No Tears, Only Dreams",
+      "Description": "Rescue Lostelle on Three Island.",
+      "Points": 5,
+      "DisplayOrder": 24,
+      "type": null,
+      "DateModified": "2024-11-17 03:54:35"
+    },
+    {
+      "ID": 33608,
+      "Title": "The Self-Proclaimed Strongest Trainer!",
+      "Description": "Defeat Giovanni and earn the Earth Badge.",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": "progression",
+      "DateModified": "2022-04-27 23:29:54"
+    },
+    {
+      "ID": 195161,
+      "Title": "Well Grounded",
+      "Description": "Defeat Giovanni in Set Mode using 5 or fewer Pokémon at level 50 or less.",
+      "Points": 10,
+      "DisplayOrder": 26,
+      "type": "missable",
+      "DateModified": "2023-10-11 23:04:19"
+    },
+    {
+      "ID": 33598,
+      "Title": "A Warm-Up!",
+      "Description": "Defeat your rival on your way to the Pokémon League.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2022-04-27 23:29:50"
+    },
+    {
+      "ID": 33613,
+      "Title": "The Real Champ I",
+      "Description": "Become the League Champion.",
+      "Points": 25,
+      "DisplayOrder": 28,
+      "type": "win_condition",
+      "DateModified": "2025-10-19 01:28:03"
+    },
+    {
+      "ID": 195162,
+      "Title": "Solo Mastery",
+      "Description": "Defeat the first round of the Elite Four with only one Pokémon in your party.",
+      "Points": 25,
+      "DisplayOrder": 29,
+      "type": "missable",
+      "DateModified": "2025-10-19 01:28:04"
+    },
+    {
+      "ID": 33627,
+      "Title": "Helping Hand",
+      "Description": "Help Lorelei in stopping Team Rocket on Island 4.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2025-05-27 18:10:26"
+    },
+    {
+      "ID": 33628,
+      "Title": "Resort Gorgeous",
+      "Description": "Rescue Selphy on Island 5.",
+      "Points": 5,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2024-12-08 19:46:02"
+    },
+    {
+      "ID": 33629,
+      "Title": "Blasting Off Again",
+      "Description": "Stop Team Rocket in their warehouse on Island 5.",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2022-04-27 23:30:02"
+    },
+    {
+      "ID": 33618,
+      "Title": "The Real Champ II",
+      "Description": "Return stronger and become the League Champion again.",
+      "Points": 25,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2025-10-19 01:28:04"
+    },
+    {
+      "ID": 195166,
+      "Title": "The True Solo Master",
+      "Description": "Defeat the second round of the Elite Four with only one Pokémon in your party.",
+      "Points": 25,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2025-10-19 01:29:39"
+    },
+    {
+      "ID": 33623,
+      "Title": "Psyched!",
+      "Description": "Catch Mewtwo.",
+      "Points": 10,
+      "DisplayOrder": 35,
+      "type": "missable",
+      "DateModified": "2024-09-18 20:11:05"
+    },
+    {
+      "ID": 33630,
+      "Title": "One at a Time",
+      "Description": "Complete the Single Battle challenge at the Trainer Tower.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2024-07-13 02:04:46"
+    },
+    {
+      "ID": 33631,
+      "Title": "Seeing Double",
+      "Description": "Complete the Double Battle challenge at the Trainer Tower.",
+      "Points": 5,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2024-07-13 02:12:25"
+    },
+    {
+      "ID": 33632,
+      "Title": "Half the Pokémon, Thrice the Battles",
+      "Description": "Complete the Knockout Battle challenge at the Trainer Tower.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2024-07-13 02:12:26"
+    },
+    {
+      "ID": 33633,
+      "Title": "Mix It All Up",
+      "Description": "Complete the Mixed Battle challenge at the Trainer Tower.",
+      "Points": 5,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2024-07-13 02:12:27"
+    },
+    {
+      "ID": 33619,
+      "Title": "Lucky Egg",
+      "Description": "Catch a Chansey.",
+      "Points": 5,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2025-09-01 02:41:58"
+    },
+    {
+      "ID": 33622,
+      "Title": "Frozen Solid",
+      "Description": "Catch Articuno.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": "missable",
+      "DateModified": "2024-11-17 03:45:34"
+    },
+    {
+      "ID": 33621,
+      "Title": "Zapped",
+      "Description": "Catch Zapdos.",
+      "Points": 5,
+      "DisplayOrder": 42,
+      "type": "missable",
+      "DateModified": "2025-05-27 14:12:33"
+    },
+    {
+      "ID": 33620,
+      "Title": "Molten",
+      "Description": "Catch Moltres.",
+      "Points": 5,
+      "DisplayOrder": 43,
+      "type": "missable",
+      "DateModified": "2022-04-27 23:29:56"
+    },
+    {
+      "ID": 33624,
+      "Title": "The Legendary Beasts",
+      "Description": "Catch Raikou, Entei or Suicune.",
+      "Points": 10,
+      "DisplayOrder": 44,
+      "type": "missable",
+      "DateModified": "2025-09-01 02:40:42"
+    },
+    {
+      "ID": 195144,
+      "Title": "Fishy Scam",
+      "Description": "Buy the Magikarp from the man just outside Mt. Moon's Pokemon Center.",
+      "Points": 3,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2026-03-03 22:25:38"
+    },
+    {
+      "ID": 195145,
+      "Title": "Lord or Retainer",
+      "Description": "Pick either the Helix Fossil or the Dome Fossil inside Mt. Moon.",
+      "Points": 3,
+      "DisplayOrder": 46,
+      "type": null,
+      "DateModified": "2025-05-18 00:07:44"
+    },
+    {
+      "ID": 195148,
+      "Title": "The Far-Fetched Trade",
+      "Description": "Trade a Spearow for a Farfetch'd in Vermillion City.",
+      "Points": 3,
+      "DisplayOrder": 47,
+      "type": null,
+      "DateModified": "2025-12-09 21:19:21"
+    },
+    {
+      "ID": 195149,
+      "Title": "Baby Prince for a Baby Princess",
+      "Description": "Trade a male Nidoran for a female Nidoran on Route 5.",
+      "Points": 3,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2022-04-27 23:30:06"
+    },
+    {
+      "ID": 195150,
+      "Title": "The Odd Mime",
+      "Description": "Trade an Abra for a Mr. Mime on Route 2.",
+      "Points": 3,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2022-06-30 18:22:41"
+    },
+    {
+      "ID": 195151,
+      "Title": "An Extinct Flying Type",
+      "Description": "Obtain the Old Amber at the Pewter City Museum.",
+      "Points": 3,
+      "DisplayOrder": 49,
+      "type": null,
+      "DateModified": "2022-07-15 07:46:40"
+    },
+    {
+      "ID": 195152,
+      "Title": "Take Your Pick",
+      "Description": "Find the Eevee in Celadon City.",
+      "Points": 3,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2025-05-05 22:28:56"
+    },
+    {
+      "ID": 195154,
+      "Title": "Sleeping Roadblock",
+      "Description": "Catch a Snorlax on Route 12 or 16.",
+      "Points": 5,
+      "DisplayOrder": 51,
+      "type": "missable",
+      "DateModified": "2024-07-13 15:11:57"
+    },
+    {
+      "ID": 195155,
+      "Title": "Young King for a Young Queen",
+      "Description": "Trade a Nidorino for a Nidorina on Route 11.",
+      "Points": 3,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2022-07-12 21:01:20"
+    },
+    {
+      "ID": 195156,
+      "Title": "Karate Master",
+      "Description": "Defeat the Head of the Dojo in Saffron City.",
+      "Points": 5,
+      "DisplayOrder": 53,
+      "type": null,
+      "DateModified": "2022-04-27 23:30:08"
+    },
+    {
+      "ID": 195158,
+      "Title": "The Transporter",
+      "Description": "Obtain the Lapras in Silph Co. after defeating your rival.",
+      "Points": 3,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2022-08-11 12:16:41"
+    },
+    {
+      "ID": 195163,
+      "Title": "Long Lick of the Tongue",
+      "Description": "Trade a Golduck for a Lickitung in the gate between Route 18 and Fuschia City.",
+      "Points": 3,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2022-07-15 07:46:41"
+    },
+    {
+      "ID": 195164,
+      "Title": "Tangled Mess",
+      "Description": "Trade a Venonat for a Tangela on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2022-07-15 07:46:41"
+    },
+    {
+      "ID": 195165,
+      "Title": "The Spherical Electric Type",
+      "Description": "Trade a Raichu for an Electrode on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 57,
+      "type": null,
+      "DateModified": "2022-07-18 13:19:29"
+    },
+    {
+      "ID": 195167,
+      "Title": "New and Eggciting Things",
+      "Description": "Obtain the Egg from the old man in the Water Labyrinth.",
+      "Points": 5,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2025-09-15 01:53:53"
+    },
+    {
+      "ID": 195168,
+      "Title": "Just Trying to Seel the Deal",
+      "Description": "Trade a Ponyta for a Seel on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 59,
+      "type": null,
+      "DateModified": "2022-06-30 18:21:55"
+    },
+    {
+      "ID": 195169,
+      "Title": "Trying Not to Jynx Myself",
+      "Description": "Trade a Poliwhirl for a Jynx in Cerulean City.",
+      "Points": 3,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2022-06-30 18:19:53"
+    },
+    {
+      "ID": 33625,
+      "Title": "Gotta Catch 'em All: FireRed!",
+      "Description": "Catch all 170 obtainable Pokémon.",
+      "Points": 50,
+      "DisplayOrder": 62,
+      "type": "missable",
+      "DateModified": "2025-05-27 14:17:41"
+    }
+  ]
+}

@@ -1,0 +1,666 @@
+{
+  "game_id": 16211,
+  "title": "Pokémon White Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/16211",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 108986,
+      "Title": "Journey Has Started!",
+      "Description": "Your Pokemon adventure has just begun. Have fun!",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:20:53"
+    },
+    {
+      "ID": 108987,
+      "Title": "Triple Trouble!",
+      "Description": "Earn the Trio Badge.",
+      "Points": 10,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:20:57"
+    },
+    {
+      "ID": 108988,
+      "Title": "An Archeologist With Backbone",
+      "Description": "Earn the Basic Badge.",
+      "Points": 10,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:03"
+    },
+    {
+      "ID": 108989,
+      "Title": "Premier Insect Artist",
+      "Description": "Earn the Insect Badge.",
+      "Points": 10,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:07"
+    },
+    {
+      "ID": 108990,
+      "Title": "The Shining Beauty",
+      "Description": "Earn the Bolt Badge.",
+      "Points": 10,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:11"
+    },
+    {
+      "ID": 108991,
+      "Title": "The Underground Boss",
+      "Description": "Earn the Quake Badge.",
+      "Points": 10,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:15"
+    },
+    {
+      "ID": 108992,
+      "Title": "The High-Flying Girl",
+      "Description": "Earn the Jet Badge.",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:19"
+    },
+    {
+      "ID": 108993,
+      "Title": "Ice Mask",
+      "Description": "Earn the Freeze Badge.",
+      "Points": 10,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:22"
+    },
+    {
+      "ID": 108994,
+      "Title": "The Girl Who Knows the Hearts of Dragons",
+      "Description": "Earn the Legend Badge.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "progression",
+      "DateModified": "2020-04-28 00:21:26"
+    },
+    {
+      "ID": 108995,
+      "Title": "Truth and Ideals",
+      "Description": "Beat the game.",
+      "Points": 25,
+      "DisplayOrder": 9,
+      "type": "win_condition",
+      "DateModified": "2020-04-28 00:21:29"
+    },
+    {
+      "ID": 108996,
+      "Title": "My Code Name, It Is Looker",
+      "Description": "Help Looker to find the remaining Six Sages all over Unova.",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": null,
+      "DateModified": "2020-04-28 00:21:33"
+    },
+    {
+      "ID": 108997,
+      "Title": "Oracle of Seasons",
+      "Description": "Show the scientist in the Season Research Lab all the forms of Deerling and obtain a reward.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": null,
+      "DateModified": "2020-04-28 00:21:37"
+    },
+    {
+      "ID": 108998,
+      "Title": "Learning to Be Better and Better",
+      "Description": "Defeat Cheren's strongest team.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": null,
+      "DateModified": "2020-04-28 00:21:41"
+    },
+    {
+      "ID": 108999,
+      "Title": "Pokemon Professor Helper",
+      "Description": "Defeat Bianca's strongest team.",
+      "Points": 10,
+      "DisplayOrder": 13,
+      "type": null,
+      "DateModified": "2020-04-28 00:21:44"
+    },
+    {
+      "ID": 109000,
+      "Title": "Heated Battle",
+      "Description": "Defeat Cynthia in Undella Town.",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": null,
+      "DateModified": "2023-07-18 06:29:13"
+    },
+    {
+      "ID": 109001,
+      "Title": "Spring Has Sprung",
+      "Description": "Defeat Cynthia in a rematch.",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": null,
+      "DateModified": "2020-06-19 00:45:43"
+    },
+    {
+      "ID": 109002,
+      "Title": "The Legendary Trainer",
+      "Description": "Defeat GAME FREAK Morimoto.",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": null,
+      "DateModified": "2020-04-28 00:21:57"
+    },
+    {
+      "ID": 109003,
+      "Title": "Certified Trainer",
+      "Description": "Score enough to get Master Rank in the Battle Institute (Single).",
+      "Points": 25,
+      "DisplayOrder": 17,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:02"
+    },
+    {
+      "ID": 109004,
+      "Title": "Certified Double Trainer",
+      "Description": "Score enough to get Master Rank in the Battle Institute (Double).",
+      "Points": 25,
+      "DisplayOrder": 18,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:05"
+    },
+    {
+      "ID": 109005,
+      "Title": "You Are a Super Player",
+      "Description": "Earn the right to challenge the Super Single, Super Double and Super Multi Trains.",
+      "Points": 10,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2024-12-04 15:20:01"
+    },
+    {
+      "ID": 109006,
+      "Title": "Prepare for Trouble!",
+      "Description": "Defeat Subway Boss Ingo in a Super Single Train battle.",
+      "Points": 25,
+      "DisplayOrder": 20,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:13"
+    },
+    {
+      "ID": 109007,
+      "Title": "Make It Double!",
+      "Description": "Defeat Subway Boss Emmet in a Super Double Train battle.",
+      "Points": 25,
+      "DisplayOrder": 21,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:16"
+    },
+    {
+      "ID": 109008,
+      "Title": "Art of Fighting",
+      "Description": "Defeat the trainers in the Battle House in one session without leaving the area having only White Forest pokemon. (Lv39 max)",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:19"
+    },
+    {
+      "ID": 109009,
+      "Title": "Worthy of the Champion Title",
+      "Description": "In a single session, rematch the Pokémon League in Set Mode with Pokémon at level 75 or below after the first Elite 4 member battle, without using items during battle, and without using Legendaries restricted by the Battle Subway ruleset",
+      "Points": 25,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:23"
+    },
+    {
+      "ID": 109010,
+      "Title": "Foreign Challenger",
+      "Description": "Enter in the Hall of Fame with a party of pokemon not originally native to Unova.",
+      "Points": 10,
+      "DisplayOrder": 24,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:26"
+    },
+    {
+      "ID": 109011,
+      "Title": "Well Worth the Wait",
+      "Description": "Purchase a delicious Casteliacone.",
+      "Points": 4,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:29"
+    },
+    {
+      "ID": 109012,
+      "Title": "Collectathon",
+      "Description": "Obtain all the type boosting items scattered across Unova (plates and incenses don't count).",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:33"
+    },
+    {
+      "ID": 109013,
+      "Title": "Colourful Plates",
+      "Description": "Obtain all the ancient plates.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2020-05-04 03:31:38"
+    },
+    {
+      "ID": 109014,
+      "Title": "Ancient Ruins Researcher",
+      "Description": "Obtain a Relic Crown.",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:39"
+    },
+    {
+      "ID": 109015,
+      "Title": "The Biggest Pokefan",
+      "Description": "Obtain all the rewards from the chairman of the Fan Club in Icirrus City.",
+      "Points": 10,
+      "DisplayOrder": 29,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:48"
+    },
+    {
+      "ID": 109016,
+      "Title": "Impressive Movepool",
+      "Description": "Obtain all the TMs and HMs.",
+      "Points": 25,
+      "DisplayOrder": 30,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:46"
+    },
+    {
+      "ID": 109017,
+      "Title": "Show Me Your Moves",
+      "Description": "Teach a move to one of your pokemon via a Move Tutor.",
+      "Points": 5,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:50"
+    },
+    {
+      "ID": 109018,
+      "Title": "Fashionista",
+      "Description": "Win a musical for the first time.",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:53"
+    },
+    {
+      "ID": 109019,
+      "Title": "Fashion Enthusiast",
+      "Description": "Obtain all the obtainable Props for the musical.",
+      "Points": 10,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2020-04-28 00:22:57"
+    },
+    {
+      "ID": 109020,
+      "Title": "Master of the Elements",
+      "Description": "Obtain one of the three elemental monkeys as a gift.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:00"
+    },
+    {
+      "ID": 109021,
+      "Title": "Deal!",
+      "Description": "Buy an extremely rare Pokemon.",
+      "Points": 4,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:04"
+    },
+    {
+      "ID": 109022,
+      "Title": "Odd Gift",
+      "Description": "Obtain a special egg.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:07"
+    },
+    {
+      "ID": 109023,
+      "Title": "Conqueror of the Opposite World",
+      "Description": "Trade a Petilil and a Minccino for rare Pokemon in Nacrene and Driftveil City.",
+      "Points": 5,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:11"
+    },
+    {
+      "ID": 109024,
+      "Title": "It's Something",
+      "Description": "Trade a Boldore for Emolga on Route 7.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:14"
+    },
+    {
+      "ID": 109025,
+      "Title": "Trading.exe Has Stopped Working",
+      "Description": "Trade a Ditto for Rotom on Route 15.",
+      "Points": 5,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:18"
+    },
+    {
+      "ID": 109026,
+      "Title": "Summer Voracity",
+      "Description": "Trade a Cinccino for Munchlax in Undella Town.",
+      "Points": 5,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:22"
+    },
+    {
+      "ID": 109027,
+      "Title": "Living Statue",
+      "Description": "Catch a Zen Mode Darmanitan.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:37"
+    },
+    {
+      "ID": 109028,
+      "Title": "Good Night Here",
+      "Description": "Catch a Telepathy Musharna.",
+      "Points": 5,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:29"
+    },
+    {
+      "ID": 109029,
+      "Title": "The Sun",
+      "Description": "Catch a Volcarona in Relic Castle.",
+      "Points": 10,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:31"
+    },
+    {
+      "ID": 109030,
+      "Title": "Victory Star",
+      "Description": "Catch Victini.",
+      "Points": 10,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:25"
+    },
+    {
+      "ID": 109031,
+      "Title": "The Goat of Justice",
+      "Description": "Catch Cobalion.",
+      "Points": 10,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:21"
+    },
+    {
+      "ID": 109032,
+      "Title": "The Antelope of Justice",
+      "Description": "Catch Virizion.",
+      "Points": 10,
+      "DisplayOrder": 46,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:16"
+    },
+    {
+      "ID": 109033,
+      "Title": "The Bull of Justice",
+      "Description": "Catch Terrakion.",
+      "Points": 10,
+      "DisplayOrder": 47,
+      "type": null,
+      "DateModified": "2020-05-28 13:20:10"
+    },
+    {
+      "ID": 109034,
+      "Title": "The Deep Black Pokemon",
+      "Description": "Catch Zekrom.",
+      "Points": 10,
+      "DisplayOrder": 48,
+      "type": "progression",
+      "DateModified": "2023-09-15 03:32:18"
+    },
+    {
+      "ID": 109035,
+      "Title": "The Bolt Striker",
+      "Description": "Catch Thundurus.",
+      "Points": 10,
+      "DisplayOrder": 49,
+      "type": null,
+      "DateModified": "2020-04-28 00:23:53"
+    },
+    {
+      "ID": 109036,
+      "Title": "The Ultimate of Nothingness",
+      "Description": "Catch Kyurem.",
+      "Points": 10,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:58"
+    },
+    {
+      "ID": 109037,
+      "Title": "My Personal Safari",
+      "Description": "Catch 4 different Pokemon in the White Forest.",
+      "Points": 5,
+      "DisplayOrder": 51,
+      "type": "missable",
+      "DateModified": "2024-12-13 23:44:36"
+    },
+    {
+      "ID": 109038,
+      "Title": "Gotta Catch em' All - White (Regional)",
+      "Description": "Catch all 130 possible Regional Dex Pokemon without using external devices.",
+      "Points": 50,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2020-04-28 00:24:05"
+    },
+    {
+      "ID": 109039,
+      "Title": "Gotta Catch em' All - White (National)",
+      "Description": "Catch all 202 possible National Dex Pokemon without using external devices. (Does not include Unova)",
+      "Points": 50,
+      "DisplayOrder": 53,
+      "type": "missable",
+      "DateModified": "2024-12-13 23:44:29"
+    },
+    {
+      "ID": 109040,
+      "Title": "Awaken, My Masters!",
+      "Description": "Awaken all the Zen Mode Darmanitan that sleep in the Desert Resort.",
+      "Points": 10,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:50"
+    },
+    {
+      "ID": 109041,
+      "Title": "Live Concert",
+      "Description": "Listen to the 2 performances in Accumula Town for a minute.",
+      "Points": 3,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:42"
+    },
+    {
+      "ID": 109042,
+      "Title": "Otherworldly Explorer",
+      "Description": "Explore the Entralink (and Entree Forest) as much as possible.",
+      "Points": 3,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2020-04-28 00:24:19"
+    },
+    {
+      "ID": 109043,
+      "Title": "Official Doxxing Award",
+      "Description": "Register your location in the Geonet.",
+      "Points": 3,
+      "DisplayOrder": 57,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:35"
+    },
+    {
+      "ID": 109044,
+      "Title": "Professional Respondent",
+      "Description": "Answer all the questionnaires in the Passerby Analytics HQ.",
+      "Points": 3,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:29"
+    },
+    {
+      "ID": 109045,
+      "Title": "Super Secret Machine",
+      "Description": "Unlock the Relocator.",
+      "Points": 3,
+      "DisplayOrder": 59,
+      "type": null,
+      "DateModified": "2020-04-28 00:24:30"
+    },
+    {
+      "ID": 109046,
+      "Title": "Renaissance Trainer",
+      "Description": "Obtain an Antidote for answering the question correctly in Icirrus City.",
+      "Points": 3,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:22"
+    },
+    {
+      "ID": 109047,
+      "Title": "Outstanding Work",
+      "Description": "Serve the correct sandwiches and earn a Lum Berry in Village Bridge.",
+      "Points": 5,
+      "DisplayOrder": 61,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:16"
+    },
+    {
+      "ID": 109048,
+      "Title": "Catch of the Day",
+      "Description": "Show the requested pokemon to a fisherman in Village Bridge.",
+      "Points": 5,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:10"
+    },
+    {
+      "ID": 109049,
+      "Title": "Street Band",
+      "Description": "Stay for a minute in Village Bridge listening to all the sound additions.",
+      "Points": 5,
+      "DisplayOrder": 63,
+      "type": null,
+      "DateModified": "2020-05-28 13:19:03"
+    },
+    {
+      "ID": 109050,
+      "Title": "Did I Just See... What?",
+      "Description": "Find a ghost on a bridge.",
+      "Points": 5,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2020-05-28 13:18:56"
+    },
+    {
+      "ID": 109051,
+      "Title": "Eagle Eye",
+      "Description": "Obtain a Big Mushroom on the Marvelous Bridge.",
+      "Points": 3,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2020-05-28 13:18:48"
+    },
+    {
+      "ID": 109052,
+      "Title": "Lucky Drink",
+      "Description": "Get an extra drink for free from a vending machine.",
+      "Points": 5,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2020-04-28 00:24:55"
+    },
+    {
+      "ID": 109053,
+      "Title": "This Tune Sounds Familiar",
+      "Description": "Listen to a dramatic sound in Castelia City.",
+      "Points": 3,
+      "DisplayOrder": 67,
+      "type": null,
+      "DateModified": "2020-04-28 05:24:46"
+    },
+    {
+      "ID": 109054,
+      "Title": "What Kind of Pokemon Battle Is This?",
+      "Description": "Get on time to the Stadium or Court stands in Nimbasa City while there is an on-going game.",
+      "Points": 3,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2020-04-28 00:25:03"
+    },
+    {
+      "ID": 109055,
+      "Title": "Cleanliness 2: Electric Boogaloo",
+      "Description": "Fully clean all your badges.",
+      "Points": 5,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2020-05-28 13:18:38"
+    },
+    {
+      "ID": 109056,
+      "Title": "Great Views!",
+      "Description": "Admire Route 14 for a minute on the rare occasions where the mist disappears.",
+      "Points": 5,
+      "DisplayOrder": 70,
+      "type": null,
+      "DateModified": "2020-04-28 00:25:10"
+    },
+    {
+      "ID": 109057,
+      "Title": "Happy New Year!",
+      "Description": "Stay for a minute in Icirrus City enjoying the diamond dust.",
+      "Points": 5,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2020-04-28 00:25:13"
+    },
+    {
+      "ID": 109058,
+      "Title": "Press F to Pay Respects",
+      "Description": "Hold a moment of silence in honor of the fallen pokemon by closing the lid of the DS atop the Celestial Tower.",
+      "Points": 3,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2020-05-28 13:18:30"
+    }
+  ]
+}

@@ -42,8 +42,11 @@ n’est prédit. Émeraude applique la Pierre Stase à la femelle, ou à Métamo
 à Pichu avec un Ballon Lumière. Les bonus de bonheur suivent le Grelot Zen, la Luxe Ball et le lieu de rencontre ;
 les baies réduisant les EV sont propres à Émeraude et le massage de Nina aux remakes.
 
-Les 519 succès officiels sont un instantané traduit en français du 8 octobre 2026 : Rouge (93), Bleu (90),
-Jaune (76), Or (72), Argent (75) et Cristal (113). Sans connexion configurée, les cases et le compteur suivent les
+Les 1 003 succès officiels sont des instantanés en français : Rouge (93), Bleu (90),
+Jaune (76), Or (72), Argent (75) et Cristal (113), conservés du 8 octobre 2026 ; Rubis (49), Saphir (49),
+Émeraude (197), Rouge Feu (61) et Vert Feuille (128), exportés le 12 octobre 2026.
+Les titres GBA sont adaptés en français, les conditions officielles sont traduites intégralement.
+Sans connexion configurée, les cases et le compteur suivent les
 validations manuelles locales. Avec une connexion configurée, seuls le compteur RetroAchievements et les succès
 synchronisés sont affichés ; les coches manuelles sont conservées pour une déconnexion ultérieure.
 Le compteur de captures utilise uniquement les captures de la version choisie ; les objectifs
@@ -52,6 +55,20 @@ un échange externe ou un événement externe. Les choix de Pokémon de départ,
 d'Évoli en génération 1 et de pierres élémentaires limitées dans Or/Argent sont comptés par alternative,
 sans additionner des branches incompatibles. Les autres restrictions du succès restent à respecter dans le jeu.
 Les textes ne constituent pas une lecture de la sauvegarde de l'émulateur.
+
+Les jeux GBA ajoutent des collections régionale et nationale sans échange ni événement externe.
+Les objectifs nationaux comptent 177 espèces dans Rubis, 178 dans Saphir, 212 dans Émeraude,
+170 dans Rouge Feu et 171 dans Vert Feuille. Les choix de partenaire, fossile et Pierre Lune limitée
+suivent chaque cartouche ; le partenaire de Kanto et son errant constituent un seul choix.
+La reproduction permet les deux combattants du Dojo et les trois évolutions élémentaires d’Évoli
+dans les remakes. Les 28 formes de Zarbi sont suivies dans leur quête des Ruines Tanoby.
+Saphir n’a pas de succès officiel de collection complète ; son outil de collection reste disponible.
+
+Dans l’accueil de « Guides », « Pokémon errants » mémorise la dernière route observée et ouvre sa carte.
+Johto conserve ses observations séparées ; chaque jeu GBA ne conserve qu’un errant à la fois.
+Rubis propose Latios, Saphir Latias, Émeraude explique le choix rouge/bleu de la télévision ;
+les remakes indiquent Entei avec Bulbizarre, Suicune avec Salamèche et Raikou avec Carapuce.
+Les routes proposées viennent du moteur de chaque jeu ; aucun prochain déplacement n’est prédit.
 
 Les sauvegardes de collection gardent le schéma JSON 1 et acceptent jusqu'à 386 espèces et 28 formes de Zarbi.
 L'import vérifie les versions contre les jeux de la base embarquée, puis les espèces et formes contre le jeu.
@@ -62,7 +79,7 @@ Les cartes, rencontres et offres de distribution portent la mention « événeme
 Dans les Réglages, renseigner le nom d'utilisateur et la **clé API web** RetroAchievements, enregistrer puis
 choisir « Synchroniser ». Seul l'endpoint GET
 [`API_GetGameInfoAndUserProgress.php`](https://api-docs.retroachievements.org/v1/get-game-info-and-user-progress.html)
-est appelé, une fois par jeu ; aucun succès ni compte n'est modifié. Aucune requête ne part au lancement ou
+est appelé, une fois pour chacun des onze jeux ; aucun succès ni compte n'est modifié. Aucune requête ne part au lancement ou
 lors du choix d'un jeu. Les résultats acquis et hardcore restent disponibles hors ligne ; un échec de lecture
 conserve la dernière synchronisation. La clé est chiffrée avec Android Keystore dans `noBackupFilesDir`, sans
 trace dans les journaux ni export. « Déconnecter » supprime la connexion et son cache, sans toucher au suivi manuel.
@@ -72,11 +89,13 @@ La permission Internet sert à cette option ; les cartes et le Pokédex n'utilis
 « Sauvegarde de collection » exporte un JSON `pokmaps-collection`, schéma 1, avec captures par version, favoris,
 formes de Zarbi, étapes cochées et observations des Pokémon errants. L'import valide le document entier (taille maximale 1 Mo)
 avant une fusion atomique : captures, favoris et étapes sont réunis ; une observation importée remplace celle du
-même Pokémon. Les autres réglages et les identifiants RetroAchievements sont exclus. Le sélecteur de documents
+même Pokémon ; dans les jeux GBA, elle remplace le choix d’errant précédent. Les autres réglages et les
+identifiants RetroAchievements sont exclus. Le sélecteur de documents
 Android choisit le fichier, sans permission de stockage générale.
 
 Pour ajouter ou retirer un guide : modifier les définitions de `data/guide/` et les textes français de
-`res/values/strings_guides*.xml` ; `strings_achievements.xml` contient les textes des succès existants.
+`res/values/strings_guides*.xml` ; `strings_achievements.xml` contient les succès des générations 1 et 2,
+et `strings_achievements_<jeu>.xml` les cinq ensembles GBA.
 Les textes de Hoenn, de son calendrier et des remakes ont chacun leur fichier dédié ;
 `strings_guides_gen3.xml` contient les outils GBA.
 Les listes de succès sont séparées par jeu, avec identifiant officiel, points,
@@ -85,6 +104,13 @@ caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`,
 Les autres noms reconnus dans la base deviennent aussi des liens. `GuideRepositoryTest` charge les onze bibliothèques
 contre la base générée et vérifie leurs liens et nombres de succès. Les soluces sont des textes originaux ;
 leurs sources éditoriales et les désassemblages pret restent documentés dans les définitions du dépôt.
+
+Les ensembles publics RetroAchievements des générations 1 à 5 sont archivés dans
+[`tools/data/retroachievements/`](tools/data/retroachievements/README.md), avec inventaire SHA-256 et
+traductions GBA dans `gen3_fr.csv`. Leur lecture et leurs tests hors ligne n’exigent aucune clé API.
+La mise à jour explicite utilise `python tools/export_retroachievements.py`, qui demande la clé sans l’enregistrer.
+Les ensembles des générations 4 et 5 sont préparés pour un travail futur ; ils n’activent aucun nouveau jeu.
+Le [bilan des guides GBA](docs/generations/guides-gen3.md) précise les choix et sources.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
@@ -521,7 +547,7 @@ personnages par version, objets fixes et conditions des scènes automatiques, av
 Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
 personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
 Les bibliothèques couvrent les onze jeux : les cinq jeux GBA proposent les outils de reproduction et de bonheur.
-Leurs soluces et autres articles sont disponibles ; les succès GBA restent prévus dans la suite de la phase 7.
+Leurs soluces, succès officiels, objectifs de collection et observations des errants sont disponibles.
 
 Le même export intègre les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.

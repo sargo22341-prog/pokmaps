@@ -1,0 +1,1233 @@
+{
+  "game_id": 7212,
+  "title": "Pokémon HeartGold Version | Pokémon SoulSilver Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/7212",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 124887,
+      "Title": "The Wind Wasn't with Him",
+      "Description": "Defeat Falkner for the Zephyr Badge.",
+      "Points": 5,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2020-09-21 17:41:42"
+    },
+    {
+      "ID": 119420,
+      "Title": "Strong Gusts from the East",
+      "Description": "Defeat Falkner in his gym without using super effective attacks or using Pokémon above Level 13. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:15"
+    },
+    {
+      "ID": 124888,
+      "Title": "His Bugs Aren't That Tough",
+      "Description": "Defeat Bugsy for the Hive Badge.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2020-10-02 11:01:56"
+    },
+    {
+      "ID": 119438,
+      "Title": "Breaking the Hive",
+      "Description": "Defeat Bugsy in his gym without using super effective attacks or using Pokémon above Level 17. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:16"
+    },
+    {
+      "ID": 124889,
+      "Title": "She Just Lost, You Hear?",
+      "Description": "Defeat Whitney for the Plain Badge.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:39"
+    },
+    {
+      "ID": 120238,
+      "Title": "Rolled Too Far",
+      "Description": "Defeat Whitney in her gym without using super effective attacks or using Pokémon above Level 19. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:16"
+    },
+    {
+      "ID": 124890,
+      "Title": "Does He Believe in Ghosts?",
+      "Description": "Defeat Morty for the Fog Badge.",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:42"
+    },
+    {
+      "ID": 120382,
+      "Title": "Cursed Forever",
+      "Description": "Defeat Morty in his gym without using super effective attacks or using Pokémon above Level 25. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:16"
+    },
+    {
+      "ID": 124891,
+      "Title": "The Pounding Waterfall",
+      "Description": "Defeat Chuck for the Storm Badge.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:46"
+    },
+    {
+      "ID": 120389,
+      "Title": "Getting an Uppercut",
+      "Description": "Defeat Chuck in his gym without using super effective attacks or using Pokémon above Level 31. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:16"
+    },
+    {
+      "ID": 124892,
+      "Title": "She's Rusty",
+      "Description": "Defeat Jasmine for the Mineral Badge.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:50"
+    },
+    {
+      "ID": 120391,
+      "Title": "Magnetic Anomaly",
+      "Description": "Defeat Jasmine in her gym without using super effective attacks or using Pokémon above Level 35. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:16"
+    },
+    {
+      "ID": 124893,
+      "Title": "When the Ice and Snow Melt, Spring Arrives",
+      "Description": "Defeat Pryce for the Glacier Badge.",
+      "Points": 5,
+      "DisplayOrder": 13,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:52"
+    },
+    {
+      "ID": 121219,
+      "Title": "Crushing Some Ice for My Drink",
+      "Description": "Defeat Pryce in his gym without using super effective attacks or using Pokémon above Level 34. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 14,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:17"
+    },
+    {
+      "ID": 124894,
+      "Title": "This Is Where Her Battle Ends",
+      "Description": "Defeat Clair for the Rising Badge.",
+      "Points": 5,
+      "DisplayOrder": 15,
+      "type": "progression",
+      "DateModified": "2020-10-02 22:16:38"
+    },
+    {
+      "ID": 121657,
+      "Title": "Unleash the Dragon",
+      "Description": "Defeat Clair in her gym without using super effective attacks or using Pokémon above Level 41. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 16,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:17"
+    },
+    {
+      "ID": 125178,
+      "Title": "Final Battle... Or Is It?",
+      "Description": "Defeat the Elite Four in Round One and enter the Hall of Fame.",
+      "Points": 10,
+      "DisplayOrder": 17,
+      "type": "progression",
+      "DateModified": "2020-09-21 18:06:58"
+    },
+    {
+      "ID": 122018,
+      "Title": "Round One... Fight!",
+      "Description": "Defeat the Elite Four and the Champ in Round One in a single session without using Pokémon above Level 45. [Option: Set Mode]",
+      "Points": 25,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:17"
+    },
+    {
+      "ID": 125184,
+      "Title": "Rock-Hard Resistance",
+      "Description": "Defeat Brock for the Boulder Badge.",
+      "Points": 5,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:01"
+    },
+    {
+      "ID": 123270,
+      "Title": "Smashing Rocks",
+      "Description": "Defeat Brock in his gym without using super effective attacks or using Pokémon above Level 54. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:17"
+    },
+    {
+      "ID": 125181,
+      "Title": "Date Interrupting Pest",
+      "Description": "Defeat Misty for the Cascade Badge.",
+      "Points": 5,
+      "DisplayOrder": 21,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:04"
+    },
+    {
+      "ID": 123271,
+      "Title": "Like a Cold Shower",
+      "Description": "Defeat Misty in her gym without using super effective attacks or using Pokémon above Level 54. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:18"
+    },
+    {
+      "ID": 125179,
+      "Title": "Zzzap!",
+      "Description": "Defeat Lt. Surge for the Thunder Badge.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:08"
+    },
+    {
+      "ID": 123272,
+      "Title": "Warning! Blackout!",
+      "Description": "Defeat Lt. Surge in his gym without using super effective attacks or using Pokémon above Level 53. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 24,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:18"
+    },
+    {
+      "ID": 125182,
+      "Title": "Flower Arrangement",
+      "Description": "Defeat Erika for the Rainbow Badge.",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:11"
+    },
+    {
+      "ID": 123273,
+      "Title": "Getting Rid of the Weeds",
+      "Description": "Defeat Erika in her gym without using super effective attacks or using Pokémon above Level 56. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:18"
+    },
+    {
+      "ID": 125183,
+      "Title": "Like Father Like Daughter",
+      "Description": "Defeat Janine for the Soul Badge.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:14"
+    },
+    {
+      "ID": 123274,
+      "Title": "I Am the Next Ninja Master",
+      "Description": "Defeat Janine in her gym without using super effective attacks or using Pokémon above Level 50. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:18"
+    },
+    {
+      "ID": 125180,
+      "Title": "The Future Was Wrong",
+      "Description": "Defeat Sabrina for the Marsh Badge.",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:19"
+    },
+    {
+      "ID": 123275,
+      "Title": "Lose Your Mind",
+      "Description": "Defeat Sabrina in her gym without using super effective attacks or using Pokémon above Level 55. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:18"
+    },
+    {
+      "ID": 125185,
+      "Title": "Spirit Burned Out",
+      "Description": "Defeat Blaine for the Volcano Badge.",
+      "Points": 5,
+      "DisplayOrder": 31,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:21"
+    },
+    {
+      "ID": 123276,
+      "Title": "Here Is Another Breakout",
+      "Description": "Defeat Blaine in his gym without using super effective attacks or using Pokémon above Level 59. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 32,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:19"
+    },
+    {
+      "ID": 125186,
+      "Title": "You're That Pathetic?",
+      "Description": "Defeat Blue for the Earth Badge.",
+      "Points": 5,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:24"
+    },
+    {
+      "ID": 123415,
+      "Title": "Preparing to Be the Real Champion",
+      "Description": "Defeat Blue in his gym without using super effective attacks or using Pokémon above Level 60. [Option: Set Mode]",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": "missable",
+      "DateModified": "2025-04-26 07:18:19"
+    },
+    {
+      "ID": 125204,
+      "Title": "Rise of a New Champion",
+      "Description": "Defeat the Elite Four in Round Two and enter the Hall of Fame.",
+      "Points": 25,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:26"
+    },
+    {
+      "ID": 123425,
+      "Title": "And the Champion Is...",
+      "Description": "Defeat the Elite Four and the Champ in Round Two in a single session without using Pokémon above Level 70. [Option: Set Mode]",
+      "Points": 25,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2025-04-26 07:18:20"
+    },
+    {
+      "ID": 125205,
+      "Title": "Battle at the Snowy Peak",
+      "Description": "Defeat Red.",
+      "Points": 10,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2020-09-21 18:07:29"
+    },
+    {
+      "ID": 125692,
+      "Title": "No Wonder I Never Heard about You",
+      "Description": "Obtain the Silver Print of the Battle Tower.",
+      "Points": 25,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2020-09-24 19:40:07"
+    },
+    {
+      "ID": 125693,
+      "Title": "All My Wishes Came True",
+      "Description": "Obtain the Gold Print of the Battle Tower.",
+      "Points": 50,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2020-09-24 19:40:55"
+    },
+    {
+      "ID": 125694,
+      "Title": "You Should Pay More Attention to the Battles",
+      "Description": "Obtain the Silver Print of the Battle Factory.",
+      "Points": 25,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2020-09-24 19:43:31"
+    },
+    {
+      "ID": 125695,
+      "Title": "Your Cheats Have No Use",
+      "Description": "Obtain the Gold Print of the Battle Factory.",
+      "Points": 50,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2020-09-24 19:43:29"
+    },
+    {
+      "ID": 125696,
+      "Title": "Did You Need to Prepare for the Loss?",
+      "Description": "Obtain the Silver Print of the Battle Hall.",
+      "Points": 25,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2020-09-24 19:58:24"
+    },
+    {
+      "ID": 125697,
+      "Title": "Lord of the Elements",
+      "Description": "Obtain the Gold Print of the Battle Hall.",
+      "Points": 50,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2020-09-24 19:58:25"
+    },
+    {
+      "ID": 125698,
+      "Title": "Caitlin's Disappointment",
+      "Description": "Obtain the Silver Print of the Battle Castle.",
+      "Points": 25,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2020-09-24 19:56:09"
+    },
+    {
+      "ID": 125699,
+      "Title": "A New Position Has Been Vacated",
+      "Description": "Obtain the Gold Print of the Battle Castle.",
+      "Points": 50,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2020-09-24 19:56:10"
+    },
+    {
+      "ID": 125700,
+      "Title": "Surprises from the Game Board",
+      "Description": "Obtain the Silver Print of the Battle Arcade.",
+      "Points": 25,
+      "DisplayOrder": 46,
+      "type": null,
+      "DateModified": "2020-09-24 19:52:40"
+    },
+    {
+      "ID": 125701,
+      "Title": "Seems like You Lost Everything",
+      "Description": "Obtain the Gold Print of the Battle Arcade.",
+      "Points": 50,
+      "DisplayOrder": 47,
+      "type": null,
+      "DateModified": "2020-09-24 19:52:22"
+    },
+    {
+      "ID": 125702,
+      "Title": "Johto's Battle Royale",
+      "Description": "Get a Streak of 100 Wins or more in the Battle Tower and obtain a Star on the Trainer Card.",
+      "Points": 50,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2020-12-07 15:19:05"
+    },
+    {
+      "ID": 125704,
+      "Title": "At Least I Can Gamble Here",
+      "Description": "Win a Prize via a Scratch-Off Card by having three of the same Pokemon.",
+      "Points": 3,
+      "DisplayOrder": 49,
+      "type": null,
+      "DateModified": "2020-09-24 20:23:30"
+    },
+    {
+      "ID": 125518,
+      "Title": "Why Don't You Give Such Information for Free?",
+      "Description": "Buy all 27 Data Cards in the Pokeathlon Dome.",
+      "Points": 10,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2020-10-01 23:59:40"
+    },
+    {
+      "ID": 125519,
+      "Title": "Unbeatable Pokeathlete",
+      "Description": "Obtain all 10 Solidarity Crowns in the Pokeathlon Dome by getting an End Result of 450 or more in every Course.",
+      "Points": 25,
+      "DisplayOrder": 51,
+      "type": null,
+      "DateModified": "2020-10-01 23:59:42"
+    },
+    {
+      "ID": 125520,
+      "Title": "Get Potential out of Everything",
+      "Description": "Obtain all 10 Trust Crowns in the Pokeathlon Dome by having at least 200 Medalist Pokemon.",
+      "Points": 100,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2023-01-22 09:27:57"
+    },
+    {
+      "ID": 125521,
+      "Title": "Novice Team Captain",
+      "Description": "Obtain a Star on your Trainer Card by beating all Normal Records of the Pokeathlon Minigames.",
+      "Points": 10,
+      "DisplayOrder": 53,
+      "type": null,
+      "DateModified": "2020-10-01 23:59:48"
+    },
+    {
+      "ID": 125522,
+      "Title": "Professional Team Captain",
+      "Description": "Obtain all 10 Potential Crowns in the Pokeathlon Dome by beating all Mastery Records of the Minigames.",
+      "Points": 25,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2022-07-26 12:38:01"
+    },
+    {
+      "ID": 125523,
+      "Title": "Greatest Pokeathlete of All Time",
+      "Description": "Obtain all 10 Friendship Crowns in the Pokeathlon Dome by having a Total of 4.500 Pokeathlon Points.",
+      "Points": 50,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2021-02-21 21:37:48"
+    },
+    {
+      "ID": 125705,
+      "Title": "Look How Good I Am",
+      "Description": "Obtain all 5 Special Trophies in the Pokeathlon Dome.",
+      "Points": 25,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2020-10-01 23:59:55"
+    },
+    {
+      "ID": 125524,
+      "Title": "Without Even Jumping",
+      "Description": "Obtain a Jump Medal in the Pokeathlon Dome with Diglett or Dugtrio.",
+      "Points": 5,
+      "DisplayOrder": 57,
+      "type": null,
+      "DateModified": "2020-09-19 19:19:53"
+    },
+    {
+      "ID": 125187,
+      "Title": "Inside the Hurricane",
+      "Description": "Defeat Falkner in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 58,
+      "type": null,
+      "DateModified": "2020-09-26 12:52:39"
+    },
+    {
+      "ID": 125188,
+      "Title": "No Chance Against My Insect Barrier",
+      "Description": "Defeat Bugsy in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 59,
+      "type": null,
+      "DateModified": "2020-09-26 12:52:55"
+    },
+    {
+      "ID": 125189,
+      "Title": "What Did You Say?",
+      "Description": "Defeat Whitney in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:03"
+    },
+    {
+      "ID": 125190,
+      "Title": "I Will Ban You Forever",
+      "Description": "Defeat Morty in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 61,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:14"
+    },
+    {
+      "ID": 125191,
+      "Title": "Now You Have Lost",
+      "Description": "Defeat Chuck in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:23"
+    },
+    {
+      "ID": 125192,
+      "Title": "Feel My Sword of Destiny",
+      "Description": "Defeat Jasmine in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 63,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:31"
+    },
+    {
+      "ID": 125193,
+      "Title": "I Send You Right into Another Ice Age",
+      "Description": "Defeat Pryce in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 64,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:39"
+    },
+    {
+      "ID": 125194,
+      "Title": "Everyone Makes Wrong Decisions",
+      "Description": "Defeat Clair in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:47"
+    },
+    {
+      "ID": 125195,
+      "Title": "Fear My Earthquake",
+      "Description": "Defeat Brock in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2020-09-26 12:53:55"
+    },
+    {
+      "ID": 125196,
+      "Title": "I Was Confident about My Win",
+      "Description": "Defeat Misty in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 67,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:02"
+    },
+    {
+      "ID": 125197,
+      "Title": "Electric Short Circuit",
+      "Description": "Defeat Lt. Surge in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:12"
+    },
+    {
+      "ID": 125198,
+      "Title": "I Am Going Hardcore",
+      "Description": "Defeat Erika in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:20"
+    },
+    {
+      "ID": 125199,
+      "Title": "Don't Joke with the Darkside",
+      "Description": "Defeat Janine in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 70,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:30"
+    },
+    {
+      "ID": 125200,
+      "Title": "Let Me Be the Fortune Teller",
+      "Description": "Defeat Sabrina in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:39"
+    },
+    {
+      "ID": 125201,
+      "Title": "Clog the Volcano",
+      "Description": "Defeat Blaine in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:46"
+    },
+    {
+      "ID": 125202,
+      "Title": "Do I Get Your Cheerleaders Now?",
+      "Description": "Defeat Blue in the Fighting Dojo.",
+      "Points": 5,
+      "DisplayOrder": 73,
+      "type": null,
+      "DateModified": "2020-09-26 12:54:53"
+    },
+    {
+      "ID": 125203,
+      "Title": "Ultimate Pokerush",
+      "Description": "Defeat all 16 Gym Leaders in the Fighting Dojo in one session without leaving the building.",
+      "Points": 25,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2020-10-10 00:15:31"
+    },
+    {
+      "ID": 123895,
+      "Title": "Silver License of Pokemon Catching",
+      "Description": "Catch all obtainable Pokemon on the Johto Pokedex. [Non-event and no external trades]",
+      "Points": 50,
+      "DisplayOrder": 75,
+      "type": "missable",
+      "DateModified": "2021-01-12 01:59:44"
+    },
+    {
+      "ID": 123898,
+      "Title": "Gold License of Pokemon Catching",
+      "Description": "Catch all 373 (HG) | 371 (SS) obtainable Pokemon on the National Pokedex. [Non-event and no external trades]",
+      "Points": 50,
+      "DisplayOrder": 76,
+      "type": "missable",
+      "DateModified": "2021-01-12 01:59:50"
+    },
+    {
+      "ID": 125540,
+      "Title": "Tower Guardians",
+      "Description": "Catch a Level 45 Lugia or Ho-Oh (No Master Ball).",
+      "Points": 10,
+      "DisplayOrder": 77,
+      "type": "missable",
+      "DateModified": "2020-10-06 18:37:42"
+    },
+    {
+      "ID": 125541,
+      "Title": "Ring the Bell",
+      "Description": "Catch a Level 70 Lugia or Ho-Oh (No Master Ball).",
+      "Points": 10,
+      "DisplayOrder": 78,
+      "type": "missable",
+      "DateModified": "2020-10-06 18:37:46"
+    },
+    {
+      "ID": 125440,
+      "Title": "Resurrected Wanderers",
+      "Description": "Catch Raikou, Entei and Suicune.",
+      "Points": 10,
+      "DisplayOrder": 79,
+      "type": null,
+      "DateModified": "2025-10-26 12:33:43"
+    },
+    {
+      "ID": 125452,
+      "Title": "Spliced DNA",
+      "Description": "Catch Mewtwo (No Master Ball).",
+      "Points": 5,
+      "DisplayOrder": 80,
+      "type": "missable",
+      "DateModified": "2020-10-06 18:43:33"
+    },
+    {
+      "ID": 125539,
+      "Title": "Three Birds with Three Stones",
+      "Description": "Catch Articuno, Zapdos and Moltres.",
+      "Points": 10,
+      "DisplayOrder": 81,
+      "type": null,
+      "DateModified": "2020-09-23 13:11:57"
+    },
+    {
+      "ID": 125538,
+      "Title": "Roaming Lati@s",
+      "Description": "Catch either Latias or Latios (No Master Ball).",
+      "Points": 5,
+      "DisplayOrder": 82,
+      "type": "missable",
+      "DateModified": "2020-10-06 18:43:37"
+    },
+    {
+      "ID": 125537,
+      "Title": "Uncontrolled Ancients",
+      "Description": "Catch either Kyogre or Groudon (No Master Ball).",
+      "Points": 5,
+      "DisplayOrder": 83,
+      "type": "missable",
+      "DateModified": "2020-12-20 20:33:20"
+    },
+    {
+      "ID": 125679,
+      "Title": "Kids Shouldn't Smoke",
+      "Description": "Get all Incenses.",
+      "Points": 5,
+      "DisplayOrder": 84,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:05"
+    },
+    {
+      "ID": 125690,
+      "Title": "Captain's Collection",
+      "Description": "Get all Plates.",
+      "Points": 5,
+      "DisplayOrder": 85,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:06"
+    },
+    {
+      "ID": 121890,
+      "Title": "Ekans Charmer",
+      "Description": "Get all colored Flutes.",
+      "Points": 5,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:07"
+    },
+    {
+      "ID": 125276,
+      "Title": "Feels like an Antique Collection",
+      "Description": "Obtain every TM in the Overworld.",
+      "Points": 25,
+      "DisplayOrder": 87,
+      "type": null,
+      "DateModified": "2020-11-23 19:06:31"
+    },
+    {
+      "ID": 122604,
+      "Title": "Johto Hidden Item Finder",
+      "Description": "Get all hidden items in Johto.",
+      "Points": 25,
+      "DisplayOrder": 88,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:10"
+    },
+    {
+      "ID": 122619,
+      "Title": "Kanto Hidden Item Finder",
+      "Description": "Get all hidden items in Kanto.",
+      "Points": 10,
+      "DisplayOrder": 89,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:11"
+    },
+    {
+      "ID": 122634,
+      "Title": "Johto Item Gatherer",
+      "Description": "Get all visible items in Johto.",
+      "Points": 25,
+      "DisplayOrder": 90,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:13"
+    },
+    {
+      "ID": 122635,
+      "Title": "Kanto Item Gatherer",
+      "Description": "Get all visible items in Kanto.",
+      "Points": 10,
+      "DisplayOrder": 91,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:15"
+    },
+    {
+      "ID": 123232,
+      "Title": "Johto Master Trainer",
+      "Description": "Battle all non-missable trainers in Johto.",
+      "Points": 25,
+      "DisplayOrder": 92,
+      "type": null,
+      "DateModified": "2022-06-02 20:36:18"
+    },
+    {
+      "ID": 123235,
+      "Title": "Kanto Master Trainer",
+      "Description": "Battle all non-missable trainers in Kanto.",
+      "Points": 25,
+      "DisplayOrder": 93,
+      "type": null,
+      "DateModified": "2022-01-08 10:27:10"
+    },
+    {
+      "ID": 123666,
+      "Title": "Resistance Is Futile",
+      "Description": "Defeat each rematchable trainer's final team.",
+      "Points": 25,
+      "DisplayOrder": 94,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:20"
+    },
+    {
+      "ID": 121880,
+      "Title": "Tough Words",
+      "Description": "Learn all trendy phrases.",
+      "Points": 5,
+      "DisplayOrder": 95,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:22"
+    },
+    {
+      "ID": 124581,
+      "Title": "Fashion Guru",
+      "Description": "Get at least one of every obtainable accessory and backdrop.",
+      "Points": 25,
+      "DisplayOrder": 96,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:23"
+    },
+    {
+      "ID": 125708,
+      "Title": "How to Design a Poké Ball",
+      "Description": "Attach eight Seals to a single Ball Capsule.",
+      "Points": 1,
+      "DisplayOrder": 97,
+      "type": null,
+      "DateModified": "2020-09-24 00:13:29"
+    },
+    {
+      "ID": 125709,
+      "Title": "Twinkle, Twinkle, Little Ball",
+      "Description": "Have all 77 obtainable Seals in the Seal Case at once.",
+      "Points": 25,
+      "DisplayOrder": 98,
+      "type": null,
+      "DateModified": "2025-01-07 20:53:41"
+    },
+    {
+      "ID": 125706,
+      "Title": "My Own Pocket Garden",
+      "Description": "Have all 43 regular available Berries in the Berry Pocket at once.",
+      "Points": 25,
+      "DisplayOrder": 99,
+      "type": null,
+      "DateModified": "2021-07-10 09:56:08"
+    },
+    {
+      "ID": 124162,
+      "Title": "Apricorn Farmer",
+      "Description": "Harvest all Apricorn Trees on one day.",
+      "Points": 5,
+      "DisplayOrder": 100,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:29"
+    },
+    {
+      "ID": 119492,
+      "Title": "Cameron's Personal Model",
+      "Description": "Fill the Photo Album on the PC with 36 Pictures of different Locations.",
+      "Points": 10,
+      "DisplayOrder": 101,
+      "type": null,
+      "DateModified": "2025-08-16 10:25:52"
+    },
+    {
+      "ID": 124160,
+      "Title": "Mommy's Favorite",
+      "Description": "Obtain a Package from your Mother.",
+      "Points": 1,
+      "DisplayOrder": 102,
+      "type": null,
+      "DateModified": "2020-09-21 15:15:04"
+    },
+    {
+      "ID": 124353,
+      "Title": "Is There a Reason They Are Sold in the Underground?",
+      "Description": "Buy some Medicine from the Herb Shop in the Goldenrod Tunnel.",
+      "Points": 1,
+      "DisplayOrder": 103,
+      "type": null,
+      "DateModified": "2025-05-24 18:27:32"
+    },
+    {
+      "ID": 124352,
+      "Title": "Buy Cheap, Sell Expensive",
+      "Description": "Buy all Items from the Man in the Bargain Shop on Monday Morning.",
+      "Points": 2,
+      "DisplayOrder": 104,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:31"
+    },
+    {
+      "ID": 125277,
+      "Title": "I Don't See a Difference",
+      "Description": "Let one of the Haircut Brothers give your Pokemon a new Haircut.",
+      "Points": 1,
+      "DisplayOrder": 105,
+      "type": null,
+      "DateModified": "2020-09-26 12:23:20"
+    },
+    {
+      "ID": 124351,
+      "Title": "Joining the Magikarp Competition",
+      "Description": "Show the Fishing Guru a big Magikarp and get rewarded for it.",
+      "Points": 3,
+      "DisplayOrder": 106,
+      "type": null,
+      "DateModified": "2020-09-26 12:04:08"
+    },
+    {
+      "ID": 125278,
+      "Title": "Relaxing and a Cup of Tea",
+      "Description": "Let Daisy give your Pokemon a Massage.",
+      "Points": 1,
+      "DisplayOrder": 107,
+      "type": null,
+      "DateModified": "2020-09-26 12:50:20"
+    },
+    {
+      "ID": 124570,
+      "Title": "I Should Become a Bug Catcher",
+      "Description": "Win the Bug Catching Contest and get your Reward.",
+      "Points": 3,
+      "DisplayOrder": 108,
+      "type": null,
+      "DateModified": "2020-09-21 14:35:05"
+    },
+    {
+      "ID": 124571,
+      "Title": "Forget It, I Will Study Entomology",
+      "Description": "Catch a Pokemon in the Bug Catching Contest which is at least worth 350 Points.",
+      "Points": 5,
+      "DisplayOrder": 109,
+      "type": null,
+      "DateModified": "2020-10-06 17:56:52"
+    },
+    {
+      "ID": 121775,
+      "Title": "The Impeccable One",
+      "Description": "Obtain a Dratini knowing 'Extreme Speed' in the Dragon's Den for answering all Questions correctly.",
+      "Points": 3,
+      "DisplayOrder": 110,
+      "type": "missable",
+      "DateModified": "2020-09-21 20:20:20"
+    },
+    {
+      "ID": 121889,
+      "Title": "Gifted Trainer",
+      "Description": "Get all Gift Pokemon (not counting Tentacool). [See comments]",
+      "Points": 10,
+      "DisplayOrder": 111,
+      "type": null,
+      "DateModified": "2021-01-24 03:14:38"
+    },
+    {
+      "ID": 125746,
+      "Title": "Stranded From the Rest of the World",
+      "Description": "Get gifted a Tentacool.",
+      "Points": 5,
+      "DisplayOrder": 112,
+      "type": null,
+      "DateModified": "2020-10-03 14:24:23"
+    },
+    {
+      "ID": 125794,
+      "Title": "Passionate Trader",
+      "Description": "Complete all 10 regular Trades in Kanto and Johto.",
+      "Points": 10,
+      "DisplayOrder": 113,
+      "type": null,
+      "DateModified": "2022-06-11 21:11:42"
+    },
+    {
+      "ID": 122572,
+      "Title": "Ultimate Copycat",
+      "Description": "Teach a Smeargle four different HM moves.",
+      "Points": 5,
+      "DisplayOrder": 114,
+      "type": null,
+      "DateModified": "2020-09-21 21:24:52"
+    },
+    {
+      "ID": 123914,
+      "Title": "Collection Trade",
+      "Description": "Trade with a Shard Collector and get three Berries for it.",
+      "Points": 2,
+      "DisplayOrder": 115,
+      "type": null,
+      "DateModified": "2020-09-21 20:36:00"
+    },
+    {
+      "ID": 124242,
+      "Title": "Miltank Veterinarian",
+      "Description": "Help the sick Miltank.",
+      "Points": 2,
+      "DisplayOrder": 116,
+      "type": null,
+      "DateModified": "2020-09-23 22:57:17"
+    },
+    {
+      "ID": 124354,
+      "Title": "A Bond That Cannot Be Broken",
+      "Description": "Collect five Shiny Leaves and get a Leaf Crown crafted.",
+      "Points": 5,
+      "DisplayOrder": 118,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:40"
+    },
+    {
+      "ID": 125006,
+      "Title": "It Is Called Retro",
+      "Description": "Obtain the GB Sounds from Game Freak's Sound Designer.",
+      "Points": 2,
+      "DisplayOrder": 119,
+      "type": null,
+      "DateModified": "2020-10-06 18:37:19"
+    },
+    {
+      "ID": 125282,
+      "Title": "How Could Something Like That Punch?",
+      "Description": "Show the Lady on Route 14 a Chansey and obtain a 'Lucky Punch'.",
+      "Points": 2,
+      "DisplayOrder": 120,
+      "type": null,
+      "DateModified": "2020-09-24 16:30:54"
+    },
+    {
+      "ID": 125281,
+      "Title": "Seems like a Lucky Day",
+      "Description": "Obtain the Item 'Lucky Egg' from a wild Chansey.",
+      "Points": 5,
+      "DisplayOrder": 121,
+      "type": null,
+      "DateModified": "2021-02-21 21:35:45"
+    },
+    {
+      "ID": 125691,
+      "Title": "Primo's Folder",
+      "Description": "Unlock all wallpapers for the Pokemon Storage System. [See comments]",
+      "Points": 3,
+      "DisplayOrder": 122,
+      "type": null,
+      "DateModified": "2020-12-02 03:29:47"
+    },
+    {
+      "ID": 125707,
+      "Title": "I Reached the Top Just to See This!",
+      "Description": "Witness the Diamond Dust on Mt. Silver.",
+      "Points": 5,
+      "DisplayOrder": 123,
+      "type": null,
+      "DateModified": "2021-08-06 17:03:08"
+    },
+    {
+      "ID": 125789,
+      "Title": "Call the Unown",
+      "Description": "Use your Radio to communicate with the Unown in the Alph Ruins to increase your odds to find new forms.",
+      "Points": 1,
+      "DisplayOrder": 124,
+      "type": null,
+      "DateModified": "2025-10-26 12:06:17"
+    },
+    {
+      "ID": 124350,
+      "Title": "A Lost Civilization",
+      "Description": "Solve all eight Puzzles of the Ruins of Alph.",
+      "Points": 3,
+      "DisplayOrder": 125,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:44"
+    },
+    {
+      "ID": 125790,
+      "Title": "It's Not Unown Anymore",
+      "Description": "Complete all Pages of the Unown Report and solve the Mystery behind the Unown.",
+      "Points": 4,
+      "DisplayOrder": 126,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:46"
+    },
+    {
+      "ID": 125791,
+      "Title": "Big Family",
+      "Description": "Get all items from the Week Siblings.",
+      "Points": 5,
+      "DisplayOrder": 127,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:47"
+    },
+    {
+      "ID": 125792,
+      "Title": "Fulfilling an Old Man's Wish",
+      "Description": "Get all items given by Bill's grandfather.",
+      "Points": 5,
+      "DisplayOrder": 128,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:48"
+    },
+    {
+      "ID": 125793,
+      "Title": "My Lucky Number",
+      "Description": "Win a Prize at the Pokemon Lottery Corner.",
+      "Points": 2,
+      "DisplayOrder": 129,
+      "type": null,
+      "DateModified": "2020-10-08 11:14:27"
+    },
+    {
+      "ID": 125795,
+      "Title": "Moonlight Sonata",
+      "Description": "Watch the Clefairy Dance on Mt. Moon.",
+      "Points": 2,
+      "DisplayOrder": 130,
+      "type": null,
+      "DateModified": "2020-09-25 21:42:24"
+    },
+    {
+      "ID": 125796,
+      "Title": "Double Dragon",
+      "Description": "Defeat Clair and Lance in a Double Battle.",
+      "Points": 5,
+      "DisplayOrder": 131,
+      "type": null,
+      "DateModified": "2020-09-24 17:26:50"
+    },
+    {
+      "ID": 125797,
+      "Title": "After All That Training",
+      "Description": "Defeat the Rival at Indigo Plateau.",
+      "Points": 5,
+      "DisplayOrder": 132,
+      "type": null,
+      "DateModified": "2020-10-13 01:19:15"
+    },
+    {
+      "ID": 123473,
+      "Title": "Creator of the Universe [Event]",
+      "Description": "Witness the Birth of a Legendary Pokemon at the Sinjoh Ruins and return back to the Alph Ruins.",
+      "Points": 5,
+      "DisplayOrder": 133,
+      "type": null,
+      "DateModified": "2023-03-05 10:23:10"
+    },
+    {
+      "ID": 123514,
+      "Title": "A Special Forest Dwellers [Event]",
+      "Description": "Find the Spikey-Eared Pichu and let Professor Elm give you some Information about it.",
+      "Points": 5,
+      "DisplayOrder": 134,
+      "type": null,
+      "DateModified": "2020-09-19 21:26:01"
+    },
+    {
+      "ID": 123533,
+      "Title": "Hero of Time [Event]",
+      "Description": "Defeat Giovanni in the Tohjo Falls and prevent Team Rocket's Comeback.",
+      "Points": 5,
+      "DisplayOrder": 135,
+      "type": null,
+      "DateModified": "2020-09-23 23:17:46"
+    },
+    {
+      "ID": 123534,
+      "Title": "The Mystery about the Enigma Stone [Event]",
+      "Description": "Bring the Enigma Stone to the Pewter Museum and capture the appearing Eon Pokemon.",
+      "Points": 5,
+      "DisplayOrder": 136,
+      "type": null,
+      "DateModified": "2020-09-21 15:27:41"
+    },
+    {
+      "ID": 124349,
+      "Title": "Multifunctional Device [Event]",
+      "Description": "Find a secret Room and discover all Forms of Rotom.",
+      "Points": 3,
+      "DisplayOrder": 137,
+      "type": null,
+      "DateModified": "2020-10-02 00:00:51"
+    }
+  ]
+}

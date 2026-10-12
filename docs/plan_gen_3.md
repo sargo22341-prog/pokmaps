@@ -748,9 +748,17 @@ Communs :
       ensembles nommés par jeu.
       Ensembles Rouge/Bleu/Jaune, Or/Argent/Cristal, Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille ;
       les deux articles d’outils GBA citent les fichiers pret aux commits épinglés.
-- [ ] Succès RetroAchievements des cinq jeux : instantané traduit, identifiants officiels relevés sur le site
+- [x] Succès RetroAchievements des cinq jeux : instantané traduit, identifiants officiels relevés sur le site
       (ne pas les deviner), `RetroGames.ids`, `CaptureGoals`, `unownGoal` et objectif de 28 formes.
-- [ ] Errants : `Roamers` par jeu (routes, espèces, dépendance à la version ou au starter) et réglages.
+      Export public du 12 octobre 2026 : Rubis 790 (49), Saphir 791 (49), Émeraude 668 (197),
+      Rouge Feu 515 (61), Vert Feuille 788 (128). Conditions françaises, titres adaptés,
+      points et mentions manquables conservés ; chapitres liés et synchronisation manuelle des onze jeux.
+      Les 28 Zarbi suivent la quête des Ruines Tanoby : aucun succès Zarbi dans les ensembles officiels GBA.
+- [x] Errants : `Roamers` par jeu (routes, espèces, dépendance à la version ou au starter) et réglages.
+      Latios dans Rubis, Latias dans Saphir, choix rouge/bleu dans Émeraude ; bête liée au partenaire
+      dans les remakes. Tables de routes pret, identifiants validés contre chaque catalogue ; Route 21 nord
+      seulement dans les remakes. Dernière observation, carte et effacement dans l’accueil des guides.
+      Une observation par cartouche GBA ; import et préférences remplacent le choix exclusif précédent.
 - [x] Reproduction de la 3e génération : IV au lieu des DV, talents, CT du père ; `BreedingUseCase` ne doit plus
       exiger la génération 2.
       Parents du National (386 espèces), six IV de 0 à 31 et compatibilité sans blocage par DV ;
@@ -772,7 +780,11 @@ Branche Hoenn :
       hebdomadaires de Johto.
       Quatre articles d’Agenda : Île Mirage, marées, loterie et horloge. La Maison Piège est une quête annexe :
       ses huit défis suivent les badges et le Panthéon, pas les jours. Aucun tirage de sauvegarde n’est simulé.
-- [ ] `CaptureGoals` : Pokédex de Hoenn, choix exclusifs (starter, fossiles Lilia/Anorith, Kecleon…).
+- [x] `CaptureGoals` : Pokédex de Hoenn, choix exclusifs (starter, fossiles Lilia/Anorith, Kecleon…).
+      Collections régionale et nationale ; totaux 177/178/212 pour Rubis/Saphir/Émeraude.
+      Partenaires, fossiles et Pierre Lune limitée suivent chaque jeu ; Émeraude donne les deux fossiles.
+      Kecleon est accessible et n’est pas un choix exclusif. Les partenaires de Johto conditionnés aux
+      200 espèces ordinaires de Hoenn restent exclus sans échanges. Saphir n’a pas de succès de collection complète.
 - [x] Pierre Stase (Émeraude) dans la reproduction.
       Objet tenu sélectionnable ; effet réservé à la femelle ou à Métamorph, prioritaire s’il est présent.
       Environ 50 % de transmission imposée de la nature, sinon tirage aléatoire (environ 52 % de même nature).
@@ -783,7 +795,10 @@ Branche Remake 1G :
 - [x] Soluces originales de Kanto de Rouge Feu/Vert Feuille et des Îles Sevii, quêtes annexes, astuces, bugs.
       Douze chapitres jusqu’au Saphir de Ciléo ; articles sur les légendaires, collections de Zarbi et fossiles,
       Cherche VS et tuteurs, défauts des IV des errants et disparition après Hurlement dans les jeux GBA.
-- [ ] `CaptureGoals` : Pokédex de Kanto puis National, choix exclusifs (starter, fossiles, Kicklee/Tygnon…).
+- [x] `CaptureGoals` : Pokédex de Kanto puis National, choix exclusifs (starter, fossiles, Kicklee/Tygnon…).
+      Totaux 170/171, projections régionales et choix corrélé partenaire + errant ; fossile exclusif.
+      La reproduction donne les trois évolutions de Debugant et les trois évolutions élémentaires d’Évoli.
+      Kicklee/Tygnon ne restent donc pas exclusifs dans la collection complète des remakes.
 
 Première passe de phase 7 (12 octobre 2026) : quatre tâches terminées, avec deux articles d’outils GBA
 dans un fichier de ressources dédié. `GuideRepositoryTest` charge les onze bibliothèques ; les six anciennes
@@ -811,6 +826,36 @@ Aucune génération ni modification du pipeline Python ; Ruff, pytest et essais 
 Le premier lancement Gradle était bloqué par l’accès au cache ; la relance autorisée a fonctionné.
 Les erreurs initiales de style et deux faux positifs anglais de Lint sur les textes français sont corrigés,
 sans exclusion. La dépréciation AGP `Configuration.setVisible(boolean)` déjà documentée reste affichée.
+
+Clôture de phase 7 (12 octobre 2026) : les quatre dernières cases sont terminées.
+Les onze bibliothèques regroupent 1 003 succès officiels ; les articles originaux de Hoenn et
+des remakes disposent aussi de leurs objectifs de collection. Le suivi des errants respecte
+les routes et espèces propres à chaque moteur, le choix de la télévision ou du partenaire,
+et conserve les observations dans les préférences et sauvegardes.
+Le [bilan détaillé](generations/guides-gen3.md) décrit les sources et les choix de compteur.
+
+À la demande de l’utilisateur, l’export public prépare aussi les autres générations disponibles :
+20 ensembles principaux des générations 1 à 5, 2 100 succès, inventaire SHA-256 et aucun identifiant
+personnel conservé. HeartGold/SoulSilver partagent l’ensemble 7212 ; l’entrée SoulSilver 39076 est vide.
+La console 3DS n’est pas présente dans le catalogue actif de cet export. Ces archives ne font pas entrer
+les générations suivantes dans l’application. Leur lecture et leurs tests ne demandent aucune clé API.
+
+Contrôles de clôture réussis : ktlint, absence de services Google (191 dépendances), Lint sans erreur,
+375 tests JVM (dont Compose et Room), APK debug, Ruff et formatage des 190 fichiers Python,
+464 tests Python ordinaires, inventaire et cohérence des 15 441 assets. Les tests des archives
+comparent identifiants, conditions, points, mentions manquables, traductions et chapitres ; ils vérifient
+aussi les données invalides et la borne des téléchargements. Les fichiers source touchés restent
+sous 600 lignes, leurs fonctions sous 60 et leurs lignes sous 120 ; diff relu et sans erreur d’espacement.
+Le nom de compte et la clé fournis sont absents de tous les fichiers modifiés.
+
+APK : 102 891 274 octets (98,12 Mio), avec présence des textes des nouveaux outils vérifiée dans
+`resources.arsc` ; cartes : 41 841 493 octets (39,90 Mio) ; objets Git : 55 755 Kio.
+Les instantanés et leur inventaire occupent 589 190 octets. Aucune régénération de la base ni des assets
+Android : les 200 tests `pipeline` ne sont pas relancés. Aucun essai sur téléphone dans cette passe.
+Les premiers accès aux caches Windows étaient bloqués dans le bac à sable ; les relances autorisées
+réussissent. Les refus HTTP 403 puis 429 ont été résolus par l’export API et les tentatives espacées.
+Les échecs initiaux de style, paragraphes Android, identifiants de routes et chaînes dupliquées sont corrigés,
+sans exclusion de contrôle. La dépréciation AGP `Configuration.setVisible(boolean)` déjà documentée reste affichée.
 
 ## Phase 8 — Contenus propres à Hoenn : baies, concours, Pokéblocs, décorations
 

@@ -15,6 +15,7 @@ import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
+import org.opensources.pokmaps.domain.guide.Roamers
 import org.opensources.pokmaps.domain.model.Game
 import org.robolectric.RobolectricTestRunner
 
@@ -59,10 +60,14 @@ class GuideRepositoryTest {
     }
 
     private fun checkGbaArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {
-        val articles = library.articles
+        val achievements = library.articles.filter { it.achievementId != null }
+        val expectedCounts = mapOf(7 to 49, 8 to 49, 9 to 197, 10 to 61, 11 to 128)
+        assertEquals(expectedCounts[library.game.versionId], achievements.size)
+        assertTrue(achievements.all { it.points > 0 && it.sources.single().endsWith("/${it.achievementId}") })
+        val articles = library.articles.filter { it.achievementId == null }
         val hoenn = library.game.versionId in 7..9
         val prefix = if (hoenn) "hoenn-" else "remake-"
-        assertEquals(if (hoenn) 24 else 18, articles.size)
+        assertEquals(if (hoenn) 26 else 20, articles.size)
         assertEquals(articles.size, articles.map { it.id }.distinct().size)
         assertTrue(articles.all { it.id in setOf("breeding", "friendship") || it.id.startsWith(prefix) })
         assertTrue(articles.all { it.paragraphs.size >= 3 && it.sources.isNotEmpty() && it.title.isNotBlank() })
@@ -79,6 +84,7 @@ class GuideRepositoryTest {
             assertEquals(GuideCategory.SIDE_QUEST, articles.single { it.id == "hoenn-trick-house" }.category)
             assertTrue(articles.single { it.id == "hoenn-tides" }.summary.contains("9 h à 14 h 59"))
         } else {
+            assertTrue(articles.single { it.id == "remake-collections" }.unownGoal)
             assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Entei avec Bulbizarre"))
             assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Raikou avec Carapuce"))
             assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Suicune avec Salamèche"))
@@ -109,6 +115,7 @@ class GuideRepositoryTest {
         catalog: org.opensources.pokmaps.domain.map.MapCatalog,
         game: Game
     ) {
+        assertTrue(Roamers.places(game.versionId).all { catalog.mapByIdentifier(it) != null })
         val trees = catalog.objects.values.flatten().filter { it.fruit != null }
         if (game.generationId == 1 || game.remakeGenerationId == 1) {
             assertTrue(trees.isEmpty())

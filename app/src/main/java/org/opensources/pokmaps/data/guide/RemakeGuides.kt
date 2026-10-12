@@ -133,7 +133,8 @@ private val DEFINITIONS = listOf(
         GuideCategory.SIDE_QUEST,
         VERSIONS,
         201,
-        SOURCES
+        SOURCES,
+        unownGoal = true
     ),
     GuideDefinition(
         "remake-preparation",

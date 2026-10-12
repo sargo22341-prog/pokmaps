@@ -1,0 +1,1026 @@
+{
+  "game_id": 810,
+  "title": "Pokémon Crystal Version",
+  "console": "Game Boy Color",
+  "source": "https://retroachievements.org/game/810",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 5636,
+      "Title": "The Silver Case",
+      "Description": "Give your rival's name to the officer at Professor Elm's lab.",
+      "Points": 1,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2025-12-15 23:06:53"
+    },
+    {
+      "ID": 5637,
+      "Title": "Flying in Father's Footsteps",
+      "Description": "Defeat Falkner in Violet City and earn the Zephyr Badge.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:49"
+    },
+    {
+      "ID": 199603,
+      "Title": "Clipping the Pigeon's Wings",
+      "Description": "Defeat Falkner in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 9 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 3,
+      "type": "missable",
+      "DateModified": "2025-08-14 18:10:31"
+    },
+    {
+      "ID": 5934,
+      "Title": "Criminal Underground",
+      "Description": "Defeat the Rocket Grunt leading the raid on the Slowpoke Well.",
+      "Points": 5,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:55"
+    },
+    {
+      "ID": 5638,
+      "Title": "Entomology Prodigy",
+      "Description": "Defeat Bugsy in Azalea Town and earn the Hive Badge.",
+      "Points": 5,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:50"
+    },
+    {
+      "ID": 199604,
+      "Title": "Did Someone Call an Exterminator?",
+      "Description": "Defeat Bugsy in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 16 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:40"
+    },
+    {
+      "ID": 5639,
+      "Title": "No Crying over Spilt Milk",
+      "Description": "Defeat Whitney in Goldenrod City and earn the Plain Badge.",
+      "Points": 5,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:50"
+    },
+    {
+      "ID": 199605,
+      "Title": "Attack of the Mad Cow",
+      "Description": "Defeat Whitney in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 20 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:41"
+    },
+    {
+      "ID": 199564,
+      "Title": "Falsa Wood",
+      "Description": "Catch the Sudowoodo on Route 36 and register it in the Pokédex.",
+      "Points": 5,
+      "DisplayOrder": 9,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:30"
+    },
+    {
+      "ID": 199566,
+      "Title": "Have Eusine What I've Seen?!",
+      "Description": "Complete the Eusine sidequest in the Burned Tower.",
+      "Points": 5,
+      "DisplayOrder": 10,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:53"
+    },
+    {
+      "ID": 5640,
+      "Title": "The Future Is Fright",
+      "Description": "Defeat Morty in Ecruteak City and earn the Fog Badge.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:50"
+    },
+    {
+      "ID": 199606,
+      "Title": "In the Spirit of Battle",
+      "Description": "Defeat Morty in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 25 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "missable",
+      "DateModified": "2025-08-14 18:10:31"
+    },
+    {
+      "ID": 199568,
+      "Title": "The Dashing Dog-Chaser",
+      "Description": "Defeat Eusine in Cianwood City.",
+      "Points": 5,
+      "DisplayOrder": 13,
+      "type": "missable",
+      "DateModified": "2024-07-14 18:22:40"
+    },
+    {
+      "ID": 5641,
+      "Title": "Bare-Fisted Beast Taming",
+      "Description": "Defeat Chuck in Cianwood City and earn the Storm Badge.",
+      "Points": 5,
+      "DisplayOrder": 14,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:51"
+    },
+    {
+      "ID": 199607,
+      "Title": "Black Belt in Training",
+      "Description": "Defeat Chuck in the Set battle style using only Johto Pokémon that do not exceed level 30 during battle and without using any Pack items - no external trade-only Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 15,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:43"
+    },
+    {
+      "ID": 199569,
+      "Title": "Working the Light Shift",
+      "Description": "Cure Amphy at the top of Olivine Lighthouse.",
+      "Points": 2,
+      "DisplayOrder": 16,
+      "type": "progression",
+      "DateModified": "2022-04-19 22:07:53"
+    },
+    {
+      "ID": 5642,
+      "Title": "Iron Maiden",
+      "Description": "Defeat Jasmine in Olivine City and earn the Mineral Badge.",
+      "Points": 5,
+      "DisplayOrder": 17,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:51"
+    },
+    {
+      "ID": 199608,
+      "Title": "Stainless Stealing Victory",
+      "Description": "Defeat Jasmine in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 35 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:44"
+    },
+    {
+      "ID": 199594,
+      "Title": "Life, the Universe, and Aurorae",
+      "Description": "Encounter Suicune on Route 42.",
+      "Points": 2,
+      "DisplayOrder": 19,
+      "type": "missable",
+      "DateModified": "2024-09-15 15:59:36"
+    },
+    {
+      "ID": 199570,
+      "Title": "Everybody Gets One",
+      "Description": "Catch the red Gyarados in the Lake of Rage.",
+      "Points": 5,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:07:54"
+    },
+    {
+      "ID": 5946,
+      "Title": "Evil Makes Waves",
+      "Description": "Thwart the efforts of Team Rocket in their hideout in Mahogany Town.",
+      "Points": 5,
+      "DisplayOrder": 21,
+      "type": "progression",
+      "DateModified": "2022-04-21 00:11:01"
+    },
+    {
+      "ID": 199571,
+      "Title": "Calling Off the Launch",
+      "Description": "Defeat every Trainer in Team Rocket's Hideout in Mahogany Town.",
+      "Points": 5,
+      "DisplayOrder": 22,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:07:54"
+    },
+    {
+      "ID": 5643,
+      "Title": "Out with the Cold, In with the New",
+      "Description": "Defeat Pryce in Mahogany Town and earn the Glacier Badge.",
+      "Points": 5,
+      "DisplayOrder": 23,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:51"
+    },
+    {
+      "ID": 199609,
+      "Title": "Braving a Brutal Blizzard",
+      "Description": "Defeat Pryce in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 31 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 24,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:45"
+    },
+    {
+      "ID": 5947,
+      "Title": "Taken Off the Air",
+      "Description": "Defeat every Rocket Executive in the Goldenrod Radio Tower.",
+      "Points": 5,
+      "DisplayOrder": 25,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:57"
+    },
+    {
+      "ID": 199572,
+      "Title": "Golden-Rocket Roundup",
+      "Description": "Defeat every Trainer in the Goldenrod Radio Tower and the Underground.",
+      "Points": 5,
+      "DisplayOrder": 26,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:07:54"
+    },
+    {
+      "ID": 199595,
+      "Title": "Forest of Fate",
+      "Description": "Encounter Suicune on Route 36.",
+      "Points": 2,
+      "DisplayOrder": 27,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:07:55"
+    },
+    {
+      "ID": 5948,
+      "Title": "Calming the Northern Winds",
+      "Description": "Catch Suicune, the Aurora Pokémon.",
+      "Points": 5,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2023-09-07 04:16:50"
+    },
+    {
+      "ID": 199573,
+      "Title": "Crystalline Catch",
+      "Description": "Catch Suicune and register it in the Pokédex without using a Master Ball.",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:31"
+    },
+    {
+      "ID": 5644,
+      "Title": "Dragon's Destiny",
+      "Description": "Defeat Clair in Blackthorn City and earn the Rising Badge.",
+      "Points": 5,
+      "DisplayOrder": 30,
+      "type": "progression",
+      "DateModified": "2022-03-22 07:16:52"
+    },
+    {
+      "ID": 199610,
+      "Title": "Down to the Last Breath",
+      "Description": "Defeat Clair in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon and Legendaries other than the Beasts, that do not exceed level 40 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 31,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:45"
+    },
+    {
+      "ID": 199576,
+      "Title": "Truthfulness Bears Rewards",
+      "Description": "Receive a Dratini with ExtremeSpeed in the Dragon Shrine by correctly answering every question of the Master's quiz on the first attempt.",
+      "Points": 2,
+      "DisplayOrder": 32,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:07:56"
+    },
+    {
+      "ID": 5949,
+      "Title": "The Johto Journey's End",
+      "Description": "Defeat the Elite Four and Champion Lance at the Pokémon League, and be crowned as the new Pokémon League Champion!",
+      "Points": 10,
+      "DisplayOrder": 33,
+      "type": "win_condition",
+      "DateModified": "2022-03-22 07:16:58"
+    },
+    {
+      "ID": 199611,
+      "Title": "Overcoming the Heavenly Kings",
+      "Description": "Defeat the Elite Four and Lance in a single session in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 44 during battle and without using any Pack items in battle.",
+      "Points": 25,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2025-08-14 18:10:30"
+    },
+    {
+      "ID": 5950,
+      "Title": "Struggle to the Top",
+      "Description": "Defeat the Elite Four and Lance using only a single Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:58"
+    },
+    {
+      "ID": 5647,
+      "Title": "The Other Electric Soldier",
+      "Description": "Defeat Lt. Surge in Vermillion City and earn the Thunder Badge.",
+      "Points": 5,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:53"
+    },
+    {
+      "ID": 199612,
+      "Title": "Shock to the System",
+      "Description": "Defeat Lt. Surge in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon and Legendaries other than the Beasts, that do not exceed level 46 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 37,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:18"
+    },
+    {
+      "ID": 5650,
+      "Title": "Born with a Twisted Spoon",
+      "Description": "Defeat Sabrina in Saffron City and earn the Marsh Badge.",
+      "Points": 5,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:54"
+    },
+    {
+      "ID": 199613,
+      "Title": "Telepathic Miscommunications",
+      "Description": "Defeat Sabrina in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon and Legendaries other than the Beasts, that do not exceed level 48 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 39,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:19"
+    },
+    {
+      "ID": 199585,
+      "Title": "We're Gonna Give You the Power",
+      "Description": "Return the stolen Machine Part to the staff of the Kanto Power Plant.",
+      "Points": 2,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:56"
+    },
+    {
+      "ID": 5646,
+      "Title": "The Third Water Wheel",
+      "Description": "Defeat Misty in Cerulean City and earn the Cascade Badge.",
+      "Points": 5,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:52"
+    },
+    {
+      "ID": 199614,
+      "Title": "Poor, Washed-Up Mermaid",
+      "Description": "Defeat Misty in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 47 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 42,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:19"
+    },
+    {
+      "ID": 5648,
+      "Title": "Two Green Thumbs Up",
+      "Description": "Defeat Erika in Celadon City and earn the Rainbow Badge.",
+      "Points": 5,
+      "DisplayOrder": 43,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:53"
+    },
+    {
+      "ID": 199615,
+      "Title": "Slicing the Blades of Yesterday",
+      "Description": "Defeat Erika in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 46 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 44,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:20"
+    },
+    {
+      "ID": 5649,
+      "Title": "'Cause You Know That You're Toxic",
+      "Description": "Defeat Janine in Fuchsia City and earn the Soul Badge.",
+      "Points": 5,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:53"
+    },
+    {
+      "ID": 199616,
+      "Title": "Separating the \"Ill\" from \"Illusions\"",
+      "Description": "Defeat Janine in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 39 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2025-08-14 17:52:05"
+    },
+    {
+      "ID": 199586,
+      "Title": "The Lazy Song",
+      "Description": "Catch the Snorlax in Vermillion City and register it in the Pokédex.",
+      "Points": 5,
+      "DisplayOrder": 47,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:27"
+    },
+    {
+      "ID": 5645,
+      "Title": "Rock-Solid Reunion",
+      "Description": "Defeat Brock in Pewter City and earn the Boulder Badge.",
+      "Points": 5,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:52"
+    },
+    {
+      "ID": 199632,
+      "Title": "Gneiss Try, Mr. Jelly Donut!",
+      "Description": "Defeat Brock in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 44 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 49,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:21"
+    },
+    {
+      "ID": 5651,
+      "Title": "Home Is Where the Hot Is",
+      "Description": "Defeat Blaine on Cinnabar Island and earn the Volcano Badge.",
+      "Points": 5,
+      "DisplayOrder": 50,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:54"
+    },
+    {
+      "ID": 199617,
+      "Title": "Frying Up the Egg-Head",
+      "Description": "Defeat Blaine in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 50 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 51,
+      "type": "missable",
+      "DateModified": "2023-05-26 09:09:22"
+    },
+    {
+      "ID": 5652,
+      "Title": "The Fallen Rival Returns",
+      "Description": "Defeat Blue in Viridian City and earn the Earth Badge.",
+      "Points": 5,
+      "DisplayOrder": 52,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:54"
+    },
+    {
+      "ID": 199618,
+      "Title": "Until Next Time... Smell Ya Later!",
+      "Description": "Defeat Blue in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, Lugia, and Ho-Oh, that do not exceed level 58 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 53,
+      "type": "missable",
+      "DateModified": "2023-05-20 01:59:46"
+    },
+    {
+      "ID": 5958,
+      "Title": "Clash of the Champions",
+      "Description": "Defeat Pokémon Trainer Red at the summit of Mt. Silver!",
+      "Points": 10,
+      "DisplayOrder": 54,
+      "type": null,
+      "DateModified": "2025-06-21 13:14:28"
+    },
+    {
+      "ID": 199619,
+      "Title": "To Train Them Is My Cause",
+      "Description": "Defeat Red in the Set battle style using only Johto Pokémon, excluding external trade-only Pokémon, that do not exceed level 65 during battle and without using any Pack items.",
+      "Points": 10,
+      "DisplayOrder": 55,
+      "type": null,
+      "DateModified": "2023-05-19 22:16:24"
+    },
+    {
+      "ID": 5959,
+      "Title": "A League of Your Own",
+      "Description": "Defeat Red using only a single Pokémon.",
+      "Points": 10,
+      "DisplayOrder": 56,
+      "type": null,
+      "DateModified": "2022-03-22 07:17:09"
+    },
+    {
+      "ID": 5951,
+      "Title": "Beasts of the Brass",
+      "Description": "Catch Entei and Raikou, the Volcano and Thunder Pokémon.",
+      "Points": 5,
+      "DisplayOrder": 57,
+      "type": null,
+      "DateModified": "2022-03-22 07:17:00"
+    },
+    {
+      "ID": 199574,
+      "Title": "Lightning in a Ball",
+      "Description": "Catch Raikou and register it in the Pokédex without using a Master Ball.",
+      "Points": 10,
+      "DisplayOrder": 58,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:30"
+    },
+    {
+      "ID": 199575,
+      "Title": "Pyroplastic Pacifier",
+      "Description": "Catch Entei and register it in the Pokédex without using a Master Ball.",
+      "Points": 10,
+      "DisplayOrder": 59,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:28"
+    },
+    {
+      "ID": 5952,
+      "Title": "Fateful Eye-to-Eye",
+      "Description": "Catch Lugia, the Diving Pokémon, in the Whirl Islands.",
+      "Points": 5,
+      "DisplayOrder": 60,
+      "type": null,
+      "DateModified": "2022-03-22 07:17:03"
+    },
+    {
+      "ID": 199589,
+      "Title": "Serenity Beyond the Storm",
+      "Description": "Catch Lugia and register it in the Pokédex without using a Master Ball.",
+      "Points": 5,
+      "DisplayOrder": 61,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:29"
+    },
+    {
+      "ID": 5953,
+      "Title": "Phoenix of a Pure Heart",
+      "Description": "Catch Ho-Oh, the Rainbow Pokémon, in Tin Tower.",
+      "Points": 5,
+      "DisplayOrder": 62,
+      "type": null,
+      "DateModified": "2022-03-22 07:17:04"
+    },
+    {
+      "ID": 199590,
+      "Title": "At the End of the Rainbow",
+      "Description": "Catch Ho-Oh and register it in the Pokédex without using a Master Ball.",
+      "Points": 5,
+      "DisplayOrder": 63,
+      "type": "missable",
+      "DateModified": "2023-10-09 11:45:29"
+    },
+    {
+      "ID": 199582,
+      "Title": "But Which Came First?",
+      "Description": "Receive an Everstone from Professor Elm by showing him the hatched Mystery Egg.",
+      "Points": 2,
+      "DisplayOrder": 64,
+      "type": "missable",
+      "DateModified": "2025-08-31 09:46:25"
+    },
+    {
+      "ID": 199601,
+      "Title": "Apri-Cornucopia",
+      "Description": "Receive a batch of at least 10 special Poké Balls at once from Kurt in Azalea Town.",
+      "Points": 5,
+      "DisplayOrder": 65,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:01"
+    },
+    {
+      "ID": 199596,
+      "Title": "I Slept Like a Log...",
+      "Description": "Encounter a sleeping Pokémon by using Headbutt on a tree.",
+      "Points": 2,
+      "DisplayOrder": 66,
+      "type": null,
+      "DateModified": "2025-06-21 16:50:41"
+    },
+    {
+      "ID": 199561,
+      "Title": "Served Shiny Side Up?",
+      "Description": "Receive the Odd Egg from the Day-Care Man on Route 34.",
+      "Points": 2,
+      "DisplayOrder": 67,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:23"
+    },
+    {
+      "ID": 199634,
+      "Title": "Megaton Chances",
+      "Description": "See Golem by lining up two 7s on a slot machine in a Game Corner.",
+      "Points": 2,
+      "DisplayOrder": 68,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:06"
+    },
+    {
+      "ID": 199635,
+      "Title": "Underage Gambling Pays Off!",
+      "Description": "Earn a 7-7-7 on a slot machine in a Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2022-04-21 00:11:02"
+    },
+    {
+      "ID": 199627,
+      "Title": "Double Dozen Deduction",
+      "Description": "Win a x24 bet in the Card Flip minigame in a Game Corner.",
+      "Points": 3,
+      "DisplayOrder": 70,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:07"
+    },
+    {
+      "ID": 199622,
+      "Title": "Cast Your Net Far & Wide",
+      "Description": "Win the Bug-Catching Contest in the National Park.",
+      "Points": 5,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2022-04-20 08:26:44"
+    },
+    {
+      "ID": 199623,
+      "Title": "Cuddly Crawlie Challenge",
+      "Description": "Win the Bug-Catching Contest without catching a Butterfree, a Beedrill, a Scyther, or a Pinsir.",
+      "Points": 10,
+      "DisplayOrder": 72,
+      "type": null,
+      "DateModified": "2022-04-20 08:26:44"
+    },
+    {
+      "ID": 199624,
+      "Title": "Earning Style Points",
+      "Description": "Win the Bug-Catching Contest with Cooltrainer Nick as a participant.",
+      "Points": 10,
+      "DisplayOrder": 73,
+      "type": null,
+      "DateModified": "2022-05-30 06:53:58"
+    },
+    {
+      "ID": 199580,
+      "Title": "Udder Selflessness",
+      "Description": "Nurse Moomoo back to health on Moomoo Farm.",
+      "Points": 2,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2022-04-30 04:40:57"
+    },
+    {
+      "ID": 199633,
+      "Title": "Sorry, No Rare Candies!",
+      "Description": "Have a Shuckle turn a Berry into Berry Juice after a battle.",
+      "Points": 1,
+      "DisplayOrder": 75,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:58"
+    },
+    {
+      "ID": 199630,
+      "Title": "Worth Its Weight in Mold",
+      "Description": "Get Mania of Cianwood City's permission to keep Shuckie by raising its Friendship high enough.",
+      "Points": 5,
+      "DisplayOrder": 76,
+      "type": "missable",
+      "DateModified": "2025-02-27 11:07:23"
+    },
+    {
+      "ID": 199591,
+      "Title": "Ferry Fountain Fridays",
+      "Description": "Catch the Lapras in Union Cave and register it in the Pokédex.",
+      "Points": 5,
+      "DisplayOrder": 77,
+      "type": null,
+      "DateModified": "2023-10-09 11:45:31"
+    },
+    {
+      "ID": 199636,
+      "Title": "Let the Unown Be Known",
+      "Description": "Solve each of the puzzle chambers and collect every item in the Ruins of Alph.",
+      "Points": 5,
+      "DisplayOrder": 78,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:58"
+    },
+    {
+      "ID": 5955,
+      "Title": "Alphabet Scoop",
+      "Description": "Catch all 26 forms of Unown.",
+      "Points": 10,
+      "DisplayOrder": 79,
+      "type": null,
+      "DateModified": "2024-12-09 00:34:34"
+    },
+    {
+      "ID": 199578,
+      "Title": "Scaling for Scaling",
+      "Description": "Trade the Red Scale to Mr. Pokémon on Route 30 for the EXP Share.",
+      "Points": 2,
+      "DisplayOrder": 80,
+      "type": null,
+      "DateModified": "2025-08-14 16:31:42"
+    },
+    {
+      "ID": 199581,
+      "Title": "That Bass's Too Fat!",
+      "Description": "Receive an Elixir from the Fishing Guru near the Lake of Rage by breaking the Magikarp size record.",
+      "Points": 5,
+      "DisplayOrder": 81,
+      "type": null,
+      "DateModified": "2024-09-15 15:57:53"
+    },
+    {
+      "ID": 199559,
+      "Title": "Go Ahead, Make My Day",
+      "Description": "Receive all seven gifts from each of the Week Siblings.",
+      "Points": 5,
+      "DisplayOrder": 82,
+      "type": null,
+      "DateModified": "2024-09-15 15:57:52"
+    },
+    {
+      "ID": 199620,
+      "Title": "Gambler's Charity",
+      "Description": "Learn a new move from Bill's father outside the Goldenrod City Game Corner.",
+      "Points": 5,
+      "DisplayOrder": 83,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:23"
+    },
+    {
+      "ID": 199637,
+      "Title": "Cruisin' for a Bruisin'",
+      "Description": "Defeat every possible Trainer aboard the S.S. Aqua, excluding those from the first voyage.",
+      "Points": 5,
+      "DisplayOrder": 84,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:10"
+    },
+    {
+      "ID": 199588,
+      "Title": "Pokémania Runs in the Family",
+      "Description": "Show all five requested Pokémon to Bill's grandfather on Route 25.",
+      "Points": 5,
+      "DisplayOrder": 85,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:24"
+    },
+    {
+      "ID": 199640,
+      "Title": "This One's For You, Doll",
+      "Description": "Receive a Pass for the Magnet Train from the Copycat in Saffron City.",
+      "Points": 2,
+      "DisplayOrder": 86,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:24"
+    },
+    {
+      "ID": 199639,
+      "Title": "The Reel Pokédex",
+      "Description": "Collect all three of the fishing rods.",
+      "Points": 5,
+      "DisplayOrder": 87,
+      "type": null,
+      "DateModified": "2024-07-14 17:07:48"
+    },
+    {
+      "ID": 199587,
+      "Title": "Lunatical Onlooker",
+      "Description": "Receive a Moon Stone after witnessing the Clefairy ritual in Mt. Moon Square.",
+      "Points": 3,
+      "DisplayOrder": 88,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:02"
+    },
+    {
+      "ID": 199593,
+      "Title": "The Thief's Last Stand",
+      "Description": "Win the optional battle against your rival in Indigo Plateau.",
+      "Points": 5,
+      "DisplayOrder": 89,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:25"
+    },
+    {
+      "ID": 199625,
+      "Title": "For That Nice & Shiny Coat",
+      "Description": "Have Daisy Oak comb your Pokémon in Pallet Town.",
+      "Points": 2,
+      "DisplayOrder": 90,
+      "type": null,
+      "DateModified": "2023-05-10 11:01:25"
+    },
+    {
+      "ID": 199629,
+      "Title": "Cute, Soft, & Made with Love",
+      "Description": "Own all four Poké Dolls purchased by Mom.",
+      "Points": 5,
+      "DisplayOrder": 91,
+      "type": null,
+      "DateModified": "2025-06-21 14:23:51"
+    },
+    {
+      "ID": 199621,
+      "Title": "The Anger of a Gentle 'Mon",
+      "Description": "Have your Pokémon use Frustration or Return at its maximum power.",
+      "Points": 5,
+      "DisplayOrder": 92,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:11"
+    },
+    {
+      "ID": 199626,
+      "Title": "Didn't Know You Had It in You!",
+      "Description": "Deal super effective damage with Hidden Power.",
+      "Points": 2,
+      "DisplayOrder": 93,
+      "type": null,
+      "DateModified": "2022-10-01 09:55:15"
+    },
+    {
+      "ID": 199567,
+      "Title": "Element of Generosity",
+      "Description": "Receive an Evolution stone from a registered Pokégear Trainer.",
+      "Points": 2,
+      "DisplayOrder": 94,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:59"
+    },
+    {
+      "ID": 199638,
+      "Title": "Deals on Wheels",
+      "Description": "Promote the Miracle Cycle bike shop in Goldenrod City and be allowed to keep the bike.",
+      "Points": 2,
+      "DisplayOrder": 95,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:59"
+    },
+    {
+      "ID": 199631,
+      "Title": "Our Store's Up High, But Our Prices Are Low",
+      "Description": "Make a purchase in the Rooftop Sale on the roof of the Goldenrod Department Store.",
+      "Points": 2,
+      "DisplayOrder": 96,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:13"
+    },
+    {
+      "ID": 199597,
+      "Title": "Password Perfectionist",
+      "Description": "Add Buena's phone number to your Pokégear after earning 30 Blue Card points.",
+      "Points": 10,
+      "DisplayOrder": 97,
+      "type": null,
+      "DateModified": "2022-05-29 20:34:23"
+    },
+    {
+      "ID": 199579,
+      "Title": "Fun to Sell Off, Not to Eat",
+      "Description": "Receive a Nugget from either Pokéfan Beverly or Pokéfan Derek.",
+      "Points": 2,
+      "DisplayOrder": 98,
+      "type": null,
+      "DateModified": "2022-04-19 22:07:59"
+    },
+    {
+      "ID": 199577,
+      "Title": "Practicing One Move Ten Thousand Times",
+      "Description": "Receive a PP Up from Blackbelt Kenji.",
+      "Points": 5,
+      "DisplayOrder": 99,
+      "type": null,
+      "DateModified": "2024-09-15 15:57:54"
+    },
+    {
+      "ID": 199602,
+      "Title": "Strength from Numbers",
+      "Description": "Receive a vitamin from all five Trainer rematches that reward one.",
+      "Points": 5,
+      "DisplayOrder": 100,
+      "type": null,
+      "DateModified": "2024-07-14 17:47:28"
+    },
+    {
+      "ID": 199565,
+      "Title": "More Valuable than Any Dollar",
+      "Description": "Receive every in-game Gift Pokémon.",
+      "Points": 5,
+      "DisplayOrder": 101,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:08"
+    },
+    {
+      "ID": 199592,
+      "Title": "Link Cable Not Included",
+      "Description": "Complete every in-game trade.",
+      "Points": 5,
+      "DisplayOrder": 102,
+      "type": null,
+      "DateModified": "2024-07-14 17:44:19"
+    },
+    {
+      "ID": 199560,
+      "Title": "Landly Legend",
+      "Description": "Defeat every non-missable Trainer in Johto.",
+      "Points": 25,
+      "DisplayOrder": 103,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:09"
+    },
+    {
+      "ID": 199562,
+      "Title": "Flourishing Findings",
+      "Description": "Collect every visible and hidden field item in Johto.",
+      "Points": 25,
+      "DisplayOrder": 104,
+      "type": "missable",
+      "DateModified": "2022-04-19 22:08:09"
+    },
+    {
+      "ID": 199583,
+      "Title": "Urban Underdog",
+      "Description": "Defeat every non-missable Trainer in Kanto.",
+      "Points": 10,
+      "DisplayOrder": 105,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:10"
+    },
+    {
+      "ID": 199584,
+      "Title": "Colorful Collector",
+      "Description": "Collect every visible and hidden field item in Kanto.",
+      "Points": 10,
+      "DisplayOrder": 106,
+      "type": null,
+      "DateModified": "2023-06-01 07:01:22"
+    },
+    {
+      "ID": 199563,
+      "Title": "Machine Learning",
+      "Description": "Collect every finite TM and HM.",
+      "Points": 25,
+      "DisplayOrder": 107,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:11"
+    },
+    {
+      "ID": 199598,
+      "Title": "Don't Give Them the Stick!",
+      "Description": "Obtain a Stick from a wild Farfetch'd by either catching the Pokémon or stealing it.",
+      "Points": 10,
+      "DisplayOrder": 108,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:07"
+    },
+    {
+      "ID": 199599,
+      "Title": "More Like the Orphan Club!",
+      "Description": "Obtain a Thick Club from a wild Cubone or Marowak by either catching the Pokémon or stealing it.",
+      "Points": 10,
+      "DisplayOrder": 109,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:08"
+    },
+    {
+      "ID": 199600,
+      "Title": "Easter Surprise",
+      "Description": "Obtain a Lucky Egg from a wild Chansey by either catching the Pokémon or stealing it.",
+      "Points": 50,
+      "DisplayOrder": 110,
+      "type": null,
+      "DateModified": "2022-04-19 22:08:08"
+    },
+    {
+      "ID": 5936,
+      "Title": "Game of Death-Defiance",
+      "Description": "Clear the Battle Tower by defeating 7 Trainers in a row.",
+      "Points": 25,
+      "DisplayOrder": 111,
+      "type": null,
+      "DateModified": "2022-03-22 07:16:56"
+    },
+    {
+      "ID": 199628,
+      "Title": "Local Competition",
+      "Description": "Clear the Battle Tower using only Johto Pokémon, excluding Lugia and Ho-Oh.",
+      "Points": 25,
+      "DisplayOrder": 112,
+      "type": null,
+      "DateModified": "2022-04-20 23:02:30"
+    },
+    {
+      "ID": 5954,
+      "Title": "Gotta Catch 'Em All - Crystal",
+      "Description": "Catch all 206 possible Pokémon that are obtainable in-game without external devices.",
+      "Points": 50,
+      "DisplayOrder": 113,
+      "type": "missable",
+      "DateModified": "2022-03-22 07:17:05"
+    }
+  ]
+}

@@ -1,0 +1,1899 @@
+{
+  "game_id": 25369,
+  "title": "Pokémon Pearl Version",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/25369",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 493568,
+      "Title": "Chronicles of the Childhood Rival",
+      "Description": "Listen to everything your rival has to say on your escapade from Twinleaf Town",
+      "Points": 1,
+      "DisplayOrder": 1000,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:24:25"
+    },
+    {
+      "ID": 493582,
+      "Title": "First One Is on the House",
+      "Description": "Receive a Potion sample on Route 201",
+      "Points": 1,
+      "DisplayOrder": 1001,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:14"
+    },
+    {
+      "ID": 493533,
+      "Title": "Journey Has Started",
+      "Description": "Officially receive your starter",
+      "Points": 1,
+      "DisplayOrder": 1010,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:29"
+    },
+    {
+      "ID": 493584,
+      "Title": "Ol' Reliable",
+      "Description": "Receive the Old Rod",
+      "Points": 1,
+      "DisplayOrder": 1011,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:21"
+    },
+    {
+      "ID": 493583,
+      "Title": "Top of the Class",
+      "Description": "Defeat both students at the Trainer School and receive TM10, Hidden Power",
+      "Points": 5,
+      "DisplayOrder": 1019,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:22"
+    },
+    {
+      "ID": 493534,
+      "Title": "Uncharted Parcel Service",
+      "Description": "Deliver the Parcel to your rival",
+      "Points": 1,
+      "DisplayOrder": 1020,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:33"
+    },
+    {
+      "ID": 493535,
+      "Title": "Latest Tech",
+      "Description": "Exchange your coupons and receive a Pokétch",
+      "Points": 1,
+      "DisplayOrder": 1030,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:37"
+    },
+    {
+      "ID": 493536,
+      "Title": "Don't Get Cooked...",
+      "Description": "Defeat your rival at Route 203",
+      "Points": 3,
+      "DisplayOrder": 1040,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:41"
+    },
+    {
+      "ID": 493537,
+      "Title": "HULK SMASH",
+      "Description": "Receive HM06, Rock Smash",
+      "Points": 1,
+      "DisplayOrder": 1050,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:48"
+    },
+    {
+      "ID": 493586,
+      "Title": "Guaranteed Not to Flee",
+      "Description": "Trade a Machop for an Abra in Oreburgh City",
+      "Points": 3,
+      "DisplayOrder": 1051,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:22"
+    },
+    {
+      "ID": 493681,
+      "Title": "Gym Skirmish: Oreburgh",
+      "Description": "Defeat every trainer in the Oreburgh Gym",
+      "Points": 3,
+      "DisplayOrder": 1059,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:40:49"
+    },
+    {
+      "ID": 493538,
+      "Title": "Who Deserves More Credit than the Wife of a Coal Miner",
+      "Description": "Earn the Coal Badge",
+      "Points": 5,
+      "DisplayOrder": 1060,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:53"
+    },
+    {
+      "ID": 493585,
+      "Title": "Making Friends",
+      "Description": "Receive the Pal Pad",
+      "Points": 1,
+      "DisplayOrder": 1061,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:22"
+    },
+    {
+      "ID": 493539,
+      "Title": "Seriously? Right in Front of my Pokémon Professor?",
+      "Description": "Join forces with Rowan's assistant and defeat the grunts annoying them",
+      "Points": 3,
+      "DisplayOrder": 1070,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:24:57"
+    },
+    {
+      "ID": 498297,
+      "Title": "I Can See My House from Here!",
+      "Description": "Register your location in Jubilife City's Global Trade Station",
+      "Points": 1,
+      "DisplayOrder": 1071,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:44"
+    },
+    {
+      "ID": 493633,
+      "Title": "Everyone is Happy with Wi-Fi Connection!",
+      "Description": "Unlock Mystery Gift",
+      "Points": 1,
+      "DisplayOrder": 1072,
+      "type": null,
+      "DateModified": "2025-02-12 22:44:59"
+    },
+    {
+      "ID": 493650,
+      "Title": "Paint Me Like One of Your Kalosian Girls",
+      "Description": "Dress up a Pokémon in the Jubilife TV dressing room",
+      "Points": 2,
+      "DisplayOrder": 1073,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:45"
+    },
+    {
+      "ID": 493651,
+      "Title": "I Go Out to Work on Monday Morning",
+      "Description": "On Monday, defeat Reporter Kinsley in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:45"
+    },
+    {
+      "ID": 493652,
+      "Title": "Tuesday, I Go Off to Honeymoon",
+      "Description": "On Tuesday, defeat Cameraman Tevin in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:45"
+    },
+    {
+      "ID": 493653,
+      "Title": "Bicycling on Every Wednesday Evening",
+      "Description": "On Wednesday, defeat Clown Lee in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:45"
+    },
+    {
+      "ID": 493654,
+      "Title": "Thursday, I Go Waltzing to the Zoo",
+      "Description": "On Thursday, defeat Interviewers Roxy & Oli in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:45"
+    },
+    {
+      "ID": 493655,
+      "Title": "Fridays, I Go Painting in the Louvre",
+      "Description": "On Friday, defeat Poké Kid Ariel in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:46"
+    },
+    {
+      "ID": 493656,
+      "Title": "I'm Bound to Be Proposing on a Saturday Night",
+      "Description": "On Saturday, defeat Guitarist Arturo in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:46"
+    },
+    {
+      "ID": 493657,
+      "Title": "Lazing on a Sunday Afternoon",
+      "Description": "On Sunday, defeat Idol Grace in the Jubilife TV building",
+      "Points": 1,
+      "DisplayOrder": 1074,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:46"
+    },
+    {
+      "ID": 493587,
+      "Title": "Farming Sim",
+      "Description": "Receive the Sprayduck",
+      "Points": 1,
+      "DisplayOrder": 1075,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:22"
+    },
+    {
+      "ID": 493682,
+      "Title": "Grunt Brush: Valley Windworks",
+      "Description": "Defeat every grunt in the Valley Windworks",
+      "Points": 3,
+      "DisplayOrder": 1079,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:40:52"
+    },
+    {
+      "ID": 493540,
+      "Title": "Free Like the Wind",
+      "Description": "Defeat Mars in the Valley Windworks",
+      "Points": 3,
+      "DisplayOrder": 1080,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:52"
+    },
+    {
+      "ID": 493634,
+      "Title": "Frickin' Floon Friday",
+      "Description": "Catch a Drifloon",
+      "Points": 3,
+      "DisplayOrder": 1081,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:05"
+    },
+    {
+      "ID": 493637,
+      "Title": "Sweet Victory",
+      "Description": "Catch a Munchlax",
+      "Points": 10,
+      "DisplayOrder": 1082,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:05"
+    },
+    {
+      "ID": 493569,
+      "Title": "Chronicles of the Big Sister",
+      "Description": "Listen to everything Cheryl has to say",
+      "Points": 1,
+      "DisplayOrder": 1089,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:25:10"
+    },
+    {
+      "ID": 493541,
+      "Title": "Scary Walk Through the Forest",
+      "Description": "Help Cheryl get through Eterna Forest",
+      "Points": 2,
+      "DisplayOrder": 1090,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:25:14"
+    },
+    {
+      "ID": 493542,
+      "Title": "Aaaand... Cut!",
+      "Description": "Meet Cynthia and receive HM01, Cut",
+      "Points": 1,
+      "DisplayOrder": 1100,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:53"
+    },
+    {
+      "ID": 493588,
+      "Title": "Do Not Teach It to Swear",
+      "Description": "Trade a Buizel for a Chatot in Eterna City",
+      "Points": 3,
+      "DisplayOrder": 1101,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:22"
+    },
+    {
+      "ID": 493589,
+      "Title": "Twinning with Roark",
+      "Description": "Receive the Explorer Kit",
+      "Points": 1,
+      "DisplayOrder": 1102,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:23"
+    },
+    {
+      "ID": 493543,
+      "Title": "I Speak for the Trees",
+      "Description": "Earn the Forest Badge",
+      "Points": 5,
+      "DisplayOrder": 1110,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:54"
+    },
+    {
+      "ID": 493683,
+      "Title": "Grunt Brush: Eterna Building",
+      "Description": "Defeat every trainer in the Team Galactic Eterna Building",
+      "Points": 5,
+      "DisplayOrder": 1119,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:40:54"
+    },
+    {
+      "ID": 493544,
+      "Title": "Building Up Enemies",
+      "Description": "Defeat Jupiter in the Team Galactic Eterna Building",
+      "Points": 3,
+      "DisplayOrder": 1120,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:54"
+    },
+    {
+      "ID": 498295,
+      "Title": "Caring About Sharing",
+      "Description": "Receive the Exp. Share from Rowan's assistant at the Eterna City south gate",
+      "Points": 2,
+      "DisplayOrder": 1121,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:23"
+    },
+    {
+      "ID": 493570,
+      "Title": "Chronicles of the Lost Child",
+      "Description": "Listen to everything Mira has to say",
+      "Points": 1,
+      "DisplayOrder": 1122,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:25:33"
+    },
+    {
+      "ID": 493638,
+      "Title": "I Can See the Light",
+      "Description": "Help Mira get out of Wayward Cave",
+      "Points": 3,
+      "DisplayOrder": 1123,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:47"
+    },
+    {
+      "ID": 493545,
+      "Title": "All About Searching",
+      "Description": "Receive the Vs. Seeker and Dowsing Machine from Rowan's assistant",
+      "Points": 1,
+      "DisplayOrder": 1130,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:55"
+    },
+    {
+      "ID": 493546,
+      "Title": "Stay Off The Hook!",
+      "Description": "Defeat your rival in Hearthome City",
+      "Points": 4,
+      "DisplayOrder": 1140,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:25:42"
+    },
+    {
+      "ID": 493590,
+      "Title": "Love, Care, Lots of Steps",
+      "Description": "Receive a Pokémon Egg from a hiker in Hearthome City",
+      "Points": 1,
+      "DisplayOrder": 1141,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:23"
+    },
+    {
+      "ID": 493641,
+      "Title": "Hey There, Bebe",
+      "Description": "Meet the creator of the Pokémon Storage System",
+      "Points": 1,
+      "DisplayOrder": 1142,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:47"
+    },
+    {
+      "ID": 493591,
+      "Title": "Cookie Box",
+      "Description": "Receive the Poffin Case",
+      "Points": 1,
+      "DisplayOrder": 1143,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:23"
+    },
+    {
+      "ID": 493660,
+      "Title": "F Is for Fren",
+      "Description": "Get a gift from your Pokémon at Amity Square",
+      "Points": 2,
+      "DisplayOrder": 1144,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:47"
+    },
+    {
+      "ID": 493592,
+      "Title": "It's a Good One",
+      "Description": "Receive the Good Rod",
+      "Points": 2,
+      "DisplayOrder": 1145,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:24"
+    },
+    {
+      "ID": 493642,
+      "Title": "Form, Not Function",
+      "Description": "Restore the Hallowed Tower",
+      "Points": 2,
+      "DisplayOrder": 1146,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:48"
+    },
+    {
+      "ID": 493547,
+      "Title": "Do Not Push Uphill",
+      "Description": "Receive HM04, Strength",
+      "Points": 4,
+      "DisplayOrder": 1150,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:40:57"
+    },
+    {
+      "ID": 493643,
+      "Title": "Treasure Trove",
+      "Description": "Get the treasure from Solaceon Ruins",
+      "Points": 3,
+      "DisplayOrder": 1151,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:48"
+    },
+    {
+      "ID": 493593,
+      "Title": "Unseal the Style",
+      "Description": "Receive the Seal Case",
+      "Points": 2,
+      "DisplayOrder": 1152,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:24"
+    },
+    {
+      "ID": 493594,
+      "Title": "Gambling Enabled",
+      "Description": "Receive the Coin Case",
+      "Points": 1,
+      "DisplayOrder": 1153,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:24"
+    },
+    {
+      "ID": 498296,
+      "Title": "Extra! Extra!",
+      "Description": "Complete an assignment for the Sinnoh News in Solaceon Town",
+      "Points": 5,
+      "DisplayOrder": 1154,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:49"
+    },
+    {
+      "ID": 493684,
+      "Title": "Gym Skirmish: Veilstone",
+      "Description": "Defeat every trainer in the Veilstone Gym",
+      "Points": 3,
+      "DisplayOrder": 1159,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:40:57"
+    },
+    {
+      "ID": 493548,
+      "Title": "Training Required",
+      "Description": "Earn the Cobble Badge",
+      "Points": 5,
+      "DisplayOrder": 1160,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:25:55"
+    },
+    {
+      "ID": 493549,
+      "Title": "Outbully The Bully",
+      "Description": "Help Rowan's assistant recover their Pokédex from the Galactic Grunts",
+      "Points": 3,
+      "DisplayOrder": 1170,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:25:59"
+    },
+    {
+      "ID": 493596,
+      "Title": "The Sky Is the Limit",
+      "Description": "Obtain HM02, Fly",
+      "Points": 2,
+      "DisplayOrder": 1171,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:24"
+    },
+    {
+      "ID": 493644,
+      "Title": "Research Completed",
+      "Description": "Complete the Ruin Maniac Cave tunnel and reach the end",
+      "Points": 10,
+      "DisplayOrder": 1172,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:49"
+    },
+    {
+      "ID": 493597,
+      "Title": "Actual Fetch Sidequest",
+      "Description": "Help a woman find the lost key for her suite and receive a reward",
+      "Points": 4,
+      "DisplayOrder": 1173,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:24"
+    },
+    {
+      "ID": 493617,
+      "Title": "Certified Feet Lover",
+      "Description": "Receive a ribbon from Mr. Footstep",
+      "Points": 4,
+      "DisplayOrder": 1174,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:25"
+    },
+    {
+      "ID": 493598,
+      "Title": "Macho Bug",
+      "Description": "Receive the Macho Brace from a Burmy fan in Pastoria City",
+      "Points": 5,
+      "DisplayOrder": 1175,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:26"
+    },
+    {
+      "ID": 493645,
+      "Title": "Where Is Carnivine?",
+      "Description": "Use the binoculars to check out some Pokémon in the Great Marsh",
+      "Points": 1,
+      "DisplayOrder": 1175,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:49"
+    },
+    {
+      "ID": 493599,
+      "Title": "Clear Skies",
+      "Description": "Receive HM05, Defog",
+      "Points": 2,
+      "DisplayOrder": 1176,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:26"
+    },
+    {
+      "ID": 493646,
+      "Title": "Bully",
+      "Description": "In the Great Marsh, throw three mud balls at a Pokémon then catch it without ever using bait",
+      "Points": 4,
+      "DisplayOrder": 1177,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:05"
+    },
+    {
+      "ID": 493647,
+      "Title": "Three Platter Banquet",
+      "Description": "In the Great Marsh, throw three bait balls at a Pokémon then catch it without ever using mud",
+      "Points": 10,
+      "DisplayOrder": 1177,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:05"
+    },
+    {
+      "ID": 493648,
+      "Title": "Beside Itself in Anger",
+      "Description": "Throw a perfect mud ball to a Pokémon in the Great Marsh, decreasing only its escape rate",
+      "Points": 2,
+      "DisplayOrder": 1178,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:51"
+    },
+    {
+      "ID": 493649,
+      "Title": "Busy Eating",
+      "Description": "Throw a perfect bait ball to a Pokémon in the Great Marsh, increasing only its catch rate",
+      "Points": 4,
+      "DisplayOrder": 1178,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:51"
+    },
+    {
+      "ID": 493685,
+      "Title": "Gym Skirmish: Pastoria",
+      "Description": "Defeat every trainer in the Pastoria Gym",
+      "Points": 5,
+      "DisplayOrder": 1179,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:00"
+    },
+    {
+      "ID": 493550,
+      "Title": "Fen Garden",
+      "Description": "Earn the Fen Badge",
+      "Points": 5,
+      "DisplayOrder": 1180,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:26:08"
+    },
+    {
+      "ID": 493551,
+      "Title": "Rawsome!",
+      "Description": "Defeat your rival in Pastoria City",
+      "Points": 5,
+      "DisplayOrder": 1190,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:26:13"
+    },
+    {
+      "ID": 493552,
+      "Title": "Go Home, You're Drunk",
+      "Description": "Get a secret remedy for Pokémon headaches from Cynthia",
+      "Points": 2,
+      "DisplayOrder": 1200,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:26:17"
+    },
+    {
+      "ID": 493658,
+      "Title": "Draconic Apocalypse",
+      "Description": "Have a Pokémon learn Draco Meteor from Grandma Wilma",
+      "Points": 5,
+      "DisplayOrder": 1201,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:51"
+    },
+    {
+      "ID": 493611,
+      "Title": "I Can See!",
+      "Description": "Receive every type of glasses from the man in Celestic Town's shop",
+      "Points": 3,
+      "DisplayOrder": 1202,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:26"
+    },
+    {
+      "ID": 493553,
+      "Title": "Slow Advance",
+      "Description": "Receive HM03, Surf",
+      "Points": 2,
+      "DisplayOrder": 1210,
+      "type": "progression",
+      "DateModified": "2025-02-21 08:28:04"
+    },
+    {
+      "ID": 493686,
+      "Title": "Gym Skirmish: Hearthome",
+      "Description": "Defeat every trainer in the Hearthome Gym",
+      "Points": 5,
+      "DisplayOrder": 1219,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:00"
+    },
+    {
+      "ID": 493554,
+      "Title": "It Belongs in a Museum!",
+      "Description": "Earn the Relic Badge",
+      "Points": 10,
+      "DisplayOrder": 1220,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:26:30"
+    },
+    {
+      "ID": 493600,
+      "Title": "Feel the Fuego",
+      "Description": "Receive a gift from Mr. Fuego in the Fuego Ironworks",
+      "Points": 5,
+      "DisplayOrder": 1221,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:26"
+    },
+    {
+      "ID": 493614,
+      "Title": "One for Strength",
+      "Description": "Receive a Black Belt from the old man living on Route 221",
+      "Points": 2,
+      "DisplayOrder": 1225,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:26"
+    },
+    {
+      "ID": 493615,
+      "Title": "One for Knowledge",
+      "Description": "Receive a Expert Belt from the old man living on Route 221",
+      "Points": 2,
+      "DisplayOrder": 1226,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:27"
+    },
+    {
+      "ID": 493616,
+      "Title": "One for Endurance",
+      "Description": "Receive a Focus Sash from the old man living on Route 221",
+      "Points": 2,
+      "DisplayOrder": 1227,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:28"
+    },
+    {
+      "ID": 493601,
+      "Title": "Senior Data Analyst",
+      "Description": "Get your Pokédex upgraded to show the different forms of Pokémon",
+      "Points": 1,
+      "DisplayOrder": 1229,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:28"
+    },
+    {
+      "ID": 493555,
+      "Title": "Bada Bada Bada Bada BLAM",
+      "Description": "Beat your rival in Canalave City",
+      "Points": 10,
+      "DisplayOrder": 1230,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:26:34"
+    },
+    {
+      "ID": 493571,
+      "Title": "Chronicles of the Cool Guy",
+      "Description": "Listen to everything Riley has to say",
+      "Points": 1,
+      "DisplayOrder": 1231,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:26:38"
+    },
+    {
+      "ID": 493602,
+      "Title": "Pleasant Aura",
+      "Description": "Receive a Pokémon Egg from Riley after helping him",
+      "Points": 5,
+      "DisplayOrder": 1232,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:28"
+    },
+    {
+      "ID": 493687,
+      "Title": "Gym Skirmish: Canalave",
+      "Description": "Defeat every trainer in the Canalave Gym",
+      "Points": 5,
+      "DisplayOrder": 1239,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:04"
+    },
+    {
+      "ID": 493556,
+      "Title": "What's Yours Is Mine",
+      "Description": "Earn the Mine Badge",
+      "Points": 10,
+      "DisplayOrder": 1240,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:41:04"
+    },
+    {
+      "ID": 493635,
+      "Title": "Mother, I Crave Violence",
+      "Description": "Catch a Gible",
+      "Points": 2,
+      "DisplayOrder": 1241,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:06"
+    },
+    {
+      "ID": 493688,
+      "Title": "Grunt Brush: Lake Valor",
+      "Description": "Defeat every grunt and get the hidden item in the dried-up Lake Valor",
+      "Points": 3,
+      "DisplayOrder": 1249,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:04"
+    },
+    {
+      "ID": 493557,
+      "Title": "For All the Magikarp",
+      "Description": "Defeat Saturn in the Valor Cavern",
+      "Points": 5,
+      "DisplayOrder": 1250,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:41:04"
+    },
+    {
+      "ID": 493689,
+      "Title": "Grunt Brush: Lake Verity",
+      "Description": "Defeat every grunt at Lake Verity",
+      "Points": 3,
+      "DisplayOrder": 1259,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:05"
+    },
+    {
+      "ID": 493558,
+      "Title": "Playing at Home",
+      "Description": "Defeat Mars at Lake Verity",
+      "Points": 5,
+      "DisplayOrder": 1260,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:41:05"
+    },
+    {
+      "ID": 493636,
+      "Title": "Ugly Duckling",
+      "Description": "Catch a Feebas",
+      "Points": 5,
+      "DisplayOrder": 1261,
+      "type": null,
+      "DateModified": "2025-02-14 19:10:06"
+    },
+    {
+      "ID": 493559,
+      "Title": "Faster than Surfing",
+      "Description": "Find HM08, Rock Climb",
+      "Points": 2,
+      "DisplayOrder": 1270,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:41:05"
+    },
+    {
+      "ID": 493604,
+      "Title": "Good Samaritan",
+      "Description": "Try to return HM08 to its owner and receive a reward",
+      "Points": 1,
+      "DisplayOrder": 1271,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:29"
+    },
+    {
+      "ID": 493605,
+      "Title": "Frick Mindy",
+      "Description": "Experience betrayal after trading a Medicham for a Haunter in Snowpoint City",
+      "Points": 2,
+      "DisplayOrder": 1272,
+      "type": null,
+      "DateModified": "2025-02-12 14:26:02"
+    },
+    {
+      "ID": 493690,
+      "Title": "Gym Skirmish: Snowpoint",
+      "Description": "Defeat every trainer in the Snowpoint Gym",
+      "Points": 5,
+      "DisplayOrder": 1279,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:06"
+    },
+    {
+      "ID": 493560,
+      "Title": "I See, Clever",
+      "Description": "Earn the Icicle Badge",
+      "Points": 10,
+      "DisplayOrder": 1280,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:27:17"
+    },
+    {
+      "ID": 493691,
+      "Title": "Grunt Brush: Galactic HQ",
+      "Description": "Defeat every grunt in the Galactic Warehouse and Galactic HQ",
+      "Points": 5,
+      "DisplayOrder": 1289,
+      "type": "missable",
+      "DateModified": "2025-02-12 22:45:00"
+    },
+    {
+      "ID": 493561,
+      "Title": "Good Guy Cyrus",
+      "Description": "Defeat Cyrus at Galactic HQ and receive the Master Ball",
+      "Points": 5,
+      "DisplayOrder": 1290,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:27:25"
+    },
+    {
+      "ID": 493562,
+      "Title": "Fly Free, Friends",
+      "Description": "Free the Lake Guardians",
+      "Points": 3,
+      "DisplayOrder": 1300,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:27:29"
+    },
+    {
+      "ID": 493692,
+      "Title": "Grunt Brush: Mt. Coronet",
+      "Description": "Defeat every grunt in Mt. Coronet",
+      "Points": 5,
+      "DisplayOrder": 1309,
+      "type": "missable",
+      "DateModified": "2025-02-12 22:45:00"
+    },
+    {
+      "ID": 493563,
+      "Title": "Bad Guy Cyrus",
+      "Description": "Defeat Cyrus at the Spear Pillar",
+      "Points": 10,
+      "DisplayOrder": 1310,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:27:38"
+    },
+    {
+      "ID": 493572,
+      "Title": "Space Lord",
+      "Description": "Catch Palkia",
+      "Points": 5,
+      "DisplayOrder": 1311,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:06"
+    },
+    {
+      "ID": 493573,
+      "Title": "Being of Wisdom",
+      "Description": "Catch Uxie",
+      "Points": 5,
+      "DisplayOrder": 1312,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:06"
+    },
+    {
+      "ID": 493574,
+      "Title": "Being of Emotion",
+      "Description": "Catch Mesprit",
+      "Points": 5,
+      "DisplayOrder": 1313,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:07"
+    },
+    {
+      "ID": 493575,
+      "Title": "Being of Courage",
+      "Description": "Catch Azelf",
+      "Points": 5,
+      "DisplayOrder": 1314,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:07"
+    },
+    {
+      "ID": 493659,
+      "Title": "History Lesson",
+      "Description": "Be shown a picture of the other ancient being that created Sinnoh by Cynthia's grandma",
+      "Points": 1,
+      "DisplayOrder": 1315,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:52"
+    },
+    {
+      "ID": 493612,
+      "Title": "Oh Lawd He Swimmin",
+      "Description": "Break the record with a humongous Remoraid and receive a reward",
+      "Points": 4,
+      "DisplayOrder": 1316,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:29"
+    },
+    {
+      "ID": 493613,
+      "Title": "Small Indie Company",
+      "Description": "Get every Pokétch app from the independent developer in Sunnyshore City",
+      "Points": 3,
+      "DisplayOrder": 1317,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:29"
+    },
+    {
+      "ID": 493618,
+      "Title": "\"A\" for Effort",
+      "Description": "Get an Effort Ribbon from a lady in the Sunnyshore Market",
+      "Points": 2,
+      "DisplayOrder": 1317,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:30"
+    },
+    {
+      "ID": 493619,
+      "Title": "Stamp Race",
+      "Description": "Have Julia award every Weekly Ribbon to a single Pokémon and open their summary",
+      "Points": 5,
+      "DisplayOrder": 1317,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:30"
+    },
+    {
+      "ID": 493693,
+      "Title": "Gym Skirmish: Sunnyshore",
+      "Description": "Defeat every trainer in the Sunnyshore Gym",
+      "Points": 5,
+      "DisplayOrder": 1319,
+      "type": "missable",
+      "DateModified": "2025-02-11 09:41:08"
+    },
+    {
+      "ID": 493564,
+      "Title": "Beacon of Hope",
+      "Description": "Earn the Beacon Badge",
+      "Points": 10,
+      "DisplayOrder": 1320,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:28:04"
+    },
+    {
+      "ID": 493565,
+      "Title": "Countercurrent",
+      "Description": "Get HM07 Waterfall from Jasmine",
+      "Points": 2,
+      "DisplayOrder": 1330,
+      "type": "progression",
+      "DateModified": "2025-02-11 09:41:08"
+    },
+    {
+      "ID": 493566,
+      "Title": "Boo-YAAAAAAHHHHHH!",
+      "Description": "Defeat your rival at the Pokémon League",
+      "Points": 10,
+      "DisplayOrder": 1340,
+      "type": "progression",
+      "DateModified": "2025-01-29 18:28:13"
+    },
+    {
+      "ID": 493567,
+      "Title": "Epic Piano Solo",
+      "Description": "Defeat Cynthia, the Champion of Sinnoh",
+      "Points": 25,
+      "DisplayOrder": 1350,
+      "type": "win_condition",
+      "DateModified": "2025-09-13 21:04:44"
+    },
+    {
+      "ID": 493606,
+      "Title": "Going National",
+      "Description": "Obtain the National Mode for your Pokédex",
+      "Points": 5,
+      "DisplayOrder": 1360,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:30"
+    },
+    {
+      "ID": 493661,
+      "Title": "It's Warm",
+      "Description": "Learn about the current swarm from Rowan's assistant's little sister",
+      "Points": 1,
+      "DisplayOrder": 1361,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:52"
+    },
+    {
+      "ID": 493663,
+      "Title": "Big if True",
+      "Description": "Learn about an unusual Pokémon visiting the Trophy Garden",
+      "Points": 2,
+      "DisplayOrder": 1361,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:52"
+    },
+    {
+      "ID": 493607,
+      "Title": "Not Included in POC",
+      "Description": "Receive an Up-Grade from Professor Oak in Eterna City",
+      "Points": 2,
+      "DisplayOrder": 1362,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:30"
+    },
+    {
+      "ID": 493595,
+      "Title": "Mascot from Another Timeline",
+      "Description": "Receive an Eevee from Bebe",
+      "Points": 3,
+      "DisplayOrder": 1363,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:32"
+    },
+    {
+      "ID": 493577,
+      "Title": "As Seen on TV!",
+      "Description": "Catch Rotom",
+      "Points": 3,
+      "DisplayOrder": 1365,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:07"
+    },
+    {
+      "ID": 493576,
+      "Title": "Chronicles of the Mysterious Maiden",
+      "Description": "Listen to everything Marley has to say",
+      "Points": 1,
+      "DisplayOrder": 1369,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:28:22"
+    },
+    {
+      "ID": 493662,
+      "Title": "...Thanks",
+      "Description": "Help Marley get through the Victory Road",
+      "Points": 5,
+      "DisplayOrder": 1370,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:53"
+    },
+    {
+      "ID": 493664,
+      "Title": "Blessing of the Moon Light",
+      "Description": "Cure the son of Sailor Eldritch with the Lunar Wing",
+      "Points": 1,
+      "DisplayOrder": 1380,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:54"
+    },
+    {
+      "ID": 493578,
+      "Title": "Sail to the Moon",
+      "Description": "Catch Cresselia",
+      "Points": 5,
+      "DisplayOrder": 1381,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:07"
+    },
+    {
+      "ID": 493603,
+      "Title": "Coat Up",
+      "Description": "Receive a Metal Coat from Byron on Iron Island",
+      "Points": 2,
+      "DisplayOrder": 1382,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:32"
+    },
+    {
+      "ID": 493580,
+      "Title": "Looming Shadow",
+      "Description": "Catch Giratina",
+      "Points": 5,
+      "DisplayOrder": 1390,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:08"
+    },
+    {
+      "ID": 493665,
+      "Title": "Gifts of the Pillars",
+      "Description": "Get a Stardust, a Rare Bone and a Reaper Cloth from Turnback Cave in the same session",
+      "Points": 10,
+      "DisplayOrder": 1391,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:54"
+    },
+    {
+      "ID": 493608,
+      "Title": "Graduated",
+      "Description": "Obtain the Diploma for seeing every Pokémon in Sinnoh from the Game Director",
+      "Points": 5,
+      "DisplayOrder": 1400,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:32"
+    },
+    {
+      "ID": 493609,
+      "Title": "SUUUUUPEEEEEER",
+      "Description": "Receive the Super Rod",
+      "Points": 3,
+      "DisplayOrder": 1401,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:32"
+    },
+    {
+      "ID": 493610,
+      "Title": "Magikarp Benz",
+      "Description": "Trade a Finneon for a foreign Magikarp in Route 226",
+      "Points": 3,
+      "DisplayOrder": 1402,
+      "type": null,
+      "DateModified": "2025-02-11 18:40:33"
+    },
+    {
+      "ID": 493673,
+      "Title": "Ultimate Move",
+      "Description": "Have a Pokémon learn an ultimate move from an old man in Route 228",
+      "Points": 5,
+      "DisplayOrder": 1403,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:54"
+    },
+    {
+      "ID": 493674,
+      "Title": "Barge in the Burgeoisie",
+      "Description": "Become a member of the Ribbon Society",
+      "Points": 5,
+      "DisplayOrder": 1404,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:54"
+    },
+    {
+      "ID": 493579,
+      "Title": "Chronicles of the Tough Boy",
+      "Description": "Listen to everything Buck has to say",
+      "Points": 1,
+      "DisplayOrder": 1409,
+      "type": "missable",
+      "DateModified": "2025-01-29 18:28:35"
+    },
+    {
+      "ID": 493666,
+      "Title": "Rocks in the Bucket",
+      "Description": "Help Buck get through Stark Mountain",
+      "Points": 5,
+      "DisplayOrder": 1410,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:55"
+    },
+    {
+      "ID": 493581,
+      "Title": "Eruption Incarnate",
+      "Description": "Catch Heatran",
+      "Points": 5,
+      "DisplayOrder": 1411,
+      "type": "missable",
+      "DateModified": "2025-02-14 19:10:08"
+    },
+    {
+      "ID": 493675,
+      "Title": "Y'all Know What Time It Is!",
+      "Description": "Defeat your rival at the Fight Area",
+      "Points": 10,
+      "DisplayOrder": 1420,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:55"
+    },
+    {
+      "ID": 498298,
+      "Title": "Fest Zest",
+      "Description": "Reach a streak of 20 victories in the Battle Tower Single Battle Room, and defeat Palmer",
+      "Points": 10,
+      "DisplayOrder": 1421,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:55"
+    },
+    {
+      "ID": 498299,
+      "Title": "Party Over",
+      "Description": "Reach a streak of 48 victories in the Battle Tower Single Battle Room, and defeat Palmer again",
+      "Points": 25,
+      "DisplayOrder": 1422,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:55"
+    },
+    {
+      "ID": 493639,
+      "Title": "Mulch Me Up",
+      "Description": "Recollect a berry you used some mulch on",
+      "Points": 1,
+      "DisplayOrder": 2000,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:57"
+    },
+    {
+      "ID": 493640,
+      "Title": "Expert Horticulturist",
+      "Description": "Recollect 15 berries from a single berry plant",
+      "Points": 10,
+      "DisplayOrder": 2001,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:57"
+    },
+    {
+      "ID": 493628,
+      "Title": "I Wanna Be the Berry Best",
+      "Description": "In a single session, plant a berry in every tile of soil",
+      "Points": 10,
+      "DisplayOrder": 2002,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:57"
+    },
+    {
+      "ID": 493632,
+      "Title": "Your Lucky Number",
+      "Description": "Win an item in the lottery",
+      "Points": 5,
+      "DisplayOrder": 2100,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:57"
+    },
+    {
+      "ID": 493629,
+      "Title": "Do Your Dailies!",
+      "Description": "In a single day, complete every daily activity",
+      "Points": 10,
+      "DisplayOrder": 2101,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:58"
+    },
+    {
+      "ID": 493680,
+      "Title": "Experience on a Silver Platter",
+      "Description": "Defeat every trainer visiting the Restaurant Seven Stars on any given day",
+      "Points": 5,
+      "DisplayOrder": 2102,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:58"
+    },
+    {
+      "ID": 493672,
+      "Title": "Better Call Luigi",
+      "Description": "In a single visit, witness all of the unnatural happenings in the Old Chateau",
+      "Points": 5,
+      "DisplayOrder": 2103,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:58"
+    },
+    {
+      "ID": 493667,
+      "Title": "Cool, Cooler, Coolest",
+      "Description": "Win a Cool Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2300,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:58"
+    },
+    {
+      "ID": 493668,
+      "Title": "Beauty Is in the Eye of the Beholder",
+      "Description": "Win a Beauty Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2301,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:59"
+    },
+    {
+      "ID": 493669,
+      "Title": "Cute as a Button",
+      "Description": "Win a Cute Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2302,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:59"
+    },
+    {
+      "ID": 493670,
+      "Title": "As a Smart Man Once Said...",
+      "Description": "Win a Smart Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2303,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:59"
+    },
+    {
+      "ID": 493671,
+      "Title": "As Tough as Old Boots",
+      "Description": "Win a Tough Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2304,
+      "type": null,
+      "DateModified": "2025-02-12 14:18:59"
+    },
+    {
+      "ID": 493676,
+      "Title": "Master of Looks",
+      "Description": "Obtain 4 Dress Up hearts and at least 9 total hearts in a Master Rank Super Contest visual stage",
+      "Points": 10,
+      "DisplayOrder": 2310,
+      "type": null,
+      "DateModified": "2025-02-21 08:28:04"
+    },
+    {
+      "ID": 493677,
+      "Title": "Master of Groove",
+      "Description": "Beat the dance stage of a Master Rank Super Contest with the maximum points possible",
+      "Points": 25,
+      "DisplayOrder": 2311,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:00"
+    },
+    {
+      "ID": 493678,
+      "Title": "Master of Performance",
+      "Description": "Obtain at least 20 hearts in the acting stage of a Master Rank Super Contest",
+      "Points": 10,
+      "DisplayOrder": 2312,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:01"
+    },
+    {
+      "ID": 493679,
+      "Title": "Hold On, Let 'em Cook",
+      "Description": "Cook a Poffin without spillages or burns in less than 40 seconds",
+      "Points": 10,
+      "DisplayOrder": 2313,
+      "type": null,
+      "DateModified": "2025-02-18 17:42:44"
+    },
+    {
+      "ID": 493621,
+      "Title": "Minesweeper",
+      "Description": "Complete the first 5 tasks of the Underground Man",
+      "Points": 10,
+      "DisplayOrder": 3000,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:01"
+    },
+    {
+      "ID": 493620,
+      "Title": "Dress to Impress",
+      "Description": "Get all of the color scarves by showing incredible Pokémon to a certain trainer in Pastoria City",
+      "Points": 10,
+      "DisplayOrder": 3001,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:01"
+    },
+    {
+      "ID": 493627,
+      "Title": "The Legend of Sinnoh",
+      "Description": "Collect all of the type plates scattered across Sinnoh. Plates obtained through digging are not required and do not count",
+      "Points": 10,
+      "DisplayOrder": 3002,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:03"
+    },
+    {
+      "ID": 493622,
+      "Title": "Fully Geared",
+      "Description": "Get every obtainable Pokétch app",
+      "Points": 10,
+      "DisplayOrder": 3003,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:03"
+    },
+    {
+      "ID": 493625,
+      "Title": "Style and Substance",
+      "Description": "Get every obtainable seal",
+      "Points": 25,
+      "DisplayOrder": 3004,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:03"
+    },
+    {
+      "ID": 493630,
+      "Title": "Wallpaper Engine",
+      "Description": "Obtain every PC box wallpaper",
+      "Points": 5,
+      "DisplayOrder": 3005,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:04"
+    },
+    {
+      "ID": 493626,
+      "Title": "Skiddo Toilet Fanum Tax",
+      "Description": "Learn all of the trendy words",
+      "Points": 10,
+      "DisplayOrder": 3006,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:04"
+    },
+    {
+      "ID": 493631,
+      "Title": "Elm's Letter Adventure",
+      "Description": "See every Unown forms at least once",
+      "Points": 5,
+      "DisplayOrder": 3010,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:04"
+    },
+    {
+      "ID": 493623,
+      "Title": "Gotta Catch Some of 'em",
+      "Description": "Register half of the obtainable Pokémon in your Pokédex",
+      "Points": 25,
+      "DisplayOrder": 3011,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:04"
+    },
+    {
+      "ID": 493624,
+      "Title": "Got to Catch 'em All",
+      "Description": "Register every obtainable Pokémon in your Pokédex",
+      "Points": 50,
+      "DisplayOrder": 3012,
+      "type": null,
+      "DateModified": "2025-02-12 14:19:05"
+    },
+    {
+      "ID": 493697,
+      "Title": "Brave Beginnings - Treasures",
+      "Description": "Get every grounded item in Twinleaf Town, Route 201, Verity Lakefront, Lake Verity, Sandgem Town and Route 202",
+      "Points": 3,
+      "DisplayOrder": 4001,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:32"
+    },
+    {
+      "ID": 493715,
+      "Title": "Rock and Roll - Treasures",
+      "Description": "Get every grounded item in Jubilife City, Route 203, Oreburgh Gate, Oreburgh City, Oreburgh Mine, Route 204 and Ravaged Path",
+      "Points": 10,
+      "DisplayOrder": 4002,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:32"
+    },
+    {
+      "ID": 493700,
+      "Title": "Flower Industries - Treasures",
+      "Description": "Get every grounded item in Floaroma Town, Floaroma Meadow, Route 205, Valley Windworks and Fuego Ironworks",
+      "Points": 5,
+      "DisplayOrder": 4003,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:32"
+    },
+    {
+      "ID": 493712,
+      "Title": "Old and New - Treasures",
+      "Description": "Get every grounded item in Eterna Forest, Old Chateau, Eterna City, Route 206 and Wayward Cave",
+      "Points": 10,
+      "DisplayOrder": 4004,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:33"
+    },
+    {
+      "ID": 493709,
+      "Title": "Mountain Outskirts - Treasures",
+      "Description": "Get every grounded item in Route 207, Route 208 and Route 211",
+      "Points": 5,
+      "DisplayOrder": 4005,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:33"
+    },
+    {
+      "ID": 493706,
+      "Title": "Metropolis and Countryside - Treasures",
+      "Description": "Get every grounded item in Hearthome City, Amity Square, Route 209, Lost Tower, Solaceon Town and Solaceon Ruins",
+      "Points": 10,
+      "DisplayOrder": 4006,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:33"
+    },
+    {
+      "ID": 493729,
+      "Title": "Through Fog and Rain - Treasures",
+      "Description": "Get every grounded item in Route 210, Route 215 and Celestic Town",
+      "Points": 5,
+      "DisplayOrder": 4007,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:33"
+    },
+    {
+      "ID": 493732,
+      "Title": "Veilstone Vertical - Treasures",
+      "Description": "Get every grounded item in Veilstone City, Route 214, Valor Lakefront and Lake Valor",
+      "Points": 10,
+      "DisplayOrder": 4008,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:33"
+    },
+    {
+      "ID": 493726,
+      "Title": "The Wet South - Treasures",
+      "Description": "Get every grounded item in Route 213, Pastoria City, Great Marsh, Route 212 and Pokémon Mansion",
+      "Points": 10,
+      "DisplayOrder": 4009,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:34"
+    },
+    {
+      "ID": 493735,
+      "Title": "Waters Ahead - Treasures",
+      "Description": "Get every grounded item in Route 218, Canalave City, Iron Island, Route 219, Route 220 and Route 221",
+      "Points": 10,
+      "DisplayOrder": 4010,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:34"
+    },
+    {
+      "ID": 493724,
+      "Title": "The Great Mount - Treasures",
+      "Description": "Get every grounded item in Mt. Coronet",
+      "Points": 10,
+      "DisplayOrder": 4011,
+      "type": null,
+      "DateModified": "2025-02-12 22:45:00"
+    },
+    {
+      "ID": 493718,
+      "Title": "Snowy Lands - Treasures",
+      "Description": "Get every grounded item in Route 216, Route 217, Acuity Lakefront, Lake Acuity and Snowpoint City",
+      "Points": 5,
+      "DisplayOrder": 4012,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:34"
+    },
+    {
+      "ID": 493721,
+      "Title": "Sunny Shores - Treasures",
+      "Description": "Get every grounded item in Route 222, Sunnyshore City and Route 223",
+      "Points": 5,
+      "DisplayOrder": 4013,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:34"
+    },
+    {
+      "ID": 493703,
+      "Title": "Last Stretch - Treasures",
+      "Description": "Get every grounded item in Victory Road, Route 224 and Pokémon League",
+      "Points": 10,
+      "DisplayOrder": 4014,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:35"
+    },
+    {
+      "ID": 493694,
+      "Title": "Battle Zone - Treasures",
+      "Description": "Get every grounded item in the Battle Zone",
+      "Points": 25,
+      "DisplayOrder": 4015,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:35"
+    },
+    {
+      "ID": 493698,
+      "Title": "Brave Beginnings - Trainers",
+      "Description": "Defeat every trainer in Twinleaf Town, Route 201, Verity Lakefront, Lake Verity, Sandgem Town and Route 202",
+      "Points": 3,
+      "DisplayOrder": 4101,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:36"
+    },
+    {
+      "ID": 493716,
+      "Title": "Rock and Roll - Trainers",
+      "Description": "Defeat every trainer in Jubilife City, Route 203, Oreburgh Gate, Oreburgh City, Oreburgh Mine, Route 204 and Ravaged Path",
+      "Points": 10,
+      "DisplayOrder": 4102,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:36"
+    },
+    {
+      "ID": 493701,
+      "Title": "Flower Industries - Trainers",
+      "Description": "Defeat every trainer in Floaroma Town, Floaroma Meadow, Route 205, Valley Windworks and Fuego Ironworks",
+      "Points": 5,
+      "DisplayOrder": 4103,
+      "type": null,
+      "DateModified": "2025-11-14 22:28:07"
+    },
+    {
+      "ID": 493713,
+      "Title": "Old and New - Trainers",
+      "Description": "Defeat every trainer in Eterna Forest, Old Chateau, Eterna City, Route 206 and Wayward Cave",
+      "Points": 10,
+      "DisplayOrder": 4104,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:37"
+    },
+    {
+      "ID": 493710,
+      "Title": "Mountain Outskirts - Trainers",
+      "Description": "Defeat every trainer in Route 207, Route 208 and Route 211",
+      "Points": 10,
+      "DisplayOrder": 4105,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:37"
+    },
+    {
+      "ID": 493707,
+      "Title": "Metropolis and Countryside - Trainers",
+      "Description": "Defeat every trainer in Hearthome City, Amity Square, Route 209, Lost Tower, Solaceon Town and Solaceon Ruins",
+      "Points": 10,
+      "DisplayOrder": 4106,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:37"
+    },
+    {
+      "ID": 493730,
+      "Title": "Through Fog and Rain - Trainers",
+      "Description": "Defeat every trainer in Route 210, Route 215 and Celestic Town",
+      "Points": 25,
+      "DisplayOrder": 4107,
+      "type": null,
+      "DateModified": "2025-02-14 17:01:20"
+    },
+    {
+      "ID": 493733,
+      "Title": "Veilstone Vertical - Trainers",
+      "Description": "Defeat every trainer in Veilstone City, Route 214, Valor Lakefront and Lake Valor",
+      "Points": 5,
+      "DisplayOrder": 4108,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:38"
+    },
+    {
+      "ID": 493727,
+      "Title": "The Wet South - Trainers",
+      "Description": "Defeat every trainer in Route 213, Pastoria City, Great Marsh, Route 212 and Pokémon Mansion",
+      "Points": 10,
+      "DisplayOrder": 4109,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:39"
+    },
+    {
+      "ID": 493736,
+      "Title": "Waters Ahead - Trainers",
+      "Description": "Defeat every trainer in Route 218, Canalave City, Iron Island, Route 219, Route 220 and Route 221",
+      "Points": 25,
+      "DisplayOrder": 4110,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:39"
+    },
+    {
+      "ID": 493719,
+      "Title": "Snowy Lands - Trainers",
+      "Description": "Defeat every trainer in Route 216, Route 217, Acuity Lakefront, Lake Acuity and Snowpoint City",
+      "Points": 10,
+      "DisplayOrder": 4112,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:39"
+    },
+    {
+      "ID": 493722,
+      "Title": "Sunny Shores - Trainers",
+      "Description": "Defeat every trainer in Route 222, Sunnyshore City and Route 223",
+      "Points": 10,
+      "DisplayOrder": 4113,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:40"
+    },
+    {
+      "ID": 493704,
+      "Title": "Last Stretch - Trainers",
+      "Description": "Defeat every trainer in Victory Road, Route 224 and Pokémon League",
+      "Points": 25,
+      "DisplayOrder": 4114,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:40"
+    },
+    {
+      "ID": 493695,
+      "Title": "Battle Zone - Trainers",
+      "Description": "Defeat every trainer in the Battle Zone",
+      "Points": 25,
+      "DisplayOrder": 4115,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:40"
+    },
+    {
+      "ID": 493699,
+      "Title": "Brave Beginnings - Secrets",
+      "Description": "Get every hidden item and gift in Twinleaf Town, Route 201, Verity Lakefront, Lake Verity, Sandgem Town and Route 202",
+      "Points": 3,
+      "DisplayOrder": 4202,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:40"
+    },
+    {
+      "ID": 493717,
+      "Title": "Rock and Roll - Secrets",
+      "Description": "Get every hidden item and gift in Jubilife City, Route 203, Oreburgh Gate, Oreburgh City, Oreburgh Mine, Route 204 and Ravaged Path",
+      "Points": 5,
+      "DisplayOrder": 4202,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:40"
+    },
+    {
+      "ID": 493702,
+      "Title": "Flower Industries - Secrets",
+      "Description": "Get every hidden item and gift in Floaroma Town, Floaroma Meadow, Route 205, Valley Windworks and Fuego Ironworks",
+      "Points": 10,
+      "DisplayOrder": 4203,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:41"
+    },
+    {
+      "ID": 493714,
+      "Title": "Old and New - Secrets",
+      "Description": "Get every hidden item and gift in Eterna Forest, Old Chateau, Eterna City, Route 206 and Wayward Cave",
+      "Points": 10,
+      "DisplayOrder": 4204,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:41"
+    },
+    {
+      "ID": 493711,
+      "Title": "Mountain Outskirts - Secrets",
+      "Description": "Get every hidden item and gift in Route 207, Route 208 and Route 211",
+      "Points": 5,
+      "DisplayOrder": 4205,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:42"
+    },
+    {
+      "ID": 493708,
+      "Title": "Metropolis and Countryside - Secrets",
+      "Description": "Get every hidden item and gift in Hearthome City, Amity Square, Route 209, Lost Tower, Solaceon Town and Solaceon Ruins",
+      "Points": 5,
+      "DisplayOrder": 4206,
+      "type": null,
+      "DateModified": "2025-02-14 17:01:20"
+    },
+    {
+      "ID": 493731,
+      "Title": "Through Fog and Rain - Secrets",
+      "Description": "Get every hidden item and gift in Route 210, Route 215 and Celestic Town",
+      "Points": 10,
+      "DisplayOrder": 4207,
+      "type": null,
+      "DateModified": "2025-02-14 17:01:21"
+    },
+    {
+      "ID": 493734,
+      "Title": "Veilstone Vertical - Secrets",
+      "Description": "Get every hidden item and gift in Veilstone City, Route 214, Valor Lakefront and Lake Valor",
+      "Points": 10,
+      "DisplayOrder": 4208,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:43"
+    },
+    {
+      "ID": 493728,
+      "Title": "The Wet South - Secrets",
+      "Description": "Get every hidden item and gift in Route 213, Pastoria City, Great Marsh, Route 212 and Pokémon Mansion",
+      "Points": 25,
+      "DisplayOrder": 4209,
+      "type": null,
+      "DateModified": "2025-02-14 17:01:21"
+    },
+    {
+      "ID": 493737,
+      "Title": "Waters Ahead - Secrets",
+      "Description": "Get every hidden item and gift in Route 218, Canalave City, Iron Island, Route 219, Route 220 and Route 221",
+      "Points": 10,
+      "DisplayOrder": 4210,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:43"
+    },
+    {
+      "ID": 493725,
+      "Title": "The Great Mount - Secrets",
+      "Description": "Get every hidden item and gift in Mt. Coronet",
+      "Points": 25,
+      "DisplayOrder": 4211,
+      "type": null,
+      "DateModified": "2025-02-12 22:45:00"
+    },
+    {
+      "ID": 493720,
+      "Title": "Snowy Lands - Secrets",
+      "Description": "Get every hidden item and gift in Route 216, Route 217, Acuity Lakefront, Lake Acuity and Snowpoint City",
+      "Points": 10,
+      "DisplayOrder": 4212,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:44"
+    },
+    {
+      "ID": 493723,
+      "Title": "Sunny Shores - Secrets",
+      "Description": "Get every hidden item and gift in Route 222, Sunnyshore City and Route 223",
+      "Points": 5,
+      "DisplayOrder": 4213,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:44"
+    },
+    {
+      "ID": 493705,
+      "Title": "Last Stretch - Secrets",
+      "Description": "Get every hidden item and gift in Victory Road, Route 224 and Pokémon League",
+      "Points": 10,
+      "DisplayOrder": 4214,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:44"
+    },
+    {
+      "ID": 493696,
+      "Title": "Battle Zone - Secrets",
+      "Description": "Get every hidden item and gift in the Battle Zone",
+      "Points": 25,
+      "DisplayOrder": 4215,
+      "type": null,
+      "DateModified": "2025-02-11 13:17:45"
+    }
+  ]
+}

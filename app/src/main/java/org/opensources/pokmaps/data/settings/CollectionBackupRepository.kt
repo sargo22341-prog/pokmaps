@@ -16,6 +16,7 @@ import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.RoamerObservation
+import org.opensources.pokmaps.domain.guide.Roamers
 import org.opensources.pokmaps.domain.guide.validateCollectionBackup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.UnownForm
@@ -95,7 +96,11 @@ internal fun merge(current: CollectionBackup, imported: CollectionBackup): Colle
     val guides = (current.guides.keys + imported.guides.keys).associateWith {
         val existing = current.guides[it] ?: GuideProgress()
         val incoming = imported.guides[it] ?: GuideProgress()
-        val observations = (existing.roamers + incoming.roamers).associateBy { it.pokemonId }.values.toList()
+        val observations = if (Roamers.maximumObservations(it) == 1 && incoming.roamers.isNotEmpty()) {
+            incoming.roamers
+        } else {
+            (existing.roamers + incoming.roamers).associateBy { it.pokemonId }.values.toList()
+        }
         GuideProgress(existing.completed + incoming.completed, observations)
     }
     val unown = (current.unown.keys + imported.unown.keys).associateWith {

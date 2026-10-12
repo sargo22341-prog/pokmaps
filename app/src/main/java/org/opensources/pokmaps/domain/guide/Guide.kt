@@ -27,10 +27,10 @@ data class GuideArticle(
     val achievementId: Int? = null,
     val points: Int = 0,
     val captureGoal: CaptureGoal? = null,
-    val shiny: Boolean = false
+    val shiny: Boolean = false,
+    val unownGoal: Boolean = achievementId in setOf(5091, 5117, 5955)
 ) {
     val summary: String = paragraphs.joinToString(" ") { spans -> spans.joinToString("") { it.text } }
-    val unownGoal: Boolean = achievementId in setOf(5091, 5117, 5955)
 }
 
 data class GuideLibrary(

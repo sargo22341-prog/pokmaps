@@ -1,0 +1,485 @@
+version_id,game_id,achievement_id,title_fr,description_fr,chapter
+7,790,31199,Battre Brice ou Flora pour la première fois,Battre Brice ou Flora pour la première fois.,hoenn-start
+7,790,31200,Battre Brice ou Flora pour la deuxième fois,Battre Brice ou Flora pour la deuxième fois.,hoenn-mauville
+7,790,31201,Battre Brice ou Flora pour la troisième fois,Battre Brice ou Flora pour la troisième fois.,hoenn-fortree
+7,790,31202,Battre Brice ou Flora pour la quatrième fois,Battre Brice ou Flora pour la quatrième fois.,hoenn-hideouts
+7,790,31205,Trouver la Master Ball dans le Repaire Magma,Trouver la Master Ball dans le Repaire Magma.,hoenn-hideouts
+7,790,31206,Battre Roxanne à Mérouville et obtenir le Badge Roche,Battre Roxanne à Mérouville et obtenir le Badge Roche.,hoenn-optional
+7,790,31207,Battre Bastien à Myokara et obtenir le Badge Poing,Battre Bastien à Myokara et obtenir le Badge Poing.,hoenn-optional
+7,790,31208,Battre Voltère à Lavandia et obtenir le Badge Dynamo,Battre Voltère à Lavandia et obtenir le Badge Dynamo.,hoenn-optional
+7,790,31209,Battre Adriane à Vermilava et obtenir le Badge Chaleur,Battre Adriane à Vermilava et obtenir le Badge Chaleur.,hoenn-optional
+7,790,31210,Battre Norman à Clémenti-Ville et obtenir le Badge Balancier,Battre Norman à Clémenti-Ville et obtenir le Badge Balancier.,hoenn-optional
+7,790,31211,Battre Alizée à Cimetronelle et obtenir le Badge Plume,Battre Alizée à Cimetronelle et obtenir le Badge Plume.,hoenn-optional
+7,790,31212,Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit,Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit.,hoenn-optional
+7,790,31213,Obtenir le Badge Pluie à Atalanopolis,Obtenir le Badge Pluie à Atalanopolis.,hoenn-optional
+7,790,31214,Battre Max au Mont Chimnée,Battre Max au Mont Chimnée.,hoenn-volcano
+7,790,31215,Battre Courtney au Centre Météo,Battre Courtney au Centre Météo.,hoenn-fortree
+7,790,31216,Battre Kelvin dans le Repaire Magma,Battre Kelvin dans le Repaire Magma.,hoenn-hideouts
+7,790,31217,Battre Max dans la Caverne Fondmer,Battre Max dans la Caverne Fondmer.,hoenn-sootopolis
+7,790,31218,Battre Timmy sur la Route Victoire,Battre Timmy sur la Route Victoire.,hoenn-league
+7,790,31223,Devenir Maître de la Ligue Pokémon de Hoenn,Devenir Maître de la Ligue Pokémon de Hoenn.,hoenn-league
+7,790,31224,Capturer Groudon,Capturer Groudon.,hoenn-sootopolis
+7,790,31225,Capturer Rayquaza,Capturer Rayquaza.,hoenn-sootopolis
+7,790,31226,Capturer Regirock,Capturer Regirock.,hoenn-regis
+7,790,31227,Capturer Regice,Capturer Regice.,hoenn-regis
+7,790,31228,Capturer Registeel,Capturer Registeel.,hoenn-regis
+7,790,31229,Capturer Latios,Capturer Latios.,hoenn-postgame
+7,790,91983,Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère,Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère.,hoenn-mauville
+7,790,91984,Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière…,Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière récompense.,hoenn-optional
+7,790,91985,Réunir les ingrédients nécessaires et faire fabriquer un Grelot Coque,Réunir les ingrédients nécessaires et faire fabriquer un Grelot Coque.,hoenn-mossdeep
+7,790,91986,Rapporter le Scanner au Capitaine Poupe,Rapporter le Scanner au Capitaine Poupe.,hoenn-optional
+7,790,91987,Rapporter l’Orbe Rouge à son emplacement d’origine,Rapporter l’Orbe Rouge à son emplacement d’origine.,hoenn-hideouts
+7,790,91988,Obtenir une Ceinture Noire,Obtenir une Ceinture Noire.,hoenn-optional
+7,790,91989,Obtenir de la Poudre Argent,Obtenir de la Poudre Argent.,hoenn-optional
+7,790,91990,Obtenir un Croc Dragon,Obtenir un Croc Dragon.,hoenn-optional
+7,790,89506,Obtenir toutes les CT. Les CT trouvées peuvent être utilisées ; toutes…,Obtenir toutes les CT. Les CT trouvées peuvent être utilisées ; toutes celles qui s’achètent doivent être détenues simultanément.,hoenn-optional
+7,790,92002,Obtenir tous les Pokémon accessibles par don ou par échange avec un…,Obtenir tous les Pokémon accessibles par don ou par échange avec un personnage du jeu.,hoenn-optional
+7,790,92005,Interagir avec tous les Pokémon fixes de Hoenn,Interagir avec tous les Pokémon fixes de Hoenn.,hoenn-optional
+7,790,91997,Faire évoluer un Azurill dont le sexe change lors de l’évolution,Faire évoluer un Azurill dont le sexe change lors de l’évolution.,hoenn-optional
+7,790,91995,Montrer un grand Pokémon aux deux frères qui comparent leurs records,Montrer un grand Pokémon aux deux frères qui comparent leurs records.,hoenn-optional
+7,790,92001,Faire éclore un Absol connaissant Relais et engager un combat avec lui,Faire éclore un Absol connaissant Relais et engager un combat avec lui.,hoenn-optional
+7,790,91996,Devenir membre du club Événement Mystère,Devenir membre du club Événement Mystère.,hoenn-optional
+7,790,91991,Compléter toute la liste Regard Dresseur,Compléter toute la liste Regard Dresseur.,hoenn-optional
+7,790,92004,Gagner au moins la quatrième revanche contre Timmy sur la Route Victoire…,"Gagner au moins la quatrième revanche contre Timmy sur la Route Victoire avec un seul Pokémon, sans légendaire ni famille de Pokémon pseudo-légendaire.",hoenn-postgame
+7,790,92000,Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs…,Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs à la version.,hoenn-league
+7,790,91992,Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 50,Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 50.,hoenn-postgame
+7,790,91993,Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 100,Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 100.,hoenn-postgame
+7,790,91994,Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes,Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes.,hoenn-postgame
+7,790,91999,Capturer un Barpau,Capturer un Barpau.,hoenn-fortree
+7,790,92003,Capturer Latios sans Master Ball,Capturer Latios sans Master Ball.,hoenn-postgame
+7,790,91998,La collection complète de Rubis,Obtenir les 177 espèces accessibles dans Rubis sans échange externe ni événement. Choisir une famille de partenaires et un fossile ; Latias de l’Île du Sud est exclu.,hoenn-national-collection
+8,791,31146,Battre Brice ou Flora pour la première fois,Battre Brice ou Flora pour la première fois.,hoenn-start
+8,791,31147,Battre Brice ou Flora pour la deuxième fois,Battre Brice ou Flora pour la deuxième fois.,hoenn-mauville
+8,791,31148,Battre Brice ou Flora pour la troisième fois,Battre Brice ou Flora pour la troisième fois.,hoenn-fortree
+8,791,31149,Battre Brice ou Flora pour la quatrième fois,Battre Brice ou Flora pour la quatrième fois.,hoenn-hideouts
+8,791,31151,Battre Roxanne à Mérouville et obtenir le Badge Roche,Battre Roxanne à Mérouville et obtenir le Badge Roche.,hoenn-rustboro
+8,791,31152,Battre Bastien à Myokara et obtenir le Badge Poing,Battre Bastien à Myokara et obtenir le Badge Poing.,hoenn-dewford
+8,791,31153,Battre Voltère à Lavandia et obtenir le Badge Dynamo,Battre Voltère à Lavandia et obtenir le Badge Dynamo.,hoenn-mauville
+8,791,31154,Battre Adriane à Vermilava et obtenir le Badge Chaleur,Battre Adriane à Vermilava et obtenir le Badge Chaleur.,hoenn-volcano
+8,791,31155,Battre Norman à Clémenti-Ville et obtenir le Badge Balancier,Battre Norman à Clémenti-Ville et obtenir le Badge Balancier.,hoenn-optional
+8,791,31156,Battre Alizée à Cimetronelle et obtenir le Badge Plume,Battre Alizée à Cimetronelle et obtenir le Badge Plume.,hoenn-fortree
+8,791,31157,Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit,Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit.,hoenn-mossdeep
+8,791,31158,Obtenir le Badge Pluie à Atalanopolis,Obtenir le Badge Pluie à Atalanopolis.,hoenn-sootopolis
+8,791,31159,Battre Arthur au Mont Chimnée,Battre Arthur au Mont Chimnée.,hoenn-volcano
+8,791,31160,Battre Sarah au Centre Météo,Battre Sarah au Centre Météo.,hoenn-fortree
+8,791,31161,Battre Matthieu dans le Repaire Aqua,Battre Matthieu dans le Repaire Aqua.,hoenn-hideouts
+8,791,31162,Battre Arthur dans la Caverne Fondmer,Battre Arthur dans la Caverne Fondmer.,hoenn-sootopolis
+8,791,31163,Obtenir la Master Ball dans le Repaire Aqua,Obtenir la Master Ball dans le Repaire Aqua.,hoenn-hideouts
+8,791,31164,Battre Timmy sur la Route Victoire,Battre Timmy sur la Route Victoire.,hoenn-league
+8,791,31169,Devenir Maître de la Ligue Pokémon de Hoenn,Devenir Maître de la Ligue Pokémon de Hoenn.,hoenn-league
+8,791,31171,Capturer Kyogre sans Master Ball,Capturer Kyogre sans Master Ball.,hoenn-sootopolis
+8,791,31172,Capturer Rayquaza sans Master Ball,Capturer Rayquaza sans Master Ball.,hoenn-sootopolis
+8,791,31173,Capturer Regirock sans Master Ball,Capturer Regirock sans Master Ball.,hoenn-regis
+8,791,31174,Capturer Regice sans Master Ball,Capturer Regice sans Master Ball.,hoenn-regis
+8,791,31175,Capturer Registeel sans Master Ball,Capturer Registeel sans Master Ball.,hoenn-regis
+8,791,31176,Capturer Latias,Capturer Latias.,hoenn-postgame
+8,791,92019,Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère,Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère.,hoenn-mauville
+8,791,92012,Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière…,Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière récompense.,hoenn-optional
+8,791,92021,Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds,Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds.,hoenn-mossdeep
+8,791,92020,Rapporter le Scanner au Capitaine Poupe,Rapporter le Scanner au Capitaine Poupe.,hoenn-optional
+8,791,92024,Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria,Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria.,hoenn-hideouts
+8,791,92023,Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs…,Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs à la version.,hoenn-league
+8,791,92006,"Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision","Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision.",hoenn-optional
+8,791,92018,Gagner un lot à la loterie,Gagner un lot à la loterie.,hoenn-optional
+8,791,92017,Voir son nom inscrit sur la section correspondante du mur de l’Arène de…,Voir son nom inscrit sur la section correspondante du mur de l’Arène de Myokara.,hoenn-dewford
+8,791,92008,Meubler entièrement sa Base Secrète,Meubler entièrement sa Base Secrète.,hoenn-optional
+8,791,92009,Jouer les quinze premières notes du thème de Bourg Palette sur les tapis…,"Jouer les quinze premières notes du thème de Bourg Palette sur les tapis musicaux, en respectant le rythme.",hoenn-optional
+8,791,92013,"Obtenir toutes les chaises, bureaux et coussins de Base Secrète","Obtenir toutes les chaises, bureaux et coussins de Base Secrète.",hoenn-optional
+8,791,92014,"Obtenir tous les tapis, plantes et posters de Base Secrète","Obtenir tous les tapis, plantes et posters de Base Secrète.",hoenn-optional
+8,791,92015,Obtenir la plupart des poupées de Base Secrète,Obtenir la plupart des poupées de Base Secrète.,hoenn-optional
+8,791,92016,Obtenir la plupart des ornements de Base Secrète,Obtenir la plupart des ornements de Base Secrète.,hoenn-optional
+8,791,92022,"Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin…","Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin et Lichii.",hoenn-optional
+8,791,92007,Fabriquer un Pokébloc de niveau 51 minimum,Fabriquer un Pokébloc de niveau 51 minimum.,hoenn-optional
+8,791,92011,Gagner son premier Concours de rang Master,Gagner son premier Concours de rang Master.,hoenn-optional
+8,791,92028,Faire peindre un de ses Pokémon après avoir remporté un Concours de…,Faire peindre un de ses Pokémon après avoir remporté un Concours de Sang-froid de rang Master.,hoenn-optional
+8,791,92027,Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce…,Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce de rang Master.,hoenn-optional
+8,791,92029,Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté…,Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté de rang Master.,hoenn-optional
+8,791,92025,Faire peindre un de ses Pokémon après avoir remporté un Concours…,Faire peindre un de ses Pokémon après avoir remporté un Concours d’Intelligence de rang Master.,hoenn-optional
+8,791,92026,Faire peindre un de ses Pokémon après avoir remporté un Concours de…,Faire peindre un de ses Pokémon après avoir remporté un Concours de Robustesse de rang Master.,hoenn-optional
+8,791,92010,Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav,Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav.,hoenn-optional
+9,668,537183,Secourir le Professeur Seko avec son nouveau partenaire,Secourir le Professeur Seko avec son nouveau partenaire.,hoenn-start
+9,668,537203,Obtenir une Potion gratuite à Rosyères,Obtenir une Potion gratuite à Rosyères.,hoenn-start
+9,668,27592,Battre le rival sur la Route 103,Battre le rival sur la Route 103.,hoenn-start
+9,668,537184,Aider Timmy à capturer son premier Pokémon,Aider Timmy à capturer son premier Pokémon.,hoenn-start
+9,668,537185,Secourir l’employé de Devon contre le sbire qui tente de voler ses documents,Secourir l’employé de Devon contre le sbire qui tente de voler ses documents.,hoenn-rustboro
+9,668,537126,Obtenir le Seau Wailmer chez Fleuriste Jolie Fleur sur la Route 104,Obtenir le Seau Wailmer chez Fleuriste Jolie Fleur sur la Route 104.,hoenn-rustboro
+9,668,537204,Obtenir la Vive Griffe à l’École des Dresseurs,Obtenir la Vive Griffe à l’École des Dresseurs.,hoenn-rustboro
+9,668,537133,Échanger un Tarsal contre un Grainipiot à Mérouville,Échanger un Tarsal contre un Grainipiot à Mérouville.,hoenn-rustboro
+9,668,537116,Battre tous les Dresseurs de l’Arène de Mérouville,Battre tous les Dresseurs de l’Arène de Mérouville.,hoenn-rustboro
+9,668,27596,Battre Roxanne et obtenir le Badge Roche,Battre Roxanne et obtenir le Badge Roche.,hoenn-rustboro
+9,668,537186,Obtenir le PokéNav auprès du président de Devon,Obtenir le PokéNav auprès du président de Devon.,hoenn-rustboro
+9,668,537115,Battre le rival à Mérouville ou sur la Route 104,Battre le rival à Mérouville ou sur la Route 104.,hoenn-rustboro
+9,668,537205,Définir une nouvelle expression à la mode,Définir une nouvelle expression à la mode.,hoenn-optional
+9,668,537206,Obtenir la Canne à Myokara,Obtenir la Canne à Myokara.,hoenn-dewford
+9,668,537117,Battre tous les Dresseurs de l’Arène de Myokara,Battre tous les Dresseurs de l’Arène de Myokara.,hoenn-dewford
+9,668,27597,Battre Bastien et obtenir le Badge Poing,Battre Bastien et obtenir le Badge Poing.,hoenn-dewford
+9,668,537187,Remettre la Lettre à Pierre,Remettre la Lettre à Pierre.,hoenn-dewford
+9,668,537214,Obtenir le Multi Exp,Obtenir le Multi Exp.,hoenn-dewford
+9,668,537207,Terminer le défi de la Maison du Bord de Mer et recevoir un lot,Terminer le défi de la Maison du Bord de Mer et recevoir un lot.,hoenn-mauville
+9,668,537208,Obtenir le Broyeur au marché de Poivressel,Obtenir le Broyeur au marché de Poivressel.,hoenn-mauville
+9,668,537210,Montrer un Pokémon heureux à la femme du Fan Club Pokémon et obtenir le…,Montrer un Pokémon heureux à la femme du Fan Club Pokémon et obtenir le Grelot Zen.,hoenn-mauville
+9,668,537188,Battre la Team Aqua au Musée Océanographique,Battre la Team Aqua au Musée Océanographique.,hoenn-mauville
+9,668,537128,Gagner à la Tente de Combat de Poivressel et obtenir un lot,Gagner à la Tente de Combat de Poivressel et obtenir un lot.,hoenn-mauville
+9,668,27593,Battre le rival sur la Route 110,Battre le rival sur la Route 110.,hoenn-mauville
+9,668,537211,Obtenir une Bicyclette de son choix chez Cycles Rodolphe,Obtenir une Bicyclette de son choix chez Cycles Rodolphe.,hoenn-mauville
+9,668,537212,Échanger une Lettre Port contre une Boîte Jetons,Échanger une Lettre Port contre une Boîte Jetons.,hoenn-mauville
+9,668,537189,Battre Timmy devant l’Arène de Lavandia,Battre Timmy devant l’Arène de Lavandia.,hoenn-mauville
+9,668,537118,Battre tous les Dresseurs de l’Arène de Lavandia,Battre tous les Dresseurs de l’Arène de Lavandia.,hoenn-mauville
+9,668,27598,Battre Voltère et obtenir le Badge Dynamo,Battre Voltère et obtenir le Badge Dynamo.,hoenn-mauville
+9,668,537213,Tenter de rendre les lunettes perdues,Tenter de rendre les lunettes perdues.,hoenn-optional
+9,668,537129,Gagner à la Tente de Combat de Vergazon et obtenir un lot,Gagner à la Tente de Combat de Vergazon et obtenir un lot.,hoenn-optional
+9,668,537127,Obtenir la récompense après avoir battu la famille Stratège sur la Route 111,Obtenir la récompense après avoir battu la famille Stratège sur la Route 111.,hoenn-volcano
+9,668,537130,Gagner à la Tente de Combat d’Autequia et obtenir un lot,Gagner à la Tente de Combat d’Autequia et obtenir un lot.,hoenn-volcano
+9,668,537215,Obtenir une poupée Nénupiot auprès d’Annette,Obtenir une poupée Nénupiot auprès d’Annette.,hoenn-volcano
+9,668,537190,Aider le Professeur Kosmo au Site Météore,Aider le Professeur Kosmo au Site Météore.,hoenn-volcano
+9,668,27604,Intervenir contre la Team Magma au Mont Chimnée,Intervenir contre la Team Magma au Mont Chimnée.,hoenn-volcano
+9,668,537216,Acheter un Lava Cookie au Mont Chimnée,Acheter un Lava Cookie au Mont Chimnée.,hoenn-volcano
+9,668,537217,Rapporter la Météorite volée au Professeur Kosmo,Rapporter la Météorite volée au Professeur Kosmo.,hoenn-volcano
+9,668,537201,Battre le sbire Magma suspect du Sentier Sinuroc,Battre le sbire Magma suspect du Sentier Sinuroc.,hoenn-volcano
+9,668,537131,Obtenir un Œuf auprès de la vieille dame aux sources de Vermilava,Obtenir un Œuf auprès de la vieille dame aux sources de Vermilava.,hoenn-volcano
+9,668,537119,Battre tous les Dresseurs de l’Arène de Vermilava,Battre tous les Dresseurs de l’Arène de Vermilava.,hoenn-volcano
+9,668,27599,Battre Adriane et obtenir le Badge Chaleur,Battre Adriane et obtenir le Badge Chaleur.,hoenn-volcano
+9,668,57267,Obtenir un fossile dans la Tour Mirage,Obtenir un fossile dans la Tour Mirage.,hoenn-fossils
+9,668,537120,Battre tous les Dresseurs de l’Arène de Clémenti-Ville,Battre tous les Dresseurs de l’Arène de Clémenti-Ville.,hoenn-optional
+9,668,27600,Battre Norman et obtenir le Badge Balancier,Battre Norman et obtenir le Badge Balancier.,hoenn-petalburg
+9,668,537218,Obtenir la récompense spéciale de sa mère après avoir battu son père,Obtenir la récompense spéciale de sa mère après avoir battu son père.,hoenn-petalburg
+9,668,57271,Arrêter le générateur de New Lavandia et obtenir sa récompense,Arrêter le générateur de New Lavandia et obtenir sa récompense.,hoenn-mauville
+9,668,537219,Obtenir la Super Canne sur la Route 118,Obtenir la Super Canne sur la Route 118.,hoenn-mauville
+9,668,57265,Capturer un Barpau sauvage,Capturer un Barpau sauvage.,hoenn-fortree
+9,668,537200,Battre tous les sbires du Centre Météo,Battre tous les sbires du Centre Météo.,hoenn-fortree
+9,668,27605,Intervenir contre la Team Aqua au Centre Météo,Intervenir contre la Team Aqua au Centre Météo.,hoenn-fortree
+9,668,27594,Battre le rival sur la Route 119,Battre le rival sur la Route 119.,hoenn-fortree
+9,668,537134,Échanger un Muciole contre un Posipi à Cimetronelle,Échanger un Muciole contre un Posipi à Cimetronelle.,hoenn-fortree
+9,668,537220,Obtenir la CT10 Puissance Cachée en réussissant le jeu de devinettes de la…,Obtenir la CT10 Puissance Cachée en réussissant le jeu de devinettes de la vieille dame.,hoenn-optional
+9,668,537191,Vaincre l’obstacle invisible à l’aide du Devon Scope,Vaincre l’obstacle invisible à l’aide du Devon Scope.,hoenn-fortree
+9,668,537121,Battre tous les Dresseurs de l’Arène de Cimetronelle,Battre tous les Dresseurs de l’Arène de Cimetronelle.,hoenn-fortree
+9,668,27601,Battre Alizée et obtenir le Badge Plume,Battre Alizée et obtenir le Badge Plume.,hoenn-fortree
+9,668,27595,Battre le rival à Nénucrique,Battre le rival à Nénucrique.,hoenn-hideouts
+9,668,537192,Assister aux événements du sommet du Mont Mémoria,Assister aux événements du sommet du Mont Mémoria.,hoenn-hideouts
+9,668,537194,Battre tous les sbires et ramasser tous les objets du Repaire Magma,Battre tous les sbires et ramasser tous les objets du Repaire Magma.,hoenn-hideouts
+9,668,27606,Battre Max dans le Repaire Magma,Battre Max dans le Repaire Magma.,hoenn-hideouts
+9,668,537195,Battre tous les sbires et ramasser tous les objets du Repaire Aqua,Battre tous les sbires et ramasser tous les objets du Repaire Aqua.,hoenn-hideouts
+9,668,27607,Battre l’Admin du Repaire Aqua,Battre l’Admin du Repaire Aqua.,hoenn-hideouts
+9,668,537222,Obtenir la Méga Canne à Algatia,Obtenir la Méga Canne à Algatia.,hoenn-mossdeep
+9,668,537223,Obtenir l’Herbe Mental après avoir vérifié le retour réussi de Goélise,Obtenir l’Herbe Mental après avoir vérifié le retour réussi de Goélise.,hoenn-optional
+9,668,57272,Faire fabriquer un Grelot Coque à la Grotte Tréfonds,Faire fabriquer un Grelot Coque à la Grotte Tréfonds.,hoenn-mossdeep
+9,668,537122,Battre tous les Dresseurs de l’Arène d’Algatia,Battre tous les Dresseurs de l’Arène d’Algatia.,hoenn-mossdeep
+9,668,27602,Battre Lévy et Tatia et obtenir le Badge Esprit,Battre Lévy et Tatia et obtenir le Badge Esprit.,hoenn-mossdeep
+9,668,537202,Battre tous les sbires du Centre Spatial,Battre tous les sbires du Centre Spatial.,hoenn-mossdeep
+9,668,27608,Aider Pierre au Centre Spatial d’Algatia,Aider Pierre au Centre Spatial d’Algatia.,hoenn-mossdeep
+9,668,537196,Battre tous les sbires et ramasser tous les objets de la Caverne Fondmer,Battre tous les sbires et ramasser tous les objets de la Caverne Fondmer.,hoenn-sootopolis
+9,668,27609,Battre Arthur dans la Caverne Fondmer,Battre Arthur dans la Caverne Fondmer.,hoenn-sootopolis
+9,668,537193,Assister à l’intervention de Rayquaza contre les légendaires à Atalanopolis,Assister à l’intervention de Rayquaza contre les légendaires à Atalanopolis.,hoenn-sootopolis
+9,668,537233,Obtenir toutes les CS,Obtenir toutes les CS.,hoenn-optional
+9,668,537226,Battre les records des deux frères d’Atalanopolis qui comparent la taille…,Battre les records des deux frères d’Atalanopolis qui comparent la taille des Pokémon.,hoenn-sootopolis
+9,668,57270,Trouver le Scanner dans l’Épave et le rapporter au Capitaine Poupe,Trouver le Scanner dans l’Épave et le rapporter au Capitaine Poupe.,hoenn-optional
+9,668,537123,Battre tous les Dresseurs de l’Arène d’Atalanopolis,Battre tous les Dresseurs de l’Arène d’Atalanopolis.,hoenn-sootopolis
+9,668,27603,Battre Juan et obtenir le Badge Pluie,Battre Juan et obtenir le Badge Pluie.,hoenn-sootopolis
+9,668,537135,Échanger un Draby contre un Hypotrempe à Pacifiville,Échanger un Draby contre un Hypotrempe à Pacifiville.,hoenn-sootopolis
+9,668,537224,Obtenir la CT21 Frustration en montrant un Pokémon peu heureux à un homme…,Obtenir la CT21 Frustration en montrant un Pokémon peu heureux à un homme de Pacifiville.,hoenn-sootopolis
+9,668,537225,Ouvrir le Sanctuaire,Ouvrir le Sanctuaire.,hoenn-regis
+9,668,27621,Capturer Regirock dans les Ruines Désert,Capturer Regirock dans les Ruines Désert.,hoenn-regis
+9,668,27622,Capturer Regice dans la Grotte Island,Capturer Regice dans la Grotte Island.,hoenn-regis
+9,668,27623,Capturer Registeel dans le Tombeau Antique,Capturer Registeel dans le Tombeau Antique.,hoenn-regis
+9,668,27620,Capturer Rayquaza au sommet du Pilier Céleste,Capturer Rayquaza au sommet du Pilier Céleste.,hoenn-sootopolis
+9,668,537197,Rencontrer Scott à chaque occasion possible pendant l’aventure,Rencontrer Scott à chaque occasion possible pendant l’aventure.,hoenn-optional
+9,668,27610,Battre Timmy sur la Route Victoire,Battre Timmy sur la Route Victoire.,hoenn-league
+9,668,27615,Battre le Maître actuel et devenir Maître de la Ligue Pokémon,Battre le Maître actuel et devenir Maître de la Ligue Pokémon.,hoenn-league
+9,668,30885,Capturer Latias ou Latios,Capturer Latias ou Latios.,hoenn-postgame
+9,668,27618,Capturer Groudon dans la Grotte Terra,Capturer Groudon dans la Grotte Terra.,hoenn-postgame
+9,668,27619,Capturer Kyogre dans la Grotte Marine,Capturer Kyogre dans la Grotte Marine.,hoenn-postgame
+9,668,57268,Obtenir le second fossile dans la Grotte du Maniaque des Fossiles,Obtenir le second fossile dans la Grotte du Maniaque des Fossiles.,hoenn-fossils
+9,668,537132,Obtenir le Terhal offert chez Pierre à Algatia,Obtenir le Terhal offert chez Pierre à Algatia.,hoenn-mossdeep
+9,668,537228,Acheter pour au moins 3 000 Pokédollars un objet à la vente spéciale du…,Acheter pour au moins 3 000 Pokédollars un objet à la vente spéciale du toit du Centre Commercial de Nénucrique.,hoenn-hideouts
+9,668,537229,Remporter le gros lot au Casino de Lavandia pendant un jour spécial…,Remporter le gros lot au Casino de Lavandia pendant un jour spécial annoncé à la télévision.,hoenn-mauville
+9,668,537231,Fabriquer des Pokéblocs avec le Maître du Mélange,Fabriquer des Pokéblocs avec le Maître du Mélange.,hoenn-optional
+9,668,537230,Battre les journalistes Gabie et Ty à leur niveau maximal,Battre les journalistes Gabie et Ty à leur niveau maximal.,hoenn-postgame
+9,668,537235,Obtenir quatre baies différentes auprès de la femme du Maître des Baies en…,Obtenir quatre baies différentes auprès de la femme du Maître des Baies en lui donnant les bonnes expressions.,hoenn-optional
+9,668,537236,Obtenir tous les dons quotidiens de baies,Obtenir tous les dons quotidiens de baies.,hoenn-optional
+9,668,537234,Apprendre des capacités auprès de tous les tuteurs à usage unique de Hoenn,Apprendre des capacités auprès de tous les tuteurs à usage unique de Hoenn.,hoenn-optional
+9,668,537198,Recevoir quatre Points Combat de Scott à la Zone de Combat,Recevoir quatre Points Combat de Scott à la Zone de Combat.,hoenn-postgame
+9,668,537136,Échanger un Skitty contre un Miaouss à la Zone de Combat,Échanger un Skitty contre un Miaouss à la Zone de Combat.,hoenn-postgame
+9,668,537199,Capturer l’arbre étrange de la Zone de Combat,Capturer l’arbre étrange de la Zone de Combat.,hoenn-postgame
+9,668,537227,Miser quinze Points Combat sur soi-même auprès de l’homme au sud de la…,Miser quinze Points Combat sur soi-même auprès de l’homme au sud de la Pyramide de Combat et gagner.,hoenn-optional
+9,668,537237,Terminer l’entraînement d’un apprenti,Terminer l’entraînement d’un apprenti.,hoenn-postgame
+9,668,537238,Battre son apprenti à la Tour de Combat,Battre son apprenti à la Tour de Combat.,hoenn-postgame
+9,668,537239,Faire équipe avec son apprenti à la Tour de Combat,Faire équipe avec son apprenti à la Tour de Combat.,hoenn-postgame
+9,668,57297,Battre Capucine et obtenir le Symbole Capacité d’Argent,Battre Capucine et obtenir le Symbole Capacité d’Argent.,hoenn-postgame
+9,668,57298,Battre de nouveau Capucine et obtenir le Symbole Capacité d’Or,Battre de nouveau Capucine et obtenir le Symbole Capacité d’Or.,hoenn-postgame
+9,668,57285,Battre Takim et obtenir le Symbole Tactique d’Argent,Battre Takim et obtenir le Symbole Tactique d’Argent.,hoenn-postgame
+9,668,57286,Battre de nouveau Takim et obtenir le Symbole Tactique d’Or,Battre de nouveau Takim et obtenir le Symbole Tactique d’Or.,hoenn-postgame
+9,668,57293,Battre Esteban et obtenir le Symbole Esprit d’Argent,Battre Esteban et obtenir le Symbole Esprit d’Argent.,hoenn-postgame
+9,668,57294,Battre de nouveau Esteban et obtenir le Symbole Esprit d’Or,Battre de nouveau Esteban et obtenir le Symbole Esprit d’Or.,hoenn-postgame
+9,668,57289,Battre Carole et obtenir le Symbole Cran d’Argent,Battre Carole et obtenir le Symbole Cran d’Argent.,hoenn-postgame
+9,668,57290,Battre de nouveau Carole et obtenir le Symbole Cran d’Or,Battre de nouveau Carole et obtenir le Symbole Cran d’Or.,hoenn-postgame
+9,668,57291,Battre Sam et obtenir le Symbole Savoir d’Argent,Battre Sam et obtenir le Symbole Savoir d’Argent.,hoenn-postgame
+9,668,57292,Battre de nouveau Sam et obtenir le Symbole Savoir d’Or,Battre de nouveau Sam et obtenir le Symbole Savoir d’Or.,hoenn-postgame
+9,668,57287,Battre Charline et obtenir le Symbole Chance d’Argent,Battre Charline et obtenir le Symbole Chance d’Argent.,hoenn-postgame
+9,668,57288,Battre de nouveau Charline et obtenir le Symbole Chance d’Or,Battre de nouveau Charline et obtenir le Symbole Chance d’Or.,hoenn-postgame
+9,668,57295,Battre Bayar et obtenir le Symbole Courage d’Argent,Battre Bayar et obtenir le Symbole Courage d’Argent.,hoenn-postgame
+9,668,57296,Battre de nouveau Bayar et obtenir le Symbole Courage d’Or,Battre de nouveau Bayar et obtenir le Symbole Courage d’Or.,hoenn-postgame
+9,668,537240,Obtenir toutes les récompenses de Scott,Obtenir toutes les récompenses de Scott.,hoenn-optional
+9,668,27617,Battre Pierre au Site Météore,Battre Pierre au Site Météore.,hoenn-volcano
+9,668,57275,La collection complète de Émeraude,"Obtenir les 212 espèces accessibles dans Émeraude sans échange externe ni événement. Une seule famille de partenaires de Hoenn et un seul errant comptent ; choisir entre Grodoudou et Delcatty pour l’unique Pierre Lune. Les partenaires de Johto, conditionnés aux 200 espèces ordinaires de Hoenn, ne comptent pas.",hoenn-national-collection
+9,668,537241,Battre tous les Dresseurs et ramasser tous les objets de la première…,Battre tous les Dresseurs et ramasser tous les objets de la première énigme de la Maison des Pièges.,hoenn-optional
+9,668,537242,Battre tous les Dresseurs et ramasser tous les objets de la deuxième…,Battre tous les Dresseurs et ramasser tous les objets de la deuxième énigme de la Maison des Pièges.,hoenn-optional
+9,668,537243,Battre tous les Dresseurs et ramasser tous les objets de la troisième…,Battre tous les Dresseurs et ramasser tous les objets de la troisième énigme de la Maison des Pièges.,hoenn-optional
+9,668,537244,Battre tous les Dresseurs et ramasser tous les objets de la quatrième…,Battre tous les Dresseurs et ramasser tous les objets de la quatrième énigme de la Maison des Pièges.,hoenn-optional
+9,668,537245,Battre tous les Dresseurs et ramasser tous les objets de la sixième énigme…,Battre tous les Dresseurs et ramasser tous les objets de la sixième énigme de la Maison des Pièges.,hoenn-optional
+9,668,537246,Battre tous les Dresseurs et ramasser tous les objets de la septième…,Battre tous les Dresseurs et ramasser tous les objets de la septième énigme de la Maison des Pièges.,hoenn-optional
+9,668,537247,Battre tous les Dresseurs et ramasser tous les objets de la huitième…,Battre tous les Dresseurs et ramasser tous les objets de la huitième énigme de la Maison des Pièges.,hoenn-optional
+9,668,57269,Résoudre toutes les énigmes de la Maison des Pièges et obtenir toutes les…,Résoudre toutes les énigmes de la Maison des Pièges et obtenir toutes les récompenses.,hoenn-optional
+9,668,537248,Trouver la Pépite cachée laissée par le Maître des Pièges après sa…,Trouver la Pépite cachée laissée par le Maître des Pièges après sa dernière énigme.,hoenn-optional
+9,668,57276,Terminer le défi en Duo du mode Normal de la Butte d’Entraînement,Terminer le défi en Duo du mode Normal de la Butte d’Entraînement.,hoenn-postgame
+9,668,57277,Terminer le défi en Duo du mode Variété de la Butte d’Entraînement,Terminer le défi en Duo du mode Variété de la Butte d’Entraînement.,hoenn-postgame
+9,668,57278,Terminer le défi en Duo du mode Unique de la Butte d’Entraînement,Terminer le défi en Duo du mode Unique de la Butte d’Entraînement.,hoenn-postgame
+9,668,57279,Terminer le défi en Duo du mode Expert de la Butte d’Entraînement,Terminer le défi en Duo du mode Expert de la Butte d’Entraînement.,hoenn-postgame
+9,668,57280,Gagner un Concours de Sang-froid de rang Master,Gagner un Concours de Sang-froid de rang Master.,hoenn-optional
+9,668,57281,Gagner un Concours de Beauté de rang Master,Gagner un Concours de Beauté de rang Master.,hoenn-optional
+9,668,57282,Gagner un Concours de Grâce de rang Master,Gagner un Concours de Grâce de rang Master.,hoenn-optional
+9,668,57283,Gagner un Concours d’Intelligence de rang Master,Gagner un Concours d’Intelligence de rang Master.,hoenn-optional
+9,668,57284,Gagner un Concours de Robustesse de rang Master,Gagner un Concours de Robustesse de rang Master.,hoenn-optional
+9,668,537232,Obtenir toutes les couleurs de Foulard en montrant des Pokémon…,Obtenir toutes les couleurs de Foulard en montrant des Pokémon remarquables au président du Fan Club Pokémon.,hoenn-optional
+9,668,537221,Obtenir un Ornement Verre en remplissant la nouvelle exposition du Musée…,Obtenir un Ornement Verre en remplissant la nouvelle exposition du Musée de Nénucrique de tableaux remarquables.,hoenn-optional
+9,668,537152,Obtenir et conserver toutes les flûtes échangées contre de la cendre sur…,Obtenir et conserver toutes les flûtes échangées contre de la cendre sur la Route 113.,hoenn-volcano
+9,668,537125,Obtenir tous les dons d’objets courants des personnages,Obtenir tous les dons d’objets courants des personnages.,hoenn-optional
+9,668,537137,Découvrir tous les Pokémon camouflés de Hoenn,Découvrir tous les Pokémon camouflés de Hoenn.,hoenn-optional
+9,668,537138,Faire éclore un Pichu connaissant Électacle,Faire éclore un Pichu connaissant Électacle.,hoenn-optional
+9,668,537450,Couper une zone d’herbe de cinq cases sur cinq en une seule utilisation de…,Couper une zone d’herbe de cinq cases sur cinq en une seule utilisation de Coupe.,hoenn-optional
+9,668,537249,Voler une Ceinture Noire au Karatéka Nob à partir de sa quatrième revanche,Voler une Ceinture Noire au Karatéka Nob à partir de sa quatrième revanche.,hoenn-postgame
+9,668,537250,Voler de la Poudre Argent au Entomomaniac Jeffrey à partir de sa quatrième…,Voler de la Poudre Argent au Entomomaniac Jeffrey à partir de sa quatrième revanche.,hoenn-postgame
+9,668,537251,Voler un Croc Dragon au Dracologue Nicolas à partir de sa quatrième revanche,Voler un Croc Dragon au Dracologue Nicolas à partir de sa quatrième revanche.,hoenn-postgame
+9,668,57266,Meubler entièrement sa Base Secrète,Meubler entièrement sa Base Secrète.,hoenn-optional
+9,668,537124,Meubler entièrement sa chambre à Bourg-en-Vol,Meubler entièrement sa chambre à Bourg-en-Vol.,hoenn-optional
+9,668,537148,"Collectionner tous les bureaux, chaises et plantes de Base Secrète","Collectionner tous les bureaux, chaises et plantes de Base Secrète.",hoenn-optional
+9,668,537149,"Collectionner tous les ornements et posters de Base Secrète, sauf la tente…","Collectionner tous les ornements et posters de Base Secrète, sauf la tente de la couleur non choisie à la Maison des Pièges.",hoenn-optional
+9,668,537150,Collectionner tous les coussins et tapis de Base Secrète,Collectionner tous les coussins et tapis de Base Secrète.,hoenn-optional
+9,668,537151,"Collectionner toutes les poupées de Base Secrète, sauf Grainipiot,…","Collectionner toutes les poupées de Base Secrète, sauf Grainipiot, Regirock, Regice et Registeel.",hoenn-optional
+9,668,537139,Battre l’équipe la plus forte de Timmy,Battre l’équipe la plus forte de Timmy.,hoenn-postgame
+9,668,537140,Battre l’équipe la plus forte de Roxanne,Battre l’équipe la plus forte de Roxanne.,hoenn-postgame
+9,668,537141,Battre l’équipe la plus forte de Bastien,Battre l’équipe la plus forte de Bastien.,hoenn-postgame
+9,668,537142,Battre l’équipe la plus forte de Voltère,Battre l’équipe la plus forte de Voltère.,hoenn-postgame
+9,668,537143,Battre l’équipe la plus forte d’Adriane,Battre l’équipe la plus forte d’Adriane.,hoenn-postgame
+9,668,537144,Battre l’équipe la plus forte de Norman,Battre l’équipe la plus forte de Norman.,hoenn-postgame
+9,668,537145,Battre l’équipe la plus forte d’Alizée,Battre l’équipe la plus forte d’Alizée.,hoenn-postgame
+9,668,537146,Battre l’équipe la plus forte de Lévy et Tatia,Battre l’équipe la plus forte de Lévy et Tatia.,hoenn-postgame
+9,668,537147,Battre l’équipe la plus forte de Juan,Battre l’équipe la plus forte de Juan.,hoenn-postgame
+9,668,537167,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Bourg-en-Vol, les Routes 101, 102 et 103 et Rosyères.",hoenn-start
+9,668,537153,"Battre tous les Dresseurs dans les lieux suivants : Bourg-en-Vol, les…","Battre tous les Dresseurs dans les lieux suivants : Bourg-en-Vol, les Routes 101, 102 et 103 et Rosyères.",hoenn-start
+9,668,537168,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Clémenti-Ville, les Routes 104 et 105 et le Bois Clémenti.",hoenn-rustboro
+9,668,537154,"Battre tous les Dresseurs dans les lieux suivants : Clémenti-Ville, les…","Battre tous les Dresseurs dans les lieux suivants : Clémenti-Ville, les Routes 104 et 105 et le Bois Clémenti.",hoenn-rustboro
+9,668,537169,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Mérouville, les Routes 115 et 116 et le Tunnel Mérazon.",hoenn-rustboro
+9,668,537155,"Battre tous les Dresseurs dans les lieux suivants : Mérouville, les Routes…","Battre tous les Dresseurs dans les lieux suivants : Mérouville, les Routes 115 et 116 et le Tunnel Mérazon.",hoenn-rustboro
+9,668,537170,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Myokara, la Grotte Granite, les Chenaux 106, 107 et 108 et l’Épave.",hoenn-dewford
+9,668,537156,"Battre tous les Dresseurs dans les lieux suivants : Myokara, la Grotte…","Battre tous les Dresseurs dans les lieux suivants : Myokara, la Grotte Granite, les Chenaux 106, 107 et 108 et l’Épave.",hoenn-dewford
+9,668,537171,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,Ramasser tous les objets visibles et cachés dans les lieux suivants : Poivressel et les Routes 109 et 110.,hoenn-mauville
+9,668,537157,Battre tous les Dresseurs dans les lieux suivants : Poivressel et les…,Battre tous les Dresseurs dans les lieux suivants : Poivressel et les Routes 109 et 110.,hoenn-mauville
+9,668,537172,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Lavandia, Vergazon, les Routes 117 et 118 et New Lavandia.",hoenn-mauville
+9,668,537158,"Battre tous les Dresseurs dans les lieux suivants : Lavandia, Vergazon,…","Battre tous les Dresseurs dans les lieux suivants : Lavandia, Vergazon, les Routes 117 et 118 et New Lavandia.",hoenn-mauville
+9,668,537173,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Vermilava, les Routes 111 et 112, le Chemin Ardent, le Mont Chimnée et le Sentier Sinuroc.",hoenn-volcano
+9,668,537159,"Battre tous les Dresseurs dans les lieux suivants : Vermilava, les Routes…","Battre tous les Dresseurs dans les lieux suivants : Vermilava, les Routes 111 et 112, le Chemin Ardent, le Mont Chimnée et le Sentier Sinuroc.",hoenn-volcano
+9,668,537174,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Autequia, les Routes 113 et 114 et le Site Météore.",hoenn-volcano
+9,668,537160,"Battre tous les Dresseurs dans les lieux suivants : Autequia, les Routes…","Battre tous les Dresseurs dans les lieux suivants : Autequia, les Routes 113 et 114 et le Site Météore.",hoenn-volcano
+9,668,537175,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Cimetronelle, les Routes 119, 120 et 121 et la Grotte Zénith.",hoenn-hideouts
+9,668,537161,"Battre tous les Dresseurs dans les lieux suivants : Cimetronelle, les…","Battre tous les Dresseurs dans les lieux suivants : Cimetronelle, les Routes 119, 120 et 121 et la Grotte Zénith.",hoenn-hideouts
+9,668,537176,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Nénucrique, le Parc Safari, le Chenal 122, le Mont Mémoria et la Route 123.",hoenn-hideouts
+9,668,537162,"Battre tous les Dresseurs dans les lieux suivants : Nénucrique, le Parc…","Battre tous les Dresseurs dans les lieux suivants : Nénucrique, le Parc Safari, le Chenal 122, le Mont Mémoria et la Route 123.",hoenn-hideouts
+9,668,537177,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Algatia, les Chenaux 124 et 125 et la Grotte Tréfonds.",hoenn-mossdeep
+9,668,537163,"Battre tous les Dresseurs dans les lieux suivants : Algatia, les Chenaux…","Battre tous les Dresseurs dans les lieux suivants : Algatia, les Chenaux 124 et 125 et la Grotte Tréfonds.",hoenn-mossdeep
+9,668,537178,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,Ramasser tous les objets visibles et cachés dans les lieux suivants : Atalanopolis et les Chenaux 126 et 127.,hoenn-sootopolis
+9,668,537164,Battre tous les Dresseurs dans les lieux suivants : Atalanopolis et les…,Battre tous les Dresseurs dans les lieux suivants : Atalanopolis et les Chenaux 126 et 127.,hoenn-sootopolis
+9,668,537179,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,"Ramasser tous les objets visibles et cachés dans les lieux suivants : Éternara, les Chenaux 128 et 129 et la Route Victoire.",hoenn-league
+9,668,537165,"Battre tous les Dresseurs dans les lieux suivants : Éternara, les Chenaux…","Battre tous les Dresseurs dans les lieux suivants : Éternara, les Chenaux 128 et 129 et la Route Victoire.",hoenn-league
+9,668,537180,Ramasser tous les objets visibles et cachés dans les lieux suivants :…,Ramasser tous les objets visibles et cachés dans les lieux suivants : Pacifiville et les Chenaux 130 à 134.,hoenn-sootopolis
+9,668,537166,Battre tous les Dresseurs dans les lieux suivants : Pacifiville et les…,Battre tous les Dresseurs dans les lieux suivants : Pacifiville et les Chenaux 130 à 134.,hoenn-sootopolis
+9,668,537182,Ramasser tous les objets visibles et cachés du Marina et de la Zone de Combat,Ramasser tous les objets visibles et cachés du Marina et de la Zone de Combat.,hoenn-postgame
+9,668,537181,Battre tous les Dresseurs du Marina et de la Zone de Combat,Battre tous les Dresseurs du Marina et de la Zone de Combat.,hoenn-postgame
+10,515,33592,Battre le rival au laboratoire du Professeur Chen,Battre le rival au laboratoire du Professeur Chen.,remake-start
+10,515,33593,Gagner le combat facultatif contre le rival sur la Route 22,Gagner le combat facultatif contre le rival sur la Route 22.,remake-brock
+10,515,33601,Battre Pierre et obtenir le Badge Roche,Battre Pierre et obtenir le Badge Roche.,remake-brock
+10,515,195143,Battre Pierre en mode Défini avec au plus deux Pokémon de niveau 14 maximum,Battre Pierre en mode Défini avec au plus deux Pokémon de niveau 14 maximum.,remake-brock
+10,515,33594,Battre le rival à Azuria,Battre le rival à Azuria.,remake-misty
+10,515,33602,Battre Ondine et obtenir le Badge Cascade,Battre Ondine et obtenir le Badge Cascade.,remake-misty
+10,515,195146,Battre Ondine en mode Défini avec au plus deux Pokémon de niveau 21 maximum,Battre Ondine en mode Défini avec au plus deux Pokémon de niveau 21 maximum.,remake-misty
+10,515,33595,Battre le rival à bord de l’Océane,Battre le rival à bord de l’Océane.,remake-ship
+10,515,33603,Battre le Major Bob et obtenir le Badge Foudre,Battre le Major Bob et obtenir le Badge Foudre.,remake-ship
+10,515,195147,Battre le Major Bob en mode Défini avec au plus trois Pokémon de niveau 24…,Battre le Major Bob en mode Défini avec au plus trois Pokémon de niveau 24 maximum.,remake-ship
+10,515,33596,Battre le rival dans la Tour Pokémon,Battre le rival dans la Tour Pokémon.,remake-flute
+10,515,33604,Battre Erika et obtenir le Badge Prisme,Battre Erika et obtenir le Badge Prisme.,remake-celadon
+10,515,195153,Battre Erika en mode Défini avec au plus trois Pokémon de niveau 29 maximum,Battre Erika en mode Défini avec au plus trois Pokémon de niveau 29 maximum.,remake-celadon
+10,515,33599,Arrêter la Team Rocket à Céladopole,Arrêter la Team Rocket à Céladopole.,remake-celadon
+10,515,33605,Battre Koga et obtenir le Badge Âme,Battre Koga et obtenir le Badge Âme.,remake-flute
+10,515,195157,Battre Koga en mode Défini avec au plus quatre Pokémon de niveau 43 maximum,Battre Koga en mode Défini avec au plus quatre Pokémon de niveau 43 maximum.,remake-flute
+10,515,33597,Battre le rival à Safrania,Battre le rival à Safrania.,remake-saffron
+10,515,33600,Arrêter la Team Rocket à Safrania,Arrêter la Team Rocket à Safrania.,remake-saffron
+10,515,33606,Battre Morgane et obtenir le Badge Marais,Battre Morgane et obtenir le Badge Marais.,remake-saffron
+10,515,195159,Battre Morgane en mode Défini avec au plus quatre Pokémon de niveau 43 maximum,Battre Morgane en mode Défini avec au plus quatre Pokémon de niveau 43 maximum.,remake-saffron
+10,515,33607,Battre Auguste et obtenir le Badge Volcan,Battre Auguste et obtenir le Badge Volcan.,remake-cinnabar
+10,515,195160,Battre Auguste en mode Défini avec au plus quatre Pokémon de niveau 47 maximum,Battre Auguste en mode Défini avec au plus quatre Pokémon de niveau 47 maximum.,remake-cinnabar
+10,515,33626,Secourir Lostelle sur l’Île 3,Secourir Lostelle sur l’Île 3.,remake-sevii
+10,515,33608,Battre Giovanni et obtenir le Badge Terre,Battre Giovanni et obtenir le Badge Terre.,remake-league
+10,515,195161,Battre Giovanni en mode Défini avec au plus cinq Pokémon de niveau 50 maximum,Battre Giovanni en mode Défini avec au plus cinq Pokémon de niveau 50 maximum.,remake-league
+10,515,33598,Battre le rival sur le chemin de la Ligue Pokémon,Battre le rival sur le chemin de la Ligue Pokémon.,remake-league
+10,515,33613,Devenir Maître de la Ligue Pokémon,Devenir Maître de la Ligue Pokémon.,remake-league
+10,515,195162,Vaincre la première Ligue avec un seul Pokémon dans l’équipe,Vaincre la première Ligue avec un seul Pokémon dans l’équipe.,remake-league
+10,515,33627,Aider Olga à arrêter la Team Rocket sur l’Île 4,Aider Olga à arrêter la Team Rocket sur l’Île 4.,remake-ruby
+10,515,33628,Secourir Selphy sur l’Île 5,Secourir Selphy sur l’Île 5.,remake-sapphire
+10,515,33629,Arrêter la Team Rocket dans son entrepôt de l’Île 5,Arrêter la Team Rocket dans son entrepôt de l’Île 5.,remake-preparation
+10,515,33618,Revenir plus fort et redevenir Maître de la Ligue Pokémon,Revenir plus fort et redevenir Maître de la Ligue Pokémon.,remake-league
+10,515,195166,Vaincre la seconde Ligue avec un seul Pokémon dans l’équipe,Vaincre la seconde Ligue avec un seul Pokémon dans l’équipe.,remake-league
+10,515,33623,Capturer Mewtwo,Capturer Mewtwo.,remake-legends
+10,515,33630,Terminer le défi Solo de la Tour Dresseurs,Terminer le défi Solo de la Tour Dresseurs.,remake-sapphire
+10,515,33631,Terminer le défi Duo de la Tour Dresseurs,Terminer le défi Duo de la Tour Dresseurs.,remake-sapphire
+10,515,33632,Terminer le défi K.O. de la Tour Dresseurs,Terminer le défi K.O. de la Tour Dresseurs.,remake-sapphire
+10,515,33633,Terminer le défi Mixte de la Tour Dresseurs,Terminer le défi Mixte de la Tour Dresseurs.,remake-sapphire
+10,515,33619,Capturer un Leveinard,Capturer un Leveinard.,remake-collections
+10,515,33622,Capturer Artikodin,Capturer Artikodin.,remake-legends
+10,515,33621,Capturer Électhor,Capturer Électhor.,remake-legends
+10,515,33620,Capturer Sulfura,Capturer Sulfura.,remake-legends
+10,515,33624,"Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ","Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ.",remake-legends
+10,515,195144,"Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite","Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite.",remake-brock
+10,515,195145,Choisir le Fossile Nautile ou le Fossile Dôme dans le Mont Sélénite,Choisir le Fossile Nautile ou le Fossile Dôme dans le Mont Sélénite.,remake-brock
+10,515,195148,Échanger un Piafabec contre un Canarticho à Carmin sur Mer,Échanger un Piafabec contre un Canarticho à Carmin sur Mer.,remake-ship
+10,515,195149,Échanger un Nidoran mâle contre un Nidoran femelle sur la Route 5,Échanger un Nidoran mâle contre un Nidoran femelle sur la Route 5.,remake-collections
+10,515,195150,Échanger un Abra contre un M. Mime sur la Route 2,Échanger un Abra contre un M. Mime sur la Route 2.,remake-brock
+10,515,195151,Obtenir le Vieil Ambre au Musée d’Argenta,Obtenir le Vieil Ambre au Musée d’Argenta.,remake-brock
+10,515,195152,Obtenir l’Évoli offert à Céladopole,Obtenir l’Évoli offert à Céladopole.,remake-celadon
+10,515,195154,Capturer un Ronflex sur la Route 12 ou la Route 16,Capturer un Ronflex sur la Route 12 ou la Route 16.,remake-flute
+10,515,195155,Échanger un Nidorino contre un Nidorina sur la Route 11,Échanger un Nidorino contre un Nidorina sur la Route 11.,remake-ship
+10,515,195156,Battre le maître du Dojo de Safrania,Battre le maître du Dojo de Safrania.,remake-saffron
+10,515,195158,Obtenir le Lokhlass de la Sylphe SARL après avoir battu le rival,Obtenir le Lokhlass de la Sylphe SARL après avoir battu le rival.,remake-saffron
+10,515,195163,Échanger un Akwakwak contre un Excelangue au poste entre la Route 18 et…,Échanger un Akwakwak contre un Excelangue au poste entre la Route 18 et Parmanie.,remake-flute
+10,515,195164,Échanger un Mimitoss contre un Saquedeneu à Cramois’Île,Échanger un Mimitoss contre un Saquedeneu à Cramois’Île.,remake-cinnabar
+10,515,195165,Échanger un Raichu contre un Électrode à Cramois’Île,Échanger un Raichu contre un Électrode à Cramois’Île.,remake-cinnabar
+10,515,195167,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O.,remake-sapphire
+10,515,195168,Échanger un Ponyta contre un Otaria à Cramois’Île,Échanger un Ponyta contre un Otaria à Cramois’Île.,remake-cinnabar
+10,515,195169,Échanger un Têtarte contre un Lippoutou à Azuria,Échanger un Têtarte contre un Lippoutou à Azuria.,remake-misty
+10,515,33625,La collection complète de Rouge Feu,"Obtenir les 170 espèces accessibles dans Rouge Feu, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-national-collection
+11,788,34776,Battre le rival au laboratoire du Professeur Chen,Battre le rival au laboratoire du Professeur Chen.,remake-start
+11,788,541899,Obtenir le Pokédex auprès du Professeur Chen,Obtenir le Pokédex auprès du Professeur Chen.,remake-start
+11,788,541900,Obtenir la Carte auprès de Nina,Obtenir la Carte auprès de Nina.,remake-start
+11,788,541901,Obtenir la Potion gratuite de l’employé de la Boutique sur la Route 1,Obtenir la Potion gratuite de l’employé de la Boutique sur la Route 1.,remake-start
+11,788,541902,Obtenir la TV ABC après la démonstration de capture,Obtenir la TV ABC après la démonstration de capture.,remake-start
+11,788,34777,Gagner le combat facultatif contre le rival sur la Route 22,Gagner le combat facultatif contre le rival sur la Route 22.,remake-brock
+11,788,541904,Battre le Dresseur de l’Arène d’Argenta,Battre le Dresseur de l’Arène d’Argenta.,remake-brock
+11,788,34785,Battre Pierre à Argenta et obtenir le Badge Roche,Battre Pierre à Argenta et obtenir le Badge Roche.,remake-brock
+11,788,541906,Choisir le Fossile Nautile ou le Fossile Dôme dans le Mont Sélénite,Choisir le Fossile Nautile ou le Fossile Dôme dans le Mont Sélénite.,remake-brock
+11,788,541937,"Battre tous les Dresseurs et ramasser tous les objets du Mont Sélénite,…","Battre tous les Dresseurs et ramasser tous les objets du Mont Sélénite, sauf les champignons cachés.",remake-brock
+11,788,34778,Battre le rival à Azuria,Battre le rival à Azuria.,remake-misty
+11,788,541907,Battre tous les Dresseurs de l’Arène d’Azuria,Battre tous les Dresseurs de l’Arène d’Azuria.,remake-misty
+11,788,34786,Battre Ondine à Azuria et obtenir le Badge Cascade,Battre Ondine à Azuria et obtenir le Badge Cascade.,remake-misty
+11,788,541908,Obtenir le Passe Bateau auprès de Léo,Obtenir le Passe Bateau auprès de Léo.,remake-ship
+11,788,541915,Battre tous les Dresseurs et ramasser tous les objets de l’Océane avant…,Battre tous les Dresseurs et ramasser tous les objets de l’Océane avant son départ.,remake-ship
+11,788,34779,Battre le rival à bord de l’Océane,Battre le rival à bord de l’Océane.,remake-ship
+11,788,541909,Obtenir la Canne à Carmin sur Mer,Obtenir la Canne à Carmin sur Mer.,remake-ship
+11,788,541910,Obtenir le Bon Commande à Carmin sur Mer,Obtenir le Bon Commande à Carmin sur Mer.,remake-ship
+11,788,541913,Obtenir la Bicyclette à Azuria,Obtenir la Bicyclette à Azuria.,remake-misty
+11,788,541916,Battre tous les Dresseurs de l’Arène de Carmin sur Mer,Battre tous les Dresseurs de l’Arène de Carmin sur Mer.,remake-preparation
+11,788,34787,Battre le Major Bob à Carmin sur Mer et obtenir le Badge Foudre,Battre le Major Bob à Carmin sur Mer et obtenir le Badge Foudre.,remake-ship
+11,788,34780,Battre le rival à Lavanville,Battre le rival à Lavanville.,remake-flute
+11,788,541921,Obtenir l’Évoli offert à Céladopole,Obtenir l’Évoli offert à Céladopole.,remake-celadon
+11,788,541922,Obtenir la Boîte Jetons à Céladopole,Obtenir la Boîte Jetons à Céladopole.,remake-celadon
+11,788,541923,Obtenir tous les jetons cachés et offerts du Casino de Céladopole,Obtenir tous les jetons cachés et offerts du Casino de Céladopole.,remake-celadon
+11,788,541924,Battre tous les Dresseurs de l’Arène de Céladopole,Battre tous les Dresseurs de l’Arène de Céladopole.,remake-celadon
+11,788,34788,Battre Erika à Céladopole et obtenir le Badge Prisme,Battre Erika à Céladopole et obtenir le Badge Prisme.,remake-celadon
+11,788,541926,Accéder à Safrania en donnant du Thé aux gardes,Accéder à Safrania en donnant du Thé aux gardes.,remake-saffron
+11,788,34783,Arrêter la Team Rocket à Céladopole,Arrêter la Team Rocket à Céladopole.,remake-celadon
+11,788,541929,Battre tous les Dresseurs et ramasser tous les objets du Repaire Rocket,Battre tous les Dresseurs et ramasser tous les objets du Repaire Rocket.,remake-celadon
+11,788,541930,Battre tous les Dresseurs et ramasser tous les objets de la Tour Pokémon,Battre tous les Dresseurs et ramasser tous les objets de la Tour Pokémon.,remake-flute
+11,788,541931,Obtenir la Poké Flûte à Lavanville,Obtenir la Poké Flûte à Lavanville.,remake-flute
+11,788,541932,Capturer un Ronflex sauvage,Capturer un Ronflex sauvage.,remake-flute
+11,788,541944,Battre tous les Dresseurs de l’Arène de Parmanie,Battre tous les Dresseurs de l’Arène de Parmanie.,remake-flute
+11,788,34789,Battre Koga à Parmanie et obtenir le Badge Âme,Battre Koga à Parmanie et obtenir le Badge Âme.,remake-flute
+11,788,34781,Battre le rival à Safrania,Battre le rival à Safrania.,remake-saffron
+11,788,541953,Battre tous les Dresseurs et ramasser tous les objets de la Sylphe SARL,Battre tous les Dresseurs et ramasser tous les objets de la Sylphe SARL.,remake-saffron
+11,788,541959,Obtenir le Lokhlass offert à la Sylphe SARL,Obtenir le Lokhlass offert à la Sylphe SARL.,remake-saffron
+11,788,34784,Arrêter la Team Rocket à Safrania,Arrêter la Team Rocket à Safrania.,remake-saffron
+11,788,541954,Battre tous les Dresseurs du Dojo de Safrania et choisir Kicklee ou Tygnon,Battre tous les Dresseurs du Dojo de Safrania et choisir Kicklee ou Tygnon.,remake-saffron
+11,788,541955,Battre tous les Dresseurs de l’Arène de Safrania,Battre tous les Dresseurs de l’Arène de Safrania.,remake-saffron
+11,788,34790,Battre Morgane à Safrania et obtenir le Badge Marais,Battre Morgane à Safrania et obtenir le Badge Marais.,remake-saffron
+11,788,541956,Obtenir la Clé Secrète,Obtenir la Clé Secrète.,remake-cinnabar
+11,788,541957,Battre tous les Dresseurs de l’Arène de Cramois’Île,Battre tous les Dresseurs de l’Arène de Cramois’Île.,remake-cinnabar
+11,788,34791,Battre Auguste à Cramois’Île et obtenir le Badge Volcan,Battre Auguste à Cramois’Île et obtenir le Badge Volcan.,remake-cinnabar
+11,788,34810,Secourir Lostelle sur l’Île 3,Secourir Lostelle sur l’Île 3.,remake-sevii
+11,788,541958,Battre tous les Dresseurs de l’Arène de Jadielle,Battre tous les Dresseurs de l’Arène de Jadielle.,remake-league
+11,788,34792,Battre Giovanni à Jadielle et obtenir le Badge Terre,Battre Giovanni à Jadielle et obtenir le Badge Terre.,remake-league
+11,788,34782,Battre le rival sur le chemin de la Ligue Pokémon,Battre le rival sur le chemin de la Ligue Pokémon.,remake-league
+11,788,34797,Devenir Maître de la Ligue Pokémon,Devenir Maître de la Ligue Pokémon.,remake-league
+11,788,541973,Obtenir le Pokédex National,Obtenir le Pokédex National.,remake-ruby
+11,788,541975,Obtenir le Rubis au Mont Braise,Obtenir le Rubis au Mont Braise.,remake-ruby
+11,788,34811,Aider Olga à arrêter la Team Rocket sur l’Île 4,Aider Olga à arrêter la Team Rocket sur l’Île 4.,remake-ruby
+11,788,34812,Secourir Selphy sur l’Île 5,Secourir Selphy sur l’Île 5.,remake-sapphire
+11,788,34813,Arrêter la Team Rocket dans son entrepôt de l’Île 5,Arrêter la Team Rocket dans son entrepôt de l’Île 5.,remake-preparation
+11,788,541984,Rapporter le Rubis et le Saphir à Ciléo pour terminer sa machine,Rapporter le Rubis et le Saphir à Ciléo pour terminer sa machine.,remake-sapphire
+11,788,541991,"Trouver le Saphir dans le Trou Percé, puis assister à son vol","Trouver le Saphir dans le Trou Percé, puis assister à son vol.",remake-sapphire
+11,788,34807,Capturer Mewtwo,Capturer Mewtwo.,remake-legends
+11,788,34802,Revenir plus fort et redevenir Maître de la Ligue Pokémon,Revenir plus fort et redevenir Maître de la Ligue Pokémon.,remake-league
+11,788,34814,Terminer le défi Solo de la Tour Dresseurs,Terminer le défi Solo de la Tour Dresseurs.,remake-sapphire
+11,788,34815,Terminer le défi Duo de la Tour Dresseurs,Terminer le défi Duo de la Tour Dresseurs.,remake-sapphire
+11,788,34816,Terminer le défi K.O. de la Tour Dresseurs,Terminer le défi K.O. de la Tour Dresseurs.,remake-sapphire
+11,788,34817,Terminer le défi Mixte de la Tour Dresseurs,Terminer le défi Mixte de la Tour Dresseurs.,remake-sapphire
+11,788,34803,Capturer un Leveinard,Capturer un Leveinard.,remake-collections
+11,788,34806,Capturer Artikodin,Capturer Artikodin.,remake-legends
+11,788,34805,Capturer Électhor,Capturer Électhor.,remake-legends
+11,788,34804,Capturer Sulfura,Capturer Sulfura.,remake-legends
+11,788,34808,"Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ","Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ.",remake-legends
+11,788,34809,La collection complète de Vert Feuille,"Obtenir les 171 espèces accessibles dans Vert Feuille, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-national-collection
+11,788,541905,"Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite","Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite.",remake-preparation
+11,788,541911,Échanger un Piafabec contre un Canarticho à Carmin sur Mer,Échanger un Piafabec contre un Canarticho à Carmin sur Mer.,remake-ship
+11,788,541912,Échanger un Abra contre un M. Mime sur la Route 2,Échanger un Abra contre un M. Mime sur la Route 2.,remake-brock
+11,788,541917,Obtenir la CS05 Flash auprès d’un assistant du Professeur Chen,Obtenir la CS05 Flash auprès d’un assistant du Professeur Chen.,remake-brock
+11,788,541918,Obtenir le Vieil Ambre au Musée d’Argenta,Obtenir le Vieil Ambre au Musée d’Argenta.,remake-brock
+11,788,541920,Obtenir la Pierre Stase auprès de l’assistant du Professeur Chen sur la…,Obtenir la Pierre Stase auprès de l’assistant du Professeur Chen sur la Route 10.,remake-start
+11,788,541925,Obtenir la CS02 Vol sur la Route 16,Obtenir la CS02 Vol sur la Route 16.,remake-celadon
+11,788,541927,Obtenir le Cherche VS à Carmin sur Mer,Obtenir le Cherche VS à Carmin sur Mer.,remake-preparation
+11,788,541928,Obtenir le Broyeur à Azuria,Obtenir le Broyeur à Azuria.,remake-misty
+11,788,541933,Obtenir les CS03 Surf et CS04 Force,Obtenir les CS03 Surf et CS04 Force.,remake-flute
+11,788,541934,Obtenir le Cherch’Objet auprès de l’assistant du Professeur Chen sur la…,Obtenir le Cherch’Objet auprès de l’assistant du Professeur Chen sur la Route 11.,remake-ship
+11,788,541935,Obtenir les deux Restes cachés qui nécessitent le Cherch’Objet,Obtenir les deux Restes cachés qui nécessitent le Cherch’Objet.,remake-preparation
+11,788,541936,Obtenir le Grelot Zen caché de la Tour Pokémon,Obtenir le Grelot Zen caché de la Tour Pokémon.,remake-flute
+11,788,541940,Obtenir la Super Canne à Parmanie,Obtenir la Super Canne à Parmanie.,remake-flute
+11,788,541941,Obtenir la Pièce Rune auprès de l’assistant du Professeur Chen sur la Route 16,Obtenir la Pièce Rune auprès de l’assistant du Professeur Chen sur la Route 16.,remake-celadon
+11,788,541942,Obtenir la Méga Canne sur la Route 12,Obtenir la Méga Canne sur la Route 12.,remake-flute
+11,788,541943,Obtenir le Multi Exp auprès de l’assistant du Professeur Chen sur la Route 15,Obtenir le Multi Exp auprès de l’assistant du Professeur Chen sur la Route 15.,remake-flute
+11,788,541961,Obtenir le Bracelet Macho dans l’Arène de Jadielle,Obtenir le Bracelet Macho dans l’Arène de Jadielle.,remake-league
+11,788,541962,Montrer au pêcheur de la Route 12 un Magicarpe assez grand pour recevoir…,Montrer au pêcheur de la Route 12 un Magicarpe assez grand pour recevoir sa récompense.,remake-flute
+11,788,541964,Effectuer les trois échanges de Cramois’Île,Effectuer les trois échanges de Cramois’Île.,remake-cinnabar
+11,788,541965,Effectuer les deux échanges permettant d’obtenir un Nidoran mâle et un…,Effectuer les deux échanges permettant d’obtenir un Nidoran mâle et un Nidorino.,remake-collections
+11,788,541966,Échanger un Têtarte contre un Lippoutou à Azuria,Échanger un Têtarte contre un Lippoutou à Azuria.,remake-misty
+11,788,541967,Échanger un Flagadoss contre un Excelangue sur la Route 18,Échanger un Flagadoss contre un Excelangue sur la Route 18.,remake-flute
+11,788,541969,Obtenir la CS06 Éclate-Roc aux Sources Braise,Obtenir la CS06 Éclate-Roc aux Sources Braise.,remake-sevii
+11,788,541970,Trouver le PP Max du Cap Falaise avec le Cherch’Objet,Trouver le PP Max du Cap Falaise avec le Cherch’Objet.,remake-sevii
+11,788,541974,Obtenir une Pépite auprès du mineur de l’Entrée Île 3,Obtenir une Pépite auprès du mineur de l’Entrée Île 3.,remake-sapphire
+11,788,541977,Obtenir la CS07 Cascade dans la Grotte de Glace,Obtenir la CS07 Cascade dans la Grotte de Glace.,remake-sapphire
+11,788,541981,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O.,remake-sapphire
+11,788,541982,Montrer pour la première fois un Scarhino battant le record à la femme de…,Montrer pour la première fois un Scarhino battant le record à la femme de la Forbuissons et recevoir une Faiblo Ball.,remake-sapphire
+11,788,541983,Montrer à Selphy le Pokémon demandé et recevoir une récompense,Montrer à Selphy le Pokémon demandé et recevoir une récompense.,remake-sapphire
+11,788,541986,Utiliser la machine du Casino pour ajouter au moins un Pokémon au dos de…,Utiliser la machine du Casino pour ajouter au moins un Pokémon au dos de la Carte Dresseur.,remake-celadon
+11,788,541989,Aligner trois 7 à une machine à sous du Casino de Céladopole,Aligner trois 7 à une machine à sous du Casino de Céladopole.,remake-celadon
+11,788,541990,Obtenir les trois CT de la fille assoiffée sur le toit du Centre…,Obtenir les trois CT de la fille assoiffée sur le toit du Centre Commercial de Céladopole.,remake-celadon
+11,788,541914,Battre tous les Dresseurs et ramasser tous les objets visibles de la Forêt…,Battre tous les Dresseurs et ramasser tous les objets visibles de la Forêt de Jade.,remake-brock
+11,788,541919,Battre tous les Dresseurs et ramasser tous les objets de la Grotte,Battre tous les Dresseurs et ramasser tous les objets de la Grotte.,remake-flute
+11,788,541938,"Battre tous les Dresseurs et ramasser tous les objets des Routes 2, 3 et…","Battre tous les Dresseurs et ramasser tous les objets des Routes 2, 3 et 4, de Jadielle, d’Argenta et d’Azuria.",remake-misty
+11,788,541939,Battre tous les Dresseurs et ramasser tous les objets des Routes 24 et 25,Battre tous les Dresseurs et ramasser tous les objets des Routes 24 et 25.,remake-misty
+11,788,541945,Ramasser tous les objets du Parc Safari,Ramasser tous les objets du Parc Safari.,remake-flute
+11,788,541946,Battre tous les Dresseurs et ramasser tous les objets des Routes 9 et 10,Battre tous les Dresseurs et ramasser tous les objets des Routes 9 et 10.,remake-flute
+11,788,541947,Ramasser tous les objets de la Centrale,Ramasser tous les objets de la Centrale.,remake-legends
+11,788,541948,"Battre tous les Dresseurs et ramasser tous les objets des Routes 6, 7 et…","Battre tous les Dresseurs et ramasser tous les objets des Routes 6, 7 et 8, de Safrania et de Carmin sur Mer.",remake-saffron
+11,788,541949,Battre tous les Dresseurs et ramasser tous les objets des Routes 11 à 15…,Battre tous les Dresseurs et ramasser tous les objets des Routes 11 à 15 et de Parmanie.,remake-flute
+11,788,541950,"Battre tous les Dresseurs et ramasser tous les objets des Routes 19, 20 et 21","Battre tous les Dresseurs et ramasser tous les objets des Routes 19, 20 et 21.",remake-cinnabar
+11,788,541951,Ramasser tous les objets des Îles Écume,Ramasser tous les objets des Îles Écume.,remake-cinnabar
+11,788,541952,Battre tous les Dresseurs et ramasser tous les objets du Manoir Pokémon,Battre tous les Dresseurs et ramasser tous les objets du Manoir Pokémon.,remake-cinnabar
+11,788,541960,"Battre tous les Dresseurs et ramasser tous les objets des Routes 16, 17 et…","Battre tous les Dresseurs et ramasser tous les objets des Routes 16, 17 et 18 et de Céladopole.",remake-celadon
+11,788,541963,Battre tous les Dresseurs et ramasser tous les objets de la Route 23 et de…,Battre tous les Dresseurs et ramasser tous les objets de la Route 23 et de la Route Victoire.,remake-league
+11,788,541968,Battre tous les Dresseurs et ramasser tous les objets de la Route Tison et…,Battre tous les Dresseurs et ramasser tous les objets de la Route Tison et du Mont Braise.,remake-sevii
+11,788,541971,"Battre tous les Dresseurs et ramasser tous les objets des Îles 2 et 3, du…","Battre tous les Dresseurs et ramasser tous les objets des Îles 2 et 3, du Cap Falaise, du Pont du Lien et du Bois Baies.",remake-sevii
+11,788,541972,Ramasser toutes les baies renouvelables du Bois Baies,Ramasser toutes les baies renouvelables du Bois Baies.,remake-sevii
+11,788,541976,Ramasser tous les objets de l’Île 4 et de la Grotte de Glace,Ramasser tous les objets de l’Île 4 et de la Grotte de Glace.,remake-sapphire
+11,788,541978,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 5,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 5.,remake-sapphire
+11,788,541979,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 6,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 6.,remake-sapphire
+11,788,541980,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 7,Battre tous les Dresseurs et ramasser tous les objets de la région de l’Île 7.,remake-sapphire
+11,788,541987,Ramasser tous les objets de la Caverne Azurée,Ramasser tous les objets de la Caverne Azurée.,remake-misty
+11,788,541985,Compléter toutes les entrées du Memorydex,Compléter toutes les entrées du Memorydex.,remake-collections
+11,788,541988,Trouver et utiliser tous les tuteurs de capacités,Trouver et utiliser tous les tuteurs de capacités.,remake-preparation
+11,788,541992,Battre les équipes de niveau maximal de tous les Dresseurs pouvant être…,Battre les équipes de niveau maximal de tous les Dresseurs pouvant être rappelés avec le Cherche VS.,remake-preparation
+11,788,541903,Débloquer le Cadeau Mystère,Débloquer le Cadeau Mystère.,remake-preparation

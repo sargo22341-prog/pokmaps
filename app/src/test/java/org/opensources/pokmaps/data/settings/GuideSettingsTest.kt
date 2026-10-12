@@ -46,6 +46,20 @@ class GuideSettingsTest {
         assertEquals(setOf("hoenn-start"), settings.progress(9).first().completed)
     }
 
+    @Test
+    fun emeraldChoiceReplacesTheOtherRoamerAndRemakeObservationsAreIsolated() = runTest {
+        val settings = GuideSettings(FakeDataStore(), FakeGameDao(GAMES + FakeGameDao.FIRERED))
+        settings.observeRoamer(9, 380, "route110")
+        settings.observeRoamer(9, 381, "route134")
+        assertEquals(listOf(RoamerObservation(381, "route134")), settings.progress(9).first().roamers)
+        settings.observeRoamer(10, 244, "route10")
+        assertEquals(listOf(RoamerObservation(244, "route10")), settings.progress(10).first().roamers)
+        settings.observeRoamer(9, 380, null)
+        assertEquals(listOf(RoamerObservation(381, "route134")), settings.progress(9).first().roamers)
+        settings.observeRoamer(9, 381, null)
+        assertTrue(settings.progress(9).first().roamers.isEmpty())
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun versionAbsentFromDatabaseIsRejected() = runTest {
         GuideSettings(FakeDataStore(), FakeGameDao()).complete(9, "hoenn-start", true)

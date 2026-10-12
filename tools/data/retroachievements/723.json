@@ -1,0 +1,693 @@
+{
+  "game_id": 723,
+  "title": "Pokémon Yellow Version: Special Pikachu Edition",
+  "console": "Game Boy",
+  "source": "https://retroachievements.org/game/723",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 4428,
+      "Title": "Showdown in Pewter City",
+      "Description": "Earn the Boulder Badge in Pewter City.",
+      "Points": 5,
+      "DisplayOrder": 1,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:18"
+    },
+    {
+      "ID": 4429,
+      "Title": "The Water Flower of Cerulean City",
+      "Description": "Earn the Cascade Badge in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 2,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:18"
+    },
+    {
+      "ID": 4430,
+      "Title": "Electric Shock Showdown",
+      "Description": "Earn the Thunder Badge in Vermillion City.",
+      "Points": 5,
+      "DisplayOrder": 3,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:18"
+    },
+    {
+      "ID": 4431,
+      "Title": "Pokemon Scent-sation",
+      "Description": "Earn the Rainbow Badge in Celadon City.",
+      "Points": 10,
+      "DisplayOrder": 4,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:19"
+    },
+    {
+      "ID": 4432,
+      "Title": "The Ninja Poke-Showdown",
+      "Description": "Earn the Soul Badge in Fuchsia City.",
+      "Points": 10,
+      "DisplayOrder": 5,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:19"
+    },
+    {
+      "ID": 4433,
+      "Title": "Psychic Showdown",
+      "Description": "Earn the Marsh Badge in Saffron City.",
+      "Points": 10,
+      "DisplayOrder": 6,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:19"
+    },
+    {
+      "ID": 4434,
+      "Title": "Volcanic Panic",
+      "Description": "Earn the Volcano Badge in Cinnabar Island.",
+      "Points": 10,
+      "DisplayOrder": 7,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:19"
+    },
+    {
+      "ID": 4435,
+      "Title": "Team Rocket's Blasting Off Again!",
+      "Description": "Earn the Earth Badge in Viridian City.",
+      "Points": 10,
+      "DisplayOrder": 8,
+      "type": "progression",
+      "DateModified": "2025-11-21 23:00:19"
+    },
+    {
+      "ID": 4437,
+      "Title": "Pokemon Master!",
+      "Description": "Defeat the Elite Four and the Champion of the Pokemon League.",
+      "Points": 10,
+      "DisplayOrder": 9,
+      "type": "win_condition",
+      "DateModified": "2026-03-04 21:04:22"
+    },
+    {
+      "ID": 81655,
+      "Title": "Pokemon - I Choose You!",
+      "Description": "Obtain a Pokedex from Prof. Oak.",
+      "Points": 1,
+      "DisplayOrder": 10,
+      "type": "progression",
+      "DateModified": "2019-10-06 21:48:02"
+    },
+    {
+      "ID": 81656,
+      "Title": "Smell You Later!",
+      "Description": "Defeat your Rival on Route 22 before traveling to Pewter City.",
+      "Points": 5,
+      "DisplayOrder": 11,
+      "type": "missable",
+      "DateModified": "2019-10-14 15:21:01"
+    },
+    {
+      "ID": 81659,
+      "Title": "Gatekeeper of the Nugget Bridge",
+      "Description": "Defeat your Rival on Cerulean City's Nugget Bridge.",
+      "Points": 10,
+      "DisplayOrder": 12,
+      "type": "progression",
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81665,
+      "Title": "Battle Aboard the St. Anne",
+      "Description": "Defeat your Rival aboard the S.S. Anne in Vermilion City.",
+      "Points": 10,
+      "DisplayOrder": 13,
+      "type": "progression",
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81667,
+      "Title": "Not the most appropriate arena...",
+      "Description": "Defeat your Rival inside the Pokemon Tower in Lavender Town.",
+      "Points": 10,
+      "DisplayOrder": 14,
+      "type": "progression",
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81672,
+      "Title": "Do we REALLY have to do this now?",
+      "Description": "Defeat your Rival inside the Silph Co. in Saffron City.",
+      "Points": 5,
+      "DisplayOrder": 15,
+      "type": "progression",
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81679,
+      "Title": "Gatekeeper of Victory Road",
+      "Description": "Defeat your Rival on Route 22 while traveling to the Pokemon League.",
+      "Points": 10,
+      "DisplayOrder": 16,
+      "type": "progression",
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81657,
+      "Title": "Prepare for Trouble!",
+      "Description": "Defeat Jessie and James of Team Rocket inside Mt. Moon using only Pikachu.",
+      "Points": 10,
+      "DisplayOrder": 17,
+      "type": "missable",
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81668,
+      "Title": "Make it Double!",
+      "Description": "Defeat Jessie and James inside the Team Rocket Hideout in Celadon City using only Pikachu.",
+      "Points": 10,
+      "DisplayOrder": 18,
+      "type": "missable",
+      "DateModified": "2021-02-09 17:34:41"
+    },
+    {
+      "ID": 81669,
+      "Title": "Protect the World From Devastation",
+      "Description": "Defeat Team Rocket in their Hideout in Celadon City.",
+      "Points": 10,
+      "DisplayOrder": 19,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81670,
+      "Title": "Unite All Peoples Within Our Nation",
+      "Description": "Defeat Jessie and James inside the Pokemon Tower in Lavender Town using only Pikachu.",
+      "Points": 10,
+      "DisplayOrder": 20,
+      "type": "missable",
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81673,
+      "Title": "Denounce the Evils of Truth and Love",
+      "Description": "Defeat Jessie and James inside the Silph Co. in Saffron City using only Pikachu.",
+      "Points": 10,
+      "DisplayOrder": 21,
+      "type": "missable",
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81674,
+      "Title": "Extend Our Reach to the Stars Above",
+      "Description": "Force Team Rocket out of Silph Co. in Saffron City.",
+      "Points": 10,
+      "DisplayOrder": 22,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 4436,
+      "Title": "Preparing to Be the Very Best",
+      "Description": "Assemble a full team of Pokemon.",
+      "Points": 1,
+      "DisplayOrder": 24,
+      "type": null,
+      "DateModified": "2019-10-06 21:25:11"
+    },
+    {
+      "ID": 4439,
+      "Title": "Halfway",
+      "Description": "Get all 6 Pokemon in your party to Level 50. (No Legendaries, Triggers on Level Up)",
+      "Points": 10,
+      "DisplayOrder": 25,
+      "type": null,
+      "DateModified": "2022-12-22 14:08:14"
+    },
+    {
+      "ID": 4441,
+      "Title": "Attack of the Prehistoric Pokemon",
+      "Description": "Acquire a fossilized Pokemon in Mt. Moon.",
+      "Points": 1,
+      "DisplayOrder": 26,
+      "type": null,
+      "DateModified": "2019-10-06 21:25:55"
+    },
+    {
+      "ID": 4443,
+      "Title": "King of the Dojo",
+      "Description": "Defeat the master of the Fighting Dojo and claim your prize in Saffron City.",
+      "Points": 5,
+      "DisplayOrder": 27,
+      "type": null,
+      "DateModified": "2019-10-06 21:26:20"
+    },
+    {
+      "ID": 4445,
+      "Title": "The Tower of Terror",
+      "Description": "Encounter the ghost blocking the final stairs inside Pokemon Tower",
+      "Points": 1,
+      "DisplayOrder": 28,
+      "type": null,
+      "DateModified": "2024-12-25 23:59:14"
+    },
+    {
+      "ID": 4446,
+      "Title": "The Sleeper Awakens",
+      "Description": "Use the Pokeflute to awaken and capture a Pokemon.",
+      "Points": 5,
+      "DisplayOrder": 29,
+      "type": "missable",
+      "DateModified": "2024-12-25 23:41:37"
+    },
+    {
+      "ID": 4447,
+      "Title": "Uno, Dos, Tres",
+      "Description": "Capture a trio of legendary Pokemon.",
+      "Points": 25,
+      "DisplayOrder": 30,
+      "type": "missable",
+      "DateModified": "2025-01-19 14:27:42"
+    },
+    {
+      "ID": 4448,
+      "Title": "Creation Gone Wrong",
+      "Description": "Capture a legendary Pokemon in Cerulean Cave.",
+      "Points": 10,
+      "DisplayOrder": 31,
+      "type": "missable",
+      "DateModified": "2025-01-19 14:27:37"
+    },
+    {
+      "ID": 81658,
+      "Title": "Fish Out Of Water",
+      "Description": "Get ripped off in the Pokemon Center on Route 3.",
+      "Points": 3,
+      "DisplayOrder": 32,
+      "type": null,
+      "DateModified": "2024-06-18 16:08:32"
+    },
+    {
+      "ID": 81661,
+      "Title": "Take care of Bulbasaur!",
+      "Description": "Obtain Bulbasaur from Melanie in Cerulean City.",
+      "Points": 5,
+      "DisplayOrder": 33,
+      "type": null,
+      "DateModified": "2019-12-12 21:12:18"
+    },
+    {
+      "ID": 81660,
+      "Title": "Charmander - The Stray Pokemon",
+      "Description": "Obtain Charmander from Guy on Route 24.",
+      "Points": 5,
+      "DisplayOrder": 34,
+      "type": null,
+      "DateModified": "2025-09-03 15:07:30"
+    },
+    {
+      "ID": 81666,
+      "Title": "Here Comes the Squirtle Squad!",
+      "Description": "Obtain Squirtle from Officer Jenny in Vermilion City.",
+      "Points": 5,
+      "DisplayOrder": 35,
+      "type": null,
+      "DateModified": "2019-12-12 21:12:20"
+    },
+    {
+      "ID": 81662,
+      "Title": "King of Fighters",
+      "Description": "Trade a Cubone for a Machoke on Route 5.",
+      "Points": 3,
+      "DisplayOrder": 36,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:51"
+    },
+    {
+      "ID": 81663,
+      "Title": "It's Mr. Mime Time!",
+      "Description": "Trade a Clefairy for a Mr. Mime on Route 2.",
+      "Points": 3,
+      "DisplayOrder": 37,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:51"
+    },
+    {
+      "ID": 81664,
+      "Title": "Can You Dig It?",
+      "Description": "Trade a Lickitung for a Dugtrio on Route 11.",
+      "Points": 3,
+      "DisplayOrder": 38,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:51"
+    },
+    {
+      "ID": 81671,
+      "Title": "The Problem with Parasect",
+      "Description": "Trade a Tangela for a Parasect on Route 18.",
+      "Points": 3,
+      "DisplayOrder": 39,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:52"
+    },
+    {
+      "ID": 81676,
+      "Title": "Literal Pile of S***",
+      "Description": "Trade a Kangaskhan for a Muk on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 40,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:51"
+    },
+    {
+      "ID": 81677,
+      "Title": "Saved a Trip to the Islands!",
+      "Description": "Trade a Growlithe for a Dewgong on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 41,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:51"
+    },
+    {
+      "ID": 81678,
+      "Title": "The Real Number One",
+      "Description": "Trade a Golduck for a Rhydon on Cinnabar Island.",
+      "Points": 3,
+      "DisplayOrder": 42,
+      "type": null,
+      "DateModified": "2025-09-03 15:03:52"
+    },
+    {
+      "ID": 4450,
+      "Title": "Gotta Catch 'em All - Yellow",
+      "Description": "Catch all 129 normally obtainable Pokemon on a single save file.",
+      "Points": 50,
+      "DisplayOrder": 43,
+      "type": "missable",
+      "DateModified": "2024-07-25 16:55:02"
+    },
+    {
+      "ID": 81680,
+      "Title": "Who Needs Flash?",
+      "Description": "Navigate Rock Tunnel from Route 9 to Lavender Town without using Flash.",
+      "Points": 10,
+      "DisplayOrder": 44,
+      "type": null,
+      "DateModified": "2025-08-21 02:21:32"
+    },
+    {
+      "ID": 81675,
+      "Title": "Safari Perfectionist",
+      "Description": "Talk to the guy that gives you HM03 in the Safari Zone with 209 steps left. (One Session, No Surf)",
+      "Points": 10,
+      "DisplayOrder": 45,
+      "type": null,
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81681,
+      "Title": "The Long Way Gauntlet",
+      "Description": "Defeat all Trainers from Routes 12-15 without leaving the \"Route 12-15\" area. (One Session)",
+      "Points": 25,
+      "DisplayOrder": 46,
+      "type": "missable",
+      "DateModified": "2025-08-30 01:08:06"
+    },
+    {
+      "ID": 4449,
+      "Title": "That's Shocking!",
+      "Description": "Beat the Elite Four and the Champion of the Pokemon League with only Pikachu in your party. (One Session, No Surfing Pikachu)",
+      "Points": 50,
+      "DisplayOrder": 48,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81795,
+      "Title": "A N G E R Y",
+      "Description": "0 <= Friendship <= 50 Mood: Bad",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81796,
+      "Title": "Smug Little Rat",
+      "Description": "0 <= Friendship <= 50 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-11 14:36:01"
+    },
+    {
+      "ID": 81797,
+      "Title": "You're lucky I'm feeling generous today",
+      "Description": "0 <= Friendship <= 50 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-11 14:36:01"
+    },
+    {
+      "ID": 81798,
+      "Title": "Look at me when I'm talking to you!",
+      "Description": "51 <= Friendship <= 100 Mood: Bad",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-14 15:21:01"
+    },
+    {
+      "ID": 81799,
+      "Title": "Ear Twitches",
+      "Description": "51 <= Friendship <= 100 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81800,
+      "Title": "Not Mad, Just Disappointed",
+      "Description": "51 <= Friendship <= 100 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2024-07-18 18:15:44"
+    },
+    {
+      "ID": 81801,
+      "Title": "Angry Ear Twitches",
+      "Description": "101 <= Friendship <= 160 Mood: Bad",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-14 15:21:01"
+    },
+    {
+      "ID": 81802,
+      "Title": "Friendly Pikachu",
+      "Description": "101 <= Friendship <= 130 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81803,
+      "Title": "So Happy",
+      "Description": "101 <= Friendship <= 130 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81804,
+      "Title": "Happier Pikachu",
+      "Description": "131 <= Friendship <= 160 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81805,
+      "Title": "High Five!",
+      "Description": "131 <= Friendship <= 160 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81806,
+      "Title": "Depressed Pikachu",
+      "Description": "161 <= Friendship <= 255 Mood: Bad",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-17 16:12:01"
+    },
+    {
+      "ID": 81807,
+      "Title": "Cheery Mood",
+      "Description": "161 <= Friendship <= 200 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:01"
+    },
+    {
+      "ID": 81808,
+      "Title": "Hug Me!",
+      "Description": "161 <= Friendship <= 200 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81809,
+      "Title": "Pikachu Loves Me!",
+      "Description": "201 <= Friendship <= 250 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:02"
+    },
+    {
+      "ID": 81810,
+      "Title": "Really Loves Me!",
+      "Description": "201 <= Friendship <= 250 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:02"
+    },
+    {
+      "ID": 81811,
+      "Title": "Best Friends Forever",
+      "Description": "251 <= Friendship <= 255 Mood: Normal",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-17 16:12:01"
+    },
+    {
+      "ID": 81812,
+      "Title": "Just Like Ash",
+      "Description": "251 <= Friendship <= 255 Mood: Good",
+      "Points": 1,
+      "DisplayOrder": 69,
+      "type": null,
+      "DateModified": "2019-10-23 18:02:01"
+    },
+    {
+      "ID": 81813,
+      "Title": "Gotta Catch em'",
+      "Description": "Catch a Pokemon and then talk to Pikachu.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-10-08 13:52:02"
+    },
+    {
+      "ID": 81814,
+      "Title": "Buckethead",
+      "Description": "Use a fishing rod and then talk to Pikachu.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-10-17 16:12:01"
+    },
+    {
+      "ID": 81815,
+      "Title": "No need for the B Button",
+      "Description": "Try to evolve Pikachu and then talk to him.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81816,
+      "Title": "Signature Move",
+      "Description": "Teach Pikachu Thunder or Thunderbolt and then talk to them.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": "missable",
+      "DateModified": "2019-10-17 16:12:01"
+    },
+    {
+      "ID": 81817,
+      "Title": "Just Give Me 5 More Minutes",
+      "Description": "Talk to Pikachu while he has the Sleep status. (No Pokemon Center)",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-12-30 10:15:01"
+    },
+    {
+      "ID": 81818,
+      "Title": "Better Bring Full Heal",
+      "Description": "Talk to Pikachu while he has any status besides Sleep.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 81819,
+      "Title": "Jigglypuff Used Sing",
+      "Description": "Talk to Pikachu after having fallen asleep due to Jigglypuff's song. (NOT THE STATUS EFFECT)",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2021-09-05 12:31:04"
+    },
+    {
+      "ID": 81820,
+      "Title": "Scared of Ghosts",
+      "Description": "Talk to Pikachu in the Pokemon Tower.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": null,
+      "DateModified": "2019-10-11 14:36:01"
+    },
+    {
+      "ID": 81976,
+      "Title": "Surprised Pikachu Face",
+      "Description": "Have Pikachu be confused by the transformed Bill and be amazed when he changes back.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": "missable",
+      "DateModified": "2024-08-25 07:32:54"
+    },
+    {
+      "ID": 81977,
+      "Title": "Clefairy Used Attract",
+      "Description": "Have Pikachu fall in love with the Clefairy in the Pokemon Fan Club.",
+      "Points": 1,
+      "DisplayOrder": 71,
+      "type": "missable",
+      "DateModified": "2019-10-14 15:21:01"
+    },
+    {
+      "ID": 81978,
+      "Title": "You're Not Getting Away from Me That Easily",
+      "Description": "Try to release your Pikachu.",
+      "Points": 1,
+      "DisplayOrder": 74,
+      "type": null,
+      "DateModified": "2019-10-20 17:05:01"
+    },
+    {
+      "ID": 82089,
+      "Title": "Look, I'm Dancing!",
+      "Description": "Have Pikachu stand behind a ledge for a while.",
+      "Points": 1,
+      "DisplayOrder": 75,
+      "type": null,
+      "DateModified": "2025-09-20 14:05:43"
+    }
+  ]
+}

@@ -1,0 +1,1368 @@
+{
+  "game_id": 16197,
+  "title": "Pokémon White Version 2",
+  "console": "Nintendo DS",
+  "source": "https://retroachievements.org/game/16197",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 146663,
+      "Title": "From Rival to Leader",
+      "Description": "Obtain the Basic Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:51"
+    },
+    {
+      "ID": 146664,
+      "Title": "P-O-K-E-M-O-N!",
+      "Description": "Obtain the Toxic Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:52"
+    },
+    {
+      "ID": 146665,
+      "Title": "Colorful Bug Artist",
+      "Description": "Obtain the Insect Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:52"
+    },
+    {
+      "ID": 146666,
+      "Title": "Shocking Beauty",
+      "Description": "Obtain the Bolt Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:52"
+    },
+    {
+      "ID": 146667,
+      "Title": "Well Grounded",
+      "Description": "Obtain the Quake Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:53"
+    },
+    {
+      "ID": 146668,
+      "Title": "To the Sky",
+      "Description": "Obtain the Jet Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:53"
+    },
+    {
+      "ID": 146669,
+      "Title": "Legend of the Dragons",
+      "Description": "Obtain the Legend Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:53"
+    },
+    {
+      "ID": 146670,
+      "Title": "Don't Get Wet",
+      "Description": "Obtain the Wave Badge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:54"
+    },
+    {
+      "ID": 146671,
+      "Title": "Team Plasma Leader Defeated",
+      "Description": "Defeat Ghetsis after taking on the Fused Kyurem and Reshiram",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "progression",
+      "DateModified": "2023-05-04 16:55:54"
+    },
+    {
+      "ID": 146672,
+      "Title": "Unova League Champion",
+      "Description": "Defeat the Elite 4 and Champion to beat the game.",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": "win_condition",
+      "DateModified": "2023-05-04 16:55:54"
+    },
+    {
+      "ID": 146673,
+      "Title": "Aspertia City Gym Defeated",
+      "Description": "Defeat both trainers and the Gym Leader in Aspertia City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:55"
+    },
+    {
+      "ID": 146674,
+      "Title": "Virbank City Gym Defeated",
+      "Description": "Defeat both trainers and the Gym Leader in Virbank City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:55"
+    },
+    {
+      "ID": 146675,
+      "Title": "Castelia City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Castelia City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:55"
+    },
+    {
+      "ID": 146676,
+      "Title": "Nimbasa City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Nimbasa City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-09-10 23:19:42"
+    },
+    {
+      "ID": 146677,
+      "Title": "Driftveil City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Driftveil City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:56"
+    },
+    {
+      "ID": 146678,
+      "Title": "Mistralton City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Mistralton City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:56"
+    },
+    {
+      "ID": 146679,
+      "Title": "Opelucid City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Opelucid City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:56"
+    },
+    {
+      "ID": 146680,
+      "Title": "Humilau City Gym Defeated",
+      "Description": "Defeat all the trainers and Gym Leader in Humilau City Gym without leaving and in one session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2023-05-04 16:55:56"
+    },
+    {
+      "ID": 146681,
+      "Title": "Elite Unova Champion",
+      "Description": "Obtain the One and Only medal",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:57"
+    },
+    {
+      "ID": 146682,
+      "Title": "Justice Trio of Unova",
+      "Description": "Catch Cobalion, Virizion, and Terrakion",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:57"
+    },
+    {
+      "ID": 146683,
+      "Title": "The New Cover Mascot?",
+      "Description": "Catch Reshiram and Kyurem",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:57"
+    },
+    {
+      "ID": 146684,
+      "Title": "Member of the Eon Duo",
+      "Description": "Catch Latias",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:57"
+    },
+    {
+      "ID": 146685,
+      "Title": "The Lake Trio",
+      "Description": "Catch Uxie, Mesprit, and Azelf",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:58"
+    },
+    {
+      "ID": 146686,
+      "Title": "The Trio of Missing Steel",
+      "Description": "Catch Regirock and Regice",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:58"
+    },
+    {
+      "ID": 146687,
+      "Title": "The Lunarian",
+      "Description": "Catch Cresselia",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:58"
+    },
+    {
+      "ID": 146688,
+      "Title": "Pure Magma",
+      "Description": "Catch Heatran",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:55:58"
+    },
+    {
+      "ID": 146689,
+      "Title": "In Memory of N",
+      "Description": "Receive N's Zorua",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-08-12 14:57:55"
+    },
+    {
+      "ID": 146690,
+      "Title": "Multiple Evolutions",
+      "Description": "Receive an Eevee from Fennel's Assistant",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-08-12 14:58:39"
+    },
+    {
+      "ID": 146691,
+      "Title": "Seasonal Specialty",
+      "Description": "Receive a Deerling at the Weather Institute",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-08-12 14:59:02"
+    },
+    {
+      "ID": 146692,
+      "Title": "Egg-citing Hatch",
+      "Description": "Receive the Happiny Egg in the Nacrene Gate",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-08-12 14:59:34"
+    },
+    {
+      "ID": 146693,
+      "Title": "Scammed Again",
+      "Description": "Buy the Magikarp on Marvelous Bridge",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:00"
+    },
+    {
+      "ID": 146694,
+      "Title": "Hard Earned Shiny",
+      "Description": "Receive the Shiny Dratini after completing the White Treehollow",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-08-12 14:59:54"
+    },
+    {
+      "ID": 146695,
+      "Title": "Gotta Catch 'em All - White 2",
+      "Description": "Catch all 402 Pokemon possible without external means [No Dropped Item Sidequest or Funfest Mission Pokemon]",
+      "Points": 100,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-03-02 06:01:39"
+    },
+    {
+      "ID": 146696,
+      "Title": "Picking up the Dropped",
+      "Description": "Obtain all 22 Pokemon (Including Evolutions and Pre-evolved forms) exclusive to the Dropped Item Sidequest",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-12-28 02:39:49"
+    },
+    {
+      "ID": 146697,
+      "Title": "Former Unova Champ",
+      "Description": "Defeat Alder in Floccesy Town",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:01"
+    },
+    {
+      "ID": 146698,
+      "Title": "Sinnoh's Most Powerful",
+      "Description": "Defeat Cynthia in Undella Town",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:02"
+    },
+    {
+      "ID": 146699,
+      "Title": "A Battle of Fire, Water, and Grass",
+      "Description": "Team up with Cilan, Chili, or Cress, and defeat the other 2 in a Double Battle",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:02"
+    },
+    {
+      "ID": 146700,
+      "Title": "Brains of Team Plasma",
+      "Description": "Defeat Colress' best team at the P2 Lab",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:02"
+    },
+    {
+      "ID": 146701,
+      "Title": "The Weird Plasma Trio",
+      "Description": "Defeat the Shadow Triad in Icirrus City",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:02"
+    },
+    {
+      "ID": 146702,
+      "Title": "Unova's Own Creators",
+      "Description": "Defeat Nishino and Morimoto, both inside the Castelia City GameFreak Building",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:03"
+    },
+    {
+      "ID": 146703,
+      "Title": "Not So Exclusive",
+      "Description": "Trade for a Cottonee on Route 4",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:03"
+    },
+    {
+      "ID": 146704,
+      "Title": "Giga Rock",
+      "Description": "Trade for a Gigalith on Route 7",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:03"
+    },
+    {
+      "ID": 146705,
+      "Title": "Overgrown Mess",
+      "Description": "Trade for a Tangrowth in Humilau City",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:24"
+    },
+    {
+      "ID": 146706,
+      "Title": "Appliance Takeover",
+      "Description": "Trade for a Rotom on Route 15",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:04"
+    },
+    {
+      "ID": 146707,
+      "Title": "Handy Pokemon",
+      "Description": "Trade for an Ambipom in Accumula Town",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:04"
+    },
+    {
+      "ID": 146708,
+      "Title": "300 IQ Trade",
+      "Description": "Trade for an Alakazam in Accumula Town",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:28"
+    },
+    {
+      "ID": 146709,
+      "Title": "Move Master",
+      "Description": "Obtain All 95 TMs, and All 6 HMs",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:04"
+    },
+    {
+      "ID": 146710,
+      "Title": "An Avenue to Call My Own",
+      "Description": "Obtain the Avenue of Fame medal for reaching an Avenue Rank of 10 and naming your Avenue",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:36"
+    },
+    {
+      "ID": 146711,
+      "Title": "Big Screen Star",
+      "Description": "Obtain the Popular Movie Star medal for starring in all possible movies in Pokestar Studios",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:36"
+    },
+    {
+      "ID": 146712,
+      "Title": "Top Notch Movie Star",
+      "Description": "Obtain the Masterpiece Star medal for getting all good endings in Pokestar Studios Movies",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:36"
+    },
+    {
+      "ID": 146713,
+      "Title": "Not Quite Right...",
+      "Description": "Obtain the First Cult Classic medal for getting a Strange Ending in a Pokestar Studio Movie",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:36"
+    },
+    {
+      "ID": 146714,
+      "Title": "Alternate Reality",
+      "Description": "Obtain the Cult Classic Star medal for getting the strange ending for all Pokestar Studios Movies",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-01-12 05:06:34"
+    },
+    {
+      "ID": 146715,
+      "Title": "Rookie Rank",
+      "Description": "Obtain the Rookie Medalist for having 50 total medals",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2024-12-28 02:38:36"
+    },
+    {
+      "ID": 146716,
+      "Title": "Subway Beginner",
+      "Description": "Obtain the Single Express, Double Express, and Multi Express medals",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:06"
+    },
+    {
+      "ID": 146717,
+      "Title": "Subway Single Master",
+      "Description": "Defeat the Subway Super Single Master at streak 49",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:07"
+    },
+    {
+      "ID": 146718,
+      "Title": "Subway Double Master",
+      "Description": "Defeat the Subway Super Double Master at Streak 49",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:07"
+    },
+    {
+      "ID": 146719,
+      "Title": "Subway Multi Master",
+      "Description": "Defeat the Subway Super Multi Master at Streak 49",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:08"
+    },
+    {
+      "ID": 146720,
+      "Title": "Unova Leaders",
+      "Description": "Win the Unova Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:08"
+    },
+    {
+      "ID": 146721,
+      "Title": "Kanto Leaders",
+      "Description": "Win the Kanto Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:08"
+    },
+    {
+      "ID": 146722,
+      "Title": "Johto Leaders",
+      "Description": "Win the Johto Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:08"
+    },
+    {
+      "ID": 146723,
+      "Title": "Hoenn Leaders",
+      "Description": "Win the Hoenn Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:36"
+    },
+    {
+      "ID": 146724,
+      "Title": "Sinnoh Leaders",
+      "Description": "Win the Sinnoh Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:09"
+    },
+    {
+      "ID": 146725,
+      "Title": "World Leaders",
+      "Description": "Win the World Leaders Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:09"
+    },
+    {
+      "ID": 146726,
+      "Title": "The Best Across the World",
+      "Description": "Win the Champions Tournament",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:36"
+    },
+    {
+      "ID": 146727,
+      "Title": "Rental Masters",
+      "Description": "Win the Rental Masters Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:09"
+    },
+    {
+      "ID": 146728,
+      "Title": "Mix Master",
+      "Description": "Win the Mix Master Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:36"
+    },
+    {
+      "ID": 146729,
+      "Title": "Type Expert",
+      "Description": "Win the Type Expert Tournament",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:10"
+    },
+    {
+      "ID": 146730,
+      "Title": "Hidden Grotto Expert",
+      "Description": "Find and step inside all hidden grottos during a single session",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:37"
+    },
+    {
+      "ID": 147206,
+      "Title": "Let's Do It Again",
+      "Description": "Defeat the Elite 4 and Champion once again, after obtaining the National Pokedex",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-05-04 16:56:11"
+    },
+    {
+      "ID": 314280,
+      "Title": "Normalization",
+      "Description": "Defeat the Elite 4 using only Normal Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:35"
+    },
+    {
+      "ID": 314281,
+      "Title": "Too Hot to Handle",
+      "Description": "Defeat the Elite 4 using only Fire Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:36"
+    },
+    {
+      "ID": 314282,
+      "Title": "Aquatic Mastery",
+      "Description": "Defeat the Elite 4 using only Water Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:37"
+    },
+    {
+      "ID": 314283,
+      "Title": "Gotta Zap 'em All",
+      "Description": "Defeat the Elite 4 using only Electric Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:38"
+    },
+    {
+      "ID": 314284,
+      "Title": "The Grass is Greener",
+      "Description": "Defeat the Elite 4 using only Grass Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:38"
+    },
+    {
+      "ID": 314285,
+      "Title": "Ice-Cold Battler",
+      "Description": "Defeat the Elite 4 using only Ice Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:39"
+    },
+    {
+      "ID": 314286,
+      "Title": "Hand-to-Hand Fighter",
+      "Description": "Defeat the Elite 4 using only Fighting Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:40"
+    },
+    {
+      "ID": 314287,
+      "Title": "In-toxic-ating",
+      "Description": "Defeat the Elite 4 using only Poison Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:40"
+    },
+    {
+      "ID": 314288,
+      "Title": "Immune to Electricity",
+      "Description": "Defeat the Elite 4 using only Ground Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:18:49"
+    },
+    {
+      "ID": 314289,
+      "Title": "Taking to the Skies",
+      "Description": "Defeat the Elite 4 using only Flying Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:41"
+    },
+    {
+      "ID": 314290,
+      "Title": "I Can See the Future",
+      "Description": "Defeat the Elite 4 using only Psychic Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:42"
+    },
+    {
+      "ID": 314291,
+      "Title": "Nature's Best Friend",
+      "Description": "Defeat the Elite 4 using only Bug Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:12:36"
+    },
+    {
+      "ID": 314292,
+      "Title": "A Sturdy Defense",
+      "Description": "Defeat the Elite 4 using only Rock Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:43"
+    },
+    {
+      "ID": 314293,
+      "Title": "Spooky and Scary",
+      "Description": "Defeat the Elite 4 using only Ghost Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:44"
+    },
+    {
+      "ID": 314294,
+      "Title": "Just a Myth",
+      "Description": "Defeat the Elite 4 using only Dragon Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:17:05"
+    },
+    {
+      "ID": 314295,
+      "Title": "The Meanest of the Mean",
+      "Description": "Defeat the Elite 4 using only Dark Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:44"
+    },
+    {
+      "ID": 314296,
+      "Title": "Unbreakable Metal",
+      "Description": "Defeat the Elite 4 using only Steel Types",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:08:45"
+    },
+    {
+      "ID": 314298,
+      "Title": "Learning is Fun",
+      "Description": "Read 15 different Trainer Tip signs across Unova and obtain the Signboard Savvy Medal",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:37"
+    },
+    {
+      "ID": 314299,
+      "Title": "What Was the Point of That?",
+      "Description": "See the Graffiti on the back of the sign on Route 2 and obtain the Graffiti Gazer Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:37"
+    },
+    {
+      "ID": 314300,
+      "Title": "That Sure is a Lot",
+      "Description": "Catch 50 Pokemon in a Single Day and obtain the Capturing Spree Medal",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:37"
+    },
+    {
+      "ID": 314301,
+      "Title": "Luck Shines Upon All ... Eventually",
+      "Description": "Get a free drink from the vending machine and obtain the Lucky Drink Medal",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:38"
+    },
+    {
+      "ID": 314302,
+      "Title": "That's ... Gross",
+      "Description": "Look in a trash can for the first time and obtain the Trash Master Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-02-23 06:48:09"
+    },
+    {
+      "ID": 314303,
+      "Title": "Hidden Item Amateur",
+      "Description": "Find 50 Hidden Items and obtain the Dowsing Collector Medal",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:38"
+    },
+    {
+      "ID": 314304,
+      "Title": "Hidden Item Master",
+      "Description": "Find 150 hidden items and obtain the Dowsing Wizard Medal",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:38"
+    },
+    {
+      "ID": 314305,
+      "Title": "Gotta Name 'em All",
+      "Description": "Nickname 10 Pokemon and obtain the Naming Champ Medal",
+      "Points": 3,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:39"
+    },
+    {
+      "ID": 314306,
+      "Title": "Channel Flipper",
+      "Description": "Change the channel on a TV several times and obtain the Television Kid Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-02-23 06:48:20"
+    },
+    {
+      "ID": 314307,
+      "Title": "Buy 10, Get 1 Free",
+      "Description": "Obtain a Premier Ball by buying 10 Poke Balls and obtain the Smart Shopper Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-08-11 04:16:32"
+    },
+    {
+      "ID": 314308,
+      "Title": "No Place Like Home",
+      "Description": "Rest at home by talking to Mom and obtain the Sweet Home Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:39"
+    },
+    {
+      "ID": 314309,
+      "Title": "Prehistoric Pokemon",
+      "Description": "Restore a Pokemon from a Fossil and obtain the Archeology Lover Medal",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:39"
+    },
+    {
+      "ID": 314310,
+      "Title": "Castelia's Best",
+      "Description": "Defeat Castelia City's gang and obtain the Castelia Boss Medal",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:40"
+    },
+    {
+      "ID": 314311,
+      "Title": "Pastime Passion",
+      "Description": "Listen to all the train descriptions in Anville Town and obtain the Rail Enthusiast Medal",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:40"
+    },
+    {
+      "ID": 314312,
+      "Title": "Marine Biologist",
+      "Description": "See a Wailord while in the Marine Tube and obtain the Wailord Watcher Medal",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:40"
+    },
+    {
+      "ID": 314313,
+      "Title": "Do ... I Have to?",
+      "Description": "Have your photo taken at the Frillish Sign in Humilau City and obtain the Medal for doing so",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:41"
+    },
+    {
+      "ID": 314314,
+      "Title": "The Quiz Master",
+      "Description": "Answer the quiz in Twist Mountain 5 times and obtain the Medal for doing so",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:41"
+    },
+    {
+      "ID": 314315,
+      "Title": "Into the Ruins!",
+      "Description": "Reach the final floor in the Abyssal Ruins and obtain the Medal for doing so",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:41"
+    },
+    {
+      "ID": 314316,
+      "Title": "It's So ... Pretty!",
+      "Description": "Experience the Diamond Dust weather for the first time and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:41"
+    },
+    {
+      "ID": 314317,
+      "Title": "The Scenic Route",
+      "Description": "Cross all of the bridges in Unova and obtain the Medal for doing so",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:42"
+    },
+    {
+      "ID": 314319,
+      "Title": "Seasoned Battler",
+      "Description": "Participate in 2000 battles and obtain the Medal for doing so",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:42"
+    },
+    {
+      "ID": 314320,
+      "Title": "Splish Splash",
+      "Description": "Use Splash in battle and obtain the Medal for doing so",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:42"
+    },
+    {
+      "ID": 314321,
+      "Title": "Struggle Bug",
+      "Description": "Use Struggle in Battle and obtain the Medal for doing so",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:43"
+    },
+    {
+      "ID": 314322,
+      "Title": "Know Your Weaknesses",
+      "Description": "Land many Supereffective hits and obtain the Medal for doing so",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:43"
+    },
+    {
+      "ID": 314323,
+      "Title": "Isn't There a Better Option?",
+      "Description": "Use a move that is not effective on the opponent and obtain the Medal for doing so",
+      "Points": 0,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:43"
+    },
+    {
+      "ID": 314324,
+      "Title": "Team Tester",
+      "Description": "Test 50 teams in the Battle Institute and obtain the Medal for doing so",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:43"
+    },
+    {
+      "ID": 314325,
+      "Title": "Shake Shake",
+      "Description": "Explore a shaking spot of Grass or Dust and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:44"
+    },
+    {
+      "ID": 314326,
+      "Title": "Pokemon Musicals",
+      "Description": "Obtain both the Talented Cast Member and Rising Star Medals",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-30 20:52:53"
+    },
+    {
+      "ID": 314327,
+      "Title": "Be the Guide",
+      "Description": "Guide 100 people in your Join Avenue and obtain the Medal for doing so",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:44"
+    },
+    {
+      "ID": 314328,
+      "Title": "We've Got a Shopping Center Now",
+      "Description": "Have 50 shops open in Join Avenue and obtain the Medal for doing so",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:44"
+    },
+    {
+      "ID": 314329,
+      "Title": "Presents!",
+      "Description": "Get 100 souvenirs from Join Avenue and obtain the Medal for doing so",
+      "Points": 25,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:45"
+    },
+    {
+      "ID": 314330,
+      "Title": "Brycen-man",
+      "Description": "Create the Brycen-man PokéStar Studios movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:45"
+    },
+    {
+      "ID": 314331,
+      "Title": "Revenge of Brycen-man",
+      "Description": "Create the Revenge of Brycen-man PokéStar Studios movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:45"
+    },
+    {
+      "ID": 314332,
+      "Title": "Full Metal",
+      "Description": "Succeed in the creation of the Full Metal PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:46"
+    },
+    {
+      "ID": 314333,
+      "Title": "Invaders",
+      "Description": "Succeed in the creation of the Invaders PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:46"
+    },
+    {
+      "ID": 314334,
+      "Title": "Monster Movie",
+      "Description": "Succeed in the creation of the Monster Movie PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:46"
+    },
+    {
+      "ID": 314335,
+      "Title": "Time Traveler",
+      "Description": "Succeed in the creation of the Time Traveler PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:46"
+    },
+    {
+      "ID": 314336,
+      "Title": "Pokemon Trainers",
+      "Description": "Succeed in the creation of the Pokémon Trainers PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:47"
+    },
+    {
+      "ID": 314337,
+      "Title": "The Mysterious Door of the Magic Kingdom",
+      "Description": "Succeed in the creation of the Mysterious Door of the Magic Kingdom PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:47"
+    },
+    {
+      "ID": 314338,
+      "Title": "The Giant Office Lady",
+      "Description": "Succeed in the creation of the Giant Office Lady PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:47"
+    },
+    {
+      "ID": 314339,
+      "Title": "Fear! The Red Mist Nightmare",
+      "Description": "Succeed in the creation of the Fear! The Red Mist Nightmare PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:48"
+    },
+    {
+      "ID": 314340,
+      "Title": "Storage Robot",
+      "Description": "Succeed in the creation of the Storage Robot PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:49"
+    },
+    {
+      "ID": 314341,
+      "Title": "Ghost Eraser",
+      "Description": "Succeed in the creation of the Ghost Eraser PokéStar Studios Movie and obtain the Medal for doing so",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:49"
+    },
+    {
+      "ID": 314342,
+      "Title": "Return of Brycenman",
+      "Description": "Succeed in the creation of the Return of Brycenman PokéStar Studios Movie",
+      "Points": 2,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-11-03 01:18:02"
+    },
+    {
+      "ID": 314343,
+      "Title": "Jellicent",
+      "Description": "Catch the Female Jellicent with its Hidden Ability in Undella Bay",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-19 15:19:57"
+    },
+    {
+      "ID": 314344,
+      "Title": "Braviary",
+      "Description": "Catch the Braviary on Route 4 with its Hidden Ability",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-19 15:19:57"
+    },
+    {
+      "ID": 314345,
+      "Title": "Volcarona",
+      "Description": "Catch the Volcarona on the bottom floor of Relic Castle",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-10-19 15:19:57"
+    },
+    {
+      "ID": 314346,
+      "Title": "Registeel",
+      "Description": "With the Iron Key, obtain Registeel",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:34:44"
+    },
+    {
+      "ID": 314347,
+      "Title": "Regigigas",
+      "Description": "Obtain Regigigas after capturing all three of the Regi Trio",
+      "Points": 5,
+      "DisplayOrder": 0,
+      "type": "missable",
+      "DateModified": "2025-04-30 22:09:19"
+    },
+    {
+      "ID": 314348,
+      "Title": "The Type Champion",
+      "Description": "Win the Type Master Tournament at the PWT with all 17 types",
+      "Points": 50,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-01-12 05:01:03"
+    },
+    {
+      "ID": 319936,
+      "Title": "Memories of the Past",
+      "Description": "See all of the Memory Link Flashbacks",
+      "Points": 10,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2025-04-30 22:28:49"
+    },
+    {
+      "ID": 319937,
+      "Title": "N's Purrloin",
+      "Description": "Find and Capture N's Purrloin",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:15"
+    },
+    {
+      "ID": 319938,
+      "Title": "N's Pidove",
+      "Description": "Find and Capture N's Pidove",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:16"
+    },
+    {
+      "ID": 319939,
+      "Title": "N's Woobat",
+      "Description": "Find and Capture N's Woobat",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:17"
+    },
+    {
+      "ID": 319940,
+      "Title": "N's Timburr",
+      "Description": "Find and Capture N's Timburr",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:18"
+    },
+    {
+      "ID": 319941,
+      "Title": "N's Tympole",
+      "Description": "Find and Capture N's Tympole",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:18"
+    },
+    {
+      "ID": 319942,
+      "Title": "N's Boldore",
+      "Description": "Find and Capture N's Boldore",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:19"
+    },
+    {
+      "ID": 319943,
+      "Title": "N's Sandile",
+      "Description": "Find and Capture N's Sandile",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:20"
+    },
+    {
+      "ID": 319944,
+      "Title": "N's Darumaka",
+      "Description": "Find and Capture N's Darumaka",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:21"
+    },
+    {
+      "ID": 319945,
+      "Title": "N's Darmanitan",
+      "Description": "Find and Capture N's Darmanitan",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:22"
+    },
+    {
+      "ID": 319946,
+      "Title": "N's Scraggy",
+      "Description": "Find and Capture N's Scraggy",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:23"
+    },
+    {
+      "ID": 319947,
+      "Title": "N's Sigilyph",
+      "Description": "Find and Capture N's Sigilyph",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:24"
+    },
+    {
+      "ID": 319948,
+      "Title": "N's Joltik",
+      "Description": "Find and Capture N's Joltik",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:24"
+    },
+    {
+      "ID": 319949,
+      "Title": "N's Ferroseed",
+      "Description": "Find and Capture N's Ferroseed",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:25"
+    },
+    {
+      "ID": 319950,
+      "Title": "N's Klink",
+      "Description": "Find and Capture N's Klink",
+      "Points": 1,
+      "DisplayOrder": 0,
+      "type": null,
+      "DateModified": "2023-10-28 00:09:26"
+    }
+  ]
+}

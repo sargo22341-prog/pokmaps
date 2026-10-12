@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="string" name="ra_31146_title">@string/ra_31199_title</item>
+    <item type="string" name="ra_31146_text">@string/ra_31199_text</item>
+    <item type="string" name="ra_31147_title">@string/ra_31200_title</item>
+    <item type="string" name="ra_31147_text">@string/ra_31200_text</item>
+    <item type="string" name="ra_31148_title">@string/ra_31201_title</item>
+    <item type="string" name="ra_31148_text">@string/ra_31201_text</item>
+    <item type="string" name="ra_31149_title">@string/ra_31202_title</item>
+    <item type="string" name="ra_31149_text">@string/ra_31202_text</item>
+    <item type="string" name="ra_31151_title">@string/ra_31206_title</item>
+    <item type="string" name="ra_31151_text">@string/ra_31206_text</item>
+    <item type="string" name="ra_31152_title">@string/ra_31207_title</item>
+    <item type="string" name="ra_31152_text">@string/ra_31207_text</item>
+    <item type="string" name="ra_31153_title">@string/ra_31208_title</item>
+    <item type="string" name="ra_31153_text">@string/ra_31208_text</item>
+    <item type="string" name="ra_31154_title">@string/ra_31209_title</item>
+    <item type="string" name="ra_31154_text">@string/ra_31209_text</item>
+    <item type="string" name="ra_31155_title">@string/ra_31210_title</item>
+    <item type="string" name="ra_31155_text">@string/ra_31210_text</item>
+    <item type="string" name="ra_31156_title">@string/ra_31211_title</item>
+    <item type="string" name="ra_31156_text">@string/ra_31211_text</item>
+    <item type="string" name="ra_31157_title">@string/ra_31212_title</item>
+    <item type="string" name="ra_31157_text">@string/ra_31212_text</item>
+    <item type="string" name="ra_31158_title">@string/ra_31213_title</item>
+    <item type="string" name="ra_31158_text">@string/ra_31213_text</item>
+    <string name="ra_31159_title">Battre Arthur au Mont Chimnée</string>
+    <string name="ra_31159_text">Battre Arthur au Mont Chimnée.</string>
+    <string name="ra_31160_title">Battre Sarah au Centre Météo</string>
+    <string name="ra_31160_text">Battre Sarah au Centre Météo.</string>
+    <string name="ra_31161_title">Battre Matthieu dans le Repaire Aqua</string>
+    <string name="ra_31161_text">Battre Matthieu dans le Repaire Aqua.</string>
+    <item type="string" name="ra_31162_title">@string/ra_27609_title</item>
+    <item type="string" name="ra_31162_text">@string/ra_27609_text</item>
+    <string name="ra_31163_title">Obtenir la Master Ball dans le Repaire Aqua</string>
+    <string name="ra_31163_text">Obtenir la Master Ball dans le Repaire Aqua.</string>
+    <item type="string" name="ra_31164_title">@string/ra_27610_title</item>
+    <item type="string" name="ra_31164_text">@string/ra_27610_text</item>
+    <item type="string" name="ra_31169_title">@string/ra_31223_title</item>
+    <item type="string" name="ra_31169_text">@string/ra_31223_text</item>
+    <string name="ra_31171_title">Capturer Kyogre sans Master Ball</string>
+    <string name="ra_31171_text">Capturer Kyogre sans Master Ball.</string>
+    <string name="ra_31172_title">Capturer Rayquaza sans Master Ball</string>
+    <string name="ra_31172_text">Capturer Rayquaza sans Master Ball.</string>
+    <string name="ra_31173_title">Capturer Regirock sans Master Ball</string>
+    <string name="ra_31173_text">Capturer Regirock sans Master Ball.</string>
+    <string name="ra_31174_title">Capturer Regice sans Master Ball</string>
+    <string name="ra_31174_text">Capturer Regice sans Master Ball.</string>
+    <string name="ra_31175_title">Capturer Registeel sans Master Ball</string>
+    <string name="ra_31175_text">Capturer Registeel sans Master Ball.</string>
+    <string name="ra_31176_title">Capturer Latias</string>
+    <string name="ra_31176_text">Capturer Latias.</string>
+    <item type="string" name="ra_92019_title">@string/ra_91983_title</item>
+    <item type="string" name="ra_92019_text">@string/ra_91983_text</item>
+    <item type="string" name="ra_92012_title">@string/ra_91984_title</item>
+    <item type="string" name="ra_92012_text">@string/ra_91984_text</item>
+    <string name="ra_92021_title">Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds</string>
+    <string name="ra_92021_text">Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds.</string>
+    <item type="string" name="ra_92020_title">@string/ra_91986_title</item>
+    <item type="string" name="ra_92020_text">@string/ra_91986_text</item>
+    <string name="ra_92024_title">Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria</string>
+    <string name="ra_92024_text">Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria.</string>
+    <item type="string" name="ra_92023_title">@string/ra_92000_title</item>
+    <item type="string" name="ra_92023_text">@string/ra_92000_text</item>
+    <string name="ra_92006_title">Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision</string>
+    <string name="ra_92006_text">Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision.</string>
+    <string name="ra_92018_title">Gagner un lot à la loterie</string>
+    <string name="ra_92018_text">Gagner un lot à la loterie.</string>
+    <string name="ra_92017_title">Voir son nom inscrit sur la section correspondante du mur de l’Arène de…</string>
+    <string name="ra_92017_text">Voir son nom inscrit sur la section correspondante du mur de l’Arène de Myokara.</string>
+    <item type="string" name="ra_92008_title">@string/ra_57266_title</item>
+    <item type="string" name="ra_92008_text">@string/ra_57266_text</item>
+    <string name="ra_92009_title">Jouer les quinze premières notes du thème de Bourg Palette sur les tapis…</string>
+    <string name="ra_92009_text">Jouer les quinze premières notes du thème de Bourg Palette sur les tapis musicaux, en respectant le rythme.</string>
+    <string name="ra_92013_title">Obtenir toutes les chaises, bureaux et coussins de Base Secrète</string>
+    <string name="ra_92013_text">Obtenir toutes les chaises, bureaux et coussins de Base Secrète.</string>
+    <string name="ra_92014_title">Obtenir tous les tapis, plantes et posters de Base Secrète</string>
+    <string name="ra_92014_text">Obtenir tous les tapis, plantes et posters de Base Secrète.</string>
+    <string name="ra_92015_title">Obtenir la plupart des poupées de Base Secrète</string>
+    <string name="ra_92015_text">Obtenir la plupart des poupées de Base Secrète.</string>
+    <string name="ra_92016_title">Obtenir la plupart des ornements de Base Secrète</string>
+    <string name="ra_92016_text">Obtenir la plupart des ornements de Base Secrète.</string>
+    <string name="ra_92022_title">Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin…</string>
+    <string name="ra_92022_text">Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin et Lichii.</string>
+    <string name="ra_92007_title">Fabriquer un Pokébloc de niveau 51 minimum</string>
+    <string name="ra_92007_text">Fabriquer un Pokébloc de niveau 51 minimum.</string>
+    <string name="ra_92011_title">Gagner son premier Concours de rang Master</string>
+    <string name="ra_92011_text">Gagner son premier Concours de rang Master.</string>
+    <string name="ra_92028_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de…</string>
+    <string name="ra_92028_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Sang-froid de rang Master.</string>
+    <string name="ra_92027_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce…</string>
+    <string name="ra_92027_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce de rang Master.</string>
+    <string name="ra_92029_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté…</string>
+    <string name="ra_92029_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté de rang Master.</string>
+    <string name="ra_92025_title">Faire peindre un de ses Pokémon après avoir remporté un Concours…</string>
+    <string name="ra_92025_text">Faire peindre un de ses Pokémon après avoir remporté un Concours d’Intelligence de rang Master.</string>
+    <item type="string" name="ra_92026_title">@string/ra_92028_title</item>
+    <string name="ra_92026_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Robustesse de rang Master.</string>
+    <string name="ra_92010_title">Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav</string>
+    <string name="ra_92010_text">Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav.</string>
+</resources>

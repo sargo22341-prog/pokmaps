@@ -1,0 +1,1782 @@
+{
+  "game_id": 668,
+  "title": "Pokémon Emerald Version",
+  "console": "Game Boy Advance",
+  "source": "https://retroachievements.org/game/668",
+  "exported_at": "2026-10-12T15:48:32+00:00",
+  "achievements": [
+    {
+      "ID": 537183,
+      "Title": "Zigzagone",
+      "Description": "Help out Professor Birch with the help of your new little friend",
+      "Points": 1,
+      "DisplayOrder": 1000,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:04"
+    },
+    {
+      "ID": 537203,
+      "Title": "Loyalty Program",
+      "Description": "Receive a free Potion sample in Oldale Town",
+      "Points": 1,
+      "DisplayOrder": 1001,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:04"
+    },
+    {
+      "ID": 27592,
+      "Title": "Let's Have a Quick Battle!",
+      "Description": "Defeat your Rival on Route 103",
+      "Points": 3,
+      "DisplayOrder": 1002,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:04"
+    },
+    {
+      "ID": 537184,
+      "Title": "Little Brother",
+      "Description": "Assist Wally in catching his first Pokémon",
+      "Points": 1,
+      "DisplayOrder": 1003,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:05"
+    },
+    {
+      "ID": 537185,
+      "Title": "Woody Rumble",
+      "Description": "Save the Devon employee from the suspicious grunt trying to rob the documents",
+      "Points": 2,
+      "DisplayOrder": 1004,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:05"
+    },
+    {
+      "ID": 537126,
+      "Title": "Gardening Pro",
+      "Description": "Receive a Wailmer Pail at the Pretty Petal flower shop on Route 104",
+      "Points": 1,
+      "DisplayOrder": 1005,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:05"
+    },
+    {
+      "ID": 537204,
+      "Title": "Good Student",
+      "Description": "Receive a Quick Claw for attending the Trainer School",
+      "Points": 1,
+      "DisplayOrder": 1006,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:06"
+    },
+    {
+      "ID": 537133,
+      "Title": "Even the Mightiest Oak",
+      "Description": "Trade a Ralts for a Seedot in Rustboro City",
+      "Points": 3,
+      "DisplayOrder": 1007,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:06"
+    },
+    {
+      "ID": 537116,
+      "Title": "Battle Addict - Rustboro",
+      "Description": "Defeat every trainer in Rustboro gym",
+      "Points": 2,
+      "DisplayOrder": 1099,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:06"
+    },
+    {
+      "ID": 27596,
+      "Title": "Rockin' Whiz",
+      "Description": "Defeat Roxanne to earn the Stone Badge",
+      "Points": 10,
+      "DisplayOrder": 1100,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:06"
+    },
+    {
+      "ID": 537186,
+      "Title": "Amazing Tech in the Palm of Your Hand",
+      "Description": "Receive the PokéNav from the Devon Corporation president",
+      "Points": 1,
+      "DisplayOrder": 1101,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:07"
+    },
+    {
+      "ID": 537115,
+      "Title": "How About a Little Battle?",
+      "Description": "Defeat your rival at Rustboro City or Route 104",
+      "Points": 3,
+      "DisplayOrder": 1102,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:07"
+    },
+    {
+      "ID": 537205,
+      "Title": "Everyone Knows",
+      "Description": "Set a new trendy phrase",
+      "Points": 1,
+      "DisplayOrder": 1103,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:07"
+    },
+    {
+      "ID": 537206,
+      "Title": "Fishing Trainee",
+      "Description": "Receive the Old Rod in Dewford Town",
+      "Points": 2,
+      "DisplayOrder": 1104,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:07"
+    },
+    {
+      "ID": 537117,
+      "Title": "Battle Addict - Dewford",
+      "Description": "Defeat every trainer in Dewford gym",
+      "Points": 5,
+      "DisplayOrder": 1199,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:07"
+    },
+    {
+      "ID": 27597,
+      "Title": "The Big Hit",
+      "Description": "Defeat Brawly to earn the Knuckle Badge",
+      "Points": 10,
+      "DisplayOrder": 1200,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:08"
+    },
+    {
+      "ID": 537187,
+      "Title": "Rocky Courier",
+      "Description": "Deliver the Letter to Steven",
+      "Points": 4,
+      "DisplayOrder": 1201,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:08"
+    },
+    {
+      "ID": 537214,
+      "Title": "Devon Delivery",
+      "Description": "Receive the Exp. Share",
+      "Points": 3,
+      "DisplayOrder": 1202,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:08"
+    },
+    {
+      "ID": 537207,
+      "Title": "Drinks on the House",
+      "Description": "Complete the Seashore House challenge and receive a prize",
+      "Points": 3,
+      "DisplayOrder": 1203,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:08"
+    },
+    {
+      "ID": 537208,
+      "Title": "Crush Those Berries",
+      "Description": "Receive a Powder Jar in Slateport's Market",
+      "Points": 2,
+      "DisplayOrder": 1204,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:09"
+    },
+    {
+      "ID": 537210,
+      "Title": "Friendship Is Amazing!",
+      "Description": "Receive the Soothe Bell for showing a friendly Pokémon to a woman in the Pokémon Fan Club",
+      "Points": 3,
+      "DisplayOrder": 1206,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:09"
+    },
+    {
+      "ID": 537188,
+      "Title": "Fight at the Museum",
+      "Description": "Defeat Team Aqua at the Oceanic Museum",
+      "Points": 3,
+      "DisplayOrder": 1207,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:10"
+    },
+    {
+      "ID": 537128,
+      "Title": "Trainer Extraordinaire - Slateport",
+      "Description": "Win at the Slateport Battle Tent and receive a prize",
+      "Points": 5,
+      "DisplayOrder": 1208,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:10"
+    },
+    {
+      "ID": 27593,
+      "Title": "Long Time No See!",
+      "Description": "Defeat your Rival on Route 110",
+      "Points": 5,
+      "DisplayOrder": 1209,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:10"
+    },
+    {
+      "ID": 537211,
+      "Title": "Rydel Rydel Rydel Rydel Rydel Rydel Rydel Rydel",
+      "Description": "Receive a bike of your choice at Rydel's Cycles",
+      "Points": 1,
+      "DisplayOrder": 1210,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:10"
+    },
+    {
+      "ID": 537212,
+      "Title": "Aw Dang It",
+      "Description": "Exchange a Harbor Mail for a Coin Case",
+      "Points": 2,
+      "DisplayOrder": 1211,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:11"
+    },
+    {
+      "ID": 537189,
+      "Title": "Still a Novice",
+      "Description": "Defeat Wally at the entrance to the Mauville Gym",
+      "Points": 2,
+      "DisplayOrder": 1212,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:11"
+    },
+    {
+      "ID": 537118,
+      "Title": "Battle Addict - Mauville",
+      "Description": "Defeat every trainer in Mauville gym",
+      "Points": 5,
+      "DisplayOrder": 1299,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:12"
+    },
+    {
+      "ID": 27598,
+      "Title": "Swell Shock",
+      "Description": "Defeat Wattson to earn the Dynamo Badge",
+      "Points": 10,
+      "DisplayOrder": 1300,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:12"
+    },
+    {
+      "ID": 537213,
+      "Title": "Didn't See It Coming",
+      "Description": "Attempt to return some lost glasses",
+      "Points": 1,
+      "DisplayOrder": 1301,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:13"
+    },
+    {
+      "ID": 537129,
+      "Title": "Trainer Extraordinaire - Verdanturf",
+      "Description": "Win at the Verdanturf Battle Tent and receive a prize",
+      "Points": 5,
+      "DisplayOrder": 1302,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:13"
+    },
+    {
+      "ID": 537127,
+      "Title": "Whole Winstrate Won",
+      "Description": "Receive a reward for beating the Winstrate family on Route 111",
+      "Points": 5,
+      "DisplayOrder": 1303,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:13"
+    },
+    {
+      "ID": 537130,
+      "Title": "Trainer Extraordinaire - Fallarbor",
+      "Description": "Win at the Fallarbor Battle Tent and receive a prize",
+      "Points": 5,
+      "DisplayOrder": 1305,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:14"
+    },
+    {
+      "ID": 537215,
+      "Title": "Lotad Tower",
+      "Description": "Receive a Lotad Doll from Lanette",
+      "Points": 2,
+      "DisplayOrder": 1306,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:14"
+    },
+    {
+      "ID": 537190,
+      "Title": "Free Falling",
+      "Description": "Help out Professor Cozmo at Meteor Falls",
+      "Points": 1,
+      "DisplayOrder": 1307,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:14"
+    },
+    {
+      "ID": 27604,
+      "Title": "Geothermal Power",
+      "Description": "Interfere with Team Magma on Mt. Chimney",
+      "Points": 5,
+      "DisplayOrder": 1308,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:14"
+    },
+    {
+      "ID": 537216,
+      "Title": "Volcano Baked",
+      "Description": "Buy a cookie on Mt. Chimney",
+      "Points": 1,
+      "DisplayOrder": 1309,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:15"
+    },
+    {
+      "ID": 537217,
+      "Title": "I Found This Rock and Thought About You",
+      "Description": "Return the stolen meteor to Professor Cozmo",
+      "Points": 3,
+      "DisplayOrder": 1310,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:15"
+    },
+    {
+      "ID": 537201,
+      "Title": "Amoonguss Would Debut 6 Years Later",
+      "Description": "Defeat the suspicious Magma grunt on Jagged Pass",
+      "Points": 1,
+      "DisplayOrder": 1311,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:15"
+    },
+    {
+      "ID": 537131,
+      "Title": "Why Not?",
+      "Description": "Receive an Egg from the old lady at the Lavaridge Springs",
+      "Points": 1,
+      "DisplayOrder": 1312,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:15"
+    },
+    {
+      "ID": 537119,
+      "Title": "Battle Addict - Lavaridge",
+      "Description": "Defeat every trainer in Lavaridge gym",
+      "Points": 5,
+      "DisplayOrder": 1399,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:16"
+    },
+    {
+      "ID": 27599,
+      "Title": "Passion Burn",
+      "Description": "Defeat Flannery to earn the Heat Badge",
+      "Points": 10,
+      "DisplayOrder": 1400,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:17"
+    },
+    {
+      "ID": 57267,
+      "Title": "Amateur Archaeologist",
+      "Description": "Acquire a fossil in the Mirage Tower",
+      "Points": 1,
+      "DisplayOrder": 1401,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:17"
+    },
+    {
+      "ID": 537120,
+      "Title": "Battle Addict - Petalburg",
+      "Description": "Defeat every trainer in Petalburg gym",
+      "Points": 10,
+      "DisplayOrder": 1499,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:17"
+    },
+    {
+      "ID": 27600,
+      "Title": "Reliable One",
+      "Description": "Defeat Norman to earn the Balance Badge",
+      "Points": 10,
+      "DisplayOrder": 1500,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:17"
+    },
+    {
+      "ID": 537218,
+      "Title": "Growing Stronger Every Day",
+      "Description": "Receive a special prize from your Mom for defeating your Dad",
+      "Points": 3,
+      "DisplayOrder": 1501,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:17"
+    },
+    {
+      "ID": 57271,
+      "Title": "New Mauville Maintenance",
+      "Description": "Disable the generator in New Mauville and obtain your reward",
+      "Points": 5,
+      "DisplayOrder": 1502,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:18"
+    },
+    {
+      "ID": 537219,
+      "Title": "Fishing Enthusiast",
+      "Description": "Receive the Good Rod on Route 118",
+      "Points": 3,
+      "DisplayOrder": 1503,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:18"
+    },
+    {
+      "ID": 57265,
+      "Title": "One Tile Away from Beauty",
+      "Description": "Catch a wild Feebas",
+      "Points": 25,
+      "DisplayOrder": 1504,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:18"
+    },
+    {
+      "ID": 537200,
+      "Title": "Panic! At the Institute",
+      "Description": "Defeat every grunt at the Weather Institute",
+      "Points": 3,
+      "DisplayOrder": 1505,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:19"
+    },
+    {
+      "ID": 27605,
+      "Title": "Meteorological Interest",
+      "Description": "Deal with Team Aqua at the Weather Institute",
+      "Points": 5,
+      "DisplayOrder": 1506,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:19"
+    },
+    {
+      "ID": 27594,
+      "Title": "How Much Stronger Have You Gotten?",
+      "Description": "Defeat your Rival on Route 119",
+      "Points": 5,
+      "DisplayOrder": 1507,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:20"
+    },
+    {
+      "ID": 537134,
+      "Title": "Positively Charged",
+      "Description": "Trade a Volbeat for a Plusle in Fortree City",
+      "Points": 3,
+      "DisplayOrder": 1508,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:20"
+    },
+    {
+      "ID": 537220,
+      "Title": "Right or Left?",
+      "Description": "Receive the TM10 Hidden Power from playing a guessing game with an old woman",
+      "Points": 3,
+      "DisplayOrder": 1509,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:21"
+    },
+    {
+      "ID": 537191,
+      "Title": "Who You Gonna Call?",
+      "Description": "Defeat the invisible obstacle with the help of the Devon Scope",
+      "Points": 2,
+      "DisplayOrder": 1510,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:21"
+    },
+    {
+      "ID": 537121,
+      "Title": "Battle Addict - Fortree",
+      "Description": "Defeat every trainer in Fortree gym",
+      "Points": 10,
+      "DisplayOrder": 1599,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:21"
+    },
+    {
+      "ID": 27601,
+      "Title": "Sky Tamer",
+      "Description": "Defeat Winona to earn the Feather Badge",
+      "Points": 10,
+      "DisplayOrder": 1600,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:22"
+    },
+    {
+      "ID": 27595,
+      "Title": "I'll Battle with You",
+      "Description": "Defeat your Rival in Lilycove City",
+      "Points": 5,
+      "DisplayOrder": 1601,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:22"
+    },
+    {
+      "ID": 537192,
+      "Title": "Orbs of Power",
+      "Description": "Witness the events on Mt. Pyre's summit",
+      "Points": 5,
+      "DisplayOrder": 1602,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:22"
+    },
+    {
+      "ID": 537194,
+      "Title": "Earth Exterminator",
+      "Description": "Defeat every grunt and find every item in the Magma Hideout",
+      "Points": 10,
+      "DisplayOrder": 1603,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:22"
+    },
+    {
+      "ID": 27606,
+      "Title": "Expanding the Earth",
+      "Description": "Defeat Maxie in Team Magma's hideout",
+      "Points": 5,
+      "DisplayOrder": 1604,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:22"
+    },
+    {
+      "ID": 537195,
+      "Title": "Valiant Vigilante",
+      "Description": "Defeat every grunt and find every item in the Aqua Hideout",
+      "Points": 5,
+      "DisplayOrder": 1605,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:23"
+    },
+    {
+      "ID": 27607,
+      "Title": "Expanding the Seas",
+      "Description": "Defeat the Admin in Team Aqua's hideout",
+      "Points": 5,
+      "DisplayOrder": 1606,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:23"
+    },
+    {
+      "ID": 537222,
+      "Title": "Fishing Master",
+      "Description": "Receive the Super Rod in Mossdeep City",
+      "Points": 4,
+      "DisplayOrder": 1607,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:24"
+    },
+    {
+      "ID": 537223,
+      "Title": "Wingull Postal Service",
+      "Description": "Receive a Mental Herb for checking on the successful return of Wingull",
+      "Points": 4,
+      "DisplayOrder": 1608,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:24"
+    },
+    {
+      "ID": 57272,
+      "Title": "Chime of the Sea",
+      "Description": "Craft a Shell Bell in Shoal Cave",
+      "Points": 5,
+      "DisplayOrder": 1609,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:24"
+    },
+    {
+      "ID": 537122,
+      "Title": "Battle Addict - Mossdeep",
+      "Description": "Defeat every trainer in Mossdeep gym",
+      "Points": 10,
+      "DisplayOrder": 1699,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:25"
+    },
+    {
+      "ID": 27602,
+      "Title": "Mystic Duo",
+      "Description": "Defeat Tate and Liza to earn the Mind Badge",
+      "Points": 10,
+      "DisplayOrder": 1700,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:25"
+    },
+    {
+      "ID": 537202,
+      "Title": "Not the Space, Not the Time",
+      "Description": "Defeat every grunt at the Space Center",
+      "Points": 4,
+      "DisplayOrder": 1701,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:25"
+    },
+    {
+      "ID": 27608,
+      "Title": "The Planet from Above",
+      "Description": "Help Steven Stone in the Mossdeep Space Center",
+      "Points": 5,
+      "DisplayOrder": 1702,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:25"
+    },
+    {
+      "ID": 537196,
+      "Title": "Ocean Obstructor",
+      "Description": "Defeat every grunt and find every item in the Seafloor Cavern",
+      "Points": 3,
+      "DisplayOrder": 1703,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:27"
+    },
+    {
+      "ID": 27609,
+      "Title": "Submarine Showdown",
+      "Description": "Defeat Archie in the Seafloor Cavern",
+      "Points": 5,
+      "DisplayOrder": 1704,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:27"
+    },
+    {
+      "ID": 537193,
+      "Title": "Ozone Peacekeeper",
+      "Description": "Watch Rayquaza put an end to the legendary showdown in Sootopolis City",
+      "Points": 5,
+      "DisplayOrder": 1705,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:27"
+    },
+    {
+      "ID": 537233,
+      "Title": "Found Machines",
+      "Description": "Obtain every Hidden Machine",
+      "Points": 5,
+      "DisplayOrder": 1706,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:27"
+    },
+    {
+      "ID": 537226,
+      "Title": "Size Matters",
+      "Description": "Break the records of both size-obsessed brothers in Sootopolis City",
+      "Points": 10,
+      "DisplayOrder": 1707,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:28"
+    },
+    {
+      "ID": 57270,
+      "Title": "Salvaging Mission",
+      "Description": "Retrieve the Scanner from the Abandoned Ship and deliver it to Captain Stern",
+      "Points": 5,
+      "DisplayOrder": 1708,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:28"
+    },
+    {
+      "ID": 537123,
+      "Title": "Battle Addict - Sootopolis",
+      "Description": "Defeat every trainer in Sootopolis gym",
+      "Points": 10,
+      "DisplayOrder": 1799,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:28"
+    },
+    {
+      "ID": 27603,
+      "Title": "Dandy Charm",
+      "Description": "Defeat Juan to earn the Rain Badge",
+      "Points": 10,
+      "DisplayOrder": 1800,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:28"
+    },
+    {
+      "ID": 537135,
+      "Title": "Dragon Charity",
+      "Description": "Trade a Bagon for a Horsea in Pacifidlog Town",
+      "Points": 4,
+      "DisplayOrder": 1801,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:29"
+    },
+    {
+      "ID": 537224,
+      "Title": "Ferocious Fiend",
+      "Description": "Receive the TM21 Frustration by showing a wild and untamable Pokémon to a man in Pacifidlog Town",
+      "Points": 3,
+      "DisplayOrder": 1802,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:29"
+    },
+    {
+      "ID": 537225,
+      "Title": "Ün Ün Ün",
+      "Description": "Unlock the Sealed Chamber",
+      "Points": 5,
+      "DisplayOrder": 1803,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:29"
+    },
+    {
+      "ID": 27621,
+      "Title": "Rock Solid Golem",
+      "Description": "Catch Regirock in the Desert Ruins",
+      "Points": 10,
+      "DisplayOrder": 1804,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:29"
+    },
+    {
+      "ID": 27622,
+      "Title": "Crystal Clear Golem",
+      "Description": "Catch Regice in the Island Cave",
+      "Points": 10,
+      "DisplayOrder": 1805,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:30"
+    },
+    {
+      "ID": 27623,
+      "Title": "Advanced Alloy Golem",
+      "Description": "Catch Registeel in the Ancient Tomb",
+      "Points": 10,
+      "DisplayOrder": 1806,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:30"
+    },
+    {
+      "ID": 27620,
+      "Title": "Sky-High Peacemaker",
+      "Description": "Catch Rayquaza at the top of the Sky Pillar",
+      "Points": 10,
+      "DisplayOrder": 1807,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:31"
+    },
+    {
+      "ID": 537197,
+      "Title": "Teacher's Pet",
+      "Description": "Meet Scott on every possible occasion during your adventure",
+      "Points": 10,
+      "DisplayOrder": 1808,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:31"
+    },
+    {
+      "ID": 27610,
+      "Title": "Zero to Hero",
+      "Description": "Defeat Wally on Victory Road",
+      "Points": 5,
+      "DisplayOrder": 1809,
+      "type": "progression",
+      "DateModified": "2025-09-23 08:36:32"
+    },
+    {
+      "ID": 27615,
+      "Title": "League Champion",
+      "Description": "Defeat the current champion and become the Pokémon League Champion",
+      "Points": 25,
+      "DisplayOrder": 1900,
+      "type": "win_condition",
+      "DateModified": "2025-09-23 08:36:32"
+    },
+    {
+      "ID": 30885,
+      "Title": "Flying Through the Eons",
+      "Description": "Catch either Latias or Latios",
+      "Points": 25,
+      "DisplayOrder": 1901,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:32"
+    },
+    {
+      "ID": 27618,
+      "Title": "Continental Drought",
+      "Description": "Catch Groudon in Terra Cave",
+      "Points": 10,
+      "DisplayOrder": 1902,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:32"
+    },
+    {
+      "ID": 27619,
+      "Title": "Endless Sea Basin",
+      "Description": "Catch Kyogre in Marine Cave",
+      "Points": 10,
+      "DisplayOrder": 1903,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:33"
+    },
+    {
+      "ID": 57268,
+      "Title": "Fossil Enthusiast",
+      "Description": "Acquire another fossil from the Fossil Maniac's Cave",
+      "Points": 2,
+      "DisplayOrder": 1904,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:33"
+    },
+    {
+      "ID": 537132,
+      "Title": "Introduction to Mineralogy",
+      "Description": "Receive a Beldum at Steven's House in Mossdeep City",
+      "Points": 2,
+      "DisplayOrder": 1905,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:33"
+    },
+    {
+      "ID": 537228,
+      "Title": "Sale Season",
+      "Description": "Buy something worth at least 3,000 pokés at the clearance sale at the top of Lilycove Department Store",
+      "Points": 5,
+      "DisplayOrder": 1906,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:33"
+    },
+    {
+      "ID": 537229,
+      "Title": "Go Big or Go Home",
+      "Description": "Win big at the Mauville Game corner during a special day, as seen on TV",
+      "Points": 5,
+      "DisplayOrder": 1907,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:34"
+    },
+    {
+      "ID": 537231,
+      "Title": "Smoothest Blocks You Will Ever See",
+      "Description": "Make Pokéblocks with the Blend Master",
+      "Points": 5,
+      "DisplayOrder": 1908,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:34"
+    },
+    {
+      "ID": 537230,
+      "Title": "Breaking News!",
+      "Description": "Defeat Reporters Gabby & Ty at their strongest",
+      "Points": 5,
+      "DisplayOrder": 1909,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:34"
+    },
+    {
+      "ID": 537235,
+      "Title": "A Berry Special Gift",
+      "Description": "Receive 4 unique berries from the Berry Master's wife by impressing her with your words",
+      "Points": 4,
+      "DisplayOrder": 1910,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:35"
+    },
+    {
+      "ID": 537236,
+      "Title": "Thank You Berry Much",
+      "Description": "Receive every daily berry gift",
+      "Points": 5,
+      "DisplayOrder": 1911,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:36"
+    },
+    {
+      "ID": 537234,
+      "Title": "Got the Schmoves",
+      "Description": "Learn new moves from all of the one-time move tutors in Hoenn",
+      "Points": 10,
+      "DisplayOrder": 1912,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:36"
+    },
+    {
+      "ID": 537198,
+      "Title": "Reward by Reputation",
+      "Description": "Be rewarded 4BP by Scott at Battle Frontier",
+      "Points": 5,
+      "DisplayOrder": 1913,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:36"
+    },
+    {
+      "ID": 537136,
+      "Title": "Cat Exchange Program",
+      "Description": "Trade a Skitty for a Meowth at the Battle Frontier",
+      "Points": 4,
+      "DisplayOrder": 1914,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:36"
+    },
+    {
+      "ID": 537199,
+      "Title": "It Moved!",
+      "Description": "Catch the weird tree at the Battle Frontier",
+      "Points": 3,
+      "DisplayOrder": 1915,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:37"
+    },
+    {
+      "ID": 537227,
+      "Title": "The House Always Wins",
+      "Description": "Bet 15BP on yourself with a man in a building south of Battle Pyramid and win",
+      "Points": 10,
+      "DisplayOrder": 1916,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:37"
+    },
+    {
+      "ID": 537237,
+      "Title": "Wax On, Wax Off",
+      "Description": "Finish training an apprentice",
+      "Points": 10,
+      "DisplayOrder": 1917,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:37"
+    },
+    {
+      "ID": 537238,
+      "Title": "Not Ready for Sensei",
+      "Description": "Defeat your apprentice at the Battle Tower",
+      "Points": 5,
+      "DisplayOrder": 1918,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:37"
+    },
+    {
+      "ID": 537239,
+      "Title": "Extra Training",
+      "Description": "Team up with your apprentice at the Battle Tower",
+      "Points": 5,
+      "DisplayOrder": 1919,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:38"
+    },
+    {
+      "ID": 57297,
+      "Title": "Test of Ability",
+      "Description": "Defeat Salon Maiden Anabel to earn the Silver Ability Symbol",
+      "Points": 10,
+      "DisplayOrder": 1920,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:39"
+    },
+    {
+      "ID": 57298,
+      "Title": "Ultimate Test of Ability",
+      "Description": "Rematch and defeat Salon Maiden Anabel to earn the Gold Ability Symbol",
+      "Points": 50,
+      "DisplayOrder": 1921,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:40"
+    },
+    {
+      "ID": 57285,
+      "Title": "Test of Tactics",
+      "Description": "Defeat Dome Superstar Tucker to earn the Silver Tactics Symbol",
+      "Points": 10,
+      "DisplayOrder": 1922,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:40"
+    },
+    {
+      "ID": 57286,
+      "Title": "Ultimate Test of Tactics",
+      "Description": "Rematch and defeat Dome Ace Tucker to earn the Gold Tactics Symbol",
+      "Points": 50,
+      "DisplayOrder": 1923,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:40"
+    },
+    {
+      "ID": 57293,
+      "Title": "Test of Spirit",
+      "Description": "Defeat Palace Maven Spenser to earn the Silver Spirits Symbol",
+      "Points": 10,
+      "DisplayOrder": 1924,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:40"
+    },
+    {
+      "ID": 57294,
+      "Title": "Ultimate Test of Spirit",
+      "Description": "Rematch and defeat Palace Maven Spenser to earn the Gold Spirits Symbol",
+      "Points": 50,
+      "DisplayOrder": 1925,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:41"
+    },
+    {
+      "ID": 57289,
+      "Title": "Test of Guts",
+      "Description": "Defeat Arena Tycoon Greta to earn the Silver Guts Symbol",
+      "Points": 10,
+      "DisplayOrder": 1926,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:41"
+    },
+    {
+      "ID": 57290,
+      "Title": "Ultimate Test of Guts",
+      "Description": "Rematch and defeat Arena Tycoon Greta to earn the Gold Guts Symbol",
+      "Points": 50,
+      "DisplayOrder": 1927,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:41"
+    },
+    {
+      "ID": 57291,
+      "Title": "Test of Knowledge",
+      "Description": "Defeat Factory Head Noland to earn the Silver Knowledge Symbol",
+      "Points": 10,
+      "DisplayOrder": 1928,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:41"
+    },
+    {
+      "ID": 57292,
+      "Title": "Ultimate Test of Knowledge",
+      "Description": "Rematch and defeat Factory Head Noland to earn the Gold Knowledge Symbol",
+      "Points": 50,
+      "DisplayOrder": 1929,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:41"
+    },
+    {
+      "ID": 57287,
+      "Title": "Test of Luck",
+      "Description": "Defeat Pike Queen Lucy to earn the Silver Luck Symbol",
+      "Points": 10,
+      "DisplayOrder": 1930,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:42"
+    },
+    {
+      "ID": 57288,
+      "Title": "Ultimate Test of Luck",
+      "Description": "Rematch and defeat Pike Queen Lucy to earn the Gold Luck Symbol",
+      "Points": 50,
+      "DisplayOrder": 1931,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:42"
+    },
+    {
+      "ID": 57295,
+      "Title": "Test of Bravery",
+      "Description": "Defeat Pyramid King Brandon to earn the Silver Brave Symbol",
+      "Points": 10,
+      "DisplayOrder": 1932,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:42"
+    },
+    {
+      "ID": 57296,
+      "Title": "Ultimate Test of Bravery",
+      "Description": "Rematch and defeat Pyramid King Brandon to earn the Gold Brave Symbol",
+      "Points": 50,
+      "DisplayOrder": 1933,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:42"
+    },
+    {
+      "ID": 537240,
+      "Title": "Scott RetroAchievements",
+      "Description": "Receive every reward from Scott",
+      "Points": 25,
+      "DisplayOrder": 1934,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:43"
+    },
+    {
+      "ID": 27617,
+      "Title": "Ultimate Trainer",
+      "Description": "Defeat Steven Stone at the Meteor Falls",
+      "Points": 25,
+      "DisplayOrder": 1935,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:43"
+    },
+    {
+      "ID": 57275,
+      "Title": "Gotta Catch 'Em All",
+      "Description": "Obtain all 212 available Pokémon in the game",
+      "Points": 50,
+      "DisplayOrder": 1936,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:43"
+    },
+    {
+      "ID": 537241,
+      "Title": "Trick Master Is Fabulous",
+      "Description": "Defeat every trainer and find every item in the first Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2000,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:44"
+    },
+    {
+      "ID": 537242,
+      "Title": "Trick Master Is Smart",
+      "Description": "Defeat every trainer and find every item in the second Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2001,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:44"
+    },
+    {
+      "ID": 537243,
+      "Title": "Trick Master Is Coveted",
+      "Description": "Defeat every trainer and find every item in the third Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2002,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:44"
+    },
+    {
+      "ID": 537244,
+      "Title": "Trick Master Is Cool",
+      "Description": "Defeat every trainer and find every item in the fourth Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2003,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:46"
+    },
+    {
+      "ID": 537245,
+      "Title": "Trick Master Is My Life",
+      "Description": "Defeat every trainer and find every item in the sixth Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2004,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:46"
+    },
+    {
+      "ID": 537246,
+      "Title": "Trick Master Is Huggable",
+      "Description": "Defeat every trainer and find every item in the seventh Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2005,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:46"
+    },
+    {
+      "ID": 537247,
+      "Title": "Trick Master I Love",
+      "Description": "Defeat every trainer and find every item in the eighth Trick House puzzle",
+      "Points": 3,
+      "DisplayOrder": 2006,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:46"
+    },
+    {
+      "ID": 57269,
+      "Title": "A New Trick Master Is Born",
+      "Description": "Clear every puzzle in the Trick House and obtain every reward",
+      "Points": 25,
+      "DisplayOrder": 2007,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:46"
+    },
+    {
+      "ID": 537248,
+      "Title": "Nugget of Wisdom",
+      "Description": "Get the hidden nugget left behind the Trick Master after his last puzzle. It's not... is it?",
+      "Points": 1,
+      "DisplayOrder": 2008,
+      "type": "missable",
+      "DateModified": "2025-09-23 08:36:47"
+    },
+    {
+      "ID": 57276,
+      "Title": "Normal Team Games",
+      "Description": "Finish a Normal Tag Match in Trainer Hill",
+      "Points": 10,
+      "DisplayOrder": 2010,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:47"
+    },
+    {
+      "ID": 57277,
+      "Title": "Wide Variety of Opponents",
+      "Description": "Finish a Variety Tag Match in Trainer Hill",
+      "Points": 10,
+      "DisplayOrder": 2011,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:47"
+    },
+    {
+      "ID": 57278,
+      "Title": "Unique Challenge",
+      "Description": "Finish a Unique Tag Match in Trainer Hill",
+      "Points": 10,
+      "DisplayOrder": 2012,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:47"
+    },
+    {
+      "ID": 57279,
+      "Title": "Taking On Experts",
+      "Description": "Finish an Expert Tag Match in Trainer Hill",
+      "Points": 10,
+      "DisplayOrder": 2013,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:48"
+    },
+    {
+      "ID": 57280,
+      "Title": "Coolest of the Bunch",
+      "Description": "Win a Master Rank Coolness Contest",
+      "Points": 25,
+      "DisplayOrder": 2020,
+      "type": null,
+      "DateModified": "2025-10-09 13:53:01"
+    },
+    {
+      "ID": 57281,
+      "Title": "Mirror Mirror",
+      "Description": "Win a Master Rank Beauty Contest",
+      "Points": 25,
+      "DisplayOrder": 2021,
+      "type": null,
+      "DateModified": "2025-10-09 13:53:01"
+    },
+    {
+      "ID": 57282,
+      "Title": "So Kawaii",
+      "Description": "Win a Master Rank Cuteness Contest",
+      "Points": 25,
+      "DisplayOrder": 2022,
+      "type": null,
+      "DateModified": "2025-10-09 13:53:01"
+    },
+    {
+      "ID": 57283,
+      "Title": "Sharpest Tool in the Shed",
+      "Description": "Win a Master Rank Smartness Contest",
+      "Points": 25,
+      "DisplayOrder": 2023,
+      "type": null,
+      "DateModified": "2025-10-09 13:53:02"
+    },
+    {
+      "ID": 57284,
+      "Title": "Intimidating, Right?",
+      "Description": "Win a Master Rank Toughness Contest",
+      "Points": 25,
+      "DisplayOrder": 2024,
+      "type": null,
+      "DateModified": "2025-10-09 13:53:02"
+    },
+    {
+      "ID": 537232,
+      "Title": "A Rainbow of Possibilities",
+      "Description": "Receive every color scarf for showing remarkable Pokémon to the president of the Pokémon Fan Club",
+      "Points": 25,
+      "DisplayOrder": 2025,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:48"
+    },
+    {
+      "ID": 537221,
+      "Title": "Oeuvre D'Art",
+      "Description": "Receive a Glass Ornament for filling up the Lilycove Museum's new exposition with breathtaking paintings",
+      "Points": 25,
+      "DisplayOrder": 2026,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:49"
+    },
+    {
+      "ID": 537152,
+      "Title": "Melodies of the Ashen One",
+      "Description": "Obtain and own every flute by trading soot for them on Route 113",
+      "Points": 10,
+      "DisplayOrder": 2030,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:50"
+    },
+    {
+      "ID": 537125,
+      "Title": "Gifted Kid",
+      "Description": "Receive every common item gift from NPCs",
+      "Points": 10,
+      "DisplayOrder": 2031,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:50"
+    },
+    {
+      "ID": 537137,
+      "Title": "Eagle Eye",
+      "Description": "Discover every camouflaged Pokémon in Hoenn",
+      "Points": 10,
+      "DisplayOrder": 2032,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:50"
+    },
+    {
+      "ID": 537138,
+      "Title": "Electrifying!",
+      "Description": "Breed and hatch a Pichu that knows Volt Tackle",
+      "Points": 10,
+      "DisplayOrder": 2033,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:51"
+    },
+    {
+      "ID": 537450,
+      "Title": "Iai Mon",
+      "Description": "Clear a 5x5 square of grass with one usage of Cut",
+      "Points": 4,
+      "DisplayOrder": 2034,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:51"
+    },
+    {
+      "ID": 537249,
+      "Title": "Martial Arts Have Shortcuts",
+      "Description": "Steal a Black Belt from Black Belt Nob from his 4th rematch onwards",
+      "Points": 5,
+      "DisplayOrder": 2035,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:51"
+    },
+    {
+      "ID": 537250,
+      "Title": "Get Buggy with It",
+      "Description": "Steal a Silver Powder from Bug Maniac Jeffrey from his 4th rematch onwards",
+      "Points": 5,
+      "DisplayOrder": 2036,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:51"
+    },
+    {
+      "ID": 537251,
+      "Title": "Three More for My Greatsword",
+      "Description": "Steal a Dragon Fang from Dragon Tamer Nicolas from his 4th rematch onwards",
+      "Points": 5,
+      "DisplayOrder": 2037,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:51"
+    },
+    {
+      "ID": 57266,
+      "Title": "Home Away From Home",
+      "Description": "Fully furnish your Secret Base",
+      "Points": 5,
+      "DisplayOrder": 2040,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:52"
+    },
+    {
+      "ID": 537124,
+      "Title": "No Place like Home",
+      "Description": "Fully furnish your room in Littleroot Town",
+      "Points": 5,
+      "DisplayOrder": 2041,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:52"
+    },
+    {
+      "ID": 537148,
+      "Title": "Furniture Collector",
+      "Description": "Collect every desk, chair and plant for your secret base",
+      "Points": 50,
+      "DisplayOrder": 2042,
+      "type": null,
+      "DateModified": "2025-11-15 14:47:10"
+    },
+    {
+      "ID": 537149,
+      "Title": "Fun Collector",
+      "Description": "Collect every ornament and poster for your secret base, except the color tent you didn't choose at the Trick House",
+      "Points": 25,
+      "DisplayOrder": 2043,
+      "type": null,
+      "DateModified": "2025-11-15 14:47:10"
+    },
+    {
+      "ID": 537150,
+      "Title": "Comfort Collector",
+      "Description": "Collect every cushion and mat for your secret base",
+      "Points": 10,
+      "DisplayOrder": 2044,
+      "type": null,
+      "DateModified": "2025-11-15 14:47:10"
+    },
+    {
+      "ID": 537151,
+      "Title": "FREN Collector",
+      "Description": "Collect every doll for your secret base, excluding Seedot, Regirock, Regice, and Registeel",
+      "Points": 50,
+      "DisplayOrder": 2045,
+      "type": null,
+      "DateModified": "2025-11-15 14:47:11"
+    },
+    {
+      "ID": 537139,
+      "Title": "Exponential Potential",
+      "Description": "Defeat Wally's strongest team",
+      "Points": 10,
+      "DisplayOrder": 2050,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:54"
+    },
+    {
+      "ID": 537140,
+      "Title": "A Lesson in Battles",
+      "Description": "Defeat Roxanne's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2051,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:54"
+    },
+    {
+      "ID": 537141,
+      "Title": "Beach Brawl",
+      "Description": "Defeat Brawly's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2052,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:54"
+    },
+    {
+      "ID": 537142,
+      "Title": "Ten Thousand Watts Battle",
+      "Description": "Defeat Wattson's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2053,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:55"
+    },
+    {
+      "ID": 537143,
+      "Title": "This Fire Is Out of Control",
+      "Description": "Defeat Flannery's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2054,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:55"
+    },
+    {
+      "ID": 537144,
+      "Title": "Beating Up Your Dad Is Perfectly Normal",
+      "Description": "Defeat Norman's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2055,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:55"
+    },
+    {
+      "ID": 537145,
+      "Title": "Soar the Skies",
+      "Description": "Defeat Winona's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2056,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:55"
+    },
+    {
+      "ID": 537146,
+      "Title": "Otherworldly Bond",
+      "Description": "Defeat Tate and Liza's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2057,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:56"
+    },
+    {
+      "ID": 537147,
+      "Title": "Don Juan",
+      "Description": "Defeat Juan's strongest team",
+      "Points": 25,
+      "DisplayOrder": 2058,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:57"
+    },
+    {
+      "ID": 537167,
+      "Title": "Little Trainer Big World - Items",
+      "Description": "Find every item and hidden item in Littleroot Town, Route 101, Oldale Town, Route 103 and Route 102",
+      "Points": 10,
+      "DisplayOrder": 3000,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:57"
+    },
+    {
+      "ID": 537153,
+      "Title": "Little Trainer Big World - Trainers",
+      "Description": "Defeat every trainer in Littleroot Town, Route 101, Oldale Town, Route 103 and Route 102",
+      "Points": 10,
+      "DisplayOrder": 3001,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:57"
+    },
+    {
+      "ID": 537168,
+      "Title": "Petals to the Wind - Items",
+      "Description": "Find every item and hidden item in Petalburg City, Route 104, Route 105 and Petalburg Woods",
+      "Points": 10,
+      "DisplayOrder": 3010,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:58"
+    },
+    {
+      "ID": 537154,
+      "Title": "Petals to the Wind - Trainers",
+      "Description": "Defeat every trainer in Petalburg City, Route 104, Route 105 and Petalburg Woods",
+      "Points": 10,
+      "DisplayOrder": 3011,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:58"
+    },
+    {
+      "ID": 537169,
+      "Title": "Learning to Strive - Items",
+      "Description": "Find every item and hidden item in Rustboro City, Route 115, Route 116 and Rusturf Tunnel",
+      "Points": 10,
+      "DisplayOrder": 3020,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:58"
+    },
+    {
+      "ID": 537155,
+      "Title": "Learning to Strive - Trainers",
+      "Description": "Defeat every trainer in Rustboro City, Route 115, Route 116 and Rusturf Tunnel",
+      "Points": 10,
+      "DisplayOrder": 3021,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:58"
+    },
+    {
+      "ID": 537170,
+      "Title": "Surfing Shores - Items",
+      "Description": "Find every item and hidden item in Dewford Town, Granite Cave, Route 106, Route 107, Route 108 and the Abandoned Ship",
+      "Points": 10,
+      "DisplayOrder": 3030,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:59"
+    },
+    {
+      "ID": 537156,
+      "Title": "Surfing Shores - Trainers",
+      "Description": "Defeat every trainer in Dewford Town, Granite Cave, Route 106, Route 107, Route 108 and the Abandoned Ship",
+      "Points": 10,
+      "DisplayOrder": 3031,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:59"
+    },
+    {
+      "ID": 537171,
+      "Title": "By Ship and by Bike - Items",
+      "Description": "Find every item and hidden item in Slateport City, Route 109 and Route 110",
+      "Points": 10,
+      "DisplayOrder": 3040,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:59"
+    },
+    {
+      "ID": 537157,
+      "Title": "By Ship and by Bike - Trainers",
+      "Description": "Defeat every trainer in Slateport City, Route 109 and Route 110",
+      "Points": 10,
+      "DisplayOrder": 3041,
+      "type": null,
+      "DateModified": "2025-09-23 08:36:59"
+    },
+    {
+      "ID": 537172,
+      "Title": "Hoenn Meridian - Items",
+      "Description": "Find every item and hidden item in Mauville City, Verdanturf Town, Route 117, Route 118 and New Mauville",
+      "Points": 10,
+      "DisplayOrder": 3050,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:00"
+    },
+    {
+      "ID": 537158,
+      "Title": "Hoenn Meridian - Trainers",
+      "Description": "Defeat every trainer in Mauville City, Verdanturf Town, Route 117, Route 118 and New Mauville",
+      "Points": 10,
+      "DisplayOrder": 3051,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:01"
+    },
+    {
+      "ID": 537173,
+      "Title": "Hot, Hotter, Hottest - Items",
+      "Description": "Find every item and hidden item in Lavaridge Town, Route 111, Route 112, Fiery Path, Mt. Chimney and Jagged Pass",
+      "Points": 10,
+      "DisplayOrder": 3060,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:01"
+    },
+    {
+      "ID": 537159,
+      "Title": "Hot, Hotter, Hottest - Trainer",
+      "Description": "Defeat every trainer in Lavaridge Town, Route 111, Route 112, Fiery Path, Mt. Chimney and Jagged Pass",
+      "Points": 10,
+      "DisplayOrder": 3061,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:01"
+    },
+    {
+      "ID": 537174,
+      "Title": "Cinder Path - Items",
+      "Description": "Find every item and hidden item in Fallarbor Town, Route 113, Route 114 and Meteor Falls",
+      "Points": 10,
+      "DisplayOrder": 3070,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:01"
+    },
+    {
+      "ID": 537160,
+      "Title": "Cinder Path - Trainers",
+      "Description": "Defeat every trainer in Fallarbor Town, Route 113, Route 114 and Meteor Falls",
+      "Points": 10,
+      "DisplayOrder": 3071,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:02"
+    },
+    {
+      "ID": 537175,
+      "Title": "Welcome to the Jungle - Items",
+      "Description": "Find every item and hidden item in Fortree City, Route 119, Route 120, Scorched Slab and Route 121",
+      "Points": 10,
+      "DisplayOrder": 3080,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:02"
+    },
+    {
+      "ID": 537161,
+      "Title": "Welcome to the Jungle - Trainers",
+      "Description": "Defeat every trainer in Fortree City, Route 119, Route 120, Scorched Slab and Route 121",
+      "Points": 10,
+      "DisplayOrder": 3081,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:02"
+    },
+    {
+      "ID": 537176,
+      "Title": "Finisterre - Items",
+      "Description": "Find every item and hidden item in Lilycove City, Safari Zone, Route 122, Mt. Pyre and Route 123",
+      "Points": 10,
+      "DisplayOrder": 3090,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:02"
+    },
+    {
+      "ID": 537162,
+      "Title": "Finisterre - Trainers",
+      "Description": "Defeat every trainer in Lilycove City, Safari Zone, Route 122, Mt. Pyre and Route 123",
+      "Points": 10,
+      "DisplayOrder": 3091,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:03"
+    },
+    {
+      "ID": 537177,
+      "Title": "Too Much Water - Items",
+      "Description": "Find every item and hidden item in Mossdeep City, Route 124, Route 125 and Shoal Cave",
+      "Points": 10,
+      "DisplayOrder": 3100,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:03"
+    },
+    {
+      "ID": 537163,
+      "Title": "Too Much Water - Trainers",
+      "Description": "Defeat every trainer in Mossdeep City, Route 124, Route 125 and Shoal Cave",
+      "Points": 10,
+      "DisplayOrder": 3101,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:03"
+    },
+    {
+      "ID": 537178,
+      "Title": "Diving Expedition - Items",
+      "Description": "Find every item and hidden item in Sootopolis City, Route 126 and Route 127",
+      "Points": 10,
+      "DisplayOrder": 3110,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:05"
+    },
+    {
+      "ID": 537164,
+      "Title": "Diving Expedition - Trainers",
+      "Description": "Defeat every trainer in Sootopolis City, Route 126 and Route 127",
+      "Points": 10,
+      "DisplayOrder": 3111,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:05"
+    },
+    {
+      "ID": 537179,
+      "Title": "End of the Line - Items",
+      "Description": "Find every item and hidden item in Ever Grande City, Route 128, Route 129 and Victory Road",
+      "Points": 10,
+      "DisplayOrder": 3120,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:05"
+    },
+    {
+      "ID": 537165,
+      "Title": "End of the Line - Trainers",
+      "Description": "Defeat every trainer in Ever Grande City, Route 128, Route 129 and Victory Road",
+      "Points": 10,
+      "DisplayOrder": 3121,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:06"
+    },
+    {
+      "ID": 537180,
+      "Title": "Southern Currents - Items",
+      "Description": "Find every item and hidden item in Pacifidlog Town, Route 130, Route 131, Route 132, Route 133 and Route 134",
+      "Points": 10,
+      "DisplayOrder": 3130,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:06"
+    },
+    {
+      "ID": 537166,
+      "Title": "Southern Currents - Trainers",
+      "Description": "Defeat every trainer in Pacifidlog Town, Route 130, Route 131, Route 132, Route 133 and Route 134",
+      "Points": 10,
+      "DisplayOrder": 3131,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:06"
+    },
+    {
+      "ID": 537182,
+      "Title": "Beyond the End - Items",
+      "Description": "Find every item and hidden item on the S.S. Tidal and in the Battle Frontier",
+      "Points": 10,
+      "DisplayOrder": 3140,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:06"
+    },
+    {
+      "ID": 537181,
+      "Title": "Beyond the End - Trainers",
+      "Description": "Defeat every trainer on the S.S. Tidal and in the Battle Frontier",
+      "Points": 10,
+      "DisplayOrder": 3141,
+      "type": null,
+      "DateModified": "2025-09-23 08:37:07"
+    }
+  ]
+}

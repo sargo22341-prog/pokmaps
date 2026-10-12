@@ -29,7 +29,7 @@ class GuideRepository @Inject constructor(
         val mentions = GuideMentions(entries, catalog, index)
         val definitions =
             kantoGuides() + johtoGuides() + sideGuides() + tipGuides() + gbaToolGuides() +
-                hoennGuides() + hoennCalendarGuides() + remakeGuides() + achievementGuides()
+                hoennGuides() + hoennCalendarGuides() + remakeGuides() + gbaCollectionGuides() + achievementGuides()
         val selected = definitions.filter { game.versionId in it.versions }
         val articles = selected.map { definition ->
             require(definition.pokemonId in pokemonIds) { "Sprite absent : ${definition.id}" }
@@ -46,11 +46,12 @@ class GuideRepository @Inject constructor(
                 definition.sources,
                 definition.relatedIds + selected.filter { it.chapter == definition.id }.map { it.id },
                 definition.missable,
-                definition.captureIds,
+                definition.captureIds + definition.captureGoal?.species.orEmpty(),
                 definition.achievementId,
                 definition.points,
-                definition.achievementId?.let(CaptureGoals::forAchievement),
-                shiny = definition.shiny
+                definition.captureGoal ?: definition.achievementId?.let(CaptureGoals::forAchievement),
+                shiny = definition.shiny,
+                unownGoal = definition.unownGoal || definition.achievementId in setOf(5091, 5117, 5955)
             )
         }
         GuideLibrary(game, articles)

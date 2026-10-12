@@ -20,7 +20,10 @@ class GuideSettings @Inject constructor(private val dataStore: DataStore<Prefere
             require(games.any { it.versionId == versionId }) { "Version absente de la base : $versionId" }
             val observations = preferences[roamersKey(versionId)].orEmpty().map { value ->
                 val parts = value.split(":", limit = 2)
-                require(parts.size == 2 && parts[0].toIntOrNull() in Roamers.pokemonIds && parts[1] in Roamers.places) {
+                require(
+                    parts.size == 2 && parts[0].toIntOrNull() in Roamers.pokemonIds(versionId) &&
+                        parts[1] in Roamers.places(versionId)
+                ) {
                     "Observation de Pokémon errant invalide : $value"
                 }
                 RoamerObservation(parts[0].toInt(), parts[1])
@@ -42,12 +45,15 @@ class GuideSettings @Inject constructor(private val dataStore: DataStore<Prefere
 
     suspend fun observeRoamer(versionId: Int, pokemonId: Int, place: String?) {
         requireVersion(versionId)
-        require(versionId in 4..6 && pokemonId in Roamers.pokemonIds)
-        require(versionId != 6 || pokemonId != 245)
-        require(place == null || place in Roamers.places)
+        require(pokemonId in Roamers.pokemonIds(versionId))
+        require(place == null || place in Roamers.places(versionId))
         dataStore.edit {
             val key = roamersKey(versionId)
-            val others = it[key].orEmpty().filterNot { value -> value.startsWith("$pokemonId:") }.toSet()
+            val others = if (Roamers.maximumObservations(versionId) == 1 && place != null) {
+                emptySet()
+            } else {
+                it[key].orEmpty().filterNot { value -> value.startsWith("$pokemonId:") }.toSet()
+            }
             it[key] = if (place == null) others else others + "$pokemonId:$place"
         }
     }
