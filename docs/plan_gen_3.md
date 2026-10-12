@@ -739,8 +739,11 @@ reste affichée. Aucun code source modifié : les limites de fonctions et fichie
 
 Communs :
 
-- [ ] Textes dans des fichiers de ressources séparés (`strings.xml` dépasse 3 600 lignes) ; balises
+- [x] Textes dans des fichiers de ressources séparés (`strings.xml` dépasse 3 600 lignes) ; balises
       `[[pokemon:…]]`, `[[place:…]]` validées par `GuideRepositoryTest` (qui charge alors 11 bibliothèques).
+      Les 853 ressources des guides et succès existants sont déplacées dans `strings_guides.xml` et
+      `strings_achievements.xml`. Hoenn, son calendrier et les remakes ont chacun leur fichier dédié.
+      Les textes existants sont conservés ; seule la description de l’Agenda est élargie aux horloges des jeux.
 - [x] Sources éditoriales dans `GuideDefinition.kt` : remplacer `KANTO_VERSIONS`/`JOHTO_VERSIONS` par des
       ensembles nommés par jeu.
       Ensembles Rouge/Bleu/Jaune, Or/Argent/Cristal, Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille ;
@@ -762,9 +765,13 @@ Communs :
 
 Branche Hoenn :
 
-- [ ] Soluces originales de Hoenn (avec les différences d'Émeraude), quêtes annexes, astuces, bugs et glitches.
-- [ ] Événements quotidiens (Île Mirage, marées, loterie, Maison Piège) à la place des événements
+- [x] Soluces originales de Hoenn (avec les différences d'Émeraude), quêtes annexes, astuces, bugs et glitches.
+      Douze chapitres, du choix du partenaire à l’après-Ligue ; différences de teams, d’Arènes, de légendaires
+      et de National. Articles distincts pour les Regis, fossiles et détours, préparation et défauts du moteur.
+- [x] Événements quotidiens (Île Mirage, marées, loterie, Maison Piège) à la place des événements
       hebdomadaires de Johto.
+      Quatre articles d’Agenda : Île Mirage, marées, loterie et horloge. La Maison Piège est une quête annexe :
+      ses huit défis suivent les badges et le Panthéon, pas les jours. Aucun tirage de sauvegarde n’est simulé.
 - [ ] `CaptureGoals` : Pokédex de Hoenn, choix exclusifs (starter, fossiles Lilia/Anorith, Kecleon…).
 - [x] Pierre Stase (Émeraude) dans la reproduction.
       Objet tenu sélectionnable ; effet réservé à la femelle ou à Métamorph, prioritaire s’il est présent.
@@ -773,7 +780,9 @@ Branche Hoenn :
 
 Branche Remake 1G :
 
-- [ ] Soluces originales de Kanto de Rouge Feu/Vert Feuille et des Îles Sevii, quêtes annexes, astuces, bugs.
+- [x] Soluces originales de Kanto de Rouge Feu/Vert Feuille et des Îles Sevii, quêtes annexes, astuces, bugs.
+      Douze chapitres jusqu’au Saphir de Ciléo ; articles sur les légendaires, collections de Zarbi et fossiles,
+      Cherche VS et tuteurs, défauts des IV des errants et disparition après Hurlement dans les jeux GBA.
 - [ ] `CaptureGoals` : Pokédex de Kanto puis National, choix exclusifs (starter, fossiles, Kicklee/Tygnon…).
 
 Première passe de phase 7 (12 octobre 2026) : quatre tâches terminées, avec deux articles d’outils GBA
@@ -786,6 +795,22 @@ Les erreurs initiales de style, de disposition des composants dans les tests et 
 L’accès au cache Gradle a nécessité une relance autorisée ; un verrou Windows entre deux contrôles a nécessité
 l’arrêt du précédent lancement puis une relance seule. La dépréciation AGP déjà documentée reste affichée.
 Les règles sont relues dans les sources pret locales épinglées ; leur lecture web était indisponible.
+
+Deuxième passe de phase 7 (12 octobre 2026) : quatre tâches terminées. Chaque bibliothèque de Hoenn
+contient 24 articles, chaque remake 18, dont douze chapitres de soluce par branche. Les textes sont originaux,
+avec sources pret épinglées et références sur les glitches dans les définitions ; les liens de Pokémon et lieux
+sont validés contre les onze jeux distribués. Les 519 succès des six anciens jeux sont conservés ;
+les succès GBA, objectifs de capture et réglages des errants restent dans les cases ouvertes ci-dessus.
+
+Contrôles Android complets réussis : ktlint, absence de services Google, Lint, 363 tests JVM sans échec
+et APK debug. `GuideRepositoryTest` vérifie les catégories, les douze chapitres, les liens et la séparation
+des branches ; il contrôle aussi le classement de la Maison Piège et l’errant associé à chaque starter.
+Validation des assets, contrôle XML des ressources déplacées, limites du code et relecture du diff réussis.
+APK : 102 891 274 octets (98,12 Mio) ; cartes : 41 841 493 octets (39,90 Mio) ; objets Git : 55 629 Kio.
+Aucune génération ni modification du pipeline Python ; Ruff, pytest et essais sur téléphone non lancés.
+Le premier lancement Gradle était bloqué par l’accès au cache ; la relance autorisée a fonctionné.
+Les erreurs initiales de style et deux faux positifs anglais de Lint sur les textes français sont corrigés,
+sans exclusion. La dépréciation AGP `Configuration.setVisible(boolean)` déjà documentée reste affichée.
 
 ## Phase 8 — Contenus propres à Hoenn : baies, concours, Pokéblocs, décorations
 

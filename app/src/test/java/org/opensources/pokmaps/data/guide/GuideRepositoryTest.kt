@@ -33,9 +33,7 @@ class GuideRepositoryTest {
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
                 if (game.generationId == 3) {
-                    // Les soluces et succès GBA restent séparés de cette première passe des outils.
-                    assertEquals(setOf("breeding", "friendship"), library.articles.map { it.id }.toSet())
-                    assertTrue(library.articles.all { it.paragraphs.isNotEmpty() && it.sources.isNotEmpty() })
+                    checkGbaArticles(library)
                     checkFruitSprites(context, maps.catalog(game), game)
                     continue
                 }
@@ -57,6 +55,33 @@ class GuideRepositoryTest {
             }
         } finally {
             database.close()
+        }
+    }
+
+    private fun checkGbaArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {
+        val articles = library.articles
+        val hoenn = library.game.versionId in 7..9
+        val prefix = if (hoenn) "hoenn-" else "remake-"
+        assertEquals(if (hoenn) 24 else 18, articles.size)
+        assertEquals(articles.size, articles.map { it.id }.distinct().size)
+        assertTrue(articles.all { it.id in setOf("breeding", "friendship") || it.id.startsWith(prefix) })
+        assertTrue(articles.all { it.paragraphs.size >= 3 && it.sources.isNotEmpty() && it.title.isNotBlank() })
+        assertEquals(12, articles.count { it.category == GuideCategory.WALKTHROUGH })
+        assertTrue(articles.none { it.category == GuideCategory.ACHIEVEMENT })
+        val expected = GuideCategory.entries.toSet() - GuideCategory.ACHIEVEMENT -
+            if (hoenn) emptySet() else setOf(GuideCategory.CALENDAR)
+        assertEquals(expected, articles.map { it.category }.toSet())
+        val targets = articles.flatMap { it.paragraphs.flatten() }.mapNotNull { it.target }
+        assertTrue(targets.any { it is GuideTarget.Pokemon })
+        assertTrue(targets.any { it is GuideTarget.Place })
+        if (hoenn) {
+            assertEquals(4, articles.count { it.category == GuideCategory.CALENDAR })
+            assertEquals(GuideCategory.SIDE_QUEST, articles.single { it.id == "hoenn-trick-house" }.category)
+            assertTrue(articles.single { it.id == "hoenn-tides" }.summary.contains("9 h à 14 h 59"))
+        } else {
+            assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Entei avec Bulbizarre"))
+            assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Raikou avec Carapuce"))
+            assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Suicune avec Salamèche"))
         }
     }
 

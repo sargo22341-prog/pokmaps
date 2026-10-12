@@ -1,0 +1,2259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ra_108020_title">
+        Échantillon gratuit
+    </string>
+    <string name="ra_108020_text">
+        Recevoir l’échantillon gratuit de la Boutique Pokémon de Jadielle.
+    </string>
+    <string name="ra_108021_title">
+        Carte de Kanto
+    </string>
+    <string name="ra_108021_text">
+        Obtenir la carte de la région de Kanto.
+    </string>
+    <string name="ra_108022_title">
+        Première page
+    </string>
+    <string name="ra_108022_text">
+        Obtenir le Pokédex.
+    </string>
+    <string name="ra_108023_title">
+        Cadeau de départ
+    </string>
+    <string name="ra_108023_text">
+        Recevoir cinq Poké Balls du Professeur Chen.
+    </string>
+    <string name="ra_108024_title">
+        Forêt nettoyée
+    </string>
+    <string name="ra_108024_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Forêt de Jade.
+    </string>
+    <string name="ra_108026_title">
+        Promenade tranquille
+    </string>
+    <string name="ra_108026_text">
+        Traverser la Forêt de Jade d’une entrée à l’autre sans rencontre sauvage, sans recommencer, sans
+        Repousse et sans Coupe.
+    </string>
+    <string name="ra_4401_title">
+        Badge Roche
+    </string>
+    <string name="ra_4401_text">
+        Vaincre Pierre et obtenir le Badge Roche.
+    </string>
+    <string name="ra_108058_title">
+        Pierre : défi niveau 14
+    </string>
+    <string name="ra_108058_text">
+        Vaincre Pierre en mode Défini, au niveau 14 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_4414_title">
+        Un seul fossile
+    </string>
+    <string name="ra_4414_text">
+        Choisir le Fossile Nautile ou le Fossile Dôme à la fin du Mont Sélénite.
+    </string>
+    <string name="ra_108025_title">
+        Exploration lunaire
+    </string>
+    <string name="ra_108025_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs du Mont Sélénite.
+    </string>
+    <string name="ra_4402_title">
+        Badge Cascade
+    </string>
+    <string name="ra_4402_text">
+        Vaincre Ondine et obtenir le Badge Cascade.
+    </string>
+    <string name="ra_108059_title">
+        Ondine : défi niveau 21
+    </string>
+    <string name="ra_108059_text">
+        Vaincre Ondine en mode Défini, au niveau 21 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_108138_title">
+        Géant endormi
+    </string>
+    <string name="ra_108138_text">
+        Écouter l’histoire du Pokémon légendaire qui dort beaucoup.
+    </string>
+    <string name="ra_108030_title">
+        Service au capitaine
+    </string>
+    <string name="ra_108030_text">
+        Soulager le capitaine de l’Océane en lui frottant le dos et recevoir la CS01 Coupe.
+    </string>
+    <string name="ra_108029_title">
+        Avant le départ
+    </string>
+    <string name="ra_108029_text">
+        Ramasser tous les objets facultatifs et vaincre tous les Dresseurs facultatifs de l’Océane.
+    </string>
+    <string name="ra_108028_title">
+        Un éclair de lumière
+    </string>
+    <string name="ra_108028_text">
+        Recevoir la CS05 Flash de l’assistant du Professeur Chen sur la Route 2.
+    </string>
+    <string name="ra_108027_title">
+        Détecteur de trésors
+    </string>
+    <string name="ra_108027_text">
+        Recevoir le Cherch’Objet de l’assistant du Professeur Chen sur la Route 11.
+    </string>
+    <string name="ra_4403_title">
+        Badge Foudre
+    </string>
+    <string name="ra_4403_text">
+        Vaincre Major Bob et obtenir le Badge Foudre.
+    </string>
+    <string name="ra_108060_title">
+        Major Bob : défi niveau 24
+    </string>
+    <string name="ra_108060_text">
+        Vaincre Major Bob en mode Défini, au niveau 24 maximum au début du combat, sans utiliser d’objet du Sac
+        en combat.
+    </string>
+    <string name="ra_108049_title">
+        Deux roues
+    </string>
+    <string name="ra_108049_text">
+        Obtenir la Bicyclette au magasin de vélos d’Azuria.
+    </string>
+    <string name="ra_108037_title">
+        Petite monnaie
+    </string>
+    <string name="ra_108037_text">
+        Trouver tous les Jetons gratuits du Casino de Céladopole.
+    </string>
+    <string name="ra_108179_title">
+        Une barre gagnante
+    </string>
+    <string name="ra_108179_text">
+        Obtenir une combinaison de barres gagnante au Casino de Céladopole.
+    </string>
+    <string name="ra_108180_title">
+        Triple sept
+    </string>
+    <string name="ra_108180_text">
+        Gagner le jackpot au Casino de Céladopole.
+    </string>
+    <string name="ra_108182_title">
+        Réserve de Jetons
+    </string>
+    <string name="ra_108182_text">
+        Détenir 9 999 Jetons simultanément.
+    </string>
+    <string name="ra_108038_title">
+        Voir les fantômes
+    </string>
+    <string name="ra_108038_text">
+        Obtenir le Scope Sylphe au Repaire Rocket.
+    </string>
+    <string name="ra_108039_title">
+        Repaire vidé
+    </string>
+    <string name="ra_108039_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs du Repaire Rocket.
+    </string>
+    <string name="ra_4404_title">
+        Badge Prisme
+    </string>
+    <string name="ra_4404_text">
+        Vaincre Érika et obtenir le Badge Prisme.
+    </string>
+    <string name="ra_108061_title">
+        Érika : défi niveau 29
+    </string>
+    <string name="ra_108061_text">
+        Vaincre Érika en mode Défini, au niveau 29 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_108036_title">
+        Prendre son envol
+    </string>
+    <string name="ra_108036_text">
+        Recevoir la CS02 Vol dans la maison cachée de la Route 16.
+    </string>
+    <string name="ra_4418_title">
+        Sauver Fuji
+    </string>
+    <string name="ra_4418_text">
+        Sauver M. Fuji et obtenir la Poké Flûte.
+    </string>
+    <string name="ra_108040_title">
+        Apaiser le fantôme
+    </string>
+    <string name="ra_108040_text">
+        Donner une Poké Poupée au fantôme bloquant le sommet de la Tour Pokémon pour le calmer sans Scope
+        Sylphe.
+    </string>
+    <string name="ra_108041_title">
+        Tour explorée
+    </string>
+    <string name="ra_108041_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Tour Pokémon.
+    </string>
+    <string name="ra_108046_title">
+        Traversée aquatique
+    </string>
+    <string name="ra_108046_text">
+        Obtenir la CS03 Surf au Parc Safari.
+    </string>
+    <string name="ra_108045_title">
+        Safari sans oubli
+    </string>
+    <string name="ra_108045_text">
+        Ramasser tous les objets facultatifs du Parc Safari en une seule visite, sans recommencer.
+    </string>
+    <string name="ra_108048_title">
+        Retrouver sa force
+    </string>
+    <string name="ra_108048_text">
+        Recevoir la CS04 Force du gardien du Parc Safari à Parmanie.
+    </string>
+    <string name="ra_108047_title">
+        Dix prises au Safari
+    </string>
+    <string name="ra_108047_text">
+        Capturer dix Pokémon au cours d’une seule visite du Parc Safari, sans recommencer.
+    </string>
+    <string name="ra_618978_title">
+        Œuf chanceux
+    </string>
+    <string name="ra_618978_text">
+        Capturer Leveinard au Parc Safari.
+    </string>
+    <string name="ra_618979_title">
+        Mère protectrice
+    </string>
+    <string name="ra_618979_text">
+        Capturer Kangourex au Parc Safari.
+    </string>
+    <string name="ra_618980_title">
+        Charge du taureau
+    </string>
+    <string name="ra_618980_text">
+        Capturer Tauros au Parc Safari.
+    </string>
+    <string name="ra_618981_title">
+        Lames du Safari
+    </string>
+    <string name="ra_618981_text">
+        Capturer Insécateur au Parc Safari.
+    </string>
+    <string name="ra_4405_title">
+        Badge Âme
+    </string>
+    <string name="ra_4405_text">
+        Vaincre Koga et obtenir le Badge Âme.
+    </string>
+    <string name="ra_108062_title">
+        Koga : défi niveau 43
+    </string>
+    <string name="ra_108062_text">
+        Vaincre Koga en mode Défini, au niveau 43 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_108057_title">
+        Labyrinthe invisible
+    </string>
+    <string name="ra_108057_text">
+        Depuis l’entrée, traverser l’Arène de Parmanie sans heurter de mur.
+    </string>
+    <string name="ra_108043_title">
+        Toutes les cannes
+    </string>
+    <string name="ra_108043_text">
+        Obtenir les trois cannes à pêche.
+    </string>
+    <string name="ra_108139_title">
+        Oiseau au loin
+    </string>
+    <string name="ra_108139_text">
+        Observer l’oiseau mystérieux dans les jumelles.
+    </string>
+    <string name="ra_108044_title">
+        Expérience partagée
+    </string>
+    <string name="ra_108044_text">
+        Recevoir le Multi Exp de l’assistant du Professeur Chen à Parmanie.
+    </string>
+    <string name="ra_108050_title">
+        Cadeau du président
+    </string>
+    <string name="ra_108050_text">
+        Recevoir la Master Ball du président de la Sylphe SARL.
+    </string>
+    <string name="ra_108069_title">
+        Infiltration rapide
+    </string>
+    <string name="ra_108069_text">
+        Atteindre le rival dans la Sylphe SARL en ayant vaincu au maximum un Dresseur du bâtiment.
+    </string>
+    <string name="ra_108051_title">
+        Libérer la Sylphe
+    </string>
+    <string name="ra_108051_text">
+        Ramasser tous les objets, vaincre tous les Dresseurs et ouvrir toutes les portes de la Sylphe SARL.
+    </string>
+    <string name="ra_4416_title">
+        Récompense du Dojo
+    </string>
+    <string name="ra_4416_text">
+        Choisir la récompense du Dojo de Safrania.
+    </string>
+    <string name="ra_4406_title">
+        Badge Marais
+    </string>
+    <string name="ra_4406_text">
+        Vaincre Morgane et obtenir le Badge Marais.
+    </string>
+    <string name="ra_108063_title">
+        Morgane : défi niveau 43
+    </string>
+    <string name="ra_108063_text">
+        Vaincre Morgane en mode Défini, au niveau 43 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_108064_title">
+        Quatre téléportations
+    </string>
+    <string name="ra_108064_text">
+        Depuis l’entrée, traverser l’Arène de Safrania en utilisant seulement quatre téléporteurs.
+    </string>
+    <string name="ra_108054_title">
+        Journal du Manoir
+    </string>
+    <string name="ra_108054_text">
+        Lire tous les journaux du Manoir Pokémon sans recommencer ni quitter le bâtiment.
+    </string>
+    <string name="ra_4407_title">
+        Badge Volcan
+    </string>
+    <string name="ra_4407_text">
+        Vaincre Auguste et obtenir le Badge Volcan.
+    </string>
+    <string name="ra_108065_title">
+        Auguste : défi niveau 47
+    </string>
+    <string name="ra_108065_text">
+        Vaincre Auguste en mode Défini, au niveau 47 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <string name="ra_108056_title">
+        Quiz parfait
+    </string>
+    <string name="ra_108056_text">
+        Réussir tous les quiz de l’Arène de Cramois’Île sans combattre de Dresseur, sans recommencer ni quitter
+        le bâtiment.
+    </string>
+    <string name="ra_4408_title">
+        Badge Terre
+    </string>
+    <string name="ra_4408_text">
+        Vaincre Giovanni et obtenir le Badge Terre.
+    </string>
+    <string name="ra_108068_title">
+        Giovanni : défi niveau 50
+    </string>
+    <string name="ra_108068_text">
+        Vaincre Giovanni en mode Défini, au niveau 50 maximum au début du combat, sans utiliser d’objet du Sac
+        en combat.
+    </string>
+    <string name="ra_108067_title">
+        Sans tapis tournant
+    </string>
+    <string name="ra_108067_text">
+        Depuis l’entrée, traverser l’Arène de Jadielle sans utiliser les tapis tournants.
+    </string>
+    <string name="ra_108066_title">
+        Trésor d’Arène
+    </string>
+    <string name="ra_108066_text">
+        Ramasser l’objet caché dans l’Arène de Jadielle.
+    </string>
+    <string name="ra_108140_title">
+        Route de la Victoire explorée
+    </string>
+    <string name="ra_108140_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Route Victoire.
+    </string>
+    <string name="ra_4410_title">
+        Maître de la Ligue
+    </string>
+    <string name="ra_4410_text">
+        Vaincre le Conseil des 4 et le Maître de la Ligue Pokémon.
+    </string>
+    <string name="ra_4422_title">
+        Ligue en solitaire
+    </string>
+    <string name="ra_4422_text">
+        Vaincre toute la Ligue sans recommencer avec un seul Pokémon dans l’équipe, à l’exclusion de Mew et de
+        Mewtwo.
+    </string>
+    <string name="ra_108169_title">
+        Fidélité à Rouge
+    </string>
+    <string name="ra_108169_text">
+        Vaincre la Ligue sans recommencer avec une équipe complète de Pokémon exclusifs à la version Rouge.
+    </string>
+    <string name="ra_108170_title">
+        Parcours sans K.O.
+    </string>
+    <string name="ra_108170_text">
+        Vaincre la Ligue sans recommencer et sans subir de K.O., avec des Pokémon de niveau 60 maximum à
+        l’entrée de la Ligue.
+    </string>
+    <string name="ra_108171_title">
+        Ligue exigeante
+    </string>
+    <string name="ra_108171_text">
+        Entrer dans la Ligue et la vaincre dans une seule session, en mode Défini, sans utiliser d’objet en
+        combat, avec des Pokémon de niveau 50 maximum à l’entrée.
+    </string>
+    <string name="ra_4419_title">
+        Réveil du dormeur
+    </string>
+    <string name="ra_4419_text">
+        Réveiller Ronflex avec la Poké Flûte et le capturer.
+    </string>
+    <string name="ra_4420_title">
+        Trio légendaire
+    </string>
+    <string name="ra_4420_text">
+        Capturer Artikodin, Électhor et Sulfura.
+    </string>
+    <string name="ra_4421_title">
+        Créature ultime
+    </string>
+    <string name="ra_4421_text">
+        Capturer Mewtwo dans la Caverne Azurée.
+    </string>
+    <string name="ra_108175_title">
+        Faune de la Caverne
+    </string>
+    <string name="ra_108175_text">
+        Sans recommencer ni quitter la Caverne Azurée, capturer un exemplaire de chaque espèce qui y est
+        disponible, sauf Mewtwo et les espèces pêchées. Ne pas utiliser la Master Ball.
+    </string>
+    <string name="ra_108176_title">
+        Capture équitable
+    </string>
+    <string name="ra_108176_text">
+        Capturer Mewtwo sans Master Ball.
+    </string>
+    <string name="ra_108052_title">
+        Six cadeaux
+    </string>
+    <string name="ra_108052_text">
+        Recevoir six Pokémon en cadeau.
+    </string>
+    <string name="ra_108053_title">
+        Échanges locaux
+    </string>
+    <string name="ra_108053_text">
+        Effectuer les neuf échanges avec les personnages du jeu.
+    </string>
+    <string name="ra_108183_title">
+        Tout acheter au Casino
+    </string>
+    <string name="ra_108183_text">
+        Acheter tous les Pokémon proposés au Casino dans une seule session.
+    </string>
+    <string name="ra_108174_title">
+        Rencontres fixes
+    </string>
+    <string name="ra_108174_text">
+        Vaincre ou capturer tous les Pokémon des rencontres fixes.
+    </string>
+    <string name="ra_108141_title">
+        Exclusivités Rouge
+    </string>
+    <string name="ra_108141_text">
+        Capturer tous les Pokémon exclusifs à la version Rouge.
+    </string>
+    <string name="ra_4425_title">
+        Collection Rouge
+    </string>
+    <string name="ra_4425_text">
+        Capturer les 124 Pokémon disponibles dans Pokémon Rouge.
+    </string>
+    <string name="ra_108365_title">
+        Disques du terrain
+    </string>
+    <string name="ra_108365_text">
+        Trouver les 50 CT et CS non manquables présentes sur le terrain.
+    </string>
+    <string name="ra_108366_title">
+        Disques achetés
+    </string>
+    <string name="ra_108366_text">
+        Acheter un exemplaire de chaque CT vendue au Centre Commercial et au Casino, dans une seule session sans
+        recommencer.
+    </string>
+    <string name="ra_108367_title">
+        Cherch’Objet vivant
+    </string>
+    <string name="ra_108367_text">
+        Ramasser tous les objets non manquables du terrain, y compris les objets cachés.
+    </string>
+    <string name="ra_108368_title">
+        Tous les Dresseurs
+    </string>
+    <string name="ra_108368_text">
+        Vaincre tous les Dresseurs non manquables de Kanto.
+    </string>
+    <string name="ra_4409_title">
+        Équipe complète
+    </string>
+    <string name="ra_4409_text">
+        Réunir six Pokémon dans l’équipe.
+    </string>
+    <string name="ra_108370_title">
+        Évolution refusée
+    </string>
+    <string name="ra_108370_text">
+        Empêcher un Pokémon d’évoluer.
+    </string>
+    <string name="ra_4411_title">
+        Premier niveau 50
+    </string>
+    <string name="ra_4411_text">
+        Faire passer le Pokémon de la première place du niveau 49 au niveau 50.
+    </string>
+    <string name="ra_4412_title">
+        Six niveaux 50
+    </string>
+    <string name="ra_4412_text">
+        Avec cinq Pokémon de niveau 50 ou plus dans l’équipe, faire atteindre le niveau 50 au dernier Pokémon.
+    </string>
+    <string name="ra_108033_title">
+        Coups critiques en série
+    </string>
+    <string name="ra_108033_text">
+        Porter cinq coups critiques consécutifs au cours du même combat.
+    </string>
+    <string name="ra_108034_title">
+        K.O. immédiats
+    </string>
+    <string name="ra_108034_text">
+        Réussir cinq capacités de K.O. en un coup consécutives au cours du même combat.
+    </string>
+    <string name="ra_108042_title">
+        Match immobile
+    </string>
+    <string name="ra_108042_text">
+        Commencer un combat avec tous les PV et tenir vingt tours sans changer de Pokémon et sans qu’aucun des
+        deux Pokémon ne subisse de dégâts.
+    </string>
+    <string name="ra_108172_title">
+        Final explosif
+    </string>
+    <string name="ra_108172_text">
+        Utiliser Métronome et provoquer une explosion qui met son utilisateur K.O.
+    </string>
+    <string name="ra_108173_title">
+        Copie conforme
+    </string>
+    <string name="ra_108173_text">
+        Avec Métamorph, utiliser Morphing sur un autre Métamorph.
+    </string>
+    <string name="ra_108364_title">
+        Dégel naturel
+    </string>
+    <string name="ra_108364_text">
+        Être libéré du gel en combat sans utiliser d’objet durant ce combat.
+    </string>
+    <string name="ra_108035_title">
+        Tondeuse
+    </string>
+    <string name="ra_108035_text">
+        Couper de l’herbe avec Coupe.
+    </string>
+    <string name="ra_540248_text">
+        Obtenir le Pokédex. Les Pokémon accessibles uniquement par échange externe ou glitch bloquent les succès
+        de cet ensemble.
+    </string>
+    <string name="ra_540306_title">
+        Arène de Argenta complète
+    </string>
+    <string name="ra_540306_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Argenta sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540307_title">
+        Arène de Azuria complète
+    </string>
+    <string name="ra_540307_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Azuria sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540308_title">
+        Arène de Carmin sur Mer complète
+    </string>
+    <string name="ra_540308_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Carmin sur Mer sans recommencer ni quitter
+        l’Arène.
+    </string>
+    <string name="ra_540309_title">
+        Arène de Céladopole complète
+    </string>
+    <string name="ra_540309_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Céladopole sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540310_title">
+        Arène de Parmanie complète
+    </string>
+    <string name="ra_540310_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Parmanie sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540311_title">
+        Arène de Safrania complète
+    </string>
+    <string name="ra_540311_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Safrania sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540312_title">
+        Arène de Cramois’Île complète
+    </string>
+    <string name="ra_540312_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Cramois’Île sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540313_title">
+        Arène de Jadielle complète
+    </string>
+    <string name="ra_540313_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Jadielle sans recommencer ni quitter l’Arène.
+    </string>
+    <string name="ra_540290_title">
+        Évolution en forêt
+    </string>
+    <string name="ra_540290_text">
+        Capturer Aspicot ou Chenipan dans la Forêt de Jade puis, sans en sortir, le faire évoluer jusqu’à
+        Dardargnan ou Papilusion.
+    </string>
+    <string name="ra_540263_title">
+        Exclusivités Bleu
+    </string>
+    <string name="ra_540263_text">
+        Capturer tous les Pokémon exclusifs à la version Bleu.
+    </string>
+    <string name="ra_540292_title">
+        Pêche à Cramois’Île
+    </string>
+    <string name="ra_540292_text">
+        Capturer Magicarpe, Ptitard, Poissirène, Kokiyas, Hypotrempe et Stari à Cramois’Île dans une seule
+        session sans quitter l’île.
+    </string>
+    <string name="ra_540348_title">
+        Collection Bleu
+    </string>
+    <string name="ra_540348_text">
+        Capturer les 124 Pokémon disponibles dans Pokémon Bleu sans échange externe et sans acquérir d’autre
+        Pokémon par quelque méthode que ce soit.
+    </string>
+    <string name="ra_540336_title">
+        Jour de paie
+    </string>
+    <string name="ra_540336_text">
+        Produire plus de 2 000 unités d’argent en un seul combat avec Jackpot.
+    </string>
+    <string name="ra_540291_title">
+        Prix du Casino
+    </string>
+    <string name="ra_540291_text">
+        Obtenir Porygon.
+    </string>
+    <string name="ra_540293_title">
+        Fidélité à Bleu
+    </string>
+    <string name="ra_540293_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon exclusifs à la version Bleu.
+    </string>
+    <string name="ra_540294_title">
+        Équipe du Safari
+    </string>
+    <string name="ra_540294_text">
+        Vaincre la Ligue sans recommencer avec une équipe d’espèces disponibles au Parc Safari ou de leurs
+        évolutions.
+    </string>
+    <string name="ra_540295_title">
+        Équipe féerique
+    </string>
+    <string name="ra_540295_text">
+        Vaincre la Ligue sans recommencer avec une équipe composée uniquement de Mélofée, Mélodelfe, Rondoudou,
+        Grodoudou et/ou M. Mime. Le groupe « féerique » du succès ne correspond pas à un type de cette
+        génération.
+    </string>
+    <string name="ra_540296_title">
+        Potentiel d’évolution
+    </string>
+    <string name="ra_540296_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon pouvant encore évoluer.
+    </string>
+    <string name="ra_540297_title">
+        Équipe aquatique
+    </string>
+    <string name="ra_540297_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon de type Eau.
+    </string>
+    <string name="ra_540314_title">
+        Échange : M. Mime
+    </string>
+    <string name="ra_540314_text">
+        Échanger Abra contre M. Mime auprès du personnage du jeu.
+    </string>
+    <string name="ra_540315_title">
+        Échange : Nidoran♀
+    </string>
+    <string name="ra_540315_text">
+        Échanger Nidoran♂ contre Nidoran♀ auprès du personnage du jeu.
+    </string>
+    <string name="ra_540316_title">
+        Échange : Nidorina
+    </string>
+    <string name="ra_540316_text">
+        Échanger Nidorino contre Nidorina auprès du personnage du jeu.
+    </string>
+    <string name="ra_540317_title">
+        Échange : Excelangue
+    </string>
+    <string name="ra_540317_text">
+        Échanger Flagadoss contre Excelangue auprès du personnage du jeu.
+    </string>
+    <string name="ra_540318_title">
+        Échange : Lippoutou
+    </string>
+    <string name="ra_540318_text">
+        Échanger Têtarte contre Lippoutou auprès du personnage du jeu.
+    </string>
+    <string name="ra_540319_title">
+        Échange : Canarticho
+    </string>
+    <string name="ra_540319_text">
+        Échanger Piafabec contre Canarticho auprès du personnage du jeu.
+    </string>
+    <string name="ra_540320_title">
+        Échange : Électrode
+    </string>
+    <string name="ra_540320_text">
+        Échanger Raichu contre Électrode auprès du personnage du jeu.
+    </string>
+    <string name="ra_540321_title">
+        Échange : Saquedeneu
+    </string>
+    <string name="ra_540321_text">
+        Échanger Mimitoss contre Saquedeneu auprès du personnage du jeu.
+    </string>
+    <string name="ra_540322_title">
+        Échange : Otaria
+    </string>
+    <string name="ra_540322_text">
+        Échanger Ponyta contre Otaria auprès du personnage du jeu.
+    </string>
+    <string name="ra_540323_title">
+        Objets des routes
+    </string>
+    <string name="ra_540323_text">
+        Ramasser tous les objets non manquables, y compris cachés, des Routes 4, 9, 10, 11, 12, 13, 17, 23 et
+        25.
+    </string>
+    <string name="ra_540324_title">
+        Objets des grottes
+    </string>
+    <string name="ra_540324_text">
+        Ramasser tous les objets non manquables, y compris cachés, de la Caverne Azurée, du Manoir Pokémon, du
+        Mont Sélénite et des Îles Écume.
+    </string>
+    <string name="ra_540325_title">
+        Objets des bâtiments
+    </string>
+    <string name="ra_540325_text">
+        Ramasser tous les objets non manquables, y compris cachés, des deux Souterrains, de la Sylphe SARL et de
+        la Centrale.
+    </string>
+    <string name="ra_540326_title">
+        Objets des excursions
+    </string>
+    <string name="ra_540326_text">
+        Ramasser tous les objets non manquables, y compris cachés, de la Forêt de Jade, du Parc Safari, de la
+        Tour Pokémon et de la Route Victoire.
+    </string>
+    <string name="ra_540327_title">
+        Objets des villes
+    </string>
+    <string name="ra_540327_text">
+        Ramasser tous les objets non manquables, y compris cachés, d’Azuria, Carmin sur Mer, Céladopole,
+        Jadielle, Safrania et Parmanie.
+    </string>
+    <string name="ra_540328_title">
+        Dresseurs des premiers pas
+    </string>
+    <string name="ra_540328_text">
+        Vaincre tous les Dresseurs non manquables de la Forêt de Jade, de la Route 3, du Mont Sélénite et de la
+        Route 4.
+    </string>
+    <string name="ra_540329_title">
+        Dresseurs du milieu
+    </string>
+    <string name="ra_540329_text">
+        Vaincre tous les Dresseurs non manquables des Routes 24, 25 et 6.
+    </string>
+    <string name="ra_540330_title">
+        Dresseurs de l’est
+    </string>
+    <string name="ra_540330_text">
+        Vaincre tous les Dresseurs non manquables des Routes 11, 9 et 10.
+    </string>
+    <string name="ra_540331_title">
+        Dresseurs dans l’ombre
+    </string>
+    <string name="ra_540331_text">
+        Vaincre tous les Dresseurs non manquables de la Grotte, de la Route 8 et de la Tour Pokémon.
+    </string>
+    <string name="ra_540332_title">
+        Dresseurs des chemins
+    </string>
+    <string name="ra_540332_text">
+        Vaincre tous les Dresseurs non manquables des Routes 12, 13, 14 et 15.
+    </string>
+    <string name="ra_540333_title">
+        Dresseurs de la Piste Cyclable
+    </string>
+    <string name="ra_540333_text">
+        Vaincre tous les Dresseurs non manquables des Routes 16, 17 et 18.
+    </string>
+    <string name="ra_540334_title">
+        Dresseurs des mers
+    </string>
+    <string name="ra_540334_text">
+        Vaincre tous les Dresseurs non manquables des Routes 19 et 20.
+    </string>
+    <string name="ra_540335_title">
+        Derniers Dresseurs
+    </string>
+    <string name="ra_540335_text">
+        Vaincre tous les Dresseurs non manquables du Manoir Pokémon, de la Route 21 et de la Route Victoire.
+    </string>
+    <string name="ra_81655_title">
+        Premier Pokédex
+    </string>
+    <string name="ra_81655_text">
+        Recevoir le Pokédex du Professeur Chen.
+    </string>
+    <string name="ra_81656_title">
+        Rival avant Argenta
+    </string>
+    <string name="ra_81656_text">
+        Vaincre le rival sur la Route 22 avant d’aller à Argenta.
+    </string>
+    <string name="ra_81659_title">
+        Rival du Pont Pépite
+    </string>
+    <string name="ra_81659_text">
+        Vaincre le rival au Pont Pépite d’Azuria.
+    </string>
+    <string name="ra_81665_title">
+        Duel sur l’Océane
+    </string>
+    <string name="ra_81665_text">
+        Vaincre le rival à bord de l’Océane à Carmin sur Mer.
+    </string>
+    <string name="ra_81667_title">
+        Duel dans la Tour
+    </string>
+    <string name="ra_81667_text">
+        Vaincre le rival dans la Tour Pokémon de Lavanville.
+    </string>
+    <string name="ra_81672_title">
+        Rival de la Sylphe
+    </string>
+    <string name="ra_81672_text">
+        Vaincre le rival dans la Sylphe SARL de Safrania.
+    </string>
+    <string name="ra_81679_title">
+        Dernier barrage
+    </string>
+    <string name="ra_81679_text">
+        Vaincre le rival sur la Route 22 en allant à la Ligue Pokémon.
+    </string>
+    <string name="ra_81657_title">
+        Pikachu contre les Rocket : Sélénite
+    </string>
+    <string name="ra_81657_text">
+        Vaincre Jessie et James au Mont Sélénite en utilisant uniquement Pikachu.
+    </string>
+    <string name="ra_81668_title">
+        Pikachu contre les Rocket : Casino
+    </string>
+    <string name="ra_81668_text">
+        Vaincre Jessie et James au Repaire Rocket de Céladopole en utilisant uniquement Pikachu.
+    </string>
+    <string name="ra_81669_title">
+        Repaire libéré
+    </string>
+    <string name="ra_81669_text">
+        Vaincre la Team Rocket dans son repaire de Céladopole.
+    </string>
+    <string name="ra_81670_title">
+        Pikachu contre les Rocket : Tour
+    </string>
+    <string name="ra_81670_text">
+        Vaincre Jessie et James dans la Tour Pokémon de Lavanville en utilisant uniquement Pikachu.
+    </string>
+    <string name="ra_81673_title">
+        Pikachu contre les Rocket : Sylphe
+    </string>
+    <string name="ra_81673_text">
+        Vaincre Jessie et James dans la Sylphe SARL de Safrania en utilisant uniquement Pikachu.
+    </string>
+    <string name="ra_81674_title">
+        Rocket expulsés
+    </string>
+    <string name="ra_81674_text">
+        Chasser la Team Rocket de la Sylphe SARL de Safrania.
+    </string>
+    <string name="ra_4439_title">
+        Équipe de niveau 50
+    </string>
+    <string name="ra_4439_text">
+        Amener les six Pokémon de l’équipe au niveau 50. Aucun légendaire. Le succès se déclenche lors d’un gain
+        de niveau.
+    </string>
+    <string name="ra_4441_title">
+        Souvenir préhistorique
+    </string>
+    <string name="ra_4441_text">
+        Obtenir un fossile de Pokémon au Mont Sélénite.
+    </string>
+    <string name="ra_4443_title">
+        Maître du Dojo
+    </string>
+    <string name="ra_4443_text">
+        Vaincre le maître du Dojo de Safrania et choisir sa récompense.
+    </string>
+    <string name="ra_4445_title">
+        Fantôme de la Tour
+    </string>
+    <string name="ra_4445_text">
+        Rencontrer le fantôme bloquant le dernier escalier de la Tour Pokémon.
+    </string>
+    <string name="ra_4446_title">
+        Réveil à la flûte
+    </string>
+    <string name="ra_4446_text">
+        Réveiller et capturer un Pokémon à l’aide de la Poké Flûte.
+    </string>
+    <string name="ra_81658_title">
+        Magicarpe trop cher
+    </string>
+    <string name="ra_81658_text">
+        Acheter le Magicarpe vendu au Centre Pokémon de la Route 3.
+    </string>
+    <string name="ra_81661_title">
+        Bulbizarre accueilli
+    </string>
+    <string name="ra_81661_text">
+        Recevoir Bulbizarre de Mélanie à Azuria.
+    </string>
+    <string name="ra_81660_title">
+        Salamèche adopté
+    </string>
+    <string name="ra_81660_text">
+        Recevoir Salamèche du personnage de la Route 24.
+    </string>
+    <string name="ra_81666_title">
+        Carapuce secouru
+    </string>
+    <string name="ra_81666_text">
+        Recevoir Carapuce de l’agent Jenny à Carmin sur Mer.
+    </string>
+    <string name="ra_81662_title">
+        Échange : Machopeur
+    </string>
+    <string name="ra_81662_text">
+        Échanger Osselait contre Machopeur auprès du personnage du jeu.
+    </string>
+    <string name="ra_81663_text">
+        Échanger Mélofée contre M. Mime auprès du personnage du jeu.
+    </string>
+    <string name="ra_81664_title">
+        Échange : Triopikeur
+    </string>
+    <string name="ra_81664_text">
+        Échanger Excelangue contre Triopikeur auprès du personnage du jeu.
+    </string>
+    <string name="ra_81671_title">
+        Échange : Parasect
+    </string>
+    <string name="ra_81671_text">
+        Échanger Saquedeneu contre Parasect auprès du personnage du jeu.
+    </string>
+    <string name="ra_81676_title">
+        Échange : Grotadmorv
+    </string>
+    <string name="ra_81676_text">
+        Échanger Kangourex contre Grotadmorv auprès du personnage du jeu.
+    </string>
+    <string name="ra_81677_title">
+        Échange : Lamantine
+    </string>
+    <string name="ra_81677_text">
+        Échanger Caninos contre Lamantine auprès du personnage du jeu.
+    </string>
+    <string name="ra_81678_title">
+        Échange : Rhinoféros
+    </string>
+    <string name="ra_81678_text">
+        Échanger Akwakwak contre Rhinoféros auprès du personnage du jeu.
+    </string>
+    <string name="ra_4450_title">
+        Collection Jaune
+    </string>
+    <string name="ra_4450_text">
+        Capturer les 129 Pokémon normalement accessibles dans une seule sauvegarde de Pokémon Jaune.
+    </string>
+    <string name="ra_81680_title">
+        Traversée sans Flash
+    </string>
+    <string name="ra_81680_text">
+        Traverser la Grotte depuis la Route 9 jusqu’à Lavanville sans utiliser Flash.
+    </string>
+    <string name="ra_81675_title">
+        Safari parfait
+    </string>
+    <string name="ra_81675_text">
+        Parler au personnage donnant la CS03 dans le Parc Safari lorsqu’il reste exactement 209 pas. Une seule
+        session, sans Surf.
+    </string>
+    <string name="ra_81681_title">
+        Routes sans détour
+    </string>
+    <string name="ra_81681_text">
+        Vaincre tous les Dresseurs des Routes 12 à 15 sans quitter cet ensemble de routes, dans une seule
+        session.
+    </string>
+    <string name="ra_4449_title">
+        Pikachu maître de la Ligue
+    </string>
+    <string name="ra_4449_text">
+        Vaincre le Conseil des 4 et le Maître avec uniquement Pikachu dans l’équipe, en une session, sans
+        Pikachu connaissant Surf.
+    </string>
+    <string name="ra_81795_title">
+        Pikachu : 0–50, humeur mauvaise
+    </string>
+    <string name="ra_81795_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur mauvaise.
+    </string>
+    <string name="ra_81796_title">
+        Pikachu : 0–50, humeur normale
+    </string>
+    <string name="ra_81796_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur normale.
+    </string>
+    <string name="ra_81797_title">
+        Pikachu : 0–50, humeur bonne
+    </string>
+    <string name="ra_81797_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81798_title">
+        Pikachu : 51–100, humeur mauvaise
+    </string>
+    <string name="ra_81798_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur mauvaise.
+    </string>
+    <string name="ra_81799_title">
+        Pikachu : 51–100, humeur normale
+    </string>
+    <string name="ra_81799_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur normale.
+    </string>
+    <string name="ra_81800_title">
+        Pikachu : 51–100, humeur bonne
+    </string>
+    <string name="ra_81800_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81801_title">
+        Pikachu : 101–160, humeur mauvaise
+    </string>
+    <string name="ra_81801_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 160 inclus et une humeur mauvaise.
+    </string>
+    <string name="ra_81802_title">
+        Pikachu : 101–130, humeur normale
+    </string>
+    <string name="ra_81802_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 130 inclus et une humeur normale.
+    </string>
+    <string name="ra_81803_title">
+        Pikachu : 101–130, humeur bonne
+    </string>
+    <string name="ra_81803_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 130 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81804_title">
+        Pikachu : 131–160, humeur normale
+    </string>
+    <string name="ra_81804_text">
+        Parler à Pikachu avec une amitié comprise entre 131 et 160 inclus et une humeur normale.
+    </string>
+    <string name="ra_81805_title">
+        Pikachu : 131–160, humeur bonne
+    </string>
+    <string name="ra_81805_text">
+        Parler à Pikachu avec une amitié comprise entre 131 et 160 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81806_title">
+        Pikachu : 161–255, humeur mauvaise
+    </string>
+    <string name="ra_81806_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 255 inclus et une humeur mauvaise.
+    </string>
+    <string name="ra_81807_title">
+        Pikachu : 161–200, humeur normale
+    </string>
+    <string name="ra_81807_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 200 inclus et une humeur normale.
+    </string>
+    <string name="ra_81808_title">
+        Pikachu : 161–200, humeur bonne
+    </string>
+    <string name="ra_81808_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 200 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81809_title">
+        Pikachu : 201–250, humeur normale
+    </string>
+    <string name="ra_81809_text">
+        Parler à Pikachu avec une amitié comprise entre 201 et 250 inclus et une humeur normale.
+    </string>
+    <string name="ra_81810_title">
+        Pikachu : 201–250, humeur bonne
+    </string>
+    <string name="ra_81810_text">
+        Parler à Pikachu avec une amitié comprise entre 201 et 250 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81811_title">
+        Pikachu : 251–255, humeur normale
+    </string>
+    <string name="ra_81811_text">
+        Parler à Pikachu avec une amitié comprise entre 251 et 255 inclus et une humeur normale.
+    </string>
+    <string name="ra_81812_title">
+        Pikachu : 251–255, humeur bonne
+    </string>
+    <string name="ra_81812_text">
+        Parler à Pikachu avec une amitié comprise entre 251 et 255 inclus et une humeur bonne.
+    </string>
+    <string name="ra_81813_title">
+        Pikachu après une capture
+    </string>
+    <string name="ra_81813_text">
+        Capturer un Pokémon puis parler à Pikachu.
+    </string>
+    <string name="ra_81814_title">
+        Pikachu pêcheur
+    </string>
+    <string name="ra_81814_text">
+        Utiliser une canne à pêche puis parler à Pikachu.
+    </string>
+    <string name="ra_81815_title">
+        Pikachu refuse la Pierre
+    </string>
+    <string name="ra_81815_text">
+        Essayer de faire évoluer Pikachu puis lui parler.
+    </string>
+    <string name="ra_81816_title">
+        Signature électrique
+    </string>
+    <string name="ra_81816_text">
+        Apprendre Fatal-Foudre ou Tonnerre à Pikachu puis lui parler.
+    </string>
+    <string name="ra_81817_title">
+        Pikachu endormi
+    </string>
+    <string name="ra_81817_text">
+        Parler à Pikachu lorsqu’il souffre du statut sommeil, sans passer par un Centre Pokémon.
+    </string>
+    <string name="ra_81818_title">
+        Pikachu malade
+    </string>
+    <string name="ra_81818_text">
+        Parler à Pikachu lorsqu’il souffre d’un statut autre que le sommeil.
+    </string>
+    <string name="ra_81819_title">
+        Berceuse de Rondoudou
+    </string>
+    <string name="ra_81819_text">
+        Parler à Pikachu après qu’il s’est endormi en écoutant Rondoudou. Il s’agit de la scène chantée, pas du
+        statut sommeil en combat.
+    </string>
+    <string name="ra_81820_title">
+        Pikachu et les fantômes
+    </string>
+    <string name="ra_81820_text">
+        Parler à Pikachu dans la Tour Pokémon.
+    </string>
+    <string name="ra_81976_title">
+        Transformation de Léo
+    </string>
+    <string name="ra_81976_text">
+        Faire réagir Pikachu à Léo transformé, puis à son retour à la forme humaine.
+    </string>
+    <string name="ra_81977_title">
+        Pikachu amoureux
+    </string>
+    <string name="ra_81977_text">
+        Faire tomber Pikachu amoureux du Mélofée du Fan Club Pokémon.
+    </string>
+    <string name="ra_81978_title">
+        Pikachu reste
+    </string>
+    <string name="ra_81978_text">
+        Essayer de relâcher Pikachu.
+    </string>
+    <string name="ra_82089_title">
+        Danse sur le rebord
+    </string>
+    <string name="ra_82089_text">
+        Laisser Pikachu derrière un rebord pendant un moment.
+    </string>
+    <string name="ra_5086_title">
+        Nom du rival
+    </string>
+    <string name="ra_5086_text">
+        Donner un nom au nouveau rival.
+    </string>
+    <string name="ra_5070_title">
+        Badge Zéphyr
+    </string>
+    <string name="ra_5070_text">
+        Vaincre Albert et obtenir le Badge Zéphyr.
+    </string>
+    <string name="ra_155162_title">
+        Albert : défi niveau 9
+    </string>
+    <string name="ra_155162_text">
+        Vaincre Albert en mode Défini, au niveau 9 maximum.
+    </string>
+    <string name="ra_5092_title">
+        Puits libéré
+    </string>
+    <string name="ra_5092_text">
+        Vaincre la nouvelle Team Rocket au Puits Ramoloss.
+    </string>
+    <string name="ra_5071_title">
+        Badge Essaim
+    </string>
+    <string name="ra_5071_text">
+        Vaincre Hector et obtenir le Badge Essaim.
+    </string>
+    <string name="ra_155163_title">
+        Hector : défi niveau 16
+    </string>
+    <string name="ra_155163_text">
+        Vaincre Hector en mode Défini, au niveau 16 maximum.
+    </string>
+    <string name="ra_5072_title">
+        Badge Plaine
+    </string>
+    <string name="ra_5072_text">
+        Vaincre Blanche et obtenir le Badge Plaine.
+    </string>
+    <string name="ra_155168_title">
+        Blanche : défi niveau 20
+    </string>
+    <string name="ra_155168_text">
+        Vaincre Blanche en mode Défini, au niveau 20 maximum.
+    </string>
+    <string name="ra_5073_title">
+        Badge Brume
+    </string>
+    <string name="ra_5073_text">
+        Vaincre Mortimer et obtenir le Badge Brume.
+    </string>
+    <string name="ra_155170_title">
+        Mortimer : défi niveau 25
+    </string>
+    <string name="ra_155170_text">
+        Vaincre Mortimer en mode Défini, au niveau 25 maximum.
+    </string>
+    <string name="ra_5074_title">
+        Badge Choc
+    </string>
+    <string name="ra_5074_text">
+        Vaincre Chuck et obtenir le Badge Choc.
+    </string>
+    <string name="ra_155173_title">
+        Chuck : défi niveau 30
+    </string>
+    <string name="ra_155173_text">
+        Vaincre Chuck en mode Défini, au niveau 30 maximum.
+    </string>
+    <string name="ra_5075_title">
+        Badge Minéral
+    </string>
+    <string name="ra_5075_text">
+        Vaincre Jasmine et obtenir le Badge Minéral.
+    </string>
+    <string name="ra_155174_title">
+        Jasmine : défi niveau 35
+    </string>
+    <string name="ra_155174_text">
+        Vaincre Jasmine en mode Défini, au niveau 35 maximum.
+    </string>
+    <string name="ra_5093_title">
+        Rocket d’Acajou
+    </string>
+    <string name="ra_5093_text">
+        Vaincre la Team Rocket à Acajou.
+    </string>
+    <string name="ra_5076_title">
+        Badge Glacier
+    </string>
+    <string name="ra_5076_text">
+        Vaincre Frédo et obtenir le Badge Glacier.
+    </string>
+    <string name="ra_155175_title">
+        Frédo : défi niveau 31
+    </string>
+    <string name="ra_155175_text">
+        Vaincre Frédo en mode Défini, au niveau 31 maximum.
+    </string>
+    <string name="ra_5497_title">
+        Radio libérée
+    </string>
+    <string name="ra_5497_text">
+        Vaincre la Team Rocket dans la Tour Radio.
+    </string>
+    <string name="ra_5077_title">
+        Badge Lever
+    </string>
+    <string name="ra_5077_text">
+        Vaincre Sandra et obtenir le Badge Lever.
+    </string>
+    <string name="ra_155176_title">
+        Sandra : défi niveau 40
+    </string>
+    <string name="ra_155176_text">
+        Vaincre Sandra en mode Défini, au niveau 40 maximum.
+    </string>
+    <string name="ra_5087_title">
+        Trio fuyard
+    </string>
+    <string name="ra_5087_text">
+        Capturer Entei, Suicune et Raikou.
+    </string>
+    <string name="ra_5089_title">
+        Arc-en-ciel capturé
+    </string>
+    <string name="ra_5089_text">
+        Capturer Ho-Oh.
+    </string>
+    <string name="ra_5091_title">
+        Alphabet complet
+    </string>
+    <string name="ra_5091_text">
+        Capturer les 26 formes de Zarbi.
+    </string>
+    <string name="ra_5509_title">
+        Première victoire à la Ligue
+    </string>
+    <string name="ra_5509_text">
+        Vaincre le Conseil des 4 et Peter pour la première fois.
+    </string>
+    <string name="ra_5511_text">
+        Vaincre le Conseil des 4 et le Maître avec un seul Pokémon dans l’équipe.
+    </string>
+    <string name="ra_155164_title">
+        Piafabec de livraison
+    </string>
+    <string name="ra_155164_text">
+        Recevoir le Piafabec offert pour une livraison.
+    </string>
+    <string name="ra_155165_title">
+        Échange : Onix
+    </string>
+    <string name="ra_155165_text">
+        Échanger Chétiflor contre Onix auprès du personnage du jeu.
+    </string>
+    <string name="ra_155166_title">
+        Échange : Machoc
+    </string>
+    <string name="ra_155166_text">
+        Échanger Soporifik contre Machoc auprès du personnage du jeu.
+    </string>
+    <string name="ra_155167_title">
+        Œuf Mystère éclos
+    </string>
+    <string name="ra_155167_text">
+        Faire éclore l’Œuf Mystère et obtenir son Pokémon.
+    </string>
+    <string name="ra_155169_title">
+        Cadeau de Léo
+    </string>
+    <string name="ra_155169_text">
+        Recevoir Évoli de Léo.
+    </string>
+    <string name="ra_155171_title">
+        Échange : Voltorbe
+    </string>
+    <string name="ra_155171_text">
+        Échanger Krabby contre Voltorbe auprès du personnage du jeu.
+    </string>
+    <string name="ra_155172_title">
+        Caratroc confié
+    </string>
+    <string name="ra_155172_text">
+        Recevoir Caratroc à Irisia.
+    </string>
+    <string name="ra_155177_text">
+        Échanger Draco contre Rhinoféros auprès du personnage du jeu.
+    </string>
+    <string name="ra_155178_title">
+        Petit combattant
+    </string>
+    <string name="ra_155178_text">
+        Recevoir le Debugant offert.
+    </string>
+    <string name="ra_155179_title">
+        Nouvelle coiffure
+    </string>
+    <string name="ra_155179_text">
+        Faire coiffer un Pokémon.
+    </string>
+    <string name="ra_155180_title">
+        Ball artisanale
+    </string>
+    <string name="ra_155180_text">
+        Recevoir une nouvelle Ball de Fargas.
+    </string>
+    <string name="ra_155181_title">
+        Major Bob : défi niveau 46
+    </string>
+    <string name="ra_155181_text">
+        Vaincre Major Bob en mode Défini, au niveau 46 maximum.
+    </string>
+    <string name="ra_155182_title">
+        Morgane : défi niveau 48
+    </string>
+    <string name="ra_155182_text">
+        Vaincre Morgane en mode Défini, au niveau 48 maximum.
+    </string>
+    <string name="ra_155183_title">
+        Érika : défi niveau 46
+    </string>
+    <string name="ra_155183_text">
+        Vaincre Érika en mode Défini, au niveau 46 maximum.
+    </string>
+    <string name="ra_5082_text">
+        Vaincre Jeannine et obtenir le Badge Âme.
+    </string>
+    <string name="ra_155184_title">
+        Jeannine : défi niveau 39
+    </string>
+    <string name="ra_155184_text">
+        Vaincre Jeannine en mode Défini, au niveau 39 maximum.
+    </string>
+    <string name="ra_155187_title">
+        Ondine : défi niveau 47
+    </string>
+    <string name="ra_155187_text">
+        Vaincre Ondine en mode Défini, au niveau 47 maximum.
+    </string>
+    <string name="ra_155190_title">
+        Pierre : défi niveau 44
+    </string>
+    <string name="ra_155190_text">
+        Vaincre Pierre en mode Défini, au niveau 44 maximum.
+    </string>
+    <string name="ra_155191_title">
+        Auguste : défi niveau 50
+    </string>
+    <string name="ra_155191_text">
+        Vaincre Auguste en mode Défini, au niveau 50 maximum.
+    </string>
+    <string name="ra_5085_text">
+        Vaincre Blue et obtenir le Badge Terre.
+    </string>
+    <string name="ra_155192_title">
+        Blue : défi niveau 58
+    </string>
+    <string name="ra_155192_text">
+        Vaincre Blue en mode Défini, au niveau 58 maximum.
+    </string>
+    <string name="ra_5088_title">
+        Maître des Tourb’Îles
+    </string>
+    <string name="ra_5088_text">
+        Capturer Lugia.
+    </string>
+    <string name="ra_5523_title">
+        Combat au sommet
+    </string>
+    <string name="ra_5523_text">
+        Vaincre Red et devenir le nouveau Maître Pokémon.
+    </string>
+    <string name="ra_5524_title">
+        Red en solitaire
+    </string>
+    <string name="ra_5524_text">
+        Vaincre Red avec un seul Pokémon dans l’équipe.
+    </string>
+    <string name="ra_155185_title">
+        Pièce retrouvée
+    </string>
+    <string name="ra_155185_text">
+        Vaincre le Sbire Rocket de la Route 24 puis trouver la Partie Machine.
+    </string>
+    <string name="ra_155186_title">
+        Demandes du grand-père
+    </string>
+    <string name="ra_155186_text">
+        Montrer les cinq Pokémon demandés au grand-père de Léo sur la Route 25.
+    </string>
+    <string name="ra_155188_title">
+        Ronflex du passage
+    </string>
+    <string name="ra_155188_text">
+        Capturer le Ronflex devant la Cave Taupiqueur.
+    </string>
+    <string name="ra_155189_title">
+        Échange : Galopa
+    </string>
+    <string name="ra_155189_text">
+        Échanger Ortide contre Galopa auprès du personnage du jeu.
+    </string>
+    <string name="ra_155193_title">
+        Dernier duel du rival
+    </string>
+    <string name="ra_155193_text">
+        Combattre le rival une dernière fois au Mont Sélénite.
+    </string>
+    <string name="ra_155194_title">
+        Les sept frères et sœurs
+    </string>
+    <string name="ra_155194_text">
+        Recevoir les sept cadeaux des personnages hebdomadaires.
+    </string>
+    <string name="ra_155195_title">
+        Échange : Ptéra
+    </string>
+    <string name="ra_155195_text">
+        Échanger Leveinard contre Ptéra auprès du personnage du jeu.
+    </string>
+    <string name="ra_155196_title">
+        Toutes les CT du terrain
+    </string>
+    <string name="ra_155196_text">
+        Trouver toutes les CT du terrain et celles offertes par les personnages.
+    </string>
+    <string name="ra_155197_title">
+        Objets à moitié trouvés
+    </string>
+    <string name="ra_155197_text">
+        Trouver 50 % des objets de Johto et Kanto.
+    </string>
+    <string name="ra_155198_title">
+        Tous les objets
+    </string>
+    <string name="ra_155198_text">
+        Trouver 100 % des objets de Johto et Kanto.
+    </string>
+    <string name="ra_155199_title">
+        Objets cachés : moitié
+    </string>
+    <string name="ra_155199_text">
+        Trouver 50 % des objets cachés de Johto et Kanto.
+    </string>
+    <string name="ra_155200_title">
+        Objets cachés : totalité
+    </string>
+    <string name="ra_155200_text">
+        Trouver 100 % des objets cachés de Johto et Kanto.
+    </string>
+    <string name="ra_155201_title">
+        Dresseurs de Johto : moitié
+    </string>
+    <string name="ra_155201_text">
+        Vaincre 50 % des Dresseurs de Johto.
+    </string>
+    <string name="ra_155202_title">
+        Dresseurs de Johto : totalité
+    </string>
+    <string name="ra_155202_text">
+        Vaincre 100 % des Dresseurs de Johto.
+    </string>
+    <string name="ra_155203_title">
+        Tous les Dresseurs de Kanto
+    </string>
+    <string name="ra_155203_text">
+        Vaincre tous les Dresseurs de Kanto.
+    </string>
+    <string name="ra_155204_title">
+        Cadeaux des habitants
+    </string>
+    <string name="ra_155204_text">
+        Recevoir tous les objets offerts par les habitants de Johto et Kanto.
+    </string>
+    <string name="ra_5090_title">
+        Collection Or
+    </string>
+    <string name="ra_5090_text">
+        Capturer tous les Pokémon accessibles dans Pokémon Or.
+    </string>
+    <string name="ra_163144_title">
+        Albert : équipe Vol
+    </string>
+    <string name="ra_163144_text">
+        Vaincre Albert en mode Défini, au niveau 9 maximum Utiliser uniquement des Pokémon de type Vol.
+    </string>
+    <string name="ra_163146_title">
+        Hector : équipe Insecte
+    </string>
+    <string name="ra_163146_text">
+        Vaincre Hector en mode Défini, au niveau 16 maximum Utiliser uniquement des Pokémon de type Insecte.
+    </string>
+    <string name="ra_163148_title">
+        Blanche : équipe Normal
+    </string>
+    <string name="ra_163148_text">
+        Vaincre Blanche en mode Défini, au niveau 20 maximum Utiliser uniquement des Pokémon de type Normal.
+    </string>
+    <string name="ra_163150_title">
+        Mortimer : équipe Spectre/Ténèbres
+    </string>
+    <string name="ra_163150_text">
+        Vaincre Mortimer en mode Défini, au niveau 25 maximum Utiliser uniquement des Pokémon de type
+        Spectre/Ténèbres.
+    </string>
+    <string name="ra_163154_title">
+        Chuck : équipe Combat
+    </string>
+    <string name="ra_163154_text">
+        Vaincre Chuck en mode Défini, au niveau 30 maximum Utiliser uniquement des Pokémon de type Combat.
+    </string>
+    <string name="ra_163152_title">
+        Jasmine : équipe Acier
+    </string>
+    <string name="ra_163152_text">
+        Vaincre Jasmine en mode Défini, au niveau 35 maximum Utiliser uniquement des Pokémon de type Acier.
+    </string>
+    <string name="ra_163156_title">
+        Frédo : équipe Glace
+    </string>
+    <string name="ra_163156_text">
+        Vaincre Frédo en mode Défini, au niveau 31 maximum Utiliser uniquement des Pokémon de type Glace.
+    </string>
+    <string name="ra_163158_title">
+        Sandra : équipe Dragon
+    </string>
+    <string name="ra_163158_text">
+        Vaincre Sandra en mode Défini, au niveau 40 maximum Utiliser uniquement des Pokémon de type Dragon.
+    </string>
+    <string name="ra_163170_title">
+        Pierre : équipe Roche
+    </string>
+    <string name="ra_163170_text">
+        Vaincre Pierre en mode Défini, au niveau 44 maximum Utiliser uniquement des Pokémon de type Roche.
+    </string>
+    <string name="ra_163168_title">
+        Ondine : équipe Eau
+    </string>
+    <string name="ra_163168_text">
+        Vaincre Ondine en mode Défini, au niveau 47 maximum Utiliser uniquement des Pokémon de type Eau.
+    </string>
+    <string name="ra_163166_title">
+        Major Bob : équipe Électrik
+    </string>
+    <string name="ra_163166_text">
+        Vaincre Major Bob en mode Défini, au niveau 46 maximum Utiliser uniquement des Pokémon de type Électrik.
+    </string>
+    <string name="ra_163174_title">
+        Érika : équipe Plante
+    </string>
+    <string name="ra_163174_text">
+        Vaincre Érika en mode Défini, au niveau 46 maximum Utiliser uniquement des Pokémon de type Plante.
+    </string>
+    <string name="ra_163172_title">
+        Jeannine : équipe Poison
+    </string>
+    <string name="ra_163172_text">
+        Vaincre Jeannine en mode Défini, au niveau 39 maximum Utiliser uniquement des Pokémon de type Poison.
+    </string>
+    <string name="ra_163163_title">
+        Morgane : équipe Psy
+    </string>
+    <string name="ra_163163_text">
+        Vaincre Morgane en mode Défini, au niveau 48 maximum Utiliser uniquement des Pokémon de type Psy.
+    </string>
+    <string name="ra_163176_title">
+        Auguste : équipe Feu
+    </string>
+    <string name="ra_163176_text">
+        Vaincre Auguste en mode Défini, au niveau 50 maximum Utiliser uniquement des Pokémon de type Feu.
+    </string>
+    <string name="ra_163187_title">
+        Équipe improbable
+    </string>
+    <string name="ra_163187_text">
+        Vaincre Blue avec une équipe de Cadoizo, Corayon, Excelangue, Capumain, Canarticho et Onix, en mode
+        Défini et au niveau 58 maximum.
+    </string>
+    <string name="ra_163177_title">
+        Collection de poupées
+    </string>
+    <string name="ra_163177_text">
+        Posséder les quatre poupées achetées par la mère pour la chambre.
+    </string>
+    <string name="ra_163189_title">
+        Carnet de contacts
+    </string>
+    <string name="ra_163189_text">
+        Remplir les dix emplacements de numéros de téléphone.
+    </string>
+    <string name="ra_163162_title">
+        Objets cachés : quart
+    </string>
+    <string name="ra_163162_text">
+        Trouver 25 % des objets cachés de Johto et Kanto.
+    </string>
+    <string name="ra_163178_title">
+        CT à moitié trouvées
+    </string>
+    <string name="ra_163178_text">
+        Trouver la moitié des CT du terrain et de celles offertes par les personnages.
+    </string>
+    <string name="ra_5120_title">
+        Collection Argent
+    </string>
+    <string name="ra_5120_text">
+        Capturer 199 Pokémon sans échange externe et sans glitch permettant d’obtenir davantage de Pokémon de
+        départ ou de pierres.
+    </string>
+    <string name="ra_5636_title">
+        Déclaration à l’agent
+    </string>
+    <string name="ra_5636_text">
+        Donner le nom du rival à l’agent dans le laboratoire du Professeur Orme.
+    </string>
+    <string name="ra_199603_text">
+        Vaincre Albert en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 9 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_5934_title">
+        Sous-sol criminel
+    </string>
+    <string name="ra_5934_text">
+        Vaincre le Sbire Rocket dirigeant l’opération du Puits Ramoloss.
+    </string>
+    <string name="ra_199604_text">
+        Vaincre Hector en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 16 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199605_text">
+        Vaincre Blanche en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 20 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199564_title">
+        Arbre trompeur
+    </string>
+    <string name="ra_199564_text">
+        Capturer Simularbre sur la Route 36 et l’enregistrer dans le Pokédex.
+    </string>
+    <string name="ra_199566_title">
+        Rencontre avec Eusine
+    </string>
+    <string name="ra_199566_text">
+        Accomplir l’événement d’Eusine dans la Tour Cendrée.
+    </string>
+    <string name="ra_199606_text">
+        Vaincre Mortimer en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 25 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199568_title">
+        Défi d’Eusine
+    </string>
+    <string name="ra_199568_text">
+        Vaincre Eusine à Irisia.
+    </string>
+    <string name="ra_199607_text">
+        Vaincre Chuck en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 30 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199569_title">
+        Phare rallumé
+    </string>
+    <string name="ra_199569_text">
+        Soigner le Pharamp au sommet du Phare d’Oliville.
+    </string>
+    <string name="ra_199608_text">
+        Vaincre Jasmine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 35 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199594_title">
+        Suicune de la Route 42
+    </string>
+    <string name="ra_199594_text">
+        Rencontrer Suicune sur la Route 42.
+    </string>
+    <string name="ra_199570_title">
+        Léviator rouge
+    </string>
+    <string name="ra_199570_text">
+        Capturer le Léviator rouge au Lac Colère.
+    </string>
+    <string name="ra_5946_title">
+        Repaire d’Acajou fermé
+    </string>
+    <string name="ra_5946_text">
+        Faire échouer la Team Rocket dans son repaire d’Acajou.
+    </string>
+    <string name="ra_199571_title">
+        Tous les Rocket du repaire
+    </string>
+    <string name="ra_199571_text">
+        Vaincre tous les Dresseurs du Repaire Rocket d’Acajou.
+    </string>
+    <string name="ra_199609_text">
+        Vaincre Frédo en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 31 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_5947_title">
+        Exécutifs hors antenne
+    </string>
+    <string name="ra_5947_text">
+        Vaincre tous les Caïds Rocket de la Tour Radio de Doublonville.
+    </string>
+    <string name="ra_199572_title">
+        Tour et souterrain libérés
+    </string>
+    <string name="ra_199572_text">
+        Vaincre tous les Dresseurs de la Tour Radio et du souterrain de Doublonville.
+    </string>
+    <string name="ra_199595_title">
+        Suicune de la Route 36
+    </string>
+    <string name="ra_199595_text">
+        Rencontrer Suicune sur la Route 36.
+    </string>
+    <string name="ra_5948_title">
+        Vent du nord apaisé
+    </string>
+    <string name="ra_5948_text">
+        Capturer Suicune.
+    </string>
+    <string name="ra_199573_title">
+        Suicune sans Master Ball
+    </string>
+    <string name="ra_199573_text">
+        Capturer Suicune et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <string name="ra_199610_text">
+        Vaincre Sandra en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 40 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199576_title">
+        Minidraco avec Vit. Extrême
+    </string>
+    <string name="ra_199576_text">
+        Recevoir le Minidraco connaissant Vit. Extrême en répondant correctement à toutes les questions du
+        maître de l’Antre du Dragon dès la première tentative.
+    </string>
+    <string name="ra_5949_title">
+        Fin du voyage de Johto
+    </string>
+    <string name="ra_5949_text">
+        Vaincre le Conseil des 4 et Peter à la Ligue Pokémon et devenir Maître.
+    </string>
+    <string name="ra_199611_title">
+        Ligue de Johto exigeante
+    </string>
+    <string name="ra_199611_text">
+        Vaincre le Conseil des 4 et Peter dans une seule session en mode Défini, avec uniquement des Pokémon
+        introduits à Johto, sans espèce réservée à l’échange externe, sans Lugia ni Ho-Oh, sans dépasser le
+        niveau 44 pendant les combats et sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_5950_text">
+        Vaincre le Conseil des 4 et Peter avec un seul Pokémon.
+    </string>
+    <string name="ra_199612_text">
+        Vaincre Major Bob en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 46 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199613_text">
+        Vaincre Morgane en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 48 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <string name="ra_199585_title">
+        Courant rétabli
+    </string>
+    <string name="ra_199585_text">
+        Rapporter la Partie Machine volée au personnel de la Centrale de Kanto.
+    </string>
+    <string name="ra_199614_text">
+        Vaincre Ondine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 47 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_199615_text">
+        Vaincre Érika en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 46 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_199616_text">
+        Vaincre Jeannine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 39 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_199586_title">
+        Ronflex enregistré
+    </string>
+    <string name="ra_199586_text">
+        Capturer le Ronflex de Carmin sur Mer et l’enregistrer dans le Pokédex.
+    </string>
+    <string name="ra_199632_text">
+        Vaincre Pierre en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 44 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_199617_text">
+        Vaincre Auguste en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 50 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_199618_text">
+        Vaincre Blue en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 58 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <string name="ra_5958_title">
+        Duel des Maîtres
+    </string>
+    <string name="ra_5958_text">
+        Vaincre Red au sommet du Mont Argenté.
+    </string>
+    <string name="ra_199619_title">
+        Red : défi niveau 65
+    </string>
+    <string name="ra_199619_text">
+        Vaincre Red en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans dépasser le niveau 65 pendant tout le combat et sans utiliser d’objet du Sac.
+    </string>
+    <string name="ra_5959_text">
+        Vaincre Red avec un seul Pokémon.
+    </string>
+    <string name="ra_5951_title">
+        Bêtes légendaires
+    </string>
+    <string name="ra_5951_text">
+        Capturer Entei et Raikou.
+    </string>
+    <string name="ra_199574_title">
+        Raikou sans Master Ball
+    </string>
+    <string name="ra_199574_text">
+        Capturer Raikou et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <string name="ra_199575_title">
+        Entei sans Master Ball
+    </string>
+    <string name="ra_199575_text">
+        Capturer Entei et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <string name="ra_5952_title">
+        Gardien des profondeurs
+    </string>
+    <string name="ra_5952_text">
+        Capturer Lugia aux Tourb’Îles.
+    </string>
+    <string name="ra_199589_title">
+        Lugia sans Master Ball
+    </string>
+    <string name="ra_199589_text">
+        Capturer Lugia et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <string name="ra_5953_title">
+        Phénix de la Tour
+    </string>
+    <string name="ra_5953_text">
+        Capturer Ho-Oh dans la Tour Ferraille.
+    </string>
+    <string name="ra_199590_title">
+        Ho-Oh sans Master Ball
+    </string>
+    <string name="ra_199590_text">
+        Capturer Ho-Oh et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <string name="ra_199582_title">
+        Preuve d’éclosion
+    </string>
+    <string name="ra_199582_text">
+        Montrer le Pokémon issu de l’Œuf Mystère au Professeur Orme pour recevoir la Pierre Stase.
+    </string>
+    <string name="ra_199601_title">
+        Commande de dix Balls
+    </string>
+    <string name="ra_199601_text">
+        Recevoir au moins dix Balls artisanales simultanément de Fargas à Écorcia.
+    </string>
+    <string name="ra_199596_title">
+        Sommeil dans l’arbre
+    </string>
+    <string name="ra_199596_text">
+        Rencontrer un Pokémon endormi en utilisant Coup d’Boule sur un arbre.
+    </string>
+    <string name="ra_199561_title">
+        Œuf Bizarre
+    </string>
+    <string name="ra_199561_text">
+        Recevoir l’Œuf Bizarre de l’homme de la Pension sur la Route 34.
+    </string>
+    <string name="ra_199634_title">
+        Deux sept et Grolem
+    </string>
+    <string name="ra_199634_text">
+        Voir Grolem après avoir aligné deux 7 sur une machine à sous d’un Casino.
+    </string>
+    <string name="ra_199635_text">
+        Aligner 7-7-7 sur une machine à sous d’un Casino.
+    </string>
+    <string name="ra_199627_title">
+        Mise multipliée par 24
+    </string>
+    <string name="ra_199627_text">
+        Gagner une mise ×24 au jeu de cartes d’un Casino.
+    </string>
+    <string name="ra_199622_title">
+        Vainqueur du concours
+    </string>
+    <string name="ra_199622_text">
+        Remporter le Concours de Capture d’insectes au Parc Naturel.
+    </string>
+    <string name="ra_199623_title">
+        Concours sans favoris
+    </string>
+    <string name="ra_199623_text">
+        Remporter le Concours de Capture sans capturer Papilusion, Dardargnan, Insécateur ni Scarabrute.
+    </string>
+    <string name="ra_199624_title">
+        Concurrent d’élite
+    </string>
+    <string name="ra_199624_text">
+        Remporter le Concours de Capture lorsque le Topdresseur Nick y participe.
+    </string>
+    <string name="ra_199580_title">
+        Guérir Meumeu
+    </string>
+    <string name="ra_199580_text">
+        Soigner Meumeu à la Ferme Meumeu.
+    </string>
+    <string name="ra_199633_title">
+        Jus de Baie
+    </string>
+    <string name="ra_199633_text">
+        Faire transformer une Baie tenue par Caratroc en Jus de Baie après un combat.
+    </string>
+    <string name="ra_199630_title">
+        Caratroc adopté
+    </string>
+    <string name="ra_199630_text">
+        Augmenter assez l’amitié du Caratroc confié à Irisia pour que son propriétaire autorise à le garder.
+    </string>
+    <string name="ra_199591_title">
+        Vendredi aquatique
+    </string>
+    <string name="ra_199591_text">
+        Capturer Lokhlass dans les Caves Jumelles et l’enregistrer dans le Pokédex.
+    </string>
+    <string name="ra_199636_title">
+        Chambres des Ruines
+    </string>
+    <string name="ra_199636_text">
+        Résoudre tous les puzzles et ramasser tous les objets des chambres des Ruines d’Alpha.
+    </string>
+    <string name="ra_199578_title">
+        Écaille échangée
+    </string>
+    <string name="ra_199578_text">
+        Donner l’Écaille Rouge à M. Pokémon sur la Route 30 contre le Multi Exp.
+    </string>
+    <string name="ra_199581_title">
+        Record de Magicarpe
+    </string>
+    <string name="ra_199581_text">
+        Battre le record de taille de Magicarpe pour recevoir un Élixir du Maître Pêcheur près du Lac Colère.
+    </string>
+    <string name="ra_199620_title">
+        Capacité du mercredi
+    </string>
+    <string name="ra_199620_text">
+        Faire apprendre une capacité par le père de Léo devant le Casino de Doublonville.
+    </string>
+    <string name="ra_199637_title">
+        Dresseurs du bateau
+    </string>
+    <string name="ra_199637_text">
+        Vaincre tous les Dresseurs pouvant se trouver sur l’Aquaria, à l’exclusion de ceux du premier voyage.
+    </string>
+    <string name="ra_199640_title">
+        Passe du train
+    </string>
+    <string name="ra_199640_text">
+        Recevoir le Passe du Train Magnétique de la Copieuse à Safrania.
+    </string>
+    <string name="ra_199639_text">
+        Réunir les trois cannes à pêche.
+    </string>
+    <string name="ra_199587_title">
+        Rituel du lundi
+    </string>
+    <string name="ra_199587_text">
+        Recevoir une Pierre Lune après avoir observé le rituel des Mélofée au Square du Mont Sélénite.
+    </string>
+    <string name="ra_199593_title">
+        Dernier combat du voleur
+    </string>
+    <string name="ra_199593_text">
+        Remporter le combat facultatif contre le rival au Plateau Indigo.
+    </string>
+    <string name="ra_199625_text">
+        Faire toiletter un Pokémon par Nina à Bourg Palette.
+    </string>
+    <string name="ra_199621_title">
+        Amitié à puissance maximale
+    </string>
+    <string name="ra_199621_text">
+        Faire utiliser Retour ou Frustration à sa puissance maximale par un Pokémon.
+    </string>
+    <string name="ra_199626_title">
+        Puissance Cachée efficace
+    </string>
+    <string name="ra_199626_text">
+        Infliger des dégâts super efficaces avec Puissance Cachée.
+    </string>
+    <string name="ra_199567_title">
+        Pierre offerte par téléphone
+    </string>
+    <string name="ra_199567_text">
+        Recevoir une pierre d’évolution d’un Dresseur enregistré dans le Pokématos.
+    </string>
+    <string name="ra_199638_title">
+        Publicité à vélo
+    </string>
+    <string name="ra_199638_text">
+        Faire connaître le magasin de cycles de Doublonville et obtenir l’autorisation de garder la Bicyclette.
+    </string>
+    <string name="ra_199631_title">
+        Soldes sur le toit
+    </string>
+    <string name="ra_199631_text">
+        Acheter un objet lors des soldes sur le toit du Centre Commercial de Doublonville.
+    </string>
+    <string name="ra_199597_title">
+        Numéro de Buena
+    </string>
+    <string name="ra_199597_text">
+        Gagner 30 points sur la Carte Bleue puis ajouter le numéro de Buena au Pokématos.
+    </string>
+    <string name="ra_199579_title">
+        Pépite téléphonique
+    </string>
+    <string name="ra_199579_text">
+        Recevoir une Pépite du Pokéfan Beverly ou du Pokéfan Derek.
+    </string>
+    <string name="ra_199577_title">
+        Plus de PP
+    </string>
+    <string name="ra_199577_text">
+        Recevoir un PP Plus du Karatéka Kenji.
+    </string>
+    <string name="ra_199602_title">
+        Cinq vitamines
+    </string>
+    <string name="ra_199602_text">
+        Recevoir une vitamine de chacun des cinq Dresseurs dont les revanches en offrent.
+    </string>
+    <string name="ra_199565_title">
+        Tous les Pokémon offerts
+    </string>
+    <string name="ra_199565_text">
+        Recevoir tous les Pokémon offerts dans le jeu.
+    </string>
+    <string name="ra_199592_title">
+        Échanges sans câble
+    </string>
+    <string name="ra_199592_text">
+        Effectuer tous les échanges internes au jeu.
+    </string>
+    <string name="ra_199560_title">
+        Tous les Dresseurs de Johto
+    </string>
+    <string name="ra_199560_text">
+        Vaincre tous les Dresseurs non manquables de Johto.
+    </string>
+    <string name="ra_199562_title">
+        Tous les objets de Johto
+    </string>
+    <string name="ra_199562_text">
+        Ramasser tous les objets visibles et cachés du terrain de Johto.
+    </string>
+    <string name="ra_199584_title">
+        Tous les objets de Kanto
+    </string>
+    <string name="ra_199584_text">
+        Ramasser tous les objets visibles et cachés du terrain de Kanto.
+    </string>
+    <string name="ra_199563_title">
+        Toutes les CT et CS limitées
+    </string>
+    <string name="ra_199563_text">
+        Ramasser toutes les CT et CS disponibles en quantité limitée.
+    </string>
+    <string name="ra_199598_title">
+        Bâton sauvage
+    </string>
+    <string name="ra_199598_text">
+        Obtenir un Bâton d’un Canarticho sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <string name="ra_199599_title">
+        Masse Os sauvage
+    </string>
+    <string name="ra_199599_text">
+        Obtenir une Masse Os d’un Osselait ou Ossatueur sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <string name="ra_199600_title">
+        Œuf Chance sauvage
+    </string>
+    <string name="ra_199600_text">
+        Obtenir un Œuf Chance d’un Leveinard sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <string name="ra_5936_title">
+        Sept victoires consécutives
+    </string>
+    <string name="ra_5936_text">
+        Terminer une série de la Tour de Combat en battant sept Dresseurs de suite.
+    </string>
+    <string name="ra_199628_title">
+        Tour de Combat locale
+    </string>
+    <string name="ra_199628_text">
+        Terminer une série de la Tour de Combat avec uniquement des Pokémon introduits à Johto, sans Lugia ni
+        Ho-Oh.
+    </string>
+    <string name="ra_5954_title">
+        Collection Cristal
+    </string>
+    <string name="ra_5954_text">
+        Capturer les 206 Pokémon accessibles dans le jeu sans appareil externe.
+    </string>
+</resources>

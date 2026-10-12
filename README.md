@@ -31,6 +31,10 @@ Les sprites et leur réglage d'animation sont réutilisés. Les chapitres propos
 les objectifs manquables avant de poursuivre.
 
 Les cinq jeux GBA proposent les outils de reproduction et de bonheur dans « Guides » → « Astuces ».
+Ils proposent aussi douze chapitres de soluce par branche, des quêtes annexes, astuces et articles sur les bugs.
+Hoenn distingue Rubis/Saphir d’Émeraude et ajoute un calendrier pour l’Île Mirage, les marées, la loterie
+et l’horloge ; la Maison Piège figure dans les quêtes car ses défis dépendent des badges, pas du jour.
+Les remakes couvrent Kanto et la mission du Rubis et du Saphir dans les Îles Sevii.
 La reproduction utilise les parents du Pokédex National, six IV de 0 à 31, les talents possibles du bébé,
 les attaques transmises dans l’ordre du moteur et les objets tenus : encens, Ballon Lumière et Pierre Stase.
 Les IV affichés sont les valeurs parentales possibles, avec le tirage aléatoire restant ; aucun œuf précis
@@ -72,7 +76,9 @@ même Pokémon. Les autres réglages et les identifiants RetroAchievements sont 
 Android choisit le fichier, sans permission de stockage générale.
 
 Pour ajouter ou retirer un guide : modifier les définitions de `data/guide/` et les textes français de
-`res/values/strings.xml` ou un fichier de ressources dédié, comme `strings_guides_gen3.xml` pour les outils GBA.
+`res/values/strings_guides*.xml` ; `strings_achievements.xml` contient les textes des succès existants.
+Les textes de Hoenn, de son calendrier et des remakes ont chacun leur fichier dédié ;
+`strings_guides_gen3.xml` contient les outils GBA.
 Les listes de succès sont séparées par jeu, avec identifiant officiel, points,
 caractère manquable et chapitre associé. Les balises `[[pokemon:25|Pikachu]]`, `[[place:route-1|Route 1]]`,
 `[[item:potion|Potion]]` et `[[character:oaks-lab:Prof. Chen|Professeur Chen]]` sont validées au chargement.
@@ -515,7 +521,7 @@ personnages par version, objets fixes et conditions des scènes automatiques, av
 Ces catalogues sont validés hors ligne par `tools/check_assets.py`. Les décorations et la Baie Enigma
 personnalisée restent dans les catalogues en attendant leur interface prévue en phase 8.
 Les bibliothèques couvrent les onze jeux : les cinq jeux GBA proposent les outils de reproduction et de bonheur.
-Leurs soluces, autres articles et succès restent prévus dans la suite de la phase 7.
+Leurs soluces et autres articles sont disponibles ; les succès GBA restent prévus dans la suite de la phase 7.
 
 Le même export intègre les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.
