@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.domain.guide
 
+import org.opensources.pokmaps.domain.model.VersionGroup
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.MoveNote
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
@@ -23,8 +24,9 @@ object GbaBreeding {
         }
     }
 
-    fun natureParent(pair: BreedingPair, first: ParentValues, second: ParentValues, emerald: Boolean): Int? {
-        if (!emerald) return null
+    /** Parent dont la Pierre Stase transmet la nature (0 ou 1), dans les jeux où elle la transmet. */
+    fun natureParent(pair: BreedingPair, first: ParentValues, second: ParentValues, group: VersionGroup): Int? {
+        if (!everstonePassesNature(group)) return null
         val parent = when {
             pair.first.id == BreedingRules.DITTO -> 0
             pair.second.id == BreedingRules.DITTO -> 1
@@ -34,6 +36,14 @@ object GbaBreeding {
         }
         val values = if (parent == 0) first else second
         return parent.takeIf { values.item == BreedingItem.EVERSTONE }
+    }
+
+    /** La Pierre Stase transmet la nature à partir d'Émeraude ; Rouge Feu et Vert Feuille sont sortis avant. */
+    private fun everstonePassesNature(group: VersionGroup): Boolean = when (group) {
+        VersionGroup.EMERALD -> true
+
+        VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,
+        VersionGroup.RUBY_SAPPHIRE, VersionGroup.FIRERED_LEAFGREEN -> false
     }
 
     fun inherited(child: PokemonDetails, donor: List<Int>, other: List<Int>, lightBall: Boolean): List<LearnedMove> {

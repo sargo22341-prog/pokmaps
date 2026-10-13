@@ -83,6 +83,14 @@ class GameViewModelTest {
     }
 
     @Test
+    fun aGameWithoutRulesInTheApplicationIsAnError() = runTest {
+        val unsupported = FakeGameDao.RED.copy(versionGroupIdentifier = "diamond-pearl")
+        val viewModel = viewModel(FakeGameDao(games = listOf(FakeGameDao.BLUE, unsupported)))
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        assertEquals(GameUiState(loading = false, failed = true), viewModel.state.value)
+    }
+
+    @Test
     fun anUnreadableDatabaseIsAnError() = runTest {
         val viewModel = viewModel(FakeGameDao(failing = true))
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }

@@ -1,11 +1,57 @@
 """Métadonnées de présentation et capacités horaires des jeux."""
 
+import re
 import sqlite3
 from pathlib import Path
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import FIRERED_LEAFGREEN, GEN3_GAMES
+from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, PretFormat
 from pokemaps_data.validate import validate
+
+_APP = Path(__file__).parents[2] / "app/src/main/java/org/opensources/pokmaps"
+# Capacités de chaque version livrée : groupe, génération, format pret, famille de cartes, régions,
+# Pokédex National débloqué et génération d'origine d'un remake.
+_MATRIX = {
+    "red": ("red-blue", 1, PretFormat.GEN1, "red-blue-yellow", ("KANTO",), False, None),
+    "blue": ("red-blue", 1, PretFormat.GEN1, "red-blue-yellow", ("KANTO",), False, None),
+    "yellow": ("yellow", 1, PretFormat.GEN1, "red-blue-yellow", ("KANTO",), False, None),
+    "gold": ("gold-silver", 2, PretFormat.GEN2, "gold-silver-crystal", ("JOHTO", "KANTO"), False, None),
+    "silver": ("gold-silver", 2, PretFormat.GEN2, "gold-silver-crystal", ("JOHTO", "KANTO"), False, None),
+    "crystal": ("crystal", 2, PretFormat.GEN2, "gold-silver-crystal", ("JOHTO", "KANTO"), False, None),
+    "ruby": ("ruby-sapphire", 3, PretFormat.GEN3, "ruby-sapphire-emerald", ("HOENN",), True, None),
+    "sapphire": ("ruby-sapphire", 3, PretFormat.GEN3, "ruby-sapphire-emerald", ("HOENN",), True, None),
+    "emerald": ("emerald", 3, PretFormat.GEN3, "ruby-sapphire-emerald", ("HOENN",), True, None),
+    "firered": ("firered-leafgreen", 3, PretFormat.GEN3, "firered-leafgreen", ("KANTO", "SEVII"), True, 1),
+    "leafgreen": ("firered-leafgreen", 3, PretFormat.GEN3, "firered-leafgreen", ("KANTO", "SEVII"), True, 1),
+}
+
+
+def test_capabilities_of_the_eleven_versions(db: sqlite3.Connection) -> None:
+    assert GAMES_IN_PROGRESS == ()
+    query = "SELECT v.identifier, vg.generation_id FROM version v JOIN version_group vg ON vg.id = v.version_group_id"
+    generations = dict(db.execute(query))
+    declared = {
+        version: (
+            game.version_group,
+            generations[version],
+            game.pret_format,
+            game.map_family,
+            tuple(region.const for region in game.regions),
+            game.national_dex,
+            game.remake_generation,
+        )
+        for game in GAMES
+        for version, _ in game.pret_versions
+    }
+    assert declared == _MATRIX
+    assert set(generations) == set(_MATRIX)
+
+
+def test_app_version_groups_match_the_pipeline_families() -> None:
+    source = (_APP / "domain/model/VersionGroup.kt").read_text(encoding="utf-8")
+    entries = re.findall(r'^\s+[A-Z_]+\("([a-z-]+)", "([a-z-]+)"\)[,;]$', source, re.MULTILINE)
+    assert dict(entries) == {game.version_group: game.map_family for game in GAMES}
+    assert len(entries) == len(GAMES)
 
 
 def test_remake_generation_is_explicit() -> None:

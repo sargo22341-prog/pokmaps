@@ -9,11 +9,16 @@ import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 @Singleton
 class GameRepository @Inject constructor(private val dao: GameDao, private val settings: GameSettings) {
     val games: Flow<List<Game>> = dao.games().map { games ->
         check(games.isNotEmpty()) { "Catalogue de jeux vide" }
+        val unsupported = games.filterNot { VersionGroup.isSupported(it.versionGroupIdentifier) }
+        check(unsupported.isEmpty()) {
+            "Jeux sans règles dans l'application : ${unsupported.joinToString { it.versionIdentifier }}"
+        }
         games
     }
 

@@ -30,6 +30,16 @@ internal class FakeGameDao(private val games: List<Game> = listOf(RED, BLUE), pr
             FIRERED,
             FIRERED.copy(versionId = 11, versionIdentifier = "leafgreen", name = "Vert Feuille")
         )
+
+        /** Les onze versions de la base livrée, dans son ordre (identifiants, groupes et générations). */
+        val ELEVEN_GAMES = listOf(
+            RED,
+            BLUE,
+            Game(3, "yellow", "Jaune", 2, "yellow", 1, 25, 0xF2C21B),
+            GOLD,
+            GOLD.copy(versionId = 5, versionIdentifier = "silver", name = "Argent"),
+            Game(6, "crystal", "Cristal", 4, "crystal", 2, 245, 0x59BFCB)
+        ) + GBA_GAMES
         const val BROKEN = "Base illisible"
         private const val CHARIZARD = 6
         private const val BLASTOISE = 9

@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.pokemon
 
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Alphabet complet ; les signes de ponctuation apparaissent à partir de la troisième génération. */
 enum class UnownForm(val identifier: String, val symbol: String, val firstGeneration: Int = 2) {
@@ -44,9 +45,11 @@ enum class UnownForm(val identifier: String, val symbol: String, val firstGenera
 
         fun available(generation: Int): List<UnownForm> = entries.filter { it.firstGeneration <= generation }
 
-        fun available(game: Game): List<UnownForm> = when (game.versionGroupIdentifier) {
-            "ruby-sapphire", "emerald" -> emptyList()
-            else -> available(game.generationId)
+        fun available(game: Game): List<UnownForm> = when (game.versionGroup) {
+            VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> emptyList()
+
+            VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,
+            VersionGroup.FIRERED_LEAFGREEN -> available(game.generationId)
         }
 
         fun from(identifier: String): UnownForm = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

@@ -4,6 +4,7 @@ import kotlin.math.abs
 import org.opensources.pokmaps.domain.model.ExternalEvent
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.MapRegion
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Carte d'un jeu : affichable (carte du monde ou intérieure) ou partie de la carte du monde (ville, route). */
 data class MapInfo(
@@ -124,7 +125,7 @@ data class MapCatalog(
         }
 
     val defaultWorld: MapInfo? = worlds.firstOrNull {
-        it.identifier == MapDestinations.startRegion(versionGroupIdentifier)
+        it.identifier == MapDestinations.startRegion(VersionGroup.of(versionGroupIdentifier))
     } ?: worlds.firstOrNull { it.identifier != "hoenn-underwater" }
 
     fun isWorld(mapId: Int): Boolean = maps[mapId]?.isWorld == true

@@ -117,6 +117,32 @@ bibliothèque comprise, et la hachait à chaque frame de la transition. L'état 
 comparée par instance. En alternant les builds (cinq ouvertures chacune), le CPU médian d'une ouverture passe de
 70,6–74,9 ms à 56,9–65,1 ms, et la frame la plus longue de 28,5–28,8 ms à 21,6–27,9 ms.
 
+## Catalogues de cartes gardés en mémoire
+
+Mesure JVM (tests Robolectric sur la base livrée, tas après GC, trois passages concordants) : un catalogue retient
+0,73 à 1,76 Mio et son index 50 à 400 Kio. `MapRepository` les gardait pour chaque version visitée, soit ≈14 Mio
+après un tour des onze jeux. Il ne garde plus que les deux dernières versions consultées, et une version sœur
+reprend cartes, warps, zones et emplacements de sa jumelle encore en mémoire (Bleu : 732 → 215 Kio ;
+Saphir : 1 380 → 456 Kio). Après un tour des onze jeux : ≈2,4 Mio. Relire un jeu oublié coûte 16 à 40 ms,
+hors du fil principal. Objets, fruits et offres restent lus pour chaque version.
+
+## Index SQL et doublons d'assets : mesurés, non retenus
+
+Les 40 requêtes des DAO, extraites telles quelles, ont été chronométrées sur une copie de la base livrée
+(SQLite de bureau, paramètres d'Émeraude, médiane de sept séries). Trois seulement parcourent une table entière,
+toutes petites : `item` (323 lignes), `evolution` (938), `pokemon_type` (1 131). Des index sur
+`evolution(version_group_id)`, `pokemon_type(generation_id)` et `pokemon_item(version_id)` ajoutent 44 Kio
+et ne gagnent que 0,1 à 0,2 ms sur des requêtes lues une fois par jeu ; `MapDao.items` et
+`PokemonDao.evolutions` deviennent même plus lentes, le planificateur choisissant le nouvel index. Aucun index
+n'est ajouté. Les requêtes les plus longues (2 à 5 ms) lisent les milliers d'objets, emplacements et offres
+d'un catalogue de carte, une fois par version et hors du fil principal.
+
+Assets : 3 354 fichiers sur 15 443 sont des copies exactes d'un autre (3,2 Mio sur 75,7 Mio, 4,3 %),
+presque tous des tuiles d'intérieurs identiques (Centres Pokémon, maisons), dont 1 752 groupes communs à
+plusieurs groupes de versions. Un stockage partagé exigerait un index des tuiles dans l'application, une autre
+écriture des tuiles par le pipeline et une régénération complète, pour ≈3 % de l'APK et aucun effet sur la
+mémoire ni la fluidité : non retenu.
+
 ## Limites et pistes non traitées
 
 - L'animation des sprites coûte ≈20 Mio de PSS sur le Pokédex National.

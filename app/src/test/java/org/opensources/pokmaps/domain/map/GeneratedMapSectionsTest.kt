@@ -76,11 +76,11 @@ class GeneratedMapSectionsTest {
         DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)
+            val groups = groupIdentifiers(connection)
             assertEquals(setOf(1, 2, 3, 4, 5, 6, 7), versions.keys)
             versions.forEach { (group, entries) ->
                 val maps = entries.map { it.second }.associateBy { it.id }
-                val identifier = mapOf(5 to "ruby-sapphire", 6 to "emerald", 7 to "firered-leafgreen")[group] ?: "test"
-                val catalog = MapCatalog(identifier, maps, warps, emptyMap(), emptyMap())
+                val catalog = MapCatalog(groups.getValue(group), maps, warps, emptyMap(), emptyMap())
                 maps.values.filter { it.isDisplayable && !it.isWorld }.forEach { current ->
                     val sections = catalog.floorsOf(current.id)
                     assertTrue(current.identifier, sections.all { it.name.isNotBlank() })
@@ -117,6 +117,12 @@ class GeneratedMapSectionsTest {
         assertTrue(identifier, plan.isDisplayable)
         assertEquals(identifier, parts, catalog.regionsOf(plan.id).size)
         assertEquals(identifier, floors, catalog.floorsOf(plan.id).size)
+    }
+
+    private fun groupIdentifiers(connection: Connection): Map<Int, String> = connection.createStatement().use { query ->
+        query.executeQuery("SELECT id, identifier FROM version_group").use { rows ->
+            buildMap { while (rows.next()) put(rows.getInt("id"), rows.getString("identifier")) }
+        }
     }
 
     private fun maps(connection: Connection): List<Pair<Int, MapInfo>> = connection.createStatement().use { query ->

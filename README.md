@@ -353,6 +353,10 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
   points), puis de les représenter dans les modèles du domaine et les ressources françaises ;
 - de classer ses nouvelles méthodes de rencontre (ex. `headbutt`) dans `ObtainMethod` : une méthode inconnue
   fait échouer le chargement au lieu de disparaître en silence des filtres et de la carte ;
+- de déclarer son groupe de versions dans `VersionGroup` (application), avec la même famille de cartes que
+  `games.py` : un groupe absent est refusé au chargement des jeux, et la compilation signale chaque règle propre
+  à un jeu (bonheur, Zarbi, guides, région de départ, Pierre Stase) à décider pour lui. Les matrices des onze
+  versions (`VersionGroupMatrixTest`, `test_game_capabilities.py`) se complètent avec lui ;
 - de lire les effets de ses attaques (`pret_moves.py`, `pret_gen2_moves.py` et `move_effects.csv`) : une
   attaque sans effet arrête la génération.
 

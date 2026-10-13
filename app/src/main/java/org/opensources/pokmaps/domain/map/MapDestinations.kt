@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.domain.map
 
+import org.opensources.pokmaps.domain.model.VersionGroup
+
 /** Destinations du menu : régions principales et entrées des îles distribuées par événement. */
 internal object MapDestinations {
     private val eventEntrances = listOf(
@@ -9,10 +11,10 @@ internal object MapDestinations {
         "faraway-island-entrance"
     )
 
-    fun startRegion(group: String): String = when (group) {
-        "gold-silver", "crystal" -> "johto"
-        "ruby-sapphire", "emerald" -> "hoenn"
-        else -> "kanto"
+    fun startRegion(group: VersionGroup): String = when (group) {
+        VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> "johto"
+        VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> "hoenn"
+        VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.FIRERED_LEAFGREEN -> "kanto"
     }
 
     fun menu(worlds: List<MapInfo>, maps: Collection<MapInfo>): List<MapInfo> =
