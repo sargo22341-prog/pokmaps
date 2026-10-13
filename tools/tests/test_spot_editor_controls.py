@@ -39,6 +39,11 @@ class LocalTerrains:
         return "kanto"
 
 
+class HoennTerrains(LocalTerrains):
+    def kinds(self, _family: Family, identifier: str) -> frozenset[str]:
+        return frozenset({"underwater"}) if identifier.startswith("underwater") else frozenset({"grass", "water"})
+
+
 @pytest.fixture
 def window() -> Iterator[tk.Tk]:
     root = tk.Tk()
@@ -214,5 +219,43 @@ def test_editor_adds_a_point_only_for_the_displayed_group(
         editor.version_choice._changed(SimpleNamespace())
         assert editor.session.merged() == {key: frozenset({VALID})}
         assert editor._key("grass").version_group == "yellow"
+    finally:
+        editor.catalog.close()
+
+
+def test_editor_selects_only_existing_underwater_plans_and_restores_shared_choices(
+    window: tk.Tk, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
+    monkeypatch.setattr(app, "WildTerrains", lambda _cache: HoennTerrains())
+    monkeypatch.setattr(app, "read_spots", dict)
+    original = app.EditorCatalog.families
+    monkeypatch.setattr(
+        app.EditorCatalog,
+        "families",
+        lambda catalog: [family for family in original(catalog) if family.identifier == "ruby-sapphire-emerald"],
+    )
+    editor = app.MapEditor(window)
+    try:
+        for identifier, group in (("underwater1", "ruby-sapphire"), ("underwater-route124", "emerald")):
+            monkeypatch.setattr(editor.canvas.canvas, "winfo_width", lambda: 640)
+            monkeypatch.setattr(editor.canvas.canvas, "winfo_height", lambda: 480)
+            editor._load_family(identifier)
+            assert editor.current is not None
+            assert editor.current.identifier == identifier
+            assert editor.current.version_group == group
+            assert editor.version_choice.groups == (group,)
+            assert editor._editing_family().version_groups == (group,)
+            assert editor._kind() == "underwater"
+            assert editor.canvas._photo is not None
+            editor.version_choice.only_displayed.set(True)
+            assert editor._key("underwater").version_group == group
+            editor.version_choice.only_displayed.set(False)
+        editor._load_family("route124")
+        assert editor.version_choice.groups == ("ruby-sapphire", "emerald")
+        assert editor.version_choice.group == "emerald"
+        editor.version_choice.select("ruby-sapphire")
+        editor._select_map()
+        assert editor.current.version_group == "ruby-sapphire"
     finally:
         editor.catalog.close()

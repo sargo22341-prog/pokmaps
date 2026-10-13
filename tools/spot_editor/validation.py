@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pokemaps_data.map_spots import Point, TerrainKey, selected_key, write_spots
 
-from .catalog import Family
+from .catalog import EditorCatalog, Family
 from .session import SpotSession
 from .terrain import WildTerrains
 
@@ -26,7 +26,9 @@ class SpotError:
         return f"{self.key.map_identifier}{scope} · {self.key.kind} · {location} : {self.message}"
 
 
-def spot_errors(session: SpotSession, families: list[Family], terrains: WildTerrains) -> list[SpotError]:
+def spot_errors(
+    session: SpotSession, families: list[Family], terrains: WildTerrains, catalog: EditorCatalog | None = None
+) -> list[SpotError]:
     """Recense toutes les erreurs pour pouvoir les corriger sans recommencer une validation par point."""
     by_family = {family.identifier: family for family in families}
     errors = []
@@ -35,9 +37,13 @@ def spot_errors(session: SpotSession, families: list[Family], terrains: WildTerr
         family = by_family.get(key.family)
         if family is None:
             continue
+        available = family.version_groups if catalog is None else catalog.available_groups(family, key.map_identifier)
+        if not available or (key.version_group and key.version_group not in available):
+            errors.append(SpotError(key, None, "Carte absente des jeux ciblés"))
+            continue
         groups = tuple(
             group
-            for group in family.version_groups
+            for group in available
             if (not key.version_group or key.version_group == group) and selected_key(merged, key, group) == key
         )
         if not groups:
@@ -71,9 +77,15 @@ def write_errors(errors: list[SpotError], path: Path) -> None:
     temporary.replace(path)
 
 
-def save_spots(session: SpotSession, families: list[Family], terrains: WildTerrains, path: Path) -> None:
+def save_spots(
+    session: SpotSession,
+    families: list[Family],
+    terrains: WildTerrains,
+    path: Path,
+    catalog: EditorCatalog | None = None,
+) -> None:
     """Refuse les points invalides avant de remplacer le CSV ; conserve les changements en cas d'échec."""
-    errors = spot_errors(session, families, terrains)
+    errors = spot_errors(session, families, terrains, catalog)
     if errors:
         raise ValueError(f"{len(errors)} erreur(s). {errors[0].label}. Consultez la liste des erreurs.")
     write_spots(session.merged(), path)
