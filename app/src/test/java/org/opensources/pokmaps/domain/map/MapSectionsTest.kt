@@ -101,5 +101,5 @@ class MapSectionsTest {
     private fun map(id: Int, identifier: String, name: String) = MapInfo(id, identifier, name, null, 0, 0, 320, 320, 2)
 
     private fun catalog(maps: List<MapInfo>, warps: List<MapWarp> = emptyList()) =
-        MapCatalog("test", maps.associateBy { it.id }, warps.groupBy { it.mapId }, emptyMap(), emptyMap())
+        MapCatalog("red-blue", maps.associateBy { it.id }, warps.groupBy { it.mapId }, emptyMap(), emptyMap())
 }

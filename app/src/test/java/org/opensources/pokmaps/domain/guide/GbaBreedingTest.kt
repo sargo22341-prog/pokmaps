@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import org.opensources.pokmaps.domain.model.PokemonType
+import org.opensources.pokmaps.domain.model.VersionGroup
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
@@ -57,18 +58,20 @@ class GbaBreedingTest {
     fun everstoneIsEmeraldOnlyAndDittoTakesPriorityOverTheFemale() {
         val pair = BreedingPair(breedingPokemon(1), breedingPokemon(2), emptyList(), 3)
         val stone = female.copy(item = BreedingItem.EVERSTONE)
-        assertNull(GbaBreeding.natureParent(pair, stone, male, false))
-        assertEquals(0, GbaBreeding.natureParent(pair, stone, male, true))
-        assertNull(GbaBreeding.natureParent(pair, female, male.copy(item = BreedingItem.EVERSTONE), true))
+        assertNull(GbaBreeding.natureParent(pair, stone, male, VersionGroup.RUBY_SAPPHIRE))
+        assertNull(GbaBreeding.natureParent(pair, stone, male, VersionGroup.FIRERED_LEAFGREEN))
+        assertEquals(0, GbaBreeding.natureParent(pair, stone, male, VersionGroup.EMERALD))
+        val maleStone = male.copy(item = BreedingItem.EVERSTONE)
+        assertNull(GbaBreeding.natureParent(pair, female, maleStone, VersionGroup.EMERALD))
         val ditto = pair.copy(second = breedingPokemon(132, listOf("Métamorph"), GenderRatio.Genderless))
-        assertNull(GbaBreeding.natureParent(ditto, stone, ParentValues(ParentSex.GENDERLESS), true))
+        assertNull(GbaBreeding.natureParent(ditto, stone, ParentValues(ParentSex.GENDERLESS), VersionGroup.EMERALD))
         assertEquals(
             1,
             GbaBreeding.natureParent(
                 ditto,
                 stone,
                 ParentValues(ParentSex.GENDERLESS, item = BreedingItem.EVERSTONE),
-                true
+                VersionGroup.EMERALD
             )
         )
     }

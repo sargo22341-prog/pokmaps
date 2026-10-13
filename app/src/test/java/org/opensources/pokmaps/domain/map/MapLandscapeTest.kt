@@ -62,11 +62,11 @@ class MapLandscapeTest {
     fun otherRegionsAndMissingLevelsRemainIndependent() {
         val remake = GeneratedGbaCatalog.load("firered-leafgreen")
         assertEquals(setOf("kanto", "sevii"), remake.regionWorlds.filter { it.isWorld }.map { it.identifier }.toSet())
-        val empty = MapCatalog("empty", emptyMap(), emptyMap(), emptyMap(), emptyMap())
+        val empty = MapCatalog("red-blue", emptyMap(), emptyMap(), emptyMap(), emptyMap())
         assertTrue(empty.regionWorlds.isEmpty())
         assertTrue(empty.floorsOf(1).isEmpty())
         val surface = requireNotNull(GeneratedGbaCatalog.load("emerald").mapByIdentifier("hoenn"))
-        val single = MapCatalog("single", mapOf(surface.id to surface), emptyMap(), emptyMap(), emptyMap())
+        val single = MapCatalog("red-blue", mapOf(surface.id to surface), emptyMap(), emptyMap(), emptyMap())
         assertTrue(single.floorsOf(surface.id).isEmpty())
     }
 }

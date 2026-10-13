@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.guide
 
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 enum class FriendshipRules {
     GOLD_SILVER,
@@ -48,13 +49,13 @@ enum class FriendshipRules {
     }
 
     companion object {
-        fun forGame(game: Game): FriendshipRules = when (game.versionGroupIdentifier) {
-            "gold-silver" -> GOLD_SILVER
-            "crystal" -> CRYSTAL
-            "ruby-sapphire" -> RUBY_SAPPHIRE
-            "emerald" -> EMERALD
-            "firered-leafgreen" -> FIRERED_LEAFGREEN
-            else -> error("Jeu sans outil de bonheur : ${game.versionIdentifier}")
+        fun forGame(game: Game): FriendshipRules = when (game.versionGroup) {
+            VersionGroup.GOLD_SILVER -> GOLD_SILVER
+            VersionGroup.CRYSTAL -> CRYSTAL
+            VersionGroup.RUBY_SAPPHIRE -> RUBY_SAPPHIRE
+            VersionGroup.EMERALD -> EMERALD
+            VersionGroup.FIRERED_LEAFGREEN -> FIRERED_LEAFGREEN
+            VersionGroup.RED_BLUE, VersionGroup.YELLOW -> error("Jeu sans outil de bonheur : ${game.versionIdentifier}")
         }
     }
 }

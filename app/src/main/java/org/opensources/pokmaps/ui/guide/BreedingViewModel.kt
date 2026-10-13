@@ -54,8 +54,8 @@ data class BreedingUiState(
     val babyAbilities: List<Pair<String, String>> = babies.map { child ->
         child.name to child.traits.abilities.joinToString { it.name }
     }
-    val natureParent: Int? = pair?.let {
-        GbaBreeding.natureParent(it, first, second, catalog?.game?.versionIdentifier == "emerald")
+    val natureParent: Int? = pair?.let { selected ->
+        catalog?.game?.let { GbaBreeding.natureParent(selected, first, second, it.versionGroup) }
     }
     val firstMoves: List<LearnedMove> = pair?.first?.let {
         (it.levelUpMoves + it.machineMoves + it.eggMoves + it.tutorMoves).distinctBy { move ->

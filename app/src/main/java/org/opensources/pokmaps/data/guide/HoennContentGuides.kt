@@ -11,6 +11,7 @@ import org.opensources.pokmaps.domain.hoenn.HoennContent
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 internal fun hoennContentGuides(): List<GuideDefinition> {
     val versions = RUBY_SAPPHIRE_VERSIONS + EMERALD_VERSIONS
@@ -50,10 +51,13 @@ internal fun hoennContentGuides(): List<GuideDefinition> {
 }
 
 internal fun decorationGuide(context: Context, game: Game, catalog: MapCatalog, content: HoennContent): GuideArticle {
-    val source = if (game.versionGroupIdentifier == "ruby-sapphire") {
-        "https://github.com/pret/pokeruby/blob/5784633ce4ef/src/decoration.c"
-    } else {
-        "https://github.com/pret/pokeemerald/blob/731ad5bfd6e6/src/data/decoration/header.h"
+    val source = when (game.versionGroup) {
+        VersionGroup.RUBY_SAPPHIRE -> "https://github.com/pret/pokeruby/blob/5784633ce4ef/src/decoration.c"
+
+        VersionGroup.EMERALD -> "https://github.com/pret/pokeemerald/blob/731ad5bfd6e6/src/data/decoration/header.h"
+
+        VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,
+        VersionGroup.FIRERED_LEAFGREEN -> error("Décorations hors de Hoenn : ${game.versionIdentifier}")
     }
     val paragraphs = listOf(listOf(GuideSpan(context.getString(R.string.guide_decorations_intro)))) +
         content.decorations.map { decoration ->

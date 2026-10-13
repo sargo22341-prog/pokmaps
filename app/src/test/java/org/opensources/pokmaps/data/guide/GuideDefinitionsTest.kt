@@ -2,6 +2,7 @@ package org.opensources.pokmaps.data.guide
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.opensources.pokmaps.data.db.FakeGameDao
 
 class GuideDefinitionsTest {
     private fun allDefinitions(): List<GuideDefinition> =
@@ -12,13 +13,19 @@ class GuideDefinitionsTest {
     @Test
     fun selectingProvidersKeepsEveryDefinitionAndItsOrderForElevenGames() {
         val original = allDefinitions()
-        for (version in 1..11) {
-            assertEquals(original.filter { version in it.versions }, guideDefinitions(version))
+        assertEquals((1..11).toList(), FakeGameDao.ELEVEN_GAMES.map { it.versionId })
+        for (game in FakeGameDao.ELEVEN_GAMES) {
+            assertEquals(original.filter { game.versionId in it.versions }, guideDefinitions(game))
         }
     }
 
     @Test(expected = IllegalStateException::class)
-    fun unknownVersionHasNoImplicitLibrary() {
-        guideDefinitions(12)
+    fun unknownVersionOfAKnownGroupHasNoImplicitLibrary() {
+        guideDefinitions(FakeGameDao.RED.copy(versionId = 12))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun unknownGroupHasNoImplicitLibrary() {
+        guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "diamond-pearl"))
     }
 }

@@ -17,12 +17,9 @@ data class Game(
     val remakeGenerationId: Int? = null,
     val hasTimeOfDay: Boolean = false
 ) {
+    /** Groupe de versions, dont la prise en charge est vérifiée à la lecture des jeux (GameRepository). */
+    val versionGroup: VersionGroup get() = VersionGroup.of(versionGroupIdentifier)
+
     /** Familles de plans communes, également utilisées par le pipeline pour les emplacements relus. */
-    val mapFamily: String
-        get() = when (versionGroupIdentifier) {
-            "red-blue", "yellow" -> "red-blue-yellow"
-            "gold-silver", "crystal" -> "gold-silver-crystal"
-            "ruby-sapphire", "emerald" -> "ruby-sapphire-emerald"
-            else -> versionGroupIdentifier
-        }
+    val mapFamily: String get() = versionGroup.mapFamily
 }

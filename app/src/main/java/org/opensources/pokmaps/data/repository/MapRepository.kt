@@ -40,16 +40,20 @@ import org.opensources.pokmaps.domain.pokemon.MoveEffect
 /**
  * Room lit sur son propre exécuteur, mais les conversions et index qui suivent reprendraient sur le fil de
  * l'appelant (souvent le fil principal) : catalogue et index sont donc construits sur `computation`.
+ *
+ * Seules les [MAX_VERSIONS] dernières versions consultées restent en mémoire : un catalogue et son index retiennent
+ * 0,8 à 2,2 Mio, et les garder tous ferait croître la mémoire avec chaque jeu ajouté. Le jeu choisi et le précédent
+ * suffisent pour comparer deux versions ; un jeu oublié se relit en quelques dizaines de millisecondes.
  */
 @Singleton
 class MapRepository @Inject constructor(private val dao: MapDao, private val computation: CoroutineDispatcher) {
     private val mutex = Mutex()
-    private val catalogs = mutableMapOf<Int, MapCatalog>()
-    private val indexes = mutableMapOf<Int, GameIndex>()
+    private val catalogs = recentVersions<MapCatalog>()
+    private val indexes = recentVersions<GameIndex>()
 
     /**
      * Cartes du jeu avec leurs warps, objets et zones, dans la version (Ho-Oh et Lugia n'ont pas le même niveau en Or
-     * et en Argent) : gardées en mémoire, la base ne change pas.
+     * et en Argent) : gardées en mémoire tant que la version est récente, la base ne change pas.
      */
     suspend fun catalog(game: Game): MapCatalog = mutex.withLock {
         catalogs.getOrPut(game.versionId) { withContext(computation) { loadCatalog(game) } }
@@ -58,11 +62,14 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
     private suspend fun loadCatalog(game: Game): MapCatalog {
         val vg = game.versionGroupId
         val fruits = loadFruits(game)
-        val maps = dao.maps(vg).map { it.toInfo() }.associateBy { it.id }
+        // Cartes, warps, zones et emplacements ne dépendent que du groupe de versions : ceux d'une version sœur
+        // encore en mémoire (Rouge pour Bleu) sont repris tels quels. Objets et fruits restent lus pour la version.
+        val sibling = catalogs.values.firstOrNull { it.versionGroupIdentifier == game.versionGroupIdentifier }
+        val maps = sibling?.maps ?: dao.maps(vg).map { it.toInfo() }.associateBy { it.id }
         return MapCatalog(
             versionGroupIdentifier = game.versionGroupIdentifier,
             maps = maps,
-            warps = dao.warps(vg)
+            warps = sibling?.warps ?: dao.warps(vg)
                 .map { MapWarp(it.id, it.mapId, it.x, it.y, it.targetMapId, it.targetX, it.targetY) }
                 .groupBy { it.mapId },
             objects = dao.objects(vg, game.versionId).map {
@@ -86,8 +93,8 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
                     shiny = FixedPokemon.isShiny(maps[it.mapId]?.identifier, it.pokemonId)
                 )
             }.groupBy { it.mapId },
-            areas = dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
-            spots = dao.spots(vg).map { spot ->
+            areas = sibling?.areas ?: dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
+            spots = sibling?.spots ?: dao.spots(vg).map { spot ->
                 MapSpot(spot.mapId, SpotKind.from(spot.kind), spot.x, spot.y)
             }.groupBy { it.mapId }
         )
@@ -107,7 +114,7 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
 
     /**
      * Objets et offres des personnages du jeu, dans la version (les lots du Casino diffèrent entre Rouge et Bleu) :
-     * gardés en mémoire comme les cartes.
+     * gardés en mémoire comme les cartes, jamais partagés entre versions.
      */
     suspend fun index(game: Game): GameIndex = mutex.withLock {
         indexes.getOrPut(game.versionId) { withContext(computation) { loadIndex(game) } }
@@ -308,5 +315,14 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
         }
         val effect = row.effect?.let { MoveEffect(it, row.effectChance) }
         ItemDetails(row.id, row.identifier, row.name, row.hasSprite, row.description, move, effect)
+    }
+
+    private companion object {
+        const val MAX_VERSIONS = 2
+
+        /** Valeurs par version, dans l'ordre des consultations : la plus ancienne est oubliée au-delà du plafond. */
+        fun <V> recentVersions(): MutableMap<Int, V> = object : LinkedHashMap<Int, V>(MAX_VERSIONS + 1, 1f, true) {
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Int, V>?): Boolean = size > MAX_VERSIONS
+        }
     }
 }

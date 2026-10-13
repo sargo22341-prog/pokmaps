@@ -2,11 +2,15 @@ package org.opensources.pokmaps.data.repository
 
 import kotlin.coroutines.ContinuationInterceptor
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotSame
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
@@ -22,6 +26,7 @@ import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferItem
 import org.opensources.pokmaps.domain.map.Weekday
 import org.opensources.pokmaps.domain.model.EncounterTime
+import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 
 class MapRepositoryTest {
@@ -91,6 +96,84 @@ class MapRepositoryTest {
         assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, level(repository.catalog(FakeGameDao.RED)))
         assertEquals(FakeMapDao.BLUE_SNORLAX_LEVEL, level(repository.catalog(FakeGameDao.BLUE)))
     }
+
+    @Test
+    fun siblingVersionsShareTheirMapsButNeitherTheirObjectsNorTheirOffers() = runTest {
+        var mapReads = 0
+        val delegate = FakeMapDao(includeVersionPokemon = true)
+        val dao = object : MapDao by delegate {
+            override suspend fun maps(versionGroupId: Int) = delegate.maps(versionGroupId).also { mapReads++ }
+        }
+        val repository = MapRepository(dao, Dispatchers.Unconfined)
+
+        val red = repository.catalog(FakeGameDao.RED)
+        val blue = repository.catalog(FakeGameDao.BLUE)
+
+        assertEquals(1, mapReads)
+        assertSame(red.maps, blue.maps)
+        assertSame(red.warps, blue.warps)
+        assertSame(red.areas, blue.areas)
+        assertSame(red.spots, blue.spots)
+        assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, snorlaxLevel(red))
+        assertEquals(FakeMapDao.BLUE_SNORLAX_LEVEL, snorlaxLevel(blue))
+        assertEquals(FakeMapDao.RED_ABRA_COINS, abraPrice(repository, FakeGameDao.RED))
+        assertEquals(FakeMapDao.BLUE_ABRA_COINS, abraPrice(repository, FakeGameDao.BLUE))
+    }
+
+    @Test
+    fun onlyTheTwoLastVersionsStayInMemoryAndAForgottenOneIsReadAgain() = runTest {
+        val repository = MapRepository(FakeMapDao(includeVersionPokemon = true), Dispatchers.Unconfined)
+        val red = repository.catalog(FakeGameDao.RED)
+        val redIndex = repository.index(FakeGameDao.RED)
+        val gold = repository.catalog(FakeGameDao.GOLD)
+        repository.index(FakeGameDao.GOLD)
+
+        // Rouge, consulté de nouveau, devient plus récent qu'Or : c'est Or qu'oublie l'arrivée de Rubis.
+        assertSame(red, repository.catalog(FakeGameDao.RED))
+        assertSame(redIndex, repository.index(FakeGameDao.RED))
+        repository.catalog(FakeGameDao.RUBY)
+        repository.index(FakeGameDao.RUBY)
+        assertSame(red, repository.catalog(FakeGameDao.RED))
+        assertSame(redIndex, repository.index(FakeGameDao.RED))
+        assertNotSame(gold, repository.catalog(FakeGameDao.GOLD))
+        repository.index(FakeGameDao.GOLD)
+
+        // Rouge est oublié à son tour ; relu ensuite, il reprend les cartes de Bleu et garde ses propres objets.
+        val blue = repository.catalog(FakeGameDao.BLUE)
+        repository.index(FakeGameDao.BLUE)
+        val reloaded = repository.catalog(FakeGameDao.RED)
+        assertNotSame(red, reloaded)
+        assertNotSame(redIndex, repository.index(FakeGameDao.RED))
+        assertEquals(red, reloaded)
+        assertSame(blue.maps, reloaded.maps)
+        assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, snorlaxLevel(reloaded))
+        assertEquals(FakeMapDao.RED_ABRA_COINS, abraPrice(repository, FakeGameDao.RED))
+    }
+
+    @Test
+    fun concurrentRequestsReadEachVersionOnceAndNeverMixThem() = runTest {
+        val repository = MapRepository(FakeMapDao(includeVersionPokemon = true), StandardTestDispatcher(testScheduler))
+
+        val requests = listOf(FakeGameDao.RED, FakeGameDao.BLUE, FakeGameDao.RED, FakeGameDao.BLUE).map { game ->
+            async { game to repository.catalog(game) }
+        }
+        val indexes = listOf(FakeGameDao.BLUE, FakeGameDao.RED).map { game -> async { repository.index(game) } }
+        val (red, blue, redAgain, blueAgain) = requests.awaitAll()
+
+        assertSame(red.second, redAgain.second)
+        assertSame(blue.second, blueAgain.second)
+        assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, snorlaxLevel(red.second))
+        assertEquals(FakeMapDao.BLUE_SNORLAX_LEVEL, snorlaxLevel(blue.second))
+        val (blueIndex, redIndex) = indexes.awaitAll()
+        assertEquals(FakeMapDao.BLUE_ABRA_COINS, blueIndex.offers.single { it.pokemonId == FakeMapDao.ABRA }.price)
+        assertEquals(FakeMapDao.RED_ABRA_COINS, redIndex.offers.single { it.pokemonId == FakeMapDao.ABRA }.price)
+    }
+
+    private fun snorlaxLevel(catalog: MapCatalog): Int? =
+        catalog.objects.getValue(FakeMapDao.ROUTE_1).single { it.pokemonId == FakeMapDao.SNORLAX }.level
+
+    private suspend fun abraPrice(repository: MapRepository, game: Game): Int? =
+        repository.index(game).offers.single { it.pokemonId == FakeMapDao.ABRA }.price
 
     @Test
     fun secondGenerationOffersKeepHeldItemsTreesAndServices() = runTest {

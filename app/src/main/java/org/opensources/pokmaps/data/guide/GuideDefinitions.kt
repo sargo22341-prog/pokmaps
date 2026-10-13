@@ -1,18 +1,21 @@
 package org.opensources.pokmaps.data.guide
 
-/** Choisit les fournisseurs avant de construire les définitions propres au jeu. */
-internal fun guideDefinitions(versionId: Int): List<GuideDefinition> {
-    val branch = when (versionId) {
-        1, 2, 3 -> kantoGuides() + sideGuides() + tipGuides()
+import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.VersionGroup
 
-        4, 5, 6 -> johtoGuides() + sideGuides() + tipGuides()
+/** Choisit les fournisseurs de la branche du jeu avant de construire les définitions propres à sa version. */
+internal fun guideDefinitions(game: Game): List<GuideDefinition> {
+    val versionId = game.versionId
+    val branch = when (game.versionGroup) {
+        VersionGroup.RED_BLUE, VersionGroup.YELLOW -> kantoGuides() + sideGuides() + tipGuides()
 
-        7, 8, 9 -> gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides() +
-            gbaCollectionGuides(versionId)
+        VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> johtoGuides() + sideGuides() + tipGuides()
 
-        10, 11 -> gbaToolGuides() + remakeGuides() + gbaCollectionGuides(versionId)
+        VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD ->
+            gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides() +
+                gbaCollectionGuides(versionId)
 
-        else -> error("Version de guides inconnue : $versionId")
+        VersionGroup.FIRERED_LEAFGREEN -> gbaToolGuides() + remakeGuides() + gbaCollectionGuides(versionId)
     }
     return branch.filter { versionId in it.versions } + achievementGuides(versionId)
 }
