@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Taux de capture, cycles d’éclosion et groupes d’œufs sont ceux du jeu choisi, et la fiche indique le jeu d’où vient la description du Pokédex.
 - La carte réagit plus vite à la sélection d’un lieu et au premier affichage d’un jeu.
 - L’ouverture d’un guide est plus fluide.
 - Les préférences de collection corrompues et un catalogue de jeux vide signalent une erreur de lecture.

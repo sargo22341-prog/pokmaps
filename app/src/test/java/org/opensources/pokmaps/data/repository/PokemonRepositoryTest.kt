@@ -104,6 +104,31 @@ class PokemonRepositoryTest {
         assertNull(pages.last().details)
     }
 
+    @Test
+    fun captureRatesHatchCyclesAndEggGroupsAreThoseOfTheGame() = runBlocking {
+        // Rattatac : 90 dans Rouge, 127 dans son remake ; Rayquaza : 3 en Émeraude, 45 dans les jeux récents.
+        assertEquals(90, sheet(FakeGameDao.RED, 20).captureRate)
+        assertEquals(127, sheet(FakeGameDao.FIRERED, 20).captureRate)
+        assertEquals(3, sheet(FakeGameDao.EMERALD, 384).captureRate)
+        // Marill : 20 cycles en Or, 10 en Émeraude ; ni cycles ni groupes d'œufs en Rouge.
+        assertEquals(20, sheet(FakeGameDao.GOLD, 183).traits.hatchCycles)
+        assertEquals(10, sheet(FakeGameDao.EMERALD, 183).traits.hatchCycles)
+        assertNull(sheet(FakeGameDao.RED, 25).traits.hatchCycles)
+        assertEquals(emptyList<String>(), sheet(FakeGameDao.RED, 25).traits.eggGroups)
+        // Tarsal n'est Humanoïde qu'après la 3e génération, y compris pour la reproduction.
+        assertEquals(listOf("Amorphe"), sheet(FakeGameDao.RUBY, 280).traits.eggGroups)
+        assertEquals(setOf("Amorphe"), repository.breedingProfiles(FakeGameDao.RUBY).getValue(280).groups)
+    }
+
+    @Test
+    fun theDescriptionNamesTheGameItComesFrom() = runBlocking {
+        val description = checkNotNull(sheet(FakeGameDao.RED, 25).description)
+        assertEquals("Noir", description.versionName)
+        assertTrue(description.text.isNotBlank())
+    }
+
+    private suspend fun sheet(game: Game, pokemonId: Int) = checkNotNull(repository.details(game, pokemonId))
+
     private suspend fun roots(game: Game, pokemonId: Int): List<Int> =
         checkNotNull(repository.details(game, pokemonId)).evolutions.map { it.pokemonId }
 }

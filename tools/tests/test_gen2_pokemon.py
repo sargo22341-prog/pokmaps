@@ -167,8 +167,11 @@ def test_johto_pokedex_and_descriptions(gold_silver_builder: DatabaseBuilder) ->
     entries = builder.pokedex_entry_table()
     assert len(entries) == 251
     assert (3, CHIKORITA, 1) in entries
-    # Aucune description française de la 2e génération dans PokéAPI : chaque Pokémon garde la plus ancienne.
-    assert all(row[16] for row in builder.pokemon.pokemon_table())
+    # Aucune description française de la 2e génération dans PokéAPI : chaque Pokémon garde la plus ancienne,
+    # avec le jeu d'où elle vient.
+    rows = builder.pokemon.pokemon_table()
+    assert all(row[15] for row in rows)
+    assert {row[16] for row in rows} == {"Noir"}
 
 
 def test_apricorn_balls_and_covers(gold_silver_builder: DatabaseBuilder) -> None:

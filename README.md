@@ -241,8 +241,9 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
 
 - **[PokéAPI](https://pokeapi.co)**, via l'export CSV du dépôt [PokeAPI/pokeapi](https://github.com/PokeAPI/pokeapi) :
   Pokémon, noms et descriptions en français, types et stats par génération, attaques par jeu, évolutions, Pokédex,
-  lieux et rencontres de chaque version ; objets tenus, groupes d'œufs et talents, préparés pour les générations
-  suivantes (vides en 1re génération). Les CSV sont téléchargés lors d'une génération explicite, avec cache ;
+  lieux et rencontres de chaque version ; objets tenus et talents, préparés pour les générations
+  suivantes (vides en 1re génération). PokéAPI n'a aucune description française du Pokédex avant Pokémon Noir :
+  la fiche nomme le jeu d'où vient le texte. Les CSV sont téléchargés lors d'une génération explicite, avec cache ;
   l'application n'appelle jamais l'API ([usage équitable](https://pokeapi.co/docs/v2#fairuse)).
 - **[pokesprite](https://github.com/msikma/pokesprite)** : icônes d'objets.
 - **[PokeAPI/sprites](https://github.com/PokeAPI/sprites)** : sprites animés de Noir/Blanc, normaux et chromatiques,
@@ -340,6 +341,9 @@ Les jeux pris en charge sont listés dans `tools/pokemaps_data/games.py`. Ajoute
 - une source de sprites pour ses Pokémon au-delà du n° 649 (`sprites.py`), s'il en a ;
 - de nommer ses nouvelles classes de dresseurs et ses nouveaux personnages dans `tools/data/` (un nom
   manquant arrête la génération) ;
+- de lire les données de base de ses espèces (`pret_species.py`) : taux de capture, cycles d'éclosion et groupes
+  d'œufs sont écrits par groupe de versions ; un sexe ou une courbe d'expérience différents de PokéAPI arrêtent la
+  génération, car ils sont encore communs à tous les jeux ;
 - de choisir ou d'adapter son lecteur pret (`PretFormat`, `pret*.py`, `pret_gen2*.py`, `pret_gen3*.py`),
   avec `PretFormat.GEN3` pour pokeruby, pokeemerald et pokefirered, ses régions et villes
   de départ (`Game.regions`), ses palettes et son rendu (`maps_render*.py`) ;
@@ -357,6 +361,12 @@ connaît (`GenerationFeature` dans l'application) : objets tenus (2e génératio
 3e, ceux de la 2e sont lus dans pret), chromatiques (1 chance sur 8 192, puis 1 sur 4 096 à partir
 de la 6e génération), sexe, groupes d'œufs et cycles d'éclosion (2e génération) et talents, dont le talent caché
 (3e et 5e générations). `tools/tests/test_future_generations.py` vérifie ces tables sur des jeux plus récents.
+
+Taux de capture, cycles d'éclosion et groupes d'œufs sont ceux de chaque jeu, lus dans son désassemblage pret :
+PokéAPI ne donne que les valeurs actuelles, fausses pour Rattatac (90 jusqu'à la 2e génération), Draco et
+Dracolosse dans Jaune, Marill et Azumarill en 2e génération, Kyogre, Groudon et Rayquaza, et les groupes d'œufs
+de Tarsal et de Kraknoix en 3e génération. Sexe, courbe d'expérience, taille et poids sont identiques dans les onze
+jeux et restent communs ; `tools/tests/test_species_profiles.py` compare une même espèce entre originaux et remakes.
 
 Les données Pokémon de la 3e génération sont intégrées séparément pour Hoenn et Rouge Feu/Vert Feuille
 ([plan d'intégration](docs/plan_gen_3.md)). Les tests du pipeline vérifient les Pokédex régional et National,

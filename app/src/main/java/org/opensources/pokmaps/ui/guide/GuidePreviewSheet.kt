@@ -27,6 +27,7 @@ import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.Offers
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
+import org.opensources.pokmaps.ui.common.PokedexDescriptionText
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SpriteSize
@@ -73,7 +74,7 @@ private fun PokemonPreview(preview: GuidePreview.Pokemon) {
     val pokemon = preview.page.details ?: return
     PokemonSprite(pokemon.id, SpritePlace.POKEMON_SHEET, SpriteSize.SHEET, pokemon.name)
     Text(pokemon.name, style = MaterialTheme.typography.headlineSmall)
-    pokemon.description?.let { Text(it) }
+    pokemon.description?.let { PokedexDescriptionText(it) }
     pokemon.stats.forEach { stat -> Text(stringResource(R.string.guide_stat, stat.name, stat.value)) }
 }
 

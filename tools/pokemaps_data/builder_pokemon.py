@@ -1,4 +1,4 @@
-"""Tables des Pokémon : fiches, types, statistiques, évolutions et groupes d'œufs."""
+"""Tables des Pokémon : fiches, données propres à chaque jeu, types, statistiques, évolutions et œufs."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 from .games import PretFormat
 from .pokeapi import ENGLISH, FRENCH, clean_text, optional_int, value_at
 from .pret_gen3_evolution import EvolutionRules, read_evolution_rules
+from .pret_species import SpeciesProfile, read_species_profiles
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -65,6 +66,9 @@ class PokemonTables:
         return [(int(row["id"]), row["identifier"], names[int(row["id"])]) for row in self.api.table("growth_rates")]
 
     def pokemon_table(self) -> list[tuple]:
+        """Identité et attributs communs à tous les jeux ; ceux qui changent d'un jeu à l'autre sont dans
+        pokemon_version_group_rows et egg_group_rows."""
+        self._check_common_attributes()
         names_fr = self.api.names("pokemon_species_names", "pokemon_species_id")
         genus_fr = self.api.names("pokemon_species_names", "pokemon_species_id", column="genus")
         names_en = self.api.names("pokemon_species_names", "pokemon_species_id", language=ENGLISH)
@@ -85,7 +89,6 @@ class PokemonTables:
                     int(row["generation_id"]),
                     evolves_from if evolves_from in self.builder.species else None,
                     int(row["evolution_chain_id"]),
-                    int(row["capture_rate"]),
                     int(row["gender_rate"]),
                     int(row["growth_rate_id"]),
                     int(size["height"]),
@@ -93,35 +96,76 @@ class PokemonTables:
                     int(row["is_legendary"]),
                     int(row["is_mythical"]),
                     int(row["is_baby"]),
-                    descriptions.get(species_id),
-                    int(row["hatch_counter"]),
+                    *descriptions.get(species_id, (None, None)),
                 )
             )
         return rows
 
     @cached_property
-    def egg_group_rows(self) -> list[tuple[int, int]]:
-        """(espèce, groupe d'œufs), seulement si un jeu configuré connaît la reproduction."""
-        if self.builder.max_generation < BREEDING_GENERATION:
-            return []
+    def profiles(self) -> dict[int, dict[int, SpeciesProfile]]:
+        """Groupe de versions -> espèce -> ses données de base dans le jeu, lues dans pret pour chaque espèce que
+        la génération du jeu connaît."""
+        identifiers = {row["identifier"]: species_id for species_id, row in self.builder.species.items()}
+        result = {}
+        for vg in self.builder.vg_ids:
+            game = self.builder.game_of(vg)
+            read = read_species_profiles(self.builder.pret_root(game, "les données de base des espèces"), game)
+            if unknown := sorted(read.keys() - identifiers.keys()):
+                raise ValueError(f"Espèces pret inconnues de PokéAPI dans {game.version_group} : {unknown}")
+            profiles = {identifiers[name]: profile for name, profile in read.items()}
+            expected = set(self._species_of_generation(self.builder.vg_generation[vg]))
+            breeds = self.builder.vg_generation[vg] >= BREEDING_GENERATION
+            if profiles.keys() != expected or any((p.breeding is not None) != breeds for p in profiles.values()):
+                raise ValueError(f"Données de base incomplètes ou inattendues dans {game.version_group}")
+            result[vg] = profiles
+        return result
+
+    def pokemon_version_group_rows(self) -> list[tuple]:
+        """(espèce, groupe de versions, taux de capture, cycles d'éclosion ou None sans œufs)."""
         return sorted(
-            (int(row["species_id"]), int(row["egg_group_id"]))
-            for row in self.api.table("pokemon_egg_groups")
-            if int(row["species_id"]) in self.builder.species
+            (species_id, vg, profile.capture_rate, profile.breeding.hatch_counter if profile.breeding else None)
+            for vg, profiles in self.profiles.items()
+            for species_id, profile in profiles.items()
         )
+
+    @cached_property
+    def egg_group_rows(self) -> list[tuple[int, int, int]]:
+        """(espèce, groupe de versions, groupe d'œufs) des jeux qui connaissent la reproduction."""
+        groups = {row["identifier"]: int(row["id"]) for row in self.api.table("egg_groups")}
+        return sorted(
+            (species_id, vg, groups[group])
+            for vg, profiles in self.profiles.items()
+            for species_id, profile in profiles.items()
+            if profile.breeding is not None
+            for group in profile.breeding.egg_groups
+        )
+
+    def _check_common_attributes(self) -> None:
+        """Arrête la génération si le sexe ou la courbe d'expérience d'une espèce (une seule valeur, celle de
+        PokéAPI) diffère dans un jeu : il faudrait alors les écrire par groupe de versions."""
+        growth_rates = {row["identifier"]: int(row["id"]) for row in self.api.table("growth_rates")}
+        for vg, profiles in self.profiles.items():
+            for species_id, profile in profiles.items():
+                row = self.builder.species[species_id]
+                expected = (int(row["growth_rate_id"]), int(row["gender_rate"]))
+                gender = profile.breeding.gender_rate if profile.breeding else expected[1]
+                if (growth_rates[profile.growth_rate], gender) != expected:
+                    raise ValueError(f"Sexe ou courbe d'expérience propre au groupe {vg} pour l'espèce {species_id}")
 
     def egg_group_table(self) -> list[tuple]:
         names = self.api.names("egg_group_prose", "egg_group_id")
-        used = {group for _, group in self.egg_group_rows}
+        used = {group for _, _, group in self.egg_group_rows}
         return [
             (int(row["id"]), row["identifier"], names[int(row["id"])])
             for row in self.api.table("egg_groups")
             if int(row["id"]) in used
         ]
 
-    def _descriptions(self) -> dict[int, str]:
-        """Description française du Pokédex : celle d'un jeu configuré si elle existe, sinon la plus ancienne."""
+    def _descriptions(self) -> dict[int, tuple[str, str]]:
+        """Description française du Pokédex et nom du jeu d'où elle vient : celle d'un jeu configuré si elle
+        existe, sinon la plus ancienne (PokéAPI n'a aucun texte français de la 1re à la 3e génération)."""
         preferred = set(self.builder.version_ids)
+        versions = self.api.names("version_names", "version_id")
         best: dict[int, tuple[tuple[int, int], str]] = {}
         for row in self.api.table("pokemon_species_flavor_text"):
             if int(row["language_id"]) != FRENCH:
@@ -130,7 +174,9 @@ class PokemonTables:
             rank = (0 if version in preferred else 1, version)
             if species_id not in best or rank < best[species_id][0]:
                 best[species_id] = (rank, clean_text(row["flavor_text"]))
-        return {species_id: text for species_id, (_, text) in best.items()}
+        if unnamed := sorted({version for (_, version), _ in best.values()} - versions.keys()):
+            raise ValueError(f"Versions sans nom français pour les descriptions du Pokédex : {unnamed}")
+        return {species_id: (text, versions[version]) for species_id, ((_, version), text) in best.items()}
 
     def pokemon_type_table(self) -> list[tuple]:
         current: dict[int, list[tuple[int, int]]] = defaultdict(list)

@@ -15,6 +15,7 @@ import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakePokedexDao
 import org.opensources.pokmaps.data.db.FakePokemonDao
 import org.opensources.pokmaps.data.db.PokemonDao
+import org.opensources.pokmaps.data.db.PokemonProfileRow
 import org.opensources.pokmaps.data.db.StatRow
 import org.opensources.pokmaps.data.db.TypeRow
 import org.opensources.pokmaps.data.repository.GameRepository
@@ -55,6 +56,20 @@ class PokemonProfileValidationTest {
             object : PokemonDao by delegate {
                 override suspend fun abilities(pokemonId: Int, generationId: Int, versionGroupId: Int) =
                     emptyList<AbilityRow>()
+            },
+            object : PokemonDao by delegate {
+                override suspend fun profile(pokemonId: Int, versionGroupId: Int): PokemonProfileRow? = null
+            },
+            object : PokemonDao by delegate {
+                override suspend fun profile(pokemonId: Int, versionGroupId: Int) = PokemonProfileRow(0, 10)
+            },
+            object : PokemonDao by delegate {
+                // Rubis connaît les œufs : des cycles d'éclosion absents sont une base invalide.
+                override suspend fun profile(pokemonId: Int, versionGroupId: Int) = PokemonProfileRow(190, null)
+            },
+            object : PokemonDao by delegate {
+                override suspend fun pokemon(pokemonId: Int) =
+                    delegate.pokemon(pokemonId)?.copy(descriptionVersion = null)
             }
         )
         for (dao in invalidProfiles) {

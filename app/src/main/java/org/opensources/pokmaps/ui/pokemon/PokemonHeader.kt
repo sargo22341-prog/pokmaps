@@ -23,6 +23,7 @@ import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.CaughtButton
 import org.opensources.pokmaps.ui.common.FavoriteButton
+import org.opensources.pokmaps.ui.common.PokedexDescriptionText
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TypeBadge
@@ -131,9 +132,7 @@ private fun Identity(details: PokemonDetails) {
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )
-    details.description?.let {
-        Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
-    }
+    details.description?.let { PokedexDescriptionText(it, Modifier.padding(top = 8.dp)) }
 }
 
 /** Doré des étincelles chromatiques. */

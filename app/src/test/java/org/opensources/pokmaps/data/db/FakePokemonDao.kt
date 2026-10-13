@@ -11,10 +11,18 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
 
     override suspend fun pokemon(pokemonId: Int) = read {
         if (pokemonId == PIKACHU) {
-            PokemonRow(PIKACHU, "Pikachu", "Pikachu", "Souris", null, 4, 60, 190, "Moyenne", 10, HALF_FEMALE, 10, 1)
+            PokemonRow(
+                PIKACHU, "Pikachu", "Pikachu", "Souris", DESCRIPTION, "Noir", 4, 60, "Moyenne", 10, HALF_FEMALE, 1
+            )
         } else {
             null
         }
+    }
+
+    override suspend fun profile(pokemonId: Int, versionGroupId: Int) = read {
+        // Pas d'œufs en 1re génération : Rouge et Bleu n'ont pas de cycles d'éclosion.
+        val hatch = if (versionGroupId == FakeGameDao.RED.versionGroupId) null else HATCH_CYCLES
+        if (pokemonId == PIKACHU) PokemonProfileRow(CAPTURE_RATE, hatch) else null
     }
 
     override suspend fun number(pokemonId: Int, versionGroupId: Int) = read { PIKACHU }
@@ -75,7 +83,7 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
         }
     }
 
-    override suspend fun eggGroups(pokemonId: Int) = read { listOf("Terrestre", "Féerique") }
+    override suspend fun eggGroups(pokemonId: Int, versionGroupId: Int) = read { listOf("Terrestre", "Féerique") }
 
     override suspend fun abilities(pokemonId: Int, generationId: Int, versionGroupId: Int) =
         read { listOf(AbilityRow("Statik", "Peut paralyser au contact.", false)) }
@@ -101,7 +109,10 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
         const val THUNDER_SHOCK = 84
         const val THUNDERBOLT = 85
         const val SURF = 57
+        const val DESCRIPTION = "Il garde de l’électricité dans ses joues."
         private const val HALF_FEMALE = 4
+        private const val CAPTURE_RATE = 190
+        private const val HATCH_CYCLES = 10
         private const val LEVEL_UP = "level-up"
         private const val MACHINE = "machine"
         private const val SPECIAL = "special"
