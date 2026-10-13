@@ -1,5 +1,6 @@
 """Non-régression : Hoenn après l'introduction avec Brice et Flora."""
 
+import json
 import sqlite3
 from contextlib import closing
 from dataclasses import replace
@@ -65,6 +66,46 @@ def test_house_roles_and_professor_lab_are_retained() -> None:
 
 def test_distributed_database_has_one_female_rival_per_battle(db: sqlite3.Connection) -> None:
     assert validate_hoenn_characters(db) == []
+
+
+@pytest.mark.parametrize("route", [111, 118, 120])
+@pytest.mark.parametrize("sprite", ["CAMERAMAN", "REPORTER_F"])
+@pytest.mark.parametrize("prefix", ["FLAG_HIDE_GABBY_AND_TY_ROUTE", "FLAG_HIDE_ROUTE_"])
+def test_reporter_rematches_reuse_one_pair(route: int, sprite: str, prefix: str) -> None:
+    current = _map(f"Route{route}")
+    flag = f"{prefix}{route}" + ("_GABBY_AND_TY" if prefix == "FLAG_HIDE_ROUTE_" else "")
+    first = _event(f"OBJ_EVENT_GFX_{sprite}", flag + "_1")
+    assert display_event(current, first) == first
+    for stage in (2, 3):
+        assert display_event(current, _event(f"OBJ_EVENT_GFX_{sprite}", f"{flag}_{stage}")) is None
+    unrelated = _event(f"OBJ_EVENT_GFX_{sprite}", "FLAG_HIDE_OTHER_REPORTER")
+    assert display_event(current, unrelated) == unrelated
+
+
+def test_validation_detects_missing_or_repeated_reporters(db: sqlite3.Connection) -> None:
+    with closing(sqlite3.connect(":memory:")) as copy:
+        db.backup(copy)
+        copy.execute(
+            "UPDATE map_object SET sprite = 'obj-event-gfx-cameraman' WHERE sprite = 'obj-event-gfx-reporter-f'"
+        )
+        errors = validate_hoenn_characters(copy)
+        assert any("2 journalistes" in error for error in errors)
+        assert any("0 journalistes" in error for error in errors)
+
+
+@pytest.mark.parametrize("group", ["ruby-sapphire", "emerald"])
+def test_reporter_rematches_remain_in_source_catalog(assets: Path, group: str) -> None:
+    catalog = json.loads((assets / "maps" / group / "characters.json").read_text(encoding="utf-8"))
+    for route, count in ((111, 6), (118, 6), (120, 4)):
+        actors = [
+            actor
+            for actor in catalog["characters"]
+            if actor["version"] == ("ruby" if group == "ruby-sapphire" else "emerald")
+            and actor["key"].startswith(f"Route{route}:")
+            and any("GABBY_AND_TY" in str(value) for key, value in actor["event"]["fields"] if key == "flag")
+        ]
+        assert len(actors) == count
+        assert all(actor["result"]["trainers"] for actor in actors)
 
 
 @pytest.mark.parametrize("version", ["ruby", "sapphire", "emerald"])

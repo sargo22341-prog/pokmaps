@@ -11,6 +11,12 @@ from .pret_gen3_offers import Gen3Offers, ScriptOffers
 def display_event(current: Gen3Map, event: Gen3Event) -> Gen3Event | None:
     fields = dict(event.fields)
     sprite, flag = str(fields["graphics_id"]), str(fields["flag"])
+    if (
+        sprite in {"OBJ_EVENT_GFX_CAMERAMAN", "OBJ_EVENT_GFX_REPORTER_F"}
+        and "GABBY_AND_TY" in flag
+        and not flag.endswith("_1")
+    ):
+        return None  # Les revanches réemploient les deux mêmes acteurs sur la même case.
     if flag.startswith("FLAG_DECORATION_"):
         return None  # Décorations choisies par le joueur, sans apparence ni position prédéfinies.
     if sprite == "OBJ_EVENT_GFX_PROF_BIRCH" and current.label != "LittlerootTown_ProfessorBirchsLab":

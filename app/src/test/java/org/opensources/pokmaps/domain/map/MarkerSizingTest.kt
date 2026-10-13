@@ -6,6 +6,18 @@ import org.junit.Test
 
 class MarkerSizingTest {
     @Test
+    fun charactersKeepNativeSizeEvenWhenStoryActorsShareACell() {
+        val professor = MapObject(
+            1, 1, MapObjectKind.NPC, 0, 0, "obj-event-gfx-prof-birch", null,
+            null, null, null, null, null, null, "Prof. Seko"
+        )
+        val neighbor = professor.copy(id = 2, kind = MapObjectKind.TRAINER)
+        val scales = MarkerSizing.objectScales(listOf(professor, neighbor))
+        assertEquals(1f, scales.getValue(professor.id))
+        assertEquals(1f, scales.getValue(neighbor.id))
+    }
+
+    @Test
     fun markersShrinkWithTheNumberOfPokemonAndGrowWithTheTerrain() {
         val area = MarkerSizing.terrainArea(spots = 10)
         val one = MarkerSizing.coverageScale(area, 1, Footprint.POKEMON)

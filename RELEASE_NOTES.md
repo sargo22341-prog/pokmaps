@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les journalistes de Hoenn ne sont plus répétés et les PNJ gardent leur taille native, alignée sur leur case et leur badge.
 - Les cartes de Hoenn fixent Flora comme rivale et retirent les doublons et éléments de l’introduction.
 - Taux de capture, cycles d’éclosion et groupes d’œufs sont ceux du jeu choisi, et la fiche indique le jeu d’où vient la description du Pokédex.
 - La carte réagit plus vite à la sélection d’un lieu et au premier affichage d’un jeu.

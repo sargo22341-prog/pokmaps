@@ -47,7 +47,17 @@ def _check_version(version: str, actors: list[tuple[str, str, str | None, str]])
         count = sum(map_name == label and kind == "trainer" and name == "Flora" for map_name, kind, _, name in actors)
         if count != 1:
             errors.append(f"{version}:{label} : {count} combats affichés pour la rivale, un attendu")
-    return errors + _check_houses(version, actors)
+    return errors + _check_houses(version, actors) + _check_reporters(version, actors)
+
+
+def _check_reporters(version: str, actors: list[tuple[str, str, str | None, str]]) -> list[str]:
+    errors = []
+    for label in ("route111", "route118", "route120"):
+        for sprite in ("obj-event-gfx-cameraman", "obj-event-gfx-reporter-f"):
+            count = sum(map_name == label and graphic == sprite for map_name, _, graphic, _ in actors)
+            if count != 1:
+                errors.append(f"{version}:{label}:{sprite} : {count} journalistes affichés, un attendu")
+    return errors
 
 
 def _check_houses(version: str, actors: list[tuple[str, str, str | None, str]]) -> list[str]:
