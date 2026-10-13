@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.place
 
 import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -37,7 +38,10 @@ class PlaceViewModelTest {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return PlaceViewModel(
             SavedStateHandle(mapOf(PlaceViewModel.PLACE to identifier)),
-            ObservePlacePageUseCase(games, MapRepository(FakeMapDao(failing, includeCompositeInterior = composite))),
+            ObservePlacePageUseCase(
+                games,
+                MapRepository(FakeMapDao(failing, includeCompositeInterior = composite), Dispatchers.Unconfined)
+            ),
             ObserveCollectionUseCase(games, collection),
             requests
         )

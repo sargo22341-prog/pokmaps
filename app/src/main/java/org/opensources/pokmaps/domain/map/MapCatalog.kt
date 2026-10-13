@@ -105,6 +105,16 @@ data class MapCatalog(
     /** Emplacements des Pokémon sauvages de chaque carte (ville, route ou carte intérieure). */
     val spots: Map<Int, List<MapSpot>> = emptyMap()
 ) {
+    // Index immuables calculés avec le catalogue, hors du fil principal (MapRepository), plutôt qu'à chaque
+    // rendu de la carte. Déclarés avant les propriétés qui s'en servent pendant la construction.
+    private val regionsByParent: Map<Int, List<MapInfo>> = maps.values
+        .mapNotNull { map -> map.parentId?.let { it to map } }
+        .groupBy({ it.first }, { it.second })
+        .mapValues { (_, regions) -> regions.sortedBy { it.id } }
+
+    /** Premier lieu de chaque identifiant, comme une recherche dans l'ordre des cartes. */
+    private val byIdentifier: Map<String, MapInfo> = buildMap { maps.values.forEach { putIfAbsent(it.identifier, it) } }
+
     val worlds: List<MapInfo> = maps.values.filter { it.isDisplayable && isWorld(it.id) }.sortedBy { it.id }
     val regionWorlds: List<MapInfo> = MapDestinations.menu(worlds, maps.values)
 
@@ -135,7 +145,7 @@ data class MapCatalog(
     }
 
     /** Villes et routes d'une carte affichable (vide pour une carte intérieure). */
-    fun regionsOf(mapId: Int): List<MapInfo> = maps.values.filter { it.parentId == mapId }.sortedBy { it.id }
+    fun regionsOf(mapId: Int): List<MapInfo> = regionsByParent[mapId].orEmpty()
 
     /** Cartes (elle-même et ses villes ou routes) dont les objets et warps se dessinent sur la carte affichable. */
     fun partsOf(mapId: Int): List<Int> = listOf(mapId) + regionsOf(mapId).map { it.id }
@@ -165,7 +175,12 @@ data class MapCatalog(
      * Warps d'une carte affichable à dessiner : un seul par destination et par entrée
      * (les portes larges ont plusieurs cases qui mènent au même endroit).
      */
-    fun entrancesOf(mapId: Int): List<MapWarp> {
+    fun entrancesOf(mapId: Int): List<MapWarp> = entrances[mapId] ?: mergedEntrances(mapId)
+
+    private val entrances: Map<Int, List<MapWarp>> =
+        maps.values.filter { it.parentId == null }.associate { it.id to mergedEntrances(it.id) }
+
+    private fun mergedEntrances(mapId: Int): List<MapWarp> {
         val kept = mutableListOf<MapWarp>()
         for (warp in partsOf(mapId).flatMap { warps[it].orEmpty() }) {
             val target = warp.targetMapId ?: continue
@@ -194,25 +209,23 @@ data class MapCatalog(
     }
 
     /** Tous les objets et personnages du jeu, par identifiant. */
-    val objectsById: Map<Int, MapObject> by lazy { objects.values.flatten().associateBy { it.id } }
+    val objectsById: Map<Int, MapObject> = objects.values.flatten().associateBy { it.id }
 
     /**
      * Où dessiner chaque objet : le centre de sa case, sauf quand plusieurs objets partagent une case de la même
      * carte affichée (personnages de deux étapes du scénario, objet caché sous un rocher) ; ils s'y écartent alors
      * côte à côte pour rester visibles et se toucher chacun.
      */
-    val markerPositions: Map<Int, MarkerPosition> by lazy {
-        objects.values.flatten()
-            .groupBy { Triple(displayedMapOf(it.mapId)?.id, it.x, it.y) }
-            .values
-            .flatMap { shared -> spreadInCell(shared.sortedBy { it.id }) }
-            .toMap()
-    }
+    val markerPositions: Map<Int, MarkerPosition> = objects.values.flatten()
+        .groupBy { Triple(displayedMapOf(it.mapId)?.id, it.x, it.y) }
+        .values
+        .flatMap { shared -> spreadInCell(shared.sortedBy { it.id }) }
+        .toMap()
 
     fun markerPosition(obj: MapObject): MarkerPosition = markerPositions[obj.id] ?: MarkerPosition(obj.x, obj.y)
 
     /** Carte (affichable ou ville, route) d'après son identifiant. */
-    fun mapByIdentifier(identifier: String): MapInfo? = maps.values.firstOrNull { it.identifier == identifier }
+    fun mapByIdentifier(identifier: String): MapInfo? = byIdentifier[identifier]
 
     /** Une entrée de recherche par lieu nommé, sans répéter une salle et le plan qui ne contient qu'elle. */
     fun searchableMaps(): List<MapInfo> = maps.values.filter { map ->
@@ -269,10 +282,12 @@ data class MapCatalog(
 
     private val landscapeFloors = MapLandscape.floors(maps)
 
-    private val sections: Map<Int, List<MapFloor>> by lazy { MapSections.build(maps) }
+    private val sections: Map<Int, List<MapFloor>> = MapSections.build(maps)
 
     /** Pour chaque carte intérieure, le warp par lequel on l'atteint en premier en partant de l'extérieur. */
-    private val reachedBy: Map<Int, MapWarp> by lazy {
+    private val reachedBy: Map<Int, MapWarp> = reachedFromWorlds()
+
+    private fun reachedFromWorlds(): Map<Int, MapWarp> {
         val result = mutableMapOf<Int, MapWarp>()
         val queue = ArrayDeque(worlds.flatMap { partsOf(it.id) })
         val seen = mutableSetOf<Int>()
@@ -289,7 +304,7 @@ data class MapCatalog(
                 queue += partsOf(target.id)
             }
         }
-        result
+        return result
     }
 
     /**

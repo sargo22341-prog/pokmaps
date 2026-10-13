@@ -1,6 +1,5 @@
 package org.opensources.pokmaps.ui.map
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -14,7 +13,7 @@ import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.model.GameMap
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.addPath
-import ovh.plrapps.mapcompose.api.removeAllMarkers
+import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.removePath
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
@@ -33,20 +32,36 @@ internal data class MapRenderState(
 internal class MapOverlayRenderer {
     private val drawnPaths = mutableListOf<String>()
 
+    /** Marqueurs présents sur [drawnOn] ; une nouvelle carte MapCompose part vide. */
+    private var drawnOn: MapState? = null
+    private var drawn: Map<String, MarkerSpec> = emptyMap()
+
     fun render(state: MapRenderState) {
-        state.mapState.removeAllMarkers()
         drawnPaths.forEach { state.mapState.removePath(it) }
         drawnPaths.clear()
+        if (drawnOn !== state.mapState) {
+            drawnOn = state.mapState
+            drawn = emptyMap()
+        }
 
+        val wanted = LinkedHashMap<String, MarkerSpec>()
         val zoneParts = zoneParts(state.catalog, state.zone)
         val entrances = state.catalog.entrancesOf(state.map.id)
         val objects = state.catalog.partsOf(state.map.id).flatMap { state.catalog.objects[it].orEmpty() }
         drawConnections(state)
-        drawEntrances(state, zoneParts, entrances)
-        drawObjects(state, zoneParts, objects)
-        drawWildMarkers(state)
-        drawFocusedObject(state)
-        drawHighlight(state, entrances, objects)
+        drawEntrances(state, wanted, zoneParts, entrances)
+        drawObjects(state, wanted, zoneParts, objects)
+        drawWildMarkers(state, wanted)
+        drawFocusedObject(state, wanted)
+        drawHighlight(state, wanted, entrances, objects)
+        apply(state, wanted)
+    }
+
+    private fun apply(state: MapRenderState, wanted: Map<String, MarkerSpec>) {
+        val updates = markerUpdates(drawn, wanted)
+        updates.removed.forEach { state.mapState.removeMarker(it) }
+        updates.added.forEach { id -> addMarker(state, id, wanted.getValue(id)) }
+        drawn = wanted
     }
 
     private fun zoneParts(catalog: MapCatalog, zone: MapInfo?): Set<Int> = when {
@@ -73,7 +88,12 @@ internal class MapOverlayRenderer {
         }
     }
 
-    private fun drawEntrances(state: MapRenderState, zoneParts: Set<Int>, entrances: List<MapWarp>) {
+    private fun drawEntrances(
+        state: MapRenderState,
+        wanted: MutableMap<String, MarkerSpec>,
+        zoneParts: Set<Int>,
+        entrances: List<MapWarp>
+    ) {
         val zone = state.zone
         if (zone != null && zone.parentId != null) {
             drawRectangle(state, "${MapMarkerIds.ZONE_PATH}:${zone.id}", zone, ZONE_COLOR, 0f)
@@ -81,68 +101,58 @@ internal class MapOverlayRenderer {
         if (MapLayer.WARPS !in state.layers) return
         entrances.forEach { warp ->
             val always = warp.mapId in zoneParts
-            drawMarker(state, "${MapMarkerIds.WARP}:${warp.id}", warp.x, warp.y, !always, 2f) {
-                val index = state.catalog.connectionsOf(state.map.id).indexOfFirst { warp.id in it.warpIds }
-                if (state.catalog.maps[warp.targetMapId]?.identifier == "route130-mirage-island") {
-                    MirageIslandMarker(state.mapState, alwaysVisible = always)
-                } else {
-                    WarpMarker(state.mapState, alwaysVisible = always || index >= 0, color = passageColor(index))
-                }
+            val index = state.catalog.connectionsOf(state.map.id).indexOfFirst { warp.id in it.warpIds }
+            val content = if (state.catalog.maps[warp.targetMapId]?.identifier == "route130-mirage-island") {
+                MarkerContent.MirageIsland(alwaysVisible = always)
+            } else {
+                MarkerContent.Warp(alwaysVisible = always || index >= 0, color = passageColor(index))
             }
+            wanted.draw("${MapMarkerIds.WARP}:${warp.id}", MarkerSpec(warp.x, warp.y, !always, 2f, false, content))
         }
     }
 
-    private fun drawObjects(state: MapRenderState, zoneParts: Set<Int>, objects: List<MapObject>) {
+    private fun drawObjects(
+        state: MapRenderState,
+        wanted: MutableMap<String, MarkerSpec>,
+        zoneParts: Set<Int>,
+        objects: List<MapObject>
+    ) {
         objects.filter { MapLayer.of(it) in state.layers }.forEach { obj ->
             val inZone = obj.mapId in zoneParts
             val pokemon = obj.kind == MapObjectKind.POKEMON && obj.pokemonId != null
             val position = state.catalog.markerPosition(obj)
-            drawMarker(state, "${MapMarkerIds.OBJECT}:${obj.id}", position.x, position.y, !inZone, 1f, pokemon) {
-                ObjectMarker(
-                    state.mapState,
-                    obj,
-                    state.catalog.versionGroupIdentifier,
-                    alwaysVisible = inZone,
-                    scale = state.overlays.objectScales[obj.id] ?: 1f
-                )
-            }
+            val content = MarkerContent.Element(
+                obj,
+                state.catalog.versionGroupIdentifier,
+                alwaysVisible = inZone,
+                scale = state.overlays.objectScales[obj.id] ?: 1f
+            )
+            val spec = MarkerSpec(position.x, position.y, !inZone, 1f, pokemon, content)
+            wanted.draw("${MapMarkerIds.OBJECT}:${obj.id}", spec)
         }
     }
 
-    private fun drawWildMarkers(state: MapRenderState) {
+    private fun drawWildMarkers(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {
         if (MapLayer.WILD_POKEMON !in state.layers) return
         state.overlays.wildMarkers.forEachIndexed { index, wild ->
-            drawMarker(
-                state = state,
-                id = "${MapMarkerIds.WILD}:${wild.pokemonId}:$index",
-                x = wild.x,
-                y = wild.y,
-                lazy = false,
-                zIndex = 1f,
-                pokemon = true
-            ) {
-                WildPokemonMarker(state.mapState, wild)
-            }
+            val spec = MarkerSpec(wild.x, wild.y, lazy = false, zIndex = 1f, pokemon = true, MarkerContent.Wild(wild))
+            wanted.draw("${MapMarkerIds.WILD}:${wild.pokemonId}:$index", spec)
         }
     }
 
-    private fun drawFocusedObject(state: MapRenderState) {
+    private fun drawFocusedObject(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {
         val focused = state.overlays.focusedObjectId?.let { state.catalog.objectsById[it] }
             ?.takeIf { it.mapId in state.catalog.partsOf(state.map.id) } ?: return
         val position = state.catalog.markerPosition(focused)
-        drawMarker(
-            state = state,
-            id = "${MapMarkerIds.HIGHLIGHT_OBJECT}:${focused.id}",
-            x = position.x,
-            y = position.y,
-            lazy = false,
-            zIndex = 3f
-        ) {
-            HighlightMarker()
-        }
+        wanted.draw("${MapMarkerIds.HIGHLIGHT_OBJECT}:${focused.id}", highlight(position.x, position.y))
     }
 
-    private fun drawHighlight(state: MapRenderState, entrances: List<MapWarp>, objects: List<MapObject>) {
+    private fun drawHighlight(
+        state: MapRenderState,
+        wanted: MutableMap<String, MarkerSpec>,
+        entrances: List<MapWarp>,
+        objects: List<MapObject>
+    ) {
         val pokemonId = state.highlightedPokemonId ?: return
         state.catalog.partsOf(state.map.id)
             .filter { it in state.overlays.highlightedMaps }
@@ -162,9 +172,7 @@ internal class MapOverlayRenderer {
             entrances.filter { it.targetMapId in state.overlays.highlightedMaps }
         }
         highlightedEntrances.distinctBy { it.id }.forEach { warp ->
-            drawMarker(state, "${MapMarkerIds.HIGHLIGHT_WARP}:${warp.id}", warp.x, warp.y, lazy = false, zIndex = 3f) {
-                HighlightMarker()
-            }
+            wanted.draw("${MapMarkerIds.HIGHLIGHT_WARP}:${warp.id}", highlight(warp.x, warp.y))
         }
         val overlays = state.overlays
         objects.filter {
@@ -172,34 +180,30 @@ internal class MapOverlayRenderer {
                 it.id != overlays.focusedObjectId
         }.forEach { obj ->
             val position = state.catalog.markerPosition(obj)
-            val id = "${MapMarkerIds.HIGHLIGHT_OBJECT}:${obj.id}"
-            drawMarker(state, id, position.x, position.y, lazy = false, zIndex = 3f) {
-                HighlightMarker()
-            }
+            wanted.draw("${MapMarkerIds.HIGHLIGHT_OBJECT}:${obj.id}", highlight(position.x, position.y))
         }
     }
 
-    private fun drawMarker(
-        state: MapRenderState,
-        id: String,
-        x: Int,
-        y: Int,
-        lazy: Boolean = true,
-        zIndex: Float = 0f,
-        pokemon: Boolean = false,
-        content: @Composable () -> Unit
-    ) {
+    private fun highlight(x: Int, y: Int) =
+        MarkerSpec(x, y, lazy = false, zIndex = 3f, pokemon = false, content = MarkerContent.Highlight)
+
+    /** Comme MapCompose, le premier marqueur d'un identifiant l'emporte. */
+    private fun MutableMap<String, MarkerSpec>.draw(id: String, spec: MarkerSpec) {
+        putIfAbsent(id, spec)
+    }
+
+    private fun addMarker(state: MapRenderState, id: String, spec: MarkerSpec) {
         state.mapState.addMarker(
             id,
-            x.toDouble() / state.map.width,
-            y.toDouble() / state.map.height,
+            spec.x.toDouble() / state.map.width,
+            spec.y.toDouble() / state.map.height,
             relativeOffset = CENTERED,
-            zIndex = zIndex,
+            zIndex = spec.zIndex,
             // Le sprite d'un Pokémon est centré dans un cadre fait pour le plus grand : on touche son centre.
-            clickableAreaScale = if (pokemon) POKEMON_CLICK_SCALE else FULL_CLICK_SCALE,
+            clickableAreaScale = if (spec.pokemon) POKEMON_CLICK_SCALE else FULL_CLICK_SCALE,
             renderingStrategy =
-                if (lazy) RenderingStrategy.LazyLoading(MapMarkerIds.LAZY_LOADER) else RenderingStrategy.Default,
-            c = content
+                if (spec.lazy) RenderingStrategy.LazyLoading(MapMarkerIds.LAZY_LOADER) else RenderingStrategy.Default,
+            c = { spec.content.Draw(state.mapState) }
         )
     }
 

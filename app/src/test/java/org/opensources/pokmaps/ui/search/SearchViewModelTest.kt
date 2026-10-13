@@ -1,7 +1,10 @@
 package org.opensources.pokmaps.ui.search
 
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -25,20 +28,40 @@ class SearchViewModelTest {
     @get:Rule
     val mainDispatcher = MainDispatcherRule()
 
-    private fun viewModel(failing: Boolean = false, composite: Boolean = false): SearchViewModel {
+    private fun viewModel(
+        failing: Boolean = false,
+        composite: Boolean = false,
+        computation: CoroutineDispatcher = Dispatchers.Unconfined
+    ): SearchViewModel {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return SearchViewModel(
             ObserveSearchIndexUseCase(
                 games,
                 PokedexRepository(FakePokedexDao()),
-                MapRepository(FakeMapDao(failing, includeCompositeInterior = composite))
-            )
+                MapRepository(FakeMapDao(failing, includeCompositeInterior = composite), Dispatchers.Unconfined)
+            ),
+            computation
         )
     }
 
     @Test
     fun startsLoading() {
         assertTrue(viewModel().state.value.loading)
+    }
+
+    @Test
+    fun theIndexIsBuiltAndFilteredOnTheComputationDispatcher() = runTest {
+        val computation = StandardTestDispatcher(testScheduler)
+        val viewModel = viewModel(computation = computation)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(SearchAction.Query("evoli"))
+        // Rien n'est calculé sur le fil de l'appelant : l'état attend le répartiteur de calcul.
+        assertTrue(viewModel.state.value.loading)
+
+        testScheduler.advanceUntilIdle()
+
+        assertFalse(viewModel.state.value.loading)
+        assertEquals(listOf(133), viewModel.state.value.pokemon.map { it.pokemonId })
     }
 
     @Test

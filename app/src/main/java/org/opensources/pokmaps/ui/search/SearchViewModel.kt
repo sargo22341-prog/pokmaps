@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.opensources.pokmaps.domain.map.CharacterRole
@@ -57,9 +59,11 @@ sealed interface SearchAction {
 /**
  * Recherche globale dans le jeu choisi : Pokémon, lieux, objets (et l'attaque des CT / CS) et personnages
  * (par leur nom ou ce qu'ils donnent, vendent ou échangent). Accents et casse ignorés.
+ * Index et filtrage tournent sur `computation` : seul l'état final est publié sur le fil principal.
  */
 @HiltViewModel
-class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCase) : ViewModel() {
+class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCase, computation: CoroutineDispatcher) :
+    ViewModel() {
     private val query = MutableStateFlow("")
 
     /** Textes normalisés de chaque élément, calculés une fois par jeu. */
@@ -89,7 +93,8 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
                     fossilUses = index.fossilUses
                 )
             }
-        }.catch { emit(SearchUiState(loading = false, failed = true)) }
+        }.flowOn(computation)
+            .catch { emit(SearchUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchUiState())
 
     fun onAction(action: SearchAction) {

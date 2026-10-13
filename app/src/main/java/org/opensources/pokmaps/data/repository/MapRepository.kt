@@ -2,8 +2,10 @@ package org.opensources.pokmaps.data.repository
 
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MapEntity
 import org.opensources.pokmaps.data.db.NpcOfferRow
@@ -35,8 +37,12 @@ import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.MoveEffect
 
+/**
+ * Room lit sur son propre exécuteur, mais les conversions et index qui suivent reprendraient sur le fil de
+ * l'appelant (souvent le fil principal) : catalogue et index sont donc construits sur `computation`.
+ */
 @Singleton
-class MapRepository @Inject constructor(private val dao: MapDao) {
+class MapRepository @Inject constructor(private val dao: MapDao, private val computation: CoroutineDispatcher) {
     private val mutex = Mutex()
     private val catalogs = mutableMapOf<Int, MapCatalog>()
     private val indexes = mutableMapOf<Int, GameIndex>()
@@ -46,7 +52,7 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
      * et en Argent) : gardées en mémoire, la base ne change pas.
      */
     suspend fun catalog(game: Game): MapCatalog = mutex.withLock {
-        catalogs.getOrPut(game.versionId) { loadCatalog(game) }
+        catalogs.getOrPut(game.versionId) { withContext(computation) { loadCatalog(game) } }
     }
 
     private suspend fun loadCatalog(game: Game): MapCatalog {
@@ -104,30 +110,30 @@ class MapRepository @Inject constructor(private val dao: MapDao) {
      * gardés en mémoire comme les cartes.
      */
     suspend fun index(game: Game): GameIndex = mutex.withLock {
-        indexes.getOrPut(game.versionId) {
-            GameIndex(
-                items = dao.items(game.versionGroupId, game.versionId).map {
-                    ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName)
-                },
-                offers = dao.offerLinks(game.versionId).map {
-                    OfferLink(
-                        objectId = it.objectId,
-                        kind = OfferKind.from(it.kind),
-                        itemIdentifier = it.itemIdentifier,
-                        itemName = it.itemName,
-                        pokemonId = it.pokemonId,
-                        pokemonName = it.pokemonName,
-                        wantedPokemonName = it.wantedPokemonName,
-                        price = it.price,
-                        quantity = it.quantity,
-                        wantedItemIdentifier = it.wantedItemIdentifier,
-                        wantedItemName = it.wantedItemName,
-                        currency = it.currency?.let(OfferCurrency::from) ?: OfferCurrency.MONEY
-                    )
-                }
+        indexes.getOrPut(game.versionId) { withContext(computation) { loadIndex(game) } }
+    }
+
+    private suspend fun loadIndex(game: Game): GameIndex = GameIndex(
+        items = dao.items(game.versionGroupId, game.versionId).map {
+            ItemSummary(it.id, it.identifier, it.name, it.hasSprite, it.moveName)
+        },
+        offers = dao.offerLinks(game.versionId).map {
+            OfferLink(
+                objectId = it.objectId,
+                kind = OfferKind.from(it.kind),
+                itemIdentifier = it.itemIdentifier,
+                itemName = it.itemName,
+                pokemonId = it.pokemonId,
+                pokemonName = it.pokemonName,
+                wantedPokemonName = it.wantedPokemonName,
+                price = it.price,
+                quantity = it.quantity,
+                wantedItemIdentifier = it.wantedItemIdentifier,
+                wantedItemName = it.wantedItemName,
+                currency = it.currency?.let(OfferCurrency::from) ?: OfferCurrency.MONEY
             )
         }
-    }
+    )
 
     private fun MapEntity.toInfo() = MapInfo(
         id, identifier, nameFr, parentMapId, x, y, width, height, levelCount, isWorld, originMapId, startMapId

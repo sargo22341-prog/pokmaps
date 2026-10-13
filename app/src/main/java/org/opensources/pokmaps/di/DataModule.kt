@@ -11,6 +11,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MoveDao
@@ -54,6 +56,10 @@ object DataModule {
 
     @Provides
     fun assetFiles(files: AssetManagerFiles): AssetFiles = files
+
+    /** Calculs (conversions, index) à garder hors du fil principal ; les tests injectent leur propre répartiteur. */
+    @Provides
+    fun computationDispatcher(): CoroutineDispatcher = Dispatchers.Default
 }
 
 /**
