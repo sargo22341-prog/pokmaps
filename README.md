@@ -125,6 +125,10 @@ Les ensembles des générations 4 et 5 sont préparés pour un travail futur ; i
 Le [bilan des guides GBA](docs/generations/guides-gen3.md) précise les choix et sources.
 
 Or, Argent et Cristal proposent Johto et Kanto via un menu de région en haut à gauche.
+Les cartes de Hoenn montrent un héros garçon et Flora comme rivale, après le déménagement.
+La maison du héros est à gauche de Bourg-en-Vol, celle de la rivale à droite. Les camions, déménageurs,
+acteurs du sauvetage de Seko et décorations personnalisables des chambres sont masqués. Seko reste dans son laboratoire.
+Chaque combat de Flora possède une seule icône ; son équipe dépend du Pokémon de départ choisi dans le jeu.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
 d’un chenal avec un accès de Plongée. Les Chenaux 124, 126, 127, 128 et 134 sont concernés ; Émeraude ajoute
 les Chenaux 105, 125 et 129. Le Chenal 133 ne possède pas de zone sous-marine.

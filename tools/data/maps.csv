@@ -811,10 +811,10 @@ ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM4,Salle de Concours multijoueur 4
 ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM5,Salle de Concours multijoueur 5
 ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM6,Salle de Concours multijoueur 6
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN,Bourg-en-Vol
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F,"Bourg-en-Vol (maison de Brice, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,"Bourg-en-Vol (maison de Brice, étage 1)"
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F,"Bourg-en-Vol (maison de Flora, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F,"Bourg-en-Vol (maison de Flora, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F,"Bourg-en-Vol (maison du héros, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,"Bourg-en-Vol (maison du héros, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F,"Bourg-en-Vol (maison de la rivale, rez-de-chaussée)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F,"Bourg-en-Vol (maison de la rivale, étage 1)"
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB,Bourg-en-Vol (laboratoire du Prof. Seko)
 ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_1F,Planque Magma (rez-de-chaussée)
 ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_1R,"Planque Magma (étage 1, salle 1)"

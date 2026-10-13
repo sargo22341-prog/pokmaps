@@ -1,10 +1,10 @@
 const	number	name_fr	parent	x	y	width	height	level_count	is_world	origin	start
 HOENN	997	Hoenn		0	0	12800	9120	7	True		MAP_LITTLEROOT_TOWN
 MAP_SOOTOPOLIS_CITY	8	Atalanopolis		0	0	960	960	3	False	MAP_UNDERWATER2	
-MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F	55	Bourg-en-Vol (maison de Brice, rez-de-chaussée)		0	0	176	144	1	False	MAP_LITTLEROOT_TOWN	
-MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F	56	Bourg-en-Vol (maison de Brice, étage 1)		0	0	144	128	1	False	MAP_LITTLEROOT_TOWN	
-MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F	57	Bourg-en-Vol (maison de Flora, rez-de-chaussée)		0	0	176	144	1	False	MAP_LITTLEROOT_TOWN	
-MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F	58	Bourg-en-Vol (maison de Flora, étage 1)		0	0	144	128	1	False	MAP_LITTLEROOT_TOWN	
+MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F	55	Bourg-en-Vol (maison du héros, rez-de-chaussée)		0	0	176	144	1	False	MAP_LITTLEROOT_TOWN	
+MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F	56	Bourg-en-Vol (maison du héros, étage 1)		0	0	144	128	1	False	MAP_LITTLEROOT_TOWN	
+MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F	57	Bourg-en-Vol (maison de la rivale, rez-de-chaussée)		0	0	176	144	1	False	MAP_LITTLEROOT_TOWN	
+MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F	58	Bourg-en-Vol (maison de la rivale, étage 1)		0	0	144	128	1	False	MAP_LITTLEROOT_TOWN	
 MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB	59	Bourg-en-Vol (laboratoire du Prof. Seko)		0	0	208	208	1	False	MAP_LITTLEROOT_TOWN	
 MAP_OLDALE_TOWN_HOUSE1	60	Rosyères (maison 1)		0	0	160	144	1	False	MAP_OLDALE_TOWN	
 MAP_OLDALE_TOWN_HOUSE2	61	Rosyères (maison 2)		0	0	176	128	1	False	MAP_OLDALE_TOWN	
