@@ -15,6 +15,7 @@ import argparse
 import shutil
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 
 # Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
@@ -31,6 +32,7 @@ from pokemaps_data.preview_wild_gen3 import build_wild_preview
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
+from pokemaps_data.validate_hoenn_character_state import validate_hoenn_characters
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_ASSETS = ROOT.parent / "app/src/main/assets"
@@ -152,6 +154,9 @@ def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, game
     builder.write(database, item_sprites)
 
     errors = validate(database)
+    if all(game in games for game in HOENN_MAP_GAMES):
+        with closing(sqlite3.connect(database)) as connection:
+            errors += validate_hoenn_characters(connection)
     if errors:
         print("Base incohérente :", file=sys.stderr)
         for error in errors:

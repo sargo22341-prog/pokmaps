@@ -3,6 +3,7 @@
 import argparse
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
@@ -11,6 +12,7 @@ from pokemaps_data.hoenn_catalog import validate_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
 from pokemaps_data.validate_gen3_characters import validate_character_catalog
+from pokemaps_data.validate_hoenn_character_state import validate_hoenn_characters
 from pokemaps_data.validate_remake_fixed import validate_remake_fixed
 
 
@@ -27,6 +29,8 @@ def main() -> int:
         for game in GEN3_GAMES:
             validate_character_catalog(args.assets / "maps" / game.version_group, game)
         errors = validate(args.assets / "database/pokedex.db")
+        with closing(sqlite3.connect(args.assets / "database/pokedex.db")) as connection:
+            errors += validate_hoenn_characters(connection)
         if errors:
             raise ValueError("Base incohérente :\n" + "\n".join(errors))
     except (OSError, ValueError, sqlite3.Error) as error:

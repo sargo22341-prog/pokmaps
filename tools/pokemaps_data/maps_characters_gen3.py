@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 
 from .character_curation_gen3 import character_key, read_gen3_curation
+from .hoenn_character_state import display_event, display_result
 from .maps_characters import ObjectRow
 from .maps_characters_data import read_character_names
 from .maps_facilities_gen3 import facility_rows
@@ -49,6 +50,9 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
                 if not (0 <= event.x < current.width and 0 <= event.y < current.height):
                     continue
                 result = reader.read_curated_object(current.label, event, index, maps.game.map_family)
+                displayed = display_event(current, event) if not maps.repo.remake else event
+                if displayed is not None and not maps.repo.remake:
+                    result = display_result(current, displayed, result, reader)
                 if result.unresolved:
                     raise ValueError(f"{version}:{key} : offres non résolues : {result.unresolved}")
                 catalog.append(_catalog_row(version, current.const, key, event, result))
@@ -63,17 +67,31 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
                     if event.value("movement_type") != "MOVEMENT_TYPE_BERRY_TREE_GROWTH"
                     else _berry_offers(event, berries, reader.scripts.constants, version)
                 )
+                if displayed is None:
+                    continue
+                event = displayed
                 # Les journaux du Memorydex restent au catalogue, sans acteur ni service à afficher sur la carte.
                 if event.value("movement_type") == "MOVEMENT_TYPE_INVISIBLE" and not result.trainers and not offers:
                     continue
                 rows.extend(_actor_rows(maps, current, event, version, result.trainers, offers))
         rows = _replace_fixed_actors(rows, maps, version)
         rows.extend(facility_rows(maps, version, api, story))
+    _write_catalog(maps, story, output, catalog, [asdict(item) for item in items])
+    return rows
+
+
+def _write_catalog(
+    maps: Gen3GameMaps,
+    story: StoryEvents,
+    output: Path,
+    catalog: list[dict[str, object]],
+    items: list[dict[str, object]],
+) -> None:
     payload = {
         "schema": 1,
         "commit": PRET_COMMITS[repo_name(maps.repo)],
         "characters": catalog,
-        "items": [asdict(item) for item in items],
+        "items": items,
         "scenes": scene_rows(maps.repo, story),
     }
     (output / "characters.json").write_text(
@@ -81,7 +99,6 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
         encoding="utf-8",
         newline="\n",
     )
-    return rows
 
 
 def _berry_offers(event: Gen3Event, berries: dict[int, str], constants: dict[str, int], version: str) -> list[NpcOffer]:
@@ -121,43 +138,44 @@ def _actor_rows(
     name = names.by_text.get(script, default)
     appearance = names.npc_kind("DYNAMIC_CHARACTER" if dynamic else raw_sprite)
     point = maps.point(current.const, event.x, event.y)
-    if not trainers:
-        return [
-            ObjectRow(
-                current.const,
-                "npc",
-                *point,
-                sprite,
-                None,
-                None,
-                None,
-                None,
-                key=script,
-                offers=offers,
-                version=version,
-                name_fr=name,
-                appearance=appearance,
-            )
-        ]
+    actor = ObjectRow(
+        current.const,
+        "npc",
+        *point,
+        sprite,
+        None,
+        None,
+        None,
+        None,
+        key=script,
+        offers=offers,
+        version=version,
+        name_fr=name,
+        appearance=appearance,
+    )
+    return _trainer_rows(maps, version, trainers, actor) if trainers else [actor]
+
+
+def _trainer_rows(
+    maps: Gen3GameMaps,
+    version: str,
+    trainers: tuple[str, ...],
+    actor: ObjectRow,
+) -> list[ObjectRow]:
+    names = read_character_names()
+    rival = any(trainer.startswith("TRAINER_MAY_") for trainer in trainers)
+    selected = tuple(trainer for trainer in trainers if trainer.startswith("TRAINER_MAY_"))[:1] if rival else trainers
     rows = []
-    for trainer_id in trainers:
+    for trainer_id in selected:
         trainer = maps.repo.trainers[version][trainer_id]
-        party = _party_rows(trainer.party)
         rows.append(
-            ObjectRow(
-                current.const,
-                "trainer",
-                *point,
-                sprite,
-                None,
-                None,
-                None,
-                trainer.trainer_class,
-                key=script,
-                party=party,
-                offers=offers,
-                version=version,
-                name_fr=names.trainer(trainer.trainer_class),
+            replace(
+                actor,
+                kind="trainer",
+                appearance=None,
+                trainer_class=trainer.trainer_class,
+                party=[] if rival else _party_rows(trainer.party),
+                name_fr="Flora" if rival else names.trainer(trainer.trainer_class),
             )
         )
     return rows
