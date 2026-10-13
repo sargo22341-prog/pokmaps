@@ -29,10 +29,11 @@ data class EggGroupEntity(
 
 @Entity(
     tableName = "pokemon_egg_group",
-    primaryKeys = ["pokemon_id", "egg_group_id"]
+    primaryKeys = ["pokemon_id", "version_group_id", "egg_group_id"]
 )
 data class PokemonEggGroupEntity(
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int,
+    @ColumnInfo(name = "version_group_id") val versionGroupId: Int,
     @ColumnInfo(name = "egg_group_id") val eggGroupId: Int
 )
 

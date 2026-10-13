@@ -11,7 +11,7 @@ interface PokemonDao {
         FROM pokemon p
         JOIN pokedex_entry pe ON pe.pokemon_id = p.id
         JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
-        LEFT JOIN pokemon_egg_group peg ON peg.pokemon_id = p.id
+        LEFT JOIN pokemon_egg_group peg ON peg.pokemon_id = p.id AND peg.version_group_id = :versionGroupId
         LEFT JOIN egg_group eg ON eg.id = peg.egg_group_id
         WHERE vgp.version_group_id = :versionGroupId
         ORDER BY p.id, eg.id
@@ -22,14 +22,22 @@ interface PokemonDao {
     @Query(
         """
         SELECT p.id, p.name_fr AS name, p.name_en AS nameEn, p.genus_fr AS genus, p.description_fr AS description,
-            p.height_dm AS heightDm, p.weight_hg AS weightHg, p.capture_rate AS captureRate,
+            p.description_version_fr AS descriptionVersion, p.height_dm AS heightDm, p.weight_hg AS weightHg,
             g.name_fr AS growthRate, p.evolution_chain_id AS evolutionChainId, p.gender_rate AS genderRate,
-            p.hatch_counter AS hatchCounter, p.generation_id AS generationId
+            p.generation_id AS generationId
         FROM pokemon p JOIN growth_rate g ON g.id = p.growth_rate_id
         WHERE p.id = :pokemonId
         """
     )
     suspend fun pokemon(pokemonId: Int): PokemonRow?
+
+    @Query(
+        """
+        SELECT capture_rate AS captureRate, hatch_counter AS hatchCounter FROM pokemon_version_group
+        WHERE pokemon_id = :pokemonId AND version_group_id = :versionGroupId
+        """
+    )
+    suspend fun profile(pokemonId: Int, versionGroupId: Int): PokemonProfileRow?
 
     @Query(
         """
@@ -146,10 +154,10 @@ interface PokemonDao {
     @Query(
         """
         SELECT eg.name_fr FROM pokemon_egg_group peg JOIN egg_group eg ON eg.id = peg.egg_group_id
-        WHERE peg.pokemon_id = :pokemonId ORDER BY eg.id
+        WHERE peg.pokemon_id = :pokemonId AND peg.version_group_id = :versionGroupId ORDER BY eg.id
         """
     )
-    suspend fun eggGroups(pokemonId: Int): List<String>
+    suspend fun eggGroups(pokemonId: Int, versionGroupId: Int): List<String>
 
     /** Talents de la génération, avec leur description dans le jeu. */
     @Query(

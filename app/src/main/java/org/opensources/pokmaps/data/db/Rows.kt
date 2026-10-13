@@ -22,15 +22,17 @@ data class PokemonRow(
     val nameEn: String,
     val genus: String,
     val description: String?,
+    val descriptionVersion: String?,
     val heightDm: Int,
     val weightHg: Int,
-    val captureRate: Int,
     val growthRate: String,
     val evolutionChainId: Int,
     val genderRate: Int,
-    val hatchCounter: Int,
     val generationId: Int
 )
+
+/** Données de l'espèce propres au groupe de versions ; pas de cycles d'éclosion sans œufs (1re génération). */
+data class PokemonProfileRow(val captureRate: Int, val hatchCounter: Int?)
 
 data class StatRow(val identifier: String, val name: String, val value: Int)
 

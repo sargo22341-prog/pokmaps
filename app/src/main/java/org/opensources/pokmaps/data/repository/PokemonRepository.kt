@@ -5,6 +5,8 @@ import javax.inject.Singleton
 import org.opensources.pokmaps.data.db.EncounterRow
 import org.opensources.pokmaps.data.db.LearnedMoveRow
 import org.opensources.pokmaps.data.db.PokemonDao
+import org.opensources.pokmaps.data.db.PokemonProfileRow
+import org.opensources.pokmaps.data.db.PokemonRow
 import org.opensources.pokmaps.domain.guide.BreedingProfile
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterTime
@@ -17,11 +19,13 @@ import org.opensources.pokmaps.domain.pokemon.EvolutionEdge
 import org.opensources.pokmaps.domain.pokemon.EvolutionTree
 import org.opensources.pokmaps.domain.pokemon.EvolutionTrigger
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
+import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.HeldItem
 import org.opensources.pokmaps.domain.pokemon.LearnMethod
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.Machine
 import org.opensources.pokmaps.domain.pokemon.MoveTab
+import org.opensources.pokmaps.domain.pokemon.PokedexDescription
 import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.domain.pokemon.PokemonForm
@@ -51,6 +55,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         check(types.size in 1..2 && types.map { it.id }.distinct().size == types.size) {
             "Types invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
         }
+        val profile = profile(game, pokemonId)
         val factors = dao.typeFactors(game.generationId).associate {
             (it.attackingTypeId to it.defendingTypeId) to
                 it.factor
@@ -63,10 +68,10 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             name = pokemon.name,
             nameEn = pokemon.nameEn,
             genus = pokemon.genus,
-            description = pokemon.description,
+            description = description(pokemon),
             heightDm = pokemon.heightDm,
             weightHg = pokemon.weightHg,
-            captureRate = pokemon.captureRate,
+            captureRate = profile.captureRate,
             growthRate = pokemon.growthRate,
             types = types,
             stats = stats(game, pokemonId),
@@ -77,9 +82,28 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
                 .sortedWith(compareBy({ it.machine?.isHm }, { it.machine?.name })),
             encounters = dao.encounters(pokemonId).map { it.toEncounter() },
             staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
-            traits = traits(game, pokemonId, pokemon.genderRate, pokemon.hatchCounter),
+            traits = traits(game, pokemonId, pokemon.genderRate, profile.hatchCounter),
             eggMoves = moves[MoveTab.EGG].orEmpty().sortedBy { it.name },
             tutorMoves = moves[MoveTab.TUTOR].orEmpty().sortedBy { it.name }
+        )
+    }
+
+    /** Données de l'espèce propres au jeu ; leur absence pour une espèce du jeu est une base invalide. */
+    private suspend fun profile(game: Game, pokemonId: Int): PokemonProfileRow {
+        val profile = checkNotNull(dao.profile(pokemonId, game.versionGroupId)) {
+            "Données propres au jeu absentes pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+        }
+        val breeds = GenerationFeature.BREEDING.existsIn(game.generationId)
+        check(profile.captureRate in 1..CAPTURE_RATE_MAX && (profile.hatchCounter != null) == breeds) {
+            "Données propres au jeu invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
+        }
+        return profile
+    }
+
+    private fun description(pokemon: PokemonRow): PokedexDescription? = pokemon.description?.let {
+        PokedexDescription(
+            it,
+            checkNotNull(pokemon.descriptionVersion) { "Description sans jeu d'origine pour le Pokémon ${pokemon.id}" }
         )
     }
 
@@ -127,12 +151,12 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
     }
 
     /** Objets tenus, sexe, œufs et talents : vides pour un jeu qui ne les connaît pas (base sans ces données). */
-    private suspend fun traits(game: Game, pokemonId: Int, genderRate: Int, hatchCounter: Int) = PokemonTraits(
+    private suspend fun traits(game: Game, pokemonId: Int, genderRate: Int, hatchCounter: Int?) = PokemonTraits(
         heldItems = dao.heldItems(pokemonId, game.versionId).map {
             HeldItem(it.identifier, it.name, it.hasSprite, it.rarity)
         },
         gender = GenderRatio.from(genderRate),
-        eggGroups = dao.eggGroups(pokemonId),
+        eggGroups = dao.eggGroups(pokemonId, game.versionGroupId),
         hatchCycles = hatchCounter,
         abilities = abilities(game, pokemonId)
     )
@@ -166,6 +190,10 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         },
         note = method.note
     )
+
+    private companion object {
+        const val CAPTURE_RATE_MAX = 255
+    }
 }
 
 fun EncounterRow.toEncounter() = Encounter(

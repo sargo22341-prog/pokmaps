@@ -59,7 +59,6 @@ data class PokemonEntity(
     @ColumnInfo(name = "generation_id") val generationId: Int,
     @ColumnInfo(name = "evolves_from_id") val evolvesFromId: Int?,
     @ColumnInfo(name = "evolution_chain_id") val evolutionChainId: Int,
-    @ColumnInfo(name = "capture_rate") val captureRate: Int,
     @ColumnInfo(name = "gender_rate") val genderRate: Int,
     @ColumnInfo(name = "growth_rate_id") val growthRateId: Int,
     @ColumnInfo(name = "height_dm") val heightDm: Int,
@@ -68,7 +67,18 @@ data class PokemonEntity(
     @ColumnInfo(name = "is_mythical") val isMythical: Boolean,
     @ColumnInfo(name = "is_baby") val isBaby: Boolean,
     @ColumnInfo(name = "description_fr") val descriptionFr: String?,
-    @ColumnInfo(name = "hatch_counter") val hatchCounter: Int
+    @ColumnInfo(name = "description_version_fr") val descriptionVersionFr: String?
+)
+
+@Entity(
+    tableName = "pokemon_version_group",
+    primaryKeys = ["pokemon_id", "version_group_id"]
+)
+data class PokemonVersionGroupEntity(
+    @ColumnInfo(name = "pokemon_id") val pokemonId: Int,
+    @ColumnInfo(name = "version_group_id") val versionGroupId: Int,
+    @ColumnInfo(name = "capture_rate") val captureRate: Int,
+    @ColumnInfo(name = "hatch_counter") val hatchCounter: Int?
 )
 
 @Entity(

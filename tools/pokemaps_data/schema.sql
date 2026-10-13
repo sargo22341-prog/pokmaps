@@ -87,7 +87,8 @@ CREATE TABLE growth_rate (
     name_fr TEXT NOT NULL
 );
 
--- Une ligne par espèce (forme par défaut).
+-- Une ligne par espèce (forme par défaut) : ce qui ne change pas d'un jeu à l'autre de la base. builder_pokemon
+-- vérifie le sexe et la courbe d'expérience dans pret ; un test des sources compare taille et poids aux Pokédex GBA.
 CREATE TABLE pokemon (
     id INTEGER NOT NULL PRIMARY KEY,
     identifier TEXT NOT NULL,
@@ -97,7 +98,6 @@ CREATE TABLE pokemon (
     generation_id INTEGER NOT NULL,
     evolves_from_id INTEGER,
     evolution_chain_id INTEGER NOT NULL,
-    capture_rate INTEGER NOT NULL,
     -- Proportion de femelles en huitièmes, -1 si asexué.
     gender_rate INTEGER NOT NULL,
     growth_rate_id INTEGER NOT NULL,
@@ -106,11 +106,23 @@ CREATE TABLE pokemon (
     is_legendary INTEGER NOT NULL,
     is_mythical INTEGER NOT NULL,
     is_baby INTEGER NOT NULL,
+    -- Description du Pokédex et nom français du jeu d'où elle vient : PokéAPI n'a aucun texte français des jeux
+    -- de la base, la description est donc reprise d'un jeu plus récent. Toutes deux NULL ensemble.
     description_fr TEXT,
-    -- Cycles d'éclosion de l'œuf (à partir de la 2e génération ; le nombre de pas d'un cycle dépend du jeu).
-    hatch_counter INTEGER NOT NULL
+    description_version_fr TEXT
 );
 CREATE INDEX index_pokemon_evolution_chain_id ON pokemon (evolution_chain_id);
+
+-- Données d'une espèce propres à un groupe de versions, lues dans pret : elles ont changé d'un jeu à l'autre
+-- (taux de capture de Rattatac ou de Rayquaza, éclosion de Marill). Cycles d'éclosion de l'œuf : NULL en
+-- 1re génération, sans œufs (le nombre de pas d'un cycle dépend du jeu).
+CREATE TABLE pokemon_version_group (
+    pokemon_id INTEGER NOT NULL,
+    version_group_id INTEGER NOT NULL,
+    capture_rate INTEGER NOT NULL,
+    hatch_counter INTEGER,
+    PRIMARY KEY (pokemon_id, version_group_id)
+);
 
 CREATE TABLE pokemon_type (
     pokemon_id INTEGER NOT NULL,
@@ -201,10 +213,13 @@ CREATE TABLE egg_group (
     name_fr TEXT NOT NULL
 );
 
+-- Groupes d'œufs d'une espèce dans un groupe de versions, lus dans pret (Tarsal n'est Humanoïde qu'après la
+-- 3e génération).
 CREATE TABLE pokemon_egg_group (
     pokemon_id INTEGER NOT NULL,
+    version_group_id INTEGER NOT NULL,
     egg_group_id INTEGER NOT NULL,
-    PRIMARY KEY (pokemon_id, egg_group_id)
+    PRIMARY KEY (pokemon_id, version_group_id, egg_group_id)
 );
 
 -- Talents (à partir de la 3e génération).

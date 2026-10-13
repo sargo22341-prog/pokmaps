@@ -88,7 +88,7 @@ internal fun Breeding(traits: PokemonTraits) {
                 stringResource(R.string.pokemon_egg_groups, traits.eggGroups.joinToString(", "))
             }
         )
-        Text(stringResource(R.string.pokemon_hatch_cycles, traits.hatchCycles))
+        traits.hatchCycles?.let { Text(stringResource(R.string.pokemon_hatch_cycles, it)) }
     }
 }
 

@@ -10,9 +10,10 @@ data class PokemonDetails(
     val name: String,
     val nameEn: String,
     val genus: String,
-    val description: String?,
+    val description: PokedexDescription?,
     val heightDm: Int,
     val weightHg: Int,
+    /** Taux de capture dans le jeu choisi (il a changé pour certaines espèces). */
     val captureRate: Int,
     val growthRate: String,
     val types: List<PokemonType>,
@@ -38,6 +39,12 @@ data class PokemonDetails(
 }
 
 /**
+ * Description du Pokédex et nom du jeu d'où elle vient : la base n'a pas de texte français des jeux de la
+ * 1re à la 3e génération, la description n'est donc pas forcément celle du jeu choisi.
+ */
+data class PokedexDescription(val text: String, val versionName: String)
+
+/**
  * Données des générations suivantes (voir [GenerationFeature]) : objets tenus dans la version du jeu, sexe, œufs et
  * talents. La fiche ne montre que ce que le jeu connaît.
  */
@@ -45,7 +52,8 @@ data class PokemonTraits(
     val heldItems: List<HeldItem>,
     val gender: GenderRatio,
     val eggGroups: List<String>,
-    val hatchCycles: Int,
+    /** Cycles d'éclosion dans le jeu, null s'il ne connaît pas les œufs. */
+    val hatchCycles: Int?,
     val abilities: List<PokemonAbility>
 )
 

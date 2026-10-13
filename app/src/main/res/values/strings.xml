@@ -69,6 +69,7 @@
     <string name="pokemon_size">%1$s m · %2$s kg</string>
     <string name="pokemon_growth">Expérience : courbe %1$s</string>
     <string name="pokemon_capture_rate">Taux de capture : %1$d</string>
+    <string name="pokemon_description_source">Texte du Pokédex de Pokémon %1$s</string>
     <string name="pokemon_stats">Stats de base</string>
     <string name="pokemon_stats_total">Total</string>
     <string name="pokemon_weaknesses">Faiblesses et résistances</string>

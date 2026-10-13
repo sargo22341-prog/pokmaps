@@ -100,6 +100,22 @@ CHECKS = (
              OR NOT EXISTS (SELECT 1 FROM pokemon_stat s WHERE s.pokemon_id = p.id AND s.generation_id = g.id))""",
     ),
     (
+        "données d'espèce par jeu absentes ou invalides",
+        """SELECT p.id, vg.id FROM pokemon p JOIN version_group vg ON vg.generation_id >= p.generation_id
+           LEFT JOIN pokemon_version_group pv ON pv.pokemon_id = p.id AND pv.version_group_id = vg.id
+           WHERE pv.pokemon_id IS NULL OR pv.capture_rate NOT BETWEEN 1 AND 255 OR pv.hatch_counter <= 0
+             OR (pv.hatch_counter IS NULL) != (vg.generation_id < 2)
+           UNION ALL
+           SELECT pv.pokemon_id, pv.version_group_id FROM pokemon_version_group pv
+           LEFT JOIN pokemon p ON p.id = pv.pokemon_id LEFT JOIN version_group vg ON vg.id = pv.version_group_id
+           WHERE p.id IS NULL OR vg.id IS NULL OR p.generation_id > vg.generation_id""",
+    ),
+    (
+        "description du Pokédex sans jeu d'origine",
+        """SELECT id FROM pokemon
+           WHERE (description_fr IS NULL) != (description_version_fr IS NULL) OR trim(description_version_fr) = ''""",
+    ),
+    (
         "rencontre avec niveaux, quantité ou probabilité invalides",
         """SELECT e.id FROM encounter e JOIN encounter_method m ON m.id = e.method_id
            WHERE e.min_level NOT BETWEEN 1 AND 100 OR e.max_level NOT BETWEEN e.min_level AND 100
@@ -264,8 +280,16 @@ CHECKS = (
     ),
     (
         "groupe d'œufs incohérent",
-        """SELECT * FROM pokemon_egg_group WHERE pokemon_id NOT IN (SELECT id FROM pokemon)
-           OR egg_group_id NOT IN (SELECT id FROM egg_group)""",
+        """SELECT peg.* FROM pokemon_egg_group peg LEFT JOIN pokemon p ON p.id = peg.pokemon_id
+           LEFT JOIN version_group vg ON vg.id = peg.version_group_id
+           WHERE p.id IS NULL OR vg.id IS NULL OR vg.generation_id < 2 OR p.generation_id > vg.generation_id
+             OR peg.egg_group_id NOT IN (SELECT id FROM egg_group)""",
+    ),
+    (
+        "Pokémon sans groupe d'œufs dans un jeu qui connaît la reproduction",
+        """SELECT p.id, vg.id FROM pokemon p JOIN version_group vg ON vg.generation_id >= max(p.generation_id, 2)
+           WHERE NOT EXISTS (SELECT 1 FROM pokemon_egg_group peg
+                             WHERE peg.pokemon_id = p.id AND peg.version_group_id = vg.id)""",
     ),
     (
         "talent incohérent",
@@ -392,13 +416,14 @@ def _obtention_links(connection: sqlite3.Connection, generation: int, groups: tu
     ).fetchall()
     if generation >= BREEDING_GENERATION:
         links += connection.execute(
-            """SELECT p.id, base.id FROM pokemon p
-               JOIN pokemon base ON base.evolution_chain_id = p.evolution_chain_id AND base.generation_id <= ?
-                AND NOT EXISTS (SELECT 1 FROM pokemon prior
-                                WHERE prior.id = base.evolves_from_id AND prior.generation_id <= ?)
-               WHERE NOT EXISTS (SELECT 1 FROM pokemon_egg_group peg JOIN egg_group g ON g.id = peg.egg_group_id
-                                 WHERE peg.pokemon_id = p.id AND g.identifier = ?)""",
-            (generation, generation, _NO_EGGS),
+            f"""SELECT p.id, base.id FROM pokemon p
+                JOIN pokemon base ON base.evolution_chain_id = p.evolution_chain_id AND base.generation_id <= ?
+                 AND NOT EXISTS (SELECT 1 FROM pokemon prior
+                                 WHERE prior.id = base.evolves_from_id AND prior.generation_id <= ?)
+                WHERE NOT EXISTS (SELECT 1 FROM pokemon_egg_group peg JOIN egg_group g ON g.id = peg.egg_group_id
+                                  WHERE peg.pokemon_id = p.id AND g.identifier = ?
+                                    AND peg.version_group_id IN ({", ".join("?" * len(groups))}))""",
+            (generation, generation, _NO_EGGS, *groups),
         ).fetchall()
     return links
 
