@@ -5,9 +5,10 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from pokemaps_data.games import FIRERED_LEAFGREEN
+from pokemaps_data.games import FIRERED_LEAFGREEN, GEN3_GAMES, Game
 from pokemaps_data.pret_gen3 import Gen3PretRepo
-from pokemaps_data.pret_gen3_sprites import sprite_image
+from pokemaps_data.pret_gen3_sprites import _tables, sprite_image
+from pokemaps_data.sources import pret_dir
 
 
 @pytest.fixture
@@ -57,3 +58,19 @@ def test_sprite_dma_size_must_still_match(sprite_repo: Gen3PretRepo) -> None:
     path.write_text(path.read_text("utf-8").replace("1, 4, 1", "1, 3, 1"), encoding="utf-8")
     with pytest.raises(ValueError, match="taille de la première image incohérente"):
         sprite_image(sprite_repo, "OBJ_EVENT_GFX_SHIP")
+
+
+@pytest.mark.pipeline
+@pytest.mark.parametrize("game", GEN3_GAMES)
+def test_all_distributed_gba_sprites_keep_pinned_engine_dimensions(game: Game) -> None:
+    tools = Path(__file__).resolve().parents[1]
+    repo = Gen3PretRepo(pret_dir(tools / ".cache", game.pret_repo), game.pret_versions)
+    pointers, info, _, _ = _tables(repo)
+    directory = tools.parent / "app/src/main/assets/maps" / game.version_group / "sprites"
+    sprites = tuple(directory.glob("*.webp"))
+    assert sprites
+    for path in sprites:
+        symbol = path.stem.upper().replace("-", "_")
+        fields = info[pointers[symbol]]
+        with Image.open(path) as image:
+            assert image.size == (int(fields["width"]), int(fields["height"])), path.name

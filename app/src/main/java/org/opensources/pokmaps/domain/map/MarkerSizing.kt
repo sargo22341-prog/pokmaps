@@ -95,14 +95,19 @@ object MarkerSizing {
     }
 
     /**
-     * Taille de chaque objet, personnage et Pokémon fixe (par identifiant) : commune à ceux d'un même lieu qui
-     * se dessinent pareil, d'après la place laissée par tous les autres marqueurs du lieu.
+     * Taille des icônes d'objets et Pokémon fixes (par identifiant), selon leurs voisins dans le même lieu.
+     * Les personnages et autres sprites du moteur restent à leur taille native.
      */
     fun objectScales(objects: List<MapObject>): Map<Int, Float> = buildMap {
         objects.groupBy { it.mapId }.values.forEach { inPlace ->
             val neighbors = inPlace.map { it.x to it.y }
             inPlace.groupBy { footprintOf(it) }.forEach { (footprint, group) ->
-                val scale = crowdScale(group.map { it.x to it.y }, neighbors, footprint)
+                // Les sprites du moteur gardent leur taille native, même entre deux acteurs de scénario.
+                val scale = if (footprint == Footprint.CHARACTER) {
+                    1f
+                } else {
+                    crowdScale(group.map { it.x to it.y }, neighbors, footprint)
+                }
                 group.forEach { put(it.id, scale) }
             }
         }

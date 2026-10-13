@@ -23,36 +23,38 @@ class MapSpriteTest {
     @Test
     fun gbaSpritesKeepTheirNativeDimensionsAndFollowZoom() {
         val zoom = mutableStateOf(2f)
-        val paths = listOf(
-            "maps/red-blue/sprites/beauty.webp",
-            "maps/ruby-sapphire/sprites/obj-event-gfx-beauty.webp",
-            "maps/emerald/sprites/obj-event-gfx-beauty.webp",
-            "maps/firered-leafgreen/sprites/obj-event-gfx-beauty.webp",
-            "maps/firered-leafgreen/sprites/obj-event-gfx-biker.webp"
+        val dimensions = mapOf(
+            "maps/red-blue/sprites/beauty.webp" to IntSize(16, 16),
+            "maps/ruby-sapphire/sprites/obj-event-gfx-beauty.webp" to IntSize(16, 32),
+            "maps/emerald/sprites/obj-event-gfx-beauty.webp" to IntSize(16, 32),
+            "maps/firered-leafgreen/sprites/obj-event-gfx-beauty.webp" to IntSize(16, 32),
+            "maps/firered-leafgreen/sprites/obj-event-gfx-biker.webp" to IntSize(32, 32),
+            "maps/emerald/sprites/obj-event-gfx-prof-birch.webp" to IntSize(16, 32),
+            "maps/emerald/sprites/obj-event-gfx-mart-employee.webp" to IntSize(16, 32)
         )
         val sizes = mutableMapOf<String, IntSize>()
         compose.setContent {
             // Le zoom ne doit pas réduire les derniers sprites pour les faire tenir dans l'écran de test.
             Column(Modifier.wrapContentHeight(unbounded = true)) {
-                paths.forEach { path ->
+                dimensions.keys.forEach { path ->
                     MapSprite(path, null, zoom.value, Modifier.onSizeChanged { sizes[path] = it })
                 }
             }
         }
         compose.waitUntil(10_000) {
-            paths.subList(1, 4).all { sizes[it] == IntSize(32, 64) } && sizes[paths[4]] == IntSize(64, 64)
+            dimensions.all { (path, source) -> sizes[path] == IntSize(source.width * 2, source.height * 2) }
         }
         compose.runOnIdle {
-            assertEquals(IntSize(32, 32), sizes[paths[0]])
-            paths.subList(1, 4).forEach { assertEquals(IntSize(32, 64), sizes[it]) }
-            assertEquals(IntSize(64, 64), sizes[paths[4]])
+            dimensions.forEach { (path, source) ->
+                assertEquals(IntSize(source.width * 2, source.height * 2), sizes[path])
+            }
             zoom.value = 3f
         }
         compose.waitForIdle()
         compose.runOnIdle {
-            assertEquals(IntSize(48, 48), sizes[paths[0]])
-            paths.subList(1, 4).forEach { assertEquals(IntSize(48, 96), sizes[it]) }
-            assertEquals(IntSize(96, 96), sizes[paths[4]])
+            dimensions.forEach { (path, source) ->
+                assertEquals(IntSize(source.width * 3, source.height * 3), sizes[path])
+            }
         }
     }
 }

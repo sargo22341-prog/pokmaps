@@ -128,7 +128,8 @@ fun ObjectMarker(
             sprite != null -> MapSprite(
                 Sprites.mapSprite(versionGroupIdentifier, sprite),
                 contentDescription = obj.name,
-                pixelScale = (mapState.scale * scale).toFloat()
+                pixelScale = (mapState.scale * scale).toFloat(),
+                tileAnchored = true
             )
 
             facility != null -> FacilityMarker(mapState, facility, obj.name, scale)

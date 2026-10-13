@@ -129,6 +129,8 @@ Les cartes de Hoenn montrent un héros garçon et Flora comme rivale, après le 
 La maison du héros est à gauche de Bourg-en-Vol, celle de la rivale à droite. Les camions, déménageurs,
 acteurs du sauvetage de Seko et décorations personnalisables des chambres sont masqués. Seko reste dans son laboratoire.
 Chaque combat de Flora possède une seule icône ; son équipe dépend du Pokémon de départ choisi dans le jeu.
+Les journalistes des Routes 111, 118 et 120 gardent une seule paire par route ; les acteurs des revanches
+restent dans le catalogue source sans répéter les sprites sur la carte.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
 d’un chenal avec un accès de Plongée. Les Chenaux 124, 126, 127, 128 et 134 sont concernés ; Émeraude ajoute
 les Chenaux 105, 125 et 129. Le Chenal 133 ne possède pas de zone sous-marine.
@@ -149,7 +151,8 @@ Les passages viennent de pret ; les niveaux sans numéro explicite sont vérifi�
 Le Léviator fixe du Lac Colère utilise son sprite chromatique.
 Le choix des jeux distingue les remakes par leur génération d’origine.
 Les personnages et objets dessinés avec leurs sprites de carte gardent leurs dimensions d’origine au zoom courant,
-y compris les personnages de 16 × 32 pixels des jeux GBA.
+y compris les personnages de 16 × 32 pixels des jeux GBA. Les PNJ ne sont pas réduits par la proximité d'autres
+marqueurs ; leurs pieds sont ancrés au bas de leur case et leur badge de combat reste attaché à cette même case.
 Le calque « Baies et Noigrumes » apparaît sur les cartes contenant des arbres à fruits.
 Le bouton horaire apparaît si les rencontres du jeu ont des conditions horaires.
 Il défile Matin, Jour, Nuit et Tout : il filtre les rencontres et anime la lumière ;
