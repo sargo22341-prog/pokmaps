@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.map
 
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.emptyFlow
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -51,7 +52,7 @@ class MapViewModelTest {
         dataStore: FakeDataStore = FakeDataStore()
     ): MapViewModel {
         val gameRepository = GameRepository(games, GameSettings(dataStore))
-        val mapRepository = MapRepository(maps)
+        val mapRepository = MapRepository(maps, Dispatchers.Unconfined)
         return MapViewModel(
             ObserveMapCatalogUseCase(gameRepository, mapRepository),
             GetMapEncountersUseCase(mapRepository),

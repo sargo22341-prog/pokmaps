@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.ui.map
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -21,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 class MapNavigationTest {
     @Test
     fun regionMenuOpensEventIslandsAndReturnsToTheMainRegion() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = GeneratedGbaCatalog.load("emerald")
         val session = MapSession(backgroundScope)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
@@ -41,7 +42,7 @@ class MapNavigationTest {
 
     @Test
     fun diveLevelsFollowTheSelectedRouteAndDisappearOnDeselect() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = GeneratedGbaCatalog.load("ruby-sapphire")
         val session = MapSession(backgroundScope)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
@@ -74,7 +75,7 @@ class MapNavigationTest {
 
     @Test
     fun fruitLayerFollowsTheDisplayedMapContents() = runTest {
-        val repository = MapRepository(FakeMapDao(includeFruitTree = true))
+        val repository = MapRepository(FakeMapDao(includeFruitTree = true), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
         val session = MapSession(backgroundScope)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
@@ -93,7 +94,7 @@ class MapNavigationTest {
 
     @Test
     fun enteringAComposedRoomCentersTheWholeFloor() = runTest {
-        val repository = MapRepository(FakeMapDao(includeCompositeInterior = true))
+        val repository = MapRepository(FakeMapDao(includeCompositeInterior = true), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
         val session = MapSession(backgroundScope)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
@@ -111,7 +112,7 @@ class MapNavigationTest {
 
     @Test
     fun aRecreatedViewKeepsItsRequestedCenterBeforeLayout() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
         val session = MapSession(backgroundScope)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
@@ -136,7 +137,7 @@ class MapNavigationTest {
 
     @Test
     fun aNewWorldStartsAtItsStartingTownBeforeLayout() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val original = repository.catalog(FakeGameDao.RED)
         val worldInfo = checkNotNull(original.defaultWorld)
         val catalog = original.copy(

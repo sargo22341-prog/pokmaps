@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -73,7 +74,9 @@ fun GuideScreen(
         }
         return
     }
-    AnimatedContent(targetState = state, contentKey = { it.category to it.articleId }, label = "guide") { screen ->
+    val frame = remember(state) { GuideFrame(state) }
+    AnimatedContent(frame, contentKey = { it.state.category to it.state.articleId }, label = "guide") { shown ->
+        val screen = shown.state
         val article = screen.article
         if (article == null) {
             GuideIndex(screen, onAction, modifier)
@@ -83,6 +86,13 @@ fun GuideScreen(
     }
     if (state.previewTarget != null) GuidePreviewSheet(state, onAction, links)
 }
+
+/**
+ * État d'une page animée, comparé par instance. AnimatedContent range ses pages dans une table indexée par l'état
+ * cible : avec [GuideUiState] lui-même, chaque frame de la transition hachait toute la bibliothèque. Le StateFlow ne
+ * publie que des états différents, si bien que l'identité distingue les mêmes états qu'avant.
+ */
+private class GuideFrame(val state: GuideUiState)
 
 @Composable
 private fun GuideIndex(state: GuideUiState, onAction: (GuideAction) -> Unit, modifier: Modifier) {

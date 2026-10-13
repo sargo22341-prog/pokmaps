@@ -1,8 +1,13 @@
 package org.opensources.pokmaps.data.repository
 
+import kotlin.coroutines.ContinuationInterceptor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
@@ -38,7 +43,7 @@ class MapRepositoryTest {
             override suspend fun offers(objectId: Int, versionId: Int) = rows
             override suspend fun offerLinks(versionId: Int) = listOf(link.copy(currency = "ashes"))
         }
-        val repository = MapRepository(dao)
+        val repository = MapRepository(dao, Dispatchers.Unconfined)
         val offers = repository.offers(FakeGameDao.RED, FakeMapDao.CLERK)
         assertEquals(OfferCurrency.ASHES, repository.index(FakeGameDao.RED).offers.single().currency)
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
@@ -59,7 +64,8 @@ class MapRepositoryTest {
 
     @Test
     fun fruitTreesUseTheirOwnLayerAndMatchingItemSprite() = runTest {
-        val catalog = MapRepository(FakeMapDao(includeFruitTree = true)).catalog(FakeGameDao.GOLD)
+        val repository = MapRepository(FakeMapDao(includeFruitTree = true), Dispatchers.Unconfined)
+        val catalog = repository.catalog(FakeGameDao.GOLD)
         val tree = catalog.objects.getValue(FakeMapDao.ROUTE_1).single { it.id == FakeMapDao.SECOND_GENERATION }
         assertEquals(OfferItem(FakeMapDao.BERRY, "oran-berry", "Baie Oran", true), tree.fruit)
         assertEquals(
@@ -76,7 +82,7 @@ class MapRepositoryTest {
 
     @Test
     fun catalogKeepsTheObjectsOfEachVersion() = runTest {
-        val repository = MapRepository(FakeMapDao(includeVersionPokemon = true))
+        val repository = MapRepository(FakeMapDao(includeVersionPokemon = true), Dispatchers.Unconfined)
 
         fun level(catalog: MapCatalog): Int? =
             catalog.objects.getValue(FakeMapDao.ROUTE_1).single { it.pokemonId == FakeMapDao.SNORLAX }.level
@@ -88,7 +94,7 @@ class MapRepositoryTest {
 
     @Test
     fun secondGenerationOffersKeepHeldItemsTreesAndServices() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val berry = OfferItem(FakeMapDao.BERRY, "oran-berry", "Baie Oran", hasSprite = true)
 
         val offers = repository.offers(FakeGameDao.RED, FakeMapDao.SECOND_GENERATION)
@@ -111,7 +117,7 @@ class MapRepositoryTest {
 
     @Test
     fun offersCarryTheirTimesDaysAndStorySteps() = runTest {
-        val repository = MapRepository(FakeMapDao())
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
 
         val (berry, potion) = repository.offers(FakeGameDao.RED, FakeMapDao.SIBLING)
 
@@ -126,8 +132,30 @@ class MapRepositoryTest {
         assertEquals(OfferCondition.ALWAYS, potion.condition)
     }
 
+    @Test
+    fun catalogAndIndexAreBuiltOnTheComputationDispatcher() = runTest {
+        val computation = StandardTestDispatcher(testScheduler)
+        val readOn = mutableListOf<ContinuationInterceptor?>()
+        val delegate = FakeMapDao()
+        val dao = object : MapDao by delegate {
+            override suspend fun maps(versionGroupId: Int) =
+                delegate.maps(versionGroupId).also { readOn += currentCoroutineContext()[ContinuationInterceptor] }
+
+            override suspend fun items(versionGroupId: Int, versionId: Int) = delegate.items(versionGroupId, versionId)
+                .also { readOn += currentCoroutineContext()[ContinuationInterceptor] }
+        }
+        val repository = MapRepository(dao, computation)
+
+        repository.catalog(FakeGameDao.RED)
+        repository.index(FakeGameDao.RED)
+
+        // Lectures et conversions qui les suivent : jamais sur le contexte de l'appelant (le fil principal).
+        assertTrue(readOn.size >= 2)
+        assertTrue(readOn.all { it === computation })
+    }
+
     @Test(expected = IllegalStateException::class)
     fun unreadableOffersAreAnError() = runTest {
-        MapRepository(FakeMapDao(failing = true)).offers(FakeGameDao.RED, FakeMapDao.SIBLING)
+        MapRepository(FakeMapDao(failing = true), Dispatchers.Unconfined).offers(FakeGameDao.RED, FakeMapDao.SIBLING)
     }
 }

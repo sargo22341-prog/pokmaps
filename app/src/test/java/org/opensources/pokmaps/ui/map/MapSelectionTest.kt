@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.map
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
@@ -39,8 +40,8 @@ class MapSelectionTest {
         val session = MapSession(scope)
         val selection = MapSelection(
             session,
-            GetMapEncountersUseCase(MapRepository(details)),
-            GetMapObjectDetailsUseCase(MapRepository(details))
+            GetMapEncountersUseCase(MapRepository(details, Dispatchers.Unconfined)),
+            GetMapObjectDetailsUseCase(MapRepository(details, Dispatchers.Unconfined))
         )
     }
 
@@ -49,7 +50,7 @@ class MapSelectionTest {
         details: MapDao = FakeMapDao(),
         catalogData: FakeMapDao = FakeMapDao()
     ): Fixture {
-        val catalog = MapRepository(catalogData).catalog(FakeGameDao.RED)
+        val catalog = MapRepository(catalogData, Dispatchers.Unconfined).catalog(FakeGameDao.RED)
         return Fixture(CoroutineScope(UnconfinedTestDispatcher(testScheduler)), details).apply {
             session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         }
@@ -200,7 +201,7 @@ class MapSelectionTest {
         val fixture = fixture()
         val original = checkNotNull(fixture.session.catalog)
         val route = original.maps.getValue(FakeMapDao.ROUTE_1)
-        val getEncounters = GetMapEncountersUseCase(MapRepository(FakeMapDao()))
+        val getEncounters = GetMapEncountersUseCase(MapRepository(FakeMapDao(), Dispatchers.Unconfined))
         val encounter = getEncounters(FakeGameDao.RED, original, route.id).single()
             .copy(method = "seaweed")
         val catalog = original.copy(

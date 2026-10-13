@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.character
 
 import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -37,7 +38,7 @@ class CharacterViewModelTest {
         if (blue) runBlocking { games.select(FakeGameDao.BLUE) }
         return CharacterViewModel(
             SavedStateHandle(mapOf(CharacterViewModel.CHARACTER to objectId)),
-            ObserveCharacterPageUseCase(games, MapRepository(FakeMapDao(failing))),
+            ObserveCharacterPageUseCase(games, MapRepository(FakeMapDao(failing), Dispatchers.Unconfined)),
             requests
         )
     }

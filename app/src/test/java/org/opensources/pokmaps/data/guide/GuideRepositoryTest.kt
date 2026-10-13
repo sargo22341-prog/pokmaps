@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import java.io.File
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -29,7 +30,7 @@ class GuideRepositoryTest {
             .createFromFile(File(requireNotNull(System.getProperty("pokemaps.database"))))
             .build()
         try {
-            val maps = MapRepository(database.mapDao())
+            val maps = MapRepository(database.mapDao(), Dispatchers.Unconfined)
             val repository =
                 GuideRepository(context, maps, PokedexRepository(database.pokedexDao()), HoennRepository(context))
             val expected = listOf(93, 90, 76, 72, 75, 113)

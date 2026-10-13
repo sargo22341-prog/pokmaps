@@ -133,4 +133,48 @@ class GuideScreenTest {
         compose.onNode(isToggleable()).assertDoesNotExist()
         assertEquals(listOf(GuideAction.Article("ra-1")), actions)
     }
+
+    @Test
+    fun openingAnArticleNeverHashesTheLibrary() {
+        val chapter = GuideArticle(
+            "chapter",
+            "Étape test",
+            GuideCategory.WALKTHROUGH,
+            listOf(listOf(GuideSpan("Paragraphe"))),
+            25,
+            emptyList()
+        )
+        val articles = HashCountingList(listOf(chapter))
+        var state by androidx.compose.runtime.mutableStateOf(
+            GuideUiState(
+                loading = false,
+                library = GuideLibrary(FakeGameDao.RED, articles),
+                category = GuideCategory.WALKTHROUGH
+            )
+        )
+        compose.mainClock.autoAdvance = false
+        compose.setContent { GuideScreen(state, { actions += it }, GuideLinks({}, {}, {})) }
+        compose.runOnIdle { state = state.copy(articleId = "chapter") }
+        repeat(ANIMATION_FRAMES) { compose.mainClock.advanceTimeByFrame() }
+        compose.mainClock.autoAdvance = true
+
+        compose.onNode(hasText("Paragraphe")).assertExists()
+        assertEquals(0, articles.hashes)
+    }
+
+    /** Liste dont le hachage, qui parcourt chaque article, se compte. */
+    private class HashCountingList(private val items: List<GuideArticle>) : List<GuideArticle> by items {
+        var hashes = 0
+
+        override fun equals(other: Any?): Boolean = items == other
+
+        override fun hashCode(): Int {
+            hashes++
+            return items.hashCode()
+        }
+    }
+
+    private companion object {
+        const val ANIMATION_FRAMES = 40
+    }
 }

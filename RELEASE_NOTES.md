@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- La carte réagit plus vite à la sélection d’un lieu et au premier affichage d’un jeu.
+- L’ouverture d’un guide est plus fluide.
 - Les préférences de collection corrompues et un catalogue de jeux vide signalent une erreur de lecture.
 - La carte écarte les anciens chargements après une nouvelle sélection ou un changement de jeu.
 - Les échecs d’enregistrement des captures et favoris sont signalés et permettent de réessayer.

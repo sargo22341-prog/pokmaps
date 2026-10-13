@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.item
 
 import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -34,7 +35,11 @@ class ItemViewModelTest {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return ItemViewModel(
             SavedStateHandle(mapOf(ItemViewModel.ITEM to identifier)),
-            ObserveItemPageUseCase(games, MapRepository(FakeMapDao(failing)), HoennRepository { error("Hors Hoenn") }),
+            ObserveItemPageUseCase(
+                games,
+                MapRepository(FakeMapDao(failing), Dispatchers.Unconfined),
+                HoennRepository { error("Hors Hoenn") }
+            ),
             requests
         )
     }

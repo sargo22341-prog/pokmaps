@@ -13,5 +13,6 @@
 - [Provenance des sprites de toutes les espèces](donnees/sprites-pokemon.md)
 - [Sources et pipeline](donnees/pipeline.md)
 - [Compilation et publication](developpement.md)
+- [Performances sur téléphone](performance.md)
 
 Le [README](../README.md) présente l'installation. [AGENTS.md](../AGENTS.md) fixe les règles de contribution.
