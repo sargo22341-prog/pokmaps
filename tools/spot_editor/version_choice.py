@@ -34,9 +34,11 @@ class VersionChoice:
     def group(self) -> str:
         return self.groups[self.choice.current()]
 
-    def show(self, family: Family) -> None:
+    def show(self, family: Family, groups: tuple[str, ...] | None = None) -> None:
         previous = self.group if self.groups else ""
-        self.groups = family.version_groups
+        self.groups = family.version_groups if groups is None else groups
+        if not self.groups:
+            raise ValueError("Aucun jeu disponible pour cette carte.")
         self.choice["values"] = [VERSION_LABELS[group] for group in self.groups]
         self.select(previous if previous in self.groups else self.groups[0])
 

@@ -133,6 +133,7 @@ class EditorCatalog:
         if not database.is_file():
             raise FileNotFoundError(f"Base absente : lancer d'abord python tools/build_data.py ({database})")
         self.connection = sqlite3.connect(f"{database.resolve().as_uri()}?mode=ro", uri=True)
+        self._available: dict[tuple[Family, str], tuple[str, ...]] = {}
 
     def close(self) -> None:
         self.connection.close()
@@ -174,6 +175,13 @@ class EditorCatalog:
         """Plan et identifiants du seul groupe choisi, pour ses tuiles, rencontres et calques."""
         selected = Family(family.identifier, family.label, (version_group,))
         return next((found for found in self.maps(selected) if found.identifier == identifier), None)
+
+    def available_groups(self, family: Family, identifier: str) -> tuple[str, ...]:
+        """Jeux qui contiennent ce lieu avec des rencontres sauvages, comme la liste des cartes éditables."""
+        key = (family, identifier)
+        if key not in self._available:
+            self._available[key] = tuple(group for group in family.version_groups if self._wild_maps(group, identifier))
+        return self._available[key]
 
     def world_names(self, family: Family) -> dict[str, str]:
         """Cartes du monde des jeux de la famille (une par région) : identifiant -> nom (« johto » -> « Johto »)."""
@@ -227,16 +235,16 @@ class EditorCatalog:
         )
         return [MapMark(*row) for row in rows]
 
-    def _wild_maps(self, version_group: str) -> list[tuple]:
+    def _wild_maps(self, version_group: str, identifier: str | None = None) -> list[tuple]:
         return self.connection.execute(
             f"""SELECT map.id, map.identifier, map.name_fr, map.x, map.y, map.width, map.height, parent.identifier
                 FROM map JOIN version_group vg ON vg.id = map.version_group_id
                 LEFT JOIN map parent ON parent.id = map.parent_map_id
-                WHERE vg.identifier = ? AND EXISTS (
+                WHERE vg.identifier = ? AND (? IS NULL OR map.identifier = ?) AND EXISTS (
                     SELECT 1 FROM map_area area
                     JOIN encounter e ON e.location_area_id = area.location_area_id
                     JOIN encounter_method method ON method.id = e.method_id
                     JOIN version v ON v.id = e.version_id AND v.version_group_id = map.version_group_id
                     WHERE area.map_id = map.id AND method.identifier IN {_IN_WILD})""",
-            (version_group, *_WILD),
+            (version_group, identifier, identifier, *_WILD),
         ).fetchall()

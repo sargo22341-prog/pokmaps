@@ -176,6 +176,7 @@ class MapEditor:
 
     def _show(self, editor_map: EditorMap | None) -> None:
         if editor_map is not None:
+            self.version_choice.show(self.family, self.catalog.available_groups(self.family, editor_map.identifier))
             editor_map = self.catalog.version_map(self.family, editor_map.identifier, self.version_choice.group)
         previous = self.terrain_choice.current()
         previous_kind = self.terrains[previous] if 0 <= previous < len(self.terrains) else None
@@ -227,7 +228,7 @@ class MapEditor:
 
     def _editing_family(self) -> Family:
         groups = (
-            (self.version_choice.group,) if self.version_choice.only_displayed.get() else self.family.version_groups
+            (self.version_choice.group,) if self.version_choice.only_displayed.get() else self.version_choice.groups
         )
         return Family(self.family.identifier, self.family.label, groups)
 
@@ -319,7 +320,7 @@ class MapEditor:
         shortfalls = self.needs.shortfalls(self.session)
         self.warnings = [item for item in shortfalls if not item.blocking]
         empty = [SpotError(item.key, None, item.message, item.version_group) for item in shortfalls if item.blocking]
-        self.errors = spot_errors(self.session, self.families, self.wild_terrains) + empty
+        self.errors = spot_errors(self.session, self.families, self.wild_terrains, self.catalog) + empty
         self.error_panel.show(self.errors)
         self.warning_panel.show(self.warnings)
         try:
@@ -342,7 +343,7 @@ class MapEditor:
         self.family = self.families[index]
         self._load_family(key.map_identifier)
         shown = key.version_group or version_group
-        if shown:
+        if shown in self.version_choice.groups:
             self.version_choice.select(shown)
             self._select_map()
         self.version_choice.only_displayed.set(bool(key.version_group))
@@ -375,7 +376,7 @@ class MapEditor:
             self.status.configure(text="Aucune modification à enregistrer.")
             return
         try:
-            save_spots(self.session, self.families, self.wild_terrains, SPOTS_CSV)
+            save_spots(self.session, self.families, self.wild_terrains, SPOTS_CSV, self.catalog)
         except (OSError, ValueError) as error:
             messagebox.showerror("Enregistrement impossible", f"{SPOTS_CSV}\n\n{error}")
             return

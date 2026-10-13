@@ -409,7 +409,10 @@ Pokémon à placer sur ce terrain, avec leur version, leurs niveaux et leur prob
 emplacement, centré sur la case de 16 px ; cliquer sur un emplacement le retire. « Vider ce terrain » retire tous ses
 emplacements.
 
-« Carte affichée » permet de basculer entre Rouge/Bleu et Jaune, ou entre Or/Argent et Cristal. Le plan,
+« Carte affichée » permet de basculer entre Rouge/Bleu et Jaune, entre Or/Argent et Cristal, ou entre
+Rubis/Saphir et Émeraude. Seuls les jeux possédant le lieu éditable sélectionné sont proposés ; si le lieu est
+propre à un jeu, ce plan est choisi automatiquement. La validation des emplacements communs ignore les jeux
+où le lieu est absent : leur absence ne bloque pas l'enregistrement. Le plan,
 les rencontres et les calques suivent ce choix. La case « Points uniquement pour … » est décochée par défaut :
 les ajouts et retraits concernent les emplacements communs à la famille. La cocher, rarement, limite la
 retouche au groupe affiché. Lors de la première retouche propre à un groupe, les points communs
