@@ -27,11 +27,15 @@
     <string name="guide_decorations_title">Bases Secrètes et décorations</string>
     <string name="guide_decorations_intro">Utiliser Force Cachée devant un emplacement de Base Secrète. Le PC conserve les décorations ; leur catégorie limite le stockage et leur forme détermine la place occupée. Le catalogue ci-dessous indique les boutiques et dons des scripts du jeu choisi. Les tarifs utilisent la monnaie indiquée : argent, jetons, cendres ou Points Combat. Les ventes peuvent dépendre de Force Cachée ou des soldes annoncées à la télévision ; les dons suivent le scénario ou une récompense. Les décorations sans source ordinaire peuvent relever d’un événement externe, d’un échange de Base ou d’une récompense spéciale. Les grandes poupées d’Émeraude sont aussi proposées à la Zone de Combat contre des Points Combat. Le catalogue ne simule aucune base de sauvegarde.</string>
     <string name="decoration_details">%1$s · %2$s\n</string>
-    <string name="decoration_purchase">Achat ou échange (%1$s) : </string>
-    <string name="decoration_gift">Don ou récompense : </string>
+    <string name="decoration_purchase">"Achat ou échange (%1$s) : "</string>
+    <string name="decoration_gift">"Don ou récompense : "</string>
     <string name="guide_secret_bases_title">Bases Secrètes · Tous les emplacements</string>
-    <string name="guide_secret_bases_intro">La CT43 Force Cachée, offerte sur la Route 111, ouvre une Base Secrète devant un renfoncement de paroi, un arbre couvert de lianes ou un grand buisson. Une seule base est occupée à la fois : en déménager garde les décorations dans le PC. Le type et le plan intérieur dépendent de l’emplacement choisi. Les %1$d emplacements du jeu sont listés par lieu ; touchez une base pour voir son entrée sur la carte, où le filtre « Bases secrètes » affiche aussi leurs drapeaux.</string>
-    <string name="guide_secret_bases_place">%1$s (%2$d) : </string>
-    <string name="guide_secret_bases_separator"> · </string>
+    <plurals name="guide_secret_bases_intro">
+        <item quantity="one">La CT43 Force Cachée, offerte sur la Route 111, ouvre une Base Secrète devant un renfoncement de paroi, un arbre couvert de lianes ou un grand buisson. Une seule base est occupée à la fois : en déménager garde les décorations dans le PC. Le type et le plan intérieur dépendent de l’emplacement choisi. L’emplacement du jeu (%1$d) est listé par lieu ; touchez une base pour voir son entrée sur la carte, où le filtre « Bases secrètes » affiche aussi leurs drapeaux.</item>
+        <item quantity="many">La CT43 Force Cachée, offerte sur la Route 111, ouvre une Base Secrète devant un renfoncement de paroi, un arbre couvert de lianes ou un grand buisson. Une seule base est occupée à la fois : en déménager garde les décorations dans le PC. Le type et le plan intérieur dépendent de l’emplacement choisi. Les %1$d emplacements du jeu sont listés par lieu ; touchez une base pour voir son entrée sur la carte, où le filtre « Bases secrètes » affiche aussi leurs drapeaux.</item>
+        <item quantity="other">La CT43 Force Cachée, offerte sur la Route 111, ouvre une Base Secrète devant un renfoncement de paroi, un arbre couvert de lianes ou un grand buisson. Une seule base est occupée à la fois : en déménager garde les décorations dans le PC. Le type et le plan intérieur dépendent de l’emplacement choisi. Les %1$d emplacements du jeu sont listés par lieu ; touchez une base pour voir son entrée sur la carte, où le filtre « Bases secrètes » affiche aussi leurs drapeaux.</item>
+    </plurals>
+    <string name="guide_secret_bases_place">"%1$s (%2$d) : "</string>
+    <string name="guide_secret_bases_separator">" · "</string>
     <string name="decoration_special">Obtention spéciale ; aucune boutique ou don ordinaire dans les scripts de cette version.</string>
 </resources>

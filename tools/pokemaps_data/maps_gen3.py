@@ -28,6 +28,12 @@ SEA_TILES = "sevii-water"
 GEN3_MAP_GAMES = (*HOENN_MAP_GAMES, FIRERED_LEAFGREEN)
 
 
+def version_patch_folder(region: str, version: str) -> str:
+    """Dossier des tuiles qu'une seule version retouche sur une carte du monde (hoenn-ruby) ; l'application
+    connaît le même nom (GameMap)."""
+    return f"{identifier(region)}-{version}"
+
+
 def _static_sprite(obj: Gen3Event) -> str | None:
     # Les journaux du Memorydex sont des objets interactifs invisibles, pas des personnages.
     if obj.value("movement_type") == "MOVEMENT_TYPE_INVISIBLE":
@@ -154,6 +160,9 @@ def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, i
     renderer.write_sprites(sprites, output / "sprites")
     if repo.remake:
         renderer.write_sea("SEVII", output / SEA_TILES)
+    for version, cells in game_maps.version_patches.items():
+        region = {game_maps.world_region[const] for const in cells}.pop()
+        renderer.write_version_patch(cells, output / version_patch_folder(region, version))
     _write_catalog(rows, warps, output)
     _write_events(game_maps, output)
     write_facility_series(repo, output)

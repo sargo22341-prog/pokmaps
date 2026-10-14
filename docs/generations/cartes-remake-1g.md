@@ -44,6 +44,14 @@ restent dans les événements, sans sprite artificiel de personnage.
 - Les plans complémentaires réunissent les cabines de chaque pont de L'Océane et les zones du
   Parc Safari. Les maisons de repos restent séparées. Grotte de Glace, Trou Percé et Tour des
   Dresseurs conservent également leurs niveaux. Aucun corridor artificiel ne relie des salles disjointes.
+  Le Laboratoire de Cramois'Île, les salles de la Ligue Pokémon, la Grotte Perdue, la maison de l'Île 7,
+  l'Île Aurore et le rez-de-chaussée du Roc Nombri ont aussi leur plan.
+- `map_trims.csv` retire la bande d'une seule métatuile qui élargit le rez-de-chaussée de la Route Victoire
+  et le 2e étage du Manoir Pokémon ; la génération refuse une bande non uniforme ou contenant un événement.
+  `map_layouts.csv` affiche le tunnel de l'Île 3 creusé, le layout que son script sélectionne et qui porte
+  ses événements.
+- Les Îles Sevii reposent sur l'eau de bordure la plus fréquente de leurs cartes, répétée sous la carte
+  (`sevii-water/<niveau>.webp`, une tuile par niveau de zoom réduite comme la carte).
 - Les salles de communication à destination dynamique gardent une origine éditoriale explicite.
   Tous les autres intérieurs héritent de leur entrée ; aucune carte utilisée n'est orpheline.
 

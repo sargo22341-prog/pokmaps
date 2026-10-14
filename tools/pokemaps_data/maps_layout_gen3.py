@@ -11,7 +11,7 @@ from .games import Game, Region
 from .maps_curation_gen3 import choose_layouts, read_layout_choices, read_trims, trim_maps
 from .maps_layout import GameMaps, LayoutCuration
 from .maps_terrain_gen3 import wild_cells
-from .maps_versions_gen3 import version_maps
+from .maps_versions_gen3 import version_maps, version_patches
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Map
 from .pret_gen3_source import read_text
@@ -173,6 +173,11 @@ class Gen3GameMaps(GameMaps):
     def version_maps(self) -> dict[str, str]:
         """Cartes qu'une seule version du groupe permet d'atteindre -> cette version."""
         return version_maps(self)
+
+    @cached_property
+    def version_patches(self) -> dict[str, dict[str, dict[tuple[int, int], int]]]:
+        """Version -> carte du monde -> case -> métatuile que seule cette version pose au chargement."""
+        return version_patches(self)
 
     @cached_property
     def parents(self) -> dict[str, str]:

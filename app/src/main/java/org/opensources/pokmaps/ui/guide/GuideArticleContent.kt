@@ -111,7 +111,7 @@ private fun GuideArticleHeader(
         )
     }
     GuideCompletion(article, state, onAction)
-    GuideCaptureProgress(article, state, links.openPokedex)
+    GuideCaptureProgress(article, state, if (article.unownGoal) links.openUnown else links.openPokedex)
 }
 
 @Composable
@@ -166,7 +166,10 @@ internal fun GuideCaptureProgress(article: GuideArticle, state: GuideUiState, on
             )
         )
     }
-    Text(stringResource(R.string.retro_collection_hint), style = MaterialTheme.typography.bodySmall)
+    Text(
+        stringResource(if (article.unownGoal) R.string.guide_unown_hint else R.string.retro_collection_hint),
+        style = MaterialTheme.typography.bodySmall
+    )
 }
 
 @Composable

@@ -30,7 +30,16 @@ Les assets des six jeux actuels restent identiques octet par octet après géné
 - Le niveau « Sous l'eau » garde les coordonnées de la surface, via `dive` / `emerge` : quatre zones dans
   Rubis/Saphir, sept dans Émeraude. Atalanopolis reste une carte séparée, rattachée à son entrée sous-marine.
 - L'Île Mirage utilise le layout alternatif réellement sélectionné par le script de la Route 130.
+  Elle a la taille de la carte du monde et seules les cases qui diffèrent de la route sont dessinées : elle
+  apparaît en place sur le Chenal 130 (passage `mirage`), et son retour est posé dans l'eau, sous la plage.
   Les îles d'événement conservent la mention « Événement externe » dans leurs événements.
+- Les cartes qu'une seule version permet d'atteindre portent cette version (`map.version_id`) : le script de
+  chargement de Nénucrique ferme l'entrée de l'autre planque, ce qui rattache la Planque Magma à Rubis et la
+  Planque Aqua à Saphir. Les cases que seule une version retouche au chargement forment un calque de tuiles
+  propre à cette version (`hoenn-ruby`), dessiné par-dessus la carte commune : l'entrée de la Planque Magma.
+- Passages sans warp (`map_warp.kind`) : plongées et remontées fixées par `setdivewarp` (Épave, Atalanopolis,
+  Caverne Fondmer, Grotte Marine, Sanctuaire des Regi depuis le fond du Chenal 134), les deux stations du
+  téléphérique d'après `CableCarWarp`, et les 75 entrées de Bases Secrètes vers la carte modèle de leur type.
 - La Grotte Tréfonds possède deux plans distincts de marée. Les événements partagés sont résolus et les
   escaliers noyés à marée haute n'apparaissent pas comme passages praticables.
 - Les plans réunissent les salles d'un même niveau ; un intervalle sépare les salles disjointes, sans

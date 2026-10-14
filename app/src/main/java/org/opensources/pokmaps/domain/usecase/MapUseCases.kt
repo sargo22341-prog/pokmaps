@@ -77,6 +77,9 @@ class GetMapTilesUseCase @Inject constructor(private val tiles: MapTiles) {
 
     /** Mer répétée sous la carte (Îles Sevii), null si la carte n'en a pas. */
     fun sea(map: GameMap): TileStreamProvider? = tiles.seaProvider(map)
+
+    /** Retouches propres à la version (entrée de la Planque Magma dans Rubis), null si la carte n'en a pas. */
+    fun version(map: GameMap): TileStreamProvider? = tiles.versionProvider(map)
 }
 
 /** Filtres de la carte choisis par l'utilisateur (tous affichés par défaut, y compris un calque ajouté depuis). */

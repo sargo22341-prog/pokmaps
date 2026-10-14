@@ -62,19 +62,19 @@ d'Évoli en génération 1 et de pierres élémentaires limitées dans Or/Argent
 sans additionner des branches incompatibles. Les autres restrictions du succès restent à respecter dans le jeu.
 Les textes ne constituent pas une lecture de la sauvegarde de l'émulateur.
 
-Les jeux GBA ajoutent des collections régionale et nationale sans échange ni événement externe.
-Les objectifs nationaux comptent 177 espèces dans Rubis, 178 dans Saphir, 212 dans Émeraude,
-170 dans Rouge Feu et 171 dans Vert Feuille. Les choix de partenaire, fossile et Pierre Lune limitée
+Les jeux GBA n’ont pas de quête de collection régionale ou nationale : le compteur du Pokédex suit déjà les captures.
+Les succès officiels de collection complète de Rubis, Émeraude, Rouge Feu et Vert Feuille gardent leur objectif
+sans échange ni événement externe. Les choix de partenaire, fossile et Pierre Lune limitée
 suivent chaque cartouche ; le partenaire de Kanto et son errant constituent un seul choix.
 La reproduction permet les deux combattants du Dojo et les trois évolutions élémentaires d’Évoli
-dans les remakes. Les 28 formes de Zarbi sont suivies dans leur quête des Ruines Tanoby.
-Saphir n’a pas de succès officiel de collection complète ; son outil de collection reste disponible.
+dans les remakes. Les 28 formes de Zarbi sont suivies dans leur quête des Ruines Tanoby,
+et les 26 formes d’Or, Argent et Cristal dans celle des Ruines d’Alpha, avec le même compteur et Pokédex alphabet.
 
-Dans l’accueil de « Guides », « Pokémon errants » mémorise la dernière route observée et ouvre sa carte.
-Johto conserve ses observations séparées ; chaque jeu GBA ne conserve qu’un errant à la fois.
-Rubis propose Latios, Saphir Latias, Émeraude explique le choix rouge/bleu de la télévision ;
-les remakes indiquent Entei avec Bulbizarre, Suicune avec Salamèche et Raikou avec Carapuce.
-Les routes proposées viennent du moteur de chaque jeu ; aucun prochain déplacement n’est prédit.
+La position d’un Pokémon errant change à chaque déplacement du joueur et ne peut pas être prédite : aucune route
+n’est suivie. Les quêtes annexes de Johto, Hoenn et des remakes présentent chaque errant avec son sprite,
+sa condition d’apparition, son niveau et la région qu’il parcourt. Rubis propose Latios, Saphir Latias,
+Émeraude explique le choix rouge/bleu de la télévision ; les remakes indiquent Entei avec Bulbizarre,
+Suicune avec Salamèche et Raikou avec Carapuce.
 
 Les sauvegardes de collection gardent le schéma JSON 1 et acceptent jusqu'à 386 espèces et 28 formes de Zarbi.
 L'import vérifie les versions contre les jeux de la base embarquée, puis les espèces et formes contre le jeu.
@@ -97,9 +97,9 @@ Sur GrapheneOS, autoriser « Network » dans les permissions de Pokémaps pour c
 La permission Internet sert à cette option ; les cartes et le Pokédex n'utilisent aucune API réseau.
 
 « Sauvegarde de collection » exporte un JSON `pokmaps-collection`, schéma 1, avec captures par version, favoris,
-formes de Zarbi, étapes cochées et observations des Pokémon errants. L'import valide le document entier (taille maximale 1 Mo)
-avant une fusion atomique : captures, favoris et étapes sont réunis ; une observation importée remplace celle du
-même Pokémon ; dans les jeux GBA, elle remplace le choix d’errant précédent. Les autres réglages et les
+formes de Zarbi et étapes cochées. L'import valide le document entier (taille maximale 1 Mo)
+avant une fusion atomique : captures, favoris et étapes sont réunis. Les observations d’errants des anciennes
+sauvegardes sont ignorées à l’import et retirées des préférences. Les autres réglages et les
 identifiants RetroAchievements sont exclus. Le sélecteur de documents
 Android choisit le fichier, sans permission de stockage générale.
 
@@ -144,10 +144,21 @@ La Grotte Tréfonds propose marée haute, marée basse et salle de glace ; les r
 Kanto et les Îles Sevii dans le menu des régions, avec un départ à Bourg Palette.
 Le menu donne aussi accès aux îles événementielles présentes dans chaque jeu : Île du Sud pour Rubis/Saphir,
 puis Île Aurore, Roc Nombri et Île lointaine en plus pour Émeraude ; Île Aurore et Roc Nombri pour les remakes.
-Un marqueur « Île Mirage » sur le Chenal 130 ouvre son plan conditionnel dans les trois jeux de Hoenn.
-Le fond transparent des Îles Sevii utilise un bleu océan fixe, sans filtre animé ni tuiles supplémentaires.
-Dans les onze jeux, les badges à droite permettent de changer d'étage. Les zones et salles d'un même niveau
-s'affichent ensemble sur un plan. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
+Un marqueur « Île Mirage » sur le Chenal 130 dessine l’île en place sur la carte de Hoenn, avec ses Pokémon et
+objets ; le marqueur de retour, posé dans l’eau sous la plage, la masque. Dans Rubis et Saphir, chaque planque n’existe que
+dans sa version : Rubis montre l’entrée de la Planque Magma de Nénucrique telle que son script la dessine.
+Le téléphérique relie ses deux stations, de la Route 112 au Mont Chimnée. Les plongées scriptées relient la surface
+et le fond de l’Épave, d’Atalanopolis, de la Caverne Fondmer, de la Grotte Marine et du Sanctuaire des Regi ;
+le fond du Chenal 134 et celui du Sanctuaire forment un seul plan.
+Le filtre « Bases secrètes », affiché par défaut, place un drapeau sur chacun des 75 emplacements de Hoenn ;
+le toucher ouvre la base correspondante, et « Astuces » liste toutes les bases avec un lien vers leur entrée.
+Les Îles Sevii reposent sur l’eau de bordure du jeu, répétée sous toute la carte à chaque niveau de zoom,
+sans limite visible entre la mer des routes et le fond.
+Dans les onze jeux, les badges à droite permettent de changer d'étage : « RDC », « 1er », « 2e », « -1 »…,
+même quand le jeu emploie un autre nom, ainsi que « Toit » et « Sommet ». Les zones et salles d'un même niveau
+s'affichent ensemble sur un plan, y compris en troisième génération (Chutes Météore, Épave, Mont Mémoria,
+Roc Nombri, Ligue Pokémon…). Le rez-de-chaussée de la Route Victoire et le 2e étage du Manoir Pokémon des remakes
+n’affichent que les cases du jeu, sans bande de remplissage. Chaque paire de passages reliés porte la même couleur ; les traits sont masqués
 par défaut et le switch « Liaisons », présent sur les plans concernés, permet de les afficher dans ces couleurs.
 Les maisons restent séparées, accessibles par leurs portes ; le Parc Safari réunit ainsi ses quatre zones.
 Les assemblages et leurs positions sont relus dans `tools/data/map_plans.csv` (coordonnées en cases de 16 pixels).
@@ -619,7 +630,7 @@ Les propriétés d’une Baie Enigma personnalisée par événement ne peuvent p
 Les données GBA de pret font autorité ; les écarts avec les CSV PokéAPI des baies et des Concours restent
 dans ce catalogue. Le [bilan des contenus Hoenn](docs/generations/contenus-hoenn.md) décrit leur portée.
 Les bibliothèques couvrent les onze jeux : les cinq jeux GBA proposent les outils de reproduction et de bonheur.
-Leurs soluces, succès officiels, objectifs de collection et observations des errants sont disponibles.
+Leurs soluces, succès officiels, objectifs de collection et fiches des errants sont disponibles.
 
 Le même export intègre les fossiles, la Pension de l'Île 4, les lots et achats de jetons du Casino
 de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Vert Feuille.

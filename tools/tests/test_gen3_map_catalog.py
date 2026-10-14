@@ -32,13 +32,25 @@ def test_bundled_hoenn_catalog_and_images(assets: Path, game: Game) -> None:
     folder = assets / "maps" / game.version_group
     validate_catalog(folder)
     maps = _catalog(folder)
-    assert len(maps) == (543 if game == EMERALD else 416)
+    # Les plans GBA regroupent les salles d'un même étage, comme en 1re et 2e génération.
+    assert len(maps) == (582 if game == EMERALD else 433)
     assert {key for key, row in maps.items() if row["is_world"] == "True"} == {"HOENN", UNDERWATER}
     assert not any("UNUSED" in key or "PROTOTYPE" in key for key in maps)
     assert maps["MAP_ROUTE130_MIRAGE_ISLAND"]["origin"] == "MAP_ROUTE130"
     assert maps["MAP_SOOTOPOLIS_CITY"]["origin"].startswith("MAP_UNDERWATER")
     assert maps["MAP_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM"]["parent"] == "SHOAL_CAVE_HIGH_TIDE_1F_PLAN"
     assert maps["MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM"]["parent"] == "SHOAL_CAVE_LOW_TIDE_1F_PLAN"
+    for room, plan in (
+        ("MAP_METEOR_FALLS_1F_1R", "METEOR_FALLS_1F_PLAN"),
+        ("MAP_METEOR_FALLS_1F_2R", "METEOR_FALLS_1F_PLAN"),
+        ("MAP_METEOR_FALLS_B1F_1R", "METEOR_FALLS_B1F_PLAN"),
+        ("MAP_METEOR_FALLS_B1F_2R", "METEOR_FALLS_B1F_PLAN"),
+        ("MAP_UNDERWATER_ROUTE134", "UNDERWATER_ROUTE134_PLAN"),
+        ("MAP_UNDERWATER_SEALED_CHAMBER", "UNDERWATER_ROUTE134_PLAN"),
+        ("MAP_NEW_MAUVILLE_ENTRANCE", "NEW_MAUVILLE_PLAN"),
+        ("MAP_NEW_MAUVILLE_INSIDE", "NEW_MAUVILLE_PLAN"),
+    ):
+        assert maps[room]["parent"] == plan
     for path in folder.rglob("*.webp"):
         with Image.open(path) as image:
             assert image.format == "WEBP"
@@ -129,17 +141,43 @@ def test_hoenn_curation_entries_are_used_by_a_family_member(source_cache_ready: 
 def test_mirage_island_has_a_round_trip_navigation_access(assets: Path, game: Game) -> None:
     folder = assets / "maps" / game.version_group
     maps = _catalog(folder)
+    # L'île a la taille de la carte du monde : elle se dessine en place, par-dessus le Chenal 130.
+    island, world = maps["MAP_ROUTE130_MIRAGE_ISLAND"], maps["HOENN"]
+    assert (island["width"], island["height"], island["level_count"]) == (
+        world["width"],
+        world["height"],
+        world["level_count"],
+    )
     with (folder / "warps.tsv").open(encoding="utf-8", newline="") as handle:
         warps = list(csv.DictReader(handle, delimiter="\t"))
     outward = [row for row in warps if row["target"] == "MAP_ROUTE130_MIRAGE_ISLAND"]
     returning = [row for row in warps if row["map_const"] == "MAP_ROUTE130_MIRAGE_ISLAND"]
     assert len(outward) == len(returning) == 1
     assert outward[0]["map_const"] == returning[0]["target"] == "MAP_ROUTE130"
-    assert outward[0]["x"] == returning[0]["target_x"]
-    assert outward[0]["y"] == returning[0]["target_y"]
-    assert outward[0]["target_x"] == returning[0]["x"]
-    assert outward[0]["target_y"] == returning[0]["y"]
     for row in [outward[0], returning[0]]:
-        source = maps[row["map_const"]]
-        assert int(source["x"]) <= int(row["x"]) < int(source["x"]) + int(source["width"])
-        assert int(source["y"]) <= int(row["y"]) < int(source["y"]) + int(source["height"])
+        assert row["kind"] == "mirage"
+        assert (row["x"], row["y"]) == (row["target_x"], row["target_y"])
+        route = maps["MAP_ROUTE130"]
+        assert int(route["x"]) <= int(row["x"]) < int(route["x"]) + int(route["width"])
+        assert int(route["y"]) <= int(row["y"]) < int(route["y"]) + int(route["height"])
+    # Le retour est posé dans l'eau sous la plage, pas sur l'île.
+    assert outward[0]["x"] == returning[0]["x"]
+    assert int(returning[0]["y"]) > int(outward[0]["y"])
+
+
+def test_catalog_rejects_a_mirage_return_on_the_island(assets: Path, tmp_path: Path) -> None:
+    target = tmp_path / "emerald"
+    shutil.copytree(assets / "maps/emerald", target)
+    path = target / "warps.tsv"
+    rows = path.read_text("utf-8").splitlines()
+    entrance = next(line for line in rows if line.startswith("MAP_ROUTE130\t") and line.endswith("\tmirage"))
+    x, y = entrance.split("\t")[1:3]
+    rows = [
+        f"MAP_ROUTE130_MIRAGE_ISLAND\t{x}\t{y}\tMAP_ROUTE130\t{x}\t{y}\tmirage"
+        if line.startswith("MAP_ROUTE130_MIRAGE_ISLAND\t")
+        else line
+        for line in rows
+    ]
+    path.write_text("\n".join(rows) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="retour placé sur l'île"):
+        validate_catalog(target)

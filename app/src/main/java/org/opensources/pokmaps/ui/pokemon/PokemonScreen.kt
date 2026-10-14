@@ -41,6 +41,7 @@ import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 import org.opensources.pokmaps.ui.common.TypeBadge
 import org.opensources.pokmaps.ui.common.label
+import org.opensources.pokmaps.ui.unown.UnownRoute
 
 /** Fiches ouvertes depuis la fiche d'un Pokémon : autre Pokémon, objet (pierre, CT / CS) ou attaque. */
 data class PokemonLinks(

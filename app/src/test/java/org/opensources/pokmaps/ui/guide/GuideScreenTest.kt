@@ -55,8 +55,38 @@ class GuideScreenTest {
         )
         compose.onNode(hasText(context.getString(R.string.guide_roamer_latios))).assertExists()
         compose.onNode(hasText(context.getString(R.string.guide_roamer_latias))).assertDoesNotExist()
-        compose.onNode(hasText(context.getString(R.string.guide_roamer_level, 40))).assertExists()
+        compose.onNode(hasText(context.getString(R.string.catch_level, 40))).assertExists()
         compose.onNode(hasText(context.getString(R.string.guide_roamer_area_hoenn))).assertExists()
+    }
+
+    @Test
+    fun alphCounterOpensTheUnownAlphabetNotThePokedex() {
+        val alph = GuideArticle(
+            "johto-alph",
+            "Ruines d’Alpha",
+            GuideCategory.SIDE_QUEST,
+            listOf(listOf(GuideSpan("Texte"))),
+            201,
+            emptyList(),
+            unownGoal = true
+        )
+        var opened = ""
+        compose.setContent {
+            GuideScreen(
+                GuideUiState(
+                    loading = false,
+                    library = GuideLibrary(FakeGameDao.GOLD, listOf(alph)),
+                    category = GuideCategory.SIDE_QUEST,
+                    articleId = alph.id
+                ),
+                { actions += it },
+                GuideLinks({}, {}, { opened = "pokedex" }, openUnown = { opened = "unown" })
+            )
+        }
+        compose.onNode(hasText(context.getString(R.string.guide_unown_progress, 0, 26))).performClick()
+        assertEquals("unown", opened)
+        compose.onNode(hasText(context.getString(R.string.guide_unown_hint))).assertExists()
+        compose.onNode(hasText(context.getString(R.string.retro_collection_hint))).assertDoesNotExist()
     }
 
     @Test

@@ -90,6 +90,15 @@ class GuideRepositoryTest {
             assertEquals(4, articles.count { it.category == GuideCategory.CALENDAR })
             assertEquals(GuideCategory.SIDE_QUEST, articles.single { it.id == "hoenn-trick-house" }.category)
             assertTrue(articles.single { it.id == "hoenn-tides" }.summary.contains("9 h à 14 h 59"))
+            val bases = articles.single { it.id == "hoenn-secret-bases" }
+            assertEquals(GuideCategory.TIP, bases.category)
+            assertTrue(bases.summary.contains("Les 75 emplacements du jeu"))
+            // Les espaces autour des séparateurs ne sont pas retirés par les ressources Android.
+            assertTrue(bases.summary, bases.summary.contains("Route 110 (2) : Base Secrète (arbre 3) · Base"))
+            val decorations = articles.single { it.id == "hoenn-decorations" }.summary
+            assertTrue(decorations.contains("Achat ou échange (") && decorations.contains(") : "))
+            assertTrue(!decorations.contains("récompense :") || decorations.contains("récompense : "))
+            assertEquals(75, bases.paragraphs.flatten().count { it.target is GuideTarget.SecretBase })
         } else {
             assertTrue(articles.single { it.id == "remake-collections" }.unownGoal)
             assertTrue(articles.single { it.id == "remake-sapphire" }.summary.contains("Entei avec Bulbizarre"))

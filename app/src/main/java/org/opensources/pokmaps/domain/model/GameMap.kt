@@ -15,7 +15,9 @@ data class GameMap(
     /** Villes et routes de la carte du monde, ou zones et salles d'un niveau composé. */
     val regions: List<MapRegion> = emptyList(),
     val isWorld: Boolean = false,
-    val startRegionId: Int? = null
+    val startRegionId: Int? = null,
+    /** Version du jeu affiché (ruby) : choisit les retouches propres à cette version. */
+    val versionIdentifier: String? = null
 ) {
     val isExternalEvent: Boolean get() = ExternalEvent.map(identifier)
 
@@ -30,9 +32,21 @@ data class GameMap(
     fun seaTilePath(level: Int): String? =
         if (identifier == SEA_WORLD) "maps/$versionGroupIdentifier/$SEA_WORLD-water/$level.webp" else null
 
+    /**
+     * Tuile des cases que seule la version affichée retouche, dessinées par-dessus la carte commune au groupe :
+     * dans Rubis, Nénucrique ouvre l'entrée de la Planque Magma une case à droite de celle de Saphir. Le pipeline
+     * écrit ces tuiles dans le même dossier (maps_gen3.version_patch_folder). Null pour les autres cartes.
+     */
+    fun versionTilePath(level: Int, row: Int, column: Int): String? {
+        val folder = "$identifier-$versionIdentifier"
+        if (folder !in VERSION_PATCHES) return null
+        return "maps/$versionGroupIdentifier/$folder/$level/${row}_$column.webp"
+    }
+
     companion object {
         const val TILE_SIZE = 256
         private const val SEA_WORLD = "sevii"
+        private val VERSION_PATCHES = setOf("hoenn-ruby")
     }
 }
 

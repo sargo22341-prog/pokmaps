@@ -1,4 +1,4 @@
-package org.opensources.pokmaps.ui.pokemon
+package org.opensources.pokmaps.ui.unown
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch

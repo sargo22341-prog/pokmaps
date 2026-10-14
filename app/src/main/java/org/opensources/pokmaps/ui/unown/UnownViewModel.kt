@@ -1,4 +1,4 @@
-package org.opensources.pokmaps.ui.pokemon
+package org.opensources.pokmaps.ui.unown
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
