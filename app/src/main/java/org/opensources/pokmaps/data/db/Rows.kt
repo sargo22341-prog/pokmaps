@@ -118,7 +118,9 @@ data class TrainerPokemonRow(
     val slot: Int,
     val pokemonId: Int,
     val name: String,
-    val level: Int
+    val level: Int,
+    val heldItemName: String? = null,
+    val rematch: Int? = null
 )
 
 /** Attaque d'un Pokémon de dresseur (`moveSlot` de 1 à 4) avec ses caractéristiques dans le jeu. */

@@ -24,7 +24,7 @@ from .pret_gen3_maps import Gen3Event, Gen3Map
 from .pret_gen3_offers import ScriptOffers
 from .pret_gen3_trainers import Gen3Trainer, Gen3TrainerPokemon
 from .pret_hoenn_berries import initial_berries
-from .pret_identifiers import species_identifier
+from .pret_identifiers import item_identifier, species_identifier
 from .pret_models import NpcOffer
 from .sources import PRET_COMMITS
 from .story_events import StoryEvents
@@ -204,6 +204,13 @@ def _trainer_rows(
                 trainer_class=trainer.trainer_class,
                 party=[] if rival else _party_rows(trainer.party),
                 name_fr="Flora" if rival else _trainer_name(trainer),
+                held_items={}
+                if rival
+                else {
+                    (1, slot): item_identifier(mon.item.removeprefix("ITEM_"), {})
+                    for slot, mon in enumerate(trainer.party, start=1)
+                    if mon.item
+                },
             )
         )
     return rows

@@ -8,8 +8,8 @@
 
 Un objet sans combat à lui peut être l'adversaire d'un script de scène : le script le désigne avec
 `setlasttalked OBJET` avant `loadtrainer` (le Rival de la Tour Cendrée). Il devient un dresseur de cette classe ;
-si les scripts choisissent entre plusieurs équipes (selon le Pokémon de départ du joueur, la caméra de sécurité
-déclenchée ou la progression), l'équipe reste inconnue.
+les trois variantes du rival sont nommées par le Pokémon de départ du joueur. Cal conserve son équipe
+par défaut ; les deux combats des caméras sont placés à leur première apparition.
 
 Un script lu différemment en Or et en Argent (checkver) donne un objet par version : Ho-Oh et Lugia n'ont pas le
 même niveau dans les deux jeux.
@@ -20,7 +20,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 
-from .pret_models import MapObject
+from .pret_models import MapObject, TrainerVariant, VariantKind
 from .pret_source import macro_args
 
 if TYPE_CHECKING:
@@ -75,6 +75,18 @@ def classify_object(
         const=event.const,
         cry=_cry(script_file, event.script) if own_script else None,
     )
+    if event.const == "RADIOTOWER5F_DIRECTOR":
+        fake = _with_battle(
+            repo, replace(base, text="FakeDirectorScript"), Battle("trainer", "EXECUTIVEM", "EXECUTIVEM_3")
+        )
+        # moveobject (12, 0), puis RadioTower5FDirectorWalksIn : le don se fait en (15, 5).
+        return [fake, replace(base, x=15, y=5, event_flag=None)]
+    if event.const == "TEAMROCKETBASEB1F_ROCKET1":
+        return [
+            # Première alarme : départ (19, 2), puis quatre pas à droite avant le combat.
+            _with_battle(repo, replace(base, x=23, y=2, text=script), Battle("trainer", "GRUNTM", trainer))
+            for script, trainer in (("TrainerCameraGrunt1", "GRUNTM_20"), ("TrainerCameraGrunt2", "GRUNTM_21"))
+        ]
     if event.object_type == _ITEMBALL:
         return [replace(base, kind="item", item=_itemball(script_file, event.script))]
     if event.object_type == _TRAINER and own_script:
@@ -129,7 +141,7 @@ def scene_opponents(script_file: ScriptFile) -> dict[str, set[Battle]]:
 
 
 def _scene_opponent(repo: Gen2PretRepo, base: MapObject, battles: set[Battle]) -> MapObject:
-    """Personnage, ou dresseur si un script de scène le combat (équipe inconnue s'il en choisit plusieurs)."""
+    """Personnage ou adversaire de scène, avec les variantes du rival et l’équipe par défaut de Cal."""
     if len(battles) == 1:
         return _with_battle(repo, base, next(iter(battles)))
     classes = {battle.name for battle in battles}
@@ -137,7 +149,23 @@ def _scene_opponent(repo: Gen2PretRepo, base: MapObject, battles: set[Battle]) -
         return base
     if len(classes) > 1:
         raise ValueError(f"{repo.root.name} : {base.text} combat plusieurs classes de dresseurs : {sorted(classes)}")
-    return replace(base, kind="trainer", trainer_class=classes.pop())
+    trainer_class = classes.pop()
+    if trainer_class == "CAL":
+        return _with_battle(repo, base, Battle("trainer", "CAL", "CAL3"))
+    if trainer_class in {"RIVAL1", "RIVAL2"}:
+        starters = {"CHIKORITA": "TOTODILE", "CYNDAQUIL": "CHIKORITA", "TOTODILE": "CYNDAQUIL"}
+        variants = tuple(
+            TrainerVariant(
+                VariantKind.PLAYER_STARTER,
+                starters[battle.value.rsplit("_", 1)[1]],
+                int(_trainer(repo, trainer_class, battle.value)["trainer_number"]),
+            )
+            for battle in sorted(battles, key=lambda battle: battle.value)
+        )
+        if len(variants) != 3:
+            raise ValueError(f"{base.text} : trois équipes du rival attendues : {variants}")
+        return replace(base, kind="trainer", trainer_class=trainer_class, trainer_variants=variants)
+    return replace(base, kind="trainer", trainer_class=trainer_class)
 
 
 def _itemball(script_file: ScriptFile, label: str) -> str:

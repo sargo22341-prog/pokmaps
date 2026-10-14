@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Complète les équipes, revanches, objets tenus et dons d’Or, Argent et Cristal, et corrige leurs guides.
 - Les salles d’un même étage de troisième génération partagent un plan, avec des badges RDC, 1er, 2e ou -1.
 - La Route Victoire et le Manoir Pokémon des remakes n’affichent plus de bande de rochers ajoutée.
 - Les liaisons du Parc Safari ne sont plus doublées.

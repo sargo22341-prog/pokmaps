@@ -101,7 +101,9 @@ data class TrainerPokemonEntity(
     @ColumnInfo(name = "move1_id") val move1Id: Int?,
     @ColumnInfo(name = "move2_id") val move2Id: Int?,
     @ColumnInfo(name = "move3_id") val move3Id: Int?,
-    @ColumnInfo(name = "move4_id") val move4Id: Int?
+    @ColumnInfo(name = "move4_id") val move4Id: Int?,
+    @ColumnInfo(name = "held_item_id") val heldItemId: Int?,
+    val rematch: Int?
 )
 
 @Entity(

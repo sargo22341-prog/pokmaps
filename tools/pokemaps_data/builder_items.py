@@ -82,6 +82,7 @@ class ItemTables:
         used = {item for _, item, _ in self.builder.moves.machine_rows}
         used |= set(self.map_item_ids.values())
         used |= set(self.offer_item_ids.values())
+        used |= set(self.trainer_item_ids.values())
         used |= {item for _, _, item, _ in self.pokemon_item_rows}
         for row in self.builder.pokemon.evolution_rows:
             used |= {item for item in (row[6], row[7]) if item}
@@ -178,6 +179,13 @@ class ItemTables:
             if item
         }
         return self._known_items(identifiers, "Objets des personnages")
+
+    @cached_property
+    def trainer_item_ids(self) -> dict[str, int]:
+        identifiers = {
+            item for data in self.builder.map_data.values() for obj in data.objects for item in obj.held_items.values()
+        }
+        return self._known_items(identifiers, "Objets tenus des dresseurs")
 
     @cached_property
     def map_item_ids(self) -> dict[str, int]:

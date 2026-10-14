@@ -90,7 +90,11 @@ fun TrainerTeams(teams: List<TrainerTeam>, place: SpritePlace, onOpenPokemon: (I
         return
     }
     teams.forEach { team ->
-        SectionTitle(team.variant?.let { trainerTeamTitle(it) } ?: stringResource(R.string.map_trainer_party))
+        SectionTitle(
+            team.variant?.let { trainerTeamTitle(it) }
+                ?: team.rematch?.let { stringResource(R.string.map_trainer_rematch, it) }
+                ?: stringResource(R.string.map_trainer_party)
+        )
         team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon) }
     }
 }
@@ -116,6 +120,7 @@ fun TrainerPokemonRow(mon: TrainerPokemon, place: SpritePlace, onOpenPokemon: (I
             Text(mon.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             Text(stringResource(R.string.encounter_levels, mon.level), style = MaterialTheme.typography.titleSmall)
         }
+        mon.heldItemName?.let { Text(stringResource(R.string.map_offer_held_item, it)) }
         mon.moves.forEach { MoveLine(it, Modifier.padding(start = 16.dp)) }
     }
 }

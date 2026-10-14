@@ -20,4 +20,4 @@ enum class TeamVariantKind(val identifier: String) {
 data class TeamVariant(val kind: TeamVariantKind, val pokemonId: Int, val pokemonName: String)
 
 /** Une équipe d'un dresseur ; `variant` est nul quand le dresseur n'en a qu'une. */
-data class TrainerTeam(val variant: TeamVariant?, val members: List<TrainerPokemon>)
+data class TrainerTeam(val variant: TeamVariant?, val members: List<TrainerPokemon>, val rematch: Int? = null)

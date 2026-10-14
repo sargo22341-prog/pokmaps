@@ -377,7 +377,8 @@
         d’[[place:pewter-city|Argenta]] après la Ligue ; Lugia est alors au niveau 70. Dans Cristal, le même
         habitant donne l’aile et Lugia est au niveau 60.\n\nRejoignez les [[place:whirl-island-nw|Tourb’Îles]]
         depuis la Route 41. Surf et Siphon permettent de franchir l’eau et les tourbillons ; Flash facilite
-        le trajet dans les grottes. Explorez les passages jusqu’à l’antre de Lugia.\n\nPréparez des Balls et
+        le trajet dans les grottes. Descendez la cascade pour atteindre l’antre ; la capacité Cascade sert
+        à la remonter.\n\nPréparez des Balls et
         une attaque de statut, puis sauvegardez avant le combat fixe. Consultez les conditions des succès
         liés avant la capture.
     </string>
@@ -534,6 +535,8 @@
         [[item:sharp-beak|Bec Pointu]] lors de la première rencontre.\n\nLe lundi soir, une danse de
         [[pokemon:35|Mélofée]] a lieu au [[place:mount-moon-square|Mont Sélénite]] de Kanto. Après leur fuite,
         brisez le rocher pour trouver une Pierre Lune. Les coiffeurs du Souterrain sont fermés le lundi.\n\nLe
+        marchand d’objets du [[place:goldenrod-underground|Souterrain]] vient le lundi matin, de 4 h à
+        9 h 59.\n\nLe
         [[place:fast-ship-1f|M/S Aquaria]] repart d’Oliville vers Carmin sur Mer les lundis et vendredis, après
         la première traversée.
     </string>
@@ -596,16 +599,15 @@
         tuteur près du Casino est aussi disponible après la Ligue, contre 4 000 jetons.
     </string>
     <string name="guide_day_sunday_title">
-        Dimanche · Dimitri, CT et bonnes affaires
+        Dimanche · Dimitri et CT
     </string>
     <string name="guide_day_sunday_text">
         [[character:route-37:@magnet|Dimitri]] apparaît sur la [[place:route-37|Route 37]] et donne un
         [[item:magnet|Aimant]] une première fois.\n\nAu [[place:goldenrod-dept-store-5f|Centre Commercial de
         Doublonville]], une dame examine le bonheur de votre premier Pokémon : un bonheur élevé donne la CT
-        Retour, un faible bonheur la CT Frustration. Les offres du personnage précisent les conditions.\n\nLe
-        marchand d’objets du [[place:goldenrod-underground|Souterrain]] est disponible le dimanche matin ; les
-        remèdes amers et le coiffeur cadet sont présents. Le [[place:fast-ship-1f|M/S Aquaria]] quitte Carmin
-        sur Mer pour Oliville après la première traversée.
+        Retour, un faible bonheur la CT Frustration. Les offres du personnage précisent les conditions.\n\nLes
+        remèdes amers et le coiffeur cadet du [[place:goldenrod-underground|Souterrain]] sont présents. Le
+        [[place:fast-ship-1f|M/S Aquaria]] quitte Carmin sur Mer pour Oliville après la première traversée.
     </string>
     <string name="guide_crystal_buena_title">
         Cristal · Radio, Buena et œuf de la Pension
@@ -770,8 +772,8 @@
         Dans Or, l’Arcenci’Aile obtenue après la libération de la Tour Radio permet de rejoindre
         [[pokemon:250|Ho-Oh]] au sommet de la [[place:tin-tower-1f|Tour Ferraille]], au niveau 40. Dans Argent,
         obtenez cette aile auprès d’un habitant d’[[place:pewter-city|Argenta]] après la Ligue ; Ho-Oh est
-        alors au niveau 70.\n\nDans Cristal, capturez Raikou, Entei et Suicune dans votre partie, puis parlez
-        aux sages de la Tour Ferraille pour recevoir l’Arcenci’Aile. Des échanges ne remplacent pas ces
+        alors au niveau 70.\n\nDans Cristal, battez la Ligue, capturez Raikou, Entei et Suicune dans votre
+        partie, puis parlez aux sages de la Tour Ferraille pour recevoir l’Arcenci’Aile. Des échanges ne remplacent pas ces
         captures. Ho-Oh est au niveau 60.\n\nPréparez des Balls et une attaque de statut, puis sauvegardez
         avant le combat fixe. Consultez les conditions des succès liés avant la capture.
     </string>

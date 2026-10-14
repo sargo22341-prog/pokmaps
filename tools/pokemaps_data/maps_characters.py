@@ -17,6 +17,8 @@ from dataclasses import dataclass, field, replace
 from .games import Game
 from .maps_characters_data import CharacterCuration, character_key
 from .maps_layout import GameMaps, identifier
+from .maps_scene_gifts_gen2 import scene_gifts
+from .maps_trainers_gen2 import attach_teams
 from .offer_conditions import Condition
 from .pret import GYM_LEADERS, PretRepo
 from .pret_gen2 import Gen2PretRepo
@@ -67,6 +69,8 @@ class ObjectRow:
     cry: str | None = None
     name_fr: str | None = None
     appearance: str | None = None
+    rematches: list[list[tuple[str, int, tuple[str, ...]]]] = field(default_factory=list)
+    held_items: dict[tuple[int, int], str] = field(default_factory=dict)
 
 
 def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:
@@ -101,7 +105,7 @@ def _character_row(
         if trainer_class
     ]
     offers = _character_offers(game_maps, pret_map, position, obj, curation)
-    return ObjectRow(
+    row = ObjectRow(
         pret_map.const,
         obj.kind,
         *game_maps.point(pret_map.const, obj.x, obj.y),
@@ -118,10 +122,17 @@ def _character_row(
         obj.cry and species_identifier(obj.cry),
         name_fr=_special_name(obj, trainer_class),
     )
+    if isinstance(repo, Gen2PretRepo):
+        attach_teams(repo, pret_map.label, obj, row)
+    return row
 
 
 def _special_name(obj: MapObject, trainer_class: str | None) -> str | None:
     """Nom qui ne vient pas des fichiers de noms : combat commun de Jessie et James, tas de jetons cachés."""
+    if obj.const == "RADIOTOWER5F_DIRECTOR":
+        return "Faux Directeur" if trainer_class else "Directeur de la Tour Radio"
+    if obj.trainer_class == "CAL":
+        return "Cal"
     if obj.sprite == "SPRITE_JESSIE" and trainer_class:
         return "Jessie et James"
     if obj.item == "COIN" and obj.quantity is not None:
@@ -170,16 +181,18 @@ def _gen2_character_offers(
     de la scène (le marin paresseux du M/S Aquaria, Red au sommet du Mont Argenté)."""
     key = character_key(obj)
     added = curation.offers_for(game.pret_repo, key)
+    scenes = scene_gifts(repo, pret_map, obj)
     script_file = repo.script_files[pret_map.label]
     if obj.kind in _PICKED_UP or obj.text is None or not script_file.has_label(obj.text):
-        return _present(added, repo.presence.condition(pret_map, obj, frozenset()))
+        return _present(added, repo.presence.condition(pret_map, obj, frozenset())) + scenes
     read = repo.offers.script_offers(script_file, obj.text)
     if read.curated_specials and not added:
         specials = sorted(read.curated_specials)
         raise ValueError(f"npc_offers.csv : offre de {key} ({pret_map.const}) à relire, faite par {specials}")
     offers = [offer for offer in read.offers if not (obj.kind == "trainer" and offer.kind in SERVICE_KINDS)]
     offers = _with_curated(curation.without_removed(game.pret_repo, key, offers), added)
-    return _present(offers, repo.presence.condition(pret_map, obj, read.points))
+    # Une scène fait apparaître son donneur ; elle n'exige pas sa présence permanente sur la carte.
+    return _present(offers, repo.presence.condition(pret_map, obj, read.points)) + scenes
 
 
 def _present(offers: list[NpcOffer], presence: Condition) -> list[NpcOffer]:
@@ -287,4 +300,5 @@ def _offer_identifiers(machines: dict[str, str], offer: NpcOffer) -> NpcOffer:
         offer.wanted_item and item_identifier(offer.wanted_item, machines),
         offer.version,
         offer.condition,
+        stories=offer.stories,
     )

@@ -36,6 +36,24 @@ import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 
 class MapRepositoryTest {
     @Test
+    fun rematchesKeepTheirOwnMovesAndHeldItems() = runTest {
+        val dao = object : MapDao by FakeMapDao() {
+            override suspend fun trainerParty(objectId: Int) = listOf(
+                TrainerPokemonRow(1, null, null, null, 1, 25, "Pikachu", 10, "Baie Oran"),
+                TrainerPokemonRow(2, null, null, null, 1, 26, "Raichu", 30, "Roche Royale", 1)
+            )
+
+            override suspend fun trainerMoves(objectId: Int, versionGroupId: Int) = listOf(
+                TrainerMoveRow(2, 1, 1, 33, "Charge", 35, 100, 35, "physical", 1, "normal", "Normal")
+            )
+        }
+        val teams = MapRepository(dao, Dispatchers.Unconfined).trainerTeams(FakeGameDao.GOLD, FakeMapDao.TRAINER)
+        assertEquals(listOf(null, 1), teams.map { it.rematch })
+        assertEquals(listOf("Baie Oran", "Roche Royale"), teams.map { it.members.single().heldItemName })
+        assertEquals(listOf(emptyList(), listOf("Charge")), teams.map { it.members.single().moves.map { it.name } })
+    }
+
+    @Test
     fun rivalTeamsAreGroupedByVariantWithTheirOwnMoves() = runTest {
         fun mon(team: Int, variant: Int, variantName: String, pokemon: Int, name: String) =
             TrainerPokemonRow(team, "player-starter", variant, variantName, 1, pokemon, name, 5)
