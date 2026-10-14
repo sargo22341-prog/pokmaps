@@ -16,6 +16,14 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "quantité de Voltorbe fixe de New Lavandia invalide",
+        """SELECT e.* FROM encounter e JOIN version v ON v.id = e.version_id
+           JOIN location_area a ON a.id = e.location_area_id JOIN location l ON l.id = a.location_id
+           JOIN encounter_method em ON em.id = e.method_id
+           WHERE v.identifier IN ('ruby', 'sapphire', 'emerald') AND l.identifier = 'new-mauville'
+           AND e.pokemon_id = 100 AND em.identifier = 'static' AND e.quantity != 3""",
+    ),
+    (
         "méthode de rencontre non prise en charge",
         """SELECT id, identifier FROM encounter_method WHERE identifier NOT IN
            ('walk', 'old-rod', 'good-rod', 'super-rod', 'feebas-tile-fishing', 'surf', 'seaweed',
@@ -41,6 +49,12 @@ CHECKS = (
         "SELECT * FROM pokemon_move WHERE pokemon_id NOT IN (SELECT id FROM pokemon)",
     ),
     ("attaque inconnue dans pokemon_move", "SELECT * FROM pokemon_move WHERE move_id NOT IN (SELECT id FROM move)"),
+    (
+        "version spécifique d'apprentissage invalide",
+        """SELECT pm.* FROM pokemon_move pm LEFT JOIN version v ON v.id = pm.version_id
+           WHERE pm.version_id IS NOT NULL
+           AND (v.id IS NULL OR v.version_group_id != pm.version_group_id)""",
+    ),
     (
         "attaque sans caractéristiques dans le jeu",
         """SELECT pm.* FROM pokemon_move pm LEFT JOIN move_version_group mvg

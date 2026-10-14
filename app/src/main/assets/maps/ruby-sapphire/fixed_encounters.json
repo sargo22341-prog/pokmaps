@@ -46,17 +46,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_151853",
         "source": "data/maps/Route120/scripts.inc:222",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_STEVEN_ROUTE120",
+        "removal_flag": "FLAG_HIDE_KECLEON_ROUTE120_1",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_KECLEON_ROUTE120_1",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_STEVEN_ROUTE120",
             "operator": "eq",
@@ -71,17 +76,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_151853",
         "source": "data/maps/Route120/scripts.inc:222",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_STEVEN_ROUTE120",
+        "removal_flag": "FLAG_HIDE_KECLEON_ROUTE120_1",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_KECLEON_ROUTE120_1",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_STEVEN_ROUTE120",
             "operator": "eq",
@@ -215,46 +225,6 @@
         ]
       },
       {
-        "map": "AquaHideout_B1F",
-        "x": 16,
-        "y": 9,
-        "elevation": 3,
-        "script": "Hideout_B1F_EventScript_Electrode1",
-        "source": "data/scripts/static_pokemon.inc:4",
-        "pokemon": "SPECIES_ELECTRODE",
-        "level": 30,
-        "held_item": null,
-        "removal_flag": "FLAG_HIDE_ELECTRODE_1_HIDEOUT",
-        "event": false,
-        "requirements": [
-          {
-            "subject": "FLAG_HIDE_ELECTRODE_1_HIDEOUT",
-            "operator": "eq",
-            "value": "FALSE"
-          }
-        ]
-      },
-      {
-        "map": "AquaHideout_B1F",
-        "x": 16,
-        "y": 10,
-        "elevation": 3,
-        "script": "Hideout_B1F_EventScript_Electrode2",
-        "source": "data/scripts/static_pokemon.inc:19",
-        "pokemon": "SPECIES_ELECTRODE",
-        "level": 30,
-        "held_item": null,
-        "removal_flag": "FLAG_HIDE_ELECTRODE_2_HIDEOUT",
-        "event": false,
-        "requirements": [
-          {
-            "subject": "FLAG_HIDE_ELECTRODE_2_HIDEOUT",
-            "operator": "eq",
-            "value": "FALSE"
-          }
-        ]
-      },
-      {
         "map": "CaveOfOrigin_B4F",
         "x": 9,
         "y": 10,
@@ -276,6 +246,66 @@
             "subject": "VAR_CAVE_OF_ORIGIN_B4F_STATE",
             "operator": "eq",
             "value": "0"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 25,
+        "y": 18,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E900",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:166",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 6,
+        "y": 11,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E91E",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:181",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 13,
+        "y": 10,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E93C",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:196",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
           }
         ]
       },
@@ -314,6 +344,46 @@
         "requirements": [
           {
             "subject": "FLAG_HIDE_REGISTEEL",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "MagmaHideout_B1F",
+        "x": 27,
+        "y": 10,
+        "elevation": 3,
+        "script": "Hideout_B1F_EventScript_Electrode1",
+        "source": "data/scripts/static_pokemon.inc:4",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ELECTRODE_1_HIDEOUT",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ELECTRODE_1_HIDEOUT",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "MagmaHideout_B1F",
+        "x": 27,
+        "y": 11,
+        "elevation": 3,
+        "script": "Hideout_B1F_EventScript_Electrode2",
+        "source": "data/scripts/static_pokemon.inc:19",
+        "pokemon": "SPECIES_ELECTRODE",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_ELECTRODE_2_HIDEOUT",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_ELECTRODE_2_HIDEOUT",
             "operator": "eq",
             "value": "FALSE"
           }
@@ -413,17 +483,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_151853",
         "source": "data/maps/Route120/scripts.inc:222",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_STEVEN_ROUTE120",
+        "removal_flag": "FLAG_HIDE_KECLEON_ROUTE120_1",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_KECLEON_ROUTE120_1",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_STEVEN_ROUTE120",
             "operator": "eq",
@@ -438,17 +513,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_151853",
         "source": "data/maps/Route120/scripts.inc:222",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_STEVEN_ROUTE120",
+        "removal_flag": "FLAG_HIDE_KECLEON_ROUTE120_1",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_KECLEON_ROUTE120_1",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_STEVEN_ROUTE120",
             "operator": "eq",
@@ -643,6 +723,66 @@
             "subject": "VAR_CAVE_OF_ORIGIN_B4F_STATE",
             "operator": "eq",
             "value": "0"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 25,
+        "y": 18,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E900",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:166",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 6,
+        "y": 11,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E91E",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:181",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 13,
+        "y": 10,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_15E93C",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:196",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE",
+            "operator": "eq",
+            "value": "FALSE"
           }
         ]
       },

@@ -18,7 +18,7 @@ def test_fixed_catalog_versions_and_levels(group: str) -> None:
     catalog = json.loads((_ROOT / "app/src/main/assets/maps" / group / "fixed_encounters.json").read_text("utf-8"))
     assert catalog["commit"] == PRET_COMMITS[catalog["repo"]]
     for version, rows in catalog["versions"].items():
-        assert len(rows) == (19 if version == "emerald" else 17)
+        assert len(rows) == (22 if version == "emerald" else 20)
         encounters = {(row["pokemon"], row["level"]) for row in rows}
         assert {(f"SPECIES_{name}", 40) for name in ("REGIROCK", "REGICE", "REGISTEEL")} <= encounters
         assert {("SPECIES_RAYQUAZA", 70), ("SPECIES_ELECTRODE", 30), ("SPECIES_KECLEON", 30)} <= encounters

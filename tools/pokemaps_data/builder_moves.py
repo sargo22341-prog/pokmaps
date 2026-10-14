@@ -6,6 +6,7 @@ from collections import defaultdict
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .builder_form_moves import deoxys_move_versions
 from .games import Game, PretFormat
 from .pokeapi import optional_int
 from .pret_moves import GameMoves, MoveEffect, PretMove, move_effects, read_pret_moves
@@ -51,10 +52,12 @@ class MoveTables:
     def pokemon_move_rows(self) -> list[tuple]:
         methods = {int(row["id"]): row["identifier"] for row in self.api.table("pokemon_move_methods")}
         species_of_pokemon = self.builder.species_of_pokemon
-        rows = set()
+        rows = set(self._form_move_versions)
         for row in self.api.table("pokemon_moves"):
             vg = int(row["version_group_id"])
             pokemon_id = int(row["pokemon_id"])
+            if pokemon_id == 386 and vg in {key[1] for key in self._form_move_versions}:
+                continue
             if vg not in self.builder.vg_ids or pokemon_id not in species_of_pokemon:
                 continue
             method = methods[int(row["pokemon_move_method_id"])]
@@ -63,6 +66,25 @@ class MoveTables:
             level = int(row["level"]) if method == "level-up" else 0
             rows.add((species_of_pokemon[pokemon_id], vg, int(row["move_id"]), method, level))
         return sorted(rows)
+
+    @cached_property
+    def _form_move_versions(self) -> dict[tuple, frozenset[int]]:
+        return deoxys_move_versions(self.builder)
+
+    def pokemon_move_table(self) -> list[tuple]:
+        rows = []
+        for key in self.pokemon_move_rows:
+            versions = self._form_move_versions.get(key, frozenset())
+            if key[3] not in LEARN_METHODS:
+                raise ValueError(f"Méthode d'apprentissage de forme inconnue : {key}")
+            group_versions = {
+                int(row["id"]) for row in self.builder.version_rows if int(row["version_group_id"]) == key[1]
+            }
+            specific = versions != group_versions and bool(versions)
+            if specific and len(versions) != 1:
+                raise ValueError(f"Apprentissage partagé par un sous-ensemble de versions non représentable : {key}")
+            rows.append((*key, next(iter(versions)) if specific else None))
+        return rows
 
     @cached_property
     def machine_rows(self) -> list[tuple]:

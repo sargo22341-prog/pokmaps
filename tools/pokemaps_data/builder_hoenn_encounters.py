@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 
 def complete_hoenn_encounters(builder: DatabaseBuilder, groups: list[EncounterGroup]) -> None:
+    _gift_conditions(builder, groups)
     emerald = next((game for game in builder.games if game.version_group == "emerald"), None)
     if emerald is None:
         return
@@ -36,3 +37,22 @@ def complete_hoenn_encounters(builder: DatabaseBuilder, groups: list[EncounterGr
         group.notes.append(
             f"Entrée variable sur les Routes {numbers} ; consultez le scientifique de l'Institut Météo après la Ligue."
         )
+
+
+def _gift_conditions(builder: DatabaseBuilder, groups: list[EncounterGroup]) -> None:
+    versions = {int(row["id"]): row["identifier"] for row in builder.version_rows}
+    league = next(
+        int(row["id"])
+        for row in builder.api.table("encounter_condition_values")
+        if row["identifier"] == "story-progress-hall-of-fame"
+    )
+    for group in groups:
+        version = versions[group.version_id]
+        if version not in {"ruby", "sapphire", "emerald"}:
+            continue
+        if group.pokemon_id == 374:
+            group.conditions = tuple(sorted({*group.conditions, league}))
+        if version == "emerald" and group.pokemon_id in {152, 155, 158}:
+            group.notes.append(
+                "Après avoir capturé les 200 Pokémon requis du Pokédex de Hoenn (Jirachi et Deoxys exclus)."
+            )

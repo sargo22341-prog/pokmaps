@@ -129,6 +129,19 @@ class PokemonRepositoryTest {
 
     private suspend fun sheet(game: Game, pokemonId: Int) = checkNotNull(repository.details(game, pokemonId))
 
+    @Test
+    fun deoxysLearnsetsFollowTheCartridgeForm() = runBlocking {
+        val emerald = sheet(FakeGameDao.EMERALD, 386).levelUpMoves
+        assertTrue(emerald.any { it.name == "Psycho-Boost" && it.level == 45 })
+        val attack = sheet(FakeGameDao.FIRERED, 386).levelUpMoves
+        val leafgreen = FakeGameDao.FIRERED.copy(versionId = 11, versionIdentifier = "leafgreen")
+        val defense = sheet(leafgreen, 386).levelUpMoves
+        assertTrue(attack.any { it.name == "Surpuissance" })
+        assertTrue(defense.none { it.name == "Surpuissance" })
+        assertTrue(defense.any { it.name == "Mur de Fer" })
+        assertTrue(attack.none { it.name == "Mur de Fer" })
+    }
+
     private suspend fun roots(game: Game, pokemonId: Int): List<Int> =
         checkNotNull(repository.details(game, pokemonId)).evolutions.map { it.pokemonId }
 }

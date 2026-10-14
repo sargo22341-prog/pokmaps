@@ -47,7 +47,7 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
     override suspend fun evolutions(chainId: Int, versionGroupId: Int) =
         read { listOf(EvolutionRow(PIKACHU, 26, "use-item", null, "Pierre Foudre", "thunder-stone", true)) }
 
-    override suspend fun moves(pokemonId: Int, versionGroupId: Int) = read {
+    override suspend fun moves(pokemonId: Int, versionGroupId: Int, versionId: Int) = read {
         listOf(
             electricMove(LEVEL_UP, 1, THUNDER_SHOCK, "Éclair", power = 40, pp = 30, machine = null),
             electricMove(MACHINE, 0, THUNDERBOLT, "Tonnerre", power = 95, pp = 15, machine = "CT24" to "tm24"),

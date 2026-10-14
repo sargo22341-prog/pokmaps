@@ -46,17 +46,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_Steven",
         "source": "data/maps/Route120/scripts.inc:190",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_ROUTE_120_STEVEN",
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_ROUTE_120_STEVEN",
             "operator": "eq",
@@ -71,17 +76,22 @@
       },
       {
         "map": "Route120",
-        "x": 13,
-        "y": 15,
+        "x": 12,
+        "y": 16,
         "elevation": 4,
         "script": "Route120_EventScript_Steven",
         "source": "data/maps/Route120/scripts.inc:190",
         "pokemon": "SPECIES_KECLEON",
         "level": 30,
         "held_item": null,
-        "removal_flag": "FLAG_HIDE_ROUTE_120_STEVEN",
+        "removal_flag": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE",
         "event": false,
         "requirements": [
+          {
+            "subject": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE",
+            "operator": "eq",
+            "value": "FALSE"
+          },
           {
             "subject": "FLAG_HIDE_ROUTE_120_STEVEN",
             "operator": "eq",
@@ -249,6 +259,66 @@
         "requirements": [
           {
             "subject": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 25,
+        "y": 18,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_Voltorb1",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:179",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 6,
+        "y": 11,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_Voltorb2",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:203",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ]
+      },
+      {
+        "map": "NewMauville_Inside",
+        "x": 13,
+        "y": 10,
+        "elevation": 3,
+        "script": "NewMauville_Inside_EventScript_Voltorb3",
+        "source": "data/maps/NewMauville_Inside/scripts.inc:227",
+        "pokemon": "SPECIES_VOLTORB",
+        "level": 25,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3",
             "operator": "eq",
             "value": "FALSE"
           }

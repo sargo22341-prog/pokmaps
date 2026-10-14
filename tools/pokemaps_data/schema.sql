@@ -193,6 +193,7 @@ CREATE TABLE pokemon_move (
     move_id INTEGER NOT NULL,
     method TEXT NOT NULL,
     level INTEGER NOT NULL,
+    version_id INTEGER,
     PRIMARY KEY (pokemon_id, version_group_id, move_id, method, level)
 );
 

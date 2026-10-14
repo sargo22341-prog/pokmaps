@@ -69,5 +69,6 @@ data class PokemonMoveEntity(
     @ColumnInfo(name = "version_group_id") val versionGroupId: Int,
     @ColumnInfo(name = "move_id") val moveId: Int,
     val method: String,
-    val level: Int
+    val level: Int,
+    @ColumnInfo(name = "version_id") val versionId: Int?
 )
