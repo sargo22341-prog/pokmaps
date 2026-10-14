@@ -129,6 +129,12 @@ Les cartes de Hoenn montrent un héros garçon et Flora comme rivale, après le 
 La maison du héros est à gauche de Bourg-en-Vol, celle de la rivale à droite. Les camions, déménageurs,
 acteurs du sauvetage de Seko et décorations personnalisables des chambres sont masqués. Seko reste dans son laboratoire.
 Chaque combat de Flora possède une seule icône ; son équipe dépend du Pokémon de départ choisi dans le jeu.
+Les sbires, admins et chefs Aqua/Magma suivent la version choisie, avec leurs sprites et équipes.
+Les combats scénarisés du Bois Clémenti, du musée, de la Caverne Fondmer et du Centre Spatial
+restent attachés aux ennemis qui combattent ; les alliés et figurants conservent leur rôle.
+Jaune affiche les quatre combats et équipes communes de Jessie et James, ainsi que les badges des combats du rival.
+Les quatre premières équipes du rival de Jaune sont fixes autour d'Évoli ; ses équipes suivantes
+varient selon les résultats des premiers combats.
 Les journalistes des Routes 111, 118 et 120 gardent une seule paire par route ; les acteurs des revanches
 restent dans le catalogue source sans répéter les sprites sur la carte.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection

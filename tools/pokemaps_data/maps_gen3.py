@@ -10,6 +10,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .games import EMERALD, EXTERNAL_EVENT_NOTE, FIRERED_LEAFGREEN, RUBY_SAPPHIRE, Game
+from .hoenn_team_graphics import team_graphics
 from .maps import MapRow, WarpRow, display_map_rows, read_map_names
 from .maps_layout import identifier, read_layout_curation
 from .maps_layout_gen3 import Gen3GameMaps
@@ -139,6 +140,10 @@ def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, i
         for obj in current.objects
         if (sprite := _static_sprite(obj)) is not None
     }
+    if repo.ruby:
+        for version, _ in game.pret_versions:
+            for current in game_maps.maps.values():
+                sprites.update(team_graphics(current, repo.offers[version].scripts).values())
     renderer.write_sprites(sprites, output / "sprites")
     _write_catalog(rows, warps, output)
     _write_events(game_maps, output)
