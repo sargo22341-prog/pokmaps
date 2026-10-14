@@ -8,6 +8,8 @@ from pathlib import Path
 
 from .character_curation_gen3 import character_key, read_gen3_curation
 from .hoenn_character_state import display_event, display_result
+from .hoenn_team_battles import team_battle
+from .hoenn_team_graphics import apply_team_graphics, team_graphics
 from .maps_characters import ObjectRow
 from .maps_characters_data import read_character_names
 from .maps_facilities_gen3 import facility_rows
@@ -20,7 +22,7 @@ from .pret_gen3_conditions import ScriptRequirement
 from .pret_gen3_fixed import fixed_encounters
 from .pret_gen3_maps import Gen3Event, Gen3Map
 from .pret_gen3_offers import ScriptOffers
-from .pret_gen3_trainers import Gen3TrainerPokemon
+from .pret_gen3_trainers import Gen3Trainer, Gen3TrainerPokemon
 from .pret_hoenn_berries import initial_berries
 from .pret_identifiers import species_identifier
 from .pret_models import NpcOffer
@@ -37,6 +39,7 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
         berries = initial_berries(maps.repo, version) if maps.game.map_family == "ruby-sapphire-emerald" else {}
         for const in sorted(maps.placements, key=lambda key: maps.maps[key].number):
             current = maps.maps[const]
+            graphics = team_graphics(current, reader.scripts) if maps.repo.ruby else {}
             for index, event in enumerate(current.objects, 1):
                 key = character_key(current.label, event, index)
                 if event.kind == "clone" or curation.is_duplicate(maps.game.map_family, key):
@@ -50,26 +53,29 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
                 if not (0 <= event.x < current.width and 0 <= event.y < current.height):
                     continue
                 result = reader.read_curated_object(current.label, event, index, maps.game.map_family)
+                # Valider aussi les chemins des scènes dont les offres appartiennent ensuite à un autre acteur.
+                _mark_offer_conditions(maps, result, version, story)
+                if not maps.repo.remake:
+                    result = team_battle(
+                        current,
+                        index,
+                        apply_team_graphics(event, graphics),
+                        result,
+                        reader,
+                        maps.repo.trainers[version],
+                    )
                 displayed = display_event(current, event) if not maps.repo.remake else event
                 if displayed is not None and not maps.repo.remake:
                     result = display_result(current, displayed, result, reader)
                 if result.unresolved:
                     raise ValueError(f"{version}:{key} : offres non résolues : {result.unresolved}")
                 catalog.append(_catalog_row(version, current.const, key, event, result))
-                for offer in result.offers:
-                    mark_alternative_conditions(offer, maps.repo, version, story)
-                offers = (
-                    [
-                        offer_row(offer, maps.repo, version, api, story)
-                        for offer in result.offers
-                        if offer.kind not in CATALOG_ONLY_KINDS
-                    ]
-                    if event.value("movement_type") != "MOVEMENT_TYPE_BERRY_TREE_GROWTH"
-                    else _berry_offers(event, berries, reader.scripts.constants, version)
-                )
+                _mark_offer_conditions(maps, result, version, story)
+                offers = _display_offers(maps, event, result, version, api, story, berries)
                 if displayed is None:
                     continue
                 event = displayed
+                event = apply_team_graphics(event, graphics)
                 # Les journaux du Memorydex restent au catalogue, sans acteur ni service à afficher sur la carte.
                 if event.value("movement_type") == "MOVEMENT_TYPE_INVISIBLE" and not result.trainers and not offers:
                     continue
@@ -78,6 +84,29 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
         rows.extend(facility_rows(maps, version, api, story))
     _write_catalog(maps, story, output, catalog, [asdict(item) for item in items])
     return rows
+
+
+def _mark_offer_conditions(maps: Gen3GameMaps, result: ScriptOffers, version: str, story: StoryEvents) -> None:
+    for offer in result.offers:
+        mark_alternative_conditions(offer, maps.repo, version, story)
+
+
+def _display_offers(
+    maps: Gen3GameMaps,
+    event: Gen3Event,
+    result: ScriptOffers,
+    version: str,
+    api: PokeApi,
+    story: StoryEvents,
+    berries: dict[int, str],
+) -> list[NpcOffer]:
+    if event.value("movement_type") == "MOVEMENT_TYPE_BERRY_TREE_GROWTH":
+        return _berry_offers(event, berries, maps.repo.offers[version].scripts.constants, version)
+    return [
+        offer_row(offer, maps.repo, version, api, story)
+        for offer in result.offers
+        if offer.kind not in CATALOG_ONLY_KINDS
+    ]
 
 
 def _write_catalog(
@@ -162,7 +191,6 @@ def _trainer_rows(
     trainers: tuple[str, ...],
     actor: ObjectRow,
 ) -> list[ObjectRow]:
-    names = read_character_names()
     rival = any(trainer.startswith("TRAINER_MAY_") for trainer in trainers)
     selected = tuple(trainer for trainer in trainers if trainer.startswith("TRAINER_MAY_"))[:1] if rival else trainers
     rows = []
@@ -175,10 +203,31 @@ def _trainer_rows(
                 appearance=None,
                 trainer_class=trainer.trainer_class,
                 party=[] if rival else _party_rows(trainer.party),
-                name_fr="Flora" if rival else names.trainer(trainer.trainer_class),
+                name_fr="Flora" if rival else _trainer_name(trainer),
             )
         )
     return rows
+
+
+def _trainer_name(trainer: Gen3Trainer) -> str:
+    names = {
+        "ARCHIE": "Arthur",
+        "MAXIE": "Max",
+        "MATT": "Matthieu",
+        "SHELLY": "Sarah",
+        "TABITHA": "Kelvin",
+        "COURTNEY": "Courtney",
+    }
+    if trainer.trainer_class in {
+        "TRAINER_CLASS_AQUA_ADMIN",
+        "TRAINER_CLASS_AQUA_LEADER",
+        "TRAINER_CLASS_MAGMA_ADMIN",
+        "TRAINER_CLASS_MAGMA_LEADER",
+    }:
+        if trainer.name not in names:
+            raise ValueError(f"{trainer.const} : nom français du chef ou de l'admin absent : {trainer.name}")
+        return names[trainer.name]
+    return read_character_names().trainer(trainer.trainer_class)
 
 
 def _fixed_rows(maps: Gen3GameMaps, version: str) -> list[ObjectRow]:

@@ -1,4 +1,4 @@
-96c1fed2296291c8cfbdf50e7aa82d2a2aa69af294c5d58993da0f5ab2926f5a  database/pokedex.db
+6cad2fceabb4d088d605e5876a68215f56d1d350ae5e0901840912d7d77e2fb6  database/pokedex.db
 61d2e181fc8551d89348b6bf51ec5584419560a3c2321b45c00fc0b0f6f295a8  hoenn.json
 2c7646145091766e97569d338a2266684c2c9e5fa7093764ef2d2dd620825c08  licenses/meteocons.txt
 58c239cc822b13835408fd2364038f86d5f0db8425659c51f095e971f710f9b5  maps/crystal/azalea-gym/0/0_0.webp
@@ -1998,7 +1998,7 @@ f593b287515f7fe0bf1300103681f6ee4f3ce8cd59e620c19e1ffd41f1ac6bf7  maps/emerald/c
 d519fb2fcea6cc7d818081026839c322323f6e52666cea99ae4449bf5c10745f  maps/emerald/cave-of-origin-b1f-plan/1/0_1.webp
 932fef8fa5bf19a921478a5a2bb39a31420ece5cb004ac3bffb7b891d66ddfa6  maps/emerald/cave-of-origin-b1f-plan/1/1_0.webp
 cd125d026fb7a350fb467de77d182fb36a36a86e264daf647b92901758aefd97  maps/emerald/cave-of-origin-b1f-plan/1/1_1.webp
-ebb9df9e7c96cdeffcb9387102cb05797c32ff9aee955dff161a817272516f11  maps/emerald/characters.json
+7f50d87eb924b9ddf77add90e38e66f7b776e3a8986e5bc1a2b1f01fe0475398  maps/emerald/characters.json
 79766799fbe63e43e0126856361a38febd3f20d348a6cbee20b8727b96b221d0  maps/emerald/contest-hall/0/0_0.webp
 ba482fc0f1242e691fbebd0c7585ffb14a0c71983c5507cceeb02580283c9baf  maps/emerald/contest-hall-beauty/0/0_0.webp
 3f3fe976ebe7fcd83ec9ec95a8577963f626819f1b71a35ff4e0917120530557  maps/emerald/contest-hall-cool/0/0_0.webp
@@ -10019,7 +10019,7 @@ f2b7a50c4d823b42d37b44bc9cff6bb9c7d5df1afcef45d862e94574e1514b99  maps/ruby-sapp
 c44eced275d9d411147545771d0bda76690a78b6779e1f53149e5a7a0ae45a91  maps/ruby-sapphire/cave-of-origin-b4f-plan/1/0_1.webp
 8d93e81fd9d16aed8f5e12872f022775cc176b934f7568ab50e588ff051ad210  maps/ruby-sapphire/cave-of-origin-b4f-plan/1/1_0.webp
 c3b0870d4fbad0aa4aed7010d3f212ccf00068348dc103d056ab11fa092d3144  maps/ruby-sapphire/cave-of-origin-b4f-plan/1/1_1.webp
-d582d1a57afeaf42ab9c6c832e292dbc8914f2c0bed774435515a266a918c21b  maps/ruby-sapphire/characters.json
+5683ceadb2b3e2ca7fed149f720fe1a7fea8a75875028780f803cad6f0a09194  maps/ruby-sapphire/characters.json
 d0666cd5525304203c913e7d8b9ed438a7e4aed061562ffa5780a3a3eadde1d7  maps/ruby-sapphire/desert-ruins/0/0_0.webp
 2e20e161470ee0cf4a756453001d27dc02c71784ef79e18636ae34385d5ac3fc  maps/ruby-sapphire/desert-ruins/1/0_0.webp
 a78f0817e8ad076d28ae4acca9dc67e4e2a079a53532be731692a6ba15ad3a8c  maps/ruby-sapphire/desert-ruins/1/1_0.webp
@@ -12138,6 +12138,9 @@ fecaf47b8161ce75311879c855325619580acb5dc3b28181847d286c1165cdd4  maps/ruby-sapp
 a0f6598e22723b22116501658a7e2769a578e49097d23069b640efb0278ef665  maps/ruby-sapphire/southern-island-interior/1/0_1.webp
 4efdffb68b55ab3ef8e64119aee8ab6310da535f8a3b15e8dcaccab3223b56c0  maps/ruby-sapphire/southern-island-interior/1/1_0.webp
 3972c0546ec5d46a5ccadf5c812da351260a935f93d611b8d08b8eca35300fac  maps/ruby-sapphire/southern-island-interior/1/1_1.webp
+a062309c955a4f3df48e80600a64cfe9d894d7b1e0147eda8c772f6e80bf7767  maps/ruby-sapphire/sprites/obj-event-gfx-aqua-member-f.webp
+af94623386a782bb9dc0e2de38097c8d71f70dde3ed2a6d16a94936e82005ace  maps/ruby-sapphire/sprites/obj-event-gfx-aqua-member-m.webp
+8572ebbc3378e30d04f914d2c79e60748d0d3d17db0ee237daa51a553b2be232  maps/ruby-sapphire/sprites/obj-event-gfx-archie.webp
 e31f67057d1615f5a0153e69f8c21ee65b000b76073e1be772a45412bfce83a9  maps/ruby-sapphire/sprites/obj-event-gfx-artist.webp
 09747b1bef327c5d24313857220bcbb075ffae9a7f3a27014044f2ac4de378b3  maps/ruby-sapphire/sprites/obj-event-gfx-azumarill.webp
 8d43f7c84d174b6695cb62e4f377ff8e3147595142c1d52308fc68a5b92baa0d  maps/ruby-sapphire/sprites/obj-event-gfx-azurill.webp
@@ -12186,6 +12189,8 @@ f456cd350973281a3be4203429a3f50bc3803cb0eed154b95ad43cc50d7d09f4  maps/ruby-sapp
 b7aa1fb5ce5ff27f77a146a66d05aaab37999652789fdfc9149e4bc28d60b29b  maps/ruby-sapphire/sprites/obj-event-gfx-liza.webp
 77ffd70cbf34f4366a3a6b9c4f1cf5152e53b51dcdc55c72d82c282a6656fac2  maps/ruby-sapphire/sprites/obj-event-gfx-machoke-carrying-box.webp
 a0bf12be1e3273a346d6324147223e12bdb6a0fc007dbba64ee8008cb3531175  maps/ruby-sapphire/sprites/obj-event-gfx-machoke-facing-away.webp
+6fdc9a634c828d76aaf12e4cd1a2dd2cdeae1f86835b30869fc6464872ca0db9  maps/ruby-sapphire/sprites/obj-event-gfx-magma-member-f.webp
+b195c07ce29c0e7988b0415146bf8def62545f7d9730252f2e5d0d4897db8def  maps/ruby-sapphire/sprites/obj-event-gfx-magma-member-m.webp
 64e1414d74fbc335d0ed8cb6c643a33146f0f38dabcb1457f982a76f01797488  maps/ruby-sapphire/sprites/obj-event-gfx-man-1.webp
 e5694d0682e62d3a800812e25e330158f8f5fe168c06ffbdd991a04ac597da5d  maps/ruby-sapphire/sprites/obj-event-gfx-man-2.webp
 1c9449eb47684b0fed0c19cdc156c7e9680b0048bae3afa6a323497ff91e0b1d  maps/ruby-sapphire/sprites/obj-event-gfx-man-3.webp
@@ -12195,6 +12200,7 @@ e5694d0682e62d3a800812e25e330158f8f5fe168c06ffbdd991a04ac597da5d  maps/ruby-sapp
 d0fee6d8db249acb5c110b8825143ec2ca3c1a71fa9c42d888c638b4fb6773cb  maps/ruby-sapphire/sprites/obj-event-gfx-man-7.webp
 7fb0d73e21f2e549753c04aa5de9d540fa6be9e6a16829aee8e40a45dfcbb9ec  maps/ruby-sapphire/sprites/obj-event-gfx-maniac.webp
 c9e77afe35af962d60c05abb71478eda7f52003c19375c98150a8e120706bbb9  maps/ruby-sapphire/sprites/obj-event-gfx-mart-employee.webp
+a0f033f2a1186899b20a6226f6fe40e50fee9974bdd6621c45efb0a9604678f3  maps/ruby-sapphire/sprites/obj-event-gfx-maxie.webp
 f4c2da2199c4ed796f15915ab278b804482f2f913fccbe069cda6fbc719690d4  maps/ruby-sapphire/sprites/obj-event-gfx-mom.webp
 035e13512260f40fc3fbc6cc909e9334863f5d5ee52639447aea82ae312a146f  maps/ruby-sapphire/sprites/obj-event-gfx-moving-box.webp
 cfed75f620a21bbd23786154fbd93b846a4fa5478349f4c1a737acf50b9df537  maps/ruby-sapphire/sprites/obj-event-gfx-mr-brineys-boat.webp

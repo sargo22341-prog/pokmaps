@@ -14,6 +14,7 @@ from pokemaps_data.validate import validate
 from pokemaps_data.validate_gen3_characters import validate_character_catalog
 from pokemaps_data.validate_hoenn_character_state import validate_hoenn_characters
 from pokemaps_data.validate_remake_fixed import validate_remake_fixed
+from pokemaps_data.validate_team_battles import validate_team_battles
 
 
 def main() -> int:
@@ -31,6 +32,7 @@ def main() -> int:
         errors = validate(args.assets / "database/pokedex.db")
         with closing(sqlite3.connect(args.assets / "database/pokedex.db")) as connection:
             errors += validate_hoenn_characters(connection)
+            errors += validate_team_battles(connection)
         if errors:
             raise ValueError("Base incohérente :\n" + "\n".join(errors))
     except (OSError, ValueError, sqlite3.Error) as error:

@@ -91,7 +91,8 @@ def _character_row(
     repo = game_maps.repo
     trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
     party = []
-    if trainer_class and trainer_class not in STARTER_DEPENDENT_TRAINERS:
+    fixed_yellow_team = game_maps.game.pret_repo == "pokeyellow" and obj.trainer_number is not None
+    if trainer_class and (trainer_class not in STARTER_DEPENDENT_TRAINERS or fixed_yellow_team):
         party = [
             (species_identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
             for mon in repo.trainer_parties.get((trainer_class, obj.trainer_number or 0), [])
@@ -111,6 +112,7 @@ def _character_row(
         [_offer_identifiers(repo.machines, offer) for offer in dict.fromkeys(offers)],
         obj.version,
         obj.cry and species_identifier(obj.cry),
+        name_fr="Jessie et James" if obj.sprite == "SPRITE_JESSIE" and trainer_class else None,
     )
 
 

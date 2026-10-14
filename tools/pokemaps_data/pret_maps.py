@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from dataclasses import replace
 from typing import TYPE_CHECKING
 
 from .pret import FIRST_INDOOR_MAP
@@ -37,8 +38,63 @@ def maps(repo: PretRepo) -> dict[str, PretMap]:
                 direction, _, target, offset = macro_args(line, "connection")
                 pret_map.connections.append(Connection(direction, target, parse_int(offset)))
         pret_map.objects += [MapObject(x, y, "hidden_item", item=item) for x, y, item in hidden.get(const, [])]
+        _rocket_scene(repo, pret_map)
+        _rival_scene(repo, pret_map)
         result[const] = pret_map
     return result
+
+
+def _rival_scene(repo: PretRepo, current: PretMap) -> None:
+    if not any(obj.sprite == "SPRITE_BLUE" for obj in current.objects):
+        return
+    text = repo.path(f"scripts/{current.label}.asm").read_text("utf-8")
+    classes = tuple(dict.fromkeys(re.findall(r"ld a, (OPP_RIVAL[123])\s+ld \[wCurOpponent\], a", text)))
+    if not classes:
+        return
+    fixed = {
+        trainer_class: parse_int(number)
+        for trainer_class, number in re.findall(
+            r"ld a, (OPP_RIVAL[123])\s+ld \[wCurOpponent\], a\s+ld a, (\$[\da-fA-F]+|\d+)\s+ld \[wTrainerNo\], a",
+            text,
+        )
+    }
+    for trainer_class, number in fixed.items():
+        if (trainer_class.removeprefix("OPP_"), number) not in repo.trainer_parties:
+            raise ValueError(f"{current.label} : équipe du rival absente : {trainer_class}, {number}")
+    current.objects = [
+        replace(
+            obj,
+            kind="trainer",
+            trainer_class=classes[-1] if obj.text == "TEXT_ROUTE22_RIVAL2" else classes[0],
+            trainer_number=fixed.get(classes[-1] if obj.text == "TEXT_ROUTE22_RIVAL2" else classes[0]),
+        )
+        if obj.sprite == "SPRITE_BLUE"
+        else obj
+        for obj in current.objects
+    ]
+
+
+def _rocket_scene(repo: PretRepo, current: PretMap) -> None:
+    actors = [obj for obj in current.objects if obj.sprite in {"SPRITE_JESSIE", "SPRITE_JAMES"}]
+    if not actors:
+        return
+    script = repo.path(f"scripts/{current.label}.asm").read_text("utf-8")
+    battles = re.findall(
+        r"ld a, OPP_ROCKET\s+ld \[wCurOpponent\], a\s+ld a, (\$[\da-fA-F]+|\d+)\s+ld \[wTrainerNo\], a",
+        script,
+    )
+    if len(battles) != 1 or len(actors) != 2:
+        raise ValueError(f"{current.label} : combat de Jessie et James absent ou ambigu")
+    number = parse_int(battles[0])
+    if ("ROCKET", number) not in repo.trainer_parties:
+        raise ValueError(f"{current.label} : équipe Rocket {number} absente")
+    # Une seule équipe commune ; James garde son sprite sans répéter le même combat.
+    current.objects = [
+        replace(obj, kind="trainer", trainer_class="OPP_ROCKET", trainer_number=number)
+        if obj.sprite == "SPRITE_JESSIE"
+        else obj
+        for obj in current.objects
+    ]
 
 
 def block_files(repo: PretRepo) -> dict[str, str]:
