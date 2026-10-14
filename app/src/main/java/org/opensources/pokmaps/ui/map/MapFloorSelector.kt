@@ -75,15 +75,17 @@ internal fun FloorSelector(floors: List<MapFloor>, currentId: Int?, onSelect: (I
 
 @Composable
 private fun floorLabel(level: FloorLevel): String = when (level) {
-    is FloorLevel.Storey -> if (level.number == 0) {
-        stringResource(R.string.map_floor_ground)
-    } else {
-        stringResource(R.string.map_floor_storey, level.number)
+    is FloorLevel.Storey -> when (level.number) {
+        0 -> stringResource(R.string.map_floor_ground)
+        1 -> stringResource(R.string.map_floor_first)
+        else -> stringResource(R.string.map_floor_storey, level.number)
     }
 
     is FloorLevel.Basement -> stringResource(R.string.map_floor_basement, level.number)
 
     FloorLevel.Roof -> stringResource(R.string.map_floor_roof)
+
+    FloorLevel.Summit -> stringResource(R.string.map_floor_summit)
 
     FloorLevel.Elevator -> stringResource(R.string.map_floor_elevator)
 

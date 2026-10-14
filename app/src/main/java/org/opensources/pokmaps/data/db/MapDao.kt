@@ -5,16 +5,27 @@ import androidx.room.Query
 
 @Dao
 interface MapDao {
-    @Query("SELECT * FROM map WHERE version_group_id = :versionGroupId ORDER BY id")
-    suspend fun maps(versionGroupId: Int): List<MapEntity>
+    /** Cartes du jeu dans la version : la Planque Magma n'existe que dans Rubis, la Planque Aqua que dans Saphir. */
+    @Query(
+        """
+        SELECT * FROM map WHERE version_group_id = :versionGroupId
+            AND (version_id IS NULL OR version_id = :versionId)
+        ORDER BY id
+        """
+    )
+    suspend fun maps(versionGroupId: Int, versionId: Int): List<MapEntity>
 
+    /** Passages des cartes de la version, sans ceux qui mènent à une carte d'une autre version. */
     @Query(
         """
         SELECT w.* FROM map_warp w JOIN map m ON m.id = w.map_id
-        WHERE m.version_group_id = :versionGroupId ORDER BY w.id
+        LEFT JOIN map t ON t.id = w.target_map_id
+        WHERE m.version_group_id = :versionGroupId AND (m.version_id IS NULL OR m.version_id = :versionId)
+            AND (t.version_id IS NULL OR t.version_id = :versionId)
+        ORDER BY w.id
         """
     )
-    suspend fun warps(versionGroupId: Int): List<MapWarpEntity>
+    suspend fun warps(versionGroupId: Int, versionId: Int): List<MapWarpEntity>
 
     @Query(
         """
@@ -27,6 +38,7 @@ interface MapDao {
         LEFT JOIN item i ON i.id = o.item_id
         LEFT JOIN pokemon p ON p.id = o.pokemon_id
         WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
+            AND (m.version_id IS NULL OR m.version_id = :versionId)
         ORDER BY o.id
         """
     )
@@ -38,11 +50,11 @@ interface MapDao {
         FROM map_area ma
         JOIN map m ON m.id = ma.map_id
         JOIN location_area la ON la.id = ma.location_area_id
-        WHERE m.version_group_id = :versionGroupId
+        WHERE m.version_group_id = :versionGroupId AND (m.version_id IS NULL OR m.version_id = :versionId)
         ORDER BY ma.map_id, la.id
         """
     )
-    suspend fun areas(versionGroupId: Int): List<MapAreaRow>
+    suspend fun areas(versionGroupId: Int, versionId: Int): List<MapAreaRow>
 
     /** Rencontres des zones d'un lieu dans une version. */
     @Query(
@@ -67,7 +79,7 @@ interface MapDao {
         JOIN map_object o ON o.id = n.map_object_id
         JOIN map m ON m.id = o.map_id
         JOIN version v ON v.version_group_id = m.version_group_id
-        WHERE v.id = :versionId AND n.pokemon_id = :pokemonId
+        WHERE v.id = :versionId AND n.pokemon_id = :pokemonId AND (m.version_id IS NULL OR m.version_id = v.id)
             AND n.kind IN ('gift_pokemon', 'gift_egg', 'trade', 'prize_pokemon', 'fossil')
             AND (n.version_id IS NULL OR n.version_id = :versionId)
             AND (o.version_id IS NULL OR o.version_id = :versionId)
@@ -87,6 +99,7 @@ interface MapDao {
             OR i.id IN (
                 SELECT o.item_id FROM map_object o JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
+                    AND (m.version_id IS NULL OR m.version_id = :versionId)
             )
             OR i.id IN (
                 SELECT n.item_id FROM npc_offer n
@@ -94,11 +107,13 @@ interface MapDao {
                 JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
                     AND (n.version_id IS NULL OR n.version_id = :versionId)
+                    AND (m.version_id IS NULL OR m.version_id = :versionId)
                 UNION SELECT n.wanted_item_id FROM npc_offer n
                 JOIN map_object o ON o.id = n.map_object_id
                 JOIN map m ON m.id = o.map_id
                 WHERE m.version_group_id = :versionGroupId AND (o.version_id IS NULL OR o.version_id = :versionId)
                     AND (n.version_id IS NULL OR n.version_id = :versionId)
+                    AND (m.version_id IS NULL OR m.version_id = :versionId)
             )
             OR i.id IN (SELECT e.item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
             OR i.id IN (SELECT e.held_item_id FROM evolution e WHERE e.version_group_id = :versionGroupId)
@@ -123,7 +138,7 @@ interface MapDao {
         LEFT JOIN pokemon w ON w.id = n.wanted_pokemon_id
         LEFT JOIN item wi ON wi.id = n.wanted_item_id
         WHERE v.id = :versionId AND (n.version_id IS NULL OR n.version_id = :versionId)
-            AND (o.version_id IS NULL OR o.version_id = :versionId)
+            AND (o.version_id IS NULL OR o.version_id = :versionId) AND (m.version_id IS NULL OR m.version_id = v.id)
         ORDER BY n.id
         """
     )
@@ -145,10 +160,11 @@ interface MapDao {
     @Query(
         """
         SELECT s.* FROM map_spot s JOIN map m ON m.id = s.map_id
-        WHERE m.version_group_id = :versionGroupId ORDER BY s.id
+        WHERE m.version_group_id = :versionGroupId AND (m.version_id IS NULL OR m.version_id = :versionId)
+        ORDER BY s.id
         """
     )
-    suspend fun spots(versionGroupId: Int): List<MapSpotEntity>
+    suspend fun spots(versionGroupId: Int, versionId: Int): List<MapSpotEntity>
 
     /** Équipe d'un dresseur de la carte. */
     @Query(

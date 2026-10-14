@@ -15,6 +15,9 @@ sealed interface MapRequest {
 
     /** Centre la carte sur un objet ou un personnage (en entrant dans son bâtiment) et ouvre sa fiche. */
     data class FocusObject(val objectId: Int) : MapRequest
+
+    /** Centre la carte sur l'entrée d'une Base Secrète, mise en évidence. */
+    data class ShowSecretBase(val warpId: Int) : MapRequest
 }
 
 /** Transmet les demandes à l'écran de la carte, qui les consomme. */

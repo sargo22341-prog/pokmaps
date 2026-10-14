@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_roamer_raikou">Raikou</string>
+    <string name="guide_roamer_entei">Entei</string>
+    <string name="guide_roamer_suicune">Suicune</string>
+    <string name="guide_roamer_latias">Latias</string>
+    <string name="guide_roamer_latios">Latios</string>
+    <string name="guide_roamer_johto">Après la libération à la Tour Cendrée</string>
+    <string name="guide_roamer_hoenn">Après la Ligue, à pied ou pendant Surf</string>
+    <string name="guide_roamer_red">Télévision : rouge, après la Ligue</string>
+    <string name="guide_roamer_blue">Télévision : bleu, après la Ligue</string>
+    <string name="guide_roamer_bulbasaur">Avec Bulbizarre, après le Saphir de Ciléo</string>
+    <string name="guide_roamer_charmander">Avec Salamèche, après le Saphir de Ciléo</string>
+    <string name="guide_roamer_squirtle">Avec Carapuce, après le Saphir de Ciléo</string>
+    <string name="guide_roamer_level">Niveau %1$d</string>
+    <string name="guide_roamer_area_johto">Routes 29 à 39 et 42 à 46 de Johto</string>
+    <string name="guide_roamer_area_hoenn">Routes 110, 111 et 117 à 134 de Hoenn</string>
+    <string name="guide_roamer_area_kanto">Routes 1 à 25 de Kanto</string>
+    <string name="guide_hoenn_roamers_title">
+        Latios et Latias · Le Pokémon errant
+    </string>
+    <string name="guide_hoenn_roamers_text">
+        Après votre entrée au Panthéon, un reportage télévisé annonce le Pokémon errant. Dans Rubis,
+        [[pokemon:381|Latios]] parcourt Hoenn ; dans Saphir, [[pokemon:380|Latias]]. Dans Émeraude, votre mère
+        demande la couleur du Pokémon vu à la télévision : rouge pour Latias, bleu pour Latios.\n\nL’errant
+        change de route à chaque changement de carte et apparaît dans les herbes comme pendant Surf. Sa prochaine
+        position ne peut pas être prédite : après une première rencontre, le Pokédex du jeu indique seulement sa
+        zone actuelle.\n\nIl fuit dès le premier tour, mais garde les dégâts et le statut subis d’une rencontre à
+        l’autre. Une attaque qui empêche la fuite, comme Regard Noir, ou une Master Ball facilite la capture. Un
+        Pokémon de tête de niveau 40 et un Repousse écartent les rencontres plus faibles des routes parcourues.
+    </string>
+    <string name="guide_remake_roamers_title">
+        Raikou, Entei et Suicune · La bête errante
+    </string>
+    <string name="guide_remake_roamers_text">
+        La bête errante dépend du Pokémon de départ reçu du Professeur Chen : [[pokemon:244|Entei]] avec
+        Bulbizarre, [[pokemon:245|Suicune]] avec Salamèche, [[pokemon:243|Raikou]] avec Carapuce. Elle commence à
+        parcourir Kanto après la remise du Saphir à Ciléo sur l’Île 1.\n\nElle change de route à chaque changement
+        de carte et apparaît dans les herbes comme pendant Surf. Sa prochaine position ne peut pas être prédite :
+        après une première rencontre, le Pokédex du jeu indique seulement sa zone actuelle.\n\nElle fuit dès
+        qu’elle le peut, mais garde les dégâts et le statut subis d’une rencontre à l’autre. Regard Noir, le
+        sommeil et des Balls adaptées aident ; une Master Ball règle la rencontre. Raikou et Entei connaissent
+        Hurlement, qui peut aussi mettre fin au combat.
+    </string>
+</resources>

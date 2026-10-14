@@ -2,12 +2,12 @@ package org.opensources.pokmaps.data.settings
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
-import org.opensources.pokmaps.domain.guide.RoamerObservation
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.robolectric.RobolectricTestRunner
 
@@ -18,9 +18,7 @@ class BackupJsonTest {
         val backup = CollectionBackup(
             setOf(25),
             mapOf(1 to setOf(25), 2 to setOf(133)),
-            mapOf(
-                4 to GuideProgress(setOf("ra-5070"), listOf(RoamerObservation(243, "route-29")))
-            )
+            mapOf(4 to GuideProgress(setOf("ra-5070")))
         )
         val withForms = backup.copy(unown = mapOf(4 to setOf(UnownForm.A, UnownForm.Z)))
         val text = BackupJson.encode(withForms)
@@ -34,56 +32,30 @@ class BackupJsonTest {
     }
 
     @Test
-    fun importingMergesCapturesAndUsesTheIncomingLastObservation() {
-        val current = CollectionBackup(
-            setOf(25),
-            mapOf(1 to setOf(25)),
-            mapOf(
-                4 to GuideProgress(
-                    setOf("johto-start"),
-                    listOf(RoamerObservation(243, "route-29"), RoamerObservation(244, "route-30"))
-                )
-            )
-        )
+    fun importingMergesCapturesFavoritesAndCompletedSteps() {
+        val current =
+            CollectionBackup(setOf(25), mapOf(1 to setOf(25)), mapOf(4 to GuideProgress(setOf("johto-start"))))
         val imported = CollectionBackup(
             setOf(133),
             mapOf(1 to setOf(1), 2 to setOf(7)),
-            mapOf(
-                4 to GuideProgress(
-                    setOf("ra-5070"),
-                    listOf(RoamerObservation(243, "route-42"))
-                )
-            )
+            mapOf(4 to GuideProgress(setOf("ra-5070")))
         )
         val merged = merge(current, imported)
         assertEquals(setOf(1, 25), merged.caught[1])
         assertEquals(setOf(7), merged.caught[2])
         assertEquals(setOf(25, 133), merged.favorites)
         assertEquals(setOf("johto-start", "ra-5070"), merged.guides[4]?.completed)
-        assertEquals("route-42", merged.guides[4]?.roamers?.single { it.pokemonId == 243 }?.place)
-        assertEquals("route-30", merged.guides[4]?.roamers?.single { it.pokemonId == 244 }?.place)
     }
 
     @Test
-    fun importedGbaObservationReplacesTheExclusiveChoiceAndSurvivesRoundTrip() {
-        val current = CollectionBackup(
-            emptySet(),
-            emptyMap(),
-            mapOf(
-                9 to GuideProgress(roamers = listOf(RoamerObservation(380, "route110")))
-            )
+    fun observationsOfAnOlderBackupAreIgnoredAndNoLongerExported() {
+        val old = decode(
+            """{"format":"pokmaps-collection","schema":1,"favorites":[],"games":[
+            {"version":9,"caught":[],"completed":["hoenn-start"],"roamers":[{"pokemon":380,"place":"route110"}]}
+        ]}"""
         )
-        val imported = CollectionBackup(
-            emptySet(),
-            emptyMap(),
-            mapOf(
-                9 to GuideProgress(roamers = listOf(RoamerObservation(381, "route134"))),
-                10 to GuideProgress(roamers = listOf(RoamerObservation(243, "route21-north")))
-            )
-        )
-        val merged = merge(current, imported)
-        assertEquals(imported.guides, merged.guides)
-        assertEquals(merged.guides, decode(BackupJson.encode(merged)).guides.filterKeys { it >= 9 })
+        assertEquals(GuideProgress(setOf("hoenn-start")), old.guides[9])
+        assertTrue(BackupJson.encode(old).contains("\"roamers\": []"))
     }
 
     @Test(expected = IllegalArgumentException::class)

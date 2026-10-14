@@ -33,6 +33,9 @@ class GuidePreviewUseCase @Inject constructor(
             is GuideTarget.Item -> items(target.identifier).first()?.let { GuidePreview.Item(it) }
 
             is GuideTarget.Character -> characters(target.id).first()?.let { GuidePreview.Character(it) }
+
+            // Une Base Secrète s'ouvre sur la carte, sans aperçu.
+            is GuideTarget.SecretBase -> null
         }
     }
 }

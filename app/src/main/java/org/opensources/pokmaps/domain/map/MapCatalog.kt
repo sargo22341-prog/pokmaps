@@ -28,7 +28,7 @@ data class MapInfo(
     fun toRegion() = MapRegion(id, identifier, name, x, y, width, height)
 }
 
-/** Porte, escalier ou entrée de grotte, en pixels de la carte affichée ; arrivée inconnue si `targetMapId` est null. */
+/** Passage, en pixels de la carte affichée ; arrivée inconnue si `targetMapId` est null. */
 data class MapWarp(
     val id: Int,
     val mapId: Int,
@@ -36,7 +36,8 @@ data class MapWarp(
     val y: Int,
     val targetMapId: Int?,
     val targetX: Int?,
-    val targetY: Int?
+    val targetY: Int?,
+    val kind: WarpKind = WarpKind.WARP
 )
 
 enum class MapObjectKind(val identifier: String) {
@@ -184,6 +185,7 @@ data class MapCatalog(
     private fun mergedEntrances(mapId: Int): List<MapWarp> {
         val kept = mutableListOf<MapWarp>()
         for (warp in partsOf(mapId).flatMap { warps[it].orEmpty() }) {
+            if (warp.kind == WarpKind.SECRET_BASE) continue
             val target = warp.targetMapId ?: continue
             if (isWorld(mapId) && displayedMapOf(target)?.id == mapId) continue
             val duplicate = kept.any {
@@ -195,6 +197,35 @@ data class MapCatalog(
         return kept
     }
 
+    /** Toutes les Bases Secrètes du jeu, par lieu puis de haut en bas. */
+    val secretBases: List<SecretBase> = MapPassages.secretBases(maps, warps)
+
+    /** Entrées des Bases Secrètes dessinées sur une carte affichable (calque des Bases Secrètes). */
+    fun secretBasesOf(mapId: Int): List<SecretBase> {
+        val parts = partsOf(mapId).toSet()
+        return secretBases.filter { it.entrance.mapId in parts }
+    }
+
+    /** Île qui apparaît sur une route de la carte du monde, null si le jeu n'en a pas. */
+    val overlayIsland: OverlayIsland? = MapPassages.overlayIsland(maps, warps)
+
+    /** L'île se dessine sur sa carte du monde tant qu'elle est le lieu sélectionné. */
+    fun isIslandShown(mapId: Int, zoneId: Int?): Boolean =
+        overlayIsland?.let { mapId == it.worldId && zoneId == it.islandId } == true
+
+    /** Entrées dessinées : l'île affichée remplace son accès par le retour à la route. */
+    fun displayedEntrances(mapId: Int, zoneId: Int?): List<MapWarp> {
+        val island = overlayIsland ?: return entrancesOf(mapId)
+        if (!isIslandShown(mapId, zoneId)) return entrancesOf(mapId)
+        return entrancesOf(mapId).filter { it.id != island.show.id } + island.hide
+    }
+
+    /** Objets et personnages dessinés sur une carte affichable, avec ceux de l'île affichée. */
+    fun displayedObjects(mapId: Int, zoneId: Int?): List<MapObject> {
+        val parts = partsOf(mapId) + listOfNotNull(overlayIsland?.islandId?.takeIf { isIslandShown(mapId, zoneId) })
+        return parts.flatMap { objects[it].orEmpty() }
+    }
+
     /**
      * Warps vers les lieux accessibles depuis une ville, une route ou une carte intérieure (bâtiments, grottes,
      * étages, sorties), un par lieu. Depuis une ville ou une route, seules les cartes intérieures comptent.
@@ -202,7 +233,8 @@ data class MapCatalog(
     fun accessibleFrom(mapId: Int): List<MapWarp> {
         val zone = maps[mapId] ?: return emptyList()
         val candidates = if (zone.parentId == null) entrancesOf(zone.id) else warps[zone.id].orEmpty()
-        return candidates.filter { warp ->
+        // Les Bases Secrètes ont leur propre calque et leur liste dans les astuces.
+        return candidates.filter { it.kind != WarpKind.SECRET_BASE }.filter { warp ->
             val target = warp.targetMapId?.let { maps[it] } ?: return@filter false
             target.id != zone.id &&
                 (displayedMapOf(zone.id)?.isWorld != true || displayedMapOf(target.id)?.isWorld != true)
@@ -296,6 +328,8 @@ data class MapCatalog(
             val source = queue.removeFirst()
             if (!seen.add(source)) continue
             for (warp in warps[source].orEmpty()) {
+                // Une carte modèle de Base Secrète a des dizaines d'entrées : aucune n'est la sienne.
+                if (warp.kind == WarpKind.SECRET_BASE) continue
                 val target = warp.targetMapId?.let(::displayedMapOf) ?: continue
                 if (!target.isDisplayable || isWorld(target.id) || target.id in result) continue
                 val origin = target.originMapId

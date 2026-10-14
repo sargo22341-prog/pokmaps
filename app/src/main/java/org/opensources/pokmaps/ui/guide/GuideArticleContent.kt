@@ -61,7 +61,21 @@ internal fun GuideArticleContent(
             }
         }
         items(article.paragraphs.indices.toList(), key = { "paragraph-$it" }) { index ->
-            GuideParagraph(article.paragraphs[index]) { onAction(GuideAction.Preview(it)) }
+            GuideParagraph(article.paragraphs[index]) { target ->
+                when (target) {
+                    is GuideTarget.SecretBase -> {
+                        onAction(GuideAction.ShowSecretBase(target.warpId))
+                        links.showMap()
+                    }
+
+                    is GuideTarget.Pokemon, is GuideTarget.Place, is GuideTarget.Item, is GuideTarget.Character ->
+                        onAction(GuideAction.Preview(target))
+                }
+            }
+        }
+        val version = state.library?.game?.versionId
+        if (version != null && state.roamers.isNotEmpty()) {
+            items(state.roamers, key = { "roamer-${it.pokemonId}" }) { roamer -> RoamerCard(roamer, version) }
         }
         if (article.id == "breeding") item("breeding") { breedingTool() }
         if (article.id == "friendship") item("friendship") { friendshipTool() }

@@ -157,6 +157,18 @@ private val DEFINITIONS = listOf(
         SOURCES
     ),
     GuideDefinition(
+        "hoenn-roamers",
+        R.string.guide_hoenn_roamers_title,
+        R.string.guide_hoenn_roamers_text,
+        GuideCategory.SIDE_QUEST,
+        VERSIONS,
+        381,
+        listOf(
+            "https://github.com/pret/pokeruby/blob/5784633ce4ef/src/roamer.c",
+            "https://github.com/pret/pokeemerald/blob/731ad5bfd6e6/src/roamer.c"
+        )
+    ),
+    GuideDefinition(
         "hoenn-bugs",
         R.string.guide_hoenn_bugs_title,
         R.string.guide_hoenn_bugs_text,

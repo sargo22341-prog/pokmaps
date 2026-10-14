@@ -56,7 +56,7 @@ class GuideRepository @Inject constructor(
         }
         val extras = hoenn.content(game)?.let {
             listOf(decorationGuide(context, game, catalog, it), pokeblockRecipes(context, it, index))
-        }.orEmpty()
+        }.orEmpty() + listOfNotNull(secretBaseGuide(context, catalog))
         GuideLibrary(game, articles + extras)
     }
 

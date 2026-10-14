@@ -10,6 +10,9 @@ sealed interface GuideTarget {
     data class Place(val identifier: String) : GuideTarget
     data class Item(val identifier: String) : GuideTarget
     data class Character(val id: Int) : GuideTarget
+
+    /** Entrée d'une Base Secrète, montrée directement sur la carte. */
+    data class SecretBase(val warpId: Int) : GuideTarget
 }
 
 data class GuideSpan(val text: String, val target: GuideTarget? = null)
@@ -47,9 +50,7 @@ data class GuideLibrary(
     }
 }
 
-data class RoamerObservation(val pokemonId: Int, val place: String)
-
-data class GuideProgress(val completed: Set<String> = emptySet(), val roamers: List<RoamerObservation> = emptyList())
+data class GuideProgress(val completed: Set<String> = emptySet())
 
 /** Les balises sont validées une fois lors du chargement, avant le rendu. */
 fun parseGuideText(text: String, resolve: (String, String) -> GuideTarget): List<List<GuideSpan>> {

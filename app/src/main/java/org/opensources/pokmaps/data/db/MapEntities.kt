@@ -29,7 +29,8 @@ data class MapEntity(
     @ColumnInfo(name = "level_count") val levelCount: Int,
     @ColumnInfo(name = "is_world") val isWorld: Boolean = false,
     @ColumnInfo(name = "origin_map_id") val originMapId: Int? = null,
-    @ColumnInfo(name = "start_map_id") val startMapId: Int? = null
+    @ColumnInfo(name = "start_map_id") val startMapId: Int? = null,
+    @ColumnInfo(name = "version_id") val versionId: Int? = null
 )
 
 @Entity(
@@ -57,7 +58,8 @@ data class MapWarpEntity(
     val y: Int,
     @ColumnInfo(name = "target_map_id") val targetMapId: Int?,
     @ColumnInfo(name = "target_x") val targetX: Int?,
-    @ColumnInfo(name = "target_y") val targetY: Int?
+    @ColumnInfo(name = "target_y") val targetY: Int?,
+    val kind: String? = null
 )
 
 @Entity(

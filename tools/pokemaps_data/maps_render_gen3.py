@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from pathlib import Path
 
 from PIL import Image
 
-from .maps_layout_gen3 import Gen3GameMaps
-from .maps_render import MapRenderer
+from .maps_layout_gen3 import MIRAGE_ISLAND, MIRAGE_ROUTE, Gen3GameMaps
+from .maps_render import DisplayMap, MapRenderer, level_count, write_region_tiles
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Map
 from .pret_gen3_tilesets import Gen3Metatile, Gen3Tileset, map_palettes
@@ -103,6 +104,47 @@ class Gen3Renderer(MapRenderer):
                 raise ValueError(f"{source.const} : métatuile absente : {index}")
             images[number] = paint_metatile(source.metatiles[index], pixels, palettes)
         return images
+
+    def write_display(self, const: str, output: Path) -> DisplayMap:
+        if const != MIRAGE_ISLAND:
+            return super().write_display(const, output)
+        # L'île est dessinée sur la grille de la carte du monde, seulement là où elle change la route.
+        island = self.maps[const]
+        blocks = self.blocks(island)
+        image = Image.new("RGBA", (island.width * 16, island.height * 16))
+        for x, y in self.game_maps.mirage_cells:
+            image.paste(blocks[island.block(x, y)], (x * 16, y * 16))
+        columns, rows = self.game_maps.world_size(self.game_maps.world_region[MIRAGE_ROUTE])
+        size = (columns * 16, rows * 16)
+        write_region_tiles(image, self.game_maps.detached_origin(const), size, output)
+        return DisplayMap(const, *size, level_count(*size), image)
+
+    def write_sea(self, region: str, output: Path) -> int:
+        """Eau de bordure répétée, une tuile par niveau de zoom de la carte du monde `region` : l'application la
+        dessine sous la carte pour prolonger la mer sans délimitation. Chaque niveau réduit la métatuile comme
+        la carte entière (moyenne par carré du facteur de zoom). Renvoie le nombre de niveaux."""
+        blocks = self.game_maps.world_blocks[region]
+        borders = Counter(cell & 0x3FF for const in blocks for cell in self.maps[const].layout.border)
+        number, _ = borders.most_common(1)[0]
+        sample = self.maps[next(const for const in blocks if number in self.maps[const].layout.border)]
+        primary = self.repo.tilesets[sample.layout.primary_tileset]
+        if number >= primary.primary_metatile_count:
+            raise ValueError(f"{region} : eau de bordure hors du tileset commun : {number}")
+        if primary.metatiles[number].behavior not in self.repo.terrain_rules.surfable:
+            raise ValueError(f"{region} : la bordure la plus fréquente n'est pas de l'eau : {number}")
+        water = self.blocks(sample)[number]
+        columns, rows = self.game_maps.world_size(region)
+        levels = level_count(columns * 16, rows * 16)
+        output.mkdir(parents=True, exist_ok=True)
+        for level in range(levels):
+            side = max(1, 16 // 2 ** (levels - 1 - level))
+            pattern = water.resize((side, side), Image.Resampling.BOX)
+            tile = Image.new("RGB", (256, 256))
+            for y in range(0, 256, side):
+                for x in range(0, 256, side):
+                    tile.paste(pattern, (x, y))
+            tile.save(output / f"{level}.webp", "WEBP", lossless=True, method=4)
+        return levels
 
     def border(self, pret_map: Gen3Map, x: int, y: int) -> Image.Image:
         layout = pret_map.layout

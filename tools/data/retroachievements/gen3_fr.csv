@@ -47,7 +47,7 @@ version_id,game_id,achievement_id,title_fr,description_fr,chapter
 7,790,91994,Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes,Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes.,hoenn-postgame
 7,790,91999,Capturer un Barpau,Capturer un Barpau.,hoenn-fortree
 7,790,92003,Capturer Latios sans Master Ball,Capturer Latios sans Master Ball.,hoenn-postgame
-7,790,91998,La collection complète de Rubis,Obtenir les 177 espèces accessibles dans Rubis sans échange externe ni événement. Choisir une famille de partenaires et un fossile ; Latias de l’Île du Sud est exclu.,hoenn-national-collection
+7,790,91998,La collection complète de Rubis,Obtenir les 177 espèces accessibles dans Rubis sans échange externe ni événement. Choisir une famille de partenaires et un fossile ; Latias de l’Île du Sud est exclu.,hoenn-postgame
 8,791,31146,Battre Brice ou Flora pour la première fois,Battre Brice ou Flora pour la première fois.,hoenn-start
 8,791,31147,Battre Brice ou Flora pour la deuxième fois,Battre Brice ou Flora pour la deuxième fois.,hoenn-mauville
 8,791,31148,Battre Brice ou Flora pour la troisième fois,Battre Brice ou Flora pour la troisième fois.,hoenn-fortree
@@ -220,7 +220,7 @@ version_id,game_id,achievement_id,title_fr,description_fr,chapter
 9,668,57296,Battre de nouveau Bayar et obtenir le Symbole Courage d’Or,Battre de nouveau Bayar et obtenir le Symbole Courage d’Or.,hoenn-postgame
 9,668,537240,Obtenir toutes les récompenses de Scott,Obtenir toutes les récompenses de Scott.,hoenn-optional
 9,668,27617,Battre Pierre au Site Météore,Battre Pierre au Site Météore.,hoenn-volcano
-9,668,57275,La collection complète de Émeraude,"Obtenir les 212 espèces accessibles dans Émeraude sans échange externe ni événement. Une seule famille de partenaires de Hoenn et un seul errant comptent ; choisir entre Grodoudou et Delcatty pour l’unique Pierre Lune. Les partenaires de Johto, conditionnés aux 200 espèces ordinaires de Hoenn, ne comptent pas.",hoenn-national-collection
+9,668,57275,La collection complète de Émeraude,"Obtenir les 212 espèces accessibles dans Émeraude sans échange externe ni événement. Une seule famille de partenaires de Hoenn et un seul errant comptent ; choisir entre Grodoudou et Delcatty pour l’unique Pierre Lune. Les partenaires de Johto, conditionnés aux 200 espèces ordinaires de Hoenn, ne comptent pas.",hoenn-postgame
 9,668,537241,Battre tous les Dresseurs et ramasser tous les objets de la première…,Battre tous les Dresseurs et ramasser tous les objets de la première énigme de la Maison des Pièges.,hoenn-optional
 9,668,537242,Battre tous les Dresseurs et ramasser tous les objets de la deuxième…,Battre tous les Dresseurs et ramasser tous les objets de la deuxième énigme de la Maison des Pièges.,hoenn-optional
 9,668,537243,Battre tous les Dresseurs et ramasser tous les objets de la troisième…,Battre tous les Dresseurs et ramasser tous les objets de la troisième énigme de la Maison des Pièges.,hoenn-optional
@@ -354,7 +354,7 @@ version_id,game_id,achievement_id,title_fr,description_fr,chapter
 10,515,195167,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O,Obtenir l’Œuf offert par le vieil homme du Labyrinthe d’O.,remake-sapphire
 10,515,195168,Échanger un Ponyta contre un Otaria à Cramois’Île,Échanger un Ponyta contre un Otaria à Cramois’Île.,remake-cinnabar
 10,515,195169,Échanger un Têtarte contre un Lippoutou à Azuria,Échanger un Têtarte contre un Lippoutou à Azuria.,remake-misty
-10,515,33625,La collection complète de Rouge Feu,"Obtenir les 170 espèces accessibles dans Rouge Feu, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-national-collection
+10,515,33625,La collection complète de Rouge Feu,"Obtenir les 170 espèces accessibles dans Rouge Feu, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-collections
 11,788,34776,Battre le rival au laboratoire du Professeur Chen,Battre le rival au laboratoire du Professeur Chen.,remake-start
 11,788,541899,Obtenir le Pokédex auprès du Professeur Chen,Obtenir le Pokédex auprès du Professeur Chen.,remake-start
 11,788,541900,Obtenir la Carte auprès de Nina,Obtenir la Carte auprès de Nina.,remake-start
@@ -423,7 +423,7 @@ version_id,game_id,achievement_id,title_fr,description_fr,chapter
 11,788,34805,Capturer Électhor,Capturer Électhor.,remake-legends
 11,788,34804,Capturer Sulfura,Capturer Sulfura.,remake-legends
 11,788,34808,"Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ","Capturer Raikou, Entei ou Suicune, selon le partenaire choisi au départ.",remake-legends
-11,788,34809,La collection complète de Vert Feuille,"Obtenir les 171 espèces accessibles dans Vert Feuille, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-national-collection
+11,788,34809,La collection complète de Vert Feuille,"Obtenir les 171 espèces accessibles dans Vert Feuille, sans échange externe ni événement. Le choix du partenaire, du fossile et de l’errant limite la collection.",remake-collections
 11,788,541905,"Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite","Acheter le Magicarpe au Centre Pokémon de la Route 4, près du Mont Sélénite.",remake-preparation
 11,788,541911,Échanger un Piafabec contre un Canarticho à Carmin sur Mer,Échanger un Piafabec contre un Canarticho à Carmin sur Mer.,remake-ship
 11,788,541912,Échanger un Abra contre un M. Mime sur la Route 2,Échanger un Abra contre un M. Mime sur la Route 2.,remake-brock

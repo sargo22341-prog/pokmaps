@@ -42,11 +42,15 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         vg = vg_ids[version_group]
         if builder.game_of(vg).pret_format is PretFormat.GEN3:
             data = _encounter_areas(data, area_ids, known_areas)
-        game_maps, game_areas, game_warps, ids = _map_rows(data, vg, area_ids, known_areas, len(warps) + 1)
+        game_maps, game_areas, game_warps, ids = _map_rows(data, vg, versions, area_ids, known_areas, len(warps) + 1)
         maps.extend(game_maps)
         areas.extend(game_areas)
         warps.extend(game_warps)
+        map_versions = {row.const: row.version for row in data.maps}
         for obj in data.objects:
+            # Une carte propre à une version ne garde pas les objets que l'autre version y placerait.
+            if obj.version and map_versions[obj.map_const] not in (None, obj.version):
+                continue
             objects.add(obj, ids[obj.map_const], repos[version_group])
         spots.add_game(version_group, data, ids)
     families = set(complete_families(builder.games))
@@ -210,6 +214,7 @@ class _ObjectRows:
 def _map_rows(
     data: GameMapData,
     version_group_id: int,
+    versions: dict[str, int],
     area_ids: dict[str, int],
     known_areas: set[int],
     first_warp_id: int,
@@ -233,6 +238,7 @@ def _map_rows(
                 int(row.is_world),
                 ids[row.origin] if row.origin else None,
                 ids[row.start] if row.start else None,
+                versions[row.version] if row.version else None,
             )
         )
     areas = []
@@ -243,7 +249,7 @@ def _map_rows(
     warps = []
     for warp_index, warp in enumerate(data.warps, start=first_warp_id):
         target = ids[warp.target] if warp.target else None
-        warps.append((warp_index, ids[warp.map_const], warp.x, warp.y, target, warp.target_x, warp.target_y))
+        warps.append((warp_index, ids[warp.map_const], warp.x, warp.y, target, warp.target_x, warp.target_y, warp.kind))
     return maps, areas, warps, ids
 
 

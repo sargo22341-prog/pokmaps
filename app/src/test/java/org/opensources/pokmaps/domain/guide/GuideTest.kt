@@ -26,23 +26,7 @@ class GuideTest {
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun duplicateRoamerInAnImportFails() {
-        CollectionBackup(
-            emptySet(),
-            emptyMap(),
-            mapOf(
-                4 to GuideProgress(
-                    roamers = listOf(
-                        RoamerObservation(243, "route-29"),
-                        RoamerObservation(243, "route-30")
-                    )
-                )
-            )
-        )
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun crystalSuicuneDoesNotRoam() {
-        validateGuideProgress(6, GuideProgress(roamers = listOf(RoamerObservation(245, "route-29"))))
+    fun invalidArticleIdentifierInAnImportFails() {
+        CollectionBackup(emptySet(), emptyMap(), mapOf(4 to GuideProgress(setOf("Article invalide"))))
     }
 }

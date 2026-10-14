@@ -5,7 +5,6 @@ import org.json.JSONObject
 import org.opensources.pokmaps.data.json.JsonLimits
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
-import org.opensources.pokmaps.domain.guide.RoamerObservation
 import org.opensources.pokmaps.domain.guide.validateCollectionBackup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.UnownForm
@@ -15,15 +14,11 @@ internal object BackupJson {
         val games = JSONArray()
         for (version in (backup.caught.keys + backup.guides.keys + backup.unown.keys).sorted()) {
             val progress = backup.guides[version] ?: GuideProgress()
-            val roamers = JSONArray(
-                progress.roamers.sortedBy { it.pokemonId }.map {
-                    JSONObject().put("pokemon", it.pokemonId).put("place", it.place)
-                }
-            )
             games.put(
                 JSONObject().put("version", version)
                     .put("caught", JSONArray(backup.caught[version].orEmpty().sorted()))
-                    .put("completed", JSONArray(progress.completed.sorted())).put("roamers", roamers)
+                    // Liste vide gardée pour le schéma 1 : les versions précédentes de l'application l'exigent.
+                    .put("completed", JSONArray(progress.completed.sorted())).put("roamers", JSONArray())
                     .put("unown", JSONArray(backup.unown[version].orEmpty().map { it.identifier }.sorted()))
             )
         }
@@ -50,13 +45,9 @@ internal object BackupJson {
             require(completed.length() <= 500)
             val articles = (0 until completed.length()).map { completed.getString(it) }.toSet()
             require(articles.size == completed.length())
-            val roamers = game.getJSONArray("roamers")
-            require(roamers.length() <= 3)
-            val observations = (0 until roamers.length()).map {
-                val observation = roamers.getJSONObject(it)
-                RoamerObservation(integer(observation, "pokemon"), observation.getString("place"))
-            }
-            guides[version] = GuideProgress(articles, observations)
+            // Les observations des Pokémon errants des anciennes sauvegardes ne sont plus suivies : elles sont ignorées.
+            require(game.getJSONArray("roamers").length() <= 3)
+            guides[version] = GuideProgress(articles)
             val forms = if (game.has("unown")) game.getJSONArray("unown") else JSONArray()
             require(forms.length() <= UnownForm.entries.size)
             val alphabet = (0 until forms.length()).map { UnownForm.from(forms.getString(it)) }.toSet()

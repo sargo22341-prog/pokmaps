@@ -17,11 +17,16 @@ internal class FakeMapDao(
     private val timedEncounters: Boolean = false,
     private val emptyMaps: Boolean = false,
     private val includeFruitTree: Boolean = false,
-    private val includeCompositeInterior: Boolean = false
+    private val includeCompositeInterior: Boolean = false,
+    private val includeBlueHideout: Boolean = false
 ) : MapDao {
-    override suspend fun maps(versionGroupId: Int) = read {
+    override suspend fun maps(versionGroupId: Int, versionId: Int) = read {
         if (emptyMaps) return@read emptyList()
-        listOf(
+        val hideout = MapEntity(
+            BLUE_HIDEOUT, versionGroupId, "blue-hideout", "Planque de Bleu", null, 0, 0, 128, 128, 1,
+            originMapId = VIRIDIAN, versionId = BLUE_VERSION
+        ).takeIf { includeBlueHideout && versionId == BLUE_VERSION }
+        listOfNotNull(hideout) + listOf(
             MapEntity(WORLD, versionGroupId, "kanto", "Kanto", null, 0, 0, 480, 432, 2, isWorld = true),
             MapEntity(ROUTE_1, versionGroupId, "route-1", "Route 1", WORLD, 160, 0, 160, 288, 0),
             MapEntity(VIRIDIAN, versionGroupId, "viridian-city", "Jadielle", WORLD, 160, 288, 160, 144, 0),
@@ -53,8 +58,11 @@ internal class FakeMapDao(
         }
     }
 
-    override suspend fun warps(versionGroupId: Int) = read {
-        listOf(
+    override suspend fun warps(versionGroupId: Int, versionId: Int) = read {
+        // Comme la requête : un passage vers une carte d'une autre version n'est pas lu.
+        val hideout = MapWarpEntity(3, VIRIDIAN, 280, 330, BLUE_HIDEOUT, 64, 112)
+            .takeIf { includeBlueHideout && versionId == BLUE_VERSION }
+        listOfNotNull(hideout) + listOf(
             MapWarpEntity(1, VIRIDIAN, 200, 330, MART, 64, 112),
             MapWarpEntity(2, MART, 64, 120, VIRIDIAN, 200, 338)
         ).map { warp ->
@@ -132,7 +140,7 @@ internal class FakeMapDao(
         name = name
     )
 
-    override suspend fun areas(versionGroupId: Int) = read {
+    override suspend fun areas(versionGroupId: Int, versionId: Int) = read {
         listOf(MapAreaRow(ROUTE_1, AREA, "Route 1")) + if (includeCompositeInterior) {
             listOf(MapAreaRow(LAB, AREA, "Labo"), MapAreaRow(MART, AREA, "Boutique"))
         } else {
@@ -203,7 +211,9 @@ internal class FakeMapDao(
 
     override suspend fun itemEvolutions(versionGroupId: Int, itemId: Int) = read { emptyList<ItemEvolutionRow>() }
 
-    override suspend fun spots(versionGroupId: Int) = read { listOf(MapSpotEntity(1, ROUTE_1, "grass", 200, 60)) }
+    override suspend fun spots(versionGroupId: Int, versionId: Int) = read {
+        listOf(MapSpotEntity(1, ROUTE_1, "grass", 200, 60))
+    }
 
     override suspend fun trainerParty(objectId: Int) =
         read { if (objectId == TRAINER) listOf(TrainerPokemonRow(1, 19, "Rattata", 5)) else emptyList() }
@@ -325,6 +335,10 @@ internal class FakeMapDao(
         const val VIRIDIAN = 1002
         const val MART = 1003
         const val LAB = 1004
+
+        /** Carte que seule la version Bleu atteint (`includeBlueHideout`). */
+        const val BLUE_HIDEOUT = 1005
+        const val BLUE_VERSION = 2
         const val TRAINER = 10
         const val CLERK = 11
         const val ITEM = 12

@@ -1,5 +1,6 @@
 package org.opensources.pokmaps.domain.map
 
+import org.opensources.pokmaps.domain.model.ExternalEvent
 import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Destinations du menu : régions principales et entrées des îles distribuées par événement. */
@@ -17,19 +18,20 @@ internal object MapDestinations {
         VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.FIRERED_LEAFGREEN -> "kanto"
     }
 
-    fun menu(worlds: List<MapInfo>, maps: Collection<MapInfo>): List<MapInfo> =
-        worlds.filter { it.identifier != "hoenn-underwater" }.sortedBy { it.identifier == "sevii" } +
+    /** Régions, puis l'entrée de chaque île : la carte affichée qui la contient (son plan, s'il y en a un). */
+    fun menu(worlds: List<MapInfo>, maps: Collection<MapInfo>): List<MapInfo> {
+        val byId = maps.associateBy { it.id }
+        return worlds.filter { it.identifier != "hoenn-underwater" }.sortedBy { it.identifier == "sevii" } +
             eventEntrances.mapNotNull { identifier ->
-                maps.firstOrNull { it.identifier == identifier && it.isDisplayable }?.let {
-                    it.copy(name = it.name.substringBefore(" (").substringBefore(" —"))
-                }
+                val entrance = maps.firstOrNull { it.identifier == identifier } ?: return@mapNotNull null
+                val displayed = entrance.parentId?.let(byId::get) ?: entrance
+                displayed.takeIf { it.isDisplayable }
+                    ?.let { it.copy(name = it.name.substringBefore(" (").substringBefore(" —")) }
             }
+    }
 
     fun eventOf(map: MapInfo?, destinations: List<MapInfo>): MapInfo? {
-        if (map == null || !map.isExternalEvent) return null
-        return destinations.firstOrNull { destination ->
-            destination.isExternalEvent &&
-                map.identifier.startsWith("${destination.identifier.substringBeforeLast('-')}-")
-        }
+        val island = map?.let { ExternalEvent.island(it.identifier) } ?: return null
+        return destinations.firstOrNull { ExternalEvent.island(it.identifier) == island }
     }
 }

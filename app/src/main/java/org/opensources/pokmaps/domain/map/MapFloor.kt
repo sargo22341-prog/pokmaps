@@ -19,6 +19,11 @@ sealed interface FloorLevel {
         override val order: Int get() = ROOF_ORDER
     }
 
+    /** Sommet d'une montagne ou d'un rocher, au-dessus de ses étages (« -summit »). */
+    data object Summit : FloorLevel {
+        override val order: Int get() = ROOF_ORDER
+    }
+
     data object Elevator : FloorLevel {
         override val order: Int get() = ELEVATOR_ORDER
     }
@@ -42,6 +47,7 @@ sealed interface FloorLevel {
             }
             return when {
                 floor.endsWith(ROOF) -> floor.removeSuffix(ROOF) to Roof
+                floor.endsWith(SUMMIT) -> floor.removeSuffix(SUMMIT) to Summit
                 floor.endsWith(ELEVATOR) -> floor.removeSuffix(ELEVATOR) to Elevator
                 else -> null
             }
@@ -51,6 +57,7 @@ sealed interface FloorLevel {
 
 private val NUMBERED = Regex("^(.+)-(b?)(\\d+)f$")
 private const val ROOF = "-roof"
+private const val SUMMIT = "-summit"
 private const val ELEVATOR = "-elevator"
 private const val ROOF_ORDER = 1_000
 private const val ELEVATOR_ORDER = -1_000

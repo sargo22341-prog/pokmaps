@@ -277,6 +277,11 @@ class GameMaps:
             result[chosen.map] = chosen.parent
         return result
 
+    @property
+    def version_maps(self) -> dict[str, str]:
+        """Cartes qu'une seule version du groupe permet d'atteindre ; aucune avant la 3e génération."""
+        return {}
+
     @cached_property
     def plans(self) -> dict[str, MapPlan]:
         return build_plans(self.plan_parts, self.maps, set(self.parents), self.block_px)
@@ -288,10 +293,14 @@ class GameMaps:
             for region, blocks in self.world_blocks.items()
             for const, (x, y) in blocks.items()
         }
-        placed |= {const: Placed(const, 0, 0) for const in self.parents}
+        placed |= {const: Placed(const, *self.detached_origin(const)) for const in self.parents}
         for plan in self.plans.values():
             placed |= {part.map: Placed(plan.const, part.x, part.y) for part in plan.parts}
         return placed
+
+    def detached_origin(self, const: str) -> tuple[int, int]:
+        """Position d'une carte à part dans sa propre image : l'origine, sauf pour une carte superposée au monde."""
+        return 0, 0
 
     @property
     def display_maps(self) -> list[str]:

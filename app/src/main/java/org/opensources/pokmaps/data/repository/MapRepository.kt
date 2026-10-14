@@ -30,6 +30,7 @@ import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.WarpKind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokemonType
@@ -61,16 +62,18 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
 
     private suspend fun loadCatalog(game: Game): MapCatalog {
         val vg = game.versionGroupId
+        val version = game.versionId
         val fruits = loadFruits(game)
-        // Cartes, warps, zones et emplacements ne dépendent que du groupe de versions : ceux d'une version sœur
-        // encore en mémoire (Rouge pour Bleu) sont repris tels quels. Objets et fruits restent lus pour la version.
-        val sibling = catalogs.values.firstOrNull { it.versionGroupIdentifier == game.versionGroupIdentifier }
-        val maps = sibling?.maps ?: dao.maps(vg).map { it.toInfo() }.associateBy { it.id }
+        // Tout est lu pour la version : certaines cartes n'existent que dans l'une des versions d'un groupe
+        // (la Planque Magma de Rubis, la Planque Aqua de Saphir).
+        val maps = dao.maps(vg, version).map { it.toInfo() }.associateBy { it.id }
         return MapCatalog(
             versionGroupIdentifier = game.versionGroupIdentifier,
             maps = maps,
-            warps = sibling?.warps ?: dao.warps(vg)
-                .map { MapWarp(it.id, it.mapId, it.x, it.y, it.targetMapId, it.targetX, it.targetY) }
+            warps = dao.warps(vg, version)
+                .map {
+                    MapWarp(it.id, it.mapId, it.x, it.y, it.targetMapId, it.targetX, it.targetY, WarpKind.from(it.kind))
+                }
                 .groupBy { it.mapId },
             objects = dao.objects(vg, game.versionId).map {
                 MapObject(
@@ -93,8 +96,8 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
                     shiny = FixedPokemon.isShiny(maps[it.mapId]?.identifier, it.pokemonId)
                 )
             }.groupBy { it.mapId },
-            areas = sibling?.areas ?: dao.areas(vg).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
-            spots = sibling?.spots ?: dao.spots(vg).map { spot ->
+            areas = dao.areas(vg, version).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
+            spots = dao.spots(vg, version).map { spot ->
                 MapSpot(spot.mapId, SpotKind.from(spot.kind), spot.x, spot.y)
             }.groupBy { it.mapId }
         )

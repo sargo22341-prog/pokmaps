@@ -2,10 +2,15 @@ package org.opensources.pokmaps.domain.guide
 
 enum class RoamerCondition { JOHTO, HOENN, RED, BLUE, BULBASAUR, CHARMANDER, SQUIRTLE }
 
+/** Routes que parcourt un errant, d'après les tables de déplacement du moteur de chaque jeu. */
+enum class RoamerArea { JOHTO, HOENN, KANTO }
+
 data class RoamerChoice(val pokemonId: Int, val condition: RoamerCondition)
 
-data class RoamerLocation(val identifier: String, val number: Int, val water: Boolean, val north: Boolean)
-
+/**
+ * Pokémon errants de chaque version, présentés dans un article des quêtes annexes. Leur prochaine route n'est
+ * pas prévisible : aucune position n'est suivie.
+ */
 object Roamers {
     fun choices(version: Int): List<RoamerChoice> = pokemonIds(version).map { pokemon ->
         val condition = when (version) {
@@ -27,43 +32,35 @@ object Roamers {
         RoamerChoice(pokemon, condition)
     }
 
-    fun locations(version: Int): List<RoamerLocation> = places(version).map { identifier ->
-        val number = identifier.filter { it.isDigit() }.toInt()
-        RoamerLocation(identifier, number, number == 122 || number in 124..134, identifier == "route21-north")
-    }
-
-    fun pokemonIds(version: Int): Set<Int> = when (version) {
-        4, 5 -> setOf(243, 244, 245)
-        6 -> setOf(243, 244)
-        7 -> setOf(381)
-        8 -> setOf(380)
-        9 -> setOf(380, 381)
-        10, 11 -> setOf(243, 244, 245)
-        else -> emptySet()
-    }
-
-    fun places(version: Int): List<String> = when (version) {
-        4, 5, 6 -> ((29..39).toList() + (42..46).toList()).map { "route-$it" }
-        7, 8, 9 -> (listOf(110, 111) + (117..134).toList()).map { "route$it" }
-        10, 11 -> (1..25).map { if (it == 21) "route21-north" else "route$it" }
+    fun pokemonIds(version: Int): List<Int> = when (version) {
+        4, 5 -> listOf(243, 244, 245)
+        6 -> listOf(243, 244)
+        7 -> listOf(381)
+        8 -> listOf(380)
+        9 -> listOf(380, 381)
+        10, 11 -> listOf(243, 244, 245)
         else -> emptyList()
     }
 
-    fun maximumObservations(version: Int): Int = when (version) {
-        4, 5 -> 3
-        6 -> 2
-        7, 8, 9, 10, 11 -> 1
-        else -> 0
+    /** Niveau de la rencontre : 40 à Johto et Hoenn, 50 dans les remakes. */
+    fun level(version: Int): Int = when (version) {
+        4, 5, 6, 7, 8, 9 -> 40
+        10, 11 -> 50
+        else -> error("Version sans errant : $version")
     }
 
-    /** Le choix du partenaire détermine la bête des remakes, jamais la version. */
-    fun forStarter(starter: Int): Int = when (starter) {
-        1 -> 244
-        4 -> 245
-        7 -> 243
-        else -> error("Partenaire de Kanto inconnu : $starter")
+    fun area(version: Int): RoamerArea = when (version) {
+        4, 5, 6 -> RoamerArea.JOHTO
+        7, 8, 9 -> RoamerArea.HOENN
+        10, 11 -> RoamerArea.KANTO
+        else -> error("Version sans errant : $version")
     }
 
-    fun valid(version: Int, observation: RoamerObservation): Boolean =
-        observation.pokemonId in pokemonIds(version) && observation.place in places(version)
+    /** Article des quêtes annexes qui présente les errants de la version, null sans errant. */
+    fun article(version: Int): String? = when (version) {
+        4, 5, 6 -> "johto-roamers"
+        7, 8, 9 -> "hoenn-roamers"
+        10, 11 -> "remake-roamers"
+        else -> null
+    }
 }

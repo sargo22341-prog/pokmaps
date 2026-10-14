@@ -171,6 +171,31 @@ CHECKS = (
              OR (w.target_map_id IS NOT NULL AND (t.id IS NULL OR t.version_group_id != m.version_group_id))""",
     ),
     (
+        "carte propre à une version hors de son groupe ou contredisant sa carte affichée",
+        """SELECT m.id FROM map m
+           LEFT JOIN version v ON v.id = m.version_id
+           LEFT JOIN map p ON p.id = m.parent_map_id
+           WHERE (m.version_id IS NOT NULL AND (v.id IS NULL OR v.version_group_id != m.version_group_id
+                  OR m.is_world = 1))
+             OR (p.version_id IS NOT NULL AND (m.version_id IS NULL OR m.version_id != p.version_id))""",
+    ),
+    (
+        "objet de carte d'une autre version que sa carte",
+        """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
+           WHERE m.version_id IS NOT NULL AND o.version_id IS NOT NULL AND o.version_id != m.version_id""",
+    ),
+    (
+        "passage sans warp de type inconnu ou mal relié",
+        """SELECT w.id FROM map_warp w JOIN map m ON m.id = w.map_id
+           LEFT JOIN map t ON t.id = w.target_map_id
+           WHERE (w.kind IS NOT NULL AND w.kind NOT IN ('dive', 'cable_car', 'mirage', 'secret_base'))
+             OR (w.kind IS NOT NULL AND (t.id IS NULL OR w.target_x IS NULL OR w.target_y IS NULL))
+             OR (w.kind = 'secret_base' AND t.identifier NOT LIKE 'secret-base-%')
+             OR (coalesce(w.kind, '') != 'secret_base' AND t.identifier LIKE 'secret-base-%'
+                 AND m.identifier NOT LIKE 'secret-base-%')
+             OR (m.version_id IS NOT NULL AND t.version_id IS NOT NULL AND m.version_id != t.version_id)""",
+    ),
+    (
         "objet de carte incohérent",
         """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
            WHERE o.kind NOT IN ('item', 'hidden_item', 'trainer', 'pokemon', 'npc', 'npc_object', 'npc_pokemon',

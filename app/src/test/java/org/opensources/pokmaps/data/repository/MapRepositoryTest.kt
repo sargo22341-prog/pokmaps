@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
@@ -98,22 +99,18 @@ class MapRepositoryTest {
     }
 
     @Test
-    fun siblingVersionsShareTheirMapsButNeitherTheirObjectsNorTheirOffers() = runTest {
-        var mapReads = 0
-        val delegate = FakeMapDao(includeVersionPokemon = true)
-        val dao = object : MapDao by delegate {
-            override suspend fun maps(versionGroupId: Int) = delegate.maps(versionGroupId).also { mapReads++ }
-        }
-        val repository = MapRepository(dao, Dispatchers.Unconfined)
+    fun eachVersionReadsItsOwnMapsObjectsAndOffers() = runTest {
+        val repository =
+            MapRepository(FakeMapDao(includeVersionPokemon = true, includeBlueHideout = true), Dispatchers.Unconfined)
 
         val red = repository.catalog(FakeGameDao.RED)
         val blue = repository.catalog(FakeGameDao.BLUE)
 
-        assertEquals(1, mapReads)
-        assertSame(red.maps, blue.maps)
-        assertSame(red.warps, blue.warps)
-        assertSame(red.areas, blue.areas)
-        assertSame(red.spots, blue.spots)
+        // La planque n'existe que dans Bleu : Rouge ne la lit pas, ni le passage qui y mène.
+        assertFalse(FakeMapDao.BLUE_HIDEOUT in red.maps)
+        assertTrue(red.warps.values.flatten().none { it.targetMapId == FakeMapDao.BLUE_HIDEOUT })
+        assertTrue(FakeMapDao.BLUE_HIDEOUT in blue.maps)
+        assertEquals(1, blue.warps.values.flatten().count { it.targetMapId == FakeMapDao.BLUE_HIDEOUT })
         assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, snorlaxLevel(red))
         assertEquals(FakeMapDao.BLUE_SNORLAX_LEVEL, snorlaxLevel(blue))
         assertEquals(FakeMapDao.RED_ABRA_COINS, abraPrice(repository, FakeGameDao.RED))
@@ -138,14 +135,14 @@ class MapRepositoryTest {
         assertNotSame(gold, repository.catalog(FakeGameDao.GOLD))
         repository.index(FakeGameDao.GOLD)
 
-        // Rouge est oublié à son tour ; relu ensuite, il reprend les cartes de Bleu et garde ses propres objets.
+        // Rouge est oublié à son tour ; relu ensuite, il retrouve les mêmes cartes que Bleu et ses propres objets.
         val blue = repository.catalog(FakeGameDao.BLUE)
         repository.index(FakeGameDao.BLUE)
         val reloaded = repository.catalog(FakeGameDao.RED)
         assertNotSame(red, reloaded)
         assertNotSame(redIndex, repository.index(FakeGameDao.RED))
         assertEquals(red, reloaded)
-        assertSame(blue.maps, reloaded.maps)
+        assertEquals(blue.maps, reloaded.maps)
         assertEquals(FakeMapDao.RED_SNORLAX_LEVEL, snorlaxLevel(reloaded))
         assertEquals(FakeMapDao.RED_ABRA_COINS, abraPrice(repository, FakeGameDao.RED))
     }
@@ -221,8 +218,8 @@ class MapRepositoryTest {
         val readOn = mutableListOf<ContinuationInterceptor?>()
         val delegate = FakeMapDao()
         val dao = object : MapDao by delegate {
-            override suspend fun maps(versionGroupId: Int) =
-                delegate.maps(versionGroupId).also { readOn += currentCoroutineContext()[ContinuationInterceptor] }
+            override suspend fun maps(versionGroupId: Int, versionId: Int) = delegate.maps(versionGroupId, versionId)
+                .also { readOn += currentCoroutineContext()[ContinuationInterceptor] }
 
             override suspend fun items(versionGroupId: Int, versionId: Int) = delegate.items(versionGroupId, versionId)
                 .also { readOn += currentCoroutineContext()[ContinuationInterceptor] }

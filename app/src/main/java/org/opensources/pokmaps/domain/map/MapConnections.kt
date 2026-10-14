@@ -1,8 +1,9 @@
 package org.opensources.pokmaps.domain.map
 
 import kotlin.math.abs
+import kotlin.math.hypot
 
-/** Liaison entre deux zones affichées ensemble, avec les coordonnées exactes de leurs passages. */
+/** Liaison entre deux zones affichées ensemble, du milieu d'un passage au milieu de son arrivée. */
 data class MapConnection(
     val warpId: Int,
     val x: Int,
@@ -13,29 +14,47 @@ data class MapConnection(
 )
 
 internal object MapConnections {
+    /** Case d'un passage et case d'arrivée, toutes deux connues. */
+    private data class Step(val id: Int, val x: Int, val y: Int, val targetX: Int, val targetY: Int)
+
     fun build(catalog: MapCatalog, mapId: Int): List<MapConnection> {
         if (catalog.isWorld(mapId)) return emptyList()
-        val connections = mutableListOf<MapConnection>()
+        val passages = mutableListOf<MutableList<Step>>()
         for (warp in catalog.partsOf(mapId).flatMap { catalog.warps[it].orEmpty() }) {
             val targetId = warp.targetMapId ?: continue
             if (targetId == warp.mapId || catalog.displayedMapOf(targetId)?.id != mapId) continue
-            val tx = warp.targetX ?: continue
-            val ty = warp.targetY ?: continue
-            val connection = MapConnection(warp.id, warp.x, warp.y, tx, ty)
-            val index = connections.indexOfFirst { samePassage(it, connection) }
-            if (index < 0) {
-                connections += connection
-            } else {
-                val previous = connections[index]
-                connections[index] = previous.copy(warpIds = previous.warpIds + warp.id)
-            }
+            val step = Step(warp.id, warp.x, warp.y, warp.targetX ?: continue, warp.targetY ?: continue)
+            // Une porte large a une case par passage : chacune rejoint le passage d'une case voisine, dans les deux
+            // sens, même au-delà de deux cases (les portes du Parc Safari en ont trois).
+            val passage = passages.firstOrNull { members -> members.any { samePassage(it, step) } }
+            if (passage == null) passages += mutableListOf(step) else passage += step
         }
-        return connections
+        return passages.map(::connection)
     }
 
-    private fun samePassage(first: MapConnection, second: MapConnection): Boolean = (
-        near(first.x, first.y, second.x, second.y) &&
-            near(first.targetX, first.targetY, second.targetX, second.targetY)
+    /** Trait du milieu des cases d'un bout au milieu des cases de l'autre, quel que soit le sens de chaque case. */
+    private fun connection(members: List<Step>): MapConnection {
+        val first = members.first()
+        val starts = mutableSetOf<Pair<Int, Int>>()
+        val ends = mutableSetOf<Pair<Int, Int>>()
+        for (step in members) {
+            val forward = hypot((step.x - first.x).toDouble(), (step.y - first.y).toDouble()) <=
+                hypot((step.targetX - first.x).toDouble(), (step.targetY - first.y).toDouble())
+            starts += if (forward) step.x to step.y else step.targetX to step.targetY
+            ends += if (forward) step.targetX to step.targetY else step.x to step.y
+        }
+        return MapConnection(
+            first.id,
+            starts.sumOf { it.first } / starts.size,
+            starts.sumOf { it.second } / starts.size,
+            ends.sumOf { it.first } / ends.size,
+            ends.sumOf { it.second } / ends.size,
+            members.map { it.id }.toSet()
+        )
+    }
+
+    private fun samePassage(first: Step, second: Step): Boolean = (
+        near(first.x, first.y, second.x, second.y) && near(first.targetX, first.targetY, second.targetX, second.targetY)
         ) ||
         (
             near(first.x, first.y, second.targetX, second.targetY) &&

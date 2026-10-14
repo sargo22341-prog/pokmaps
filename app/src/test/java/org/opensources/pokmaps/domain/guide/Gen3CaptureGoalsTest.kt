@@ -43,14 +43,4 @@ class Gen3CaptureGoalsTest {
         assertEquals(4, goal.count(setOf(106, 107, 236, 237)))
         assertFalse(goal.species.any { it in setOf(196, 197, 199, 208, 212, 230, 233) })
     }
-
-    @Test
-    fun regionalProjectionKeepsChoiceWeightsAndExcludesSeviiSpecies() {
-        val regional = Gen3CaptureGoals.forVersion(10, regional = true)
-        assertTrue(regional.species.all { it <= 151 })
-        assertEquals(3, regional.count(setOf(1, 2, 3, 244)))
-        assertEquals(0, regional.count(setOf(201, 237, 243)))
-        val hoenn = Gen3CaptureGoals.forVersion(9, regional = true)
-        assertFalse(hoenn.species.any { it in setOf(52, 53, 132, 185, 235) })
-    }
 }

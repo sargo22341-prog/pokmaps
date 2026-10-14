@@ -28,7 +28,7 @@ from .games import DECLARED_GAMES, GAMES, Game, PretFormat, complete_families
 from .maps_characters import ObjectRow, object_rows
 from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
-from .maps_render import MapRenderer, write_tiles
+from .maps_render import MapRenderer
 from .maps_render_gen1 import Gen1Renderer
 from .maps_render_gen2 import Gen2Renderer
 from .pret import LAST_MAP, PretRepo
@@ -113,6 +113,12 @@ class MapRow:
     is_world: bool = False
     origin: str | None = None
     start: str | None = None
+    version: str | None = None  # seule version du groupe où la carte existe, None pour toutes
+
+
+# Passages qui ne sont pas des warps du jeu : plongée scriptée, téléphérique, apparition de l'Île Mirage et
+# entrée d'une Base Secrète. None pour une porte, un escalier ou une entrée de grotte.
+WARP_KINDS = frozenset({"dive", "cable_car", "mirage", "secret_base"})
 
 
 @dataclass
@@ -123,6 +129,11 @@ class WarpRow:
     target: str | None
     target_x: int | None
     target_y: int | None
+    kind: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.kind is not None and self.kind not in WARP_KINDS:
+            raise ValueError(f"Type de passage inconnu : {self.kind}")
 
 
 @dataclass
@@ -208,8 +219,7 @@ def display_map_rows(
     plan_numbers = {const: plan.number for const, plan in game_maps.plans.items()}
     rows: list[MapRow] = []
     for const in game_maps.display_maps:
-        display = map_renderer.render(const)
-        write_tiles(display, output / identifier(const))
+        display = map_renderer.write_display(const, output / identifier(const))
         number = numbers.get(const) or plan_numbers.get(const) or maps[const].number
         start = next((region.start_map for region in game_maps.game.regions if region.const == const), None)
         rows.append(
@@ -226,6 +236,7 @@ def display_map_rows(
                 const in numbers,
                 game_maps.parents.get(const) or _plan_origin(game_maps, const),
                 start,
+                _display_version(game_maps, const),
             )
         )
     for const, placed in game_maps.placements.items():
@@ -245,9 +256,21 @@ def display_map_rows(
                 height,
                 0,
                 origin=game_maps.parents.get(const),
+                version=game_maps.version_maps.get(const),
             )
         )
     return rows
+
+
+def _display_version(game_maps: GameMaps, const: str) -> str | None:
+    """Version d'une carte affichée ; un plan n'appartient à une version que si toutes ses zones lui appartiennent."""
+    plan = game_maps.plans.get(const)
+    if plan is None:
+        return game_maps.version_maps.get(const)
+    versions = {game_maps.version_maps.get(part.map) for part in plan.parts}
+    if len(versions) != 1:
+        raise ValueError(f"{const} : plan mêlant des zones de versions différentes : {sorted(map(str, versions))}")
+    return versions.pop()
 
 
 def _plan_origin(game_maps: GameMaps, const: str) -> str | None:

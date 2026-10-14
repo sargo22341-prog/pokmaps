@@ -122,13 +122,13 @@ private fun GuideDestination(navController: NavHostController) {
     GuideRoute(
         GuideLinks(
             open = { target ->
-                val route = when (target) {
-                    is GuideTarget.Pokemon -> "pokemon/${target.id}"
-                    is GuideTarget.Place -> "place/${target.identifier}"
-                    is GuideTarget.Item -> "item/${target.identifier}"
-                    is GuideTarget.Character -> "character/${target.id}"
+                when (target) {
+                    is GuideTarget.Pokemon -> navController.navigate("pokemon/${target.id}")
+                    is GuideTarget.Place -> navController.navigate("place/${target.identifier}")
+                    is GuideTarget.Item -> navController.navigate("item/${target.identifier}")
+                    is GuideTarget.Character -> navController.navigate("character/${target.id}")
+                    is GuideTarget.SecretBase -> navController.showMap()
                 }
-                navController.navigate(route)
             },
             showMap = { navController.navigateToTopLevel(TopLevelDestination.MAP) },
             openPokedex = { navController.navigateToTopLevel(TopLevelDestination.POKEDEX) }

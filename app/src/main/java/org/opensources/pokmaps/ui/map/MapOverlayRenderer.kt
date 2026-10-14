@@ -10,11 +10,15 @@ import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.MapWarp
+import org.opensources.pokmaps.domain.map.WarpKind
 import org.opensources.pokmaps.domain.model.GameMap
+import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.addPath
+import ovh.plrapps.mapcompose.api.removeLayer
 import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.removePath
+import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 
@@ -29,12 +33,15 @@ internal data class MapRenderState(
     val highlightedPokemonId: Int?
 )
 
-internal class MapOverlayRenderer {
+internal class MapOverlayRenderer(private val tiles: (GameMap) -> TileStreamProvider) {
     private val drawnPaths = mutableListOf<String>()
 
     /** Marqueurs présents sur [drawnOn] ; une nouvelle carte MapCompose part vide. */
     private var drawnOn: MapState? = null
     private var drawn: Map<String, MarkerSpec> = emptyMap()
+
+    /** Calque des tuiles de l'île superposée sur [drawnOn], null si elle n'est pas affichée. */
+    private var islandLayer: String? = null
 
     fun render(state: MapRenderState) {
         drawnPaths.forEach { state.mapState.removePath(it) }
@@ -42,17 +49,21 @@ internal class MapOverlayRenderer {
         if (drawnOn !== state.mapState) {
             drawnOn = state.mapState
             drawn = emptyMap()
+            islandLayer = null
         }
 
         val wanted = LinkedHashMap<String, MarkerSpec>()
         val zoneParts = zoneParts(state.catalog, state.zone)
-        val entrances = state.catalog.entrancesOf(state.map.id)
-        val objects = state.catalog.partsOf(state.map.id).flatMap { state.catalog.objects[it].orEmpty() }
+        val entrances = state.catalog.displayedEntrances(state.map.id, state.zone?.id)
+        val objects = state.catalog.displayedObjects(state.map.id, state.zone?.id)
+        syncIsland(state)
         drawConnections(state)
         drawEntrances(state, wanted, zoneParts, entrances)
+        drawSecretBases(state, wanted, zoneParts)
         drawObjects(state, wanted, zoneParts, objects)
         drawWildMarkers(state, wanted)
         drawFocusedObject(state, wanted)
+        drawFocusedWarp(state, wanted)
         drawHighlight(state, wanted, entrances, objects)
         apply(state, wanted)
     }
@@ -62,6 +73,20 @@ internal class MapOverlayRenderer {
         updates.removed.forEach { state.mapState.removeMarker(it) }
         updates.added.forEach { id -> addMarker(state, id, wanted.getValue(id)) }
         drawn = wanted
+    }
+
+    /** L'île superposée apparaît sur la carte du monde tant qu'elle est le lieu sélectionné. */
+    private fun syncIsland(state: MapRenderState) {
+        val island = state.catalog.overlayIsland ?: return
+        val shown = state.catalog.isIslandShown(state.map.id, state.zone?.id)
+        val layer = islandLayer
+        if (shown && layer == null) {
+            val map = state.catalog.gameMap(island.islandId) ?: return
+            islandLayer = state.mapState.addLayer(tiles(map))
+        } else if (!shown && layer != null) {
+            state.mapState.removeLayer(layer)
+            islandLayer = null
+        }
     }
 
     private fun zoneParts(catalog: MapCatalog, zone: MapInfo?): Set<Int> = when {
@@ -102,12 +127,27 @@ internal class MapOverlayRenderer {
         entrances.forEach { warp ->
             val always = warp.mapId in zoneParts
             val index = state.catalog.connectionsOf(state.map.id).indexOfFirst { warp.id in it.warpIds }
-            val content = if (state.catalog.maps[warp.targetMapId]?.identifier == "route130-mirage-island") {
-                MarkerContent.MirageIsland(alwaysVisible = always)
+            val content = if (warp.kind == WarpKind.MIRAGE) {
+                val returning = warp.id == state.catalog.overlayIsland?.hide?.id
+                val route = state.catalog.maps[warp.targetMapId]?.name.takeIf { returning }
+                MarkerContent.MirageIsland(alwaysVisible = always || returning, returnTo = route)
             } else {
                 MarkerContent.Warp(alwaysVisible = always || index >= 0, color = passageColor(index))
             }
             wanted.draw("${MapMarkerIds.WARP}:${warp.id}", MarkerSpec(warp.x, warp.y, !always, 2f, false, content))
+        }
+    }
+
+    private fun drawSecretBases(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>, zoneParts: Set<Int>) {
+        if (MapLayer.SECRET_BASES !in state.layers) return
+        state.catalog.secretBasesOf(state.map.id).forEach { base ->
+            val warp = base.entrance
+            val always = warp.mapId in zoneParts
+            val content = MarkerContent.SecretBase(alwaysVisible = always)
+            wanted.draw(
+                "${MapMarkerIds.SECRET_BASE}:${warp.id}",
+                MarkerSpec(warp.x, warp.y, !always, 2f, false, content)
+            )
         }
     }
 
@@ -145,6 +185,14 @@ internal class MapOverlayRenderer {
             ?.takeIf { it.mapId in state.catalog.partsOf(state.map.id) } ?: return
         val position = state.catalog.markerPosition(focused)
         wanted.draw("${MapMarkerIds.HIGHLIGHT_OBJECT}:${focused.id}", highlight(position.x, position.y))
+    }
+
+    private fun drawFocusedWarp(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {
+        val id = state.overlays.focusedWarpId ?: return
+        val parts = state.catalog.partsOf(state.map.id).toSet()
+        val warp =
+            parts.asSequence().flatMap { state.catalog.warps[it].orEmpty() }.firstOrNull { it.id == id } ?: return
+        wanted.draw("${MapMarkerIds.HIGHLIGHT_WARP}:${warp.id}", highlight(warp.x, warp.y))
     }
 
     private fun drawHighlight(

@@ -24,7 +24,7 @@ class MapNavigationTest {
     fun regionMenuOpensEventIslandsAndReturnsToTheMainRegion() = runTest {
         val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = GeneratedGbaCatalog.load("emerald")
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection =
             MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
@@ -33,7 +33,11 @@ class MapNavigationTest {
             navigation.selectWorld(destination.id)
             assertEquals(destination.identifier, session.current.map?.identifier)
             assertEquals(destination.id, session.current.worldId)
-            if (destination.isExternalEvent) assertEquals(destination.id, session.current.zone?.mapId)
+            if (destination.isExternalEvent) {
+                // Une île faite d'un plan sélectionne sa première zone.
+                val zone = checkNotNull(session.current.zone).mapId
+                assertEquals(destination.id, catalog.displayedMapOf(zone)?.id)
+            }
         }
         navigation.selectWorld(checkNotNull(catalog.defaultWorld).id)
         assertEquals("hoenn", session.current.map?.identifier)
@@ -44,7 +48,7 @@ class MapNavigationTest {
     fun diveLevelsFollowTheSelectedRouteAndDisappearOnDeselect() = runTest {
         val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = GeneratedGbaCatalog.load("ruby-sapphire")
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection =
             MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
@@ -68,7 +72,7 @@ class MapNavigationTest {
         assertTrue(session.current.floors.isEmpty())
         navigation.open(checkNotNull(catalog.mapByIdentifier("route134")).id)
         navigation.selectFloor(session.current.floors.last().mapId)
-        assertEquals("underwater-route134", session.current.map?.identifier)
+        assertEquals("underwater-route134-plan", session.current.map?.identifier)
         assertEquals(2, session.current.floors.size)
         session.current.mapState?.shutdown()
     }
@@ -77,7 +81,7 @@ class MapNavigationTest {
     fun fruitLayerFollowsTheDisplayedMapContents() = runTest {
         val repository = MapRepository(FakeMapDao(includeFruitTree = true), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection = MapSelection(
             session,
@@ -96,7 +100,7 @@ class MapNavigationTest {
     fun enteringAComposedRoomCentersTheWholeFloor() = runTest {
         val repository = MapRepository(FakeMapDao(includeCompositeInterior = true), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection =
             MapSelection(session, GetMapEncountersUseCase(repository), GetMapObjectDetailsUseCase(repository))
@@ -114,7 +118,7 @@ class MapNavigationTest {
     fun aRecreatedViewKeepsItsRequestedCenterBeforeLayout() = runTest {
         val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = repository.catalog(FakeGameDao.RED)
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection = MapSelection(
             session,
@@ -143,7 +147,7 @@ class MapNavigationTest {
         val catalog = original.copy(
             maps = original.maps + (worldInfo.id to worldInfo.copy(startMapId = FakeMapDao.ROUTE_1))
         )
-        val session = MapSession(backgroundScope)
+        val session = MapSession(backgroundScope, noTiles)
         session.setLoaded(GameMaps(FakeGameDao.RED, catalog))
         val selection = MapSelection(
             session,

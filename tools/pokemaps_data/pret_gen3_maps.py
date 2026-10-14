@@ -104,13 +104,17 @@ def _words(path: Path, count: int) -> tuple[int, ...]:
     return struct.unpack(f"<{count}H", path.read_bytes())
 
 
-def read_layouts(root: Path) -> dict[str, Gen3Layout]:
+def read_layouts(root: Path, extra: frozenset[str] = frozenset()) -> dict[str, Gen3Layout]:
+    """Layouts des cartes, de l'Île Mirage et ceux de `extra` qu'un script sélectionne (map_layouts.csv)."""
     rows = read_json(root / "data/layouts/layouts.json")["layouts"]
     if not isinstance(rows, list) or not 0 < len(rows) <= MAX_MAPS:
         raise ValueError(f"{root} : nombre de layouts invalide")
     labels = read_groups(root)
     used = {read_json(source_path(root, f"data/maps/{label}/map.json"))["layout"] for _, _, label in labels}
     used.update(_mirage_layouts(root, rows))
+    if unknown := extra - {row.get("id") for row in rows if row}:
+        raise ValueError(f"{root} : layouts inconnus : {sorted(unknown)}")
+    used.update(extra)
     result: dict[str, Gen3Layout] = {}
     for row in rows:
         if row == {}:
@@ -119,35 +123,46 @@ def read_layouts(root: Path) -> dict[str, Gen3Layout]:
         # Les layouts non référencés incluent des prototypes tronqués ; ils ne décrivent aucune carte du jeu.
         if row["id"] not in used:
             continue
-        width, height = row["width"], row["height"]
-        bw, bh = row.get("border_width", 2), row.get("border_height", 2)
-        if any(type(size) is not int or not 0 < size <= 1024 for size in (width, height, bw, bh)):
-            raise ValueError(f"{root} : dimensions invalides pour {row['id']}")
-        if width * height > MAX_MAP_CELLS or row["id"] in result:
-            raise ValueError(f"{root} : layout invalide ou répété : {row['id']}")
-        result[row["id"]] = Gen3Layout(
-            row["id"],
-            width,
-            height,
-            row["primary_tileset"],
-            row["secondary_tileset"],
-            _words(source_path(root, row["blockdata_filepath"]), width * height),
-            bw,
-            bh,
-            _words(source_path(root, row["border_filepath"]), bw * bh),
-        )
+        if row["id"] in result:
+            raise ValueError(f"{root} : layout répété : {row['id']}")
+        result[row["id"]] = _layout(root, row)
     return result
 
 
+def _layout(root: Path, row: dict[str, Any]) -> Gen3Layout:
+    width, height = row["width"], row["height"]
+    bw, bh = row.get("border_width", 2), row.get("border_height", 2)
+    if any(type(size) is not int or not 0 < size <= 1024 for size in (width, height, bw, bh)):
+        raise ValueError(f"{root} : dimensions invalides pour {row['id']}")
+    if width * height > MAX_MAP_CELLS:
+        raise ValueError(f"{root} : layout invalide : {row['id']}")
+    return Gen3Layout(
+        row["id"],
+        width,
+        height,
+        row["primary_tileset"],
+        row["secondary_tileset"],
+        _words(source_path(root, row["blockdata_filepath"]), width * height),
+        bw,
+        bh,
+        _words(source_path(root, row["border_filepath"]), bw * bh),
+    )
+
+
 def _mirage_layouts(root: Path, rows: list[dict[str, Any]]) -> set[str]:
-    script = root / "data/maps/Route130/scripts.inc"
+    result = script_layouts(root, rows, "Route130")
+    if (root / "data/maps/Route130/scripts.inc").is_file() and len(result) != 2:
+        raise ValueError(f"{root} : deux layouts attendus pour l’Île Mirage")
+    return result
+
+
+def script_layouts(root: Path, rows: list[dict[str, Any]], label: str) -> set[str]:
+    """Layouts que les scripts de la carte `label` lui donnent (`setmaplayoutindex`), par identifiant."""
+    script = root / f"data/maps/{label}/scripts.inc"
     if not script.is_file():
         return set()
-    references = re.findall(r"^\s*setmaplayoutindex\s+(\w+)", read_text(script), re.M)
-    if len(set(references)) != 2:
-        raise ValueError(f"{script} : deux layouts attendus pour l’Île Mirage")
     result = set()
-    for reference in references:
+    for reference in re.findall(r"^\s*setmaplayoutindex\s+(\w+)", read_text(script), re.M):
         if reference.isdecimal():
             index = int(reference) - 1
             if not 0 <= index < len(rows) or not rows[index]:

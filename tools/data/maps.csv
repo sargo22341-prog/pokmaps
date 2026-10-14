@@ -667,7 +667,7 @@ ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_MART,Zone de Combat (Boutique Pokémon
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_OUTSIDE_EAST,Zone de Combat (extérieur est)
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_OUTSIDE_WEST,Zone de Combat (extérieur ouest)
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,"Zone de Combat (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F,"Zone de Combat (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F,"Zone de Combat (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_RANKING_HALL,Zone de Combat (Salle des Classements)
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_RECEPTION_GATE,Zone de Combat (porte d’accueil)
 ruby-sapphire-emerald,MAP_BATTLE_FRONTIER_SCOTTS_HOUSE,Zone de Combat (maison de Scott)
@@ -714,7 +714,7 @@ ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HALL,Myokara (hall)
 ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HOUSE1,Myokara (maison 1)
 ruby-sapphire-emerald,MAP_DEWFORD_TOWN_HOUSE2,Myokara (maison 2)
 ruby-sapphire-emerald,MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,"Myokara (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_DEWFORD_TOWN_POKEMON_CENTER_2F,"Myokara (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_DEWFORD_TOWN_POKEMON_CENTER_2F,"Myokara (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_DOUBLE_BATTLE_COLOSSEUM,Colisée de combat double
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY,Éternara
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_CHAMPIONS_ROOM,Éternara (salle du Maître)
@@ -733,10 +733,10 @@ ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL5,Éternara (hall 5)
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_HALL_OF_FAME,Éternara (Panthéon)
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_PHOEBES_ROOM,Éternara (salle de Spectra)
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,"Éternara (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_CENTER_2F,"Éternara (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_CENTER_2F,"Éternara (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE,Éternara (Ligue Pokémon)
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,"Éternara (Ligue Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F,"Éternara (Ligue Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F,"Éternara (Ligue Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM,Éternara (salle de Damien)
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN,Autéquia
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM,"Autéquia (Tente de Combat, salle de combat)"
@@ -750,7 +750,7 @@ ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_HOUSE2,Autéquia (maison 2)
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_MART,Autéquia (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE,Autéquia (maison du Maître des Capacités)
 ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,"Autéquia (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_POKEMON_CENTER_2F,"Autéquia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_FALLARBOR_TOWN_POKEMON_CENTER_2F,"Autéquia (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_FARAWAY_ISLAND_ENTRANCE,Île lointaine (entrée)
 ruby-sapphire-emerald,MAP_FARAWAY_ISLAND_INTERIOR,Île lointaine (intérieur)
 ruby-sapphire-emerald,MAP_FIERY_PATH,Chemin Ardent
@@ -764,7 +764,7 @@ ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE4,Cimetronelle (maison 4)
 ruby-sapphire-emerald,MAP_FORTREE_CITY_HOUSE5,Cimetronelle (maison 5)
 ruby-sapphire-emerald,MAP_FORTREE_CITY_MART,Cimetronelle (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_FORTREE_CITY_POKEMON_CENTER_1F,"Cimetronelle (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_FORTREE_CITY_POKEMON_CENTER_2F,"Cimetronelle (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_FORTREE_CITY_POKEMON_CENTER_2F,"Cimetronelle (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_GRANITE_CAVE_1F,Grotte Granite (rez-de-chaussée)
 ruby-sapphire-emerald,MAP_GRANITE_CAVE_B1F,Grotte Granite (1er sous-sol)
 ruby-sapphire-emerald,MAP_GRANITE_CAVE_B2F,Grotte Granite (2e sous-sol)
@@ -779,17 +779,17 @@ ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_HERB_SHOP,Vermilava (Herboristerie)
 ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_HOUSE,Vermilava (maison)
 ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_MART,Vermilava (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,"Vermilava (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_POKEMON_CENTER_2F,"Vermilava (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_LAVARIDGE_TOWN_POKEMON_CENTER_2F,"Vermilava (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY,Nénucrique
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_CONTEST_HALL,Nénucrique (salle de Concours)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_CONTEST_LOBBY,Nénucrique (accueil des Concours)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F,"Nénucrique (Hôtel du Grand Lac, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_2F,"Nénucrique (Hôtel du Grand Lac, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_2F,"Nénucrique (Hôtel du Grand Lac, 1er étage)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F,"Nénucrique (Centre Commercial, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F,"Nénucrique (Centre Commercial, étage 1)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F,"Nénucrique (Centre Commercial, étage 2)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F,"Nénucrique (Centre Commercial, étage 3)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F,"Nénucrique (Centre Commercial, étage 4)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F,"Nénucrique (Centre Commercial, 1er étage)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F,"Nénucrique (Centre Commercial, 2e étage)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F,"Nénucrique (Centre Commercial, 3e étage)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F,"Nénucrique (Centre Commercial, 4e étage)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR,"Nénucrique (Centre Commercial, ascenseur)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP,"Nénucrique (Centre Commercial, toit)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_EMPTY_MAP,Nénucrique (salle vide)
@@ -799,10 +799,10 @@ ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE2,Nénucrique (maison 2)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE3,Nénucrique (maison 3)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_HOUSE4,Nénucrique (maison 4)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F,"Nénucrique (Musée de Nénucrique, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F,"Nénucrique (Musée de Nénucrique, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F,"Nénucrique (Musée de Nénucrique, 1er étage)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_MOVE_DELETERS_HOUSE,Nénucrique (maison de l’Effaceur de Capacités)
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_CENTER_1F,"Nénucrique (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_CENTER_2F,"Nénucrique (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_CENTER_2F,"Nénucrique (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB,Nénucrique (Fan Club des Dresseurs)
 ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM1,Salle de Concours multijoueur 1
 ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM2,Salle de Concours multijoueur 2
@@ -812,18 +812,18 @@ ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM5,Salle de Concours multijoueur 5
 ruby-sapphire-emerald,MAP_LINK_CONTEST_ROOM6,Salle de Concours multijoueur 6
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN,Bourg-en-Vol
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F,"Bourg-en-Vol (maison du héros, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,"Bourg-en-Vol (maison du héros, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,"Bourg-en-Vol (maison du héros, 1er étage)"
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F,"Bourg-en-Vol (maison de la rivale, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F,"Bourg-en-Vol (maison de la rivale, étage 1)"
+ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F,"Bourg-en-Vol (maison de la rivale, 1er étage)"
 ruby-sapphire-emerald,MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB,Bourg-en-Vol (laboratoire du Prof. Seko)
 ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_1F,Planque Magma (rez-de-chaussée)
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_1R,"Planque Magma (étage 1, salle 1)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_2R,"Planque Magma (étage 1, salle 2)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_3R,"Planque Magma (étage 1, salle 3)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_1R,"Planque Magma (étage 2, salle 1)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_2R,"Planque Magma (étage 2, salle 2)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_3R,"Planque Magma (étage 2, salle 3)"
-ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_4F,Planque Magma (étage 3)
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_1R,"Planque Magma (1er étage, salle 1)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_2R,"Planque Magma (1er étage, salle 2)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_2F_3R,"Planque Magma (1er étage, salle 3)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_1R,"Planque Magma (2e étage, salle 1)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_2R,"Planque Magma (2e étage, salle 2)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_3F_3R,"Planque Magma (2e étage, salle 3)"
+ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_4F,Planque Magma (3e étage)
 ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_B1F,Planque Magma (1er sous-sol)
 ruby-sapphire-emerald,MAP_MAGMA_HIDEOUT_B2F,Planque Magma (2e sous-sol)
 ruby-sapphire-emerald,MAP_MARINE_CAVE_END,Grotte Marine (salle finale)
@@ -836,16 +836,16 @@ ruby-sapphire-emerald,MAP_MAUVILLE_CITY_HOUSE1,Lavandia (maison 1)
 ruby-sapphire-emerald,MAP_MAUVILLE_CITY_HOUSE2,Lavandia (maison 2)
 ruby-sapphire-emerald,MAP_MAUVILLE_CITY_MART,Lavandia (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_MAUVILLE_CITY_POKEMON_CENTER_1F,"Lavandia (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_MAUVILLE_CITY_POKEMON_CENTER_2F,"Lavandia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_MAUVILLE_CITY_POKEMON_CENTER_2F,"Lavandia (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_METEOR_FALLS_1F_1R,"Site Météore (rez-de-chaussée, salle 1)"
 ruby-sapphire-emerald,MAP_METEOR_FALLS_1F_2R,"Site Météore (rez-de-chaussée, salle 2)"
 ruby-sapphire-emerald,MAP_METEOR_FALLS_B1F_1R,"Site Météore (1er sous-sol, salle 1)"
 ruby-sapphire-emerald,MAP_METEOR_FALLS_B1F_2R,"Site Météore (1er sous-sol, salle 2)"
 ruby-sapphire-emerald,MAP_METEOR_FALLS_STEVENS_CAVE,Site Météore (grotte de Pierre)
 ruby-sapphire-emerald,MAP_MIRAGE_TOWER_1F,Tour Mirage (rez-de-chaussée)
-ruby-sapphire-emerald,MAP_MIRAGE_TOWER_2F,Tour Mirage (étage 1)
-ruby-sapphire-emerald,MAP_MIRAGE_TOWER_3F,Tour Mirage (étage 2)
-ruby-sapphire-emerald,MAP_MIRAGE_TOWER_4F,Tour Mirage (étage 3)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_2F,Tour Mirage (1er étage)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_3F,Tour Mirage (2e étage)
+ruby-sapphire-emerald,MAP_MIRAGE_TOWER_4F,Tour Mirage (3e étage)
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY,Algatia
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_GAME_CORNER_1F,"Algatia (Casino, rez-de-chaussée)"
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_GAME_CORNER_B1F,"Algatia (Casino, 1er sous-sol)"
@@ -856,18 +856,18 @@ ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE3,Algatia (maison 3)
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_HOUSE4,Algatia (maison 4)
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_MART,Algatia (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F,"Algatia (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_POKEMON_CENTER_2F,"Algatia (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_POKEMON_CENTER_2F,"Algatia (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_SPACE_CENTER_1F,"Algatia (Centre Spatial, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_SPACE_CENTER_2F,"Algatia (Centre Spatial, étage 1)"
+ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_SPACE_CENTER_2F,"Algatia (Centre Spatial, 1er étage)"
 ruby-sapphire-emerald,MAP_MOSSDEEP_CITY_STEVENS_HOUSE,Algatia (maison de Pierre)
 ruby-sapphire-emerald,MAP_MT_CHIMNEY,Mont Chimnée
 ruby-sapphire-emerald,MAP_MT_CHIMNEY_CABLE_CAR_STATION,Mont Chimnée (station du téléphérique)
 ruby-sapphire-emerald,MAP_MT_PYRE_1F,Mont Mémoria (rez-de-chaussée)
-ruby-sapphire-emerald,MAP_MT_PYRE_2F,Mont Mémoria (étage 1)
-ruby-sapphire-emerald,MAP_MT_PYRE_3F,Mont Mémoria (étage 2)
-ruby-sapphire-emerald,MAP_MT_PYRE_4F,Mont Mémoria (étage 3)
-ruby-sapphire-emerald,MAP_MT_PYRE_5F,Mont Mémoria (étage 4)
-ruby-sapphire-emerald,MAP_MT_PYRE_6F,Mont Mémoria (étage 5)
+ruby-sapphire-emerald,MAP_MT_PYRE_2F,Mont Mémoria (1er étage)
+ruby-sapphire-emerald,MAP_MT_PYRE_3F,Mont Mémoria (2e étage)
+ruby-sapphire-emerald,MAP_MT_PYRE_4F,Mont Mémoria (3e étage)
+ruby-sapphire-emerald,MAP_MT_PYRE_5F,Mont Mémoria (4e étage)
+ruby-sapphire-emerald,MAP_MT_PYRE_6F,Mont Mémoria (5e étage)
 ruby-sapphire-emerald,MAP_MT_PYRE_EXTERIOR,Mont Mémoria (extérieur)
 ruby-sapphire-emerald,MAP_MT_PYRE_SUMMIT,Mont Mémoria (sommet)
 ruby-sapphire-emerald,MAP_NAVEL_ROCK_B1F,Roc Nombri (1er sous-sol)
@@ -899,7 +899,7 @@ ruby-sapphire-emerald,MAP_OLDALE_TOWN_HOUSE1,Rosyères (maison 1)
 ruby-sapphire-emerald,MAP_OLDALE_TOWN_HOUSE2,Rosyères (maison 2)
 ruby-sapphire-emerald,MAP_OLDALE_TOWN_MART,Rosyères (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_OLDALE_TOWN_POKEMON_CENTER_1F,"Rosyères (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_OLDALE_TOWN_POKEMON_CENTER_2F,"Rosyères (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_OLDALE_TOWN_POKEMON_CENTER_2F,"Rosyères (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN,Pacifiville
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE1,Pacifiville (maison 1)
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE2,Pacifiville (maison 2)
@@ -907,14 +907,14 @@ ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE3,Pacifiville (maison 3)
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE4,Pacifiville (maison 4)
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_HOUSE5,Pacifiville (maison 5)
 ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F,"Pacifiville (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_2F,"Pacifiville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_2F,"Pacifiville (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_PETALBURG_CITY,Clémenti-Ville
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_GYM,Clémenti-Ville (Arène)
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_HOUSE1,Clémenti-Ville (maison 1)
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_HOUSE2,Clémenti-Ville (maison 2)
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_MART,Clémenti-Ville (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_POKEMON_CENTER_1F,"Clémenti-Ville (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_PETALBURG_CITY_POKEMON_CENTER_2F,"Clémenti-Ville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_PETALBURG_CITY_POKEMON_CENTER_2F,"Clémenti-Ville (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_PETALBURG_CITY_WALLYS_HOUSE,Clémenti-Ville (maison de Timmy)
 ruby-sapphire-emerald,MAP_PETALBURG_WOODS,Bois Clémenti
 ruby-sapphire-emerald,MAP_RECORD_CORNER,Centre de mixage de données
@@ -964,7 +964,7 @@ ruby-sapphire-emerald,MAP_ROUTE118,Route 118
 ruby-sapphire-emerald,MAP_ROUTE119,Route 119
 ruby-sapphire-emerald,MAP_ROUTE119_HOUSE,Route 119 (maison)
 ruby-sapphire-emerald,MAP_ROUTE119_WEATHER_INSTITUTE_1F,"Route 119 (Centre Météo, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_ROUTE119_WEATHER_INSTITUTE_2F,"Route 119 (Centre Météo, étage 1)"
+ruby-sapphire-emerald,MAP_ROUTE119_WEATHER_INSTITUTE_2F,"Route 119 (Centre Météo, 1er étage)"
 ruby-sapphire-emerald,MAP_ROUTE120,Route 120
 ruby-sapphire-emerald,MAP_ROUTE121,Route 121
 ruby-sapphire-emerald,MAP_ROUTE121_SAFARI_ZONE_ENTRANCE,Route 121 (entrée du Parc Safari)
@@ -987,20 +987,20 @@ ruby-sapphire-emerald,MAP_ROUTE134,Chenal 134
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY,Mérouville
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_CUTTERS_HOUSE,Mérouville (maison du Coupeur)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_1F,"Mérouville (Devon SARL, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_2F,"Mérouville (Devon SARL, étage 1)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_3F,"Mérouville (Devon SARL, étage 2)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_2F,"Mérouville (Devon SARL, 1er étage)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_DEVON_CORP_3F,"Mérouville (Devon SARL, 2e étage)"
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT1_1F,"Mérouville (immeuble 1, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT1_2F,"Mérouville (immeuble 1, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT1_2F,"Mérouville (immeuble 1, 1er étage)"
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_1F,"Mérouville (immeuble 2, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_2F,"Mérouville (immeuble 2, étage 1)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_3F,"Mérouville (immeuble 2, étage 2)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_2F,"Mérouville (immeuble 2, 1er étage)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_FLAT2_3F,"Mérouville (immeuble 2, 2e étage)"
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_GYM,Mérouville (Arène)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE1,Mérouville (maison 1)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE2,Mérouville (maison 2)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_HOUSE3,Mérouville (maison 3)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_MART,Mérouville (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_CENTER_1F,"Mérouville (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_CENTER_2F,"Mérouville (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_CENTER_2F,"Mérouville (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_RUSTBORO_CITY_POKEMON_SCHOOL,Mérouville (École des Dresseurs)
 ruby-sapphire-emerald,MAP_RUSTURF_TUNNEL,Tunnel Mérazon
 ruby-sapphire-emerald,MAP_SAFARI_ZONE_NORTH,Parc Safari (nord)
@@ -1056,10 +1056,10 @@ ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM,"Grotte Tréfonds (mar�
 ruby-sapphire-emerald,MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM,"Grotte Tréfonds (marée basse, escaliers)"
 ruby-sapphire-emerald,MAP_SINGLE_BATTLE_COLOSSEUM,Colisée de combat simple
 ruby-sapphire-emerald,MAP_SKY_PILLAR_1F,Pilier Céleste (rez-de-chaussée)
-ruby-sapphire-emerald,MAP_SKY_PILLAR_2F,Pilier Céleste (étage 1)
-ruby-sapphire-emerald,MAP_SKY_PILLAR_3F,Pilier Céleste (étage 2)
-ruby-sapphire-emerald,MAP_SKY_PILLAR_4F,Pilier Céleste (étage 3)
-ruby-sapphire-emerald,MAP_SKY_PILLAR_5F,Pilier Céleste (étage 4)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_2F,Pilier Céleste (1er étage)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_3F,Pilier Céleste (2e étage)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_4F,Pilier Céleste (3e étage)
+ruby-sapphire-emerald,MAP_SKY_PILLAR_5F,Pilier Céleste (4e étage)
 ruby-sapphire-emerald,MAP_SKY_PILLAR_ENTRANCE,Pilier Céleste (entrée)
 ruby-sapphire-emerald,MAP_SKY_PILLAR_OUTSIDE,Pilier Céleste (extérieur)
 ruby-sapphire-emerald,MAP_SKY_PILLAR_TOP,Pilier Céleste (sommet)
@@ -1076,12 +1076,12 @@ ruby-sapphire-emerald,MAP_SLATEPORT_CITY_HOUSE2,Poivressel (maison 2)
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_MART,Poivressel (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_NAME_RATERS_HOUSE,Poivressel (maison du Spécialiste des Noms)
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F,"Poivressel (Musée Océanographique, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F,"Poivressel (Musée Océanographique, étage 1)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F,"Poivressel (Musée Océanographique, 1er étage)"
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_CENTER_1F,"Poivressel (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_CENTER_2F,"Poivressel (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_CENTER_2F,"Poivressel (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB,Poivressel (Fan Club Pokémon)
 ruby-sapphire-emerald,MAP_SLATEPORT_CITY_STERNS_SHIPYARD_1F,"Poivressel (Chantier Naval de Poupe, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_SLATEPORT_CITY_STERNS_SHIPYARD_2F,"Poivressel (Chantier Naval de Poupe, étage 1)"
+ruby-sapphire-emerald,MAP_SLATEPORT_CITY_STERNS_SHIPYARD_2F,"Poivressel (Chantier Naval de Poupe, 1er étage)"
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY,Atalanopolis
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_GYM_1F,"Atalanopolis (Arène, rez-de-chaussée)"
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_GYM_B1F,"Atalanopolis (Arène, 1er sous-sol)"
@@ -1098,7 +1098,7 @@ ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MART,Atalanopolis (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F,"Atalanopolis (maison des événements mystère, rez-de-chaussée)"
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F,"Atalanopolis (maison des événements mystère, 1er sous-sol)"
 ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F,"Atalanopolis (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_2F,"Atalanopolis (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_2F,"Atalanopolis (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_SOUTHERN_ISLAND_EXTERIOR,Île du Sud (extérieur)
 ruby-sapphire-emerald,MAP_SOUTHERN_ISLAND_INTERIOR,Île du Sud (intérieur)
 ruby-sapphire-emerald,MAP_SS_TIDAL_CORRIDOR,Le Marina (couloir)
@@ -1108,9 +1108,9 @@ ruby-sapphire-emerald,MAP_TERRA_CAVE_END,Grotte Terra (salle finale)
 ruby-sapphire-emerald,MAP_TERRA_CAVE_ENTRANCE,Grotte Terra (entrée)
 ruby-sapphire-emerald,MAP_TRADE_CENTER,Centre de Troc
 ruby-sapphire-emerald,MAP_TRAINER_HILL_1F,Colline Dresseurs (rez-de-chaussée)
-ruby-sapphire-emerald,MAP_TRAINER_HILL_2F,Colline Dresseurs (étage 1)
-ruby-sapphire-emerald,MAP_TRAINER_HILL_3F,Colline Dresseurs (étage 2)
-ruby-sapphire-emerald,MAP_TRAINER_HILL_4F,Colline Dresseurs (étage 3)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_2F,Colline Dresseurs (1er étage)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_3F,Colline Dresseurs (2e étage)
+ruby-sapphire-emerald,MAP_TRAINER_HILL_4F,Colline Dresseurs (3e étage)
 ruby-sapphire-emerald,MAP_TRAINER_HILL_ELEVATOR,Colline Dresseurs (ascenseur)
 ruby-sapphire-emerald,MAP_TRAINER_HILL_ENTRANCE,Colline Dresseurs (entrée)
 ruby-sapphire-emerald,MAP_TRAINER_HILL_ROOF,Colline Dresseurs (toit)
@@ -1141,7 +1141,7 @@ ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE,Vergazon (mais
 ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_HOUSE,Vergazon (maison)
 ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_MART,Vergazon (Boutique Pokémon)
 ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F,"Vergazon (Centre Pokémon, rez-de-chaussée)"
-ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_POKEMON_CENTER_2F,"Vergazon (Centre Pokémon, étage 1)"
+ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_POKEMON_CENTER_2F,"Vergazon (Centre Pokémon, 1er étage)"
 ruby-sapphire-emerald,MAP_VERDANTURF_TOWN_WANDAS_HOUSE,Vergazon (maison de la cousine de Timmy)
 ruby-sapphire-emerald,MAP_VICTORY_ROAD_1F,Route Victoire (rez-de-chaussée)
 ruby-sapphire-emerald,MAP_VICTORY_ROAD_B1F,Route Victoire (1er sous-sol)
@@ -1155,13 +1155,13 @@ firered-leafgreen,MAP_BATTLE_COLOSSEUM_4P,Colisée (quatre joueurs)
 firered-leafgreen,MAP_UNION_ROOM,Salle Union
 firered-leafgreen,MAP_VIRIDIAN_FOREST,Forêt de Jade
 firered-leafgreen,MAP_MT_MOON_1F,Mont Sélénite — rez-de-chaussée
-firered-leafgreen,MAP_MT_MOON_B1F,Mont Sélénite — sous-sol 1
-firered-leafgreen,MAP_MT_MOON_B2F,Mont Sélénite — sous-sol 2
+firered-leafgreen,MAP_MT_MOON_B1F,Mont Sélénite — 1er sous-sol
+firered-leafgreen,MAP_MT_MOON_B2F,Mont Sélénite — 2e sous-sol
 firered-leafgreen,MAP_SSANNE_EXTERIOR,L’Océane — Extérieur
 firered-leafgreen,MAP_SSANNE_1F_CORRIDOR,"L’Océane — rez-de-chaussée, Couloir"
 firered-leafgreen,MAP_SSANNE_2F_CORRIDOR,"L’Océane — 1er étage, Couloir"
 firered-leafgreen,MAP_SSANNE_3F_CORRIDOR,"L’Océane — 2e étage, Couloir"
-firered-leafgreen,MAP_SSANNE_B1F_CORRIDOR,"L’Océane — sous-sol 1, Couloir"
+firered-leafgreen,MAP_SSANNE_B1F_CORRIDOR,"L’Océane — 1er sous-sol, Couloir"
 firered-leafgreen,MAP_SSANNE_DECK,L’Océane — Pont
 firered-leafgreen,MAP_SSANNE_KITCHEN,L’Océane — Cuisine
 firered-leafgreen,MAP_SSANNE_CAPTAINS_OFFICE,L’Océane — Cabine du Capitaine
@@ -1177,11 +1177,11 @@ firered-leafgreen,MAP_SSANNE_2F_ROOM3,"L’Océane — 1er étage, Salle 3"
 firered-leafgreen,MAP_SSANNE_2F_ROOM4,"L’Océane — 1er étage, Salle 4"
 firered-leafgreen,MAP_SSANNE_2F_ROOM5,"L’Océane — 1er étage, Salle 5"
 firered-leafgreen,MAP_SSANNE_2F_ROOM6,"L’Océane — 1er étage, Salle 6"
-firered-leafgreen,MAP_SSANNE_B1F_ROOM1,"L’Océane — sous-sol 1, Salle 1"
-firered-leafgreen,MAP_SSANNE_B1F_ROOM2,"L’Océane — sous-sol 1, Salle 2"
-firered-leafgreen,MAP_SSANNE_B1F_ROOM3,"L’Océane — sous-sol 1, Salle 3"
-firered-leafgreen,MAP_SSANNE_B1F_ROOM4,"L’Océane — sous-sol 1, Salle 4"
-firered-leafgreen,MAP_SSANNE_B1F_ROOM5,"L’Océane — sous-sol 1, Salle 5"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM1,"L’Océane — 1er sous-sol, Salle 1"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM2,"L’Océane — 1er sous-sol, Salle 2"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM3,"L’Océane — 1er sous-sol, Salle 3"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM4,"L’Océane — 1er sous-sol, Salle 4"
+firered-leafgreen,MAP_SSANNE_B1F_ROOM5,"L’Océane — 1er sous-sol, Salle 5"
 firered-leafgreen,MAP_SSANNE_1F_ROOM6,"L’Océane — rez-de-chaussée, Salle 6"
 firered-leafgreen,MAP_UNDERGROUND_PATH_NORTH_ENTRANCE,Souterrain (nord–sud) — Entrée nord
 firered-leafgreen,MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL,Souterrain (nord–sud) — Galerie
@@ -1190,15 +1190,15 @@ firered-leafgreen,MAP_UNDERGROUND_PATH_WEST_ENTRANCE,Souterrain (est–ouest) �
 firered-leafgreen,MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL,Souterrain (est–ouest) — Galerie
 firered-leafgreen,MAP_UNDERGROUND_PATH_EAST_ENTRANCE,Souterrain (est–ouest) — Entrée est
 firered-leafgreen,MAP_DIGLETTS_CAVE_NORTH_ENTRANCE,Cave Taupiqueur — Entrée nord
-firered-leafgreen,MAP_DIGLETTS_CAVE_B1F,Cave Taupiqueur — sous-sol 1
+firered-leafgreen,MAP_DIGLETTS_CAVE_B1F,Cave Taupiqueur — 1er sous-sol
 firered-leafgreen,MAP_DIGLETTS_CAVE_SOUTH_ENTRANCE,Cave Taupiqueur — Entrée sud
 firered-leafgreen,MAP_VICTORY_ROAD_1F,Route Victoire — rez-de-chaussée
 firered-leafgreen,MAP_VICTORY_ROAD_2F,Route Victoire — 1er étage
 firered-leafgreen,MAP_VICTORY_ROAD_3F,Route Victoire — 2e étage
-firered-leafgreen,MAP_ROCKET_HIDEOUT_B1F,Repaire Rocket — sous-sol 1
-firered-leafgreen,MAP_ROCKET_HIDEOUT_B2F,Repaire Rocket — sous-sol 2
-firered-leafgreen,MAP_ROCKET_HIDEOUT_B3F,Repaire Rocket — sous-sol 3
-firered-leafgreen,MAP_ROCKET_HIDEOUT_B4F,Repaire Rocket — sous-sol 4
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B1F,Repaire Rocket — 1er sous-sol
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B2F,Repaire Rocket — 2e sous-sol
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B3F,Repaire Rocket — 3e sous-sol
+firered-leafgreen,MAP_ROCKET_HIDEOUT_B4F,Repaire Rocket — 4e sous-sol
 firered-leafgreen,MAP_ROCKET_HIDEOUT_ELEVATOR,Repaire Rocket — Ascenseur
 firered-leafgreen,MAP_SILPH_CO_1F,Sylphe SARL — rez-de-chaussée
 firered-leafgreen,MAP_SILPH_CO_2F,Sylphe SARL — 1er étage
@@ -1215,7 +1215,7 @@ firered-leafgreen,MAP_SILPH_CO_ELEVATOR,Sylphe SARL — Ascenseur
 firered-leafgreen,MAP_POKEMON_MANSION_1F,Manoir Pokémon — rez-de-chaussée
 firered-leafgreen,MAP_POKEMON_MANSION_2F,Manoir Pokémon — 1er étage
 firered-leafgreen,MAP_POKEMON_MANSION_3F,Manoir Pokémon — 2e étage
-firered-leafgreen,MAP_POKEMON_MANSION_B1F,Manoir Pokémon — sous-sol 1
+firered-leafgreen,MAP_POKEMON_MANSION_B1F,Manoir Pokémon — 1er sous-sol
 firered-leafgreen,MAP_SAFARI_ZONE_CENTER,Parc Safari — Zone centrale
 firered-leafgreen,MAP_SAFARI_ZONE_EAST,Parc Safari — Zone est
 firered-leafgreen,MAP_SAFARI_ZONE_NORTH,Parc Safari — Nord
@@ -1227,7 +1227,7 @@ firered-leafgreen,MAP_SAFARI_ZONE_WEST_REST_HOUSE,Parc Safari — Aire de repos 
 firered-leafgreen,MAP_SAFARI_ZONE_SECRET_HOUSE,Parc Safari — Cabane Secrète
 firered-leafgreen,MAP_CERULEAN_CAVE_1F,Grotte Azurée — rez-de-chaussée
 firered-leafgreen,MAP_CERULEAN_CAVE_2F,Grotte Azurée — 1er étage
-firered-leafgreen,MAP_CERULEAN_CAVE_B1F,Grotte Azurée — sous-sol 1
+firered-leafgreen,MAP_CERULEAN_CAVE_B1F,Grotte Azurée — 1er sous-sol
 firered-leafgreen,MAP_POKEMON_LEAGUE_LORELEIS_ROOM,Ligue Pokémon — Salle d’Olga
 firered-leafgreen,MAP_POKEMON_LEAGUE_BRUNOS_ROOM,Ligue Pokémon — Salle d’Aldo
 firered-leafgreen,MAP_POKEMON_LEAGUE_AGATHAS_ROOM,Ligue Pokémon — Salle d’Agatha
@@ -1235,12 +1235,12 @@ firered-leafgreen,MAP_POKEMON_LEAGUE_LANCES_ROOM,Ligue Pokémon — Salle de Pet
 firered-leafgreen,MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM,Ligue Pokémon — Salle du Maître
 firered-leafgreen,MAP_POKEMON_LEAGUE_HALL_OF_FAME,Ligue Pokémon — Panthéon
 firered-leafgreen,MAP_ROCK_TUNNEL_1F,Grotte — rez-de-chaussée
-firered-leafgreen,MAP_ROCK_TUNNEL_B1F,Grotte — sous-sol 1
+firered-leafgreen,MAP_ROCK_TUNNEL_B1F,Grotte — 1er sous-sol
 firered-leafgreen,MAP_SEAFOAM_ISLANDS_1F,Îles Écume — rez-de-chaussée
-firered-leafgreen,MAP_SEAFOAM_ISLANDS_B1F,Îles Écume — sous-sol 1
-firered-leafgreen,MAP_SEAFOAM_ISLANDS_B2F,Îles Écume — sous-sol 2
-firered-leafgreen,MAP_SEAFOAM_ISLANDS_B3F,Îles Écume — sous-sol 3
-firered-leafgreen,MAP_SEAFOAM_ISLANDS_B4F,Îles Écume — sous-sol 4
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B1F,Îles Écume — 1er sous-sol
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B2F,Îles Écume — 2e sous-sol
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B3F,Îles Écume — 3e sous-sol
+firered-leafgreen,MAP_SEAFOAM_ISLANDS_B4F,Îles Écume — 4e sous-sol
 firered-leafgreen,MAP_POKEMON_TOWER_1F,Tour Pokémon — rez-de-chaussée
 firered-leafgreen,MAP_POKEMON_TOWER_2F,Tour Pokémon — 1er étage
 firered-leafgreen,MAP_POKEMON_TOWER_3F,Tour Pokémon — 2e étage
@@ -1249,30 +1249,30 @@ firered-leafgreen,MAP_POKEMON_TOWER_5F,Tour Pokémon — 4e étage
 firered-leafgreen,MAP_POKEMON_TOWER_6F,Tour Pokémon — 5e étage
 firered-leafgreen,MAP_POKEMON_TOWER_7F,Tour Pokémon — 6e étage
 firered-leafgreen,MAP_POWER_PLANT,Centrale
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B4F,"Mont Braise — Chemin du Rubis, sous-sol 4"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B4F,"Mont Braise — Chemin du Rubis, 4e sous-sol"
 firered-leafgreen,MAP_MT_EMBER_EXTERIOR,Mont Braise — Extérieur
 firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_1F,"Mont Braise — Chemin du sommet, rez-de-chaussée"
 firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_2F,"Mont Braise — Chemin du sommet, 1er étage"
 firered-leafgreen,MAP_MT_EMBER_SUMMIT_PATH_3F,"Mont Braise — Chemin du sommet, 2e étage"
 firered-leafgreen,MAP_MT_EMBER_SUMMIT,Mont Braise — Sommet
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B5F,"Mont Braise — Chemin du Rubis, sous-sol 5"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B5F,"Mont Braise — Chemin du Rubis, 5e sous-sol"
 firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_1F,"Mont Braise — Chemin du Rubis, rez-de-chaussée"
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F,"Mont Braise — Chemin du Rubis, sous-sol 1"
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F,"Mont Braise — Chemin du Rubis, sous-sol 2"
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B3F,"Mont Braise — Chemin du Rubis, sous-sol 3"
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS,"Mont Braise — Chemin du Rubis, sous-sol 1, Escalier"
-firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS,"Mont Braise — Chemin du Rubis, sous-sol 2, Escalier"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F,"Mont Braise — Chemin du Rubis, 1er sous-sol"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F,"Mont Braise — Chemin du Rubis, 2e sous-sol"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B3F,"Mont Braise — Chemin du Rubis, 3e sous-sol"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS,"Mont Braise — Chemin du Rubis, 1er sous-sol, Escalier"
+firered-leafgreen,MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS,"Mont Braise — Chemin du Rubis, 2e sous-sol, Escalier"
 firered-leafgreen,MAP_THREE_ISLAND_BERRY_FOREST,Bois aux Baies
 firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE,Grotte de Glace — Entrée
 firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_1F,Grotte de Glace — rez-de-chaussée
-firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F,Grotte de Glace — sous-sol 1
+firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F,Grotte de Glace — 1er sous-sol
 firered-leafgreen,MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK,Grotte de Glace — Salle du fond
 firered-leafgreen,MAP_FIVE_ISLAND_ROCKET_WAREHOUSE,Entrepôt Rocket
 firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_1F,Trou Percé — rez-de-chaussée
-firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B1F,Trou Percé — sous-sol 1
-firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B2F,Trou Percé — sous-sol 2
-firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B3F,Trou Percé — sous-sol 3
-firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B4F,Trou Percé — sous-sol 4
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B1F,Trou Percé — 1er sous-sol
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B2F,Trou Percé — 2e sous-sol
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B3F,Trou Percé — 3e sous-sol
+firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_B4F,Trou Percé — 4e sous-sol
 firered-leafgreen,MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM,Trou Percé — Salle du Saphir
 firered-leafgreen,MAP_SIX_ISLAND_PATTERN_BUSH,Forbuissons
 firered-leafgreen,MAP_SIX_ISLAND_ALTERING_CAVE,Grotte Métamo
@@ -1319,18 +1319,18 @@ firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_2F,"Roc Nombri — Chemin du sommet
 firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_3F,"Roc Nombri — Chemin du sommet, 2e étage"
 firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_4F,"Roc Nombri — Chemin du sommet, 3e étage"
 firered-leafgreen,MAP_NAVEL_ROCK_SUMMIT_PATH_5F,"Roc Nombri — Chemin du sommet, 4e étage"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B1F,"Roc Nombri — Chemin des profondeurs, sous-sol 1"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B2F,"Roc Nombri — Chemin des profondeurs, sous-sol 2"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B3F,"Roc Nombri — Chemin des profondeurs, sous-sol 3"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B4F,"Roc Nombri — Chemin des profondeurs, sous-sol 4"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B5F,"Roc Nombri — Chemin des profondeurs, sous-sol 5"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B6F,"Roc Nombri — Chemin des profondeurs, sous-sol 6"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B7F,"Roc Nombri — Chemin des profondeurs, sous-sol 7"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B8F,"Roc Nombri — Chemin des profondeurs, sous-sol 8"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B9F,"Roc Nombri — Chemin des profondeurs, sous-sol 9"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B10F,"Roc Nombri — Chemin des profondeurs, sous-sol 10"
-firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B11F,"Roc Nombri — Chemin des profondeurs, sous-sol 11"
-firered-leafgreen,MAP_NAVEL_ROCK_B1F,Roc Nombri — sous-sol 1
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B1F,"Roc Nombri — Chemin des profondeurs, 1er sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B2F,"Roc Nombri — Chemin des profondeurs, 2e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B3F,"Roc Nombri — Chemin des profondeurs, 3e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B4F,"Roc Nombri — Chemin des profondeurs, 4e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B5F,"Roc Nombri — Chemin des profondeurs, 5e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B6F,"Roc Nombri — Chemin des profondeurs, 6e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B7F,"Roc Nombri — Chemin des profondeurs, 7e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B8F,"Roc Nombri — Chemin des profondeurs, 8e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B9F,"Roc Nombri — Chemin des profondeurs, 9e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B10F,"Roc Nombri — Chemin des profondeurs, 10e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_BASE_PATH_B11F,"Roc Nombri — Chemin des profondeurs, 11e sous-sol"
+firered-leafgreen,MAP_NAVEL_ROCK_B1F,Roc Nombri — 1er sous-sol
 firered-leafgreen,MAP_NAVEL_ROCK_FORK,Roc Nombri — Bifurcation
 firered-leafgreen,MAP_BIRTH_ISLAND_EXTERIOR,Île Aurore — Extérieur
 firered-leafgreen,MAP_ONE_ISLAND_KINDLE_ROAD_EMBER_SPA,Source Braise

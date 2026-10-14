@@ -2,6 +2,7 @@ package org.opensources.pokmaps.domain.usecase
 
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.data.map.MapTiles
 import org.opensources.pokmaps.data.repository.GameRepository
@@ -73,14 +74,26 @@ class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapReposi
 /** Tuiles d'une carte affichable, lues dans les assets. */
 class GetMapTilesUseCase @Inject constructor(private val tiles: MapTiles) {
     operator fun invoke(map: GameMap): TileStreamProvider = tiles.provider(map)
+
+    /** Mer répétée sous la carte (Îles Sevii), null si la carte n'en a pas. */
+    fun sea(map: GameMap): TileStreamProvider? = tiles.seaProvider(map)
 }
 
-/** Filtres de la carte choisis par l'utilisateur (tous affichés par défaut). */
+/** Filtres de la carte choisis par l'utilisateur (tous affichés par défaut, y compris un calque ajouté depuis). */
 class MapLayersUseCase @Inject constructor(private val settings: MapSettings) {
-    val layers: Flow<Set<MapLayer>> = settings.layers.map { names ->
-        names?.mapNotNull { name -> MapLayer.entries.firstOrNull { it.name == name } }?.toSet()
-            ?: MapLayer.entries.toSet()
+    val layers: Flow<Set<MapLayer>> = combine(settings.layers, settings.knownLayers) { names, known ->
+        if (names == null) return@combine MapLayer.entries.toSet()
+        val shown = names.mapNotNull { name -> MapLayer.entries.firstOrNull { it.name == name } }.toSet()
+        val existing = known?.mapNotNull { name -> MapLayer.entries.firstOrNull { it.name == name } }?.toSet()
+            ?: LAYERS_BEFORE_SECRET_BASES
+        shown + (MapLayer.entries.toSet() - existing)
     }
 
-    suspend fun set(layers: Set<MapLayer>) = settings.setLayers(layers.map { it.name }.toSet())
+    suspend fun set(layers: Set<MapLayer>) =
+        settings.setLayers(layers.map { it.name }.toSet(), MapLayer.entries.map { it.name }.toSet())
+
+    private companion object {
+        /** Calques des choix enregistrés avant que les calques connus soient mémorisés. */
+        val LAYERS_BEFORE_SECRET_BASES = MapLayer.entries.toSet() - MapLayer.SECRET_BASES
+    }
 }

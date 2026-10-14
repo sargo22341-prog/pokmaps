@@ -13,7 +13,8 @@ private val DEFINITIONS = listOf(
         GuideCategory.SIDE_QUEST,
         GOLD_SILVER_CRYSTAL_VERSIONS,
         201,
-        listOf("https://github.com/pret/pokecrystal")
+        listOf("https://github.com/pret/pokecrystal"),
+        unownGoal = true
     ),
     GuideDefinition(
         "johto-gifts",

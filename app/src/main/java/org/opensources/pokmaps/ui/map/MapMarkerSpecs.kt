@@ -9,7 +9,10 @@ import ovh.plrapps.mapcompose.ui.state.MapState
 internal sealed interface MarkerContent {
     data class Warp(val alwaysVisible: Boolean, val color: Color) : MarkerContent
 
-    data class MirageIsland(val alwaysVisible: Boolean) : MarkerContent
+    /** Accès à l'île superposée, ou retour à la route (`returnTo`, nom de la route) quand elle est affichée. */
+    data class MirageIsland(val alwaysVisible: Boolean, val returnTo: String?) : MarkerContent
+
+    data class SecretBase(val alwaysVisible: Boolean) : MarkerContent
 
     /** Objet, dresseur, personnage, Pokémon fixe ou installation. */
     data class Element(
@@ -38,9 +41,19 @@ internal data class MarkerSpec(
 internal fun MarkerContent.Draw(mapState: MapState) {
     when (this) {
         is MarkerContent.Warp -> WarpMarker(mapState, alwaysVisible = alwaysVisible, color = color)
-        is MarkerContent.MirageIsland -> MirageIslandMarker(mapState, alwaysVisible = alwaysVisible)
+
+        is MarkerContent.MirageIsland -> MirageIslandMarker(
+            mapState,
+            alwaysVisible = alwaysVisible,
+            returnTo = returnTo
+        )
+
+        is MarkerContent.SecretBase -> SecretBaseMarker(mapState, alwaysVisible = alwaysVisible)
+
         is MarkerContent.Element -> ObjectMarker(mapState, obj, versionGroupIdentifier, alwaysVisible, scale)
+
         is MarkerContent.Wild -> WildPokemonMarker(mapState, wild)
+
         MarkerContent.Highlight -> HighlightMarker()
     }
 }

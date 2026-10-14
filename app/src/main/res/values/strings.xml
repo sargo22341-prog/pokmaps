@@ -152,10 +152,12 @@
     <string name="map_layer_trainers">Dresseurs</string>
     <string name="map_layer_static_pokemon">Pokémon fixes</string>
     <string name="map_back_to">Retour : %1$s</string>
-    <string name="map_floor_ground">RdC</string>
-    <string name="map_floor_storey">%1$d</string>
+    <string name="map_floor_ground">RDC</string>
+    <string name="map_floor_first">1er</string>
+    <string name="map_floor_storey">%1$de</string>
     <string name="map_floor_basement">-%1$d</string>
     <string name="map_floor_roof">Toit</string>
+    <string name="map_floor_summit">Sommet</string>
     <string name="map_floor_elevator">Asc.</string>
     <string name="map_no_encounter">Aucun Pokémon sauvage.</string>
     <string name="map_places">Lieux accessibles</string>
@@ -630,6 +632,9 @@
     <string name="map_floor_low_tide">Marée basse</string>
     <string name="map_floor_low_tide_basement">Marée basse · Sous-sol</string>
     <string name="map_mirage_island">Île Mirage</string>
+    <string name="map_mirage_return">Retour au %1$s</string>
+    <string name="map_secret_base">Base Secrète</string>
+    <string name="map_layer_secret_bases">Bases secrètes</string>
     <string name="collection_load_error">Impossible de lire les captures et favoris enregistrés.</string>
     <string name="collection_save_error">
         Enregistrement impossible. Réessayez en touchant à nouveau la capture ou le favori.

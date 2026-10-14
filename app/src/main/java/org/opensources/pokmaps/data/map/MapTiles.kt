@@ -26,4 +26,9 @@ class AssetManagerFiles @Inject constructor(private val assets: AssetManager) : 
 class MapTiles @Inject constructor(private val files: AssetFiles) {
     fun provider(map: GameMap): TileStreamProvider =
         TileStreamProvider { row, column, level -> files.open(map.tilePath(level, row, column)) }
+
+    /** Mer répétée sous la carte, null si la carte n'en a pas. */
+    fun seaProvider(map: GameMap): TileStreamProvider? = map.seaTilePath(0)?.let {
+        TileStreamProvider { _, _, level -> map.seaTilePath(level)?.let(files::open) }
+    }
 }

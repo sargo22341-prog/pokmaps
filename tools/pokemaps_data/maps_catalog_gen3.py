@@ -40,6 +40,7 @@ def map_data(
                 row["target"] or None,
                 int(row["target_x"]) if row["target_x"] else None,
                 int(row["target_y"]) if row["target_y"] else None,
+                row["kind"] or None,
             )
             for row in csv.DictReader(handle, delimiter="\t")
         ]
@@ -78,4 +79,5 @@ def _map_row(row: dict[str, str]) -> MapRow:
         row["is_world"] == "True",
         row["origin"] or None,
         row["start"] or None,
+        row["version"] or None,
     )

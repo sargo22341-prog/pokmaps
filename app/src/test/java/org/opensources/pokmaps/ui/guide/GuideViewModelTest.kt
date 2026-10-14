@@ -17,7 +17,6 @@ import org.opensources.pokmaps.domain.guide.GuideLibrary
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideSpan
 import org.opensources.pokmaps.domain.guide.GuideTarget
-import org.opensources.pokmaps.domain.guide.RoamerObservation
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.Guides
 import org.opensources.pokmaps.domain.usecase.MapRequest
@@ -119,42 +118,34 @@ class GuideViewModelTest {
     }
 
     @Test
-    fun roamerWritesCanBeClearedAndFailuresRemainVisible() = runTest {
+    fun roamersArePresentedOnlyInTheirArticleAndRemakeUnownFormsAreCounted() = runTest {
         val guides = MemoryGuides()
-        guides.value.value = GuideLibrary(FakeGameDao.EMERALD, emptyList()) to GuideProgress()
+        val roamers = article("hoenn-roamers")
+        guides.value.value = GuideLibrary(FakeGameDao.EMERALD, listOf(roamers)) to GuideProgress()
         val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
-        assertTrue(model.state.value.observedRoamers.isEmpty())
-        model.onAction(GuideAction.ObserveRoamer(380, "route110"))
-        assertEquals("route110", model.state.value.observedRoamers[380]?.identifier)
-        guides.failing = true
-        model.onAction(GuideAction.ObserveRoamer(381, "route134"))
-        assertTrue(model.state.value.writeFailed)
-        assertEquals(setOf(380), model.state.value.observedRoamers.keys)
-        guides.failing = false
-        model.onAction(GuideAction.ObserveRoamer(380, null))
-        assertTrue(model.state.value.observedRoamers.isEmpty())
-        assertFalse(model.state.value.writeFailed)
-    }
-
-    @Test
-    fun changingBranchesReplacesRoamerRoutesAndCountsAll28RemakeUnownForms() = runTest {
-        val guides = MemoryGuides()
-        guides.value.value = GuideLibrary(FakeGameDao.EMERALD, emptyList()) to
-            GuideProgress(roamers = listOf(RoamerObservation(380, "route110")))
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
-        assertEquals(20, model.state.value.roamerLocations.size)
+        assertTrue(model.state.value.roamers.isEmpty())
+        model.onAction(GuideAction.Category(GuideCategory.TIP))
+        model.onAction(GuideAction.Article(roamers.id))
+        assertEquals(listOf(380, 381), model.state.value.roamers.map { it.pokemonId })
         val collection = article("remake-collections").copy(unownGoal = true)
         guides.value.value = GuideLibrary(
             FakeGameDao.FIRERED,
             listOf(collection),
             unown = setOf(UnownForm.A, UnownForm.QUESTION)
         ) to GuideProgress()
-        assertTrue(model.state.value.observedRoamers.isEmpty())
-        assertEquals(25, model.state.value.roamerLocations.size)
+        assertTrue(model.state.value.roamers.isEmpty())
         assertEquals(28, model.state.value.captureTotals[collection.id])
         assertEquals(2, model.state.value.captureCounts[collection.id])
         guides.value.value = GuideLibrary(FakeGameDao.GOLD, listOf(collection)) to GuideProgress()
         assertEquals(26, model.state.value.captureTotals[collection.id])
+    }
+
+    @Test
+    fun secretBaseLinkAsksTheMapToShowItsEntrance() = runTest {
+        val requests = MapRequests()
+        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { null }, requests)
+        model.onAction(GuideAction.ShowSecretBase(42))
+        assertEquals(MapRequest.ShowSecretBase(42), requests.pending.value)
     }
 
     private fun article(id: String) =
@@ -172,11 +163,4 @@ private class MemoryGuides : Guides {
         value
     }
     override suspend fun complete(versionId: Int, id: String, completed: Boolean): Unit = error("Écriture impossible")
-    override suspend fun observeRoamer(versionId: Int, pokemonId: Int, place: String?) {
-        if (failing) error("Écriture impossible")
-        val library = value.value.first
-        require(versionId == library.game.versionId)
-        value.value =
-            library to GuideProgress(roamers = place?.let { listOf(RoamerObservation(pokemonId, it)) }.orEmpty())
-    }
 }

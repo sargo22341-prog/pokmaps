@@ -14,6 +14,7 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapWarp
 import org.opensources.pokmaps.domain.map.MapZoom
 import org.opensources.pokmaps.domain.map.MarkerSizing
+import org.opensources.pokmaps.domain.map.WarpKind
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.usecase.GetMapTilesUseCase
 import ovh.plrapps.mapcompose.api.BoundingBox
@@ -52,10 +53,14 @@ internal class MapNavigation(
     private var positioned = false
     private var centerGroundId: Int? = null
 
+    /** Entrée d'où l'on a ouvert la Base Secrète affichée : son modèle sert à des dizaines d'emplacements. */
+    private var baseEntrance: MapWarp? = null
+
     /** Oublie les zooms mémorisés (les cartes du nouveau jeu sont différentes). */
     fun forgetScales() {
         scales.clear()
         centerGroundId = null
+        baseEntrance = null
     }
 
     fun selectWorld(mapId: Int) {
@@ -94,6 +99,10 @@ internal class MapNavigation(
         }
         if (map.identifier == "pokecenter-2f-plan" && centerGroundId != null) {
             centerGroundId?.let { open(it) }
+            return
+        }
+        baseEntrance?.takeIf { it.targetMapId == map.id }?.let { entrance ->
+            open(entrance.mapId, entrance.x, entrance.y)
             return
         }
         val entrance = catalog.parentEntrance(map.id)
@@ -136,12 +145,27 @@ internal class MapNavigation(
         session.refreshOverlays()
     }
 
+    /** Centre la carte sur l'entrée d'une Base Secrète et la met en évidence. */
+    fun focusSecretBase(warp: MapWarp) {
+        session.update { it.copy(detail = null, zoneListOpen = false) }
+        open(warp.mapId, warp.x, warp.y)
+        session.updateOverlays { it.copy(focusedWarpId = warp.id) }
+        session.refreshOverlays()
+    }
+
     /**
      * Affiche la carte qui contient `mapId`, centrée sur (x, y) en pixels si donnés, sinon sur la ville ou la route,
      * au zoom `scale` (zoom rapproché par défaut), et sélectionne ce lieu.
      */
     fun open(mapId: Int, x: Int? = null, y: Int? = null, scale: Double? = null) {
         val catalog = session.catalog ?: return
+        val island = catalog.overlayIsland
+        if (island != null && mapId == island.islandId) {
+            // L'île apparaît à sa place sur la carte du monde, sans carte à part.
+            open(island.routeId, x ?: island.show.x, y ?: island.show.y, scale)
+            selection.selectZone(catalog, island.islandId)
+            return
+        }
         val displayed = catalog.displayedMapOf(mapId) ?: return
         val target = catalog.maps[mapId] ?: return
         val focusX = x ?: (if (target.parentId != null && displayed.isWorld) target.x + target.width / 2 else null)
@@ -182,6 +206,7 @@ internal class MapNavigation(
             it.copy(
                 wildMarkers = emptyList(),
                 focusedObjectId = null,
+                focusedWarpId = null,
                 objectScales = MarkerSizing.objectScales(objects)
             )
         }
@@ -197,6 +222,7 @@ internal class MapNavigation(
                 map = map,
                 hasConnections = catalog.connectionsOf(map.id).isNotEmpty(),
                 hasFruitTrees = objects.any { it.fruit != null },
+                hasSecretBases = catalog.secretBases.isNotEmpty(),
                 worldId = catalog.regionWorldOf(map.id)?.id,
                 mapState = mapState,
                 zone = null,
@@ -241,6 +267,8 @@ internal class MapNavigation(
         }.apply {
             // Les bords de la carte peuvent venir jusqu'au milieu de l'écran : tout lieu peut y être centré.
             setScrollOffsetRatio(EDGE_SCROLL_RATIO, EDGE_SCROLL_RATIO)
+            // La mer répétée passe sous la carte : les tuiles absentes de la carte laissent voir l'eau.
+            getMapTiles.sea(map)?.let { addLayer(it) }
             addLayer(getMapTiles(map))
             setMapBackground(if (map.identifier == "sevii") SEVII_BACKGROUND else MAP_BACKGROUND)
             addLazyLoader(MapMarkerIds.LAZY_LOADER, padding = 64.dp)
@@ -301,6 +329,11 @@ internal class MapNavigation(
         }
         if (map.regions.isEmpty()) return
         val zone = map.regions.firstOrNull { it.contains(px, py) }?.id
+        val island = catalog.overlayIsland
+        // L'île affichée reste sélectionnée sur sa route : son passage de retour la masque.
+        if (island != null && zone == island.routeId && catalog.isIslandShown(map.id, session.current.zone?.mapId)) {
+            return
+        }
         if (zone == null) {
             selection.clearZone()
         } else if (zone != session.current.zone?.mapId) {
@@ -316,11 +349,34 @@ internal class MapNavigation(
     }
 
     /** Entrées dessinées sur la carte (calque des entrées affiché). */
-    private fun visibleEntrances(catalog: MapCatalog, mapId: Int): List<MapWarp> =
-        if (MapLayer.WARPS in session.current.layers) catalog.entrancesOf(mapId) else emptyList()
+    private fun visibleEntrances(catalog: MapCatalog, mapId: Int): List<MapWarp> {
+        val layers = session.current.layers
+        val zoneId = session.current.zone?.mapId
+        val entrances = if (MapLayer.WARPS in layers) catalog.displayedEntrances(mapId, zoneId) else emptyList()
+        val bases = if (MapLayer.SECRET_BASES in
+            layers
+        ) {
+            catalog.secretBasesOf(mapId).map { it.entrance }
+        } else {
+            emptyList()
+        }
+        return entrances + bases
+    }
 
     private fun enter(catalog: MapCatalog, warp: MapWarp) {
         val target = catalog.maps[warp.targetMapId ?: return] ?: return
+        when (warp.kind) {
+            WarpKind.MIRAGE -> {
+                // Montrer l'île la sélectionne sur la carte du monde ; le retour sélectionne sa route.
+                session.update { it.copy(detail = null, zoneListOpen = false) }
+                selection.selectZone(catalog, target.id)
+                return
+            }
+
+            WarpKind.SECRET_BASE -> baseEntrance = warp
+
+            WarpKind.WARP, WarpKind.DIVE, WarpKind.CABLE_CAR -> Unit
+        }
         openPlace(MapPlace(target.id, target.name, warp.targetX, warp.targetY))
     }
 
@@ -345,7 +401,7 @@ internal class MapNavigation(
         val parts = id.split(':')
         val value = parts.getOrNull(1)?.toIntOrNull() ?: return
         when (parts[0]) {
-            MapMarkerIds.WARP, MapMarkerIds.HIGHLIGHT_WARP -> {
+            MapMarkerIds.WARP, MapMarkerIds.HIGHLIGHT_WARP, MapMarkerIds.SECRET_BASE -> {
                 val warp = catalog.warps.values.asSequence().flatten().firstOrNull { it.id == value } ?: return
                 enter(catalog, warp)
             }

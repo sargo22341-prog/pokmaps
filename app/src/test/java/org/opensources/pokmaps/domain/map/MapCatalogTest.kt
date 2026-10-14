@@ -60,6 +60,11 @@ class MapCatalogTest {
         assertEquals("pokemon-tower" to FloorLevel.Storey(0), FloorLevel.parse("pokemon-tower-1f"))
         assertEquals("celadon-mart" to FloorLevel.Roof, FloorLevel.parse("celadon-mart-roof"))
         assertEquals("rocket-hideout" to FloorLevel.Elevator, FloorLevel.parse("rocket-hideout-elevator"))
+        assertEquals("mt-pyre" to FloorLevel.Summit, FloorLevel.parse("mt-pyre-summit-plan"))
+        assertEquals(
+            "lilycove-city-department-store" to FloorLevel.Roof,
+            FloorLevel.parse("lilycove-city-department-store-roof-plan")
+        )
         assertNull(FloorLevel.parse("celadon-mansion-roof-house"))
         assertNull(FloorLevel.parse("ss-anne-1f-rooms"))
         assertNull(FloorLevel.parse("route-3"))

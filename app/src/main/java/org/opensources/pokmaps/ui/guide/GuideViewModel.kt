@@ -18,7 +18,6 @@ import org.opensources.pokmaps.domain.guide.GuideLibrary
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.guide.RoamerChoice
-import org.opensources.pokmaps.domain.guide.RoamerLocation
 import org.opensources.pokmaps.domain.guide.Roamers
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.GuidePreview
@@ -42,11 +41,11 @@ data class GuideUiState(
     val writeFailed: Boolean = false
 ) {
     val article: GuideArticle? = library?.articles?.firstOrNull { it.id == articleId }
-    val roamers: List<RoamerChoice> = library?.game?.let { Roamers.choices(it.versionId) }.orEmpty()
-    val roamerLocations: List<RoamerLocation> = library?.game?.let { Roamers.locations(it.versionId) }.orEmpty()
-    val observedRoamers: Map<Int, RoamerLocation> = progress.roamers.associate { observation ->
-        observation.pokemonId to roamerLocations.first { it.identifier == observation.place }
-    }
+
+    /** Errants présentés dans l'article ouvert, s'il est celui des errants de la version. */
+    val roamers: List<RoamerChoice> = library?.game?.versionId
+        ?.takeIf { Roamers.article(it) == articleId }
+        ?.let(Roamers::choices).orEmpty()
     val articles: List<GuideArticle> = library?.articles.orEmpty().filter { it.category == category }
     val related: List<GuideArticle> = library?.articles.orEmpty().filter { it.id in article?.relatedIds.orEmpty() }
         .sortedByDescending { it.missable }
@@ -85,7 +84,9 @@ sealed interface GuideAction {
     data class Article(val id: String) : GuideAction
     data object Back : GuideAction
     data class Complete(val id: String, val completed: Boolean) : GuideAction
-    data class ObserveRoamer(val pokemonId: Int, val place: String?) : GuideAction
+
+    /** Montre sur la carte l'entrée d'une Base Secrète (liste des astuces). */
+    data class ShowSecretBase(val warpId: Int) : GuideAction
     data class Preview(val target: GuideTarget) : GuideAction
     data object ClosePreview : GuideAction
     data class ShowPlace(val identifier: String) : GuideAction
@@ -160,9 +161,7 @@ class GuideViewModel internal constructor(
 
             is GuideAction.Complete -> complete(action)
 
-            is GuideAction.ObserveRoamer -> write { version ->
-                guides.observeRoamer(version, action.pokemonId, action.place)
-            }
+            is GuideAction.ShowSecretBase -> mapRequests.send(MapRequest.ShowSecretBase(action.warpId))
 
             is GuideAction.Preview -> openPreview(action.target)
 

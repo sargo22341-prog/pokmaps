@@ -25,7 +25,7 @@ from .pret_gen2 import Gen2PretRepo
 from .pret_gen3 import Gen3PretRepo
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 16
+SCHEMA_VERSION = 17
 
 # Pokédex National de PokéAPI, ajouté aux jeux qui le débloquent (games.Game.national_dex).
 NATIONAL_DEX = "national"
