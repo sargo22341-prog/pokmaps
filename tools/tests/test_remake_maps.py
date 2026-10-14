@@ -31,7 +31,7 @@ def test_remake_catalog_has_separate_regions_and_complete_plans(assets: Path) ->
     folder = assets / "maps/firered-leafgreen"
     validate_catalog(folder)
     rows = _rows(folder)
-    assert len(rows) == 504
+    assert len(rows) == 509
     assert {c for c, row in rows.items() if row["is_world"] == "True"} == {"KANTO", "SEVII"}
     assert not any("PROTOTYPE" in c or "UNUSED" in c for c in rows)
     assert rows["MAP_PALLET_TOWN"]["parent"] == "KANTO"
@@ -43,6 +43,15 @@ def test_remake_catalog_has_separate_regions_and_complete_plans(assets: Path) ->
             assert rows[f"MAP_{stem}_{floor}F"]["parent"] == f"{stem}_{floor}F_PLAN"
     assert rows["MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS"]["parent"] == "MT_EMBER_RUBY_PATH_B1F_PLAN"
     assert rows["MAP_NAVEL_ROCK_FORK"]["parent"] == "NAVEL_ROCK_B2F_PLAN"
+    for room, plan in (
+        ("MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE", "CINNABAR_ISLAND_POKEMON_LAB_PLAN"),
+        ("MAP_CINNABAR_ISLAND_POKEMON_LAB_LOUNGE", "CINNABAR_ISLAND_POKEMON_LAB_PLAN"),
+        ("MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM", "POKEMON_LEAGUE_PLAN"),
+        ("MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE", "FIVE_ISLAND_LOST_CAVE_PLAN"),
+    ):
+        assert rows[room]["parent"] == plan
+    # Rez-de-chaussée de la Route Victoire : la bande de rochers qui l'élargissait est retirée.
+    assert (rows["MAP_VICTORY_ROAD_1F"]["width"], rows["MAP_VICTORY_ROAD_1F"]["height"]) == ("416", "352")
     chambers = [row for c, row in rows.items() if c.endswith("_CHAMBER")]
     assert len(chambers) == 7 and {row["parent"] for row in chambers} == {"TANOBY_RUINS_PLAN"}
     assert {row["name_fr"] for row in chambers} == {
@@ -105,7 +114,7 @@ def test_remake_curation_is_used_and_distinct_from_original_kanto(remake_maps: G
     for entries in (curation.anchors, curation.parents, curation.plans):
         assert {entry.map for entry in entries if entry.family == family} <= remake_maps.maps.keys()
     assert len(remake_maps.anchors) == 6
-    assert len(remake_maps.plans) == 85
+    assert len(remake_maps.plans) == 90  # avec le Labo de Cramois’Île, la Ligue, la Grotte Perdue…
     assert all(part.family == family for part in remake_maps.plan_parts)
     assert len(remake_maps.plans["TANOBY_RUINS_PLAN"].parts) == 7
     assert len(remake_maps.plans["MT_EMBER_RUBY_PATH_B1F_PLAN"].parts) == 2

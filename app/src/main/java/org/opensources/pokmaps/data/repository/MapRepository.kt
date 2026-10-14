@@ -69,6 +69,7 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
         val maps = dao.maps(vg, version).map { it.toInfo() }.associateBy { it.id }
         return MapCatalog(
             versionGroupIdentifier = game.versionGroupIdentifier,
+            versionIdentifier = game.versionIdentifier,
             maps = maps,
             warps = dao.warps(vg, version)
                 .map {

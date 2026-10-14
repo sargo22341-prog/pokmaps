@@ -692,6 +692,10 @@
     <string name="guide_unown_progress">
         Alphabet local : %1$d / %2$d
     </string>
+    <string name="guide_unown_hint">
+        Ce compteur suit les formes de Zarbi cochées pour cette version ; touchez-le pour ouvrir l’alphabet et cocher
+        les lettres capturées. Il ne déverrouille aucun succès.
+    </string>
     <string name="guide_alph_title">
         Ruines d’Alpha · Quatre puzzles et 26 lettres
     </string>

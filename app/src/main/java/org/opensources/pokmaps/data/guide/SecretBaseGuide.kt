@@ -21,12 +21,13 @@ internal fun secretBaseGuide(context: Context, catalog: MapCatalog): GuideArticl
         }
         spans.toList()
     }
+    val count = catalog.secretBases.size
+    val intro = context.resources.getQuantityString(R.plurals.guide_secret_bases_intro, count, count)
     return GuideArticle(
         "hoenn-secret-bases",
         context.getString(R.string.guide_secret_bases_title),
         GuideCategory.TIP,
-        listOf(listOf(GuideSpan(context.getString(R.string.guide_secret_bases_intro, catalog.secretBases.size)))) +
-            places,
+        listOf(listOf(GuideSpan(intro))) + places,
         263,
         listOf(
             "https://github.com/pret/pokeruby/blob/5784633ce4ef/src/secret_base.c",

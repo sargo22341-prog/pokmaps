@@ -27,6 +27,11 @@ class MapTiles @Inject constructor(private val files: AssetFiles) {
     fun provider(map: GameMap): TileStreamProvider =
         TileStreamProvider { row, column, level -> files.open(map.tilePath(level, row, column)) }
 
+    /** Retouches de la version, par-dessus la carte ; null si la carte n'en a pas dans cette version. */
+    fun versionProvider(map: GameMap): TileStreamProvider? = map.versionTilePath(0, 0, 0)?.let {
+        TileStreamProvider { row, column, level -> map.versionTilePath(level, row, column)?.let(files::open) }
+    }
+
     /** Mer répétée sous la carte, null si la carte n'en a pas. */
     fun seaProvider(map: GameMap): TileStreamProvider? = map.seaTilePath(0)?.let {
         TileStreamProvider { _, _, level -> map.seaTilePath(level)?.let(files::open) }

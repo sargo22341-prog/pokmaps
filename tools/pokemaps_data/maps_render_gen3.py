@@ -48,12 +48,17 @@ def paint_metatile(
     return image
 
 
+# Tuiles 8×8 par numéro et palettes chargées pour un couple de tilesets.
+_Vram = tuple[dict[int, bytes], tuple[tuple[tuple[int, int, int], ...], ...]]
+
+
 class Gen3Renderer(MapRenderer):
     def __init__(self, game_maps: Gen3GameMaps, repo: Gen3PretRepo) -> None:
         super().__init__(game_maps)
         self.repo = repo
         self._blocks: dict[tuple[str, str], list[Image.Image]] = {}
         self._validated: set[str] = set()
+        self._vrams: dict[tuple[str, str], _Vram] = {}
 
     def blocks(self, pret_map: Gen3Map) -> list[Image.Image]:
         layout = pret_map.layout
@@ -76,8 +81,24 @@ class Gen3Renderer(MapRenderer):
         return result
 
     def _render_blocks(self, primary_name: str, secondary_name: str) -> list[Image.Image]:
+        used = {
+            cell & 0x3FF
+            for current in self.maps.values()
+            if (current.layout.primary_tileset, current.layout.secondary_tileset) == (primary_name, secondary_name)
+            for cell in (*current.layout.cells, *current.layout.border)
+        }
+        images = [Image.new("RGB", (16, 16)) for _ in range(1024)]
+        for number in used:
+            images[number] = self._metatile_image(primary_name, secondary_name, number)
+        return images
+
+    def _vram(self, primary_name: str, secondary_name: str) -> _Vram:
+        """Tuiles 8×8 et palettes chargées pour un couple de tilesets."""
         from .pret_gen3_animation import animation_tiles
 
+        key = (primary_name, secondary_name)
+        if key in self._vrams:
+            return self._vrams[key]
         primary, secondary = self.repo.tilesets[primary_name], self.repo.tilesets[secondary_name]
         # Les palettes réservées sont présentes dans les sources (notamment les fenêtres de Bourg-en-Vol).
         palettes = map_palettes(primary, secondary) + secondary.palettes[13:]
@@ -89,21 +110,41 @@ class Gen3Renderer(MapRenderer):
             for number in range(secondary.tile_count)
         }
         pixels |= animation_tiles(self.repo, primary) | animation_tiles(self.repo, secondary)
-        used = {
-            cell & 0x3FF
-            for current in self.maps.values()
-            if (current.layout.primary_tileset, current.layout.secondary_tileset) == (primary_name, secondary_name)
-            for cell in (*current.layout.cells, *current.layout.border)
-        }
-        images = [Image.new("RGB", (16, 16)) for _ in range(1024)]
-        for number in used:
-            offset = primary.primary_metatile_count
-            source = primary if number < offset else secondary
-            index = number if number < offset else number - offset
-            if index >= len(source.metatiles):
-                raise ValueError(f"{source.const} : métatuile absente : {index}")
-            images[number] = paint_metatile(source.metatiles[index], pixels, palettes)
-        return images
+        self._vrams[key] = (pixels, palettes)
+        return self._vrams[key]
+
+    def _metatile_image(self, primary_name: str, secondary_name: str, number: int) -> Image.Image:
+        primary, secondary = self.repo.tilesets[primary_name], self.repo.tilesets[secondary_name]
+        offset = primary.primary_metatile_count
+        source = primary if number < offset else secondary
+        index = number if number < offset else number - offset
+        if index >= len(source.metatiles):
+            raise ValueError(f"{source.const} : métatuile absente : {index}")
+        return paint_metatile(source.metatiles[index], *self._vram(primary_name, secondary_name))
+
+    def write_version_patch(self, cells: dict[str, dict[tuple[int, int], int]], output: Path) -> int:
+        """Cases qu'une seule version retouche au chargement, sur la grille de leur carte du monde : l'application
+        les dessine par-dessus la carte commune au groupe. Renvoie le nombre de tuiles écrites."""
+        regions = {self.game_maps.world_region[const] for const in cells}
+        if len(regions) != 1:
+            raise ValueError(f"Retouches de version sur plusieurs cartes du monde : {sorted(regions)}")
+        region = regions.pop()
+        placed = [
+            (self.game_maps.world_blocks[region][const], x, y, self.maps[const], number)
+            for const, numbers in cells.items()
+            for (x, y), number in numbers.items()
+        ]
+        left = min((origin[0] + x) * 16 for origin, x, _, _, _ in placed)
+        top = min((origin[1] + y) * 16 for origin, _, y, _, _ in placed)
+        right = max((origin[0] + x + 1) * 16 for origin, x, _, _, _ in placed)
+        bottom = max((origin[1] + y + 1) * 16 for origin, _, y, _, _ in placed)
+        image = Image.new("RGBA", (right - left, bottom - top))
+        for origin, x, y, current, number in placed:
+            layout = current.layout
+            block = self._metatile_image(layout.primary_tileset, layout.secondary_tileset, number)
+            image.paste(block, ((origin[0] + x) * 16 - left, (origin[1] + y) * 16 - top))
+        columns, rows = self.game_maps.world_size(region)
+        return write_region_tiles(image, (left, top), (columns * 16, rows * 16), output)
 
     def write_display(self, const: str, output: Path) -> DisplayMap:
         if const != MIRAGE_ISLAND:

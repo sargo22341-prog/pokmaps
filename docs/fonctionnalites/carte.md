@@ -32,3 +32,9 @@ indépendamment du calque des personnages. Toucher le fruit ouvre la fiche de l�
 Hoenn propose Plongée pour le chenal sélectionné, les marées de la Grotte Tréfonds et les plantations
 du calque Baies. Les remakes séparent Kanto et les Îles Sevii. Aucun filtre ni voile horaire en génération 3.
 Les îles événementielles indiquent leur condition d’accès.
+
+Le marqueur « Île Mirage » du Chenal 130 dessine l’île en place sur la carte de Hoenn ; son marqueur de retour,
+dans l’eau sous la plage, la masque. Le téléphérique relie ses deux stations et les plongées scriptées relient
+surface et fond marin. Le filtre « Bases secrètes » affiche un drapeau par emplacement ; le toucher ouvre la base,
+et le retour ramène à son entrée. Les Îles Sevii reposent sur l’eau répétée du jeu au lieu d’un fond uni.
+Les badges d’étage suivent la même convention partout : « RDC », « 1er », « 2e », « -1 »…

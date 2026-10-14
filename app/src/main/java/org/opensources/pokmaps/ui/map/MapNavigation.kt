@@ -270,6 +270,7 @@ internal class MapNavigation(
             // La mer répétée passe sous la carte : les tuiles absentes de la carte laissent voir l'eau.
             getMapTiles.sea(map)?.let { addLayer(it) }
             addLayer(getMapTiles(map))
+            getMapTiles.version(map)?.let { addLayer(it) }
             setMapBackground(if (map.identifier == "sevii") SEVII_BACKGROUND else MAP_BACKGROUND)
             addLazyLoader(MapMarkerIds.LAZY_LOADER, padding = 64.dp)
             onTap { tapX, tapY -> handleTap(tapX, tapY) }
@@ -353,13 +354,8 @@ internal class MapNavigation(
         val layers = session.current.layers
         val zoneId = session.current.zone?.mapId
         val entrances = if (MapLayer.WARPS in layers) catalog.displayedEntrances(mapId, zoneId) else emptyList()
-        val bases = if (MapLayer.SECRET_BASES in
-            layers
-        ) {
-            catalog.secretBasesOf(mapId).map { it.entrance }
-        } else {
-            emptyList()
-        }
+        val showBases = MapLayer.SECRET_BASES in layers
+        val bases = if (showBases) catalog.secretBasesOf(mapId).map { it.entrance } else emptyList()
         return entrances + bases
     }
 
@@ -466,6 +462,9 @@ internal class MapNavigation(
         const val WARP_TOUCH_MIN_SCALE = 1.0
         const val SHUTDOWN_DELAY_MS = 600L
         val MAP_BACKGROUND = Color(0xFF202028)
-        val SEVII_BACKGROUND = Color(0xFF386898)
+
+        // Teinte moyenne de la mer répétée (sevii-water) : au-delà du bord de la carte, seule une couleur unie est
+        // possible ; elle prolonge l'eau sans cassure de teinte.
+        val SEVII_BACKGROUND = Color(0xFF3568B6)
     }
 }

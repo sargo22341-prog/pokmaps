@@ -96,6 +96,21 @@ class MapSectionsTest {
     }
 
     @Test
+    fun aGateReadOutOfOrderIsStillOneConnection() {
+        val maps = listOf(
+            map(1, "safari-zone-plan", "Parc Safari"),
+            map(2, "safari-zone-center", "Centre").copy(parentId = 1, levelCount = 0),
+            map(3, "safari-zone-north", "Nord").copy(parentId = 1, x = 352, levelCount = 0)
+        )
+        // Les deux cases du bord sont lues avant celle du milieu, qui seule touche les deux.
+        val passages = listOf(1240, 1272, 1256).mapIndexed { index, x -> MapWarp(index + 1, 2, x, 792, 3, x + 80, 552) }
+        val connections = catalog(maps, passages).connectionsOf(1)
+        assertEquals(1, connections.size)
+        assertEquals(setOf(1, 2, 3), connections.single().warpIds)
+        assertEquals(1256, connections.single().x)
+    }
+
+    @Test
     fun compositeZonesAndTheirHousesReturnToTheCorrectWorldEntrance() {
         val maps = listOf(
             map(9, "johto", "Johto").copy(isWorld = true),

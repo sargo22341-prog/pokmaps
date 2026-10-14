@@ -36,7 +36,7 @@ internal fun RoamerCard(roamer: RoamerChoice, version: Int) {
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(name, style = MaterialTheme.typography.titleMedium)
                 Text(stringResource(roamer.condition.label()), style = MaterialTheme.typography.bodyMedium)
-                Text(stringResource(R.string.guide_roamer_level, Roamers.level(version)))
+                Text(stringResource(R.string.catch_level, Roamers.level(version)))
                 Text(stringResource(Roamers.area(version).label()), style = MaterialTheme.typography.bodySmall)
             }
         }

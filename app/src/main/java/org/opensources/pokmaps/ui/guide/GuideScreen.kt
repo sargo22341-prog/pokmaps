@@ -17,7 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -34,19 +37,28 @@ import org.opensources.pokmaps.ui.common.LocalAnimatedPlaces
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SpriteSize
+import org.opensources.pokmaps.ui.unown.UnownRoute
 
-data class GuideLinks(val open: (GuideTarget) -> Unit, val showMap: () -> Unit, val openPokedex: () -> Unit)
+data class GuideLinks(
+    val open: (GuideTarget) -> Unit,
+    val showMap: () -> Unit,
+    val openPokedex: () -> Unit,
+    /** Alphabet des formes de Zarbi, ouvert par le compteur des quêtes des Ruines d'Alpha et de Tanoby. */
+    val openUnown: () -> Unit = {}
+)
 
 @Composable
 fun GuideRoute(links: GuideLinks, modifier: Modifier = Modifier, viewModel: GuideViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var unownOpen by rememberSaveable { mutableStateOf(false) }
+    if (unownOpen) UnownRoute(onDismiss = { unownOpen = false }, shiny = false)
     GuideScreen(
         state,
         onAction = { action ->
             viewModel.onAction(action)
             if (action is GuideAction.ShowPlace || action is GuideAction.ShowObject) links.showMap()
         },
-        links = links,
+        links = links.copy(openUnown = { unownOpen = true }),
         modifier = modifier,
         breedingTool = { BreedingRoute(onPreview = { viewModel.onAction(GuideAction.Preview(it)) }) },
         friendshipTool = { state.library?.game?.let { FriendshipRoute(FriendshipRules.forGame(it)) } }

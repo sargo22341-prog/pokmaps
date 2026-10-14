@@ -105,7 +105,9 @@ data class MapCatalog(
     val objects: Map<Int, List<MapObject>>,
     val areas: Map<Int, List<MapArea>>,
     /** Emplacements des Pokémon sauvages de chaque carte (ville, route ou carte intérieure). */
-    val spots: Map<Int, List<MapSpot>> = emptyMap()
+    val spots: Map<Int, List<MapSpot>> = emptyMap(),
+    /** Version du jeu, pour les dessins qui lui sont propres ; null dans les tests qui n'en dépendent pas. */
+    val versionIdentifier: String? = null
 ) {
     // Index immuables calculés avec le catalogue, hors du fil principal (MapRepository), plutôt qu'à chaque
     // rendu de la carte. Déclarés avant les propriétés qui s'en servent pendant la construction.
@@ -169,7 +171,8 @@ data class MapCatalog(
             levelCount = map.levelCount,
             regions = regionsOf(map.id).map { it.toRegion() },
             isWorld = isWorld(map.id),
-            startRegionId = map.startMapId
+            startRegionId = map.startMapId,
+            versionIdentifier = versionIdentifier
         )
     }
 

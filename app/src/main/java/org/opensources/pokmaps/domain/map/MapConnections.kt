@@ -19,17 +19,19 @@ internal object MapConnections {
 
     fun build(catalog: MapCatalog, mapId: Int): List<MapConnection> {
         if (catalog.isWorld(mapId)) return emptyList()
-        val passages = mutableListOf<MutableList<Step>>()
+        val passages = mutableListOf<List<Step>>()
         for (warp in catalog.partsOf(mapId).flatMap { catalog.warps[it].orEmpty() }) {
             val targetId = warp.targetMapId ?: continue
             if (targetId == warp.mapId || catalog.displayedMapOf(targetId)?.id != mapId) continue
             val step = Step(warp.id, warp.x, warp.y, warp.targetX ?: continue, warp.targetY ?: continue)
             // Une porte large a une case par passage : chacune rejoint le passage d'une case voisine, dans les deux
             // sens, même au-delà de deux cases (les portes du Parc Safari en ont trois).
-            val passage = passages.firstOrNull { members -> members.any { samePassage(it, step) } }
-            if (passage == null) passages += mutableListOf(step) else passage += step
+            // Une case peut relier deux groupes déjà formés (cases lues dans le désordre) : ils n'en font qu'un.
+            val touched = passages.filter { members -> members.any { samePassage(it, step) } }
+            passages.removeAll(touched)
+            passages += (touched.flatten() + step).sortedBy { it.id }
         }
-        return passages.map(::connection)
+        return passages.sortedBy { it.first().id }.map(::connection)
     }
 
     /** Trait du milieu des cases d'un bout au milieu des cases de l'autre, quel que soit le sens de chaque case. */

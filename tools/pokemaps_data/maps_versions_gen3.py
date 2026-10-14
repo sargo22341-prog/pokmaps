@@ -4,12 +4,17 @@ Le script de chargement de Nénucrique ouvre l'entrée de la Planque Magma dans 
 Planque Aqua dans Saphir : les métatuiles posées par `setmetatile` diffèrent entre les deux versions. Un warp
 dont la case n'est praticable que dans certaines versions est bloqué dans les autres ; les cartes qu'on ne
 peut atteindre qu'à travers lui n'appartiennent alors qu'aux versions où il est ouvert.
+
+Le dessin des cartes est commun au groupe : les cases qu'une version retouche ainsi forment un calque propre à
+cette version, dessiné par-dessus la carte du monde.
 """
 
 from __future__ import annotations
 
 import re
 from collections import deque
+from functools import cache
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from .pret_gen3_maps import Gen3Map
@@ -18,6 +23,9 @@ if TYPE_CHECKING:
     from .maps_layout_gen3 import Gen3GameMaps
 
 _ON_LOAD = re.compile(r"^\s*map_script\s+MAP_SCRIPT_ON_LOAD\s*,\s*(\w+)\s*$", re.M)
+_METATILE_LABEL = re.compile(r"^#define\s+(METATILE_\w+)\s+(0x[0-9A-Fa-f]+|\d+)\s*$", re.M)
+# Case (x, y) -> (métatuile posée, collision).
+_Placed = dict[tuple[int, int], tuple[str, int]]
 
 
 def version_maps(game_maps: Gen3GameMaps) -> dict[str, str]:
@@ -37,6 +45,38 @@ def version_maps(game_maps: Gen3GameMaps) -> dict[str, str]:
     return result
 
 
+def version_patches(game_maps: Gen3GameMaps) -> dict[str, dict[str, dict[tuple[int, int], int]]]:
+    """Version -> carte du monde -> case -> numéro de la métatuile que seule cette version pose au chargement."""
+    versions = [version for version, _ in game_maps.repo.versions]
+    if len(versions) < 2:
+        return {}
+    result: dict[str, dict[str, dict[tuple[int, int], int]]] = {}
+    for const, current in sorted(game_maps.maps.items()):
+        placed = {version: _load_metatiles(game_maps, current, version) for version in versions}
+        for version in versions:
+            # Une case est propre à la version si une autre version n'y pose pas la même métatuile.
+            cells = {
+                cell: name
+                for cell, (name, collision) in placed[version].items()
+                if any(placed[other].get(cell) != (name, collision) for other in versions if other != version)
+            }
+            if not cells:
+                continue
+            if const not in game_maps.world_region:
+                raise ValueError(f"{const} : métatuiles propres à {version} hors de la carte du monde")
+            numbers = _metatile_numbers(game_maps.repo.root)
+            if missing := sorted(set(cells.values()) - numbers.keys()):
+                raise ValueError(f"{const} : métatuiles inconnues : {missing}")
+            result.setdefault(version, {})[const] = {cell: numbers[name] for cell, name in cells.items()}
+    return result
+
+
+@cache
+def _metatile_numbers(root: Path) -> dict[str, int]:
+    text = (root / "include/constants/metatile_labels.h").read_text("utf-8")
+    return {name: int(value, 0) for name, value in _METATILE_LABEL.findall(text)}
+
+
 def _blocked_warps(game_maps: Gen3GameMaps, versions: list[str]) -> dict[str, set[tuple[str, int]]]:
     """Version -> warps (carte, indice) fermés dans cette version mais ouverts dans une autre."""
     result: dict[str, set[tuple[str, int]]] = {version: set() for version in versions}
@@ -53,8 +93,8 @@ def _blocked_warps(game_maps: Gen3GameMaps, versions: list[str]) -> dict[str, se
     return result
 
 
-def _load_metatiles(game_maps: Gen3GameMaps, current: Gen3Map, version: str) -> dict[tuple[int, int], int]:
-    """Collision des métatuiles que le script de chargement pose directement, dans la version donnée."""
+def _load_metatiles(game_maps: Gen3GameMaps, current: Gen3Map, version: str) -> _Placed:
+    """Métatuiles et collisions que le script de chargement pose directement, dans la version donnée."""
     relative = f"data/maps/{current.shared_scripts_map or current.label}/scripts.inc"
     if not (game_maps.repo.root / relative).is_file():
         return {}
@@ -72,13 +112,13 @@ def _load_metatiles(game_maps: Gen3GameMaps, current: Gen3Map, version: str) -> 
         if len(instruction.args) != 4 or instruction.args[3] not in {"0", "1", "TRUE", "FALSE"}:
             raise ValueError(f"{instruction.source} : setmetatile inattendu : {instruction.args}")
         collision = 1 if instruction.args[3] in {"1", "TRUE"} else 0
-        placed[int(instruction.args[0]), int(instruction.args[1])] = collision
+        placed[int(instruction.args[0]), int(instruction.args[1])] = (instruction.args[2], collision)
     return placed
 
 
-def _collision(current: Gen3Map, placed: dict[tuple[int, int], int], x: int, y: int) -> int:
+def _collision(current: Gen3Map, placed: _Placed, x: int, y: int) -> int:
     if (x, y) in placed:
-        return placed[x, y]
+        return placed[x, y][1]
     return (current.layout.cells[y * current.width + x] >> 10) & 3
 
 
