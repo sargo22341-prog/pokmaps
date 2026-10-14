@@ -24,8 +24,8 @@ _HOENN_MAPS = frozenset(
         "MarineCave_End",
         "SkyPillar_Top",
         "AquaHideout_B1F",
-        "TeamAquaHideout_B1F",
-        "TeamMagmaHideout_B1F",
+        "MagmaHideout_B1F",
+        "NewMauville_Inside",
         "Route119",
         "Route120",
         "SouthernIsland_Interior",
@@ -50,6 +50,13 @@ _EVENT_MAPS = frozenset({"SouthernIsland_Interior", "NavelRock_Summit", "NavelRo
 
 
 def _pokemon_position(current: Gen3Map, event: Gen3Event) -> Gen3Event:
+    if current.label == "Route120" and event.value("graphics_id") == "OBJ_EVENT_GFX_STEVEN":
+        candidates = [
+            obj for obj in current.objects if "KECLEON" in str(obj.value("graphics_id")) and obj.elevation == 4
+        ]
+        if len(candidates) != 1:
+            raise ValueError("Route120 : Kecleon du pont absent ou ambigu")
+        return candidates[0]
     remote = {"SouthernIsland_Interior", "BirthIsland_Exterior"}
     if "var" not in dict(event.fields) and current.label not in remote:
         return event
@@ -76,7 +83,7 @@ def fixed_encounters(repo: Gen3PretRepo, version: str) -> list[dict[str, object]
     reader = repo.offers[version]
     rows: list[dict[str, object]] = []
     for current in sorted(repo.maps.values(), key=lambda current: current.number):
-        if current.label not in (_REMAKE_MAPS if repo.remake else _HOENN_MAPS):
+        if not _active_fixed_map(repo, current.label, version):
             continue
         for event in (*current.objects, *current.bg_events, *current.coord_events):
             fields = dict(event.fields)
@@ -121,6 +128,15 @@ def fixed_encounters(repo: Gen3PretRepo, version: str) -> list[dict[str, object]
                 if row not in rows:
                     rows.append(row)
     return rows
+
+
+def _active_fixed_map(repo: Gen3PretRepo, label: str, version: str) -> bool:
+    if label not in (_REMAKE_MAPS if repo.remake else _HOENN_MAPS):
+        return False
+    # Nénucrique ouvre seulement la planque de la team propre à la cartouche.
+    if repo.ruby and label in {"AquaHideout_B1F", "MagmaHideout_B1F"}:
+        return label == ("MagmaHideout_B1F" if version == "ruby" else "AquaHideout_B1F")
+    return True
 
 
 def build_fixed_catalog(cache: Path, assets: Path, group: str | None = None) -> None:

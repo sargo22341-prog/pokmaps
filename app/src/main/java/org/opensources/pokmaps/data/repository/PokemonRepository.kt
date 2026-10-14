@@ -60,7 +60,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             (it.attackingTypeId to it.defendingTypeId) to
                 it.factor
         }
-        val moves = dao.moves(pokemonId, game.versionGroupId).map { LearnMethod.from(it.method) to it }
+        val moves = dao.moves(pokemonId, game.versionGroupId, game.versionId).map { LearnMethod.from(it.method) to it }
             .groupBy({ (method, _) -> method.tab }) { (method, row) -> row.toLearnedMove(method) }
         return PokemonDetails(
             id = pokemon.id,

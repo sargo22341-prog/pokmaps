@@ -16,7 +16,23 @@ def validate_hoenn_characters(connection: sqlite3.Connection) -> list[str]:
     for version in ("ruby", "sapphire", "emerald"):
         actors = [row[1:] for row in rows if row[0] == version]
         errors.extend(_check_version(version, actors))
-    return errors
+    return errors + _check_rival_teams(connection)
+
+
+def _check_rival_teams(connection: sqlite3.Connection) -> list[str]:
+    rows = connection.execute(
+        """SELECT v.identifier, m.identifier, count(DISTINCT t.team),
+                  count(DISTINCT t.variant_pokemon_id)
+           FROM map_object o JOIN map m ON m.id = o.map_id JOIN version v ON v.id = o.version_id
+           LEFT JOIN trainer_pokemon t ON t.map_object_id = o.id
+           WHERE v.identifier IN ('ruby', 'sapphire', 'emerald')
+             AND o.kind = 'trainer' AND o.name_fr = 'Flora' GROUP BY o.id"""
+    ).fetchall()
+    return [
+        f"{version}:{label} : trois équipes de Flora selon le partenaire du joueur attendues"
+        for version, label, teams, partners in rows
+        if (teams, partners) != (3, 3)
+    ]
 
 
 def _check_version(version: str, actors: list[tuple[str, str, str | None, str]]) -> list[str]:
@@ -42,7 +58,7 @@ def _check_version(version: str, actors: list[tuple[str, str, str | None, str]])
             errors.append(f"{version}:{label} : apparence de la rivale incorrecte")
     required = {"route103", "route110", "route119", "lilycove-city"}
     if version == "emerald":
-        required |= {"rustboro-city", "route104"}
+        required |= {"rustboro-city"}
     for label in sorted(required):
         count = sum(map_name == label and kind == "trainer" and name == "Flora" for map_name, kind, _, name in actors)
         if count != 1:

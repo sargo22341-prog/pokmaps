@@ -118,10 +118,11 @@ interface PokemonDao {
             AND ma.version_group_id = pm.version_group_id
         LEFT JOIN item i ON i.id = ma.item_id
         WHERE pm.pokemon_id = :pokemonId AND pm.version_group_id = :versionGroupId
+            AND (pm.version_id IS NULL OR pm.version_id = :versionId)
             AND pm.method IN ('level-up', 'machine', 'egg', 'tutor')
         """
     )
-    suspend fun moves(pokemonId: Int, versionGroupId: Int): List<LearnedMoveRow>
+    suspend fun moves(pokemonId: Int, versionGroupId: Int, versionId: Int): List<LearnedMoveRow>
 
     /** Rencontres du Pokémon dans toutes les versions. */
     @Query(

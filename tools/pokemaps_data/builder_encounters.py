@@ -15,6 +15,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .builder_fishing_gen1 import check_fishing_rows, gen1_fishing_encounters
+from .builder_fixed_gen3 import reconcile_fixed_encounters
 from .builder_hoenn_encounters import complete_hoenn_encounters
 from .builder_remake_encounters import complete_remake_encounters
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
@@ -112,6 +113,7 @@ class EncounterTables:
     @cached_property
     def encounter_groups(self) -> list[EncounterGroup]:
         groups = self._apply_curation([replace(group, notes=list(group.notes)) for group in self._uncurated_groups])
+        reconcile_fixed_encounters(self.builder, groups)
         complete_hoenn_encounters(self.builder, groups)
         complete_remake_encounters(self.builder, groups)
         _roaming_conditions(groups, self.method_identifiers)

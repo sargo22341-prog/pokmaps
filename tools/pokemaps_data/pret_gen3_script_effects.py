@@ -18,6 +18,7 @@ def special_writes(root: Path) -> dict[str, frozenset[str]]:
         raise ValueError(f"{root} : trop de fichiers C à analyser")
     writes: dict[str, frozenset[str]] = {}
     calls: dict[str, frozenset[str]] = {}
+    easy_chat_writes: set[str] = set()
     for path in files:
         text = re.sub(r"/\*.*?\*/|//[^\n]*", "", read_text(path), flags=re.S)
         text = re.sub(r'"(?:\\.|[^"\\])*"', '""', text)
@@ -25,8 +26,13 @@ def special_writes(root: Path) -> dict[str, frozenset[str]]:
             modified = re.findall(r"\bgSpecialVar_(\w+)\s*(?:[+*/&|^-]?=(?!=)|\+\+|--)", body)
             variables = {_SPECIAL_VARS.get(var, "VAR_" + var) for var in modified}
             variables.update(re.findall(r"\bVarSet\(\s*(VAR_\w+)\s*,", body))
+            if path.name.startswith("easy_chat"):
+                easy_chat_writes.update(variables)
             writes[name] = writes.get(name, frozenset()) | variables
             calls[name] = calls.get(name, frozenset()) | set(re.findall(r"\b(\w+)\s*\(", body))
+    if "ShowEasyChatScreen" in writes:
+        # Le dialogue rend la main via des callbacks : ses écritures dépassent l'appel C initial.
+        writes["ShowEasyChatScreen"] |= easy_chat_writes
     for _ in range(32):
         expanded = {
             name: variables | frozenset(var for callee in calls[name] for var in writes.get(callee, ()))

@@ -37,6 +37,12 @@ def offer_row(offer: Gen3Offer, repo: Gen3PretRepo, version: str, api: PokeApi, 
         for req in (frozenset.intersection(*offer.paths) if offer.paths else frozenset())
     )
     phrases = (*story.script_phrases(repo_name(repo), requirements, offer.source), *offer.conditions)
+    if pokemon == "beldum":
+        phrases += ("Après la première victoire à la Ligue.",)
+    if pokemon in {"chikorita", "cyndaquil", "totodile"} and version == "emerald":
+        phrases += ("Après avoir capturé les 200 Pokémon requis du Pokédex de Hoenn (Jirachi et Deoxys exclus).",)
+    if kind == "trade":
+        phrases += ("Le Pokémon reçu prend le niveau du Pokémon cédé.",)
     if offer.move:
         move = offer.move.removeprefix("MOVE_").lower().replace("_", "-")
         move_id = next(int(row["id"]) for row in api.table("moves") if row["identifier"] == move)
