@@ -17,14 +17,15 @@ def test_gba_secondary_chance_is_a_percent(tmp_path: Path, extension: str) -> No
     path.parent.mkdir(parents=True)
     path.write_text(
         "const struct BattleMove gBattleMoves[] = {\n"
-        "[MOVE_NONE] = {.effect = EFFECT_HIT, .secondaryEffectChance = 0,},\n"
-        "[MOVE_EMBER] = {.effect = EFFECT_BURN_HIT, .secondaryEffectChance = 10,},\n"
-        "[MOVE_POUND] = {.effect = EFFECT_HIT, .secondaryEffectChance = 0,},\n};",
+        "[MOVE_NONE] = {.effect = EFFECT_HIT, .power = 0, .pp = 0, .secondaryEffectChance = 0,},\n"
+        "[MOVE_EMBER] = {.effect = EFFECT_BURN_HIT, .power = 40, .pp = 25, .secondaryEffectChance = 10,},\n"
+        "[MOVE_POUND] = {.effect = EFFECT_HIT, .power = 40, .pp = 35, .secondaryEffectChance = 0,},\n};",
         encoding="utf-8",
     )
     moves = read_moves(tmp_path)
     assert [move.const for move in moves] == ["EMBER", "POUND"]
     assert moves[0].chance_percent == 10
+    assert (moves[0].power, moves[0].pp) == (40, 25)
     assert moves[0].chance_256 is None
     assert moves[1].chance_percent is None
 
@@ -70,4 +71,4 @@ def test_builder_caches_its_gen3_reader(gen3_builder: DatabaseBuilder) -> None:
 
 def test_probabilities_cannot_mix_units() -> None:
     with pytest.raises(ValueError, match="deux unités"):
-        PretMove("EMBER", "EFFECT_BURN_HIT", chance_256=25, chance_percent=10)
+        PretMove("EMBER", "EFFECT_BURN_HIT", 40, 25, chance_256=25, chance_percent=10)

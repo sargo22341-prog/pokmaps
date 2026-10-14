@@ -1,7 +1,7 @@
 location,area,id,name_fr,reason
 mt-silver,item-rooms,100001,Mont Argenté (salles des objets),"Or et Argent : salles où l'on trouve les objets, avec leur propre table de rencontres ; PokéAPI ne les distingue pas du 1er étage"
 goldenrod-city,,100002,Doublonville,"Or et Argent : on pêche dans le canal de la ville ; PokéAPI n'a de zones que pour ses bâtiments"
-cerulean-city,gym,100003,Arène d'Azuria,"Or et Argent : on pêche dans le bassin de l'Arène ; PokéAPI ne la distingue pas de la ville"
+cerulean-city,gym,100003,Arène d'Azuria,"Rouge, Bleu, Jaune, Or et Argent : on pêche dans le bassin de l'Arène ; PokéAPI ne la distingue pas de la ville"
 olivine-city,port,100004,Port d'Oliville,"Or et Argent : on pêche et surfe au port ; PokéAPI ne le distingue pas de la ville"
 rock-tunnel,remake-b1f,100005,Grotte (1er sous-sol),Rouge Feu et Vert Feuille : b1f est le sous-sol ; PokéAPI réutilise cette zone pour le RdC de Rouge/Bleu/Jaune
 hoenn-altering-cave,a,100006,Grotte Métamo (table A),Tables du moteur GBA ; A normale et B à I événementielles
@@ -20,3 +20,4 @@ mt-ember,ruby-path-b2f-stairs,100018,"Mont Braise — Chemin du Rubis, sous-sol 
 seafloor-cavern,entrance,100019,Caverne Fondmer (entrée),Tables aquatiques du moteur Hoenn
 seafloor-cavern,dry-rooms,100020,Caverne Fondmer (salles sèches),Tables terrestres du moteur Hoenn
 seafloor-cavern,flooded-rooms,100021,Caverne Fondmer (salles inondées),Tables terrestres et aquatiques du moteur Hoenn
+indigo-plateau,loreleis-room,100022,Salle d'Olga,"Rouge, Bleu et Jaune : on pêche depuis la plateforme ; PokéAPI n'a pas de zone pour la salle"

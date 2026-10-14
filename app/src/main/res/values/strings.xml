@@ -186,6 +186,8 @@
     <string name="map_machine_move">Enseigne %1$s</string>
     <string name="map_trainer_party">Équipe</string>
     <string name="map_trainer_starter">L’équipe varie selon la partie.</string>
+    <string name="map_trainer_team_player_starter">Équipe si vous avez choisi %1$s</string>
+    <string name="map_trainer_team_rival_evolution">Équipe si l’Évoli du rival devient %1$s</string>
     <string name="map_offer_gifts">Donne</string>
     <string name="map_offer_sales">Vend</string>
     <string name="map_offer_quantity">%1$s × %2$d</string>

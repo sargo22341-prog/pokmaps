@@ -22,7 +22,7 @@ from .pret import GYM_LEADERS, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_offers import SERVICE_KINDS
 from .pret_identifiers import item_identifier, species_identifier
-from .pret_models import HIDDEN_ITEM, MapObject, NpcOffer, PretMap, Sign
+from .pret_models import HIDDEN_ITEM, MapObject, NpcOffer, PretMap, Sign, VariantKind
 from .pret_services import (
     HEAL_SPOT,
     PRIZE_VENDOR,
@@ -33,7 +33,7 @@ from .pret_services import (
     vending_offers,
 )
 
-# Classes de dresseurs dont l'équipe dépend du starter choisi (fixée par le script, pas par la carte).
+# Classes de dresseurs dont l'équipe dépend souvent de la partie : fixe seulement si le script donne un numéro.
 STARTER_DEPENDENT_TRAINERS = frozenset({"RIVAL1", "RIVAL2", "RIVAL3"})
 # Objets à ramasser : leur « script » est l'objet lui-même (itemball, hiddenitem), sans offre.
 _PICKED_UP = frozenset({"item", HIDDEN_ITEM})
@@ -55,6 +55,8 @@ class ObjectRow:
     key: str | None = None
     # Équipe d'un dresseur : (Pokémon, niveau, attaques), identifiants PokéAPI.
     party: list[tuple[str, int, tuple[str, ...]]] = field(default_factory=list)
+    # Équipes selon la partie, à la place de `party` : (VariantKind, Pokémon qui nomme la variante, équipe).
+    variants: list[tuple[VariantKind, str, list[tuple[str, int, tuple[str, ...]]]]] = field(default_factory=list)
     # Dons, ventes, échanges et services (identifiants PokéAPI).
     offers: list[NpcOffer] = field(default_factory=list)
     # Version PokéAPI où l'objet est ainsi (Ho-Oh et Lugia n'ont pas le même niveau en Or et en Argent), None s'il
@@ -91,12 +93,13 @@ def _character_row(
     repo = game_maps.repo
     trainer_class = obj.trainer_class and obj.trainer_class.removeprefix("OPP_")
     party = []
-    fixed_yellow_team = game_maps.game.pret_repo == "pokeyellow" and obj.trainer_number is not None
-    if trainer_class and (trainer_class not in STARTER_DEPENDENT_TRAINERS or fixed_yellow_team):
-        party = [
-            (species_identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
-            for mon in repo.trainer_parties.get((trainer_class, obj.trainer_number or 0), [])
-        ]
+    if trainer_class and (trainer_class not in STARTER_DEPENDENT_TRAINERS or obj.trainer_number is not None):
+        party = _party(repo, trainer_class, obj.trainer_number or 0)
+    variants = [
+        (variant.kind, species_identifier(variant.species), _party(repo, trainer_class, variant.number))
+        for variant in obj.trainer_variants
+        if trainer_class
+    ]
     offers = _character_offers(game_maps, pret_map, position, obj, curation)
     return ObjectRow(
         pret_map.const,
@@ -109,11 +112,28 @@ def _character_row(
         trainer_class and identifier(trainer_class),
         character_key(obj),
         party,
+        variants,
         [_offer_identifiers(repo.machines, offer) for offer in dict.fromkeys(offers)],
         obj.version,
         obj.cry and species_identifier(obj.cry),
-        name_fr="Jessie et James" if obj.sprite == "SPRITE_JESSIE" and trainer_class else None,
+        name_fr=_special_name(obj, trainer_class),
     )
+
+
+def _special_name(obj: MapObject, trainer_class: str | None) -> str | None:
+    """Nom qui ne vient pas des fichiers de noms : combat commun de Jessie et James, tas de jetons cachés."""
+    if obj.sprite == "SPRITE_JESSIE" and trainer_class:
+        return "Jessie et James"
+    if obj.item == "COIN" and obj.quantity is not None:
+        return f"{obj.quantity} jetons"
+    return None
+
+
+def _party(repo: PretRepo | Gen2PretRepo, trainer_class: str, number: int) -> list[tuple[str, int, tuple[str, ...]]]:
+    return [
+        (species_identifier(mon.species), mon.level, tuple(identifier(move) for move in mon.moves))
+        for mon in repo.trainer_parties.get((trainer_class, number), [])
+    ]
 
 
 def _character_offers(

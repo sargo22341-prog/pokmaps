@@ -17,6 +17,8 @@ import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.db.MapDao
+import org.opensources.pokmaps.data.db.TrainerMoveRow
+import org.opensources.pokmaps.data.db.TrainerPokemonRow
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.map.CharacterService
@@ -25,12 +27,36 @@ import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferCondition
 import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.TeamVariant
+import org.opensources.pokmaps.domain.map.TeamVariantKind
 import org.opensources.pokmaps.domain.map.Weekday
 import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 
 class MapRepositoryTest {
+    @Test
+    fun rivalTeamsAreGroupedByVariantWithTheirOwnMoves() = runTest {
+        fun mon(team: Int, variant: Int, variantName: String, pokemon: Int, name: String) =
+            TrainerPokemonRow(team, "player-starter", variant, variantName, 1, pokemon, name, 5)
+        val tackle = TrainerMoveRow(2, 1, 1, 33, "Charge", 35, 100, 35, "physical", 1, "normal", "Normal")
+        val dao = object : MapDao by FakeMapDao() {
+            override suspend fun trainerParty(objectId: Int) =
+                listOf(mon(1, 4, "Salamèche", 7, "Carapuce"), mon(2, 7, "Carapuce", 1, "Bulbizarre"))
+            override suspend fun trainerMoves(objectId: Int, versionGroupId: Int) = listOf(tackle)
+        }
+        val teams = MapRepository(dao, Dispatchers.Unconfined).trainerTeams(FakeGameDao.RED, FakeMapDao.TRAINER)
+        assertEquals(
+            listOf(
+                TeamVariant(TeamVariantKind.PLAYER_STARTER, 4, "Salamèche"),
+                TeamVariant(TeamVariantKind.PLAYER_STARTER, 7, "Carapuce")
+            ),
+            teams.map { it.variant }
+        )
+        val moves = teams.map { team -> team.members.single().moves.map { it.name } }
+        assertEquals(listOf(emptyList(), listOf("Charge")), moves)
+    }
+
     @Test
     fun hoennSalesKeepTheirCurrencyAndTutorsCanBeFree() = runTest {
         val delegate = FakeMapDao()

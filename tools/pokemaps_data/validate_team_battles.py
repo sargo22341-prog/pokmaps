@@ -73,7 +73,9 @@ def _yellow_fixed_rivals(connection: sqlite3.Connection) -> list[str]:
         """SELECT m.identifier, count(t.slot) FROM map_object o JOIN map m ON m.id = o.map_id
            JOIN version_group vg ON vg.id = m.version_group_id
            LEFT JOIN trainer_pokemon t ON t.map_object_id = o.id
-           WHERE vg.identifier = 'yellow' AND o.sprite = 'blue' GROUP BY o.id"""
+           WHERE vg.identifier = 'yellow' AND o.sprite = 'blue' AND NOT EXISTS (
+             SELECT 1 FROM trainer_pokemon v WHERE v.map_object_id = o.id AND v.variant_kind IS NOT NULL)
+           GROUP BY o.id"""
     ).fetchall()
     errors = []
     for label, size in (("oaks-lab", 1), ("route-22", 2), ("cerulean-city", 4), ("ss-anne-2f", 4)):

@@ -88,10 +88,13 @@ data class MapObjectEntity(
 
 @Entity(
     tableName = "trainer_pokemon",
-    primaryKeys = ["map_object_id", "slot"]
+    primaryKeys = ["map_object_id", "team", "slot"]
 )
 data class TrainerPokemonEntity(
     @ColumnInfo(name = "map_object_id") val mapObjectId: Int,
+    val team: Int,
+    @ColumnInfo(name = "variant_kind") val variantKind: String?,
+    @ColumnInfo(name = "variant_pokemon_id") val variantPokemonId: Int?,
     val slot: Int,
     @ColumnInfo(name = "pokemon_id") val pokemonId: Int,
     val level: Int,

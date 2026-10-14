@@ -71,15 +71,15 @@ class BattleNote:
 def gen2_wild_encounters(builder: DatabaseBuilder, game: Game) -> list[WildEncounter]:
     """Rencontres aléatoires du jeu, version par version."""
     repo = builder.gen2_repo(game, "les rencontres aléatoires")
-    areas = _map_areas(builder, game)
-    ids = _Ids(builder)
+    areas = displayed_map_areas(builder, game)
+    ids = EncounterIds(builder)
     encounters: list[WildEncounter] = []
     for version, symbol in game.pret_versions:
         seen: dict[tuple[int, str, tuple[str, ...]], WildTable] = {}
         for table in wild_tables(repo, symbol):
             if table.map_const not in areas:
                 continue
-            area_id = _single_area(table.map_const, areas[table.map_const])
+            area_id = single_area(table.map_const, areas[table.map_const])
             key = (area_id, table.method, table.conditions)
             if key in seen:
                 if seen[key].slots != table.slots:
@@ -94,8 +94,8 @@ def gen2_wild_encounters(builder: DatabaseBuilder, game: Game) -> list[WildEncou
 def gen2_battle_notes(builder: DatabaseBuilder, game: Game) -> list[BattleNote]:
     """Notes des combats scriptés à objet forcé ou chromatiques du jeu."""
     repo = builder.gen2_repo(game, "les combats scriptés")
-    areas = _map_areas(builder, game)
-    ids = _Ids(builder)
+    areas = displayed_map_areas(builder, game)
+    ids = EncounterIds(builder)
     versions = frozenset(ids.versions[version] for version, _ in game.pret_versions)
     notes = []
     for battle in special_battles(repo):
@@ -122,7 +122,7 @@ def _battle_note(builder: DatabaseBuilder, battle: SpecialBattle, item: str, mac
             raise ValueError(f"Type de combat sans note : {battle}")
 
 
-def _map_areas(builder: DatabaseBuilder, game: Game) -> dict[str, list[int]]:
+def displayed_map_areas(builder: DatabaseBuilder, game: Game) -> dict[str, list[int]]:
     """Carte affichée du jeu -> zones de map_areas.csv."""
     if game.version_group not in builder.map_data:
         raise ValueError(f"Cartes de {game.version_group} nécessaires pour rattacher ses rencontres à leurs zones")
@@ -138,13 +138,13 @@ def _map_areas(builder: DatabaseBuilder, game: Game) -> dict[str, list[int]]:
     return result
 
 
-def _single_area(const: str, areas: list[int]) -> int:
+def single_area(const: str, areas: list[int]) -> int:
     if len(areas) != 1:
         raise ValueError(f"map_areas.csv : {const} a des rencontres aléatoires et {len(areas)} zones au lieu d'une")
     return areas[0]
 
 
-class _Ids:
+class EncounterIds:
     """Identifiants PokéAPI des versions, espèces, méthodes et conditions."""
 
     def __init__(self, builder: DatabaseBuilder) -> None:

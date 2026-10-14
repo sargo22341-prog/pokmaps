@@ -6,6 +6,7 @@ import re
 from typing import TYPE_CHECKING
 
 from .pret_models import TrainerPokemon
+from .pret_rival import champion_moves
 from .pret_source import macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
@@ -130,8 +131,8 @@ def _apply_special_moves(repo: PretRepo, parties: dict, raw: dict) -> None:
             elif len(args) == 3 and key:
                 put(key, parse_int(args[0]) - 1, parse_int(args[1]) - 1, args[2])
     else:
-        # Rouge / Bleu : attaque unique d'un champion d'arène (LoneMoves, 3e attaque du Pokémon n + 1)
-        # et attaque du Conseil 4 (TeamMoves, 3e attaque du 5e Pokémon).
+        # Rouge / Bleu : attaque unique d'un champion d'arène (LoneMoves, 3e attaque du Pokémon n + 1),
+        # attaque du Conseil 4 (TeamMoves, 3e attaque du 5e Pokémon) et attaques du Maître (pret_rival).
         section = None
         lone = []
         team = {}
@@ -152,6 +153,9 @@ def _apply_special_moves(repo: PretRepo, parties: dict, raw: dict) -> None:
             for key in raw:
                 if key[0] == trainer_class:
                     put(key, 4, 2, move)
+        for number, moves in champion_moves(repo.root).items():
+            for mon, move in moves:
+                put(("RIVAL3", number), mon, 2, move)
     for party in parties.values():
         for mon in party:
             mon[2] = [move for move in mon[2] if move != "NO_MOVE"]

@@ -25,7 +25,10 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
+import org.opensources.pokmaps.domain.map.TeamVariant
+import org.opensources.pokmaps.domain.map.TeamVariantKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.DamageClass
@@ -74,6 +77,28 @@ fun SectionTitle(text: String, modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(top = 4.dp)
     )
+}
+
+/**
+ * Équipes d'un dresseur : la seule qu'il a, ou une par variante de la partie (rival de la 1re génération), chacune
+ * sous son titre ; un message quand l'équipe dépend de la partie sans être connue.
+ */
+@Composable
+fun TrainerTeams(teams: List<TrainerTeam>, place: SpritePlace, onOpenPokemon: (Int) -> Unit) {
+    if (teams.isEmpty()) {
+        Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
+        return
+    }
+    teams.forEach { team ->
+        SectionTitle(team.variant?.let { trainerTeamTitle(it) } ?: stringResource(R.string.map_trainer_party))
+        team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon) }
+    }
+}
+
+@Composable
+fun trainerTeamTitle(variant: TeamVariant): String = when (variant.kind) {
+    TeamVariantKind.PLAYER_STARTER -> stringResource(R.string.map_trainer_team_player_starter, variant.pokemonName)
+    TeamVariantKind.RIVAL_EVOLUTION -> stringResource(R.string.map_trainer_team_rival_evolution, variant.pokemonName)
 }
 
 /** Pokémon d'un dresseur : niveau et attaques qu'il utilisera. */

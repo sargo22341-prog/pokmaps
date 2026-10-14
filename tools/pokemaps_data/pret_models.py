@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
+from enum import Enum
 from pathlib import Path
 
 from .offer_conditions import ALWAYS, Condition
@@ -34,6 +35,20 @@ class Sign:
     text: str  # constante du texte affiché (ex. TEXT_CELADONMARTROOF_VENDING_MACHINE1)
 
 
+class VariantKind(Enum):
+    """Ce qui choisit l'équipe d'un dresseur qui en a plusieurs."""
+
+    PLAYER_STARTER = "player-starter"  # Pokémon de départ du joueur (Rouge, Bleu)
+    RIVAL_EVOLUTION = "rival-evolution"  # évolution finale de l'Évoli du rival (Jaune)
+
+
+@dataclass(frozen=True)
+class TrainerVariant:
+    kind: VariantKind
+    species: str  # constante pret du Pokémon qui nomme la variante
+    number: int  # numéro de l'équipe dans la classe (data/trainers/parties.asm)
+
+
 # Objet caché (Cherch'Objet) : invisible sur la carte du jeu.
 HIDDEN_ITEM = "hidden_item"
 
@@ -47,8 +62,11 @@ class MapObject:
     item: str | None = None  # ex. MOON_STONE, TM_MEGA_PUNCH
     pokemon: str | None = None  # ex. ZAPDOS
     level: int | None = None
+    quantity: int | None = None  # jetons cachés du Casino (1re génération) : nombre de jetons trouvés
     trainer_class: str | None = None  # ex. OPP_YOUNGSTER
     trainer_number: int | None = None  # numéro de l'équipe dans la classe (data/trainers/parties.asm)
+    # Équipes selon la partie (rival de la 1re génération), vide si l'équipe est fixe ou inconnue.
+    trainer_variants: tuple[TrainerVariant, ...] = ()
     # Ce qui identifie le personnage dans pret : la constante du texte affiché quand on lui parle en 1re génération
     # (ex. TEXT_ROUTE1_YOUNGSTER1), le label de son script en 2e (ex. Route30YoungsterScript).
     text: str | None = None

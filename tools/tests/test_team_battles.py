@@ -48,7 +48,8 @@ def test_yellow_fixed_rival_parties(db: sqlite3.Connection) -> None:
             """SELECT p.identifier, t.level FROM trainer_pokemon t
                JOIN pokemon p ON p.id = t.pokemon_id JOIN map_object o ON o.id = t.map_object_id
                JOIN map m ON m.id = o.map_id JOIN version_group vg ON vg.id = m.version_group_id
-               WHERE vg.identifier = 'yellow' AND m.identifier = ? AND o.sprite = 'blue' ORDER BY t.slot""",
+               WHERE vg.identifier = 'yellow' AND m.identifier = ? AND o.sprite = 'blue'
+               AND t.variant_kind IS NULL ORDER BY t.slot""",
             (label,),
         ).fetchall()
         assert rows == party
@@ -113,3 +114,50 @@ def test_yellow_scripted_rivals_have_battle_badges() -> None:
         if label in fixed:
             trainer_class, number = fixed[label]
             assert (actors[0].trainer_class, actors[0].trainer_number) == ("OPP_" + trainer_class, number)
+
+
+def _rival_teams(db: sqlite3.Connection, version_group: str, label: str) -> dict[tuple[str, str | None], list]:
+    """(nom du rival, variante) -> équipe (Pokémon, niveau, 3e attaque) des rivaux d'une carte."""
+    rows = db.execute(
+        """SELECT o.name_fr, t.variant_kind, vp.identifier, p.identifier, t.level, mv.identifier
+           FROM trainer_pokemon t JOIN map_object o ON o.id = t.map_object_id JOIN map m ON m.id = o.map_id
+           JOIN version_group vg ON vg.id = m.version_group_id JOIN pokemon p ON p.id = t.pokemon_id
+           LEFT JOIN pokemon vp ON vp.id = t.variant_pokemon_id LEFT JOIN move mv ON mv.id = t.move3_id
+           WHERE vg.identifier = ? AND m.identifier = ? AND o.sprite = 'blue' ORDER BY o.id, t.team, t.slot""",
+        (version_group, label),
+    ).fetchall()
+    teams: dict[tuple[str, str | None], list] = {}
+    for name, kind, variant, pokemon, level, move in rows:
+        teams.setdefault((name, kind and f"{kind}:{variant}"), []).append((pokemon, level, move))
+    return teams
+
+
+def test_red_blue_rival_teams_follow_the_players_starter(db: sqlite3.Connection) -> None:
+    lab = _rival_teams(db, "red-blue", "oaks-lab")
+    assert {variant: team[0][0] for (_, variant), team in lab.items()} == {
+        "player-starter:charmander": "squirtle",
+        "player-starter:squirtle": "bulbasaur",
+        "player-starter:bulbasaur": "charmander",
+    }
+    champion = _rival_teams(db, "red-blue", "champions-room")
+    # ReadTrainer : Piqué au Roucarnage, puis l'attaque du Pokémon de départ du rival en 3e attaque.
+    finals = {variant: (team[0][2], team[-1][0], team[-1][2]) for (_, variant), team in champion.items()}
+    assert finals == {
+        "player-starter:charmander": ("sky-attack", "blastoise", "blizzard"),
+        "player-starter:squirtle": ("sky-attack", "venusaur", "mega-drain"),
+        "player-starter:bulbasaur": ("sky-attack", "charizard", "fire-blast"),
+    }
+
+
+def test_route_22_has_both_rival_battles(db: sqlite3.Connection) -> None:
+    red_blue = _rival_teams(db, "red-blue", "route-22")
+    assert sorted({name for name, _ in red_blue}) == ["Rival (1er combat)", "Rival (2e combat)"]
+    assert len(red_blue) == 6
+    assert red_blue[("Rival (2e combat)", "player-starter:bulbasaur")][-1][:2] == ("charizard", 53)
+    yellow = _rival_teams(db, "yellow", "route-22")
+    assert [mon[:2] for mon in yellow[("Rival (1er combat)", None)]] == [("spearow", 9), ("eevee", 8)]
+    assert {variant for name, variant in yellow if name == "Rival (2e combat)"} == {
+        "rival-evolution:jolteon",
+        "rival-evolution:flareon",
+        "rival-evolution:vaporeon",
+    }

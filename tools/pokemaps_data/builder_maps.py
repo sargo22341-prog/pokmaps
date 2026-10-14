@@ -147,19 +147,30 @@ class _ObjectRows:
         self.offers: list[tuple] = []
         self.stories: list[tuple] = []
 
+    def _add_team(
+        self, object_id: int, team: int, variant: tuple[str, int] | None, party: list[tuple[str, int, tuple[str, ...]]]
+    ) -> None:
+        kind, pokemon = variant or (None, None)
+        for slot, (mon, level, moves) in enumerate(party, start=1):
+            move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
+            self.parties.append((object_id, team, kind, pokemon, slot, self.species[mon], level, *move_ids[:4]))
+
     def add(self, obj: ObjectRow, map_id: int, repo: str) -> None:
         if obj.version and obj.version not in self.versions:
             raise ValueError(f"Objet de carte d'une version inconnue de PokéAPI : {obj}")
         species = self.species
-        for name in [obj.pokemon, obj.cry, *(mon[0] for mon in obj.party)] + [
+        variant_mons = [name for _, pokemon, party in obj.variants for name in (pokemon, *(mon[0] for mon in party))]
+        for name in [obj.pokemon, obj.cry, *(mon[0] for mon in obj.party), *variant_mons] + [
             p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
         ]:
             if name and name not in species:
                 raise ValueError(f"Pokémon des cartes inconnu de PokéAPI : {name}")
+        if obj.party and obj.variants:
+            raise ValueError(f"Dresseur avec une équipe fixe et des variantes : {obj}")
         object_id = len(self.objects) + 1
-        for slot, (pokemon, level, moves) in enumerate(obj.party, start=1):
-            move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
-            self.parties.append((object_id, slot, species[pokemon], level, *move_ids[:4]))
+        self._add_team(object_id, 1, None, obj.party)
+        for team, (kind, pokemon, party) in enumerate(obj.variants, start=1):
+            self._add_team(object_id, team, (kind.value, species[pokemon]), party)
         for offer in obj.offers:
             self._add_offer(obj, object_id, offer, repo)
         self.objects.append(
@@ -269,13 +280,14 @@ class _ObjectNames:
         return sorted(texts - self.used_texts)
 
     def of(self, obj: ObjectRow) -> str:
-        """Nom relu par clé, sinon d'après la nature de l'objet : classe du dresseur, Pokémon, objet, type
-        d'installation, cri du Pokémon pour un personnage qui en a l'apparence, ou sprite du personnage."""
+        """Nom relu par clé (deux combats du rival au même endroit), sinon d'après la nature de l'objet : classe du
+        dresseur, Pokémon, objet, type d'installation, cri du Pokémon pour un personnage qui en a l'apparence, ou
+        sprite du personnage."""
         if obj.name_fr:
             if obj.key in self.characters.by_text:
                 self.used_texts.add(obj.key)
             return obj.name_fr
-        if obj.kind in ("npc", *FACILITY_KINDS) and obj.key in self.characters.by_text:
+        if obj.kind in ("npc", "trainer", *FACILITY_KINDS) and obj.key in self.characters.by_text:
             self.used_texts.add(obj.key)
             return self.characters.by_text[obj.key]
         if obj.kind == "trainer" and obj.trainer_class:

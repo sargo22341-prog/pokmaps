@@ -420,8 +420,14 @@ CREATE INDEX index_map_object_pokemon_id ON map_object (pokemon_id);
 
 -- Équipe d'un dresseur de la carte (map_object de type trainer), avec les attaques qu'il utilise :
 -- les 4 dernières apprises au niveau du Pokémon, plus les attaques spéciales des champions et du Conseil 4.
+-- Un dresseur dont l'équipe dépend de la partie (rival de la 1re génération) a une équipe (team) par variante,
+-- nommée par variant_kind (player-starter : Pokémon de départ du joueur ; rival-evolution : évolution finale de
+-- l'Évoli du rival) et variant_pokemon_id ; un dresseur à équipe unique a team = 1 et ces deux colonnes NULL.
 CREATE TABLE trainer_pokemon (
     map_object_id INTEGER NOT NULL,
+    team INTEGER NOT NULL,
+    variant_kind TEXT,
+    variant_pokemon_id INTEGER,
     slot INTEGER NOT NULL,
     pokemon_id INTEGER NOT NULL,
     level INTEGER NOT NULL,
@@ -429,7 +435,7 @@ CREATE TABLE trainer_pokemon (
     move2_id INTEGER,
     move3_id INTEGER,
     move4_id INTEGER,
-    PRIMARY KEY (map_object_id, slot)
+    PRIMARY KEY (map_object_id, team, slot)
 );
 
 -- Ce que propose un personnage ou une installation (map_object) quand on lui parle. kind :

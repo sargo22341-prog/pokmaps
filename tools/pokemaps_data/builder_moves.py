@@ -132,14 +132,16 @@ class MoveTables:
                 effect = effects.get(move_id)
                 if effect is None:
                     raise ValueError(f"Attaque {moves[move_id]['identifier']} absente des attaques pret du jeu {vg}")
+                pret_move = self._pret_moves_by_id[vg][move_id]
                 rows.append(
                     (
                         move_id,
                         vg,
                         type_id,
-                        optional_int(values["power"]),
+                        _game_power(optional_int(values["power"]), pret_move),
                         optional_int(values["accuracy"]),
-                        int(values["pp"]),
+                        # L'historique de PokéAPI oublie des changements (Repos, E-Coque) : le jeu fait foi.
+                        pret_move.pp,
                         self._damage_class(vg, moves[move_id], type_id),
                         effect.description_fr,
                         effect.chance,
@@ -148,17 +150,30 @@ class MoveTables:
         return rows
 
     @cached_property
-    def effects(self) -> dict[int, dict[int, MoveEffect]]:
-        """Effet de chaque attaque, par groupe de versions (id) puis par attaque (id PokéAPI), lu dans pret."""
+    def _pret_moves_by_game(self) -> dict[str, GameMoves]:
+        """Attaques lues dans pret, par identifiant de groupe de versions."""
         missing = [
             row["identifier"] for row in self.builder.vg_rows if row["identifier"] not in self.builder.pret_roots
         ]
         if missing:
-            raise ValueError(f"Désassemblage pret manquant pour lire les effets des attaques : {missing}")
-        pret_moves = {
-            game.version_group: GameMoves(game.pret_format, self._pret_moves(game)) for game in self.builder.games
+            raise ValueError(f"Désassemblage pret manquant pour lire les attaques : {missing}")
+        return {game.version_group: GameMoves(game.pret_format, self._pret_moves(game)) for game in self.builder.games}
+
+    @cached_property
+    def _pret_moves_by_id(self) -> dict[int, dict[int, PretMove]]:
+        """Attaques lues dans pret, par groupe de versions (id) puis par attaque (id PokéAPI)."""
+        return {
+            int(row["id"]): {
+                self.move_id(move.const.lower().replace("_", "-")): move
+                for move in self._pret_moves_by_game[row["identifier"]].moves
+            }
+            for row in self.builder.vg_rows
         }
-        by_game = move_effects(pret_moves)
+
+    @cached_property
+    def effects(self) -> dict[int, dict[int, MoveEffect]]:
+        """Effet de chaque attaque, par groupe de versions (id) puis par attaque (id PokéAPI), lu dans pret."""
+        by_game = move_effects(self._pret_moves_by_game)
         return {
             int(row["id"]): {
                 self.move_id(const.lower().replace("_", "-")): effect
@@ -204,3 +219,11 @@ class MoveTables:
         if key not in self.move_ids:
             raise ValueError(f"Attaque pret inconnue de PokéAPI : {identifier} (voir MOVE_ALIASES)")
         return self.move_ids[key]
+
+
+def _game_power(api_power: int | None, pret_move: PretMove) -> int | None:
+    """Puissance affichée : celle du jeu. Une attaque à dégâts fixes ou variables n'en affiche pas : PokéAPI la
+    laisse vide (Sonicboom, Relâche) ou pret l'écrit 0 ou 1, valeur technique (Puissance Cachée)."""
+    if api_power is None or pret_move.power <= 1:
+        return None
+    return pret_move.power

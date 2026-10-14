@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.builder_wild_gen2 import _single_area
+from pokemaps_data.builder_wild_gen2 import single_area
 from pokemaps_data.games import GOLD_SILVER
 from pokemaps_data.maps_terrain import wild_cells
 from pokemaps_data.pret_gen2 import Gen2PretRepo
@@ -216,9 +216,9 @@ def test_special_battles(gold_silver_repo: Gen2PretRepo) -> None:
 
 
 def test_a_map_with_random_encounters_has_one_area() -> None:
-    assert _single_area("ROUTE_29", [185]) == 185
+    assert single_area("ROUTE_29", [185]) == 185
     with pytest.raises(ValueError, match="ROUTE_29 a des rencontres aléatoires et 2 zones"):
-        _single_area("ROUTE_29", [185, 795])
+        single_area("ROUTE_29", [185, 795])
 
 
 def test_stale_transfer_only_rows_are_reported(preview_database: Path, tmp_path: Path) -> None:

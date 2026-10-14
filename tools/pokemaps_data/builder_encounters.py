@@ -1,7 +1,8 @@
 """Tables des rencontres, corrigées par les fichiers maintenus dans tools/data/.
 
 Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des 2e et 3e générations, lues dans pret
-(builder_wild_gen2.py et builder_wild_gen3.py). Les rencontres d'événement externe portent la mention
+(builder_wild_gen2.py et builder_wild_gen3.py), et la pêche de 1re génération que PokéAPI oublie
+(builder_fishing_gen1.py). Les rencontres d'événement externe portent la mention
 EXTERNAL_EVENT_NOTE. Les lieux et zones sont dans builder_locations.py.
 """
 
@@ -13,6 +14,7 @@ from dataclasses import dataclass, field, replace
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from .builder_fishing_gen1 import check_fishing_rows, gen1_fishing_encounters
 from .builder_hoenn_encounters import complete_hoenn_encounters
 from .builder_remake_encounters import complete_remake_encounters
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
@@ -126,7 +128,8 @@ class EncounterTables:
     @cached_property
     def _uncurated_groups(self) -> list[EncounterGroup]:
         groups: dict[tuple, EncounterGroup] = {}
-        for encounter in self._pokeapi_encounters() + self._pret_encounters():
+        pokeapi = self._pokeapi_encounters()
+        for encounter in pokeapi + self._pret_encounters(pokeapi):
             key = (
                 encounter.version_id,
                 encounter.area_id,
@@ -162,17 +165,21 @@ class EncounterTables:
             for row in self.raw_encounters
         ]
 
-    def _pret_encounters(self) -> list[WildEncounter]:
+    def _pret_encounters(self, pokeapi: list[WildEncounter]) -> list[WildEncounter]:
         encounters: list[WildEncounter] = []
+        gen1_games = [game for game in self.builder.games if game.pret_format is PretFormat.GEN1]
+        fishing: list[WildEncounter] = []
         for game in self.builder.games:
             match game.pret_format:
                 case PretFormat.GEN1:
-                    pass
+                    fishing += gen1_fishing_encounters(self.builder, game, pokeapi)
                 case PretFormat.GEN2:
                     encounters += gen2_wild_encounters(self.builder, game)
                 case PretFormat.GEN3:
                     encounters += list(self.gen3_wild[game.version_group].encounters)
-        return encounters
+        if gen1_games:
+            check_fishing_rows(self.builder, gen1_games, fishing)
+        return encounters + fishing
 
     def _replaced_methods(self, version: int) -> frozenset[str]:
         row = next(row for row in self.builder.version_rows if int(row["id"]) == version)

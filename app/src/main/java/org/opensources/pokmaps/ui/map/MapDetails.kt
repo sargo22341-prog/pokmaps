@@ -36,9 +36,8 @@ import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.RoleIcons
-import org.opensources.pokmaps.ui.common.SectionTitle
 import org.opensources.pokmaps.ui.common.SpriteSize
-import org.opensources.pokmaps.ui.common.TrainerPokemonRow
+import org.opensources.pokmaps.ui.common.TrainerTeams
 
 /** Fiche de l'élément touché sur la carte, en bas d'écran (la carte reste utilisable). */
 @Composable
@@ -212,12 +211,7 @@ private fun CharacterDetails(detail: MapDetail.Character, versionGroupIdentifier
         return
     }
     if (obj.kind == MapObjectKind.TRAINER) {
-        if (detail.party.isEmpty()) {
-            Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
-        } else {
-            SectionTitle(stringResource(R.string.map_trainer_party))
-            detail.party.forEach { TrainerPokemonRow(it, SpritePlace.MAP_LIST, links.onOpenPokemon) }
-        }
+        TrainerTeams(detail.teams, SpritePlace.MAP_LIST, links.onOpenPokemon)
     }
     // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
     Offers(
