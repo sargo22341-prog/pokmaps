@@ -136,7 +136,10 @@ Jaune affiche les quatre combats et équipes communes de Jessie et James, ainsi 
 Les quatre premières équipes du rival de Jaune sont fixes autour d'Évoli ; ses équipes suivantes s'affichent
 pour chaque évolution finale de son Évoli, fixée par les résultats des premiers combats. Dans Rouge et Bleu, chaque
 combat du rival montre ses trois équipes, une par Pokémon de départ du joueur, avec les attaques spéciales du Maître.
-La Route 22 a un badge par combat du rival.
+La Route 22 a un badge par combat du rival. Or, Argent et Cristal affichent aussi les trois équipes de chaque
+combat du rival, l’équipe par défaut de Cal et les équipes de revanche téléphonique sur la même fiche.
+Les objets tenus des dresseurs de Johto et des jeux GBA sont conservés et affichés. Les dons des scènes du
+laboratoire, de M. Pokémon, de Sandra et du Directeur de la Tour Radio sont rattachés à leurs donneurs.
 Les journalistes des Routes 111, 118 et 120 gardent une seule paire par route ; les acteurs des revanches
 restent dans le catalogue source sans répéter les sprites sur la carte.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
@@ -318,9 +321,8 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   plusieurs côtés (`map_parents.csv`), et sens des drapeaux du scénario qu'exigent les offres
   (`story_events.csv`, voir ci-dessous).
 
-Les objets temporaires sans position fixe sont aussi écartés dans `npc_duplicates.csv` : le sbire des caméras
-du repaire Rocket est masqué à l'entrée, puis déplacé par chaque alarme ; sa position initiale dans le mur
-n'est jamais affichée par le jeu.
+Les deux équipes des caméras du repaire Rocket sont placées à la première alarme, où le script fait
+apparaître le sbire ; sa position initiale dans le mur n’est pas utilisée.
 
 Chaque offre de personnage dit aussi quand elle est possible : moments de la journée, jours de la semaine et étapes
 du scénario. Ces conditions sont lues dans les scripts pret par une analyse de flot (`offer_conditions.py`,
@@ -593,7 +595,8 @@ vers le National. Les filtres et coches sont conservés entre les deux listes ; 
 régional et utilise le National pour les espèces hors région. Les talents ont leurs noms français et leurs
 descriptions disponibles dans le jeu ; six talents n’ont pas de description française GBA dans PokéAPI.
 Ces fonctions sont disponibles pour les cinq jeux GBA dans l’application distribuée.
-Le schéma 15 reste commun au générateur et à Room ; les offres portent leur monnaie explicite.
+Le schéma 19 reste commun au générateur et à Room ; les offres portent leur monnaie explicite et
+les équipes conservent leurs objets tenus et numéros de revanche.
 
 Les fiches de personnages Hoenn incluent leurs offres et conditions de scénario. Le domaine et les ressources
 françaises prennent en charge les tarifs en Points Combat et en cendres, le Maître des Capacités et les

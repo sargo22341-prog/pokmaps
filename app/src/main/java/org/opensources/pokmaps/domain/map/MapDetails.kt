@@ -23,7 +23,13 @@ enum class SpotKind(val identifier: String) {
 data class MapSpot(val mapId: Int, val kind: SpotKind, val x: Int, val y: Int)
 
 /** Pokémon de l'équipe d'un dresseur, avec les attaques qu'il utilise en combat. */
-data class TrainerPokemon(val pokemonId: Int, val name: String, val level: Int, val moves: List<LearnedMove>)
+data class TrainerPokemon(
+    val pokemonId: Int,
+    val name: String,
+    val level: Int,
+    val moves: List<LearnedMove>,
+    val heldItemName: String? = null
+)
 
 /**
  * Ce que propose un personnage ou une installation quand on lui parle, et ce qu'exige l'offre pour être possible

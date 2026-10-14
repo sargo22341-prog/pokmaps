@@ -170,9 +170,11 @@ interface MapDao {
     @Query(
         """
         SELECT t.team, t.variant_kind AS variantKind, t.variant_pokemon_id AS variantPokemonId,
-            vp.name_fr AS variantName, t.slot, t.pokemon_id AS pokemonId, p.name_fr AS name, t.level
+            vp.name_fr AS variantName, t.slot, t.pokemon_id AS pokemonId, p.name_fr AS name, t.level,
+            i.name_fr AS heldItemName, t.rematch
         FROM trainer_pokemon t JOIN pokemon p ON p.id = t.pokemon_id
         LEFT JOIN pokemon vp ON vp.id = t.variant_pokemon_id
+        LEFT JOIN item i ON i.id = t.held_item_id
         WHERE t.map_object_id = :objectId ORDER BY t.team, t.slot
         """
     )

@@ -174,12 +174,14 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
         return dao.trainerParty(objectId).groupBy { it.team }.values.map { members ->
             TrainerTeam(
                 variant = members.first().toVariant(),
+                rematch = members.first().rematch,
                 members = members.map { mon ->
                     TrainerPokemon(
                         pokemonId = mon.pokemonId,
                         name = mon.name,
                         level = mon.level,
-                        moves = moves[mon.team to mon.slot].orEmpty().map { it.toLearnedMove() }
+                        moves = moves[mon.team to mon.slot].orEmpty().map { it.toLearnedMove() },
+                        heldItemName = mon.heldItemName
                     )
                 }
             )

@@ -423,6 +423,8 @@ CREATE INDEX index_map_object_pokemon_id ON map_object (pokemon_id);
 -- Un dresseur dont l'équipe dépend de la partie (rival de la 1re génération) a une équipe (team) par variante,
 -- nommée par variant_kind (player-starter : Pokémon de départ du joueur ; rival-evolution : évolution finale de
 -- l'Évoli du rival) et variant_pokemon_id ; un dresseur à équipe unique a team = 1 et ces deux colonnes NULL.
+-- Les revanches téléphoniques ont rematch = team - 1 (à partir de 1), sans variante de starter.
+-- held_item_id conserve l'objet tenu par ce Pokémon, s'il en a un.
 CREATE TABLE trainer_pokemon (
     map_object_id INTEGER NOT NULL,
     team INTEGER NOT NULL,
@@ -435,6 +437,8 @@ CREATE TABLE trainer_pokemon (
     move2_id INTEGER,
     move3_id INTEGER,
     move4_id INTEGER,
+    held_item_id INTEGER,
+    rematch INTEGER,
     PRIMARY KEY (map_object_id, team, slot)
 );
 

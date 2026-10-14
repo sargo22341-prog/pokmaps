@@ -222,14 +222,17 @@ CHECKS = (
              OR t.level NOT BETWEEN 1 AND 100 OR t.move1_id IS NULL OR t.team < 1
              OR (t.variant_kind IS NULL) != (t.variant_pokemon_id IS NULL)
              OR t.variant_kind NOT IN ('player-starter', 'rival-evolution')
-             OR t.variant_pokemon_id NOT IN (SELECT id FROM pokemon)""",
+             OR t.variant_pokemon_id NOT IN (SELECT id FROM pokemon)
+             OR t.held_item_id NOT IN (SELECT id FROM item)
+             OR (t.rematch IS NOT NULL AND (t.rematch < 1 OR t.rematch != t.team - 1 OR t.variant_kind IS NOT NULL))""",
     ),
     (
         "variantes d'équipe incohérentes (une seule équipe nommée, équipes non numérotées de 1 à n ou mélangées)",
         """SELECT map_object_id FROM trainer_pokemon GROUP BY map_object_id
            HAVING count(DISTINCT team) != max(team)
-             OR count(DISTINCT coalesce(variant_kind, '') || '/' || coalesce(variant_pokemon_id, '')) != max(team)
-             OR (max(team) = 1) != (max(variant_kind) IS NULL)
+             OR count(DISTINCT coalesce(variant_kind, '') || '/' || coalesce(variant_pokemon_id, '')
+                       || '/' || coalesce(rematch, '')) != max(team)
+             OR (max(team) = 1) != (max(variant_kind) IS NULL AND max(rematch) IS NULL)
              OR count(DISTINCT variant_kind) > 1""",
     ),
     (

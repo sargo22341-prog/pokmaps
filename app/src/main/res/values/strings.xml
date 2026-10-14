@@ -184,6 +184,7 @@
     <string name="map_close">Fermer</string>
     <string name="map_hidden_item_hint">Invisible sur la carte : appuyez sur A face à cette case (ou utilisez le Cherch’Objet).</string>
     <string name="map_machine_move">Enseigne %1$s</string>
+    <string name="map_trainer_rematch">Revanche téléphonique %1$d</string>
     <string name="map_trainer_party">Équipe</string>
     <string name="map_trainer_starter">L’équipe varie selon la partie.</string>
     <string name="map_trainer_team_player_starter">Équipe si vous avez choisi %1$s</string>

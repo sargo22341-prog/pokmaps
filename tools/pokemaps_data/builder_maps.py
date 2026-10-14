@@ -148,18 +148,39 @@ class _ObjectRows:
         self.stories: list[tuple] = []
 
     def _add_team(
-        self, object_id: int, team: int, variant: tuple[str, int] | None, party: list[tuple[str, int, tuple[str, ...]]]
+        self,
+        object_id: int,
+        team: int,
+        variant: tuple[str, int] | None,
+        party: list[tuple[str, int, tuple[str, ...]]],
+        held_items: dict[tuple[int, int], str],
+        rematch: int | None = None,
     ) -> None:
         kind, pokemon = variant or (None, None)
         for slot, (mon, level, moves) in enumerate(party, start=1):
             move_ids = [self.builder.moves.move_id(move) for move in moves] + [None] * (4 - len(moves))
-            self.parties.append((object_id, team, kind, pokemon, slot, self.species[mon], level, *move_ids[:4]))
+            item = held_items.get((team, slot))
+            self.parties.append(
+                (
+                    object_id,
+                    team,
+                    kind,
+                    pokemon,
+                    slot,
+                    self.species[mon],
+                    level,
+                    *move_ids[:4],
+                    self.builder.items.trainer_item_ids[item] if item else None,
+                    rematch,
+                )
+            )
 
     def add(self, obj: ObjectRow, map_id: int, repo: str) -> None:
         if obj.version and obj.version not in self.versions:
             raise ValueError(f"Objet de carte d'une version inconnue de PokéAPI : {obj}")
         species = self.species
         variant_mons = [name for _, pokemon, party in obj.variants for name in (pokemon, *(mon[0] for mon in party))]
+        variant_mons += [mon[0] for party in obj.rematches for mon in party]
         for name in [obj.pokemon, obj.cry, *(mon[0] for mon in obj.party), *variant_mons] + [
             p for offer in obj.offers for p in (offer.pokemon, offer.wanted)
         ]:
@@ -168,9 +189,11 @@ class _ObjectRows:
         if obj.party and obj.variants:
             raise ValueError(f"Dresseur avec une équipe fixe et des variantes : {obj}")
         object_id = len(self.objects) + 1
-        self._add_team(object_id, 1, None, obj.party)
+        self._add_team(object_id, 1, None, obj.party, obj.held_items)
+        for rematch, party in enumerate(obj.rematches, start=1):
+            self._add_team(object_id, rematch + 1, None, party, obj.held_items, rematch)
         for team, (kind, pokemon, party) in enumerate(obj.variants, start=1):
-            self._add_team(object_id, team, (kind.value, species[pokemon]), party)
+            self._add_team(object_id, team, (kind.value, species[pokemon]), party, obj.held_items)
         for offer in obj.offers:
             self._add_offer(obj, object_id, offer, repo)
         self.objects.append(
