@@ -42,7 +42,13 @@ class Gen3PretRepo:
 
     @cached_property
     def layouts(self) -> dict[str, Gen3Layout]:
-        return read_layouts(self.root)
+        from .maps_curation_gen3 import read_layout_choices
+
+        # Les layouts qu'un script sélectionne ne sont lus que si une carte les affiche (map_layouts.csv).
+        family = "firered-leafgreen" if self.remake else "ruby-sapphire-emerald"
+        return read_layouts(
+            self.root, frozenset(choice.layout for choice in read_layout_choices() if choice.family == family)
+        )
 
     @cached_property
     def maps(self) -> dict[str, Gen3Map]:

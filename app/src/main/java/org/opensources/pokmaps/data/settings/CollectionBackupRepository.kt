@@ -15,8 +15,6 @@ import kotlinx.coroutines.withContext
 import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
-import org.opensources.pokmaps.domain.guide.RoamerObservation
-import org.opensources.pokmaps.domain.guide.Roamers
 import org.opensources.pokmaps.domain.guide.validateCollectionBackup
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.UnownForm
@@ -49,8 +47,6 @@ class CollectionBackupRepository @Inject constructor(
                     merged.caught[version].orEmpty().map { it.toString() }.toSet()
                 val progress = merged.guides[version] ?: GuideProgress()
                 preferences[key("guide_completed_$version")] = progress.completed
-                preferences[key("guide_roamers_$version")] =
-                    progress.roamers.map { "${it.pokemonId}:${it.place}" }.toSet()
                 if (UnownForm.available(game).isNotEmpty()) {
                     preferences[key("caught_unown_$version")] =
                         merged.unown[version].orEmpty().map { it.identifier }.toSet()
@@ -65,12 +61,7 @@ class CollectionBackupRepository @Inject constructor(
             preferences[key("caught_pokemon_$version")].orEmpty().map { it.toInt() }.toSet()
         }
         val guides = games.map { it.versionId }.associateWith { version ->
-            val roamers = preferences[key("guide_roamers_$version")].orEmpty().map {
-                val pieces = it.split(":", limit = 2)
-                require(pieces.size == 2)
-                RoamerObservation(pieces[0].toInt(), pieces[1])
-            }
-            GuideProgress(preferences[key("guide_completed_$version")].orEmpty(), roamers)
+            GuideProgress(preferences[key("guide_completed_$version")].orEmpty())
         }
         val unown = games.filter {
             UnownForm.available(it).isNotEmpty()
@@ -96,12 +87,7 @@ internal fun merge(current: CollectionBackup, imported: CollectionBackup): Colle
     val guides = (current.guides.keys + imported.guides.keys).associateWith {
         val existing = current.guides[it] ?: GuideProgress()
         val incoming = imported.guides[it] ?: GuideProgress()
-        val observations = if (Roamers.maximumObservations(it) == 1 && incoming.roamers.isNotEmpty()) {
-            incoming.roamers
-        } else {
-            (existing.roamers + incoming.roamers).associateBy { it.pokemonId }.values.toList()
-        }
-        GuideProgress(existing.completed + incoming.completed, observations)
+        GuideProgress(existing.completed + incoming.completed)
     }
     val unown = (current.unown.keys + imported.unown.keys).associateWith {
         current.unown[it].orEmpty() +

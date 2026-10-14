@@ -30,7 +30,8 @@ internal object MapLandscape {
             listOf(route.id to floors, depth.id to floors)
         }.toMap()
         val route = routes.firstOrNull { it.identifier == "route134" } ?: return paired
-        val depth = maps.values.firstOrNull { it.identifier == "underwater-route134" && it.isDisplayable }
+        // Le fond du Chenal 134 et celui du Sanctuaire forment un plan, relié par le passage vers le Sanctuaire.
+        val depth = maps.values.firstOrNull { it.identifier == "underwater-route134-plan" && it.isDisplayable }
             ?: return paired
         val floors = diveLevels(route, depth)
         return paired + mapOf(route.id to floors, depth.id to floors)

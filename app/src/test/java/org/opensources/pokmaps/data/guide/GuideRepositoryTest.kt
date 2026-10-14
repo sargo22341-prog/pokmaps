@@ -17,7 +17,6 @@ import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
-import org.opensources.pokmaps.domain.guide.Roamers
 import org.opensources.pokmaps.domain.model.Game
 import org.robolectric.RobolectricTestRunner
 
@@ -74,7 +73,8 @@ class GuideRepositoryTest {
         val articles = library.articles.filter { it.achievementId == null }
         val hoenn = library.game.versionId in 7..9
         val prefix = if (hoenn) "hoenn-" else "remake-"
-        assertEquals(if (hoenn) 31 else 20, articles.size)
+        // Sans les deux collections GBA, avec l'article des errants et, à Hoenn, celui des Bases Secrètes.
+        assertEquals(if (hoenn) 31 else 19, articles.size)
         assertEquals(articles.size, articles.map { it.id }.distinct().size)
         assertTrue(articles.all { it.id in setOf("breeding", "friendship") || it.id.startsWith(prefix) })
         assertTrue(articles.all { it.paragraphs.size >= 3 && it.sources.isNotEmpty() && it.title.isNotBlank() })
@@ -122,7 +122,6 @@ class GuideRepositoryTest {
         catalog: org.opensources.pokmaps.domain.map.MapCatalog,
         game: Game
     ) {
-        assertTrue(Roamers.places(game.versionId).all { catalog.mapByIdentifier(it) != null })
         val trees = catalog.objects.values.flatten().filter { it.fruit != null }
         if (game.generationId == 1 || game.remakeGenerationId == 1) {
             assertTrue(trees.isEmpty())

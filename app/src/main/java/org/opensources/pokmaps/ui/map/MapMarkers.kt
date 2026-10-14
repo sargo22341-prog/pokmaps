@@ -81,18 +81,43 @@ fun WarpMarker(mapState: MapState, alwaysVisible: Boolean = false, color: Color 
     }
 }
 
-/** Accès au layout conditionnel du Chenal 130. */
+/** Fait apparaître l'Île Mirage sur sa route, ou revient à la route (`returnTo`) quand elle est affichée. */
 @Composable
-internal fun MirageIslandMarker(mapState: MapState, alwaysVisible: Boolean) {
+internal fun MirageIslandMarker(mapState: MapState, alwaysVisible: Boolean, returnTo: String?) {
     if (!alwaysVisible && !visibleAtScale(mapState)) return
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            stringResource(R.string.map_mirage_island),
+            if (returnTo == null) {
+                stringResource(R.string.map_mirage_island)
+            } else {
+                stringResource(R.string.map_mirage_return, returnTo)
+            },
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)),
             style = MaterialTheme.typography.labelSmall
         )
         WarpMarker(mapState, alwaysVisible = true)
+    }
+}
+
+/** Entrée d'une Base Secrète : on la touche pour ouvrir la carte de la base. */
+@Composable
+internal fun SecretBaseMarker(mapState: MapState, alwaysVisible: Boolean) {
+    if (!alwaysVisible && !visibleAtScale(mapState)) return
+    val size = max(mapPixels(mapState, TILE_PX), SECRET_BASE_MIN_SIZE)
+    Box(
+        Modifier
+            .size(size)
+            .background(SECRET_BASE_COLOR.copy(alpha = 0.9f), CircleShape)
+            .border(size / 12, Color.White, CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            painterResource(R.drawable.ic_secret_base),
+            stringResource(R.string.map_secret_base),
+            tint = Color.White,
+            modifier = Modifier.size(size * 0.62f)
+        )
     }
 }
 
@@ -263,10 +288,14 @@ fun HighlightMarker() {
 
 val HIGHLIGHT_COLOR = Color(0xFFFF1744)
 private val WARP_COLOR = Color(0xFF2962FF)
+private val SECRET_BASE_COLOR = Color(0xFFD84315)
 private val HIDDEN_COLOR = Color(0xFF6A1B9A)
 private val TRAINER_COLOR = Color(0xFFD32F2F)
 private val FACILITY_COLOR = Color(0xFF00897B)
 private val WARP_MIN_SIZE = 8.dp
+
+/** Assez grand pour reconnaître le drapeau d'une Base Secrète en vue éloignée. */
+private val SECRET_BASE_MIN_SIZE = 18.dp
 
 /**
  * Taille d'un pixel des sprites des Pokémon, en pixels de la carte : 0,75 augmenté de 30 %, pour que les sprites de

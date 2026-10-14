@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapWarp
+import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.usecase.GameMaps
+import ovh.plrapps.mapcompose.core.TileStreamProvider
 
 /** Ce qui est dessiné sur la carte en plus de ses calques : Pokémon du lieu, éléments mis en évidence. */
 internal data class MapOverlays(
@@ -18,6 +20,8 @@ internal data class MapOverlays(
     val wildMarkers: List<WildMarker> = emptyList(),
     /** Objet ou personnage mis en évidence (ouvert depuis une fiche). */
     val focusedObjectId: Int? = null,
+    /** Passage mis en évidence (Base Secrète ouverte depuis les astuces). */
+    val focusedWarpId: Int? = null,
     /** Cartes où se trouve le Pokémon surligné, et personnages qui le donnent ou l'échangent. */
     val highlightedMaps: Set<Int> = emptySet(),
     val highlightedObjects: Set<Int> = emptySet(),
@@ -31,7 +35,7 @@ internal data class MapOverlays(
  * État de l'écran de la carte, partagé par [MapViewModel] et les classes qui l'aident ([MapNavigation],
  * [MapSelection]). Les coroutines sont lancées dans le scope du ViewModel et meurent avec lui.
  */
-internal class MapSession(private val scope: CoroutineScope) {
+internal class MapSession(private val scope: CoroutineScope, tiles: (GameMap) -> TileStreamProvider) {
     private val _state = MutableStateFlow(MapUiState())
     val state: StateFlow<MapUiState> = _state.asStateFlow()
     val current: MapUiState get() = _state.value
@@ -45,7 +49,7 @@ internal class MapSession(private val scope: CoroutineScope) {
     var overlays = MapOverlays()
         private set
 
-    private val renderer = MapOverlayRenderer()
+    private val renderer = MapOverlayRenderer(tiles)
 
     fun update(transform: (MapUiState) -> MapUiState) = _state.update(transform)
 

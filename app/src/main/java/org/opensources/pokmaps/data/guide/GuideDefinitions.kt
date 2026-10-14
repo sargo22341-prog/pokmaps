@@ -12,10 +12,9 @@ internal fun guideDefinitions(game: Game): List<GuideDefinition> {
         VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> johtoGuides() + sideGuides() + tipGuides()
 
         VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD ->
-            gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides() +
-                gbaCollectionGuides(versionId)
+            gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides()
 
-        VersionGroup.FIRERED_LEAFGREEN -> gbaToolGuides() + remakeGuides() + gbaCollectionGuides(versionId)
+        VersionGroup.FIRERED_LEAFGREEN -> gbaToolGuides() + remakeGuides()
     }
     return branch.filter { versionId in it.versions } + achievementGuides(versionId)
 }

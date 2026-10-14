@@ -4,7 +4,8 @@ import org.opensources.pokmaps.R
 
 internal fun rubyAchievements(): List<AchievementDefinition> = DEFINITIONS
 
-private const val COLLECTION_CHAPTER = "hoenn-national-collection"
+// Le Pokédex de la collection complète se termine après la Ligue.
+private const val COLLECTION_CHAPTER = "hoenn-postgame"
 
 private val DEFINITIONS = listOf(
     AchievementDefinition(31199, 7, R.string.ra_31199_title, R.string.ra_31199_text, 1, false, "hoenn-start"),

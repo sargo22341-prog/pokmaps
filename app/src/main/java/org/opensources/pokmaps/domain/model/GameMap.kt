@@ -23,8 +23,16 @@ data class GameMap(
     fun tilePath(level: Int, row: Int, column: Int): String =
         "maps/$versionGroupIdentifier/$identifier/$level/${row}_$column.webp"
 
+    /**
+     * Mer répétée sous la carte des Îles Sevii, la même tuile pour tout un niveau de zoom : elle prolonge l'eau
+     * des routes sans limite visible avec le fond. Null pour les autres cartes.
+     */
+    fun seaTilePath(level: Int): String? =
+        if (identifier == SEA_WORLD) "maps/$versionGroupIdentifier/$SEA_WORLD-water/$level.webp" else null
+
     companion object {
         const val TILE_SIZE = 256
+        private const val SEA_WORLD = "sevii"
     }
 }
 

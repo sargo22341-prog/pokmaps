@@ -90,19 +90,19 @@ ruby-sapphire-emerald,HOENN_VICTORY_ROAD_1F_PLAN,913,Route Victoire (rez-de-chau
 ruby-sapphire-emerald,HOENN_VICTORY_ROAD_B1F_PLAN,914,Route Victoire (1er sous-sol),MAP_VICTORY_ROAD_B1F,0,0
 ruby-sapphire-emerald,HOENN_VICTORY_ROAD_B2F_PLAN,915,Route Victoire (2e sous-sol),MAP_VICTORY_ROAD_B2F,0,0
 ruby-sapphire-emerald,MAGMA_HIDEOUT_1F_PLAN,916,Planque Magma (rez-de-chaussée),MAP_MAGMA_HIDEOUT_1F,0,0
-ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_1R,0,0
-ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_2R,35,0
-ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (étage 1),MAP_MAGMA_HIDEOUT_2F_3R,0,41
-ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_1R,0,0
-ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_2R,30,0
-ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (étage 2),MAP_MAGMA_HIDEOUT_3F_3R,0,26
-ruby-sapphire-emerald,MAGMA_HIDEOUT_4F_PLAN,919,Planque Magma (étage 3),MAP_MAGMA_HIDEOUT_4F,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (1er étage),MAP_MAGMA_HIDEOUT_2F_1R,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (1er étage),MAP_MAGMA_HIDEOUT_2F_2R,35,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_2F_PLAN,917,Planque Magma (1er étage),MAP_MAGMA_HIDEOUT_2F_3R,0,41
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (2e étage),MAP_MAGMA_HIDEOUT_3F_1R,0,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (2e étage),MAP_MAGMA_HIDEOUT_3F_2R,30,0
+ruby-sapphire-emerald,MAGMA_HIDEOUT_3F_PLAN,918,Planque Magma (2e étage),MAP_MAGMA_HIDEOUT_3F_3R,0,26
+ruby-sapphire-emerald,MAGMA_HIDEOUT_4F_PLAN,919,Planque Magma (3e étage),MAP_MAGMA_HIDEOUT_4F,0,0
 ruby-sapphire-emerald,MAGMA_HIDEOUT_B1F_PLAN,920,Planque Magma (1er sous-sol),MAP_MAGMA_HIDEOUT_B1F,0,0
 ruby-sapphire-emerald,MAGMA_HIDEOUT_B2F_PLAN,921,Planque Magma (2e sous-sol),MAP_MAGMA_HIDEOUT_B2F,0,0
 ruby-sapphire-emerald,MIRAGE_TOWER_1F_PLAN,922,Tour Mirage (rez-de-chaussée),MAP_MIRAGE_TOWER_1F,0,0
-ruby-sapphire-emerald,MIRAGE_TOWER_2F_PLAN,923,Tour Mirage (étage 1),MAP_MIRAGE_TOWER_2F,0,0
-ruby-sapphire-emerald,MIRAGE_TOWER_3F_PLAN,924,Tour Mirage (étage 2),MAP_MIRAGE_TOWER_3F,0,0
-ruby-sapphire-emerald,MIRAGE_TOWER_4F_PLAN,925,Tour Mirage (étage 3),MAP_MIRAGE_TOWER_4F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_2F_PLAN,923,Tour Mirage (1er étage),MAP_MIRAGE_TOWER_2F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_3F_PLAN,924,Tour Mirage (2e étage),MAP_MIRAGE_TOWER_3F,0,0
+ruby-sapphire-emerald,MIRAGE_TOWER_4F_PLAN,925,Tour Mirage (3e étage),MAP_MIRAGE_TOWER_4F,0,0
 ruby-sapphire-emerald,MT_CHIMNEY_PLAN,926,Mont Chimnée,MAP_MT_CHIMNEY,0,0
 ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ENTRANCE,0,0
 ruby-sapphire-emerald,SEAFLOOR_CAVERN_1F_PLAN,927,Caverne Fondmer,MAP_SEAFLOOR_CAVERN_ROOM1,22,0
@@ -122,14 +122,16 @@ ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée b
 ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_1F_PLAN,929,Grotte Tréfonds (marée basse),MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM,33,40
 ruby-sapphire-emerald,SHOAL_CAVE_LOW_TIDE_B1F_PLAN,930,"Grotte Tréfonds (marée basse, salle de glace)",MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM,0,0
 ruby-sapphire-emerald,SKY_PILLAR_1F_PLAN,931,Pilier Céleste (rez-de-chaussée),MAP_SKY_PILLAR_1F,0,0
-ruby-sapphire-emerald,SKY_PILLAR_2F_PLAN,932,Pilier Céleste (étage 1),MAP_SKY_PILLAR_2F,0,0
-ruby-sapphire-emerald,SKY_PILLAR_3F_PLAN,933,Pilier Céleste (étage 2),MAP_SKY_PILLAR_3F,0,0
-ruby-sapphire-emerald,SKY_PILLAR_4F_PLAN,934,Pilier Céleste (étage 3),MAP_SKY_PILLAR_4F,0,0
-ruby-sapphire-emerald,SKY_PILLAR_5F_PLAN,935,Pilier Céleste (étage 4),MAP_SKY_PILLAR_5F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_1F_PLAN,931,Pilier Céleste (rez-de-chaussée),MAP_SKY_PILLAR_OUTSIDE,16,0
+ruby-sapphire-emerald,SKY_PILLAR_1F_PLAN,931,Pilier Céleste (rez-de-chaussée),MAP_SKY_PILLAR_ENTRANCE,46,0
+ruby-sapphire-emerald,SKY_PILLAR_2F_PLAN,932,Pilier Céleste (1er étage),MAP_SKY_PILLAR_2F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_3F_PLAN,933,Pilier Céleste (2e étage),MAP_SKY_PILLAR_3F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_4F_PLAN,934,Pilier Céleste (3e étage),MAP_SKY_PILLAR_4F,0,0
+ruby-sapphire-emerald,SKY_PILLAR_5F_PLAN,935,Pilier Céleste (4e étage),MAP_SKY_PILLAR_5F,0,0
 ruby-sapphire-emerald,TRAINER_HILL_1F_PLAN,936,Colline Dresseurs (rez-de-chaussée),MAP_TRAINER_HILL_1F,0,0
-ruby-sapphire-emerald,TRAINER_HILL_2F_PLAN,937,Colline Dresseurs (étage 1),MAP_TRAINER_HILL_2F,0,0
-ruby-sapphire-emerald,TRAINER_HILL_3F_PLAN,938,Colline Dresseurs (étage 2),MAP_TRAINER_HILL_3F,0,0
-ruby-sapphire-emerald,TRAINER_HILL_4F_PLAN,939,Colline Dresseurs (étage 3),MAP_TRAINER_HILL_4F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_2F_PLAN,937,Colline Dresseurs (1er étage),MAP_TRAINER_HILL_2F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_3F_PLAN,938,Colline Dresseurs (2e étage),MAP_TRAINER_HILL_3F,0,0
+ruby-sapphire-emerald,TRAINER_HILL_4F_PLAN,939,Colline Dresseurs (3e étage),MAP_TRAINER_HILL_4F,0,0
 ruby-sapphire-emerald,TRAINER_HILL_ROOF_PLAN,940,Colline Dresseurs (toit),MAP_TRAINER_HILL_ROOF,0,0
 firered-leafgreen,SILPH_CO_1F_PLAN,900,Sylphe SARL — rez-de-chaussée,MAP_SILPH_CO_1F,0,0
 firered-leafgreen,SILPH_CO_2F_PLAN,901,Sylphe SARL — 1er étage,MAP_SILPH_CO_2F,0,0
@@ -152,27 +154,27 @@ firered-leafgreen,POKEMON_TOWER_6F_PLAN,917,Tour Pokémon — 5e étage,MAP_POKE
 firered-leafgreen,POKEMON_TOWER_7F_PLAN,918,Tour Pokémon — 6e étage,MAP_POKEMON_TOWER_7F,0,0
 firered-leafgreen,CERULEAN_CAVE_1F_PLAN,919,Grotte Azurée — rez-de-chaussée,MAP_CERULEAN_CAVE_1F,0,0
 firered-leafgreen,CERULEAN_CAVE_2F_PLAN,920,Grotte Azurée — 1er étage,MAP_CERULEAN_CAVE_2F,0,0
-firered-leafgreen,CERULEAN_CAVE_B1F_PLAN,921,Grotte Azurée — sous-sol 1,MAP_CERULEAN_CAVE_B1F,0,0
+firered-leafgreen,CERULEAN_CAVE_B1F_PLAN,921,Grotte Azurée — 1er sous-sol,MAP_CERULEAN_CAVE_B1F,0,0
 firered-leafgreen,VICTORY_ROAD_1F_PLAN,922,Route Victoire — rez-de-chaussée,MAP_VICTORY_ROAD_1F,0,0
 firered-leafgreen,VICTORY_ROAD_2F_PLAN,923,Route Victoire — 1er étage,MAP_VICTORY_ROAD_2F,0,0
 firered-leafgreen,VICTORY_ROAD_3F_PLAN,924,Route Victoire — 2e étage,MAP_VICTORY_ROAD_3F,0,0
 firered-leafgreen,SEAFOAM_ISLANDS_1F_PLAN,925,Îles Écume — rez-de-chaussée,MAP_SEAFOAM_ISLANDS_1F,0,0
-firered-leafgreen,SEAFOAM_ISLANDS_B1F_PLAN,926,Îles Écume — sous-sol 1,MAP_SEAFOAM_ISLANDS_B1F,0,0
-firered-leafgreen,SEAFOAM_ISLANDS_B2F_PLAN,927,Îles Écume — sous-sol 2,MAP_SEAFOAM_ISLANDS_B2F,0,0
-firered-leafgreen,SEAFOAM_ISLANDS_B3F_PLAN,928,Îles Écume — sous-sol 3,MAP_SEAFOAM_ISLANDS_B3F,0,0
-firered-leafgreen,SEAFOAM_ISLANDS_B4F_PLAN,929,Îles Écume — sous-sol 4,MAP_SEAFOAM_ISLANDS_B4F,0,0
+firered-leafgreen,SEAFOAM_ISLANDS_B1F_PLAN,926,Îles Écume — 1er sous-sol,MAP_SEAFOAM_ISLANDS_B1F,0,0
+firered-leafgreen,SEAFOAM_ISLANDS_B2F_PLAN,927,Îles Écume — 2e sous-sol,MAP_SEAFOAM_ISLANDS_B2F,0,0
+firered-leafgreen,SEAFOAM_ISLANDS_B3F_PLAN,928,Îles Écume — 3e sous-sol,MAP_SEAFOAM_ISLANDS_B3F,0,0
+firered-leafgreen,SEAFOAM_ISLANDS_B4F_PLAN,929,Îles Écume — 4e sous-sol,MAP_SEAFOAM_ISLANDS_B4F,0,0
 firered-leafgreen,MT_EMBER_RUBY_PATH_1F_PLAN,930,"Mont Braise — Chemin du Rubis, rez-de-chaussée",MAP_MT_EMBER_RUBY_PATH_1F,0,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B1F_PLAN,931,"Mont Braise — Chemin du Rubis, sous-sol 1",MAP_MT_EMBER_RUBY_PATH_B1F,0,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B1F_PLAN,931,"Mont Braise — Chemin du Rubis, sous-sol 1",MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS,15,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B2F_PLAN,932,"Mont Braise — Chemin du Rubis, sous-sol 2",MAP_MT_EMBER_RUBY_PATH_B2F,0,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B2F_PLAN,932,"Mont Braise — Chemin du Rubis, sous-sol 2",MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS,20,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B3F_PLAN,933,"Mont Braise — Chemin du Rubis, sous-sol 3",MAP_MT_EMBER_RUBY_PATH_B3F,0,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B4F_PLAN,934,"Mont Braise — Chemin du Rubis, sous-sol 4",MAP_MT_EMBER_RUBY_PATH_B4F,0,0
-firered-leafgreen,MT_EMBER_RUBY_PATH_B5F_PLAN,935,"Mont Braise — Chemin du Rubis, sous-sol 5",MAP_MT_EMBER_RUBY_PATH_B5F,0,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B1F_PLAN,931,"Mont Braise — Chemin du Rubis, 1er sous-sol",MAP_MT_EMBER_RUBY_PATH_B1F,0,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B1F_PLAN,931,"Mont Braise — Chemin du Rubis, 1er sous-sol",MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS,15,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B2F_PLAN,932,"Mont Braise — Chemin du Rubis, 2e sous-sol",MAP_MT_EMBER_RUBY_PATH_B2F,0,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B2F_PLAN,932,"Mont Braise — Chemin du Rubis, 2e sous-sol",MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS,20,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B3F_PLAN,933,"Mont Braise — Chemin du Rubis, 3e sous-sol",MAP_MT_EMBER_RUBY_PATH_B3F,0,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B4F_PLAN,934,"Mont Braise — Chemin du Rubis, 4e sous-sol",MAP_MT_EMBER_RUBY_PATH_B4F,0,0
+firered-leafgreen,MT_EMBER_RUBY_PATH_B5F_PLAN,935,"Mont Braise — Chemin du Rubis, 5e sous-sol",MAP_MT_EMBER_RUBY_PATH_B5F,0,0
 firered-leafgreen,MT_EMBER_SUMMIT_PATH_1F_PLAN,936,"Mont Braise — Chemin du sommet, rez-de-chaussée",MAP_MT_EMBER_SUMMIT_PATH_1F,0,0
 firered-leafgreen,MT_EMBER_SUMMIT_PATH_2F_PLAN,937,"Mont Braise — Chemin du sommet, 1er étage",MAP_MT_EMBER_SUMMIT_PATH_2F,0,0
 firered-leafgreen,MT_EMBER_SUMMIT_PATH_3F_PLAN,938,"Mont Braise — Chemin du sommet, 2e étage",MAP_MT_EMBER_SUMMIT_PATH_3F,0,0
-firered-leafgreen,MT_EMBER_SUMMIT_PATH_ROOF_PLAN,939,Mont Braise (sommet),MAP_MT_EMBER_SUMMIT,0,0
+firered-leafgreen,MT_EMBER_SUMMIT_PATH_SUMMIT_PLAN,939,Mont Braise (sommet),MAP_MT_EMBER_SUMMIT,0,0
 firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER,0,0
 firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER,27,0
 firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAND_TANOBY_RUINS_SCUFIB_CHAMBER,54,0
@@ -181,24 +183,26 @@ firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAN
 firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAND_TANOBY_RUINS_LIPTOO_CHAMBER,135,0
 firered-leafgreen,TANOBY_RUINS_PLAN,940,Ruines Tanoby (chambres),MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,162,0
 firered-leafgreen,NAVEL_ROCK_1F_PLAN,941,Roc Nombri — rez-de-chaussée,MAP_NAVEL_ROCK_1F,0,0
-firered-leafgreen,NAVEL_ROCK_B1F_PLAN,942,Roc Nombri — sous-sol 1,MAP_NAVEL_ROCK_B1F,0,0
+firered-leafgreen,NAVEL_ROCK_1F_PLAN,941,Roc Nombri — rez-de-chaussée,MAP_NAVEL_ROCK_EXTERIOR,19,0
+firered-leafgreen,NAVEL_ROCK_1F_PLAN,941,Roc Nombri — rez-de-chaussée,MAP_NAVEL_ROCK_HARBOR,41,0
+firered-leafgreen,NAVEL_ROCK_B1F_PLAN,942,Roc Nombri — 1er sous-sol,MAP_NAVEL_ROCK_B1F,0,0
 firered-leafgreen,NAVEL_ROCK_B2F_PLAN,943,Roc Nombri (bifurcation),MAP_NAVEL_ROCK_FORK,0,0
 firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_2F_PLAN,944,"Roc Nombri — Chemin du sommet, 1er étage",MAP_NAVEL_ROCK_SUMMIT_PATH_2F,0,0
 firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_3F_PLAN,945,"Roc Nombri — Chemin du sommet, 2e étage",MAP_NAVEL_ROCK_SUMMIT_PATH_3F,0,0
 firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_4F_PLAN,946,"Roc Nombri — Chemin du sommet, 3e étage",MAP_NAVEL_ROCK_SUMMIT_PATH_4F,0,0
 firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_5F_PLAN,947,"Roc Nombri — Chemin du sommet, 4e étage",MAP_NAVEL_ROCK_SUMMIT_PATH_5F,0,0
-firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_ROOF_PLAN,948,Roc Nombri (sommet),MAP_NAVEL_ROCK_SUMMIT,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B1F_PLAN,949,"Roc Nombri — Chemin des profondeurs, sous-sol 1",MAP_NAVEL_ROCK_BASE_PATH_B1F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B2F_PLAN,950,"Roc Nombri — Chemin des profondeurs, sous-sol 2",MAP_NAVEL_ROCK_BASE_PATH_B2F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B3F_PLAN,951,"Roc Nombri — Chemin des profondeurs, sous-sol 3",MAP_NAVEL_ROCK_BASE_PATH_B3F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B4F_PLAN,952,"Roc Nombri — Chemin des profondeurs, sous-sol 4",MAP_NAVEL_ROCK_BASE_PATH_B4F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B5F_PLAN,953,"Roc Nombri — Chemin des profondeurs, sous-sol 5",MAP_NAVEL_ROCK_BASE_PATH_B5F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B6F_PLAN,954,"Roc Nombri — Chemin des profondeurs, sous-sol 6",MAP_NAVEL_ROCK_BASE_PATH_B6F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B7F_PLAN,955,"Roc Nombri — Chemin des profondeurs, sous-sol 7",MAP_NAVEL_ROCK_BASE_PATH_B7F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B8F_PLAN,956,"Roc Nombri — Chemin des profondeurs, sous-sol 8",MAP_NAVEL_ROCK_BASE_PATH_B8F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B9F_PLAN,957,"Roc Nombri — Chemin des profondeurs, sous-sol 9",MAP_NAVEL_ROCK_BASE_PATH_B9F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B10F_PLAN,958,"Roc Nombri — Chemin des profondeurs, sous-sol 10",MAP_NAVEL_ROCK_BASE_PATH_B10F,0,0
-firered-leafgreen,NAVEL_ROCK_BASE_PATH_B11F_PLAN,959,"Roc Nombri — Chemin des profondeurs, sous-sol 11",MAP_NAVEL_ROCK_BASE_PATH_B11F,0,0
+firered-leafgreen,NAVEL_ROCK_SUMMIT_PATH_SUMMIT_PLAN,948,Roc Nombri (sommet),MAP_NAVEL_ROCK_SUMMIT,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B1F_PLAN,949,"Roc Nombri — Chemin des profondeurs, 1er sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B1F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B2F_PLAN,950,"Roc Nombri — Chemin des profondeurs, 2e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B2F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B3F_PLAN,951,"Roc Nombri — Chemin des profondeurs, 3e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B3F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B4F_PLAN,952,"Roc Nombri — Chemin des profondeurs, 4e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B4F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B5F_PLAN,953,"Roc Nombri — Chemin des profondeurs, 5e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B5F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B6F_PLAN,954,"Roc Nombri — Chemin des profondeurs, 6e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B6F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B7F_PLAN,955,"Roc Nombri — Chemin des profondeurs, 7e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B7F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B8F_PLAN,956,"Roc Nombri — Chemin des profondeurs, 8e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B8F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B9F_PLAN,957,"Roc Nombri — Chemin des profondeurs, 9e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B9F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B10F_PLAN,958,"Roc Nombri — Chemin des profondeurs, 10e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B10F,0,0
+firered-leafgreen,NAVEL_ROCK_BASE_PATH_B11F_PLAN,959,"Roc Nombri — Chemin des profondeurs, 11e sous-sol",MAP_NAVEL_ROCK_BASE_PATH_B11F,0,0
 firered-leafgreen,NAVEL_ROCK_BASE_PATH_B12F_PLAN,960,Roc Nombri (profondeurs),MAP_NAVEL_ROCK_BASE,0,0
 firered-leafgreen,SSANNE_1F_PLAN,961,L’Océane (pont 1),MAP_SSANNE_1F_CORRIDOR,0,0
 firered-leafgreen,SSANNE_1F_PLAN,961,L’Océane (pont 1),MAP_SSANNE_1F_ROOM1,35,0
@@ -228,12 +232,12 @@ firered-leafgreen,SSANNE_B1F_PLAN,964,L’Océane (cale),MAP_SSANNE_B1F_ROOM5,67
 firered-leafgreen,ICEFALL_CAVE_1F_PLAN,965,Grotte de Glace (rez-de-chaussée),MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE,0,0
 firered-leafgreen,ICEFALL_CAVE_1F_PLAN,965,Grotte de Glace (rez-de-chaussée),MAP_FOUR_ISLAND_ICEFALL_CAVE_1F,34,0
 firered-leafgreen,ICEFALL_CAVE_1F_PLAN,965,Grotte de Glace (rez-de-chaussée),MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK,58,0
-firered-leafgreen,ICEFALL_CAVE_B1F_PLAN,966,Grotte de Glace — sous-sol 1,MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F,0,0
+firered-leafgreen,ICEFALL_CAVE_B1F_PLAN,966,Grotte de Glace — 1er sous-sol,MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F,0,0
 firered-leafgreen,DOTTED_HOLE_1F_PLAN,967,Trou Percé — rez-de-chaussée,MAP_SIX_ISLAND_DOTTED_HOLE_1F,0,0
-firered-leafgreen,DOTTED_HOLE_B1F_PLAN,968,Trou Percé — sous-sol 1,MAP_SIX_ISLAND_DOTTED_HOLE_B1F,0,0
-firered-leafgreen,DOTTED_HOLE_B2F_PLAN,969,Trou Percé — sous-sol 2,MAP_SIX_ISLAND_DOTTED_HOLE_B2F,0,0
-firered-leafgreen,DOTTED_HOLE_B3F_PLAN,970,Trou Percé — sous-sol 3,MAP_SIX_ISLAND_DOTTED_HOLE_B3F,0,0
-firered-leafgreen,DOTTED_HOLE_B4F_PLAN,971,Trou Percé — sous-sol 4,MAP_SIX_ISLAND_DOTTED_HOLE_B4F,0,0
+firered-leafgreen,DOTTED_HOLE_B1F_PLAN,968,Trou Percé — 1er sous-sol,MAP_SIX_ISLAND_DOTTED_HOLE_B1F,0,0
+firered-leafgreen,DOTTED_HOLE_B2F_PLAN,969,Trou Percé — 2e sous-sol,MAP_SIX_ISLAND_DOTTED_HOLE_B2F,0,0
+firered-leafgreen,DOTTED_HOLE_B3F_PLAN,970,Trou Percé — 3e sous-sol,MAP_SIX_ISLAND_DOTTED_HOLE_B3F,0,0
+firered-leafgreen,DOTTED_HOLE_B4F_PLAN,971,Trou Percé — 4e sous-sol,MAP_SIX_ISLAND_DOTTED_HOLE_B4F,0,0
 firered-leafgreen,DOTTED_HOLE_B5F_PLAN,972,Trou Percé — Salle du Saphir,MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM,0,0
 firered-leafgreen,TRAINER_TOWER_1F_PLAN,973,Tour des Dresseurs — rez-de-chaussée,MAP_TRAINER_TOWER_1F,0,0
 firered-leafgreen,TRAINER_TOWER_2F_PLAN,974,Tour des Dresseurs — 1er étage,MAP_TRAINER_TOWER_2F,0,0
@@ -250,3 +254,105 @@ firered-leafgreen,SAFARI_ZONE_PLAN,984,Parc Safari,MAP_SAFARI_ZONE_NORTH,52,0
 firered-leafgreen,SAFARI_ZONE_PLAN,984,Parc Safari,MAP_SAFARI_ZONE_WEST,0,44
 firered-leafgreen,SAFARI_ZONE_PLAN,984,Parc Safari,MAP_SAFARI_ZONE_CENTER,52,44
 firered-leafgreen,SAFARI_ZONE_PLAN,984,Parc Safari,MAP_SAFARI_ZONE_EAST,107,44
+ruby-sapphire-emerald,METEOR_FALLS_1F_PLAN,942,Site Météore (rez-de-chaussée),MAP_METEOR_FALLS_1F_1R,0,0
+ruby-sapphire-emerald,METEOR_FALLS_1F_PLAN,942,Site Météore (rez-de-chaussée),MAP_METEOR_FALLS_1F_2R,32,0
+ruby-sapphire-emerald,METEOR_FALLS_1F_PLAN,942,Site Météore (rez-de-chaussée),MAP_METEOR_FALLS_STEVENS_CAVE,64,0
+ruby-sapphire-emerald,METEOR_FALLS_B1F_PLAN,943,Site Météore (1er sous-sol),MAP_METEOR_FALLS_B1F_1R,0,0
+ruby-sapphire-emerald,METEOR_FALLS_B1F_PLAN,943,Site Météore (1er sous-sol),MAP_METEOR_FALLS_B1F_2R,31,0
+ruby-sapphire-emerald,ABANDONED_SHIP_2F_PLAN,944,Épave (pont),MAP_ABANDONED_SHIP_DECK,0,0
+ruby-sapphire-emerald,ABANDONED_SHIP_2F_PLAN,944,Épave (pont),MAP_ABANDONED_SHIP_CAPTAINS_OFFICE,25,0
+ruby-sapphire-emerald,ABANDONED_SHIP_1F_PLAN,945,Épave (rez-de-chaussée),MAP_ABANDONED_SHIP_CORRIDORS_1F,0,0
+ruby-sapphire-emerald,ABANDONED_SHIP_1F_PLAN,945,Épave (rez-de-chaussée),MAP_ABANDONED_SHIP_ROOMS_1F,20,0
+ruby-sapphire-emerald,ABANDONED_SHIP_1F_PLAN,945,Épave (rez-de-chaussée),MAP_ABANDONED_SHIP_ROOMS2_1F,40,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B1F_PLAN,946,Épave (1er sous-sol),MAP_ABANDONED_SHIP_CORRIDORS_B1F,0,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B1F_PLAN,946,Épave (1er sous-sol),MAP_ABANDONED_SHIP_ROOMS_B1F,15,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B1F_PLAN,946,Épave (1er sous-sol),MAP_ABANDONED_SHIP_ROOMS2_B1F,15,10
+ruby-sapphire-emerald,ABANDONED_SHIP_B1F_PLAN,946,Épave (1er sous-sol),MAP_ABANDONED_SHIP_ROOM_B1F,0,12
+ruby-sapphire-emerald,ABANDONED_SHIP_B2F_PLAN,947,Épave (étage caché),MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS,0,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B2F_PLAN,947,Épave (étage caché),MAP_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS,15,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B3F_PLAN,948,Épave (sous l’eau),MAP_ABANDONED_SHIP_UNDERWATER1,0,0
+ruby-sapphire-emerald,ABANDONED_SHIP_B3F_PLAN,948,Épave (sous l’eau),MAP_ABANDONED_SHIP_UNDERWATER2,10,0
+ruby-sapphire-emerald,SS_TIDAL_1F_PLAN,949,Le Marina (rez-de-chaussée),MAP_SS_TIDAL_CORRIDOR,0,0
+ruby-sapphire-emerald,SS_TIDAL_1F_PLAN,949,Le Marina (rez-de-chaussée),MAP_SS_TIDAL_ROOMS,20,0
+ruby-sapphire-emerald,SS_TIDAL_B1F_PLAN,950,Le Marina (pont inférieur),MAP_SS_TIDAL_LOWER_DECK,0,0
+ruby-sapphire-emerald,NEW_MAUVILLE_PLAN,951,New Lavandia,MAP_NEW_MAUVILLE_ENTRANCE,0,0
+ruby-sapphire-emerald,NEW_MAUVILLE_PLAN,951,New Lavandia,MAP_NEW_MAUVILLE_INSIDE,11,0
+ruby-sapphire-emerald,SEALED_CHAMBER_PLAN,952,Sanctuaire,MAP_SEALED_CHAMBER_OUTER_ROOM,0,0
+ruby-sapphire-emerald,SEALED_CHAMBER_PLAN,952,Sanctuaire,MAP_SEALED_CHAMBER_INNER_ROOM,23,0
+ruby-sapphire-emerald,UNDERWATER_ROUTE134_PLAN,953,Fond marin (Chenal 134),MAP_UNDERWATER_ROUTE134,0,0
+ruby-sapphire-emerald,UNDERWATER_ROUTE134_PLAN,953,Fond marin (Chenal 134),MAP_UNDERWATER_SEALED_CHAMBER,1,10
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_HALL5,0,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CORRIDOR5,0,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_SIDNEYS_ROOM,13,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_HALL1,28,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CORRIDOR1,28,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_PHOEBES_ROOM,41,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_HALL2,56,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CORRIDOR2,56,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_GLACIAS_ROOM,69,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_HALL3,84,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CORRIDOR3,84,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_DRAKES_ROOM,97,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_HALL4,112,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CORRIDOR4,112,0
+ruby-sapphire-emerald,EVER_GRANDE_CITY_LEAGUE_PLAN,954,Éternara (Conseil 4),MAP_EVER_GRANDE_CITY_CHAMPIONS_ROOM,125,0
+ruby-sapphire-emerald,NAVEL_ROCK_1F_PLAN,955,Roc Nombri (rez-de-chaussée),MAP_NAVEL_ROCK_ENTRANCE,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_1F_PLAN,955,Roc Nombri (rez-de-chaussée),MAP_NAVEL_ROCK_EXTERIOR,23,0
+ruby-sapphire-emerald,NAVEL_ROCK_1F_PLAN,955,Roc Nombri (rez-de-chaussée),MAP_NAVEL_ROCK_HARBOR,46,0
+ruby-sapphire-emerald,NAVEL_ROCK_B1F_PLAN,956,Roc Nombri (1er sous-sol),MAP_NAVEL_ROCK_B1F,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_B2F_PLAN,957,Roc Nombri (embranchement),MAP_NAVEL_ROCK_FORK,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_SUMMIT_PATH_2F_PLAN,958,"Roc Nombri (chemin du sommet, 1er étage)",MAP_NAVEL_ROCK_UP1,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_SUMMIT_PATH_3F_PLAN,959,"Roc Nombri (chemin du sommet, 2e étage)",MAP_NAVEL_ROCK_UP2,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_SUMMIT_PATH_4F_PLAN,960,"Roc Nombri (chemin du sommet, 3e étage)",MAP_NAVEL_ROCK_UP3,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_SUMMIT_PATH_5F_PLAN,961,"Roc Nombri (chemin du sommet, 4e étage)",MAP_NAVEL_ROCK_UP4,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_SUMMIT_PATH_SUMMIT_PLAN,962,Roc Nombri (sommet),MAP_NAVEL_ROCK_TOP,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B1F_PLAN,963,"Roc Nombri (chemin des profondeurs, 1er sous-sol)",MAP_NAVEL_ROCK_DOWN01,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B2F_PLAN,964,"Roc Nombri (chemin des profondeurs, 2e sous-sol)",MAP_NAVEL_ROCK_DOWN02,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B3F_PLAN,965,"Roc Nombri (chemin des profondeurs, 3e sous-sol)",MAP_NAVEL_ROCK_DOWN03,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B4F_PLAN,966,"Roc Nombri (chemin des profondeurs, 4e sous-sol)",MAP_NAVEL_ROCK_DOWN04,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B5F_PLAN,967,"Roc Nombri (chemin des profondeurs, 5e sous-sol)",MAP_NAVEL_ROCK_DOWN05,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B6F_PLAN,968,"Roc Nombri (chemin des profondeurs, 6e sous-sol)",MAP_NAVEL_ROCK_DOWN06,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B7F_PLAN,969,"Roc Nombri (chemin des profondeurs, 7e sous-sol)",MAP_NAVEL_ROCK_DOWN07,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B8F_PLAN,970,"Roc Nombri (chemin des profondeurs, 8e sous-sol)",MAP_NAVEL_ROCK_DOWN08,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B9F_PLAN,971,"Roc Nombri (chemin des profondeurs, 9e sous-sol)",MAP_NAVEL_ROCK_DOWN09,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B10F_PLAN,972,"Roc Nombri (chemin des profondeurs, 10e sous-sol)",MAP_NAVEL_ROCK_DOWN10,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B11F_PLAN,973,"Roc Nombri (chemin des profondeurs, 11e sous-sol)",MAP_NAVEL_ROCK_DOWN11,0,0
+ruby-sapphire-emerald,NAVEL_ROCK_BASE_PATH_B12F_PLAN,974,Roc Nombri (fond),MAP_NAVEL_ROCK_BOTTOM,0,0
+ruby-sapphire-emerald,MT_PYRE_1F_PLAN,975,Mont Mémoria (rez-de-chaussée),MAP_MT_PYRE_1F,0,0
+ruby-sapphire-emerald,MT_PYRE_1F_PLAN,975,Mont Mémoria (rez-de-chaussée),MAP_MT_PYRE_EXTERIOR,24,0
+ruby-sapphire-emerald,MT_PYRE_SUMMIT_PLAN,976,Mont Mémoria (sommet),MAP_MT_PYRE_SUMMIT,0,0
+ruby-sapphire-emerald,BIRTH_ISLAND_PLAN,977,Île Aurore,MAP_BIRTH_ISLAND_EXTERIOR,0,0
+ruby-sapphire-emerald,BIRTH_ISLAND_PLAN,977,Île Aurore,MAP_BIRTH_ISLAND_HARBOR,32,0
+ruby-sapphire-emerald,FARAWAY_ISLAND_PLAN,978,Île lointaine,MAP_FARAWAY_ISLAND_ENTRANCE,0,0
+ruby-sapphire-emerald,FARAWAY_ISLAND_PLAN,978,Île lointaine,MAP_FARAWAY_ISLAND_INTERIOR,36,0
+ruby-sapphire-emerald,SOUTHERN_ISLAND_PLAN,979,Île du Sud,MAP_SOUTHERN_ISLAND_EXTERIOR,0,0
+ruby-sapphire-emerald,SOUTHERN_ISLAND_PLAN,979,Île du Sud,MAP_SOUTHERN_ISLAND_INTERIOR,35,0
+ruby-sapphire-emerald,LILYCOVE_CITY_DEPARTMENT_STORE_ROOF_PLAN,980,"Nénucrique (Centre Commercial, toit)",MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP,0,0
+firered-leafgreen,CINNABAR_ISLAND_POKEMON_LAB_PLAN,985,Cramois’Île — Laboratoire Pokémon,MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE,0,0
+firered-leafgreen,CINNABAR_ISLAND_POKEMON_LAB_PLAN,985,Cramois’Île — Laboratoire Pokémon,MAP_CINNABAR_ISLAND_POKEMON_LAB_LOUNGE,0,13
+firered-leafgreen,CINNABAR_ISLAND_POKEMON_LAB_PLAN,985,Cramois’Île — Laboratoire Pokémon,MAP_CINNABAR_ISLAND_POKEMON_LAB_RESEARCH_ROOM,17,13
+firered-leafgreen,CINNABAR_ISLAND_POKEMON_LAB_PLAN,985,Cramois’Île — Laboratoire Pokémon,MAP_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM,34,13
+firered-leafgreen,POKEMON_LEAGUE_PLAN,986,Ligue Pokémon,MAP_POKEMON_LEAGUE_LORELEIS_ROOM,0,0
+firered-leafgreen,POKEMON_LEAGUE_PLAN,986,Ligue Pokémon,MAP_POKEMON_LEAGUE_BRUNOS_ROOM,15,0
+firered-leafgreen,POKEMON_LEAGUE_PLAN,986,Ligue Pokémon,MAP_POKEMON_LEAGUE_AGATHAS_ROOM,30,0
+firered-leafgreen,POKEMON_LEAGUE_PLAN,986,Ligue Pokémon,MAP_POKEMON_LEAGUE_LANCES_ROOM,45,0
+firered-leafgreen,POKEMON_LEAGUE_PLAN,986,Ligue Pokémon,MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM,75,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE,0,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM1,12,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM2,24,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM3,36,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM4,48,0
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM5,0,12
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM6,12,12
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM7,24,12
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM8,36,12
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM9,48,12
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM10,0,24
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM11,12,24
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM12,24,24
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM13,36,24
+firered-leafgreen,FIVE_ISLAND_LOST_CAVE_PLAN,987,Grotte Perdue,MAP_FIVE_ISLAND_LOST_CAVE_ROOM14,48,24
+firered-leafgreen,SEVEN_ISLAND_HOUSE_PLAN,988,Île 7 — Maison,MAP_SEVEN_ISLAND_HOUSE_ROOM1,0,0
+firered-leafgreen,SEVEN_ISLAND_HOUSE_PLAN,988,Île 7 — Maison,MAP_SEVEN_ISLAND_HOUSE_ROOM2,13,0
+firered-leafgreen,BIRTH_ISLAND_PLAN,989,Île Aurore,MAP_BIRTH_ISLAND_EXTERIOR,0,0
+firered-leafgreen,BIRTH_ISLAND_PLAN,989,Île Aurore,MAP_BIRTH_ISLAND_HARBOR,32,0

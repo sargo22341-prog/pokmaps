@@ -87,12 +87,12 @@ class MapOverlayRendererTest {
             val map = checkNotNull(catalog.defaultWorld?.let { catalog.gameMap(it.id) })
             val ids = candidates(catalog, map)
             val state = newState(map)
-            val renderer = MapOverlayRenderer()
+            val renderer = MapOverlayRenderer(noTiles)
             var orderChecks = 0
             for (step in steps(catalog, map, state)) {
                 renderer.render(step)
                 val fresh = newState(map)
-                MapOverlayRenderer().render(step.copy(mapState = fresh))
+                MapOverlayRenderer(noTiles).render(step.copy(mapState = fresh))
                 val expected = drawn(fresh, ids)
                 assertTrue(expected.isNotEmpty())
                 assertEquals(expected, drawn(state, ids))

@@ -13,7 +13,8 @@ from .games import EMERALD, EXTERNAL_EVENT_NOTE, FIRERED_LEAFGREEN, RUBY_SAPPHIR
 from .hoenn_team_graphics import team_graphics
 from .maps import MapRow, WarpRow, display_map_rows, read_map_names
 from .maps_layout import identifier, read_layout_curation
-from .maps_layout_gen3 import Gen3GameMaps
+from .maps_layout_gen3 import MIRAGE_ISLAND, MIRAGE_ROUTE, Gen3GameMaps
+from .maps_passages_gen3 import passages
 from .maps_render_gen3 import Gen3Renderer
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Event, Gen3Map
@@ -22,6 +23,8 @@ from .pret_hoenn_facilities import validate_facility_series, write_facility_seri
 from .sources import fetch_pret
 
 HOENN_MAP_GAMES = (EMERALD, RUBY_SAPPHIRE)
+# Eau des Îles Sevii répétée sous la carte : <niveau>.webp, une tuile identique pour toute la carte à ce niveau.
+SEA_TILES = "sevii-water"
 GEN3_MAP_GAMES = (*HOENN_MAP_GAMES, FIRERED_LEAFGREEN)
 
 
@@ -51,23 +54,27 @@ def _warps(game_maps: Gen3GameMaps) -> list[WarpRow]:
                     if 0 <= arrival.x < destination.width and 0 <= arrival.y < destination.height:
                         point = game_maps.point(target, arrival.x, arrival.y)
             result.append(WarpRow(const, *game_maps.point(const, warp.x, warp.y), target, *point))
-    return result + _mirage_passages(game_maps)
+    return result + _mirage_passages(game_maps) + passages(game_maps)
 
 
 def _mirage_passages(game_maps: Gen3GameMaps) -> list[WarpRow]:
     if game_maps.repo.remake:
         return []
-    island = "MAP_ROUTE130_MIRAGE_ISLAND"
-    grass = game_maps.cells(island)["grass"]
+    grass = game_maps.cells(MIRAGE_ISLAND)["grass"]
     if not grass:
         raise ValueError("Île Mirage : terrain herbeux absent")
     x, y = grass[len(grass) // 2]
-    source = game_maps.point("MAP_ROUTE130", x, y)
-    target = game_maps.point(island, x, y)
-    # Accès de navigation au layout conditionnel, sans inventer une porte dans le jeu.
+    # Le retour vers la route est posé sous la plage, dans l'eau, pour ne pas masquer l'île.
+    beach = max(row for column, row in game_maps.mirage_cells if column == x)
+    back = (x, beach + 2)
+    if back[1] >= game_maps.maps[MIRAGE_ROUTE].height or back in game_maps.mirage_cells:
+        raise ValueError(f"Île Mirage : retour hors de l'eau : {back}")
+    island, route = game_maps.point(MIRAGE_ISLAND, x, y), game_maps.point(MIRAGE_ROUTE, x, y)
+    leave, arrive = game_maps.point(MIRAGE_ISLAND, *back), game_maps.point(MIRAGE_ROUTE, *back)
+    # L'île est superposée à la route : chaque passage arrive à la même position, sur l'autre couche.
     return [
-        WarpRow("MAP_ROUTE130", *source, island, *target),
-        WarpRow(island, *target, "MAP_ROUTE130", *source),
+        WarpRow(MIRAGE_ROUTE, *route, MIRAGE_ISLAND, *island, "mirage"),
+        WarpRow(MIRAGE_ISLAND, *leave, MIRAGE_ROUTE, *arrive, "mirage"),
     ]
 
 
@@ -145,6 +152,8 @@ def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, i
             for current in game_maps.maps.values():
                 sprites.update(team_graphics(current, repo.offers[version].scripts).values())
     renderer.write_sprites(sprites, output / "sprites")
+    if repo.remake:
+        renderer.write_sea("SEVII", output / SEA_TILES)
     _write_catalog(rows, warps, output)
     _write_events(game_maps, output)
     write_facility_series(repo, output)
@@ -169,8 +178,13 @@ def validate_catalog(output: Path) -> None:
     maps = {row["const"]: row for row in rows}
     if len(maps) != len(rows) or len({row["number"] for row in rows}) != len(rows):
         raise ValueError(f"{output} : cartes ou numéros répétés")
+    versions = {
+        version for game in GEN3_MAP_GAMES if game.version_group == output.name for version, _ in game.pret_versions
+    }
     for row in rows:
         _validate_row(output, row, maps)
+        if row["version"] and (row["version"] not in versions or row["is_world"] == "True"):
+            raise ValueError(f"{output} : version de carte invalide : {row['const']} {row['version']}")
     with (output / "warps.tsv").open(encoding="utf-8", newline="") as handle:
         warps = list(csv.DictReader(handle, delimiter="\t"))
         for warp in warps:
@@ -182,21 +196,23 @@ def validate_catalog(output: Path) -> None:
 
 
 def _validate_mirage_access(output: Path, maps: dict[str, dict[str, str]], warps: list[dict[str, str]]) -> None:
-    island = "MAP_ROUTE130_MIRAGE_ISLAND"
-    if island not in maps:
+    if MIRAGE_ISLAND not in maps:
         return
-    outward = [warp for warp in warps if warp["target"] == island]
-    returning = [warp for warp in warps if warp["map_const"] == island]
+    outward = [warp for warp in warps if warp["target"] == MIRAGE_ISLAND]
+    returning = [warp for warp in warps if warp["map_const"] == MIRAGE_ISLAND]
     if len(outward) != 1 or len(returning) != 1:
         raise ValueError(f"{output} : Île Mirage : accès aller-retour absent ou répété")
     entrance, exit_warp = outward[0], returning[0]
-    if entrance["map_const"] != "MAP_ROUTE130" or exit_warp["target"] != "MAP_ROUTE130":
+    if entrance["map_const"] != MIRAGE_ROUTE or exit_warp["target"] != MIRAGE_ROUTE:
         raise ValueError(f"{output} : Île Mirage : accès hors du Chenal 130")
-    if any(
-        entrance[source] != exit_warp[target]
-        for source, target in (("x", "target_x"), ("y", "target_y"), ("target_x", "x"), ("target_y", "y"))
+    if {entrance["kind"], exit_warp["kind"]} != {"mirage"} or any(
+        warp[source] != warp[target]
+        for warp in (entrance, exit_warp)
+        for source, target in (("x", "target_x"), ("y", "target_y"))
     ):
-        raise ValueError(f"{output} : Île Mirage : coordonnées aller-retour incohérentes")
+        raise ValueError(f"{output} : Île Mirage : passages non superposés à la route")
+    if int(exit_warp["y"]) <= int(entrance["y"]):
+        raise ValueError(f"{output} : Île Mirage : retour placé sur l'île")
 
 
 def _validate_events(output: Path, maps: dict[str, dict[str, str]]) -> None:

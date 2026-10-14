@@ -121,7 +121,7 @@ private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit
         if (state.game?.hasTimeOfDay == true) {
             TimeButton(state.time, iconOnly = true) { onAction(MapAction.CycleTime) }
         }
-        LayersButton(state.layers, state.hasFruitTrees) { onAction(MapAction.ToggleLayer(it)) }
+        LayersButton(state.layers, state.hasFruitTrees, state.hasSecretBases) { onAction(MapAction.ToggleLayer(it)) }
     }
 }
 
@@ -327,14 +327,21 @@ private fun MapTitle(state: MapUiState, onBack: () -> Unit, modifier: Modifier =
 }
 
 @Composable
-private fun LayersButton(layers: Set<MapLayer>, fruitTrees: Boolean, onToggle: (MapLayer) -> Unit) {
+private fun LayersButton(
+    layers: Set<MapLayer>,
+    fruitTrees: Boolean,
+    secretBases: Boolean,
+    onToggle: (MapLayer) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
     Box {
         FilledTonalIconButton(onClick = { expanded = true }) {
             Icon(painterResource(R.drawable.ic_layers), stringResource(R.string.map_layers))
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            MapLayer.entries.filter { it != MapLayer.FRUIT_TREES || fruitTrees }.forEach { layer ->
+            MapLayer.entries.filter {
+                (it != MapLayer.FRUIT_TREES || fruitTrees) && (it != MapLayer.SECRET_BASES || secretBases)
+            }.forEach { layer ->
                 DropdownMenuItem(
                     text = { Text(stringResource(layer.label)) },
                     leadingIcon = { Checkbox(checked = layer in layers, onCheckedChange = null) },
@@ -384,6 +391,7 @@ private fun HighlightBanner(highlight: MapHighlight, onOpen: (MapPlace) -> Unit,
 private val MapLayer.label: Int
     get() = when (this) {
         MapLayer.WARPS -> R.string.map_layer_warps
+        MapLayer.SECRET_BASES -> R.string.map_layer_secret_bases
         MapLayer.ITEMS -> R.string.label_items
         MapLayer.FRUIT_TREES -> R.string.map_layer_fruit_trees
         MapLayer.TRAINERS -> R.string.map_layer_trainers

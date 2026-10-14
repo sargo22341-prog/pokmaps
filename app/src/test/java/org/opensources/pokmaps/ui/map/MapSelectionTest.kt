@@ -37,7 +37,7 @@ import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
 @OptIn(ExperimentalCoroutinesApi::class)
 class MapSelectionTest {
     private class Fixture(scope: CoroutineScope, details: MapDao) {
-        val session = MapSession(scope)
+        val session = MapSession(scope, noTiles)
         val selection = MapSelection(
             session,
             GetMapEncountersUseCase(MapRepository(details, Dispatchers.Unconfined)),

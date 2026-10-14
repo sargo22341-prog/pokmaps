@@ -99,7 +99,6 @@ private fun GuideIndex(state: GuideUiState, onAction: (GuideAction) -> Unit, mod
     LazyColumn(modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item("header") { GuideHeading(state, onAction) }
         if (state.category == null) {
-            if (state.roamers.isNotEmpty()) item("roamers") { RoamerTool(state, onAction) }
             items(state.categories, key = { it.name }) { category ->
                 Card(onClick = { onAction(GuideAction.Category(category)) }, modifier = Modifier.fillMaxWidth()) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {

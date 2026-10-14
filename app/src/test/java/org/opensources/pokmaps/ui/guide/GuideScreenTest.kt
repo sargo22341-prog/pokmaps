@@ -10,6 +10,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,9 +19,8 @@ import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideLibrary
-import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideSpan
-import org.opensources.pokmaps.domain.guide.RoamerObservation
+import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -36,19 +36,55 @@ class GuideScreenTest {
     }
 
     @Test
-    fun observedGbaRoamerOpensItsRouteAndCanBeForgotten() {
-        val state = GuideUiState(
-            loading = false,
-            library = GuideLibrary(FakeGameDao.RUBY, emptyList()),
-            progress = GuideProgress(roamers = listOf(RoamerObservation(381, "route110")))
+    fun roamerArticlePresentsTheVersionRoamerWithoutTracking() {
+        val roamers = GuideArticle(
+            "hoenn-roamers",
+            "Errants",
+            GuideCategory.SIDE_QUEST,
+            listOf(listOf(GuideSpan("Texte"))),
+            381,
+            emptyList()
         )
-        compose.setContent { RoamerTool(state) { actions += it } }
-        compose.onNode(hasText(context.getString(R.string.guide_roamers_title))).performClick()
+        show(
+            GuideUiState(
+                loading = false,
+                library = GuideLibrary(FakeGameDao.RUBY, listOf(roamers)),
+                category = GuideCategory.SIDE_QUEST,
+                articleId = roamers.id
+            )
+        )
         compose.onNode(hasText(context.getString(R.string.guide_roamer_latios))).assertExists()
         compose.onNode(hasText(context.getString(R.string.guide_roamer_latias))).assertDoesNotExist()
-        compose.onNode(hasText(context.getString(R.string.guide_roamer_map))).performClick()
-        compose.onNode(hasText(context.getString(R.string.guide_roamer_forget))).performClick()
-        assertEquals(listOf(GuideAction.ShowPlace("route110"), GuideAction.ObserveRoamer(381, null)), actions)
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_level, 40))).assertExists()
+        compose.onNode(hasText(context.getString(R.string.guide_roamer_area_hoenn))).assertExists()
+    }
+
+    @Test
+    fun secretBaseLinkShowsItsEntranceOnTheMap() {
+        val bases = GuideArticle(
+            "hoenn-secret-bases",
+            "Bases",
+            GuideCategory.TIP,
+            listOf(listOf(GuideSpan("Route 111 : "), GuideSpan("Base Secrète (arbre 1)", GuideTarget.SecretBase(7)))),
+            263,
+            emptyList()
+        )
+        var mapShown = false
+        compose.setContent {
+            GuideScreen(
+                GuideUiState(
+                    loading = false,
+                    library = GuideLibrary(FakeGameDao.RUBY, listOf(bases)),
+                    category = GuideCategory.TIP,
+                    articleId = bases.id
+                ),
+                { actions += it },
+                GuideLinks({}, { mapShown = true }, {})
+            )
+        }
+        compose.onNode(hasText("Base Secrète (arbre 1)", substring = true)).performClick()
+        assertEquals(listOf(GuideAction.ShowSecretBase(7)), actions)
+        assertTrue(mapShown)
     }
 
     @Test

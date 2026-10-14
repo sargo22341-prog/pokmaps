@@ -52,7 +52,7 @@ class MapViewModel @Inject constructor(
     private val observeCollection: ObserveCollectionUseCase,
     getMapTiles: GetMapTilesUseCase
 ) : ViewModel() {
-    private val session = MapSession(viewModelScope)
+    private val session = MapSession(viewModelScope) { getMapTiles(it) }
     private val selection = MapSelection(session, getMapEncounters, getObjectDetails)
     private val navigation = MapNavigation(session, selection, getMapTiles)
 
@@ -215,6 +215,9 @@ class MapViewModel @Inject constructor(
             }
 
             is MapRequest.FocusObject -> catalog.objectsById[request.objectId]?.let(navigation::focusObject)
+
+            is MapRequest.ShowSecretBase -> catalog.secretBases.firstOrNull { it.entrance.id == request.warpId }
+                ?.let { navigation.focusSecretBase(it.entrance) }
         }
     }
 

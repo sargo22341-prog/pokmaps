@@ -8,13 +8,18 @@ from dataclasses import replace
 from functools import cached_property
 
 from .games import Game, Region
+from .maps_curation_gen3 import choose_layouts, read_layout_choices, read_trims, trim_maps
 from .maps_layout import GameMaps, LayoutCuration
 from .maps_terrain_gen3 import wild_cells
+from .maps_versions_gen3 import version_maps
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Map
 from .pret_gen3_source import read_text
 
 UNDERWATER = "HOENN_UNDERWATER"
+# L'Île Mirage est le Chenal 130 avec un autre layout : elle se superpose à la route dans la carte du monde.
+MIRAGE_ISLAND = "MAP_ROUTE130_MIRAGE_ISLAND"
+MIRAGE_ROUTE = "MAP_ROUTE130"
 
 
 class Gen3GameMaps(GameMaps):
@@ -37,9 +42,7 @@ class Gen3GameMaps(GameMaps):
                 anchors=tuple(anchor for anchor in curation.anchors if anchor.map in repo.maps),
                 skips=tuple(skip for skip in curation.skips if skip.map in repo.maps and skip.target in repo.maps),
                 parents=tuple(
-                    parent
-                    for parent in curation.parents
-                    if parent.map in repo.maps or parent.map == "MAP_ROUTE130_MIRAGE_ISLAND"
+                    parent for parent in curation.parents if parent.map in repo.maps or parent.map == MIRAGE_ISLAND
                 ),
             )
         )
@@ -50,14 +53,17 @@ class Gen3GameMaps(GameMaps):
             for const, current in repo.maps.items()
             if not any(marker in const for marker in ("UNUSED", "PROTOTYPE", "UNKNOWN_MAP"))
         }
+        family = game.map_family
+        choose_layouts(self.maps, repo, [choice for choice in read_layout_choices() if choice.family == family])
+        trim_maps(self.maps, [trim for trim in read_trims() if trim.family == family])
         if repo.remake:
             curated = {entry.map for entry in (*self.anchors, *self.chosen_parents, *self.plan_parts)}
             if missing := sorted(curated - self.maps.keys()):
                 raise ValueError(f"Cartes de remake éditoriales absentes ou inutilisées : {missing}")
             return
-        self.maps["MAP_ROUTE130_MIRAGE_ISLAND"] = replace(
-            self.maps["MAP_ROUTE130"],
-            const="MAP_ROUTE130_MIRAGE_ISLAND",
+        self.maps[MIRAGE_ISLAND] = replace(
+            self.maps[MIRAGE_ROUTE],
+            const=MIRAGE_ISLAND,
             number=800,
             layout=repo.layouts["LAYOUT_UNREFERENCED_MAP" if repo.ruby else "LAYOUT_ROUTE130_MIRAGE_ISLAND"],
             connections=(),
@@ -130,15 +136,43 @@ class Gen3GameMaps(GameMaps):
         return surface | {UNDERWATER: underwater}
 
     def _exits(self, const: str) -> list[str]:
+        return self.exits(const)
+
+    def exits(self, const: str, closed: frozenset[int] = frozenset()) -> list[str]:
+        """Cartes atteintes depuis `const`, sauf par ses warps d'indice `closed` (fermés dans une version)."""
         current = self.maps[const]
-        targets = [warp.target for warp in current.warps if warp.accessible] + [
-            connection.target for connection in current.connections if connection.direction in {"dive", "emerge"}
-        ]
+        targets = [
+            warp.target for index, warp in enumerate(current.warps) if warp.accessible and index not in closed
+        ] + [connection.target for connection in current.connections if connection.direction in {"dive", "emerge"}]
         path = self.repo.root / "data/maps" / (current.shared_scripts_map or current.label) / "scripts.inc"
         if path.is_file():
             text = read_text(path)
             targets += re.findall(r"^\s*(?:warp\w*|set\w*warp)\s+(MAP_\w+)", text, re.M)
         return [target for target in targets if target in self.maps]
+
+    def detached_origin(self, const: str) -> tuple[int, int]:
+        if const != MIRAGE_ISLAND:
+            return 0, 0
+        x, y = self.world_blocks[self.world_region[MIRAGE_ROUTE]][MIRAGE_ROUTE]
+        return x * self.block_px, y * self.block_px
+
+    @cached_property
+    def mirage_cells(self) -> frozenset[tuple[int, int]]:
+        """Cases où l'Île Mirage change le Chenal 130 : seules elles sont dessinées par-dessus la route."""
+        if MIRAGE_ISLAND not in self.maps:
+            return frozenset()
+        island, route = self.maps[MIRAGE_ISLAND], self.maps[MIRAGE_ROUTE]
+        cells = frozenset(
+            (x, y) for y in range(island.height) for x in range(island.width) if island.block(x, y) != route.block(x, y)
+        )
+        if not cells:
+            raise ValueError("Île Mirage : layout identique au Chenal 130")
+        return cells
+
+    @cached_property
+    def version_maps(self) -> dict[str, str]:
+        """Cartes qu'une seule version du groupe permet d'atteindre -> cette version."""
+        return version_maps(self)
 
     @cached_property
     def parents(self) -> dict[str, str]:

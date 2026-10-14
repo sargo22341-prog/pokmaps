@@ -347,6 +347,8 @@ CREATE TABLE encounter_rate (
 -- Toutes les coordonnées (x, y) sont en pixels de la carte affichée.
 -- is_world identifie les régions sans dépendre de leur nom ; start_map_id désigne leur ville de départ.
 -- origin_map_id conserve la ville ou route d'origine des cartes à part, calculée avec map_parents.csv.
+-- version_id : seule version du groupe où l'on peut atteindre la carte (Planque Magma de Rubis, Planque Aqua de
+-- Saphir), NULL si elle existe dans toutes.
 CREATE TABLE map (
     id INTEGER NOT NULL PRIMARY KEY,
     version_group_id INTEGER NOT NULL,
@@ -360,7 +362,8 @@ CREATE TABLE map (
     level_count INTEGER NOT NULL,
     is_world INTEGER NOT NULL,
     origin_map_id INTEGER,
-    start_map_id INTEGER
+    start_map_id INTEGER,
+    version_id INTEGER
 );
 CREATE INDEX index_map_version_group_id ON map (version_group_id);
 CREATE INDEX index_map_parent_map_id ON map (parent_map_id);
@@ -374,6 +377,8 @@ CREATE TABLE map_area (
 CREATE INDEX index_map_area_location_area_id ON map_area (location_area_id);
 
 -- Warps (portes, escaliers, entrées de grottes) : position et arrivée (NULL si inconnue).
+-- kind : NULL pour un warp du jeu, sinon un passage sans warp : dive (plongée ou remontée scriptée), cable_car
+-- (téléphérique), mirage (apparition de l'Île Mirage) ou secret_base (entrée d'une Base Secrète).
 CREATE TABLE map_warp (
     id INTEGER NOT NULL PRIMARY KEY,
     map_id INTEGER NOT NULL,
@@ -381,7 +386,8 @@ CREATE TABLE map_warp (
     y INTEGER NOT NULL,
     target_map_id INTEGER,
     target_x INTEGER,
-    target_y INTEGER
+    target_y INTEGER,
+    kind TEXT
 );
 CREATE INDEX index_map_warp_map_id ON map_warp (map_id);
 

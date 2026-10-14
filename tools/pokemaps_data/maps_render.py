@@ -72,6 +72,12 @@ class MapRenderer(ABC):
     def write_sprites(self, sprites: set[str], output: Path) -> None:
         """Première image (de face) des sprites de personnages utilisés, fond transparent."""
 
+    def write_display(self, const: str, output: Path) -> DisplayMap:
+        """Rend une carte affichée et écrit ses tuiles dans `output`."""
+        display = self.render(const)
+        write_tiles(display, output)
+        return display
+
     def render(self, const: str) -> DisplayMap:
         if const in self.game_maps.world_blocks:
             return self._render_world(const)
@@ -161,6 +167,36 @@ def write_tiles(display: DisplayMap, output: Path) -> int:
                 path = output / str(level) / f"{row}_{column}.webp"
                 path.parent.mkdir(parents=True, exist_ok=True)
                 # method=4 et non 6 : 6 n'allège les tuiles que de 4 % (mesuré), pour un encodage 25 fois plus long.
+                tile.save(path, "WEBP", lossless=True, method=4)
+                count += 1
+    return count
+
+
+def write_region_tiles(image: Image.Image, origin: tuple[int, int], size: tuple[int, int], output: Path) -> int:
+    """Tuiles d'une image placée en `origin` dans une carte de taille `size`, sur la grille de cette carte.
+
+    Seules les tuiles que l'image touche sont écrites, à chaque niveau de zoom ; la réduction de chaque niveau
+    part d'un cadre aligné sur son facteur, comme la carte entière, pour que les pixels coïncident."""
+    levels = level_count(*size)
+    count = 0
+    for level in range(levels):
+        factor = 2 ** (levels - 1 - level)
+        left, top = (origin[0] // factor) * factor, (origin[1] // factor) * factor
+        right = math.ceil((origin[0] + image.width) / factor) * factor
+        bottom = math.ceil((origin[1] + image.height) / factor) * factor
+        frame = Image.new("RGBA", (right - left, bottom - top))
+        frame.paste(image, (origin[0] - left, origin[1] - top))
+        if factor > 1:
+            frame = frame.resize((frame.width // factor, frame.height // factor), Image.Resampling.BOX)
+        x0, y0 = left // factor, top // factor
+        for row in range(y0 // TILE_SIZE, math.ceil((y0 + frame.height) / TILE_SIZE)):
+            for column in range(x0 // TILE_SIZE, math.ceil((x0 + frame.width) / TILE_SIZE)):
+                tile = Image.new("RGBA", (TILE_SIZE, TILE_SIZE))
+                tile.paste(frame, (x0 - column * TILE_SIZE, y0 - row * TILE_SIZE))
+                if tile.getextrema()[3][1] == 0:
+                    continue
+                path = output / str(level) / f"{row}_{column}.webp"
+                path.parent.mkdir(parents=True, exist_ok=True)
                 tile.save(path, "WEBP", lossless=True, method=4)
                 count += 1
     return count

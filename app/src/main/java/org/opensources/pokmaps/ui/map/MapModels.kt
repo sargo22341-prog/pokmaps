@@ -135,6 +135,8 @@ data class MapUiState(
     val floors: List<MapFloor> = emptyList(),
     val hasConnections: Boolean = false,
     val hasFruitTrees: Boolean = false,
+    /** Le jeu a des Bases Secrètes : leur calque est proposé. */
+    val hasSecretBases: Boolean = false,
     val showConnections: Boolean = false,
     val layers: Set<MapLayer> = MapLayer.entries.toSet(),
     /** Pokémon capturés dans la version. */
@@ -189,6 +191,7 @@ sealed interface MapAction {
 internal object MapMarkerIds {
     const val LAZY_LOADER = "lazy"
     const val WARP = "w"
+    const val SECRET_BASE = "sb"
     const val OBJECT = "o"
     const val WILD = "p"
     const val HIGHLIGHT_WARP = "hw"

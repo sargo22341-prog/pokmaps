@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.FossilUse
@@ -76,31 +77,40 @@ class SearchViewModel @Inject constructor(observeIndex: ObserveSearchIndexUseCas
         val fossilUses: Map<String, FossilUse>
     )
 
-    val state: StateFlow<SearchUiState> =
-        combine(observeIndex().map(::index), query) { index, query ->
-            val text = PokedexSearch.normalize(query)
-            if (text.isEmpty()) {
-                SearchUiState(loading = false, game = index.source.game, query = query)
-            } else {
-                SearchUiState(
-                    loading = false,
-                    game = index.source.game,
-                    query = query,
-                    pokemon = index.pokemon.filter(index.source.pokedex, PokedexFilter(query = query), MAX_RESULTS),
-                    places = index.places.matching(text),
-                    items = index.items.matching(text),
-                    characters = index.characters.matching(text),
-                    fossilUses = index.fossilUses
-                )
-            }
-        }.flowOn(computation)
+    /** Résultats calculés hors du fil principal ; ils peuvent correspondre au texte précédent un court instant. */
+    private val results =
+        combine(observeIndex().map(::index), query) { index, query -> results(index, query) }
+            .flowOn(computation)
             .catch { emit(SearchUiState(loading = false, failed = true)) }
+            .onStart { emit(SearchUiState()) }
+
+    /**
+     * Le texte saisi rejoint l'état sans attendre le calcul : un champ qui reçoit sa propre valeur en retard
+     * replace son curseur et inverse l'ordre des lettres tapées.
+     */
+    val state: StateFlow<SearchUiState> =
+        combine(results, query) { results, query -> results.copy(query = query) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchUiState())
 
     fun onAction(action: SearchAction) {
         when (action) {
             is SearchAction.Query -> query.value = action.text
         }
+    }
+
+    private fun results(index: Index, query: String): SearchUiState {
+        val text = PokedexSearch.normalize(query)
+        if (text.isEmpty()) return SearchUiState(loading = false, game = index.source.game, query = query)
+        return SearchUiState(
+            loading = false,
+            game = index.source.game,
+            query = query,
+            pokemon = index.pokemon.filter(index.source.pokedex, PokedexFilter(query = query), MAX_RESULTS),
+            places = index.places.matching(text),
+            items = index.items.matching(text),
+            characters = index.characters.matching(text),
+            fossilUses = index.fossilUses
+        )
     }
 
     private fun <T> List<Pair<String, T>>.matching(text: String): List<T> =

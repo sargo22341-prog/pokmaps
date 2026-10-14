@@ -6,7 +6,8 @@ internal fun fireRedAchievements(): List<AchievementDefinition> = DEFINITIONS
 
 private const val ZARBI_CHAPTER = "remake-collections"
 
-private const val COLLECTION_CHAPTER = "remake-national-collection"
+// La collection se prépare avec les Zarbi, fossiles et détours des Îles Sevii.
+private const val COLLECTION_CHAPTER = "remake-collections"
 
 private const val PREP_CHAPTER = "remake-preparation"
 

@@ -66,8 +66,33 @@ class MapSectionsTest {
         assertEquals(setOf(2, 3), catalog.gameMap(1)?.regions?.map { it.id }?.toSet())
         assertTrue(catalog.floorsOf(1).isEmpty())
         assertTrue(catalog.floorsOf(4).isEmpty())
-        assertEquals(listOf(MapConnection(1, 312, 100, 360, 100, setOf(1, 2, 3))), catalog.connectionsOf(1))
+        assertEquals(listOf(MapConnection(1, 312, 108, 360, 108, setOf(1, 2, 3))), catalog.connectionsOf(1))
         assertTrue(catalog.entrancesOf(1).any { it.targetMapId == 4 })
+    }
+
+    @Test
+    fun aThreeTileGateIsOneConnectionFromItsMiddle() {
+        val maps = listOf(
+            map(1, "safari-zone-plan", "Parc Safari"),
+            map(2, "safari-zone-center", "Centre").copy(parentId = 1, levelCount = 0),
+            map(3, "safari-zone-north", "Nord").copy(parentId = 1, x = 352, levelCount = 0)
+        )
+        // Les portes des remakes ont trois cases, dans chaque sens : un seul trait, sans doublon.
+        val passages = listOf(1240, 1256, 1272).flatMapIndexed { index, x ->
+            listOf(
+                MapWarp(index + 1, 2, x, 792, 3, x + 80, 552),
+                MapWarp(index + 10, 3, x + 80, 552, 2, x, 792)
+            )
+        }
+        val connections = catalog(maps, passages).connectionsOf(1)
+        assertEquals(1, connections.size)
+        assertEquals(
+            listOf(1256, 792, 1336, 552),
+            connections.single().let {
+                listOf(it.x, it.y, it.targetX, it.targetY)
+            }
+        )
+        assertEquals(setOf(1, 2, 3, 10, 11, 12), connections.single().warpIds)
     }
 
     @Test

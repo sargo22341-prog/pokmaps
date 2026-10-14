@@ -24,8 +24,10 @@ def validate_team_battles(connection: sqlite3.Connection) -> list[str]:
             if len(actors) != count or any(team not in (row[3] or "") or row[5] == 0 for row in actors):
                 errors.append(f"{version}:{label} : sbires, apparences ou équipes incorrects")
         if version != "emerald":
+            # Nénucrique n'ouvre que la planque de l'équipe de la version.
+            hideout = "magma-hideout-" if version == "ruby" else "aqua-hideout-"
             for floor, count in (("1f", 1), ("b1f", 3), ("b2f", 3)):
-                label = "magma-hideout-" + floor
+                label = hideout + floor
                 actors = [row for row in rows if row[0] == version and row[1] == label and row[2] == "trainer"]
                 if len(actors) != count:
                     errors.append(f"{version}:{label} : combats du repaire manquants")

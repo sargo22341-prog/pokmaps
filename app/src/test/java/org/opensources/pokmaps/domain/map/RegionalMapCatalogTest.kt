@@ -53,25 +53,25 @@ class RegionalMapCatalogTest {
         assertEquals("kanto", start.identifier)
         assertEquals("pallet-town", maps.maps[start.startMapId]?.identifier)
         assertEquals(
-            listOf("kanto", "sevii", "birth-island-exterior", "navel-rock-exterior"),
+            listOf("kanto", "sevii", "birth-island-plan", "navel-rock-1f-plan"),
             maps.regionWorlds.map { it.identifier }
         )
         val summit = checkNotNull(maps.mapByIdentifier("navel-rock-summit"))
-        assertEquals("navel-rock-exterior", maps.regionWorldOf(summit.id)?.identifier)
+        assertEquals("navel-rock-1f-plan", maps.regionWorldOf(summit.id)?.identifier)
     }
 
     @Test
     fun hoennMenuOffersOnlyTheIslandsPresentInEachGame() {
         val ruby = GeneratedGbaCatalog.load("ruby-sapphire")
-        assertEquals(listOf("hoenn", "southern-island-exterior"), ruby.regionWorlds.map { it.identifier })
+        assertEquals(listOf("hoenn", "southern-island-plan"), ruby.regionWorlds.map { it.identifier })
         val emerald = GeneratedGbaCatalog.load("emerald")
         assertEquals(
             listOf(
                 "hoenn",
-                "southern-island-exterior",
-                "birth-island-exterior",
-                "navel-rock-exterior",
-                "faraway-island-entrance"
+                "southern-island-plan",
+                "birth-island-plan",
+                "navel-rock-1f-plan",
+                "faraway-island-plan"
             ),
             emerald.regionWorlds.map { it.identifier }
         )

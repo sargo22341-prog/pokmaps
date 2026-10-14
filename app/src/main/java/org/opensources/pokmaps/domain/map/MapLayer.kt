@@ -6,6 +6,9 @@ package org.opensources.pokmaps.domain.map
  */
 enum class MapLayer {
     WARPS,
+
+    /** Entrées des Bases Secrètes (Rubis, Saphir, Émeraude). */
+    SECRET_BASES,
     ITEMS,
     FRUIT_TREES,
     TRAINERS,

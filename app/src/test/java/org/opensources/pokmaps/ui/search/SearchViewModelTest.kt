@@ -65,6 +65,23 @@ class SearchViewModelTest {
     }
 
     @Test
+    fun theTypedTextReachesTheStateBeforeTheResults() = runTest {
+        val computation = StandardTestDispatcher(testScheduler)
+        val viewModel = viewModel(computation = computation)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        testScheduler.advanceUntilIdle()
+        viewModel.onAction(SearchAction.Query("e"))
+        viewModel.onAction(SearchAction.Query("ev"))
+        // Le champ relit aussitôt sa valeur : un retard replaçait le curseur avant les lettres déjà tapées.
+        assertEquals("ev", viewModel.state.value.query)
+
+        testScheduler.advanceUntilIdle()
+
+        assertEquals("ev", viewModel.state.value.query)
+        assertTrue(133 in viewModel.state.value.pokemon.map { it.pokemonId })
+    }
+
+    @Test
     fun aRoomOnAComposedFloorIsAnInteriorSearchResult() = runTest {
         val viewModel = viewModel(composite = true)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }

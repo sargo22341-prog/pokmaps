@@ -22,12 +22,6 @@ data class CollectionBackup(
 fun validateGuideProgress(version: Int, progress: GuideProgress) {
     require(version > 0)
     require(progress.completed.size <= 500 && progress.completed.all { it.matches(ARTICLE_ID) })
-    require(
-        progress.roamers.size <= Roamers.maximumObservations(version) && progress.roamers.map {
-            it.pokemonId
-        }.distinct().size == progress.roamers.size
-    )
-    require(progress.roamers.all { Roamers.valid(version, it) })
 }
 
 private val ARTICLE_ID = Regex("[a-z0-9-]{1,100}")

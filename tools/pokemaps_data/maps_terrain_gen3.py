@@ -21,12 +21,18 @@ class TerrainRules:
     surfable: frozenset[int]
 
 
-def terrain_rules(repo: Gen3PretRepo) -> TerrainRules:
+def behavior_constants(repo: Gen3PretRepo) -> dict[str, int]:
+    """Valeur de chaque comportement de métatuile (`MB_…`), définie ou énumérée selon le dépôt."""
     header = read_text(repo.root / "include/constants/metatile_behaviors.h")
     defines = re.findall(r"#define\s+(MB_\w+)\s+(0x[0-9A-Fa-f]+|\d+)", header)
     constants = {name: int(value, 0) for name, value in defines}
     if not constants:
         constants = {name: index for index, name in enumerate(re.findall(r"^\s*(MB_\w+),", header, re.M))}
+    return constants
+
+
+def terrain_rules(repo: Gen3PretRepo) -> TerrainRules:
+    constants = behavior_constants(repo)
     text = read_text(repo.root / "src/metatile_behavior.c")
     if repo.remake:
         body = _table(text, "sBehaviorSurfable")

@@ -10,8 +10,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import org.opensources.pokmaps.data.settings.ObsoleteRoamerObservations
 
-internal val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+internal val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "settings",
+    produceMigrations = { listOf(ObsoleteRoamerObservations) }
+)
 
 /** Préférences de l'utilisateur (jeu choisi, collection, réglages) ; séparé pour que les tests UI le remplacent. */
 @Module

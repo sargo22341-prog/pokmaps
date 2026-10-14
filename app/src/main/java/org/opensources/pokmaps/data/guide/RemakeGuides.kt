@@ -127,6 +127,15 @@ private val DEFINITIONS = listOf(
         SOURCES
     ),
     GuideDefinition(
+        "remake-roamers",
+        R.string.guide_remake_roamers_title,
+        R.string.guide_remake_roamers_text,
+        GuideCategory.SIDE_QUEST,
+        VERSIONS,
+        244,
+        listOf("https://github.com/pret/pokefirered/blob/037335f4c725/src/roamer.c")
+    ),
+    GuideDefinition(
         "remake-collections",
         R.string.guide_remake_collections_title,
         R.string.guide_remake_collections_text,
