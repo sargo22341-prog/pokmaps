@@ -215,8 +215,15 @@ internal class FakeMapDao(
         listOf(MapSpotEntity(1, ROUTE_1, "grass", 200, 60))
     }
 
-    override suspend fun trainerParty(objectId: Int) =
-        read { if (objectId == TRAINER) listOf(TrainerPokemonRow(1, 19, "Rattata", 5)) else emptyList() }
+    override suspend fun trainerParty(objectId: Int) = read {
+        if (objectId ==
+            TRAINER
+        ) {
+            listOf(TrainerPokemonRow(1, null, null, null, 1, 19, "Rattata", 5))
+        } else {
+            emptyList()
+        }
+    }
 
     override suspend fun trainerMoves(objectId: Int, versionGroupId: Int) = read { emptyList<TrainerMoveRow>() }
 

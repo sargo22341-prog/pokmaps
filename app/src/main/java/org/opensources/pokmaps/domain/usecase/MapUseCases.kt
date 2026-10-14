@@ -15,7 +15,7 @@ import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.PokemonPlaces
-import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameMap
@@ -60,7 +60,7 @@ class GetPokemonMapsUseCase @Inject constructor(private val maps: MapRepository)
 
 /** Ce qu'on apprend en touchant un objet ou un personnage de la carte. */
 class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapRepository) {
-    suspend fun trainerParty(game: Game, objectId: Int): List<TrainerPokemon> = maps.trainerParty(game, objectId)
+    suspend fun trainerTeams(game: Game, objectId: Int): List<TrainerTeam> = maps.trainerTeams(game, objectId)
 
     suspend fun offers(game: Game, objectId: Int): List<NpcOffer> = maps.offers(game, objectId)
 

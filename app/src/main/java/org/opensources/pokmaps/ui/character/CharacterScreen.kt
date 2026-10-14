@@ -30,9 +30,8 @@ import org.opensources.pokmaps.domain.usecase.CharacterPage
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.Offers
 import org.opensources.pokmaps.ui.common.RoleIcons
-import org.opensources.pokmaps.ui.common.SectionTitle
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
-import org.opensources.pokmaps.ui.common.TrainerPokemonRow
+import org.opensources.pokmaps.ui.common.TrainerTeams
 
 @Composable
 fun CharacterRoute(
@@ -121,12 +120,7 @@ private fun CharacterContent(
             }
         }
         if (obj.kind == MapObjectKind.TRAINER) {
-            if (page.party.isEmpty()) {
-                Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
-            } else {
-                SectionTitle(stringResource(R.string.map_trainer_party))
-                page.party.forEach { TrainerPokemonRow(it, SpritePlace.SHEETS, onOpenPokemon) }
-            }
+            TrainerTeams(page.teams, SpritePlace.SHEETS, onOpenPokemon)
         }
         Offers(
             page.offers,

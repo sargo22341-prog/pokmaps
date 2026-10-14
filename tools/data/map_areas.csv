@@ -46,6 +46,8 @@ red-blue-yellow,ROCK_TUNNEL_B1F,rock-tunnel/b2f,PokéAPI décale les étages de 
 red-blue-yellow,POWER_PLANT,kanto-power-plant,
 red-blue-yellow,UNDERGROUND_PATH_ROUTE_5,kanto-underground-path,échange de la Route 5
 red-blue-yellow,VERMILION_DOCK,vermilion-city/ss-anne-dock,
+red-blue-yellow,CERULEAN_GYM,cerulean-city/gym,zone ajoutée (extra_areas.csv) : on pêche dans le bassin
+red-blue-yellow,LORELEIS_ROOM,indigo-plateau/loreleis-room,zone ajoutée (extra_areas.csv) : on pêche depuis la plateforme
 red-blue-yellow,CELADON_MANSION_ROOF_HOUSE,celadon-city/celadon-mansion,
 red-blue-yellow,GAME_CORNER_PRIZE_ROOM,celadon-city/prize-corner,
 red-blue-yellow,POKEMON_TOWER_3F,pokemon-tower/3f,

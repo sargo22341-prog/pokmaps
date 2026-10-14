@@ -428,3 +428,44 @@ def test_a_version_specific_map_object_has_its_version(preview_builder: Database
     unknown = _ObjectRows(builder, names, {}, read_story_events())
     with pytest.raises(ValueError, match="version inconnue"):
         unknown.add(ho_oh, 1, "pokegold")
+
+
+def test_kanto_audit_corrections(db: sqlite3.Connection) -> None:
+    # Souterrain de la Route 7 : la vraie carte, pas sa copie inutilisée (même constante dans pret).
+    for version_group in (RED_BLUE, YELLOW_GROUP):
+        sprites = db.execute(
+            """SELECT o.sprite FROM map_object o JOIN map m ON m.id = o.map_id
+               WHERE m.version_group_id = ? AND m.identifier = 'underground-path-route-7'""",
+            (version_group,),
+        ).fetchall()
+        assert sprites == [("middle-aged-man",)]
+        targets = db.execute(
+            """SELECT DISTINCT t.identifier FROM map_warp w JOIN map m ON m.id = w.map_id
+               JOIN map t ON t.id = w.target_map_id
+               WHERE m.version_group_id = ? AND m.identifier = 'underground-path-route-7'""",
+            (version_group,),
+        ).fetchall()
+        assert ("route-7",) in targets
+    town_map = """SELECT o.name_fr FROM map_object o JOIN map m ON m.id = o.map_id
+                  WHERE m.identifier = 'blues-house' AND o.sprite = 'pokedex'"""
+    assert {row[0] for row in db.execute(town_map)} == {"Carte"}
+    machoke = scalar(
+        db,
+        """SELECT e.note_fr FROM encounter e JOIN encounter_method m ON m.id = e.method_id
+           WHERE e.pokemon_id = 67 AND e.version_id = ? AND m.identifier = 'npc-trade'""",
+        YELLOW,
+    )
+    assert machoke == "Échange contre Osselait ; Évolue en Mackogneur dès la réception"
+
+
+def test_game_corner_hidden_coins(db: sqlite3.Connection) -> None:
+    for version_group in (RED_BLUE, YELLOW_GROUP):
+        coins = db.execute(
+            """SELECT o.name_fr FROM map_object o JOIN map m ON m.id = o.map_id JOIN item i ON i.id = o.item_id
+               WHERE m.version_group_id = ? AND m.identifier = 'game-corner' AND o.kind = 'hidden_item'
+               AND i.identifier = 'coin'""",
+            (version_group,),
+        ).fetchall()
+        # HiddenCoins donne 20 jetons pour « COIN + 40 » (bogue du jeu) : 240 jetons au lieu des 260 écrits.
+        assert len(coins) == 12
+        assert sum(int(name.split()[0]) for (name,) in coins) == 240

@@ -30,6 +30,7 @@ import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.map.WarpKind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
@@ -167,23 +168,18 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
             ItemEvolution(it.fromId, it.fromName, it.toId, it.toName)
         }
 
-    /** Équipe d'un dresseur de la carte, avec ses attaques dans le jeu. */
-    suspend fun trainerParty(game: Game, objectId: Int): List<TrainerPokemon> {
-        val moves = dao.trainerMoves(objectId, game.versionGroupId).groupBy { it.slot }
-        return dao.trainerParty(objectId).map { mon ->
-            TrainerPokemon(
-                pokemonId = mon.pokemonId,
-                name = mon.name,
-                level = mon.level,
-                moves = moves[mon.slot].orEmpty().map {
-                    LearnedMove(
-                        moveId = it.moveId,
-                        name = it.name,
-                        type = PokemonType(it.typeId, it.typeIdentifier, it.typeName),
-                        damageClass = DamageClass.from(it.damageClass),
-                        power = it.power,
-                        accuracy = it.accuracy,
-                        pp = it.pp
+    /** Équipes d'un dresseur de la carte (une par variante de la partie), avec leurs attaques dans le jeu. */
+    suspend fun trainerTeams(game: Game, objectId: Int): List<TrainerTeam> {
+        val moves = dao.trainerMoves(objectId, game.versionGroupId).groupBy { it.team to it.slot }
+        return dao.trainerParty(objectId).groupBy { it.team }.values.map { members ->
+            TrainerTeam(
+                variant = members.first().toVariant(),
+                members = members.map { mon ->
+                    TrainerPokemon(
+                        pokemonId = mon.pokemonId,
+                        name = mon.name,
+                        level = mon.level,
+                        moves = moves[mon.team to mon.slot].orEmpty().map { it.toLearnedMove() }
                     )
                 }
             )

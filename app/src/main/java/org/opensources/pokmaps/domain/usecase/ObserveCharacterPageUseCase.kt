@@ -11,7 +11,7 @@ import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
-import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Game
 
@@ -20,7 +20,7 @@ data class CharacterPage(
     val game: Game,
     val obj: MapObject,
     val map: MapInfo,
-    val party: List<TrainerPokemon>,
+    val teams: List<TrainerTeam>,
     val offers: List<NpcOffer>,
     /** Ce que deviennent les fossiles du jeu (pour un personnage qui en donne). */
     val fossilUses: Map<String, FossilUse> = emptyMap()
@@ -37,7 +37,7 @@ class ObserveCharacterPageUseCase @Inject constructor(
         val catalog = maps.catalog(game)
         val obj = catalog.objectsById[objectId] ?: return@map null
         val map = catalog.maps[obj.mapId] ?: return@map null
-        val party = if (obj.kind == MapObjectKind.TRAINER) maps.trainerParty(game, obj.id) else emptyList()
-        CharacterPage(game, obj, map, party, maps.offers(game, obj.id), FossilUse.of(maps.index(game), catalog))
+        val teams = if (obj.kind == MapObjectKind.TRAINER) maps.trainerTeams(game, obj.id) else emptyList()
+        CharacterPage(game, obj, map, teams, maps.offers(game, obj.id), FossilUse.of(maps.index(game), catalog))
     }
 }

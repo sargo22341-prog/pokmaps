@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 
 from .pret import FIRST_INDOOR_MAP
 from .pret_models import Connection, MapObject, PretMap, Sign, Warp
+from .pret_rival import RivalBattle, rival_battles, script_text
 from .pret_source import conditional_annotated_lines, macro_args, parse_int, source_lines
 
 if TYPE_CHECKING:
@@ -23,6 +24,10 @@ def maps(repo: PretRepo) -> dict[str, PretMap]:
     for header in sorted(repo.path("data/maps/headers").glob("*.asm")):
         lines = source_lines(header)
         label, const, tileset = macro_args(lines[0], "map_header")[:3]
+        if _unused_copy(repo, label, const):
+            continue
+        if const in result:
+            raise ValueError(f"{header.name} : deuxième en-tête pour {const}")
         number, width, height = repo.map_constants[const]
         border, warps, signs, objs = objects[label]
         data = repo.path(blocks[label]).read_bytes()
@@ -37,41 +42,50 @@ def maps(repo: PretRepo) -> dict[str, PretMap]:
             if line.startswith("connection "):
                 direction, _, target, offset = macro_args(line, "connection")
                 pret_map.connections.append(Connection(direction, target, parse_int(offset)))
-        pret_map.objects += [MapObject(x, y, "hidden_item", item=item) for x, y, item in hidden.get(const, [])]
+        pret_map.objects += [
+            MapObject(x, y, "hidden_item", item=item, quantity=coins) for x, y, item, coins in hidden.get(const, [])
+        ]
         _rocket_scene(repo, pret_map)
         _rival_scene(repo, pret_map)
         result[const] = pret_map
     return result
 
 
+def _unused_copy(repo: PretRepo, label: str, const: str) -> bool:
+    """Copie inutilisée qui réutilise la constante d'une autre carte (UndergroundPathRoute7Copy)."""
+    own_const = re.sub(r"(?<=[a-z\d])(?=[A-Z])|(?<=[a-z])(?=\d)", "_", label).upper()
+    return own_const != const and own_const in repo.map_constants
+
+
 def _rival_scene(repo: PretRepo, current: PretMap) -> None:
+    """Rival de la carte : son combat (équipe fixe ou variantes, pret_rival). La Route 22 a deux combats au même
+    endroit, un objet par combat."""
     if not any(obj.sprite == "SPRITE_BLUE" for obj in current.objects):
         return
-    text = repo.path(f"scripts/{current.label}.asm").read_text("utf-8")
-    classes = tuple(dict.fromkeys(re.findall(r"ld a, (OPP_RIVAL[123])\s+ld \[wCurOpponent\], a", text)))
-    if not classes:
+    battles = list(dict.fromkeys(rival_battles(repo.root, script_text(repo.path(f"scripts/{current.label}.asm")))))
+    if not battles:
         return
-    fixed = {
-        trainer_class: parse_int(number)
-        for trainer_class, number in re.findall(
-            r"ld a, (OPP_RIVAL[123])\s+ld \[wCurOpponent\], a\s+ld a, (\$[\da-fA-F]+|\d+)\s+ld \[wTrainerNo\], a",
-            text,
-        )
-    }
-    for trainer_class, number in fixed.items():
-        if (trainer_class.removeprefix("OPP_"), number) not in repo.trainer_parties:
-            raise ValueError(f"{current.label} : équipe du rival absente : {trainer_class}, {number}")
+    for battle in battles:
+        numbers = [battle.number] if battle.number is not None else [variant.number for variant in battle.variants]
+        for number in numbers:
+            if (battle.trainer_class.removeprefix("OPP_"), number) not in repo.trainer_parties:
+                raise ValueError(f"{current.label} : équipe du rival absente : {battle.trainer_class}, {number}")
     current.objects = [
-        replace(
-            obj,
-            kind="trainer",
-            trainer_class=classes[-1] if obj.text == "TEXT_ROUTE22_RIVAL2" else classes[0],
-            trainer_number=fixed.get(classes[-1] if obj.text == "TEXT_ROUTE22_RIVAL2" else classes[0]),
-        )
+        _rival(obj, battles[-1] if obj.text == "TEXT_ROUTE22_RIVAL2" else battles[0])
         if obj.sprite == "SPRITE_BLUE"
         else obj
         for obj in current.objects
     ]
+
+
+def _rival(obj: MapObject, battle: RivalBattle) -> MapObject:
+    return replace(
+        obj,
+        kind="trainer",
+        trainer_class=battle.trainer_class,
+        trainer_number=battle.number,
+        trainer_variants=battle.variants,
+    )
 
 
 def _rocket_scene(repo: PretRepo, current: PretMap) -> None:
@@ -146,9 +160,10 @@ def read_objects(repo: PretRepo) -> dict[str, tuple[int, list[Warp], list[Sign],
     return result
 
 
-def hidden_items(repo: PretRepo) -> dict[str, list[tuple[int, int, str]]]:
-    """Objets cachés (Cherch'Objet) : constante de carte -> [(x, y, objet)]."""
-    result: dict[str, list[tuple[int, int, str]]] = {}
+def hidden_items(repo: PretRepo) -> dict[str, list[tuple[int, int, str, int | None]]]:
+    """Objets cachés (Cherch'Objet) et jetons cachés du Casino : constante de carte -> [(x, y, objet, jetons)]."""
+    result: dict[str, list[tuple[int, int, str, int | None]]] = {}
+    coins = _hidden_coin_amounts(repo)
     current = None
     for line in source_lines(repo.path("data/events/hidden_events.asm")):
         if line.startswith("hidden_events_for "):
@@ -156,8 +171,25 @@ def hidden_items(repo: PretRepo) -> dict[str, list[tuple[int, int, str]]]:
         elif line.startswith("hidden_event ") and current:
             x, y, function, argument = macro_args(line, "hidden_event")
             if function == "HiddenItems":
-                result.setdefault(current, []).append((int(x), int(y), argument))
+                result.setdefault(current, []).append((int(x), int(y), argument, None))
+            elif function == "HiddenCoins":
+                written = parse_int(argument.replace(" ", "").removeprefix("COIN+"))
+                result.setdefault(current, []).append((int(x), int(y), "COIN", coins.get(written, coins[None])))
     return result
+
+
+def _hidden_coin_amounts(repo: PretRepo) -> dict[int | None, int]:
+    """Jetons réellement donnés selon le nombre écrit après « COIN + » (HiddenCoins) : « cp N » saute vers .bcdM,
+    qui ajoute M jetons ; None vaut pour les autres nombres. Le jeu donne 20 jetons pour « COIN + 40 »."""
+    lines = source_lines(repo.path("engine/events/hidden_items.asm"))
+    body = "\n".join(lines[lines.index("HiddenCoins:") :])
+    amounts: dict[int | None, int] = {
+        parse_int(written): int(amount) for written, amount in re.findall(r"cp (\d+)\njr z, \.bcd(\d+)", body)
+    }
+    default = re.search(r"\njr \.bcd(\d+)\n", body)
+    if not amounts or default is None:
+        raise ValueError("engine/events/hidden_items.asm : jetons cachés illisibles")
+    return amounts | {None: int(default.group(1))}
 
 
 def _object_event(args: list[str]) -> MapObject:

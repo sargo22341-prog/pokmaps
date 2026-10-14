@@ -133,8 +133,10 @@ Les sbires, admins et chefs Aqua/Magma suivent la version choisie, avec leurs sp
 Les combats scénarisés du Bois Clémenti, du musée, de la Caverne Fondmer et du Centre Spatial
 restent attachés aux ennemis qui combattent ; les alliés et figurants conservent leur rôle.
 Jaune affiche les quatre combats et équipes communes de Jessie et James, ainsi que les badges des combats du rival.
-Les quatre premières équipes du rival de Jaune sont fixes autour d'Évoli ; ses équipes suivantes
-varient selon les résultats des premiers combats.
+Les quatre premières équipes du rival de Jaune sont fixes autour d'Évoli ; ses équipes suivantes s'affichent
+pour chaque évolution finale de son Évoli, fixée par les résultats des premiers combats. Dans Rouge et Bleu, chaque
+combat du rival montre ses trois équipes, une par Pokémon de départ du joueur, avec les attaques spéciales du Maître.
+La Route 22 a un badge par combat du rival.
 Les journalistes des Routes 111, 118 et 120 gardent une seule paire par route ; les acteurs des revanches
 restent dans le catalogue source sans répéter les sprites sur la carte.
 Dans Rubis, Saphir et Émeraude, les niveaux Surface et Sous les eaux apparaissent uniquement après sélection
@@ -302,8 +304,9 @@ Sources (les mêmes que [pokemaps.net](https://pokemaps.net)) :
   prix du Casino, Pokémon demandés en échange, doublons), noms français des cartes (`maps.csv`), des classes de
   dresseurs (`trainer_classes.csv`), des personnages et leur apparence (`npc_names.csv`, `npc_text_names.csv`) et
   des installations (`facility_names.csv`), lien entre cartes et zones de rencontre PokéAPI, par famille de cartes
-  (`map_areas.csv`), zones et objets absents de PokéAPI (`extra_areas.csv`, `extra_items.csv` : l'ADN Berzerk
-  et les lettres d'Or et d'Argent), Pokémon que les jeux d'une famille de cartes n'obtiennent que par échange avec
+  (`map_areas.csv`), zones et objets absents de PokéAPI (`extra_areas.csv`, `extra_items.csv` : l'ADN Berzerk,
+  les lettres d'Or et d'Argent et les jetons cachés du Casino), cartes de Rouge, Bleu et Jaune où l'on pêche sans
+  rencontre dans PokéAPI (`fishing_gen1.csv`, cannes lues dans pret), Pokémon que les jeux d'une famille de cartes n'obtiennent que par échange avec
   un autre jeu (`transfer_only.csv`, contrôlé par famille : Hoenn et Rouge Feu/Vert Feuille séparément),
   personnages en double écartés (`npc_duplicates.csv` : un même personnage à plusieurs étapes du scénario), offres
   que les scripts ne disent pas simplement (`npc_offers.csv`, action `add` : échanges d'objets, jetons vendus,

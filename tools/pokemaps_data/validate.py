@@ -219,17 +219,29 @@ CHECKS = (
         "équipe de dresseur incohérente",
         """SELECT t.* FROM trainer_pokemon t LEFT JOIN map_object o ON o.id = t.map_object_id
            WHERE o.kind IS NOT 'trainer' OR t.pokemon_id NOT IN (SELECT id FROM pokemon)
-             OR t.level NOT BETWEEN 1 AND 100 OR t.move1_id IS NULL""",
+             OR t.level NOT BETWEEN 1 AND 100 OR t.move1_id IS NULL OR t.team < 1
+             OR (t.variant_kind IS NULL) != (t.variant_pokemon_id IS NULL)
+             OR t.variant_kind NOT IN ('player-starter', 'rival-evolution')
+             OR t.variant_pokemon_id NOT IN (SELECT id FROM pokemon)""",
+    ),
+    (
+        "variantes d'équipe incohérentes (une seule équipe nommée, équipes non numérotées de 1 à n ou mélangées)",
+        """SELECT map_object_id FROM trainer_pokemon GROUP BY map_object_id
+           HAVING count(DISTINCT team) != max(team)
+             OR count(DISTINCT coalesce(variant_kind, '') || '/' || coalesce(variant_pokemon_id, '')) != max(team)
+             OR (max(team) = 1) != (max(variant_kind) IS NULL)
+             OR count(DISTINCT variant_kind) > 1""",
     ),
     (
         "attaque de dresseur sans caractéristiques dans le jeu",
         """SELECT t.map_object_id, t.slot, mv.move_id FROM trainer_pokemon t
            JOIN map_object o ON o.id = t.map_object_id JOIN map m ON m.id = o.map_id
-           JOIN (SELECT map_object_id, slot, move1_id AS move_id FROM trainer_pokemon
-                 UNION ALL SELECT map_object_id, slot, move2_id FROM trainer_pokemon
-                 UNION ALL SELECT map_object_id, slot, move3_id FROM trainer_pokemon
-                 UNION ALL SELECT map_object_id, slot, move4_id FROM trainer_pokemon) mv
-             ON mv.map_object_id = t.map_object_id AND mv.slot = t.slot AND mv.move_id IS NOT NULL
+           JOIN (SELECT map_object_id, team, slot, move1_id AS move_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, team, slot, move2_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, team, slot, move3_id FROM trainer_pokemon
+                 UNION ALL SELECT map_object_id, team, slot, move4_id FROM trainer_pokemon) mv
+             ON mv.map_object_id = t.map_object_id AND mv.team = t.team AND mv.slot = t.slot
+             AND mv.move_id IS NOT NULL
            LEFT JOIN move_version_group mvg ON mvg.move_id = mv.move_id AND mvg.version_group_id = m.version_group_id
            WHERE mvg.move_id IS NULL""",
     ),

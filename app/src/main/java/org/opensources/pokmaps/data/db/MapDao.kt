@@ -166,12 +166,14 @@ interface MapDao {
     )
     suspend fun spots(versionGroupId: Int, versionId: Int): List<MapSpotEntity>
 
-    /** Équipe d'un dresseur de la carte. */
+    /** Équipes d'un dresseur de la carte (une par variante quand elle dépend de la partie). */
     @Query(
         """
-        SELECT t.slot, t.pokemon_id AS pokemonId, p.name_fr AS name, t.level
+        SELECT t.team, t.variant_kind AS variantKind, t.variant_pokemon_id AS variantPokemonId,
+            vp.name_fr AS variantName, t.slot, t.pokemon_id AS pokemonId, p.name_fr AS name, t.level
         FROM trainer_pokemon t JOIN pokemon p ON p.id = t.pokemon_id
-        WHERE t.map_object_id = :objectId ORDER BY t.slot
+        LEFT JOIN pokemon vp ON vp.id = t.variant_pokemon_id
+        WHERE t.map_object_id = :objectId ORDER BY t.team, t.slot
         """
     )
     suspend fun trainerParty(objectId: Int): List<TrainerPokemonRow>
@@ -179,20 +181,20 @@ interface MapDao {
     /** Attaques de l'équipe d'un dresseur, avec leurs caractéristiques dans le jeu. */
     @Query(
         """
-        SELECT t.slot, mv.move_slot AS moveSlot, m.id AS moveId, m.name_fr AS name, v.power, v.accuracy, v.pp,
+        SELECT t.team, t.slot, mv.move_slot AS moveSlot, m.id AS moveId, m.name_fr AS name, v.power, v.accuracy, v.pp,
             v.damage_class AS damageClass, ty.id AS typeId, ty.identifier AS typeIdentifier, ty.name_fr AS typeName
         FROM trainer_pokemon t
         JOIN (
-            SELECT map_object_id, slot, 1 AS move_slot, move1_id AS move_id FROM trainer_pokemon
-            UNION ALL SELECT map_object_id, slot, 2, move2_id FROM trainer_pokemon
-            UNION ALL SELECT map_object_id, slot, 3, move3_id FROM trainer_pokemon
-            UNION ALL SELECT map_object_id, slot, 4, move4_id FROM trainer_pokemon
-        ) mv ON mv.map_object_id = t.map_object_id AND mv.slot = t.slot
+            SELECT map_object_id, team, slot, 1 AS move_slot, move1_id AS move_id FROM trainer_pokemon
+            UNION ALL SELECT map_object_id, team, slot, 2, move2_id FROM trainer_pokemon
+            UNION ALL SELECT map_object_id, team, slot, 3, move3_id FROM trainer_pokemon
+            UNION ALL SELECT map_object_id, team, slot, 4, move4_id FROM trainer_pokemon
+        ) mv ON mv.map_object_id = t.map_object_id AND mv.team = t.team AND mv.slot = t.slot
         JOIN move m ON m.id = mv.move_id
         JOIN move_version_group v ON v.move_id = m.id AND v.version_group_id = :versionGroupId
         JOIN type ty ON ty.id = v.type_id
         WHERE t.map_object_id = :objectId
-        ORDER BY t.slot, mv.move_slot
+        ORDER BY t.team, t.slot, mv.move_slot
         """
     )
     suspend fun trainerMoves(objectId: Int, versionGroupId: Int): List<TrainerMoveRow>

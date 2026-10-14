@@ -29,3 +29,8 @@ Voir la section publication de `README.md`.
 - Les échecs d’enregistrement des captures et favoris sont signalés et permettent de réessayer.
 - Les fiches et familles d’évolution respectent la génération du jeu choisi, notamment pour la reproduction à Johto.
 
+- Rouge, Bleu et Jaune affichent les équipes du rival selon votre Pokémon de départ ou l’Évoli du rival, et ses deux combats de la Route 22.
+- Le Souterrain de la Route 7 retrouve sa sortie et perd une Fille qui n’existe pas dans le jeu.
+- Repos, E-Coque, Lait à Boire, Lire-Esprit, Paresse et Lumi-Éclat ont les PP et la puissance de leur jeu ; Puissance Cachée n’affiche plus une puissance de 1.
+- On peut pêcher dans l’Arène d’Azuria et la Salle d’Olga, et avec toutes les cannes au Port de Carmin de Jaune.
+- La Carte chez la sœur du rival est bien nommée, l’échange du Machopeur de Jaune signale son évolution et la soluce de Kanto est corrigée.

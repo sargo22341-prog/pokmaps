@@ -180,10 +180,10 @@ internal class MapSelection(
         detailJob = session.load(
             block = {
                 val isTrainer = obj.kind == MapObjectKind.TRAINER
-                val party = if (isTrainer) getObjectDetails.trainerParty(game, obj.id) else emptyList()
+                val teams = if (isTrainer) getObjectDetails.trainerTeams(game, obj.id) else emptyList()
                 detail.copy(
                     loading = false,
-                    party = party,
+                    teams = teams,
                     offers = getObjectDetails.offers(game, obj.id),
                     fossilUses = getObjectDetails.fossilUses(game, loaded.catalog)
                 )

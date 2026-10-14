@@ -40,6 +40,10 @@ _GEN3_EFFECT_ALIASES = {
 class PretMove:
     const: str  # constante pret de l'attaque (ex. FIRE_PUNCH)
     effect: str  # constante de son effet (ex. BURN_SIDE_EFFECT1)
+    # Puissance écrite dans les sources : 0 pour une attaque de statut, valeur technique (1, ou celle d'un dégât
+    # fixe) pour les attaques dont les dégâts ne dépendent pas d'une puissance.
+    power: int
+    pp: int
     # Probabilité de l'effet sur 256 lue dans moves.asm (2e génération) ; None si elle vient de move_effects.csv
     # (1re génération) ou si l'effet se produit à chaque fois.
     chance_256: int | None = None
@@ -51,6 +55,8 @@ class PretMove:
             raise ValueError(f"{self.const} : deux unités de probabilité")
         if self.chance_percent is not None and not 0 < self.chance_percent < 100:
             raise ValueError(f"{self.const} : probabilité en pourcentage invalide")
+        if self.power < 0 or self.pp < 0:
+            raise ValueError(f"{self.const} : puissance ou PP négatifs")
 
 
 @dataclass(frozen=True)
@@ -72,7 +78,8 @@ def read_pret_moves(root: Path, pret_format: PretFormat) -> list[PretMove]:
     """Attaques du jeu dans l'ordre de moves.asm, avec la constante de leur effet."""
     match pret_format:
         case PretFormat.GEN1:
-            return [PretMove(args[0], args[1]) for args in _move_macros(root)]
+            # « move NOM, EFFET, puissance, type, précision, PP »
+            return [PretMove(args[0], args[1], int(args[2]), int(args[5])) for args in _move_macros(root)]
         case PretFormat.GEN2:
             chance_effects = _chance_effects(root)
             return [_gen2_move(args, chance_effects) for args in _move_macros(root)]
@@ -92,12 +99,12 @@ def _move_macros(root: Path) -> list[list[str]]:
 
 def _gen2_move(args: list[str], chance_effects: frozenset[str]) -> PretMove:
     """« move NOM, EFFET, puissance, type, précision, PP, probabilité en % »."""
-    const, effect, percent = args[0], args[1], int(args[6])
+    const, effect, power, pp, percent = args[0], args[1], int(args[2]), int(args[5]), int(args[6])
     if not 0 <= percent <= 100:
         raise ValueError(f"{MOVES_FILE} : probabilité invalide pour {const} : {percent} %")
     if percent == 0 or effect not in chance_effects:
-        return PretMove(const, effect)
-    return PretMove(const, effect, percent * 255 // 100)
+        return PretMove(const, effect, power, pp)
+    return PretMove(const, effect, power, pp, percent * 255 // 100)
 
 
 def _chance_effects(root: Path) -> frozenset[str]:

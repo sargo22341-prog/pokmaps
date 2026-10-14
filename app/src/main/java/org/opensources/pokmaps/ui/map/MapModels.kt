@@ -7,7 +7,7 @@ import org.opensources.pokmaps.domain.map.MapFloor
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.NpcOffer
-import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterFilter
@@ -99,7 +99,7 @@ sealed interface MapDetail {
     data class Character(
         val obj: MapObject,
         val loading: Boolean = true,
-        val party: List<TrainerPokemon> = emptyList(),
+        val teams: List<TrainerTeam> = emptyList(),
         val offers: List<NpcOffer> = emptyList(),
         val fossilUses: Map<String, FossilUse> = emptyMap(),
         val failed: Boolean = false

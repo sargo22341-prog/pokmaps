@@ -110,10 +110,20 @@ data class MapObjectRow(
 
 data class MapAreaRow(val mapId: Int, val areaId: Int, val name: String)
 
-data class TrainerPokemonRow(val slot: Int, val pokemonId: Int, val name: String, val level: Int)
+data class TrainerPokemonRow(
+    val team: Int,
+    val variantKind: String?,
+    val variantPokemonId: Int?,
+    val variantName: String?,
+    val slot: Int,
+    val pokemonId: Int,
+    val name: String,
+    val level: Int
+)
 
 /** Attaque d'un Pokémon de dresseur (`moveSlot` de 1 à 4) avec ses caractéristiques dans le jeu. */
 data class TrainerMoveRow(
+    val team: Int,
     val slot: Int,
     val moveSlot: Int,
     val moveId: Int,

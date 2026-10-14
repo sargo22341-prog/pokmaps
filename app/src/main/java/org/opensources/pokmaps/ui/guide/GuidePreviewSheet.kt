@@ -32,6 +32,7 @@ import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.TrainerPokemonRow
+import org.opensources.pokmaps.ui.common.trainerTeamTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,8 +110,11 @@ private fun CharacterPreview(preview: GuidePreview.Character, onAction: (GuideAc
     Text(page.obj.name, style = MaterialTheme.typography.headlineSmall)
     Text(page.map.name)
     Button(onClick = { onAction(GuideAction.ShowObject(page.obj.id)) }) { Text(stringResource(R.string.show_on_map)) }
-    page.party.forEach { pokemon ->
-        TrainerPokemonRow(pokemon, SpritePlace.SHEETS) { onAction(GuideAction.Preview(GuideTarget.Pokemon(it))) }
+    page.teams.forEach { team ->
+        team.variant?.let { Text(trainerTeamTitle(it), style = MaterialTheme.typography.titleSmall) }
+        team.members.forEach { pokemon ->
+            TrainerPokemonRow(pokemon, SpritePlace.SHEETS) { onAction(GuideAction.Preview(GuideTarget.Pokemon(it))) }
+        }
     }
     Offers(
         page.offers,

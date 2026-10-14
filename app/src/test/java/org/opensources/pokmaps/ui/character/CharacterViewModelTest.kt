@@ -53,7 +53,8 @@ class CharacterViewModelTest {
         val viewModel = viewModel(FakeMapDao.TRAINER)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         val page = checkNotNull(viewModel.state.value.page)
-        assertEquals(listOf("Rattata"), page.party.map { it.name })
+        assertEquals(listOf(listOf("Rattata")), page.teams.map { team -> team.members.map { it.name } })
+        assertEquals(null, page.teams.single().variant)
         assertTrue(page.offers.isEmpty())
         viewModel.onAction(CharacterAction.ShowOnMap)
         assertEquals(MapRequest.FocusObject(FakeMapDao.TRAINER), requests.pending.value)
