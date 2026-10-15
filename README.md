@@ -132,7 +132,7 @@ Chaque combat de Flora possède une seule icône et présente trois équipes sel
 Le combat facultatif de Mérouville dans Émeraude reste sur cette ville, sans seconde fiche sur la Route 104.
 Les Maîtres et le premier combat de Timmy sur la Route Victoire ont leurs équipes ; les revanches de Hoenn
 sont regroupées sur les fiches des dresseurs. Lévy et Tatia partagent une seule fiche de combat double.
-Les dons des scènes sont rattachés à leurs donneurs par `tools/data/hoenn_scene_actors.csv` ; les conditions
+Les dons des scènes sont rattachés à leurs donneurs par `tools/data/scene_actors_gen3.csv` ; les conditions
 de Terhal et du partenaire de Johto sont indiquées. Les Pokémon fixes sont recoupés avec pret pour leurs
 versions, positions, niveaux et quantités, notamment les Voltorbe de New Lavandia.
 Deoxys apprend les attaques de sa forme propre à chaque cartouche, y compris dans Émeraude et les remakes.
@@ -619,11 +619,12 @@ Kecleon exige le Devon Scope ; l'Île du Sud exige le Passe Éon distribué par 
 
 Les Pokémon fixes de Rouge Feu/Vert Feuille se régénèrent avec
 `python tools/build_data.py --remake-fixed-only`. Le catalogue versionné
-`maps/firered-leafgreen/fixed_encounters.json` conserve onze rencontres par version : deux Ronflex
-niveau 30, deux Électrode niveau 34, les trois oiseaux niveau 50, Mewtwo niveau 70,
-Ho-Oh et Lugia niveau 70, Deoxys niveau 30. Les positions viennent des objets Pokémon,
-même si un autre événement déclenche le combat. Scripts, conditions et drapeaux de retrait sont conservés ;
-le Roc Nombri exige le Ticketevent et l'Île Aurore le Ticketaurore, distribués par événement externe.
+`maps/firered-leafgreen/fixed_encounters.json` conserve douze rencontres par version : deux Ronflex
+niveau 30, deux Électrode niveau 34, l'Hypnomade niveau 30 du Bois Baies, les trois oiseaux niveau 50,
+Mewtwo niveau 70, Ho-Oh et Lugia niveau 70, Deoxys niveau 30. Les positions viennent des objets Pokémon,
+même si un autre événement déclenche le combat ; l'Hypnomade est placé sur Lostelle, qui déclenche son combat.
+Scripts, conditions et drapeaux de retrait sont conservés ;
+le Roc Nombri exige le Ticketmystik et l'Île Aurore le Ticketaurora, distribués par événement externe.
 Ce catalogue entre aussi dans `character_curation.json` ; les rencontres fixes sont affichées sur les cartes Android.
 
 Les services de Hoenn sont intégrés à la base et conservés dans le catalogue `character_curation.json`, généré par
@@ -651,6 +652,14 @@ de Céladopole, les tuteurs uniques, l'Effaceur et le Cherche VS de Rouge Feu/Ve
 Les prix sont lus dans le JSON de pokefirered ; les conditions de scénario, le choix des fossiles
 et la récompense du Mémorial de Tectonix sont conservés dans la base distribuée.
 Le [bilan des services Remake 1G](docs/generations/services-remake-1g.md) détaille les tarifs et niveaux par version.
+Dans Rouge Feu/Vert Feuille, `scene_actors_gen3.csv` rattache aussi les combats scénarisés à leur acteur :
+chaque combat du rival montre ses trois équipes selon le Pokémon de départ du joueur (deux fiches sur la
+Route 22 et dans la salle du Maître, pour la revanche), ainsi que Giovanni à la Sylphe SARL, les motards de
+l'Île 3, Selphy et le sbire de la Grotte de Glace. Ses colonnes `only` réservent à chaque acteur ses combats
+ou dons d'une scène commune (Météorite de Léo, Tri-Passe de Ciléo). Les Champions et le Conseil 4 portent
+leur nom, la seconde équipe du Conseil 4 étant marquée « revanche ». Les jetons cachés du Casino sont placés.
+Le choix d'un Pokémon de l'équipe (`ChoosePartyMon`) rend l'emplacement choisi inconnu : les échanges du
+laboratoire de Cramois'Île et les récompenses de taille du Magicarpe et du Scarabrute restent affichés.
 
 Les lecteurs d'offres GBA appliquent les drapeaux de présence des événements avant le parcours des scripts.
 `story_events.csv` accepte aussi les comparaisons de variables (`operator,value,phrase`) ; une comparaison

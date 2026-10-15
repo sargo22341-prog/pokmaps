@@ -19,6 +19,8 @@ def special_writes(root: Path) -> dict[str, frozenset[str]]:
     writes: dict[str, frozenset[str]] = {}
     calls: dict[str, frozenset[str]] = {}
     easy_chat_writes: set[str] = set()
+    party_menu_writes: set[str] = set()
+    party_menu_functions: set[str] = set()
     for path in files:
         text = re.sub(r"/\*.*?\*/|//[^\n]*", "", read_text(path), flags=re.S)
         text = re.sub(r'"(?:\\.|[^"\\])*"', '""', text)
@@ -28,11 +30,18 @@ def special_writes(root: Path) -> dict[str, frozenset[str]]:
             variables.update(re.findall(r"\bVarSet\(\s*(VAR_\w+)\s*,", body))
             if path.name.startswith("easy_chat"):
                 easy_chat_writes.update(variables)
+            if path.name.startswith("party_menu"):
+                party_menu_writes.update(variables)
+                party_menu_functions.add(name)
             writes[name] = writes.get(name, frozenset()) | variables
             calls[name] = calls.get(name, frozenset()) | set(re.findall(r"\b(\w+)\s*\(", body))
     if "ShowEasyChatScreen" in writes:
         # Le dialogue rend la main via des callbacks : ses écritures dépassent l'appel C initial.
         writes["ShowEasyChatScreen"] |= easy_chat_writes
+    for name in party_menu_functions:
+        # Le choix d'un Pokémon de l'équipe revient aussi par des tâches : l'emplacement choisi (VAR_0x8004)
+        # n'est connu qu'après coup, même si le script y a rangé une autre valeur avant l'appel.
+        writes[name] |= party_menu_writes
     for _ in range(32):
         expanded = {
             name: variables | frozenset(var for callee in calls[name] for var in writes.get(callee, ()))

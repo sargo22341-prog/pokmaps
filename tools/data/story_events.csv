@@ -604,3 +604,6 @@ pokeruby|pokeemerald,FLAG_RECEIVED_PAMTRE_BERRY,,Cette baie rare n’a pas encor
 pokeruby|pokeemerald,FLAG_RECEIVED_WATMEL_BERRY,,Cette baie rare n’a pas encore été reçue avec sa phrase spéciale,Route123_BerryMastersHouse/scripts.inc : chaque phrase spéciale ne donne sa baie rare qu’une fois,,,
 pokeruby|pokeemerald,FLAG_RECEIVED_DURIN_BERRY,,Cette baie rare n’a pas encore été reçue avec sa phrase spéciale,Route123_BerryMastersHouse/scripts.inc : chaque phrase spéciale ne donne sa baie rare qu’une fois,,,
 pokeruby|pokeemerald,FLAG_RECEIVED_BELUE_BERRY,,Cette baie rare n’a pas encore été reçue avec sa phrase spéciale,Route123_BerryMastersHouse/scripts.inc : chaque phrase spéciale ne donne sa baie rare qu’une fois,,,
+pokefirered,FLAG_DID_ESPHERE_TRADE,,,data/event_scripts.s et scripts du personnage : échange unique déjà effectué,,,
+pokefirered,FLAG_DID_TANGENY_TRADE,,,data/maps/CinnabarIsland_PokemonLab_Lounge/scripts.inc : échange unique déjà effectué,,,
+pokefirered,FLAG_DID_SEELOR_TRADE,,,data/event_scripts.s et scripts du personnage : échange unique déjà effectué,,,

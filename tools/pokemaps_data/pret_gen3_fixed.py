@@ -38,6 +38,7 @@ _REMAKE_MAPS = frozenset(
         "Route12",
         "Route16",
         "PowerPlant",
+        "ThreeIsland_BerryForest",
         "SeafoamIslands_B4F",
         "MtEmber_Summit",
         "CeruleanCave_B1F",

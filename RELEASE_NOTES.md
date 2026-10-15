@@ -36,3 +36,4 @@ Voir la section publication de `README.md`.
 - Repos, E-Coque, Lait à Boire, Lire-Esprit, Paresse et Lumi-Éclat ont les PP et la puissance de leur jeu ; Puissance Cachée n’affiche plus une puissance de 1.
 - On peut pêcher dans l’Arène d’Azuria et la Salle d’Olga, et avec toutes les cannes au Port de Carmin de Jaune.
 - La Carte chez la sœur du rival est bien nommée, l’échange du Machopeur de Jaune signale son évolution et la soluce de Kanto est corrigée.
+- Rouge Feu et Vert Feuille affichent les combats du rival, des motards et de Giovanni, les Champions par leur nom, les échanges de Cramois’Île, les jetons cachés du Casino et l’Hypnomade du Bois Baies ; les revanches ne sont plus dites téléphoniques.

@@ -35,8 +35,8 @@ def test_remake_worlds_fixed_pokemon_and_services_are_shipped(db: sqlite3.Connec
                WHERE m.version_group_id = 7 AND o.version_id = ? AND o.kind = 'pokemon'""",
             (version,),
         ).fetchall()
-        assert len(rows) == 11
-        assert rows.count((143, 30)) == 2
+        assert len(rows) == 12
+        assert rows.count((143, 30)) == 2 and (97, 30) in rows
         assert (150, 70) in rows and (386, 30) in rows
         kinds = db.execute(
             """SELECT n.kind FROM npc_offer n JOIN map_object o ON o.id = n.map_object_id

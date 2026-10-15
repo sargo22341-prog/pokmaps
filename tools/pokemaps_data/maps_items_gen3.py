@@ -20,7 +20,14 @@ def item_rows(maps: Gen3GameMaps) -> tuple[list[ObjectRow], tuple[Gen3MapItem, .
                 point = maps.point(const, item.x, item.y)
                 metadata.append(replace(item, x=point[0], y=point[1]))
                 if item.kind == "hidden_coins":
-                    continue  # Le schéma Room actuel ne représente pas les jetons cachés ; le JSON les conserve.
+                    # Comme au Casino de la 1re génération : un objet caché « Jetons » nommé par sa quantité.
+                    coins = f"{item.quantity} jetons"
+                    rows.append(
+                        ObjectRow(
+                            const, "hidden_item", *point, None, "coin", None, None, None, version=version, name_fr=coins
+                        )
+                    )
+                    continue
                 name = _identifier(item.item, reader.scripts.constants)
                 rows.append(ObjectRow(const, item.kind, *point, None, name, None, None, None, version=version))
     return rows, tuple(metadata)

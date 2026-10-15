@@ -125,3 +125,41 @@ firered|leafgreen,rock-tunnel/b1f,machop,walk,move_to,rock-tunnel/remake-b1f
 firered|leafgreen,rock-tunnel/b1f,onix,walk,move_to,rock-tunnel/remake-b1f
 firered|leafgreen,rock-tunnel/b1f,geodude,rock-smash,move_to,rock-tunnel/remake-b1f
 firered|leafgreen,rock-tunnel/b1f,graveler,rock-smash,move_to,rock-tunnel/remake-b1f
+firered|leafgreen,kanto-route-3/pokemon-center,magikarp,gift,exclude,Doublon : le marchand de Magicarpe se trouve au Centre Pokémon de la Route 4
+firered|leafgreen,kanto-route-4/pokemon-center,magikarp,gift,note,Vendu 500 ₽ par un marchand (une seule fois)
+firered|leafgreen,pallet-town,bulbasaur,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+firered|leafgreen,pallet-town,charmander,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+firered|leafgreen,pallet-town,squirtle,gift,note,Pokémon de départ (un seul au choix parmi les trois)
+firered|leafgreen,celadon-city/celadon-mansion,eevee,gift,note,Poké Ball posée sur la table de la maison du toit
+firered|leafgreen,saffron-city/silph-co-7f,lapras,gift,note,Donné par un employé de Sylphe SARL
+firered|leafgreen,saffron-city/fighting-dojo,hitmonlee,gift,note,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+firered|leafgreen,saffron-city/fighting-dojo,hitmonchan,gift,note,Récompense du Dojo (un seul au choix entre Kicklee et Tygnon)
+firered|leafgreen,cinnabar-island/cinnabar-lab,omanyte,gift,note,Ressuscité à partir du Fossile Nautile (Mont Sélénite ; un seul au choix avec le Fossile Dôme)
+firered|leafgreen,cinnabar-island/cinnabar-lab,kabuto,gift,note,Ressuscité à partir du Fossile Dôme (Mont Sélénite ; un seul au choix avec le Fossile Nautile)
+firered|leafgreen,cinnabar-island/cinnabar-lab,aerodactyl,gift,note,Ressuscité à partir du Vieil Ambre (Musée d'Argenta)
+firered|leafgreen,kanto-route-12,snorlax,pokeflute,note,Bloque la route : réveillez-le avec la Poké Flûte
+firered|leafgreen,kanto-route-16,snorlax,pokeflute,note,Bloque la route : réveillez-le avec la Poké Flûte
+firered|leafgreen,kanto-power-plant,electrode,static,note,Déguisé en Poké Ball
+firered|leafgreen,berry-forest,hypno,static,note,Attaque quand on parle à Lostelle
+firered,celadon-city/prize-corner,abra,gift,note,180 jetons
+firered,celadon-city/prize-corner,clefairy,gift,note,500 jetons
+firered,celadon-city/prize-corner,dratini,gift,note,2800 jetons
+firered,celadon-city/prize-corner,scyther,gift,note,5500 jetons
+firered,celadon-city/prize-corner,porygon,gift,note,9999 jetons
+leafgreen,celadon-city/prize-corner,abra,gift,note,120 jetons
+leafgreen,celadon-city/prize-corner,clefairy,gift,note,750 jetons
+leafgreen,celadon-city/prize-corner,pinsir,gift,note,2500 jetons
+leafgreen,celadon-city/prize-corner,dratini,gift,note,4600 jetons
+leafgreen,celadon-city/prize-corner,porygon,gift,note,6500 jetons
+firered|leafgreen,kanto-route-2/north-towards-pewter-city,mr-mime,npc-trade,trade_for,abra
+firered,kanto-underground-path,nidoran-f,npc-trade,trade_for,nidoran-m
+leafgreen,kanto-underground-path,nidoran-m,npc-trade,trade_for,nidoran-f
+firered,kanto-route-11,nidorina,npc-trade,trade_for,nidorino
+leafgreen,kanto-route-11,nidorino,npc-trade,trade_for,nidorina
+firered,kanto-route-18,lickitung,npc-trade,trade_for,golduck
+leafgreen,kanto-route-18,lickitung,npc-trade,trade_for,slowbro
+firered|leafgreen,cerulean-city,jynx,npc-trade,trade_for,poliwhirl
+firered|leafgreen,vermilion-city,farfetchd,npc-trade,trade_for,spearow
+firered|leafgreen,cinnabar-island/cinnabar-lab,electrode,npc-trade,trade_for,raichu
+firered|leafgreen,cinnabar-island/cinnabar-lab,tangela,npc-trade,trade_for,venonat
+firered|leafgreen,cinnabar-island/cinnabar-lab,seel,npc-trade,trade_for,ponyta

@@ -1,7 +1,8 @@
-"""Équipes, variantes de Flora et revanches des personnages GBA."""
+"""Équipes, variantes des rivaux et revanches des personnages GBA."""
 
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 
 from .maps_characters import ObjectRow
@@ -22,7 +23,9 @@ def trainer_rows(
     selected = tuple(trainer for trainer in trainers if trainer.startswith("TRAINER_MAY_")) if rival else trainers
     if rival:
         return [_rival_row(maps, version, selected, actor)]
-    rows = []
+    kanto_rivals = _kanto_rival_battles(selected)
+    selected = tuple(trainer for trainer in selected if not _KANTO_RIVAL.fullmatch(trainer))
+    rows = [_kanto_rival_row(maps, version, battle, teams, actor) for battle, teams in kanto_rivals.items()]
     for trainer_id in selected:
         trainer = maps.repo.trainers[version][trainer_id]
         rows.append(
@@ -32,7 +35,7 @@ def trainer_rows(
                 appearance=None,
                 trainer_class=trainer.trainer_class,
                 party=_party_rows(trainer.party),
-                name_fr=_trainer_name(trainer),
+                name_fr=_trainer_name(trainer) + (" (revanche)" if _league_rematch(trainer) else ""),
                 rematches=_rematches(maps, version, trainer_id),
                 held_items={
                     (1, slot): item_identifier(mon.item.removeprefix("ITEM_"), {})
@@ -41,7 +44,49 @@ def trainer_rows(
                 },
             )
         )
-    return [_with_rematch_items(maps, version, trainer_id, row) for trainer_id, row in zip(selected, rows, strict=True)]
+    fixed = rows[len(kanto_rivals) :]
+    return rows[: len(kanto_rivals)] + [
+        _with_rematch_items(maps, version, trainer_id, row) for trainer_id, row in zip(selected, fixed, strict=True)
+    ]
+
+
+# Combats du rival de Rouge Feu et Vert Feuille : une équipe par Pokémon de départ du rival.
+_KANTO_RIVAL = re.compile(r"TRAINER_((?:RIVAL|CHAMPION)_\w+?)_(BULBASAUR|CHARMANDER|SQUIRTLE)")
+# Le rival prend le Pokémon de départ qui bat celui du joueur.
+_KANTO_PLAYER_STARTER = {"BULBASAUR": "squirtle", "CHARMANDER": "bulbasaur", "SQUIRTLE": "charmander"}
+# Deux combats au même endroit : celui de la Route 22 avant et après les badges, et la revanche de la Ligue.
+_KANTO_RIVAL_NAMES = {
+    "RIVAL_ROUTE22_EARLY": "Rival (1er combat)",
+    "RIVAL_ROUTE22_LATE": "Rival (2e combat)",
+    "CHAMPION_REMATCH": "Rival (revanche)",
+}
+
+
+def _kanto_rival_battles(trainers: tuple[str, ...]) -> dict[str, dict[str, str]]:
+    battles: dict[str, dict[str, str]] = {}
+    for trainer in trainers:
+        if match := _KANTO_RIVAL.fullmatch(trainer):
+            battles.setdefault(match[1], {})[match[2]] = trainer
+    return battles
+
+
+def _kanto_rival_row(
+    maps: Gen3GameMaps, version: str, battle: str, teams: dict[str, str], actor: ObjectRow
+) -> ObjectRow:
+    if set(teams) != set(_KANTO_PLAYER_STARTER):
+        raise ValueError(f"{version}:{actor.key} : trois équipes du rival attendues pour {battle}")
+    trainers = maps.repo.trainers[version]
+    return replace(
+        actor,
+        kind="trainer",
+        appearance=None,
+        name_fr=_KANTO_RIVAL_NAMES.get(battle, "Rival"),
+        variants=[
+            (VariantKind.PLAYER_STARTER, _KANTO_PLAYER_STARTER[starter], _party_rows(trainers[teams[starter]].party))
+            for starter in sorted(teams, key=lambda starter: _KANTO_PLAYER_STARTER[starter])
+        ],
+        trainer_class=trainers[teams["BULBASAUR"]].trainer_class,
+    )
 
 
 def _rival_row(maps: Gen3GameMaps, version: str, trainers: tuple[str, ...], actor: ObjectRow) -> ObjectRow:
@@ -96,7 +141,32 @@ def _with_rematch_items(maps: Gen3GameMaps, version: str, trainer: str, row: Obj
     return replace(row, held_items=held)
 
 
+def _league_rematch(trainer: Gen3Trainer) -> bool:
+    """Seconde équipe du Conseil 4 de Rouge Feu et Vert Feuille, affrontée après la mission de Ciléo."""
+    return trainer.trainer_class == "TRAINER_CLASS_ELITE_FOUR" and trainer.const.endswith("_2")
+
+
+# Champions d'Arène, Conseil 4 et chef Rocket de Rouge Feu et Vert Feuille, nommés comme dans Rouge et Bleu.
+_KANTO_NAMES = {
+    "BROCK": "Pierre",
+    "MISTY": "Ondine",
+    "LT. SURGE": "Major Bob",
+    "ERIKA": "Érika",
+    "KOGA": "Koga",
+    "SABRINA": "Morgane",
+    "BLAINE": "Auguste",
+    "GIOVANNI": "Giovanni",
+    "LORELEI": "Olga",
+    "BRUNO": "Aldo",
+    "AGATHA": "Agatha",
+    "LANCE": "Peter",
+}
+
+
 def _trainer_name(trainer: Gen3Trainer) -> str:
+    named = {"TRAINER_CLASS_LEADER", "TRAINER_CLASS_ELITE_FOUR", "TRAINER_CLASS_BOSS"}
+    if trainer.trainer_class in named and trainer.name in _KANTO_NAMES:
+        return _KANTO_NAMES[trainer.name]
     if trainer.name == "WALLY":
         return "Timmy"
     if trainer.name == "STEVEN":
