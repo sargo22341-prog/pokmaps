@@ -17,6 +17,12 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "personnage sur un passage",
+        """SELECT o.id, o.map_id, o.name_fr FROM map_object o
+           WHERE o.kind IN ('npc', 'trainer', 'npc_pokemon') AND EXISTS
+           (SELECT 1 FROM map_warp w WHERE w.map_id = o.map_id AND w.x = o.x AND w.y = o.y)""",
+    ),
+    (
         "objet sans description française hors CT/CS",
         """SELECT id, identifier FROM item WHERE (description_fr IS NULL OR trim(description_fr) = '')
            AND id NOT IN (SELECT item_id FROM machine)""",

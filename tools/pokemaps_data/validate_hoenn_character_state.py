@@ -38,6 +38,10 @@ def _check_rival_teams(connection: sqlite3.Connection) -> list[str]:
 def _check_version(version: str, actors: list[tuple[str, str, str | None, str]]) -> list[str]:
     errors = []
     for label, kind, sprite, name in actors:
+        if (label == "route104" and name == "Flora") or (
+            label == "rustboro-city" and sprite == "obj-event-gfx-scientist-1"
+        ):
+            errors.append(f"{version}:{label} : figurant de scène devant une porte")
         if sprite == "obj-event-gfx-prof-birch" and label != "littleroot-town-professor-birchs-lab":
             errors.append(f"{version}:{label} : Seko hors du laboratoire")
         if label == "route101" and sprite in {

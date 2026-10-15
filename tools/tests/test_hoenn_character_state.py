@@ -10,6 +10,7 @@ import pytest
 
 from pokemaps_data.games import EMERALD, RUBY_SAPPHIRE, Game
 from pokemaps_data.hoenn_character_state import display_event, display_result
+from pokemaps_data.maps_actor_positions import clears_passages
 from pokemaps_data.pret_gen3 import Gen3PretRepo
 from pokemaps_data.pret_gen3_maps import Gen3Event, Gen3Layout, Gen3Map
 from pokemaps_data.sources import pret_dir
@@ -66,6 +67,39 @@ def test_house_roles_and_professor_lab_are_retained() -> None:
 
 def test_distributed_database_has_one_female_rival_per_battle(db: sqlite3.Connection) -> None:
     assert validate_hoenn_characters(db) == []
+
+
+def test_transient_door_actors_are_hidden_but_permanent_npcs_and_rewards_remain(db: sqlite3.Connection) -> None:
+    transient = db.execute(
+        """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id
+           JOIN version_group g ON g.id = m.version_group_id WHERE g.identifier = 'emerald'
+           AND ((m.identifier = 'route104' AND o.name_fr = 'Flora')
+           OR (m.identifier = 'rustboro-city' AND o.sprite = 'obj-event-gfx-scientist-1'))"""
+    ).fetchall()
+    assert transient == []
+    permanent = db.execute(
+        """SELECT count(*) FROM map_object o JOIN map m ON m.id = o.map_id
+           JOIN version_group g ON g.id = m.version_group_id WHERE g.identifier = 'emerald'
+           AND m.identifier = 'littleroot-town-mays-house-2f' AND o.name_fr = 'Flora'"""
+    ).fetchone()[0]
+    assert permanent == 1
+    point = db.execute(
+        """SELECT o.x, o.y FROM map_object o JOIN map m ON m.id = o.map_id
+           JOIN version_group g ON g.id = m.version_group_id WHERE g.identifier = 'emerald'
+           AND m.identifier = 'littleroot-town-mays-house-2f' AND o.name_fr = 'Flora'"""
+    ).fetchone()
+    warps = db.execute(
+        """SELECT w.x, w.y FROM map_warp w JOIN map m ON m.id = w.map_id
+           JOIN version_group g ON g.id = m.version_group_id WHERE g.identifier = 'emerald'
+           AND m.identifier = 'littleroot-town-mays-house-2f'"""
+    ).fetchall()
+    assert clears_passages(tuple(point), {tuple(warp) for warp in warps})
+    rewards = db.execute(
+        """SELECT count(*) FROM npc_offer f JOIN map_object o ON o.id = f.map_object_id
+           JOIN map m ON m.id = o.map_id JOIN version_group g ON g.id = m.version_group_id
+           WHERE g.identifier = 'emerald' AND m.identifier = 'lavaridge-town' AND o.name_fr = 'Flora'"""
+    ).fetchone()[0]
+    assert rewards > 0
 
 
 @pytest.mark.parametrize("route", [111, 118, 120])

@@ -18,6 +18,9 @@ Pour les mises à jour avec [Obtainium](https://github.com/ImranR98/Obtainium), 
 
 Choisir une version dans l’onglet Jeu. Toucher un lieu sur la carte pour consulter ses rencontres,
 objets et personnages ; les fiches du Pokédex permettent de retrouver leurs lieux sur la carte.
+Les icônes de combat restent au-dessus des sprites, avec une icône commune aux duos ; les PNJ sont placés
+à distance des passages pour laisser leur accès visible. Les figurants temporaires devant les portes sont
+retirés lorsqu'ils n'ajoutent aucun combat ni service ; les PNJ permanents restent affichés.
 Les guides regroupent soluces, quêtes, astuces et succès officiels traduits.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent

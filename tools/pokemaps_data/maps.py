@@ -25,6 +25,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .games import DECLARED_GAMES, GAMES, Game, PretFormat, complete_families
+from .maps_actor_positions import clear_actor_passages
 from .maps_characters import ObjectRow, object_rows
 from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
@@ -190,6 +191,7 @@ def export_game(
     rows = display_map_rows(game_maps, names, map_renderer, output)
     warps = _warp_rows(game_maps)
     objects, sprites = object_rows(game_maps, curation)
+    objects = clear_actor_passages(game_maps, objects)
     spots = _spot_rows(game_maps)
     map_renderer.write_sprites(sprites, output / "sprites")
     game_areas = [(const, area) for const, area in [*areas, *roaming_areas(game_maps)] if const in placements]

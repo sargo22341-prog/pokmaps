@@ -26,6 +26,7 @@ from .pret_gen3_offers import ScriptOffers
 from .pret_hoenn_berries import initial_berries
 from .pret_identifiers import species_identifier
 from .pret_models import NpcOffer
+from .scene_actor_visibility import read_scene_actor_visibility
 from .scene_actors_gen3 import attach_scenes, validate_scene_actors
 from .sources import PRET_COMMITS
 from .story_events import StoryEvents
@@ -34,6 +35,7 @@ from .story_events import StoryEvents
 def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output: Path) -> list[ObjectRow]:
     rows, items = item_rows(maps)
     curation = read_gen3_curation()
+    scene_only = read_scene_actor_visibility()
     catalog: list[dict[str, object]] = []
     for version, _ in maps.game.pret_versions:
         reader = maps.repo.offers[version]
@@ -63,7 +65,9 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
                 catalog.append(_catalog_row(version, current.const, key, event, result))
                 _mark_offer_conditions(maps, result, version, story)
                 offers = _display_offers(maps, event, result, version, api, story, berries)
-                if displayed is None:
+                if (maps.game.map_family, key) in scene_only and (result.trainers or offers):
+                    raise ValueError(f"scene_actor_visibility.csv : {version}:{key} : acteur avec combat ou offre")
+                if displayed is None or (maps.game.map_family, key) in scene_only:
                     continue
                 event = displayed
                 event = apply_team_graphics(event, graphics)

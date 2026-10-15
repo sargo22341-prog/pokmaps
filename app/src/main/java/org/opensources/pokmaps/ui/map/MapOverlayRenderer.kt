@@ -170,6 +170,31 @@ internal class MapOverlayRenderer(private val tiles: (GameMap) -> TileStreamProv
             val spec = MarkerSpec(position.x, position.y, !inZone, 1f, pokemon, content)
             wanted.draw("${MapMarkerIds.OBJECT}:${obj.id}", spec)
         }
+        drawBattles(state, wanted, zoneParts, objects)
+    }
+
+    private fun drawBattles(
+        state: MapRenderState,
+        wanted: MutableMap<String, MarkerSpec>,
+        zoneParts: Set<Int>,
+        objects: List<MapObject>
+    ) {
+        val visible = objects.filter { MapLayer.of(it) in state.layers }.map { it.id }.toSet()
+        for (battle in state.catalog.battleMarkers) {
+            if (battle.objectId !in visible) continue
+            val obj = state.catalog.objectsById.getValue(battle.objectId)
+            val position = state.catalog.markerPosition(obj)
+            val inZone = obj.mapId in zoneParts
+            val spec = MarkerSpec(
+                position.x + battle.x - obj.x,
+                position.y + battle.y - obj.y,
+                !inZone,
+                2f,
+                false,
+                MarkerContent.Battle(inZone)
+            )
+            wanted.draw("${MapMarkerIds.OBJECT}:${obj.id}:battle", spec)
+        }
     }
 
     private fun drawWildMarkers(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {

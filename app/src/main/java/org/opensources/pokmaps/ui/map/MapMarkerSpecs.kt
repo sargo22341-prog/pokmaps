@@ -24,6 +24,8 @@ internal sealed interface MarkerContent {
 
     data class Wild(val wild: WildMarker) : MarkerContent
 
+    data class Battle(val alwaysVisible: Boolean) : MarkerContent
+
     data object Highlight : MarkerContent
 }
 
@@ -53,6 +55,8 @@ internal fun MarkerContent.Draw(mapState: MapState) {
         is MarkerContent.Element -> ObjectMarker(mapState, obj, versionGroupIdentifier, alwaysVisible, scale)
 
         is MarkerContent.Wild -> WildPokemonMarker(mapState, wild)
+
+        is MarkerContent.Battle -> BattleMarker(mapState, alwaysVisible)
 
         MarkerContent.Highlight -> HighlightMarker()
     }

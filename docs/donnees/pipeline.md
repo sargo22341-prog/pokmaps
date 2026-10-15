@@ -77,6 +77,7 @@ L’export authentifié des archives est une opération distincte, décrite dans
 | Connexions, layouts et bordures corrigés | `map_connection_skips.csv`, `map_layouts.csv`, `map_trims.csv` |
 | Zones de rencontres et placement | `map_areas.csv`, `extra_areas.csv`, `map_spots.csv` |
 | Personnages, noms et scènes | `npc_names.csv`, `npc_text_names.csv`, `npc_duplicates.csv`, `scene_actors_gen3.csv` |
+| Figurants masqués uniquement sur la carte | `scene_actor_visibility.csv` (scripts et catalogues conservés) |
 | Classes, installations et offres | `trainer_classes.csv`, `facility_names.csv`, `npc_offers.csv`, `story_events.csv` |
 | Formes, événements externes et objets | `pokemon_forms.csv`, `external_event_maps.csv`, `item_descriptions.csv` |
 | Obtention sans transfert et effets d’attaques | `transfer_only.csv`, `move_effects.csv` |
