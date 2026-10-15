@@ -9,6 +9,7 @@
   dresseurs, les effets des attaques et les objets tenus.
 - pret/pokeruby, pret/pokeemerald, pret/pokefirered : sources des cinq jeux GBA pour les cartes, rencontres,
   personnages, services et règles du moteur (docs/generations/generation-3.md).
+- pret/pokediamond, pret/pokeplatinum : sources de Diamant, Perle et Platine, en cours d'intégration (gen4.md).
 """
 
 from __future__ import annotations
@@ -56,10 +57,13 @@ PRET_COMMITS = {
     "pokeruby": "5784633ce4ef7ade1a7f2d2d0c288e3d5e6cdd7f",
     "pokeemerald": "731ad5bfd6e6f265508d0efcca0ba42f9dcf5881",
     "pokefirered": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+    "pokediamond": "b623abef1b4dfe204ca50aab42447ac00c134290",
+    "pokeplatinum": "1dc13dcea40c04ab53f1f607de46023dc409ef20",
 }
 PRET_URL = "https://github.com/pret/{repo}.git"
-# Délai de chaque commande git. Mesure du 9 octobre 2026 : le plus lourd (pokeemerald) se récupère en moins de
-# 5 s, pour un paquet de 12 Mio et 60 Mio de sources extraites.
+# Délai de chaque commande git. Mesures : pokeemerald (9 octobre 2026) se récupère en moins de 5 s, pour un paquet
+# de 12 Mio et 60 Mio de sources ; pokeplatinum (15 octobre 2026), le plus lourd, en 4 s pour un paquet de 45 Mio,
+# mais son extraction (27 668 fichiers, 132 Mio) prend 12 s et celle de pokediamond (33 254 fichiers) 14 s sous Windows.
 PRET_GIT_TIMEOUT_SECONDS = 120
 
 POKEAPI_CSV_FILES = (
