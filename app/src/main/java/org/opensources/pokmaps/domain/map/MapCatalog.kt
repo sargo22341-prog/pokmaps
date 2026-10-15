@@ -1,7 +1,6 @@
 package org.opensources.pokmaps.domain.map
 
 import kotlin.math.abs
-import org.opensources.pokmaps.domain.model.ExternalEvent
 import org.opensources.pokmaps.domain.model.GameMap
 import org.opensources.pokmaps.domain.model.MapRegion
 import org.opensources.pokmaps.domain.model.VersionGroup
@@ -19,9 +18,12 @@ data class MapInfo(
     val levelCount: Int,
     val isWorld: Boolean = false,
     val originMapId: Int? = null,
-    val startMapId: Int? = null
+    val startMapId: Int? = null,
+    val externalEventKey: String? = null,
+    /** Ordre dans le menu des îles ; zéro pour les cartes qui ne sont pas une entrée. */
+    val eventEntranceOrder: Int = 0
 ) {
-    val isExternalEvent: Boolean get() = ExternalEvent.map(identifier)
+    val isExternalEvent: Boolean get() = externalEventKey != null
 
     val isDisplayable: Boolean get() = parentId == null && levelCount > 0
 
@@ -172,7 +174,8 @@ data class MapCatalog(
             regions = regionsOf(map.id).map { it.toRegion() },
             isWorld = isWorld(map.id),
             startRegionId = map.startMapId,
-            versionIdentifier = versionIdentifier
+            versionIdentifier = versionIdentifier,
+            isExternalEvent = map.isExternalEvent
         )
     }
 

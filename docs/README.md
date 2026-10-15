@@ -1,18 +1,30 @@
-# Documentation de Pokémaps
+# Documentation
 
-- [Jeux et carte](fonctionnalites/carte.md)
-- [Pokédex et collection](fonctionnalites/pokedex.md)
-- [Recherche, objets et personnages](fonctionnalites/recherche.md)
-- [Réglages](fonctionnalites/reglages.md)
-- [Génération 1](generations/generation-1.md)
-- [Génération 2](generations/generation-2.md)
-- [Génération 3 et Remake 1G](generations/generation-3.md)
-- [Bilan avant la génération 4](generations/bilan-generations-1-2-3.md)
-- [Bilan avant la génération 3](generations/bilan-generations-1-2.md)
-- [Générations suivantes](generations/generations-suivantes.md)
-- [Provenance des sprites de toutes les espèces](donnees/sprites-pokemon.md)
-- [Sources et pipeline](donnees/pipeline.md)
-- [Compilation et publication](developpement.md)
-- [Performances sur téléphone](performance.md)
+Commencer par [le README](../README.md) et les règles obligatoires [AGENTS.md](../AGENTS.md).
+Lire ensuite uniquement la référence du sujet modifié, puis le code et ses tests.
+Les pages décrivent l’état actuel ; les rapports de tâches et anciens résultats de contrôles n’y sont pas conservés.
 
-Le [README](../README.md) présente l'installation. [AGENTS.md](../AGENTS.md) fixe les règles de contribution.
+## Développer et modifier les données
+
+- [Compilation, contrôles et CI](developpement.md).
+- [Sources, génération, ajout d’un jeu et éditeur des emplacements](donnees/pipeline.md).
+- [Mesures et décisions de performance](performance.md), seulement pour une tâche de performance.
+- [Archives et traductions RetroAchievements](../tools/data/retroachievements/README.md).
+
+## Fonctionnement
+
+- [Jeux et carte](fonctionnalites/carte.md).
+- [Pokédex et collection](fonctionnalites/pokedex.md).
+- [Recherche, objets et personnages](fonctionnalites/recherche.md).
+- [Guides et succès](fonctionnalites/guides.md).
+- [Réglages, sauvegardes et RetroAchievements](fonctionnalites/reglages.md).
+
+## Jeux et règles
+
+- [Génération 1](generations/generation-1.md), [génération 2](generations/generation-2.md).
+- [Génération 3 et remakes](generations/generation-3.md) : accès aux références techniques GBA par sujet.
+- [Prérequis des générations suivantes](generations/generations-suivantes.md).
+
+Le [catalogue des sprites](donnees/sprites-pokemon.md) est un inventaire généré de 1 025 espèces,
+à consulter uniquement pour une provenance précise. Les règles de sprites sont résumées dans le pipeline.
+Les valeurs exhaustives, versions de schéma et comptes sont à rechercher dans le code, les CSV et les tests.

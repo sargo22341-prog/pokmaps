@@ -7,8 +7,8 @@
 - msikma/pokesprite : icônes d'objets.
 - pret/pokered, pret/pokeyellow, pret/pokegold, pret/pokecrystal : désassemblages des jeux, pour les cartes et les
   dresseurs, les effets des attaques et les objets tenus.
-- pret/pokeruby, pret/pokeemerald, pret/pokefirered : désassemblages de la 3e génération, épinglés pour son
-  intégration (docs/plan_gen_3.md) ; aucun jeu ne les lit encore.
+- pret/pokeruby, pret/pokeemerald, pret/pokefirered : sources des cinq jeux GBA pour les cartes, rencontres,
+  personnages, services et règles du moteur (docs/generations/generation-3.md).
 """
 
 from __future__ import annotations

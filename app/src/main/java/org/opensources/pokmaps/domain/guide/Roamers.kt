@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.domain.guide
 
+import org.opensources.pokmaps.domain.model.GameVersion
+
 enum class RoamerCondition { JOHTO, HOENN, RED, BLUE, BULBASAUR, CHARMANDER, SQUIRTLE }
 
 /** Routes que parcourt un errant, d'après les tables de déplacement du moteur de chaque jeu. */
@@ -13,54 +15,57 @@ data class RoamerChoice(val pokemonId: Int, val condition: RoamerCondition)
  */
 object Roamers {
     fun choices(version: Int): List<RoamerChoice> = pokemonIds(version).map { pokemon ->
-        val condition = when (version) {
-            4, 5, 6 -> RoamerCondition.JOHTO
+        val condition = when (GameVersion.of(version)) {
+            GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerCondition.JOHTO
 
-            7, 8 -> RoamerCondition.HOENN
+            GameVersion.RUBY, GameVersion.SAPPHIRE -> RoamerCondition.HOENN
 
-            9 -> if (pokemon == 380) RoamerCondition.RED else RoamerCondition.BLUE
+            GameVersion.EMERALD -> if (pokemon == 380) RoamerCondition.RED else RoamerCondition.BLUE
 
-            10, 11 -> when (pokemon) {
+            GameVersion.FIRERED, GameVersion.LEAFGREEN -> when (pokemon) {
                 244 -> RoamerCondition.BULBASAUR
                 245 -> RoamerCondition.CHARMANDER
                 243 -> RoamerCondition.SQUIRTLE
                 else -> error("Bête errante inconnue : $pokemon")
             }
 
-            else -> error("Version sans errant : $version")
+            GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
         }
         RoamerChoice(pokemon, condition)
     }
 
-    fun pokemonIds(version: Int): List<Int> = when (version) {
-        4, 5 -> listOf(243, 244, 245)
-        6 -> listOf(243, 244)
-        7 -> listOf(381)
-        8 -> listOf(380)
-        9 -> listOf(380, 381)
-        10, 11 -> listOf(243, 244, 245)
-        else -> emptyList()
+    fun pokemonIds(version: Int): List<Int> = when (GameVersion.of(version)) {
+        GameVersion.GOLD, GameVersion.SILVER -> listOf(243, 244, 245)
+        GameVersion.CRYSTAL -> listOf(243, 244)
+        GameVersion.RUBY -> listOf(381)
+        GameVersion.SAPPHIRE -> listOf(380)
+        GameVersion.EMERALD -> listOf(380, 381)
+        GameVersion.FIRERED, GameVersion.LEAFGREEN -> listOf(243, 244, 245)
+        GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> emptyList()
     }
 
     /** Niveau de la rencontre : 40 à Johto et Hoenn, 50 dans les remakes. */
-    fun level(version: Int): Int = when (version) {
-        4, 5, 6, 7, 8, 9 -> 40
-        10, 11 -> 50
-        else -> error("Version sans errant : $version")
+    fun level(version: Int): Int = when (GameVersion.of(version)) {
+        GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL, GameVersion.RUBY, GameVersion.SAPPHIRE,
+        GameVersion.EMERALD -> 40
+
+        GameVersion.FIRERED, GameVersion.LEAFGREEN -> 50
+
+        GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
     }
 
-    fun area(version: Int): RoamerArea = when (version) {
-        4, 5, 6 -> RoamerArea.JOHTO
-        7, 8, 9 -> RoamerArea.HOENN
-        10, 11 -> RoamerArea.KANTO
-        else -> error("Version sans errant : $version")
+    fun area(version: Int): RoamerArea = when (GameVersion.of(version)) {
+        GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerArea.JOHTO
+        GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> RoamerArea.HOENN
+        GameVersion.FIRERED, GameVersion.LEAFGREEN -> RoamerArea.KANTO
+        GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
     }
 
     /** Article des quêtes annexes qui présente les errants de la version, null sans errant. */
-    fun article(version: Int): String? = when (version) {
-        4, 5, 6 -> "johto-roamers"
-        7, 8, 9 -> "hoenn-roamers"
-        10, 11 -> "remake-roamers"
-        else -> null
+    fun article(version: Int): String? = when (GameVersion.of(version)) {
+        GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> "johto-roamers"
+        GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> "hoenn-roamers"
+        GameVersion.FIRERED, GameVersion.LEAFGREEN -> "remake-roamers"
+        GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> null
     }
 }

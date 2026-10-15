@@ -155,6 +155,7 @@ class NpcOffer:
     condition: Condition = ALWAYS
     currency: str | None = None
     stories: tuple[str, ...] = ()
+    external_event: bool = False
 
 
 @dataclass(frozen=True)

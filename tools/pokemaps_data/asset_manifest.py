@@ -26,6 +26,12 @@ def _required_paths(assets: Path) -> set[str]:
                     paths.add(f"sprites/{style}/{variant}/{species}.webp")
         for (identifier,) in connection.execute("SELECT identifier FROM item WHERE has_sprite = 1"):
             paths.add(f"sprites/items/{identifier}.webp")
+        for folder, identifier in connection.execute(
+            "SELECT DISTINCT sprite_folder, sprite_identifier FROM pokemon_form"
+        ):
+            for style in ("", "shiny/"):
+                for motion in ("static", "animated"):
+                    paths.add(f"sprites/{folder}/{style}{motion}/{identifier}.webp")
         rows = connection.execute(
             """SELECT DISTINCT vg.identifier, o.sprite FROM map_object o JOIN map m ON m.id = o.map_id
                JOIN version_group vg ON vg.id = m.version_group_id WHERE o.sprite IS NOT NULL"""

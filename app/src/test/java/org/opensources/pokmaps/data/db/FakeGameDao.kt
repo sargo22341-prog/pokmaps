@@ -8,6 +8,8 @@ import org.opensources.pokmaps.domain.model.Game
 /** Jeux en mémoire (Or, de la 2e génération, seulement sur demande) ; `failing` simule une base illisible. */
 internal class FakeGameDao(private val games: List<Game> = listOf(RED, BLUE), private val failing: Boolean = false) :
     GameDao {
+    override fun gameRows(): Flow<List<GameRow>> = error("Le faux fournit directement les jeux du domaine")
+
     override fun games(): Flow<List<Game>> = if (failing) {
         flow {
             throw IllegalStateException(BROKEN)

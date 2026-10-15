@@ -1,4 +1,4 @@
-"""Rencontres, terrains et emplacements d'Or et d'Argent (phase 4 de plan_gen_2.md), dans l'aperçu de tous les jeux."""
+"""Rencontres, terrains et emplacements d'Or et d'Argent, dans l'aperçu de tous les jeux."""
 
 import shutil
 import sqlite3
@@ -229,7 +229,7 @@ def test_stale_transfer_only_rows_are_reported(preview_database: Path, tmp_path:
         # Bulbizarre devient obtenable dans Or, et ses évolutions avec lui : leurs lignes de transfer_only.csv n'ont
         # plus lieu d'être.
         connection.execute(
-            """INSERT INTO encounter SELECT max(id) + 1, 4, 185, 1, 18, 5, 5, NULL, 1, NULL FROM encounter"""
+            """INSERT INTO encounter SELECT max(id) + 1, 4, 185, 1, 18, 5, 5, NULL, 1, NULL, 0 FROM encounter"""
         )
         connection.commit()
     finally:

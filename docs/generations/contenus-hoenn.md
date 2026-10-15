@@ -1,4 +1,4 @@
-# Contenus propres à Hoenn — phase 8
+# Contenus propres à Hoenn
 
 Rubis/Saphir et Émeraude disposent chacun de leur catalogue `app/src/main/assets/hoenn.json` :
 43 baies, 354 attaques de Concours et 120 décorations. Rouge Feu/Vert Feuille n’exposent pas ces contenus.
@@ -24,8 +24,9 @@ aux enchaînements. Les attaques de combat et leurs effets sont conservés.
 Cinq articles complètent chaque bibliothèque Hoenn : culture des baies, Concours et leurs salles par jeu,
 Mélangeur et Parc Safari, recettes à deux avec une Baie Ceriz, Bases Secrètes et décorations.
 Le guide donne les profils des 43 baies, y compris les baies rares absentes du catalogue d’objets Room ;
-seules les fiches existantes reçoivent un lien. Les recettes utilisent les cinq saveurs de toutes les baies, les soustractions circulaires, la pénalité
-des saveurs négatives, la moyenne entière d’onctuosité et la vitesse du moteur. La liste affiche la base
+seules les fiches existantes reçoivent un lien. Les recettes utilisent les cinq saveurs de toutes les baies,
+les soustractions circulaires, la pénalité des saveurs négatives, la moyenne entière d’onctuosité
+et la vitesse du moteur. La liste affiche la base
 avant vitesse ; les blocs noirs signalent leurs trois saveurs aléatoires, sans inventer le tirage.
 L’appréciation selon la nature, la satiété et les usages au Safari sont expliqués dans le guide.
 
@@ -37,7 +38,7 @@ Les articles rappellent les conditions des soldes, les récompenses et les distr
 Une décoration sans boutique ou don dans les scripts est signalée comme obtention spéciale.
 Il n’y a pas d’éditeur de Base Secrète ni de lecture de sauvegarde de cartouche.
 
-Le catalogue séparé complète les données Room sans changer le schéma 15. Il est immuable une fois chargé,
+Le catalogue séparé complète les données Room. Il est immuable une fois chargé,
 lu sur `Dispatchers.IO` par le repository, borné à 512 Kio et validé avant son utilisation.
 Les ViewModels et composables ne lisent pas les assets ; les textes de présentation viennent des ressources.
 Les tests ordinaires utilisent l’asset versionné, les tests `pipeline` relisent les deux sources épinglées.

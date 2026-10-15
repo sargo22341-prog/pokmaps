@@ -7,13 +7,17 @@ import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 
 class UnownFormTest {
+    @Test(expected = IllegalArgumentException::class)
+    fun aFutureGenerationRequiresAnExplicitAlphabetRule() {
+        UnownForm.available(9)
+    }
+
     @Test
     fun formsFollowTheirGeneration() {
         assertTrue(UnownForm.available(1).isEmpty())
         assertEquals(26, UnownForm.available(2).size)
         assertFalse(UnownForm.EXCLAMATION in UnownForm.available(2))
         assertEquals(28, UnownForm.available(3).size)
-        assertEquals(UnownForm.entries, UnownForm.available(9))
     }
 
     @Test

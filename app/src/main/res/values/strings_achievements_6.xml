@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_5636_title">
+        Déclaration à l’agent
+    </string>
+    <string name="ra_5636_text">
+        Donner le nom du rival à l’agent dans le laboratoire du Professeur Orme.
+    </string>
+    <array name="ra_5636">
+        <item>5636</item>
+        <item>@string/ra_5636_title</item>
+        <item>@string/ra_5636_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_5637_title" type="string">@string/ra_5070_title</item>
+    <item name="ra_5637_text" type="string">@string/ra_5070_text</item>
+    <array name="ra_5637">
+        <item>5637</item>
+        <item>@string/ra_5637_title</item>
+        <item>@string/ra_5637_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-violet</item>
+    </array>
+    <item name="ra_199603_title" type="string">@string/ra_155162_title</item>
+    <string name="ra_199603_text">
+        Vaincre Albert en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 9 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199603">
+        <item>199603</item>
+        <item>@string/ra_199603_title</item>
+        <item>@string/ra_199603_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-violet</item>
+    </array>
+    <string name="ra_5934_title">
+        Sous-sol criminel
+    </string>
+    <string name="ra_5934_text">
+        Vaincre le Sbire Rocket dirigeant l’opération du Puits Ramoloss.
+    </string>
+    <array name="ra_5934">
+        <item>5934</item>
+        <item>@string/ra_5934_title</item>
+        <item>@string/ra_5934_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_5638_title" type="string">@string/ra_5071_title</item>
+    <item name="ra_5638_text" type="string">@string/ra_5071_text</item>
+    <array name="ra_5638">
+        <item>5638</item>
+        <item>@string/ra_5638_title</item>
+        <item>@string/ra_5638_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_199604_title" type="string">@string/ra_155163_title</item>
+    <string name="ra_199604_text">
+        Vaincre Hector en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 16 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199604">
+        <item>199604</item>
+        <item>@string/ra_199604_title</item>
+        <item>@string/ra_199604_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_5639_title" type="string">@string/ra_5072_title</item>
+    <item name="ra_5639_text" type="string">@string/ra_5072_text</item>
+    <array name="ra_5639">
+        <item>5639</item>
+        <item>@string/ra_5639_title</item>
+        <item>@string/ra_5639_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <item name="ra_199605_title" type="string">@string/ra_155168_title</item>
+    <string name="ra_199605_text">
+        Vaincre Blanche en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 20 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199605">
+        <item>199605</item>
+        <item>@string/ra_199605_title</item>
+        <item>@string/ra_199605_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <string name="ra_199564_title">
+        Arbre trompeur
+    </string>
+    <string name="ra_199564_text">
+        Capturer Simularbre sur la Route 36 et l’enregistrer dans le Pokédex.
+    </string>
+    <array name="ra_199564">
+        <item>199564</item>
+        <item>@string/ra_199564_title</item>
+        <item>@string/ra_199564_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <string name="ra_199566_title">
+        Rencontre avec Eusine
+    </string>
+    <string name="ra_199566_text">
+        Accomplir l’événement d’Eusine dans la Tour Cendrée.
+    </string>
+    <array name="ra_199566">
+        <item>199566</item>
+        <item>@string/ra_199566_title</item>
+        <item>@string/ra_199566_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <item name="ra_5640_title" type="string">@string/ra_5073_title</item>
+    <item name="ra_5640_text" type="string">@string/ra_5073_text</item>
+    <array name="ra_5640">
+        <item>5640</item>
+        <item>@string/ra_5640_title</item>
+        <item>@string/ra_5640_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <item name="ra_199606_title" type="string">@string/ra_155170_title</item>
+    <string name="ra_199606_text">
+        Vaincre Mortimer en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 25 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199606">
+        <item>199606</item>
+        <item>@string/ra_199606_title</item>
+        <item>@string/ra_199606_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <string name="ra_199568_title">
+        Défi d’Eusine
+    </string>
+    <string name="ra_199568_text">
+        Vaincre Eusine à Irisia.
+    </string>
+    <array name="ra_199568">
+        <item>199568</item>
+        <item>@string/ra_199568_title</item>
+        <item>@string/ra_199568_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>crystal-suicune</item>
+    </array>
+    <item name="ra_5641_title" type="string">@string/ra_5074_title</item>
+    <item name="ra_5641_text" type="string">@string/ra_5074_text</item>
+    <array name="ra_5641">
+        <item>5641</item>
+        <item>@string/ra_5641_title</item>
+        <item>@string/ra_5641_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_199607_title" type="string">@string/ra_155173_title</item>
+    <string name="ra_199607_text">
+        Vaincre Chuck en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 30 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199607">
+        <item>199607</item>
+        <item>@string/ra_199607_title</item>
+        <item>@string/ra_199607_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_199569_title">
+        Phare rallumé
+    </string>
+    <string name="ra_199569_text">
+        Soigner le Pharamp au sommet du Phare d’Oliville.
+    </string>
+    <array name="ra_199569">
+        <item>199569</item>
+        <item>@string/ra_199569_title</item>
+        <item>@string/ra_199569_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_5642_title" type="string">@string/ra_5075_title</item>
+    <item name="ra_5642_text" type="string">@string/ra_5075_text</item>
+    <array name="ra_5642">
+        <item>5642</item>
+        <item>@string/ra_5642_title</item>
+        <item>@string/ra_5642_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_199608_title" type="string">@string/ra_155174_title</item>
+    <string name="ra_199608_text">
+        Vaincre Jasmine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 35 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199608">
+        <item>199608</item>
+        <item>@string/ra_199608_title</item>
+        <item>@string/ra_199608_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_199594_title">
+        Suicune de la Route 42
+    </string>
+    <string name="ra_199594_text">
+        Rencontrer Suicune sur la Route 42.
+    </string>
+    <array name="ra_199594">
+        <item>199594</item>
+        <item>@string/ra_199594_title</item>
+        <item>@string/ra_199594_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_199570_title">
+        Léviator rouge
+    </string>
+    <string name="ra_199570_text">
+        Capturer le Léviator rouge au Lac Colère.
+    </string>
+    <array name="ra_199570">
+        <item>199570</item>
+        <item>@string/ra_199570_title</item>
+        <item>@string/ra_199570_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_5946_title">
+        Repaire d’Acajou fermé
+    </string>
+    <string name="ra_5946_text">
+        Faire échouer la Team Rocket dans son repaire d’Acajou.
+    </string>
+    <array name="ra_5946">
+        <item>5946</item>
+        <item>@string/ra_5946_title</item>
+        <item>@string/ra_5946_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199571_title">
+        Tous les Rocket du repaire
+    </string>
+    <string name="ra_199571_text">
+        Vaincre tous les Dresseurs du Repaire Rocket d’Acajou.
+    </string>
+    <array name="ra_199571">
+        <item>199571</item>
+        <item>@string/ra_199571_title</item>
+        <item>@string/ra_199571_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_5643_title" type="string">@string/ra_5076_title</item>
+    <item name="ra_5643_text" type="string">@string/ra_5076_text</item>
+    <array name="ra_5643">
+        <item>5643</item>
+        <item>@string/ra_5643_title</item>
+        <item>@string/ra_5643_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-mahogany</item>
+    </array>
+    <item name="ra_199609_title" type="string">@string/ra_155175_title</item>
+    <string name="ra_199609_text">
+        Vaincre Frédo en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, au niveau 31 maximum pendant tout le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199609">
+        <item>199609</item>
+        <item>@string/ra_199609_title</item>
+        <item>@string/ra_199609_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-mahogany</item>
+    </array>
+    <string name="ra_5947_title">
+        Exécutifs hors antenne
+    </string>
+    <string name="ra_5947_text">
+        Vaincre tous les Caïds Rocket de la Tour Radio de Doublonville.
+    </string>
+    <array name="ra_5947">
+        <item>5947</item>
+        <item>@string/ra_5947_title</item>
+        <item>@string/ra_5947_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-radio</item>
+    </array>
+    <string name="ra_199572_title">
+        Tour et souterrain libérés
+    </string>
+    <string name="ra_199572_text">
+        Vaincre tous les Dresseurs de la Tour Radio et du souterrain de Doublonville.
+    </string>
+    <array name="ra_199572">
+        <item>199572</item>
+        <item>@string/ra_199572_title</item>
+        <item>@string/ra_199572_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-radio</item>
+    </array>
+    <string name="ra_199595_title">
+        Suicune de la Route 36
+    </string>
+    <string name="ra_199595_text">
+        Rencontrer Suicune sur la Route 36.
+    </string>
+    <array name="ra_199595">
+        <item>199595</item>
+        <item>@string/ra_199595_title</item>
+        <item>@string/ra_199595_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_5948_title">
+        Vent du nord apaisé
+    </string>
+    <string name="ra_5948_text">
+        Capturer Suicune.
+    </string>
+    <array name="ra_5948">
+        <item>5948</item>
+        <item>@string/ra_5948_title</item>
+        <item>@string/ra_5948_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_199573_title">
+        Suicune sans Master Ball
+    </string>
+    <string name="ra_199573_text">
+        Capturer Suicune et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <array name="ra_199573">
+        <item>199573</item>
+        <item>@string/ra_199573_title</item>
+        <item>@string/ra_199573_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <item name="ra_5644_title" type="string">@string/ra_5077_title</item>
+    <item name="ra_5644_text" type="string">@string/ra_5077_text</item>
+    <array name="ra_5644">
+        <item>5644</item>
+        <item>@string/ra_5644_title</item>
+        <item>@string/ra_5644_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <item name="ra_199610_title" type="string">@string/ra_155176_title</item>
+    <string name="ra_199610_text">
+        Vaincre Sandra en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 40 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199610">
+        <item>199610</item>
+        <item>@string/ra_199610_title</item>
+        <item>@string/ra_199610_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_199576_title">
+        Minidraco avec Vit. Extrême
+    </string>
+    <string name="ra_199576_text">
+        Recevoir le Minidraco connaissant Vit. Extrême en répondant correctement à toutes les questions du
+        maître de l’Antre du Dragon dès la première tentative.
+    </string>
+    <array name="ra_199576">
+        <item>199576</item>
+        <item>@string/ra_199576_title</item>
+        <item>@string/ra_199576_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_5949_title">
+        Fin du voyage de Johto
+    </string>
+    <string name="ra_5949_text">
+        Vaincre le Conseil des 4 et Peter à la Ligue Pokémon et devenir Maître.
+    </string>
+    <array name="ra_5949">
+        <item>5949</item>
+        <item>@string/ra_5949_title</item>
+        <item>@string/ra_5949_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <string name="ra_199611_title">
+        Ligue de Johto exigeante
+    </string>
+    <string name="ra_199611_text">
+        Vaincre le Conseil des 4 et Peter dans une seule session en mode Défini, avec uniquement des Pokémon
+        introduits à Johto, sans espèce réservée à l’échange externe, sans Lugia ni Ho-Oh, sans dépasser le
+        niveau 44 pendant les combats et sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199611">
+        <item>199611</item>
+        <item>@string/ra_199611_title</item>
+        <item>@string/ra_199611_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-legends</item>
+    </array>
+    <item name="ra_5950_title" type="string">@string/ra_4422_title</item>
+    <string name="ra_5950_text">
+        Vaincre le Conseil des 4 et Peter avec un seul Pokémon.
+    </string>
+    <array name="ra_5950">
+        <item>5950</item>
+        <item>@string/ra_5950_title</item>
+        <item>@string/ra_5950_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <item name="ra_5647_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_5647_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_5647">
+        <item>5647</item>
+        <item>@string/ra_5647_title</item>
+        <item>@string/ra_5647_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199612_title" type="string">@string/ra_155181_title</item>
+    <string name="ra_199612_text">
+        Vaincre Major Bob en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 46 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199612">
+        <item>199612</item>
+        <item>@string/ra_199612_title</item>
+        <item>@string/ra_199612_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5650_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_5650_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_5650">
+        <item>5650</item>
+        <item>@string/ra_5650_title</item>
+        <item>@string/ra_5650_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199613_title" type="string">@string/ra_155182_title</item>
+    <string name="ra_199613_text">
+        Vaincre Morgane en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans légendaire autre que Raikou, Entei et Suicune, au niveau 48 maximum pendant tout
+        le combat, sans utiliser d’objet du Sac en combat.
+    </string>
+    <array name="ra_199613">
+        <item>199613</item>
+        <item>@string/ra_199613_title</item>
+        <item>@string/ra_199613_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_199585_title">
+        Courant rétabli
+    </string>
+    <string name="ra_199585_text">
+        Rapporter la Partie Machine volée au personnel de la Centrale de Kanto.
+    </string>
+    <array name="ra_199585">
+        <item>199585</item>
+        <item>@string/ra_199585_title</item>
+        <item>@string/ra_199585_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5646_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_5646_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_5646">
+        <item>5646</item>
+        <item>@string/ra_5646_title</item>
+        <item>@string/ra_5646_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199614_title" type="string">@string/ra_155187_title</item>
+    <string name="ra_199614_text">
+        Vaincre Ondine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 47 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199614">
+        <item>199614</item>
+        <item>@string/ra_199614_title</item>
+        <item>@string/ra_199614_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5648_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_5648_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_5648">
+        <item>5648</item>
+        <item>@string/ra_5648_title</item>
+        <item>@string/ra_5648_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199615_title" type="string">@string/ra_155183_title</item>
+    <string name="ra_199615_text">
+        Vaincre Érika en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 46 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199615">
+        <item>199615</item>
+        <item>@string/ra_199615_title</item>
+        <item>@string/ra_199615_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5649_title" type="string">@string/ra_4405_title</item>
+    <item name="ra_5649_text" type="string">@string/ra_5082_text</item>
+    <array name="ra_5649">
+        <item>5649</item>
+        <item>@string/ra_5649_title</item>
+        <item>@string/ra_5649_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199616_title" type="string">@string/ra_155184_title</item>
+    <string name="ra_199616_text">
+        Vaincre Jeannine en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 39 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199616">
+        <item>199616</item>
+        <item>@string/ra_199616_title</item>
+        <item>@string/ra_199616_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_199586_title">
+        Ronflex enregistré
+    </string>
+    <string name="ra_199586_text">
+        Capturer le Ronflex de Carmin sur Mer et l’enregistrer dans le Pokédex.
+    </string>
+    <array name="ra_199586">
+        <item>199586</item>
+        <item>@string/ra_199586_title</item>
+        <item>@string/ra_199586_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5645_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_5645_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_5645">
+        <item>5645</item>
+        <item>@string/ra_5645_title</item>
+        <item>@string/ra_5645_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199632_title" type="string">@string/ra_155190_title</item>
+    <string name="ra_199632_text">
+        Vaincre Pierre en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 44 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199632">
+        <item>199632</item>
+        <item>@string/ra_199632_title</item>
+        <item>@string/ra_199632_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5651_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_5651_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_5651">
+        <item>5651</item>
+        <item>@string/ra_5651_title</item>
+        <item>@string/ra_5651_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199617_title" type="string">@string/ra_155191_title</item>
+    <string name="ra_199617_text">
+        Vaincre Auguste en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 50 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199617">
+        <item>199617</item>
+        <item>@string/ra_199617_title</item>
+        <item>@string/ra_199617_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5652_title" type="string">@string/ra_4408_title</item>
+    <item name="ra_5652_text" type="string">@string/ra_5085_text</item>
+    <array name="ra_5652">
+        <item>5652</item>
+        <item>@string/ra_5652_title</item>
+        <item>@string/ra_5652_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199618_title" type="string">@string/ra_155192_title</item>
+    <string name="ra_199618_text">
+        Vaincre Blue en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans Lugia ni Ho-Oh, au niveau 58 maximum pendant tout le combat, sans utiliser
+        d’objet du Sac en combat.
+    </string>
+    <array name="ra_199618">
+        <item>199618</item>
+        <item>@string/ra_199618_title</item>
+        <item>@string/ra_199618_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_5958_title">
+        Duel des Maîtres
+    </string>
+    <string name="ra_5958_text">
+        Vaincre Red au sommet du Mont Argenté.
+    </string>
+    <array name="ra_5958">
+        <item>5958</item>
+        <item>@string/ra_5958_title</item>
+        <item>@string/ra_5958_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_199619_title">
+        Red : défi niveau 65
+    </string>
+    <string name="ra_199619_text">
+        Vaincre Red en mode Défini, avec uniquement des Pokémon introduits à Johto, sans espèce réservée à
+        l’échange externe, sans dépasser le niveau 65 pendant tout le combat et sans utiliser d’objet du Sac.
+    </string>
+    <array name="ra_199619">
+        <item>199619</item>
+        <item>@string/ra_199619_title</item>
+        <item>@string/ra_199619_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <item name="ra_5959_title" type="string">@string/ra_5524_title</item>
+    <string name="ra_5959_text">
+        Vaincre Red avec un seul Pokémon.
+    </string>
+    <array name="ra_5959">
+        <item>5959</item>
+        <item>@string/ra_5959_title</item>
+        <item>@string/ra_5959_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_5951_title">
+        Bêtes légendaires
+    </string>
+    <string name="ra_5951_text">
+        Capturer Entei et Raikou.
+    </string>
+    <array name="ra_5951">
+        <item>5951</item>
+        <item>@string/ra_5951_title</item>
+        <item>@string/ra_5951_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_199574_title">
+        Raikou sans Master Ball
+    </string>
+    <string name="ra_199574_text">
+        Capturer Raikou et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <array name="ra_199574">
+        <item>199574</item>
+        <item>@string/ra_199574_title</item>
+        <item>@string/ra_199574_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_199575_title">
+        Entei sans Master Ball
+    </string>
+    <string name="ra_199575_text">
+        Capturer Entei et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <array name="ra_199575">
+        <item>199575</item>
+        <item>@string/ra_199575_title</item>
+        <item>@string/ra_199575_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_5952_title">
+        Gardien des profondeurs
+    </string>
+    <string name="ra_5952_text">
+        Capturer Lugia aux Tourb’Îles.
+    </string>
+    <array name="ra_5952">
+        <item>5952</item>
+        <item>@string/ra_5952_title</item>
+        <item>@string/ra_5952_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-legends</item>
+    </array>
+    <string name="ra_199589_title">
+        Lugia sans Master Ball
+    </string>
+    <string name="ra_199589_text">
+        Capturer Lugia et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <array name="ra_199589">
+        <item>199589</item>
+        <item>@string/ra_199589_title</item>
+        <item>@string/ra_199589_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-legends</item>
+    </array>
+    <string name="ra_5953_title">
+        Phénix de la Tour
+    </string>
+    <string name="ra_5953_text">
+        Capturer Ho-Oh dans la Tour Ferraille.
+    </string>
+    <array name="ra_5953">
+        <item>5953</item>
+        <item>@string/ra_5953_title</item>
+        <item>@string/ra_5953_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-hooh</item>
+    </array>
+    <string name="ra_199590_title">
+        Ho-Oh sans Master Ball
+    </string>
+    <string name="ra_199590_text">
+        Capturer Ho-Oh et l’enregistrer dans le Pokédex sans Master Ball.
+    </string>
+    <array name="ra_199590">
+        <item>199590</item>
+        <item>@string/ra_199590_title</item>
+        <item>@string/ra_199590_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-hooh</item>
+    </array>
+    <string name="ra_199582_title">
+        Preuve d’éclosion
+    </string>
+    <string name="ra_199582_text">
+        Montrer le Pokémon issu de l’Œuf Mystère au Professeur Orme pour recevoir la Pierre Stase.
+    </string>
+    <array name="ra_199582">
+        <item>199582</item>
+        <item>@string/ra_199582_title</item>
+        <item>@string/ra_199582_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199601_title">
+        Commande de dix Balls
+    </string>
+    <string name="ra_199601_text">
+        Recevoir au moins dix Balls artisanales simultanément de Fargas à Écorcia.
+    </string>
+    <array name="ra_199601">
+        <item>199601</item>
+        <item>@string/ra_199601_title</item>
+        <item>@string/ra_199601_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <string name="ra_199596_title">
+        Sommeil dans l’arbre
+    </string>
+    <string name="ra_199596_text">
+        Rencontrer un Pokémon endormi en utilisant Coup d’Boule sur un arbre.
+    </string>
+    <array name="ra_199596">
+        <item>199596</item>
+        <item>@string/ra_199596_title</item>
+        <item>@string/ra_199596_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199561_title">
+        Œuf Bizarre
+    </string>
+    <string name="ra_199561_text">
+        Recevoir l’Œuf Bizarre de l’homme de la Pension sur la Route 34.
+    </string>
+    <array name="ra_199561">
+        <item>199561</item>
+        <item>@string/ra_199561_title</item>
+        <item>@string/ra_199561_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199634_title">
+        Deux sept et Grolem
+    </string>
+    <string name="ra_199634_text">
+        Voir Grolem après avoir aligné deux 7 sur une machine à sous d’un Casino.
+    </string>
+    <array name="ra_199634">
+        <item>199634</item>
+        <item>@string/ra_199634_title</item>
+        <item>@string/ra_199634_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199635_title" type="string">@string/ra_108180_title</item>
+    <string name="ra_199635_text">
+        Aligner 7-7-7 sur une machine à sous d’un Casino.
+    </string>
+    <array name="ra_199635">
+        <item>199635</item>
+        <item>@string/ra_199635_title</item>
+        <item>@string/ra_199635_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199627_title">
+        Mise multipliée par 24
+    </string>
+    <string name="ra_199627_text">
+        Gagner une mise ×24 au jeu de cartes d’un Casino.
+    </string>
+    <array name="ra_199627">
+        <item>199627</item>
+        <item>@string/ra_199627_title</item>
+        <item>@string/ra_199627_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199622_title">
+        Vainqueur du concours
+    </string>
+    <string name="ra_199622_text">
+        Remporter le Concours de Capture d’insectes au Parc Naturel.
+    </string>
+    <array name="ra_199622">
+        <item>199622</item>
+        <item>@string/ra_199622_title</item>
+        <item>@string/ra_199622_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199623_title">
+        Concours sans favoris
+    </string>
+    <string name="ra_199623_text">
+        Remporter le Concours de Capture sans capturer Papilusion, Dardargnan, Insécateur ni Scarabrute.
+    </string>
+    <array name="ra_199623">
+        <item>199623</item>
+        <item>@string/ra_199623_title</item>
+        <item>@string/ra_199623_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199624_title">
+        Concurrent d’élite
+    </string>
+    <string name="ra_199624_text">
+        Remporter le Concours de Capture lorsque le Topdresseur Nick y participe.
+    </string>
+    <array name="ra_199624">
+        <item>199624</item>
+        <item>@string/ra_199624_title</item>
+        <item>@string/ra_199624_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199580_title">
+        Guérir Meumeu
+    </string>
+    <string name="ra_199580_text">
+        Soigner Meumeu à la Ferme Meumeu.
+    </string>
+    <array name="ra_199580">
+        <item>199580</item>
+        <item>@string/ra_199580_title</item>
+        <item>@string/ra_199580_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199633_title">
+        Jus de Baie
+    </string>
+    <string name="ra_199633_text">
+        Faire transformer une Baie tenue par Caratroc en Jus de Baie après un combat.
+    </string>
+    <array name="ra_199633">
+        <item>199633</item>
+        <item>@string/ra_199633_title</item>
+        <item>@string/ra_199633_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199630_title">
+        Caratroc adopté
+    </string>
+    <string name="ra_199630_text">
+        Augmenter assez l’amitié du Caratroc confié à Irisia pour que son propriétaire autorise à le garder.
+    </string>
+    <array name="ra_199630">
+        <item>199630</item>
+        <item>@string/ra_199630_title</item>
+        <item>@string/ra_199630_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199591_title">
+        Vendredi aquatique
+    </string>
+    <string name="ra_199591_text">
+        Capturer Lokhlass dans les Caves Jumelles et l’enregistrer dans le Pokédex.
+    </string>
+    <array name="ra_199591">
+        <item>199591</item>
+        <item>@string/ra_199591_title</item>
+        <item>@string/ra_199591_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199636_title">
+        Chambres des Ruines
+    </string>
+    <string name="ra_199636_text">
+        Résoudre tous les puzzles et ramasser tous les objets des chambres des Ruines d’Alpha.
+    </string>
+    <array name="ra_199636">
+        <item>199636</item>
+        <item>@string/ra_199636_title</item>
+        <item>@string/ra_199636_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-alph</item>
+    </array>
+    <item name="ra_5955_title" type="string">@string/ra_5091_title</item>
+    <item name="ra_5955_text" type="string">@string/ra_5091_text</item>
+    <array name="ra_5955">
+        <item>5955</item>
+        <item>@string/ra_5955_title</item>
+        <item>@string/ra_5955_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-alph</item>
+    </array>
+    <string name="ra_199578_title">
+        Écaille échangée
+    </string>
+    <string name="ra_199578_text">
+        Donner l’Écaille Rouge à M. Pokémon sur la Route 30 contre le Multi Exp.
+    </string>
+    <array name="ra_199578">
+        <item>199578</item>
+        <item>@string/ra_199578_title</item>
+        <item>@string/ra_199578_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_199581_title">
+        Record de Magicarpe
+    </string>
+    <string name="ra_199581_text">
+        Battre le record de taille de Magicarpe pour recevoir un Élixir du Maître Pêcheur près du Lac Colère.
+    </string>
+    <array name="ra_199581">
+        <item>199581</item>
+        <item>@string/ra_199581_title</item>
+        <item>@string/ra_199581_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199559_title" type="string">@string/ra_155194_title</item>
+    <item name="ra_199559_text" type="string">@string/ra_155194_text</item>
+    <array name="ra_199559">
+        <item>199559</item>
+        <item>@string/ra_199559_title</item>
+        <item>@string/ra_199559_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199620_title">
+        Capacité du mercredi
+    </string>
+    <string name="ra_199620_text">
+        Faire apprendre une capacité par le père de Léo devant le Casino de Doublonville.
+    </string>
+    <array name="ra_199620">
+        <item>199620</item>
+        <item>@string/ra_199620_title</item>
+        <item>@string/ra_199620_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199637_title">
+        Dresseurs du bateau
+    </string>
+    <string name="ra_199637_text">
+        Vaincre tous les Dresseurs pouvant se trouver sur l’Aquaria, à l’exclusion de ceux du premier voyage.
+    </string>
+    <array name="ra_199637">
+        <item>199637</item>
+        <item>@string/ra_199637_title</item>
+        <item>@string/ra_199637_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199588_title" type="string">@string/ra_155186_title</item>
+    <item name="ra_199588_text" type="string">@string/ra_155186_text</item>
+    <array name="ra_199588">
+        <item>199588</item>
+        <item>@string/ra_199588_title</item>
+        <item>@string/ra_199588_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_199640_title">
+        Passe du train
+    </string>
+    <string name="ra_199640_text">
+        Recevoir le Passe du Train Magnétique de la Copieuse à Safrania.
+    </string>
+    <array name="ra_199640">
+        <item>199640</item>
+        <item>@string/ra_199640_title</item>
+        <item>@string/ra_199640_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_199639_title" type="string">@string/ra_108043_title</item>
+    <string name="ra_199639_text">
+        Réunir les trois cannes à pêche.
+    </string>
+    <array name="ra_199639">
+        <item>199639</item>
+        <item>@string/ra_199639_title</item>
+        <item>@string/ra_199639_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199587_title">
+        Rituel du lundi
+    </string>
+    <string name="ra_199587_text">
+        Recevoir une Pierre Lune après avoir observé le rituel des Mélofée au Square du Mont Sélénite.
+    </string>
+    <array name="ra_199587">
+        <item>199587</item>
+        <item>@string/ra_199587_title</item>
+        <item>@string/ra_199587_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199593_title">
+        Dernier combat du voleur
+    </string>
+    <string name="ra_199593_text">
+        Remporter le combat facultatif contre le rival au Plateau Indigo.
+    </string>
+    <array name="ra_199593">
+        <item>199593</item>
+        <item>@string/ra_199593_title</item>
+        <item>@string/ra_199593_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199625_title" type="string">@string/friendship_grooming</item>
+    <string name="ra_199625_text">
+        Faire toiletter un Pokémon par Nina à Bourg Palette.
+    </string>
+    <array name="ra_199625">
+        <item>199625</item>
+        <item>@string/ra_199625_title</item>
+        <item>@string/ra_199625_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199629_title" type="string">@string/ra_163177_title</item>
+    <item name="ra_199629_text" type="string">@string/ra_163177_text</item>
+    <array name="ra_199629">
+        <item>199629</item>
+        <item>@string/ra_199629_title</item>
+        <item>@string/ra_199629_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199621_title">
+        Amitié à puissance maximale
+    </string>
+    <string name="ra_199621_text">
+        Faire utiliser Retour ou Frustration à sa puissance maximale par un Pokémon.
+    </string>
+    <array name="ra_199621">
+        <item>199621</item>
+        <item>@string/ra_199621_title</item>
+        <item>@string/ra_199621_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199626_title">
+        Puissance Cachée efficace
+    </string>
+    <string name="ra_199626_text">
+        Infliger des dégâts super efficaces avec Puissance Cachée.
+    </string>
+    <array name="ra_199626">
+        <item>199626</item>
+        <item>@string/ra_199626_title</item>
+        <item>@string/ra_199626_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199567_title">
+        Pierre offerte par téléphone
+    </string>
+    <string name="ra_199567_text">
+        Recevoir une pierre d’évolution d’un Dresseur enregistré dans le Pokématos.
+    </string>
+    <array name="ra_199567">
+        <item>199567</item>
+        <item>@string/ra_199567_title</item>
+        <item>@string/ra_199567_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_199638_title">
+        Publicité à vélo
+    </string>
+    <string name="ra_199638_text">
+        Faire connaître le magasin de cycles de Doublonville et obtenir l’autorisation de garder la Bicyclette.
+    </string>
+    <array name="ra_199638">
+        <item>199638</item>
+        <item>@string/ra_199638_title</item>
+        <item>@string/ra_199638_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199631_title">
+        Soldes sur le toit
+    </string>
+    <string name="ra_199631_text">
+        Acheter un objet lors des soldes sur le toit du Centre Commercial de Doublonville.
+    </string>
+    <array name="ra_199631">
+        <item>199631</item>
+        <item>@string/ra_199631_title</item>
+        <item>@string/ra_199631_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199597_title">
+        Numéro de Buena
+    </string>
+    <string name="ra_199597_text">
+        Gagner 30 points sur la Carte Bleue puis ajouter le numéro de Buena au Pokématos.
+    </string>
+    <array name="ra_199597">
+        <item>199597</item>
+        <item>@string/ra_199597_title</item>
+        <item>@string/ra_199597_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199579_title">
+        Pépite téléphonique
+    </string>
+    <string name="ra_199579_text">
+        Recevoir une Pépite du Pokéfan Beverly ou du Pokéfan Derek.
+    </string>
+    <array name="ra_199579">
+        <item>199579</item>
+        <item>@string/ra_199579_title</item>
+        <item>@string/ra_199579_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199577_title">
+        Plus de PP
+    </string>
+    <string name="ra_199577_text">
+        Recevoir un PP Plus du Karatéka Kenji.
+    </string>
+    <array name="ra_199577">
+        <item>199577</item>
+        <item>@string/ra_199577_title</item>
+        <item>@string/ra_199577_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199602_title">
+        Cinq vitamines
+    </string>
+    <string name="ra_199602_text">
+        Recevoir une vitamine de chacun des cinq Dresseurs dont les revanches en offrent.
+    </string>
+    <array name="ra_199602">
+        <item>199602</item>
+        <item>@string/ra_199602_title</item>
+        <item>@string/ra_199602_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199565_title">
+        Tous les Pokémon offerts
+    </string>
+    <string name="ra_199565_text">
+        Recevoir tous les Pokémon offerts dans le jeu.
+    </string>
+    <array name="ra_199565">
+        <item>199565</item>
+        <item>@string/ra_199565_title</item>
+        <item>@string/ra_199565_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199592_title">
+        Échanges sans câble
+    </string>
+    <string name="ra_199592_text">
+        Effectuer tous les échanges internes au jeu.
+    </string>
+    <array name="ra_199592">
+        <item>199592</item>
+        <item>@string/ra_199592_title</item>
+        <item>@string/ra_199592_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199560_title">
+        Tous les Dresseurs de Johto
+    </string>
+    <string name="ra_199560_text">
+        Vaincre tous les Dresseurs non manquables de Johto.
+    </string>
+    <array name="ra_199560">
+        <item>199560</item>
+        <item>@string/ra_199560_title</item>
+        <item>@string/ra_199560_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199562_title">
+        Tous les objets de Johto
+    </string>
+    <string name="ra_199562_text">
+        Ramasser tous les objets visibles et cachés du terrain de Johto.
+    </string>
+    <array name="ra_199562">
+        <item>199562</item>
+        <item>@string/ra_199562_title</item>
+        <item>@string/ra_199562_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_199583_title" type="string">@string/ra_155203_title</item>
+    <item name="ra_199583_text" type="string">@string/ra_108368_text</item>
+    <array name="ra_199583">
+        <item>199583</item>
+        <item>@string/ra_199583_title</item>
+        <item>@string/ra_199583_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_199584_title">
+        Tous les objets de Kanto
+    </string>
+    <string name="ra_199584_text">
+        Ramasser tous les objets visibles et cachés du terrain de Kanto.
+    </string>
+    <array name="ra_199584">
+        <item>199584</item>
+        <item>@string/ra_199584_title</item>
+        <item>@string/ra_199584_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_199563_title">
+        Toutes les CT et CS limitées
+    </string>
+    <string name="ra_199563_text">
+        Ramasser toutes les CT et CS disponibles en quantité limitée.
+    </string>
+    <array name="ra_199563">
+        <item>199563</item>
+        <item>@string/ra_199563_title</item>
+        <item>@string/ra_199563_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199598_title">
+        Bâton sauvage
+    </string>
+    <string name="ra_199598_text">
+        Obtenir un Bâton d’un Canarticho sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <array name="ra_199598">
+        <item>199598</item>
+        <item>@string/ra_199598_title</item>
+        <item>@string/ra_199598_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199599_title">
+        Masse Os sauvage
+    </string>
+    <string name="ra_199599_text">
+        Obtenir une Masse Os d’un Osselait ou Ossatueur sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <array name="ra_199599">
+        <item>199599</item>
+        <item>@string/ra_199599_title</item>
+        <item>@string/ra_199599_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199600_title">
+        Œuf Chance sauvage
+    </string>
+    <string name="ra_199600_text">
+        Obtenir un Œuf Chance d’un Leveinard sauvage en le capturant ou en lui volant l’objet.
+    </string>
+    <array name="ra_199600">
+        <item>199600</item>
+        <item>@string/ra_199600_title</item>
+        <item>@string/ra_199600_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_5936_title">
+        Sept victoires consécutives
+    </string>
+    <string name="ra_5936_text">
+        Terminer une série de la Tour de Combat en battant sept Dresseurs de suite.
+    </string>
+    <array name="ra_5936">
+        <item>5936</item>
+        <item>@string/ra_5936_title</item>
+        <item>@string/ra_5936_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_199628_title">
+        Tour de Combat locale
+    </string>
+    <string name="ra_199628_text">
+        Terminer une série de la Tour de Combat avec uniquement des Pokémon introduits à Johto, sans Lugia ni
+        Ho-Oh.
+    </string>
+    <array name="ra_199628">
+        <item>199628</item>
+        <item>@string/ra_199628_title</item>
+        <item>@string/ra_199628_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-legends</item>
+    </array>
+    <string name="ra_5954_title">
+        Collection Cristal
+    </string>
+    <string name="ra_5954_text">
+        Capturer les 206 Pokémon accessibles dans le jeu sans appareil externe.
+    </string>
+    <array name="ra_5954">
+        <item>5954</item>
+        <item>@string/ra_5954_title</item>
+        <item>@string/ra_5954_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <array name="achievements_6">
+        <item>@array/ra_5636</item>
+        <item>@array/ra_5637</item>
+        <item>@array/ra_199603</item>
+        <item>@array/ra_5934</item>
+        <item>@array/ra_5638</item>
+        <item>@array/ra_199604</item>
+        <item>@array/ra_5639</item>
+        <item>@array/ra_199605</item>
+        <item>@array/ra_199564</item>
+        <item>@array/ra_199566</item>
+        <item>@array/ra_5640</item>
+        <item>@array/ra_199606</item>
+        <item>@array/ra_199568</item>
+        <item>@array/ra_5641</item>
+        <item>@array/ra_199607</item>
+        <item>@array/ra_199569</item>
+        <item>@array/ra_5642</item>
+        <item>@array/ra_199608</item>
+        <item>@array/ra_199594</item>
+        <item>@array/ra_199570</item>
+        <item>@array/ra_5946</item>
+        <item>@array/ra_199571</item>
+        <item>@array/ra_5643</item>
+        <item>@array/ra_199609</item>
+        <item>@array/ra_5947</item>
+        <item>@array/ra_199572</item>
+        <item>@array/ra_199595</item>
+        <item>@array/ra_5948</item>
+        <item>@array/ra_199573</item>
+        <item>@array/ra_5644</item>
+        <item>@array/ra_199610</item>
+        <item>@array/ra_199576</item>
+        <item>@array/ra_5949</item>
+        <item>@array/ra_199611</item>
+        <item>@array/ra_5950</item>
+        <item>@array/ra_5647</item>
+        <item>@array/ra_199612</item>
+        <item>@array/ra_5650</item>
+        <item>@array/ra_199613</item>
+        <item>@array/ra_199585</item>
+        <item>@array/ra_5646</item>
+        <item>@array/ra_199614</item>
+        <item>@array/ra_5648</item>
+        <item>@array/ra_199615</item>
+        <item>@array/ra_5649</item>
+        <item>@array/ra_199616</item>
+        <item>@array/ra_199586</item>
+        <item>@array/ra_5645</item>
+        <item>@array/ra_199632</item>
+        <item>@array/ra_5651</item>
+        <item>@array/ra_199617</item>
+        <item>@array/ra_5652</item>
+        <item>@array/ra_199618</item>
+        <item>@array/ra_5958</item>
+        <item>@array/ra_199619</item>
+        <item>@array/ra_5959</item>
+        <item>@array/ra_5951</item>
+        <item>@array/ra_199574</item>
+        <item>@array/ra_199575</item>
+        <item>@array/ra_5952</item>
+        <item>@array/ra_199589</item>
+        <item>@array/ra_5953</item>
+        <item>@array/ra_199590</item>
+        <item>@array/ra_199582</item>
+        <item>@array/ra_199601</item>
+        <item>@array/ra_199596</item>
+        <item>@array/ra_199561</item>
+        <item>@array/ra_199634</item>
+        <item>@array/ra_199635</item>
+        <item>@array/ra_199627</item>
+        <item>@array/ra_199622</item>
+        <item>@array/ra_199623</item>
+        <item>@array/ra_199624</item>
+        <item>@array/ra_199580</item>
+        <item>@array/ra_199633</item>
+        <item>@array/ra_199630</item>
+        <item>@array/ra_199591</item>
+        <item>@array/ra_199636</item>
+        <item>@array/ra_5955</item>
+        <item>@array/ra_199578</item>
+        <item>@array/ra_199581</item>
+        <item>@array/ra_199559</item>
+        <item>@array/ra_199620</item>
+        <item>@array/ra_199637</item>
+        <item>@array/ra_199588</item>
+        <item>@array/ra_199640</item>
+        <item>@array/ra_199639</item>
+        <item>@array/ra_199587</item>
+        <item>@array/ra_199593</item>
+        <item>@array/ra_199625</item>
+        <item>@array/ra_199629</item>
+        <item>@array/ra_199621</item>
+        <item>@array/ra_199626</item>
+        <item>@array/ra_199567</item>
+        <item>@array/ra_199638</item>
+        <item>@array/ra_199631</item>
+        <item>@array/ra_199597</item>
+        <item>@array/ra_199579</item>
+        <item>@array/ra_199577</item>
+        <item>@array/ra_199602</item>
+        <item>@array/ra_199565</item>
+        <item>@array/ra_199592</item>
+        <item>@array/ra_199560</item>
+        <item>@array/ra_199562</item>
+        <item>@array/ra_199583</item>
+        <item>@array/ra_199584</item>
+        <item>@array/ra_199563</item>
+        <item>@array/ra_199598</item>
+        <item>@array/ra_199599</item>
+        <item>@array/ra_199600</item>
+        <item>@array/ra_5936</item>
+        <item>@array/ra_199628</item>
+        <item>@array/ra_5954</item>
+    </array>
+</resources>

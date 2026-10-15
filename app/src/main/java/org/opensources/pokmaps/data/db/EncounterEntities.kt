@@ -70,7 +70,8 @@ data class EncounterEntity(
     @ColumnInfo(name = "max_level") val maxLevel: Int,
     val chance: Double?,
     val quantity: Int,
-    @ColumnInfo(name = "note_fr") val noteFr: String?
+    @ColumnInfo(name = "note_fr") val noteFr: String?,
+    @ColumnInfo(name = "external_event") val externalEvent: Boolean
 )
 
 @Entity(

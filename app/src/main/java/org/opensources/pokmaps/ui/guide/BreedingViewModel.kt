@@ -20,6 +20,7 @@ import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.GbaBreeding
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
@@ -49,7 +50,12 @@ data class BreedingUiState(
     val choices: List<PokedexEntry> = PokedexSearch.filter(catalog?.pokemon.orEmpty(), PokedexFilter(query = query))
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
-    val gba: Boolean = catalog?.game?.generationId == 3
+    val gba: Boolean = when (catalog?.game?.generation) {
+        null, Generation.GEN1,
+        Generation.GEN2 -> false
+
+        Generation.GEN3 -> true
+    }
     val babies = pair?.let { if (gba) GbaBreeding.babies(it, first, second) else it.babies }.orEmpty()
     val babyAbilities: List<Pair<String, String>> = babies.map { child ->
         child.name to child.traits.abilities.joinToString { it.name }

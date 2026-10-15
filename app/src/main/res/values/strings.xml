@@ -625,13 +625,6 @@
     <string name="catch_already_caught">Espèce déjà capturée dans le Pokédex du jeu</string>
     <string name="catch_elapsed_turns">Tours écoulés : %1$d (bonus maximal à 30)</string>
     <string name="catch_note_gen3">Probabilité par lancer dans Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille, avec un IV des PV moyen et quatre contrôles de capture. Sommeil et gel : ×2 ; autres statuts : ×1,5. Filet Ball : ×3 pour Eau ou Insecte ; Scuba Ball : ×3,5 uniquement sous l’eau ; Bis Ball : ×3 si l’espèce est déjà capturée. Faiblo Ball aide aux faibles niveaux ; Chrono Ball passe de ×1 à ×4 après 30 tours écoulés. Luxe Ball et Honor Ball ont le taux d’une Poké Ball ; Luxe Ball facilite ensuite les gains de bonheur. Hors Parc Safari.</string>
-    <string name="pokemon_form_normal">Forme Normale</string>
-    <string name="pokemon_form_sunny">Solaire</string>
-    <string name="pokemon_form_rainy">Eau de Pluie</string>
-    <string name="pokemon_form_snowy">Blizzard</string>
-    <string name="pokemon_form_attack">Forme Attaque</string>
-    <string name="pokemon_form_defense">Forme Défense</string>
-    <string name="pokemon_form_speed">Forme Vitesse</string>
     <string name="pokemon_forms_weather">Morphéo change de forme selon la météo du combat.</string>
     <string name="map_floor_surface">Surface</string>
     <string name="map_floor_underwater">Sous l’eau</string>

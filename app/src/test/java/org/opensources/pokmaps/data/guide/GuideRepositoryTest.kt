@@ -72,6 +72,13 @@ class GuideRepositoryTest {
         assertTrue(achievements.all { it.points > 0 && it.sources.single().endsWith("/${it.achievementId}") })
         val articles = library.articles.filter { it.achievementId == null }
         val hoenn = library.game.versionId in 7..9
+        val mascot = if (hoenn) 252 else 25
+        assertTrue(achievements.all { it.pokemonId == mascot })
+        if (hoenn) {
+            val links = library.articles.flatMap { it.paragraphs.flatten() }
+                .filter { it.target is GuideTarget.Character }.map { it.text }.toSet()
+            assertTrue(links.containsAll(setOf("Roxanne", "Voltère", "Damien", "Spectra", "Glacia", "Aragon")))
+        }
         val prefix = if (hoenn) "hoenn-" else "remake-"
         // Sans les deux collections GBA, avec l'article des errants et, à Hoenn, celui des Bases Secrètes.
         assertEquals(if (hoenn) 31 else 19, articles.size)

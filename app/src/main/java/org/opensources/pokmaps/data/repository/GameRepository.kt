@@ -19,6 +19,12 @@ class GameRepository @Inject constructor(private val dao: GameDao, private val s
         check(unsupported.isEmpty()) {
             "Jeux sans règles dans l'application : ${unsupported.joinToString { it.versionIdentifier }}"
         }
+        games.forEach { game ->
+            check(game.version.identifier == game.versionIdentifier && game.version.group == game.versionGroup) {
+                "Version incohérente : ${game.versionIdentifier}"
+            }
+            check(game.version.generation == game.generation) { "Génération incohérente : ${game.versionIdentifier}" }
+        }
         games
     }
 

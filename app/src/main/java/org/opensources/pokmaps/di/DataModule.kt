@@ -3,8 +3,9 @@ package org.opensources.pokmaps.di
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
-import androidx.core.content.edit
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,11 +29,19 @@ object DataModule {
     @Provides
     @Singleton
     fun database(@ApplicationContext context: Context): PokedexDatabase {
-        refreshDatabaseAfterUpdate(context)
+        val installedAt = context.packageManager
+            .getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+            .lastUpdateTime
+        val name = "pokedex-$installedAt.db"
         return Room
-            .databaseBuilder(context, PokedexDatabase::class.java, PokedexDatabase.NAME)
+            .databaseBuilder(context, PokedexDatabase::class.java, name)
             .createFromAsset(PokedexDatabase.ASSET)
             .fallbackToDestructiveMigration(dropAllTables = true)
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onOpen(db: SupportSQLiteDatabase) {
+                    removePreviousDatabases(context, name)
+                }
+            })
             .build()
     }
 
@@ -63,19 +72,15 @@ object DataModule {
 }
 
 /**
- * La base n'est copiée depuis les assets qu'au premier lancement : après une mise à jour de l'application
- * (nouvelles données à version de schéma égale), on supprime la copie pour que Room la recopie.
- * Les données de l'utilisateur ne sont jamais stockées dans cette base.
+ * Chaque installation ouvre une nouvelle copie. Le nettoyage des copies précédentes attend l'ouverture réussie,
+ * sur l'exécuteur Room ; aucune lecture de préférences ou suppression n'a lieu dans le provider Hilt.
  */
-internal fun refreshDatabaseAfterUpdate(context: Context) {
-    val installedAt = context.packageManager
-        .getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
-        .lastUpdateTime
-    val preferences = context.getSharedPreferences("database", Context.MODE_PRIVATE)
-    if (preferences.getLong(KEY_COPIED_FOR, 0L) != installedAt) {
-        context.deleteDatabase(PokedexDatabase.NAME)
-        preferences.edit { putLong(KEY_COPIED_FOR, installedAt) }
+internal fun removePreviousDatabases(context: Context, currentName: String) {
+    context.databaseList().filter { it == PokedexDatabase.NAME || it.matches(INSTALL_DATABASE) }.forEach { name ->
+        if (name != currentName) {
+            check(context.deleteDatabase(name)) { "Impossible de retirer l'ancienne base : $name" }
+        }
     }
 }
 
-private const val KEY_COPIED_FOR = "copied_for_install"
+private val INSTALL_DATABASE = Regex("pokedex-[0-9]+\\.db")

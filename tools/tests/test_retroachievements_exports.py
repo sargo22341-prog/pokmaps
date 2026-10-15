@@ -52,7 +52,7 @@ def test_public_inventory_is_complete_and_contains_no_account_data() -> None:
 
 @pytest.mark.parametrize("version", _GBA)
 def test_gba_translations_and_android_definitions_match_official_snapshot(version: int) -> None:
-    game_id, name = _GBA[version]
+    game_id, _name = _GBA[version]
     snapshot = json.loads((_EXPORTS / f"{game_id}.json").read_text(encoding="utf-8"))
     with (_EXPORTS / "gen3_fr.csv").open(encoding="utf-8", newline="") as source:
         translations = [row for row in csv.DictReader(source) if int(row["version_id"]) == version]
@@ -64,29 +64,25 @@ def test_gba_translations_and_android_definitions_match_official_snapshot(versio
         for row in ET.parse(path).getroot()
         if row.tag == "string" or (row.tag == "item" and row.attrib.get("type") == "string")
     }
-    class_name = {"firered": "FireRed", "leafgreen": "LeafGreen"}.get(name, name.title())
-    kotlin = _ROOT / f"app/src/main/java/org/opensources/pokmaps/data/guide/{class_name}Achievements.kt"
-    code = kotlin.read_text(encoding="utf-8")
-    definitions = re.findall(
-        r"AchievementDefinition\((\d+), \d+, R.string.\w+, R.string.\w+, (\d+), (true|false),", code
-    )
-    assert len(definitions) == len(translations)
-    assert {int(row[0]) for row in definitions} == set(official)
-    for identifier, points, missable in definitions:
-        source = official[int(identifier)]
-        assert int(points) == source["Points"]
-        assert (missable == "true") == (source["type"] == "missable")
+    resource = ET.parse(_ROOT / f"app/src/main/res/values/strings_achievements_{version}.xml").getroot()
+    definitions = {
+        int(row.attrib["name"].removeprefix("ra_")): list(row)
+        for row in resource.findall("array")
+        if row.attrib["name"].startswith("ra_")
+    }
+    assert set(definitions) == set(official)
+    for identifier, fields in definitions.items():
+        source = official[identifier]
+        assert int(fields[0].text) == identifier
+        assert int(fields[3].text) == source["Points"]
+        assert bool(int(fields[4].text)) == (source["type"] == "missable")
     for row in translations:
         identifier = row["achievement_id"]
         assert int(row["game_id"]) == game_id
         assert _resource(texts, f"ra_{identifier}_title") == row["title_fr"]
         assert _resource(texts, f"ra_{identifier}_text") == row["description_fr"]
         assert row["title_fr"] and row["description_fr"]
-        constants = dict(re.findall(r'private const val (\w+) = "([^"]+)"', code))
-        chapter = re.search(rf"AchievementDefinition\({identifier},.*?, (\w+|\"[^\"]+\")\)", code)
-        assert chapter is not None
-        argument = chapter.group(1)
-        assert constants.get(argument, argument.strip('"')) == row["chapter"]
+        assert definitions[int(identifier)][5].text == row["chapter"]
 
 
 def _resource(texts: dict[str, str | None], name: str) -> str:
@@ -95,7 +91,7 @@ def _resource(texts: dict[str, str | None], name: str) -> str:
     if value.startswith("@string/"):
         value = texts[value.removeprefix("@string/")]
     assert value is not None and not value.startswith("@string/")
-    return value
+    return value.replace("\\'", "'").replace('\\"', '"')
 
 
 def _game() -> dict[str, Any]:

@@ -1,17 +1,9 @@
 package org.opensources.pokmaps.domain.map
 
-import org.opensources.pokmaps.domain.model.ExternalEvent
 import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Destinations du menu : régions principales et entrées des îles distribuées par événement. */
 internal object MapDestinations {
-    private val eventEntrances = listOf(
-        "southern-island-exterior",
-        "birth-island-exterior",
-        "navel-rock-exterior",
-        "faraway-island-entrance"
-    )
-
     fun startRegion(group: VersionGroup): String = when (group) {
         VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> "johto"
         VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> "hoenn"
@@ -22,8 +14,7 @@ internal object MapDestinations {
     fun menu(worlds: List<MapInfo>, maps: Collection<MapInfo>): List<MapInfo> {
         val byId = maps.associateBy { it.id }
         return worlds.filter { it.identifier != "hoenn-underwater" }.sortedBy { it.identifier == "sevii" } +
-            eventEntrances.mapNotNull { identifier ->
-                val entrance = maps.firstOrNull { it.identifier == identifier } ?: return@mapNotNull null
+            maps.filter { it.eventEntranceOrder > 0 }.sortedBy { it.eventEntranceOrder }.mapNotNull { entrance ->
                 val displayed = entrance.parentId?.let(byId::get) ?: entrance
                 displayed.takeIf { it.isDisplayable }
                     ?.let { it.copy(name = it.name.substringBefore(" (").substringBefore(" —")) }
@@ -31,7 +22,7 @@ internal object MapDestinations {
     }
 
     fun eventOf(map: MapInfo?, destinations: List<MapInfo>): MapInfo? {
-        val island = map?.let { ExternalEvent.island(it.identifier) } ?: return null
-        return destinations.firstOrNull { ExternalEvent.island(it.identifier) == island }
+        val island = map?.externalEventKey ?: return null
+        return destinations.firstOrNull { it.externalEventKey == island }
     }
 }

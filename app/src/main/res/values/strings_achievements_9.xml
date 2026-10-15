@@ -1,0 +1,2173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_537183_title">Secourir le Professeur Seko avec son nouveau partenaire</string>
+    <string name="ra_537183_text">Secourir le Professeur Seko avec son nouveau partenaire.</string>
+    <array name="ra_537183">
+        <item>537183</item>
+        <item>@string/ra_537183_title</item>
+        <item>@string/ra_537183_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_537203_title">Obtenir une Potion gratuite à Rosyères</string>
+    <string name="ra_537203_text">Obtenir une Potion gratuite à Rosyères.</string>
+    <array name="ra_537203">
+        <item>537203</item>
+        <item>@string/ra_537203_title</item>
+        <item>@string/ra_537203_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_27592_title">Battre le rival sur la Route 103</string>
+    <string name="ra_27592_text">Battre le rival sur la Route 103.</string>
+    <array name="ra_27592">
+        <item>27592</item>
+        <item>@string/ra_27592_title</item>
+        <item>@string/ra_27592_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_537184_title">Aider Timmy à capturer son premier Pokémon</string>
+    <string name="ra_537184_text">Aider Timmy à capturer son premier Pokémon.</string>
+    <array name="ra_537184">
+        <item>537184</item>
+        <item>@string/ra_537184_title</item>
+        <item>@string/ra_537184_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_537185_title">Secourir l’employé de Devon contre le sbire qui tente de voler ses documents</string>
+    <string name="ra_537185_text">Secourir l’employé de Devon contre le sbire qui tente de voler ses documents.</string>
+    <array name="ra_537185">
+        <item>537185</item>
+        <item>@string/ra_537185_title</item>
+        <item>@string/ra_537185_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537126_title">Obtenir le Seau Wailmer chez Fleuriste Jolie Fleur sur la Route 104</string>
+    <string name="ra_537126_text">Obtenir le Seau Wailmer chez Fleuriste Jolie Fleur sur la Route 104.</string>
+    <array name="ra_537126">
+        <item>537126</item>
+        <item>@string/ra_537126_title</item>
+        <item>@string/ra_537126_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537204_title">Obtenir la Vive Griffe à l’École des Dresseurs</string>
+    <string name="ra_537204_text">Obtenir la Vive Griffe à l’École des Dresseurs.</string>
+    <array name="ra_537204">
+        <item>537204</item>
+        <item>@string/ra_537204_title</item>
+        <item>@string/ra_537204_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537133_title">Échanger un Tarsal contre un Grainipiot à Mérouville</string>
+    <string name="ra_537133_text">Échanger un Tarsal contre un Grainipiot à Mérouville.</string>
+    <array name="ra_537133">
+        <item>537133</item>
+        <item>@string/ra_537133_title</item>
+        <item>@string/ra_537133_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537116_title">Battre tous les Dresseurs de l’Arène de Mérouville</string>
+    <string name="ra_537116_text">Battre tous les Dresseurs de l’Arène de Mérouville.</string>
+    <array name="ra_537116">
+        <item>537116</item>
+        <item>@string/ra_537116_title</item>
+        <item>@string/ra_537116_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_27596_title">Battre Roxanne et obtenir le Badge Roche</string>
+    <string name="ra_27596_text">Battre Roxanne et obtenir le Badge Roche.</string>
+    <array name="ra_27596">
+        <item>27596</item>
+        <item>@string/ra_27596_title</item>
+        <item>@string/ra_27596_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537186_title">Obtenir le PokéNav auprès du président de Devon</string>
+    <string name="ra_537186_text">Obtenir le PokéNav auprès du président de Devon.</string>
+    <array name="ra_537186">
+        <item>537186</item>
+        <item>@string/ra_537186_title</item>
+        <item>@string/ra_537186_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537115_title">Battre le rival à Mérouville ou sur la Route 104</string>
+    <string name="ra_537115_text">Battre le rival à Mérouville ou sur la Route 104.</string>
+    <array name="ra_537115">
+        <item>537115</item>
+        <item>@string/ra_537115_title</item>
+        <item>@string/ra_537115_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537205_title">Définir une nouvelle expression à la mode</string>
+    <string name="ra_537205_text">Définir une nouvelle expression à la mode.</string>
+    <array name="ra_537205">
+        <item>537205</item>
+        <item>@string/ra_537205_title</item>
+        <item>@string/ra_537205_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537206_title">Obtenir la Canne à Myokara</string>
+    <string name="ra_537206_text">Obtenir la Canne à Myokara.</string>
+    <array name="ra_537206">
+        <item>537206</item>
+        <item>@string/ra_537206_title</item>
+        <item>@string/ra_537206_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_537117_title">Battre tous les Dresseurs de l’Arène de Myokara</string>
+    <string name="ra_537117_text">Battre tous les Dresseurs de l’Arène de Myokara.</string>
+    <array name="ra_537117">
+        <item>537117</item>
+        <item>@string/ra_537117_title</item>
+        <item>@string/ra_537117_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_27597_title">Battre Bastien et obtenir le Badge Poing</string>
+    <string name="ra_27597_text">Battre Bastien et obtenir le Badge Poing.</string>
+    <array name="ra_27597">
+        <item>27597</item>
+        <item>@string/ra_27597_title</item>
+        <item>@string/ra_27597_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_537187_title">Remettre la Lettre à Pierre</string>
+    <string name="ra_537187_text">Remettre la Lettre à Pierre.</string>
+    <array name="ra_537187">
+        <item>537187</item>
+        <item>@string/ra_537187_title</item>
+        <item>@string/ra_537187_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_537214_title">Obtenir le Multi Exp</string>
+    <string name="ra_537214_text">Obtenir le Multi Exp.</string>
+    <array name="ra_537214">
+        <item>537214</item>
+        <item>@string/ra_537214_title</item>
+        <item>@string/ra_537214_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_537207_title">Terminer le défi de la Maison du Bord de Mer et recevoir un lot</string>
+    <string name="ra_537207_text">Terminer le défi de la Maison du Bord de Mer et recevoir un lot.</string>
+    <array name="ra_537207">
+        <item>537207</item>
+        <item>@string/ra_537207_title</item>
+        <item>@string/ra_537207_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537208_title">Obtenir le Broyeur au marché de Poivressel</string>
+    <string name="ra_537208_text">Obtenir le Broyeur au marché de Poivressel.</string>
+    <array name="ra_537208">
+        <item>537208</item>
+        <item>@string/ra_537208_title</item>
+        <item>@string/ra_537208_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537210_title">Montrer un Pokémon heureux à la femme du Fan Club Pokémon et obtenir le…</string>
+    <string name="ra_537210_text">Montrer un Pokémon heureux à la femme du Fan Club Pokémon et obtenir le Grelot Zen.</string>
+    <array name="ra_537210">
+        <item>537210</item>
+        <item>@string/ra_537210_title</item>
+        <item>@string/ra_537210_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537188_title">Battre la Team Aqua au Musée Océanographique</string>
+    <string name="ra_537188_text">Battre la Team Aqua au Musée Océanographique.</string>
+    <array name="ra_537188">
+        <item>537188</item>
+        <item>@string/ra_537188_title</item>
+        <item>@string/ra_537188_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537128_title">Gagner à la Tente de Combat de Poivressel et obtenir un lot</string>
+    <string name="ra_537128_text">Gagner à la Tente de Combat de Poivressel et obtenir un lot.</string>
+    <array name="ra_537128">
+        <item>537128</item>
+        <item>@string/ra_537128_title</item>
+        <item>@string/ra_537128_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_27593_title">Battre le rival sur la Route 110</string>
+    <string name="ra_27593_text">Battre le rival sur la Route 110.</string>
+    <array name="ra_27593">
+        <item>27593</item>
+        <item>@string/ra_27593_title</item>
+        <item>@string/ra_27593_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537211_title">Obtenir une Bicyclette de son choix chez Cycles Rodolphe</string>
+    <string name="ra_537211_text">Obtenir une Bicyclette de son choix chez Cycles Rodolphe.</string>
+    <array name="ra_537211">
+        <item>537211</item>
+        <item>@string/ra_537211_title</item>
+        <item>@string/ra_537211_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537212_title">Échanger une Lettre Port contre une Boîte Jetons</string>
+    <string name="ra_537212_text">Échanger une Lettre Port contre une Boîte Jetons.</string>
+    <array name="ra_537212">
+        <item>537212</item>
+        <item>@string/ra_537212_title</item>
+        <item>@string/ra_537212_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537189_title">Battre Timmy devant l’Arène de Lavandia</string>
+    <string name="ra_537189_text">Battre Timmy devant l’Arène de Lavandia.</string>
+    <array name="ra_537189">
+        <item>537189</item>
+        <item>@string/ra_537189_title</item>
+        <item>@string/ra_537189_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537118_title">Battre tous les Dresseurs de l’Arène de Lavandia</string>
+    <string name="ra_537118_text">Battre tous les Dresseurs de l’Arène de Lavandia.</string>
+    <array name="ra_537118">
+        <item>537118</item>
+        <item>@string/ra_537118_title</item>
+        <item>@string/ra_537118_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_27598_title">Battre Voltère et obtenir le Badge Dynamo</string>
+    <string name="ra_27598_text">Battre Voltère et obtenir le Badge Dynamo.</string>
+    <array name="ra_27598">
+        <item>27598</item>
+        <item>@string/ra_27598_title</item>
+        <item>@string/ra_27598_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537213_title">Tenter de rendre les lunettes perdues</string>
+    <string name="ra_537213_text">Tenter de rendre les lunettes perdues.</string>
+    <array name="ra_537213">
+        <item>537213</item>
+        <item>@string/ra_537213_title</item>
+        <item>@string/ra_537213_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537129_title">Gagner à la Tente de Combat de Vergazon et obtenir un lot</string>
+    <string name="ra_537129_text">Gagner à la Tente de Combat de Vergazon et obtenir un lot.</string>
+    <array name="ra_537129">
+        <item>537129</item>
+        <item>@string/ra_537129_title</item>
+        <item>@string/ra_537129_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537127_title">Obtenir la récompense après avoir battu la famille Stratège sur la Route 111</string>
+    <string name="ra_537127_text">Obtenir la récompense après avoir battu la famille Stratège sur la Route 111.</string>
+    <array name="ra_537127">
+        <item>537127</item>
+        <item>@string/ra_537127_title</item>
+        <item>@string/ra_537127_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537130_title">Gagner à la Tente de Combat d’Autequia et obtenir un lot</string>
+    <string name="ra_537130_text">Gagner à la Tente de Combat d’Autequia et obtenir un lot.</string>
+    <array name="ra_537130">
+        <item>537130</item>
+        <item>@string/ra_537130_title</item>
+        <item>@string/ra_537130_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537215_title">Obtenir une poupée Nénupiot auprès d’Annette</string>
+    <string name="ra_537215_text">Obtenir une poupée Nénupiot auprès d’Annette.</string>
+    <array name="ra_537215">
+        <item>537215</item>
+        <item>@string/ra_537215_title</item>
+        <item>@string/ra_537215_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537190_title">Aider le Professeur Kosmo au Site Météore</string>
+    <string name="ra_537190_text">Aider le Professeur Kosmo au Site Météore.</string>
+    <array name="ra_537190">
+        <item>537190</item>
+        <item>@string/ra_537190_title</item>
+        <item>@string/ra_537190_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_27604_title">Intervenir contre la Team Magma au Mont Chimnée</string>
+    <string name="ra_27604_text">Intervenir contre la Team Magma au Mont Chimnée.</string>
+    <array name="ra_27604">
+        <item>27604</item>
+        <item>@string/ra_27604_title</item>
+        <item>@string/ra_27604_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537216_title">Acheter un Lava Cookie au Mont Chimnée</string>
+    <string name="ra_537216_text">Acheter un Lava Cookie au Mont Chimnée.</string>
+    <array name="ra_537216">
+        <item>537216</item>
+        <item>@string/ra_537216_title</item>
+        <item>@string/ra_537216_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537217_title">Rapporter la Météorite volée au Professeur Kosmo</string>
+    <string name="ra_537217_text">Rapporter la Météorite volée au Professeur Kosmo.</string>
+    <array name="ra_537217">
+        <item>537217</item>
+        <item>@string/ra_537217_title</item>
+        <item>@string/ra_537217_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537201_title">Battre le sbire Magma suspect du Sentier Sinuroc</string>
+    <string name="ra_537201_text">Battre le sbire Magma suspect du Sentier Sinuroc.</string>
+    <array name="ra_537201">
+        <item>537201</item>
+        <item>@string/ra_537201_title</item>
+        <item>@string/ra_537201_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537131_title">Obtenir un Œuf auprès de la vieille dame aux sources de Vermilava</string>
+    <string name="ra_537131_text">Obtenir un Œuf auprès de la vieille dame aux sources de Vermilava.</string>
+    <array name="ra_537131">
+        <item>537131</item>
+        <item>@string/ra_537131_title</item>
+        <item>@string/ra_537131_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537119_title">Battre tous les Dresseurs de l’Arène de Vermilava</string>
+    <string name="ra_537119_text">Battre tous les Dresseurs de l’Arène de Vermilava.</string>
+    <array name="ra_537119">
+        <item>537119</item>
+        <item>@string/ra_537119_title</item>
+        <item>@string/ra_537119_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_27599_title">Battre Adriane et obtenir le Badge Chaleur</string>
+    <string name="ra_27599_text">Battre Adriane et obtenir le Badge Chaleur.</string>
+    <array name="ra_27599">
+        <item>27599</item>
+        <item>@string/ra_27599_title</item>
+        <item>@string/ra_27599_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_57267_title">Obtenir un fossile dans la Tour Mirage</string>
+    <string name="ra_57267_text">Obtenir un fossile dans la Tour Mirage.</string>
+    <array name="ra_57267">
+        <item>57267</item>
+        <item>@string/ra_57267_title</item>
+        <item>@string/ra_57267_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-fossils</item>
+    </array>
+    <string name="ra_537120_title">Battre tous les Dresseurs de l’Arène de Clémenti-Ville</string>
+    <string name="ra_537120_text">Battre tous les Dresseurs de l’Arène de Clémenti-Ville.</string>
+    <array name="ra_537120">
+        <item>537120</item>
+        <item>@string/ra_537120_title</item>
+        <item>@string/ra_537120_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_27600_title">Battre Norman et obtenir le Badge Balancier</string>
+    <string name="ra_27600_text">Battre Norman et obtenir le Badge Balancier.</string>
+    <array name="ra_27600">
+        <item>27600</item>
+        <item>@string/ra_27600_title</item>
+        <item>@string/ra_27600_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-petalburg</item>
+    </array>
+    <string name="ra_537218_title">Obtenir la récompense spéciale de sa mère après avoir battu son père</string>
+    <string name="ra_537218_text">Obtenir la récompense spéciale de sa mère après avoir battu son père.</string>
+    <array name="ra_537218">
+        <item>537218</item>
+        <item>@string/ra_537218_title</item>
+        <item>@string/ra_537218_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-petalburg</item>
+    </array>
+    <string name="ra_57271_title">Arrêter le générateur de New Lavandia et obtenir sa récompense</string>
+    <string name="ra_57271_text">Arrêter le générateur de New Lavandia et obtenir sa récompense.</string>
+    <array name="ra_57271">
+        <item>57271</item>
+        <item>@string/ra_57271_title</item>
+        <item>@string/ra_57271_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537219_title">Obtenir la Super Canne sur la Route 118</string>
+    <string name="ra_537219_text">Obtenir la Super Canne sur la Route 118.</string>
+    <array name="ra_537219">
+        <item>537219</item>
+        <item>@string/ra_537219_title</item>
+        <item>@string/ra_537219_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_57265_title">Capturer un Barpau sauvage</string>
+    <string name="ra_57265_text">Capturer un Barpau sauvage.</string>
+    <array name="ra_57265">
+        <item>57265</item>
+        <item>@string/ra_57265_title</item>
+        <item>@string/ra_57265_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_537200_title">Battre tous les sbires du Centre Météo</string>
+    <string name="ra_537200_text">Battre tous les sbires du Centre Météo.</string>
+    <array name="ra_537200">
+        <item>537200</item>
+        <item>@string/ra_537200_title</item>
+        <item>@string/ra_537200_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_27605_title">Intervenir contre la Team Aqua au Centre Météo</string>
+    <string name="ra_27605_text">Intervenir contre la Team Aqua au Centre Météo.</string>
+    <array name="ra_27605">
+        <item>27605</item>
+        <item>@string/ra_27605_title</item>
+        <item>@string/ra_27605_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_27594_title">Battre le rival sur la Route 119</string>
+    <string name="ra_27594_text">Battre le rival sur la Route 119.</string>
+    <array name="ra_27594">
+        <item>27594</item>
+        <item>@string/ra_27594_title</item>
+        <item>@string/ra_27594_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_537134_title">Échanger un Muciole contre un Posipi à Cimetronelle</string>
+    <string name="ra_537134_text">Échanger un Muciole contre un Posipi à Cimetronelle.</string>
+    <array name="ra_537134">
+        <item>537134</item>
+        <item>@string/ra_537134_title</item>
+        <item>@string/ra_537134_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_537220_title">Obtenir la CT10 Puissance Cachée en réussissant le jeu de devinettes de la…</string>
+    <string name="ra_537220_text">Obtenir la CT10 Puissance Cachée en réussissant le jeu de devinettes de la vieille dame.</string>
+    <array name="ra_537220">
+        <item>537220</item>
+        <item>@string/ra_537220_title</item>
+        <item>@string/ra_537220_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537191_title">Vaincre l’obstacle invisible à l’aide du Devon Scope</string>
+    <string name="ra_537191_text">Vaincre l’obstacle invisible à l’aide du Devon Scope.</string>
+    <array name="ra_537191">
+        <item>537191</item>
+        <item>@string/ra_537191_title</item>
+        <item>@string/ra_537191_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_537121_title">Battre tous les Dresseurs de l’Arène de Cimetronelle</string>
+    <string name="ra_537121_text">Battre tous les Dresseurs de l’Arène de Cimetronelle.</string>
+    <array name="ra_537121">
+        <item>537121</item>
+        <item>@string/ra_537121_title</item>
+        <item>@string/ra_537121_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_27601_title">Battre Alizée et obtenir le Badge Plume</string>
+    <string name="ra_27601_text">Battre Alizée et obtenir le Badge Plume.</string>
+    <array name="ra_27601">
+        <item>27601</item>
+        <item>@string/ra_27601_title</item>
+        <item>@string/ra_27601_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_27595_title">Battre le rival à Nénucrique</string>
+    <string name="ra_27595_text">Battre le rival à Nénucrique.</string>
+    <array name="ra_27595">
+        <item>27595</item>
+        <item>@string/ra_27595_title</item>
+        <item>@string/ra_27595_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537192_title">Assister aux événements du sommet du Mont Mémoria</string>
+    <string name="ra_537192_text">Assister aux événements du sommet du Mont Mémoria.</string>
+    <array name="ra_537192">
+        <item>537192</item>
+        <item>@string/ra_537192_title</item>
+        <item>@string/ra_537192_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537194_title">Battre tous les sbires et ramasser tous les objets du Repaire Magma</string>
+    <string name="ra_537194_text">Battre tous les sbires et ramasser tous les objets du Repaire Magma.</string>
+    <array name="ra_537194">
+        <item>537194</item>
+        <item>@string/ra_537194_title</item>
+        <item>@string/ra_537194_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_27606_title">Battre Max dans le Repaire Magma</string>
+    <string name="ra_27606_text">Battre Max dans le Repaire Magma.</string>
+    <array name="ra_27606">
+        <item>27606</item>
+        <item>@string/ra_27606_title</item>
+        <item>@string/ra_27606_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537195_title">Battre tous les sbires et ramasser tous les objets du Repaire Aqua</string>
+    <string name="ra_537195_text">Battre tous les sbires et ramasser tous les objets du Repaire Aqua.</string>
+    <array name="ra_537195">
+        <item>537195</item>
+        <item>@string/ra_537195_title</item>
+        <item>@string/ra_537195_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_27607_title">Battre l’Admin du Repaire Aqua</string>
+    <string name="ra_27607_text">Battre l’Admin du Repaire Aqua.</string>
+    <array name="ra_27607">
+        <item>27607</item>
+        <item>@string/ra_27607_title</item>
+        <item>@string/ra_27607_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537222_title">Obtenir la Méga Canne à Algatia</string>
+    <string name="ra_537222_text">Obtenir la Méga Canne à Algatia.</string>
+    <array name="ra_537222">
+        <item>537222</item>
+        <item>@string/ra_537222_title</item>
+        <item>@string/ra_537222_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537223_title">Obtenir l’Herbe Mental après avoir vérifié le retour réussi de Goélise</string>
+    <string name="ra_537223_text">Obtenir l’Herbe Mental après avoir vérifié le retour réussi de Goélise.</string>
+    <array name="ra_537223">
+        <item>537223</item>
+        <item>@string/ra_537223_title</item>
+        <item>@string/ra_537223_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57272_title">Faire fabriquer un Grelot Coque à la Grotte Tréfonds</string>
+    <string name="ra_57272_text">Faire fabriquer un Grelot Coque à la Grotte Tréfonds.</string>
+    <array name="ra_57272">
+        <item>57272</item>
+        <item>@string/ra_57272_title</item>
+        <item>@string/ra_57272_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537122_title">Battre tous les Dresseurs de l’Arène d’Algatia</string>
+    <string name="ra_537122_text">Battre tous les Dresseurs de l’Arène d’Algatia.</string>
+    <array name="ra_537122">
+        <item>537122</item>
+        <item>@string/ra_537122_title</item>
+        <item>@string/ra_537122_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_27602_title">Battre Lévy et Tatia et obtenir le Badge Esprit</string>
+    <string name="ra_27602_text">Battre Lévy et Tatia et obtenir le Badge Esprit.</string>
+    <array name="ra_27602">
+        <item>27602</item>
+        <item>@string/ra_27602_title</item>
+        <item>@string/ra_27602_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537202_title">Battre tous les sbires du Centre Spatial</string>
+    <string name="ra_537202_text">Battre tous les sbires du Centre Spatial.</string>
+    <array name="ra_537202">
+        <item>537202</item>
+        <item>@string/ra_537202_title</item>
+        <item>@string/ra_537202_text</item>
+        <item>4</item>
+        <item>1</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_27608_title">Aider Pierre au Centre Spatial d’Algatia</string>
+    <string name="ra_27608_text">Aider Pierre au Centre Spatial d’Algatia.</string>
+    <array name="ra_27608">
+        <item>27608</item>
+        <item>@string/ra_27608_title</item>
+        <item>@string/ra_27608_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537196_title">Battre tous les sbires et ramasser tous les objets de la Caverne Fondmer</string>
+    <string name="ra_537196_text">Battre tous les sbires et ramasser tous les objets de la Caverne Fondmer.</string>
+    <array name="ra_537196">
+        <item>537196</item>
+        <item>@string/ra_537196_title</item>
+        <item>@string/ra_537196_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <item name="ra_27609_title" type="string">@string/ra_31162_title</item>
+    <item name="ra_27609_text" type="string">@string/ra_31162_text</item>
+    <array name="ra_27609">
+        <item>27609</item>
+        <item>@string/ra_27609_title</item>
+        <item>@string/ra_27609_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537193_title">Assister à l’intervention de Rayquaza contre les légendaires à Atalanopolis</string>
+    <string name="ra_537193_text">Assister à l’intervention de Rayquaza contre les légendaires à Atalanopolis.</string>
+    <array name="ra_537193">
+        <item>537193</item>
+        <item>@string/ra_537193_title</item>
+        <item>@string/ra_537193_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537233_title">Obtenir toutes les CS</string>
+    <string name="ra_537233_text">Obtenir toutes les CS.</string>
+    <array name="ra_537233">
+        <item>537233</item>
+        <item>@string/ra_537233_title</item>
+        <item>@string/ra_537233_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537226_title">Battre les records des deux frères d’Atalanopolis qui comparent la taille…</string>
+    <string name="ra_537226_text">Battre les records des deux frères d’Atalanopolis qui comparent la taille des Pokémon.</string>
+    <array name="ra_537226">
+        <item>537226</item>
+        <item>@string/ra_537226_title</item>
+        <item>@string/ra_537226_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_57270_title">Trouver le Scanner dans l’Épave et le rapporter au Capitaine Poupe</string>
+    <string name="ra_57270_text">Trouver le Scanner dans l’Épave et le rapporter au Capitaine Poupe.</string>
+    <array name="ra_57270">
+        <item>57270</item>
+        <item>@string/ra_57270_title</item>
+        <item>@string/ra_57270_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537123_title">Battre tous les Dresseurs de l’Arène d’Atalanopolis</string>
+    <string name="ra_537123_text">Battre tous les Dresseurs de l’Arène d’Atalanopolis.</string>
+    <array name="ra_537123">
+        <item>537123</item>
+        <item>@string/ra_537123_title</item>
+        <item>@string/ra_537123_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_27603_title">Battre Juan et obtenir le Badge Pluie</string>
+    <string name="ra_27603_text">Battre Juan et obtenir le Badge Pluie.</string>
+    <array name="ra_27603">
+        <item>27603</item>
+        <item>@string/ra_27603_title</item>
+        <item>@string/ra_27603_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537135_title">Échanger un Draby contre un Hypotrempe à Pacifiville</string>
+    <string name="ra_537135_text">Échanger un Draby contre un Hypotrempe à Pacifiville.</string>
+    <array name="ra_537135">
+        <item>537135</item>
+        <item>@string/ra_537135_title</item>
+        <item>@string/ra_537135_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537224_title">Obtenir la CT21 Frustration en montrant un Pokémon peu heureux à un homme…</string>
+    <string name="ra_537224_text">Obtenir la CT21 Frustration en montrant un Pokémon peu heureux à un homme de Pacifiville.</string>
+    <array name="ra_537224">
+        <item>537224</item>
+        <item>@string/ra_537224_title</item>
+        <item>@string/ra_537224_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537225_title">Ouvrir le Sanctuaire</string>
+    <string name="ra_537225_text">Ouvrir le Sanctuaire.</string>
+    <array name="ra_537225">
+        <item>537225</item>
+        <item>@string/ra_537225_title</item>
+        <item>@string/ra_537225_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_27621_title">Capturer Regirock dans les Ruines Désert</string>
+    <string name="ra_27621_text">Capturer Regirock dans les Ruines Désert.</string>
+    <array name="ra_27621">
+        <item>27621</item>
+        <item>@string/ra_27621_title</item>
+        <item>@string/ra_27621_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_27622_title">Capturer Regice dans la Grotte de l’Îlot</string>
+    <string name="ra_27622_text">Capturer Regice dans la Grotte de l’Îlot.</string>
+    <array name="ra_27622">
+        <item>27622</item>
+        <item>@string/ra_27622_title</item>
+        <item>@string/ra_27622_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_27623_title">Capturer Registeel dans le Tombeau Antique</string>
+    <string name="ra_27623_text">Capturer Registeel dans le Tombeau Antique.</string>
+    <array name="ra_27623">
+        <item>27623</item>
+        <item>@string/ra_27623_title</item>
+        <item>@string/ra_27623_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_27620_title">Capturer Rayquaza au sommet du Pilier Céleste</string>
+    <string name="ra_27620_text">Capturer Rayquaza au sommet du Pilier Céleste.</string>
+    <array name="ra_27620">
+        <item>27620</item>
+        <item>@string/ra_27620_title</item>
+        <item>@string/ra_27620_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537197_title">Rencontrer Scott à chaque occasion possible pendant l’aventure</string>
+    <string name="ra_537197_text">Rencontrer Scott à chaque occasion possible pendant l’aventure.</string>
+    <array name="ra_537197">
+        <item>537197</item>
+        <item>@string/ra_537197_title</item>
+        <item>@string/ra_537197_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <item name="ra_27610_title" type="string">@string/ra_31218_title</item>
+    <item name="ra_27610_text" type="string">@string/ra_31218_text</item>
+    <array name="ra_27610">
+        <item>27610</item>
+        <item>@string/ra_27610_title</item>
+        <item>@string/ra_27610_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_27615_title">Battre le Maître actuel et devenir Maître de la Ligue Pokémon</string>
+    <string name="ra_27615_text">Battre le Maître actuel et devenir Maître de la Ligue Pokémon.</string>
+    <array name="ra_27615">
+        <item>27615</item>
+        <item>@string/ra_27615_title</item>
+        <item>@string/ra_27615_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_30885_title">Capturer Latias ou Latios</string>
+    <string name="ra_30885_text">Capturer Latias ou Latios.</string>
+    <array name="ra_30885">
+        <item>30885</item>
+        <item>@string/ra_30885_title</item>
+        <item>@string/ra_30885_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_27618_title">Capturer Groudon dans la Grotte Terra</string>
+    <string name="ra_27618_text">Capturer Groudon dans la Grotte Terra.</string>
+    <array name="ra_27618">
+        <item>27618</item>
+        <item>@string/ra_27618_title</item>
+        <item>@string/ra_27618_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_27619_title">Capturer Kyogre dans la Grotte Marine</string>
+    <string name="ra_27619_text">Capturer Kyogre dans la Grotte Marine.</string>
+    <array name="ra_27619">
+        <item>27619</item>
+        <item>@string/ra_27619_title</item>
+        <item>@string/ra_27619_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57268_title">Obtenir le second fossile dans la Grotte du Maniaque des Fossiles</string>
+    <string name="ra_57268_text">Obtenir le second fossile dans la Grotte du Maniaque des Fossiles.</string>
+    <array name="ra_57268">
+        <item>57268</item>
+        <item>@string/ra_57268_title</item>
+        <item>@string/ra_57268_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-fossils</item>
+    </array>
+    <string name="ra_537132_title">Obtenir le Terhal offert chez Pierre à Algatia</string>
+    <string name="ra_537132_text">Obtenir le Terhal offert chez Pierre à Algatia.</string>
+    <array name="ra_537132">
+        <item>537132</item>
+        <item>@string/ra_537132_title</item>
+        <item>@string/ra_537132_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537228_title">Acheter pour au moins 3 000 Pokédollars un objet à la vente spéciale du…</string>
+    <string name="ra_537228_text">Acheter pour au moins 3 000 Pokédollars un objet à la vente spéciale du toit du Centre Commercial de Nénucrique.</string>
+    <array name="ra_537228">
+        <item>537228</item>
+        <item>@string/ra_537228_title</item>
+        <item>@string/ra_537228_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537229_title">Remporter le gros lot au Casino de Lavandia pendant un jour spécial…</string>
+    <string name="ra_537229_text">Remporter le gros lot au Casino de Lavandia pendant un jour spécial annoncé à la télévision.</string>
+    <array name="ra_537229">
+        <item>537229</item>
+        <item>@string/ra_537229_title</item>
+        <item>@string/ra_537229_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537231_title">Fabriquer des Pokéblocs avec le Maître du Mélange</string>
+    <string name="ra_537231_text">Fabriquer des Pokéblocs avec le Maître du Mélange.</string>
+    <array name="ra_537231">
+        <item>537231</item>
+        <item>@string/ra_537231_title</item>
+        <item>@string/ra_537231_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537230_title">Battre les journalistes Gabie et Ty à leur niveau maximal</string>
+    <string name="ra_537230_text">Battre les journalistes Gabie et Ty à leur niveau maximal.</string>
+    <array name="ra_537230">
+        <item>537230</item>
+        <item>@string/ra_537230_title</item>
+        <item>@string/ra_537230_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537235_title">Obtenir quatre baies différentes auprès de la femme du Maître des Baies en…</string>
+    <string name="ra_537235_text">Obtenir quatre baies différentes auprès de la femme du Maître des Baies en lui donnant les bonnes expressions.</string>
+    <array name="ra_537235">
+        <item>537235</item>
+        <item>@string/ra_537235_title</item>
+        <item>@string/ra_537235_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537236_title">Obtenir tous les dons quotidiens de baies</string>
+    <string name="ra_537236_text">Obtenir tous les dons quotidiens de baies.</string>
+    <array name="ra_537236">
+        <item>537236</item>
+        <item>@string/ra_537236_title</item>
+        <item>@string/ra_537236_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537234_title">Apprendre des capacités auprès de tous les tuteurs à usage unique de Hoenn</string>
+    <string name="ra_537234_text">Apprendre des capacités auprès de tous les tuteurs à usage unique de Hoenn.</string>
+    <array name="ra_537234">
+        <item>537234</item>
+        <item>@string/ra_537234_title</item>
+        <item>@string/ra_537234_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537198_title">Recevoir quatre Points Combat de Scott à la Zone de Combat</string>
+    <string name="ra_537198_text">Recevoir quatre Points Combat de Scott à la Zone de Combat.</string>
+    <array name="ra_537198">
+        <item>537198</item>
+        <item>@string/ra_537198_title</item>
+        <item>@string/ra_537198_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537136_title">Échanger un Skitty contre un Miaouss à la Zone de Combat</string>
+    <string name="ra_537136_text">Échanger un Skitty contre un Miaouss à la Zone de Combat.</string>
+    <array name="ra_537136">
+        <item>537136</item>
+        <item>@string/ra_537136_title</item>
+        <item>@string/ra_537136_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537199_title">Capturer l’arbre étrange de la Zone de Combat</string>
+    <string name="ra_537199_text">Capturer l’arbre étrange de la Zone de Combat.</string>
+    <array name="ra_537199">
+        <item>537199</item>
+        <item>@string/ra_537199_title</item>
+        <item>@string/ra_537199_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537227_title">Miser quinze Points Combat sur soi-même auprès de l’homme au sud de la…</string>
+    <string name="ra_537227_text">Miser quinze Points Combat sur soi-même auprès de l’homme au sud de la Pyramide de Combat et gagner.</string>
+    <array name="ra_537227">
+        <item>537227</item>
+        <item>@string/ra_537227_title</item>
+        <item>@string/ra_537227_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537237_title">Terminer l’entraînement d’un apprenti</string>
+    <string name="ra_537237_text">Terminer l’entraînement d’un apprenti.</string>
+    <array name="ra_537237">
+        <item>537237</item>
+        <item>@string/ra_537237_title</item>
+        <item>@string/ra_537237_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537238_title">Battre son apprenti à la Tour de Combat</string>
+    <string name="ra_537238_text">Battre son apprenti à la Tour de Combat.</string>
+    <array name="ra_537238">
+        <item>537238</item>
+        <item>@string/ra_537238_title</item>
+        <item>@string/ra_537238_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537239_title">Faire équipe avec son apprenti à la Tour de Combat</string>
+    <string name="ra_537239_text">Faire équipe avec son apprenti à la Tour de Combat.</string>
+    <array name="ra_537239">
+        <item>537239</item>
+        <item>@string/ra_537239_title</item>
+        <item>@string/ra_537239_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57297_title">Battre Capucine et obtenir le Symbole Capacité d’Argent</string>
+    <string name="ra_57297_text">Battre Capucine et obtenir le Symbole Capacité d’Argent.</string>
+    <array name="ra_57297">
+        <item>57297</item>
+        <item>@string/ra_57297_title</item>
+        <item>@string/ra_57297_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57298_title">Battre de nouveau Capucine et obtenir le Symbole Capacité d’Or</string>
+    <string name="ra_57298_text">Battre de nouveau Capucine et obtenir le Symbole Capacité d’Or.</string>
+    <array name="ra_57298">
+        <item>57298</item>
+        <item>@string/ra_57298_title</item>
+        <item>@string/ra_57298_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57285_title">Battre Takim et obtenir le Symbole Tactique d’Argent</string>
+    <string name="ra_57285_text">Battre Takim et obtenir le Symbole Tactique d’Argent.</string>
+    <array name="ra_57285">
+        <item>57285</item>
+        <item>@string/ra_57285_title</item>
+        <item>@string/ra_57285_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57286_title">Battre de nouveau Takim et obtenir le Symbole Tactique d’Or</string>
+    <string name="ra_57286_text">Battre de nouveau Takim et obtenir le Symbole Tactique d’Or.</string>
+    <array name="ra_57286">
+        <item>57286</item>
+        <item>@string/ra_57286_title</item>
+        <item>@string/ra_57286_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57293_title">Battre Esteban et obtenir le Symbole Esprit d’Argent</string>
+    <string name="ra_57293_text">Battre Esteban et obtenir le Symbole Esprit d’Argent.</string>
+    <array name="ra_57293">
+        <item>57293</item>
+        <item>@string/ra_57293_title</item>
+        <item>@string/ra_57293_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57294_title">Battre de nouveau Esteban et obtenir le Symbole Esprit d’Or</string>
+    <string name="ra_57294_text">Battre de nouveau Esteban et obtenir le Symbole Esprit d’Or.</string>
+    <array name="ra_57294">
+        <item>57294</item>
+        <item>@string/ra_57294_title</item>
+        <item>@string/ra_57294_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57289_title">Battre Carole et obtenir le Symbole Cran d’Argent</string>
+    <string name="ra_57289_text">Battre Carole et obtenir le Symbole Cran d’Argent.</string>
+    <array name="ra_57289">
+        <item>57289</item>
+        <item>@string/ra_57289_title</item>
+        <item>@string/ra_57289_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57290_title">Battre de nouveau Carole et obtenir le Symbole Cran d’Or</string>
+    <string name="ra_57290_text">Battre de nouveau Carole et obtenir le Symbole Cran d’Or.</string>
+    <array name="ra_57290">
+        <item>57290</item>
+        <item>@string/ra_57290_title</item>
+        <item>@string/ra_57290_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57291_title">Battre Sam et obtenir le Symbole Savoir d’Argent</string>
+    <string name="ra_57291_text">Battre Sam et obtenir le Symbole Savoir d’Argent.</string>
+    <array name="ra_57291">
+        <item>57291</item>
+        <item>@string/ra_57291_title</item>
+        <item>@string/ra_57291_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57292_title">Battre de nouveau Sam et obtenir le Symbole Savoir d’Or</string>
+    <string name="ra_57292_text">Battre de nouveau Sam et obtenir le Symbole Savoir d’Or.</string>
+    <array name="ra_57292">
+        <item>57292</item>
+        <item>@string/ra_57292_title</item>
+        <item>@string/ra_57292_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57287_title">Battre Charline et obtenir le Symbole Chance d’Argent</string>
+    <string name="ra_57287_text">Battre Charline et obtenir le Symbole Chance d’Argent.</string>
+    <array name="ra_57287">
+        <item>57287</item>
+        <item>@string/ra_57287_title</item>
+        <item>@string/ra_57287_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57288_title">Battre de nouveau Charline et obtenir le Symbole Chance d’Or</string>
+    <string name="ra_57288_text">Battre de nouveau Charline et obtenir le Symbole Chance d’Or.</string>
+    <array name="ra_57288">
+        <item>57288</item>
+        <item>@string/ra_57288_title</item>
+        <item>@string/ra_57288_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57295_title">Battre Bayar et obtenir le Symbole Courage d’Argent</string>
+    <string name="ra_57295_text">Battre Bayar et obtenir le Symbole Courage d’Argent.</string>
+    <array name="ra_57295">
+        <item>57295</item>
+        <item>@string/ra_57295_title</item>
+        <item>@string/ra_57295_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57296_title">Battre de nouveau Bayar et obtenir le Symbole Courage d’Or</string>
+    <string name="ra_57296_text">Battre de nouveau Bayar et obtenir le Symbole Courage d’Or.</string>
+    <array name="ra_57296">
+        <item>57296</item>
+        <item>@string/ra_57296_title</item>
+        <item>@string/ra_57296_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537240_title">Obtenir toutes les récompenses de Scott</string>
+    <string name="ra_537240_text">Obtenir toutes les récompenses de Scott.</string>
+    <array name="ra_537240">
+        <item>537240</item>
+        <item>@string/ra_537240_title</item>
+        <item>@string/ra_537240_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_27617_title">Battre Pierre au Site Météore</string>
+    <string name="ra_27617_text">Battre Pierre au Site Météore.</string>
+    <array name="ra_27617">
+        <item>27617</item>
+        <item>@string/ra_27617_title</item>
+        <item>@string/ra_27617_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_57275_title">La collection complète de Émeraude</string>
+    <string name="ra_57275_text">Obtenir les 212 espèces accessibles dans Émeraude sans échange externe ni événement. Une seule famille de partenaires de Hoenn et un seul errant comptent ; choisir entre Grodoudou et Delcatty pour l’unique Pierre Lune. Les partenaires de Johto, conditionnés aux 200 espèces ordinaires de Hoenn, ne comptent pas.</string>
+    <array name="ra_57275">
+        <item>57275</item>
+        <item>@string/ra_57275_title</item>
+        <item>@string/ra_57275_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537241_title">Battre tous les Dresseurs et ramasser tous les objets de la première…</string>
+    <string name="ra_537241_text">Battre tous les Dresseurs et ramasser tous les objets de la première énigme de la Maison des Pièges.</string>
+    <array name="ra_537241">
+        <item>537241</item>
+        <item>@string/ra_537241_title</item>
+        <item>@string/ra_537241_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537242_title">Battre tous les Dresseurs et ramasser tous les objets de la deuxième…</string>
+    <string name="ra_537242_text">Battre tous les Dresseurs et ramasser tous les objets de la deuxième énigme de la Maison des Pièges.</string>
+    <array name="ra_537242">
+        <item>537242</item>
+        <item>@string/ra_537242_title</item>
+        <item>@string/ra_537242_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537243_title">Battre tous les Dresseurs et ramasser tous les objets de la troisième…</string>
+    <string name="ra_537243_text">Battre tous les Dresseurs et ramasser tous les objets de la troisième énigme de la Maison des Pièges.</string>
+    <array name="ra_537243">
+        <item>537243</item>
+        <item>@string/ra_537243_title</item>
+        <item>@string/ra_537243_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537244_title">Battre tous les Dresseurs et ramasser tous les objets de la quatrième…</string>
+    <string name="ra_537244_text">Battre tous les Dresseurs et ramasser tous les objets de la quatrième énigme de la Maison des Pièges.</string>
+    <array name="ra_537244">
+        <item>537244</item>
+        <item>@string/ra_537244_title</item>
+        <item>@string/ra_537244_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537245_title">Battre tous les Dresseurs et ramasser tous les objets de la sixième énigme…</string>
+    <string name="ra_537245_text">Battre tous les Dresseurs et ramasser tous les objets de la sixième énigme de la Maison des Pièges.</string>
+    <array name="ra_537245">
+        <item>537245</item>
+        <item>@string/ra_537245_title</item>
+        <item>@string/ra_537245_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537246_title">Battre tous les Dresseurs et ramasser tous les objets de la septième…</string>
+    <string name="ra_537246_text">Battre tous les Dresseurs et ramasser tous les objets de la septième énigme de la Maison des Pièges.</string>
+    <array name="ra_537246">
+        <item>537246</item>
+        <item>@string/ra_537246_title</item>
+        <item>@string/ra_537246_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537247_title">Battre tous les Dresseurs et ramasser tous les objets de la huitième…</string>
+    <string name="ra_537247_text">Battre tous les Dresseurs et ramasser tous les objets de la huitième énigme de la Maison des Pièges.</string>
+    <array name="ra_537247">
+        <item>537247</item>
+        <item>@string/ra_537247_title</item>
+        <item>@string/ra_537247_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57269_title">Résoudre toutes les énigmes de la Maison des Pièges et obtenir toutes les…</string>
+    <string name="ra_57269_text">Résoudre toutes les énigmes de la Maison des Pièges et obtenir toutes les récompenses.</string>
+    <array name="ra_57269">
+        <item>57269</item>
+        <item>@string/ra_57269_title</item>
+        <item>@string/ra_57269_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537248_title">Trouver la Pépite cachée laissée par le Maître des Pièges après sa…</string>
+    <string name="ra_537248_text">Trouver la Pépite cachée laissée par le Maître des Pièges après sa dernière énigme.</string>
+    <array name="ra_537248">
+        <item>537248</item>
+        <item>@string/ra_537248_title</item>
+        <item>@string/ra_537248_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57276_title">Terminer le défi en Duo du mode Normal de la Butte d’Entraînement</string>
+    <string name="ra_57276_text">Terminer le défi en Duo du mode Normal de la Butte d’Entraînement.</string>
+    <array name="ra_57276">
+        <item>57276</item>
+        <item>@string/ra_57276_title</item>
+        <item>@string/ra_57276_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57277_title">Terminer le défi en Duo du mode Variété de la Butte d’Entraînement</string>
+    <string name="ra_57277_text">Terminer le défi en Duo du mode Variété de la Butte d’Entraînement.</string>
+    <array name="ra_57277">
+        <item>57277</item>
+        <item>@string/ra_57277_title</item>
+        <item>@string/ra_57277_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57278_title">Terminer le défi en Duo du mode Unique de la Butte d’Entraînement</string>
+    <string name="ra_57278_text">Terminer le défi en Duo du mode Unique de la Butte d’Entraînement.</string>
+    <array name="ra_57278">
+        <item>57278</item>
+        <item>@string/ra_57278_title</item>
+        <item>@string/ra_57278_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57279_title">Terminer le défi en Duo du mode Expert de la Butte d’Entraînement</string>
+    <string name="ra_57279_text">Terminer le défi en Duo du mode Expert de la Butte d’Entraînement.</string>
+    <array name="ra_57279">
+        <item>57279</item>
+        <item>@string/ra_57279_title</item>
+        <item>@string/ra_57279_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_57280_title">Gagner un Concours de Sang-froid de rang Master</string>
+    <string name="ra_57280_text">Gagner un Concours de Sang-froid de rang Master.</string>
+    <array name="ra_57280">
+        <item>57280</item>
+        <item>@string/ra_57280_title</item>
+        <item>@string/ra_57280_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57281_title">Gagner un Concours de Beauté de rang Master</string>
+    <string name="ra_57281_text">Gagner un Concours de Beauté de rang Master.</string>
+    <array name="ra_57281">
+        <item>57281</item>
+        <item>@string/ra_57281_title</item>
+        <item>@string/ra_57281_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57282_title">Gagner un Concours de Grâce de rang Master</string>
+    <string name="ra_57282_text">Gagner un Concours de Grâce de rang Master.</string>
+    <array name="ra_57282">
+        <item>57282</item>
+        <item>@string/ra_57282_title</item>
+        <item>@string/ra_57282_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57283_title">Gagner un Concours d’Intelligence de rang Master</string>
+    <string name="ra_57283_text">Gagner un Concours d’Intelligence de rang Master.</string>
+    <array name="ra_57283">
+        <item>57283</item>
+        <item>@string/ra_57283_title</item>
+        <item>@string/ra_57283_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_57284_title">Gagner un Concours de Robustesse de rang Master</string>
+    <string name="ra_57284_text">Gagner un Concours de Robustesse de rang Master.</string>
+    <array name="ra_57284">
+        <item>57284</item>
+        <item>@string/ra_57284_title</item>
+        <item>@string/ra_57284_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537232_title">Obtenir toutes les couleurs de Foulard en montrant des Pokémon…</string>
+    <string name="ra_537232_text">Obtenir toutes les couleurs de Foulard en montrant des Pokémon remarquables au président du Fan Club Pokémon.</string>
+    <array name="ra_537232">
+        <item>537232</item>
+        <item>@string/ra_537232_title</item>
+        <item>@string/ra_537232_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537221_title">Obtenir un Ornement Verre en remplissant la nouvelle exposition du Musée…</string>
+    <string name="ra_537221_text">Obtenir un Ornement Verre en remplissant la nouvelle exposition du Musée de Nénucrique de tableaux remarquables.</string>
+    <array name="ra_537221">
+        <item>537221</item>
+        <item>@string/ra_537221_title</item>
+        <item>@string/ra_537221_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537152_title">Obtenir et conserver toutes les flûtes échangées contre de la cendre sur…</string>
+    <string name="ra_537152_text">Obtenir et conserver toutes les flûtes échangées contre de la cendre sur la Route 113.</string>
+    <array name="ra_537152">
+        <item>537152</item>
+        <item>@string/ra_537152_title</item>
+        <item>@string/ra_537152_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537125_title">Obtenir tous les dons d’objets courants des personnages</string>
+    <string name="ra_537125_text">Obtenir tous les dons d’objets courants des personnages.</string>
+    <array name="ra_537125">
+        <item>537125</item>
+        <item>@string/ra_537125_title</item>
+        <item>@string/ra_537125_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537137_title">Découvrir tous les Pokémon camouflés de Hoenn</string>
+    <string name="ra_537137_text">Découvrir tous les Pokémon camouflés de Hoenn.</string>
+    <array name="ra_537137">
+        <item>537137</item>
+        <item>@string/ra_537137_title</item>
+        <item>@string/ra_537137_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537138_title">Faire éclore un Pichu connaissant Électacle</string>
+    <string name="ra_537138_text">Faire éclore un Pichu connaissant Électacle.</string>
+    <array name="ra_537138">
+        <item>537138</item>
+        <item>@string/ra_537138_title</item>
+        <item>@string/ra_537138_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537450_title">Couper une zone d’herbe de cinq cases sur cinq en une seule utilisation de…</string>
+    <string name="ra_537450_text">Couper une zone d’herbe de cinq cases sur cinq en une seule utilisation de Coupe.</string>
+    <array name="ra_537450">
+        <item>537450</item>
+        <item>@string/ra_537450_title</item>
+        <item>@string/ra_537450_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537249_title">Voler une Ceinture Noire au Karatéka Nob à partir de sa quatrième revanche</string>
+    <string name="ra_537249_text">Voler une Ceinture Noire au Karatéka Nob à partir de sa quatrième revanche.</string>
+    <array name="ra_537249">
+        <item>537249</item>
+        <item>@string/ra_537249_title</item>
+        <item>@string/ra_537249_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537250_title">Voler de la Poudre Argent au Entomomaniac Jeffrey à partir de sa quatrième…</string>
+    <string name="ra_537250_text">Voler de la Poudre Argent au Entomomaniac Jeffrey à partir de sa quatrième revanche.</string>
+    <array name="ra_537250">
+        <item>537250</item>
+        <item>@string/ra_537250_title</item>
+        <item>@string/ra_537250_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537251_title">Voler un Croc Dragon au Dracologue Nicolas à partir de sa quatrième revanche</string>
+    <string name="ra_537251_text">Voler un Croc Dragon au Dracologue Nicolas à partir de sa quatrième revanche.</string>
+    <array name="ra_537251">
+        <item>537251</item>
+        <item>@string/ra_537251_title</item>
+        <item>@string/ra_537251_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <item name="ra_57266_title" type="string">@string/ra_92008_title</item>
+    <item name="ra_57266_text" type="string">@string/ra_92008_text</item>
+    <array name="ra_57266">
+        <item>57266</item>
+        <item>@string/ra_57266_title</item>
+        <item>@string/ra_57266_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537124_title">Meubler entièrement sa chambre à Bourg-en-Vol</string>
+    <string name="ra_537124_text">Meubler entièrement sa chambre à Bourg-en-Vol.</string>
+    <array name="ra_537124">
+        <item>537124</item>
+        <item>@string/ra_537124_title</item>
+        <item>@string/ra_537124_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537148_title">Collectionner tous les bureaux, chaises et plantes de Base Secrète</string>
+    <string name="ra_537148_text">Collectionner tous les bureaux, chaises et plantes de Base Secrète.</string>
+    <array name="ra_537148">
+        <item>537148</item>
+        <item>@string/ra_537148_title</item>
+        <item>@string/ra_537148_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537149_title">Collectionner tous les ornements et posters de Base Secrète, sauf la tente…</string>
+    <string name="ra_537149_text">Collectionner tous les ornements et posters de Base Secrète, sauf la tente de la couleur non choisie à la Maison des Pièges.</string>
+    <array name="ra_537149">
+        <item>537149</item>
+        <item>@string/ra_537149_title</item>
+        <item>@string/ra_537149_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537150_title">Collectionner tous les coussins et tapis de Base Secrète</string>
+    <string name="ra_537150_text">Collectionner tous les coussins et tapis de Base Secrète.</string>
+    <array name="ra_537150">
+        <item>537150</item>
+        <item>@string/ra_537150_title</item>
+        <item>@string/ra_537150_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537151_title">Collectionner toutes les poupées de Base Secrète, sauf Grainipiot,…</string>
+    <string name="ra_537151_text">Collectionner toutes les poupées de Base Secrète, sauf Grainipiot, Regirock, Regice et Registeel.</string>
+    <array name="ra_537151">
+        <item>537151</item>
+        <item>@string/ra_537151_title</item>
+        <item>@string/ra_537151_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_537139_title">Battre l’équipe la plus forte de Timmy</string>
+    <string name="ra_537139_text">Battre l’équipe la plus forte de Timmy.</string>
+    <array name="ra_537139">
+        <item>537139</item>
+        <item>@string/ra_537139_title</item>
+        <item>@string/ra_537139_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537140_title">Battre l’équipe la plus forte de Roxanne</string>
+    <string name="ra_537140_text">Battre l’équipe la plus forte de Roxanne.</string>
+    <array name="ra_537140">
+        <item>537140</item>
+        <item>@string/ra_537140_title</item>
+        <item>@string/ra_537140_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537141_title">Battre l’équipe la plus forte de Bastien</string>
+    <string name="ra_537141_text">Battre l’équipe la plus forte de Bastien.</string>
+    <array name="ra_537141">
+        <item>537141</item>
+        <item>@string/ra_537141_title</item>
+        <item>@string/ra_537141_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537142_title">Battre l’équipe la plus forte de Voltère</string>
+    <string name="ra_537142_text">Battre l’équipe la plus forte de Voltère.</string>
+    <array name="ra_537142">
+        <item>537142</item>
+        <item>@string/ra_537142_title</item>
+        <item>@string/ra_537142_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537143_title">Battre l’équipe la plus forte d’Adriane</string>
+    <string name="ra_537143_text">Battre l’équipe la plus forte d’Adriane.</string>
+    <array name="ra_537143">
+        <item>537143</item>
+        <item>@string/ra_537143_title</item>
+        <item>@string/ra_537143_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537144_title">Battre l’équipe la plus forte de Norman</string>
+    <string name="ra_537144_text">Battre l’équipe la plus forte de Norman.</string>
+    <array name="ra_537144">
+        <item>537144</item>
+        <item>@string/ra_537144_title</item>
+        <item>@string/ra_537144_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537145_title">Battre l’équipe la plus forte d’Alizée</string>
+    <string name="ra_537145_text">Battre l’équipe la plus forte d’Alizée.</string>
+    <array name="ra_537145">
+        <item>537145</item>
+        <item>@string/ra_537145_title</item>
+        <item>@string/ra_537145_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537146_title">Battre l’équipe la plus forte de Lévy et Tatia</string>
+    <string name="ra_537146_text">Battre l’équipe la plus forte de Lévy et Tatia.</string>
+    <array name="ra_537146">
+        <item>537146</item>
+        <item>@string/ra_537146_title</item>
+        <item>@string/ra_537146_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537147_title">Battre l’équipe la plus forte de Juan</string>
+    <string name="ra_537147_text">Battre l’équipe la plus forte de Juan.</string>
+    <array name="ra_537147">
+        <item>537147</item>
+        <item>@string/ra_537147_title</item>
+        <item>@string/ra_537147_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537167_title">Ramasser tous les objets visibles et cachés dans les lieux suivants :…</string>
+    <string name="ra_537167_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Bourg-en-Vol, les Routes 101, 102 et 103 et Rosyères.</string>
+    <array name="ra_537167">
+        <item>537167</item>
+        <item>@string/ra_537167_title</item>
+        <item>@string/ra_537167_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_537153_title">Battre tous les Dresseurs dans les lieux suivants : Bourg-en-Vol, les…</string>
+    <string name="ra_537153_text">Battre tous les Dresseurs dans les lieux suivants : Bourg-en-Vol, les Routes 101, 102 et 103 et Rosyères.</string>
+    <array name="ra_537153">
+        <item>537153</item>
+        <item>@string/ra_537153_title</item>
+        <item>@string/ra_537153_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <item name="ra_537168_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537168_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Clémenti-Ville, les Routes 104 et 105 et le Bois Clémenti.</string>
+    <array name="ra_537168">
+        <item>537168</item>
+        <item>@string/ra_537168_title</item>
+        <item>@string/ra_537168_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537154_title">Battre tous les Dresseurs dans les lieux suivants : Clémenti-Ville, les…</string>
+    <string name="ra_537154_text">Battre tous les Dresseurs dans les lieux suivants : Clémenti-Ville, les Routes 104 et 105 et le Bois Clémenti.</string>
+    <array name="ra_537154">
+        <item>537154</item>
+        <item>@string/ra_537154_title</item>
+        <item>@string/ra_537154_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <item name="ra_537169_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537169_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Mérouville, les Routes 115 et 116 et le Tunnel Mérazon.</string>
+    <array name="ra_537169">
+        <item>537169</item>
+        <item>@string/ra_537169_title</item>
+        <item>@string/ra_537169_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <string name="ra_537155_title">Battre tous les Dresseurs dans les lieux suivants : Mérouville, les Routes…</string>
+    <string name="ra_537155_text">Battre tous les Dresseurs dans les lieux suivants : Mérouville, les Routes 115 et 116 et le Tunnel Mérazon.</string>
+    <array name="ra_537155">
+        <item>537155</item>
+        <item>@string/ra_537155_title</item>
+        <item>@string/ra_537155_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <item name="ra_537170_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537170_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Myokara, la Grotte Granite, les Chenaux 106, 107 et 108 et l’Épave.</string>
+    <array name="ra_537170">
+        <item>537170</item>
+        <item>@string/ra_537170_title</item>
+        <item>@string/ra_537170_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_537156_title">Battre tous les Dresseurs dans les lieux suivants : Myokara, la Grotte…</string>
+    <string name="ra_537156_text">Battre tous les Dresseurs dans les lieux suivants : Myokara, la Grotte Granite, les Chenaux 106, 107 et 108 et l’Épave.</string>
+    <array name="ra_537156">
+        <item>537156</item>
+        <item>@string/ra_537156_title</item>
+        <item>@string/ra_537156_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <item name="ra_537171_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537171_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Poivressel et les Routes 109 et 110.</string>
+    <array name="ra_537171">
+        <item>537171</item>
+        <item>@string/ra_537171_title</item>
+        <item>@string/ra_537171_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537157_title">Battre tous les Dresseurs dans les lieux suivants : Poivressel et les…</string>
+    <string name="ra_537157_text">Battre tous les Dresseurs dans les lieux suivants : Poivressel et les Routes 109 et 110.</string>
+    <array name="ra_537157">
+        <item>537157</item>
+        <item>@string/ra_537157_title</item>
+        <item>@string/ra_537157_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <item name="ra_537172_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537172_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Lavandia, Vergazon, les Routes 117 et 118 et New Lavandia.</string>
+    <array name="ra_537172">
+        <item>537172</item>
+        <item>@string/ra_537172_title</item>
+        <item>@string/ra_537172_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_537158_title">Battre tous les Dresseurs dans les lieux suivants : Lavandia, Vergazon,…</string>
+    <string name="ra_537158_text">Battre tous les Dresseurs dans les lieux suivants : Lavandia, Vergazon, les Routes 117 et 118 et New Lavandia.</string>
+    <array name="ra_537158">
+        <item>537158</item>
+        <item>@string/ra_537158_title</item>
+        <item>@string/ra_537158_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <item name="ra_537173_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537173_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Vermilava, les Routes 111 et 112, le Chemin Ardent, le Mont Chimnée et le Sentier Sinuroc.</string>
+    <array name="ra_537173">
+        <item>537173</item>
+        <item>@string/ra_537173_title</item>
+        <item>@string/ra_537173_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537159_title">Battre tous les Dresseurs dans les lieux suivants : Vermilava, les Routes…</string>
+    <string name="ra_537159_text">Battre tous les Dresseurs dans les lieux suivants : Vermilava, les Routes 111 et 112, le Chemin Ardent, le Mont Chimnée et le Sentier Sinuroc.</string>
+    <array name="ra_537159">
+        <item>537159</item>
+        <item>@string/ra_537159_title</item>
+        <item>@string/ra_537159_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <item name="ra_537174_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537174_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Autequia, les Routes 113 et 114 et le Site Météore.</string>
+    <array name="ra_537174">
+        <item>537174</item>
+        <item>@string/ra_537174_title</item>
+        <item>@string/ra_537174_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_537160_title">Battre tous les Dresseurs dans les lieux suivants : Autequia, les Routes…</string>
+    <string name="ra_537160_text">Battre tous les Dresseurs dans les lieux suivants : Autequia, les Routes 113 et 114 et le Site Météore.</string>
+    <array name="ra_537160">
+        <item>537160</item>
+        <item>@string/ra_537160_title</item>
+        <item>@string/ra_537160_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <item name="ra_537175_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537175_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Cimetronelle, les Routes 119, 120 et 121 et la Grotte Zénith.</string>
+    <array name="ra_537175">
+        <item>537175</item>
+        <item>@string/ra_537175_title</item>
+        <item>@string/ra_537175_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537161_title">Battre tous les Dresseurs dans les lieux suivants : Cimetronelle, les…</string>
+    <string name="ra_537161_text">Battre tous les Dresseurs dans les lieux suivants : Cimetronelle, les Routes 119, 120 et 121 et la Grotte Zénith.</string>
+    <array name="ra_537161">
+        <item>537161</item>
+        <item>@string/ra_537161_title</item>
+        <item>@string/ra_537161_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <item name="ra_537176_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537176_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Nénucrique, le Parc Safari, le Chenal 122, le Mont Mémoria et la Route 123.</string>
+    <array name="ra_537176">
+        <item>537176</item>
+        <item>@string/ra_537176_title</item>
+        <item>@string/ra_537176_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_537162_title">Battre tous les Dresseurs dans les lieux suivants : Nénucrique, le Parc…</string>
+    <string name="ra_537162_text">Battre tous les Dresseurs dans les lieux suivants : Nénucrique, le Parc Safari, le Chenal 122, le Mont Mémoria et la Route 123.</string>
+    <array name="ra_537162">
+        <item>537162</item>
+        <item>@string/ra_537162_title</item>
+        <item>@string/ra_537162_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <item name="ra_537177_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537177_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Algatia, les Chenaux 124 et 125 et la Grotte Tréfonds.</string>
+    <array name="ra_537177">
+        <item>537177</item>
+        <item>@string/ra_537177_title</item>
+        <item>@string/ra_537177_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_537163_title">Battre tous les Dresseurs dans les lieux suivants : Algatia, les Chenaux…</string>
+    <string name="ra_537163_text">Battre tous les Dresseurs dans les lieux suivants : Algatia, les Chenaux 124 et 125 et la Grotte Tréfonds.</string>
+    <array name="ra_537163">
+        <item>537163</item>
+        <item>@string/ra_537163_title</item>
+        <item>@string/ra_537163_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <item name="ra_537178_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537178_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Atalanopolis et les Chenaux 126 et 127.</string>
+    <array name="ra_537178">
+        <item>537178</item>
+        <item>@string/ra_537178_title</item>
+        <item>@string/ra_537178_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537164_title">Battre tous les Dresseurs dans les lieux suivants : Atalanopolis et les…</string>
+    <string name="ra_537164_text">Battre tous les Dresseurs dans les lieux suivants : Atalanopolis et les Chenaux 126 et 127.</string>
+    <array name="ra_537164">
+        <item>537164</item>
+        <item>@string/ra_537164_title</item>
+        <item>@string/ra_537164_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <item name="ra_537179_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537179_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Éternara, les Chenaux 128 et 129 et la Route Victoire.</string>
+    <array name="ra_537179">
+        <item>537179</item>
+        <item>@string/ra_537179_title</item>
+        <item>@string/ra_537179_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_537165_title">Battre tous les Dresseurs dans les lieux suivants : Éternara, les Chenaux…</string>
+    <string name="ra_537165_text">Battre tous les Dresseurs dans les lieux suivants : Éternara, les Chenaux 128 et 129 et la Route Victoire.</string>
+    <array name="ra_537165">
+        <item>537165</item>
+        <item>@string/ra_537165_title</item>
+        <item>@string/ra_537165_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <item name="ra_537180_title" type="string">@string/ra_537167_title</item>
+    <string name="ra_537180_text">Ramasser tous les objets visibles et cachés dans les lieux suivants : Pacifiville et les Chenaux 130 à 134.</string>
+    <array name="ra_537180">
+        <item>537180</item>
+        <item>@string/ra_537180_title</item>
+        <item>@string/ra_537180_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537166_title">Battre tous les Dresseurs dans les lieux suivants : Pacifiville et les…</string>
+    <string name="ra_537166_text">Battre tous les Dresseurs dans les lieux suivants : Pacifiville et les Chenaux 130 à 134.</string>
+    <array name="ra_537166">
+        <item>537166</item>
+        <item>@string/ra_537166_title</item>
+        <item>@string/ra_537166_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_537182_title">Ramasser tous les objets visibles et cachés du Marina et de la Zone de Combat</string>
+    <string name="ra_537182_text">Ramasser tous les objets visibles et cachés du Marina et de la Zone de Combat.</string>
+    <array name="ra_537182">
+        <item>537182</item>
+        <item>@string/ra_537182_title</item>
+        <item>@string/ra_537182_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_537181_title">Battre tous les Dresseurs du Marina et de la Zone de Combat</string>
+    <string name="ra_537181_text">Battre tous les Dresseurs du Marina et de la Zone de Combat.</string>
+    <array name="ra_537181">
+        <item>537181</item>
+        <item>@string/ra_537181_title</item>
+        <item>@string/ra_537181_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <array name="achievements_9">
+        <item>@array/ra_537183</item>
+        <item>@array/ra_537203</item>
+        <item>@array/ra_27592</item>
+        <item>@array/ra_537184</item>
+        <item>@array/ra_537185</item>
+        <item>@array/ra_537126</item>
+        <item>@array/ra_537204</item>
+        <item>@array/ra_537133</item>
+        <item>@array/ra_537116</item>
+        <item>@array/ra_27596</item>
+        <item>@array/ra_537186</item>
+        <item>@array/ra_537115</item>
+        <item>@array/ra_537205</item>
+        <item>@array/ra_537206</item>
+        <item>@array/ra_537117</item>
+        <item>@array/ra_27597</item>
+        <item>@array/ra_537187</item>
+        <item>@array/ra_537214</item>
+        <item>@array/ra_537207</item>
+        <item>@array/ra_537208</item>
+        <item>@array/ra_537210</item>
+        <item>@array/ra_537188</item>
+        <item>@array/ra_537128</item>
+        <item>@array/ra_27593</item>
+        <item>@array/ra_537211</item>
+        <item>@array/ra_537212</item>
+        <item>@array/ra_537189</item>
+        <item>@array/ra_537118</item>
+        <item>@array/ra_27598</item>
+        <item>@array/ra_537213</item>
+        <item>@array/ra_537129</item>
+        <item>@array/ra_537127</item>
+        <item>@array/ra_537130</item>
+        <item>@array/ra_537215</item>
+        <item>@array/ra_537190</item>
+        <item>@array/ra_27604</item>
+        <item>@array/ra_537216</item>
+        <item>@array/ra_537217</item>
+        <item>@array/ra_537201</item>
+        <item>@array/ra_537131</item>
+        <item>@array/ra_537119</item>
+        <item>@array/ra_27599</item>
+        <item>@array/ra_57267</item>
+        <item>@array/ra_537120</item>
+        <item>@array/ra_27600</item>
+        <item>@array/ra_537218</item>
+        <item>@array/ra_57271</item>
+        <item>@array/ra_537219</item>
+        <item>@array/ra_57265</item>
+        <item>@array/ra_537200</item>
+        <item>@array/ra_27605</item>
+        <item>@array/ra_27594</item>
+        <item>@array/ra_537134</item>
+        <item>@array/ra_537220</item>
+        <item>@array/ra_537191</item>
+        <item>@array/ra_537121</item>
+        <item>@array/ra_27601</item>
+        <item>@array/ra_27595</item>
+        <item>@array/ra_537192</item>
+        <item>@array/ra_537194</item>
+        <item>@array/ra_27606</item>
+        <item>@array/ra_537195</item>
+        <item>@array/ra_27607</item>
+        <item>@array/ra_537222</item>
+        <item>@array/ra_537223</item>
+        <item>@array/ra_57272</item>
+        <item>@array/ra_537122</item>
+        <item>@array/ra_27602</item>
+        <item>@array/ra_537202</item>
+        <item>@array/ra_27608</item>
+        <item>@array/ra_537196</item>
+        <item>@array/ra_27609</item>
+        <item>@array/ra_537193</item>
+        <item>@array/ra_537233</item>
+        <item>@array/ra_537226</item>
+        <item>@array/ra_57270</item>
+        <item>@array/ra_537123</item>
+        <item>@array/ra_27603</item>
+        <item>@array/ra_537135</item>
+        <item>@array/ra_537224</item>
+        <item>@array/ra_537225</item>
+        <item>@array/ra_27621</item>
+        <item>@array/ra_27622</item>
+        <item>@array/ra_27623</item>
+        <item>@array/ra_27620</item>
+        <item>@array/ra_537197</item>
+        <item>@array/ra_27610</item>
+        <item>@array/ra_27615</item>
+        <item>@array/ra_30885</item>
+        <item>@array/ra_27618</item>
+        <item>@array/ra_27619</item>
+        <item>@array/ra_57268</item>
+        <item>@array/ra_537132</item>
+        <item>@array/ra_537228</item>
+        <item>@array/ra_537229</item>
+        <item>@array/ra_537231</item>
+        <item>@array/ra_537230</item>
+        <item>@array/ra_537235</item>
+        <item>@array/ra_537236</item>
+        <item>@array/ra_537234</item>
+        <item>@array/ra_537198</item>
+        <item>@array/ra_537136</item>
+        <item>@array/ra_537199</item>
+        <item>@array/ra_537227</item>
+        <item>@array/ra_537237</item>
+        <item>@array/ra_537238</item>
+        <item>@array/ra_537239</item>
+        <item>@array/ra_57297</item>
+        <item>@array/ra_57298</item>
+        <item>@array/ra_57285</item>
+        <item>@array/ra_57286</item>
+        <item>@array/ra_57293</item>
+        <item>@array/ra_57294</item>
+        <item>@array/ra_57289</item>
+        <item>@array/ra_57290</item>
+        <item>@array/ra_57291</item>
+        <item>@array/ra_57292</item>
+        <item>@array/ra_57287</item>
+        <item>@array/ra_57288</item>
+        <item>@array/ra_57295</item>
+        <item>@array/ra_57296</item>
+        <item>@array/ra_537240</item>
+        <item>@array/ra_27617</item>
+        <item>@array/ra_57275</item>
+        <item>@array/ra_537241</item>
+        <item>@array/ra_537242</item>
+        <item>@array/ra_537243</item>
+        <item>@array/ra_537244</item>
+        <item>@array/ra_537245</item>
+        <item>@array/ra_537246</item>
+        <item>@array/ra_537247</item>
+        <item>@array/ra_57269</item>
+        <item>@array/ra_537248</item>
+        <item>@array/ra_57276</item>
+        <item>@array/ra_57277</item>
+        <item>@array/ra_57278</item>
+        <item>@array/ra_57279</item>
+        <item>@array/ra_57280</item>
+        <item>@array/ra_57281</item>
+        <item>@array/ra_57282</item>
+        <item>@array/ra_57283</item>
+        <item>@array/ra_57284</item>
+        <item>@array/ra_537232</item>
+        <item>@array/ra_537221</item>
+        <item>@array/ra_537152</item>
+        <item>@array/ra_537125</item>
+        <item>@array/ra_537137</item>
+        <item>@array/ra_537138</item>
+        <item>@array/ra_537450</item>
+        <item>@array/ra_537249</item>
+        <item>@array/ra_537250</item>
+        <item>@array/ra_537251</item>
+        <item>@array/ra_57266</item>
+        <item>@array/ra_537124</item>
+        <item>@array/ra_537148</item>
+        <item>@array/ra_537149</item>
+        <item>@array/ra_537150</item>
+        <item>@array/ra_537151</item>
+        <item>@array/ra_537139</item>
+        <item>@array/ra_537140</item>
+        <item>@array/ra_537141</item>
+        <item>@array/ra_537142</item>
+        <item>@array/ra_537143</item>
+        <item>@array/ra_537144</item>
+        <item>@array/ra_537145</item>
+        <item>@array/ra_537146</item>
+        <item>@array/ra_537147</item>
+        <item>@array/ra_537167</item>
+        <item>@array/ra_537153</item>
+        <item>@array/ra_537168</item>
+        <item>@array/ra_537154</item>
+        <item>@array/ra_537169</item>
+        <item>@array/ra_537155</item>
+        <item>@array/ra_537170</item>
+        <item>@array/ra_537156</item>
+        <item>@array/ra_537171</item>
+        <item>@array/ra_537157</item>
+        <item>@array/ra_537172</item>
+        <item>@array/ra_537158</item>
+        <item>@array/ra_537173</item>
+        <item>@array/ra_537159</item>
+        <item>@array/ra_537174</item>
+        <item>@array/ra_537160</item>
+        <item>@array/ra_537175</item>
+        <item>@array/ra_537161</item>
+        <item>@array/ra_537176</item>
+        <item>@array/ra_537162</item>
+        <item>@array/ra_537177</item>
+        <item>@array/ra_537163</item>
+        <item>@array/ra_537178</item>
+        <item>@array/ra_537164</item>
+        <item>@array/ra_537179</item>
+        <item>@array/ra_537165</item>
+        <item>@array/ra_537180</item>
+        <item>@array/ra_537166</item>
+        <item>@array/ra_537182</item>
+        <item>@array/ra_537181</item>
+    </array>
+</resources>

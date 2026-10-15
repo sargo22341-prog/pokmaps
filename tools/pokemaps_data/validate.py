@@ -9,12 +9,18 @@ from pathlib import Path
 from .builder_pokemon import BREEDING_GENERATION
 from .games import DECLARED_GAMES, EXTERNAL_EVENT_AREAS, EXTERNAL_EVENT_LOCATIONS, EXTERNAL_EVENT_METHODS
 from .sources import DATA_DIR
+from .validate_profiles import validate_profiles
 
 # Groupe d'œufs des Pokémon qui ne se reproduisent pas (légendaires, bébés).
 _NO_EGGS = "no-eggs"
 
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
+    (
+        "objet sans description française hors CT/CS",
+        """SELECT id, identifier FROM item WHERE (description_fr IS NULL OR trim(description_fr) = '')
+           AND id NOT IN (SELECT item_id FROM machine)""",
+    ),
     (
         "quantité de Voltorbe fixe de New Lavandia invalide",
         """SELECT e.* FROM encounter e JOIN version v ON v.id = e.version_id
@@ -378,6 +384,7 @@ def validate(path: Path) -> list[str]:
             if rows:
                 errors.append(f"{description} : {rows[:5]}")
         errors += _check_obtainable(connection)
+        errors += validate_profiles(connection)
     finally:
         connection.close()
     return errors

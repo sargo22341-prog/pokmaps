@@ -79,6 +79,11 @@ android {
         unitTests.isIncludeAndroidResources = true
     }
 
+    androidResources {
+        // L'inventaire sert aux contrôles du dépôt ; l'application ne le lit pas.
+        ignoreAssetsPattern = "assets.sha256"
+    }
+
     lint {
         abortOnError = true
         checkDependencies = true

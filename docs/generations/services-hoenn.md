@@ -1,4 +1,4 @@
-# Services de Hoenn — phase 5
+# Services de Hoenn
 
 Les lecteurs des trois versions Hoenn alimentent la base Room distribuée et les fiches Android.
 La génération complète conserve les catalogues `maps/ruby-sapphire/characters.json` et
@@ -40,10 +40,8 @@ Un tarif inconnu ou ambigu arrête la lecture. Les coordonnées, versions, prove
 alternatifs restent ceux de `pret_gen3_offers.py` ; les décorations reçues par `adddecoration`
 et les jetons reçus par `addcoins` sont désormais conservés.
 
-La relecture a révélé qu'un dialogue de confirmation pouvait garder la valeur du menu précédent
-dans `VAR_RESULT`, ce qui masquait notamment le premier lot du Casino. L'analyse invalide désormais
-la réponse aux dialogues oui/non, les résultats de vérification des décorations et la variable
-écrite par `checkcoins`. Un test en mémoire couvre ce défaut.
+Le lecteur invalide les résultats des dialogues et vérifications qui écrivent `VAR_RESULT`,
+pour ne pas masquer une branche par une ancienne valeur de menu.
 
 Les tests vérifient les trois versions sur les sources locales épinglées, les objets requis,
 les sept créations du verrier, les cinq CT, les trois poupées, les achats de jetons, la Pension,

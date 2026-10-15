@@ -7,25 +7,22 @@ import org.opensources.pokmaps.domain.map.OfferCondition
 
 class ExternalEventTest {
     @Test
-    fun eventMapsIncludeTheirRoomsAndHarbors() {
-        listOf("faraway-island", "birth-island", "navel-rock", "southern-island").forEach { identifier ->
-            assertTrue(ExternalEvent.map(identifier))
-            assertTrue(ExternalEvent.map("$identifier-harbor"))
-            assertTrue(ExternalEvent.map("$identifier-top"))
-        }
-        assertFalse(ExternalEvent.map("one-island"))
-        assertFalse(ExternalEvent.map("southern-islander"))
+    fun theTextDoesNotDecideWhetherAnOfferIsAnExternalEvent() {
+        assertFalse(OfferCondition(story = listOf("Carte reçue ; événement externe")).isExternalEvent)
+        assertTrue(OfferCondition(story = listOf("Carte reçue"), isExternalEvent = true).isExternalEvent)
+        assertFalse(OfferCondition(story = listOf("Après la Ligue")).isExternalEvent)
     }
 
     @Test
-    fun externalDistributionsAndCuratedConditionsAreRecognized() {
-        assertTrue(ExternalEvent.method("colosseum-bonus-disc-jpn"))
-        assertTrue(ExternalEvent.method("colosseum-bonus-disc-us"))
-        assertTrue(ExternalEvent.method("pokemon-channel-pal"))
-        assertFalse(ExternalEvent.method("gift"))
+    fun theEditorialLabelOnlyPreventsDuplicateLabels() {
         assertTrue(ExternalEvent.mentioned("Événement externe ; Ticket Aurore"))
         assertFalse(ExternalEvent.mentioned(null))
-        assertTrue(OfferCondition(story = listOf("Carte reçue ; événement externe")).isExternalEvent)
-        assertFalse(OfferCondition(story = listOf("Après la Ligue")).isExternalEvent)
+    }
+
+    @Test
+    fun anExternalDistributionIsARestrictionWithoutAnEditorialNote() {
+        val condition = OfferCondition(isExternalEvent = true)
+        assertFalse(condition.isAlways)
+        assertTrue(condition.isExternalEvent)
     }
 }

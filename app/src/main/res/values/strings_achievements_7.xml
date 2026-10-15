@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_31199_title">Battre Brice ou Flora pour la première fois</string>
+    <string name="ra_31199_text">Battre Brice ou Flora pour la première fois.</string>
+    <array name="ra_31199">
+        <item>31199</item>
+        <item>@string/ra_31199_title</item>
+        <item>@string/ra_31199_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <string name="ra_31200_title">Battre Brice ou Flora pour la deuxième fois</string>
+    <string name="ra_31200_text">Battre Brice ou Flora pour la deuxième fois.</string>
+    <array name="ra_31200">
+        <item>31200</item>
+        <item>@string/ra_31200_title</item>
+        <item>@string/ra_31200_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_31201_title">Battre Brice ou Flora pour la troisième fois</string>
+    <string name="ra_31201_text">Battre Brice ou Flora pour la troisième fois.</string>
+    <array name="ra_31201">
+        <item>31201</item>
+        <item>@string/ra_31201_title</item>
+        <item>@string/ra_31201_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_31202_title">Battre Brice ou Flora pour la quatrième fois</string>
+    <string name="ra_31202_text">Battre Brice ou Flora pour la quatrième fois.</string>
+    <array name="ra_31202">
+        <item>31202</item>
+        <item>@string/ra_31202_title</item>
+        <item>@string/ra_31202_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_31205_title">Trouver la Master Ball dans le Repaire Magma</string>
+    <string name="ra_31205_text">Trouver la Master Ball dans le Repaire Magma.</string>
+    <array name="ra_31205">
+        <item>31205</item>
+        <item>@string/ra_31205_title</item>
+        <item>@string/ra_31205_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_31206_title">Battre Roxanne à Mérouville et obtenir le Badge Roche</string>
+    <string name="ra_31206_text">Battre Roxanne à Mérouville et obtenir le Badge Roche.</string>
+    <array name="ra_31206">
+        <item>31206</item>
+        <item>@string/ra_31206_title</item>
+        <item>@string/ra_31206_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31207_title">Battre Bastien à Myokara et obtenir le Badge Poing</string>
+    <string name="ra_31207_text">Battre Bastien à Myokara et obtenir le Badge Poing.</string>
+    <array name="ra_31207">
+        <item>31207</item>
+        <item>@string/ra_31207_title</item>
+        <item>@string/ra_31207_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31208_title">Battre Voltère à Lavandia et obtenir le Badge Dynamo</string>
+    <string name="ra_31208_text">Battre Voltère à Lavandia et obtenir le Badge Dynamo.</string>
+    <array name="ra_31208">
+        <item>31208</item>
+        <item>@string/ra_31208_title</item>
+        <item>@string/ra_31208_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31209_title">Battre Adriane à Vermilava et obtenir le Badge Chaleur</string>
+    <string name="ra_31209_text">Battre Adriane à Vermilava et obtenir le Badge Chaleur.</string>
+    <array name="ra_31209">
+        <item>31209</item>
+        <item>@string/ra_31209_title</item>
+        <item>@string/ra_31209_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31210_title">Battre Norman à Clémenti-Ville et obtenir le Badge Balancier</string>
+    <string name="ra_31210_text">Battre Norman à Clémenti-Ville et obtenir le Badge Balancier.</string>
+    <array name="ra_31210">
+        <item>31210</item>
+        <item>@string/ra_31210_title</item>
+        <item>@string/ra_31210_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31211_title">Battre Alizée à Cimetronelle et obtenir le Badge Plume</string>
+    <string name="ra_31211_text">Battre Alizée à Cimetronelle et obtenir le Badge Plume.</string>
+    <array name="ra_31211">
+        <item>31211</item>
+        <item>@string/ra_31211_title</item>
+        <item>@string/ra_31211_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31212_title">Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit</string>
+    <string name="ra_31212_text">Battre Lévy et Tatia à Algatia et obtenir le Badge Esprit.</string>
+    <array name="ra_31212">
+        <item>31212</item>
+        <item>@string/ra_31212_title</item>
+        <item>@string/ra_31212_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31213_title">Obtenir le Badge Pluie à Atalanopolis</string>
+    <string name="ra_31213_text">Obtenir le Badge Pluie à Atalanopolis.</string>
+    <array name="ra_31213">
+        <item>31213</item>
+        <item>@string/ra_31213_title</item>
+        <item>@string/ra_31213_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_31214_title">Battre Max au Mont Chimnée</string>
+    <string name="ra_31214_text">Battre Max au Mont Chimnée.</string>
+    <array name="ra_31214">
+        <item>31214</item>
+        <item>@string/ra_31214_title</item>
+        <item>@string/ra_31214_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_31215_title">Battre Courtney au Centre Météo</string>
+    <string name="ra_31215_text">Battre Courtney au Centre Météo.</string>
+    <array name="ra_31215">
+        <item>31215</item>
+        <item>@string/ra_31215_title</item>
+        <item>@string/ra_31215_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_31216_title">Battre Kelvin dans le Repaire Magma</string>
+    <string name="ra_31216_text">Battre Kelvin dans le Repaire Magma.</string>
+    <array name="ra_31216">
+        <item>31216</item>
+        <item>@string/ra_31216_title</item>
+        <item>@string/ra_31216_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_31217_title">Battre Max dans la Caverne Fondmer</string>
+    <string name="ra_31217_text">Battre Max dans la Caverne Fondmer.</string>
+    <array name="ra_31217">
+        <item>31217</item>
+        <item>@string/ra_31217_title</item>
+        <item>@string/ra_31217_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31218_title">Battre Timmy sur la Route Victoire</string>
+    <string name="ra_31218_text">Battre Timmy sur la Route Victoire.</string>
+    <array name="ra_31218">
+        <item>31218</item>
+        <item>@string/ra_31218_title</item>
+        <item>@string/ra_31218_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_31223_title">Devenir Maître de la Ligue Pokémon de Hoenn</string>
+    <string name="ra_31223_text">Devenir Maître de la Ligue Pokémon de Hoenn.</string>
+    <array name="ra_31223">
+        <item>31223</item>
+        <item>@string/ra_31223_title</item>
+        <item>@string/ra_31223_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_31224_title">Capturer Groudon</string>
+    <string name="ra_31224_text">Capturer Groudon.</string>
+    <array name="ra_31224">
+        <item>31224</item>
+        <item>@string/ra_31224_title</item>
+        <item>@string/ra_31224_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31225_title">Capturer Rayquaza</string>
+    <string name="ra_31225_text">Capturer Rayquaza.</string>
+    <array name="ra_31225">
+        <item>31225</item>
+        <item>@string/ra_31225_title</item>
+        <item>@string/ra_31225_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31226_title">Capturer Regirock</string>
+    <string name="ra_31226_text">Capturer Regirock.</string>
+    <array name="ra_31226">
+        <item>31226</item>
+        <item>@string/ra_31226_title</item>
+        <item>@string/ra_31226_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31227_title">Capturer Regice</string>
+    <string name="ra_31227_text">Capturer Regice.</string>
+    <array name="ra_31227">
+        <item>31227</item>
+        <item>@string/ra_31227_title</item>
+        <item>@string/ra_31227_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31228_title">Capturer Registeel</string>
+    <string name="ra_31228_text">Capturer Registeel.</string>
+    <array name="ra_31228">
+        <item>31228</item>
+        <item>@string/ra_31228_title</item>
+        <item>@string/ra_31228_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31229_title">Capturer Latios</string>
+    <string name="ra_31229_text">Capturer Latios.</string>
+    <array name="ra_31229">
+        <item>31229</item>
+        <item>@string/ra_31229_title</item>
+        <item>@string/ra_31229_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_91983_title">Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère</string>
+    <string name="ra_91983_text">Arrêter le générateur de New Lavandia et obtenir la récompense de Voltère.</string>
+    <array name="ra_91983">
+        <item>91983</item>
+        <item>@string/ra_91983_title</item>
+        <item>@string/ra_91983_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <string name="ra_91984_title">Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière…</string>
+    <string name="ra_91984_text">Résoudre toutes les énigmes de la Maison des Pièges et obtenir la dernière récompense.</string>
+    <array name="ra_91984">
+        <item>91984</item>
+        <item>@string/ra_91984_title</item>
+        <item>@string/ra_91984_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91985_title">Réunir les ingrédients nécessaires et faire fabriquer un Grelot Coque</string>
+    <string name="ra_91985_text">Réunir les ingrédients nécessaires et faire fabriquer un Grelot Coque.</string>
+    <array name="ra_91985">
+        <item>91985</item>
+        <item>@string/ra_91985_title</item>
+        <item>@string/ra_91985_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <string name="ra_91986_title">Rapporter le Scanner au Capitaine Poupe</string>
+    <string name="ra_91986_text">Rapporter le Scanner au Capitaine Poupe.</string>
+    <array name="ra_91986">
+        <item>91986</item>
+        <item>@string/ra_91986_title</item>
+        <item>@string/ra_91986_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91987_title">Rapporter l’Orbe Rouge à son emplacement d’origine</string>
+    <string name="ra_91987_text">Rapporter l’Orbe Rouge à son emplacement d’origine.</string>
+    <array name="ra_91987">
+        <item>91987</item>
+        <item>@string/ra_91987_title</item>
+        <item>@string/ra_91987_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_91988_title">Obtenir une Ceinture Noire</string>
+    <string name="ra_91988_text">Obtenir une Ceinture Noire.</string>
+    <array name="ra_91988">
+        <item>91988</item>
+        <item>@string/ra_91988_title</item>
+        <item>@string/ra_91988_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91989_title">Obtenir de la Poudre Argent</string>
+    <string name="ra_91989_text">Obtenir de la Poudre Argent.</string>
+    <array name="ra_91989">
+        <item>91989</item>
+        <item>@string/ra_91989_title</item>
+        <item>@string/ra_91989_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91990_title">Obtenir un Croc Dragon</string>
+    <string name="ra_91990_text">Obtenir un Croc Dragon.</string>
+    <array name="ra_91990">
+        <item>91990</item>
+        <item>@string/ra_91990_title</item>
+        <item>@string/ra_91990_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_89506_title">Obtenir toutes les CT. Les CT trouvées peuvent être utilisées ; toutes…</string>
+    <string name="ra_89506_text">Obtenir toutes les CT. Les CT trouvées peuvent être utilisées ; toutes celles qui s’achètent doivent être détenues simultanément.</string>
+    <array name="ra_89506">
+        <item>89506</item>
+        <item>@string/ra_89506_title</item>
+        <item>@string/ra_89506_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92002_title">Obtenir tous les Pokémon accessibles par don ou par échange avec un…</string>
+    <string name="ra_92002_text">Obtenir tous les Pokémon accessibles par don ou par échange avec un personnage du jeu.</string>
+    <array name="ra_92002">
+        <item>92002</item>
+        <item>@string/ra_92002_title</item>
+        <item>@string/ra_92002_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92005_title">Interagir avec tous les Pokémon fixes de Hoenn</string>
+    <string name="ra_92005_text">Interagir avec tous les Pokémon fixes de Hoenn.</string>
+    <array name="ra_92005">
+        <item>92005</item>
+        <item>@string/ra_92005_title</item>
+        <item>@string/ra_92005_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91997_title">Faire évoluer un Azurill dont le sexe change lors de l’évolution</string>
+    <string name="ra_91997_text">Faire évoluer un Azurill dont le sexe change lors de l’évolution.</string>
+    <array name="ra_91997">
+        <item>91997</item>
+        <item>@string/ra_91997_title</item>
+        <item>@string/ra_91997_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91995_title">Montrer un grand Pokémon aux deux frères qui comparent leurs records</string>
+    <string name="ra_91995_text">Montrer un grand Pokémon aux deux frères qui comparent leurs records.</string>
+    <array name="ra_91995">
+        <item>91995</item>
+        <item>@string/ra_91995_title</item>
+        <item>@string/ra_91995_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92001_title">Faire éclore un Absol connaissant Relais et engager un combat avec lui</string>
+    <string name="ra_92001_text">Faire éclore un Absol connaissant Relais et engager un combat avec lui.</string>
+    <array name="ra_92001">
+        <item>92001</item>
+        <item>@string/ra_92001_title</item>
+        <item>@string/ra_92001_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91996_title">Devenir membre du club Événement Mystère</string>
+    <string name="ra_91996_text">Devenir membre du club Événement Mystère.</string>
+    <array name="ra_91996">
+        <item>91996</item>
+        <item>@string/ra_91996_title</item>
+        <item>@string/ra_91996_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_91991_title">Compléter toute la liste Regard Dresseur</string>
+    <string name="ra_91991_text">Compléter toute la liste Regard Dresseur.</string>
+    <array name="ra_91991">
+        <item>91991</item>
+        <item>@string/ra_91991_title</item>
+        <item>@string/ra_91991_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92004_title">Gagner au moins la quatrième revanche contre Timmy sur la Route Victoire…</string>
+    <string name="ra_92004_text">Gagner au moins la quatrième revanche contre Timmy sur la Route Victoire avec un seul Pokémon, sans légendaire ni famille de Pokémon pseudo-légendaire.</string>
+    <array name="ra_92004">
+        <item>92004</item>
+        <item>@string/ra_92004_title</item>
+        <item>@string/ra_92004_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_92000_title">Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs…</string>
+    <string name="ra_92000_text">Vaincre la Ligue en une session avec six Pokémon non légendaires exclusifs à la version.</string>
+    <array name="ra_92000">
+        <item>92000</item>
+        <item>@string/ra_92000_title</item>
+        <item>@string/ra_92000_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_91992_title">Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 50</string>
+    <string name="ra_91992_text">Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 50.</string>
+    <array name="ra_91992">
+        <item>91992</item>
+        <item>@string/ra_91992_title</item>
+        <item>@string/ra_91992_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_91993_title">Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 100</string>
+    <string name="ra_91993_text">Gagner 50 combats consécutifs à la Tour de Combat en mode Niveau 100.</string>
+    <array name="ra_91993">
+        <item>91993</item>
+        <item>@string/ra_91993_title</item>
+        <item>@string/ra_91993_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_91994_title">Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes</string>
+    <string name="ra_91994_text">Gagner 100 combats consécutifs à la Tour de Combat dans l’un des deux modes.</string>
+    <array name="ra_91994">
+        <item>91994</item>
+        <item>@string/ra_91994_title</item>
+        <item>@string/ra_91994_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_91999_title">Capturer un Barpau</string>
+    <string name="ra_91999_text">Capturer un Barpau.</string>
+    <array name="ra_91999">
+        <item>91999</item>
+        <item>@string/ra_91999_title</item>
+        <item>@string/ra_91999_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_92003_title">Capturer Latios sans Master Ball</string>
+    <string name="ra_92003_text">Capturer Latios sans Master Ball.</string>
+    <array name="ra_92003">
+        <item>92003</item>
+        <item>@string/ra_92003_title</item>
+        <item>@string/ra_92003_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <string name="ra_91998_title">La collection complète de Rubis</string>
+    <string name="ra_91998_text">Obtenir les 177 espèces accessibles dans Rubis sans échange externe ni événement. Choisir une famille de partenaires et un fossile ; Latias de l’Île du Sud est exclu.</string>
+    <array name="ra_91998">
+        <item>91998</item>
+        <item>@string/ra_91998_title</item>
+        <item>@string/ra_91998_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <array name="achievements_7">
+        <item>@array/ra_31199</item>
+        <item>@array/ra_31200</item>
+        <item>@array/ra_31201</item>
+        <item>@array/ra_31202</item>
+        <item>@array/ra_31205</item>
+        <item>@array/ra_31206</item>
+        <item>@array/ra_31207</item>
+        <item>@array/ra_31208</item>
+        <item>@array/ra_31209</item>
+        <item>@array/ra_31210</item>
+        <item>@array/ra_31211</item>
+        <item>@array/ra_31212</item>
+        <item>@array/ra_31213</item>
+        <item>@array/ra_31214</item>
+        <item>@array/ra_31215</item>
+        <item>@array/ra_31216</item>
+        <item>@array/ra_31217</item>
+        <item>@array/ra_31218</item>
+        <item>@array/ra_31223</item>
+        <item>@array/ra_31224</item>
+        <item>@array/ra_31225</item>
+        <item>@array/ra_31226</item>
+        <item>@array/ra_31227</item>
+        <item>@array/ra_31228</item>
+        <item>@array/ra_31229</item>
+        <item>@array/ra_91983</item>
+        <item>@array/ra_91984</item>
+        <item>@array/ra_91985</item>
+        <item>@array/ra_91986</item>
+        <item>@array/ra_91987</item>
+        <item>@array/ra_91988</item>
+        <item>@array/ra_91989</item>
+        <item>@array/ra_91990</item>
+        <item>@array/ra_89506</item>
+        <item>@array/ra_92002</item>
+        <item>@array/ra_92005</item>
+        <item>@array/ra_91997</item>
+        <item>@array/ra_91995</item>
+        <item>@array/ra_92001</item>
+        <item>@array/ra_91996</item>
+        <item>@array/ra_91991</item>
+        <item>@array/ra_92004</item>
+        <item>@array/ra_92000</item>
+        <item>@array/ra_91992</item>
+        <item>@array/ra_91993</item>
+        <item>@array/ra_91994</item>
+        <item>@array/ra_91999</item>
+        <item>@array/ra_92003</item>
+        <item>@array/ra_91998</item>
+    </array>
+</resources>

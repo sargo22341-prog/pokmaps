@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Complète les descriptions françaises des objets et renouvelle la base en arrière-plan après une mise à jour.
+- Les Champions et le Conseil 4 de Hoenn portent leur nom, aussi dans la recherche et les liens des guides.
 - Les fiches du rival montrent une seule équipe, choisie d’un geste par votre Pokémon de départ ou, dans Jaune, vos premières victoires.
 - Corrige les équipes, revanches, dons, rencontres fixes et apprentissages de Hoenn, ainsi que les textes des guides.
 - Complète les équipes, revanches, objets tenus et dons d’Or, Argent et Cristal, et corrige leurs guides.
@@ -31,7 +33,6 @@ Voir la section publication de `README.md`.
 - La carte écarte les anciens chargements après une nouvelle sélection ou un changement de jeu.
 - Les échecs d’enregistrement des captures et favoris sont signalés et permettent de réessayer.
 - Les fiches et familles d’évolution respectent la génération du jeu choisi, notamment pour la reproduction à Johto.
-
 - Rouge, Bleu et Jaune affichent les équipes du rival selon votre Pokémon de départ ou l’Évoli du rival, et ses deux combats de la Route 22.
 - Le Souterrain de la Route 7 retrouve sa sortie et perd une Fille qui n’existe pas dans le jeu.
 - Repos, E-Coque, Lait à Boire, Lire-Esprit, Paresse et Lumi-Éclat ont les PP et la puissance de leur jeu ; Puissance Cachée n’affiche plus une puissance de 1.

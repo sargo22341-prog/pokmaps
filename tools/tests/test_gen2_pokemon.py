@@ -1,4 +1,4 @@
-"""Données Pokémon d'Or et d'Argent (phase 1 de plan_gen_2.md) : tables construites depuis PokéAPI et pret.
+"""Données Pokémon d'Or et d'Argent : tables construites depuis PokéAPI et pret.
 
 Or et Argent ne sont pas encore dans games.GAMES : leurs tables sont construites à part (gold_silver_builder),
 sans cartes, et comparées aux données de base du désassemblage pokegold.

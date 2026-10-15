@@ -18,15 +18,15 @@
         Roche ; une attaque Eau, Plante ou Combat facilite le premier badge.\n\nUn employé est ensuite
         dépouillé des biens de Devon. Suivez le voleur par la Route 116 jusqu’au Tunnel Mérazon,
         récupérez les biens et libérez le Goélise de M. Marco. Revenez à Devon pour recevoir vos missions,
-        la lettre pour Pierre et le PokéNav.\n\nCoupe vient de la maison de Mérouville et peut être utilisée
+        la lettre pour Pierre Rochard et le PokéNav.\n\nCoupe vient de la maison de Mérouville et peut être utilisée
         après le Badge Roche. Retrouvez M. Marco dans sa maison de la Route 104 : il vous conduit à Myokara,
         puis à Poivressel. Gardez la lettre et les biens jusqu’à leur remise.
     </string>
-    <string name="guide_hoenn_dewford_title">3 · Myokara, Pierre et Poivressel</string>
+    <string name="guide_hoenn_dewford_title">3 · Myokara, Pierre Rochard et Poivressel</string>
     <string name="guide_hoenn_dewford_text">
         À Myokara, le pêcheur donne la Canne. Entraînez un partenaire capable de résister au type Combat
         avant l’Arène de Bastien. Le Badge Poing autorise Flash ; un montagnard remet cette CS à l’entrée
-        de la Grotte Granite.\n\nDescendez dans la grotte et remettez la lettre à Pierre. Revenez ensuite
+        de la Grotte Granite.\n\nDescendez dans la grotte et remettez la lettre à Pierre Rochard. Revenez ensuite
         à Devon pour recevoir le Multi Exp, utile pour entraîner une nouvelle capture. Demandez à M. Marco
         de vous emmener à Poivressel.\n\nCherchez le Capitaine Poupe au chantier naval, puis au Musée
         Océanographique. Livrez les biens et battez les sbires qui interviennent. La Route 110 est alors
@@ -67,7 +67,7 @@
     <string name="guide_hoenn_fortree_text">
         Sur la Route 119, libérez l’Institut Météo des sbires. Une place libre permet de recevoir
         [[pokemon:351|Morphéo]]. Au-delà du pont, le rival vous affronte puis remet Vol.
-        Continuez jusqu’à Cimetronelle.\n\nUne présence invisible bloque l’accès à l’Arène. Cherchez Pierre
+        Continuez jusqu’à Cimetronelle.\n\nUne présence invisible bloque l’accès à l’Arène. Cherchez Pierre Rochard
         sur la Route 120 : utilisez le Devon Scope pour révéler [[pokemon:352|Kecleon]], puis revenez retirer
         l’obstacle. Préparez des attaques efficaces contre les types Vol d’Alizée ; son Badge Plume autorise Vol.
         \n\nPoursuivez par les Routes 120 et 121 vers Nénucrique. Le Parc Safari est facultatif.
@@ -88,7 +88,7 @@
     <string name="guide_hoenn_mossdeep_text">
         Lévy et Tatia livrent un combat double à l’Arène d’Algatia. Préparez deux partenaires complémentaires
         et évitez de ne compter que sur une attaque Sol : les talents et types adverses peuvent la neutraliser.
-        Le Badge Esprit autorise Plongée.\n\nDans Rubis/Saphir, Pierre remet la CS chez lui. Dans Émeraude,
+        Le Badge Esprit autorise Plongée.\n\nDans Rubis/Saphir, Pierre Rochard remet la CS chez lui. Dans Émeraude,
         aidez-le d’abord au Centre Spatial contre Magma, puis retrouvez-le dans sa maison pour Plongée.
         Utilisez les zones d’eau sombre ; les niveaux sous-marins de l’application permettent de repérer les accès.
         \n\nSur le Chenal 128, cherchez le sous-marin et remontez dans la Caverne Fondmer. Emportez Surf,
@@ -115,7 +115,7 @@
         Préparez le combat de Timmy et rejoignez la sortie nord.\n\nLa Ligue enchaîne Damien (Ténèbres),
         Spectra (Spectre), Glacia (Glace) et Aragon (Dragon), sans retour au Centre Pokémon entre les combats.
         Achetez de quoi soigner, ranimer et restaurer les PP ; répartissez les réponses aux types sur plusieurs
-        partenaires plutôt que sur une seule attaque.\n\nLe Maître est Pierre dans Rubis/Saphir, avec une
+        partenaires plutôt que sur une seule attaque.\n\nLe Maître est Pierre Rochard dans Rubis/Saphir, avec une
         équipe dominée par Roche et Acier, et Marc dans Émeraude, avec une équipe Eau. Après la victoire,
         l’enregistrement au Panthéon ouvre les activités de fin de jeu et la chasse au Pokémon errant.
     </string>
@@ -125,10 +125,10 @@
         la réponse rouge ou bleue à votre mère choisit Latias ou Latios. L’autre exige l’événement externe
         du Passe Éon : il ne constitue pas une rencontre ordinaire.\n\nDans Émeraude, Seko remet le
         Pokédex National après la Ligue. Dans Rubis/Saphir, il se débloque par un échange avec un partenaire
-        qui transmet son activation, notamment Émeraude ou Rouge Feu/Vert Feuille. Revenez chez Pierre
+        qui transmet son activation, notamment Émeraude ou Rouge Feu/Vert Feuille. Revenez chez Pierre Rochard
         à Algatia pour le [[pokemon:374|Terhal]] offert.\n\nLe bateau dessert la Tour de Combat dans
         Rubis/Saphir et la Zone de Combat dans Émeraude. Dans cette dernière, l’Institut Météo signale les
-        grottes Terra et Marine de Groudon et Kyogre ; Pierre propose aussi un combat au Site Météore.
+        grottes Terra et Marine de Groudon et Kyogre ; Pierre Rochard propose aussi un combat au Site Météore.
         Retournez au Pilier Céleste avec le Vélo Course pour ses sols fissurés et la capture de Rayquaza.
     </string>
     <string name="guide_hoenn_regis_title">Les trois golems et le Sanctuaire</string>

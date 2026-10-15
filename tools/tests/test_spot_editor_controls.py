@@ -44,9 +44,20 @@ class HoennTerrains(LocalTerrains):
         return frozenset({"underwater"}) if identifier.startswith("underwater") else frozenset({"grass", "water"})
 
 
-@pytest.fixture
-def window() -> Iterator[tk.Tk]:
+@pytest.fixture(scope="module")
+def interpreter() -> Iterator[tk.Tk]:
+    # Un seul interpréteur, comme dans l'éditeur réel : recréer Tk fragilise le chargement Tcl sous Windows.
     root = tk.Tk()
+    root.withdraw()
+    try:
+        yield root
+    finally:
+        root.destroy()
+
+
+@pytest.fixture
+def window(interpreter: tk.Tk) -> Iterator[tk.Toplevel]:
+    root = tk.Toplevel(interpreter)
     root.withdraw()
     try:
         yield root
@@ -90,7 +101,7 @@ def test_collects_all_errors_and_persists_report(tmp_path: Path) -> None:
     assert json.loads(report.read_text(encoding="utf-8")) == []
 
 
-def test_error_panel_navigates_and_removes_selected_point(window: tk.Tk) -> None:
+def test_error_panel_navigates_and_removes_selected_point(window: tk.Toplevel) -> None:
     selected: list[SpotError] = []
     removed: list[SpotError] = []
     panel = ErrorPanel(window, selected.append, removed.append)
@@ -105,7 +116,9 @@ def test_error_panel_navigates_and_removes_selected_point(window: tk.Tk) -> None
     assert removed == [error]
 
 
-def test_canvas_reports_map_coordinates_and_keeps_zoom_on_edit(window: tk.Tk, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_canvas_reports_map_coordinates_and_keeps_zoom_on_edit(
+    window: tk.Toplevel, monkeypatch: pytest.MonkeyPatch
+) -> None:
     clicks: list[tuple[float, float]] = []
     canvas = SpotCanvas(window, lambda x, y, _hit: clicks.append((x, y)))
     monkeypatch.setattr(canvas.canvas, "winfo_width", lambda: 640)
@@ -132,7 +145,7 @@ def test_canvas_reports_map_coordinates_and_keeps_zoom_on_edit(window: tk.Tk, mo
 
 
 def test_editor_opens_error_location_and_updates_report(
-    window: tk.Tk, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     report = tmp_path / "errors.json"
     monkeypatch.setattr(app, "ERROR_REPORT", report)
@@ -170,7 +183,7 @@ def test_editor_opens_error_location_and_updates_report(
     ],
 )
 def test_editor_switches_map_and_selects_matching_point_scope(
-    window: tk.Tk, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, family_id: str, groups: tuple[str, str]
+    window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, family_id: str, groups: tuple[str, str]
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
     monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
@@ -202,7 +215,7 @@ def test_editor_switches_map_and_selects_matching_point_scope(
 
 
 def test_editor_adds_a_point_only_for_the_displayed_group(
-    window: tk.Tk, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
     monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
@@ -224,7 +237,7 @@ def test_editor_adds_a_point_only_for_the_displayed_group(
 
 
 def test_editor_selects_only_existing_underwater_plans_and_restores_shared_choices(
-    window: tk.Tk, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
     monkeypatch.setattr(app, "WildTerrains", lambda _cache: HoennTerrains())

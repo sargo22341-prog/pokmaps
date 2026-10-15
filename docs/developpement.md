@@ -1,7 +1,15 @@
-# Compilation et publication
+# Compilation et vérifications
 
-Prérequis : Android SDK 37, JDK 21, Git ; Python 3.11+ pour les contrôles et la génération explicite.
-Gradle utilise Temurin 21 via `gradle/gradle-daemon-jvm.properties`.
+Prérequis : Android SDK 37, JDK 21, Git et Python 3.11+. Gradle utilise Temurin 21 via
+`gradle/gradle-daemon-jvm.properties`. Installer les dépendances Python épinglées :
+
+```powershell
+python -m pip install -r tools/requirements.txt -r tools/requirements-dev.txt
+```
+
+## Contrôles locaux
+
+Depuis la racine, lancer les contrôles correspondant à la partie modifiée :
 
 ```powershell
 .\gradlew.bat ktlintCheck checkNoGoogleServices lintDebug testDebugUnitTest assembleDebug
@@ -12,21 +20,27 @@ python -m ruff format --check .
 python -m pytest -q
 ```
 
-Le checkout contient les assets nécessaires : aucun téléchargement de contenu Pokémon ni cache de sources
-n'est requis. Les dépendances de compilation peuvent nécessiter un téléchargement.
-Les tests Compose tournent en JVM avec Robolectric ; une base manquante fait échouer les contrôles.
-Les tests `pipeline` sont séparés et se lancent après une mise à jour explicite des données.
+Le checkout fournit les assets ; seuls les outils et dépendances de compilation peuvent nécessiter
+un téléchargement. Les tests Compose utilisent Robolectric en JVM, sans appareil ni émulateur.
+Les tests `pipeline` sont exclus par défaut : les lancer après une génération explicite avec
+`python -m pytest -q -m pipeline`, depuis `tools/`. Voir le [pipeline](donnees/pipeline.md).
 
-La CI et la release vérifient les assets versionnés, sans les régénérer. Le workflow manuel
-`data-pipeline.yml` génère depuis les sources épinglées, teste puis assemble un APK debug pour mesurer sa taille.
-Son résumé indique durée de génération, taille du cache, des assets et de l'APK. Il ne publie rien.
-La CI conserve l'APK debug pendant 14 jours. La release signe uniquement avec les secrets CI.
+L’APK debug est `app/build/outputs/apk/debug/app-debug.apk`, paquet `org.opensources.pokmaps.debug`.
+Pour l’installation ADB préservant les données, suivre [AGENTS.md, §10](../AGENTS.md#10-téléphone-et-adb).
+`dependencyUpdates` liste les versions stables sans rien modifier ; toute mise à jour reste manuelle.
 
-La publication reste celle du [README](../README.md#publier-une-version) : tag `vMAJEUR.MINEUR.CORRECTIF`
-ou déclenchement manuel. Les notes françaises sous `<!-- notes -->` sont publiées puis vidées par le workflow.
-Ne jamais vider les notes manuellement, ni ajouter un keystore au dépôt.
-Le code Android vaut `MAJEUR × 10000 + MINEUR × 100 + CORRECTIF`.
+## CI et publication
 
-L'avertissement `Configuration.setVisible(boolean)` vient d'AGP et reste visible ; son origine est documentée
-au README. Il doit être réexaminé lors des mises à jour, sans baseline ni suppression globale.
-Les règles de contribution et de test sur appareil sont dans [AGENTS.md](../AGENTS.md).
+| Workflow | Rôle |
+|---|---|
+| `ci.yml` | Assets, contrôles Python et Android, tests JVM, APK debug conservé 14 jours |
+| `release.yml` | Vérifications, signature CI, APK et empreinte SHA-256 dans GitHub Releases |
+| `data-pipeline.yml` | Génération et tests des sources épinglées, mesures du cache, des assets et de l’APK |
+
+CI et release utilisent les assets versionnés sans régénération. Le workflow manuel du pipeline
+ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
+La procédure et les secrets de publication sont dans le [README](../README.md#publier-une-version).
+
+Dépréciation connue : `Configuration.setVisible(boolean)` est appelée par AGP (`BasePlugin`,
+`SourceSetManager`). Elle reste visible avec `org.gradle.warning.mode=all` ; la réexaminer lors
+des mises à jour d’AGP et avant le retrait de cette API dans Gradle 11. Aucun masquage ni baseline.

@@ -17,9 +17,9 @@ data class GameMap(
     val isWorld: Boolean = false,
     val startRegionId: Int? = null,
     /** Version du jeu affiché (ruby) : choisit les retouches propres à cette version. */
-    val versionIdentifier: String? = null
+    val versionIdentifier: String? = null,
+    val isExternalEvent: Boolean = false
 ) {
-    val isExternalEvent: Boolean get() = ExternalEvent.map(identifier)
 
     /** Chemin d'une tuile dans les assets (niveau 0 = carte entière dans une seule tuile). */
     fun tilePath(level: Int, row: Int, column: Int): String =

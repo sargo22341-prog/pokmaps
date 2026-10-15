@@ -87,7 +87,8 @@ data class EncounterRow(
     val note: String?,
     val conditions: String?,
     val conditionIdentifiers: String? = null,
-    val nonTimeConditions: String? = conditions
+    val nonTimeConditions: String? = conditions,
+    val isExternalEvent: Boolean = false
 )
 
 data class MapObjectRow(
@@ -158,7 +159,8 @@ data class NpcOfferRow(
     val wantedItemHasSprite: Boolean?,
     val timeMask: Int?,
     val weekdayMask: Int?,
-    val currency: String? = null
+    val currency: String? = null,
+    val isExternalEvent: Boolean = false
 )
 
 /** Étape du scénario qu'exige une offre (npc_offer_story), dans l'ordre de `slot`. */

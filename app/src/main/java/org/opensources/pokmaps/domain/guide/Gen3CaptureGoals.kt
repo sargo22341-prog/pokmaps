@@ -1,22 +1,35 @@
 package org.opensources.pokmaps.domain.guide
 
+import org.opensources.pokmaps.domain.model.GameVersion
+
 /** Collection sans échange externe, événement ni duplication, selon les règles de chaque cartouche. */
 object Gen3CaptureGoals {
     fun forVersion(version: Int): CaptureGoal {
-        val available = when (version) {
-            7 -> RUBY
-            8 -> SAPPHIRE
-            9 -> EMERALD
-            10 -> FIRERED
-            11 -> LEAFGREEN
-            else -> error("Version GBA inconnue : $version")
+        val available = when (GameVersion.of(version)) {
+            GameVersion.RUBY -> RUBY
+
+            GameVersion.SAPPHIRE -> SAPPHIRE
+
+            GameVersion.EMERALD -> EMERALD
+
+            GameVersion.FIRERED -> FIRERED
+
+            GameVersion.LEAFGREEN -> LEAFGREEN
+
+            GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW, GameVersion.GOLD, GameVersion.SILVER,
+            GameVersion.CRYSTAL -> error("Version GBA inconnue : $version")
         }
-        val choices = when (version) {
-            7 -> listOf(HOENN_STARTERS, FOSSILS, MOON_STONE)
-            8 -> listOf(HOENN_STARTERS, FOSSILS)
-            9 -> listOf(HOENN_STARTERS, MOON_STONE, singles(listOf(380, 381)))
-            10, 11 -> listOf(KANTO_STARTERS_AND_ROAMER, KANTO_FOSSILS)
-            else -> error("Version GBA inconnue : $version")
+        val choices = when (GameVersion.of(version)) {
+            GameVersion.RUBY -> listOf(HOENN_STARTERS, FOSSILS, MOON_STONE)
+
+            GameVersion.SAPPHIRE -> listOf(HOENN_STARTERS, FOSSILS)
+
+            GameVersion.EMERALD -> listOf(HOENN_STARTERS, MOON_STONE, singles(listOf(380, 381)))
+
+            GameVersion.FIRERED, GameVersion.LEAFGREEN -> listOf(KANTO_STARTERS_AND_ROAMER, KANTO_FOSSILS)
+
+            GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW, GameVersion.GOLD, GameVersion.SILVER,
+            GameVersion.CRYSTAL -> error("Version GBA inconnue : $version")
         }
         val selectedChoices = choices.mapNotNull { choice ->
             val options = choice.alternatives.map { it.intersect(available) }

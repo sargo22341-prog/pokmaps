@@ -50,7 +50,8 @@ import androidx.room.RoomDatabase
         TrainerPokemonEntity::class,
         NpcOfferEntity::class,
         NpcOfferStoryEntity::class,
-        MapSpotEntity::class
+        MapSpotEntity::class,
+        PokemonFormEntity::class
     ],
     version = PokedexDatabase.VERSION,
     exportSchema = true
@@ -67,7 +68,7 @@ abstract class PokedexDatabase : RoomDatabase() {
     abstract fun moveDao(): MoveDao
 
     companion object {
-        const val VERSION = 20
+        const val VERSION = 21
         const val NAME = "pokedex.db"
         const val ASSET = "database/pokedex.db"
     }

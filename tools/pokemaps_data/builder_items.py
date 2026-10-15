@@ -9,6 +9,7 @@ from functools import cached_property
 from typing import TYPE_CHECKING
 
 from .games import Game, PretFormat
+from .item_descriptions import read_item_descriptions
 from .pokeapi import FRENCH, clean_text
 from .pret_identifiers import item_identifier, species_identifier
 from .sources import DATA_DIR
@@ -165,7 +166,7 @@ class ItemTables:
             if item_id not in machines and (item_id not in best or order < best[item_id][0]):
                 best[item_id] = (order, clean_text(row["flavor_text"]))
         extra = {item.id: item.description_fr for item in self.extra_items.values()}
-        return {item_id: text for item_id, (_, text) in best.items()} | extra
+        return {item_id: text for item_id, (_, text) in best.items()} | extra | read_item_descriptions(self.ids)
 
     @cached_property
     def offer_item_ids(self) -> dict[str, int]:

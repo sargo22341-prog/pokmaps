@@ -1,15 +1,19 @@
-# Générations suivantes
+# Ajouter une génération
 
-Les générations 1 à 3 sont distribuées. Les jeux ci-dessous ne sont pas encore proposés.
-Les règles exactes seront validées par jeu lors de leur intégration.
+Seules les générations 1 à 3 sont distribuées. Les archives de succès futurs ne constituent pas une activation.
 
-| Génération | Nouvelles espèces nationales | Spécificités à distinguer |
-|---|---|---|
-| 4 | 387–493 | Catégorie physique/spéciale par attaque |
-| 5 | 494–649 | Talents cachés ; sprites Noir/Blanc actuels |
-| 6 | 650–721 | Fée ; taux chromatique de base 1/4 096 |
-| 7 | 722–809 | Formes régionales ; différences entre jeux |
-| 8 | 810–905 | Autres formes régionales et règles propres aux jeux |
-| 9 | 906–1025 | Formes et mécaniques des nouveaux jeux |
+Avant Diamant, Perle ou Platine, valider **un premier lieu DS complet**, sans ROM : image 2D hors ligne,
+coordonnées des cases, étages, collisions, passages et génération reproductible.
+Les décompilations pret `pokeplatinum` et `pokediamond` ne prouvent pas à elles seules la disponibilité
+d’un atlas compatible avec MapCompose. Aucune source de cartes DS n’est déclarée prête.
 
-Les modèles préparent talents, talents cachés, œufs et chromatiques. Le modèle Zarbi compte 28 formes à partir de la génération 3. Le tableau de provenance couvre les 1 025 espèces de la source épinglée. Au-delà de 649, aucune source de sprites n'est configurée : le pipeline exige une source choisie et validée avant d'ajouter un jeu concerné.
+`Generation`, `GameVersion` et `VersionGroup` exigent des règles explicites par jeu.
+HeartGold/SoulSilver formeront une branche distincte de Diamant/Perle/Platine.
+Les formes, événements externes et succès ont des modèles et sources éditoriales dédiés ;
+leur existence ne valide pas les règles de Sinnoh. Mesurer l’index des mentions de guides avec un vrai
+catalogue DS avant de décider de le remplacer.
+
+Points à décider lors de chaque intégration : séparation physique/spéciale par attaque en génération 4,
+talents cachés en 5, type Fée et taux chromatique en 6, formes régionales et mécaniques propres aux jeux suivants.
+Les sprites actuels couvrent une source jusqu’à l’espèce 649 ; au-delà, choisir et valider une nouvelle source.
+La [procédure d’ajout](../donnees/pipeline.md#ajouter-un-jeu) précise les fichiers et contrôles concernés.

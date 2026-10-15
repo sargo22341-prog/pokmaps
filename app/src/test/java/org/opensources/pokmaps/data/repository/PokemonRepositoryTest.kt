@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import java.io.File
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
@@ -128,6 +129,28 @@ class PokemonRepositoryTest {
     }
 
     private suspend fun sheet(game: Game, pokemonId: Int) = checkNotNull(repository.details(game, pokemonId))
+
+    @Test
+    fun databaseFormsControlDeoxysStatsAndSpritesForEveryCartridge() = runBlocking {
+        val expectedAttack = mapOf(7 to 150, 8 to 150, 9 to 95, 10 to 180, 11 to 70)
+        val games = database.gameDao().games().first().filter { it.versionId in expectedAttack }
+        assertEquals(5, games.size)
+        for (game in games) {
+            val form = game.forms.getValue(386).single()
+            assertTrue(form.isDefault)
+            val details = sheet(game, 386)
+            assertEquals(
+                expectedAttack.getValue(game.versionId),
+                details.stats.single {
+                    it.identifier == "attack"
+                }.value
+            )
+            assertEquals(
+                form.sprite(animated = true, shiny = true),
+                org.opensources.pokmaps.domain.model.Sprites.pokemon(386, true, true, game.forms)
+            )
+        }
+    }
 
     @Test
     fun deoxysLearnsetsFollowTheCartridgeForm() = runBlocking {
