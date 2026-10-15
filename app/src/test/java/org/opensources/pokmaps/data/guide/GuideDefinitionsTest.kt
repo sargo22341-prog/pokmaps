@@ -10,8 +10,7 @@ import org.opensources.pokmaps.domain.guide.Roamers
 class GuideDefinitionsTest {
     private fun allDefinitions(): List<GuideDefinition> =
         kantoGuides() + johtoGuides() + sideGuides() + tipGuides() + gbaToolGuides() +
-            hoennGuides() + hoennCalendarGuides() + hoennContentGuides() + remakeGuides() +
-            (1..11).flatMap(::achievementGuides)
+            hoennGuides() + hoennCalendarGuides() + hoennContentGuides() + remakeGuides()
 
     @Test
     fun selectingProvidersKeepsEveryDefinitionAndItsOrderForElevenGames() {
@@ -45,7 +44,7 @@ class GuideDefinitionsTest {
         }
     }
 
-    @Test(expected = IllegalStateException::class)
+    @Test(expected = IllegalArgumentException::class)
     fun unknownVersionOfAKnownGroupHasNoImplicitLibrary() {
         guideDefinitions(FakeGameDao.RED.copy(versionId = 12))
     }

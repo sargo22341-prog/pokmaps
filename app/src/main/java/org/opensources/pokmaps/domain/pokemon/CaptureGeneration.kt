@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.domain.pokemon
 
+import org.opensources.pokmaps.domain.model.Generation
+
 /** Contexte des Balls de Johto et des jeux GBA. */
 data class BallContext(
     val pokemonId: Int,
@@ -42,11 +44,10 @@ enum class CaptureGeneration {
         }
 
     companion object {
-        fun from(generation: Int): CaptureGeneration? = when (generation) {
-            1 -> GEN1
-            2 -> GEN2
-            3 -> GEN3
-            else -> null
+        fun from(generation: Int): CaptureGeneration? = when (Generation.of(generation)) {
+            Generation.GEN1 -> GEN1
+            Generation.GEN2 -> GEN2
+            Generation.GEN3 -> GEN3
         }
     }
 }

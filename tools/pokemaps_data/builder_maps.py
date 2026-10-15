@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import TYPE_CHECKING
 
+from .external_events import event_map
 from .games import Game, PretFormat, complete_families
 from .map_spots import Point, TerrainKey, read_spots, selected_key
 from .maps import GameMapData
@@ -238,6 +239,7 @@ class _ObjectRows:
                 None if condition.times == ALL_TIMES else condition.times,
                 None if condition.weekdays == ALL_WEEKDAYS else condition.weekdays,
                 offer.currency,
+                int(offer.external_event or event_map(identifier(obj.map_const))[0] is not None),
             )
         )
         phrases = tuple(dict.fromkeys((*self.story.phrases(repo, condition, where), *offer.stories)))
@@ -273,6 +275,7 @@ def _map_rows(
                 ids[row.origin] if row.origin else None,
                 ids[row.start] if row.start else None,
                 versions[row.version] if row.version else None,
+                *event_map(identifier(row.const)),
             )
         )
     areas = []

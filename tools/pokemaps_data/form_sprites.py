@@ -4,13 +4,14 @@ suivantes), Morphéo (météo) et Deoxys (forme propre à chaque jeu de la 3e g�
 Chaque forme a quatre variantes, comme les espèces : sprites/<dossier>/[shiny/]{animated,static}/<forme>.webp.
 """
 
+import csv
 from dataclasses import dataclass
 from pathlib import Path
 from string import ascii_lowercase
 
 from PIL import Image
 
-from .sources import download_all, pokeapi_sprite
+from .sources import DATA_DIR, download_all, pokeapi_sprite
 
 
 @dataclass(frozen=True)
@@ -23,16 +24,22 @@ class FormSprites:
 
 
 UNOWN = FormSprites(201, "unown", (*ascii_lowercase, "exclamation", "question"))
-# La forme normale de Morphéo et celle de Deoxys sont le sprite de l'espèce.
-CASTFORM = FormSprites(351, "castform", ("sunny", "rainy", "snowy"))
-DEOXYS = FormSprites(386, "deoxys", ("attack", "defense", "speed"))
-FORM_SPRITES = (UNOWN, CASTFORM, DEOXYS)
 _STYLES = ("", "shiny/")
 
 
 def form_sprites_of(species: set[int]) -> tuple[FormSprites, ...]:
     """Formes à embarquer pour les espèces `species`."""
-    return tuple(sprites for sprites in FORM_SPRITES if sprites.species_id in species)
+    groups: dict[tuple[int, str], list[str]] = {}
+    with (DATA_DIR / "pokemon_forms.csv").open(encoding="utf-8", newline="") as source:
+        for row in csv.DictReader(source):
+            pokemon, folder = int(row["pokemon_id"]), row["sprite_folder"]
+            if pokemon not in species or folder == "pokemon":
+                continue
+            forms = groups.setdefault((pokemon, folder), [])
+            if row["sprite_identifier"] not in forms:
+                forms.append(row["sprite_identifier"])
+    result = [UNOWN] if UNOWN.species_id in species else []
+    return tuple(result + [FormSprites(pokemon, folder, tuple(forms)) for (pokemon, folder), forms in groups.items()])
 
 
 def form_jobs(cache: Path, output: Path, sprites: FormSprites) -> list[tuple[Path, Path]]:

@@ -1,4 +1,4 @@
-"""Personnages, installations et offres d'Or et d'Argent (phase 5 de plan_gen_2.md), dans l'aperçu de tous les jeux."""
+"""Personnages, installations et offres d'Or et d'Argent, dans l'aperçu de tous les jeux."""
 
 import sqlite3
 from pathlib import Path

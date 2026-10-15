@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <item name="ra_540248_title" type="string">@string/ra_108022_title</item>
+    <string name="ra_540248_text">
+        Obtenir le Pokédex. Les Pokémon accessibles uniquement par échange externe ou glitch bloquent les succès
+        de cet ensemble.
+    </string>
+    <array name="ra_540248">
+        <item>540248</item>
+        <item>@string/ra_540248_title</item>
+        <item>@string/ra_540248_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540268_title" type="string">@string/ra_108021_title</item>
+    <item name="ra_540268_text" type="string">@string/ra_108021_text</item>
+    <array name="ra_540268">
+        <item>540268</item>
+        <item>@string/ra_540268_title</item>
+        <item>@string/ra_540268_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540258_title" type="string">@string/ra_108023_title</item>
+    <item name="ra_540258_text" type="string">@string/ra_108023_text</item>
+    <array name="ra_540258">
+        <item>540258</item>
+        <item>@string/ra_540258_title</item>
+        <item>@string/ra_540258_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540267_title" type="string">@string/ra_108020_title</item>
+    <item name="ra_540267_text" type="string">@string/ra_108020_text</item>
+    <array name="ra_540267">
+        <item>540267</item>
+        <item>@string/ra_540267_title</item>
+        <item>@string/ra_540267_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540249_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_540249_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_540249">
+        <item>540249</item>
+        <item>@string/ra_540249_title</item>
+        <item>@string/ra_540249_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_540306_title">
+        Arène de Argenta complète
+    </string>
+    <string name="ra_540306_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Argenta sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540306">
+        <item>540306</item>
+        <item>@string/ra_540306_title</item>
+        <item>@string/ra_540306_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-brock</item>
+    </array>
+    <item name="ra_540298_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_540298_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_540298">
+        <item>540298</item>
+        <item>@string/ra_540298_title</item>
+        <item>@string/ra_540298_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-brock</item>
+    </array>
+    <item name="ra_540250_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_540250_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_540250">
+        <item>540250</item>
+        <item>@string/ra_540250_title</item>
+        <item>@string/ra_540250_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_540307_title">
+        Arène de Azuria complète
+    </string>
+    <string name="ra_540307_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Azuria sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540307">
+        <item>540307</item>
+        <item>@string/ra_540307_title</item>
+        <item>@string/ra_540307_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540299_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_540299_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_540299">
+        <item>540299</item>
+        <item>@string/ra_540299_title</item>
+        <item>@string/ra_540299_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-bill</item>
+    </array>
+    <item name="ra_540251_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_540251_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_540251">
+        <item>540251</item>
+        <item>@string/ra_540251_title</item>
+        <item>@string/ra_540251_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <item name="ra_540265_title" type="string">@string/ra_108029_title</item>
+    <item name="ra_540265_text" type="string">@string/ra_108029_text</item>
+    <array name="ra_540265">
+        <item>540265</item>
+        <item>@string/ra_540265_title</item>
+        <item>@string/ra_540265_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_540308_title">
+        Arène de Carmin sur Mer complète
+    </string>
+    <string name="ra_540308_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Carmin sur Mer sans recommencer ni quitter
+        l’Arène.
+    </string>
+    <array name="ra_540308">
+        <item>540308</item>
+        <item>@string/ra_540308_title</item>
+        <item>@string/ra_540308_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540300_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_540300_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_540300">
+        <item>540300</item>
+        <item>@string/ra_540300_title</item>
+        <item>@string/ra_540300_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-ship</item>
+    </array>
+    <item name="ra_540259_title" type="string">@string/ra_108039_title</item>
+    <item name="ra_540259_text" type="string">@string/ra_108039_text</item>
+    <array name="ra_540259">
+        <item>540259</item>
+        <item>@string/ra_540259_title</item>
+        <item>@string/ra_540259_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <item name="ra_540252_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_540252_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_540252">
+        <item>540252</item>
+        <item>@string/ra_540252_title</item>
+        <item>@string/ra_540252_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_540309_title">
+        Arène de Céladopole complète
+    </string>
+    <string name="ra_540309_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Céladopole sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540309">
+        <item>540309</item>
+        <item>@string/ra_540309_title</item>
+        <item>@string/ra_540309_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540301_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_540301_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_540301">
+        <item>540301</item>
+        <item>@string/ra_540301_title</item>
+        <item>@string/ra_540301_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-celadon</item>
+    </array>
+    <item name="ra_540253_title" type="string">@string/ra_4405_title</item>
+    <item name="ra_540253_text" type="string">@string/ra_4405_text</item>
+    <array name="ra_540253">
+        <item>540253</item>
+        <item>@string/ra_540253_title</item>
+        <item>@string/ra_540253_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_540310_title">
+        Arène de Parmanie complète
+    </string>
+    <string name="ra_540310_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Parmanie sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540310">
+        <item>540310</item>
+        <item>@string/ra_540310_title</item>
+        <item>@string/ra_540310_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540302_title" type="string">@string/ra_4405_title</item>
+    <item name="ra_540302_text" type="string">@string/ra_4405_text</item>
+    <array name="ra_540302">
+        <item>540302</item>
+        <item>@string/ra_540302_title</item>
+        <item>@string/ra_540302_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-safari</item>
+    </array>
+    <item name="ra_540264_title" type="string">@string/ra_108051_title</item>
+    <item name="ra_540264_text" type="string">@string/ra_108051_text</item>
+    <array name="ra_540264">
+        <item>540264</item>
+        <item>@string/ra_540264_title</item>
+        <item>@string/ra_540264_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_540254_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_540254_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_540254">
+        <item>540254</item>
+        <item>@string/ra_540254_title</item>
+        <item>@string/ra_540254_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_540311_title">
+        Arène de Safrania complète
+    </string>
+    <string name="ra_540311_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Safrania sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540311">
+        <item>540311</item>
+        <item>@string/ra_540311_title</item>
+        <item>@string/ra_540311_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540303_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_540303_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_540303">
+        <item>540303</item>
+        <item>@string/ra_540303_title</item>
+        <item>@string/ra_540303_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_540255_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_540255_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_540255">
+        <item>540255</item>
+        <item>@string/ra_540255_title</item>
+        <item>@string/ra_540255_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_540312_title">
+        Arène de Cramois’Île complète
+    </string>
+    <string name="ra_540312_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Cramois’Île sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540312">
+        <item>540312</item>
+        <item>@string/ra_540312_title</item>
+        <item>@string/ra_540312_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <item name="ra_540304_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_540304_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_540304">
+        <item>540304</item>
+        <item>@string/ra_540304_title</item>
+        <item>@string/ra_540304_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <item name="ra_540256_title" type="string">@string/ra_4408_title</item>
+    <item name="ra_540256_text" type="string">@string/ra_4408_text</item>
+    <array name="ra_540256">
+        <item>540256</item>
+        <item>@string/ra_540256_title</item>
+        <item>@string/ra_540256_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_540313_title">
+        Arène de Jadielle complète
+    </string>
+    <string name="ra_540313_text">
+        Vaincre tous les Dresseurs et le Champion de l’Arène de Jadielle sans recommencer ni quitter l’Arène.
+    </string>
+    <array name="ra_540313">
+        <item>540313</item>
+        <item>@string/ra_540313_title</item>
+        <item>@string/ra_540313_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540305_title" type="string">@string/ra_4408_title</item>
+    <item name="ra_540305_text" type="string">@string/ra_4408_text</item>
+    <array name="ra_540305">
+        <item>540305</item>
+        <item>@string/ra_540305_title</item>
+        <item>@string/ra_540305_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-league</item>
+    </array>
+    <item name="ra_540257_title" type="string">@string/ra_4410_title</item>
+    <item name="ra_540257_text" type="string">@string/ra_4410_text</item>
+    <array name="ra_540257">
+        <item>540257</item>
+        <item>@string/ra_540257_title</item>
+        <item>@string/ra_540257_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <item name="ra_540269_title" type="string">@string/ra_108139_title</item>
+    <item name="ra_540269_text" type="string">@string/ra_108139_text</item>
+    <array name="ra_540269">
+        <item>540269</item>
+        <item>@string/ra_540269_title</item>
+        <item>@string/ra_540269_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540270_title" type="string">@string/ra_4409_title</item>
+    <item name="ra_540270_text" type="string">@string/ra_4409_text</item>
+    <array name="ra_540270">
+        <item>540270</item>
+        <item>@string/ra_540270_title</item>
+        <item>@string/ra_540270_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540273_title" type="string">@string/ra_108044_title</item>
+    <item name="ra_540273_text" type="string">@string/ra_108044_text</item>
+    <array name="ra_540273">
+        <item>540273</item>
+        <item>@string/ra_540273_title</item>
+        <item>@string/ra_540273_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540276_title" type="string">@string/ra_108037_title</item>
+    <item name="ra_540276_text" type="string">@string/ra_108037_text</item>
+    <array name="ra_540276">
+        <item>540276</item>
+        <item>@string/ra_540276_title</item>
+        <item>@string/ra_540276_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <item name="ra_540282_title" type="string">@string/ra_108027_title</item>
+    <item name="ra_540282_text" type="string">@string/ra_108027_text</item>
+    <array name="ra_540282">
+        <item>540282</item>
+        <item>@string/ra_540282_title</item>
+        <item>@string/ra_540282_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540283_title" type="string">@string/ra_108049_title</item>
+    <item name="ra_540283_text" type="string">@string/ra_108049_text</item>
+    <array name="ra_540283">
+        <item>540283</item>
+        <item>@string/ra_540283_title</item>
+        <item>@string/ra_540283_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540290_title">
+        Évolution en forêt
+    </string>
+    <string name="ra_540290_text">
+        Capturer Aspicot ou Chenipan dans la Forêt de Jade puis, sans en sortir, le faire évoluer jusqu’à
+        Dardargnan ou Papilusion.
+    </string>
+    <array name="ra_540290">
+        <item>540290</item>
+        <item>@string/ra_540290_title</item>
+        <item>@string/ra_540290_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <item name="ra_540260_title" type="string">@string/ra_4419_title</item>
+    <item name="ra_540260_text" type="string">@string/ra_4419_text</item>
+    <array name="ra_540260">
+        <item>540260</item>
+        <item>@string/ra_540260_title</item>
+        <item>@string/ra_540260_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540263_title">
+        Exclusivités Bleu
+    </string>
+    <string name="ra_540263_text">
+        Capturer tous les Pokémon exclusifs à la version Bleu.
+    </string>
+    <array name="ra_540263">
+        <item>540263</item>
+        <item>@string/ra_540263_title</item>
+        <item>@string/ra_540263_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540287_title" type="string">@string/ra_108047_title</item>
+    <item name="ra_540287_text" type="string">@string/ra_108047_text</item>
+    <array name="ra_540287">
+        <item>540287</item>
+        <item>@string/ra_540287_title</item>
+        <item>@string/ra_540287_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <item name="ra_540289_title" type="string">@string/ra_108174_title</item>
+    <item name="ra_540289_text" type="string">@string/ra_108174_text</item>
+    <array name="ra_540289">
+        <item>540289</item>
+        <item>@string/ra_540289_title</item>
+        <item>@string/ra_540289_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540292_title">
+        Pêche à Cramois’Île
+    </string>
+    <string name="ra_540292_text">
+        Capturer Magicarpe, Ptitard, Poissirène, Kokiyas, Hypotrempe et Stari à Cramois’Île dans une seule
+        session sans quitter l’île.
+    </string>
+    <array name="ra_540292">
+        <item>540292</item>
+        <item>@string/ra_540292_title</item>
+        <item>@string/ra_540292_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <item name="ra_540261_title" type="string">@string/ra_4420_title</item>
+    <item name="ra_540261_text" type="string">@string/ra_4420_text</item>
+    <array name="ra_540261">
+        <item>540261</item>
+        <item>@string/ra_540261_title</item>
+        <item>@string/ra_540261_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-legends</item>
+    </array>
+    <item name="ra_540262_title" type="string">@string/ra_4421_title</item>
+    <item name="ra_540262_text" type="string">@string/ra_4421_text</item>
+    <array name="ra_540262">
+        <item>540262</item>
+        <item>@string/ra_540262_title</item>
+        <item>@string/ra_540262_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-legends</item>
+    </array>
+    <string name="ra_540348_title">
+        Collection Bleu
+    </string>
+    <string name="ra_540348_text">
+        Capturer les 124 Pokémon disponibles dans Pokémon Bleu sans échange externe et sans acquérir d’autre
+        Pokémon par quelque méthode que ce soit.
+    </string>
+    <array name="ra_540348">
+        <item>540348</item>
+        <item>@string/ra_540348_title</item>
+        <item>@string/ra_540348_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540275_title" type="string">@string/ra_108050_title</item>
+    <item name="ra_540275_text" type="string">@string/ra_108050_text</item>
+    <array name="ra_540275">
+        <item>540275</item>
+        <item>@string/ra_540275_title</item>
+        <item>@string/ra_540275_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_540274_title" type="string">@string/ra_4416_title</item>
+    <item name="ra_540274_text" type="string">@string/ra_4416_text</item>
+    <array name="ra_540274">
+        <item>540274</item>
+        <item>@string/ra_540274_title</item>
+        <item>@string/ra_540274_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_540271_title" type="string">@string/ra_108052_title</item>
+    <item name="ra_540271_text" type="string">@string/ra_108052_text</item>
+    <array name="ra_540271">
+        <item>540271</item>
+        <item>@string/ra_540271_title</item>
+        <item>@string/ra_540271_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540272_title" type="string">@string/ra_108043_title</item>
+    <item name="ra_540272_text" type="string">@string/ra_108043_text</item>
+    <array name="ra_540272">
+        <item>540272</item>
+        <item>@string/ra_540272_title</item>
+        <item>@string/ra_540272_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540266_title" type="string">@string/ra_108066_title</item>
+    <item name="ra_540266_text" type="string">@string/ra_108066_text</item>
+    <array name="ra_540266">
+        <item>540266</item>
+        <item>@string/ra_540266_title</item>
+        <item>@string/ra_540266_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540277_title" type="string">@string/ra_108030_title</item>
+    <item name="ra_540277_text" type="string">@string/ra_108030_text</item>
+    <array name="ra_540277">
+        <item>540277</item>
+        <item>@string/ra_540277_title</item>
+        <item>@string/ra_540277_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <item name="ra_540278_title" type="string">@string/ra_108028_title</item>
+    <item name="ra_540278_text" type="string">@string/ra_108028_text</item>
+    <array name="ra_540278">
+        <item>540278</item>
+        <item>@string/ra_540278_title</item>
+        <item>@string/ra_540278_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540279_title" type="string">@string/ra_108036_title</item>
+    <item name="ra_540279_text" type="string">@string/ra_108036_text</item>
+    <array name="ra_540279">
+        <item>540279</item>
+        <item>@string/ra_540279_title</item>
+        <item>@string/ra_540279_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540280_title" type="string">@string/ra_108046_title</item>
+    <item name="ra_540280_text" type="string">@string/ra_108046_text</item>
+    <array name="ra_540280">
+        <item>540280</item>
+        <item>@string/ra_540280_title</item>
+        <item>@string/ra_540280_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <item name="ra_540281_title" type="string">@string/ra_108048_title</item>
+    <item name="ra_540281_text" type="string">@string/ra_108048_text</item>
+    <array name="ra_540281">
+        <item>540281</item>
+        <item>@string/ra_540281_title</item>
+        <item>@string/ra_540281_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <item name="ra_540284_title" type="string">@string/ra_4414_title</item>
+    <item name="ra_540284_text" type="string">@string/ra_4414_text</item>
+    <array name="ra_540284">
+        <item>540284</item>
+        <item>@string/ra_540284_title</item>
+        <item>@string/ra_540284_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <item name="ra_540285_title" type="string">@string/ra_4418_title</item>
+    <item name="ra_540285_text" type="string">@string/ra_4418_text</item>
+    <array name="ra_540285">
+        <item>540285</item>
+        <item>@string/ra_540285_title</item>
+        <item>@string/ra_540285_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_540336_title">
+        Jour de paie
+    </string>
+    <string name="ra_540336_text">
+        Produire plus de 2 000 unités d’argent en un seul combat avec Jackpot.
+    </string>
+    <array name="ra_540336">
+        <item>540336</item>
+        <item>@string/ra_540336_title</item>
+        <item>@string/ra_540336_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540286_title" type="string">@string/ra_108365_title</item>
+    <item name="ra_540286_text" type="string">@string/ra_108365_text</item>
+    <array name="ra_540286">
+        <item>540286</item>
+        <item>@string/ra_540286_title</item>
+        <item>@string/ra_540286_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_540288_title" type="string">@string/ra_108054_title</item>
+    <item name="ra_540288_text" type="string">@string/ra_108054_text</item>
+    <array name="ra_540288">
+        <item>540288</item>
+        <item>@string/ra_540288_title</item>
+        <item>@string/ra_540288_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_540291_title">
+        Prix du Casino
+    </string>
+    <string name="ra_540291_text">
+        Obtenir Porygon.
+    </string>
+    <array name="ra_540291">
+        <item>540291</item>
+        <item>@string/ra_540291_title</item>
+        <item>@string/ra_540291_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540293_title">
+        Fidélité à Bleu
+    </string>
+    <string name="ra_540293_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon exclusifs à la version Bleu.
+    </string>
+    <array name="ra_540293">
+        <item>540293</item>
+        <item>@string/ra_540293_title</item>
+        <item>@string/ra_540293_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_540294_title">
+        Équipe du Safari
+    </string>
+    <string name="ra_540294_text">
+        Vaincre la Ligue sans recommencer avec une équipe d’espèces disponibles au Parc Safari ou de leurs
+        évolutions.
+    </string>
+    <array name="ra_540294">
+        <item>540294</item>
+        <item>@string/ra_540294_title</item>
+        <item>@string/ra_540294_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_540295_title">
+        Équipe féerique
+    </string>
+    <string name="ra_540295_text">
+        Vaincre la Ligue sans recommencer avec une équipe composée uniquement de Mélofée, Mélodelfe, Rondoudou,
+        Grodoudou et/ou M. Mime. Le groupe « féerique » du succès ne correspond pas à un type de cette
+        génération.
+    </string>
+    <array name="ra_540295">
+        <item>540295</item>
+        <item>@string/ra_540295_title</item>
+        <item>@string/ra_540295_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_540296_title">
+        Potentiel d’évolution
+    </string>
+    <string name="ra_540296_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon pouvant encore évoluer.
+    </string>
+    <array name="ra_540296">
+        <item>540296</item>
+        <item>@string/ra_540296_title</item>
+        <item>@string/ra_540296_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_540297_title">
+        Équipe aquatique
+    </string>
+    <string name="ra_540297_text">
+        Vaincre la Ligue sans recommencer avec une équipe de Pokémon de type Eau.
+    </string>
+    <array name="ra_540297">
+        <item>540297</item>
+        <item>@string/ra_540297_title</item>
+        <item>@string/ra_540297_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_540314_title">
+        Échange : M. Mime
+    </string>
+    <string name="ra_540314_text">
+        Échanger Abra contre M. Mime auprès du personnage du jeu.
+    </string>
+    <array name="ra_540314">
+        <item>540314</item>
+        <item>@string/ra_540314_title</item>
+        <item>@string/ra_540314_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540315_title">
+        Échange : Nidoran♀
+    </string>
+    <string name="ra_540315_text">
+        Échanger Nidoran♂ contre Nidoran♀ auprès du personnage du jeu.
+    </string>
+    <array name="ra_540315">
+        <item>540315</item>
+        <item>@string/ra_540315_title</item>
+        <item>@string/ra_540315_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540316_title">
+        Échange : Nidorina
+    </string>
+    <string name="ra_540316_text">
+        Échanger Nidorino contre Nidorina auprès du personnage du jeu.
+    </string>
+    <array name="ra_540316">
+        <item>540316</item>
+        <item>@string/ra_540316_title</item>
+        <item>@string/ra_540316_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540317_title">
+        Échange : Excelangue
+    </string>
+    <string name="ra_540317_text">
+        Échanger Flagadoss contre Excelangue auprès du personnage du jeu.
+    </string>
+    <array name="ra_540317">
+        <item>540317</item>
+        <item>@string/ra_540317_title</item>
+        <item>@string/ra_540317_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540318_title">
+        Échange : Lippoutou
+    </string>
+    <string name="ra_540318_text">
+        Échanger Têtarte contre Lippoutou auprès du personnage du jeu.
+    </string>
+    <array name="ra_540318">
+        <item>540318</item>
+        <item>@string/ra_540318_title</item>
+        <item>@string/ra_540318_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540319_title">
+        Échange : Canarticho
+    </string>
+    <string name="ra_540319_text">
+        Échanger Piafabec contre Canarticho auprès du personnage du jeu.
+    </string>
+    <array name="ra_540319">
+        <item>540319</item>
+        <item>@string/ra_540319_title</item>
+        <item>@string/ra_540319_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540320_title">
+        Échange : Électrode
+    </string>
+    <string name="ra_540320_text">
+        Échanger Raichu contre Électrode auprès du personnage du jeu.
+    </string>
+    <array name="ra_540320">
+        <item>540320</item>
+        <item>@string/ra_540320_title</item>
+        <item>@string/ra_540320_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_540321_title">
+        Échange : Saquedeneu
+    </string>
+    <string name="ra_540321_text">
+        Échanger Mimitoss contre Saquedeneu auprès du personnage du jeu.
+    </string>
+    <array name="ra_540321">
+        <item>540321</item>
+        <item>@string/ra_540321_title</item>
+        <item>@string/ra_540321_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_540322_title">
+        Échange : Otaria
+    </string>
+    <string name="ra_540322_text">
+        Échanger Ponyta contre Otaria auprès du personnage du jeu.
+    </string>
+    <array name="ra_540322">
+        <item>540322</item>
+        <item>@string/ra_540322_title</item>
+        <item>@string/ra_540322_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_540323_title">
+        Objets des routes
+    </string>
+    <string name="ra_540323_text">
+        Ramasser tous les objets non manquables, y compris cachés, des Routes 4, 9, 10, 11, 12, 13, 17, 23 et
+        25.
+    </string>
+    <array name="ra_540323">
+        <item>540323</item>
+        <item>@string/ra_540323_title</item>
+        <item>@string/ra_540323_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540324_title">
+        Objets des grottes
+    </string>
+    <string name="ra_540324_text">
+        Ramasser tous les objets non manquables, y compris cachés, de la Caverne Azurée, du Manoir Pokémon, du
+        Mont Sélénite et des Îles Écume.
+    </string>
+    <array name="ra_540324">
+        <item>540324</item>
+        <item>@string/ra_540324_title</item>
+        <item>@string/ra_540324_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_540325_title">
+        Objets des bâtiments
+    </string>
+    <string name="ra_540325_text">
+        Ramasser tous les objets non manquables, y compris cachés, des deux Souterrains, de la Sylphe SARL et de
+        la Centrale.
+    </string>
+    <array name="ra_540325">
+        <item>540325</item>
+        <item>@string/ra_540325_title</item>
+        <item>@string/ra_540325_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_540326_title">
+        Objets des excursions
+    </string>
+    <string name="ra_540326_text">
+        Ramasser tous les objets non manquables, y compris cachés, de la Forêt de Jade, du Parc Safari, de la
+        Tour Pokémon et de la Route Victoire.
+    </string>
+    <array name="ra_540326">
+        <item>540326</item>
+        <item>@string/ra_540326_title</item>
+        <item>@string/ra_540326_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_540327_title">
+        Objets des villes
+    </string>
+    <string name="ra_540327_text">
+        Ramasser tous les objets non manquables, y compris cachés, d’Azuria, Carmin sur Mer, Céladopole,
+        Jadielle, Safrania et Parmanie.
+    </string>
+    <array name="ra_540327">
+        <item>540327</item>
+        <item>@string/ra_540327_title</item>
+        <item>@string/ra_540327_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540328_title">
+        Dresseurs des premiers pas
+    </string>
+    <string name="ra_540328_text">
+        Vaincre tous les Dresseurs non manquables de la Forêt de Jade, de la Route 3, du Mont Sélénite et de la
+        Route 4.
+    </string>
+    <array name="ra_540328">
+        <item>540328</item>
+        <item>@string/ra_540328_title</item>
+        <item>@string/ra_540328_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_540329_title">
+        Dresseurs du milieu
+    </string>
+    <string name="ra_540329_text">
+        Vaincre tous les Dresseurs non manquables des Routes 24, 25 et 6.
+    </string>
+    <array name="ra_540329">
+        <item>540329</item>
+        <item>@string/ra_540329_title</item>
+        <item>@string/ra_540329_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540330_title">
+        Dresseurs de l’est
+    </string>
+    <string name="ra_540330_text">
+        Vaincre tous les Dresseurs non manquables des Routes 11, 9 et 10.
+    </string>
+    <array name="ra_540330">
+        <item>540330</item>
+        <item>@string/ra_540330_title</item>
+        <item>@string/ra_540330_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540331_title">
+        Dresseurs dans l’ombre
+    </string>
+    <string name="ra_540331_text">
+        Vaincre tous les Dresseurs non manquables de la Grotte, de la Route 8 et de la Tour Pokémon.
+    </string>
+    <array name="ra_540331">
+        <item>540331</item>
+        <item>@string/ra_540331_title</item>
+        <item>@string/ra_540331_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-rock</item>
+    </array>
+    <string name="ra_540332_title">
+        Dresseurs des chemins
+    </string>
+    <string name="ra_540332_text">
+        Vaincre tous les Dresseurs non manquables des Routes 12, 13, 14 et 15.
+    </string>
+    <array name="ra_540332">
+        <item>540332</item>
+        <item>@string/ra_540332_title</item>
+        <item>@string/ra_540332_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540333_title">
+        Dresseurs de la Piste Cyclable
+    </string>
+    <string name="ra_540333_text">
+        Vaincre tous les Dresseurs non manquables des Routes 16, 17 et 18.
+    </string>
+    <array name="ra_540333">
+        <item>540333</item>
+        <item>@string/ra_540333_title</item>
+        <item>@string/ra_540333_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540334_title">
+        Dresseurs des mers
+    </string>
+    <string name="ra_540334_text">
+        Vaincre tous les Dresseurs non manquables des Routes 19 et 20.
+    </string>
+    <array name="ra_540334">
+        <item>540334</item>
+        <item>@string/ra_540334_title</item>
+        <item>@string/ra_540334_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_540335_title">
+        Derniers Dresseurs
+    </string>
+    <string name="ra_540335_text">
+        Vaincre tous les Dresseurs non manquables du Manoir Pokémon, de la Route 21 et de la Route Victoire.
+    </string>
+    <array name="ra_540335">
+        <item>540335</item>
+        <item>@string/ra_540335_title</item>
+        <item>@string/ra_540335_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <array name="achievements_2">
+        <item>@array/ra_540248</item>
+        <item>@array/ra_540268</item>
+        <item>@array/ra_540258</item>
+        <item>@array/ra_540267</item>
+        <item>@array/ra_540249</item>
+        <item>@array/ra_540306</item>
+        <item>@array/ra_540298</item>
+        <item>@array/ra_540250</item>
+        <item>@array/ra_540307</item>
+        <item>@array/ra_540299</item>
+        <item>@array/ra_540251</item>
+        <item>@array/ra_540265</item>
+        <item>@array/ra_540308</item>
+        <item>@array/ra_540300</item>
+        <item>@array/ra_540259</item>
+        <item>@array/ra_540252</item>
+        <item>@array/ra_540309</item>
+        <item>@array/ra_540301</item>
+        <item>@array/ra_540253</item>
+        <item>@array/ra_540310</item>
+        <item>@array/ra_540302</item>
+        <item>@array/ra_540264</item>
+        <item>@array/ra_540254</item>
+        <item>@array/ra_540311</item>
+        <item>@array/ra_540303</item>
+        <item>@array/ra_540255</item>
+        <item>@array/ra_540312</item>
+        <item>@array/ra_540304</item>
+        <item>@array/ra_540256</item>
+        <item>@array/ra_540313</item>
+        <item>@array/ra_540305</item>
+        <item>@array/ra_540257</item>
+        <item>@array/ra_540269</item>
+        <item>@array/ra_540270</item>
+        <item>@array/ra_540273</item>
+        <item>@array/ra_540276</item>
+        <item>@array/ra_540282</item>
+        <item>@array/ra_540283</item>
+        <item>@array/ra_540290</item>
+        <item>@array/ra_540260</item>
+        <item>@array/ra_540263</item>
+        <item>@array/ra_540287</item>
+        <item>@array/ra_540289</item>
+        <item>@array/ra_540292</item>
+        <item>@array/ra_540261</item>
+        <item>@array/ra_540262</item>
+        <item>@array/ra_540348</item>
+        <item>@array/ra_540275</item>
+        <item>@array/ra_540274</item>
+        <item>@array/ra_540271</item>
+        <item>@array/ra_540272</item>
+        <item>@array/ra_540266</item>
+        <item>@array/ra_540277</item>
+        <item>@array/ra_540278</item>
+        <item>@array/ra_540279</item>
+        <item>@array/ra_540280</item>
+        <item>@array/ra_540281</item>
+        <item>@array/ra_540284</item>
+        <item>@array/ra_540285</item>
+        <item>@array/ra_540336</item>
+        <item>@array/ra_540286</item>
+        <item>@array/ra_540288</item>
+        <item>@array/ra_540291</item>
+        <item>@array/ra_540293</item>
+        <item>@array/ra_540294</item>
+        <item>@array/ra_540295</item>
+        <item>@array/ra_540296</item>
+        <item>@array/ra_540297</item>
+        <item>@array/ra_540314</item>
+        <item>@array/ra_540315</item>
+        <item>@array/ra_540316</item>
+        <item>@array/ra_540317</item>
+        <item>@array/ra_540318</item>
+        <item>@array/ra_540319</item>
+        <item>@array/ra_540320</item>
+        <item>@array/ra_540321</item>
+        <item>@array/ra_540322</item>
+        <item>@array/ra_540323</item>
+        <item>@array/ra_540324</item>
+        <item>@array/ra_540325</item>
+        <item>@array/ra_540326</item>
+        <item>@array/ra_540327</item>
+        <item>@array/ra_540328</item>
+        <item>@array/ra_540329</item>
+        <item>@array/ra_540330</item>
+        <item>@array/ra_540331</item>
+        <item>@array/ra_540332</item>
+        <item>@array/ra_540333</item>
+        <item>@array/ra_540334</item>
+        <item>@array/ra_540335</item>
+    </array>
+</resources>

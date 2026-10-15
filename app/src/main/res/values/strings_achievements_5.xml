@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <item name="ra_5113_title" type="string">@string/ra_5086_title</item>
+    <item name="ra_5113_text" type="string">@string/ra_5086_text</item>
+    <array name="ra_5113">
+        <item>5113</item>
+        <item>@string/ra_5113_title</item>
+        <item>@string/ra_5113_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_5097_title" type="string">@string/ra_5070_title</item>
+    <item name="ra_5097_text" type="string">@string/ra_5070_text</item>
+    <array name="ra_5097">
+        <item>5097</item>
+        <item>@string/ra_5097_title</item>
+        <item>@string/ra_5097_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-violet</item>
+    </array>
+    <item name="ra_163143_title" type="string">@string/ra_155162_title</item>
+    <item name="ra_163143_text" type="string">@string/ra_155162_text</item>
+    <array name="ra_163143">
+        <item>163143</item>
+        <item>@string/ra_163143_title</item>
+        <item>@string/ra_163143_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-violet</item>
+    </array>
+    <string name="ra_163144_title">
+        Albert : équipe Vol
+    </string>
+    <string name="ra_163144_text">
+        Vaincre Albert en mode Défini, au niveau 9 maximum Utiliser uniquement des Pokémon de type Vol.
+    </string>
+    <array name="ra_163144">
+        <item>163144</item>
+        <item>@string/ra_163144_title</item>
+        <item>@string/ra_163144_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-violet</item>
+    </array>
+    <item name="ra_5118_title" type="string">@string/ra_5092_title</item>
+    <item name="ra_5118_text" type="string">@string/ra_5092_text</item>
+    <array name="ra_5118">
+        <item>5118</item>
+        <item>@string/ra_5118_title</item>
+        <item>@string/ra_5118_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_5098_title" type="string">@string/ra_5071_title</item>
+    <item name="ra_5098_text" type="string">@string/ra_5071_text</item>
+    <array name="ra_5098">
+        <item>5098</item>
+        <item>@string/ra_5098_title</item>
+        <item>@string/ra_5098_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_163145_title" type="string">@string/ra_155163_title</item>
+    <item name="ra_163145_text" type="string">@string/ra_155163_text</item>
+    <array name="ra_163145">
+        <item>163145</item>
+        <item>@string/ra_163145_title</item>
+        <item>@string/ra_163145_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-azalea</item>
+    </array>
+    <string name="ra_163146_title">
+        Hector : équipe Insecte
+    </string>
+    <string name="ra_163146_text">
+        Vaincre Hector en mode Défini, au niveau 16 maximum Utiliser uniquement des Pokémon de type Insecte.
+    </string>
+    <array name="ra_163146">
+        <item>163146</item>
+        <item>@string/ra_163146_title</item>
+        <item>@string/ra_163146_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_5099_title" type="string">@string/ra_5072_title</item>
+    <item name="ra_5099_text" type="string">@string/ra_5072_text</item>
+    <array name="ra_5099">
+        <item>5099</item>
+        <item>@string/ra_5099_title</item>
+        <item>@string/ra_5099_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <item name="ra_163147_title" type="string">@string/ra_155168_title</item>
+    <item name="ra_163147_text" type="string">@string/ra_155168_text</item>
+    <array name="ra_163147">
+        <item>163147</item>
+        <item>@string/ra_163147_title</item>
+        <item>@string/ra_163147_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <string name="ra_163148_title">
+        Blanche : équipe Normal
+    </string>
+    <string name="ra_163148_text">
+        Vaincre Blanche en mode Défini, au niveau 20 maximum Utiliser uniquement des Pokémon de type Normal.
+    </string>
+    <array name="ra_163148">
+        <item>163148</item>
+        <item>@string/ra_163148_title</item>
+        <item>@string/ra_163148_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <item name="ra_5100_title" type="string">@string/ra_5073_title</item>
+    <item name="ra_5100_text" type="string">@string/ra_5073_text</item>
+    <array name="ra_5100">
+        <item>5100</item>
+        <item>@string/ra_5100_title</item>
+        <item>@string/ra_5100_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <item name="ra_163149_title" type="string">@string/ra_155170_title</item>
+    <item name="ra_163149_text" type="string">@string/ra_155170_text</item>
+    <array name="ra_163149">
+        <item>163149</item>
+        <item>@string/ra_163149_title</item>
+        <item>@string/ra_163149_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <string name="ra_163150_title">
+        Mortimer : équipe Spectre/Ténèbres
+    </string>
+    <string name="ra_163150_text">
+        Vaincre Mortimer en mode Défini, au niveau 25 maximum Utiliser uniquement des Pokémon de type
+        Spectre/Ténèbres.
+    </string>
+    <array name="ra_163150">
+        <item>163150</item>
+        <item>@string/ra_163150_title</item>
+        <item>@string/ra_163150_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <item name="ra_5101_title" type="string">@string/ra_5074_title</item>
+    <item name="ra_5101_text" type="string">@string/ra_5074_text</item>
+    <array name="ra_5101">
+        <item>5101</item>
+        <item>@string/ra_5101_title</item>
+        <item>@string/ra_5101_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_163153_title" type="string">@string/ra_155173_title</item>
+    <item name="ra_163153_text" type="string">@string/ra_155173_text</item>
+    <array name="ra_163153">
+        <item>163153</item>
+        <item>@string/ra_163153_title</item>
+        <item>@string/ra_163153_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_163154_title">
+        Chuck : équipe Combat
+    </string>
+    <string name="ra_163154_text">
+        Vaincre Chuck en mode Défini, au niveau 30 maximum Utiliser uniquement des Pokémon de type Combat.
+    </string>
+    <array name="ra_163154">
+        <item>163154</item>
+        <item>@string/ra_163154_title</item>
+        <item>@string/ra_163154_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_5102_title" type="string">@string/ra_5075_title</item>
+    <item name="ra_5102_text" type="string">@string/ra_5075_text</item>
+    <array name="ra_5102">
+        <item>5102</item>
+        <item>@string/ra_5102_title</item>
+        <item>@string/ra_5102_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_163151_title" type="string">@string/ra_155174_title</item>
+    <item name="ra_163151_text" type="string">@string/ra_155174_text</item>
+    <array name="ra_163151">
+        <item>163151</item>
+        <item>@string/ra_163151_title</item>
+        <item>@string/ra_163151_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_163152_title">
+        Jasmine : équipe Acier
+    </string>
+    <string name="ra_163152_text">
+        Vaincre Jasmine en mode Défini, au niveau 35 maximum Utiliser uniquement des Pokémon de type Acier.
+    </string>
+    <array name="ra_163152">
+        <item>163152</item>
+        <item>@string/ra_163152_title</item>
+        <item>@string/ra_163152_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <item name="ra_5119_title" type="string">@string/ra_5093_title</item>
+    <item name="ra_5119_text" type="string">@string/ra_5093_text</item>
+    <array name="ra_5119">
+        <item>5119</item>
+        <item>@string/ra_5119_title</item>
+        <item>@string/ra_5119_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-mahogany</item>
+    </array>
+    <item name="ra_5103_title" type="string">@string/ra_5076_title</item>
+    <item name="ra_5103_text" type="string">@string/ra_5076_text</item>
+    <array name="ra_5103">
+        <item>5103</item>
+        <item>@string/ra_5103_title</item>
+        <item>@string/ra_5103_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-mahogany</item>
+    </array>
+    <item name="ra_163155_title" type="string">@string/ra_155175_title</item>
+    <item name="ra_163155_text" type="string">@string/ra_155175_text</item>
+    <array name="ra_163155">
+        <item>163155</item>
+        <item>@string/ra_163155_title</item>
+        <item>@string/ra_163155_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-mahogany</item>
+    </array>
+    <string name="ra_163156_title">
+        Frédo : équipe Glace
+    </string>
+    <string name="ra_163156_text">
+        Vaincre Frédo en mode Défini, au niveau 31 maximum Utiliser uniquement des Pokémon de type Glace.
+    </string>
+    <array name="ra_163156">
+        <item>163156</item>
+        <item>@string/ra_163156_title</item>
+        <item>@string/ra_163156_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-mahogany</item>
+    </array>
+    <item name="ra_5498_title" type="string">@string/ra_5497_title</item>
+    <item name="ra_5498_text" type="string">@string/ra_5497_text</item>
+    <array name="ra_5498">
+        <item>5498</item>
+        <item>@string/ra_5498_title</item>
+        <item>@string/ra_5498_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-radio</item>
+    </array>
+    <item name="ra_5104_title" type="string">@string/ra_5077_title</item>
+    <item name="ra_5104_text" type="string">@string/ra_5077_text</item>
+    <array name="ra_5104">
+        <item>5104</item>
+        <item>@string/ra_5104_title</item>
+        <item>@string/ra_5104_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <item name="ra_163157_title" type="string">@string/ra_155176_title</item>
+    <item name="ra_163157_text" type="string">@string/ra_155176_text</item>
+    <array name="ra_163157">
+        <item>163157</item>
+        <item>@string/ra_163157_title</item>
+        <item>@string/ra_163157_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_163158_title">
+        Sandra : équipe Dragon
+    </string>
+    <string name="ra_163158_text">
+        Vaincre Sandra en mode Défini, au niveau 40 maximum Utiliser uniquement des Pokémon de type Dragon.
+    </string>
+    <array name="ra_163158">
+        <item>163158</item>
+        <item>@string/ra_163158_title</item>
+        <item>@string/ra_163158_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <item name="ra_5114_title" type="string">@string/ra_5087_title</item>
+    <item name="ra_5114_text" type="string">@string/ra_5087_text</item>
+    <array name="ra_5114">
+        <item>5114</item>
+        <item>@string/ra_5114_title</item>
+        <item>@string/ra_5114_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <item name="ra_5116_title" type="string">@string/ra_5089_title</item>
+    <item name="ra_5116_text" type="string">@string/ra_5089_text</item>
+    <array name="ra_5116">
+        <item>5116</item>
+        <item>@string/ra_5116_title</item>
+        <item>@string/ra_5116_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-hooh</item>
+    </array>
+    <item name="ra_5117_title" type="string">@string/ra_5091_title</item>
+    <item name="ra_5117_text" type="string">@string/ra_5091_text</item>
+    <array name="ra_5117">
+        <item>5117</item>
+        <item>@string/ra_5117_title</item>
+        <item>@string/ra_5117_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-alph</item>
+    </array>
+    <item name="ra_5520_title" type="string">@string/ra_5509_title</item>
+    <item name="ra_5520_text" type="string">@string/ra_5509_text</item>
+    <array name="ra_5520">
+        <item>5520</item>
+        <item>@string/ra_5520_title</item>
+        <item>@string/ra_5520_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <item name="ra_5521_title" type="string">@string/ra_4422_title</item>
+    <item name="ra_5521_text" type="string">@string/ra_5511_text</item>
+    <array name="ra_5521">
+        <item>5521</item>
+        <item>@string/ra_5521_title</item>
+        <item>@string/ra_5521_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <item name="ra_5105_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_5105_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_5105">
+        <item>5105</item>
+        <item>@string/ra_5105_title</item>
+        <item>@string/ra_5105_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163169_title" type="string">@string/ra_155190_title</item>
+    <item name="ra_163169_text" type="string">@string/ra_155190_text</item>
+    <array name="ra_163169">
+        <item>163169</item>
+        <item>@string/ra_163169_title</item>
+        <item>@string/ra_163169_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163170_title">
+        Pierre : équipe Roche
+    </string>
+    <string name="ra_163170_text">
+        Vaincre Pierre en mode Défini, au niveau 44 maximum Utiliser uniquement des Pokémon de type Roche.
+    </string>
+    <array name="ra_163170">
+        <item>163170</item>
+        <item>@string/ra_163170_title</item>
+        <item>@string/ra_163170_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5106_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_5106_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_5106">
+        <item>5106</item>
+        <item>@string/ra_5106_title</item>
+        <item>@string/ra_5106_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163167_title" type="string">@string/ra_155187_title</item>
+    <item name="ra_163167_text" type="string">@string/ra_155187_text</item>
+    <array name="ra_163167">
+        <item>163167</item>
+        <item>@string/ra_163167_title</item>
+        <item>@string/ra_163167_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163168_title">
+        Ondine : équipe Eau
+    </string>
+    <string name="ra_163168_text">
+        Vaincre Ondine en mode Défini, au niveau 47 maximum Utiliser uniquement des Pokémon de type Eau.
+    </string>
+    <array name="ra_163168">
+        <item>163168</item>
+        <item>@string/ra_163168_title</item>
+        <item>@string/ra_163168_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5107_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_5107_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_5107">
+        <item>5107</item>
+        <item>@string/ra_5107_title</item>
+        <item>@string/ra_5107_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163165_title" type="string">@string/ra_155181_title</item>
+    <item name="ra_163165_text" type="string">@string/ra_155181_text</item>
+    <array name="ra_163165">
+        <item>163165</item>
+        <item>@string/ra_163165_title</item>
+        <item>@string/ra_163165_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163166_title">
+        Major Bob : équipe Électrik
+    </string>
+    <string name="ra_163166_text">
+        Vaincre Major Bob en mode Défini, au niveau 46 maximum Utiliser uniquement des Pokémon de type Électrik.
+    </string>
+    <array name="ra_163166">
+        <item>163166</item>
+        <item>@string/ra_163166_title</item>
+        <item>@string/ra_163166_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5108_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_5108_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_5108">
+        <item>5108</item>
+        <item>@string/ra_5108_title</item>
+        <item>@string/ra_5108_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163173_title" type="string">@string/ra_155183_title</item>
+    <item name="ra_163173_text" type="string">@string/ra_155183_text</item>
+    <array name="ra_163173">
+        <item>163173</item>
+        <item>@string/ra_163173_title</item>
+        <item>@string/ra_163173_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163174_title">
+        Érika : équipe Plante
+    </string>
+    <string name="ra_163174_text">
+        Vaincre Érika en mode Défini, au niveau 46 maximum Utiliser uniquement des Pokémon de type Plante.
+    </string>
+    <array name="ra_163174">
+        <item>163174</item>
+        <item>@string/ra_163174_title</item>
+        <item>@string/ra_163174_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5109_title" type="string">@string/ra_4405_title</item>
+    <item name="ra_5109_text" type="string">@string/ra_5082_text</item>
+    <array name="ra_5109">
+        <item>5109</item>
+        <item>@string/ra_5109_title</item>
+        <item>@string/ra_5109_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163171_title" type="string">@string/ra_155184_title</item>
+    <item name="ra_163171_text" type="string">@string/ra_155184_text</item>
+    <array name="ra_163171">
+        <item>163171</item>
+        <item>@string/ra_163171_title</item>
+        <item>@string/ra_163171_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163172_title">
+        Jeannine : équipe Poison
+    </string>
+    <string name="ra_163172_text">
+        Vaincre Jeannine en mode Défini, au niveau 39 maximum Utiliser uniquement des Pokémon de type Poison.
+    </string>
+    <array name="ra_163172">
+        <item>163172</item>
+        <item>@string/ra_163172_title</item>
+        <item>@string/ra_163172_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5110_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_5110_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_5110">
+        <item>5110</item>
+        <item>@string/ra_5110_title</item>
+        <item>@string/ra_5110_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163163_title">
+        Morgane : équipe Psy
+    </string>
+    <string name="ra_163163_text">
+        Vaincre Morgane en mode Défini, au niveau 48 maximum Utiliser uniquement des Pokémon de type Psy.
+    </string>
+    <array name="ra_163163">
+        <item>163163</item>
+        <item>@string/ra_163163_title</item>
+        <item>@string/ra_163163_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163164_title" type="string">@string/ra_155182_title</item>
+    <item name="ra_163164_text" type="string">@string/ra_155182_text</item>
+    <array name="ra_163164">
+        <item>163164</item>
+        <item>@string/ra_163164_title</item>
+        <item>@string/ra_163164_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5111_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_5111_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_5111">
+        <item>5111</item>
+        <item>@string/ra_5111_title</item>
+        <item>@string/ra_5111_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163175_title" type="string">@string/ra_155191_title</item>
+    <item name="ra_163175_text" type="string">@string/ra_155191_text</item>
+    <array name="ra_163175">
+        <item>163175</item>
+        <item>@string/ra_163175_title</item>
+        <item>@string/ra_163175_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163176_title">
+        Auguste : équipe Feu
+    </string>
+    <string name="ra_163176_text">
+        Vaincre Auguste en mode Défini, au niveau 50 maximum Utiliser uniquement des Pokémon de type Feu.
+    </string>
+    <array name="ra_163176">
+        <item>163176</item>
+        <item>@string/ra_163176_title</item>
+        <item>@string/ra_163176_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5112_title" type="string">@string/ra_4408_title</item>
+    <item name="ra_5112_text" type="string">@string/ra_5085_text</item>
+    <array name="ra_5112">
+        <item>5112</item>
+        <item>@string/ra_5112_title</item>
+        <item>@string/ra_5112_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163187_title">
+        Équipe improbable
+    </string>
+    <string name="ra_163187_text">
+        Vaincre Blue avec une équipe de Cadoizo, Corayon, Excelangue, Capumain, Canarticho et Onix, en mode
+        Défini et au niveau 58 maximum.
+    </string>
+    <array name="ra_163187">
+        <item>163187</item>
+        <item>@string/ra_163187_title</item>
+        <item>@string/ra_163187_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163188_title" type="string">@string/ra_155192_title</item>
+    <item name="ra_163188_text" type="string">@string/ra_155192_text</item>
+    <array name="ra_163188">
+        <item>163188</item>
+        <item>@string/ra_163188_title</item>
+        <item>@string/ra_163188_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5115_title" type="string">@string/ra_5088_title</item>
+    <item name="ra_5115_text" type="string">@string/ra_5088_text</item>
+    <array name="ra_5115">
+        <item>5115</item>
+        <item>@string/ra_5115_title</item>
+        <item>@string/ra_5115_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-legends</item>
+    </array>
+    <item name="ra_5525_title" type="string">@string/ra_5523_title</item>
+    <item name="ra_5525_text" type="string">@string/ra_5523_text</item>
+    <array name="ra_5525">
+        <item>5525</item>
+        <item>@string/ra_5525_title</item>
+        <item>@string/ra_5525_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <item name="ra_5526_title" type="string">@string/ra_5524_title</item>
+    <item name="ra_5526_text" type="string">@string/ra_5524_text</item>
+    <array name="ra_5526">
+        <item>5526</item>
+        <item>@string/ra_5526_title</item>
+        <item>@string/ra_5526_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_163177_title">
+        Collection de poupées
+    </string>
+    <string name="ra_163177_text">
+        Posséder les quatre poupées achetées par la mère pour la chambre.
+    </string>
+    <array name="ra_163177">
+        <item>163177</item>
+        <item>@string/ra_163177_title</item>
+        <item>@string/ra_163177_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_163189_title">
+        Carnet de contacts
+    </string>
+    <string name="ra_163189_text">
+        Remplir les dix emplacements de numéros de téléphone.
+    </string>
+    <array name="ra_163189">
+        <item>163189</item>
+        <item>@string/ra_163189_title</item>
+        <item>@string/ra_163189_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_163162_title">
+        Objets cachés : quart
+    </string>
+    <string name="ra_163162_text">
+        Trouver 25 % des objets cachés de Johto et Kanto.
+    </string>
+    <array name="ra_163162">
+        <item>163162</item>
+        <item>@string/ra_163162_title</item>
+        <item>@string/ra_163162_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163160_title" type="string">@string/ra_155199_title</item>
+    <item name="ra_163160_text" type="string">@string/ra_155199_text</item>
+    <array name="ra_163160">
+        <item>163160</item>
+        <item>@string/ra_163160_title</item>
+        <item>@string/ra_163160_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_163161_title" type="string">@string/ra_155200_title</item>
+    <item name="ra_163161_text" type="string">@string/ra_155200_text</item>
+    <array name="ra_163161">
+        <item>163161</item>
+        <item>@string/ra_163161_title</item>
+        <item>@string/ra_163161_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_163178_title">
+        CT à moitié trouvées
+    </string>
+    <string name="ra_163178_text">
+        Trouver la moitié des CT du terrain et de celles offertes par les personnages.
+    </string>
+    <array name="ra_163178">
+        <item>163178</item>
+        <item>@string/ra_163178_title</item>
+        <item>@string/ra_163178_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163159_title" type="string">@string/ra_155196_title</item>
+    <item name="ra_163159_text" type="string">@string/ra_155196_text</item>
+    <array name="ra_163159">
+        <item>163159</item>
+        <item>@string/ra_163159_title</item>
+        <item>@string/ra_163159_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163185_title" type="string">@string/ra_155167_title</item>
+    <item name="ra_163185_text" type="string">@string/ra_155167_text</item>
+    <array name="ra_163185">
+        <item>163185</item>
+        <item>@string/ra_163185_title</item>
+        <item>@string/ra_163185_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163179_title" type="string">@string/ra_155165_title</item>
+    <item name="ra_163179_text" type="string">@string/ra_155165_text</item>
+    <array name="ra_163179">
+        <item>163179</item>
+        <item>@string/ra_163179_title</item>
+        <item>@string/ra_163179_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163180_title" type="string">@string/ra_155166_title</item>
+    <item name="ra_163180_text" type="string">@string/ra_155166_text</item>
+    <array name="ra_163180">
+        <item>163180</item>
+        <item>@string/ra_163180_title</item>
+        <item>@string/ra_163180_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163181_title" type="string">@string/ra_155171_title</item>
+    <item name="ra_163181_text" type="string">@string/ra_155171_text</item>
+    <array name="ra_163181">
+        <item>163181</item>
+        <item>@string/ra_163181_title</item>
+        <item>@string/ra_163181_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163182_title" type="string">@string/ra_81678_title</item>
+    <item name="ra_163182_text" type="string">@string/ra_155177_text</item>
+    <array name="ra_163182">
+        <item>163182</item>
+        <item>@string/ra_163182_title</item>
+        <item>@string/ra_163182_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <item name="ra_163183_title" type="string">@string/ra_155189_title</item>
+    <item name="ra_163183_text" type="string">@string/ra_155189_text</item>
+    <array name="ra_163183">
+        <item>163183</item>
+        <item>@string/ra_163183_title</item>
+        <item>@string/ra_163183_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_163184_title" type="string">@string/ra_155195_title</item>
+    <item name="ra_163184_text" type="string">@string/ra_155195_text</item>
+    <array name="ra_163184">
+        <item>163184</item>
+        <item>@string/ra_163184_title</item>
+        <item>@string/ra_163184_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_5120_title">
+        Collection Argent
+    </string>
+    <string name="ra_5120_text">
+        Capturer 199 Pokémon sans échange externe et sans glitch permettant d’obtenir davantage de Pokémon de
+        départ ou de pierres.
+    </string>
+    <array name="ra_5120">
+        <item>5120</item>
+        <item>@string/ra_5120_title</item>
+        <item>@string/ra_5120_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <array name="achievements_5">
+        <item>@array/ra_5113</item>
+        <item>@array/ra_5097</item>
+        <item>@array/ra_163143</item>
+        <item>@array/ra_163144</item>
+        <item>@array/ra_5118</item>
+        <item>@array/ra_5098</item>
+        <item>@array/ra_163145</item>
+        <item>@array/ra_163146</item>
+        <item>@array/ra_5099</item>
+        <item>@array/ra_163147</item>
+        <item>@array/ra_163148</item>
+        <item>@array/ra_5100</item>
+        <item>@array/ra_163149</item>
+        <item>@array/ra_163150</item>
+        <item>@array/ra_5101</item>
+        <item>@array/ra_163153</item>
+        <item>@array/ra_163154</item>
+        <item>@array/ra_5102</item>
+        <item>@array/ra_163151</item>
+        <item>@array/ra_163152</item>
+        <item>@array/ra_5119</item>
+        <item>@array/ra_5103</item>
+        <item>@array/ra_163155</item>
+        <item>@array/ra_163156</item>
+        <item>@array/ra_5498</item>
+        <item>@array/ra_5104</item>
+        <item>@array/ra_163157</item>
+        <item>@array/ra_163158</item>
+        <item>@array/ra_5114</item>
+        <item>@array/ra_5116</item>
+        <item>@array/ra_5117</item>
+        <item>@array/ra_5520</item>
+        <item>@array/ra_5521</item>
+        <item>@array/ra_5105</item>
+        <item>@array/ra_163169</item>
+        <item>@array/ra_163170</item>
+        <item>@array/ra_5106</item>
+        <item>@array/ra_163167</item>
+        <item>@array/ra_163168</item>
+        <item>@array/ra_5107</item>
+        <item>@array/ra_163165</item>
+        <item>@array/ra_163166</item>
+        <item>@array/ra_5108</item>
+        <item>@array/ra_163173</item>
+        <item>@array/ra_163174</item>
+        <item>@array/ra_5109</item>
+        <item>@array/ra_163171</item>
+        <item>@array/ra_163172</item>
+        <item>@array/ra_5110</item>
+        <item>@array/ra_163163</item>
+        <item>@array/ra_163164</item>
+        <item>@array/ra_5111</item>
+        <item>@array/ra_163175</item>
+        <item>@array/ra_163176</item>
+        <item>@array/ra_5112</item>
+        <item>@array/ra_163187</item>
+        <item>@array/ra_163188</item>
+        <item>@array/ra_5115</item>
+        <item>@array/ra_5525</item>
+        <item>@array/ra_5526</item>
+        <item>@array/ra_163177</item>
+        <item>@array/ra_163189</item>
+        <item>@array/ra_163162</item>
+        <item>@array/ra_163160</item>
+        <item>@array/ra_163161</item>
+        <item>@array/ra_163178</item>
+        <item>@array/ra_163159</item>
+        <item>@array/ra_163185</item>
+        <item>@array/ra_163179</item>
+        <item>@array/ra_163180</item>
+        <item>@array/ra_163181</item>
+        <item>@array/ra_163182</item>
+        <item>@array/ra_163183</item>
+        <item>@array/ra_163184</item>
+        <item>@array/ra_5120</item>
+    </array>
+</resources>

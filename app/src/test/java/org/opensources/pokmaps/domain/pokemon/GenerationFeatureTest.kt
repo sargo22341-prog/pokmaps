@@ -7,6 +7,11 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GenerationFeatureTest {
+    @Test(expected = IllegalArgumentException::class)
+    fun aFutureGenerationDoesNotInheritShinyRules() {
+        ShinyOdds.oneIn(6)
+    }
+
     @Test
     fun featuresAppearWithTheirGeneration() {
         assertFalse(GenerationFeature.HELD_ITEMS.existsIn(1))
@@ -19,8 +24,7 @@ class GenerationFeatureTest {
     fun shinyOddsByGeneration() {
         assertNull(ShinyOdds.oneIn(1))
         assertEquals(8192, ShinyOdds.oneIn(2))
-        assertEquals(8192, ShinyOdds.oneIn(5))
-        assertEquals(4096, ShinyOdds.oneIn(6))
+        assertEquals(8192, ShinyOdds.oneIn(3))
     }
 
     @Test

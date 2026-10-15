@@ -1,9 +1,8 @@
-# Guides GBA — fin de phase 7
+# Guides et collections GBA
 
 Les cinq bibliothèques ajoutent les 484 succès officiels exportés le 12 octobre 2026,
 avec conditions en français, points, mentions manquables et liens vers leurs chapitres.
-Les 519 succès des six anciens jeux sont conservés. Hoenn propose 29 articles originaux par
-jeu ; chaque remake en propose 17. La synchronisation manuelle RetroAchievements parcourt
+Les succès des six anciens jeux sont conservés. La synchronisation manuelle RetroAchievements parcourt
 les onze identifiants officiels ; aucune requête n’est déclenchée par le chargement des guides.
 
 Les archives publiques des générations 1 à 5 et les traductions GBA sont dans

@@ -94,6 +94,7 @@ class MapViewModelTest {
     @Test
     fun waitsForTheSelectedGame() {
         val pending = object : GameDao {
+            override fun gameRows() = emptyFlow<List<org.opensources.pokmaps.data.db.GameRow>>()
             override fun games() = emptyFlow<List<org.opensources.pokmaps.domain.model.Game>>()
         }
         val viewModel = viewModel(pending)
@@ -199,7 +200,12 @@ class MapViewModelTest {
     fun aSharedFamilyPreservesSelectedZoneAndAvailableTimeFilter() {
         val dataStore = FakeDataStore()
         val gold = FakeGameDao.GOLD.copy(hasTimeOfDay = true)
-        val crystal = gold.copy(versionId = 6, versionGroupId = 4, versionGroupIdentifier = "crystal")
+        val crystal = gold.copy(
+            versionId = 6,
+            versionIdentifier = "crystal",
+            versionGroupId = 4,
+            versionGroupIdentifier = "crystal"
+        )
         val model = viewModel(FakeGameDao(listOf(gold, crystal)), dataStore = dataStore)
         model.onScreenShown()
         model.onAction(MapAction.OpenPlace(MapPlace(FakeMapDao.ROUTE_1, "Route 1")))

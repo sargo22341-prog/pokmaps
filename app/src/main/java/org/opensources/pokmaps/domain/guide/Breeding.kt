@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.guide
 
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
@@ -61,7 +62,11 @@ object BreedingRules {
         if (!ditto && (first.sex == second.sex || ParentSex.GENDERLESS in setOf(first.sex, second.sex))) {
             return BreedingStatus.SAME_SEX
         }
-        if (pair.generationId == 3) return BreedingStatus.COMPATIBLE
+        when (Generation.of(pair.generationId)) {
+            Generation.GEN1 -> error("Jeu sans reproduction")
+            Generation.GEN2 -> Unit
+            Generation.GEN3 -> return BreedingStatus.COMPATIBLE
+        }
         if (first.defense == null || second.defense == null || first.special == null || second.special == null) {
             return BreedingStatus.POSSIBLE
         }

@@ -12,6 +12,25 @@ CREATE TABLE generation (
     name_fr TEXT NOT NULL
 );
 
+-- Les formes affichables et la forme initiale dépendent de la cartouche, pas d'une enum Android.
+CREATE TABLE pokemon_form (
+    version_id INTEGER NOT NULL,
+    pokemon_id INTEGER NOT NULL,
+    identifier TEXT NOT NULL,
+    name_fr TEXT NOT NULL,
+    sprite_folder TEXT NOT NULL,
+    sprite_identifier TEXT NOT NULL,
+    is_default INTEGER NOT NULL,
+    sort_order INTEGER NOT NULL,
+    hp INTEGER NOT NULL,
+    attack INTEGER NOT NULL,
+    defense INTEGER NOT NULL,
+    special_attack INTEGER NOT NULL,
+    special_defense INTEGER NOT NULL,
+    speed INTEGER NOT NULL,
+    PRIMARY KEY (version_id, pokemon_id, identifier)
+);
+
 CREATE TABLE region (
     id INTEGER NOT NULL PRIMARY KEY,
     identifier TEXT NOT NULL,
@@ -317,7 +336,8 @@ CREATE TABLE encounter (
     max_level INTEGER NOT NULL,
     chance REAL,
     quantity INTEGER NOT NULL,
-    note_fr TEXT
+    note_fr TEXT,
+    external_event INTEGER NOT NULL
 );
 CREATE INDEX index_encounter_pokemon_id ON encounter (pokemon_id);
 CREATE INDEX index_encounter_location_area_id ON encounter (location_area_id);
@@ -364,7 +384,9 @@ CREATE TABLE map (
     is_world INTEGER NOT NULL,
     origin_map_id INTEGER,
     start_map_id INTEGER,
-    version_id INTEGER
+    version_id INTEGER,
+    external_event_key TEXT,
+    event_entrance INTEGER NOT NULL
 );
 CREATE INDEX index_map_version_group_id ON map (version_group_id);
 CREATE INDEX index_map_parent_map_id ON map (parent_map_id);
@@ -470,7 +492,8 @@ CREATE TABLE npc_offer (
     version_id INTEGER,
     time_mask INTEGER,
     weekday_mask INTEGER,
-    currency TEXT
+    currency TEXT,
+    external_event INTEGER NOT NULL
 );
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
 

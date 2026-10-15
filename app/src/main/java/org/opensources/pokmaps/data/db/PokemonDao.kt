@@ -177,7 +177,7 @@ const val ENCOUNTER_COLUMNS = """
     e.version_id AS versionId, v.name_fr AS versionName, e.location_area_id AS areaId, la.name_fr AS areaName,
     e.pokemon_id AS pokemonId, p.name_fr AS pokemonName, m.identifier AS method, m.name_fr AS methodName,
     m.sort_order AS methodOrder, m.is_one_off AS isOneOff, e.min_level AS minLevel, e.max_level AS maxLevel,
-    e.chance, e.quantity, e.note_fr AS note,
+    e.chance, e.quantity, e.note_fr AS note, e.external_event AS isExternalEvent,
     (SELECT group_concat(cv.name_fr, ', ') FROM encounter_condition ec
         JOIN encounter_condition_value cv ON cv.id = ec.condition_value_id WHERE ec.encounter_id = e.id) AS conditions,
     (SELECT group_concat(cv.identifier, ',') FROM encounter_condition ec

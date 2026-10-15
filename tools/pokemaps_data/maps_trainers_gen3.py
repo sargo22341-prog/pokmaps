@@ -162,11 +162,26 @@ _KANTO_NAMES = {
     "LANCE": "Peter",
 }
 
+_HOENN_NAMES = {
+    "ROXANNE": "Roxanne",
+    "BRAWLY": "Bastien",
+    "WATTSON": "Voltère",
+    "FLANNERY": "Adriane",
+    "NORMAN": "Norman",
+    "WINONA": "Alizée",
+    "JUAN": "Juan",
+    "SIDNEY": "Damien",
+    "PHOEBE": "Spectra",
+    "GLACIA": "Glacia",
+    "DRAKE": "Aragon",
+}
+
 
 def _trainer_name(trainer: Gen3Trainer) -> str:
     named = {"TRAINER_CLASS_LEADER", "TRAINER_CLASS_ELITE_FOUR", "TRAINER_CLASS_BOSS"}
-    if trainer.trainer_class in named and trainer.name in _KANTO_NAMES:
-        return _KANTO_NAMES[trainer.name]
+    names = _KANTO_NAMES | _HOENN_NAMES
+    if trainer.trainer_class in named and trainer.name in names:
+        return names[trainer.name]
     if trainer.name == "WALLY":
         return "Timmy"
     if trainer.name == "STEVEN":

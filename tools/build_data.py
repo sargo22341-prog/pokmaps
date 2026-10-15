@@ -19,6 +19,7 @@ from contextlib import closing
 from pathlib import Path
 
 # Lancé en script (`python tools/build_data.py`), Python place déjà tools/ en tête de sys.path.
+from pokemaps_data.achievement_resources import build_achievement_resources
 from pokemaps_data.asset_manifest import write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, Game
@@ -45,6 +46,9 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
     maps_only = parser.add_mutually_exclusive_group()
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
+    maps_only.add_argument(
+        "--achievement-resources-only", action="store_true", help="générer les ressources de succès depuis les archives"
+    )
     maps_only.add_argument(
         "--remake-fixed-only", action="store_true", help="exporter les Pokémon fixes Rouge Feu/Vert Feuille"
     )
@@ -74,6 +78,9 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.achievement_resources_only:
+        build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
+        return 0
     if args.hoenn_content_only:
         build_hoenn_catalog(args.cache, args.assets)
         write_manifest(args.assets)
@@ -117,6 +124,8 @@ def main() -> int:
     if not _build(api, args.cache, repos, args.assets, GAMES):
         return 1
     build_hoenn_catalog(args.cache, args.assets)
+    if args.assets.resolve() == DEFAULT_ASSETS.resolve():
+        build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
     write_manifest(args.assets)

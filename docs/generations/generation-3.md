@@ -1,45 +1,30 @@
-# Génération 3 et Remake 1G
+# Génération 3 et remakes
 
-Rubis, Saphir et Émeraude constituent la branche Hoenn ; Rouge Feu et Vert Feuille constituent
-la branche Remake 1G. Les cinq jeux sont distribués hors ligne, avec les six jeux précédents.
-Le moteur GBA commun ne rend pas leurs cartes, scénarios ou règles interchangeables.
+Les cinq jeux GBA sont distribués hors ligne avec les six jeux des générations 1 et 2.
+Hoenn et Remake 1G partagent un moteur, mais restent deux branches aux cartes, scénarios et règles distincts.
 
-| Branche | Cartes | Pokédex | Sources pret |
+| Branche | Jeux | Cartes | Pokédex régional / National |
 |---|---|---|---|
-| Hoenn | Hoenn, Plongée, marées, îles événementielles | Hoenn 202, National 386 | pokeruby, pokeemerald |
-| Remake 1G | Kanto, Îles Sevii, îles événementielles | Kanto 151, National 386 | pokefirered |
+| Hoenn | Rubis, Saphir, Émeraude | Hoenn, fonds marins, marées, îles événementielles | 202 / 386 |
+| Remake 1G | Rouge Feu, Vert Feuille | Kanto, Îles Sevii, îles événementielles | 151 / 386 |
 
-Les commits sont épinglés dans `tools/pokemaps_data/sources.py`. Les rencontres sauvages viennent
-de `wild_encounters.json`, avec les probabilités du moteur ; PokéAPI complète noms, Pokédex et données Pokémon.
-Les coordonnées, conditions des personnages, équipes et revanches sont lues dans pret et corrigées
-explicitement dans les CSV éditoriaux. Room et la base générée partagent le schéma 15.
+Talents, objets tenus, attaques, évolutions et reproduction suivent chaque jeu.
+Deoxys utilise sa forme de cartouche ; Morphéo présente quatre formes. Les remakes suivent les 28 Zarbi,
+sans collection de formes dans Hoenn. Le calculateur de capture GBA reproduit les contrôles entiers et Balls
+du moteur ; le Parc Safari est exclu et l’IV des PV est moyen.
 
-## Fonctionnalités
+## Références techniques par sujet
 
-Le choix du jeu sépare la ligne Hoenn de « Remake 1G ». Les fiches proposent talents, objets tenus,
-attaques et évolutions par jeu, Deoxys dans sa forme propre et les quatre formes de Morphéo.
-Le calculateur GBA reproduit les contrôles entiers et les nouvelles Balls ; le Parc Safari est exclu.
-Les remakes proposent le suivi des 28 Zarbi ; Hoenn ne propose pas de collection de formes.
+| Modification | Pages utiles |
+|---|---|
+| Assemblages et rendu | [Cartes Hoenn](cartes-hoenn.md), [cartes des remakes](cartes-remake-1g.md) |
+| Rencontres | [Socle](rencontres-gen3-communs.md), [Hoenn](rencontres-hoenn.md), [remakes](rencontres-remake-1g.md) |
+| Scripts, équipes et National | [Personnages](personnages-gen3-communs.md) |
+| Offres et coûts | [Services Hoenn](services-hoenn.md), [services des remakes](services-remake-1g.md) |
+| Guides, collections et errants | [Guides GBA](guides-gen3.md) |
+| Baies, Concours et décorations | [Contenus Hoenn](contenus-hoenn.md) |
 
-Les guides comprennent douze chapitres par branche, quêtes, astuces, bugs et 484 succès officiels GBA
-traduits. Les outils de reproduction utilisent les IV, objets et règles de transmission de chaque jeu.
-Les collections excluent échanges et événements externes et respectent les choix incompatibles.
-Le suivi des errants mémorise une observation manuelle par cartouche ; aucune sauvegarde du jeu n'est lue.
-Hoenn ajoute baies, Concours, recettes de Pokéblocs et 120 décorations dans le catalogue `hoenn.json`.
-
-## Lectures détaillées
-
-- Cartes : [Hoenn](cartes-hoenn.md), [Remake 1G](cartes-remake-1g.md).
-- Rencontres : [socle commun](rencontres-gen3-communs.md), [Hoenn](rencontres-hoenn.md),
-  [Remake 1G](rencontres-remake-1g.md).
-- Personnages : [socle commun](personnages-gen3-communs.md), [services Hoenn](services-hoenn.md),
-  [services Remake 1G](services-remake-1g.md).
-- [Guides et outils](guides-gen3.md), [contenus Hoenn](contenus-hoenn.md).
-- [Bilan avant la génération 4](bilan-generations-1-2-3.md), [plan et contrôles](../plan_gen_3.md).
-
-Les distributions externes sont signalées, sans être comptées comme obtention ordinaire.
-Les cartes de la Zone de Combat sont affichées ; les contenus aléatoires ne sont pas simulés.
-Les séries de rencontres de la Pyramide et du Reptile sont conservées hors ligne.
-La Baie Enigma personnalisée, les tirages de cartouche, les motifs de Spinda et les futurs déplacements
-des errants ne sont pas prédits. Les limites de placement des petits terrains sont documentées
-dans les bilans de rencontres, séparément pour chaque branche.
+Commandes et sources épinglées : [pipeline](../donnees/pipeline.md).
+Les distributions externes sont indiquées et exclues de l’obtention ordinaire.
+Les salles aléatoires de la Zone de Combat restent des modèles ; les rencontres de la Pyramide et du Reptile
+sont archivées sans devenir capturables. Aucun tirage, motif de Spinda ou déplacement d’errant n’est prédit.

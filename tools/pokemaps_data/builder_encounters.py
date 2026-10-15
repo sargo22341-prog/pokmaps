@@ -54,6 +54,7 @@ class EncounterGroup:
     chance: float | None
     quantity: int
     notes: list[str] = field(default_factory=list)
+    external_event: bool = False
 
     def add(self, low: int, high: int, rarity: int) -> None:
         """Fusionne un emplacement de rencontre : probabilités cumulées, ou un exemplaire de plus."""
@@ -124,6 +125,7 @@ class EncounterTables:
             method, location = self.method_identifiers[group.method_id], locations[group.location_area_id]
             area = self.builder.locations.area_keys[group.location_area_id]
             if method in EXTERNAL_EVENT_METHODS or location in EXTERNAL_EVENT_LOCATIONS or area in EXTERNAL_EVENT_AREAS:
+                group.external_event = True
                 group.notes.insert(0, EXTERNAL_EVENT_NOTE)
         return groups
 
@@ -313,6 +315,7 @@ class EncounterTables:
                     group.chance,
                     group.quantity,
                     " ; ".join(group.notes) or None,
+                    int(group.external_event),
                 )
             )
             conditions += [(index, value) for value in group.conditions]

@@ -30,7 +30,9 @@ data class MapEntity(
     @ColumnInfo(name = "is_world") val isWorld: Boolean = false,
     @ColumnInfo(name = "origin_map_id") val originMapId: Int? = null,
     @ColumnInfo(name = "start_map_id") val startMapId: Int? = null,
-    @ColumnInfo(name = "version_id") val versionId: Int? = null
+    @ColumnInfo(name = "version_id") val versionId: Int? = null,
+    @ColumnInfo(name = "external_event_key") val externalEventKey: String? = null,
+    @ColumnInfo(name = "event_entrance") val eventEntranceOrder: Int = 0
 )
 
 @Entity(
@@ -125,7 +127,8 @@ data class NpcOfferEntity(
     @ColumnInfo(name = "version_id") val versionId: Int?,
     @ColumnInfo(name = "time_mask") val timeMask: Int?,
     @ColumnInfo(name = "weekday_mask") val weekdayMask: Int?,
-    val currency: String?
+    val currency: String?,
+    @ColumnInfo(name = "external_event") val externalEvent: Boolean
 )
 
 @Entity(

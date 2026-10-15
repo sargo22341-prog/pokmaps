@@ -8,3 +8,7 @@ personnage précis.
 
 Hoenn ajoute les propriétés des baies sur les objets, les Concours sur les attaques et les décorations
 dans les guides. Les services et revanches GBA conservent leurs conditions de scénario.
+
+Les variantes du rival partagent une fiche : un sélecteur choisit le starter du joueur ; Jaune ajoute
+les résultats des premiers combats. Le choix est mémorisé par jeu et partagé entre carte, fiches et guides.
+Les revanches restent sur la fiche du dresseur ; les objets tenus sont affichés à partir de Johto.

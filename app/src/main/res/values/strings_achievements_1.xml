@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_108020_title">
+        Échantillon gratuit
+    </string>
+    <string name="ra_108020_text">
+        Recevoir l’échantillon gratuit de la Boutique Pokémon de Jadielle.
+    </string>
+    <array name="ra_108020">
+        <item>108020</item>
+        <item>@string/ra_108020_title</item>
+        <item>@string/ra_108020_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108021_title">
+        Carte de Kanto
+    </string>
+    <string name="ra_108021_text">
+        Obtenir la carte de la région de Kanto.
+    </string>
+    <array name="ra_108021">
+        <item>108021</item>
+        <item>@string/ra_108021_title</item>
+        <item>@string/ra_108021_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108022_title">
+        Première page
+    </string>
+    <string name="ra_108022_text">
+        Obtenir le Pokédex.
+    </string>
+    <array name="ra_108022">
+        <item>108022</item>
+        <item>@string/ra_108022_title</item>
+        <item>@string/ra_108022_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108023_title">
+        Cadeau de départ
+    </string>
+    <string name="ra_108023_text">
+        Recevoir cinq Poké Balls du Professeur Chen.
+    </string>
+    <array name="ra_108023">
+        <item>108023</item>
+        <item>@string/ra_108023_title</item>
+        <item>@string/ra_108023_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108024_title">
+        Forêt nettoyée
+    </string>
+    <string name="ra_108024_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Forêt de Jade.
+    </string>
+    <array name="ra_108024">
+        <item>108024</item>
+        <item>@string/ra_108024_title</item>
+        <item>@string/ra_108024_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_108026_title">
+        Promenade tranquille
+    </string>
+    <string name="ra_108026_text">
+        Traverser la Forêt de Jade d’une entrée à l’autre sans rencontre sauvage, sans recommencer, sans
+        Repousse et sans Coupe.
+    </string>
+    <array name="ra_108026">
+        <item>108026</item>
+        <item>@string/ra_108026_title</item>
+        <item>@string/ra_108026_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_4401_title">
+        Badge Roche
+    </string>
+    <string name="ra_4401_text">
+        Vaincre Pierre et obtenir le Badge Roche.
+    </string>
+    <array name="ra_4401">
+        <item>4401</item>
+        <item>@string/ra_4401_title</item>
+        <item>@string/ra_4401_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_108058_title">
+        Pierre : défi niveau 14
+    </string>
+    <string name="ra_108058_text">
+        Vaincre Pierre en mode Défini, au niveau 14 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108058">
+        <item>108058</item>
+        <item>@string/ra_108058_title</item>
+        <item>@string/ra_108058_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_4414_title">
+        Un seul fossile
+    </string>
+    <string name="ra_4414_text">
+        Choisir le Fossile Nautile ou le Fossile Dôme à la fin du Mont Sélénite.
+    </string>
+    <array name="ra_4414">
+        <item>4414</item>
+        <item>@string/ra_4414_title</item>
+        <item>@string/ra_4414_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_108025_title">
+        Exploration lunaire
+    </string>
+    <string name="ra_108025_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs du Mont Sélénite.
+    </string>
+    <array name="ra_108025">
+        <item>108025</item>
+        <item>@string/ra_108025_title</item>
+        <item>@string/ra_108025_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_4402_title">
+        Badge Cascade
+    </string>
+    <string name="ra_4402_text">
+        Vaincre Ondine et obtenir le Badge Cascade.
+    </string>
+    <array name="ra_4402">
+        <item>4402</item>
+        <item>@string/ra_4402_title</item>
+        <item>@string/ra_4402_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_108059_title">
+        Ondine : défi niveau 21
+    </string>
+    <string name="ra_108059_text">
+        Vaincre Ondine en mode Défini, au niveau 21 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108059">
+        <item>108059</item>
+        <item>@string/ra_108059_title</item>
+        <item>@string/ra_108059_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_108138_title">
+        Géant endormi
+    </string>
+    <string name="ra_108138_text">
+        Écouter l’histoire du Pokémon légendaire qui dort beaucoup.
+    </string>
+    <array name="ra_108138">
+        <item>108138</item>
+        <item>@string/ra_108138_title</item>
+        <item>@string/ra_108138_text</item>
+        <item>2</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108030_title">
+        Service au capitaine
+    </string>
+    <string name="ra_108030_text">
+        Soulager le capitaine de l’Océane en lui frottant le dos et recevoir la CS01 Coupe.
+    </string>
+    <array name="ra_108030">
+        <item>108030</item>
+        <item>@string/ra_108030_title</item>
+        <item>@string/ra_108030_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_108029_title">
+        Avant le départ
+    </string>
+    <string name="ra_108029_text">
+        Ramasser tous les objets facultatifs et vaincre tous les Dresseurs facultatifs de l’Océane.
+    </string>
+    <array name="ra_108029">
+        <item>108029</item>
+        <item>@string/ra_108029_title</item>
+        <item>@string/ra_108029_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_108028_title">
+        Un éclair de lumière
+    </string>
+    <string name="ra_108028_text">
+        Recevoir la CS05 Flash de l’assistant du Professeur Chen sur la Route 2.
+    </string>
+    <array name="ra_108028">
+        <item>108028</item>
+        <item>@string/ra_108028_title</item>
+        <item>@string/ra_108028_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108027_title">
+        Détecteur de trésors
+    </string>
+    <string name="ra_108027_text">
+        Recevoir le Cherch’Objet de l’assistant du Professeur Chen sur la Route 11.
+    </string>
+    <array name="ra_108027">
+        <item>108027</item>
+        <item>@string/ra_108027_title</item>
+        <item>@string/ra_108027_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4403_title">
+        Badge Foudre
+    </string>
+    <string name="ra_4403_text">
+        Vaincre Major Bob et obtenir le Badge Foudre.
+    </string>
+    <array name="ra_4403">
+        <item>4403</item>
+        <item>@string/ra_4403_title</item>
+        <item>@string/ra_4403_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_108060_title">
+        Major Bob : défi niveau 24
+    </string>
+    <string name="ra_108060_text">
+        Vaincre Major Bob en mode Défini, au niveau 24 maximum au début du combat, sans utiliser d’objet du Sac
+        en combat.
+    </string>
+    <array name="ra_108060">
+        <item>108060</item>
+        <item>@string/ra_108060_title</item>
+        <item>@string/ra_108060_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_108049_title">
+        Deux roues
+    </string>
+    <string name="ra_108049_text">
+        Obtenir la Bicyclette au magasin de vélos d’Azuria.
+    </string>
+    <array name="ra_108049">
+        <item>108049</item>
+        <item>@string/ra_108049_title</item>
+        <item>@string/ra_108049_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108037_title">
+        Petite monnaie
+    </string>
+    <string name="ra_108037_text">
+        Trouver tous les Jetons gratuits du Casino de Céladopole.
+    </string>
+    <array name="ra_108037">
+        <item>108037</item>
+        <item>@string/ra_108037_title</item>
+        <item>@string/ra_108037_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108179_title">
+        Une barre gagnante
+    </string>
+    <string name="ra_108179_text">
+        Obtenir une combinaison de barres gagnante au Casino de Céladopole.
+    </string>
+    <array name="ra_108179">
+        <item>108179</item>
+        <item>@string/ra_108179_title</item>
+        <item>@string/ra_108179_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108180_title">
+        Triple sept
+    </string>
+    <string name="ra_108180_text">
+        Gagner le jackpot au Casino de Céladopole.
+    </string>
+    <array name="ra_108180">
+        <item>108180</item>
+        <item>@string/ra_108180_title</item>
+        <item>@string/ra_108180_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108182_title">
+        Réserve de Jetons
+    </string>
+    <string name="ra_108182_text">
+        Détenir 9 999 Jetons simultanément.
+    </string>
+    <array name="ra_108182">
+        <item>108182</item>
+        <item>@string/ra_108182_title</item>
+        <item>@string/ra_108182_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108038_title">
+        Voir les fantômes
+    </string>
+    <string name="ra_108038_text">
+        Obtenir le Scope Sylphe au Repaire Rocket.
+    </string>
+    <array name="ra_108038">
+        <item>108038</item>
+        <item>@string/ra_108038_title</item>
+        <item>@string/ra_108038_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108039_title">
+        Repaire vidé
+    </string>
+    <string name="ra_108039_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs du Repaire Rocket.
+    </string>
+    <array name="ra_108039">
+        <item>108039</item>
+        <item>@string/ra_108039_title</item>
+        <item>@string/ra_108039_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_4404_title">
+        Badge Prisme
+    </string>
+    <string name="ra_4404_text">
+        Vaincre Érika et obtenir le Badge Prisme.
+    </string>
+    <array name="ra_4404">
+        <item>4404</item>
+        <item>@string/ra_4404_title</item>
+        <item>@string/ra_4404_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108061_title">
+        Érika : défi niveau 29
+    </string>
+    <string name="ra_108061_text">
+        Vaincre Érika en mode Défini, au niveau 29 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108061">
+        <item>108061</item>
+        <item>@string/ra_108061_title</item>
+        <item>@string/ra_108061_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108036_title">
+        Prendre son envol
+    </string>
+    <string name="ra_108036_text">
+        Recevoir la CS02 Vol dans la maison cachée de la Route 16.
+    </string>
+    <array name="ra_108036">
+        <item>108036</item>
+        <item>@string/ra_108036_title</item>
+        <item>@string/ra_108036_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4418_title">
+        Sauver Fuji
+    </string>
+    <string name="ra_4418_text">
+        Sauver M. Fuji et obtenir la Poké Flûte.
+    </string>
+    <array name="ra_4418">
+        <item>4418</item>
+        <item>@string/ra_4418_title</item>
+        <item>@string/ra_4418_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_108040_title">
+        Apaiser le fantôme
+    </string>
+    <string name="ra_108040_text">
+        Donner une Poké Poupée au fantôme bloquant le sommet de la Tour Pokémon pour le calmer sans Scope
+        Sylphe.
+    </string>
+    <array name="ra_108040">
+        <item>108040</item>
+        <item>@string/ra_108040_title</item>
+        <item>@string/ra_108040_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108041_title">
+        Tour explorée
+    </string>
+    <string name="ra_108041_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Tour Pokémon.
+    </string>
+    <array name="ra_108041">
+        <item>108041</item>
+        <item>@string/ra_108041_title</item>
+        <item>@string/ra_108041_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_108046_title">
+        Traversée aquatique
+    </string>
+    <string name="ra_108046_text">
+        Obtenir la CS03 Surf au Parc Safari.
+    </string>
+    <array name="ra_108046">
+        <item>108046</item>
+        <item>@string/ra_108046_title</item>
+        <item>@string/ra_108046_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_108045_title">
+        Safari sans oubli
+    </string>
+    <string name="ra_108045_text">
+        Ramasser tous les objets facultatifs du Parc Safari en une seule visite, sans recommencer.
+    </string>
+    <array name="ra_108045">
+        <item>108045</item>
+        <item>@string/ra_108045_title</item>
+        <item>@string/ra_108045_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_108048_title">
+        Retrouver sa force
+    </string>
+    <string name="ra_108048_text">
+        Recevoir la CS04 Force du gardien du Parc Safari à Parmanie.
+    </string>
+    <array name="ra_108048">
+        <item>108048</item>
+        <item>@string/ra_108048_title</item>
+        <item>@string/ra_108048_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_108047_title">
+        Dix prises au Safari
+    </string>
+    <string name="ra_108047_text">
+        Capturer dix Pokémon au cours d’une seule visite du Parc Safari, sans recommencer.
+    </string>
+    <array name="ra_108047">
+        <item>108047</item>
+        <item>@string/ra_108047_title</item>
+        <item>@string/ra_108047_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_618978_title">
+        Œuf chanceux
+    </string>
+    <string name="ra_618978_text">
+        Capturer Leveinard au Parc Safari.
+    </string>
+    <array name="ra_618978">
+        <item>618978</item>
+        <item>@string/ra_618978_title</item>
+        <item>@string/ra_618978_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_618979_title">
+        Mère protectrice
+    </string>
+    <string name="ra_618979_text">
+        Capturer Kangourex au Parc Safari.
+    </string>
+    <array name="ra_618979">
+        <item>618979</item>
+        <item>@string/ra_618979_title</item>
+        <item>@string/ra_618979_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_618980_title">
+        Charge du taureau
+    </string>
+    <string name="ra_618980_text">
+        Capturer Tauros au Parc Safari.
+    </string>
+    <array name="ra_618980">
+        <item>618980</item>
+        <item>@string/ra_618980_title</item>
+        <item>@string/ra_618980_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_618981_title">
+        Lames du Safari
+    </string>
+    <string name="ra_618981_text">
+        Capturer Insécateur au Parc Safari.
+    </string>
+    <array name="ra_618981">
+        <item>618981</item>
+        <item>@string/ra_618981_title</item>
+        <item>@string/ra_618981_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_4405_title">
+        Badge Âme
+    </string>
+    <string name="ra_4405_text">
+        Vaincre Koga et obtenir le Badge Âme.
+    </string>
+    <array name="ra_4405">
+        <item>4405</item>
+        <item>@string/ra_4405_title</item>
+        <item>@string/ra_4405_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_108062_title">
+        Koga : défi niveau 43
+    </string>
+    <string name="ra_108062_text">
+        Vaincre Koga en mode Défini, au niveau 43 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108062">
+        <item>108062</item>
+        <item>@string/ra_108062_title</item>
+        <item>@string/ra_108062_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_108057_title">
+        Labyrinthe invisible
+    </string>
+    <string name="ra_108057_text">
+        Depuis l’entrée, traverser l’Arène de Parmanie sans heurter de mur.
+    </string>
+    <array name="ra_108057">
+        <item>108057</item>
+        <item>@string/ra_108057_title</item>
+        <item>@string/ra_108057_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108043_title">
+        Toutes les cannes
+    </string>
+    <string name="ra_108043_text">
+        Obtenir les trois cannes à pêche.
+    </string>
+    <array name="ra_108043">
+        <item>108043</item>
+        <item>@string/ra_108043_title</item>
+        <item>@string/ra_108043_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108139_title">
+        Oiseau au loin
+    </string>
+    <string name="ra_108139_text">
+        Observer l’oiseau mystérieux dans les jumelles.
+    </string>
+    <array name="ra_108139">
+        <item>108139</item>
+        <item>@string/ra_108139_title</item>
+        <item>@string/ra_108139_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108044_title">
+        Expérience partagée
+    </string>
+    <string name="ra_108044_text">
+        Recevoir le Multi Exp de l’assistant du Professeur Chen à Parmanie.
+    </string>
+    <array name="ra_108044">
+        <item>108044</item>
+        <item>@string/ra_108044_title</item>
+        <item>@string/ra_108044_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108050_title">
+        Cadeau du président
+    </string>
+    <string name="ra_108050_text">
+        Recevoir la Master Ball du président de la Sylphe SARL.
+    </string>
+    <array name="ra_108050">
+        <item>108050</item>
+        <item>@string/ra_108050_title</item>
+        <item>@string/ra_108050_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_108069_title">
+        Infiltration rapide
+    </string>
+    <string name="ra_108069_text">
+        Atteindre le rival dans la Sylphe SARL en ayant vaincu au maximum un Dresseur du bâtiment.
+    </string>
+    <array name="ra_108069">
+        <item>108069</item>
+        <item>@string/ra_108069_title</item>
+        <item>@string/ra_108069_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_108051_title">
+        Libérer la Sylphe
+    </string>
+    <string name="ra_108051_text">
+        Ramasser tous les objets, vaincre tous les Dresseurs et ouvrir toutes les portes de la Sylphe SARL.
+    </string>
+    <array name="ra_108051">
+        <item>108051</item>
+        <item>@string/ra_108051_title</item>
+        <item>@string/ra_108051_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_4416_title">
+        Récompense du Dojo
+    </string>
+    <string name="ra_4416_text">
+        Choisir la récompense du Dojo de Safrania.
+    </string>
+    <array name="ra_4416">
+        <item>4416</item>
+        <item>@string/ra_4416_title</item>
+        <item>@string/ra_4416_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_4406_title">
+        Badge Marais
+    </string>
+    <string name="ra_4406_text">
+        Vaincre Morgane et obtenir le Badge Marais.
+    </string>
+    <array name="ra_4406">
+        <item>4406</item>
+        <item>@string/ra_4406_title</item>
+        <item>@string/ra_4406_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_108063_title">
+        Morgane : défi niveau 43
+    </string>
+    <string name="ra_108063_text">
+        Vaincre Morgane en mode Défini, au niveau 43 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108063">
+        <item>108063</item>
+        <item>@string/ra_108063_title</item>
+        <item>@string/ra_108063_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_108064_title">
+        Quatre téléportations
+    </string>
+    <string name="ra_108064_text">
+        Depuis l’entrée, traverser l’Arène de Safrania en utilisant seulement quatre téléporteurs.
+    </string>
+    <array name="ra_108064">
+        <item>108064</item>
+        <item>@string/ra_108064_title</item>
+        <item>@string/ra_108064_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108054_title">
+        Journal du Manoir
+    </string>
+    <string name="ra_108054_text">
+        Lire tous les journaux du Manoir Pokémon sans recommencer ni quitter le bâtiment.
+    </string>
+    <array name="ra_108054">
+        <item>108054</item>
+        <item>@string/ra_108054_title</item>
+        <item>@string/ra_108054_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_4407_title">
+        Badge Volcan
+    </string>
+    <string name="ra_4407_text">
+        Vaincre Auguste et obtenir le Badge Volcan.
+    </string>
+    <array name="ra_4407">
+        <item>4407</item>
+        <item>@string/ra_4407_title</item>
+        <item>@string/ra_4407_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_108065_title">
+        Auguste : défi niveau 47
+    </string>
+    <string name="ra_108065_text">
+        Vaincre Auguste en mode Défini, au niveau 47 maximum au début du combat, sans utiliser d’objet du Sac en
+        combat.
+    </string>
+    <array name="ra_108065">
+        <item>108065</item>
+        <item>@string/ra_108065_title</item>
+        <item>@string/ra_108065_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_108056_title">
+        Quiz parfait
+    </string>
+    <string name="ra_108056_text">
+        Réussir tous les quiz de l’Arène de Cramois’Île sans combattre de Dresseur, sans recommencer ni quitter
+        le bâtiment.
+    </string>
+    <array name="ra_108056">
+        <item>108056</item>
+        <item>@string/ra_108056_title</item>
+        <item>@string/ra_108056_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_4408_title">
+        Badge Terre
+    </string>
+    <string name="ra_4408_text">
+        Vaincre Giovanni et obtenir le Badge Terre.
+    </string>
+    <array name="ra_4408">
+        <item>4408</item>
+        <item>@string/ra_4408_title</item>
+        <item>@string/ra_4408_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_108068_title">
+        Giovanni : défi niveau 50
+    </string>
+    <string name="ra_108068_text">
+        Vaincre Giovanni en mode Défini, au niveau 50 maximum au début du combat, sans utiliser d’objet du Sac
+        en combat.
+    </string>
+    <array name="ra_108068">
+        <item>108068</item>
+        <item>@string/ra_108068_title</item>
+        <item>@string/ra_108068_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_108067_title">
+        Sans tapis tournant
+    </string>
+    <string name="ra_108067_text">
+        Depuis l’entrée, traverser l’Arène de Jadielle sans utiliser les tapis tournants.
+    </string>
+    <array name="ra_108067">
+        <item>108067</item>
+        <item>@string/ra_108067_title</item>
+        <item>@string/ra_108067_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108066_title">
+        Trésor d’Arène
+    </string>
+    <string name="ra_108066_text">
+        Ramasser l’objet caché dans l’Arène de Jadielle.
+    </string>
+    <array name="ra_108066">
+        <item>108066</item>
+        <item>@string/ra_108066_title</item>
+        <item>@string/ra_108066_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108140_title">
+        Route de la Victoire explorée
+    </string>
+    <string name="ra_108140_text">
+        Ramasser tous les objets et vaincre tous les Dresseurs de la Route Victoire.
+    </string>
+    <array name="ra_108140">
+        <item>108140</item>
+        <item>@string/ra_108140_title</item>
+        <item>@string/ra_108140_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4410_title">
+        Maître de la Ligue
+    </string>
+    <string name="ra_4410_text">
+        Vaincre le Conseil des 4 et le Maître de la Ligue Pokémon.
+    </string>
+    <array name="ra_4410">
+        <item>4410</item>
+        <item>@string/ra_4410_title</item>
+        <item>@string/ra_4410_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_4422_title">
+        Ligue en solitaire
+    </string>
+    <string name="ra_4422_text">
+        Vaincre toute la Ligue sans recommencer avec un seul Pokémon dans l’équipe, à l’exclusion de Mew et de
+        Mewtwo.
+    </string>
+    <array name="ra_4422">
+        <item>4422</item>
+        <item>@string/ra_4422_title</item>
+        <item>@string/ra_4422_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_108169_title">
+        Fidélité à Rouge
+    </string>
+    <string name="ra_108169_text">
+        Vaincre la Ligue sans recommencer avec une équipe complète de Pokémon exclusifs à la version Rouge.
+    </string>
+    <array name="ra_108169">
+        <item>108169</item>
+        <item>@string/ra_108169_title</item>
+        <item>@string/ra_108169_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_108170_title">
+        Parcours sans K.O.
+    </string>
+    <string name="ra_108170_text">
+        Vaincre la Ligue sans recommencer et sans subir de K.O., avec des Pokémon de niveau 60 maximum à
+        l’entrée de la Ligue.
+    </string>
+    <array name="ra_108170">
+        <item>108170</item>
+        <item>@string/ra_108170_title</item>
+        <item>@string/ra_108170_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_108171_title">
+        Ligue exigeante
+    </string>
+    <string name="ra_108171_text">
+        Entrer dans la Ligue et la vaincre dans une seule session, en mode Défini, sans utiliser d’objet en
+        combat, avec des Pokémon de niveau 50 maximum à l’entrée.
+    </string>
+    <array name="ra_108171">
+        <item>108171</item>
+        <item>@string/ra_108171_title</item>
+        <item>@string/ra_108171_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_4419_title">
+        Réveil du dormeur
+    </string>
+    <string name="ra_4419_text">
+        Réveiller Ronflex avec la Poké Flûte et le capturer.
+    </string>
+    <array name="ra_4419">
+        <item>4419</item>
+        <item>@string/ra_4419_title</item>
+        <item>@string/ra_4419_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4420_title">
+        Trio légendaire
+    </string>
+    <string name="ra_4420_text">
+        Capturer Artikodin, Électhor et Sulfura.
+    </string>
+    <array name="ra_4420">
+        <item>4420</item>
+        <item>@string/ra_4420_title</item>
+        <item>@string/ra_4420_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-legends</item>
+    </array>
+    <string name="ra_4421_title">
+        Créature ultime
+    </string>
+    <string name="ra_4421_text">
+        Capturer Mewtwo dans la Caverne Azurée.
+    </string>
+    <array name="ra_4421">
+        <item>4421</item>
+        <item>@string/ra_4421_title</item>
+        <item>@string/ra_4421_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-legends</item>
+    </array>
+    <string name="ra_108175_title">
+        Faune de la Caverne
+    </string>
+    <string name="ra_108175_text">
+        Sans recommencer ni quitter la Caverne Azurée, capturer un exemplaire de chaque espèce qui y est
+        disponible, sauf Mewtwo et les espèces pêchées. Ne pas utiliser la Master Ball.
+    </string>
+    <array name="ra_108175">
+        <item>108175</item>
+        <item>@string/ra_108175_title</item>
+        <item>@string/ra_108175_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-legends</item>
+    </array>
+    <string name="ra_108176_title">
+        Capture équitable
+    </string>
+    <string name="ra_108176_text">
+        Capturer Mewtwo sans Master Ball.
+    </string>
+    <array name="ra_108176">
+        <item>108176</item>
+        <item>@string/ra_108176_title</item>
+        <item>@string/ra_108176_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-legends</item>
+    </array>
+    <string name="ra_108052_title">
+        Six cadeaux
+    </string>
+    <string name="ra_108052_text">
+        Recevoir six Pokémon en cadeau.
+    </string>
+    <array name="ra_108052">
+        <item>108052</item>
+        <item>@string/ra_108052_title</item>
+        <item>@string/ra_108052_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108053_title">
+        Échanges locaux
+    </string>
+    <string name="ra_108053_text">
+        Effectuer les neuf échanges avec les personnages du jeu.
+    </string>
+    <array name="ra_108053">
+        <item>108053</item>
+        <item>@string/ra_108053_title</item>
+        <item>@string/ra_108053_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108183_title">
+        Tout acheter au Casino
+    </string>
+    <string name="ra_108183_text">
+        Acheter tous les Pokémon proposés au Casino dans une seule session.
+    </string>
+    <array name="ra_108183">
+        <item>108183</item>
+        <item>@string/ra_108183_title</item>
+        <item>@string/ra_108183_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108174_title">
+        Rencontres fixes
+    </string>
+    <string name="ra_108174_text">
+        Vaincre ou capturer tous les Pokémon des rencontres fixes.
+    </string>
+    <array name="ra_108174">
+        <item>108174</item>
+        <item>@string/ra_108174_title</item>
+        <item>@string/ra_108174_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108141_title">
+        Exclusivités Rouge
+    </string>
+    <string name="ra_108141_text">
+        Capturer tous les Pokémon exclusifs à la version Rouge.
+    </string>
+    <array name="ra_108141">
+        <item>108141</item>
+        <item>@string/ra_108141_title</item>
+        <item>@string/ra_108141_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4425_title">
+        Collection Rouge
+    </string>
+    <string name="ra_4425_text">
+        Capturer les 124 Pokémon disponibles dans Pokémon Rouge.
+    </string>
+    <array name="ra_4425">
+        <item>4425</item>
+        <item>@string/ra_4425_title</item>
+        <item>@string/ra_4425_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108365_title">
+        Disques du terrain
+    </string>
+    <string name="ra_108365_text">
+        Trouver les 50 CT et CS non manquables présentes sur le terrain.
+    </string>
+    <array name="ra_108365">
+        <item>108365</item>
+        <item>@string/ra_108365_title</item>
+        <item>@string/ra_108365_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108366_title">
+        Disques achetés
+    </string>
+    <string name="ra_108366_text">
+        Acheter un exemplaire de chaque CT vendue au Centre Commercial et au Casino, dans une seule session sans
+        recommencer.
+    </string>
+    <array name="ra_108366">
+        <item>108366</item>
+        <item>@string/ra_108366_title</item>
+        <item>@string/ra_108366_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_108367_title">
+        Cherch’Objet vivant
+    </string>
+    <string name="ra_108367_text">
+        Ramasser tous les objets non manquables du terrain, y compris les objets cachés.
+    </string>
+    <array name="ra_108367">
+        <item>108367</item>
+        <item>@string/ra_108367_title</item>
+        <item>@string/ra_108367_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108368_title">
+        Tous les Dresseurs
+    </string>
+    <string name="ra_108368_text">
+        Vaincre tous les Dresseurs non manquables de Kanto.
+    </string>
+    <array name="ra_108368">
+        <item>108368</item>
+        <item>@string/ra_108368_title</item>
+        <item>@string/ra_108368_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4409_title">
+        Équipe complète
+    </string>
+    <string name="ra_4409_text">
+        Réunir six Pokémon dans l’équipe.
+    </string>
+    <array name="ra_4409">
+        <item>4409</item>
+        <item>@string/ra_4409_title</item>
+        <item>@string/ra_4409_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108370_title">
+        Évolution refusée
+    </string>
+    <string name="ra_108370_text">
+        Empêcher un Pokémon d’évoluer.
+    </string>
+    <array name="ra_108370">
+        <item>108370</item>
+        <item>@string/ra_108370_title</item>
+        <item>@string/ra_108370_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4411_title">
+        Premier niveau 50
+    </string>
+    <string name="ra_4411_text">
+        Faire passer le Pokémon de la première place du niveau 49 au niveau 50.
+    </string>
+    <array name="ra_4411">
+        <item>4411</item>
+        <item>@string/ra_4411_title</item>
+        <item>@string/ra_4411_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4412_title">
+        Six niveaux 50
+    </string>
+    <string name="ra_4412_text">
+        Avec cinq Pokémon de niveau 50 ou plus dans l’équipe, faire atteindre le niveau 50 au dernier Pokémon.
+    </string>
+    <array name="ra_4412">
+        <item>4412</item>
+        <item>@string/ra_4412_title</item>
+        <item>@string/ra_4412_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108033_title">
+        Coups critiques en série
+    </string>
+    <string name="ra_108033_text">
+        Porter cinq coups critiques consécutifs au cours du même combat.
+    </string>
+    <array name="ra_108033">
+        <item>108033</item>
+        <item>@string/ra_108033_title</item>
+        <item>@string/ra_108033_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108034_title">
+        K.O. immédiats
+    </string>
+    <string name="ra_108034_text">
+        Réussir cinq capacités de K.O. en un coup consécutives au cours du même combat.
+    </string>
+    <array name="ra_108034">
+        <item>108034</item>
+        <item>@string/ra_108034_title</item>
+        <item>@string/ra_108034_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108042_title">
+        Match immobile
+    </string>
+    <string name="ra_108042_text">
+        Commencer un combat avec tous les PV et tenir vingt tours sans changer de Pokémon et sans qu’aucun des
+        deux Pokémon ne subisse de dégâts.
+    </string>
+    <array name="ra_108042">
+        <item>108042</item>
+        <item>@string/ra_108042_title</item>
+        <item>@string/ra_108042_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108172_title">
+        Final explosif
+    </string>
+    <string name="ra_108172_text">
+        Utiliser Métronome et provoquer une explosion qui met son utilisateur K.O.
+    </string>
+    <array name="ra_108172">
+        <item>108172</item>
+        <item>@string/ra_108172_title</item>
+        <item>@string/ra_108172_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108173_title">
+        Copie conforme
+    </string>
+    <string name="ra_108173_text">
+        Avec Métamorph, utiliser Morphing sur un autre Métamorph.
+    </string>
+    <array name="ra_108173">
+        <item>108173</item>
+        <item>@string/ra_108173_title</item>
+        <item>@string/ra_108173_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108364_title">
+        Dégel naturel
+    </string>
+    <string name="ra_108364_text">
+        Être libéré du gel en combat sans utiliser d’objet durant ce combat.
+    </string>
+    <array name="ra_108364">
+        <item>108364</item>
+        <item>@string/ra_108364_title</item>
+        <item>@string/ra_108364_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_108035_title">
+        Tondeuse
+    </string>
+    <string name="ra_108035_text">
+        Couper de l’herbe avec Coupe.
+    </string>
+    <array name="ra_108035">
+        <item>108035</item>
+        <item>@string/ra_108035_title</item>
+        <item>@string/ra_108035_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <array name="achievements_1">
+        <item>@array/ra_108020</item>
+        <item>@array/ra_108021</item>
+        <item>@array/ra_108022</item>
+        <item>@array/ra_108023</item>
+        <item>@array/ra_108024</item>
+        <item>@array/ra_108026</item>
+        <item>@array/ra_4401</item>
+        <item>@array/ra_108058</item>
+        <item>@array/ra_4414</item>
+        <item>@array/ra_108025</item>
+        <item>@array/ra_4402</item>
+        <item>@array/ra_108059</item>
+        <item>@array/ra_108138</item>
+        <item>@array/ra_108030</item>
+        <item>@array/ra_108029</item>
+        <item>@array/ra_108028</item>
+        <item>@array/ra_108027</item>
+        <item>@array/ra_4403</item>
+        <item>@array/ra_108060</item>
+        <item>@array/ra_108049</item>
+        <item>@array/ra_108037</item>
+        <item>@array/ra_108179</item>
+        <item>@array/ra_108180</item>
+        <item>@array/ra_108182</item>
+        <item>@array/ra_108038</item>
+        <item>@array/ra_108039</item>
+        <item>@array/ra_4404</item>
+        <item>@array/ra_108061</item>
+        <item>@array/ra_108036</item>
+        <item>@array/ra_4418</item>
+        <item>@array/ra_108040</item>
+        <item>@array/ra_108041</item>
+        <item>@array/ra_108046</item>
+        <item>@array/ra_108045</item>
+        <item>@array/ra_108048</item>
+        <item>@array/ra_108047</item>
+        <item>@array/ra_618978</item>
+        <item>@array/ra_618979</item>
+        <item>@array/ra_618980</item>
+        <item>@array/ra_618981</item>
+        <item>@array/ra_4405</item>
+        <item>@array/ra_108062</item>
+        <item>@array/ra_108057</item>
+        <item>@array/ra_108043</item>
+        <item>@array/ra_108139</item>
+        <item>@array/ra_108044</item>
+        <item>@array/ra_108050</item>
+        <item>@array/ra_108069</item>
+        <item>@array/ra_108051</item>
+        <item>@array/ra_4416</item>
+        <item>@array/ra_4406</item>
+        <item>@array/ra_108063</item>
+        <item>@array/ra_108064</item>
+        <item>@array/ra_108054</item>
+        <item>@array/ra_4407</item>
+        <item>@array/ra_108065</item>
+        <item>@array/ra_108056</item>
+        <item>@array/ra_4408</item>
+        <item>@array/ra_108068</item>
+        <item>@array/ra_108067</item>
+        <item>@array/ra_108066</item>
+        <item>@array/ra_108140</item>
+        <item>@array/ra_4410</item>
+        <item>@array/ra_4422</item>
+        <item>@array/ra_108169</item>
+        <item>@array/ra_108170</item>
+        <item>@array/ra_108171</item>
+        <item>@array/ra_4419</item>
+        <item>@array/ra_4420</item>
+        <item>@array/ra_4421</item>
+        <item>@array/ra_108175</item>
+        <item>@array/ra_108176</item>
+        <item>@array/ra_108052</item>
+        <item>@array/ra_108053</item>
+        <item>@array/ra_108183</item>
+        <item>@array/ra_108174</item>
+        <item>@array/ra_108141</item>
+        <item>@array/ra_4425</item>
+        <item>@array/ra_108365</item>
+        <item>@array/ra_108366</item>
+        <item>@array/ra_108367</item>
+        <item>@array/ra_108368</item>
+        <item>@array/ra_4409</item>
+        <item>@array/ra_108370</item>
+        <item>@array/ra_4411</item>
+        <item>@array/ra_4412</item>
+        <item>@array/ra_108033</item>
+        <item>@array/ra_108034</item>
+        <item>@array/ra_108042</item>
+        <item>@array/ra_108172</item>
+        <item>@array/ra_108173</item>
+        <item>@array/ra_108364</item>
+        <item>@array/ra_108035</item>
+    </array>
+</resources>

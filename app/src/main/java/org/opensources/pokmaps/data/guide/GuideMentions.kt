@@ -60,7 +60,9 @@ internal class GuideMentions(pokemon: List<PokedexEntry>, catalog: MapCatalog, i
         val CHARACTER_NAMES = setOf(
             "Pierre", "Ondine", "Major Bob", "Érika", "Koga", "Morgane", "Auguste", "Giovanni",
             "Albert", "Hector", "Blanche", "Mortimer", "Chuck", "Jasmine", "Frédo", "Sandra", "Jeannine",
-            "Fargas", "Buena", "Red", "Eusine", "Léo", "Peter"
+            "Fargas", "Buena", "Red", "Eusine", "Léo", "Peter",
+            "Roxanne", "Bastien", "Voltère", "Adriane", "Norman", "Alizée", "Lévy et Tatia", "Juan",
+            "Damien", "Spectra", "Glacia", "Aragon", "Marc", "Pierre Rochard", "Timmy", "Flora"
         )
         val CHARACTER_ALIASES = mapOf(
             "Professeur Chen" to ("oaks-lab" to "Prof. Chen"),

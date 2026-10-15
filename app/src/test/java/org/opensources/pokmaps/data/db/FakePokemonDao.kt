@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.data.db
 
+import org.opensources.pokmaps.domain.model.Generation
+
 /**
  * Fiche de Pikachu en mémoire (seul Pokémon connu) ; `failing` simule une base illisible et `unknownLearnMethod` une
  * attaque apprise d'une façon inconnue de l'application. Il tient un Ballon Lumière dans Bleu seulement, pour vérifier
@@ -85,8 +87,15 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
 
     override suspend fun eggGroups(pokemonId: Int, versionGroupId: Int) = read { listOf("Terrestre", "Féerique") }
 
-    override suspend fun abilities(pokemonId: Int, generationId: Int, versionGroupId: Int) =
-        read { listOf(AbilityRow("Statik", "Peut paralyser au contact.", false)) }
+    override suspend fun abilities(pokemonId: Int, generationId: Int, versionGroupId: Int) = read {
+        when (Generation.of(generationId)) {
+            Generation.GEN1,
+            Generation.GEN2 -> emptyList()
+
+            Generation.GEN3 ->
+                listOf(AbilityRow("Statik", "Peut paralyser au contact.", false))
+        }
+    }
 
     private fun electricMove(
         method: String,

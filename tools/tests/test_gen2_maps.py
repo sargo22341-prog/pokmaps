@@ -1,4 +1,4 @@
-"""Cartes d'Or et d'Argent (phase 3 de plan_gen_2.md) : cartes du monde, rendu en couleurs et terrains."""
+"""Cartes d'Or et d'Argent : cartes du monde, rendu en couleurs et terrains."""
 
 from pathlib import Path
 

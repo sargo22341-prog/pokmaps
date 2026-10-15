@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.BallContext
@@ -235,10 +236,11 @@ class PokemonViewModel @Inject constructor(
             ?: details.encounters.filter { it.versionId == game.versionId && !it.isTrade }.minOfOrNull { it.minLevel }
             ?: DEFAULT_LEVEL
         val baseHp = details.stats.firstOrNull { it.identifier == HP }?.value ?: 0
-        val maxHp = if (game.generationId == 3) {
-            Gen3CatchRate.maxHp(details.id, baseHp, level)
-        } else {
-            CatchRate.maxHp(baseHp, level)
+        val maxHp = when (game.generation) {
+            Generation.GEN1,
+            Generation.GEN2 -> CatchRate.maxHp(baseHp, level)
+
+            Generation.GEN3 -> Gen3CatchRate.maxHp(details.id, baseHp, level)
         }
         val currentHp = CatchRate.currentHp(maxHp, input.hp.fraction)
         val generation = checkNotNull(CaptureGeneration.from(game.generationId))

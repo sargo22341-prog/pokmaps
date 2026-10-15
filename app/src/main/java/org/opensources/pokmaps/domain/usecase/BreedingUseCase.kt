@@ -14,6 +14,7 @@ import org.opensources.pokmaps.domain.guide.BreedingPair
 import org.opensources.pokmaps.domain.guide.BreedingRules
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 
 interface BreedingTools {
     fun observe(): Flow<BreedingCatalog>
@@ -26,7 +27,7 @@ class BreedingUseCase @Inject constructor(
     private val pokemon: PokemonRepository
 ) : BreedingTools {
     override fun observe(): Flow<BreedingCatalog> = games.selectedGame.map {
-        if (it.generationId in 2..3) {
+        if (GenerationFeature.BREEDING.existsIn(it.generationId)) {
             val national = pokedex.catalogs(it).last().id
             BreedingCatalog(it, pokedex.pokedex(it, national), pokemon.breedingProfiles(it))
         } else {
@@ -36,7 +37,7 @@ class BreedingUseCase @Inject constructor(
 
     override suspend fun pair(game: Game, firstId: Int, secondId: Int, firstSex: ParentSex): BreedingPair =
         withContext(Dispatchers.IO) {
-            require(game.generationId in 2..3)
+            require(GenerationFeature.BREEDING.existsIn(game.generationId))
             val first = requireNotNull(pokemon.details(game, firstId))
             val second = requireNotNull(pokemon.details(game, secondId))
             val mother = when {
@@ -48,7 +49,7 @@ class BreedingUseCase @Inject constructor(
             val root = requireNotNull(mother.evolutions.singleOrNull())
             val ids = when (root.pokemonId) {
                 29 -> listOf(29, 32)
-                314 -> if (game.generationId == 3) listOf(314, 313) else listOf(314)
+                314 -> listOf(314, 313)
                 298 -> listOf(298, 183)
                 360 -> listOf(360, 202)
                 else -> listOf(root.pokemonId)

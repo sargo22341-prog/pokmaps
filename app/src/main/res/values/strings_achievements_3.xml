@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <item name="ra_4428_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_4428_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_4428">
+        <item>4428</item>
+        <item>@string/ra_4428_title</item>
+        <item>@string/ra_4428_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-brock</item>
+    </array>
+    <item name="ra_4429_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_4429_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_4429">
+        <item>4429</item>
+        <item>@string/ra_4429_title</item>
+        <item>@string/ra_4429_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <item name="ra_4430_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_4430_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_4430">
+        <item>4430</item>
+        <item>@string/ra_4430_title</item>
+        <item>@string/ra_4430_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <item name="ra_4431_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_4431_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_4431">
+        <item>4431</item>
+        <item>@string/ra_4431_title</item>
+        <item>@string/ra_4431_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-celadon</item>
+    </array>
+    <item name="ra_4432_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_4432_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_4432">
+        <item>4432</item>
+        <item>@string/ra_4432_title</item>
+        <item>@string/ra_4432_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <item name="ra_4433_title" type="string">@string/ra_4405_title</item>
+    <item name="ra_4433_text" type="string">@string/ra_4405_text</item>
+    <array name="ra_4433">
+        <item>4433</item>
+        <item>@string/ra_4433_title</item>
+        <item>@string/ra_4433_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_4434_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_4434_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_4434">
+        <item>4434</item>
+        <item>@string/ra_4434_title</item>
+        <item>@string/ra_4434_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <item name="ra_4435_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_4435_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_4435">
+        <item>4435</item>
+        <item>@string/ra_4435_title</item>
+        <item>@string/ra_4435_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <item name="ra_4437_title" type="string">@string/ra_4410_title</item>
+    <item name="ra_4437_text" type="string">@string/ra_4410_text</item>
+    <array name="ra_4437">
+        <item>4437</item>
+        <item>@string/ra_4437_title</item>
+        <item>@string/ra_4437_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_81655_title">
+        Premier Pokédex
+    </string>
+    <string name="ra_81655_text">
+        Recevoir le Pokédex du Professeur Chen.
+    </string>
+    <array name="ra_81655">
+        <item>81655</item>
+        <item>@string/ra_81655_title</item>
+        <item>@string/ra_81655_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81656_title">
+        Rival avant Argenta
+    </string>
+    <string name="ra_81656_text">
+        Vaincre le rival sur la Route 22 avant d’aller à Argenta.
+    </string>
+    <array name="ra_81656">
+        <item>81656</item>
+        <item>@string/ra_81656_title</item>
+        <item>@string/ra_81656_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-brock</item>
+    </array>
+    <string name="ra_81659_title">
+        Rival du Pont Pépite
+    </string>
+    <string name="ra_81659_text">
+        Vaincre le rival au Pont Pépite d’Azuria.
+    </string>
+    <array name="ra_81659">
+        <item>81659</item>
+        <item>@string/ra_81659_title</item>
+        <item>@string/ra_81659_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_81665_title">
+        Duel sur l’Océane
+    </string>
+    <string name="ra_81665_text">
+        Vaincre le rival à bord de l’Océane à Carmin sur Mer.
+    </string>
+    <array name="ra_81665">
+        <item>81665</item>
+        <item>@string/ra_81665_title</item>
+        <item>@string/ra_81665_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_81667_title">
+        Duel dans la Tour
+    </string>
+    <string name="ra_81667_text">
+        Vaincre le rival dans la Tour Pokémon de Lavanville.
+    </string>
+    <array name="ra_81667">
+        <item>81667</item>
+        <item>@string/ra_81667_title</item>
+        <item>@string/ra_81667_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_81672_title">
+        Rival de la Sylphe
+    </string>
+    <string name="ra_81672_text">
+        Vaincre le rival dans la Sylphe SARL de Safrania.
+    </string>
+    <array name="ra_81672">
+        <item>81672</item>
+        <item>@string/ra_81672_title</item>
+        <item>@string/ra_81672_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_81679_title">
+        Dernier barrage
+    </string>
+    <string name="ra_81679_text">
+        Vaincre le rival sur la Route 22 en allant à la Ligue Pokémon.
+    </string>
+    <array name="ra_81679">
+        <item>81679</item>
+        <item>@string/ra_81679_title</item>
+        <item>@string/ra_81679_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_81657_title">
+        Pikachu contre les Rocket : Sélénite
+    </string>
+    <string name="ra_81657_text">
+        Vaincre Jessie et James au Mont Sélénite en utilisant uniquement Pikachu.
+    </string>
+    <array name="ra_81657">
+        <item>81657</item>
+        <item>@string/ra_81657_title</item>
+        <item>@string/ra_81657_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_81668_title">
+        Pikachu contre les Rocket : Casino
+    </string>
+    <string name="ra_81668_text">
+        Vaincre Jessie et James au Repaire Rocket de Céladopole en utilisant uniquement Pikachu.
+    </string>
+    <array name="ra_81668">
+        <item>81668</item>
+        <item>@string/ra_81668_title</item>
+        <item>@string/ra_81668_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-celadon</item>
+    </array>
+    <string name="ra_81669_title">
+        Repaire libéré
+    </string>
+    <string name="ra_81669_text">
+        Vaincre la Team Rocket dans son repaire de Céladopole.
+    </string>
+    <array name="ra_81669">
+        <item>81669</item>
+        <item>@string/ra_81669_title</item>
+        <item>@string/ra_81669_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81670_title">
+        Pikachu contre les Rocket : Tour
+    </string>
+    <string name="ra_81670_text">
+        Vaincre Jessie et James dans la Tour Pokémon de Lavanville en utilisant uniquement Pikachu.
+    </string>
+    <array name="ra_81670">
+        <item>81670</item>
+        <item>@string/ra_81670_title</item>
+        <item>@string/ra_81670_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_81673_title">
+        Pikachu contre les Rocket : Sylphe
+    </string>
+    <string name="ra_81673_text">
+        Vaincre Jessie et James dans la Sylphe SARL de Safrania en utilisant uniquement Pikachu.
+    </string>
+    <array name="ra_81673">
+        <item>81673</item>
+        <item>@string/ra_81673_title</item>
+        <item>@string/ra_81673_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_81674_title">
+        Rocket expulsés
+    </string>
+    <string name="ra_81674_text">
+        Chasser la Team Rocket de la Sylphe SARL de Safrania.
+    </string>
+    <array name="ra_81674">
+        <item>81674</item>
+        <item>@string/ra_81674_title</item>
+        <item>@string/ra_81674_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <item name="ra_4436_title" type="string">@string/ra_4409_title</item>
+    <item name="ra_4436_text" type="string">@string/ra_4409_text</item>
+    <array name="ra_4436">
+        <item>4436</item>
+        <item>@string/ra_4436_title</item>
+        <item>@string/ra_4436_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4439_title">
+        Équipe de niveau 50
+    </string>
+    <string name="ra_4439_text">
+        Amener les six Pokémon de l’équipe au niveau 50. Aucun légendaire. Le succès se déclenche lors d’un gain
+        de niveau.
+    </string>
+    <array name="ra_4439">
+        <item>4439</item>
+        <item>@string/ra_4439_title</item>
+        <item>@string/ra_4439_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4441_title">
+        Souvenir préhistorique
+    </string>
+    <string name="ra_4441_text">
+        Obtenir un fossile de Pokémon au Mont Sélénite.
+    </string>
+    <array name="ra_4441">
+        <item>4441</item>
+        <item>@string/ra_4441_title</item>
+        <item>@string/ra_4441_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_4443_title">
+        Maître du Dojo
+    </string>
+    <string name="ra_4443_text">
+        Vaincre le maître du Dojo de Safrania et choisir sa récompense.
+    </string>
+    <array name="ra_4443">
+        <item>4443</item>
+        <item>@string/ra_4443_title</item>
+        <item>@string/ra_4443_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-silph</item>
+    </array>
+    <string name="ra_4445_title">
+        Fantôme de la Tour
+    </string>
+    <string name="ra_4445_text">
+        Rencontrer le fantôme bloquant le dernier escalier de la Tour Pokémon.
+    </string>
+    <array name="ra_4445">
+        <item>4445</item>
+        <item>@string/ra_4445_title</item>
+        <item>@string/ra_4445_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_4446_title">
+        Réveil à la flûte
+    </string>
+    <string name="ra_4446_text">
+        Réveiller et capturer un Pokémon à l’aide de la Poké Flûte.
+    </string>
+    <array name="ra_4446">
+        <item>4446</item>
+        <item>@string/ra_4446_title</item>
+        <item>@string/ra_4446_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_4447_title" type="string">@string/ra_4420_title</item>
+    <item name="ra_4447_text" type="string">@string/ra_4420_text</item>
+    <array name="ra_4447">
+        <item>4447</item>
+        <item>@string/ra_4447_title</item>
+        <item>@string/ra_4447_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_4448_title" type="string">@string/ra_4421_title</item>
+    <item name="ra_4448_text" type="string">@string/ra_4421_text</item>
+    <array name="ra_4448">
+        <item>4448</item>
+        <item>@string/ra_4448_title</item>
+        <item>@string/ra_4448_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81658_title">
+        Magicarpe trop cher
+    </string>
+    <string name="ra_81658_text">
+        Acheter le Magicarpe vendu au Centre Pokémon de la Route 3.
+    </string>
+    <array name="ra_81658">
+        <item>81658</item>
+        <item>@string/ra_81658_title</item>
+        <item>@string/ra_81658_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-moon</item>
+    </array>
+    <string name="ra_81661_title">
+        Bulbizarre accueilli
+    </string>
+    <string name="ra_81661_text">
+        Recevoir Bulbizarre de Mélanie à Azuria.
+    </string>
+    <array name="ra_81661">
+        <item>81661</item>
+        <item>@string/ra_81661_title</item>
+        <item>@string/ra_81661_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_81660_title">
+        Salamèche adopté
+    </string>
+    <string name="ra_81660_text">
+        Recevoir Salamèche du personnage de la Route 24.
+    </string>
+    <array name="ra_81660">
+        <item>81660</item>
+        <item>@string/ra_81660_title</item>
+        <item>@string/ra_81660_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-bill</item>
+    </array>
+    <string name="ra_81666_title">
+        Carapuce secouru
+    </string>
+    <string name="ra_81666_text">
+        Recevoir Carapuce de l’agent Jenny à Carmin sur Mer.
+    </string>
+    <array name="ra_81666">
+        <item>81666</item>
+        <item>@string/ra_81666_title</item>
+        <item>@string/ra_81666_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>kanto-ship</item>
+    </array>
+    <string name="ra_81662_title">
+        Échange : Machopeur
+    </string>
+    <string name="ra_81662_text">
+        Échanger Osselait contre Machopeur auprès du personnage du jeu.
+    </string>
+    <array name="ra_81662">
+        <item>81662</item>
+        <item>@string/ra_81662_title</item>
+        <item>@string/ra_81662_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <item name="ra_81663_title" type="string">@string/ra_540314_title</item>
+    <string name="ra_81663_text">
+        Échanger Mélofée contre M. Mime auprès du personnage du jeu.
+    </string>
+    <array name="ra_81663">
+        <item>81663</item>
+        <item>@string/ra_81663_title</item>
+        <item>@string/ra_81663_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81664_title">
+        Échange : Triopikeur
+    </string>
+    <string name="ra_81664_text">
+        Échanger Excelangue contre Triopikeur auprès du personnage du jeu.
+    </string>
+    <array name="ra_81664">
+        <item>81664</item>
+        <item>@string/ra_81664_title</item>
+        <item>@string/ra_81664_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81671_title">
+        Échange : Parasect
+    </string>
+    <string name="ra_81671_text">
+        Échanger Saquedeneu contre Parasect auprès du personnage du jeu.
+    </string>
+    <array name="ra_81671">
+        <item>81671</item>
+        <item>@string/ra_81671_title</item>
+        <item>@string/ra_81671_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81676_title">
+        Échange : Grotadmorv
+    </string>
+    <string name="ra_81676_text">
+        Échanger Kangourex contre Grotadmorv auprès du personnage du jeu.
+    </string>
+    <array name="ra_81676">
+        <item>81676</item>
+        <item>@string/ra_81676_title</item>
+        <item>@string/ra_81676_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_81677_title">
+        Échange : Lamantine
+    </string>
+    <string name="ra_81677_text">
+        Échanger Caninos contre Lamantine auprès du personnage du jeu.
+    </string>
+    <array name="ra_81677">
+        <item>81677</item>
+        <item>@string/ra_81677_title</item>
+        <item>@string/ra_81677_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_81678_title">
+        Échange : Rhinoféros
+    </string>
+    <string name="ra_81678_text">
+        Échanger Akwakwak contre Rhinoféros auprès du personnage du jeu.
+    </string>
+    <array name="ra_81678">
+        <item>81678</item>
+        <item>@string/ra_81678_title</item>
+        <item>@string/ra_81678_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>kanto-cinnabar</item>
+    </array>
+    <string name="ra_4450_title">
+        Collection Jaune
+    </string>
+    <string name="ra_4450_text">
+        Capturer les 129 Pokémon normalement accessibles dans une seule sauvegarde de Pokémon Jaune.
+    </string>
+    <array name="ra_4450">
+        <item>4450</item>
+        <item>@string/ra_4450_title</item>
+        <item>@string/ra_4450_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81680_title">
+        Traversée sans Flash
+    </string>
+    <string name="ra_81680_text">
+        Traverser la Grotte depuis la Route 9 jusqu’à Lavanville sans utiliser Flash.
+    </string>
+    <array name="ra_81680">
+        <item>81680</item>
+        <item>@string/ra_81680_title</item>
+        <item>@string/ra_81680_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-rock</item>
+    </array>
+    <string name="ra_81675_title">
+        Safari parfait
+    </string>
+    <string name="ra_81675_text">
+        Parler au personnage donnant la CS03 dans le Parc Safari lorsqu’il reste exactement 209 pas. Une seule
+        session, sans Surf.
+    </string>
+    <array name="ra_81675">
+        <item>81675</item>
+        <item>@string/ra_81675_title</item>
+        <item>@string/ra_81675_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>kanto-safari</item>
+    </array>
+    <string name="ra_81681_title">
+        Routes sans détour
+    </string>
+    <string name="ra_81681_text">
+        Vaincre tous les Dresseurs des Routes 12 à 15 sans quitter cet ensemble de routes, dans une seule
+        session.
+    </string>
+    <array name="ra_81681">
+        <item>81681</item>
+        <item>@string/ra_81681_title</item>
+        <item>@string/ra_81681_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_4449_title">
+        Pikachu maître de la Ligue
+    </string>
+    <string name="ra_4449_text">
+        Vaincre le Conseil des 4 et le Maître avec uniquement Pikachu dans l’équipe, en une session, sans
+        Pikachu connaissant Surf.
+    </string>
+    <array name="ra_4449">
+        <item>4449</item>
+        <item>@string/ra_4449_title</item>
+        <item>@string/ra_4449_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>kanto-league</item>
+    </array>
+    <string name="ra_81795_title">
+        Pikachu : 0–50, humeur mauvaise
+    </string>
+    <string name="ra_81795_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur mauvaise.
+    </string>
+    <array name="ra_81795">
+        <item>81795</item>
+        <item>@string/ra_81795_title</item>
+        <item>@string/ra_81795_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81796_title">
+        Pikachu : 0–50, humeur normale
+    </string>
+    <string name="ra_81796_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur normale.
+    </string>
+    <array name="ra_81796">
+        <item>81796</item>
+        <item>@string/ra_81796_title</item>
+        <item>@string/ra_81796_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81797_title">
+        Pikachu : 0–50, humeur bonne
+    </string>
+    <string name="ra_81797_text">
+        Parler à Pikachu avec une amitié comprise entre 0 et 50 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81797">
+        <item>81797</item>
+        <item>@string/ra_81797_title</item>
+        <item>@string/ra_81797_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81798_title">
+        Pikachu : 51–100, humeur mauvaise
+    </string>
+    <string name="ra_81798_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur mauvaise.
+    </string>
+    <array name="ra_81798">
+        <item>81798</item>
+        <item>@string/ra_81798_title</item>
+        <item>@string/ra_81798_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81799_title">
+        Pikachu : 51–100, humeur normale
+    </string>
+    <string name="ra_81799_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur normale.
+    </string>
+    <array name="ra_81799">
+        <item>81799</item>
+        <item>@string/ra_81799_title</item>
+        <item>@string/ra_81799_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81800_title">
+        Pikachu : 51–100, humeur bonne
+    </string>
+    <string name="ra_81800_text">
+        Parler à Pikachu avec une amitié comprise entre 51 et 100 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81800">
+        <item>81800</item>
+        <item>@string/ra_81800_title</item>
+        <item>@string/ra_81800_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81801_title">
+        Pikachu : 101–160, humeur mauvaise
+    </string>
+    <string name="ra_81801_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 160 inclus et une humeur mauvaise.
+    </string>
+    <array name="ra_81801">
+        <item>81801</item>
+        <item>@string/ra_81801_title</item>
+        <item>@string/ra_81801_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81802_title">
+        Pikachu : 101–130, humeur normale
+    </string>
+    <string name="ra_81802_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 130 inclus et une humeur normale.
+    </string>
+    <array name="ra_81802">
+        <item>81802</item>
+        <item>@string/ra_81802_title</item>
+        <item>@string/ra_81802_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81803_title">
+        Pikachu : 101–130, humeur bonne
+    </string>
+    <string name="ra_81803_text">
+        Parler à Pikachu avec une amitié comprise entre 101 et 130 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81803">
+        <item>81803</item>
+        <item>@string/ra_81803_title</item>
+        <item>@string/ra_81803_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81804_title">
+        Pikachu : 131–160, humeur normale
+    </string>
+    <string name="ra_81804_text">
+        Parler à Pikachu avec une amitié comprise entre 131 et 160 inclus et une humeur normale.
+    </string>
+    <array name="ra_81804">
+        <item>81804</item>
+        <item>@string/ra_81804_title</item>
+        <item>@string/ra_81804_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81805_title">
+        Pikachu : 131–160, humeur bonne
+    </string>
+    <string name="ra_81805_text">
+        Parler à Pikachu avec une amitié comprise entre 131 et 160 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81805">
+        <item>81805</item>
+        <item>@string/ra_81805_title</item>
+        <item>@string/ra_81805_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81806_title">
+        Pikachu : 161–255, humeur mauvaise
+    </string>
+    <string name="ra_81806_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 255 inclus et une humeur mauvaise.
+    </string>
+    <array name="ra_81806">
+        <item>81806</item>
+        <item>@string/ra_81806_title</item>
+        <item>@string/ra_81806_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81807_title">
+        Pikachu : 161–200, humeur normale
+    </string>
+    <string name="ra_81807_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 200 inclus et une humeur normale.
+    </string>
+    <array name="ra_81807">
+        <item>81807</item>
+        <item>@string/ra_81807_title</item>
+        <item>@string/ra_81807_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81808_title">
+        Pikachu : 161–200, humeur bonne
+    </string>
+    <string name="ra_81808_text">
+        Parler à Pikachu avec une amitié comprise entre 161 et 200 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81808">
+        <item>81808</item>
+        <item>@string/ra_81808_title</item>
+        <item>@string/ra_81808_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81809_title">
+        Pikachu : 201–250, humeur normale
+    </string>
+    <string name="ra_81809_text">
+        Parler à Pikachu avec une amitié comprise entre 201 et 250 inclus et une humeur normale.
+    </string>
+    <array name="ra_81809">
+        <item>81809</item>
+        <item>@string/ra_81809_title</item>
+        <item>@string/ra_81809_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81810_title">
+        Pikachu : 201–250, humeur bonne
+    </string>
+    <string name="ra_81810_text">
+        Parler à Pikachu avec une amitié comprise entre 201 et 250 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81810">
+        <item>81810</item>
+        <item>@string/ra_81810_title</item>
+        <item>@string/ra_81810_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81811_title">
+        Pikachu : 251–255, humeur normale
+    </string>
+    <string name="ra_81811_text">
+        Parler à Pikachu avec une amitié comprise entre 251 et 255 inclus et une humeur normale.
+    </string>
+    <array name="ra_81811">
+        <item>81811</item>
+        <item>@string/ra_81811_title</item>
+        <item>@string/ra_81811_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81812_title">
+        Pikachu : 251–255, humeur bonne
+    </string>
+    <string name="ra_81812_text">
+        Parler à Pikachu avec une amitié comprise entre 251 et 255 inclus et une humeur bonne.
+    </string>
+    <array name="ra_81812">
+        <item>81812</item>
+        <item>@string/ra_81812_title</item>
+        <item>@string/ra_81812_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81813_title">
+        Pikachu après une capture
+    </string>
+    <string name="ra_81813_text">
+        Capturer un Pokémon puis parler à Pikachu.
+    </string>
+    <array name="ra_81813">
+        <item>81813</item>
+        <item>@string/ra_81813_title</item>
+        <item>@string/ra_81813_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81814_title">
+        Pikachu pêcheur
+    </string>
+    <string name="ra_81814_text">
+        Utiliser une canne à pêche puis parler à Pikachu.
+    </string>
+    <array name="ra_81814">
+        <item>81814</item>
+        <item>@string/ra_81814_title</item>
+        <item>@string/ra_81814_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81815_title">
+        Pikachu refuse la Pierre
+    </string>
+    <string name="ra_81815_text">
+        Essayer de faire évoluer Pikachu puis lui parler.
+    </string>
+    <array name="ra_81815">
+        <item>81815</item>
+        <item>@string/ra_81815_title</item>
+        <item>@string/ra_81815_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81816_title">
+        Signature électrique
+    </string>
+    <string name="ra_81816_text">
+        Apprendre Fatal-Foudre ou Tonnerre à Pikachu puis lui parler.
+    </string>
+    <array name="ra_81816">
+        <item>81816</item>
+        <item>@string/ra_81816_title</item>
+        <item>@string/ra_81816_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81817_title">
+        Pikachu endormi
+    </string>
+    <string name="ra_81817_text">
+        Parler à Pikachu lorsqu’il souffre du statut sommeil, sans passer par un Centre Pokémon.
+    </string>
+    <array name="ra_81817">
+        <item>81817</item>
+        <item>@string/ra_81817_title</item>
+        <item>@string/ra_81817_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81818_title">
+        Pikachu malade
+    </string>
+    <string name="ra_81818_text">
+        Parler à Pikachu lorsqu’il souffre d’un statut autre que le sommeil.
+    </string>
+    <array name="ra_81818">
+        <item>81818</item>
+        <item>@string/ra_81818_title</item>
+        <item>@string/ra_81818_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81819_title">
+        Berceuse de Rondoudou
+    </string>
+    <string name="ra_81819_text">
+        Parler à Pikachu après qu’il s’est endormi en écoutant Rondoudou. Il s’agit de la scène chantée, pas du
+        statut sommeil en combat.
+    </string>
+    <array name="ra_81819">
+        <item>81819</item>
+        <item>@string/ra_81819_title</item>
+        <item>@string/ra_81819_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81820_title">
+        Pikachu et les fantômes
+    </string>
+    <string name="ra_81820_text">
+        Parler à Pikachu dans la Tour Pokémon.
+    </string>
+    <array name="ra_81820">
+        <item>81820</item>
+        <item>@string/ra_81820_title</item>
+        <item>@string/ra_81820_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-flute</item>
+    </array>
+    <string name="ra_81976_title">
+        Transformation de Léo
+    </string>
+    <string name="ra_81976_text">
+        Faire réagir Pikachu à Léo transformé, puis à son retour à la forme humaine.
+    </string>
+    <array name="ra_81976">
+        <item>81976</item>
+        <item>@string/ra_81976_title</item>
+        <item>@string/ra_81976_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81977_title">
+        Pikachu amoureux
+    </string>
+    <string name="ra_81977_text">
+        Faire tomber Pikachu amoureux du Mélofée du Fan Club Pokémon.
+    </string>
+    <array name="ra_81977">
+        <item>81977</item>
+        <item>@string/ra_81977_title</item>
+        <item>@string/ra_81977_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_81978_title">
+        Pikachu reste
+    </string>
+    <string name="ra_81978_text">
+        Essayer de relâcher Pikachu.
+    </string>
+    <array name="ra_81978">
+        <item>81978</item>
+        <item>@string/ra_81978_title</item>
+        <item>@string/ra_81978_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <string name="ra_82089_title">
+        Danse sur le rebord
+    </string>
+    <string name="ra_82089_text">
+        Laisser Pikachu derrière un rebord pendant un moment.
+    </string>
+    <array name="ra_82089">
+        <item>82089</item>
+        <item>@string/ra_82089_title</item>
+        <item>@string/ra_82089_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>kanto-start</item>
+    </array>
+    <array name="achievements_3">
+        <item>@array/ra_4428</item>
+        <item>@array/ra_4429</item>
+        <item>@array/ra_4430</item>
+        <item>@array/ra_4431</item>
+        <item>@array/ra_4432</item>
+        <item>@array/ra_4433</item>
+        <item>@array/ra_4434</item>
+        <item>@array/ra_4435</item>
+        <item>@array/ra_4437</item>
+        <item>@array/ra_81655</item>
+        <item>@array/ra_81656</item>
+        <item>@array/ra_81659</item>
+        <item>@array/ra_81665</item>
+        <item>@array/ra_81667</item>
+        <item>@array/ra_81672</item>
+        <item>@array/ra_81679</item>
+        <item>@array/ra_81657</item>
+        <item>@array/ra_81668</item>
+        <item>@array/ra_81669</item>
+        <item>@array/ra_81670</item>
+        <item>@array/ra_81673</item>
+        <item>@array/ra_81674</item>
+        <item>@array/ra_4436</item>
+        <item>@array/ra_4439</item>
+        <item>@array/ra_4441</item>
+        <item>@array/ra_4443</item>
+        <item>@array/ra_4445</item>
+        <item>@array/ra_4446</item>
+        <item>@array/ra_4447</item>
+        <item>@array/ra_4448</item>
+        <item>@array/ra_81658</item>
+        <item>@array/ra_81661</item>
+        <item>@array/ra_81660</item>
+        <item>@array/ra_81666</item>
+        <item>@array/ra_81662</item>
+        <item>@array/ra_81663</item>
+        <item>@array/ra_81664</item>
+        <item>@array/ra_81671</item>
+        <item>@array/ra_81676</item>
+        <item>@array/ra_81677</item>
+        <item>@array/ra_81678</item>
+        <item>@array/ra_4450</item>
+        <item>@array/ra_81680</item>
+        <item>@array/ra_81675</item>
+        <item>@array/ra_81681</item>
+        <item>@array/ra_4449</item>
+        <item>@array/ra_81795</item>
+        <item>@array/ra_81796</item>
+        <item>@array/ra_81797</item>
+        <item>@array/ra_81798</item>
+        <item>@array/ra_81799</item>
+        <item>@array/ra_81800</item>
+        <item>@array/ra_81801</item>
+        <item>@array/ra_81802</item>
+        <item>@array/ra_81803</item>
+        <item>@array/ra_81804</item>
+        <item>@array/ra_81805</item>
+        <item>@array/ra_81806</item>
+        <item>@array/ra_81807</item>
+        <item>@array/ra_81808</item>
+        <item>@array/ra_81809</item>
+        <item>@array/ra_81810</item>
+        <item>@array/ra_81811</item>
+        <item>@array/ra_81812</item>
+        <item>@array/ra_81813</item>
+        <item>@array/ra_81814</item>
+        <item>@array/ra_81815</item>
+        <item>@array/ra_81816</item>
+        <item>@array/ra_81817</item>
+        <item>@array/ra_81818</item>
+        <item>@array/ra_81819</item>
+        <item>@array/ra_81820</item>
+        <item>@array/ra_81976</item>
+        <item>@array/ra_81977</item>
+        <item>@array/ra_81978</item>
+        <item>@array/ra_82089</item>
+    </array>
+</resources>

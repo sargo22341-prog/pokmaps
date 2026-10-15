@@ -12,6 +12,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
+from .external_events import event_locations
+
 
 class PretFormat(Enum):
     """Format des sources d'un désassemblage pret : chaque format a son lecteur."""
@@ -121,8 +123,7 @@ CRYSTAL = Game(
     PretFormat.GEN2,
     (JOHTO, KANTO),
 )
-# 3e génération, en deux branches qui ne partagent que le moteur (docs/plan_gen_3.md) : Hoenn (Rubis, Saphir,
-# Émeraude) et le remake de la 1re génération (Rouge Feu, Vert Feuille), toutes deux activées.
+# 3e génération : Hoenn et les remakes de Kanto partagent le moteur (docs/generations/generation-3.md).
 RUBY_SAPPHIRE = Game(
     "ruby-sapphire",
     "pokeruby",
@@ -208,7 +209,7 @@ ONE_OFF_METHODS = frozenset(
 # (lieux PokéAPI : Roc Nombri, Île Aurore, Île Lointaine, Île du Sud). Ces rencontres sont gardées avec la
 # mention EXTERNAL_EVENT_NOTE, mais ne rendent pas le Pokémon obtenable dans le jeu (validate._check_obtainable).
 EXTERNAL_EVENT_METHODS = frozenset({"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal"})
-EXTERNAL_EVENT_LOCATIONS = frozenset({"navel-rock", "birth-island", "faraway-island", "southern-island"})
+EXTERNAL_EVENT_LOCATIONS = event_locations()
 # Métamo : seule la table A (Nosferapti) est accessible sans distribution externe ; les tables B à I
 # étaient prévues pour le Cadeau Mystère, jamais distribué. Garder les rencontres, sans les compter.
 EXTERNAL_EVENT_AREAS = frozenset(

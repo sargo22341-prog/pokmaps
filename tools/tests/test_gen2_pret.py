@@ -1,4 +1,4 @@
-"""Lecteur pret de la 2e génération (phase 2 de plan_gen_2.md) : cartes, événements, dresseurs et scripts."""
+"""Lecteur pret de la 2e génération : cartes, événements, dresseurs et scripts."""
 
 from pathlib import Path
 

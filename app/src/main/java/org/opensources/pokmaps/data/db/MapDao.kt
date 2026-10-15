@@ -58,7 +58,8 @@ interface MapDao {
 
     /** Rencontres des zones d'un lieu dans une version. */
     @Query(
-        "SELECT $ENCOUNTER_COLUMNS FROM $ENCOUNTER_TABLES WHERE e.version_id = :versionId AND e.location_area_id IN (:areaIds)"
+        "SELECT $ENCOUNTER_COLUMNS FROM $ENCOUNTER_TABLES " +
+            "WHERE e.version_id = :versionId AND e.location_area_id IN (:areaIds)"
     )
     suspend fun encounters(versionId: Int, areaIds: List<Int>): List<EncounterRow>
 
@@ -208,7 +209,8 @@ interface MapDao {
             i.has_sprite AS itemHasSprite, n.pokemon_id AS pokemonId, p.name_fr AS pokemonName, n.quantity, n.price,
             n.wanted_pokemon_id AS wantedPokemonId, w.name_fr AS wantedPokemonName,
             n.wanted_item_id AS wantedItemId, wi.identifier AS wantedItemIdentifier, wi.name_fr AS wantedItemName,
-            wi.has_sprite AS wantedItemHasSprite, n.time_mask AS timeMask, n.weekday_mask AS weekdayMask, n.currency
+            wi.has_sprite AS wantedItemHasSprite, n.time_mask AS timeMask, n.weekday_mask AS weekdayMask, n.currency,
+            n.external_event AS isExternalEvent
         FROM npc_offer n
         LEFT JOIN item i ON i.id = n.item_id
         LEFT JOIN pokemon p ON p.id = n.pokemon_id

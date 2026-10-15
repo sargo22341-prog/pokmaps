@@ -2,11 +2,16 @@ package org.opensources.pokmaps.data.db
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.opensources.pokmaps.domain.model.Game
 
 @Dao
 interface GameDao {
+    fun games(): Flow<List<Game>> = gameRows().map { rows -> rows.map { it.toGame() } }
+
+    @Transaction
     @Query(
         """
         SELECT v.id AS versionId, v.identifier AS versionIdentifier, v.name_fr AS name,
@@ -21,5 +26,5 @@ interface GameDao {
         ORDER BY vg.sort_order, v.id
         """
     )
-    fun games(): Flow<List<Game>>
+    fun gameRows(): Flow<List<GameRow>>
 }

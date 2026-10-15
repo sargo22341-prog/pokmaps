@@ -1,8 +1,8 @@
 # Jeux et carte
 
 L'onglet Jeu présente une rangée horizontale de jaquettes par génération : Rouge, Bleu, Jaune ; Or, Argent,
-Cristal ; Rubis, Saphir, Émeraude ; puis « Remake 1G » avec Rouge Feu et Vert Feuille. Une coche indique le jeu actif ; les
-jaquettes gardent leurs noms accessibles.
+Cristal ; Rubis, Saphir, Émeraude ; puis « Remake 1G » avec Rouge Feu et Vert Feuille. Une coche indique le jeu actif ;
+les jaquettes gardent leurs noms accessibles.
 
 Changer de version dans la même famille de cartes conserve lieu, centre et zoom lorsque la carte existe aussi dans
 la nouvelle version. Changer de famille revient au départ : Bourg Palette, Bourg Geon ou Bourg-en-Vol. Une carte
@@ -38,3 +38,6 @@ dans l’eau sous la plage, la masque. Le téléphérique relie ses deux station
 surface et fond marin. Le filtre « Bases secrètes » affiche un drapeau par emplacement ; le toucher ouvre la base,
 et le retour ramène à son entrée. Les Îles Sevii reposent sur l’eau répétée du jeu au lieu d’un fond uni.
 Les badges d’étage suivent la même convention partout : « RDC », « 1er », « 2e », « -1 »…
+
+Sur les plans concernés, les passages reliés ont la même couleur ; « Liaisons » affiche leurs traits,
+masqués par défaut. Les sprites de personnages gardent leur taille native et leurs pieds au bas de la case.

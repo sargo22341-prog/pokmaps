@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_5086_title">
+        Nom du rival
+    </string>
+    <string name="ra_5086_text">
+        Donner un nom au nouveau rival.
+    </string>
+    <array name="ra_5086">
+        <item>5086</item>
+        <item>@string/ra_5086_title</item>
+        <item>@string/ra_5086_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_5070_title">
+        Badge Zéphyr
+    </string>
+    <string name="ra_5070_text">
+        Vaincre Albert et obtenir le Badge Zéphyr.
+    </string>
+    <array name="ra_5070">
+        <item>5070</item>
+        <item>@string/ra_5070_title</item>
+        <item>@string/ra_5070_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-violet</item>
+    </array>
+    <string name="ra_155162_title">
+        Albert : défi niveau 9
+    </string>
+    <string name="ra_155162_text">
+        Vaincre Albert en mode Défini, au niveau 9 maximum.
+    </string>
+    <array name="ra_155162">
+        <item>155162</item>
+        <item>@string/ra_155162_title</item>
+        <item>@string/ra_155162_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-violet</item>
+    </array>
+    <string name="ra_5092_title">
+        Puits libéré
+    </string>
+    <string name="ra_5092_text">
+        Vaincre la nouvelle Team Rocket au Puits Ramoloss.
+    </string>
+    <array name="ra_5092">
+        <item>5092</item>
+        <item>@string/ra_5092_title</item>
+        <item>@string/ra_5092_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <string name="ra_5071_title">
+        Badge Essaim
+    </string>
+    <string name="ra_5071_text">
+        Vaincre Hector et obtenir le Badge Essaim.
+    </string>
+    <array name="ra_5071">
+        <item>5071</item>
+        <item>@string/ra_5071_title</item>
+        <item>@string/ra_5071_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <string name="ra_155163_title">
+        Hector : défi niveau 16
+    </string>
+    <string name="ra_155163_text">
+        Vaincre Hector en mode Défini, au niveau 16 maximum.
+    </string>
+    <array name="ra_155163">
+        <item>155163</item>
+        <item>@string/ra_155163_title</item>
+        <item>@string/ra_155163_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-azalea</item>
+    </array>
+    <string name="ra_5072_title">
+        Badge Plaine
+    </string>
+    <string name="ra_5072_text">
+        Vaincre Blanche et obtenir le Badge Plaine.
+    </string>
+    <array name="ra_5072">
+        <item>5072</item>
+        <item>@string/ra_5072_title</item>
+        <item>@string/ra_5072_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <string name="ra_155168_title">
+        Blanche : défi niveau 20
+    </string>
+    <string name="ra_155168_text">
+        Vaincre Blanche en mode Défini, au niveau 20 maximum.
+    </string>
+    <array name="ra_155168">
+        <item>155168</item>
+        <item>@string/ra_155168_title</item>
+        <item>@string/ra_155168_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-goldenrod</item>
+    </array>
+    <string name="ra_5073_title">
+        Badge Brume
+    </string>
+    <string name="ra_5073_text">
+        Vaincre Mortimer et obtenir le Badge Brume.
+    </string>
+    <array name="ra_5073">
+        <item>5073</item>
+        <item>@string/ra_5073_title</item>
+        <item>@string/ra_5073_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <string name="ra_155170_title">
+        Mortimer : défi niveau 25
+    </string>
+    <string name="ra_155170_text">
+        Vaincre Mortimer en mode Défini, au niveau 25 maximum.
+    </string>
+    <array name="ra_155170">
+        <item>155170</item>
+        <item>@string/ra_155170_title</item>
+        <item>@string/ra_155170_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-ecruteak</item>
+    </array>
+    <string name="ra_5074_title">
+        Badge Choc
+    </string>
+    <string name="ra_5074_text">
+        Vaincre Chuck et obtenir le Badge Choc.
+    </string>
+    <array name="ra_5074">
+        <item>5074</item>
+        <item>@string/ra_5074_title</item>
+        <item>@string/ra_5074_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_155173_title">
+        Chuck : défi niveau 30
+    </string>
+    <string name="ra_155173_text">
+        Vaincre Chuck en mode Défini, au niveau 30 maximum.
+    </string>
+    <array name="ra_155173">
+        <item>155173</item>
+        <item>@string/ra_155173_title</item>
+        <item>@string/ra_155173_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_5075_title">
+        Badge Minéral
+    </string>
+    <string name="ra_5075_text">
+        Vaincre Jasmine et obtenir le Badge Minéral.
+    </string>
+    <array name="ra_5075">
+        <item>5075</item>
+        <item>@string/ra_5075_title</item>
+        <item>@string/ra_5075_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_155174_title">
+        Jasmine : défi niveau 35
+    </string>
+    <string name="ra_155174_text">
+        Vaincre Jasmine en mode Défini, au niveau 35 maximum.
+    </string>
+    <array name="ra_155174">
+        <item>155174</item>
+        <item>@string/ra_155174_title</item>
+        <item>@string/ra_155174_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-coast</item>
+    </array>
+    <string name="ra_5093_title">
+        Rocket d’Acajou
+    </string>
+    <string name="ra_5093_text">
+        Vaincre la Team Rocket à Acajou.
+    </string>
+    <array name="ra_5093">
+        <item>5093</item>
+        <item>@string/ra_5093_title</item>
+        <item>@string/ra_5093_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-mahogany</item>
+    </array>
+    <string name="ra_5076_title">
+        Badge Glacier
+    </string>
+    <string name="ra_5076_text">
+        Vaincre Frédo et obtenir le Badge Glacier.
+    </string>
+    <array name="ra_5076">
+        <item>5076</item>
+        <item>@string/ra_5076_title</item>
+        <item>@string/ra_5076_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-mahogany</item>
+    </array>
+    <string name="ra_155175_title">
+        Frédo : défi niveau 31
+    </string>
+    <string name="ra_155175_text">
+        Vaincre Frédo en mode Défini, au niveau 31 maximum.
+    </string>
+    <array name="ra_155175">
+        <item>155175</item>
+        <item>@string/ra_155175_title</item>
+        <item>@string/ra_155175_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-mahogany</item>
+    </array>
+    <string name="ra_5497_title">
+        Radio libérée
+    </string>
+    <string name="ra_5497_text">
+        Vaincre la Team Rocket dans la Tour Radio.
+    </string>
+    <array name="ra_5497">
+        <item>5497</item>
+        <item>@string/ra_5497_title</item>
+        <item>@string/ra_5497_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-radio</item>
+    </array>
+    <string name="ra_5077_title">
+        Badge Lever
+    </string>
+    <string name="ra_5077_text">
+        Vaincre Sandra et obtenir le Badge Lever.
+    </string>
+    <array name="ra_5077">
+        <item>5077</item>
+        <item>@string/ra_5077_title</item>
+        <item>@string/ra_5077_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_155176_title">
+        Sandra : défi niveau 40
+    </string>
+    <string name="ra_155176_text">
+        Vaincre Sandra en mode Défini, au niveau 40 maximum.
+    </string>
+    <array name="ra_155176">
+        <item>155176</item>
+        <item>@string/ra_155176_title</item>
+        <item>@string/ra_155176_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_5087_title">
+        Trio fuyard
+    </string>
+    <string name="ra_5087_text">
+        Capturer Entei, Suicune et Raikou.
+    </string>
+    <array name="ra_5087">
+        <item>5087</item>
+        <item>@string/ra_5087_title</item>
+        <item>@string/ra_5087_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>johto-roamers</item>
+    </array>
+    <string name="ra_5089_title">
+        Arc-en-ciel capturé
+    </string>
+    <string name="ra_5089_text">
+        Capturer Ho-Oh.
+    </string>
+    <array name="ra_5089">
+        <item>5089</item>
+        <item>@string/ra_5089_title</item>
+        <item>@string/ra_5089_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-hooh</item>
+    </array>
+    <string name="ra_5091_title">
+        Alphabet complet
+    </string>
+    <string name="ra_5091_text">
+        Capturer les 26 formes de Zarbi.
+    </string>
+    <array name="ra_5091">
+        <item>5091</item>
+        <item>@string/ra_5091_title</item>
+        <item>@string/ra_5091_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-alph</item>
+    </array>
+    <string name="ra_5509_title">
+        Première victoire à la Ligue
+    </string>
+    <string name="ra_5509_text">
+        Vaincre le Conseil des 4 et Peter pour la première fois.
+    </string>
+    <array name="ra_5509">
+        <item>5509</item>
+        <item>@string/ra_5509_title</item>
+        <item>@string/ra_5509_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <item name="ra_5511_title" type="string">@string/ra_4422_title</item>
+    <string name="ra_5511_text">
+        Vaincre le Conseil des 4 et le Maître avec un seul Pokémon dans l’équipe.
+    </string>
+    <array name="ra_5511">
+        <item>5511</item>
+        <item>@string/ra_5511_title</item>
+        <item>@string/ra_5511_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-league</item>
+    </array>
+    <string name="ra_155164_title">
+        Piafabec de livraison
+    </string>
+    <string name="ra_155164_text">
+        Recevoir le Piafabec offert pour une livraison.
+    </string>
+    <array name="ra_155164">
+        <item>155164</item>
+        <item>@string/ra_155164_title</item>
+        <item>@string/ra_155164_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155165_title">
+        Échange : Onix
+    </string>
+    <string name="ra_155165_text">
+        Échanger Chétiflor contre Onix auprès du personnage du jeu.
+    </string>
+    <array name="ra_155165">
+        <item>155165</item>
+        <item>@string/ra_155165_title</item>
+        <item>@string/ra_155165_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155166_title">
+        Échange : Machoc
+    </string>
+    <string name="ra_155166_text">
+        Échanger Soporifik contre Machoc auprès du personnage du jeu.
+    </string>
+    <array name="ra_155166">
+        <item>155166</item>
+        <item>@string/ra_155166_title</item>
+        <item>@string/ra_155166_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155167_title">
+        Œuf Mystère éclos
+    </string>
+    <string name="ra_155167_text">
+        Faire éclore l’Œuf Mystère et obtenir son Pokémon.
+    </string>
+    <array name="ra_155167">
+        <item>155167</item>
+        <item>@string/ra_155167_title</item>
+        <item>@string/ra_155167_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155169_title">
+        Cadeau de Léo
+    </string>
+    <string name="ra_155169_text">
+        Recevoir Évoli de Léo.
+    </string>
+    <array name="ra_155169">
+        <item>155169</item>
+        <item>@string/ra_155169_title</item>
+        <item>@string/ra_155169_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155171_title">
+        Échange : Voltorbe
+    </string>
+    <string name="ra_155171_text">
+        Échanger Krabby contre Voltorbe auprès du personnage du jeu.
+    </string>
+    <array name="ra_155171">
+        <item>155171</item>
+        <item>@string/ra_155171_title</item>
+        <item>@string/ra_155171_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155172_title">
+        Caratroc confié
+    </string>
+    <string name="ra_155172_text">
+        Recevoir Caratroc à Irisia.
+    </string>
+    <array name="ra_155172">
+        <item>155172</item>
+        <item>@string/ra_155172_title</item>
+        <item>@string/ra_155172_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <item name="ra_155177_title" type="string">@string/ra_81678_title</item>
+    <string name="ra_155177_text">
+        Échanger Draco contre Rhinoféros auprès du personnage du jeu.
+    </string>
+    <array name="ra_155177">
+        <item>155177</item>
+        <item>@string/ra_155177_title</item>
+        <item>@string/ra_155177_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-blackthorn</item>
+    </array>
+    <string name="ra_155178_title">
+        Petit combattant
+    </string>
+    <string name="ra_155178_text">
+        Recevoir le Debugant offert.
+    </string>
+    <array name="ra_155178">
+        <item>155178</item>
+        <item>@string/ra_155178_title</item>
+        <item>@string/ra_155178_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155179_title">
+        Nouvelle coiffure
+    </string>
+    <string name="ra_155179_text">
+        Faire coiffer un Pokémon.
+    </string>
+    <array name="ra_155179">
+        <item>155179</item>
+        <item>@string/ra_155179_title</item>
+        <item>@string/ra_155179_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155180_title">
+        Ball artisanale
+    </string>
+    <string name="ra_155180_text">
+        Recevoir une nouvelle Ball de Fargas.
+    </string>
+    <array name="ra_155180">
+        <item>155180</item>
+        <item>@string/ra_155180_title</item>
+        <item>@string/ra_155180_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-azalea</item>
+    </array>
+    <item name="ra_5080_title" type="string">@string/ra_4403_title</item>
+    <item name="ra_5080_text" type="string">@string/ra_4403_text</item>
+    <array name="ra_5080">
+        <item>5080</item>
+        <item>@string/ra_5080_title</item>
+        <item>@string/ra_5080_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155181_title">
+        Major Bob : défi niveau 46
+    </string>
+    <string name="ra_155181_text">
+        Vaincre Major Bob en mode Défini, au niveau 46 maximum.
+    </string>
+    <array name="ra_155181">
+        <item>155181</item>
+        <item>@string/ra_155181_title</item>
+        <item>@string/ra_155181_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5083_title" type="string">@string/ra_4406_title</item>
+    <item name="ra_5083_text" type="string">@string/ra_4406_text</item>
+    <array name="ra_5083">
+        <item>5083</item>
+        <item>@string/ra_5083_title</item>
+        <item>@string/ra_5083_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155182_title">
+        Morgane : défi niveau 48
+    </string>
+    <string name="ra_155182_text">
+        Vaincre Morgane en mode Défini, au niveau 48 maximum.
+    </string>
+    <array name="ra_155182">
+        <item>155182</item>
+        <item>@string/ra_155182_title</item>
+        <item>@string/ra_155182_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5081_title" type="string">@string/ra_4404_title</item>
+    <item name="ra_5081_text" type="string">@string/ra_4404_text</item>
+    <array name="ra_5081">
+        <item>5081</item>
+        <item>@string/ra_5081_title</item>
+        <item>@string/ra_5081_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155183_title">
+        Érika : défi niveau 46
+    </string>
+    <string name="ra_155183_text">
+        Vaincre Érika en mode Défini, au niveau 46 maximum.
+    </string>
+    <array name="ra_155183">
+        <item>155183</item>
+        <item>@string/ra_155183_title</item>
+        <item>@string/ra_155183_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5082_title" type="string">@string/ra_4405_title</item>
+    <string name="ra_5082_text">
+        Vaincre Jeannine et obtenir le Badge Âme.
+    </string>
+    <array name="ra_5082">
+        <item>5082</item>
+        <item>@string/ra_5082_title</item>
+        <item>@string/ra_5082_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155184_title">
+        Jeannine : défi niveau 39
+    </string>
+    <string name="ra_155184_text">
+        Vaincre Jeannine en mode Défini, au niveau 39 maximum.
+    </string>
+    <array name="ra_155184">
+        <item>155184</item>
+        <item>@string/ra_155184_title</item>
+        <item>@string/ra_155184_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5079_title" type="string">@string/ra_4402_title</item>
+    <item name="ra_5079_text" type="string">@string/ra_4402_text</item>
+    <array name="ra_5079">
+        <item>5079</item>
+        <item>@string/ra_5079_title</item>
+        <item>@string/ra_5079_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155187_title">
+        Ondine : défi niveau 47
+    </string>
+    <string name="ra_155187_text">
+        Vaincre Ondine en mode Défini, au niveau 47 maximum.
+    </string>
+    <array name="ra_155187">
+        <item>155187</item>
+        <item>@string/ra_155187_title</item>
+        <item>@string/ra_155187_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5078_title" type="string">@string/ra_4401_title</item>
+    <item name="ra_5078_text" type="string">@string/ra_4401_text</item>
+    <array name="ra_5078">
+        <item>5078</item>
+        <item>@string/ra_5078_title</item>
+        <item>@string/ra_5078_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155190_title">
+        Pierre : défi niveau 44
+    </string>
+    <string name="ra_155190_text">
+        Vaincre Pierre en mode Défini, au niveau 44 maximum.
+    </string>
+    <array name="ra_155190">
+        <item>155190</item>
+        <item>@string/ra_155190_title</item>
+        <item>@string/ra_155190_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5084_title" type="string">@string/ra_4407_title</item>
+    <item name="ra_5084_text" type="string">@string/ra_4407_text</item>
+    <array name="ra_5084">
+        <item>5084</item>
+        <item>@string/ra_5084_title</item>
+        <item>@string/ra_5084_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155191_title">
+        Auguste : défi niveau 50
+    </string>
+    <string name="ra_155191_text">
+        Vaincre Auguste en mode Défini, au niveau 50 maximum.
+    </string>
+    <array name="ra_155191">
+        <item>155191</item>
+        <item>@string/ra_155191_title</item>
+        <item>@string/ra_155191_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <item name="ra_5085_title" type="string">@string/ra_4408_title</item>
+    <string name="ra_5085_text">
+        Vaincre Blue et obtenir le Badge Terre.
+    </string>
+    <array name="ra_5085">
+        <item>5085</item>
+        <item>@string/ra_5085_title</item>
+        <item>@string/ra_5085_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155192_title">
+        Blue : défi niveau 58
+    </string>
+    <string name="ra_155192_text">
+        Vaincre Blue en mode Défini, au niveau 58 maximum.
+    </string>
+    <array name="ra_155192">
+        <item>155192</item>
+        <item>@string/ra_155192_title</item>
+        <item>@string/ra_155192_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_5088_title">
+        Maître des Tourb’Îles
+    </string>
+    <string name="ra_5088_text">
+        Capturer Lugia.
+    </string>
+    <array name="ra_5088">
+        <item>5088</item>
+        <item>@string/ra_5088_title</item>
+        <item>@string/ra_5088_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-legends</item>
+    </array>
+    <string name="ra_5523_title">
+        Combat au sommet
+    </string>
+    <string name="ra_5523_text">
+        Vaincre Red et devenir le nouveau Maître Pokémon.
+    </string>
+    <array name="ra_5523">
+        <item>5523</item>
+        <item>@string/ra_5523_title</item>
+        <item>@string/ra_5523_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_5524_title">
+        Red en solitaire
+    </string>
+    <string name="ra_5524_text">
+        Vaincre Red avec un seul Pokémon dans l’équipe.
+    </string>
+    <array name="ra_5524">
+        <item>5524</item>
+        <item>@string/ra_5524_title</item>
+        <item>@string/ra_5524_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-red</item>
+    </array>
+    <string name="ra_155185_title">
+        Pièce retrouvée
+    </string>
+    <string name="ra_155185_text">
+        Vaincre le Sbire Rocket de la Route 24 puis trouver la Partie Machine.
+    </string>
+    <array name="ra_155185">
+        <item>155185</item>
+        <item>@string/ra_155185_title</item>
+        <item>@string/ra_155185_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155186_title">
+        Demandes du grand-père
+    </string>
+    <string name="ra_155186_text">
+        Montrer les cinq Pokémon demandés au grand-père de Léo sur la Route 25.
+    </string>
+    <array name="ra_155186">
+        <item>155186</item>
+        <item>@string/ra_155186_title</item>
+        <item>@string/ra_155186_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155188_title">
+        Ronflex du passage
+    </string>
+    <string name="ra_155188_text">
+        Capturer le Ronflex devant la Cave Taupiqueur.
+    </string>
+    <array name="ra_155188">
+        <item>155188</item>
+        <item>@string/ra_155188_title</item>
+        <item>@string/ra_155188_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155189_title">
+        Échange : Galopa
+    </string>
+    <string name="ra_155189_text">
+        Échanger Ortide contre Galopa auprès du personnage du jeu.
+    </string>
+    <array name="ra_155189">
+        <item>155189</item>
+        <item>@string/ra_155189_title</item>
+        <item>@string/ra_155189_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155193_title">
+        Dernier duel du rival
+    </string>
+    <string name="ra_155193_text">
+        Combattre le rival une dernière fois au Mont Sélénite.
+    </string>
+    <array name="ra_155193">
+        <item>155193</item>
+        <item>@string/ra_155193_title</item>
+        <item>@string/ra_155193_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155194_title">
+        Les sept frères et sœurs
+    </string>
+    <string name="ra_155194_text">
+        Recevoir les sept cadeaux des personnages hebdomadaires.
+    </string>
+    <array name="ra_155194">
+        <item>155194</item>
+        <item>@string/ra_155194_title</item>
+        <item>@string/ra_155194_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155195_title">
+        Échange : Ptéra
+    </string>
+    <string name="ra_155195_text">
+        Échanger Leveinard contre Ptéra auprès du personnage du jeu.
+    </string>
+    <array name="ra_155195">
+        <item>155195</item>
+        <item>@string/ra_155195_title</item>
+        <item>@string/ra_155195_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155196_title">
+        Toutes les CT du terrain
+    </string>
+    <string name="ra_155196_text">
+        Trouver toutes les CT du terrain et celles offertes par les personnages.
+    </string>
+    <array name="ra_155196">
+        <item>155196</item>
+        <item>@string/ra_155196_title</item>
+        <item>@string/ra_155196_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155197_title">
+        Objets à moitié trouvés
+    </string>
+    <string name="ra_155197_text">
+        Trouver 50 % des objets de Johto et Kanto.
+    </string>
+    <array name="ra_155197">
+        <item>155197</item>
+        <item>@string/ra_155197_title</item>
+        <item>@string/ra_155197_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155198_title">
+        Tous les objets
+    </string>
+    <string name="ra_155198_text">
+        Trouver 100 % des objets de Johto et Kanto.
+    </string>
+    <array name="ra_155198">
+        <item>155198</item>
+        <item>@string/ra_155198_title</item>
+        <item>@string/ra_155198_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155199_title">
+        Objets cachés : moitié
+    </string>
+    <string name="ra_155199_text">
+        Trouver 50 % des objets cachés de Johto et Kanto.
+    </string>
+    <array name="ra_155199">
+        <item>155199</item>
+        <item>@string/ra_155199_title</item>
+        <item>@string/ra_155199_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155200_title">
+        Objets cachés : totalité
+    </string>
+    <string name="ra_155200_text">
+        Trouver 100 % des objets cachés de Johto et Kanto.
+    </string>
+    <array name="ra_155200">
+        <item>155200</item>
+        <item>@string/ra_155200_title</item>
+        <item>@string/ra_155200_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155201_title">
+        Dresseurs de Johto : moitié
+    </string>
+    <string name="ra_155201_text">
+        Vaincre 50 % des Dresseurs de Johto.
+    </string>
+    <array name="ra_155201">
+        <item>155201</item>
+        <item>@string/ra_155201_title</item>
+        <item>@string/ra_155201_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155202_title">
+        Dresseurs de Johto : totalité
+    </string>
+    <string name="ra_155202_text">
+        Vaincre 100 % des Dresseurs de Johto.
+    </string>
+    <array name="ra_155202">
+        <item>155202</item>
+        <item>@string/ra_155202_title</item>
+        <item>@string/ra_155202_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <string name="ra_155203_title">
+        Tous les Dresseurs de Kanto
+    </string>
+    <string name="ra_155203_text">
+        Vaincre tous les Dresseurs de Kanto.
+    </string>
+    <array name="ra_155203">
+        <item>155203</item>
+        <item>@string/ra_155203_title</item>
+        <item>@string/ra_155203_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_155204_title">
+        Cadeaux des habitants
+    </string>
+    <string name="ra_155204_text">
+        Recevoir tous les objets offerts par les habitants de Johto et Kanto.
+    </string>
+    <array name="ra_155204">
+        <item>155204</item>
+        <item>@string/ra_155204_title</item>
+        <item>@string/ra_155204_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>johto-kanto</item>
+    </array>
+    <string name="ra_5090_title">
+        Collection Or
+    </string>
+    <string name="ra_5090_text">
+        Capturer tous les Pokémon accessibles dans Pokémon Or.
+    </string>
+    <array name="ra_5090">
+        <item>5090</item>
+        <item>@string/ra_5090_title</item>
+        <item>@string/ra_5090_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>johto-start</item>
+    </array>
+    <array name="achievements_4">
+        <item>@array/ra_5086</item>
+        <item>@array/ra_5070</item>
+        <item>@array/ra_155162</item>
+        <item>@array/ra_5092</item>
+        <item>@array/ra_5071</item>
+        <item>@array/ra_155163</item>
+        <item>@array/ra_5072</item>
+        <item>@array/ra_155168</item>
+        <item>@array/ra_5073</item>
+        <item>@array/ra_155170</item>
+        <item>@array/ra_5074</item>
+        <item>@array/ra_155173</item>
+        <item>@array/ra_5075</item>
+        <item>@array/ra_155174</item>
+        <item>@array/ra_5093</item>
+        <item>@array/ra_5076</item>
+        <item>@array/ra_155175</item>
+        <item>@array/ra_5497</item>
+        <item>@array/ra_5077</item>
+        <item>@array/ra_155176</item>
+        <item>@array/ra_5087</item>
+        <item>@array/ra_5089</item>
+        <item>@array/ra_5091</item>
+        <item>@array/ra_5509</item>
+        <item>@array/ra_5511</item>
+        <item>@array/ra_155164</item>
+        <item>@array/ra_155165</item>
+        <item>@array/ra_155166</item>
+        <item>@array/ra_155167</item>
+        <item>@array/ra_155169</item>
+        <item>@array/ra_155171</item>
+        <item>@array/ra_155172</item>
+        <item>@array/ra_155177</item>
+        <item>@array/ra_155178</item>
+        <item>@array/ra_155179</item>
+        <item>@array/ra_155180</item>
+        <item>@array/ra_5080</item>
+        <item>@array/ra_155181</item>
+        <item>@array/ra_5083</item>
+        <item>@array/ra_155182</item>
+        <item>@array/ra_5081</item>
+        <item>@array/ra_155183</item>
+        <item>@array/ra_5082</item>
+        <item>@array/ra_155184</item>
+        <item>@array/ra_5079</item>
+        <item>@array/ra_155187</item>
+        <item>@array/ra_5078</item>
+        <item>@array/ra_155190</item>
+        <item>@array/ra_5084</item>
+        <item>@array/ra_155191</item>
+        <item>@array/ra_5085</item>
+        <item>@array/ra_155192</item>
+        <item>@array/ra_5088</item>
+        <item>@array/ra_5523</item>
+        <item>@array/ra_5524</item>
+        <item>@array/ra_155185</item>
+        <item>@array/ra_155186</item>
+        <item>@array/ra_155188</item>
+        <item>@array/ra_155189</item>
+        <item>@array/ra_155193</item>
+        <item>@array/ra_155194</item>
+        <item>@array/ra_155195</item>
+        <item>@array/ra_155196</item>
+        <item>@array/ra_155197</item>
+        <item>@array/ra_155198</item>
+        <item>@array/ra_155199</item>
+        <item>@array/ra_155200</item>
+        <item>@array/ra_155201</item>
+        <item>@array/ra_155202</item>
+        <item>@array/ra_155203</item>
+        <item>@array/ra_155204</item>
+        <item>@array/ra_5090</item>
+    </array>
+</resources>

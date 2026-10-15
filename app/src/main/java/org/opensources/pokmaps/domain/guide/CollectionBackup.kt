@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.guide
 
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 
 data class CollectionBackup(
@@ -10,9 +11,9 @@ data class CollectionBackup(
     val unown: Map<Int, Set<UnownForm>> = emptyMap()
 ) {
     init {
-        require(favorites.all { it in 1..386 })
+        require(favorites.all { it in 1..Generation.maximumSupportedSpecies })
         require(caught.keys.all { it > 0 })
-        require(caught.values.all { ids -> ids.all { it in 1..386 } })
+        require(caught.values.all { ids -> ids.all { it in 1..Generation.maximumSupportedSpecies } })
         require(guides.keys.all { it > 0 })
         guides.forEach { (version, progress) -> validateGuideProgress(version, progress) }
         require(unown.keys.all { it > 0 })
@@ -33,13 +34,7 @@ fun validateCollectionBackup(backup: CollectionBackup, games: List<Game>) {
         "Version de sauvegarde absente de la base"
     }
     backup.caught.forEach { (version, ids) ->
-        val generation = catalog.getValue(version).generationId
-        val maximum = when (generation) {
-            1 -> 151
-            2 -> 251
-            3 -> 386
-            else -> error("Génération non prise en charge : $generation")
-        }
+        val maximum = catalog.getValue(version).generation.maximumSpecies
         require(ids.all { it <= maximum }) { "Espèce absente de la génération : $version" }
     }
     backup.unown.forEach { (version, forms) ->

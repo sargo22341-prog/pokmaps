@@ -1,7 +1,6 @@
 package org.opensources.pokmaps.domain.map
 
 import org.opensources.pokmaps.domain.model.EncounterTime
-import org.opensources.pokmaps.domain.model.ExternalEvent
 
 /** Jour de la semaine du jeu (2e génération), avec son bit dans npc_offer.weekday_mask (dimanche : bit 0). */
 enum class Weekday(val bit: Int) {
@@ -21,12 +20,11 @@ enum class Weekday(val bit: Int) {
 data class OfferCondition(
     val times: Set<EncounterTime> = emptySet(),
     val weekdays: Set<Weekday> = emptySet(),
-    val story: List<String> = emptyList()
+    val story: List<String> = emptyList(),
+    val isExternalEvent: Boolean = false
 ) {
-    val isExternalEvent: Boolean get() = story.any(ExternalEvent::mentioned)
-
     /** Vrai si l'offre est possible à tout moment, tous les jours et sans étape préalable. */
-    val isAlways: Boolean get() = times.isEmpty() && weekdays.isEmpty() && story.isEmpty()
+    val isAlways: Boolean get() = times.isEmpty() && weekdays.isEmpty() && story.isEmpty() && !isExternalEvent
 
     companion object {
         val ALWAYS = OfferCondition()
@@ -40,7 +38,12 @@ data class OfferCondition(
          * Condition lue dans la base : `null` ne restreint rien ; un masque vide ou complet est refusé, la génération
          * écrivant `null` à sa place (tools/pokemaps_data/builder_maps.py).
          */
-        fun fromMasks(timeMask: Int?, weekdayMask: Int?, story: List<String>): OfferCondition {
+        fun fromMasks(
+            timeMask: Int?,
+            weekdayMask: Int?,
+            story: List<String>,
+            externalEvent: Boolean = false
+        ): OfferCondition {
             require(timeMask == null || timeMask in 1 until ALL_TIMES) { "Masque des moments invalide : $timeMask" }
             require(weekdayMask == null || weekdayMask in 1 until ALL_WEEKDAYS) {
                 "Masque des jours invalide : $weekdayMask"
@@ -48,7 +51,7 @@ data class OfferCondition(
             require(story.none { it.isBlank() }) { "Étape du scénario vide" }
             val times = timeMask?.let { mask -> TIME_BITS.filterIndexed { bit, _ -> (mask and (1 shl bit)) != 0 } }
             val weekdays = weekdayMask?.let { mask -> Weekday.entries.filter { (mask and (1 shl it.bit)) != 0 } }
-            return OfferCondition(times.orEmpty().toSet(), weekdays.orEmpty().toSet(), story)
+            return OfferCondition(times.orEmpty().toSet(), weekdays.orEmpty().toSet(), story, externalEvent)
         }
     }
 }

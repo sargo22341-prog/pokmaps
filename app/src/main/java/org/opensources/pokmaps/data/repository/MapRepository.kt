@@ -148,7 +148,8 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
     )
 
     private fun MapEntity.toInfo() = MapInfo(
-        id, identifier, nameFr, parentMapId, x, y, width, height, levelCount, isWorld, originMapId, startMapId
+        id, identifier, nameFr, parentMapId, x, y, width, height, levelCount, isWorld, originMapId, startMapId,
+        externalEventKey, eventEntranceOrder
     )
 
     /** Rencontres des zones dans la version du jeu. */
@@ -192,7 +193,9 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
     suspend fun offers(game: Game, objectId: Int): List<NpcOffer> {
         val stories = dao.offerStories(objectId).groupBy({ it.offerId }, { it.description })
         return dao.offers(objectId, game.versionId).map { row ->
-            row.toOffer(OfferCondition.fromMasks(row.timeMask, row.weekdayMask, stories[row.id].orEmpty()))
+            row.toOffer(
+                OfferCondition.fromMasks(row.timeMask, row.weekdayMask, stories[row.id].orEmpty(), row.isExternalEvent)
+            )
         }
     }
 

@@ -1,8 +1,6 @@
-# Hoenn — Rencontres, terrains et emplacements
+# Rencontres de Hoenn
 
-Phase 4, branche Hoenn, réalisée le 9 octobre 2026 pour Rubis, Saphir et Émeraude.
-Les jeux restent préparatoires : leurs rencontres se consultent dans l'aperçu PC ; leur activation
-Android appartient à la phase 6. Aucune dépendance ajoutée.
+Référence des rencontres distribuées et des exceptions de placement relues.
 
 ## Rencontres et conditions
 
@@ -16,17 +14,16 @@ Android appartient à la phase 6. Aucune dépendance ajoutée.
 - **Grotte Métamo** : l'entrée de la Route 103 s'ouvre après la Ligue
   (`Route103_OnLoad`, `FLAG_SYS_GAME_CLEAR`). Les neuf tables héritent de cette condition.
   A donne Nosferapti ; B à I portent « Événement externe » et ne comptent pas dans l'obtention.
-  Leurs noms français, dont certains accents étaient abîmés, sont corrigés.
 - **Parc Safari** : les zones ordinaires restent accessibles sans condition de Ligue.
   L'extension nord-est/sud-est d'Émeraude exige la Ligue ; Rubis/Saphir gardent leurs quatre zones.
 - **Kecleon** : les rencontres fixes des Routes 119 et 120 indiquent l'usage du Devon Scope,
-  au niveau 30. Les positions des personnages appartiennent aux données de phase 5.
+  au niveau 30. Leurs positions sont conservées avec les personnages.
 - **Simularbre** : niveau 40, Wailmerrosoir à la Zone de Combat, après la Ligue.
 - **Errants** : Latios dans Rubis, Latias dans Saphir ; dans Émeraude, choix Rouge pour Latias,
   Bleu pour Latios. Tous sont au niveau 40, après la Ligue. Les conditions sont communes aux
   méthodes au sol et dans l'eau. Les vingt routes possibles viennent de `sRoamerLocations`.
 
-Les épidémies TV facultatives ne sont pas retenues dans cette phase. L'aperçu décrit les tables
+Les épidémies TV facultatives ne sont pas exportées. Le catalogue décrit les tables
 permanentes et les rencontres particulières ci-dessus. Il ne simule pas les informations d'une
 sauvegarde ni les épidémies reçues par mélange de données.
 
@@ -78,11 +75,7 @@ tables d'obtention ni sur des emplacements sauvages fixes.
 
 ## Emplacements et décisions de place
 
-`map_spots.csv` conserve **4 523 points** sur **152 terrains distincts** : 80 retouches communes,
-49 propres à Rubis/Saphir et 67 propres à Émeraude, via `version_group`. Tous les points sont
-validés dans les cases libres de leur version. La relecture PC couvre les 101 lieux initialement
-proposés pour Rubis/Saphir et les 117 pour Émeraude avec les sprites de l'éditeur ; la salle
-finale de Fondmer est ensuite retirée des deux listes.
+`map_spots.csv` conserve les placements relus, par famille et `version_group`.
 
 Décision : garder l'espacement d'au moins trois cases et les petits terrains lisibles. Les six
 terrains ci-dessous conservent un avertissement de capacité ; aucune absence d'emplacement
@@ -100,45 +93,3 @@ dans la liste du lieu, conformément au comportement de `WildPlacement`.
 
 Cela représente neuf avertissements au total : six en Rubis/Saphir, trois en Émeraude. Ils restent visibles dans
 l'éditeur ; aucun n'est supprimé ou rendu silencieux.
-
-## Reproduction et mesures
-
-```powershell
-python tools/build_data.py --hoenn-maps-only
-python tools/build_data.py --gen3-encounters-only --preview tools/build/preview/gen3-encounters
-python tools/map_editor.py --assets tools/build/preview/gen3-encounters
-```
-
-La première commande régénère les cartes, le catalogue des installations et l'inventaire.
-La seconde applique les retouches au seul aperçu. Les personnages, offres et positions des
-Pokémon fixes suivent le périmètre de phase 5.
-
-Avec cache : cartes Hoenn régénérées en **63,5 s** ; aperçu mesuré pendant les contrôles parallèles
-en **44,7 s**, **56 110 614 octets**, base **4 022 272 octets**, **1 463 cartes/zones**,
-**4 288 rencontres**, **9 328 emplacements** pour les cinq versions GBA. Les images de relecture
-locales sont exclues de cette taille et de Git.
-
-Cartes versionnées : **31 630 579 octets**, dont **86 352 octets** pour le nouveau catalogue.
-Aucun asset ne dépasse 5 Mio. APK debug recompilé : **87 390 017 octets**. Paquets Git :
-**36 149 Kio**, objets locaux non empaquetés : **110 Kio** avant commit.
-
-## Contrôles et incidents
-
-Génération explicite des cartes Hoenn et de l'aperçu, validation des assets et SHA-256, Ruff,
-contrôle des tailles de sources, relecture du diff et des cartes : réussis. Suite Python ordinaire :
-**269 tests réussis** ; pipeline complet : **146 tests réussis** ; dernières régressions Hoenn :
-**15 tests réussis**. Android : `ktlintCheck`, `checkNoGoogleServices`, `lintDebug`,
-`testDebugUnitTest` (dont `PokedexSchemaTest`) et `assembleDebug` réussis.
-
-Les premiers essais ont rencontré les permissions de cache/temporaire du bac à sable Windows :
-les contrôles ont ensuite été exécutés avec les permissions nécessaires. Deux tests existants
-supposaient toutes les familles actives ou cinq terrains ; leurs attentes sont adaptées au périmètre
-des bases et au terrain sous-marin vide en génération 2. Une attente nouvelle supposait à tort trois
-cartes sous-marines sauvages ; les sources en montrent deux. Le lecteur des séries de combat a aussi
-été corrigé pour accepter les talents fixés aux indices 0/1, en plus de `ABILITY_RANDOM`.
-
-Gradle affiche encore la dépréciation `Configuration.setVisible(boolean)` d'AGP documentée dans
-le README. Git signale les conversions LF/CRLF prévues par sa configuration ; le diff passe son
-contrôle de whitespace. Aucun avertissement Kotlin, Lint, ktlint, Ruff ou pytest restant.
-Pas d'essai sur téléphone : Hoenn n'est pas encore sélectionnable dans l'application, conformément
-au périmètre de phase 4.

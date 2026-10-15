@@ -1,0 +1,9 @@
+pokemon_id,identifier,name_fr,sprite_folder,sprite_identifier,versions,default_versions
+351,castform,Forme Normale,pokemon,351,ruby|sapphire|emerald|firered|leafgreen,ruby|sapphire|emerald|firered|leafgreen
+351,castform-sunny,Solaire,castform,sunny,ruby|sapphire|emerald|firered|leafgreen,
+351,castform-rainy,Eau de Pluie,castform,rainy,ruby|sapphire|emerald|firered|leafgreen,
+351,castform-snowy,Blizzard,castform,snowy,ruby|sapphire|emerald|firered|leafgreen,
+386,deoxys-normal,Forme Normale,pokemon,386,ruby|sapphire,ruby|sapphire
+386,deoxys-attack,Forme Attaque,deoxys,attack,firered,firered
+386,deoxys-defense,Forme Défense,deoxys,defense,leafgreen,leafgreen
+386,deoxys-speed,Forme Vitesse,deoxys,speed,emerald,emerald

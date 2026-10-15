@@ -7,6 +7,7 @@ import org.opensources.pokmaps.domain.guide.CollectionBackup
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.validateCollectionBackup
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 
 internal object BackupJson {
@@ -45,7 +46,7 @@ internal object BackupJson {
             require(completed.length() <= 500)
             val articles = (0 until completed.length()).map { completed.getString(it) }.toSet()
             require(articles.size == completed.length())
-            // Les observations des Pokémon errants des anciennes sauvegardes ne sont plus suivies : elles sont ignorées.
+            // Les anciennes observations de Pokémon errants ne sont plus suivies et restent ignorées à l'import.
             require(game.getJSONArray("roamers").length() <= 3)
             guides[version] = GuideProgress(articles)
             val forms = if (game.has("unown")) game.getJSONArray("unown") else JSONArray()
@@ -60,7 +61,7 @@ internal object BackupJson {
     }
 
     private fun ids(array: JSONArray): Set<Int> {
-        require(array.length() <= 386)
+        require(array.length() <= Generation.maximumSupportedSpecies)
         val ids = (0 until array.length()).map { requireNotNull(array.get(it) as? Int) }.toSet()
         require(ids.size == array.length())
         return ids

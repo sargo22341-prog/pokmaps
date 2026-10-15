@@ -15,9 +15,13 @@ sont proposés à partir de la génération 2.
 
 Accessible depuis la fiche de Zarbi dans Or, Argent, Cristal, Rouge Feu et Vert Feuille ; aucun suivi dans Hoenn.
 Chaque forme a son sprite et sa case de capture. Le compteur compte les formes disponibles : A à Z en
-génération 2 ; ! et ? s'ajoutent à partir de la génération 3. Le stockage est distinct de la capture de l'espèce et suit la même
-portée. Changer de génération ou de portée ne détruit aucune forme mémorisée.
+génération 2 ; ! et ? s'ajoutent à partir de la génération 3. Le stockage est distinct de la capture de l'espèce et
+suit la même portée. Changer de génération ou de portée ne détruit aucune forme mémorisée.
 
 Les jeux GBA ouvrent le régional (202 à Hoenn, 151 à Kanto) puis permettent le National (386).
 Deoxys suit la forme du jeu ; Morphéo présente quatre formes. Le calculateur GBA propose les sept nouvelles
 Balls, Plongée, tours écoulés et espèce déjà capturée ; il exclut le Parc Safari.
+
+Les familles d’évolution excluent les espèces apparues après la génération choisie, sans se limiter au régional.
+Une espèce historiquement présente reste consultable si son obtention exige un transfert ou un événement externe.
+Après changement de jeu, une espèce non encore apparue est signalée absente ; un profil incomplet est une erreur.

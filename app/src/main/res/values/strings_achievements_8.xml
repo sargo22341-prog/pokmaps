@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <item name="ra_31146_title" type="string">@string/ra_31199_title</item>
+    <item name="ra_31146_text" type="string">@string/ra_31199_text</item>
+    <array name="ra_31146">
+        <item>31146</item>
+        <item>@string/ra_31146_title</item>
+        <item>@string/ra_31146_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-start</item>
+    </array>
+    <item name="ra_31147_title" type="string">@string/ra_31200_title</item>
+    <item name="ra_31147_text" type="string">@string/ra_31200_text</item>
+    <array name="ra_31147">
+        <item>31147</item>
+        <item>@string/ra_31147_title</item>
+        <item>@string/ra_31147_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <item name="ra_31148_title" type="string">@string/ra_31201_title</item>
+    <item name="ra_31148_text" type="string">@string/ra_31201_text</item>
+    <array name="ra_31148">
+        <item>31148</item>
+        <item>@string/ra_31148_title</item>
+        <item>@string/ra_31148_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <item name="ra_31149_title" type="string">@string/ra_31202_title</item>
+    <item name="ra_31149_text" type="string">@string/ra_31202_text</item>
+    <array name="ra_31149">
+        <item>31149</item>
+        <item>@string/ra_31149_title</item>
+        <item>@string/ra_31149_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <item name="ra_31151_title" type="string">@string/ra_31206_title</item>
+    <item name="ra_31151_text" type="string">@string/ra_31206_text</item>
+    <array name="ra_31151">
+        <item>31151</item>
+        <item>@string/ra_31151_title</item>
+        <item>@string/ra_31151_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-rustboro</item>
+    </array>
+    <item name="ra_31152_title" type="string">@string/ra_31207_title</item>
+    <item name="ra_31152_text" type="string">@string/ra_31207_text</item>
+    <array name="ra_31152">
+        <item>31152</item>
+        <item>@string/ra_31152_title</item>
+        <item>@string/ra_31152_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <item name="ra_31153_title" type="string">@string/ra_31208_title</item>
+    <item name="ra_31153_text" type="string">@string/ra_31208_text</item>
+    <array name="ra_31153">
+        <item>31153</item>
+        <item>@string/ra_31153_title</item>
+        <item>@string/ra_31153_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <item name="ra_31154_title" type="string">@string/ra_31209_title</item>
+    <item name="ra_31154_text" type="string">@string/ra_31209_text</item>
+    <array name="ra_31154">
+        <item>31154</item>
+        <item>@string/ra_31154_title</item>
+        <item>@string/ra_31154_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <item name="ra_31155_title" type="string">@string/ra_31210_title</item>
+    <item name="ra_31155_text" type="string">@string/ra_31210_text</item>
+    <array name="ra_31155">
+        <item>31155</item>
+        <item>@string/ra_31155_title</item>
+        <item>@string/ra_31155_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <item name="ra_31156_title" type="string">@string/ra_31211_title</item>
+    <item name="ra_31156_text" type="string">@string/ra_31211_text</item>
+    <array name="ra_31156">
+        <item>31156</item>
+        <item>@string/ra_31156_title</item>
+        <item>@string/ra_31156_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <item name="ra_31157_title" type="string">@string/ra_31212_title</item>
+    <item name="ra_31157_text" type="string">@string/ra_31212_text</item>
+    <array name="ra_31157">
+        <item>31157</item>
+        <item>@string/ra_31157_title</item>
+        <item>@string/ra_31157_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <item name="ra_31158_title" type="string">@string/ra_31213_title</item>
+    <item name="ra_31158_text" type="string">@string/ra_31213_text</item>
+    <array name="ra_31158">
+        <item>31158</item>
+        <item>@string/ra_31158_title</item>
+        <item>@string/ra_31158_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31159_title">Battre Arthur au Mont Chimnée</string>
+    <string name="ra_31159_text">Battre Arthur au Mont Chimnée.</string>
+    <array name="ra_31159">
+        <item>31159</item>
+        <item>@string/ra_31159_title</item>
+        <item>@string/ra_31159_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-volcano</item>
+    </array>
+    <string name="ra_31160_title">Battre Sarah au Centre Météo</string>
+    <string name="ra_31160_text">Battre Sarah au Centre Météo.</string>
+    <array name="ra_31160">
+        <item>31160</item>
+        <item>@string/ra_31160_title</item>
+        <item>@string/ra_31160_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-fortree</item>
+    </array>
+    <string name="ra_31161_title">Battre Matthieu dans le Repaire Aqua</string>
+    <string name="ra_31161_text">Battre Matthieu dans le Repaire Aqua.</string>
+    <array name="ra_31161">
+        <item>31161</item>
+        <item>@string/ra_31161_title</item>
+        <item>@string/ra_31161_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <string name="ra_31162_title">Battre Arthur dans la Caverne Fondmer</string>
+    <string name="ra_31162_text">Battre Arthur dans la Caverne Fondmer.</string>
+    <array name="ra_31162">
+        <item>31162</item>
+        <item>@string/ra_31162_title</item>
+        <item>@string/ra_31162_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31163_title">Obtenir la Master Ball dans le Repaire Aqua</string>
+    <string name="ra_31163_text">Obtenir la Master Ball dans le Repaire Aqua.</string>
+    <array name="ra_31163">
+        <item>31163</item>
+        <item>@string/ra_31163_title</item>
+        <item>@string/ra_31163_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <item name="ra_31164_title" type="string">@string/ra_31218_title</item>
+    <item name="ra_31164_text" type="string">@string/ra_31218_text</item>
+    <array name="ra_31164">
+        <item>31164</item>
+        <item>@string/ra_31164_title</item>
+        <item>@string/ra_31164_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <item name="ra_31169_title" type="string">@string/ra_31223_title</item>
+    <item name="ra_31169_text" type="string">@string/ra_31223_text</item>
+    <array name="ra_31169">
+        <item>31169</item>
+        <item>@string/ra_31169_title</item>
+        <item>@string/ra_31169_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_31171_title">Capturer Kyogre sans Master Ball</string>
+    <string name="ra_31171_text">Capturer Kyogre sans Master Ball.</string>
+    <array name="ra_31171">
+        <item>31171</item>
+        <item>@string/ra_31171_title</item>
+        <item>@string/ra_31171_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31172_title">Capturer Rayquaza sans Master Ball</string>
+    <string name="ra_31172_text">Capturer Rayquaza sans Master Ball.</string>
+    <array name="ra_31172">
+        <item>31172</item>
+        <item>@string/ra_31172_title</item>
+        <item>@string/ra_31172_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hoenn-sootopolis</item>
+    </array>
+    <string name="ra_31173_title">Capturer Regirock sans Master Ball</string>
+    <string name="ra_31173_text">Capturer Regirock sans Master Ball.</string>
+    <array name="ra_31173">
+        <item>31173</item>
+        <item>@string/ra_31173_title</item>
+        <item>@string/ra_31173_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31174_title">Capturer Regice sans Master Ball</string>
+    <string name="ra_31174_text">Capturer Regice sans Master Ball.</string>
+    <array name="ra_31174">
+        <item>31174</item>
+        <item>@string/ra_31174_title</item>
+        <item>@string/ra_31174_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31175_title">Capturer Registeel sans Master Ball</string>
+    <string name="ra_31175_text">Capturer Registeel sans Master Ball.</string>
+    <array name="ra_31175">
+        <item>31175</item>
+        <item>@string/ra_31175_title</item>
+        <item>@string/ra_31175_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hoenn-regis</item>
+    </array>
+    <string name="ra_31176_title">Capturer Latias</string>
+    <string name="ra_31176_text">Capturer Latias.</string>
+    <array name="ra_31176">
+        <item>31176</item>
+        <item>@string/ra_31176_title</item>
+        <item>@string/ra_31176_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-postgame</item>
+    </array>
+    <item name="ra_92019_title" type="string">@string/ra_91983_title</item>
+    <item name="ra_92019_text" type="string">@string/ra_91983_text</item>
+    <array name="ra_92019">
+        <item>92019</item>
+        <item>@string/ra_92019_title</item>
+        <item>@string/ra_92019_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mauville</item>
+    </array>
+    <item name="ra_92012_title" type="string">@string/ra_91984_title</item>
+    <item name="ra_92012_text" type="string">@string/ra_91984_text</item>
+    <array name="ra_92012">
+        <item>92012</item>
+        <item>@string/ra_92012_title</item>
+        <item>@string/ra_92012_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92021_title">Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds</string>
+    <string name="ra_92021_text">Obtenir un Grelot Coque auprès du vieil homme de la Grotte Tréfonds.</string>
+    <array name="ra_92021">
+        <item>92021</item>
+        <item>@string/ra_92021_title</item>
+        <item>@string/ra_92021_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-mossdeep</item>
+    </array>
+    <item name="ra_92020_title" type="string">@string/ra_91986_title</item>
+    <item name="ra_92020_text" type="string">@string/ra_91986_text</item>
+    <array name="ra_92020">
+        <item>92020</item>
+        <item>@string/ra_92020_title</item>
+        <item>@string/ra_92020_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92024_title">Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria</string>
+    <string name="ra_92024_text">Rapporter l’Orbe Bleu à son emplacement d’origine au Mont Mémoria.</string>
+    <array name="ra_92024">
+        <item>92024</item>
+        <item>@string/ra_92024_title</item>
+        <item>@string/ra_92024_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hoenn-hideouts</item>
+    </array>
+    <item name="ra_92023_title" type="string">@string/ra_92000_title</item>
+    <item name="ra_92023_text" type="string">@string/ra_92000_text</item>
+    <array name="ra_92023">
+        <item>92023</item>
+        <item>@string/ra_92023_title</item>
+        <item>@string/ra_92023_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-league</item>
+    </array>
+    <string name="ra_92006_title">Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision</string>
+    <string name="ra_92006_text">Parcourir la Piste Cyclable en 9,5 secondes maximum, sans collision.</string>
+    <array name="ra_92006">
+        <item>92006</item>
+        <item>@string/ra_92006_title</item>
+        <item>@string/ra_92006_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92018_title">Gagner un lot à la loterie</string>
+    <string name="ra_92018_text">Gagner un lot à la loterie.</string>
+    <array name="ra_92018">
+        <item>92018</item>
+        <item>@string/ra_92018_title</item>
+        <item>@string/ra_92018_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92017_title">Voir son nom inscrit sur la section correspondante du mur de l’Arène de…</string>
+    <string name="ra_92017_text">Voir son nom inscrit sur la section correspondante du mur de l’Arène de Myokara.</string>
+    <array name="ra_92017">
+        <item>92017</item>
+        <item>@string/ra_92017_title</item>
+        <item>@string/ra_92017_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hoenn-dewford</item>
+    </array>
+    <string name="ra_92008_title">Meubler entièrement sa Base Secrète</string>
+    <string name="ra_92008_text">Meubler entièrement sa Base Secrète.</string>
+    <array name="ra_92008">
+        <item>92008</item>
+        <item>@string/ra_92008_title</item>
+        <item>@string/ra_92008_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92009_title">Jouer les quinze premières notes du thème de Bourg Palette sur les tapis…</string>
+    <string name="ra_92009_text">Jouer les quinze premières notes du thème de Bourg Palette sur les tapis musicaux, en respectant le rythme.</string>
+    <array name="ra_92009">
+        <item>92009</item>
+        <item>@string/ra_92009_title</item>
+        <item>@string/ra_92009_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92013_title">Obtenir toutes les chaises, bureaux et coussins de Base Secrète</string>
+    <string name="ra_92013_text">Obtenir toutes les chaises, bureaux et coussins de Base Secrète.</string>
+    <array name="ra_92013">
+        <item>92013</item>
+        <item>@string/ra_92013_title</item>
+        <item>@string/ra_92013_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92014_title">Obtenir tous les tapis, plantes et posters de Base Secrète</string>
+    <string name="ra_92014_text">Obtenir tous les tapis, plantes et posters de Base Secrète.</string>
+    <array name="ra_92014">
+        <item>92014</item>
+        <item>@string/ra_92014_title</item>
+        <item>@string/ra_92014_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92015_title">Obtenir la plupart des poupées de Base Secrète</string>
+    <string name="ra_92015_text">Obtenir la plupart des poupées de Base Secrète.</string>
+    <array name="ra_92015">
+        <item>92015</item>
+        <item>@string/ra_92015_title</item>
+        <item>@string/ra_92015_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92016_title">Obtenir la plupart des ornements de Base Secrète</string>
+    <string name="ra_92016_text">Obtenir la plupart des ornements de Base Secrète.</string>
+    <array name="ra_92016">
+        <item>92016</item>
+        <item>@string/ra_92016_title</item>
+        <item>@string/ra_92016_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92022_title">Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin…</string>
+    <string name="ra_92022_text">Collectionner toutes les variétés de baies, sauf Wiki, Mago, Gowav, Durin et Lichii.</string>
+    <array name="ra_92022">
+        <item>92022</item>
+        <item>@string/ra_92022_title</item>
+        <item>@string/ra_92022_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92007_title">Fabriquer un Pokébloc de niveau 51 minimum</string>
+    <string name="ra_92007_text">Fabriquer un Pokébloc de niveau 51 minimum.</string>
+    <array name="ra_92007">
+        <item>92007</item>
+        <item>@string/ra_92007_title</item>
+        <item>@string/ra_92007_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92011_title">Gagner son premier Concours de rang Master</string>
+    <string name="ra_92011_text">Gagner son premier Concours de rang Master.</string>
+    <array name="ra_92011">
+        <item>92011</item>
+        <item>@string/ra_92011_title</item>
+        <item>@string/ra_92011_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92028_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de…</string>
+    <string name="ra_92028_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Sang-froid de rang Master.</string>
+    <array name="ra_92028">
+        <item>92028</item>
+        <item>@string/ra_92028_title</item>
+        <item>@string/ra_92028_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92027_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce…</string>
+    <string name="ra_92027_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Grâce de rang Master.</string>
+    <array name="ra_92027">
+        <item>92027</item>
+        <item>@string/ra_92027_title</item>
+        <item>@string/ra_92027_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92029_title">Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté…</string>
+    <string name="ra_92029_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Beauté de rang Master.</string>
+    <array name="ra_92029">
+        <item>92029</item>
+        <item>@string/ra_92029_title</item>
+        <item>@string/ra_92029_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92025_title">Faire peindre un de ses Pokémon après avoir remporté un Concours…</string>
+    <string name="ra_92025_text">Faire peindre un de ses Pokémon après avoir remporté un Concours d’Intelligence de rang Master.</string>
+    <array name="ra_92025">
+        <item>92025</item>
+        <item>@string/ra_92025_title</item>
+        <item>@string/ra_92025_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <item name="ra_92026_title" type="string">@string/ra_92028_title</item>
+    <string name="ra_92026_text">Faire peindre un de ses Pokémon après avoir remporté un Concours de Robustesse de rang Master.</string>
+    <array name="ra_92026">
+        <item>92026</item>
+        <item>@string/ra_92026_title</item>
+        <item>@string/ra_92026_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <string name="ra_92010_title">Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav</string>
+    <string name="ra_92010_text">Obtenir les 25 Rubans sur un même Pokémon et les consulter dans le PokéNav.</string>
+    <array name="ra_92010">
+        <item>92010</item>
+        <item>@string/ra_92010_title</item>
+        <item>@string/ra_92010_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hoenn-optional</item>
+    </array>
+    <array name="achievements_8">
+        <item>@array/ra_31146</item>
+        <item>@array/ra_31147</item>
+        <item>@array/ra_31148</item>
+        <item>@array/ra_31149</item>
+        <item>@array/ra_31151</item>
+        <item>@array/ra_31152</item>
+        <item>@array/ra_31153</item>
+        <item>@array/ra_31154</item>
+        <item>@array/ra_31155</item>
+        <item>@array/ra_31156</item>
+        <item>@array/ra_31157</item>
+        <item>@array/ra_31158</item>
+        <item>@array/ra_31159</item>
+        <item>@array/ra_31160</item>
+        <item>@array/ra_31161</item>
+        <item>@array/ra_31162</item>
+        <item>@array/ra_31163</item>
+        <item>@array/ra_31164</item>
+        <item>@array/ra_31169</item>
+        <item>@array/ra_31171</item>
+        <item>@array/ra_31172</item>
+        <item>@array/ra_31173</item>
+        <item>@array/ra_31174</item>
+        <item>@array/ra_31175</item>
+        <item>@array/ra_31176</item>
+        <item>@array/ra_92019</item>
+        <item>@array/ra_92012</item>
+        <item>@array/ra_92021</item>
+        <item>@array/ra_92020</item>
+        <item>@array/ra_92024</item>
+        <item>@array/ra_92023</item>
+        <item>@array/ra_92006</item>
+        <item>@array/ra_92018</item>
+        <item>@array/ra_92017</item>
+        <item>@array/ra_92008</item>
+        <item>@array/ra_92009</item>
+        <item>@array/ra_92013</item>
+        <item>@array/ra_92014</item>
+        <item>@array/ra_92015</item>
+        <item>@array/ra_92016</item>
+        <item>@array/ra_92022</item>
+        <item>@array/ra_92007</item>
+        <item>@array/ra_92011</item>
+        <item>@array/ra_92028</item>
+        <item>@array/ra_92027</item>
+        <item>@array/ra_92029</item>
+        <item>@array/ra_92025</item>
+        <item>@array/ra_92026</item>
+        <item>@array/ra_92010</item>
+    </array>
+</resources>

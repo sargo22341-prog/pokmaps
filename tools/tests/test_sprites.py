@@ -11,7 +11,7 @@ from pokemaps_data.sprites import icons_by_identifier
 
 from .conftest import CACHE
 
-# Objets de la 3e génération sans numéro de 8e génération dans pokesprite (docs/plan_gen_3.md, phase 0).
+# Objets de la 3e génération sans numéro de 8e génération dans pokesprite (docs/generations/generation-3.md, phase 0).
 GEN3_UNLINKED_ITEMS = (
     "exp-share",
     "vs-seeker",

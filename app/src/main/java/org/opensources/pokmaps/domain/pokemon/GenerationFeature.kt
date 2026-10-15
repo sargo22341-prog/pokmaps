@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.domain.pokemon
 
+import org.opensources.pokmaps.domain.model.Generation
+
 /**
  * Mécaniques apparues après la 1re génération, avec la génération qui les introduit : la fiche d'un Pokémon ne
  * les montre que pour un jeu qui les connaît.
@@ -20,20 +22,27 @@ enum class GenerationFeature(val introducedIn: Int) {
     /** Talents ; le talent caché arrive en 5e génération. */
     ABILITIES(3);
 
-    fun existsIn(generationId: Int): Boolean = generationId >= introducedIn
+    fun existsIn(generationId: Int): Boolean = when (this) {
+        HELD_ITEMS, SHINY, GENDER, BREEDING -> when (Generation.of(generationId)) {
+            Generation.GEN1 -> false
+            Generation.GEN2, Generation.GEN3 -> true
+        }
+
+        ABILITIES -> when (Generation.of(generationId)) {
+            Generation.GEN1, Generation.GEN2 -> false
+            Generation.GEN3 -> true
+        }
+    }
 }
 
 /** Probabilité de rencontrer un Pokémon chromatique : 1 chance sur [oneIn]. */
 object ShinyOdds {
     private const val CLASSIC_ODDS = 8192
-    private const val MODERN_ODDS = 4096
-    private const val MODERN_ODDS_GENERATION = 6
 
-    /** 1 sur 8 192 de la 2e à la 5e génération, 1 sur 4 096 ensuite ; null avant les chromatiques. */
-    fun oneIn(generationId: Int): Int? = when {
-        !GenerationFeature.SHINY.existsIn(generationId) -> null
-        generationId < MODERN_ODDS_GENERATION -> CLASSIC_ODDS
-        else -> MODERN_ODDS
+    /** Probabilité dans les générations prises en charge ; null avant les chromatiques. */
+    fun oneIn(generationId: Int): Int? = when (Generation.of(generationId)) {
+        Generation.GEN1 -> null
+        Generation.GEN2, Generation.GEN3 -> CLASSIC_ODDS
     }
 }
 

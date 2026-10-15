@@ -51,9 +51,9 @@ internal fun PokemonHeader(
             SpriteSize.HEADER,
             details.name,
             shiny = state.shiny,
-            version = game.versionIdentifier
+            forms = game.forms
         )
-        PokemonForms(details.id, game.versionIdentifier, state.shiny)
+        PokemonForms(game.forms[details.id].orEmpty(), state.shiny)
         Identity(details)
     }
 }

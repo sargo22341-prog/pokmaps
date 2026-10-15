@@ -1,5 +1,7 @@
 package org.opensources.pokmaps.domain.guide
 
+import org.opensources.pokmaps.domain.model.Generation
+
 data class CaptureChoice(val alternatives: List<Set<Int>>) {
     init {
         require(alternatives.isNotEmpty() && alternatives.all { it.isNotEmpty() })
@@ -16,7 +18,7 @@ data class CaptureGoal(val fixed: Set<Int>, val choices: List<CaptureChoice>) {
     val total: Int = fixed.size + choices.sumOf { it.total }
 
     init {
-        require(species.all { it in 1..386 })
+        require(species.all { it in 1..Generation.maximumSupportedSpecies })
         require(species.size == fixed.size + choices.sumOf { it.alternatives.sumOf { option -> option.size } })
     }
 

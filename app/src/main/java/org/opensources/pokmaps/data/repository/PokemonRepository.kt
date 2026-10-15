@@ -11,6 +11,7 @@ import org.opensources.pokmaps.domain.guide.BreedingProfile
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.PokemonType
 import org.opensources.pokmaps.domain.pokemon.BaseStat
 import org.opensources.pokmaps.domain.pokemon.DamageClass
@@ -28,7 +29,6 @@ import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokedexDescription
 import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
-import org.opensources.pokmaps.domain.pokemon.PokemonForm
 import org.opensources.pokmaps.domain.pokemon.PokemonTraits
 import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.domain.pokemon.TypeChart
@@ -109,10 +109,11 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
 
     private suspend fun stats(game: Game, pokemonId: Int): List<BaseStat> {
         val original = dao.stats(pokemonId, game.generationId).map { BaseStat(it.identifier, it.name, it.value) }
-        val required = if (game.generationId == 1) {
-            setOf("hp", "attack", "defense", "special", "speed")
-        } else {
-            setOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
+        val required = when (game.generation) {
+            Generation.GEN1 -> setOf("hp", "attack", "defense", "special", "speed")
+
+            Generation.GEN2, Generation.GEN3 ->
+                setOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
         }
         check(
             original.size == required.size && original.map { it.identifier }.toSet() == required &&
@@ -120,7 +121,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         ) {
             "Statistiques invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
         }
-        return if (pokemonId == 386) PokemonForm.deoxys(game.versionIdentifier).stats(original) else original
+        return game.forms[pokemonId]?.single { it.isDefault }?.stats(original) ?: original
     }
 
     private suspend fun evolutions(
@@ -163,8 +164,10 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
 
     private suspend fun abilities(game: Game, pokemonId: Int): List<PokemonAbility> {
         val abilities = dao.abilities(pokemonId, game.generationId, game.versionGroupId)
-        if (game.generationId == 3) {
-            check(abilities.size in 1..2 && abilities.none { it.hidden }) {
+        when (game.generation) {
+            Generation.GEN1, Generation.GEN2 -> check(abilities.isEmpty()) { "Jeu sans talents" }
+
+            Generation.GEN3 -> check(abilities.size in 1..2 && abilities.none { it.hidden }) {
                 "Talents invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
             }
         }
@@ -214,5 +217,6 @@ fun EncounterRow.toEncounter() = Encounter(
     note = note,
     conditions = conditions,
     nonTimeConditions = nonTimeConditions,
+    isExternalEvent = isExternalEvent,
     times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet()
 )
