@@ -8,7 +8,6 @@ from pathlib import Path
 
 from .character_curation_gen3 import character_key, read_gen3_curation
 from .hoenn_character_state import display_event, display_result
-from .hoenn_scene_actors import attach_scenes, validate_scene_actors
 from .hoenn_team_battles import team_battle
 from .hoenn_team_graphics import apply_team_graphics, team_graphics
 from .maps_characters import ObjectRow
@@ -27,6 +26,7 @@ from .pret_gen3_offers import ScriptOffers
 from .pret_hoenn_berries import initial_berries
 from .pret_identifiers import species_identifier
 from .pret_models import NpcOffer
+from .scene_actors_gen3 import attach_scenes, validate_scene_actors
 from .sources import PRET_COMMITS
 from .story_events import StoryEvents
 
@@ -37,8 +37,7 @@ def character_rows(maps: Gen3GameMaps, api: PokeApi, story: StoryEvents, output:
     catalog: list[dict[str, object]] = []
     for version, _ in maps.game.pret_versions:
         reader = maps.repo.offers[version]
-        if not maps.repo.remake:
-            validate_scene_actors(maps.repo, version)
+        validate_scene_actors(maps.repo, version)
         berries = initial_berries(maps.repo, version) if maps.game.map_family == "ruby-sapphire-emerald" else {}
         for const in sorted(maps.placements, key=lambda key: maps.maps[key].number):
             current = maps.maps[const]
@@ -89,9 +88,9 @@ def _object_result(
 ) -> ScriptOffers:
     reader = maps.repo.offers[version]
     result = reader.read_curated_object(current.label, event, index, maps.game.map_family)
+    result = attach_scenes(current, index, event, result, reader, version)
     if maps.repo.remake:
         return result
-    result = attach_scenes(current, index, event, result, reader, version)
     # Valider aussi les chemins des scènes dont les offres appartiennent ensuite à un autre acteur.
     _mark_offer_conditions(maps, result, version, story)
     return team_battle(

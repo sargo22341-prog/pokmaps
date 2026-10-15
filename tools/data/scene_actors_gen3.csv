@@ -1,0 +1,63 @@
+version,map,index,script,only,condition
+ruby,EverGrandeCity_ChampionsRoom,1,EverGrandeCity_ChampionsRoom_EventScript_EnterRoom,,Après avoir vaincu le Conseil 4
+ruby,RustboroCity_DevonCorp_3F,1,RustboroCity_DevonCorp_3F_EventScript_MeetPresident,,Après avoir récupéré les marchandises Devon
+ruby,LittlerootTown_ProfessorBirchsLab,3,LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls,,Après le premier combat contre Flora sur la Route 103
+ruby,MossdeepCity_StevensHouse,1,MossdeepCity_StevensHouse_EventScript_StevenGivesDive,,Après la victoire à l’Arène d’Algatia
+ruby,RusturfTunnel,1,RusturfTunnel_EventScript_15C7D1,,Après avoir brisé les rochers séparant les deux amoureux avec Éclate-Roc
+ruby,MtPyre_Summit,3,MtPyre_Summit_EventScript_15D4E1,,Après le départ de la team au sommet du Mont Mémoria
+ruby,VictoryRoad_1F,4,VictoryRoad_1F_EventScript_WallyApproachPlayer,,Avant la première victoire à la Ligue
+sapphire,EverGrandeCity_ChampionsRoom,1,EverGrandeCity_ChampionsRoom_EventScript_EnterRoom,,Après avoir vaincu le Conseil 4
+sapphire,RustboroCity_DevonCorp_3F,1,RustboroCity_DevonCorp_3F_EventScript_MeetPresident,,Après avoir récupéré les marchandises Devon
+sapphire,LittlerootTown_ProfessorBirchsLab,3,LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls,,Après le premier combat contre Flora sur la Route 103
+sapphire,MossdeepCity_StevensHouse,1,MossdeepCity_StevensHouse_EventScript_StevenGivesDive,,Après la victoire à l’Arène d’Algatia
+sapphire,RusturfTunnel,1,RusturfTunnel_EventScript_15C7D1,,Après avoir brisé les rochers séparant les deux amoureux avec Éclate-Roc
+sapphire,MtPyre_Summit,3,MtPyre_Summit_EventScript_15D4E1,,Après le départ de la team au sommet du Mont Mémoria
+sapphire,VictoryRoad_1F,4,VictoryRoad_1F_EventScript_WallyApproachPlayer,,Avant la première victoire à la Ligue
+emerald,EverGrandeCity_ChampionsRoom,1,EverGrandeCity_ChampionsRoom_EventScript_EnterRoom,,Après avoir vaincu le Conseil 4
+emerald,RustboroCity_DevonCorp_3F,1,RustboroCity_DevonCorp_3F_EventScript_MeetPresident,,Après avoir récupéré les marchandises Devon
+emerald,LittlerootTown_ProfessorBirchsLab,3,LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls,,Après le premier combat contre Flora sur la Route 103
+emerald,MossdeepCity_StevensHouse,1,MossdeepCity_StevensHouse_EventScript_StevenGivesDive,,Après la victoire à l’Arène d’Algatia
+emerald,RusturfTunnel,1,RusturfTunnel_EventScript_ClearTunnelScene,,Après avoir brisé les rochers séparant les deux amoureux avec Éclate-Roc
+emerald,MtPyre_Summit,3,MtPyre_Summit_EventScript_TeamAquaExits,,Après le départ de la team au sommet du Mont Mémoria
+emerald,PetalburgCity_WallysHouse,1,PetalburgCity_WallysHouse_EventScript_GiveHMSurf,,Après la victoire contre Norman
+emerald,LavaridgeTown,8,LavaridgeTown_EventScript_RivalGiveGoGoggles,,Après la victoire contre Adriane
+emerald,VictoryRoad_1F,4,VictoryRoad_1F_EventScript_WallyEntranceBattle,,Avant la première victoire à la Ligue
+ruby,Route110,28,Route110_EventScript_14FEA5,,Après le combat contre Flora sur la Route 110
+sapphire,Route110,28,Route110_EventScript_14FEA5,,Après le combat contre Flora sur la Route 110
+emerald,Route110,28,Route110_EventScript_GiveItemfinder,,Après le combat contre Flora sur la Route 110
+firered,PalletTown_ProfessorOaksLab,8,PalletTown_ProfessorOaksLab_EventScript_RivalBattle,,
+firered,Route22,1,Route22_EventScript_EarlyRival,,
+firered,Route22,1,Route22_EventScript_LateRival,,
+firered,CeruleanCity,8,CeruleanCity_EventScript_Rival,,Après le combat contre le rival à Azuria
+firered,SSAnne_2F_Corridor,1,SSAnne_2F_Corridor_EventScript_RivalTrigger,,
+firered,PokemonTower_2F,1,PokemonTower_2F_EventScript_Rival,,
+firered,SilphCo_7F,1,SilphCo_7F_EventScript_RivalScene,,
+firered,SilphCo_11F,3,SilphCo_11F_EventScript_BattleGiovanni,,
+firered,PokemonLeague_ChampionsRoom,1,PokemonLeague_ChampionsRoom_EventScript_EnterRoom,,
+firered,ThreeIsland,3,ThreeIsland_EventScript_BattleBikersScene,TRAINER_CUE_BALL_PAXTON,
+firered,ThreeIsland,4,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON_3,
+firered,ThreeIsland,5,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON,
+firered,ThreeIsland,7,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON_2,
+firered,FiveIsland_LostCave_Room10,1,FiveIsland_LostCave_Room10_EventScript_FindSelphyScene,,
+firered,FourIsland_IcefallCave_Back,4,FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene,,
+firered,OneIsland_PokemonCenter_1F,2,OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene,ITEM_METEORITE,À la première arrivée sur l’Île 1
+firered,OneIsland_PokemonCenter_1F,3,OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene,ITEM_TRI_PASS,À la première arrivée sur l’Île 1
+firered,ViridianCity_Mart,1,ViridianCity_Mart_EventScript_ParcelScene,,À la première entrée dans la Boutique
+leafgreen,PalletTown_ProfessorOaksLab,8,PalletTown_ProfessorOaksLab_EventScript_RivalBattle,,
+leafgreen,Route22,1,Route22_EventScript_EarlyRival,,
+leafgreen,Route22,1,Route22_EventScript_LateRival,,
+leafgreen,CeruleanCity,8,CeruleanCity_EventScript_Rival,,Après le combat contre le rival à Azuria
+leafgreen,SSAnne_2F_Corridor,1,SSAnne_2F_Corridor_EventScript_RivalTrigger,,
+leafgreen,PokemonTower_2F,1,PokemonTower_2F_EventScript_Rival,,
+leafgreen,SilphCo_7F,1,SilphCo_7F_EventScript_RivalScene,,
+leafgreen,SilphCo_11F,3,SilphCo_11F_EventScript_BattleGiovanni,,
+leafgreen,PokemonLeague_ChampionsRoom,1,PokemonLeague_ChampionsRoom_EventScript_EnterRoom,,
+leafgreen,ThreeIsland,3,ThreeIsland_EventScript_BattleBikersScene,TRAINER_CUE_BALL_PAXTON,
+leafgreen,ThreeIsland,4,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON_3,
+leafgreen,ThreeIsland,5,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON,
+leafgreen,ThreeIsland,7,ThreeIsland_EventScript_BattleBikersScene,TRAINER_BIKER_GOON_2,
+leafgreen,FiveIsland_LostCave_Room10,1,FiveIsland_LostCave_Room10_EventScript_FindSelphyScene,,
+leafgreen,FourIsland_IcefallCave_Back,4,FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene,,
+leafgreen,OneIsland_PokemonCenter_1F,2,OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene,ITEM_METEORITE,À la première arrivée sur l’Île 1
+leafgreen,OneIsland_PokemonCenter_1F,3,OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene,ITEM_TRI_PASS,À la première arrivée sur l’Île 1
+leafgreen,ViridianCity_Mart,1,ViridianCity_Mart_EventScript_ParcelScene,,À la première entrée dans la Boutique

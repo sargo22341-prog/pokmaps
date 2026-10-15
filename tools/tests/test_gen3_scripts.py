@@ -293,6 +293,18 @@ def test_special_writes_are_propagated_through_c_wrappers(tmp_path: Path) -> Non
     assert writes["Outer"] == frozenset({"VAR_0x8004"})
 
 
+def test_party_menu_specials_return_the_chosen_slot_through_their_tasks(tmp_path: Path) -> None:
+    root = tmp_path / "source"
+    (root / "src").mkdir(parents=True)
+    (root / "src/party_menu_specials.c").write_text(
+        "void ChoosePartyMon(void) { CreateTask(Task_ChoosePartyMon, 10); }\n", encoding="utf-8"
+    )
+    (root / "src/party_menu.c").write_text(
+        "static void Task_HandleChooseMonInput(u8 taskId) { gSpecialVar_0x8004 = slot; }\n", encoding="utf-8"
+    )
+    assert "VAR_0x8004" in special_writes(root)["ChoosePartyMon"]
+
+
 def test_special_writes_do_not_hide_a_later_branch() -> None:
     blocks = parse_scripts(
         "Entry:\nsetvar VAR_0x8004, 5\nspecial ChangeChoice\ngoto_if_eq VAR_0x8004, 1, Gift\nend\n"

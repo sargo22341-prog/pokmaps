@@ -131,6 +131,27 @@
         "access_item": null
       },
       {
+        "map": "ThreeIsland_BerryForest",
+        "x": 4,
+        "y": 8,
+        "elevation": 3,
+        "script": "ThreeIsland_BerryForest_EventScript_Lostelle",
+        "source": "data/maps/ThreeIsland_BerryForest/scripts.inc:24",
+        "pokemon": "SPECIES_HYPNO",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
         "map": "NavelRock_Summit",
         "x": 9,
         "y": 6,
@@ -387,6 +408,27 @@
         "requirements": [
           {
             "subject": "FLAG_HIDE_MOLTRES",
+            "operator": "eq",
+            "value": "FALSE"
+          }
+        ],
+        "access_item": null
+      },
+      {
+        "map": "ThreeIsland_BerryForest",
+        "x": 4,
+        "y": 8,
+        "elevation": 3,
+        "script": "ThreeIsland_BerryForest_EventScript_Lostelle",
+        "source": "data/maps/ThreeIsland_BerryForest/scripts.inc:24",
+        "pokemon": "SPECIES_HYPNO",
+        "level": 30,
+        "held_item": null,
+        "removal_flag": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST",
+        "event": false,
+        "requirements": [
+          {
+            "subject": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST",
             "operator": "eq",
             "value": "FALSE"
           }

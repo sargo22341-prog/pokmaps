@@ -29,6 +29,7 @@ def validate_remake_rows(version: str, rows: list[dict[str, object]]) -> None:
             ("SPECIES_ZAPDOS", 50): 1,
             ("SPECIES_MOLTRES", 50): 1,
             ("SPECIES_MEWTWO", 70): 1,
+            ("SPECIES_HYPNO", 30): 1,
             ("SPECIES_HO_OH", 70): 1,
             ("SPECIES_LUGIA", 70): 1,
             ("SPECIES_DEOXYS", 30): 1,
