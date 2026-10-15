@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les fiches du rival montrent une seule équipe, choisie d’un geste par votre Pokémon de départ ou, dans Jaune, vos premières victoires.
 - Corrige les équipes, revanches, dons, rencontres fixes et apprentissages de Hoenn, ainsi que les textes des guides.
 - Complète les équipes, revanches, objets tenus et dons d’Or, Argent et Cristal, et corrige leurs guides.
 - Les salles d’un même étage de troisième génération partagent un plan, avec des badges RDC, 1er, 2e ou -1.

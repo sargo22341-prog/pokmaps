@@ -17,6 +17,7 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapInfo
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
+import org.opensources.pokmaps.domain.map.RivalChoice
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GameMaps
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
@@ -28,6 +29,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObserveMapCatalogUseCase
+import org.opensources.pokmaps.domain.usecase.RivalChoiceUseCase
 import ovh.plrapps.mapcompose.api.BoundingBox
 import ovh.plrapps.mapcompose.api.centroidX
 import ovh.plrapps.mapcompose.api.centroidY
@@ -50,6 +52,7 @@ class MapViewModel @Inject constructor(
     private val mapRequests: MapRequests,
     private val mapLayers: MapLayersUseCase,
     private val observeCollection: ObserveCollectionUseCase,
+    private val rivalChoice: RivalChoiceUseCase,
     getMapTiles: GetMapTilesUseCase
 ) : ViewModel() {
     private val session = MapSession(viewModelScope) { getMapTiles(it) }
@@ -75,6 +78,7 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch { followCatalog() }
         viewModelScope.launch { followRequests() }
         viewModelScope.launch { followLayers() }
+        viewModelScope.launch { followRivalChoice() }
         viewModelScope.launch {
             observeCollection().catch {
                 session.update { it.copy(message = MapMessage.CollectionFailed) }
@@ -115,6 +119,8 @@ class MapViewModel @Inject constructor(
                 ?.let(navigation::focusObject)
 
             MapAction.MessageShown -> session.update { it.copy(message = null) }
+
+            is MapAction.ChooseRival -> chooseRival(action.choice)
         }
     }
 
@@ -226,6 +232,27 @@ class MapViewModel @Inject constructor(
             if (layers == session.current.layers) return@collect
             session.update { it.copy(layers = layers) }
             session.refreshOverlays()
+        }
+    }
+
+    /** Le choix vaut pour l'état et pour la fiche ouverte, qui montre aussitôt l'autre équipe. */
+    private suspend fun followRivalChoice() {
+        rivalChoice().catch { session.update { it.copy(rivalChoiceFailed = true) } }.collect { choice ->
+            session.update { state ->
+                val detail = state.detail
+                state.copy(
+                    rivalChoice = choice,
+                    detail = if (detail is MapDetail.Character) detail.copy(rivalChoice = choice) else detail
+                )
+            }
+        }
+    }
+
+    private fun chooseRival(choice: RivalChoice) {
+        val game = session.loaded.value?.game ?: return
+        viewModelScope.launch {
+            val failed = session.attempt { rivalChoice.set(game, choice) }.isFailure
+            session.update { it.copy(rivalChoiceFailed = failed) }
         }
     }
 

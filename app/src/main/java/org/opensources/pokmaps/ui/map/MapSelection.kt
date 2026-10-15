@@ -174,7 +174,7 @@ internal class MapSelection(
     private fun showCharacter(obj: MapObject) {
         val loaded = session.loaded.value ?: return
         val game = loaded.game
-        val detail = MapDetail.Character(obj)
+        val detail = MapDetail.Character(obj, rivalChoice = session.current.rivalChoice)
         val request = beginDetail()
         session.update { it.copy(detail = detail, zoneListOpen = false) }
         detailJob = session.load(
@@ -185,7 +185,8 @@ internal class MapSelection(
                     loading = false,
                     teams = teams,
                     offers = getObjectDetails.offers(game, obj.id),
-                    fossilUses = getObjectDetails.fossilUses(game, loaded.catalog)
+                    fossilUses = getObjectDetails.fossilUses(game, loaded.catalog),
+                    rivalChoice = session.current.rivalChoice
                 )
             },
             onFailure = { replaceDetail(loaded, request, detail.copy(loading = false, failed = true)) }

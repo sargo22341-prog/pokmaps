@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.guide.GuideTarget
+import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.usecase.GuidePreview
@@ -31,8 +32,7 @@ import org.opensources.pokmaps.ui.common.PokedexDescriptionText
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SpriteSize
-import org.opensources.pokmaps.ui.common.TrainerPokemonRow
-import org.opensources.pokmaps.ui.common.trainerTeamTitle
+import org.opensources.pokmaps.ui.common.TrainerTeams
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +54,7 @@ internal fun GuidePreviewSheet(state: GuideUiState, onAction: (GuideAction) -> U
                     is GuidePreview.Pokemon -> PokemonPreview(preview)
                     is GuidePreview.Place -> PlacePreview(preview, onAction)
                     is GuidePreview.Item -> ItemPreview(preview)
-                    is GuidePreview.Character -> CharacterPreview(preview, onAction)
+                    is GuidePreview.Character -> CharacterPreview(state, preview, onAction)
                 }
                 state.previewTarget?.let { target ->
                     Button(onClick = {
@@ -104,17 +104,20 @@ private fun ItemPreview(preview: GuidePreview.Item) {
 }
 
 @Composable
-private fun CharacterPreview(preview: GuidePreview.Character, onAction: (GuideAction) -> Unit) {
+private fun CharacterPreview(state: GuideUiState, preview: GuidePreview.Character, onAction: (GuideAction) -> Unit) {
     val page = preview.page
     CharacterSprite(page.obj, page.game.versionGroupIdentifier)
     Text(page.obj.name, style = MaterialTheme.typography.headlineSmall)
     Text(page.map.name)
     Button(onClick = { onAction(GuideAction.ShowObject(page.obj.id)) }) { Text(stringResource(R.string.show_on_map)) }
-    page.teams.forEach { team ->
-        team.variant?.let { Text(trainerTeamTitle(it), style = MaterialTheme.typography.titleSmall) }
-        team.members.forEach { pokemon ->
-            TrainerPokemonRow(pokemon, SpritePlace.SHEETS) { onAction(GuideAction.Preview(GuideTarget.Pokemon(it))) }
-        }
+    state.previewTeams?.takeIf { page.obj.kind == MapObjectKind.TRAINER }?.let { teams ->
+        TrainerTeams(
+            teams,
+            SpritePlace.SHEETS,
+            state.rivalChoiceFailed,
+            onChooseRival = { onAction(GuideAction.ChooseRival(it)) },
+            onOpenPokemon = { onAction(GuideAction.Preview(GuideTarget.Pokemon(it))) }
+        )
     }
     Offers(
         page.offers,

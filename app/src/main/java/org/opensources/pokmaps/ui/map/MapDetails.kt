@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.map.RivalChoice
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.CharacterSprite
@@ -44,6 +45,8 @@ import org.opensources.pokmaps.ui.common.TrainerTeams
 internal fun DetailCard(
     detail: MapDetail,
     versionGroupIdentifier: String,
+    rivalChoiceFailed: Boolean,
+    onChooseRival: (RivalChoice) -> Unit,
     onClose: () -> Unit,
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
@@ -73,7 +76,8 @@ internal fun DetailCard(
                     is MapDetail.Character -> CharacterDetails(
                         detail,
                         versionGroupIdentifier,
-                        DetailLinks(onOpenPokemon, onOpenItem, onShowObject)
+                        DetailLinks(onOpenPokemon, onOpenItem, onShowObject, onChooseRival),
+                        rivalChoiceFailed
                     )
                 }
             }
@@ -88,7 +92,8 @@ internal fun DetailCard(
 private data class DetailLinks(
     val onOpenPokemon: (Int) -> Unit,
     val onOpenItem: (String) -> Unit,
-    val onShowObject: (Int) -> Unit
+    val onShowObject: (Int) -> Unit,
+    val onChooseRival: (RivalChoice) -> Unit
 )
 
 /** En-tête d'une fiche : image, icônes de ce qu'est l'élément (dresseur, personnage…), petite ligne et nom. */
@@ -175,7 +180,12 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
 }
 
 @Composable
-private fun CharacterDetails(detail: MapDetail.Character, versionGroupIdentifier: String, links: DetailLinks) {
+private fun CharacterDetails(
+    detail: MapDetail.Character,
+    versionGroupIdentifier: String,
+    links: DetailLinks,
+    rivalChoiceFailed: Boolean
+) {
     val obj = detail.obj
     val pokemonId = obj.pokemonId
     if (obj.kind == MapObjectKind.POKEMON) {
@@ -211,7 +221,13 @@ private fun CharacterDetails(detail: MapDetail.Character, versionGroupIdentifier
         return
     }
     if (obj.kind == MapObjectKind.TRAINER) {
-        TrainerTeams(detail.teams, SpritePlace.MAP_LIST, links.onOpenPokemon)
+        TrainerTeams(
+            detail.teamSelection,
+            SpritePlace.MAP_LIST,
+            rivalChoiceFailed,
+            onChooseRival = links.onChooseRival,
+            onOpenPokemon = links.onOpenPokemon
+        )
     }
     // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
     Offers(

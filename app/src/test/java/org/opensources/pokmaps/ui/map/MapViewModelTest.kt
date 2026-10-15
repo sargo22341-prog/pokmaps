@@ -22,6 +22,7 @@ import org.opensources.pokmaps.data.settings.CollectionSettings
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.data.settings.MapSettings
+import org.opensources.pokmaps.data.settings.RivalSettings
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.usecase.GetMapEncountersUseCase
 import org.opensources.pokmaps.domain.usecase.GetMapObjectDetailsUseCase
@@ -32,6 +33,7 @@ import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCollectionUseCase
 import org.opensources.pokmaps.domain.usecase.ObserveMapCatalogUseCase
+import org.opensources.pokmaps.domain.usecase.RivalChoiceUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 import org.robolectric.RobolectricTestRunner
 
@@ -61,6 +63,7 @@ class MapViewModelTest {
             requests,
             MapLayersUseCase(MapSettings(dataStore)),
             ObserveCollectionUseCase(gameRepository, CollectionSettings(dataStore)),
+            RivalChoiceUseCase(gameRepository, RivalSettings(dataStore)),
             GetMapTilesUseCase(MapTiles { null })
         )
     }

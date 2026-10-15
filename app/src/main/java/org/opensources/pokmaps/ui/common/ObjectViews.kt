@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,10 +26,9 @@ import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
-import org.opensources.pokmaps.domain.map.TeamVariant
-import org.opensources.pokmaps.domain.map.TeamVariantKind
+import org.opensources.pokmaps.domain.map.RivalChoice
+import org.opensources.pokmaps.domain.map.TeamSelection
 import org.opensources.pokmaps.domain.map.TrainerPokemon
-import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.DamageClass
@@ -80,29 +80,33 @@ fun SectionTitle(text: String, modifier: Modifier = Modifier) {
 }
 
 /**
- * Équipes d'un dresseur : la seule qu'il a, ou une par variante de la partie (rival de la 1re génération), chacune
- * sous son titre ; un message quand l'équipe dépend de la partie sans être connue.
+ * Équipes d'un dresseur : la seule qu'il a, ou celle que donne la partie indiquée (Pokémon de départ, combats de
+ * Jaune), sous l'encadré qui la change (`choiceFailed` : le dernier choix n'a pas pu être enregistré) ; un message quand l'équipe dépend de la partie sans être connue.
  */
 @Composable
-fun TrainerTeams(teams: List<TrainerTeam>, place: SpritePlace, onOpenPokemon: (Int) -> Unit) {
-    if (teams.isEmpty()) {
+fun TrainerTeams(
+    selection: TeamSelection,
+    place: SpritePlace,
+    choiceFailed: Boolean,
+    onChooseRival: (RivalChoice) -> Unit,
+    onOpenPokemon: (Int) -> Unit
+) {
+    if (selection.unknown) {
         Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
         return
     }
-    teams.forEach { team ->
-        SectionTitle(
-            team.variant?.let { trainerTeamTitle(it) }
-                ?: team.rematch?.let { stringResource(R.string.map_trainer_rematch, it) }
-                ?: stringResource(R.string.map_trainer_party)
-        )
-        team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon) }
+    RivalChoicePanel(selection, place, choiceFailed, onChooseRival)
+    Crossfade(selection.shown, label = "trainerTeams") { teams ->
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            teams.forEach { team ->
+                SectionTitle(
+                    team.rematch?.let { stringResource(R.string.map_trainer_rematch, it) }
+                        ?: stringResource(R.string.map_trainer_party)
+                )
+                team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon) }
+            }
+        }
     }
-}
-
-@Composable
-fun trainerTeamTitle(variant: TeamVariant): String = when (variant.kind) {
-    TeamVariantKind.PLAYER_STARTER -> stringResource(R.string.map_trainer_team_player_starter, variant.pokemonName)
-    TeamVariantKind.RIVAL_EVOLUTION -> stringResource(R.string.map_trainer_team_rival_evolution, variant.pokemonName)
 }
 
 /** Pokémon d'un dresseur : niveau et attaques qu'il utilisera. */

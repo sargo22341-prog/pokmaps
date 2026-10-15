@@ -187,8 +187,12 @@
     <string name="map_trainer_rematch">Revanche %1$d</string>
     <string name="map_trainer_party">Équipe</string>
     <string name="map_trainer_starter">L’équipe varie selon la partie.</string>
-    <string name="map_trainer_team_player_starter">Équipe si vous avez choisi %1$s</string>
-    <string name="map_trainer_team_rival_evolution">Équipe si l’Évoli du rival devient %1$s</string>
+    <string name="rival_choice_starter">Votre Pokémon de départ</string>
+    <string name="rival_choice_battles">Vos premiers combats contre le rival</string>
+    <string name="rival_choice_lab_won">Victoire au laboratoire du Prof. Chen</string>
+    <string name="rival_choice_route22_won">Victoire au premier combat de la Route 22</string>
+    <string name="rival_choice_evolution">Son Évoli devient %1$s</string>
+    <string name="rival_choice_write_error">Ce choix n’a pas pu être enregistré.</string>
     <string name="map_offer_gifts">Donne</string>
     <string name="map_offer_sales">Vend</string>
     <string name="map_offer_quantity">%1$s × %2$d</string>
