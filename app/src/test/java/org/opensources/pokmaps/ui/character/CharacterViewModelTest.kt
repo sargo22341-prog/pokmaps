@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.character
 
 import androidx.lifecycle.SavedStateHandle
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -9,6 +10,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -19,11 +21,14 @@ import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
+import org.opensources.pokmaps.data.settings.RivalSettings
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.RivalChoice
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
 import org.opensources.pokmaps.domain.usecase.ObserveCharacterPageUseCase
+import org.opensources.pokmaps.domain.usecase.RivalChoiceUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -33,12 +38,18 @@ class CharacterViewModelTest {
 
     private val requests = MapRequests()
 
-    private fun viewModel(objectId: Int, failing: Boolean = false, blue: Boolean = false): CharacterViewModel {
-        val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
+    private fun viewModel(
+        objectId: Int,
+        failing: Boolean = false,
+        blue: Boolean = false,
+        dataStore: FakeDataStore = FakeDataStore()
+    ): CharacterViewModel {
+        val games = GameRepository(FakeGameDao(), GameSettings(dataStore))
         if (blue) runBlocking { games.select(FakeGameDao.BLUE) }
         return CharacterViewModel(
             SavedStateHandle(mapOf(CharacterViewModel.CHARACTER to objectId)),
             ObserveCharacterPageUseCase(games, MapRepository(FakeMapDao(failing), Dispatchers.Unconfined)),
+            RivalChoiceUseCase(games, RivalSettings(dataStore)),
             requests
         )
     }
@@ -55,9 +66,36 @@ class CharacterViewModelTest {
         val page = checkNotNull(viewModel.state.value.page)
         assertEquals(listOf(listOf("Rattata")), page.teams.map { team -> team.members.map { it.name } })
         assertEquals(null, page.teams.single().variant)
+        assertEquals(page.teams, viewModel.state.value.teams.shown)
         assertTrue(page.offers.isEmpty())
         viewModel.onAction(CharacterAction.ShowOnMap)
         assertEquals(MapRequest.FocusObject(FakeMapDao.TRAINER), requests.pending.value)
+    }
+
+    @Test
+    fun theRivalChoiceIsRememberedForTheGame() = runTest {
+        val dataStore = FakeDataStore()
+        val viewModel = viewModel(FakeMapDao.TRAINER, dataStore = dataStore)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        viewModel.onAction(CharacterAction.ChooseRival(RivalChoice(starterId = 4)))
+        assertEquals(RivalChoice(starterId = 4), viewModel.state.value.rivalChoice)
+        assertEquals(RivalChoice(starterId = 4), viewModel.state.value.teams.choice)
+        assertFalse(viewModel.state.value.choiceFailed)
+        val other = viewModel(FakeMapDao.TRAINER, dataStore = dataStore)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { other.state.collect {} }
+        assertEquals(RivalChoice(starterId = 4), other.state.value.rivalChoice)
+    }
+
+    @Test
+    fun anUnsavedRivalChoiceIsShownAsAnError() = runTest {
+        val dataStore = FakeDataStore()
+        val viewModel = viewModel(FakeMapDao.TRAINER, dataStore = dataStore)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
+        dataStore.writeError = IOException("Disque plein")
+        viewModel.onAction(CharacterAction.ChooseRival(RivalChoice(starterId = 4)))
+        assertTrue(viewModel.state.value.choiceFailed)
+        assertEquals(RivalChoice(), viewModel.state.value.rivalChoice)
+        assertNotNull(viewModel.state.value.page)
     }
 
     @Test

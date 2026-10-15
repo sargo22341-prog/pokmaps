@@ -273,6 +273,8 @@ private fun BoxScope.BottomPanel(
                 is BottomCard.Detail -> DetailCard(
                     detail = card.detail,
                     versionGroupIdentifier = state.map?.versionGroupIdentifier.orEmpty(),
+                    rivalChoiceFailed = state.rivalChoiceFailed,
+                    onChooseRival = { onAction(MapAction.ChooseRival(it)) },
                     onClose = { onAction(MapAction.DismissDetail) },
                     onOpenPokemon = onOpenPokemon,
                     onOpenItem = onOpenItem,

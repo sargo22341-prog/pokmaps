@@ -145,6 +145,9 @@ pour chaque évolution finale de son Évoli, fixée par les résultats des premi
 combat du rival montre ses trois équipes, une par Pokémon de départ du joueur, avec les attaques spéciales du Maître.
 La Route 22 a un badge par combat du rival. Or, Argent et Cristal affichent aussi les trois équipes de chaque
 combat du rival, l’équipe par défaut de Cal et les équipes de revanche téléphonique sur la même fiche.
+Une fiche de rival à plusieurs équipes n’en montre qu’une : un sélecteur de sprites y choisit le Pokémon de départ
+du joueur et, dans Jaune, deux interrupteurs indiquent les victoires au laboratoire et au premier combat de la
+Route 22. Ce choix est mémorisé par jeu et vaut pour toutes les fiches du rival (carte, fiche, guides).
 Les objets tenus des dresseurs de Johto et des jeux GBA sont conservés et affichés. Les dons des scènes du
 laboratoire, de M. Pokémon, de Sandra et du Directeur de la Tour Radio sont rattachés à leurs donneurs.
 Les journalistes des Routes 111, 118 et 120 gardent une seule paire par route ; les acteurs des revanches

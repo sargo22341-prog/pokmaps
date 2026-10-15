@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.guide
 
 import androidx.lifecycle.SavedStateHandle
+import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -11,16 +12,22 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
+import org.opensources.pokmaps.data.repository.GameRepository
+import org.opensources.pokmaps.data.settings.FakeDataStore
+import org.opensources.pokmaps.data.settings.GameSettings
+import org.opensources.pokmaps.data.settings.RivalSettings
 import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideLibrary
 import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideSpan
 import org.opensources.pokmaps.domain.guide.GuideTarget
+import org.opensources.pokmaps.domain.map.RivalChoice
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.Guides
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
+import org.opensources.pokmaps.domain.usecase.RivalChoiceUseCase
 import org.opensources.pokmaps.ui.MainDispatcherRule
 
 class GuideViewModelTest {
@@ -30,7 +37,7 @@ class GuideViewModelTest {
     fun emptyLibraryIsContentAndFailureCanBeRetried() = runTest {
         val guides = MemoryGuides()
         guides.failing = true
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         assertTrue(model.state.value.failed)
         guides.failing = false
         model.onAction(GuideAction.Retry)
@@ -43,7 +50,7 @@ class GuideViewModelTest {
     fun navigationIsRestoredSeparatelyForEachGame() = runTest {
         val guides = MemoryGuides()
         guides.value.value = GuideLibrary(FakeGameDao.RED, listOf(article("red"))) to GuideProgress()
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         model.onAction(GuideAction.Article("red"))
         assertEquals(GuideCategory.TIP, model.state.value.category)
         guides.value.value = GuideLibrary(FakeGameDao.BLUE, listOf(article("blue"))) to GuideProgress()
@@ -56,7 +63,7 @@ class GuideViewModelTest {
     @Test
     fun previewFailureIsVisibleAndMapRequestIsExplicit() = runTest {
         val maps = MapRequests()
-        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { error("Fiche illisible") }, maps)
+        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { error("Fiche illisible") }, maps, rivals())
         model.onAction(GuideAction.Preview(GuideTarget.Pokemon(25)))
         assertTrue(model.state.value.previewFailed)
         assertFalse(model.state.value.previewLoading)
@@ -73,7 +80,7 @@ class GuideViewModelTest {
         val achievement = article("ra-1").copy(category = GuideCategory.ACHIEVEMENT, achievementId = 1)
         val guides = MemoryGuides()
         guides.value.value = GuideLibrary(FakeGameDao.RED, listOf(chapter, achievement)) to GuideProgress()
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         model.onAction(GuideAction.Article("chapter"))
         model.onAction(GuideAction.Article("ra-1"))
         assertEquals(GuideCategory.ACHIEVEMENT, model.state.value.category)
@@ -87,7 +94,7 @@ class GuideViewModelTest {
         val guides = MemoryGuides()
         val achievement = article("ra-1").copy(category = GuideCategory.ACHIEVEMENT, achievementId = 1)
         guides.value.value = GuideLibrary(FakeGameDao.RED, listOf(achievement)) to GuideProgress()
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         model.onAction(GuideAction.Complete("ra-1", true))
         assertTrue(model.state.value.writeFailed)
         assertTrue(model.state.value.progress.completed.isEmpty())
@@ -100,7 +107,7 @@ class GuideViewModelTest {
         val library = GuideLibrary(FakeGameDao.RED, articles)
         val progress = GuideProgress(completed = setOf("ra-1", "ra-2"))
         guides.value.value = library to progress
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         assertEquals(2, model.state.value.completedAchievements)
         guides.value.value = library.copy(
             retro = org.opensources.pokmaps.domain.guide.RetroProgress(
@@ -122,7 +129,7 @@ class GuideViewModelTest {
         val guides = MemoryGuides()
         val roamers = article("hoenn-roamers")
         guides.value.value = GuideLibrary(FakeGameDao.EMERALD, listOf(roamers)) to GuideProgress()
-        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests())
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
         assertTrue(model.state.value.roamers.isEmpty())
         model.onAction(GuideAction.Category(GuideCategory.TIP))
         model.onAction(GuideAction.Article(roamers.id))
@@ -143,14 +150,30 @@ class GuideViewModelTest {
     @Test
     fun secretBaseLinkAsksTheMapToShowItsEntrance() = runTest {
         val requests = MapRequests()
-        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { null }, requests)
+        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { null }, requests, rivals())
         model.onAction(GuideAction.ShowSecretBase(42))
         assertEquals(MapRequest.ShowSecretBase(42), requests.pending.value)
     }
 
     private fun article(id: String) =
         GuideArticle(id, id, GuideCategory.TIP, listOf(listOf(GuideSpan(id))), 25, emptyList())
+
+    @Test
+    fun theRivalChoiceIsSavedAndAFailedWriteIsVisible() = runTest {
+        val dataStore = FakeDataStore()
+        val model = GuideViewModel(SavedStateHandle(), MemoryGuides(), { null }, MapRequests(), rivals(dataStore))
+        model.onAction(GuideAction.ChooseRival(RivalChoice(wonLabBattle = false)))
+        assertEquals(RivalChoice(wonLabBattle = false), model.state.value.rivalChoice)
+        assertFalse(model.state.value.rivalChoiceFailed)
+        dataStore.writeError = IOException("Disque plein")
+        model.onAction(GuideAction.ChooseRival(RivalChoice()))
+        assertTrue(model.state.value.rivalChoiceFailed)
+        assertEquals(RivalChoice(wonLabBattle = false), model.state.value.rivalChoice)
+    }
 }
+
+private fun rivals(dataStore: FakeDataStore = FakeDataStore()) =
+    RivalChoiceUseCase(GameRepository(FakeGameDao(), GameSettings(dataStore)), RivalSettings(dataStore))
 
 private class MemoryGuides : Guides {
     var failing = false

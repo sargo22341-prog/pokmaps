@@ -49,6 +49,7 @@ fun CharacterRoute(
             viewModel.onAction(action)
             when (action) {
                 CharacterAction.ShowOnMap, is CharacterAction.ShowObject -> onShowOnMap()
+                is CharacterAction.ChooseRival -> Unit
             }
         },
         onOpenPokemon = onOpenPokemon,
@@ -73,24 +74,24 @@ fun CharacterScreen(
         return
     }
     CharacterContent(
+        state,
         page,
+        onAction = onAction,
         onOpenPokemon = onOpenPokemon,
         onOpenItem = onOpenItem,
         onOpenPlace = onOpenPlace,
-        onShowOnMap = { onAction(CharacterAction.ShowOnMap) },
-        onShowObject = { onAction(CharacterAction.ShowObject(it)) },
         modifier = modifier
     )
 }
 
 @Composable
 private fun CharacterContent(
+    state: CharacterUiState,
     page: CharacterPage,
+    onAction: (CharacterAction) -> Unit,
     onOpenPokemon: (Int) -> Unit,
     onOpenItem: (String) -> Unit,
     onOpenPlace: (String) -> Unit,
-    onShowOnMap: () -> Unit,
-    onShowObject: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val obj = page.obj
@@ -110,7 +111,7 @@ private fun CharacterContent(
             RoleIcons(page.roles, size = 28.dp)
             Text(obj.name, style = MaterialTheme.typography.headlineMedium)
             FilledTonalButton(onClick = { onOpenPlace(page.map.identifier) }) { Text(page.map.name) }
-            Button(onClick = onShowOnMap) {
+            Button(onClick = { onAction(CharacterAction.ShowOnMap) }) {
                 Icon(
                     painterResource(R.drawable.ic_map),
                     contentDescription = null,
@@ -120,7 +121,13 @@ private fun CharacterContent(
             }
         }
         if (obj.kind == MapObjectKind.TRAINER) {
-            TrainerTeams(page.teams, SpritePlace.SHEETS, onOpenPokemon)
+            TrainerTeams(
+                state.teams,
+                SpritePlace.SHEETS,
+                state.choiceFailed,
+                onChooseRival = { onAction(CharacterAction.ChooseRival(it)) },
+                onOpenPokemon = onOpenPokemon
+            )
         }
         Offers(
             page.offers,
@@ -128,7 +135,7 @@ private fun CharacterContent(
             page.fossilUses,
             onOpenPokemon = onOpenPokemon,
             onOpenItem = onOpenItem,
-            onShowObject = onShowObject
+            onShowObject = { onAction(CharacterAction.ShowObject(it)) }
         )
         Spacer(Modifier.height(24.dp))
     }

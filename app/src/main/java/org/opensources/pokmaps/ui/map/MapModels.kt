@@ -7,6 +7,8 @@ import org.opensources.pokmaps.domain.map.MapFloor
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.NpcOffer
+import org.opensources.pokmaps.domain.map.RivalChoice
+import org.opensources.pokmaps.domain.map.TeamSelection
 import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.map.kind
 import org.opensources.pokmaps.domain.model.Encounter
@@ -94,7 +96,8 @@ sealed interface MapDetail {
 
     /**
      * Dresseur, personnage, Pokémon fixe ou installation ; `loading` tant que l'équipe et les offres ne sont pas
-     * lues. `fossilUses` : ce que deviennent les fossiles du jeu, pour un personnage qui en donne.
+     * lues. `fossilUses` : ce que deviennent les fossiles du jeu, pour un personnage qui en donne. `rivalChoice` :
+     * partie indiquée, qui choisit l'équipe d'un rival qui en a plusieurs.
      */
     data class Character(
         val obj: MapObject,
@@ -102,9 +105,11 @@ sealed interface MapDetail {
         val teams: List<TrainerTeam> = emptyList(),
         val offers: List<NpcOffer> = emptyList(),
         val fossilUses: Map<String, FossilUse> = emptyMap(),
-        val failed: Boolean = false
+        val failed: Boolean = false,
+        val rivalChoice: RivalChoice = RivalChoice()
     ) : MapDetail {
         val roles: List<CharacterRole> get() = CharacterRole.of(obj.kind, offers.map { it.kind })
+        val teamSelection: TeamSelection get() = TeamSelection.of(teams, rivalChoice)
     }
 }
 
@@ -148,7 +153,11 @@ data class MapUiState(
     val highlight: MapHighlight? = null,
     /** Message à afficher une fois (voir [MapAction.MessageShown]). */
     val message: MapMessage? = null,
-    val failed: Boolean = false
+    val failed: Boolean = false,
+    /** Pokémon de départ et combats indiqués, qui choisissent l'équipe des rivaux. */
+    val rivalChoice: RivalChoice = RivalChoice(),
+    /** Le dernier de ces choix n'a pas pu être enregistré. */
+    val rivalChoiceFailed: Boolean = false
 ) {
     val times: Set<EncounterTime> get() = time.times
     val selectedFloorId: Int? get() = zone?.mapId?.takeIf { id -> floors.any { it.mapId == id } } ?: map?.id
@@ -186,6 +195,9 @@ sealed interface MapAction {
 
     /** Le message de [MapUiState.message] a été affiché. */
     data object MessageShown : MapAction
+
+    /** Change le Pokémon de départ ou l'issue des combats qui fixent l'équipe du rival. */
+    data class ChooseRival(val choice: RivalChoice) : MapAction
 }
 
 internal object MapMarkerIds {

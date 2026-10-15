@@ -19,6 +19,8 @@ import org.opensources.pokmaps.domain.guide.GuideProgress
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.guide.RoamerChoice
 import org.opensources.pokmaps.domain.guide.Roamers
+import org.opensources.pokmaps.domain.map.RivalChoice
+import org.opensources.pokmaps.domain.map.TeamSelection
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.opensources.pokmaps.domain.usecase.GuidePreview
 import org.opensources.pokmaps.domain.usecase.GuidePreviewUseCase
@@ -26,6 +28,7 @@ import org.opensources.pokmaps.domain.usecase.GuideUseCase
 import org.opensources.pokmaps.domain.usecase.Guides
 import org.opensources.pokmaps.domain.usecase.MapRequest
 import org.opensources.pokmaps.domain.usecase.MapRequests
+import org.opensources.pokmaps.domain.usecase.RivalChoiceUseCase
 
 data class GuideUiState(
     val loading: Boolean = true,
@@ -38,8 +41,16 @@ data class GuideUiState(
     val preview: GuidePreview? = null,
     val previewLoading: Boolean = false,
     val previewFailed: Boolean = false,
-    val writeFailed: Boolean = false
+    val writeFailed: Boolean = false,
+    /** Pokémon de départ et combats indiqués, qui choisissent l'équipe des rivaux. */
+    val rivalChoice: RivalChoice = RivalChoice(),
+    val rivalChoiceFailed: Boolean = false
 ) {
+    /** Équipes du dresseur dont l'aperçu est ouvert, selon la partie indiquée. */
+    val previewTeams: TeamSelection? = (preview as? GuidePreview.Character)?.let {
+        TeamSelection.of(it.page.teams, rivalChoice)
+    }
+
     val article: GuideArticle? = library?.articles?.firstOrNull { it.id == articleId }
 
     /** Errants présentés dans l'article ouvert, s'il est celui des errants de la version. */
@@ -92,6 +103,9 @@ sealed interface GuideAction {
     data class ShowPlace(val identifier: String) : GuideAction
     data class ShowObject(val id: Int) : GuideAction
     data object Retry : GuideAction
+
+    /** Change le Pokémon de départ ou l'issue des combats qui fixent l'équipe du rival. */
+    data class ChooseRival(val choice: RivalChoice) : GuideAction
 }
 
 @HiltViewModel
@@ -99,11 +113,17 @@ class GuideViewModel internal constructor(
     private val saved: SavedStateHandle,
     private val guides: Guides,
     private val preview: suspend (GuideTarget) -> GuidePreview?,
-    private val mapRequests: MapRequests
+    private val mapRequests: MapRequests,
+    private val rivalChoice: RivalChoiceUseCase
 ) : ViewModel() {
     @Inject
-    constructor(saved: SavedStateHandle, guides: GuideUseCase, preview: GuidePreviewUseCase, maps: MapRequests) :
-        this(saved, guides, { preview(it) }, maps)
+    constructor(
+        saved: SavedStateHandle,
+        guides: GuideUseCase,
+        preview: GuidePreviewUseCase,
+        maps: MapRequests,
+        rivalChoice: RivalChoiceUseCase
+    ) : this(saved, guides, { preview(it) }, maps, rivalChoice)
 
     private val mutableState = MutableStateFlow(GuideUiState())
     val state: StateFlow<GuideUiState> = mutableState.asStateFlow()
@@ -112,6 +132,11 @@ class GuideViewModel internal constructor(
 
     init {
         load()
+        viewModelScope.launch {
+            attempt(onError = { mutableState.update { it.copy(rivalChoiceFailed = true) } }) {
+                rivalChoice().collect { choice -> mutableState.update { it.copy(rivalChoice = choice) } }
+            }
+        }
     }
 
     private fun load() {
@@ -143,7 +168,9 @@ class GuideViewModel internal constructor(
                             previewTarget = if (changed) null else it.previewTarget,
                             preview = if (changed) null else it.preview,
                             previewLoading = !changed && it.previewLoading,
-                            previewFailed = !changed && it.previewFailed
+                            previewFailed = !changed && it.previewFailed,
+                            rivalChoice = it.rivalChoice,
+                            rivalChoiceFailed = it.rivalChoiceFailed
                         )
                     }
                 }
@@ -176,6 +203,8 @@ class GuideViewModel internal constructor(
                 closePreview()
                 mapRequests.send(MapRequest.FocusObject(action.id))
             }
+
+            is GuideAction.ChooseRival -> chooseRival(action.choice)
 
             GuideAction.Retry -> {
                 mutableState.update { it.copy(loading = true, failed = false) }
@@ -223,6 +252,16 @@ class GuideViewModel internal constructor(
             attempt(onError = { mutableState.update { it.copy(previewLoading = false, previewFailed = true) } }) {
                 val result = preview(target)
                 mutableState.update { it.copy(preview = result, previewLoading = false) }
+            }
+        }
+    }
+
+    private fun chooseRival(choice: RivalChoice) {
+        val game = state.value.library?.game ?: return
+        viewModelScope.launch {
+            mutableState.update { it.copy(rivalChoiceFailed = false) }
+            attempt(onError = { mutableState.update { it.copy(rivalChoiceFailed = true) } }) {
+                rivalChoice.set(game, choice)
             }
         }
     }
