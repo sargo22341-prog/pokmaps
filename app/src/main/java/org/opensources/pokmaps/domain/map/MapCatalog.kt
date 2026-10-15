@@ -113,6 +113,8 @@ data class MapCatalog(
 ) {
     // Index immuables calculés avec le catalogue, hors du fil principal (MapRepository), plutôt qu'à chaque
     // rendu de la carte. Déclarés avant les propriétés qui s'en servent pendant la construction.
+    val battleMarkers: List<BattleMarkers.Position> = BattleMarkers.positions(objects.values.flatten())
+
     private val regionsByParent: Map<Int, List<MapInfo>> = maps.values
         .mapNotNull { map -> map.parentId?.let { it to map } }
         .groupBy({ it.first }, { it.second })

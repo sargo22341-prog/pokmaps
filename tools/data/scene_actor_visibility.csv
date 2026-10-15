@@ -1,0 +1,18 @@
+family,text,reason
+ruby-sapphire-emerald,Route104:LOCALID_ROUTE104_RIVAL,Flora sortant du cottage pendant la transition ; combat facultatif déjà représenté à Mérouville
+ruby-sapphire-emerald,RustboroCity:LOCALID_RUSTBORO_SCIENTIST,Scientifique sortant de Devon pour le tutoriel du PokéNav puis rentrant aussitôt ; aucun objet ni combat
+ruby-sapphire-emerald,PetalburgCity_Gym:10,Timmy devant la sortie pendant la démonstration de capture ; aucun don ni combat contre le joueur
+ruby-sapphire-emerald,PetalburgCity_Gym:LOCALID_PETALBURG_GYM_WALLY,Timmy devant la sortie pendant la démonstration de capture ; aucun don ni combat contre le joueur
+ruby-sapphire-emerald,PetalburgCity_Gym:LOCALID_PETALBURG_GYM_WALLYS_DAD,Père de Timmy pendant la sortie de la scène de capture ; aucun don ni combat
+ruby-sapphire-emerald,SlateportCity_OceanicMuseum_2F:2,Chef de la Team sortant du musée après la scène ; conserver les combats des sbires
+ruby-sapphire-emerald,SlateportCity_OceanicMuseum_2F:LOCALID_OCEANIC_MUSEUM_2F_ARCHIE,Arthur sortant du musée après la scène ; conserver les combats des sbires
+ruby-sapphire-emerald,EverGrandeCity_ChampionsRoom:2,Flora pendant la scène de fin devant l'escalier ; aucun don ni combat
+ruby-sapphire-emerald,EverGrandeCity_ChampionsRoom:LOCALID_CHAMPIONS_ROOM_RIVAL,Flora pendant la scène de fin devant l'escalier ; aucun don ni combat
+ruby-sapphire-emerald,Route111:2,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+ruby-sapphire-emerald,Route111:3,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+ruby-sapphire-emerald,Route111:4,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+ruby-sapphire-emerald,Route111:LOCALID_ROUTE111_VICTORIA,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+ruby-sapphire-emerald,Route111:LOCALID_ROUTE111_VIVI,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+ruby-sapphire-emerald,Route111:LOCALID_ROUTE111_VICKY,Figurante sortant de la maison Stratège ; son combat reste dans la série déclenchée par le père
+firered-leafgreen,SixIsland_DottedHole_SapphireRoom:LOCALID_DOTTED_HOLE_THIEF,Voleur du Saphir pendant la scène de fuite ; combat conservé à l'Entrepôt Rocket
+firered-leafgreen,TwoIsland_JoyfulGameCorner:LOCALID_JOYFUL_GAME_CORNER_BIKER,Motard entrant puis sortant pendant une scène sans combat ; conserver ses autres emplacements

@@ -165,7 +165,7 @@ fun ObjectMarker(
     }
 }
 
-/** Repère d'un objet caché (« ? ») ou d'un dresseur (« ! »), dans un coin du marqueur. */
+/** Repère d'un objet caché ; les combats sont dessinés au-dessus des personnages. */
 @Composable
 private fun BoxScope.KindBadge(mapState: MapState, kind: MapObjectKind, scale: Float) {
     when (kind) {
@@ -177,18 +177,16 @@ private fun BoxScope.KindBadge(mapState: MapState, kind: MapObjectKind, scale: F
             scale
         )
 
-        MapObjectKind.TRAINER -> Badge(
-            mapState,
-            stringResource(R.string.map_badge_trainer),
-            TRAINER_COLOR,
-            Modifier.align(Alignment.TopEnd),
-            scale
-        )
-
-        MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT,
+        MapObjectKind.TRAINER, MapObjectKind.ITEM, MapObjectKind.POKEMON, MapObjectKind.NPC, MapObjectKind.NPC_OBJECT,
         MapObjectKind.NPC_POKEMON, MapObjectKind.VENDING_MACHINE, MapObjectKind.PRIZE_VENDOR,
         MapObjectKind.HEAL_SPOT -> Unit
     }
+}
+
+@Composable
+internal fun BattleMarker(mapState: MapState, alwaysVisible: Boolean) {
+    if (!alwaysVisible && !visibleAtScale(mapState)) return
+    Badge(mapState, stringResource(R.string.map_badge_trainer), TRAINER_COLOR)
 }
 
 /** Installation (distributeur, comptoir des lots, soins) : son icône sur une pastille, de la taille d'une case. */

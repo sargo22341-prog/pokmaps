@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Dégage davantage les portes et retire leurs figurants de scènes ponctuelles sans supprimer les PNJ permanents.
+- Les repères de combat sont décalés des sprites et regroupés au-dessus des duos.
 - Complète les descriptions françaises des objets et renouvelle la base en arrière-plan après une mise à jour.
 - Les Champions et le Conseil 4 de Hoenn portent leur nom, aussi dans la recherche et les liens des guides.
 - Les fiches du rival montrent une seule équipe, choisie d’un geste par votre Pokémon de départ ou, dans Jaune, vos premières victoires.
