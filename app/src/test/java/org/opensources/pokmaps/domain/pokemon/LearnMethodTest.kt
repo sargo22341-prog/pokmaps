@@ -10,6 +10,7 @@ class LearnMethodTest {
         assertEquals(LearnMethod.EGG, LearnMethod.from("egg"))
         assertEquals(MoveTab.EGG to MoveNote.LIGHT_BALL_PARENT, LearnMethod.LIGHT_BALL_EGG.let { it.tab to it.note })
         assertEquals(MoveTab.TUTOR, LearnMethod.from("stadium-surfing-pikachu").tab)
+        assertEquals(LearnMethod.FORM_CHANGE, LearnMethod.from("form-change"))
     }
 
     @Test

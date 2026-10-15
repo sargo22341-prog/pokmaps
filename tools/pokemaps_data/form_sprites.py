@@ -1,5 +1,5 @@
 """Sprites des formes embarquées à part du sprite de l'espèce : Zarbi (lettres, puis ponctuation des générations
-suivantes), Morphéo (météo) et Deoxys (forme propre à chaque jeu de la 3e génération).
+suivantes), Morphéo, Deoxys et formes de Sinnoh déclarées par version dans pokemon_forms.csv.
 
 Chaque forme a quatre variantes, comme les espèces : sprites/<dossier>/[shiny/]{animated,static}/<forme>.webp.
 """

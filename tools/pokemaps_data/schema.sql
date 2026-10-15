@@ -292,6 +292,22 @@ CREATE TABLE evolution (
 CREATE INDEX index_evolution_from_pokemon_id ON evolution (from_pokemon_id);
 CREATE INDEX index_evolution_to_pokemon_id ON evolution (to_pokemon_id);
 
+-- Conditions DS : identifiants PokéAPI (lieu, sexe, espèce et formes), conservés avant activation Android.
+-- location_id : Mont Couronné, Forêt Vestigion ou Route 217.
+-- gender_id : 1 femelle, 2 mâle ; NULL sans restriction.
+-- party_species_id : espèce dans l'équipe (Rémoraid pour Babimanta).
+-- near_special_rock : 1 impose la proximité de la Pierre Mousse ou Glacée du lieu indiqué.
+-- required_form_id / evolved_form_id : formes de Cheniti et Sancoki, entre autres.
+CREATE TABLE evolution_requirement (
+    evolution_id INTEGER NOT NULL PRIMARY KEY,
+    location_id INTEGER,
+    gender_id INTEGER,
+    party_species_id INTEGER,
+    near_special_rock INTEGER,
+    required_form_id INTEGER,
+    evolved_form_id INTEGER
+);
+
 CREATE TABLE location (
     id INTEGER NOT NULL PRIMARY KEY,
     identifier TEXT NOT NULL,

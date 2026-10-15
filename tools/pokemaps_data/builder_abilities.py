@@ -54,7 +54,22 @@ class AbilityTables:
                             f"Talent {ability} du Pokémon {species_id} absent de la génération {generation}"
                         )
                     rows.append((species_id, generation, slot, ability, int(hidden)))
-        return rows
+        return self._ds_abilities(rows)
+
+    def _ds_abilities(self, rows: list[tuple]) -> list[tuple]:
+        if not self.builder.ds_species:
+            return rows
+        ids = {r["identifier"]: int(r["id"]) for r in self.api.table("abilities")}
+        species = {r["identifier"]: i for i, r in self.builder.species.items()}
+        result: dict[tuple[int, int], int] = {}
+        for profiles in self.builder.ds_species.values():
+            for name, profile in profiles.items():
+                for slot, ability in enumerate(profile.abilities, 1):
+                    key = (species[name], slot)
+                    if key in result and result[key] != ids[ability]:
+                        raise ValueError(f"Talents propres à une version DS : {name}")
+                    result[key] = ids[ability]
+        return [r for r in rows if r[1] != 4] + [(p, 4, s, a, 0) for (p, s), a in sorted(result.items())]
 
     def ability_table(self) -> list[tuple]:
         names = self.api.names("ability_names", "ability_id")

@@ -5,7 +5,10 @@ On construit seulement les tables de Pokémon, à partir des mêmes CSV PokéAPI
 """
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import DECLARED_GAMES, Game, PretFormat
+from pokemaps_data.games import DECLARED_GAMES, DIAMOND_PEARL, PLATINUM, Game, PretFormat
+from pokemaps_data.sources import pret_dir
+
+from .conftest import CACHE
 
 RAICHU, CLEFAIRY = 26, 35
 
@@ -15,7 +18,10 @@ def _builder(builder: DatabaseBuilder, version_group: str) -> DatabaseBuilder:
     # n'en a pas et prend un format pret quelconque : seules les tables qui ne lisent pas pret sont construites.
     declared = {game.version_group: game for game in DECLARED_GAMES}
     game = declared.get(version_group) or Game(version_group, "", (), "", (), PretFormat.GEN1, ())
-    return DatabaseBuilder(builder.api, games=(game,), pret_roots=builder.pret_roots)
+    roots = dict(builder.pret_roots)
+    if game in (PLATINUM, DIAMOND_PEARL):
+        roots[game.version_group] = pret_dir(CACHE, game.pret_repo)
+    return DatabaseBuilder(builder.api, games=(game,), pret_roots=roots)
 
 
 def test_gen1_has_none_of_the_later_data(builder: DatabaseBuilder) -> None:
@@ -41,6 +47,7 @@ def test_abilities_follow_their_generation(builder: DatabaseBuilder) -> None:
     # Mélofée : Joli Sourire en 3e génération, Garde Magik ajouté en 4e, Garde-Ami caché en 5e.
     assert abilities("ruby-sapphire", CLEFAIRY) == [(1, "cute-charm", False)]
     assert abilities("diamond-pearl", CLEFAIRY) == [(1, "cute-charm", False), (2, "magic-guard", False)]
+    assert abilities("platinum", CLEFAIRY) == [(1, "cute-charm", False), (2, "magic-guard", False)]
     assert abilities("black-white", CLEFAIRY) == [
         (1, "cute-charm", False),
         (2, "magic-guard", False),

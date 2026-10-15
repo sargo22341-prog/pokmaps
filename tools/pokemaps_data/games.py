@@ -24,6 +24,8 @@ class PretFormat(Enum):
     GEN2 = "gen2"
     # pokeruby, pokeemerald, pokefirered : data/maps/<Carte>/map.json, sources C et JSON, variantes par dépôt.
     GEN3 = "gen3"
+    # DS : JSON par espèce dans pokeplatinum ; tables JSON agrégées dans pokediamond (Diamant et Perle).
+    GEN4 = "gen4"
 
 
 @dataclass(frozen=True)
@@ -57,6 +59,7 @@ HOENN = Region("HOENN", "LITTLEROOT_TOWN", 997)
 FIRERED_KANTO = Region("KANTO", "PALLET_TOWN", 996)
 # Les Îles Sevii forment sept ensembles non reliés, placés par map_anchors.csv autour de l'Île 1.
 SEVII = Region("SEVII", "ONE_ISLAND", 995)
+SINNOH = Region("SINNOH", "TWINLEAF_TOWN", 994)
 
 
 @dataclass(frozen=True)
@@ -76,7 +79,7 @@ class Game:
     pret_format: PretFormat
     # Régions du jeu, une carte du monde chacune.
     regions: tuple[Region, ...]
-    # Le jeu débloque le Pokédex National après son Pokédex régional (3e génération) ; PokéAPI ne relie ces jeux
+    # Le jeu débloque le Pokédex National après son Pokédex régional (dès la 3e génération) ; PokéAPI ne relie ces jeux
     # qu'à leur Pokédex régional.
     national_dex: bool = False
     # Génération des jeux originaux, pour la ligne des remakes dans le choix du jeu.
@@ -158,13 +161,34 @@ FIRERED_LEAFGREEN = Game(
     remake_generation=1,
 )
 GEN3_GAMES: tuple[Game, ...] = (RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
+PLATINUM = Game(
+    "platinum",
+    "pokeplatinum",
+    (("platinum", "PLATINUM"),),
+    "platinum",
+    (VersionCover("platinum", "giratina", 0xA49A72),),
+    PretFormat.GEN4,
+    (SINNOH,),
+    national_dex=True,
+)
+DIAMOND_PEARL = Game(
+    "diamond-pearl",
+    "pokediamond",
+    (("diamond", "DIAMOND"), ("pearl", "PEARL")),
+    "diamond-pearl",
+    (VersionCover("diamond", "dialga", 0x7D9DC4), VersionCover("pearl", "palkia", 0xCF9EB5)),
+    PretFormat.GEN4,
+    (SINNOH,),
+    national_dex=True,
+)
+GEN4_GAMES: tuple[Game, ...] = (PLATINUM, DIAMOND_PEARL)
 GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, *GEN3_GAMES)
 GAMES_IN_PROGRESS: tuple[Game, ...] = ()
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
 # Tous les jeux déclarés, générés ou non. La famille de cartes d'un jeu est aussi sa branche, que les contrôles
 # d'obtention traitent comme une génération à part (validate._check_obtainable).
-DECLARED_GAMES: tuple[Game, ...] = tuple(dict.fromkeys((*ALL_GAMES, *GEN3_GAMES)))
+DECLARED_GAMES: tuple[Game, ...] = tuple(dict.fromkeys((*ALL_GAMES, *GEN3_GAMES, *GEN4_GAMES)))
 
 
 def map_families(games: tuple[Game, ...] = ALL_GAMES) -> dict[str, tuple[str, ...]]:
@@ -203,13 +227,18 @@ ONE_OFF_METHODS = frozenset(
         "colosseum-bonus-disc-jpn",
         "colosseum-bonus-disc-us",
         "pokemon-channel-pal",
+        "pokemon-ranger",
     }
 )
 # Événements externes : un autre jeu ou une distribution donne le Pokémon (méthodes), ou le billet qui ouvre le lieu
 # (lieux PokéAPI : Roc Nombri, Île Aurore, Île Lointaine, Île du Sud). Ces rencontres sont gardées avec la
 # mention EXTERNAL_EVENT_NOTE, mais ne rendent pas le Pokémon obtenable dans le jeu (validate._check_obtainable).
-EXTERNAL_EVENT_METHODS = frozenset({"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal"})
-EXTERNAL_EVENT_LOCATIONS = event_locations()
+EXTERNAL_EVENT_METHODS = frozenset(
+    {"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal", "pokemon-ranger"}
+)
+EXTERNAL_EVENT_LOCATIONS = event_locations() | frozenset(
+    {"pal-park", "newmoon-island", "flower-paradise", "sinnoh-hall-of-origin-1", "sinnoh-hall-of-origin-2"}
+)
 # Métamo : seule la table A (Nosferapti) est accessible sans distribution externe ; les tables B à I
 # étaient prévues pour le Cadeau Mystère, jamais distribué. Garder les rencontres, sans les compter.
 EXTERNAL_EVENT_AREAS = frozenset(

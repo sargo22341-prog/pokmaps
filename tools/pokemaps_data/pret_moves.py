@@ -87,6 +87,8 @@ def read_pret_moves(root: Path, pret_format: PretFormat) -> list[PretMove]:
             from .pret_gen3_moves import read_moves
 
             return read_moves(root)
+        case PretFormat.GEN4:
+            raise ValueError("Effets DS non intégrés : utiliser l'aperçu Pokémon --sinnoh-pokemon-only")
 
 
 def _move_macros(root: Path) -> list[list[str]]:

@@ -1,4 +1,21 @@
 kind,key,name_fr,reason
+location,sinnoh-pokemart,Boutique Pokémon de Sinnoh,nom français absent de PokéAPI
+method,honey-tree,Arbre à Miel,méthode de Sinnoh relue
+method,pokemon-ranger,Transfert depuis Pokémon Ranger,événement externe
+condition,item-skull-fossil,Avec un Fossile Crâne,condition de Sinnoh
+condition,item-armor-fossil,Avec un Fossile Armure,condition de Sinnoh
+condition,great-marsh-daily-slot-1-of-32,Tirage quotidien du Grand Marais (1/32),aucune prédiction du tirage
+condition,great-marsh-daily-slot-2-of-32,Tirage quotidien du Grand Marais (2/32),aucune prédiction du tirage
+condition,great-marsh-daily-slot-3-of-32,Tirage quotidien du Grand Marais (3/32),aucune prédiction du tirage
+condition,great-marsh-daily-slot-4-of-32,Tirage quotidien du Grand Marais (4/32),aucune prédiction du tirage
+condition,great-marsh-daily-slot-5-of-32,Tirage quotidien du Grand Marais (5/32),aucune prédiction du tirage
+condition,great-marsh-daily-slot-15-of-32,Tirage quotidien du Grand Marais (15/32),aucune prédiction du tirage
+condition,story-progress-before-national-dex,Avant le Pokédex National,condition de Sinnoh
+condition,honey-tree-group-a,Groupe A des arbres à Miel,groupe du moteur sans prédiction
+condition,honey-tree-group-b,Groupe B des arbres à Miel,groupe du moteur sans prédiction
+condition,honey-tree-group-c,Groupe C des arbres à Miel (Goinfrex),dépend de l'identifiant du dresseur
+condition,backlot-mentioned,Après l'annonce de M. Décorum,Jardin Trophée
+condition,other-giratina-not-caught-in-distortion-world,Giratina non capturé dans le Monde Distorsion,Platine seulement
 location,seafoam-islands,Îles Écume,accents manquants dans PokéAPI
 location,cinnabar-island,Cramois'Île,accent manquant dans PokéAPI
 location,digletts-cave,Cave Taupiqueur,majuscules dans PokéAPI

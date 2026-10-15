@@ -24,9 +24,10 @@ from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen3 import Gen3PretRepo
+from .pret_species_gen4 import DsSpecies, read_ds_species
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 21
+SCHEMA_VERSION = 22
 
 # Pokédex National de PokéAPI, ajouté aux jeux qui le débloquent (games.Game.national_dex).
 NATIONAL_DEX = "national"
@@ -72,6 +73,14 @@ class DatabaseBuilder:
         self.abilities = AbilityTables(self)
 
     # --- Référentiels ---------------------------------------------------------
+
+    @cached_property
+    def ds_species(self) -> dict[int, dict[str, DsSpecies]]:
+        return {
+            vg: read_ds_species(self.pret_root(game, "les espèces DS"), game.pret_repo)
+            for game, vg in zip(self.games, self.vg_ids, strict=True)
+            if game.pret_format is PretFormat.GEN4
+        }
 
     def game_of(self, version_group_id: int) -> Game:
         """Jeu configuré du groupe de versions `version_group_id`."""
@@ -298,6 +307,7 @@ class DatabaseBuilder:
             "ability_version_group": self.abilities.ability_version_group_table(),
             "pokemon_ability": self.abilities.pokemon_ability_rows,
             "evolution": self.pokemon.evolution_rows,
+            "evolution_requirement": self.pokemon.evolution_requirement_rows,
             "location": self.locations.location_rows(self.encounters.used_areas),
             "location_area": self.locations.location_area_table(self.encounters.used_areas),
             "encounter_method": self.encounters.encounter_method_table(),

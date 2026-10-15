@@ -26,7 +26,10 @@ enum class LearnMethod(val identifier: String, val tab: MoveTab, val note: MoveN
     LIGHT_BALL_EGG("light-ball-egg", MoveTab.EGG, MoveNote.LIGHT_BALL_PARENT),
 
     /** Surf du Pikachu Surfeur de Pokémon Stadium (Rouge, Bleu et Jaune). */
-    STADIUM_SURFING_PIKACHU("stadium-surfing-pikachu", MoveTab.TUTOR, MoveNote.EXTERNAL_EVENT);
+    STADIUM_SURFING_PIKACHU("stadium-surfing-pikachu", MoveTab.TUTOR, MoveNote.EXTERNAL_EVENT),
+
+    /** Attaque apprise lors du changement d'appareil de Motisma (Platine). */
+    FORM_CHANGE("form-change", MoveTab.TUTOR, null);
 
     companion object {
         fun from(identifier: String): LearnMethod = entries.firstOrNull { it.identifier == identifier }

@@ -54,6 +54,10 @@ sans génération ni téléchargement de contenu Pokémon. Les sources brutes et
 Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépôts pret ; aucune ressource
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
+L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
+`python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.
+Il contient les données Pokémon et leurs sprites ; les cartes DS et l’activation dans l’application restent séparées.
+
 ## Publier une version
 
 Configurer une fois les secrets GitHub Actions `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`

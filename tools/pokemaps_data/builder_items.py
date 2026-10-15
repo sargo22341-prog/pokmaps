@@ -116,6 +116,10 @@ class ItemTables:
                     rows += self._pret_held_items(game, vg)
                 case PretFormat.GEN3:
                     rows += self._pokeapi_held_items(vg)
+                case PretFormat.GEN4:
+                    from .pret_items_gen4 import ds_held_items
+
+                    rows += ds_held_items(self.builder, vg)
         return sorted(rows)
 
     def _pokeapi_held_items(self, vg: int) -> list[tuple[int, int, int, int]]:

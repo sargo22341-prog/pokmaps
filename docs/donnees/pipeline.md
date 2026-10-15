@@ -11,6 +11,7 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 | `pret/pokered`, `pokeyellow` | Cartes, personnages, offres et règles des jeux Rouge/Bleu/Jaune |
 | `pret/pokegold`, `pokecrystal` | Cartes, scripts et tables sauvages horaires de Johto/Kanto |
 | `pret/pokeruby`, `pokeemerald`, `pokefirered` | Cartes, scripts, rencontres, équipes et règles GBA |
+| `pret/pokeplatinum`, `pokediamond` | Aperçu Pokémon DS : espèces, objets tenus, évolutions et caractéristiques des attaques |
 | PokeAPI/sprites | Sprites Pokémon Noir/Blanc normaux et chromatiques |
 | pokesprite | Icônes d’objets |
 | `tools/data/` | Corrections et compléments éditoriaux relus |
@@ -63,6 +64,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--gen3-items-only`, `--gen3-trainers-only` | Aperçu GBA avec objets, puis équipes |
 | `--gen3-curation-only` | Rapport éditorial `character_curation.json` |
 | `--achievement-resources-only` | Ressources Android des succès depuis les archives locales |
+| `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.
@@ -86,6 +88,27 @@ Les taux de capture, cycles d’éclosion et groupes d’œufs viennent du pret 
 pas des valeurs actuelles de PokéAPI. Sexe et courbe d’expérience divergents sont refusés tant que le modèle
 les partage entre jeux. Les formes sont dans `pokemon_form` ; la provenance externe utilise des colonnes
 dédiées, jamais la détection d’une phrase française. Les validations et leurs tests accompagnent tout nouvel invariant.
+
+### Aperçu Pokémon de Sinnoh
+
+`PLATINUM` puis `DIAMOND_PEARL` sont déclarés au format `GEN4`, hors de `GAMES_IN_PROGRESS` :
+le lecteur général refuse encore les cartes DS. L’option `--sinnoh-pokemon-only` lit les deux dépôts
+épinglés, sans ROM, et génère une base et les sprites normaux/chromatiques des 493 espèces dans l’aperçu.
+Les variantes de Perle sont lues séparément pour les objets tenus ; un test compare leurs autres données à Diamant.
+
+Les statistiques, types, talents, objets tenus, capture et reproduction viennent des données personnelles DS.
+Les évolutions PokéAPI sont comparées aux deux tables pret. Le schéma 22 conserve les conditions supplémentaires
+dans `evolution_requirement` : lieu, sexe, espèce dans l’équipe, proximité d’une pierre et formes de départ/arrivée
+(identifiants PokéAPI). Le moteur de chaque dépôt fournit le seuil de bonheur.
+
+La table préparatoire `ds_move` contient puissance, PP, précision, type et classe par attaque ; les effets de combat
+ne sont pas encore exportés. Les rencontres PokéAPI servent au contrôle d’obtention par branche, avec une correction
+de Giratina dans Diamant/Perle vérifiée dans le script compilé épinglé. Les méthodes et conditions inconnues arrêtent
+l’export. Les probabilités complètes et les liens aux cartes attendent les lecteurs de rencontres DS.
+Cet aperçu n’est pas une base distribuable dans l’application.
+
+Les formes de Sinnoh suivent leurs versions dans `pokemon_forms.csv`. Les formes Fée et ??? d’Arceus sont exclues :
+la première est postérieure à ces jeux et la seconde n’a pas de sprite Noir/Blanc épinglé.
 
 ## Éditeur des emplacements
 

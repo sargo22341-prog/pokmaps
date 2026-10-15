@@ -17,6 +17,7 @@ from .games import Game, PretFormat
 from .pret_gen3_source import MAX_SOURCE_BYTES, balanced_bodies
 from .pret_identifiers import species_identifier
 from .pret_source import annotated_lines, macro_args, parse_int
+from .pret_species_gen4 import DsSpecies, read_ds_species
 
 # Fichier des données de base des espèces dans chaque dépôt GBA.
 GEN3_SOURCES = {
@@ -108,6 +109,24 @@ def read_species_profiles(root: Path, game: Game) -> dict[str, SpeciesProfile]:
             return _read_asm(root, _gen2_profile)
         case PretFormat.GEN3:
             return _read_gen3(root, game.pret_repo)
+        case PretFormat.GEN4:
+            return ds_profiles(read_ds_species(root, game.pret_repo))
+
+
+def ds_profiles(rows: dict[str, DsSpecies]) -> dict[str, SpeciesProfile]:
+    growth = {key.removeprefix("GROWTH_"): value for key, value in _GROWTH_RATES.items()}
+    return {
+        name: SpeciesProfile(
+            row.capture_rate,
+            _known(growth, row.growth, name),
+            Breeding(
+                row.gender_rate,
+                row.hatch_cycles,
+                _egg_groups([g.removeprefix("EGG_GROUP_") for g in row.egg_groups], name),
+            ),
+        )
+        for name, row in rows.items()
+    }
 
 
 def _read_asm(root: Path, profile: Callable[[_AsmFields], SpeciesProfile]) -> dict[str, SpeciesProfile]:

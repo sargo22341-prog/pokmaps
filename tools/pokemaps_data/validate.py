@@ -17,6 +17,13 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "conditions complémentaires d'évolution invalides",
+        """SELECT r.evolution_id FROM evolution_requirement r LEFT JOIN evolution e ON e.id = r.evolution_id
+           WHERE e.id IS NULL OR r.gender_id NOT IN (1, 2) OR r.near_special_rock NOT IN (0, 1)
+           OR r.party_species_id NOT IN (SELECT id FROM pokemon)
+           OR (r.near_special_rock = 1 AND r.location_id IS NULL)""",
+    ),
+    (
         "personnage sur un passage",
         """SELECT o.id, o.map_id, o.name_fr FROM map_object o
            WHERE o.kind IN ('npc', 'trainer', 'npc_pokemon') AND EXISTS
@@ -42,13 +49,13 @@ CHECKS = (
             'headbutt', 'headbutt-low', 'headbutt-normal', 'headbutt-high', 'rock-smash',
             'gift', 'gift-egg', 'colosseum-bonus-disc-jpn', 'colosseum-bonus-disc-us', 'pokemon-channel-pal',
             'static', 'pokeflute', 'squirt-bottle', 'roaming-grass', 'roaming-water',
-            'devon-scope', 'wailmer-pail', 'npc-trade')""",
+            'devon-scope', 'wailmer-pail', 'npc-trade', 'pokemon-ranger', 'honey-tree')""",
     ),
     (
         "méthode d'apprentissage non prise en charge",
         """SELECT pokemon_id, method FROM pokemon_move
            WHERE method NOT IN
-           ('level-up', 'machine', 'egg', 'tutor', 'light-ball-egg', 'stadium-surfing-pikachu')""",
+           ('level-up', 'machine', 'egg', 'tutor', 'light-ball-egg', 'stadium-surfing-pikachu', 'form-change')""",
     ),
     (
         "génération d'origine du remake invalide",
@@ -454,7 +461,7 @@ def _obtainable(connection: sqlite3.Connection, generation: int, groups: tuple[i
             f"""SELECT DISTINCT e.pokemon_id FROM encounter e JOIN version v ON v.id = e.version_id
                 JOIN encounter_method m ON m.id = e.method_id
                 JOIN location_area la ON la.id = e.location_area_id JOIN location l ON l.id = la.location_id
-                WHERE v.version_group_id IN ({", ".join("?" * len(groups))})
+                WHERE v.version_group_id IN ({", ".join("?" * len(groups))}) AND e.external_event = 0
                   AND m.identifier NOT IN ({", ".join("?" * len(methods))})
                   AND l.identifier NOT IN ({", ".join("?" * len(places))})
                   AND l.identifier || '/' || la.identifier NOT IN ({", ".join("?" * len(areas))})""",
@@ -462,14 +469,32 @@ def _obtainable(connection: sqlite3.Connection, generation: int, groups: tuple[i
         )
     }
     links = _obtention_links(connection, generation, groups)
-    changed = True
-    while changed:
+    required = _party_requirements(connection, groups)
+    maximum = connection.execute("SELECT count(*) FROM pokemon").fetchone()[0] + 1
+    for _ in range(maximum):
         changed = False
         for source, target in links:
+            if (source, target) in required and not required[(source, target)] <= obtainable:
+                continue
             if source in obtainable and target not in obtainable:
                 obtainable.add(target)
                 changed = True
-    return obtainable
+        if not changed:
+            return obtainable
+    raise ValueError("Le calcul d'obtention ne converge pas dans la borne du nombre d'espèces")
+
+
+def _party_requirements(connection: sqlite3.Connection, groups: tuple[int, ...]) -> dict[tuple[int, int], set[int]]:
+    rows = connection.execute(
+        f"""SELECT e.from_pokemon_id, e.to_pokemon_id, r.party_species_id
+            FROM evolution e JOIN evolution_requirement r ON r.evolution_id = e.id
+            WHERE e.version_group_id IN ({",".join("?" * len(groups))}) AND r.party_species_id IS NOT NULL""",
+        groups,
+    )
+    result: dict[tuple[int, int], set[int]] = {}
+    for source, target, species in rows:
+        result.setdefault((source, target), set()).add(species)
+    return result
 
 
 def _obtention_links(connection: sqlite3.Connection, generation: int, groups: tuple[int, ...]) -> list[tuple[int, int]]:

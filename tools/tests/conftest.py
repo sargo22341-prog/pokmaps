@@ -7,7 +7,7 @@ import pytest
 
 from pokemaps_data import sources
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import ALL_GAMES, CRYSTAL, GAMES, GEN3_GAMES, GOLD_SILVER
+from pokemaps_data.games import ALL_GAMES, CRYSTAL, GAMES, GEN3_GAMES, GEN4_GAMES, GOLD_SILVER
 from pokemaps_data.maps import GameMapData, build_maps
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
 from pokemaps_data.pokeapi import PokeApi
@@ -155,3 +155,9 @@ def gen3_builder(source_cache_ready: None) -> DatabaseBuilder:
     """Rubis/Saphir, Émeraude et Rouge Feu/Vert Feuille, avec leurs désassemblages pret (règles d'évolution)."""
     pret_roots = {game.version_group: pret_dir(CACHE, game.pret_repo) for game in GEN3_GAMES}
     return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), GEN3_GAMES, pret_roots=pret_roots)
+
+
+@pytest.fixture(scope="session")
+def gen4_builder(source_cache_ready: None) -> DatabaseBuilder:
+    roots = {game.version_group: pret_dir(CACHE, game.pret_repo) for game in GEN4_GAMES}
+    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), GEN4_GAMES, pret_roots=roots)

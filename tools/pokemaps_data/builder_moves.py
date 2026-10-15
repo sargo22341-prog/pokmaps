@@ -24,6 +24,7 @@ MOVE_ALIASES = {
     "hi-jump-kick": "high-jump-kick",
     "faint-attack": "feint-attack",
     "smelling-salt": "smelling-salts",
+    "vise-grip": "vice-grip",
 }
 
 _MOVE_FIELDS = ("type_id", "power", "pp", "accuracy")
@@ -39,6 +40,8 @@ LEARN_METHODS = frozenset(
         "light-ball-egg",
         # Surf du Pikachu Surfeur de Pokémon Stadium : événement externe (Rouge, Bleu et Jaune).
         "stadium-surfing-pikachu",
+        # Motisma apprend l'attaque de son appareil lors du changement de forme (Platine).
+        "form-change",
     }
 )
 

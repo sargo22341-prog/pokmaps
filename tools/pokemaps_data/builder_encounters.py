@@ -88,7 +88,7 @@ class EncounterTables:
         versions: set[int] = set()
         for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
             match game.pret_format:
-                case PretFormat.GEN1:
+                case PretFormat.GEN1 | PretFormat.GEN4:
                     pass
                 case PretFormat.GEN2 | PretFormat.GEN3:
                     rows = self.builder.version_rows
@@ -181,6 +181,8 @@ class EncounterTables:
                     encounters += gen2_wild_encounters(self.builder, game)
                 case PretFormat.GEN3:
                     encounters += list(self.gen3_wild[game.version_group].encounters)
+                case PretFormat.GEN4:
+                    pass  # Aperçu Pokémon : rencontres PokéAPI, avant le lecteur sauvage DS de la phase 4.
         if gen1_games:
             check_fishing_rows(self.builder, gen1_games, fishing)
         return encounters + fishing
@@ -203,7 +205,7 @@ class EncounterTables:
         notes: list[BattleNote] = []
         for game in self.builder.games:
             match game.pret_format:
-                case PretFormat.GEN1 | PretFormat.GEN3:
+                case PretFormat.GEN1 | PretFormat.GEN3 | PretFormat.GEN4:
                     pass
                 case PretFormat.GEN2:
                     notes += gen2_battle_notes(self.builder, game)

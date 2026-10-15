@@ -15,6 +15,12 @@ def form_table(builder: DatabaseBuilder) -> list[tuple]:
     versions = {row["identifier"]: int(row["id"]) for row in builder.version_rows}
     pokemon = {row["identifier"]: int(row["id"]) for row in builder.api.table("pokemon")}
     species = {row["identifier"]: int(row["species_id"]) for row in builder.api.table("pokemon")}
+    # Les formes purement visuelles (Cheniti, Sancoki, Arceus…) partagent la fiche de leur espèce.
+    for form in builder.api.table("pokemon_forms"):
+        key, base = form["identifier"], int(form["pokemon_id"])
+        if key not in pokemon:
+            pokemon[key] = base
+            species[key] = next(int(r["species_id"]) for r in builder.api.table("pokemon") if int(r["id"]) == base)
     known_versions = {row["identifier"] for row in builder.api.table("versions")}
     stats: dict[int, dict[int, int]] = {}
     for row in builder.api.table("pokemon_stats"):

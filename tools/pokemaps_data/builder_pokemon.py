@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 from .games import PretFormat
 from .pokeapi import ENGLISH, FRENCH, clean_text, optional_int, value_at
 from .pret_gen3_evolution import EvolutionRules, read_evolution_rules
-from .pret_species import SpeciesProfile, read_species_profiles
+from .pret_species import SpeciesProfile, ds_profiles, read_species_profiles
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
@@ -37,10 +37,14 @@ _EVOLUTION_CONDITIONS = frozenset(
         "relative_physical_stats",
         "condition_expression",
         "percentage_chance",
+        "gender_id",
+        "location_id",
+        "party_species_id",
+        "near_special_rock",
+        "required_pokemon_form_id",
+        "evolved_pokemon_form_id",
     }
 )
-# Formes avant et après l'évolution : sans effet quand c'est la forme par défaut de l'espèce.
-_FORM_COLUMNS = frozenset({"required_pokemon_form_id", "evolved_pokemon_form_id"})
 # Conditions de PokéAPI qui départagent selon la personnalité du Pokémon (Chenipotte : Armulys ou Blindalys).
 PERSONALITY_EXPRESSIONS = frozenset({"PID 16 >> 10 % 4 <=", "PID 16 >> 10 % 5 >="})
 
@@ -109,7 +113,11 @@ class PokemonTables:
         result = {}
         for vg in self.builder.vg_ids:
             game = self.builder.game_of(vg)
-            read = read_species_profiles(self.builder.pret_root(game, "les données de base des espèces"), game)
+            read = (
+                ds_profiles(self.builder.ds_species[vg])
+                if game.pret_format is PretFormat.GEN4
+                else read_species_profiles(self.builder.pret_root(game, "les données de base des espèces"), game)
+            )
             if unknown := sorted(read.keys() - identifiers.keys()):
                 raise ValueError(f"Espèces pret inconnues de PokéAPI dans {game.version_group} : {unknown}")
             profiles = {identifiers[name]: profile for name, profile in read.items()}
@@ -196,7 +204,7 @@ class PokemonTables:
                         types = past[pokemon_id][until]
                         break
                 rows += [(species_id, generation, slot, type_id) for slot, type_id in sorted(types)]
-        return rows
+        return self._ds_values(rows, "types")
 
     def pokemon_stat_table(self) -> list[tuple]:
         current: dict[tuple[int, int], int] = {
@@ -219,7 +227,23 @@ class PokemonTables:
                             f"Stat {stat} manquante pour le Pokémon {species_id} (génération {generation})"
                         )
                     rows.append((species_id, generation, stat, value))
-        return rows
+        return self._ds_values(rows, "stats")
+
+    def _ds_values(self, rows: list[tuple], field: str) -> list[tuple]:
+        if not self.builder.ds_species:
+            return rows
+        types = {r["identifier"]: int(r["id"]) for r in self.api.table("types")}
+        result: dict[tuple[int, int, int], int] = {}
+        for profiles in self.builder.ds_species.values():
+            for species, profile in profiles.items():
+                pokemon = next(i for i, r in self.builder.species.items() if r["identifier"] == species)
+                values = profile.stats if field == "stats" else tuple(types[t] for t in profile.types)
+                for slot, value in enumerate(values, 1):
+                    key = (pokemon, 4, slot)
+                    if key in result and result[key] != value:
+                        raise ValueError(f"{field} propres à une version DS : {species}")
+                    result[key] = value
+        return [row for row in rows if row[1] != 4] + [(*key, value) for key, value in sorted(result.items())]
 
     def _species_of_generation(self, generation: int) -> list[int]:
         """Espèces déjà apparues à `generation`, triées par numéro."""
@@ -231,6 +255,14 @@ class PokemonTables:
 
     @cached_property
     def evolution_rows(self) -> list[tuple]:
+        return [(index, *row) for index, (row, _) in enumerate(self._evolution_records, 1)]
+
+    @cached_property
+    def evolution_requirement_rows(self) -> list[tuple]:
+        return [(index, *extra) for index, (_, extra) in enumerate(self._evolution_records, 1) if any(extra)]
+
+    @cached_property
+    def _evolution_records(self) -> list[tuple[tuple, tuple]]:
         triggers = {int(row["id"]): row["identifier"] for row in self.api.table("evolution_triggers")}
         by_target: dict[int, list[dict[str, str]]] = defaultdict(list)
         for row in self.api.table("pokemon_evolution"):
@@ -246,23 +278,43 @@ class PokemonTables:
                     continue
                 methods = self._evolution_methods(vg, candidates)
                 for row in methods:
-                    _check_represented(row, self._default_forms)
+                    _check_represented(row)
+                    self._check_requirements(row)
                 rows += [
-                    (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_conditions(row, rules))
+                    (
+                        (vg, int(source), target, triggers[int(row["evolution_trigger_id"])], *_conditions(row, rules)),
+                        tuple(
+                            optional_int(row[key])
+                            for key in (
+                                "location_id",
+                                "gender_id",
+                                "party_species_id",
+                                "near_special_rock",
+                                "required_pokemon_form_id",
+                                "evolved_pokemon_form_id",
+                            )
+                        ),
+                    )
                     for row in methods
                     if rules is None or rules.time_of_day or not row["time_of_day"]
                 ]
-        return [(index, *row) for index, row in enumerate(rows, start=1)]
+        return rows
+
+    def _check_requirements(self, row: dict[str, str]) -> None:
+        for column, known in self._requirement_ids.items():
+            if row[column] and row[column] not in known:
+                raise ValueError(f"Condition d'évolution invalide : {column}={row[column]} ({row['id']})")
 
     @cached_property
-    def _default_forms(self) -> frozenset[str]:
-        """Formes par défaut des espèces (PokéAPI les cite parfois comme forme requise d'une évolution)."""
-        defaults = set(self.builder.default_pokemon.values())
-        return frozenset(
-            row["id"]
-            for row in self.api.table("pokemon_forms")
-            if row["is_default"] == "1" and int(row["pokemon_id"]) in defaults
-        )
+    def _requirement_ids(self) -> dict[str, set[str]]:
+        return {
+            "location_id": {r["id"] for r in self.api.table("locations")},
+            "gender_id": {"1", "2"},
+            "party_species_id": {str(i) for i in self.builder.species},
+            "near_special_rock": {"0", "1"},
+            "required_pokemon_form_id": {r["id"] for r in self.api.table("pokemon_forms")},
+            "evolved_pokemon_form_id": {r["id"] for r in self.api.table("pokemon_forms")},
+        }
 
     def _evolution_rules(self, vg: int) -> EvolutionRules | None:
         """Règles du moteur de ce jeu, lues dans pret ; None pour garder les conditions de PokéAPI.
@@ -278,6 +330,12 @@ class PokemonTables:
                 return EvolutionRules(self.builder.gen2_repo(game, "le bonheur d'évolution").happiness_to_evolve, True)
             case PretFormat.GEN3:
                 return read_evolution_rules(self.builder.pret_root(game, "les règles d'évolution"), game.pret_repo)
+            case PretFormat.GEN4:
+                from .pret_evolution_gen4 import read_ds_evolution_rules
+
+                return read_ds_evolution_rules(
+                    self.builder.pret_root(game, "les règles d'évolution DS"), game.pret_repo
+                )
 
     def _evolution_methods(self, vg: int, candidates: list[dict[str, str]]) -> list[dict[str, str]]:
         """Méthodes valables dans ce jeu : celles introduites au plus tard dans ce groupe de versions,
@@ -290,14 +348,12 @@ class PokemonTables:
         return [row for row in valid if order[int(row["version_group_id"])] == latest]
 
 
-def _check_represented(row: dict[str, str], default_forms: frozenset[str]) -> None:
+def _check_represented(row: dict[str, str]) -> None:
     """Arrête la génération si l'évolution a une condition de PokéAPI que la base ne sait pas écrire."""
     unknown = sorted(
         column
         for column, value in row.items()
-        if column not in _EVOLUTION_KEYS | _EVOLUTION_CONDITIONS
-        and value not in ("", "0")
-        and not (column in _FORM_COLUMNS and value in default_forms)
+        if column not in _EVOLUTION_KEYS | _EVOLUTION_CONDITIONS and value not in ("", "0")
     )
     if unknown:
         raise ValueError(f"Conditions d'évolution non représentées dans la base : {unknown} ({dict(row)})")

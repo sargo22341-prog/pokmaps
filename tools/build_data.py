@@ -45,6 +45,7 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
     maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument("--sinnoh-pokemon-only", action="store_true", help="générer l'aperçu Pokémon DS sans cartes")
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
     maps_only.add_argument(
         "--achievement-resources-only", action="store_true", help="générer les ressources de succès depuis les archives"
@@ -78,6 +79,11 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.sinnoh_pokemon_only:
+        from pokemaps_data.preview_pokemon_gen4 import build_pokemon_preview
+
+        build_pokemon_preview(args.cache, args.preview, args.assets)
+        return 0
     if args.achievement_resources_only:
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
         return 0
@@ -111,6 +117,10 @@ def main() -> int:
         write_manifest(args.assets)
         return 0
 
+    return _build_all(args)
+
+
+def _build_all(args: argparse.Namespace) -> int:
     # Tous les dépôts épinglés, y compris ceux des jeux en cours d'intégration : les tests les lisent dans le cache.
     print(f"Téléchargement des désassemblages pret ({', '.join(PRET_COMMITS)})…")
     repos = {repo: fetch_pret(args.cache, repo) for repo in PRET_COMMITS}

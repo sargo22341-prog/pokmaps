@@ -21,3 +21,5 @@ def open_pret(game: Game, root: Path) -> PretReader:
             return Gen2PretRepo(root, game.pret_versions)
         case PretFormat.GEN3:
             return Gen3PretRepo(root, game.pret_versions)
+        case PretFormat.GEN4:
+            raise ValueError(f"{game.version_group} : lecteur de cartes DS indisponible ; aperçu Pokémon seulement")
