@@ -40,7 +40,7 @@ TERRAIN_LABELS = {
     "floor": "Sol des grottes et bâtiments (marche)",
     "water": "Eau (surf et pêche)",
     "underwater": "Algues sous-marines (Plongée)",
-    "tree": "Arbres (Coup d'Boule)",
+    "tree": "Arbres (Coup d'Boule, arbres à Miel)",
     "rock": "Rochers (Éclate-Roc)",
 }
 ALL_REGIONS = "Toutes les régions"
@@ -53,7 +53,7 @@ class MapEditor:
         self.catalog = EditorCatalog(assets / "database/pokedex.db")
         self.images = MapImages(assets / "maps")
         self.painter = OverlayPainter(assets)
-        self.wild_terrains = WildTerrains(CACHE)
+        self.wild_terrains = WildTerrains(CACHE, assets / "maps")
         self.session = SpotSession(read_spots())
         self.families = self.catalog.families()
         if not self.families:

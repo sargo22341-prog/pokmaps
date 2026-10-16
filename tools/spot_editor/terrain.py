@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from pokemaps_data.builder_wild_gen4 import wild_context
 from pokemaps_data.games import DECLARED_GAMES, PretFormat
 from pokemaps_data.map_spots import Point
+from pokemaps_data.maps_data_gen4 import Gen4WildMaps
 from pokemaps_data.maps_layout import GameMaps, identifier, read_layout_curation
 from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
 from pokemaps_data.pret_gen3 import Gen3PretRepo
+from pokemaps_data.pret_gen4 import Gen4PretRepo
 from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.sources import pret_dir
 
@@ -20,12 +23,14 @@ class WildTerrains:
     """Terrains de chaque lieu (herbes, sol, eau, arbres, rochers) : l'éditeur ne propose que ceux où un Pokémon peut
     apparaître. Chaque jeu est lu avec le lecteur de son format pret (open_pret).
 
-    Les sources pret doivent déjà être dans le cache (python tools/build_data.py) : l'éditeur ne télécharge rien."""
+    Les sources pret doivent déjà être dans le cache (python tools/build_data.py) : l'éditeur ne télécharge rien. Les
+    cartes DS se placent d'après le catalogue des cartes affichées (`maps`), qui porte leur projection oblique."""
 
-    def __init__(self, cache: Path) -> None:
+    def __init__(self, cache: Path, maps: Path | None = None) -> None:
         self.cache = cache
+        self.maps = maps
         self._points: dict[tuple[Family, str, str], frozenset[Point]] = {}
-        self._games: dict[str, tuple[GameMaps, dict[str, str]]] = {}
+        self._games: dict[str, tuple[GameMaps | Gen4WildMaps, dict[str, str]]] = {}
 
     def kinds(self, family: Family, map_identifier: str) -> frozenset[str]:
         """Terrains du lieu dans au moins un jeu de la famille (les plans sont communs à la famille)."""
@@ -74,15 +79,22 @@ class WildTerrains:
                 rejected.append(VERSION_LABELS[group])
         return tuple(rejected)
 
-    def _game(self, version_group: str) -> tuple[GameMaps, dict[str, str]]:
+    def _game(self, version_group: str) -> tuple[GameMaps | Gen4WildMaps, dict[str, str]]:
         if version_group not in self._games:
             game = next(game for game in DECLARED_GAMES if game.version_group == version_group)
             root = pret_dir(self.cache, game.pret_repo)
             if not (root / ".complete").is_file():
                 raise FileNotFoundError(f"Sources pret absentes : lancer d'abord python tools/build_data.py ({root})")
-            if game.pret_format is PretFormat.GEN3:
-                game_maps = Gen3GameMaps(Gen3PretRepo(root, game.pret_versions), game, read_layout_curation())
-            else:
-                game_maps = GameMaps(open_pret(game, root), game, read_layout_curation())
+            game_maps: GameMaps | Gen4WildMaps
+            match game.pret_format:
+                case PretFormat.GEN4:
+                    if self.maps is None:
+                        raise FileNotFoundError("Catalogue des cartes DS absent : ouvrir l'aperçu des rencontres DS")
+                    repo = Gen4PretRepo(root, game.pret_versions)
+                    game_maps = Gen4WildMaps(self.maps / version_group, repo, game, wild_context(repo))
+                case PretFormat.GEN3:
+                    game_maps = Gen3GameMaps(Gen3PretRepo(root, game.pret_versions), game, read_layout_curation())
+                case PretFormat.GEN1 | PretFormat.GEN2:
+                    game_maps = GameMaps(open_pret(game, root), game, read_layout_curation())
             self._games[version_group] = (game_maps, {identifier(const): const for const in game_maps.placements})
         return self._games[version_group]

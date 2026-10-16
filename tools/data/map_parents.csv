@@ -57,7 +57,7 @@ firered-leafgreen,MAP_BATTLE_COLOSSEUM_2P,MAP_PALLET_TOWN,Salle de communication
 firered-leafgreen,MAP_BATTLE_COLOSSEUM_4P,MAP_PALLET_TOWN,Salle de communication accessible depuis les Centres Pokémon ; destination dynamique
 firered-leafgreen,MAP_RECORD_CORNER,MAP_PALLET_TOWN,Salle de communication accessible depuis les Centres Pokémon ; destination dynamique
 firered-leafgreen,MAP_SAFFRON_CITY,MAP_ROUTE5,Safrania réelle atteinte par la porte ; la carte de connexion ne montre que sa bordure
-platinum,MAP_HEADER_UNDERGROUND,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+platinum,MAP_HEADER_UNDERGROUND,MAP_HEADER_ETERNA_CITY,"Accessible depuis toutes les routes une fois l'Explorakit reçu à Vestigion : origine fixée à cette ville"
 platinum,MAP_HEADER_JUBILIFE_CITY_MART,MAP_HEADER_JUBILIFE_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_JUBILIFE_CITY_POKECENTER_1F,MAP_HEADER_JUBILIFE_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_JUBILIFE_CITY_POKECENTER_2F,MAP_HEADER_JUBILIFE_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -143,7 +143,7 @@ platinum,MAP_HEADER_HEARTHOME_CITY_NORTHEAST_HOUSE_ELEVATOR,MAP_HEADER_HEARTHOME
 platinum,MAP_HEADER_HEARTHOME_CITY_NORTHWEST_HOUSE,MAP_HEADER_HEARTHOME_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_POFFIN_HOUSE,MAP_HEADER_HEARTHOME_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_CONTEST_HALL_LOBBY,MAP_HEADER_HEARTHOME_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-platinum,MAP_HEADER_CONTEST_HALL_STAGE_ONGOING_CONTEST,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+platinum,MAP_HEADER_CONTEST_HALL_STAGE_ONGOING_CONTEST,MAP_HEADER_HEARTHOME_CITY,Scène des concours rejointe depuis la Salle de Concours d'Unionpolis
 platinum,MAP_HEADER_FOREIGN_BUILDING,MAP_HEADER_HEARTHOME_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_PASTORIA_CITY_MART,MAP_HEADER_PASTORIA_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_PASTORIA_CITY_GYM,MAP_HEADER_PASTORIA_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -321,8 +321,8 @@ platinum,MAP_HEADER_BATTLE_TOWER_CORRIDOR,MAP_HEADER_FIGHT_AREA,Origine depuis l
 platinum,MAP_HEADER_BATTLE_TOWER_CORRIDOR_MULTI,MAP_HEADER_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_BATTLE_TOWER_BATTLE_ROOM,MAP_HEADER_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_BATTLE_TOWER_MULTI_BATTLE_ROOM,MAP_HEADER_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_2P,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_4P,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_2P,MAP_HEADER_SANDGEM_TOWN,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
+platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_4P,MAP_HEADER_SANDGEM_TOWN,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
 platinum,MAP_HEADER_RESTAURANT,MAP_HEADER_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_GRAND_LAKE_VALOR_LAKEFRONT_EAST_HOUSE,MAP_HEADER_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_GRAND_LAKE_VALOR_LAKEFRONT_WEST_HOUSE,MAP_HEADER_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -356,7 +356,7 @@ platinum,MAP_HEADER_ROUTE_221_HOUSE,MAP_HEADER_ROUTE_221,Origine depuis les liai
 platinum,MAP_HEADER_ROUTE_222_WEST_HOUSE,MAP_HEADER_ROUTE_222,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_ROUTE_222_EAST_HOUSE,MAP_HEADER_ROUTE_222,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_ROUTE_222_GATE_TO_SUNYSHORE_CITY,MAP_HEADER_SUNYSHORE_CITY,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-platinum,MAP_HEADER_RECORD_MIXING_ROOM,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+platinum,MAP_HEADER_RECORD_MIXING_ROOM,MAP_HEADER_SANDGEM_TOWN,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
 platinum,MAP_HEADER_TWINLEAF_TOWN_RIVAL_HOUSE_1F,MAP_HEADER_TWINLEAF_TOWN,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_TWINLEAF_TOWN_RIVAL_HOUSE_2F,MAP_HEADER_TWINLEAF_TOWN,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_TWINLEAF_TOWN_PLAYER_HOUSE_1F,MAP_HEADER_ROUTE_201,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -487,14 +487,14 @@ platinum,MAP_HEADER_DISTORTION_WORLD_GIRATINA_ROOM,MAP_HEADER_SPRING_PATH,Origin
 platinum,MAP_HEADER_DISTORTION_WORLD_TURNBACK_CAVE_ROOM,MAP_HEADER_SPRING_PATH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_SPEAR_PILLAR_DIALGA,MAP_HEADER_ROUTE_211_WEST,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_SPEAR_PILLAR_PALKIA,MAP_HEADER_ROUTE_211_WEST,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-platinum,MAP_HEADER_WIFI_PLAZA_ENTRANCE,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+platinum,MAP_HEADER_WIFI_PLAZA_ENTRANCE,MAP_HEADER_SANDGEM_TOWN,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
 platinum,MAP_HEADER_IRON_ISLAND_IRON_RUINS,MAP_HEADER_IRON_ISLAND,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_IRON_RUINS,MAP_HEADER_IRON_ISLAND,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_MT_CORONET_ICEBERG_RUINS,MAP_HEADER_ROUTE_216,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_ICEBERG_RUINS,MAP_HEADER_ROUTE_216,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_ROUTE_228_ROCK_PEAK_RUINS,MAP_HEADER_ROUTE_228,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 platinum,MAP_HEADER_ROCK_PEAK_RUINS,MAP_HEADER_ROUTE_228,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-diamond-pearl,MAP_UNDERGROUND,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+diamond-pearl,MAP_UNDERGROUND,MAP_ETERNA,"Accessible depuis toutes les routes une fois l'Explorakit reçu à Vestigion : origine fixée à cette ville"
 diamond-pearl,MAP_JUBLIFE_POKEMART,MAP_JUBLIFE,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_JUBLIFE_POKECENTER_1F,MAP_JUBLIFE,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_JUBLIFE_POKECENTER_2F,MAP_JUBLIFE,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -600,7 +600,7 @@ diamond-pearl,MAP_HEARTHOME_NORTHEAST_HOUSE_ELEVATOR,MAP_HEARTHOME,Origine depui
 diamond-pearl,MAP_HEARTHOME_BEBE_HOUSE,MAP_HEARTHOME,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_HEARTHOME_POFFIN_HOUSE,MAP_HEARTHOME,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_LOBBY,MAP_HEARTHOME,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_STAGE,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_STAGE,MAP_HEARTHOME,Scène des concours rejointe depuis la Salle de Concours d'Unionpolis
 diamond-pearl,MAP_HEARTHOME_FOREIGN_BUILDING,MAP_HEARTHOME,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_PASTORIA_POKEMART,MAP_PASTORIA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_PASTORIA_GYM,MAP_PASTORIA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -780,8 +780,8 @@ diamond-pearl,MAP_BATTLE_TOWER_CORRIDOR_MULTI,MAP_FIGHT_AREA,Origine depuis les 
 diamond-pearl,MAP_BATTLE_TOWER_CORRIDOR_WIFI,MAP_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_BATTLE_TOWER_ARENA_MULTI,MAP_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_BATTLE_TOWER_ARENA_WIFI,MAP_FIGHT_AREA,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-diamond-pearl,MAP_WIFI_SINGLE_BATTLE_AREA,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-diamond-pearl,MAP_WIFI_MULTI_BATTLE_AREA,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+diamond-pearl,MAP_WIFI_SINGLE_BATTLE_AREA,MAP_SANDGEM,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
+diamond-pearl,MAP_WIFI_MULTI_BATTLE_AREA,MAP_SANDGEM,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
 diamond-pearl,MAP_VALOR_LAKEFRONT_SEVEN_STARS_RESTAURANT,MAP_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_VALOR_LAKEFRONT_GRAND_LAKE_EAST_ROOM,MAP_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_VALOR_LAKEFRONT_GRAND_LAKE_WEST_ROOM,MAP_VALOR_LAKEFRONT,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
@@ -815,7 +815,7 @@ diamond-pearl,MAP_ROUTE_221_LEVEL_ITEM_HOUSE,MAP_ROUTE_221,Origine depuis les li
 diamond-pearl,MAP_ROUTE_222_PIKACHU_FAN_CLUB,MAP_ROUTE_222,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_ROUTE_222_POKEMON_SIZE_CONTEST_HOUSE,MAP_ROUTE_222,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_ROUTE_222_SUNYSHORE_GATEOUSE,MAP_SUNYSHORE,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
-diamond-pearl,MAP_RECORD,SINNOH,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
+diamond-pearl,MAP_RECORD,MAP_SANDGEM,"Salle de communication des Centres Pokémon, sans origine fixe : premier Centre Pokémon, à Littorella"
 diamond-pearl,MAP_TWINLEAF_PLAYER_HOUSE_1F,MAP_TWINLEAF,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_TWINLEAF_PLAYER_HOUSE_2F,MAP_TWINLEAF,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice
 diamond-pearl,MAP_TWINLEAF_RIVAL_HOUSE_1F,MAP_ROUTE_201,Origine depuis les liaisons du jeu ; les plans conservent les coordonnées natives de leur matrice

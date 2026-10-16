@@ -21,3 +21,40 @@ seafloor-cavern,entrance,100019,Caverne Fondmer (entrée),Tables aquatiques du m
 seafloor-cavern,dry-rooms,100020,Caverne Fondmer (salles sèches),Tables terrestres du moteur Hoenn
 seafloor-cavern,flooded-rooms,100021,Caverne Fondmer (salles inondées),Tables terrestres et aquatiques du moteur Hoenn
 indigo-plateau,loreleis-room,100022,Salle d'Olga,"Rouge, Bleu et Jaune : on pêche depuis la plateforme ; PokéAPI n'a pas de zone pour la salle"
+mt-coronet,north-mountainside,100023,Mont Couronné — partie nord,En-tête sauvage du moteur DS ; PokéAPI découpe ce versant selon la météo
+mt-coronet,south-mountainside,100024,Mont Couronné — partie sud,En-tête sauvage du moteur DS ; PokéAPI découpe ce versant selon la météo
+solaceon-ruins,maniac-tunnel-room,100025,Ruines Bonville — salle reliée au Tunnel Runiem.,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-2-northeast-dead-end,100026,"Ruines Bonville — salle 2, cul-de-sac nord-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-1-northwest-dead-end,100027,"Ruines Bonville — salle 1, cul-de-sac nord-ouest","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-2,100028,Ruines Bonville — salle 2,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-1-southeast-dead-end,100029,"Ruines Bonville — salle 1, cul-de-sac sud-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-3,100030,Ruines Bonville — salle 3,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-2-southeast-dead-end,100031,"Ruines Bonville — salle 2, cul-de-sac sud-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-6-southeast-dead-end,100032,"Ruines Bonville — salle 6, cul-de-sac sud-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-5-southwest-dead-end,100033,"Ruines Bonville — salle 5, cul-de-sac sud-ouest","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-3-northwest-dead-end,100034,"Ruines Bonville — salle 3, cul-de-sac nord-ouest","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-3-southwest-dead-end,100035,"Ruines Bonville — salle 3, cul-de-sac sud-ouest","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-4,100036,Ruines Bonville — salle 4,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-6,100037,Ruines Bonville — salle 6,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-5,100038,Ruines Bonville — salle 5,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-7,100039,Ruines Bonville — salle 7,"Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-4-southeast-dead-end,100040,"Ruines Bonville — salle 4, cul-de-sac sud-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-6-northwest-dead-end,100041,"Ruines Bonville — salle 6, cul-de-sac nord-ouest","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+solaceon-ruins,room-5-southeast-dead-end,100042,"Ruines Bonville — salle 5, cul-de-sac sud-est","Salle sauvage du moteur DS, avec ses formes de Zarbi ; PokéAPI ne distingue pas ces salles"
+turnback-cave,pillar-1-room-1,100043,"Grotte Retour — salle 1, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-1-room-2,100044,"Grotte Retour — salle 2, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-1-room-3,100045,"Grotte Retour — salle 3, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-1-room-4,100046,"Grotte Retour — salle 4, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-1-room-5,100047,"Grotte Retour — salle 5, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-1-room-6,100048,"Grotte Retour — salle 6, pilier 1",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-1,100049,"Grotte Retour — salle 1, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-2,100050,"Grotte Retour — salle 2, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-3,100051,"Grotte Retour — salle 3, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-4,100052,"Grotte Retour — salle 4, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-5,100053,"Grotte Retour — salle 5, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-2-room-6,100054,"Grotte Retour — salle 6, pilier 2",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-3-room-1,100055,"Grotte Retour — salle 1, pilier 3",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-3-room-2,100056,"Grotte Retour — salle 2, pilier 3",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-3-room-3,100057,"Grotte Retour — salle 3, pilier 3",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-3-room-4,100058,"Grotte Retour — salle 4, pilier 3",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles
+turnback-cave,pillar-3-room-5,100059,"Grotte Retour — salle 5, pilier 3",Salle sauvage du moteur DS ; les tables de PokéAPI ne suivent pas ces salles

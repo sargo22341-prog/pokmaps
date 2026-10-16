@@ -149,7 +149,7 @@ def test_editor_opens_error_location_and_updates_report(
 ) -> None:
     report = tmp_path / "errors.json"
     monkeypatch.setattr(app, "ERROR_REPORT", report)
-    monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
+    monkeypatch.setattr(app, "WildTerrains", lambda _cache, _maps: LocalTerrains())
     monkeypatch.setattr(app, "read_spots", lambda: {KEY: frozenset({INVALID})})
     # Le faux terrain ne décrit que la famille R/B/J, pas les nouvelles cartes GBA.
     monkeypatch.setattr(app.EditorCatalog, "families", lambda _catalog: [FAMILY])
@@ -186,7 +186,7 @@ def test_editor_switches_map_and_selects_matching_point_scope(
     window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, family_id: str, groups: tuple[str, str]
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
-    monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
+    monkeypatch.setattr(app, "WildTerrains", lambda _cache, _maps: LocalTerrains())
     monkeypatch.setattr(app, "read_spots", dict)
     editor = app.MapEditor(window)
     try:
@@ -218,7 +218,7 @@ def test_editor_adds_a_point_only_for_the_displayed_group(
     window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
-    monkeypatch.setattr(app, "WildTerrains", lambda _cache: LocalTerrains())
+    monkeypatch.setattr(app, "WildTerrains", lambda _cache, _maps: LocalTerrains())
     monkeypatch.setattr(app, "read_spots", dict)
     editor = app.MapEditor(window)
     try:
@@ -240,7 +240,7 @@ def test_editor_selects_only_existing_underwater_plans_and_restores_shared_choic
     window: tk.Toplevel, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(app, "ERROR_REPORT", tmp_path / "errors.json")
-    monkeypatch.setattr(app, "WildTerrains", lambda _cache: HoennTerrains())
+    monkeypatch.setattr(app, "WildTerrains", lambda _cache, _maps: HoennTerrains())
     monkeypatch.setattr(app, "read_spots", dict)
     original = app.EditorCatalog.families
     monkeypatch.setattr(

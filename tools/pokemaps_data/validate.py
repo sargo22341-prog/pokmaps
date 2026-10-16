@@ -9,6 +9,7 @@ from pathlib import Path
 from .builder_pokemon import BREEDING_GENERATION
 from .games import DECLARED_GAMES, EXTERNAL_EVENT_AREAS, EXTERNAL_EVENT_LOCATIONS, EXTERNAL_EVENT_METHODS
 from .sources import DATA_DIR
+from .validate_encounters_gen4 import check_slot_probabilities
 from .validate_profiles import validate_profiles
 
 # Groupe d'œufs des Pokémon qui ne se reproduisent pas (légendaires, bébés).
@@ -156,9 +157,13 @@ CHECKS = (
              OR (m.is_one_off = 1 AND e.chance IS NOT NULL)""",
     ),
     (
+        # Jusqu'à la 3e génération, chaque ensemble de conditions forme une table complète ; la 4e génération
+        # remplace des emplacements isolés (validate_encounters_gen4).
         "probabilités de rencontre aléatoire différentes de 100 %",
         """SELECT e.version_id, e.location_area_id, e.method_id, sum(e.chance) AS total FROM encounter e
-           JOIN encounter_method m ON m.id = e.method_id WHERE m.is_one_off = 0
+           JOIN encounter_method m ON m.id = e.method_id
+           JOIN version v ON v.id = e.version_id JOIN version_group vg ON vg.id = v.version_group_id
+           WHERE m.is_one_off = 0 AND vg.generation_id < 4
            GROUP BY e.version_id, e.location_area_id, e.method_id,
              (SELECT group_concat(condition_value_id) FROM encounter_condition c WHERE c.encounter_id = e.id)
            HAVING abs(total - 100) > 0.01""",
@@ -398,6 +403,7 @@ def validate(path: Path) -> list[str]:
                 errors.append(f"{description} : {rows[:5]}")
         errors += _check_obtainable(connection)
         errors += validate_profiles(connection)
+        errors += check_slot_probabilities(connection)
     finally:
         connection.close()
     return errors

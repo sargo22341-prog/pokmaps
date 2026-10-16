@@ -1,7 +1,7 @@
 """Tables des rencontres, corrigées par les fichiers maintenus dans tools/data/.
 
-Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des 2e et 3e générations, lues dans pret
-(builder_wild_gen2.py et builder_wild_gen3.py), et la pêche de 1re génération que PokéAPI oublie
+Les rencontres viennent de PokéAPI, sauf les rencontres aléatoires des 2e à 4e générations, lues dans pret
+(builder_wild_gen2.py, builder_wild_gen3.py et builder_wild_gen4.py), et la pêche de 1re génération que PokéAPI oublie
 (builder_fishing_gen1.py). Les rencontres d'événement externe portent la mention
 EXTERNAL_EVENT_NOTE. Les lieux et zones sont dans builder_locations.py.
 """
@@ -20,6 +20,7 @@ from .builder_hoenn_encounters import complete_hoenn_encounters
 from .builder_remake_encounters import complete_remake_encounters
 from .builder_wild_gen2 import REPLACED_METHODS, BattleNote, WildEncounter, gen2_battle_notes, gen2_wild_encounters
 from .builder_wild_gen3 import WildData, gen3_wild_data
+from .builder_wild_gen4 import Gen4WildData, complete_gen4_encounters, gen4_wild_data, wild_context
 from .games import (
     EXTERNAL_EVENT_AREAS,
     EXTERNAL_EVENT_LOCATIONS,
@@ -29,6 +30,8 @@ from .games import (
     PretFormat,
 )
 from .pret_gen3_wild import REPLACED_METHODS as GEN3_REPLACED_METHODS
+from .pret_gen4_wild import REPLACED_METHODS as GEN4_REPLACED_METHODS
+from .pret_gen4_wild import WildContext
 from .sources import DATA_DIR
 
 if TYPE_CHECKING:
@@ -88,9 +91,9 @@ class EncounterTables:
         versions: set[int] = set()
         for game, vg in zip(self.builder.games, self.builder.vg_ids, strict=True):
             match game.pret_format:
-                case PretFormat.GEN1 | PretFormat.GEN4:
+                case PretFormat.GEN1:
                     pass
-                case PretFormat.GEN2 | PretFormat.GEN3:
+                case PretFormat.GEN2 | PretFormat.GEN3 | PretFormat.GEN4:
                     rows = self.builder.version_rows
                     versions |= {int(row["id"]) for row in rows if int(row["version_group_id"]) == vg}
         return frozenset(versions)
@@ -117,6 +120,7 @@ class EncounterTables:
         reconcile_fixed_encounters(self.builder, groups)
         complete_hoenn_encounters(self.builder, groups)
         complete_remake_encounters(self.builder, groups)
+        complete_gen4_encounters(self.builder, groups, self.gen4_wild)
         _roaming_conditions(groups, self.method_identifiers)
         for note in self._battle_notes:
             _add_battle_note(groups, note)
@@ -182,15 +186,20 @@ class EncounterTables:
                 case PretFormat.GEN3:
                     encounters += list(self.gen3_wild[game.version_group].encounters)
                 case PretFormat.GEN4:
-                    pass  # Aperçu Pokémon : rencontres PokéAPI, avant le lecteur sauvage DS de la phase 4.
+                    encounters += list(self.gen4_wild[game.version_group].encounters)
         if gen1_games:
             check_fishing_rows(self.builder, gen1_games, fishing)
         return encounters + fishing
 
     def _replaced_methods(self, version: int) -> frozenset[str]:
         row = next(row for row in self.builder.version_rows if int(row["id"]) == version)
-        game = self.builder.game_of(int(row["version_group_id"]))
-        return GEN3_REPLACED_METHODS if game.pret_format is PretFormat.GEN3 else REPLACED_METHODS
+        match self.builder.game_of(int(row["version_group_id"])).pret_format:
+            case PretFormat.GEN3:
+                return GEN3_REPLACED_METHODS
+            case PretFormat.GEN4:
+                return GEN4_REPLACED_METHODS
+            case PretFormat.GEN1 | PretFormat.GEN2:
+                return REPLACED_METHODS
 
     @cached_property
     def gen3_wild(self) -> dict[str, WildData]:
@@ -198,6 +207,23 @@ class EncounterTables:
             game.version_group: gen3_wild_data(self.builder, game)
             for game in self.builder.games
             if game.pret_format is PretFormat.GEN3
+        }
+
+    @cached_property
+    def gen4_contexts(self) -> dict[str, WildContext]:
+        """Règles et listes du moteur DS de chaque jeu, partagées par les rencontres et les emplacements."""
+        return {
+            game.version_group: wild_context(self.builder.gen4_repo(game, "les règles sauvages"))
+            for game in self.builder.games
+            if game.pret_format is PretFormat.GEN4
+        }
+
+    @cached_property
+    def gen4_wild(self) -> dict[str, Gen4WildData]:
+        return {
+            game.version_group: gen4_wild_data(self.builder, game, self.gen4_contexts[game.version_group])
+            for game in self.builder.games
+            if game.pret_format is PretFormat.GEN4
         }
 
     @cached_property
@@ -369,7 +395,7 @@ class EncounterTables:
             if not targets or key in present:
                 rates.add((version, area, method, int(row["rate"])))
             rates.update((version, target, method, int(row["rate"])) for target in targets)
-        for data in self.gen3_wild.values():
+        for data in (*self.gen3_wild.values(), *self.gen4_wild.values()):
             for version, area, method, rate in data.rates:
                 key = (version, area, method)
                 targets = self._rate_moves.get(key, set())

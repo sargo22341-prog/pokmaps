@@ -12,7 +12,8 @@ from pokemaps_data.pret import STEP_PX
 
 # Méthode sous laquelle l'application regroupe une rencontre sauvage (ui/map/MapZoneContent.kt) : un même
 # Pokémon pêché à l'Ancienne, à la Super ou à la Méga Canne n'a qu'un marqueur, mais un de plus s'il surfe. Coup
-# d'Boule réunit de même les arbres ordinaires et les arbres rares (2e génération).
+# d'Boule réunit de même les arbres ordinaires et les arbres rares (2e génération). Les arbres à Miel (4e génération)
+# sont l'objet posé de l'arbre, terrain des arbres.
 _PLACEMENT_METHODS = {
     "walk": "walk",
     "surf": "surf",
@@ -23,6 +24,7 @@ _PLACEMENT_METHODS = {
     "headbutt-high": "headbutt",
     "rock-smash": "rock-smash",
     "seaweed": "dive",
+    "honey-tree": "honey-tree",
 }
 # Terrain sur lequel l'application dessine chaque méthode : la marche utilise les herbes, ou le sol sans herbes.
 _TERRAINS = {
@@ -32,6 +34,7 @@ _TERRAINS = {
     "fishing": ("water",),
     "headbutt": ("tree",),
     "rock-smash": ("rock",),
+    "honey-tree": ("tree",),
 }
 _WILD = tuple(_PLACEMENT_METHODS)
 _IN_WILD = f"({', '.join('?' * len(_WILD))})"

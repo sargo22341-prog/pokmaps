@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import shutil
 import sqlite3
+from collections.abc import Callable
 from contextlib import closing
 from pathlib import Path
 
@@ -39,9 +40,17 @@ def build_pokemon_preview(cache: Path, output: Path, assets: Path) -> None:
     if missing := {row[1] for row in builder.items.item_rows} - sprites:
         raise ValueError(f"Icônes d'objets manquantes dans l'aperçu DS : {sorted(missing)}")
     tables = pokemon_preview_tables(builder, sprites)
-    path = output / "database/pokedex.db"
+    write_ds_database(output / "database/pokedex.db", tables, validate_pokemon_preview)
+    shutil.copytree(assets / "licenses", output / "licenses", dirs_exist_ok=True)
+    write_manifest(output)
+    print(f"Aperçu Pokémon DS validé : {output} (493 espèces, 3 versions)")
+
+
+def write_ds_database(
+    path: Path, tables: dict[str, list[tuple]], validator: Callable[[sqlite3.Connection], list[str]]
+) -> None:
+    """Écrit et valide une base d'aperçu DS, remplacée atomiquement pour ne jamais laisser un ancien aperçu."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    # Remplacer atomiquement la base évite de laisser un ancien aperçu en cas d'échec.
     temporary = path.with_suffix(".tmp")
     temporary.unlink(missing_ok=True)
     with closing(sqlite3.connect(temporary)) as connection, connection:
@@ -56,18 +65,14 @@ def build_pokemon_preview(cache: Path, output: Path, assets: Path) -> None:
                 marks = ",".join("?" * len(rows[0]))
                 connection.executemany(f"INSERT INTO {table} VALUES ({marks})", rows)
         connection.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
-        errors = validate_pokemon_preview(connection)
-        if errors:
-            raise ValueError("Aperçu Pokémon DS invalide : " + "; ".join(errors))
+        if errors := validator(connection):
+            raise ValueError("Aperçu DS invalide : " + "; ".join(errors))
         connection.commit()
         connection.execute("VACUUM")
     with temporary.open("r+b") as handle:
         handle.seek(96)
         handle.write(bytes(4))
     temporary.replace(path)
-    shutil.copytree(assets / "licenses", output / "licenses", dirs_exist_ok=True)
-    write_manifest(output)
-    print(f"Aperçu Pokémon DS validé : {output} (493 espèces, 3 versions)")
 
 
 def pokemon_preview_tables(builder: DatabaseBuilder, sprites: set[str]) -> dict[str, list[tuple]]:
@@ -137,16 +142,14 @@ def ds_move_rows(builder: DatabaseBuilder) -> list[tuple]:
     return result
 
 
-def validate_pokemon_preview(connection: sqlite3.Connection) -> list[str]:
+def validate_pokemon_preview(connection: sqlite3.Connection, *, with_maps: bool = False) -> list[str]:
     from .validate import CHECKS
+    from .validate_encounters_gen4 import check_slot_probabilities
     from .validate_profiles import validate_profiles
 
-    # Les invariants de cartes et de rencontres appartiennent aux phases 3 et 4 ; les autres restent identiques.
-    excluded = {
-        "zone avec des rencontres sans carte dans le jeu",
-        "probabilités de rencontre aléatoire différentes de 100 %",
-    }
-    errors = []
+    # Sans cartes (aperçu Pokémon), les zones de rencontres ne peuvent pas être reliées ; le reste est identique.
+    excluded = set() if with_maps else {"zone avec des rencontres sans carte dans le jeu"}
+    errors = check_slot_probabilities(connection)
     for label, query in CHECKS:
         if label not in excluded and (rows := connection.execute(query).fetchall()):
             errors.append(f"{label} : {rows[:5]}")

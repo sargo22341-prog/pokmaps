@@ -14,6 +14,8 @@ VERSION_LABELS = {
     "ruby-sapphire": "Rubis / Saphir",
     "emerald": "Émeraude",
     "firered-leafgreen": "Rouge Feu / Vert Feuille",
+    "diamond-pearl": "Diamant / Perle",
+    "platinum": "Platine",
 }
 
 

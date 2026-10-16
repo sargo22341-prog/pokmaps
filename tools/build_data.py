@@ -56,6 +56,11 @@ def _arguments() -> argparse.Namespace:
     )
     parser.add_argument("--map-workers", type=int, choices=range(1, 9), default=4, help="processus de rendu DS (1 à 8)")
     maps_only.add_argument("--sinnoh-pokemon-only", action="store_true", help="générer l'aperçu Pokémon DS sans cartes")
+    maps_only.add_argument(
+        "--sinnoh-encounters-only",
+        action="store_true",
+        help="générer l'aperçu des rencontres et emplacements DS (après --sinnoh-maps-only)",
+    )
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
     maps_only.add_argument(
         "--achievement-resources-only", action="store_true", help="générer les ressources de succès depuis les archives"
@@ -89,25 +94,7 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
-    if args.sinnoh_scenes_only:
-        from pokemaps_data.maps_scenes_gen4 import rebuild_scenes
-
-        rebuild_scenes(args.cache, args.preview / "sinnoh-maps", args.map_workers)
-        return 0
-    if args.sinnoh_catalogs_only:
-        from pokemaps_data.maps_refresh_gen4 import refresh_catalogs
-
-        refresh_catalogs(args.cache, args.preview / "sinnoh-maps")
-        return 0
-    if args.sinnoh_maps_only:
-        from pokemaps_data.maps_gen4 import build_gen4_maps
-
-        build_gen4_maps(args.cache, args.preview / "sinnoh-maps", args.map_workers)
-        return 0
-    if args.sinnoh_pokemon_only:
-        from pokemaps_data.preview_pokemon_gen4 import build_pokemon_preview
-
-        build_pokemon_preview(args.cache, args.preview, args.assets)
+    if _sinnoh_preview(args):
         return 0
     if args.achievement_resources_only:
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
@@ -143,6 +130,33 @@ def main() -> int:
         return 0
 
     return _build_all(args)
+
+
+def _sinnoh_preview(args: argparse.Namespace) -> bool:
+    """Aperçus DS demandés (cartes, décor, catalogues, Pokémon, rencontres) ; faux si aucun ne l'est."""
+    if args.sinnoh_scenes_only:
+        from pokemaps_data.maps_scenes_gen4 import rebuild_scenes
+
+        rebuild_scenes(args.cache, args.preview / "sinnoh-maps", args.map_workers)
+    elif args.sinnoh_catalogs_only:
+        from pokemaps_data.maps_refresh_gen4 import refresh_catalogs
+
+        refresh_catalogs(args.cache, args.preview / "sinnoh-maps")
+    elif args.sinnoh_maps_only:
+        from pokemaps_data.maps_gen4 import build_gen4_maps
+
+        build_gen4_maps(args.cache, args.preview / "sinnoh-maps", args.map_workers)
+    elif args.sinnoh_encounters_only:
+        from pokemaps_data.preview_wild_gen4 import build_wild_preview_gen4
+
+        build_wild_preview_gen4(args.cache, args.preview, args.assets)
+    elif args.sinnoh_pokemon_only:
+        from pokemaps_data.preview_pokemon_gen4 import build_pokemon_preview
+
+        build_pokemon_preview(args.cache, args.preview, args.assets)
+    else:
+        return False
+    return True
 
 
 def _build_all(args: argparse.Namespace) -> int:

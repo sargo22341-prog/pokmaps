@@ -164,3 +164,13 @@ location,five-island,Île 5,accent manquant dans PokéAPI ; nom relu sur Pokép�
 area,five-island,Île 5,accent manquant dans PokéAPI ; nom relu sur Poképédia
 location,six-island,Île 6,accent manquant dans PokéAPI ; nom relu sur Poképédia
 location,seven-island,Île 7,accent manquant dans PokéAPI ; nom relu sur Poképédia
+condition,backlot-not-mentioned,Sans le Pokémon du jour annoncé au Jardin Trophée,Jardin Trophée : emplacements de base du moteur
+condition,swarm-no,Hors essaim,essaim de Sinnoh : emplacements de base du moteur
+condition,radar-on,Avec le Poké Radar (après le Pokédex National),Poké Radar remis avec le Pokédex National ; emplacements remplacés quand l'herbe s'agite
+condition,radar-off,Sans le Poké Radar,emplacements de base du moteur
+condition,slot2-none,Sans jeu GBA inséré,double insertion : emplacements de base du moteur
+condition,slot2-ruby,Pokémon Rubis inséré (après le Pokédex National),double insertion lue dans le moteur
+condition,slot2-sapphire,Pokémon Saphir inséré (après le Pokédex National),double insertion lue dans le moteur
+condition,slot2-emerald,Pokémon Émeraude inséré (après le Pokédex National),double insertion lue dans le moteur
+condition,slot2-firered,Pokémon Rouge Feu inséré (après le Pokédex National),double insertion lue dans le moteur
+condition,slot2-leafgreen,Pokémon Vert Feuille inséré (après le Pokédex National),double insertion lue dans le moteur
