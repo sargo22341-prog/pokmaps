@@ -278,11 +278,8 @@ def _roamer_headers(repo: Gen4PretRepo, headers: dict[str, int]) -> tuple[int, .
 
 
 def _roamers(repo: Gen4PretRepo) -> tuple[tuple[int, int], ...]:
-    lines = asm_function(read_text(repo.root / _ROAMERS), "Save_CreateRoamerByID", _ROAMERS)
-    table = {0: (0x1E1, 0x32), 1: (0x7A << 2, 0x32), 2: (0x1EB, 0x28)}
-    expected = ["ldr r7, _02060580", "mov r6, #0x32", "mov r7, #0x7a", "lsl r7, r7, #0x2", "ldr r7, _02060584"]
-    if not all(any(line.startswith(prefix) for line in lines) for prefix in expected) or "mov r6, #0x28" not in lines:
-        raise ValueError(f"{_ROAMERS} : errants de Save_CreateRoamerByID illisibles")
+    text = read_text(repo.root / _ROAMERS)
+    table = _roamer_table(text, asm_function(text, "Save_CreateRoamerByID", _ROAMERS))
     created = sorted(
         {
             instruction.arguments[0]
@@ -294,3 +291,31 @@ def _roamers(repo: Gen4PretRepo) -> tuple[tuple[int, int], ...]:
     if not created or any(slot not in table for slot in created):
         raise ValueError(f"{repo.root} : errants créés par les scripts inconnus : {created}")
     return tuple(table[slot] for slot in created)
+
+
+def _roamer_table(text: str, lines: list[str]) -> dict[int, tuple[int, int]]:
+    """(espèce, niveau) de chaque numéro d'errant : `cmp r5, #N` / `beq`, puis l'espèce dans r7 (littéral ou
+    `mov` suivi de `lsl`) et le niveau dans r6, jusqu'au branchement commun."""
+    table = {}
+    for slot in range(len(lines)):
+        if f"cmp r5, #{slot:#x}" not in lines:
+            break
+        branch = lines[lines.index(f"cmp r5, #{slot:#x}") + 1]
+        start = lines.index(f"{branch.removeprefix('beq ')}:") if branch.startswith("beq ") else -1
+        body = lines[start + 1 : start + 5] if start >= 0 else []
+        species = level = None
+        for index, line in enumerate(body):
+            if found := re.fullmatch(r"ldr r7, (_[0-9A-F]+)", line):
+                literal = re.search(rf"^{found.group(1)}: \.word (0x[0-9A-Fa-f]+)$", text, re.MULTILINE)
+                species = int(literal.group(1), 16) if literal else None
+            elif (found := re.fullmatch(r"mov r7, #(0x[0-9a-f]+)", line)) and index + 1 < len(body):
+                shift = re.fullmatch(r"lsl r7, r7, #(0x[0-9a-f]+)", body[index + 1])
+                species = int(found.group(1), 16) << int(shift.group(1), 16) if shift else None
+            elif found := re.fullmatch(r"mov r6, #(0x[0-9a-f]+)", line):
+                level = int(found.group(1), 16)
+        if species is None or level is None:
+            raise ValueError(f"{_ROAMERS} : errant {slot} de Save_CreateRoamerByID illisible")
+        table[slot] = (species, level)
+    if not table:
+        raise ValueError(f"{_ROAMERS} : errants de Save_CreateRoamerByID illisibles")
+    return table

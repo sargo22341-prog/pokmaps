@@ -68,6 +68,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--sinnoh-maps-only` | Deux familles de cartes DS dans `sinnoh-maps/`, sans activation Android |
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
+| `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.
@@ -112,10 +113,36 @@ dans `evolution_requirement` : lieu, sexe, espèce dans l’équipe, proximité 
 
 La table préparatoire `ds_move` contient puissance, PP, précision, type et classe par attaque ; `move_version_group`
 porte en plus les effets, relus dans `move_effects.csv` au format `gen4` (clé : numéro d’effet du moteur, commun aux
-deux dépôts). Les rencontres PokéAPI servent au contrôle d’obtention par branche, avec une correction
-de Giratina dans Diamant/Perle vérifiée dans le script compilé épinglé. Les méthodes et conditions inconnues arrêtent
-l’export. Les probabilités complètes et les liens aux cartes attendent les lecteurs de rencontres DS.
-Cet aperçu n’est pas une base distribuable dans l’application.
+deux dépôts). Les rencontres aléatoires viennent du moteur (« Rencontres DS ») ; les dons, fixes, échanges et
+errants restent ceux de PokéAPI, avec une correction de Giratina dans Diamant/Perle vérifiée dans le script compilé
+épinglé. Les méthodes et conditions inconnues arrêtent l’export. Cet aperçu n’est pas une base distribuable dans
+l’application.
+
+### Rencontres DS
+
+`pret_gen4_wild_rules.py` lit les règles sauvages dans le C de Platine et `pret_gen4_wild_rules_dp.py` dans
+l’assembleur de Diamant/Perle, dont chaque fragment est vérifié instruction par instruction : probabilités des
+emplacements (12 d’herbe, 5 de surf et 5 par canne), emplacements remplacés (essaim, heure, Pokéradar, Pokémon du
+jour, double insertion), comportements des cases, lieux d’essaim, arbres à Miel, Barpau, errants et formes. Un test
+compare les deux lectures. `pret_gen4_wild_extra.py` lit l’archive `encdata_ex` (arbres à Miel, Jardin Trophée,
+Grand Marais, Barpau).
+
+`pret_gen4_wild.py` traduit chaque remplacement en condition PokéAPI : le matin garde la table de base, le jour et le
+crépuscule prennent `day`, la nuit `night` ; l’essaim ne vaut que dans les lieux de la liste du moteur, le Pokéradar
+que dans les lieux à hautes herbes. Une condition qui ne change pas l’espèce d’un emplacement est omise. Les Pokémon
+du jour du Grand Marais et du Jardin Trophée ne sont jamais prédits : chaque entrée de la liste reçoit sa part de la
+probabilité des emplacements remplacés. `builder_wild_gen4.py` remplace marche, surf, cannes et arbres à Miel de
+PokéAPI et vérifie contre le moteur Barpau et les errants de PokéAPI. `validate_encounters_gen4.py` exige 100 % pour
+chaque combinaison de conditions.
+
+`compare_wild_gen4.py` compare ces tables à PokéAPI par combinaison de conditions, donc par ce que le joueur
+rencontre ; `encounter_comparison.json` liste les écarts de l’aperçu. Ils viennent tous de zones regroupées
+autrement (`extra_areas.csv`), du Pokémon du jour en probabilité moyenne et d’erreurs de PokéAPI (Pokéradar sans
+hautes herbes, essaims hors de la liste du moteur) ; un test `pipeline` les classe et refuse tout autre écart.
+
+`maps_terrain_gen4.py` déduit les terrains des comportements de cases (herbes, sol, eau) et des arbres à Miel posés ;
+`maps_data_gen4.py` place les emplacements sur l’image oblique. Une case à plusieurs niveaux (pont, passerelle) garde
+son terrain mais ne reçoit pas d’emplacement.
 
 ### Lecteurs DS
 
@@ -200,6 +227,7 @@ la première est postérieure à ces jeux et la seconde n’a pas de sprite Noir
 python tools/map_editor.py
 # Pour un aperçu explicitement généré :
 python tools/map_editor.py --assets tools/build/preview/gen3-encounters
+python tools/map_editor.py --assets tools/build/preview/sinnoh-encounters
 ```
 
 L’éditeur lit l’aperçu lorsqu’un jeu est en cours d’intégration, sinon les assets distribués.

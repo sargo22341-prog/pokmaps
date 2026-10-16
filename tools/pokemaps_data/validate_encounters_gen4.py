@@ -11,6 +11,7 @@ from __future__ import annotations
 import itertools
 import sqlite3
 from collections import defaultdict
+from collections.abc import Iterable
 
 # Préfixes des valeurs qui s'excluent ; toute autre valeur est une condition à elle seule.
 _EXCLUSIVE_PREFIXES = ("time-", "swarm-", "radar-", "slot2-", "backlot-", "honey-tree-group-", "great-marsh-daily-")
@@ -27,6 +28,21 @@ def condition_axis(identifier: str) -> str:
     if identifier in _NATIONAL_DEX:
         return "national-dex"
     return next((prefix for prefix in _EXCLUSIVE_PREFIXES if identifier.startswith(prefix)), identifier)
+
+
+def condition_combinations(condition_sets: Iterable[frozenset[str]]) -> list[frozenset[str]] | None:
+    """Chaque combinaison d'une valeur par condition présente ; None au-delà de _MAX_COMBINATIONS."""
+    axes: dict[str, set[str]] = defaultdict(set)
+    for conditions in condition_sets:
+        for value in conditions:
+            axes[condition_axis(value)].add(value)
+    choices = [sorted(values) for _, values in sorted(axes.items())]
+    count = 1
+    for values in choices:
+        count *= len(values)
+    if count > _MAX_COMBINATIONS:
+        return None
+    return [frozenset(combination) for combination in itertools.product(*choices)]
 
 
 def check_slot_probabilities(connection: sqlite3.Connection) -> list[str]:
@@ -50,24 +66,12 @@ def check_slot_probabilities(connection: sqlite3.Connection) -> list[str]:
 
 def wrong_combinations(rows: list[Row]) -> list[tuple[tuple[str, ...], float]]:
     """Combinaisons de conditions dont le total des rencontres retenues diffère de 100 %."""
-    axes: dict[str, set[str]] = defaultdict(set)
-    for _, conditions in rows:
-        for value in conditions:
-            axes[condition_axis(value)].add(value)
-    choices = [sorted(values) for _, values in sorted(axes.items())]
-    if any(len(values) == 0 for values in choices) or _count(choices) > _MAX_COMBINATIONS:
+    combinations = condition_combinations(conditions for _, conditions in rows)
+    if combinations is None:
         return [(("trop de combinaisons",), 0.0)]
     wrong = []
-    for combination in itertools.product(*choices):
-        selected = frozenset(combination)
+    for selected in combinations:
         total = sum(chance for chance, conditions in rows if conditions <= selected)
         if abs(total - 100) > 0.01:
-            wrong.append((combination, total))
+            wrong.append((tuple(sorted(selected)), total))
     return wrong
-
-
-def _count(choices: list[list[str]]) -> int:
-    count = 1
-    for values in choices:
-        count *= len(values)
-    return count

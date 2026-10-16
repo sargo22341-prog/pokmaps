@@ -94,5 +94,12 @@ def check_encounter_taxonomy(builder: DatabaseBuilder) -> None:
         for r in builder.api.table("encounter_condition_value_map")
         if r["encounter_id"] in ids
     }
+    # Les tables du moteur remplacent les rencontres aléatoires de PokéAPI : leurs conditions sont classées aussi.
+    used_conditions |= {
+        conditions[value]["identifier"]
+        for data in builder.encounters.gen4_wild.values()
+        for encounter in data.encounters
+        for value in encounter.conditions
+    }
     if unknown := used_conditions - CONDITIONS:
         raise ValueError(f"Conditions de rencontre DS inconnues : {sorted(unknown)}")

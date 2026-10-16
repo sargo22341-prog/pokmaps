@@ -62,6 +62,8 @@ Les cartes préparatoires de Sinnoh se génèrent avec
 `python tools/build_data.py --sinnoh-maps-only --map-workers 8` dans `tools/build/preview/sinnoh-maps/`.
 Les deux familles ont leurs propres tuiles, catalogues français, étages, niveaux inférieurs et liaisons.
 `python tools/review_gen4_maps.py` produit les planches de relecture dans le scratchpad.
+Ensuite, `python tools/build_data.py --sinnoh-encounters-only` ajoute les rencontres lues dans le moteur DS et les
+emplacements sauvages dans `tools/build/preview/sinnoh-encounters/`, que l’éditeur ouvre avec `--assets`.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
 
 ## Publier une version

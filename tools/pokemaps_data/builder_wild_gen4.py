@@ -83,16 +83,16 @@ def gen4_wild_data(builder: DatabaseBuilder, game: Game, context: WildContext) -
             if previous is not table:
                 continue
             for slot in table.slots:
-                ids = tuple(sorted(conditions[value] for value in slot.conditions))
+                ids = tuple(sorted(_identifier(conditions, value, "Conditions") for value in slot.conditions))
                 row = WildEncounter(
-                    versions[version], area, slot.species, methods[table.method], ids,
+                    versions[version], area, slot.species, _identifier(methods, table.method, "Méthodes"), ids,
                     slot.min_level, slot.max_level, slot.chance,
                 )  # fmt: skip
                 encounters.append(row)
                 key = (row.version_id, area, row.species_id, row.method_id, ids)
                 notes[key].update(_notes(table, slot.conditions))
             if table.rate:
-                rates.add((versions[version], area, methods[table.method], table.rate))
+                rates.add((versions[version], area, _identifier(methods, table.method, "Méthodes"), table.rate))
     rules, feebas = context.rules, context.extra[FEEBAS][0]
     return Gen4WildData(
         tuple(encounters),
@@ -103,6 +103,13 @@ def gen4_wild_data(builder: DatabaseBuilder, game: Game, context: WildContext) -
         rules.roamers,
         len(set(rules.roamer_headers)),
     )
+
+
+def _identifier(ids: dict[str, int], value: str, kind: str) -> int:
+    """Numéro PokéAPI d'une méthode ou d'une condition produite par le moteur."""
+    if value not in ids:
+        raise ValueError(f"{kind} de rencontre DS inconnues de PokéAPI : {value}")
+    return ids[value]
 
 
 def complete_gen4_encounters(
