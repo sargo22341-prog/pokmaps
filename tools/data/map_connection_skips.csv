@@ -6,3 +6,21 @@ gold-silver-crystal,CELADON_CITY,ROUTE_7,"Les connexions placent la Route 7 une 
 firered-leafgreen,MAP_ROUTE6,MAP_SAFFRON_CITY_CONNECTION,Le retour Route 6 décale la bordure de Safrania de 12 cases ; placement par les Routes 5 et 7
 firered-leafgreen,MAP_PROTOTYPE_SEVII_ISLE_6,MAP_THREE_ISLAND,Prototype inutilisé
 firered-leafgreen,MAP_PROTOTYPE_SEVII_ISLE_7,MAP_THREE_ISLAND,Prototype inutilisé
+platinum,MAP_HEADER_JUBILIFE_CITY,MAP_HEADER_UNUSED_JUBILIFE_CITY_HOUSE_3,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_JUBILIFE_CITY,MAP_HEADER_UNUSED_JUBILIFE_CITY_HOUSE_4,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_JUBILIFE_CITY_SOUTH_HOUSE_2F,MAP_HEADER_UNUSED_JUBILIFE_CITY_SOUTH_HOUSE_3F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_JUBILIFE_CITY_CONDOMINIUMS_2F,MAP_HEADER_UNUSED_JUBILIFE_CITY_CONDOMINIUMS_3F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_OREBURGH_CITY_NORTHWEST_HOUSE_2F,MAP_HEADER_UNUSED_OREBURGH_CITY_NORTHWEST_HOUSE_3F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_OREBURGH_CITY_NORTH_HOUSE_2F,MAP_HEADER_UNUSED_OREBURGH_CITY_NORTH_HOUSE_3F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_OREBURGH_CITY_EAST_HOUSE_2F,MAP_HEADER_UNUSED_OREBURGH_CITY_EAST_HOUSE_3F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_ETERNA_CITY_GYM,MAP_HEADER_ETERNA_CITY_DP_GYM,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_ETERNA_CITY_CONDOMINIUMS_3F,MAP_HEADER_UNUSED_ETERNA_CITY_CONDOMINIUMS_4F,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_LEADER_ROOM,MAP_HEADER_HEARTHOME_CITY_DP_GYM_TRAINER_ROOM_1,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_LEADER_ROOM,MAP_HEADER_HEARTHOME_CITY_DP_GYM_ELEVATOR_ROOM_1,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_LEADER_ROOM,MAP_HEADER_HEARTHOME_CITY_DP_GYM_TRAINER_ROOM_2,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_SUNYSHORE_CITY,MAP_HEADER_UNUSED_SUNYSHORE_CITY_HOUSE_1,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+platinum,MAP_HEADER_SUNYSHORE_CITY,MAP_HEADER_UNUSED_SUNYSHORE_CITY_HOUSE_2,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+diamond-pearl,MAP_JUBLIFE,MAP_JUBLIFE_UNUSED_HOUSE_2,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+diamond-pearl,MAP_JUBLIFE,MAP_JUBLIFE_UNUSED_HOUSE_3,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+diamond-pearl,MAP_SUNYSHORE,MAP_SUNYSHORE_UNUSED_HOUSE_1,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu
+diamond-pearl,MAP_SUNYSHORE,MAP_SUNYSHORE_UNUSED_HOUSE_2,Warp de métadonnées vers une carte inutilisée ; porte non retenue dans le parcours du jeu

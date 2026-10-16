@@ -58,6 +58,12 @@ L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.
 Il contient les données Pokémon et leurs sprites ; les cartes DS et l’activation dans l’application restent séparées.
 
+Les cartes préparatoires de Sinnoh se génèrent avec
+`python tools/build_data.py --sinnoh-maps-only --map-workers 8` dans `tools/build/preview/sinnoh-maps/`.
+Les deux familles ont leurs propres tuiles, catalogues français, étages, niveaux inférieurs et liaisons.
+`python tools/review_gen4_maps.py` produit les planches de relecture dans le scratchpad.
+Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
+
 ## Publier une version
 
 Configurer une fois les secrets GitHub Actions `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`

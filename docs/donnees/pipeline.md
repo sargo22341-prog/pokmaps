@@ -11,7 +11,7 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 | `pret/pokered`, `pokeyellow` | Cartes, personnages, offres et règles des jeux Rouge/Bleu/Jaune |
 | `pret/pokegold`, `pokecrystal` | Cartes, scripts et tables sauvages horaires de Johto/Kanto |
 | `pret/pokeruby`, `pokeemerald`, `pokefirered` | Cartes, scripts, rencontres, équipes et règles GBA |
-| `pret/pokeplatinum`, `pokediamond` | Aperçu Pokémon DS : espèces, objets tenus, évolutions et caractéristiques des attaques |
+| `pret/pokeplatinum`, `pokediamond` | Aperçus Pokémon et cartes DS, lecteurs des modèles, textures, matrices, événements et scripts |
 | PokeAPI/sprites | Sprites Pokémon Noir/Blanc normaux et chromatiques |
 | pokesprite | Icônes d’objets |
 | `tools/data/` | Corrections et compléments éditoriaux relus |
@@ -65,9 +65,17 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--gen3-curation-only` | Rapport éditorial `character_curation.json` |
 | `--achievement-resources-only` | Ressources Android des succès depuis les archives locales |
 | `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
+| `--sinnoh-maps-only` | Deux familles de cartes DS dans `sinnoh-maps/`, sans activation Android |
+| `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
+| `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.
+`--map-workers` choisit de 1 à 8 processus pour les cartes DS (4 par défaut). Les deux familles passent une
+vérification de géométrie avant le rendu. Chaque famille remplace ensuite son aperçu après validation complète,
+depuis un dossier temporaire ; son ancien aperçu est conservé sous `<famille>.previous-*`. Un échec dans
+l’autre famille ne détruit pas les cartes déjà validées. Le réexport des catalogues conserve les tuiles et
+refuse une modification des sources, des en-têtes ou des blocs qui exige de refaire les images.
 L’export authentifié des archives est une opération distincte, décrite dans
 [leur README](../../tools/data/retroachievements/README.md) ; les builds ne l’appellent jamais.
 
@@ -77,6 +85,7 @@ L’export authentifié des archives est une opération distincte, décrite dans
 |---|---|
 | Noms, plans et coordonnées des cartes | `maps.csv`, `map_plans.csv`, `map_anchors.csv`, `map_parents.csv` |
 | Connexions, layouts et bordures corrigés | `map_connection_skips.csv`, `map_layouts.csv`, `map_trims.csv` |
+| Sélection DS, palettes et niveaux écartés | `map_exclusions_gen4.csv`, `map_texture_bindings_gen4.csv`, `map_level_skips_gen4.csv` |
 | Zones de rencontres et placement | `map_areas.csv`, `extra_areas.csv`, `map_spots.csv` |
 | Personnages, noms et scènes | `npc_names.csv`, `npc_text_names.csv`, `npc_duplicates.csv`, `scene_actors_gen3.csv` |
 | Figurants masqués uniquement sur la carte | `scene_actor_visibility.csv` (scripts et catalogues conservés) |
@@ -92,7 +101,7 @@ dédiées, jamais la détection d’une phrase française. Les validations et le
 ### Aperçu Pokémon de Sinnoh
 
 `PLATINUM` puis `DIAMOND_PEARL` sont déclarés au format `GEN4`, hors de `GAMES_IN_PROGRESS` :
-la génération des cartes refuse encore les jeux DS. L’option `--sinnoh-pokemon-only` lit les deux dépôts
+la génération générale ne les active pas encore. L’option `--sinnoh-pokemon-only` lit les deux dépôts
 épinglés, sans ROM, et génère une base et les sprites normaux/chromatiques des 493 espèces dans l’aperçu.
 Les variantes de Perle sont lues séparément pour les objets tenus ; un test compare leurs autres données à Diamant.
 
@@ -118,7 +127,69 @@ ses fichiers extraits (`pret_gen4_narc.py`) et dans le moteur, en C ou en assemb
 `pret_gen4_script_commands.py`). La forme des arguments de chaque commande de script compilé se lit dans la
 fonction du moteur ; le désassembleur (`pret_gen4_script_binary.py`) suit le flux depuis les points d’entrée. Les
 formats sont refusés dès qu’ils sortent de ce que les deux dépôts emploient (textures 4 × 4 et directes, commandes
-GX ou de script inconnues, tailles incohérentes). Ces lecteurs ne produisent encore aucune carte.
+GX ou de script inconnues, tailles incohérentes).
+
+### Cartes préparatoires de Sinnoh
+
+`maps_gen4.py` assemble séparément Platine et Diamant/Perle depuis leurs matrices pret. Sinnoh et le Grand Marais
+gardent leurs en-têtes de blocs ; les autres matrices donnent les intérieurs et les étages. `maps.csv` fournit
+tous les noms français, les plans éditoriaux restent dans `map_plans.csv`, et `map_parents.csv` décrit les origines.
+Les matrices donnent déjà les positions : aucun ancrage géométrique artificiel n’est nécessaire.
+`map_exclusions_gen4.csv` écarte explicitement les copies inutilisées, avec leur raison ; les anciennes portes
+qui les visent restent tracées dans `map_connection_skips.csv` et dans les liaisons non navigables.
+`map_level_skips_gen4.csv` écarte les plans BDHC qui ne correspondent pas à un étage accessible ; le réexport
+éditorial retire leurs calques obsolètes sans modifier les images conservées.
+Le Passage Marin de Diamant/Perle reste retenu malgré son nom source `MAP_ROUTE_231_UNUSED` : son en-tête est
+référencé par la matrice 0 et porte la zone de textures du passage effectivement présent dans le jeu.
+
+`maps_render_gen4` rend terrain et objets posés ; `maps_geometry_gen4` traite les nœuds et la pile SBC ;
+`maps_raster_gen4` projette les triangles en arithmétique entière (profondeur, textures au plus proche,
+transparence). Les valeurs de cotangente sont fixes, relues contre les caméras des sources. Les images sont
+découpées en cadres bornés, puis en WebP sans perte de 256 pixels ; aucune image régionale entière n’est chargée.
+La pyramide de zoom est construite depuis les tuiles du niveau supérieur.
+
+`maps_dynamic_gen4.py` lit aussi le décor chargé par le moteur hors des blocs : étages et plateformes de
+Joliberges, engrenages de Rivamar à l’état zéro, eau de Verchamps à son niveau initial, horloge de Vestigion
+dans Platine, cloisons et ascenseurs d’arènes dans Diamant/Perle, tramway du Grand Marais et plateforme de
+l’Île de Fer. `dynamic-props.json` conserve leurs positions et leur provenance. Les mécanismes ne sont pas
+animés et aucune sauvegarde n’est simulée ; la Villa garde son état vide, avant achat du mobilier.
+
+Les textures automatiques NSBTP et NSBTA sont évaluées à l’image zéro (`pret_gen4_animation.py`,
+`pret_gen4_prop_animations.py`) ; les animations articulées ne sont pas jouées, le décor garde sa pose de modèle.
+Les deux jeux de textures chargés par zone fournissent terrain et objets ; les noms de palettes manquants
+sont corrigés explicitement dans `map_texture_bindings_gen4.csv`. Un bloc de remplissage sans en-tête prend
+la zone nommée compatible la plus proche, dans un ordre stable. Un matériau ou une commande inconnu arrête l’export.
+
+Le BDHC fournit les niveaux praticables superposés. Les surfaces d’au moins quatre cases libres contiguës,
+séparées d’au moins une case en hauteur, produisent un calque inférieur ; les petites surfaces de mobilier
+et les cases en collision ne créent pas d’étage. `levels.json` conserve cases et plafonds. Les calques inférieurs
+partagent exactement le cadre de leur base ; `matrices.json` indique les rectangles qu’ils remplacent.
+Tous les niveaux superposés sont conservés, y compris les quatre de Joliberges. Un objet appartenant à
+l’étage supérieur est retiré entièrement du plan inférieur, afin que sa face inférieure ne masque pas le sol.
+Le Monde Distorsion conserve ses plans et ses liaisons, sans simulation de la gravité ni des plateformes mobiles.
+
+Chaque famille contient `catalog.tsv`, `passages.tsv`, `events.json`, `matrices.json`, `levels.json`,
+les images de PNJ et leur provenance (`sprites.json`), ainsi qu’un inventaire `assets.sha256`.
+Les sprites PNG de Platine et les NSBTX de Diamant/Perle sont lus séparément ; les couleurs invisibles sous
+l’alpha nul sont normalisées avant comparaison. Les apparences variables et les objets à modèle 3D restent
+explicitement distingués des sprites. Les liaisons comprennent warps, ascenseurs, scripts, bateau, Vol,
+plateformes du Monde Distorsion, destinations possibles de la Grotte Retour et accès au Souterrain par le
+Kit Explorateur. L’arrivée souterraine et le retour en surface dépendent de la position mémorisée ; aucun
+tirage ni déplacement du joueur n’est simulé.
+
+Après génération :
+
+```powershell
+python tools/check_assets.py --sinnoh-maps tools/build/preview/sinnoh-maps
+python tools/review_gen4_maps.py
+```
+
+La relecture couvre chaque lieu du catalogue, chaque bloc possédant un niveau inférieur et les seize modèles
+de blocs du Souterrain en détail. Arial (Windows/macOS) ou DejaVu Sans (Linux) fournit les accents des libellés.
+Les planches et leur index restent dans `tools/build/scratchpad/gen4-map-review/`. Les durées et tailles sont
+mesurées dans l’aperçu (`generation-report.json`), hors des inventaires des familles. Les jeux DS restent
+hors de `GAMES_IN_PROGRESS` jusqu’à l’intégration des rencontres, personnages et écrans : ces cartes ne sont
+pas encore distribuées dans l’APK normal.
 
 Les formes de Sinnoh suivent leurs versions dans `pokemon_forms.csv`. Les formes Fée et ??? d’Arceus sont exclues :
 la première est postérieure à ces jeux et la seconde n’a pas de sprite Noir/Blanc épinglé.

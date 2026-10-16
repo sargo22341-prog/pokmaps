@@ -38,7 +38,7 @@ class Vertex:
     texcoord: tuple[int, int]  # pas de 1/16 de texel
     color: tuple[int, int, int] | None
     normal: tuple[int, int, int] | None  # fx10 (512 = 1,0)
-    matrix: int
+    matrix: int | None
 
 
 @dataclass(frozen=True)
@@ -53,7 +53,7 @@ class _State:
     texcoord: tuple[int, int] = (0, 0)
     color: tuple[int, int, int] | None = None
     normal: tuple[int, int, int] | None = None
-    matrix: int = 0
+    matrix: int | None = None
 
 
 def signed(value: int, bits: int) -> int:
@@ -120,6 +120,8 @@ def _attribute(state: _State, opcode: int, parameters: tuple[int, ...], where: s
         state.color = (value & 31, (value >> 5) & 31, (value >> 10) & 31)
     elif opcode == 0x21:
         state.normal = (signed(value, 10), signed(value >> 10, 10), signed(value >> 20, 10))
+        # NORMAL recalcule la couleur d'éclairage ; un COLOR antérieur ne reste pas prioritaire.
+        state.color = None
     elif opcode == 0x22:
         state.texcoord = (signed(value, 16), signed(value >> 16, 16))
     elif opcode == 0x1B:

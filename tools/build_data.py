@@ -45,6 +45,16 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
     maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument(
+        "--sinnoh-maps-only", action="store_true", help="générer les cartes DS sans activation Android"
+    )
+    maps_only.add_argument(
+        "--sinnoh-catalogs-only", action="store_true", help="réexporter les catalogues DS sans refaire les tuiles"
+    )
+    maps_only.add_argument(
+        "--sinnoh-scenes-only", action="store_true", help="réexporter le décor moteur et les niveaux DS existants"
+    )
+    parser.add_argument("--map-workers", type=int, choices=range(1, 9), default=4, help="processus de rendu DS (1 à 8)")
     maps_only.add_argument("--sinnoh-pokemon-only", action="store_true", help="générer l'aperçu Pokémon DS sans cartes")
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
     maps_only.add_argument(
@@ -79,6 +89,21 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.sinnoh_scenes_only:
+        from pokemaps_data.maps_scenes_gen4 import rebuild_scenes
+
+        rebuild_scenes(args.cache, args.preview / "sinnoh-maps", args.map_workers)
+        return 0
+    if args.sinnoh_catalogs_only:
+        from pokemaps_data.maps_refresh_gen4 import refresh_catalogs
+
+        refresh_catalogs(args.cache, args.preview / "sinnoh-maps")
+        return 0
+    if args.sinnoh_maps_only:
+        from pokemaps_data.maps_gen4 import build_gen4_maps
+
+        build_gen4_maps(args.cache, args.preview / "sinnoh-maps", args.map_workers)
+        return 0
     if args.sinnoh_pokemon_only:
         from pokemaps_data.preview_pokemon_gen4 import build_pokemon_preview
 

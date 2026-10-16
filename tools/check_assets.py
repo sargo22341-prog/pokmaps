@@ -7,12 +7,14 @@ from contextlib import closing
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
-from pokemaps_data.games import GEN3_GAMES
+from pokemaps_data.games import GEN3_GAMES, GEN4_GAMES
 from pokemaps_data.hoenn_catalog import validate_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
 from pokemaps_data.validate_gen3_characters import validate_character_catalog
 from pokemaps_data.validate_hoenn_character_state import validate_hoenn_characters
+from pokemaps_data.validate_maps_gen4 import check_inventory
+from pokemaps_data.validate_maps_gen4 import validate_catalog as validate_gen4_catalog
 from pokemaps_data.validate_remake_fixed import validate_remake_fixed
 from pokemaps_data.validate_team_battles import validate_team_battles
 
@@ -20,6 +22,7 @@ from pokemaps_data.validate_team_battles import validate_team_battles
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--assets", type=Path, default=Path(__file__).resolve().parent.parent / "app/src/main/assets")
+    parser.add_argument("--sinnoh-maps", type=Path, help="vérifier aussi les deux catalogues DS préparatoires")
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
@@ -35,6 +38,11 @@ def main() -> int:
             errors += validate_team_battles(connection)
         if errors:
             raise ValueError("Base incohérente :\n" + "\n".join(errors))
+        if args.sinnoh_maps:
+            for game in GEN4_GAMES:
+                output = args.sinnoh_maps / game.version_group
+                check_inventory(output)
+                validate_gen4_catalog(output)
     except (OSError, ValueError, sqlite3.Error) as error:
         print(str(error), file=sys.stderr)
         return 1

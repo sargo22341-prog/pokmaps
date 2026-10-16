@@ -1565,3 +1565,1003 @@ firered-leafgreen,MAP_TWO_ISLAND_CAPE_BRINK_HOUSE,Cap Falaise — Maison
 firered-leafgreen,MAP_SIX_ISLAND_WATER_PATH_HOUSE1,Agualcanal — Maison 1
 firered-leafgreen,MAP_SIX_ISLAND_WATER_PATH_HOUSE2,Agualcanal — Maison 2
 firered-leafgreen,MAP_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE,Canyon Sesor — Maison
+platinum,MAP_HEADER_UNDERGROUND,Souterrain
+platinum,MAP_HEADER_JUBILIFE_CITY,Féli-Cité
+platinum,MAP_HEADER_JUBILIFE_CITY_MART,Féli-Cité — Boutique Pokémon
+platinum,MAP_HEADER_JUBILIFE_CITY_POKECENTER_1F,"Féli-Cité — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_JUBILIFE_CITY_POKECENTER_2F,"Féli-Cité — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_POKETCH_CO_1F,Société Pokémontre — rez-de-chaussée
+platinum,MAP_HEADER_POKETCH_CO_2F,Société Pokémontre — 1er étage
+platinum,MAP_HEADER_POKETCH_CO_3F,Société Pokémontre — 2e étage
+platinum,MAP_HEADER_JUBILIFE_TV_1F,Féli-Télé — rez-de-chaussée
+platinum,MAP_HEADER_JUBILIFE_TV_2F,Féli-Télé — 1er étage
+platinum,MAP_HEADER_JUBILIFE_TV_3F,Féli-Télé — 2e étage
+platinum,MAP_HEADER_JUBILIFE_TV_4F,Féli-Télé — 3e étage
+platinum,MAP_HEADER_JUBILIFE_TV_2F_GALLERY,Féli-Télé — 1er étage
+platinum,MAP_HEADER_JUBILIFE_TV_3F_GLOBAL_RANKING_ROOM,Féli-Télé — 2e étage
+platinum,MAP_HEADER_JUBILIFE_TV_3F_GROUP_RANKING_ROOM,Féli-Télé — 2e étage
+platinum,MAP_HEADER_JUBILIFE_TV_ELEVATOR,Féli-Télé — ascenseur
+platinum,MAP_HEADER_JUBILIFE_CITY_SOUTH_HOUSE_1F,"Féli-Cité — maison, rez-de-chaussée, partie sud"
+platinum,MAP_HEADER_JUBILIFE_CITY_SOUTH_HOUSE_2F,"Féli-Cité — maison, 1er étage, partie sud"
+platinum,MAP_HEADER_JUBILIFE_CITY_CONDOMINIUMS_1F,Féli-Cité — rez-de-chaussée
+platinum,MAP_HEADER_JUBILIFE_CITY_CONDOMINIUMS_2F,Féli-Cité — 1er étage
+platinum,MAP_HEADER_GLOBAL_TERMINAL_1F,Terminal Mondial — rez-de-chaussée
+platinum,MAP_HEADER_TRAINERS_SCHOOL,École de Dresseurs
+platinum,MAP_HEADER_JUBILIFE_CITY_SOUTHWEST_HOUSE_1F,"Féli-Cité — maison, rez-de-chaussée, partie sud-ouest"
+platinum,MAP_HEADER_CANALAVE_CITY,Joliberges
+platinum,MAP_HEADER_CANALAVE_CITY_MART,Joliberges — Boutique Pokémon
+platinum,MAP_HEADER_CANALAVE_CITY_GYM,Joliberges — Arène
+platinum,MAP_HEADER_CANALAVE_CITY_POKECENTER_1F,"Joliberges — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_CANALAVE_CITY_POKECENTER_2F,"Joliberges — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_CANALAVE_LIBRARY_1F,Bibliothèque de Joliberges — rez-de-chaussée
+platinum,MAP_HEADER_CANALAVE_LIBRARY_2F,Bibliothèque de Joliberges — 1er étage
+platinum,MAP_HEADER_CANALAVE_LIBRARY_3F,Bibliothèque de Joliberges — 2e étage
+platinum,MAP_HEADER_CANALAVE_CITY_SOUTHEAST_HOUSE,"Joliberges — maison, partie sud-est"
+platinum,MAP_HEADER_CANALAVE_CITY_EAST_HOUSE,"Joliberges — maison, partie est"
+platinum,MAP_HEADER_CANALAVE_CITY_HARBOR_INN,Joliberges
+platinum,MAP_HEADER_CANALAVE_CITY_SAILOR_ELDRITCH_HOUSE,Joliberges — maison
+platinum,MAP_HEADER_OREBURGH_CITY,Charbourg
+platinum,MAP_HEADER_OREBURGH_CITY_MART,Charbourg — Boutique Pokémon
+platinum,MAP_HEADER_OREBURGH_CITY_GYM,Charbourg — Arène
+platinum,MAP_HEADER_OREBURGH_CITY_POKECENTER_1F,"Charbourg — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_OREBURGH_CITY_POKECENTER_2F,"Charbourg — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_OREBURGH_CITY_NORTHWEST_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie nord-ouest"
+platinum,MAP_HEADER_OREBURGH_CITY_NORTHWEST_HOUSE_2F,"Charbourg — maison, 1er étage, partie nord-ouest"
+platinum,MAP_HEADER_OREBURGH_CITY_NORTH_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie nord"
+platinum,MAP_HEADER_OREBURGH_CITY_NORTH_HOUSE_2F,"Charbourg — maison, 1er étage, partie nord"
+platinum,MAP_HEADER_OREBURGH_CITY_MIDDLE_HOUSE,Charbourg — maison
+platinum,MAP_HEADER_MINING_MUSEUM,Musée Minier
+platinum,MAP_HEADER_OREBURGH_CITY_WEST_HOUSE,"Charbourg — maison, partie ouest"
+platinum,MAP_HEADER_OREBURGH_CITY_EAST_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie est"
+platinum,MAP_HEADER_OREBURGH_CITY_EAST_HOUSE_2F,"Charbourg — maison, 1er étage, partie est"
+platinum,MAP_HEADER_OREBURGH_CITY_SOUTH_HOUSE,"Charbourg — maison, partie sud"
+platinum,MAP_HEADER_ETERNA_CITY,Vestigion
+platinum,MAP_HEADER_ETERNA_CITY_MART,Vestigion — Boutique Pokémon
+platinum,MAP_HEADER_ETERNA_CITY_GYM,Vestigion — Arène
+platinum,MAP_HEADER_ETERNA_CITY_POKECENTER_1F,"Vestigion — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_ETERNA_CITY_POKECENTER_2F,"Vestigion — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_CYCLE_SHOP,Boutique de Vélos
+platinum,MAP_HEADER_TEAM_GALACTIC_ETERNA_BUILDING_1F,Bâtiment Galaxie de Vestigion — rez-de-chaussée
+platinum,MAP_HEADER_TEAM_GALACTIC_ETERNA_BUILDING_2F,Bâtiment Galaxie de Vestigion — 1er étage
+platinum,MAP_HEADER_TEAM_GALACTIC_ETERNA_BUILDING_3F,Bâtiment Galaxie de Vestigion — 2e étage
+platinum,MAP_HEADER_TEAM_GALACTIC_ETERNA_BUILDING_4F,Bâtiment Galaxie de Vestigion — 3e étage
+platinum,MAP_HEADER_ETERNA_CITY_CONDOMINIUMS_1F,Vestigion — rez-de-chaussée
+platinum,MAP_HEADER_ETERNA_CITY_CONDOMINIUMS_2F,Vestigion — 1er étage
+platinum,MAP_HEADER_ETERNA_CITY_CONDOMINIUMS_3F,Vestigion — 2e étage
+platinum,MAP_HEADER_ROUTE_206_CYCLING_ROAD_NORTH_GATE,"Route 206 — porte, partie nord"
+platinum,MAP_HEADER_ETERNA_CITY_HERB_SHOP,Vestigion
+platinum,MAP_HEADER_ETERNA_CITY_SOUTH_HOUSE,"Vestigion — maison, partie sud"
+platinum,MAP_HEADER_ETERNA_CITY_EAST_HOUSE,"Vestigion — maison, partie est"
+platinum,MAP_HEADER_ETERNA_CITY_UNDERGROUND_MAN_HOUSE,Vestigion — maison
+platinum,MAP_HEADER_HEARTHOME_CITY,Unionpolis
+platinum,MAP_HEADER_HEARTHOME_CITY_MART,Unionpolis — Boutique Pokémon
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_ENTRANCE_ROOM,Unionpolis — Arène
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_TRAINER_ROOM_1,"Unionpolis — Arène, salle 1"
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_TRAINER_ROOM_2,"Unionpolis — Arène, salle 2"
+platinum,MAP_HEADER_HEARTHOME_CITY_GYM_LEADER_ROOM,Unionpolis — Arène
+platinum,MAP_HEADER_HEARTHOME_CITY_POKECENTER_1F,"Unionpolis — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_HEARTHOME_CITY_POKECENTER_2F,"Unionpolis — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_HEARTHOME_CITY_SOUTHEAST_HOUSE_1F,"Unionpolis — maison, rez-de-chaussée, partie sud-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_SOUTHEAST_HOUSE_2F,"Unionpolis — maison, 1er étage, partie sud-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_SOUTHEAST_HOUSE_ELEVATOR,"Unionpolis — ascenseur, maison, partie sud-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_POKEMON_FAN_CLUB,Unionpolis
+platinum,MAP_HEADER_HEARTHOME_CITY_WEST_GATE_TO_AMITY_SQUARE,"Unionpolis — porte, partie ouest"
+platinum,MAP_HEADER_HEARTHOME_CITY_EAST_GATE_TO_AMITY_SQUARE,"Unionpolis — porte, partie est"
+platinum,MAP_HEADER_ROUTE_208_GATE_TO_HEARTHOME_CITY,Route 208 — porte
+platinum,MAP_HEADER_ROUTE_209_GATE_TO_HEARTHOME_CITY,Route 209 — porte
+platinum,MAP_HEADER_ROUTE_212_GATE_TO_HEARTHOME_CITY,Route 212 — porte
+platinum,MAP_HEADER_HEARTHOME_CITY_NORTHEAST_HOUSE_1F,"Unionpolis — maison, rez-de-chaussée, partie nord-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_NORTHEAST_HOUSE_2F,"Unionpolis — maison, 1er étage, partie nord-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_NORTHEAST_HOUSE_ELEVATOR,"Unionpolis — ascenseur, maison, partie nord-est"
+platinum,MAP_HEADER_HEARTHOME_CITY_NORTHWEST_HOUSE,"Unionpolis — maison, partie nord-ouest"
+platinum,MAP_HEADER_POFFIN_HOUSE,Poffinerie — maison
+platinum,MAP_HEADER_CONTEST_HALL_LOBBY,Salle de Concours
+platinum,MAP_HEADER_CONTEST_HALL_STAGE_ONGOING_CONTEST,Salle de Concours
+platinum,MAP_HEADER_FOREIGN_BUILDING,Bâtiment étranger
+platinum,MAP_HEADER_PASTORIA_CITY,Verchamps
+platinum,MAP_HEADER_PASTORIA_CITY_MART,Verchamps — Boutique Pokémon
+platinum,MAP_HEADER_PASTORIA_CITY_GYM,Verchamps — Arène
+platinum,MAP_HEADER_PASTORIA_CITY_POKECENTER_1F,"Verchamps — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_PASTORIA_CITY_POKECENTER_2F,"Verchamps — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_PASTORIA_CITY_OBSERVATORY_GATE_1F,"Verchamps — porte, rez-de-chaussée"
+platinum,MAP_HEADER_PASTORIA_CITY_OBSERVATORY_GATE_2F,"Verchamps — porte, 1er étage"
+platinum,MAP_HEADER_PASTORIA_CITY_SOUTHWEST_HOUSE,"Verchamps — maison, partie sud-ouest"
+platinum,MAP_HEADER_PASTORIA_CITY_MIDDLE_HOUSE,Verchamps — maison
+platinum,MAP_HEADER_PASTORIA_CITY_EAST_HOUSE,"Verchamps — maison, partie est"
+platinum,MAP_HEADER_PASTORIA_CITY_NORTH_HOUSE,"Verchamps — maison, partie nord"
+platinum,MAP_HEADER_PASTORIA_CITY_NORTHEAST_HOUSE,"Verchamps — maison, partie nord-est"
+platinum,MAP_HEADER_VEILSTONE_CITY,Voilaroc
+platinum,MAP_HEADER_VEILSTONE_CITY_GYM,Voilaroc — Arène
+platinum,MAP_HEADER_VEILSTONE_CITY_POKECENTER_1F,"Voilaroc — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_VEILSTONE_CITY_POKECENTER_2F,"Voilaroc — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_GAME_CORNER,Casino
+platinum,MAP_HEADER_VEILSTONE_STORE_1F,Centre Commercial de Voilaroc — rez-de-chaussée
+platinum,MAP_HEADER_VEILSTONE_STORE_2F,Centre Commercial de Voilaroc — 1er étage
+platinum,MAP_HEADER_VEILSTONE_STORE_3F,Centre Commercial de Voilaroc — 2e étage
+platinum,MAP_HEADER_VEILSTONE_STORE_4F,Centre Commercial de Voilaroc — 3e étage
+platinum,MAP_HEADER_VEILSTONE_STORE_5F,Centre Commercial de Voilaroc — 4e étage
+platinum,MAP_HEADER_VEILSTONE_STORE_ELEVATOR,Centre Commercial de Voilaroc — ascenseur
+platinum,MAP_HEADER_VEILSTONE_CITY_GALACTIC_WAREHOUSE,Voilaroc — entrepôt
+platinum,MAP_HEADER_VEILSTONE_CITY_PRIZE_EXCHANGE,Voilaroc
+platinum,MAP_HEADER_VEILSTONE_CITY_SOUTHEAST_HOUSE,"Voilaroc — maison, partie sud-est"
+platinum,MAP_HEADER_VEILSTONE_CITY_NORTHWEST_HOUSE,"Voilaroc — maison, partie nord-ouest"
+platinum,MAP_HEADER_VEILSTONE_CITY_NORTHEAST_HOUSE,"Voilaroc — maison, partie nord-est"
+platinum,MAP_HEADER_VEILSTONE_CITY_SOUTHWEST_HOUSE,"Voilaroc — maison, partie sud-ouest"
+platinum,MAP_HEADER_ROUTE_215_GATE_TO_VEILSTONE_CITY,Route 215 — porte
+platinum,MAP_HEADER_SUNYSHORE_CITY,Rivamar
+platinum,MAP_HEADER_SUNYSHORE_CITY_POKECENTER_1F,"Rivamar — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_SUNYSHORE_CITY_POKECENTER_2F,"Rivamar — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_SUNYSHORE_CITY_MART,Rivamar — Boutique Pokémon
+platinum,MAP_HEADER_SUNYSHORE_CITY_GYM_ROOM_1,"Rivamar — Arène, salle 1"
+platinum,MAP_HEADER_SUNYSHORE_CITY_GYM_ROOM_2,"Rivamar — Arène, salle 2"
+platinum,MAP_HEADER_SUNYSHORE_CITY_GYM_ROOM_3,"Rivamar — Arène, salle 3"
+platinum,MAP_HEADER_SUNYSHORE_MARKET,Marché de Rivamar
+platinum,MAP_HEADER_SUNYSHORE_CITY_NORTHEAST_HOUSE,"Rivamar — maison, partie nord-est"
+platinum,MAP_HEADER_SUNYSHORE_CITY_WEST_HOUSE,"Rivamar — maison, partie ouest"
+platinum,MAP_HEADER_SUNYSHORE_CITY_NORTHWEST_HOUSE,"Rivamar — maison, partie nord-ouest"
+platinum,MAP_HEADER_SUNYSHORE_CITY_EAST_HOUSE,"Rivamar — maison, partie est"
+platinum,MAP_HEADER_VISTA_LIGHTHOUSE,Phare Panorama
+platinum,MAP_HEADER_SNOWPOINT_CITY,Frimapic
+platinum,MAP_HEADER_SNOWPOINT_CITY_MART,Frimapic — Boutique Pokémon
+platinum,MAP_HEADER_SNOWPOINT_CITY_GYM,Frimapic — Arène
+platinum,MAP_HEADER_SNOWPOINT_CITY_POKECENTER_1F,"Frimapic — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_SNOWPOINT_CITY_POKECENTER_2F,"Frimapic — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_SNOWPOINT_CITY_WEST_HOUSE,"Frimapic — maison, partie ouest"
+platinum,MAP_HEADER_SNOWPOINT_CITY_EAST_HOUSE,"Frimapic — maison, partie est"
+platinum,MAP_HEADER_POKEMON_LEAGUE,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_SOUTH_POKECENTER_1F,"Ligue Pokémon — Centre Pokémon, rez-de-chaussée, partie sud"
+platinum,MAP_HEADER_POKEMON_LEAGUE_SOUTH_POKECENTER_2F,"Ligue Pokémon — Centre Pokémon, 1er étage, partie sud"
+platinum,MAP_HEADER_POKEMON_LEAGUE_NORTH_POKECENTER_1F,"Ligue Pokémon — Centre Pokémon, rez-de-chaussée, partie nord"
+platinum,MAP_HEADER_POKEMON_LEAGUE_ELEVATOR_TO_AARON_ROOM,Ligue Pokémon — ascenseur
+platinum,MAP_HEADER_POKEMON_LEAGUE_AARON_ROOM,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_ELEVATOR_TO_BERTHA_ROOM,Ligue Pokémon — ascenseur
+platinum,MAP_HEADER_POKEMON_LEAGUE_BERTHA_ROOM,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_ELEVATOR_TO_FLINT_ROOM,Ligue Pokémon — ascenseur
+platinum,MAP_HEADER_POKEMON_LEAGUE_FLINT_ROOM,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_ELEVATOR_TO_LUCIAN_ROOM,Ligue Pokémon — ascenseur
+platinum,MAP_HEADER_POKEMON_LEAGUE_LUCIAN_ROOM,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_ELEVATOR_TO_CHAMPION_ROOM,Ligue Pokémon — ascenseur
+platinum,MAP_HEADER_POKEMON_LEAGUE_CHAMPION_ROOM,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_HALLWAY_TO_HALL_OF_FAME,Ligue Pokémon
+platinum,MAP_HEADER_POKEMON_LEAGUE_HALL_OF_FAME,Ligue Pokémon
+platinum,MAP_HEADER_FIGHT_AREA,Aire de Combat
+platinum,MAP_HEADER_FIGHT_AREA_POKECENTER_1F,"Aire de Combat — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_FIGHT_AREA_POKECENTER_2F,"Aire de Combat — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_FIGHT_AREA_MART,Aire de Combat — Boutique Pokémon
+platinum,MAP_HEADER_ROUTE_225_GATE_TO_FIGHT_AREA,Route 225 — porte
+platinum,MAP_HEADER_FIGHT_AREA_MIDDLE_HOUSE,Aire de Combat — maison
+platinum,MAP_HEADER_FIGHT_AREA_SOUTH_HOUSE,"Aire de Combat — maison, partie sud"
+platinum,MAP_HEADER_OREBURGH_MINE_B1F,Mine Charbourg — sous-sol 1
+platinum,MAP_HEADER_OREBURGH_MINE_B2F,Mine Charbourg — sous-sol 2
+platinum,MAP_HEADER_VALLEY_WINDWORKS_OUTSIDE,Les Eoliennes
+platinum,MAP_HEADER_VALLEY_WINDWORKS_BUILDING,Les Eoliennes
+platinum,MAP_HEADER_ETERNA_FOREST_OUTSIDE,Forêt Vestigion
+platinum,MAP_HEADER_ETERNA_FOREST,Forêt Vestigion
+platinum,MAP_HEADER_FUEGO_IRONWORKS_OUTSIDE,Forge Fuego
+platinum,MAP_HEADER_FUEGO_IRONWORKS_BUILDING,Forge Fuego
+platinum,MAP_HEADER_MT_CORONET_1F_SOUTH,"Mont Couronné — rez-de-chaussée, partie sud"
+platinum,MAP_HEADER_MT_CORONET_2F,Mont Couronné — 1er étage
+platinum,MAP_HEADER_MT_CORONET_3F,Mont Couronné — 2e étage
+platinum,MAP_HEADER_MT_CORONET_OUTSIDE_NORTH,Mont Couronné — partie nord
+platinum,MAP_HEADER_MT_CORONET_OUTSIDE_SOUTH,Mont Couronné — partie sud
+platinum,MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2,Mont Couronné — 3e étage
+platinum,MAP_HEADER_MT_CORONET_4F_ROOM_3,"Mont Couronné — 3e étage, salle 3"
+platinum,MAP_HEADER_MT_CORONET_5F,Mont Couronné — 4e étage
+platinum,MAP_HEADER_MT_CORONET_6F,Mont Couronné — 5e étage
+platinum,MAP_HEADER_MT_CORONET_1F_TUNNEL_ROOM,Mont Couronné — rez-de-chaussée
+platinum,MAP_HEADER_MT_CORONET_1F_NORTH_ROOM_2,"Mont Couronné — rez-de-chaussée, salle 2, partie nord"
+platinum,MAP_HEADER_MT_CORONET_1F_NORTH_ROOM_1,"Mont Couronné — rez-de-chaussée, salle 1, partie nord"
+platinum,MAP_HEADER_MT_CORONET_B1F,Mont Couronné — sous-sol 1
+platinum,MAP_HEADER_SPEAR_PILLAR,Colonnes Lances
+platinum,MAP_HEADER_SPEAR_PILLAR_DISTORTED,Colonnes Lances
+platinum,MAP_HEADER_SOLACEON_RUINS_MANIAC_TUNNEL_ROOM,Ruines Bonville
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_1,Ruines Bonville — salle 1
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_2_NORTHEAST_DEAD_END,Ruines Bonville — partie nord-est
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_1_NORTHWEST_DEAD_END,Ruines Bonville — partie nord-ouest
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_2,Ruines Bonville — salle 2
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_1_SOUTHEAST_DEAD_END,Ruines Bonville — partie sud-est
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_3,Ruines Bonville — salle 3
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_2_SOUTHEAST_DEAD_END,Ruines Bonville — partie sud-est
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_6_SOUTHEAST_DEAD_END,Ruines Bonville — partie sud-est
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_5_SOUTHWEST_DEAD_END,Ruines Bonville — partie sud-ouest
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_3_NORTHWEST_DEAD_END,Ruines Bonville — partie nord-ouest
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_3_SOUTHWEST_DEAD_END,Ruines Bonville — partie sud-ouest
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_4,Ruines Bonville — salle 4
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_6,Ruines Bonville — salle 6
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_5,Ruines Bonville — salle 5
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_7,Ruines Bonville — salle 7
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_4_SOUTHEAST_DEAD_END,Ruines Bonville — partie sud-est
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_6_NORTHWEST_DEAD_END,Ruines Bonville — partie nord-ouest
+platinum,MAP_HEADER_VICTORY_ROAD_1F,Route Victoire — rez-de-chaussée
+platinum,MAP_HEADER_VICTORY_ROAD_2F,Route Victoire — 1er étage
+platinum,MAP_HEADER_VICTORY_ROAD_B1F,Route Victoire — sous-sol 1
+platinum,MAP_HEADER_VICTORY_ROAD_1F_ROOM_2,"Route Victoire — rez-de-chaussée, salle 2"
+platinum,MAP_HEADER_VICTORY_ROAD_1F_ROOM_1,"Route Victoire — rez-de-chaussée, salle 1"
+platinum,MAP_HEADER_VICTORY_ROAD_1F_ROOM_3,"Route Victoire — rez-de-chaussée, salle 3"
+platinum,MAP_HEADER_PAL_PARK,Parc des Amis
+platinum,MAP_HEADER_AMITY_SQUARE,Square Paisible
+platinum,MAP_HEADER_RAVAGED_PATH,Chemin Rocheux
+platinum,MAP_HEADER_FLOAROMA_MEADOW,Pré Floraville
+platinum,MAP_HEADER_FLOAROMA_MEADOW_HOUSE,Pré Floraville — maison
+platinum,MAP_HEADER_OREBURGH_GATE_1F,"Entrée Charbourg — porte, rez-de-chaussée"
+platinum,MAP_HEADER_OREBURGH_GATE_B1F,"Entrée Charbourg — porte, sous-sol 1"
+platinum,MAP_HEADER_FULLMOON_ISLAND,Île Pleine Lune
+platinum,MAP_HEADER_FULLMOON_ISLAND_FOREST,Île Pleine Lune
+platinum,MAP_HEADER_STARK_MOUNTAIN_OUTSIDE,Mont Abrupt
+platinum,MAP_HEADER_STARK_MOUNTAIN_ROOM_1,Mont Abrupt — salle 1
+platinum,MAP_HEADER_STARK_MOUNTAIN_ROOM_2,Mont Abrupt — salle 2
+platinum,MAP_HEADER_STARK_MOUNTAIN_ROOM_3,Mont Abrupt — salle 3
+platinum,MAP_HEADER_SENDOFF_SPRING,Source Adieu
+platinum,MAP_HEADER_TURNBACK_CAVE_ENTRANCE,Grotte Retour
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_ROOM,Grotte Retour — salle du pilier
+platinum,MAP_HEADER_TURNBACK_CAVE_GIRATINA_ROOM,Grotte Retour — salle de Giratina
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_1,"Grotte Retour — salle 1, pilier 1"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_2,"Grotte Retour — salle 2, pilier 1"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_3,"Grotte Retour — salle 3, pilier 1"
+platinum,MAP_HEADER_FLOWER_PARADISE,Paradis Fleuri
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_1F,Temple de Frimapic — rez-de-chaussée
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_B1F,Temple de Frimapic — sous-sol 1
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_B2F,Temple de Frimapic — sous-sol 2
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_B3F,Temple de Frimapic — sous-sol 3
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_B4F,Temple de Frimapic — sous-sol 4
+platinum,MAP_HEADER_SNOWPOINT_TEMPLE_B5F,Temple de Frimapic — sous-sol 5
+platinum,MAP_HEADER_WAYWARD_CAVE_1F,Grotte Revêche — rez-de-chaussée
+platinum,MAP_HEADER_WAYWARD_CAVE_B1F,Grotte Revêche — sous-sol 1
+platinum,MAP_HEADER_RUIN_MANIAC_CAVE_SHORT,Grotte Ruineman.
+platinum,MAP_HEADER_TROPHY_GARDEN,Jardin Trophée
+platinum,MAP_HEADER_IRON_ISLAND,Île de Fer
+platinum,MAP_HEADER_IRON_ISLAND_1F,Île de Fer — rez-de-chaussée
+platinum,MAP_HEADER_IRON_ISLAND_B1F_LEFT_ROOM,"Île de Fer — sous-sol 1, partie gauche"
+platinum,MAP_HEADER_IRON_ISLAND_B1F_RIGHT_ROOM,"Île de Fer — sous-sol 1, partie droite"
+platinum,MAP_HEADER_IRON_ISLAND_B2F_RIGHT_ROOM,"Île de Fer — sous-sol 2, partie droite"
+platinum,MAP_HEADER_IRON_ISLAND_B2F_LEFT_ROOM,"Île de Fer — sous-sol 2, partie gauche"
+platinum,MAP_HEADER_IRON_ISLAND_B3F,Île de Fer — sous-sol 3
+platinum,MAP_HEADER_OLD_CHATEAU,Vieux Château
+platinum,MAP_HEADER_OLD_CHATEAU_DINING_AREA,Vieux Château — salle à manger
+platinum,MAP_HEADER_OLD_CHATEAU_SIDE_ROOMS,Vieux Château
+platinum,MAP_HEADER_OLD_CHATEAU_CORRIDOR,Vieux Château
+platinum,MAP_HEADER_OLD_CHATEAU_BACK_WEST_ROOM,Vieux Château — partie ouest
+platinum,MAP_HEADER_OLD_CHATEAU_BACK_MIDDLE_WEST_ROOM,Vieux Château — partie ouest
+platinum,MAP_HEADER_OLD_CHATEAU_BACK_MIDDLE_ROOM,Vieux Château
+platinum,MAP_HEADER_OLD_CHATEAU_BACK_MIDDLE_EAST_ROOM,Vieux Château — partie est
+platinum,MAP_HEADER_OLD_CHATEAU_BACK_EAST_ROOM,Vieux Château — partie est
+platinum,MAP_HEADER_GALACTIC_HQ_1F,QG Galaxie — rez-de-chaussée
+platinum,MAP_HEADER_GALACTIC_HQ_2F,QG Galaxie — 1er étage
+platinum,MAP_HEADER_GALACTIC_HQ_3F,QG Galaxie — 2e étage
+platinum,MAP_HEADER_GALACTIC_HQ_4F,QG Galaxie — 3e étage
+platinum,MAP_HEADER_GALACTIC_HQ_B1F,QG Galaxie — sous-sol 1
+platinum,MAP_HEADER_GALACTIC_HQ_B2F,QG Galaxie — sous-sol 2
+platinum,MAP_HEADER_LAKE_VERITY_LOW_WATER,Lac Vérité
+platinum,MAP_HEADER_LAKE_VERITY,Lac Vérité
+platinum,MAP_HEADER_VERITY_CAVERN,Caverne Vérité
+platinum,MAP_HEADER_LAKE_VALOR_DRAINED,Lac Courage
+platinum,MAP_HEADER_LAKE_VALOR,Lac Courage
+platinum,MAP_HEADER_VALOR_CAVERN,Caverne Courage
+platinum,MAP_HEADER_LAKE_ACUITY_LOW_WATER,Lac Savoir
+platinum,MAP_HEADER_LAKE_ACUITY,Lac Savoir
+platinum,MAP_HEADER_ACUITY_CAVERN,Caverne Savoir
+platinum,MAP_HEADER_NEWMOON_ISLAND,Île Nouvellelune
+platinum,MAP_HEADER_NEWMOON_ISLAND_FOREST,Île Nouvellelune
+platinum,MAP_HEADER_BATTLE_TOWER,Tour de Combat
+platinum,MAP_HEADER_BATTLE_TOWER_ELEVATOR,Tour de Combat — ascenseur
+platinum,MAP_HEADER_BATTLE_TOWER_CORRIDOR,Tour de Combat — couloir
+platinum,MAP_HEADER_BATTLE_TOWER_CORRIDOR_MULTI,Tour de Combat — couloir des combats multi
+platinum,MAP_HEADER_BATTLE_TOWER_BATTLE_ROOM,Tour de Combat — salle de combat
+platinum,MAP_HEADER_BATTLE_TOWER_MULTI_BATTLE_ROOM,Tour de Combat — salle des combats multi
+platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_2P,Club Communication — combat simple
+platinum,MAP_HEADER_COMMUNICATION_CLUB_COLOSSEUM_4P,Club Communication — combat multi
+platinum,MAP_HEADER_VERITY_LAKEFRONT,Rive Lac Vérité
+platinum,MAP_HEADER_VALOR_LAKEFRONT,Rive Lac Courage
+platinum,MAP_HEADER_RESTAURANT,Restaurant Sept Étoiles
+platinum,MAP_HEADER_GRAND_LAKE_VALOR_LAKEFRONT_EAST_HOUSE,"Grand Lac — maison, partie est"
+platinum,MAP_HEADER_GRAND_LAKE_VALOR_LAKEFRONT_WEST_HOUSE,"Grand Lac — maison, partie ouest"
+platinum,MAP_HEADER_ACUITY_LAKEFRONT,Rive Lac Savoir
+platinum,MAP_HEADER_SPRING_PATH,Chemin Source
+platinum,MAP_HEADER_ROUTE_201,Route 201
+platinum,MAP_HEADER_ROUTE_202,Route 202
+platinum,MAP_HEADER_ROUTE_203,Route 203
+platinum,MAP_HEADER_ROUTE_204_SOUTH,Route 204 — partie sud
+platinum,MAP_HEADER_ROUTE_204_NORTH,Route 204 — partie nord
+platinum,MAP_HEADER_ROUTE_205_SOUTH,Route 205 — partie sud
+platinum,MAP_HEADER_ROUTE_205_HOUSE,Route 205 — maison
+platinum,MAP_HEADER_ROUTE_205_NORTH,Route 205 — partie nord
+platinum,MAP_HEADER_ROUTE_206,Route 206
+platinum,MAP_HEADER_ROUTE_206_CYCLING_ROAD_SOUTH_GATE,"Route 206 — porte, partie sud"
+platinum,MAP_HEADER_ROUTE_207,Route 207
+platinum,MAP_HEADER_ROUTE_208,Route 208
+platinum,MAP_HEADER_ROUTE_208_HOUSE,Route 208 — maison
+platinum,MAP_HEADER_ROUTE_209,Route 209
+platinum,MAP_HEADER_ROUTE_209_LOST_TOWER_1F,Tour Perdue — rez-de-chaussée
+platinum,MAP_HEADER_ROUTE_209_LOST_TOWER_2F,Tour Perdue — 1er étage
+platinum,MAP_HEADER_ROUTE_209_LOST_TOWER_3F,Tour Perdue — 2e étage
+platinum,MAP_HEADER_ROUTE_209_LOST_TOWER_4F,Tour Perdue — 3e étage
+platinum,MAP_HEADER_ROUTE_209_LOST_TOWER_5F,Tour Perdue — 4e étage
+platinum,MAP_HEADER_ROUTE_210_SOUTH,Route 210 — partie sud
+platinum,MAP_HEADER_ROUTE_210_NORTH,Route 210 — partie nord
+platinum,MAP_HEADER_ROUTE_210_GRANDMA_WILMA_HOUSE,Route 210 — maison
+platinum,MAP_HEADER_ROUTE_211_WEST,Route 211 — partie ouest
+platinum,MAP_HEADER_ROUTE_211_EAST,Route 211 — partie est
+platinum,MAP_HEADER_ROUTE_212_NORTH,Route 212 — partie nord
+platinum,MAP_HEADER_POKEMON_MANSION,Manoir Pokémon
+platinum,MAP_HEADER_POKEMON_MANSION_MAIDS_ROOM,Manoir Pokémon
+platinum,MAP_HEADER_POKEMON_MANSION_OFFICE,Manoir Pokémon
+platinum,MAP_HEADER_ROUTE_212_SOUTH,Route 212 — partie sud
+platinum,MAP_HEADER_ROUTE_212_HOUSE,Route 212 — maison
+platinum,MAP_HEADER_ROUTE_213,Route 213
+platinum,MAP_HEADER_ROUTE_213_GATE_TO_PASTORIA_CITY,Route 213 — porte
+platinum,MAP_HEADER_FOOTSTEP_HOUSE,Maison du Docteur Petitpas
+platinum,MAP_HEADER_GRAND_LAKE_ROUTE_213_LOBBY,Grand Lac
+platinum,MAP_HEADER_GRAND_LAKE_ROUTE_213_EAST_HOUSE,"Grand Lac — maison, partie est"
+platinum,MAP_HEADER_GRAND_LAKE_ROUTE_213_NORTHWEST_HOUSE,"Grand Lac — maison, partie nord-ouest"
+platinum,MAP_HEADER_GRAND_LAKE_ROUTE_213_NORTHEAST_HOUSE,"Grand Lac — maison, partie nord-est"
+platinum,MAP_HEADER_ROUTE_214,Route 214
+platinum,MAP_HEADER_ROUTE_214_GATE_TO_VEILSTONE_CITY,Route 214 — porte
+platinum,MAP_HEADER_ROUTE_215,Route 215
+platinum,MAP_HEADER_ROUTE_216,Route 216
+platinum,MAP_HEADER_ROUTE_216_HOUSE,Route 216 — maison
+platinum,MAP_HEADER_ROUTE_217,Route 217
+platinum,MAP_HEADER_ROUTE_217_WEST_HOUSE,"Route 217 — maison, partie ouest"
+platinum,MAP_HEADER_ROUTE_217_NORTHEAST_HOUSE,"Route 217 — maison, partie nord-est"
+platinum,MAP_HEADER_ROUTE_218,Route 218
+platinum,MAP_HEADER_ROUTE_218_GATE_TO_JUBILIFE_CITY,Route 218 — porte
+platinum,MAP_HEADER_ROUTE_218_GATE_TO_CANALAVE_CITY,Route 218 — porte
+platinum,MAP_HEADER_ROUTE_219,Route 219
+platinum,MAP_HEADER_ROUTE_221,Route 221
+platinum,MAP_HEADER_PAL_PARK_LOBBY,Parc des Amis
+platinum,MAP_HEADER_ROUTE_221_HOUSE,Route 221 — maison
+platinum,MAP_HEADER_ROUTE_222,Route 222
+platinum,MAP_HEADER_ROUTE_222_WEST_HOUSE,"Route 222 — maison, partie ouest"
+platinum,MAP_HEADER_ROUTE_222_EAST_HOUSE,"Route 222 — maison, partie est"
+platinum,MAP_HEADER_ROUTE_222_GATE_TO_SUNYSHORE_CITY,Route 222 — porte
+platinum,MAP_HEADER_ROUTE_224,Route 224
+platinum,MAP_HEADER_ROUTE_225,Route 225
+platinum,MAP_HEADER_ROUTE_227,Route 227
+platinum,MAP_HEADER_ROUTE_228,Route 228
+platinum,MAP_HEADER_ROUTE_229,Route 229
+platinum,MAP_HEADER_RECORD_MIXING_ROOM,Salle de mélange des données
+platinum,MAP_HEADER_TWINLEAF_TOWN,Bonaugure
+platinum,MAP_HEADER_TWINLEAF_TOWN_RIVAL_HOUSE_1F,"Bonaugure — maison du rival, rez-de-chaussée"
+platinum,MAP_HEADER_TWINLEAF_TOWN_RIVAL_HOUSE_2F,"Bonaugure — maison du rival, 1er étage"
+platinum,MAP_HEADER_TWINLEAF_TOWN_PLAYER_HOUSE_1F,"Bonaugure — maison du joueur, rez-de-chaussée"
+platinum,MAP_HEADER_TWINLEAF_TOWN_PLAYER_HOUSE_2F,"Bonaugure — maison du joueur, 1er étage"
+platinum,MAP_HEADER_TWINLEAF_TOWN_NORTHEAST_HOUSE,"Bonaugure — maison, partie nord-est"
+platinum,MAP_HEADER_TWINLEAF_TOWN_SOUTHWEST_HOUSE,"Bonaugure — maison, partie sud-ouest"
+platinum,MAP_HEADER_SANDGEM_TOWN,Littorella
+platinum,MAP_HEADER_SANDGEM_TOWN_MART,Littorella — Boutique Pokémon
+platinum,MAP_HEADER_SANDGEM_TOWN_POKECENTER_1F,"Littorella — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_SANDGEM_TOWN_POKECENTER_2F,"Littorella — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_SANDGEM_TOWN_POKEMON_RESEARCH_LAB,Littorella — laboratoire
+platinum,MAP_HEADER_SANDGEM_TOWN_COUNTERPART_HOUSE_1F,"Littorella — maison, rez-de-chaussée"
+platinum,MAP_HEADER_SANDGEM_TOWN_COUNTERPART_HOUSE_2F,"Littorella — maison, 1er étage"
+platinum,MAP_HEADER_SANDGEM_TOWN_HOUSE,Littorella — maison
+platinum,MAP_HEADER_FLOAROMA_TOWN,Floraville
+platinum,MAP_HEADER_FLOAROMA_TOWN_MART,Floraville — Boutique Pokémon
+platinum,MAP_HEADER_FLOAROMA_TOWN_POKECENTER_1F,"Floraville — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_FLOAROMA_TOWN_POKECENTER_2F,"Floraville — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_FLOWER_SHOP,Fleuriste
+platinum,MAP_HEADER_FLOAROMA_TOWN_SOUTHEAST_HOUSE,"Floraville — maison, partie sud-est"
+platinum,MAP_HEADER_FLOAROMA_TOWN_MIDDLE_HOUSE,Floraville — maison
+platinum,MAP_HEADER_SOLACEON_TOWN,Bonville
+platinum,MAP_HEADER_SOLACEON_TOWN_MART,Bonville — Boutique Pokémon
+platinum,MAP_HEADER_SOLACEON_TOWN_POKECENTER_1F,"Bonville — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_SOLACEON_TOWN_POKECENTER_2F,"Bonville — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_POKEMON_DAY_CARE,Pension Pokémon
+platinum,MAP_HEADER_SOLACEON_TOWN_NORTHEAST_HOUSE,"Bonville — maison, partie nord-est"
+platinum,MAP_HEADER_SOLACEON_TOWN_POKEMON_NEWS_PRESS,Bonville
+platinum,MAP_HEADER_SOLACEON_TOWN_NORTH_HOUSE,"Bonville — maison, partie nord"
+platinum,MAP_HEADER_SOLACEON_TOWN_EAST_HOUSE,"Bonville — maison, partie est"
+platinum,MAP_HEADER_CELESTIC_TOWN,Célestia
+platinum,MAP_HEADER_CELESTIC_TOWN_POKECENTER_1F,"Célestia — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_CELESTIC_TOWN_POKECENTER_2F,"Célestia — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_CELESTIC_TOWN_NORTH_HOUSE,"Célestia — maison, partie nord"
+platinum,MAP_HEADER_CELESTIC_TOWN_NORTHWEST_HOUSE,"Célestia — maison, partie nord-ouest"
+platinum,MAP_HEADER_CELESTIC_TOWN_NORTHEAST_HOUSE,"Célestia — maison, partie nord-est"
+platinum,MAP_HEADER_CELESTIC_TOWN_SOUTHWEST_HOUSE,"Célestia — maison, partie sud-ouest"
+platinum,MAP_HEADER_CELESTIC_TOWN_CAVE,Célestia
+platinum,MAP_HEADER_SURVIVAL_AREA,Aire de Survie
+platinum,MAP_HEADER_SURVIVAL_AREA_MART,Aire de Survie — Boutique Pokémon
+platinum,MAP_HEADER_SURVIVAL_AREA_POKECENTER_1F,"Aire de Survie — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_SURVIVAL_AREA_POKECENTER_2F,"Aire de Survie — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_BATTLEGROUND,Café Combats
+platinum,MAP_HEADER_SURVIVAL_AREA_SOUTH_HOUSE,"Aire de Survie — maison, partie sud"
+platinum,MAP_HEADER_SURVIVAL_AREA_NORTH_HOUSE,"Aire de Survie — maison, partie nord"
+platinum,MAP_HEADER_RESORT_AREA,Aire de Détente
+platinum,MAP_HEADER_RESORT_AREA_POKECENTER_1F,"Aire de Détente — Centre Pokémon, rez-de-chaussée"
+platinum,MAP_HEADER_RESORT_AREA_POKECENTER_2F,"Aire de Détente — Centre Pokémon, 1er étage"
+platinum,MAP_HEADER_RESORT_AREA_RIBBON_SYNDICATE_1F,Aire de Détente — rez-de-chaussée
+platinum,MAP_HEADER_RESORT_AREA_RIBBON_SYNDICATE_2F,Aire de Détente — 1er étage
+platinum,MAP_HEADER_RESORT_AREA_RIBBON_SYNDICATE_ELEVATOR,Aire de Détente — ascenseur
+platinum,MAP_HEADER_VILLA,Villa
+platinum,MAP_HEADER_RESORT_AREA_HOUSE,Aire de Détente — maison
+platinum,MAP_HEADER_UNION_ROOM,Salle Union
+platinum,MAP_HEADER_ROUTE_220,Route 220
+platinum,MAP_HEADER_ROUTE_223,Route 223
+platinum,MAP_HEADER_ROUTE_226,Route 226
+platinum,MAP_HEADER_ROUTE_230,Route 230
+platinum,MAP_HEADER_SEABREAK_PATH,Passage Marin
+platinum,MAP_HEADER_JUBILIFE_CITY_POKECENTER_B1F,"Féli-Cité — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_CANALAVE_CITY_POKECENTER_B1F,"Joliberges — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_OREBURGH_CITY_POKECENTER_B1F,"Charbourg — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_ETERNA_CITY_POKECENTER_B1F,"Vestigion — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_HEARTHOME_CITY_POKECENTER_B1F,"Unionpolis — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_PASTORIA_CITY_POKECENTER_B1F,"Verchamps — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_VEILSTONE_CITY_POKECENTER_B1F,"Voilaroc — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_SUNYSHORE_CITY_POKECENTER_B1F,"Rivamar — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_SNOWPOINT_CITY_POKECENTER_B1F,"Frimapic — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_POKEMON_LEAGUE_SOUTH_POKECENTER_B1F,"Ligue Pokémon — Centre Pokémon, sous-sol 1, partie sud"
+platinum,MAP_HEADER_FIGHT_AREA_POKECENTER_B1F,"Aire de Combat — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_SANDGEM_TOWN_POKECENTER_B1F,"Littorella — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_FLOAROMA_TOWN_POKECENTER_B1F,"Floraville — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_SOLACEON_TOWN_POKECENTER_B1F,"Bonville — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_CELESTIC_TOWN_POKECENTER_B1F,"Célestia — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_SURVIVAL_AREA_POKECENTER_B1F,"Aire de Survie — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_RESORT_AREA_POKECENTER_B1F,"Aire de Détente — Centre Pokémon, sous-sol 1"
+platinum,MAP_HEADER_CANALAVE_CITY_WEST_HOUSE,"Joliberges — maison, partie ouest"
+platinum,MAP_HEADER_CAFE,Café Cabane
+platinum,MAP_HEADER_BATTLE_TOWER_BATTLE_SALON,Tour de Combat
+platinum,MAP_HEADER_GALACTIC_HQ_CONTROL_ROOM,QG Galaxie
+platinum,MAP_HEADER_POKEMON_LEAGUE_NORTH_POKECENTER_2F,"Ligue Pokémon — Centre Pokémon, 1er étage, partie nord"
+platinum,MAP_HEADER_POKEMON_LEAGUE_NORTH_POKECENTER_B1F,"Ligue Pokémon — Centre Pokémon, sous-sol 1, partie nord"
+platinum,MAP_HEADER_GALACTIC_HQ_LABORATORY,QG Galaxie — laboratoire
+platinum,MAP_HEADER_ROUTE_225_HOUSE,Route 225 — maison
+platinum,MAP_HEADER_ROUTE_226_HOUSE,Route 226 — maison
+platinum,MAP_HEADER_ROUTE_227_HOUSE,Route 227 — maison
+platinum,MAP_HEADER_ROUTE_228_GATE_TO_ROUTE_226,Route 228 — porte
+platinum,MAP_HEADER_ROUTE_228_NORTH_HOUSE,"Route 228 — maison, partie nord"
+platinum,MAP_HEADER_ROUTE_228_SOUTH_HOUSE,"Route 228 — maison, partie sud"
+platinum,MAP_HEADER_GREAT_MARSH_1,Grand Marais — zone 1
+platinum,MAP_HEADER_GREAT_MARSH_2,Grand Marais — zone 2
+platinum,MAP_HEADER_GREAT_MARSH_3,Grand Marais — zone 3
+platinum,MAP_HEADER_GREAT_MARSH_4,Grand Marais — zone 4
+platinum,MAP_HEADER_GREAT_MARSH_5,Grand Marais — zone 5
+platinum,MAP_HEADER_GREAT_MARSH_6,Grand Marais — zone 6
+platinum,MAP_HEADER_HALL_OF_ORIGIN,Salle Originelle
+platinum,MAP_HEADER_RUIN_MANIAC_CAVE_LONG,Grotte Ruineman.
+platinum,MAP_HEADER_MANIAC_TUNNEL,Tunnel Runiem.
+platinum,MAP_HEADER_IRON_ISLAND_HOUSE,Île de Fer — maison
+platinum,MAP_HEADER_SOLACEON_RUINS_ROOM_5_SOUTHEAST_DEADEND,Ruines Bonville — partie sud-est
+platinum,MAP_HEADER_VISTA_LIGHTHOUSE_ELEVATOR,Phare Panorama — ascenseur
+platinum,MAP_HEADER_JUBILIFE_CITY_SOUTHWEST_HOUSE_2F,"Féli-Cité — maison, 1er étage, partie sud-ouest"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_4,"Grotte Retour — salle 4, pilier 1"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_5,"Grotte Retour — salle 5, pilier 1"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_6,"Grotte Retour — salle 6, pilier 1"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_1,"Grotte Retour — salle 1, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_2,"Grotte Retour — salle 2, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_3,"Grotte Retour — salle 3, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_4,"Grotte Retour — salle 4, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_5,"Grotte Retour — salle 5, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_6,"Grotte Retour — salle 6, pilier 2"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_1,"Grotte Retour — salle 1, pilier 3"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_2,"Grotte Retour — salle 2, pilier 3"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_3,"Grotte Retour — salle 3, pilier 3"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_4,"Grotte Retour — salle 4, pilier 3"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_5,"Grotte Retour — salle 5, pilier 3"
+platinum,MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_6,"Grotte Retour — salle 6, pilier 3"
+platinum,MAP_HEADER_CONTEST_HALL_STAGE_NO_CONTEST,Salle de Concours
+platinum,MAP_HEADER_BATTLE_FRONTIER,Zone de Combat
+platinum,MAP_HEADER_BATTLE_FRONTIER_GATE_TO_FIGHT_AREA,Zone de Combat — porte
+platinum,MAP_HEADER_BATTLE_FACTORY,Usine de Combat
+platinum,MAP_HEADER_BATTLE_HALL,Scène de Combat
+platinum,MAP_HEADER_BATTLE_CASTLE,Castel de Combat
+platinum,MAP_HEADER_BATTLE_ARCADE,Arcade de Combat
+platinum,MAP_HEADER_VEILSTONE_STORE_B1F,Centre Commercial de Voilaroc — sous-sol 1
+platinum,MAP_HEADER_GLOBAL_TERMINAL_2F,Terminal Mondial — 1er étage
+platinum,MAP_HEADER_GLOBAL_TERMINAL_3F,Terminal Mondial — 2e étage
+platinum,MAP_HEADER_GALACTIC_HQ_HALL,QG Galaxie
+platinum,MAP_HEADER_ROTOMS_ROOM,Salle de Motisma
+platinum,MAP_HEADER_DISTORTION_WORLD_1F,Monde Distorsion — rez-de-chaussée
+platinum,MAP_HEADER_DISTORTION_WORLD_B1F,Monde Distorsion — sous-sol 1
+platinum,MAP_HEADER_DISTORTION_WORLD_B2F,Monde Distorsion — sous-sol 2
+platinum,MAP_HEADER_DISTORTION_WORLD_B3F,Monde Distorsion — sous-sol 3
+platinum,MAP_HEADER_DISTORTION_WORLD_B4F,Monde Distorsion — sous-sol 4
+platinum,MAP_HEADER_DISTORTION_WORLD_B5F,Monde Distorsion — sous-sol 5
+platinum,MAP_HEADER_DISTORTION_WORLD_B6F,Monde Distorsion — sous-sol 6
+platinum,MAP_HEADER_DISTORTION_WORLD_B7F,Monde Distorsion — sous-sol 7
+platinum,MAP_HEADER_DISTORTION_WORLD_GIRATINA_ROOM,Monde Distorsion — salle de Giratina
+platinum,MAP_HEADER_DISTORTION_WORLD_TURNBACK_CAVE_ROOM,Monde Distorsion
+platinum,MAP_HEADER_SPEAR_PILLAR_DIALGA,Colonnes Lances
+platinum,MAP_HEADER_SPEAR_PILLAR_PALKIA,Colonnes Lances
+platinum,MAP_HEADER_WIFI_PLAZA_ENTRANCE,Square Wi-Fi — entrée
+platinum,MAP_HEADER_IRON_ISLAND_IRON_RUINS,Ruines de Fer
+platinum,MAP_HEADER_IRON_RUINS,Ruines de Fer
+platinum,MAP_HEADER_MT_CORONET_ICEBERG_RUINS,Ruines Iceberg
+platinum,MAP_HEADER_ICEBERG_RUINS,Ruines Iceberg
+platinum,MAP_HEADER_ROUTE_228_ROCK_PEAK_RUINS,Ruines Pic Roche
+platinum,MAP_HEADER_ROCK_PEAK_RUINS,Ruines Pic Roche
+platinum,SINNOH,Sinnoh
+diamond-pearl,MAP_UNDERGROUND,Souterrain
+diamond-pearl,MAP_JUBLIFE,Féli-Cité
+diamond-pearl,MAP_JUBLIFE_POKEMART,Féli-Cité — Boutique Pokémon
+diamond-pearl,MAP_JUBLIFE_POKECENTER_1F,"Féli-Cité — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_JUBLIFE_POKECENTER_2F,"Féli-Cité — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_JUBLIFE_POKETCH_COMPANY_1F,Société Pokémontre — rez-de-chaussée
+diamond-pearl,MAP_JUBLIFE_POKETCH_COMPANY_2F,Société Pokémontre — 1er étage
+diamond-pearl,MAP_JUBLIFE_POKETCH_COMPANY_3F,Société Pokémontre — 2e étage
+diamond-pearl,MAP_JUBLIFE_TV_1F,Féli-Télé — rez-de-chaussée
+diamond-pearl,MAP_JUBLIFE_TV_2F,Féli-Télé — 1er étage
+diamond-pearl,MAP_JUBLIFE_TV_3F,Féli-Télé — 2e étage
+diamond-pearl,MAP_JUBLIFE_TV_4F,Féli-Télé — 3e étage
+diamond-pearl,MAP_JUBLIFE_TV_2F_GALLERY,Féli-Télé — 1er étage
+diamond-pearl,MAP_JUBLIFE_TV_3F_GLOBAL_RANKINGS,Féli-Télé — 2e étage
+diamond-pearl,MAP_JUBLIFE_TV_3F_GROUP_RANKINGS,Féli-Télé — 2e étage
+diamond-pearl,MAP_JUBLIFE_TV_ELEVATOR,Féli-Télé — ascenseur
+diamond-pearl,MAP_JUBLIFE_SOUTHEAST_HOUSE_1F,"Féli-Cité — maison, rez-de-chaussée, partie sud-est"
+diamond-pearl,MAP_JUBLIFE_SOUTHEAST_HOUSE_2F,"Féli-Cité — maison, 1er étage, partie sud-est"
+diamond-pearl,MAP_JUBLIFE_SOUTHEAST_HOUSE_3F,"Féli-Cité — maison, 2e étage, partie sud-est"
+diamond-pearl,MAP_JUBLIFE_SOUTHEAST_HOUSE_4F,"Féli-Cité — maison, 3e étage, partie sud-est"
+diamond-pearl,MAP_JUBLIFE_CONDOMINIUMS_1F,Féli-Cité — rez-de-chaussée
+diamond-pearl,MAP_JUBLIFE_CONDOMINIUMS_2F,Féli-Cité — 1er étage
+diamond-pearl,MAP_JUBLIFE_CONDOMINIUMS_3F,Féli-Cité — 2e étage
+diamond-pearl,MAP_JUBLIFE_CONDOMINIUMS_4F,Féli-Cité — 3e étage
+diamond-pearl,MAP_JUBLIFE_GLOBAL_TRADE_STATION,GTS
+diamond-pearl,MAP_JUBLIFE_TRAINER_SCHOOL,École de Dresseurs
+diamond-pearl,MAP_JUBLIFE_SOUTHWEST_HOUSE_1F,"Féli-Cité — maison, rez-de-chaussée, partie sud-ouest"
+diamond-pearl,MAP_CANALAVE,Joliberges
+diamond-pearl,MAP_CANALAVE_POKEMART,Joliberges — Boutique Pokémon
+diamond-pearl,MAP_CANALAVE_GYM,Joliberges — Arène
+diamond-pearl,MAP_CANALAVE_POKECENTER_1F,"Joliberges — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_CANALAVE_POKECENTER_2F,"Joliberges — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_CANALAVE_LIBRARY_1F,Bibliothèque de Joliberges — rez-de-chaussée
+diamond-pearl,MAP_CANALAVE_LIBRARY_2F,Bibliothèque de Joliberges — 1er étage
+diamond-pearl,MAP_CANALAVE_LIBRARY_3F,Bibliothèque de Joliberges — 2e étage
+diamond-pearl,MAP_CANALAVE_SOUTHEAST_HOUSE,"Joliberges — maison, partie sud-est"
+diamond-pearl,MAP_CANALAVE_MOVE_DELETER_HOUSE,Joliberges — maison
+diamond-pearl,MAP_CANALAVE_HARBOR_INN,Joliberges
+diamond-pearl,MAP_CANALAVE_SAILOR_ELDRITCH_HOUSE,Joliberges — maison
+diamond-pearl,MAP_OREBURGH,Charbourg
+diamond-pearl,MAP_OREBURGH_POKEMART,Charbourg — Boutique Pokémon
+diamond-pearl,MAP_OREBURGH_GYM,Charbourg — Arène
+diamond-pearl,MAP_OREBURGH_POKECENTER_1F,"Charbourg — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_OREBURGH_POKECENTER_2F,"Charbourg — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_OREBURGH_NORTHWEST_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie nord-ouest"
+diamond-pearl,MAP_OREBURGH_NORTHWEST_HOUSE_2F,"Charbourg — maison, 1er étage, partie nord-ouest"
+diamond-pearl,MAP_OREBURGH_NORTHWEST_HOUSE_3F,"Charbourg — maison, 2e étage, partie nord-ouest"
+diamond-pearl,MAP_OREBURGH_NORTHWEST_HOUSE_4F,"Charbourg — maison, 3e étage, partie nord-ouest"
+diamond-pearl,MAP_OREBURGH_NORTH_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie nord"
+diamond-pearl,MAP_OREBURGH_NORTH_HOUSE_2F,"Charbourg — maison, 1er étage, partie nord"
+diamond-pearl,MAP_OREBURGH_NORTH_HOUSE_3F,"Charbourg — maison, 2e étage, partie nord"
+diamond-pearl,MAP_OREBURGH_NORTH_HOUSE_4F,"Charbourg — maison, 3e étage, partie nord"
+diamond-pearl,MAP_OREBURGH_MIDDLE_HOUSE,Charbourg — maison
+diamond-pearl,MAP_OREBURGH_MINING_MUSEUM,Musée Minier
+diamond-pearl,MAP_OREBURGH_WEST_HOUSE,"Charbourg — maison, partie ouest"
+diamond-pearl,MAP_OREBURGH_EAST_HOUSE_1F,"Charbourg — maison, rez-de-chaussée, partie est"
+diamond-pearl,MAP_OREBURGH_EAST_HOUSE_2F,"Charbourg — maison, 1er étage, partie est"
+diamond-pearl,MAP_OREBURGH_EAST_HOUSE_3F,"Charbourg — maison, 2e étage, partie est"
+diamond-pearl,MAP_OREBURGH_SOUTH_HOUSE,"Charbourg — maison, partie sud"
+diamond-pearl,MAP_ETERNA,Vestigion
+diamond-pearl,MAP_ETERNA_POKEMART,Vestigion — Boutique Pokémon
+diamond-pearl,MAP_ETERNA_GYM_ENTRANCE,Vestigion — Arène
+diamond-pearl,MAP_ETERNA_GYM,Vestigion — Arène
+diamond-pearl,MAP_ETERNA_POKECENTER_1F,"Vestigion — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_ETERNA_POKECENTER_2F,"Vestigion — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_ETERNA_BIKE_SHOP,Boutique de Vélos
+diamond-pearl,MAP_ETERNA_GALACTIC_BUILDING_1F,Vestigion — rez-de-chaussée
+diamond-pearl,MAP_ETERNA_GALACTIC_BUILDING_2F,Vestigion — 1er étage
+diamond-pearl,MAP_ETERNA_GALACTIC_BUILDING_3F,Vestigion — 2e étage
+diamond-pearl,MAP_ETERNA_GALACTIC_BUILDING_4F,Vestigion — 3e étage
+diamond-pearl,MAP_ETERNA_CONDOMINIUMS_1F,Vestigion — rez-de-chaussée
+diamond-pearl,MAP_ETERNA_CONDOMINIUMS_2F,Vestigion — 1er étage
+diamond-pearl,MAP_ETERNA_CONDOMINIUMS_3F,Vestigion — 2e étage
+diamond-pearl,MAP_ETERNA_CONDOMINIUMS_4F,Vestigion — 3e étage
+diamond-pearl,MAP_ETERNA_ROUTE_206_GATEHOUSE,Route 206 — porte
+diamond-pearl,MAP_ETERNA_HERB_SHOP,Vestigion
+diamond-pearl,MAP_ETERNA_OAK_HOUSE,Vestigion — maison
+diamond-pearl,MAP_ETERNA_EAST_HOUSE,"Vestigion — maison, partie est"
+diamond-pearl,MAP_ETERNA_UNDERGROUND_MAN_HOUSE,Vestigion — maison
+diamond-pearl,MAP_HEARTHOME,Unionpolis
+diamond-pearl,MAP_HEARTHOME_POKEMART,Unionpolis — Boutique Pokémon
+diamond-pearl,MAP_HEARTHOME_GYM_FIRST_QUESTION_ROOM,Unionpolis — Arène
+diamond-pearl,MAP_HEARTHOME_GYM_FIRST_QUESTION_TRAINER_ROOM_1,"Unionpolis — Arène, salle 1"
+diamond-pearl,MAP_HEARTHOME_GYM_FIRST_QUESTION_TRAINER_ROOM_2,"Unionpolis — Arène, salle 2"
+diamond-pearl,MAP_HEARTHOME_GYM_SECOND_QUESTION_ROOM,Unionpolis — Arène
+diamond-pearl,MAP_HEARTHOME_GYM_SECOND_QUESTION_TRAINER_ROOM_1,"Unionpolis — Arène, salle 1"
+diamond-pearl,MAP_HEARTHOME_GYM_THIRD_QUESTION_ROOM,Unionpolis — Arène
+diamond-pearl,MAP_HEARTHOME_GYM_SECOND_QUESTION_TRAINER_ROOM_2,"Unionpolis — Arène, salle 2"
+diamond-pearl,MAP_HEARTHOME_GYM_FOURTH_QUESTION_ROOM,Unionpolis — Arène
+diamond-pearl,MAP_HEARTHOME_GYM_THIRD_QUESTION_TRAINER_ROOM_1,"Unionpolis — Arène, salle 1"
+diamond-pearl,MAP_HEARTHOME_GYM_THIRD_QUESTION_TRAINER_ROOM_2,"Unionpolis — Arène, salle 2"
+diamond-pearl,MAP_HEARTHOME_GYM_FOURTH_QUESTION_TRAINER_ROOM_1,"Unionpolis — Arène, salle 1"
+diamond-pearl,MAP_HEARTHOME_GYM_FOURTH_QUESTION_TRAINER_ROOM_2,"Unionpolis — Arène, salle 2"
+diamond-pearl,MAP_HEARTHOME_GYM_LEADER_ROOM,Unionpolis — Arène
+diamond-pearl,MAP_HEARTHOME_POKECENTER_1F,"Unionpolis — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_HEARTHOME_POKECENTER_2F,"Unionpolis — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_HEARTHOME_SOUTHEAST_HOUSE_1F,"Unionpolis — maison, rez-de-chaussée, partie sud-est"
+diamond-pearl,MAP_HEARTHOME_SOUTHEAST_HOUSE_2F,"Unionpolis — maison, 1er étage, partie sud-est"
+diamond-pearl,MAP_HEARTHOME_SOUTHEAST_HOUSE_ELEVATOR,"Unionpolis — ascenseur, maison, partie sud-est"
+diamond-pearl,MAP_HEARTHOME_POKEMON_FAN_CLUB,Unionpolis
+diamond-pearl,MAP_HEARTHOME_AMITY_SQUARE_WEST_GATEHOUSE,"Unionpolis — porte, partie ouest"
+diamond-pearl,MAP_HEARTHOME_AMITY_SQUARE_EAST_GATEHOUSE,"Unionpolis — porte, partie est"
+diamond-pearl,MAP_HEARTHOME_ROUTE_208_GATEHOUSE,Route 208 — porte
+diamond-pearl,MAP_HEARTHOME_ROUTE_209_GATEHOUSE,Route 209 — porte
+diamond-pearl,MAP_HEARTHOME_ROUTE_212_GATEHOUSE,Route 212 — porte
+diamond-pearl,MAP_HEARTHOME_NORTHEAST_HOUSE_1F,"Unionpolis — maison, rez-de-chaussée, partie nord-est"
+diamond-pearl,MAP_HEARTHOME_NORTHEAST_HOUSE_2F,"Unionpolis — maison, 1er étage, partie nord-est"
+diamond-pearl,MAP_HEARTHOME_NORTHEAST_HOUSE_ELEVATOR,"Unionpolis — ascenseur, maison, partie nord-est"
+diamond-pearl,MAP_HEARTHOME_BEBE_HOUSE,Unionpolis — maison
+diamond-pearl,MAP_HEARTHOME_POFFIN_HOUSE,Poffinerie — maison
+diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_LOBBY,Salle de Concours
+diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_STAGE,Salle de Concours
+diamond-pearl,MAP_HEARTHOME_FOREIGN_BUILDING,Bâtiment étranger
+diamond-pearl,MAP_PASTORIA,Verchamps
+diamond-pearl,MAP_PASTORIA_POKEMART,Verchamps — Boutique Pokémon
+diamond-pearl,MAP_PASTORIA_GYM,Verchamps — Arène
+diamond-pearl,MAP_PASTORIA_POKECENTER_1F,"Verchamps — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_PASTORIA_POKECENTER_2F,"Verchamps — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_PASTORIA_GREAT_MARSH_ENTRANCE_1F,Verchamps — rez-de-chaussée
+diamond-pearl,MAP_PASTORIA_GREAT_MARSH_ENTRANCE_2F,Verchamps — 1er étage
+diamond-pearl,MAP_PASTORIA_SOUTHWEST_HOUSE,"Verchamps — maison, partie sud-ouest"
+diamond-pearl,MAP_PASTORIA_WEST_HOUSE,"Verchamps — maison, partie ouest"
+diamond-pearl,MAP_PASTORIA_MOVE_TUTOR_HOUSE,Verchamps — maison
+diamond-pearl,MAP_PASTORIA_NORTHWEST_HOUSE,"Verchamps — maison, partie nord-ouest"
+diamond-pearl,MAP_PASTORIA_SCARF_GUY_HOUSE,Verchamps — maison
+diamond-pearl,MAP_VEILSTONE,Voilaroc
+diamond-pearl,MAP_VEILSTONE_GYM,Voilaroc — Arène
+diamond-pearl,MAP_VEILSTONE_POKECENTER_1F,"Voilaroc — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_VEILSTONE_POKECENTER_2F,"Voilaroc — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_VEILSTONE_GAME_CORNER,Casino
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_1F,Centre Commercial de Voilaroc — rez-de-chaussée
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_2F,Centre Commercial de Voilaroc — 1er étage
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_3F,Centre Commercial de Voilaroc — 2e étage
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_4F,Centre Commercial de Voilaroc — 3e étage
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_5F,Centre Commercial de Voilaroc — 4e étage
+diamond-pearl,MAP_VEILSTONE_DEPARTMENT_STORE_ELEVATOR,Centre Commercial de Voilaroc — ascenseur
+diamond-pearl,MAP_VEILSTONE_GALACTIC_WAREHOUSE_ENTRANCE,Voilaroc — entrepôt
+diamond-pearl,MAP_VEILSTONE_PRIZE_EXCHANGE,Voilaroc
+diamond-pearl,MAP_VEILSTONE_SOUTH_HOUSE,"Voilaroc — maison, partie sud"
+diamond-pearl,MAP_VEILSTONE_NORTH_HOUSE,"Voilaroc — maison, partie nord"
+diamond-pearl,MAP_VEILSTONE_NORTHEAST_HOUSE,"Voilaroc — maison, partie nord-est"
+diamond-pearl,MAP_VEILSTONE_MASSAGE_GIRL_HOUSE,Voilaroc — maison
+diamond-pearl,MAP_VEILSTONE_ROUTE_215_GATEHOUSE,Route 215 — porte
+diamond-pearl,MAP_SUNYSHORE,Rivamar
+diamond-pearl,MAP_SUNYSHORE_POKECENTER_1F,"Rivamar — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_SUNYSHORE_POKECENTER_2F,"Rivamar — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_SUNYSHORE_POKEMART,Rivamar — Boutique Pokémon
+diamond-pearl,MAP_SUNYSHORE_GYM_ROOM_1,"Rivamar — Arène, salle 1"
+diamond-pearl,MAP_SUNYSHORE_GYM_ROOM_2,"Rivamar — Arène, salle 2"
+diamond-pearl,MAP_SUNYSHORE_GYM_ROOM_3,"Rivamar — Arène, salle 3"
+diamond-pearl,MAP_SUNYSHORE_MARKET,Marché de Rivamar
+diamond-pearl,MAP_SUNYSHORE_JULIA_HOUSE,Rivamar — maison
+diamond-pearl,MAP_SUNYSHORE_WEST_HOUSE,"Rivamar — maison, partie ouest"
+diamond-pearl,MAP_SUNYSHORE_NORTH_HOUSE,"Rivamar — maison, partie nord"
+diamond-pearl,MAP_SUNYSHORE_POKETCH_DEVELOPER_HOUSE,Rivamar — maison
+diamond-pearl,MAP_SUNYSHORE_VISTA_LIGHTHOUSE_OBSERVATION_DECK,Phare Panorama
+diamond-pearl,MAP_SNOWPOINT,Frimapic
+diamond-pearl,MAP_SNOWPOINT_POKEMART,Frimapic — Boutique Pokémon
+diamond-pearl,MAP_SNOWPOINT_GYM,Frimapic — Arène
+diamond-pearl,MAP_SNOWPOINT_POKECENTER_1F,"Frimapic — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_SNOWPOINT_POKECENTER_2F,"Frimapic — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_SNOWPOINT_NORTHWEST_HOUSE,"Frimapic — maison, partie nord-ouest"
+diamond-pearl,MAP_SNOWPOINT_NORTHEAST_HOUSE,"Frimapic — maison, partie nord-est"
+diamond-pearl,MAP_POKEMON_LEAGUE,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_POKECENTER_1F,"Ligue Pokémon — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_POKEMON_LEAGUE_POKECENTER_2F,"Ligue Pokémon — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_POKEMON_LEAGUE_LOBBY_1F,Ligue Pokémon — rez-de-chaussée
+diamond-pearl,MAP_POKEMON_LEAGUE_ENTRANCE,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_AARON_ROOM,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_AARON_BERTHA_LINK,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_BERTHA_ROOM,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_BERTHA_FLINT_LINK,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_FLINT_ROOM,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_FLINT_LUCIAN_LINK,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_LUCIAN_ROOM,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_LUCIAN_CYNTHIA_LINK,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_CYNTHIA_ROOM,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_HALL_OF_FAME_CORRIDOR,Ligue Pokémon
+diamond-pearl,MAP_POKEMON_LEAGUE_HALL_OF_FAME,Ligue Pokémon
+diamond-pearl,MAP_FIGHT_AREA,Aire de Combat
+diamond-pearl,MAP_FIGHT_AREA_POKECENTER_1F,"Aire de Combat — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_FIGHT_AREA_POKECENTER_2F,"Aire de Combat — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_FIGHT_AREA_POKEMART,Aire de Combat — Boutique Pokémon
+diamond-pearl,MAP_FIGHT_AREA_BATTLE_PARK_GATEHOUSE,Parc des Combats — porte
+diamond-pearl,MAP_FIGHT_AREA_ROUTE_225_GATEHOUSE,Route 225 — porte
+diamond-pearl,MAP_FIGHT_AREA_SOUTHEAST_HOUSE,"Aire de Combat — maison, partie sud-est"
+diamond-pearl,MAP_FIGHT_AREA_SOUTHWEST_HOUSE,"Aire de Combat — maison, partie sud-ouest"
+diamond-pearl,MAP_OREBURGH_MINE_B1F,Mine Charbourg — sous-sol 1
+diamond-pearl,MAP_OREBURGH_MINE_B2F,Mine Charbourg — sous-sol 2
+diamond-pearl,MAP_VALLEY_WINDWORKS_EXTERIOR,Les Eoliennes
+diamond-pearl,MAP_VALLEY_WINDWORKS_INTERIOR,Les Eoliennes
+diamond-pearl,MAP_ETERNA_FOREST_EXTERIOR,Forêt Vestigion
+diamond-pearl,MAP_ETERNA_FOREST_INTERIOR,Forêt Vestigion
+diamond-pearl,MAP_FUEGO_IRONWORKS_EXTERIOR,Forge Fuego
+diamond-pearl,MAP_FUEGO_IRONWORKS_INTERIOR,Forge Fuego
+diamond-pearl,MAP_MOUNT_CORONET_SOUTH_1F,"Mont Couronné — rez-de-chaussée, partie sud"
+diamond-pearl,MAP_MOUNT_CORONET_SOUTH_2F,"Mont Couronné — 1er étage, partie sud"
+diamond-pearl,MAP_MOUNT_CORONET_SOUTH_3F,"Mont Couronné — 2e étage, partie sud"
+diamond-pearl,MAP_MOUNT_CORONET_NORTH_MOUNTAINSIDE,Mont Couronné — partie nord
+diamond-pearl,MAP_MOUNT_CORONET_SOUTH_MOUNTAINSIDE,Mont Couronné — partie sud
+diamond-pearl,MAP_MOUNT_CORONET_4F_ROOM_1,"Mont Couronné — 3e étage, salle 1"
+diamond-pearl,MAP_MOUNT_CORONET_4F_ROOM_3,"Mont Couronné — 3e étage, salle 3"
+diamond-pearl,MAP_MOUNT_CORONET_5F,Mont Couronné — 4e étage
+diamond-pearl,MAP_MOUNT_CORONET_6F,Mont Couronné — 5e étage
+diamond-pearl,MAP_MOUNT_CORONET_TUNNEL_ROOM,Mont Couronné
+diamond-pearl,MAP_MOUNT_CORONET_NORTH_1F_ROOM_2,"Mont Couronné — rez-de-chaussée, salle 2, partie nord"
+diamond-pearl,MAP_MOUNT_CORONET_NORTH_1F_ROOM_1,"Mont Couronné — rez-de-chaussée, salle 1, partie nord"
+diamond-pearl,MAP_MOUNT_CORONET_B1F,Mont Couronné — sous-sol 1
+diamond-pearl,MAP_MOUNT_CORONET_SPEAR_PILLAR,Colonnes Lances
+diamond-pearl,MAP_SOLACEON_RUINS_2F,Ruines Bonville — 1er étage
+diamond-pearl,MAP_SOLACEON_RUINS_1F_MAIN_ROOM,Ruines Bonville — rez-de-chaussée
+diamond-pearl,MAP_SOLACEON_RUINS_B1F_ROOM_1,"Ruines Bonville — sous-sol 1, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_1F_ROOM_1,"Ruines Bonville — rez-de-chaussée, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_B1F_MAIN_ROOM,Ruines Bonville — sous-sol 1
+diamond-pearl,MAP_SOLACEON_RUINS_1F_ROOM_2,"Ruines Bonville — rez-de-chaussée, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B2F_MAIN_ROOM,Ruines Bonville — sous-sol 2
+diamond-pearl,MAP_SOLACEON_RUINS_B1F_ROOM_2,"Ruines Bonville — sous-sol 1, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B3F_ROOM_1,"Ruines Bonville — sous-sol 3, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_B4F_ROOM_1,"Ruines Bonville — sous-sol 4, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_B2F_ROOM_1,"Ruines Bonville — sous-sol 2, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_B2F_ROOM_2,"Ruines Bonville — sous-sol 2, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B3F_MAIN_ROOM_1,"Ruines Bonville — sous-sol 3, salle 1"
+diamond-pearl,MAP_SOLACEON_RUINS_B3F_MAIN_ROOM_2,"Ruines Bonville — sous-sol 3, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B4F_MAIN_ROOM,Ruines Bonville — sous-sol 4
+diamond-pearl,MAP_SOLACEON_RUINS_B4F_ROOM_2,"Ruines Bonville — sous-sol 4, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B3F_ROOM_2,"Ruines Bonville — sous-sol 3, salle 2"
+diamond-pearl,MAP_SOLACEON_RUINS_B3F_ROOM_3,"Ruines Bonville — sous-sol 3, salle 3"
+diamond-pearl,MAP_VICTORY_ROAD_1F,Route Victoire — rez-de-chaussée
+diamond-pearl,MAP_VICTORY_ROAD_2F,Route Victoire — 1er étage
+diamond-pearl,MAP_VICTORY_ROAD_B1F,Route Victoire — sous-sol 1
+diamond-pearl,MAP_VICTORY_ROAD_1F_BACK_2,Route Victoire — rez-de-chaussée
+diamond-pearl,MAP_VICTORY_ROAD_1F_BACK_1,Route Victoire — rez-de-chaussée
+diamond-pearl,MAP_VICTORY_ROAD_1F_BACK_3,Route Victoire — rez-de-chaussée
+diamond-pearl,MAP_PAL_PARK,Parc des Amis
+diamond-pearl,MAP_AMITY_SQUARE,Square Paisible
+diamond-pearl,MAP_RAVAGED_PATH,Chemin Rocheux
+diamond-pearl,MAP_FLOAROMA_MEADOW,Pré Floraville
+diamond-pearl,MAP_FLOAROMA_MEADOW_HOUSE,Pré Floraville — maison
+diamond-pearl,MAP_OREBURGH_GATE_1F,"Entrée Charbourg — porte, rez-de-chaussée"
+diamond-pearl,MAP_OREBURGH_GATE_B1F,"Entrée Charbourg — porte, sous-sol 1"
+diamond-pearl,MAP_FULLMOON_ISLAND_EXTERIOR,Île Pleine Lune
+diamond-pearl,MAP_FULLMOON_ISLAND_INTERIOR,Île Pleine Lune
+diamond-pearl,MAP_STARK_MOUNTAIN_EXTERIOR,Mont Abrupt
+diamond-pearl,MAP_STARK_MOUNTAIN_INTERIOR_1,Mont Abrupt
+diamond-pearl,MAP_STARK_MOUNTAIN_INTERIOR_2,Mont Abrupt
+diamond-pearl,MAP_STARK_MOUNTAIN_INTERIOR_3,Mont Abrupt
+diamond-pearl,MAP_SENDOFF_SPRING,Source Adieu
+diamond-pearl,MAP_TURNBACK_CAVE_ENTRANCE,Grotte Retour
+diamond-pearl,MAP_TURNBACK_CAVE_PILLAR_ROOM,Grotte Retour — salle du pilier
+diamond-pearl,MAP_TURNBACK_CAVE_GIRATINA_ROOM,Grotte Retour — salle de Giratina
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_3,Grotte Retour — salle 3
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_6,Grotte Retour — salle 6
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_5,Grotte Retour — salle 5
+diamond-pearl,MAP_FLOWER_PARADISE,Paradis Fleuri
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_1F,Temple de Frimapic — rez-de-chaussée
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_B1F,Temple de Frimapic — sous-sol 1
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_B2F,Temple de Frimapic — sous-sol 2
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_B3F,Temple de Frimapic — sous-sol 3
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_B4F,Temple de Frimapic — sous-sol 4
+diamond-pearl,MAP_SNOWPOINT_TEMPLE_B5F,Temple de Frimapic — sous-sol 5
+diamond-pearl,MAP_WAYWARD_CAVE_1F,Grotte Revêche — rez-de-chaussée
+diamond-pearl,MAP_WAYWARD_CAVE_B1F,Grotte Revêche — sous-sol 1
+diamond-pearl,MAP_RUIN_MANIAC_CAVE_STAGE_1,Grotte Ruineman.
+diamond-pearl,MAP_TROPHY_GARDEN,Jardin Trophée
+diamond-pearl,MAP_IRON_ISLAND_EXTERIOR,Île de Fer
+diamond-pearl,MAP_IRON_ISLAND_1F,Île de Fer — rez-de-chaussée
+diamond-pearl,MAP_IRON_ISLAND_B1F_ROOM_1,"Île de Fer — sous-sol 1, salle 1"
+diamond-pearl,MAP_IRON_ISLAND_B1F_ROOM_2,"Île de Fer — sous-sol 1, salle 2"
+diamond-pearl,MAP_IRON_ISLAND_B2F_ROOM_1,"Île de Fer — sous-sol 2, salle 1"
+diamond-pearl,MAP_IRON_ISLAND_B2F_ROOM_2,"Île de Fer — sous-sol 2, salle 2"
+diamond-pearl,MAP_IRON_ISLAND_B3F,Île de Fer — sous-sol 3
+diamond-pearl,MAP_OLD_CHATEAU_ENTRANCE,Vieux Château
+diamond-pearl,MAP_OLD_CHATEAU_1F,Vieux Château — rez-de-chaussée
+diamond-pearl,MAP_OLD_CHATEAU_2F_SIDE_ROOMS,Vieux Château — 1er étage
+diamond-pearl,MAP_OLD_CHATEAU_2F_CORRIDOR,Vieux Château — 1er étage
+diamond-pearl,MAP_OLD_CHATEAU_2F_ROOM_1,"Vieux Château — 1er étage, salle 1"
+diamond-pearl,MAP_OLD_CHATEAU_2F_ROOM_2,"Vieux Château — 1er étage, salle 2"
+diamond-pearl,MAP_OLD_CHATEAU_2F_ROOM_3,"Vieux Château — 1er étage, salle 3"
+diamond-pearl,MAP_OLD_CHATEAU_2F_ROOM_4,"Vieux Château — 1er étage, salle 4"
+diamond-pearl,MAP_OLD_CHATEAU_2F_ROOM_5,"Vieux Château — 1er étage, salle 5"
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_1F,QG Galaxie — rez-de-chaussée
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_2F,QG Galaxie — 1er étage
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_3F,QG Galaxie — 2e étage
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_4F_1,QG Galaxie — 3e étage
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_B1F,QG Galaxie — sous-sol 1
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_B2F,QG Galaxie — sous-sol 2
+diamond-pearl,MAP_LAKE_VERITY,Lac Vérité
+diamond-pearl,MAP_LAKE_VERITY_GALACTIC,Lac Vérité
+diamond-pearl,MAP_VERITY_CAVERN,Caverne Vérité
+diamond-pearl,MAP_LAKE_VALOR_GALACTIC,Lac Courage
+diamond-pearl,MAP_LAKE_VALOR,Lac Courage
+diamond-pearl,MAP_VALOR_CAVERN,Caverne Courage
+diamond-pearl,MAP_LAKE_ACUITY,Lac Savoir
+diamond-pearl,MAP_LAKE_ACUITY_GALACTIC,Lac Savoir
+diamond-pearl,MAP_ACUITY_CAVERN,Caverne Savoir
+diamond-pearl,MAP_NEWMOON_ISLAND_EXTERIOR,Île Nouvellelune
+diamond-pearl,MAP_NEWMOON_ISLAND_INTERIOR,Île Nouvellelune
+diamond-pearl,MAP_BATTLE_PARK,Parc des Combats
+diamond-pearl,MAP_BATTLE_PARK_EXCHANGE_SERVICE_CORNER,Parc des Combats
+diamond-pearl,MAP_BATTLE_TOWER_LOBBY,Tour de Combat
+diamond-pearl,MAP_BATTLE_TOWER_ELEVATOR,Tour de Combat — ascenseur
+diamond-pearl,MAP_BATTLE_TOWER_CORRIDOR_MULTI,Tour de Combat — couloir des combats multi
+diamond-pearl,MAP_BATTLE_TOWER_CORRIDOR_WIFI,Tour de Combat — couloir des combats Wi-Fi
+diamond-pearl,MAP_BATTLE_TOWER_ARENA_MULTI,Tour de Combat — salle des combats multi
+diamond-pearl,MAP_BATTLE_TOWER_ARENA_WIFI,Tour de Combat — salle des combats Wi-Fi
+diamond-pearl,MAP_WIFI_SINGLE_BATTLE_AREA,Club Communication — combat simple
+diamond-pearl,MAP_WIFI_MULTI_BATTLE_AREA,Club Communication — combat multi
+diamond-pearl,MAP_VERITY_LAKEFRONT,Rive Lac Vérité
+diamond-pearl,MAP_VALOR_LAKEFRONT,Rive Lac Courage
+diamond-pearl,MAP_VALOR_LAKEFRONT_SEVEN_STARS_RESTAURANT,Restaurant Sept Étoiles
+diamond-pearl,MAP_VALOR_LAKEFRONT_GRAND_LAKE_EAST_ROOM,Grand Lac — partie est
+diamond-pearl,MAP_VALOR_LAKEFRONT_GRAND_LAKE_WEST_ROOM,Grand Lac — partie ouest
+diamond-pearl,MAP_ACUITY_LAKEFRONT,Rive Lac Savoir
+diamond-pearl,MAP_SPRING_PATH,Chemin Source
+diamond-pearl,MAP_ROUTE_201,Route 201
+diamond-pearl,MAP_ROUTE_202,Route 202
+diamond-pearl,MAP_ROUTE_203,Route 203
+diamond-pearl,MAP_ROUTE_204_SOUTH,Route 204 — partie sud
+diamond-pearl,MAP_ROUTE_204_NORTH,Route 204 — partie nord
+diamond-pearl,MAP_ROUTE_205_SOUTH,Route 205 — partie sud
+diamond-pearl,MAP_ROUTE_205_HOUSE,Route 205 — maison
+diamond-pearl,MAP_ROUTE_205_NORTH,Route 205 — partie nord
+diamond-pearl,MAP_ROUTE_206,Route 206
+diamond-pearl,MAP_ROUTE_206_CYCLING_ROAD_GATEHOUSE,Route 206 — porte
+diamond-pearl,MAP_ROUTE_207,Route 207
+diamond-pearl,MAP_ROUTE_208,Route 208
+diamond-pearl,MAP_ROUTE_208_BERRY_MASTER_HOUSE,Route 208 — maison
+diamond-pearl,MAP_ROUTE_209,Route 209
+diamond-pearl,MAP_ROUTE_209_LOST_TOWER_1F,Tour Perdue — rez-de-chaussée
+diamond-pearl,MAP_ROUTE_209_LOST_TOWER_2F,Tour Perdue — 1er étage
+diamond-pearl,MAP_ROUTE_209_LOST_TOWER_3F,Tour Perdue — 2e étage
+diamond-pearl,MAP_ROUTE_209_LOST_TOWER_4F,Tour Perdue — 3e étage
+diamond-pearl,MAP_ROUTE_209_LOST_TOWER_5F,Tour Perdue — 4e étage
+diamond-pearl,MAP_ROUTE_210_SOUTH,Route 210 — partie sud
+diamond-pearl,MAP_ROUTE_210_NORTH,Route 210 — partie nord
+diamond-pearl,MAP_ROUTE_210_GRANDMA_WILMA_HOUSE,Route 210 — maison
+diamond-pearl,MAP_ROUTE_211_WEST,Route 211 — partie ouest
+diamond-pearl,MAP_ROUTE_211_EAST,Route 211 — partie est
+diamond-pearl,MAP_ROUTE_212_NORTH,Route 212 — partie nord
+diamond-pearl,MAP_ROUTE_212_POKEMON_MANSION_LOBBY,Manoir Pokémon
+diamond-pearl,MAP_ROUTE_212_POKEMON_MANSION_WEST_ROOMS,Manoir Pokémon — partie ouest
+diamond-pearl,MAP_ROUTE_212_POKEMON_MANSION_EAST_ROOM,Manoir Pokémon — partie est
+diamond-pearl,MAP_ROUTE_212_SOUTH,Route 212 — partie sud
+diamond-pearl,MAP_ROUTE_212_SHARD_WEATHER_TM_HOUSE,Route 212 — maison
+diamond-pearl,MAP_ROUTE_213,Route 213
+diamond-pearl,MAP_ROUTE_213_PASTORIA_GATEHOUSE,Route 213 — porte
+diamond-pearl,MAP_ROUTE_213_FOOTSTEP_HOUSE,Maison du Docteur Petitpas
+diamond-pearl,MAP_ROUTE_213_GRAND_LAKE_RECEPTION,Grand Lac
+diamond-pearl,MAP_ROUTE_213_GRAND_LAKE_EAST_ROOM,Grand Lac — partie est
+diamond-pearl,MAP_ROUTE_213_GRAND_LAKE_WEST_ROOM,Grand Lac — partie ouest
+diamond-pearl,MAP_ROUTE_213_GRAND_LAKE_NORTHEAST_ROOM,Grand Lac — partie nord-est
+diamond-pearl,MAP_ROUTE_214,Route 214
+diamond-pearl,MAP_ROUTE_214_VEILSTONE_GATEHOUSE,Route 214 — porte
+diamond-pearl,MAP_ROUTE_215,Route 215
+diamond-pearl,MAP_ROUTE_216,Route 216
+diamond-pearl,MAP_ROUTE_216_SNOWBOUND_LODGE,Route 216
+diamond-pearl,MAP_ROUTE_217,Route 217
+diamond-pearl,MAP_ROUTE_217_SOUTH_HOUSE,"Route 217 — maison, partie sud"
+diamond-pearl,MAP_ROUTE_217_NORTH_HOUSE,"Route 217 — maison, partie nord"
+diamond-pearl,MAP_ROUTE_218,Route 218
+diamond-pearl,MAP_ROUTE_218_JUBLIFE_GATEHOUSE,Route 218 — porte
+diamond-pearl,MAP_ROUTE_218_CANALAVE_GATEHOUSE,Route 218 — porte
+diamond-pearl,MAP_ROUTE_219,Route 219
+diamond-pearl,MAP_ROUTE_221,Route 221
+diamond-pearl,MAP_ROUTE_221_PAL_PARK_ENTRANCE,Parc des Amis
+diamond-pearl,MAP_ROUTE_221_LEVEL_ITEM_HOUSE,Route 221 — maison
+diamond-pearl,MAP_ROUTE_222,Route 222
+diamond-pearl,MAP_ROUTE_222_PIKACHU_FAN_CLUB,Route 222
+diamond-pearl,MAP_ROUTE_222_POKEMON_SIZE_CONTEST_HOUSE,Route 222 — maison
+diamond-pearl,MAP_ROUTE_222_SUNYSHORE_GATEOUSE,Route 222 — porte
+diamond-pearl,MAP_ROUTE_224,Route 224
+diamond-pearl,MAP_ROUTE_225,Route 225
+diamond-pearl,MAP_ROUTE_227,Route 227
+diamond-pearl,MAP_ROUTE_228,Route 228
+diamond-pearl,MAP_ROUTE_229,Route 229
+diamond-pearl,MAP_RECORD,Salle de mélange des données
+diamond-pearl,MAP_TWINLEAF,Bonaugure
+diamond-pearl,MAP_TWINLEAF_PLAYER_HOUSE_1F,"Bonaugure — maison du joueur, rez-de-chaussée"
+diamond-pearl,MAP_TWINLEAF_PLAYER_HOUSE_2F,"Bonaugure — maison du joueur, 1er étage"
+diamond-pearl,MAP_TWINLEAF_RIVAL_HOUSE_1F,"Bonaugure — maison du rival, rez-de-chaussée"
+diamond-pearl,MAP_TWINLEAF_RIVAL_HOUSE_2F,"Bonaugure — maison du rival, 1er étage"
+diamond-pearl,MAP_TWINLEAF_NORTHEAST_HOUSE,"Bonaugure — maison, partie nord-est"
+diamond-pearl,MAP_TWINLEAF_SOUTHWEST_HOUSE,"Bonaugure — maison, partie sud-ouest"
+diamond-pearl,MAP_SANDGEM,Littorella
+diamond-pearl,MAP_SANDGEM_POKEMART,Littorella — Boutique Pokémon
+diamond-pearl,MAP_SANDGEM_POKECENTER_1F,"Littorella — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_SANDGEM_POKECENTER_2F,"Littorella — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_SANDGEM_ROWANS_LAB,Littorella — laboratoire
+diamond-pearl,MAP_SANDGEM_PROFESSOR_ASSISTANT_HOUSE_1F,"Littorella — maison, rez-de-chaussée"
+diamond-pearl,MAP_SANDGEM_PROFESSOR_ASSISTANT_HOUSE_2F,"Littorella — maison, 1er étage"
+diamond-pearl,MAP_SANDGEM_SOUTHWEST_HOUSE,"Littorella — maison, partie sud-ouest"
+diamond-pearl,MAP_FLOAROMA,Floraville
+diamond-pearl,MAP_FLOAROMA_POKEMART,Floraville — Boutique Pokémon
+diamond-pearl,MAP_FLOAROMA_POKECENTER_1F,"Floraville — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_FLOAROMA_POKECENTER_2F,"Floraville — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_FLOAROMA_FLOWER_SHOP,Fleuriste
+diamond-pearl,MAP_FLOAROMA_SOUTHEAST_HOUSE,"Floraville — maison, partie sud-est"
+diamond-pearl,MAP_FLOAROMA_MIDDLE_HOUSE,Floraville — maison
+diamond-pearl,MAP_SOLACEON,Bonville
+diamond-pearl,MAP_SOLACEON_POKEMART,Bonville — Boutique Pokémon
+diamond-pearl,MAP_SOLACEON_POKECENTER_1F,"Bonville — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_SOLACEON_POKECENTER_2F,"Bonville — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_SOLACEON_DAYCARE,Pension Pokémon
+diamond-pearl,MAP_SOLACEON_NORTHEAST_HOUSE,"Bonville — maison, partie nord-est"
+diamond-pearl,MAP_SOLACEON_NEWS_PRESS,Bonville
+diamond-pearl,MAP_SOLACEON_NORTH_HOUSE,"Bonville — maison, partie nord"
+diamond-pearl,MAP_SOLACEON_SEAL_HOUSE,Bonville — maison
+diamond-pearl,MAP_CELESTIC,Célestia
+diamond-pearl,MAP_CELESTIC_POKECENTER_1F,"Célestia — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_CELESTIC_POKECENTER_2F,"Célestia — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_CELESTIC_CYNTHIA_GRANDPARENTS_HOUSE,Célestia — maison
+diamond-pearl,MAP_CELESTIC_SHOP,Célestia
+diamond-pearl,MAP_CELESTIC_NORTHEAST_HOUSE,"Célestia — maison, partie nord-est"
+diamond-pearl,MAP_CELESTIC_SOUTHWEST_HOUSE,"Célestia — maison, partie sud-ouest"
+diamond-pearl,MAP_CELESTIC_RUINS,Célestia
+diamond-pearl,MAP_SURVIVAL_AREA,Aire de Survie
+diamond-pearl,MAP_SURVIVAL_AREA_POKEMART,Aire de Survie — Boutique Pokémon
+diamond-pearl,MAP_SURVIVAL_AREA_POKECENTER_1F,"Aire de Survie — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_SURVIVAL_AREA_POKECENTER_2F,"Aire de Survie — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_SURVIVAL_AREA_WEST_HOUSE,"Aire de Survie — maison, partie ouest"
+diamond-pearl,MAP_SURVIVAL_AREA_SOUTH_HOUSE,"Aire de Survie — maison, partie sud"
+diamond-pearl,MAP_SURVIVAL_AREA_NORTH_HOUSE,"Aire de Survie — maison, partie nord"
+diamond-pearl,MAP_RESORT_AREA,Aire de Détente
+diamond-pearl,MAP_RESORT_AREA_POKECENTER_1F,"Aire de Détente — Centre Pokémon, rez-de-chaussée"
+diamond-pearl,MAP_RESORT_AREA_POKECENTER_2F,"Aire de Détente — Centre Pokémon, 1er étage"
+diamond-pearl,MAP_RESORT_AREA_RIBBON_SYNDICATE_1F,Aire de Détente — rez-de-chaussée
+diamond-pearl,MAP_RESORT_AREA_RIBBON_SYNDICATE_2F,Aire de Détente — 1er étage
+diamond-pearl,MAP_RESORT_AREA_RIBBON_SYNDICATE_ELEVATOR,Aire de Détente — ascenseur
+diamond-pearl,MAP_RESORT_AREA_SOUTHWEST_HOUSE,"Aire de Détente — maison, partie sud-ouest"
+diamond-pearl,MAP_RESORT_AREA_SOUTHEAST_HOUSE,"Aire de Détente — maison, partie sud-est"
+diamond-pearl,MAP_UNION_ROOM,Salle Union
+diamond-pearl,MAP_ROUTE_220,Route 220
+diamond-pearl,MAP_ROUTE_223,Route 223
+diamond-pearl,MAP_ROUTE_226,Route 226
+diamond-pearl,MAP_ROUTE_230,Route 230
+diamond-pearl,MAP_JUBLIFE_POKECENTER_B1F,"Féli-Cité — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_CANALAVE_POKECENTER_B1F,"Joliberges — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_OREBURGH_POKECENTER_B1F,"Charbourg — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_ETERNA_POKECENTER_B1F,"Vestigion — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_HEARTHOME_POKECENTER_B1F,"Unionpolis — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_PASTORIA_POKECENTER_B1F,"Verchamps — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_VEILSTONE_POKECENTER_B1F,"Voilaroc — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_SUNYSHORE_POKECENTER_B1F,"Rivamar — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_SNOWPOINT_POKECENTER_B1F,"Frimapic — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_POKEMON_LEAGUE_POKECENTER_B1F,"Ligue Pokémon — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_FIGHT_AREA_POKECENTER_B1F,"Aire de Combat — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_SANDGEM_POKECENTER_B1F,"Littorella — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_FLOAROMA_POKECENTER_B1F,"Floraville — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_SOLACEON_POKECENTER_B1F,"Bonville — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_CELESTIC_POKECENTER_B1F,"Célestia — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_SURVIVAL_AREA_POKECENTER_B1F,"Aire de Survie — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_RESORT_AREA_POKECENTER_B1F,"Aire de Détente — Centre Pokémon, sous-sol 1"
+diamond-pearl,MAP_CANALAVE_WEST_HOUSE,"Joliberges — maison, partie ouest"
+diamond-pearl,MAP_ROUTE_210_CAFE,Café Cabane
+diamond-pearl,MAP_BATTLE_TOWER_PARTNER_ROOM,Tour de Combat
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_4F_BACK,QG Galaxie — 3e étage
+diamond-pearl,MAP_POKEMON_LEAGUE_LOBBY_2F,Ligue Pokémon — 1er étage
+diamond-pearl,MAP_POKEMON_LEAGUE_LOBBY_B1F,Ligue Pokémon — sous-sol 1
+diamond-pearl,MAP_VEILSTONE_GALACTIC_HEADQUARTERS_4F_2,QG Galaxie — 3e étage
+diamond-pearl,MAP_ROUTE_225_HOUSE,Route 225 — maison
+diamond-pearl,MAP_ROUTE_226_HOUSE,Route 226 — maison
+diamond-pearl,MAP_ROUTE_227_HOUSE,Route 227 — maison
+diamond-pearl,MAP_ROUTE_228_ROUTE_226_GATEHOUSE,Route 228 — porte
+diamond-pearl,MAP_ROUTE_228_NORTH_HOUSE,"Route 228 — maison, partie nord"
+diamond-pearl,MAP_ROUTE_228_SOUTH_HOUSE,"Route 228 — maison, partie sud"
+diamond-pearl,MAP_GREAT_MARSH_AREA_1,Grand Marais — zone 1
+diamond-pearl,MAP_GREAT_MARSH_AREA_2,Grand Marais — zone 2
+diamond-pearl,MAP_GREAT_MARSH_AREA_3,Grand Marais — zone 3
+diamond-pearl,MAP_GREAT_MARSH_AREA_4,Grand Marais — zone 4
+diamond-pearl,MAP_GREAT_MARSH_AREA_5,Grand Marais — zone 5
+diamond-pearl,MAP_GREAT_MARSH_AREA_6,Grand Marais — zone 6
+diamond-pearl,MAP_HALL_OF_ORIGIN,Salle Originelle
+diamond-pearl,MAP_RUIN_MANIAC_CAVE_STAGE_2,Grotte Ruineman.
+diamond-pearl,MAP_RUIN_MANIAC_CAVE_STAGE_3,Tunnel Runiem.
+diamond-pearl,MAP_IRON_ISLAND_HOUSE,Île de Fer — maison
+diamond-pearl,MAP_SOLACEON_RUINS_B4F_ROOM_3,"Ruines Bonville — sous-sol 4, salle 3"
+diamond-pearl,MAP_SUNYSHORE_VISTA_LIGHTHOUSE_ELEVATOR,Phare Panorama — ascenseur
+diamond-pearl,MAP_JUBLIFE_SOUTHWEST_HOUSE_2F,"Féli-Cité — maison, 1er étage, partie sud-ouest"
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_4,Grotte Retour — salle 4
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_2,Grotte Retour — salle 2
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_1,Grotte Retour — salle 1
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_12,Grotte Retour — salle 12
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_9,Grotte Retour — salle 9
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_10,Grotte Retour — salle 10
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_11,Grotte Retour — salle 11
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_7,Grotte Retour — salle 7
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_8,Grotte Retour — salle 8
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_18,Grotte Retour — salle 18
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_15,Grotte Retour — salle 15
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_16,Grotte Retour — salle 16
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_13,Grotte Retour — salle 13
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_17,Grotte Retour — salle 17
+diamond-pearl,MAP_TURNBACK_CAVE_RANDOM_ROOM_14,Grotte Retour — salle 14
+diamond-pearl,MAP_HEARTHOME_SUPER_CONTEST_HALL_SEATS,Salle de Concours
+diamond-pearl,SINNOH,Sinnoh
+diamond-pearl,MAP_ROUTE_231_UNUSED,Passage Marin

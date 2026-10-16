@@ -1,0 +1,3 @@
+family,texture_set,kind,source,target,reason
+platinum,71,palette,dun_floor2_d20,dun_floor2_20,Le modèle 507 de l'Île de Fer demande dun_floor2_d20 ; seule la palette dun_floor2_20 du sol est présente dans le jeu 71
+diamond-pearl,42,palette,dun_apeak,apeak,Les modèles du Mont Couronné et de la Grotte Revêche demandent dun_apeak ; la palette de dun_allpeak s'appelle apeak dans le jeu 42
