@@ -37,6 +37,7 @@ from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import roaming_maps
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_wild import roaming_maps as gen3_roaming_maps
+from .pret_gen4 import Gen4PretRepo
 from .pret_hoenn_caves import moving_cave_areas
 from .pret_reader import open_pret
 from .sources import DATA_DIR, fetch_pret
@@ -353,7 +354,12 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
 
             result[game.version_group] = export_gen3_game(cache, output / game.version_group, game)
             continue
-        game_maps = GameMaps(open_pret(game, fetch_pret(cache, game.pret_repo)), game, layout)
+        if game.pret_format == PretFormat.GEN4:
+            raise ValueError(f"{game.version_group} : cartes DS sans rendu, à construire avant d'activer le jeu")
+        repo = open_pret(game, fetch_pret(cache, game.pret_repo))
+        if isinstance(repo, Gen4PretRepo):
+            raise ValueError(f"{game.version_group} : lecteur DS inattendu pour des cartes en tuiles")
+        game_maps = GameMaps(repo, game, layout)
         family_names = names.get(game.map_family, {})
         family_areas = read_map_areas(game.version_group).get(game.map_family, [])
         output_game = output / game.version_group

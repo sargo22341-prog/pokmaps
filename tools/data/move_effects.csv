@@ -442,3 +442,260 @@ gen3,EFFECT_WEATHER_BALL,,,Inflige des dégâts ; son type change avec la mété
 gen3,EFFECT_WILL_O_WISP,,,"Brûle la cible, sauf un Pokémon de type Feu."
 gen3,EFFECT_WISH,,,"À la fin du tour suivant, restaure la moitié des PV max du Pokémon qui occupe la place du lanceur."
 gen3,EFFECT_YAWN,,,Rend la cible somnolente ; elle s’endort à la fin du tour suivant si elle reste sur le terrain.
+gen4,000,,,Inflige des dégâts sans effet supplémentaire.
+gen4,001,,,"Endort la cible pendant un à quatre tours, sauf les immunités du moteur."
+gen4,002,,,Inflige des dégâts et peut empoisonner la cible (sauf un Pokémon de type Poison ou Acier).
+gen4,003,,,Inflige des dégâts ; le lanceur récupère la moitié des dégâts infligés.
+gen4,004,,,Inflige des dégâts et peut brûler la cible (sauf un Pokémon de type Feu).
+gen4,005,,,Inflige des dégâts et peut geler la cible (sauf un Pokémon de type Glace ou par temps ensoleillé).
+gen4,006,,,Inflige des dégâts et peut paralyser la cible.
+gen4,007,,,Le lanceur est mis K.O. ; la Défense de la cible est divisée par deux pour le calcul des dégâts.
+gen4,008,,,Ne fonctionne que sur une cible endormie ; le lanceur récupère la moitié des dégâts infligés.
+gen4,009,,,Relance la dernière attaque utilisée par la cible.
+gen4,010,,,Augmente l’Attaque du lanceur d’un niveau.
+gen4,011,,,Augmente la Défense du lanceur d’un niveau.
+gen4,013,,,Augmente l’Attaque Spéciale du lanceur d’un niveau.
+gen4,016,,,Augmente l’Esquive du lanceur d’un niveau.
+gen4,017,,,Inflige des dégâts sans jamais rater.
+gen4,018,,,Baisse l’Attaque de la cible d’un niveau.
+gen4,019,,,Baisse la Défense de la cible d’un niveau.
+gen4,020,,,Baisse la Vitesse de la cible d’un niveau.
+gen4,023,,,Baisse la Précision de la cible d’un niveau.
+gen4,024,,,Baisse l’Esquive de la cible d’un niveau.
+gen4,025,,,Annule les changements de statistiques de tous les Pokémon présents sur le terrain.
+gen4,026,,,"Le lanceur encaisse les coups pendant deux tours, puis rend le double des dégâts reçus."
+gen4,027,,,"Le lanceur attaque sans pouvoir s’arrêter pendant 2 ou 3 tours, puis devient confus."
+gen4,028,,,"Agit en dernier : met fin à un combat contre un Pokémon sauvage, ou force le dresseur adverse à changer de Pokémon."
+gen4,029,,,Frappe 2 à 5 fois de suite.
+gen4,030,,,"Le lanceur prend le type d’une de ses attaques, choisie au hasard parmi celles qui ne sont pas de son type."
+gen4,031,,,"Inflige des dégâts et peut apeurer la cible : si le lanceur agit en premier, elle ne peut pas attaquer ce tour-ci."
+gen4,032,,,Le lanceur récupère la moitié de ses PV max.
+gen4,033,,,Empoisonne gravement la cible : les dégâts du poison augmentent à chaque tour (sauf un Pokémon de type Poison ou Acier).
+gen4,034,,,Inflige des dégâts et fait gagner de l’argent à la fin du combat : cinq fois le niveau du lanceur par utilisation.
+gen4,035,,,"Pendant cinq tours, réduit les dégâts spéciaux subis par le camp du lanceur, sauf les coups critiques."
+gen4,036,,,"Inflige des dégâts et peut brûler, geler ou paralyser la cible."
+gen4,037,,,"Endort le lanceur pour deux tours, restaure tous ses PV et soigne son altération de statut."
+gen4,038,,,Met la cible K.O. en un coup. Échoue si la cible a un niveau plus élevé que le lanceur ; touche d’autant plus souvent que le lanceur la dépasse en niveau.
+gen4,039,,,"Le lanceur se prépare pendant un tour, puis frappe au tour suivant. Taux de coups critiques élevé."
+gen4,040,,,Divise par deux les PV restants de la cible.
+gen4,041,,,Inflige toujours 40 PV de dégâts.
+gen4,042,,,Inflige des dégâts et piège la cible pendant 2 à 5 tours : elle ne peut pas fuir et perd un seizième de ses PV max à chaque tour.
+gen4,043,,,Inflige des dégâts. Taux de coups critiques élevé.
+gen4,044,,,Frappe deux fois de suite.
+gen4,045,,,"Si l’attaque rate, le lanceur perd la moitié des dégâts qu’il aurait infligés, au plus la moitié des PV max de la cible."
+gen4,046,,,"Pendant cinq tours, protège le camp du lanceur des baisses de statistiques infligées par les adversaires."
+gen4,047,,,Augmente fortement le taux de coups critiques du lanceur.
+gen4,048,,,Inflige des dégâts ; le lanceur subit en contrecoup un quart des dégâts infligés.
+gen4,049,,,Rend la cible confuse pendant un à quatre tours : elle peut se blesser au lieu d’attaquer.
+gen4,050,,,Augmente l’Attaque du lanceur de deux niveaux.
+gen4,051,,,Augmente la Défense du lanceur de deux niveaux.
+gen4,052,,,Augmente la Vitesse du lanceur de deux niveaux.
+gen4,053,,,Augmente l’Attaque Spéciale du lanceur de deux niveaux.
+gen4,054,,,Augmente la Défense Spéciale du lanceur de deux niveaux.
+gen4,057,,,"Le lanceur prend l’apparence, les types, les statistiques et les attaques de la cible."
+gen4,058,,,Baisse l’Attaque de la cible de deux niveaux.
+gen4,059,,,Baisse la Défense de la cible de deux niveaux.
+gen4,060,,,Baisse la Vitesse de la cible de deux niveaux.
+gen4,062,,,Baisse la Défense Spéciale de la cible de deux niveaux.
+gen4,065,,,"Pendant cinq tours, réduit les dégâts physiques subis par le camp du lanceur, sauf les coups critiques."
+gen4,066,,,"Empoisonne la cible, sauf un Pokémon de type Poison ou Acier."
+gen4,067,,,Paralyse la cible.
+gen4,068,,,Inflige des dégâts et peut baisser l’Attaque de la cible d’un niveau.
+gen4,069,,,Inflige des dégâts et peut baisser la Défense de la cible d’un niveau.
+gen4,070,,,Inflige des dégâts et peut baisser la Vitesse de la cible d’un niveau.
+gen4,071,,,Inflige des dégâts et peut baisser l’Attaque Spéciale de la cible d’un niveau.
+gen4,072,,,Inflige des dégâts et peut baisser la Défense Spéciale de la cible d’un niveau.
+gen4,073,,,Inflige des dégâts et peut baisser la Précision de la cible d’un niveau.
+gen4,075,,,"Se prépare au premier tour puis frappe au suivant, avec un taux de coups critiques élevé, et peut apeurer la cible."
+gen4,076,,,Inflige des dégâts et peut rendre la cible confuse.
+gen4,077,,,"Frappe deux fois de suite et peut empoisonner la cible, sauf un Pokémon de type Poison ou Acier."
+gen4,078,,,"Inflige des dégâts en agissant après les attaques ordinaires, sans vérification de Précision."
+gen4,079,,,Le lanceur sacrifie un quart de ses PV max pour créer un clone qui encaisse les attaques à sa place.
+gen4,080,,,Inflige des dégâts ; le lanceur doit se reposer au tour suivant.
+gen4,081,,,"Tant que le lanceur continue d’utiliser Frénésie, son Attaque augmente chaque fois qu’il est touché."
+gen4,082,,,"Copie la dernière attaque utilisée par la cible, qui remplace Copie jusqu’à ce que le lanceur quitte le combat."
+gen4,083,,,Lance une attaque choisie au hasard.
+gen4,084,,,"La cible perd un huitième de ses PV max à chaque tour, que le lanceur récupère. Sans effet sur les Pokémon de type Plante."
+gen4,085,,,N’a aucun effet.
+gen4,086,,,Bloque la dernière attaque utilisée par la cible pendant trois à six tours.
+gen4,087,,,Inflige autant de dégâts que le niveau du lanceur.
+gen4,088,,,Inflige des dégâts aléatoires entre la moitié et une fois et demie le niveau du lanceur.
+gen4,089,,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il venait d’une attaque physique."
+gen4,090,,,"Pendant trois à sept tours, la cible ne peut utiliser que sa dernière attaque."
+gen4,091,,,"Additionne les PV du lanceur et ceux de la cible, puis les partage entre eux à parts égales."
+gen4,092,,,Ne fonctionne que si le lanceur dort. Inflige des dégâts et peut apeurer la cible.
+gen4,093,,,Le lanceur prend un type qui résiste à la dernière attaque utilisée par la cible.
+gen4,094,,,"Au tour suivant, la prochaine attaque du lanceur touche la cible à coup sûr."
+gen4,095,,,"Copie définitivement la dernière attaque utilisée par la cible, qui remplace Gribouille."
+gen4,097,,,Ne fonctionne que si le lanceur dort : lance une autre de ses attaques choisie au hasard.
+gen4,098,,,"Si le lanceur est mis K.O. avant d’agir de nouveau, le Pokémon qui l’a mis K.O. l’est aussi."
+gen4,099,,,Inflige des dégâts d’autant plus forts que les PV du lanceur sont bas.
+gen4,100,,,Retire 4 PP à la dernière attaque utilisée par la cible.
+gen4,101,,,Inflige des dégâts sans jamais mettre la cible K.O. : elle garde au moins 1 PV.
+gen4,102,,,Soigne le statut de tous les Pokémon de l’équipe du lanceur.
+gen4,103,,,Inflige des dégâts en frappant en premier (attaque prioritaire).
+gen4,104,,,"Frappe 1 à 3 fois de suite, plus fort à chaque coup."
+gen4,105,,,"Inflige des dégâts et peut voler l’objet tenu par la cible, si le lanceur n’en tient pas."
+gen4,106,,,"Empêche la cible de fuir ou d’être remplacée, tant que le lanceur reste au combat."
+gen4,107,,,"Une cible endormie perd un quart de ses PV max à chaque tour, tant qu’elle dort."
+gen4,108,,,Augmente l’Esquive du lanceur d’un niveau ; Écrasement lui inflige ensuite le double de dégâts.
+gen4,109,,,"Lancée par un Pokémon de type Spectre : il perd la moitié de ses PV max et maudit la cible, qui perd un quart de ses PV max à chaque tour. Sinon : baisse la Vitesse du lanceur d’un niveau et augmente son Attaque et sa Défense d’un niveau."
+gen4,111,,,Agit en premier : le lanceur se protège de toutes les attaques du tour. Réussit de moins en moins souvent si elle est utilisée plusieurs fois de suite.
+gen4,112,,,Disperse jusqu’à trois couches de picots ; les Pokémon adverses au sol perdent des PV en entrant au combat.
+gen4,113,,,Annule l’Esquive de la cible et permet aux attaques Normal et Combat de toucher un Pokémon de type Spectre.
+gen4,114,,,"Les Pokémon au combat sont mis K.O. au bout de 3 tours, sauf ceux qui sont remplacés entre-temps."
+gen4,115,,,Déclenche une tempête de sable pendant cinq tours : les Pokémon non immunisés perdent un seizième de leurs PV max par tour.
+gen4,116,,,Agit en premier : le lanceur résiste à toutes les attaques du tour en gardant au moins 1 PV. Réussit de moins en moins souvent si elle est utilisée plusieurs fois de suite.
+gen4,117,,,"Le lanceur attaque 5 tours de suite sans pouvoir s’arrêter ; la puissance double à chaque coup réussi, et elle est encore doublée après Boul’Armure."
+gen4,118,,,Augmente l’Attaque de la cible de deux niveaux et la rend confuse.
+gen4,119,,,Inflige des dégâts dont la puissance double à chaque utilisation réussie consécutive.
+gen4,120,,,"Rend amoureuse une cible du sexe opposé : à chaque tour, elle a une chance sur deux de ne pas attaquer."
+gen4,121,,,Inflige des dégâts d’autant plus forts que le Pokémon est attaché à son Dresseur.
+gen4,122,,,"Inflige des dégâts de puissance aléatoire : 40 (40 % des cas), 80 (30 %) ou 120 (10 %). Sinon, rend un quart de ses PV max à la cible."
+gen4,123,,,Inflige des dégâts d’autant plus forts que le Pokémon est peu attaché à son Dresseur.
+gen4,124,,,"Pendant 5 tours, protège les Pokémon du lanceur des altérations de statut et de la confusion."
+gen4,125,,,Inflige des dégâts et peut brûler la cible. Dégèle le lanceur s’il est gelé.
+gen4,126,,,"Inflige des dégâts de puissance aléatoire, de 10 à 150, doublés si la cible est sous terre (Tunnel)."
+gen4,127,,,"Le lanceur est remplacé par un autre Pokémon de l’équipe, qui garde ses changements de statistiques et certains de ses effets (Clonage, confusion, Vampigraine…)."
+gen4,128,,,"Inflige des dégâts ; si la cible est remplacée ce tour-ci, la frappe avant son départ avec une puissance doublée."
+gen4,129,,,"Inflige des dégâts et libère le lanceur des Picots, Pics Toxik, Piège de Roc, de Vampigraine et des attaques qui le piègent."
+gen4,130,,,Inflige toujours 20 PV de dégâts.
+gen4,132,,,"Restaure la moitié des PV max du lanceur ; deux tiers par temps ensoleillé, un quart sous les autres météos."
+gen4,135,,,Inflige des dégâts dont le type et la puissance dépendent des valeurs individuelles du lanceur.
+gen4,136,,,"Fait tomber la pluie pendant 5 tours : les attaques Eau sont plus puissantes, les attaques Feu plus faibles."
+gen4,137,,,"Fait briller le soleil pendant 5 tours : les attaques Feu sont plus puissantes, les attaques Eau plus faibles."
+gen4,138,,,Inflige des dégâts et peut augmenter la Défense du lanceur d’un niveau.
+gen4,139,,,Inflige des dégâts et peut augmenter l’Attaque du lanceur d’un niveau.
+gen4,140,,,"Inflige des dégâts et peut augmenter l’Attaque, la Défense, la Vitesse, l’Attaque Spéciale et la Défense Spéciale du lanceur d’un niveau."
+gen4,142,,,Le lanceur sacrifie la moitié de ses PV max pour monter son Attaque au maximum.
+gen4,143,,,Le lanceur copie les changements de statistiques de la cible.
+gen4,144,,,"Agit en dernier et renvoie le double des dégâts du dernier coup reçu, s’il venait d’une attaque spéciale."
+gen4,145,,,"Le lanceur rentre la tête au premier tour, ce qui augmente sa Défense d’un niveau, puis frappe au tour suivant."
+gen4,146,,,"Inflige des dégâts, doublés si la cible est dans les airs (Vol ou Rebond), et peut l’apeurer."
+gen4,147,,,"Inflige des dégâts, doublés si la cible est sous terre (Tunnel)."
+gen4,148,,,La cible subit les dégâts deux tours plus tard.
+gen4,149,,,"Inflige des dégâts, doublés si la cible est dans les airs (Vol ou Rebond)."
+gen4,150,,,"Inflige des dégâts, doublés si la cible a utilisé Lilliput, et peut l’apeurer."
+gen4,151,,,"Le lanceur absorbe la lumière pendant un tour, puis frappe au tour suivant ; frappe dès le premier tour par temps ensoleillé."
+gen4,152,,,"Inflige des dégâts et peut paralyser la cible. Atteint un Pokémon dans les airs (Vol ou Rebond) ; ne rate jamais sous la pluie, mais touche environ une fois sur deux par temps ensoleillé."
+gen4,153,,,"Met fin à un combat contre un Pokémon sauvage ; échoue contre un dresseur. Hors combat, à l’extérieur : ramène au dernier Centre Pokémon visité."
+gen4,154,,,Chaque Pokémon de l’équipe apte au combat et sans altération de statut frappe la cible une fois.
+gen4,155,,,"Le lanceur s’envole au premier tour, ce qui le rend difficile à toucher, puis frappe au tour suivant."
+gen4,156,,,Augmente la Défense du lanceur d’un niveau ; Roulade et Ball’Glace infligent ensuite le double de dégâts.
+gen4,158,,,Inflige des dégâts prioritaires et apeure la cible. Ne réussit qu’au premier tour du lanceur sur le terrain.
+gen4,159,,,Inflige des dégâts pendant deux à cinq tours ; empêche les Pokémon de dormir pendant ce temps.
+gen4,160,,,"Accumule de l’énergie pour Relâche ou Avale, jusqu’à trois fois, et augmente la Défense et la Défense Spéciale du lanceur d’un niveau à chaque fois."
+gen4,161,,,"Inflige des dégâts selon le nombre de Stockages accumulés, puis les consomme."
+gen4,162,,,"Consomme les Stockages pour restaurer un quart, la moitié ou la totalité des PV max du lanceur."
+gen4,164,,,Fait tomber la grêle pendant cinq tours ; les Pokémon qui ne sont pas de type Glace perdent des PV.
+gen4,165,,,Empêche la cible d’utiliser la même attaque deux fois de suite tant qu’elle reste sur le terrain.
+gen4,166,,,Augmente l’Attaque Spéciale de la cible d’un niveau et la rend confuse.
+gen4,167,,,"Brûle la cible, sauf un Pokémon de type Feu."
+gen4,168,,,Met le lanceur K.O. et baisse l’Attaque et l’Attaque Spéciale de la cible de deux niveaux.
+gen4,169,,,"Inflige des dégâts ; sa puissance double si le lanceur est empoisonné, paralysé ou brûlé."
+gen4,170,,,Frappe après les attaques ordinaires ; échoue si le lanceur a subi des dégâts d’une attaque ce tour-ci.
+gen4,171,,,Inflige des dégâts ; double sa puissance contre une cible paralysée et soigne alors sa paralysie.
+gen4,172,,,Attire vers le lanceur les attaques adverses à cible unique pendant ce tour.
+gen4,173,,,Utilise une attaque déterminée par le terrain du combat.
+gen4,174,,,Augmente la Défense Spéciale du lanceur d’un niveau et double la puissance de sa prochaine attaque Électrik si elle est utilisée au tour suivant.
+gen4,175,,,"Pendant trois à cinq tours, la cible ne peut utiliser que des attaques qui infligent des dégâts."
+gen4,176,,,Augmente de moitié les dégâts de l’attaque de l’allié pendant ce tour.
+gen4,177,,,Échange les objets tenus par le lanceur et la cible.
+gen4,178,,,"Copie le talent de la cible, sauf les talents exclus par le moteur."
+gen4,179,,,"À la fin du tour suivant, restaure la moitié des PV max du Pokémon qui occupe la place du lanceur."
+gen4,180,,,"Utilise au hasard une attaque des autres Pokémon de l’équipe, sauf les attaques exclues par le moteur."
+gen4,181,,,Enracine le lanceur : restaure un seizième de ses PV max par tour et empêche son remplacement.
+gen4,182,,,Inflige des dégâts puis baisse l’Attaque et la Défense du lanceur d’un niveau.
+gen4,183,,,Renvoie certaines attaques de statut vers leur lanceur pendant ce tour.
+gen4,184,,,Récupère le dernier objet consommé par le lanceur pendant le combat.
+gen4,185,,,Inflige des dégâts après les attaques ordinaires ; sa puissance double si la cible a blessé le lanceur ce tour-ci.
+gen4,186,,,Retire Protection et Mur Lumière du camp adverse avant d’infliger des dégâts.
+gen4,187,,,Rend la cible somnolente ; elle s’endort à la fin du tour suivant si elle reste sur le terrain.
+gen4,188,,,Inflige des dégâts et rend l’objet tenu par la cible inutilisable pour le reste du combat.
+gen4,189,,,"Réduit les PV de la cible au nombre de PV du lanceur, si elle en a davantage."
+gen4,190,,,Inflige des dégâts ; sa puissance diminue avec les PV restants du lanceur.
+gen4,191,,,"Échange les talents du lanceur et de la cible, sauf les talents exclus par le moteur."
+gen4,192,,,Empêche les adversaires d’utiliser les attaques que le lanceur connaît tant qu’il reste sur le terrain.
+gen4,193,,,"Soigne la brûlure, la paralysie ou l’empoisonnement du lanceur."
+gen4,194,,,"Si le lanceur est mis K.O. par une attaque avant sa prochaine action, cette attaque perd tous ses PP."
+gen4,195,,,Vole le bénéfice de certaines attaques de soutien utilisées pendant ce tour.
+gen4,196,,,Inflige des dégâts ; sa puissance augmente avec le poids de la cible.
+gen4,197,,,Inflige des dégâts et peut produire un effet secondaire déterminé par le terrain du combat.
+gen4,198,,,Inflige des dégâts ; le lanceur perd un tiers des dégâts infligés en PV.
+gen4,199,,,Rend confus tous les autres Pokémon présents sur le terrain.
+gen4,200,,,"Inflige des dégâts, avec un taux de coups critiques élevé, et peut brûler la cible."
+gen4,201,,,Divise par deux la puissance des attaques Électrik tant que le lanceur reste sur le terrain.
+gen4,202,,,Inflige des dégâts et peut empoisonner gravement la cible.
+gen4,203,,,Inflige des dégâts ; son type change avec la météo et sa puissance double par météo particulière.
+gen4,204,,,Inflige des dégâts puis baisse l’Attaque Spéciale du lanceur de deux niveaux.
+gen4,205,,,Baisse l’Attaque et la Défense de la cible d’un niveau.
+gen4,206,,,Augmente la Défense et la Défense Spéciale du lanceur d’un niveau.
+gen4,207,,,Inflige des dégâts et peut toucher une cible en train d’utiliser Vol ou Rebond.
+gen4,208,,,Augmente l’Attaque et la Défense du lanceur d’un niveau.
+gen4,209,,,"Inflige des dégâts, avec un taux de coups critiques élevé, et peut empoisonner la cible."
+gen4,210,,,Divise par deux la puissance des attaques Feu tant que le lanceur reste sur le terrain.
+gen4,211,,,Augmente l’Attaque Spéciale et la Défense Spéciale du lanceur d’un niveau.
+gen4,212,,,Augmente l’Attaque et la Vitesse du lanceur d’un niveau.
+gen4,213,,,Change le type du lanceur selon le terrain du combat.
+gen4,214,,,Le lanceur récupère la moitié de ses PV max et perd son type Vol jusqu’à la fin du tour.
+gen4,215,,,"Pendant cinq tours, augmente la Précision de tous les Pokémon et cloue au sol ceux qui volent ou lévitent ; Vol, Rebond et Trempette sont impossibles."
+gen4,216,,,Annule l’Esquive de la cible et permet aux attaques Psy de toucher un Pokémon de type Ténèbres.
+gen4,217,,,"Inflige des dégâts, doublés contre une cible endormie, qui est alors réveillée."
+gen4,218,,,Inflige des dégâts puis baisse la Vitesse du lanceur d’un niveau.
+gen4,219,,,Inflige des dégâts d’autant plus forts que le lanceur est lent par rapport à la cible.
+gen4,220,,,Le lanceur est mis K.O. ; le Pokémon qui le remplace récupère tous ses PV et guérit de son altération de statut.
+gen4,221,,,"Inflige des dégâts, doublés si la cible a perdu au moins la moitié de ses PV max."
+gen4,222,,,"Inflige des dégâts dont le type et la puissance dépendent de la baie tenue par le lanceur, qui la consomme."
+gen4,223,,,"Inflige des dégâts à une cible qui se protège (Abri, Détection) et annule sa protection ; échoue sinon."
+gen4,224,,,Inflige des dégâts ; le lanceur mange la baie tenue par la cible et en reçoit l’effet.
+gen4,225,,,"Pendant trois tours, double la Vitesse des Pokémon du camp du lanceur."
+gen4,226,,,Augmente de deux niveaux une statistique du lanceur choisie au hasard.
+gen4,227,,,Renvoie une fois et demie les dégâts du dernier coup reçu pendant ce tour.
+gen4,228,,,"Inflige des dégâts, puis le lanceur est remplacé par un autre Pokémon de l’équipe."
+gen4,229,,,Inflige des dégâts puis baisse la Défense et la Défense Spéciale du lanceur d’un niveau.
+gen4,230,,,"Inflige des dégâts, doublés si le lanceur agit après la cible."
+gen4,231,,,"Inflige des dégâts, doublés si la cible a déjà subi des dégâts ce tour-ci."
+gen4,232,,,"Pendant cinq tours, la cible ne peut ni utiliser son objet tenu ni bénéficier des objets du Dresseur."
+gen4,233,,,Lance l’objet tenu par le lanceur ; la puissance et l’effet dépendent de l’objet.
+gen4,234,,,"Transmet l’altération de statut du lanceur à la cible, puis l’en guérit."
+gen4,235,,,Inflige des dégâts d’autant plus forts qu’il reste peu de PP à cette attaque.
+gen4,236,,,"Pendant cinq tours, la cible ne peut pas récupérer de PV."
+gen4,237,,,Inflige des dégâts d’autant plus forts qu’il reste de PV à la cible.
+gen4,238,,,Échange l’Attaque et la Défense du lanceur.
+gen4,239,,,Neutralise le talent de la cible tant qu’elle reste sur le terrain.
+gen4,240,,,"Pendant cinq tours, les Pokémon du camp du lanceur ne subissent pas de coup critique."
+gen4,241,,,"Utilise avant elle l’attaque choisie par la cible, avec une puissance augmentée de moitié ; échoue si la cible a déjà agi ou si son attaque n’inflige pas de dégâts."
+gen4,242,,,Utilise la dernière attaque employée pendant le combat.
+gen4,243,,,Échange les changements d’Attaque et d’Attaque Spéciale du lanceur et de la cible.
+gen4,244,,,Échange les changements de Défense et de Défense Spéciale du lanceur et de la cible.
+gen4,245,,,Inflige des dégâts d’autant plus forts que les statistiques de la cible ont été augmentées.
+gen4,246,,,Ne réussit que si le lanceur a déjà utilisé toutes ses autres attaques depuis son entrée au combat.
+gen4,247,,,Le talent de la cible devient Insomnia.
+gen4,248,,,Inflige des dégâts en premier ; échoue si la cible ne s’apprête pas à utiliser une attaque qui inflige des dégâts.
+gen4,249,,,"Disperse jusqu’à deux couches de pics toxiques ; les Pokémon adverses au sol sont empoisonnés en entrant au combat, gravement avec deux couches. Un Pokémon Poison au sol les retire."
+gen4,250,,,Échange tous les changements de statistiques du lanceur et de la cible.
+gen4,251,,,Le lanceur récupère un seizième de ses PV max à chaque tour.
+gen4,252,,,"Pendant cinq tours, le lanceur est immunisé contre les attaques Sol."
+gen4,253,,,Inflige des dégâts et peut brûler la cible ; le lanceur perd un tiers des dégâts infligés en PV. Dégèle le lanceur s’il est gelé.
+gen4,254,,,Utilisée quand le lanceur n’a plus de PP : inflige des dégâts ; le lanceur perd un quart de ses PV max.
+gen4,255,,,"Le lanceur plonge au premier tour, ce qui le rend difficile à toucher, puis frappe au tour suivant."
+gen4,256,,,"Le lanceur creuse au premier tour, ce qui le rend difficile à toucher, puis frappe au tour suivant."
+gen4,257,,,"Inflige des dégâts, doublés si la cible est sous l’eau (Plongée)."
+gen4,258,,,"Baisse l’Esquive de la cible d’un niveau et retire de son camp Protection, Mur Lumière, Rune Protect, Brume, Picots, Pics Toxik et Piège de Roc."
+gen4,259,,,"Pendant cinq tours, les Pokémon les plus lents agissent en premier."
+gen4,260,,,Inflige des dégâts et peut geler la cible. Ne rate jamais par temps de grêle.
+gen4,261,,,Inflige des dégâts et piège la cible pendant 2 à 5 tours ; dégâts doublés si la cible est sous l’eau (Plongée).
+gen4,262,,,Inflige des dégâts et peut paralyser la cible ; le lanceur perd un tiers des dégâts infligés en PV.
+gen4,263,,,"Le lanceur bondit au premier tour, ce qui le rend difficile à toucher, puis frappe au tour suivant et peut paralyser la cible."
+gen4,265,,,Baisse l’Attaque Spéciale d’une cible du sexe opposé de deux niveaux.
+gen4,266,,,"Disperse des pierres pointues ; les Pokémon adverses perdent des PV en entrant au combat, selon l’efficacité du type Roche contre eux."
+gen4,267,,,"Inflige des dégâts et peut rendre la cible confuse, selon le cri enregistré par Pijako."
+gen4,268,,,Inflige des dégâts ; son type est celui de la plaque tenue par le lanceur.
+gen4,269,,,Inflige des dégâts ; le lanceur perd la moitié des dégâts infligés en PV.
+gen4,270,,,Le lanceur est mis K.O. ; le Pokémon qui le remplace récupère tous ses PV et ses PP et guérit de son altération de statut.
+gen4,271,,,Inflige des dégâts et peut baisser la Défense Spéciale de la cible de deux niveaux.
+gen4,272,,,"Le lanceur disparaît au premier tour, ce qui le rend impossible à toucher, puis frappe au tour suivant en ignorant Abri et Détection."
+gen4,273,,,Inflige des dégâts ; peut brûler la cible et peut l’apeurer.
+gen4,274,,,Inflige des dégâts ; peut geler la cible et peut l’apeurer.
+gen4,275,,,Inflige des dégâts ; peut paralyser la cible et peut l’apeurer.
+gen4,276,,,Inflige des dégâts et peut augmenter l’Attaque Spéciale du lanceur d’un niveau.

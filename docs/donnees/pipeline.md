@@ -92,7 +92,7 @@ dédiées, jamais la détection d’une phrase française. Les validations et le
 ### Aperçu Pokémon de Sinnoh
 
 `PLATINUM` puis `DIAMOND_PEARL` sont déclarés au format `GEN4`, hors de `GAMES_IN_PROGRESS` :
-le lecteur général refuse encore les cartes DS. L’option `--sinnoh-pokemon-only` lit les deux dépôts
+la génération des cartes refuse encore les jeux DS. L’option `--sinnoh-pokemon-only` lit les deux dépôts
 épinglés, sans ROM, et génère une base et les sprites normaux/chromatiques des 493 espèces dans l’aperçu.
 Les variantes de Perle sont lues séparément pour les objets tenus ; un test compare leurs autres données à Diamant.
 
@@ -101,11 +101,24 @@ Les évolutions PokéAPI sont comparées aux deux tables pret. Le schéma 22 con
 dans `evolution_requirement` : lieu, sexe, espèce dans l’équipe, proximité d’une pierre et formes de départ/arrivée
 (identifiants PokéAPI). Le moteur de chaque dépôt fournit le seuil de bonheur.
 
-La table préparatoire `ds_move` contient puissance, PP, précision, type et classe par attaque ; les effets de combat
-ne sont pas encore exportés. Les rencontres PokéAPI servent au contrôle d’obtention par branche, avec une correction
+La table préparatoire `ds_move` contient puissance, PP, précision, type et classe par attaque ; `move_version_group`
+porte en plus les effets, relus dans `move_effects.csv` au format `gen4` (clé : numéro d’effet du moteur, commun aux
+deux dépôts). Les rencontres PokéAPI servent au contrôle d’obtention par branche, avec une correction
 de Giratina dans Diamant/Perle vérifiée dans le script compilé épinglé. Les méthodes et conditions inconnues arrêtent
 l’export. Les probabilités complètes et les liens aux cartes attendent les lecteurs de rencontres DS.
 Cet aperçu n’est pas une base distribuable dans l’application.
+
+### Lecteurs DS
+
+`pret_gen4.Gen4PretRepo` (choisi par `open_pret`) lit les deux dépôts dans un même modèle de données : en-têtes de
+lieux, matrices, événements, zones, objets posés, éclairages, caméras, tables de rencontres brutes, blocs de terrain
+(attributs, objets, hauteurs BDHC), modèles et textures Nitro, attaques et scripts. Platine se lit dans ses JSON,
+en-têtes C et macros (`pret_gen4_maps.py`, `pret_gen4_events.py`, `pret_gen4_scripts.py`) ; Diamant/Perle dans
+ses fichiers extraits (`pret_gen4_narc.py`) et dans le moteur, en C ou en assembleur (`pret_gen4_maps_dp.py`,
+`pret_gen4_script_commands.py`). La forme des arguments de chaque commande de script compilé se lit dans la
+fonction du moteur ; le désassembleur (`pret_gen4_script_binary.py`) suit le flux depuis les points d’entrée. Les
+formats sont refusés dès qu’ils sortent de ce que les deux dépôts emploient (textures 4 × 4 et directes, commandes
+GX ou de script inconnues, tailles incohérentes). Ces lecteurs ne produisent encore aucune carte.
 
 Les formes de Sinnoh suivent leurs versions dans `pokemon_forms.csv`. Les formes Fée et ??? d’Arceus sont exclues :
 la première est postérieure à ces jeux et la seconde n’a pas de sprite Noir/Blanc épinglé.

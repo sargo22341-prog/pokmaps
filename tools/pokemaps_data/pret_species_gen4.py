@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from pathlib import Path
 
+from .pret_gen4_source import read_json
 from .pret_identifiers import species_identifier
 
-_MAX_JSON_BYTES = 4 * 1024 * 1024
 _STATS = ("hp", "attack", "defense", "special_attack", "special_defense", "speed")
 _DP_STATS = ("hp", "atk", "def", "spatk", "spdef", "speed")
 _SPECIAL_DP = frozenset(
@@ -29,15 +28,6 @@ class DsSpecies:
     growth: str
     egg_groups: tuple[str, ...]
     evolutions: tuple[tuple[str, int | str, str], ...]
-
-
-def read_json(path: Path) -> dict:
-    if path.stat().st_size > _MAX_JSON_BYTES:
-        raise ValueError(f"{path} : JSON DS trop volumineux")
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"{path} : objet JSON attendu")
-    return value
 
 
 def read_ds_species(root: Path, repo: str, *, pearl: bool = False) -> dict[str, DsSpecies]:

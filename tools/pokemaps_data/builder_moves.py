@@ -210,6 +210,8 @@ class MoveTables:
     def _pret_moves(self, game: Game) -> list[PretMove]:
         if game.pret_format is PretFormat.GEN3:
             return self.builder.gen3_repo(game, "les effets des attaques").moves
+        if game.pret_format is PretFormat.GEN4:
+            return self.builder.gen4_repo(game, "les effets des attaques").moves
         return read_pret_moves(self.builder.pret_roots[game.version_group], game.pret_format)
 
     def _values_in(self, vg: int, move: dict[str, str], changes: list[dict[str, str]]) -> dict[str, str]:

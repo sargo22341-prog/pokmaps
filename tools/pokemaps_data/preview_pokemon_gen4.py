@@ -95,6 +95,7 @@ def pokemon_preview_tables(builder: DatabaseBuilder, sprites: set[str]) -> dict[
         "pokemon_stat": builder.pokemon.pokemon_stat_table(),
         "move": _preview_moves(builder, moves),
         "ds_move": moves,
+        "move_version_group": builder.moves.move_version_group_table(),
         "machine": builder.moves.machine_rows,
         "pokemon_move": builder.moves.pokemon_move_table(),
         "item": [(*r, int(r[1] in sprites), descriptions.get(r[0])) for r in builder.items.item_rows],
@@ -140,10 +141,8 @@ def validate_pokemon_preview(connection: sqlite3.Connection) -> list[str]:
     from .validate import CHECKS
     from .validate_profiles import validate_profiles
 
-    # Les invariants de cartes et d'effets appartiennent aux phases 2–5 ; les autres restent identiques.
+    # Les invariants de cartes et de rencontres appartiennent aux phases 3 et 4 ; les autres restent identiques.
     excluded = {
-        "attaque sans caractéristiques dans le jeu",
-        "effet d'attaque vide ou probabilité invalide",
         "zone avec des rencontres sans carte dans le jeu",
         "probabilités de rencontre aléatoire différentes de 100 %",
     }

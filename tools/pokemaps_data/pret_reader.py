@@ -8,11 +8,13 @@ from .games import Game, PretFormat
 from .pret import PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen3 import Gen3PretRepo
+from .pret_gen4 import Gen4PretRepo
 
+# Lecteurs des cartes en tuiles (GB, GBA), seuls acceptés par GameMaps ; les cartes DS ont leur propre rendu.
 PretReader = PretRepo | Gen2PretRepo | Gen3PretRepo
 
 
-def open_pret(game: Game, root: Path) -> PretReader:
+def open_pret(game: Game, root: Path) -> PretReader | Gen4PretRepo:
     """Lecteur des sources pret du jeu, extraites dans `root`."""
     match game.pret_format:
         case PretFormat.GEN1:
@@ -22,4 +24,4 @@ def open_pret(game: Game, root: Path) -> PretReader:
         case PretFormat.GEN3:
             return Gen3PretRepo(root, game.pret_versions)
         case PretFormat.GEN4:
-            raise ValueError(f"{game.version_group} : lecteur de cartes DS indisponible ; aperçu Pokémon seulement")
+            return Gen4PretRepo(root, game.pret_versions)

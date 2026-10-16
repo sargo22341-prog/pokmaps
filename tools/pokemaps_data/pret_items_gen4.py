@@ -6,8 +6,8 @@ import re
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from .pret_gen4_source import read_json
 from .pret_identifiers import item_identifier
-from .pret_species_gen4 import read_json
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder

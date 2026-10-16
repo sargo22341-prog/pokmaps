@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from .pret_species_gen4 import read_json
+from .pret_gen4_source import read_json
 
 
 @dataclass(frozen=True)

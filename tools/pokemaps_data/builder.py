@@ -24,6 +24,7 @@ from .maps import GameMapData
 from .pokeapi import PokeApi, optional_int, value_at
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen3 import Gen3PretRepo
+from .pret_gen4 import Gen4PretRepo
 from .pret_species_gen4 import DsSpecies, read_ds_species
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
@@ -51,6 +52,7 @@ class DatabaseBuilder:
         self.pret_roots = pret_roots or {}
         self._gen2_repos: dict[str, Gen2PretRepo] = {}
         self._gen3_repos: dict[str, Gen3PretRepo] = {}
+        self._gen4_repos: dict[str, Gen4PretRepo] = {}
         groups = {row["identifier"]: row for row in api.table("version_groups")}
         missing = [game.version_group for game in games if game.version_group not in groups]
         if missing:
@@ -112,6 +114,14 @@ class DatabaseBuilder:
         if game.version_group not in self._gen3_repos:
             self._gen3_repos[game.version_group] = Gen3PretRepo(self.pret_root(game, purpose), game.pret_versions)
         return self._gen3_repos[game.version_group]
+
+    def gen4_repo(self, game: Game, purpose: str) -> Gen4PretRepo:
+        """Lecteur DS partagé par les tables du jeu."""
+        if game.pret_format is not PretFormat.GEN4:
+            raise ValueError(f"{game.version_group} n'a pas de sources DS ({purpose})")
+        if game.version_group not in self._gen4_repos:
+            self._gen4_repos[game.version_group] = Gen4PretRepo(self.pret_root(game, purpose), game.pret_versions)
+        return self._gen4_repos[game.version_group]
 
     @cached_property
     def species(self) -> dict[int, dict[str, str]]:
