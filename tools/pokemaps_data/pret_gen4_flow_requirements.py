@@ -18,6 +18,7 @@ from .pret_gen4_flow import (
     CALL_COMMON,
     CALL_IF,
     CHECK_FLAG,
+    COMPARE_VALUE,
     COMPARE_VAR,
     COPY_VAR,
     END,
@@ -111,7 +112,7 @@ class _Must:
             return state
         compare = self.chains.comparisons[step.key]
         dependency: Dependency = None
-        if compare.command == COMPARE_VAR and is_var(compare.arguments[0]):
+        if compare.command in {COMPARE_VAR, COMPARE_VALUE} and is_var(compare.arguments[0]):
             dependency = ("var", int(compare.arguments[0]))
         elif compare.command == CHECK_FLAG and isinstance(compare.arguments[0], int):
             dependency = ("flag", compare.arguments[0])

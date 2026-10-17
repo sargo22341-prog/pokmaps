@@ -25,10 +25,24 @@ from pokemaps_data.pret_gen4_flow_values import (
 from pokemaps_data.pret_gen4_offer_bundles import item_bundles
 from pokemaps_data.pret_gen4_offer_commands import TAKE_ITEM, OfferCommand
 from pokemaps_data.pret_gen4_offer_sites import OfferSite
-from pokemaps_data.pret_gen4_offers import Gen4Offer, OfferCatalog, OfferStep
+from pokemaps_data.pret_gen4_offers import Gen4Offer, OfferCatalog, OfferStep, _offer_conditions
 from pokemaps_data.validate_offers_gen4 import validate_offers
 
 ITEM, QUANTITY = 0x8004, 0x8005
+
+
+def test_one_time_gift_keeps_the_flag_it_will_set_after_delivery() -> None:
+    condition = Condition("flag:12", "=", 0)
+    assert _offer_conditions((condition,), {12}, range(100, 110)) == ((condition,), False)
+
+
+def test_daily_flag_is_distinct_from_a_permanent_gift_flag() -> None:
+    once, daily = Condition("flag:12", "=", 0), Condition("flag:100", "=", 0)
+    assert _offer_conditions((once, daily), {12, 100}, range(100, 110)) == ((once,), True)
+
+
+def test_daily_reset_is_preserved_when_flag_was_set_before_delivery() -> None:
+    assert _offer_conditions((), {100}, range(100, 110)) == ((), True)
 
 
 def _flow(rows: list[tuple[str, tuple[int, ...], int | None]]) -> ScriptFlow:

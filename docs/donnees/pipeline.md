@@ -175,6 +175,27 @@ ces lectures pour les lieux retenus dans `sinnoh-characters/characters.json`. Un
 pas, une condition ou un nom absent, ou une ligne DS inemployée arrête la génération, sauf exception justifiée dans
 `pret_gen4_battles._OPEN_BATTLES`.
 
+Le schéma 5 de cet aperçu inclut `actors` (`character_actors_gen4.py`) : chaque événement posé garde sa clé
+`dépôt:en-tête:rang`, son identifiant local, son apparence, ses coordonnées, son script et son drapeau de retrait.
+Le rang distingue aussi les entrées dont l'identifiant local est répété dans les sources. Les indices des offres
+renvoient à `offers.steps` ; les offres sans donneur posé figurent séparément dans `scene_offers`.
+La validation exige qu'une offre ait exactement une attribution. Le point de départ du script et le donneur
+restent distincts : le dialogue des Sbires de l'Île de Fer peut mener au don d'Armand, sans leur attribuer l'œuf.
+`character_curation_gen4.py` lit les figurants temporaires de `npc_duplicates.csv` (`scene_only`, sans supprimer
+les événements) et les attributions et conditions éditoriales de `npc_offers.csv` (action `resolve`, clé
+`en-tête:type:rang`, source exacte de la commande ; `expression` vaut `script` ou la clé du donneur).
+Les clés DS de `npc_duplicates.csv` et `npc_text_names.csv` ont la forme `dépôt:numéro-en-tête:rang`.
+Une annotation DS ne peut pas réécrire le prix ou la quantité lus dans le moteur.
+Les apparences communes ne servent pas à fusionner des personnages ; chaque variante garde position et drapeau.
+Les noms propres par clé viennent de `npc_text_names.csv`, ceux des services de `facility_names.csv`.
+Chaque condition des offres passe par `story_events.csv`, même lorsqu'elle n'affiche rien parce qu'elle concerne
+un menu ou une vérification technique. Une condition inconnue ou une ligne DS inemployée bloque la génération.
+Les conditions permanentes « pas encore reçu » testées avant un don restent dans ses conditions brutes,
+même si ce script lève ensuite le drapeau ; les drapeaux quotidiens portent séparément la propriété `daily`.
+Les comparaisons à une valeur littérale restent distinctes de celles entre deux variables ; les valeurs copiées
+gardent leur origine (par exemple le jour de vente des Sceaux). Les tests de parcours lisent séparément les
+offres applicables à Platine, Diamant et Perle dans tous les lieux retenus.
+
 ### Cartes préparatoires de Sinnoh
 
 `maps_gen4.py` assemble séparément Platine et Diamant/Perle depuis leurs matrices pret. Sinnoh et le Grand Marais

@@ -29,6 +29,7 @@ from .pret_gen4_flow import (
     CALL_IF,
     CHECK_FLAG,
     CHECK_TRAINER,
+    COMPARE_VALUE,
     COMPARE_VAR,
     COPY_VAR,
     END,
@@ -69,7 +70,7 @@ _MAX_STEPS = 2_000_000
 _MAX_DEPTH = 16
 _MAX_COMBINATIONS = 1024
 _MAX_RANDOM = 64
-_COMPARISONS = frozenset({COMPARE_VAR, CHECK_FLAG, CHECK_TRAINER})
+_COMPARISONS = frozenset({COMPARE_VAR, COMPARE_VALUE, CHECK_FLAG, CHECK_TRAINER})
 
 Valuation = tuple[Value, ...]
 State = frozenset[Valuation]
@@ -192,7 +193,11 @@ class _Analysis:
         condition = step.arguments[0]
         if condition not in _CONDITIONS:
             raise ValueError(f"{self.flow.name} : condition de saut inconnue : {step.source}")
-        if compare is None or compare.command != COMPARE_VAR or compare.arguments[0] not in self.tracked:
+        if (
+            compare is None
+            or compare.command not in {COMPARE_VAR, COMPARE_VALUE}
+            or compare.arguments[0] not in self.tracked
+        ):
             return state, state
         taken, skipped = set(), set()
         for valuation in state:
@@ -205,7 +210,8 @@ class _Analysis:
 
     def _compare(self, compare: Step, valuation: Valuation) -> str | None:
         left, right = self._read(compare.arguments[0], valuation), compare.arguments[1]
-        right = self._read(right, valuation) if is_var(right) else right
+        right = self._read(right, valuation) if compare.command == COMPARE_VAR and is_var(right) else right
+        right = right & _WORD if isinstance(right, int) else right
         if not isinstance(left, int) or not isinstance(right, int):
             return None
         return "<" if left < right else "=" if left == right else ">"
@@ -314,7 +320,7 @@ def tracked_vars(flow: ScriptFlow, seeds: set[int]) -> tuple[int, ...]:
     """Variables à suivre : celles demandées, les sources des copies qui les alimentent et les variables
     comparées avant une branche."""
     tracked = set(seeds)
-    compared = (step for step in comparisons(flow).values() if step.command == COMPARE_VAR)
+    compared = (step for step in comparisons(flow).values() if step.command in {COMPARE_VAR, COMPARE_VALUE})
     tracked |= {int(step.arguments[0]) for step in compared if is_var(step.arguments[0])}
     copies = [step.arguments for step in flow.steps.values() if step.command == COPY_VAR]
     changed = True

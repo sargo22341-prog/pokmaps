@@ -69,8 +69,11 @@ dresseurs, combats de scénario, revanches du Cherche VS, objets des lieux, Pok�
 scénario et le déblocage du Pokédex National.
 L'aperçu comprend aussi les offres des personnages et des installations : dons, œufs, stocks des boutiques
 selon les badges, échanges, tuteurs, soins, baies et paillis, fossiles, Pension, Casino et Maître des Capacités.
-Les conditions brutes des scripts accompagnent chaque étape d'offre ; les prix, monnaies et coûts en Tessons
-restent distincts. Les lots échangés ensemble conservent leur paiement unique.
+Les conditions des offres sont traduites en français et gardent leur provenance brute ; les prix, monnaies et
+coûts en Tessons restent distincts. Les lots échangés ensemble conservent leur paiement unique.
+Chaque offre garde son origine : PNJ posé avec son drapeau de retrait, ou scène, case et déclencheur.
+Les exemplaires d'un personnage à plusieurs étapes restent distincts dans cet aperçu.
+La curation annote les figurants temporaires et attribue les dons de scène au personnage qui les remet.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
 
 ## Publier une version

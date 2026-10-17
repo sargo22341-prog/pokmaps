@@ -10,6 +10,7 @@ from pokemaps_data.pret_gen4_flow import (
     CALL_COMMON,
     CALL_IF,
     CHECK_FLAG,
+    COMPARE_VALUE,
     COMPARE_VAR,
     COPY_VAR,
     DATA,
@@ -58,6 +59,32 @@ def flow(*rows: tuple, entries: tuple[int, ...] = (0,), name: str = "test") -> S
 
 def is_battle(step: Step) -> bool:
     return step.command == TRAINER_BATTLE
+
+
+def test_literal_menu_cancel_value_is_not_read_as_a_variable() -> None:
+    script = flow(
+        (SET_VALUE, (RESULT, 65534), None),
+        (COMPARE_VALUE, (RESULT, 65534), None),
+        (GOTO_IF, (1,), 5),
+        (TRAINER_BATTLE, (7, 0), None),
+        (END, (), None),
+        (END, (), None),
+    )
+    assert Chains(script).conditions(3) == (Condition("set_value", "!=", 65534),)
+    assert values_at(script, is_battle, {RESULT}).values(3, RESULT) == frozenset()
+
+
+def test_condition_follows_a_copied_day_of_week() -> None:
+    script = flow(
+        ("GetDayOfWeek", (RESULT,), None, {0}),
+        (COPY_VAR, (OTHER, RESULT), None),
+        (COMPARE_VALUE, (OTHER, 1), None),
+        (GOTO_IF, (1,), 5),
+        (END, (), None),
+        (TRAINER_BATTLE, (7, 0), None),
+        (END, (), None),
+    )
+    assert Chains(script).conditions(5) == (Condition("GetDayOfWeek", "=", 1),)
 
 
 def test_assignments_and_copies_reach_the_battle() -> None:
@@ -219,7 +246,7 @@ def test_platinum_macros_expand_like_the_assembler(tmp_path: Path) -> None:
     script = TextScriptFile("scripts_test", ("Start",), {"LOCAL": "3"}, (), calls)
     built = platinum_flow(script, PlatinumContext(templates, writes, frozenset({"WalkNorth"}), constants))
     commands = [step.command for step in built.steps.values()]
-    assert commands == [SET_VALUE, COPY_VAR, CALL_COMMON, COMPARE_VAR, GOTO_IF, TRAINER_BATTLE, END, DATA]
+    assert commands == [SET_VALUE, COPY_VAR, CALL_COMMON, COMPARE_VALUE, GOTO_IF, TRAINER_BATTLE, END, DATA]
     assert built.steps["Start", 3].arguments == (RESULT, 3)
     assert built.steps["Start", 4].target == ("Battle", 5)
     # Le dernier appel d'un label continue au label suivant, et l'argument omis prend sa valeur par défaut.

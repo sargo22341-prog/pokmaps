@@ -56,6 +56,8 @@ enum class CharacterRole {
             OfferKind.GROOMING -> GROOMING
             OfferKind.MOVE_TUTOR -> MOVE_TUTOR
             OfferKind.MOVE_RELEARNER -> MOVE_RELEARNER
+            OfferKind.ACCESSORY_SHOP -> SHOP
+            OfferKind.SCRATCH_CARDS -> PRIZES
         }
     }
 }

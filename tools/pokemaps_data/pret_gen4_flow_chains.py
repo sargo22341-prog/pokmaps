@@ -15,6 +15,7 @@ from .pret_gen4_flow import (
     CALL_IF,
     CHECK_FLAG,
     CHECK_TRAINER,
+    COMPARE_VAR,
     COPY_VAR,
     END,
     GOTO,
@@ -79,7 +80,11 @@ class Chains:
         operator = _OPERATORS[code] if taken else _NEGATION[_OPERATORS[code]]
         value = compare.arguments[1]
         # CompareVar compare aussi deux variables (CompareVarToVar de Diamant/Perle) : la valeur nomme alors la seconde.
-        return Condition(self._subject(compare), operator, f"var:{value}" if is_var(value) else value)
+        if compare.command == COMPARE_VAR and is_var(value):
+            value = f"var:{value}"
+        elif isinstance(value, int):
+            value &= 0xFFFF
+        return Condition(self._subject(compare), operator, value)
 
     def _subject(self, compare: Step) -> str:
         var = compare.arguments[0]
@@ -91,6 +96,10 @@ class Chains:
             step = before[0]
             written = {0} if step.command in {SET_VALUE, COPY_VAR} else step.writes
             if any(step.arguments[i] == var for i in written):
+                if step.command == COPY_VAR and is_var(step.arguments[1]):
+                    var = step.arguments[1]
+                    current = step.key
+                    continue
                 return step.command.split(" ")[0]
             current = step.key
         return f"var:{var}"

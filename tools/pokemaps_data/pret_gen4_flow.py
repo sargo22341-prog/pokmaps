@@ -30,6 +30,7 @@ TRAINER_BATTLE, TAG_BATTLE = "trainer_battle", "tag_battle"
 # sauvage (ScrCmd_FirstBattle : espèce et niveau), qui garde son nom source.
 FIRST_BATTLE = "first_battle"
 COMPARE_VAR, CHECK_FLAG, CHECK_TRAINER, CALL_COMMON = "compare_var", "check_flag", "check_trainer", "call_common"
+COMPARE_VALUE = "compare_value"
 SET_FLAG, NATIONAL_DEX = "set_flag", "national_dex"
 ADD_ITEM, ADD_COINS = "add_item", "add_coins"
 RANDOM, PLAYER_STARTER, PLAYER_GENDER = "random", "player_starter", "player_gender"
@@ -38,7 +39,17 @@ DATA = "data"
 _FLOW = frozenset({GOTO, GOTO_IF, CALL, CALL_IF})
 # Commandes qui lisent leurs arguments sans écrire de variable (les sources nomment certains varID).
 _READ_ONLY = frozenset(
-    {COMPARE_VAR, CHECK_FLAG, CHECK_TRAINER, TRAINER_BATTLE, TAG_BATTLE, FIRST_BATTLE, SET_FLAG, CALL_COMMON}
+    {
+        COMPARE_VAR,
+        COMPARE_VALUE,
+        CHECK_FLAG,
+        CHECK_TRAINER,
+        TRAINER_BATTLE,
+        TAG_BATTLE,
+        FIRST_BATTLE,
+        SET_FLAG,
+        CALL_COMMON,
+    }
 )
 _ENDS = frozenset({GOTO, RETURN, END})
 # Macros primitives de Platine -> nom canonique.
@@ -55,6 +66,8 @@ _PLATINUM = {
     "StartTagBattle": TAG_BATTLE,
     "StartFirstBattle": FIRST_BATTLE,
     "CompareVar": COMPARE_VAR,
+    "CompareVarToValue": COMPARE_VALUE,
+    "CompareVarToVar": COMPARE_VAR,
     "CheckFlag": CHECK_FLAG,
     "CheckTrainerFlag": CHECK_TRAINER,
     "CallCommonScript": CALL_COMMON,
@@ -70,7 +83,7 @@ _PLATINUM = {
 # Opcodes de Diamant/Perle (gScriptCmdTable) -> nom canonique, vérifiés contre le nom de leur fonction.
 _DIAMOND_PEARL = {
     0x02: ("ScrCmd_End", END),
-    0x11: ("ScrCmd_CompareVarToValue", COMPARE_VAR),
+    0x11: ("ScrCmd_CompareVarToValue", COMPARE_VALUE),
     0x12: ("ScrCmd_CompareVarToVar", COMPARE_VAR),
     0x14: ("ScrCmd_RunScriptWait", CALL_COMMON),
     0x16: ("ScrCmd_GoTo", GOTO),
@@ -275,6 +288,11 @@ def _platinum_step(
         values = tuple(_value(arg, script.defines, context.constants) for arg in args[:-1])
         return Step(key, command, values, target, following, source)
     values = tuple(_value(arg, script.defines, context.constants) for arg in args)
+    if name == "CompareVar" and isinstance(values[1], int):
+        permanent = range(context.constants.get("VARS_START", VAR_START), context.constants.get("VARS_END", 0x8000) + 1)
+        local = range(0x8000, context.constants.get("SCRIPT_LOCAL_VARS_END", 0x800D) + 1)
+        if values[1] not in permanent and values[1] not in local:
+            command = COMPARE_VALUE
     if command == TRAINER_BATTLE:
         values = (*values, 0) if len(values) == 1 else values
     writes = frozenset() if command in _READ_ONLY else context.writes.get(name, frozenset())

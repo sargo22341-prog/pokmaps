@@ -101,4 +101,9 @@ def _flag_and_var_names(values: dict[str, int]) -> dict[int, str]:
         if value in names:
             shared.add(value)
         names[value] = name
-    return {value: name for value, name in names.items() if value not in shared}
+    unique = {value: name for value, name in names.items() if value not in shared}
+    # Ces deux alias sont les noms employés dans les scripts, pas des bornes de plage.
+    for alias in ("VAR_RESULT", "VAR_LAST_TALKED"):
+        if alias in values:
+            unique[values[alias]] = alias
+    return unique

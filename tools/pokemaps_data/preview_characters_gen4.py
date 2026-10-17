@@ -15,6 +15,8 @@ import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from .character_actors_gen4 import ActorCatalog, read_actors, validate_actors
+from .character_curation_gen4 import curate_characters
 from .character_names_gen4 import Gen4Names, read_gen4_names, unused_names
 from .games import GEN4_GAMES, Game
 from .maps_characters_data import CharacterNames, read_character_names
@@ -41,7 +43,7 @@ from .story_events import DS_REPOS, StoryEvents, read_story_events
 from .validate_offers_gen4 import validate_offers
 
 PREVIEW_NAME = "sinnoh-characters"
-SCHEMA = 3
+SCHEMA = 5
 
 
 @dataclass(frozen=True)
@@ -66,6 +68,7 @@ class CharacterCatalog:
     scenario: dict[str, tuple[tuple[str, ...], ...]]
     names: Gen4Names
     offers: OfferCatalog
+    actors: ActorCatalog
 
 
 def character_catalog(
@@ -82,6 +85,8 @@ def character_catalog(
     battles = read_script_battles(repo, files)
     fixed = read_fixed_encounters(repo, headers)
     national = read_national_dex(repo, headers)
+    offers = read_offers(repo, headers)
+    actors, offers = curate_characters(game.pret_repo, game.map_family, read_actors(repo, headers, offers), offers)
     catalog = CharacterCatalog(
         game.version_group,
         game.pret_repo,
@@ -97,9 +102,10 @@ def character_catalog(
         read_map_items(repo, repo.script_ids, headers),
         fixed,
         national,
-        _scenario(ScenarioConditions(repo, story or read_story_events()), battles, fixed, national),
-        read_gen4_names(repo, headers, names or read_character_names()),
-        read_offers(repo, headers),
+        _scenario(ScenarioConditions(repo, story or read_story_events()), battles, fixed, national, offers),
+        read_gen4_names(repo, headers, names or read_character_names(), offers),
+        offers,
+        actors,
     )
     validate_character_catalog(catalog)
     return catalog
@@ -110,6 +116,7 @@ def _scenario(
     battles: tuple[ScriptBattle, ...],
     fixed: tuple[FixedEncounter, ...],
     national: NationalDexUnlock,
+    offers: OfferCatalog,
 ) -> dict[str, tuple[tuple[str, ...], ...]]:
     result = {}
     for battle in battles:
@@ -122,6 +129,10 @@ def _scenario(
             where = f"position {encounter.header} {encounter.step} {rank}"
             result[where] = (conditions.phrases(position.conditions, where),)
     result["pokedex_national"] = tuple(conditions.phrases(path, "pokedex_national") for path in national.paths)
+    for index, step in enumerate(offers.steps):
+        label = f"offre {index} {step.site.header} {step.step}"
+        phrases = (*conditions.phrases(step.conditions, label), *step.editorial_conditions)
+        result[label] = (tuple(dict.fromkeys(phrases)),)
     return result
 
 
@@ -166,6 +177,7 @@ def validate_character_catalog(catalog: CharacterCatalog) -> None:
     if not catalog.fixed or any(encounter.header not in constants for encounter in catalog.fixed):
         raise ValueError(f"{where} : Pokémon fixes absents ou hors des lieux retenus")
     validate_offers(catalog.offers, constants, where)
+    validate_actors(catalog.actors, catalog.offers)
 
 
 def unbound_trainers(catalog: CharacterCatalog) -> tuple[int, ...]:

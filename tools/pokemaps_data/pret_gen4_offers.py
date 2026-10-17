@@ -4,7 +4,7 @@ Chaque point de départ d'un lieu (pret_gen4_offer_sites) mène à des commandes
 traduites ici avec les tables du moteur (pret_gen4_offer_tables). Un don précédé d'un paiement devient une vente
 (argent), un lot (jetons, Points Combat) ou un échange d'objet (objet repris) ; des jetons payés en argent sont
 une vente de jetons. Les conditions sont celles qui valent sur tous les chemins du point de départ jusqu'à
-l'offre (pret_gen4_flow_requirements), sans les drapeaux que le script lève lui-même (« déjà donné ») ; un drapeau
+l'offre (pret_gen4_flow_requirements), y compris les drapeaux « déjà donné » encore testés avant le don ; un drapeau
 du jour (DAILY_FLAGS_START à DAILY_FLAGS_END, remis à zéro chaque jour) qui doit être baissé fait une offre
 quotidienne. La version du jeu est portée par l'offre, pas par ses conditions.
 """
@@ -91,6 +91,8 @@ class OfferStep:
     offers: tuple[Gen4Offer, ...]
     conditions: tuple[Condition, ...]  # conditions nécessaires, avant traduction (story_conditions_gen4)
     daily: bool
+    editorial_conditions: tuple[str, ...] = ()
+    giver: str | None = None  # acteur qui remet le cadeau, distinct du PNJ ou déclencheur qui lance la scène
 
 
 @dataclass(frozen=True)
@@ -178,7 +180,7 @@ class _Builder:
                 raise ValueError(f"{flow.name}, point d'entrée {entry + 1} : {error}") from error
             if not offers:
                 continue
-            conditions, daily = self._conditions(requirements.get(key, ()), own)
+            conditions, daily = _offer_conditions(requirements.get(key, ()), own, self.daily)
             sources = " ; ".join(dict.fromkeys(found.source for found in group))
             result.append((sources, tuple(offers), conditions, daily))
         return tuple(result)
@@ -193,23 +195,6 @@ class _Builder:
             wanted_quantity=bundle.quantity,
             extra_items=items[1:],
         )
-
-    def _conditions(self, conditions: tuple[Condition, ...], own: set[Value]) -> tuple[tuple[Condition, ...], bool]:
-        kept = []
-        # Le script peut lever le drapeau avant de remettre l'objet : l'analyse des
-        # conditions l'a alors retiré, mais la remise à zéro quotidienne vaut toujours.
-        daily = any(flag in self.daily for flag in own if isinstance(flag, int))
-        for condition in conditions:
-            kind, _, number = condition.subject.partition(":")
-            if condition.subject == GAME_VERSION:
-                continue
-            if kind == "flag" and int(number) in self.daily and condition.value == 0:
-                daily = True
-                continue
-            if kind == "flag" and int(number) in own:
-                continue
-            kept.append(condition)
-        return tuple(kept), daily
 
     def _offers(self, found: FoundOffer, siblings: tuple[FoundOffer, ...]) -> list[Gen4Offer]:
         if found.consumes_table:
@@ -357,6 +342,24 @@ class _Builder:
         if not self.tables.prices.get(item):
             raise ValueError(f"{found.source} : objet vendu sans prix : {item}")
         return self.tables.prices[item]
+
+
+def _offer_conditions(
+    conditions: tuple[Condition, ...], own: set[Value], daily_flags: range
+) -> tuple[tuple[Condition, ...], bool]:
+    kept = []
+    # Le script peut lever le drapeau avant de remettre l'objet : l'analyse des
+    # conditions l'a alors retiré, mais la remise à zéro quotidienne vaut toujours.
+    daily = any(flag in daily_flags for flag in own if isinstance(flag, int))
+    for condition in conditions:
+        kind, _, number = condition.subject.partition(":")
+        if condition.subject == GAME_VERSION:
+            continue
+        if kind == "flag" and int(number) in daily_flags and condition.value == 0:
+            daily = True
+            continue
+        kept.append(condition)
+    return tuple(kept), daily
 
 
 def _paid_item(item: str, quantity: int, money: int, coins: int, points: int, taken: str | None) -> Gen4Offer:

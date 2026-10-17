@@ -82,8 +82,17 @@ sealed interface NpcOffer {
     data class Exchange(
         val item: OfferItem,
         val wanted: OfferItem,
-        override val condition: OfferCondition = OfferCondition.ALWAYS
-    ) : NpcOffer
+        override val condition: OfferCondition = OfferCondition.ALWAYS,
+        val quantity: Int = 1,
+        val wantedQuantity: Int = 1,
+        val extraItems: List<OfferItemCost> = emptyList()
+    ) : NpcOffer {
+        init {
+            require(quantity > 0 && wantedQuantity > 0)
+            require(extraItems.none { it.item.id == item.id })
+            require(extraItems.map { it.item.id }.distinct().size == extraItems.size)
+        }
+    }
 
     /** Lot du Casino, contre des jetons. */
     data class PrizeItem(
@@ -138,8 +147,15 @@ sealed interface NpcOffer {
         } else {
             OfferCurrency.MONEY
         },
-        val requiredItem: OfferItem? = null
-    ) : NpcOffer
+        val requiredItem: OfferItem? = null,
+        val requiredItems: List<OfferItemCost> = emptyList()
+    ) : NpcOffer {
+        init {
+            require(price == null || price > 0)
+            require(requiredItem == null || requiredItems.isEmpty())
+            require(requiredItems.map { it.item.id }.distinct().size == requiredItems.size)
+        }
+    }
 }
 
 /** Nature d'une offre lue dans la base. */
@@ -182,6 +198,8 @@ val NpcOffer.kind: OfferKind
             CharacterService.MOVE_DELETER -> OfferKind.MOVE_DELETER
             CharacterService.GROOMING -> OfferKind.GROOMING
             CharacterService.MOVE_TUTOR -> OfferKind.MOVE_TUTOR
+            CharacterService.ACCESSORY_SHOP -> OfferKind.ACCESSORY_SHOP
+            CharacterService.SCRATCH_CARDS -> OfferKind.SCRATCH_CARDS
         }
     }
 
@@ -202,10 +220,23 @@ enum class CharacterService {
     GROOMING,
 
     /** Tuteur de capacités, gratuit ou payé dans la monnaie indiquée par l’offre. */
-    MOVE_TUTOR
+    MOVE_TUTOR,
+
+    /** Échange des Baies contre des Accessoires de Concours. */
+    ACCESSORY_SHOP,
+
+    /** Cartes à gratter de la Zone de Combat de Platine, payées en Points Combat. */
+    SCRATCH_CARDS
 }
 
 data class OfferItem(val id: Int, val identifier: String, val name: String, val hasSprite: Boolean)
+
+/** Chaque objet et quantité d'un paiement composé, par exemple les quatre couleurs de Tessons. */
+data class OfferItemCost(val item: OfferItem, val quantity: Int) {
+    init {
+        require(quantity > 0)
+    }
+}
 
 /** Objet : description, ou attaque enseignée par une CT / CS et ce qu'elle fait. */
 data class ItemDetails(
@@ -251,7 +282,9 @@ enum class OfferKind(val identifier: String) {
     MOVE_DELETER("move_deleter"),
     GROOMING("grooming"),
     MOVE_TUTOR("move_tutor"),
-    POINT_PRIZE("point_prize");
+    POINT_PRIZE("point_prize"),
+    ACCESSORY_SHOP("accessory_shop"),
+    SCRATCH_CARDS("scratch_cards");
 
     companion object {
         fun from(identifier: String): OfferKind = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

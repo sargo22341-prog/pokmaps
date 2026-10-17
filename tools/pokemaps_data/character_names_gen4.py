@@ -14,7 +14,7 @@ de Diamant/Perle) sont choisies par les scripts : elles prennent le nom commun D
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from .maps_characters_data import CharacterNames
@@ -24,15 +24,33 @@ from .pret_gen4_source import c_defines, metang_enum, read_text
 if TYPE_CHECKING:
     from .pret_gen4 import Gen4PretRepo
     from .pret_gen4_map_models import Gen4Header
+    from .pret_gen4_offers import OfferCatalog
 
 DYNAMIC = "DYNAMIC_CHARACTER"
 _DP_DYNAMIC = re.compile(r"if \(spriteId >= (\d+) && spriteId <= (\d+)\)")
+_FACILITIES = {
+    "heal": "heal_spot",
+    "daycare": "day_care",
+    "daycare_egg": "day_care",
+    "daycare_withdrawal": "day_care",
+    "move_tutor": "move_tutor",
+    "move_relearner": "move_relearner",
+    "move_deleter": "move_deleter",
+    "point_prize": "battle_point_exchange",
+    "prize_item": "prize_vendor",
+    "fossil": "fossil_revival",
+    "accessory_shop": "accessory_shop",
+    "sale_seal": "seal_shop",
+    "scratch_cards": "scratch_cards",
+}
 
 
 @dataclass(frozen=True)
 class Gen4Names:
     classes: dict[str, str]  # constante de classe -> nom français
     sprites: dict[int, tuple[str, str]]  # apparence employée -> nom français, apparence (person, object, pokemon)
+    characters: dict[str, str] = field(default_factory=dict)
+    facilities: dict[str, str] = field(default_factory=dict)
 
 
 def repo_name(repo: Gen4PretRepo) -> str:
@@ -79,7 +97,9 @@ def sprite_key(repo: Gen4PretRepo, keys: dict[int, str], dynamic: range, graphic
     return f"{repo_name(repo)}:{keys.get(graphics, graphics)}"
 
 
-def read_gen4_names(repo: Gen4PretRepo, headers: dict[int, Gen4Header], names: CharacterNames) -> Gen4Names:
+def read_gen4_names(
+    repo: Gen4PretRepo, headers: dict[int, Gen4Header], names: CharacterNames, offers: OfferCatalog
+) -> Gen4Names:
     """Noms de toutes les classes du dépôt et des apparences des personnages posés dans les lieux retenus ; un nom
     manquant arrête la lecture."""
     prefix = repo_name(repo)
@@ -92,7 +112,17 @@ def read_gen4_names(repo: Gen4PretRepo, headers: dict[int, Gen4Header], names: C
     for graphics in sorted(used):
         key = sprite_key(repo, keys, dynamic, graphics)
         sprites[graphics] = (names.character(key), names.appearances[key])
-    return Gen4Names(dict(sorted(classes.items())), sprites)
+    characters = {}
+    for index, header in sorted(headers.items()):
+        for rank, _obj in enumerate(repo.events[header.events].object_events):
+            key = f"{prefix}:{index}:{rank}"
+            if key in names.by_text:
+                if names.text_families[key] != ("platinum" if repo.platinum else "diamond-pearl"):
+                    raise ValueError(f"npc_text_names.csv : famille DS incompatible : {key}")
+                characters[key] = names.text_name(key)
+    kinds = {offer.kind for step in offers.steps for offer in step.offers}
+    facilities = {kind: names.facility(_FACILITIES[kind]) for kind in sorted(kinds & _FACILITIES.keys())}
+    return Gen4Names(dict(sorted(classes.items())), sprites, characters, facilities)
 
 
 def unused_names(names: CharacterNames, found: dict[str, Gen4Names], repos: dict[str, Gen4PretRepo]) -> list[str]:
@@ -104,6 +134,7 @@ def unused_names(names: CharacterNames, found: dict[str, Gen4Names], repos: dict
         used |= {f"{prefix}:{trainer_class}" for trainer_class in catalog.classes}
         keys, dynamic = sprite_keys(repo), dynamic_sprites(repo)
         used |= {sprite_key(repo, keys, dynamic, graphics) for graphics in catalog.sprites}
+        used |= set(catalog.characters)
     prefixes = tuple(f"{repo_name(repo)}:" for repo in repos.values())
-    declared = {key for key in (*names.trainers, *names.characters) if key.startswith(prefixes)}
+    declared = {key for key in (*names.trainers, *names.characters, *names.by_text) if key.startswith(prefixes)}
     return sorted(declared - used)

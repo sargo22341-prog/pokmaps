@@ -249,6 +249,15 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
         OfferKind.GROOMING -> NpcOffer.Service(CharacterService.GROOMING, price, condition)
 
         OfferKind.MOVE_TUTOR -> moveTutor(condition)
+
+        OfferKind.ACCESSORY_SHOP -> NpcOffer.Service(CharacterService.ACCESSORY_SHOP, condition = condition)
+
+        OfferKind.SCRATCH_CARDS -> NpcOffer.Service(
+            CharacterService.SCRATCH_CARDS,
+            required(price),
+            condition,
+            OfferCurrency.BATTLE_POINTS
+        )
     }
 
     private fun NpcOfferRow.sale(condition: OfferCondition) = NpcOffer.Sale(

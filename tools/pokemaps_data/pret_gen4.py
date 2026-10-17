@@ -60,6 +60,7 @@ _SCRIPT_ENUMS = (
     "mart_seal_id",
     "mart_frontier_id",
     "tutor_locations",
+    "battle_tower_modes",
 )
 
 
@@ -211,7 +212,7 @@ class Gen4PretRepo:
         conflicts: set[str] = set()
         sources = [metang_enum(self.root / f"generated/{enum}.txt") for enum in _SCRIPT_ENUMS]
         sources.append(c_enum(self.root / "include/constants/npc_trades.h", "NPCTradeID"))
-        for source in (*sources, included_defines(self.root, FIELD_MACROS)):
+        for source in (*sources, included_defines(self.root, (*FIELD_MACROS, "include/constants/contests.h"))):
             for name, value in source.items():
                 if values.get(name, value) != value:
                     conflicts.add(name)

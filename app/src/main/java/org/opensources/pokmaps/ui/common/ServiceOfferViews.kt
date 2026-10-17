@@ -49,6 +49,12 @@ internal fun Services(services: List<NpcOffer.Service>, rowConditions: Boolean) 
         offer.requiredItem?.let {
             Text(stringResource(R.string.map_offer_required_item, it.name), style = MaterialTheme.typography.bodySmall)
         }
+        offer.requiredItems.forEach {
+            Text(
+                stringResource(R.string.map_offer_required_item_quantity, it.quantity, it.item.name),
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
         OfferRowCondition(offer, rowConditions)
     }
 }
@@ -65,6 +71,8 @@ private val CharacterService.role: CharacterRole
         CharacterService.MOVE_DELETER -> CharacterRole.MOVE_DELETER
         CharacterService.GROOMING -> CharacterRole.GROOMING
         CharacterService.MOVE_TUTOR -> CharacterRole.MOVE_TUTOR
+        CharacterService.ACCESSORY_SHOP -> CharacterRole.SHOP
+        CharacterService.SCRATCH_CARDS -> CharacterRole.PRIZES
     }
 
 @get:StringRes
@@ -80,4 +88,6 @@ private val CharacterService.description: Int
         CharacterService.MOVE_DELETER -> R.string.service_move_deleter
         CharacterService.GROOMING -> R.string.service_grooming
         CharacterService.MOVE_TUTOR -> R.string.service_move_tutor
+        CharacterService.ACCESSORY_SHOP -> R.string.service_accessory_shop
+        CharacterService.SCRATCH_CARDS -> R.string.service_scratch_cards
     }

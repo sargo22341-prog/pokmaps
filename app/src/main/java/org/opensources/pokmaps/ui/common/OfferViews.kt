@@ -290,13 +290,24 @@ private fun ExchangeRow(offer: NpcOffer.Exchange, onOpenItem: ((String) -> Unit)
     ) {
         ItemIcon(offer.item)
         Text(
-            stringResource(R.string.map_offer_exchange, offer.item.name, offer.wanted.name),
+            stringResource(
+                R.string.map_offer_exchange,
+                quantityText(offer.item.name, offer.quantity),
+                quantityText(offer.wanted.name, offer.wantedQuantity)
+            ),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.weight(1f)
         )
         ItemIcon(
             offer.wanted,
             Modifier.clickable(enabled = onOpenItem != null) { onOpenItem?.invoke(offer.wanted.identifier) }
+        )
+    }
+    offer.extraItems.forEach {
+        OfferItemRow(
+            it.item,
+            stringResource(R.string.map_offer_bundle_item, quantityText(it.item.name, it.quantity)),
+            onOpenItem = onOpenItem
         )
     }
 }

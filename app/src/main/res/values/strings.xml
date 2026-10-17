@@ -605,6 +605,10 @@
     <string name="service_daycare_withdrawal">Rend un Pokémon de la Pension : 100 ₽ plus 100 ₽ par niveau gagné.</string>
     <string name="service_move_tutor_generic">Enseigne une capacité à un Pokémon.</string>
     <string name="map_offer_required_item">Objet requis : %1$s</string>
+    <string name="map_offer_required_item_quantity">Objet requis : %1$d × %2$s</string>
+    <string name="map_offer_bundle_item">Dans le même lot : %1$s</string>
+    <string name="service_accessory_shop">Échange des Baies contre des Accessoires de Concours.</string>
+    <string name="service_scratch_cards">Propose des cartes à gratter contre des Points Combat.</string>
     <plurals name="map_offer_battle_points">
         <item quantity="one">%1$d Point Combat</item>
         <item quantity="other">%1$d Points Combat</item>

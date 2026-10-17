@@ -5,4 +5,5 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les offres prennent en charge les paiements en plusieurs objets et les lots avec un paiement unique.
 

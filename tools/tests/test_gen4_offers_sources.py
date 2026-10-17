@@ -83,6 +83,22 @@ def test_services_and_game_corner_are_exported(ds: tuple[Gen4PretRepo, OfferCata
     assert all(offer.currency == "battle_points" for offer in _offers(catalog, "point_prize"))
 
 
+def test_contest_reception_does_not_offer_link_healing_for_official_contests(
+    ds: tuple[Gen4PretRepo, OfferCatalog],
+) -> None:
+    repo, catalog = ds
+    if not repo.platinum:
+        return
+    healed = {
+        step.site.event
+        for step in catalog.steps
+        if step.site.header == "MAP_HEADER_CONTEST_HALL_LOBBY" and any(o.kind == "heal" for o in step.offers)
+    }
+    # scripts_contests.s : l'entrée 6 fixe CONTEST_MODE_OFFICIAL ; seuls les Concours Link soignent l'équipe.
+    assert 0 not in healed
+    assert healed
+
+
 def test_daily_rewards_and_persistent_balls(ds: tuple[Gen4PretRepo, OfferCatalog]) -> None:
     repo, catalog = ds
     assert daily_flags(repo)

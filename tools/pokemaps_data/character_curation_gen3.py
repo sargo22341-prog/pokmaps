@@ -118,7 +118,11 @@ def read_gen3_curation() -> Gen3Curation:
     if len(set(duplicates)) != len(duplicates):
         raise ValueError("npc_duplicates.csv : personnage GBA répété")
     with (DATA_DIR / "npc_offers.csv").open(encoding="utf-8", newline="") as handle:
-        rows = tuple(row for row in csv.DictReader(handle) if row["action"] == "resolve")
+        rows = tuple(
+            row
+            for row in csv.DictReader(handle)
+            if row["action"] == "resolve" and not set(row["repos"].split("|")) <= {"pokeplatinum", "pokediamond"}
+        )
     resolutions = tuple(_resolution(row) for row in rows)
     _check_resolution_duplicates(resolutions)
     reasons = tuple((row["family"], row["text"], row["reason"]) for row in duplicate_rows)
