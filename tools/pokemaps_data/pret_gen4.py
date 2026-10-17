@@ -10,6 +10,8 @@ from pathlib import Path
 
 from .pret_gen4_encounter_tables import EncounterTable, read_dp_encounters, read_platinum_encounters
 from .pret_gen4_events import read_events
+from .pret_gen4_flow import PlatinumContext, ScriptFlow, diamond_pearl_flow, platinum_flow, read_platinum_macros
+from .pret_gen4_flow_values import CommonScripts
 from .pret_gen4_land import LandBlock, read_land_block
 from .pret_gen4_map_models import CameraSettings, Gen4Area, Gen4Events, Gen4Header, Gen4Matrix, LightingPeriod
 from .pret_gen4_maps import (
@@ -25,16 +27,34 @@ from .pret_gen4_maps_dp import read_dp_cameras, read_dp_headers, read_dp_lightin
 from .pret_gen4_moves import read_gen4_moves
 from .pret_gen4_narc import FIELD_DATA, members, read_dp_areas, read_dp_events, read_dp_matrices, read_dp_prop_sets
 from .pret_gen4_nitro import NitroFile, read_nsbmd
+from .pret_gen4_rematches import VsSeekerRules, read_vs_seeker
 from .pret_gen4_script_binary import InitScripts, ScriptFile, read_init_scripts, read_script_file
 from .pret_gen4_script_commands import ScriptCommand, read_command_table
-from .pret_gen4_scripts import TextScriptFile, read_frontier_scripts, read_platinum_scripts
-from .pret_gen4_source import read_binary
+from .pret_gen4_script_ids import ScriptIds, read_script_ids
+from .pret_gen4_scripts import TextScriptFile, read_frontier_scripts, read_macros, read_platinum_scripts
+from .pret_gen4_source import metang_enum, read_binary
 from .pret_gen4_textures import NitroTextures, read_nsbtx
+from .pret_gen4_trainers import Gen4Trainer, read_trainers
 from .pret_moves import PretMove
 
 _VARIANTS = {frozenset({"PLATINUM"}): "platinum", frozenset({"DIAMOND", "PEARL"}): "diamond-pearl"}
 _MARKERS = {"platinum": "res/field/maps/data", "diamond-pearl": f"{FIELD_DATA}/land_data/land_data_release"}
 _SCRIPTS = f"{FIELD_DATA}/script/scr_seq_release"
+# Énumérations de Platine dont les scripts du terrain emploient les noms comme arguments.
+_SCRIPT_ENUMS = (
+    "vars_flags",
+    "trainers",
+    "items",
+    "species",
+    "moves",
+    "time_of_day",
+    "days_of_week",
+    "genders",
+    "badges",
+    "movement_types",
+    "object_events_gfx",
+    "map_headers",
+)
 
 
 class Gen4PretRepo:
@@ -175,6 +195,58 @@ class Gen4PretRepo:
                         raise
                     tables[index] = _init_or_fail(path, script_error)
         return scripts, tables
+
+    @cached_property
+    def constants(self) -> dict[str, int]:
+        """Constantes nommées de Platine lues par les scripts (énumérations generated/*.txt) ; un nom défini deux fois
+        avec deux valeurs différentes est écarté, et reste alors un texte que les lectures refusent si besoin."""
+        values: dict[str, int] = {"TRUE": 1, "FALSE": 0}
+        conflicts: set[str] = set()
+        for enum in _SCRIPT_ENUMS:
+            for name, value in metang_enum(self.root / f"generated/{enum}.txt").items():
+                if values.get(name, value) != value:
+                    conflicts.add(name)
+                values[name] = value
+        return {name: value for name, value in values.items() if name not in conflicts}
+
+    @cached_property
+    def flows(self) -> dict[int, ScriptFlow]:
+        """Flux de chaque fichier de scripts du terrain, sous la forme commune aux deux jeux (pret_gen4_flow)."""
+        if not self.platinum:
+            return {
+                index: diamond_pearl_flow(f"scripts {index}", script, self.script_commands)
+                for index, script in self._dp_scripts[0].items()
+            }
+        context = PlatinumContext(
+            *read_platinum_macros(self.root),
+            frozenset(read_macros(self.root, ("asm/macros/movement.inc",))),
+            self.constants,
+        )
+        return {
+            index: platinum_flow(script, context)
+            for index, script in self.scripts.items()
+            if isinstance(script, TextScriptFile)
+        }
+
+    @cached_property
+    def trainers(self) -> dict[int, Gen4Trainer]:
+        return read_trainers(self.root, self._repo_name)
+
+    @cached_property
+    def vs_seeker(self) -> VsSeekerRules:
+        return read_vs_seeker(self.root, self._repo_name, self.names.trainers if self.platinum else None)
+
+    @property
+    def _repo_name(self) -> str:
+        return "pokeplatinum" if self.platinum else "pokediamond"
+
+    @cached_property
+    def script_ids(self) -> ScriptIds:
+        return read_script_ids(self.root, self._repo_name, self.names.archives["scripts"] if self.platinum else None)
+
+    @cached_property
+    def common_scripts(self) -> CommonScripts:
+        return CommonScripts(self.flows[self.script_ids.common_file], self.script_ids.common)
 
     @cached_property
     def frontier_scripts(self) -> dict[str, TextScriptFile]:

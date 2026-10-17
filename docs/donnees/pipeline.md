@@ -69,6 +69,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 | `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |
+| `--sinnoh-characters-only` | Dresseurs, combats, revanches, objets et Pokédex National DS dans `sinnoh-characters/` |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.
@@ -155,6 +156,19 @@ ses fichiers extraits (`pret_gen4_narc.py`) et dans le moteur, en C ou en assemb
 fonction du moteur ; le désassembleur (`pret_gen4_script_binary.py`) suit le flux depuis les points d’entrée. Les
 formats sont refusés dès qu’ils sortent de ce que les deux dépôts emploient (textures 4 × 4 et directes, commandes
 GX ou de script inconnues, tailles incohérentes).
+
+### Personnages DS
+
+`pret_gen4_flow.py` ramène les scripts des deux dépôts à une même suite d’étapes (macros composées de Platine
+développées d’après `scrcmd.inc`) ; `pret_gen4_flow_values.py` y suit les valeurs possibles des variables, avec les
+choix du joueur (Pokémon de départ, sexe) et les tirages bornés, et `pret_gen4_flow_chains.py` les conditions qui
+mènent à une étape. `pret_gen4_trainers.py` lit les équipes et calcule les attaques par défaut comme le moteur ;
+`pret_gen4_rematches.py` lit la table du Cherche VS et ses drapeaux de niveau ; `pret_gen4_battles.py` relie les PNJ
+dresseurs, les combats de scénario (variantes selon le Pokémon de départ et le sexe du joueur) et les partenaires ;
+`pret_gen4_field_items.py` lit les objets au sol et cachés avec leur drapeau ; `pret_gen4_national_dex.py` le
+déblocage du Pokédex National. `preview_characters_gen4.py` réunit ces lectures pour les lieux retenus dans
+`sinnoh-characters/characters.json`. Une valeur que la lecture ne borne pas arrête la génération, sauf exception
+justifiée dans `pret_gen4_battles._OPEN_BATTLES`.
 
 ### Cartes préparatoires de Sinnoh
 

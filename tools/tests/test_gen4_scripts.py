@@ -174,7 +174,7 @@ def test_command_layouts_are_read_from_c_bodies(engine: Path) -> None:
     assert layout(engine, "ScrCmd_GoToIf") == (((1, "value"), (4, "jump")), (), False)
     assert layout(engine, "ScrCmd_Movement") == (((2, "var"), (4, "data")), (), False)
     assert layout(engine, "ScrCmd_Option") == (((1, "value"),), ((0, ()), (2, (2,))), False)
-    assert layout(engine, "ScrCmd_Poffin")[0] == ((2, "var"), *([(1, "value")] * 4))
+    assert layout(engine, "ScrCmd_Poffin")[0] == ((2, "pointer"), *([(1, "value")] * 4))
     assert layout(engine, "ScrCmd_Helper") == (((2, "value"), (2, "var")), (), False)
     assert layout(engine, "ScrCmd_Maybe") == ("illisible", "lecture conditionnelle (ScriptReadHalfword)")
 

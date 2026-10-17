@@ -61,6 +61,11 @@ def _arguments() -> argparse.Namespace:
         action="store_true",
         help="générer l'aperçu des rencontres et emplacements DS (après --sinnoh-maps-only)",
     )
+    maps_only.add_argument(
+        "--sinnoh-characters-only",
+        action="store_true",
+        help="générer l'aperçu des dresseurs, combats, objets et du Pokédex National DS",
+    )
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
     maps_only.add_argument(
         "--achievement-resources-only", action="store_true", help="générer les ressources de succès depuis les archives"
@@ -133,7 +138,7 @@ def main() -> int:
 
 
 def _sinnoh_preview(args: argparse.Namespace) -> bool:
-    """Aperçus DS demandés (cartes, décor, catalogues, Pokémon, rencontres) ; faux si aucun ne l'est."""
+    """Aperçus DS demandés (cartes, décor, catalogues, Pokémon, rencontres, personnages) ; faux si aucun ne l'est."""
     if args.sinnoh_scenes_only:
         from pokemaps_data.maps_scenes_gen4 import rebuild_scenes
 
@@ -150,6 +155,10 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
         from pokemaps_data.preview_wild_gen4 import build_wild_preview_gen4
 
         build_wild_preview_gen4(args.cache, args.preview, args.assets)
+    elif args.sinnoh_characters_only:
+        from pokemaps_data.preview_characters_gen4 import build_characters_preview_gen4
+
+        build_characters_preview_gen4(args.cache, args.preview)
     elif args.sinnoh_pokemon_only:
         from pokemaps_data.preview_pokemon_gen4 import build_pokemon_preview
 

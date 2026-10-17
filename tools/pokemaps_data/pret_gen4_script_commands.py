@@ -11,7 +11,7 @@ argument ; toute autre forme laisse la commande « illisible », et son emploi d
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from itertools import pairwise
 from pathlib import Path
 
@@ -23,7 +23,7 @@ _READS = {
     "ScriptReadByte": (1, "value"),
     "ScriptReadHalfword": (2, "value"),
     "ScriptGetVar": (2, "var"),
-    "ScriptGetVarPointer": (2, "var"),
+    "ScriptGetVarPointer": (2, "pointer"),
     "ScriptReadWord": (4, "value"),
 }
 # Fonctions recevant le contexte sans lire d'argument : contrôle du script et marqueur de paramètre inutilisé.
@@ -38,12 +38,14 @@ _NONMATCHING_ASM = re.compile(r"#else\s*\n(?://[^\n]*\n)?asm .*?#endif", re.DOTA
 _ASM_FUNCTION = re.compile(r"\tthumb_func_start (\w+)\n")
 _ASM_BRANCH = re.compile(r"^b(?:eq|ne|lt|gt|le|ge|hi|lo|hs|ls|cc|cs|mi|pl)?\s+_")
 _MAX_HELPER_DEPTH = 3
+_STORES_VAR = re.compile(r"(?<!\w)GetVarPointer\s*\(|->data\[\d+\]\s*=")
 
 
 @dataclass(frozen=True)
 class Argument:
     size: int
-    role: str  # value, var (numéro de variable ou valeur), jump, call, data
+    # value, var (numéro de variable ou valeur, lu), pointer (variable que la commande peut écrire), jump, call, data
+    role: str
 
 
 @dataclass(frozen=True)
@@ -55,6 +57,9 @@ class ScriptCommand:
     cases: tuple[tuple[int, tuple[Argument, ...]], ...]
     ends: bool  # End, Return ou saut inconditionnel : le flux ne continue pas après la commande
     problem: str | None  # raison pour laquelle la forme n'a pas pu être lue
+    # La fonction garde un numéro de variable lu par valeur pour l'écrire (GetVarPointer, ctx->data[n] = …) :
+    # un argument qui désigne une variable peut alors être écrit, même lu par ScriptReadHalfword.
+    stores_var: bool = False
 
 
 def read_command_table(root: Path) -> tuple[ScriptCommand, ...]:
@@ -64,9 +69,11 @@ def read_command_table(root: Path) -> tuple[ScriptCommand, ...]:
     commands = []
     for opcode, name in enumerate(names):
         if name in functions:
-            commands.append(_c_command(opcode, name, functions, assembly))
+            command = _c_command(opcode, name, functions, assembly)
+            commands.append(replace(command, stores_var=bool(_STORES_VAR.search(functions[name][0]))))
         elif name in assembly:
-            commands.append(_asm_command(opcode, name, assembly[name]))
+            command = _asm_command(opcode, name, assembly[name])
+            commands.append(replace(command, stores_var="bl GetVarPointer" in assembly[name]))
         else:
             commands.append(ScriptCommand(opcode, name, (), (), False, "fonction introuvable"))
     return tuple(commands)

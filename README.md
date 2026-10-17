@@ -64,6 +64,8 @@ Les deux familles ont leurs propres tuiles, catalogues français, étages, nivea
 `python tools/review_gen4_maps.py` produit les planches de relecture dans le scratchpad.
 Ensuite, `python tools/build_data.py --sinnoh-encounters-only` ajoute les rencontres lues dans le moteur DS et les
 emplacements sauvages dans `tools/build/preview/sinnoh-encounters/`, que l’éditeur ouvre avec `--assets`.
+`python tools/build_data.py --sinnoh-characters-only` écrit dans `tools/build/preview/sinnoh-characters/` les
+dresseurs, combats de scénario, revanches du Cherche VS, objets des lieux et le déblocage du Pokédex National.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
 
 ## Publier une version
