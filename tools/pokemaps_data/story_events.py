@@ -11,12 +11,18 @@ Léo, ENGINE_TIME_CAPSULE est remis à zéro chaque jour. Chaque drapeau rencont
 - `operator`, `value`, `phrase` : comparaison numérique d'une `VAR_…` et son texte français ;
   ces lignes laissent `when_set` et `when_clear` vides.
 
+Les jeux DS (story_conditions_gen4) décrivent de la même façon les conditions lues sur les chemins de leurs scripts :
+un drapeau (nommé en Platine, « flag:N » en Diamant/Perle) ou un dresseur battu (« trainer_defeated:N ») prend une
+ligne sans comparaison ; toute autre comparaison, sur une variable ou sur le résultat d'une commande
+(GetTimeOfDay, ScrCmd_HasBadge…), une ligne avec `operator` et `value`, entier ou autre variable.
+
 Un drapeau absent du fichier arrête la génération : on ne devine jamais une étape.
 """
 
 from __future__ import annotations
 
 import csv
+import re
 from dataclasses import dataclass, field
 
 from .offer_conditions import Condition
@@ -26,6 +32,8 @@ from .sources import DATA_DIR
 _FILE = "story_events.csv"
 _COLUMNS = ["repos", "flag", "when_set", "when_clear", "reason"]
 _VALUE_COLUMNS = ["operator", "value", "phrase"]
+DS_REPOS = frozenset({"pokeplatinum", "pokediamond"})
+_DS_VARIABLE = re.compile(r"VAR_\w+|var:\d+")
 
 
 @dataclass(frozen=True)
@@ -124,7 +132,9 @@ def read_story_events() -> StoryEvents:
             if phrase and (phrase != phrase.strip() or not phrase[0].isupper() or phrase.endswith(".")):
                 raise ValueError(f"{_FILE} : phrase mal formée pour {row['flag']} : {phrase!r}")
         repos = frozenset(row["repos"].split("|"))
-        if row["flag"].startswith("VAR_"):
+        if repos & DS_REPOS and not repos <= DS_REPOS:
+            raise ValueError(f"{_FILE} : jeux DS et jeux plus anciens sur une même ligne : {row['flag']}")
+        if row["flag"].startswith("VAR_") or (repos <= DS_REPOS and row.get("operator")):
             _read_value(row, repos, values)
             continue
         if any(row.get(column) for column in _VALUE_COLUMNS):
@@ -143,13 +153,19 @@ def _read_value(
     operator, value = row.get("operator", ""), row.get("value", "")
     if operator not in {"eq", "ne", "lt", "le", "gt", "ge"} or not value:
         raise ValueError(f"{_FILE} : comparaison incomplète pour {row['flag']}")
-    try:
-        number = int(value, 0)
-    except ValueError as error:
-        raise ValueError(f"{_FILE} : valeur illisible pour {row['flag']} : {value}") from error
-    if not 0 <= number <= 65535 or row["when_set"] or row["when_clear"]:
+    if repos <= DS_REPOS and _DS_VARIABLE.fullmatch(value):
+        text = value
+    else:
+        try:
+            number = int(value, 0)
+        except ValueError as error:
+            raise ValueError(f"{_FILE} : valeur illisible pour {row['flag']} : {value}") from error
+        if not 0 <= number <= 65535:
+            raise ValueError(f"{_FILE} : variable mal formée : {row['flag']}")
+        text = str(number)
+    if row["when_set"] or row["when_clear"]:
         raise ValueError(f"{_FILE} : variable mal formée : {row['flag']}")
-    requirement = ScriptRequirement(row["flag"], operator, str(number))
+    requirement = ScriptRequirement(row["flag"], operator, text)
     for repo in sorted(repos):
         key = (repo, requirement)
         if key in values:

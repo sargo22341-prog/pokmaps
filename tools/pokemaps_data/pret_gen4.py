@@ -31,8 +31,8 @@ from .pret_gen4_rematches import VsSeekerRules, read_vs_seeker
 from .pret_gen4_script_binary import InitScripts, ScriptFile, read_init_scripts, read_script_file
 from .pret_gen4_script_commands import ScriptCommand, read_command_table
 from .pret_gen4_script_ids import ScriptIds, read_script_ids
-from .pret_gen4_scripts import TextScriptFile, read_frontier_scripts, read_macros, read_platinum_scripts
-from .pret_gen4_source import metang_enum, read_binary
+from .pret_gen4_scripts import FIELD_MACROS, TextScriptFile, read_frontier_scripts, read_macros, read_platinum_scripts
+from .pret_gen4_source import included_defines, metang_enum, read_binary
 from .pret_gen4_textures import NitroTextures, read_nsbtx
 from .pret_gen4_trainers import Gen4Trainer, read_trainers
 from .pret_moves import PretMove
@@ -198,12 +198,14 @@ class Gen4PretRepo:
 
     @cached_property
     def constants(self) -> dict[str, int]:
-        """Constantes nommées de Platine lues par les scripts (énumérations generated/*.txt) ; un nom défini deux fois
-        avec deux valeurs différentes est écarté, et reste alors un texte que les lectures refusent si besoin."""
+        """Constantes nommées de Platine lues par les scripts (énumérations generated/*.txt, `#define` entiers des
+        en-têtes constants/ qu'incluent les macros) ; un nom défini deux fois avec deux valeurs différentes est
+        écarté, et reste alors un texte que les lectures refusent si besoin."""
         values: dict[str, int] = {"TRUE": 1, "FALSE": 0}
         conflicts: set[str] = set()
-        for enum in _SCRIPT_ENUMS:
-            for name, value in metang_enum(self.root / f"generated/{enum}.txt").items():
+        sources = [metang_enum(self.root / f"generated/{enum}.txt") for enum in _SCRIPT_ENUMS]
+        for source in (*sources, included_defines(self.root, FIELD_MACROS)):
+            for name, value in source.items():
                 if values.get(name, value) != value:
                     conflicts.add(name)
                 values[name] = value

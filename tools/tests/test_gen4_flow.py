@@ -14,6 +14,7 @@ from pokemaps_data.pret_gen4_flow import (
     COPY_VAR,
     DATA,
     END,
+    GAME_VERSION,
     GOTO,
     GOTO_IF,
     PLAYER_STARTER,
@@ -33,6 +34,7 @@ from pokemaps_data.pret_gen4_flow_values import (
     EXTERNAL,
     STARTER_SLOT,
     UNKNOWN,
+    VERSION_SLOT,
     Choices,
     CommonScripts,
     values_at,
@@ -84,6 +86,25 @@ def test_branch_on_the_starter_keeps_each_team_with_its_starter() -> None:
     assert values.values(4, STARTER_SLOT) == {390, 393}
     assert values.values(6, STARTER_SLOT) == {387}
     assert values.values(4, RESULT) == {20}
+
+
+def test_game_version_keeps_each_species_with_its_version() -> None:
+    script = flow(
+        (GAME_VERSION, (RESULT,), None, {0}),
+        (SET_VALUE, (TRAINER, 483), None),
+        (COMPARE_VAR, (RESULT, 10), None),
+        (GOTO_IF, (1,), 5),
+        (SET_VALUE, (TRAINER, 484), None),
+        ("ScrCmd_LegendaryBattle", (TRAINER, 47), None),
+        (END, (), None),
+    )
+    wanted = {"ScrCmd_LegendaryBattle"}
+    versions = Choices(CHOICES.starters, CHOICES.genders, frozenset({10, 11}))
+    values = values_at(script, lambda step: step.command in wanted, {TRAINER}, choices=versions)
+    assert values.combos(5, (TRAINER, 47, VERSION_SLOT)) == {(483, 47, 10), (484, 47, 11)}
+    # Sans domaine de versions, la variable reste inconnue et les deux espèces restent possibles.
+    unknown = values_at(script, lambda step: step.command in wanted, {TRAINER}, choices=CHOICES)
+    assert unknown.combos(5, (TRAINER, VERSION_SLOT)) == {(483, UNKNOWN), (484, UNKNOWN)}
 
 
 def test_random_choice_resolves_both_opponents_without_external_value() -> None:

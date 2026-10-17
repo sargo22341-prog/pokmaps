@@ -33,6 +33,7 @@ COMPARE_VAR, CHECK_FLAG, CHECK_TRAINER, CALL_COMMON = "compare_var", "check_flag
 SET_FLAG, NATIONAL_DEX = "set_flag", "national_dex"
 ADD_ITEM, ADD_COINS = "add_item", "add_coins"
 RANDOM, PLAYER_STARTER, PLAYER_GENDER = "random", "player_starter", "player_gender"
+GAME_VERSION = "game_version"
 DATA = "data"
 _FLOW = frozenset({GOTO, GOTO_IF, CALL, CALL_IF})
 # Commandes qui lisent leurs arguments sans écrire de variable (les sources nomment certains varID).
@@ -64,6 +65,7 @@ _PLATINUM = {
     "GetRandom": RANDOM,
     "GetPlayerStarterSpecies": PLAYER_STARTER,
     "GetPlayerGender": PLAYER_GENDER,
+    "GetGameVersion": GAME_VERSION,
 }
 # Opcodes de Diamant/Perle (gScriptCmdTable) -> nom canonique, vérifiés contre le nom de leur fonction.
 _DIAMOND_PEARL = {
@@ -86,6 +88,7 @@ _DIAMOND_PEARL = {
     0xDE: ("ScrCmd_GetStarter", PLAYER_STARTER),
     0x14D: ("ScrCmd_GetPlayerGender", PLAYER_GENDER),
     0x1B7: ("ScrCmd_Random", RANDOM),
+    0x246: ("ScrCmd_GetGameVersion", GAME_VERSION),
     0xE5: ("ScrCmd_Unk00E5", TRAINER_BATTLE),
     0x22D: ("ScrCmd_NationalDex", NATIONAL_DEX),
     0x2A0: ("ScrCmd_Unk02A0", TAG_BATTLE),

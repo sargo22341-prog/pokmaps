@@ -69,7 +69,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 | `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |
-| `--sinnoh-characters-only` | Dresseurs, combats, revanches, objets et Pokédex National DS dans `sinnoh-characters/` |
+| `--sinnoh-characters-only` | Dresseurs, combats, revanches, objets, Pokémon fixes, noms français et étapes du scénario DS dans `sinnoh-characters/` |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.
@@ -165,10 +165,15 @@ choix du joueur (Pokémon de départ, sexe) et les tirages bornés, et `pret_gen
 mènent à une étape. `pret_gen4_trainers.py` lit les équipes et calcule les attaques par défaut comme le moteur ;
 `pret_gen4_rematches.py` lit la table du Cherche VS et ses drapeaux de niveau ; `pret_gen4_battles.py` relie les PNJ
 dresseurs, les combats de scénario (variantes selon le Pokémon de départ et le sexe du joueur) et les partenaires ;
-`pret_gen4_field_items.py` lit les objets au sol et cachés avec leur drapeau ; `pret_gen4_national_dex.py` le
-déblocage du Pokédex National. `preview_characters_gen4.py` réunit ces lectures pour les lieux retenus dans
-`sinnoh-characters/characters.json`. Une valeur que la lecture ne borne pas arrête la génération, sauf exception
-justifiée dans `pret_gen4_battles._OPEN_BATTLES`.
+`pret_gen4_field_items.py` lit les objets au sol et cachés avec leur drapeau ; `pret_gen4_fixed.py` les Pokémon fixes
+(espèce, niveau et version, position, drapeau de retrait ; Giratina du Monde Distorsion posé par le moteur, lu par
+`pret_gen4_distortion.py`) ; `pret_gen4_national_dex.py` le déblocage du Pokédex National. `story_conditions_gen4.py`
+traduit les conditions des chemins avec `story_events.csv` (drapeaux nommés en Platine, numérotés en Diamant/Perle) ;
+`character_names_gen4.py` nomme les classes et les personnages avec `trainer_classes.csv` et `npc_names.csv`, dont
+les lignes DS sont préfixées par le dépôt (`pokeplatinum:`, `pokediamond:`). `preview_characters_gen4.py` réunit
+ces lectures pour les lieux retenus dans `sinnoh-characters/characters.json`. Une valeur que la lecture ne borne
+pas, une condition ou un nom absent, ou une ligne DS inemployée arrête la génération, sauf exception justifiée dans
+`pret_gen4_battles._OPEN_BATTLES`.
 
 ### Cartes préparatoires de Sinnoh
 

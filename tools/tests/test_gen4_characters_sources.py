@@ -101,7 +101,8 @@ def test_items_and_hidden_coins(ds: tuple[Gen4PretRepo, CharacterCatalog]) -> No
     for item in catalog.items:
         kinds[item.kind] += 1
         assert item.quantity >= 1 and item.item.startswith("ITEM_")
-    expected = {"platinum": (328, 262), "diamond-pearl": (260, 241)}[catalog.version_group]
+    # Platine : 328 objets des événements et l'Orbe Platiné que le moteur pose au Monde Distorsion.
+    expected = {"platinum": (329, 262), "diamond-pearl": (260, 241)}[catalog.version_group]
     assert (kinds["item"], kinds["hidden_item"]) == expected
     assert all(730 <= item.flag < 730 + 800 for item in catalog.items if item.kind == "hidden_item")
 

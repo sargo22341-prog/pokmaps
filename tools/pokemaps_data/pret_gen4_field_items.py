@@ -1,6 +1,7 @@
 """Objets au sol et objets cachés des lieux DS, avec le drapeau qui les retire une fois ramassés.
 
-Un objet au sol est un PNJ (Poké Ball) dont le script appartient à la tranche des objets au sol : son point
+Un objet au sol est un PNJ (Poké Ball, posé par les événements du lieu ou, au Monde Distorsion de Platine, par le
+moteur : pret_gen4_distortion) dont le script appartient à la tranche des objets au sol : son point
 d'entrée dans le fichier commun fixe l'objet et la quantité (VAR_0x8008 et VAR_0x8009 en Platine, mêmes variables
 dans Diamant/Perle) avant de les donner ; son drapeau de masquage est celui qui le retire. Un objet caché est un
 événement de fond (type BG_EVENT_TYPE_HIDDEN_ITEM) : le moteur cherche l'objet et la quantité dans gHiddenItems
@@ -18,6 +19,7 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from .pret_gen4_distortion import read_distortion_objects
 from .pret_gen4_engine_text import asm_data, asm_function, c_initializer
 from .pret_gen4_flow import ADD_COINS, ADD_ITEM, Step, is_var, reachable
 from .pret_gen4_flow_values import values_at
@@ -80,28 +82,51 @@ def read_map_items(repo: Gen4PretRepo, ids: ScriptIds, selected: dict[int, Gen4H
     """Objets au sol et cachés des lieux `selected`."""
     names = item_names(repo)
     headers = [selected[index] for index in sorted(selected)]
-    scripts = {
-        obj.script - ids.visible
-        for header in headers
-        for obj in repo.events[header.events].object_events
-        if ids.visible <= obj.script < ids.hidden
-    }
-    visible = _visible_contents(repo, ids, scripts)
+    balls = _placed_balls(repo, ids, headers)
+    visible = _visible_contents(repo, ids, {ball.script - ids.visible for ball in balls})
     hidden = _hidden_table(repo)
     result = []
+    for ball in balls:
+        item, quantity = visible[ball.script - ids.visible]
+        if not ball.hidden_flag:
+            raise ValueError(f"{ball.header.constant} : objet au sol sans drapeau ({ball.script})")
+        values = (ball.x, ball.z, ball.y, names[item], quantity, ball.hidden_flag, ball.script)
+        result.append(Gen4MapItem(ball.header.index, "item", *values))
     for header in headers:
-        events = repo.events[header.events]
-        for obj in events.object_events:
-            if ids.visible <= obj.script < ids.hidden:
-                item, quantity = visible[obj.script - ids.visible]
-                if not obj.hidden_flag:
-                    raise ValueError(f"{header.constant} : objet au sol sans drapeau ({obj.script})")
-                values = (header.index, "item", obj.x, obj.z, obj.y, names[item], quantity, obj.hidden_flag, obj.script)
-                result.append(Gen4MapItem(*values))
-        for event in events.bg_events:
+        for event in repo.events[header.events].bg_events:
             if event.kind == HIDDEN_ITEM_EVENT:
                 result.append(_hidden(header.index, header.constant, event, hidden, ids, names, repo.platinum))
     return tuple(result)
+
+
+@dataclass(frozen=True)
+class _Placed:
+    header: Gen4Header
+    x: int
+    z: int
+    y: int
+    hidden_flag: int
+    script: int
+
+
+def _placed_balls(repo: Gen4PretRepo, ids: ScriptIds, headers: list[Gen4Header]) -> list[_Placed]:
+    """Objets au sol posés dans les lieux, y compris par le moteur du Monde Distorsion (pret_gen4_distortion)."""
+    result = [
+        _Placed(header, obj.x, obj.z, obj.y, obj.hidden_flag, obj.script)
+        for header in headers
+        for obj in repo.events[header.events].object_events
+        if ids.visible <= obj.script < ids.hidden
+    ]
+    if not repo.platinum:
+        return result
+    by_constant = {header.constant: header for header in headers}
+    for obj in read_distortion_objects(repo):
+        if obj.header not in by_constant or obj.script is None or not ids.visible <= obj.script < ids.hidden:
+            continue
+        if obj.x is None or obj.z is None or obj.y is None:
+            raise ValueError(f"{obj.name} : position illisible")
+        result.append(_Placed(by_constant[obj.header], obj.x, obj.z, obj.y, obj.hidden_flag or 0, obj.script))
+    return result
 
 
 def _visible_contents(repo: Gen4PretRepo, ids: ScriptIds, scripts: set[int]) -> dict[int, tuple[int, int]]:

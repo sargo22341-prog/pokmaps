@@ -24,6 +24,7 @@ from .pret_gen4_flow import (
     Key,
     ScriptFlow,
     Step,
+    is_var,
 )
 from .pret_gen4_flow_values import comparisons
 
@@ -41,7 +42,7 @@ _MAX_PATH_STEPS = 200_000
 class Condition:
     subject: str  # commande qui fixe la valeur comparée, « flag:N », « trainer_defeated:N » ou « var:N »
     operator: str
-    value: int | str
+    value: int | str  # entier, « var:N » pour une autre variable, ou constante restée sans valeur
 
 
 class Chains:
@@ -76,7 +77,9 @@ class Chains:
             subject = "flag" if compare.command == CHECK_FLAG else "trainer_defeated"
             return Condition(f"{subject}:{compare.arguments[0]}", "=", int(1 in kept))
         operator = _OPERATORS[code] if taken else _NEGATION[_OPERATORS[code]]
-        return Condition(self._subject(compare), operator, compare.arguments[1])
+        value = compare.arguments[1]
+        # CompareVar compare aussi deux variables (CompareVarToVar de Diamant/Perle) : la valeur nomme alors la seconde.
+        return Condition(self._subject(compare), operator, f"var:{value}" if is_var(value) else value)
 
     def _subject(self, compare: Step) -> str:
         var = compare.arguments[0]

@@ -607,3 +607,98 @@ pokeruby|pokeemerald,FLAG_RECEIVED_BELUE_BERRY,,Cette baie rare n’a pas encore
 pokefirered,FLAG_DID_ESPHERE_TRADE,,,data/event_scripts.s et scripts du personnage : échange unique déjà effectué,,,
 pokefirered,FLAG_DID_TANGENY_TRADE,,,data/maps/CinnabarIsland_PokemonLab_Lounge/scripts.inc : échange unique déjà effectué,,,
 pokefirered,FLAG_DID_SEELOR_TRADE,,,data/event_scripts.s et scripts du personnage : échange unique déjà effectué,,,
+pokeplatinum,FLAG_ARRESTED_CHARON_STARK_MOUNTAIN,Après l'arrestation de Charon au Mont Abrupt,Avant l'arrestation de Charon au Mont Abrupt,Levé au Mont Abrupt (scripts_stark_mountain_room_3.s) ; le Conseil 4 et Cynthia prennent alors leurs équipes de revanche (scripts des salles de la Ligue),,,
+pokeplatinum,FLAG_AWAKENED_REGIGIGAS,Après le réveil de Regigigas,Avant le réveil de Regigigas,"Levé au premier combat contre Regigigas (scripts_snowpoint_temple_b5f.s) ; avant, il ne se réveille qu'avec Regirock, Regice et Registeel dans l'équipe",,,
+pokeplatinum,FLAG_CAUGHT_DIALGA,,Avant la capture de Dialga,Levé à la capture de Dialga aux Colonnes Lances (scripts_spear_pillar_dialga.s),,,
+pokeplatinum,FLAG_CAUGHT_PALKIA,,Avant la capture de Palkia,Levé à la capture de Palkia aux Colonnes Lances (scripts_spear_pillar_palkia.s),,,
+pokeplatinum,FLAG_CAUGHT_OLD_CHATEAU_ROTOM,,Avant la capture de Motisma,Levé à la capture de Motisma au Vieux Château (scripts_old_chateau_back_middle_west_room.s),,,
+pokeplatinum,FLAG_DAILY_BATTLED_OLD_CHATEAU_ROTOM,,Une fois par jour,Drapeau du jour levé après le combat contre Motisma (scripts_old_chateau_back_middle_west_room.s),,,
+pokeplatinum,FLAG_DAILY_DEFEATED_SURVIVAL_AREA_RIVAL,,Une fois par jour,Drapeau du jour levé après la victoire contre le rival à l'Aire de Survie (scripts_survival_area.s),,,
+pokeplatinum,FLAG_DEFEATED_AARON,,,"Levé par la victoire contre Aaron lui-même (scripts_pokemon_league_aaron_room.s), baissé au Centre Pokémon de la Ligue : ce n'est pas une étape",,,
+pokeplatinum,FLAG_DEFEATED_BERTHA,,,"Levé par la victoire contre Terry lui-même (scripts_pokemon_league_bertha_room.s), baissé au Centre Pokémon de la Ligue : ce n'est pas une étape",,,
+pokeplatinum,FLAG_DEFEATED_FLINT,,,"Levé par la victoire contre Adrien lui-même (scripts_pokemon_league_flint_room.s), baissé au Centre Pokémon de la Ligue : ce n'est pas une étape",,,
+pokeplatinum,FLAG_DEFEATED_LUCIAN,,,"Levé par la victoire contre Lucio lui-même (scripts_pokemon_league_lucian_room.s), baissé au Centre Pokémon de la Ligue : ce n'est pas une étape",,,
+pokeplatinum,FLAG_DEFEATED_GALACTIC_HQ_CONTROL_ROOM_SATURN,,,"Levé par la victoire contre Saturne au QG Galaxie, dans la même scène (scripts_galactic_hq_control_room.s) : ce n'est pas une étape",,,
+pokeplatinum,FLAG_FREED_GALACTIC_HQ_POKEMON,,,"Levé après le combat contre Saturne, dans la même scène (scripts_galactic_hq_control_room.s) : ce n'est pas une étape",,,
+pokeplatinum,FLAG_DEFEATED_TRAINERS_SCHOOL_SCHOOL_KID_HARRISON,,,Levé par la victoire contre cet Élève de l'École de Dresseurs (scripts_trainers_school.s) : le combat ne se joue qu'une fois,,,
+pokeplatinum,FLAG_DEFEATED_TRAINERS_SCHOOL_SCHOOL_KID_CHRISTINE,,,Levé par la victoire contre cette Élève de l'École de Dresseurs (scripts_trainers_school.s) : le combat ne se joue qu'une fois,,,
+pokeplatinum,FLAG_RECEIVED_TRAINERS_SCHOOL_POTION,,,"Levé quand l'Élève donne la Potion après le combat, dans la même scène (scripts_trainers_school.s) : ce n'est pas une étape",,,
+pokeplatinum,FLAG_EXAMINED_CELESTIC_TOWN_CAVE_PAINTING,,,"Levé quand on examine la fresque après le combat contre Hélio, dans la même scène (scripts_celestic_town_cave.s) : ce n'est pas une étape",,,
+pokeplatinum,FLAG_FIRST_ARRIVAL_ETERNA_CITY,Après la première visite de Vestigion,Avant la première visite de Vestigion,Drapeau de première arrivée levé par le moteur en entrant à Vestigion ; le Prof. Sorbier ne vérifie le Pokédex de Sinnoh qu'ensuite (scripts_sandgem_town_pokemon_research_lab.s),,,
+pokeplatinum,FLAG_GAME_COMPLETED,Après la victoire à la Ligue Pokémon,Avant la victoire à la Ligue Pokémon,Levé au Panthéon (scripts_pokemon_league_hall_of_fame.s),,,
+pokeplatinum,FLAG_SHOWN_COMPLETE_LOCAL_DEX,,,Levé quand le Pokédex de Sinnoh complet est montré (scripts_pokedex_ratings.s) ; les deux chemins mènent au Pokédex National : ce n'est pas une étape,,,
+pokeplatinum,FLAG_TALKED_TO_VALOR_LAKEFRONT_GRUNT_M,,,"Levé quand le Sbire Galaxie de la Rive Lac Courage s'écarte au premier dialogue (scripts_valor_lakefront.s) : il combat au suivant, ce n'est pas une étape",,,
+pokeplatinum,AddVar,,,VAR_0x8005 cumule VAR_TOTAL_TURNS_LAST_BATTLE (AddVar) des cinq combats ; le dernier combat n'a lieu que si le total vaut VAR_FIVE_MAID_KNOCKOUT_TURN_TARGET (scripts_pokemon_mansion.s),eq,VAR_FIVE_MAID_KNOCKOUT_TURN_TARGET,Après avoir battu les cinq Servantes en exactement le nombre de tours annoncé
+pokeplatinum,CheckBadgeAcquired,,,Chaque Champion d'Arène ne combat que si CheckBadgeAcquired répond faux pour son badge (scripts des huit arènes),ne,1,Avant le badge de cette arène
+pokeplatinum,CheckHasAllLegendaryTitansInParty,,,Regigigas ne se réveille au premier combat qu'avec les trois dans l'équipe (scripts_snowpoint_temple_b5f.s),ne,0,"Avec Regirock, Regice et Registeel dans l'équipe"
+pokeplatinum,CheckHasTwoAliveMons,,,Les deux Sbires des Colonnes Lances ne combattent ensemble que si le joueur a deux Pokémon valides (scripts_spear_pillar.s),ne,0,Avec au moins deux Pokémon en état de se battre
+pokeplatinum,CheckLocalDexCompleted,,,Pokedex_LocalDexCompleted : au moins LOCAL_DEX_GOAL (210) Pokémon vus (src/pokedex.c),eq,1,Après avoir vu les 210 Pokémon du Pokédex de Sinnoh
+pokeplatinum,CheckPartyHasFatefulEncounterRegigigas,,,"Les statues des Ruines Pic Roche, Iceberg et de Fer ne s'animent qu'avec un Regigigas de rencontre fatidique dans l'équipe (scripts des trois ruines)",ne,0,Avec un Regigigas reçu lors d'une distribution dans l'équipe
+pokeplatinum,CheckWonBattle,,,"Victoire au combat précédent de la même scène (Manoir Pokémon, Pré Floraville, Mont Abrupt) : ce n'est pas une étape",ne,0,
+pokeplatinum,GetLeagueVictories,,,Nombre d'entrées du Panthéon (ScrCmd_GetLeagueVictories) ; le rival de l'Aire de Survie change d'équipe à 20 (scripts_survival_area.s),ge,20,Après 20 victoires à la Ligue Pokémon
+pokeplatinum,GetLeagueVictories,,,Nombre d'entrées du Panthéon (ScrCmd_GetLeagueVictories) ; le rival de l'Aire de Survie change d'équipe à 20 (scripts_survival_area.s),lt,20,Avant 20 victoires à la Ligue Pokémon
+pokeplatinum,GetSpiritombCounter,,,Compteur des discussions du Souterrain (ScrCmd_GetUndergroundTalkCounter) ; Spiritomb n'apparaît qu'à partir de 32 (scripts_route_209.s),ge,32,Après avoir parlé à 32 personnes dans le Souterrain
+pokeplatinum,GetTimeOfDay,,,TIMEOFDAY_NIGHT (3) et TIMEOFDAY_LATE_NIGHT (4) de generated/time_of_day.txt (scripts_old_chateau_back_middle_west_room.s),ge,3,La nuit
+pokeplatinum,VAR_0x8006,,,"Variable locale du laboratoire de Littorella (arrivée à Rivamar), relue juste avant : ce n'est pas une étape",ne,1,
+pokeplatinum,VAR_DISTORTION_WORLD_PROGRESS,,,DIST_WORLD_PROGRESS_GIRATINA_ARRIVED (include/constants/distortion_world.h) ; le moteur ne pose Giratina qu'à cette étape (src/overlay009/ov9_02249960.c),eq,13,"Pendant la traversée du Monde Distorsion, avant le combat contre Giratina"
+pokeplatinum,VAR_ETERNA_GYM_TRAINERS_BEATEN,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts_eterna_city_gym.s) : ce n'est pas une étape,lt,1,
+pokeplatinum,VAR_ETERNA_GYM_TRAINERS_BEATEN,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts_eterna_city_gym.s) : ce n'est pas une étape,lt,2,
+pokeplatinum,VAR_ETERNA_GYM_TRAINERS_BEATEN,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts_eterna_city_gym.s) : ce n'est pas une étape,lt,3,
+pokeplatinum,VAR_HALLOWED_TOWER_STATE,,,Mis à 1 quand la Clé de Voûte complète la tour (scripts_route_209.s),eq,1,Après avoir placé la Clé de Voûte sur la tour de la Route 209
+pokeplatinum,VAR_HALL_OF_ORIGIN_STATE,,,"Mis à 1 aux Colonnes Lances si la partie est terminée, le Pokédex National obtenu, la Flûte Azur possédée, l'événement Arceus valide et Arceus non capturé (scripts_spear_pillar*.s)",eq,1,"Après la Ligue Pokémon, avec le Pokédex National et la Flûte Azur d'une distribution"
+pokeplatinum,VAR_ICEBERG_RUINS_STATE,,,"RUINS_STATE_ACTIVATED_STATUE (include/constants/regi_ruins.h), atteint dans les scripts des Ruines Iceberg",eq,270,Après avoir activé la statue des Ruines Iceberg
+pokeplatinum,VAR_ICEBERG_RUINS_STATE,,,RUINS_STATE_DID_NOT_CATCH_REGI (include/constants/regi_ruins.h) : la statue des Ruines Iceberg se rendort,ne,280,Avant un combat contre Regice terminé sans capture
+pokeplatinum,VAR_ICEBERG_RUINS_STATE,,,"RUINS_STATE_CAUGHT_REGI (include/constants/regi_ruins.h), dans les scripts des Ruines Iceberg",ne,290,Avant la capture de Regice
+pokeplatinum,VAR_IRON_RUINS_STATE,,,"RUINS_STATE_ACTIVATED_STATUE (include/constants/regi_ruins.h), atteint dans les scripts des Ruines de Fer",eq,270,Après avoir activé la statue des Ruines de Fer
+pokeplatinum,VAR_IRON_RUINS_STATE,,,RUINS_STATE_DID_NOT_CATCH_REGI (include/constants/regi_ruins.h) : la statue des Ruines de Fer se rendort,ne,280,Avant un combat contre Registeel terminé sans capture
+pokeplatinum,VAR_IRON_RUINS_STATE,,,"RUINS_STATE_CAUGHT_REGI (include/constants/regi_ruins.h), dans les scripts des Ruines de Fer",ne,290,Avant la capture de Registeel
+pokeplatinum,VAR_ROCK_PEAK_RUINS_STATE,,,"RUINS_STATE_ACTIVATED_STATUE (include/constants/regi_ruins.h), atteint dans les scripts des Ruines Pic Roche",eq,270,Après avoir activé la statue des Ruines Pic Roche
+pokeplatinum,VAR_ROCK_PEAK_RUINS_STATE,,,RUINS_STATE_DID_NOT_CATCH_REGI (include/constants/regi_ruins.h) : la statue des Ruines Pic Roche se rendort,ne,280,Avant un combat contre Regirock terminé sans capture
+pokeplatinum,VAR_ROCK_PEAK_RUINS_STATE,,,"RUINS_STATE_CAUGHT_REGI (include/constants/regi_ruins.h), dans les scripts des Ruines Pic Roche",ne,290,Avant la capture de Regirock
+pokeplatinum,VAR_SPEAR_PILLAR_DIALGA_STATE,,,"Mis à 1 au combat contre Dialga, remis à 0 au Panthéon (scripts_pokemon_league_hall_of_fame.s)",lt,1,Une fois par victoire à la Ligue Pokémon
+pokeplatinum,VAR_SPEAR_PILLAR_PALKIA_STATE,,,"Mis à 1 au combat contre Palkia, remis à 0 au Panthéon (scripts_pokemon_league_hall_of_fame.s)",lt,1,Une fois par victoire à la Ligue Pokémon
+pokeplatinum,national_dex,,,GetNationalDexEnabled relu au laboratoire de Littorella (scripts_sandgem_town_pokemon_research_lab.s),ne,1,Avant l'obtention du Pokédex National
+pokediamond,flag:173,,,"Levé par la victoire contre Saturne au QG Galaxie, dans la même scène (scripts 339) : ce n'est pas une étape",,,
+pokediamond,flag:2429,,,"Levé après le combat contre Saturne au QG Galaxie, dans la même scène (scripts 339) : ce n'est pas une étape",,,
+pokediamond,flag:176,,,"Levé par la victoire contre Aaron lui-même (scripts 182), baissé au hall de la Ligue (scripts 180) : ce n'est pas une étape",,,
+pokediamond,flag:177,,,"Levé par la victoire contre Terry lui-même (scripts 184), baissé au hall de la Ligue (scripts 180) : ce n'est pas une étape",,,
+pokediamond,flag:178,,,"Levé par la victoire contre Adrien lui-même (scripts 186), baissé au hall de la Ligue (scripts 180) : ce n'est pas une étape",,,
+pokediamond,flag:179,,,"Levé par la victoire contre Lucio lui-même (scripts 188), baissé au hall de la Ligue (scripts 180) : ce n'est pas une étape",,,
+pokediamond,flag:2490,Après la première visite de Vestigion,Avant la première visite de Vestigion,Drapeau de première arrivée levé par le moteur en entrant à Vestigion ; le Prof. Sorbier ne vérifie le Pokédex de Sinnoh qu'ensuite (scripts 376),,,
+pokediamond,flag:262,,,"Levé quand le Sbire Galaxie de la Rive Lac Courage s'écarte au premier dialogue (scripts 381) : il combat au suivant, ce n'est pas une étape",,,
+pokediamond,flag:268,,,Levé par la victoire contre cet Élève de l'École de Dresseurs (scripts 29) : le combat ne se joue qu'une fois,,,
+pokediamond,flag:269,,,Levé par la victoire contre cette Élève de l'École de Dresseurs (scripts 29) : le combat ne se joue qu'une fois,,,
+pokediamond,flag:274,,,"Levé quand l'Élève donne la Potion après le combat, dans la même scène (scripts 29) : ce n'est pas une étape",,,
+pokediamond,flag:272,,,Levé quand le Pokédex de Sinnoh complet est montré (scripts 376) ; les deux chemins mènent au Pokédex National : ce n'est pas une étape,,,
+pokediamond,flag:2736,,Une fois par jour,Drapeau du jour levé après le combat contre Motisma (scripts 329),,,
+pokediamond,flag:2738,,Une fois par jour,Drapeau du jour levé après la victoire contre le rival à l'Aire de Combat (scripts 195),,,
+pokediamond,flag:282,Après le réveil de Regigigas,Avant le réveil de Regigigas,"Levé au premier combat contre Regigigas (scripts 309) ; avant, il ne se réveille qu'avec Regirock, Regice et Registeel dans l'équipe",,,
+pokediamond,flag:329,,Avant la capture de Motisma,Levé à la capture de Motisma au Vieux Château (scripts 329),,,
+pokediamond,trainer_defeated:368,,,"Victoire contre les Journalistes de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:369,,,"Victoire contre le Caméraman de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:370,,,"Victoire contre l'Interviewer de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:371,,,"Victoire contre la Star de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:431,,,"Victoire contre le Guitariste de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:460,,,"Victoire contre le Bouffon de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,trainer_defeated:465,,,"Victoire contre le Poké Enfant de Féli-Télé (scripts 11) : le combat ne se joue qu'une fois, ce n'est pas une étape",,,
+pokediamond,ScrCmd_CheckGameCompleted,,,"Partie terminée (ScrCmd_CheckGameCompleted), relue au Vieux Château (scripts 329)",ne,0,Après la victoire à la Ligue Pokémon
+pokediamond,ScrCmd_CheckRegis,,,Save_PlayerHasAllRegisInParty (arm9/src/scrcmd.c) ; Regigigas ne se réveille qu'à cette condition (scripts 309),ne,0,"Avec Regirock, Regice et Registeel dans l'équipe"
+pokediamond,ScrCmd_CheckSinnohDexComplete,,,Pokedex_SinnohDexIsComplete : au moins 150 vus sans Manaphy (arm9/src/pokedex.c),eq,1,"Après avoir vu les 150 Pokémon du Pokédex de Sinnoh, Manaphy non compté"
+pokediamond,ScrCmd_CountAvailablePartyMons_IgnoreSlot,,,Les Journalistes de Féli-Télé combattent en duo seulement avec deux Pokémon valides (scripts 11),ge,2,Avec au moins deux Pokémon en état de se battre
+pokediamond,ScrCmd_GetSpiritombTalkCounter,,,Save_VarsFlags_GetSpiritombTalkCounter ; Spiritomb n'apparaît qu'à partir de 32 (scripts 406),ge,32,Après avoir parlé à 32 personnes dans le Souterrain
+pokediamond,ScrCmd_GetTimeOfDay,,,RTC_TIMEOFDAY_NITE (3) et RTC_TIMEOFDAY_LATE (4) de include/gf_rtc.h (scripts 329),ge,3,La nuit
+pokediamond,ScrCmd_HasBadge,,,Chaque Champion d'Arène ne combat que si ScrCmd_HasBadge répond faux pour son badge (scripts des huit arènes),ne,1,Avant le badge de cette arène
+pokediamond,ScrCmd_SpearPillarSequence,,,Attente de la fin de l'animation des Colonnes Lances avant le combat contre Hélio (scripts 230) : ce n'est pas une étape,ne,0,
+pokediamond,ScrCmd_Unk00EC,,,"IsBattleResultWin : victoire au combat précédent de la même scène (scripts 269), ce n'est pas une étape",ne,0,
+pokediamond,ScrCmd_Unk028F,,,Nombre d'entrées du Panthéon (Save_HOF_TranslateRecordIdx) ; le rival de l'Aire de Combat change d'équipe à 20 (scripts 195),ge,20,Après 20 victoires à la Ligue Pokémon
+pokediamond,ScrCmd_Unk028F,,,Nombre d'entrées du Panthéon (Save_HOF_TranslateRecordIdx) ; le rival de l'Aire de Combat change d'équipe à 20 (scripts 195),lt,20,Avant 20 victoires à la Ligue Pokémon
+pokediamond,national_dex,,,ScrCmd_NationalDex relu au Vieux Château (scripts 329),ne,0,Après l'obtention du Pokédex National
+pokediamond,national_dex,,,ScrCmd_NationalDex relu au laboratoire de Littorella (scripts 376),ne,1,Avant l'obtention du Pokédex National
+pokediamond,var:16522,,,Mis à 1 quand la Clé de Voûte complète la tour (scripts 406),eq,1,Après avoir placé la Clé de Voûte sur la tour de la Route 209
+pokediamond,var:16536,,,État des Colonnes Lances mis à 3 après la scène d'Hélio (scripts 230),eq,3,Après la victoire contre Hélio aux Colonnes Lances
+pokediamond,var:16536,,,Mis à 5 au Panthéon quand le drapeau 351 n'est pas levé (scripts 192),eq,5,"Après une victoire à la Ligue Pokémon, tant que Dialga (Diamant) ou Palkia (Perle) n'est pas capturé"
+pokediamond,var:16558,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts 72) : ce n'est pas une étape,lt,1,
+pokediamond,var:16558,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts 72) : ce n'est pas une étape,lt,2,
+pokediamond,var:16558,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts 72) : ce n'est pas une étape,lt,3,
+pokediamond,var:16558,,,Ordre des Dresseurs de l'Arène de Vestigion (scripts 72) : ce n'est pas une étape,lt,4,
+pokediamond,var:16664,,,"Mis à 1 aux Colonnes Lances si la partie est terminée, le Pokédex National obtenu, la Flûte Azur possédée, l'événement valide et le drapeau 286 baissé (scripts 230)",eq,1,"Après la Ligue Pokémon, avec le Pokédex National et la Flûte Azur d'une distribution"

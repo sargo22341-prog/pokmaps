@@ -6,13 +6,13 @@ plus. L'état est l'ensemble des combinaisons possibles des variables suivies, p
 du rival choisie selon le Pokémon de départ du joueur reste rattachée à ce Pokémon.
 
 Une variable suivie prend la valeur de chaque affectation (SetVar, CopyVar). Une commande de choix lui donne
-chacune de ses valeurs possibles : tirage au hasard borné (GetRandom), Pokémon de départ ou sexe du joueur
-(domaines donnés par l'appelant, choix gardé dans STARTER_SLOT et GENDER_SLOT). Une branche après une
-comparaison (CompareVar puis GoToIf ou CallIf) ne garde que les combinaisons qui la prennent, avec la table des
-conditions du moteur (sConditionTable). Une variable vaut
-EXTERNAL à l'entrée (valeur fixée par le moteur ou par un autre script) et UNKNOWN après une commande qui peut
-l'écrire autrement (Step.writes). Un script commun (CallCommonScript, RunScriptWait) rend UNKNOWN les variables
-qu'il peut écrire ; sans son fichier, toutes les variables locales 0x8000 à 0x800F.
+chacune de ses valeurs possibles : tirage au hasard borné (GetRandom), Pokémon de départ ou sexe du joueur, version
+du jeu (domaines donnés par l'appelant, choix gardé dans STARTER_SLOT, GENDER_SLOT et VERSION_SLOT). Une branche
+après une comparaison (CompareVar puis GoToIf ou CallIf) ne garde que les combinaisons qui la prennent, avec la table
+des conditions du moteur (sConditionTable). Une variable vaut EXTERNAL à l'entrée (valeur fixée par le moteur ou
+par un autre script) et UNKNOWN après une commande qui peut l'écrire autrement (Step.writes). Un script commun
+(CallCommonScript, RunScriptWait) rend UNKNOWN les variables qu'il peut écrire ; sans son fichier, toutes les
+variables locales 0x8000 à 0x800F.
 """
 
 from __future__ import annotations
@@ -29,6 +29,7 @@ from .pret_gen4_flow import (
     COMPARE_VAR,
     COPY_VAR,
     END,
+    GAME_VERSION,
     GOTO,
     GOTO_IF,
     PLAYER_GENDER,
@@ -48,8 +49,8 @@ EXTERNAL = "externe"
 UNKNOWN = "inconnue"
 # Mémoire du choix fait au premier appel de chaque commande de choix fixée pour la partie : la variable qui le
 # reçoit peut être réutilisée ensuite, le choix reste attaché à la combinaison.
-STARTER_SLOT, GENDER_SLOT = -1, -2
-_SLOTS = {PLAYER_STARTER: STARTER_SLOT, PLAYER_GENDER: GENDER_SLOT}
+STARTER_SLOT, GENDER_SLOT, VERSION_SLOT = -1, -2, -3
+_SLOTS = {PLAYER_STARTER: STARTER_SLOT, PLAYER_GENDER: GENDER_SLOT, GAME_VERSION: VERSION_SLOT}
 _SCRIPT_LOCALS = frozenset(range(0x8000, 0x8010))
 # sConditionTable (scrcmd.c) : pour chaque condition de GoToIf/CallIf, résultats de comparaison qui la valident.
 _CONDITIONS = {0: {"<"}, 1: {"="}, 2: {">"}, 3: {"<", "="}, 4: {"=", ">"}, 5: {"<", ">"}}
@@ -89,10 +90,12 @@ class CommonScripts:
 
 @dataclass(frozen=True)
 class Choices:
-    """Domaines des commandes de choix : Pokémon de départ du joueur et sexe du joueur."""
+    """Domaines des commandes de choix : Pokémon de départ du joueur, sexe du joueur et version du jeu (vide : la
+    version n'est pas distinguée, la variable qui la reçoit reste inconnue)."""
 
     starters: frozenset[int]
     genders: frozenset[int]
+    versions: frozenset[int] = frozenset()
 
 
 @dataclass
@@ -215,8 +218,12 @@ class _Analysis:
             return tuple(range(bound)) if isinstance(bound, int) and 0 < bound <= _MAX_RANDOM else (UNKNOWN,)
         if self.choices is None:
             return (UNKNOWN,)
-        domain = self.choices.starters if step.command == PLAYER_STARTER else self.choices.genders
-        return tuple(sorted(domain))
+        domains = {
+            PLAYER_STARTER: self.choices.starters,
+            PLAYER_GENDER: self.choices.genders,
+            GAME_VERSION: self.choices.versions,
+        }
+        return tuple(sorted(domains[step.command])) or (UNKNOWN,)
 
     def _assign(self, valuation: Valuation, var: Value, value: Value) -> Valuation:
         if not isinstance(var, int) or var not in self.tracked:
@@ -284,7 +291,7 @@ class FlowValues:
         return frozenset(valuation[index] for valuation in self.found.get(key, frozenset()))
 
     def combos(self, key: Key, items: tuple[Value, ...]) -> frozenset[tuple[Value, ...]]:
-        """Combinaisons possibles des `items` à l'étape `key` : une variable suivie (ou STARTER_SLOT, GENDER_SLOT)
+        """Combinaisons possibles des `items` à l'étape `key` : une variable suivie (ou l'un des choix *_SLOT)
         prend sa valeur, une variable non suivie vaut EXTERNAL, une constante reste elle-même."""
         positions = [self.tracked.index(item) if item in self.tracked else None for item in items]
         return frozenset(
@@ -297,7 +304,7 @@ class FlowValues:
 
 
 def _is_slot_or_var(item: Value) -> bool:
-    return item in {STARTER_SLOT, GENDER_SLOT} or is_var(item)
+    return item in {STARTER_SLOT, GENDER_SLOT, VERSION_SLOT} or is_var(item)
 
 
 def values_at(

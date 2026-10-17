@@ -16,6 +16,9 @@ _DEFINE = re.compile(r"^\s*#define\s+(\w+)[ \t]+([^\n/]+)", re.MULTILINE)
 _TERM = re.compile(r"\s*([+-]?)\s*(\w+)")
 _C_ENUM = re.compile(r"enum\s+(\w+)\s*\{(.*?)\}", re.DOTALL)
 _C_COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.DOTALL)
+_INCLUDE = re.compile(r'^\s*#include\s+"(constants/[\w/]+\.h)"', re.MULTILINE)
+_INTEGER_DEFINE = re.compile(r"^\s*#define\s+(\w+)[ \t]+(-?(?:0x[0-9A-Fa-f]+|\d+))[ \t]*(?://[^\n]*)?$", re.MULTILINE)
+_MAX_INCLUDES = 256
 
 
 def read_json(path: Path) -> dict:
@@ -141,6 +144,30 @@ def c_defines(path: Path, prefix: str) -> dict[str, int]:
     if not values:
         raise ValueError(f"{path} : aucune constante {prefix}")
     return values
+
+
+def included_defines(root: Path, sources: tuple[str, ...]) -> dict[str, int]:
+    """Constantes `#define NOM entier` des en-têtes include/constants/ inclus, directement ou non, par les fichiers
+    `sources` du dépôt ; une constante définie deux fois avec deux valeurs différentes est écartée."""
+    values: dict[str, int] = {}
+    conflicts: set[str] = set()
+    pending = [root / source for source in sources]
+    seen: set[Path] = set()
+    while pending:
+        path = pending.pop()
+        if path in seen:
+            continue
+        seen.add(path)
+        if len(seen) > _MAX_INCLUDES:
+            raise ValueError(f"{root} : trop d'en-têtes inclus depuis {sources}")
+        text = read_text(path)
+        pending += [root / "include" / name for name in _INCLUDE.findall(text)]
+        for name, value in _INTEGER_DEFINE.findall(text):
+            number = int(value, 0)
+            if values.get(name, number) != number:
+                conflicts.add(name)
+            values[name] = number
+    return {name: value for name, value in values.items() if name not in conflicts}
 
 
 def _sum(expression: str, known: dict[str, int], where: str) -> int:
