@@ -113,6 +113,13 @@ class Chains:
                     pending.append(self._back(step, current, seen, conditions))
         return tuple(sorted(found, key=lambda path: (len(path), repr(path))))
 
+    def branch(self, step: Step, taken: bool) -> Condition | None:
+        """Condition d'un saut ou d'un appel conditionnel pris (ou évité), si une comparaison le précède seule."""
+        compare = self.comparisons.get(step.key)
+        if step.command not in {GOTO_IF, CALL_IF} or compare is None or step.target == step.following:
+            return None
+        return self._condition(compare, int(step.arguments[0]), taken)
+
     def _back(
         self, step: Step, current: Key, seen: frozenset[Key], conditions: tuple[Condition, ...]
     ) -> tuple[Key, frozenset[Key], tuple[Condition, ...]]:
@@ -120,6 +127,6 @@ class Chains:
         decided = step.command == GOTO_IF or (step.command == CALL_IF and step.target == current)
         if not decided or compare is None or step.target == step.following:
             return step.key, seen | {step.key}, conditions
-        condition = self._condition(compare, int(step.arguments[0]), step.target == current)
+        condition = self.branch(step, step.target == current)
         added = conditions if condition is None else (*conditions, condition)
         return compare.key, seen | {step.key, compare.key}, added

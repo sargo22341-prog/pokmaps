@@ -69,7 +69,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 | `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |
-| `--sinnoh-characters-only` | Dresseurs, combats, revanches, objets, Pokémon fixes, noms français et étapes du scénario DS dans `sinnoh-characters/` |
+| `--sinnoh-characters-only` | Dresseurs, combats, revanches, objets, Pokémon fixes, offres, noms français et étapes du scénario DS dans `sinnoh-characters/` |
 
 `--assets`, `--preview` et `--cache` choisissent les dossiers. Une génération ciblée de cartes ou de catalogue
 ne reconstruit pas la base Room : toute modification affectant celle-ci exige la génération complète.

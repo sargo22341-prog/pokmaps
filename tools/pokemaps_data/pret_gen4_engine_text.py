@@ -37,9 +37,9 @@ def c_function(text: str, name: str, where: str) -> str:
 
 
 def c_initializer(text: str, name: str, where: str) -> str:
-    """Contenu de l'initialiseur `name[...] = { ... };`, sans commentaires."""
+    """Contenu de l'initialiseur `name[...] = { ... };` (une ou plusieurs dimensions), sans commentaires."""
     source = _C_COMMENT.sub("", text)
-    match = re.search(rf"\b{re.escape(name)}\s*\[[^\]]*\]\s*=\s*\{{(.*?)\}};", source, re.DOTALL)
+    match = re.search(rf"\b{re.escape(name)}(?:\s*\[[^\]]*\])+\s*=\s*\{{(.*?)\}};", source, re.DOTALL)
     if match is None:
         raise ValueError(f"{where} : table {name} introuvable")
     return match.group(1)

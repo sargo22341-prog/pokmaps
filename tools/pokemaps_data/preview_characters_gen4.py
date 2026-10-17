@@ -1,7 +1,7 @@
-"""Aperçu PC des personnages DS : dresseurs, combats, revanches, objets des lieux, Pokémon fixes et Pokédex National.
+"""Aperçu PC des personnages DS : dresseurs, combats, revanches, objets, Pokémon fixes, offres et Pokédex National.
 
 Il réunit, pour chaque famille de Sinnoh, ce que lisent les lecteurs de la phase 5 (pret_gen4_trainers,
-pret_gen4_rematches, pret_gen4_battles, pret_gen4_field_items, pret_gen4_fixed, pret_gen4_national_dex) dans
+pret_gen4_rematches, pret_gen4_battles, pret_gen4_field_items, pret_gen4_fixed, pret_gen4_national_dex, offres) dans
 tools/build/preview/sinnoh-characters/characters.json. Seuls les lieux retenus pour les cartes
 (maps_layout_gen4.selected_headers) sont parcourus. Rien n'entre dans les assets de l'application avant
 l'activation des jeux DS (phase 6). Les noms français des classes et des personnages (character_names_gen4) et les
@@ -32,14 +32,16 @@ from .pret_gen4_field_items import Gen4MapItem, hidden_coin_events, read_map_ite
 from .pret_gen4_fixed import FixedEncounter, read_fixed_encounters
 from .pret_gen4_flow import SET_FLAG
 from .pret_gen4_national_dex import NationalDexUnlock, read_national_dex
+from .pret_gen4_offers import OfferCatalog, read_offers
 from .pret_gen4_rematches import VsSeekerRules
 from .pret_gen4_trainers import Gen4Trainer
 from .sources import PRET_COMMITS, fetch_pret
 from .story_conditions_gen4 import ScenarioConditions
 from .story_events import DS_REPOS, StoryEvents, read_story_events
+from .validate_offers_gen4 import validate_offers
 
 PREVIEW_NAME = "sinnoh-characters"
-SCHEMA = 2
+SCHEMA = 3
 
 
 @dataclass(frozen=True)
@@ -63,6 +65,7 @@ class CharacterCatalog:
     # « position LIEU ÉTAPE RANG » et « pokedex_national ».
     scenario: dict[str, tuple[tuple[str, ...], ...]]
     names: Gen4Names
+    offers: OfferCatalog
 
 
 def character_catalog(
@@ -96,6 +99,7 @@ def character_catalog(
         national,
         _scenario(ScenarioConditions(repo, story or read_story_events()), battles, fixed, national),
         read_gen4_names(repo, headers, names or read_character_names()),
+        read_offers(repo, headers),
     )
     validate_character_catalog(catalog)
     return catalog
@@ -161,6 +165,7 @@ def validate_character_catalog(catalog: CharacterCatalog) -> None:
     constants = set(catalog.headers.values())
     if not catalog.fixed or any(encounter.header not in constants for encounter in catalog.fixed):
         raise ValueError(f"{where} : Pokémon fixes absents ou hors des lieux retenus")
+    validate_offers(catalog.offers, constants, where)
 
 
 def unbound_trainers(catalog: CharacterCatalog) -> tuple[int, ...]:
@@ -195,6 +200,7 @@ def build_characters_preview_gen4(cache: Path, preview: Path) -> None:
             f"{catalog.version_group} : {len(catalog.trainers)} dresseurs, {len(catalog.event_trainers)} posés, "
             f"{len(catalog.script_battles)} combats de script, {len(catalog.items)} objets, "
             f"{len(catalog.fixed)} Pokémon fixes, "
+            f"{len(catalog.offers.steps)} étapes d'offres, "
             f"{len(unbound_trainers(catalog))} dresseurs sans lieu retenu"
         )
     print(f"Aperçu des personnages DS validé : {target} ({time.monotonic() - started:.1f} s)")

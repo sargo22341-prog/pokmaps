@@ -12,13 +12,16 @@ après une comparaison (CompareVar puis GoToIf ou CallIf) ne garde que les combi
 des conditions du moteur (sConditionTable). Une variable vaut EXTERNAL à l'entrée (valeur fixée par le moteur ou
 par un autre script) et UNKNOWN après une commande qui peut l'écrire autrement (Step.writes). Un script commun
 (CallCommonScript, RunScriptWait) rend UNKNOWN les variables qu'il peut écrire ; sans son fichier, toutes les
-variables locales 0x8000 à 0x800F.
+variables locales 0x8000 à 0x800F. Les offres demandent en plus quelques effets (Effects) : additions exactes et
+paiements rattachés à l'offre qui les suit.
 """
 
 from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass, field
+from itertools import product
+from math import prod
 
 from .pret_gen4_flow import (
     CALL,
@@ -51,6 +54,13 @@ UNKNOWN = "inconnue"
 # reçoit peut être réutilisée ensuite, le choix reste attaché à la combinaison.
 STARTER_SLOT, GENDER_SLOT, VERSION_SLOT = -1, -2, -3
 _SLOTS = {PLAYER_STARTER: STARTER_SLOT, PLAYER_GENDER: GENDER_SLOT, GAME_VERSION: VERSION_SLOT}
+# Paiements gardés jusqu'à l'étape voulue suivante (Effects.payments) : argent, jetons, Points Combat, objet repris.
+MONEY_SLOT, COINS_SLOT, POINTS_SLOT, TAKEN_SLOT = -4, -5, -6, -7
+TAKEN_QUANTITY_SLOT = -8
+PAYMENT_SLOTS = (MONEY_SLOT, COINS_SLOT, POINTS_SLOT, TAKEN_SLOT, TAKEN_QUANTITY_SLOT)
+_ADD_VAR = frozenset({"AddVar", "ScrCmd_AddVar"})
+_SUB_VAR = frozenset({"SubVar", "ScrCmd_SubVar"})
+_WORD = 0xFFFF
 _SCRIPT_LOCALS = frozenset(range(0x8000, 0x8010))
 # sConditionTable (scrcmd.c) : pour chaque condition de GoToIf/CallIf, résultats de comparaison qui la valident.
 _CONDITIONS = {0: {"<"}, 1: {"="}, 2: {">"}, 3: {"<", "="}, 4: {"=", ">"}, 5: {"<", ">"}}
@@ -98,6 +108,19 @@ class Choices:
     versions: frozenset[int] = frozenset()
 
 
+@dataclass(frozen=True)
+class Effects:
+    """Lectures demandées par les offres en plus des affectations : additions et soustractions exactes sur les
+    variables `arithmetic` (AddVar, SubVar ; une autre variable reste inconnue après elles, car un compteur de boucle
+    non borné ne finirait jamais), et paiements. Une commande de `payments` range le montant (ou l'objet repris) lu à
+    la place indiquée dans un des PAYMENT_SLOTS ; chaque étape voulue remet ensuite ces paiements à 0."""
+
+    arithmetic: frozenset[int] = frozenset()
+    payments: tuple[tuple[str, int, int], ...] = ()  # commande, place du paiement, position de l'argument
+    initial: tuple[tuple[int, tuple[int, ...]], ...] = ()
+    outputs: tuple[tuple[Key, tuple[tuple[int, int], ...]], ...] = ()
+
+
 @dataclass
 class _Analysis:
     flow: ScriptFlow
@@ -106,6 +129,7 @@ class _Analysis:
     common: CommonScripts | None
     choices: Choices | None
     comparisons: dict[Key, Step]
+    effects: Effects = Effects()
     found: dict[Key, set[Valuation]] = field(default_factory=dict)
     memo: dict[tuple[Key, State], State | None] = field(default_factory=dict)
     steps: int = 0
@@ -190,7 +214,21 @@ class _Analysis:
         return valuation[self.tracked.index(int(var))] if isinstance(var, int) and var in self.tracked else UNKNOWN
 
     def _effect(self, step: Step, valuation: Valuation) -> list[Valuation]:
+        if self.effects.payments and self.wanted(step):
+            for slot in PAYMENT_SLOTS:
+                valuation = self._assign(valuation, slot, 0)
         arguments, command = step.arguments, step.command
+        outcomes = [assignments for key, assignments in self.effects.outputs if key == step.key]
+        if outcomes:
+            return [self._assign_many(valuation, assignments) for assignments in outcomes]
+        payments = [entry for entry in self.effects.payments if entry[0] == command]
+        if payments:
+            for _, slot, position in payments:
+                amount = arguments[position]
+                valuation = self._assign(valuation, slot, self._read(amount, valuation) if is_var(amount) else amount)
+            return [valuation]
+        if command in _ADD_VAR | _SUB_VAR and arguments[0] in self.effects.arithmetic:
+            return [self._assign(valuation, arguments[0], self._arithmetic(step, valuation))]
         if command == SET_VALUE:
             return [self._assign(valuation, arguments[0], arguments[1])]
         if command == COPY_VAR:
@@ -210,6 +248,18 @@ class _Analysis:
         for var in written:
             result = self._assign(result, var, UNKNOWN)
         return [result]
+
+    def _assign_many(self, valuation: Valuation, assignments: tuple[tuple[int, int], ...]) -> Valuation:
+        for var, value in assignments:
+            valuation = self._assign(valuation, var, value)
+        return valuation
+
+    def _arithmetic(self, step: Step, valuation: Valuation) -> Value:
+        left, right = self._read(step.arguments[0], valuation), step.arguments[1]
+        right = self._read(right, valuation) if is_var(right) else right
+        if not isinstance(left, int) or not isinstance(right, int):
+            return UNKNOWN
+        return (left + right if step.command in _ADD_VAR else left - right) & _WORD
 
     def _domain(self, step: Step, valuation: Valuation) -> tuple[Value, ...]:
         if step.command == RANDOM:
@@ -304,7 +354,7 @@ class FlowValues:
 
 
 def _is_slot_or_var(item: Value) -> bool:
-    return item in {STARTER_SLOT, GENDER_SLOT, VERSION_SLOT} or is_var(item)
+    return item in {STARTER_SLOT, GENDER_SLOT, VERSION_SLOT, *PAYMENT_SLOTS} or is_var(item)
 
 
 def values_at(
@@ -314,12 +364,19 @@ def values_at(
     entries: tuple[Key, ...] | None = None,
     common: CommonScripts | None = None,
     choices: Choices | None = None,
+    effects: Effects | None = None,
 ) -> FlowValues:
     """Combinaisons possibles des variables suivies à chaque étape voulue, depuis les points d'entrée `entries`."""
+    effects = effects or Effects()
     slots = {slot for command, slot in _SLOTS.items() if any(step.command == command for step in flow.steps.values())}
-    tracked = tuple(sorted({*tracked_vars(flow, seeds), *(slots if choices else ())}))
-    analysis = _Analysis(flow, tracked, wanted, common, choices, comparisons(flow))
-    initial: State = frozenset({tuple(EXTERNAL for _ in tracked)})
+    payments = {slot for _, slot, _ in effects.payments}
+    tracked = tuple(sorted({*tracked_vars(flow, seeds), *(slots if choices else ()), *payments}))
+    analysis = _Analysis(flow, tracked, wanted, common, choices, comparisons(flow), effects)
+    domains = dict(effects.initial)
+    options = [domains.get(var, (0 if var in payments else EXTERNAL,)) for var in tracked]
+    if prod(map(len, options)) > _MAX_COMBINATIONS:
+        raise ValueError(f"{flow.name} : trop de combinaisons initiales")
+    initial: State = frozenset(product(*options))
     for entry in flow.entries if entries is None else entries:
         analysis.run(entry, initial, ())
     return FlowValues(tracked, {key: frozenset(found) for key, found in analysis.found.items()})

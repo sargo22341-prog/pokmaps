@@ -67,6 +67,10 @@ emplacements sauvages dans `tools/build/preview/sinnoh-encounters/`, que l’éd
 `python tools/build_data.py --sinnoh-characters-only` écrit dans `tools/build/preview/sinnoh-characters/` les
 dresseurs, combats de scénario, revanches du Cherche VS, objets des lieux, Pokémon fixes, noms français, étapes du
 scénario et le déblocage du Pokédex National.
+L'aperçu comprend aussi les offres des personnages et des installations : dons, œufs, stocks des boutiques
+selon les badges, échanges, tuteurs, soins, baies et paillis, fossiles, Pension, Casino et Maître des Capacités.
+Les conditions brutes des scripts accompagnent chaque étape d'offre ; les prix, monnaies et coûts en Tessons
+restent distincts. Les lots échangés ensemble conservent leur paiement unique.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
 
 ## Publier une version

@@ -31,8 +31,9 @@ from .pret_gen4_rematches import VsSeekerRules, read_vs_seeker
 from .pret_gen4_script_binary import InitScripts, ScriptFile, read_init_scripts, read_script_file
 from .pret_gen4_script_commands import ScriptCommand, read_command_table
 from .pret_gen4_script_ids import ScriptIds, read_script_ids
+from .pret_gen4_script_ranges import ScriptRanges, read_script_ranges
 from .pret_gen4_scripts import FIELD_MACROS, TextScriptFile, read_frontier_scripts, read_macros, read_platinum_scripts
-from .pret_gen4_source import included_defines, metang_enum, read_binary
+from .pret_gen4_source import c_enum, included_defines, metang_enum, read_binary
 from .pret_gen4_textures import NitroTextures, read_nsbtx
 from .pret_gen4_trainers import Gen4Trainer, read_trainers
 from .pret_moves import PretMove
@@ -54,6 +55,11 @@ _SCRIPT_ENUMS = (
     "movement_types",
     "object_events_gfx",
     "map_headers",
+    "mart_specialties_id",
+    "mart_decor_id",
+    "mart_seal_id",
+    "mart_frontier_id",
+    "tutor_locations",
 )
 
 
@@ -204,6 +210,7 @@ class Gen4PretRepo:
         values: dict[str, int] = {"TRUE": 1, "FALSE": 0}
         conflicts: set[str] = set()
         sources = [metang_enum(self.root / f"generated/{enum}.txt") for enum in _SCRIPT_ENUMS]
+        sources.append(c_enum(self.root / "include/constants/npc_trades.h", "NPCTradeID"))
         for source in (*sources, included_defines(self.root, FIELD_MACROS)):
             for name, value in source.items():
                 if values.get(name, value) != value:
@@ -245,6 +252,10 @@ class Gen4PretRepo:
     @cached_property
     def script_ids(self) -> ScriptIds:
         return read_script_ids(self.root, self._repo_name, self.names.archives["scripts"] if self.platinum else None)
+
+    @cached_property
+    def script_ranges(self) -> ScriptRanges:
+        return read_script_ranges(self.root, self.names.archives["scripts"] if self.platinum else None)
 
     @cached_property
     def common_scripts(self) -> CommonScripts:

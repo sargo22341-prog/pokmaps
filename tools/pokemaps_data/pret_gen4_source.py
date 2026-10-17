@@ -148,9 +148,24 @@ def c_defines(path: Path, prefix: str) -> dict[str, int]:
 
 def included_defines(root: Path, sources: tuple[str, ...]) -> dict[str, int]:
     """Constantes `#define NOM entier` des en-têtes include/constants/ inclus, directement ou non, par les fichiers
-    `sources` du dépôt ; une constante définie deux fois avec deux valeurs différentes est écartée."""
+    `sources` du dépôt, puis membres de leurs énumérations C (valeurs implicites, entières ou déjà connues) ; une
+    constante définie deux fois avec deux valeurs différentes est écartée."""
     values: dict[str, int] = {}
     conflicts: set[str] = set()
+    texts = _included_texts(root, sources)
+    found = [(name, int(value, 0)) for text in texts for name, value in _INTEGER_DEFINE.findall(text)]
+    defines = dict(found)
+    for text in texts:
+        found += _enum_members(_C_COMMENT.sub("", text), defines)
+    for name, number in found:
+        if values.get(name, number) != number:
+            conflicts.add(name)
+        values[name] = number
+    return {name: value for name, value in values.items() if name not in conflicts}
+
+
+def _included_texts(root: Path, sources: tuple[str, ...]) -> list[str]:
+    texts = []
     pending = [root / source for source in sources]
     seen: set[Path] = set()
     while pending:
@@ -162,12 +177,30 @@ def included_defines(root: Path, sources: tuple[str, ...]) -> dict[str, int]:
             raise ValueError(f"{root} : trop d'en-têtes inclus depuis {sources}")
         text = read_text(path)
         pending += [root / "include" / name for name in _INCLUDE.findall(text)]
-        for name, value in _INTEGER_DEFINE.findall(text):
-            number = int(value, 0)
-            if values.get(name, number) != number:
-                conflicts.add(name)
-            values[name] = number
-    return {name: value for name, value in values.items() if name not in conflicts}
+        texts.append(text)
+    return texts
+
+
+def _enum_members(text: str, known: dict[str, int]) -> list[tuple[str, int]]:
+    """Membres des énumérations C du texte ; une énumération dont une valeur explicite reste inconnue est écartée."""
+    result = []
+    for match in _C_ENUM.finditer(text):
+        members: dict[str, int] = {}
+        following = 0
+        for member in (part.strip() for part in match.group(2).split(",")):
+            if not member:
+                continue
+            key, _, value = (piece.strip() for piece in member.partition("="))
+            if value:
+                resolved = members.get(value, known.get(value))
+                if resolved is None and not re.fullmatch(r"-?(?:0x[0-9A-Fa-f]+|\d+)", value):
+                    members = {}
+                    break
+                following = resolved if resolved is not None else int(value, 0)
+            members[key] = following
+            following += 1
+        result += members.items()
+    return result
 
 
 def _sum(expression: str, known: dict[str, int], where: str) -> int:
