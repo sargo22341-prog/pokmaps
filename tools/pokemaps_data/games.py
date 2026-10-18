@@ -182,7 +182,7 @@ DIAMOND_PEARL = Game(
     national_dex=True,
 )
 GEN4_GAMES: tuple[Game, ...] = (PLATINUM, DIAMOND_PEARL)
-GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, *GEN3_GAMES)
+GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, *GEN3_GAMES, *GEN4_GAMES)
 GAMES_IN_PROGRESS: tuple[Game, ...] = ()
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)

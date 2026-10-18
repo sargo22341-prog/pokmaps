@@ -28,7 +28,7 @@ from .pret_gen4 import Gen4PretRepo
 from .pret_species_gen4 import DsSpecies, read_ds_species
 
 # Version du schéma : doit correspondre à la version de la base Room dans l'application.
-SCHEMA_VERSION = 22
+SCHEMA_VERSION = 23
 
 # Pokédex National de PokéAPI, ajouté aux jeux qui le débloquent (games.Game.national_dex).
 NATIONAL_DEX = "national"
@@ -285,6 +285,9 @@ class DatabaseBuilder:
 
     def tables(self, item_sprites: set[str]) -> dict[str, list[tuple]]:
         """Lignes de chaque table, dans l'ordre d'insertion imposé par les clés étrangères."""
+        from .preview_encounters_gen4 import complete_preview_encounters
+
+        complete_preview_encounters(self)
         encounters, conditions = self.encounters.encounter_tables()
         descriptions = self.items.item_descriptions()
         items = [(*row, int(row[1] in item_sprites), descriptions.get(row[0])) for row in self.items.item_rows]

@@ -107,6 +107,10 @@ def test_heights_and_weights_are_those_of_the_gba_pokedex(builder: DatabaseBuild
     pokedex = {
         species_identifier(name): (int(height), int(weight)) for name, height, weight in entries if name != "NONE"
     }
-    database = {row[1]: (row[10], row[11]) for row in builder.pokemon.pokemon_table()}
+    database = {
+        row[1]: (row[10], row[11])
+        for row in builder.pokemon.pokemon_table()
+        if int(builder.species[row[0]]["generation_id"]) <= 3
+    }
     assert len(pokedex) == len(database) == 386
     assert pokedex == database

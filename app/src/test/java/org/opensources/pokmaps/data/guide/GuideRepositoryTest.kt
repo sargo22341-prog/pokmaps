@@ -35,6 +35,10 @@ class GuideRepositoryTest {
             val expected = listOf(93, 90, 76, 72, 75, 113)
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
+                if (game.generationId == 4) {
+                    assertTrue(library.articles.isEmpty())
+                    continue
+                }
                 if (game.generationId == 3) {
                     checkGbaArticles(library)
                     val itemIds = maps.index(game).items.map { it.identifier }.toSet()

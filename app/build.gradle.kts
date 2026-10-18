@@ -220,7 +220,7 @@ tasks.register("checkAssets") {
         val manifest = root.resolve("assets.sha256")
         check(manifest.isFile) { "Inventaire des assets absent : $manifest. Restaurer les assets depuis Git." }
         val entries = manifest.readLines()
-        check(entries.isNotEmpty() && entries.size <= 20000) { "Inventaire des assets vide ou trop volumineux." }
+        check(entries.isNotEmpty() && entries.size <= 40000) { "Inventaire des assets vide ou trop volumineux." }
         val paths = mutableSetOf<String>()
         entries.forEach { entry ->
             val parts = entry.split("  ", limit = 2)

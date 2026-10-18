@@ -5,9 +5,10 @@ from pathlib import Path
 
 import pytest
 
+from pokemaps_data import maps, maps_export_gen4
 from pokemaps_data.builder_pokemon import _check_represented
-from pokemaps_data.games import PLATINUM
-from pokemaps_data.maps import build_maps
+from pokemaps_data.games import PLATINUM, Game
+from pokemaps_data.maps import GameMapData
 from pokemaps_data.pret_evolution_gen4 import _pret_conditions
 from pokemaps_data.pret_gen4 import Gen4PretRepo
 from pokemaps_data.pret_gen4_source import read_json
@@ -16,13 +17,28 @@ from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.pret_species_gen4 import _platinum
 
 
-def test_ds_reader_checks_its_repository_and_ds_maps_stay_refused(tmp_path: Path) -> None:
+def test_ds_reader_checks_its_repository(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="dépôt platinum attendu"):
         open_pret(PLATINUM, tmp_path)
     (tmp_path / "res/field/maps/data").mkdir(parents=True)
     assert isinstance(open_pret(PLATINUM, tmp_path), Gen4PretRepo)
-    with pytest.raises(ValueError, match="cartes DS sans rendu"):
-        build_maps(tmp_path, tmp_path / "cartes", games=(PLATINUM,))
+
+
+def test_map_generation_dispatches_to_the_ds_exporter(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[tuple[Path, Path, Game]] = []
+    result = GameMapData([], [], [], [])
+
+    def export(cache: Path, output: Path, game: Game) -> GameMapData:
+        calls.append((cache, output, game))
+        return result
+
+    def families(_games: tuple[Game, ...]) -> dict[str, tuple[str, ...]]:
+        return {}
+
+    monkeypatch.setattr(maps_export_gen4, "export_game", export)
+    monkeypatch.setattr(maps, "complete_families", families)
+    assert maps.build_maps(tmp_path, tmp_path / "cartes", games=(PLATINUM,)) == {"platinum": result}
+    assert calls == [(tmp_path, tmp_path / "cartes/platinum", PLATINUM)]
 
 
 def test_unknown_evolution_condition_is_never_lost() -> None:

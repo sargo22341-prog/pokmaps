@@ -261,6 +261,8 @@ internal class FakeMapDao(
         }
     }
 
+    override suspend fun offerComponents(objectId: Int): List<OfferComponentRow> = read { emptyList() }
+
     override suspend fun offerStories(objectId: Int) = read {
         if (objectId == SIBLING) {
             listOf(

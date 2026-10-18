@@ -25,7 +25,7 @@ from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, Game
 from pokemaps_data.hoenn_catalog import build_hoenn_catalog
 from pokemaps_data.maps import build_maps
-from pokemaps_data.maps_gen3 import HOENN_MAP_GAMES, build_gen3_maps
+from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, HOENN_MAP_GAMES, build_gen3_maps, validate_catalog
 from pokemaps_data.pokeapi import PokeApi
 from pokemaps_data.pret_gen3_fixed import build_fixed_catalog
 from pokemaps_data.preview_curation_gen3 import build_curation_preview
@@ -39,11 +39,21 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_ASSETS = ROOT.parent / "app/src/main/assets"
 
 
-def _arguments() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+def _output_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--assets", type=Path, default=DEFAULT_ASSETS, help="dossier des assets de l'application")
     parser.add_argument("--preview", type=Path, default=PREVIEW_DIR, help="dossier de l'aperçu de tous les jeux")
     parser.add_argument("--cache", type=Path, default=ROOT / ".cache", help="dossier de cache des sources")
+    parser.add_argument(
+        "--application-only", action="store_true", help="générer les jeux actifs sans aperçu supplémentaire"
+    )
+    parser.add_argument(
+        "--reuse-gen3-maps", action="store_true", help="réutiliser les cartes GBA existantes et validées"
+    )
+
+
+def _arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    _output_arguments(parser)
     maps_only = parser.add_mutually_exclusive_group()
     maps_only.add_argument(
         "--sinnoh-maps-only", action="store_true", help="générer les cartes DS sans activation Android"
@@ -175,7 +185,11 @@ def _build_all(args: argparse.Namespace) -> int:
     print("Téléchargement des CSV PokéAPI…")
     api = PokeApi(fetch_pokeapi_csv(args.cache))
 
-    build_gen3_maps(args.cache, args.assets / "maps")
+    if args.reuse_gen3_maps:
+        for game in GEN3_MAP_GAMES:
+            validate_catalog(args.assets / "maps" / game.version_group)
+    else:
+        build_gen3_maps(args.cache, args.assets / "maps")
     build_fixed_catalog(args.cache, args.assets)
 
     print(f"Données de l'application ({', '.join(game.version_group for game in GAMES)}) : {args.assets}")
@@ -187,7 +201,7 @@ def _build_all(args: argparse.Namespace) -> int:
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
     write_manifest(args.assets)
-    if GAMES_IN_PROGRESS:
+    if GAMES_IN_PROGRESS and not args.application_only:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)
         print(f"Aperçu avec les jeux en cours d'intégration ({names}) : {args.preview}")
         if not _build(api, args.cache, repos, args.preview, ALL_GAMES):
@@ -214,6 +228,9 @@ def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, game
 
     pret_roots = {game.version_group: repos[game.pret_repo] for game in games}
     builder = DatabaseBuilder(api, games, map_data=map_data, pret_roots=pret_roots)
+    from pokemaps_data.preview_encounters_gen4 import complete_preview_encounters
+
+    complete_preview_encounters(builder)
     print("Téléchargement des images (pokesprite, PokeAPI/sprites)…")
     item_sprites = build_sprites(builder, cache, assets / "sprites")
 

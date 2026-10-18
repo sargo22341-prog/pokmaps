@@ -7,7 +7,7 @@ from contextlib import closing
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
-from pokemaps_data.games import GEN3_GAMES, GEN4_GAMES
+from pokemaps_data.games import GAMES, GEN3_GAMES, GEN4_GAMES, PretFormat
 from pokemaps_data.hoenn_catalog import validate_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
 from pokemaps_data.validate import validate
@@ -32,6 +32,11 @@ def main() -> int:
             validate_catalog(args.assets / "maps" / game.version_group)
         for game in GEN3_GAMES:
             validate_character_catalog(args.assets / "maps" / game.version_group, game)
+        for game in GAMES:
+            if game.pret_format is PretFormat.GEN4:
+                folder = args.assets / "maps" / game.version_group
+                check_inventory(folder)
+                validate_gen4_catalog(folder)
         errors = validate(args.assets / "database/pokedex.db")
         with closing(sqlite3.connect(args.assets / "database/pokedex.db")) as connection:
             errors += validate_hoenn_characters(connection)

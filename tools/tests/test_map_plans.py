@@ -1,4 +1,4 @@
-"""Assemblage des zones d'un niveau : pixels, coordonnées et erreurs éditoriales."""
+"""Assemblage GB/GBA des zones d'un niveau : pixels, coordonnées et erreurs éditoriales."""
 
 import csv
 import sqlite3
@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data import maps_plans
-from pokemaps_data.games import GAMES, GEN3_GAMES, Game
+from pokemaps_data.games import GAMES, GEN3_GAMES, Game, PretFormat
 from pokemaps_data.maps import renderer
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
 from pokemaps_data.maps_layout_gen3 import Gen3GameMaps
@@ -21,7 +21,11 @@ from pokemaps_data.sources import pret_dir
 CACHE = Path(__file__).resolve().parent.parent / ".cache"
 
 
-@pytest.mark.parametrize("game", GAMES, ids=lambda game: game.version_group)
+@pytest.mark.parametrize(
+    "game",
+    tuple(game for game in GAMES if game.pret_format is not PretFormat.GEN4),
+    ids=lambda game: game.version_group,
+)
 def test_plan_preserves_every_source_pixel_and_coordinate(game: Game, source_cache_ready: None) -> None:
     root = pret_dir(CACHE, game.pret_repo)
     if game in GEN3_GAMES:

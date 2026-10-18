@@ -1,5 +1,6 @@
 """Images embarquées : sprites des Pokémon (normaux et chromatiques) et icônes d'objets."""
 
+import csv
 import json
 import sqlite3
 from pathlib import Path
@@ -58,13 +59,20 @@ def test_sprites(assets: Path, db: sqlite3.Connection) -> None:
         Image.open(sprites / "pokemon/shiny/static/6.webp") as shiny,
     ):
         assert normal.convert("RGB").tobytes() != shiny.convert("RGB").tobytes()
+
+
+def test_item_icons_match_their_declared_availability(assets: Path, db: sqlite3.Connection) -> None:
+    sprites = assets / "sprites"
     missing = [
         identifier
         for identifier, has_sprite in db.execute("SELECT identifier, has_sprite FROM item")
         if has_sprite != (sprites / "items" / f"{identifier}.webp").is_file()
     ]
     assert missing == []
-    assert {row[0] for row in db.execute("SELECT identifier FROM item WHERE has_sprite = 0")} == {
+    with (Path(__file__).parents[1] / "data/extra_items.csv").open(encoding="utf-8", newline="") as source:
+        merchandise = {row["identifier"] for row in csv.DictReader(source) if row["identifier"].startswith("sinnoh-")}
+    assert len(merchandise) == 61
+    assert {row[0] for row in db.execute("SELECT identifier FROM item WHERE has_sprite = 0")} == merchandise | {
         "berserk-gene",
         "coin",
         "oaks-parcel",

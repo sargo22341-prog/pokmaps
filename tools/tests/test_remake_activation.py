@@ -21,7 +21,9 @@ def test_remake_versions_and_pokedexes_are_shipped(db: sqlite3.Connection) -> No
     rows = db.execute(
         """SELECT p.identifier, count(*) FROM version_group_pokedex vgp
            JOIN pokedex p ON p.id = vgp.pokedex_id JOIN pokedex_entry pe ON pe.pokedex_id = p.id
-           WHERE vgp.version_group_id = 7 GROUP BY p.identifier"""
+           JOIN pokemon mon ON mon.id = pe.pokemon_id
+           JOIN version_group vg ON vg.id = vgp.version_group_id
+           WHERE vgp.version_group_id = 7 AND mon.generation_id <= vg.generation_id GROUP BY p.identifier"""
     ).fetchall()
     assert dict(rows) == {"kanto": 151, "national": 386}
 

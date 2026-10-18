@@ -37,11 +37,12 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
     spots = _SpotRows(read_spots(), builder.games)
     repos = {game.version_group: game.pret_repo for game in builder.games}
     for version_group, data in builder.map_data.items():
+        objects.names.used_texts.update(data.named_characters)
         if data.story is not None:
             objects.story.used.update(data.story.used)
             objects.story.used_values.update(data.story.used_values)
         vg = vg_ids[version_group]
-        if builder.game_of(vg).pret_format is PretFormat.GEN3:
+        if builder.game_of(vg).pret_format in (PretFormat.GEN3, PretFormat.GEN4):
             data = _encounter_areas(data, area_ids, known_areas)
         game_maps, game_areas, game_warps, ids = _map_rows(data, vg, versions, area_ids, known_areas, len(warps) + 1)
         maps.extend(game_maps)
@@ -71,6 +72,7 @@ def build_map_tables(builder: DatabaseBuilder) -> dict[str, list[tuple]]:
         "trainer_pokemon": objects.parties,
         "npc_offer": objects.offers,
         "npc_offer_story": objects.stories,
+        "npc_offer_component": objects.components,
         "map_spot": spots.rows,
     }
 
@@ -147,6 +149,7 @@ class _ObjectRows:
         self.parties: list[tuple] = []
         self.offers: list[tuple] = []
         self.stories: list[tuple] = []
+        self.components: list[tuple] = []
 
     def _add_team(
         self,
@@ -245,6 +248,8 @@ class _ObjectRows:
         phrases = tuple(dict.fromkeys((*self.story.phrases(repo, condition, where), *offer.stories)))
         for slot, phrase in enumerate(phrases, start=1):
             self.stories.append((offer_id, slot, phrase))
+        for kind, item, quantity in offer.components:
+            self.components.append((offer_id, kind, self.builder.items.ids[item], quantity))
 
 
 def _map_rows(

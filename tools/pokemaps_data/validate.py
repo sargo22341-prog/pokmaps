@@ -18,6 +18,15 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "composant d'offre invalide",
+        """SELECT c.* FROM npc_offer_component c LEFT JOIN npc_offer n ON n.id = c.npc_offer_id
+           LEFT JOIN item i ON i.id = c.item_id
+           WHERE n.id IS NULL OR i.id IS NULL OR c.quantity <= 0 OR c.kind NOT IN ('cost', 'wanted', 'extra')
+             OR (c.kind = 'cost' AND n.kind != 'move_tutor')
+             OR (c.kind IN ('wanted', 'extra') AND n.kind != 'exchange')
+             OR (c.kind = 'wanted' AND c.item_id != n.wanted_item_id)""",
+    ),
+    (
         "conditions complémentaires d'évolution invalides",
         """SELECT r.evolution_id FROM evolution_requirement r LEFT JOIN evolution e ON e.id = r.evolution_id
            WHERE e.id IS NULL OR r.gender_id NOT IN (1, 2) OR r.near_special_rock NOT IN (0, 1)
@@ -112,7 +121,8 @@ CHECKS = (
         """SELECT vg.identifier, pe.pokedex_id, p.id FROM pokedex_entry pe
            JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
            JOIN version_group vg ON vg.id = vgp.version_group_id JOIN pokemon p ON p.id = pe.pokemon_id
-           WHERE p.generation_id > vg.generation_id""",
+           JOIN pokedex pd ON pd.id = pe.pokedex_id
+           WHERE pd.identifier != 'national' AND p.generation_id > vg.generation_id""",
     ),
     (
         "Pokémon rencontré absent des Pokédex de son jeu",
@@ -240,7 +250,7 @@ CHECKS = (
                'vending_machine', 'prize_vendor', 'heal_spot')
              OR (o.kind IN ('npc', 'npc_object', 'npc_pokemon') AND (o.trainer_class IS NOT NULL
                OR (o.sprite IS NULL AND m.version_group_id NOT IN
-                   (SELECT id FROM version_group WHERE generation_id = 3))))
+                   (SELECT id FROM version_group WHERE generation_id IN (3, 4)))))
              OR (o.kind IN ('item', 'hidden_item')) != (o.item_id IS NOT NULL)
              OR (o.kind IN ('vending_machine', 'prize_vendor', 'heal_spot') AND (o.sprite IS NOT NULL
                OR NOT EXISTS (SELECT 1 FROM npc_offer n WHERE n.map_object_id = o.id)))
@@ -294,7 +304,7 @@ CHECKS = (
              OR n.kind NOT IN ('gift_item', 'gift_pokemon', 'gift_egg', 'sale', 'trade', 'exchange', 'prize_item',
                'prize_pokemon', 'coin_sale', 'coin_gift', 'fossil', 'fruit_tree', 'heal', 'cable_club', 'name_rater',
                'daycare', 'daycare_egg', 'daycare_withdrawal', 'move_relearner',
-               'move_deleter', 'grooming', 'move_tutor', 'point_prize')
+               'move_deleter', 'grooming', 'move_tutor', 'point_prize', 'accessory_shop', 'scratch_cards')
              OR (n.kind IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree')
                AND n.item_id IS NULL)
              OR (n.kind NOT IN ('gift_item', 'sale', 'exchange', 'prize_item', 'point_prize', 'fossil', 'fruit_tree',
@@ -307,10 +317,11 @@ CHECKS = (
                AND coalesce(n.price, 0) <= 0)
              OR (n.kind = 'move_tutor' AND n.price IS NOT NULL AND n.price <= 0)
              OR (n.kind = 'move_tutor' AND n.price IS NULL AND m.version_group_id NOT IN
-               (SELECT id FROM version_group WHERE generation_id = 3))
+               (SELECT id FROM version_group WHERE generation_id IN (3, 4)))
              OR n.currency NOT IN ('money', 'coins', 'battle_points', 'ashes')
              OR (n.currency IS NOT NULL AND n.kind NOT IN
-               ('sale', 'prize_item', 'prize_pokemon', 'coin_sale', 'daycare_withdrawal', 'move_tutor'))
+               ('sale', 'prize_item', 'prize_pokemon', 'coin_sale', 'daycare_withdrawal', 'move_tutor',
+                'scratch_cards'))
              OR (n.kind = 'prize_pokemon' AND n.currency IS NOT NULL AND n.currency != 'coins')
              OR (n.kind = 'sale' AND n.currency IS NOT NULL AND coalesce(n.price, 0) <= 0)
              OR (n.kind IN ('daycare_egg', 'daycare_withdrawal', 'move_relearner')
@@ -425,8 +436,8 @@ def _check_obtainable(connection: sqlite3.Connection) -> list[str]:
                 f"""SELECT DISTINCT pe.pokemon_id FROM pokedex_entry pe
                     JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
                     JOIN pokemon p ON p.id = pe.pokemon_id
-                    WHERE vgp.version_group_id IN ({marks}) AND p.is_mythical = 0""",
-                groups,
+                    WHERE vgp.version_group_id IN ({marks}) AND p.is_mythical = 0 AND p.generation_id <= ?""",
+                (*groups, generation),
             )
         }
         obtainable = _obtainable(connection, generation, groups)

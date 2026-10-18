@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING
 
 from .pret_gen4_engine_text import c_function, c_initializer
 from .pret_gen4_flow_chains import Condition
-from .pret_gen4_source import c_defines, c_enum, metang_enum, read_text
+from .pret_gen4_source import ByteReader, c_defines, c_enum, metang_enum, read_binary, read_text
 
 if TYPE_CHECKING:
     from .pret_gen4 import Gen4PretRepo
@@ -33,6 +33,34 @@ _HEIGHT = re.compile(r"\((\d+) << 4\) \* FX32_ONE")
 _FX32_ONE = 4096
 _MAX_OBJECTS = 256
 _SCRIPT_ID = re.compile(r"SCRIPT_ID\((\w+), (\d+)\)")
+
+
+def map_offsets(repo: Gen4PretRepo) -> dict[int, tuple[int, int, int]]:
+    """Origines globales des dix matrices, en cases, lues comme DistWorldMapInfoFile_Load."""
+    if not repo.platinum:
+        return {}
+    from .pret_gen4_animation import narc_members
+
+    body = c_function(
+        read_text(repo.root / "src/overlay005/land_data.c"), "LandDataManager_DistortionWorldSetOffsets", "land_data.c"
+    )
+    if any(
+        f"landDataMan->offset.{axis} = {field} * MAP_OBJECT_TILE_SIZE;" not in body
+        for axis, field in (("x", "offsetTileX"), ("y", "offsetAltitude"), ("z", "offsetTileZ"))
+    ):
+        raise ValueError("Monde Distorsion : unités des offsets modifiées")
+    path = repo.root / "res/prebuilt/fielddata/tornworld/tw_arc.narc"
+    reader = ByteReader(narc_members(read_binary(path, 8 * 1024 * 1024), str(path))[0], str(path))
+    count = reader.u32(0)
+    if count != 10 or len(reader.data) != 4 + count * 12:
+        raise ValueError(f"{path} : dix origines de matrices attendues")
+    result = {}
+    for index in range(count):
+        header, file, x, altitude, z = reader.unpack("IHhhh", 4 + index * 12)
+        if header not in repo.headers or header in result or file != index:
+            raise ValueError(f"{path} : origine de matrice invalide : {header}")
+        result[header] = (x, altitude, z)
+    return result
 
 
 @dataclass(frozen=True)

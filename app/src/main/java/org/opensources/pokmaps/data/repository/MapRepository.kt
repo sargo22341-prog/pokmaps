@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 import org.opensources.pokmaps.data.db.MapDao
 import org.opensources.pokmaps.data.db.MapEntity
 import org.opensources.pokmaps.data.db.NpcOfferRow
+import org.opensources.pokmaps.data.db.OfferComponentRow
 import org.opensources.pokmaps.domain.map.CharacterService
 import org.opensources.pokmaps.domain.map.FixedPokemon
 import org.opensources.pokmaps.domain.map.GameIndex
@@ -26,6 +27,7 @@ import org.opensources.pokmaps.domain.map.NpcOffer
 import org.opensources.pokmaps.domain.map.OfferCondition
 import org.opensources.pokmaps.domain.map.OfferCurrency
 import org.opensources.pokmaps.domain.map.OfferItem
+import org.opensources.pokmaps.domain.map.OfferItemCost
 import org.opensources.pokmaps.domain.map.OfferKind
 import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.SpotKind
@@ -192,12 +194,37 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
     /** Offres d'un personnage ou d'une installation dans la version du jeu, avec ce qu'exige chacune. */
     suspend fun offers(game: Game, objectId: Int): List<NpcOffer> {
         val stories = dao.offerStories(objectId).groupBy({ it.offerId }, { it.description })
+        val components = dao.offerComponents(objectId).groupBy { it.offerId }
         return dao.offers(objectId, game.versionId).map { row ->
             row.toOffer(
                 OfferCondition.fromMasks(row.timeMask, row.weekdayMask, stories[row.id].orEmpty(), row.isExternalEvent)
-            )
+            ).withComponents(row, components[row.id].orEmpty())
         }
     }
+
+    private fun NpcOffer.withComponents(row: NpcOfferRow, components: List<OfferComponentRow>): NpcOffer {
+        require(components.all { it.kind in setOf("cost", "wanted", "extra") && it.quantity > 0 })
+        val costs = components.filter { it.kind == "cost" }.map { it.itemCost() }
+        val extras = components.filter { it.kind == "extra" }.map { it.itemCost() }
+        val wanted = components.filter { it.kind == "wanted" }
+        require(wanted.size <= 1)
+        if (this is NpcOffer.Service) {
+            require(extras.isEmpty() && wanted.isEmpty())
+            return copy(requiredItems = costs)
+        }
+        if (this is NpcOffer.Exchange) {
+            require(costs.isEmpty() && wanted.all { it.itemId == this.wanted.id })
+            return copy(
+                quantity = row.quantity ?: 1,
+                wantedQuantity = wanted.singleOrNull()?.quantity ?: 1,
+                extraItems = extras
+            )
+        }
+        require(components.isEmpty())
+        return this
+    }
+
+    private fun OfferComponentRow.itemCost() = OfferItemCost(OfferItem(itemId, identifier, name, hasSprite), quantity)
 
     /** Offre lue dans la base ; une ligne incomplète est une erreur (la base est validée à la génération). */
     private fun NpcOfferRow.toOffer(condition: OfferCondition): NpcOffer = when (OfferKind.from(kind)) {

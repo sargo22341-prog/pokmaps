@@ -71,6 +71,7 @@ class ObjectRow:
     appearance: str | None = None
     rematches: list[list[tuple[str, int, tuple[str, ...]]]] = field(default_factory=list)
     held_items: dict[tuple[int, int], str] = field(default_factory=dict)
+    source_cell: tuple[int, int] | None = None
 
 
 def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:

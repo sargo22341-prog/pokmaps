@@ -10,7 +10,7 @@ from pathlib import Path
 from .form_sprites import UNOWN
 
 MANIFEST = "assets.sha256"
-_MAX_FILES = 20_000
+_MAX_FILES = 40_000
 
 
 def _required_paths(assets: Path) -> set[str]:

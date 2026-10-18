@@ -40,6 +40,11 @@ class Gen3PokemonDataTest {
         assertEquals(listOf(2, 1), dao.catalogs(7).map { it.id })
         assertEquals(202, dao.pokedex(6, 4).size)
         assertEquals(386, dao.pokedex(6, 1).size)
+        // Le National est partagé avec Sinnoh : la requête doit conserver la limite propre à chaque génération.
+        assertEquals(493, dao.pokedex(8, 1).size)
+        assertEquals(493, dao.pokedex(9, 1).size)
+        assertEquals(151, dao.pokedex(8, 5).size)
+        assertEquals(210, dao.pokedex(9, 6).size)
         assertEquals(156, dao.pokedex(6, 4).single { it.pokemonId == 25 }.number)
         assertTrue(dao.pokedex(6, 2).isEmpty())
     }

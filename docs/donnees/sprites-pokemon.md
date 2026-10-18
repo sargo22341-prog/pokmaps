@@ -4,7 +4,7 @@ Catalogue : 1025 espèces, export PokéAPI `bc92d3b6029ef1abe9e7ad424c400b338f3c
 
 Images : PokeAPI/sprites, commit `bfb75391935310368065096fa08c51e8970bc43e`.
 
-Les espèces 1 à 386 sont embarquées. De 387 à 649, les chemins décrivent la source prévue,
+Les espèces 1 à 493 sont embarquées. De 494 à 649, les chemins décrivent la source prévue,
 sans affirmer que les images sont embarquées. Après 649, aucune source n'est configurée ;
 le pipeline refuse un jeu qui en aurait besoin. Les fixes sont la première image du GIF
 normal ou chromatique, encodée en WebP sans perte, comme les animations.

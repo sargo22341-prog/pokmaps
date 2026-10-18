@@ -77,7 +77,7 @@ class GeneratedMapSectionsTest {
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)
             val groups = groupIdentifiers(connection)
-            assertEquals(setOf(1, 2, 3, 4, 5, 6, 7), versions.keys)
+            assertEquals((1..9).toSet(), versions.keys)
             versions.forEach { (group, entries) ->
                 val maps = entries.map { it.second }.associateBy { it.id }
                 val catalog = MapCatalog(groups.getValue(group), maps, warps, emptyMap(), emptyMap())

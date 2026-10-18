@@ -11,9 +11,10 @@ interface PokemonDao {
         FROM pokemon p
         JOIN pokedex_entry pe ON pe.pokemon_id = p.id
         JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+        JOIN version_group vg ON vg.id = vgp.version_group_id
         LEFT JOIN pokemon_egg_group peg ON peg.pokemon_id = p.id AND peg.version_group_id = :versionGroupId
         LEFT JOIN egg_group eg ON eg.id = peg.egg_group_id
-        WHERE vgp.version_group_id = :versionGroupId
+        WHERE vgp.version_group_id = :versionGroupId AND p.generation_id <= vg.generation_id
         ORDER BY p.id, eg.id
         """
     )

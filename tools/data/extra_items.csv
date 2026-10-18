@@ -7,3 +7,64 @@ liteblue-mail,100004,Letrbleuciel,all-mail,Lettre à faire porter par un Pokémo
 portrait-mail,100005,Letrportrait,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue à l'aire de repos du Mont Sélénite
 lovely-mail,100006,Letrcharm.,all-mail,Lettre à faire porter par un Pokémon pour l'échanger avec un message.,Lettre de la 2e génération absente de PokéAPI ; nom du jeu français relevé sur Poképédia (Lettre (message)) : vendue au Centre Commercial de Céladopole
 coin,100008,Jetons,gameplay,Jetons du Casino à jouer aux machines à sous ou à échanger contre des lots.,"Objet COIN de pret absent de PokéAPI : jetons cachés au sol du Casino de Céladopole (Rouge, Bleu, Jaune)"
+sinnoh-decoration-bonsly-doll,101000,Poupée Manzaï,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-buizel-doll,101001,Poupée Mustébouée,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-chatot-doll,101002,Poupée Pijako,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-cupboard,101003,Placard,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-mantyke-doll,101004,Poupée Babimanta,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-mime-jr-doll,101005,Poupée Mime Jr.,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-munchlax-doll,101006,Poupée Goinfrex,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-pretty-sink,101007,Évier,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-refrigerator,101008,Réfrigérateur,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-tv,101009,Télévision,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-decoration-yellow-cushion,101010,Coussin jaune,collectibles,Décoration pour une Base Secrète du Souterrain de Sinnoh.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-a,101011,Sceau A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-ele-a,101012,Sceau Électrik A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-ele-b,101013,Sceau Électrik B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-ele-c,101014,Sceau Électrik C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-ele-d,101015,Sceau Électrik D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-fire-a,101016,Sceau Feu A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-fire-b,101017,Sceau Feu B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-fire-c,101018,Sceau Feu C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-fire-d,101019,Sceau Feu D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-a,101020,Sceau Floral A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-b,101021,Sceau Floral B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-c,101022,Sceau Floral C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-d,101023,Sceau Floral D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-e,101024,Sceau Floral E,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-flora-f,101025,Sceau Floral F,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-foamy-a,101026,Sceau Bulle A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-foamy-b,101027,Sceau Bulle B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-foamy-c,101028,Sceau Bulle C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-foamy-d,101029,Sceau Bulle D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-a,101030,Sceau Cœur A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-b,101031,Sceau Cœur B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-c,101032,Sceau Cœur C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-d,101033,Sceau Cœur D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-e,101034,Sceau Cœur E,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-heart-f,101035,Sceau Cœur F,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-line-a,101036,Sceau Ligne A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-line-b,101037,Sceau Ligne B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-line-c,101038,Sceau Ligne C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-line-d,101039,Sceau Ligne D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-party-a,101040,Sceau Fête A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-party-b,101041,Sceau Fête B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-party-c,101042,Sceau Fête C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-party-d,101043,Sceau Fête D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-smoke-a,101044,Sceau Fumée A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-smoke-b,101045,Sceau Fumée B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-smoke-c,101046,Sceau Fumée C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-smoke-d,101047,Sceau Fumée D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-a,101048,Sceau Note A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-b,101049,Sceau Note B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-c,101050,Sceau Note C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-d,101051,Sceau Note D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-e,101052,Sceau Note E,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-f,101053,Sceau Note F,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-song-g,101054,Sceau Note G,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-a,101055,Sceau Étoile A,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-b,101056,Sceau Étoile B,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-c,101057,Sceau Étoile C,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-d,101058,Sceau Étoile D,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-e,101059,Sceau Étoile E,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.
+sinnoh-seal-star-f,101060,Sceau Étoile F,collectibles,Sceau de Sinnoh à placer sur une Capsule Ball.,Catalogue des boutiques DS lu dans les dépôts pret épinglés.

@@ -513,8 +513,16 @@ CREATE TABLE npc_offer (
 );
 CREATE INDEX index_npc_offer_map_object_id ON npc_offer (map_object_id);
 
--- Étapes du scénario qu'exige une offre, dans l'ordre (tools/data/story_events.csv) : « Après la libération de la
--- Tour Radio », « Avant la remise de l'Œuf Mystère au Prof. Orme ».
+-- Paiements composés, quantité de l'objet demandé et objets remis ensemble dans un échange.
+CREATE TABLE npc_offer_component (
+    npc_offer_id INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    item_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    PRIMARY KEY (npc_offer_id, kind, item_id)
+);
+
+-- Étapes du scénario nécessaires à une offre, dans l'ordre de tools/data/story_events.csv.
 CREATE TABLE npc_offer_story (
     npc_offer_id INTEGER NOT NULL,
     slot INTEGER NOT NULL,

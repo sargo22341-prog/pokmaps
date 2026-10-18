@@ -76,6 +76,48 @@ class MapRepositoryTest {
     }
 
     @Test
+    fun sinnohTutorKeepsEveryShardCostAndExchangeKeepsTheWholeBundle() = runTest {
+        val delegate = FakeMapDao()
+        val sale = delegate.offers(FakeMapDao.CLERK, FakeGameDao.RED.versionId).single()
+        val tutor = sale.copy(
+            id = 101,
+            kind = "move_tutor",
+            itemId = null,
+            itemIdentifier = null,
+            itemName = null,
+            itemHasSprite = null,
+            price = null
+        )
+        val exchange = sale.copy(
+            id = 102,
+            kind = "exchange",
+            price = null,
+            quantity = 3,
+            wantedItemId = 72,
+            wantedItemIdentifier = "red-shard",
+            wantedItemName = "Tesson Rouge",
+            wantedItemHasSprite = true
+        )
+        val components = listOf(
+            org.opensources.pokmaps.data.db.OfferComponentRow(101, "cost", 72, "red-shard", "Tesson Rouge", true, 2),
+            org.opensources.pokmaps.data.db.OfferComponentRow(101, "cost", 73, "blue-shard", "Tesson Bleu", true, 6),
+            org.opensources.pokmaps.data.db.OfferComponentRow(102, "wanted", 72, "red-shard", "Tesson Rouge", true, 10),
+            org.opensources.pokmaps.data.db.OfferComponentRow(102, "extra", 73, "blue-shard", "Tesson Bleu", true, 2)
+        )
+        val dao = object : MapDao by delegate {
+            override suspend fun offers(objectId: Int, versionId: Int) = listOf(tutor, exchange)
+            override suspend fun offerComponents(objectId: Int) = components
+        }
+        val offers = MapRepository(dao, Dispatchers.Unconfined).offers(FakeGameDao.PLATINUM, FakeMapDao.CLERK)
+        val service = offers[0] as NpcOffer.Service
+        assertEquals(listOf(72 to 2, 73 to 6), service.requiredItems.map { it.item.id to it.quantity })
+        val bundle = offers[1] as NpcOffer.Exchange
+        assertEquals(3, bundle.quantity)
+        assertEquals(10, bundle.wantedQuantity)
+        assertEquals(listOf(73 to 2), bundle.extraItems.map { it.item.id to it.quantity })
+    }
+
+    @Test
     fun hoennSalesKeepTheirCurrencyAndTutorsCanBeFree() = runTest {
         val delegate = FakeMapDao()
         val sale = delegate.offers(FakeMapDao.CLERK, FakeGameDao.RED.versionId).single()

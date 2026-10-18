@@ -176,6 +176,47 @@ class MapViewModelTest {
     }
 
     @Test
+    fun emeraldToPlatinumResetsPlaceTimeAndHighlight() {
+        assertBranchChangeResetsSelection(FakeGameDao.EMERALD, FakeGameDao.PLATINUM.copy(hasTimeOfDay = true))
+    }
+
+    @Test
+    fun platinumToDiamondResetsPlaceTimeAndHighlight() {
+        assertBranchChangeResetsSelection(
+            FakeGameDao.PLATINUM.copy(hasTimeOfDay = true),
+            FakeGameDao.DIAMOND.copy(hasTimeOfDay = true)
+        )
+    }
+
+    private fun assertBranchChangeResetsSelection(
+        source: org.opensources.pokmaps.domain.model.Game,
+        target: org.opensources.pokmaps.domain.model.Game
+    ) {
+        val store = FakeDataStore()
+        val model = viewModel(FakeGameDao(listOf(source, target)), dataStore = store)
+        model.onScreenShown()
+        requests.send(MapRequest.OpenPlace("viridian-mart"))
+        requests.send(MapRequest.HighlightPokemon(FakeMapDao.PIDGEY, "Roucool"))
+        model.onAction(MapAction.OpenPlace(MapPlace(FakeMapDao.ROUTE_1, "Route 1")))
+        model.onAction(MapAction.CycleTime)
+        assertEquals(source, model.state.value.game)
+        assertEquals(FakeMapDao.PIDGEY, model.state.value.highlight?.pokemonId)
+        assertEquals(FakeMapDao.ROUTE_1, model.state.value.zone?.mapId)
+        assertEquals(TimeFilter.MORNING, model.state.value.time)
+        val previousMap = model.state.value.mapState
+
+        kotlinx.coroutines.test.runTest { GameSettings(store).selectVersion(target.versionId) }
+
+        assertEquals(target, model.state.value.game)
+        assertNotSame(previousMap, model.state.value.mapState)
+        assertEquals("kanto", model.state.value.map?.identifier)
+        assertEquals(TimeFilter.ALL, model.state.value.time)
+        assertNull(model.state.value.highlight)
+        assertNull(model.state.value.zone)
+        assertFalse(model.state.value.failed)
+    }
+
+    @Test
     fun changingGen3BranchResetsPlaceTimeAndHighlight() {
         val dataStore = FakeDataStore()
         val games = FakeGameDao(listOf(FakeGameDao.EMERALD, FakeGameDao.FIRERED))

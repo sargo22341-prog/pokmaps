@@ -5,7 +5,7 @@ import sqlite3
 from pathlib import Path
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, GEN4_GAMES, PretFormat
+from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, PretFormat
 from pokemaps_data.validate import validate
 
 _APP = Path(__file__).parents[2] / "app/src/main/java/org/opensources/pokmaps"
@@ -23,10 +23,13 @@ _MATRIX = {
     "emerald": ("emerald", 3, PretFormat.GEN3, "ruby-sapphire-emerald", ("HOENN",), True, None),
     "firered": ("firered-leafgreen", 3, PretFormat.GEN3, "firered-leafgreen", ("KANTO", "SEVII"), True, 1),
     "leafgreen": ("firered-leafgreen", 3, PretFormat.GEN3, "firered-leafgreen", ("KANTO", "SEVII"), True, 1),
+    "diamond": ("diamond-pearl", 4, PretFormat.GEN4, "diamond-pearl", ("SINNOH",), True, None),
+    "pearl": ("diamond-pearl", 4, PretFormat.GEN4, "diamond-pearl", ("SINNOH",), True, None),
+    "platinum": ("platinum", 4, PretFormat.GEN4, "platinum", ("SINNOH",), True, None),
 }
 
 
-def test_capabilities_of_the_eleven_versions(db: sqlite3.Connection) -> None:
+def test_capabilities_of_the_fourteen_versions(db: sqlite3.Connection) -> None:
     assert GAMES_IN_PROGRESS == ()
     query = "SELECT v.identifier, vg.generation_id FROM version v JOIN version_group vg ON vg.id = v.version_group_id"
     generations = dict(db.execute(query))
@@ -50,8 +53,7 @@ def test_capabilities_of_the_eleven_versions(db: sqlite3.Connection) -> None:
 def test_app_version_groups_match_the_pipeline_families() -> None:
     source = (_APP / "domain/model/VersionGroup.kt").read_text(encoding="utf-8")
     entries = re.findall(r'^\s+[A-Z_]+\("([a-z-]+)", "([a-z-]+)"\)[,;]$', source, re.MULTILINE)
-    # Les modèles DS sont prêts avant le passage des assets de Sinnoh dans GAMES.
-    modeled = (*GAMES, *GEN4_GAMES)
+    modeled = GAMES
     assert dict(entries) == {game.version_group: game.map_family for game in modeled}
     assert len(entries) == len(modeled)
 
@@ -80,6 +82,13 @@ def test_game_query_derives_time_from_encounters(db: sqlite3.Connection) -> None
     rows = db.execute(query).fetchall()
     columns = [column[0] for column in db.execute(query).description]
     games = [dict(zip(columns, row, strict=True)) for row in rows]
-    assert {game["versionIdentifier"] for game in games if game["hasTimeOfDay"]} == {"gold", "silver", "crystal"}
+    assert {game["versionIdentifier"] for game in games if game["hasTimeOfDay"]} == {
+        "gold",
+        "silver",
+        "crystal",
+        "diamond",
+        "pearl",
+        "platinum",
+    }
     db.execute("DELETE FROM encounter_condition")
     assert all(not row[columns.index("hasTimeOfDay")] for row in db.execute(query))

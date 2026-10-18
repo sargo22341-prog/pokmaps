@@ -37,7 +37,7 @@ class DataModuleTest {
         val database = DataModule.database(context)
         try {
             val games = withContext(Dispatchers.IO) { database.gameDao().games().first() }
-            assertEquals(11, games.size)
+            assertEquals(14, games.size)
             assertTrue(games.single { it.versionId == 9 }.forms.getValue(386).single().isDefault)
             assertFalse(context.getDatabasePath("pokedex.db").exists())
             assertFalse(context.getDatabasePath("pokedex-123.db").exists())

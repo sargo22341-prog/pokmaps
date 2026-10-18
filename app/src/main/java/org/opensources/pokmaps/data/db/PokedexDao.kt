@@ -21,8 +21,10 @@ interface PokedexDao {
         SELECT pe.number AS number, p.id AS pokemonId, p.name_fr AS name, p.name_en AS nameEn
         FROM pokedex_entry pe
         JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+        JOIN version_group vg ON vg.id = vgp.version_group_id
         JOIN pokemon p ON p.id = pe.pokemon_id
         WHERE vgp.version_group_id = :versionGroupId AND pe.pokedex_id = :pokedexId
+            AND p.generation_id <= vg.generation_id
         ORDER BY number
         """
     )

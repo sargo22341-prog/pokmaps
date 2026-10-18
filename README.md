@@ -1,7 +1,7 @@
 # Pokémaps
 
 Application Android en français : cartes interactives, Pokédex et guides pour **Rouge, Bleu, Jaune,
-Or, Argent, Cristal, Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille**.
+Or, Argent, Cristal, Rubis, Saphir, Émeraude, Rouge Feu, Vert Feuille, Diamant, Perle et Platine**.
 
 - Android 17 (API 37), Kotlin et Jetpack Compose.
 - Fonctionne sur GrapheneOS, sans services Google Play.
@@ -34,6 +34,14 @@ L’application ne lit aucune sauvegarde de cartouche et ne prédit aucun tirage
 [carte]: docs/screenshots/carte.webp
 [pokedex]: docs/screenshots/pokedex.webp
 [pokemon]: docs/screenshots/pokemon.webp
+
+| Carte de Platine | Pokédex de Diamant | Carte de Perle |
+|---|---|---|
+| ![Sinnoh dans Platine][platine] | ![Pokédex Sinnoh de Diamant][diamant] | ![Sinnoh dans Perle][perle] |
+
+[platine]: docs/screenshots/sinnoh-platinum-map.png
+[diamant]: docs/screenshots/sinnoh-diamond-pokedex.png
+[perle]: docs/screenshots/sinnoh-pearl-map.png
 
 ## Documentation
 
@@ -74,19 +82,22 @@ coûts en Tessons restent distincts. Les lots échangés ensemble conservent leu
 Chaque offre garde son origine : PNJ posé avec son drapeau de retrait, ou scène, case et déclencheur.
 Les exemplaires d'un personnage à plusieurs étapes restent distincts dans cet aperçu.
 La curation annote les figurants temporaires et attribue les dons de scène au personnage qui les remet.
-Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
-La carte prépare des sélecteurs distincts pour les étages et les niveaux superposés de Sinnoh.
+La génération complète intègre les catalogues DS validés et active Diamant, Perle et Platine dans l’application.
+Si les cartes préparatoires manquent, elle les reconstruit depuis les sources épinglées.
+`--application-only` limite la génération aux jeux actifs, sans reconstruire un aperçu supplémentaire.
+La carte propose des sélecteurs distincts pour les étages et les niveaux superposés de Sinnoh.
 Le calque Arbres à Miel apparaît uniquement sur les cartes qui contiennent leurs emplacements ;
 le sol meuble attend les données de baies. Les lieux, rencontres et offres événementiels gardent la mention
 « événement externe ». La sauvegarde de collection accepte les versions 12 à 14 et leurs 493 espèces,
 et conserve l’import des anciens fichiers de schéma 1.
-Les modèles Android reconnaissent désormais ces trois versions (493 espèces) et préparent leur rangée
+Les modèles Android reconnaissent ces trois versions (493 espèces) et affichent leur rangée
 « 4e génération ». Les filtres distinguent les arbres à Miel et les dons de Pokémon Ranger.
 Le calculateur DS gère Sombre, Soin et Rapide Ball, le terrain aquatique, le Grand Marais et le Parc des Amis ;
-la Mémoire Ball reste réservée aux distributions. Ces fonctions seront accessibles après intégration des assets.
-Le Pokédex DS prépare la bascule Sinnoh/National et les deux numéros sur la fiche. Les formes retenues ont
+la Mémoire Ball reste réservée aux distributions.
+Le Pokédex DS propose la bascule Sinnoh/National et les deux numéros sur la fiche. Les formes retenues ont
 leurs sprites normaux et chromatiques et leur suivi de collection ; Zarbi conserve ses 28 formes.
 Les fiches utilisent la classe propre à chaque attaque et les conditions d’évolution DS en français.
+Les guides, succès et outils spécifiques à Sinnoh restent décrits dans les phases suivantes de `gen4.md`.
 
 ## Publier une version
 

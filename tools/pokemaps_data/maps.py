@@ -161,6 +161,7 @@ class GameMapData:
     # Les aperçus partiels n'exportent pas encore les personnages ; leurs noms se valident dans les sources.
     characters_complete: bool = True
     story: StoryEvents | None = None
+    named_characters: frozenset[str] = frozenset()
 
 
 def renderer(game_maps: GameMaps) -> MapRenderer:
@@ -355,7 +356,10 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
             result[game.version_group] = export_gen3_game(cache, output / game.version_group, game)
             continue
         if game.pret_format == PretFormat.GEN4:
-            raise ValueError(f"{game.version_group} : cartes DS sans rendu, à construire avant d'activer le jeu")
+            from .maps_export_gen4 import export_game as export_gen4_game
+
+            result[game.version_group] = export_gen4_game(cache, output / game.version_group, game)
+            continue
         repo = open_pret(game, fetch_pret(cache, game.pret_repo))
         if isinstance(repo, Gen4PretRepo):
             raise ValueError(f"{game.version_group} : lecteur DS inattendu pour des cartes en tuiles")
@@ -369,7 +373,7 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
         placed = {row.const for group in version_groups for row in result[group].maps}
         if unknown := sorted({part.map for part in layout.plans if part.family == family} - placed):
             raise ValueError(f"map_plans.csv : zones absentes des jeux {family} : {unknown}")
-    legacy = tuple(game for game in games if game.pret_format != PretFormat.GEN3)
+    legacy = tuple(game for game in games if game.pret_format in (PretFormat.GEN1, PretFormat.GEN2))
     families, repos = set(complete_families(legacy)), {game.pret_repo for game in legacy}
     if unused := curation.unused(families, repos):
         raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")

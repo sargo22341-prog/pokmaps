@@ -11,7 +11,7 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 | `pret/pokered`, `pokeyellow` | Cartes, personnages, offres et règles des jeux Rouge/Bleu/Jaune |
 | `pret/pokegold`, `pokecrystal` | Cartes, scripts et tables sauvages horaires de Johto/Kanto |
 | `pret/pokeruby`, `pokeemerald`, `pokefirered` | Cartes, scripts, rencontres, équipes et règles GBA |
-| `pret/pokeplatinum`, `pokediamond` | Aperçus Pokémon et cartes DS, lecteurs des modèles, textures, matrices, événements et scripts |
+| `pret/pokeplatinum`, `pokediamond` | Pokémon et cartes DS, modèles, textures, matrices, événements et scripts |
 | PokeAPI/sprites | Sprites Pokémon Noir/Blanc normaux et chromatiques |
 | pokesprite | Icônes d’objets |
 | `tools/data/` | Corrections et compléments éditoriaux relus |
@@ -27,7 +27,7 @@ produits dans `res/values/strings_achievements_<version>.xml` depuis les archive
 Caches (`tools/.cache`), sources brutes et aperçus (`tools/build/preview`) restent hors Git, sans Git LFS.
 
 Les images sont en WebP sans perte, vérifiées contre leurs sources. Le style Pokémon est identique partout :
-animations Noir/Blanc et fixes issus de leur première image. Les espèces 1 à 386 sont embarquées ;
+animations Noir/Blanc et fixes issus de leur première image. Les espèces 1 à 493 sont embarquées ;
 la source est configurée jusqu’à 649. Au-delà, choisir et valider une source avant d’ajouter un jeu.
 Zarbi dispose de sprites A–Z, ! et ?, normaux/chromatiques et fixes/animés.
 Le [catalogue généré](sprites-pokemon.md) fournit les liens par espèce ; `tools/build_sprite_catalog.py` le reproduit.
@@ -64,6 +64,8 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--gen3-items-only`, `--gen3-trainers-only` | Aperçu GBA avec objets, puis équipes |
 | `--gen3-curation-only` | Rapport éditorial `character_curation.json` |
 | `--achievement-resources-only` | Ressources Android des succès depuis les archives locales |
+| `--application-only` | Génération complète des jeux actifs, sans aperçu supplémentaire des jeux en cours |
+| `--reuse-gen3-maps` | Réutilisation des tuiles GBA validées ; uniquement si leurs sources épinglées sont inchangées |
 | `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
 | `--sinnoh-maps-only` | Deux familles de cartes DS dans `sinnoh-maps/`, sans activation Android |
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
@@ -102,13 +104,22 @@ dédiées, jamais la détection d’une phrase française. Les validations et le
 
 ### Aperçu Pokémon de Sinnoh
 
-`PLATINUM` puis `DIAMOND_PEARL` sont déclarés au format `GEN4`, hors de `GAMES_IN_PROGRESS` :
-la génération générale ne les active pas encore. L’option `--sinnoh-pokemon-only` lit les deux dépôts
+`PLATINUM` puis `DIAMOND_PEARL` sont intégrés au format `GEN4` dans `GAMES`.
+La génération complète importe les catalogues de `sinnoh-maps` après validation de leurs empreintes et
+du commit source, et les reconstruit s'ils manquent. `maps_export_gen4.py` projette les passages,
+personnages, équipes, objets, fixes et offres dans les tables communes. Les coordonnées globales du
+Monde Distorsion sont ramenées à chaque matrice depuis les dix offsets de `tw_arc.narc`, avec les unités
+vérifiées dans `LandDataManager_DistortionWorldSetOffsets`.
+Les catalogues `characters.json` distribués conservent les drapeaux, conditions et origines des scènes.
+Le schéma 23 ajoute `npc_offer_component` pour les paiements en Tessons, les quantités demandées et
+les objets remis ensemble ; chaque composant est validé avec son offre et son objet.
+Les marchandises propres aux boutiques DS sont nommées dans `extra_items.csv`.
+L’option `--sinnoh-pokemon-only` reste un aperçu indépendant et lit les deux dépôts
 épinglés, sans ROM, et génère une base et les sprites normaux/chromatiques des 493 espèces dans l’aperçu.
 Les variantes de Perle sont lues séparément pour les objets tenus ; un test compare leurs autres données à Diamant.
 
 Les statistiques, types, talents, objets tenus, capture et reproduction viennent des données personnelles DS.
-Les évolutions PokéAPI sont comparées aux deux tables pret. Le schéma 22 conserve les conditions supplémentaires
+Les évolutions PokéAPI sont comparées aux deux tables pret. La base conserve les conditions supplémentaires
 dans `evolution_requirement` : lieu, sexe, espèce dans l’équipe, proximité d’une pierre et formes de départ/arrivée
 (identifiants PokéAPI). Le moteur de chaque dépôt fournit le seuil de bonheur.
 

@@ -141,6 +141,14 @@ data class NpcOfferStoryEntity(
     @ColumnInfo(name = "description_fr") val descriptionFr: String
 )
 
+@Entity(tableName = "npc_offer_component", primaryKeys = ["npc_offer_id", "kind", "item_id"])
+data class NpcOfferComponentEntity(
+    @ColumnInfo(name = "npc_offer_id") val npcOfferId: Int,
+    val kind: String,
+    @ColumnInfo(name = "item_id") val itemId: Int,
+    val quantity: Int
+)
+
 @Entity(
     tableName = "map_spot",
     indices = [

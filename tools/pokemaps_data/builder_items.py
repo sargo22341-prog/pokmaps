@@ -180,7 +180,7 @@ class ItemTables:
             for data in self.builder.map_data.values()
             for obj in data.objects
             for offer in obj.offers
-            for item in (offer.item, offer.wanted_item)
+            for item in (offer.item, offer.wanted_item, *(item for _, item, _ in offer.components))
             if item
         }
         return self._known_items(identifiers, "Objets des personnages")

@@ -56,6 +56,42 @@ class PokemapsJourneyTest {
     }
 
     @Test
+    fun platinumCapturesItsStarterAndHighlightsSinnoh() {
+        sinnohJourney("Platine", "tortipouss", "Tortipouss", 210)
+    }
+
+    @Test
+    fun diamondCapturesItsStarterAndHighlightsSinnoh() {
+        sinnohJourney("Diamant", "tiplouf", "Tiplouf", 151)
+    }
+
+    private fun sinnohJourney(game: String, query: String, pokemon: String, regionalSize: Int) {
+        selectGame(game)
+        openPokemon(query, pokemon)
+        click(hasContentDescription(text(R.string.collection_not_caught)))
+        await(hasContentDescription(text(R.string.collection_caught)))
+        click(hasContentDescription(text(R.string.back)))
+        await(
+            hasText(
+                compose.activity.resources.getQuantityString(
+                    R.plurals.pokedex_count_caught,
+                    1,
+                    1,
+                    1,
+                    regionalSize
+                )
+            )
+        )
+        click(hasText(pokemon))
+        await(hasScrollToNodeAction())
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
+        click(hasText(text(R.string.show_on_map)))
+        await(hasText(text(R.string.map_highlight, pokemon)))
+        await(hasText("Sinnoh"))
+        cycleToNight()
+    }
+
+    @Test
     fun emeraldOpensItsRegionalPokemonAndHighlightsHoenn() {
         selectGame("Émeraude")
         openPokemon("arcko", "Arcko")
@@ -147,10 +183,7 @@ class PokemapsJourneyTest {
         compose.onNode(hasText("Kanto") and hasClickAction()).assertExists()
         click(hasText("Kanto") and hasClickAction())
         click(hasText("Johto") and hasClickAction())
-        click(hasContentDescription(text(R.string.time_all)))
-        click(hasContentDescription(text(R.string.time_morning)))
-        click(hasContentDescription(text(R.string.time_day)))
-        compose.onNode(hasContentDescription(text(R.string.time_night)) and hasClickAction()).assertExists()
+        cycleToNight()
         openPokemon("hoot", "Hoothoot")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText(text(R.string.show_on_map)))
         click(hasText(text(R.string.show_on_map)))
@@ -329,6 +362,13 @@ class PokemapsJourneyTest {
     }
 
     private fun text(@StringRes id: Int, vararg args: Any): String = compose.activity.getString(id, *args)
+
+    private fun cycleToNight() {
+        click(hasContentDescription(text(R.string.time_all)))
+        click(hasContentDescription(text(R.string.time_morning)))
+        click(hasContentDescription(text(R.string.time_day)))
+        await(hasContentDescription(text(R.string.time_night)) and hasClickAction())
+    }
 
     private fun selectGold() {
         selectGame("Or")

@@ -50,6 +50,30 @@ class CollectionSettingsTest {
     }
 
     @Test
+    fun sinnohCapturesSurviveReopeningAndDoNotReplaceExistingCollections() = runTest {
+        val store = FakeDataStore()
+        val settings = CollectionSettings(store)
+        settings.setCaught(setOf(1), 25, true)
+        settings.setCaught(setOf(9), 384, true)
+        settings.setFavorite(25, true)
+        settings.setCaught(setOf(12), 483, true)
+        settings.setCaught(setOf(13), 484, true)
+        settings.setCaught(setOf(14), 487, true)
+        settings.setCaught(setOf(12, 13, 14), 493, true)
+
+        val reopened = CollectionSettings(store)
+        assertEquals(
+            mapOf(1 to setOf(25), 9 to setOf(384), 12 to setOf(483, 493), 13 to setOf(484, 493), 14 to setOf(487, 493)),
+            reopened.caughtByVersion.first()
+        )
+        reopened.setCaught(setOf(14), 487, false)
+        assertEquals(setOf(493), reopened.caughtByVersion.first()[14])
+        assertEquals(setOf(25), reopened.caughtByVersion.first()[1])
+        assertEquals(setOf(384), reopened.caughtByVersion.first()[9])
+        assertEquals(setOf(25), reopened.favorites.first())
+    }
+
+    @Test
     fun validCollectionAndCompatibilityFallbackArePreserved() = runTest {
         val store = FakeDataStore()
         val settings = CollectionSettings(store)

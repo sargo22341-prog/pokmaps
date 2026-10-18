@@ -8,7 +8,7 @@ from pokemaps_data.sprite_catalog import sprite_catalog
 
 def test_complete_catalog(builder: DatabaseBuilder) -> None:
     content = sprite_catalog(builder.api)
-    assert "Les espèces 1 à 386 sont embarquées. De 387 à 649" in content
+    assert "Les espèces 1 à 493 sont embarquées. De 494 à 649" in content
     assert "| 1 | Bulbizarre | 1 |" in content
     assert "| 1025 | Pêchaminus | 9 |" in content
     assert "| 650 | Marisson | 6 | Non configuré" in content

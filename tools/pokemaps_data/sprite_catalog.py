@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from .games import GAMES
 from .pokeapi import PokeApi
 from .sources import POKEAPI_COMMIT, POKEAPI_SPRITES_COMMIT, POKEAPI_SPRITES_URL
 from .sprites import ANIMATED_SPRITES, LAST_ANIMATED_SPECIES, SHINY_SPRITES
@@ -15,6 +16,9 @@ def sprite_catalog(api: PokeApi) -> str:
         if row["local_language_id"] == "5"
     }
     rows = sorted(api.table("pokemon_species"), key=lambda row: int(row["id"]))
+    groups = {game.version_group for game in GAMES}
+    generation = max(int(row["generation_id"]) for row in api.table("version_groups") if row["identifier"] in groups)
+    last = max(int(row["id"]) for row in rows if int(row["generation_id"]) <= generation)
     lines = [
         "# Provenance des sprites Pokémon",
         "",
@@ -22,7 +26,7 @@ def sprite_catalog(api: PokeApi) -> str:
         "",
         f"Images : PokeAPI/sprites, commit `{POKEAPI_SPRITES_COMMIT}`.",
         "",
-        "Les espèces 1 à 386 sont embarquées. De 387 à 649, les chemins décrivent la source prévue,",
+        f"Les espèces 1 à {last} sont embarquées. De {last + 1} à 649, les chemins décrivent la source prévue,",
         "sans affirmer que les images sont embarquées. Après 649, aucune source n'est configurée ;",
         "le pipeline refuse un jeu qui en aurait besoin. Les fixes sont la première image du GIF",
         "normal ou chromatique, encodée en WebP sans perte, comme les animations.",

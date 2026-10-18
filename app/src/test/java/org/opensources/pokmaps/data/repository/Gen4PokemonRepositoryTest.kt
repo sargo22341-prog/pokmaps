@@ -20,7 +20,7 @@ import org.opensources.pokmaps.domain.pokemon.EvolutionGender
 import org.opensources.pokmaps.domain.pokemon.UnownForm
 import org.robolectric.RobolectricTestRunner
 
-/** Petit extrait versionné de l’aperçu DS : aucun cache ni réseau pendant les tests. */
+/** Requêtes DS sur la base distribuée : aucun cache ni réseau pendant les tests. */
 @RunWith(RobolectricTestRunner::class)
 class Gen4PokemonRepositoryTest {
     private lateinit var database: PokedexDatabase
@@ -35,10 +35,6 @@ class Gen4PokemonRepositoryTest {
             PokedexDatabase::class.java,
             "gen4-test.db"
         ).createFromFile(File(requireNotNull(System.getProperty("pokemaps.database")))).build()
-        for (name in listOf("gen4-catalog.sql", "gen4-species.sql", "gen4-forms.sql", "gen4-evolutions.sql")) {
-            val sql = checkNotNull(javaClass.getResourceAsStream("/$name")).bufferedReader().use { it.readLines() }
-            sql.filter { it.startsWith("INSERT") }.forEach { database.openHelper.writableDatabase.execSQL(it) }
-        }
         pokedex = PokedexRepository(database.pokedexDao())
         pokemon = PokemonRepository(database.pokemonDao(), pokedex)
         games = database.gameDao().games().first().filter { it.versionId in 12..14 }

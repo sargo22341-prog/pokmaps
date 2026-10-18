@@ -156,6 +156,7 @@ class NpcOffer:
     currency: str | None = None
     stories: tuple[str, ...] = ()
     external_event: bool = False
+    components: tuple[tuple[str, str, int], ...] = ()
 
 
 @dataclass(frozen=True)

@@ -231,6 +231,16 @@ interface MapDao {
     )
     suspend fun offerStories(objectId: Int): List<OfferStoryRow>
 
+    @Query(
+        """
+        SELECT c.npc_offer_id AS offerId, c.kind, i.id AS itemId, i.identifier, i.name_fr AS name,
+            i.has_sprite AS hasSprite, c.quantity
+        FROM npc_offer_component c JOIN npc_offer n ON n.id = c.npc_offer_id JOIN item i ON i.id = c.item_id
+        WHERE n.map_object_id = :objectId ORDER BY c.npc_offer_id, c.kind, c.item_id
+        """
+    )
+    suspend fun offerComponents(objectId: Int): List<OfferComponentRow>
+
     /** Objet : description, ou attaque de la CT / CS dans le jeu. */
     @Query(
         """

@@ -10,7 +10,7 @@ import pytest
 from pokemaps_data.builder import SCHEMA, DatabaseBuilder
 from pokemaps_data.builder_forms import form_table
 from pokemaps_data.encounter_methods_gen4 import check_encounter_taxonomy
-from pokemaps_data.games import DIAMOND_PEARL, GAMES_IN_PROGRESS, GEN4_GAMES, PLATINUM, Game
+from pokemaps_data.games import DIAMOND_PEARL, GAMES, GAMES_IN_PROGRESS, GEN4_GAMES, PLATINUM, Game
 from pokemaps_data.pokeapi import PokeApi
 from pokemaps_data.pret_evolution_gen4 import compare_ds_evolutions
 from pokemaps_data.pret_items_gen4 import ds_item_constants, ds_item_id
@@ -19,9 +19,10 @@ from pokemaps_data.preview_pokemon_gen4 import ds_move_rows, pokemon_preview_tab
 from pokemaps_data.validate import _check_obtainable, _obtainable
 
 
-def test_ds_games_remain_outside_map_generation() -> None:
+def test_ds_games_are_active_in_map_generation() -> None:
     assert GEN4_GAMES == (PLATINUM, DIAMOND_PEARL)
     assert all(game not in GAMES_IN_PROGRESS for game in GEN4_GAMES)
+    assert all(game in GAMES for game in GEN4_GAMES)
 
 
 def test_species_and_abilities_are_read_in_both_sources(gen4_builder: DatabaseBuilder) -> None:

@@ -26,7 +26,8 @@ def test_deoxys_profile_and_sprite_follow_the_cartridge(
 
 def test_castform_has_four_forms_and_one_default_in_each_gba_game(db: sqlite3.Connection) -> None:
     assert db.execute(
-        "SELECT version_id, count(*), sum(is_default) FROM pokemon_form WHERE pokemon_id = 351 GROUP BY version_id"
+        """SELECT version_id, count(*), sum(is_default) FROM pokemon_form
+           WHERE pokemon_id = 351 AND version_id BETWEEN 7 AND 11 GROUP BY version_id"""
     ).fetchall() == [(version, 4, 1) for version in range(7, 12)]
 
 
@@ -61,7 +62,17 @@ def test_external_event_metadata_survives_editorial_changes(db: sqlite3.Connecti
     assert db.execute("SELECT count(*) FROM encounter WHERE external_event = 1").fetchone()[0] == count
     # Les récompenses personnalisées du Bulletin restent au catalogue, hors des offres distribuées.
     assert db.execute("SELECT count(*) FROM npc_offer WHERE external_event NOT IN (0, 1)").fetchone()[0] == 0
-    assert db.execute("SELECT count(*) FROM map WHERE event_entrance > 0").fetchone()[0] == 7
+    assert (
+        db.execute(
+            """SELECT count(*) FROM map m JOIN version_group vg ON vg.id = m.version_group_id
+           WHERE m.event_entrance > 0 AND vg.generation_id <= 3"""
+        ).fetchone()[0]
+        == 7
+    )
+    assert db.execute(
+        """SELECT version_group_id, count(*) FROM map WHERE event_entrance > 0 AND version_group_id IN (8, 9)
+           GROUP BY version_group_id ORDER BY version_group_id"""
+    ).fetchall() == [(8, 3), (9, 3)]
 
 
 def test_achievement_resources_are_reproducible(tmp_path: Path) -> None:

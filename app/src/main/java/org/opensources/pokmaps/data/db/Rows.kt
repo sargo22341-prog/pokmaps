@@ -174,6 +174,16 @@ data class NpcOfferRow(
 /** Étape du scénario qu'exige une offre (npc_offer_story), dans l'ordre de `slot`. */
 data class OfferStoryRow(val offerId: Int, val description: String)
 
+data class OfferComponentRow(
+    val offerId: Int,
+    val kind: String,
+    val itemId: Int,
+    val identifier: String,
+    val name: String,
+    val hasSprite: Boolean,
+    val quantity: Int
+)
+
 data class ItemDetailsRow(
     val id: Int,
     val identifier: String,
