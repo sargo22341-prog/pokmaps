@@ -59,6 +59,7 @@ internal fun DetailCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .detailDismissGesture(onClose)
     ) {
         Box {
             Column(
@@ -240,4 +241,4 @@ private fun CharacterDetails(
     )
 }
 
-private val DETAIL_MAX_HEIGHT = 360.dp
+private val DETAIL_MAX_HEIGHT = 468.dp

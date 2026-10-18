@@ -78,6 +78,7 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
     from .maps_characters_gen4 import character_rows
 
     data.objects = character_rows(builder, catalog, projection, source)
+    _deduplicate_items(data)
     from .maps_actor_positions_gen4 import clear_actor_passages, space_characters, space_trainer_duos
 
     clear_actor_passages(data, projection)
@@ -89,6 +90,22 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
     data.characters_complete = True
     _write_catalog_assets(source, output, catalog)
     return data
+
+
+def _deduplicate_items(data: GameMapData) -> None:
+    """Un événement de fond partagé par deux en-têtes ne donne qu'un objet sur l'image."""
+    maps = {row.const: row for row in data.maps}
+    seen: set[tuple[str, str, int, int, str | None, str | None]] = set()
+    result = []
+    for obj in data.objects:
+        if obj.kind in {"item", "hidden_item"}:
+            display = maps[obj.map_const].parent or obj.map_const
+            key = (display, obj.kind, obj.x, obj.y, obj.item, obj.version)
+            if key in seen:
+                continue
+            seen.add(key)
+        result.append(obj)
+    data.objects = result
 
 
 def _write_catalog_assets(source: Path, output: Path, catalog: CharacterCatalog) -> None:

@@ -4,6 +4,7 @@ import android.content.res.AssetManager
 import java.io.FileNotFoundException
 import java.io.InputStream
 import javax.inject.Inject
+import org.opensources.pokmaps.domain.map.MapFrame
 import org.opensources.pokmaps.domain.model.GameMap
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 
@@ -24,6 +25,8 @@ class AssetManagerFiles @Inject constructor(private val assets: AssetManager) : 
 
 /** Tuiles des cartes, lues dans les assets. Les tuiles vides ne sont pas embarquées : rien n'est dessiné. */
 class MapTiles @Inject constructor(private val files: AssetFiles) {
+    suspend fun frame(map: GameMap): MapFrame = mapTileFrame(files, map)
+
     fun provider(map: GameMap): TileStreamProvider =
         TileStreamProvider { row, column, level -> files.open(map.tilePath(level, row, column)) }
 

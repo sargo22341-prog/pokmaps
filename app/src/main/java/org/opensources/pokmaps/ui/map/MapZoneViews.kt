@@ -125,11 +125,7 @@ internal fun ZoneListSheet(
                 .padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
         ) {
             Text(zone.name, style = MaterialTheme.typography.titleLarge)
-            if (timed && !zone.loading && !zone.failed) {
-                TimedZoneEncounters(zone, caught, initialTime, onOpenPokemon)
-            } else {
-                FilteredZoneEncounters(zone, caught, onOpenPokemon)
-            }
+            RouteEncounters(zone, caught, timed, initialTime, onOpenPokemon)
             ZoneItems(zone, onOpenItem, onShowObject)
             ZonePlaces(zone, onOpenPlace)
         }

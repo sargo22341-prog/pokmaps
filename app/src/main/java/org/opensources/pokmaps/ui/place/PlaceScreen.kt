@@ -29,6 +29,7 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
+import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.usecase.PlacePage
 import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.CharacterSprite
@@ -38,6 +39,7 @@ import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.RoleIcons
+import org.opensources.pokmaps.ui.common.RouteEncounterOptions
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
 import org.opensources.pokmaps.ui.common.SheetRow
 import org.opensources.pokmaps.ui.common.SheetSection
@@ -94,17 +96,19 @@ fun PlaceScreen(
     ) {
         PlaceHeader(state, page) { onAction(PlaceAction.ShowPlace) }
         SheetSection(stringResource(R.string.label_wild_pokemon)) {
-            if (state.encounterGroups.isEmpty()) {
-                Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            } else {
-                EncounterGroups(
-                    state.encounterGroups,
-                    title = { it.pokemonName },
-                    spritePlace = SpritePlace.SHEETS,
-                    spriteSize = SpriteSize.SHEET,
-                    caught = { it.pokemonId in state.caught },
-                    onClick = { onOpenPokemon(it.pokemonId) }
-                )
+            RouteEncounterOptions(page.map.id, page.encounters) { encounters ->
+                if (encounters.isEmpty()) {
+                    Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                } else {
+                    EncounterGroups(
+                        encounters.groupByMethod(),
+                        title = { it.pokemonName },
+                        spritePlace = SpritePlace.SHEETS,
+                        spriteSize = SpriteSize.SHEET,
+                        caught = { it.pokemonId in state.caught },
+                        onClick = { onOpenPokemon(it.pokemonId) }
+                    )
+                }
             }
         }
         ItemsSection(page, onOpenItem, onShowObject)

@@ -23,7 +23,9 @@ data class Encounter(
     val conditions: String?,
     val times: Set<EncounterTime> = emptySet(),
     val nonTimeConditions: String? = conditions,
-    val isExternalEvent: Boolean = false
+    val isExternalEvent: Boolean = false,
+    val conditionKeys: Set<String> = emptySet(),
+    val conditionNames: Map<String, String> = emptyMap()
 ) {
     val needsExternalEventLabel: Boolean
         get() = isExternalEvent && !ExternalEvent.mentioned(note) && !ExternalEvent.mentioned(conditions)

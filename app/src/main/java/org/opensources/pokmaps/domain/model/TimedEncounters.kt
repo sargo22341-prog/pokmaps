@@ -17,7 +17,14 @@ data class TimedEncounters(val period: TimeFilter, val groups: List<EncounterGro
 
 /** Fusionne seulement les rencontres dont niveaux, probabilités et autres conditions sont identiques. */
 fun List<Encounter>.byTime(filter: TimeFilter): List<TimedEncounters> {
-    val merged = groupBy { it.copy(times = emptySet(), conditions = it.nonTimeConditions) }
+    val merged = groupBy {
+        it.copy(
+            times = emptySet(),
+            conditions = it.nonTimeConditions,
+            conditionKeys = it.conditionKeys.filterNot { key -> key.startsWith("time-") }.toSet(),
+            conditionNames = it.conditionNames.filterKeys { key -> !key.startsWith("time-") }
+        )
+    }
         .map { (encounter, variants) ->
             val times = if (variants.any { it.times.isEmpty() }) emptySet() else variants.flatMap { it.times }.toSet()
             encounter.copy(times = times)

@@ -26,6 +26,10 @@ Les combats de scénario sont rattachés aux personnages, avec un sélecteur de 
 pour les équipes variables. Les poses techniques et les décors sans sprite ni interaction utile
 ne créent pas de repères ; les services sans image disposent d’une icône d’information.
 Les guides regroupent soluces, quêtes, astuces et succès officiels traduits.
+Les listes des routes affichent par défaut les rencontres ordinaires, sans cartouche GBA insérée.
+Des filtres séparent les Pokémon errants et activent les conditions disponibles (cartouche GBA,
+Pokédex National, Pokéradar, essaim). Les dresseurs présentent leur équipe initiale et une Poké Ball
+par Pokémon ; un menu compact permet de choisir une revanche. Leur fiche se ferme aussi en glissant vers le bas.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.

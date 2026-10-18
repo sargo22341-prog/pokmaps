@@ -5,6 +5,7 @@ import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.RouteEncounterFilter
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.model.matchesTimes
@@ -105,10 +106,17 @@ internal class MapSelection(
     }
 
     private fun applyTimes(catalog: MapCatalog, zone: MapZone) {
-        val encounters = loadedEncounters.filter { it.matchesTimes(session.current.times) }
+        val filter = RouteEncounterFilter()
+        val encounters = filter.apply(loadedEncounters).filter { it.matchesTimes(session.current.times) }
         val markers = loadedZones.flatMap { (id, all) ->
             val info = catalog.maps[id] ?: return@flatMap emptyList()
-            MapZoneContent.wildMarkers(catalog, info, all.filter { it.matchesTimes(session.current.times) })
+            MapZoneContent.wildMarkers(
+                catalog,
+                info,
+                filter.apply(all).filter {
+                    it.matchesTimes(session.current.times)
+                }
+            )
         }
         session.updateOverlays { it.copy(wildMarkers = markers) }
         session.update {

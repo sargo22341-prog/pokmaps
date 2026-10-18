@@ -18,6 +18,14 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "objet DS répété sur la même case affichée",
+        """SELECT coalesce(m.parent_map_id, m.id), o.kind, o.item_id, o.x, o.y, o.version_id
+           FROM map_object o JOIN map m ON m.id = o.map_id
+           WHERE m.version_group_id IN (8, 9) AND o.kind IN ('item', 'hidden_item')
+           GROUP BY coalesce(m.parent_map_id, m.id), o.kind, o.item_id, o.x, o.y, o.version_id
+           HAVING count(*) > 1""",
+    ),
+    (
         "repère sans image ni interaction",
         """SELECT o.id, o.name_fr FROM map_object o
            WHERE o.sprite IS NULL AND o.item_id IS NULL AND o.pokemon_id IS NULL

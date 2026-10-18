@@ -11,6 +11,7 @@ import org.opensources.pokmaps.data.settings.MapSettings
 import org.opensources.pokmaps.domain.map.FossilUse
 import org.opensources.pokmaps.domain.map.ItemDetails
 import org.opensources.pokmaps.domain.map.MapCatalog
+import org.opensources.pokmaps.domain.map.MapFrame
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.NpcOffer
@@ -73,6 +74,8 @@ class GetMapObjectDetailsUseCase @Inject constructor(private val maps: MapReposi
 
 /** Tuiles d'une carte affichable, lues dans les assets. */
 class GetMapTilesUseCase @Inject constructor(private val tiles: MapTiles) {
+    suspend fun frame(map: GameMap): MapFrame = tiles.frame(map)
+
     operator fun invoke(map: GameMap): TileStreamProvider = tiles.provider(map)
 
     /** Mer répétée sous la carte (Îles Sevii), null si la carte n'en a pas. */

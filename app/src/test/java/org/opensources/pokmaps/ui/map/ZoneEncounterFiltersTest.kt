@@ -40,9 +40,9 @@ class ZoneEncounterFiltersTest {
         compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), map.time) {} } }
         compose.onNode(hasText("Roucool")).assertExists()
         compose.onNode(hasText("Hoothoot")).assertDoesNotExist()
-        click(R.string.time_morning)
+        selectTime(R.string.time_morning, R.string.time_day)
         compose.onNode(hasText("Roucool")).assertDoesNotExist()
-        click(R.string.time_day)
+        selectTime(R.string.time_day, R.string.time_night)
         compose.onNode(hasText("Hoothoot")).assertExists()
         assertEquals(TimeFilter.MORNING, map.time)
     }
@@ -95,6 +95,11 @@ class ZoneEncounterFiltersTest {
         compose.onNode(hasText(context.getString(label)) and hasClickAction()).performClick()
     }
 
+    private fun selectTime(current: Int, target: Int) {
+        click(current)
+        click(target)
+    }
+
     @Test
     fun walkingZoneHidesFishingAndSurf() {
         val encounters = listOf(encounter("Roucool", "walk", EncounterTime.DAY))
@@ -132,13 +137,13 @@ class ZoneEncounterFiltersTest {
         compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), TimeFilter.MORNING) {} } }
         click(R.string.map_method_walk)
         assertNoChip(R.string.method_fishing)
-        click(R.string.time_morning)
+        selectTime(R.string.time_morning, R.string.time_day)
         assertNoChip(R.string.map_method_walk)
         compose.onNode(hasText("Magicarpe")).assertExists()
         click(R.string.method_fishing)
-        click(R.string.time_day)
+        selectTime(R.string.time_day, R.string.time_night)
         assertNoCaptureChips()
-        click(R.string.time_night)
+        selectTime(R.string.time_night, R.string.time_all)
         compose.onNode(hasText("Roucool")).assertExists()
         compose.onNode(hasText("Magicarpe")).assertExists()
     }

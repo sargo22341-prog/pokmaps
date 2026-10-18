@@ -1,34 +1,23 @@
 package org.opensources.pokmaps.ui.common
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.RivalChoice
@@ -55,7 +44,7 @@ internal fun RivalChoicePanel(
     ) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             when (selected.kind) {
-                TeamVariantKind.PLAYER_STARTER -> StarterPicker(selection.variants, selected, place) {
+                TeamVariantKind.PLAYER_STARTER -> StarterPicker(selection.variants, selected) {
                     onChoose(selection.choice.copy(starterId = it))
                 }
 
@@ -72,68 +61,10 @@ internal fun RivalChoicePanel(
     }
 }
 
-/** Pokémon de départ côte à côte : celui choisi en grand sur une pastille, les autres réduits. */
 @Composable
-private fun StarterPicker(
-    variants: List<TeamVariant>,
-    selected: TeamVariant,
-    place: SpritePlace,
-    onPick: (Int) -> Unit
-) {
-    PanelTitle(stringResource(R.string.rival_choice_starter))
-    Row(
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.Bottom,
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectableGroup()
-    ) {
-        variants.forEach { variant ->
-            StarterOption(variant, variant == selected, place, Modifier.weight(1f)) { onPick(variant.pokemonId) }
-        }
-    }
-}
-
-@Composable
-private fun StarterOption(
-    variant: TeamVariant,
-    selected: Boolean,
-    place: SpritePlace,
-    modifier: Modifier,
-    onClick: () -> Unit
-) {
-    val scale by animateFloatAsState(if (selected) 1f else UNSELECTED_SCALE, label = "starterScale")
-    val halo by animateColorAsState(
-        if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
-        label = "starterHalo"
-    )
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .clip(MaterialTheme.shapes.medium)
-            .selectable(selected = selected, role = Role.RadioButton, onClick = onClick)
-            .padding(vertical = 4.dp)
-    ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .graphicsLayer {
-                    scaleX = scale
-                    scaleY = scale
-                    alpha = if (selected) 1f else UNSELECTED_ALPHA
-                }
-                .clip(CircleShape)
-                .background(halo)
-        ) {
-            PokemonSprite(variant.pokemonId, place, SpriteSize.LIST, contentDescription = null)
-        }
-        Text(
-            variant.pokemonName,
-            style = MaterialTheme.typography.labelLarge,
-            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
+private fun StarterPicker(variants: List<TeamVariant>, selected: TeamVariant, onPick: (Int) -> Unit) {
+    CompactSelect(selected, variants, { onPick(it.pokemonId) }) {
+        stringResource(R.string.trainer_starter_option, it.pokemonName)
     }
 }
 
@@ -187,6 +118,3 @@ private fun OutcomeSwitch(label: String, checked: Boolean, enabled: Boolean, onC
 private fun PanelTitle(text: String) {
     Text(text, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
 }
-
-private const val UNSELECTED_SCALE = 0.65f
-private const val UNSELECTED_ALPHA = 0.6f

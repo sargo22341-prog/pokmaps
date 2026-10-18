@@ -15,6 +15,7 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.EncounterFilter
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.byTime
+import org.opensources.pokmaps.ui.common.CompactSelect
 
 @Composable
 internal fun TimedZoneEncounters(
@@ -31,10 +32,10 @@ internal fun TimedZoneEncounters(
         zone.allEncounters.filter { selected.matches(it) }.byTime(filter).filter { it.groups.isNotEmpty() }
     }
     if (zone.allEncounters.isNotEmpty()) {
-        TimeButton(filter) {
-            filter = filter.next()
+        CompactSelect(filter, TimeFilter.entries, {
+            filter = it
             if (method !in zone.availableMethods(filter)) method = EncounterFilter.ALL
-        }
+        }) { stringResource(it.label) }
     }
     if (methods.isNotEmpty()) EncounterFilterRow(methods, selected) { method = it }
     if (sections.isEmpty()) {

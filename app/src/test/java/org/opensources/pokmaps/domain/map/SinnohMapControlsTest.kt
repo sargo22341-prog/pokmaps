@@ -31,6 +31,14 @@ class SinnohMapControlsTest {
     }
 
     @Test
+    fun eventAreasOnTheMainWorldKeepTheirOwnNamesAndIds() {
+        val event = island.copy(parentId = world.id, levelCount = 0, name = "Île Nouvellelune")
+        val destinations = MapDestinations.menu(listOf(world), listOf(world, event))
+        assertEquals(listOf(world.id, event.id), destinations.map { it.id })
+        assertEquals(listOf("sinnoh", "Île Nouvellelune"), destinations.map { it.name })
+    }
+
+    @Test
     fun honeyLayerRequiresSinnohTreePositionsOnTheDisplayedMap() {
         val catalog = catalog("platinum")
         assertTrue(catalog.hasHoneyTrees(world.id))

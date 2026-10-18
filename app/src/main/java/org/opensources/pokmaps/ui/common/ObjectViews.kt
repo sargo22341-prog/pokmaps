@@ -8,12 +8,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -79,10 +85,7 @@ fun SectionTitle(text: String, modifier: Modifier = Modifier) {
     )
 }
 
-/**
- * Équipes d'un dresseur : la seule qu'il a, ou celle que donne la partie indiquée (Pokémon de départ, combats de
- * Jaune), sous l'encadré qui la change (`choiceFailed` : le dernier choix n'a pas pu être enregistré) ; un message quand l'équipe dépend de la partie sans être connue.
- */
+/** Premier combat par défaut ; les revanches et les variantes de la partie se choisissent séparément. */
 @Composable
 fun TrainerTeams(
     selection: TeamSelection,
@@ -96,36 +99,52 @@ fun TrainerTeams(
         return
     }
     RivalChoicePanel(selection, place, choiceFailed, onChooseRival)
-    Crossfade(selection.shown, label = "trainerTeams") { teams ->
+    var battle by remember(selection.shown) { mutableStateOf<Int?>(null) }
+    var showMoves by remember(selection.shown) { mutableStateOf(false) }
+    val selected = if (selection.shown.any { it.rematch == battle }) {
+        battle
+    } else {
+        selection.shown.minByOrNull { it.rematch ?: 0 }?.rematch
+    }
+    TrainerBattleSelector(selection.shown, selected) { battle = it }
+    Crossfade(selection.shown.filter { it.rematch == selected }, label = "trainerTeams") { teams ->
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             teams.forEach { team ->
-                SectionTitle(
-                    team.rematch?.let { stringResource(R.string.map_trainer_rematch, it) }
-                        ?: stringResource(R.string.map_trainer_party)
-                )
-                team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon) }
+                TrainerPartyBalls(team)
+                team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon, showMoves) }
             }
+        }
+    }
+    if (selection.shown.any { team -> team.members.any { it.moves.isNotEmpty() } }) {
+        TextButton(onClick = { showMoves = !showMoves }) {
+            Text(stringResource(if (showMoves) R.string.trainer_hide_moves else R.string.trainer_show_moves))
         }
     }
 }
 
 /** Pokémon d'un dresseur : niveau et attaques qu'il utilisera. */
 @Composable
-fun TrainerPokemonRow(mon: TrainerPokemon, place: SpritePlace, onOpenPokemon: (Int) -> Unit) {
+fun TrainerPokemonRow(
+    mon: TrainerPokemon,
+    place: SpritePlace,
+    onOpenPokemon: (Int) -> Unit,
+    showMoves: Boolean = true
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(2.dp),
         modifier = Modifier
             .fillMaxWidth()
+            .heightIn(min = 48.dp)
             .clickable { onOpenPokemon(mon.pokemonId) }
             .padding(vertical = 4.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PokemonSprite(mon.pokemonId, place, SpriteSize.SHEET, contentDescription = null)
+            PokemonSprite(mon.pokemonId, place, SpriteSize.SMALL, contentDescription = null)
             Text(mon.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             Text(stringResource(R.string.encounter_levels, mon.level), style = MaterialTheme.typography.titleSmall)
         }
         mon.heldItemName?.let { Text(stringResource(R.string.map_offer_held_item, it)) }
-        mon.moves.forEach { MoveLine(it, Modifier.padding(start = 16.dp)) }
+        if (showMoves) mon.moves.forEach { MoveLine(it, Modifier.padding(start = 16.dp)) }
     }
 }
 

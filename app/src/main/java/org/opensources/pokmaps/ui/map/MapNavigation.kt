@@ -8,6 +8,7 @@ import kotlin.math.max
 import kotlin.math.sqrt
 import kotlinx.coroutines.Job
 import org.opensources.pokmaps.domain.map.MapCatalog
+import org.opensources.pokmaps.domain.map.MapFrame
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
 import org.opensources.pokmaps.domain.map.MapWarp
@@ -50,6 +51,7 @@ internal class MapNavigation(
     private var viewportJob: Job? = null
     private var initialPosition: Position? = null
     private var positioned = false
+    private var fitInterior = false
     private var centerGroundId: Int? = null
 
     /** Entrée d'où l'on a ouvert la Base Secrète affichée : son modèle sert à des dizaines d'emplacements. */
@@ -198,6 +200,7 @@ internal class MapNavigation(
         val mapState = createMapState(map, arrival)
         retire(session.current)
         initialPosition = arrival
+        fitInterior = !isWorld && x == null && scale == null
         positioned = false
         followViewport(map, mapState)
         val objects = catalog.partsOf(map.id).flatMap { catalog.objects[it].orEmpty() }
@@ -234,10 +237,6 @@ internal class MapNavigation(
             )
         }
         session.refreshOverlays()
-        // Carte intérieure ouverte sans point d'arrivée : on l'affiche en entier.
-        if (!isWorld && x == null && scale == null) {
-            session.launch { mapState.snapScrollTo(BoundingBox(0.0, 0.0, 1.0, 1.0), Offset(0.1f, 0.1f)) }
-        }
     }
 
     private fun startingPosition(map: GameMap, x: Double?, y: Double?, scale: Double?): Position {
@@ -285,6 +284,14 @@ internal class MapNavigation(
     private fun followViewport(map: GameMap, mapState: MapState) {
         viewportJob?.cancel()
         viewportJob = session.launch {
+            val frame = if (fitInterior) {
+                session.attempt { getMapTiles.frame(map) }.getOrElse {
+                    session.update { it.copy(message = MapMessage.FramingFailed) }
+                    return@launch
+                }
+            } else {
+                MapFrame.FULL
+            }
             mapState.getLayoutSizeFlow().collect { size ->
                 if (size.width <= 0 || size.height <= 0) return@collect
                 if (map.isWorld || map.regions.isNotEmpty()) {
@@ -293,7 +300,14 @@ internal class MapNavigation(
                     }
                 }
                 if (!positioned) {
-                    initialPosition?.let { mapState.snapScrollTo(it.x, it.y) }
+                    if (fitInterior) {
+                        mapState.snapScrollTo(
+                            BoundingBox(frame.left, frame.top, frame.right, frame.bottom),
+                            Offset(0.1f, 0.1f)
+                        )
+                    } else {
+                        initialPosition?.let { mapState.snapScrollTo(it.x, it.y) }
+                    }
                     positioned = true
                 }
             }

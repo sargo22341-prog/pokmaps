@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Corrige le cadrage des bâtiments et les doublons de Sinnoh, simplifie les rencontres des routes avec filtres et les fiches dresseurs avec choix des revanches.
 - Correction des doublons, des équipes variables du rival et du placement des personnages de Sinnoh.
 - Affichage des baies initiales et retrait des points blancs inutiles dans toutes les générations.
 - Correction des textures des cartes de Sinnoh, des personnages de face et de l’espacement des duos.

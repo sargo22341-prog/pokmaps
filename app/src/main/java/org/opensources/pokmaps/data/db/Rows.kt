@@ -96,7 +96,8 @@ data class EncounterRow(
     val conditions: String?,
     val conditionIdentifiers: String? = null,
     val nonTimeConditions: String? = conditions,
-    val isExternalEvent: Boolean = false
+    val isExternalEvent: Boolean = false,
+    val conditionLabels: String? = null
 )
 
 data class MapObjectRow(

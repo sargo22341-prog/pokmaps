@@ -16,8 +16,9 @@ internal object MapDestinations {
         val byId = maps.associateBy { it.id }
         return worlds.filter { it.identifier != "hoenn-underwater" }.sortedBy { it.identifier == "sevii" } +
             maps.filter { it.eventEntranceOrder > 0 }.sortedBy { it.eventEntranceOrder }.mapNotNull { entrance ->
-                val displayed = entrance.parentId?.let(byId::get) ?: entrance
-                displayed.takeIf { it.isDisplayable }
+                val parent = entrance.parentId?.let(byId::get)
+                val displayed = parent?.takeUnless { it.isWorld } ?: entrance
+                displayed.takeIf { it.isDisplayable || parent?.isWorld == true }
                     ?.let { it.copy(name = it.name.substringBefore(" (").substringBefore(" —")) }
             }
     }

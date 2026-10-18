@@ -249,5 +249,9 @@ fun EncounterRow.toEncounter() = Encounter(
     conditions = conditions,
     nonTimeConditions = nonTimeConditions,
     isExternalEvent = isExternalEvent,
+    conditionKeys = conditionIdentifiers.orEmpty().split(',').filter { it.isNotEmpty() }.toSet(),
+    conditionNames = conditionLabels.orEmpty().split('\u001e').filter { it.isNotEmpty() }.associate {
+        it.substringBefore('\u001f') to it.substringAfter('\u001f')
+    },
     times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet()
 )
