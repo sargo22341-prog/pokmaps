@@ -50,7 +50,15 @@ data class EvolutionRow(
     val timeOfDay: String? = null,
     val minBeauty: Int? = null,
     val relativePhysicalStats: Int? = null,
-    val personalityChance: Int? = null
+    val personalityChance: Int? = null,
+    val heldItem: Boolean = false,
+    val knownMoveName: String? = null,
+    val locationName: String? = null,
+    val genderId: Int? = null,
+    val partySpeciesName: String? = null,
+    val nearSpecialRock: Boolean = false,
+    val requiredFormId: Int? = null,
+    val evolvedFormId: Int? = null
 )
 
 data class LearnedMoveRow(

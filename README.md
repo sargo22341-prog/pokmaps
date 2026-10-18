@@ -79,6 +79,9 @@ Les modèles Android reconnaissent désormais ces trois versions (493 espèces) 
 « 4e génération ». Les filtres distinguent les arbres à Miel et les dons de Pokémon Ranger.
 Le calculateur DS gère Sombre, Soin et Rapide Ball, le terrain aquatique, le Grand Marais et le Parc des Amis ;
 la Mémoire Ball reste réservée aux distributions. Ces fonctions seront accessibles après intégration des assets.
+Le Pokédex DS prépare la bascule Sinnoh/National et les deux numéros sur la fiche. Les formes retenues ont
+leurs sprites normaux et chromatiques et leur suivi de collection ; Zarbi conserve ses 28 formes.
+Les fiches utilisent la classe propre à chaque attaque et les conditions d’évolution DS en français.
 
 ## Publier une version
 

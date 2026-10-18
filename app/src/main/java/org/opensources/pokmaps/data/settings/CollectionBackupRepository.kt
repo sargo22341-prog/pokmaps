@@ -45,6 +45,7 @@ class CollectionBackupRepository @Inject constructor(
                 val version = game.versionId
                 preferences[key("caught_pokemon_$version")] =
                     merged.caught[version].orEmpty().map { it.toString() }.toSet()
+                preferences[key("caught_form_$version")] = merged.forms[version].orEmpty()
                 val progress = merged.guides[version] ?: GuideProgress()
                 preferences[key("guide_completed_$version")] = progress.completed
                 if (UnownForm.available(game).isNotEmpty()) {
@@ -68,7 +69,8 @@ class CollectionBackupRepository @Inject constructor(
         }.map { it.versionId }.associateWith { version ->
             preferences[key("caught_unown_$version")].orEmpty().map(UnownForm::from).toSet()
         }
-        return CollectionBackup(favorites, caught, guides, unown).also { validateCollectionBackup(it, games) }
+        val forms = games.associate { it.versionId to preferences[key("caught_form_${it.versionId}")].orEmpty() }
+        return CollectionBackup(favorites, caught, guides, unown, forms).also { validateCollectionBackup(it, games) }
     }
 
     private fun document(address: String): Uri = address.toUri().also { require(it.scheme == "content") }
@@ -93,5 +95,8 @@ internal fun merge(current: CollectionBackup, imported: CollectionBackup): Colle
         current.unown[it].orEmpty() +
             imported.unown[it].orEmpty()
     }
-    return CollectionBackup(current.favorites + imported.favorites, caught, guides, unown)
+    val forms = (current.forms.keys + imported.forms.keys).associateWith {
+        current.forms[it].orEmpty() + imported.forms[it].orEmpty()
+    }
+    return CollectionBackup(current.favorites + imported.favorites, caught, guides, unown, forms)
 }

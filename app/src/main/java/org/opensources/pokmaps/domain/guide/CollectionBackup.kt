@@ -8,7 +8,8 @@ data class CollectionBackup(
     val favorites: Set<Int>,
     val caught: Map<Int, Set<Int>>,
     val guides: Map<Int, GuideProgress>,
-    val unown: Map<Int, Set<UnownForm>> = emptyMap()
+    val unown: Map<Int, Set<UnownForm>> = emptyMap(),
+    val forms: Map<Int, Set<String>> = emptyMap()
 ) {
     init {
         require(favorites.all { it in 1..Generation.maximumSupportedSpecies })
@@ -17,6 +18,7 @@ data class CollectionBackup(
         require(guides.keys.all { it > 0 })
         guides.forEach { (version, progress) -> validateGuideProgress(version, progress) }
         require(unown.keys.all { it > 0 })
+        require(forms.keys.all { it > 0 })
     }
 }
 
@@ -30,12 +32,16 @@ private val ARTICLE_ID = Regex("[a-z0-9-]{1,100}")
 /** Les versions et leurs limites viennent du catalogue embarqué, y compris lors d'un import ancien. */
 fun validateCollectionBackup(backup: CollectionBackup, games: List<Game>) {
     val catalog = games.associateBy { it.versionId }
-    require((backup.caught.keys + backup.guides.keys + backup.unown.keys).all { it in catalog }) {
+    require((backup.caught.keys + backup.guides.keys + backup.unown.keys + backup.forms.keys).all { it in catalog }) {
         "Version de sauvegarde absente de la base"
     }
     backup.caught.forEach { (version, ids) ->
         val maximum = catalog.getValue(version).generation.maximumSpecies
         require(ids.all { it <= maximum }) { "Espèce absente de la génération : $version" }
+    }
+    backup.forms.forEach { (version, forms) ->
+        val available = catalog.getValue(version).forms.values.flatten().map { it.identifier }.toSet()
+        require(forms.all { it in available }) { "Forme absente du jeu : $version" }
     }
     backup.unown.forEach { (version, forms) ->
         require(forms.all { it in UnownForm.available(catalog.getValue(version)) }) {

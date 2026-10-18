@@ -14,6 +14,25 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class BackupJsonTest {
     @Test
+    fun retainedFormsRoundTripAndOldSchemaOneFilesStillImport() {
+        val form = org.opensources.pokmaps.domain.pokemon.PokemonFormTest.form("origin", "Originelle", List(6) { 100 })
+        val game = FakeGameDao.PLATINUM.copy(forms = mapOf(form.pokemonId to listOf(form)))
+        val backup = CollectionBackup(
+            setOf(493),
+            mapOf(14 to setOf(493)),
+            emptyMap(),
+            forms = mapOf(14 to setOf(form.identifier))
+        )
+        val encoded = BackupJson.encode(backup)
+        assertEquals(backup.forms, BackupJson.decode(encoded, listOf(game)).forms)
+        val legacy = org.json.JSONObject(encoded)
+        legacy.getJSONArray("games").getJSONObject(0).remove("forms")
+        val decoded = BackupJson.decode(legacy.toString(), listOf(game))
+        assertTrue(decoded.forms.isEmpty())
+        assertEquals(setOf(493), decoded.caught[14])
+    }
+
+    @Test
     fun roundTripPreservesEachVersionAndContainsNoCredentials() {
         val backup = CollectionBackup(
             setOf(25),

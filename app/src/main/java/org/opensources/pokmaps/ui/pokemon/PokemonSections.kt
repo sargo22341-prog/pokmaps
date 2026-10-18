@@ -36,9 +36,11 @@ import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.model.groupByMethod
 import org.opensources.pokmaps.domain.pokemon.BaseStat
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
+import org.opensources.pokmaps.domain.pokemon.EvolutionGender
 import org.opensources.pokmaps.domain.pokemon.EvolutionNode
 import org.opensources.pokmaps.domain.pokemon.EvolutionTrigger
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.PokemonForm
 import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.ui.common.EncounterGroups
 import org.opensources.pokmaps.ui.common.PixelArt
@@ -99,7 +101,8 @@ private data class EvolutionView(
     val currentId: Int,
     val shiny: Boolean,
     val onOpenPokemon: (Int) -> Unit,
-    val onOpenItem: (String) -> Unit
+    val onOpenItem: (String) -> Unit,
+    val forms: Map<Int, List<PokemonForm>>
 )
 
 @Composable
@@ -107,14 +110,15 @@ internal fun Evolutions(
     details: PokemonDetails,
     shiny: Boolean,
     onOpenPokemon: (Int) -> Unit,
-    onOpenItem: (String) -> Unit
+    onOpenItem: (String) -> Unit,
+    forms: Map<Int, List<PokemonForm>>
 ) {
     val single = details.evolutions.singleOrNull()
     if (details.evolutions.isEmpty() || (single != null && single.children.isEmpty())) {
         Text(stringResource(R.string.pokemon_no_evolution))
         return
     }
-    val view = EvolutionView(details.id, shiny, onOpenPokemon, onOpenItem)
+    val view = EvolutionView(details.id, shiny, onOpenPokemon, onOpenItem, forms)
     // Arbre de gauche à droite : chaque évolution part de son Pokémon d'origine, avec sa condition sur la flèche.
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -176,7 +180,9 @@ private fun EvolutionMember(node: EvolutionNode, view: EvolutionView) {
             SpritePlace.EVOLUTIONS,
             SpriteSize.SHEET,
             contentDescription = null,
-            shiny = view.shiny
+            shiny = view.shiny,
+            forms = view.forms,
+            form = node.condition?.evolvedForm
         )
         Text(
             node.name,
@@ -212,11 +218,31 @@ private fun EvolutionArrow(condition: EvolutionCondition?, color: Color, onOpenI
 }
 
 @Composable
-private fun evolutionText(condition: EvolutionCondition?): String {
+internal fun evolutionText(condition: EvolutionCondition?): String {
     if (condition == null) return ""
     val parts = listOfNotNull(
         evolutionTriggerText(condition.trigger)?.let { stringResource(it) },
-        condition.itemName,
+        condition.itemName?.let {
+            if (condition.heldItem) stringResource(R.string.evolution_held_item, it) else it
+        },
+        condition.knownMoveName?.let { stringResource(R.string.evolution_known_move, it) },
+        condition.locationName?.let {
+            stringResource(
+                if (condition.nearSpecialRock) R.string.evolution_near_rock else R.string.evolution_location,
+                it
+            )
+        },
+        condition.gender?.let {
+            stringResource(
+                when (it) {
+                    EvolutionGender.FEMALE -> R.string.evolution_female
+                    EvolutionGender.MALE -> R.string.evolution_male
+                }
+            )
+        },
+        condition.partySpeciesName?.let { stringResource(R.string.evolution_party_species, it) },
+        condition.requiredFormName?.let { stringResource(R.string.evolution_required_form, it) },
+        condition.evolvedFormName?.let { stringResource(R.string.evolution_evolved_form, it) },
         condition.minLevel?.let { stringResource(R.string.encounter_levels, it) },
         condition.minHappiness?.let { stringResource(R.string.evolution_happiness, it) },
         condition.minBeauty?.let { stringResource(R.string.evolution_beauty, it) },

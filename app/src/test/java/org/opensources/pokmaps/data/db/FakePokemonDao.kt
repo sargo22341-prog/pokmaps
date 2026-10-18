@@ -29,6 +29,8 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
 
     override suspend fun number(pokemonId: Int, versionGroupId: Int) = read { PIKACHU }
 
+    override suspend fun regionalNumber(pokemonId: Int, versionGroupId: Int) = read { PIKACHU }
+
     override suspend fun types(pokemonId: Int, generationId: Int) = read { listOf(TypeRow(13, "electric", "Électrik")) }
 
     override suspend fun stats(pokemonId: Int, generationId: Int) = read {

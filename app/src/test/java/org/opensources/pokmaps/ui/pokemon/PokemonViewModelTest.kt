@@ -109,6 +109,41 @@ class PokemonViewModelTest {
     }
 
     @Test
+    fun formWritesFollowCollectionScopeAndExposeFailures() = runTest {
+        val form = org.opensources.pokmaps.domain.pokemon.PokemonFormTest.form("test", "Forme test", List(6) { 50 })
+            .copy(pokemonId = PIKACHU)
+        val platinum = FakeGameDao.PLATINUM.copy(forms = mapOf(PIKACHU to listOf(form)))
+        val gameRepository = GameRepository(FakeGameDao(listOf(platinum, FakeGameDao.RED)), GameSettings(dataStore))
+        val model = PokemonViewModel(
+            SavedStateHandle(mapOf(PokemonViewModel.POKEMON_ID to PIKACHU)),
+            ObservePokemonUseCase(
+                gameRepository,
+                PokemonRepository(FakePokemonDao(), PokedexRepository(FakePokedexDao()))
+            ),
+            ObserveCollectionUseCase(gameRepository, collection),
+            UpdateCollectionUseCase(gameRepository, collection),
+            requests
+        )
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        model.onAction(PokemonAction.ToggleForm(form.identifier))
+        assertEquals(setOf(form.identifier), model.state.value.caughtForms)
+        assertFalse(model.state.value.caught)
+        dataStore.writeError = IOException("Écriture impossible")
+        model.onAction(PokemonAction.ToggleForm(form.identifier))
+        assertTrue(model.state.value.writeFailed)
+        assertEquals(setOf(form.identifier), model.state.value.caughtForms)
+        dataStore.writeError = null
+        model.onAction(PokemonAction.ToggleForm(form.identifier))
+        assertTrue(model.state.value.caughtForms.isEmpty())
+        assertFalse(model.state.value.writeFailed)
+        collection.setFormCaught(setOf(12), form.identifier, true)
+        collection.setCaptureScope(CaptureScope.ALL)
+        assertEquals(setOf(form.identifier), model.state.value.caughtForms)
+        model.onAction(PokemonAction.ToggleForm(form.identifier))
+        assertTrue(model.state.value.caughtForms.isEmpty())
+    }
+
+    @Test
     fun detailsCollectionAndMapRequest() = runTest {
         val viewModel = viewModel(PIKACHU)
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }

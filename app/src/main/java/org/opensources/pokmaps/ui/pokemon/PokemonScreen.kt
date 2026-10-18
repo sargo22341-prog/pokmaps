@@ -124,7 +124,7 @@ private fun PokemonContent(
         if (state.has(GenerationFeature.ABILITIES)) section(R.string.pokemon_abilities) { Abilities(details.traits) }
         section(R.string.pokemon_weaknesses) { Weaknesses(details) }
         section(R.string.pokemon_evolutions) {
-            Evolutions(details, state.shiny, links.onOpenPokemon, links.onOpenItem)
+            Evolutions(details, state.shiny, links.onOpenPokemon, links.onOpenItem, game.forms)
         }
         section(R.string.pokemon_locations) { Locations(game, details) { onAction(PokemonAction.ShowOnMap) } }
         if (state.has(GenerationFeature.HELD_ITEMS)) {

@@ -37,7 +37,29 @@ class CollectionSettings @Inject constructor(private val dataStore: DataStore<Pr
         }.toMap()
     }.distinctUntilChanged()
 
-    /** Portée des captures ; un identifiant inconnu (réglage d'une autre version) revient à la portée par défaut. */
+    /** Identifiants du catalogue de formes, mémorisés indépendamment de la capture de l’espèce. */
+    val formsByVersion: Flow<Map<Int, Set<String>>> = dataStore.data.map { preferences ->
+        preferences.asMap().filterKeys { it.name.startsWith(FORM_PREFIX) }.map { (key, value) ->
+            val version = requireNotNull(key.name.removePrefix(FORM_PREFIX).toIntOrNull())
+            require(version > 0 && key.name == "$FORM_PREFIX$version")
+            require(value is Set<*> && value.all { it is String && it.matches(FORM_IDENTIFIER) })
+            version to value.map { it.toString() }.toSet()
+        }.toMap()
+    }.distinctUntilChanged()
+
+    suspend fun setFormCaught(versions: Set<Int>, identifier: String, caught: Boolean) {
+        require(versions.all { it > 0 } && identifier.matches(FORM_IDENTIFIER))
+        dataStore.edit { preferences ->
+            versions.forEach { version ->
+                val key = stringSetPreferencesKey("$FORM_PREFIX$version")
+                val recorded = preferences[key].orEmpty()
+                val updated = if (caught) recorded + identifier else recorded - identifier
+                if (updated.isEmpty()) preferences.remove(key) else preferences[key] = updated
+            }
+        }
+    }
+
+    /** Portée des captures ; un identifiant inconnu revient à la portée par défaut. */
     val captureScope: Flow<CaptureScope> = dataStore.data.map { preferences ->
         preferences[CAPTURE_SCOPE]?.let { CaptureScope.fromIdentifier(it) } ?: CaptureScope.DEFAULT
     }.distinctUntilChanged()
@@ -75,6 +97,8 @@ class CollectionSettings @Inject constructor(private val dataStore: DataStore<Pr
     private companion object {
         val FAVORITES = stringSetPreferencesKey("favorite_pokemon")
         val CAPTURE_SCOPE = stringPreferencesKey("capture_scope")
+        val FORM_IDENTIFIER = Regex("[a-z0-9-]{1,100}")
+        const val FORM_PREFIX = "caught_form_"
         const val CAUGHT_PREFIX = "caught_pokemon_"
     }
 }

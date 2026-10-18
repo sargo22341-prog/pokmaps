@@ -52,6 +52,18 @@ interface PokemonDao {
 
     @Query(
         """
+        SELECT pe.number FROM pokedex_entry pe
+        JOIN version_group_pokedex vgp ON vgp.pokedex_id = pe.pokedex_id
+        JOIN pokedex pd ON pd.id = pe.pokedex_id
+        WHERE vgp.version_group_id = :versionGroupId AND pe.pokemon_id = :pokemonId
+            AND pd.identifier != 'national'
+        ORDER BY pd.id LIMIT 1
+        """
+    )
+    suspend fun regionalNumber(pokemonId: Int, versionGroupId: Int): Int?
+
+    @Query(
+        """
         SELECT t.id, t.identifier, t.name_fr AS name
         FROM pokemon_type pt JOIN type t ON t.id = pt.type_id
         WHERE pt.pokemon_id = :pokemonId AND pt.generation_id = :generationId
@@ -94,11 +106,18 @@ interface PokemonDao {
             coalesce(i.name_fr, hi.name_fr) AS itemName, coalesce(i.identifier, hi.identifier) AS itemIdentifier,
             coalesce(i.has_sprite, hi.has_sprite) AS itemHasSprite, e.min_happiness AS minHappiness,
             e.time_of_day AS timeOfDay, e.min_beauty AS minBeauty, e.relative_physical_stats AS relativePhysicalStats,
-            e.personality_chance AS personalityChance
+            e.personality_chance AS personalityChance, (e.held_item_id IS NOT NULL) AS heldItem,
+            km.name_fr AS knownMoveName, l.name_fr AS locationName, er.gender_id AS genderId,
+            ps.name_fr AS partySpeciesName, coalesce(er.near_special_rock, 0) AS nearSpecialRock,
+            er.required_form_id AS requiredFormId, er.evolved_form_id AS evolvedFormId
         FROM evolution e
         JOIN pokemon p ON p.id = e.from_pokemon_id
         LEFT JOIN item i ON i.id = e.item_id
         LEFT JOIN item hi ON hi.id = e.held_item_id
+        LEFT JOIN move km ON km.id = e.known_move_id
+        LEFT JOIN evolution_requirement er ON er.evolution_id = e.id
+        LEFT JOIN location l ON l.id = er.location_id
+        LEFT JOIN pokemon ps ON ps.id = er.party_species_id
         WHERE e.version_group_id = :versionGroupId AND p.evolution_chain_id = :chainId
         """
     )

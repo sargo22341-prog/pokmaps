@@ -17,7 +17,8 @@ data class PokemonCollection(
     val game: Game,
     val caught: Set<Int>,
     val favorites: Set<Int>,
-    val scope: CaptureScope = CaptureScope.DEFAULT
+    val scope: CaptureScope = CaptureScope.DEFAULT,
+    val forms: Set<String> = emptySet()
 )
 
 class ObserveCollectionUseCase @Inject constructor(
@@ -27,11 +28,13 @@ class ObserveCollectionUseCase @Inject constructor(
     operator fun invoke(): Flow<PokemonCollection> = combine(
         games.selectedGame,
         games.games,
-        settings.caughtByVersion,
+        combine(settings.caughtByVersion, settings.formsByVersion) { caught, forms -> caught to forms },
         settings.favorites,
         settings.captureScope
     ) { game, all, caughtByVersion, favorites, scope ->
-        PokemonCollection(game, scope.caught(game, all, caughtByVersion), favorites, scope)
+        val (caught, forms) = caughtByVersion
+        val recordedForms = scope.versionsFor(game, all, forms.keys).flatMap { forms[it].orEmpty() }.toSet()
+        PokemonCollection(game, scope.caught(game, all, caught), favorites, scope, recordedForms)
     }
 }
 
@@ -51,6 +54,16 @@ class UpdateCollectionUseCase @Inject constructor(
             settings.captureScope.first().versionsFor(game, games.games.first(), recorded)
         }
         settings.setCaught(versions, pokemonId, caught)
+    }
+
+    suspend fun setFormCaught(game: Game, pokemonId: Int, identifier: String, caught: Boolean) {
+        require(game.forms[pokemonId].orEmpty().any { it.identifier == identifier })
+        val versions = if (caught) {
+            setOf(game.versionId)
+        } else {
+            settings.captureScope.first().versionsFor(game, games.games.first(), settings.formsByVersion.first().keys)
+        }
+        settings.setFormCaught(versions, identifier, caught)
     }
 
     suspend fun setFavorite(pokemonId: Int, favorite: Boolean) = settings.setFavorite(pokemonId, favorite)

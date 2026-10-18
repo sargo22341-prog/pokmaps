@@ -28,7 +28,8 @@ data class PokemonDetails(
     val staticEncounters: Int,
     val traits: PokemonTraits,
     val eggMoves: List<LearnedMove> = emptyList(),
-    val tutorMoves: List<LearnedMove> = emptyList()
+    val tutorMoves: List<LearnedMove> = emptyList(),
+    val regionalNumber: Int? = null
 ) {
     fun moves(tab: MoveTab): List<LearnedMove> = when (tab) {
         MoveTab.LEVEL_UP -> levelUpMoves

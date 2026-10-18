@@ -13,7 +13,7 @@ import org.opensources.pokmaps.domain.pokemon.UnownForm
 internal object BackupJson {
     fun encode(backup: CollectionBackup): String {
         val games = JSONArray()
-        for (version in (backup.caught.keys + backup.guides.keys + backup.unown.keys).sorted()) {
+        for (version in (backup.caught.keys + backup.guides.keys + backup.unown.keys + backup.forms.keys).sorted()) {
             val progress = backup.guides[version] ?: GuideProgress()
             games.put(
                 JSONObject().put("version", version)
@@ -21,6 +21,7 @@ internal object BackupJson {
                     // Liste vide gardée pour le schéma 1 : les versions précédentes de l'application l'exigent.
                     .put("completed", JSONArray(progress.completed.sorted())).put("roamers", JSONArray())
                     .put("unown", JSONArray(backup.unown[version].orEmpty().map { it.identifier }.sorted()))
+                    .put("forms", JSONArray(backup.forms[version].orEmpty().sorted()))
             )
         }
         return JSONObject().put("format", "pokmaps-collection").put("schema", 1)
@@ -37,6 +38,7 @@ internal object BackupJson {
         val caught = mutableMapOf<Int, Set<Int>>()
         val guides = mutableMapOf<Int, GuideProgress>()
         val unown = mutableMapOf<Int, Set<UnownForm>>()
+        val capturedForms = mutableMapOf<Int, Set<String>>()
         for (index in 0 until games.length()) {
             val game = games.getJSONObject(index)
             val version = integer(game, "version")
@@ -54,8 +56,13 @@ internal object BackupJson {
             val alphabet = (0 until forms.length()).map { UnownForm.from(forms.getString(it)) }.toSet()
             require(alphabet.size == forms.length())
             if (alphabet.isNotEmpty()) unown[version] = alphabet
+            val extra = if (game.has("forms")) game.getJSONArray("forms") else JSONArray()
+            require(extra.length() <= 200)
+            val identifiers = (0 until extra.length()).map { extra.getString(it) }.toSet()
+            require(identifiers.size == extra.length())
+            if (identifiers.isNotEmpty()) capturedForms[version] = identifiers
         }
-        return CollectionBackup(favorites, caught.toMap(), guides.toMap(), unown.toMap()).also {
+        return CollectionBackup(favorites, caught.toMap(), guides.toMap(), unown.toMap(), capturedForms.toMap()).also {
             validateCollectionBackup(it, gamesInDatabase)
         }
     }

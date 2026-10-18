@@ -656,4 +656,16 @@
     <string name="catch_safari_stage">Coefficient Safari : %1$d (départ : 6 ; appât : +1 ; boue : −1 dans neuf cas sur dix)</string>
     <string name="catch_pal_park_note">La Parc Ball capture toujours un Pokémon transféré au Parc des Amis.</string>
     <string name="catch_note_gen4">Formule DS, IV moyens et sans EV. Rapide Ball : ×4 si aucun tour écoulé. Sombre Ball : ×3,5 la nuit ou en grotte. La Mémoire Ball est réservée aux événements, sans lancer possible.</string>
+    <string name="pokemon_regional_national_number">Régional : n° %1$03d · National : n° %2$03d</string>
+    <string name="pokemon_national_number">National : n° %1$03d</string>
+    <string name="pokemon_forms_title">Formes</string>
+    <string name="evolution_held_item">En tenant %1$s</string>
+    <string name="evolution_known_move">En connaissant %1$s</string>
+    <string name="evolution_location">À %1$s</string>
+    <string name="evolution_near_rock">Près de la pierre spéciale : %1$s</string>
+    <string name="evolution_female">Femelle</string>
+    <string name="evolution_male">Mâle</string>
+    <string name="evolution_party_species">Avec %1$s dans l’équipe</string>
+    <string name="evolution_required_form">Forme de départ : %1$s</string>
+    <string name="evolution_evolved_form">Forme obtenue : %1$s</string>
 </resources>

@@ -12,8 +12,29 @@ data class EvolutionCondition(
     val minBeauty: Int? = null,
     val relativeStats: RelativeStats? = null,
     /** Probabilité (%) fixée par la personnalité du Pokémon (Chenipotte). */
-    val personalityChance: Int? = null
+    val personalityChance: Int? = null,
+    val heldItem: Boolean = false,
+    val knownMoveName: String? = null,
+    val locationName: String? = null,
+    val gender: EvolutionGender? = null,
+    val partySpeciesName: String? = null,
+    val nearSpecialRock: Boolean = false,
+    val requiredFormId: Int? = null,
+    val evolvedFormId: Int? = null,
+    val requiredFormName: String? = null,
+    val evolvedFormName: String? = null,
+    val evolvedForm: PokemonForm? = null
 )
+
+enum class EvolutionGender(val id: Int) {
+    FEMALE(1),
+    MALE(2);
+
+    companion object {
+        fun from(id: Int): EvolutionGender = entries.singleOrNull { it.id == id }
+            ?: error("Sexe d’évolution inconnu : $id")
+    }
+}
 
 /** Déclencheur d'une évolution (`evolution.trigger`) ; un déclencheur inconnu est une erreur. */
 enum class EvolutionTrigger(val identifier: String) {

@@ -17,6 +17,7 @@ import org.opensources.pokmaps.domain.pokemon.BaseStat
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.EvolutionCondition
 import org.opensources.pokmaps.domain.pokemon.EvolutionEdge
+import org.opensources.pokmaps.domain.pokemon.EvolutionGender
 import org.opensources.pokmaps.domain.pokemon.EvolutionTree
 import org.opensources.pokmaps.domain.pokemon.EvolutionTrigger
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
@@ -29,6 +30,7 @@ import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokedexDescription
 import org.opensources.pokmaps.domain.pokemon.PokemonAbility
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
+import org.opensources.pokmaps.domain.pokemon.PokemonForm
 import org.opensources.pokmaps.domain.pokemon.PokemonTraits
 import org.opensources.pokmaps.domain.pokemon.RelativeStats
 import org.opensources.pokmaps.domain.pokemon.TypeChart
@@ -84,7 +86,8 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
             staticEncounters = dao.staticCount(pokemonId, game.versionGroupId),
             traits = traits(game, pokemonId, pokemon.genderRate, profile.hatchCounter),
             eggMoves = moves[MoveTab.EGG].orEmpty().sortedBy { it.name },
-            tutorMoves = moves[MoveTab.TUTOR].orEmpty().sortedBy { it.name }
+            tutorMoves = moves[MoveTab.TUTOR].orEmpty().sortedBy { it.name },
+            regionalNumber = dao.regionalNumber(pokemonId, game.versionGroupId)
         )
     }
 
@@ -144,11 +147,39 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
                     it.timeOfDay,
                     it.minBeauty,
                     it.relativePhysicalStats?.let(RelativeStats::from),
-                    it.personalityChance
+                    it.personalityChance,
+                    it.heldItem,
+                    it.knownMoveName,
+                    it.locationName,
+                    it.genderId?.let(EvolutionGender::from),
+                    it.partySpeciesName,
+                    it.nearSpecialRock,
+                    it.requiredFormId,
+                    it.evolvedFormId,
+                    evolutionForm(game, it.fromId, it.requiredFormId)?.name,
+                    evolutionForm(game, it.toId, it.evolvedFormId)?.name,
+                    evolutionForm(game, it.toId, it.evolvedFormId)
                 )
             )
         }
         return EvolutionTree.build(members, edges)
+    }
+
+    private fun evolutionForm(game: Game, pokemonId: Int, formId: Int?): PokemonForm? {
+        if (formId == null) return null
+        val forms = game.forms[pokemonId].orEmpty()
+        if (formId == pokemonId) return forms.singleOrNull { it.isDefault }
+        // Identifiants des formes PokéAPI conservés par evolution_requirement (catalogue de phase 1).
+        val identifier = when (formId) {
+            10034 -> "burmy-sandy"
+            10035 -> "burmy-trash"
+            10036 -> "wormadam-sandy"
+            10037 -> "wormadam-trash"
+            10039 -> "shellos-east"
+            10040 -> "gastrodon-east"
+            else -> error("Forme d’évolution inconnue : $formId")
+        }
+        return checkNotNull(forms.singleOrNull { it.identifier == identifier })
     }
 
     /** Objets tenus, sexe, œufs et talents : vides pour un jeu qui ne les connaît pas (base sans ces données). */

@@ -94,7 +94,8 @@ data class PokemonUiState(
     val captureScope: CaptureScope = CaptureScope.DEFAULT,
     val favorite: Boolean = false,
     /** Sprites en couleurs chromatiques (en-tête et ligne d'évolution), jamais dans un jeu sans chromatiques. */
-    val shiny: Boolean = false
+    val shiny: Boolean = false,
+    val caughtForms: Set<String> = emptySet()
 ) {
     /** Une rencontre sur [shinyOdds] est chromatique dans le jeu, null si le jeu n'a pas de chromatiques. */
     val shinyOdds: Int? get() = game?.let { ShinyOdds.oneIn(it.generationId) }
@@ -126,6 +127,8 @@ sealed interface PokemonAction {
     data object ToggleCaught : PokemonAction
 
     data object ToggleFavorite : PokemonAction
+
+    data class ToggleForm(val identifier: String) : PokemonAction
 
     /** Montre le Pokémon et sa ligne d'évolution en chromatique, ou en couleurs normales. */
     data object ToggleShiny : PokemonAction
@@ -192,7 +195,8 @@ class PokemonViewModel @Inject constructor(
                 captureScope = collection.scope,
                 favorite = pokemonId in collection.favorites,
                 // Un jeu sans chromatiques montre toujours les couleurs normales.
-                shiny = shiny && GenerationFeature.SHINY.existsIn(page.game.generationId)
+                shiny = shiny && GenerationFeature.SHINY.existsIn(page.game.generationId),
+                caughtForms = if (collection.game == page.game) collection.forms else emptySet()
             )
         }.catch { emit(PokemonUiState(loading = false, failed = true)) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PokemonUiState())
@@ -202,6 +206,8 @@ class PokemonViewModel @Inject constructor(
             PokemonAction.ToggleCaught -> toggleCaught()
 
             PokemonAction.ToggleFavorite -> toggleFavorite()
+
+            is PokemonAction.ToggleForm -> toggleForm(action.identifier)
 
             PokemonAction.ToggleShiny -> if (state.value.shinyOdds != null) shiny.update { !it }
 
@@ -244,6 +250,15 @@ class PokemonViewModel @Inject constructor(
         val current = state.value
         val game = current.game ?: return
         collectionWrites.launch { updateCollection.setCaught(game, pokemonId, !current.caught) }
+    }
+
+    private fun toggleForm(identifier: String) {
+        val current = state.value
+        val game = current.game ?: return
+        if (game.forms[pokemonId].orEmpty().none { it.identifier == identifier }) return
+        collectionWrites.launch {
+            updateCollection.setFormCaught(game, pokemonId, identifier, identifier !in current.caughtForms)
+        }
     }
 
     private fun toggleFavorite() {

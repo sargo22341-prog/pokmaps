@@ -1,7 +1,10 @@
 package org.opensources.pokmaps.ui.pokemon
 
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.performClick
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,6 +14,16 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class PokemonFormsTest {
     @get:Rule val compose = createComposeRule()
+
+    @Test
+    fun formsExposeIndependentCollectionButtons() {
+        val form = PokemonFormTest.form("origin", "Forme Originelle", List(6) { 100 })
+        var selected: String? = null
+        compose.setContent { PokemonForms(listOf(form), true, setOf(form.identifier)) { selected = it } }
+        compose.onNode(hasText("Forme Originelle")).assertExists()
+        compose.onNode(hasContentDescription("Capturé (toucher pour décocher)")).performClick()
+        assertEquals(form.identifier, selected)
+    }
 
     @Test
     fun castformShowsItsFourWeatherForms() {

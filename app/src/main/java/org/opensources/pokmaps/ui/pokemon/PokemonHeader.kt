@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Game
+import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
@@ -53,8 +54,10 @@ internal fun PokemonHeader(
             shiny = state.shiny,
             forms = game.forms
         )
-        PokemonForms(game.forms[details.id].orEmpty(), state.shiny)
-        Identity(details)
+        PokemonForms(game.forms[details.id].orEmpty(), state.shiny, state.caughtForms) {
+            onAction(PokemonAction.ToggleForm(it))
+        }
+        Identity(details, game)
     }
 }
 
@@ -107,9 +110,20 @@ private fun ShinyButton(shiny: Boolean, onToggle: () -> Unit) {
 
 /** Numéro, nom, catégorie, types, mensurations, capture, croissance et description. */
 @Composable
-private fun Identity(details: PokemonDetails) {
+private fun Identity(details: PokemonDetails, game: Game) {
     details.number?.let {
-        Text(stringResource(R.string.pokedex_number, it), color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(
+            if (game.generation == Generation.GEN4) {
+                if (details.regionalNumber != null) {
+                    stringResource(R.string.pokemon_regional_national_number, details.regionalNumber, details.id)
+                } else {
+                    stringResource(R.string.pokemon_national_number, details.id)
+                }
+            } else {
+                stringResource(R.string.pokedex_number, it)
+            },
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
     Text(details.name, style = MaterialTheme.typography.headlineMedium)
     Text(
