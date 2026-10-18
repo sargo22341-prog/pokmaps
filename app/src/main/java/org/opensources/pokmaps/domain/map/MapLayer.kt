@@ -14,7 +14,8 @@ enum class MapLayer {
     TRAINERS,
     NPCS,
     STATIC_POKEMON,
-    WILD_POKEMON;
+    WILD_POKEMON,
+    HONEY_TREES;
 
     companion object {
         fun of(obj: MapObject): MapLayer = if (obj.fruit != null) FRUIT_TREES else of(obj.kind)

@@ -125,7 +125,7 @@ internal class MapNavigation(
         val map = session.current.map ?: return
         val mapState = session.current.mapState ?: return
         if (mapId == map.id || mapId == session.current.zone?.mapId) return
-        if (session.current.floors.none { it.mapId == mapId }) return
+        if ((session.current.floors + session.current.levels).none { it.mapId == mapId }) return
         val target = catalog.displayedMapOf(mapId) ?: return
         session.update { it.copy(detail = null, zoneListOpen = false) }
         if (target.width == map.width && target.height == map.height) {
@@ -222,6 +222,7 @@ internal class MapNavigation(
                 map = map,
                 hasConnections = catalog.connectionsOf(map.id).isNotEmpty(),
                 hasFruitTrees = objects.any { it.fruit != null },
+                hasHoneyTrees = catalog.hasHoneyTrees(map.id),
                 hasSecretBases = catalog.secretBases.isNotEmpty(),
                 worldId = catalog.regionWorldOf(map.id)?.id,
                 mapState = mapState,
@@ -229,6 +230,7 @@ internal class MapNavigation(
                 detail = null,
                 zoneListOpen = false,
                 parent = parent?.let { place -> MapPlace(place.id, place.name) },
+                levels = catalog.levelsOf(map.id),
                 floors = catalog.floorsOf(map.id, centerGroundId)
             )
         }

@@ -8,6 +8,7 @@ class WildMethodTest {
     @Test
     fun onlyWildEncountersAreDrawnOnTheMap() {
         assertEquals(WildMethod.WALK, WildMethod.from("walk"))
+        assertEquals(WildMethod.HONEY_TREE, WildMethod.from("honey-tree"))
         assertEquals(WildMethod.SURF, WildMethod.from("surf"))
         assertEquals(WildMethod.FISHING, WildMethod.from("super-rod"))
         assertEquals(WildMethod.HEADBUTT, WildMethod.from("headbutt-high"))

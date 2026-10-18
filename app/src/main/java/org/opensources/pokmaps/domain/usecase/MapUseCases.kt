@@ -97,6 +97,6 @@ class MapLayersUseCase @Inject constructor(private val settings: MapSettings) {
 
     private companion object {
         /** Calques des choix enregistrés avant que les calques connus soient mémorisés. */
-        val LAYERS_BEFORE_SECRET_BASES = MapLayer.entries.toSet() - MapLayer.SECRET_BASES
+        val LAYERS_BEFORE_SECRET_BASES = MapLayer.entries.toSet() - setOf(MapLayer.SECRET_BASES, MapLayer.HONEY_TREES)
     }
 }

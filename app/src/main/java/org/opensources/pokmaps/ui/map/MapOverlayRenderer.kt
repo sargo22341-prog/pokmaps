@@ -198,8 +198,9 @@ internal class MapOverlayRenderer(private val tiles: (GameMap) -> TileStreamProv
     }
 
     private fun drawWildMarkers(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {
-        if (MapLayer.WILD_POKEMON !in state.layers) return
         state.overlays.wildMarkers.forEachIndexed { index, wild ->
+            val layer = if (wild.method == WildMethod.HONEY_TREE) MapLayer.HONEY_TREES else MapLayer.WILD_POKEMON
+            if (layer !in state.layers) return@forEachIndexed
             val spec = MarkerSpec(wild.x, wild.y, lazy = false, zIndex = 1f, pokemon = true, MarkerContent.Wild(wild))
             wanted.draw("${MapMarkerIds.WILD}:${wild.pokemonId}:$index", spec)
         }

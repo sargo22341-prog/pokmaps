@@ -158,6 +158,11 @@ data class MapCatalog(
     /** Cartes (elle-même et ses villes ou routes) dont les objets et warps se dessinent sur la carte affichable. */
     fun partsOf(mapId: Int): List<Int> = listOf(mapId) + regionsOf(mapId).map { it.id }
 
+    /** Les emplacements arbre de Sinnoh correspondent aux arbres à Miel, ceux de Johto à Coup d'Boule. */
+    fun hasHoneyTrees(mapId: Int): Boolean =
+        versionGroupIdentifier in setOf(VersionGroup.DIAMOND_PEARL.identifier, VersionGroup.PLATINUM.identifier) &&
+            partsOf(mapId).any { id -> spots[id].orEmpty().any { it.kind == SpotKind.TREE } }
+
     fun connectionsOf(mapId: Int): List<MapConnection> = connections[mapId].orEmpty()
 
     private val connections: Map<Int, List<MapConnection>> = maps.values.filter { it.isDisplayable && !it.isWorld }
@@ -305,7 +310,8 @@ data class MapCatalog(
     /** Étages uniquement : les maisons et les zones d'un même niveau ne deviennent pas des badges. */
     fun floorsOf(mapId: Int, centerGroundId: Int? = null): List<MapFloor> {
         landscapeFloors[mapId]?.let { return it }
-        val display = displayedMapOf(mapId) ?: return emptyList()
+        val baseId = levelsOf(mapId).firstOrNull()?.mapId ?: mapId
+        val display = displayedMapOf(baseId) ?: return emptyList()
         val upstairs = mapByIdentifier("pokecenter-2f-plan")
         val ground = if (display.id == upstairs?.id) {
             maps[centerGroundId ?: reachedBy[display.id]?.mapId]
@@ -320,6 +326,10 @@ data class MapCatalog(
         }
         return landscapeFloors[display.id] ?: sections[display.id].orEmpty()
     }
+
+    private val surfaceLevels = MapLevels.build(maps)
+
+    fun levelsOf(mapId: Int): List<MapFloor> = surfaceLevels[mapId].orEmpty()
 
     private val landscapeFloors = MapLandscape.floors(maps)
 

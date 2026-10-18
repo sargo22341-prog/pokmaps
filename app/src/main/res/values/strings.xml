@@ -668,4 +668,7 @@
     <string name="evolution_party_species">Avec %1$s dans l’équipe</string>
     <string name="evolution_required_form">Forme de départ : %1$s</string>
     <string name="evolution_evolved_form">Forme obtenue : %1$s</string>
+    <string name="map_layer_honey_trees">Arbres à Miel</string>
+    <string name="map_level_upper">Dessus</string>
+    <string name="map_level_lower">Dessous %1$d</string>
 </resources>

@@ -75,6 +75,11 @@ Chaque offre garde son origine : PNJ posé avec son drapeau de retrait, ou scèn
 Les exemplaires d'un personnage à plusieurs étapes restent distincts dans cet aperçu.
 La curation annote les figurants temporaires et attribue les dons de scène au personnage qui les remet.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
+La carte prépare des sélecteurs distincts pour les étages et les niveaux superposés de Sinnoh.
+Le calque Arbres à Miel apparaît uniquement sur les cartes qui contiennent leurs emplacements ;
+le sol meuble attend les données de baies. Les lieux, rencontres et offres événementiels gardent la mention
+« événement externe ». La sauvegarde de collection accepte les versions 12 à 14 et leurs 493 espèces,
+et conserve l’import des anciens fichiers de schéma 1.
 Les modèles Android reconnaissent désormais ces trois versions (493 espèces) et préparent leur rangée
 « 4e génération ». Les filtres distinguent les arbres à Miel et les dons de Pokémon Ranger.
 Le calculateur DS gère Sombre, Soin et Rapide Ball, le terrain aquatique, le Grand Marais et le Parc des Amis ;

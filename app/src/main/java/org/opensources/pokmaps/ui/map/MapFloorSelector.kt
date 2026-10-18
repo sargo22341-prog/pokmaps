@@ -83,6 +83,12 @@ private fun floorLabel(level: FloorLevel): String = when (level) {
 
     is FloorLevel.Basement -> stringResource(R.string.map_floor_basement, level.number)
 
+    is FloorLevel.Height -> if (level.depth == 0) {
+        stringResource(R.string.map_level_upper)
+    } else {
+        stringResource(R.string.map_level_lower, level.depth)
+    }
+
     FloorLevel.Roof -> stringResource(R.string.map_floor_roof)
 
     FloorLevel.Summit -> stringResource(R.string.map_floor_summit)

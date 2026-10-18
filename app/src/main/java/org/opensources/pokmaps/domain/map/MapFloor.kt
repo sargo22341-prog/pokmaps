@@ -15,6 +15,10 @@ sealed interface FloorLevel {
         override val order: Int get() = -number
     }
 
+    data class Height(val depth: Int) : FloorLevel {
+        override val order: Int get() = -depth
+    }
+
     data object Roof : FloorLevel {
         override val order: Int get() = ROOF_ORDER
     }

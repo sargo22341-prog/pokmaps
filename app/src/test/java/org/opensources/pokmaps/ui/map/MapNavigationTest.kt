@@ -21,6 +21,47 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class MapNavigationTest {
     @Test
+    fun sinnohLowerLevelKeepsTheStoreySelectorAndReturnsToTheUpperSurface() = runTest {
+        val ground = org.opensources.pokmaps.domain.map.MapInfo(
+            1, "mt-coronet-1f", "Mont Couronné", null, 0, 0, 256, 256, 1
+        )
+        val upstairs = ground.copy(id = 2, identifier = "mt-coronet-2f")
+        val lower = ground.copy(id = 3, identifier = "mt-coronet-1f-lower")
+        val catalog = org.opensources.pokmaps.domain.map.MapCatalog(
+            "platinum",
+            listOf(ground, upstairs, lower).associateBy { it.id },
+            emptyMap(),
+            emptyMap(),
+            emptyMap()
+        )
+        val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
+        val session = MapSession(backgroundScope, noTiles)
+        session.setLoaded(GameMaps(FakeGameDao.PLATINUM, catalog))
+        val selection = MapSelection(
+            session,
+            GetMapEncountersUseCase(repository),
+            GetMapObjectDetailsUseCase(repository)
+        )
+        val navigation = MapNavigation(session, selection, GetMapTilesUseCase(MapTiles { null }))
+        try {
+            navigation.show(ground.id, null, null, null)
+            assertEquals(listOf(upstairs.id, ground.id), session.current.floors.map { it.mapId })
+            assertEquals(listOf(ground.id, lower.id), session.current.levels.map { it.mapId })
+            navigation.selectFloor(lower.id)
+            assertEquals(lower.id, session.current.map?.id)
+            assertEquals(ground.id, session.current.selectedFloorId)
+            navigation.selectFloor(upstairs.id)
+            assertEquals(upstairs.id, session.current.map?.id)
+            assertTrue(session.current.levels.isEmpty())
+            navigation.selectFloor(ground.id)
+            assertEquals(ground.id, session.current.map?.id)
+            assertEquals(2, session.current.levels.size)
+        } finally {
+            session.current.mapState?.shutdown()
+        }
+    }
+
+    @Test
     fun regionMenuOpensEventIslandsAndReturnsToTheMainRegion() = runTest {
         val repository = MapRepository(FakeMapDao(), Dispatchers.Unconfined)
         val catalog = GeneratedGbaCatalog.load("emerald")

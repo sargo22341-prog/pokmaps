@@ -35,6 +35,7 @@ enum class WildMethod {
     DIVE,
     FISHING,
     HEADBUTT,
+    HONEY_TREE,
     ROCK_SMASH;
 
     companion object {
@@ -44,7 +45,8 @@ enum class WildMethod {
             ObtainMethod.SURF -> SURF
             ObtainMethod.DIVE -> DIVE
             ObtainMethod.FISHING -> FISHING
-            ObtainMethod.HEADBUTT, ObtainMethod.HONEY_TREE -> HEADBUTT
+            ObtainMethod.HEADBUTT -> HEADBUTT
+            ObtainMethod.HONEY_TREE -> HONEY_TREE
             ObtainMethod.ROCK_SMASH -> ROCK_SMASH
             ObtainMethod.GIFT, ObtainMethod.STATIC, ObtainMethod.TRADE, ObtainMethod.EVOLUTION -> null
         }
@@ -138,8 +140,10 @@ data class MapUiState(
     val parent: MapPlace? = null,
     /** Étages du bâtiment ou de la grotte affiché, de haut en bas (vide s'il n'a qu'un niveau). */
     val floors: List<MapFloor> = emptyList(),
+    val levels: List<MapFloor> = emptyList(),
     val hasConnections: Boolean = false,
     val hasFruitTrees: Boolean = false,
+    val hasHoneyTrees: Boolean = false,
     /** Le jeu a des Bases Secrètes : leur calque est proposé. */
     val hasSecretBases: Boolean = false,
     val showConnections: Boolean = false,
@@ -160,7 +164,9 @@ data class MapUiState(
     val rivalChoiceFailed: Boolean = false
 ) {
     val times: Set<EncounterTime> get() = time.times
-    val selectedFloorId: Int? get() = zone?.mapId?.takeIf { id -> floors.any { it.mapId == id } } ?: map?.id
+    val selectedFloorId: Int?
+        get() = zone?.mapId?.takeIf { id -> floors.any { it.mapId == id } }
+            ?: levels.firstOrNull()?.mapId ?: map?.id
 }
 
 /** Intentions de l'écran de la carte, traitées par [MapViewModel]. */

@@ -121,7 +121,9 @@ private fun BoxScope.MapToolbar(state: MapUiState, onAction: (MapAction) -> Unit
         if (state.game?.hasTimeOfDay == true) {
             TimeButton(state.time, iconOnly = true) { onAction(MapAction.CycleTime) }
         }
-        LayersButton(state.layers, state.hasFruitTrees, state.hasSecretBases) { onAction(MapAction.ToggleLayer(it)) }
+        LayersButton(state.layers, state.hasFruitTrees, state.hasSecretBases, state.hasHoneyTrees) {
+            onAction(MapAction.ToggleLayer(it))
+        }
     }
 }
 
@@ -228,7 +230,7 @@ private fun MapCanvas(state: MapUiState) {
 @Composable
 private fun BoxScope.Floors(state: MapUiState, onAction: (MapAction) -> Unit) {
     AnimatedContent(
-        targetState = state.floors,
+        targetState = state.floors to state.levels,
         transitionSpec = {
             (fadeIn() + slideInHorizontally { it }) togetherWith (fadeOut() + slideOutHorizontally { it })
         },
@@ -236,9 +238,14 @@ private fun BoxScope.Floors(state: MapUiState, onAction: (MapAction) -> Unit) {
             .align(Alignment.TopEnd)
             .padding(top = FLOORS_TOP, end = 8.dp),
         label = "floors"
-    ) { floors ->
-        if (floors.isNotEmpty()) {
-            FloorSelector(floors, state.selectedFloorId) { onAction(MapAction.SelectFloor(it)) }
+    ) { (floors, levels) ->
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            if (floors.isNotEmpty()) {
+                FloorSelector(floors, state.selectedFloorId) { onAction(MapAction.SelectFloor(it)) }
+            }
+            if (levels.isNotEmpty()) {
+                FloorSelector(levels, state.map?.id) { onAction(MapAction.SelectFloor(it)) }
+            }
         }
     }
 }
@@ -333,6 +340,7 @@ private fun LayersButton(
     layers: Set<MapLayer>,
     fruitTrees: Boolean,
     secretBases: Boolean,
+    honeyTrees: Boolean,
     onToggle: (MapLayer) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -342,7 +350,8 @@ private fun LayersButton(
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             MapLayer.entries.filter {
-                (it != MapLayer.FRUIT_TREES || fruitTrees) && (it != MapLayer.SECRET_BASES || secretBases)
+                (it != MapLayer.FRUIT_TREES || fruitTrees) && (it != MapLayer.SECRET_BASES || secretBases) &&
+                    (it != MapLayer.HONEY_TREES || honeyTrees)
             }.forEach { layer ->
                 DropdownMenuItem(
                     text = { Text(stringResource(layer.label)) },
@@ -400,6 +409,7 @@ private val MapLayer.label: Int
         MapLayer.NPCS -> R.string.label_characters
         MapLayer.STATIC_POKEMON -> R.string.map_layer_static_pokemon
         MapLayer.WILD_POKEMON -> R.string.label_wild_pokemon
+        MapLayer.HONEY_TREES -> R.string.map_layer_honey_trees
     }
 
 /** Carte en bas d'écran : fiche de l'élément touché, ou lieu sélectionné. */

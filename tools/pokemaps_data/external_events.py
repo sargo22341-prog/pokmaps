@@ -16,8 +16,9 @@ def _maps() -> tuple[tuple[str, str], ...]:
 
 
 def event_map(identifier: str) -> tuple[str | None, int]:
+    identifier = identifier.removeprefix("header-")
     matches = [
-        (key, position if identifier == entrance else 0)
+        (key, position if identifier in {key, entrance} else 0)
         for position, (key, entrance) in enumerate(_maps(), 1)
         if identifier == key or identifier.startswith(f"{key}-")
     ]

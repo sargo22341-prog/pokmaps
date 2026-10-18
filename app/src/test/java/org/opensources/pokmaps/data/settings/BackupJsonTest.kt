@@ -33,6 +33,35 @@ class BackupJsonTest {
     }
 
     @Test
+    fun sinnohRoundTripPreserves493SpeciesInAllThreeVersions() {
+        val games = listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM)
+        val backup = CollectionBackup(
+            (1..493).toSet(),
+            (12..14).associateWith { (1..493).toSet() },
+            (12..14).associateWith { GuideProgress() },
+            (12..14).associateWith { UnownForm.entries.toSet() }
+        )
+        assertEquals(backup, BackupJson.decode(BackupJson.encode(backup), games))
+    }
+
+    @Test
+    fun legacySchemaOneMergesWithoutLosingSinnohCollections() {
+        val games = listOf(FakeGameDao.RED, FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM)
+        val old = BackupJson.decode(
+            """{"format":"pokmaps-collection","schema":1,"favorites":[25],"games":[
+                {"version":1,"caught":[25],"completed":[],"roamers":[]}
+            ]}""",
+            games
+        )
+        val current = CollectionBackup(setOf(493), (12..14).associateWith { setOf(493) }, emptyMap())
+        val restored = merge(current, old)
+        assertEquals(setOf(25, 493), restored.favorites)
+        for (version in 12..14) assertEquals(setOf(493), restored.caught[version])
+        assertEquals(setOf(25), restored.caught[1])
+        assertTrue(restored.forms.isEmpty())
+    }
+
+    @Test
     fun roundTripPreservesEachVersionAndContainsNoCredentials() {
         val backup = CollectionBackup(
             setOf(25),

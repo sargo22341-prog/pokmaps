@@ -76,6 +76,32 @@ class MapOverlayRendererTest {
     }
 
     @Test
+    fun honeyMarkersHaveTheirOwnLayer() {
+        val info = org.opensources.pokmaps.domain.map.MapInfo(1, "sinnoh", "Sinnoh", null, 0, 0, 256, 256, 1, true)
+        val catalog = MapCatalog("platinum", mapOf(1 to info), emptyMap(), emptyMap(), emptyMap())
+        val map = checkNotNull(catalog.gameMap(1))
+        val state = newState(map)
+        try {
+            val overlays = MapOverlays(
+                wildMarkers = listOf(
+                    WildMarker(415, "Apitrini", WildMethod.HONEY_TREE, 40, 40),
+                    WildMarker(399, "Keunotor", WildMethod.WALK, 80, 80)
+                )
+            )
+            val renderer = MapOverlayRenderer(noTiles)
+            val render = MapRenderState(catalog, map, state, setOf(MapLayer.HONEY_TREES), false, null, overlays, null)
+            renderer.render(render)
+            val honey = "${MapMarkerIds.WILD}:415:0"
+            val walk = "${MapMarkerIds.WILD}:399:1"
+            assertEquals(setOf(honey), drawn(state, listOf(honey, walk)).keys)
+            renderer.render(render.copy(layers = setOf(MapLayer.WILD_POKEMON)))
+            assertEquals(setOf(walk), drawn(state, listOf(honey, walk)).keys)
+        } finally {
+            state.shutdown()
+        }
+    }
+
+    @Test
     fun incrementalMarkersMatchAFreshRenderAfterEachChange() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val database = Room.databaseBuilder(context, PokedexDatabase::class.java, "renderer-test.db")
