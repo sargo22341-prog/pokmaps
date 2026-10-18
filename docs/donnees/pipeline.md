@@ -94,6 +94,7 @@ L’export authentifié des archives est une opération distincte, décrite dans
 | Personnages, noms et scènes | `npc_names.csv`, `npc_text_names.csv`, `npc_duplicates.csv`, `scene_actors_gen3.csv` |
 | Figurants masqués uniquement sur la carte | `scene_actor_visibility.csv` (scripts et catalogues conservés) |
 | Classes, installations et offres | `trainer_classes.csv`, `facility_names.csv`, `npc_offers.csv`, `story_events.csv` |
+| Apparences des adversaires de scénario DS | `trainer_sprites_gen4.csv` |
 | Formes, événements externes et objets | `pokemon_forms.csv`, `external_event_maps.csv`, `item_descriptions.csv` |
 | Obtention sans transfert et effets d’attaques | `transfer_only.csv`, `move_effects.csv` |
 
@@ -198,6 +199,11 @@ les événements) et les attributions et conditions éditoriales de `npc_offers.
 Les clés DS de `npc_duplicates.csv` et `npc_text_names.csv` ont la forme `dépôt:numéro-en-tête:rang`.
 Une annotation DS ne peut pas réécrire le prix ou la quantité lus dans le moteur.
 Les apparences communes ne servent pas à fusionner des personnages ; chaque variante garde position et drapeau.
+À l’export vers la carte, les poses d’un même protagoniste sont réunies et les événements techniques sans
+interaction sont écartés, sans modifier ce catalogue source. Les branches des combats sont rattachées au
+personnage avec les variantes de Pokémon de départ. Les marchands du Souterrain prennent les positions
+fixées par son script d’entrée ; les avatars des autres joueurs de la Salle Union ne sont pas des PNJ permanents.
+Les 118 plantations de chaque famille prennent leur baie et leur quantité initiales dans les tables du jeu.
 Les noms propres par clé viennent de `npc_text_names.csv`, ceux des services de `facility_names.csv`.
 Chaque condition des offres passe par `story_events.csv`, même lorsqu'elle n'affiche rien parce qu'elle concerne
 un menu ou une vérification technique. Une condition inconnue ou une ligne DS inemployée bloque la génération.
@@ -229,6 +235,8 @@ La répétition et le miroir des textures sont lus sur chaque matériau NSBMD, e
 Les personnages à planche de marche utilisent leur cinquième image, la pose de face ; les objets fixes gardent
 leur première image. Les partenaires adjacents des classes de duo DS sont espacés de 24 pixels horizontalement
 ou 32 pixels verticalement au lieu de 16, en conservant leur centre, leur alignement et leurs cases sources.
+L’export vérifie ensuite les contours visibles de tous les sprites et garde quatre pixels entre eux ;
+les déplacements restent sur des cases praticables du lieu et dégagent les accès aux bâtiments.
 
 `maps_dynamic_gen4.py` lit aussi le décor chargé par le moteur hors des blocs : étages et plateformes de
 Joliberges, engrenages de Rivamar à l’état zéro, eau de Verchamps à son niveau initial, horloge de Vestigion

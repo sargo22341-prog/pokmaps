@@ -377,6 +377,13 @@ def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> di
     families, repos = set(complete_families(legacy)), {game.pret_repo for game in legacy}
     if unused := curation.unused(families, repos):
         raise ValueError(f"Personnages de npc_duplicates.csv ou npc_offers.csv absents des jeux : {unused}")
+    for data in result.values():
+        # Un décor sans image ni interaction utile n'ajoute aucun repère à la carte.
+        data.objects = [
+            row
+            for row in data.objects
+            if row.sprite or row.item or row.pokemon or row.offers or row.party or row.variants
+        ]
     return result
 
 

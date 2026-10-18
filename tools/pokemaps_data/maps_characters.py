@@ -72,6 +72,8 @@ class ObjectRow:
     rematches: list[list[tuple[str, int, tuple[str, ...]]]] = field(default_factory=list)
     held_items: dict[tuple[int, int], str] = field(default_factory=dict)
     source_cell: tuple[int, int] | None = None
+    # Les revanches du rival sont numérotées séparément pour chaque choix de Pokémon de départ.
+    variant_rematches: dict[int, int] = field(default_factory=dict)
 
 
 def object_rows(game_maps: GameMaps, curation: CharacterCuration) -> tuple[list[ObjectRow], set[str]]:

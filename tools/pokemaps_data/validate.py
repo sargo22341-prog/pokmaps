@@ -18,6 +18,13 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "repère sans image ni interaction",
+        """SELECT o.id, o.name_fr FROM map_object o
+           WHERE o.sprite IS NULL AND o.item_id IS NULL AND o.pokemon_id IS NULL
+           AND NOT EXISTS (SELECT 1 FROM npc_offer n WHERE n.map_object_id = o.id)
+           AND NOT EXISTS (SELECT 1 FROM trainer_pokemon t WHERE t.map_object_id = o.id)""",
+    ),
+    (
         "composant d'offre invalide",
         """SELECT c.* FROM npc_offer_component c LEFT JOIN npc_offer n ON n.id = c.npc_offer_id
            LEFT JOIN item i ON i.id = c.item_id
@@ -272,7 +279,15 @@ CHECKS = (
              OR t.variant_kind NOT IN ('player-starter', 'rival-evolution')
              OR t.variant_pokemon_id NOT IN (SELECT id FROM pokemon)
              OR t.held_item_id NOT IN (SELECT id FROM item)
-             OR (t.rematch IS NOT NULL AND (t.rematch < 1 OR t.rematch != t.team - 1 OR t.variant_kind IS NOT NULL))""",
+             OR (t.rematch IS NOT NULL AND (t.rematch < 1
+               OR (t.variant_kind IS NULL AND t.rematch != t.team - 1)))""",
+    ),
+    (
+        "revanches de variante non consécutives",
+        """SELECT map_object_id, variant_kind, variant_pokemon_id FROM trainer_pokemon
+           WHERE variant_kind IS NOT NULL GROUP BY map_object_id, variant_kind, variant_pokemon_id
+           HAVING min(coalesce(rematch, 0)) != 0
+             OR count(DISTINCT team) != max(coalesce(rematch, 0)) + 1""",
     ),
     (
         "variantes d'équipe incohérentes (une seule équipe nommée, équipes non numérotées de 1 à n ou mélangées)",

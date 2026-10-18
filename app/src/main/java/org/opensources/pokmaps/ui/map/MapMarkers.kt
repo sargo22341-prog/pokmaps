@@ -159,7 +159,7 @@ fun ObjectMarker(
 
             facility != null -> FacilityMarker(mapState, facility, obj.name, scale)
 
-            else -> Box(Modifier.size(mapPixels(mapState, TILE_PX / 2 * scale)).background(Color.White, CircleShape))
+            else -> FacilityMarker(mapState, R.drawable.ic_info, obj.name, scale)
         }
         KindBadge(mapState, obj.kind, scale)
     }

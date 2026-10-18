@@ -211,7 +211,7 @@ private fun Fossils(revivals: List<NpcOffer.FossilRevival>, links: OfferLinks, r
     }
 }
 
-/** Baies ou Noigrumes que donne l'arbre, une fois par jour. */
+/** Fruits à récolter ; les conditions précisent la plantation initiale ou le renouvellement. */
 @Composable
 private fun FruitTrees(trees: List<NpcOffer.FruitTree>, links: OfferLinks, rowConditions: Boolean) {
     if (trees.isEmpty()) return

@@ -229,7 +229,11 @@ class EditorCatalog:
         contient."""
         rows = self.connection.execute(
             """SELECT o.kind, o.x, o.y, o.sprite, CASE WHEN item.has_sprite THEN item.identifier END, o.pokemon_id
-               FROM map_object o LEFT JOIN item ON item.id = o.item_id JOIN map m ON m.id = o.map_id
+               FROM map_object o JOIN map m ON m.id = o.map_id
+               LEFT JOIN npc_offer fruit ON fruit.map_object_id = o.id AND fruit.kind = 'fruit_tree'
+                 AND (fruit.version_id IS NULL OR fruit.version_id =
+                   (SELECT min(v.id) FROM version v WHERE v.version_group_id = m.version_group_id))
+               LEFT JOIN item ON item.id = coalesce(o.item_id, fruit.item_id)
                WHERE o.map_id = :map AND (o.version_id IS NULL OR o.version_id =
                  (SELECT min(v.id) FROM version v WHERE v.version_group_id = m.version_group_id))
                UNION ALL

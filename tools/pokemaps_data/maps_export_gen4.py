@@ -78,10 +78,11 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
     from .maps_characters_gen4 import character_rows
 
     data.objects = character_rows(builder, catalog, projection, source)
-    from .maps_actor_positions_gen4 import clear_actor_passages, space_trainer_duos
+    from .maps_actor_positions_gen4 import clear_actor_passages, space_characters, space_trainer_duos
 
     clear_actor_passages(data, projection)
     space_trainer_duos(data.objects)
+    space_characters(data, projection, source)
     _assign_display_positions(data)
     data.story = story
     data.named_characters = frozenset(catalog.names.characters)

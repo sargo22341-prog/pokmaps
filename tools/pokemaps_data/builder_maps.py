@@ -197,7 +197,9 @@ class _ObjectRows:
         for rematch, party in enumerate(obj.rematches, start=1):
             self._add_team(object_id, rematch + 1, None, party, obj.held_items, rematch)
         for team, (kind, pokemon, party) in enumerate(obj.variants, start=1):
-            self._add_team(object_id, team, (kind.value, species[pokemon]), party, obj.held_items)
+            self._add_team(
+                object_id, team, (kind.value, species[pokemon]), party, obj.held_items, obj.variant_rematches.get(team)
+            )
         for offer in obj.offers:
             self._add_offer(obj, object_id, offer, repo)
         self.objects.append(

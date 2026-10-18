@@ -22,6 +22,9 @@ Les icônes de combat restent au-dessus des sprites, avec une icône commune aux
 à distance des passages pour laisser leur accès visible. Les figurants temporaires devant les portes sont
 retirés lorsqu'ils n'ajoutent aucun combat ni service ; les PNJ permanents restent affichés.
 À Sinnoh, les personnages sont présentés de face et les duos adjacents sont espacés.
+Les combats de scénario sont rattachés aux personnages, avec un sélecteur de Pokémon de départ
+pour les équipes variables. Les poses techniques et les décors sans sprite ni interaction utile
+ne créent pas de repères ; les services sans image disposent d’une icône d’information.
 Les guides regroupent soluces, quêtes, astuces et succès officiels traduits.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
@@ -88,7 +91,8 @@ Si les cartes préparatoires manquent, elle les reconstruit depuis les sources �
 `--application-only` limite la génération aux jeux actifs, sans reconstruire un aperçu supplémentaire.
 La carte propose des sélecteurs distincts pour les étages et les niveaux superposés de Sinnoh.
 Le calque Arbres à Miel apparaît uniquement sur les cartes qui contiennent leurs emplacements ;
-le sol meuble attend les données de baies. Les lieux, rencontres et offres événementiels gardent la mention
+les plantations affichent leur baie et leur récolte initiales, puis permettent de replanter dans le jeu.
+Les lieux, rencontres et offres événementiels gardent la mention
 « événement externe ». La sauvegarde de collection accepte les versions 12 à 14 et leurs 493 espèces,
 et conserve l’import des anciens fichiers de schéma 1.
 Les modèles Android reconnaissent ces trois versions (493 espèces) et affichent leur rangée

@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
+
+from PIL import Image
 
 from .maps_actor_positions import clears_passages
 from .pret_gen4_map_models import EMPTY_BLOCK
@@ -52,7 +55,9 @@ def clear_actor_passages(data: GameMapData, projection: Gen4MapProjection) -> No
     regions = {row.const: row for row in data.maps}
     for obj in data.objects:
         passages = {(w.x, w.y) for w in data.warps if w.map_const == obj.map_const}
-        if obj.kind not in {"npc", "trainer", "npc_pokemon"} or (obj.x, obj.y) not in passages:
+        outdoor = projection.maps.repo.matrices[projection.maps.headers[obj.map_const].matrix].headers is not None
+        blocked = not clears_passages((obj.x, obj.y), passages) if outdoor else (obj.x, obj.y) in passages
+        if obj.kind not in {"npc", "trainer", "npc_pokemon"} or not blocked:
             continue
         region = regions[obj.map_const]
         occupied = {(other.x, other.y) for other in data.objects if other.map_const == obj.map_const}
@@ -67,6 +72,52 @@ def clear_actor_passages(data: GameMapData, projection: Gen4MapProjection) -> No
         if not candidates:
             raise ValueError(f"{obj.map_const}:{obj.key} : aucune case libre à distance du passage")
         obj.x, obj.y = min(candidates, key=lambda p: ((p[0] - obj.x) ** 2 + (p[1] - obj.y) ** 2, p))
+
+
+def space_characters(data: GameMapData, projection: Gen4MapProjection, source: Path) -> None:
+    """Dégage aussi les personnages de scénario et les petits objets comme la mallette."""
+    placed: dict[str, list[tuple[int, int, int, int]]] = {}
+    frames = _sprite_frames(data.objects, source)
+    for obj in data.objects:
+        if obj.sprite is None:
+            continue
+        parent = projection.maps.parents[obj.map_const]
+        occupied = placed.setdefault(parent, [])
+        point = (obj.x, obj.y)
+        frame = frames[obj.sprite]
+        if not _clears_frame(point, frame, occupied):
+            passages = {(w.x, w.y) for w in data.warps if projection.maps.parents[w.map_const] == parent}
+            candidates = [
+                p
+                for p in _points(obj, projection)
+                if _clears_frame(p, frame, occupied) and clears_passages(p, passages)
+            ]
+            if not candidates:
+                raise ValueError(f"{obj.map_const}:{obj.key} : aucune case libre pour espacer le personnage")
+            point = min(candidates, key=lambda p: ((p[0] - obj.x) ** 2 + (p[1] - obj.y) ** 2, p))
+            obj.x, obj.y = point
+        occupied.append((point[0] + frame[0], point[1] + frame[1], point[0] + frame[2], point[1] + frame[3]))
+
+
+def _sprite_frames(objects: list[ObjectRow], source: Path) -> dict[str, tuple[int, int, int, int]]:
+    frames = {}
+    for sprite in sorted({obj.sprite for obj in objects if obj.sprite is not None}):
+        with Image.open(source / "sprites" / f"{sprite}.webp") as image:
+            box = image.convert("RGBA").getbbox()
+            if box is None:
+                raise ValueError(f"Sprite DS vide : {sprite}")
+            dx, dy = -image.width // 2, 8 - image.height
+            frames[sprite] = (dx + box[0], dy + box[1], dx + box[2], dy + box[3])
+    return frames
+
+
+def _clears_frame(
+    point: tuple[int, int],
+    frame: tuple[int, int, int, int],
+    occupied: list[tuple[int, int, int, int]],
+) -> bool:
+    left, top, right, bottom = (point[0] + frame[0], point[1] + frame[1], point[0] + frame[2], point[1] + frame[3])
+    return all(right + 4 <= x1 or x2 + 4 <= left or bottom + 4 <= y1 or y2 + 4 <= top for x1, y1, x2, y2 in occupied)
 
 
 def _points(obj: ObjectRow, projection: Gen4MapProjection) -> list[tuple[int, int]]:

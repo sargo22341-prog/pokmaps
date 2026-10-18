@@ -38,7 +38,6 @@ _LAYERS = {
     "vending_machine": Layer.NPCS,
     "prize_vendor": Layer.NPCS,
 }
-_FACILITIES = frozenset({"vending_machine", "prize_vendor"})
 # Constantes de MapMarkers.kt : un pixel d'un sprite de Pokémon vaut POKEMON_RATIO pixel de la carte.
 _POKEMON_RATIO = 0.6825
 _TILE_PX = 16
@@ -106,10 +105,8 @@ class OverlayPainter:
         elif mark.sprite is not None:
             path = self.assets / "maps" / version_group / "sprites" / f"{mark.sprite}.webp"
             _paste(image, self._sprite(path, _TILE_PX), center)
-        elif mark.kind in _FACILITIES:
-            _paste(image, _facility(), center)
         else:
-            _paste(image, _disc(_TILE_PX // 2, _WHITE), center)
+            _paste(image, _facility(), center)
         if mark.kind == "hidden_item":
             corner = _ITEM_PX // 2 - _BADGE_PX // 2
             _paste(image, _disc(_BADGE_PX, _HIDDEN_COLOR), (center[0] + corner, center[1] + corner))
