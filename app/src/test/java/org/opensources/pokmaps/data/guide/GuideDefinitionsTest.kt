@@ -44,13 +44,20 @@ class GuideDefinitionsTest {
         }
     }
 
+    @Test
+    fun sinnohDoesNotInheritTheGbaTools() {
+        listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM).forEach {
+            assertTrue(guideDefinitions(it).isEmpty())
+        }
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun unknownVersionOfAKnownGroupHasNoImplicitLibrary() {
-        guideDefinitions(FakeGameDao.RED.copy(versionId = 12))
+        guideDefinitions(FakeGameDao.RED.copy(versionId = 15))
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun unknownGroupHasNoImplicitLibrary() {
-        guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "diamond-pearl"))
+        guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "heartgold-soulsilver"))
     }
 }

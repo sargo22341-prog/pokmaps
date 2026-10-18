@@ -25,6 +25,7 @@ import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
+import org.opensources.pokmaps.domain.pokemon.CaptureEnvironment
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.domain.pokemon.GenderRatio
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
@@ -47,7 +48,16 @@ class PokemonViewModelTest {
     private val requests = MapRequests()
     private val dataStore = FakeDataStore()
     private val games = GameRepository(
-        FakeGameDao(listOf(FakeGameDao.RED, FakeGameDao.BLUE, FakeGameDao.GOLD, FakeGameDao.RUBY, FakeGameDao.EMERALD)),
+        FakeGameDao(
+            listOf(
+                FakeGameDao.RED,
+                FakeGameDao.BLUE,
+                FakeGameDao.GOLD,
+                FakeGameDao.RUBY,
+                FakeGameDao.EMERALD,
+                FakeGameDao.PLATINUM
+            )
+        ),
         GameSettings(dataStore)
     )
     private val collection = CollectionSettings(dataStore)
@@ -66,6 +76,31 @@ class PokemonViewModelTest {
             UpdateCollectionUseCase(games, collection),
             requests
         )
+    }
+
+    @Test
+    fun sinnohCaptureContextsRecomputeProbabilities() = runTest {
+        val model = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        games.select(FakeGameDao.PLATINUM)
+        fun probability(ball: Ball): Double = checkNotNull(model.state.value.catch).probabilities.single {
+            it.first == ball
+        }.second
+        assertFalse(model.state.value.failed)
+        val quick = probability(Ball.QUICK)
+        val dusk = probability(Ball.DUSK)
+        model.onAction(PokemonAction.SetElapsedTurns(1))
+        assertTrue(quick > probability(Ball.QUICK))
+        model.onAction(PokemonAction.ToggleNightOrCave)
+        assertTrue(probability(Ball.DUSK) > dusk)
+        model.onAction(
+            PokemonAction.SetCaptureEnvironment(
+                CaptureEnvironment.PAL_PARK
+            )
+        )
+        assertEquals(listOf(Ball.PARK to 1.0), model.state.value.catch?.probabilities)
+        games.select(FakeGameDao.RUBY)
+        assertFalse(checkNotNull(model.state.value.catch).probabilities.any { it.first == Ball.PARK })
     }
 
     @Test

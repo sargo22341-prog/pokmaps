@@ -49,14 +49,16 @@ enum class UnownForm(val identifier: String, val symbol: String, val firstGenera
         ) {
             Generation.GEN1 -> emptyList()
             Generation.GEN2 -> entries.filter { it.firstGeneration == 2 }
-            Generation.GEN3 -> entries
+            Generation.GEN3, Generation.GEN4 -> entries
         }
 
         fun available(game: Game): List<UnownForm> = when (game.versionGroup) {
             VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> emptyList()
 
             VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,
-            VersionGroup.FIRERED_LEAFGREEN -> available(game.generationId)
+            VersionGroup.FIRERED_LEAFGREEN, VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> available(
+                game.generationId
+            )
         }
 
         fun from(identifier: String): UnownForm = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

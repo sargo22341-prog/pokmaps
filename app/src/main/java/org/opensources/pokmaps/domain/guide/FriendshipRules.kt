@@ -51,10 +51,18 @@ enum class FriendshipRules {
     companion object {
         fun forGame(game: Game): FriendshipRules = when (game.versionGroup) {
             VersionGroup.GOLD_SILVER -> GOLD_SILVER
+
             VersionGroup.CRYSTAL -> CRYSTAL
+
             VersionGroup.RUBY_SAPPHIRE -> RUBY_SAPPHIRE
+
             VersionGroup.EMERALD -> EMERALD
+
             VersionGroup.FIRERED_LEAFGREEN -> FIRERED_LEAFGREEN
+
+            VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM ->
+                error("Outil de bonheur Sinnoh non disponible")
+
             VersionGroup.RED_BLUE, VersionGroup.YELLOW -> error("Jeu sans outil de bonheur : ${game.versionIdentifier}")
         }
     }

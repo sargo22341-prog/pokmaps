@@ -26,7 +26,9 @@ data class GameUiState(
     val selected: Game? = null,
     val failed: Boolean = false
 ) {
-    val rows: List<GameChoiceRow> = games.groupBy { it.generationId }.flatMap { (generation, games) ->
+    val rows: List<GameChoiceRow> = games.sortedBy {
+        it.versionId
+    }.groupBy { it.generationId }.flatMap { (generation, games) ->
         games.groupBy { it.remakeGenerationId }.entries.sortedBy { it.key ?: 0 }.map { (remake, versions) ->
             GameChoiceRow(generation, remake, versions)
         }

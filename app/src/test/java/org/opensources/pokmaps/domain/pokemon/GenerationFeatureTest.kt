@@ -25,6 +25,8 @@ class GenerationFeatureTest {
         assertNull(ShinyOdds.oneIn(1))
         assertEquals(8192, ShinyOdds.oneIn(2))
         assertEquals(8192, ShinyOdds.oneIn(3))
+        assertEquals(8192, ShinyOdds.oneIn(4))
+        GenerationFeature.entries.forEach { assertTrue(it.existsIn(4)) }
     }
 
     @Test

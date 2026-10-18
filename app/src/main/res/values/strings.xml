@@ -356,7 +356,7 @@
     <string name="ball_friend">Copain Ball</string>
     <string name="ball_love">Love Ball</string>
     <string name="ball_heavy">Masse Ball</string>
-    <string name="ball_fast">Rapide Ball</string>
+    <string name="ball_fast">Speed Ball</string>
     <string name="ball_park">Parc Ball</string>
     <string name="catch_player_level">Niveau de votre Pokémon : %1$d</string>
     <string name="catch_fishing">Rencontre par pêche</string>
@@ -643,4 +643,17 @@
     <string name="collection_save_error">
         Enregistrement impossible. Réessayez en touchant à nouveau la capture ou le favori.
     </string>
+    <string name="method_honey_tree">Arbre à Miel</string>
+    <string name="ball_dusk">Sombre Ball</string>
+    <string name="ball_heal">Soin Ball</string>
+    <string name="ball_quick">Rapide Ball</string>
+    <string name="ball_cherish">Mémoire Ball</string>
+    <string name="catch_night_or_cave">Nuit ou grotte</string>
+    <string name="catch_water_terrain">Terrain aquatique (Surf ou pêche)</string>
+    <string name="catch_normal_battle">Combat sauvage</string>
+    <string name="catch_great_marsh">Grand Marais</string>
+    <string name="catch_pal_park">Parc des Amis</string>
+    <string name="catch_safari_stage">Coefficient Safari : %1$d (départ : 6 ; appât : +1 ; boue : −1 dans neuf cas sur dix)</string>
+    <string name="catch_pal_park_note">La Parc Ball capture toujours un Pokémon transféré au Parc des Amis.</string>
+    <string name="catch_note_gen4">Formule DS, IV moyens et sans EV. Rapide Ball : ×4 si aucun tour écoulé. Sombre Ball : ×3,5 la nuit ou en grotte. La Mémoire Ball est réservée aux événements, sans lancer possible.</string>
 </resources>

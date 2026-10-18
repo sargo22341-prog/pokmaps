@@ -40,6 +40,8 @@ object GbaBreeding {
 
     /** La Pierre Stase transmet la nature à partir d'Émeraude ; Rouge Feu et Vert Feuille sont sortis avant. */
     private fun everstonePassesNature(group: VersionGroup): Boolean = when (group) {
+        VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> error("Règles de reproduction hors GBA")
+
         VersionGroup.EMERALD -> true
 
         VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,

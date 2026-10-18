@@ -6,6 +6,7 @@ enum class ObtainMethod {
     FISHING,
     SURF,
     DIVE,
+    HONEY_TREE,
     HEADBUTT,
     ROCK_SMASH,
     GIFT,
@@ -16,7 +17,7 @@ enum class ObtainMethod {
     /** Pokémon rencontré à l'état sauvage (herbes, grottes, surf, pêche), qu'on peut capturer sur place. */
     val isWild: Boolean
         get() = when (this) {
-            WALK, FISHING, SURF, DIVE, HEADBUTT, ROCK_SMASH -> true
+            WALK, FISHING, SURF, DIVE, HONEY_TREE, HEADBUTT, ROCK_SMASH -> true
             GIFT, STATIC, TRADE, EVOLUTION -> false
         }
 
@@ -28,6 +29,8 @@ enum class ObtainMethod {
         fun fromEncounterMethod(identifier: String): ObtainMethod = when (identifier) {
             "walk" -> WALK
 
+            "honey-tree" -> HONEY_TREE
+
             "old-rod", "good-rod", "super-rod", "feebas-tile-fishing" -> FISHING
 
             "surf" -> SURF
@@ -38,7 +41,8 @@ enum class ObtainMethod {
 
             "rock-smash" -> ROCK_SMASH
 
-            "gift", "gift-egg", "colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal" -> GIFT
+            "gift", "gift-egg", "pokemon-ranger",
+            "colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal" -> GIFT
 
             "static", "pokeflute", "squirt-bottle", "roaming-grass", "roaming-water",
             "devon-scope", "wailmer-pail" -> STATIC

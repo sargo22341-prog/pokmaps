@@ -75,6 +75,10 @@ Chaque offre garde son origine : PNJ posé avec son drapeau de retrait, ou scèn
 Les exemplaires d'un personnage à plusieurs étapes restent distincts dans cet aperçu.
 La curation annote les figurants temporaires et attribue les dons de scène au personnage qui les remet.
 Ces aperçus n’activent pas Diamant, Perle ou Platine dans l’application.
+Les modèles Android reconnaissent désormais ces trois versions (493 espèces) et préparent leur rangée
+« 4e génération ». Les filtres distinguent les arbres à Miel et les dons de Pokémon Ranger.
+Le calculateur DS gère Sombre, Soin et Rapide Ball, le terrain aquatique, le Grand Marais et le Parc des Amis ;
+la Mémoire Ball reste réservée aux distributions. Ces fonctions seront accessibles après intégration des assets.
 
 ## Publier une version
 

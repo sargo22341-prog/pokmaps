@@ -44,7 +44,7 @@ enum class WildMethod {
             ObtainMethod.SURF -> SURF
             ObtainMethod.DIVE -> DIVE
             ObtainMethod.FISHING -> FISHING
-            ObtainMethod.HEADBUTT -> HEADBUTT
+            ObtainMethod.HEADBUTT, ObtainMethod.HONEY_TREE -> HEADBUTT
             ObtainMethod.ROCK_SMASH -> ROCK_SMASH
             ObtainMethod.GIFT, ObtainMethod.STATIC, ObtainMethod.TRADE, ObtainMethod.EVOLUTION -> null
         }

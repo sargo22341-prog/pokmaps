@@ -48,6 +48,7 @@ internal fun EncounterFilterRow(
 
 private val EncounterFilter.label: Int
     get() = when (this) {
+        EncounterFilter.HONEY_TREE -> R.string.method_honey_tree
         EncounterFilter.ALL -> R.string.time_all
         EncounterFilter.WALK -> R.string.map_method_walk
         EncounterFilter.FISHING -> R.string.method_fishing

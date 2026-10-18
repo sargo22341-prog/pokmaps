@@ -92,7 +92,7 @@ internal class FakePokemonDao(private val failing: Boolean = false, private val 
             Generation.GEN1,
             Generation.GEN2 -> emptyList()
 
-            Generation.GEN3 ->
+            Generation.GEN3, Generation.GEN4 ->
                 listOf(AbilityRow("Statik", "Peut paralyser au contact.", false))
         }
     }

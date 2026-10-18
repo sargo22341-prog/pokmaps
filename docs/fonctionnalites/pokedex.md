@@ -25,3 +25,9 @@ Balls, Plongée, tours écoulés et espèce déjà capturée ; il exclut le Parc
 Les familles d’évolution excluent les espèces apparues après la génération choisie, sans se limiter au régional.
 Une espèce historiquement présente reste consultable si son obtention exige un transfert ou un événement externe.
 Après changement de jeu, une espèce non encore apparue est signalée absente ; un profil incomplet est une erreur.
+
+Les modèles de Sinnoh sont préparés, sans activation des jeux dans les assets distribués : arbres à Miel,
+dons de Pokémon Ranger, talents et chromatiques à 1/8 192. La capture DS distingue les combats sauvages,
+le Grand Marais (PV pleins, sans statut, coefficient initial 6) et le Parc des Amis (capture garantie).
+La Rapide Ball vaut ×4 au premier tour, la Sombre Ball ×3,5 la nuit ou en grotte ; la Plongée Ball dépend
+du terrain aquatique. La Mémoire Ball est une Ball de distribution, jamais proposée pour un lancer.

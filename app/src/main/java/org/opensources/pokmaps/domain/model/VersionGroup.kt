@@ -14,7 +14,9 @@ enum class VersionGroup(val identifier: String, val mapFamily: String) {
     CRYSTAL("crystal", "gold-silver-crystal"),
     RUBY_SAPPHIRE("ruby-sapphire", "ruby-sapphire-emerald"),
     EMERALD("emerald", "ruby-sapphire-emerald"),
-    FIRERED_LEAFGREEN("firered-leafgreen", "firered-leafgreen");
+    FIRERED_LEAFGREEN("firered-leafgreen", "firered-leafgreen"),
+    DIAMOND_PEARL("diamond-pearl", "diamond-pearl"),
+    PLATINUM("platinum", "platinum");
 
     companion object {
         fun of(identifier: String): VersionGroup = requireNotNull(entries.firstOrNull { it.identifier == identifier }) {

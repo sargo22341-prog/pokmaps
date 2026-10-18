@@ -6,9 +6,11 @@ enum class EncounterFilter {
     WALK,
     FISHING,
     SURF,
-    DIVE;
+    DIVE,
+    HONEY_TREE;
 
     fun matches(encounter: Encounter): Boolean = when (this) {
+        HONEY_TREE -> ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.HONEY_TREE
         ALL -> true
         WALK -> ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.WALK
         FISHING -> ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.FISHING

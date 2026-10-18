@@ -14,6 +14,8 @@ internal fun guideDefinitions(game: Game): List<GuideDefinition> {
         VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD ->
             gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides()
 
+        VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> emptyList()
+
         VersionGroup.FIRERED_LEAFGREEN -> gbaToolGuides() + remakeGuides()
     }
     return branch.filter { versionId in it.versions }

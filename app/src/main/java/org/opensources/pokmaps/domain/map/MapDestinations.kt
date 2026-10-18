@@ -5,6 +5,7 @@ import org.opensources.pokmaps.domain.model.VersionGroup
 /** Destinations du menu : régions principales et entrées des îles distribuées par événement. */
 internal object MapDestinations {
     fun startRegion(group: VersionGroup): String = when (group) {
+        VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> "sinnoh"
         VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> "johto"
         VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> "hoenn"
         VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.FIRERED_LEAFGREEN -> "kanto"

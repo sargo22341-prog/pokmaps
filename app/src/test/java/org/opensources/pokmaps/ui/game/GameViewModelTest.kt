@@ -46,6 +46,15 @@ class GameViewModelTest {
     }
 
     @Test
+    fun sinnohGamesUseOneRowInCartridgeOrder() {
+        val state = GameUiState(games = listOf(FakeGameDao.PLATINUM, FakeGameDao.PEARL, FakeGameDao.DIAMOND))
+        assertEquals(
+            listOf(GameChoiceRow(4, null, listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM))),
+            state.rows
+        )
+    }
+
+    @Test
     fun startsLoading() {
         assertTrue(viewModel(FakeGameDao()).state.value.loading)
     }
@@ -84,7 +93,7 @@ class GameViewModelTest {
 
     @Test
     fun aGameWithoutRulesInTheApplicationIsAnError() = runTest {
-        val unsupported = FakeGameDao.RED.copy(versionGroupIdentifier = "diamond-pearl")
+        val unsupported = FakeGameDao.RED.copy(versionGroupIdentifier = "heartgold-soulsilver")
         val viewModel = viewModel(FakeGameDao(games = listOf(FakeGameDao.BLUE, unsupported)))
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.state.collect {} }
         assertEquals(GameUiState(loading = false, failed = true), viewModel.state.value)

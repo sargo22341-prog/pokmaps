@@ -6,8 +6,8 @@ import org.junit.Test
 class GameVersionTest {
     @Test
     fun everyVersionHasAUniqueIdentifierAndSupportedGeneration() {
-        assertEquals(11, GameVersion.entries.map { it.id }.toSet().size)
-        assertEquals(11, GameVersion.entries.map { it.identifier }.toSet().size)
+        assertEquals(14, GameVersion.entries.map { it.id }.toSet().size)
+        assertEquals(14, GameVersion.entries.map { it.identifier }.toSet().size)
         GameVersion.entries.forEach {
             assertEquals(it, GameVersion.of(it.id))
             assertEquals(it, GameVersion.of(it.identifier))
@@ -17,11 +17,11 @@ class GameVersionTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun aNewGenerationRequiresExplicitRules() {
-        Generation.of(4)
+        Generation.of(5)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun aNewVersionRequiresExplicitRules() {
-        GameVersion.of(12)
+        GameVersion.of(15)
     }
 }

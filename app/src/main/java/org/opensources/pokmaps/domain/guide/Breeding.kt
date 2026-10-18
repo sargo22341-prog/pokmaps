@@ -65,6 +65,7 @@ object BreedingRules {
         when (Generation.of(pair.generationId)) {
             Generation.GEN1 -> error("Jeu sans reproduction")
             Generation.GEN2 -> Unit
+            Generation.GEN4 -> error("Outil de reproduction Sinnoh non disponible")
             Generation.GEN3 -> return BreedingStatus.COMPATIBLE
         }
         if (first.defense == null || second.defense == null || first.special == null || second.special == null) {

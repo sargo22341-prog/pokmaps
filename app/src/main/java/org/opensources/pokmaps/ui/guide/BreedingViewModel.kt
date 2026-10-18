@@ -51,6 +51,8 @@ data class BreedingUiState(
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
     val gba: Boolean = when (catalog?.game?.generation) {
+        Generation.GEN4 -> error("Outil de reproduction Sinnoh non disponible")
+
         null, Generation.GEN1,
         Generation.GEN2 -> false
 

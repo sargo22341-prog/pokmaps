@@ -310,6 +310,7 @@ private fun PokedexCard(
 @get:StringRes
 private val ObtainMethod.label: Int
     get() = when (this) {
+        ObtainMethod.HONEY_TREE -> R.string.method_honey_tree
         ObtainMethod.WALK -> R.string.method_walk
         ObtainMethod.FISHING -> R.string.method_fishing
         ObtainMethod.SURF -> R.string.method_surf

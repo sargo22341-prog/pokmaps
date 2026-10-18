@@ -48,6 +48,13 @@ class ObtainMethodTest {
         }
     }
 
+    @Test
+    fun sinnohMethodsStayVisible() {
+        assertEquals(ObtainMethod.HONEY_TREE, ObtainMethod.fromEncounterMethod("honey-tree"))
+        assertEquals(true, ObtainMethod.HONEY_TREE.isWild)
+        assertEquals(ObtainMethod.GIFT, ObtainMethod.fromEncounterMethod("pokemon-ranger"))
+    }
+
     /** Une méthode inconnue ne doit pas disparaître des filtres. */
     @Test
     fun anUnknownMethodIsAnError() {

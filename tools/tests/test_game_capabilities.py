@@ -5,7 +5,7 @@ import sqlite3
 from pathlib import Path
 
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, PretFormat
+from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, GEN4_GAMES, PretFormat
 from pokemaps_data.validate import validate
 
 _APP = Path(__file__).parents[2] / "app/src/main/java/org/opensources/pokmaps"
@@ -50,8 +50,10 @@ def test_capabilities_of_the_eleven_versions(db: sqlite3.Connection) -> None:
 def test_app_version_groups_match_the_pipeline_families() -> None:
     source = (_APP / "domain/model/VersionGroup.kt").read_text(encoding="utf-8")
     entries = re.findall(r'^\s+[A-Z_]+\("([a-z-]+)", "([a-z-]+)"\)[,;]$', source, re.MULTILINE)
-    assert dict(entries) == {game.version_group: game.map_family for game in GAMES}
-    assert len(entries) == len(GAMES)
+    # Les modèles DS sont prêts avant le passage des assets de Sinnoh dans GAMES.
+    modeled = (*GAMES, *GEN4_GAMES)
+    assert dict(entries) == {game.version_group: game.map_family for game in modeled}
+    assert len(entries) == len(modeled)
 
 
 def test_remake_generation_is_explicit() -> None:

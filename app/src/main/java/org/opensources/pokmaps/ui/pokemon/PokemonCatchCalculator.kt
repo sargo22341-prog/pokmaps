@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.Ball
+import org.opensources.pokmaps.domain.pokemon.CaptureEnvironment
 import org.opensources.pokmaps.domain.pokemon.CaptureGeneration
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.formatNumber
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -35,34 +35,43 @@ internal fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> U
             onValueChange = { onAction(PokemonAction.SetCatchLevel(it.toInt())) },
             valueRange = 1f..PokemonViewModel.MAX_LEVEL.toFloat()
         )
-        Text(stringResource(R.string.catch_hp), style = MaterialTheme.typography.bodyMedium)
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            HpChoice.entries.forEach { hp ->
-                FilterChip(selected = catch.hp == hp, onClick = {
-                    onAction(PokemonAction.SetCatchHp(hp))
-                }, label = { Text(stringResource(hp.label)) })
-            }
-        }
         when (catch.generation) {
             CaptureGeneration.GEN1 -> Unit
             CaptureGeneration.GEN2 -> JohtoBallControls(catch, onAction)
+            CaptureGeneration.GEN4 -> Gen4BallControls(catch, onAction)
             CaptureGeneration.GEN3 -> Gen3BallControls(catch, onAction)
         }
-        Text(stringResource(R.string.status_label), style = MaterialTheme.typography.bodyMedium)
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CatchStatus.entries.forEach { status ->
-                FilterChip(
-                    selected = catch.status == status,
-                    onClick = { onAction(PokemonAction.SetCatchStatus(status)) },
-                    label = { Text(stringResource(status.label)) }
-                )
-            }
+        if (catch.generation != CaptureGeneration.GEN4 || catch.environment == CaptureEnvironment.NORMAL) {
+            HealthControls(catch, onAction)
         }
         BallProbabilities(catch)
         if (catch.blockedBalls.isNotEmpty()) {
             Text(stringResource(R.string.catch_engine_blocked), color = MaterialTheme.colorScheme.error)
         }
         CatchNote(catch.generation)
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun HealthControls(catch: CatchUiState, onAction: (PokemonAction) -> Unit) {
+    Text(stringResource(R.string.catch_hp), style = MaterialTheme.typography.bodyMedium)
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        HpChoice.entries.forEach { hp ->
+            FilterChip(selected = catch.hp == hp, onClick = {
+                onAction(PokemonAction.SetCatchHp(hp))
+            }, label = { Text(stringResource(hp.label)) })
+        }
+    }
+    Text(stringResource(R.string.status_label), style = MaterialTheme.typography.bodyMedium)
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CatchStatus.entries.forEach { status ->
+            FilterChip(
+                selected = catch.status == status,
+                onClick = { onAction(PokemonAction.SetCatchStatus(status)) },
+                label = { Text(stringResource(status.label)) }
+            )
+        }
     }
 }
 
@@ -73,6 +82,7 @@ private fun CatchNote(generation: CaptureGeneration) {
             when (generation) {
                 CaptureGeneration.GEN1 -> R.string.catch_note
                 CaptureGeneration.GEN2 -> R.string.catch_note_gen2
+                CaptureGeneration.GEN4 -> R.string.catch_note_gen4
                 CaptureGeneration.GEN3 -> R.string.catch_note_gen3
             }
         ),
@@ -143,6 +153,10 @@ private val Ball.label: Int
         Ball.REPEAT -> R.string.ball_repeat
         Ball.TIMER -> R.string.ball_timer
         Ball.LUXURY -> R.string.ball_luxury
+        Ball.DUSK -> R.string.ball_dusk
+        Ball.HEAL -> R.string.ball_heal
+        Ball.QUICK -> R.string.ball_quick
+        Ball.CHERISH -> R.string.ball_cherish
         Ball.PREMIER -> R.string.ball_premier
     }
 

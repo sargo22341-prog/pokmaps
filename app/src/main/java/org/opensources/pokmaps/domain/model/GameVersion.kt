@@ -12,7 +12,10 @@ enum class GameVersion(val id: Int, val identifier: String, val group: VersionGr
     SAPPHIRE(8, "sapphire", VersionGroup.RUBY_SAPPHIRE, Generation.GEN3),
     EMERALD(9, "emerald", VersionGroup.EMERALD, Generation.GEN3),
     FIRERED(10, "firered", VersionGroup.FIRERED_LEAFGREEN, Generation.GEN3),
-    LEAFGREEN(11, "leafgreen", VersionGroup.FIRERED_LEAFGREEN, Generation.GEN3);
+    LEAFGREEN(11, "leafgreen", VersionGroup.FIRERED_LEAFGREEN, Generation.GEN3),
+    DIAMOND(12, "diamond", VersionGroup.DIAMOND_PEARL, Generation.GEN4),
+    PEARL(13, "pearl", VersionGroup.DIAMOND_PEARL, Generation.GEN4),
+    PLATINUM(14, "platinum", VersionGroup.PLATINUM, Generation.GEN4);
 
     companion object {
         fun of(id: Int): GameVersion = requireNotNull(entries.firstOrNull { it.id == id }) {

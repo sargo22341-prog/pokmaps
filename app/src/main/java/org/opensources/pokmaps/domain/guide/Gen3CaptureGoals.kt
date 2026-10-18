@@ -17,7 +17,9 @@ object Gen3CaptureGoals {
             GameVersion.LEAFGREEN -> LEAFGREEN
 
             GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW, GameVersion.GOLD, GameVersion.SILVER,
-            GameVersion.CRYSTAL -> error("Version GBA inconnue : $version")
+            GameVersion.CRYSTAL, GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error(
+                "Version GBA inconnue : $version"
+            )
         }
         val choices = when (GameVersion.of(version)) {
             GameVersion.RUBY -> listOf(HOENN_STARTERS, FOSSILS, MOON_STONE)
@@ -29,7 +31,9 @@ object Gen3CaptureGoals {
             GameVersion.FIRERED, GameVersion.LEAFGREEN -> listOf(KANTO_STARTERS_AND_ROAMER, KANTO_FOSSILS)
 
             GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW, GameVersion.GOLD, GameVersion.SILVER,
-            GameVersion.CRYSTAL -> error("Version GBA inconnue : $version")
+            GameVersion.CRYSTAL, GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error(
+                "Version GBA inconnue : $version"
+            )
         }
         val selectedChoices = choices.mapNotNull { choice ->
             val options = choice.alternatives.map { it.intersect(available) }

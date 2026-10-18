@@ -29,6 +29,8 @@ object Roamers {
                 else -> error("Bête errante inconnue : $pokemon")
             }
 
+            GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
+
             GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
         }
         RoamerChoice(pokemon, condition)
@@ -41,6 +43,7 @@ object Roamers {
         GameVersion.SAPPHIRE -> listOf(380)
         GameVersion.EMERALD -> listOf(380, 381)
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> listOf(243, 244, 245)
+        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
         GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> emptyList()
     }
 
@@ -51,6 +54,8 @@ object Roamers {
 
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> 50
 
+        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
+
         GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
     }
 
@@ -58,6 +63,7 @@ object Roamers {
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerArea.JOHTO
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> RoamerArea.HOENN
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> RoamerArea.KANTO
+        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
         GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> error("Version sans errant : $version")
     }
 
@@ -66,6 +72,7 @@ object Roamers {
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> "johto-roamers"
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> "hoenn-roamers"
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> "remake-roamers"
+        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
         GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> null
     }
 }

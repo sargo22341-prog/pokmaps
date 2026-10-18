@@ -112,7 +112,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         val required = when (game.generation) {
             Generation.GEN1 -> setOf("hp", "attack", "defense", "special", "speed")
 
-            Generation.GEN2, Generation.GEN3 ->
+            Generation.GEN2, Generation.GEN3, Generation.GEN4 ->
                 setOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
         }
         check(
@@ -167,7 +167,7 @@ class PokemonRepository @Inject constructor(private val dao: PokemonDao, private
         when (game.generation) {
             Generation.GEN1, Generation.GEN2 -> check(abilities.isEmpty()) { "Jeu sans talents" }
 
-            Generation.GEN3 -> check(abilities.size in 1..2 && abilities.none { it.hidden }) {
+            Generation.GEN3, Generation.GEN4 -> check(abilities.size in 1..2 && abilities.none { it.hidden }) {
                 "Talents invalides pour le Pokémon $pokemonId dans ${game.versionIdentifier}"
             }
         }

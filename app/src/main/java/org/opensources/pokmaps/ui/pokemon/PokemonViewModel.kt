@@ -17,11 +17,13 @@ import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.BallContext
+import org.opensources.pokmaps.domain.pokemon.CaptureEnvironment
 import org.opensources.pokmaps.domain.pokemon.CaptureGeneration
 import org.opensources.pokmaps.domain.pokemon.CatchRate
 import org.opensources.pokmaps.domain.pokemon.CatchStatus
 import org.opensources.pokmaps.domain.pokemon.Gen2CatchRate
 import org.opensources.pokmaps.domain.pokemon.Gen3CatchRate
+import org.opensources.pokmaps.domain.pokemon.Gen4CatchRate
 import org.opensources.pokmaps.domain.pokemon.GenerationFeature
 import org.opensources.pokmaps.domain.pokemon.MoveTab
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
@@ -52,7 +54,11 @@ data class CatchInput(
     val sameSpeciesAndGender: Boolean = false,
     val underwater: Boolean = false,
     val elapsedTurns: Int = 0,
-    val alreadyCaught: Boolean = false
+    val alreadyCaught: Boolean = false,
+    val nightOrCave: Boolean = false,
+    val waterTerrain: Boolean = false,
+    val environment: CaptureEnvironment = CaptureEnvironment.NORMAL,
+    val safariStage: Int = 6
 )
 
 data class CatchUiState(
@@ -68,7 +74,11 @@ data class CatchUiState(
     val underwater: Boolean = false,
     val elapsedTurns: Int = 0,
     val alreadyCaught: Boolean = false,
-    val blockedBalls: Set<Ball> = emptySet()
+    val blockedBalls: Set<Ball> = emptySet(),
+    val nightOrCave: Boolean = false,
+    val waterTerrain: Boolean = false,
+    val environment: CaptureEnvironment = CaptureEnvironment.NORMAL,
+    val safariStage: Int = 6
 )
 
 data class PokemonUiState(
@@ -135,6 +145,14 @@ sealed interface PokemonAction {
 
     data object ToggleLoveBonus : PokemonAction
 
+    data object ToggleNightOrCave : PokemonAction
+
+    data object ToggleWaterTerrain : PokemonAction
+
+    data class SetCaptureEnvironment(val environment: CaptureEnvironment) : PokemonAction
+
+    data class SetSafariStage(val stage: Int) : PokemonAction
+
     data object ToggleUnderwater : PokemonAction
 
     data object ToggleAlreadyCaught : PokemonAction
@@ -199,6 +217,15 @@ class PokemonViewModel @Inject constructor(
             is PokemonAction.SetPlayerLevel ->
                 catchInput.update { it.copy(playerLevel = action.level.coerceIn(1, MAX_LEVEL)) }
 
+            PokemonAction.ToggleNightOrCave -> catchInput.update { it.copy(nightOrCave = !it.nightOrCave) }
+
+            PokemonAction.ToggleWaterTerrain -> catchInput.update { it.copy(waterTerrain = !it.waterTerrain) }
+
+            is PokemonAction.SetCaptureEnvironment -> catchInput.update { it.copy(environment = action.environment) }
+
+            is PokemonAction.SetSafariStage ->
+                catchInput.update { it.copy(safariStage = action.stage.coerceIn(0, 12)) }
+
             PokemonAction.ToggleUnderwater -> catchInput.update { it.copy(underwater = !it.underwater) }
 
             PokemonAction.ToggleAlreadyCaught -> catchInput.update { it.copy(alreadyCaught = !it.alreadyCaught) }
@@ -240,7 +267,7 @@ class PokemonViewModel @Inject constructor(
             Generation.GEN1,
             Generation.GEN2 -> CatchRate.maxHp(baseHp, level)
 
-            Generation.GEN3 -> Gen3CatchRate.maxHp(details.id, baseHp, level)
+            Generation.GEN3, Generation.GEN4 -> Gen3CatchRate.maxHp(details.id, baseHp, level)
         }
         val currentHp = CatchRate.currentHp(maxHp, input.hp.fraction)
         val generation = checkNotNull(CaptureGeneration.from(game.generationId))
@@ -254,20 +281,23 @@ class PokemonViewModel @Inject constructor(
             input.underwater,
             input.elapsedTurns,
             input.alreadyCaught,
-            details.types.any { it.identifier == "water" || it.identifier == "bug" }
+            details.types.any { it.identifier == "water" || it.identifier == "bug" },
+            input.nightOrCave, input.waterTerrain, input.environment, input.safariStage
         )
         val blocked = if (generation == CaptureGeneration.GEN2 && Gen2CatchRate.blocksEngine(maxHp)) {
             generation.balls.filter { it != Ball.MASTER && it != Ball.LEVEL }.toSet()
         } else {
             emptySet()
         }
-        val probabilities = generation.balls.filter { it !in blocked }.associateWith {
+        val balls = if (generation == CaptureGeneration.GEN4) Gen4CatchRate.balls(context) else generation.balls
+        val probabilities = balls.filter { it !in blocked }.associateWith {
             generation.probability(it, details.captureRate, maxHp, currentHp, input.status, context)
         }
         return CatchUiState(
             level, input.hp, input.status, probabilities.toList(), CatchRate.bestBall(probabilities),
             generation, input.playerLevel, input.fishing, input.sameSpeciesAndGender,
-            input.underwater, input.elapsedTurns, input.alreadyCaught, blocked
+            input.underwater, input.elapsedTurns, input.alreadyCaught, blocked,
+            input.nightOrCave, input.waterTerrain, input.environment, input.safariStage
         )
     }
 

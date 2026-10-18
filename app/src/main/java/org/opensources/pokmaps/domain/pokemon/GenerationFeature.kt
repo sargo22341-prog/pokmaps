@@ -25,12 +25,12 @@ enum class GenerationFeature(val introducedIn: Int) {
     fun existsIn(generationId: Int): Boolean = when (this) {
         HELD_ITEMS, SHINY, GENDER, BREEDING -> when (Generation.of(generationId)) {
             Generation.GEN1 -> false
-            Generation.GEN2, Generation.GEN3 -> true
+            Generation.GEN2, Generation.GEN3, Generation.GEN4 -> true
         }
 
         ABILITIES -> when (Generation.of(generationId)) {
             Generation.GEN1, Generation.GEN2 -> false
-            Generation.GEN3 -> true
+            Generation.GEN3, Generation.GEN4 -> true
         }
     }
 }
@@ -42,7 +42,7 @@ object ShinyOdds {
     /** Probabilité dans les générations prises en charge ; null avant les chromatiques. */
     fun oneIn(generationId: Int): Int? = when (Generation.of(generationId)) {
         Generation.GEN1 -> null
-        Generation.GEN2, Generation.GEN3 -> CLASSIC_ODDS
+        Generation.GEN2, Generation.GEN3, Generation.GEN4 -> CLASSIC_ODDS
     }
 }
 

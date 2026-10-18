@@ -1,8 +1,5 @@
 package org.opensources.pokmaps.domain.pokemon
 
-import kotlin.math.pow
-import kotlin.math.sqrt
-
 /** Calcul entier des quatre contrôles de capture des moteurs GBA pret, hors Parc Safari. */
 object Gen3CatchRate {
     fun probability(ball: Ball, rate: Int, maxHp: Int, hp: Int, status: CatchStatus, context: BallContext): Double {
@@ -11,17 +8,7 @@ object Gen3CatchRate {
         require(ball in CaptureGeneration.GEN3.balls)
         if (ball == Ball.MASTER) return 1.0
         val modified = rate * multiplier(ball, context) / 10
-        val value = modified * (3 * maxHp - 2 * hp) / (3 * maxHp)
-        val odds = when (status) {
-            CatchStatus.NONE -> value
-            CatchStatus.SLEEP_OR_FREEZE -> value * 2
-            CatchStatus.PARALYSIS_BURN_OR_POISON -> value * 15 / 10
-        }
-        if (odds >= 255) return 1.0
-        if (odds == 0) return 0.0
-        val root = sqrt(sqrt((SHAKE_NUMERATOR / odds).toDouble()).toInt().toDouble()).toInt()
-        val threshold = SHAKE_SCALE / root
-        return (threshold / RANDOM_RANGE).pow(4)
+        return CaptureChecks.probability(modified, maxHp, hp, status)
     }
 
     /** PV sauvages sans EV, avec un IV moyen de 15 ; Munja n'a toujours qu'un PV. */
@@ -47,6 +34,7 @@ object Gen3CatchRate {
 
         Ball.TIMER -> (context.elapsedTurns + 10).coerceAtMost(40)
 
+        Ball.DUSK, Ball.HEAL, Ball.QUICK, Ball.CHERISH,
         Ball.SAFARI, Ball.LEVEL, Ball.LURE, Ball.MOON, Ball.FRIEND, Ball.LOVE, Ball.HEAVY, Ball.FAST, Ball.PARK ->
             error("Ball indisponible en génération 3 : $ball")
     }
@@ -55,8 +43,4 @@ object Gen3CatchRate {
 
     // Le moteur stocke les PV sur 16 bits ; cette borne garde aussi les produits dans un Int.
     private const val MAX_HP = 65535
-
-    private const val SHAKE_NUMERATOR = 16711680
-    private const val SHAKE_SCALE = 1048560
-    private const val RANDOM_RANGE = 65536.0
 }

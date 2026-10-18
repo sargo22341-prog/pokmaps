@@ -4,7 +4,8 @@ package org.opensources.pokmaps.domain.model
 enum class Generation(val id: Int, val maximumSpecies: Int) {
     GEN1(1, 151),
     GEN2(2, 251),
-    GEN3(3, 386);
+    GEN3(3, 386),
+    GEN4(4, 493);
 
     companion object {
         val maximumSupportedSpecies: Int = entries.maxOf { it.maximumSpecies }
