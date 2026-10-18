@@ -80,9 +80,14 @@ def _validate_sprites(output: Path) -> None:
     used = {obj["graphics"] for event in events.values() for obj in event["object_events"]}
     if used != images | others:
         raise ValueError(f"{output} : graphismes d'événements absents du catalogue")
-    for graphics in images:
-        if not (output / "sprites" / f"{graphics}.webp").is_file():
+    for sprite in catalog["sprites"]:
+        graphics = sprite["graphics"]
+        path = output / "sprites" / f"{graphics}.webp"
+        if not path.is_file():
             raise ValueError(f"{output} : image de personnage absente : {graphics}")
+        with Image.open(path) as image:
+            if list(image.size) != sprite["size"] or image.convert("RGBA").getbbox() is None:
+                raise ValueError(f"{path} : dimensions ou image de personnage invalides")
 
 
 def _validate_tiles(output: Path) -> None:

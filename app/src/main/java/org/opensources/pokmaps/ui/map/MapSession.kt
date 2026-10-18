@@ -2,7 +2,9 @@ package org.opensources.pokmaps.ui.map
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -62,6 +64,15 @@ internal class MapSession(private val scope: CoroutineScope, tiles: (GameMap) ->
     }
 
     fun launch(block: suspend CoroutineScope.() -> Unit): Job = scope.launch(block = block)
+
+    /** Enregistre la fermeture avant toute suspension, même si le scope est annulé pendant le fondu. */
+    fun retire(afterMillis: Long, shutdown: () -> Unit): Job = scope.launch(start = CoroutineStart.UNDISPATCHED) {
+        try {
+            delay(afterMillis)
+        } finally {
+            shutdown()
+        }
+    }
 
     /** Exécute `block` : `CancellationException` est relancée, toute autre erreur devient un résultat en échec. */
     suspend fun <T> attempt(block: suspend () -> T): Result<T> = try {

@@ -7,7 +7,7 @@ non pris en charge arrête l'export avec le modèle concerné, jamais avec une i
 from __future__ import annotations
 
 from collections.abc import Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import lru_cache
 from pathlib import Path
 
@@ -178,6 +178,13 @@ def _material(
         palette = next((value.palettes[material.palette] for value in sets if material.palette in value.palettes), None)
         if source is None:
             raise ValueError(f"matériau {material.name} : texture absente : {material.texture}")
+        # La répétition et le miroir appartiennent au matériau, pas à l'image partagée du TEX0.
+        parameters = material.texture_parameters
+        source = replace(
+            source,
+            repeat=(bool(parameters & (1 << 16)), bool(parameters & (1 << 17))),
+            flip=(bool(parameters & (1 << 18)), bool(parameters & (1 << 19))),
+        )
         texture = _texture(source, palette)
     return RasterMaterial(texture, material.polygon_attributes >> 16 & 31, material.polygon_attributes >> 6 & 3)
 

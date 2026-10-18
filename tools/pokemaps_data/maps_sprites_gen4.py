@@ -1,4 +1,4 @@
-"""Premières images des personnages DS, lues séparément dans chaque dépôt."""
+"""Poses de face des personnages DS, lues séparément dans chaque dépôt."""
 
 from __future__ import annotations
 
@@ -92,7 +92,9 @@ def _png_frame(repo: Gen4PretRepo, path: Path) -> Image.Image:
             height = source.height
         else:
             height = min(32, source.height)
-        image = source.convert("RGBA").crop((0, 0, source.width, height))
+        # Les planches de marche commencent par quatre images de dos, puis quatre de face.
+        top = 4 * height if source.height >= 16 * height else 0
+        image = source.convert("RGBA").crop((0, top, source.width, top + height))
         # Le PNG garde une couleur invisible sous l'alpha nul ; le décodeur Nitro rend du noir transparent.
         data = bytes(value for pixel in image.get_flattened_data() for value in (pixel if pixel[3] else (0, 0, 0, 0)))
         return Image.frombytes("RGBA", image.size, data)
@@ -102,10 +104,11 @@ def _nitro_frame(path: Path) -> Image.Image:
     textures = read_nsbtx(read_binary(path), str(path))
     if not textures.textures:
         raise ValueError(f"{path} : personnage sans texture")
-    # Les dictionnaires Nitro sont triés lexicalement : .10 précède .2 ; le premier cadre est .1.
-    name = min(
+    # Les dictionnaires Nitro sont triés lexicalement : .10 précède .2 ; la face commence au cinquième cadre.
+    names = sorted(
         textures.textures, key=lambda key: (int(key.rsplit(".", 1)[1]) if key.rsplit(".", 1)[-1].isdigit() else 0, key)
     )
+    name = names[4] if len(names) >= 16 else names[0]
     texture = textures.textures[name]
     prefix = name.rsplit(".", 1)[0]
     palette = textures.palettes.get(prefix) or textures.palettes.get(name + "_pl")

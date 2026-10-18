@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.max
 import kotlin.math.sqrt
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import org.opensources.pokmaps.domain.map.MapCatalog
 import org.opensources.pokmaps.domain.map.MapLayer
 import org.opensources.pokmaps.domain.map.MapObject
@@ -305,10 +304,7 @@ internal class MapNavigation(
     private fun retire(current: MapUiState) {
         val oldState = current.mapState ?: return
         current.map?.let { scales[it.id] = oldState.scale }
-        session.launch {
-            delay(SHUTDOWN_DELAY_MS)
-            oldState.shutdown()
-        }
+        session.retire(SHUTDOWN_DELAY_MS, oldState::shutdown)
     }
 
     private fun handleTap(x: Double, y: Double) {

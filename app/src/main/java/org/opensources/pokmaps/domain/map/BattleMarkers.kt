@@ -46,6 +46,10 @@ object BattleMarkers {
 
     private val DUO_CLASSES = setOf(
         "twins",
+        "young_couple",
+        "double_team",
+        "sis_and_bro",
+        "interviewers",
         "TRAINER_CLASS_TWINS",
         "TRAINER_CLASS_SIS_AND_BRO",
         "TRAINER_CLASS_YOUNG_COUPLE",

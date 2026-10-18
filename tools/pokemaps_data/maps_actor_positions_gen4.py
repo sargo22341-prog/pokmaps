@@ -1,4 +1,4 @@
-"""Dégagement des marqueurs DS placés sur une entrée, sur les cases libres du même lieu."""
+"""Dégagement des entrées et espacement des partenaires sur les cartes DS."""
 
 from __future__ import annotations
 
@@ -11,6 +11,41 @@ if TYPE_CHECKING:
     from .maps import GameMapData
     from .maps_characters import ObjectRow
     from .maps_export_gen4 import Gen4MapProjection
+
+_DUO_CLASSES = frozenset({"twins", "young_couple", "double_team", "sis_and_bro", "interviewers"})
+
+
+def space_trainer_duos(objects: list[ObjectRow]) -> None:
+    """Écarte les partenaires en gardant leur centre, leur alignement et leur case source."""
+    pending = [
+        obj for obj in objects if obj.kind == "trainer" and obj.sprite is not None and obj.trainer_class in _DUO_CLASSES
+    ]
+    paired: set[int] = set()
+    for index, actor in enumerate(pending):
+        if index in paired:
+            continue
+        partners = [
+            (other_index, other)
+            for other_index, other in enumerate(pending)
+            if other_index != index
+            and other_index not in paired
+            and (actor.map_const, actor.trainer_class, actor.name_fr)
+            == (other.map_const, other.trainer_class, other.name_fr)
+            and (actor.x == other.x or actor.y == other.y)
+            and abs(actor.x - other.x) + abs(actor.y - other.y) == 16
+        ]
+        if len(partners) != 1:
+            continue
+        other_index, other = partners[0]
+        if actor.y == other.y:
+            left, right = sorted((actor, other), key=lambda obj: obj.x)
+            left.x -= 4
+            right.x += 4
+        else:
+            top, bottom = sorted((actor, other), key=lambda obj: obj.y)
+            top.y -= 8
+            bottom.y += 8
+        paired.update((index, other_index))
 
 
 def clear_actor_passages(data: GameMapData, projection: Gen4MapProjection) -> None:

@@ -225,6 +225,10 @@ référencé par la matrice 0 et porte la zone de textures du passage effectivem
 transparence). Les valeurs de cotangente sont fixes, relues contre les caméras des sources. Les images sont
 découpées en cadres bornés, puis en WebP sans perte de 256 pixels ; aucune image régionale entière n’est chargée.
 La pyramide de zoom est construite depuis les tuiles du niveau supérieur.
+La répétition et le miroir des textures sont lus sur chaque matériau NSBMD, et non sur l’image TEX0 partagée.
+Les personnages à planche de marche utilisent leur cinquième image, la pose de face ; les objets fixes gardent
+leur première image. Les partenaires adjacents des classes de duo DS sont espacés de 24 pixels horizontalement
+ou 32 pixels verticalement au lieu de 16, en conservant leur centre, leur alignement et leurs cases sources.
 
 `maps_dynamic_gen4.py` lit aussi le décor chargé par le moteur hors des blocs : étages et plateformes de
 Joliberges, engrenages de Rivamar à l’état zéro, eau de Verchamps à son niveau initial, horloge de Vestigion

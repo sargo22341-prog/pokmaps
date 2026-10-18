@@ -11,6 +11,7 @@ from pokemaps_data.validate_maps_gen4 import (
     _validate_dynamic_props,
     _validate_layers,
     _validate_row,
+    _validate_sprites,
     check_inventory,
     write_inventory,
 )
@@ -34,6 +35,22 @@ def test_inventory_rejects_paths_outside_the_asset_folder(tmp_path: Path) -> Non
     (tmp_path / "assets.sha256").write_text("0" * 64 + "  ../secret\n", encoding="utf-8")
     with pytest.raises(ValueError, match="entrée d'inventaire DS invalide"):
         check_inventory(tmp_path)
+
+
+def test_sprite_dimensions_and_visible_pixels_match_catalog(tmp_path: Path) -> None:
+    (tmp_path / "sprites").mkdir()
+    path = tmp_path / "sprites/2.webp"
+    (tmp_path / "sprites.json").write_text(
+        json.dumps({"sprites": [{"graphics": 2, "size": [32, 32]}], "without_texture": []}), encoding="utf-8"
+    )
+    (tmp_path / "events.json").write_text(json.dumps({"ROUTE": {"object_events": [{"graphics": 2}]}}), encoding="utf-8")
+    for color in ("red", "black"):
+        Image.new("RGBA", (32, 32), color).save(path, "WEBP", lossless=True)
+        _validate_sprites(tmp_path)
+    for size, color in [((16, 32), "red"), ((32, 32), (0, 0, 0, 0))]:
+        Image.new("RGBA", size, color).save(path, "WEBP", lossless=True)
+        with pytest.raises(ValueError, match="dimensions ou image"):
+            _validate_sprites(tmp_path)
 
 
 def test_a_child_map_cannot_overflow_its_display(tmp_path: Path) -> None:

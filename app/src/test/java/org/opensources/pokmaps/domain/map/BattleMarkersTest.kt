@@ -34,6 +34,20 @@ class BattleMarkersTest {
     }
 
     @Test
+    fun sinnohDuosKeepOneIconAfterTheirSpritesAreSpaced() {
+        for (trainerClass in listOf("twins", "young_couple", "double_team", "sis_and_bro", "interviewers")) {
+            val first = trainer.copy(x = 36, sprite = "2", trainerClass = trainerClass)
+            val partner = first.copy(id = 2, x = 60)
+            assertEquals(listOf(BattleMarkers.Position(1, 48, 40)), BattleMarkers.positions(listOf(first, partner)))
+        }
+        val top = trainer.copy(y = 32, trainerClass = "double_team")
+        assertEquals(
+            listOf(BattleMarkers.Position(1, 40, 16)),
+            BattleMarkers.positions(listOf(top, top.copy(id = 2, y = 64)))
+        )
+    }
+
+    @Test
     fun partnersOnDifferentMapsOrFarAwayAreSeparate() {
         assertEquals(2, BattleMarkers.positions(listOf(trainer, trainer.copy(id = 2, mapId = 2))).size)
         assertEquals(2, BattleMarkers.positions(listOf(trainer, trainer.copy(id = 2, x = 104))).size)
