@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterHabitat
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.TimedSpecies
 import org.opensources.pokmaps.domain.model.WaterMethod
@@ -35,16 +35,32 @@ internal fun WaterEncounterRows(
     spriteSize: SpriteSize,
     caught: (Encounter) -> Boolean,
     onClick: ((Encounter) -> Unit)?,
+    inWaterZone: Boolean = false,
     caption: @Composable (Encounter) -> String
 ) {
-    WaterSectionHeader()
+    val habitat = species.firstOrNull()?.encounters?.firstOrNull()?.habitat ?: EncounterHabitat.GRASS
+    if (inWaterZone) {
+        WaterSpeciesCards(species, title, spritePlace, spriteSize, caught, onClick, caption)
+    } else {
+        EncounterWaterZone(habitat) {
+            WaterSpeciesCards(species, title, spritePlace, spriteSize, caught, onClick, caption)
+        }
+    }
+}
+
+@Composable
+private fun WaterSpeciesCards(
+    species: List<TimedSpecies>,
+    title: (Encounter) -> String,
+    spritePlace: SpritePlace?,
+    spriteSize: SpriteSize,
+    caught: (Encounter) -> Boolean,
+    onClick: ((Encounter) -> Unit)?,
+    caption: @Composable (Encounter) -> String
+) {
     species.forEach { pokemon ->
         val first = pokemon.encounters.first()
-        Surface(
-            shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colorScheme.surfaceContainer,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
-        ) {
+        EncounterWaterCard(first.habitat, Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
             Column(
                 Modifier.fillMaxWidth()
                     .then(if (onClick == null) Modifier else Modifier.clickable { onClick(first) })
@@ -66,21 +82,6 @@ internal fun WaterEncounterRows(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun WaterSectionHeader() {
-    Column(
-        Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-        Text(
-            stringResource(R.string.water_zone),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.primary
-        )
     }
 }
 

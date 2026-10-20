@@ -25,7 +25,8 @@ data class Encounter(
     val nonTimeConditions: String? = conditions,
     val isExternalEvent: Boolean = false,
     val conditionKeys: Set<String> = emptySet(),
-    val conditionNames: Map<String, String> = emptyMap()
+    val conditionNames: Map<String, String> = emptyMap(),
+    val habitat: EncounterHabitat = EncounterHabitat.TALL_GRASS
 ) {
     val needsExternalEventLabel: Boolean
         get() = isExternalEvent && !ExternalEvent.mentioned(note) && !ExternalEvent.mentioned(conditions)
@@ -36,8 +37,11 @@ data class Encounter(
     /** Rencontre à l'état sauvage (herbes, grottes, surf, pêche), et non don, échange ou Pokémon fixe. */
     val isWild: Boolean get() = ObtainMethod.fromEncounterMethod(method).isWild
 
+    val isWater: Boolean get() = method in WATER_METHODS
+
     private companion object {
         const val TRADE = "npc-trade"
+        val WATER_METHODS = setOf("surf", "old-rod", "good-rod", "super-rod", "feebas-tile-fishing", "seaweed")
     }
 }
 
@@ -46,7 +50,12 @@ fun List<Encounter>.wildPokemonIds(): Set<Int> = filter { it.isWild }.map { it.p
 
 /** Rencontres d'une zone (ou d'un Pokémon) regroupées par méthode, dans l'ordre du jeu. */
 data class EncounterGroup(val methodName: String, val encounters: List<Encounter>) {
-    val aquatic: Boolean = encounters.isNotEmpty() && encounters.all { WaterMethod.of(it.method) != null }
+    val habitat: EncounterHabitat = encounters.firstOrNull()?.habitat ?: EncounterHabitat.GRASS
+    val aquatic: Boolean = encounters.isNotEmpty() && encounters.all {
+        WaterMethod.of(it.method) != null || it.method == "feebas-tile-fishing"
+    }
+    val water: Boolean = encounters.isNotEmpty() && encounters.all { it.isWater }
+    val landscape: Boolean = encounters.any { it.isWild }
     val species: List<TimedSpecies> = encounters.groupBy { Triple(it.versionId, it.areaId, it.pokemonId) }
         .values.map { variants -> TimedSpecies(variants.first().pokemonId, variants.first().pokemonName, variants) }
 }
@@ -56,5 +65,6 @@ fun List<Encounter>.groupByMethod(): List<EncounterGroup> = sortedWith(
         .thenByDescending { it.chance ?: 0.0 }
         .thenBy { it.areaName }
         .thenBy { it.pokemonId }
-).groupBy { if (WaterMethod.of(it.method) != null) "" else it.methodName }
+).groupBy { if (WaterMethod.of(it.method) != null || it.method == "feebas-tile-fishing") "" else it.methodName }
     .map { (method, encounters) -> EncounterGroup(method, encounters) }
+    .sortedBy { it.water }

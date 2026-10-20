@@ -56,3 +56,9 @@ Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilit�
 les méthodes indisponibles sont grisées, sans libellé visible.
 La section « Zone d’eau » commence par un séparateur. Chaque Pokémon aquatique est présenté
 dans un encadré, avec les icônes et probabilités au-dessus du sprite et du nom.
+Toutes les périodes terrestres et les autres moyens d’obtenir un Pokémon sont affichés avant le bloc d’eau.
+Les horaires aquatiques restent détaillés à l’intérieur de ce bloc. Les décors réutilisent des textures fixes
+d’Émeraude pour toutes les générations : prairie, hautes herbes, sous-bois pour Coup d’Boule et arbres à Miel,
+roche, glace, sable et sol intérieur. Le choix repose sur les identifiants du lieu et de sa salle,
+avec distinction des parties extérieures des montagnes. La rive du lac reprend le terrain autour de l’eau ;
+le fond des cartes aquatiques est flouté sous une surface translucide, avec sprites et informations nets.

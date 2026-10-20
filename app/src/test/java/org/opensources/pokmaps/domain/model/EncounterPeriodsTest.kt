@@ -32,6 +32,26 @@ class EncounterPeriodsTest {
     }
 
     @Test
+    fun everyLandPeriodAndGiftPrecedesTheSingleWaterZone() {
+        val dry = EncounterTime.entries.map {
+            encounter(it, 10.0 + it.ordinal).copy(pokemonId = 16 + it.ordinal)
+        }
+        val water = EncounterTime.entries.map {
+            encounter(it, 20.0 + it.ordinal).copy(method = "surf", methodName = "Surf", pokemonId = 129 + it.ordinal)
+        }
+        val gift = encounter(null).copy(method = "gift", methodName = "Cadeau")
+        val periods = EncounterPeriods((dry + water + gift).byTime(TimeFilter.ALL), EncounterTime.entries.toSet())
+        assertEquals(4, periods.drySections.size)
+        assertEquals(3, periods.waterSections.size)
+        assertEquals(periods.drySections + periods.waterSections, periods.shown)
+        assertTrue(periods.drySections.flatMap { it.groups }.none { it.aquatic })
+        assertTrue(periods.waterSections.flatMap { it.groups }.all { it.aquatic })
+        val night = EncounterPeriods((dry + water).byTime(TimeFilter.ALL), setOf(EncounterTime.NIGHT))
+        assertEquals(listOf(TimeFilter.NIGHT), night.drySections.map { it.period })
+        assertEquals(listOf(TimeFilter.NIGHT), night.waterSections.map { it.period })
+    }
+
+    @Test
     fun identicalPeriodsAndUntimedEncountersNeedNoButtons() {
         val same = EncounterTime.entries.map { encounter(it) }.byTime(TimeFilter.ALL)
         assertTrue(EncounterPeriods(same, emptySet()).available.isEmpty())

@@ -7,6 +7,8 @@ enum class WaterMethod(val identifier: String) {
     GOOD_ROD("good-rod"),
     SUPER_ROD("super-rod");
 
+    fun matches(method: String): Boolean = method == identifier || (method == "feebas-tile-fishing" && this != SURF)
+
     companion object {
         fun of(identifier: String): WaterMethod? = entries.firstOrNull { it.identifier == identifier }
     }

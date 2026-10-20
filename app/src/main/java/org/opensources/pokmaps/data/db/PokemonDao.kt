@@ -194,6 +194,7 @@ interface PokemonDao {
 }
 
 const val ENCOUNTER_COLUMNS = """
+    l.identifier AS locationIdentifier, la.identifier AS areaIdentifier,
     e.version_id AS versionId, v.name_fr AS versionName, e.location_area_id AS areaId, la.name_fr AS areaName,
     e.pokemon_id AS pokemonId, p.name_fr AS pokemonName, m.identifier AS method, m.name_fr AS methodName,
     m.sort_order AS methodOrder, m.is_one_off AS isOneOff, e.min_level AS minLevel, e.max_level AS maxLevel,
@@ -216,6 +217,7 @@ const val ENCOUNTER_TABLES = """
     encounter e
     JOIN version v ON v.id = e.version_id
     JOIN location_area la ON la.id = e.location_area_id
+    JOIN location l ON l.id = la.location_id
     JOIN pokemon p ON p.id = e.pokemon_id
     JOIN encounter_method m ON m.id = e.method_id
 """

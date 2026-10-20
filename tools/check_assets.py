@@ -7,6 +7,7 @@ from contextlib import closing
 from pathlib import Path
 
 from pokemaps_data.asset_manifest import check_manifest
+from pokemaps_data.encounter_backgrounds import validate_encounter_backgrounds
 from pokemaps_data.games import GAMES, GEN3_GAMES, GEN4_GAMES, PretFormat
 from pokemaps_data.hoenn_catalog import validate_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
@@ -27,6 +28,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
+        validate_encounter_backgrounds(args.assets)
         validate_hoenn_catalog(args.assets)
         validate_sinnoh_catalog(args.assets)
         validate_remake_fixed(args.assets)

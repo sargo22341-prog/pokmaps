@@ -16,12 +16,16 @@ data class EncounterPeriods(val sections: List<TimedEncounters>, val selected: S
         }
         section.copy(groups = groups).takeIf { groups.isNotEmpty() }
     }
-    val shown: List<TimedEncounters> = listOf(true, false).flatMap { wild ->
+    val shown: List<TimedEncounters> = EncounterSection.entries.flatMap { kind ->
         filtered.mapNotNull { section ->
-            val encounters = section.groups.flatMap { it.encounters }.filter { it.isWild == wild }
+            val encounters = section.groups.flatMap { it.encounters }.filter { EncounterSection.of(it) == kind }
             section.copy(groups = encounters.groupByMethod()).takeIf { encounters.isNotEmpty() }
         }
     }
+    val drySections: List<TimedEncounters> = shown.filter { section -> section.groups.none { it.water } }
+    val waterSections: List<TimedEncounters> = shown.filter { section -> section.groups.any { it.water } }
+    val waterHabitat: EncounterHabitat = waterSections.firstOrNull()?.groups?.firstOrNull()
+        ?.encounters?.firstOrNull()?.habitat ?: EncounterHabitat.GRASS
     private val encounters = shown.flatMap { it.groups }.flatMap { it.encounters }
     val availableMethods: List<EncounterFilter> = EncounterFilter.entries.filter { method ->
         encounters.any { method.matches(it) }
@@ -30,5 +34,19 @@ data class EncounterPeriods(val sections: List<TimedEncounters>, val selected: S
     fun toggle(period: TimeFilter): Set<EncounterTime> {
         val time = period.time ?: return EncounterTime.entries.toSet()
         return if (time in selected) selected - time else selected + time
+    }
+}
+
+private enum class EncounterSection {
+    LAND,
+    OTHER,
+    WATER;
+
+    companion object {
+        fun of(encounter: Encounter): EncounterSection = when {
+            encounter.isWater -> WATER
+            encounter.isWild -> LAND
+            else -> OTHER
+        }
     }
 }

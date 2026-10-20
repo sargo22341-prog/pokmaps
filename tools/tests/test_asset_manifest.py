@@ -8,6 +8,7 @@ import pytest
 
 from pokemaps_data.asset_manifest import MANIFEST, check_manifest, write_manifest
 from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.encounter_backgrounds import build_encounter_backgrounds
 from pokemaps_data.games import GAMES
 from pokemaps_data.hoenn_catalog import build_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, build_gen3_maps
@@ -70,6 +71,7 @@ def test_pipeline_reproduces_bundled_assets(builder: DatabaseBuilder, assets_roo
     builder.write(assets_root / "database/pokedex.db", icons)
     build_hoenn_catalog(CACHE, assets_root)
     build_sinnoh_catalog(CACHE, assets_root)
+    build_encounter_backgrounds(CACHE, assets_root)
     assert validate(assets_root / "database/pokedex.db") == []
     shutil.copytree(assets / "licenses", assets_root / "licenses")
     # Vérifie toutes les tuiles, y compris celles absentes car entièrement transparentes.

@@ -7,6 +7,7 @@ import sqlite3
 from contextlib import closing
 from pathlib import Path
 
+from .encounter_backgrounds import TERRAINS
 from .form_sprites import UNOWN
 
 MANIFEST = "assets.sha256"
@@ -19,6 +20,9 @@ def _required_paths(assets: Path) -> set[str]:
     if not database.is_file():
         raise ValueError(f"Asset indispensable absent : {database}")
     paths = {"database/pokedex.db", "licenses/meteocons.txt"}
+    paths.update(
+        f"encounter_backgrounds/{terrain.name}_{kind}.webp" for terrain in TERRAINS for kind in ("ground", "lake")
+    )
     with closing(sqlite3.connect(f"{database.resolve().as_uri()}?mode=ro", uri=True)) as connection:
         for (species,) in connection.execute("SELECT id FROM pokemon"):
             for style in ("pokemon", "pokemon/shiny"):

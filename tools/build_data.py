@@ -22,6 +22,7 @@ from pathlib import Path
 from pokemaps_data.achievement_resources import build_achievement_resources
 from pokemaps_data.asset_manifest import write_manifest
 from pokemaps_data.builder import DatabaseBuilder
+from pokemaps_data.encounter_backgrounds import build_encounter_backgrounds
 from pokemaps_data.games import ALL_GAMES, FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, Game
 from pokemaps_data.hoenn_catalog import build_hoenn_catalog
 from pokemaps_data.maps import build_maps
@@ -56,6 +57,11 @@ def _arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     _output_arguments(parser)
     maps_only = parser.add_mutually_exclusive_group()
+    maps_only.add_argument(
+        "--encounter-backgrounds-only",
+        action="store_true",
+        help="exporter les décors fixes des rencontres depuis Émeraude",
+    )
     maps_only.add_argument(
         "--sinnoh-maps-only", action="store_true", help="générer les cartes DS sans activation Android"
     )
@@ -111,6 +117,10 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.encounter_backgrounds_only:
+        build_encounter_backgrounds(args.cache, args.assets)
+        write_manifest(args.assets)
+        return 0
     if _sinnoh_preview(args):
         return 0
     if args.achievement_resources_only:
@@ -203,6 +213,7 @@ def _build_all(args: argparse.Namespace) -> int:
         return 1
     build_hoenn_catalog(args.cache, args.assets)
     build_sinnoh_catalog(args.cache, args.assets)
+    build_encounter_backgrounds(args.cache, args.assets)
     if args.assets.resolve() == DEFAULT_ASSETS.resolve():
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():

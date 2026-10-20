@@ -6,6 +6,20 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class WaterEncountersTest {
+    @Test
+    fun specialFishingTilesAndDivingStayInTheWaterZone() {
+        val fishing = encounter("feebas-tile-fishing").copy(chance = null)
+        val water = listOf(fishing, encounter("seaweed"))
+        val periods = EncounterPeriods(water.byTime(TimeFilter.ALL), EncounterTime.entries.toSet())
+        assertTrue(periods.drySections.isEmpty())
+        assertTrue(periods.waterSections.isNotEmpty())
+        val species = listOf(fishing).groupByMethod().single().species.single()
+        assertTrue(species.waterMethods.getValue(WaterMethod.SURF).isEmpty())
+        for (method in listOf(WaterMethod.OLD_ROD, WaterMethod.GOOD_ROD, WaterMethod.SUPER_ROD)) {
+            assertEquals(listOf(fishing), species.waterMethods.getValue(method))
+        }
+    }
+
     private fun encounter(method: String, chance: Double = 30.0, version: Int = 1) = Encounter(
         version, "Version", 1, "Route", 129, "Magicarpe", method, method, 1, false,
         5, 10, chance, 1, null, null

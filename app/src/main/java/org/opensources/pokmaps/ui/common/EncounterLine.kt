@@ -39,8 +39,18 @@ fun EncounterGroups(
                 WaterEncounterRows(group.species, title, spritePlace, spriteSize, caught, onClick) {
                     encounterDetails(it)
                 }
+            } else if (group.water) {
+                EncounterWaterZone(group.habitat) {
+                    EncounterWaterCard(group.habitat) {
+                        Column(Modifier.padding(12.dp)) {
+                            EncounterMethodRows(group, title, spritePlace, spriteSize, caught, onClick)
+                        }
+                    }
+                }
             } else {
-                EncounterMethodRows(group, title, spritePlace, spriteSize, caught, onClick)
+                EncounterLandSection(group.habitat, enabled = group.landscape) {
+                    EncounterMethodRows(group, title, spritePlace, spriteSize, caught, onClick)
+                }
             }
         }
     }

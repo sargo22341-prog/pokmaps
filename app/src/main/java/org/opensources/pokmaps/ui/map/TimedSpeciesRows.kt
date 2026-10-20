@@ -16,15 +16,23 @@ import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.TimedEncounters
+import org.opensources.pokmaps.domain.model.TimedMethod
 import org.opensources.pokmaps.domain.model.TimedSpecies
 import org.opensources.pokmaps.ui.common.CaughtIcon
+import org.opensources.pokmaps.ui.common.EncounterLandSection
+import org.opensources.pokmaps.ui.common.EncounterWaterCard
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
 import org.opensources.pokmaps.ui.common.WaterEncounterRows
 import org.opensources.pokmaps.ui.common.formatNumber
 
 @Composable
-internal fun TimedSpeciesRows(section: TimedEncounters, caught: Set<Int>, onOpen: (Int) -> Unit) {
+internal fun TimedSpeciesRows(
+    section: TimedEncounters,
+    caught: Set<Int>,
+    onOpen: (Int) -> Unit,
+    inWaterZone: Boolean = false
+) {
     section.methods.forEach { method ->
         if (method.aquatic) {
             WaterEncounterRows(
@@ -33,14 +41,28 @@ internal fun TimedSpeciesRows(section: TimedEncounters, caught: Set<Int>, onOpen
                 SpritePlace.MAP_LIST,
                 SpriteSize.LIST,
                 { it.pokemonId in caught },
-                { onOpen(it.pokemonId) }
+                { onOpen(it.pokemonId) },
+                inWaterZone = inWaterZone
             ) { encounterCaption(it.copy(chance = null), section.period) }
+        } else if (inWaterZone) {
+            EncounterWaterCard(method.habitat) {
+                Column(Modifier.padding(12.dp)) {
+                    TimedMethodRows(method, section.period, caught, onOpen)
+                }
+            }
         } else {
-            Text(method.name, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
-            method.species.forEach { species ->
-                TimedSpeciesRow(species, species.pokemonId in caught, section.period) { onOpen(species.pokemonId) }
+            EncounterLandSection(method.habitat, enabled = method.landscape) {
+                TimedMethodRows(method, section.period, caught, onOpen)
             }
         }
+    }
+}
+
+@Composable
+private fun TimedMethodRows(method: TimedMethod, period: TimeFilter, caught: Set<Int>, onOpen: (Int) -> Unit) {
+    Text(method.name, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+    method.species.forEach { species ->
+        TimedSpeciesRow(species, species.pokemonId in caught, period) { onOpen(species.pokemonId) }
     }
 }
 

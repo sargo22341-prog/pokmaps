@@ -43,6 +43,10 @@ Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilit�
 les méthodes indisponibles sont grisées, sans libellé visible.
 La section « Zone d’eau » sépare ces rencontres de la marche ; chaque Pokémon a un encadré
 avec ses icônes et probabilités au-dessus de son sprite et de son nom.
+Les fonds fixes reprennent uniquement les tuiles d’Émeraude pour tous les jeux : herbes, sous-bois,
+grotte, glace, sable ou sol intérieur. Une rive de lac assortie entoure l’eau et les cartes aquatiques
+ont un fond dépoli ; leurs textes restent nets. Toutes les rencontres hors eau, y compris celles
+du matin, du jour et de la nuit, précèdent l’unique bloc aquatique.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.

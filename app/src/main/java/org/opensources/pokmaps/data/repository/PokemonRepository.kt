@@ -9,6 +9,7 @@ import org.opensources.pokmaps.data.db.PokemonProfileRow
 import org.opensources.pokmaps.data.db.PokemonRow
 import org.opensources.pokmaps.domain.guide.BreedingProfile
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterHabitat
 import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.Generation
@@ -253,5 +254,6 @@ fun EncounterRow.toEncounter() = Encounter(
     conditionNames = conditionLabels.orEmpty().split('\u001e').filter { it.isNotEmpty() }.associate {
         it.substringBefore('\u001f') to it.substringAfter('\u001f')
     },
-    times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet()
+    times = conditionIdentifiers.orEmpty().split(',').mapNotNull(EncounterTime::fromCondition).toSet(),
+    habitat = EncounterHabitat.of(locationIdentifier, areaIdentifier, method)
 )

@@ -3,9 +3,19 @@ package org.opensources.pokmaps.data.repository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.opensources.pokmaps.data.db.EncounterRow
+import org.opensources.pokmaps.domain.model.EncounterHabitat
 import org.opensources.pokmaps.domain.model.EncounterTime
 
 class EncounterConversionTest {
+    @Test
+    fun stableLocationIdentifiersSelectIceRatherThanTheTranslatedName() {
+        val row = EncounterRow(
+            9, "Émeraude", 1, "Nom sans indication du terrain", 363, "Obalie", "walk", "Marche", 1, false,
+            20, 25, 50.0, 1, null, null, locationIdentifier = "shoal-cave", areaIdentifier = "b3f"
+        )
+        assertEquals(EncounterHabitat.ICE, row.toEncounter().habitat)
+    }
+
     @Test
     fun conditionIdentifiersAndLabelsReachTheRouteFilterWithoutSplittingFrenchCommas() {
         val text = "Après un badge, puis un dialogue"

@@ -66,6 +66,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--gen3-items-only`, `--gen3-trainers-only` | Aperçu GBA avec objets, puis équipes |
 | `--gen3-curation-only` | Rapport éditorial `character_curation.json` |
 | `--achievement-resources-only` | Ressources Android des succès depuis les archives locales |
+| `--encounter-backgrounds-only` | Textures fixes des rencontres, tirées des métatuiles d’Émeraude, puis inventaire |
 | `--application-only` | Génération complète des jeux actifs, sans aperçu supplémentaire des jeux en cours |
 | `--reuse-gen3-maps` | Réutilisation des tuiles GBA validées ; uniquement si leurs sources épinglées sont inchangées |
 | `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
