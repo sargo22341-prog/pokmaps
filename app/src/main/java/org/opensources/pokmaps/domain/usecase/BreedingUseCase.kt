@@ -46,13 +46,28 @@ class BreedingUseCase @Inject constructor(
                 firstSex == ParentSex.FEMALE -> first
                 else -> second
             }
-            val root = requireNotNull(mother.evolutions.singleOrNull())
-            val ids = when (root.pokemonId) {
+            // Manaphy et Phione partagent une famille PokéAPI sans lien d’évolution.
+            val root = if (mother.id in
+                489..490
+            ) {
+                mother.id
+            } else {
+                requireNotNull(mother.evolutions.singleOrNull()).pokemonId
+            }
+            val ids = when (root) {
                 29 -> listOf(29, 32)
                 314 -> listOf(314, 313)
                 298 -> listOf(298, 183)
                 360 -> listOf(360, 202)
-                else -> listOf(root.pokemonId)
+                406 -> listOf(406, 315)
+                433 -> listOf(433, 358)
+                438 -> listOf(438, 185)
+                439 -> listOf(439, 122)
+                440 -> listOf(440, 113)
+                446 -> listOf(446, 143)
+                458 -> listOf(458, 226)
+                490 -> listOf(489)
+                else -> listOf(root)
             }
             val babies = ids.map { requireNotNull(pokemon.details(game, it)) }
             BreedingPair(first, second, babies, game.generationId)

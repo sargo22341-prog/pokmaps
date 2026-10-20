@@ -29,7 +29,8 @@ data class ParentValues(
     val special: Int? = null,
     val moves: List<Int> = emptyList(),
     val item: BreedingItem = BreedingItem.NONE,
-    val ivs: List<Int?> = List(6) { null }
+    val ivs: List<Int?> = List(6) { null },
+    val foreignLanguage: Boolean = false
 ) {
     init {
         require(defense == null || defense in 0..15)
@@ -65,8 +66,7 @@ object BreedingRules {
         when (Generation.of(pair.generationId)) {
             Generation.GEN1 -> error("Jeu sans reproduction")
             Generation.GEN2 -> Unit
-            Generation.GEN4 -> error("Outil de reproduction Sinnoh non disponible")
-            Generation.GEN3 -> return BreedingStatus.COMPATIBLE
+            Generation.GEN3, Generation.GEN4 -> return BreedingStatus.COMPATIBLE
         }
         if (first.defense == null || second.defense == null || first.special == null || second.special == null) {
             return BreedingStatus.POSSIBLE

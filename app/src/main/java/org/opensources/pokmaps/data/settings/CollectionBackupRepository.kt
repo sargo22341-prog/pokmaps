@@ -48,6 +48,8 @@ class CollectionBackupRepository @Inject constructor(
                 preferences[key("caught_form_$version")] = merged.forms[version].orEmpty()
                 val progress = merged.guides[version] ?: GuideProgress()
                 preferences[key("guide_completed_$version")] = progress.completed
+                preferences[key("sinnoh_roamers_$version")] =
+                    progress.roamerObservations.map { (id, place) -> "$id:$place" }.toSet()
                 if (UnownForm.available(game).isNotEmpty()) {
                     preferences[key("caught_unown_$version")] =
                         merged.unown[version].orEmpty().map { it.identifier }.toSet()
@@ -62,7 +64,10 @@ class CollectionBackupRepository @Inject constructor(
             preferences[key("caught_pokemon_$version")].orEmpty().map { it.toInt() }.toSet()
         }
         val guides = games.map { it.versionId }.associateWith { version ->
-            GuideProgress(preferences[key("guide_completed_$version")].orEmpty())
+            GuideProgress(
+                preferences[key("guide_completed_$version")].orEmpty(),
+                readRoamerObservations(preferences, version)
+            )
         }
         val unown = games.filter {
             UnownForm.available(it).isNotEmpty()
@@ -89,7 +94,10 @@ internal fun merge(current: CollectionBackup, imported: CollectionBackup): Colle
     val guides = (current.guides.keys + imported.guides.keys).associateWith {
         val existing = current.guides[it] ?: GuideProgress()
         val incoming = imported.guides[it] ?: GuideProgress()
-        GuideProgress(existing.completed + incoming.completed)
+        GuideProgress(
+            existing.completed + incoming.completed,
+            existing.roamerObservations + incoming.roamerObservations
+        )
     }
     val unown = (current.unown.keys + imported.unown.keys).associateWith {
         current.unown[it].orEmpty() +

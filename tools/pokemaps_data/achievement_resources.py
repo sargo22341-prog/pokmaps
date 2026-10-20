@@ -22,7 +22,7 @@ class _Achievement:
 
 def _translations() -> dict[int, tuple[int, list[dict[str, str]]]]:
     versions: dict[int, tuple[int, list[dict[str, str]]]] = {}
-    for filename in ("gen12_fr.csv", "gen3_fr.csv"):
+    for filename in ("gen12_fr.csv", "gen3_fr.csv", "gen4_fr.csv"):
         with (DATA_DIR / "retroachievements" / filename).open(encoding="utf-8", newline="") as source:
             for row in csv.DictReader(source):
                 version, game = int(row["version_id"]), int(row["game_id"])

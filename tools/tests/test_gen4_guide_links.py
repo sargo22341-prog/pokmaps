@@ -17,7 +17,7 @@ def test_explicit_guide_links_exist_in_their_own_game(database: Path, group: int
         places = {row[0] for row in connection.execute("SELECT identifier FROM map WHERE version_group_id=?", (group,))}
         pokemon = {row[0] for row in connection.execute("SELECT id FROM pokemon WHERE generation_id<=4")}
     files = sorted(_RESOURCES.glob("strings_guides_sinnoh*.xml"))
-    assert len(files) == 3
+    assert len(files) == 4
     for path in files:
         for resource in ET.parse(path).getroot():
             name = resource.attrib["name"]

@@ -24,6 +24,7 @@ data class CollectionBackup(
 
 fun validateGuideProgress(version: Int, progress: GuideProgress) {
     require(version > 0)
+    SinnohRoamerObservations.validate(version, progress.roamerObservations)
     require(progress.completed.size <= 500 && progress.completed.all { it.matches(ARTICLE_ID) })
 }
 

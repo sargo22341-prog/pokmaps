@@ -20,6 +20,7 @@ import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.GbaBreeding
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
+import org.opensources.pokmaps.domain.guide.SinnohBreeding
 import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.PokedexEntry
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
@@ -51,19 +52,31 @@ data class BreedingUiState(
     val status: BreedingStatus? = pair?.let { BreedingRules.status(it, first, second) }
     val possible: Boolean = status == BreedingStatus.POSSIBLE || status == BreedingStatus.COMPATIBLE
     val gba: Boolean = when (catalog?.game?.generation) {
-        Generation.GEN4 -> error("Outil de reproduction Sinnoh non disponible")
+        Generation.GEN4 -> false
 
         null, Generation.GEN1,
         Generation.GEN2 -> false
 
         Generation.GEN3 -> true
     }
-    val babies = pair?.let { if (gba) GbaBreeding.babies(it, first, second) else it.babies }.orEmpty()
+    val sinnoh: Boolean = catalog?.game?.generation == Generation.GEN4
+    val ivBased: Boolean = gba || sinnoh
+    val babies = pair?.let {
+        when {
+            sinnoh -> SinnohBreeding.babies(it, first, second)
+            gba -> GbaBreeding.babies(it, first, second)
+            else -> it.babies
+        }
+    }.orEmpty()
     val babyAbilities: List<Pair<String, String>> = babies.map { child ->
         child.name to child.traits.abilities.joinToString { it.name }
     }
     val natureParent: Int? = pair?.let { selected ->
-        catalog?.game?.let { GbaBreeding.natureParent(selected, first, second, it.versionGroup) }
+        if (sinnoh) {
+            SinnohBreeding.natureParent(selected, first, second)
+        } else {
+            catalog?.game?.let { GbaBreeding.natureParent(selected, first, second, it.versionGroup) }
+        }
     }
     val firstMoves: List<LearnedMove> = pair?.first?.let {
         (it.levelUpMoves + it.machineMoves + it.eggMoves + it.tutorMoves).distinctBy { move ->
@@ -84,7 +97,9 @@ data class BreedingUiState(
             val firstDonor = BreedingRules.donorIsFirst(requireNotNull(pair), first, second)
             val donor = if (firstDonor) first.moves else second.moves
             val other = if (firstDonor) second.moves else first.moves
-            child.id to if (gba) {
+            child.id to if (sinnoh) {
+                SinnohBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))
+            } else if (gba) {
                 GbaBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))
             } else {
                 BreedingRules.inherited(child, donor, other)

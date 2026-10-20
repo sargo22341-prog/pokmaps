@@ -182,6 +182,23 @@ class GuideViewModelTest {
         assertEquals(MapRequest.ShowSecretBase(42), requests.pending.value)
     }
 
+    @Test
+    fun sinnohObservationsCanBeRecordedClearedAndFailWithoutAFalseSuccess() = runTest {
+        val guides = MemoryGuides()
+        guides.value.value = GuideLibrary(FakeGameDao.PLATINUM, listOf(article("sinnoh-roamers"))) to GuideProgress()
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
+        model.onAction(GuideAction.Article("sinnoh-roamers"))
+        assertEquals(5, model.state.value.roamers.size)
+        model.onAction(GuideAction.ObserveRoamer(481, "route-201"))
+        assertEquals("route-201", model.state.value.progress.roamerObservations[481])
+        model.onAction(GuideAction.ObserveRoamer(481, null))
+        assertTrue(model.state.value.progress.roamerObservations.isEmpty())
+        guides.failing = true
+        model.onAction(GuideAction.ObserveRoamer(488, "route-202"))
+        assertTrue(model.state.value.writeFailed)
+        assertTrue(model.state.value.progress.roamerObservations.isEmpty())
+    }
+
     private fun article(id: String) =
         GuideArticle(id, id, GuideCategory.TIP, listOf(listOf(GuideSpan(id))), 25, emptyList())
 
@@ -211,6 +228,13 @@ private class MemoryGuides : Guides {
         }
     } else {
         value
+    }
+    override suspend fun observeRoamer(version: Int, pokemon: Int, place: String?) {
+        if (failing) error("Disque plein")
+        val (library, progress) = value.value
+        val observations = progress.roamerObservations.toMutableMap()
+        if (place == null) observations.remove(pokemon) else observations[pokemon] = place
+        value.value = library to progress.copy(roamerObservations = observations)
     }
     override suspend fun complete(versionId: Int, id: String, completed: Boolean): Unit = error("Écriture impossible")
 }

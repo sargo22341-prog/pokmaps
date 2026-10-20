@@ -50,7 +50,7 @@ data class GuideLibrary(
     }
 }
 
-data class GuideProgress(val completed: Set<String> = emptySet())
+data class GuideProgress(val completed: Set<String> = emptySet(), val roamerObservations: Map<Int, String> = emptyMap())
 
 /** Les balises sont validées une fois lors du chargement, avant le rendu. */
 fun parseGuideText(text: String, resolve: (String, String) -> GuideTarget): List<List<GuideSpan>> {

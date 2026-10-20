@@ -1,0 +1,433 @@
+version_id,game_id,achievement_id,title_fr,description_fr,chapter
+12,9852,360974,Battre l’Étourmi rencontré au Lac Vérité en utilisant uniquement l’écran tactile,Battre l’Étourmi rencontré au Lac Vérité en utilisant uniquement l’écran tactile.,sinnoh-start
+12,9852,360975,Obtenir le Pokédex,Obtenir le Pokédex.,sinnoh-start
+12,9852,360976,Obtenir la Pokémontre,Obtenir la Pokémontre.,sinnoh-start
+12,9852,360977,Battre Pierrick et obtenir le Badge Charbon,Battre Pierrick et obtenir le Badge Charbon.,sinnoh-oreburgh
+12,9852,360978,Battre Pierrick avec une équipe d’au plus 3 Pokémon de niveau 14 ou moins,Battre Pierrick avec une équipe d’au plus 3 Pokémon de niveau 14 ou moins.,sinnoh-oreburgh
+12,9852,360979,"Battre tous les Dresseurs de l’Arène de Pierrick sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Pierrick sans sortir, au cours d’une seule session.",sinnoh-oreburgh
+12,9852,360980,Battre Mars aux Éoliennes,Battre Mars aux Éoliennes.,sinnoh-start
+12,9852,360981,Mettre K.O. le Leveinard de Sara en un tour dans la Forêt de Vestigion,Mettre K.O. le Leveinard de Sara en un tour dans la Forêt de Vestigion.,sinnoh-eterna
+12,9852,360982,Battre Flo et obtenir le Badge Forêt,Battre Flo et obtenir le Badge Forêt.,sinnoh-eterna
+12,9852,360983,Battre Flo avec une équipe d’au plus 3 Pokémon de niveau 20 ou moins,Battre Flo avec une équipe d’au plus 3 Pokémon de niveau 20 ou moins.,sinnoh-eterna
+12,9852,360984,"Battre tous les Dresseurs de l’Arène de Flo sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Flo sans sortir, au cours d’une seule session.",sinnoh-eterna
+12,9852,360985,Obtenir tous les objets et battre tous les Dresseurs à Vestigion,Obtenir tous les objets et battre tous les Dresseurs à Vestigion.,sinnoh-eterna
+12,9852,360986,Atteindre Célestia sans avoir jamais obtenu la CS Anti-Brume,Atteindre Célestia sans avoir jamais obtenu la CS Anti-Brume.,sinnoh-start
+12,9852,360987,Battre Mélina et obtenir le Badge Pavé,Battre Mélina et obtenir le Badge Pavé.,sinnoh-veilstone
+12,9852,360988,Battre Mélina avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins,Battre Mélina avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins.,sinnoh-veilstone
+12,9852,360989,"Battre tous les Dresseurs de l’Arène de Mélina sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Mélina sans sortir, au cours d’une seule session.",sinnoh-veilstone
+12,9852,360990,Battre Lovis et obtenir le Badge Palustre,Battre Lovis et obtenir le Badge Palustre.,sinnoh-pastoria
+12,9852,360991,Battre Lovis avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins,Battre Lovis avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins.,sinnoh-pastoria
+12,9852,360992,"Battre tous les Dresseurs de l’Arène de Lovis sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Lovis sans sortir, au cours d’une seule session.",sinnoh-pastoria
+12,9852,360993,Obtenir un remède spécial,Obtenir un remède spécial.,sinnoh-start
+12,9852,360994,Battre Kiméra et obtenir le Badge Fantôme,Battre Kiméra et obtenir le Badge Fantôme.,sinnoh-hearthome
+12,9852,360995,Battre Kiméra avec une équipe d’au plus 3 Pokémon de niveau 34 ou moins,Battre Kiméra avec une équipe d’au plus 3 Pokémon de niveau 34 ou moins.,sinnoh-hearthome
+12,9852,360996,"Battre tous les Dresseurs de l’Arène de Kiméra sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Kiméra sans sortir, au cours d’une seule session.",sinnoh-hearthome
+12,9852,360997,Battre Charles et obtenir le Badge Mine,Battre Charles et obtenir le Badge Mine.,sinnoh-canalave
+12,9852,360998,Battre Charles avec une équipe d’au plus 3 Pokémon de niveau 37 ou moins,Battre Charles avec une équipe d’au plus 3 Pokémon de niveau 37 ou moins.,sinnoh-canalave
+12,9852,360999,"Battre tous les Dresseurs de l’Arène de Charles sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Charles sans sortir, au cours d’une seule session.",sinnoh-canalave
+12,9852,361000,Obtenir tous les objets et battre tous les Dresseurs au Lac Courage,Obtenir tous les objets et battre tous les Dresseurs au Lac Courage.,sinnoh-start
+12,9852,361001,Battre Gladys et obtenir le Badge Glaçon,Battre Gladys et obtenir le Badge Glaçon.,sinnoh-snowpoint
+12,9852,361002,Battre Gladys avec une équipe d’au plus 4 Pokémon de niveau 40 ou moins,Battre Gladys avec une équipe d’au plus 4 Pokémon de niveau 40 ou moins.,sinnoh-snowpoint
+12,9852,361003,"Battre tous les Dresseurs de l’Arène de Gladys sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Gladys sans sortir, au cours d’une seule session.",sinnoh-snowpoint
+12,9852,361004,Obtenir tous les objets et battre tous les Dresseurs à Voilaroc avant de battre Saturne au QG…,Obtenir tous les objets et battre tous les Dresseurs à Voilaroc avant de battre Saturne au QG Galaxie.,sinnoh-veilstone
+12,9852,361005,Voir l’animation alternative avec Baudrive lors de l’apparition de Dialga,Voir l’animation alternative avec Baudrive lors de l’apparition de Dialga.,sinnoh-summit
+12,9852,361006,Battre Tanguy et obtenir le Badge Phare,Battre Tanguy et obtenir le Badge Phare.,sinnoh-league
+12,9852,361007,Battre Tanguy avec une équipe d’au plus 4 Pokémon de niveau 47 ou moins,Battre Tanguy avec une équipe d’au plus 4 Pokémon de niveau 47 ou moins.,sinnoh-league
+12,9852,361008,"Battre tous les Dresseurs de l’Arène de Tanguy sans sortir, au cours d’une seule session","Battre tous les Dresseurs de l’Arène de Tanguy sans sortir, au cours d’une seule session.",sinnoh-league
+12,9852,361009,Battre le Conseil 4 et Cynthia pour devenir Maître de Sinnoh,Battre le Conseil 4 et Cynthia pour devenir Maître de Sinnoh.,sinnoh-league
+12,9852,361010,"Battre Cynthia avec une équipe composée uniquement des familles de Mélofée, Rondoudou, M. Mime,…","Battre Cynthia avec une équipe composée uniquement des familles de Mélofée, Rondoudou, M. Mime, Togekiss, Marill, Granbull, Gardevoir, ainsi que Mysdibule, qui auront le type Fée dans les générations suivantes.",sinnoh-league
+12,9852,361012,Faire améliorer le Pokédex en Pokédex National par le Professeur Chen,Faire améliorer le Pokédex en Pokédex National par le Professeur Chen.,sinnoh-national
+12,9852,361013,"Capturer Créhelf au Lac Savoir, un Créfollet errant et Créfadet au Lac Courage","Capturer Créhelf au Lac Savoir, un Créfollet errant et Créfadet au Lac Courage.",sinnoh-roamers
+12,9852,361014,Capturer Dialga aux Colonnes Lances,Capturer Dialga aux Colonnes Lances.,sinnoh-summit
+12,9852,361015,Capturer Giratina à la Grotte Retour,Capturer Giratina à la Grotte Retour.,sinnoh-summit
+12,9852,361016,Capturer un Cresselia errant,Capturer un Cresselia errant.,sinnoh-roamers
+12,9852,361017,Capturer Heatran au Mont Abrupt,Capturer Heatran au Mont Abrupt.,sinnoh-postgame
+12,9852,361018,Voir dix formes différentes de Zarbi,Voir dix formes différentes de Zarbi.,sinnoh-national
+12,9852,361019,Voir les 28 formes de Zarbi,Voir les 28 formes de Zarbi.,sinnoh-national
+12,9852,361020,Capturer tous les Pokémon accessibles du Pokédex de Sinnoh dans Diamant,Capturer tous les Pokémon accessibles du Pokédex de Sinnoh dans Diamant.,sinnoh-national
+12,9852,361021,Voir tous les Pokémon possibles du Pokédex National,Voir tous les Pokémon possibles du Pokédex National.,sinnoh-national
+12,9852,361022,Effectuer tous les échanges internes au jeu,Effectuer tous les échanges internes au jeu.,sinnoh-start
+12,9852,361023,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Joliberges et…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Joliberges et l’Île de Fer.,sinnoh-canalave
+12,9852,361024,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forêt de…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forêt de Vestigion et le Vieux Château.,sinnoh-eterna
+12,9852,361025,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forge Fuego,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forge Fuego.,sinnoh-start
+12,9852,361026,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Unionpolis,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Unionpolis.,sinnoh-hearthome
+12,9852,361027,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Savoir…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Savoir et Frimapic.,sinnoh-snowpoint
+12,9852,361028,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Vérité…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Vérité et Bonaugure.,sinnoh-start
+12,9852,361029,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Tour Perdue,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Tour Perdue.,sinnoh-start
+12,9852,361030,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Couronné,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Couronné.,sinnoh-start
+12,9852,361031,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : l’Entrée…,"Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : l’Entrée Charbourg, Charbourg et la Mine Charbourg.",sinnoh-oreburgh
+12,9852,361032,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Verchamps et…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Verchamps et le Grand Marais.,sinnoh-pastoria
+12,9852,361033,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 202…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 202 et Féli-Cité.,sinnoh-start
+12,9852,361034,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 203,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 203.,sinnoh-oreburgh
+12,9852,361035,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 204…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 204 et le Chemin Rocheux.,sinnoh-oreburgh
+12,9852,361036,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 205,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 205.,sinnoh-eterna
+12,9852,361037,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 206,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 206.,sinnoh-eterna
+12,9852,361038,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 207,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 207.,sinnoh-eterna
+12,9852,361039,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 208,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 208.,sinnoh-hearthome
+12,9852,361040,"Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 209,…","Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 209, Bonville et les Ruines de Bonville.",sinnoh-gifts
+12,9852,361041,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 210,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 210.,sinnoh-veilstone
+12,9852,361042,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 211,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 211.,sinnoh-veilstone
+12,9852,361043,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 212…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 212 et le Manoir Pokémon.,sinnoh-hearthome
+12,9852,361044,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 213,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 213.,sinnoh-pastoria
+12,9852,361045,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 214…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 214 et le Tunnel du Ruinemaniac.,sinnoh-pastoria
+12,9852,361046,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 215,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 215.,sinnoh-veilstone
+12,9852,361047,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 216,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 216.,sinnoh-snowpoint
+12,9852,361048,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 217,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 217.,sinnoh-snowpoint
+12,9852,361049,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 218,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 218.,sinnoh-canalave
+12,9852,361050,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 219,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 219.,sinnoh-canalave
+12,9852,361051,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 220,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 220.,sinnoh-canalave
+12,9852,361052,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 221,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 221.,sinnoh-canalave
+12,9852,361053,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 222,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 222.,sinnoh-league
+12,9852,361054,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 223…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 223 et Rivamar.,sinnoh-league
+12,9852,361055,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 224,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 224.,sinnoh-national
+12,9852,361056,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 225,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 225.,sinnoh-postgame
+12,9852,361057,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 226…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 226 et l’Aire de Survie.,sinnoh-postgame
+12,9852,361058,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 227,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 227.,sinnoh-postgame
+12,9852,361059,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 228,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 228.,sinnoh-postgame
+12,9852,361060,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 229,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 229.,sinnoh-postgame
+12,9852,361061,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 230…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 230 et le Parc des Combats.,sinnoh-postgame
+12,9852,361062,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Abrupt,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Abrupt.,sinnoh-postgame
+12,9852,361063,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : les Éoliennes…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : les Éoliennes et le Pré Floraville.,sinnoh-eterna
+12,9852,361064,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route…,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route Victoire et la Ligue Pokémon.,sinnoh-league
+12,9852,361065,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Grotte Revêche,Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Grotte Revêche.,sinnoh-start
+12,9852,361066,"Depuis la Route 219, atteindre une case sous le Pêcheur de la Route 221 en 95 pas au maximum","Depuis la Route 219, atteindre une case sous le Pêcheur de la Route 221 en 95 pas au maximum.",sinnoh-canalave
+12,9852,361067,Se placer devant chaque emplacement de baie de Sinnoh au cours d’une seule session,Se placer devant chaque emplacement de baie de Sinnoh au cours d’une seule session.,sinnoh-daily
+12,9852,361068,Cuisiner son premier Poffin,Cuisiner son premier Poffin.,sinnoh-hearthome
+12,9852,361069,Gagner un Concours Grâce de rang Normal pour recevoir l’accessoire Barrette Rose,Gagner un Concours Grâce de rang Normal pour recevoir l’accessoire Barrette Rose.,sinnoh-hearthome
+12,9852,361070,Gagner un Concours Sang-froid de rang Normal pour recevoir l’accessoire Barrette Rouge,Gagner un Concours Sang-froid de rang Normal pour recevoir l’accessoire Barrette Rouge.,sinnoh-hearthome
+12,9852,361071,Gagner un Concours Beauté de rang Normal pour recevoir l’accessoire Barrette Bleue,Gagner un Concours Beauté de rang Normal pour recevoir l’accessoire Barrette Bleue.,sinnoh-hearthome
+12,9852,361072,Gagner un Concours Robustesse de rang Normal pour recevoir l’accessoire Barrette Jaune,Gagner un Concours Robustesse de rang Normal pour recevoir l’accessoire Barrette Jaune.,sinnoh-hearthome
+12,9852,361073,Gagner un Concours Intelligence de rang Normal pour recevoir l’accessoire Barrette Verte,Gagner un Concours Intelligence de rang Normal pour recevoir l’accessoire Barrette Verte.,sinnoh-hearthome
+12,9852,361074,Gagner un Concours Grâce de rang Méga pour recevoir l’accessoire Ballon Rose,Gagner un Concours Grâce de rang Méga pour recevoir l’accessoire Ballon Rose.,sinnoh-hearthome
+12,9852,361075,Gagner un Concours Sang-froid de rang Méga pour recevoir l’accessoire Ballons Rouges,Gagner un Concours Sang-froid de rang Méga pour recevoir l’accessoire Ballons Rouges.,sinnoh-hearthome
+12,9852,361076,Gagner un Concours Beauté de rang Méga pour recevoir l’accessoire Ballons Bleus,Gagner un Concours Beauté de rang Méga pour recevoir l’accessoire Ballons Bleus.,sinnoh-hearthome
+12,9852,361077,Gagner un Concours Robustesse de rang Méga pour recevoir l’accessoire Ballon Jaune,Gagner un Concours Robustesse de rang Méga pour recevoir l’accessoire Ballon Jaune.,sinnoh-hearthome
+12,9852,361078,Gagner un Concours Intelligence de rang Méga pour recevoir l’accessoire Ballons Verts,Gagner un Concours Intelligence de rang Méga pour recevoir l’accessoire Ballons Verts.,sinnoh-hearthome
+12,9852,361079,Gagner un Concours Grâce de rang Ultra pour recevoir l’accessoire Coiffe Dentelle,Gagner un Concours Grâce de rang Ultra pour recevoir l’accessoire Coiffe Dentelle.,sinnoh-hearthome
+12,9852,361080,Gagner un Concours Sang-froid de rang Ultra pour recevoir l’accessoire Haut-de-forme,Gagner un Concours Sang-froid de rang Ultra pour recevoir l’accessoire Haut-de-forme.,sinnoh-hearthome
+12,9852,361081,Gagner un Concours Beauté de rang Ultra pour recevoir l’accessoire Voile de Soie,Gagner un Concours Beauté de rang Ultra pour recevoir l’accessoire Voile de Soie.,sinnoh-hearthome
+12,9852,361082,Gagner un Concours Robustesse de rang Ultra pour recevoir l’accessoire Bandeau Héroïque,Gagner un Concours Robustesse de rang Ultra pour recevoir l’accessoire Bandeau Héroïque.,sinnoh-hearthome
+12,9852,361083,Gagner un Concours Intelligence de rang Ultra pour recevoir l’accessoire Chapeau Prof,Gagner un Concours Intelligence de rang Ultra pour recevoir l’accessoire Chapeau Prof.,sinnoh-hearthome
+12,9852,361084,Gagner un Concours Grâce de rang Master pour recevoir l’accessoire Scène Fleurie,Gagner un Concours Grâce de rang Master pour recevoir l’accessoire Scène Fleurie.,sinnoh-hearthome
+12,9852,361085,Gagner un Concours Sang-froid de rang Master pour recevoir l’accessoire Piédestal Doré,Gagner un Concours Sang-froid de rang Master pour recevoir l’accessoire Piédestal Doré.,sinnoh-hearthome
+12,9852,361086,Gagner un Concours Beauté de rang Master pour recevoir l’accessoire Scène de Verre,Gagner un Concours Beauté de rang Master pour recevoir l’accessoire Scène de Verre.,sinnoh-hearthome
+12,9852,361087,Gagner un Concours Robustesse de rang Master pour recevoir l’accessoire Podium,Gagner un Concours Robustesse de rang Master pour recevoir l’accessoire Podium.,sinnoh-hearthome
+12,9852,361088,Gagner un Concours Intelligence de rang Master pour recevoir l’accessoire Scène Cubique,Gagner un Concours Intelligence de rang Master pour recevoir l’accessoire Scène Cubique.,sinnoh-hearthome
+12,9852,361089,"Après vingt victoires dans la salle de Combat Solo de la Tour de Combat, battre Koner","Après vingt victoires dans la salle de Combat Solo de la Tour de Combat, battre Koner.",sinnoh-postgame
+12,9852,361090,"Après 48 victoires dans la salle de Combat Solo de la Tour de Combat, battre à nouveau Koner","Après 48 victoires dans la salle de Combat Solo de la Tour de Combat, battre à nouveau Koner.",sinnoh-postgame
+12,9852,361091,Obtenir toutes les applications possibles de la Pokémontre,Obtenir toutes les applications possibles de la Pokémontre.,sinnoh-start
+12,9852,361092,Apprendre la moitié des mots à la mode auprès du vieil homme de Frimapic,Apprendre la moitié des mots à la mode auprès du vieil homme de Frimapic.,sinnoh-snowpoint
+12,9852,361093,Apprendre tous les mots à la mode auprès du vieil homme de Frimapic,Apprendre tous les mots à la mode auprès du vieil homme de Frimapic.,sinnoh-snowpoint
+12,9852,361094,Créer sa Base Secrète dans le Souterrain,Créer sa Base Secrète dans le Souterrain.,sinnoh-fossils
+12,9852,361095,Monter sur sa Bicyclette à Vestigion sans l’utiliser depuis le Sac ni l’assigner à un bouton,Monter sur sa Bicyclette à Vestigion sans l’utiliser depuis le Sac ni l’assigner à un bouton.,sinnoh-eterna
+13,25369,493568,Écouter tout ce que le rival raconte pendant l’escapade depuis Bonaugure,Écouter tout ce que le rival raconte pendant l’escapade depuis Bonaugure.,sinnoh-start
+13,25369,493582,Recevoir l’échantillon de Potion sur la Route 201,Recevoir l’échantillon de Potion sur la Route 201.,sinnoh-start
+13,25369,493533,Recevoir officiellement son Pokémon de départ,Recevoir officiellement son Pokémon de départ.,sinnoh-start
+13,25369,493584,Recevoir la Canne,Recevoir la Canne.,sinnoh-start
+13,25369,493583,Battre les deux élèves de l’École de Dresseurs et recevoir la CT10 Puissance Cachée,Battre les deux élèves de l’École de Dresseurs et recevoir la CT10 Puissance Cachée.,sinnoh-start
+13,25369,493534,Livrer le Colis au rival,Livrer le Colis au rival.,sinnoh-start
+13,25369,493535,Échanger ses Bons et recevoir la Pokémontre,Échanger ses Bons et recevoir la Pokémontre.,sinnoh-start
+13,25369,493536,Battre le rival sur la Route 203,Battre le rival sur la Route 203.,sinnoh-oreburgh
+13,25369,493537,Recevoir la CS06 Éclate-Roc,Recevoir la CS06 Éclate-Roc.,sinnoh-start
+13,25369,493586,Échanger un Machoc contre un Abra à Charbourg,Échanger un Machoc contre un Abra à Charbourg.,sinnoh-oreburgh
+13,25369,493681,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Charbourg,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Charbourg.,sinnoh-oreburgh
+13,25369,493538,Obtenir le Badge Charbon,Obtenir le Badge Charbon.,sinnoh-oreburgh
+13,25369,493585,Recevoir le Registre Ami,Recevoir le Registre Ami.,sinnoh-start
+13,25369,493539,S’allier à l’assistant de Sorbier et battre les Sbires qui l’importunent,S’allier à l’assistant de Sorbier et battre les Sbires qui l’importunent.,sinnoh-start
+13,25369,498297,Enregistrer sa position au terminal d’échange mondial de Féli-Cité,Enregistrer sa position au terminal d’échange mondial de Féli-Cité.,sinnoh-start
+13,25369,493633,Débloquer le Cadeau Mystère,Débloquer le Cadeau Mystère.,sinnoh-start
+13,25369,493650,Habiller un Pokémon dans le vestiaire de Féli-Télé,Habiller un Pokémon dans le vestiaire de Féli-Télé.,sinnoh-start
+13,25369,493651,"Le lundi, battre le Journaliste dans le bâtiment de Féli-Télé","Le lundi, battre le Journaliste dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493652,"Le mardi, battre le Caméraman dans le bâtiment de Féli-Télé","Le mardi, battre le Caméraman dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493653,"Le mercredi, battre le Clown dans le bâtiment de Féli-Télé","Le mercredi, battre le Clown dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493654,"Le jeudi, battre les Interviewers dans le bâtiment de Féli-Télé","Le jeudi, battre les Interviewers dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493655,"Le vendredi, battre le Poké Enfant dans le bâtiment de Féli-Télé","Le vendredi, battre le Poké Enfant dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493656,"Le samedi, battre le Guitariste dans le bâtiment de Féli-Télé","Le samedi, battre le Guitariste dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493657,"Le dimanche, battre la Star dans le bâtiment de Féli-Télé","Le dimanche, battre la Star dans le bâtiment de Féli-Télé.",sinnoh-daily
+13,25369,493587,Recevoir le Kwakarrosoir,Recevoir le Kwakarrosoir.,sinnoh-start
+13,25369,493682,Battre tous les Sbires dans les lieux suivants : les Éoliennes,Battre tous les Sbires dans les lieux suivants : les Éoliennes.,sinnoh-start
+13,25369,493540,Battre Mars aux Éoliennes,Battre Mars aux Éoliennes.,sinnoh-start
+13,25369,493634,Capturer un Baudrive,Capturer un Baudrive.,sinnoh-friday
+13,25369,493637,Capturer un Goinfrex,Capturer un Goinfrex.,sinnoh-honey
+13,25369,493569,Écouter tout ce que Sara raconte,Écouter tout ce que Sara raconte.,sinnoh-start
+13,25369,493541,Aider Sara à traverser la Forêt de Vestigion,Aider Sara à traverser la Forêt de Vestigion.,sinnoh-eterna
+13,25369,493542,Rencontrer Cynthia et recevoir la CS01 Coupe,Rencontrer Cynthia et recevoir la CS01 Coupe.,sinnoh-league
+13,25369,493588,Échanger un Mustébouée contre un Pijako à Vestigion,Échanger un Mustébouée contre un Pijako à Vestigion.,sinnoh-eterna
+13,25369,493589,Recevoir l’Explorakit,Recevoir l’Explorakit.,sinnoh-fossils
+13,25369,493543,Obtenir le Badge Forêt,Obtenir le Badge Forêt.,sinnoh-eterna
+13,25369,493683,Battre tous les Dresseurs dans les lieux suivants : le Bâtiment Galaxie de Vestigion,Battre tous les Dresseurs dans les lieux suivants : le Bâtiment Galaxie de Vestigion.,sinnoh-eterna
+13,25369,493544,Battre Jupiter au Bâtiment Galaxie de Vestigion,Battre Jupiter au Bâtiment Galaxie de Vestigion.,sinnoh-eterna
+13,25369,498295,Recevoir le Multi Exp de l’assistant de Sorbier dans la porte au sud de Vestigion,Recevoir le Multi Exp de l’assistant de Sorbier dans la porte au sud de Vestigion.,sinnoh-eterna
+13,25369,493570,Écouter tout ce que Mira raconte,Écouter tout ce que Mira raconte.,sinnoh-start
+13,25369,493638,Aider Mira à sortir de la Grotte Revêche,Aider Mira à sortir de la Grotte Revêche.,sinnoh-start
+13,25369,493545,Recevoir le Cherch’Combat et le Radar à objets de l’assistant de Sorbier,Recevoir le Cherch’Combat et le Radar à objets de l’assistant de Sorbier.,sinnoh-start
+13,25369,493546,Battre le rival à Unionpolis,Battre le rival à Unionpolis.,sinnoh-hearthome
+13,25369,493590,Recevoir un Œuf de Pokémon du Montagnard à Unionpolis,Recevoir un Œuf de Pokémon du Montagnard à Unionpolis.,sinnoh-gifts
+13,25369,493641,Rencontrer la créatrice du système de stockage des Pokémon,Rencontrer la créatrice du système de stockage des Pokémon.,sinnoh-start
+13,25369,493591,Recevoir la Boîte Poffin,Recevoir la Boîte Poffin.,sinnoh-hearthome
+13,25369,493660,Recevoir un cadeau de son Pokémon au Square Paisible,Recevoir un cadeau de son Pokémon au Square Paisible.,sinnoh-start
+13,25369,493592,Recevoir la Super Canne,Recevoir la Super Canne.,sinnoh-start
+13,25369,493642,Restaurer la Tour Sacrée,Restaurer la Tour Sacrée.,sinnoh-gifts
+13,25369,493547,Recevoir la CS04 Force,Recevoir la CS04 Force.,sinnoh-start
+13,25369,493643,Obtenir le trésor des Ruines de Bonville,Obtenir le trésor des Ruines de Bonville.,sinnoh-gifts
+13,25369,493593,Recevoir la Boîte Sceaux,Recevoir la Boîte Sceaux.,sinnoh-start
+13,25369,493594,Recevoir la Boîte Jetons,Recevoir la Boîte Jetons.,sinnoh-start
+13,25369,498296,Accomplir une mission des Dépêches Pokémon à Bonville,Accomplir une mission des Dépêches Pokémon à Bonville.,sinnoh-start
+13,25369,493684,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Voilaroc,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Voilaroc.,sinnoh-veilstone
+13,25369,493548,Obtenir le Badge Pavé,Obtenir le Badge Pavé.,sinnoh-veilstone
+13,25369,493549,Aider l’assistant de Sorbier à reprendre son Pokédex aux Sbires Galaxie,Aider l’assistant de Sorbier à reprendre son Pokédex aux Sbires Galaxie.,sinnoh-start
+13,25369,493596,Obtenir la CS02 Vol,Obtenir la CS02 Vol.,sinnoh-start
+13,25369,493644,Terminer le tunnel de la Grotte du Ruinemaniac et en atteindre le bout,Terminer le tunnel de la Grotte du Ruinemaniac et en atteindre le bout.,sinnoh-canalave
+13,25369,493597,Aider une femme à retrouver la clé de sa suite et recevoir la récompense,Aider une femme à retrouver la clé de sa suite et recevoir la récompense.,sinnoh-start
+13,25369,493617,Recevoir un Ruban du Dr Petitpas,Recevoir un Ruban du Dr Petitpas.,friendship
+13,25369,493598,Recevoir le Bracelet Macho du passionné de Cheniti à Verchamps,Recevoir le Bracelet Macho du passionné de Cheniti à Verchamps.,sinnoh-pastoria
+13,25369,493645,Observer des Pokémon du Grand Marais avec les jumelles,Observer des Pokémon du Grand Marais avec les jumelles.,sinnoh-pastoria
+13,25369,493599,Recevoir la CS05 Anti-Brume,Recevoir la CS05 Anti-Brume.,sinnoh-start
+13,25369,493646,"Au Grand Marais, lancer trois boules de boue sur un Pokémon puis le capturer sans jamais…","Au Grand Marais, lancer trois boules de boue sur un Pokémon puis le capturer sans jamais utiliser d’appât.",sinnoh-pastoria
+13,25369,493647,"Au Grand Marais, lancer trois appâts sur un Pokémon puis le capturer sans jamais utiliser de boue","Au Grand Marais, lancer trois appâts sur un Pokémon puis le capturer sans jamais utiliser de boue.",sinnoh-pastoria
+13,25369,493648,"Au Grand Marais, lancer une boule de boue parfaite, qui diminue seulement le taux de fuite du…","Au Grand Marais, lancer une boule de boue parfaite, qui diminue seulement le taux de fuite du Pokémon.",sinnoh-pastoria
+13,25369,493649,"Au Grand Marais, lancer un appât parfait, qui augmente seulement le taux de capture du Pokémon","Au Grand Marais, lancer un appât parfait, qui augmente seulement le taux de capture du Pokémon.",sinnoh-pastoria
+13,25369,493685,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Verchamps,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Verchamps.,sinnoh-pastoria
+13,25369,493550,Obtenir le Badge Palustre,Obtenir le Badge Palustre.,sinnoh-pastoria
+13,25369,493551,Battre le rival à Verchamps,Battre le rival à Verchamps.,sinnoh-pastoria
+13,25369,493552,Recevoir de Cynthia le remède secret contre les maux de tête des Pokémon,Recevoir de Cynthia le remède secret contre les maux de tête des Pokémon.,sinnoh-league
+13,25369,493658,Faire apprendre Draco Météore à un Pokémon par Mamie Bertille,Faire apprendre Draco Météore à un Pokémon par Mamie Bertille.,sinnoh-start
+13,25369,493611,Recevoir tous les types de lunettes de l’homme du magasin de Célestia,Recevoir tous les types de lunettes de l’homme du magasin de Célestia.,sinnoh-start
+13,25369,493553,Recevoir la CS03 Surf,Recevoir la CS03 Surf.,sinnoh-start
+13,25369,493686,Battre tous les Dresseurs dans les lieux suivants : l’Arène d’Unionpolis,Battre tous les Dresseurs dans les lieux suivants : l’Arène d’Unionpolis.,sinnoh-hearthome
+13,25369,493554,Obtenir le Badge Fantôme,Obtenir le Badge Fantôme.,sinnoh-hearthome
+13,25369,493600,Recevoir un cadeau de M. Fuego à la Forge Fuego,Recevoir un cadeau de M. Fuego à la Forge Fuego.,sinnoh-start
+13,25369,493614,Recevoir une Ceinture Noire du vieil homme de la Route 221,Recevoir une Ceinture Noire du vieil homme de la Route 221.,sinnoh-canalave
+13,25369,493615,Recevoir une Ceinture Pro du vieil homme de la Route 221,Recevoir une Ceinture Pro du vieil homme de la Route 221.,sinnoh-canalave
+13,25369,493616,Recevoir une Ceinture Force du vieil homme de la Route 221,Recevoir une Ceinture Force du vieil homme de la Route 221.,sinnoh-canalave
+13,25369,493601,Faire améliorer le Pokédex pour qu’il affiche les différentes formes des Pokémon,Faire améliorer le Pokédex pour qu’il affiche les différentes formes des Pokémon.,sinnoh-start
+13,25369,493555,Battre le rival à Joliberges,Battre le rival à Joliberges.,sinnoh-canalave
+13,25369,493571,Écouter tout ce qu’Armand raconte,Écouter tout ce qu’Armand raconte.,sinnoh-start
+13,25369,493602,Recevoir un Œuf de Pokémon d’Armand après l’avoir aidé,Recevoir un Œuf de Pokémon d’Armand après l’avoir aidé.,sinnoh-gifts
+13,25369,493687,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Joliberges,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Joliberges.,sinnoh-canalave
+13,25369,493556,Obtenir le Badge Mine,Obtenir le Badge Mine.,sinnoh-canalave
+13,25369,493635,Capturer un Griknot,Capturer un Griknot.,sinnoh-start
+13,25369,493688,Battre tous les Sbires et récupérer l’objet caché dans le Lac Courage asséché,Battre tous les Sbires et récupérer l’objet caché dans le Lac Courage asséché.,sinnoh-start
+13,25369,493557,Battre Saturne dans la Caverne Courage,Battre Saturne dans la Caverne Courage.,sinnoh-start
+13,25369,493689,Battre tous les Sbires dans les lieux suivants : le Lac Vérité,Battre tous les Sbires dans les lieux suivants : le Lac Vérité.,sinnoh-start
+13,25369,493558,Battre Mars au Lac Vérité,Battre Mars au Lac Vérité.,sinnoh-start
+13,25369,493636,Capturer un Barpau,Capturer un Barpau.,sinnoh-start
+13,25369,493559,Trouver la CS08 Escalade,Trouver la CS08 Escalade.,sinnoh-start
+13,25369,493604,Tenter de rendre la CS08 à son propriétaire et recevoir la récompense,Tenter de rendre la CS08 à son propriétaire et recevoir la récompense.,sinnoh-start
+13,25369,493605,Subir la trahison de l’échange d’un Charmina contre un Spectrum à Frimapic,Subir la trahison de l’échange d’un Charmina contre un Spectrum à Frimapic.,sinnoh-snowpoint
+13,25369,493690,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Frimapic,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Frimapic.,sinnoh-snowpoint
+13,25369,493560,Obtenir le Badge Glaçon,Obtenir le Badge Glaçon.,sinnoh-snowpoint
+13,25369,493691,Battre tous les Sbires dans les lieux suivants : l’Entrepôt Galaxie et le QG Galaxie,Battre tous les Sbires dans les lieux suivants : l’Entrepôt Galaxie et le QG Galaxie.,sinnoh-start
+13,25369,493561,Battre Hélio au QG Galaxie et recevoir la Master Ball,Battre Hélio au QG Galaxie et recevoir la Master Ball.,sinnoh-summit
+13,25369,493562,Libérer les gardiens des lacs,Libérer les gardiens des lacs.,sinnoh-start
+13,25369,493692,Battre tous les Sbires dans les lieux suivants : le Mont Couronné,Battre tous les Sbires dans les lieux suivants : le Mont Couronné.,sinnoh-start
+13,25369,493563,Battre Hélio aux Colonnes Lances,Battre Hélio aux Colonnes Lances.,sinnoh-summit
+13,25369,493572,Capturer Palkia,Capturer Palkia.,sinnoh-summit
+13,25369,493573,Capturer Créhelf,Capturer Créhelf.,sinnoh-start
+13,25369,493574,Capturer Créfollet,Capturer Créfollet.,sinnoh-roamers
+13,25369,493575,Capturer Créfadet,Capturer Créfadet.,sinnoh-start
+13,25369,493659,"Voir l’image de l’autre être ancien ayant créé Sinnoh, montrée par la grand-mère de Cynthia","Voir l’image de l’autre être ancien ayant créé Sinnoh, montrée par la grand-mère de Cynthia.",sinnoh-league
+13,25369,493612,Battre le record avec un énorme Rémoraid et recevoir la récompense,Battre le record avec un énorme Rémoraid et recevoir la récompense.,sinnoh-start
+13,25369,493613,Obtenir toutes les applications Pokémontre du développeur indépendant à Rivamar,Obtenir toutes les applications Pokémontre du développeur indépendant à Rivamar.,sinnoh-league
+13,25369,493618,Recevoir un Ruban Effort de la femme au marché de Rivamar,Recevoir un Ruban Effort de la femme au marché de Rivamar.,friendship
+13,25369,493619,Faire remettre par Julie tous les Rubans hebdomadaires à un seul Pokémon et ouvrir son résumé,Faire remettre par Julie tous les Rubans hebdomadaires à un seul Pokémon et ouvrir son résumé.,sinnoh-start
+13,25369,493693,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Rivamar,Battre tous les Dresseurs dans les lieux suivants : l’Arène de Rivamar.,sinnoh-league
+13,25369,493564,Obtenir le Badge Phare,Obtenir le Badge Phare.,sinnoh-league
+13,25369,493565,Recevoir la CS07 Cascade de Jasmine,Recevoir la CS07 Cascade de Jasmine.,sinnoh-canalave
+13,25369,493566,Battre le rival à la Ligue Pokémon,Battre le rival à la Ligue Pokémon.,sinnoh-league
+13,25369,493567,"Battre Cynthia, la Maîtresse de Sinnoh","Battre Cynthia, la Maîtresse de Sinnoh.",sinnoh-league
+13,25369,493606,Obtenir le mode National du Pokédex,Obtenir le mode National du Pokédex.,sinnoh-national
+13,25369,493661,Apprendre l’essaim du jour auprès de la petite sœur de l’assistant de Sorbier,Apprendre l’essaim du jour auprès de la petite sœur de l’assistant de Sorbier.,sinnoh-start
+13,25369,493663,Apprendre quel Pokémon inhabituel visite le Jardin Trophée,Apprendre quel Pokémon inhabituel visite le Jardin Trophée.,sinnoh-start
+13,25369,493607,Recevoir une Améliorator du Professeur Chen à Vestigion,Recevoir une Améliorator du Professeur Chen à Vestigion.,sinnoh-eterna
+13,25369,493595,Recevoir un Évoli d’Amelle,Recevoir un Évoli d’Amelle.,sinnoh-start
+13,25369,493577,Capturer Motisma,Capturer Motisma.,sinnoh-rotom
+13,25369,493576,Écouter tout ce que Viviane raconte,Écouter tout ce que Viviane raconte.,sinnoh-start
+13,25369,493662,Aider Viviane à traverser la Route Victoire,Aider Viviane à traverser la Route Victoire.,sinnoh-start
+13,25369,493664,Soigner le fils du marin avec la Lun’Aile,Soigner le fils du marin avec la Lun’Aile.,sinnoh-roamers
+13,25369,493578,Capturer Cresselia,Capturer Cresselia.,sinnoh-roamers
+13,25369,493603,Recevoir une Peau Métal de Charles sur l’Île de Fer,Recevoir une Peau Métal de Charles sur l’Île de Fer.,sinnoh-canalave
+13,25369,493580,Capturer Giratina,Capturer Giratina.,sinnoh-summit
+13,25369,493665,"Recevoir une Poussière Étoile, un Os Rare et un Tissu Fauche à la Grotte Retour au cours d’une…","Recevoir une Poussière Étoile, un Os Rare et un Tissu Fauche à la Grotte Retour au cours d’une même session.",sinnoh-start
+13,25369,493608,Obtenir du réalisateur le diplôme pour avoir vu tous les Pokémon de Sinnoh,Obtenir du réalisateur le diplôme pour avoir vu tous les Pokémon de Sinnoh.,sinnoh-national
+13,25369,493609,Recevoir la Méga Canne,Recevoir la Méga Canne.,sinnoh-start
+13,25369,493610,Échanger un Écayon contre un Magicarpe étranger sur la Route 226,Échanger un Écayon contre un Magicarpe étranger sur la Route 226.,sinnoh-postgame
+13,25369,493673,Faire apprendre une capacité ultime à un Pokémon par le vieil homme de la Route 228,Faire apprendre une capacité ultime à un Pokémon par le vieil homme de la Route 228.,sinnoh-postgame
+13,25369,493674,Devenir membre du Club Ruban,Devenir membre du Club Ruban.,sinnoh-start
+13,25369,493579,Écouter tout ce que Cornil raconte,Écouter tout ce que Cornil raconte.,sinnoh-start
+13,25369,493666,Aider Cornil à traverser le Mont Abrupt,Aider Cornil à traverser le Mont Abrupt.,sinnoh-postgame
+13,25369,493581,Capturer Heatran,Capturer Heatran.,sinnoh-start
+13,25369,493675,Battre le rival à l’Aire de Combat,Battre le rival à l’Aire de Combat.,sinnoh-start
+13,25369,498298,"Atteindre vingt victoires de suite dans la salle de Combat Solo de la Tour de Combat, puis…","Atteindre vingt victoires de suite dans la salle de Combat Solo de la Tour de Combat, puis battre Koner.",sinnoh-postgame
+13,25369,498299,"Atteindre 48 victoires de suite dans la salle de Combat Solo de la Tour de Combat, puis battre…","Atteindre 48 victoires de suite dans la salle de Combat Solo de la Tour de Combat, puis battre à nouveau Koner.",sinnoh-postgame
+13,25369,493639,Récolter une baie dont le plant a reçu du paillis,Récolter une baie dont le plant a reçu du paillis.,sinnoh-daily
+13,25369,493640,Récolter quinze baies sur un seul plant,Récolter quinze baies sur un seul plant.,sinnoh-daily
+13,25369,493628,Planter une baie dans chaque case de sol meuble au cours d’une seule session,Planter une baie dans chaque case de sol meuble au cours d’une seule session.,sinnoh-daily
+13,25369,493632,Gagner un objet à la loterie,Gagner un objet à la loterie.,sinnoh-daily
+13,25369,493629,Accomplir toutes les activités quotidiennes en une seule journée,Accomplir toutes les activités quotidiennes en une seule journée.,sinnoh-daily
+13,25369,493680,Battre tous les Dresseurs présents au restaurant des Sept Étoiles au cours d’une journée,Battre tous les Dresseurs présents au restaurant des Sept Étoiles au cours d’une journée.,sinnoh-daily
+13,25369,493672,Voir tous les phénomènes surnaturels du Vieux Château au cours d’une seule visite,Voir tous les phénomènes surnaturels du Vieux Château au cours d’une seule visite.,sinnoh-start
+13,25369,493667,Gagner un Super Concours Sang-froid de rang Master,Gagner un Super Concours Sang-froid de rang Master.,sinnoh-hearthome
+13,25369,493668,Gagner un Super Concours Beauté de rang Master,Gagner un Super Concours Beauté de rang Master.,sinnoh-hearthome
+13,25369,493669,Gagner un Super Concours Grâce de rang Master,Gagner un Super Concours Grâce de rang Master.,sinnoh-hearthome
+13,25369,493670,Gagner un Super Concours Intelligence de rang Master,Gagner un Super Concours Intelligence de rang Master.,sinnoh-hearthome
+13,25369,493671,Gagner un Super Concours Robustesse de rang Master,Gagner un Super Concours Robustesse de rang Master.,sinnoh-hearthome
+13,25369,493676,Obtenir quatre cœurs de Style et au moins neuf cœurs au total dans l’épreuve visuelle d’un…,Obtenir quatre cœurs de Style et au moins neuf cœurs au total dans l’épreuve visuelle d’un Super Concours de rang Master.,sinnoh-hearthome
+13,25369,493677,Terminer l’épreuve de danse d’un Super Concours de rang Master avec le maximum de points possible,Terminer l’épreuve de danse d’un Super Concours de rang Master avec le maximum de points possible.,sinnoh-hearthome
+13,25369,493678,Obtenir au moins vingt cœurs dans l’épreuve de comédie d’un Super Concours de rang Master,Obtenir au moins vingt cœurs dans l’épreuve de comédie d’un Super Concours de rang Master.,sinnoh-hearthome
+13,25369,493679,Cuisiner un Poffin sans débordement ni brûlure en moins de quarante secondes,Cuisiner un Poffin sans débordement ni brûlure en moins de quarante secondes.,sinnoh-hearthome
+13,25369,493621,Accomplir les cinq premières missions de l’Homme du Souterrain,Accomplir les cinq premières missions de l’Homme du Souterrain.,sinnoh-fossils
+13,25369,493620,Obtenir toutes les Écharpes colorées en montrant des Pokémon aux qualités remarquables au…,Obtenir toutes les Écharpes colorées en montrant des Pokémon aux qualités remarquables au Dresseur de Verchamps.,sinnoh-pastoria
+13,25369,493627,Récupérer toutes les Plaques éparpillées dans Sinnoh. Les Plaques déterrées ne sont ni requises…,Récupérer toutes les Plaques éparpillées dans Sinnoh. Les Plaques déterrées ne sont ni requises ni comptabilisées.,sinnoh-start
+13,25369,493622,Obtenir toutes les applications Pokémontre accessibles,Obtenir toutes les applications Pokémontre accessibles.,sinnoh-start
+13,25369,493625,Obtenir tous les Sceaux accessibles,Obtenir tous les Sceaux accessibles.,sinnoh-start
+13,25369,493630,Obtenir tous les papiers peints des Boîtes du PC,Obtenir tous les papiers peints des Boîtes du PC.,sinnoh-start
+13,25369,493626,Apprendre tous les mots à la mode,Apprendre tous les mots à la mode.,sinnoh-start
+13,25369,493631,Voir au moins une fois toutes les formes de Zarbi,Voir au moins une fois toutes les formes de Zarbi.,sinnoh-national
+13,25369,493623,Enregistrer dans le Pokédex la moitié des Pokémon accessibles,Enregistrer dans le Pokédex la moitié des Pokémon accessibles.,sinnoh-start
+13,25369,493624,Enregistrer dans le Pokédex tous les Pokémon accessibles,Enregistrer dans le Pokédex tous les Pokémon accessibles.,sinnoh-national
+13,25369,493697,"Récupérer tous les objets au sol dans les lieux suivants : Bonaugure, la Route 201, la Rive du…","Récupérer tous les objets au sol dans les lieux suivants : Bonaugure, la Route 201, la Rive du Lac Vérité, le Lac Vérité, Littorella et la Route 202.",sinnoh-start
+13,25369,493715,"Récupérer tous les objets au sol dans les lieux suivants : Féli-Cité, la Route 203, l’Entrée…","Récupérer tous les objets au sol dans les lieux suivants : Féli-Cité, la Route 203, l’Entrée Charbourg, Charbourg, la Mine Charbourg, la Route 204 et le Chemin Rocheux.",sinnoh-oreburgh
+13,25369,493700,"Récupérer tous les objets au sol dans les lieux suivants : Floraville, le Pré Floraville, la…","Récupérer tous les objets au sol dans les lieux suivants : Floraville, le Pré Floraville, la Route 205, les Éoliennes et la Forge Fuego.",sinnoh-eterna
+13,25369,493712,"Récupérer tous les objets au sol dans les lieux suivants : la Forêt de Vestigion, le Vieux…","Récupérer tous les objets au sol dans les lieux suivants : la Forêt de Vestigion, le Vieux Château, Vestigion, la Route 206 et la Grotte Revêche.",sinnoh-eterna
+13,25369,493709,"Récupérer tous les objets au sol dans les lieux suivants : la Route 207, la Route 208 et la…","Récupérer tous les objets au sol dans les lieux suivants : la Route 207, la Route 208 et la Route 211.",sinnoh-eterna
+13,25369,493706,"Récupérer tous les objets au sol dans les lieux suivants : Unionpolis, le Square Paisible, la…","Récupérer tous les objets au sol dans les lieux suivants : Unionpolis, le Square Paisible, la Route 209, la Tour Perdue, Bonville et les Ruines de Bonville.",sinnoh-gifts
+13,25369,493729,"Récupérer tous les objets au sol dans les lieux suivants : la Route 210, la Route 215 et Célestia","Récupérer tous les objets au sol dans les lieux suivants : la Route 210, la Route 215 et Célestia.",sinnoh-veilstone
+13,25369,493732,"Récupérer tous les objets au sol dans les lieux suivants : Voilaroc, la Route 214, la Rive du…","Récupérer tous les objets au sol dans les lieux suivants : Voilaroc, la Route 214, la Rive du Lac Courage et le Lac Courage.",sinnoh-veilstone
+13,25369,493726,"Récupérer tous les objets au sol dans les lieux suivants : la Route 213, Verchamps, le Grand…","Récupérer tous les objets au sol dans les lieux suivants : la Route 213, Verchamps, le Grand Marais, la Route 212 et le Manoir Pokémon.",sinnoh-pastoria
+13,25369,493735,"Récupérer tous les objets au sol dans les lieux suivants : la Route 218, Joliberges, l’Île de…","Récupérer tous les objets au sol dans les lieux suivants : la Route 218, Joliberges, l’Île de Fer, la Route 219, la Route 220 et la Route 221.",sinnoh-canalave
+13,25369,493724,Récupérer tous les objets au sol dans les lieux suivants : le Mont Couronné,Récupérer tous les objets au sol dans les lieux suivants : le Mont Couronné.,sinnoh-start
+13,25369,493718,"Récupérer tous les objets au sol dans les lieux suivants : la Route 216, la Route 217, la Rive…","Récupérer tous les objets au sol dans les lieux suivants : la Route 216, la Route 217, la Rive du Lac Savoir, le Lac Savoir et Frimapic.",sinnoh-snowpoint
+13,25369,493721,"Récupérer tous les objets au sol dans les lieux suivants : la Route 222, Rivamar et la Route 223","Récupérer tous les objets au sol dans les lieux suivants : la Route 222, Rivamar et la Route 223.",sinnoh-league
+13,25369,493703,"Récupérer tous les objets au sol dans les lieux suivants : la Route Victoire, la Route 224 et…","Récupérer tous les objets au sol dans les lieux suivants : la Route Victoire, la Route 224 et la Ligue Pokémon.",sinnoh-league
+13,25369,493694,Récupérer tous les objets au sol dans les lieux suivants : le Secteur Combat,Récupérer tous les objets au sol dans les lieux suivants : le Secteur Combat.,sinnoh-postgame
+13,25369,493698,"Battre tous les Dresseurs dans les lieux suivants : Bonaugure, la Route 201, la Rive du Lac…","Battre tous les Dresseurs dans les lieux suivants : Bonaugure, la Route 201, la Rive du Lac Vérité, le Lac Vérité, Littorella et la Route 202.",sinnoh-start
+13,25369,493716,"Battre tous les Dresseurs dans les lieux suivants : Féli-Cité, la Route 203, l’Entrée…","Battre tous les Dresseurs dans les lieux suivants : Féli-Cité, la Route 203, l’Entrée Charbourg, Charbourg, la Mine Charbourg, la Route 204 et le Chemin Rocheux.",sinnoh-oreburgh
+13,25369,493701,"Battre tous les Dresseurs dans les lieux suivants : Floraville, le Pré Floraville, la Route…","Battre tous les Dresseurs dans les lieux suivants : Floraville, le Pré Floraville, la Route 205, les Éoliennes et la Forge Fuego.",sinnoh-eterna
+13,25369,493713,"Battre tous les Dresseurs dans les lieux suivants : la Forêt de Vestigion, le Vieux Château,…","Battre tous les Dresseurs dans les lieux suivants : la Forêt de Vestigion, le Vieux Château, Vestigion, la Route 206 et la Grotte Revêche.",sinnoh-eterna
+13,25369,493710,"Battre tous les Dresseurs dans les lieux suivants : la Route 207, la Route 208 et la Route 211","Battre tous les Dresseurs dans les lieux suivants : la Route 207, la Route 208 et la Route 211.",sinnoh-eterna
+13,25369,493707,"Battre tous les Dresseurs dans les lieux suivants : Unionpolis, le Square Paisible, la Route…","Battre tous les Dresseurs dans les lieux suivants : Unionpolis, le Square Paisible, la Route 209, la Tour Perdue, Bonville et les Ruines de Bonville.",sinnoh-gifts
+13,25369,493730,"Battre tous les Dresseurs dans les lieux suivants : la Route 210, la Route 215 et Célestia","Battre tous les Dresseurs dans les lieux suivants : la Route 210, la Route 215 et Célestia.",sinnoh-veilstone
+13,25369,493733,"Battre tous les Dresseurs dans les lieux suivants : Voilaroc, la Route 214, la Rive du Lac…","Battre tous les Dresseurs dans les lieux suivants : Voilaroc, la Route 214, la Rive du Lac Courage et le Lac Courage.",sinnoh-veilstone
+13,25369,493727,"Battre tous les Dresseurs dans les lieux suivants : la Route 213, Verchamps, le Grand Marais,…","Battre tous les Dresseurs dans les lieux suivants : la Route 213, Verchamps, le Grand Marais, la Route 212 et le Manoir Pokémon.",sinnoh-pastoria
+13,25369,493736,"Battre tous les Dresseurs dans les lieux suivants : la Route 218, Joliberges, l’Île de Fer, la…","Battre tous les Dresseurs dans les lieux suivants : la Route 218, Joliberges, l’Île de Fer, la Route 219, la Route 220 et la Route 221.",sinnoh-canalave
+13,25369,493719,"Battre tous les Dresseurs dans les lieux suivants : la Route 216, la Route 217, la Rive du Lac…","Battre tous les Dresseurs dans les lieux suivants : la Route 216, la Route 217, la Rive du Lac Savoir, le Lac Savoir et Frimapic.",sinnoh-snowpoint
+13,25369,493722,"Battre tous les Dresseurs dans les lieux suivants : la Route 222, Rivamar et la Route 223","Battre tous les Dresseurs dans les lieux suivants : la Route 222, Rivamar et la Route 223.",sinnoh-league
+13,25369,493704,"Battre tous les Dresseurs dans les lieux suivants : la Route Victoire, la Route 224 et la Ligue…","Battre tous les Dresseurs dans les lieux suivants : la Route Victoire, la Route 224 et la Ligue Pokémon.",sinnoh-league
+13,25369,493695,Battre tous les Dresseurs dans les lieux suivants : le Secteur Combat,Battre tous les Dresseurs dans les lieux suivants : le Secteur Combat.,sinnoh-postgame
+13,25369,493699,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Bonaugure, la Route 201, la…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Bonaugure, la Route 201, la Rive du Lac Vérité, le Lac Vérité, Littorella et la Route 202.",sinnoh-start
+13,25369,493717,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Féli-Cité, la Route 203,…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Féli-Cité, la Route 203, l’Entrée Charbourg, Charbourg, la Mine Charbourg, la Route 204 et le Chemin Rocheux.",sinnoh-oreburgh
+13,25369,493702,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Floraville, le Pré…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Floraville, le Pré Floraville, la Route 205, les Éoliennes et la Forge Fuego.",sinnoh-eterna
+13,25369,493714,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Forêt de Vestigion, le…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Forêt de Vestigion, le Vieux Château, Vestigion, la Route 206 et la Grotte Revêche.",sinnoh-eterna
+13,25369,493711,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 207, la Route 208…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 207, la Route 208 et la Route 211.",sinnoh-eterna
+13,25369,493708,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Unionpolis, le Square…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Unionpolis, le Square Paisible, la Route 209, la Tour Perdue, Bonville et les Ruines de Bonville.",sinnoh-gifts
+13,25369,493731,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 210, la Route 215…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 210, la Route 215 et Célestia.",sinnoh-veilstone
+13,25369,493734,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Voilaroc, la Route 214, la…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : Voilaroc, la Route 214, la Rive du Lac Courage et le Lac Courage.",sinnoh-veilstone
+13,25369,493728,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 213, Verchamps, le…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 213, Verchamps, le Grand Marais, la Route 212 et le Manoir Pokémon.",sinnoh-pastoria
+13,25369,493737,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 218, Joliberges,…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 218, Joliberges, l’Île de Fer, la Route 219, la Route 220 et la Route 221.",sinnoh-canalave
+13,25369,493725,Obtenir tous les objets cachés et cadeaux dans les lieux suivants : le Mont Couronné,Obtenir tous les objets cachés et cadeaux dans les lieux suivants : le Mont Couronné.,sinnoh-start
+13,25369,493720,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 216, la Route 217,…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 216, la Route 217, la Rive du Lac Savoir, le Lac Savoir et Frimapic.",sinnoh-snowpoint
+13,25369,493723,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 222, Rivamar et la…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route 222, Rivamar et la Route 223.",sinnoh-league
+13,25369,493705,"Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route Victoire, la Route…","Obtenir tous les objets cachés et cadeaux dans les lieux suivants : la Route Victoire, la Route 224 et la Ligue Pokémon.",sinnoh-league
+13,25369,493696,Obtenir tous les objets cachés et cadeaux dans les lieux suivants : le Secteur Combat,Obtenir tous les objets cachés et cadeaux dans les lieux suivants : le Secteur Combat.,sinnoh-postgame
+14,11732,91200,Battre Pierrick et obtenir le Badge Charbon,Battre Pierrick et obtenir le Badge Charbon.,sinnoh-oreburgh
+14,11732,91201,Battre Flo et obtenir le Badge Forêt,Battre Flo et obtenir le Badge Forêt.,sinnoh-eterna
+14,11732,91202,Battre Mélina et obtenir le Badge Pavé,Battre Mélina et obtenir le Badge Pavé.,sinnoh-veilstone
+14,11732,91203,Battre Lovis et obtenir le Badge Palustre,Battre Lovis et obtenir le Badge Palustre.,sinnoh-pastoria
+14,11732,91204,Battre Kiméra et obtenir le Badge Fantôme,Battre Kiméra et obtenir le Badge Fantôme.,sinnoh-hearthome
+14,11732,91205,Battre Charles et obtenir le Badge Mine,Battre Charles et obtenir le Badge Mine.,sinnoh-canalave
+14,11732,91206,Battre Gladys et obtenir le Badge Glaçon,Battre Gladys et obtenir le Badge Glaçon.,sinnoh-snowpoint
+14,11732,91207,Battre Tanguy et obtenir le Badge Phare,Battre Tanguy et obtenir le Badge Phare.,sinnoh-league
+14,11732,91208,Battre le Conseil 4 et Cynthia à la Ligue Pokémon pour devenir Maître,Battre le Conseil 4 et Cynthia à la Ligue Pokémon pour devenir Maître.,sinnoh-league
+14,11732,95752,Battre Pierrick en revanche au Café Combat,Battre Pierrick en revanche au Café Combat.,sinnoh-postgame
+14,11732,95751,Battre Flo en revanche au Café Combat,Battre Flo en revanche au Café Combat.,sinnoh-postgame
+14,11732,95753,Battre Mélina en revanche au Café Combat,Battre Mélina en revanche au Café Combat.,sinnoh-postgame
+14,11732,95754,Battre Lovis en revanche au Café Combat,Battre Lovis en revanche au Café Combat.,sinnoh-postgame
+14,11732,95755,Battre Kiméra en revanche au Café Combat,Battre Kiméra en revanche au Café Combat.,sinnoh-postgame
+14,11732,95756,Battre Charles en revanche au Café Combat,Battre Charles en revanche au Café Combat.,sinnoh-postgame
+14,11732,95757,Battre Gladys en revanche au Café Combat,Battre Gladys en revanche au Café Combat.,sinnoh-postgame
+14,11732,95758,Battre Tanguy en revanche au Café Combat,Battre Tanguy en revanche au Café Combat.,sinnoh-postgame
+14,11732,95759,Battre Sara en revanche au Café Combat,Battre Sara en revanche au Café Combat.,sinnoh-postgame
+14,11732,95760,Battre Cornil en revanche au Café Combat,Battre Cornil en revanche au Café Combat.,sinnoh-postgame
+14,11732,95761,Battre Viviane en revanche au Café Combat,Battre Viviane en revanche au Café Combat.,sinnoh-postgame
+14,11732,95762,Battre Armand en revanche au Café Combat,Battre Armand en revanche au Café Combat.,sinnoh-postgame
+14,11732,95763,Battre Mira en revanche au Café Combat,Battre Mira en revanche au Café Combat.,sinnoh-postgame
+14,11732,95749,Battre le rival à l’Aire de Survie,Battre le rival à l’Aire de Survie.,sinnoh-postgame
+14,11732,91209,Être à nouveau sacré Maître de la Ligue Pokémon,Être à nouveau sacré Maître de la Ligue Pokémon.,sinnoh-league
+14,11732,95750,Battre le rival à l’Aire de Survie avec sa dernière équipe,Battre le rival à l’Aire de Survie avec sa dernière équipe.,sinnoh-postgame
+14,11732,91472,Battre Koner et obtenir la Photo Argent de la Tour de Combat,Battre Koner et obtenir la Photo Argent de la Tour de Combat.,sinnoh-postgame
+14,11732,91473,Battre à nouveau Koner et obtenir la Photo Or de la Tour de Combat,Battre à nouveau Koner et obtenir la Photo Or de la Tour de Combat.,sinnoh-postgame
+14,11732,381776,Atteindre cent victoires consécutives en mode Solo à la Tour de Combat pour débloquer une…,Atteindre cent victoires consécutives en mode Solo à la Tour de Combat pour débloquer une étoile de Dresseur.,sinnoh-postgame
+14,11732,91474,Battre Cardus et obtenir la Photo Argent de l’Usine de Combat,Battre Cardus et obtenir la Photo Argent de l’Usine de Combat.,sinnoh-postgame
+14,11732,91475,Battre à nouveau Cardus et obtenir la Photo Or de l’Usine de Combat,Battre à nouveau Cardus et obtenir la Photo Or de l’Usine de Combat.,sinnoh-postgame
+14,11732,91476,Atteindre une série de trente échanges à l’Usine de Combat,Atteindre une série de trente échanges à l’Usine de Combat.,sinnoh-postgame
+14,11732,91477,Battre Argenta et obtenir la Photo Argent du Hall de Combat,Battre Argenta et obtenir la Photo Argent du Hall de Combat.,sinnoh-postgame
+14,11732,91478,Battre à nouveau Argenta et obtenir la Photo Or du Hall de Combat,Battre à nouveau Argenta et obtenir la Photo Or du Hall de Combat.,sinnoh-postgame
+14,11732,91479,Battre Parsley et obtenir la Photo Argent du Castel de Combat,Battre Parsley et obtenir la Photo Argent du Castel de Combat.,sinnoh-postgame
+14,11732,91480,Battre à nouveau Parsley et obtenir la Photo Or du Castel de Combat,Battre à nouveau Parsley et obtenir la Photo Or du Castel de Combat.,sinnoh-postgame
+14,11732,91481,Économiser au moins 1 500 PC en même temps au Castel de Combat,Économiser au moins 1 500 PC en même temps au Castel de Combat.,sinnoh-postgame
+14,11732,91482,Battre Dahlia et obtenir la Photo Argent de la Scène de Combat,Battre Dahlia et obtenir la Photo Argent de la Scène de Combat.,sinnoh-postgame
+14,11732,91483,Battre à nouveau Dahlia et obtenir la Photo Or de la Scène de Combat,Battre à nouveau Dahlia et obtenir la Photo Or de la Scène de Combat.,sinnoh-postgame
+14,11732,91487,"Capturer Giratina au bout du Monde Distorsion après avoir battu Hélio, ou après l’énigme de la…","Capturer Giratina au bout du Monde Distorsion après avoir battu Hélio, ou après l’énigme de la Grotte Retour.",sinnoh-summit
+14,11732,91488,Capturer Dialga en interagissant avec le portail bleu au sommet des Colonnes Lances,Capturer Dialga en interagissant avec le portail bleu au sommet des Colonnes Lances.,sinnoh-summit
+14,11732,91489,Capturer Palkia en interagissant avec le portail rose au sommet des Colonnes Lances,Capturer Palkia en interagissant avec le portail rose au sommet des Colonnes Lances.,sinnoh-summit
+14,11732,91493,Capturer Heatran dans la salle la plus profonde du Mont Abrupt,Capturer Heatran dans la salle la plus profonde du Mont Abrupt.,sinnoh-postgame
+14,11732,91490,Capturer Créhelf dans la caverne du Lac Savoir,Capturer Créhelf dans la caverne du Lac Savoir.,sinnoh-start
+14,11732,91491,Capturer Créfollet après l’avoir traqué,Capturer Créfollet après l’avoir traqué.,sinnoh-roamers
+14,11732,91492,Capturer Créfadet dans la caverne du Lac Courage,Capturer Créfadet dans la caverne du Lac Courage.,sinnoh-start
+14,11732,91494,Capturer Cresselia après l’avoir traquée,Capturer Cresselia après l’avoir traquée.,sinnoh-roamers
+14,11732,91495,Capturer Artikodin après l’avoir traqué,Capturer Artikodin après l’avoir traqué.,sinnoh-roamers
+14,11732,91496,Capturer Électhor après l’avoir traqué,Capturer Électhor après l’avoir traqué.,sinnoh-roamers
+14,11732,91497,Capturer Sulfura après l’avoir traqué,Capturer Sulfura après l’avoir traqué.,sinnoh-roamers
+14,11732,91628,Capturer Baudrive devant les Éoliennes un vendredi,Capturer Baudrive devant les Éoliennes un vendredi.,sinnoh-friday
+14,11732,91629,Capturer Motisma en interagissant avec le téléviseur possédé du Vieux Château,Capturer Motisma en interagissant avec le téléviseur possédé du Vieux Château.,sinnoh-rotom
+14,11732,94103,Capturer un Magicarpe de niveau 100 en pêchant à l’Aire de Détente,Capturer un Magicarpe de niveau 100 en pêchant à l’Aire de Détente.,sinnoh-start
+14,11732,91631,Capturer Barpau en pêchant au Mont Couronné,Capturer Barpau en pêchant au Mont Couronné.,sinnoh-start
+14,11732,91630,Capturer Goinfrex sur un Arbre à Miel,Capturer Goinfrex sur un Arbre à Miel.,sinnoh-honey
+14,11732,97651,Rencontrer et capturer un Pokémon chromatique,Rencontrer et capturer un Pokémon chromatique.,sinnoh-start
+14,11732,98167,Capturer un Zarbi de forme ! ou ?,Capturer un Zarbi de forme ! ou ?.,sinnoh-national
+14,11732,95988,Échanger un Machoc contre un Abra à Charbourg,Échanger un Machoc contre un Abra à Charbourg.,sinnoh-oreburgh
+14,11732,95989,Échanger un Mustébouée contre un Pijako dans l’immeuble de Vestigion,Échanger un Mustébouée contre un Pijako dans l’immeuble de Vestigion.,sinnoh-eterna
+14,11732,95990,Échanger un Charmina contre un Spectrum à Frimapic,Échanger un Charmina contre un Spectrum à Frimapic.,sinnoh-snowpoint
+14,11732,95991,Échanger un Écayon contre un Magicarpe allemand sur la Route 226,Échanger un Écayon contre un Magicarpe allemand sur la Route 226.,sinnoh-postgame
+14,11732,96044,Recevoir un Évoli d’Amelle à Unionpolis,Recevoir un Évoli d’Amelle à Unionpolis.,sinnoh-hearthome
+14,11732,96045,Recevoir un Porygon gratuit à Voilaroc,Recevoir un Porygon gratuit à Voilaroc.,sinnoh-veilstone
+14,11732,96046,Recevoir un Œuf d’Armand sur l’Île de Fer,Recevoir un Œuf d’Armand sur l’Île de Fer.,sinnoh-gifts
+14,11732,96071,« Résoudre » l’énigme de Regirock dans la caverne spéciale de la Route 228…,« Résoudre » l’énigme de Regirock dans la caverne spéciale de la Route 228…,sinnoh-events
+14,11732,96070,« Résoudre » l’énigme de Regice dans une caverne spéciale du Mont Couronné…,« Résoudre » l’énigme de Regice dans une caverne spéciale du Mont Couronné…,sinnoh-events
+14,11732,96048,« Résoudre » l’énigme de Registeel dans une caverne spéciale de l’Île de Fer…,« Résoudre » l’énigme de Registeel dans une caverne spéciale de l’Île de Fer…,sinnoh-events
+14,11732,96072,« C’est une statue de Pokémon… On dirait qu’elle dégage une certaine puissance… »,« C’est une statue de Pokémon… On dirait qu’elle dégage une certaine puissance… »,sinnoh-events
+14,11732,96084,"« Sans plus attendre, j’aimerais que tu examines cette tablette de pierre… »","« Sans plus attendre, j’aimerais que tu examines cette tablette de pierre… »",sinnoh-events
+14,11732,96083,« La porte est solidement fermée… Il semble impossible de l’ouvrir. »,« La porte est solidement fermée… Il semble impossible de l’ouvrir. »,sinnoh-events
+14,11732,96085,« La flûte produit un son… mais rien ne se passe ! »,« La flûte produit un son… mais rien ne se passe ! »,sinnoh-events
+14,11732,97408,« Il y a une tour brisée et délabrée… On dirait qu’une Clé de Voûte pourrait y trouver sa place. »,« Il y a une tour brisée et délabrée… On dirait qu’une Clé de Voûte pourrait y trouver sa place. »,sinnoh-events
+14,11732,96086,« Des Pokémon de tout le pays peuvent être amenés ici… »,« Des Pokémon de tout le pays peuvent être amenés ici… »,sinnoh-events
+14,11732,95623,Gagner n’importe quel prix à la loterie de Féli-Télé,Gagner n’importe quel prix à la loterie de Féli-Télé.,sinnoh-daily
+14,11732,95624,Montrer un Pokémon aux Dépêches Pokémon de Bonville,Montrer un Pokémon aux Dépêches Pokémon de Bonville.,sinnoh-daily
+14,11732,97650,Obtenir le Bracelet Macho dans une maison de Verchamps,Obtenir le Bracelet Macho dans une maison de Verchamps.,sinnoh-pastoria
+14,11732,96042,Recevoir une Super Ball gratuite à Célestia grâce à un Pokémon ayant un bonheur élevé,Recevoir une Super Ball gratuite à Célestia grâce à un Pokémon ayant un bonheur élevé.,friendship
+14,11732,96087,Montrer à l’homme de la Route 221 un Pokémon du niveau demandé pour obtenir une Ceinture Noire,Montrer à l’homme de la Route 221 un Pokémon du niveau demandé pour obtenir une Ceinture Noire.,sinnoh-canalave
+14,11732,97352,Obtenir chaque Plaque au moins une fois,Obtenir chaque Plaque au moins une fois.,sinnoh-start
+14,11732,97649,Obtenir la CT64 Explosion au Casino,Obtenir la CT64 Explosion au Casino.,sinnoh-start
+14,11732,95625,Gagner cinq combats au restaurant des Sept Étoiles au cours d’une seule session sans quitter la zone,Gagner cinq combats au restaurant des Sept Étoiles au cours d’une seule session sans quitter la zone.,sinnoh-start
+14,11732,95748,Battre le Richard ou la Mademoiselle du Manoir Pokémon,Battre le Richard ou la Mademoiselle du Manoir Pokémon.,sinnoh-start
+14,11732,95743,Obtenir un Ruban Empreinte du Dr Petitpas,Obtenir un Ruban Empreinte du Dr Petitpas.,friendship
+14,11732,95744,Obtenir un Ruban Effort à la boutique de Sceaux de Rivamar,Obtenir un Ruban Effort à la boutique de Sceaux de Rivamar.,friendship
+14,11732,95746,Obtenir tous les Rubans quotidiens de Julie sur un seul Pokémon et les voir dans son résumé,Obtenir tous les Rubans quotidiens de Julie sur un seul Pokémon et les voir dans son résumé.,sinnoh-start
+14,11732,95745,Obtenir tous les Rubans de Concours sur un seul Pokémon et les voir dans son résumé,Obtenir tous les Rubans de Concours sur un seul Pokémon et les voir dans son résumé.,sinnoh-hearthome
+14,11732,97394,Obtenir tous les Rubans possibles de la Tour de Combat sur un seul Pokémon et les voir dans son…,Obtenir tous les Rubans possibles de la Tour de Combat sur un seul Pokémon et les voir dans son résumé.,sinnoh-postgame
+14,11732,95747,Obtenir le Ruban Royal Sublime au Club Ruban et le voir dans le résumé du Pokémon sur place,Obtenir le Ruban Royal Sublime au Club Ruban et le voir dans le résumé du Pokémon sur place.,sinnoh-start
+14,11732,97622,Déterrer quatre objets dans un seul mur du Souterrain,Déterrer quatre objets dans un seul mur du Souterrain.,sinnoh-fossils
+14,11732,97666,Meubler entièrement sa Base Secrète,Meubler entièrement sa Base Secrète.,sinnoh-fossils
+14,11732,97615,"Avoir au moins un exemplaire de chaque piège dans l’inventaire du Souterrain, sauf les pièges…","Avoir au moins un exemplaire de chaque piège dans l’inventaire du Souterrain, sauf les pièges multijoueurs et la Foreuse.",sinnoh-fossils
+14,11732,95622,Acheter tous les meubles de la Villa de l’Aire de Détente,Acheter tous les meubles de la Villa de l’Aire de Détente.,sinnoh-postgame
+14,11732,113671,Obtenir au moins un exemplaire de chaque Accessoire possible selon son Pokémon de départ,Obtenir au moins un exemplaire de chaque Accessoire possible selon son Pokémon de départ.,sinnoh-hearthome
+14,11732,97721,Obtenir toutes les applications possibles de la Pokémontre,Obtenir toutes les applications possibles de la Pokémontre.,sinnoh-start
+14,11732,113672,"Obtenir un exemplaire de chaque Sceau sauf les Sceaux Liquide, Explosion et Étoile","Obtenir un exemplaire de chaque Sceau sauf les Sceaux Liquide, Explosion et Étoile.",sinnoh-start
+14,11732,97520,Capturer les 374 Pokémon accessibles dans le jeu sans appareil externe,Capturer les 374 Pokémon accessibles dans le jeu sans appareil externe.,sinnoh-national
+14,11732,91210,Atteindre 99 999 pas sur le podomètre de la Pokémontre,Atteindre 99 999 pas sur le podomètre de la Pokémontre.,sinnoh-start
+14,11732,96047,Faire briller au maximum ses huit Badges d’Arène,Faire briller au maximum ses huit Badges d’Arène.,sinnoh-start
+14,11732,97734,Rencontrer un fantôme au Vieux Château,Rencontrer un fantôme au Vieux Château.,sinnoh-hearthome
+14,11732,101234,Se faire narguer par un Cradopaud,Se faire narguer par un Cradopaud.,sinnoh-start
+14,11732,91623,"Après avoir battu le Conseil 4, parler à Louka ou Aurore à Littorella le jour de son anniversaire","Après avoir battu le Conseil 4, parler à Louka ou Aurore à Littorella le jour de son anniversaire.",sinnoh-start
+14,11732,91624,Rester au moins deux minutes à Frimapic pendant la poussière de diamant,Rester au moins deux minutes à Frimapic pendant la poussière de diamant.,sinnoh-snowpoint

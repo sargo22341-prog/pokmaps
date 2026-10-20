@@ -3,12 +3,13 @@
 Instantanés publics des ensembles principaux des générations 1 à 5, exportés le 12 octobre 2026.
 `<identifiant>.json` conserve titres, conditions, points, ordre, type et date de modification ;
 `index.json` inventorie fichiers, nombres et SHA-256. Aucun résultat de joueur, nom de compte ni clé API.
-Les générations 4 et 5 restent archivées sans être activées dans l’application.
+La génération 4 est activée ; la génération 5 reste archivée.
 
 | Traductions | Jeux distribués | Ressources produites |
 |---|---|---|
 | `gen12_fr.csv` | Rouge, Bleu, Jaune, Or, Argent, Cristal | `strings_achievements_<version>.xml` |
 | `gen3_fr.csv` | Rubis, Saphir, Émeraude, Rouge Feu, Vert Feuille | Même format |
+| `gen4_fr.csv` | Diamant, Perle, Platine | Même format, ensembles 9852, 25369, 11732 |
 
 Les CSV associent version PokéAPI, ensemble officiel, succès et chapitre. Les titres français peuvent
 être adaptés ; conditions, nombres et restrictions restent ceux des originaux archivés.

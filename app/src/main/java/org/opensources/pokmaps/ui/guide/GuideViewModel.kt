@@ -93,6 +93,7 @@ data class GuideUiState(
 sealed interface GuideAction {
     data class Category(val category: GuideCategory) : GuideAction
     data class Article(val id: String) : GuideAction
+    data class ObserveRoamer(val pokemon: Int, val place: String?) : GuideAction
     data object Back : GuideAction
     data class Complete(val id: String, val completed: Boolean) : GuideAction
 
@@ -186,6 +187,12 @@ class GuideViewModel internal constructor(
 
             GuideAction.Back -> back()
 
+            is GuideAction.ObserveRoamer -> {
+                if (state.value.roamers.any { it.pokemonId == action.pokemon }) {
+                    write { version -> guides.observeRoamer(version, action.pokemon, action.place) }
+                }
+            }
+
             is GuideAction.Complete -> complete(action)
 
             is GuideAction.ShowSecretBase -> mapRequests.send(MapRequest.ShowSecretBase(action.warpId))
@@ -273,6 +280,7 @@ class GuideViewModel internal constructor(
 
     private fun write(block: suspend (Int) -> Unit) {
         val version = state.value.library?.game?.versionId ?: return
+        mutableState.update { it.copy(writeFailed = false) }
         viewModelScope.launch {
             attempt(onError = { mutableState.update { it.copy(writeFailed = true) } }) { block(version) }
         }

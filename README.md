@@ -118,7 +118,9 @@ Les fiches utilisent la classe propre à chaque attaque et les conditions d’é
 Les guides de Sinnoh proposent une soluce adaptée à chaque version, des quêtes, conseils, bugs documentés
 et un calendrier des rendez-vous. Deux objectifs suivent les captures accessibles sur une cartouche seule,
 dans le régional puis le National, en tenant compte des starters et fossiles incompatibles.
-Les succès et les outils détaillés de reproduction, bonheur et suivi des errants restent en phase 7 de `gen4.md`.
+Les succès officiels des quatorze jeux sont traduits et consultables hors ligne ; leur synchronisation
+RetroAchievements reste manuelle. Les outils de Sinnoh appliquent ses règles de reproduction et de bonheur.
+Les dernières routes observées des errants se notent par cartouche et entrent dans la sauvegarde JSON.
 
 ## Publier une version
 

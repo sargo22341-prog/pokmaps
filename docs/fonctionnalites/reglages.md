@@ -17,11 +17,15 @@ Les autres réglages et identifiants RetroAchievements sont exclus. Le sélecteu
 L’import valide le document entier (1 Mo maximum), les jeux contre le catalogue embarqué, puis espèces
 et formes contre chaque jeu, avant une fusion atomique. Les anciens fichiers sans `unown` restent acceptés.
 Les observations d’errants historiques sont ignorées à l’import et retirées des préférences.
+Les nouveaux relevés manuels de Sinnoh utilisent le champ facultatif `sinnohRoamers`, par version et par
+espèce. Les anciens fichiers sans ce champ restent acceptés ; une route ou une espèce non accessible
+dans la version fait rejeter l’import entier. La fusion conserve les autres relevés et privilégie ceux du
+fichier importé pour un même errant. La portée des captures ne fusionne jamais ces observations.
 
 ## RetroAchievements facultatif
 
 Saisir nom d’utilisateur et clé API web, enregistrer puis « Synchroniser ».
-Seul `API_GetGameInfoAndUserProgress.php` est appelé en GET, une fois par jeu pris en charge.
+Seul `API_GetGameInfoAndUserProgress.php` est appelé en GET, une fois pour chacun des quatorze jeux pris en charge.
 Aucun succès ni compte distant n’est modifié ; aucune requête au lancement, à l’ouverture des guides
 ou au changement de jeu. La permission Internet sert à cette option ; sur GrapheneOS, autoriser Network.
 

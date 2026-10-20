@@ -132,6 +132,35 @@ class BreedingViewModelTest {
     }
 
     @Test
+    fun sinnohHandlesEmptyFailureAndGameChangesWithoutGbaRules() = runTest {
+        val tools = MemoryBreeding()
+        tools.catalog.value = BreedingCatalog(FakeGameDao.DIAMOND, emptyList())
+        val model = BreedingViewModel(tools)
+        assertFalse(model.state.value.failed)
+        assertTrue(model.state.value.choices.isEmpty())
+        assertTrue(model.state.value.sinnoh)
+        tools.failing = true
+        model.onAction(BreedingAction.Retry)
+        assertTrue(model.state.value.failed)
+        tools.failing = false
+        tools.catalog.value = MemoryBreeding().catalog.value.copy(game = FakeGameDao.PLATINUM)
+        model.onAction(BreedingAction.Retry)
+        model.onAction(BreedingAction.Species(true, 1))
+        assertTrue(model.state.value.possible)
+        assertTrue(model.state.value.sinnoh)
+        model.onAction(
+            BreedingAction.Values(
+                true,
+                ParentValues(ParentSex.FEMALE, item = org.opensources.pokmaps.domain.guide.BreedingItem.EVERSTONE)
+            )
+        )
+        assertEquals(0, model.state.value.natureParent)
+        tools.catalog.value = tools.catalog.value.copy(game = FakeGameDao.GOLD)
+        assertFalse(model.state.value.sinnoh)
+        assertFalse(model.state.value.firstSelected)
+    }
+
+    @Test
     fun gbaUsesIvsAndEverstoneAndChangingGameClearsParentValues() = runTest {
         val tools = MemoryBreeding()
         tools.catalog.value = tools.catalog.value.copy(game = FakeGameDao.EMERALD)

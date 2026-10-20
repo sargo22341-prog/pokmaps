@@ -16,6 +16,7 @@ from export_retroachievements import _MAIN_SERIES, _read_content, _snapshot
 
 _ROOT = Path(__file__).resolve().parents[2]
 _EXPORTS = _ROOT / "tools/data/retroachievements"
+_SINNOH = {12: (9852, "diamond"), 13: (25369, "pearl"), 14: (11732, "platinum")}
 _GBA = {7: (790, "ruby"), 8: (791, "sapphire"), 9: (668, "emerald"), 10: (515, "firered"), 11: (788, "leafgreen")}
 
 
@@ -50,11 +51,13 @@ def test_public_inventory_is_complete_and_contains_no_account_data() -> None:
             assert achievement["ID"] > 0 and achievement["Points"] >= 0
 
 
-@pytest.mark.parametrize("version", _GBA)
-def test_gba_translations_and_android_definitions_match_official_snapshot(version: int) -> None:
-    game_id, _name = _GBA[version]
+@pytest.mark.parametrize("version", _GBA | _SINNOH)
+def test_translations_and_android_definitions_match_official_snapshot(version: int) -> None:
+    game_id, _name = (_GBA | _SINNOH)[version]
     snapshot = json.loads((_EXPORTS / f"{game_id}.json").read_text(encoding="utf-8"))
-    with (_EXPORTS / "gen3_fr.csv").open(encoding="utf-8", newline="") as source:
+    with (_EXPORTS / ("gen4_fr.csv" if version in _SINNOH else "gen3_fr.csv")).open(
+        encoding="utf-8", newline=""
+    ) as source:
         translations = [row for row in csv.DictReader(source) if int(row["version_id"]) == version]
     official = {row["ID"]: row for row in snapshot["achievements"]}
     assert {int(row["achievement_id"]) for row in translations} == set(official)
@@ -91,7 +94,7 @@ def _resource(texts: dict[str, str | None], name: str) -> str:
     if value.startswith("@string/"):
         value = texts[value.removeprefix("@string/")]
     assert value is not None and not value.startswith("@string/")
-    return value.replace("\\'", "'").replace('\\"', '"')
+    return " ".join(value.replace("\\'", "'").replace('\\"', '"').split())
 
 
 def _game() -> dict[str, Any]:
@@ -141,11 +144,11 @@ def test_incomplete_snapshot_stops_export() -> None:
         _snapshot(game, "2026-10-12")
 
 
-def test_all_eleven_sync_game_ids_point_to_public_main_sets() -> None:
+def test_all_fourteen_sync_game_ids_point_to_public_main_sets() -> None:
     path = _ROOT / "app/src/main/java/org/opensources/pokmaps/domain/guide/RetroProgress.kt"
     mapping = {int(version): int(game) for version, game in re.findall(r"(\d+) to (\d+)", path.read_text())}
-    assert set(mapping) == set(range(1, 12))
-    assert len(set(mapping.values())) == 11
+    assert set(mapping) == set(range(1, 15))
+    assert len(set(mapping.values())) == 14
     assert {version: mapping[version] for version in _GBA} == {version: game for version, (game, _) in _GBA.items()}
     for game in mapping.values():
         assert json.loads((_EXPORTS / f"{game}.json").read_text(encoding="utf-8"))["game_id"] == game

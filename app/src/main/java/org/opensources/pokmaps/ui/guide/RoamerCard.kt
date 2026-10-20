@@ -24,7 +24,12 @@ import org.opensources.pokmaps.ui.common.SpriteSize
 
 /** Pokémon errant de la version : condition d'apparition, niveau et routes parcourues. */
 @Composable
-internal fun RoamerCard(roamer: RoamerChoice, version: Int) {
+internal fun RoamerCard(
+    roamer: RoamerChoice,
+    version: Int,
+    observation: String? = null,
+    onObserve: (String?) -> Unit = {}
+) {
     val name = stringResource(pokemonLabel(roamer.pokemonId))
     Card(Modifier.fillMaxWidth()) {
         Row(
@@ -36,14 +41,20 @@ internal fun RoamerCard(roamer: RoamerChoice, version: Int) {
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(name, style = MaterialTheme.typography.titleMedium)
                 Text(stringResource(roamer.condition.label()), style = MaterialTheme.typography.bodyMedium)
-                Text(stringResource(R.string.catch_level, Roamers.level(version)))
+                Text(stringResource(R.string.catch_level, Roamers.level(version, roamer.pokemonId)))
                 Text(stringResource(Roamers.area(version).label()), style = MaterialTheme.typography.bodySmall)
+                if (version in 12..14) RoamerObservation(observation, onObserve)
             }
         }
     }
 }
 
 private fun pokemonLabel(pokemon: Int): Int = when (pokemon) {
+    481 -> R.string.guide_roamer_mesprit
+    488 -> R.string.guide_roamer_cresselia
+    144 -> R.string.guide_roamer_articuno
+    145 -> R.string.guide_roamer_zapdos
+    146 -> R.string.guide_roamer_moltres
     243 -> R.string.guide_roamer_raikou
     244 -> R.string.guide_roamer_entei
     245 -> R.string.guide_roamer_suicune
@@ -53,6 +64,9 @@ private fun pokemonLabel(pokemon: Int): Int = when (pokemon) {
 }
 
 private fun RoamerCondition.label(): Int = when (this) {
+    RoamerCondition.MESPRIT -> R.string.guide_roamer_mesprit_condition
+    RoamerCondition.CRESSELIA -> R.string.guide_roamer_cresselia_condition
+    RoamerCondition.BIRDS -> R.string.guide_roamer_birds_condition
     RoamerCondition.JOHTO -> R.string.guide_roamer_johto
     RoamerCondition.HOENN -> R.string.guide_roamer_hoenn
     RoamerCondition.RED -> R.string.guide_roamer_red
@@ -63,6 +77,7 @@ private fun RoamerCondition.label(): Int = when (this) {
 }
 
 private fun RoamerArea.label(): Int = when (this) {
+    RoamerArea.SINNOH -> R.string.guide_roamer_area_sinnoh
     RoamerArea.JOHTO -> R.string.guide_roamer_area_johto
     RoamerArea.HOENN -> R.string.guide_roamer_area_hoenn
     RoamerArea.KANTO -> R.string.guide_roamer_area_kanto

@@ -75,7 +75,11 @@ internal fun GuideArticleContent(
         }
         val version = state.library?.game?.versionId
         if (version != null && state.roamers.isNotEmpty()) {
-            items(state.roamers, key = { "roamer-${it.pokemonId}" }) { roamer -> RoamerCard(roamer, version) }
+            items(state.roamers, key = { "roamer-${it.pokemonId}" }) { roamer ->
+                RoamerCard(roamer, version, state.progress.roamerObservations[roamer.pokemonId]) {
+                    onAction(GuideAction.ObserveRoamer(roamer.pokemonId, it))
+                }
+            }
         }
         if (article.id == "breeding") item("breeding") { breedingTool() }
         if (article.id == "friendship") item("friendship") { friendshipTool() }

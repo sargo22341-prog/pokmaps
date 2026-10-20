@@ -15,7 +15,9 @@ internal fun achievementGuides(context: Context, versionId: Int): List<GuideDefi
     val version = GameVersion.of(versionId)
 
     @ArrayRes val array = when (version) {
-        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> return emptyList()
+        GameVersion.DIAMOND -> R.array.achievements_12
+        GameVersion.PEARL -> R.array.achievements_13
+        GameVersion.PLATINUM -> R.array.achievements_14
         GameVersion.RED -> R.array.achievements_1
         GameVersion.BLUE -> R.array.achievements_2
         GameVersion.YELLOW -> R.array.achievements_3

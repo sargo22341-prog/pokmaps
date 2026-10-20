@@ -40,29 +40,21 @@ internal fun FriendshipTool(state: FriendshipUiState, onAction: (FriendshipActio
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.friendship_tool), style = MaterialTheme.typography.titleLarge)
         Text(
-            stringResource(if (state.rules.gba) R.string.friendship_gba_simulation else R.string.friendship_simulation),
+            stringResource(
+                if (state.rules.modern) R.string.friendship_gba_simulation else R.string.friendship_simulation
+            ),
             style = MaterialTheme.typography.bodySmall
         )
-        Text(stringResource(R.string.friendship_value, state.value))
-        Slider(
-            value = state.value.toFloat(),
-            valueRange = 0f..255f,
-            onValueChange = { onAction(FriendshipAction.Value(it.roundToInt())) }
-        )
-        Row {
-            listOf(70, 120, 200, 220).forEach { value ->
-                TextButton(onClick = {
-                    onAction(FriendshipAction.Value(value))
-                }) { Text(stringResource(R.string.friendship_preset, value)) }
-            }
-        }
+        FriendshipValue(state, onAction)
         Column {
             OutlinedButton(onClick = { expanded = true }, modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(state.event.label()))
+                Text(stringResource(state.event.label(state.rules == FriendshipRules.SINNOH)))
             }
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                 state.events.forEach { event ->
-                    DropdownMenuItem(text = { Text(stringResource(event.label())) }, onClick = {
+                    DropdownMenuItem(text = {
+                        Text(stringResource(event.label(state.rules == FriendshipRules.SINNOH)))
+                    }, onClick = {
                         expanded = false
                         onAction(FriendshipAction.Event(event))
                     })
@@ -74,22 +66,39 @@ internal fun FriendshipTool(state: FriendshipUiState, onAction: (FriendshipActio
             style = MaterialTheme.typography.titleMedium
         )
         Text(stringResource(R.string.friendship_bands, state.event.low, state.event.medium, state.event.high))
-        if (state.rules.gba) GbaFriendshipOptions(state, onAction)
+        if (state.rules.modern) GbaFriendshipOptions(state, onAction)
         Text(
-            stringResource(if (state.rules.gba) R.string.friendship_gba_random else R.string.friendship_random),
+            stringResource(if (state.rules.modern) R.string.friendship_gba_random else R.string.friendship_random),
             style = MaterialTheme.typography.bodySmall
         )
     }
 }
 
-private fun FriendshipEvent.label(): Int = when (this) {
+@Composable
+private fun FriendshipValue(state: FriendshipUiState, onAction: (FriendshipAction) -> Unit) {
+    Text(stringResource(R.string.friendship_value, state.value))
+    Slider(
+        value = state.value.toFloat(),
+        valueRange = 0f..255f,
+        onValueChange = { onAction(FriendshipAction.Value(it.roundToInt())) }
+    )
+    Row {
+        listOf(70, 120, 200, 220).forEach { value ->
+            TextButton(onClick = {
+                onAction(FriendshipAction.Value(value))
+            }) { Text(stringResource(R.string.friendship_preset, value)) }
+        }
+    }
+}
+
+private fun FriendshipEvent.label(sinnoh: Boolean): Int = when (this) {
     FriendshipEvent.LEVEL -> R.string.friendship_level
     FriendshipEvent.VITAMIN -> R.string.friendship_vitamin
     FriendshipEvent.X_ITEM -> R.string.friendship_x_item
     FriendshipEvent.GYM_BATTLE -> R.string.friendship_gym
     FriendshipEvent.LEARN_MOVE -> R.string.friendship_move
     FriendshipEvent.FAINT -> R.string.friendship_faint
-    FriendshipEvent.POISON_FAINT -> R.string.friendship_poison
+    FriendshipEvent.POISON_FAINT -> if (sinnoh) R.string.friendship_sinnoh_poison else R.string.friendship_poison
     FriendshipEvent.STRONG_ENEMY_FAINT -> R.string.friendship_strong
     FriendshipEvent.BITTER_POWDER -> R.string.friendship_powder
     FriendshipEvent.ENERGY_ROOT -> R.string.friendship_root
@@ -99,4 +108,8 @@ private fun FriendshipEvent.label(): Int = when (this) {
     FriendshipEvent.WALKING -> R.string.friendship_walking
     FriendshipEvent.MASSAGE -> R.string.friendship_massage
     FriendshipEvent.EV_BERRY -> R.string.friendship_ev_berry
+    FriendshipEvent.SPA -> R.string.friendship_spa
+    FriendshipEvent.SPA_MEDIUM -> R.string.friendship_spa_medium
+    FriendshipEvent.SPA_LARGE -> R.string.friendship_spa_large
+    FriendshipEvent.CONTEST -> R.string.friendship_contest
 }

@@ -9,15 +9,15 @@ import org.opensources.pokmaps.domain.guide.RetroGames
 
 class RetroSynchronizationTest {
     @Test
-    fun manualSynchronizationReadsEachOfTheElevenGamesExactlyOnce() = runTest {
+    fun manualSynchronizationReadsEachOfTheFourteenGamesExactlyOnce() = runTest {
         val requests = mutableListOf<Int>()
         val progress = readAllRetroProgress("player") { gameId ->
             requests += gameId
             RetroUnlocks(setOf(gameId), setOf(gameId))
         }
         assertEquals(RetroGames.ids.values.toList(), requests)
-        assertEquals(11, requests.toSet().size)
-        for (version in 7..11) {
+        assertEquals(14, requests.toSet().size)
+        for (version in 1..14) {
             assertEquals(setOf(RetroGames.ids.getValue(version)), progress.earned[version])
             assertEquals(progress.earned[version], progress.hardcore[version])
         }

@@ -3,6 +3,7 @@ package org.opensources.pokmaps.data.guide
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.R
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.Roamers
@@ -48,8 +49,9 @@ class GuideDefinitionsTest {
     fun sinnohDoesNotInheritTheGbaTools() {
         listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM).forEach {
             val articles = guideDefinitions(it)
-            assertEquals(25, articles.size)
-            assertTrue(articles.none { article -> article.id in setOf("breeding", "friendship") })
+            assertEquals(28, articles.size)
+            assertEquals(R.string.guide_breeding_sinnoh_text, articles.single { a -> a.id == "breeding" }.text)
+            assertEquals(R.string.guide_friendship_sinnoh_text, articles.single { a -> a.id == "friendship" }.text)
             assertTrue(articles.all { article -> article.versions == setOf(it.versionId) })
             assertTrue(articles.all { article -> article.sources == sinnohGuideSources(it) })
         }

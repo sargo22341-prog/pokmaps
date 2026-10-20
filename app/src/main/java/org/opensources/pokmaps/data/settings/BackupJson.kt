@@ -20,6 +20,7 @@ internal object BackupJson {
                     .put("caught", JSONArray(backup.caught[version].orEmpty().sorted()))
                     // Liste vide gardée pour le schéma 1 : les versions précédentes de l'application l'exigent.
                     .put("completed", JSONArray(progress.completed.sorted())).put("roamers", JSONArray())
+                    .put("sinnohRoamers", JSONObject(progress.roamerObservations.mapKeys { it.key.toString() }))
                     .put("unown", JSONArray(backup.unown[version].orEmpty().map { it.identifier }.sorted()))
                     .put("forms", JSONArray(backup.forms[version].orEmpty().sorted()))
             )
@@ -50,7 +51,7 @@ internal object BackupJson {
             require(articles.size == completed.length())
             // Les anciennes observations de Pokémon errants ne sont plus suivies et restent ignorées à l'import.
             require(game.getJSONArray("roamers").length() <= 3)
-            guides[version] = GuideProgress(articles)
+            guides[version] = GuideProgress(articles, observations(game))
             val forms = if (game.has("unown")) game.getJSONArray("unown") else JSONArray()
             require(forms.length() <= UnownForm.entries.size)
             val alphabet = (0 until forms.length()).map { UnownForm.from(forms.getString(it)) }.toSet()
@@ -64,6 +65,17 @@ internal object BackupJson {
         }
         return CollectionBackup(favorites, caught.toMap(), guides.toMap(), unown.toMap(), capturedForms.toMap()).also {
             validateCollectionBackup(it, gamesInDatabase)
+        }
+    }
+
+    private fun observations(game: JSONObject): Map<Int, String> {
+        if (!game.has("sinnohRoamers")) return emptyMap()
+        val values = game.getJSONObject("sinnohRoamers")
+        require(values.length() <= 5)
+        return values.keys().asSequence().associate { key ->
+            val id = key.toInt()
+            require(key == id.toString())
+            id to requireNotNull(values.get(key) as? String)
         }
     }
 

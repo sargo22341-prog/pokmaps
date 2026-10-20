@@ -1,0 +1,1337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_360974_title">Battre l’Étourmi rencontré au Lac Vérité en utilisant uniquement l’écran tactile</string>
+    <string name="ra_360974_text">Battre l’Étourmi rencontré au Lac Vérité en utilisant uniquement l’écran tactile.</string>
+    <array name="ra_360974">
+        <item>360974</item>
+        <item>@string/ra_360974_title</item>
+        <item>@string/ra_360974_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360975_title">Obtenir le Pokédex</string>
+    <item name="ra_360975_text" type="string">@string/ra_108022_text</item>
+    <array name="ra_360975">
+        <item>360975</item>
+        <item>@string/ra_360975_title</item>
+        <item>@string/ra_360975_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360976_title">Obtenir la Pokémontre</string>
+    <string name="ra_360976_text">Obtenir la Pokémontre.</string>
+    <array name="ra_360976">
+        <item>360976</item>
+        <item>@string/ra_360976_title</item>
+        <item>@string/ra_360976_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360977_title">Battre Pierrick et obtenir le Badge Charbon</string>
+    <string name="ra_360977_text">Battre Pierrick et obtenir le Badge Charbon.</string>
+    <array name="ra_360977">
+        <item>360977</item>
+        <item>@string/ra_360977_title</item>
+        <item>@string/ra_360977_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_360978_title">Battre Pierrick avec une équipe d’au plus 3 Pokémon de niveau 14 ou moins</string>
+    <string name="ra_360978_text">Battre Pierrick avec une équipe d’au plus 3 Pokémon de niveau 14 ou moins.</string>
+    <array name="ra_360978">
+        <item>360978</item>
+        <item>@string/ra_360978_title</item>
+        <item>@string/ra_360978_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_360979_title">Battre tous les Dresseurs de l’Arène de Pierrick sans sortir, au cours d’une seule session</string>
+    <string name="ra_360979_text">Battre tous les Dresseurs de l’Arène de Pierrick sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360979">
+        <item>360979</item>
+        <item>@string/ra_360979_title</item>
+        <item>@string/ra_360979_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_360980_title">Battre Mars aux Éoliennes</string>
+    <string name="ra_360980_text">Battre Mars aux Éoliennes.</string>
+    <array name="ra_360980">
+        <item>360980</item>
+        <item>@string/ra_360980_title</item>
+        <item>@string/ra_360980_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360981_title">Mettre K.O. le Leveinard de Sara en un tour dans la Forêt de Vestigion</string>
+    <string name="ra_360981_text">Mettre K.O. le Leveinard de Sara en un tour dans la Forêt de Vestigion.</string>
+    <array name="ra_360981">
+        <item>360981</item>
+        <item>@string/ra_360981_title</item>
+        <item>@string/ra_360981_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_360982_title">Battre Flo et obtenir le Badge Forêt</string>
+    <string name="ra_360982_text">Battre Flo et obtenir le Badge Forêt.</string>
+    <array name="ra_360982">
+        <item>360982</item>
+        <item>@string/ra_360982_title</item>
+        <item>@string/ra_360982_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_360983_title">Battre Flo avec une équipe d’au plus 3 Pokémon de niveau 20 ou moins</string>
+    <string name="ra_360983_text">Battre Flo avec une équipe d’au plus 3 Pokémon de niveau 20 ou moins.</string>
+    <array name="ra_360983">
+        <item>360983</item>
+        <item>@string/ra_360983_title</item>
+        <item>@string/ra_360983_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_360984_title">Battre tous les Dresseurs de l’Arène de Flo sans sortir, au cours d’une seule session</string>
+    <string name="ra_360984_text">Battre tous les Dresseurs de l’Arène de Flo sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360984">
+        <item>360984</item>
+        <item>@string/ra_360984_title</item>
+        <item>@string/ra_360984_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_360985_title">Obtenir tous les objets et battre tous les Dresseurs à Vestigion</string>
+    <string name="ra_360985_text">Obtenir tous les objets et battre tous les Dresseurs à Vestigion.</string>
+    <array name="ra_360985">
+        <item>360985</item>
+        <item>@string/ra_360985_title</item>
+        <item>@string/ra_360985_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_360986_title">Atteindre Célestia sans avoir jamais obtenu la CS Anti-Brume</string>
+    <string name="ra_360986_text">Atteindre Célestia sans avoir jamais obtenu la CS Anti-Brume.</string>
+    <array name="ra_360986">
+        <item>360986</item>
+        <item>@string/ra_360986_title</item>
+        <item>@string/ra_360986_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360987_title">Battre Mélina et obtenir le Badge Pavé</string>
+    <string name="ra_360987_text">Battre Mélina et obtenir le Badge Pavé.</string>
+    <array name="ra_360987">
+        <item>360987</item>
+        <item>@string/ra_360987_title</item>
+        <item>@string/ra_360987_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_360988_title">Battre Mélina avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins</string>
+    <string name="ra_360988_text">Battre Mélina avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins.</string>
+    <array name="ra_360988">
+        <item>360988</item>
+        <item>@string/ra_360988_title</item>
+        <item>@string/ra_360988_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_360989_title">Battre tous les Dresseurs de l’Arène de Mélina sans sortir, au cours d’une seule session</string>
+    <string name="ra_360989_text">Battre tous les Dresseurs de l’Arène de Mélina sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360989">
+        <item>360989</item>
+        <item>@string/ra_360989_title</item>
+        <item>@string/ra_360989_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_360990_title">Battre Lovis et obtenir le Badge Palustre</string>
+    <string name="ra_360990_text">Battre Lovis et obtenir le Badge Palustre.</string>
+    <array name="ra_360990">
+        <item>360990</item>
+        <item>@string/ra_360990_title</item>
+        <item>@string/ra_360990_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_360991_title">Battre Lovis avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins</string>
+    <string name="ra_360991_text">Battre Lovis avec une équipe d’au plus 3 Pokémon de niveau 28 ou moins.</string>
+    <array name="ra_360991">
+        <item>360991</item>
+        <item>@string/ra_360991_title</item>
+        <item>@string/ra_360991_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_360992_title">Battre tous les Dresseurs de l’Arène de Lovis sans sortir, au cours d’une seule session</string>
+    <string name="ra_360992_text">Battre tous les Dresseurs de l’Arène de Lovis sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360992">
+        <item>360992</item>
+        <item>@string/ra_360992_title</item>
+        <item>@string/ra_360992_text</item>
+        <item>4</item>
+        <item>1</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_360993_title">Obtenir un remède spécial</string>
+    <string name="ra_360993_text">Obtenir un remède spécial.</string>
+    <array name="ra_360993">
+        <item>360993</item>
+        <item>@string/ra_360993_title</item>
+        <item>@string/ra_360993_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_360994_title">Battre Kiméra et obtenir le Badge Fantôme</string>
+    <string name="ra_360994_text">Battre Kiméra et obtenir le Badge Fantôme.</string>
+    <array name="ra_360994">
+        <item>360994</item>
+        <item>@string/ra_360994_title</item>
+        <item>@string/ra_360994_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_360995_title">Battre Kiméra avec une équipe d’au plus 3 Pokémon de niveau 34 ou moins</string>
+    <string name="ra_360995_text">Battre Kiméra avec une équipe d’au plus 3 Pokémon de niveau 34 ou moins.</string>
+    <array name="ra_360995">
+        <item>360995</item>
+        <item>@string/ra_360995_title</item>
+        <item>@string/ra_360995_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_360996_title">Battre tous les Dresseurs de l’Arène de Kiméra sans sortir, au cours d’une seule session</string>
+    <string name="ra_360996_text">Battre tous les Dresseurs de l’Arène de Kiméra sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360996">
+        <item>360996</item>
+        <item>@string/ra_360996_title</item>
+        <item>@string/ra_360996_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_360997_title">Battre Charles et obtenir le Badge Mine</string>
+    <string name="ra_360997_text">Battre Charles et obtenir le Badge Mine.</string>
+    <array name="ra_360997">
+        <item>360997</item>
+        <item>@string/ra_360997_title</item>
+        <item>@string/ra_360997_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_360998_title">Battre Charles avec une équipe d’au plus 3 Pokémon de niveau 37 ou moins</string>
+    <string name="ra_360998_text">Battre Charles avec une équipe d’au plus 3 Pokémon de niveau 37 ou moins.</string>
+    <array name="ra_360998">
+        <item>360998</item>
+        <item>@string/ra_360998_title</item>
+        <item>@string/ra_360998_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_360999_title">Battre tous les Dresseurs de l’Arène de Charles sans sortir, au cours d’une seule session</string>
+    <string name="ra_360999_text">Battre tous les Dresseurs de l’Arène de Charles sans sortir, au cours d’une seule session.</string>
+    <array name="ra_360999">
+        <item>360999</item>
+        <item>@string/ra_360999_title</item>
+        <item>@string/ra_360999_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361000_title">Obtenir tous les objets et battre tous les Dresseurs au Lac Courage</string>
+    <string name="ra_361000_text">Obtenir tous les objets et battre tous les Dresseurs au Lac Courage.</string>
+    <array name="ra_361000">
+        <item>361000</item>
+        <item>@string/ra_361000_title</item>
+        <item>@string/ra_361000_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361001_title">Battre Gladys et obtenir le Badge Glaçon</string>
+    <string name="ra_361001_text">Battre Gladys et obtenir le Badge Glaçon.</string>
+    <array name="ra_361001">
+        <item>361001</item>
+        <item>@string/ra_361001_title</item>
+        <item>@string/ra_361001_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361002_title">Battre Gladys avec une équipe d’au plus 4 Pokémon de niveau 40 ou moins</string>
+    <string name="ra_361002_text">Battre Gladys avec une équipe d’au plus 4 Pokémon de niveau 40 ou moins.</string>
+    <array name="ra_361002">
+        <item>361002</item>
+        <item>@string/ra_361002_title</item>
+        <item>@string/ra_361002_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361003_title">Battre tous les Dresseurs de l’Arène de Gladys sans sortir, au cours d’une seule session</string>
+    <string name="ra_361003_text">Battre tous les Dresseurs de l’Arène de Gladys sans sortir, au cours d’une seule session.</string>
+    <array name="ra_361003">
+        <item>361003</item>
+        <item>@string/ra_361003_title</item>
+        <item>@string/ra_361003_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361004_title">Obtenir tous les objets et battre tous les Dresseurs à Voilaroc avant de battre Saturne au QG…</string>
+    <string name="ra_361004_text">Obtenir tous les objets et battre tous les Dresseurs à Voilaroc avant de battre Saturne au QG Galaxie.</string>
+    <array name="ra_361004">
+        <item>361004</item>
+        <item>@string/ra_361004_title</item>
+        <item>@string/ra_361004_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_361005_title">Voir l’animation alternative avec Baudrive lors de l’apparition de Dialga</string>
+    <string name="ra_361005_text">Voir l’animation alternative avec Baudrive lors de l’apparition de Dialga.</string>
+    <array name="ra_361005">
+        <item>361005</item>
+        <item>@string/ra_361005_title</item>
+        <item>@string/ra_361005_text</item>
+        <item>1</item>
+        <item>1</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_361006_title">Battre Tanguy et obtenir le Badge Phare</string>
+    <string name="ra_361006_text">Battre Tanguy et obtenir le Badge Phare.</string>
+    <array name="ra_361006">
+        <item>361006</item>
+        <item>@string/ra_361006_title</item>
+        <item>@string/ra_361006_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361007_title">Battre Tanguy avec une équipe d’au plus 4 Pokémon de niveau 47 ou moins</string>
+    <string name="ra_361007_text">Battre Tanguy avec une équipe d’au plus 4 Pokémon de niveau 47 ou moins.</string>
+    <array name="ra_361007">
+        <item>361007</item>
+        <item>@string/ra_361007_title</item>
+        <item>@string/ra_361007_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361008_title">Battre tous les Dresseurs de l’Arène de Tanguy sans sortir, au cours d’une seule session</string>
+    <string name="ra_361008_text">Battre tous les Dresseurs de l’Arène de Tanguy sans sortir, au cours d’une seule session.</string>
+    <array name="ra_361008">
+        <item>361008</item>
+        <item>@string/ra_361008_title</item>
+        <item>@string/ra_361008_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361009_title">Battre le Conseil 4 et Cynthia pour devenir Maître de Sinnoh</string>
+    <string name="ra_361009_text">Battre le Conseil 4 et Cynthia pour devenir Maître de Sinnoh.</string>
+    <array name="ra_361009">
+        <item>361009</item>
+        <item>@string/ra_361009_title</item>
+        <item>@string/ra_361009_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361010_title">Battre Cynthia avec une équipe composée uniquement des familles de Mélofée, Rondoudou, M. Mime,…</string>
+    <string name="ra_361010_text">Battre Cynthia avec une équipe composée uniquement des familles de Mélofée, Rondoudou, M. Mime, Togekiss, Marill, Granbull, Gardevoir, ainsi que Mysdibule, qui auront le type Fée dans les générations suivantes.</string>
+    <array name="ra_361010">
+        <item>361010</item>
+        <item>@string/ra_361010_title</item>
+        <item>@string/ra_361010_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361012_title">Faire améliorer le Pokédex en Pokédex National par le Professeur Chen</string>
+    <string name="ra_361012_text">Faire améliorer le Pokédex en Pokédex National par le Professeur Chen.</string>
+    <array name="ra_361012">
+        <item>361012</item>
+        <item>@string/ra_361012_title</item>
+        <item>@string/ra_361012_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361013_title">Capturer Créhelf au Lac Savoir, un Créfollet errant et Créfadet au Lac Courage</string>
+    <string name="ra_361013_text">Capturer Créhelf au Lac Savoir, un Créfollet errant et Créfadet au Lac Courage.</string>
+    <array name="ra_361013">
+        <item>361013</item>
+        <item>@string/ra_361013_title</item>
+        <item>@string/ra_361013_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_361014_title">Capturer Dialga aux Colonnes Lances</string>
+    <string name="ra_361014_text">Capturer Dialga aux Colonnes Lances.</string>
+    <array name="ra_361014">
+        <item>361014</item>
+        <item>@string/ra_361014_title</item>
+        <item>@string/ra_361014_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_361015_title">Capturer Giratina à la Grotte Retour</string>
+    <string name="ra_361015_text">Capturer Giratina à la Grotte Retour.</string>
+    <array name="ra_361015">
+        <item>361015</item>
+        <item>@string/ra_361015_title</item>
+        <item>@string/ra_361015_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_361016_title">Capturer un Cresselia errant</string>
+    <string name="ra_361016_text">Capturer un Cresselia errant.</string>
+    <array name="ra_361016">
+        <item>361016</item>
+        <item>@string/ra_361016_title</item>
+        <item>@string/ra_361016_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_361017_title">Capturer Heatran au Mont Abrupt</string>
+    <string name="ra_361017_text">Capturer Heatran au Mont Abrupt.</string>
+    <array name="ra_361017">
+        <item>361017</item>
+        <item>@string/ra_361017_title</item>
+        <item>@string/ra_361017_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361018_title">Voir dix formes différentes de Zarbi</string>
+    <string name="ra_361018_text">Voir dix formes différentes de Zarbi.</string>
+    <array name="ra_361018">
+        <item>361018</item>
+        <item>@string/ra_361018_title</item>
+        <item>@string/ra_361018_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361019_title">Voir les 28 formes de Zarbi</string>
+    <string name="ra_361019_text">Voir les 28 formes de Zarbi.</string>
+    <array name="ra_361019">
+        <item>361019</item>
+        <item>@string/ra_361019_title</item>
+        <item>@string/ra_361019_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361020_title">Capturer tous les Pokémon accessibles du Pokédex de Sinnoh dans Diamant</string>
+    <string name="ra_361020_text">Capturer tous les Pokémon accessibles du Pokédex de Sinnoh dans Diamant.</string>
+    <array name="ra_361020">
+        <item>361020</item>
+        <item>@string/ra_361020_title</item>
+        <item>@string/ra_361020_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361021_title">Voir tous les Pokémon possibles du Pokédex National</string>
+    <string name="ra_361021_text">Voir tous les Pokémon possibles du Pokédex National.</string>
+    <array name="ra_361021">
+        <item>361021</item>
+        <item>@string/ra_361021_title</item>
+        <item>@string/ra_361021_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361022_title">Effectuer tous les échanges internes au jeu</string>
+    <item name="ra_361022_text" type="string">@string/ra_199592_text</item>
+    <array name="ra_361022">
+        <item>361022</item>
+        <item>@string/ra_361022_title</item>
+        <item>@string/ra_361022_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361023_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Joliberges et…</string>
+    <string name="ra_361023_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Joliberges et l’Île de Fer.</string>
+    <array name="ra_361023">
+        <item>361023</item>
+        <item>@string/ra_361023_title</item>
+        <item>@string/ra_361023_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361024_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forêt de…</string>
+    <string name="ra_361024_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forêt de Vestigion et le Vieux Château.</string>
+    <array name="ra_361024">
+        <item>361024</item>
+        <item>@string/ra_361024_title</item>
+        <item>@string/ra_361024_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_361025_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forge Fuego</string>
+    <string name="ra_361025_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Forge Fuego.</string>
+    <array name="ra_361025">
+        <item>361025</item>
+        <item>@string/ra_361025_title</item>
+        <item>@string/ra_361025_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361026_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Unionpolis</string>
+    <string name="ra_361026_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Unionpolis.</string>
+    <array name="ra_361026">
+        <item>361026</item>
+        <item>@string/ra_361026_title</item>
+        <item>@string/ra_361026_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361027_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Savoir…</string>
+    <string name="ra_361027_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Savoir et Frimapic.</string>
+    <array name="ra_361027">
+        <item>361027</item>
+        <item>@string/ra_361027_title</item>
+        <item>@string/ra_361027_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361028_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Vérité…</string>
+    <string name="ra_361028_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Lac Vérité et Bonaugure.</string>
+    <array name="ra_361028">
+        <item>361028</item>
+        <item>@string/ra_361028_title</item>
+        <item>@string/ra_361028_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361029_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Tour Perdue</string>
+    <string name="ra_361029_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Tour Perdue.</string>
+    <array name="ra_361029">
+        <item>361029</item>
+        <item>@string/ra_361029_title</item>
+        <item>@string/ra_361029_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361030_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Couronné</string>
+    <string name="ra_361030_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Couronné.</string>
+    <array name="ra_361030">
+        <item>361030</item>
+        <item>@string/ra_361030_title</item>
+        <item>@string/ra_361030_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361031_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : l’Entrée…</string>
+    <string name="ra_361031_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : l’Entrée Charbourg, Charbourg et la Mine Charbourg.</string>
+    <array name="ra_361031">
+        <item>361031</item>
+        <item>@string/ra_361031_title</item>
+        <item>@string/ra_361031_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_361032_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Verchamps et…</string>
+    <string name="ra_361032_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : Verchamps et le Grand Marais.</string>
+    <array name="ra_361032">
+        <item>361032</item>
+        <item>@string/ra_361032_title</item>
+        <item>@string/ra_361032_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_361033_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 202…</string>
+    <string name="ra_361033_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 202 et Féli-Cité.</string>
+    <array name="ra_361033">
+        <item>361033</item>
+        <item>@string/ra_361033_title</item>
+        <item>@string/ra_361033_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361034_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 203</string>
+    <string name="ra_361034_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 203.</string>
+    <array name="ra_361034">
+        <item>361034</item>
+        <item>@string/ra_361034_title</item>
+        <item>@string/ra_361034_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_361035_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 204…</string>
+    <string name="ra_361035_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 204 et le Chemin Rocheux.</string>
+    <array name="ra_361035">
+        <item>361035</item>
+        <item>@string/ra_361035_title</item>
+        <item>@string/ra_361035_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_361036_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 205</string>
+    <string name="ra_361036_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 205.</string>
+    <array name="ra_361036">
+        <item>361036</item>
+        <item>@string/ra_361036_title</item>
+        <item>@string/ra_361036_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_361037_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 206</string>
+    <string name="ra_361037_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 206.</string>
+    <array name="ra_361037">
+        <item>361037</item>
+        <item>@string/ra_361037_title</item>
+        <item>@string/ra_361037_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_361038_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 207</string>
+    <string name="ra_361038_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 207.</string>
+    <array name="ra_361038">
+        <item>361038</item>
+        <item>@string/ra_361038_title</item>
+        <item>@string/ra_361038_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_361039_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 208</string>
+    <string name="ra_361039_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 208.</string>
+    <array name="ra_361039">
+        <item>361039</item>
+        <item>@string/ra_361039_title</item>
+        <item>@string/ra_361039_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361040_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 209,…</string>
+    <string name="ra_361040_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 209, Bonville et les Ruines de Bonville.</string>
+    <array name="ra_361040">
+        <item>361040</item>
+        <item>@string/ra_361040_title</item>
+        <item>@string/ra_361040_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-gifts</item>
+    </array>
+    <string name="ra_361041_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 210</string>
+    <string name="ra_361041_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 210.</string>
+    <array name="ra_361041">
+        <item>361041</item>
+        <item>@string/ra_361041_title</item>
+        <item>@string/ra_361041_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_361042_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 211</string>
+    <string name="ra_361042_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 211.</string>
+    <array name="ra_361042">
+        <item>361042</item>
+        <item>@string/ra_361042_title</item>
+        <item>@string/ra_361042_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_361043_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 212…</string>
+    <string name="ra_361043_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 212 et le Manoir Pokémon.</string>
+    <array name="ra_361043">
+        <item>361043</item>
+        <item>@string/ra_361043_title</item>
+        <item>@string/ra_361043_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361044_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 213</string>
+    <string name="ra_361044_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 213.</string>
+    <array name="ra_361044">
+        <item>361044</item>
+        <item>@string/ra_361044_title</item>
+        <item>@string/ra_361044_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_361045_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 214…</string>
+    <string name="ra_361045_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 214 et le Tunnel du Ruinemaniac.</string>
+    <array name="ra_361045">
+        <item>361045</item>
+        <item>@string/ra_361045_title</item>
+        <item>@string/ra_361045_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_361046_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 215</string>
+    <string name="ra_361046_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 215.</string>
+    <array name="ra_361046">
+        <item>361046</item>
+        <item>@string/ra_361046_title</item>
+        <item>@string/ra_361046_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_361047_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 216</string>
+    <string name="ra_361047_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 216.</string>
+    <array name="ra_361047">
+        <item>361047</item>
+        <item>@string/ra_361047_title</item>
+        <item>@string/ra_361047_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361048_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 217</string>
+    <string name="ra_361048_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 217.</string>
+    <array name="ra_361048">
+        <item>361048</item>
+        <item>@string/ra_361048_title</item>
+        <item>@string/ra_361048_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361049_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 218</string>
+    <string name="ra_361049_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 218.</string>
+    <array name="ra_361049">
+        <item>361049</item>
+        <item>@string/ra_361049_title</item>
+        <item>@string/ra_361049_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361050_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 219</string>
+    <string name="ra_361050_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 219.</string>
+    <array name="ra_361050">
+        <item>361050</item>
+        <item>@string/ra_361050_title</item>
+        <item>@string/ra_361050_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361051_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 220</string>
+    <string name="ra_361051_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 220.</string>
+    <array name="ra_361051">
+        <item>361051</item>
+        <item>@string/ra_361051_title</item>
+        <item>@string/ra_361051_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361052_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 221</string>
+    <string name="ra_361052_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 221.</string>
+    <array name="ra_361052">
+        <item>361052</item>
+        <item>@string/ra_361052_title</item>
+        <item>@string/ra_361052_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361053_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 222</string>
+    <string name="ra_361053_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 222.</string>
+    <array name="ra_361053">
+        <item>361053</item>
+        <item>@string/ra_361053_title</item>
+        <item>@string/ra_361053_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361054_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 223…</string>
+    <string name="ra_361054_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 223 et Rivamar.</string>
+    <array name="ra_361054">
+        <item>361054</item>
+        <item>@string/ra_361054_title</item>
+        <item>@string/ra_361054_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361055_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 224</string>
+    <string name="ra_361055_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 224.</string>
+    <array name="ra_361055">
+        <item>361055</item>
+        <item>@string/ra_361055_title</item>
+        <item>@string/ra_361055_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_361056_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 225</string>
+    <string name="ra_361056_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 225.</string>
+    <array name="ra_361056">
+        <item>361056</item>
+        <item>@string/ra_361056_title</item>
+        <item>@string/ra_361056_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361057_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 226…</string>
+    <string name="ra_361057_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 226 et l’Aire de Survie.</string>
+    <array name="ra_361057">
+        <item>361057</item>
+        <item>@string/ra_361057_title</item>
+        <item>@string/ra_361057_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361058_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 227</string>
+    <string name="ra_361058_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 227.</string>
+    <array name="ra_361058">
+        <item>361058</item>
+        <item>@string/ra_361058_title</item>
+        <item>@string/ra_361058_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361059_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 228</string>
+    <string name="ra_361059_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 228.</string>
+    <array name="ra_361059">
+        <item>361059</item>
+        <item>@string/ra_361059_title</item>
+        <item>@string/ra_361059_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361060_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 229</string>
+    <string name="ra_361060_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 229.</string>
+    <array name="ra_361060">
+        <item>361060</item>
+        <item>@string/ra_361060_title</item>
+        <item>@string/ra_361060_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361061_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 230…</string>
+    <string name="ra_361061_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route 230 et le Parc des Combats.</string>
+    <array name="ra_361061">
+        <item>361061</item>
+        <item>@string/ra_361061_title</item>
+        <item>@string/ra_361061_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361062_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Abrupt</string>
+    <string name="ra_361062_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : le Mont Abrupt.</string>
+    <array name="ra_361062">
+        <item>361062</item>
+        <item>@string/ra_361062_title</item>
+        <item>@string/ra_361062_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361063_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : les Éoliennes…</string>
+    <string name="ra_361063_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : les Éoliennes et le Pré Floraville.</string>
+    <array name="ra_361063">
+        <item>361063</item>
+        <item>@string/ra_361063_title</item>
+        <item>@string/ra_361063_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_361064_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route…</string>
+    <string name="ra_361064_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Route Victoire et la Ligue Pokémon.</string>
+    <array name="ra_361064">
+        <item>361064</item>
+        <item>@string/ra_361064_title</item>
+        <item>@string/ra_361064_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_361065_title">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Grotte Revêche</string>
+    <string name="ra_361065_text">Récupérer tous les objets et battre tous les Dresseurs dans les lieux suivants : la Grotte Revêche.</string>
+    <array name="ra_361065">
+        <item>361065</item>
+        <item>@string/ra_361065_title</item>
+        <item>@string/ra_361065_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361066_title">Depuis la Route 219, atteindre une case sous le Pêcheur de la Route 221 en 95 pas au maximum</string>
+    <string name="ra_361066_text">Depuis la Route 219, atteindre une case sous le Pêcheur de la Route 221 en 95 pas au maximum.</string>
+    <array name="ra_361066">
+        <item>361066</item>
+        <item>@string/ra_361066_title</item>
+        <item>@string/ra_361066_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_361067_title">Se placer devant chaque emplacement de baie de Sinnoh au cours d’une seule session</string>
+    <string name="ra_361067_text">Se placer devant chaque emplacement de baie de Sinnoh au cours d’une seule session.</string>
+    <array name="ra_361067">
+        <item>361067</item>
+        <item>@string/ra_361067_title</item>
+        <item>@string/ra_361067_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-daily</item>
+    </array>
+    <string name="ra_361068_title">Cuisiner son premier Poffin</string>
+    <string name="ra_361068_text">Cuisiner son premier Poffin.</string>
+    <array name="ra_361068">
+        <item>361068</item>
+        <item>@string/ra_361068_title</item>
+        <item>@string/ra_361068_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361069_title">Gagner un Concours Grâce de rang Normal pour recevoir l’accessoire Barrette Rose</string>
+    <string name="ra_361069_text">Gagner un Concours Grâce de rang Normal pour recevoir l’accessoire Barrette Rose.</string>
+    <array name="ra_361069">
+        <item>361069</item>
+        <item>@string/ra_361069_title</item>
+        <item>@string/ra_361069_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361070_title">Gagner un Concours Sang-froid de rang Normal pour recevoir l’accessoire Barrette Rouge</string>
+    <string name="ra_361070_text">Gagner un Concours Sang-froid de rang Normal pour recevoir l’accessoire Barrette Rouge.</string>
+    <array name="ra_361070">
+        <item>361070</item>
+        <item>@string/ra_361070_title</item>
+        <item>@string/ra_361070_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361071_title">Gagner un Concours Beauté de rang Normal pour recevoir l’accessoire Barrette Bleue</string>
+    <string name="ra_361071_text">Gagner un Concours Beauté de rang Normal pour recevoir l’accessoire Barrette Bleue.</string>
+    <array name="ra_361071">
+        <item>361071</item>
+        <item>@string/ra_361071_title</item>
+        <item>@string/ra_361071_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361072_title">Gagner un Concours Robustesse de rang Normal pour recevoir l’accessoire Barrette Jaune</string>
+    <string name="ra_361072_text">Gagner un Concours Robustesse de rang Normal pour recevoir l’accessoire Barrette Jaune.</string>
+    <array name="ra_361072">
+        <item>361072</item>
+        <item>@string/ra_361072_title</item>
+        <item>@string/ra_361072_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361073_title">Gagner un Concours Intelligence de rang Normal pour recevoir l’accessoire Barrette Verte</string>
+    <string name="ra_361073_text">Gagner un Concours Intelligence de rang Normal pour recevoir l’accessoire Barrette Verte.</string>
+    <array name="ra_361073">
+        <item>361073</item>
+        <item>@string/ra_361073_title</item>
+        <item>@string/ra_361073_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361074_title">Gagner un Concours Grâce de rang Méga pour recevoir l’accessoire Ballon Rose</string>
+    <string name="ra_361074_text">Gagner un Concours Grâce de rang Méga pour recevoir l’accessoire Ballon Rose.</string>
+    <array name="ra_361074">
+        <item>361074</item>
+        <item>@string/ra_361074_title</item>
+        <item>@string/ra_361074_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361075_title">Gagner un Concours Sang-froid de rang Méga pour recevoir l’accessoire Ballons Rouges</string>
+    <string name="ra_361075_text">Gagner un Concours Sang-froid de rang Méga pour recevoir l’accessoire Ballons Rouges.</string>
+    <array name="ra_361075">
+        <item>361075</item>
+        <item>@string/ra_361075_title</item>
+        <item>@string/ra_361075_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361076_title">Gagner un Concours Beauté de rang Méga pour recevoir l’accessoire Ballons Bleus</string>
+    <string name="ra_361076_text">Gagner un Concours Beauté de rang Méga pour recevoir l’accessoire Ballons Bleus.</string>
+    <array name="ra_361076">
+        <item>361076</item>
+        <item>@string/ra_361076_title</item>
+        <item>@string/ra_361076_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361077_title">Gagner un Concours Robustesse de rang Méga pour recevoir l’accessoire Ballon Jaune</string>
+    <string name="ra_361077_text">Gagner un Concours Robustesse de rang Méga pour recevoir l’accessoire Ballon Jaune.</string>
+    <array name="ra_361077">
+        <item>361077</item>
+        <item>@string/ra_361077_title</item>
+        <item>@string/ra_361077_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361078_title">Gagner un Concours Intelligence de rang Méga pour recevoir l’accessoire Ballons Verts</string>
+    <string name="ra_361078_text">Gagner un Concours Intelligence de rang Méga pour recevoir l’accessoire Ballons Verts.</string>
+    <array name="ra_361078">
+        <item>361078</item>
+        <item>@string/ra_361078_title</item>
+        <item>@string/ra_361078_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361079_title">Gagner un Concours Grâce de rang Ultra pour recevoir l’accessoire Coiffe Dentelle</string>
+    <string name="ra_361079_text">Gagner un Concours Grâce de rang Ultra pour recevoir l’accessoire Coiffe Dentelle.</string>
+    <array name="ra_361079">
+        <item>361079</item>
+        <item>@string/ra_361079_title</item>
+        <item>@string/ra_361079_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361080_title">Gagner un Concours Sang-froid de rang Ultra pour recevoir l’accessoire Haut-de-forme</string>
+    <string name="ra_361080_text">Gagner un Concours Sang-froid de rang Ultra pour recevoir l’accessoire Haut-de-forme.</string>
+    <array name="ra_361080">
+        <item>361080</item>
+        <item>@string/ra_361080_title</item>
+        <item>@string/ra_361080_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361081_title">Gagner un Concours Beauté de rang Ultra pour recevoir l’accessoire Voile de Soie</string>
+    <string name="ra_361081_text">Gagner un Concours Beauté de rang Ultra pour recevoir l’accessoire Voile de Soie.</string>
+    <array name="ra_361081">
+        <item>361081</item>
+        <item>@string/ra_361081_title</item>
+        <item>@string/ra_361081_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361082_title">Gagner un Concours Robustesse de rang Ultra pour recevoir l’accessoire Bandeau Héroïque</string>
+    <string name="ra_361082_text">Gagner un Concours Robustesse de rang Ultra pour recevoir l’accessoire Bandeau Héroïque.</string>
+    <array name="ra_361082">
+        <item>361082</item>
+        <item>@string/ra_361082_title</item>
+        <item>@string/ra_361082_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361083_title">Gagner un Concours Intelligence de rang Ultra pour recevoir l’accessoire Chapeau Prof</string>
+    <string name="ra_361083_text">Gagner un Concours Intelligence de rang Ultra pour recevoir l’accessoire Chapeau Prof.</string>
+    <array name="ra_361083">
+        <item>361083</item>
+        <item>@string/ra_361083_title</item>
+        <item>@string/ra_361083_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361084_title">Gagner un Concours Grâce de rang Master pour recevoir l’accessoire Scène Fleurie</string>
+    <string name="ra_361084_text">Gagner un Concours Grâce de rang Master pour recevoir l’accessoire Scène Fleurie.</string>
+    <array name="ra_361084">
+        <item>361084</item>
+        <item>@string/ra_361084_title</item>
+        <item>@string/ra_361084_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361085_title">Gagner un Concours Sang-froid de rang Master pour recevoir l’accessoire Piédestal Doré</string>
+    <string name="ra_361085_text">Gagner un Concours Sang-froid de rang Master pour recevoir l’accessoire Piédestal Doré.</string>
+    <array name="ra_361085">
+        <item>361085</item>
+        <item>@string/ra_361085_title</item>
+        <item>@string/ra_361085_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361086_title">Gagner un Concours Beauté de rang Master pour recevoir l’accessoire Scène de Verre</string>
+    <string name="ra_361086_text">Gagner un Concours Beauté de rang Master pour recevoir l’accessoire Scène de Verre.</string>
+    <array name="ra_361086">
+        <item>361086</item>
+        <item>@string/ra_361086_title</item>
+        <item>@string/ra_361086_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361087_title">Gagner un Concours Robustesse de rang Master pour recevoir l’accessoire Podium</string>
+    <string name="ra_361087_text">Gagner un Concours Robustesse de rang Master pour recevoir l’accessoire Podium.</string>
+    <array name="ra_361087">
+        <item>361087</item>
+        <item>@string/ra_361087_title</item>
+        <item>@string/ra_361087_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361088_title">Gagner un Concours Intelligence de rang Master pour recevoir l’accessoire Scène Cubique</string>
+    <string name="ra_361088_text">Gagner un Concours Intelligence de rang Master pour recevoir l’accessoire Scène Cubique.</string>
+    <array name="ra_361088">
+        <item>361088</item>
+        <item>@string/ra_361088_title</item>
+        <item>@string/ra_361088_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_361089_title">Après vingt victoires dans la salle de Combat Solo de la Tour de Combat, battre Koner</string>
+    <string name="ra_361089_text">Après vingt victoires dans la salle de Combat Solo de la Tour de Combat, battre Koner.</string>
+    <array name="ra_361089">
+        <item>361089</item>
+        <item>@string/ra_361089_title</item>
+        <item>@string/ra_361089_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361090_title">Après 48 victoires dans la salle de Combat Solo de la Tour de Combat, battre à nouveau Koner</string>
+    <string name="ra_361090_text">Après 48 victoires dans la salle de Combat Solo de la Tour de Combat, battre à nouveau Koner.</string>
+    <array name="ra_361090">
+        <item>361090</item>
+        <item>@string/ra_361090_title</item>
+        <item>@string/ra_361090_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_361091_title">Obtenir toutes les applications possibles de la Pokémontre</string>
+    <string name="ra_361091_text">Obtenir toutes les applications possibles de la Pokémontre.</string>
+    <array name="ra_361091">
+        <item>361091</item>
+        <item>@string/ra_361091_title</item>
+        <item>@string/ra_361091_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_361092_title">Apprendre la moitié des mots à la mode auprès du vieil homme de Frimapic</string>
+    <string name="ra_361092_text">Apprendre la moitié des mots à la mode auprès du vieil homme de Frimapic.</string>
+    <array name="ra_361092">
+        <item>361092</item>
+        <item>@string/ra_361092_title</item>
+        <item>@string/ra_361092_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361093_title">Apprendre tous les mots à la mode auprès du vieil homme de Frimapic</string>
+    <string name="ra_361093_text">Apprendre tous les mots à la mode auprès du vieil homme de Frimapic.</string>
+    <array name="ra_361093">
+        <item>361093</item>
+        <item>@string/ra_361093_title</item>
+        <item>@string/ra_361093_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_361094_title">Créer sa Base Secrète dans le Souterrain</string>
+    <string name="ra_361094_text">Créer sa Base Secrète dans le Souterrain.</string>
+    <array name="ra_361094">
+        <item>361094</item>
+        <item>@string/ra_361094_title</item>
+        <item>@string/ra_361094_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-fossils</item>
+    </array>
+    <string name="ra_361095_title">Monter sur sa Bicyclette à Vestigion sans l’utiliser depuis le Sac ni l’assigner à un bouton</string>
+    <string name="ra_361095_text">Monter sur sa Bicyclette à Vestigion sans l’utiliser depuis le Sac ni l’assigner à un bouton.</string>
+    <array name="ra_361095">
+        <item>361095</item>
+        <item>@string/ra_361095_title</item>
+        <item>@string/ra_361095_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <array name="achievements_12">
+        <item>@array/ra_360974</item>
+        <item>@array/ra_360975</item>
+        <item>@array/ra_360976</item>
+        <item>@array/ra_360977</item>
+        <item>@array/ra_360978</item>
+        <item>@array/ra_360979</item>
+        <item>@array/ra_360980</item>
+        <item>@array/ra_360981</item>
+        <item>@array/ra_360982</item>
+        <item>@array/ra_360983</item>
+        <item>@array/ra_360984</item>
+        <item>@array/ra_360985</item>
+        <item>@array/ra_360986</item>
+        <item>@array/ra_360987</item>
+        <item>@array/ra_360988</item>
+        <item>@array/ra_360989</item>
+        <item>@array/ra_360990</item>
+        <item>@array/ra_360991</item>
+        <item>@array/ra_360992</item>
+        <item>@array/ra_360993</item>
+        <item>@array/ra_360994</item>
+        <item>@array/ra_360995</item>
+        <item>@array/ra_360996</item>
+        <item>@array/ra_360997</item>
+        <item>@array/ra_360998</item>
+        <item>@array/ra_360999</item>
+        <item>@array/ra_361000</item>
+        <item>@array/ra_361001</item>
+        <item>@array/ra_361002</item>
+        <item>@array/ra_361003</item>
+        <item>@array/ra_361004</item>
+        <item>@array/ra_361005</item>
+        <item>@array/ra_361006</item>
+        <item>@array/ra_361007</item>
+        <item>@array/ra_361008</item>
+        <item>@array/ra_361009</item>
+        <item>@array/ra_361010</item>
+        <item>@array/ra_361012</item>
+        <item>@array/ra_361013</item>
+        <item>@array/ra_361014</item>
+        <item>@array/ra_361015</item>
+        <item>@array/ra_361016</item>
+        <item>@array/ra_361017</item>
+        <item>@array/ra_361018</item>
+        <item>@array/ra_361019</item>
+        <item>@array/ra_361020</item>
+        <item>@array/ra_361021</item>
+        <item>@array/ra_361022</item>
+        <item>@array/ra_361023</item>
+        <item>@array/ra_361024</item>
+        <item>@array/ra_361025</item>
+        <item>@array/ra_361026</item>
+        <item>@array/ra_361027</item>
+        <item>@array/ra_361028</item>
+        <item>@array/ra_361029</item>
+        <item>@array/ra_361030</item>
+        <item>@array/ra_361031</item>
+        <item>@array/ra_361032</item>
+        <item>@array/ra_361033</item>
+        <item>@array/ra_361034</item>
+        <item>@array/ra_361035</item>
+        <item>@array/ra_361036</item>
+        <item>@array/ra_361037</item>
+        <item>@array/ra_361038</item>
+        <item>@array/ra_361039</item>
+        <item>@array/ra_361040</item>
+        <item>@array/ra_361041</item>
+        <item>@array/ra_361042</item>
+        <item>@array/ra_361043</item>
+        <item>@array/ra_361044</item>
+        <item>@array/ra_361045</item>
+        <item>@array/ra_361046</item>
+        <item>@array/ra_361047</item>
+        <item>@array/ra_361048</item>
+        <item>@array/ra_361049</item>
+        <item>@array/ra_361050</item>
+        <item>@array/ra_361051</item>
+        <item>@array/ra_361052</item>
+        <item>@array/ra_361053</item>
+        <item>@array/ra_361054</item>
+        <item>@array/ra_361055</item>
+        <item>@array/ra_361056</item>
+        <item>@array/ra_361057</item>
+        <item>@array/ra_361058</item>
+        <item>@array/ra_361059</item>
+        <item>@array/ra_361060</item>
+        <item>@array/ra_361061</item>
+        <item>@array/ra_361062</item>
+        <item>@array/ra_361063</item>
+        <item>@array/ra_361064</item>
+        <item>@array/ra_361065</item>
+        <item>@array/ra_361066</item>
+        <item>@array/ra_361067</item>
+        <item>@array/ra_361068</item>
+        <item>@array/ra_361069</item>
+        <item>@array/ra_361070</item>
+        <item>@array/ra_361071</item>
+        <item>@array/ra_361072</item>
+        <item>@array/ra_361073</item>
+        <item>@array/ra_361074</item>
+        <item>@array/ra_361075</item>
+        <item>@array/ra_361076</item>
+        <item>@array/ra_361077</item>
+        <item>@array/ra_361078</item>
+        <item>@array/ra_361079</item>
+        <item>@array/ra_361080</item>
+        <item>@array/ra_361081</item>
+        <item>@array/ra_361082</item>
+        <item>@array/ra_361083</item>
+        <item>@array/ra_361084</item>
+        <item>@array/ra_361085</item>
+        <item>@array/ra_361086</item>
+        <item>@array/ra_361087</item>
+        <item>@array/ra_361088</item>
+        <item>@array/ra_361089</item>
+        <item>@array/ra_361090</item>
+        <item>@array/ra_361091</item>
+        <item>@array/ra_361092</item>
+        <item>@array/ra_361093</item>
+        <item>@array/ra_361094</item>
+        <item>@array/ra_361095</item>
+    </array>
+</resources>

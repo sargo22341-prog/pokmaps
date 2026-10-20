@@ -8,7 +8,10 @@ enum class FriendshipRules {
     CRYSTAL,
     RUBY_SAPPHIRE,
     EMERALD,
-    FIRERED_LEAFGREEN;
+    FIRERED_LEAFGREEN,
+    SINNOH;
+
+    val modern: Boolean get() = gba || this == SINNOH
 
     val gba: Boolean get() = this in setOf(RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
 
@@ -16,13 +19,16 @@ enum class FriendshipRules {
         when (event) {
             FriendshipEvent.LEVEL_AT_CAPTURE_PLACE -> this == CRYSTAL
 
-            FriendshipEvent.GROOMING -> !gba
+            FriendshipEvent.GROOMING -> !modern
 
-            FriendshipEvent.WALKING -> gba
+            FriendshipEvent.WALKING -> modern
 
-            FriendshipEvent.MASSAGE -> this == FIRERED_LEAFGREEN
+            FriendshipEvent.MASSAGE -> this == FIRERED_LEAFGREEN || this == SINNOH
 
-            FriendshipEvent.EV_BERRY -> this == EMERALD
+            FriendshipEvent.SPA, FriendshipEvent.SPA_MEDIUM, FriendshipEvent.SPA_LARGE,
+            FriendshipEvent.CONTEST -> this == SINNOH
+
+            FriendshipEvent.EV_BERRY -> this == EMERALD || this == SINNOH
 
             FriendshipEvent.LEVEL, FriendshipEvent.VITAMIN, FriendshipEvent.X_ITEM,
             FriendshipEvent.GYM_BATTLE, FriendshipEvent.LEARN_MOVE, FriendshipEvent.FAINT,
@@ -40,7 +46,21 @@ enum class FriendshipRules {
     ): Int {
         require(event in events)
         var delta = event.delta(value)
-        if (gba && delta > 0) {
+        val itemEvent = event in setOf(
+            FriendshipEvent.VITAMIN,
+            FriendshipEvent.X_ITEM,
+            FriendshipEvent.EV_BERRY,
+            FriendshipEvent.MASSAGE,
+            FriendshipEvent.SPA,
+            FriendshipEvent.SPA_MEDIUM,
+            FriendshipEvent.SPA_LARGE
+        )
+        if (this == SINNOH && !itemEvent && delta > 0) {
+            if (luxuryBall) delta++
+            if (capturePlace) delta++
+            if (sootheBell) delta = delta * 150 / 100
+        }
+        if ((gba || (this == SINNOH && itemEvent)) && delta > 0) {
             if (sootheBell) delta = delta * 150 / 100
             if (luxuryBall) delta++
             if (capturePlace) delta++
@@ -51,18 +71,11 @@ enum class FriendshipRules {
     companion object {
         fun forGame(game: Game): FriendshipRules = when (game.versionGroup) {
             VersionGroup.GOLD_SILVER -> GOLD_SILVER
-
             VersionGroup.CRYSTAL -> CRYSTAL
-
             VersionGroup.RUBY_SAPPHIRE -> RUBY_SAPPHIRE
-
             VersionGroup.EMERALD -> EMERALD
-
             VersionGroup.FIRERED_LEAFGREEN -> FIRERED_LEAFGREEN
-
-            VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM ->
-                error("Outil de bonheur Sinnoh non disponible")
-
+            VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> SINNOH
             VersionGroup.RED_BLUE, VersionGroup.YELLOW -> error("Jeu sans outil de bonheur : ${game.versionIdentifier}")
         }
     }

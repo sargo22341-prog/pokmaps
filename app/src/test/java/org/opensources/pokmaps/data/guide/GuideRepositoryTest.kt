@@ -70,8 +70,13 @@ class GuideRepositoryTest {
     }
 
     private fun checkSinnohArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {
-        val articles = library.articles
-        assertEquals(25, articles.size)
+        val achievements = library.articles.filter { it.achievementId != null }
+        val expected = mapOf(12 to 121, 13 to 210, 14 to 101)
+        assertEquals(expected[library.game.versionId], achievements.size)
+        assertTrue(achievements.all { it.points >= 0 })
+        assertTrue(achievements.all { a -> library.articles.any { a.id in it.relatedIds } })
+        val articles = library.articles.filter { it.achievementId == null }
+        assertEquals(28, articles.size)
         assertEquals(12, articles.count { it.category == GuideCategory.WALKTHROUGH })
         assertEquals(4, articles.count { it.category == GuideCategory.CALENDAR })
         assertEquals(GuideCategory.entries.toSet() - GuideCategory.ACHIEVEMENT, articles.map { it.category }.toSet())

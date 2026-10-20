@@ -28,6 +28,7 @@ internal fun GbaParentValues(
     sexes: List<ParentSex>,
     values: ParentValues,
     first: Boolean,
+    sinnoh: Boolean = false,
     onAction: (BreedingAction) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -39,7 +40,7 @@ internal fun GbaParentValues(
             )
         }
     }
-    GbaParentItem(values.item) { onAction(BreedingAction.Values(first, values.copy(item = it))) }
+    GbaParentItem(values.item, sinnoh) { onAction(BreedingAction.Values(first, values.copy(item = it))) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         BreedingIv.entries.chunked(2).forEach { stats ->
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -64,14 +65,14 @@ internal fun GbaParentValues(
 }
 
 @Composable
-private fun GbaParentItem(item: BreedingItem, onItem: (BreedingItem) -> Unit) {
+private fun GbaParentItem(item: BreedingItem, sinnoh: Boolean, onItem: (BreedingItem) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     Column {
         OutlinedButton(onClick = { expanded = true }) {
             Text(stringResource(R.string.breeding_held_item, stringResource(item.label())))
         }
         DropdownMenu(expanded, onDismissRequest = { expanded = false }) {
-            BreedingItem.entries.forEach { choice ->
+            BreedingItem.entries.filter { sinnoh || !it.sinnohOnly }.forEach { choice ->
                 DropdownMenuItem(text = { Text(stringResource(choice.label())) }, onClick = {
                     expanded = false
                     onItem(choice)
@@ -83,7 +84,7 @@ private fun GbaParentItem(item: BreedingItem, onItem: (BreedingItem) -> Unit) {
 
 @Composable
 internal fun GbaBreedingResult(state: BreedingUiState) {
-    Text(stringResource(R.string.breeding_gba_ivs))
+    Text(stringResource(if (state.sinnoh) R.string.breeding_sinnoh_ivs else R.string.breeding_gba_ivs))
     BreedingIv.entries.forEach { stat ->
         val unknown = stringResource(R.string.breeding_unknown_iv)
         Text(
@@ -95,7 +96,7 @@ internal fun GbaBreedingResult(state: BreedingUiState) {
             )
         )
     }
-    Text(stringResource(R.string.breeding_gba_abilities))
+    Text(stringResource(if (state.sinnoh) R.string.breeding_sinnoh_abilities else R.string.breeding_gba_abilities))
     state.babyAbilities.forEach { (name, abilities) ->
         Text(
             stringResource(
@@ -110,7 +111,10 @@ internal fun GbaBreedingResult(state: BreedingUiState) {
         if (natureParent == null) {
             stringResource(R.string.breeding_random_nature)
         } else {
-            stringResource(R.string.breeding_everstone_nature, natureParent + 1)
+            stringResource(
+                if (state.sinnoh) R.string.breeding_sinnoh_everstone else R.string.breeding_everstone_nature,
+                natureParent + 1
+            )
         }
     )
 }
@@ -121,6 +125,13 @@ private fun BreedingItem.label(): Int = when (this) {
     BreedingItem.LAX_INCENSE -> R.string.breeding_lax_incense
     BreedingItem.LIGHT_BALL -> R.string.breeding_light_ball
     BreedingItem.EVERSTONE -> R.string.breeding_everstone
+    BreedingItem.ODD_INCENSE -> R.string.breeding_odd_incense
+    BreedingItem.ROCK_INCENSE -> R.string.breeding_rock_incense
+    BreedingItem.FULL_INCENSE -> R.string.breeding_full_incense
+    BreedingItem.WAVE_INCENSE -> R.string.breeding_wave_incense
+    BreedingItem.ROSE_INCENSE -> R.string.breeding_rose_incense
+    BreedingItem.LUCK_INCENSE -> R.string.breeding_luck_incense
+    BreedingItem.PURE_INCENSE -> R.string.breeding_pure_incense
 }
 
 private fun BreedingIv.label(): Int = when (this) {

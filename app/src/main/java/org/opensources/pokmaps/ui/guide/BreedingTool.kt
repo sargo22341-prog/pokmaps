@@ -76,7 +76,7 @@ internal fun BreedingTool(
                         it.first == child.id
                     }?.second.orEmpty().forEach { Text(it.name) }
                 }
-                if (state.gba) {
+                if (state.ivBased) {
                     GbaBreedingResult(state)
                 } else {
                     Text(stringResource(R.string.breeding_inheritance_note), style = MaterialTheme.typography.bodySmall)
@@ -102,8 +102,9 @@ private fun BreedingParent(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(if (first) R.string.breeding_parent_one else R.string.breeding_parent_two))
         BreedingSpeciesSelector(parent.id, parent.name, state, first, onAction, onPreview)
-        if (state.gba) {
-            GbaParentValues(sexes, values, first, onAction)
+        if (state.ivBased) {
+            GbaParentValues(sexes, values, first, state.sinnoh, onAction)
+            if (state.sinnoh && first) SinnohLanguage(state, onAction)
         } else {
             BreedingParentValues(sexes, values, first, onAction)
         }

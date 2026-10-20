@@ -10,15 +10,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.guide.FriendshipRules
 
 @Composable
 internal fun GbaFriendshipOptions(state: FriendshipUiState, onAction: (FriendshipAction) -> Unit) {
     FriendshipOption(state.sootheBell, R.string.friendship_soothe_bell) { onAction(FriendshipAction.SootheBell(it)) }
     FriendshipOption(state.luxuryBall, R.string.friendship_luxury_ball) { onAction(FriendshipAction.LuxuryBall(it)) }
-    FriendshipOption(state.capturePlace, R.string.friendship_capture_place) {
+    FriendshipOption(
+        state.capturePlace,
+        if (state.rules ==
+            FriendshipRules.SINNOH
+        ) {
+            R.string.friendship_egg_place
+        } else {
+            R.string.friendship_capture_place
+        }
+    ) {
         onAction(FriendshipAction.CapturePlace(it))
     }
-    Text(stringResource(R.string.friendship_gba_note))
+    Text(
+        stringResource(
+            if (state.rules == FriendshipRules.SINNOH) {
+                R.string.friendship_sinnoh_note
+            } else {
+                R.string.friendship_gba_note
+            }
+        )
+    )
 }
 
 @Composable

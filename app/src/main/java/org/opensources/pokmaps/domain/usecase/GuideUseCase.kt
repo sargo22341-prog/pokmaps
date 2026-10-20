@@ -20,6 +20,7 @@ import org.opensources.pokmaps.domain.guide.GuideProgress
 /** Contrat substitué en mémoire dans les tests des états et des écritures du guide. */
 interface Guides {
     fun observe(): Flow<Pair<GuideLibrary, GuideProgress>>
+    suspend fun observeRoamer(version: Int, pokemon: Int, place: String?)
     suspend fun complete(versionId: Int, id: String, completed: Boolean)
 }
 
@@ -45,6 +46,9 @@ class GuideUseCase @Inject constructor(
                 library.copy(unown = forms[library.game.versionId].orEmpty()) to progress
             }
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun observeRoamer(version: Int, pokemon: Int, place: String?) =
+        settings.observeRoamer(version, pokemon, place)
 
     override suspend fun complete(versionId: Int, id: String, completed: Boolean) =
         settings.complete(versionId, id, completed)

@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <item name="ra_91200_title" type="string">@string/ra_360977_title</item>
+    <item name="ra_91200_text" type="string">@string/ra_360977_text</item>
+    <array name="ra_91200">
+        <item>91200</item>
+        <item>@string/ra_91200_title</item>
+        <item>@string/ra_91200_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <item name="ra_91201_title" type="string">@string/ra_360982_title</item>
+    <item name="ra_91201_text" type="string">@string/ra_360982_text</item>
+    <array name="ra_91201">
+        <item>91201</item>
+        <item>@string/ra_91201_title</item>
+        <item>@string/ra_91201_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <item name="ra_91202_title" type="string">@string/ra_360987_title</item>
+    <item name="ra_91202_text" type="string">@string/ra_360987_text</item>
+    <array name="ra_91202">
+        <item>91202</item>
+        <item>@string/ra_91202_title</item>
+        <item>@string/ra_91202_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <item name="ra_91203_title" type="string">@string/ra_360990_title</item>
+    <item name="ra_91203_text" type="string">@string/ra_360990_text</item>
+    <array name="ra_91203">
+        <item>91203</item>
+        <item>@string/ra_91203_title</item>
+        <item>@string/ra_91203_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <item name="ra_91204_title" type="string">@string/ra_360994_title</item>
+    <item name="ra_91204_text" type="string">@string/ra_360994_text</item>
+    <array name="ra_91204">
+        <item>91204</item>
+        <item>@string/ra_91204_title</item>
+        <item>@string/ra_91204_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <item name="ra_91205_title" type="string">@string/ra_360997_title</item>
+    <item name="ra_91205_text" type="string">@string/ra_360997_text</item>
+    <array name="ra_91205">
+        <item>91205</item>
+        <item>@string/ra_91205_title</item>
+        <item>@string/ra_91205_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <item name="ra_91206_title" type="string">@string/ra_361001_title</item>
+    <item name="ra_91206_text" type="string">@string/ra_361001_text</item>
+    <array name="ra_91206">
+        <item>91206</item>
+        <item>@string/ra_91206_title</item>
+        <item>@string/ra_91206_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <item name="ra_91207_title" type="string">@string/ra_361006_title</item>
+    <item name="ra_91207_text" type="string">@string/ra_361006_text</item>
+    <array name="ra_91207">
+        <item>91207</item>
+        <item>@string/ra_91207_title</item>
+        <item>@string/ra_91207_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_91208_title">Battre le Conseil 4 et Cynthia à la Ligue Pokémon pour devenir Maître</string>
+    <string name="ra_91208_text">Battre le Conseil 4 et Cynthia à la Ligue Pokémon pour devenir Maître.</string>
+    <array name="ra_91208">
+        <item>91208</item>
+        <item>@string/ra_91208_title</item>
+        <item>@string/ra_91208_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_95752_title">Battre Pierrick en revanche au Café Combat</string>
+    <string name="ra_95752_text">Battre Pierrick en revanche au Café Combat.</string>
+    <array name="ra_95752">
+        <item>95752</item>
+        <item>@string/ra_95752_title</item>
+        <item>@string/ra_95752_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95751_title">Battre Flo en revanche au Café Combat</string>
+    <string name="ra_95751_text">Battre Flo en revanche au Café Combat.</string>
+    <array name="ra_95751">
+        <item>95751</item>
+        <item>@string/ra_95751_title</item>
+        <item>@string/ra_95751_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95753_title">Battre Mélina en revanche au Café Combat</string>
+    <string name="ra_95753_text">Battre Mélina en revanche au Café Combat.</string>
+    <array name="ra_95753">
+        <item>95753</item>
+        <item>@string/ra_95753_title</item>
+        <item>@string/ra_95753_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95754_title">Battre Lovis en revanche au Café Combat</string>
+    <string name="ra_95754_text">Battre Lovis en revanche au Café Combat.</string>
+    <array name="ra_95754">
+        <item>95754</item>
+        <item>@string/ra_95754_title</item>
+        <item>@string/ra_95754_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95755_title">Battre Kiméra en revanche au Café Combat</string>
+    <string name="ra_95755_text">Battre Kiméra en revanche au Café Combat.</string>
+    <array name="ra_95755">
+        <item>95755</item>
+        <item>@string/ra_95755_title</item>
+        <item>@string/ra_95755_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95756_title">Battre Charles en revanche au Café Combat</string>
+    <string name="ra_95756_text">Battre Charles en revanche au Café Combat.</string>
+    <array name="ra_95756">
+        <item>95756</item>
+        <item>@string/ra_95756_title</item>
+        <item>@string/ra_95756_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95757_title">Battre Gladys en revanche au Café Combat</string>
+    <string name="ra_95757_text">Battre Gladys en revanche au Café Combat.</string>
+    <array name="ra_95757">
+        <item>95757</item>
+        <item>@string/ra_95757_title</item>
+        <item>@string/ra_95757_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95758_title">Battre Tanguy en revanche au Café Combat</string>
+    <string name="ra_95758_text">Battre Tanguy en revanche au Café Combat.</string>
+    <array name="ra_95758">
+        <item>95758</item>
+        <item>@string/ra_95758_title</item>
+        <item>@string/ra_95758_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95759_title">Battre Sara en revanche au Café Combat</string>
+    <string name="ra_95759_text">Battre Sara en revanche au Café Combat.</string>
+    <array name="ra_95759">
+        <item>95759</item>
+        <item>@string/ra_95759_title</item>
+        <item>@string/ra_95759_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95760_title">Battre Cornil en revanche au Café Combat</string>
+    <string name="ra_95760_text">Battre Cornil en revanche au Café Combat.</string>
+    <array name="ra_95760">
+        <item>95760</item>
+        <item>@string/ra_95760_title</item>
+        <item>@string/ra_95760_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95761_title">Battre Viviane en revanche au Café Combat</string>
+    <string name="ra_95761_text">Battre Viviane en revanche au Café Combat.</string>
+    <array name="ra_95761">
+        <item>95761</item>
+        <item>@string/ra_95761_title</item>
+        <item>@string/ra_95761_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95762_title">Battre Armand en revanche au Café Combat</string>
+    <string name="ra_95762_text">Battre Armand en revanche au Café Combat.</string>
+    <array name="ra_95762">
+        <item>95762</item>
+        <item>@string/ra_95762_title</item>
+        <item>@string/ra_95762_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95763_title">Battre Mira en revanche au Café Combat</string>
+    <string name="ra_95763_text">Battre Mira en revanche au Café Combat.</string>
+    <array name="ra_95763">
+        <item>95763</item>
+        <item>@string/ra_95763_title</item>
+        <item>@string/ra_95763_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95749_title">Battre le rival à l’Aire de Survie</string>
+    <string name="ra_95749_text">Battre le rival à l’Aire de Survie.</string>
+    <array name="ra_95749">
+        <item>95749</item>
+        <item>@string/ra_95749_title</item>
+        <item>@string/ra_95749_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91209_title">Être à nouveau sacré Maître de la Ligue Pokémon</string>
+    <string name="ra_91209_text">Être à nouveau sacré Maître de la Ligue Pokémon.</string>
+    <array name="ra_91209">
+        <item>91209</item>
+        <item>@string/ra_91209_title</item>
+        <item>@string/ra_91209_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-league</item>
+    </array>
+    <string name="ra_95750_title">Battre le rival à l’Aire de Survie avec sa dernière équipe</string>
+    <string name="ra_95750_text">Battre le rival à l’Aire de Survie avec sa dernière équipe.</string>
+    <array name="ra_95750">
+        <item>95750</item>
+        <item>@string/ra_95750_title</item>
+        <item>@string/ra_95750_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91472_title">Battre Koner et obtenir la Photo Argent de la Tour de Combat</string>
+    <string name="ra_91472_text">Battre Koner et obtenir la Photo Argent de la Tour de Combat.</string>
+    <array name="ra_91472">
+        <item>91472</item>
+        <item>@string/ra_91472_title</item>
+        <item>@string/ra_91472_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91473_title">Battre à nouveau Koner et obtenir la Photo Or de la Tour de Combat</string>
+    <string name="ra_91473_text">Battre à nouveau Koner et obtenir la Photo Or de la Tour de Combat.</string>
+    <array name="ra_91473">
+        <item>91473</item>
+        <item>@string/ra_91473_title</item>
+        <item>@string/ra_91473_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_381776_title">Atteindre cent victoires consécutives en mode Solo à la Tour de Combat pour débloquer une…</string>
+    <string name="ra_381776_text">Atteindre cent victoires consécutives en mode Solo à la Tour de Combat pour débloquer une étoile de Dresseur.</string>
+    <array name="ra_381776">
+        <item>381776</item>
+        <item>@string/ra_381776_title</item>
+        <item>@string/ra_381776_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91474_title">Battre Cardus et obtenir la Photo Argent de l’Usine de Combat</string>
+    <string name="ra_91474_text">Battre Cardus et obtenir la Photo Argent de l’Usine de Combat.</string>
+    <array name="ra_91474">
+        <item>91474</item>
+        <item>@string/ra_91474_title</item>
+        <item>@string/ra_91474_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91475_title">Battre à nouveau Cardus et obtenir la Photo Or de l’Usine de Combat</string>
+    <string name="ra_91475_text">Battre à nouveau Cardus et obtenir la Photo Or de l’Usine de Combat.</string>
+    <array name="ra_91475">
+        <item>91475</item>
+        <item>@string/ra_91475_title</item>
+        <item>@string/ra_91475_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91476_title">Atteindre une série de trente échanges à l’Usine de Combat</string>
+    <string name="ra_91476_text">Atteindre une série de trente échanges à l’Usine de Combat.</string>
+    <array name="ra_91476">
+        <item>91476</item>
+        <item>@string/ra_91476_title</item>
+        <item>@string/ra_91476_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91477_title">Battre Argenta et obtenir la Photo Argent du Hall de Combat</string>
+    <string name="ra_91477_text">Battre Argenta et obtenir la Photo Argent du Hall de Combat.</string>
+    <array name="ra_91477">
+        <item>91477</item>
+        <item>@string/ra_91477_title</item>
+        <item>@string/ra_91477_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91478_title">Battre à nouveau Argenta et obtenir la Photo Or du Hall de Combat</string>
+    <string name="ra_91478_text">Battre à nouveau Argenta et obtenir la Photo Or du Hall de Combat.</string>
+    <array name="ra_91478">
+        <item>91478</item>
+        <item>@string/ra_91478_title</item>
+        <item>@string/ra_91478_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91479_title">Battre Parsley et obtenir la Photo Argent du Castel de Combat</string>
+    <string name="ra_91479_text">Battre Parsley et obtenir la Photo Argent du Castel de Combat.</string>
+    <array name="ra_91479">
+        <item>91479</item>
+        <item>@string/ra_91479_title</item>
+        <item>@string/ra_91479_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91480_title">Battre à nouveau Parsley et obtenir la Photo Or du Castel de Combat</string>
+    <string name="ra_91480_text">Battre à nouveau Parsley et obtenir la Photo Or du Castel de Combat.</string>
+    <array name="ra_91480">
+        <item>91480</item>
+        <item>@string/ra_91480_title</item>
+        <item>@string/ra_91480_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91481_title">Économiser au moins 1 500 PC en même temps au Castel de Combat</string>
+    <string name="ra_91481_text">Économiser au moins 1 500 PC en même temps au Castel de Combat.</string>
+    <array name="ra_91481">
+        <item>91481</item>
+        <item>@string/ra_91481_title</item>
+        <item>@string/ra_91481_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91482_title">Battre Dahlia et obtenir la Photo Argent de la Scène de Combat</string>
+    <string name="ra_91482_text">Battre Dahlia et obtenir la Photo Argent de la Scène de Combat.</string>
+    <array name="ra_91482">
+        <item>91482</item>
+        <item>@string/ra_91482_title</item>
+        <item>@string/ra_91482_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91483_title">Battre à nouveau Dahlia et obtenir la Photo Or de la Scène de Combat</string>
+    <string name="ra_91483_text">Battre à nouveau Dahlia et obtenir la Photo Or de la Scène de Combat.</string>
+    <array name="ra_91483">
+        <item>91483</item>
+        <item>@string/ra_91483_title</item>
+        <item>@string/ra_91483_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91487_title">Capturer Giratina au bout du Monde Distorsion après avoir battu Hélio, ou après l’énigme de la…</string>
+    <string name="ra_91487_text">Capturer Giratina au bout du Monde Distorsion après avoir battu Hélio, ou après l’énigme de la Grotte Retour.</string>
+    <array name="ra_91487">
+        <item>91487</item>
+        <item>@string/ra_91487_title</item>
+        <item>@string/ra_91487_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_91488_title">Capturer Dialga en interagissant avec le portail bleu au sommet des Colonnes Lances</string>
+    <string name="ra_91488_text">Capturer Dialga en interagissant avec le portail bleu au sommet des Colonnes Lances.</string>
+    <array name="ra_91488">
+        <item>91488</item>
+        <item>@string/ra_91488_title</item>
+        <item>@string/ra_91488_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_91489_title">Capturer Palkia en interagissant avec le portail rose au sommet des Colonnes Lances</string>
+    <string name="ra_91489_text">Capturer Palkia en interagissant avec le portail rose au sommet des Colonnes Lances.</string>
+    <array name="ra_91489">
+        <item>91489</item>
+        <item>@string/ra_91489_title</item>
+        <item>@string/ra_91489_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-summit</item>
+    </array>
+    <string name="ra_91493_title">Capturer Heatran dans la salle la plus profonde du Mont Abrupt</string>
+    <string name="ra_91493_text">Capturer Heatran dans la salle la plus profonde du Mont Abrupt.</string>
+    <array name="ra_91493">
+        <item>91493</item>
+        <item>@string/ra_91493_title</item>
+        <item>@string/ra_91493_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_91490_title">Capturer Créhelf dans la caverne du Lac Savoir</string>
+    <string name="ra_91490_text">Capturer Créhelf dans la caverne du Lac Savoir.</string>
+    <array name="ra_91490">
+        <item>91490</item>
+        <item>@string/ra_91490_title</item>
+        <item>@string/ra_91490_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91491_title">Capturer Créfollet après l’avoir traqué</string>
+    <string name="ra_91491_text">Capturer Créfollet après l’avoir traqué.</string>
+    <array name="ra_91491">
+        <item>91491</item>
+        <item>@string/ra_91491_title</item>
+        <item>@string/ra_91491_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_91492_title">Capturer Créfadet dans la caverne du Lac Courage</string>
+    <string name="ra_91492_text">Capturer Créfadet dans la caverne du Lac Courage.</string>
+    <array name="ra_91492">
+        <item>91492</item>
+        <item>@string/ra_91492_title</item>
+        <item>@string/ra_91492_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91494_title">Capturer Cresselia après l’avoir traquée</string>
+    <string name="ra_91494_text">Capturer Cresselia après l’avoir traquée.</string>
+    <array name="ra_91494">
+        <item>91494</item>
+        <item>@string/ra_91494_title</item>
+        <item>@string/ra_91494_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_91495_title">Capturer Artikodin après l’avoir traqué</string>
+    <string name="ra_91495_text">Capturer Artikodin après l’avoir traqué.</string>
+    <array name="ra_91495">
+        <item>91495</item>
+        <item>@string/ra_91495_title</item>
+        <item>@string/ra_91495_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_91496_title">Capturer Électhor après l’avoir traqué</string>
+    <string name="ra_91496_text">Capturer Électhor après l’avoir traqué.</string>
+    <array name="ra_91496">
+        <item>91496</item>
+        <item>@string/ra_91496_title</item>
+        <item>@string/ra_91496_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_91497_title">Capturer Sulfura après l’avoir traqué</string>
+    <string name="ra_91497_text">Capturer Sulfura après l’avoir traqué.</string>
+    <array name="ra_91497">
+        <item>91497</item>
+        <item>@string/ra_91497_title</item>
+        <item>@string/ra_91497_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-roamers</item>
+    </array>
+    <string name="ra_91628_title">Capturer Baudrive devant les Éoliennes un vendredi</string>
+    <string name="ra_91628_text">Capturer Baudrive devant les Éoliennes un vendredi.</string>
+    <array name="ra_91628">
+        <item>91628</item>
+        <item>@string/ra_91628_title</item>
+        <item>@string/ra_91628_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-friday</item>
+    </array>
+    <string name="ra_91629_title">Capturer Motisma en interagissant avec le téléviseur possédé du Vieux Château</string>
+    <string name="ra_91629_text">Capturer Motisma en interagissant avec le téléviseur possédé du Vieux Château.</string>
+    <array name="ra_91629">
+        <item>91629</item>
+        <item>@string/ra_91629_title</item>
+        <item>@string/ra_91629_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-rotom</item>
+    </array>
+    <string name="ra_94103_title">Capturer un Magicarpe de niveau 100 en pêchant à l’Aire de Détente</string>
+    <string name="ra_94103_text">Capturer un Magicarpe de niveau 100 en pêchant à l’Aire de Détente.</string>
+    <array name="ra_94103">
+        <item>94103</item>
+        <item>@string/ra_94103_title</item>
+        <item>@string/ra_94103_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91631_title">Capturer Barpau en pêchant au Mont Couronné</string>
+    <string name="ra_91631_text">Capturer Barpau en pêchant au Mont Couronné.</string>
+    <array name="ra_91631">
+        <item>91631</item>
+        <item>@string/ra_91631_title</item>
+        <item>@string/ra_91631_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91630_title">Capturer Goinfrex sur un Arbre à Miel</string>
+    <string name="ra_91630_text">Capturer Goinfrex sur un Arbre à Miel.</string>
+    <array name="ra_91630">
+        <item>91630</item>
+        <item>@string/ra_91630_title</item>
+        <item>@string/ra_91630_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-honey</item>
+    </array>
+    <string name="ra_97651_title">Rencontrer et capturer un Pokémon chromatique</string>
+    <string name="ra_97651_text">Rencontrer et capturer un Pokémon chromatique.</string>
+    <array name="ra_97651">
+        <item>97651</item>
+        <item>@string/ra_97651_title</item>
+        <item>@string/ra_97651_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_98167_title">Capturer un Zarbi de forme ! ou ?</string>
+    <string name="ra_98167_text">Capturer un Zarbi de forme ! ou ?.</string>
+    <array name="ra_98167">
+        <item>98167</item>
+        <item>@string/ra_98167_title</item>
+        <item>@string/ra_98167_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <item name="ra_95988_title" type="string">@string/ra_493586_title</item>
+    <item name="ra_95988_text" type="string">@string/ra_493586_text</item>
+    <array name="ra_95988">
+        <item>95988</item>
+        <item>@string/ra_95988_title</item>
+        <item>@string/ra_95988_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-oreburgh</item>
+    </array>
+    <string name="ra_95989_title">Échanger un Mustébouée contre un Pijako dans l’immeuble de Vestigion</string>
+    <string name="ra_95989_text">Échanger un Mustébouée contre un Pijako dans l’immeuble de Vestigion.</string>
+    <array name="ra_95989">
+        <item>95989</item>
+        <item>@string/ra_95989_title</item>
+        <item>@string/ra_95989_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-eterna</item>
+    </array>
+    <string name="ra_95990_title">Échanger un Charmina contre un Spectrum à Frimapic</string>
+    <string name="ra_95990_text">Échanger un Charmina contre un Spectrum à Frimapic.</string>
+    <array name="ra_95990">
+        <item>95990</item>
+        <item>@string/ra_95990_title</item>
+        <item>@string/ra_95990_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <string name="ra_95991_title">Échanger un Écayon contre un Magicarpe allemand sur la Route 226</string>
+    <string name="ra_95991_text">Échanger un Écayon contre un Magicarpe allemand sur la Route 226.</string>
+    <array name="ra_95991">
+        <item>95991</item>
+        <item>@string/ra_95991_title</item>
+        <item>@string/ra_95991_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_96044_title">Recevoir un Évoli d’Amelle à Unionpolis</string>
+    <string name="ra_96044_text">Recevoir un Évoli d’Amelle à Unionpolis.</string>
+    <array name="ra_96044">
+        <item>96044</item>
+        <item>@string/ra_96044_title</item>
+        <item>@string/ra_96044_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_96045_title">Recevoir un Porygon gratuit à Voilaroc</string>
+    <string name="ra_96045_text">Recevoir un Porygon gratuit à Voilaroc.</string>
+    <array name="ra_96045">
+        <item>96045</item>
+        <item>@string/ra_96045_title</item>
+        <item>@string/ra_96045_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-veilstone</item>
+    </array>
+    <string name="ra_96046_title">Recevoir un Œuf d’Armand sur l’Île de Fer</string>
+    <string name="ra_96046_text">Recevoir un Œuf d’Armand sur l’Île de Fer.</string>
+    <array name="ra_96046">
+        <item>96046</item>
+        <item>@string/ra_96046_title</item>
+        <item>@string/ra_96046_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-gifts</item>
+    </array>
+    <string name="ra_96071_title">« Résoudre » l’énigme de Regirock dans la caverne spéciale de la Route 228…</string>
+    <item name="ra_96071_text" type="string">@string/ra_96071_title</item>
+    <array name="ra_96071">
+        <item>96071</item>
+        <item>@string/ra_96071_title</item>
+        <item>@string/ra_96071_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96070_title">« Résoudre » l’énigme de Regice dans une caverne spéciale du Mont Couronné…</string>
+    <item name="ra_96070_text" type="string">@string/ra_96070_title</item>
+    <array name="ra_96070">
+        <item>96070</item>
+        <item>@string/ra_96070_title</item>
+        <item>@string/ra_96070_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96048_title">« Résoudre » l’énigme de Registeel dans une caverne spéciale de l’Île de Fer…</string>
+    <item name="ra_96048_text" type="string">@string/ra_96048_title</item>
+    <array name="ra_96048">
+        <item>96048</item>
+        <item>@string/ra_96048_title</item>
+        <item>@string/ra_96048_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96072_title">« C’est une statue de Pokémon… On dirait qu’elle dégage une certaine puissance… »</string>
+    <item name="ra_96072_text" type="string">@string/ra_96072_title</item>
+    <array name="ra_96072">
+        <item>96072</item>
+        <item>@string/ra_96072_title</item>
+        <item>@string/ra_96072_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96084_title">« Sans plus attendre, j’aimerais que tu examines cette tablette de pierre… »</string>
+    <item name="ra_96084_text" type="string">@string/ra_96084_title</item>
+    <array name="ra_96084">
+        <item>96084</item>
+        <item>@string/ra_96084_title</item>
+        <item>@string/ra_96084_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96083_title">« La porte est solidement fermée… Il semble impossible de l’ouvrir. »</string>
+    <item name="ra_96083_text" type="string">@string/ra_96083_title</item>
+    <array name="ra_96083">
+        <item>96083</item>
+        <item>@string/ra_96083_title</item>
+        <item>@string/ra_96083_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96085_title">« La flûte produit un son… mais rien ne se passe ! »</string>
+    <item name="ra_96085_text" type="string">@string/ra_96085_title</item>
+    <array name="ra_96085">
+        <item>96085</item>
+        <item>@string/ra_96085_title</item>
+        <item>@string/ra_96085_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_97408_title">« Il y a une tour brisée et délabrée… On dirait qu’une Clé de Voûte pourrait y trouver sa place. »</string>
+    <item name="ra_97408_text" type="string">@string/ra_97408_title</item>
+    <array name="ra_97408">
+        <item>97408</item>
+        <item>@string/ra_97408_title</item>
+        <item>@string/ra_97408_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_96086_title">« Des Pokémon de tout le pays peuvent être amenés ici… »</string>
+    <item name="ra_96086_text" type="string">@string/ra_96086_title</item>
+    <array name="ra_96086">
+        <item>96086</item>
+        <item>@string/ra_96086_title</item>
+        <item>@string/ra_96086_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-events</item>
+    </array>
+    <string name="ra_95623_title">Gagner n’importe quel prix à la loterie de Féli-Télé</string>
+    <string name="ra_95623_text">Gagner n’importe quel prix à la loterie de Féli-Télé.</string>
+    <array name="ra_95623">
+        <item>95623</item>
+        <item>@string/ra_95623_title</item>
+        <item>@string/ra_95623_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-daily</item>
+    </array>
+    <string name="ra_95624_title">Montrer un Pokémon aux Dépêches Pokémon de Bonville</string>
+    <string name="ra_95624_text">Montrer un Pokémon aux Dépêches Pokémon de Bonville.</string>
+    <array name="ra_95624">
+        <item>95624</item>
+        <item>@string/ra_95624_title</item>
+        <item>@string/ra_95624_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-daily</item>
+    </array>
+    <string name="ra_97650_title">Obtenir le Bracelet Macho dans une maison de Verchamps</string>
+    <string name="ra_97650_text">Obtenir le Bracelet Macho dans une maison de Verchamps.</string>
+    <array name="ra_97650">
+        <item>97650</item>
+        <item>@string/ra_97650_title</item>
+        <item>@string/ra_97650_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-pastoria</item>
+    </array>
+    <string name="ra_96042_title">Recevoir une Super Ball gratuite à Célestia grâce à un Pokémon ayant un bonheur élevé</string>
+    <string name="ra_96042_text">Recevoir une Super Ball gratuite à Célestia grâce à un Pokémon ayant un bonheur élevé.</string>
+    <array name="ra_96042">
+        <item>96042</item>
+        <item>@string/ra_96042_title</item>
+        <item>@string/ra_96042_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>friendship</item>
+    </array>
+    <string name="ra_96087_title">Montrer à l’homme de la Route 221 un Pokémon du niveau demandé pour obtenir une Ceinture Noire</string>
+    <string name="ra_96087_text">Montrer à l’homme de la Route 221 un Pokémon du niveau demandé pour obtenir une Ceinture Noire.</string>
+    <array name="ra_96087">
+        <item>96087</item>
+        <item>@string/ra_96087_title</item>
+        <item>@string/ra_96087_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-canalave</item>
+    </array>
+    <string name="ra_97352_title">Obtenir chaque Plaque au moins une fois</string>
+    <string name="ra_97352_text">Obtenir chaque Plaque au moins une fois.</string>
+    <array name="ra_97352">
+        <item>97352</item>
+        <item>@string/ra_97352_title</item>
+        <item>@string/ra_97352_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_97649_title">Obtenir la CT64 Explosion au Casino</string>
+    <string name="ra_97649_text">Obtenir la CT64 Explosion au Casino.</string>
+    <array name="ra_97649">
+        <item>97649</item>
+        <item>@string/ra_97649_title</item>
+        <item>@string/ra_97649_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_95625_title">Gagner cinq combats au restaurant des Sept Étoiles au cours d’une seule session sans quitter la zone</string>
+    <string name="ra_95625_text">Gagner cinq combats au restaurant des Sept Étoiles au cours d’une seule session sans quitter la zone.</string>
+    <array name="ra_95625">
+        <item>95625</item>
+        <item>@string/ra_95625_title</item>
+        <item>@string/ra_95625_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_95748_title">Battre le Richard ou la Mademoiselle du Manoir Pokémon</string>
+    <string name="ra_95748_text">Battre le Richard ou la Mademoiselle du Manoir Pokémon.</string>
+    <array name="ra_95748">
+        <item>95748</item>
+        <item>@string/ra_95748_title</item>
+        <item>@string/ra_95748_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_95743_title">Obtenir un Ruban Empreinte du Dr Petitpas</string>
+    <string name="ra_95743_text">Obtenir un Ruban Empreinte du Dr Petitpas.</string>
+    <array name="ra_95743">
+        <item>95743</item>
+        <item>@string/ra_95743_title</item>
+        <item>@string/ra_95743_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>friendship</item>
+    </array>
+    <string name="ra_95744_title">Obtenir un Ruban Effort à la boutique de Sceaux de Rivamar</string>
+    <string name="ra_95744_text">Obtenir un Ruban Effort à la boutique de Sceaux de Rivamar.</string>
+    <array name="ra_95744">
+        <item>95744</item>
+        <item>@string/ra_95744_title</item>
+        <item>@string/ra_95744_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>friendship</item>
+    </array>
+    <string name="ra_95746_title">Obtenir tous les Rubans quotidiens de Julie sur un seul Pokémon et les voir dans son résumé</string>
+    <string name="ra_95746_text">Obtenir tous les Rubans quotidiens de Julie sur un seul Pokémon et les voir dans son résumé.</string>
+    <array name="ra_95746">
+        <item>95746</item>
+        <item>@string/ra_95746_title</item>
+        <item>@string/ra_95746_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_95745_title">Obtenir tous les Rubans de Concours sur un seul Pokémon et les voir dans son résumé</string>
+    <string name="ra_95745_text">Obtenir tous les Rubans de Concours sur un seul Pokémon et les voir dans son résumé.</string>
+    <array name="ra_95745">
+        <item>95745</item>
+        <item>@string/ra_95745_title</item>
+        <item>@string/ra_95745_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_97394_title">Obtenir tous les Rubans possibles de la Tour de Combat sur un seul Pokémon et les voir dans son…</string>
+    <string name="ra_97394_text">Obtenir tous les Rubans possibles de la Tour de Combat sur un seul Pokémon et les voir dans son résumé.</string>
+    <array name="ra_97394">
+        <item>97394</item>
+        <item>@string/ra_97394_title</item>
+        <item>@string/ra_97394_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_95747_title">Obtenir le Ruban Royal Sublime au Club Ruban et le voir dans le résumé du Pokémon sur place</string>
+    <string name="ra_95747_text">Obtenir le Ruban Royal Sublime au Club Ruban et le voir dans le résumé du Pokémon sur place.</string>
+    <array name="ra_95747">
+        <item>95747</item>
+        <item>@string/ra_95747_title</item>
+        <item>@string/ra_95747_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_97622_title">Déterrer quatre objets dans un seul mur du Souterrain</string>
+    <string name="ra_97622_text">Déterrer quatre objets dans un seul mur du Souterrain.</string>
+    <array name="ra_97622">
+        <item>97622</item>
+        <item>@string/ra_97622_title</item>
+        <item>@string/ra_97622_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-fossils</item>
+    </array>
+    <item name="ra_97666_title" type="string">@string/ra_92008_title</item>
+    <item name="ra_97666_text" type="string">@string/ra_92008_text</item>
+    <array name="ra_97666">
+        <item>97666</item>
+        <item>@string/ra_97666_title</item>
+        <item>@string/ra_97666_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>sinnoh-fossils</item>
+    </array>
+    <string name="ra_97615_title">Avoir au moins un exemplaire de chaque piège dans l’inventaire du Souterrain, sauf les pièges…</string>
+    <string name="ra_97615_text">Avoir au moins un exemplaire de chaque piège dans l’inventaire du Souterrain, sauf les pièges multijoueurs et la Foreuse.</string>
+    <array name="ra_97615">
+        <item>97615</item>
+        <item>@string/ra_97615_title</item>
+        <item>@string/ra_97615_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-fossils</item>
+    </array>
+    <string name="ra_95622_title">Acheter tous les meubles de la Villa de l’Aire de Détente</string>
+    <string name="ra_95622_text">Acheter tous les meubles de la Villa de l’Aire de Détente.</string>
+    <array name="ra_95622">
+        <item>95622</item>
+        <item>@string/ra_95622_title</item>
+        <item>@string/ra_95622_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-postgame</item>
+    </array>
+    <string name="ra_113671_title">Obtenir au moins un exemplaire de chaque Accessoire possible selon son Pokémon de départ</string>
+    <string name="ra_113671_text">Obtenir au moins un exemplaire de chaque Accessoire possible selon son Pokémon de départ.</string>
+    <array name="ra_113671">
+        <item>113671</item>
+        <item>@string/ra_113671_title</item>
+        <item>@string/ra_113671_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <item name="ra_97721_title" type="string">@string/ra_361091_title</item>
+    <item name="ra_97721_text" type="string">@string/ra_361091_text</item>
+    <array name="ra_97721">
+        <item>97721</item>
+        <item>@string/ra_97721_title</item>
+        <item>@string/ra_97721_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_113672_title">Obtenir un exemplaire de chaque Sceau sauf les Sceaux Liquide, Explosion et Étoile</string>
+    <string name="ra_113672_text">Obtenir un exemplaire de chaque Sceau sauf les Sceaux Liquide, Explosion et Étoile.</string>
+    <array name="ra_113672">
+        <item>113672</item>
+        <item>@string/ra_113672_title</item>
+        <item>@string/ra_113672_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_97520_title">Capturer les 374 Pokémon accessibles dans le jeu sans appareil externe</string>
+    <string name="ra_97520_text">Capturer les 374 Pokémon accessibles dans le jeu sans appareil externe.</string>
+    <array name="ra_97520">
+        <item>97520</item>
+        <item>@string/ra_97520_title</item>
+        <item>@string/ra_97520_text</item>
+        <item>100</item>
+        <item>0</item>
+        <item>sinnoh-national</item>
+    </array>
+    <string name="ra_91210_title">Atteindre 99 999 pas sur le podomètre de la Pokémontre</string>
+    <string name="ra_91210_text">Atteindre 99 999 pas sur le podomètre de la Pokémontre.</string>
+    <array name="ra_91210">
+        <item>91210</item>
+        <item>@string/ra_91210_title</item>
+        <item>@string/ra_91210_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_96047_title">Faire briller au maximum ses huit Badges d’Arène</string>
+    <string name="ra_96047_text">Faire briller au maximum ses huit Badges d’Arène.</string>
+    <array name="ra_96047">
+        <item>96047</item>
+        <item>@string/ra_96047_title</item>
+        <item>@string/ra_96047_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_97734_title">Rencontrer un fantôme au Vieux Château</string>
+    <string name="ra_97734_text">Rencontrer un fantôme au Vieux Château.</string>
+    <array name="ra_97734">
+        <item>97734</item>
+        <item>@string/ra_97734_title</item>
+        <item>@string/ra_97734_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-hearthome</item>
+    </array>
+    <string name="ra_101234_title">Se faire narguer par un Cradopaud</string>
+    <string name="ra_101234_text">Se faire narguer par un Cradopaud.</string>
+    <array name="ra_101234">
+        <item>101234</item>
+        <item>@string/ra_101234_title</item>
+        <item>@string/ra_101234_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91623_title">Après avoir battu le Conseil 4, parler à Louka ou Aurore à Littorella le jour de son anniversaire</string>
+    <string name="ra_91623_text">Après avoir battu le Conseil 4, parler à Louka ou Aurore à Littorella le jour de son anniversaire.</string>
+    <array name="ra_91623">
+        <item>91623</item>
+        <item>@string/ra_91623_title</item>
+        <item>@string/ra_91623_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-start</item>
+    </array>
+    <string name="ra_91624_title">Rester au moins deux minutes à Frimapic pendant la poussière de diamant</string>
+    <string name="ra_91624_text">Rester au moins deux minutes à Frimapic pendant la poussière de diamant.</string>
+    <array name="ra_91624">
+        <item>91624</item>
+        <item>@string/ra_91624_title</item>
+        <item>@string/ra_91624_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>sinnoh-snowpoint</item>
+    </array>
+    <array name="achievements_14">
+        <item>@array/ra_91200</item>
+        <item>@array/ra_91201</item>
+        <item>@array/ra_91202</item>
+        <item>@array/ra_91203</item>
+        <item>@array/ra_91204</item>
+        <item>@array/ra_91205</item>
+        <item>@array/ra_91206</item>
+        <item>@array/ra_91207</item>
+        <item>@array/ra_91208</item>
+        <item>@array/ra_95752</item>
+        <item>@array/ra_95751</item>
+        <item>@array/ra_95753</item>
+        <item>@array/ra_95754</item>
+        <item>@array/ra_95755</item>
+        <item>@array/ra_95756</item>
+        <item>@array/ra_95757</item>
+        <item>@array/ra_95758</item>
+        <item>@array/ra_95759</item>
+        <item>@array/ra_95760</item>
+        <item>@array/ra_95761</item>
+        <item>@array/ra_95762</item>
+        <item>@array/ra_95763</item>
+        <item>@array/ra_95749</item>
+        <item>@array/ra_91209</item>
+        <item>@array/ra_95750</item>
+        <item>@array/ra_91472</item>
+        <item>@array/ra_91473</item>
+        <item>@array/ra_381776</item>
+        <item>@array/ra_91474</item>
+        <item>@array/ra_91475</item>
+        <item>@array/ra_91476</item>
+        <item>@array/ra_91477</item>
+        <item>@array/ra_91478</item>
+        <item>@array/ra_91479</item>
+        <item>@array/ra_91480</item>
+        <item>@array/ra_91481</item>
+        <item>@array/ra_91482</item>
+        <item>@array/ra_91483</item>
+        <item>@array/ra_91487</item>
+        <item>@array/ra_91488</item>
+        <item>@array/ra_91489</item>
+        <item>@array/ra_91493</item>
+        <item>@array/ra_91490</item>
+        <item>@array/ra_91491</item>
+        <item>@array/ra_91492</item>
+        <item>@array/ra_91494</item>
+        <item>@array/ra_91495</item>
+        <item>@array/ra_91496</item>
+        <item>@array/ra_91497</item>
+        <item>@array/ra_91628</item>
+        <item>@array/ra_91629</item>
+        <item>@array/ra_94103</item>
+        <item>@array/ra_91631</item>
+        <item>@array/ra_91630</item>
+        <item>@array/ra_97651</item>
+        <item>@array/ra_98167</item>
+        <item>@array/ra_95988</item>
+        <item>@array/ra_95989</item>
+        <item>@array/ra_95990</item>
+        <item>@array/ra_95991</item>
+        <item>@array/ra_96044</item>
+        <item>@array/ra_96045</item>
+        <item>@array/ra_96046</item>
+        <item>@array/ra_96071</item>
+        <item>@array/ra_96070</item>
+        <item>@array/ra_96048</item>
+        <item>@array/ra_96072</item>
+        <item>@array/ra_96084</item>
+        <item>@array/ra_96083</item>
+        <item>@array/ra_96085</item>
+        <item>@array/ra_97408</item>
+        <item>@array/ra_96086</item>
+        <item>@array/ra_95623</item>
+        <item>@array/ra_95624</item>
+        <item>@array/ra_97650</item>
+        <item>@array/ra_96042</item>
+        <item>@array/ra_96087</item>
+        <item>@array/ra_97352</item>
+        <item>@array/ra_97649</item>
+        <item>@array/ra_95625</item>
+        <item>@array/ra_95748</item>
+        <item>@array/ra_95743</item>
+        <item>@array/ra_95744</item>
+        <item>@array/ra_95746</item>
+        <item>@array/ra_95745</item>
+        <item>@array/ra_97394</item>
+        <item>@array/ra_95747</item>
+        <item>@array/ra_97622</item>
+        <item>@array/ra_97666</item>
+        <item>@array/ra_97615</item>
+        <item>@array/ra_95622</item>
+        <item>@array/ra_113671</item>
+        <item>@array/ra_97721</item>
+        <item>@array/ra_113672</item>
+        <item>@array/ra_97520</item>
+        <item>@array/ra_91210</item>
+        <item>@array/ra_96047</item>
+        <item>@array/ra_97734</item>
+        <item>@array/ra_101234</item>
+        <item>@array/ra_91623</item>
+        <item>@array/ra_91624</item>
+    </array>
+</resources>

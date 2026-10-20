@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="breeding_odd_incense">Encens Bizarre</string>
+    <string name="breeding_rock_incense">Encens Roc</string>
+    <string name="breeding_full_incense">Encens Plein</string>
+    <string name="breeding_wave_incense">Encens Vague</string>
+    <string name="breeding_rose_incense">Encens Fleur</string>
+    <string name="breeding_luck_incense">Encens Veine</string>
+    <string name="breeding_pure_incense">Encens Pur</string>
+    <string name="breeding_different_languages">Parents de langues différentes</string>
+    <string name="breeding_sinnoh_ivs">
+        Trois choix de statistiques sont copiés depuis un parent choisi pour chacun. Le moteur peut sélectionner
+        deux fois la même statistique : un à trois IV distincts sont alors hérités. Les autres IV
+        sont tirés entre 0 et 31. Les objets Pouvoir ne transmettent pas les IV dans ces jeux.
+    </string>
+    <string name="breeding_sinnoh_abilities">
+        Le talent dépend de la personnalité de l’œuf, sans transmission directe du talent parental. Les talents
+        affichés sont ceux possibles pour cette espèce.
+    </string>
+    <string name="friendship_spa" formatted="false">Club Ruban : petit gain (+5, 70 %)</string>
+    <string name="friendship_contest">Victoire en Super Concours</string>
+    <string name="friendship_sinnoh_note">
+        Pour les vitamines, objets de combat et baies, le Grelot Zen précède les bonus. Pour les autres
+        événements du moteur DS, les bonus Luxe Ball et lieu de réception de l’œuf sont ajoutés avant le
+        multiplicateur du Grelot Zen, arrondi vers le bas. Massage et soin du Club Ruban appliquent aussi le
+        Grelot Zen avant les bonus de Ball et de lieu. La marche donne une chance sur deux par cycle de 128 pas
+        : le résultat suppose que le gain a lieu.
+    </string>
+    <string name="guide_breeding_sinnoh_text">
+        La Pension de Bonville accepte deux Pokémon de groupes d’Œufs compatibles, de sexes opposés, ou un
+        parent fertile avec Métamorph. Deux Métamorph ne produisent pas d’œuf ; les bébés et les espèces du
+        groupe Inconnu non plus. Nidorina et Nidoqueen sont stériles. Manaphy avec Métamorph donne Phione, qui
+        peut aussi se reproduire. Les familles de Nidoran et de Muciole/Lumivole peuvent produire les deux
+        espèces.\n\nLes œufs éclosent au niveau 1. Sans Encens adapté, les neuf familles concernées donnent la
+        forme adulte : Marill, Qulbutoké, Rosélia, Éoko, Simularbre, M. Mime, Leveinard, Ronflex ou Démanta.
+        L’un des deux parents peut porter l’Encens. Une Ballon Lumière portée par un parent permet Électacle à
+        Pichu.\n\nLa mère, ou Métamorph s’il est présent, peut transmettre sa nature avec une Pierre Stase, avec
+        environ une chance sur deux. Les langues différentes entraînent des essais supplémentaires de
+        personnalité pour les chromatiques et ne permettent pas de garantir cette transmission. Ni le Nœud
+        Destin ni les objets Pouvoir ne transmettent de statistiques dans Diamant, Perle ou Platine.\n\nLe père
+        transmet les attaques Œuf et CT/CS ; les attaques de niveau connues des deux parents sont ajoutées
+        ensuite. Avec Métamorph, le parent mâle reste le donneur. L’outil présente les possibilités et les
+        attaques résultantes des parents indiqués, sans prédire un œuf, sa nature, ses IV ou son caractère
+        chromatique.
+    </string>
+    <string name="guide_friendship_sinnoh_text" formatted="false">
+        Le bonheur varie de 0 à 255, avec des paliers à 100 et 200. Les évolutions par bonheur demandent au
+        moins 220, puis un niveau gagné avec les autres conditions éventuelles de jour ou de nuit. Le bonheur
+        d’un Pokémon sauvage vient de son espèce ; un œuf éclos commence à 120. Le simulateur utilise une valeur
+        que vous indiquez, sans lire de sauvegarde.\n\nLa masseuse de Voilaroc ajoute 3 points une fois par
+        jour. Le soin du Club Ruban à l’Aire de Détente, accessible avec dix Rubans sur un Pokémon, ajoute
+        aléatoirement 5 points (70 %), 10 points (25 %) ou 30 points (5 %). Ces deux services appliquent le
+        Grelot Zen avant les bonus de Ball et de lieu. Il n’y a pas de coiffeurs de Johto dans Sinnoh.\n\nLes
+        niveaux et vitamines donnent +5/+3/+2 ; les baies diminuant les EV donnent +10/+5/+2. Les objets de
+        combat et CT/CS donnent +1/+1/+0. Battre un Champion, le Conseil 4 ou la Maîtresse et gagner un Super
+        Concours donne +3/+2/+1. Les gains par objet appliquent le Grelot Zen avant les deux bonus de lieu et de
+        Ball. Les autres gains du moteur ajoutent d’abord les bonus de Luxe Ball et du lieu de réception de
+        l’œuf, puis multiplient par 1,5 avec le Grelot Zen.\n\nUn K.O. ordinaire enlève 1 point ; un adversaire
+        d’au moins trente niveaux de plus ou la survie au poison hors combat enlève 5/5/10. La Poudrénergie et
+        la Poudre Soin enlèvent 5/5/10, la Racinénergie 10/10/15 et l’Herbe Rappel 15/15/20. La marche reste
+        aléatoire : une chance sur deux par cycle de 128 pas, sans prédiction dans cet outil.
+    </string>
+    <string name="guide_roamer_sinnoh_title">Les Pokémon errants de Sinnoh</string>
+    <string name="guide_roamer_sinnoh_text">
+        Après sa libération dans la Caverne Vérité, Créfollet parcourt Sinnoh au niveau 50. Après le Pokédex
+        National, allez sur l’Île Pleine Lune depuis Joliberges pour libérer Cresselia, également au niveau 50 ;
+        rapportez la Lun’Aile au fils du marin. Dans Platine seulement, la visite au Professeur Chen à
+        Vestigion, après le National et la visite au Parc des Amis, libère Artikodin, Électhor et Sulfura au
+        niveau 60.\n\nLa Carte Repères de la Pokémontre montre leurs positions actuelles. Ils changent de route
+        lors des déplacements ; leur prochaine position ne peut pas être prédite. Les routes 201 à 222, les
+        Éoliennes et la Forge Fuego appartiennent à leur réseau, avec les parties distinctes des routes 204,
+        205, 210, 211 et 212.\n\nNotez ci-dessous la dernière route que vous avez observée pour chaque Pokémon.
+        Ces observations restent propres à la cartouche sélectionnée, indépendamment de la portée des captures,
+        et font partie de la sauvegarde JSON des Réglages. Elles ne sont jamais actualisées automatiquement et
+        peuvent être effacées individuellement.
+    </string>
+    <string name="guide_roamer_mesprit">Créfollet</string>
+    <string name="guide_roamer_cresselia">Cresselia</string>
+    <string name="guide_roamer_articuno">Artikodin</string>
+    <string name="guide_roamer_zapdos">Électhor</string>
+    <string name="guide_roamer_moltres">Sulfura</string>
+    <string name="guide_roamer_mesprit_condition">Après sa libération à la Caverne Vérité</string>
+    <string name="guide_roamer_cresselia_condition">Après le National et sa libération sur l’Île Pleine Lune</string>
+    <string name="guide_roamer_birds_condition">
+        Platine : après le National, le Parc des Amis et la visite à Chen à Vestigion
+    </string>
+    <string name="guide_roamer_area_sinnoh">Routes 201 à 222, Éoliennes et Forge Fuego</string>
+    <string name="roamer_observation">Dernière observation : %1$s</string>
+    <string name="roamer_not_observed">Non renseignée / effacer</string>
+    <string name="roamer_windworks">Les Éoliennes</string>
+    <string name="roamer_ironworks">Forge Fuego</string>
+    <string name="roamer_route">Route %1$d</string>
+    <string name="roamer_route_south">Route %1$d · sud</string>
+    <string name="roamer_route_north">Route %1$d · nord</string>
+    <string name="roamer_route_west">Route %1$d · ouest</string>
+    <string name="roamer_route_east">Route %1$d · est</string>
+    <string name="friendship_spa_medium" formatted="false">Club Ruban : gain moyen (+10, 25 %)</string>
+    <string name="friendship_spa_large" formatted="false">Club Ruban : grand gain (+30, 5 %)</string>
+    <string name="friendship_egg_place">Lieu de réception de l’œuf</string>
+    <string name="breeding_sinnoh_everstone">
+        Parent %1$d : la Pierre Stase favorise sa nature dans environ 50 %% des tirages.
+        La nature reste aléatoire en cas d’échec ; Métamorph est prioritaire sur la mère.
+    </string>
+    <string name="friendship_sinnoh_poison">Survie au poison hors combat</string>
+</resources>
