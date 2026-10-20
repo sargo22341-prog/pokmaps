@@ -10,6 +10,7 @@ from pokemaps_data.asset_manifest import check_manifest
 from pokemaps_data.games import GAMES, GEN3_GAMES, GEN4_GAMES, PretFormat
 from pokemaps_data.hoenn_catalog import validate_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, validate_catalog
+from pokemaps_data.sinnoh_catalog import validate_sinnoh_catalog
 from pokemaps_data.validate import validate
 from pokemaps_data.validate_gen3_characters import validate_character_catalog
 from pokemaps_data.validate_hoenn_character_state import validate_hoenn_characters
@@ -27,6 +28,7 @@ def main() -> int:
     try:
         check_manifest(args.assets)
         validate_hoenn_catalog(args.assets)
+        validate_sinnoh_catalog(args.assets)
         validate_remake_fixed(args.assets)
         for game in GEN3_MAP_GAMES:
             validate_catalog(args.assets / "maps" / game.version_group)

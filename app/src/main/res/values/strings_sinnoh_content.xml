@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="super_contest_title">Super Concours</string>
+    <string name="super_contest_hearts">Attrait de base : %1$d cœur(s).</string>
+    <string name="sinnoh_berry_water">
+        Arroser avec le Kwakarrosoir restaure l’humidité à 100. Perte : %1$d points par heure sans paillis. Les
+        heures passées à sec diminuent la récolte, avec un minimum de 2 baies.
+    </string>
+    <string name="sinnoh_poffin_flavors">
+        Ces saveurs sont celles des ingrédients pour Poffins : épicé pour le Sang-froid, sec pour la Beauté,
+        sucré pour la Grâce, amer pour l’Intelligence et acide pour la Robustesse. Le niveau final dépend de la
+        cuisson.
+    </string>
+    <string name="sinnoh_mulch_growth">
+        Fertipousse : %1$d minutes par stade ; perte d’humidité de %2$d points par heure.
+    </string>
+    <string name="sinnoh_mulch_damp">
+        Fertihumide : %1$d minutes par stade ; perte d’humidité de %2$d points par heure.
+    </string>
+    <string name="sinnoh_mulch_stable">Fertistable : les fruits restent 6 stades au lieu de 4 avant de tomber.</string>
+    <string name="sinnoh_mulch_gooey">Fertiglu : la limite de repousse passe de 10 à 15 cycles.</string>
+    <string name="sinnoh_berries_title">Baies et paillis</string>
+    <string name="sinnoh_berries_text">
+        Le sol meuble permet de planter une baie, puis de suivre quatre stades avant la récolte. Le calque Baies
+        montre les plantations et leur récolte initiale ; il ne suit pas l’état de la cartouche. La fiche de
+        chaque baie indique ses durées et ses rendements propres à Sinnoh.\n\nLe Kwakarrosoir, remis chez la
+        Fleuriste à Floraville, restaure l’humidité. À sec, la qualité de récolte diminue chaque heure ; elle ne
+        remonte pas en arrosant tardivement. La récolte compte au moins deux baies. Les baies initialement mûres
+        sont celles des tables de début de partie.\n\nSur la Route 208, la maison du Maître des Baies permet
+        d’obtenir des baies ; le vendeur de paillis propose Fertipousse, Fertihumide, Fertistable et Fertiglu.
+        Les deux premiers changent la durée de chaque stade et l’assèchement ; les deux autres prolongent
+        respectivement la présence des fruits et les repousses. Les valeurs figurent sur la fiche de la baie.
+    </string>
+    <string name="sinnoh_contests_text">
+        À Unionpolis, les Super Concours proposent Sang-froid, Beauté, Grâce, Intelligence et Robustesse, aux
+        rangs Normal, Méga, Ultra et Master. La condition du Pokémon et les accessoires interviennent lors de
+        l’épreuve visuelle, puis viennent la danse et les prestations d’attaques.\n\nChaque fiche d’attaque
+        indique sa catégorie, son attrait de base et son effet de quatrième génération. Les trois juges, leur
+        tension et l’ordre de passage modifient le score ; les effets ne sont pas ceux des Concours de
+        Hoenn.\n\nLes Poffins améliorent les conditions correspondant à leurs saveurs. Préparer aussi les
+        attaques selon leur ordre et leur interaction avec la tension. Les articles décrivent les règles et les
+        possibilités ; ils ne jouent ni la danse ni le concours.
+    </string>
+    <string name="sinnoh_poffins_title">Poffins et saveurs des baies</string>
+    <string name="sinnoh_poffins_text">
+        La Poffinerie d’Unionpolis transforme les baies en Poffins. La Boîte Poffin se reçoit au Fan Club
+        Pokémon de la ville. Ouvrir une fiche de baie pour consulter ses cinq saveurs et sa douceur : ces
+        valeurs décrivent l’ingrédient, pas un Poffin déjà cuit.\n\nLes saveurs épicée, sèche, sucrée, amère et
+        acide améliorent respectivement Sang-froid, Beauté, Grâce, Intelligence et Robustesse. La nature du
+        Pokémon influe sur ses goûts ; sa satiété limite les Poffins qu’il peut encore manger. La douceur de
+        l’ingrédient entre dans la douceur du résultat.\n\nLe temps de cuisson, les débordements, les brûlures
+        et les baies des participants influent sur le résultat. Aucune valeur finale ni recette garantie n’est
+        prédite ici. Les fiches permettent de choisir une baie selon les saveurs recherchées avant de cuisiner.
+    </string>
+    <string name="sinnoh_underground_title">Souterrain et Bases Secrètes</string>
+    <string name="sinnoh_underground_text">
+        L’Explorakit est remis à Vestigion par l’Homme du Souterrain. Il donne accès au Souterrain depuis les
+        espaces extérieurs autorisés. Les scintillements des murs signalent les fouilles : fossiles, pierres,
+        tessons, plaques et sphères sont des possibilités, jamais une récompense garantie. Les fossiles se
+        restaurent au Musée de Charbourg.\n\nLes sphères servent de monnaie aux marchands souterrains. Les
+        couleurs et tailles requises, ainsi que les stocks, varient ; les catalogues de mobilier et de pièges
+        donnent les fourchettes possibles. Enfouir une sphère permet de la faire grandir. Les emplacements des
+        marchands sont visibles sur la carte du Souterrain.\n\nUne Foreuse ouvre une Base Secrète dans une
+        paroi. Le PC permet de ranger puis placer les décorations. Le jeu multijoueur local permet de capturer
+        les drapeaux des autres bases ; les rangs obtenus autorisent davantage de décorations et le retrait des
+        rochers. Les quêtes de l’Homme du Souterrain donnent du mobilier et des gemmes. Les coupes et cristaux
+        se réclament à Unionpolis ; les trophées récompensent la Tour de Combat.
+    </string>
+    <string name="sinnoh_battle_title">Installations de combat</string>
+    <string name="sinnoh_battle_dp_text">
+        À l’Aire de Combat, la Tour de Combat propose les défis Solo, Duo et Multi. Les équipes sont ramenées au
+        niveau 50 si nécessaire ; espèces et objets tenus ne peuvent pas être répétés. Le mode Solo utilise
+        trois Pokémon, le Duo quatre et le Multi deux par partenaire.\n\nChaque série compte sept combats. En
+        Solo, Koner attend aux combats 21 et 49 avec deux équipes distinctes. Les articles de séries listent les
+        configurations possibles du début puis du dernier combat ; à partir de la huitième série, la réserve
+        reste celle de la huitième. Les combinaisons sont tirées par le jeu.\n\nLes Points de Combat s’échangent
+        aux comptoirs de l’Aire de Combat. Les trophées de décoration sont liés aux séries de victoires. Les
+        anciens défis en ligne ne sont pas reproduits : aucun téléchargement d’équipe ni parcours aléatoire
+        n’est simulé.
+    </string>
+    <string name="sinnoh_battle_pt_text">
+        À la Zone de Combat, la Tour conserve ses séries de sept combats et les défis Solo, Duo et Multi. Koner
+        affronte le joueur aux combats 21 et 49 en Solo. Les configurations possibles sont listées par série,
+        avec un groupe distinct pour le dernier combat.\n\nL’Usine prête des Pokémon et propose un échange après
+        une victoire ; le nombre d’échanges améliore certaines locations. Le Castel donne des Points Castel pour
+        gérer soins et informations, auprès de Parsley et Percila. L’Arcade de Dahlia utilise une roulette qui
+        peut modifier le combat. Les réserves de ces installations sont présentées séparément.\n\nLa Scène
+        d’Argenta se joue avec une espèce choisie et des rangs par type, en séries de dix. Ses adversaires
+        viennent d’un catalogue propre ; les combats 50 et 170 utilisent des règles particulières. Les listes
+        indiquent les possibilités, sans prévoir le tirage, la roulette, les locations ni le parcours.
+    </string>
+    <string name="sinnoh_content_version">Version : %1$s.</string>
+    <string name="sinnoh_content_no_prediction">
+        Les possibilités sont consultables hors ligne. Le contenu de la cartouche et les tirages aléatoires ne
+        sont pas lus.
+    </string>
+    <string name="sinnoh_mining_title">Objets et sphères des fouilles</string>
+    <string name="sinnoh_mining_dp_intro">
+        Poids de base du moteur, dans l’ordre : Diamant avant le National, Perle avant le National, Diamant
+        après le National, Perle après le National. Zéro signifie absent de cette réserve. Les formes d’un même
+        objet sont regroupées ; ces poids ne sont pas des probabilités de réussite de fouille. Certains progrès
+        souterrains renforcent encore les sphères de la version.
+    </string>
+    <string name="sinnoh_mining_pt_intro">
+        Poids du moteur, dans l’ordre : identifiant de dresseur impair avant le National, pair avant le
+        National, impair après le National, pair après le National. Les orientations d’un objet sont regroupées.
+        Zéro signifie absent ; ces poids ne prédisent ni l’emplacement ni la réussite d’une fouille.
+    </string>
+    <string name="sinnoh_mining_row">%1$s — poids : %2$d / %3$d / %4$d / %5$d.</string>
+    <string name="sinnoh_goods_title">Mobilier du Souterrain</string>
+    <string name="sinnoh_goods_intro">
+        Dimensions au sol et lieux d’obtention des décorations utilisables. Les marchands du Souterrain
+        demandent une sphère entière d’une taille au moins égale au prix. Les stocks et prix sont variables ;
+        les fourchettes ci-dessous incluent leur minimum et leur maximum.
+    </string>
+    <string name="sinnoh_good_row">%1$s (%2$d × %3$d cases) — %4$s.%5$s</string>
+    <string name="sinnoh_good_vendor">marchands de mobilier du Souterrain : %1$s</string>
+    <string name="sinnoh_good_store">Centre Commercial de Voilaroc : %1$d ₽</string>
+    <string name="sinnoh_good_eterna">récompense des quêtes de l’Homme du Souterrain à Vestigion</string>
+    <string name="sinnoh_good_hearthome">décorateur d’Unionpolis, après l’exploit correspondant</string>
+    <string name="sinnoh_good_tower">Tour de Combat : trophées à 20, 50 et 100 victoires</string>
+    <string name="sinnoh_good_external">distribution externe ; aucune obtention ordinaire dans les scripts</string>
+    <string name="sinnoh_national">\u0020Pokédex National requis chez les marchands.</string>
+    <string name="sinnoh_traps_title">Pièges et Foreuse</string>
+    <string name="sinnoh_traps_intro">
+        Les marchands de pièges du Souterrain vendent la Foreuse et une sélection de pièges contre des sphères.
+        Les pièges posés peuvent gêner les autres joueurs ; ils ne capturent pas de Pokémon. Les dispositifs de
+        décoration sont rangés dans le catalogue du mobilier.
+    </string>
+    <string name="sinnoh_trap_row">%1$s — marchand de pièges du Souterrain : %2$s.</string>
+    <string name="sinnoh_sphere_price">sphère %1$s, taille %2$d à %3$d</string>
+    <string name="sinnoh_sphere_prism">prisme</string>
+    <string name="sinnoh_sphere_pale">pâle</string>
+    <string name="sinnoh_sphere_red">rouge</string>
+    <string name="sinnoh_sphere_blue">bleue</string>
+    <string name="sinnoh_sphere_green">verte</string>
+    <string name="sinnoh_sphere_random">de couleur variable</string>
+    <string name="sinnoh_list_separator">\u0020;\u0020</string>
+    <string name="sinnoh_tower">Tour de Combat</string>
+    <string name="sinnoh_castle">Castel de Combat</string>
+    <string name="sinnoh_arcade">Arcade de Combat</string>
+    <string name="sinnoh_factory">Usine de Combat</string>
+    <string name="sinnoh_battle_series">%1$s — série %2$d</string>
+    <string name="sinnoh_battle_pool_intro">
+        Configurations possibles, et non équipes garanties. Le jeu choisit les partenaires de chaque équipe en
+        évitant les répétitions d’espèce et d’objet. Les combats contre les meneurs sont présentés séparément. À
+        partir de la série 8, la réserve de la série 8 est réutilisée.
+    </string>
+    <string name="sinnoh_arcade_pool_intro">
+        Configurations possibles avant les effets de la roulette. L’Arcade retire les objets tenus des
+        adversaires ; la roulette peut ensuite leur en donner. Les combats de Dahlia sont présentés séparément.
+        À partir de la série 8, la réserve de la série 8 est réutilisée.
+    </string>
+    <string name="sinnoh_battle_ordinary">Réserve des six premiers combats :</string>
+    <string name="sinnoh_battle_final">Réserve du septième combat, hors meneur :</string>
+    <string name="sinnoh_brains_title">Équipes des meneurs</string>
+    <string name="sinnoh_brains_intro">
+        Koner utilise deux équipes fixes en Solo. Dans Platine, Dahlia et Parsley ont aussi deux équipes fixes ;
+        les objets de leurs configurations ne sont pas tous conservés par leur installation. Cardus tire ses
+        Pokémon dans les réserves de l’Usine. Argenta choisit une espèce différente de celle du joueur : au
+        combat 50 dans le groupe de cette espèce, au combat 170 dans le dernier groupe de la Scène.
+    </string>
+    <string name="sinnoh_koner_silver">Koner — combat 21</string>
+    <string name="sinnoh_koner_gold">Koner — combat 49</string>
+    <string name="sinnoh_dahlia_silver">Dahlia — combat 21</string>
+    <string name="sinnoh_dahlia_gold">Dahlia — combat 49</string>
+    <string name="sinnoh_parsley_silver">Parsley et Percila — combat 21</string>
+    <string name="sinnoh_parsley_gold">Parsley et Percila — combat 49</string>
+    <string name="sinnoh_factory_intro">
+        Réserves de location de l’Usine. Les échanges permettent de recevoir certaines configurations de la
+        réserve suivante ; les seuils d’amélioration sont dépassés après 6, 13, 20, 27 et 34 échanges. Les
+        espèces et objets déjà choisis sont exclus du tirage. Les réserves adverses dépendent aussi du dresseur
+        choisi.
+    </string>
+    <string name="sinnoh_factory_level50">Location au niveau 50</string>
+    <string name="sinnoh_factory_opponent50">Adversaires au niveau 50, réserve ordinaire ou de fin de série</string>
+    <string name="sinnoh_factory_open_player">Location en niveau libre</string>
+    <string name="sinnoh_factory_open_opponent">Adversaires en niveau libre</string>
+    <string name="sinnoh_factory_upgrade">Réserve améliorée possible</string>
+    <string name="sinnoh_factory_pool">%1$s — IV : %2$d dans chaque statistique.</string>
+    <string name="sinnoh_cardus_silver50">Cardus — combat 21 au niveau 50</string>
+    <string name="sinnoh_cardus_gold50">Cardus — combat 49 au niveau 50</string>
+    <string name="sinnoh_cardus_silver_open">Cardus — combat 21 en niveau libre</string>
+    <string name="sinnoh_cardus_gold_open">Cardus — combat 49 en niveau libre</string>
+    <string name="sinnoh_hall_rank">Scène de Combat — rang %1$d</string>
+    <string name="sinnoh_hall_intro">
+        Configurations du groupe de ce rang de type. Le jeu filtre ensuite par le type choisi, retire l’espèce
+        du joueur et tient compte des adversaires déjà rencontrés. La liste reste un ensemble de possibilités ;
+        les défis d’Argenta suivent leur propre groupe. Le niveau dépend de celui du Pokémon engagé.
+    </string>
+    <string name="sinnoh_configuration_name">Configuration %1$d : %2$s</string>
+    <string name="sinnoh_configuration_details">
+        \u0020— nature %1$s ; objet de la configuration : %2$s ; attaques : %3$s ; EV répartis entre : %4$s.
+    </string>
+    <string name="sinnoh_no_item">aucun</string>
+</resources>

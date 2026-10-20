@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
+import org.opensources.pokmaps.data.repository.SinnohRepository
 import org.opensources.pokmaps.domain.guide.CaptureGoals
 import org.opensources.pokmaps.domain.guide.GuideArticle
 import org.opensources.pokmaps.domain.guide.GuideLibrary
@@ -21,7 +22,8 @@ class GuideRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val maps: MapRepository,
     private val pokedex: PokedexRepository,
-    private val hoenn: HoennRepository
+    private val hoenn: HoennRepository,
+    private val sinnoh: SinnohRepository
 ) {
     suspend fun library(game: Game): GuideLibrary = withContext(Dispatchers.IO) {
         val catalog = maps.catalog(game)
@@ -56,7 +58,8 @@ class GuideRepository @Inject constructor(
         }
         val extras = hoenn.content(game)?.let {
             listOf(decorationGuide(context, game, catalog, it), pokeblockRecipes(context, it, index))
-        }.orEmpty() + listOfNotNull(secretBaseGuide(context, catalog))
+        }.orEmpty() + listOfNotNull(secretBaseGuide(context, catalog)) +
+            sinnoh.content(game)?.let { sinnohContentArticles(context, game, it) }.orEmpty()
         GuideLibrary(game, articles + extras)
     }
 

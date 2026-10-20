@@ -121,6 +121,12 @@ dans le régional puis le National, en tenant compte des starters et fossiles in
 Les succès officiels des quatorze jeux sont traduits et consultables hors ligne ; leur synchronisation
 RetroAchievements reste manuelle. Les outils de Sinnoh appliquent ses règles de reproduction et de bonheur.
 Les dernières routes observées des errants se notent par cartouche et entrent dans la sauvegarde JSON.
+Les fiches des baies de Sinnoh détaillent croissance, arrosage, paillis et saveurs pour Poffins ; les attaques
+présentent leurs effets de Super Concours. Les guides recensent les fouilles, pièges et décorations du Souterrain,
+ainsi que les configurations possibles par série de la Tour et des installations de Platine.
+Ils distinguent locations de l’Usine et rangs de la Scène, sans simuler les mini-jeux ni les tirages.
+Ce catalogue se régénère avec `python tools/build_data.py --sinnoh-content-only` ; ses sources et règles sont
+décrites dans [les contenus de Sinnoh](docs/generations/contenus-sinnoh.md).
 
 ## Publier une version
 

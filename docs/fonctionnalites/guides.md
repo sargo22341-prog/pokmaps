@@ -50,6 +50,20 @@ Le Grelot Zen précède les bonus de Ball et de lieu pour les objets et ces serv
 les autres événements du moteur. Les trois issues sont proposées sans simuler le hasard.
 Les coiffeurs de Johto ne sont pas proposés.
 
+## Contenus propres à Sinnoh
+
+Les guides présentent baies et paillis, Super Concours et ingrédients des Poffins. Le Souterrain possède
+ses catalogues de fouilles, mobilier et pièges : poids par version ou par parité de l’identifiant dans Platine,
+conditions du National, dimensions et lieux d’obtention, prix variables en sphères. Le mobilier inutilisé
+et les entrées techniques des bases ne sont pas proposés comme objets à obtenir ; la Poupée Lucario garde
+sa mention de distribution externe.
+
+La Tour détaille les configurations possibles dans les six premiers combats et le dernier de chaque série.
+Platine ajoute les réserves du Castel et de l’Arcade, les locations et améliorations de l’Usine, et les rangs
+de la Scène avec son catalogue distinct. Les équipes fixes des meneurs et les réserves de Cardus sont séparées.
+Les listes ne prédisent aucun parcours, tirage, résultat de cuisson, roulette ou fouille.
+Voir les [sources et règles de ces contenus](../generations/contenus-sinnoh.md).
+
 ## Modifier un guide
 
 - Définitions dans `data/guide/`, textes français dans `res/values/strings_guides*.xml`.

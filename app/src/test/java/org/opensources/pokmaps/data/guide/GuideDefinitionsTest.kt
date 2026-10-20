@@ -49,11 +49,26 @@ class GuideDefinitionsTest {
     fun sinnohDoesNotInheritTheGbaTools() {
         listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM).forEach {
             val articles = guideDefinitions(it)
-            assertEquals(28, articles.size)
+            assertEquals(33, articles.size)
             assertEquals(R.string.guide_breeding_sinnoh_text, articles.single { a -> a.id == "breeding" }.text)
             assertEquals(R.string.guide_friendship_sinnoh_text, articles.single { a -> a.id == "friendship" }.text)
             assertTrue(articles.all { article -> article.versions == setOf(it.versionId) })
-            assertTrue(articles.all { article -> article.sources == sinnohGuideSources(it) })
+            val contentIds = setOf(
+                "sinnoh-berries",
+                "sinnoh-super-contests",
+                "sinnoh-poffins",
+                "sinnoh-underground",
+                "sinnoh-battle"
+            )
+            val previous = articles.filter { article -> article.id !in contentIds }
+            assertEquals(28, previous.size)
+            assertTrue(previous.all { article -> article.sources == sinnohGuideSources(it) })
+            val repo = if (it.versionId == 14) "pokeplatinum" else "pokediamond"
+            assertTrue(
+                articles.filter { article -> article.id in contentIds }.all { article ->
+                    article.sources.all { source -> source.startsWith("https://github.com/pret/$repo/blob/") }
+                }
+            )
         }
     }
 

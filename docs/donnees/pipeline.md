@@ -22,7 +22,8 @@ Les sources en cache sont réutilisées ; seules les sources manquantes sont té
 Les téléchargements sont bornés en taille et durée, avec quatre tentatives HTTP au maximum.
 
 Sorties dans `app/src/main/assets/` : `database/pokedex.db`, `sprites/`, `maps/`, `hoenn.json`, licences
-et `assets.sha256`. Les guides sont des définitions Kotlin et ressources françaises ; les succès sont
+et `assets.sha256`. `sinnoh.json` contient les baies, Super Concours, fouilles, mobilier, pièges et réserves de combat DS.
+Les guides sont des définitions Kotlin et ressources françaises ; les succès sont
 produits dans `res/values/strings_achievements_<version>.xml` depuis les archives et traductions CSV.
 Caches (`tools/.cache`), sources brutes et aperçus (`tools/build/preview`) restent hors Git, sans Git LFS.
 
@@ -59,6 +60,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 |---|---|
 | `--hoenn-maps-only`, `--remake-maps-only` | Cartes de la branche, catalogues associés et inventaire |
 | `--hoenn-content-only` | Baies, Concours et décorations Hoenn |
+| `--sinnoh-content-only` | Baies, Super Concours, Souterrain et installations de combat DS dans `sinnoh.json`, puis inventaire |
 | `--hoenn-fixed-only`, `--remake-fixed-only` | Catalogues des Pokémon fixes |
 | `--gen3-encounters-only` | Aperçu GBA des rencontres, sans personnages |
 | `--gen3-items-only`, `--gen3-trainers-only` | Aperçu GBA avec objets, puis équipes |

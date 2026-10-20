@@ -1,0 +1,133 @@
+identifier,name_fr
+UG_GOOD_YELLOW_CUSHION,Coussin jaune
+UG_GOOD_BLUE_CUSHION,Coussin bleu
+UG_GOOD_WOODEN_CHAIR,Siège en Bois
+UG_GOOD_BIG_TABLE,Grande table
+UG_GOOD_PLAIN_TABLE,Table simple
+UG_GOOD_SMALL_TABLE,Petite table
+UG_GOOD_LONG_TABLE,Table Horizontale
+UG_GOOD_WIDE_TABLE,Table Verticale
+UG_GOOD_POKE_TABLE,Table Poké
+UG_GOOD_BIG_BOOKSHELF,Grande bibliothèque
+UG_GOOD_SMALL_BOOKSHELF,Petite bibliothèque
+UG_GOOD_RESEARCH_SHELF,Meuble Archives
+UG_GOOD_BIKE_RACK,Établi
+UG_GOOD_SHOP_SHELF,Étagère de magasin
+UG_GOOD_DISPLAY_SHELF,Présentoir
+UG_GOOD_CUPBOARD,Buffet
+UG_GOOD_WOOD_DRESSER,Armoire Bois
+UG_GOOD_PINK_DRESSER,Armoire Rose
+UG_GOOD_TV,TV
+UG_GOOD_REFRIGERATOR,Réfrigérateur
+UG_GOOD_PRETTY_SINK,Bel Évier
+UG_GOOD_FEATHERY_BED,Lit en Plumes
+UG_GOOD_TRASH_CAN,Poubelle
+UG_GOOD_CARDBOARD_BOX,Carton
+UG_GOOD_CRATE,Caisse
+UG_GOOD_CONTAINER,Conteneur
+UG_GOOD_OIL_DRUM,Bidon
+UG_GOOD_BIG_OIL_DRUM,Grand bidon
+UG_GOOD_IRON_BEAM,Poutre métallique
+UG_GOOD_POTTED_PLANT,Plante en pot
+UG_GOOD_POKE_FLOWER,Fleur Poké
+UG_GOOD_HEALING_MACHINE,Machine Soins
+UG_GOOD_LAB_MACHINE,Machine Labo
+UG_GOOD_TEST_MACHINE,Machine Test
+UG_GOOD_GAME_SYSTEM,Console de jeu
+UG_GOOD_VENDING_MACHINE,Distributeur
+UG_GOOD_RED_BIKE,Vélo rouge
+UG_GOOD_GREEN_BIKE,Vélo vert
+UG_GOOD_BINOCULARS,Jumelles
+UG_GOOD_GLOBE,Globe terrestre
+UG_GOOD_GYM_STATUE,Statue d’Arène
+UG_GOOD_RED_TENT,Tente rouge
+UG_GOOD_BLUE_TENT,Tente bleue
+UG_GOOD_CLEAR_TENT,Tente transparente
+UG_GOOD_MAZE_BLOCK_1,Bloc labyrinthe 1
+UG_GOOD_MAZE_BLOCK_2,Bloc labyrinthe 2
+UG_GOOD_MAZE_BLOCK_3,Bloc labyrinthe 3
+UG_GOOD_MAZE_BLOCK_4,Bloc labyrinthe 4
+UG_GOOD_MAZE_BLOCK_5,Bloc labyrinthe 5
+UG_GOOD_HOLE_TOOL,Dispositif Trou
+UG_GOOD_PIT_TOOL,Dispositif Fosse
+UG_GOOD_SMOKE_TOOL,Dispositif Fumée
+UG_GOOD_BIG_SMOKE_TOOL,Dispositif Grosse Fumée
+UG_GOOD_ROCK_TOOL,Dispositif Rocher
+UG_GOOD_ROCKFALL_TOOL,Dispositif Éboulement
+UG_GOOD_FOAM_TOOL,Dispositif Mousse
+UG_GOOD_BUBBLE_TOOL,Dispositif Bulles
+UG_GOOD_ALERT_TOOL_1,Dispositif Alerte 1
+UG_GOOD_ALERT_TOOL_2,Dispositif Alerte 2
+UG_GOOD_ALERT_TOOL_3,Dispositif Alerte 3
+UG_GOOD_ALERT_TOOL_4,Dispositif Alerte 4
+UG_GOOD_LEAF_TOOL,Dispositif Feuilles
+UG_GOOD_FLOWER_TOOL,Dispositif Fleurs
+UG_GOOD_EMBER_TOOL,Dispositif Braises
+UG_GOOD_FIRE_TOOL,Dispositif Feu
+UG_GOOD_CUTE_CUP,Coupe Grâce
+UG_GOOD_COOL_CUP,Coupe Sang-froid
+UG_GOOD_BEAUTY_CUP,Coupe Beauté
+UG_GOOD_TOUGH_CUP,Coupe Robustesse
+UG_GOOD_CLEVER_CUP,Coupe Intelligence
+UG_GOOD_BLUE_CRYSTAL,Cristal bleu
+UG_GOOD_PINK_CRYSTAL,Cristal rose
+UG_GOOD_RED_CRYSTAL,Cristal rouge
+UG_GOOD_YELLOW_CRYSTAL,Cristal jaune
+UG_GOOD_PRETTY_GEM,Jolie gemme
+UG_GOOD_SHINY_GEM,Gemme brillante
+UG_GOOD_MYSTIC_GEM,Gemme mystique
+UG_GOOD_GLITTER_GEM,Gemme scintillante
+UG_GOOD_BRONZE_TROPHY,Trophée de bronze
+UG_GOOD_SILVER_TROPHY,Trophée d’argent
+UG_GOOD_GOLD_TROPHY,Trophée d’or
+UG_GOOD_GREAT_TROPHY_UNUSED,Grand trophée inutilisé
+UG_GOOD_BALL_ORNAMENT_UNUSED,Ornement Ball inutilisé
+UG_GOOD_ROUND_ORNAMENT_UNUSED,Ornement rond inutilisé
+UG_GOOD_CLEAR_ORNAMENT_UNUSED,Ornement transparent inutilisé
+UG_GOOD_CHARMANDER_DOLL,Poupée Salamèche
+UG_GOOD_BULBASAUR_DOLL,Poupée Bulbizarre
+UG_GOOD_SQUIRTLE_DOLL,Poupée Carapuce
+UG_GOOD_CYNDAQUIL_DOLL,Poupée Héricendre
+UG_GOOD_CHIKORITA_DOLL,Poupée Germignon
+UG_GOOD_TOTODILE_DOLL,Poupée Kaiminus
+UG_GOOD_TORCHIC_DOLL,Poupée Poussifeu
+UG_GOOD_TREECKO_DOLL,Poupée Arcko
+UG_GOOD_MUDKIP_DOLL,Poupée Gobou
+UG_GOOD_CHIMCHAR_DOLL,Poupée Ouisticram
+UG_GOOD_TURTWIG_DOLL,Poupée Tortipouss
+UG_GOOD_PIPLUP_DOLL,Poupée Tiplouf
+UG_GOOD_PIKACHU_DOLL,Poupée Pikachu
+UG_GOOD_PLUSLE_DOLL,Poupée Posipi
+UG_GOOD_MINUN_DOLL,Poupée Négapi
+UG_GOOD_CLEFAIRY_DOLL,Poupée Mélofée
+UG_GOOD_JIGGLYPUFF_DOLL,Poupée Rondoudou
+UG_GOOD_WOBBUFFET_DOLL,Poupée Qulbutoké
+UG_GOOD_MEOWTH_DOLL,Poupée Miaouss
+UG_GOOD_SKITTY_DOLL,Poupée Skitty
+UG_GOOD_GLAMEOW_DOLL,Poupée Chaglam
+UG_GOOD_BUNEARY_DOLL,Poupée Laporeille
+UG_GOOD_WEAVILE_DOLL,Poupée Dimoret
+UG_GOOD_MUNCHLAX_DOLL,Poupée Goinfrex
+UG_GOOD_BONSLY_DOLL,Poupée Manzaï
+UG_GOOD_MIME_JR_DOLL,Poupée Mime Jr.
+UG_GOOD_LUCARIO_DOLL,Poupée Lucario
+UG_GOOD_MANTYKE_DOLL,Poupée Babimanta
+UG_GOOD_BUIZEL_DOLL,Poupée Mustébouée
+UG_GOOD_CHATOT_DOLL,Poupée Pijako
+UG_GOOD_MANAPHY_DOLL_UNUSED,Poupée Manaphy inutilisée
+UG_GOOD_SNORLAX_DOLL,Poupée Ronflex
+UG_GOOD_WAILORD_DOLL,Poupée Wailord
+UG_GOOD_MAGNEZONE_DOLL_UNUSED,Poupée Magnézone inutilisée
+UG_GOOD_DRIFLOON_DOLL,Poupée Baudrive
+UG_GOOD_HAPPINY_DOLL,Poupée Ptiravi
+UG_GOOD_PACHIRISU_DOLL,Poupée Pachirisu
+UG_GOOD_BASE_ENTRANCE_NORTH,Entrée de base au nord
+UG_GOOD_BASE_ENTRANCE_SOUTH,Entrée de base au sud
+UG_GOOD_BASE_ENTRANCE_WEST,Entrée de base à l’ouest
+UG_GOOD_BASE_ENTRANCE_EAST,Entrée de base à l’est
+UG_GOOD_WIDE_SOFA,Large Canapé
+UG_GOOD_BONSAI,Bonsaï
+UG_GOOD_DAINTY_FLOWERS,Fleurs délicates
+UG_GOOD_LOVELY_FLOWERS,Fleurs ravissantes
+UG_GOOD_PRETTY_FLOWERS,Jolies fleurs
+UG_GOOD_LAVISH_FLOWERS,Fleurs luxuriantes

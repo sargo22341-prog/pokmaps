@@ -56,6 +56,9 @@ fun MoveScreen(state: MoveUiState, onOpenItem: (String) -> Unit, modifier: Modif
         move.contest?.let { contest ->
             section("contest", R.string.contest_title) { ContestSection(contest) }
         }
+        move.superContest?.let { contest ->
+            section("super-contest", R.string.super_contest_title) { SuperContestSection(contest) }
+        }
         move.machine?.let { machine ->
             section("machine", R.string.move_machine) {
                 SheetRow(

@@ -89,6 +89,7 @@ fun ItemScreen(state: ItemUiState, onAction: (ItemAction) -> Unit, links: ItemLi
     ) {
         ItemHeader(page)
         BerrySection(page.berry)
+        SinnohBerrySection(page.sinnohBerry)
         MachineMoveSection(page, links.onOpenMove)
         EvolutionsSection(page, links.onOpenPokemon)
         FossilSection(page, sources, links.onOpenPokemon)

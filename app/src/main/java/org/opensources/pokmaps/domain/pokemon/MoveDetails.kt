@@ -16,5 +16,6 @@ data class MoveDetails(
     val pp: Int,
     val effect: MoveEffect,
     val machine: Machine?,
-    val contest: org.opensources.pokmaps.domain.hoenn.ContestMove? = null
+    val contest: org.opensources.pokmaps.domain.hoenn.ContestMove? = null,
+    val superContest: org.opensources.pokmaps.domain.sinnoh.SuperContestMove? = null
 )

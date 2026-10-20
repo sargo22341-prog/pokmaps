@@ -17,6 +17,7 @@ import org.opensources.pokmaps.data.db.FakeMapDao
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
+import org.opensources.pokmaps.data.repository.SinnohRepository
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.usecase.MapRequest
@@ -38,7 +39,8 @@ class ItemViewModelTest {
             ObserveItemPageUseCase(
                 games,
                 MapRepository(FakeMapDao(failing), Dispatchers.Unconfined),
-                HoennRepository { error("Hors Hoenn") }
+                HoennRepository { error("Hors Hoenn") },
+                SinnohRepository { error("Hors Sinnoh") }
             ),
             requests
         )

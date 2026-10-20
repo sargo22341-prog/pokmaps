@@ -15,6 +15,7 @@ import org.opensources.pokmaps.data.db.PokedexDatabase
 import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MapRepository
 import org.opensources.pokmaps.data.repository.PokedexRepository
+import org.opensources.pokmaps.data.repository.SinnohRepository
 import org.opensources.pokmaps.domain.guide.GuideCategory
 import org.opensources.pokmaps.domain.guide.GuideTarget
 import org.opensources.pokmaps.domain.model.Game
@@ -31,7 +32,13 @@ class GuideRepositoryTest {
         try {
             val maps = MapRepository(database.mapDao(), Dispatchers.Unconfined)
             val repository =
-                GuideRepository(context, maps, PokedexRepository(database.pokedexDao()), HoennRepository(context))
+                GuideRepository(
+                    context,
+                    maps,
+                    PokedexRepository(database.pokedexDao()),
+                    HoennRepository(context),
+                    SinnohRepository(context)
+                )
             val expected = listOf(93, 90, 76, 72, 75, 113)
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
@@ -76,7 +83,7 @@ class GuideRepositoryTest {
         assertTrue(achievements.all { it.points >= 0 })
         assertTrue(achievements.all { a -> library.articles.any { a.id in it.relatedIds } })
         val articles = library.articles.filter { it.achievementId == null }
-        assertEquals(28, articles.size)
+        assertEquals(if (library.game.versionId == 14) 79 else 45, articles.size)
         assertEquals(12, articles.count { it.category == GuideCategory.WALKTHROUGH })
         assertEquals(4, articles.count { it.category == GuideCategory.CALENDAR })
         assertEquals(GuideCategory.entries.toSet() - GuideCategory.ACHIEVEMENT, articles.map { it.category }.toSet())

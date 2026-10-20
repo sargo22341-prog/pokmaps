@@ -8,6 +8,9 @@ personnage précis.
 
 Hoenn ajoute les propriétés des baies sur les objets, les Concours sur les attaques et les décorations
 dans les guides. Les services et revanches GBA conservent leurs conditions de scénario.
+À Sinnoh, les fiches des baies indiquent leurs durées, rendements, assèchement, effets des quatre paillis
+et saveurs pour Poffins. Les fiches des attaques montrent catégorie, attrait de base et effet de Super Concours,
+sans reprendre les cœurs de blocage ni les enchaînements de Hoenn.
 
 Les variantes du rival partagent une fiche : un sélecteur choisit le starter du joueur ; Jaune ajoute
 les résultats des premiers combats. Le choix est mémorisé par jeu et partagé entre carte, fiches et guides.

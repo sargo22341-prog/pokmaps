@@ -1,0 +1,28 @@
+identifier,name_fr
+TRAP_MOVE_UP,Piège Mouvement haut
+TRAP_MOVE_RIGHT,Piège Mouvement droite
+TRAP_MOVE_DOWN,Piège Mouvement bas
+TRAP_MOVE_LEFT,Piège Mouvement gauche
+TRAP_HURL_UP,Piège Projection haut
+TRAP_HURL_RIGHT,Piège Projection droite
+TRAP_HURL_DOWN,Piège Projection bas
+TRAP_HURL_LEFT,Piège Projection gauche
+TRAP_HOLE,Piège Trou
+TRAP_PIT,Piège Fosse
+TRAP_REVERSE,Piège Inversion
+TRAP_CONFUSE,Piège Confusion
+TRAP_SMOKE,Piège Fumée
+TRAP_BIG_SMOKE,Piège Grosse Fumée
+TRAP_ROCK,Piège Rocher
+TRAP_ROCKFALL,Piège Éboulement
+TRAP_FOAM,Piège Mousse
+TRAP_BUBBLE,Piège Bulles
+TRAP_ALERT_1,Piège Alerte 1
+TRAP_ALERT_2,Piège Alerte 2
+TRAP_ALERT_3,Piège Alerte 3
+TRAP_ALERT_4,Piège Alerte 4
+TRAP_LEAF,Piège Feuilles
+TRAP_FLOWER,Piège Fleurs
+TRAP_EMBER,Piège Braises
+TRAP_FIRE,Piège Feu
+TRAP_DIGGER_DRILL,Foreuse

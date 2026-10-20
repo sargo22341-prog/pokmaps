@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import java.io.File
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -14,10 +15,13 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.opensources.pokmaps.data.db.PokedexDatabase
+import org.opensources.pokmaps.data.settings.FakeDataStore
+import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.pokemon.DamageClass
 import org.opensources.pokmaps.domain.pokemon.EvolutionGender
 import org.opensources.pokmaps.domain.pokemon.UnownForm
+import org.opensources.pokmaps.domain.usecase.ObserveItemPageUseCase
 import org.robolectric.RobolectricTestRunner
 
 /** Requêtes DS sur la base distribuée : aucun cache ni réseau pendant les tests. */
@@ -65,12 +69,37 @@ class Gen4PokemonRepositoryTest {
 
     @Test
     fun damageClassBelongsToTheMoveRatherThanItsType() = runBlocking {
-        val moves = MoveRepository(database.moveDao(), HoennRepository { error("Hors Hoenn") })
+        val moves = MoveRepository(
+            database.moveDao(),
+            HoennRepository { error("Hors Hoenn") },
+            SinnohRepository(ApplicationProvider.getApplicationContext<Context>())
+        )
         assertEquals("special", database.moveDao().move(9, 5)?.damageClass)
         assertEquals("physical", database.moveDao().move(247, 5)?.damageClass)
         for (game in games) {
             assertEquals(DamageClass.PHYSICAL, moves.details(game, 9)?.damageClass)
             assertEquals(DamageClass.SPECIAL, moves.details(game, 247)?.damageClass)
+            assertEquals(3, moves.details(game, 1)?.superContest?.appeal)
+        }
+    }
+
+    @Test
+    fun berrySheetsReceiveSinnohGrowthAndPoffinFlavors() = runBlocking {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val selected = GameRepository(database.gameDao(), GameSettings(FakeDataStore()))
+        val pages = ObserveItemPageUseCase(
+            selected,
+            MapRepository(database.mapDao(), Dispatchers.IO),
+            HoennRepository(context),
+            SinnohRepository(context)
+        )
+        for (game in games) {
+            selected.select(game)
+            val page = checkNotNull(pages("cheri-berry").first())
+            assertNull(page.berry)
+            assertEquals(5, page.sinnohBerry?.maxYield)
+            assertEquals(listOf(10, 0, 0, 0, 0), page.sinnohBerry?.flavors)
+            assertTrue(page.given.isNotEmpty())
         }
     }
 

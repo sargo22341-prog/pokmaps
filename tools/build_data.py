@@ -30,6 +30,7 @@ from pokemaps_data.pokeapi import PokeApi
 from pokemaps_data.pret_gen3_fixed import build_fixed_catalog
 from pokemaps_data.preview_curation_gen3 import build_curation_preview
 from pokemaps_data.preview_wild_gen3 import build_wild_preview
+from pokemaps_data.sinnoh_catalog import build_sinnoh_catalog
 from pokemaps_data.sources import PRET_COMMITS, PREVIEW_DIR, fetch_pokeapi_csv, fetch_pret
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
@@ -77,6 +78,7 @@ def _arguments() -> argparse.Namespace:
         help="générer l'aperçu des dresseurs, combats, objets et du Pokédex National DS",
     )
     maps_only.add_argument("--hoenn-content-only", action="store_true", help="exporter baies, concours et décorations")
+    maps_only.add_argument("--sinnoh-content-only", action="store_true", help="exporter les contenus propres à Sinnoh")
     maps_only.add_argument(
         "--achievement-resources-only", action="store_true", help="générer les ressources de succès depuis les archives"
     )
@@ -116,6 +118,10 @@ def main() -> int:
         return 0
     if args.hoenn_content_only:
         build_hoenn_catalog(args.cache, args.assets)
+        write_manifest(args.assets)
+        return 0
+    if args.sinnoh_content_only:
+        build_sinnoh_catalog(args.cache, args.assets)
         write_manifest(args.assets)
         return 0
     if args.hoenn_fixed_only or args.remake_fixed_only:
@@ -196,6 +202,7 @@ def _build_all(args: argparse.Namespace) -> int:
     if not _build(api, args.cache, repos, args.assets, GAMES):
         return 1
     build_hoenn_catalog(args.cache, args.assets)
+    build_sinnoh_catalog(args.cache, args.assets)
     if args.assets.resolve() == DEFAULT_ASSETS.resolve():
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():

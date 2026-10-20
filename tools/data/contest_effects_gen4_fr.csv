@@ -1,0 +1,24 @@
+identifier,description_fr
+CONTEST_EFFECT_FIRST_NEXT_TURN,Passe en premier au prochain tour.
+CONTEST_EFFECT_LAST_NEXT_TURN,Passe en dernier au prochain tour.
+CONTEST_EFFECT_DOUBLED_JUDGE,Gagne 2 cœurs supplémentaires pour chaque autre participant ayant choisi le même juge.
+CONTEST_EFFECT_2_HEARTS_WHEN_VOLTAGE_UP,Gagne 2 cœurs supplémentaires si la tension du juge augmente.
+CONTEST_EFFECT_BASIC,Prestation simple sans effet supplémentaire.
+CONTEST_EFFECT_UNIQUE_JUDGE,Gagne 3 cœurs supplémentaires si aucun autre participant ne choisit le même juge.
+CONTEST_EFFECT_CONSECUTIVE_USE,Peut être utilisée deux tours de suite sans pénalité.
+CONTEST_EFFECT_VOLTAGE,Ajoute autant de cœurs que la tension du juge.
+CONTEST_EFFECT_ALL_SAME_JUDGE,Gagne 15 cœurs supplémentaires si les quatre participants choisissent le même juge.
+CONTEST_EFFECT_LOWERS_VOLTAGE,Diminue la tension des juges de 1.
+CONTEST_EFFECT_DOUBLE_NEXT_TURN,Double le score de la prestation au prochain tour.
+CONTEST_EFFECT_STEAL_VOLTAGE,Gagne les cœurs de tension obtenus par le participant précédent.
+CONTEST_EFFECT_SUPPRESS_VOLTAGE,Empêche la tension des juges de monter pendant ce tour.
+CONTEST_EFFECT_RANDOM_ORDER,Rend aléatoire l’ordre de passage au prochain tour.
+CONTEST_EFFECT_DOUBLE_FINAL_ACT,Double le score si cette attaque est utilisée au dernier tour.
+CONTEST_EFFECT_LOW_VOLTAGE_ADVANTAGE,Gagne davantage de cœurs quand la tension du juge est faible.
+CONTEST_EFFECT_FIRST_PERFORMANCE_ADVANTAGE,Gagne 2 cœurs supplémentaires en passant en premier.
+CONTEST_EFFECT_FINAL_PERFORMANCE_ADVANTAGE,Gagne 2 cœurs supplémentaires en passant en dernier.
+CONTEST_EFFECT_NO_VOLTAGE_DOWN,Empêche la tension des juges de baisser pendant ce tour.
+CONTEST_EFFECT_TWO_VOLTAGE_IN_A_ROW_ADVANTAGE,Gagne 3 cœurs supplémentaires si la tension augmente deux fois de suite.
+CONTEST_EFFECT_HIGH_SCORE_LATER_TURN,Gagne davantage de cœurs en passant plus tard dans le tour.
+CONTEST_EFFECT_MAX_VOLTAGE_ADVANTAGE,Gagne 3 cœurs supplémentaires après que la tension a atteint son maximum.
+CONTEST_EFFECT_PITY_POINTS,Gagne 3 cœurs supplémentaires si le score du tour est le plus faible.

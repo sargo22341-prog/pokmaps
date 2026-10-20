@@ -48,7 +48,8 @@ data class ItemPage(
     val prizes: List<ItemSource> = emptyList(),
     /** Fossile : le Pokémon qu'il devient et le personnage qui le ranime. */
     val fossil: FossilUse? = null,
-    val berry: org.opensources.pokmaps.domain.hoenn.Berry? = null
+    val berry: org.opensources.pokmaps.domain.hoenn.Berry? = null,
+    val sinnohBerry: org.opensources.pokmaps.domain.sinnoh.SinnohBerry? = null
 ) {
     /** On ne peut l'obtenir nulle part sur les cartes du jeu. */
     val nowhere: Boolean get() = found.isEmpty() && sold.isEmpty() && given.isEmpty() && exchangedFor.isEmpty() &&
@@ -58,7 +59,8 @@ data class ItemPage(
 class ObserveItemPageUseCase @Inject constructor(
     private val games: GameRepository,
     private val maps: MapRepository,
-    private val hoenn: HoennRepository
+    private val hoenn: HoennRepository,
+    private val sinnoh: org.opensources.pokmaps.data.repository.SinnohRepository
 ) {
     /** Fiche de l'objet dans le jeu choisi, null s'il n'y existe pas. */
     operator fun invoke(identifier: String): Flow<ItemPage?> = games.selectedGame.map { game ->
@@ -94,7 +96,8 @@ class ObserveItemPageUseCase @Inject constructor(
             exchangeableFor = offered(OfferKind.EXCHANGE, wanted = true),
             prizes = offered(OfferKind.PRIZE_ITEM),
             fossil = FossilUse.of(index, catalog)[identifier],
-            berry = hoenn.content(game)?.berries?.get(identifier)
+            berry = hoenn.content(game)?.berries?.get(identifier),
+            sinnohBerry = sinnoh.content(game)?.berries?.get(identifier)
         )
     }
 

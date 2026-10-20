@@ -15,7 +15,8 @@ internal fun guideDefinitions(game: Game): List<GuideDefinition> {
         VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD ->
             gbaToolGuides() + hoennGuides() + hoennCalendarGuides() + hoennContentGuides()
 
-        VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> sinnohGuides(game) + sinnohToolGuides(game)
+        VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM ->
+            sinnohGuides(game) + sinnohToolGuides(game) + sinnohContentDefinitions(game)
 
         VersionGroup.FIRERED_LEAFGREEN -> gbaToolGuides() + remakeGuides()
     }

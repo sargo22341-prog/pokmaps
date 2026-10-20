@@ -16,6 +16,7 @@ import org.opensources.pokmaps.data.db.FakeMoveDao
 import org.opensources.pokmaps.data.repository.GameRepository
 import org.opensources.pokmaps.data.repository.HoennRepository
 import org.opensources.pokmaps.data.repository.MoveRepository
+import org.opensources.pokmaps.data.repository.SinnohRepository
 import org.opensources.pokmaps.data.settings.FakeDataStore
 import org.opensources.pokmaps.data.settings.GameSettings
 import org.opensources.pokmaps.domain.pokemon.Machine
@@ -32,7 +33,14 @@ class MoveViewModelTest {
         val games = GameRepository(FakeGameDao(), GameSettings(FakeDataStore()))
         return MoveViewModel(
             SavedStateHandle(mapOf(MoveViewModel.MOVE_ID to moveId)),
-            ObserveMoveUseCase(games, MoveRepository(FakeMoveDao(failing), HoennRepository { error("Hors Hoenn") }))
+            ObserveMoveUseCase(
+                games,
+                MoveRepository(
+                    FakeMoveDao(failing),
+                    HoennRepository { error("Hors Hoenn") },
+                    SinnohRepository { error("Hors Sinnoh") }
+                )
+            )
         )
     }
 
