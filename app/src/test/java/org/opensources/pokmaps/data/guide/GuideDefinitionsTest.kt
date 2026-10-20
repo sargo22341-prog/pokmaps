@@ -47,7 +47,11 @@ class GuideDefinitionsTest {
     @Test
     fun sinnohDoesNotInheritTheGbaTools() {
         listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM).forEach {
-            assertTrue(guideDefinitions(it).isEmpty())
+            val articles = guideDefinitions(it)
+            assertEquals(25, articles.size)
+            assertTrue(articles.none { article -> article.id in setOf("breeding", "friendship") })
+            assertTrue(articles.all { article -> article.versions == setOf(it.versionId) })
+            assertTrue(articles.all { article -> article.sources == sinnohGuideSources(it) })
         }
     }
 

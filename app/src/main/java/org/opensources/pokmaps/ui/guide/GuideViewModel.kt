@@ -55,7 +55,7 @@ data class GuideUiState(
 
     /** Errants présentés dans l'article ouvert, s'il est celui des errants de la version. */
     val roamers: List<RoamerChoice> = library?.game?.versionId
-        ?.takeIf { Roamers.article(it) == articleId }
+        ?.takeIf { articleId != null && Roamers.article(it) == articleId }
         ?.let(Roamers::choices).orEmpty()
     val articles: List<GuideArticle> = library?.articles.orEmpty().filter { it.category == category }
     val related: List<GuideArticle> = library?.articles.orEmpty().filter { it.id in article?.relatedIds.orEmpty() }

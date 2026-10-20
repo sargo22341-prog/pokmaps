@@ -72,7 +72,7 @@ object Roamers {
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> "johto-roamers"
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> "hoenn-roamers"
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> "remake-roamers"
-        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> error("Outil Sinnoh non disponible")
+        GameVersion.DIAMOND, GameVersion.PEARL, GameVersion.PLATINUM -> null
         GameVersion.RED, GameVersion.BLUE, GameVersion.YELLOW -> null
     }
 }

@@ -34,6 +34,33 @@ class GuideViewModelTest {
     @get:Rule val mainDispatcher = MainDispatcherRule()
 
     @Test
+    fun sinnohLoadsEmptyAndErrorStatesThenOpensItsCollectionWithoutAnUnavailableRoamerTool() = runTest {
+        val guides = MemoryGuides()
+        guides.value.value = GuideLibrary(FakeGameDao.PLATINUM, emptyList()) to GuideProgress()
+        guides.failing = true
+        val model = GuideViewModel(SavedStateHandle(), guides, { null }, MapRequests(), rivals())
+        assertTrue(model.state.value.failed)
+        guides.failing = false
+        model.onAction(GuideAction.Retry)
+        assertFalse(model.state.value.failed)
+        assertFalse(model.state.value.loading)
+        assertTrue(model.state.value.categories.isEmpty())
+        assertTrue(model.state.value.roamers.isEmpty())
+        val goal = org.opensources.pokmaps.domain.guide.Gen4CaptureGoals.forVersion(14, false)
+        val collection = article("sinnoh-regional-collection").copy(captureGoal = goal, captureIds = goal.species)
+        guides.value.value = GuideLibrary(
+            FakeGameDao.PLATINUM,
+            listOf(collection),
+            caught = (387..395).toSet() + (408..411).toSet()
+        ) to GuideProgress()
+        model.onAction(GuideAction.Article(collection.id))
+        assertEquals(collection, model.state.value.article)
+        assertEquals(5, model.state.value.captureCounts[collection.id])
+        assertEquals(181, model.state.value.captureTotals[collection.id])
+        assertTrue(model.state.value.roamers.isEmpty())
+    }
+
+    @Test
     fun emptyLibraryIsContentAndFailureCanBeRetried() = runTest {
         val guides = MemoryGuides()
         guides.failing = true

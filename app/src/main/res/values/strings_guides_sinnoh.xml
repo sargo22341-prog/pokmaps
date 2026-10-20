@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ces ressources par défaut sont françaises ; Lint doit utiliser le dictionnaire de cette langue. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="guide_sinnoh_start_title">1 · De Bonaugure à Féli-Cité</string>
+    <string name="guide_sinnoh_start_dp_text">
+        Depuis [[place:twinleaf|Bonaugure]], accompagnez votre rival au Lac Vérité. Le sac oublié permet
+        de choisir [[pokemon:387|Tortipouss]], [[pokemon:390|Ouisticram]] ou [[pokemon:393|Tiplouf]] pour
+        repousser les Étourmi. Ce partenaire reste votre seul choix de départ sur cette partie.
+        \n\nRejoignez Littorella par la Route 201 et rendez visite au Professeur Sorbier dans son laboratoire.
+        Recevez le Pokédex, puis repassez chez votre mère avant de continuer vers le nord.
+        \n\nSur la Route 202, assistez à la démonstration de capture. À Féli-Cité, livrez le colis à votre rival,
+        passez à l’École des Dresseurs et cherchez les trois coupons des clowns pour obtenir la Pokétch.
+        La sortie est mène vers votre premier Badge.
+    </string>
+    <string name="guide_sinnoh_start_pt_text">
+        Quittez [[place:header-twinleaf-town|Bonaugure]] avec votre rival. Sur la Route 201, Sorbier vous propose
+        [[pokemon:387|Tortipouss]], [[pokemon:390|Ouisticram]] ou [[pokemon:393|Tiplouf]]. Le premier combat
+        vous oppose au rival : le début de Platine ne reprend pas l’attaque des Étourmi de Diamant et Perle.
+        \n\nAprès le détour par le Lac Vérité, gagnez Littorella et le laboratoire de Sorbier. Recevez le Pokédex,
+        puis retournez voir votre mère. Sur la Route 202, votre partenaire vous montre la capture.
+        \n\nÀ Féli-Cité, livrez le colis à l’École des Dresseurs. Beladonis intervient dans cette version.
+        Les trois coupons des clowns donnent la Pokétch ; partez ensuite vers la Route 203 et Charbourg.
+    </string>
+    <string name="guide_sinnoh_oreburgh_title">2 · Charbourg et le Badge Charbon</string>
+    <string name="guide_sinnoh_oreburgh_text">
+        Battez votre rival sur la Route 203, puis traversez l’Entrée de Charbourg. Le montagnard vous remet
+        la CS Éclate-Roc ; la posséder ne suffit pas encore à briser les rochers sur le terrain.
+        \n\nÀ l’Arène de Charbourg, Pierrick est absent. Retrouvez-le au fond de la Mine
+        de Charbourg et parlez-lui pour le faire revenir. Préparez une réponse au type Roche, notamment
+        contre [[pokemon:408|Kranidos]].
+        \n\nRemportez le Badge Charbon, puis revenez vers Féli-Cité. Éclate-Roc ouvre le passage de la Route 204
+        vers Floraville. Le nord de Charbourg demande une Bicyclette pour certains obstacles : ce détour
+        n’est pas la suite immédiate de votre parcours.
+    </string>
+    <string name="guide_sinnoh_eterna_title">3 · Floraville, les Éoliennes et Vestigion</string>
+    <string name="guide_sinnoh_eterna_text">
+        À Floraville, intervenez aux Éoliennes, puis libérez les Champs Floraville pour récupérer la clé.
+        Rentrez dans le bâtiment et battez Mars. L’accès à la Route 205 et à la Forêt Vestigion se débloque.
+        \n\nTraversez la forêt avec Sara, dont les soins facilitent le trajet. À Vestigion, battez Flo pour
+        obtenir le Badge Forêt. Cynthia remet Coupe ; le Badge permet de l’utiliser hors combat.
+        \n\nCoupez les arbustes devant le bâtiment de la Team Galaxie et battez Jupiter pour libérer le marchand
+        de cycles. Récupérez la Bicyclette avant de prendre la Piste Cyclable.
+        Le [[place:sinnoh-old-chateau-1f|Vieux Château]]
+        reste une visite annexe, avec une rencontre nocturne soumise aux conditions de votre version.
+    </string>
+    <string name="guide_sinnoh_hearthome_title">4 · Unionpolis et Bonville</string>
+    <string name="guide_sinnoh_hearthome_dp_text">
+        Descendez la Piste Cyclable, puis traversez le Mont Couronné par la Route 207. La Route 208 mène
+        à [[place:hearthome|Unionpolis]], où la salle de concours fait avancer votre rencontre avec Kiméra.
+        \n\nDans Diamant et Perle, Kiméra ne livre pas encore son combat d’Arène. Poursuivez vers la Route 209
+        et Bonville après le combat contre votre rival. La Pension permet de confier des Pokémon ; la Tour
+        Perdue et les Ruines Bonville sont des détours utiles.
+        \n\nContinuez par les Routes 210 et 215 vers Voilaroc. Les Psykokwak au nord de la Route 210 bloquent
+        encore le chemin de Célestia : vous obtiendrez leur remède plus tard.
+    </string>
+    <string name="guide_sinnoh_hearthome_pt_text">
+        Descendez la Piste Cyclable et passez du côté est du Mont Couronné. La Route 208 conduit à
+        [[place:header-hearthome-city|Unionpolis]]. Visitez la salle de concours et préparez le combat contre Kiméra.
+        \n\nDans Platine, le Badge Fantôme est le troisième Badge. Traversez l’Arène et remportez ce combat
+        avant de poursuivre. Cet ordre diffère de Diamant et Perle, où Kiméra est combattue plus tard.
+        \n\nLa Route 209 mène à Bonville, à la Pension, à la Tour Perdue et aux Ruines Bonville.
+        Prenez ensuite les Routes 210 et 215 vers Voilaroc. Les Psykokwak de la Route 210 attendent encore
+        le remède remis au cours du scénario.
+    </string>
+    <string name="guide_sinnoh_veilstone_title">5 · Voilaroc et la route de Verchamps</string>
+    <string name="guide_sinnoh_veilstone_text">
+        À Voilaroc, préparez une réponse au type Combat et au [[pokemon:448|Lucario]]
+        de Mélina. Le Badge Pavé permet l’usage de Vol sur le terrain quand vous aurez récupéré la CS.
+        \n\nAidez votre partenaire contre les sbires près de l’entrepôt Galaxie. Entrez ensuite dans l’entrepôt
+        accessible depuis l’extérieur pour récupérer Vol. Le siège principal reste une étape ultérieure.
+        \n\nDescendez les Routes 214 et 213 en passant par la Rive du Lac Courage. Rejoignez Verchamps ;
+        le Grand Marais est facultatif et ne remplace pas le combat d’Arène qui vous attend.
+    </string>
+    <string name="guide_sinnoh_pastoria_title">6 · Verchamps, Célestia et Surf</string>
+    <string name="guide_sinnoh_pastoria_dp_text">
+        Battez Lovis à [[place:pastoria|Verchamps]] pour le Badge Palustre. Au Grand Marais, récupérez
+        Anti-Brume si vous souhaitez rendre les trajets brumeux plus lisibles.
+        \n\nPoursuivez le sbire Galaxie depuis Verchamps vers la Rive du Lac Courage. Cynthia remet le remède
+        des Psykokwak ; libérez la Route 210, puis portez le Vieux Grigri à sa grand-mère à Célestia.
+        Repoussez le sbire et examinez les ruines pour obtenir Surf.
+        \n\nRetournez à Unionpolis pour battre Kiméra, cinquième Championne de ce parcours.
+        Le Badge Fantôme autorise Surf hors combat. Vous pouvez alors gagner Joliberges par la Route 218.
+    </string>
+    <string name="guide_sinnoh_pastoria_pt_text">
+        À [[place:header-pastoria-city|Verchamps]], affrontez votre rival puis Lovis.
+        Le Badge Palustre est le cinquième
+        de Platine, puisque Kiméra a déjà été vaincue à Unionpolis.
+        \n\nAprès l’explosion au Grand Marais, poursuivez le sbire vers le Lac Courage. Cynthia donne le remède
+        destiné aux Psykokwak de la Route 210. Rejoignez Célestia et sa grand-mère avec le Vieux Grigri.
+        \n\nRepoussez la Team Galaxie, puis affrontez Hélio dans les ruines. Recevez Surf et prenez la direction
+        de Joliberges. Dans Platine, Anti-Brume se trouve aux Ruines Bonville, et non au Grand Marais.
+    </string>
+    <string name="guide_sinnoh_canalave_title">7 · Joliberges et les trois lacs</string>
+    <string name="guide_sinnoh_canalave_dp_text">
+        Surfez sur la Route 218 et gagnez [[place:canalave|Joliberges]]. Après votre rival, préparez l’Arène
+        d’Acier de Charles. L’Île de Fer est un détour pour entraîner votre équipe et rencontrer Armand.
+        Récupérez Force au sommet de la Tour Perdue si vous ne l’avez pas encore fait.
+        \n\nUne fois le Badge Mine obtenu, rejoignez Sorbier et vos compagnons à la bibliothèque.
+        L’explosion vous envoie au Lac Courage : entrez dans la caverne et battez Saturne.
+        \n\nAu Lac Vérité, aidez votre partenaire contre Mars. Le dernier lac est au nord, au-delà du Mont
+        Couronné et des Routes 216 et 217. Préparez les CS et des soins avant cette longue traversée enneigée.
+    </string>
+    <string name="guide_sinnoh_canalave_pt_text">
+        Surfez sur la Route 218 pour rejoindre [[place:header-canalave-city|Joliberges]]. Après le combat du rival,
+        prenez le bateau pour l’Île de Fer : Armand remet Force à l’entrée dans Platine. L’exploration
+        avec lui permet ensuite de recevoir un œuf de [[pokemon:447|Riolu]].
+        \n\nBattez Charles dans son Arène d’Acier. Le Badge Mine permet l’usage de Force hors combat.
+        Rejoignez ensuite Sorbier à la bibliothèque. Après l’explosion, partez au Lac Courage et battez
+        Saturne dans la caverne.
+        \n\nAu Lac Vérité, aidez votre partenaire contre Mars. Le dernier lac est au nord, au-delà du Mont
+        Couronné et des Routes 216 et 217. Préparez les CS et des soins avant cette longue traversée enneigée.
+    </string>
+    <string name="guide_sinnoh_snowpoint_title">8 · Frimapic et le siège Galaxie</string>
+    <string name="guide_sinnoh_snowpoint_text">
+        Traversez le Mont Couronné vers la Route 216, puis progressez dans la neige de la Route 217.
+        Récupérez Escalade près de la maison du randonneur. À Frimapic, battez Gladys
+        pour le Badge Glaçon et l’usage d’Escalade hors combat.
+        \n\nRejoignez le Lac Savoir et constatez la défaite de votre rival face à Jupiter. Revenez à Voilaroc :
+        récupérez la clé laissée près du siège, puis entrez par l’entrepôt pour explorer les sous-sols.
+        \n\nLa Clé Galaxie ouvre le siège principal. Battez Hélio, puis Saturne dans le laboratoire ; libérez
+        les trois Pokémon des lacs. Préparez votre montée vers les Colonnes Lances depuis le Mont Couronné.
+    </string>
+    <string name="guide_sinnoh_summit_title">9 · Le sommet du Mont Couronné</string>
+    <string name="guide_sinnoh_summit_dp_text">
+        Entrez dans le Mont Couronné depuis la Route 207 et utilisez Surf puis Escalade pour gagner
+        les hauteurs. Les sorties enneigées se poursuivent par des cavernes : vérifiez l’étage de la carte
+        quand plusieurs passages se superposent.
+        \n\nAux [[place:mount-coronet-spear-pillar|Colonnes Lances]], combattez Mars et Jupiter avec votre rival,
+        puis Hélio.
+        Dans Diamant, [[pokemon:483|Dialga]] apparaît au niveau 47 ; dans Perle, il s’agit de
+        [[pokemon:484|Palkia]] au même niveau. Ce sont deux versions exclusives de cette rencontre.
+        \n\nSauvegardez avant le combat sauvage si vous voulez conserver un essai de capture.
+        Diamant et Perle ne possèdent pas le parcours du Monde Distorsion de Platine.
+        Après cette crise, la Route 222 permet d’aller vers Rivamar et votre dernier Badge.
+    </string>
+    <string name="guide_sinnoh_summit_pt_text">
+        Montez au sommet du Mont Couronné avec Surf et Escalade. Aux [[place:header-spear-pillar|Colonnes Lances]],
+        affrontez Mars et Jupiter avec votre rival. L’intervention de Giratina ouvre ensuite le Monde Distorsion.
+        \n\nSuivez Cynthia et les Pokémon des lacs, utilisez les plates-formes et poussez les rochers aux endroits
+        indiqués. La gravité change au fil du trajet : les plans de la carte représentent les différents niveaux,
+        pas une nouvelle commande à exécuter dans le jeu.
+        \n\nBattez Hélio et rencontrez [[pokemon:487|Giratina]] Originel au niveau 47. Le passage de sortie mène
+        à la Source Adieu. Retournez parler à Sorbier, puis gagnez Rivamar par la Route 222.
+        Dialga et Palkia sont des rencontres annexes ultérieures dans cette version.
+    </string>
+    <string name="guide_sinnoh_league_title">10 · Rivamar, la Route Victoire et la Ligue</string>
+    <string name="guide_sinnoh_league_text">
+        À Rivamar, retrouvez Tanguy au phare pour le faire revenir dans son Arène.
+        Le Badge Phare est le huitième. Parlez ensuite à Jasmine sur la plage pour obtenir Cascade.
+        \n\nRemontez le Chenal 223 avec Surf, franchissez la cascade et traversez la Route Victoire.
+        Prévoyez aussi Force et Escalade pour son parcours. Soignez-vous avant le dernier combat contre
+        votre rival à l’entrée de la Ligue.
+        \n\nLe Conseil 4 réunit Aaron, Terry, Adrien et Lucio ; Cynthia termine le défi avec notamment
+        [[pokemon:445|Carchacrok]]. Leurs équipes diffèrent entre Diamant/Perle et Platine : consultez
+        les fiches de dresseurs du jeu sélectionné. Stockez des soins avant de franchir les portes du Conseil.
+    </string>
+    <string name="guide_sinnoh_national_title">11 · Voir Sinnoh et ouvrir le National</string>
+    <string name="guide_sinnoh_national_dp_text">
+        Le Pokédex National demande d’avoir vu les 150 espèces ordinaires du Pokédex Sinnoh de Diamant
+        et Perle. [[pokemon:490|Manaphy]], numéro 151, n’est pas exigé. Il s’agit de Pokémon vus, pas de
+        150 captures : les évolutions par échange ne bloquent donc pas cette étape.
+        \n\nAprès la Ligue, montrez votre Pokédex à Sorbier à Littorella. À Célestia, la grand-mère de Cynthia
+        montre l’image du légendaire de l’autre version. Les dresseurs oubliés et le Baudrive du vendredi
+        peuvent compléter les dernières entrées vues.
+        \n\nLe National ouvre notamment le Pokéradar, des rencontres supplémentaires et les routes du secteur
+        de combat. Les objectifs de capture du guide restent séparés de ce contrôle des espèces vues.
+        Un Pokédex National complet exige des apports extérieurs à une cartouche seule.
+    </string>
+    <string name="guide_sinnoh_national_pt_text">
+        Dans Platine, le régional est étendu à 210 espèces. Sorbier demande d’avoir vu les 210 entrées,
+        et non de les avoir toutes capturées. [[pokemon:490|Manaphy]] compte ici : son image peut être
+        consultée dans le livre du Manoir Pokémon, sans recevoir de Pokémon Ranger.
+        \n\nAprès la Ligue, revenez au laboratoire de Littorella avec le Pokédex rempli en observations.
+        Vérifiez les dresseurs manqués et les rencontres propres à certains jours ou horaires avant de
+        conclure qu’une espèce exige un échange.
+        \n\nLe National débloque le Pokéradar et d’autres espèces de rencontre. Explorez ensuite le secteur
+        de combat et poursuivez l’affaire de la Team Galaxie au Mont Abrupt avec Cornil et Beladonis.
+        Les objectifs de capture ne demandent ni Manaphy transféré ni distribution externe.
+    </string>
+    <string name="guide_sinnoh_postgame_title">12 · Après le Panthéon</string>
+    <string name="guide_sinnoh_postgame_dp_text">
+        Prenez le bateau de Frimapic vers le secteur de combat. Avec le National, explorez les routes
+        du nord et le [[place:sinnoh-stark-mountain-1f|Mont Abrupt]]. Accompagnez Cornil, puis retrouvez-le à l’Aire
+        de Survie après le vol de la Pierre Magma ; le retour au volcan mène à [[pokemon:485|Heatran]] niveau 70.
+        \n\nÀ Joliberges, aidez le fils du marin et gagnez l’Île Pleine Lune. Après cette visite,
+        [[pokemon:488|Cresselia]] parcourt Sinnoh. [[pokemon:481|Créfollet]] devient également errant
+        après votre rencontre dans la Caverne Vérité ; leur position n’est pas prédite par Pokémaps.
+        \n\nLa Source Adieu et la Grotte Retour abritent [[pokemon:487|Giratina]] au niveau 70.
+        La Tour de Combat propose un autre défi. Les îles de distributions et Regigigas, qui demande
+        les trois golems importés, ne sont pas des captures ordinaires sur une cartouche isolée.
+    </string>
+    <string name="guide_sinnoh_postgame_pt_text">
+        Après le National, poursuivez l’histoire du [[place:sinnoh-stark-mountain-1f|Mont Abrupt]] avec Cornil
+        et Beladonis. Une fois l’affaire résolue et Cornil revu à l’Aire de Survie, retournez au volcan :
+        [[pokemon:485|Heatran]] y est au niveau 50 dans Platine.
+        \n\nL’Île Pleine Lune lance l’errance de [[pokemon:488|Cresselia]]. Après le National, parlez au
+        Professeur Chen dans sa maison de Vestigion pour lancer celles d’Artikodin, Électhor et Sulfura.
+        Créfollet reste lié à la Caverne Vérité. Aucune route suivante n’est garantie par le guide.
+        \n\nRelisez les propos de la grand-mère de Cynthia et cherchez les Orbes Adamant et Perlé au Mont
+        Couronné pour Dialga et Palkia aux Colonnes Lances, niveau 70. La Zone de Combat remplace le Parc
+        de Combat. Le café de l’Aire de Survie accueille des revanches une fois son accès débloqué.
+    </string>
+</resources>

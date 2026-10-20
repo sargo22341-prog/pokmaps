@@ -115,7 +115,10 @@ la Mémoire Ball reste réservée aux distributions.
 Le Pokédex DS propose la bascule Sinnoh/National et les deux numéros sur la fiche. Les formes retenues ont
 leurs sprites normaux et chromatiques et leur suivi de collection ; Zarbi conserve ses 28 formes.
 Les fiches utilisent la classe propre à chaque attaque et les conditions d’évolution DS en français.
-Les guides, succès et outils spécifiques à Sinnoh restent décrits dans les phases suivantes de `gen4.md`.
+Les guides de Sinnoh proposent une soluce adaptée à chaque version, des quêtes, conseils, bugs documentés
+et un calendrier des rendez-vous. Deux objectifs suivent les captures accessibles sur une cartouche seule,
+dans le régional puis le National, en tenant compte des starters et fossiles incompatibles.
+Les succès et les outils détaillés de reproduction, bonheur et suivi des errants restent en phase 7 de `gen4.md`.
 
 ## Publier une version
 

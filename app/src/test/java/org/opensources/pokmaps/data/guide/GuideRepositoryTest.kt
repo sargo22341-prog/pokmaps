@@ -23,7 +23,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class GuideRepositoryTest {
     @Test
-    fun elevenLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
+    fun fourteenLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val database = Room.databaseBuilder(context, PokedexDatabase::class.java, "guides-test.db")
             .createFromFile(File(requireNotNull(System.getProperty("pokemaps.database"))))
@@ -36,7 +36,7 @@ class GuideRepositoryTest {
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
                 if (game.generationId == 4) {
-                    assertTrue(library.articles.isEmpty())
+                    checkSinnohArticles(library)
                     continue
                 }
                 if (game.generationId == 3) {
@@ -67,6 +67,28 @@ class GuideRepositoryTest {
         } finally {
             database.close()
         }
+    }
+
+    private fun checkSinnohArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {
+        val articles = library.articles
+        assertEquals(25, articles.size)
+        assertEquals(12, articles.count { it.category == GuideCategory.WALKTHROUGH })
+        assertEquals(4, articles.count { it.category == GuideCategory.CALENDAR })
+        assertEquals(GuideCategory.entries.toSet() - GuideCategory.ACHIEVEMENT, articles.map { it.category }.toSet())
+        assertTrue(articles.all { it.paragraphs.size >= 3 && it.title.isNotBlank() && it.sources.isNotEmpty() })
+        val targets = articles.flatMap { it.paragraphs.flatten() }.mapNotNull { it.target }
+        assertTrue(targets.any { it is GuideTarget.Pokemon })
+        assertTrue(targets.any { it is GuideTarget.Place })
+        val platinum = library.game.versionId == 14
+        val national = articles.single { it.id == "sinnoh-national-collection" }
+        val regional = articles.single { it.id == "sinnoh-regional-collection" }
+        assertEquals(if (platinum) 374 else 357, national.captureGoal?.total)
+        assertEquals(if (platinum) 181 else 132, regional.captureGoal?.total)
+        assertTrue(national.captureIds.containsAll(regional.captureIds))
+        val friday = articles.single { it.id == "sinnoh-friday" }
+        assertTrue(friday.summary.contains(if (platinum) "niveau 15" else "niveau 22"))
+        val weekend = articles.single { it.id == "sinnoh-weekend" }
+        assertTrue(weekend.summary.contains(if (platinum) "à l’Aire de Survie" else "à l’Aire de Combat"))
     }
 
     private fun checkGbaArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {

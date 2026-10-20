@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Ajout des guides, du calendrier et des objectifs de capture de Sinnoh, adaptés à Diamant, Perle et Platine.
 - Dans Jaune, masque les filtres d’évolution du rival au premier combat de la Route 22 et les conserve au deuxième.
 - Corrige les sections horaires des rencontres, place les dons après les Pokémon sauvages et réunit les deux combats du rival de la Route 22 sous un seul repère.
 - Allège et repositionne les marqueurs de Pokémon sauvages des cartes de Kanto, Johto et Hoenn.

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ces ressources par défaut sont françaises ; Lint doit utiliser le dictionnaire de cette langue. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="guide_sinnoh_fossils_title">Fossiles · Fouiller selon sa version</string>
+    <string name="guide_sinnoh_fossils_dp_text">
+        Le Kit d’Exploration reçu à Vestigion ouvre le Souterrain. En fouillant les parois, Diamant
+        permet de trouver le Fossile Crâne de [[pokemon:408|Kranidos]], tandis que Perle donne le
+        Fossile Armure de [[pokemon:410|Dinoclier]]. Ce ne sont pas deux fossiles au choix sur la même cartouche.
+        \n\nApportez vos trouvailles au Musée de Charbourg, sortez puis revenez récupérer le Pokémon.
+        Les fossiles sont renouvelables : vous pouvez en chercher d’autres, sans qu’une fouille garantisse
+        une récompense donnée. Le guide ne lit pas votre tirage.
+        \n\nAprès le Pokédex National, les anciens fossiles deviennent disponibles dans le Souterrain.
+        Leurs Pokémon peuvent compléter l’objectif National. Les captures de l’autre fossile de Sinnoh
+        restent extérieures à l’objectif de votre version.
+    </string>
+    <string name="guide_sinnoh_fossils_pt_text">
+        Dans Platine, la parité de l’identifiant du dresseur décide du fossile de Sinnoh : impair pour
+        le Fossile Crâne de [[pokemon:408|Kranidos]], pair pour le Fossile Armure de [[pokemon:410|Dinoclier]].
+        Fouiller davantage ne change pas cette condition.
+        \n\nUtilisez le Kit d’Exploration remis à Vestigion, fouillez les murs du Souterrain, puis confiez
+        les fossiles au Musée de Charbourg. Sortez et rentrez pour récupérer chaque Pokémon restauré.
+        Un fossile compatible peut être retrouvé plusieurs fois.
+        \n\nLes anciens fossiles se débloquent après le National. Le compteur de collection traite les
+        familles Kranidos et Dinoclier comme une alternative, sans inventer votre identifiant ni compter
+        simultanément les deux résultats possibles de cette partie.
+    </string>
+    <string name="guide_sinnoh_gifts_title">Œufs, dons et Ruines Bonville</string>
+    <string name="guide_sinnoh_gifts_dp_text">
+        À Unionpolis, recevez l’œuf de [[pokemon:440|Ptiravi]] du randonneur. À l’Île de Fer, accompagnez
+        Armand et libérez une place dans votre équipe pour recevoir l’œuf de [[pokemon:447|Riolu]].
+        Un œuf doit éclore avant de compter comme capture de son espèce.
+        \n\nAprès le National, rendez visite à la personne qui gère les boîtes à Unionpolis pour recevoir
+        [[pokemon:133|Évoli]]. La Pension permet ensuite d’en obtenir d’autres pour ses évolutions,
+        avec un partenaire compatible ou Métamorph.
+        \n\nLes [[place:sinnoh-solaceon-ruins-1f|Ruines Bonville]] abritent [[pokemon:201|Zarbi]]. Explorez les salles
+        latérales et poursuivez le travail de la Grotte Ruinemaniac ; l’ensemble compte 28 formes.
+        Les formes se suivent dans leur écran dédié, indépendamment des objectifs d’espèces.
+    </string>
+    <string name="guide_sinnoh_gifts_pt_text">
+        À Vestigion, Cynthia remet un œuf de [[pokemon:175|Togepi]]. À l’Île de Fer, accompagnez Armand
+        et gardez une place dans votre équipe pour l’œuf de [[pokemon:447|Riolu]]. Faites éclore les œufs
+        avant de les marquer capturés dans la collection.
+        \n\nÀ Unionpolis, [[pokemon:133|Évoli]] est offert avant le National dans Platine. Explorez aussi
+        les [[place:sinnoh-solaceon-ruins-1f|Ruines Bonville]] : Anti-Brume s’y récupère dans cette version.
+        La Pension et Métamorph permettent de préparer plusieurs évolutions d’Évoli.
+        \n\n[[pokemon:201|Zarbi]] possède 28 formes accessibles en explorant les ruines et en poursuivant
+        la Grotte Ruinemaniac. Utilisez le suivi des formes ; une forme supplémentaire n’est pas une
+        espèce supplémentaire pour les compteurs Sinnoh et National.
+    </string>
+    <string name="guide_sinnoh_honey_title">Miel, Jardin Trophée et Grand Marais</string>
+    <string name="guide_sinnoh_honey_text">
+        Enduisez un arbre à Miel et revenez lorsque son feuillage bouge. Le moteur attend six heures ;
+        une rencontre disparaît après vingt-quatre heures depuis l’application. [[pokemon:446|Goinfrex]]
+        dépend d’un petit ensemble d’arbres déterminé par votre identifiant de dresseur.
+        \n\nAu Manoir Pokémon, les annonces de M. Décorum ajoutent des possibilités au Jardin Trophée après
+        le National. Au Grand Marais, les jumelles aident à reconnaître les visiteurs du jour ; les six
+        zones n’ont pas toutes la même sélection. La carte liste des possibilités, pas le tirage de votre partie.
+        \n\nPour compléter votre collection, combinez rencontres ordinaires, essaims et Pokéradar une fois
+        débloqués. Les filtres de la fiche du lieu distinguent ces conditions. La double insertion GBA
+        exige une autre cartouche et reste exclue des objectifs de capture sans apport extérieur.
+    </string>
+    <string name="guide_sinnoh_rotom_title">Le téléviseur du Vieux Château</string>
+    <string name="guide_sinnoh_rotom_dp_text">
+        Après la Ligue et le Pokédex National, revenez de nuit au [[place:sinnoh-old-chateau-1f|Vieux Château]],
+        dans la Forêt Vestigion. Examinez le téléviseur à l’étage entre 20 h et 3 h 59 pour affronter
+        [[pokemon:479|Motisma]] au niveau 15.
+        \n\nSi Motisma n’est pas capturé, une nouvelle tentative est possible un autre jour.
+        La capture ferme cette rencontre. Le filtre horaire de Pokémaps affiche la condition sans
+        modifier l’heure de votre console.
+        \n\nDiamant et Perle ne proposent pas la salle des appareils de Platine.
+        Posséder Motisma dans ces jeux ne débloque donc pas ses formes Électroménager.
+    </string>
+    <string name="guide_sinnoh_rotom_pt_text">
+        Dès que Coupe permet d’entrer au [[place:sinnoh-old-chateau-1f|Vieux Château]], examinez le téléviseur
+        à l’étage de nuit, entre 20 h et 3 h 59. Dans Platine, [[pokemon:479|Motisma]] est au niveau 20
+        et n’exige pas le Pokédex National.
+        \n\nUne tentative sans capture peut être renouvelée un autre jour ; une capture termine la rencontre.
+        Préparez des Balls et un moyen d’affaiblir ce Pokémon sans le mettre K.O.
+        \n\nLe changement d’appareil à Vestigion exige la Clé Secrète, objet de distribution externe.
+        Les cinq appareils ne sont pas une récompense ordinaire de la capture et ne font pas partie
+        des objectifs d’espèces sans événement externe.
+    </string>
+    <string name="guide_sinnoh_events_title">Rencontres qui demandent un apport extérieur</string>
+    <string name="guide_sinnoh_events_text">
+        [[pokemon:442|Spiritomb]] demande une Clé de Voûte à la Tour Sacrée et des conversations avec
+        32 visiteurs du Souterrain ; les marchands ne remplissent pas ce compteur. Ce parcours demande
+        une interaction avec un autre joueur et n’entre pas dans l’objectif de cartouche isolée.
+        \n\n[[pokemon:486|Regigigas]] exige Regirock, Regice et Registeel dans l’équipe au Temple de Frimapic.
+        Dans Platine, les grottes des trois golems exigent elles-mêmes un Regigigas de distribution.
+        Cette chaîne ne donne pas les quatre Pokémon sans apport extérieur.
+        \n\nManaphy vient d’un transfert Ranger ; Phione dépend ensuite de sa reproduction. Darkrai, Shaymin
+        et Arceus sont liés à des objets ou distributions externes, et le Parc des Amis importe des Pokémon
+        GBA. Leurs fiches restent consultables, mais ces apports ne gonflent pas les objectifs ordinaires.
+    </string>
+    <string name="guide_sinnoh_capture_title">Capturer · Préparer chaque rencontre</string>
+    <string name="guide_sinnoh_capture_text">
+        Gardez des Balls variées : Rapide Ball au premier tour, Sombre Ball la nuit ou dans une grotte,
+        puis des Balls adaptées à la durée et à l’espèce. Le calculateur de [[pokemon:425|Baudrive]] ou
+        de tout autre Pokémon applique les règles DS quand vous avez choisi Diamant, Perle ou Platine.
+        \n\nAffaiblissez la cible, puis endormez-la ou paralysez-la si possible. Faux-Chage ne touche pas
+        les Spectres sans moyen de lever leur immunité ; les dégâts résiduels peuvent terminer le combat
+        avant une nouvelle tentative. Sauvegardez avant une rencontre fixe importante.
+        \n\nAu Grand Marais, utilisez les règles Safari plutôt que les PV et statuts d’un combat normal.
+        Les errants et les tirages quotidiens ne sont jamais prédits. Les espèces vues pour débloquer
+        le National et les espèces capturées pour votre collection sont deux objectifs différents.
+    </string>
+    <string name="guide_sinnoh_collection_text">
+        Ce compteur suit les espèces capturables sur une seule partie, jusqu’à l’après-Ligue, par rencontre,
+        don, éclosion ou évolution sans échange externe. Il compte les captures indiquées dans Pokémaps,
+        sans lire votre cartouche ni vérifier les Pokémon actuellement présents dans vos boîtes.
+        \n\nUne seule famille de départ est comptée, même si plusieurs starters ont été cochés.
+        Diamant conserve Kranidos, Perle Dinoclier ; Platine compte une seule de ces familles selon
+        l’identifiant du dresseur. Les anciens fossiles sont renouvelables et ne sont pas un choix exclusif.
+        \n\nLes échanges avec une autre cartouche, les interactions multijoueurs nécessaires à Spiritomb,
+        la double insertion GBA, les transferts et les distributions sont exclus. Les échanges internes
+        n’ajoutent pas d’espèce absente de ces parcours. Le compteur Sinnoh utilise le régional de votre jeu ;
+        le National étend le même objectif aux espèces supplémentaires accessibles sur cette cartouche.
+    </string>
+    <string name="guide_sinnoh_regional_collection_title">Collection · Objectif Sinnoh</string>
+    <string name="guide_sinnoh_national_collection_title">Collection · Objectif National</string>
+    <string name="guide_sinnoh_bugs_dp_title">Bugs · La limite de l’horloge</string>
+    <string name="guide_sinnoh_bugs_dp_text">
+        Le moteur de Diamant et Perle mesure des durées avec une horloge limitée à la fin de 2099.
+        Son calcul au retour à l’année 2000 omet une seconde : à cette frontière, deux instants consécutifs
+        peuvent donc être considérés comme identiques. Ce défaut n’est pas une méthode d’obtention de Pokémon.
+        \n\nCe cas concerne le passage de la borne du calendrier, pas chaque minuit ni chaque changement
+        de mois. N’en déduisez pas qu’un rendez-vous hebdomadaire ou une rencontre quotidienne est garanti
+        en réglant l’horloge de la console.
+        \n\nPokémaps décrit les parcours ordinaires et les conditions des scripts ; il n’utilise aucun
+        passage hors carte, duplication ni modification de sauvegarde pour ses objectifs de capture.
+        Les rencontres externes ne deviennent pas ordinaires parce qu’un contournement existe.
+    </string>
+    <string name="guide_sinnoh_bugs_pt_title">Bugs · Pêche et effets de combat dans Platine</string>
+    <string name="guide_sinnoh_bugs_pt_text">
+        Dans Platine, les talents Ventouse et Glue ne doublent pas effectivement le taux de touche à
+        la pêche : le moteur calcule un produit sans le réaffecter au taux utilisé. Ce défaut concerne
+        les touches à la canne, pas le taux de capture après le début du combat.
+        \n\nLe script de Poursuite comporte aussi une mauvaise écriture des conditions du terrain.
+        Lorsqu’un adversaire est mis K.O. en tentant de se retirer sous certains effets de terrain,
+        plusieurs météos peuvent se retrouver actives : c’est le glitch souvent appelé « pluie acide ».
+        \n\nCes observations sont propres aux sources de Platine citées pour cet article ; elles ne sont
+        pas appliquées automatiquement à Diamant et Perle. Les objectifs du guide utilisent les méthodes
+        ordinaires et n’exigent aucun glitch ni duplication.
+    </string>
+</resources>

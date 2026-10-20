@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ces ressources par défaut sont françaises ; Lint doit utiliser le dictionnaire de cette langue. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="guide_sinnoh_clock_title">Horaires · Matin, journée et nuit</string>
+    <string name="guide_sinnoh_clock_text">
+        Les rencontres de Sinnoh distinguent le matin de 4 h à 9 h 59, la journée de 10 h à 19 h 59
+        et la nuit de 20 h à 3 h 59. Le moteur possède aussi un crépuscule de 17 h à 19 h 59,
+        regroupé avec la journée pour les tables ordinaires de rencontres.
+        \n\nLe téléviseur du [[place:sinnoh-old-chateau-1f|Vieux Château]] utilise la nuit pour [[pokemon:479|Motisma]].
+        Les policiers et joggeurs rencontrés sur les routes suivent leurs propres horaires de combat ;
+        les conditions affichées sur leur fiche font foi, plutôt qu’une règle supposée pour tous les PNJ.
+        \n\nCes horaires suivent l’horloge de la console, pas celle du téléphone. Les filtres de Pokémaps
+        permettent d’examiner plusieurs périodes. Ils ne modifient aucun rendez-vous de votre partie,
+        et le guide ne tire ni essaim, ni visiteur du Marais, ni Pokémon du Jardin à votre place.
+    </string>
+    <string name="guide_sinnoh_friday_title">Vendredi · Baudrive aux Éoliennes</string>
+    <string name="guide_sinnoh_friday_dp_text">
+        Après avoir libéré les Éoliennes de Mars, revenez le vendredi devant le bâtiment.
+        [[pokemon:425|Baudrive]] y apparaît au niveau 22 dans Diamant et Perle.
+        Une victoire ou une capture ferme la rencontre pour la journée.
+        \n\nL’apparition dépend aussi de l’état du scénario et de la mise à jour du lieu. Si vous venez
+        tout juste de terminer l’intervention Galaxie, ne prenez pas l’absence immédiate du Pokémon
+        pour une rencontre manquante dans la carte : revenez au rendez-vous suivant.
+        \n\nCe rendez-vous est hebdomadaire, contrairement aux tirages quotidiens du Grand Marais.
+        Baudrive peut aider à compléter les espèces vues du régional ; le capturer reste un objectif
+        séparé, suivi manuellement dans le Pokédex de Pokémaps.
+    </string>
+    <string name="guide_sinnoh_friday_pt_text">
+        Après la libération des Éoliennes, revenez le vendredi devant le bâtiment.
+        [[pokemon:425|Baudrive]] est au niveau 15 dans Platine, et non au niveau 22 de Diamant et Perle.
+        Le script vérifie le jour, l’avancement de l’affaire Galaxie et la victoire du jour contre ce Pokémon.
+        \n\nSi la rencontre vient d’être remportée, elle n’est plus disponible cette journée.
+        Le vendredi ne suffit donc pas à garantir un Baudrive encore présent dans votre partie.
+        Consultez la carte pour l’emplacement et votre console pour la disponibilité réelle.
+        \n\nCe calendrier ne simule aucun tirage et ne règle pas l’heure du jeu. Les visiteurs du Marais,
+        les arbres à Miel et le Jardin Trophée obéissent à d’autres mécanismes ; leur liste de possibilités
+        ne certifie pas un résultat aujourd’hui.
+    </string>
+    <string name="guide_sinnoh_daily_title">Chaque jour · Récoltes, loterie et rencontres</string>
+    <string name="guide_sinnoh_daily_text">
+        À Féli-Cité, tentez la loterie de la télévision. À Floraville, à Verchamps et chez le Maître des
+        Baies sur la Route 208, les dons de baies ont leur limite quotidienne. Le massage de Voilaroc
+        est lui aussi limité à une séance par jour.
+        \n\nAprès le National, interrogez la sœur de votre partenaire à Littorella pour connaître l’essaim.
+        Au Manoir Pokémon et au Grand Marais, vérifiez les annonces et les jumelles pour les possibilités
+        du jour. Le guide n’anticipe aucun résultat et ne garantit pas une nouvelle espèce à chaque visite.
+        \n\nRevenez aussi au Marché de Rivamar avec la Boîte Sceaux : l’assortiment suit les sept jours de
+        la semaine. Dans la maison au nord-est de Rivamar, le récit demandé permet de recevoir le Ruban
+        correspondant au jour pour un Pokémon de votre équipe.
+    </string>
+    <string name="guide_sinnoh_weekend_title">Week-end · Revanche du rival</string>
+    <string name="guide_sinnoh_weekend_dp_text">
+        Après la Ligue, le rival revient à l’Aire de Combat pour une revanche le samedi et le dimanche.
+        Le script contrôle ces deux jours ; une revanche déjà remportée n’est pas répétable à volonté
+        pendant la même journée.
+        \n\nSon équipe dépend de votre Pokémon de départ et progresse avec les victoires à la Ligue.
+        Consultez sa fiche de dresseur et sélectionnez le combat qui correspond à votre avancement,
+        plutôt que de préparer l’équipe de votre première rencontre.
+        \n\nPlatine déplace ce rendez-vous à l’Aire de Survie. La présence de scripts semblables dans les
+        sources ne rend pas les deux emplacements interchangeables : cet article décrit Diamant et Perle.
+    </string>
+    <string name="guide_sinnoh_weekend_pt_text">
+        Après l’affaire du Mont Abrupt, retrouvez le rival à l’Aire de Survie. Sa revanche est proposée
+        le samedi et le dimanche, avec un contrôle de la victoire quotidienne. Le rendez-vous de Platine
+        ne se tient pas à l’Aire de Combat comme dans Diamant et Perle.
+        \n\nL’équipe dépend de votre partenaire initial et du nombre de victoires à la Ligue.
+        Choisissez le combat correspondant dans sa fiche pour vérifier espèces et niveaux avant de
+        commencer ; le calendrier ne déduit pas votre progression réelle.
+        \n\nLe café voisin accueille d’autres revanches après son déblocage. Leur sélection quotidienne
+        n’est pas une promesse que tous les dresseurs seront présents ensemble. Pokémaps ne simule pas
+        la sélection enregistrée dans votre partie.
+    </string>
+</resources>
