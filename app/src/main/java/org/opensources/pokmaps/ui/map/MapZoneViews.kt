@@ -176,7 +176,7 @@ private fun ZoneItems(zone: MapZone, onOpenItem: (String) -> Unit, onShowObject:
 private fun ZoneItemRow(obj: MapObject, onOpenItem: (String) -> Unit, onShowObject: (Int) -> Unit) {
     val identifier = obj.itemIdentifier
     SheetRow(
-        title = obj.itemName.orEmpty(),
+        title = obj.name,
         subtitle = stringResource(
             if (obj.kind == MapObjectKind.HIDDEN_ITEM) R.string.map_hidden_item else R.string.map_item
         ),

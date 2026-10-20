@@ -18,6 +18,13 @@ _NO_EGGS = "no-eggs"
 # Requêtes qui doivent renvoyer 0 ligne : (description, requête).
 CHECKS = (
     (
+        "quantités des lots de Miel cachés de Platine perdues",
+        """SELECT o.id FROM map_object o JOIN map m ON m.id = o.map_id JOIN item i ON i.id = o.item_id
+           WHERE m.version_group_id = 9 AND m.identifier IN
+             ('header-old-chateau-dining-area', 'header-route-209-lost-tower-2f')
+             AND o.kind = 'hidden_item' AND i.identifier = 'honey' AND o.name_fr != i.name_fr || ' ×3'""",
+    ),
+    (
         "objet DS répété sur la même case affichée",
         """SELECT coalesce(m.parent_map_id, m.id), o.kind, o.item_id, o.x, o.y, o.version_id
            FROM map_object o JOIN map m ON m.id = o.map_id

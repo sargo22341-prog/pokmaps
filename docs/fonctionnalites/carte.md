@@ -18,6 +18,7 @@ arbres accueillent Coup d'Boule, les rochers Éclate-Roc, l'eau surf et pêche.
 
 La liste du lieu affiche rencontres, niveaux, probabilités, objets et lieux accessibles. Son filtre d'heure est
 indépendant de celui de la carte. Les boutons à icônes combinent Matin, Jour et Nuit ; Tout les réactive.
+À Sinnoh, les objets ramassés par lots gardent leur quantité dans leur nom, dont les lots de trois Miels de Platine.
 Seules les périodes qui comportent une variation apparaissent ; une liste identique toute la journée
 ne propose aucun bouton horaire. Tout affiche Tout le temps, Matin, Jour et Nuit. Un Pokémon présent aux trois
 périodes apparaît une fois dans Tout le temps. Désactiver une période masque sa section, même si les mêmes

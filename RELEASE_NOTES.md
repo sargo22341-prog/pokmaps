@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Affiche les quantités des lots de Miel de Platine et des jetons cachés, et corrige les guides de Sinnoh.
 - Sinnoh : baies et paillis, Super Concours, saveurs pour Poffins, catalogues du Souterrain et équipes possibles des installations de combat.
 - Sinnoh : succès officiels traduits, observations des errants sauvegardées et outils de reproduction et de bonheur.
 - Ajout des guides, du calendrier et des objectifs de capture de Sinnoh, adaptés à Diamant, Perle et Platine.

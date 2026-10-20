@@ -31,6 +31,7 @@ Des filtres séparent les Pokémon errants et activent les conditions disponible
 Pokédex National, Pokéradar, essaim). Les périodes disponibles se combinent avec des boutons à icônes ;
 Tout les réactive et les lieux sans variation horaire masquent ces boutons.
 Seules les sections horaires sélectionnées restent visibles ; les dons et échanges suivent les rencontres sauvages.
+À Sinnoh, les objets ramassés par lots indiquent leur quantité sur la carte et dans les listes des lieux.
 Dans Rouge, Bleu et Jaune, le rival de la Route 22 partage un seul repère pour ses deux combats.
 Dans Jaune, seuls les combats à équipe variable affichent les choix de victoires et défaites précédentes.
 Les dresseurs présentent leur équipe initiale et six Poké Balls, grisées pour les places vides ;

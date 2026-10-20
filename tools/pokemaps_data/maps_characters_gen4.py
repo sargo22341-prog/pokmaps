@@ -147,6 +147,9 @@ def _items(builder: DatabaseBuilder, catalog: CharacterCatalog, projection: Gen4
             None,
             None,
             None,
+            name_fr=(
+                f"{builder.items.name_of(_item(builder, item.item))} ×{item.quantity}" if item.quantity > 1 else None
+            ),
         )
         for item in catalog.items
     ]

@@ -148,7 +148,7 @@ private fun ItemDetailsContent(detail: MapDetail.Item, versionGroupIdentifier: S
     val hidden = obj.kind == MapObjectKind.HIDDEN_ITEM
     DetailHeader(
         stringResource(if (hidden) R.string.map_hidden_item else R.string.map_item),
-        obj.itemName.orEmpty()
+        obj.name
     ) {
         val identifier = obj.itemIdentifier
         val sprite = obj.sprite
