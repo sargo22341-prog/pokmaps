@@ -56,6 +56,9 @@ data class SpriteSize(val pixel: Dp, val frame: Int) {
 
         /** Petite pastille (Pokémon surligné sur la carte). */
         val SMALL = SpriteSize(0.67.dp, 64)
+
+        /** Équipes des dresseurs : quatre cinquièmes de l'échelle des fiches. */
+        val TRAINER = SpriteSize(1.34.dp, 80)
     }
 }
 

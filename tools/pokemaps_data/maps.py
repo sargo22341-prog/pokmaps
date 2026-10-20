@@ -162,6 +162,8 @@ class GameMapData:
     characters_complete: bool = True
     story: StoryEvents | None = None
     named_characters: frozenset[str] = frozenset()
+    # Translation des coordonnées éditoriales natives lorsqu'un plan DS réunit plusieurs matrices.
+    coordinate_offsets: dict[str, tuple[int, int]] = field(default_factory=dict)
 
 
 def renderer(game_maps: GameMaps) -> MapRenderer:

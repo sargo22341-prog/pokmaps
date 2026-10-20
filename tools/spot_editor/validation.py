@@ -88,5 +88,5 @@ def save_spots(
     errors = spot_errors(session, families, terrains, catalog)
     if errors:
         raise ValueError(f"{len(errors)} erreur(s). {errors[0].label}. Consultez la liste des erreurs.")
-    write_spots(session.merged(), path)
+    write_spots(session.native_points(), path)
     session.mark_written()

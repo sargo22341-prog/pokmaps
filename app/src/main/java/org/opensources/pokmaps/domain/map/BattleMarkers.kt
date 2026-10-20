@@ -6,7 +6,8 @@ import kotlin.math.abs
 object BattleMarkers {
     data class Position(val objectId: Int, val x: Int, val y: Int)
 
-    fun positions(objects: List<MapObject>): List<Position> {
+    fun positions(objects: List<MapObject>, compactSprites: Boolean = false): List<Position> {
+        val offset = if (compactSprites) 8 else 16
         val trainers = objects.filter { it.kind == MapObjectKind.TRAINER }
         val paired = mutableSetOf<Int>()
         return buildList {
@@ -23,10 +24,10 @@ object BattleMarkers {
                 }
                 val partner = partners.singleOrNull()
                 if (partner == null) {
-                    add(Position(trainer.id, trainer.x + 16, trainer.y - 16))
+                    add(Position(trainer.id, trainer.x + offset, trainer.y - offset))
                 } else {
                     paired.add(partner.id)
-                    add(Position(trainer.id, (trainer.x + partner.x) / 2, minOf(trainer.y, partner.y) - 16))
+                    add(Position(trainer.id, (trainer.x + partner.x) / 2, minOf(trainer.y, partner.y) - offset))
                 }
             }
         }

@@ -28,8 +28,11 @@ ne créent pas de repères ; les services sans image disposent d’une icône d�
 Les guides regroupent soluces, quêtes, astuces et succès officiels traduits.
 Les listes des routes affichent par défaut les rencontres ordinaires, sans cartouche GBA insérée.
 Des filtres séparent les Pokémon errants et activent les conditions disponibles (cartouche GBA,
-Pokédex National, Pokéradar, essaim). Les dresseurs présentent leur équipe initiale et une Poké Ball
-par Pokémon ; un menu compact permet de choisir une revanche. Leur fiche se ferme aussi en glissant vers le bas.
+Pokédex National, Pokéradar, essaim). Les périodes disponibles se combinent avec des boutons à icônes ;
+Tout les réactive et les lieux sans variation horaire masquent ces boutons.
+Les dresseurs présentent leur équipe initiale et six Poké Balls, grisées pour les places vides ;
+un menu compact permet de choisir un autre combat. Leur fiche se ferme aussi en glissant vers le bas.
+Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ramène au Pokédex.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.
@@ -94,6 +97,9 @@ La génération complète intègre les catalogues DS validés et active Diamant,
 Si les cartes préparatoires manquent, elle les reconstruit depuis les sources épinglées.
 `--application-only` limite la génération aux jeux actifs, sans reconstruire un aperçu supplémentaire.
 La carte propose des sélecteurs distincts pour les étages et les niveaux superposés de Sinnoh.
+Les salles DS d'un même étage sont réunies en plans, avec les liaisons entre leurs portes.
+Les poses alternatives des agents et joggers partagent un seul repère et les Pokémon fixes restent
+à leur position permanente ; sans animation, leur sprite de terrain est présenté de face.
 Le calque Arbres à Miel apparaît uniquement sur les cartes qui contiennent leurs emplacements ;
 les plantations affichent leur baie et leur récolte initiales, puis permettent de replanter dans le jeu.
 Les lieux, rencontres et offres événementiels gardent la mention

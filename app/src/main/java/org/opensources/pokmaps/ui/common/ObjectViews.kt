@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +36,7 @@ import org.opensources.pokmaps.domain.map.OfferLink
 import org.opensources.pokmaps.domain.map.RivalChoice
 import org.opensources.pokmaps.domain.map.TeamSelection
 import org.opensources.pokmaps.domain.map.TrainerPokemon
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.pokemon.DamageClass
@@ -92,13 +94,14 @@ fun TrainerTeams(
     place: SpritePlace,
     choiceFailed: Boolean,
     onChooseRival: (RivalChoice) -> Unit,
-    onOpenPokemon: (Int) -> Unit
+    onOpenPokemon: (Int) -> Unit,
+    header: (@Composable (List<TrainerTeam>) -> Unit)? = null
 ) {
     if (selection.unknown) {
+        header?.invoke(emptyList())
         Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
         return
     }
-    RivalChoicePanel(selection, place, choiceFailed, onChooseRival)
     var battle by remember(selection.shown) { mutableStateOf<Int?>(null) }
     var showMoves by remember(selection.shown) { mutableStateOf(false) }
     val selected = if (selection.shown.any { it.rematch == battle }) {
@@ -106,11 +109,16 @@ fun TrainerTeams(
     } else {
         selection.shown.minByOrNull { it.rematch ?: 0 }?.rematch
     }
+    val active = selection.shown.filter { it.rematch == selected }
+    header?.invoke(active)
+    RivalChoicePanel(selection, place, choiceFailed, onChooseRival)
     TrainerBattleSelector(selection.shown, selected) { battle = it }
-    Crossfade(selection.shown.filter { it.rematch == selected }, label = "trainerTeams") { teams ->
+    Crossfade(active, label = "trainerTeams") { teams ->
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             teams.forEach { team ->
-                TrainerPartyBalls(team)
+                if (header == null) {
+                    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.TopEnd) { TrainerPartyBalls(team) }
+                }
                 team.members.forEach { TrainerPokemonRow(it, place, onOpenPokemon, showMoves) }
             }
         }
@@ -139,7 +147,7 @@ fun TrainerPokemonRow(
             .padding(vertical = 4.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PokemonSprite(mon.pokemonId, place, SpriteSize.SMALL, contentDescription = null)
+            PokemonSprite(mon.pokemonId, place, SpriteSize.TRAINER, contentDescription = null)
             Text(mon.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             Text(stringResource(R.string.encounter_levels, mon.level), style = MaterialTheme.typography.titleSmall)
         }

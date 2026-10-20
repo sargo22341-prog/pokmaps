@@ -687,4 +687,6 @@
     <string name="trainer_show_moves">Afficher les attaques</string>
     <string name="trainer_hide_moves">Masquer les attaques</string>
     <string name="trainer_party_ball">Un Pokémon dans l’équipe</string>
+    <string name="trainer_party_empty">Place vide dans l’équipe</string>
+    <string name="trainer_battle_number">Combat %1$d</string>
 </resources>

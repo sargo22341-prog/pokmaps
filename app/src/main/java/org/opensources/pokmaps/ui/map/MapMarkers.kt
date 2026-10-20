@@ -147,6 +147,14 @@ fun ObjectMarker(
                 alpha = if (obj.kind == MapObjectKind.HIDDEN_ITEM) HIDDEN_ALPHA else 1f
             )
 
+            obj.kind == MapObjectKind.POKEMON && sprite != null && SpritePlace.MAP !in LocalAnimatedPlaces.current ->
+                MapSprite(
+                    Sprites.mapSprite(versionGroupIdentifier, sprite),
+                    contentDescription = obj.pokemonName,
+                    pixelScale = mapState.scale.toFloat(),
+                    tileAnchored = true
+                )
+
             obj.kind == MapObjectKind.POKEMON && pokemonId != null ->
                 MapPokemon(mapState, pokemonId, obj.pokemonName, scale, obj.shiny)
 

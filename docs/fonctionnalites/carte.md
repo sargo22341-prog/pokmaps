@@ -17,7 +17,9 @@ au lieu parent. Les calques choisissent entrées, objets, dresseurs, personnages
 arbres accueillent Coup d'Boule, les rochers Éclate-Roc, l'eau surf et pêche.
 
 La liste du lieu affiche rencontres, niveaux, probabilités, objets et lieux accessibles. Son filtre d'heure est
-indépendant de celui de la carte. Tout affiche Tout le temps, Matin, Jour et Nuit. Un Pokémon présent aux trois
+indépendant de celui de la carte. Les boutons à icônes combinent Matin, Jour et Nuit ; Tout les réactive.
+Seules les périodes qui comportent une variation apparaissent ; une liste identique toute la journée
+ne propose aucun bouton horaire. Tout affiche Tout le temps, Matin, Jour et Nuit. Un Pokémon présent aux trois
 périodes apparaît une fois dans Tout le temps. Si niveaux ou probabilités varient, sa ligne conserve le détail par
 période. Les autres conditions, comme un essaim, restent distinctes.
 
@@ -41,3 +43,5 @@ Les badges d’étage suivent la même convention partout : « RDC », « 1er »
 
 Sur les plans concernés, les passages reliés ont la même couleur ; « Liaisons » affiche leurs traits,
 masqués par défaut. Les sprites de personnages gardent leur taille native et leurs pieds au bas de la case.
+À Sinnoh, les salles d'un même étage sont assemblées selon `map_assemblies_gen4.csv` ; leurs portes
+conservent leurs deux extrémités et les mêmes liaisons colorées que les autres générations.

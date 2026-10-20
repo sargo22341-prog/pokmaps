@@ -77,7 +77,7 @@ tables d'obtention ni sur des emplacements sauvages fixes.
 
 `map_spots.csv` conserve les placements relus, par famille et `version_group`.
 
-Décision : garder l'espacement d'au moins trois cases et les petits terrains lisibles. Les six
+Décision : garder l'espacement d'au moins trois cases et les petits terrains lisibles. Les huit
 terrains ci-dessous conservent un avertissement de capacité ; aucune absence d'emplacement
 n'est admise. Un Pokémon tiré au hasard occupe chaque point disponible, les autres restent
 dans la liste du lieu, conformément au comportement de `WildPlacement`.
@@ -87,9 +87,11 @@ dans la liste du lieu, conformément au comportement de `WildPlacement`.
 | Épave, couloir sous-marin, eau | Rubis/Saphir | 1 / 5 | Petite poche d'eau à l'entrée |
 | Épave, salles du premier sous-sol, eau | Rubis/Saphir | 1 / 5 | Petit bassin central |
 | Myokara, eau | Rubis/Saphir et Émeraude | 5 / 6 | Bande d'eau entre plage et bord de carte |
-| Site Météore, sous-sol 1 salle 2, eau | Rubis/Saphir | 5 / 6 | Bassin étroit entouré de falaises |
+| Site Météore, rez-de-chaussée salle 2, eau | Rubis/Saphir | 5 / 6 | Retouche manuelle dans l'éditeur |
+| Site Météore, sous-sol 1 salle 2, eau | Rubis/Saphir | 3 / 6 | Bassin étroit entouré de falaises |
 | Route 102, eau | Rubis/Saphir et Émeraude | 3 / 5 | Petit étang isolé |
 | Route 115, herbes | Rubis/Saphir et Émeraude | 2 / 5 | Petites parcelles hors du chemin |
+| Route 117, herbes | Rubis/Saphir | 6 / 7 | Retouche manuelle dans l'éditeur |
 
-Cela représente neuf avertissements au total : six en Rubis/Saphir, trois en Émeraude. Ils restent visibles dans
+Cela représente onze avertissements au total : huit en Rubis/Saphir, trois en Émeraude. Ils restent visibles dans
 l'éditeur ; aucun n'est supprimé ou rendu silencieux.

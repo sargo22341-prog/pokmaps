@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.ui.character
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,13 +25,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.opensources.pokmaps.R
+import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapObjectKind
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.usecase.CharacterPage
 import org.opensources.pokmaps.ui.common.CharacterSprite
 import org.opensources.pokmaps.ui.common.Offers
 import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SheetPlaceholder
+import org.opensources.pokmaps.ui.common.TrainerPartyBalls
 import org.opensources.pokmaps.ui.common.TrainerTeams
 
 @Composable
@@ -102,32 +106,17 @@ private fun CharacterContent(
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CharacterSprite(obj, page.game.versionGroupIdentifier, size = 96)
-            RoleIcons(page.roles, size = 28.dp)
-            Text(obj.name, style = MaterialTheme.typography.headlineMedium)
-            FilledTonalButton(onClick = { onOpenPlace(page.map.identifier) }) { Text(page.map.name) }
-            Button(onClick = { onAction(CharacterAction.ShowOnMap) }) {
-                Icon(
-                    painterResource(R.drawable.ic_map),
-                    contentDescription = null,
-                    modifier = Modifier.padding(end = 8.dp)
-                )
-                Text(stringResource(R.string.show_on_map))
-            }
-        }
         if (obj.kind == MapObjectKind.TRAINER) {
             TrainerTeams(
                 state.teams,
                 SpritePlace.SHEETS,
                 state.choiceFailed,
                 onChooseRival = { onAction(CharacterAction.ChooseRival(it)) },
-                onOpenPokemon = onOpenPokemon
+                onOpenPokemon = onOpenPokemon,
+                header = { teams -> CharacterHeader(page, teams, onAction, onOpenPlace) }
             )
+        } else {
+            CharacterHeader(page, emptyList(), onAction, onOpenPlace)
         }
         Offers(
             page.offers,
@@ -138,5 +127,35 @@ private fun CharacterContent(
             onShowObject = { onAction(CharacterAction.ShowObject(it)) }
         )
         Spacer(Modifier.height(24.dp))
+    }
+}
+
+@Composable
+private fun CharacterHeader(
+    page: CharacterPage,
+    teams: List<TrainerTeam>,
+    onAction: (CharacterAction) -> Unit,
+    onOpenPlace: (String) -> Unit
+) {
+    Box(Modifier.fillMaxWidth()) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            CharacterSprite(page.obj, page.game.versionGroupIdentifier, size = 96)
+            RoleIcons(page.roles.filter { it != CharacterRole.BATTLE }, size = 28.dp)
+            Text(page.obj.name, style = MaterialTheme.typography.headlineMedium)
+            FilledTonalButton(onClick = { onOpenPlace(page.map.identifier) }) { Text(page.map.name) }
+            Button(onClick = { onAction(CharacterAction.ShowOnMap) }) {
+                Icon(
+                    painterResource(R.drawable.ic_map),
+                    contentDescription = null,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(stringResource(R.string.show_on_map))
+            }
+        }
+        Column(Modifier.align(Alignment.TopEnd)) { teams.forEach { TrainerPartyBalls(it) } }
     }
 }

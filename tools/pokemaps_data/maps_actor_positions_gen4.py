@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -9,6 +10,7 @@ from PIL import Image
 
 from .maps_actor_positions import clears_passages
 from .pret_gen4_map_models import EMPTY_BLOCK
+from .sources import DATA_DIR
 
 if TYPE_CHECKING:
     from .maps import GameMapData
@@ -16,6 +18,27 @@ if TYPE_CHECKING:
     from .maps_export_gen4 import Gen4MapProjection
 
 _DUO_CLASSES = frozenset({"twins", "young_couple", "double_team", "sis_and_bro", "interviewers"})
+
+
+def curated_positions(data: GameMapData, projection: Gen4MapProjection) -> None:
+    family = projection.maps.game.version_group
+    actors = {obj.key: obj for obj in data.objects if obj.key}
+    seen = set()
+    with (DATA_DIR / "map_actor_positions_gen4.csv").open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if row["family"] != family:
+                continue
+            key = row["key"]
+            if key in seen or key not in actors or not row["reason"].strip():
+                raise ValueError(f"map_actor_positions_gen4.csv : personnage inconnu, répété ou sans raison : {key}")
+            seen.add(key)
+            obj = actors[key]
+            cell = (int(row["x"]), int(row["z"]))
+            point = projection.point(obj.map_const, *cell)
+            if point not in _points(obj, projection):
+                raise ValueError(f"map_actor_positions_gen4.csv : case non praticable : {key}:{cell}")
+            obj.x, obj.y = point
+            obj.source_cell = cell
 
 
 def space_trainer_duos(objects: list[ObjectRow]) -> None:
@@ -79,19 +102,17 @@ def space_characters(data: GameMapData, projection: Gen4MapProjection, source: P
     placed: dict[str, list[tuple[int, int, int, int]]] = {}
     frames = _sprite_frames(data.objects, source)
     for obj in data.objects:
-        if obj.sprite is None:
+        if obj.sprite is None or obj.kind == "pokemon":
             continue
         parent = projection.maps.parents[obj.map_const]
         occupied = placed.setdefault(parent, [])
         point = (obj.x, obj.y)
         frame = frames[obj.sprite]
-        if not _clears_frame(point, frame, occupied):
+        walkable = _points(obj, projection) if obj.trainer_class in _DUO_CLASSES else None
+        if not _clears_frame(point, frame, occupied) or (walkable is not None and point not in walkable):
             passages = {(w.x, w.y) for w in data.warps if projection.maps.parents[w.map_const] == parent}
-            candidates = [
-                p
-                for p in _points(obj, projection)
-                if _clears_frame(p, frame, occupied) and clears_passages(p, passages)
-            ]
+            available = walkable if walkable is not None else _points(obj, projection)
+            candidates = [p for p in available if _clears_frame(p, frame, occupied) and clears_passages(p, passages)]
             if not candidates:
                 raise ValueError(f"{obj.map_const}:{obj.key} : aucune case libre pour espacer le personnage")
             point = min(candidates, key=lambda p: ((p[0] - obj.x) ** 2 + (p[1] - obj.y) ** 2, p))

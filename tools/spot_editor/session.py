@@ -21,8 +21,11 @@ class SpotSession:
     Seuls les terrains réellement modifiés sont mis en attente : un terrain qu'on n'a pas touché reste
     généré (il n'est pas recopié dans map_spots.csv)."""
 
-    def __init__(self, curated: dict[TerrainKey, frozenset[Point]]) -> None:
-        self.curated = dict(curated)
+    def __init__(
+        self, curated: dict[TerrainKey, frozenset[Point]], offsets: dict[tuple[str, str], Point] | None = None
+    ) -> None:
+        self._offsets = dict(offsets or {})
+        self.curated = self._translate(curated, 1)
         self.pending: dict[TerrainKey, frozenset[Point]] = {}
 
     @property
@@ -56,8 +59,21 @@ class SpotSession:
         self._set(key, generated, self.points(key, generated) - {point})
 
     def merged(self) -> dict[TerrainKey, frozenset[Point]]:
-        """Contenu complet de map_spots.csv une fois les modifications appliquées."""
+        """Emplacements affichés une fois les modifications appliquées."""
         return {**self.curated, **self.pending}
+
+    def native_points(self) -> dict[TerrainKey, frozenset[Point]]:
+        """Le CSV conserve les coordonnées natives, indépendantes de l'assemblage affiché."""
+        return self._translate(self.merged(), -1)
+
+    def _translate(
+        self, points: dict[TerrainKey, frozenset[Point]], direction: int
+    ) -> dict[TerrainKey, frozenset[Point]]:
+        return {
+            key: frozenset((x + direction * dx, y + direction * dy) for x, y in cells)
+            for key, cells in points.items()
+            for dx, dy in (self._offsets.get((key.family, key.map_identifier), (0, 0)),)
+        }
 
     def mark_written(self) -> None:
         self.curated = self.merged()

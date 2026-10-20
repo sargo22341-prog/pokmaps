@@ -10,6 +10,14 @@ class BattleMarkersTest {
     )
 
     @Test
+    fun gameBoyBadgeStaysCloseToItsSixteenPixelSprite() {
+        assertEquals(
+            listOf(BattleMarkers.Position(1, 48, 48)),
+            BattleMarkers.positions(listOf(trainer.copy(sprite = "youngster")), compactSprites = true)
+        )
+    }
+
+    @Test
     fun singleBattleIsAboveAndRightOfTheSprite() {
         assertEquals(listOf(BattleMarkers.Position(1, 56, 40)), BattleMarkers.positions(listOf(trainer)))
     }

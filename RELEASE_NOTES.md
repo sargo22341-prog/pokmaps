@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Allège et repositionne les marqueurs de Pokémon sauvages des cartes de Kanto, Johto et Hoenn.
+- Corrige les doublons, les plans d'étages de Sinnoh, les fiches dresseurs, les filtres horaires et le retour au Pokédex.
 - Corrige le cadrage des bâtiments et les doublons de Sinnoh, simplifie les rencontres des routes avec filtres et les fiches dresseurs avec choix des revanches.
 - Correction des doublons, des équipes variables du rival et du placement des personnages de Sinnoh.
 - Affichage des baies initiales et retrait des points blancs inutiles dans toutes les générations.

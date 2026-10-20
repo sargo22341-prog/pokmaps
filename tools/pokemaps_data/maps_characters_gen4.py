@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from .maps_characters import ObjectRow
+from .maps_fixed_gen4 import fixed_rows, merge_actor_poses
 from .pret_identifiers import species_identifier
 from .pret_items_gen4 import ds_item_id
 
@@ -65,13 +66,18 @@ def character_rows(
             row.name_fr = "Plantation de baies"
         result.append(row)
     result += _items(builder, catalog, projection)
-    result += _fixed(catalog, projection)
+    fixed = fixed_rows(builder, catalog, projection)
+    occupied = {(row.map_const, row.source_cell, row.sprite) for row in fixed if row.sprite}
+    result = [row for row in result if (row.map_const, row.source_cell, row.sprite) not in occupied]
+    result += fixed
     from .maps_battles_gen4 import attach_script_battles, merge_story_actors
 
     result = merge_story_actors(result)
     attach_script_battles(builder, catalog, projection, result, source)
-    result += scene_rows(builder, catalog, projection)
-    return [row for row in result if row.sprite or row.item or row.pokemon or row.offers or row.kind == "trainer"]
+    result += scene_rows(builder, catalog, projection, result)
+    return merge_actor_poses(
+        [row for row in result if row.sprite or row.item or row.pokemon or row.offers or row.kind == "trainer"]
+    )
 
 
 def _display_actors(catalog: CharacterCatalog) -> list[CharacterActor]:
@@ -144,30 +150,3 @@ def _items(builder: DatabaseBuilder, catalog: CharacterCatalog, projection: Gen4
         )
         for item in catalog.items
     ]
-
-
-def _fixed(catalog: CharacterCatalog, projection: Gen4MapProjection) -> list[ObjectRow]:
-    result = []
-    for encounter in catalog.fixed:
-        for position in encounter.positions:
-            for pokemon in encounter.pokemon:
-                for version in pokemon.versions or (None,):
-                    result.append(
-                        ObjectRow(
-                            encounter.header,
-                            "pokemon",
-                            *projection.point(
-                                encounter.header,
-                                position.x,
-                                position.z,
-                                position.y if position.kind == "object" else None,
-                            ),
-                            None,
-                            None,
-                            species_identifier(pokemon.species.removeprefix("SPECIES_")),
-                            pokemon.level,
-                            None,
-                            version=version,
-                        )
-                    )
-    return result

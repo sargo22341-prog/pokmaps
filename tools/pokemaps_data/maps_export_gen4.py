@@ -79,8 +79,9 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
 
     data.objects = character_rows(builder, catalog, projection, source)
     _deduplicate_items(data)
-    from .maps_actor_positions_gen4 import clear_actor_passages, space_characters, space_trainer_duos
+    from .maps_actor_positions_gen4 import clear_actor_passages, curated_positions, space_characters, space_trainer_duos
 
+    curated_positions(data, projection)
     clear_actor_passages(data, projection)
     space_trainer_duos(data.objects)
     space_characters(data, projection, source)
@@ -89,6 +90,11 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
     data.named_characters = frozenset(catalog.names.characters)
     data.characters_complete = True
     _write_catalog_assets(source, output, catalog)
+    from .maps_assemblies_gen4 import assemble_floors
+
+    assemble_floors(data, output, game.version_group)
+    validate_catalog(output)
+    write_inventory(output)
     return data
 
 

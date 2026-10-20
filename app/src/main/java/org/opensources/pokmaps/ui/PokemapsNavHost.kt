@@ -95,7 +95,11 @@ internal fun PokemapsNavHost(navController: NavHostController, modifier: Modifie
         composable(TopLevelDestination.GAME.route) { GameRoute() }
         composable(TopLevelDestination.GUIDES.route) { GuideDestination(navController) }
         composable(POKEMON_ROUTE, listOf(navArgument(PokemonViewModel.POKEMON_ID) { type = NavType.IntType })) {
-            PokemonRoute(PokemonLinks(openPokemon, openItem, openMove), onShowOnMap = showMap)
+            PokemonRoute(
+                PokemonLinks(openPokemon, openItem, openMove),
+                onShowOnMap = showMap,
+                onUnavailable = { navController.showPokedex() }
+            )
         }
         composable(MOVE_ROUTE, listOf(navArgument(MoveViewModel.MOVE_ID) { type = NavType.IntType })) {
             MoveRoute(onOpenItem = openItem)
@@ -165,5 +169,14 @@ internal fun NavHostController.navigateToTopLevel(destination: TopLevelDestinati
 private fun NavHostController.showMap() {
     if (!popBackStack(TopLevelDestination.MAP.route, inclusive = false)) {
         navigateToTopLevel(TopLevelDestination.MAP)
+    }
+}
+
+/** Une fiche absente du nouveau jeu ne doit pas être restaurée avec l'onglet Pokédex. */
+private fun NavHostController.showPokedex() {
+    // Une recherche de l'espèce absente ne doit pas laisser la liste de remplacement vide.
+    navigate(TopLevelDestination.POKEDEX.route) {
+        popUpTo(graph.findStartDestination().id)
+        launchSingleTop = true
     }
 }

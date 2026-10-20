@@ -25,7 +25,8 @@ Balls, Plongée, tours écoulés et espèce déjà capturée ; il exclut le Parc
 
 Les familles d’évolution excluent les espèces apparues après la génération choisie, sans se limiter au régional.
 Une espèce historiquement présente reste consultable si son obtention exige un transfert ou un événement externe.
-Après changement de jeu, une espèce non encore apparue est signalée absente ; un profil incomplet est une erreur.
+Après changement de jeu, une fiche d'espèce non encore apparue revient à la liste du Pokédex ;
+une erreur de chargement reste affichée comme erreur.
 
 Les modèles de Sinnoh sont préparés, sans activation des jeux dans les assets distribués : arbres à Miel,
 dons de Pokémon Ranger, talents et chromatiques à 1/8 192. La capture DS distingue les combats sauvages,

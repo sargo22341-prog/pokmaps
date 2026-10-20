@@ -75,24 +75,59 @@ entrées sont exclus des points libres.
 Chaque point est validé sur son terrain, avec au moins trois cases entre deux points.
 
 Décision : préserver cet espacement et les rochers réels, plutôt que superposer les sprites ou
-inventer des cases. **Quatorze avertissements de capacité** restent visibles dans l'éditeur,
+inventer des cases. **Quarante-neuf avertissements de capacité** restent visibles dans l'éditeur,
 sans aucun terrain privé de point. Les Pokémon supplémentaires restent consultables dans la
 liste du lieu ; l'application choisit un Pokémon par point disponible, comme pour les autres jeux.
 Un test exige exactement ces manques et refuse toute nouvelle absence.
 
 | Lieu et terrain | Points / marqueurs nécessaires | Motif |
 |---|---|---|
-| Bourg Palette, eau | 2 / 8 | Petit bassin au sud |
-| Céladopole, eau | 2 / 4 | Étang étroit |
-| Jadielle, eau | 4 / 7 | Petit étang |
-| Cap Falaise, herbes | 5 / 8 | Parcelles étroites de part et d'autre de la maison |
+| Céladopole, eau | 1 / 4 | Étang étroit |
+| Grotte Azurée — 1er sous-sol, eau | 4 / 8 | Marqueurs allégés dans l'éditeur |
+| Île 5, eau | 4 / 9 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 1, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 14, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 2, sol | 3 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 3, sol | 3 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 4, sol | 3 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 5, sol | 3 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 6, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 7, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 8, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte Perdue — Salle 9, sol | 4 / 5 | Marqueurs allégés dans l'éditeur |
+| Île 4, eau | 4 / 8 | Marqueurs allégés dans l'éditeur |
+| Grotte de Glace — Salle du fond, sol | 2 / 5 | Marqueurs allégés dans l'éditeur |
+| Grotte de Glace — Salle du fond, eau | 5 / 9 | Marqueurs allégés dans l'éditeur |
+| Grotte de Glace — Entrée, eau | 7 / 10 | Marqueurs allégés dans l'éditeur |
+| Parmanie, eau | 1 / 7 | Marqueurs allégés dans l'éditeur |
 | Mont Braise, escalier du Rubis B1F, rocher | 1 / 2 | Un seul rocher destructible |
 | Mont Braise, escalier du Rubis B2F, rocher | 1 / 2 | Un seul rocher destructible |
-| Route 4, eau | 4 / 6 | Bande d'eau en bord de carte |
-| Route 11, eau | 5 / 6 | Petite zone aquatique |
-| Route 14, herbes | 4 / 6 | Parcelle allongée |
-| Route 16, herbes | 3 / 4 | Petite parcelle |
-| Route 18, herbes | 4 / 5 | Parcelle étroite |
-| Route 22, eau | 4 / 7 | Petit bassin |
-| Route 24, herbes | 5 / 7 | Bande entre rivière et chemin |
-| Route 25, herbes | 3 / 7 | Petite parcelle au sud du chemin |
+| Île 1, eau | 2 / 8 | Marqueurs allégés dans l'éditeur |
+| Plage Trésor, herbes | 4 / 6 | Marqueurs allégés dans l'éditeur |
+| Bourg Palette, eau | 2 / 8 | Petit bassin au sud |
+| Route 11, eau | 2 / 6 | Petite zone aquatique |
+| Route 12, herbes | 1 / 4 | Marqueurs allégés dans l'éditeur |
+| Route 13, herbes | 2 / 6 | Marqueurs allégés dans l'éditeur |
+| Route 14, herbes | 1 / 6 | Parcelle allongée |
+| Route 15, herbes | 4 / 6 | Marqueurs allégés dans l'éditeur |
+| Route 16, herbes | 2 / 4 | Petite parcelle |
+| Route 17, herbes | 2 / 5 | Marqueurs allégés dans l'éditeur |
+| Route 18, herbes | 1 / 5 | Parcelle étroite |
+| Route 22, eau | 1 / 7 | Petit bassin |
+| Route 24, herbes | 3 / 7 | Bande entre rivière et chemin |
+| Route 24, eau | 4 / 6 | Marqueurs allégés dans l'éditeur |
+| Route 25, herbes | 2 / 7 | Petite parcelle au sud du chemin |
+| Route 25, eau | 2 / 7 | Marqueurs allégés dans l'éditeur |
+| Route 4, eau | 1 / 6 | Bande d'eau en bord de carte |
+| Route 6, eau | 2 / 7 | Marqueurs allégés dans l'éditeur |
+| Route 7, herbes | 3 / 4 | Marqueurs allégés dans l'éditeur |
+| Parc Safari — Zone centrale, eau | 2 / 8 | Marqueurs allégés dans l'éditeur |
+| Parc Safari — Zone est, eau | 4 / 8 | Marqueurs allégés dans l'éditeur |
+| Parc Safari — Nord, eau | 3 / 8 | Marqueurs allégés dans l'éditeur |
+| Parc Safari — Zone ouest, herbes | 5 / 9 | Marqueurs allégés dans l'éditeur |
+| Parc Safari — Zone ouest, eau | 2 / 8 | Marqueurs allégés dans l'éditeur |
+| Vallée Ruine, eau | 4 / 7 | Marqueurs allégés dans l'éditeur |
+| Bois aux Baies, eau | 5 / 8 | Marqueurs allégés dans l'éditeur |
+| Cap Falaise, herbes | 3 / 8 | Parcelles étroites de part et d'autre de la maison |
+| Cap Falaise, eau | 3 / 8 | Marqueurs allégés dans l'éditeur |
+| Jadielle, eau | 1 / 7 | Petit étang |

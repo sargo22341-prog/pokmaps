@@ -26,6 +26,8 @@ def trainer_rows(
     kanto_rivals = _kanto_rival_battles(selected)
     selected = tuple(trainer for trainer in selected if not _KANTO_RIVAL.fullmatch(trainer))
     rows = [_kanto_rival_row(maps, version, battle, teams, actor) for battle, teams in kanto_rivals.items()]
+    if len(rows) > 1:
+        rows = [_merge_rival_battles(rows)]
     for trainer_id in selected:
         trainer = maps.repo.trainers[version][trainer_id]
         rows.append(
@@ -44,10 +46,24 @@ def trainer_rows(
                 },
             )
         )
-    fixed = rows[len(kanto_rivals) :]
-    return rows[: len(kanto_rivals)] + [
+    rival_count = 1 if kanto_rivals else 0
+    fixed = rows[rival_count:]
+    return rows[:rival_count] + [
         _with_rematch_items(maps, version, trainer_id, row) for trainer_id, row in zip(selected, fixed, strict=True)
     ]
+
+
+def _merge_rival_battles(rows: list[ObjectRow]) -> ObjectRow:
+    rows = sorted(rows, key=lambda row: max(mon[1] for _, _, party in row.variants for mon in party))
+    variants = [variant for row in rows for variant in row.variants]
+    counts: dict[str, int] = {}
+    rematches = {}
+    for team, (_, starter, _) in enumerate(variants, 1):
+        count = counts.get(starter, 0)
+        if count:
+            rematches[team] = count
+        counts[starter] = count + 1
+    return replace(rows[0], name_fr="Rival", variants=variants, variant_rematches=rematches)
 
 
 # Combats du rival de Rouge Feu et Vert Feuille : une équipe par Pokémon de départ du rival.

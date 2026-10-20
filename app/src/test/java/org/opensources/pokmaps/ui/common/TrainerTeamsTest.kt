@@ -30,12 +30,38 @@ class TrainerTeamsTest {
         compose.onNode(hasText("Roucool")).assertExists()
         compose.onNode(hasText("Roucoups")).assertDoesNotExist()
         compose.onAllNodes(hasContentDescription("Un Pokémon dans l’équipe")).assertCountEquals(1)
+        compose.onAllNodes(hasContentDescription("Place vide dans l’équipe")).assertCountEquals(5)
         compose.onNode(hasText("Premier combat")).performClick()
         compose.onNode(hasText("Revanche 1")).performClick()
         compose.onNode(hasText("Roucool")).assertDoesNotExist()
         compose.onNode(hasText("Roucoups")).assertExists()
         compose.onAllNodes(hasContentDescription("Un Pokémon dans l’équipe")).assertCountEquals(2)
+        compose.onAllNodes(hasContentDescription("Place vide dans l’équipe")).assertCountEquals(4)
     }
 
     private fun pokemon(id: Int, name: String) = TrainerPokemon(id, name, 5, emptyList())
+
+    @Test
+    fun headerFollowsTheSelectedBattleWithoutDuplicatingPartyBalls() {
+        val base = TrainerTeam(null, listOf(pokemon(16, "Roucool")))
+        val rematch = TrainerTeam(null, listOf(pokemon(17, "Roucoups"), pokemon(19, "Rattata")), rematch = 1)
+        compose.setContent {
+            Column {
+                TrainerTeams(
+                    TeamSelection(listOf(base, rematch)),
+                    SpritePlace.SHEETS,
+                    false,
+                    {},
+                    {},
+                    header = { teams -> teams.forEach { TrainerPartyBalls(it) } }
+                )
+            }
+        }
+        compose.onAllNodes(hasContentDescription("Un Pokémon dans l’équipe")).assertCountEquals(1)
+        compose.onAllNodes(hasContentDescription("Place vide dans l’équipe")).assertCountEquals(5)
+        compose.onNode(hasText("Premier combat")).performClick()
+        compose.onNode(hasText("Revanche 1")).performClick()
+        compose.onAllNodes(hasContentDescription("Un Pokémon dans l’équipe")).assertCountEquals(2)
+        compose.onAllNodes(hasContentDescription("Place vide dans l’équipe")).assertCountEquals(4)
+    }
 }

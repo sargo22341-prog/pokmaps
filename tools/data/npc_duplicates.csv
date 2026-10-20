@@ -92,3 +92,5 @@ diamond-pearl,pokediamond:313:1,"Prof. Sorbier : figurant temporaire sans script
 diamond-pearl,pokediamond:342:5,"Prof. Sorbier : figurant temporaire sans script de dialogue (script 0) ; MAP_ROUTE_201 événement 5, retrait 406 ; conserver les scènes et leurs offres"
 diamond-pearl,pokediamond:362:20,"Cynthia : figurant temporaire sans script de dialogue (script 0) ; MAP_ROUTE_210_SOUTH événement 20, retrait 463 ; conserver les scènes et leurs offres"
 diamond-pearl,pokediamond:403:11,"Cornil : figurant temporaire sans script de dialogue (script 0) ; MAP_ROUTE_227 événement 11, retrait 684 ; conserver les scènes et leurs offres"
+platinum,pokeplatinum:399:16,Shaymin en déplacement sur la Route 224 ; conserver uniquement le Pokémon permanent au Paradis Fleuri.
+diamond-pearl,pokediamond:399:16,Shaymin en déplacement sur la Route 224 ; conserver uniquement le Pokémon permanent au Paradis Fleuri.

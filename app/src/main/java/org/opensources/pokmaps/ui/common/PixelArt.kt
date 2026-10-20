@@ -3,6 +3,7 @@ package org.opensources.pokmaps.ui.common
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
@@ -39,8 +40,9 @@ fun PixelArtImage(
     targetWidth: Dp,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    alpha: Float = 1f
+    alpha: Float = 1f,
+    colorFilter: ColorFilter? = null
 ) {
     val size = pixelArtSize(source, targetWidth)
-    AssetImage(path, contentDescription, modifier.size(size), alpha = alpha)
+    AssetImage(path, contentDescription, modifier.size(size), alpha = alpha, colorFilter = colorFilter)
 }

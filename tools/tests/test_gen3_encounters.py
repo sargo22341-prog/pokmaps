@@ -192,7 +192,8 @@ def _check_hoenn_coverage(catalog: EditorCatalog) -> None:
         for name, points, required in (
             ("abandoned-ship-hidden-floor-corridors", 1, 5),
             ("abandoned-ship-rooms-b1f", 1, 5),
-            ("meteor-falls-b1f-2r", 5, 6),
+            ("meteor-falls-1f-2r", 5, 6),
+            ("meteor-falls-b1f-2r", 3, 6),
         )
-    }
+    } | {("route117", "grass", "ruby-sapphire", 6, 7)}
     assert actual == shared | ruby

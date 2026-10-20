@@ -78,8 +78,11 @@ def _offers(builder: DatabaseBuilder, offer: Gen4Offer, stories: tuple[str, ...]
     ]
 
 
-def scene_rows(builder: DatabaseBuilder, catalog: CharacterCatalog, projection: Gen4MapProjection) -> list[ObjectRow]:
+def scene_rows(
+    builder: DatabaseBuilder, catalog: CharacterCatalog, projection: Gen4MapProjection, actors: list[ObjectRow]
+) -> list[ObjectRow]:
     result = []
+    retained = _scene_targets(catalog, actors)
     for index in catalog.actors.scene_offers:
         step = catalog.offers.steps[index]
         region = projection.maps.by_const[step.site.header]
@@ -89,6 +92,11 @@ def scene_rows(builder: DatabaseBuilder, catalog: CharacterCatalog, projection: 
             else (region.x + region.width // 2, region.y + region.height // 2)
         )
         offers = actor_offers(builder, catalog, (index,))
+        key = (step.site.header, step.site.script_file, step.step)
+        if key in retained:
+            row = retained[key]
+            row.offers = list(dict.fromkeys([*row.offers, *offers]))
+            continue
         result.append(
             ObjectRow(
                 step.site.header,
@@ -104,4 +112,18 @@ def scene_rows(builder: DatabaseBuilder, catalog: CharacterCatalog, projection: 
                 appearance="npc_object",
             )
         )
+        retained[key] = result[-1]
     return result
+
+
+def _scene_targets(catalog: CharacterCatalog, actors: list[ObjectRow]) -> dict[tuple[str, int, str], ObjectRow]:
+    candidates: dict[tuple[str, int, str], set[str]] = {}
+    by_key = {row.key: row for row in actors if row.key}
+    for actor in catalog.actors.actors:
+        if actor.key not in by_key:
+            continue
+        for index in actor.offers:
+            step = catalog.offers.steps[index]
+            key = (step.site.header, step.site.script_file, step.step)
+            candidates.setdefault(key, set()).add(actor.key)
+    return {key: by_key[next(iter(keys))] for key, keys in candidates.items() if len(keys) == 1}

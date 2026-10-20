@@ -95,6 +95,8 @@ L’export authentifié des archives est une opération distincte, décrite dans
 | Figurants masqués uniquement sur la carte | `scene_actor_visibility.csv` (scripts et catalogues conservés) |
 | Classes, installations et offres | `trainer_classes.csv`, `facility_names.csv`, `npc_offers.csv`, `story_events.csv` |
 | Apparences des adversaires de scénario DS | `trainer_sprites_gen4.csv` |
+| Plans assemblés de même étage DS | `map_assemblies_gen4.csv` (positions en pixels, sur la grille de 256 px) |
+| Positions éditoriales des personnages DS | `map_actor_positions_gen4.csv` (cases natives, vérifiées praticables) |
 | Formes, événements externes et objets | `pokemon_forms.csv`, `external_event_maps.csv`, `item_descriptions.csv` |
 | Obtention sans transfert et effets d’attaques | `transfer_only.csv`, `move_effects.csv` |
 
@@ -219,6 +221,10 @@ offres applicables à Platine, Diamant et Perle dans tous les lieux retenus.
 gardent leurs en-têtes de blocs ; les autres matrices donnent les intérieurs et les étages. `maps.csv` fournit
 tous les noms français, les plans éditoriaux restent dans `map_plans.csv`, et `map_parents.csv` décrit les origines.
 Les matrices donnent déjà les positions : aucun ancrage géométrique artificiel n’est nécessaire.
+L'intégration dans l'application assemble ensuite les matrices de même étage définies dans
+`map_assemblies_gen4.csv`, en conservant leurs images natives et leur provenance. Les régions,
+personnages, rencontres et deux extrémités des passages reçoivent la même translation. Les points
+éditoriaux de `map_spots.csv` restent exprimés dans leur repère natif et sont translatés à l'export.
 `map_exclusions_gen4.csv` écarte explicitement les copies inutilisées, avec leur raison ; les anciennes portes
 qui les visent restent tracées dans `map_connection_skips.csv` et dans les liaisons non navigables.
 `map_level_skips_gen4.csv` écarte les plans BDHC qui ne correspondent pas à un étage accessible ; le réexport

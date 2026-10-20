@@ -3,6 +3,7 @@ package org.opensources.pokmaps.ui.map
 import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.performClick
@@ -40,9 +41,9 @@ class ZoneEncounterFiltersTest {
         compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), map.time) {} } }
         compose.onNode(hasText("Roucool")).assertExists()
         compose.onNode(hasText("Hoothoot")).assertDoesNotExist()
-        selectTime(R.string.time_morning, R.string.time_day)
+        assertNoTimeButton(R.string.time_day)
+        selectTime(R.string.time_morning, R.string.time_night)
         compose.onNode(hasText("Roucool")).assertDoesNotExist()
-        selectTime(R.string.time_day, R.string.time_night)
         compose.onNode(hasText("Hoothoot")).assertExists()
         assertEquals(TimeFilter.MORNING, map.time)
     }
@@ -96,8 +97,16 @@ class ZoneEncounterFiltersTest {
     }
 
     private fun selectTime(current: Int, target: Int) {
-        click(current)
-        click(target)
+        toggleTime(current)
+        toggleTime(target)
+    }
+
+    private fun toggleTime(label: Int) {
+        compose.onNode(hasContentDescription(context.getString(label)) and hasClickAction()).performClick()
+    }
+
+    private fun assertNoTimeButton(label: Int) {
+        compose.onNode(hasContentDescription(context.getString(label)) and hasClickAction()).assertDoesNotExist()
     }
 
     @Test
@@ -124,6 +133,7 @@ class ZoneEncounterFiltersTest {
         compose.setContent { Column { TimedZoneEncounters(zone, emptySet(), TimeFilter.MORNING) {} } }
         assertNoCaptureChips()
         assertNoChip(R.string.time_morning)
+        assertNoTimeButton(R.string.time_morning)
         compose.onNode(hasText(context.getString(R.string.time_morning))).assertDoesNotExist()
     }
 
@@ -141,9 +151,10 @@ class ZoneEncounterFiltersTest {
         assertNoChip(R.string.map_method_walk)
         compose.onNode(hasText("Magicarpe")).assertExists()
         click(R.string.method_fishing)
-        selectTime(R.string.time_day, R.string.time_night)
+        assertNoTimeButton(R.string.time_night)
+        toggleTime(R.string.time_day)
         assertNoCaptureChips()
-        selectTime(R.string.time_night, R.string.time_all)
+        toggleTime(R.string.time_all)
         compose.onNode(hasText("Roucool")).assertExists()
         compose.onNode(hasText("Magicarpe")).assertExists()
     }

@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.common
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
@@ -14,13 +15,15 @@ fun AssetImage(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     alpha: Float = 1f,
-    contentScale: ContentScale = ContentScale.Fit
+    contentScale: ContentScale = ContentScale.Fit,
+    colorFilter: ColorFilter? = null
 ) {
     AsyncImage(
         model = Sprites.assetUri(path),
         contentDescription = contentDescription,
         modifier = modifier,
         alpha = alpha,
+        colorFilter = colorFilter,
         contentScale = contentScale,
         filterQuality = FilterQuality.None
     )

@@ -1,13 +1,13 @@
 """Portée des emplacements : CSV, édition, validation et application aux groupes de versions."""
 
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
 from pokemaps_data.builder_maps import _SpotRows
 from pokemaps_data.games import GAMES
 from pokemaps_data.map_spots import TerrainKey, read_spots, write_spots
+from pokemaps_data.maps import GameMapData, MapRow, SpotRow
 from spot_editor.catalog import Family
 from spot_editor.session import SpotSession
 from spot_editor.validation import spot_errors
@@ -18,6 +18,17 @@ RED = TerrainKey(COMMON.family, COMMON.map_identifier, COMMON.kind, "red-blue")
 FAMILY = Family(COMMON.family, "Rouge, Bleu et Jaune", ("red-blue", "yellow"))
 RED_POINT = (8, 8)
 YELLOW_POINT = (24, 8)
+
+
+def _map_data(point: tuple[int, int] = RED_POINT) -> GameMapData:
+    return GameMapData(
+        [MapRow("ROUTE_1", 1, "Route 1", None, 0, 0, 256, 256, 1)],
+        [],
+        [],
+        [],
+        [SpotRow("ROUTE_1", "grass", *point)],
+        {("route-1", "grass"): frozenset({point})},
+    )
 
 
 class VersionTerrains:
@@ -78,11 +89,7 @@ def test_common_validation_ignores_a_group_with_its_own_override() -> None:
 def test_builder_applies_only_the_selected_group_override() -> None:
     rows = _SpotRows({COMMON: frozenset({RED_POINT}), YELLOW: frozenset({YELLOW_POINT})}, GAMES)
     for group, point, map_id in (("red-blue", RED_POINT, 1), ("yellow", YELLOW_POINT, 2)):
-        data = SimpleNamespace(
-            maps=[SimpleNamespace(const="ROUTE_1")],
-            spots=[SimpleNamespace(map_const="ROUTE_1", kind="grass", x=point[0], y=point[1])],
-            terrain={("route-1", "grass"): frozenset({point})},
-        )
+        data = _map_data(point)
         rows.add_game(group, data, {"ROUTE_1": map_id})
     rows.check_all_used({COMMON.family})
     assert rows.rows == [(1, 1, "grass", *RED_POINT), (2, 2, "grass", *YELLOW_POINT)]
@@ -90,11 +97,7 @@ def test_builder_applies_only_the_selected_group_override() -> None:
 
 def test_builder_empty_override_removes_only_yellow_points() -> None:
     rows = _SpotRows({YELLOW: frozenset()}, GAMES)
-    data = SimpleNamespace(
-        maps=[SimpleNamespace(const="ROUTE_1")],
-        spots=[SimpleNamespace(map_const="ROUTE_1", kind="grass", x=8, y=8)],
-        terrain={("route-1", "grass"): frozenset({RED_POINT})},
-    )
+    data = _map_data()
     rows.add_game("red-blue", data, {"ROUTE_1": 1})
     rows.add_game("yellow", data, {"ROUTE_1": 2})
     assert rows.rows == [(1, 1, "grass", *RED_POINT)]
@@ -102,11 +105,7 @@ def test_builder_empty_override_removes_only_yellow_points() -> None:
 
 def test_common_points_shadowed_in_every_group_are_not_reported_as_unknown() -> None:
     rows = _SpotRows({COMMON: frozenset({(1000, 1000)}), RED: frozenset(), YELLOW: frozenset()}, GAMES)
-    data = SimpleNamespace(
-        maps=[SimpleNamespace(const="ROUTE_1")],
-        spots=[SimpleNamespace(map_const="ROUTE_1", kind="grass", x=8, y=8)],
-        terrain={("route-1", "grass"): frozenset({RED_POINT})},
-    )
+    data = _map_data()
     rows.add_game("red-blue", data, {"ROUTE_1": 1})
     rows.add_game("yellow", data, {"ROUTE_1": 2})
     rows.check_all_used({COMMON.family})

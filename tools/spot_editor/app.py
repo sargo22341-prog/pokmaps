@@ -17,6 +17,7 @@ from PIL import Image
 
 from pokemaps_data.games import GAMES_IN_PROGRESS
 from pokemaps_data.map_spots import SPOTS_CSV, Point, TerrainKey, read_spots, selected_key
+from pokemaps_data.maps_assembly_coordinates_gen4 import editor_offsets
 from pokemaps_data.sources import PREVIEW_DIR
 
 from .canvas import SpotCanvas
@@ -54,7 +55,7 @@ class MapEditor:
         self.images = MapImages(assets / "maps")
         self.painter = OverlayPainter(assets)
         self.wild_terrains = WildTerrains(CACHE, assets / "maps")
-        self.session = SpotSession(read_spots())
+        self.session = SpotSession(read_spots(), editor_offsets(assets / "maps"))
         self.families = self.catalog.families()
         if not self.families:
             raise ValueError("Aucun jeu de la base n'appartient à une famille de cartes connue.")

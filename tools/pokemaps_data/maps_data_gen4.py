@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 
 from .map_spots import SPOT_KINDS
 from .maps import GameMapData, MapRow, SpotRow, read_map_areas
+from .maps_assembly_coordinates_gen4 import read_coordinates
 from .maps_layout import SPOTS_PER_KIND, identifier, spread
 from .maps_terrain_gen4 import BLOCK_PX, STEP_PX, BlockView, cell_point, header_terrain
 from .pret_gen4_wild import wild_tables
@@ -55,6 +56,7 @@ class Gen4WildMaps:
         self.world_region = {row.const: "SINNOH" for row in self.rows}
         self.headers = {header.constant: header for header in repo.headers.values() if header.constant in self.parents}
         self.displays = _displays(catalog)
+        self.assembly_coordinates = read_coordinates(catalog)
         self.methods = self._methods()
         self._terrain: dict[str, tuple[dict[str, list[Cell]], dict[Cell, tuple[int, int]]]] = {}
 
@@ -110,7 +112,8 @@ class Gen4WildMaps:
         if const not in self._terrain:
             header = self.headers[const]
             terrain = header_terrain(self.repo, header, self.context.rules, self.methods[const])
-            display = self.displays[self.parents[const]]
+            native, offset = self.assembly_coordinates.get(const, (self.parents[const], (0, 0)))
+            display = self.displays[native]
             row = self.by_const[const]
             left, top = (row.x, row.y) if row.parent else (0, 0)
             occupied = _occupied(self.repo, header)
@@ -118,6 +121,7 @@ class Gen4WildMaps:
             for cell in terrain.single_level - occupied:
                 view = display.blocks[(cell[0] * STEP_PX // BLOCK_PX, cell[1] * STEP_PX // BLOCK_PX)]
                 x, y = cell_point(cell, terrain.heights[cell], view, display.bounds)
+                x, y = x + offset[0], y + offset[1]
                 # Un point remonté par la hauteur au-delà du bord du lieu n'y serait plus dessiné.
                 if left <= x <= left + row.width and top <= y <= top + row.height:
                     points[cell] = (x, y)

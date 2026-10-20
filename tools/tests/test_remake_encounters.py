@@ -143,6 +143,60 @@ def test_remake_source_readers_reject_missing_tables(tmp_path: Path) -> None:
         roaming_starters(repo, "firered")
 
 
+# Décisions de capacité relues dans docs/generations/rencontres-remake-1g.md.
+_SHORTFALLS = {
+    ("celadon-city", "water", 1, 4),
+    ("cerulean-cave-b1f", "water", 4, 8),
+    ("five-island", "water", 4, 9),
+    ("five-island-lost-cave-room1", "floor", 4, 5),
+    ("five-island-lost-cave-room14", "floor", 4, 5),
+    ("five-island-lost-cave-room2", "floor", 3, 5),
+    ("five-island-lost-cave-room3", "floor", 3, 5),
+    ("five-island-lost-cave-room4", "floor", 3, 5),
+    ("five-island-lost-cave-room5", "floor", 3, 5),
+    ("five-island-lost-cave-room6", "floor", 4, 5),
+    ("five-island-lost-cave-room7", "floor", 4, 5),
+    ("five-island-lost-cave-room8", "floor", 4, 5),
+    ("five-island-lost-cave-room9", "floor", 4, 5),
+    ("four-island", "water", 4, 8),
+    ("four-island-icefall-cave-back", "floor", 2, 5),
+    ("four-island-icefall-cave-back", "water", 5, 9),
+    ("four-island-icefall-cave-entrance", "water", 7, 10),
+    ("fuchsia-city", "water", 1, 7),
+    ("mt-ember-ruby-path-b1f-stairs", "rock", 1, 2),
+    ("mt-ember-ruby-path-b2f-stairs", "rock", 1, 2),
+    ("one-island", "water", 2, 8),
+    ("one-island-treasure-beach", "grass", 4, 6),
+    ("pallet-town", "water", 2, 8),
+    ("route11", "water", 2, 6),
+    ("route12", "grass", 1, 4),
+    ("route13", "grass", 2, 6),
+    ("route14", "grass", 1, 6),
+    ("route15", "grass", 4, 6),
+    ("route16", "grass", 2, 4),
+    ("route17", "grass", 2, 5),
+    ("route18", "grass", 1, 5),
+    ("route22", "water", 1, 7),
+    ("route24", "grass", 3, 7),
+    ("route24", "water", 4, 6),
+    ("route25", "grass", 2, 7),
+    ("route25", "water", 2, 7),
+    ("route4", "water", 1, 6),
+    ("route6", "water", 2, 7),
+    ("route7", "grass", 3, 4),
+    ("safari-zone-center", "water", 2, 8),
+    ("safari-zone-east", "water", 4, 8),
+    ("safari-zone-north", "water", 3, 8),
+    ("safari-zone-west", "grass", 5, 9),
+    ("safari-zone-west", "water", 2, 8),
+    ("six-island-ruin-valley", "water", 4, 7),
+    ("three-island-berry-forest", "water", 5, 8),
+    ("two-island-cape-brink", "grass", 3, 8),
+    ("two-island-cape-brink", "water", 3, 8),
+    ("viridian-city", "water", 1, 7),
+}
+
+
 def assert_remake_coverage(catalog: EditorCatalog) -> None:
     families = [family for family in catalog.families() if family.identifier == "firered-leafgreen"]
     terrains = WildTerrains(CACHE)
@@ -152,7 +206,7 @@ def assert_remake_coverage(catalog: EditorCatalog) -> None:
     places = catalog.maps(families[0])
     assert len(places) == 124
     curated = {key: points for key, points in spots.items() if key.family == "firered-leafgreen"}
-    assert len(curated) == 168 and sum(map(len, curated.values())) == 3294
+    assert len(curated) == 168 and sum(map(len, curated.values())) == 927
     assert {key.map_identifier for key in curated} == {place.identifier for place in places}
     for key, points in curated.items():
         assert points
@@ -161,20 +215,4 @@ def assert_remake_coverage(catalog: EditorCatalog) -> None:
         ), key
     shortfalls = PlacementNeeds(catalog, families, terrains).shortfalls(session)
     assert all(not row.blocking for row in shortfalls)
-    # Décisions de capacité relues dans docs/generations/rencontres-remake-1g.md.
-    assert {(row.key.map_identifier, row.key.kind, row.points, row.required) for row in shortfalls} == {
-        ("pallet-town", "water", 2, 8),
-        ("celadon-city", "water", 2, 4),
-        ("viridian-city", "water", 4, 7),
-        ("two-island-cape-brink", "grass", 5, 8),
-        ("mt-ember-ruby-path-b1f-stairs", "rock", 1, 2),
-        ("mt-ember-ruby-path-b2f-stairs", "rock", 1, 2),
-        ("route4", "water", 4, 6),
-        ("route11", "water", 5, 6),
-        ("route14", "grass", 4, 6),
-        ("route16", "grass", 3, 4),
-        ("route18", "grass", 4, 5),
-        ("route22", "water", 4, 7),
-        ("route24", "grass", 5, 7),
-        ("route25", "grass", 3, 7),
-    }
+    assert {(row.key.map_identifier, row.key.kind, row.points, row.required) for row in shortfalls} == _SHORTFALLS

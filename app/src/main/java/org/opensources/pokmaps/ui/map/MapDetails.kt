@@ -27,6 +27,7 @@ import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.map.CharacterRole
 import org.opensources.pokmaps.domain.map.MapObjectKind
 import org.opensources.pokmaps.domain.map.RivalChoice
+import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.model.SpritePlace
 import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.ui.common.CharacterSprite
@@ -38,6 +39,7 @@ import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.RoleIcons
 import org.opensources.pokmaps.ui.common.SpriteSize
+import org.opensources.pokmaps.ui.common.TrainerPartyBalls
 import org.opensources.pokmaps.ui.common.TrainerTeams
 
 /** Fiche de l'élément touché sur la carte, en bas d'écran (la carte reste utilisable). */
@@ -103,6 +105,7 @@ private fun DetailHeader(
     label: String,
     title: String,
     roles: List<CharacterRole> = emptyList(),
+    teams: List<TrainerTeam> = emptyList(),
     content: @Composable () -> Unit
 ) {
     Row(
@@ -111,8 +114,11 @@ private fun DetailHeader(
         modifier = Modifier.padding(end = 40.dp)
     ) {
         content()
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            RoleIcons(roles, size = 24.dp)
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Box(Modifier.fillMaxWidth()) {
+                RoleIcons(roles.filter { it != CharacterRole.BATTLE }, size = 24.dp)
+                Column(Modifier.align(Alignment.TopEnd)) { teams.forEach { TrainerPartyBalls(it) } }
+            }
             if (label.isNotEmpty()) {
                 Text(
                     label,
@@ -189,6 +195,51 @@ private fun CharacterDetails(
 ) {
     val obj = detail.obj
     val pokemonId = obj.pokemonId
+    if (obj.kind == MapObjectKind.TRAINER && !detail.loading && !detail.failed) {
+        TrainerTeams(
+            detail.teamSelection,
+            SpritePlace.MAP_LIST,
+            rivalChoiceFailed,
+            onChooseRival = links.onChooseRival,
+            onOpenPokemon = links.onOpenPokemon,
+            header = { teams -> CharacterDetailHeader(detail, versionGroupIdentifier, teams) }
+        )
+    } else {
+        CharacterDetailHeader(detail, versionGroupIdentifier, emptyList())
+    }
+    if (pokemonId != null) {
+        Button(onClick = { links.onOpenPokemon(pokemonId) }) {
+            Text(stringResource(R.string.map_open_pokemon, obj.pokemonName.orEmpty()))
+        }
+    }
+    if (detail.loading) {
+        CircularProgressIndicator(Modifier.size(24.dp))
+        return
+    }
+    if (detail.failed) {
+        Text(stringResource(R.string.data_load_error), color = MaterialTheme.colorScheme.error)
+        return
+    }
+
+    // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
+    Offers(
+        detail.offers,
+        SpritePlace.MAP_LIST,
+        detail.fossilUses,
+        onOpenPokemon = links.onOpenPokemon,
+        onOpenItem = links.onOpenItem,
+        onShowObject = links.onShowObject
+    )
+}
+
+@Composable
+private fun CharacterDetailHeader(
+    detail: MapDetail.Character,
+    versionGroupIdentifier: String,
+    teams: List<TrainerTeam>
+) {
+    val obj = detail.obj
+    val pokemonId = obj.pokemonId
     if (obj.kind == MapObjectKind.POKEMON) {
         DetailHeader(
             stringResource(R.string.map_static_pokemon, obj.level ?: 0),
@@ -206,39 +257,8 @@ private fun CharacterDetails(
             }
         }
     } else {
-        DetailHeader("", obj.name, detail.roles) { CharacterSprite(obj, versionGroupIdentifier) }
+        DetailHeader("", obj.name, detail.roles, teams) { CharacterSprite(obj, versionGroupIdentifier) }
     }
-    if (pokemonId != null) {
-        Button(onClick = { links.onOpenPokemon(pokemonId) }) {
-            Text(stringResource(R.string.map_open_pokemon, obj.pokemonName.orEmpty()))
-        }
-    }
-    if (detail.loading) {
-        CircularProgressIndicator(Modifier.size(24.dp))
-        return
-    }
-    if (detail.failed) {
-        Text(stringResource(R.string.data_load_error), color = MaterialTheme.colorScheme.error)
-        return
-    }
-    if (obj.kind == MapObjectKind.TRAINER) {
-        TrainerTeams(
-            detail.teamSelection,
-            SpritePlace.MAP_LIST,
-            rivalChoiceFailed,
-            onChooseRival = links.onChooseRival,
-            onOpenPokemon = links.onOpenPokemon
-        )
-    }
-    // Un personnage qui n'a rien à donner, vendre ni échanger : rien de plus à afficher.
-    Offers(
-        detail.offers,
-        SpritePlace.MAP_LIST,
-        detail.fossilUses,
-        onOpenPokemon = links.onOpenPokemon,
-        onOpenItem = links.onOpenItem,
-        onShowObject = links.onShowObject
-    )
 }
 
 private val DETAIL_MAX_HEIGHT = 468.dp

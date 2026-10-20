@@ -9,6 +9,7 @@ from pathlib import Path
 
 from PIL import Image
 
+from .maps_assembly_coordinates_gen4 import read_coordinates
 from .maps_layout import identifier
 
 _MAX_FILES = 30_000
@@ -22,6 +23,7 @@ def validate_catalog(output: Path) -> None:
         raise ValueError(f"{output} : catalogue vide, doublons ou Sinnoh absent")
     for row in rows:
         _validate_row(output, row, maps)
+    _validate_assemblies(output, maps)
     matrices = json.loads((output / "matrices.json").read_text(encoding="utf-8"))
     headers = {header["index"]: header for header in matrices["headers"]}
     for header in headers.values():
@@ -32,6 +34,15 @@ def validate_catalog(output: Path) -> None:
     _validate_dynamic_props(output, headers)
     _validate_layers(output, matrices)
     _validate_tiles(output)
+
+
+def _validate_assemblies(output: Path, maps: dict[str, dict[str, str]]) -> None:
+    for const, (native, offset) in read_coordinates(output).items():
+        row = maps.get(const)
+        if row is None or native not in maps or not row["parent"]:
+            raise ValueError(f"{output} : repère d'assemblage sans région ou plan natif : {const}")
+        if any(value % 256 for value in offset) or int(row["x"]) < offset[0] or int(row["y"]) < offset[1]:
+            raise ValueError(f"{output} : région mal translatée : {const}")
 
 
 def _validate_row(output: Path, row: dict[str, str], maps: dict[str, dict[str, str]]) -> None:

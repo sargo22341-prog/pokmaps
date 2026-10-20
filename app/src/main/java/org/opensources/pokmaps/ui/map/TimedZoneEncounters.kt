@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -13,9 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.EncounterFilter
+import org.opensources.pokmaps.domain.model.EncounterPeriods
+import org.opensources.pokmaps.domain.model.EncounterTime
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.domain.model.byTime
-import org.opensources.pokmaps.ui.common.CompactSelect
 
 @Composable
 internal fun TimedZoneEncounters(
@@ -24,18 +26,22 @@ internal fun TimedZoneEncounters(
     initialTime: TimeFilter,
     onOpenPokemon: (Int) -> Unit
 ) {
-    var filter by rememberSaveable(zone.mapId) { mutableStateOf(initialTime) }
+    var mask by rememberSaveable(zone.mapId) { mutableIntStateOf(initialTime.times.sumOf { 1 shl it.ordinal }) }
     var method by rememberSaveable(zone.mapId) { mutableStateOf(EncounterFilter.ALL) }
-    val methods = zone.availableMethods(filter)
+    val times = EncounterTime.entries.filter { mask and (1 shl it.ordinal) != 0 }.toSet()
+    val periods =
+        remember(zone.allEncounters, times) { EncounterPeriods(zone.allEncounters.byTime(TimeFilter.ALL), times) }
+    val methods = periods.availableMethods
     val selected = method.takeIf { it in methods } ?: EncounterFilter.ALL
-    val sections = remember(zone.allEncounters, filter, selected) {
-        zone.allEncounters.filter { selected.matches(it) }.byTime(filter).filter { it.groups.isNotEmpty() }
+    val sections = remember(zone.allEncounters, times, selected) {
+        EncounterPeriods(zone.allEncounters.filter { selected.matches(it) }.byTime(TimeFilter.ALL), times).shown
     }
-    if (zone.allEncounters.isNotEmpty()) {
-        CompactSelect(filter, TimeFilter.entries, {
-            filter = it
-            if (method !in zone.availableMethods(filter)) method = EncounterFilter.ALL
-        }) { stringResource(it.label) }
+    if (periods.available.isNotEmpty()) {
+        EncounterPeriodButtons(periods) { period ->
+            val next = periods.copy(selected = periods.toggle(period))
+            mask = next.selected.sumOf { 1 shl it.ordinal }
+            if (method !in next.availableMethods) method = EncounterFilter.ALL
+        }
     }
     if (methods.isNotEmpty()) EncounterFilterRow(methods, selected) { method = it }
     if (sections.isEmpty()) {

@@ -120,6 +120,8 @@ class _SpotRows:
                 raise ValueError(f"map_spots.csv : aucun Pokémon sauvage n'apparaît sur le terrain {where}")
             self.used.add(key)
             map_id, _ = bounds[key.map_identifier]
+            dx, dy = data.coordinate_offsets.get(key.map_identifier, (0, 0))
+            points = frozenset((x + dx, y + dy) for x, y in points)
             # Les jeux d'une famille partagent leurs retouches, pas toujours leurs plans (la Caverne Azurée de Jaune) :
             # chaque emplacement doit tomber au centre d'une case du terrain dans chacun d'eux.
             if outside := sorted(points - data.terrain.get((key.map_identifier, key.kind), frozenset())):

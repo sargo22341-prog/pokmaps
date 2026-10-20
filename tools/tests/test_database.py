@@ -9,6 +9,7 @@ from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.games import DECLARED_GAMES, map_families
 from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key
+from pokemaps_data.maps_assembly_coordinates_gen4 import editor_offsets
 from pokemaps_data.maps_characters import ObjectRow
 from pokemaps_data.maps_characters_data import read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier
@@ -359,8 +360,9 @@ def test_generated_pokemon_spots(builder: DatabaseBuilder) -> None:
                 assert (ax - bx) ** 2 + (ay - by) ** 2 >= (3 * 16) ** 2
 
 
-def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlite3.Connection) -> None:
+def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlite3.Connection, assets: Path) -> None:
     curated = read_spots()
+    offsets = editor_offsets(assets / "maps")
     assert curated
     groups = dict(db.execute("SELECT identifier, id FROM version_group"))
     families = map_families(DECLARED_GAMES)
@@ -373,12 +375,18 @@ def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlit
             if selected_key(curated, key, identifier) != key:
                 continue
             group = groups[identifier]
+            exists = db.execute(
+                "SELECT 1 FROM map WHERE version_group_id = ? AND identifier = ?", (group, key.map_identifier)
+            ).fetchone()
+            if exists is None:
+                continue  # Carte propre à un autre jeu de la famille (la Grotte Altérée d'Émeraude).
             rows = db.execute(
                 """SELECT s.x, s.y FROM map_spot s JOIN map m ON m.id = s.map_id
                    WHERE m.version_group_id = ? AND m.identifier = ? AND s.kind = ?""",
                 (group, key.map_identifier, key.kind),
             ).fetchall()
-            assert set(rows) == points, (key, group)
+            dx, dy = offsets.get((key.family, key.map_identifier), (0, 0))
+            assert {(x - dx, y - dy) for x, y in rows} == points, (key, group)
 
 
 def test_curated_spots_must_be_on_a_wild_terrain(builder: DatabaseBuilder) -> None:

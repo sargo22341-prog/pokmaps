@@ -55,10 +55,12 @@ data class PokemonLinks(
 fun PokemonRoute(
     links: PokemonLinks,
     onShowOnMap: () -> Unit,
+    onUnavailable: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    UnavailablePokemonEffect(state, onUnavailable)
     var unownOpen by rememberSaveable { mutableStateOf(false) }
     if (unownOpen && state.hasUnownForms) {
         UnownRoute(onDismiss = { unownOpen = false }, shiny = state.shiny)
