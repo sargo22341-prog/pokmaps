@@ -11,6 +11,23 @@ class EncounterPeriodsTest {
     )
 
     @Test
+    fun selectedTimeKeepsOtherAvailablePeriodsForVisibleSpecies() {
+        val morning = encounter(EncounterTime.MORNING, 20.0)
+        val night = encounter(EncounterTime.NIGHT, 40.0)
+        val onlyNight = night.copy(pokemonId = 163, pokemonName = "Hoothoot")
+        val tree = night.copy(method = "headbutt", methodName = "Arbre")
+        val periods = EncounterPeriods(
+            listOf(morning, night, onlyNight, tree).byTime(TimeFilter.ALL),
+            setOf(EncounterTime.MORNING)
+        )
+        val species = periods.groups.single().species.single()
+        assertEquals(16, species.pokemonId)
+        assertEquals(listOf(20.0), species.periods.getValue(EncounterTime.MORNING).map { it.chance })
+        assertEquals(listOf(40.0), species.periods.getValue(EncounterTime.NIGHT).map { it.chance })
+        assertTrue(species.periods.getValue(EncounterTime.DAY).isEmpty())
+    }
+
+    @Test
     fun sharedMorningAndNightEncounterDoesNotKeepTheNightSection() {
         val sections = listOf(encounter(EncounterTime.MORNING), encounter(EncounterTime.NIGHT))
             .byTime(TimeFilter.ALL)

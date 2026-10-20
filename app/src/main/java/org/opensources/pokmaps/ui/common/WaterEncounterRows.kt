@@ -1,23 +1,17 @@
 package org.opensources.pokmaps.ui.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ColorMatrix
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
@@ -94,16 +88,12 @@ private fun WaterMethodDetails(
     val available = encounters.isNotEmpty()
     val label = stringResource(method.label)
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Image(
-            painterResource(method.image),
-            contentDescription = if (available) label else "$label : ${stringResource(R.string.water_unavailable)}",
-            modifier = Modifier.size(28.dp).alpha(if (available) 1f else 0.3f),
-            colorFilter = if (available) null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
-        )
+        EncounterAvailabilityIcon(method.image, label, available)
         if (encounters.size == 1) WaterChance(encounters.single())
     }
     encounters.forEach { encounter ->
         if (encounters.size > 1) WaterChance(encounter)
+        EncounterTimeIcons(encounter)
         Text(caption(encounter), style = MaterialTheme.typography.bodySmall)
     }
 }

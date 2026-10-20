@@ -25,8 +25,19 @@ class ZoneEncounterFiltersTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
+    private val pokemonIds = mapOf(
+        "Roucool" to 16,
+        "Hoothoot" to 163,
+        "Coquiperl" to 366,
+        "Barpau" to 349,
+        "Tentacool" to 72,
+        "Kecleon" to 352,
+        "Magicarpe" to 129,
+        "\u00c9voli" to 133
+    )
+
     private fun encounter(name: String, method: String, time: EncounterTime) = Encounter(
-        4, "Or", 1, "Route", 16, name, method, method, 1, false,
+        4, "Or", 1, "Route", pokemonIds.getValue(name), name, method, method, 1, false,
         2, 4, 30.0, 1, null, null, setOf(time)
     )
 

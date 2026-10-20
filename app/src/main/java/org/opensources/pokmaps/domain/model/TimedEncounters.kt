@@ -1,8 +1,13 @@
 package org.opensources.pokmaps.domain.model
 
 data class TimedSpecies(val pokemonId: Int, val name: String, val encounters: List<Encounter>) {
+    val variants: List<Encounter> = encounters.mergeTimeVariants()
+    val trees: Boolean = encounters.all { it.method.startsWith("headbutt") || it.method == "honey-tree" }
+    val periods: Map<EncounterTime, List<Encounter>> = EncounterTime.entries.associateWith { time ->
+        variants.filter { it.times.isEmpty() || time in it.times }
+    }
     val waterMethods: Map<WaterMethod, List<Encounter>> = WaterMethod.entries.associateWith { method ->
-        encounters.filter { method.matches(it.method) }
+        variants.filter { method.matches(it.method) }
     }
 }
 
@@ -22,18 +27,7 @@ data class TimedEncounters(val period: TimeFilter, val groups: List<EncounterGro
 
 /** Fusionne seulement les rencontres dont niveaux, probabilités et autres conditions sont identiques. */
 fun List<Encounter>.byTime(filter: TimeFilter): List<TimedEncounters> {
-    val merged = groupBy {
-        it.copy(
-            times = emptySet(),
-            conditions = it.nonTimeConditions,
-            conditionKeys = it.conditionKeys.filterNot { key -> key.startsWith("time-") }.toSet(),
-            conditionNames = it.conditionNames.filterKeys { key -> !key.startsWith("time-") }
-        )
-    }
-        .map { (encounter, variants) ->
-            val times = if (variants.any { it.times.isEmpty() }) emptySet() else variants.flatMap { it.times }.toSet()
-            encounter.copy(times = times)
-        }
+    val merged = mergeTimeVariants()
     if (filter != TimeFilter.ALL) {
         return listOf(TimedEncounters(filter, merged.filter { it.matchesTimes(filter.times) }.groupByMethod()))
     }
@@ -48,3 +42,16 @@ fun List<Encounter>.byTime(filter: TimeFilter): List<TimedEncounters> {
         }
     return sections.filter { it.groups.isNotEmpty() }
 }
+
+internal fun List<Encounter>.mergeTimeVariants(): List<Encounter> = groupBy {
+    it.copy(
+        times = emptySet(),
+        conditions = it.nonTimeConditions,
+        conditionKeys = it.conditionKeys.filterNot { key -> key.startsWith("time-") }.toSet(),
+        conditionNames = it.conditionNames.filterKeys { key -> !key.startsWith("time-") }
+    )
+}
+    .map { (encounter, variants) ->
+        val times = if (variants.any { it.times.isEmpty() }) emptySet() else variants.flatMap { it.times }.toSet()
+        encounter.copy(times = times)
+    }

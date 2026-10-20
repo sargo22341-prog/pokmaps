@@ -35,6 +35,7 @@ import org.opensources.pokmaps.domain.model.Sprites
 import org.opensources.pokmaps.domain.model.TimeFilter
 import org.opensources.pokmaps.ui.common.CaughtProgress
 import org.opensources.pokmaps.ui.common.EncounterGroups
+import org.opensources.pokmaps.ui.common.LandscapeBoundary
 import org.opensources.pokmaps.ui.common.PixelArt
 import org.opensources.pokmaps.ui.common.PixelArtImage
 import org.opensources.pokmaps.ui.common.SheetRow
@@ -122,10 +123,15 @@ internal fun ZoneListSheet(
             Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
-                .padding(start = 16.dp, end = 16.dp, bottom = 32.dp)
+                .padding(bottom = 32.dp)
         ) {
-            Text(zone.name, style = MaterialTheme.typography.titleLarge)
+            Text(
+                zone.name,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
             RouteEncounters(zone, caught, timed, initialTime, onOpenPokemon)
+            LandscapeBoundary()
             ZoneItems(zone, onOpenItem, onShowObject)
             ZonePlaces(zone, onOpenPlace)
         }

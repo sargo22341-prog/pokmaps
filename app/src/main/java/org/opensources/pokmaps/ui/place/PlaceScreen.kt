@@ -95,7 +95,12 @@ fun PlaceScreen(
             .verticalScroll(rememberScrollState())
     ) {
         PlaceHeader(state, page) { onAction(PlaceAction.ShowPlace) }
-        SheetSection(stringResource(R.string.label_wild_pokemon)) {
+        Column(Modifier.fillMaxWidth()) {
+            Text(
+                stringResource(R.string.label_wild_pokemon),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(16.dp)
+            )
             RouteEncounterOptions(page.map.id, page.encounters) { encounters ->
                 if (encounters.isEmpty()) {
                     Text(stringResource(R.string.map_no_encounter), color = MaterialTheme.colorScheme.onSurfaceVariant)

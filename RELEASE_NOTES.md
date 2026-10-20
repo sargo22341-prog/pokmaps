@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Rétablit les couleurs des horaires, grise les périodes absentes et remplace les libellés répétés des arbres par des icônes.
+- Regroupe les horaires et les arbres par Pokémon dans un décor continu de forêt, de marche et d’eau.
 - Habille les rencontres avec les décors fixes d’Émeraude, les sous-bois et des rives de lac assorties, et regroupe toute l’eau après les rencontres terrestres.
 - Clarifie les rencontres aquatiques avec une section « Zone d’eau » et des cartes séparées, icônes au-dessus du Pokémon.
 - Regroupe les Pokémon aquatiques avec les icônes Surf et des trois cannes, leurs chances et les méthodes indisponibles grisées dans toutes les générations.

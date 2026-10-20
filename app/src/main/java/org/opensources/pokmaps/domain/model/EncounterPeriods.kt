@@ -22,6 +22,13 @@ data class EncounterPeriods(val sections: List<TimedEncounters>, val selected: S
             section.copy(groups = encounters.groupByMethod()).takeIf { encounters.isNotEmpty() }
         }
     }
+    private val visibleSpecies = shown.flatMap { it.groups }.groupBy { it.methodName }.mapValues { (_, groups) ->
+        groups.flatMap { it.encounters }.map { Triple(it.versionId, it.areaId, it.pokemonId) }.toSet()
+    }
+    val groups: List<EncounterGroup> = sections.flatMap { it.groups }.flatMap { group ->
+        val visible = visibleSpecies[group.methodName].orEmpty()
+        group.encounters.filter { Triple(it.versionId, it.areaId, it.pokemonId) in visible }
+    }.distinct().groupByMethod()
     val drySections: List<TimedEncounters> = shown.filter { section -> section.groups.none { it.water } }
     val waterSections: List<TimedEncounters> = shown.filter { section -> section.groups.any { it.water } }
     val waterHabitat: EncounterHabitat = waterSections.firstOrNull()?.groups?.firstOrNull()

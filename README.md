@@ -30,7 +30,7 @@ Les listes des routes affichent par défaut les rencontres ordinaires, sans cart
 Des filtres séparent les Pokémon errants et activent les conditions disponibles (cartouche GBA,
 Pokédex National, Pokéradar, essaim). Les périodes disponibles se combinent avec des boutons à icônes ;
 Tout les réactive et les lieux sans variation horaire masquent ces boutons.
-Seules les sections horaires sélectionnées restent visibles ; les dons et échanges suivent les rencontres sauvages.
+Seuls les Pokémon des horaires sélectionnés restent visibles ; les dons et échanges suivent les rencontres sauvages.
 À Sinnoh, les objets ramassés par lots indiquent leur quantité sur la carte et dans les listes des lieux.
 Dans Rouge, Bleu et Jaune, le rival de la Route 22 partage un seul repère pour ses deux combats.
 Dans Jaune, seuls les combats à équipe variable affichent les choix de victoires et défaites précédentes.
@@ -38,7 +38,11 @@ Les dresseurs présentent leur équipe initiale et six Poké Balls, grisées pou
 un menu compact permet de choisir un autre combat. Leur fiche se ferme aussi en glissant vers le bas.
 Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ramène au Pokédex.
 
-Les rencontres aquatiques regroupent chaque Pokémon par lieu et période, avec quatre icônes dans l’ordre
+Les horaires et les types d’arbres sont réunis par Pokémon, avec leurs icônes et probabilités.
+Les trois horaires gardent leurs couleurs et seuls les horaires absents sont grisés.
+Les arbres partagent un titre ; chaque icône affiche son taux, avec des flèches pour les arbres à taux élevé.
+Les sections forêt, marche et eau se suivent sur toute la largeur, sans espace.
+Les rencontres aquatiques regroupent chaque Pokémon par lieu, avec quatre icônes dans l’ordre
 Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
 les méthodes indisponibles sont grisées, sans libellé visible.
 La section « Zone d’eau » sépare ces rencontres de la marche ; chaque Pokémon a un encadré

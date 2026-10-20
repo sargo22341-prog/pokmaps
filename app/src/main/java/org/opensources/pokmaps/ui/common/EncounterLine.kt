@@ -33,7 +33,7 @@ fun EncounterGroups(
     caught: (Encounter) -> Boolean = { false },
     onClick: ((Encounter) -> Unit)? = null
 ) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Column(modifier) {
         groups.forEach { group ->
             if (group.aquatic) {
                 WaterEncounterRows(group.species, title, spritePlace, spriteSize, caught, onClick) {
@@ -65,20 +65,33 @@ private fun EncounterMethodRows(
     caught: (Encounter) -> Boolean,
     onClick: ((Encounter) -> Unit)?
 ) {
-    Text(
-        group.methodName,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(top = 8.dp)
-    )
-    group.encounters.forEach { encounter ->
-        EncounterLine(
-            encounter,
-            title(encounter),
-            spritePlace?.let { place -> EncounterSprite(place, spriteSize) },
-            caught(encounter),
-            onClick
+    when {
+        group.headbutt -> Text(
+            stringResource(R.string.encounter_headbutt_title),
+            style = MaterialTheme.typography.titleSmall
         )
+
+        group.honeyTrees -> Text(
+            stringResource(R.string.method_honey_tree),
+            style = MaterialTheme.typography.titleSmall
+        )
+
+        else -> Text(group.methodName, style = MaterialTheme.typography.titleSmall)
+    }
+    if (group.landscape) {
+        group.species.forEach { species ->
+            EncounterVariantRow(species, title, spritePlace, spriteSize, caught, onClick)
+        }
+    } else {
+        group.encounters.forEach { encounter ->
+            EncounterLine(
+                encounter,
+                title(encounter),
+                spritePlace?.let { EncounterSprite(it, spriteSize) },
+                caught(encounter),
+                onClick
+            )
+        }
     }
 }
 
@@ -128,7 +141,7 @@ private fun EncounterLine(
 }
 
 @Composable
-private fun encounterDetails(encounter: Encounter): String = listOfNotNull(
+internal fun encounterDetails(encounter: Encounter): String = listOfNotNull(
     when {
         encounter.isTrade -> null
         encounter.minLevel == encounter.maxLevel -> stringResource(R.string.encounter_levels, encounter.minLevel)

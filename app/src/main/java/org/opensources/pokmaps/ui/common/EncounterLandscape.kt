@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,6 +18,8 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipRect
@@ -39,12 +42,12 @@ internal fun EncounterLandSection(
         Column(content = content)
         return
     }
-    Box(Modifier.fillMaxWidth().padding(vertical = 4.dp).clip(MaterialTheme.shapes.medium)) {
+    Box(Modifier.fillMaxWidth()) {
         LandscapeTexture(habitat, lake = false, Modifier.matchParentSize())
+        LandscapeBoundary()
         Surface(
             color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 16.dp)
         ) {
             Column(Modifier.fillMaxWidth().padding(8.dp), content = content)
         }
@@ -55,6 +58,7 @@ internal fun EncounterLandSection(
 internal fun EncounterWaterZone(habitat: EncounterHabitat, content: @Composable ColumnScope.() -> Unit) {
     Box(Modifier.fillMaxWidth()) {
         LandscapeTexture(habitat, lake = false, Modifier.matchParentSize())
+        LandscapeBoundary()
         LandscapeTexture(habitat, lake = true, Modifier.matchParentSize().padding(top = 16.dp, bottom = 8.dp))
         Column(
             Modifier.padding(horizontal = 16.dp, vertical = 40.dp),
@@ -96,8 +100,14 @@ internal fun EncounterWaterCard(
 @Composable
 private fun LandscapeTexture(habitat: EncounterHabitat, lake: Boolean, modifier: Modifier) {
     val kind = if (lake) "lake" else "ground"
+    val forest = habitat == EncounterHabitat.FOREST && !lake
+    val asset = if (forest) {
+        "maps/emerald/petalburg-woods/2/0_0.webp"
+    } else {
+        "encounter_backgrounds/${habitat.asset}_$kind.webp"
+    }
     val painter = rememberAsyncImagePainter(
-        model = Sprites.assetUri("encounter_backgrounds/${habitat.asset}_$kind.webp"),
+        model = Sprites.assetUri(asset),
         filterQuality = FilterQuality.None
     )
     Canvas(modifier.clipToBounds()) {
@@ -110,7 +120,10 @@ private fun LandscapeTexture(habitat: EncounterHabitat, lake: Boolean, modifier:
             for (row in 0 until rows) {
                 for (column in 0 until columns) {
                     withTransform({ translate(column * step, row * step) }) {
-                        with(painter) { draw(Size(step, step)) }
+                        clipRect(0f, 0f, step, step) {
+                            val scale = if (forest) 4f else 1f
+                            with(painter) { draw(Size(step * scale, step * scale)) }
+                        }
                     }
                 }
             }
@@ -153,5 +166,13 @@ private fun DrawScope.drawLakeCell(
         withTransform({ translate(left - column * width, top - row * height) }) {
             with(painter) { draw(Size(width * 3f, height * 3f)) }
         }
+    }
+}
+
+@Composable
+internal fun LandscapeBoundary() {
+    val edge = MaterialTheme.colorScheme.scrim.copy(alpha = 0.28f)
+    Canvas(Modifier.fillMaxWidth().height(12.dp)) {
+        drawRect(Brush.verticalGradient(listOf(edge, Color.Transparent)))
     }
 }

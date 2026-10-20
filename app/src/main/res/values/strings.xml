@@ -371,7 +371,6 @@
         <item quantity="other">%1$d points de la Carte Bleue</item>
     </plurals>
     <string name="time_all">@string/settings_capture_scope_all</string>
-    <string name="time_always">Tout le temps</string>
     <string name="unown_title">Pokédex des Zarbi</string>
     <string name="unown_form">Zarbi %1$s</string>
     <string name="unown_progress">Formes capturées : %1$d / %2$d</string>
@@ -694,4 +693,6 @@
     <string name="water_good_rod">Super Canne</string>
     <string name="water_super_rod">Méga Canne</string>
     <string name="water_unavailable">Indisponible</string>
+    <string name="encounter_time_icon">Horaire de rencontre : %1$s</string>
+    <string name="encounter_headbutt_title">Coup d’Boule sur les arbres</string>
 </resources>

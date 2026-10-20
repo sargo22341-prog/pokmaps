@@ -55,6 +55,8 @@ data class EncounterGroup(val methodName: String, val encounters: List<Encounter
         WaterMethod.of(it.method) != null || it.method == "feebas-tile-fishing"
     }
     val water: Boolean = encounters.isNotEmpty() && encounters.all { it.isWater }
+    val headbutt: Boolean = encounters.any { it.method.startsWith("headbutt") }
+    val honeyTrees: Boolean = encounters.any { it.method == "honey-tree" }
     val landscape: Boolean = encounters.any { it.isWild }
     val species: List<TimedSpecies> = encounters.groupBy { Triple(it.versionId, it.areaId, it.pokemonId) }
         .values.map { variants -> TimedSpecies(variants.first().pokemonId, variants.first().pokemonName, variants) }
@@ -65,6 +67,12 @@ fun List<Encounter>.groupByMethod(): List<EncounterGroup> = sortedWith(
         .thenByDescending { it.chance ?: 0.0 }
         .thenBy { it.areaName }
         .thenBy { it.pokemonId }
-).groupBy { if (WaterMethod.of(it.method) != null || it.method == "feebas-tile-fishing") "" else it.methodName }
+).groupBy {
+    when {
+        WaterMethod.of(it.method) != null || it.method == "feebas-tile-fishing" -> ""
+        it.method.startsWith("headbutt") || it.method == "honey-tree" -> "headbutt"
+        else -> it.methodName
+    }
+}
     .map { (method, encounters) -> EncounterGroup(method, encounters) }
-    .sortedBy { it.water }
+    .sortedWith(compareBy<EncounterGroup> { it.water }.thenBy { it.habitat != EncounterHabitat.FOREST })

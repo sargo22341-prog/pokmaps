@@ -48,6 +48,45 @@ class WaterEncounterRowsTest {
         assertEquals(129, opened)
     }
 
+    @Test
+    fun landTimesShareOnePokemonAndKeepTheirChances() {
+        val morning = encounter("walk", 20.0).copy(
+            times = setOf(
+                org.opensources.pokmaps.domain.model.EncounterTime.MORNING
+            )
+        )
+        val night = morning.copy(
+            chance = 40.0,
+            times = setOf(
+                org.opensources.pokmaps.domain.model.EncounterTime.NIGHT
+            )
+        )
+        compose.setContent {
+            EncounterGroups(listOf(morning, night).groupByMethod(), title = { it.pokemonName })
+        }
+        compose.onAllNodesWithText("Magicarpe").assertCountEquals(1)
+        compose.onNodeWithContentDescription("Horaire de rencontre : Matin", useUnmergedTree = true).assertExists()
+        compose.onNodeWithContentDescription("Horaire de rencontre : Nuit", useUnmergedTree = true).assertExists()
+        compose.onNodeWithContentDescription("Horaire de rencontre : Jour : Indisponible").assertExists()
+        compose.onNodeWithText("20 %", useUnmergedTree = true).assertExists()
+        compose.onNodeWithText("40 %", useUnmergedTree = true).assertExists()
+    }
+
+    @Test
+    fun treeVariantsShareOnePokemonAndKeepTheirMethods() {
+        val normal = encounter("headbutt-normal", 20.0)
+        val high = encounter("headbutt-high", 40.0)
+        val groups = listOf(normal, high).groupByMethod()
+        assertEquals(1, groups.size)
+        compose.setContent { EncounterGroups(groups, title = { it.pokemonName }) }
+        compose.onAllNodesWithText("Magicarpe").assertCountEquals(1)
+        compose.onNodeWithContentDescription("headbutt-normal", useUnmergedTree = true).assertExists()
+        compose.onNodeWithContentDescription("headbutt-high", useUnmergedTree = true).assertExists()
+        compose.onNodeWithText("headbutt-normal").assertDoesNotExist()
+        compose.onNodeWithText("headbutt-high").assertDoesNotExist()
+        compose.onNodeWithText("Coup d\u2019Boule sur les arbres").assertExists()
+    }
+
     private fun encounter(method: String, chance: Double) = Encounter(
         1, "Rouge", 1, "Route", 129, "Magicarpe", method, method, 1, false,
         5, 10, chance, 1, null, null
