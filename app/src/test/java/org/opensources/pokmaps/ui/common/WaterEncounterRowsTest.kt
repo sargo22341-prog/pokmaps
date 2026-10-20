@@ -68,8 +68,8 @@ class WaterEncounterRowsTest {
         compose.onNodeWithContentDescription("Horaire de rencontre : Matin", useUnmergedTree = true).assertExists()
         compose.onNodeWithContentDescription("Horaire de rencontre : Nuit", useUnmergedTree = true).assertExists()
         compose.onNodeWithContentDescription("Horaire de rencontre : Jour : Indisponible").assertExists()
-        compose.onNodeWithText("20 %", useUnmergedTree = true).assertExists()
-        compose.onNodeWithText("40 %", useUnmergedTree = true).assertExists()
+        compose.onNodeWithText("N. 5 \u00e0 10 \u00b7 20 %", useUnmergedTree = true).assertExists()
+        compose.onNodeWithText("N. 5 \u00e0 10 \u00b7 40 %", useUnmergedTree = true).assertExists()
     }
 
     @Test

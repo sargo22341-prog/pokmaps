@@ -60,8 +60,11 @@ private fun EncounterPeriodIcon(time: EncounterTime, available: Boolean, size: D
 
 @Composable
 internal fun EncounterVariantCaption(encounter: Encounter) {
-    encounter.chance?.let {
-        Text(stringResource(R.string.encounter_chance, formatNumber(it)), style = MaterialTheme.typography.labelSmall)
-    }
-    Text(encounterDetails(encounter), style = MaterialTheme.typography.bodySmall)
+    val summary = listOfNotNull(
+        encounterLevel(encounter),
+        encounter.chance?.let { stringResource(R.string.encounter_chance, formatNumber(it)) }
+    ).joinToString(" · ")
+    Text(summary, style = MaterialTheme.typography.bodySmall)
+    val context = encounterContext(encounter)
+    if (context.isNotEmpty()) Text(context, style = MaterialTheme.typography.bodySmall)
 }

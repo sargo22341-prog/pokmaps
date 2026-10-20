@@ -40,6 +40,8 @@ Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ram
 
 Les horaires et les types d’arbres sont réunis par Pokémon, avec leurs icônes et probabilités.
 Les trois horaires gardent leurs couleurs et seuls les horaires absents sont grisés.
+À pied, le sprite et le nom précèdent les colonnes horaires, qui occupent toute la largeur ;
+chaque niveau et sa probabilité se lisent sur une même ligne.
 Les arbres partagent un titre ; chaque icône affiche son taux, avec des flèches pour les arbres à taux élevé.
 Les sections forêt, marche et eau se suivent sur toute la largeur, sans espace.
 Les rencontres aquatiques regroupent chaque Pokémon par lieu, avec quatre icônes dans l’ordre

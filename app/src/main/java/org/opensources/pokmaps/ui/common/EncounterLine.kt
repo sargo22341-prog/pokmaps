@@ -142,11 +142,19 @@ private fun EncounterLine(
 
 @Composable
 internal fun encounterDetails(encounter: Encounter): String = listOfNotNull(
-    when {
-        encounter.isTrade -> null
-        encounter.minLevel == encounter.maxLevel -> stringResource(R.string.encounter_levels, encounter.minLevel)
-        else -> stringResource(R.string.encounter_level_range, encounter.minLevel, encounter.maxLevel)
-    },
+    encounterLevel(encounter),
+    encounterContext(encounter).takeIf { it.isNotEmpty() }
+).joinToString(" · ")
+
+@Composable
+internal fun encounterLevel(encounter: Encounter): String? = when {
+    encounter.isTrade -> null
+    encounter.minLevel == encounter.maxLevel -> stringResource(R.string.encounter_levels, encounter.minLevel)
+    else -> stringResource(R.string.encounter_level_range, encounter.minLevel, encounter.maxLevel)
+}
+
+@Composable
+internal fun encounterContext(encounter: Encounter): String = listOfNotNull(
     encounter.quantity.takeIf { it > 1 }?.let { stringResource(R.string.encounter_quantity, it) },
     encounter.conditions,
     encounter.note

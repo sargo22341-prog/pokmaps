@@ -25,24 +25,22 @@ internal fun EncounterVariantRow(
     onClick: ((Encounter) -> Unit)?
 ) {
     val first = species.encounters.first()
-    Row(
+    Column(
         Modifier.fillMaxWidth()
             .then(if (onClick == null) Modifier else Modifier.clickable { onClick(first) })
-            .padding(vertical = 6.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(vertical = 6.dp)
     ) {
-        spritePlace?.let { PokemonSprite(species.pokemonId, it, spriteSize, contentDescription = null) }
-        Column(Modifier.weight(1f)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(title(first), style = MaterialTheme.typography.bodyLarge)
-                if (caught(first)) CaughtIcon(28.dp)
-            }
-            if (first.needsExternalEventLabel) ExternalEventLabel()
-            if (species.trees) {
-                TreeEncounterDetails(species)
-            } else {
-                EncounterPeriodDetails(species)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            spritePlace?.let { PokemonSprite(species.pokemonId, it, spriteSize, contentDescription = null) }
+            Column(Modifier.weight(1f)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(title(first), style = MaterialTheme.typography.bodyLarge)
+                    if (caught(first)) CaughtIcon(28.dp)
+                }
+                if (first.needsExternalEventLabel) ExternalEventLabel()
+                if (species.trees) TreeEncounterDetails(species)
             }
         }
+        if (!species.trees) EncounterPeriodDetails(species)
     }
 }

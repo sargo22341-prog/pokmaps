@@ -10,7 +10,6 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import kotlin.math.abs
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,7 +29,7 @@ class EncounterPeriodColorsTest {
         compose.setContent {
             Box(Modifier.background(Color.White)) { EncounterTimeIcons(encounter(setOf(EncounterTime.MORNING))) }
         }
-        assertTrue(isColored("Horaire de rencontre : Matin"))
+        assertColored("Horaire de rencontre : Matin")
         assertFalse(isColored("Horaire de rencontre : Jour : Indisponible"))
         assertFalse(isColored("Horaire de rencontre : Nuit : Indisponible"))
     }
@@ -38,9 +37,13 @@ class EncounterPeriodColorsTest {
     @Test
     fun untimedEncounterKeepsAllThreePeriodsColored() {
         compose.setContent { Box(Modifier.background(Color.White)) { EncounterTimeIcons(encounter(emptySet())) } }
-        assertTrue(isColored("Horaire de rencontre : Matin"))
-        assertTrue(isColored("Horaire de rencontre : Jour"))
-        assertTrue(isColored("Horaire de rencontre : Nuit"))
+        assertColored("Horaire de rencontre : Matin")
+        assertColored("Horaire de rencontre : Jour")
+        assertColored("Horaire de rencontre : Nuit")
+    }
+
+    private fun assertColored(description: String) {
+        compose.waitUntil(timeoutMillis = 5_000) { isColored(description) }
     }
 
     private fun isColored(description: String): Boolean {
