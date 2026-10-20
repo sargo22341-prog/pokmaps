@@ -1,17 +1,16 @@
 package org.opensources.pokmaps.domain.model
 
-data class TimedSpecies(val pokemonId: Int, val name: String, val encounters: List<Encounter>)
+data class TimedSpecies(val pokemonId: Int, val name: String, val encounters: List<Encounter>) {
+    val waterMethods: Map<WaterMethod, List<Encounter>> = WaterMethod.entries.associateWith { method ->
+        encounters.filter { it.method == method.identifier }
+    }
+}
 
-data class TimedMethod(val name: String, val species: List<TimedSpecies>)
+data class TimedMethod(val name: String, val species: List<TimedSpecies>, val aquatic: Boolean = false)
 
 data class TimedEncounters(val period: TimeFilter, val groups: List<EncounterGroup>) {
     val methods: List<TimedMethod> = groups.map { group ->
-        TimedMethod(
-            group.methodName,
-            group.encounters.groupBy { it.pokemonId to it.areaId }.map { (_, variants) ->
-                TimedSpecies(variants.first().pokemonId, variants.first().pokemonName, variants)
-            }
-        )
+        TimedMethod(group.methodName, group.species, group.aquatic)
     }
 }
 

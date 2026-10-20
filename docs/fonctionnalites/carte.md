@@ -50,3 +50,7 @@ Sur les plans concernés, les passages reliés ont la même couleur ; « Liaison
 masqués par défaut. Les sprites de personnages gardent leur taille native et leurs pieds au bas de la case.
 À Sinnoh, les salles d'un même étage sont assemblées selon `map_assemblies_gen4.csv` ; leurs portes
 conservent leurs deux extrémités et les mêmes liaisons colorées que les autres générations.
+
+Les rencontres aquatiques regroupent chaque Pokémon par lieu et période, avec quatre icônes dans l’ordre
+Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
+les méthodes indisponibles sont grisées, sans libellé visible.

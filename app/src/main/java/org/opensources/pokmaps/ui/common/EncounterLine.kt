@@ -35,22 +35,40 @@ fun EncounterGroups(
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         groups.forEach { group ->
-            Text(
-                group.methodName,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-            group.encounters.forEach { encounter ->
-                EncounterLine(
-                    encounter,
-                    title(encounter),
-                    spritePlace?.let { place -> EncounterSprite(place, spriteSize) },
-                    caught(encounter),
-                    onClick
-                )
+            if (group.aquatic) {
+                WaterEncounterRows(group.species, title, spritePlace, spriteSize, caught, onClick) {
+                    encounterDetails(it)
+                }
+            } else {
+                EncounterMethodRows(group, title, spritePlace, spriteSize, caught, onClick)
             }
         }
+    }
+}
+
+@Composable
+private fun EncounterMethodRows(
+    group: EncounterGroup,
+    title: (Encounter) -> String,
+    spritePlace: SpritePlace?,
+    spriteSize: SpriteSize,
+    caught: (Encounter) -> Boolean,
+    onClick: ((Encounter) -> Unit)?
+) {
+    Text(
+        group.methodName,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(top = 8.dp)
+    )
+    group.encounters.forEach { encounter ->
+        EncounterLine(
+            encounter,
+            title(encounter),
+            spritePlace?.let { place -> EncounterSprite(place, spriteSize) },
+            caught(encounter),
+            onClick
+        )
     }
 }
 

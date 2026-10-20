@@ -38,6 +38,10 @@ Les dresseurs présentent leur équipe initiale et six Poké Balls, grisées pou
 un menu compact permet de choisir un autre combat. Leur fiche se ferme aussi en glissant vers le bas.
 Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ramène au Pokédex.
 
+Les rencontres aquatiques regroupent chaque Pokémon par lieu et période, avec quatre icônes dans l’ordre
+Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
+les méthodes indisponibles sont grisées, sans libellé visible.
+
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.
 L’application ne lit aucune sauvegarde de cartouche et ne prédit aucun tirage du jeu.

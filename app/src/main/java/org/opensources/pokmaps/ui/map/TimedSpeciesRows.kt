@@ -20,14 +20,26 @@ import org.opensources.pokmaps.domain.model.TimedSpecies
 import org.opensources.pokmaps.ui.common.CaughtIcon
 import org.opensources.pokmaps.ui.common.PokemonSprite
 import org.opensources.pokmaps.ui.common.SpriteSize
+import org.opensources.pokmaps.ui.common.WaterEncounterRows
 import org.opensources.pokmaps.ui.common.formatNumber
 
 @Composable
 internal fun TimedSpeciesRows(section: TimedEncounters, caught: Set<Int>, onOpen: (Int) -> Unit) {
     section.methods.forEach { method ->
-        Text(method.name, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
-        method.species.forEach { species ->
-            TimedSpeciesRow(species, species.pokemonId in caught, section.period) { onOpen(species.pokemonId) }
+        if (method.aquatic) {
+            WaterEncounterRows(
+                method.species,
+                { it.pokemonName },
+                SpritePlace.MAP_LIST,
+                SpriteSize.LIST,
+                { it.pokemonId in caught },
+                { onOpen(it.pokemonId) }
+            ) { encounterCaption(it.copy(chance = null), section.period) }
+        } else {
+            Text(method.name, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+            method.species.forEach { species ->
+                TimedSpeciesRow(species, species.pokemonId in caught, section.period) { onOpen(species.pokemonId) }
+            }
         }
     }
 }

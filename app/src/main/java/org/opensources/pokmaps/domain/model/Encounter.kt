@@ -45,11 +45,16 @@ data class Encounter(
 fun List<Encounter>.wildPokemonIds(): Set<Int> = filter { it.isWild }.map { it.pokemonId }.toSet()
 
 /** Rencontres d'une zone (ou d'un Pokémon) regroupées par méthode, dans l'ordre du jeu. */
-data class EncounterGroup(val methodName: String, val encounters: List<Encounter>)
+data class EncounterGroup(val methodName: String, val encounters: List<Encounter>) {
+    val aquatic: Boolean = encounters.isNotEmpty() && encounters.all { WaterMethod.of(it.method) != null }
+    val species: List<TimedSpecies> = encounters.groupBy { Triple(it.versionId, it.areaId, it.pokemonId) }
+        .values.map { variants -> TimedSpecies(variants.first().pokemonId, variants.first().pokemonName, variants) }
+}
 
 fun List<Encounter>.groupByMethod(): List<EncounterGroup> = sortedWith(
     compareBy<Encounter> { it.methodOrder }
         .thenByDescending { it.chance ?: 0.0 }
         .thenBy { it.areaName }
         .thenBy { it.pokemonId }
-).groupBy { it.methodName }.map { (method, encounters) -> EncounterGroup(method, encounters) }
+).groupBy { if (WaterMethod.of(it.method) != null) "" else it.methodName }
+    .map { (method, encounters) -> EncounterGroup(method, encounters) }

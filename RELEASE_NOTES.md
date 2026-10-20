@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Regroupe les Pokémon aquatiques avec les icônes Surf et des trois cannes, leurs chances et les méthodes indisponibles grisées dans toutes les générations.
 - Affiche les quantités des lots de Miel de Platine et des jetons cachés, et corrige les guides de Sinnoh.
 - Sinnoh : baies et paillis, Super Concours, saveurs pour Poffins, catalogues du Souterrain et équipes possibles des installations de combat.
 - Sinnoh : succès officiels traduits, observations des errants sauvegardées et outils de reproduction et de bonheur.
