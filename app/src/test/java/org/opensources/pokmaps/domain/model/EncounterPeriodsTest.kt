@@ -11,6 +11,27 @@ class EncounterPeriodsTest {
     )
 
     @Test
+    fun sharedMorningAndNightEncounterDoesNotKeepTheNightSection() {
+        val sections = listOf(encounter(EncounterTime.MORNING), encounter(EncounterTime.NIGHT))
+            .byTime(TimeFilter.ALL)
+        val shown = EncounterPeriods(sections, setOf(EncounterTime.MORNING)).shown
+        assertEquals(listOf(TimeFilter.MORNING), shown.map { it.period })
+        assertEquals("Roucool", shown.single().groups.single().encounters.single().pokemonName)
+    }
+
+    @Test
+    fun giftsFollowAllSelectedWildPeriods() {
+        val encounters = listOf(
+            encounter(EncounterTime.MORNING),
+            encounter(EncounterTime.NIGHT),
+            encounter(null).copy(method = "gift", methodName = "Cadeau")
+        )
+        val shown = EncounterPeriods(encounters.byTime(TimeFilter.ALL), EncounterTime.entries.toSet()).shown
+        assertEquals(listOf(TimeFilter.MORNING, TimeFilter.NIGHT, TimeFilter.ALL), shown.map { it.period })
+        assertEquals("gift", shown.last().groups.single().encounters.single().method)
+    }
+
+    @Test
     fun identicalPeriodsAndUntimedEncountersNeedNoButtons() {
         val same = EncounterTime.entries.map { encounter(it) }.byTime(TimeFilter.ALL)
         assertTrue(EncounterPeriods(same, emptySet()).available.isEmpty())

@@ -20,7 +20,9 @@ La liste du lieu affiche rencontres, niveaux, probabilités, objets et lieux acc
 indépendant de celui de la carte. Les boutons à icônes combinent Matin, Jour et Nuit ; Tout les réactive.
 Seules les périodes qui comportent une variation apparaissent ; une liste identique toute la journée
 ne propose aucun bouton horaire. Tout affiche Tout le temps, Matin, Jour et Nuit. Un Pokémon présent aux trois
-périodes apparaît une fois dans Tout le temps. Si niveaux ou probabilités varient, sa ligne conserve le détail par
+périodes apparaît une fois dans Tout le temps. Désactiver une période masque sa section, même si les mêmes
+Pokémon sont présents à une autre période sélectionnée. Les dons et échanges suivent les sections sauvages.
+Si niveaux ou probabilités varient, sa ligne conserve le détail par
 période. Les autres conditions, comme un essaim, restent distinctes.
 
 Les filtres Tout, Marche, Pêche et Surf ne proposent que les méthodes présentes au moment choisi.

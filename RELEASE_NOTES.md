@@ -5,6 +5,8 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Dans Jaune, masque les filtres d’évolution du rival au premier combat de la Route 22 et les conserve au deuxième.
+- Corrige les sections horaires des rencontres, place les dons après les Pokémon sauvages et réunit les deux combats du rival de la Route 22 sous un seul repère.
 - Allège et repositionne les marqueurs de Pokémon sauvages des cartes de Kanto, Johto et Hoenn.
 - Corrige les doublons, les plans d'étages de Sinnoh, les fiches dresseurs, les filtres horaires et le retour au Pokédex.
 - Corrige le cadrage des bâtiments et les doublons de Sinnoh, simplifie les rencontres des routes avec filtres et les fiches dresseurs avec choix des revanches.

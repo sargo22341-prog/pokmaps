@@ -43,9 +43,19 @@ data class TeamSelection(
     val choice: RivalChoice = RivalChoice()
 ) {
     val kind: TeamVariantKind? get() = selected?.kind
+    val battles: List<Int?> = shown.map { it.rematch }.distinct()
 
     /** Il n'y a aucune équipe : elle dépend de la partie sans être connue. */
     val unknown: Boolean get() = shown.isEmpty()
+
+    fun forBattle(rematch: Int?): TeamSelection {
+        val teams = shown.filter { it.rematch == rematch }
+        return if (teams.any { it.variant != null }) {
+            copy(shown = teams)
+        } else {
+            TeamSelection(teams, choice = choice)
+        }
+    }
 
     companion object {
         fun of(teams: List<TrainerTeam>, choice: RivalChoice): TeamSelection {

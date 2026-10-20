@@ -30,6 +30,9 @@ Les listes des routes affichent par défaut les rencontres ordinaires, sans cart
 Des filtres séparent les Pokémon errants et activent les conditions disponibles (cartouche GBA,
 Pokédex National, Pokéradar, essaim). Les périodes disponibles se combinent avec des boutons à icônes ;
 Tout les réactive et les lieux sans variation horaire masquent ces boutons.
+Seules les sections horaires sélectionnées restent visibles ; les dons et échanges suivent les rencontres sauvages.
+Dans Rouge, Bleu et Jaune, le rival de la Route 22 partage un seul repère pour ses deux combats.
+Dans Jaune, seuls les combats à équipe variable affichent les choix de victoires et défaites précédentes.
 Les dresseurs présentent leur équipe initiale et six Poké Balls, grisées pour les places vides ;
 un menu compact permet de choisir un autre combat. Leur fiche se ferme aussi en glissant vers le bas.
 Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ramène au Pokédex.

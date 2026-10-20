@@ -102,7 +102,7 @@ fun TrainerTeams(
         Text(stringResource(R.string.map_trainer_starter), style = MaterialTheme.typography.bodyMedium)
         return
     }
-    var battle by remember(selection.shown) { mutableStateOf<Int?>(null) }
+    var battle by remember(selection.variants, selection.battles) { mutableStateOf<Int?>(null) }
     var showMoves by remember(selection.shown) { mutableStateOf(false) }
     val selected = if (selection.shown.any { it.rematch == battle }) {
         battle
@@ -111,8 +111,8 @@ fun TrainerTeams(
     }
     val active = selection.shown.filter { it.rematch == selected }
     header?.invoke(active)
-    RivalChoicePanel(selection, place, choiceFailed, onChooseRival)
     TrainerBattleSelector(selection.shown, selected) { battle = it }
+    RivalChoicePanel(selection.forBattle(selected), place, choiceFailed, onChooseRival)
     Crossfade(active, label = "trainerTeams") { teams ->
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             teams.forEach { team ->

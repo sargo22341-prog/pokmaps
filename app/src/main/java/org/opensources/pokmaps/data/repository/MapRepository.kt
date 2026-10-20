@@ -34,6 +34,7 @@ import org.opensources.pokmaps.domain.map.SpotKind
 import org.opensources.pokmaps.domain.map.TrainerPokemon
 import org.opensources.pokmaps.domain.map.TrainerTeam
 import org.opensources.pokmaps.domain.map.WarpKind
+import org.opensources.pokmaps.domain.map.mergeRoute22Rival
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.PokemonType
@@ -99,7 +100,7 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
                     fruit = fruits[it.id],
                     shiny = FixedPokemon.isShiny(maps[it.mapId]?.identifier, it.pokemonId)
                 )
-            }.groupBy { it.mapId },
+            }.let { mergeRoute22Rival(it, maps, game.generationId) }.groupBy { it.mapId },
             areas = dao.areas(vg, version).map { MapArea(it.mapId, it.areaId, it.name) }.groupBy { it.mapId },
             spots = dao.spots(vg, version).map { spot ->
                 MapSpot(spot.mapId, SpotKind.from(spot.kind), spot.x, spot.y)
@@ -173,6 +174,15 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
 
     /** Équipes d'un dresseur de la carte (une par variante de la partie), avec leurs attaques dans le jeu. */
     suspend fun trainerTeams(game: Game, objectId: Int): List<TrainerTeam> {
+        val actor = catalog(game).objects.values.flatten().firstOrNull { it.id == objectId }
+        val ids = actor?.battleObjectIds.orEmpty()
+        if (ids.isEmpty()) return loadTrainerTeams(game, objectId)
+        return ids.flatMapIndexed { index, id ->
+            loadTrainerTeams(game, id).map { it.copy(rematch = index.takeIf { it > 0 }) }
+        }
+    }
+
+    private suspend fun loadTrainerTeams(game: Game, objectId: Int): List<TrainerTeam> {
         val moves = dao.trainerMoves(objectId, game.versionGroupId).groupBy { it.team to it.slot }
         return dao.trainerParty(objectId).groupBy { it.team }.values.map { members ->
             TrainerTeam(
@@ -279,13 +289,15 @@ class MapRepository @Inject constructor(private val dao: MapDao, private val com
 
         OfferKind.ACCESSORY_SHOP -> NpcOffer.Service(CharacterService.ACCESSORY_SHOP, condition = condition)
 
-        OfferKind.SCRATCH_CARDS -> NpcOffer.Service(
-            CharacterService.SCRATCH_CARDS,
-            required(price),
-            condition,
-            OfferCurrency.BATTLE_POINTS
-        )
+        OfferKind.SCRATCH_CARDS -> scratchCards(condition)
     }
+
+    private fun NpcOfferRow.scratchCards(condition: OfferCondition) = NpcOffer.Service(
+        CharacterService.SCRATCH_CARDS,
+        required(price),
+        condition,
+        OfferCurrency.BATTLE_POINTS
+    )
 
     private fun NpcOfferRow.sale(condition: OfferCondition) = NpcOffer.Sale(
         offerItem(),

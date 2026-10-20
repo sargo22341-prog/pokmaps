@@ -93,7 +93,8 @@ data class MapObject(
     val name: String,
     val itemHasSprite: Boolean = true,
     val fruit: OfferItem? = null,
-    val shiny: Boolean = false
+    val shiny: Boolean = false,
+    val battleObjectIds: List<Int> = emptyList()
 )
 
 /** Zone de rencontre PokéAPI rattachée à une carte. */

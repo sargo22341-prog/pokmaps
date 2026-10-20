@@ -70,6 +70,21 @@ class TeamSelectionTest {
         assertTrue(TeamSelection.of(emptyList(), RivalChoice()).unknown)
     }
 
+    @Test
+    fun yellowOnlyOffersEvolutionChoicesForTheSecondRoute22Battle() {
+        val fixed = team(null, 133)
+        val variants = listOf(JOLTEON, FLAREON, VAPOREON).map { team(evolution(it), it, rematch = 1) }
+        val selection = TeamSelection.of(listOf(fixed) + variants, RivalChoice())
+        val first = selection.forBattle(null)
+        assertEquals(listOf(fixed), first.shown)
+        assertTrue(first.variants.isEmpty())
+        assertNull(first.selected)
+        val second = selection.forBattle(1)
+        assertEquals(selection.variants, second.variants)
+        assertEquals(evolution(JOLTEON), second.selected)
+        assertEquals(listOf(JOLTEON), second.shown.flatMap { it.members }.map { it.pokemonId })
+    }
+
     private companion object {
         const val VAPOREON = 134
         const val JOLTEON = 135

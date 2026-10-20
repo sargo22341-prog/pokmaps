@@ -11,4 +11,5 @@ dans les guides. Les services et revanches GBA conservent leurs conditions de sc
 
 Les variantes du rival partagent une fiche : un sélecteur choisit le starter du joueur ; Jaune ajoute
 les résultats des premiers combats. Le choix est mémorisé par jeu et partagé entre carte, fiches et guides.
+Sur la Route 22 de Jaune, le premier combat affiche son équipe fixe sans ces choix ; le deuxième les propose.
 Les revanches restent sur la fiche du dresseur ; les objets tenus sont affichés à partir de Johto.
