@@ -2,15 +2,17 @@
 
 L'onglet Jeu présente une rangée horizontale de jaquettes par génération : Rouge, Bleu, Jaune ; Or, Argent,
 Cristal ; Rubis, Saphir, Émeraude ; puis « Remake 1G » avec Rouge Feu et Vert Feuille. Une coche indique le jeu actif ;
-les jaquettes gardent leurs noms accessibles.
+les jaquettes gardent leurs noms accessibles. La rangée « 4e génération » réunit Diamant, Perle et Platine.
 
 Changer de version dans la même famille de cartes conserve lieu, centre et zoom lorsque la carte existe aussi dans
-la nouvelle version. Changer de famille revient au départ : Bourg Palette, Bourg Geon ou Bourg-en-Vol. Une carte
-absente du nouveau jeu revient aussi au monde et au départ.
+la nouvelle version. Changer de famille revient au départ : Bourg Palette, Bourg Geon, Bourg-en-Vol ou Bonaugure.
+Une carte absente du nouveau jeu revient aussi au monde et au départ.
 
 En génération 2, le menu de région en haut à gauche choisit Johto ou Kanto. Le bouton à droite défile Matin → Jour
 → Nuit → Tout → Matin. Le voile de lumière évolue en 1,4 seconde : matin chaud, jour lumineux, nuit bleutée. Tout
 conserve les couleurs originales. Ce choix filtre aussi les marqueurs et rencontres de la carte.
+Sinnoh propose également les horaires et leur voile ; Diamant/Perle et Platine sont deux familles distinctes.
+Ses sélecteurs séparent étages et niveaux superposés ; le calque Arbres à Miel apparaît sur les plans concernés.
 
 Toucher une ville ou route affiche son contenu. Les entrées ouvrent bâtiments, grottes et étages. Le retour remonte
 au lieu parent. Les calques choisissent entrées, objets, dresseurs, personnages, Pokémon fixes et sauvages. Les

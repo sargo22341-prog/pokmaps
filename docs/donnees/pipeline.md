@@ -217,7 +217,7 @@ Les comparaisons à une valeur littérale restent distinctes de celles entre deu
 gardent leur origine (par exemple le jour de vente des Sceaux). Les tests de parcours lisent séparément les
 offres applicables à Platine, Diamant et Perle dans tous les lieux retenus.
 
-### Cartes préparatoires de Sinnoh
+### Cartes de Sinnoh
 
 `maps_gen4.py` assemble séparément Platine et Diamant/Perle depuis leurs matrices pret. Sinnoh et le Grand Marais
 gardent leurs en-têtes de blocs ; les autres matrices donnent les intérieurs et les étages. `maps.csv` fournit
@@ -285,9 +285,10 @@ python tools/review_gen4_maps.py
 La relecture couvre chaque lieu du catalogue, chaque bloc possédant un niveau inférieur et les seize modèles
 de blocs du Souterrain en détail. Arial (Windows/macOS) ou DejaVu Sans (Linux) fournit les accents des libellés.
 Les planches et leur index restent dans `tools/build/scratchpad/gen4-map-review/`. Les durées et tailles sont
-mesurées dans l’aperçu (`generation-report.json`), hors des inventaires des familles. Les jeux DS restent
-hors de `GAMES_IN_PROGRESS` jusqu’à l’intégration des rencontres, personnages et écrans : ces cartes ne sont
-pas encore distribuées dans l’APK normal.
+mesurées dans l’aperçu (`generation-report.json`), hors des inventaires des familles.
+Les trois jeux DS sont actifs dans `GAMES` ; cartes, rencontres et personnages sont distribués dans l’APK.
+Pour relire ces assets plutôt que l’aperçu, passer `--maps app/src/main/assets/maps` à `review_gen4_maps.py`.
+Les références par sujet sont accessibles depuis la [génération 4](../generations/generation-4.md).
 
 Les formes de Sinnoh suivent leurs versions dans `pokemon_forms.csv`. Les formes Fée et ??? d’Arceus sont exclues :
 la première est postérieure à ces jeux et la seconde n’a pas de sprite Noir/Blanc épinglé.

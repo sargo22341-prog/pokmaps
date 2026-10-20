@@ -47,3 +47,19 @@ Optimisations étudiées et écartées : index SQL supplémentaires (gain 0,1–
 certaines requêtes) et déduplication des tuiles (environ 3 % de l’APK, nouveau format, aucun gain de fluidité).
 Réexaminer ces choix seulement avec de nouvelles mesures. Les résultats sur un seul appareil haut de gamme
 ne prédisent pas ceux d’un téléphone plus lent.
+
+## Valider une branche intégrée
+
+Utiliser la release complète sous le paquet distinct `.perf`, avec les assets distribués et les
+marqueurs réels. Un banc de tuiles seul ne valide ni les calques, ni les guides, ni les changements de jeu.
+Comparer Hoenn, Platine et Diamant/Perle sur leurs cartes régionales, à résolution et fréquence identiques.
+Alterner l'ordre sur trois répétitions, relever l'état thermique, puis séparer les scénarios :
+
+- Glissements alternés et pincement à deux contacts dans les deux sens ; garder les événements réellement injectés.
+- Calques Dresseurs et Pokémon fixes, désactivés puis réactivés pour restaurer l'état.
+- Bibliothèque de soluce définitive, défilement dans les deux sens et retour à la carte.
+
+Conserver `gfxinfo framestats`, `meminfo`, CPU principal et état thermique dans le scratchpad.
+Les percentiles de trames ne mesurent pas le temps de chargement ni la latence d'un geste.
+Comparer les répétitions et les plages mémoire, en tenant compte du cache et du passage du ramasse-miettes.
+Une mesure sur le Pixel 6 Pro ne garantit pas le comportement d'un appareil moins puissant.

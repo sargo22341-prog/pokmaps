@@ -23,6 +23,7 @@ Les pages décrivent l’état actuel ; les rapports de tâches et anciens résu
 
 - [Génération 1](generations/generation-1.md), [génération 2](generations/generation-2.md).
 - [Génération 3 et remakes](generations/generation-3.md) : accès aux références techniques GBA par sujet.
+- [Génération 4](generations/generation-4.md) : références techniques DS par sujet.
 - [Contenus de Sinnoh](generations/contenus-sinnoh.md) : baies, Super Concours, Poffins, Souterrain et combat.
 - [Prérequis des générations suivantes](generations/generations-suivantes.md).
 

@@ -12,8 +12,9 @@ Cette validation ne vaut pas pour les cartes de HeartGold/SoulSilver, la prochai
 `Generation`, `GameVersion` et `VersionGroup` exigent des règles explicites par jeu.
 HeartGold/SoulSilver formeront une branche distincte de Diamant/Perle/Platine.
 Les formes, événements externes et succès ont des modèles et sources éditoriales dédiés ;
-leur existence ne valide pas les règles de Sinnoh. Mesurer l’index des mentions de guides avec un vrai
-catalogue DS avant de décider de le remplacer.
+leur existence ne valide pas les règles d’une nouvelle branche. L’index des mentions de guides est conservé
+pour Sinnoh après mesure sur son catalogue DS ; refaire cette mesure avec le catalogue de la nouvelle branche
+avant de décider de le remplacer.
 
 À chaque intégration, tester les changements de famille de cartes, les états vide et erreur, les captures
 et la sauvegarde avec les anciens jeux. Les essais sur émulateur gardent des captures ; l'installation

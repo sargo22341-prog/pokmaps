@@ -9,7 +9,8 @@ permissions:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Le rendu DS à cache froid et la reconstruction de reproductibilité sont deux opérations longues.
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v5
       - name: Générer et tester les données depuis les sources épinglées
@@ -23,6 +24,8 @@ jobs:
       - uses: gradle/actions/setup-gradle@v5
       - name: Mesurer l’APK debug avec les assets générés
         run: |
+          SECONDS=0
           ./gradlew --stacktrace assembleDebug
           size=$(stat --format=%s app/build/outputs/apk/debug/app-debug.apk)
+          echo "Assemblage APK debug : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
           echo "APK debug après génération : ${size} octets" >> "$GITHUB_STEP_SUMMARY"

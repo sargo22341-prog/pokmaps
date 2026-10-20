@@ -16,6 +16,7 @@ Les autres réglages et identifiants RetroAchievements sont exclus. Le sélecteu
 
 L’import valide le document entier (1 Mo maximum), les jeux contre le catalogue embarqué, puis espèces
 et formes contre chaque jeu, avant une fusion atomique. Les anciens fichiers sans `unown` restent acceptés.
+Les versions 12 à 14 et leurs 493 espèces sont prises en charge, ainsi que les formes de Pokémon.
 Les observations d’errants historiques sont ignorées à l’import et retirées des préférences.
 Les nouveaux relevés manuels de Sinnoh utilisent le champ facultatif `sinnohRoamers`, par version et par
 espèce. Les anciens fichiers sans ce champ restent acceptés ; une route ou une espèce non accessible

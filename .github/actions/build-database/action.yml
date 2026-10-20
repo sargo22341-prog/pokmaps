@@ -11,6 +11,7 @@ runs:
         cache-dependency-path: tools/requirements*.txt
 
     - name: Cache des sources (PokéAPI, pokesprite, PokeAPI/sprites, pret)
+      id: source-cache
       uses: actions/cache@v5
       with:
         path: tools/.cache
@@ -35,6 +36,7 @@ runs:
       run: |
         SECONDS=0
         python tools/build_data.py
+        echo "Cache exact restauré : ${{ steps.source-cache.outputs.cache-hit }}" >> "$GITHUB_STEP_SUMMARY"
         echo "Génération des données (cache restauré selon disponibilité) : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
         cache_size=$(du -sb tools/.cache | cut -f1)
         assets_size=$(du -sb app/src/main/assets | cut -f1)
@@ -50,4 +52,7 @@ runs:
     - name: Tests du pipeline
       shell: bash
       working-directory: tools
-      run: python -m pytest -q -m pipeline
+      run: |
+        SECONDS=0
+        python -m pytest -q -m pipeline
+        echo "Tests des sources épinglées : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"

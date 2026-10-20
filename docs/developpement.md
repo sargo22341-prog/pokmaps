@@ -39,6 +39,11 @@ Pour l’installation ADB préservant les données, suivre [AGENTS.md, §10](../
 
 CI et release utilisent les assets versionnés sans régénération. Le workflow manuel du pipeline
 ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
+Son résumé indique la restauration exacte du cache, la durée de génération et des tests de sources,
+la taille du cache et des assets, puis la durée d'assemblage et la taille de l'APK debug.
+Le job est borné à 90 minutes pour inclure le rendu DS à cache froid et le test de reconstruction.
+Ne pas lancer les lecteurs d'assets ou le build Android pendant une régénération des mêmes fichiers :
+les dossiers de cartes sont remplacés pendant l'export. Attendre sa réussite avant les contrôles.
 La procédure et les secrets de publication sont dans le [README](../README.md#publier-une-version).
 
 Dépréciation connue : `Configuration.setVisible(boolean)` est appelée par AGP (`BasePlugin`,

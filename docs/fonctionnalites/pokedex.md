@@ -14,7 +14,7 @@ sont proposés à partir de la génération 2.
 ## Pokédex des Zarbi
 
 Accessible depuis la fiche de Zarbi dans Or, Argent, Cristal, Rouge Feu et Vert Feuille ; aucun suivi dans Hoenn.
-Diamant, Perle et Platine préparent ce même écran avec les 28 formes, avant intégration de leurs assets.
+Diamant, Perle et Platine proposent ce même écran avec les 28 formes et leurs sprites embarqués.
 Chaque forme a son sprite et sa case de capture. Le compteur compte les formes disponibles : A à Z en
 génération 2 ; ! et ? s'ajoutent à partir de la génération 3. Le stockage est distinct de la capture de l'espèce et
 suit la même portée. Changer de génération ou de portée ne détruit aucune forme mémorisée.
@@ -28,7 +28,7 @@ Une espèce historiquement présente reste consultable si son obtention exige un
 Après changement de jeu, une fiche d'espèce non encore apparue revient à la liste du Pokédex ;
 une erreur de chargement reste affichée comme erreur.
 
-Les modèles de Sinnoh sont préparés, sans activation des jeux dans les assets distribués : arbres à Miel,
+Les jeux de Sinnoh sont distribués avec arbres à Miel,
 dons de Pokémon Ranger, talents et chromatiques à 1/8 192. La capture DS distingue les combats sauvages,
 le Grand Marais (PV pleins, sans statut, coefficient initial 6) et le Parc des Amis (capture garantie).
 La Rapide Ball vaut ×4 au premier tour, la Sombre Ball ×3,5 la nuit ou en grotte ; la Plongée Ball dépend
@@ -44,4 +44,4 @@ Chaque forme du catalogue de la cartouche a ses sprites fixes, animés et chroma
 case de capture indépendante de celle de l’espèce. Le titre « Formes » s’applique aussi aux formes sans rapport
 avec la météo. Le suivi respecte la portée choisie et entre dans la sauvegarde JSON ; les anciens fichiers
 de schéma 1 sans cette liste restent importables. Les appareils de Motisma, Giratina Originel et Shaymin Céleste
-sont propres à Platine ; les formes non retenues en phase 0 ne sont pas ajoutées.
+sont propres à Platine ; les formes Fée et ??? d’Arceus ne sont pas proposées.

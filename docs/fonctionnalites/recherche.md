@@ -8,6 +8,8 @@ personnage précis.
 
 Hoenn ajoute les propriétés des baies sur les objets, les Concours sur les attaques et les décorations
 dans les guides. Les services et revanches GBA conservent leurs conditions de scénario.
+Diamant, Perle et Platine utilisent les mêmes liens entre recherche, fiches et carte. Les services DS
+conservent leurs conditions, lots et paiements en Tessons ; leurs composants ne sont pas des offres indépendantes.
 À Sinnoh, les fiches des baies indiquent leurs durées, rendements, assèchement, effets des quatre paillis
 et saveurs pour Poffins. Les fiches des attaques montrent catégorie, attrait de base et effet de Super Concours,
 sans reprendre les cœurs de blocage ni les enchaînements de Hoenn.

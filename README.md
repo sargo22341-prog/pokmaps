@@ -69,6 +69,7 @@ via [l’index](docs/README.md).
 | Sources, génération et éditeur de cartes | [Pipeline](docs/donnees/pipeline.md) |
 | Fonctionnement des écrans | [Documentation fonctionnelle](docs/README.md#fonctionnement) |
 | Particularités des jeux | [Générations](docs/README.md#jeux-et-règles) |
+| Diamant, Perle et Platine | [Génération 4](docs/generations/generation-4.md) |
 | Mesurer une optimisation | [Performances](docs/performance.md) |
 
 `app/` contient l’application ; `tools/` le pipeline Python ; `tools/data/` les données éditoriales.

@@ -16,7 +16,7 @@ multijoueurs, les transferts et la double insertion GBA. Platine compte une seul
 selon la parité de l’identifiant du dresseur ; les anciens fossiles restent renouvelables.
 Ces compteurs ne prouvent pas le respect des autres
 restrictions d’un succès. Les jeux GBA n’ajoutent pas de quête de collection doublant le compteur du Pokédex.
-Les quêtes de Zarbi partagent le compteur des formes : 26 à Johto, 28 dans les remakes.
+Les quêtes de Zarbi partagent le compteur des formes : 26 à Johto, 28 dans les remakes et à Sinnoh.
 Les errants sont présentés par condition, niveau et région. À Sinnoh, une dernière route observée peut être
 notée pour chaque errant : deux dans Diamant/Perle, cinq dans Platine. Le relevé reste propre à la cartouche
 et se corrige ou s’efface dans le guide ; il ne prédit aucun déplacement.
