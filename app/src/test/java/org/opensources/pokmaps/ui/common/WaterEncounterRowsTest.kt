@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +32,12 @@ class WaterEncounterRowsTest {
             )
         }
         compose.onAllNodesWithText("Magicarpe").assertCountEquals(1)
+        compose.onNodeWithText("Zone d’eau").assertExists()
+        val iconBounds = compose.onNodeWithContentDescription("Surf", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        val nameBounds = compose.onNodeWithText("Magicarpe", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        assertTrue(iconBounds.bottom < nameBounds.top)
         compose.onNodeWithContentDescription("Surf", useUnmergedTree = true).assertExists()
         compose.onNodeWithContentDescription("Canne", useUnmergedTree = true).assertExists()
         compose.onNodeWithContentDescription("Super Canne : Indisponible", useUnmergedTree = true).assertExists()

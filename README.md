@@ -41,6 +41,8 @@ Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ram
 Les rencontres aquatiques regroupent chaque Pokémon par lieu et période, avec quatre icônes dans l’ordre
 Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
 les méthodes indisponibles sont grisées, sans libellé visible.
+La section « Zone d’eau » sépare ces rencontres de la marche ; chaque Pokémon a un encadré
+avec ses icônes et probabilités au-dessus de son sprite et de son nom.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.

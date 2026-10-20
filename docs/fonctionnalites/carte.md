@@ -54,3 +54,5 @@ conservent leurs deux extrémités et les mêmes liaisons colorées que les autr
 Les rencontres aquatiques regroupent chaque Pokémon par lieu et période, avec quatre icônes dans l’ordre
 Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
 les méthodes indisponibles sont grisées, sans libellé visible.
+La section « Zone d’eau » commence par un séparateur. Chaque Pokémon aquatique est présenté
+dans un encadré, avec les icônes et probabilités au-dessus du sprite et du nom.

@@ -689,6 +689,7 @@
     <string name="trainer_party_ball">Un Pokémon dans l’équipe</string>
     <string name="trainer_party_empty">Place vide dans l’équipe</string>
     <string name="trainer_battle_number">Combat %1$d</string>
+    <string name="water_zone">Zone d’eau</string>
     <string name="water_old_rod">Canne</string>
     <string name="water_good_rod">Super Canne</string>
     <string name="water_super_rod">Méga Canne</string>

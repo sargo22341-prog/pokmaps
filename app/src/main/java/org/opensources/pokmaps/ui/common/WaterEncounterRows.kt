@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,27 +37,50 @@ internal fun WaterEncounterRows(
     onClick: ((Encounter) -> Unit)?,
     caption: @Composable (Encounter) -> String
 ) {
+    WaterSectionHeader()
     species.forEach { pokemon ->
         val first = pokemon.encounters.first()
-        Column(
-            Modifier.fillMaxWidth()
-                .then(if (onClick == null) Modifier else Modifier.clickable { onClick(first) })
-                .padding(vertical = 4.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+        Surface(
+            shape = MaterialTheme.shapes.medium,
+            color = MaterialTheme.colorScheme.surfaceContainer,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                spritePlace?.let { PokemonSprite(pokemon.pokemonId, it, spriteSize, contentDescription = null) }
-                Text(title(first), style = MaterialTheme.typography.bodyLarge)
-                if (caught(first)) CaughtIcon(28.dp)
-            }
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                WaterMethod.entries.forEach { method ->
-                    Column(Modifier.weight(1f)) {
-                        WaterMethodDetails(method, pokemon.waterMethods.getValue(method), caption)
+            Column(
+                Modifier.fillMaxWidth()
+                    .then(if (onClick == null) Modifier else Modifier.clickable { onClick(first) })
+                    .padding(12.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    WaterMethod.entries.forEach { method ->
+                        Column(Modifier.weight(1f)) {
+                            WaterMethodDetails(method, pokemon.waterMethods.getValue(method), caption)
+                        }
                     }
+                }
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    spritePlace?.let { PokemonSprite(pokemon.pokemonId, it, spriteSize, contentDescription = null) }
+                    Text(title(first), style = MaterialTheme.typography.bodyLarge)
+                    if (caught(first)) CaughtIcon(28.dp)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun WaterSectionHeader() {
+    Column(
+        Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 4.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        Text(
+            stringResource(R.string.water_zone),
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.primary
+        )
     }
 }
 
