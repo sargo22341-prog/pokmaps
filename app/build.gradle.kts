@@ -1,4 +1,5 @@
 import java.security.MessageDigest
+import java.util.HexFormat
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 
 plugins {
@@ -210,11 +211,14 @@ tasks.named("check") {
 }
 
 val bundledAssets = layout.projectDirectory.dir("src/main/assets")
+val verifiedAssets = layout.buildDirectory.file("verification/assets.checked")
 
 tasks.register("checkAssets") {
     group = "verification"
     description = "Vérifie les assets versionnés indispensables, sans générer ni télécharger de contenu."
     inputs.dir(bundledAssets)
+    // Gradle revérifie dès qu'un asset change ; un build identique réutilise le contrôle réussi.
+    outputs.file(verifiedAssets)
     doLast {
         val root = bundledAssets.asFile
         val manifest = root.resolve("assets.sha256")
@@ -242,7 +246,7 @@ tasks.register("checkAssets") {
                     count = stream.read(buffer)
                 }
             }
-            val actual = digest.digest().joinToString("") { "%02x".format(it) }
+            val actual = HexFormat.of().formatHex(digest.digest())
             check(actual == parts[0]) {
                 "Asset différent de l'inventaire : $asset. Vérifier la mise à jour des données."
             }
@@ -251,6 +255,10 @@ tasks.register("checkAssets") {
             "Base ou licence indispensable absente de l'inventaire."
         }
         logger.lifecycle("OK : ${paths.size} assets versionnés vérifiés.")
+        verifiedAssets.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText("${paths.size}\n")
+        }
     }
 }
 

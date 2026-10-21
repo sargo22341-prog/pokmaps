@@ -80,6 +80,7 @@ def write_manifest(assets: Path) -> None:
 
 
 def check_manifest(assets: Path) -> None:
+    resolved_assets = assets.resolve()
     manifest = assets / MANIFEST
     if not manifest.is_file():
         raise ValueError(f"Inventaire des assets absent : {manifest}")
@@ -90,7 +91,7 @@ def check_manifest(assets: Path) -> None:
     for entry in entries:
         digest, separator, relative = entry.partition("  ")
         path = assets / relative
-        if not separator or len(digest) != 64 or not path.resolve().is_relative_to(assets.resolve()):
+        if not separator or len(digest) != 64 or not path.resolve().is_relative_to(resolved_assets):
             raise ValueError(f"Entrée d'inventaire invalide : {entry}")
         if relative in listed:
             raise ValueError(f"Asset en double dans l'inventaire : {relative}")

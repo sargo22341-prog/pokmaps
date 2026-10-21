@@ -25,6 +25,15 @@ un téléchargement. Les tests Compose utilisent Robolectric en JVM, sans appare
 Les tests `pipeline` sont exclus par défaut : les lancer après une génération explicite avec
 `python -m pytest -q -m pipeline`, depuis `tools/`. Voir le [pipeline](donnees/pipeline.md).
 
+Pour identifier les contrôles coûteux, utiliser `python -m pytest -q --durations=20` dans `tools/`
+et `.\gradlew.bat testDebugUnitTest --profile` à la racine. Les rapports Gradle sont dans
+`build/reports/profile/`. Un test `UP-TO-DATE` n'a pas été réexécuté ; ajouter `--rerun` juste après
+`testDebugUnitTest` pour mesurer son exécution réelle sans recompiler toutes ses dépendances.
+Le contrôle Gradle `checkAssets` conserve son résultat dans `app/build/verification/assets.checked` :
+Gradle le relance dès qu'une entrée change ou que ce fichier manque. Les empreintes SHA-256 restent
+vérifiées intégralement lors de cette exécution. La première lecture de milliers de fichiers peut être
+sensiblement plus lente que les suivantes ; comparer des mesures à cache comparable.
+
 L’APK debug est `app/build/outputs/apk/debug/app-debug.apk`, paquet `org.opensources.pokmaps.debug`.
 Pour l’installation ADB préservant les données, suivre [AGENTS.md, §10](../AGENTS.md#10-téléphone-et-adb).
 `dependencyUpdates` liste les versions stables sans rien modifier ; toute mise à jour reste manuelle.
