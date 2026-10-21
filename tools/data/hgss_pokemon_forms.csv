@@ -1,0 +1,48 @@
+pokemon_id,identifier,name_fr,sprite_folder,sprite_identifier
+351,castform,Forme Normale,pokemon,351
+351,castform-sunny,Solaire,castform,sunny
+351,castform-rainy,Eau de Pluie,castform,rainy
+351,castform-snowy,Blizzard,castform,snowy
+386,deoxys-normal,Forme Normale,pokemon,386
+386,deoxys-attack,Forme Attaque,deoxys,attack
+386,deoxys-defense,Forme Défense,deoxys,defense
+386,deoxys-speed,Forme Vitesse,deoxys,speed
+412,burmy-plant,Cape Plante,burmy,plant
+412,burmy-sandy,Cape Sable,burmy,sandy
+412,burmy-trash,Cape Déchet,burmy,trash
+413,wormadam-plant,Cape Plante,wormadam,plant
+413,wormadam-sandy,Cape Sable,wormadam,sandy
+413,wormadam-trash,Cape Déchet,wormadam,trash
+421,cherrim-overcast,Temps Couvert,cherrim,overcast
+421,cherrim-sunshine,Temps Ensoleillé,cherrim,sunshine
+422,shellos-west,Mer Occident,shellos,west
+422,shellos-east,Mer Orient,shellos,east
+423,gastrodon-west,Mer Occident,gastrodon,west
+423,gastrodon-east,Mer Orient,gastrodon,east
+479,rotom,Forme Normale,pokemon,479
+479,rotom-heat,Motisma Chaleur,rotom,heat
+479,rotom-wash,Motisma Lavage,rotom,wash
+479,rotom-frost,Motisma Froid,rotom,frost
+479,rotom-fan,Motisma Hélice,rotom,fan
+479,rotom-mow,Motisma Tonte,rotom,mow
+487,giratina-altered,Forme Alternative,giratina,altered
+487,giratina-origin,Forme Originelle,giratina,origin
+492,shaymin-land,Forme Terrestre,shaymin,land
+492,shaymin-sky,Forme Céleste,shaymin,sky
+493,arceus-normal,Normal,arceus,normal
+493,arceus-fighting,Combat,arceus,fighting
+493,arceus-flying,Vol,arceus,flying
+493,arceus-poison,Poison,arceus,poison
+493,arceus-ground,Sol,arceus,ground
+493,arceus-rock,Roche,arceus,rock
+493,arceus-bug,Insecte,arceus,bug
+493,arceus-ghost,Spectre,arceus,ghost
+493,arceus-steel,Acier,arceus,steel
+493,arceus-fire,Feu,arceus,fire
+493,arceus-water,Eau,arceus,water
+493,arceus-grass,Plante,arceus,grass
+493,arceus-electric,Électrik,arceus,electric
+493,arceus-psychic,Psy,arceus,psychic
+493,arceus-ice,Glace,arceus,ice
+493,arceus-dragon,Dragon,arceus,dragon
+493,arceus-dark,Ténèbres,arceus,dark

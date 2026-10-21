@@ -108,6 +108,9 @@ et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas enco
 Leur [lot de preuve cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
 `python tools/build_data.py --hgss-maps-only` : Bourg Geon, les deux niveaux du laboratoire, les Routes 29 et 47,
 dans `tools/build/preview/hgss-maps/`, avec collisions, passages, acteurs témoins et coupe inférieure.
+Leur [aperçu Pokémon indépendant](docs/generations/pokemon-hgss.md) se génère avec
+`python tools/build_data.py --hgss-pokemon-only` dans `tools/build/preview/hgss-pokemon/` :
+493 espèces, régional Johto, attaques, CT/CS, formes et évolutions, sans activation Android.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

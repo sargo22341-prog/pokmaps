@@ -409,14 +409,49 @@ renommés, collision de nom méthode/cache et dépassement de 60 lignes corrigé
 Une attente de test initialement fausse a été rectifiée :
 la case témoin de la Route 47 porte l'attribut natif `0x15`, pas zéro. Aucun échec de contrôle restant.
 La preuve sans ROM réussit ; aucun remplacement GSC/Sinnoh et aucune activation HGSS.
-Prochaine action : phase 2A, données Pokémon/Pokédex indépendantes ; la généralisation Johto/Kanto reste en phase 3.
+La preuve autorise les données Pokémon indépendantes ; la généralisation Johto/Kanto reste en phase 3.
 
 ### Phase 2 — Données Pokémon indépendantes des cartes complètes
 
-- [ ] **2A — Pokémon et Pokédex.** Préparer `--hgss-pokemon-only`, contrôler régional/National,
+- [x] **2A — Pokémon et Pokédex.** Préparer `--hgss-pokemon-only`, contrôler régional/National,
   données personnelles, talents, attaques et CT/CS. Sortie : aperçu validé et comparaisons de sources.
-- [ ] **2B — Formes et évolutions.** Traiter formes, sprites, Zarbi, tuteurs et obtentions par échange/transfert.
+- [x] **2B — Formes et évolutions.** Traiter formes, sprites, Zarbi, tuteurs et obtentions par échange/transfert.
   Sortie : tests par cartouche et aucun remplacement par les valeurs GSC ou les valeurs modernes.
+
+Résultats : [catalogue et recette Pokémon HGSS](docs/generations/pokemon-hgss.md),
+[empreintes des sources](docs/generations/pokemon-hgss-sources.json), lecteurs `pret_hgss_pokemon.py`,
+assemblage `catalog_pokemon_hgss.py`, comparaison `compare_pokemon_hgss.py`, formes `pokemon_forms_hgss.py`,
+conditions `evolution_hgss.py` et aperçu `preview_pokemon_hgss.py`.
+Les corrections françaises restent dans `tools/data/hgss_pokemon_forms.csv` et `hgss_pokemon_rules.json`.
+
+`python tools/build_data.py --hgss-pokemon-only` produit un catalogue JSON autonome et les sprites dans
+`tools/build/preview/hgss-pokemon/`, sans carte, base SQL artificielle ni activation Android.
+Les 493 espèces, 256 rangs régionaux, 467 attaques, 92 CT et huit CS sont contrôlés.
+Les statistiques historiques, types, talents, attaques par niveau, machines et tuteurs de la table principale
+concordent avec PokéAPI. Cinq différences de taux de capture non historisés sont expliquées et gardent
+la valeur HGSS ; les méthodes complémentaires d'apprentissage gardent explicitement leur provenance PokéAPI groupe 10.
+Les chaînes d'évolution concordent ; les évolutions exigeant Sinnoh restent distinctes des échanges ordinaires.
+
+Les 47 formes nommées de chaque cartouche ont leurs profils natifs, niveaux, tuteurs et sprites ;
+les 28 Zarbi gardent leurs groupes de déblocage vérifiés dans le moteur. Pichu Troizépi est traité séparément :
+il ne peut ni évoluer ni être échangé, et sa planche HGSS est conservée sans inventer de variante Noir/Blanc.
+Les règles d'accès des autres formes conservent leurs références aux scripts et aux objets.
+
+Deux générations indépendantes reproduisent exactement les 2 264 fichiers inventoriés, soit
+45 870 203 octets avec l'inventaire ; durées de 11,20 et 10,79 secondes.
+Le remplacement n'intervient qu'après validation et restaure l'ancien aperçu si le renommage échoue.
+
+Contrôles exécutés : `python tools/check_assets.py`, Ruff et format sur tout `tools`,
+`python -m pytest -q` (968 réussis), puis tests `pipeline` HGSS Pokémon et qualification
+(14 réussis). Limites 600/60 lignes et `git diff --check` vérifiées.
+Les contrôles Android et la suite `pipeline` intégrale ne sont pas lancés : aucun asset distribué,
+schéma ou code Android n'a changé ; les sources concernées sont couvertes par la recette ciblée.
+
+Incidents résolus : accès aux dossiers temporaires/cache pytest refusé dans le bac à sable Windows,
+relance autorisée ; formats techniques NARC et alias `ITEM_UPGRADE` ajustés aux sources.
+Une attente de test erronée a été corrigée : Cheniselle Sable apprend Telluriforce par tuteur,
+mais pas Coup d'Boule. Le contrôle Ruff a été relancé depuis le bon dossier après un chemin vide.
+Aucun échec de contrôle restant. Prochaine action : phase 3, catalogue complet Johto/Kanto.
 
 ### Phase 3 — Cartes complètes et navigation
 

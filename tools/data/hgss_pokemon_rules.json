@@ -1,0 +1,109 @@
+{
+  "versions": [
+    "heartgold",
+    "soulsilver"
+  ],
+  "evolution_access": [
+    {
+      "methods": [
+        "EVO_CORONET",
+        "EVO_ETERNA",
+        "EVO_ROUTE217"
+      ],
+      "access": "other-game",
+      "text_fr": "Évolution impossible dans HGSS : évoluer dans Diamant, Perle ou Platine, puis échanger.",
+      "source": "src/map_header.c:MapHeader_GetMapEvolutionMethod"
+    },
+    {
+      "methods": [
+        "EVO_TRADE",
+        "EVO_TRADE_ITEM"
+      ],
+      "access": "trade",
+      "text_fr": "Échange nécessaire ; conserver l'objet tenu lorsqu'il est demandé.",
+      "source": "src/pokemon.c:GetMonEvolution"
+    }
+  ],
+  "form_access": [
+    {
+      "species": 172,
+      "form": "spiky",
+      "text_fr": "Pichu Troizépi : événement au Bois aux Chênes avec le Pichu aux couleurs de Pikachu. Ne peut ni évoluer ni être échangé. Aucun sprite Noir/Blanc : planche native HGSS conservée séparément.",
+      "source": "files/fielddata/script/scr_seq/scr_seq_0092_D36R0101.s;src/pokemon.c"
+    },
+    {
+      "species": 386,
+      "form": "all",
+      "text_fr": "Deoxys obtenu d'ailleurs ; changement de forme par les météorites de la Route 3.",
+      "source": "files/fielddata/script/scr_seq/scr_seq_0175_R03.s"
+    },
+    {
+      "species": 479,
+      "form": "all",
+      "text_fr": "Motisma obtenu par échange ; appareils dans la salle de la Sylphe accessible avec Motisma en tête d'équipe.",
+      "source": "files/fielddata/script/scr_seq/scr_seq_0838_T11R0702.s;files/fielddata/script/scr_seq/scr_seq_0839_T11R0703.s"
+    },
+    {
+      "species": 487,
+      "form": "origin",
+      "text_fr": "Forme Originelle avec l'Orbe Platiné ; événement des Ruines Sinjoh avec Arceus pour obtenir l'objet dans HGSS.",
+      "source": "src/pokemon.c;files/fielddata/script/scr_seq/scr_seq_0131_D51R0201.s"
+    },
+    {
+      "species": 492,
+      "form": "sky",
+      "text_fr": "Shaymin événementiel requis pour recevoir la Gracidée ; forme Céleste de jour, hors gel, réversible au rangement.",
+      "source": "src/pokemon.c;src/field_use_item.c"
+    },
+    {
+      "species": 493,
+      "form": "all",
+      "text_fr": "Arceus événementiel ou échangé ; type déterminé par la Plaque tenue et Multitype, sans type Fée en génération 4.",
+      "source": "src/pokemon.c"
+    }
+  ],
+  "unown": {
+    "puzzles": {
+      "Kabuto": "ABCDEFGHIJ",
+      "Aerodactyl": "RSTUV",
+      "Omanyte": "KLMNOPQ",
+      "HoOh": "WXYZ"
+    },
+    "punctuation": "!?",
+    "text_fr": "Les quatre puzzles débloquent leurs groupes de lettres. La salle d'entrée de l'événement Sinjoh utilise ! et ?. La radio Zarbi favorise les lettres non capturées parmi les groupes déjà débloqués ; aucun tirage n'est prédit.",
+    "source": "src/field/encounter_check.c:EncounterGen_ChooseUnownForm"
+  },
+  "comparison_capture_rates": [
+    {
+      "species": 382,
+      "field": "catchRate",
+      "native": 5,
+      "pokeapi": 3
+    },
+    {
+      "species": 383,
+      "field": "catchRate",
+      "native": 5,
+      "pokeapi": 3
+    },
+    {
+      "species": 384,
+      "field": "catchRate",
+      "native": 3,
+      "pokeapi": 45
+    },
+    {
+      "species": 483,
+      "field": "catchRate",
+      "native": 30,
+      "pokeapi": 3
+    },
+    {
+      "species": 484,
+      "field": "catchRate",
+      "native": 30,
+      "pokeapi": 3
+    }
+  ],
+  "comparison_explanation_fr": "PokéAPI ne date pas le taux de capture des espèces : ces cinq écarts sont conservés depuis personal.json HGSS. Aucun taux moderne ne remplace une donnée native."
+}

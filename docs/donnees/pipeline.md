@@ -78,6 +78,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
 | `--sinnoh-maps-only` | Deux familles de cartes DS dans `sinnoh-maps/`, sans activation Android |
 | `--hgss-maps-only` | Preuve de cinq lieux HGSS dans `hgss-maps/`, depuis le cache qualifié, sans ROM ni activation Android |
+| `--hgss-pokemon-only` | [Catalogue Pokémon HGSS](../generations/pokemon-hgss.md) validé dans `hgss-pokemon/`, sans cartes ni activation |
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 | `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |
