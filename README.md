@@ -103,6 +103,9 @@ un cache vérifié par leur contenu lors des générations explicites.
 Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépôts pret ; aucune ressource
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
+HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generations/sources-hgss.md)
+et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
+
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.
 Il contient les données Pokémon et leurs sprites ; les cartes DS et l’activation dans l’application restent séparées.

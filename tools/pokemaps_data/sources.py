@@ -66,6 +66,10 @@ PRET_URL = "https://github.com/pret/{repo}.git"
 # mais son extraction (27 668 fichiers, 132 Mio) prend 12 s et celle de pokediamond (33 254 fichiers) 14 s sous Windows.
 PRET_GIT_TIMEOUT_SECONDS = 120
 
+# Candidat qualifié, hors PRET_COMMITS : aucun lecteur HGSS ni génération automatique avant la preuve des cartes.
+# Inventaire et limites : docs/generations/sources-hgss.md.
+HGSS_PRET_COMMIT = "6988158691eb6178cff697cda0428045ddcba5fb"
+
 POKEAPI_CSV_FILES = (
     "abilities",
     "ability_flavor_text",
