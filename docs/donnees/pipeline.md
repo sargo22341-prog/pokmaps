@@ -19,6 +19,12 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 
 Commits et URLs : `tools/pokemaps_data/sources.py`. Aucun prélèvement sur pokemaps.net, aucune ROM.
 Les sources en cache sont réutilisées ; seules les sources manquantes sont téléchargées.
+Les rendus disposent aussi d'un cache de contenu dans `tools/.cache/map-renders/` : les cartes des générations
+1 à 3 réutilisent leurs tuiles WebP et niveaux de zoom quand leurs pixels sont identiques. Les cadres DS
+réutilisent leur image lorsque triangles, couleurs, textures, projection et plafonds sont identiques.
+Un changement du moteur de rasterisation invalide les cadres DS ; un changement de l'encodeur invalide les
+tuiles. Les empreintes d'intégrité sont contrôlées à la lecture. Les caches ne remplacent ni l'assemblage des
+données ni leurs validations ; une entrée corrompue produit une erreur qui nomme le fichier à retirer.
 Les téléchargements sont bornés en taille et durée, avec quatre tentatives HTTP au maximum.
 
 Sorties dans `app/src/main/assets/` : `database/pokedex.db`, `sprites/`, `maps/`, `hoenn.json`, licences

@@ -1,11 +1,12 @@
 """Pixels DS vérifiés sur des triangles synthétiques, sans source extérieure."""
 
 from dataclasses import replace
+from types import SimpleNamespace
 
 import pytest
 
 from pokemaps_data.maps_geometry_gen4 import Transform, node_transform, shape_draws
-from pokemaps_data.maps_raster_gen4 import RasterCanvas, RasterMaterial, RasterTexture, RasterVertex
+from pokemaps_data.maps_raster_gen4 import RasterCanvas, RasterMaterial, RasterTexture, RasterVertex, _color
 from pokemaps_data.pret_gen4_gx import TRIANGLES, primitives
 from pokemaps_data.pret_gen4_nitro import NitroNode, SbcCommand, read_nsbmd
 from pokemaps_data.pret_gen4_textures import PALETTE_16, Texture
@@ -122,3 +123,17 @@ def test_sbc_stack_restores_parent_and_rejects_missing_matrix() -> None:
 def test_canvas_bounds_are_validated(size: tuple[int, int], cotangent: int) -> None:
     with pytest.raises(ValueError, match="cadre ou projection"):
         RasterCanvas((0, 0), size, cotangent)
+
+
+@pytest.mark.parametrize("colors", [(WHITE, WHITE, WHITE), (RED, BLUE, WHITE), ((3, 7, 11),) * 3])
+def test_color_shortcut_preserves_integer_interpolation(colors: tuple[tuple[int, int, int], ...]) -> None:
+    vertices = tuple(replace(vertex, color=color) for vertex, color in zip(_triangle(0, RED), colors, strict=True))
+    points = tuple(SimpleNamespace(vertex=vertex) for vertex in vertices)
+    for alpha in (0, 15, 31):
+        for w0 in range(6):
+            for w1 in range(6 - w0):
+                weights = (w0, w1, 5 - w0 - w1)
+                expected = tuple(
+                    sum(color[k] * w for color, w in zip(colors, weights, strict=True)) // 5 for k in range(3)
+                )
+                assert _color(points, weights, 5, RasterMaterial(None, alpha, 3)) == (*expected, alpha)

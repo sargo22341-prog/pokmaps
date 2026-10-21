@@ -22,10 +22,10 @@ def map_data(
     game: Game,
     items: list[Gen3MapItem] | None = None,
     trainers: list[TrainerCatalog] | None = None,
+    game_maps: Gen3GameMaps | None = None,
 ) -> GameMapData:
     validate_catalog(source)
-    repo = Gen3PretRepo(root, game.pret_versions)
-    maps = Gen3GameMaps(repo, game, read_layout_curation())
+    maps = game_maps or Gen3GameMaps(Gen3PretRepo(root, game.pret_versions), game, read_layout_curation())
     with (source / "catalog.tsv").open(encoding="utf-8", newline="") as handle:
         rows = [_map_row(row) for row in csv.DictReader(handle, delimiter="\t")]
     for row in rows:

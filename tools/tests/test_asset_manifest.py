@@ -64,6 +64,15 @@ def test_missing_manifest_is_rejected(tmp_path: Path) -> None:
         check_manifest(tmp_path)
 
 
+def test_manifest_cannot_escape_its_root(tmp_path: Path) -> None:
+    assets = tmp_path / "assets"
+    assets.mkdir()
+    (tmp_path / "outside").write_bytes(b"externe")
+    (assets / MANIFEST).write_text("0" * 64 + "  ../outside\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="Entrée d'inventaire invalide"):
+        check_manifest(assets)
+
+
 def test_pipeline_reproduces_bundled_assets(builder: DatabaseBuilder, assets_root: Path, assets: Path) -> None:
     build_gen3_maps(CACHE, assets_root / "maps", tuple(game for game in GEN3_MAP_GAMES if game not in GAMES))
     build_fixed_catalog(CACHE, assets_root)

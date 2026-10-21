@@ -2,11 +2,13 @@
 
 import csv
 import sqlite3
+from collections.abc import Callable
 from pathlib import Path
 
 import pytest
 
 from pokemaps_data.games import GEN4_GAMES, Game
+from pokemaps_data.maps import GameMapData
 from pokemaps_data.validate import CHECKS
 from pokemaps_data.validate_maps_gen4 import check_inventory, validate_catalog
 
@@ -15,10 +17,8 @@ _ASSETS = Path(__file__).parents[2] / "app/src/main/assets"
 
 @pytest.mark.pipeline
 @pytest.mark.parametrize("game", GEN4_GAMES, ids=lambda game: game.version_group)
-def test_source_export_positions_are_valid(game: Game, tmp_path: Path, source_cache_ready: None) -> None:
-    from pokemaps_data.maps_export_gen4 import export_game
-
-    data = export_game(Path(__file__).parents[1] / ".cache", tmp_path / game.version_group, game)
+def test_source_export_positions_are_valid(game: Game, sinnoh_exports: Callable[[Game], GameMapData]) -> None:
+    data = sinnoh_exports(game)
     regions = {row.const: row for row in data.maps}
     assert data.characters_complete
     assert data.objects and data.warps

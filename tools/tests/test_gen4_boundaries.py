@@ -25,11 +25,11 @@ def test_ds_reader_checks_its_repository(tmp_path: Path) -> None:
 
 
 def test_map_generation_dispatches_to_the_ds_exporter(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    calls: list[tuple[Path, Path, Game]] = []
+    calls: list[tuple[Path, Path, Game, object | None]] = []
     result = GameMapData([], [], [], [])
 
-    def export(cache: Path, output: Path, game: Game) -> GameMapData:
-        calls.append((cache, output, game))
+    def export(cache: Path, output: Path, game: Game, api: object | None = None) -> GameMapData:
+        calls.append((cache, output, game, api))
         return result
 
     def families(_games: tuple[Game, ...]) -> dict[str, tuple[str, ...]]:
@@ -38,7 +38,7 @@ def test_map_generation_dispatches_to_the_ds_exporter(tmp_path: Path, monkeypatc
     monkeypatch.setattr(maps_export_gen4, "export_game", export)
     monkeypatch.setattr(maps, "complete_families", families)
     assert maps.build_maps(tmp_path, tmp_path / "cartes", games=(PLATINUM,)) == {"platinum": result}
-    assert calls == [(tmp_path, tmp_path / "cartes/platinum", PLATINUM)]
+    assert calls == [(tmp_path, tmp_path / "cartes/platinum", PLATINUM, None)]
 
 
 def test_unknown_evolution_condition_is_never_lost() -> None:

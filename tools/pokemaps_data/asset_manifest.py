@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import sqlite3
+import stat
 from contextlib import closing
 from pathlib import Path
 
@@ -81,6 +82,7 @@ def write_manifest(assets: Path) -> None:
 
 def check_manifest(assets: Path) -> None:
     resolved_assets = assets.resolve()
+    parents: dict[Path, Path] = {}
     manifest = assets / MANIFEST
     if not manifest.is_file():
         raise ValueError(f"Inventaire des assets absent : {manifest}")
@@ -90,17 +92,36 @@ def check_manifest(assets: Path) -> None:
     listed = set()
     for entry in entries:
         digest, separator, relative = entry.partition("  ")
-        path = assets / relative
-        if not separator or len(digest) != 64 or not path.resolve().is_relative_to(resolved_assets):
+        if not separator or len(digest) != 64:
             raise ValueError(f"Entrée d'inventaire invalide : {entry}")
+        path = _checked_path(assets, resolved_assets, relative, parents)
         if relative in listed:
             raise ValueError(f"Asset en double dans l'inventaire : {relative}")
         listed.add(relative)
-        if not path.is_file():
-            raise ValueError(f"Asset indispensable absent : {path}")
         with path.open("rb") as handle:
             actual = hashlib.file_digest(handle, "sha256").hexdigest()
         if actual != digest:
             raise ValueError(f"Asset modifié sans mise à jour de l'inventaire : {path}")
     if missing := _required_paths(assets) - listed:
         raise ValueError(f"Assets indispensables absents de l'inventaire : {sorted(missing)}")
+
+
+def _checked_path(assets: Path, resolved_assets: Path, relative: str, parents: dict[Path, Path]) -> Path:
+    path = assets / relative
+    parent = path.parent
+    if parent not in parents:
+        parents[parent] = parent.resolve()
+    if not parents[parent].is_relative_to(resolved_assets):
+        raise ValueError(f"Entrée d'inventaire invalide : {relative}")
+    try:
+        mode = path.lstat().st_mode
+    except FileNotFoundError as error:
+        raise ValueError(f"Asset indispensable absent : {path}") from error
+    # Un fichier ordinaire ne peut pas rediriger sa lecture ; ses dossiers ont déjà été contrôlés.
+    if stat.S_ISLNK(mode):
+        if not path.resolve().is_relative_to(resolved_assets):
+            raise ValueError(f"Entrée d'inventaire invalide : {relative}")
+        mode = path.stat().st_mode
+    if not stat.S_ISREG(mode):
+        raise ValueError(f"Asset indispensable absent : {path}")
+    return path

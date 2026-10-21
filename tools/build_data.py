@@ -242,7 +242,7 @@ def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, game
     """Génère cartes, images et base des jeux `games` dans `assets`, puis valide la base."""
     database = assets / "database/pokedex.db"
     print("Génération des cartes…")
-    map_data = build_maps(cache, assets / "maps", games)
+    map_data = build_maps(cache, assets / "maps", games, api)
 
     pret_roots = {game.version_group: repos[game.pret_repo] for game in games}
     builder = DatabaseBuilder(api, games, map_data=map_data, pret_roots=pret_roots)

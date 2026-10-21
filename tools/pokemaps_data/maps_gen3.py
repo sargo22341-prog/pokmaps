@@ -15,6 +15,7 @@ from .maps import MapRow, WarpRow, display_map_rows, read_map_names
 from .maps_layout import identifier, read_layout_curation
 from .maps_layout_gen3 import MIRAGE_ISLAND, MIRAGE_ROUTE, Gen3GameMaps
 from .maps_passages_gen3 import passages
+from .maps_render_cache import RenderCache
 from .maps_render_gen3 import Gen3Renderer
 from .pret_gen3 import Gen3PretRepo
 from .pret_gen3_maps import Gen3Event, Gen3Map
@@ -145,6 +146,7 @@ def export_gen3_maps(cache: Path, output: Path, game: Game) -> tuple[int, int, i
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
     renderer = Gen3Renderer(game_maps, repo)
+    renderer.tile_cache = RenderCache.for_tiles(cache / "map-renders/tiles")
     rows = display_map_rows(game_maps, names, renderer, output)
     warps = _warps(game_maps)
     sprites = {

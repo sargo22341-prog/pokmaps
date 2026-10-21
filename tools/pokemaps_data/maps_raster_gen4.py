@@ -167,9 +167,18 @@ def _color(
         s = (a.texcoord[0] * w0 + b.texcoord[0] * w1 + c.texcoord[0] * w2) // (area * 16)
         t = (a.texcoord[1] * w0 + b.texcoord[1] * w1 + c.texcoord[1] * w2) // (area * 16)
         texel = material.texture.sample(s, t)
-    channels = tuple((a.color[k] * w0 + b.color[k] * w1 + c.color[k] * w2) // area for k in range(3))
-    rgb = tuple(((texel[k] + 1) * (channels[k] + 1) - 1) >> 5 for k in range(3))
-    return (*rgb, ((texel[3] + 1) * (material.alpha + 1) - 1) >> 5)
+    if a.color == b.color == c.color:
+        red, green, blue = a.color
+    else:
+        red = (a.color[0] * w0 + b.color[0] * w1 + c.color[0] * w2) // area
+        green = (a.color[1] * w0 + b.color[1] * w1 + c.color[1] * w2) // area
+        blue = (a.color[2] * w0 + b.color[2] * w1 + c.color[2] * w2) // area
+    return (
+        ((texel[0] + 1) * (red + 1) - 1) >> 5,
+        ((texel[1] + 1) * (green + 1) - 1) >> 5,
+        ((texel[2] + 1) * (blue + 1) - 1) >> 5,
+        ((texel[3] + 1) * (material.alpha + 1) - 1) >> 5,
+    )
 
 
 def _over(source: Rgba, destination: Rgba) -> Rgba:

@@ -19,15 +19,16 @@ from .story_events import read_story_events
 from .validate_gen3_characters import validate_character_catalog
 
 
-def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
+def export_game(cache: Path, output: Path, game: Game, api: PokeApi | None = None) -> GameMapData:
     if not (output / "catalog.tsv").is_file():
         export_gen3_maps(cache, output, game)
     root = fetch_pret(cache, game.pret_repo)
     repo = Gen3PretRepo(root, game.pret_versions)
     maps = Gen3GameMaps(repo, game, read_layout_curation())
-    data = map_data(output, root, game)
+    data = map_data(output, root, game, game_maps=maps)
     story = read_story_events()
-    data.objects = character_rows(maps, PokeApi(fetch_pokeapi_csv(cache)), story, output)
+    api = api if api is not None else PokeApi(fetch_pokeapi_csv(cache))
+    data.objects = character_rows(maps, api, story, output)
     data.objects = clear_actor_passages(maps, data.objects)
     validate_character_catalog(output, game)
     data.characters_complete = True

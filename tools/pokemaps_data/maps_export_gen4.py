@@ -55,7 +55,7 @@ class Gen4MapProjection:
         return cell_point((x, z), height, view, display.bounds)
 
 
-def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
+def export_game(cache: Path, output: Path, game: Game, api: PokeApi | None = None) -> GameMapData:
     source = PREVIEW_DIR / "sinnoh-maps" / game.version_group
     if not source.is_dir():
         from .maps_gen4 import build_gen4_maps
@@ -67,7 +67,8 @@ def export_game(cache: Path, output: Path, game: Game) -> GameMapData:
     if metadata["commit"] != PRET_COMMITS[game.pret_repo]:
         raise ValueError(f"{source} : cartes DS à régénérer avec les sources épinglées")
     root = fetch_pret(cache, game.pret_repo)
-    builder = DatabaseBuilder(PokeApi(fetch_pokeapi_csv(cache)), (game,), pret_roots={game.version_group: root})
+    api = api if api is not None else PokeApi(fetch_pokeapi_csv(cache))
+    builder = DatabaseBuilder(api, (game,), pret_roots={game.version_group: root})
     repo = builder.gen4_repo(game, "l'intégration des cartes")
     maps = Gen4WildMaps(source, repo, game, builder.encounters.gen4_contexts[game.version_group])
     data = maps.map_data()

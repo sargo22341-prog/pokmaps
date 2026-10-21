@@ -64,14 +64,14 @@ def _build_game(output: Path, game: Game, workers: int, source: tuple) -> dict:
         for atlas in all_atlases
         for job in jobs(repo, atlas, output / identifier(atlas.display.const) / str(level_count(*atlas.size) - 1))
     )
-    _render(pending, workers)
+    cache_hits = _render(pending, workers)
     for atlas in all_atlases:
         write_pyramid(output / identifier(atlas.display.const), atlas.size)
     _write_matrices(repo, headers, all_atlases, surfaces, output)
     write_catalog(repo, headers, base_atlases, output)
     validate_catalog(output)
     write_inventory(output)
-    return _report(game, output, start, workers)
+    return _report(game, output, start, workers, cache_hits)
 
 
 def _prepare(repo: Gen4PretRepo, headers: dict) -> tuple[Atlas, ...]:
@@ -114,7 +114,7 @@ def _write_matrices(
     (output / "levels.json").write_text(json.dumps(surfaces, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _report(game: Game, output: Path, start: float, workers: int) -> dict:
+def _report(game: Game, output: Path, start: float, workers: int, cache_hits: int) -> dict:
     files = [path for path in output.rglob("*") if path.is_file()]
     tiles = [path for path in files if path.suffix == ".webp" and path.parent.name.isdecimal()]
     sizes = [(p.relative_to(output).as_posix(), p.stat().st_size) for p in files]
@@ -126,25 +126,30 @@ def _report(game: Game, output: Path, start: float, workers: int) -> dict:
         "bytes": sum(n for _, n in sizes),
         "seconds": round(time.perf_counter() - start, 2),
         "workers": workers,
+        "frame_cache_hits": cache_hits,
         "assets_over_5_mib": [(p, n) for p, n in sizes if n > 5 * 1024 * 1024],
     }
     print(report, flush=True)
     return report
 
 
-def _render(pending: tuple[TileJob, ...], workers: int) -> None:
+def _render(pending: tuple[TileJob, ...], workers: int) -> int:
     if not pending or len(pending) > _MAX_JOBS:
         raise ValueError(f"Nombre de cadres DS invalide : {len(pending)}")
     print(f"Rendu de {len(pending)} cadres avec {workers} processus (CPU : {os.cpu_count()})…", flush=True)
+    cache_hits = 0
     with ProcessPoolExecutor(max_workers=workers) as pool:
         batches = tuple(pending[index : index + 8] for index in range(0, len(pending), 8))
         futures = [pool.submit(render_batch, batch) for batch in batches]
         try:
             for index, future in enumerate(as_completed(futures, timeout=_BUILD_TIMEOUT_SECONDS), 1):
-                future.result()
+                _, hits = future.result()
+                cache_hits += hits
                 if index % 5 == 0 or index == len(futures):
                     print(f"  lots rendus {index}/{len(futures)}", flush=True)
         except BaseException:
             for future in futures:
                 future.cancel()
             raise
+    print(f"Cadres DS réutilisés : {cache_hits}/{len(pending)}", flush=True)
+    return cache_hits

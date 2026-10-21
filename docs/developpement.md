@@ -12,6 +12,17 @@ python -m pip install -r tools/requirements.txt -r tools/requirements-dev.txt
 Depuis la racine, lancer les contrôles correspondant à la partie modifiée :
 
 ```powershell
+python tools/verify.py                         # Python et Android, sans génération de données
+python tools/verify.py --scope android         # changement dans l'application uniquement
+python tools/verify.py --scope python          # changement dans les outils uniquement
+python tools/verify.py --scope python --pipeline # tests supplémentaires des sources déjà préparées
+```
+
+Cette commande conserve tous les contrôles ci-dessous, affiche leurs durées et s'arrête au premier échec.
+Les tests du pipeline nécessitent les sources locales épinglées ; ils ne téléchargent rien.
+Les commandes individuelles restent disponibles :
+
+```powershell
 .\gradlew.bat ktlintCheck checkNoGoogleServices lintDebug testDebugUnitTest assembleDebug
 python tools/check_assets.py
 cd tools
@@ -54,6 +65,10 @@ Les cartes DS préparatoires disposent d'un cache distinct, sans clé de repli :
 scripts Python, des données éditoriales ou des dépendances Python impose leur reconstruction.
 Un cache réutilisé passe toujours les validations d'inventaire, de catalogue et de commit source.
 Les tests des sources affichent leurs vingt durées les plus longues, y compris les fixtures de génération.
+Le cache `tools/.cache/map-renders` conserve les pyramides des générations 1 à 3 et les cadres 3D DS.
+Ses entrées sont identifiées par les pixels ou les triangles, textures, cadrage et version du moteur.
+Elles vérifient leur intégrité avant réutilisation ; les catalogues, personnages et validations sont recalculés.
+La CI restaure ce cache entre commits : chaque entrée décide elle-même si elle est encore applicable.
 Le job est borné à 90 minutes pour inclure le rendu DS à cache froid et le test de reconstruction.
 Ne pas lancer les lecteurs d'assets ou le build Android pendant une régénération des mêmes fichiers :
 les dossiers de cartes sont remplacés pendant l'export. Attendre sa réussite avant les contrôles.
@@ -62,3 +77,9 @@ La procédure et les secrets de publication sont dans le [README](../README.md#p
 Dépréciation connue : `Configuration.setVisible(boolean)` est appelée par AGP (`BasePlugin`,
 `SourceSetManager`). Elle reste visible avec `org.gradle.warning.mode=all` ; la réexaminer lors
 des mises à jour d’AGP et avant le retrait de cette API dans Gradle 11. Aucun masquage ni baseline.
+
+Lint 32.4.1 se rabat sur tout le module quand les sources principales d'un modèle de test sont absentes.
+Il parcourt alors aussi les assets et les sorties de build. `app/build.gradle.kts` fournit aux seules tâches
+d'analyse des tests un dossier principal explicitement vide, via les entrées internes d'AGP 9.4.1.
+Ce recours local est nécessaire car le modèle est généré à l'intérieur de l'action Lint ; les sources de test,
+dépendances et règles restent intactes. Une modification du modèle AGP incompatible fait échouer ce contrôle.

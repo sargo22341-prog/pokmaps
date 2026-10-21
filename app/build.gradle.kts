@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
+import com.android.build.gradle.internal.lint.SourceProviderInput
 import java.security.MessageDigest
 import java.util.HexFormat
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
@@ -119,6 +121,32 @@ ksp {
 tasks.matching { it.name.startsWith("lintAnalyze") }.configureEach {
     val variant = name.removePrefix("lintAnalyze")
     mustRunAfter(tasks.matching { it.name == "hiltJavaCompile$variant" })
+}
+
+// Lint 32.4.1 remplace les sources principales absentes des modèles de test par tout le module,
+// assets et build compris (UastEnvironment.Module). Un dossier explicitement vide évite ce repli ;
+// les vrais dossiers de test et les dépendances conservent leur propre analyse.
+tasks.withType<AndroidLintAnalysisTask>().configureEach {
+    if (!name.endsWith("UnitTest") && !name.endsWith("AndroidTest")) return@configureEach
+    val emptySources = layout.buildDirectory.dir("lint-source-roots/$name")
+    val source = objects.newInstance<SourceProviderInput>()
+    source.manifestOverlayFilePaths.set(emptyList())
+    source.manifestAbsoluteFilePaths.set(emptyList())
+    source.javaDirectoryPaths.set(emptySources.map { listOf(it.asFile.absolutePath) })
+    source.resDirectoryPaths.set(emptyList())
+    source.assetsDirectoryPaths.set(emptyList())
+    source.debugOnly.set(false)
+    source.unitTestOnly.set(false)
+    source.instrumentationTestOnly.set(false)
+    source.testFixtureOnly.set(false)
+    source.javaDirectories.from(emptySources)
+    outputs.dir(emptySources)
+    doFirst {
+        val sourceRoot = emptySources.get().asFile
+        check(sourceRoot.isDirectory || sourceRoot.mkdirs()) { "Dossier de sources Lint impossible : $sourceRoot" }
+        check(!variantInputs.mainSourceProvider.isPresent) { "Le modèle Lint contient déjà ses sources principales." }
+        variantInputs.mainSourceProvider.set(source)
+    }
 }
 
 tasks.withType<Test>().configureEach {

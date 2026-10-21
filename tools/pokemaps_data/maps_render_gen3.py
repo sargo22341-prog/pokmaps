@@ -144,7 +144,7 @@ class Gen3Renderer(MapRenderer):
             block = self._metatile_image(layout.primary_tileset, layout.secondary_tileset, number)
             image.paste(block, ((origin[0] + x) * 16 - left, (origin[1] + y) * 16 - top))
         columns, rows = self.game_maps.world_size(region)
-        return write_region_tiles(image, (left, top), (columns * 16, rows * 16), output)
+        return write_region_tiles(image, (left, top), (columns * 16, rows * 16), output, self.tile_cache)
 
     def write_display(self, const: str, output: Path) -> DisplayMap:
         if const != MIRAGE_ISLAND:
@@ -157,7 +157,7 @@ class Gen3Renderer(MapRenderer):
             image.paste(blocks[island.block(x, y)], (x * 16, y * 16))
         columns, rows = self.game_maps.world_size(self.game_maps.world_region[MIRAGE_ROUTE])
         size = (columns * 16, rows * 16)
-        write_region_tiles(image, self.game_maps.detached_origin(const), size, output)
+        write_region_tiles(image, self.game_maps.detached_origin(const), size, output, self.tile_cache)
         return DisplayMap(const, *size, level_count(*size), image)
 
     def write_sea(self, region: str, output: Path) -> int:

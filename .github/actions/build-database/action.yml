@@ -14,11 +14,21 @@ runs:
       id: source-cache
       uses: actions/cache@v5
       with:
-        path: tools/.cache
+        path: |
+          tools/.cache/*
+          !tools/.cache/map-renders
         # Les images encodées en WebP (webp.py) sont gardées dans ce cache, à côté de leurs sources.
         # sources.py épingle tous les dépôts pret (y compris ceux des jeux en cours d'intégration) :
         # toute mise à jour d'un commit invalide ce cache.
         key: data-sources-${{ hashFiles('tools/pokemaps_data/sources.py', 'tools/pokemaps_data/webp.py') }}
+
+    - name: Cache des cadres et tuiles de toutes les générations
+      uses: actions/cache@v5
+      with:
+        path: tools/.cache/map-renders
+        # Chaque entrée vérifie ses pixels ou sa géométrie et son intégrité, indépendamment de cette clé CI.
+        key: map-renders-${{ runner.os }}-${{ github.sha }}
+        restore-keys: map-renders-${{ runner.os }}-
 
     - name: Cache des cartes DS préparatoires
       id: sinnoh-map-cache
@@ -64,5 +74,5 @@ runs:
       working-directory: tools
       run: |
         SECONDS=0
-        python -m pytest -q -m pipeline --durations=20
+        python -m pytest -q -m pipeline --durations=20 --capture=tee-sys
         echo "Tests des sources épinglées : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"

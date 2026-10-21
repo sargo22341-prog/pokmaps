@@ -30,8 +30,10 @@ from .maps_characters import ObjectRow, object_rows
 from .maps_characters_data import CharacterCuration, read_character_curation
 from .maps_layout import GameMaps, identifier, read_layout_curation
 from .maps_render import MapRenderer
+from .maps_render_cache import RenderCache
 from .maps_render_gen1 import Gen1Renderer
 from .maps_render_gen2 import Gen2Renderer
+from .pokeapi import PokeApi
 from .pret import LAST_MAP, PretRepo
 from .pret_gen2 import Gen2PretRepo
 from .pret_gen2_wild import roaming_maps
@@ -192,6 +194,7 @@ def export_game(
         shutil.rmtree(output)
 
     map_renderer = renderer(game_maps)
+    map_renderer.tile_cache = RenderCache.for_tiles(game_maps.repo.root.parent / "map-renders/tiles")
     rows = display_map_rows(game_maps, names, map_renderer, output)
     warps = _warp_rows(game_maps)
     objects, sprites = object_rows(game_maps, curation)
@@ -346,21 +349,24 @@ def _warp_target(game_maps: GameMaps, source: str, target: str, number: int) -> 
     return target, arrival.x, arrival.y
 
 
-def build_maps(cache: Path, output: Path, games: tuple[Game, ...] = GAMES) -> dict[str, GameMapData]:
+def build_maps(
+    cache: Path, output: Path, games: tuple[Game, ...] = GAMES, api: PokeApi | None = None
+) -> dict[str, GameMapData]:
     """Génère les cartes de chaque jeu dans `output/<groupe de versions>`. Renvoie les données par groupe."""
     names, areas, curation = read_map_names(), read_map_areas(), read_character_curation()
     layout = read_layout_curation()
     result = {}
     for game in games:
+        print(f"Cartes {game.version_group} : préparation des images et des données…", flush=True)
         if game.pret_format == PretFormat.GEN3:
             from .maps_export_gen3 import export_game as export_gen3_game
 
-            result[game.version_group] = export_gen3_game(cache, output / game.version_group, game)
+            result[game.version_group] = export_gen3_game(cache, output / game.version_group, game, api)
             continue
         if game.pret_format == PretFormat.GEN4:
             from .maps_export_gen4 import export_game as export_gen4_game
 
-            result[game.version_group] = export_gen4_game(cache, output / game.version_group, game)
+            result[game.version_group] = export_gen4_game(cache, output / game.version_group, game, api)
             continue
         repo = open_pret(game, fetch_pret(cache, game.pret_repo))
         if isinstance(repo, Gen4PretRepo):

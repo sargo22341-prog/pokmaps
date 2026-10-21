@@ -12,7 +12,7 @@ from PIL import Image
 from .maps_layout_gen4 import BLOCK_PX, MatrixDisplay, camera_cotangent
 from .maps_raster_gen4 import ONE, RasterCanvas
 from .maps_render import TILE_SIZE, level_count
-from .maps_render_gen4 import BlockRender, Gen4Renderer
+from .maps_render_gen4 import BlockRender, Gen4Renderer, RasterTriangle
 from .pret_gen4 import Gen4PretRepo
 from .pret_gen4_map_models import Gen4Header
 
@@ -152,15 +152,29 @@ def overlaps(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> bool
 
 def render_job(job: TileJob, renderer: Gen4Renderer | None = None) -> int:
     renderer = renderer or Gen4Renderer(Gen4PretRepo(job.root, job.versions))
-    canvas = RasterCanvas(job.origin, job.size, 0, job.ceiling)
     prepared = [(source, renderer.prepare_block(source.request)) for source in job.sources]
+    key = renderer.frames.key(job, prepared)
+    image = renderer.frames.read(key)
+    if image is None:
+        image = _render_frame(job, prepared)
+        renderer.frames.write(key, image)
+    else:
+        renderer.frame_cache_hits += 1
+    return _write_frame(job, image)
+
+
+def _render_frame(job: TileJob, prepared: list[tuple[BlockSource, tuple[RasterTriangle, ...]]]) -> Image.Image:
+    canvas = RasterCanvas(job.origin, job.size, 0, job.ceiling)
     for translucent in (False, True):
         for source, triangles in prepared:
             canvas.ceiling = source.request.ceiling if source.request.ceiling is not None else job.ceiling
             for vertices, material in triangles:
                 if (material.alpha < 31) == translucent:
                     canvas.triangle(vertices, material, source.offset, source.request.cotangent)
-    image = canvas.image()
+    return canvas.image()
+
+
+def _write_frame(job: TileJob, image: Image.Image) -> int:
     count = 0
     for y in range(0, image.height, TILE_SIZE):
         for x in range(0, image.width, TILE_SIZE):
@@ -174,13 +188,14 @@ def render_job(job: TileJob, renderer: Gen4Renderer | None = None) -> int:
     return count
 
 
-def render_batch(batch: tuple[TileJob, ...]) -> int:
+def render_batch(batch: tuple[TileJob, ...]) -> tuple[int, int]:
     if not batch or len(batch) > 8:
         raise ValueError(f"Lot de rendu DS invalide : {len(batch)}")
     renderer = Gen4Renderer(Gen4PretRepo(batch[0].root, batch[0].versions))
     if any(job.root != batch[0].root or job.versions != batch[0].versions for job in batch):
         raise ValueError("Un lot de rendu DS mélange les sources de plusieurs jeux")
-    return sum(render_job(job, renderer) for job in batch)
+    count = sum(render_job(job, renderer) for job in batch)
+    return count, renderer.frame_cache_hits
 
 
 def write_pyramid(output: Path, size: tuple[int, int]) -> int:

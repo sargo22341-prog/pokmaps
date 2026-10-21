@@ -15,6 +15,8 @@ from pathlib import Path
 from PIL import Image
 
 from .maps_layout import GameMaps
+from .maps_render_cache import RenderCache
+from .maps_tile_sets import restore_tiles, store_tiles, tile_set_key
 from .pret import TILE_PX, PretMap
 
 TILE_SIZE = 256
@@ -63,6 +65,7 @@ class MapRenderer(ABC):
     def __init__(self, game_maps: GameMaps) -> None:
         self.game_maps = game_maps
         self.maps = game_maps.maps
+        self.tile_cache: RenderCache | None = None
 
     @abstractmethod
     def blocks(self, pret_map: PretMap) -> list[Image.Image]:
@@ -75,7 +78,7 @@ class MapRenderer(ABC):
     def write_display(self, const: str, output: Path) -> DisplayMap:
         """Rend une carte affichée et écrit ses tuiles dans `output`."""
         display = self.render(const)
-        write_tiles(display, output)
+        write_tiles(display, output, self.tile_cache)
         return display
 
     def render(self, const: str) -> DisplayMap:
@@ -146,7 +149,21 @@ class MapRenderer(ABC):
         return self.blocks(pret_map)[pret_map.border_block]
 
 
-def write_tiles(display: DisplayMap, output: Path) -> int:
+def write_tiles(display: DisplayMap, output: Path, cache: RenderCache | None = None) -> int:
+    geometry = (display.width, display.height, display.level_count)
+    key = None if cache is None else tile_set_key(display.image, geometry, cache)
+    if cache is not None and key is not None:
+        restored = restore_tiles(cache, key, output)
+        if restored is not None:
+            return restored
+    written: list[Path] = []
+    count = _write_tiles(display, output, written)
+    if cache is not None and key is not None:
+        store_tiles(cache, key, output, written)
+    return count
+
+
+def _write_tiles(display: DisplayMap, output: Path, written: list[Path]) -> int:
     """Découpe la carte en tuiles WebP sans perte, pour chaque niveau de zoom. Renvoie le nombre de tuiles.
 
     Les tuiles entièrement transparentes ne sont pas écrites."""
@@ -168,11 +185,33 @@ def write_tiles(display: DisplayMap, output: Path) -> int:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 # method=4 et non 6 : 6 n'allège les tuiles que de 4 % (mesuré), pour un encodage 25 fois plus long.
                 tile.save(path, "WEBP", lossless=True, method=4)
+                written.append(path)
                 count += 1
     return count
 
 
-def write_region_tiles(image: Image.Image, origin: tuple[int, int], size: tuple[int, int], output: Path) -> int:
+def write_region_tiles(
+    image: Image.Image,
+    origin: tuple[int, int],
+    size: tuple[int, int],
+    output: Path,
+    cache: RenderCache | None = None,
+) -> int:
+    key = None if cache is None else tile_set_key(image, (origin, size), cache)
+    if cache is not None and key is not None:
+        restored = restore_tiles(cache, key, output)
+        if restored is not None:
+            return restored
+    written: list[Path] = []
+    count = _write_region_tiles(image, origin, size, output, written)
+    if cache is not None and key is not None:
+        store_tiles(cache, key, output, written)
+    return count
+
+
+def _write_region_tiles(
+    image: Image.Image, origin: tuple[int, int], size: tuple[int, int], output: Path, written: list[Path]
+) -> int:
     """Tuiles d'une image placée en `origin` dans une carte de taille `size`, sur la grille de cette carte.
 
     Seules les tuiles que l'image touche sont écrites, à chaque niveau de zoom ; la réduction de chaque niveau
@@ -198,6 +237,7 @@ def write_region_tiles(image: Image.Image, origin: tuple[int, int], size: tuple[
                 path = output / str(level) / f"{row}_{column}.webp"
                 path.parent.mkdir(parents=True, exist_ok=True)
                 tile.save(path, "WEBP", lossless=True, method=4)
+                written.append(path)
                 count += 1
     return count
 

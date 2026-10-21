@@ -15,6 +15,7 @@ from PIL import Image
 
 from .maps_bindings_gen4 import bind_palettes, read_palette_bindings
 from .maps_dynamic_gen4 import DynamicProps, prop_rotation
+from .maps_frame_cache_gen4 import FrameCache
 from .maps_geometry_gen4 import ShapeDraw, Transform, Vector, shape_draws
 from .maps_raster_gen4 import RasterCanvas, RasterMaterial, RasterTexture, RasterVertex
 from .maps_render import DisplayMap, level_count, write_tiles
@@ -49,6 +50,8 @@ class BlockRender:
 class Gen4Renderer:
     def __init__(self, repo: Gen4PretRepo) -> None:
         self.repo = repo
+        self.frames = FrameCache.for_sources(repo.root)
+        self.frame_cache_hits = 0
         self._terrain_files: dict[int, NitroFile] = {}
         self._prop_files: dict[int, NitroFile] = {}
         self._terrain_textures: dict[int, NitroTextures] = {}

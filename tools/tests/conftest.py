@@ -1,13 +1,13 @@
 import shutil
 import sqlite3
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from pathlib import Path
 
 import pytest
 
 from pokemaps_data import sources
 from pokemaps_data.builder import DatabaseBuilder
-from pokemaps_data.games import ALL_GAMES, CRYSTAL, GAMES, GEN3_GAMES, GEN4_GAMES, GOLD_SILVER
+from pokemaps_data.games import ALL_GAMES, CRYSTAL, GAMES, GEN3_GAMES, GEN4_GAMES, GOLD_SILVER, Game
 from pokemaps_data.maps import GameMapData, build_maps
 from pokemaps_data.maps_layout import GameMaps, read_layout_curation
 from pokemaps_data.pokeapi import PokeApi
@@ -36,10 +36,41 @@ def assets_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 @pytest.fixture(scope="session")
-def builder(assets_root: Path, source_cache_ready: None) -> DatabaseBuilder:
-    map_data = build_maps(CACHE, assets_root / "maps")
+def source_api(source_cache_ready: None) -> PokeApi:
+    return PokeApi(fetch_pokeapi_csv(CACHE))
+
+
+@pytest.fixture(scope="session")
+def sinnoh_exports(assets_root: Path, source_api: PokeApi) -> Callable[[Game], GameMapData]:
+    from pokemaps_data.maps_export_gen4 import export_game
+
+    exports: dict[str, GameMapData] = {}
+
+    def export(game: Game) -> GameMapData:
+        group = game.version_group
+        if group not in exports:
+            print(f"Cartes {group} : export des sources pour la session de tests…", flush=True)
+            exports[group] = export_game(CACHE, assets_root / "maps" / group, game, source_api)
+        return exports[group]
+
+    return export
+
+
+@pytest.fixture(scope="session")
+def builder(
+    assets_root: Path,
+    in_progress_export: tuple[dict[str, GameMapData], Path],
+    source_api: PokeApi,
+    sinnoh_exports: Callable[[Game], GameMapData],
+) -> DatabaseBuilder:
+    # Or/Argent et Cristal sont déjà rendus par la fixture utilisée par leurs propres tests.
+    remaining = tuple(game for game in GAMES if game not in (GOLD_SILVER, CRYSTAL, *GEN4_GAMES))
+    generated = {**in_progress_export[0], **build_maps(CACHE, assets_root / "maps", games=remaining, api=source_api)}
+    generated.update({game.version_group: sinnoh_exports(game) for game in GEN4_GAMES})
+    # Les identifiants SQLite dépendent de cet ordre, qui doit rester celui du build de production.
+    map_data = {game.version_group: generated[game.version_group] for game in GAMES}
     pret_roots = {game.version_group: pret_dir(CACHE, game.pret_repo) for game in GAMES}
-    return DatabaseBuilder(PokeApi(fetch_pokeapi_csv(CACHE)), map_data=map_data, pret_roots=pret_roots)
+    return DatabaseBuilder(source_api, map_data=map_data, pret_roots=pret_roots)
 
 
 @pytest.fixture(scope="session")
@@ -102,11 +133,9 @@ def gold_silver_maps(gold_silver_repo: Gen2PretRepo) -> GameMaps:
 
 
 @pytest.fixture(scope="session")
-def in_progress_export(
-    tmp_path_factory: pytest.TempPathFactory, source_cache_ready: None
-) -> tuple[dict[str, GameMapData], Path]:
+def in_progress_export(assets_root: Path, source_cache_ready: None) -> tuple[dict[str, GameMapData], Path]:
     """Cartes des jeux en cours d'intégration générées (lignes de la base par groupe de versions, dossier)."""
-    output = tmp_path_factory.mktemp("in-progress-maps")
+    output = assets_root / "maps"
     return build_maps(CACHE, output, games=(GOLD_SILVER, CRYSTAL)), output
 
 
