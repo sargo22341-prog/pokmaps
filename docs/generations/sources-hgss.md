@@ -1,7 +1,8 @@
 # Qualification des sources HeartGold et SoulSilver
 
 Contrat préparatoire de la phase 0 du [plan](../../plan4g%20remake.md), établi le 21 octobre 2026.
-Les quatorze jeux distribués restent seuls actifs. Aucun rendu HGSS n'est encore validé.
+Les quatorze jeux distribués restent seuls actifs. Le [lot cartographique de phase 1](cartes-hgss.md)
+valide désormais cinq lieux HGSS ; cette preuve locale n'active aucun jeu.
 
 ## Source retenue et preuve reproductible
 
@@ -135,7 +136,7 @@ Elles ne sont pas déduites du seul numéro de génération.
 - **Succès** : Ensemble officiel commun, traduction française, progression manuelle ; Archives locales + association
   testée des deux versions à 7212 ; aucune génération en phase 0.
 
-Ces noms d'aperçu restent réservés : aucune option `--hgss-…-only` n'est encore disponible.
+`--hgss-maps-only` produit désormais le lot de preuve de phase 1 ; les autres noms d'aperçu restent réservés.
 Chaque futur aperçu vérifiera commit et empreintes de ses prérequis avant export ; les jeux actuels ne
 doivent pas être régénérés pour préparer HGSS. Aucun changement de schéma ne découle de cette qualification.
 
@@ -165,10 +166,10 @@ avant de distribuer de nouveaux assets. Aucun avis de réutilisation juridique n
 
 - **Ressource nécessitant une ROM externe** : Aucune identifiée pour les fichiers inventoriés : données natives et
   archives déjà versionnées. L'exhaustivité des futurs contenus n'est pas prouvée.
-- **Preuve de rendu sans ROM** : Non réalisée ; jalon de phase 1, bloquant les cartes globales. Il faut résoudre zones,
-  textures, modèles, BDHC et sprites de terrain, puis comparer HG/SS.
-- **Format des sprites d'acteurs et accompagnateurs** : Ressources candidates présentes, associations et décodage non
-  qualifiés ; bloquant la validation du premier acteur.
+- **Preuve de rendu sans ROM** : Réalisée sur Bourg Geon, les deux niveaux du laboratoire et les Routes 29 et 47,
+  dans les deux versions ; [formats, ressources et preuves](cartes-hgss.md). Le catalogue global reste à construire.
+- **Format des sprites d'acteurs et accompagnateurs** : Association sprite/NSBTX et pose de face validées sur les
+  acteurs témoins du lot ; couverture globale et accompagnateurs à traiter dans les phases suivantes.
 - **Couverture française** : Trois lieux de départ et identités établis ; catalogue complet et noms de PNJ à relire par
   entrée native en phases 3/5.
 - **Équivalence des variantes** : Tables sauvages distinctes attestées ; géométrie commune et variantes de

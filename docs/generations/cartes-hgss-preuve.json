@@ -1,0 +1,196 @@
+{
+  "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+  "versions": [
+    "heartgold",
+    "soulsilver"
+  ],
+  "maps": [
+    {
+      "header": 60,
+      "origin_pixels": [
+        10624,
+        5888
+      ],
+      "size": [
+        768,
+        1024
+      ],
+      "tiles": 15,
+      "pixels_sha256": "9526d2f3026997a2a641f30c73ddd7ccb9f2b54b098ed0d7cf771544ae8ccf06",
+      "native_sha256": "660d9a43311ee9014aafac281aa21c5dee112cd86d8e9b60d02dab7abefeeb1d",
+      "actor": {
+        "native": {
+          "identity": "obj_T20_gsrivel",
+          "sprite": "SPRITE_GSRIVEL",
+          "x": 682,
+          "z": 391,
+          "y": 0,
+          "direction": 3,
+          "script": "_EV_scr_seq_T20_000 + 1",
+          "flag": "FLAG_HIDE_NEW_BARK_RIVAL"
+        },
+        "sprite_source": "files/data/mmodel/mmodel/mmodel_00000058.NSBTX",
+        "surface_fx32": 65536,
+        "frame": "face"
+      },
+      "lower": null
+    },
+    {
+      "header": 61,
+      "origin_pixels": [
+        -128,
+        -256
+      ],
+      "size": [
+        768,
+        1024
+      ],
+      "tiles": 9,
+      "pixels_sha256": "9c4a17568a883d9ab2d2e456783569a2b436c79723e81203681108701f4176bd",
+      "native_sha256": "6b0b1af28bc4a8ce281da5b74e9f195a1dacc227cc83ea9835a12386595a6b04",
+      "actor": {
+        "native": {
+          "identity": "obj_T20R0101_doctor",
+          "sprite": "SPRITE_DOCTOR",
+          "x": 6,
+          "z": 5,
+          "y": 0,
+          "direction": 1,
+          "script": "_EV_scr_seq_T20R0101_000 + 1",
+          "flag": "FLAG_HIDE_ELMS_LAB_ELM"
+        },
+        "sprite_source": "files/data/mmodel/mmodel/mmodel_00000054.NSBTX",
+        "surface_fx32": 0,
+        "frame": "face"
+      },
+      "lower": null
+    },
+    {
+      "header": 33,
+      "origin_pixels": [
+        9088,
+        5888
+      ],
+      "size": [
+        1792,
+        1024
+      ],
+      "tiles": 32,
+      "pixels_sha256": "ba5f514b370e64bd86f666c1e303f28da5eef2b8e02774aa072d1dde85f778c6",
+      "native_sha256": "cd822259a72ebb85cd8648608c84bf0138a58b3053d597a010c40cb5ec84fe9a",
+      "actor": {
+        "native": {
+          "identity": "obj_R29_gsboy2",
+          "sprite": "SPRITE_GSBOY2",
+          "x": 626,
+          "z": 410,
+          "y": 0,
+          "direction": 1,
+          "script": "_EV_scr_seq_R29_006 + 1",
+          "flag": "FLAG_NOTHING"
+        },
+        "sprite_source": "files/data/mmodel/mmodel/mmodel_00000115.NSBTX",
+        "surface_fx32": 65536,
+        "frame": "face"
+      },
+      "lower": null
+    },
+    {
+      "header": 62,
+      "origin_pixels": [
+        -128,
+        -256
+      ],
+      "size": [
+        768,
+        1024
+      ],
+      "tiles": 6,
+      "pixels_sha256": "8b3dbcf07c6b296de939a8710cc4be54e25dcccf5f5ce9244fcb4132c46e822d",
+      "native_sha256": "ad100414c440acfc54e7c4d1f2c1919d9e85beed8d5c4665726b650dc276011d",
+      "actor": {
+        "native": {
+          "identity": "obj_T20R0102_gswoman1",
+          "sprite": "SPRITE_GSWOMAN1",
+          "x": 7,
+          "z": 5,
+          "y": 0,
+          "direction": 1,
+          "script": "_EV_scr_seq_T20R0102_000 + 1",
+          "flag": "FLAG_NOTHING"
+        },
+        "sprite_source": "files/data/mmodel/mmodel/mmodel_00000123.NSBTX",
+        "surface_fx32": 0,
+        "frame": "face"
+      },
+      "lower": null
+    },
+    {
+      "header": 151,
+      "origin_pixels": [
+        896,
+        5376
+      ],
+      "size": [
+        1792,
+        1536
+      ],
+      "tiles": 52,
+      "pixels_sha256": "8c4bb2f87fc77bdd7b0bbe37221a81f35280ea25ad4a0f362cc3535f4f44813c",
+      "native_sha256": "e40ec3c5ff26bae6d20bcd8e6cf6df816e92442d11d9bec53a719b31a1026385",
+      "actor": {
+        "native": {
+          "identity": "obj_R47_monstarball",
+          "sprite": "SPRITE_MONSTARBALL",
+          "x": 117,
+          "z": 395,
+          "y": 0,
+          "direction": 0,
+          "script": "std_itemball_r47_revive",
+          "flag": "FLAG_HIDE_ITEMBALL_R47_REVIVE"
+        },
+        "sprite_source": "files/data/mmodel/mmodel/mmodel_00000094.NSBTX",
+        "surface_fx32": 655360,
+        "frame": "face"
+      },
+      "lower": {
+        "witness": {
+          "x": 97,
+          "z": 377,
+          "attribute": 21,
+          "heights": [
+            688128,
+            851968
+          ]
+        },
+        "ceiling_fx32": 770048,
+        "pixels_sha256": "54ed8da8692642809670814bc935dbb1a81a126ef31cb4585d5b5c9d075f5fa1"
+      }
+    }
+  ],
+  "return_links": [
+    {
+      "outside": 60,
+      "warp": 0,
+      "inside": 61,
+      "anchor": 0
+    },
+    {
+      "outside": 60,
+      "warp": 4,
+      "inside": 62,
+      "anchor": 0
+    }
+  ],
+  "route_29_boundary_count": 7,
+  "overlapping_surface_count": 118,
+  "reproducibility": {
+    "files": 361,
+    "bytes": 8799306,
+    "inventory_sha256": "fc26e93d2bbd32a9c0cfb60830e6eda4383802e42eeef4022326c6d80bb58bd8",
+    "generations_seconds": [
+      72.82,
+      97.14
+    ]
+  }
+}

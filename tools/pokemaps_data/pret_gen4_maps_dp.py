@@ -164,7 +164,7 @@ def read_dp_cameras(root: Path) -> tuple[CameraSettings, ...]:
 
 def read_dp_lighting(root: Path) -> dict[int, tuple[LightingPeriod, ...]]:
     names = _light_files(root / _LIGHT_FILE)
-    return {index: _light_file(root / "files/data" / name) for index, name in enumerate(names)}
+    return {index: read_light_file(root / "files/data" / name) for index, name in enumerate(names)}
 
 
 def _light_files(path: Path) -> tuple[str, ...]:
@@ -187,7 +187,7 @@ def _light_files(path: Path) -> tuple[str, ...]:
     return tables[0]
 
 
-def _light_file(path: Path) -> tuple[LightingPeriod, ...]:
+def read_light_file(path: Path) -> tuple[LightingPeriod, ...]:
     """Format texte lu par AreaLightTemplate_New : heure de fin, quatre lumières, quatre couleurs, ligne vide."""
     lines = read_text(path).replace("\r\n", "\n").split("\n")
     if lines[-1] == "":

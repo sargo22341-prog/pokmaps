@@ -27,6 +27,7 @@ Les pages décrivent l’état actuel ; les rapports de tâches et anciens résu
 - [Contenus de Sinnoh](generations/contenus-sinnoh.md) : baies, Super Concours, Poffins, Souterrain et combat.
 - [Prérequis des générations suivantes](generations/generations-suivantes.md).
 - [Sources et contrat préparatoire HeartGold/SoulSilver](generations/sources-hgss.md).
+- [Preuve cartographique HeartGold/SoulSilver](generations/cartes-hgss.md).
 
 Le [catalogue des sprites](donnees/sprites-pokemon.md) est un inventaire généré de 1 025 espèces,
 à consulter uniquement pour une provenance précise. Les règles de sprites sont résumées dans le pipeline.

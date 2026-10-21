@@ -8,7 +8,7 @@ import pytest
 
 from pokemaps_data.pret_gen4_map_models import Gen4Header
 from pokemaps_data.pret_gen4_maps import _camera, deg_to_index, fx32_const
-from pokemaps_data.pret_gen4_maps_dp import _dp_header, _labelled_bytes, _light_file, _split
+from pokemaps_data.pret_gen4_maps_dp import _dp_header, _labelled_bytes, _split, read_light_file
 from pokemaps_data.pret_gen4_moves import effect_key, read_gen4_moves
 
 FIELDS = (
@@ -56,12 +56,12 @@ def test_diamond_pearl_lighting_text(tmp_path: Path) -> None:
     period = "{end},\r\n" + "1,11,11,16,1897,-3600,-466,\r\n" + "0,0,0,0,0,0,0,\r\n" * 3 + "14,14,16,\r\n" * 4 + "\r\n"
     path = tmp_path / "area00light.txt"
     path.write_text(period.format(end=0) + period.format(end=43200) + "EOF", newline="")
-    periods = _light_file(path)
+    periods = read_light_file(path)
     assert [p.end_time for p in periods] == [0, 43200]
     assert periods[0].lights[0].direction == (1897, -3600, -466) and periods[0].emission == (14, 14, 16)
     path.write_text(period.format(end=7200) + period.format(end=0) + "EOF", newline="")
     with pytest.raises(ValueError, match="heures de fin d'éclairage invalides"):
-        _light_file(path)
+        read_light_file(path)
 
 
 def test_move_effects_use_engine_numbers(tmp_path: Path) -> None:

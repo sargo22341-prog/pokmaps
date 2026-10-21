@@ -72,7 +72,7 @@ def test_nitro_front_frame_is_selected_in_numeric_order(tmp_path: Path, monkeypa
     }
     catalog = NitroTextures(textures, {"actor": Palette("actor", tuple(range(16)))})
     monkeypatch.setattr(maps_sprites_gen4, "read_nsbtx", lambda *_: catalog)
-    front = maps_sprites_gen4._nitro_frame(path)
+    front = maps_sprites_gen4.read_nitro_frame(path)
     assert front.getpixel((0, 0)) == (33, 0, 0, 255)
 
 

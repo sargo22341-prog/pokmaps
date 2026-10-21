@@ -77,6 +77,7 @@ Les tests ordinaires bloquent le réseau et n’exigent pas de cache ; les tests
 | `--reuse-gen3-maps` | Réutilisation des tuiles GBA validées ; uniquement si leurs sources épinglées sont inchangées |
 | `--sinnoh-pokemon-only` | Aperçu Pokémon DS dans `sinnoh-pokemon/`, sans cartes ni activation Android |
 | `--sinnoh-maps-only` | Deux familles de cartes DS dans `sinnoh-maps/`, sans activation Android |
+| `--hgss-maps-only` | Preuve de cinq lieux HGSS dans `hgss-maps/`, depuis le cache qualifié, sans ROM ni activation Android |
 | `--sinnoh-catalogs-only` | Réexport des catalogues DS existants, après contrôle des sources et de la géométrie |
 | `--sinnoh-scenes-only` | Réexport des décors moteur et de tous les calques inférieurs depuis un aperçu validé |
 | `--sinnoh-encounters-only` | Rencontres du moteur DS et emplacements dans `sinnoh-encounters/`, après `--sinnoh-maps-only` |

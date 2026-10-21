@@ -7,7 +7,8 @@ Avant toute nouvelle branche DS, valider **un premier lieu complet**, sans ROM :
 coordonnées des cases, étages, collisions, passages et génération reproductible.
 Les cartes de `pokeplatinum` et `pokediamond` sont produites et validées depuis les modèles, textures,
 matrices, événements et scripts épinglés, puis distribuées en tuiles hors ligne pour MapCompose.
-Cette validation ne vaut pas pour les cartes de HeartGold/SoulSilver, la prochaine branche envisagée.
+HeartGold/SoulSilver ont désormais leur propre [preuve locale de cinq lieux](cartes-hgss.md),
+avec intérieur, étage et pont ; leur catalogue complet et leur activation restent à réaliser.
 
 `Generation`, `GameVersion` et `VersionGroup` exigent des règles explicites par jeu.
 HeartGold/SoulSilver formeront une branche distincte de Diamant/Perle/Platine.

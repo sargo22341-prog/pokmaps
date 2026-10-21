@@ -51,12 +51,20 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--reuse-gen3-maps", action="store_true", help="réutiliser les cartes GBA existantes et validées"
     )
+    parser.add_argument("--map-workers", type=int, choices=range(1, 9), default=4, help="processus de rendu DS (1 à 8)")
+
+
+def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
+    maps_only.add_argument(
+        "--hgss-maps-only", action="store_true", help="prouver cinq lieux HGSS depuis les sources qualifiées, sans ROM"
+    )
 
 
 def _arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     _output_arguments(parser)
     maps_only = parser.add_mutually_exclusive_group()
+    _preparatory_arguments(maps_only)
     maps_only.add_argument(
         "--encounter-backgrounds-only",
         action="store_true",
@@ -71,7 +79,6 @@ def _arguments() -> argparse.Namespace:
     maps_only.add_argument(
         "--sinnoh-scenes-only", action="store_true", help="réexporter le décor moteur et les niveaux DS existants"
     )
-    parser.add_argument("--map-workers", type=int, choices=range(1, 9), default=4, help="processus de rendu DS (1 à 8)")
     maps_only.add_argument("--sinnoh-pokemon-only", action="store_true", help="générer l'aperçu Pokémon DS sans cartes")
     maps_only.add_argument(
         "--sinnoh-encounters-only",
@@ -121,7 +128,7 @@ def main() -> int:
         build_encounter_backgrounds(args.cache, args.assets)
         write_manifest(args.assets)
         return 0
-    if _sinnoh_preview(args):
+    if _hgss_preview(args) or _sinnoh_preview(args):
         return 0
     if args.achievement_resources_only:
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
@@ -191,6 +198,15 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
         build_pokemon_preview(args.cache, args.preview, args.assets)
     else:
         return False
+    return True
+
+
+def _hgss_preview(args: argparse.Namespace) -> bool:
+    if not args.hgss_maps_only:
+        return False
+    from pokemaps_data.preview_maps_hgss import build_hgss_maps
+
+    build_hgss_maps(args.cache, args.preview)
     return True
 
 

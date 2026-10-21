@@ -373,11 +373,43 @@ Le transfert vers les jeux générables est conditionné à l'aiguillage explici
 
 ### Phase 1 — Prouver les cartes avant de généraliser
 
-- [ ] **1A — Lecteur minimal.** Extraire Bourg Geon et son intérieur dans les deux versions,
+- [x] **1A — Lecteur minimal.** Extraire Bourg Geon et son intérieur dans les deux versions,
   avec fixtures et erreurs de format explicites. Sortie : données natives, unités et références contrôlées.
-- [ ] **1B — Rendu complet minimal.** Produire tuiles, collision, passage aller/retour et acteur,
+- [x] **1B — Rendu complet minimal.** Produire tuiles, collision, passage aller/retour et acteur,
   puis un lieu à plusieurs niveaux. Sortie : preuve visuelle et génération reproductible sans ROM.
   **Arrêt de cette branche si la preuve échoue ; aucune substitution GSC.**
+
+Résultats : [preuve cartographique et formats HGSS](docs/generations/cartes-hgss.md),
+[empreintes d'entrée](docs/generations/cartes-hgss-sources.json) et
+[preuve synthétique](docs/generations/cartes-hgss-preuve.json).
+Lecteurs `pret_hgss_binary.py`/`pret_hgss_maps.py`, rendu `maps_render_hgss.py`, validation
+`validate_hgss_maps.py`, aperçu `preview_maps_hgss.py`, option explicite dans `tools/build_data.py`,
+fixtures et recette dans `test_hgss_maps.py`/`test_hgss_map_sources.py`.
+Les codecs de triangles Nitro, de pose NSBTX et d'éclairage sont réutilisés sans modifier leurs règles ;
+les tests existants suivent leurs nouveaux noms publics. README, index et documentation sont actualisés.
+
+`python tools/build_data.py --hgss-maps-only` produit `tools/build/preview/hgss-maps/` pour les deux versions :
+Bourg Geon, laboratoire RDC/étage, Routes 29 et 47. Deux allers-retours sont contrôlés, sept paires de cases
+franchissent la frontière Route 29/Bourg Geon et 118 cases de la Route 47 ont plusieurs surfaces.
+La planche `tools/build/scratchpad/hgss-phase1-review.png` et la coupe inférieure ont été relues.
+Une seconde génération avec `--preview tools/build/scratchpad/hgss-repro` reproduit exactement les
+361 fichiers de l'inventaire, soit 8 799 306 octets ; durées de 72,82 et 97,14 secondes, sans cache de rendu persistant.
+
+Contrôles exécutés : `python tools/check_assets.py`, Ruff et son contrôle de format sur `tools`,
+`python -m pytest -q` (951 réussis), puis tests `pipeline` ciblant `test_hgss_preparation.py`,
+`test_hgss_map_sources.py`, `test_gen4_map_sources.py` et `test_gen4_render_sources.py` (18 réussis).
+La dernière recette ciblée, incluant fixtures, tailles de fonctions et sources, passe ses 50 tests.
+Les limites de fichiers/fonctions/lignes et `git diff --check` passent.
+Les contrôles Android et la suite `pipeline` intégrale ne sont pas lancés : aucun asset distribué,
+schéma ni code Android ne change ; la recette de cette phase porte sur l'aperçu isolé et les codecs DS concernés.
+
+Incidents résolus : accès aux dossiers temporaires refusé par le bac à sable Windows, génération/tests
+relancés avec autorisation ; entrée standard Git explicitement détachée sous pytest ; imports des codecs
+renommés, collision de nom méthode/cache et dépassement de 60 lignes corrigés.
+Une attente de test initialement fausse a été rectifiée :
+la case témoin de la Route 47 porte l'attribut natif `0x15`, pas zéro. Aucun échec de contrôle restant.
+La preuve sans ROM réussit ; aucun remplacement GSC/Sinnoh et aucune activation HGSS.
+Prochaine action : phase 2A, données Pokémon/Pokédex indépendantes ; la généralisation Johto/Kanto reste en phase 3.
 
 ### Phase 2 — Données Pokémon indépendantes des cartes complètes
 

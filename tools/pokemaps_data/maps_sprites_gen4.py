@@ -70,7 +70,7 @@ def read_field_sprites(repo: Gen4PretRepo, used: set[int]) -> tuple[FieldSprite,
     result = []
     for graphics in sorted(used & files.keys()):
         path = files[graphics]
-        image = _png_frame(repo, path) if repo.platinum else _nitro_frame(path)
+        image = _png_frame(repo, path) if repo.platinum else read_nitro_frame(path)
         result.append(FieldSprite(graphics, path.relative_to(repo.root).as_posix(), image))
     return tuple(result)
 
@@ -100,7 +100,7 @@ def _png_frame(repo: Gen4PretRepo, path: Path) -> Image.Image:
         return Image.frombytes("RGBA", image.size, data)
 
 
-def _nitro_frame(path: Path) -> Image.Image:
+def read_nitro_frame(path: Path) -> Image.Image:
     textures = read_nsbtx(read_binary(path), str(path))
     if not textures.textures:
         raise ValueError(f"{path} : personnage sans texture")

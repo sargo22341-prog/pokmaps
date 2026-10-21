@@ -105,6 +105,9 @@ n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipelin
 
 HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generations/sources-hgss.md)
 et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
+Leur [lot de preuve cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
+`python tools/build_data.py --hgss-maps-only` : Bourg Geon, les deux niveaux du laboratoire, les Routes 29 et 47,
+dans `tools/build/preview/hgss-maps/`, avec collisions, passages, acteurs témoins et coupe inférieure.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

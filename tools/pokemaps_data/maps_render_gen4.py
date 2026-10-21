@@ -151,19 +151,31 @@ class Gen4Renderer:
         lighting: LightingPeriod,
         placement: Transform = _IDENTITY_TRANSFORM,
     ) -> Iterator[RasterTriangle]:
-        for model in file.models:
-            for draw in shape_draws(model):
-                material = model.materials[draw.material]
-                raster_material = _material(material, file.textures, textures)
-                if raster_material.alpha == 0:
-                    continue
-                for primitive in primitives(model.shapes[draw.shape].display_list, model.name):
-                    for triangle in triangles(primitive):
-                        vertices = tuple(
-                            _vertex(vertex, draw, model, material, origin, scale, lighting, placement)
-                            for vertex in triangle
-                        )
-                        yield vertices, raster_material
+        yield from model_triangles(file, textures, origin, scale, lighting, placement)
+
+
+def model_triangles(
+    file: NitroFile,
+    textures: tuple[NitroTextures, ...],
+    origin: Vector,
+    scale: Vector,
+    lighting: LightingPeriod,
+    placement: Transform = _IDENTITY_TRANSFORM,
+) -> Iterator[RasterTriangle]:
+    """Projette un modèle Nitro déjà validé, indépendamment de la famille du jeu."""
+    for model in file.models:
+        for draw in shape_draws(model):
+            material = model.materials[draw.material]
+            raster_material = _material(material, file.textures, textures)
+            if raster_material.alpha == 0:
+                continue
+            for primitive in primitives(model.shapes[draw.shape].display_list, model.name):
+                for triangle in triangles(primitive):
+                    vertices = tuple(
+                        _vertex(vertex, draw, model, material, origin, scale, lighting, placement)
+                        for vertex in triangle
+                    )
+                    yield vertices, raster_material
 
 
 @lru_cache(maxsize=256)
