@@ -1,5 +1,5 @@
 name: Générer les données
-description: Génère la base de données, les images et les cartes de l'application (tools/build_data.py) et lance les tests du pipeline.
+description: Génère les données et les cartes de l'application, puis teste le pipeline.
 
 runs:
   using: composite
@@ -20,6 +20,14 @@ runs:
         # toute mise à jour d'un commit invalide ce cache.
         key: data-sources-${{ hashFiles('tools/pokemaps_data/sources.py', 'tools/pokemaps_data/webp.py') }}
 
+    - name: Cache des cartes DS préparatoires
+      id: sinnoh-map-cache
+      uses: actions/cache@v5
+      with:
+        path: tools/build/preview/sinnoh-maps
+        # Aucun repli : toute modification du pipeline, des données ou des dépendances impose un nouveau rendu.
+        key: sinnoh-maps-${{ runner.os }}-${{ hashFiles('tools/**/*.py', 'tools/data/**', 'tools/requirements*.txt') }}
+
     - name: Installer les dépendances
       shell: bash
       run: pip install -r tools/requirements-dev.txt
@@ -37,6 +45,8 @@ runs:
         SECONDS=0
         python tools/build_data.py
         echo "Cache exact restauré : ${{ steps.source-cache.outputs.cache-hit }}" >> "$GITHUB_STEP_SUMMARY"
+        sinnoh_cache_hit="${{ steps.sinnoh-map-cache.outputs.cache-hit }}"
+        echo "Cache exact des cartes DS restauré : ${sinnoh_cache_hit}" >> "$GITHUB_STEP_SUMMARY"
         echo "Génération des données (cache restauré selon disponibilité) : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"
         cache_size=$(du -sb tools/.cache | cut -f1)
         assets_size=$(du -sb app/src/main/assets | cut -f1)
@@ -54,5 +64,5 @@ runs:
       working-directory: tools
       run: |
         SECONDS=0
-        python -m pytest -q -m pipeline
+        python -m pytest -q -m pipeline --durations=20
         echo "Tests des sources épinglées : ${SECONDS} s" >> "$GITHUB_STEP_SUMMARY"

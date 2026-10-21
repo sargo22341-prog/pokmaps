@@ -50,6 +50,10 @@ CI et release utilisent les assets versionnés sans régénération. Le workflow
 ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
 Son résumé indique la restauration exacte du cache, la durée de génération et des tests de sources,
 la taille du cache et des assets, puis la durée d'assemblage et la taille de l'APK debug.
+Les cartes DS préparatoires disposent d'un cache distinct, sans clé de repli : toute modification des
+scripts Python, des données éditoriales ou des dépendances Python impose leur reconstruction.
+Un cache réutilisé passe toujours les validations d'inventaire, de catalogue et de commit source.
+Les tests des sources affichent leurs vingt durées les plus longues, y compris les fixtures de génération.
 Le job est borné à 90 minutes pour inclure le rendu DS à cache froid et le test de reconstruction.
 Ne pas lancer les lecteurs d'assets ou le build Android pendant une régénération des mêmes fichiers :
 les dossiers de cartes sont remplacés pendant l'export. Attendre sa réussite avant les contrôles.

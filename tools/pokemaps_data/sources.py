@@ -9,7 +9,7 @@
   dresseurs, les effets des attaques et les objets tenus.
 - pret/pokeruby, pret/pokeemerald, pret/pokefirered : sources des cinq jeux GBA pour les cartes, rencontres,
   personnages, services et règles du moteur (docs/generations/generation-3.md).
-- pret/pokediamond, pret/pokeplatinum : sources de Diamant, Perle et Platine, en cours d'intégration (gen4.md).
+- pret/pokediamond, pret/pokeplatinum : sources de Diamant, Perle et Platine (docs/generations/generation-4.md).
 """
 
 from __future__ import annotations
