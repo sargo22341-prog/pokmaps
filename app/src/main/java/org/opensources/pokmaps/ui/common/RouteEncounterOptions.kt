@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Encounter
 import org.opensources.pokmaps.domain.model.GbaCartridge
+import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.RouteEncounterFilter
 
 @Composable
@@ -25,6 +26,7 @@ internal fun RouteEncounterOptions(
     content: @Composable (List<Encounter>) -> Unit
 ) {
     var cartridge by rememberSaveable(key) { mutableStateOf(GbaCartridge.NONE) }
+    var gifts by rememberSaveable(key) { mutableStateOf(false) }
     var roaming by rememberSaveable(key) { mutableStateOf(false) }
     var radar by rememberSaveable(key) { mutableStateOf(false) }
     var swarm by rememberSaveable(key) { mutableStateOf(false) }
@@ -36,24 +38,34 @@ internal fun RouteEncounterOptions(
         radar,
         swarm,
         national || daily || cartridge != GbaCartridge.NONE,
-        daily
+        daily,
+        gifts
     )
     val keys = remember(encounters) { encounters.flatMap { it.conditionKeys }.toSet() }
-    if (!roaming && keys.any { it.startsWith("slot2-") }) {
+    if (!roaming && !gifts && keys.any { it.startsWith("slot2-") }) {
         CompactSelect(cartridge, GbaCartridge.entries, { cartridge = it }) { stringResource(it.label) }
     }
-    if (!roaming && "backlot-mentioned" in keys) {
+    if (!roaming && !gifts && "backlot-mentioned" in keys) {
         FilterChip(daily, { daily = !daily }, { Text(stringResource(R.string.route_daily)) })
     }
     RouteSwitches(
         encounters,
         filter,
         keys,
-        { roaming = !roaming },
+        {
+            roaming = !roaming
+            gifts = false
+        },
         { radar = !radar },
         { swarm = !swarm },
         { national = !national }
     )
+    if (encounters.any { ObtainMethod.fromEncounterMethod(it.method) == ObtainMethod.GIFT }) {
+        FilterChip(gifts, {
+            gifts = !gifts
+            roaming = false
+        }, { Text(stringResource(R.string.route_gifts)) })
+    }
     val filtered = remember(encounters, filter) { filter.apply(encounters) }
     content(filtered)
 }
@@ -73,15 +85,15 @@ private fun RouteSwitches(
         if (encounters.any { it.method.startsWith("roaming-") }) {
             FilterChip(filter.roaming, onRoaming, { Text(stringResource(R.string.route_roaming)) })
         }
-        if (!filter.roaming && "story-progress-national-dex" in keys &&
+        if (!filter.roaming && !filter.gifts && "story-progress-national-dex" in keys &&
             filter.cartridge == GbaCartridge.NONE && !filter.daily
         ) {
             FilterChip(filter.nationalDex, onNational, { Text(stringResource(R.string.route_national)) })
         }
-        if (!filter.roaming && "radar-on" in keys) {
+        if (!filter.roaming && !filter.gifts && "radar-on" in keys) {
             FilterChip(filter.radar, onRadar, { Text(stringResource(R.string.route_radar)) })
         }
-        if (!filter.roaming && "swarm-yes" in keys) {
+        if (!filter.roaming && !filter.gifts && "swarm-yes" in keys) {
             FilterChip(filter.swarm, onSwarm, { Text(stringResource(R.string.route_swarm)) })
         }
     }

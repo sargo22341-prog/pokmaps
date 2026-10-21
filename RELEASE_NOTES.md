@@ -5,4 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les rencontres de Rouge, Bleu, Jaune et des jeux GBA masquent les horaires
+  et affichent une seule fois niveaux et probabilités.
+- Les rencontres terrestres adoptent les cartes des zones d’eau et les Pokémon offerts ont leur liste dédiée.
 

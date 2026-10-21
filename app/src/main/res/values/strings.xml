@@ -676,6 +676,7 @@
     <string name="route_gba_emerald">GBA : Émeraude</string>
     <string name="route_gba_firered">GBA : Rouge Feu</string>
     <string name="route_gba_leafgreen">GBA : Vert Feuille</string>
+    <string name="route_gifts">Pokémon offerts</string>
     <string name="route_roaming">Pokémon errants</string>
     <string name="route_national">Pokédex National</string>
     <string name="route_radar">Pokéradar</string>

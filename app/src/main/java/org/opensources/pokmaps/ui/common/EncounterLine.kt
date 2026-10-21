@@ -41,7 +41,7 @@ fun EncounterGroups(
                 }
             } else if (group.water) {
                 EncounterWaterZone(group.habitat) {
-                    EncounterWaterCard(group.habitat) {
+                    EncounterSpeciesCard(group.habitat) {
                         Column(Modifier.padding(12.dp)) {
                             EncounterMethodRows(group, title, spritePlace, spriteSize, caught, onClick)
                         }
@@ -65,19 +65,7 @@ private fun EncounterMethodRows(
     caught: (Encounter) -> Boolean,
     onClick: ((Encounter) -> Unit)?
 ) {
-    when {
-        group.headbutt -> Text(
-            stringResource(R.string.encounter_headbutt_title),
-            style = MaterialTheme.typography.titleSmall
-        )
-
-        group.honeyTrees -> Text(
-            stringResource(R.string.method_honey_tree),
-            style = MaterialTheme.typography.titleSmall
-        )
-
-        else -> Text(group.methodName, style = MaterialTheme.typography.titleSmall)
-    }
+    EncounterMethodTitle(group)
     if (group.landscape) {
         group.species.forEach { species ->
             EncounterVariantRow(species, title, spritePlace, spriteSize, caught, onClick)
@@ -93,6 +81,20 @@ private fun EncounterMethodRows(
             )
         }
     }
+}
+
+@Composable
+private fun EncounterMethodTitle(group: EncounterGroup) {
+    val title = when {
+        group.headbutt -> stringResource(R.string.encounter_headbutt_title)
+        group.honeyTrees -> stringResource(R.string.method_honey_tree)
+        else -> group.methodName
+    }
+    if (!group.landscape) {
+        Text(title, style = MaterialTheme.typography.titleSmall)
+        return
+    }
+    EncounterSectionTitle(title)
 }
 
 /** Sprite des Pokémon d'une liste de rencontres : endroit (réglage des sprites animés) et taille. */

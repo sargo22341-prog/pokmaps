@@ -28,7 +28,7 @@ class EncounterPeriodLayoutTest {
     val compose = createComposeRule()
 
     @Test
-    fun sinnohLevelAndChancePairsFitOneLineWithTheSpriteAboveThePeriods() {
+    fun sinnohLevelAndChancePairsFitOneLineAboveThePokemon() {
         val encounters = listOf(encounter(2, 2, 24.0), encounter(2, 3, 11.0), encounter(3, 3, 10.0))
         compose.setContent {
             Box(Modifier.width(360.dp)) {
@@ -40,6 +40,12 @@ class EncounterPeriodLayoutTest {
             }
         }
         compose.onAllNodesWithText("\u00c9tourmi").assertCountEquals(1)
+        val pokemon = compose.onNodeWithText("\u00c9tourmi", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
+        val period = compose.onNodeWithText(
+            "N. 2 \u00b7 24 %",
+            useUnmergedTree = true
+        ).fetchSemanticsNode().boundsInRoot
+        assertTrue(period.bottom < pokemon.top)
         assertSingleLine("N. 2 \u00b7 24 %")
         assertSingleLine("N. 2 \u00e0 3 \u00b7 11 %")
         assertSingleLine("N. 3 \u00b7 10 %")

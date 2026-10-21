@@ -45,12 +45,11 @@ internal fun EncounterLandSection(
     Box(Modifier.fillMaxWidth()) {
         LandscapeTexture(habitat, lake = false, Modifier.matchParentSize())
         LandscapeBoundary()
-        Surface(
-            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 16.dp)
-        ) {
-            Column(Modifier.fillMaxWidth().padding(8.dp), content = content)
-        }
+        Column(
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            content = content
+        )
     }
 }
 
@@ -64,30 +63,36 @@ internal fun EncounterWaterZone(habitat: EncounterHabitat, content: @Composable 
             Modifier.padding(horizontal = 16.dp, vertical = 40.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Surface(
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.88f),
-                shape = MaterialTheme.shapes.small
-            ) {
-                Text(
-                    stringResource(R.string.water_zone),
-                    style = MaterialTheme.typography.titleSmall,
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-                )
-            }
+            EncounterSectionTitle(stringResource(R.string.water_zone))
             content()
         }
     }
 }
 
 @Composable
-internal fun EncounterWaterCard(
+internal fun EncounterSectionTitle(title: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.88f),
+        shape = MaterialTheme.shapes.small
+    ) {
+        Text(
+            title,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+        )
+    }
+}
+
+@Composable
+internal fun EncounterSpeciesCard(
     habitat: EncounterHabitat,
     modifier: Modifier = Modifier,
+    lake: Boolean = true,
     content: @Composable () -> Unit
 ) {
     Box(modifier.clip(MaterialTheme.shapes.medium)) {
         // Seul le décor est flouté : noms, icônes et probabilités restent nets.
-        LandscapeTexture(habitat, lake = true, Modifier.matchParentSize().blur(8.dp))
+        LandscapeTexture(habitat, lake = lake, Modifier.matchParentSize().blur(8.dp))
         Surface(
             shape = MaterialTheme.shapes.medium,
             color = MaterialTheme.colorScheme.surface.copy(alpha = 0.68f),

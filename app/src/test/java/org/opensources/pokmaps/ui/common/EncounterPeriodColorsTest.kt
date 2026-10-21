@@ -47,6 +47,8 @@ class EncounterPeriodColorsTest {
     }
 
     private fun isColored(description: String): Boolean {
+        compose.mainClock.advanceTimeByFrame()
+        compose.waitForIdle()
         val pixels = compose.onNodeWithContentDescription(description).captureToImage().toPixelMap()
         for (y in 0 until pixels.height) {
             for (x in 0 until pixels.width) {

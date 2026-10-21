@@ -17,6 +17,34 @@ class RouteEncounterOptionsTest {
     val compose = createComposeRule()
 
     @Test
+    fun giftsReplaceWildPokemonAndRoamersAndCanBeTurnedOff() {
+        val encounters = listOf(
+            encounter("Wild", "walk"),
+            encounter("Gift", "gift-egg"),
+            encounter("Roamer", "roaming-grass")
+        )
+        compose.setContent {
+            Column {
+                RouteEncounterOptions(1, encounters) { selected ->
+                    selected.forEach { Text(it.pokemonName) }
+                }
+            }
+        }
+        compose.onNode(hasText("Gift")).assertDoesNotExist()
+        compose.onNode(hasText("Pok\u00e9mon offerts")).performClick()
+        compose.onNode(hasText("Gift")).assertExists()
+        compose.onNode(hasText("Wild")).assertDoesNotExist()
+        compose.onNode(hasText("Pok\u00e9mon errants")).performClick()
+        compose.onNode(hasText("Gift")).assertDoesNotExist()
+        compose.onNode(hasText("Roamer")).assertExists()
+        compose.onNode(hasText("Pok\u00e9mon offerts")).performClick()
+        compose.onNode(hasText("Gift")).assertExists()
+        compose.onNode(hasText("Roamer")).assertDoesNotExist()
+        compose.onNode(hasText("Pok\u00e9mon offerts")).performClick()
+        compose.onNode(hasText("Wild")).assertExists()
+    }
+
+    @Test
     fun cartridgeAndRoamingChoicesReplaceTheVisibleSpecies() {
         val encounters = listOf(
             encounter("Ordinaire", "walk", "slot2-none"),

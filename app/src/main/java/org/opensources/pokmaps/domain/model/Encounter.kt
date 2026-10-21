@@ -39,6 +39,11 @@ data class Encounter(
 
     val isWater: Boolean get() = method in WATER_METHODS
 
+    val hasTimeOfDay: Boolean = when (GameVersion.of(versionId).generation) {
+        Generation.GEN1, Generation.GEN3 -> false
+        Generation.GEN2, Generation.GEN4 -> true
+    }
+
     private companion object {
         const val TRADE = "npc-trade"
         val WATER_METHODS = setOf("surf", "old-rod", "good-rod", "super-rod", "feebas-tile-fishing", "seaweed")

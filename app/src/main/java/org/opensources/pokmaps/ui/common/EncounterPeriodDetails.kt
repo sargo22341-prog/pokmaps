@@ -18,6 +18,10 @@ import org.opensources.pokmaps.domain.model.TimedSpecies
 
 @Composable
 internal fun EncounterPeriodDetails(species: TimedSpecies) {
+    if (!species.encounters.first().hasTimeOfDay) {
+        species.variants.forEach { EncounterVariantCaption(it) }
+        return
+    }
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         EncounterTime.entries.forEach { time ->
             val encounters = species.periods.getValue(time)
@@ -31,6 +35,7 @@ internal fun EncounterPeriodDetails(species: TimedSpecies) {
 
 @Composable
 internal fun EncounterTimeIcons(encounter: Encounter) {
+    if (!encounter.hasTimeOfDay) return
     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         EncounterTime.entries.forEach { time ->
             EncounterPeriodIcon(time, encounter.times.isEmpty() || time in encounter.times, size = 20.dp)

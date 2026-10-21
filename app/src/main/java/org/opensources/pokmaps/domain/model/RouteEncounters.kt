@@ -16,10 +16,17 @@ data class RouteEncounterFilter(
     val radar: Boolean = false,
     val swarm: Boolean = false,
     val nationalDex: Boolean = false,
-    val daily: Boolean = false
+    val daily: Boolean = false,
+    val gifts: Boolean = false
 ) {
+    init {
+        require(!roaming || !gifts)
+    }
+
     fun matches(encounter: Encounter): Boolean {
         if (encounter.method.startsWith("roaming-") != roaming) return false
+        if ((ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.GIFT) != gifts) return false
+        if (gifts) return true
         val keys = encounter.conditionKeys
         if (keys.any { it.startsWith("slot2-") } && cartridge.condition !in keys) return false
         if (("radar-on" in keys && !radar) || ("radar-off" in keys && radar)) return false
@@ -40,7 +47,7 @@ data class RouteEncounterFilter(
     }
 
     private fun withoutSelectedConditions(encounter: Encounter): Encounter {
-        if (encounter.conditionNames.isEmpty()) return encounter
+        if (gifts || encounter.conditionNames.isEmpty()) return encounter
         val remaining = encounter.conditionNames.filterKeys { !isSelectedCondition(it) }
         return encounter.copy(
             conditionNames = remaining,

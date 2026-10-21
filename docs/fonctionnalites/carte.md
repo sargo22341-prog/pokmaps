@@ -24,7 +24,9 @@ indépendant de celui de la carte. Les boutons à icônes combinent Matin, Jour 
 Seules les périodes qui comportent une variation apparaissent ; une liste identique toute la journée
 ne propose aucun bouton horaire. Tout affiche Tout le temps, Matin, Jour et Nuit. Un Pokémon présent aux trois
 périodes apparaît une fois dans Tout le temps. Désactiver une période masque sa section, même si les mêmes
-Pokémon sont présents à une autre période sélectionnée. Les dons et échanges suivent les sections sauvages.
+Pokémon sont présents à une autre période sélectionnée. Les Pokémon offerts, y compris les œufs, ont leur filtre dédié
+comme les errants, sur les routes
+et dans les bâtiments. Les échanges suivent les sections sauvages.
 Si niveaux ou probabilités varient, sa ligne conserve le détail par
 période. Les autres conditions, comme un essaim, restent distinctes.
 
@@ -62,3 +64,10 @@ d’Émeraude pour toutes les générations : prairie, hautes herbes, sous-bois 
 roche, glace, sable et sol intérieur. Le choix repose sur les identifiants du lieu et de sa salle,
 avec distinction des parties extérieures des montagnes. La rive du lac reprend le terrain autour de l’eau ;
 le fond des cartes aquatiques est flouté sous une surface translucide, avec sprites et informations nets.
+
+Les rencontres terrestres utilisent aussi une carte par Pokémon, avec le décor visible entre les cartes.
+Les horaires ou types d’arbres et leurs probabilités précèdent le sprite et le nom.
+
+Les cartes de rencontres de Rouge, Bleu, Jaune, Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille
+masquent les horaires matin, jour et nuit : niveaux et probabilités ne sont affichés qu’une fois.
+Les horaires restent disponibles dans Or, Argent, Cristal, Diamant, Perle et Platine.

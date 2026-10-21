@@ -12,6 +12,30 @@ class RouteEncountersTest {
     )
 
     @Test
+    fun giftsAndEggsHaveTheirOwnListWithoutHidingTheirRequirements() {
+        val methods = listOf(
+            "gift",
+            "gift-egg",
+            "pokemon-ranger",
+            "colosseum-bonus-disc-jpn",
+            "colosseum-bonus-disc-us",
+            "pokemon-channel-pal"
+        )
+        for (method in methods) {
+            val gift = encounter(method, "story-progress-national-dex").copy(
+                conditions = "Pok\u00e9dex National",
+                conditionNames = mapOf("story-progress-national-dex" to "Pok\u00e9dex National")
+            )
+            assertFalse(RouteEncounterFilter().matches(gift))
+            assertFalse(RouteEncounterFilter(roaming = true).matches(gift))
+            assertEquals(listOf(gift), RouteEncounterFilter(gifts = true).apply(listOf(gift)))
+        }
+        assertFalse(RouteEncounterFilter(gifts = true).matches(encounter()))
+        assertFalse(RouteEncounterFilter(gifts = true).matches(encounter("npc-trade")))
+        assertFalse(RouteEncounterFilter(gifts = true).matches(encounter("roaming-grass")))
+    }
+
+    @Test
     fun defaultShowsOrdinaryEncountersWithoutInsertedCartridge() {
         val filter = RouteEncounterFilter()
         assertTrue(filter.matches(encounter()))

@@ -30,7 +30,9 @@ Les listes des routes affichent par défaut les rencontres ordinaires, sans cart
 Des filtres séparent les Pokémon errants et activent les conditions disponibles (cartouche GBA,
 Pokédex National, Pokéradar, essaim). Les périodes disponibles se combinent avec des boutons à icônes ;
 Tout les réactive et les lieux sans variation horaire masquent ces boutons.
-Seuls les Pokémon des horaires sélectionnés restent visibles ; les dons et échanges suivent les rencontres sauvages.
+Seuls les Pokémon des horaires sélectionnés restent visibles ; les Pokémon offerts ont leur filtre dédié, comme les
+errants.
+Les échanges suivent les rencontres sauvages.
 À Sinnoh, les objets ramassés par lots indiquent leur quantité sur la carte et dans les listes des lieux.
 Dans Rouge, Bleu et Jaune, le rival de la Route 22 partage un seul repère pour ses deux combats.
 Dans Jaune, seuls les combats à équipe variable affichent les choix de victoires et défaites précédentes.
@@ -40,10 +42,10 @@ Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ram
 
 Les horaires et les types d’arbres sont réunis par Pokémon, avec leurs icônes et probabilités.
 Les trois horaires gardent leurs couleurs et seuls les horaires absents sont grisés.
-À pied, le sprite et le nom précèdent les colonnes horaires, qui occupent toute la largeur ;
+À pied, les colonnes horaires précèdent le sprite et le nom dans une carte par Pokémon ;
 chaque niveau et sa probabilité se lisent sur une même ligne.
 Les arbres partagent un titre ; chaque icône affiche son taux, avec des flèches pour les arbres à taux élevé.
-Les sections forêt, marche et eau se suivent sur toute la largeur, sans espace.
+Les sections forêt, marche et eau utilisent des cartes espacées laissant voir le décor.
 Les rencontres aquatiques regroupent chaque Pokémon par lieu, avec quatre icônes dans l’ordre
 Surf, Canne, Super Canne et Méga Canne. Chaque méthode affiche ses probabilités et niveaux ;
 les méthodes indisponibles sont grisées, sans libellé visible.
@@ -53,6 +55,10 @@ Les fonds fixes reprennent uniquement les tuiles d’Émeraude pour tous les jeu
 grotte, glace, sable ou sol intérieur. Une rive de lac assortie entoure l’eau et les cartes aquatiques
 ont un fond dépoli ; leurs textes restent nets. Toutes les rencontres hors eau, y compris celles
 du matin, du jour et de la nuit, précèdent l’unique bloc aquatique.
+
+Les cartes de rencontres de Rouge, Bleu, Jaune, Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille
+masquent les horaires matin, jour et nuit : niveaux et probabilités ne sont affichés qu’une fois.
+Les horaires restent disponibles dans Or, Argent, Cristal, Diamant, Perle et Platine.
 
 Captures, formes de Zarbi et progression sont mémorisées localement. Les Réglages proposent
 la portée des captures, les animations, la sauvegarde JSON et la connexion RetroAchievements.

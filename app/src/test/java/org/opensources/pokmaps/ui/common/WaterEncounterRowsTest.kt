@@ -51,6 +51,8 @@ class WaterEncounterRowsTest {
     @Test
     fun landTimesShareOnePokemonAndKeepTheirChances() {
         val morning = encounter("walk", 20.0).copy(
+            versionId = 4,
+            versionName = "Or",
             times = setOf(
                 org.opensources.pokmaps.domain.model.EncounterTime.MORNING
             )

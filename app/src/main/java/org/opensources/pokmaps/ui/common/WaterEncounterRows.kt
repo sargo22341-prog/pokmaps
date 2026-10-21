@@ -54,7 +54,7 @@ private fun WaterSpeciesCards(
 ) {
     species.forEach { pokemon ->
         val first = pokemon.encounters.first()
-        EncounterWaterCard(first.habitat, Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+        EncounterSpeciesCard(first.habitat, Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
             Column(
                 Modifier.fillMaxWidth()
                     .then(if (onClick == null) Modifier else Modifier.clickable { onClick(first) })
