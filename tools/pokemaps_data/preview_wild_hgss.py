@@ -18,6 +18,7 @@ from .preview_pokemon_hgss import _replace_preview
 from .sources import HGSS_PRET_COMMIT, POKEAPI_COMMIT, fetch_pokeapi_csv
 from .validate_hgss_maps import _file_digest
 from .validate_johto_hgss import check_johto_preview
+from .validate_special_hgss import validate_obtainings, validate_special_wild
 
 _MANIFEST = Path(__file__).resolve().parents[2] / "docs/generations/rencontres-hgss-sources.json"
 
@@ -153,6 +154,9 @@ def check_encounters_preview(folder: Path, maps: Path | None = None) -> None:
         raise ValueError("HGSS : provenance des rencontres incorrecte")
     for table in catalog["distributions"] + catalog["headbutt"]:
         _validate_distribution(table)
+    if catalog.get("scope") == "4A-4D":
+        validate_special_wild(catalog["special_wild"])
+        validate_obtainings(catalog["obtainings"])
     validate_comparison(read_json(folder / "comparison.json"))
 
 
@@ -171,6 +175,9 @@ def _validate_distribution(table: dict) -> None:
 
 def _recipe() -> dict[str, str]:
     names = (
+        "special_wild_hgss.py",
+        "obtainings_hgss.py",
+        "validate_special_hgss.py",
         "encounters_hgss.py",
         "pret_hgss_wild.py",
         "compare_wild_hgss.py",

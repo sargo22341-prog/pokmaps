@@ -119,7 +119,9 @@ Leur [aperçu Pokémon indépendant](docs/generations/pokemon-hgss.md) se génè
 493 espèces, régional Johto, attaques, CT/CS, formes et évolutions, sans activation Android.
 L’[aperçu des rencontres HGSS](docs/generations/rencontres-hgss.md) se génère après les cartes avec
 `python tools/build_data.py --hgss-encounters-only` : marche, eau, pêche, horaires, radio, essaims,
-arbres et Éclate-Roc, avec distributions conditionnelles et écarts PokéAPI classés.
+arbres et Éclate-Roc, concours selon le jour et le National, Safari selon les blocs et la maturation,
+avec distributions conditionnelles et écarts PokéAPI classés. Les obtentions particulières conservent
+leur provenance et leurs exclusions par événement, transfert ou accessoire, sans prédiction de disponibilité.
 Les filtres de rencontres distinguent Coup d’Boule et Éclate-Roc ; les remakes restent préparatoires.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec

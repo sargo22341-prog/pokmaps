@@ -506,9 +506,9 @@ projection Nitro, deux constantes natives mal nommées, titre du plan Kanto et u
   ajouter l’aperçu de rencontres et le rapport comparatif PokéAPI. Sortie : distributions cohérentes et écarts classés.
 - [x] **4B — Remplacements et méthodes.** Radio, essaims, arbres et rochers ; taxonomie et filtres associés.
   Sortie : tests des conditions combinées et incompatibles, traductions françaises.
-- [ ] **4C — Concours et Safari.** Modéliser jours, National, blocs et délais avec limites de calcul.
+- [x] **4C — Concours et Safari.** Modéliser jours, National, blocs et délais avec limites de calcul.
   Sortie : configurations vérifiables et présentation de taux conditionnels sans prédiction.
-- [ ] **4D — Obtentions particulières.** Fixes, errants, dons, œufs, échanges, Pokéwalker et événements.
+- [x] **4D — Obtentions particulières.** Fixes, errants, dons, œufs, échanges, Pokéwalker et événements.
   Sortie : provenance et exclusions des objectifs ordinaires validées.
 - [ ] **4E — Placement.** Adapter l’éditeur aux terrains HGSS et relire les points des deux régions.
   Sortie : `map_spots.csv` validé, aucun point hors terrain ou lieu dépourvu de couverture sans explication.

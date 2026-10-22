@@ -1,6 +1,6 @@
 # Rencontres préparatoires HeartGold et SoulSilver
 
-Lots 4A et 4B du [plan](../../plan4g%20remake.md), sans activation des remakes dans l’application.
+Lots 4A à 4D du [plan](../../plan4g%20remake.md), sans activation des remakes dans l’application.
 Le moteur et les tables proviennent du commit HGSS fixé dans `sources.HGSS_PRET_COMMIT` ;
 les CSV de comparaison proviennent de `sources.POKEAPI_COMMIT`.
 L’[inventaire des sources](rencontres-hgss-sources.json) fixe leurs empreintes ;
@@ -95,6 +95,59 @@ elles sont classées `table_absente_moteur`, avec les lignes PokéAPI conservée
 
 Les tables d’arbres PokéAPI ne distinguent pas les catégories natives : leur exclusion de la comparaison
 numérique est explicite, et les trois distributions du moteur restent séparées.
-Le Safari est recensé hors comparaison ; ses blocs et délais relèvent de 4C, comme les variantes de concours.
-Fixes, errants, dons, échanges et événements sont classés hors de ce lot (4D).
+Le Safari et le concours restent hors comparaison PokéAPI ordinaire ; leurs tables natives sont validées séparément.
+Fixes, errants, dons, échanges et événements ont leur inventaire de provenance distinct des distributions.
 La comparaison du Parc Naturel sélectionne explicitement « hors concours ».
+
+## Concours et Safari — 4C
+
+`special_wild` conserve les six configurations du concours : mardi, jeudi et samedi, avant et après le National.
+Les jours sont ISO (lundi = 0), convertis explicitement depuis le calendrier DS (dimanche = 0).
+Avant le National, les trois jours emploient la même table ; après, chacun sélectionne sa propre table.
+Les seuils cumulés de `mushi_encount.csv` deviennent des poids : 20, 20, 10, 10, 10, 10, 5, 5, 5, 5.
+Le taux reste conditionnel à une rencontre pendant le concours, sans prédiction du classement ni de la capture.
+
+Les douze habitats Safari gardent cinq méthodes, trois horaires, les dix emplacements ordinaires et les candidats
+supplémentaires dans l'ordre natif. `SafariConfiguration` valide quatre nombres de blocs et les objets décoratifs,
+avec trente objets au total. Les blocs et la maturation requièrent le National et le déblocage déclaré des objets.
+L'âge enregistré de l'habitat est compris entre 0 et 255 jours ; il ne désigne pas l'âge de chaque objet.
+Les multiplicateurs suivent `getObjectLevelBoost` dans `src/unk_02097268.c` :
+
+| Type | Seuils en jours enregistrés pour les multiplicateurs 2 à 7 |
+|---|---|
+| Plaine | 10, 50, 100, 150, 200, 250 |
+| Forêt | 20, 60, 110, 160, 210, 250 |
+| Pic | 30, 70, 120, 170, 220, 250 |
+| Eau | 40, 80, 130, 180, 230, 250 |
+
+`safari_slots` vérifie simultanément les deux exigences lorsqu'elles existent. Les dix premiers candidats
+admissibles remplacent les premiers emplacements, dans l'ordre de la table ; les suivants n'ajoutent aucun taux.
+Chaque emplacement vaut 10 %, sans talent, répulsif ni effet de niveau du meneur. Sans configuration, le catalogue
+présente les exigences, sans probabilité globale d'espèce. Il ne calcule aucune date réelle de déblocage.
+Une évaluation inspecte au plus trente candidats, deux exigences chacun et dix emplacements : aucune énumération
+des arrangements ni des combinaisons de jours/blocs. Six habitats peuvent être actifs parmi les douze ;
+les configurations cartographiques initiales restent dans l'aperçu des cartes.
+
+## Obtentions particulières — 4D
+
+`obtainings` inventorie 62 occurrences de commandes dans les scripts, avec fichier, ligne, label, arguments
+et branches natives conservées. Ce compte inclut des réapparitions et des occurrences techniques ; ce n'est pas
+un nombre de cadeaux uniques. Les candidats d'espèce des arguments variables restent des alternatives,
+jamais une affirmation que tous ces Pokémon sont accessibles ensemble ou dans les deux versions.
+Les quatre errants, les fixes, les dons, les œufs de Primo et de Togepi, les starters, les fossiles et les
+récompenses du Casino restent séparés des tables aléatoires. Les treize membres de l'archive native des échanges
+gardent espèce reçue, contrepartie et les deux prêts (Caratroc et Piafabec).
+
+L'éligibilité `ordinary_objective` porte sur la provenance, sous conditions, pas sur l'espèce entière.
+Pichu Troizépi, les dons des Ruines Sinjoh et les Lati du Mystécristal sont exclus par événement externe ;
+Rayquaza est exclu par son besoin de Pokémon issus de deux cartouches HGSS. Les parcours Pokéwalker ont la
+catégorie accessoire, distincte des distributions et des transferts, et aucun en-tête cartographique artificiel.
+Les 27 identifiants de parcours sont inventoriés ; leur catalogue détaillé de récompenses relève du lot 7C.
+Les distributions n'impliquent aucune disponibilité actuelle et ne créent pas de capture locale de Celebi ou d'Arceus.
+Une autre provenance locale de la même espèce reste éligible, notamment le Lati errant de la cartouche.
+Le calcul des objectifs compatibles avec les choix de starters et de fossiles reste celui du lot 7B.
+
+Le [catalogue particulier versionné](rencontres-hgss-particulieres.json) permet de vérifier ces données sans cache.
+Son empreinte figure dans la preuve de génération ; les tests pipeline reconstruisent aussi le catalogue complet
+depuis les sources épinglées. L'affichage Android et la traduction des branches de scénario appartiennent aux
+lots d'intégration des personnages et d'activation ; les remakes ne sont pas encore sélectionnables.

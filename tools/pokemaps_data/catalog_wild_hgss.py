@@ -6,11 +6,13 @@ from pathlib import Path
 
 from .catalog_maps_hgss import read_catalog
 from .encounters_hgss import METHOD_NAMES, Distribution
+from .obtainings_hgss import obtaining_catalog
 from .pokeapi import PokeApi
 from .pret_gen4_source import read_json, read_text
 from .pret_hgss_maps import HgssMapRepo
 from .pret_hgss_wild import TREE_SOURCE, WILD_SOURCE
 from .sources import HGSS_PRET_COMMIT
+from .special_wild_hgss import read_special_wild
 
 
 def tree_catalog(root: Path) -> dict:
@@ -51,10 +53,12 @@ def encounter_catalog(
     maps = read_catalog(repo)
     raw = read_json(root / WILD_SOURCE)["encounters"]
     names = api.names("pokemon_species_names", "pokemon_species_id")
+    special = read_special_wild(root)
+    obtainings = obtaining_catalog(root)
     return {
         "commit": HGSS_PRET_COMMIT,
         "versions": ["heartgold", "soulsilver"],
-        "scope": "4A-4B",
+        "scope": "4A-4D",
         "radio_rate_effects": {
             "source": "src/field/encounter_check.c:FieldSystem_EncounterRateRoll",
             "march": {"first_roll_delta": 25, "label_fr": "Marche Pokémon"},
@@ -76,7 +80,7 @@ def encounter_catalog(
             "sinnoh": "Son de Sinnoh — jeudi, Pokédex National",
             "swarm": "Essaim actif dans ce lieu — Pokédex National",
         },
-        "species_fr": {str(i): names[i] for i in sorted({s.species for t in (*tables, *trees) for s in t.slots})},
+        "species_fr": _catalog_species(names, tables + trees, special, obtainings),
         "banks": [
             {
                 "bank": i,
@@ -93,13 +97,25 @@ def encounter_catalog(
         "distributions": [asdict(t) for t in tables],
         "headbutt": [asdict(t) for t in trees],
         "headbutt_context": tree_catalog(root),
+        "special_wild": special,
+        "obtainings": obtainings,
         "probability_fr": "Probabilité conditionnelle à une rencontre, sans talent, objet, répulsif ni errant. "
         "rate est le paramètre brut du moteur, pas une probabilité par pas. "
         "Pour les arbres, rate reste nul au sens JSON (non applicable), sans taux inventé.",
-        "excluded": [
-            "Concours de capture d’insectes (4C)",
-            "Parc Safari et blocs (4C)",
-            "Obtentions particulières (4D)",
-            "Placement projeté et curation (4E)",
-        ],
+        "excluded": ["Placement projeté et curation (4E)"],
     }
+
+
+def _catalog_species(names: dict[int, str], tables: tuple[Distribution, ...], special: dict, obtainings: dict) -> dict:
+    numbers = {s.species for table in tables for s in table.slots}
+    numbers.update(n for row in obtainings["scripts"] for n in row["species"])
+    numbers.update(row["given"] for row in obtainings["trades"])
+    numbers.update(row["requested"] for row in obtainings["trades"] if row["requested"])
+    for area in special["safari"]:
+        for method in ("land", "surf", "oldrod", "goodrod", "superrod"):
+            table = area[method]
+            for period in ("morn", "day", "nite"):
+                mons = table["mons"][period] + [row[period] for row in table["bonus_mons"]]
+                numbers.update(special["species_ids"][m["species"]] for m in mons)
+    numbers.update(s["species"] for row in special["contest"] for s in row["slots"])
+    return {str(i): names[i] for i in sorted(numbers)}
