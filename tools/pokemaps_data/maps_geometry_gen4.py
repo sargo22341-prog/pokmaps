@@ -42,12 +42,14 @@ class ShapeDraw:
     transform: Transform
     stack: tuple[tuple[int, Transform], ...]
     position_scale: int
+    projected: bool = False
 
 
 def shape_draws(model: NitroModel, billboard: tuple[int, ...] | None = None) -> Iterator[ShapeDraw]:
     current = Transform()
     stack: dict[int, Transform] = {}
     material, scale, visible = 0, FX_ONE, True
+    projected = False
     for command in model.render:
         opcode, flags, args = command.opcode, command.flags, command.arguments
         if opcode == 1:
@@ -62,6 +64,13 @@ def shape_draws(model: NitroModel, billboard: tuple[int, ...] | None = None) -> 
             current = _restore(stack, args[0], model.name)
         elif opcode == 4:
             material = args[0]
+            projected = False
+        elif opcode == 13:
+            if args != (material, 0) or material >= len(model.materials):
+                raise ValueError(f"{model.name} : projection de texture SBC invalide : {args}")
+            if not model.materials[material].effect_matrix:
+                raise ValueError(f"{model.name} : projection de texture sans matrice d’effet")
+            projected = True
         elif opcode == 2:
             visible = bool(args[1])
         elif opcode == 11:
@@ -69,7 +78,7 @@ def shape_draws(model: NitroModel, billboard: tuple[int, ...] | None = None) -> 
         elif opcode == 5 and visible:
             if material >= len(model.materials) or args[0] >= len(model.shapes):
                 raise ValueError(f"{model.name} : matériau ou forme hors limites")
-            yield ShapeDraw(material, args[0], current, tuple(sorted(stack.items())), scale)
+            yield ShapeDraw(material, args[0], current, tuple(sorted(stack.items())), scale, projected)
         elif opcode not in (0, 2, 4, 5):
             raise ValueError(f"{model.name} : commande de rendu SBC non gérée : {opcode:#x}, drapeaux {flags}")
 

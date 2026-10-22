@@ -457,9 +457,9 @@ Aucun échec de contrôle restant. Prochaine action : phase 3, catalogue complet
 
 - [x] **3A — Johto.** Étendre l’aperçu de cartes à ses extérieurs, intérieurs et donjons,
   nommer et assembler les plans. Sortie : catalogue Johto sans référence cassée et planches relues.
-- [ ] **3B — Kanto.** Traiter ses cartes remaniées, accès, plans et transitions interrégionales.
+- [x] **3B — Kanto.** Traiter ses cartes remaniées, accès, plans et transitions interrégionales.
   Sortie : catalogue Kanto complet dans les deux versions.
-- [ ] **3C — Lieux spéciaux et étages.** Finaliser installations, niveaux superposés,
+- [x] **3C — Lieux spéciaux et étages.** Finaliser installations, niveaux superposés,
   décors dynamiques et liaisons scriptées. Sortie : couverture visuelle de tout le catalogue et inventaire.
 
 **Bilan 3A — 22 octobre 2026.** Le [catalogue Johto](docs/generations/cartes-hgss.md) couvre
@@ -484,8 +484,21 @@ Limites 600/60 lignes et diff relus. Aucun contrôle en échec restant.
 Les contrôles Android et ADB ne sont pas lancés : aucun code Android ni asset distribué n'a changé.
 Incidents corrigés : permissions Windows des dossiers temporaires, encodage des libellés,
 cadres trop grands, double échelle des modèles articulés, casse des étages et masque des miniatures.
-Les jeux restent préparatoires ; Kanto relève de 3B et les finitions de niveaux, décors dynamiques,
-installations et liaisons scriptées de 3C.
+Les jeux restent préparatoires ; les compléments de 3B et 3C sont décrits ci-dessous.
+
+**Bilan 3B et 3C — 22 octobre 2026.** L'[atlas intégral](docs/generations/cartes-hgss-atlas.md)
+couvre les deux versions : 192 cartes de Kanto et 58 lieux spéciaux ou gabarits complètent Johto,
+soit 496 entrées, 224 plans, 196 coupes et une surface non visuelle explicitement inventoriée.
+Les 1 314 portes, 164 voisinages de blocs et 181 instructions de déplacement conservent leurs références ;
+train, Aquaria, destinations mémorisées et portes déplacées par le scénario restent distincts.
+Les douze décors ajoutés par les mécanismes d'arènes sont placés dans leur état initial.
+Le Safari conserve ses douze habitats, deux gabarits supplémentaires, six emplacements et dix configurations
+initiales, sans imposer un arrangement universel. Les 60 planches relues et les empreintes des images sont
+conservées dans la [preuve](docs/generations/cartes-hgss-atlas-preuve.json).
+Les contrôles des assets et les dix tests de recette HGSS passent ; Ruff et les tests Python ordinaires
+couvrent aussi les nouvelles règles. Aucun build Android n'est nécessaire pour cet aperçu isolé.
+Incidents corrigés : droits des dossiers temporaires Windows, encodage, références de textures,
+projection Nitro, deux constantes natives mal nommées, titre du plan Kanto et une surface BDHC sans géométrie visible.
 
 ### Phase 4 — Rencontres, en lots maîtrisés
 

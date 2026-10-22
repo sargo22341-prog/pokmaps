@@ -1,0 +1,13 @@
+header,model,x,y,z,rotation_y,source,reason
+135,111,248,32,328,0,src/field/gymmick/violet.c,Ascenseur en bas : liftState = 0 dans InitVioletGym ; GymmickInit_Violet place le modèle 111 à 32 unités.
+180,118,56,0,496,0,src/field/gymmick/azalea.c,InitAzaleaGym : spiders = {0;1;2;7} ; sSpinarakInitialPositions et GymmickInit_Azalea.
+180,118,152,0,496,0,src/field/gymmick/azalea.c,InitAzaleaGym : spiders = {0;1;2;7} ; sSpinarakInitialPositions et GymmickInit_Azalea.
+180,118,248,0,496,0,src/field/gymmick/azalea.c,InitAzaleaGym : spiders = {0;1;2;7} ; sSpinarakInitialPositions et GymmickInit_Azalea.
+180,118,152,0,256,0,src/field/gymmick/azalea.c,InitAzaleaGym : spiders = {0;1;2;7} ; sSpinarakInitialPositions et GymmickInit_Azalea.
+141,120,216,48,1208,0,src/field/gymmick/blackthorn.c,InitBlackthornGym fixe x/z/rot ; GymmickInit_Blackthorn place les plateformes à 48 unités.
+141,121,152,48,936,49152,src/field/gymmick/blackthorn.c,InitBlackthornGym fixe x/z/rot ; GymmickInit_Blackthorn place les plateformes à 48 unités.
+141,120,232,48,520,0,src/field/gymmick/blackthorn.c,InitBlackthornGym fixe x/z/rot ; GymmickInit_Blackthorn place les plateformes à 48 unités.
+80,128,280,0,632,0,src/field/gymmick/ecruteak.c,GymmickInit_Ecruteak attache les quatre bougies aux médiums ; InitEcruteakGym les conserve allumées.
+80,128,312,0,488,0,src/field/gymmick/ecruteak.c,GymmickInit_Ecruteak attache les quatre bougies aux médiums ; InitEcruteakGym les conserve allumées.
+80,128,152,0,472,0,src/field/gymmick/ecruteak.c,GymmickInit_Ecruteak attache les quatre bougies aux médiums ; InitEcruteakGym les conserve allumées.
+80,128,184,0,312,0,src/field/gymmick/ecruteak.c,GymmickInit_Ecruteak attache les quatre bougies aux médiums ; InitEcruteakGym les conserve allumées.

@@ -3,6 +3,8 @@
 Le prototype de phase 1 lit et rend cinq lieux depuis `pret/pokeheartgold` au commit
 `6988158691eb6178cff697cda0428045ddcba5fb`, sans ROM et sans compiler le jeu.
 Il reste séparé des cartes distribuées et ne rend pas HGSS disponible dans Android.
+L'[atlas actuel des phases 3B et 3C](cartes-hgss-atlas.md) complète ces lots ; les chiffres ci-dessous
+retracent la preuve initiale et la phase 3A.
 
 ## Reproduire
 
@@ -171,8 +173,8 @@ n'a été utilisé. Ces durées ne constituent pas une comparaison de performanc
 Les cinq lieux des deux versions ont les mêmes données natives et les mêmes pixels au commit retenu.
 Cette égalité locale n'autorise pas à fusionner toutes les variantes HGSS.
 
-La preuve et Johto permettent de poursuivre les cartes HGSS. Les jeux restent dans `PREPARATORY_GAMES` :
-ni le pipeline générique, ni la base, ni Android ne sont activés. Kanto (3B), les installations,
-les niveaux superposés, décors dynamiques et liaisons scriptées (3C) gardent leurs jalons propres.
+La preuve et Johto sont maintenant complétés par l'[atlas des phases 3B et 3C](cartes-hgss-atlas.md) :
+Kanto, installations, coupes de terrain, décors initiaux et déplacements scriptés.
+Les jeux restent dans `PREPARATORY_GAMES` : ni le pipeline générique, ni la base, ni Android ne sont activés.
 La résolution métier des scripts, des acteurs conditionnels et des accompagnateurs reste dans les phases
 prévues du plan. Les limites de licence de la [qualification](sources-hgss.md) restent applicables avant distribution.

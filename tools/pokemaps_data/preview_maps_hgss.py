@@ -1,4 +1,4 @@
-"""Aperçu Johto HGSS et lot témoin, remplacés seulement après validation des deux cartouches."""
+"""Atlas HGSS et lot témoin, remplacés seulement après validation des deux cartouches."""
 
 import hashlib
 import json
@@ -52,6 +52,7 @@ def build_hgss_maps(cache: Path, output: Path, workers: int = 4) -> None:
         from .preview_johto_hgss import build_johto
 
         build_johto(root, staging, cache / "map-renders/hgss-johto", workers)
+        build_johto(root, staging, cache / "map-renders/hgss-atlas", workers, "atlas")
         _write_inventory(staging)
         if target.exists():
             target.rename(Path(temporary) / "previous")
@@ -62,7 +63,7 @@ def build_hgss_maps(cache: Path, output: Path, workers: int = 4) -> None:
             if previous.exists():
                 previous.rename(target)
             raise
-    print(f"Cartes HGSS validées : {target} ({time.perf_counter() - started:.2f} s, preuve et catalogue Johto)")
+    print(f"Cartes HGSS validées : {target} ({time.perf_counter() - started:.2f} s, preuve, Johto et atlas)")
 
 
 def _version(root: Path, output: Path, version: str) -> dict:

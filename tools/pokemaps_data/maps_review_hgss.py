@@ -1,4 +1,4 @@
-"""Planches indexées des lieux et assemblages Johto, avec repères des passages natifs."""
+"""Planches indexées des lieux, coupes et assemblages HGSS, avec repères des passages natifs."""
 
 import hashlib
 import json
@@ -20,24 +20,11 @@ def write_johto_review(maps: Path, output: Path) -> tuple[Path, ...]:
     catalog = json.loads((maps / "catalog.json").read_text(encoding="utf-8"))
     validate_johto_output(maps, catalog)
     output.mkdir(parents=True, exist_ok=True)
-    offsets = {part["header"]: part["offset"] for plan in catalog["plans"] for part in plan["parts"]}
-    cards = []
-    for record in catalog["maps"]:
-        warps = [
-            (p["index"], tuple(p["source_pixel"][k] - offsets[record["header"]][k] for k in (0, 1)))
-            for p in catalog["passages"]
-            if p["source"] == record["header"]
-        ]
-        cards.append(
-            {"kind": "lieu", "label": f"{record['header']} — {record['name_fr']}", "record": record, "warps": warps}
-        )
-    for plan in catalog["plans"]:
-        label = plan["name_fr"]
-        cards.append({"kind": "plan", "label": f"{label} — assemblage ({len(plan['parts'])} lieux)", "record": plan})
+    cards = _cards(catalog)
     pages = []
     index = []
     for start in range(0, len(cards), _PAGE_SIZE):
-        path = output / f"johto-{len(pages) + 1:02d}.png"
+        path = output / f"{catalog.get('scope', 'johto')}-{len(pages) + 1:02d}.png"
         _sheet(maps, cards[start : start + _PAGE_SIZE], path)
         pages.append(path)
         for card in cards[start : start + _PAGE_SIZE]:
@@ -47,11 +34,12 @@ def write_johto_review(maps: Path, output: Path) -> tuple[Path, ...]:
                     "label": card["label"],
                     "kind": card["kind"],
                     "id": card["record"].get("header", card["record"].get("id")),
+                    "image": card["record"].get("image"),
+                    "ceiling_fx32": card["record"].get("ceiling_fx32"),
                 }
             )
-    world = next((plan for plan in catalog["plans"] if plan["layout"] == "native"), None)
-    if world is not None:
-        detail = output / "johto-exterieurs-detail.png"
+    for world in (plan for plan in catalog["plans"] if plan["layout"] == "native"):
+        detail = output / f"{world['id']}-detail.png"
         _world_sheet(maps, world, detail)
         pages.append(detail)
         index.append({"sheet": detail.name, "label": world["name_fr"], "kind": "plan-detail", "id": world["id"]})
@@ -65,6 +53,26 @@ def write_johto_review(maps: Path, output: Path) -> tuple[Path, ...]:
     return tuple(pages)
 
 
+def _cards(catalog: dict) -> list[dict]:
+    offsets = {part["header"]: part["offset"] for plan in catalog["plans"] for part in plan["parts"]}
+    cards = []
+    for record in catalog["maps"]:
+        warps = [
+            (p["index"], tuple(p["source_pixel"][k] - offsets[record["header"]][k] for k in (0, 1)))
+            for p in catalog["passages"]
+            if p["source"] == record["header"]
+        ]
+        cards.append(
+            {"kind": "lieu", "label": f"{record['header']} — {record['name_fr']}", "record": record, "warps": warps}
+        )
+        for layer in record.get("layers", []):
+            cards.append({"kind": "coupe", "label": layer["name_fr"], "record": layer, "warps": []})
+    for plan in catalog["plans"]:
+        label = plan["name_fr"]
+        cards.append({"kind": "plan", "label": f"{label} — assemblage ({len(plan['parts'])} lieux)", "record": plan})
+    return cards
+
+
 def _sheet(maps: Path, cards: list[dict], path: Path) -> None:
     sheet = Image.new("RGB", (_COLUMNS * _CARD_WIDTH, 4 * _CARD_HEIGHT), "#e6e6e6")
     draw = ImageDraw.Draw(sheet)
@@ -72,7 +80,7 @@ def _sheet(maps: Path, cards: list[dict], path: Path) -> None:
     for index, card in enumerate(cards):
         x, y = index % _COLUMNS * _CARD_WIDTH, index // _COLUMNS * _CARD_HEIGHT
         record = card["record"]
-        if card["kind"] == "lieu":
+        if card["kind"] in ("lieu", "coupe"):
             with Image.open(maps / record["image"]) as source:
                 image = source.convert("RGBA")
                 markers = ImageDraw.Draw(image)

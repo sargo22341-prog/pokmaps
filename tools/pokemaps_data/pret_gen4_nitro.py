@@ -76,6 +76,7 @@ class NitroMaterial:
     texture_translation: tuple[int, int]
     texture: str | None
     palette: str | None
+    effect_matrix: tuple[int, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -226,8 +227,8 @@ def _material(reader: ByteReader, offset: int, name: str, texture: str | None, p
             position += 4
         if not flags & _MATERIAL_TRANSLATION_ZERO:
             translation = reader.unpack("2i", position)
-    if flags & _MATERIAL_EFFECT_MATRIX:
-        raise ValueError(f"{reader.where} : matériau {name} à matrice d'effet non prise en charge")
+            position += 8
+    effect = reader.unpack("16i", position) if flags & _MATERIAL_EFFECT_MATRIX else ()
     return NitroMaterial(
         name,
         diffuse,
@@ -241,6 +242,7 @@ def _material(reader: ByteReader, offset: int, name: str, texture: str | None, p
         translation,
         texture,
         palette,
+        effect,
     )
 
 

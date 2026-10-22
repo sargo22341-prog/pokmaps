@@ -1,4 +1,4 @@
-"""Inventaire éditorial Johto et références natives, séparés des prochaines phases HGSS."""
+"""Inventaire éditorial HGSS, sélection des périmètres et références natives de navigation."""
 
 import csv
 import re
@@ -37,7 +37,7 @@ def read_catalog(repo: HgssMapRepo, path: Path = _CATALOG) -> tuple[HgssMapEntry
     for entry in entries:
         if entry.const != repo.headers[entry.header].constant or entry.scope not in _SCOPES:
             raise ValueError(f"{path} : identité ou périmètre invalide : {entry.const}")
-        if entry.scope != "johto":
+        if entry.scope == "excluded":
             if not entry.reason or entry.plan or entry.name_fr or entry.floor:
                 raise ValueError(f"{entry.const} : exclusion HGSS non justifiée ou plan hors périmètre")
             continue
@@ -47,18 +47,24 @@ def read_catalog(repo: HgssMapRepo, path: Path = _CATALOG) -> tuple[HgssMapEntry
             or not re.fullmatch(r"[a-z0-9_-]+", entry.plan)
         ):
             raise ValueError(f"{entry.const} : nom français, étage ou plan absent")
-    plans = {entry.plan: entry.floor for entry in entries if entry.scope == "johto"}
-    if any(plans[entry.plan] != entry.floor for entry in entries if entry.scope == "johto"):
+    plans = {entry.plan: entry.floor for entry in entries if entry.scope != "excluded"}
+    if any(plans[entry.plan] != entry.floor for entry in entries if entry.scope != "excluded"):
         raise ValueError(f"{path} : un plan HGSS mélange plusieurs étages")
     return entries
 
 
-def passage_catalog(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...]) -> list[dict]:
+def selected_entries(entries: tuple[HgssMapEntry, ...], scope: str) -> tuple[HgssMapEntry, ...]:
+    if scope not in (_SCOPES - {"excluded"}) | {"atlas"}:
+        raise ValueError(f"Périmètre du catalogue HGSS inconnu : {scope}")
+    return tuple(e for e in entries if e.scope == scope or (scope == "atlas" and e.scope != "excluded"))
+
+
+def passage_catalog(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...], scope: str = "johto") -> list[dict]:
     lookup = {entry.header: entry for entry in entries}
     result = []
-    for entry in entries:
-        if entry.scope != "johto":
-            continue
+    selected = selected_entries(entries, scope)
+    retained = {entry.header for entry in selected}
+    for entry in selected:
         for index, warp in enumerate(repo.events(repo.headers[entry.header]).warps):
             record = {"source": entry.header, "index": index, **asdict(warp)}
             if warp.destination == 4095:
@@ -71,7 +77,7 @@ def passage_catalog(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...]) -> lis
                 if warp.anchor >= len(targets):
                     raise ValueError(f"{entry.const} : ancre {warp.anchor} absente dans {destination.const}")
                 record.update(
-                    kind="fixed" if destination.scope == "johto" else "boundary",
+                    kind="fixed" if destination.header in retained else "boundary",
                     target_scope=destination.scope,
                     target_name=destination.name_fr or destination.const,
                     target=asdict(targets[warp.anchor]),
@@ -80,10 +86,8 @@ def passage_catalog(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...]) -> lis
     return result
 
 
-def validate_catalog_geometry(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...]) -> None:
-    for entry in entries:
-        if entry.scope != "johto":
-            continue
+def validate_catalog_geometry(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...], scope: str = "johto") -> None:
+    for entry in selected_entries(entries, scope):
         header = repo.headers[entry.header]
         blocks = repo.blocks(header)
         if len(blocks) > 256:
@@ -122,15 +126,16 @@ def passage_surface(repo: HgssMapRepo, header: int, index: int) -> dict:
     }
 
 
-def matrix_neighbors(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...]) -> list[dict]:
+def matrix_neighbors(repo: HgssMapRepo, entries: tuple[HgssMapEntry, ...], scope: str = "johto") -> list[dict]:
     lookup = {entry.header: entry for entry in entries}
+    selected = {entry.header for entry in selected_entries(entries, scope)}
     matrix = repo.matrix(next(repo.headers[e.header] for e in entries if e.plan == "johto-exterieurs"))
     if matrix.headers is None:
         raise ValueError("Johto : matrice extérieure sans en-têtes")
     result = []
     for z, row in enumerate(matrix.headers):
         for x, source in enumerate(row):
-            if source not in lookup or lookup[source].scope != "johto" or matrix.blocks[z][x] == 0xFFFF:
+            if source not in selected or matrix.blocks[z][x] == 0xFFFF:
                 continue
             for dx, dz in ((-1, 0), (1, 0), (0, -1), (0, 1)):
                 nx, nz = x + dx, z + dz

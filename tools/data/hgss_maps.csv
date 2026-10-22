@@ -1,37 +1,37 @@
 header,const,scope,name_fr,plan,floor,reason
 0,MAP_EVERYWHERE,excluded,,,,En-tête global EVERYWHERE : blocs de remplissage de la matrice extérieure ; aucune destination autonome de Johto.
 1,MAP_NOTHING,excluded,,,,"En-tête NOTHING : mapType MAP_TYPE_INVALID dans la source, sans lieu utilisable."
-2,MAP_UNION,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+2,MAP_UNION,special,Salle Union,union-base,base,
 3,MAP_UNDERGROUND,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_UNDERGROUND ; aucune carte autonome à rendre.
-4,MAP_WIFI_SINGLE_BATTLE_AREA,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-5,MAP_WIFI_MULTI_BATTLE_AREA,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+4,MAP_WIFI_SINGLE_BATTLE_AREA,special,Salle de combat Wi-Fi solo,wifi_single_battle_area-base,base,
+5,MAP_WIFI_MULTI_BATTLE_AREA,special,Salle de combat Wi-Fi multi,wifi_multi_battle_area-base,base,
 6,MAP_BELLCHIME_TOWER,johto,Carillon,bellchime_tower-base,base,
 7,MAP_BURNED_TOWER_1F,johto,Tour Cendrée — RDC,burned_tower-1f,1f,
 8,MAP_RUINS_OF_ALPH_UNUSED,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_RUINS_OF_ALPH_UNUSED ; aucune carte autonome à rendre.
-9,MAP_ROUTE_1,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-10,MAP_ROUTE_2,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-11,MAP_ROUTE_3,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-12,MAP_ROUTE_4,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-13,MAP_ROUTE_5,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-14,MAP_ROUTE_6,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-15,MAP_ROUTE_7,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-16,MAP_ROUTE_8,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-17,MAP_ROUTE_9,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-18,MAP_ROUTE_10,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-19,MAP_ROUTE_11,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-20,MAP_ROUTE_12,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-21,MAP_ROUTE_13,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-22,MAP_ROUTE_14,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-23,MAP_ROUTE_15,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-24,MAP_ROUTE_16,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-25,MAP_ROUTE_17,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-26,MAP_ROUTE_18,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-27,MAP_ROUTE_22,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-28,MAP_ROUTE_24,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-29,MAP_ROUTE_25,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-30,MAP_ROUTE_26,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-31,MAP_ROUTE_27,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-32,MAP_ROUTE_28,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+9,MAP_ROUTE_1,kanto,Route 1,kanto-exterieurs,base,
+10,MAP_ROUTE_2,kanto,Route 2,kanto-exterieurs,base,
+11,MAP_ROUTE_3,kanto,Route 3,kanto-exterieurs,base,
+12,MAP_ROUTE_4,kanto,Route 4,kanto-exterieurs,base,
+13,MAP_ROUTE_5,kanto,Route 5,kanto-exterieurs,base,
+14,MAP_ROUTE_6,kanto,Route 6,kanto-exterieurs,base,
+15,MAP_ROUTE_7,kanto,Route 7,kanto-exterieurs,base,
+16,MAP_ROUTE_8,kanto,Route 8,kanto-exterieurs,base,
+17,MAP_ROUTE_9,kanto,Route 9,kanto-exterieurs,base,
+18,MAP_ROUTE_10,kanto,Route 10,kanto-exterieurs,base,
+19,MAP_ROUTE_11,kanto,Route 11,kanto-exterieurs,base,
+20,MAP_ROUTE_12,kanto,Route 12,kanto-exterieurs,base,
+21,MAP_ROUTE_13,kanto,Route 13,kanto-exterieurs,base,
+22,MAP_ROUTE_14,kanto,Route 14,kanto-exterieurs,base,
+23,MAP_ROUTE_15,kanto,Route 15,kanto-exterieurs,base,
+24,MAP_ROUTE_16,kanto,Route 16,kanto-exterieurs,base,
+25,MAP_ROUTE_17,kanto,Route 17,kanto-exterieurs,base,
+26,MAP_ROUTE_18,kanto,Route 18,kanto-exterieurs,base,
+27,MAP_ROUTE_22,kanto,Route 22,kanto-exterieurs,base,
+28,MAP_ROUTE_24,kanto,Route 24,kanto-exterieurs,base,
+29,MAP_ROUTE_25,kanto,Route 25,kanto-exterieurs,base,
+30,MAP_ROUTE_26,kanto,Route 26,kanto-exterieurs,base,
+31,MAP_ROUTE_27,kanto,Route 27,kanto-exterieurs,base,
+32,MAP_ROUTE_28,kanto,Route 28,kanto-exterieurs,base,
 33,MAP_ROUTE_29,johto,Route 29,johto-exterieurs,base,
 34,MAP_ROUTE_30,johto,Route 30,johto-exterieurs,base,
 35,MAP_ROUTE_31,johto,Route 31,johto-exterieurs,base,
@@ -48,17 +48,17 @@ header,const,scope,name_fr,plan,floor,reason
 46,MAP_ROUTE_44,johto,Route 44,johto-exterieurs,base,
 47,MAP_ROUTE_45,johto,Route 45,johto-exterieurs,base,
 48,MAP_ROUTE_46,johto,Route 46,johto-exterieurs,base,
-49,MAP_PALLET,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-50,MAP_VIRIDIAN,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-51,MAP_PEWTER,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-52,MAP_CERULEAN,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-53,MAP_LAVENDER,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-54,MAP_VERMILION,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-55,MAP_CELADON,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-56,MAP_FUCHSIA,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-57,MAP_CINNABAR_ISLAND,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-58,MAP_INDIGO_PLATEAU,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-59,MAP_SAFFRON,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+49,MAP_PALLET,kanto,Bourg Palette,kanto-exterieurs,base,
+50,MAP_VIRIDIAN,kanto,Jadielle,kanto-exterieurs,base,
+51,MAP_PEWTER,kanto,Argenta,kanto-exterieurs,base,
+52,MAP_CERULEAN,kanto,Azuria,kanto-exterieurs,base,
+53,MAP_LAVENDER,kanto,Lavanville,kanto-exterieurs,base,
+54,MAP_VERMILION,kanto,Carmin sur Mer,kanto-exterieurs,base,
+55,MAP_CELADON,kanto,Céladopole,kanto-exterieurs,base,
+56,MAP_FUCHSIA,kanto,Parmanie,kanto-exterieurs,base,
+57,MAP_CINNABAR_ISLAND,kanto,Cramois’Île,kanto-exterieurs,base,
+58,MAP_INDIGO_PLATEAU,kanto,Plateau Indigo,kanto-exterieurs,base,
+59,MAP_SAFFRON,kanto,Safrania,kanto-exterieurs,base,
 60,MAP_NEW_BARK,johto,Bourg Geon,johto-exterieurs,base,
 61,MAP_NEW_BARK_ELMS_LAB_1F,johto,Bourg Geon — laboratoire du Prof. Orme — RDC,new_bark-1f,1f,
 62,MAP_NEW_BARK_ELMS_LAB_2F,johto,Bourg Geon — laboratoire du Prof. Orme — 1er étage,new_bark-2f,2f,
@@ -90,9 +90,9 @@ header,const,scope,name_fr,plan,floor,reason
 88,MAP_LAKE_OF_RAGE,johto,Lac Colère,johto-exterieurs,base,
 89,MAP_BLACKTHORN,johto,Ébènelle,johto-exterieurs,base,
 90,MAP_MOUNT_SILVER,johto,Mont Argenté,johto-exterieurs,base,
-91,MAP_ROUTE_19,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-92,MAP_ROUTE_20,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-93,MAP_ROUTE_21,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+91,MAP_ROUTE_19,kanto,Route 19,kanto-exterieurs,base,
+92,MAP_ROUTE_20,kanto,Route 20,kanto-exterieurs,base,
+93,MAP_ROUTE_21,kanto,Route 21,kanto-exterieurs,base,
 94,MAP_ROUTE_40,johto,Route 40,johto-exterieurs,base,
 95,MAP_ROUTE_41,johto,Route 41,johto-exterieurs,base,
 96,MAP_NATIONAL_PARK,johto,Parc Naturel,national_park-base,base,
@@ -105,10 +105,10 @@ header,const,scope,name_fr,plan,floor,reason
 103,MAP_ROUTE_36_RUINS_OF_ALPH_GATEHOUSE,johto,Route 36 — poste de passage vers Ruines d’Alpha,route_36-base,base,
 104,MAP_ROUTE_36_NATIONAL_PARK_GATEHOUSE,johto,Route 36 — poste de passage vers Parc Naturel,route_36-base,base,
 105,MAP_ECRUTEAK_UNUSED_GATEHOUSE,excluded,,,,Copie native marquée UNUSED (matrice 70) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
-106,MAP_DIGLETT_CAVE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-107,MAP_MOUNT_MOON,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-108,MAP_ROCK_TUNNEL_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-109,MAP_PAL_PARK,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+106,MAP_DIGLETT_CAVE,kanto,Cave Taupiqueur,diglett_cave-base,base,
+107,MAP_MOUNT_MOON,kanto,Mont Sélénite,mount_moon-base,base,
+108,MAP_ROCK_TUNNEL_1F,kanto,Grotte Sombre — RDC,rock_tunnel-1f,1f,
+109,MAP_PAL_PARK,kanto,Parc des Amis,pal_park-base,base,
 110,MAP_SPROUT_TOWER_1F,johto,Tour Chétiflor — RDC,sprout_tower-1f,1f,
 111,MAP_BELL_TOWER_1F,johto,Tour Carillon — RDC,bell_tower-1f,1f,
 112,MAP_GOLDENROD_RADIO_TOWER_1F,johto,Doublonville — Tour Radio — RDC,goldenrod-1f,1f,
@@ -123,9 +123,9 @@ header,const,scope,name_fr,plan,floor,reason
 121,MAP_WHIRL_ISLANDS_1F,johto,Tourb’Îles — RDC,whirl_islands-1f,1f,
 122,MAP_MOUNT_SILVER_CAVE_1F,johto,Grotte du Mont Argenté — RDC,mount_silver_cave-1f,1f,
 123,MAP_DARK_CAVE_ROUTE_45_SIDE,johto,Antre Noir — côté Route 45,dark_cave-base,base,
-124,MAP_VICTORY_ROAD_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+124,MAP_VICTORY_ROAD_1F,kanto,Route Victoire — RDC,victory_road-1f,1f,
 125,MAP_DRAGONS_DEN_ENTRANCE,johto,Antre du Dragon — entrée,dragons_den-base,base,
-126,MAP_TOHJO_FALLS,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+126,MAP_TOHJO_FALLS,kanto,Chutes Tohjo,tohjo_falls-base,base,
 127,MAP_ROUTE_30_APRICORN_HOUSE,johto,Route 30 — maison des Noigrumes,route_30-base,base,
 128,MAP_ECRUTEAK_POKECENTER_UNUSED_1,excluded,,,,Copie native marquée UNUSED (matrice 74) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
 129,MAP_ECRUTEAK_POKECENTER_UNUSED_2,excluded,,,,Copie native marquée UNUSED (matrice 75) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
@@ -144,10 +144,10 @@ header,const,scope,name_fr,plan,floor,reason
 142,MAP_ROUTE_43_MAHOGANY_GATEHOUSE,johto,Route 43 — poste de passage vers Acajou,route_43-base,base,
 143,MAP_ROUTE_30_MR_POKEMON_HOUSE,johto,Route 30 — maison de M. Pokémon,route_30-base,base,
 144,MAP_CHERRYGROVE_POKECENTER_B1F,johto,Ville Griotte — Centre Pokémon — sous-sol 1,cherrygrove-b1f,b1f,
-145,MAP_CERULEAN_CAVE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-146,MAP_SEAFOAM_ISLANDS_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-147,MAP_VIRIDIAN_FOREST,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-148,MAP_ROUTE_9_UNUSED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+145,MAP_CERULEAN_CAVE_1F,kanto,Caverne Azurée — RDC,cerulean_cave-1f,1f,
+146,MAP_SEAFOAM_ISLANDS_1F,kanto,Îles Écume — RDC,seafoam_islands-1f,1f,
+147,MAP_VIRIDIAN_FOREST,kanto,Forêt de Jade,viridian_forest-base,base,
+148,MAP_ROUTE_9_UNUSED,excluded,,,,"En-tête natif UNUSED, sans lieu jouable autonome."
 149,MAP_VIOLET_ROUTE_36_GATEHOUSE,johto,Mauville — poste de passage vers Route 36,violet-base,base,
 150,MAP_NATIONAL_PARK_UNUSED_GATEHOUSE,excluded,,,,Ancien poste nord du Parc Naturel : en-tête marqué UNUSED ; aucun acteur et script D22R0201 terminé par End. Les six portes historiques du Parc restent tracées comme non navigables.
 151,MAP_ROUTE_47,johto,Route 47,johto-exterieurs,base,
@@ -177,8 +177,8 @@ header,const,scope,name_fr,plan,floor,reason
 175,MAP_ECRUTEAK_UNUSED_1,excluded,,,,Copie native marquée UNUSED (matrice 66) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
 176,MAP_DARK_CAVE_ROUTE_31_SIDE,johto,Antre Noir — côté Route 31,dark_cave-base,base,
 177,MAP_SLOWPOKE_WELL_B1F,johto,Puits Ramoloss — sous-sol 1,slowpoke_well-b1f,b1f,
-178,MAP_VICTORY_ROAD_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-179,MAP_VICTORY_ROAD_3F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+178,MAP_VICTORY_ROAD_2F,kanto,Route Victoire — 1er étage,victory_road-2f,2f,
+179,MAP_VICTORY_ROAD_3F,kanto,Route Victoire — 2e étage,victory_road-3f,3f,
 180,MAP_AZALEA_GYM,johto,Écorcia — Arène,azalea-base,base,
 181,MAP_SLOWPOKE_WELL_B2F,johto,Puits Ramoloss — sous-sol 2,slowpoke_well-b2f,b2f,
 182,MAP_GOLDENROD_BIKE_SHOP,johto,Doublonville — Cycles à Gogo,goldenrod-base,base,
@@ -206,7 +206,7 @@ header,const,scope,name_fr,plan,floor,reason
 204,MAP_GOLDENROD_FRIENDSHIP_CHECKER_HOUSE,johto,Doublonville — maison de l’amitié,goldenrod-base,base,
 205,MAP_GOLDENROD_NORTHEAST_HOUSE,johto,Doublonville — maison nord-est,goldenrod-base,base,
 206,MAP_GOLDENROD_NAME_RATER_HOUSE,johto,Doublonville — maison du Spécialiste des Noms,goldenrod-base,base,
-207,MAP_GOLDENROD_GLOBAL_TERMINAL_1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+207,MAP_GOLDENROD_GLOBAL_TERMINAL_1F,special,Doublonville — Terminal Mondial — RDC,goldenrod_global_terminal-1f,1f,
 208,MAP_GOLDENROD_UNUSED_1,excluded,,,,Copie native marquée UNUSED (matrice 119) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
 209,MAP_GOLDENROD_UNUSED_2,excluded,,,,Copie native marquée UNUSED (matrice 120) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
 210,MAP_GOLDENROD_UNUSED_3,excluded,,,,Copie native marquée UNUSED (matrice 121) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
@@ -264,29 +264,29 @@ header,const,scope,name_fr,plan,floor,reason
 262,MAP_FIGHT_AREA_UNUSED_9,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_FIGHT_AREA_UNUSED_9 ; aucune carte autonome à rendre.
 263,MAP_BATTLE_PARK_UNUSED_1,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_PARK_UNUSED_1 ; aucune carte autonome à rendre.
 264,MAP_BATTLE_PARK_UNUSED_2,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_PARK_UNUSED_2 ; aucune carte autonome à rendre.
-265,MAP_BATTLE_TOWER,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-266,MAP_BATTLE_TOWER_ELEVATOR,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+265,MAP_BATTLE_TOWER,special,Tour de Combat,battle_tower-base,base,
+266,MAP_BATTLE_TOWER_ELEVATOR,special,Tour de Combat — ascenseur,battle_tower-base,base,
 267,MAP_BATTLE_TOWER_UNUSED_1,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_TOWER_UNUSED_1 ; aucune carte autonome à rendre.
 268,MAP_BATTLE_TOWER_UNUSED_2,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_TOWER_UNUSED_2 ; aucune carte autonome à rendre.
 269,MAP_BATTLE_TOWER_UNUSED_3,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_TOWER_UNUSED_3 ; aucune carte autonome à rendre.
 270,MAP_BATTLE_TOWER_UNUSED_4,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_BATTLE_TOWER_UNUSED_4 ; aucune carte autonome à rendre.
-271,MAP_BATTLE_TOWER_PARTNER_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-272,MAP_BATTLE_FRONTIER,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-273,MAP_BATTLE_FRONTIER_FRONTIER_ACCESS_GATEHOUSE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+271,MAP_BATTLE_TOWER_PARTNER_ROOM,special,Tour de Combat — salle des partenaires,battle_tower-base,base,
+272,MAP_BATTLE_FRONTIER,special,Zone de Combat,battle_frontier-base,base,
+273,MAP_BATTLE_FRONTIER_FRONTIER_ACCESS_GATEHOUSE,special,Zone de Combat — poste d’accès,battle_frontier-base,base,
 274,MAP_BATTLE_FRONTIER_BATTLE_TOWER_UNUSED,excluded,,,,Copie native marquée UNUSED (matrice 232) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
-275,MAP_BATTLE_FRONTIER_BATTLE_FACTORY,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-276,MAP_BATTLE_FRONTIER_BATTLE_HALL,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-277,MAP_BATTLE_FRONTIER_BATTLE_CASTLE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-278,MAP_BATTLE_FRONTIER_BATTLE_ARCADE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+275,MAP_BATTLE_FRONTIER_BATTLE_FACTORY,special,Zone de Combat — Usine de Combat,battle_frontier-base,base,
+276,MAP_BATTLE_FRONTIER_BATTLE_HALL,special,Zone de Combat — Scène de Combat,battle_frontier-base,base,
+277,MAP_BATTLE_FRONTIER_BATTLE_CASTLE,special,Zone de Combat — Castel de Combat,battle_frontier-base,base,
+278,MAP_BATTLE_FRONTIER_BATTLE_ARCADE,special,Zone de Combat — Arcade de Combat,battle_frontier-base,base,
 279,MAP_CLIFF_EDGE_GATE,johto,Portail Falaise,cliff_edge_gate-base,base,
-280,MAP_POKEATHLON_DOME,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-281,MAP_POKEATHLON_DOME_INTERIOR_1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-282,MAP_POKEATHLON_DOME_INTERIOR_2F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-283,MAP_POKEATHLON_DOME_INTERIOR_2F_ENTRANCE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-284,MAP_POKEATHLON_DOME_INTERIOR_B1F_SOLIDARITY_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-285,MAP_POKEATHLON_DOME_INTERIOR_B1F_TRUST_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-286,MAP_POKEATHLON_DOME_INTERIOR_B1F_POTENTIAL_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-287,MAP_POKEATHLON_DOME_INTERIOR_B1F_FRIENDSHIP_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+280,MAP_POKEATHLON_DOME,special,Dôme Pokéathlon,pokeathlon_dome-base,base,
+281,MAP_POKEATHLON_DOME_INTERIOR_1F,special,Dôme Pokéathlon — intérieur — RDC,pokeathlon_dome-1f,1f,
+282,MAP_POKEATHLON_DOME_INTERIOR_2F,special,Dôme Pokéathlon — intérieur — 1er étage,pokeathlon_dome-2f,2f,
+283,MAP_POKEATHLON_DOME_INTERIOR_2F_ENTRANCE,special,Dôme Pokéathlon — intérieur — entrée — 1er étage,pokeathlon_dome-2f,2f,
+284,MAP_POKEATHLON_DOME_INTERIOR_B1F_SOLIDARITY_ROOM,special,Dôme Pokéathlon — intérieur — salle de Solidarité — sous-sol 1,pokeathlon_dome-b1f,b1f,
+285,MAP_POKEATHLON_DOME_INTERIOR_B1F_TRUST_ROOM,special,Dôme Pokéathlon — intérieur — salle de Confiance — sous-sol 1,pokeathlon_dome-b1f,b1f,
+286,MAP_POKEATHLON_DOME_INTERIOR_B1F_POTENTIAL_ROOM,special,Dôme Pokéathlon — intérieur — salle du Potentiel — sous-sol 1,pokeathlon_dome-b1f,b1f,
+287,MAP_POKEATHLON_DOME_INTERIOR_B1F_FRIENDSHIP_ROOM,special,Dôme Pokéathlon — intérieur — salle de l’Amitié — sous-sol 1,pokeathlon_dome-b1f,b1f,
 288,MAP_DRAGONS_DEN_SHRINE,johto,Antre du Dragon — sanctuaire,dragons_den-base,base,
 289,MAP_BLACKTHORN_WEST_HOUSE,johto,Ébènelle — maison ouest,blackthorn-base,base,
 290,MAP_BLACKTHORN_EAST_HOUSE,johto,Ébènelle — maison est,blackthorn-base,base,
@@ -295,22 +295,22 @@ header,const,scope,name_fr,plan,floor,reason
 293,MAP_BLACKTHORN_POKECENTER_1F,johto,Ébènelle — Centre Pokémon — RDC,blackthorn-1f,1f,
 294,MAP_LAKE_OF_RAGE_HIDDEN_POWER_HOUSE,johto,Lac Colère — maison de Puissance Cachée,lake_of_rage-base,base,
 295,MAP_LAKE_OF_RAGE_FISHING_GURU_HOUSE,johto,Lac Colère — maison du Maître Pêcheur,lake_of_rage-base,base,
-296,MAP_ROUTE_26_NORTH_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-297,MAP_ROUTE_26_WEEK_SIBLINGS_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-298,MAP_TOHJO_FALLS_HIDDEN_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-299,MAP_ROUTE_22_POKEMON_LEAGUE_RECEPTION_GATE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-300,MAP_POKEMON_LEAGUE_ENTRANCE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-301,MAP_POKEMON_LEAGUE_WILL_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-302,MAP_POKEMON_LEAGUE_KOGA_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-303,MAP_POKEMON_LEAGUE_BRUNO_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-304,MAP_POKEMON_LEAGUE_KAREN_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-305,MAP_POKEMON_LEAGUE_LANCE_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-306,MAP_POKEMON_LEAGUE_HALL_OF_FAME,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-307,MAP_SS_AQUA_1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-308,MAP_SS_AQUA_CAPTAIN_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-309,MAP_SS_AQUA_1F_SOUTHEAST_ROOMS,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-310,MAP_SS_AQUA_1F_SOUTHWEST_ROOMS,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-311,MAP_SS_AQUA_1F_NORTHEAST_ROOMS,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+296,MAP_ROUTE_26_NORTH_HOUSE,kanto,Route 26 — maison nord,route_26-base,base,
+297,MAP_ROUTE_26_WEEK_SIBLINGS_HOUSE,kanto,Route 26 — maison des sept frères et sœurs,route_26-base,base,
+298,MAP_TOHJO_FALLS_HIDDEN_ROOM,kanto,Chutes Tohjo — salle cachée,tohjo_falls-base,base,
+299,MAP_ROUTE_22_POKEMON_LEAGUE_RECEPTION_GATE,kanto,"Accueil de la Ligue Pokémon — Routes 22, 26 et 28",route_22-base,base,
+300,MAP_POKEMON_LEAGUE_ENTRANCE,kanto,Ligue Pokémon — entrée,pokemon_league-base,base,
+301,MAP_POKEMON_LEAGUE_WILL_ROOM,kanto,Ligue Pokémon — salle de Clément,pokemon_league-base,base,
+302,MAP_POKEMON_LEAGUE_KOGA_ROOM,kanto,Ligue Pokémon — salle de Koga,pokemon_league-base,base,
+303,MAP_POKEMON_LEAGUE_BRUNO_ROOM,kanto,Ligue Pokémon — salle d’Aldo,pokemon_league-base,base,
+304,MAP_POKEMON_LEAGUE_KAREN_ROOM,kanto,Ligue Pokémon — salle de Marion,pokemon_league-base,base,
+305,MAP_POKEMON_LEAGUE_LANCE_ROOM,kanto,Ligue Pokémon — salle de Peter,pokemon_league-base,base,
+306,MAP_POKEMON_LEAGUE_HALL_OF_FAME,kanto,Ligue Pokémon — Panthéon,pokemon_league-base,base,
+307,MAP_SS_AQUA_1F,special,Aquaria — RDC,ss_aqua-1f,1f,
+308,MAP_SS_AQUA_CAPTAIN_ROOM,special,Aquaria — cabine du capitaine — RDC,ss_aqua-1f,1f,
+309,MAP_SS_AQUA_1F_SOUTHEAST_ROOMS,special,Aquaria — cabines sud-est — RDC,ss_aqua-1f,1f,
+310,MAP_SS_AQUA_1F_SOUTHWEST_ROOMS,special,Aquaria — cabines sud-ouest — RDC,ss_aqua-1f,1f,
+311,MAP_SS_AQUA_1F_NORTHEAST_ROOMS,special,Aquaria — cabines nord-est — RDC,ss_aqua-1f,1f,
 312,MAP_RUINS_OF_ALPH_NORTHEAST_ENTRANCE_FIRST_ROOM,johto,Ruines d’Alpha — première salle nord-est,ruins_of_alph-base,base,
 313,MAP_RUINS_OF_ALPH_NORTHEAST_HIDDEN_ROOM,johto,Ruines d’Alpha — salle secrète nord-est,ruins_of_alph-base,base,
 314,MAP_RUINS_OF_ALPH_SOUTHEAST_ENTRANCE_FIRST_ROOM,johto,Ruines d’Alpha — première salle sud-est,ruins_of_alph-base,base,
@@ -321,14 +321,14 @@ header,const,scope,name_fr,plan,floor,reason
 319,MAP_RUINS_OF_ALPH_NORTHWEST_HIDDEN_ROOM,johto,Ruines d’Alpha — salle secrète nord-ouest,ruins_of_alph-base,base,
 320,MAP_RUINS_OF_ALPH_SOUTHEAST_HIDDEN_ROOM,johto,Ruines d’Alpha — salle secrète sud-est,ruins_of_alph-base,base,
 321,MAP_RUINS_OF_ALPH_RESEARCH_CENTER,johto,Ruines d’Alpha — Centre de Recherches,ruins_of_alph-base,base,
-322,MAP_ROUTE_27_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+322,MAP_ROUTE_27_HOUSE,kanto,Route 27 — maison,route_27-base,base,
 323,MAP_RUINS_OF_ALPH_HALL_ENTRANCE,johto,Ruines d’Alpha — entrée de la salle souterraine,ruins_of_alph-base,base,
 324,MAP_RUINS_OF_ALPH_NORTHEAST_ENTRANCE_SECOND_ROOM,johto,Ruines d’Alpha — deuxième salle nord-est,ruins_of_alph-base,base,
 325,MAP_RUINS_OF_ALPH_SOUTHEAST_ENTRANCE_SECOND_ROOM,johto,Ruines d’Alpha — deuxième salle sud-est,ruins_of_alph-base,base,
 326,MAP_RUINS_OF_ALPH_NORTHWEST_ENTRANCE_SECOND_ROOM,johto,Ruines d’Alpha — deuxième salle nord-ouest,ruins_of_alph-base,base,
 327,MAP_RUINS_OF_ALPH_SOUTHWEST_ENTRANCE_SECOND_ROOM,johto,Ruines d’Alpha — deuxième salle sud-ouest,ruins_of_alph-base,base,
-328,MAP_SS_AQUA_1F_NORTHWEST_ROOMS,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-329,MAP_SS_AQUA_B1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+328,MAP_SS_AQUA_1F_NORTHWEST_ROOMS,special,Aquaria — cabines nord-ouest — RDC,ss_aqua-1f,1f,
+329,MAP_SS_AQUA_B1F,special,Aquaria — sous-sol 1,ss_aqua-b1f,b1f,
 330,MAP_SS_AQUA_OLIVINE_PORT_EXTERIOR,johto,Oliville — port de l’Aquaria — extérieur,ss_aqua_olivine_port-base,base,
 331,MAP_ROUTE_34_DAYCARE,johto,Route 34 — Pension,route_34-base,base,
 332,MAP_BELL_TOWER_2F,johto,Tour Carillon — 1er étage,bell_tower-2f,2f,
@@ -342,122 +342,122 @@ header,const,scope,name_fr,plan,floor,reason
 340,MAP_BELL_TOWER_ROOF,johto,Tour Carillon — toit,bell_tower-base,base,
 341,MAP_BELL_TOWER_10F,johto,Tour Carillon — 9e étage,bell_tower-10f,10f,
 342,MAP_CLIFF_CAVE,johto,Grotte Falaise,cliff_cave-base,base,
-343,MAP_SAFARI_ZONE_01,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-344,MAP_SAFARI_ZONE_02,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-345,MAP_SAFARI_ZONE_03,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-346,MAP_SAFARI_ZONE_04,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-347,MAP_SAFARI_ZONE_05,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-348,MAP_SAFARI_ZONE_06,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-349,MAP_SAFARI_ZONE_07,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-350,MAP_SAFARI_ZONE_08,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-351,MAP_SAFARI_ZONE_09,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-352,MAP_SAFARI_ZONE_10,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-353,MAP_SAFARI_ZONE_11,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-354,MAP_SAFARI_ZONE_12,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-355,MAP_SAFARI_ZONE_13,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-356,MAP_SAFARI_ZONE_14,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-357,MAP_SAFARI_ZONE_ENTRANCE_EXTERIOR,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-358,MAP_VERMILION_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-359,MAP_VERMILION_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-360,MAP_VERMILION_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-361,MAP_VERMILION_FISHING_DUDE_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-362,MAP_VERMILION_POKEMON_FAN_CLUB,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-363,MAP_VERMILION_CENTRAL_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-364,MAP_VERMILION_SOUTH_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-365,MAP_VERMILION_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+343,MAP_SAFARI_ZONE_01,special,Parc Safari — gabarit Plaine,safari_zone_01-base,base,Gabarit du bloc 652 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+344,MAP_SAFARI_ZONE_02,special,Parc Safari — gabarit Prairie,safari_zone_02-base,base,Gabarit du bloc 653 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+345,MAP_SAFARI_ZONE_03,special,Parc Safari — gabarit Savane,safari_zone_03-base,base,Gabarit du bloc 654 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+346,MAP_SAFARI_ZONE_04,special,Parc Safari — gabarit Pic,safari_zone_04-base,base,Gabarit du bloc 655 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+347,MAP_SAFARI_ZONE_05,special,Parc Safari — gabarit Plage rocheuse,safari_zone_05-base,base,Gabarit du bloc 656 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+348,MAP_SAFARI_ZONE_06,special,Parc Safari — gabarit Zone humide,safari_zone_06-base,base,Gabarit du bloc 657 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+349,MAP_SAFARI_ZONE_07,special,Parc Safari — gabarit Forêt,safari_zone_07-base,base,Gabarit du bloc 658 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+350,MAP_SAFARI_ZONE_08,special,Parc Safari — gabarit Marécage,safari_zone_08-base,base,Gabarit du bloc 659 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+351,MAP_SAFARI_ZONE_09,special,Parc Safari — gabarit Marais,safari_zone_09-base,base,Gabarit du bloc 660 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+352,MAP_SAFARI_ZONE_10,special,Parc Safari — gabarit Terre aride,safari_zone_10-base,base,Gabarit du bloc 661 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+353,MAP_SAFARI_ZONE_11,special,Parc Safari — gabarit Montagne,safari_zone_11-base,base,Gabarit du bloc 662 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+354,MAP_SAFARI_ZONE_12,special,Parc Safari — gabarit Désert,safari_zone_12-base,base,Gabarit du bloc 663 : PlaceSafariZoneAreas place six habitats dans la matrice 212 du lieu 357 ; ce gabarit n’est pas une destination autonome.
+355,MAP_SAFARI_ZONE_13,special,Parc Safari — gabarit de décor 13,safari_zone_13-base,base,Gabarit natif supplémentaire ; hors des douze habitats sélectionnables (NUM_SAFARI_ZONE_AREAS = 12). Aucune porte ni rencontre autonome.
+356,MAP_SAFARI_ZONE_14,special,Parc Safari — gabarit de décor 14,safari_zone_14-base,base,Gabarit natif supplémentaire ; hors des douze habitats sélectionnables (NUM_SAFARI_ZONE_AREAS = 12). Aucune porte ni rencontre autonome.
+357,MAP_SAFARI_ZONE_ENTRANCE_EXTERIOR,special,Parc Safari — entrée — extérieur,safari_zone_entrance_exterior-base,base,
+358,MAP_VERMILION_POKECENTER_1F,kanto,Carmin sur Mer — Centre Pokémon — RDC,vermilion-1f,1f,
+359,MAP_VERMILION_POKECENTER_B1F,kanto,Carmin sur Mer — Centre Pokémon — sous-sol 1,vermilion-b1f,b1f,
+360,MAP_VERMILION_POKEMART,kanto,Carmin sur Mer — Boutique Pokémon,vermilion-base,base,
+361,MAP_VERMILION_FISHING_DUDE_HOUSE,kanto,Carmin sur Mer — maison du pêcheur,vermilion-base,base,
+362,MAP_VERMILION_POKEMON_FAN_CLUB,kanto,Carmin sur Mer — Fan Club Pokémon,vermilion-base,base,
+363,MAP_VERMILION_CENTRAL_HOUSE,kanto,Carmin sur Mer — maison centrale,vermilion-base,base,
+364,MAP_VERMILION_SOUTH_HOUSE,kanto,Carmin sur Mer — maison sud,vermilion-base,base,
+365,MAP_VERMILION_GYM,kanto,Carmin sur Mer — Arène,vermilion-base,base,
 366,MAP_ROUTE_40_BATTLE_FRONTIER_GATEHOUSE,johto,Route 40 — poste de passage vers Zone de Combat,route_40-base,base,
 367,MAP_OLIVINE_POKECENTER_B1F,johto,Oliville — Centre Pokémon — sous-sol 1,olivine-b1f,b1f,
 368,MAP_MAHOGANY_POKECENTER_B1F,johto,Acajou — Centre Pokémon — sous-sol 1,mahogany-b1f,b1f,
 369,MAP_BLACKTHORN_POKECENTER_B1F,johto,Ébènelle — Centre Pokémon — sous-sol 1,blackthorn-b1f,b1f,
-370,MAP_CELADON_DEPARTMENT_STORE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-371,MAP_CELADON_DEPARTMENT_STORE_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-372,MAP_CELADON_DEPARTMENT_STORE_3F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-373,MAP_CELADON_DEPARTMENT_STORE_4F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-374,MAP_CELADON_DEPARTMENT_STORE_5F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-375,MAP_CELADON_DEPARTMENT_STORE_ROOF,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-376,MAP_CELADON_CONDOMINIUMS_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-377,MAP_CELADON_CONDOMINIUMS_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-378,MAP_CELADON_CONDOMINIUMS_3F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-379,MAP_CELADON_CONDOMINIUMS_ROOF,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-380,MAP_CELADON_CONDOMINIUMS_ROOF_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-381,MAP_CELADON_GAME_CORNER_JP,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-382,MAP_CELADON_PRIZE_CORNER,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-383,MAP_CELADON_RESTAURANT,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+370,MAP_CELADON_DEPARTMENT_STORE_1F,kanto,Céladopole — Centre Commercial — RDC,celadon-1f,1f,
+371,MAP_CELADON_DEPARTMENT_STORE_2F,kanto,Céladopole — Centre Commercial — 1er étage,celadon-2f,2f,
+372,MAP_CELADON_DEPARTMENT_STORE_3F,kanto,Céladopole — Centre Commercial — 2e étage,celadon-3f,3f,
+373,MAP_CELADON_DEPARTMENT_STORE_4F,kanto,Céladopole — Centre Commercial — 3e étage,celadon-4f,4f,
+374,MAP_CELADON_DEPARTMENT_STORE_5F,kanto,Céladopole — Centre Commercial — 4e étage,celadon-5f,5f,
+375,MAP_CELADON_DEPARTMENT_STORE_ROOF,kanto,Céladopole — Centre Commercial — toit,celadon-base,base,
+376,MAP_CELADON_CONDOMINIUMS_1F,kanto,Céladopole — Résidence Céladon — RDC,celadon-1f,1f,
+377,MAP_CELADON_CONDOMINIUMS_2F,kanto,Céladopole — Résidence Céladon — 1er étage,celadon-2f,2f,
+378,MAP_CELADON_CONDOMINIUMS_3F,kanto,Céladopole — Résidence Céladon — 2e étage,celadon-3f,3f,
+379,MAP_CELADON_CONDOMINIUMS_ROOF,kanto,Céladopole — Résidence Céladon — toit,celadon-base,base,
+380,MAP_CELADON_CONDOMINIUMS_ROOF_ROOM,kanto,Céladopole — Résidence Céladon — pièce sur le toit — 3e étage,celadon-4f,4f,
+381,MAP_CELADON_GAME_CORNER_JP,excluded,,,,Casino japonais : hors de l’édition américaine qualifiée.
+382,MAP_CELADON_PRIZE_CORNER,kanto,Céladopole — échange de prix,celadon-base,base,
+383,MAP_CELADON_RESTAURANT,kanto,Céladopole — restaurant,celadon-base,base,
 384,MAP_NEW_BARK_RIVAL_HOUSE_2F,johto,Bourg Geon — maison du voisin — 1er étage,new_bark-2f,2f,
 385,MAP_CIANWOOD_NORTH_HOUSE,johto,Irisia — maison nord,cianwood-base,base,
-386,MAP_SS_AQUA_VERMILION_PORT_INTERIOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-387,MAP_SS_AQUA_VERMILION_PORT_EXTERIOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-388,MAP_ROUTE_10_SOUTH,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-389,MAP_ROUTE_6_SAFFRON_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-390,MAP_ROUTE_8_SAFFRON_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-391,MAP_ROUTE_5_SAFFRON_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-392,MAP_ROUTE_15_FUCHSIA_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-393,MAP_CELADON_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-394,MAP_CELADON_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-395,MAP_CELADON_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+386,MAP_SS_AQUA_VERMILION_PORT_INTERIOR,kanto,Aquaria — port de Carmin sur Mer — intérieur,vermilion-port-base,base,
+387,MAP_SS_AQUA_VERMILION_PORT_EXTERIOR,kanto,Aquaria — port de Carmin sur Mer — extérieur,vermilion-port-base,base,
+388,MAP_ROUTE_10_SOUTH,kanto,Route 10 — sud,kanto-exterieurs,base,
+389,MAP_ROUTE_6_SAFFRON_GATEHOUSE,kanto,Route 6 — poste de Safrania,route_6-base,base,
+390,MAP_ROUTE_8_SAFFRON_GATEHOUSE,kanto,Route 8 — poste de Safrania,route_8-base,base,
+391,MAP_ROUTE_5_SAFFRON_GATEHOUSE,kanto,Route 5 — poste de Safrania,route_5-base,base,
+392,MAP_ROUTE_15_FUCHSIA_GATEHOUSE,kanto,Route 15 — poste de Parmanie,route_15-base,base,
+393,MAP_CELADON_POKECENTER_1F,kanto,Céladopole — Centre Pokémon — RDC,celadon-1f,1f,
+394,MAP_CELADON_POKECENTER_B1F,kanto,Céladopole — Centre Pokémon — sous-sol 1,celadon-b1f,b1f,
+395,MAP_CELADON_GYM,kanto,Céladopole — Arène,celadon-base,base,
 396,MAP_MAHOGANY_GYM_ROOM_2,johto,"Acajou — Arène, deuxième salle",mahogany-base,base,
 397,MAP_MAHOGANY_GYM_ROOM_1,johto,"Acajou — Arène, première salle",mahogany-base,base,
-398,MAP_SAFFRON_FIGHTING_DOJO,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-399,MAP_SAFFRON_MR_PSYCHIC_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-400,MAP_SAFFRON_MAGNET_TRAIN_STATION_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-401,MAP_SAFFRON_MAGNET_TRAIN_STATION_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-402,MAP_SAFFRON_SILPH_CO_HQ,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-403,MAP_SAFFRON_SILPH_CO_ROTOM_ROOM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-404,MAP_SAFFRON_COPYCAT_HOUSE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-405,MAP_SAFFRON_COPYCAT_HOUSE_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-406,MAP_SAFFRON_UNUSED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-407,MAP_SAFFRON_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-408,MAP_SAFFRON_POKECENTER_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-409,MAP_SAFFRON_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-410,MAP_SAFFRON_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-411,MAP_BATTLE_FRONTIER_FRONTIER_ACCESS,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-412,MAP_GOLDENROD_GLOBAL_TERMINAL_2F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-413,MAP_GOLDENROD_GLOBAL_TERMINAL_3F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-414,MAP_ROUTE_2_EAST,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-415,MAP_ROUTE_16_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-416,MAP_ROUTE_20_UNUSED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-417,MAP_ROUTE_2_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-418,MAP_ROUTE_2_SOUTHEAST_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-419,MAP_ROUTE_2_VIRIDIAN_FOREST_SOUTH_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-420,MAP_ROUTE_2_VIRIDIAN_FOREST_NORTH_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-421,MAP_ROUTE_16_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-422,MAP_ROUTE_16_EAST,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-423,MAP_ROUTE_18_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-424,MAP_ROUTE_19_FUCHSIA_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-425,MAP_ROUTE_19_ROUTE_12_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-426,MAP_CERULEAN_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-427,MAP_CERULEAN_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-428,MAP_CERULEAN_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-429,MAP_CERULEAN_NORTH_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-430,MAP_CERULEAN_EAST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-431,MAP_CERULEAN_WEST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-432,MAP_CERULEAN_BIKE_MANIAC_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-433,MAP_LAVENDER_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-434,MAP_LAVENDER_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-435,MAP_LAVENDER_VOLUNTEER_POKEMON_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-436,MAP_LAVENDER_SOUTHWEST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-437,MAP_LAVENDER_NAME_RATER,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-438,MAP_LAVENDER_HOUSE_OF_MEMORIES,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-439,MAP_LAVENDER_RADIO_STATION,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-440,MAP_ROUTE_25_SEA_COTTAGE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+398,MAP_SAFFRON_FIGHTING_DOJO,kanto,Safrania — Dojo,saffron-base,base,
+399,MAP_SAFFRON_MR_PSYCHIC_HOUSE,kanto,Safrania — maison de M. Psy,saffron-base,base,
+400,MAP_SAFFRON_MAGNET_TRAIN_STATION_1F,kanto,Safrania — gare du Train Magnétique — RDC,saffron-1f,1f,
+401,MAP_SAFFRON_MAGNET_TRAIN_STATION_2F,kanto,Safrania — gare du Train Magnétique — 1er étage,saffron-2f,2f,
+402,MAP_SAFFRON_SILPH_CO_HQ,kanto,Safrania — siège de la Sylphe SARL,saffron-base,base,
+403,MAP_SAFFRON_SILPH_CO_ROTOM_ROOM,kanto,Safrania — salle de Motisma de la Sylphe SARL,saffron-base,base,
+404,MAP_SAFFRON_COPYCAT_HOUSE_1F,kanto,Safrania — maison de la Copieuse — RDC,saffron-1f,1f,
+405,MAP_SAFFRON_COPYCAT_HOUSE_2F,kanto,Safrania — maison de la Copieuse — 1er étage,saffron-2f,2f,
+406,MAP_SAFFRON_UNUSED,excluded,,,,"En-tête natif UNUSED, sans lieu jouable autonome."
+407,MAP_SAFFRON_POKECENTER_1F,kanto,Safrania — Centre Pokémon — RDC,saffron-1f,1f,
+408,MAP_SAFFRON_POKECENTER_2F,kanto,Safrania — Centre Pokémon — sous-sol 1,saffron-b1f,b1f,La constante historique porte 2F ; la matrice 77 est celle des sous-sols des Centres Pokémon et sa porte rejoint l’escalier (14;17) du RDC.
+409,MAP_SAFFRON_POKEMART,kanto,Safrania — Boutique Pokémon,saffron-base,base,
+410,MAP_SAFFRON_GYM,kanto,Safrania — Arène,saffron-base,base,
+411,MAP_BATTLE_FRONTIER_FRONTIER_ACCESS,special,Zone de Combat — accès,battle_frontier-base,base,
+412,MAP_GOLDENROD_GLOBAL_TERMINAL_2F,special,Doublonville — Terminal Mondial — 1er étage,goldenrod_global_terminal-2f,2f,
+413,MAP_GOLDENROD_GLOBAL_TERMINAL_3F,special,Doublonville — Terminal Mondial — 2e étage,goldenrod_global_terminal-3f,3f,
+414,MAP_ROUTE_2_EAST,kanto,Route 2 — est,kanto-exterieurs,base,
+415,MAP_ROUTE_16_HOUSE,kanto,Route 16 — maison,route_16-base,base,
+416,MAP_ROUTE_20_UNUSED,excluded,,,,"En-tête natif UNUSED, sans lieu jouable autonome."
+417,MAP_ROUTE_2_HOUSE,kanto,Route 2 — maison,route_2-base,base,
+418,MAP_ROUTE_2_SOUTHEAST_GATEHOUSE,kanto,Route 2 — poste sud-est,route_2-base,base,
+419,MAP_ROUTE_2_VIRIDIAN_FOREST_SOUTH_GATEHOUSE,kanto,Route 2 — poste sud de la Forêt de Jade,route_2-base,base,
+420,MAP_ROUTE_2_VIRIDIAN_FOREST_NORTH_GATEHOUSE,kanto,Route 2 — poste nord de la Forêt de Jade,route_2-base,base,
+421,MAP_ROUTE_16_GATEHOUSE,kanto,Route 16 — poste de passage,route_16-base,base,
+422,MAP_ROUTE_16_EAST,kanto,Route 16 — est,kanto-exterieurs,base,
+423,MAP_ROUTE_18_GATEHOUSE,kanto,Route 18 — poste de passage,route_18-base,base,
+424,MAP_ROUTE_19_FUCHSIA_GATEHOUSE,kanto,Route 19 — poste de Parmanie,route_19-base,base,
+425,MAP_ROUTE_19_ROUTE_12_GATEHOUSE,kanto,Route 11 — poste de la Route 12,route_11-base,base,La constante historique porte ROUTE_19 ; la section native est ROUTE_11 et les deux portes rejoignent exclusivement les Routes 11 et 12.
+426,MAP_CERULEAN_POKEMART,kanto,Azuria — Boutique Pokémon,cerulean-base,base,
+427,MAP_CERULEAN_GYM,kanto,Azuria — Arène,cerulean-base,base,
+428,MAP_CERULEAN_POKECENTER_1F,kanto,Azuria — Centre Pokémon — RDC,cerulean-1f,1f,
+429,MAP_CERULEAN_NORTH_HOUSE,kanto,Azuria — maison nord,cerulean-base,base,
+430,MAP_CERULEAN_EAST_HOUSE,kanto,Azuria — maison est,cerulean-base,base,
+431,MAP_CERULEAN_WEST_HOUSE,kanto,Azuria — maison ouest,cerulean-base,base,
+432,MAP_CERULEAN_BIKE_MANIAC_HOUSE,kanto,Azuria — maison du passionné de vélos,cerulean-base,base,
+433,MAP_LAVENDER_POKEMART,kanto,Lavanville — Boutique Pokémon,lavender-base,base,
+434,MAP_LAVENDER_POKECENTER_1F,kanto,Lavanville — Centre Pokémon — RDC,lavender-1f,1f,
+435,MAP_LAVENDER_VOLUNTEER_POKEMON_HOUSE,kanto,Lavanville — maison Pokémon,lavender-base,base,
+436,MAP_LAVENDER_SOUTHWEST_HOUSE,kanto,Lavanville — maison sud-ouest,lavender-base,base,
+437,MAP_LAVENDER_NAME_RATER,kanto,Lavanville — Spécialiste des Noms,lavender-base,base,
+438,MAP_LAVENDER_HOUSE_OF_MEMORIES,kanto,Lavanville — Maison des Souvenirs,lavender-base,base,
+439,MAP_LAVENDER_RADIO_STATION,kanto,Lavanville — Tour Radio,lavender-base,base,
+440,MAP_ROUTE_25_SEA_COTTAGE,kanto,Route 25 — Villa du Cap,route_25-base,base,
 441,MAP_GOLDENROD_DEPARTMENT_STORE_ELEVATOR,johto,"Doublonville — Centre Commercial, ascenseur",goldenrod-base,base,
-442,MAP_CELADON_DEPARTMENT_STORE_ELEVATOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-443,MAP_CELADON_CONDOMINIUMS_LEFT_ELEVATOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-444,MAP_CELADON_CONDOMINIUMS_RIGHT_ELEVATOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-445,MAP_SAFFRON_SILPH_CO_ELEVATOR,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+442,MAP_CELADON_DEPARTMENT_STORE_ELEVATOR,kanto,Céladopole — Centre Commercial — ascenseur,celadon-base,base,
+443,MAP_CELADON_CONDOMINIUMS_LEFT_ELEVATOR,kanto,Céladopole — Résidence Céladon — ascenseur gauche,celadon-base,base,
+444,MAP_CELADON_CONDOMINIUMS_RIGHT_ELEVATOR,kanto,Céladopole — Résidence Céladon — ascenseur droit,celadon-base,base,
+445,MAP_SAFFRON_SILPH_CO_ELEVATOR,kanto,Safrania — ascenseur de la Sylphe SARL,saffron-base,base,
 446,MAP_OLIVINE_LIGHTHOUSE_ELEVATOR,johto,"Oliville — Phare, ascenseur",olivine-base,base,
 447,MAP_GOLDENROD_RADIO_TOWER_ELEVATOR,johto,"Doublonville — Tour Radio, ascenseur",goldenrod-base,base,
-448,MAP_MOUNT_MOON_SQUARE_ENTRANCE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-449,MAP_MOUNT_MOON_SQUARE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-450,MAP_CERULEAN_CAVE_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-451,MAP_CERULEAN_CAVE_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-452,MAP_ROCK_TUNNEL_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-453,MAP_SEAFOAM_ISLANDS_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-454,MAP_SEAFOAM_ISLANDS_B2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-455,MAP_SEAFOAM_ISLANDS_B3F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-456,MAP_SEAFOAM_ISLANDS_B4F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-457,MAP_SEAFOAM_ISLANDS_CINNABAR_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-458,MAP_SEAFOAM_ISLANDS_UNUSED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+448,MAP_MOUNT_MOON_SQUARE_ENTRANCE,kanto,Mont Sélénite — entrée du square,mount_moon-base,base,
+449,MAP_MOUNT_MOON_SQUARE,kanto,Mont Sélénite — square,mount_moon-base,base,
+450,MAP_CERULEAN_CAVE_2F,kanto,Caverne Azurée — 1er étage,cerulean_cave-2f,2f,
+451,MAP_CERULEAN_CAVE_B1F,kanto,Caverne Azurée — sous-sol 1,cerulean_cave-b1f,b1f,
+452,MAP_ROCK_TUNNEL_B1F,kanto,Grotte Sombre — sous-sol 1,rock_tunnel-b1f,b1f,
+453,MAP_SEAFOAM_ISLANDS_B1F,kanto,Îles Écume — sous-sol 1,seafoam_islands-b1f,b1f,
+454,MAP_SEAFOAM_ISLANDS_B2F,kanto,Îles Écume — sous-sol 2,seafoam_islands-b2f,b2f,
+455,MAP_SEAFOAM_ISLANDS_B3F,kanto,Îles Écume — sous-sol 3,seafoam_islands-b3f,b3f,
+456,MAP_SEAFOAM_ISLANDS_B4F,kanto,Îles Écume — sous-sol 4,seafoam_islands-b4f,b4f,
+457,MAP_SEAFOAM_ISLANDS_CINNABAR_GYM,kanto,Îles Écume — Arène de Cramois’Île,seafoam_islands-base,base,
+458,MAP_SEAFOAM_ISLANDS_UNUSED,excluded,,,,"En-tête natif UNUSED, sans lieu jouable autonome."
 459,MAP_MOUNT_SILVER_CAVE_UPPER_MOUNTAINSIDE,johto,Grotte du Mont Argenté — versant supérieur,mount_silver_cave-base,base,
 460,MAP_MOUNT_SILVER_CAVE_LOWER_MOUNTAINSIDE,johto,Grotte du Mont Argenté — versant inférieur,mount_silver_cave-base,base,
 461,MAP_MOUNT_SILVER_CAVE_EXPERT_BELT_CHAMBER,johto,Grotte du Mont Argenté — salle de la Ceinture Pro,mount_silver_cave-base,base,
@@ -465,77 +465,77 @@ header,const,scope,name_fr,plan,floor,reason
 463,MAP_MOUNT_SILVER_CAVE_2F,johto,Grotte du Mont Argenté — 1er étage,mount_silver_cave-2f,2f,
 464,MAP_MOUNT_SILVER_CAVE_3F,johto,Grotte du Mont Argenté — 2e étage,mount_silver_cave-3f,3f,
 465,MAP_MOUNT_SILVER_CAVE_SUMMIT,johto,Grotte du Mont Argenté — sommet,mount_silver_cave-base,base,
-466,MAP_ROUTE_10_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-467,MAP_ROUTE_10_POWER_PLANT_REPAIRED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-468,MAP_ROUTE_5_UNUSED,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-469,MAP_ROUTE_5_UNDERGROUND_PATH_GATE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-470,MAP_ROUTE_6_UNDERGROUND_PATH_GATE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-471,MAP_PEWTER_MUSEUM_OF_SCIENCE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-472,MAP_PEWTER_NORTHEAST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-473,MAP_PEWTER_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-474,MAP_PEWTER_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-475,MAP_PEWTER_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-476,MAP_PEWTER_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-477,MAP_PEWTER_SOUTHWEST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-478,MAP_FUCHSIA_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-479,MAP_FUCHSIA_PAL_PARK_ENTRANCE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-480,MAP_FUCHSIA_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-481,MAP_FUCHSIA_SOUTHWEST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-482,MAP_FUCHSIA_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-483,MAP_FUCHSIA_SAFARI_ZONE_WARDEN_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-484,MAP_ROUTE_10_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-485,MAP_FUCHSIA_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+466,MAP_ROUTE_10_POKECENTER_1F,kanto,Route 10 — Centre Pokémon — RDC,route_10-1f,1f,
+467,MAP_ROUTE_10_POWER_PLANT_REPAIRED,kanto,Route 10 — Centrale réparée,route_10-base,base,
+468,MAP_ROUTE_5_UNUSED,excluded,,,,"En-tête natif UNUSED, sans lieu jouable autonome."
+469,MAP_ROUTE_5_UNDERGROUND_PATH_GATE,kanto,Route 5 — entrée du Souterrain,route_5-base,base,
+470,MAP_ROUTE_6_UNDERGROUND_PATH_GATE,kanto,Route 6 — entrée du Souterrain,route_6-base,base,
+471,MAP_PEWTER_MUSEUM_OF_SCIENCE,kanto,Argenta — Musée des Sciences,pewter-base,base,
+472,MAP_PEWTER_NORTHEAST_HOUSE,kanto,Argenta — maison nord-est,pewter-base,base,
+473,MAP_PEWTER_GYM,kanto,Argenta — Arène,pewter-base,base,
+474,MAP_PEWTER_POKEMART,kanto,Argenta — Boutique Pokémon,pewter-base,base,
+475,MAP_PEWTER_POKECENTER_1F,kanto,Argenta — Centre Pokémon — RDC,pewter-1f,1f,
+476,MAP_PEWTER_POKECENTER_B1F,kanto,Argenta — Centre Pokémon — sous-sol 1,pewter-b1f,b1f,
+477,MAP_PEWTER_SOUTHWEST_HOUSE,kanto,Argenta — maison sud-ouest,pewter-base,base,
+478,MAP_FUCHSIA_POKEMART,kanto,Parmanie — Boutique Pokémon,fuchsia-base,base,
+479,MAP_FUCHSIA_PAL_PARK_ENTRANCE,kanto,Parmanie — entrée du Parc des Amis,fuchsia-base,base,
+480,MAP_FUCHSIA_GYM,kanto,Parmanie — Arène,fuchsia-base,base,
+481,MAP_FUCHSIA_SOUTHWEST_HOUSE,kanto,Parmanie — maison sud-ouest,fuchsia-base,base,
+482,MAP_FUCHSIA_POKECENTER_1F,kanto,Parmanie — Centre Pokémon — RDC,fuchsia-1f,1f,
+483,MAP_FUCHSIA_SAFARI_ZONE_WARDEN_HOUSE,kanto,Parmanie — maison du gardien du Parc Safari,fuchsia-base,base,
+484,MAP_ROUTE_10_POKECENTER_B1F,kanto,Route 10 — Centre Pokémon — sous-sol 1,route_10-b1f,b1f,
+485,MAP_FUCHSIA_POKECENTER_B1F,kanto,Parmanie — Centre Pokémon — sous-sol 1,fuchsia-b1f,b1f,
 486,MAP_WHIRL_ISLANDS_B3F,johto,Tourb’Îles — sous-sol 3,whirl_islands-b3f,b3f,
 487,MAP_NATIONAL_PARK_BUG_CATCHING_CONTEST,johto,Parc Naturel — Concours de capture d’insectes,national_park-base,base,
 488,MAP_NATIONAL_PARK_UNUSED,excluded,,,,Copie native marquée UNUSED (matrice 27) ; aucune porte depuis les lieux Johto retenus. Conservée dans cet inventaire pour la curation des lieux spéciaux.
-489,MAP_ROUTE_10_POWER_PLANT_BROKEN,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+489,MAP_ROUTE_10_POWER_PLANT_BROKEN,kanto,Route 10 — Centrale en panne,route_10-base,base,
 490,MAP_RUINS_OF_ALPH_UNDERGROUND_HALL_SINJOH_EVENT,johto,Ruines d’Alpha — salle souterraine — arrivée de Sinjoh,ruins_of_alph-base,base,
 491,MAP_RUINS_OF_ALPH_HALL_ENTRANCE_SINJOH_EVENT,johto,Ruines d’Alpha — entrée souterraine — événement de Sinjoh,ruins_of_alph-base,base,
 492,MAP_RUINS_OF_ALPH_UNDERGROUND_HALL_SINJOH_EVENT_2,johto,Ruines d’Alpha — salle souterraine — événement de Sinjoh 2,ruins_of_alph-base,base,
-493,MAP_ROUTE_7_SAFFRON_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-494,MAP_LAVENDER_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-495,MAP_CERULEAN_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-496,MAP_VIRIDIAN_GYM,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-497,MAP_VIRIDIAN_NORTHEAST_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-498,MAP_VIRIDIAN_TRAINER_HOUSE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-499,MAP_VIRIDIAN_TRAINER_HOUSE_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-500,MAP_VIRIDIAN_POKEMART,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-501,MAP_VIRIDIAN_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-502,MAP_VIRIDIAN_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-503,MAP_PALLET_TOWN_REDS_HOUSE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-504,MAP_PALLET_TOWN_BLUES_HOUSE_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-505,MAP_PALLET_TOWN_OAKS_LAB,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-506,MAP_PALLET_TOWN_REDS_HOUSE_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-507,MAP_PALLET_TOWN_BLUES_HOUSE_2F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-508,MAP_CINNABAR_ISLAND_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-509,MAP_CINNABAR_ISLAND_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-510,MAP_ROUTE_28_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-511,MAP_ROUTE_3_POKECENTER_1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-512,MAP_ROUTE_3_POKECENTER_B1F,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-513,MAP_MOUNT_MOON_SQUARE_CLEFAIRY_EVENT,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+493,MAP_ROUTE_7_SAFFRON_GATEHOUSE,kanto,Route 7 — poste de Safrania,route_7-base,base,
+494,MAP_LAVENDER_POKECENTER_B1F,kanto,Lavanville — Centre Pokémon — sous-sol 1,lavender-b1f,b1f,
+495,MAP_CERULEAN_POKECENTER_B1F,kanto,Azuria — Centre Pokémon — sous-sol 1,cerulean-b1f,b1f,
+496,MAP_VIRIDIAN_GYM,kanto,Jadielle — Arène,viridian-base,base,
+497,MAP_VIRIDIAN_NORTHEAST_HOUSE,kanto,Jadielle — maison nord-est,viridian-base,base,
+498,MAP_VIRIDIAN_TRAINER_HOUSE_1F,kanto,Jadielle — Club des Dresseurs — RDC,viridian-1f,1f,
+499,MAP_VIRIDIAN_TRAINER_HOUSE_B1F,kanto,Jadielle — Club des Dresseurs — sous-sol 1,viridian-b1f,b1f,
+500,MAP_VIRIDIAN_POKEMART,kanto,Jadielle — Boutique Pokémon,viridian-base,base,
+501,MAP_VIRIDIAN_POKECENTER_1F,kanto,Jadielle — Centre Pokémon — RDC,viridian-1f,1f,
+502,MAP_VIRIDIAN_POKECENTER_B1F,kanto,Jadielle — Centre Pokémon — sous-sol 1,viridian-b1f,b1f,
+503,MAP_PALLET_TOWN_REDS_HOUSE_1F,kanto,Bourg Palette — maison de Red — RDC,pallet-1f,1f,
+504,MAP_PALLET_TOWN_BLUES_HOUSE_1F,kanto,Bourg Palette — maison de Blue — RDC,pallet-1f,1f,
+505,MAP_PALLET_TOWN_OAKS_LAB,kanto,Bourg Palette — laboratoire du Prof. Chen,pallet-base,base,
+506,MAP_PALLET_TOWN_REDS_HOUSE_2F,kanto,Bourg Palette — maison de Red — 1er étage,pallet-2f,2f,
+507,MAP_PALLET_TOWN_BLUES_HOUSE_2F,kanto,Bourg Palette — maison de Blue — 1er étage,pallet-2f,2f,
+508,MAP_CINNABAR_ISLAND_POKECENTER_1F,kanto,Cramois’Île — Centre Pokémon — RDC,cinnabar_island-1f,1f,
+509,MAP_CINNABAR_ISLAND_POKECENTER_B1F,kanto,Cramois’Île — Centre Pokémon — sous-sol 1,cinnabar_island-b1f,b1f,
+510,MAP_ROUTE_28_HOUSE,kanto,Route 28 — maison,route_28-base,base,
+511,MAP_ROUTE_3_POKECENTER_1F,kanto,Route 3 — Centre Pokémon — RDC,route_3-1f,1f,
+512,MAP_ROUTE_3_POKECENTER_B1F,kanto,Route 3 — Centre Pokémon — sous-sol 1,route_3-b1f,b1f,
+513,MAP_MOUNT_MOON_SQUARE_CLEFAIRY_EVENT,kanto,Mont Sélénite — square — danse des Mélofée,mount_moon-base,base,
 514,MAP_MOUNT_SILVER_POKECENTER_1F,johto,Mont Argenté — Centre Pokémon — RDC,mount_silver-1f,1f,
 515,MAP_MOUNT_SILVER_POKECENTER_B1F,johto,Mont Argenté — Centre Pokémon — sous-sol 1,mount_silver-b1f,b1f,
-516,MAP_WIFI_PLAZA_WARP_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-517,MAP_ROUTE_5_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-518,MAP_MOUNT_MOON_SQUARE_SHOP,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+516,MAP_WIFI_PLAZA_WARP_ROOM,special,Salle d’accès au Square Wi-Fi,wifi_plaza_warp_room-base,base,
+517,MAP_ROUTE_5_HOUSE,kanto,Route 5 — maison,route_5-base,base,
+518,MAP_MOUNT_MOON_SQUARE_SHOP,kanto,Mont Sélénite — boutique du square,mount_moon-base,base,
 519,MAP_GOLDENROD_MAGNET_TRAIN_STATION_2F_EMPTY,johto,"Doublonville — gare du Train Magnétique, quai vide — 1er étage",goldenrod-2f,2f,
-520,MAP_SAFFRON_MAGNET_TRAIN_STATION_2F_EMPTY,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-521,MAP_SINJOH_RUINS_EXTERIOR,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-522,MAP_SINJOH_RUINS_MYSTRI_STAGE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-523,MAP_SINJOH_RUINS_CABIN,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-524,MAP_EMBEDDED_TOWER_GROUDON_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-525,MAP_EMBEDDED_TOWER_KYOGRE_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-526,MAP_EMBEDDED_TOWER_RAYQUAZA_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-527,MAP_VIRIDIAN_ROUTE_1_GATEHOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-528,MAP_FRONTIER_ACCESS_POKECENTER_1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-529,MAP_FRONTIER_ACCESS_POKECENTER_B1F,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-530,MAP_FRONTIER_ACCESS_POKEMART,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-531,MAP_FRONTIER_ACCESS_MOVE_TUTOR_HOUSE,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
-532,MAP_ROUTE_5_UNDERGROUND_PATH,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
-533,MAP_ROUTE_12_FISHING_BROTHER_HOUSE,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+520,MAP_SAFFRON_MAGNET_TRAIN_STATION_2F_EMPTY,kanto,Safrania — gare du Train Magnétique — quai vide — 1er étage,saffron-2f,2f,
+521,MAP_SINJOH_RUINS_EXTERIOR,special,Ruines Sinjoh — extérieur,sinjoh_ruins-base,base,
+522,MAP_SINJOH_RUINS_MYSTRI_STAGE,special,Ruines Sinjoh — scène Trismégis,sinjoh_ruins-base,base,
+523,MAP_SINJOH_RUINS_CABIN,special,Ruines Sinjoh — cabane,sinjoh_ruins-base,base,
+524,MAP_EMBEDDED_TOWER_GROUDON_ROOM,special,Tour Enfouie — salle de Groudon,embedded_tower_groudon_room-base,base,
+525,MAP_EMBEDDED_TOWER_KYOGRE_ROOM,special,Tour Enfouie — salle de Kyogre,embedded_tower_kyogre_room-base,base,
+526,MAP_EMBEDDED_TOWER_RAYQUAZA_ROOM,special,Tour Enfouie — salle de Rayquaza,embedded_tower_rayquaza_room-base,base,
+527,MAP_VIRIDIAN_ROUTE_1_GATEHOUSE,kanto,Jadielle — poste de la Route 1,viridian-base,base,
+528,MAP_FRONTIER_ACCESS_POKECENTER_1F,special,Entrée de la Zone de Combat — Centre Pokémon — RDC,frontier_access-1f,1f,
+529,MAP_FRONTIER_ACCESS_POKECENTER_B1F,special,Entrée de la Zone de Combat — Centre Pokémon — sous-sol 1,frontier_access-b1f,b1f,
+530,MAP_FRONTIER_ACCESS_POKEMART,special,Entrée de la Zone de Combat — Boutique Pokémon,frontier_access-base,base,
+531,MAP_FRONTIER_ACCESS_MOVE_TUTOR_HOUSE,special,Entrée de la Zone de Combat — maison des donneurs de capacités,frontier_access-base,base,
+532,MAP_ROUTE_5_UNDERGROUND_PATH,kanto,Route 5 — Souterrain,route_5-base,base,
+533,MAP_ROUTE_12_FISHING_BROTHER_HOUSE,kanto,Route 12 — maison du pêcheur,route_12-base,base,
 534,MAP_SAFARI_ZONE_GATE_POKECENTER_1F,johto,Portail Safari — Centre Pokémon — RDC,safari_zone_gate-1f,1f,
 535,MAP_SAFARI_ZONE_GATE_POKECENTER_B1F,johto,Portail Safari — Centre Pokémon — sous-sol 1,safari_zone_gate-b1f,b1f,
 536,MAP_GOLDENROD_GAME_CORNER,johto,Doublonville — Casino (Voltorbataille),goldenrod-base,base,
-537,MAP_CELADON_GAME_CORNER,kanto,,,,Phase 3B : Kanto et transitions interrégionales.
+537,MAP_CELADON_GAME_CORNER,kanto,Céladopole — Casino (Voltorbataille),celadon-base,base,
 538,MAP_UNUSED,excluded,,,,En-tête de remplissage ou retiré : matrice 0 sans bloc propre à MAP_UNUSED ; aucune carte autonome à rendre.
-539,MAP_POKEMON_LEAGUE_ENTRANCE_WIFI_ROOM,special,,,,"Phase 3C : installation, connexion ou lieu spécial."
+539,MAP_POKEMON_LEAGUE_ENTRANCE_WIFI_ROOM,special,Ligue Pokémon — salle Wi-Fi de l’accueil,pokemon_league-base,base,

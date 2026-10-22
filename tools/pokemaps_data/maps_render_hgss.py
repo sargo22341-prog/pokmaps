@@ -8,6 +8,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from .dynamic_props_hgss import read_dynamic_props
+from .maps_dynamic_gen4 import prop_rotation
 from .maps_raster_gen4 import RasterCanvas
 from .maps_render_gen4 import RasterTriangle, model_triangles
 from .maps_sprites_gen4 import read_nitro_frame
@@ -132,7 +134,45 @@ class HgssRenderer:
                     billboard=billboard,
                 )
             )
+        result.extend(self._dynamic_triangles(header, block, models, textures, light, billboard))
         return tuple(result)
+
+    @cached_property
+    def dynamic_props(self) -> tuple:
+        return read_dynamic_props()
+
+    def _dynamic_triangles(
+        self,
+        header: HgssHeader,
+        block: int,
+        models: tuple[int, ...],
+        textures: tuple[NitroTextures, ...],
+        light: LightingPeriod,
+        billboard: tuple[int, ...],
+    ) -> list[RasterTriangle]:
+        result = []
+        for prop in self.dynamic_props:
+            if prop.header != header.index:
+                continue
+            x, y, z = prop.position
+            locations = [b for b in self.repo.blocks(header) if (b[0], b[1]) == (x // 512, z // 512)]
+            if len(locations) != 1 or prop.model not in models:
+                raise ValueError(f"{header.constant} : décor dynamique hors des blocs ou modèles : {prop}")
+            if locations[0][2] != block:
+                continue
+            position = (x % 512 * FX_ONE, y * FX_ONE, z % 512 * FX_ONE)
+            result.extend(
+                model_triangles(
+                    self._prop("a/1/4/8", prop.model),
+                    (textures[1], textures[0], *textures[2:]),
+                    position,
+                    (FX_ONE,) * 3,
+                    light,
+                    prop_rotation((0, prop.rotation_y, 0)),
+                    billboard,
+                )
+            )
+        return result
 
     def render(
         self, header: HgssHeader, ceiling: int | None = None, *, complete: bool = False

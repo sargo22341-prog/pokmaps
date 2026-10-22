@@ -12,7 +12,7 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 | `pret/pokegold`, `pokecrystal` | Cartes, scripts et tables sauvages horaires de Johto/Kanto |
 | `pret/pokeruby`, `pokeemerald`, `pokefirered` | Cartes, scripts, rencontres, équipes et règles GBA |
 | `pret/pokeplatinum`, `pokediamond` | Pokémon et cartes DS, modèles, textures, matrices, événements et scripts |
-| `pret/pokeheartgold`, aperçu isolé | Pokémon HGSS, preuve cartographique et catalogue des cartes ordinaires de Johto |
+| `pret/pokeheartgold`, aperçu isolé | Pokémon HGSS, atlas Johto/Kanto, installations, coupes et déplacements scriptés |
 | PokeAPI/sprites | Sprites Pokémon Noir/Blanc normaux et chromatiques |
 | pokesprite | Icônes d’objets |
 | `tools/data/` | Corrections et compléments éditoriaux relus |
@@ -35,9 +35,9 @@ produits dans `res/values/strings_achievements_<version>.xml` depuis les archive
 Caches (`tools/.cache`), sources brutes et aperçus (`tools/build/preview`) restent hors Git, sans Git LFS.
 
 L'[aperçu cartographique HGSS](../generations/cartes-hgss.md) se construit séparément avec
-`python tools/build_data.py --hgss-maps-only --map-workers 4`. Il ajoute Johto à la preuve initiale,
+`python tools/build_data.py --hgss-maps-only --map-workers 4`. Il ajoute Johto et l'atlas complet à la preuve initiale,
 sans reconstruire Sinnoh ni activer les remakes dans Android. Ses noms, plans et exclusions sont dans
-`hgss_maps.csv` ; ses corrections de textures et de hauteurs de portes ont leurs propres CSV.
+`hgss_maps.csv` ; textures, hauteurs de portes et décors dynamiques ont leurs propres CSV.
 `python tools/review_hgss_maps.py` produit les planches indexées et `check_assets.py --hgss-maps`
 contrôle aussi cet aperçu lorsqu'on lui passe le chemin `tools/build/preview/hgss-maps`.
 

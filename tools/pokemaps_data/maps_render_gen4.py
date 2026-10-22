@@ -228,8 +228,19 @@ def _vertex(
     point = placement.point(tuple(point[k] * scale[k] // FX_ONE for k in range(3)))
     position = tuple(point[k] + origin[k] for k in range(3))
     color = vertex.color if vertex.color is not None else _shade(vertex, transform.then(placement), material, lighting)
-    uv = _texcoord(vertex.texcoord, material)
+    uv = _projected_texcoord(position, material) if draw.projected else _texcoord(vertex.texcoord, material)
     return RasterVertex(position, uv, color)
+
+
+def _projected_texcoord(position: Vector, material: NitroMaterial) -> tuple[int, int]:
+    # NNSi_G3dFuncSbc_PRJMAP : biais (largeur/2 ; hauteur/2), effet, puis inverse vue × position.
+    # La vue est déjà éliminée de nos positions monde ; les coordonnées GX sont en seizièmes de texel.
+    matrix = material.effect_matrix
+    vector = (*position, FX_ONE)
+    projected = tuple(sum(vector[row] * matrix[row * 4 + col] for row in range(4)) // FX_ONE for col in (0, 1, 3))
+    x, y, w = projected
+    width, height = material.original_size
+    return (x + w) * width * 8 // FX_ONE, (w - y) * height * 8 // FX_ONE
 
 
 def _texcoord(uv: tuple[int, int], material: NitroMaterial) -> tuple[int, int]:

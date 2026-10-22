@@ -107,11 +107,13 @@ HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generation
 et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
 Leur [aperçu cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
 `python tools/build_data.py --hgss-maps-only --map-workers 4` dans `tools/build/preview/hgss-maps/`.
-Il conserve les cinq lieux témoins et ajoute le catalogue Johto : 246 lieux nommés en français,
-110 plans assemblés, portes et voisinages de la matrice DS. Les destinations variables et les lieux
-réservés aux phases suivantes restent identifiés. `python tools/review_hgss_maps.py` produit les planches
+Il conserve les cinq lieux témoins et le catalogue Johto, puis ajoute un
+[atlas complet](docs/generations/cartes-hgss-atlas.md) : 496 cartes et gabarits nommés en français dans les deux régions
+et les installations, portes, voisinages DS, transports scriptés et coupes des surfaces superposées.
+Les décors créés par les arènes sont placés dans leur état initial ; les destinations variables et les branches
+de scénario restent identifiées. `python tools/review_hgss_maps.py` produit les planches
 de relecture dans le scratchpad ; `python tools/check_assets.py --hgss-maps tools/build/preview/hgss-maps`
-vérifie l'inventaire et les références. Kanto, installations et mécanismes particuliers restent séparés.
+vérifie l'inventaire, les images, les plans, les coupes et leurs références. Les jeux restent préparatoires.
 Leur [aperçu Pokémon indépendant](docs/generations/pokemon-hgss.md) se génère avec
 `python tools/build_data.py --hgss-pokemon-only` dans `tools/build/preview/hgss-pokemon/` :
 493 espèces, régional Johto, attaques, CT/CS, formes et évolutions, sans activation Android.

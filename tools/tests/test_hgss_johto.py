@@ -39,7 +39,7 @@ def _entries() -> tuple[HgssMapEntry, ...]:
     return (
         HgssMapEntry(0, "MAP_TEST_0", "johto", "Ville", "ville", "base", ""),
         HgssMapEntry(1, "MAP_TEST_1", "johto", "Maison", "maison", "1f", ""),
-        HgssMapEntry(2, "MAP_TEST_2", "kanto", "", "", "", "Phase 3B"),
+        HgssMapEntry(2, "MAP_TEST_2", "kanto", "Autre région", "autre", "base", ""),
     )
 
 
@@ -183,6 +183,7 @@ def test_review_accepts_both_rgba_maps_and_rgb_plan_thumbnails(tmp_path: Path) -
         assert image.getpixel((128, 4)) == (255, 0, 0)
     index = json.loads((output / "index.json").read_text(encoding="utf-8"))
     assert [card["kind"] for card in index["cards"]] == ["lieu", "plan"]
+    assert index["cards"][0]["image"] == "maps/0/map.png"
 
 
 def test_versioned_review_covers_every_editorial_map_and_plan() -> None:

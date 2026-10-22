@@ -11,7 +11,7 @@ from .maps_render import level_count
 def plan_layout(records: list[dict]) -> tuple[tuple[int, int], list[dict]]:
     if not records or len(records) > 256:
         raise ValueError("HGSS : plan vide ou contenant plus de 256 lieux")
-    native = records[0]["plan"] == "johto-exterieurs"
+    native = records[0]["plan"] in ("johto-exterieurs", "kanto-exterieurs")
     if native:
         origin = tuple(min(record["origin_pixels"][axis] for record in records) for axis in (0, 1))
         positions = [tuple(record["origin_pixels"][axis] - origin[axis] for axis in (0, 1)) for record in records]
@@ -46,13 +46,15 @@ def write_plan(root: Path, records: list[dict], output: Path) -> dict:
         "size": size,
         "level_count": levels,
         "parts": parts,
-        "layout": "native" if records[0]["plan"] == "johto-exterieurs" else "atlas",
+        "layout": "native" if records[0]["plan"] in ("johto-exterieurs", "kanto-exterieurs") else "atlas",
     }
 
 
 def _plan_name(records: list[dict]) -> str:
     if records[0]["plan"] == "johto-exterieurs":
         return "Johto — extérieurs"
+    if records[0]["plan"] == "kanto-exterieurs":
+        return "Kanto — extérieurs"
     if len(records) == 1:
         return records[0]["name_fr"]
     place = records[0]["name_fr"].split(" — ", 1)[0]
