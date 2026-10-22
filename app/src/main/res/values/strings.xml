@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="route_radio_off">Radio désactivée</string>
+    <string name="route_radio_hoenn">Son de Hoenn · mercredi · Pokédex National</string>
+    <string name="route_radio_sinnoh">Son de Sinnoh · jeudi · Pokédex National</string>
     <string name="app_name">Pokémaps</string>
 
     <string name="nav_map">Carte</string>

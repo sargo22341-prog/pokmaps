@@ -6,6 +6,40 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class RouteEncountersTest {
+    @Test
+    fun radioIsExclusiveAndCombinesWithSwarmWithoutSinnohConditions() {
+        val hoenn = encounter("walk", "radio-hoenn", "swarm-yes", "story-progress-national-dex")
+        val sinnoh = encounter("walk", "radio-sinnoh", "swarm-yes", "story-progress-national-dex")
+        val filter = RouteEncounterFilter(swarm = true, nationalDex = true, radio = EncounterRadio.HOENN)
+        assertTrue(filter.matches(hoenn))
+        assertFalse(filter.matches(sinnoh))
+        assertFalse(filter.matches(encounter("walk", "radio-off")))
+        assertFalse(RouteEncounterFilter().matches(hoenn))
+        assertFalse(filter.copy(swarm = false).matches(hoenn))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun regionalRadioRequiresNationalDex() {
+        RouteEncounterFilter(radio = EncounterRadio.HOENN)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun regionalRadioCannotUseSinnohRadar() {
+        RouteEncounterFilter(radio = EncounterRadio.SINNOH, nationalDex = true, radar = true)
+    }
+
+    @Test
+    fun hgssTreesAndRocksHaveTheirOwnMethodFilters() {
+        for (method in listOf("headbutt-common", "headbutt-rare", "headbutt-secret")) {
+            val tree = encounter(method)
+            assertEquals(ObtainMethod.HEADBUTT, ObtainMethod.fromEncounterMethod(method))
+            assertTrue(EncounterFilter.HEADBUTT.matches(tree))
+            assertFalse(EncounterFilter.ROCK_SMASH.matches(tree))
+        }
+        assertTrue(EncounterFilter.ROCK_SMASH.matches(encounter("rock-smash")))
+        assertFalse(EncounterFilter.HEADBUTT.matches(encounter("honey-tree")))
+    }
+
     private fun encounter(method: String = "walk", vararg keys: String) = Encounter(
         12, "Diamant", 1, "Route", 16, "Roucool", method, method, 1, false,
         2, 4, 20.0, 1, null, null, conditionKeys = keys.toSet()

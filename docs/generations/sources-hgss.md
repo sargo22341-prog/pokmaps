@@ -137,7 +137,9 @@ Elles ne sont pas déduites du seul numéro de génération.
   testée des deux versions à 7212 ; aucune génération en phase 0.
 
 `--hgss-maps-only` produit le lot de preuve de phase 1 et `--hgss-pokemon-only` le
-[catalogue Pokémon indépendant de phase 2](pokemon-hgss.md) ; les autres noms d'aperçu restent réservés.
+[catalogue Pokémon indépendant de phase 2](pokemon-hgss.md). `--hgss-encounters-only` produit les
+[rencontres ordinaires et remplacements](rencontres-hgss.md) après validation des cartes ;
+les autres noms d'aperçu restent réservés.
 Chaque futur aperçu vérifiera commit et empreintes de ses prérequis avant export ; les jeux actuels ne
 doivent pas être régénérés pour préparer HGSS. Aucun changement de schéma ne découle de cette qualification.
 

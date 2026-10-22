@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.opensources.pokmaps.R
 import org.opensources.pokmaps.domain.model.Encounter
+import org.opensources.pokmaps.domain.model.EncounterRadio
 import org.opensources.pokmaps.domain.model.GbaCartridge
 import org.opensources.pokmaps.domain.model.ObtainMethod
 import org.opensources.pokmaps.domain.model.RouteEncounterFilter
@@ -32,16 +33,19 @@ internal fun RouteEncounterOptions(
     var swarm by rememberSaveable(key) { mutableStateOf(false) }
     var national by rememberSaveable(key) { mutableStateOf(false) }
     var daily by rememberSaveable(key) { mutableStateOf(false) }
+    var radio by rememberSaveable(key) { mutableStateOf(EncounterRadio.OFF) }
     val filter = RouteEncounterFilter(
         cartridge,
         roaming,
         radar,
         swarm,
-        national || daily || cartridge != GbaCartridge.NONE,
+        national || daily || cartridge != GbaCartridge.NONE || radio != EncounterRadio.OFF,
         daily,
-        gifts
+        gifts,
+        radio
     )
     val keys = remember(encounters) { encounters.flatMap { it.conditionKeys }.toSet() }
+    if (!roaming && !gifts && keys.any { it.startsWith("radio-") }) RadioSelector(radio) { radio = it }
     if (!roaming && !gifts && keys.any { it.startsWith("slot2-") }) {
         CompactSelect(cartridge, GbaCartridge.entries, { cartridge = it }) { stringResource(it.label) }
     }
@@ -70,6 +74,19 @@ internal fun RouteEncounterOptions(
     content(filtered)
 }
 
+@Composable
+private fun RadioSelector(selected: EncounterRadio, onSelect: (EncounterRadio) -> Unit) {
+    CompactSelect(selected, EncounterRadio.entries, onSelect) {
+        stringResource(
+            when (it) {
+                EncounterRadio.OFF -> R.string.route_radio_off
+                EncounterRadio.HOENN -> R.string.route_radio_hoenn
+                EncounterRadio.SINNOH -> R.string.route_radio_sinnoh
+            }
+        )
+    }
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun RouteSwitches(
@@ -86,7 +103,7 @@ private fun RouteSwitches(
             FilterChip(filter.roaming, onRoaming, { Text(stringResource(R.string.route_roaming)) })
         }
         if (!filter.roaming && !filter.gifts && "story-progress-national-dex" in keys &&
-            filter.cartridge == GbaCartridge.NONE && !filter.daily
+            filter.cartridge == GbaCartridge.NONE && !filter.daily && filter.radio == EncounterRadio.OFF
         ) {
             FilterChip(filter.nationalDex, onNational, { Text(stringResource(R.string.route_national)) })
         }

@@ -9,6 +9,12 @@ enum class GbaCartridge(val condition: String) {
     LEAFGREEN("slot2-leafgreen")
 }
 
+enum class EncounterRadio(val condition: String) {
+    OFF("radio-off"),
+    HOENN("radio-hoenn"),
+    SINNOH("radio-sinnoh")
+}
+
 /** Conditions choisies pour une route ; les errants ont leur liste séparée. */
 data class RouteEncounterFilter(
     val cartridge: GbaCartridge = GbaCartridge.NONE,
@@ -17,10 +23,12 @@ data class RouteEncounterFilter(
     val swarm: Boolean = false,
     val nationalDex: Boolean = false,
     val daily: Boolean = false,
-    val gifts: Boolean = false
+    val gifts: Boolean = false,
+    val radio: EncounterRadio = EncounterRadio.OFF
 ) {
     init {
         require(!roaming || !gifts)
+        require(radio == EncounterRadio.OFF || (nationalDex && cartridge == GbaCartridge.NONE && !radar))
     }
 
     fun matches(encounter: Encounter): Boolean {
@@ -28,6 +36,7 @@ data class RouteEncounterFilter(
         if ((ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.GIFT) != gifts) return false
         if (gifts) return true
         val keys = encounter.conditionKeys
+        if (keys.any { it.startsWith("radio-") } && radio.condition !in keys) return false
         if (keys.any { it.startsWith("slot2-") } && cartridge.condition !in keys) return false
         if (("radar-on" in keys && !radar) || ("radar-off" in keys && radar)) return false
         if (("swarm-yes" in keys && !swarm) || ("swarm-no" in keys && swarm)) return false
@@ -58,7 +67,7 @@ data class RouteEncounterFilter(
         )
     }
 
-    private fun isSelectedCondition(key: String): Boolean = key.startsWith("slot2-") ||
+    private fun isSelectedCondition(key: String): Boolean = key.startsWith("slot2-") || key.startsWith("radio-") ||
         key in setOf(
             "radar-on",
             "radar-off",

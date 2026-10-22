@@ -26,6 +26,7 @@ def main() -> int:
     parser.add_argument("--assets", type=Path, default=Path(__file__).resolve().parent.parent / "app/src/main/assets")
     parser.add_argument("--sinnoh-maps", type=Path, help="vérifier aussi les deux catalogues DS préparatoires")
     parser.add_argument("--hgss-maps", type=Path, help="vérifier aussi l'aperçu Johto HGSS préparatoire")
+    parser.add_argument("--hgss-encounters", type=Path, help="vérifier aussi l'aperçu des rencontres HGSS")
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
@@ -57,6 +58,10 @@ def main() -> int:
             from pokemaps_data.validate_johto_hgss import check_johto_preview
 
             check_johto_preview(args.hgss_maps)
+        if args.hgss_encounters:
+            from pokemaps_data.preview_wild_hgss import check_encounters_preview
+
+            check_encounters_preview(args.hgss_encounters)
     except (OSError, ValueError, sqlite3.Error) as error:
         print(str(error), file=sys.stderr)
         return 1

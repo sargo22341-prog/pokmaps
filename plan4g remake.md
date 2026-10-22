@@ -502,9 +502,9 @@ projection Nitro, deux constantes natives mal nommées, titre du plan Kanto et u
 
 ### Phase 4 — Rencontres, en lots maîtrisés
 
-- [ ] **4A — Tables ordinaires.** Marche, eau, pêche, horaires et taux issus du moteur ;
+- [x] **4A — Tables ordinaires.** Marche, eau, pêche, horaires et taux issus du moteur ;
   ajouter l’aperçu de rencontres et le rapport comparatif PokéAPI. Sortie : distributions cohérentes et écarts classés.
-- [ ] **4B — Remplacements et méthodes.** Radio, essaims, arbres et rochers ; taxonomie et filtres associés.
+- [x] **4B — Remplacements et méthodes.** Radio, essaims, arbres et rochers ; taxonomie et filtres associés.
   Sortie : tests des conditions combinées et incompatibles, traductions françaises.
 - [ ] **4C — Concours et Safari.** Modéliser jours, National, blocs et délais avec limites de calcul.
   Sortie : configurations vérifiables et présentation de taux conditionnels sans prédiction.
@@ -512,6 +512,28 @@ projection Nitro, deux constantes natives mal nommées, titre du plan Kanto et u
   Sortie : provenance et exclusions des objectifs ordinaires validées.
 - [ ] **4E — Placement.** Adapter l’éditeur aux terrains HGSS et relire les points des deux régions.
   Sortie : `map_spots.csv` validé, aucun point hors terrain ou lieu dépourvu de couverture sans explication.
+
+**Bilan 4A et 4B — 22 octobre 2026.** L’[aperçu des rencontres](docs/generations/rencontres-hgss.md),
+généré par `--hgss-encounters-only`, conserve 142 banques, leurs en-têtes et 14 616 distributions compatibles
+dans les deux versions. Les 252 tables d’arbres couvrent 60 lieux, avec leurs groupes de coordonnées,
+catégories et tables de décision selon l’identifiant du dresseur. Les horaires de pêche, remplacements
+radio/essaim et poids Éclate-Roc suivent le moteur ; les taux de déclenchement restent séparés des taux d’espèce.
+La comparaison donne 14 256 distributions identiques, 360 écarts 90/10 contre 80/20 pour Éclate-Roc,
+et huit tables PokéAPI du quai de Carmin absentes du moteur. Tout autre écart ordinaire est bloquant.
+Les identifiants techniques inutilisés 90/142 et les exclusions Safari, concours, obtentions particulières
+et catégories d’arbres absentes de PokéAPI sont explicites. Les filtres Python/Kotlin, les exigences françaises
+de la radio et les incompatibilités sont couverts ; les remakes restent isolés des jeux Android distribués.
+La [preuve versionnée](docs/generations/rencontres-hgss-preuve.json) conserve les sources et empreintes des sorties.
+Les coordonnées natives des arbres n’anticipent pas la projection et la curation de 4E.
+
+Contrôles réussis : génération finale (15,00 s), assets distribués et aperçu, Ruff et format sur tout `tools`,
+1 036 tests Python ordinaires, 415 tests des sources (17 min 33 s), puis 34 tests ciblés sur l’état final,
+dont la reproduction des empreintes du catalogue et du rapport. Android : ktlint, absence de services Google,
+Lint, tests JVM/Compose et APK debug réussis. Limites 600/60 lignes et diff relus ; aucun test sur téléphone.
+La dépréciation AGP déjà décrite dans `docs/developpement.md` reste visible, sans nouvelle suppression.
+Incidents corrigés : permissions Windows des aperçus/caches, lecture JSON limitée à 4 Mio pour une sortie
+de 17,8 Mo, variantes de noms des banques techniques et attente de test initialement fixée à 70 lieux d’arbres
+au lieu des 60 comptés dans la source. Le quai de Carmin et la condition « hors concours » sont classés explicitement.
 
 ### Phase 5 — Personnages, objets et services
 

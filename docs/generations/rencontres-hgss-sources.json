@@ -1,0 +1,34 @@
+{
+  "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+  "pokeapi_commit": "bc92d3b6029ef1abe9e7ad424c400b338f3c11fe",
+  "native": {
+    "files/fielddata/encountdata/gs_enc_data.json": "ae0895407231448bbf12be33480e534e5ca812d9f172ffd0b0918c29070f4ab1",
+    "files/fielddata/encountdata/gs_enc_data.json.txt": "67643fc5cf53cf93ae789341a194ad01a325f400f30f9603457b0e6d38456ca3",
+    "files/arc/headbutt.json": "b1eb4b3263e89f89f9e1ebe5fdbf2bc4aa3e27bb7a3145c20903f455cfbbf08d",
+    "files/arc/headbutt.json.txt": "76f80c82e20bc137e40aea22bed851b48bd5b874a0aba02c34a83a6b8649e3be",
+    "src/field/encounter_check.c": "89a9bf276591ff90db54ef4f9ef6377cc3c4d46065d69edf6336a031e4e223a0",
+    "src/field/headbutt.c": "43d7b1253e7c89db41a9bb6d8021b51749b6ce053dc0fa547cd8f263958f6242",
+    "src/unk_02097F6C.c": "59bed4aca31cb35d948ce5a667ebc8afb295b82fd4d41c3565713b0451f8c401",
+    "src/field/overlay_2_gear_phone.c": "6adfd3a0b3a878e63c56dd521637ab7ee3f0f813ef9fe5e9d3d0d2075de8d89c",
+    "src/application/pokegear/radio/shows/pokemon_music.c": "c2e811c96270bd94e893acb522dc73dc726a3a317f0cab408edd068c0138773c",
+    "src/data/map_headers.h": "fcdef6a96ffdf6b353377baaafb496a181059bdf88d1d9a6f71c197187edae9b",
+    "include/constants/maps.h": "9ebf1f2f6110af509b830cc33f271d4b5d257f309212345a6bb4557321634adb",
+    "include/constants/species.h": "a72ce01027d83aabd9ff61dc8f3afbbf43eee30b25c39b6e23ed42c5ac587732",
+    "include/encounter_tables_narc.h": "87faef4eb364ca9c90195be234c386ffafc7886d8a4ce04797a2c5196cd52322",
+    "include/wild_encounter.h": "1cd053c4f34289ba440bd8a60b8147050dac310716727b57fa242c2b6e7e65b5",
+    "src/roamer.c": "7eccd43fe5540d3ab8fd8236a22f21012e5ae687895e5c59598ab3bab9a14f1b",
+    "src/scrcmd_c.c": "3eb39e0372d07d7e1f6517da89f9103b80b27d317af11b94d28a16f330a7362c",
+    "files/fielddata/script/scr_seq/scr_seq_0152_P01R0101.s": "966ed0d7fa089ce8a455a576e6905f9bb06802b5f2352bec3172ba269964eb03"
+  },
+  "pokeapi": {
+    "encounters.csv": "93ba8853ac871719d230a6406c91f8418754fdc773f2f4b9f476007f743b4955",
+    "encounter_slots.csv": "597dc58df2b0a2c64cedce6d6a2a08feeecbd1cf860bdf926cd27f119417d87a",
+    "encounter_methods.csv": "99327ac41c463b8bcca18d04b56cad3d5532fec70dd7eb869b9ca650a007e291",
+    "encounter_condition_values.csv": "f55fc7c4b4d821631695ff30d74f34b2122859c412d29b98d4d973cb6d2df902",
+    "encounter_condition_value_map.csv": "e7e566eb07f53aab34065869a245359cc8c0313ca97872de5fd07d1867a46c7a",
+    "pokemon.csv": "16c81c33188b0eac403aa2f759fcbe9e42c611f722d263f5b5a6a5bff9f8ce6b",
+    "pokemon_species_names.csv": "820cde17074cdb1c2b0595c997fb8f998e773bd5da3bb525dec85703c86c5fd9",
+    "location_areas.csv": "4706b96842166a44ca619da0add34c212088669270a478d9e84bc78e9f581840",
+    "locations.csv": "2af5d6a1151d5ae402f9da1d5513bc1c7437795e69b140787c7aab3f6ed7eaa3"
+  }
+}

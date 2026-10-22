@@ -30,6 +30,7 @@ Les pages décrivent l’état actuel ; les rapports de tâches et anciens résu
 - [Preuve et catalogue cartographique Johto HeartGold/SoulSilver](generations/cartes-hgss.md).
 - [Atlas Kanto, installations, niveaux et navigation HeartGold/SoulSilver](generations/cartes-hgss-atlas.md).
 - [Aperçu Pokémon HeartGold/SoulSilver](generations/pokemon-hgss.md).
+- [Rencontres, conditions et comparaison HeartGold/SoulSilver](generations/rencontres-hgss.md).
 
 Le [catalogue des sprites](donnees/sprites-pokemon.md) est un inventaire généré de 1 025 espèces,
 à consulter uniquement pour une provenance précise. Les règles de sprites sont résumées dans le pipeline.

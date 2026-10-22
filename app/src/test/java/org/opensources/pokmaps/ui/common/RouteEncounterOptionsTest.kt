@@ -17,6 +17,30 @@ class RouteEncounterOptionsTest {
     val compose = createComposeRule()
 
     @Test
+    fun radioReplacesSpeciesAndKeepsItsFrenchRequirementsVisible() {
+        val encounters = listOf(
+            encounter("Ordinaire", "walk", "radio-off"),
+            encounter("Hoenn", "walk", "radio-hoenn", "story-progress-national-dex"),
+            encounter("Sinnoh", "walk", "radio-sinnoh", "story-progress-national-dex")
+        )
+        compose.setContent {
+            Column {
+                RouteEncounterOptions(1, encounters) { selected ->
+                    selected.forEach { Text(it.pokemonName) }
+                }
+            }
+        }
+        compose.onNode(hasText("Ordinaire")).assertExists()
+        compose.onNode(hasText("Hoenn")).assertDoesNotExist()
+        compose.onNode(hasText("Radio désactivée")).performClick()
+        compose.onNode(hasText("Son de Hoenn · mercredi · Pokédex National")).performClick()
+        compose.onNode(hasText("Pokédex National")).assertDoesNotExist()
+        compose.onNode(hasText("Hoenn")).assertExists()
+        compose.onNode(hasText("Sinnoh")).assertDoesNotExist()
+        compose.onNode(hasText("Ordinaire")).assertDoesNotExist()
+    }
+
+    @Test
     fun giftsReplaceWildPokemonAndRoamersAndCanBeTurnedOff() {
         val encounters = listOf(
             encounter("Wild", "walk"),
@@ -76,6 +100,7 @@ class RouteEncounterOptionsTest {
         compose.setContent { RouteEncounterOptions(1, emptyList()) {} }
         compose.onNode(hasText("GBA : aucune cartouche")).assertDoesNotExist()
         compose.onNode(hasText("Pokémon errants")).assertDoesNotExist()
+        compose.onNode(hasText("Radio désactivée")).assertDoesNotExist()
     }
 
     private fun encounter(name: String, method: String, vararg keys: String) = Encounter(

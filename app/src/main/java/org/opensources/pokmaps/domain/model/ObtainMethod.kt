@@ -37,7 +37,8 @@ enum class ObtainMethod {
 
             "seaweed" -> DIVE
 
-            "headbutt", "headbutt-low", "headbutt-normal", "headbutt-high" -> HEADBUTT
+            "headbutt", "headbutt-low", "headbutt-normal", "headbutt-high",
+            "headbutt-common", "headbutt-rare", "headbutt-secret" -> HEADBUTT
 
             "rock-smash" -> ROCK_SMASH
 

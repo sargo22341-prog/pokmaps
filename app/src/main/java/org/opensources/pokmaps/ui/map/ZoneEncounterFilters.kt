@@ -54,4 +54,6 @@ private val EncounterFilter.label: Int
         EncounterFilter.FISHING -> R.string.method_fishing
         EncounterFilter.SURF -> R.string.method_surf
         EncounterFilter.DIVE -> R.string.method_dive
+        EncounterFilter.HEADBUTT -> R.string.method_headbutt
+        EncounterFilter.ROCK_SMASH -> R.string.method_rock_smash
     }
