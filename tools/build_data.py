@@ -56,6 +56,9 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
 
 def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
     maps_only.add_argument(
+        "--hgss-placement-only", action="store_true", help="valider les points HGSS et leur couverture sur l'atlas"
+    )
+    maps_only.add_argument(
         "--hgss-encounters-only", action="store_true", help="valider les rencontres HGSS après l'aperçu des cartes"
     )
     maps_only.add_argument(
@@ -208,6 +211,11 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
 
 
 def _hgss_preview(args: argparse.Namespace) -> bool:
+    if args.hgss_placement_only:
+        from pokemaps_data.preview_placement_hgss import build_placement
+
+        build_placement(args.cache, args.preview)
+        return True
     if args.hgss_encounters_only:
         from pokemaps_data.preview_wild_hgss import build_hgss_encounters
 

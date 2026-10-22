@@ -7,6 +7,7 @@ from tkinter import ttk
 from .catalog import Family
 
 VERSION_LABELS = {
+    "heartgold-soulsilver": "Or HeartGold / Argent SoulSilver",
     "red-blue": "Rouge / Bleu",
     "yellow": "Jaune",
     "gold-silver": "Or / Argent",

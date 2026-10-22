@@ -151,3 +151,66 @@ Le [catalogue particulier versionné](rencontres-hgss-particulieres.json) permet
 Son empreinte figure dans la preuve de génération ; les tests pipeline reconstruisent aussi le catalogue complet
 depuis les sources épinglées. L'affichage Android et la traduction des branches de scénario appartiennent aux
 lots d'intégration des personnages et d'activation ; les remakes ne sont pas encore sélectionnables.
+
+## Placement — 4E
+
+`python tools/build_data.py --hgss-placement-only` valide les aperçus des cartes et des rencontres,
+les sources natives et les retouches de `tools/data/map_spots.csv`, puis écrit `hgss-placement/`.
+Cette étape ne télécharge rien, n'active pas les remakes et ne modifie pas les assets Android.
+Un échec préserve le dernier aperçu valide. La génération ne réécrit jamais les points éditoriaux.
+
+```powershell
+python tools/map_editor.py --assets tools/build/preview/hgss-placement
+python tools/review_hgss_spots.py
+```
+
+L'éditeur lit le catalogue préparatoire directement, sans base SQLite artificielle. Les listes gardent
+les espèces des deux versions et de toutes les configurations ; « — » évite d'additionner leurs probabilités
+incompatibles. Le clic utilise les centres projetés HGSS, à douze pixels au plus, et les passages gardent
+leur projection native. Les sprites de prévisualisation sont ceux déjà distribués par l'application.
+
+Les comportements et leurs drapeaux viennent de `src/metatile_behavior.c` et de son enum natif :
+herbes et sols de marche sans collision, eau surfable pour la pêche, eau à rencontre pour Surf.
+Les arbres viennent des groupes réguliers et particuliers de `headbutt.json`, sans prédiction de leur
+classement selon le dresseur ; les rochers sont les acteurs `SPRITE_BREAKROCK` des événements natifs.
+Les cases des autres acteurs et des passages sont retirées du placement ordinaire.
+Les hauteurs BDHC, altitudes de matrice et caméras HGSS projettent chaque centre dans le repère de l'image.
+Les surfaces superposées, hauteurs absentes, projections hors image, pixels transparents et surfaces
+techniques noires opaques sont écartés. Pour la marche, une seconde vérification compare la profondeur
+BDHC à celle du décor opaque, avec les mêmes triangles, textures et faces que le rasteriseur des cartes.
+Une demi-case de tolérance (huit unités de profondeur) accepte le faible décalage des sols visuels,
+notamment 4,23 unités dans les gabarits Safari, sans accepter une surface derrière une falaise.
+Les arbres et rochers restent attachés à leur objet, sans être rejetés parce que leur propre modèle cache le sol.
+Pour l'eau, la surface haute reste candidate même si le BDHC contient aussi un fond ; les plans d'eau visuels
+ne suivent pas toujours ces surfaces. La curation retient uniquement les points relus sur l'eau bleue/cyan
+de l'image, sans imposer une équivalence avec le sol opaque ni placer de Pokémon sur les props ou les berges.
+L'aperçu conserve les candidats rejetés et leurs deux profondeurs pour la relecture.
+
+La curation retient **5 655 points**, pour **151 lieux audités** : 81 à Johto, 57 à Kanto et 13 gabarits/lieux spéciaux.
+Les 296 terrains contrôlés comprennent 268 terrains avec points et **28 absences expliquées**.
+Les points sont espacés d'au moins 32 pixels dans chaque terrain ; les propositions initiales sont
+déterministes et plafonnées à quarante points, puis restent des retouches éditoriales.
+Les treize planches couvrent tous les lieux ; les images détaillées et leur index restent dans
+`tools/build/scratchpad/hgss-placement-review/`. Vert : herbes ; orange : sol ; bleu : eau ; violet : arbres ; rouge : rochers.
+
+`tools/data/hgss_spot_exclusions.csv` explique chaque terrain sans point : sept habitats Safari sans eau malgré
+leurs tables, l'en-tête Safari dynamique 357 pour la marche et l'eau, cinq salles/étages sans eau malgré leur banque,
+et les dix-sept cases libres de la salle de Lugia sans surface BDHC exploitable.
+Trois autres terrains ne passent pas le rapprochement BDHC/décor : marche au deuxième étage de la Tour Chétiflor,
+au neuvième étage de la Tour Carillon et au premier sous-sol du Puits Ramoloss.
+Leurs espèces restent dans les listes, sans point flottant ou masqué ajouté pour remplir la carte.
+La relecture aquatique écarte aussi dix terrains dont les candidats natifs projetables ne rejoignent pas
+l'eau visible : Routes 6, 22, 30 et 43, Bourg Palette, Jadielle, Céladopole, Puits Ramoloss sous-sol 1,
+et les deux états du square du Mont Sélénite. Le CSV d'exclusions conserve leurs comptes de candidats.
+Le Safari se place sur ses douze gabarits, jamais sur un arrangement universel inventé de ses six habitats actifs.
+Les rencontres de la salle de Lugia restent dans la liste ; aucune hauteur arbitraire ne crée de marqueur.
+Tout terrain sans couverture ni raison, point hors terrain, carte inconnue ou exception inutilisée est bloquant.
+
+L'éditeur conserve 37 avertissements de capacité : ces terrains ont des points, mais moins que l'union
+des espèces et méthodes possibles. Une partie des Pokémon reste visible dans la liste du lieu.
+Ces avertissements ne désignent pas un lieu sans couverture et ne changent aucune probabilité de rencontre.
+
+La [preuve de couverture](placements-hgss-preuve.json) conserve les comptes, empreintes des points par terrain,
+exclusions et prérequis. Le [contrat des terrains](placements-hgss-sources.json) épingle les lectures supplémentaires.
+Les tests ordinaires vérifient les points versionnés sans cache ; le test pipeline reconstruit les terrains des
+151 lieux depuis les sources épinglées et contrôle aussi les pixels sous les candidats.

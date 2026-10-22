@@ -123,6 +123,10 @@ arbres et Éclate-Roc, concours selon le jour et le National, Safari selon les b
 avec distributions conditionnelles et écarts PokéAPI classés. Les obtentions particulières conservent
 leur provenance et leurs exclusions par événement, transfert ou accessoire, sans prédiction de disponibilité.
 Les filtres de rencontres distinguent Coup d’Boule et Éclate-Roc ; les remakes restent préparatoires.
+Le placement se vérifie avec `python tools/build_data.py --hgss-placement-only`, puis se relit avec
+`python tools/map_editor.py --assets tools/build/preview/hgss-placement`.
+Les points de Johto, Kanto et des gabarits Safari restent dans `tools/data/map_spots.csv` ;
+les terrains sans marqueur ont une [explication explicite](docs/generations/rencontres-hgss.md#placement--4e).
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .games import DECLARED_GAMES, map_families
+from .hgss_preparation import PREPARATORY_GAMES
 
 SPOTS_CSV = Path(__file__).resolve().parents[1] / "data/map_spots.csv"
 SPOT_KINDS = ("grass", "water", "floor", "tree", "rock", "underwater")
@@ -86,7 +87,7 @@ def _parse_row(row: dict[str, str], where: str) -> tuple[TerrainKey, Point | Non
     if None in row or any(value is None for value in row.values()):
         raise ValueError(f"{where} : nombre de colonnes invalide")
     family, kind = row["family"], row["kind"]
-    families = map_families(DECLARED_GAMES)
+    families = map_families((*DECLARED_GAMES, *PREPARATORY_GAMES))
     if family not in families:
         raise ValueError(f"{where} : famille de cartes inconnue {family!r}")
     if kind not in SPOT_KINDS:

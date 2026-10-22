@@ -317,6 +317,9 @@ python tools/map_editor.py
 # Pour un aperçu explicitement généré :
 python tools/map_editor.py --assets tools/build/preview/gen3-encounters
 python tools/map_editor.py --assets tools/build/preview/sinnoh-encounters
+# HGSS, après les aperçus des cartes et des rencontres :
+python tools/build_data.py --hgss-placement-only
+python tools/map_editor.py --assets tools/build/preview/hgss-placement
 ```
 
 L’éditeur lit l’aperçu lorsqu’un jeu est en cours d’intégration, sinon les assets distribués.
@@ -335,6 +338,12 @@ La liste d’erreurs ouvre et centre le point fautif. Le rapport local est `tool
 (`family,map_identifier,kind,x,y,version_group`). Un groupe vide signifie une portée commune ; des coordonnées
 vides marquent un terrain vide. Ce bouton ne génère ni n’installe l’application : lancer ensuite le pipeline complet.
 Un terrain sans point est une erreur ; un terrain trop petit conserve un avertissement visible.
+L'adaptateur préparatoire HGSS lit son catalogue de terrains sans fabriquer une base Android.
+Il conserve les deux cartouches et les régions Johto/Kanto ; les douze gabarits Safari ont leur rubrique distincte.
+Le clic rejoint le centre projeté d'une case admissible à douze pixels au plus, car les hauteurs DS
+ne suivent pas une grille plate de seize pixels. Les passages sont projetés dans le même repère que les images.
+Les tables HGSS sans terrain plaçable exigent une raison dans `hgss_spot_exclusions.csv` ;
+une exception devenue inutile bloque la validation. Voir la [couverture HGSS](../generations/rencontres-hgss.md#placement--4e).
 L’application choisit un Pokémon par point et garde les autres dans la liste du lieu. Les exceptions relues sont
 conservées dans les références de rencontres [Hoenn](../generations/rencontres-hoenn.md) et
 [remakes](../generations/rencontres-remake-1g.md).

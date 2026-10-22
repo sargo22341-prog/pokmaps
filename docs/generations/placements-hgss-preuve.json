@@ -1,0 +1,2998 @@
+{
+  "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+  "native_sources": {
+    "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+    "files": {
+      "include/constants/metatile_behavior.h": "daf592a2074c423b5649eba564cc37ea5acd224c5c86658dc1fe6b00160f509d",
+      "src/metatile_behavior.c": "6c666a9c849c524de9a43016ca39ddcdaffff46c0daa87e8d91afe1fc6c8c78c",
+      "include/constants/sprites.h": "f794bad6114be6671f03fc3a80ba9d743e8b7106e1f2678c4f7f3514d75b10ed",
+      "src/field/headbutt.c": "43d7b1253e7c89db41a9bb6d8021b51749b6ce053dc0fa547cd8f263958f6242",
+      "asm/overlay_01_021EABA8.s": "3671330c7fcc7cbb707e3afe5091481bebd85166b6ed982f1a2e9ae3d260b3e1"
+    }
+  },
+  "sources": {
+    "hgss-maps/inventory.json": "a1e41c53f16678f29e022e27b39013df21d4d594011cdb8c438acfe7bf7e0a1d",
+    "hgss-encounters/inventory.json": "464cc337a8429b20c2ecb8f4ecadac6dea800cce73a2c49063d36dfe0164bbcd"
+  },
+  "recipe": {
+    "preview_placement_hgss.py": "76cc8e5d8fc29673d83e6e868ef5731bd8cd7db8a958f3b1516e641d650be3a2",
+    "placement_hgss.py": "9d2491454163d6e06fc193ea95555b833513b5b31253c0c4e26dcbc65828f457",
+    "terrain_hgss.py": "408239781288a5790c338f79a8f737f27c349d39bf3a98c3f6840ca3c75cf398",
+    "visibility_hgss.py": "1a4346551b633575a579e8eaef37ac55f08fd43d6a000b4e7e229b6aaa9094cd"
+  },
+  "spots_sha256": "0f57c8eb88690228054221f4f6cc570f812f3cfa0b64b03c8e4ed755acd61bfc",
+  "exclusions_sha256": "754229c74d41f4bbdf8f621a04205a01f2463fe2ed383d3e43f6050ae594fe91",
+  "coverage": [
+    {
+      "header": 7,
+      "map": "burned-tower-1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "5fbc83aa9ba0e81198987c4edaed003e51d80aa9cf9e2262ebcc6ecd412137c0",
+      "available": 184,
+      "reason": ""
+    },
+    {
+      "header": 9,
+      "map": "route-1",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "a6d722749756a40de56a35454f26386280d497df378de9e30b2cc52717059c66",
+      "available": 225,
+      "reason": ""
+    },
+    {
+      "header": 9,
+      "map": "route-1",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 21,
+      "points_sha256": "928ba814e33df7f7ed01859db8e64db45574c564309e08c1002e38303c835d8c",
+      "available": 47,
+      "reason": ""
+    },
+    {
+      "header": 10,
+      "map": "route-2",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 11,
+      "points_sha256": "7fb81027512a14b3ecf1d2884c6275a97c69964ddc38cad2ec3cfcfbb2541808",
+      "available": 39,
+      "reason": ""
+    },
+    {
+      "header": 10,
+      "map": "route-2",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 18,
+      "points_sha256": "523355a547079a371244571ec22c4807bffbd0d3a30cdb8797c114d1b95e698a",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 11,
+      "map": "route-3",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 31,
+      "points_sha256": "67c21079d3ac2216cd1e02d20ab05bcd0934b25371f799b42009b7603fb88fdf",
+      "available": 138,
+      "reason": ""
+    },
+    {
+      "header": 11,
+      "map": "route-3",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 4,
+      "points_sha256": "4273a9362df5320b5f8b60fb5884d0fabc60864b9881b06bfbd13c08892d116c",
+      "available": 12,
+      "reason": ""
+    },
+    {
+      "header": 12,
+      "map": "route-4",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 13,
+      "points_sha256": "04bca8608e323e97cb1c10ff1108d6c83eb2e8e78ea671a775d04f745b1ca0ea",
+      "available": 72,
+      "reason": ""
+    },
+    {
+      "header": 12,
+      "map": "route-4",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 12,
+      "points_sha256": "62dd56379c6c35a10ee629b6e5e0ce0d42aef3b2c9487da5d4c40c6035ab0d16",
+      "available": 29,
+      "reason": ""
+    },
+    {
+      "header": 12,
+      "map": "route-4",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 3,
+      "points_sha256": "05612197b7416d4c27bb4366b891da0bae09b736a6d1348b9783283aa41cd15c",
+      "available": 16,
+      "reason": ""
+    },
+    {
+      "header": 13,
+      "map": "route-5",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 9,
+      "points_sha256": "5f388ad9c6c760f54d750d5517fd598a78bff073d7ff2aadddff12f3fa2c8bea",
+      "available": 39,
+      "reason": ""
+    },
+    {
+      "header": 13,
+      "map": "route-5",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 3,
+      "points_sha256": "84d5d43e4e85d09e0664ec4b26bd96242c7c39933bb0b4ae74f24cccf6f993de",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 14,
+      "map": "route-6",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 32,
+      "points_sha256": "a75a849c795d80215549ce9d1dbb14b85658b04e0c4d6e72556194df3d9f16a7",
+      "available": 117,
+      "reason": ""
+    },
+    {
+      "header": 14,
+      "map": "route-6",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 7,
+      "points_sha256": "5de4feed3c0c0bb003b07d687c665b101d1d186e545b2e2c15fa1855b8c7ce66",
+      "available": 16,
+      "reason": ""
+    },
+    {
+      "header": 14,
+      "map": "route-6",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 52,
+      "reason": "Route 6 : les 52 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun point n'est placé dans les herbes ou sur les berges ; Surf et pêche restent dans la liste."
+    },
+    {
+      "header": 15,
+      "map": "route-7",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 14,
+      "points_sha256": "b16b7a234cb0bd11c171850d85085aafb10b5630a344981a532e9d3e69ae7024",
+      "available": 52,
+      "reason": ""
+    },
+    {
+      "header": 15,
+      "map": "route-7",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 8,
+      "points_sha256": "5597effc83df70e9cfe59be668a052c3729cb3fb919e2eae8d2be51172be1663",
+      "available": 15,
+      "reason": ""
+    },
+    {
+      "header": 16,
+      "map": "route-8",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 15,
+      "points_sha256": "6105c1acff55bc8be4a92809b2c449352b79b6621e310c595552dfda3196c7df",
+      "available": 47,
+      "reason": ""
+    },
+    {
+      "header": 16,
+      "map": "route-8",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 5,
+      "points_sha256": "610068b57e9a1b25b86258b8eaf7a203388be8dd5f55433ea5875add895880a0",
+      "available": 13,
+      "reason": ""
+    },
+    {
+      "header": 17,
+      "map": "route-9",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 22,
+      "points_sha256": "e2dbd1be93839e6eb3e9823d9b52461c0a4fc9bad6fdcdee2dfcefd8e8a64ef6",
+      "available": 84,
+      "reason": ""
+    },
+    {
+      "header": 17,
+      "map": "route-9",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 2,
+      "points_sha256": "cff07f34f1ba9a54d993a6fc3cc51a552426e9cef7d6b18e1e0d1c181c6fa510",
+      "available": 59,
+      "reason": ""
+    },
+    {
+      "header": 18,
+      "map": "route-10",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 2,
+      "points_sha256": "f01852aa949187694f93532c7bbffbbdd24658c0a91d5028b07937a3043576cc",
+      "available": 7,
+      "reason": ""
+    },
+    {
+      "header": 18,
+      "map": "route-10",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 5,
+      "points_sha256": "56402077bf29ae0e47c14a9d4f2885261f4a1e4fbb30ed67a03b60b6eb854ba7",
+      "available": 33,
+      "reason": ""
+    },
+    {
+      "header": 19,
+      "map": "route-11",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "3ed5119ffb7c381dbd643017798d3060c4d814eaeb25edc206f62dd4a5012079",
+      "available": 536,
+      "reason": ""
+    },
+    {
+      "header": 19,
+      "map": "route-11",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 11,
+      "points_sha256": "cc1d7e64df5e35517877149a64d63f24395142cd82b1c017f20dcdf085942095",
+      "available": 19,
+      "reason": ""
+    },
+    {
+      "header": 20,
+      "map": "route-12",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 9,
+      "points_sha256": "f9b17d6bd3a477f79668b64bb6777164fac3e4fdb610f9e09b3ca3f8eb4901fb",
+      "available": 16,
+      "reason": ""
+    },
+    {
+      "header": 20,
+      "map": "route-12",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "9a8f66f361d9b66237da70fe4c62e28ddaff7051947c607222e7de7caac512d0",
+      "available": 1003,
+      "reason": ""
+    },
+    {
+      "header": 21,
+      "map": "route-13",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 5,
+      "points_sha256": "61412c7a5dc44c6663cfaa86c252958b8a480f56b84d4fc8cb6a9c7db6ef517c",
+      "available": 12,
+      "reason": ""
+    },
+    {
+      "header": 21,
+      "map": "route-13",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 15,
+      "points_sha256": "9fc3de4acde93423d05117b35df74b4fe76c94d4010cdd822bfd76e4ec79c1ee",
+      "available": 29,
+      "reason": ""
+    },
+    {
+      "header": 21,
+      "map": "route-13",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "156b9b4f68cadaa207533bc6809c0dfccb7716090e122c4ee39a80bb474f3489",
+      "available": 383,
+      "reason": ""
+    },
+    {
+      "header": 22,
+      "map": "route-14",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 17,
+      "points_sha256": "a0017ed5b876beea4076a33b22a5403d5a485a36e07aeaa9a7b796de3c89e1e3",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 22,
+      "map": "route-14",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 5,
+      "points_sha256": "2cb23d6a4c4599837cb62ac63b4e843eab5116d08bf85b132681407e88caefe6",
+      "available": 14,
+      "reason": ""
+    },
+    {
+      "header": 23,
+      "map": "route-15",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 29,
+      "points_sha256": "526ea5586cd8efbd8ae2e25654593e61dc2ac6faf2abf9c6af2ed82a8076d56b",
+      "available": 117,
+      "reason": ""
+    },
+    {
+      "header": 23,
+      "map": "route-15",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 22,
+      "points_sha256": "f68408262fda833dc858186767df70df183695c08a61588350ccfe7dae193a8f",
+      "available": 49,
+      "reason": ""
+    },
+    {
+      "header": 24,
+      "map": "route-16",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 2,
+      "points_sha256": "de7e196ea5b76185caedebacfc45ef9bb430d8e664e613ccd259812f74f3704e",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 25,
+      "map": "route-17",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 8,
+      "points_sha256": "90cc64a304e6e276efdc16ea99d483e5c9a3f5a392e11bc94a03daa07f5db6cc",
+      "available": 8,
+      "reason": ""
+    },
+    {
+      "header": 26,
+      "map": "route-18",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 3,
+      "points_sha256": "549cafdf792190f52c68f6b5d0874aad74d2ee3ef1d461a4f90bc26555de605d",
+      "available": 3,
+      "reason": ""
+    },
+    {
+      "header": 26,
+      "map": "route-18",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 10,
+      "points_sha256": "a500578bb9663b449bb5d093d0c69846d267221389bcc755f42837b72de274da",
+      "available": 11,
+      "reason": ""
+    },
+    {
+      "header": 26,
+      "map": "route-18",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 3,
+      "points_sha256": "618d6833fef8b665559e71d27d32451d56372cfd71b9dd3bdb518d7936ecf8d6",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 27,
+      "map": "route-22",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 12,
+      "points_sha256": "bd23fd12b054c5ddd2daf9113435922c04a4907bc232ba06c0407010bb3fb4f7",
+      "available": 56,
+      "reason": ""
+    },
+    {
+      "header": 27,
+      "map": "route-22",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 7,
+      "points_sha256": "cf50aa2a57f69d5c5c3a73fee04491efaaf792dadca51a13bb919a9a80edb1ca",
+      "available": 18,
+      "reason": ""
+    },
+    {
+      "header": 27,
+      "map": "route-22",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 54,
+      "reason": "Route 22 : les 54 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les herbes ou le relief."
+    },
+    {
+      "header": 28,
+      "map": "route-24",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 2,
+      "points_sha256": "b700104c325693e68e06c1dae78aae78f27255f8f0a2e5bb5f7649fe790b2296",
+      "available": 3,
+      "reason": ""
+    },
+    {
+      "header": 28,
+      "map": "route-24",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 13,
+      "points_sha256": "2dea6412ce98dc8f3ce672459f341449adee0bb49d202e671b0607c27d960d62",
+      "available": 53,
+      "reason": ""
+    },
+    {
+      "header": 28,
+      "map": "route-24",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 5,
+      "points_sha256": "8f8794349dff568d315a99ea9ecee3503dc4406900be632242205de462d3e326",
+      "available": 174,
+      "reason": ""
+    },
+    {
+      "header": 29,
+      "map": "route-25",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 8,
+      "points_sha256": "9f90a31421d6bc2bec28782ac412ff9930a069dbfaca38a3261bff4a0c623253",
+      "available": 32,
+      "reason": ""
+    },
+    {
+      "header": 29,
+      "map": "route-25",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 21,
+      "points_sha256": "44be2cd1e023fb0b80035d2cd4bea66481a74dbcf9b4f02b40f70c3dec461b4f",
+      "available": 54,
+      "reason": ""
+    },
+    {
+      "header": 29,
+      "map": "route-25",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "1c9b687ba4785761ac09215e818b074abe56f68087caa74e14ad597e31aad927",
+      "available": 338,
+      "reason": ""
+    },
+    {
+      "header": 30,
+      "map": "route-26",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 36,
+      "points_sha256": "3b14ee9baba9ccefb37da336e01dab927400b3b09b1d4cfb48f1bb23294c5405",
+      "available": 154,
+      "reason": ""
+    },
+    {
+      "header": 30,
+      "map": "route-26",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 11,
+      "points_sha256": "5e8283388efdc48f6146e76a08acdbc27fc792d90754addaea4745c3fbcb9542",
+      "available": 22,
+      "reason": ""
+    },
+    {
+      "header": 30,
+      "map": "route-26",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "cd2baa41a3939ce6e42d267012dcffd1d6430fe501e3cf9ff16c10b2c22587ec",
+      "available": 437,
+      "reason": ""
+    },
+    {
+      "header": 31,
+      "map": "route-27",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 16,
+      "points_sha256": "32f4200af57226e64f18623f978ab6d5be2c7664e8eba02bc1f787c7351f0a3a",
+      "available": 55,
+      "reason": ""
+    },
+    {
+      "header": 31,
+      "map": "route-27",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 20,
+      "points_sha256": "d60af8ee0c6b3826d410fdc210666724487545392d3295237f91626374fbc0e0",
+      "available": 46,
+      "reason": ""
+    },
+    {
+      "header": 31,
+      "map": "route-27",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "c2ae3aac0ae67877fc1e1f0c4ff6bdecb6de1ab92f8abe8cdd9371f570962d22",
+      "available": 1877,
+      "reason": ""
+    },
+    {
+      "header": 32,
+      "map": "route-28",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 39,
+      "points_sha256": "47fff7df8210dbf193ec2adc6ead0cbca8c946527705eef572dd86376ed2b498",
+      "available": 150,
+      "reason": ""
+    },
+    {
+      "header": 32,
+      "map": "route-28",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 15,
+      "points_sha256": "4358c9db2fe323922732770da421b504a5edcbb788dcdc585b90904e7b29f457",
+      "available": 33,
+      "reason": ""
+    },
+    {
+      "header": 32,
+      "map": "route-28",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 1,
+      "points_sha256": "9175d24958428dd82927d39a238d57fe6a65f7efe58b55a40f6a9fb20da50865",
+      "available": 45,
+      "reason": ""
+    },
+    {
+      "header": 33,
+      "map": "route-29",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "106e4472f0b80d7703dde5e00e5ba55613bb262bc3fc09e2a72e184c80aaf526",
+      "available": 357,
+      "reason": ""
+    },
+    {
+      "header": 33,
+      "map": "route-29",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 40,
+      "points_sha256": "80169d4ccb636178af5c254475f41d70cc36931c17e375126a7db350a4212e5d",
+      "available": 95,
+      "reason": ""
+    },
+    {
+      "header": 34,
+      "map": "route-30",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "6ae5f6c3a5f94314abf7c0a45e5c6f6dfd9ccfe11f0e48532b98ec68ae9c9ea1",
+      "available": 165,
+      "reason": ""
+    },
+    {
+      "header": 34,
+      "map": "route-30",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 32,
+      "points_sha256": "6da163ccaeb5d269d0d0d3bfd219398fde4f5a461c518136792d8d7c37ca34f8",
+      "available": 75,
+      "reason": ""
+    },
+    {
+      "header": 34,
+      "map": "route-30",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 126,
+      "reason": "Route 30 : les 126 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables restent consultables sans inventer une hauteur d'eau."
+    },
+    {
+      "header": 35,
+      "map": "route-31",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 24,
+      "points_sha256": "65b98d254139b2239b7c9284a7051c1bf37f7d8f3f66f1c250b7117fbce97082",
+      "available": 95,
+      "reason": ""
+    },
+    {
+      "header": 35,
+      "map": "route-31",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 16,
+      "points_sha256": "cdc8c14d7a4ff431b822e8e4fa1c0a450571dd6a70774ee7f8e1a603a34251ca",
+      "available": 34,
+      "reason": ""
+    },
+    {
+      "header": 35,
+      "map": "route-31",
+      "scope": "johto",
+      "kind": "water",
+      "points": 3,
+      "points_sha256": "f5c0086b1e4d2ffa5c668e62f7fa8376b6804272752466397be9c82205f355b6",
+      "available": 76,
+      "reason": ""
+    },
+    {
+      "header": 36,
+      "map": "route-32",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "fcc7c4fab044a5de2b0e6c23ca05f3e4b86e5a6c57bff51ba954728fc1a286fc",
+      "available": 360,
+      "reason": ""
+    },
+    {
+      "header": 36,
+      "map": "route-32",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 40,
+      "points_sha256": "d4d7ca0d7946af89719082d1a7cfcddca648628eb34dc2e0062e0cdada2c5c33",
+      "available": 86,
+      "reason": ""
+    },
+    {
+      "header": 36,
+      "map": "route-32",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "1af0623029a4d8b04a974de069228e937d2177817895e49e528729860e6f85e1",
+      "available": 644,
+      "reason": ""
+    },
+    {
+      "header": 37,
+      "map": "route-33",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 12,
+      "points_sha256": "230424c08ba2b212d434c4d62290ce108d1793341aa430273a9acf0f2bb251e1",
+      "available": 56,
+      "reason": ""
+    },
+    {
+      "header": 37,
+      "map": "route-33",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 4,
+      "points_sha256": "3dd255fd0382723d8ed65aef8ce68df25c43e12127da6f16558ab43d768f078c",
+      "available": 8,
+      "reason": ""
+    },
+    {
+      "header": 38,
+      "map": "route-34",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 9,
+      "points_sha256": "2bd21d2c63f471f525c277d5176f09b5146ef4e175b81353af3b8f7ed90af6a8",
+      "available": 11,
+      "reason": ""
+    },
+    {
+      "header": 38,
+      "map": "route-34",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "e4edd878b95def97dfb40e62d72c3f35fa11e0d1b015ab5e41f307bab6ddbf03",
+      "available": 283,
+      "reason": ""
+    },
+    {
+      "header": 38,
+      "map": "route-34",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 16,
+      "points_sha256": "79552b73d836bc21ebad9c3ad5c18e2d1116a4d9c11b5572a833655dc4e87d77",
+      "available": 33,
+      "reason": ""
+    },
+    {
+      "header": 38,
+      "map": "route-34",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "d7305b5dcfc955d9f01c8d7d3590cb20de7c9c27835acaa8515e224d13630684",
+      "available": 444,
+      "reason": ""
+    },
+    {
+      "header": 39,
+      "map": "route-35",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 17,
+      "points_sha256": "44b2e7ff158e522bc60c28d47280d8c0ece21e42b6ee5e82a4ed591b6a4e33ca",
+      "available": 72,
+      "reason": ""
+    },
+    {
+      "header": 39,
+      "map": "route-35",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 19,
+      "points_sha256": "a32e82ff032134c69815c48630aabcc07f69aa71f3bee46a05c658e8c635cd51",
+      "available": 39,
+      "reason": ""
+    },
+    {
+      "header": 39,
+      "map": "route-35",
+      "scope": "johto",
+      "kind": "water",
+      "points": 7,
+      "points_sha256": "ac687fd141167af7ac6218f28296c0599c0c2764549fd1299ba61f1265891276",
+      "available": 112,
+      "reason": ""
+    },
+    {
+      "header": 40,
+      "map": "route-36",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 10,
+      "points_sha256": "e2ba14cdf373cf409cf1cb72d43f6237c4a38f062a9472a694fd175249e1da78",
+      "available": 44,
+      "reason": ""
+    },
+    {
+      "header": 40,
+      "map": "route-36",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 28,
+      "points_sha256": "92323fcb11c5886e9c8441f44d55fdc977d8a64714a70a4b6e21c97a8568f474",
+      "available": 59,
+      "reason": ""
+    },
+    {
+      "header": 41,
+      "map": "route-37",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 29,
+      "points_sha256": "7ed0b2c21771958c4f32320b5813fe7aa9a5da3986500d6072e1d162d44a3b1b",
+      "available": 133,
+      "reason": ""
+    },
+    {
+      "header": 41,
+      "map": "route-37",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 16,
+      "points_sha256": "48743cb0b4911280a850bbe05786821fdb5ca898de7dab49ccd667f697d8c1d5",
+      "available": 36,
+      "reason": ""
+    },
+    {
+      "header": 42,
+      "map": "route-38",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "5b3f1faf802f5972ffbdfe1090da94e5d12ba4e4e05bac8a8735e051378d4211",
+      "available": 197,
+      "reason": ""
+    },
+    {
+      "header": 42,
+      "map": "route-38",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 18,
+      "points_sha256": "7eda4fa06022824c8345345d15d52b58ddb9fc08a9d40dba6f46a2871ece7869",
+      "available": 38,
+      "reason": ""
+    },
+    {
+      "header": 43,
+      "map": "route-39",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 10,
+      "points_sha256": "f5d2f4105a5082a0e19b21c8fb55cf3ac499300e42e3102fa4d41faa9eaa8b56",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 43,
+      "map": "route-39",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 4,
+      "points_sha256": "0ab4b5ef4f2d9b6364ec26b91097379dfc44c286b19a8d0e3293fd0cb49dd2a9",
+      "available": 9,
+      "reason": ""
+    },
+    {
+      "header": 44,
+      "map": "route-42",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 2,
+      "points_sha256": "26cf05fd1fdf6633b4391f452ba76266aae12587fa183cc49d5fc0e15863403f",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 44,
+      "map": "route-42",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 11,
+      "points_sha256": "4ae76a3ef6955518e27306ad05f9aaa544395114ea227815879bec56a68cac76",
+      "available": 26,
+      "reason": ""
+    },
+    {
+      "header": 44,
+      "map": "route-42",
+      "scope": "johto",
+      "kind": "water",
+      "points": 6,
+      "points_sha256": "9f9b0347055270aee92d40896a323b0aed12e9778cdea9d4801ab6b57bc05d1d",
+      "available": 192,
+      "reason": ""
+    },
+    {
+      "header": 45,
+      "map": "route-43",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 17,
+      "points_sha256": "b5b68358b84dc10496b569b97af63d4684593c7687b349526eaf6866485e8a1d",
+      "available": 51,
+      "reason": ""
+    },
+    {
+      "header": 45,
+      "map": "route-43",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 19,
+      "points_sha256": "68168ad728c786f5195e0b87ecf8f10030fa2b13f654e1d083f66f40fba98880",
+      "available": 46,
+      "reason": ""
+    },
+    {
+      "header": 45,
+      "map": "route-43",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 144,
+      "reason": "Route 43 : les 144 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun marqueur sur les herbes ; tables conservées dans la liste."
+    },
+    {
+      "header": 46,
+      "map": "route-44",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 5,
+      "points_sha256": "77aa571d1dbabab6a36e59f3d8527ec0761e96d361b0cddcaf2e18d7434dbfaf",
+      "available": 13,
+      "reason": ""
+    },
+    {
+      "header": 46,
+      "map": "route-44",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 18,
+      "points_sha256": "1671f31184a02e10a89d0b8b73b18f42a70da0ea1ac00e2924b8f97941c0a6bd",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 46,
+      "map": "route-44",
+      "scope": "johto",
+      "kind": "water",
+      "points": 32,
+      "points_sha256": "d53178465b4992102fb9fe6b1d36a5db6908804ec29bb89b49654b01658d7dc1",
+      "available": 222,
+      "reason": ""
+    },
+    {
+      "header": 47,
+      "map": "route-45",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 6,
+      "points_sha256": "27568ccc5c4884e123d62cb7ebeffd683bf240773bdedcdc22b014946c130b5a",
+      "available": 7,
+      "reason": ""
+    },
+    {
+      "header": 47,
+      "map": "route-45",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "db82001f4f259cc20637e2f3dc8968cb1b4fe43ac7dbb8f07832203b42d30ea1",
+      "available": 270,
+      "reason": ""
+    },
+    {
+      "header": 47,
+      "map": "route-45",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 3,
+      "points_sha256": "c3bb7638933dd5fbee3231f4cae2f925fc7d1babc17c41fbf3358c9eea91f9b0",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 47,
+      "map": "route-45",
+      "scope": "johto",
+      "kind": "water",
+      "points": 12,
+      "points_sha256": "a2dd89442c1793446170017c869210e9dae92aa11542c68c795ad4dcca3a7136",
+      "available": 231,
+      "reason": ""
+    },
+    {
+      "header": 48,
+      "map": "route-46",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 35,
+      "points_sha256": "01b6dc90fd6b07a630a2eaf27b81d29aa444897d4967236c7ead11a011fd5cbc",
+      "available": 166,
+      "reason": ""
+    },
+    {
+      "header": 48,
+      "map": "route-46",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 10,
+      "points_sha256": "a6fc247165e694a921a2c56e679d348d096b2ef86268f710b4afa24cab0d6b96",
+      "available": 18,
+      "reason": ""
+    },
+    {
+      "header": 49,
+      "map": "pallet",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 8,
+      "points_sha256": "3e5cb651841c921dcdd602fe09f68a674f5729065456edb37b52292b6c775719",
+      "available": 16,
+      "reason": ""
+    },
+    {
+      "header": 49,
+      "map": "pallet",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 14,
+      "reason": "Bourg Palette : les 14 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur arbitraire."
+    },
+    {
+      "header": 50,
+      "map": "viridian",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 23,
+      "points_sha256": "ccc3bc26c9933f17bb73502bedb1812fcbbbbb3bc7b282a7d958cfbab33f73d4",
+      "available": 43,
+      "reason": ""
+    },
+    {
+      "header": 50,
+      "map": "viridian",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 29,
+      "reason": "Jadielle : les 29 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur le décor."
+    },
+    {
+      "header": 51,
+      "map": "pewter",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 28,
+      "points_sha256": "c2c7c119128ae38d47ca891220358e824a3c45713ffa4fbc780bbede54b5d60f",
+      "available": 57,
+      "reason": ""
+    },
+    {
+      "header": 52,
+      "map": "cerulean",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 14,
+      "points_sha256": "30c3e743cc86ff770bf53cfbf2ac9da70eadf0eb2a6bbd55cb2e552eceec1b75",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 52,
+      "map": "cerulean",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 21,
+      "points_sha256": "f51ebf4c5871ba8cde4aa42efac9654a8c723a72479e131a57b0d3fda2437093",
+      "available": 204,
+      "reason": ""
+    },
+    {
+      "header": 54,
+      "map": "vermilion",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 4,
+      "points_sha256": "3543f1737a1d8a1307320c56900d1ecdcbb0d48a9c4d72b8da84557fd17e1b66",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 54,
+      "map": "vermilion",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 10,
+      "points_sha256": "4795217e838dcf43b4de9a4c8dd188e11d99c882b6d0d7b7592921647c40d2ac",
+      "available": 22,
+      "reason": ""
+    },
+    {
+      "header": 54,
+      "map": "vermilion",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "a6a13260820758a207cead5c9ffacc779ae2ce08417d7f0702d15c961d03c51d",
+      "available": 1576,
+      "reason": ""
+    },
+    {
+      "header": 55,
+      "map": "celadon",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 34,
+      "points_sha256": "ae338823af78539b4ca89f00a413dee68af4bba2698a7de7e74faeabaaa3aaca",
+      "available": 68,
+      "reason": ""
+    },
+    {
+      "header": 55,
+      "map": "celadon",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 30,
+      "reason": "Céladopole : les 30 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les berges."
+    },
+    {
+      "header": 56,
+      "map": "fuchsia",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 18,
+      "points_sha256": "fdc2891e94aad927b689488d4d4a2e6eb0ef80817ffdf9e44ce4de1a0550eecf",
+      "available": 33,
+      "reason": ""
+    },
+    {
+      "header": 56,
+      "map": "fuchsia",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 8,
+      "points_sha256": "e48fef1f528b2f0391fdefe51cd31b000bf39bfa2044b7fe8de059024f2efa75",
+      "available": 72,
+      "reason": ""
+    },
+    {
+      "header": 57,
+      "map": "cinnabar-island",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 22,
+      "points_sha256": "e7138a0c76be5cf0bb35807bbf441bfbb3f6858cd441ffc00c4cd431a5673acb",
+      "available": 138,
+      "reason": ""
+    },
+    {
+      "header": 60,
+      "map": "new-bark",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 12,
+      "points_sha256": "76f6085032b169080c05f8c3f96de245dee55162c7d071e5bfa650d19697e136",
+      "available": 26,
+      "reason": ""
+    },
+    {
+      "header": 60,
+      "map": "new-bark",
+      "scope": "johto",
+      "kind": "water",
+      "points": 1,
+      "points_sha256": "0a20fb5628a3dedbaf5b415d0f1abedbc2f6f0ccbdb4e2e60eb6a7e0bbda0759",
+      "available": 22,
+      "reason": ""
+    },
+    {
+      "header": 67,
+      "map": "cherrygrove",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 10,
+      "points_sha256": "6053233fb6bdf03919aa4b51c9548f99063d3a7cb45d244f7fd59a95b5de35d7",
+      "available": 23,
+      "reason": ""
+    },
+    {
+      "header": 67,
+      "map": "cherrygrove",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "72449edd6d94bf867b1d22b8f744db013d7e53eb77f513f63409c59f5270e1fd",
+      "available": 491,
+      "reason": ""
+    },
+    {
+      "header": 73,
+      "map": "violet",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 28,
+      "points_sha256": "f1b0c11b04cd0c99c77da7a3da0810d60e3219f57e637b460a5a66552ae34f12",
+      "available": 58,
+      "reason": ""
+    },
+    {
+      "header": 73,
+      "map": "violet",
+      "scope": "johto",
+      "kind": "water",
+      "points": 34,
+      "points_sha256": "1ecf2cd829cac81e235469f57b638aa1856c78b17e79edd19bc8fd51fefb8bbf",
+      "available": 379,
+      "reason": ""
+    },
+    {
+      "header": 74,
+      "map": "azalea",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 16,
+      "points_sha256": "53b6107552eb5b04d915a614318f51d7c9f442c2e29f869bf7c4275d0b81cee9",
+      "available": 32,
+      "reason": ""
+    },
+    {
+      "header": 75,
+      "map": "cianwood",
+      "scope": "johto",
+      "kind": "rock",
+      "points": 4,
+      "points_sha256": "6a91bc873b365454b30b6fe2e2a79aa1f662bc44a4e0104a9132b26211af1a28",
+      "available": 5,
+      "reason": ""
+    },
+    {
+      "header": 75,
+      "map": "cianwood",
+      "scope": "johto",
+      "kind": "water",
+      "points": 12,
+      "points_sha256": "e1811978990b37e6515f041998b4dc984a8710facac75f86cceb138e81c07ae0",
+      "available": 271,
+      "reason": ""
+    },
+    {
+      "header": 77,
+      "map": "olivine",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "ce4de91bd28f13919de4cc6a1c670d704f9c89900e536950b7a0a824cf2dc184",
+      "available": 931,
+      "reason": ""
+    },
+    {
+      "header": 78,
+      "map": "ecruteak",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 18,
+      "points_sha256": "d8f428238f457ec417453310f31df5cfa9eda1aec02e74bbecdc4607a48ca4da",
+      "available": 39,
+      "reason": ""
+    },
+    {
+      "header": 78,
+      "map": "ecruteak",
+      "scope": "johto",
+      "kind": "water",
+      "points": 10,
+      "points_sha256": "be38919aacee5279e8734e1366c80cd9117fa0a64e279c56fd783e66678af68d",
+      "available": 63,
+      "reason": ""
+    },
+    {
+      "header": 88,
+      "map": "lake-of-rage",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 23,
+      "points_sha256": "307f9aafc3f6286b7324a56d9ab1e83aa51a0013d3644cea4bbea648243abc0a",
+      "available": 49,
+      "reason": ""
+    },
+    {
+      "header": 88,
+      "map": "lake-of-rage",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "3d2d2842452fd7b605551e1be57f149d6ac7d67fa39a265ac6bde0684a40729d",
+      "available": 1795,
+      "reason": ""
+    },
+    {
+      "header": 89,
+      "map": "blackthorn",
+      "scope": "johto",
+      "kind": "water",
+      "points": 7,
+      "points_sha256": "d7acffc9efad37fa8375388eec2e80d39b257fd6dcab426cc746c0be9adf10dd",
+      "available": 108,
+      "reason": ""
+    },
+    {
+      "header": 90,
+      "map": "mount-silver",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 11,
+      "points_sha256": "625977b0aee0ac561bdf6d38338b89c0cf426185a595f6a7460dde9579ec206f",
+      "available": 40,
+      "reason": ""
+    },
+    {
+      "header": 90,
+      "map": "mount-silver",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 5,
+      "points_sha256": "908891a9e01a68b8a4a0f9a1369643ed4f230d5253cdfdee9e347bb052944bf1",
+      "available": 9,
+      "reason": ""
+    },
+    {
+      "header": 90,
+      "map": "mount-silver",
+      "scope": "johto",
+      "kind": "water",
+      "points": 1,
+      "points_sha256": "9310dfd683f57afe4cf4c2ca39cebb03dba5e80d7b5be42ef384c2e0a3f6c754",
+      "available": 33,
+      "reason": ""
+    },
+    {
+      "header": 91,
+      "map": "route-19",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 3,
+      "points_sha256": "a874e009cd34d5fbbbc797d2b6c948c8f65081d9273d4082f1c75399bdb033d1",
+      "available": 5,
+      "reason": ""
+    },
+    {
+      "header": 91,
+      "map": "route-19",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "10e3da6851f8acea18686d5ee8e6c455d36ba40fe86c58ca4666c274fe26c7b4",
+      "available": 1134,
+      "reason": ""
+    },
+    {
+      "header": 92,
+      "map": "route-20",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "570864eeb663217b0b0fe3ba4185b5bfbe6d9e3a6c81ab855357d79ca1cb810e",
+      "available": 2974,
+      "reason": ""
+    },
+    {
+      "header": 93,
+      "map": "route-21",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 11,
+      "points_sha256": "5738d7442243ee8e3c0514a5770223f406ddbf67e33f59ed2934e268d71a8025",
+      "available": 14,
+      "reason": ""
+    },
+    {
+      "header": 93,
+      "map": "route-21",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 23,
+      "points_sha256": "4f0466ce844ff2051a3e14e617334135c1281ad2dc6e50c461b32e3fb6d64477",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 93,
+      "map": "route-21",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 3,
+      "points_sha256": "f4a0720fa66c848d01393e8fe9f8974f080a720acd6bdd26fcbbe31fe42b6027",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 93,
+      "map": "route-21",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "7863574433ca07bc9ed5d94e07d94d14909d6784000fadcc395d3b3fcd5e4254",
+      "available": 1955,
+      "reason": ""
+    },
+    {
+      "header": 94,
+      "map": "route-40",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "176bcc644354aadb6e4d46a4f038f0465abf312fe25447c97f993da4534cdcaa",
+      "available": 1022,
+      "reason": ""
+    },
+    {
+      "header": 95,
+      "map": "route-41",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "22683c776add3f4aaa93164c8719aa061ff4d0dec2d9e27c48041cb73baf324d",
+      "available": 2498,
+      "reason": ""
+    },
+    {
+      "header": 96,
+      "map": "national-park",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "9a3294dfd761b13668af3716f9b658a7a5a5e22a8158495080ecc273e0d5f741",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 96,
+      "map": "national-park",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "fc439427c8b3120e7f4e7134b06f8548e837d76f6b9d6db2599fcc95258ff7d2",
+      "available": 487,
+      "reason": ""
+    },
+    {
+      "header": 96,
+      "map": "national-park",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 27,
+      "points_sha256": "8d90ff12e61ec7e47ba046fe40185e75cb4e124d059390fffb965f34821de2df",
+      "available": 58,
+      "reason": ""
+    },
+    {
+      "header": 99,
+      "map": "union-cave-1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "ccadbab917023987237a2db68fce7a8a62d36ebb8d4954c6aee38fbf8100765f",
+      "available": 413,
+      "reason": ""
+    },
+    {
+      "header": 99,
+      "map": "union-cave-1f",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 4,
+      "points_sha256": "16b71c8c8f499f45cc2427e95b844ea2e97dc5a9bdbcbd68798a6c8caf3049cd",
+      "available": 4,
+      "reason": ""
+    },
+    {
+      "header": 99,
+      "map": "union-cave-1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 26,
+      "points_sha256": "48ffc94ae676ba7c6ec75b2b17baa231b1cdedf0c63f4e1e03c3c25ba41594a0",
+      "available": 259,
+      "reason": ""
+    },
+    {
+      "header": 106,
+      "map": "diglett-cave",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "11b0576a9a087c384413abd492701bb7063cbb2aa5f53fff5ab52cbe5d697d21",
+      "available": 473,
+      "reason": ""
+    },
+    {
+      "header": 107,
+      "map": "mount-moon",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "b789c77cc63163cdf65e1d46844b40e41c8d730283f431789d466fb7905de55b",
+      "available": 219,
+      "reason": ""
+    },
+    {
+      "header": 108,
+      "map": "rock-tunnel-1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "37ec1901e7db08d7eff9eba5163faca3ac0112577e889af8a5654022bbd43046",
+      "available": 601,
+      "reason": ""
+    },
+    {
+      "header": 113,
+      "map": "ruins-of-alph",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 2,
+      "points_sha256": "b87b13c6e3893ffd0952a9159c9674ad8eff6c1cf53d45d736b19cbbde87936a",
+      "available": 3,
+      "reason": ""
+    },
+    {
+      "header": 113,
+      "map": "ruins-of-alph",
+      "scope": "johto",
+      "kind": "rock",
+      "points": 3,
+      "points_sha256": "1195fcdc83957dd11fa96cc3336557b912f05b2729f0e49294cb1ea9c92edc9c",
+      "available": 5,
+      "reason": ""
+    },
+    {
+      "header": 113,
+      "map": "ruins-of-alph",
+      "scope": "johto",
+      "kind": "water",
+      "points": 5,
+      "points_sha256": "fab7a64b5c0269fb0571507849a43c01fff820296b0df2f5f0c8dd6d79ef7f1e",
+      "available": 96,
+      "reason": ""
+    },
+    {
+      "header": 117,
+      "map": "ilex-forest",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "0f7a8bf9b8e278bf0f12ef056471fe308b5923654dc27c4008824755485c0eb0",
+      "available": 575,
+      "reason": ""
+    },
+    {
+      "header": 117,
+      "map": "ilex-forest",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 40,
+      "points_sha256": "2979e1c7b9032ea4b74d17728782f4d5d0933c0fed71270b50733bb12378fbc1",
+      "available": 148,
+      "reason": ""
+    },
+    {
+      "header": 117,
+      "map": "ilex-forest",
+      "scope": "johto",
+      "kind": "water",
+      "points": 16,
+      "points_sha256": "6b0816e499c026145d5e451d6bb35b7bb369fde57dd17ac95df3fb0ae70fa56c",
+      "available": 79,
+      "reason": ""
+    },
+    {
+      "header": 119,
+      "map": "mount-mortar-1f-entrance",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "44bbf6365a2bccc6a0c6afdd36b6f2944187caae2d05a86e7f1f52a9bef73c54",
+      "available": 443,
+      "reason": ""
+    },
+    {
+      "header": 119,
+      "map": "mount-mortar-1f-entrance",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 9,
+      "points_sha256": "8a89dbddd3eb5f44ad3cf5ac8bcebde5d34abf7c5edbd2d61af9adfacd302e0c",
+      "available": 13,
+      "reason": ""
+    },
+    {
+      "header": 119,
+      "map": "mount-mortar-1f-entrance",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "405380d6624b39eb441ffd437ee2e33982a7b6e8db93a1cefd06fe99a2bb64f1",
+      "available": 822,
+      "reason": ""
+    },
+    {
+      "header": 120,
+      "map": "ice-path-1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "2f2a720f75e4f91e13b63526c372c49197658d2ccc0052a201ff0fba6eebc462",
+      "available": 454,
+      "reason": ""
+    },
+    {
+      "header": 121,
+      "map": "whirl-islands-1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "4150806b14acb2df5a7b6512fdfd4b121925e2f8c44889037a52f8c63ca86c1f",
+      "available": 258,
+      "reason": ""
+    },
+    {
+      "header": 121,
+      "map": "whirl-islands-1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 4,
+      "points_sha256": "8f05933da0b84e9c2659b54de24f4ec2eda0974d236d56b67d55a8b6d4c40bf3",
+      "available": 67,
+      "reason": ""
+    },
+    {
+      "header": 122,
+      "map": "mount-silver-cave-1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "389a8d050652704c03b32742f3768ad0223cf14751e0f3ff0a20386a7c32b8af",
+      "available": 357,
+      "reason": ""
+    },
+    {
+      "header": 122,
+      "map": "mount-silver-cave-1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "1fbd2b8cd9f154617ab247ace0d2a3196601ac7ded971519b49a72f4645768ba",
+      "available": 271,
+      "reason": ""
+    },
+    {
+      "header": 123,
+      "map": "dark-cave-route-45-side",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "9b314b049ba484356baa63bf665e12a975b99ce28b06159a2517b0e88ad7799e",
+      "available": 459,
+      "reason": ""
+    },
+    {
+      "header": 123,
+      "map": "dark-cave-route-45-side",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 2,
+      "points_sha256": "94e2b8148d96674e17d36048241aabe19a40025e532b5bdaa67a14eab1d811c1",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 123,
+      "map": "dark-cave-route-45-side",
+      "scope": "johto",
+      "kind": "water",
+      "points": 31,
+      "points_sha256": "6fc51741cc162df0fdb5c7e93e16a1fcf00f558729cf3538d3fa46009e78d603",
+      "available": 287,
+      "reason": ""
+    },
+    {
+      "header": 124,
+      "map": "victory-road-1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "a509dc8243b5109751a5e80aa68649afa733b20fedc2faa28be3033611cb5109",
+      "available": 546,
+      "reason": ""
+    },
+    {
+      "header": 126,
+      "map": "tohjo-falls",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 3,
+      "points_sha256": "e643353d41bd22e456d3ac413b8e5b08edb3645395db8f1f9a98822a5e5711a8",
+      "available": 4,
+      "reason": ""
+    },
+    {
+      "header": 126,
+      "map": "tohjo-falls",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 19,
+      "points_sha256": "daff11250afbc86b5be6938ace587bea97ee5637c62be05185bb6279cf4ecb2f",
+      "available": 91,
+      "reason": ""
+    },
+    {
+      "header": 145,
+      "map": "cerulean-cave-1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "42f516d4e295791c91934cb3d123e1188396b26c54b56d8b994e79514094d1b4",
+      "available": 521,
+      "reason": ""
+    },
+    {
+      "header": 145,
+      "map": "cerulean-cave-1f",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 6,
+      "points_sha256": "d2fa0960b52385ef51a89fa83221eeb4f488056614e8343589102a085e24986f",
+      "available": 7,
+      "reason": ""
+    },
+    {
+      "header": 145,
+      "map": "cerulean-cave-1f",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 34,
+      "points_sha256": "a9d69e9883be34c05a51aa82707451cd80ccffb58275548a8717d6f07c9f300d",
+      "available": 298,
+      "reason": ""
+    },
+    {
+      "header": 146,
+      "map": "seafoam-islands-1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 37,
+      "points_sha256": "a540d2df793baa25ec37cf42a621e3743ad63c76d2a0aa9d81c3d1df995e83c3",
+      "available": 158,
+      "reason": ""
+    },
+    {
+      "header": 147,
+      "map": "viridian-forest",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "e9d52b5c81f2826b7de8ffdbe0205b40719789332cf25c77ca72cece3bd229df",
+      "available": 512,
+      "reason": ""
+    },
+    {
+      "header": 147,
+      "map": "viridian-forest",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 21,
+      "points_sha256": "acc961d0099f92aef3d16eb6cff881e0bb35cb39d7d2c69fc6cedf7541c36992",
+      "available": 59,
+      "reason": ""
+    },
+    {
+      "header": 151,
+      "map": "route-47",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 9,
+      "points_sha256": "90639a1b88fa88c2f24d103fbb3aee41dac75a5e95300c1f4a04a5a2001ba778",
+      "available": 14,
+      "reason": ""
+    },
+    {
+      "header": 151,
+      "map": "route-47",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 4,
+      "points_sha256": "4d7804534b5d63375f6a2ddcf184bb07349de663e29ebc2ded630dcff77ff550",
+      "available": 5,
+      "reason": ""
+    },
+    {
+      "header": 151,
+      "map": "route-47",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 13,
+      "points_sha256": "550cda059d07bab08255dfea812ba9b49937f0c242a5abac6d93102eee5e85de",
+      "available": 28,
+      "reason": ""
+    },
+    {
+      "header": 151,
+      "map": "route-47",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "15f4b0cc359b9d6a358e208f91f80dbd55c5f78ca37d38382b791631100df986",
+      "available": 2162,
+      "reason": ""
+    },
+    {
+      "header": 152,
+      "map": "route-48",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 12,
+      "points_sha256": "00cdbaa7c6693283b7b57c88af8dc322ee061d51001ca3ce881dbc0296b47028",
+      "available": 50,
+      "reason": ""
+    },
+    {
+      "header": 152,
+      "map": "route-48",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 7,
+      "points_sha256": "4000011a871722457c61f0bb34db524730ca29d4081df30408e056901461310e",
+      "available": 12,
+      "reason": ""
+    },
+    {
+      "header": 153,
+      "map": "union-cave-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 31,
+      "points_sha256": "9fde193af0969407eaae54a894b9279a76c13c819c29e83e14a9b9ccfd2a773f",
+      "available": 81,
+      "reason": ""
+    },
+    {
+      "header": 153,
+      "map": "union-cave-b1f",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 1,
+      "points_sha256": "52f3fc8549cd8b0cd3e494617741827d488c93d863b6d322fca37375a0375662",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 153,
+      "map": "union-cave-b1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 3,
+      "points_sha256": "9a209850c4e4b6ad2c31156cd39a049bbb965cd108ecef52d803a33eb2e106d5",
+      "available": 105,
+      "reason": ""
+    },
+    {
+      "header": 154,
+      "map": "union-cave-b2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "61c97e1f58aeaf6d4a0f1dfc711fa0378e6c9412eaa193c542f03eeedaf74e6a",
+      "available": 183,
+      "reason": ""
+    },
+    {
+      "header": 154,
+      "map": "union-cave-b2f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "452c555fd7e17098832678148a9fd39640dbcafba560004893e2dcb818e8c901",
+      "available": 386,
+      "reason": ""
+    },
+    {
+      "header": 155,
+      "map": "sprout-tower-2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 33,
+      "points_sha256": "b5df1276b781ea3bab244e61388efe0687fe30634c150c97e88d9d57c71c4b12",
+      "available": 87,
+      "reason": ""
+    },
+    {
+      "header": 156,
+      "map": "sprout-tower-3f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Tour Chétiflor 2e étage : aucune projection BDHC de marche ne correspond à la profondeur du décor visible à une demi-case près. Les rencontres restent dans la liste sans marqueur sur les parois ou sous le plancher."
+    },
+    {
+      "header": 174,
+      "map": "safari-zone-gate",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 17,
+      "points_sha256": "89acbcd122cb7fc4cb20f18ab3643b02ceef75200e856cb14afabcc4f433feb8",
+      "available": 34,
+      "reason": ""
+    },
+    {
+      "header": 176,
+      "map": "dark-cave-route-31-side",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "9d99484a8af32750e70ef7f9fcbc9a0fe60824007cd2989ffdf2ccbd3c1702cd",
+      "available": 482,
+      "reason": ""
+    },
+    {
+      "header": 176,
+      "map": "dark-cave-route-31-side",
+      "scope": "johto",
+      "kind": "rock",
+      "points": 3,
+      "points_sha256": "863b25353b373f9635fbf5c34613bd7a2c95c26b01b84c3a2425e7302ac78f63",
+      "available": 4,
+      "reason": ""
+    },
+    {
+      "header": 176,
+      "map": "dark-cave-route-31-side",
+      "scope": "johto",
+      "kind": "water",
+      "points": 9,
+      "points_sha256": "571697d6638d5effc1468301b59e71180e0166460840d85fb13c72ac8919a444",
+      "available": 109,
+      "reason": ""
+    },
+    {
+      "header": 177,
+      "map": "slowpoke-well-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Puits Ramoloss sous-sol 1 : les surfaces BDHC de marche sont décalées par rapport à la géométrie visible de plus de huit unités de profondeur. Aucun marqueur arbitraire ; rencontres conservées dans la liste."
+    },
+    {
+      "header": 177,
+      "map": "slowpoke-well-b1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 20,
+      "reason": "Puits Ramoloss sous-sol 1 : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables de Surf et de pêche restent consultables sans marqueur sur les murs."
+    },
+    {
+      "header": 178,
+      "map": "victory-road-2f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "972763086275b5b36308d5fee9d247b094310b12854a793c9d5b8db4780edfac",
+      "available": 835,
+      "reason": ""
+    },
+    {
+      "header": 179,
+      "map": "victory-road-3f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "cf1af4dcc116fa2bc1c2243d0b41ea32ec86a9502b713433e40c300901ee580e",
+      "available": 820,
+      "reason": ""
+    },
+    {
+      "header": 179,
+      "map": "victory-road-3f",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 6,
+      "points_sha256": "d8ccaa2a01063f52ccac1bcf2fd0f63f812fca8bcc0ac356412b12e9f5f63802",
+      "available": 7,
+      "reason": ""
+    },
+    {
+      "header": 181,
+      "map": "slowpoke-well-b2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 32,
+      "points_sha256": "00f6f092c50db949ab1babca4fee70225cf45fdd2f4c7e90971f832ed018ae30",
+      "available": 116,
+      "reason": ""
+    },
+    {
+      "header": 181,
+      "map": "slowpoke-well-b2f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "dee1c9f52f8ef1d8c0b494a91dc849b9f8f11d4bc449bd92f187479577411a86",
+      "available": 394,
+      "reason": ""
+    },
+    {
+      "header": 217,
+      "map": "burned-tower-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "1fb50e8dd9df9f5937b7b6a47c4b90a88a8c1c02cc53e791f3c9a4598c0280ca",
+      "available": 232,
+      "reason": ""
+    },
+    {
+      "header": 237,
+      "map": "ice-path-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "93993645a308213064dcbd3f49ae0ef5d3982d7e190dd4891f7458b6888b09ae",
+      "available": 256,
+      "reason": ""
+    },
+    {
+      "header": 238,
+      "map": "ice-path-b2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "cbf9b6c244365d1285915dc8c7f5ab538a5b7ed94ee3594e0f5207d6de2f5a9f",
+      "available": 192,
+      "reason": ""
+    },
+    {
+      "header": 239,
+      "map": "ice-path-b3f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 35,
+      "points_sha256": "e49568727caacacb325f84a145f4eb776fadedebf73909920bb52717e8d5f7bb",
+      "available": 139,
+      "reason": ""
+    },
+    {
+      "header": 242,
+      "map": "whirl-islands-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "8f52e0dbb13448ba40dd20eeee314b014cd27067553b04f5a8a820a3aa239a0f",
+      "available": 1616,
+      "reason": ""
+    },
+    {
+      "header": 243,
+      "map": "whirl-islands-b2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "ddff6be53ce63b98d2376e6d49bd2fb3e5ef3558532b6cd53c59185fe2e36fc3",
+      "available": 162,
+      "reason": ""
+    },
+    {
+      "header": 243,
+      "map": "whirl-islands-b2f",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 2,
+      "points_sha256": "07e9a8c1e4333a2b9716adc46231637547102b709250d2a41b518af658e30ae1",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 243,
+      "map": "whirl-islands-b2f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "b294792777704a63bae8d7105a5bca2bd9ffa6a187ce9491579404cfe7469153",
+      "available": 1127,
+      "reason": ""
+    },
+    {
+      "header": 250,
+      "map": "mount-mortar-1f-back",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "6baf2fddf7febbb99860a8ca518742e42428431eb3b4dbdcb52ecc41b6eb5f1a",
+      "available": 2229,
+      "reason": ""
+    },
+    {
+      "header": 251,
+      "map": "mount-mortar-2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "3d58c5fa76c84b1f9ecb7016b5dc6a1d22a839288b050c20fa9c1926c03e4037",
+      "available": 488,
+      "reason": ""
+    },
+    {
+      "header": 251,
+      "map": "mount-mortar-2f",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 1,
+      "points_sha256": "c32b02e63eabbac4227f04d9c5ad8258ae9451589fc2dcb0b35d061627b32142",
+      "available": 1,
+      "reason": ""
+    },
+    {
+      "header": 251,
+      "map": "mount-mortar-2f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 31,
+      "points_sha256": "204fcce4de91389f5d34a588f79870b2dd7f58108408611036544607e287cfdb",
+      "available": 290,
+      "reason": ""
+    },
+    {
+      "header": 252,
+      "map": "mount-mortar-b1f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "24c5a82e090933643122f2f70355b579d9a3a5aae1fd75d6609126863fe56b40",
+      "available": 364,
+      "reason": ""
+    },
+    {
+      "header": 252,
+      "map": "mount-mortar-b1f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 25,
+      "points_sha256": "3c2b2b0de09cbe54c046cec299aa6c35273e731dfce74f121ee2090d85a1a03e",
+      "available": 503,
+      "reason": ""
+    },
+    {
+      "header": 253,
+      "map": "dragons-den",
+      "scope": "johto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "7d4927001ab985c2b3d28277ec783652f559f295dbceec2b5d9b6074a2756b41",
+      "available": 618,
+      "reason": ""
+    },
+    {
+      "header": 279,
+      "map": "cliff-edge-gate",
+      "scope": "johto",
+      "kind": "water",
+      "points": 6,
+      "points_sha256": "766db041dfb1f4f75eb798300dbbb83f9a4bb6e1668d44670abd06f50b7b6239",
+      "available": 27,
+      "reason": ""
+    },
+    {
+      "header": 315,
+      "map": "ruins-of-alph-underground-hall",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "0276740cf5519b73a70ab613ce951214706d77c9419939ca38ec23eab0bb4ce5",
+      "available": 621,
+      "reason": ""
+    },
+    {
+      "header": 332,
+      "map": "bell-tower-2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 28,
+      "points_sha256": "65e6a2c5963797b49d5a4e99b56757ac6842df4e6aa3eca94f166dfca6e31aae",
+      "available": 102,
+      "reason": ""
+    },
+    {
+      "header": 333,
+      "map": "bell-tower-3f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 31,
+      "points_sha256": "bf5ff0331c7434d14497d06292a62c79bc47b764b485a51a1ed6d3f9075ff7e4",
+      "available": 77,
+      "reason": ""
+    },
+    {
+      "header": 334,
+      "map": "bell-tower-4f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 31,
+      "points_sha256": "a531b2554925efebd341f699dfca73e08d32b7b83fc53f858915dc1f9e574acc",
+      "available": 54,
+      "reason": ""
+    },
+    {
+      "header": 335,
+      "map": "bell-tower-5f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 27,
+      "points_sha256": "27b4c97c04cdb70b0acfe87618dc313932900d8cb0ce386402ab8186b2e77d59",
+      "available": 50,
+      "reason": ""
+    },
+    {
+      "header": 336,
+      "map": "bell-tower-6f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 21,
+      "points_sha256": "85f70d84790db615b78a01b33539aa41c5c33815ca4f06af75c66d29ff7b41fd",
+      "available": 60,
+      "reason": ""
+    },
+    {
+      "header": 337,
+      "map": "bell-tower-7f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 19,
+      "points_sha256": "09e1e263953a60cce0279512df61eac7f7d161b0c79f0d816f0d132c0fd4fe2f",
+      "available": 45,
+      "reason": ""
+    },
+    {
+      "header": 338,
+      "map": "bell-tower-8f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 19,
+      "points_sha256": "d7b57de1af2f1cd77d63decf214a0579f86d3020ff41898b840899c2ee8d0caa",
+      "available": 53,
+      "reason": ""
+    },
+    {
+      "header": 339,
+      "map": "bell-tower-9f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 10,
+      "points_sha256": "9a20a6a1b318d42d3c730e06e63469de4f16c1e47d332053cbbc798e832c646e",
+      "available": 16,
+      "reason": ""
+    },
+    {
+      "header": 341,
+      "map": "bell-tower-10f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Tour Carillon 9e étage : aucune projection BDHC de marche ne correspond à la profondeur du décor visible à une demi-case près. Les rencontres restent dans la liste sans marqueur flottant ou masqué."
+    },
+    {
+      "header": 342,
+      "map": "cliff-cave",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 5,
+      "points_sha256": "5911ebac021167ac8c1547afb5ba04863e9ba40b14b0bc7d72c1b0bad835a3d0",
+      "available": 17,
+      "reason": ""
+    },
+    {
+      "header": 342,
+      "map": "cliff-cave",
+      "scope": "johto",
+      "kind": "rock",
+      "points": 5,
+      "points_sha256": "6c894160ff8b88f97da69cc9fea569efc452491150d82a57d9b0d2cba4801b29",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 343,
+      "map": "safari-zone-01",
+      "scope": "special",
+      "kind": "grass",
+      "points": 27,
+      "points_sha256": "0af4797b787a41e53af6a3c66c3e6c3dce08b89131ae54ad15e81dd7a3e99cd2",
+      "available": 119,
+      "reason": ""
+    },
+    {
+      "header": 343,
+      "map": "safari-zone-01",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 0 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 652."
+    },
+    {
+      "header": 344,
+      "map": "safari-zone-02",
+      "scope": "special",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "dad58db7409bbc62bb5700ad3b17e3d58baa8bc4ac61def561577d4cc04e37b8",
+      "available": 1,
+      "reason": ""
+    },
+    {
+      "header": 344,
+      "map": "safari-zone-02",
+      "scope": "special",
+      "kind": "grass",
+      "points": 26,
+      "points_sha256": "95ae4a1b0b7d43e5a308944dd3bdc234b62e8b8a7c2d4cc2828bdd4151854c89",
+      "available": 91,
+      "reason": ""
+    },
+    {
+      "header": 344,
+      "map": "safari-zone-02",
+      "scope": "special",
+      "kind": "water",
+      "points": 3,
+      "points_sha256": "fc65010cb3b5d3b9c57657dd1e390f2270b6511205a91bb4e172daa18f11e560",
+      "available": 63,
+      "reason": ""
+    },
+    {
+      "header": 345,
+      "map": "safari-zone-03",
+      "scope": "special",
+      "kind": "grass",
+      "points": 10,
+      "points_sha256": "7e2b78ba0192105994e4024c03bb442d2cba97a64b9d7bc05a9d9fead5a433d4",
+      "available": 42,
+      "reason": ""
+    },
+    {
+      "header": 345,
+      "map": "safari-zone-03",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 2 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 654."
+    },
+    {
+      "header": 346,
+      "map": "safari-zone-04",
+      "scope": "special",
+      "kind": "grass",
+      "points": 15,
+      "points_sha256": "4120c1b846022632e08de725476364a3192b70fda62dc1a1d716f1b371da34af",
+      "available": 68,
+      "reason": ""
+    },
+    {
+      "header": 346,
+      "map": "safari-zone-04",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 3 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 655."
+    },
+    {
+      "header": 347,
+      "map": "safari-zone-05",
+      "scope": "special",
+      "kind": "grass",
+      "points": 1,
+      "points_sha256": "423f4ee312cc3bebd59217722e87d3d5a4595daaed5873d61db9dd00377e0832",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 347,
+      "map": "safari-zone-05",
+      "scope": "special",
+      "kind": "water",
+      "points": 7,
+      "points_sha256": "75855076d080be0b970e7e577bd94e6e2c38c1ff812cb259c17a8c8f29a094bf",
+      "available": 88,
+      "reason": ""
+    },
+    {
+      "header": 348,
+      "map": "safari-zone-06",
+      "scope": "special",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "006c3ffb51b1a64509387f42db98ddffadc667e445b5eced4e6bbbb48825e0dc",
+      "available": 1,
+      "reason": ""
+    },
+    {
+      "header": 348,
+      "map": "safari-zone-06",
+      "scope": "special",
+      "kind": "grass",
+      "points": 16,
+      "points_sha256": "020242cabe047a0140bd0faa2dd5b14df7ba76f3702756588ecfbfe1b31a5de3",
+      "available": 70,
+      "reason": ""
+    },
+    {
+      "header": 348,
+      "map": "safari-zone-06",
+      "scope": "special",
+      "kind": "water",
+      "points": 19,
+      "points_sha256": "196939fd7f369fd0787931ce5ae1ff5a9a1469367687af3fb95d13972cb8b5d2",
+      "available": 211,
+      "reason": ""
+    },
+    {
+      "header": 349,
+      "map": "safari-zone-07",
+      "scope": "special",
+      "kind": "grass",
+      "points": 22,
+      "points_sha256": "ee2149b7214ba96b8d2a1657a375060d275450093373573b93b57f5c63846631",
+      "available": 88,
+      "reason": ""
+    },
+    {
+      "header": 349,
+      "map": "safari-zone-07",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 6 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 658."
+    },
+    {
+      "header": 350,
+      "map": "safari-zone-08",
+      "scope": "special",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "006c3ffb51b1a64509387f42db98ddffadc667e445b5eced4e6bbbb48825e0dc",
+      "available": 1,
+      "reason": ""
+    },
+    {
+      "header": 350,
+      "map": "safari-zone-08",
+      "scope": "special",
+      "kind": "grass",
+      "points": 3,
+      "points_sha256": "f093079a144e2c401abf0487a5cc8663c3f44c4da360682f7f6a54021c64a5ec",
+      "available": 9,
+      "reason": ""
+    },
+    {
+      "header": 350,
+      "map": "safari-zone-08",
+      "scope": "special",
+      "kind": "water",
+      "points": 8,
+      "points_sha256": "11e0194a3d3d515f84e56399b0a56c49723ecec73fd23c709bcb02e8c349981f",
+      "available": 138,
+      "reason": ""
+    },
+    {
+      "header": 351,
+      "map": "safari-zone-09",
+      "scope": "special",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "dad58db7409bbc62bb5700ad3b17e3d58baa8bc4ac61def561577d4cc04e37b8",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 351,
+      "map": "safari-zone-09",
+      "scope": "special",
+      "kind": "grass",
+      "points": 28,
+      "points_sha256": "c02c52cfbe6ed395d12c356e677bac5dbfe544902cce28268b33a4a59223f7f4",
+      "available": 103,
+      "reason": ""
+    },
+    {
+      "header": 351,
+      "map": "safari-zone-09",
+      "scope": "special",
+      "kind": "water",
+      "points": 7,
+      "points_sha256": "b8701e9e08091105c4dc9d4fbaf8af9853b1821d620f8cddfd0c7ec62da9c3b5",
+      "available": 179,
+      "reason": ""
+    },
+    {
+      "header": 352,
+      "map": "safari-zone-10",
+      "scope": "special",
+      "kind": "grass",
+      "points": 25,
+      "points_sha256": "e1cca3717a1536ae4c9fba2690c1ce8c7492e3f05479c916089d29f820f03fcc",
+      "available": 95,
+      "reason": ""
+    },
+    {
+      "header": 352,
+      "map": "safari-zone-10",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 9 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 661."
+    },
+    {
+      "header": 353,
+      "map": "safari-zone-11",
+      "scope": "special",
+      "kind": "grass",
+      "points": 13,
+      "points_sha256": "cb288362da56c82ac3b7c7fd11c8d887cfe9247f7d2b3a44ef5165eccdc56daf",
+      "available": 46,
+      "reason": ""
+    },
+    {
+      "header": 353,
+      "map": "safari-zone-11",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 10 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 662."
+    },
+    {
+      "header": 354,
+      "map": "safari-zone-12",
+      "scope": "special",
+      "kind": "grass",
+      "points": 10,
+      "points_sha256": "5bfcb44a67112421bafadde671d4f10dc070ed8de11f1c579f34c8c97e910dd6",
+      "available": 40,
+      "reason": ""
+    },
+    {
+      "header": 354,
+      "map": "safari-zone-12",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Habitat Safari 11 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 663."
+    },
+    {
+      "header": 357,
+      "map": "safari-zone-entrance-exterior",
+      "scope": "special",
+      "kind": "floor",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "En-tête Safari dynamique : la matrice 212 est peuplée à l'exécution. Les rencontres sont placées sur les douze gabarits 343 à 354 et jamais sur l'image vide de l'entrée."
+    },
+    {
+      "header": 357,
+      "map": "safari-zone-entrance-exterior",
+      "scope": "special",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "En-tête Safari dynamique : la matrice 212 est peuplée à l'exécution. Les rencontres aquatiques sont placées sur les gabarits avec eau et ne prédisent aucun arrangement des six habitats actifs."
+    },
+    {
+      "header": 414,
+      "map": "route-2-east",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 15,
+      "points_sha256": "a74833d3a806ed027013c631dfd93a9072b132181f57d7aa84ecc6b2e4013627",
+      "available": 64,
+      "reason": ""
+    },
+    {
+      "header": 414,
+      "map": "route-2-east",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 15,
+      "points_sha256": "af8a0206e0594804e3d0efd74cedf8e1cb6f1bae0c5a72395fa0a629231d65a3",
+      "available": 29,
+      "reason": ""
+    },
+    {
+      "header": 422,
+      "map": "route-16-east",
+      "scope": "kanto",
+      "kind": "grass",
+      "points": 6,
+      "points_sha256": "7e760415bcf40f65249cc36d6a9a73263928efe1123d98f389449d8558079c1f",
+      "available": 24,
+      "reason": ""
+    },
+    {
+      "header": 422,
+      "map": "route-16-east",
+      "scope": "kanto",
+      "kind": "tree",
+      "points": 5,
+      "points_sha256": "fb341e7ac3844bf2e304835a55c3e4a0e2442dcc9479760fd3ab9253dbb6f13c",
+      "available": 11,
+      "reason": ""
+    },
+    {
+      "header": 448,
+      "map": "mount-moon-square-entrance",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 15,
+      "points_sha256": "3581bbba2d4859dd3300bf52da5d66890d388d7d7bf0e5b69bba823ab6d1c3bd",
+      "available": 57,
+      "reason": ""
+    },
+    {
+      "header": 449,
+      "map": "mount-moon-square",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 11,
+      "reason": "Square du Mont Sélénite : les 11 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les arbres ou les berges."
+    },
+    {
+      "header": 450,
+      "map": "cerulean-cave-2f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "94749332a8a6f874d2494261867860b95bf5c94e71e11835d00fa9b6d34de0f0",
+      "available": 835,
+      "reason": ""
+    },
+    {
+      "header": 450,
+      "map": "cerulean-cave-2f",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 2e étage de la Caverne Azurée."
+    },
+    {
+      "header": 451,
+      "map": "cerulean-cave-b1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "fea3f6e2ec655de22c3d81a9c9cad0d4560e3252a628f77ba66a65e13700f073",
+      "available": 429,
+      "reason": ""
+    },
+    {
+      "header": 451,
+      "map": "cerulean-cave-b1f",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 7,
+      "points_sha256": "26eca40b0e812748f627f277d4150babec6e9d07df7823aa5dfac0dce40c855d",
+      "available": 10,
+      "reason": ""
+    },
+    {
+      "header": 451,
+      "map": "cerulean-cave-b1f",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 21,
+      "points_sha256": "36fb5f0c076338b94b6e07713a37cfc65948b6d98e73b8226bfcccd4b41cb106",
+      "available": 234,
+      "reason": ""
+    },
+    {
+      "header": 452,
+      "map": "rock-tunnel-b1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "59352b04a684a1b911de1f2764278e6019abdc231b37e1f3039bbe682a7c66d4",
+      "available": 573,
+      "reason": ""
+    },
+    {
+      "header": 452,
+      "map": "rock-tunnel-b1f",
+      "scope": "kanto",
+      "kind": "rock",
+      "points": 10,
+      "points_sha256": "397849b631712f5e17d37211dd66a7e08be6b11824a14358c4f075a7870455e9",
+      "available": 15,
+      "reason": ""
+    },
+    {
+      "header": 453,
+      "map": "seafoam-islands-b1f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "cbb2aa84ad19b54317b2e5ea1bad995574068a7b9ee87c73ef03ba22617154a1",
+      "available": 505,
+      "reason": ""
+    },
+    {
+      "header": 454,
+      "map": "seafoam-islands-b2f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "39e7c27f3c0c1804b697e02d179415c69be33724494bf1e86f9c00f03bc56713",
+      "available": 366,
+      "reason": ""
+    },
+    {
+      "header": 455,
+      "map": "seafoam-islands-b3f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "99d407da3d4f878c4de22baddc4b735e9cf89cab6614dfbfc1cde2305fd1a449",
+      "available": 495,
+      "reason": ""
+    },
+    {
+      "header": 456,
+      "map": "seafoam-islands-b4f",
+      "scope": "kanto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "91f7fedff5aeb906a3593c05d63d19f0cd9c21154edc44e754fba68da6222333",
+      "available": 148,
+      "reason": ""
+    },
+    {
+      "header": 456,
+      "map": "seafoam-islands-b4f",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 40,
+      "points_sha256": "1fa55045ecd09a22a7fda0f3efa38ec3b1dbc64b1f5843125cf244a2d9048e17",
+      "available": 189,
+      "reason": ""
+    },
+    {
+      "header": 459,
+      "map": "mount-silver-cave-upper-mountainside",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 35,
+      "points_sha256": "d4b9537c8283bd40fd34f64a1f1f7b46d8b78b0ae1e5a8f94a4b9915f717b0dd",
+      "available": 100,
+      "reason": ""
+    },
+    {
+      "header": 459,
+      "map": "mount-silver-cave-upper-mountainside",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "La banque conserve des tables aquatiques mais aucun comportement surfable n'existe sur cette partie supérieure du Mont Argenté."
+    },
+    {
+      "header": 460,
+      "map": "mount-silver-cave-lower-mountainside",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 4,
+      "points_sha256": "64cd84a3ffe4dee46976b287655c2309b73f22e413109fc8a8cf062aabef4230",
+      "available": 14,
+      "reason": ""
+    },
+    {
+      "header": 460,
+      "map": "mount-silver-cave-lower-mountainside",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "a07160f46de0a0561b05566369b3269933e49491048c45003d69f7c582250cd8",
+      "available": 101,
+      "reason": ""
+    },
+    {
+      "header": 460,
+      "map": "mount-silver-cave-lower-mountainside",
+      "scope": "johto",
+      "kind": "tree",
+      "points": 3,
+      "points_sha256": "1f5d19cfbab7dfc7ae105f4455b97e899f87b164f9d632b952612eff2bb2f761",
+      "available": 6,
+      "reason": ""
+    },
+    {
+      "header": 461,
+      "map": "mount-silver-cave-expert-belt-chamber",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 11,
+      "points_sha256": "305235bbd79e430059b820ff80a149132127b2cc11cbe6550ed9ba10fdf76651",
+      "available": 47,
+      "reason": ""
+    },
+    {
+      "header": 462,
+      "map": "mount-silver-cave-moltres-chamber",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 34,
+      "points_sha256": "8281433105ffe06f0355a3a691eb136ca3e0ade649fe194a549059b6849ce9bf",
+      "available": 103,
+      "reason": ""
+    },
+    {
+      "header": 462,
+      "map": "mount-silver-cave-moltres-chamber",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "La banque conserve des tables aquatiques mais aucun comportement surfable n'existe dans la salle de Sulfura."
+    },
+    {
+      "header": 463,
+      "map": "mount-silver-cave-2f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "8f641750195ef8a22740db5663194778f2c4ee81cf8cf1974b4138082bca8d68",
+      "available": 704,
+      "reason": ""
+    },
+    {
+      "header": 463,
+      "map": "mount-silver-cave-2f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 2e étage du Mont Argenté."
+    },
+    {
+      "header": 464,
+      "map": "mount-silver-cave-3f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 31,
+      "points_sha256": "f952b7573ebbfe305430a848d14476346a8b06a7180b00a626604db2adc93693",
+      "available": 125,
+      "reason": ""
+    },
+    {
+      "header": 464,
+      "map": "mount-silver-cave-3f",
+      "scope": "johto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 3e étage du Mont Argenté."
+    },
+    {
+      "header": 486,
+      "map": "whirl-islands-b3f",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 0,
+      "reason": "Les 17 cases de rencontre libres de la salle de Lugia ne portent aucune surface BDHC dans la source épinglée. La hauteur projetée ne peut pas être prouvée : rencontres conservées dans la liste du lieu sans marqueur arbitraire."
+    },
+    {
+      "header": 487,
+      "map": "national-park-bug-catching-contest",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 1,
+      "points_sha256": "9a3294dfd761b13668af3716f9b658a7a5a5e22a8158495080ecc273e0d5f741",
+      "available": 2,
+      "reason": ""
+    },
+    {
+      "header": 487,
+      "map": "national-park-bug-catching-contest",
+      "scope": "johto",
+      "kind": "grass",
+      "points": 40,
+      "points_sha256": "e3c2bbc54ea024de05d5a14d5787a21962eaf852ddf6573eabe7354498f657f9",
+      "available": 485,
+      "reason": ""
+    },
+    {
+      "header": 490,
+      "map": "ruins-of-alph-underground-hall-sinjoh-event",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "7149f3ff5660cd6431e011354f1509feea14971af4dce754c5b5887e89539ef3",
+      "available": 628,
+      "reason": ""
+    },
+    {
+      "header": 491,
+      "map": "ruins-of-alph-hall-entrance-sinjoh-event",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 18,
+      "points_sha256": "b0e472539188afd5a91296f17aa8efb0d82250c5940ed9d71f3169090d985d8b",
+      "available": 71,
+      "reason": ""
+    },
+    {
+      "header": 492,
+      "map": "ruins-of-alph-underground-hall-sinjoh-event-2",
+      "scope": "johto",
+      "kind": "floor",
+      "points": 40,
+      "points_sha256": "45e9a8692f036326c00b2a8c295ba45757c932e251896f2d4cbe74128f4bd89b",
+      "available": 628,
+      "reason": ""
+    },
+    {
+      "header": 513,
+      "map": "mount-moon-square-clefairy-event",
+      "scope": "kanto",
+      "kind": "water",
+      "points": 0,
+      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": 20,
+      "reason": "Square du Mont Sélénite pendant la danse des Mélofée : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les arbres ou les berges."
+    }
+  ],
+  "review": {
+    "maps": 151,
+    "sheets": 13,
+    "legend": {
+      "grass": "vert",
+      "floor": "orange",
+      "water": "bleu",
+      "tree": "violet",
+      "rock": "rouge"
+    }
+  }
+}

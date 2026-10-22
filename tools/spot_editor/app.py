@@ -24,6 +24,7 @@ from .canvas import SpotCanvas
 from .catalog import EditorCatalog, EditorMap, EncounterLine, Family, MapMark, required_spots, used_by_app
 from .coverage import PlacementNeeds, Shortfall
 from .error_panel import ErrorPanel
+from .hgss import HgssCatalog
 from .overlays import Layer, OverlayPainter, wild_preview
 from .rendering import MapImages
 from .session import SpotSession
@@ -51,10 +52,11 @@ _WARNING_COLOR = "#b3261e"
 class MapEditor:
     def __init__(self, root: tk.Tk, assets: Path = ASSETS) -> None:
         self.root = root
-        self.catalog = EditorCatalog(assets / "database/pokedex.db")
-        self.images = MapImages(assets / "maps")
-        self.painter = OverlayPainter(assets)
-        self.wild_terrains = WildTerrains(CACHE, assets / "maps")
+        hgss = HgssCatalog(assets) if (assets / "placement.json").is_file() else None
+        self.catalog = hgss if hgss is not None else EditorCatalog(assets / "database/pokedex.db")
+        self.images = hgss if hgss is not None else MapImages(assets / "maps")
+        self.painter = OverlayPainter(ROOT / "app/src/main/assets" if hgss is not None else assets)
+        self.wild_terrains = hgss if hgss is not None else WildTerrains(CACHE, assets / "maps")
         self.session = SpotSession(read_spots(), editor_offsets(assets / "maps"))
         self.families = self.catalog.families()
         if not self.families:
@@ -250,7 +252,11 @@ class MapEditor:
         kind = self._kind()
         if self.current is None or kind is None:
             return
-        point = self.current.snap(x, y)
+        if isinstance(self.wild_terrains, HgssCatalog):
+            point = self.wild_terrains.snap(self._editing_family(), self.current.identifier, kind, x, y)
+        else:
+            point = self.current.snap(x, y)
+        point = next((p for p in self._points(kind) if hit(p)), point)
         key = self._key(kind)
         if point is None or key is None:
             return

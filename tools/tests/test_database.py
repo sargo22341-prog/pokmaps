@@ -8,6 +8,7 @@ import pytest
 from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.games import DECLARED_GAMES, map_families
+from pokemaps_data.hgss_preparation import PREPARATORY_GAMES
 from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key
 from pokemaps_data.maps_assembly_coordinates_gen4 import editor_offsets
 from pokemaps_data.maps_characters import ObjectRow
@@ -365,7 +366,7 @@ def test_curated_spots_replace_generated_in_every_game_of_their_family(db: sqlit
     offsets = editor_offsets(assets / "maps")
     assert curated
     groups = dict(db.execute("SELECT identifier, id FROM version_group"))
-    families = map_families(DECLARED_GAMES)
+    families = map_families((*DECLARED_GAMES, *PREPARATORY_GAMES))
     for key, points in curated.items():
         for identifier in families[key.family]:
             if identifier not in groups:

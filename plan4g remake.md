@@ -510,7 +510,7 @@ projection Nitro, deux constantes natives mal nommées, titre du plan Kanto et u
   Sortie : configurations vérifiables et présentation de taux conditionnels sans prédiction.
 - [x] **4D — Obtentions particulières.** Fixes, errants, dons, œufs, échanges, Pokéwalker et événements.
   Sortie : provenance et exclusions des objectifs ordinaires validées.
-- [ ] **4E — Placement.** Adapter l’éditeur aux terrains HGSS et relire les points des deux régions.
+- [x] **4E — Placement.** Adapter l’éditeur aux terrains HGSS et relire les points des deux régions.
   Sortie : `map_spots.csv` validé, aucun point hors terrain ou lieu dépourvu de couverture sans explication.
 
 **Bilan 4A et 4B — 22 octobre 2026.** L’[aperçu des rencontres](docs/generations/rencontres-hgss.md),
@@ -534,6 +534,29 @@ La dépréciation AGP déjà décrite dans `docs/developpement.md` reste visible
 Incidents corrigés : permissions Windows des aperçus/caches, lecture JSON limitée à 4 Mio pour une sortie
 de 17,8 Mo, variantes de noms des banques techniques et attente de test initialement fixée à 70 lieux d’arbres
 au lieu des 60 comptés dans la source. Le quai de Carmin et la condition « hors concours » sont classés explicitement.
+
+**Bilan 4E — 22 octobre 2026.** L'éditeur ouvre `hgss-placement/` sans base Android artificielle,
+avec régions, deux cartouches, terrains natifs, centres projetés et passages. Le nouvel aperçu se génère
+avec `python tools/build_data.py --hgss-placement-only` ; les treize planches de relecture viennent de
+`python tools/review_hgss_spots.py`. Les 151 lieux audités couvrent Johto, Kanto et les gabarits Safari.
+`map_spots.csv` conserve 5 655 points, validés sur 296 terrains : 268 couverts et 28 absences expliquées dans
+`hgss_spot_exclusions.csv`. Aucun point hors terrain ni absence sans explication ; 37 avertissements de
+capacité restent visibles et documentés. Les rencontres sans marqueur restent dans les listes.
+La [preuve versionnée](docs/generations/placements-hgss-preuve.json) conserve les comptes et empreintes.
+
+Contrôles : aperçu final, assets distribués, Ruff et format complets, limites 600/60 et diff réussis.
+1 070 tests Python ordinaires réussis. La suite des sources a donné 416 succès et un échec HGSS pendant
+le recalcul des données ; le test natif HGSS relancé explicitement sur l'état figé réussit (65,71 s).
+Une relance globale a été interrompue au profit de cette relance ciblée. L'éditeur Tk a été ouvert sans
+fenêtre visible : zéro erreur ; les treize planches finales ont été relues. Aucun contrôle Android ni ADB
+relancé : outils et données préparatoires uniquement, sans modification des assets distribués.
+
+Incidents traités : accès Windows aux aperçus et caches temporaires, lecteur JSON natif limité à 4 Mio
+remplacé par une lecture préparatoire bornée à 64 Mio, commande Ruff appelée par `python -m ruff`.
+L'attente du test de base supposait à tort toutes les familles du CSV déjà déclarées pour l'application ;
+elle inclut maintenant les contrats préparatoires, contrôlés séparément sans activation HGSS.
+La relecture a retiré les projections transparentes/noires, flottantes ou masquées et les points aquatiques
+sur le décor ; les hauteurs d'eau restent des candidats relus visuellement, sans hauteur arbitraire.
 
 ### Phase 5 — Personnages, objets et services
 
