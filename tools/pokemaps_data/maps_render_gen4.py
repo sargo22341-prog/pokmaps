@@ -161,10 +161,11 @@ def model_triangles(
     scale: Vector,
     lighting: LightingPeriod,
     placement: Transform = _IDENTITY_TRANSFORM,
+    billboard: tuple[int, ...] | None = None,
 ) -> Iterator[RasterTriangle]:
     """Projette un modèle Nitro déjà validé, indépendamment de la famille du jeu."""
     for model in file.models:
-        for draw in shape_draws(model):
+        for draw in shape_draws(model, billboard):
             material = model.materials[draw.material]
             raster_material = _material(material, file.textures, textures)
             if raster_material.alpha == 0:
@@ -218,7 +219,11 @@ def _vertex(
     if vertex.matrix is not None and vertex.matrix not in stack:
         raise ValueError(f"{model.name} : matrice GX {vertex.matrix} non initialisée")
     transform = draw.transform if vertex.matrix is None else stack[vertex.matrix]
-    point = tuple(value * draw.position_scale // FX_ONE for value in vertex.position)
+    # MTX_RESTORE recharge la matrice du nœud avant POS_SCALE ; le GX peut réappliquer son échelle lui-même.
+    position_scale = draw.position_scale if vertex.matrix is None else FX_ONE
+    point = tuple(
+        value * position_scale * vertex.matrix_scale[k] // FX_ONE // FX_ONE for k, value in enumerate(vertex.position)
+    )
     point = transform.point(point)
     point = placement.point(tuple(point[k] * scale[k] // FX_ONE for k in range(3)))
     position = tuple(point[k] + origin[k] for k in range(3))

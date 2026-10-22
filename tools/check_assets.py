@@ -25,6 +25,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--assets", type=Path, default=Path(__file__).resolve().parent.parent / "app/src/main/assets")
     parser.add_argument("--sinnoh-maps", type=Path, help="vérifier aussi les deux catalogues DS préparatoires")
+    parser.add_argument("--hgss-maps", type=Path, help="vérifier aussi l'aperçu Johto HGSS préparatoire")
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
@@ -52,6 +53,10 @@ def main() -> int:
                 output = args.sinnoh_maps / game.version_group
                 check_inventory(output)
                 validate_gen4_catalog(output)
+        if args.hgss_maps:
+            from pokemaps_data.validate_johto_hgss import check_johto_preview
+
+            check_johto_preview(args.hgss_maps)
     except (OSError, ValueError, sqlite3.Error) as error:
         print(str(error), file=sys.stderr)
         return 1

@@ -105,9 +105,13 @@ n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipelin
 
 HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generations/sources-hgss.md)
 et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
-Leur [lot de preuve cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
-`python tools/build_data.py --hgss-maps-only` : Bourg Geon, les deux niveaux du laboratoire, les Routes 29 et 47,
-dans `tools/build/preview/hgss-maps/`, avec collisions, passages, acteurs témoins et coupe inférieure.
+Leur [aperçu cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
+`python tools/build_data.py --hgss-maps-only --map-workers 4` dans `tools/build/preview/hgss-maps/`.
+Il conserve les cinq lieux témoins et ajoute le catalogue Johto : 246 lieux nommés en français,
+110 plans assemblés, portes et voisinages de la matrice DS. Les destinations variables et les lieux
+réservés aux phases suivantes restent identifiés. `python tools/review_hgss_maps.py` produit les planches
+de relecture dans le scratchpad ; `python tools/check_assets.py --hgss-maps tools/build/preview/hgss-maps`
+vérifie l'inventaire et les références. Kanto, installations et mécanismes particuliers restent séparés.
 Leur [aperçu Pokémon indépendant](docs/generations/pokemon-hgss.md) se génère avec
 `python tools/build_data.py --hgss-pokemon-only` dans `tools/build/preview/hgss-pokemon/` :
 493 espèces, régional Johto, attaques, CT/CS, formes et évolutions, sans activation Android.

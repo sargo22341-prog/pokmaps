@@ -173,11 +173,12 @@ class HgssMapRepo:
 
 
 def _warp(row: dict, names: dict[str, int], where: str) -> HgssWarp:
-    if set(row) != {"x", "z", "y", "header", "anchor"} or row["header"] not in names:
+    if set(row) != {"x", "z", "y", "header", "anchor"} or (row["header"] != 4095 and row["header"] not in names):
         raise ValueError(f"{where} : passage HGSS invalide : {row}")
     if any(type(row[key]) is not int or not 0 <= row[key] <= 65535 for key in ("x", "z", "y", "anchor")):
         raise ValueError(f"{where} : coordonnées de passage HGSS invalides : {row}")
-    return HgssWarp(row["x"], row["z"], row["y"], names[row["header"]], row["anchor"])
+    destination = 4095 if row["header"] == 4095 else names[row["header"]]
+    return HgssWarp(row["x"], row["z"], row["y"], destination, row["anchor"])
 
 
 def _actor(row: dict, where: str) -> HgssActor:

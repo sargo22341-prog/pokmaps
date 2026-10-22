@@ -1,4 +1,4 @@
-"""Preuve locale HGSS de cinq lieux, remplacée seulement après validation des deux cartouches."""
+"""Aperçu Johto HGSS et lot témoin, remplacés seulement après validation des deux cartouches."""
 
 import hashlib
 import json
@@ -25,7 +25,7 @@ def _digest(image: Image.Image) -> str:
     return hashlib.sha256(image.tobytes()).hexdigest()
 
 
-def build_hgss_maps(cache: Path, output: Path) -> None:
+def build_hgss_maps(cache: Path, output: Path, workers: int = 4) -> None:
     started = time.perf_counter()
     root = (cache / "hgss-qualification").resolve()
     target = (output / "hgss-maps").resolve()
@@ -49,6 +49,9 @@ def build_hgss_maps(cache: Path, output: Path) -> None:
                 "units": {"block_tiles": 32, "tile_units": 16, "fx_one": FX_ONE, "altitude_units": 8},
             },
         )
+        from .preview_johto_hgss import build_johto
+
+        build_johto(root, staging, cache / "map-renders/hgss-johto", workers)
         _write_inventory(staging)
         if target.exists():
             target.rename(Path(temporary) / "previous")
@@ -59,7 +62,7 @@ def build_hgss_maps(cache: Path, output: Path) -> None:
             if previous.exists():
                 previous.rename(target)
             raise
-    print(f"Preuve HGSS validée : {target} ({time.perf_counter() - started:.2f} s, deux versions, cinq lieux)")
+    print(f"Cartes HGSS validées : {target} ({time.perf_counter() - started:.2f} s, preuve et catalogue Johto)")
 
 
 def _version(root: Path, output: Path, version: str) -> dict:
@@ -187,8 +190,8 @@ def _lower(renderer: HgssRenderer, header: HgssHeader, cells: list[dict], folder
 
 def _write_inventory(folder: Path) -> None:
     files = sorted(path for path in folder.rglob("*") if path.is_file())
-    if len(files) > 4096:
-        raise ValueError("Prototype HGSS : trop de fichiers produits")
+    if len(files) > 100_000:
+        raise ValueError("Cartes HGSS : plus de 100 000 fichiers produits")
     _json(
         folder / "inventory.json",
         {path.relative_to(folder).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() for path in files},

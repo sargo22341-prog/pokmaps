@@ -1,0 +1,6 @@
+header,texture_bank,reason
+206,27,Le terrain 280 référence bike_02_2 absent de sa banque 42 ; texture native des intérieurs HGSS banque 27.
+441,27,Le terrain 372 de l’ascenseur référence bike_02_2 absent de sa banque 44 ; même texture native que le terrain 280.
+446,27,Le terrain 372 de l’ascenseur référence bike_02_2 absent de sa banque 44 ; même texture native que le terrain 280.
+447,27,Le terrain 372 de l’ascenseur référence bike_02_2 absent de sa banque 44 ; même texture native que le terrain 280.
+486,85,Le terrain 566 référence droad01 absent de la banque 98 ; banque 85 des trois autres niveaux des Tourb’Îles.

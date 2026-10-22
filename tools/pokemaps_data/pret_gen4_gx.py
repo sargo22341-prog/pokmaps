@@ -39,6 +39,7 @@ class Vertex:
     color: tuple[int, int, int] | None
     normal: tuple[int, int, int] | None  # fx10 (512 = 1,0)
     matrix: int | None
+    matrix_scale: tuple[int, int, int] = (4096, 4096, 4096)
 
 
 @dataclass(frozen=True)
@@ -54,6 +55,7 @@ class _State:
     color: tuple[int, int, int] | None = None
     normal: tuple[int, int, int] | None = None
     matrix: int | None = None
+    matrix_scale: tuple[int, int, int] = (4096, 4096, 4096)
 
 
 def signed(value: int, bits: int) -> int:
@@ -101,7 +103,9 @@ def primitives(data: bytes, where: str) -> tuple[Primitive, ...]:
             if kind is None:
                 raise ValueError(f"{where} : sommet hors de BEGIN_VTXS")
             state.position = _position(opcode, parameters, state.position)
-            vertices.append(Vertex(state.position, state.texcoord, state.color, state.normal, state.matrix))
+            vertices.append(
+                Vertex(state.position, state.texcoord, state.color, state.normal, state.matrix, state.matrix_scale)
+            )
             if len(vertices) > _MAX_VERTICES:
                 raise ValueError(f"{where} : primitive de plus de {_MAX_VERTICES} sommets")
         else:
@@ -116,6 +120,7 @@ def _attribute(state: _State, opcode: int, parameters: tuple[int, ...], where: s
     value = parameters[0]
     if opcode == 0x14:
         state.matrix = value & 0x1F
+        state.matrix_scale = (4096, 4096, 4096)
     elif opcode == 0x20:
         state.color = (value & 31, (value >> 5) & 31, (value >> 10) & 31)
     elif opcode == 0x21:
@@ -125,7 +130,10 @@ def _attribute(state: _State, opcode: int, parameters: tuple[int, ...], where: s
     elif opcode == 0x22:
         state.texcoord = (signed(value, 16), signed(value >> 16, 16))
     elif opcode == 0x1B:
-        raise ValueError(f"{where} : MTX_SCALE dans une forme, non pris en charge")
+        state.matrix_scale = tuple(
+            scale * signed(parameter, 32) // 4096
+            for scale, parameter in zip(state.matrix_scale, parameters, strict=True)
+        )
 
 
 def _position(opcode: int, parameters: tuple[int, ...], current: tuple[int, int, int]) -> tuple[int, int, int]:

@@ -1,4 +1,4 @@
-# Preuve des cartes HeartGold et SoulSilver
+# Cartes préparatoires HeartGold et SoulSilver
 
 Le prototype de phase 1 lit et rend cinq lieux depuis `pret/pokeheartgold` au commit
 `6988158691eb6178cff697cda0428045ddcba5fb`, sans ROM et sans compiler le jeu.
@@ -10,8 +10,10 @@ Préparer les [sources qualifiées](sources-hgss.md#source-retenue-et-preuve-rep
 
 ```powershell
 python tools/build_data.py --hgss-maps-only
+python tools/review_hgss_maps.py
+python tools/check_assets.py --hgss-maps tools/build/preview/hgss-maps
 cd tools
-python -m pytest -q tests/test_hgss_preparation.py tests/test_hgss_map_sources.py -m pipeline
+python -m pytest -q -m pipeline tests/test_hgss_map_sources.py tests/test_hgss_johto_sources.py
 ```
 
 La commande lit `--cache/hgss-qualification` ; elle ne télécharge rien et ne reconstruit pas Sinnoh.
@@ -25,6 +27,80 @@ et la pyramide WebP `tiles/`. La Route 47 ajoute `lower.png` et `lower-tiles/`.
 `proof.json` conserve unités, sources, empreintes des pixels, acteurs témoins et liaisons contrôlées.
 `inventory.json` couvre tous les fichiers produits. Ce lot de preuve n'est pas encore le catalogue
 complet destiné à l'éditeur de rencontres ou à l'application.
+
+## Catalogue Johto — phase 3A
+
+Le même point d'entrée produit désormais `johto/catalog.json`, `johto/maps/` et `johto/plans/`.
+Le lot témoin des deux versions reste séparé et conserve ses collisions et sa coupe de la Route 47.
+Le catalogue Johto décrit les ressources géométriques communes aux deux cartouches au commit retenu ;
+les événements et les en-têtes sont comparés avant de partager les images. Cela ne fusionne ni leurs
+rencontres, ni les conditions des scènes, ni les lieux spéciaux qui seront traités ensuite.
+
+[`hgss_maps.csv`](../../tools/data/hgss_maps.csv) classe explicitement les 540 en-têtes natifs :
+246 lieux de Johto, 198 de Kanto pour la phase 3B, 58 lieux spéciaux pour la phase 3C et 38 exclusions
+justifiées. Le lot couvre villes, Routes 29 à 48, maisons, boutiques, Centres Pokémon, arènes,
+étages des tours, Ruines d'Alpha, Caves Jumelles, Tourb'Îles, grottes et Mont Argenté.
+Routes 26 à 28, Chutes Tohjo, Route Victoire et Ligue suivent le classement Kanto des sources.
+Les frontières de la matrice vers les Routes 27 et 28 sont conservées, sans inventer de porte.
+Les variantes du Concours de capture, des Ruines d'Alpha et du quai vide restent distinctes.
+
+Le Casino de Doublonville, en-tête 536, est retenu malgré son indicateur régional Kanto :
+sa section, son nom natif et ses portes le rattachent à Doublonville. Le Casino japonais 183
+est écarté de ce lot fondé sur les sources américaines. L'ancien poste nord du Parc Naturel,
+en-tête 150, garde ses six références historiques comme frontières exclues : son en-tête est marqué
+`UNUSED`, il n'a aucun acteur et son unique script `D22R0201` se termine par `End`.
+
+Les 110 plans ont un nom français et contiennent chaque lieu exactement une fois :
+
+- Les extérieurs de la matrice 0 gardent leurs positions et altitudes DS. Les 80 voisinages de blocs
+  entre lieux différents sont conservés ; ce sont des contacts géométriques, pas une preuve de
+  praticabilité de toute la frontière. La continuité praticable Bourg Geon–Route 29 reste prouvée.
+- Les intérieurs et salles d'un même étage sont réunis en atlas à cases espacées, sans fausse
+  continuité entre deux pièces. Les origines natives, les translations, les dimensions et les
+  membres de chaque plan restent dans le catalogue ; les points des deux extrémités des portes
+  reçoivent ces mêmes translations.
+
+Les 684 passages comprennent 665 liens internes, 16 frontières vers des exclusions ou des lieux
+spéciaux et trois sorties d'ascenseur à destination mémorisée. Les destinations fixes et leurs
+ancres sont vérifiées jusque dans les lieux hors périmètre ; une frontière n'est pas un lien navigable
+vers une image absente. `FieldSystem_MapConnection` dans `src/field/field_control.c` donne le contrat
+`header=0xFFF, anchor=0x100` des sorties variables. Aucune destination fixe n'est fabriquée pour elles.
+
+La position des repères utilise le BDHC, et conserve toutes les hauteurs candidates. La surface
+la plus basse sert à l'aperçu principal ; le choix des niveaux superposés relève de la phase 3C.
+Une seule case d'escalier, Caves Jumelles RDC, passage 3, n'a pas de plaque BDHC : sa hauteur zéro
+est explicitement documentée dans [`hgss_warp_heights.csv`](../../tools/data/hgss_warp_heights.csv).
+Le champ natif `y` des portes est conservé mais ne remplace pas la hauteur du terrain.
+
+Les [795 empreintes d'entrée Johto](cartes-hgss-johto-sources.json) complètent celles de la preuve.
+Les cinq compléments de textures restent dans [`hgss_map_textures.csv`](../../tools/data/hgss_map_textures.csv),
+avec les blocs concernés et leur justification ; ils proviennent exclusivement des banques HGSS natives.
+Le rendu accepte les billboards face à la caméra, les enveloppes de modèles articulés et les commandes GX
+d'échelle. Une restauration de matrice ne réapplique pas une seconde fois l'échelle SBC : l'Arène de
+Rosalia couvre cette régression. L'éclairage fixe des grottes, dont la période unique se termine à zéro,
+est distingué des périodes horaires.
+
+Les grandes images sont rendues par cadres de 1 024 pixels au plus, puis assemblées en pyramides WebP
+sans charger une image régionale entière. Leur cadre complet inclut les sommets projetés, y compris
+le relief et les débords de décor. Les images par lieu sont limitées à 32 millions de pixels et les
+plans à 32 768 pixels de côté. `--map-workers` choisit de un à huit processus ; chaque tâche parallèle
+a un délai de 300 secondes. Les caches de modèles et de textures sont bornés ; le cache persistant
+des images est indexé par les sources, codecs, corrections de textures et version de Pillow.
+Son empreinte est vérifiée à la lecture. Une erreur préserve le dernier aperçu valide.
+
+`inventory.json` couvre la preuve et Johto. Le contrôle `--hgss-maps` refuse les fichiers manquants,
+modifiés ou supplémentaires, les recettes ou corrections éditoriales périmées, les plans incomplets,
+les niveaux de tuiles absents et les repères hors de leur image ou de leur plan.
+`review_hgss_maps.py` produit des planches de tous les lieux et plans, avec les numéros des portes,
+ainsi qu'un index associant chaque vue au catalogue et aux empreintes des planches, dans
+`tools/build/scratchpad/hgss-map-review/`.
+
+La [preuve de relecture Johto](cartes-hgss-johto-preuve.json), datée du 22 octobre 2026, conserve
+les empreintes des 246 images et des 24 planches : 357 vues, dont le détail des extérieurs assemblés.
+La sortie validée compte 8 741 fichiers et 64 441 388 octets, preuve initiale comprise.
+La dernière génération avec cache a pris 179,95 secondes ; une retouche des seuls libellés a conservé
+exactement les pixels de chaque carte. Les poses des modèles sont statiques : les plateformes et
+autres mécanismes d'arènes, les états de décor et les liaisons scriptées restent à finaliser en 3C.
 
 ## Lot témoin et unités natives
 
@@ -95,8 +171,8 @@ n'a été utilisé. Ces durées ne constituent pas une comparaison de performanc
 Les cinq lieux des deux versions ont les mêmes données natives et les mêmes pixels au commit retenu.
 Cette égalité locale n'autorise pas à fusionner toutes les variantes HGSS.
 
-La preuve permet de poursuivre les cartes HGSS. Les jeux restent dans `PREPARATORY_GAMES` :
-ni le pipeline générique, ni la base, ni Android ne sont activés. Les prochaines cartes doivent recevoir
-leur propre sélection de lieux, leurs noms français, assemblages, états initiaux et plans relus.
+La preuve et Johto permettent de poursuivre les cartes HGSS. Les jeux restent dans `PREPARATORY_GAMES` :
+ni le pipeline générique, ni la base, ni Android ne sont activés. Kanto (3B), les installations,
+les niveaux superposés, décors dynamiques et liaisons scriptées (3C) gardent leurs jalons propres.
 La résolution métier des scripts, des acteurs conditionnels et des accompagnateurs reste dans les phases
 prévues du plan. Les limites de licence de la [qualification](sources-hgss.md) restent applicables avant distribution.

@@ -102,6 +102,7 @@ class NitroModel:
     materials: tuple[NitroMaterial, ...]
     shapes: tuple[NitroShape, ...]
     render: tuple[SbcCommand, ...]
+    inverse_binds: tuple[tuple[int, ...], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -139,10 +140,20 @@ def _model(reader: ByteReader, start: int, name: str) -> NitroModel:
         materials=_materials(reader, start + materials),
         shapes=_shapes(reader, start + shapes),
         render=_sbc(reader, start + sbc, start + materials),
+        inverse_binds=_inverse_binds(reader, start, size, node_count),
     )
     if (len(model.nodes), len(model.materials), len(model.shapes)) != (node_count, material_count, shape_count):
         raise ValueError(f"{reader.where} : {name} : nombres de nœuds, matériaux ou formes incohérents")
     return model
+
+
+def _inverse_binds(reader: ByteReader, start: int, size: int, count: int) -> tuple[tuple[int, ...], ...]:
+    offset = reader.u32(start + 16)
+    if offset == 0 or offset == size:
+        return ()
+    if offset + count * 84 > size:
+        raise ValueError(f"{reader.where} : matrices d'enveloppe hors du modèle")
+    return tuple(reader.unpack("12i", start + offset + index * 84) for index in range(count))
 
 
 def _node(reader: ByteReader, offset: int, name: str) -> NitroNode:

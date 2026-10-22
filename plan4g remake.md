@@ -455,12 +455,37 @@ Aucun échec de contrôle restant. Prochaine action : phase 3, catalogue complet
 
 ### Phase 3 — Cartes complètes et navigation
 
-- [ ] **3A — Johto.** Étendre l’aperçu de cartes à ses extérieurs, intérieurs et donjons,
+- [x] **3A — Johto.** Étendre l’aperçu de cartes à ses extérieurs, intérieurs et donjons,
   nommer et assembler les plans. Sortie : catalogue Johto sans référence cassée et planches relues.
 - [ ] **3B — Kanto.** Traiter ses cartes remaniées, accès, plans et transitions interrégionales.
   Sortie : catalogue Kanto complet dans les deux versions.
 - [ ] **3C — Lieux spéciaux et étages.** Finaliser installations, niveaux superposés,
   décors dynamiques et liaisons scriptées. Sortie : couverture visuelle de tout le catalogue et inventaire.
+
+**Bilan 3A — 22 octobre 2026.** Le [catalogue Johto](docs/generations/cartes-hgss.md) couvre
+246 lieux nommés en français, réunis en 110 plans, avec 684 passages et 80 voisinages de matrice.
+Les 540 en-têtes sont classés dans `hgss_maps.csv`, sans utiliser les coordonnées ou cartes GSC.
+Le Casino de Doublonville reste rattaché à Johto malgré son indicateur natif Kanto.
+Les destinations fixes et leurs ancres sont vérifiées ; 16 frontières hors périmètre et trois sorties
+d'ascenseur mémorisées sont explicites. Les repères gardent leurs surfaces BDHC et leurs translations.
+
+`python tools/build_data.py --hgss-maps-only --map-workers 4` conserve la preuve initiale et produit
+le catalogue dans `tools/build/preview/hgss-maps/johto/`. Les 795 empreintes d'entrée, les corrections
+de textures et de hauteur d'escalier, ainsi que les rendus bornés et leur cache sont contrôlés.
+La sortie compte 8 741 fichiers, 64 441 388 octets ; génération avec cache en 179,95 secondes.
+Les 24 planches de `review_hgss_maps.py` ont été relues : 357 vues, avec un détail des extérieurs.
+La [preuve versionnée](docs/generations/cartes-hgss-johto-preuve.json) garde leurs empreintes et celles
+des 246 images ; le réexport des libellés conserve exactement les pixels des cartes.
+
+Contrôles exécutés : assets distribués et aperçu via `check_assets.py --hgss-maps`, Ruff et format
+sur tout `tools`, suite ordinaire (990 réussis), puis contrôles ciblés finaux (23 réussis, dont
+la nouvelle vérification de couverture de la preuve) et suite `pipeline` intégrale (410 réussis).
+Limites 600/60 lignes et diff relus. Aucun contrôle en échec restant.
+Les contrôles Android et ADB ne sont pas lancés : aucun code Android ni asset distribué n'a changé.
+Incidents corrigés : permissions Windows des dossiers temporaires, encodage des libellés,
+cadres trop grands, double échelle des modèles articulés, casse des étages et masque des miniatures.
+Les jeux restent préparatoires ; Kanto relève de 3B et les finitions de niveaux, décors dynamiques,
+installations et liaisons scriptées de 3C.
 
 ### Phase 4 — Rencontres, en lots maîtrisés
 

@@ -44,7 +44,7 @@ class ShapeDraw:
     position_scale: int
 
 
-def shape_draws(model: NitroModel) -> Iterator[ShapeDraw]:
+def shape_draws(model: NitroModel, billboard: tuple[int, ...] | None = None) -> Iterator[ShapeDraw]:
     current = Transform()
     stack: dict[int, Transform] = {}
     material, scale, visible = 0, FX_ONE, True
@@ -54,6 +54,10 @@ def shape_draws(model: NitroModel) -> Iterator[ShapeDraw]:
             return
         if opcode == 6:
             current = _node(model, args, flags, current, stack)
+        elif opcode == 7 and billboard is not None:
+            current = _billboard(current, stack, args, flags, billboard, model.name)
+        elif opcode == 9:
+            current = _node_mix(model, stack, args)
         elif opcode == 3:
             current = _restore(stack, args[0], model.name)
         elif opcode == 4:
@@ -68,6 +72,49 @@ def shape_draws(model: NitroModel) -> Iterator[ShapeDraw]:
             yield ShapeDraw(material, args[0], current, tuple(sorted(stack.items())), scale)
         elif opcode not in (0, 2, 4, 5):
             raise ValueError(f"{model.name} : commande de rendu SBC non gérée : {opcode:#x}, drapeaux {flags}")
+
+
+def _billboard(
+    current: Transform,
+    stack: dict[int, Transform],
+    args: tuple[int, ...],
+    flags: int,
+    rotation: tuple[int, ...],
+    name: str,
+) -> Transform:
+    if flags & ~3:
+        raise ValueError(f"{name} : drapeaux de billboard inconnus : {flags}")
+    if flags & 2:
+        current = _restore(stack, args[1 + bool(flags & 1)], name)
+    # Le billboard conserve translation et longueurs des axes, puis fait face à la caméra.
+    lengths = tuple(round(sum(v * v for v in current.rotation[i : i + 3]) ** 0.5) for i in (0, 3, 6))
+    current = Transform(
+        tuple(value * lengths[i // 3] // FX_ONE for i, value in enumerate(rotation)), current.translation
+    )
+    if flags & 1:
+        stack[args[1]] = current
+    return current
+
+
+def _node_mix(model: NitroModel, stack: dict[int, Transform], args: tuple[int, ...]) -> Transform:
+    matrices = []
+    weights = []
+    for position in range(2, len(args), 3):
+        source, node, weight = args[position : position + 3]
+        if node >= len(model.inverse_binds):
+            raise ValueError(f"{model.name} : matrice d'enveloppe absente : {node}")
+        bind = model.inverse_binds[node]
+        matrices.append(Transform(bind[:9], bind[9:]).then(_restore(stack, source, model.name)))
+        weights.append(weight)
+    if sum(weights) not in (255, 256):
+        raise ValueError(f"{model.name} : poids d'enveloppe incohérents : {weights}")
+    rotation = tuple(sum(m.rotation[k] * w for m, w in zip(matrices, weights, strict=True)) // 256 for k in range(9))
+    translation = tuple(
+        sum(m.translation[k] * w for m, w in zip(matrices, weights, strict=True)) // 256 for k in range(3)
+    )
+    current = Transform(rotation, translation)
+    stack[args[0]] = current
+    return current
 
 
 def _restore(stack: dict[int, Transform], index: int, name: str) -> Transform:

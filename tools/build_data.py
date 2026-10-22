@@ -59,7 +59,7 @@ def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
         "--hgss-pokemon-only", action="store_true", help="valider les Pokémon HGSS sans cartes ni activation Android"
     )
     maps_only.add_argument(
-        "--hgss-maps-only", action="store_true", help="prouver cinq lieux HGSS depuis les sources qualifiées, sans ROM"
+        "--hgss-maps-only", action="store_true", help="générer la preuve HGSS et le catalogue Johto qualifié, sans ROM"
     )
 
 
@@ -214,7 +214,7 @@ def _hgss_preview(args: argparse.Namespace) -> bool:
         return False
     from pokemaps_data.preview_maps_hgss import build_hgss_maps
 
-    build_hgss_maps(args.cache, args.preview)
+    build_hgss_maps(args.cache, args.preview, args.map_workers)
     return True
 
 
