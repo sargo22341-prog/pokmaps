@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.Generation
+import org.opensources.pokmaps.domain.model.VersionGroup
 import org.opensources.pokmaps.domain.pokedex.CaptureScope
 import org.opensources.pokmaps.domain.pokemon.Ball
 import org.opensources.pokmaps.domain.pokemon.BallContext
@@ -58,7 +59,8 @@ data class CatchInput(
     val nightOrCave: Boolean = false,
     val waterTerrain: Boolean = false,
     val environment: CaptureEnvironment = CaptureEnvironment.NORMAL,
-    val safariStage: Int = 6
+    val safariStage: Int = 6,
+    val sameSpeciesOppositeGender: Boolean = false
 )
 
 data class CatchUiState(
@@ -78,7 +80,9 @@ data class CatchUiState(
     val nightOrCave: Boolean = false,
     val waterTerrain: Boolean = false,
     val environment: CaptureEnvironment = CaptureEnvironment.NORMAL,
-    val safariStage: Int = 6
+    val safariStage: Int = 6,
+    val sameSpeciesOppositeGender: Boolean = false,
+    val hgss: Boolean = false
 )
 
 data class PokemonUiState(
@@ -151,6 +155,8 @@ sealed interface PokemonAction {
     data object ToggleNightOrCave : PokemonAction
 
     data object ToggleWaterTerrain : PokemonAction
+
+    data object ToggleOppositeGender : PokemonAction
 
     data class SetCaptureEnvironment(val environment: CaptureEnvironment) : PokemonAction
 
@@ -227,6 +233,10 @@ class PokemonViewModel @Inject constructor(
 
             PokemonAction.ToggleWaterTerrain -> catchInput.update { it.copy(waterTerrain = !it.waterTerrain) }
 
+            PokemonAction.ToggleOppositeGender -> catchInput.update {
+                it.copy(sameSpeciesOppositeGender = !it.sameSpeciesOppositeGender)
+            }
+
             is PokemonAction.SetCaptureEnvironment -> catchInput.update { it.copy(environment = action.environment) }
 
             is PokemonAction.SetSafariStage ->
@@ -297,7 +307,8 @@ class PokemonViewModel @Inject constructor(
             input.elapsedTurns,
             input.alreadyCaught,
             details.types.any { it.identifier == "water" || it.identifier == "bug" },
-            input.nightOrCave, input.waterTerrain, input.environment, input.safariStage
+            input.nightOrCave, input.waterTerrain, captureEnvironment(game, input), input.safariStage,
+            game.versionGroup, details.stats.first { it.identifier == "speed" }.value, input.sameSpeciesOppositeGender
         )
         val blocked = if (generation == CaptureGeneration.GEN2 && Gen2CatchRate.blocksEngine(maxHp)) {
             generation.balls.filter { it != Ball.MASTER && it != Ball.LEVEL }.toSet()
@@ -312,8 +323,21 @@ class PokemonViewModel @Inject constructor(
             level, input.hp, input.status, probabilities.toList(), CatchRate.bestBall(probabilities),
             generation, input.playerLevel, input.fishing, input.sameSpeciesAndGender,
             input.underwater, input.elapsedTurns, input.alreadyCaught, blocked,
-            input.nightOrCave, input.waterTerrain, input.environment, input.safariStage
+            input.nightOrCave, input.waterTerrain, context.environment, input.safariStage,
+            input.sameSpeciesOppositeGender, game.versionGroup == VersionGroup.HEARTGOLD_SOULSILVER
         )
+    }
+
+    private fun captureEnvironment(game: Game, input: CatchInput): CaptureEnvironment {
+        val hgss = game.versionGroup == VersionGroup.HEARTGOLD_SOULSILVER
+        return when (input.environment) {
+            CaptureEnvironment.GREAT_MARSH -> if (hgss) CaptureEnvironment.NORMAL else input.environment
+
+            CaptureEnvironment.HGSS_SAFARI, CaptureEnvironment.BUG_CONTEST ->
+                if (hgss) input.environment else CaptureEnvironment.NORMAL
+
+            CaptureEnvironment.NORMAL, CaptureEnvironment.PAL_PARK -> input.environment
+        }
     }
 
     companion object {

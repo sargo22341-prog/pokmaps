@@ -52,6 +52,8 @@ internal fun hoennContentGuides(): List<GuideDefinition> {
 
 internal fun decorationGuide(context: Context, game: Game, catalog: MapCatalog, content: HoennContent): GuideArticle {
     val source = when (game.versionGroup) {
+        VersionGroup.HEARTGOLD_SOULSILVER -> error("Décorations hors Hoenn")
+
         VersionGroup.RUBY_SAPPHIRE -> "https://github.com/pret/pokeruby/blob/5784633ce4ef/src/decoration.c"
 
         VersionGroup.EMERALD -> "https://github.com/pret/pokeemerald/blob/731ad5bfd6e6/src/data/decoration/header.h"

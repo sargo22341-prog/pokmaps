@@ -45,7 +45,7 @@ object Gen2CatchRate {
 
             Ball.FAST -> rate * if (context.pokemonId in FAST_SPECIES) 4 else 1
 
-            Ball.DUSK, Ball.HEAL, Ball.QUICK, Ball.CHERISH,
+            Ball.DUSK, Ball.HEAL, Ball.QUICK, Ball.CHERISH, Ball.SPORT,
             Ball.NET, Ball.DIVE, Ball.NEST, Ball.REPEAT, Ball.TIMER, Ball.LUXURY, Ball.PREMIER ->
                 error("Ball indisponible en génération 2 : $ball")
 

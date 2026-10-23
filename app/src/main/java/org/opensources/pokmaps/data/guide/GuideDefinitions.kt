@@ -8,6 +8,8 @@ import org.opensources.pokmaps.domain.model.VersionGroup
 internal fun guideDefinitions(game: Game): List<GuideDefinition> {
     val versionId = game.version.id
     val branch = when (game.versionGroup) {
+        VersionGroup.HEARTGOLD_SOULSILVER -> emptyList()
+
         VersionGroup.RED_BLUE, VersionGroup.YELLOW -> kantoGuides() + sideGuides() + tipGuides()
 
         VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> johtoGuides() + sideGuides() + tipGuides()

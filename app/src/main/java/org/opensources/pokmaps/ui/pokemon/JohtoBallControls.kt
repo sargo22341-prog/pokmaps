@@ -21,8 +21,12 @@ internal fun JohtoBallControls(catch: CatchUiState, onAction: (PokemonAction) ->
         label = { Text(stringResource(R.string.catch_fishing)) }
     )
     FilterChip(
-        selected = catch.sameSpeciesAndGender,
-        onClick = { onAction(PokemonAction.ToggleLoveBonus) },
-        label = { Text(stringResource(R.string.catch_love_bonus)) }
+        selected = if (catch.hgss) catch.sameSpeciesOppositeGender else catch.sameSpeciesAndGender,
+        onClick = {
+            onAction(if (catch.hgss) PokemonAction.ToggleOppositeGender else PokemonAction.ToggleLoveBonus)
+        },
+        label = {
+            Text(stringResource(if (catch.hgss) R.string.catch_hgss_love_bonus else R.string.catch_love_bonus))
+        }
     )
 }

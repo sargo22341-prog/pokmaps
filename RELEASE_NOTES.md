@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Préparation des identités HeartGold/SoulSilver et de leurs règles de capture, sans activation des jeux.
 - Les filtres de rencontres distinguent Coup d’Boule et Éclate-Roc ; la radio HGSS est préparée sans activer les remakes.
 - Les rencontres de Rouge, Bleu, Jaune et des jeux GBA masquent les horaires
   et affichent une seule fois niveaux et probabilités.

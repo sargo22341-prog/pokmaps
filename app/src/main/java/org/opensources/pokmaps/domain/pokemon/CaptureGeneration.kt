@@ -1,6 +1,7 @@
 package org.opensources.pokmaps.domain.pokemon
 
 import org.opensources.pokmaps.domain.model.Generation
+import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Contexte des Balls des générations 2 à 4. */
 data class BallContext(
@@ -17,7 +18,10 @@ data class BallContext(
     val nightOrCave: Boolean = false,
     val waterTerrain: Boolean = false,
     val environment: CaptureEnvironment = CaptureEnvironment.NORMAL,
-    val safariStage: Int = 6
+    val safariStage: Int = 6,
+    val versionGroup: VersionGroup = VersionGroup.PLATINUM,
+    val baseSpeed: Int = 0,
+    val sameSpeciesOppositeGender: Boolean = false
 )
 
 enum class CaptureGeneration {

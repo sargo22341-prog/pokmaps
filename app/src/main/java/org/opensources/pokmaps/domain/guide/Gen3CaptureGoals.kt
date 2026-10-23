@@ -6,6 +6,8 @@ import org.opensources.pokmaps.domain.model.GameVersion
 object Gen3CaptureGoals {
     fun forVersion(version: Int): CaptureGoal {
         val available = when (GameVersion.of(version)) {
+            GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Objectifs HGSS non disponibles")
+
             GameVersion.RUBY -> RUBY
 
             GameVersion.SAPPHIRE -> SAPPHIRE
@@ -22,6 +24,8 @@ object Gen3CaptureGoals {
             )
         }
         val choices = when (GameVersion.of(version)) {
+            GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Objectifs HGSS non disponibles")
+
             GameVersion.RUBY -> listOf(HOENN_STARTERS, FOSSILS, MOON_STONE)
 
             GameVersion.SAPPHIRE -> listOf(HOENN_STARTERS, FOSSILS)

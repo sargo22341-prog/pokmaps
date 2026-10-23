@@ -16,6 +16,8 @@ data class RoamerChoice(val pokemonId: Int, val condition: RoamerCondition)
 object Roamers {
     fun choices(version: Int): List<RoamerChoice> = pokemonIds(version).map { pokemon ->
         val condition = when (GameVersion.of(version)) {
+            GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+
             GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerCondition.JOHTO
 
             GameVersion.RUBY, GameVersion.SAPPHIRE -> RoamerCondition.HOENN
@@ -42,6 +44,7 @@ object Roamers {
     }
 
     fun pokemonIds(version: Int): List<Int> = when (GameVersion.of(version)) {
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
         GameVersion.GOLD, GameVersion.SILVER -> listOf(243, 244, 245)
         GameVersion.CRYSTAL -> listOf(243, 244)
         GameVersion.RUBY -> listOf(381)
@@ -55,6 +58,8 @@ object Roamers {
 
     /** Niveau de la rencontre : 40 à Johto et Hoenn, 50 dans les remakes. */
     fun level(version: Int): Int = when (GameVersion.of(version)) {
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL, GameVersion.RUBY, GameVersion.SAPPHIRE,
         GameVersion.EMERALD -> 40
 
@@ -71,6 +76,7 @@ object Roamers {
     }
 
     fun area(version: Int): RoamerArea = when (GameVersion.of(version)) {
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerArea.JOHTO
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> RoamerArea.HOENN
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> RoamerArea.KANTO
@@ -80,6 +86,7 @@ object Roamers {
 
     /** Article des quêtes annexes qui présente les errants de la version, null sans errant. */
     fun article(version: Int): String? = when (GameVersion.of(version)) {
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> "johto-roamers"
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> "hoenn-roamers"
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> "remake-roamers"

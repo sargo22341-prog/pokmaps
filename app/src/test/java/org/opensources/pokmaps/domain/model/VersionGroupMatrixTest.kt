@@ -52,7 +52,10 @@ class VersionGroupMatrixTest {
         }
         assertEquals(expected, actual)
         assertEquals(
-            (VersionGroup.entries.toSet() - setOf(VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM)),
+            (
+                VersionGroup.entries.toSet() -
+                    setOf(VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM, VersionGroup.HEARTGOLD_SOULSILVER)
+                ),
             actual.values.map {
                 it.group
             }.toSet()
@@ -96,7 +99,7 @@ class VersionGroupMatrixTest {
 
     @Test
     fun aGroupWithoutRulesIsRejectedInsteadOfBorrowingAnotherGamesRules() {
-        val unsupported = FakeGameDao.EMERALD.copy(versionGroupIdentifier = "heartgold-soulsilver")
+        val unsupported = FakeGameDao.EMERALD.copy(versionGroupIdentifier = "unsupported")
         assertThrows(IllegalArgumentException::class.java) { unsupported.mapFamily }
     }
 }

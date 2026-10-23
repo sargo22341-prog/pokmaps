@@ -74,11 +74,17 @@ class GuideDefinitionsTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun unknownVersionOfAKnownGroupHasNoImplicitLibrary() {
-        guideDefinitions(FakeGameDao.RED.copy(versionId = 15))
+        guideDefinitions(FakeGameDao.RED.copy(versionId = 17))
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun unknownGroupHasNoImplicitLibrary() {
-        guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "heartgold-soulsilver"))
+        guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "unsupported"))
+    }
+
+    @Test
+    fun preparatoryHgssDoesNotBorrowGuidesFromAnotherBranch() {
+        assertTrue(guideDefinitions(FakeGameDao.HEARTGOLD).isEmpty())
+        assertTrue(guideDefinitions(FakeGameDao.SOULSILVER).isEmpty())
     }
 }

@@ -15,7 +15,9 @@ enum class GameVersion(val id: Int, val identifier: String, val group: VersionGr
     LEAFGREEN(11, "leafgreen", VersionGroup.FIRERED_LEAFGREEN, Generation.GEN3),
     DIAMOND(12, "diamond", VersionGroup.DIAMOND_PEARL, Generation.GEN4),
     PEARL(13, "pearl", VersionGroup.DIAMOND_PEARL, Generation.GEN4),
-    PLATINUM(14, "platinum", VersionGroup.PLATINUM, Generation.GEN4);
+    PLATINUM(14, "platinum", VersionGroup.PLATINUM, Generation.GEN4),
+    HEARTGOLD(15, "heartgold", VersionGroup.HEARTGOLD_SOULSILVER, Generation.GEN4),
+    SOULSILVER(16, "soulsilver", VersionGroup.HEARTGOLD_SOULSILVER, Generation.GEN4);
 
     companion object {
         fun of(id: Int): GameVersion = requireNotNull(entries.firstOrNull { it.id == id }) {

@@ -28,6 +28,17 @@ internal class FakeGameDao(private val games: List<Game> = listOf(RED, BLUE), pr
         val DIAMOND = Game(12, "diamond", "Diamant", 8, "diamond-pearl", 4, 483, 0x7D9DC4)
         val PEARL = Game(13, "pearl", "Perle", 8, "diamond-pearl", 4, 484, 0xCF9EB5)
         val PLATINUM = Game(14, "platinum", "Platine", 9, "platinum", 4, 487, 0xA49A72)
+        val HEARTGOLD = Game(
+            15, "heartgold", "Or HeartGold", 10, "heartgold-soulsilver", 4, 250, 0xC9A227,
+            remakeGenerationId = 2, hasTimeOfDay = true
+        )
+        val SOULSILVER = HEARTGOLD.copy(
+            versionId = 16,
+            versionIdentifier = "soulsilver",
+            name = "Argent SoulSilver",
+            mascotPokemonId = 249,
+            color = 0x9DA9B5
+        )
         val GBA_GAMES = listOf(
             RUBY,
             RUBY.copy(versionId = 8, versionIdentifier = "sapphire", name = "Saphir"),

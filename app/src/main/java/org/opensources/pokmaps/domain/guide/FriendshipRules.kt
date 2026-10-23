@@ -70,6 +70,7 @@ enum class FriendshipRules {
 
     companion object {
         fun forGame(game: Game): FriendshipRules = when (game.versionGroup) {
+            VersionGroup.HEARTGOLD_SOULSILVER -> error("Outil de bonheur HGSS non disponible")
             VersionGroup.GOLD_SILVER -> GOLD_SILVER
             VersionGroup.CRYSTAL -> CRYSTAL
             VersionGroup.RUBY_SAPPHIRE -> RUBY_SAPPHIRE

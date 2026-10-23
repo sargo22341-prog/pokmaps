@@ -8,6 +8,8 @@ import org.opensources.pokmaps.domain.model.GameVersion
 object Gen4CaptureGoals {
     fun forVersion(version: Int, national: Boolean): CaptureGoal {
         val available = when (GameVersion.of(version)) {
+            GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Objectifs HGSS non disponibles")
+
             GameVersion.DIAMOND -> COMMON + DIAMOND
 
             GameVersion.PEARL -> COMMON + PEARL

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ball_sport">Compét’Ball</string>
+    <string name="catch_hgss_safari">Parc Safari de Johto</string>
+    <string name="catch_bug_contest">Concours de capture d’insectes</string>
+    <string name="catch_hgss_love_bonus">Même espèce, sexes opposés</string>
     <string name="route_radio_off">Radio désactivée</string>
     <string name="route_radio_hoenn">Son de Hoenn · mercredi · Pokédex National</string>
     <string name="route_radio_sinnoh">Son de Sinnoh · jeudi · Pokédex National</string>

@@ -575,15 +575,34 @@ conditions, monnaies, quantités et étapes, ainsi que les retouches éditoriale
 
 ### Phase 6 — Règles Android et compatibilité
 
-- [ ] **6A — Identité et capacités.** Déclarer versions/groupe, choix des jeux, jaquettes et régions ;
+- [x] **6A — Identité et capacités.** Déclarer versions/groupe, choix des jeux, jaquettes et régions ;
   compléter tous les choix exhaustifs. Sortie : application testable avec le catalogue préparatoire,
   jeux non distribués.
-- [ ] **6B — Capture.** Ajouter le contexte HGSS, Balls et environnements avec tests de frontières.
+- [x] **6B — Capture.** Ajouter le contexte HGSS, Balls et environnements avec tests de frontières.
   Sortie : règles moteur prouvées et aucune régression GSC/Sinnoh.
 - [ ] **6C — Reproduction et bonheur.** Implémenter les différences prouvées et leurs outils français.
   Sortie : matrice des règles couverte par les tests du domaine et des cas d’usage.
 - [ ] **6D — Base et sauvegardes.** Finaliser export commun, éventuel schéma, collections et errants.
   Sortie : schéma aligné, mise à jour de base et imports historiques testés sans perte de progression.
+
+**Bilan 6A et 6B — 23 octobre 2026.** Les [règles Android préparatoires](docs/generations/regles-android-hgss.md)
+reconnaissent les versions 15/16, le groupe 10 et leur famille propre. Les catalogues en mémoire testent
+la rangée des remakes de génération 2, les mascottes et couleurs, la sélection mémorisée, Johto/Kanto
+et le départ à Bourg Geon. Les choix exhaustifs décident HGSS explicitement ; les contenus des phases
+suivantes ne sont pas hérités de GSC ou Sinnoh. La base et les quatorze jeux distribués restent inchangés.
+
+Le contexte de capture porte le groupe, la vitesse de base et le critère de sexes opposés. Les sept Balls
+Noigrumes suivent le moteur HGSS épinglé, y compris plafonnement, divisions entières et défaut de la Masse Ball.
+Safari, concours et Parc des Amis ont leurs Balls et règles propres ; les changements de branche écartent
+les environnements incompatibles. Les contrôles français réutilisent les composants existants de Johto.
+Les tests couvrent les frontières de poids, niveaux, vitesse, taux nul/négatif, conditions et environnements.
+
+Contrôles finaux réussis : ktlint, absence de services Google, Lint, 640 tests JVM/Compose et APK debug ;
+`python tools/check_assets.py`, limites 600/60 et diff relu. Aucun test ADB ni suite Python/Ruff ou pipeline
+lancé : aucun outil Python ni asset généré n'a changé. Les attentes de tests utilisant HGSS comme jeu inconnu
+ont été actualisées vers des identifiants inconnus ; les écarts initiaux de formatage ont été corrigés.
+Gradle a nécessité l'accès au cache utilisateur. Sa dépréciation AGP déjà documentée reste visible.
+Les phases 6C et 6D restent distinctes et non réalisées dans ce lot.
 
 ### Phase 7 — Guides et activités des remakes
 

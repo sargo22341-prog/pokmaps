@@ -41,7 +41,9 @@ internal fun CatchCalculator(catch: CatchUiState, onAction: (PokemonAction) -> U
             CaptureGeneration.GEN4 -> Gen4BallControls(catch, onAction)
             CaptureGeneration.GEN3 -> Gen3BallControls(catch, onAction)
         }
-        if (catch.generation != CaptureGeneration.GEN4 || catch.environment == CaptureEnvironment.NORMAL) {
+        if (catch.generation != CaptureGeneration.GEN4 ||
+            catch.environment in listOf(CaptureEnvironment.NORMAL, CaptureEnvironment.BUG_CONTEST)
+        ) {
             HealthControls(catch, onAction)
         }
         BallProbabilities(catch)
@@ -156,6 +158,7 @@ private val Ball.label: Int
         Ball.DUSK -> R.string.ball_dusk
         Ball.HEAL -> R.string.ball_heal
         Ball.QUICK -> R.string.ball_quick
+        Ball.SPORT -> R.string.ball_sport
         Ball.CHERISH -> R.string.ball_cherish
         Ball.PREMIER -> R.string.ball_premier
     }

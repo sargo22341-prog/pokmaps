@@ -34,7 +34,7 @@ object Gen3CatchRate {
 
         Ball.TIMER -> (context.elapsedTurns + 10).coerceAtMost(40)
 
-        Ball.DUSK, Ball.HEAL, Ball.QUICK, Ball.CHERISH,
+        Ball.DUSK, Ball.HEAL, Ball.QUICK, Ball.CHERISH, Ball.SPORT,
         Ball.SAFARI, Ball.LEVEL, Ball.LURE, Ball.MOON, Ball.FRIEND, Ball.LOVE, Ball.HEAVY, Ball.FAST, Ball.PARK ->
             error("Ball indisponible en génération 3 : $ball")
     }

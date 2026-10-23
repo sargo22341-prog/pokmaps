@@ -53,6 +53,8 @@ enum class UnownForm(val identifier: String, val symbol: String, val firstGenera
         }
 
         fun available(game: Game): List<UnownForm> = when (game.versionGroup) {
+            VersionGroup.HEARTGOLD_SOULSILVER -> available(game.generationId)
+
             VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD -> emptyList()
 
             VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,

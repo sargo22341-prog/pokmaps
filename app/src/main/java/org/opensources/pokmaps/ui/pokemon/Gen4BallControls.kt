@@ -10,7 +10,17 @@ import org.opensources.pokmaps.domain.pokemon.CaptureEnvironment
 
 @Composable
 internal fun Gen4BallControls(catch: CatchUiState, onAction: (PokemonAction) -> Unit) {
-    CaptureEnvironment.entries.forEach { environment ->
+    val environments = if (catch.hgss) {
+        listOf(
+            CaptureEnvironment.NORMAL,
+            CaptureEnvironment.HGSS_SAFARI,
+            CaptureEnvironment.BUG_CONTEST,
+            CaptureEnvironment.PAL_PARK
+        )
+    } else {
+        listOf(CaptureEnvironment.NORMAL, CaptureEnvironment.GREAT_MARSH, CaptureEnvironment.PAL_PARK)
+    }
+    environments.forEach { environment ->
         FilterChip(
             selected = catch.environment == environment,
             onClick = { onAction(PokemonAction.SetCaptureEnvironment(environment)) },
@@ -18,9 +28,12 @@ internal fun Gen4BallControls(catch: CatchUiState, onAction: (PokemonAction) -> 
         )
     }
     when (catch.environment) {
-        CaptureEnvironment.NORMAL -> NormalBallControls(catch, onAction)
+        CaptureEnvironment.NORMAL -> {
+            NormalBallControls(catch, onAction)
+            if (catch.hgss) JohtoBallControls(catch, onAction)
+        }
 
-        CaptureEnvironment.GREAT_MARSH -> {
+        CaptureEnvironment.GREAT_MARSH, CaptureEnvironment.HGSS_SAFARI -> {
             Text(stringResource(R.string.catch_safari_stage, catch.safariStage))
             Slider(
                 value = catch.safariStage.toFloat(),
@@ -29,6 +42,8 @@ internal fun Gen4BallControls(catch: CatchUiState, onAction: (PokemonAction) -> 
                 steps = 11
             )
         }
+
+        CaptureEnvironment.BUG_CONTEST -> Unit
 
         CaptureEnvironment.PAL_PARK -> Text(stringResource(R.string.catch_pal_park_note))
     }
@@ -62,6 +77,8 @@ private fun NormalBallControls(catch: CatchUiState, onAction: (PokemonAction) ->
 
 private val CaptureEnvironment.label: Int
     get() = when (this) {
+        CaptureEnvironment.HGSS_SAFARI -> R.string.catch_hgss_safari
+        CaptureEnvironment.BUG_CONTEST -> R.string.catch_bug_contest
         CaptureEnvironment.NORMAL -> R.string.catch_normal_battle
         CaptureEnvironment.GREAT_MARSH -> R.string.catch_great_marsh
         CaptureEnvironment.PAL_PARK -> R.string.catch_pal_park

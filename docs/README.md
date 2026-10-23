@@ -32,6 +32,7 @@ Les pages décrivent l’état actuel ; les rapports de tâches et anciens résu
 - [Aperçu Pokémon HeartGold/SoulSilver](generations/pokemon-hgss.md).
 - [Rencontres, conditions et comparaison HeartGold/SoulSilver](generations/rencontres-hgss.md).
 - [Personnages, objets et services HeartGold/SoulSilver](generations/personnages-hgss.md).
+- [Identité Android et règles de capture préparatoires HeartGold/SoulSilver](generations/regles-android-hgss.md).
 
 Le [catalogue des sprites](donnees/sprites-pokemon.md) est un inventaire généré de 1 025 espèces,
 à consulter uniquement pour une provenance précise. Les règles de sprites sont résumées dans le pipeline.

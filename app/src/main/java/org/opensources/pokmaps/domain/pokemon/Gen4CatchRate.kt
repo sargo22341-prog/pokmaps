@@ -1,17 +1,54 @@
 package org.opensources.pokmaps.domain.pokemon
 
+import org.opensources.pokmaps.domain.model.VersionGroup
+
 /** Contexte de combat : les Balls du Grand Marais et du Parc des Amis ne sont pas interchangeables. */
-enum class CaptureEnvironment { NORMAL, GREAT_MARSH, PAL_PARK }
+enum class CaptureEnvironment { NORMAL, GREAT_MARSH, PAL_PARK, HGSS_SAFARI, BUG_CONTEST }
 
 /** BattleScript_CalcCatchShakes, pret/pokeplatinum 1dc13dcea40c, et son équivalent Diamant/Perle. */
 object Gen4CatchRate {
-    fun balls(context: BallContext): List<Ball> = when (context.environment) {
-        CaptureEnvironment.NORMAL -> CaptureGeneration.GEN4.balls
-        CaptureEnvironment.GREAT_MARSH -> listOf(Ball.SAFARI)
-        CaptureEnvironment.PAL_PARK -> listOf(Ball.PARK)
+    fun balls(context: BallContext): List<Ball> {
+        val hgss = when (context.versionGroup) {
+            VersionGroup.HEARTGOLD_SOULSILVER -> true
+
+            VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> false
+
+            VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL,
+            VersionGroup.RUBY_SAPPHIRE, VersionGroup.EMERALD, VersionGroup.FIRERED_LEAFGREEN ->
+                error("Contexte de capture hors DS : ${context.versionGroup}")
+        }
+        require(context.environment != CaptureEnvironment.GREAT_MARSH || !hgss)
+        require(context.environment !in listOf(CaptureEnvironment.HGSS_SAFARI, CaptureEnvironment.BUG_CONTEST) || hgss)
+        return when (context.environment) {
+            CaptureEnvironment.NORMAL ->
+                CaptureGeneration.GEN4.balls +
+                    if (hgss) {
+                        HgssCatchRate.apricornBalls
+                    } else {
+                        emptyList()
+                    }
+
+            CaptureEnvironment.GREAT_MARSH -> listOf(Ball.SAFARI)
+
+            CaptureEnvironment.PAL_PARK -> listOf(Ball.PARK)
+
+            CaptureEnvironment.HGSS_SAFARI -> listOf(Ball.SAFARI)
+
+            CaptureEnvironment.BUG_CONTEST -> listOf(Ball.SPORT)
+        }
     }
 
     fun probability(ball: Ball, rate: Int, maxHp: Int, hp: Int, status: CatchStatus, context: BallContext): Double {
+        if (context.versionGroup == VersionGroup.HEARTGOLD_SOULSILVER) {
+            return HgssCatchRate.probability(ball, rate, maxHp, hp, status, context)
+        }
+        require(
+            context.environment in listOf(
+                CaptureEnvironment.NORMAL,
+                CaptureEnvironment.GREAT_MARSH,
+                CaptureEnvironment.PAL_PARK
+            )
+        )
         require(rate in 1..255 && maxHp in 1..65535 && hp in 1..maxHp)
         require(context.wildLevel in 1..100 && context.elapsedTurns in 0..255 && context.safariStage in 0..12)
         require(ball in balls(context)) { "Ball indisponible dans ce contexte : $ball" }
@@ -47,9 +84,9 @@ object Gen4CatchRate {
         Ball.QUICK -> if (context.elapsedTurns == 0) 40 else 10
 
         Ball.LEVEL, Ball.LURE, Ball.MOON, Ball.FRIEND, Ball.LOVE, Ball.HEAVY, Ball.FAST,
-        Ball.PARK, Ball.CHERISH -> error("Ball sans lancer ordinaire en Sinnoh : $ball")
+        Ball.PARK, Ball.CHERISH, Ball.SPORT -> error("Ball sans lancer ordinaire en Sinnoh : $ball")
     }
 
-    private fun safariRate(rate: Int, stage: Int): Int =
+    internal fun safariRate(rate: Int, stage: Int): Int =
         if (stage <= 6) rate * 10 / (40 - stage * 5) else rate * (15 + (stage - 7) * 5) / 10
 }

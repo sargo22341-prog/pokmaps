@@ -48,4 +48,8 @@ private fun visibleFrame(bytes: ByteArray, map: GameMap): MapFrame {
 
 private const val MAX_TILE_BYTES = 512 * 1024
 private const val READ_TIMEOUT_MS = 3_000L
-private val DS_GROUPS = setOf(VersionGroup.PLATINUM.identifier, VersionGroup.DIAMOND_PEARL.identifier)
+private val DS_GROUPS = setOf(
+    VersionGroup.PLATINUM.identifier,
+    VersionGroup.DIAMOND_PEARL.identifier,
+    VersionGroup.HEARTGOLD_SOULSILVER.identifier
+)

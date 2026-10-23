@@ -55,7 +55,9 @@ class PokemonViewModelTest {
                 FakeGameDao.GOLD,
                 FakeGameDao.RUBY,
                 FakeGameDao.EMERALD,
-                FakeGameDao.PLATINUM
+                FakeGameDao.PLATINUM,
+                FakeGameDao.HEARTGOLD,
+                FakeGameDao.SOULSILVER
             )
         ),
         GameSettings(dataStore)
@@ -76,6 +78,27 @@ class PokemonViewModelTest {
             UpdateCollectionUseCase(games, collection),
             requests
         )
+    }
+
+    @Test
+    fun hgssCaptureControlsAndGameChangesKeepEnvironmentsCompatible() = runTest {
+        val model = viewModel(PIKACHU)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        games.select(FakeGameDao.HEARTGOLD)
+        assertTrue(checkNotNull(model.state.value.catch).hgss)
+        assertTrue(checkNotNull(model.state.value.catch).probabilities.any { it.first == Ball.HEAVY })
+        model.onAction(PokemonAction.ToggleOppositeGender)
+        assertTrue(checkNotNull(model.state.value.catch).sameSpeciesOppositeGender)
+        model.onAction(PokemonAction.SetCaptureEnvironment(CaptureEnvironment.BUG_CONTEST))
+        assertEquals(listOf(Ball.SPORT), model.state.value.catch?.probabilities?.map { it.first })
+        games.select(FakeGameDao.PLATINUM)
+        assertEquals(CaptureEnvironment.NORMAL, model.state.value.catch?.environment)
+        assertFalse(checkNotNull(model.state.value.catch).probabilities.any { it.first == Ball.SPORT })
+        model.onAction(PokemonAction.SetCaptureEnvironment(CaptureEnvironment.GREAT_MARSH))
+        games.select(FakeGameDao.SOULSILVER)
+        assertEquals(CaptureEnvironment.NORMAL, model.state.value.catch?.environment)
+        model.onAction(PokemonAction.SetCaptureEnvironment(CaptureEnvironment.HGSS_SAFARI))
+        assertEquals(listOf(Ball.SAFARI), model.state.value.catch?.probabilities?.map { it.first })
     }
 
     @Test

@@ -15,6 +15,7 @@ internal fun achievementGuides(context: Context, versionId: Int): List<GuideDefi
     val version = GameVersion.of(versionId)
 
     @ArrayRes val array = when (version) {
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> return emptyList()
         GameVersion.DIAMOND -> R.array.achievements_12
         GameVersion.PEARL -> R.array.achievements_13
         GameVersion.PLATINUM -> R.array.achievements_14
@@ -47,6 +48,7 @@ private fun readAchievement(resources: Resources, @ArrayRes array: Int, version:
         "ra-$id", values[1].resourceId, values[2].resourceId, GuideCategory.ACHIEVEMENT,
         setOf(version.id),
         when (version.group) {
+            VersionGroup.HEARTGOLD_SOULSILVER -> 175
             VersionGroup.RED_BLUE, VersionGroup.YELLOW, VersionGroup.FIRERED_LEAFGREEN -> 25
             VersionGroup.DIAMOND_PEARL, VersionGroup.PLATINUM -> 387
             VersionGroup.GOLD_SILVER, VersionGroup.CRYSTAL -> 175

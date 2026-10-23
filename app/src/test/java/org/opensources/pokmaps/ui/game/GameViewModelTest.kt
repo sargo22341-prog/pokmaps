@@ -55,6 +55,25 @@ class GameViewModelTest {
     }
 
     @Test
+    fun preparatoryRemakesCanBeSelectedWithoutChangingTheShippedCatalog() = runTest {
+        val dao = FakeGameDao(listOf(FakeGameDao.PLATINUM, FakeGameDao.HEARTGOLD, FakeGameDao.SOULSILVER))
+        val model = viewModel(dao)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { model.state.collect {} }
+        assertEquals(
+            listOf(
+                GameChoiceRow(4, null, listOf(FakeGameDao.PLATINUM)),
+                GameChoiceRow(4, 2, listOf(FakeGameDao.HEARTGOLD, FakeGameDao.SOULSILVER))
+            ),
+            model.state.value.rows
+        )
+        model.onAction(GameAction.Select(FakeGameDao.SOULSILVER))
+        assertEquals(FakeGameDao.SOULSILVER, model.state.value.selected)
+        val reopened = viewModel(dao)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { reopened.state.collect {} }
+        assertEquals(FakeGameDao.SOULSILVER, reopened.state.value.selected)
+    }
+
+    @Test
     fun startsLoading() {
         assertTrue(viewModel(FakeGameDao()).state.value.loading)
     }

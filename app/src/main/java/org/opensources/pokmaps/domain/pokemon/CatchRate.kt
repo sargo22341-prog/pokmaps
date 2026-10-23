@@ -29,7 +29,8 @@ enum class Ball(val itemIdentifier: String, val randomMax: Int, val hpDivisor: I
     DUSK("dusk-ball", 255, 12),
     HEAL("heal-ball", 255, 12),
     QUICK("quick-ball", 255, 12),
-    CHERISH("cherish-ball", 255, 12)
+    CHERISH("cherish-ball", 255, 12),
+    SPORT("sport-ball", 255, 12)
 }
 
 /** Statut du Pokémon sauvage : sommeil et gel facilitent le plus la capture. */
