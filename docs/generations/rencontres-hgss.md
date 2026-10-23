@@ -185,10 +185,21 @@ Les arbres et rochers restent attachés à leur objet, sans être rejetés parce
 Pour l'eau, la surface haute reste candidate même si le BDHC contient aussi un fond ; les plans d'eau visuels
 ne suivent pas toujours ces surfaces. La curation retient uniquement les points relus sur l'eau bleue/cyan
 de l'image, sans imposer une équivalence avec le sol opaque ni placer de Pokémon sur les props ou les berges.
+Le générateur écarte déjà les candidats aquatiques qui ne correspondent pas à cette couleur dans l'image
+locale, afin qu'une proposition de remplacement ne puisse pas revenir sur un arbre ou une rive.
 L'aperçu conserve les candidats rejetés et leurs deux profondeurs pour la relecture.
 
-La curation retient **5 655 points**, pour **151 lieux audités** : 81 à Johto, 57 à Kanto et 13 gabarits/lieux spéciaux.
-Les 296 terrains contrôlés comprennent 268 terrains avec points et **28 absences expliquées**.
+La curation retient **5 850 points**, pour **151 lieux audités** : 81 à Johto, 57 à Kanto et 13 gabarits/lieux spéciaux.
+Les 290 terrains contrôlés comprennent 272 terrains avec points et **18 absences expliquées**.
+L'herbe ordinaire est rapprochée de sa palette diurne dans le rendu natif : le centre et huit pixels voisins
+écartent les chemins, l'eau et les arbres. Le parcours ajoute les cases d'herbe visibles que le BDHC décalé
+manquait, puis les retouches restent espacées de trente-deux pixels. Six faux terrains d'herbe des grottes
+sont retirés ; leurs rencontres utilisent le sol déjà validé. Les habitats rocheux particuliers du Safari
+et l'herbe propre au flanc supérieur du Mont Argenté conservent leurs terrains natifs.
+Les points extérieurs sont ensuite comparés pixel par pixel aux tuiles du plan monde assemblé :
+le décor d'une carte voisine peut masquer un point pourtant visible sur l'image locale.
+Ce contrôle retire notamment trois anciens points aquatiques de la Route 12 et un arbre de la Route 30.
+Les trois points aquatiques ont été remplacés sur de l'eau visible ; l'arbre masqué n'est plus proposé.
 Les points sont espacés d'au moins 32 pixels dans chaque terrain ; les propositions initiales sont
 déterministes et plafonnées à quarante points, puis restent des retouches éditoriales.
 Les treize planches couvrent tous les lieux ; les images détaillées et leur index restent dans
@@ -200,14 +211,21 @@ et les dix-sept cases libres de la salle de Lugia sans surface BDHC exploitable.
 Trois autres terrains ne passent pas le rapprochement BDHC/décor : marche au deuxième étage de la Tour Chétiflor,
 au neuvième étage de la Tour Carillon et au premier sous-sol du Puits Ramoloss.
 Leurs espèces restent dans les listes, sans point flottant ou masqué ajouté pour remplir la carte.
-La relecture aquatique écarte aussi dix terrains dont les candidats natifs projetables ne rejoignent pas
-l'eau visible : Routes 6, 22, 30 et 43, Bourg Palette, Jadielle, Céladopole, Puits Ramoloss sous-sol 1,
-et les deux états du square du Mont Sélénite. Le CSV d'exclusions conserve leurs comptes de candidats.
+La relecture aquatique corrige dix terrains dont les candidats BDHC ne rejoignent pas l'eau visible :
+Routes 6, 22, 30 et 43, Bourg Palette, Jadielle, Céladopole, Puits Ramoloss sous-sol 1,
+et les deux états du square du Mont Sélénite. `tools/data/hgss_water_regions.csv` délimite quinze
+surfaces relues sur les images natives, sans inventer une hauteur BDHC. Les candidats sont espacés
+sur une grille de seize pixels et contrôlent neuf pixels autour du centre, jusqu'à huit pixels de distance :
+une berge, une zone transparente ou un pixel non aquatique rejette le point. Ces surfaces reçoivent cent
+points éditoriaux dans `map_spots.csv`, dont vingt-cinq sur les deux lacs de la Route 30.
+Une surface sans eau visible, hors image, trop grande ou sans lieu natif bloque la génération.
+L'export Android respecte aussi les dix-huit exclusions restantes : aucun candidat automatique rejeté
+ne peut recréer de marqueur sur ces terrains.
 Le Safari se place sur ses douze gabarits, jamais sur un arrangement universel inventé de ses six habitats actifs.
 Les rencontres de la salle de Lugia restent dans la liste ; aucune hauteur arbitraire ne crée de marqueur.
 Tout terrain sans couverture ni raison, point hors terrain, carte inconnue ou exception inutilisée est bloquant.
 
-L'éditeur conserve 37 avertissements de capacité : ces terrains ont des points, mais moins que l'union
+L'éditeur conserve 36 avertissements de capacité : ces terrains ont des points, mais moins que l'union
 des espèces et méthodes possibles. Une partie des Pokémon reste visible dans la liste du lieu.
 Ces avertissements ne désignent pas un lieu sans couverture et ne changent aucune probabilité de rencontre.
 

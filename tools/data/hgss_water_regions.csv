@@ -1,0 +1,16 @@
+header,left,top,right,bottom,reason
+14,320,576,497,609,Route 6 : lac central relu sur le rendu natif ; le BDHC est décalé du décor.
+27,736,448,833,529,Route 22 : bassin relu sur le rendu natif ; le BDHC est décalé du décor.
+34,432,1216,497,1393,Route 30 : lac près de la maison des Noigrumes relu sur le rendu natif.
+34,480,1680,593,1793,Route 30 : lac sud relu sur le rendu natif.
+45,240,544,337,753,Route 43 : grand lac occidental relu sur le rendu natif.
+45,272,416,337,449,Route 43 : petit lac nord relu sur le rendu natif.
+49,304,656,337,753,Bourg Palette : accès à la Route 21 relu sur le rendu natif.
+50,512,848,609,881,Jadielle : étang occidental relu sur le rendu natif.
+55,560,832,593,865,Céladopole : bassin au sud de la passerelle relu sur le rendu natif.
+55,560,704,593,721,Céladopole : bassin au nord de la passerelle relu sur le rendu natif.
+177,656,640,769,673,Puits Ramoloss : bassin sud-est du sous-sol 1 relu sur le rendu natif.
+177,464,608,561,673,Puits Ramoloss : bassin sud-ouest du sous-sol 1 relu sur le rendu natif.
+177,544,464,577,481,Puits Ramoloss : bassin central du sous-sol 1 relu sur le rendu natif.
+449,256,384,305,417,Mont Sélénite : bassin du square hors danse relu sur le rendu natif.
+513,256,384,305,417,Mont Sélénite : bassin du square pendant la danse relu sur le rendu natif.

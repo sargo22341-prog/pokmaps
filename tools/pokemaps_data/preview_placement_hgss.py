@@ -83,6 +83,9 @@ def build_placement(cache: Path, output: Path) -> None:
             Path(__file__).with_name("placement_hgss.py"),
             Path(__file__).with_name("terrain_hgss.py"),
             Path(__file__).with_name("visibility_hgss.py"),
+            Path(__file__).with_name("water_placement_hgss.py"),
+            Path(__file__).with_name("grass_placement_hgss.py"),
+            Path(__file__).with_name("world_placement_hgss.py"),
         )
     }
     payload = dict(
@@ -92,6 +95,7 @@ def build_placement(cache: Path, output: Path) -> None:
         recipe=recipe,
         spots_sha256=digest(DATA / "map_spots.csv"),
         exclusions_sha256=digest(DATA / "hgss_spot_exclusions.csv"),
+        water_regions_sha256=digest(DATA / "hgss_water_regions.csv"),
         catalog=catalog,
         coverage=rows,
     )
@@ -116,6 +120,8 @@ def check_placement(folder: Path, validate_spots: bool = True) -> dict:
     if set(inventory) != {"placement.json"} or digest(folder / "placement.json") != inventory["placement.json"]:
         raise ValueError("HGSS : aperçu de placement modifié")
     data = read_placement_json(folder / "placement.json")
+    if data.get("water_regions_sha256") != digest(DATA / "hgss_water_regions.csv"):
+        raise ValueError("HGSS : surfaces aquatiques périmées")
     for name, expected in data["sources"].items():
         if digest(folder.parent / name) != expected:
             raise ValueError(f"HGSS : prérequis de placement périmé : {name}")

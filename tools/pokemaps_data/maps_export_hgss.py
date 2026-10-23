@@ -30,6 +30,9 @@ def export_game(cache: Path, output: Path) -> GameMapData:
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)
+    from .plans_application_hgss import application_catalog, native_map_types
+
+    catalog = application_catalog(catalog, native_map_types(cache / "hgss-qualification"))
     rows, offsets = _maps(source, output, catalog)
     print(f"HGSS : {len(rows)} cartes et niveaux exportés", flush=True)
     lookup = {row["header"]: row for row in catalog["maps"]}
@@ -72,8 +75,11 @@ def _maps(source: Path, output: Path, catalog: dict) -> tuple[list[MapRow], dict
         "johto-exterieurs": ("JOHTO", 993, "Johto", "MAP_NEW_BARK"),
         "kanto-exterieurs": ("KANTO", 992, "Kanto", "MAP_PALLET"),
     }
-    for index, plan in enumerate(catalog["plans"]):
-        const, number, name, start = names.get(plan["id"], (plan["id"], 540 + index, plan["name_fr"], None))
+    for plan in catalog["plans"]:
+        if plan.get("standalone"):
+            continue
+        number = 540 + sum(not row.is_world for row in rows)
+        const, number, name, start = names.get(plan["id"], (plan["id"], number, plan["name_fr"], None))
         rows.append(
             MapRow(
                 const,
@@ -88,19 +94,46 @@ def _maps(source: Path, output: Path, catalog: dict) -> tuple[list[MapRow], dict
                 start=start,
             )
         )
-        shutil.copytree(source / "plans" / plan["id"], output / identifier(const))
+        _write_plan(source, output, catalog, plan, const)
     for record in catalog["maps"]:
         plan = plans[record["plan"]]
         parent = names.get(plan["id"], (plan["id"],))[0]
         offset = next(tuple(p["offset"]) for p in plan["parts"] if p["header"] == record["header"])
         offsets[identifier(record["const"])] = offset
-        rows.append(MapRow(record["const"], record["header"], record["name_fr"], parent, *offset, *record["size"], 0))
+        rows.append(_native_map(source, output, record, plan, parent, offset))
     from .layers_application_hgss import write_layers
     from .origins_hgss import assign_origins
 
     assign_origins(rows, catalog)
     write_layers(source, output, catalog, rows)
     return rows, offsets
+
+
+def _native_map(source: Path, output: Path, record: dict, plan: dict, parent: str, offset: tuple) -> MapRow:
+    standalone = plan.get("standalone", False)
+    if standalone:
+        from .maps_plans_hgss import write_plan
+
+        write_plan(source, [record], output / identifier(record["const"]))
+    return MapRow(
+        record["const"],
+        record["header"],
+        record["name_fr"],
+        None if standalone else parent,
+        *offset,
+        *record["size"],
+        plan["level_count"] if standalone else 0,
+    )
+
+
+def _write_plan(source: Path, output: Path, catalog: dict, plan: dict, const: str) -> None:
+    if plan.get("separated"):
+        from .maps_plans_hgss import write_plan
+
+        members = [r for r in catalog["maps"] if r["plan"] == plan["id"]]
+        write_plan(source, members, output / identifier(const))
+    else:
+        shutil.copytree(source / "plans" / plan["id"], output / identifier(const))
 
 
 def _warps(catalog: dict, lookup: dict[int, dict]) -> list[WarpRow]:
@@ -122,12 +155,14 @@ def _warps(catalog: dict, lookup: dict[int, dict]) -> list[WarpRow]:
 
 
 def _spots(data: GameMapData, placement: dict, lookup: dict, offsets: dict) -> None:
+    excluded = {(r["header"], r["kind"]) for r in placement["coverage"] if r["reason"]}
     for record in placement["catalog"]["maps"]:
         const = lookup[record["header"]]["const"]
         dx, dy = offsets[identifier(const)]
         for kind, points in record["terrain"].items():
             data.terrain[(identifier(const), kind)] = frozenset((x + dx, y + dy) for x, y in points)
-            data.spots.extend(SpotRow(const, kind, x + dx, y + dy) for x, y in points)
+            if (record["header"], kind) not in excluded:
+                data.spots.extend(SpotRow(const, kind, x + dx, y + dy) for x, y in points)
 
 
 def _api_areas(catalog: dict) -> list[tuple[str, str]]:

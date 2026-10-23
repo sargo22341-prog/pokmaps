@@ -97,8 +97,12 @@ def validate_assets(assets: Path) -> None:
     check_inventory(folder)
     data = read_placement_json(folder / "catalog.json")
     source = data["source_catalog"]
-    lower = sum(max(len(r["layers"]) for r in source["maps"] if r["plan"] == p["id"]) for p in source["plans"])
-    expected = 496 + 224 + lower
+    lower = sum(
+        max(len(r["layers"]) for r in source["maps"] if r["plan"] == p["id"])
+        for p in source["plans"]
+        if p["id"] not in {"johto-exterieurs", "kanto-exterieurs"}
+    )
+    expected = 496 + sum(not p.get("standalone", False) for p in source["plans"]) + lower
     if data["commit"] != HGSS_PRET_COMMIT or len(data["maps"]) != expected:
         raise ValueError("HGSS : catalogue distribué incomplet ou d'un autre commit")
     constants = {row["const"] for row in data["maps"]}
@@ -124,16 +128,37 @@ def validate_database(connection: sqlite3.Connection) -> list[str]:
         ("profils des 493 espèces HGSS", "SELECT count(*) FROM pokemon_version_group WHERE version_group_id=10", 493),
         ("régional HGSS de 256 espèces", "SELECT count(*) FROM pokedex_entry WHERE pokedex_id=7", 256),
     )
-    return [
+    errors = [
         f"HGSS : {label} incomplets"
         for label, query, expected in checks
         if connection.execute(query).fetchone()[0] != expected
     ]
+    errors.extend(_validate_map_placement(connection))
+    return errors
+
+
+def _validate_map_placement(connection: sqlite3.Connection) -> list[str]:
+    from .preview_placement_hgss import exceptions
+
+    errors = []
+    if connection.execute(
+        """SELECT count(*) FROM map WHERE version_group_id=10
+           AND (identifier LIKE 'johto-lower%' OR identifier LIKE 'kanto-lower%')"""
+    ).fetchone()[0]:
+        errors.append("HGSS : coupes techniques présentes sur la carte monde")
+    for header, kind in exceptions():
+        count = connection.execute(
+            "SELECT count(*) FROM map_spot WHERE map_id=? AND kind=?", (10_000 + header, kind)
+        ).fetchone()[0]
+        if count:
+            errors.append(f"HGSS : terrain exclu avec marqueurs : {header}/{kind}")
+    return errors
 
 
 def export_recipe() -> dict[str, str]:
     names = (
         "maps_export_hgss.py",
+        "plans_application_hgss.py",
         "maps_characters_hgss.py",
         "maps_offers_hgss.py",
         "builder_wild_hgss.py",

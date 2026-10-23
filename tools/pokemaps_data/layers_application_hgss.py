@@ -18,12 +18,16 @@ def layer_const(plan: str, depth: int) -> str:
 
 
 def actor_layer(record: dict, ceiling: int) -> str:
+    if record["plan"] in {"johto-exterieurs", "kanto-exterieurs"}:
+        return record["const"]
     layers = sorted(record["layers"], key=lambda r: r["ceiling_fx32"], reverse=True)
     depth = next(i for i, row in enumerate(layers, 1) if row["ceiling_fx32"] == ceiling)
     return layer_const(record["plan"], depth)
 
 
 def surface_map(record: dict, height: int) -> str:
+    if record["plan"] in {"johto-exterieurs", "kanto-exterieurs"}:
+        return record["const"]
     candidates = [row for row in record["layers"] if height < row["ceiling_fx32"]]
     if not candidates:
         return record["const"]
@@ -32,8 +36,10 @@ def surface_map(record: dict, height: int) -> str:
 
 def write_layers(source: Path, output: Path, catalog: dict, rows: list[MapRow]) -> None:
     records = {r["header"]: r for r in catalog["maps"]}
-    number = 540 + len(catalog["plans"])
+    number = max((r.number for r in rows if 540 <= r.number < 992), default=539) + 1
     for plan in catalog["plans"]:
+        if plan["id"] in {"johto-exterieurs", "kanto-exterieurs"}:
+            continue
         parts = [(records[p["header"]], p["offset"]) for p in plan["parts"]]
         count = max(len(r["layers"]) for r, _ in parts)
         upper = next(row for row in rows if row.const == plan_const(plan["id"]))

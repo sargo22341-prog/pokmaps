@@ -107,6 +107,10 @@ Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépô
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
 Or HeartGold et Argent SoulSilver sont disponibles avec Johto, Kanto et leurs installations.
+Les bâtiments indépendants disposent de leur propre carte ; seules les salles reliées d'un même plan restent
+assemblées. La carte monde ne propose pas les coupes techniques de relief comme niveaux inférieurs.
+Les rencontres respectent les points éditoriaux et leurs exclusions : les terrains sans projection visible
+gardent leurs Pokémon dans la liste du lieu, sans marqueur placé hors du décor correspondant.
 Leur [qualification des sources](docs/generations/sources-hgss.md) fixe le dépôt natif et ses empreintes ;
 les [règles de capture](docs/generations/regles-android-hgss.md), de reproduction et de bonheur restent
 propres aux remakes.

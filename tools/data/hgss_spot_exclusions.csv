@@ -1,14 +1,6 @@
 header,kind,reason
-14,water,Route 6 : les 52 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun point n'est placé dans les herbes ou sur les berges ; Surf et pêche restent dans la liste.
-27,water,Route 22 : les 54 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les herbes ou le relief.
-34,water,Route 30 : les 126 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables restent consultables sans inventer une hauteur d'eau.
-45,water,Route 43 : les 144 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun marqueur sur les herbes ; tables conservées dans la liste.
-49,water,Bourg Palette : les 14 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur arbitraire.
-50,water,Jadielle : les 29 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur le décor.
-55,water,Céladopole : les 30 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les berges.
 156,floor,Tour Chétiflor 2e étage : aucune projection BDHC de marche ne correspond à la profondeur du décor visible à une demi-case près. Les rencontres restent dans la liste sans marqueur sur les parois ou sous le plancher.
 177,floor,Puits Ramoloss sous-sol 1 : les surfaces BDHC de marche sont décalées par rapport à la géométrie visible de plus de huit unités de profondeur. Aucun marqueur arbitraire ; rencontres conservées dans la liste.
-177,water,Puits Ramoloss sous-sol 1 : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables de Surf et de pêche restent consultables sans marqueur sur les murs.
 341,floor,Tour Carillon 9e étage : aucune projection BDHC de marche ne correspond à la profondeur du décor visible à une demi-case près. Les rencontres restent dans la liste sans marqueur flottant ou masqué.
 343,water,Habitat Safari 0 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 652.
 345,water,Habitat Safari 2 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 654.
@@ -19,11 +11,9 @@ header,kind,reason
 354,water,Habitat Safari 11 : tables aquatiques natives conservées mais aucune case surfable dans le gabarit 663.
 357,floor,En-tête Safari dynamique : la matrice 212 est peuplée à l'exécution. Les rencontres sont placées sur les douze gabarits 343 à 354 et jamais sur l'image vide de l'entrée.
 357,water,En-tête Safari dynamique : la matrice 212 est peuplée à l'exécution. Les rencontres aquatiques sont placées sur les gabarits avec eau et ne prédisent aucun arrangement des six habitats actifs.
-449,water,Square du Mont Sélénite : les 11 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les arbres ou les berges.
 450,water,La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 2e étage de la Caverne Azurée.
 459,water,La banque conserve des tables aquatiques mais aucun comportement surfable n'existe sur cette partie supérieure du Mont Argenté.
 462,water,La banque conserve des tables aquatiques mais aucun comportement surfable n'existe dans la salle de Sulfura.
 463,water,La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 2e étage du Mont Argenté.
 464,water,La banque conserve des tables aquatiques mais aucun comportement surfable n'existe au 3e étage du Mont Argenté.
 486,floor,Les 17 cases de rencontre libres de la salle de Lugia ne portent aucune surface BDHC dans la source épinglée. La hauteur projetée ne peut pas être prouvée : rencontres conservées dans la liste du lieu sans marqueur arbitraire.
-513,water,Square du Mont Sélénite pendant la danse des Mélofée : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les arbres ou les berges.

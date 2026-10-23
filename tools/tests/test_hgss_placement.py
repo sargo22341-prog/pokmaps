@@ -76,6 +76,16 @@ def test_points_on_transparent_pixels_are_rejected(tmp_path: Path) -> None:
     assert rejected[0]["point"] == (24, 8)
 
 
+def test_native_water_candidates_on_trees_cannot_be_replacement_spots(tmp_path: Path) -> None:
+    path = tmp_path / "water.png"
+    image = Image.new("RGBA", (64, 64), (82, 115, 41, 255))
+    image.putpixel((40, 40), (20, 150, 220, 255))
+    image.save(path)
+    rejected = []
+    assert visible_cells(path, {"water": [(24, 24), (40, 40)]}, rejected) == {"water": [(40, 40)]}
+    assert rejected[0]["point"] == (24, 24)
+
+
 def test_editor_snaps_to_projected_center_instead_of_flat_grid() -> None:
     catalog = object.__new__(HgssCatalog)
     catalog.records = {"route-29": dict(terrain={"grass": [[24, 26], [56, 42]]})}
@@ -155,6 +165,7 @@ def test_snapshot_rejects_modified_output_but_editor_can_open_invalid_curation(t
         sources={},
         recipe={},
         native_sources=read_placement_json(preview.CONTRACT),
+        water_regions_sha256=preview.digest(preview.DATA / "hgss_water_regions.csv"),
         catalog={"maps": []},
         coverage=[],
     )

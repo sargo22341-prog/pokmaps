@@ -11,17 +11,21 @@
     }
   },
   "sources": {
-    "hgss-maps/inventory.json": "a1e41c53f16678f29e022e27b39013df21d4d594011cdb8c438acfe7bf7e0a1d",
-    "hgss-encounters/inventory.json": "464cc337a8429b20c2ecb8f4ecadac6dea800cce73a2c49063d36dfe0164bbcd"
+    "hgss-maps/inventory.json": "4e157d30d6ac5fd06fc79fdae16274cceefd5b3eb615a6dc1fb9995744241235",
+    "hgss-encounters/inventory.json": "fd56cab0c651ac093383cdf71627dc34cb25a9de74c3865e64d16cd64c5024fa"
   },
   "recipe": {
-    "preview_placement_hgss.py": "76cc8e5d8fc29673d83e6e868ef5731bd8cd7db8a958f3b1516e641d650be3a2",
-    "placement_hgss.py": "9d2491454163d6e06fc193ea95555b833513b5b31253c0c4e26dcbc65828f457",
+    "preview_placement_hgss.py": "296d650c4a2ed3e8be27af539fe8bb161156b686f29661b4561add27c537953b",
+    "placement_hgss.py": "9381d5bbf5732fc64d92cf2a286dc573f6840ebf5e10330b03a4349c06c392d9",
     "terrain_hgss.py": "408239781288a5790c338f79a8f737f27c349d39bf3a98c3f6840ca3c75cf398",
-    "visibility_hgss.py": "1a4346551b633575a579e8eaef37ac55f08fd43d6a000b4e7e229b6aaa9094cd"
+    "visibility_hgss.py": "1a4346551b633575a579e8eaef37ac55f08fd43d6a000b4e7e229b6aaa9094cd",
+    "water_placement_hgss.py": "832b040ef5412f486be227e2d4cb005ceb8763c1118d13f560d2cf590268bd93",
+    "grass_placement_hgss.py": "07e5ba52cd41d60236c6d2eb6ee5cb82e3a4576178cd96dd2eadc65e27c1c736",
+    "world_placement_hgss.py": "2f612531aaac555c2c0f31da0d38152fb3c037ccf2813ecd59271edd992ebecb"
   },
-  "spots_sha256": "0f57c8eb88690228054221f4f6cc570f812f3cfa0b64b03c8e4ed755acd61bfc",
-  "exclusions_sha256": "754229c74d41f4bbdf8f621a04205a01f2463fe2ed383d3e43f6050ae594fe91",
+  "spots_sha256": "492f1984ff5efe2e5ea926b5864fd078e1e1b3e155f0889d7ec781f1df1b1051",
+  "exclusions_sha256": "15b3d08c54fbc0e24051bd4472ba28cfc257cd60c85f93b4f6e1d8f9fcce58b2",
+  "water_regions_sha256": "8d26cb3d0a841d81dd480bbc21346bfea2c3d122f2bb8e3dd17db4547e957073",
   "coverage": [
     {
       "header": 7,
@@ -39,8 +43,8 @@
       "scope": "kanto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "a6d722749756a40de56a35454f26386280d497df378de9e30b2cc52717059c66",
-      "available": 225,
+      "points_sha256": "abe454bd39abfe7f02514e1236be0e16ea3ada0802436e1bffadf8a3748e6f59",
+      "available": 416,
       "reason": ""
     },
     {
@@ -60,7 +64,7 @@
       "kind": "grass",
       "points": 11,
       "points_sha256": "7fb81027512a14b3ecf1d2884c6275a97c69964ddc38cad2ec3cfcfbb2541808",
-      "available": 39,
+      "available": 78,
       "reason": ""
     },
     {
@@ -79,8 +83,8 @@
       "scope": "kanto",
       "kind": "grass",
       "points": 31,
-      "points_sha256": "67c21079d3ac2216cd1e02d20ab05bcd0934b25371f799b42009b7603fb88fdf",
-      "available": 138,
+      "points_sha256": "291e09e9c6d9a1502dd91801535e4a94ab6e0073f5986e81dfbaa07fbd69bbe6",
+      "available": 260,
       "reason": ""
     },
     {
@@ -98,9 +102,9 @@
       "map": "route-4",
       "scope": "kanto",
       "kind": "grass",
-      "points": 13,
-      "points_sha256": "04bca8608e323e97cb1c10ff1108d6c83eb2e8e78ea671a775d04f745b1ca0ea",
-      "available": 72,
+      "points": 15,
+      "points_sha256": "ec84c5a0231154aa2aed299c461005f8de0f24a0376f917c4af933046294335f",
+      "available": 126,
       "reason": ""
     },
     {
@@ -120,7 +124,7 @@
       "kind": "water",
       "points": 3,
       "points_sha256": "05612197b7416d4c27bb4366b891da0bae09b736a6d1348b9783283aa41cd15c",
-      "available": 16,
+      "available": 12,
       "reason": ""
     },
     {
@@ -128,9 +132,9 @@
       "map": "route-5",
       "scope": "kanto",
       "kind": "grass",
-      "points": 9,
-      "points_sha256": "5f388ad9c6c760f54d750d5517fd598a78bff073d7ff2aadddff12f3fa2c8bea",
-      "available": 39,
+      "points": 7,
+      "points_sha256": "8ce38e23f42522a58135219f575eb077e9d75792672e285c652dd0e3ee293916",
+      "available": 65,
       "reason": ""
     },
     {
@@ -148,9 +152,9 @@
       "map": "route-6",
       "scope": "kanto",
       "kind": "grass",
-      "points": 32,
-      "points_sha256": "a75a849c795d80215549ce9d1dbb14b85658b04e0c4d6e72556194df3d9f16a7",
-      "available": 117,
+      "points": 40,
+      "points_sha256": "29045861739dd6aef08d2bffb1c5bb83d6471529570cff12622da10b16f610b1",
+      "available": 246,
       "reason": ""
     },
     {
@@ -168,19 +172,19 @@
       "map": "route-6",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 52,
-      "reason": "Route 6 : les 52 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun point n'est placé dans les herbes ou sur les berges ; Surf et pêche restent dans la liste."
+      "points": 9,
+      "points_sha256": "b73c2ad0c49074512e97283d5e2453269bd3ecbc44065e6ab90a96ee60ba84d8",
+      "available": 36,
+      "reason": ""
     },
     {
       "header": 15,
       "map": "route-7",
       "scope": "kanto",
       "kind": "grass",
-      "points": 14,
-      "points_sha256": "b16b7a234cb0bd11c171850d85085aafb10b5630a344981a532e9d3e69ae7024",
-      "available": 52,
+      "points": 12,
+      "points_sha256": "76435e7e96b08773d6057f97265543db165502a901b6d8fe481cf8e6e66f3980",
+      "available": 97,
       "reason": ""
     },
     {
@@ -198,9 +202,9 @@
       "map": "route-8",
       "scope": "kanto",
       "kind": "grass",
-      "points": 15,
-      "points_sha256": "6105c1acff55bc8be4a92809b2c449352b79b6621e310c595552dfda3196c7df",
-      "available": 47,
+      "points": 14,
+      "points_sha256": "0616bdade4d32f84f42f4ada021519481e21f8e7b8f66851d4e371f869294bc4",
+      "available": 87,
       "reason": ""
     },
     {
@@ -218,9 +222,9 @@
       "map": "route-9",
       "scope": "kanto",
       "kind": "grass",
-      "points": 22,
-      "points_sha256": "e2dbd1be93839e6eb3e9823d9b52461c0a4fc9bad6fdcdee2dfcefd8e8a64ef6",
-      "available": 84,
+      "points": 24,
+      "points_sha256": "a4423d0e2f34e9f84abec6aaca5ecec6f566e3f35db3a470f4c04ed5e95a6d3e",
+      "available": 161,
       "reason": ""
     },
     {
@@ -230,7 +234,7 @@
       "kind": "water",
       "points": 2,
       "points_sha256": "cff07f34f1ba9a54d993a6fc3cc51a552426e9cef7d6b18e1e0d1c181c6fa510",
-      "available": 59,
+      "available": 6,
       "reason": ""
     },
     {
@@ -238,9 +242,9 @@
       "map": "route-10",
       "scope": "kanto",
       "kind": "grass",
-      "points": 2,
-      "points_sha256": "f01852aa949187694f93532c7bbffbbdd24658c0a91d5028b07937a3043576cc",
-      "available": 7,
+      "points": 12,
+      "points_sha256": "5f1edb412e4ea6f0adec549e0c28e8ce774bdbf67c749596eba9e9d93131e4e1",
+      "available": 45,
       "reason": ""
     },
     {
@@ -250,7 +254,7 @@
       "kind": "water",
       "points": 5,
       "points_sha256": "56402077bf29ae0e47c14a9d4f2885261f4a1e4fbb30ed67a03b60b6eb854ba7",
-      "available": 33,
+      "available": 22,
       "reason": ""
     },
     {
@@ -259,8 +263,8 @@
       "scope": "kanto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "3ed5119ffb7c381dbd643017798d3060c4d814eaeb25edc206f62dd4a5012079",
-      "available": 536,
+      "points_sha256": "071e734208960231560cda6219aed0af84c65fc5258871dfc7b48addefd1b4d1",
+      "available": 1037,
       "reason": ""
     },
     {
@@ -289,8 +293,8 @@
       "scope": "kanto",
       "kind": "water",
       "points": 40,
-      "points_sha256": "9a8f66f361d9b66237da70fe4c62e28ddaff7051947c607222e7de7caac512d0",
-      "available": 1003,
+      "points_sha256": "471515c95cbb60f8e7a181821594cd3e91337e7fdf57a58a16bd85080db15ff3",
+      "available": 573,
       "reason": ""
     },
     {
@@ -298,9 +302,9 @@
       "map": "route-13",
       "scope": "kanto",
       "kind": "grass",
-      "points": 5,
-      "points_sha256": "61412c7a5dc44c6663cfaa86c252958b8a480f56b84d4fc8cb6a9c7db6ef517c",
-      "available": 12,
+      "points": 10,
+      "points_sha256": "afe84ebb64e51ed849ddf3d43034afad72063daa4c566d812ab4891bf0a81120",
+      "available": 43,
       "reason": ""
     },
     {
@@ -320,7 +324,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "156b9b4f68cadaa207533bc6809c0dfccb7716090e122c4ee39a80bb474f3489",
-      "available": 383,
+      "available": 275,
       "reason": ""
     },
     {
@@ -328,9 +332,9 @@
       "map": "route-14",
       "scope": "kanto",
       "kind": "grass",
-      "points": 17,
-      "points_sha256": "a0017ed5b876beea4076a33b22a5403d5a485a36e07aeaa9a7b796de3c89e1e3",
-      "available": 42,
+      "points": 8,
+      "points_sha256": "4cbeb073ff62a52e4cad45cccdd0173c15dff4578e444ea8b64f3dda291e9124",
+      "available": 39,
       "reason": ""
     },
     {
@@ -348,9 +352,9 @@
       "map": "route-15",
       "scope": "kanto",
       "kind": "grass",
-      "points": 29,
-      "points_sha256": "526ea5586cd8efbd8ae2e25654593e61dc2ac6faf2abf9c6af2ed82a8076d56b",
-      "available": 117,
+      "points": 32,
+      "points_sha256": "0ab282124942ab5ed2865502d82141afadef3772fec48eb793baf0311b6535f2",
+      "available": 230,
       "reason": ""
     },
     {
@@ -378,9 +382,9 @@
       "map": "route-17",
       "scope": "kanto",
       "kind": "grass",
-      "points": 8,
-      "points_sha256": "90cc64a304e6e276efdc16ea99d483e5c9a3f5a392e11bc94a03daa07f5db6cc",
-      "available": 8,
+      "points": 4,
+      "points_sha256": "3361471a6e74d2a33061502e84bc6010cf62bd0b1936349f83f11718f6753e77",
+      "available": 16,
       "reason": ""
     },
     {
@@ -398,9 +402,9 @@
       "map": "route-18",
       "scope": "kanto",
       "kind": "grass",
-      "points": 10,
-      "points_sha256": "a500578bb9663b449bb5d093d0c69846d267221389bcc755f42837b72de274da",
-      "available": 11,
+      "points": 9,
+      "points_sha256": "223b038778a6d74387df064b2b74e94773bbd58d67298610e2ac4894a6d386e1",
+      "available": 45,
       "reason": ""
     },
     {
@@ -418,9 +422,9 @@
       "map": "route-22",
       "scope": "kanto",
       "kind": "grass",
-      "points": 12,
-      "points_sha256": "bd23fd12b054c5ddd2daf9113435922c04a4907bc232ba06c0407010bb3fb4f7",
-      "available": 56,
+      "points": 22,
+      "points_sha256": "ff75d83db3fe7bd615708344f158785fe8500dba10ade03c27009b78f1a5183e",
+      "available": 142,
       "reason": ""
     },
     {
@@ -438,10 +442,10 @@
       "map": "route-22",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 54,
-      "reason": "Route 22 : les 54 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les herbes ou le relief."
+      "points": 8,
+      "points_sha256": "de2c2d45c9581b87f2e691d429244a3fc4107c3502b36e24ff357dff8b3064d5",
+      "available": 42,
+      "reason": ""
     },
     {
       "header": 28,
@@ -458,9 +462,9 @@
       "map": "route-24",
       "scope": "kanto",
       "kind": "grass",
-      "points": 13,
-      "points_sha256": "2dea6412ce98dc8f3ce672459f341449adee0bb49d202e671b0607c27d960d62",
-      "available": 53,
+      "points": 14,
+      "points_sha256": "e38cf82f74a05ea6f9a754731e2ce0bb813dc1bafe82100743ca0ac90c9fe846",
+      "available": 60,
       "reason": ""
     },
     {
@@ -470,7 +474,7 @@
       "kind": "water",
       "points": 5,
       "points_sha256": "8f8794349dff568d315a99ea9ecee3503dc4406900be632242205de462d3e326",
-      "available": 174,
+      "available": 12,
       "reason": ""
     },
     {
@@ -480,7 +484,7 @@
       "kind": "grass",
       "points": 8,
       "points_sha256": "9f90a31421d6bc2bec28782ac412ff9930a069dbfaca38a3261bff4a0c623253",
-      "available": 32,
+      "available": 64,
       "reason": ""
     },
     {
@@ -500,7 +504,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "1c9b687ba4785761ac09215e818b074abe56f68087caa74e14ad597e31aad927",
-      "available": 338,
+      "available": 229,
       "reason": ""
     },
     {
@@ -508,9 +512,9 @@
       "map": "route-26",
       "scope": "kanto",
       "kind": "grass",
-      "points": 36,
-      "points_sha256": "3b14ee9baba9ccefb37da336e01dab927400b3b09b1d4cfb48f1bb23294c5405",
-      "available": 154,
+      "points": 39,
+      "points_sha256": "fa800066881d8430a8a47930e6933d2c8a0ab4aac0d1c86d4d7c511d71b79945",
+      "available": 292,
       "reason": ""
     },
     {
@@ -530,7 +534,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "cd2baa41a3939ce6e42d267012dcffd1d6430fe501e3cf9ff16c10b2c22587ec",
-      "available": 437,
+      "available": 277,
       "reason": ""
     },
     {
@@ -538,9 +542,9 @@
       "map": "route-27",
       "scope": "kanto",
       "kind": "grass",
-      "points": 16,
-      "points_sha256": "32f4200af57226e64f18623f978ab6d5be2c7664e8eba02bc1f787c7351f0a3a",
-      "available": 55,
+      "points": 24,
+      "points_sha256": "a10145713a8c3e12c0940550bba631c93ce018a242e8d96d26af73aa8a3d1a6b",
+      "available": 117,
       "reason": ""
     },
     {
@@ -560,7 +564,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "c2ae3aac0ae67877fc1e1f0c4ff6bdecb6de1ab92f8abe8cdd9371f570962d22",
-      "available": 1877,
+      "available": 1173,
       "reason": ""
     },
     {
@@ -568,9 +572,9 @@
       "map": "route-28",
       "scope": "kanto",
       "kind": "grass",
-      "points": 39,
-      "points_sha256": "47fff7df8210dbf193ec2adc6ead0cbca8c946527705eef572dd86376ed2b498",
-      "available": 150,
+      "points": 40,
+      "points_sha256": "5cf2c83375d576bb7e1a455a254a2a7411c7604ba02b6e1a810240d2704d1cf2",
+      "available": 238,
       "reason": ""
     },
     {
@@ -590,7 +594,7 @@
       "kind": "water",
       "points": 1,
       "points_sha256": "9175d24958428dd82927d39a238d57fe6a65f7efe58b55a40f6a9fb20da50865",
-      "available": 45,
+      "available": 2,
       "reason": ""
     },
     {
@@ -599,8 +603,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "106e4472f0b80d7703dde5e00e5ba55613bb262bc3fc09e2a72e184c80aaf526",
-      "available": 357,
+      "points_sha256": "3bb158f31511350c416f418fdf33e1d2a4cf5174e3b4ac95d25540031b443d16",
+      "available": 679,
       "reason": ""
     },
     {
@@ -619,8 +623,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "6ae5f6c3a5f94314abf7c0a45e5c6f6dfd9ccfe11f0e48532b98ec68ae9c9ea1",
-      "available": 165,
+      "points_sha256": "906e3c223b6452cb90027e07042ebf67b30d33fe21bacb734b3a6a36c14e7a48",
+      "available": 426,
       "reason": ""
     },
     {
@@ -628,9 +632,9 @@
       "map": "route-30",
       "scope": "johto",
       "kind": "tree",
-      "points": 32,
-      "points_sha256": "6da163ccaeb5d269d0d0d3bfd219398fde4f5a461c518136792d8d7c37ca34f8",
-      "available": 75,
+      "points": 31,
+      "points_sha256": "989aedf12ae142f1ce87749d54e66a7419159763db6e77b193a52595eb7e8edf",
+      "available": 73,
       "reason": ""
     },
     {
@@ -638,19 +642,19 @@
       "map": "route-30",
       "scope": "johto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 126,
-      "reason": "Route 30 : les 126 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables restent consultables sans inventer une hauteur d'eau."
+      "points": 25,
+      "points_sha256": "cef9357af4d88135e597bbc394a8e05c26def1470ad7500bf4269db84d36fdce",
+      "available": 108,
+      "reason": ""
     },
     {
       "header": 35,
       "map": "route-31",
       "scope": "johto",
       "kind": "grass",
-      "points": 24,
-      "points_sha256": "65b98d254139b2239b7c9284a7051c1bf37f7d8f3f66f1c250b7117fbce97082",
-      "available": 95,
+      "points": 31,
+      "points_sha256": "f87c285f5921d6ee27f2c134e9e6ccda3d5445442051c553cb2b8d1511dd39a0",
+      "available": 205,
       "reason": ""
     },
     {
@@ -670,7 +674,7 @@
       "kind": "water",
       "points": 3,
       "points_sha256": "f5c0086b1e4d2ffa5c668e62f7fa8376b6804272752466397be9c82205f355b6",
-      "available": 76,
+      "available": 4,
       "reason": ""
     },
     {
@@ -679,8 +683,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "fcc7c4fab044a5de2b0e6c23ca05f3e4b86e5a6c57bff51ba954728fc1a286fc",
-      "available": 360,
+      "points_sha256": "3768b522c4cbcc48e084895234aaf252a1fe4c25d84f58ed44d0d85bb40b1dc8",
+      "available": 653,
       "reason": ""
     },
     {
@@ -700,7 +704,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "1af0623029a4d8b04a974de069228e937d2177817895e49e528729860e6f85e1",
-      "available": 644,
+      "available": 307,
       "reason": ""
     },
     {
@@ -710,7 +714,7 @@
       "kind": "grass",
       "points": 12,
       "points_sha256": "230424c08ba2b212d434c4d62290ce108d1793341aa430273a9acf0f2bb251e1",
-      "available": 56,
+      "available": 111,
       "reason": ""
     },
     {
@@ -739,8 +743,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "e4edd878b95def97dfb40e62d72c3f35fa11e0d1b015ab5e41f307bab6ddbf03",
-      "available": 283,
+      "points_sha256": "a858692b4ddfdca6132202a3fb1985ff522cdee57bb80d40765f6dea36ec1c1c",
+      "available": 484,
       "reason": ""
     },
     {
@@ -760,7 +764,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "d7305b5dcfc955d9f01c8d7d3590cb20de7c9c27835acaa8515e224d13630684",
-      "available": 444,
+      "available": 196,
       "reason": ""
     },
     {
@@ -768,9 +772,9 @@
       "map": "route-35",
       "scope": "johto",
       "kind": "grass",
-      "points": 17,
-      "points_sha256": "44b2e7ff158e522bc60c28d47280d8c0ece21e42b6ee5e82a4ed591b6a4e33ca",
-      "available": 72,
+      "points": 28,
+      "points_sha256": "57f408ba0da2525bbfdbcc4b62f95d625c3652099502bbf78ab53b5d96e48774",
+      "available": 184,
       "reason": ""
     },
     {
@@ -790,7 +794,7 @@
       "kind": "water",
       "points": 7,
       "points_sha256": "ac687fd141167af7ac6218f28296c0599c0c2764549fd1299ba61f1265891276",
-      "available": 112,
+      "available": 27,
       "reason": ""
     },
     {
@@ -800,7 +804,7 @@
       "kind": "grass",
       "points": 10,
       "points_sha256": "e2ba14cdf373cf409cf1cb72d43f6237c4a38f062a9472a694fd175249e1da78",
-      "available": 44,
+      "available": 86,
       "reason": ""
     },
     {
@@ -819,8 +823,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 29,
-      "points_sha256": "7ed0b2c21771958c4f32320b5813fe7aa9a5da3986500d6072e1d162d44a3b1b",
-      "available": 133,
+      "points_sha256": "53b3e0c8104f15478355d0b4595b0ff4fa2bdb5c36941d96475870f8655bd7b7",
+      "available": 256,
       "reason": ""
     },
     {
@@ -839,8 +843,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "5b3f1faf802f5972ffbdfe1090da94e5d12ba4e4e05bac8a8735e051378d4211",
-      "available": 197,
+      "points_sha256": "9043393902eeb9b857c3be9999fc706fdd25c29c4379445c16e83b1390e8dad3",
+      "available": 366,
       "reason": ""
     },
     {
@@ -860,7 +864,7 @@
       "kind": "grass",
       "points": 10,
       "points_sha256": "f5d2f4105a5082a0e19b21c8fb55cf3ac499300e42e3102fa4d41faa9eaa8b56",
-      "available": 42,
+      "available": 84,
       "reason": ""
     },
     {
@@ -878,9 +882,9 @@
       "map": "route-42",
       "scope": "johto",
       "kind": "grass",
-      "points": 2,
-      "points_sha256": "26cf05fd1fdf6633b4391f452ba76266aae12587fa183cc49d5fc0e15863403f",
-      "available": 6,
+      "points": 8,
+      "points_sha256": "f7cce5e5cd4f1eca9e5b69a69acd2742b87255c805e941be3a954a150d62e1e2",
+      "available": 36,
       "reason": ""
     },
     {
@@ -900,7 +904,7 @@
       "kind": "water",
       "points": 6,
       "points_sha256": "9f9b0347055270aee92d40896a323b0aed12e9778cdea9d4801ab6b57bc05d1d",
-      "available": 192,
+      "available": 18,
       "reason": ""
     },
     {
@@ -908,9 +912,9 @@
       "map": "route-43",
       "scope": "johto",
       "kind": "grass",
-      "points": 17,
-      "points_sha256": "b5b68358b84dc10496b569b97af63d4684593c7687b349526eaf6866485e8a1d",
-      "available": 51,
+      "points": 40,
+      "points_sha256": "8c1f75ad2eb062d8501216dfa6ff46c83936cbc432f479cc63d1d6ff6af8cb50",
+      "available": 181,
       "reason": ""
     },
     {
@@ -928,19 +932,19 @@
       "map": "route-43",
       "scope": "johto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 144,
-      "reason": "Route 43 : les 144 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Aucun marqueur sur les herbes ; tables conservées dans la liste."
+      "points": 26,
+      "points_sha256": "e28dca45d555b6d23ee635bec5cd60bf4bba0bce5efd33fca42a8f20a020129a",
+      "available": 113,
+      "reason": ""
     },
     {
       "header": 46,
       "map": "route-44",
       "scope": "johto",
       "kind": "grass",
-      "points": 5,
-      "points_sha256": "77aa571d1dbabab6a36e59f3d8527ec0761e96d361b0cddcaf2e18d7434dbfaf",
-      "available": 13,
+      "points": 6,
+      "points_sha256": "74c43e850f67aba8a2b5aa2b2311aa7e072ed64cbecea4791c8ba1c48cb44e30",
+      "available": 27,
       "reason": ""
     },
     {
@@ -960,7 +964,7 @@
       "kind": "water",
       "points": 32,
       "points_sha256": "d53178465b4992102fb9fe6b1d36a5db6908804ec29bb89b49654b01658d7dc1",
-      "available": 222,
+      "available": 122,
       "reason": ""
     },
     {
@@ -979,8 +983,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "db82001f4f259cc20637e2f3dc8968cb1b4fe43ac7dbb8f07832203b42d30ea1",
-      "available": 270,
+      "points_sha256": "286e460f1fd5a841a19bd043531d2be7196cc68b979482e90fbaf0a31d84cfa3",
+      "available": 544,
       "reason": ""
     },
     {
@@ -1000,7 +1004,7 @@
       "kind": "water",
       "points": 12,
       "points_sha256": "a2dd89442c1793446170017c869210e9dae92aa11542c68c795ad4dcca3a7136",
-      "available": 231,
+      "available": 25,
       "reason": ""
     },
     {
@@ -1009,8 +1013,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 35,
-      "points_sha256": "01b6dc90fd6b07a630a2eaf27b81d29aa444897d4967236c7ead11a011fd5cbc",
-      "available": 166,
+      "points_sha256": "8fface879901137789e7f3ccce1eb3a437dc0c322f13444a8f742f068039cf77",
+      "available": 330,
       "reason": ""
     },
     {
@@ -1038,10 +1042,10 @@
       "map": "pallet",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 14,
-      "reason": "Bourg Palette : les 14 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur arbitraire."
+      "points": 5,
+      "points_sha256": "7ffb1bab08c75691f7cbdfc16e19f1f5db54e0d42c1207630dc5dfd8015dd97f",
+      "available": 21,
+      "reason": ""
     },
     {
       "header": 50,
@@ -1058,10 +1062,10 @@
       "map": "viridian",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 29,
-      "reason": "Jadielle : les 29 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur le décor."
+      "points": 5,
+      "points_sha256": "c28d35ee9896f2abc043739c5b92c4a843f4803b456b1287dac5400c75ee62fe",
+      "available": 17,
+      "reason": ""
     },
     {
       "header": 51,
@@ -1090,7 +1094,7 @@
       "kind": "water",
       "points": 21,
       "points_sha256": "f51ebf4c5871ba8cde4aa42efac9654a8c723a72479e131a57b0d3fda2437093",
-      "available": 204,
+      "available": 86,
       "reason": ""
     },
     {
@@ -1120,7 +1124,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "a6a13260820758a207cead5c9ffacc779ae2ce08417d7f0702d15c961d03c51d",
-      "available": 1576,
+      "available": 983,
       "reason": ""
     },
     {
@@ -1138,10 +1142,10 @@
       "map": "celadon",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 30,
-      "reason": "Céladopole : les 30 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les berges."
+      "points": 2,
+      "points_sha256": "774d9f7a194dc3a88f8e166f486c1fd423dc9d4b7bcc5cf17fa409aed8db037d",
+      "available": 15,
+      "reason": ""
     },
     {
       "header": 56,
@@ -1160,7 +1164,7 @@
       "kind": "water",
       "points": 8,
       "points_sha256": "e48fef1f528b2f0391fdefe51cd31b000bf39bfa2044b7fe8de059024f2efa75",
-      "available": 72,
+      "available": 24,
       "reason": ""
     },
     {
@@ -1170,7 +1174,7 @@
       "kind": "water",
       "points": 22,
       "points_sha256": "e7138a0c76be5cf0bb35807bbf441bfbb3f6858cd441ffc00c4cd431a5673acb",
-      "available": 138,
+      "available": 63,
       "reason": ""
     },
     {
@@ -1190,7 +1194,7 @@
       "kind": "water",
       "points": 1,
       "points_sha256": "0a20fb5628a3dedbaf5b415d0f1abedbc2f6f0ccbdb4e2e60eb6a7e0bbda0759",
-      "available": 22,
+      "available": 1,
       "reason": ""
     },
     {
@@ -1210,7 +1214,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "72449edd6d94bf867b1d22b8f744db013d7e53eb77f513f63409c59f5270e1fd",
-      "available": 491,
+      "available": 361,
       "reason": ""
     },
     {
@@ -1230,7 +1234,7 @@
       "kind": "water",
       "points": 34,
       "points_sha256": "1ecf2cd829cac81e235469f57b638aa1856c78b17e79edd19bc8fd51fefb8bbf",
-      "available": 379,
+      "available": 139,
       "reason": ""
     },
     {
@@ -1260,7 +1264,7 @@
       "kind": "water",
       "points": 12,
       "points_sha256": "e1811978990b37e6515f041998b4dc984a8710facac75f86cceb138e81c07ae0",
-      "available": 271,
+      "available": 26,
       "reason": ""
     },
     {
@@ -1270,7 +1274,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "ce4de91bd28f13919de4cc6a1c670d704f9c89900e536950b7a0a824cf2dc184",
-      "available": 931,
+      "available": 706,
       "reason": ""
     },
     {
@@ -1290,7 +1294,7 @@
       "kind": "water",
       "points": 10,
       "points_sha256": "be38919aacee5279e8734e1366c80cd9117fa0a64e279c56fd783e66678af68d",
-      "available": 63,
+      "available": 40,
       "reason": ""
     },
     {
@@ -1310,7 +1314,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "3d2d2842452fd7b605551e1be57f149d6ac7d67fa39a265ac6bde0684a40729d",
-      "available": 1795,
+      "available": 1403,
       "reason": ""
     },
     {
@@ -1320,7 +1324,7 @@
       "kind": "water",
       "points": 7,
       "points_sha256": "d7acffc9efad37fa8375388eec2e80d39b257fd6dcab426cc746c0be9adf10dd",
-      "available": 108,
+      "available": 12,
       "reason": ""
     },
     {
@@ -1328,9 +1332,9 @@
       "map": "mount-silver",
       "scope": "johto",
       "kind": "grass",
-      "points": 11,
-      "points_sha256": "625977b0aee0ac561bdf6d38338b89c0cf426185a595f6a7460dde9579ec206f",
-      "available": 40,
+      "points": 29,
+      "points_sha256": "a33015bb76afbd02b1e35146c9f93ec0593327089a6d5757a706b5ff0afd7fee",
+      "available": 123,
       "reason": ""
     },
     {
@@ -1350,7 +1354,7 @@
       "kind": "water",
       "points": 1,
       "points_sha256": "9310dfd683f57afe4cf4c2ca39cebb03dba5e80d7b5be42ef384c2e0a3f6c754",
-      "available": 33,
+      "available": 1,
       "reason": ""
     },
     {
@@ -1370,7 +1374,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "10e3da6851f8acea18686d5ee8e6c455d36ba40fe86c58ca4666c274fe26c7b4",
-      "available": 1134,
+      "available": 959,
       "reason": ""
     },
     {
@@ -1380,7 +1384,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "570864eeb663217b0b0fe3ba4185b5bfbe6d9e3a6c81ab855357d79ca1cb810e",
-      "available": 2974,
+      "available": 2371,
       "reason": ""
     },
     {
@@ -1398,9 +1402,9 @@
       "map": "route-21",
       "scope": "kanto",
       "kind": "grass",
-      "points": 23,
-      "points_sha256": "4f0466ce844ff2051a3e14e617334135c1281ad2dc6e50c461b32e3fb6d64477",
-      "available": 42,
+      "points": 13,
+      "points_sha256": "e01193b8fd12ae4dabb804342f55e4873dfc12900206b5be75b077826399d195",
+      "available": 53,
       "reason": ""
     },
     {
@@ -1420,7 +1424,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "7863574433ca07bc9ed5d94e07d94d14909d6784000fadcc395d3b3fcd5e4254",
-      "available": 1955,
+      "available": 1457,
       "reason": ""
     },
     {
@@ -1430,7 +1434,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "176bcc644354aadb6e4d46a4f038f0465abf312fe25447c97f993da4534cdcaa",
-      "available": 1022,
+      "available": 876,
       "reason": ""
     },
     {
@@ -1440,7 +1444,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "22683c776add3f4aaa93164c8719aa061ff4d0dec2d9e27c48041cb73baf324d",
-      "available": 2498,
+      "available": 1869,
       "reason": ""
     },
     {
@@ -1459,8 +1463,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "fc439427c8b3120e7f4e7134b06f8548e837d76f6b9d6db2599fcc95258ff7d2",
-      "available": 487,
+      "points_sha256": "0d8ac0b00f19e2a14eb83f441714295abc1bd086761c7dd8830e190661b8216c",
+      "available": 671,
       "reason": ""
     },
     {
@@ -1487,20 +1491,10 @@
       "header": 99,
       "map": "union-cave-1f",
       "scope": "johto",
-      "kind": "grass",
-      "points": 4,
-      "points_sha256": "16b71c8c8f499f45cc2427e95b844ea2e97dc5a9bdbcbd68798a6c8caf3049cd",
-      "available": 4,
-      "reason": ""
-    },
-    {
-      "header": 99,
-      "map": "union-cave-1f",
-      "scope": "johto",
       "kind": "water",
       "points": 26,
       "points_sha256": "48ffc94ae676ba7c6ec75b2b17baa231b1cdedf0c63f4e1e03c3c25ba41594a0",
-      "available": 259,
+      "available": 96,
       "reason": ""
     },
     {
@@ -1538,9 +1532,9 @@
       "map": "ruins-of-alph",
       "scope": "johto",
       "kind": "grass",
-      "points": 2,
-      "points_sha256": "b87b13c6e3893ffd0952a9159c9674ad8eff6c1cf53d45d736b19cbbde87936a",
-      "available": 3,
+      "points": 4,
+      "points_sha256": "4a3b5a8a09a875e6aaaf1542fc358b212eabb47c7895ac6a1815ff2a8eb892fc",
+      "available": 13,
       "reason": ""
     },
     {
@@ -1560,7 +1554,7 @@
       "kind": "water",
       "points": 5,
       "points_sha256": "fab7a64b5c0269fb0571507849a43c01fff820296b0df2f5f0c8dd6d79ef7f1e",
-      "available": 96,
+      "available": 18,
       "reason": ""
     },
     {
@@ -1590,7 +1584,7 @@
       "kind": "water",
       "points": 16,
       "points_sha256": "6b0816e499c026145d5e451d6bb35b7bb369fde57dd17ac95df3fb0ae70fa56c",
-      "available": 79,
+      "available": 53,
       "reason": ""
     },
     {
@@ -1607,20 +1601,10 @@
       "header": 119,
       "map": "mount-mortar-1f-entrance",
       "scope": "johto",
-      "kind": "grass",
-      "points": 9,
-      "points_sha256": "8a89dbddd3eb5f44ad3cf5ac8bcebde5d34abf7c5edbd2d61af9adfacd302e0c",
-      "available": 13,
-      "reason": ""
-    },
-    {
-      "header": 119,
-      "map": "mount-mortar-1f-entrance",
-      "scope": "johto",
       "kind": "water",
       "points": 40,
       "points_sha256": "405380d6624b39eb441ffd437ee2e33982a7b6e8db93a1cefd06fe99a2bb64f1",
-      "available": 822,
+      "available": 447,
       "reason": ""
     },
     {
@@ -1650,7 +1634,7 @@
       "kind": "water",
       "points": 4,
       "points_sha256": "8f05933da0b84e9c2659b54de24f4ec2eda0974d236d56b67d55a8b6d4c40bf3",
-      "available": 67,
+      "available": 12,
       "reason": ""
     },
     {
@@ -1670,7 +1654,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "1fbd2b8cd9f154617ab247ace0d2a3196601ac7ded971519b49a72f4645768ba",
-      "available": 271,
+      "available": 252,
       "reason": ""
     },
     {
@@ -1687,20 +1671,10 @@
       "header": 123,
       "map": "dark-cave-route-45-side",
       "scope": "johto",
-      "kind": "grass",
-      "points": 2,
-      "points_sha256": "94e2b8148d96674e17d36048241aabe19a40025e532b5bdaa67a14eab1d811c1",
-      "available": 2,
-      "reason": ""
-    },
-    {
-      "header": 123,
-      "map": "dark-cave-route-45-side",
-      "scope": "johto",
       "kind": "water",
       "points": 31,
       "points_sha256": "6fc51741cc162df0fdb5c7e93e16a1fcf00f558729cf3538d3fa46009e78d603",
-      "available": 287,
+      "available": 132,
       "reason": ""
     },
     {
@@ -1730,7 +1704,7 @@
       "kind": "water",
       "points": 19,
       "points_sha256": "daff11250afbc86b5be6938ace587bea97ee5637c62be05185bb6279cf4ecb2f",
-      "available": 91,
+      "available": 65,
       "reason": ""
     },
     {
@@ -1760,7 +1734,7 @@
       "kind": "water",
       "points": 34,
       "points_sha256": "a9d69e9883be34c05a51aa82707451cd80ccffb58275548a8717d6f07c9f300d",
-      "available": 298,
+      "available": 122,
       "reason": ""
     },
     {
@@ -1779,8 +1753,8 @@
       "scope": "kanto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "e9d52b5c81f2826b7de8ffdbe0205b40719789332cf25c77ca72cece3bd229df",
-      "available": 512,
+      "points_sha256": "4348b13d84bc363363864d2e1d481043280c665c37cfea1845a8c75b8caf0b58",
+      "available": 940,
       "reason": ""
     },
     {
@@ -1808,9 +1782,9 @@
       "map": "route-47",
       "scope": "johto",
       "kind": "grass",
-      "points": 4,
-      "points_sha256": "4d7804534b5d63375f6a2ddcf184bb07349de663e29ebc2ded630dcff77ff550",
-      "available": 5,
+      "points": 6,
+      "points_sha256": "d62df60db2379ff9a05d5317ddf3e0b236cd37bd7ce897c523eac1eb6c62c984",
+      "available": 20,
       "reason": ""
     },
     {
@@ -1830,7 +1804,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "15f4b0cc359b9d6a358e208f91f80dbd55c5f78ca37d38382b791631100df986",
-      "available": 2162,
+      "available": 1603,
       "reason": ""
     },
     {
@@ -1838,9 +1812,9 @@
       "map": "route-48",
       "scope": "johto",
       "kind": "grass",
-      "points": 12,
-      "points_sha256": "00cdbaa7c6693283b7b57c88af8dc322ee061d51001ca3ce881dbc0296b47028",
-      "available": 50,
+      "points": 22,
+      "points_sha256": "3000ba21ae164ffe173d35a77225e3751323ec2beeddcf6ef551eb32ce3a1a1e",
+      "available": 136,
       "reason": ""
     },
     {
@@ -1867,20 +1841,10 @@
       "header": 153,
       "map": "union-cave-b1f",
       "scope": "johto",
-      "kind": "grass",
-      "points": 1,
-      "points_sha256": "52f3fc8549cd8b0cd3e494617741827d488c93d863b6d322fca37375a0375662",
-      "available": 2,
-      "reason": ""
-    },
-    {
-      "header": 153,
-      "map": "union-cave-b1f",
-      "scope": "johto",
       "kind": "water",
       "points": 3,
       "points_sha256": "9a209850c4e4b6ad2c31156cd39a049bbb965cd108ecef52d803a33eb2e106d5",
-      "available": 105,
+      "available": 4,
       "reason": ""
     },
     {
@@ -1900,7 +1864,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "452c555fd7e17098832678148a9fd39640dbcafba560004893e2dcb818e8c901",
-      "available": 386,
+      "available": 298,
       "reason": ""
     },
     {
@@ -1960,7 +1924,7 @@
       "kind": "water",
       "points": 9,
       "points_sha256": "571697d6638d5effc1468301b59e71180e0166460840d85fb13c72ac8919a444",
-      "available": 109,
+      "available": 42,
       "reason": ""
     },
     {
@@ -1978,10 +1942,10 @@
       "map": "slowpoke-well-b1f",
       "scope": "johto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 20,
-      "reason": "Puits Ramoloss sous-sol 1 : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les tables de Surf et de pêche restent consultables sans marqueur sur les murs."
+      "points": 14,
+      "points_sha256": "2d276904b910400e1945e40808743e289d6c4f8d802a09e8d59d7b7959950407",
+      "available": 44,
+      "reason": ""
     },
     {
       "header": 178,
@@ -2030,7 +1994,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "dee1c9f52f8ef1d8c0b494a91dc849b9f8f11d4bc449bd92f187479577411a86",
-      "available": 394,
+      "available": 302,
       "reason": ""
     },
     {
@@ -2097,20 +2061,10 @@
       "header": 243,
       "map": "whirl-islands-b2f",
       "scope": "johto",
-      "kind": "grass",
-      "points": 2,
-      "points_sha256": "07e9a8c1e4333a2b9716adc46231637547102b709250d2a41b518af658e30ae1",
-      "available": 2,
-      "reason": ""
-    },
-    {
-      "header": 243,
-      "map": "whirl-islands-b2f",
-      "scope": "johto",
       "kind": "water",
       "points": 40,
       "points_sha256": "b294792777704a63bae8d7105a5bca2bd9ffa6a187ce9491579404cfe7469153",
-      "available": 1127,
+      "available": 994,
       "reason": ""
     },
     {
@@ -2137,20 +2091,10 @@
       "header": 251,
       "map": "mount-mortar-2f",
       "scope": "johto",
-      "kind": "grass",
-      "points": 1,
-      "points_sha256": "c32b02e63eabbac4227f04d9c5ad8258ae9451589fc2dcb0b35d061627b32142",
-      "available": 1,
-      "reason": ""
-    },
-    {
-      "header": 251,
-      "map": "mount-mortar-2f",
-      "scope": "johto",
       "kind": "water",
       "points": 31,
       "points_sha256": "204fcce4de91389f5d34a588f79870b2dd7f58108408611036544607e287cfdb",
-      "available": 290,
+      "available": 101,
       "reason": ""
     },
     {
@@ -2170,7 +2114,7 @@
       "kind": "water",
       "points": 25,
       "points_sha256": "3c2b2b0de09cbe54c046cec299aa6c35273e731dfce74f121ee2090d85a1a03e",
-      "available": 503,
+      "available": 91,
       "reason": ""
     },
     {
@@ -2180,7 +2124,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "7d4927001ab985c2b3d28277ec783652f559f295dbceec2b5d9b6074a2756b41",
-      "available": 618,
+      "available": 398,
       "reason": ""
     },
     {
@@ -2190,7 +2134,7 @@
       "kind": "water",
       "points": 6,
       "points_sha256": "766db041dfb1f4f75eb798300dbbb83f9a4bb6e1668d44670abd06f50b7b6239",
-      "available": 27,
+      "available": 23,
       "reason": ""
     },
     {
@@ -2318,9 +2262,9 @@
       "map": "safari-zone-01",
       "scope": "special",
       "kind": "grass",
-      "points": 27,
-      "points_sha256": "0af4797b787a41e53af6a3c66c3e6c3dce08b89131ae54ad15e81dd7a3e99cd2",
-      "available": 119,
+      "points": 28,
+      "points_sha256": "a4def06a98b77f5491bc55f47f115c07be62f03d4ba5a623c479afbeaca39b33",
+      "available": 234,
       "reason": ""
     },
     {
@@ -2348,9 +2292,9 @@
       "map": "safari-zone-02",
       "scope": "special",
       "kind": "grass",
-      "points": 26,
-      "points_sha256": "95ae4a1b0b7d43e5a308944dd3bdc234b62e8b8a7c2d4cc2828bdd4151854c89",
-      "available": 91,
+      "points": 22,
+      "points_sha256": "a66aac5de0d880eb9d82c0acbf6fee9051374ef13cd92d079c833ffc69bf7d3f",
+      "available": 87,
       "reason": ""
     },
     {
@@ -2360,7 +2304,7 @@
       "kind": "water",
       "points": 3,
       "points_sha256": "fc65010cb3b5d3b9c57657dd1e390f2270b6511205a91bb4e172daa18f11e560",
-      "available": 63,
+      "available": 5,
       "reason": ""
     },
     {
@@ -2370,7 +2314,7 @@
       "kind": "grass",
       "points": 10,
       "points_sha256": "7e2b78ba0192105994e4024c03bb442d2cba97a64b9d7bc05a9d9fead5a433d4",
-      "available": 42,
+      "available": 83,
       "reason": ""
     },
     {
@@ -2390,7 +2334,7 @@
       "kind": "grass",
       "points": 15,
       "points_sha256": "4120c1b846022632e08de725476364a3192b70fda62dc1a1d716f1b371da34af",
-      "available": 68,
+      "available": 132,
       "reason": ""
     },
     {
@@ -2408,9 +2352,9 @@
       "map": "safari-zone-05",
       "scope": "special",
       "kind": "grass",
-      "points": 1,
-      "points_sha256": "423f4ee312cc3bebd59217722e87d3d5a4595daaed5873d61db9dd00377e0832",
-      "available": 2,
+      "points": 6,
+      "points_sha256": "19f239b336698795b237a69b65d59a93911e41ea05685d289120e91045479a58",
+      "available": 28,
       "reason": ""
     },
     {
@@ -2420,7 +2364,7 @@
       "kind": "water",
       "points": 7,
       "points_sha256": "75855076d080be0b970e7e577bd94e6e2c38c1ff812cb259c17a8c8f29a094bf",
-      "available": 88,
+      "available": 21,
       "reason": ""
     },
     {
@@ -2450,7 +2394,7 @@
       "kind": "water",
       "points": 19,
       "points_sha256": "196939fd7f369fd0787931ce5ae1ff5a9a1469367687af3fb95d13972cb8b5d2",
-      "available": 211,
+      "available": 54,
       "reason": ""
     },
     {
@@ -2460,7 +2404,7 @@
       "kind": "grass",
       "points": 22,
       "points_sha256": "ee2149b7214ba96b8d2a1657a375060d275450093373573b93b57f5c63846631",
-      "available": 88,
+      "available": 200,
       "reason": ""
     },
     {
@@ -2488,9 +2432,9 @@
       "map": "safari-zone-08",
       "scope": "special",
       "kind": "grass",
-      "points": 3,
-      "points_sha256": "f093079a144e2c401abf0487a5cc8663c3f44c4da360682f7f6a54021c64a5ec",
-      "available": 9,
+      "points": 12,
+      "points_sha256": "3fb5d61ec8bb0fe1a74bd5c10ea2ee342397c1bc9e5eb0ea7bf1726b5968fd9f",
+      "available": 40,
       "reason": ""
     },
     {
@@ -2500,7 +2444,7 @@
       "kind": "water",
       "points": 8,
       "points_sha256": "11e0194a3d3d515f84e56399b0a56c49723ecec73fd23c709bcb02e8c349981f",
-      "available": 138,
+      "available": 26,
       "reason": ""
     },
     {
@@ -2530,7 +2474,7 @@
       "kind": "water",
       "points": 7,
       "points_sha256": "b8701e9e08091105c4dc9d4fbaf8af9853b1821d620f8cddfd0c7ec62da9c3b5",
-      "available": 179,
+      "available": 15,
       "reason": ""
     },
     {
@@ -2540,7 +2484,7 @@
       "kind": "grass",
       "points": 25,
       "points_sha256": "e1cca3717a1536ae4c9fba2690c1ce8c7492e3f05479c916089d29f820f03fcc",
-      "available": 95,
+      "available": 190,
       "reason": ""
     },
     {
@@ -2560,7 +2504,7 @@
       "kind": "grass",
       "points": 13,
       "points_sha256": "cb288362da56c82ac3b7c7fd11c8d887cfe9247f7d2b3a44ef5165eccdc56daf",
-      "available": 46,
+      "available": 92,
       "reason": ""
     },
     {
@@ -2580,7 +2524,7 @@
       "kind": "grass",
       "points": 10,
       "points_sha256": "5bfcb44a67112421bafadde671d4f10dc070ed8de11f1c579f34c8c97e910dd6",
-      "available": 40,
+      "available": 80,
       "reason": ""
     },
     {
@@ -2620,7 +2564,7 @@
       "kind": "grass",
       "points": 15,
       "points_sha256": "a74833d3a806ed027013c631dfd93a9072b132181f57d7aa84ecc6b2e4013627",
-      "available": 64,
+      "available": 127,
       "reason": ""
     },
     {
@@ -2640,7 +2584,7 @@
       "kind": "grass",
       "points": 6,
       "points_sha256": "7e760415bcf40f65249cc36d6a9a73263928efe1123d98f389449d8558079c1f",
-      "available": 24,
+      "available": 44,
       "reason": ""
     },
     {
@@ -2668,10 +2612,10 @@
       "map": "mount-moon-square",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 11,
-      "reason": "Square du Mont Sélénite : les 11 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres sont conservées sans marqueur sur les arbres ou les berges."
+      "points": 2,
+      "points_sha256": "1ed636e9d91ed6903bb0c579c2106f274043956f6a2b4d1dd6865968b3db2a7a",
+      "available": 12,
+      "reason": ""
     },
     {
       "header": 450,
@@ -2720,7 +2664,7 @@
       "kind": "water",
       "points": 21,
       "points_sha256": "36fb5f0c076338b94b6e07713a37cfc65948b6d98e73b8226bfcccd4b41cb106",
-      "available": 234,
+      "available": 84,
       "reason": ""
     },
     {
@@ -2790,7 +2734,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "1fa55045ecd09a22a7fda0f3efa38ec3b1dbc64b1f5843125cf244a2d9048e17",
-      "available": 189,
+      "available": 180,
       "reason": ""
     },
     {
@@ -2830,7 +2774,7 @@
       "kind": "grass",
       "points": 40,
       "points_sha256": "a07160f46de0a0561b05566369b3269933e49491048c45003d69f7c582250cd8",
-      "available": 101,
+      "available": 226,
       "reason": ""
     },
     {
@@ -2939,8 +2883,8 @@
       "scope": "johto",
       "kind": "grass",
       "points": 40,
-      "points_sha256": "e3c2bbc54ea024de05d5a14d5787a21962eaf852ddf6573eabe7354498f657f9",
-      "available": 485,
+      "points_sha256": "12982146472e500835a6715059c34eab3c7ec414bf9242c840b9b2cd52f5b52b",
+      "available": 670,
       "reason": ""
     },
     {
@@ -2978,10 +2922,10 @@
       "map": "mount-moon-square-clefairy-event",
       "scope": "kanto",
       "kind": "water",
-      "points": 0,
-      "points_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "available": 20,
-      "reason": "Square du Mont Sélénite pendant la danse des Mélofée : les 20 candidats aquatiques projetables ne rejoignent pas l'eau visible sur l'image native. Les rencontres restent consultables sans marqueur sur les arbres ou les berges."
+      "points": 4,
+      "points_sha256": "e97aff324946d1bc082c967a0dcc911676371b622fde330f7b709f60c8338f2d",
+      "available": 8,
+      "reason": ""
     }
   ],
   "review": {

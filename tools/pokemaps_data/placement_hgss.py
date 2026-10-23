@@ -8,12 +8,15 @@ from pathlib import Path
 
 from PIL import Image
 
+from .grass_placement_hgss import align_grass
 from .map_spots import TerrainKey, read_spots, selected_key
 from .maps_layout import identifier
 from .maps_render_hgss import HgssRenderer
 from .pret_hgss_maps import HgssMapRepo
 from .terrain_hgss import projected_cells, tile_flags
 from .visibility_hgss import visible_surfaces
+from .water_placement_hgss import read_water_regions, water_points
+from .world_placement_hgss import visible_world_cells
 
 FAMILY = "heartgold-soulsilver"
 
@@ -88,12 +91,14 @@ def placement_catalog(root: Path, maps: Path, encounters: dict) -> dict:
     repo = HgssMapRepo(root, "heartgold")
     atlas = read_placement_json(maps / "atlas/catalog.json")
     records = {r["header"]: r for r in atlas["maps"]}
+    plans = {p["id"]: p for p in atlas["plans"]}
     offsets = {p["header"]: p["offset"] for plan in atlas["plans"] for p in plan["parts"]}
     warps: dict[int, list] = defaultdict(list)
     for passage in atlas["passages"]:
         offset = offsets[passage["source"]]
         warps[passage["source"]].append([passage["source_pixel"][i] - offset[i] for i in (0, 1)])
     flags = tile_flags(root)
+    water_regions = read_water_regions()
     renderer = HgssRenderer(repo)
     trees = {
         row["header"]: {(p["x"], p["y"]) for group in row["regular"] + row["secret"] for p in group}
@@ -114,9 +119,13 @@ def placement_catalog(root: Path, maps: Path, encounters: dict) -> dict:
         cells = visible_cells(maps / "atlas" / record["image"], cells, rejected)
         # Les plans d'eau visuels ne suivent pas toujours le BDHC ; leur curation se relit sur les images.
         water = cells.pop("water", [])
+        if header in water_regions:
+            water = water_points(maps / "atlas" / record["image"], water_regions[header])
         cells = visible_surfaces(renderer, record, cells, depths, rejected)
         if water:
             cells["water"] = water
+        cells = align_grass(maps / "atlas" / record["image"], cells, record["const"])
+        cells = visible_world_cells(maps / "atlas", record, cells, plans[record["plan"]], offsets[header], rejected)
         result.append(
             record
             | dict(
@@ -131,6 +140,8 @@ def placement_catalog(root: Path, maps: Path, encounters: dict) -> dict:
                 warps=warps[header],
             )
         )
+    if unknown := water_regions.keys() - {r["header"] for r in result}:
+        raise ValueError(f"HGSS : surfaces aquatiques sans rencontre native : {sorted(unknown)}")
     return dict(maps=result, excluded=excluded, species_fr=encounters["species_fr"])
 
 
@@ -143,11 +154,12 @@ def visible_cells(path: Path, cells: dict, rejected: list[dict]) -> dict:
             for point in points:
                 red, green, blue, alpha = pixels.getpixel(point)
                 # Certains plans techniques rendent aussi un rectangle noir opaque hors du décor visible.
-                if alpha and max(red, green, blue) > 8:
+                water = kind != "water" or (blue - red >= 24 and blue >= green)
+                if alpha and max(red, green, blue) > 8 and water:
                     accepted.append(point)
                 else:
                     rejected.append(
-                        dict(point=point, kind=kind, reason="projection hors décor visible (transparent ou noir)")
+                        dict(point=point, kind=kind, reason="projection hors décor visible ou hors eau visible")
                     )
             if accepted:
                 result[kind] = accepted

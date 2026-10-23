@@ -79,7 +79,7 @@
     }
   },
   "prerequisites": {
-    "hgss-characters/inventory.json": "7b6bddf743a6bd0f870dc1b5055b1d5267aa76a72cc4401a78863ef498660ba9",
+    "hgss-characters/inventory.json": "fd380515ca888d64e3d81c146cc1efc579f533192a73169d78407d4a76086c4d",
     "hgss-encounters/inventory.json": "fd56cab0c651ac093383cdf71627dc34cb25a9de74c3865e64d16cd64c5024fa"
   },
   "guides": [

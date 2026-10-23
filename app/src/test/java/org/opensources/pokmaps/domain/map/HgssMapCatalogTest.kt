@@ -28,10 +28,17 @@ class HgssMapCatalogTest {
                 }
             }
         }
-        assertTrue(maps.size > 720)
+        assertEquals(710, maps.size)
         assertEquals(setOf("johto", "kanto"), maps.values.filter { it.isWorld }.map { it.identifier }.toSet())
         val levels = MapLevels.build(maps)
         assertTrue(levels.isNotEmpty())
+        assertTrue(maps.values.filter { it.isWorld }.all { levels[it.id].isNullOrEmpty() })
+        val houses = maps.values.filter {
+            it.identifier.startsWith("cherrygrove-") &&
+                (it.identifier.endsWith("-house") || it.identifier == "cherrygrove-pokemart")
+        }
+        assertEquals(4, houses.size)
+        assertTrue(houses.all { it.isDisplayable })
         for (group in levels.values.distinct()) {
             assertEquals(
                 1,

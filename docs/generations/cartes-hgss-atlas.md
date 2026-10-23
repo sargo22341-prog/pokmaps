@@ -3,7 +3,14 @@
 Ce lot étend la [preuve et le catalogue Johto](cartes-hgss.md), depuis le même commit
 `6988158691eb6178cff697cda0428045ddcba5fb` de `pret/pokeheartgold`.
 La génération complète utilise cet atlas pour les assets Android HGSS, sans ROM.
-Les 496 lieux, 224 plans et 169 plans inférieurs alignés donnent 889 entrées dans la base.
+L'aperçu conserve 496 lieux et 224 plans techniques. L'export Android sépare les bâtiments indépendants :
+496 lieux, 26 plans assemblés, 17 vues de gabarits isolés et 171 plans inférieurs alignés donnent
+710 entrées dans la base. Les gabarits Safari et les salles de connexion sans accès géographique fixe
+gardent leur ancre native dans une vue individuelle, sans leur inventer une ville d'origine.
+Les salles ne partagent une vue que si une porte native les relie sur le même plan et dans le même type
+de carte ; un accès extérieur ne réunit donc pas les bâtiments qu'il dessert. Les maisons isolées sont
+affichables directement, avec leurs coordonnées locales et leurs portes traduites depuis l'atlas.
+Les coupes techniques des extérieurs de Johto et Kanto ne créent aucun niveau inférieur sur la carte monde.
 Les 196 coupes natives restent tracées dans le catalogue source ; les niveaux distribués
 partagent les dimensions et les coordonnées de leur plan supérieur.
 
