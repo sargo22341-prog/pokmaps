@@ -1,7 +1,6 @@
 package org.opensources.pokmaps.domain.model
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.opensources.pokmaps.data.db.FakeGameDao
 import org.opensources.pokmaps.domain.guide.FriendshipRules
@@ -18,7 +17,7 @@ class HgssModelsTest {
             assertEquals("johto", MapDestinations.startRegion(game.versionGroup))
             assertEquals(2, game.remakeGenerationId)
             assertEquals(28, UnownForm.available(game).size)
-            assertThrows(IllegalStateException::class.java) { FriendshipRules.forGame(game) }
+            assertEquals(FriendshipRules.HEARTGOLD_SOULSILVER, FriendshipRules.forGame(game))
         }
         assertEquals(250, FakeGameDao.HEARTGOLD.mascotPokemonId)
         assertEquals(249, FakeGameDao.SOULSILVER.mascotPokemonId)

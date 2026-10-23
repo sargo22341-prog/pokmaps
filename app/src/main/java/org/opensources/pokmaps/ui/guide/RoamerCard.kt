@@ -42,8 +42,11 @@ internal fun RoamerCard(
                 Text(name, style = MaterialTheme.typography.titleMedium)
                 Text(stringResource(roamer.condition.label()), style = MaterialTheme.typography.bodyMedium)
                 Text(stringResource(R.string.catch_level, Roamers.level(version, roamer.pokemonId)))
-                Text(stringResource(Roamers.area(version).label()), style = MaterialTheme.typography.bodySmall)
-                if (version in 12..14) RoamerObservation(observation, onObserve)
+                Text(
+                    stringResource(Roamers.area(version, roamer.pokemonId).label()),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                if (version in 12..16) RoamerObservation(version, roamer.pokemonId, observation, onObserve)
             }
         }
     }
@@ -64,6 +67,7 @@ private fun pokemonLabel(pokemon: Int): Int = when (pokemon) {
 }
 
 private fun RoamerCondition.label(): Int = when (this) {
+    RoamerCondition.HGSS_EON -> R.string.guide_roamer_hgss_eon
     RoamerCondition.MESPRIT -> R.string.guide_roamer_mesprit_condition
     RoamerCondition.CRESSELIA -> R.string.guide_roamer_cresselia_condition
     RoamerCondition.BIRDS -> R.string.guide_roamer_birds_condition

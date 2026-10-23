@@ -28,7 +28,8 @@ internal fun GbaParentValues(
     sexes: List<ParentSex>,
     values: ParentValues,
     first: Boolean,
-    sinnoh: Boolean = false,
+    ds: Boolean = false,
+    hgss: Boolean = false,
     onAction: (BreedingAction) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -40,7 +41,7 @@ internal fun GbaParentValues(
             )
         }
     }
-    GbaParentItem(values.item, sinnoh) { onAction(BreedingAction.Values(first, values.copy(item = it))) }
+    GbaParentItem(values.item, ds, hgss) { onAction(BreedingAction.Values(first, values.copy(item = it))) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         BreedingIv.entries.chunked(2).forEach { stats ->
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -65,14 +66,16 @@ internal fun GbaParentValues(
 }
 
 @Composable
-private fun GbaParentItem(item: BreedingItem, sinnoh: Boolean, onItem: (BreedingItem) -> Unit) {
+private fun GbaParentItem(item: BreedingItem, ds: Boolean, hgss: Boolean, onItem: (BreedingItem) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     Column {
         OutlinedButton(onClick = { expanded = true }) {
             Text(stringResource(R.string.breeding_held_item, stringResource(item.label())))
         }
         DropdownMenu(expanded, onDismissRequest = { expanded = false }) {
-            BreedingItem.entries.filter { sinnoh || !it.sinnohOnly }.forEach { choice ->
+            BreedingItem.entries.filter {
+                (ds || !it.dsOnly) && (hgss || !it.hgssOnly)
+            }.forEach { choice ->
                 DropdownMenuItem(text = { Text(stringResource(choice.label())) }, onClick = {
                     expanded = false
                     onItem(choice)
@@ -84,7 +87,15 @@ private fun GbaParentItem(item: BreedingItem, sinnoh: Boolean, onItem: (Breeding
 
 @Composable
 internal fun GbaBreedingResult(state: BreedingUiState) {
-    Text(stringResource(if (state.sinnoh) R.string.breeding_sinnoh_ivs else R.string.breeding_gba_ivs))
+    Text(
+        stringResource(
+            when {
+                state.hgss -> R.string.breeding_hgss_ivs
+                state.sinnoh -> R.string.breeding_sinnoh_ivs
+                else -> R.string.breeding_gba_ivs
+            }
+        )
+    )
     BreedingIv.entries.forEach { stat ->
         val unknown = stringResource(R.string.breeding_unknown_iv)
         Text(
@@ -96,7 +107,7 @@ internal fun GbaBreedingResult(state: BreedingUiState) {
             )
         )
     }
-    Text(stringResource(if (state.sinnoh) R.string.breeding_sinnoh_abilities else R.string.breeding_gba_abilities))
+    Text(stringResource(if (state.ds) R.string.breeding_sinnoh_abilities else R.string.breeding_gba_abilities))
     state.babyAbilities.forEach { (name, abilities) ->
         Text(
             stringResource(
@@ -105,6 +116,10 @@ internal fun GbaBreedingResult(state: BreedingUiState) {
                 abilities
             )
         )
+    }
+    if (state.hgss) {
+        HgssBreedingResult(state)
+        return
     }
     val natureParent = state.natureParent
     Text(
@@ -120,6 +135,12 @@ internal fun GbaBreedingResult(state: BreedingUiState) {
 }
 
 private fun BreedingItem.label(): Int = when (this) {
+    BreedingItem.POWER_WEIGHT -> R.string.breeding_power_weight
+    BreedingItem.POWER_BRACER -> R.string.breeding_power_bracer
+    BreedingItem.POWER_BELT -> R.string.breeding_power_belt
+    BreedingItem.POWER_ANKLET -> R.string.breeding_power_anklet
+    BreedingItem.POWER_LENS -> R.string.breeding_power_lens
+    BreedingItem.POWER_BAND -> R.string.breeding_power_band
     BreedingItem.NONE -> R.string.catch_status_none
     BreedingItem.SEA_INCENSE -> R.string.breeding_sea_incense
     BreedingItem.LAX_INCENSE -> R.string.breeding_lax_incense
@@ -134,7 +155,7 @@ private fun BreedingItem.label(): Int = when (this) {
     BreedingItem.PURE_INCENSE -> R.string.breeding_pure_incense
 }
 
-private fun BreedingIv.label(): Int = when (this) {
+internal fun BreedingIv.label(): Int = when (this) {
     BreedingIv.HP -> R.string.breeding_iv_hp
     BreedingIv.ATTACK -> R.string.breeding_iv_attack
     BreedingIv.DEFENSE -> R.string.breeding_iv_defense

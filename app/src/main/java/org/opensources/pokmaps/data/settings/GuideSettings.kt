@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import org.opensources.pokmaps.data.db.GameDao
 import org.opensources.pokmaps.domain.guide.GuideProgress
+import org.opensources.pokmaps.domain.guide.RoamerObservations
 import org.opensources.pokmaps.domain.guide.Roamers
-import org.opensources.pokmaps.domain.guide.SinnohRoamerObservations
 import org.opensources.pokmaps.domain.guide.validateGuideProgress
 
 class GuideSettings @Inject constructor(private val dataStore: DataStore<Preferences>, private val gamesDao: GameDao) {
@@ -37,11 +37,11 @@ class GuideSettings @Inject constructor(private val dataStore: DataStore<Prefere
 
     suspend fun observeRoamer(version: Int, pokemon: Int, place: String?) {
         requireVersion(version)
-        require(version in 12..14 && pokemon in Roamers.pokemonIds(version))
+        require(version in 12..16 && pokemon in Roamers.pokemonIds(version))
         dataStore.edit { preferences ->
             val updated = readRoamerObservations(preferences, version).toMutableMap()
             if (place == null) updated.remove(pokemon) else updated[pokemon] = place
-            SinnohRoamerObservations.validate(version, updated)
+            RoamerObservations.validate(version, updated)
             preferences[stringSetPreferencesKey("sinnoh_roamers_$version")] =
                 updated.map { (id, route) -> "$id:$route" }.toSet()
         }

@@ -48,12 +48,12 @@ internal fun FriendshipTool(state: FriendshipUiState, onAction: (FriendshipActio
         FriendshipValue(state, onAction)
         Column {
             OutlinedButton(onClick = { expanded = true }, modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(state.event.label(state.rules == FriendshipRules.SINNOH)))
+                Text(stringResource(state.event.label(state.rules.ds)))
             }
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                 state.events.forEach { event ->
                     DropdownMenuItem(text = {
-                        Text(stringResource(event.label(state.rules == FriendshipRules.SINNOH)))
+                        Text(stringResource(event.label(state.rules.ds)))
                     }, onClick = {
                         expanded = false
                         onAction(FriendshipAction.Event(event))
@@ -92,6 +92,9 @@ private fun FriendshipValue(state: FriendshipUiState, onAction: (FriendshipActio
 }
 
 private fun FriendshipEvent.label(sinnoh: Boolean): Int = when (this) {
+    FriendshipEvent.HGSS_GROOM_SMALL -> R.string.friendship_hgss_groom_small
+    FriendshipEvent.HGSS_GROOM_MEDIUM -> R.string.friendship_hgss_groom_medium
+    FriendshipEvent.HGSS_GROOM_LARGE -> R.string.friendship_hgss_groom_large
     FriendshipEvent.LEVEL -> R.string.friendship_level
     FriendshipEvent.VITAMIN -> R.string.friendship_vitamin
     FriendshipEvent.X_ITEM -> R.string.friendship_x_item

@@ -20,7 +20,10 @@ internal object BackupJson {
                     .put("caught", JSONArray(backup.caught[version].orEmpty().sorted()))
                     // Liste vide gardée pour le schéma 1 : les versions précédentes de l'application l'exigent.
                     .put("completed", JSONArray(progress.completed.sorted())).put("roamers", JSONArray())
-                    .put("sinnohRoamers", JSONObject(progress.roamerObservations.mapKeys { it.key.toString() }))
+                    .put(
+                        if (version in 15..16) "roamerObservations" else "sinnohRoamers",
+                        JSONObject(progress.roamerObservations.mapKeys { it.key.toString() })
+                    )
                     .put("unown", JSONArray(backup.unown[version].orEmpty().map { it.identifier }.sorted()))
                     .put("forms", JSONArray(backup.forms[version].orEmpty().sorted()))
             )
@@ -69,8 +72,9 @@ internal object BackupJson {
     }
 
     private fun observations(game: JSONObject): Map<Int, String> {
-        if (!game.has("sinnohRoamers")) return emptyMap()
-        val values = game.getJSONObject("sinnohRoamers")
+        val key = if (integer(game, "version") in 15..16) "roamerObservations" else "sinnohRoamers"
+        if (!game.has(key)) return emptyMap()
+        val values = game.getJSONObject(key)
         require(values.length() <= 5)
         return values.keys().asSequence().associate { key ->
             val id = key.toInt()

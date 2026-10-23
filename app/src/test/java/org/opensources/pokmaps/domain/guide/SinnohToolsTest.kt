@@ -87,13 +87,13 @@ class SinnohToolsTest {
         assertEquals(listOf(481, 488, 144, 145, 146), Roamers.pokemonIds(14))
         assertEquals(60, Roamers.level(14, 144))
         assertEquals(50, Roamers.level(14, 481))
-        assertEquals(29, SinnohRoamerObservations.places.size)
-        SinnohRoamerObservations.validate(14, mapOf(144 to "route-204-north"))
+        assertEquals(29, RoamerObservations.places.size)
+        RoamerObservations.validate(14, mapOf(144 to "route-204-north"))
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun diamondCannotObservePlatinumBirds() {
-        SinnohRoamerObservations.validate(12, mapOf(144 to "route-201"))
+        RoamerObservations.validate(12, mapOf(144 to "route-201"))
     }
 
     private fun move(id: Int, level: Int = 0) =

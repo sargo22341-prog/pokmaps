@@ -18,9 +18,7 @@ internal fun GbaFriendshipOptions(state: FriendshipUiState, onAction: (Friendshi
     FriendshipOption(state.luxuryBall, R.string.friendship_luxury_ball) { onAction(FriendshipAction.LuxuryBall(it)) }
     FriendshipOption(
         state.capturePlace,
-        if (state.rules ==
-            FriendshipRules.SINNOH
-        ) {
+        if (state.rules.ds) {
             R.string.friendship_egg_place
         } else {
             R.string.friendship_capture_place
@@ -30,7 +28,9 @@ internal fun GbaFriendshipOptions(state: FriendshipUiState, onAction: (Friendshi
     }
     Text(
         stringResource(
-            if (state.rules == FriendshipRules.SINNOH) {
+            if (state.rules == FriendshipRules.HEARTGOLD_SOULSILVER) {
+                R.string.friendship_hgss_note
+            } else if (state.rules.ds) {
                 R.string.friendship_sinnoh_note
             } else {
                 R.string.friendship_gba_note

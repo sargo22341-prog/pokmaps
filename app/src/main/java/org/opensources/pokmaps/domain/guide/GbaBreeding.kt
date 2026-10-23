@@ -4,7 +4,7 @@ import org.opensources.pokmaps.domain.model.VersionGroup
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
 import org.opensources.pokmaps.domain.pokemon.PokemonDetails
 
-enum class BreedingItem(val sinnohOnly: Boolean = false) {
+enum class BreedingItem(val dsOnly: Boolean = false, val hgssOnly: Boolean = false) {
     NONE,
     SEA_INCENSE,
     LAX_INCENSE,
@@ -16,7 +16,13 @@ enum class BreedingItem(val sinnohOnly: Boolean = false) {
     WAVE_INCENSE(true),
     ROSE_INCENSE(true),
     LUCK_INCENSE(true),
-    PURE_INCENSE(true)
+    PURE_INCENSE(true),
+    POWER_WEIGHT(true, true),
+    POWER_BRACER(true, true),
+    POWER_BELT(true, true),
+    POWER_ANKLET(true, true),
+    POWER_LENS(true, true),
+    POWER_BAND(true, true)
 }
 
 /** Les statistiques suivent l'ordre des tirages du moteur, pas celui de la fiche. */

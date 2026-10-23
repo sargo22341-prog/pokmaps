@@ -9,15 +9,21 @@ enum class FriendshipRules {
     RUBY_SAPPHIRE,
     EMERALD,
     FIRERED_LEAFGREEN,
-    SINNOH;
+    SINNOH,
+    HEARTGOLD_SOULSILVER;
 
-    val modern: Boolean get() = gba || this == SINNOH
+    val modern: Boolean get() = gba || ds
+
+    val ds: Boolean get() = this == SINNOH || this == HEARTGOLD_SOULSILVER
 
     val gba: Boolean get() = this in setOf(RUBY_SAPPHIRE, EMERALD, FIRERED_LEAFGREEN)
 
     val events: List<FriendshipEvent> get() = FriendshipEvent.entries.filter { event ->
         when (event) {
             FriendshipEvent.LEVEL_AT_CAPTURE_PLACE -> this == CRYSTAL
+
+            FriendshipEvent.HGSS_GROOM_SMALL, FriendshipEvent.HGSS_GROOM_MEDIUM,
+            FriendshipEvent.HGSS_GROOM_LARGE -> this == HEARTGOLD_SOULSILVER
 
             FriendshipEvent.GROOMING -> !modern
 
@@ -28,7 +34,7 @@ enum class FriendshipRules {
             FriendshipEvent.SPA, FriendshipEvent.SPA_MEDIUM, FriendshipEvent.SPA_LARGE,
             FriendshipEvent.CONTEST -> this == SINNOH
 
-            FriendshipEvent.EV_BERRY -> this == EMERALD || this == SINNOH
+            FriendshipEvent.EV_BERRY -> this == EMERALD || ds
 
             FriendshipEvent.LEVEL, FriendshipEvent.VITAMIN, FriendshipEvent.X_ITEM,
             FriendshipEvent.GYM_BATTLE, FriendshipEvent.LEARN_MOVE, FriendshipEvent.FAINT,
@@ -55,7 +61,7 @@ enum class FriendshipRules {
             FriendshipEvent.SPA_MEDIUM,
             FriendshipEvent.SPA_LARGE
         )
-        if (this == SINNOH && !itemEvent && delta > 0) {
+        if (ds && (this == HEARTGOLD_SOULSILVER || !itemEvent) && delta > 0) {
             if (luxuryBall) delta++
             if (capturePlace) delta++
             if (sootheBell) delta = delta * 150 / 100
@@ -70,7 +76,7 @@ enum class FriendshipRules {
 
     companion object {
         fun forGame(game: Game): FriendshipRules = when (game.versionGroup) {
-            VersionGroup.HEARTGOLD_SOULSILVER -> error("Outil de bonheur HGSS non disponible")
+            VersionGroup.HEARTGOLD_SOULSILVER -> HEARTGOLD_SOULSILVER
             VersionGroup.GOLD_SILVER -> GOLD_SILVER
             VersionGroup.CRYSTAL -> CRYSTAL
             VersionGroup.RUBY_SAPPHIRE -> RUBY_SAPPHIRE

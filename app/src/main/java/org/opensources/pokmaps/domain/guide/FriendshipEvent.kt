@@ -20,7 +20,10 @@ enum class FriendshipEvent(val low: Int, val medium: Int, val high: Int) {
     SPA(5, 5, 5),
     SPA_MEDIUM(10, 10, 10),
     SPA_LARGE(30, 30, 30),
-    CONTEST(3, 2, 1);
+    CONTEST(3, 2, 1),
+    HGSS_GROOM_SMALL(1, 1, 1),
+    HGSS_GROOM_MEDIUM(5, 5, 5),
+    HGSS_GROOM_LARGE(10, 10, 10);
 
     fun delta(value: Int): Int {
         require(value in 0..255)

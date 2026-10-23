@@ -107,6 +107,9 @@ HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generation
 et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
 Android reconnaît leur identité préparatoire et leurs [règles de capture](docs/generations/regles-android-hgss.md),
 sans les ajouter au catalogue distribué ; les tests injectent les deux remakes séparément de la base embarquée.
+Leurs outils préparatoires appliquent les règles propres de reproduction (Pierre Stase et objets Pouvoir)
+et de bonheur. Le même export JSON préserve les collections et les dernières routes observées des errants
+de Sinnoh et des deux remakes, avec import des anciens fichiers ; aucune progression GSC n’est copiée vers HGSS.
 Leur [aperçu cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
 `python tools/build_data.py --hgss-maps-only --map-workers 4` dans `tools/build/preview/hgss-maps/`.
 Il conserve les cinq lieux témoins et le catalogue Johto, puis ajoute un

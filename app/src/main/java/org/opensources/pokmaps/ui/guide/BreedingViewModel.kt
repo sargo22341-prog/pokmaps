@@ -18,11 +18,13 @@ import org.opensources.pokmaps.domain.guide.BreedingPartners
 import org.opensources.pokmaps.domain.guide.BreedingRules
 import org.opensources.pokmaps.domain.guide.BreedingStatus
 import org.opensources.pokmaps.domain.guide.GbaBreeding
+import org.opensources.pokmaps.domain.guide.HgssBreeding
 import org.opensources.pokmaps.domain.guide.ParentSex
 import org.opensources.pokmaps.domain.guide.ParentValues
 import org.opensources.pokmaps.domain.guide.SinnohBreeding
 import org.opensources.pokmaps.domain.model.Generation
 import org.opensources.pokmaps.domain.model.PokedexEntry
+import org.opensources.pokmaps.domain.model.VersionGroup
 import org.opensources.pokmaps.domain.pokedex.PokedexFilter
 import org.opensources.pokmaps.domain.pokedex.PokedexSearch
 import org.opensources.pokmaps.domain.pokemon.LearnedMove
@@ -59,10 +61,15 @@ data class BreedingUiState(
 
         Generation.GEN3 -> true
     }
-    val sinnoh: Boolean = catalog?.game?.generation == Generation.GEN4
-    val ivBased: Boolean = gba || sinnoh
+    val ds: Boolean = catalog?.game?.generation == Generation.GEN4
+    val hgss: Boolean = catalog?.game?.versionGroup == VersionGroup.HEARTGOLD_SOULSILVER
+    val sinnoh: Boolean = ds && !hgss
+    val natureParents: List<Int> = if (hgss) HgssBreeding.natureParents(first, second) else emptyList()
+    val forcedIvs = if (hgss) HgssBreeding.forcedIvs(first, second) else emptyList()
+    val ivBased: Boolean = gba || ds
     val babies = pair?.let {
         when {
+            hgss -> HgssBreeding.babies(it, first, second)
             sinnoh -> SinnohBreeding.babies(it, first, second)
             gba -> GbaBreeding.babies(it, first, second)
             else -> it.babies
@@ -72,7 +79,9 @@ data class BreedingUiState(
         child.name to child.traits.abilities.joinToString { it.name }
     }
     val natureParent: Int? = pair?.let { selected ->
-        if (sinnoh) {
+        if (hgss) {
+            natureParents.singleOrNull()
+        } else if (sinnoh) {
             SinnohBreeding.natureParent(selected, first, second)
         } else {
             catalog?.game?.let { GbaBreeding.natureParent(selected, first, second, it.versionGroup) }
@@ -97,7 +106,9 @@ data class BreedingUiState(
             val firstDonor = BreedingRules.donorIsFirst(requireNotNull(pair), first, second)
             val donor = if (firstDonor) first.moves else second.moves
             val other = if (firstDonor) second.moves else first.moves
-            child.id to if (sinnoh) {
+            child.id to if (hgss) {
+                HgssBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))
+            } else if (sinnoh) {
                 SinnohBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))
             } else if (gba) {
                 GbaBreeding.inherited(child, donor, other, BreedingItem.LIGHT_BALL in setOf(first.item, second.item))

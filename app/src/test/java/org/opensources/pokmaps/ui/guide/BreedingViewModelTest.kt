@@ -26,6 +26,36 @@ class BreedingViewModelTest {
     @get:Rule val mainDispatcher = MainDispatcherRule()
 
     @Test
+    fun hgssHandlesEmptyErrorAndBothParentsWithoutLeakingAcrossGames() = runTest {
+        val tools = MemoryBreeding()
+        tools.catalog.value = BreedingCatalog(FakeGameDao.HEARTGOLD, emptyList())
+        val model = BreedingViewModel(tools)
+        assertFalse(model.state.value.failed)
+        assertTrue(model.state.value.choices.isEmpty())
+        tools.failing = true
+        model.onAction(BreedingAction.Retry)
+        assertTrue(model.state.value.failed)
+        tools.failing = false
+        tools.catalog.value = MemoryBreeding().catalog.value.copy(game = FakeGameDao.SOULSILVER)
+        model.onAction(BreedingAction.Retry)
+        model.onAction(BreedingAction.Species(true, 1))
+        model.onAction(
+            BreedingAction.Values(
+                false,
+                ParentValues(
+                    ParentSex.MALE,
+                    item = org.opensources.pokmaps.domain.guide.BreedingItem.EVERSTONE
+                )
+            )
+        )
+        assertEquals(listOf(1), model.state.value.natureParents)
+        assertTrue(model.state.value.hgss)
+        tools.catalog.value = tools.catalog.value.copy(game = FakeGameDao.PLATINUM)
+        assertFalse(model.state.value.hgss)
+        assertTrue(model.state.value.natureParents.isEmpty())
+    }
+
+    @Test
     fun initiallyNoParentIsSelectedAndChoosingFirstDefaultsToOppositeSex() = runTest {
         val model = BreedingViewModel(MemoryBreeding())
         assertFalse(model.state.value.firstSelected)

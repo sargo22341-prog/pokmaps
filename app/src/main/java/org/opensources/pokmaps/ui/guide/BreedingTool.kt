@@ -103,8 +103,8 @@ private fun BreedingParent(
         Text(stringResource(if (first) R.string.breeding_parent_one else R.string.breeding_parent_two))
         BreedingSpeciesSelector(parent.id, parent.name, state, first, onAction, onPreview)
         if (state.ivBased) {
-            GbaParentValues(sexes, values, first, state.sinnoh, onAction)
-            if (state.sinnoh && first) SinnohLanguage(state, onAction)
+            GbaParentValues(sexes, values, first, state.ds, state.hgss, onAction)
+            if (state.ds && first) SinnohLanguage(state, onAction)
         } else {
             BreedingParentValues(sexes, values, first, onAction)
         }

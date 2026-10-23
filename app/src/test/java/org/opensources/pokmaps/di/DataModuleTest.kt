@@ -1,6 +1,9 @@
 package org.opensources.pokmaps.di
 
 import android.content.Context
+import android.content.pm.PackageManager
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -16,6 +19,40 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class DataModuleTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
+
+    @Test
+    fun applicationUpdateReplacesTheAssetCopyWithoutChangingStoredProgress() = runBlocking {
+        val store = SettingsModule.settings(context)
+        store.edit { preferences ->
+            preferences[stringSetPreferencesKey("caught_pokemon_4")] = setOf("25")
+            preferences[stringSetPreferencesKey("caught_pokemon_15")] = setOf("493")
+            preferences[stringSetPreferencesKey("caught_unown_16")] = setOf("a", "exclamation")
+            preferences[stringSetPreferencesKey("guide_completed_15")] = setOf("hgss-start")
+            preferences[stringSetPreferencesKey("sinnoh_roamers_15")] = setOf("243:route-29")
+        }
+        val before = store.data.first()
+        val info = context.packageManager.getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+        val originalTime = info.lastUpdateTime
+        val oldName = "pokedex-$originalTime.db"
+        val first = DataModule.database(context)
+        try {
+            withContext(Dispatchers.IO) { first.gameDao().games().first() }
+        } finally {
+            first.close()
+        }
+        info.lastUpdateTime = originalTime + 1
+        org.robolectric.Shadows.shadowOf(context.packageManager).installPackage(info)
+        val updated = DataModule.database(context)
+        try {
+            val games = withContext(Dispatchers.IO) { updated.gameDao().games().first() }
+            assertEquals(14, games.size)
+            assertFalse(context.getDatabasePath(oldName).exists())
+            assertTrue(context.getDatabasePath("pokedex-${originalTime + 1}.db").exists())
+            assertEquals(before, store.data.first())
+        } finally {
+            updated.close()
+        }
+    }
 
     @Test
     fun creatingTheProviderDoesNotCreateOrDeleteAnyDatabase() {

@@ -2,7 +2,19 @@ package org.opensources.pokmaps.domain.guide
 
 import org.opensources.pokmaps.domain.model.GameVersion
 
-enum class RoamerCondition { JOHTO, HOENN, RED, BLUE, BULBASAUR, CHARMANDER, SQUIRTLE, MESPRIT, CRESSELIA, BIRDS }
+enum class RoamerCondition {
+    JOHTO,
+    HOENN,
+    RED,
+    BLUE,
+    BULBASAUR,
+    CHARMANDER,
+    SQUIRTLE,
+    MESPRIT,
+    CRESSELIA,
+    BIRDS,
+    HGSS_EON
+}
 
 /** Routes que parcourt un errant, d'après les tables de déplacement du moteur de chaque jeu. */
 enum class RoamerArea { JOHTO, HOENN, KANTO, SINNOH }
@@ -16,7 +28,8 @@ data class RoamerChoice(val pokemonId: Int, val condition: RoamerCondition)
 object Roamers {
     fun choices(version: Int): List<RoamerChoice> = pokemonIds(version).map { pokemon ->
         val condition = when (GameVersion.of(version)) {
-            GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+            GameVersion.HEARTGOLD, GameVersion.SOULSILVER ->
+                if (pokemon in setOf(243, 244)) RoamerCondition.JOHTO else RoamerCondition.HGSS_EON
 
             GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerCondition.JOHTO
 
@@ -44,7 +57,8 @@ object Roamers {
     }
 
     fun pokemonIds(version: Int): List<Int> = when (GameVersion.of(version)) {
-        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+        GameVersion.HEARTGOLD -> listOf(243, 244, 380)
+        GameVersion.SOULSILVER -> listOf(243, 244, 381)
         GameVersion.GOLD, GameVersion.SILVER -> listOf(243, 244, 245)
         GameVersion.CRYSTAL -> listOf(243, 244)
         GameVersion.RUBY -> listOf(381)
@@ -58,7 +72,7 @@ object Roamers {
 
     /** Niveau de la rencontre : 40 à Johto et Hoenn, 50 dans les remakes. */
     fun level(version: Int): Int = when (GameVersion.of(version)) {
-        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> 40
 
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL, GameVersion.RUBY, GameVersion.SAPPHIRE,
         GameVersion.EMERALD -> 40
@@ -72,11 +86,17 @@ object Roamers {
 
     fun level(version: Int, pokemon: Int): Int {
         require(pokemon in pokemonIds(version))
+        if (version in 15..16 && pokemon in setOf(380, 381)) return 35
         return if (version == 14 && pokemon in 144..146) 60 else level(version)
     }
 
+    fun area(version: Int, pokemon: Int): RoamerArea {
+        require(pokemon in pokemonIds(version))
+        return if (version in 15..16 && pokemon in setOf(380, 381)) RoamerArea.KANTO else area(version)
+    }
+
     fun area(version: Int): RoamerArea = when (GameVersion.of(version)) {
-        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> RoamerArea.JOHTO
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> RoamerArea.JOHTO
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> RoamerArea.HOENN
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> RoamerArea.KANTO
@@ -86,7 +106,7 @@ object Roamers {
 
     /** Article des quêtes annexes qui présente les errants de la version, null sans errant. */
     fun article(version: Int): String? = when (GameVersion.of(version)) {
-        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> error("Suivi des errants HGSS non disponible")
+        GameVersion.HEARTGOLD, GameVersion.SOULSILVER -> "hgss-roamers"
         GameVersion.GOLD, GameVersion.SILVER, GameVersion.CRYSTAL -> "johto-roamers"
         GameVersion.RUBY, GameVersion.SAPPHIRE, GameVersion.EMERALD -> "hoenn-roamers"
         GameVersion.FIRERED, GameVersion.LEAFGREEN -> "remake-roamers"

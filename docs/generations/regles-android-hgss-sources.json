@@ -1,0 +1,14 @@
+{
+  "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+  "normalization": "CRLF -> LF",
+  "native": {
+    "src/get_egg.c": "65f7bc5bb30aedea2260cdbc6a80af99da4d5f34f0681828dfd355b4d8bd08b2",
+    "src/daycare.c": "077948145972cbad55c28f835d4a61d59b75fd9ffb5d50fe358606a7feb30375",
+    "src/pokemon.c": "d485ada6131981327c19c651fac9734d685a582f273bc990657901614f3e39e5",
+    "src/use_item_on_mon.c": "990fdcd6294558932fb6bd032de0b9dabdc2e5cc32ebf8b8970fdaf860a9f9aa",
+    "src/scrcmd_party.c": "0bbb953f337c5d600d96c946d1dcbb6d70c608f115b105c24868f8aa5a0c1c4c",
+    "src/field_roamer.c": "a413683ab55d410ddcf57e13d0931a1db5f700829e92d4e557c1d080f017b19d",
+    "files/fielddata/script/scr_seq/scr_seq_0094_D37R0102.s": "6d20d4e048fb4fc31fd4d7615103f5b3369363a511fb4b170d17a5b85e7dcf32",
+    "files/fielddata/script/scr_seq/scr_seq_0738_T01R0201.s": "339ce3aa1bd2e6fd7d7dc73ec4860149cfa91f4a0d1f550b72db734616efa278"
+  }
+}

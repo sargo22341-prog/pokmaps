@@ -2,7 +2,7 @@ package org.opensources.pokmaps.data.settings
 
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringSetPreferencesKey
-import org.opensources.pokmaps.domain.guide.SinnohRoamerObservations
+import org.opensources.pokmaps.domain.guide.RoamerObservations
 
 internal fun readRoamerObservations(preferences: Preferences, version: Int): Map<Int, String> {
     val values = preferences[stringSetPreferencesKey("sinnoh_roamers_$version")].orEmpty()
@@ -15,5 +15,5 @@ internal fun readRoamerObservations(preferences: Preferences, version: Int): Map
         pokemon to parts[1]
     }
     require(pairs.map { it.first }.distinct().size == pairs.size)
-    return pairs.toMap().also { SinnohRoamerObservations.validate(version, it) }
+    return pairs.toMap().also { RoamerObservations.validate(version, it) }
 }

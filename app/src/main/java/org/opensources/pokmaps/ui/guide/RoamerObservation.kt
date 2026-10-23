@@ -12,17 +12,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import org.opensources.pokmaps.R
-import org.opensources.pokmaps.domain.guide.SinnohRoamerObservations
+import org.opensources.pokmaps.domain.guide.RoamerObservations
 
 @Composable
-internal fun RoamerObservation(place: String?, onObserve: (String?) -> Unit) {
+internal fun RoamerObservation(version: Int, pokemon: Int, place: String?, onObserve: (String?) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     Column {
         OutlinedButton(onClick = { expanded = true }) {
             Text(stringResource(R.string.roamer_observation, routeLabel(place)))
         }
         DropdownMenu(expanded, onDismissRequest = { expanded = false }) {
-            (listOf(null) + SinnohRoamerObservations.places).forEach { route ->
+            (listOf(null) + RoamerObservations.places(version, pokemon)).forEach { route ->
                 DropdownMenuItem(text = { Text(routeLabel(route)) }, onClick = {
                     expanded = false
                     onObserve(route)

@@ -580,9 +580,9 @@ conditions, monnaies, quantités et étapes, ainsi que les retouches éditoriale
   jeux non distribués.
 - [x] **6B — Capture.** Ajouter le contexte HGSS, Balls et environnements avec tests de frontières.
   Sortie : règles moteur prouvées et aucune régression GSC/Sinnoh.
-- [ ] **6C — Reproduction et bonheur.** Implémenter les différences prouvées et leurs outils français.
+- [x] **6C — Reproduction et bonheur.** Implémenter les différences prouvées et leurs outils français.
   Sortie : matrice des règles couverte par les tests du domaine et des cas d’usage.
-- [ ] **6D — Base et sauvegardes.** Finaliser export commun, éventuel schéma, collections et errants.
+- [x] **6D — Base et sauvegardes.** Finaliser export commun, éventuel schéma, collections et errants.
   Sortie : schéma aligné, mise à jour de base et imports historiques testés sans perte de progression.
 
 **Bilan 6A et 6B — 23 octobre 2026.** Les [règles Android préparatoires](docs/generations/regles-android-hgss.md)
@@ -603,6 +603,38 @@ lancé : aucun outil Python ni asset généré n'a changé. Les attentes de test
 ont été actualisées vers des identifiants inconnus ; les écarts initiaux de formatage ont été corrigés.
 Gradle a nécessité l'accès au cache utilisateur. Sa dépréciation AGP déjà documentée reste visible.
 Les phases 6C et 6D restent distinctes et non réalisées dans ce lot.
+
+**Bilan 6C et 6D — 23 octobre 2026.** La [matrice des règles](docs/generations/regles-android-hgss.md)
+et les [empreintes des sources](docs/generations/regles-android-hgss-sources.json) tracent les règles natives.
+`HgssBreeding` traite les deux porteurs de Pierre Stase et les six objets Pouvoir ; `DsBreeding`
+ne partage que les encens et passes d’attaques vérifiés. Les outils français distinguent désormais
+DS, Sinnoh et HGSS. Les langues différentes peuvent modifier la personnalité après Pierre Stase ;
+les alternatives ne prédisent ni nature finale ni tirage des IV. Le bonheur HGSS applique Luxe Ball
+et lieu de réception de l’œuf avant le Grelot Zen, y compris aux consommables ; les résultats des
+coiffeurs et de Nina ont leurs événements propres. Les tests du domaine, des cas d’usage et des
+ViewModels couvrent les frontières et changements de branche, le vide, l’erreur et la reprise.
+
+`RoamerObservations`, `Roamers`, `GuideSettings` et `BackupJson` étendent le suivi aux deux remakes :
+Raikou/Entei à Johto, Latias HG ou Latios SS à Kanto, avec routes et niveaux natifs validés.
+L’export commun conserve le schéma JSON 1 et `sinnohRoamers` pour Sinnoh ; HGSS utilise
+`roamerObservations`. La clé DataStore historique reste stable par cartouche. Captures, favoris,
+formes, Zarbi, guides et observations passent par les tests d’import/fusion sans perte ; une mauvaise
+route est refusée avant écriture et aucune progression GSC ne devient automatiquement HGSS.
+Le schéma SQL/Room reste 23, sans table nouvelle ni asset distribué modifié. `DataModuleTest`
+simule une mise à jour et le remplacement réel de la copie de base, en conservant le DataStore.
+La génération candidate HGSS et son activation restent les sorties prévues de 8A/8B.
+
+Contrôles finaux réussis : ktlint, absence de services Google, Lint, 657 tests JVM/Compose
+(zéro échec, zéro test ignoré), APK debug, `python tools/check_assets.py`, empreintes des huit
+sources natives, limites 600/60 et diff relu. README, index et notes de version actualisés.
+Aucun test ADB ni génération, Ruff, pytest ou pipeline Python lancé : aucun outil Python ni asset
+généré n’a changé. La recette d’installation sur téléphone reste en 8C. Aucun commit effectué.
+
+Incidents : accès initial au cache Gradle refusé puis autorisé ; formatage et import de test Compose
+corrigés ; accents rétablis après un passage par le pipe PowerShell ; plantage interne de Lint
+absent à la relance sur sources figées. Une relance a dépassé le délai du test graphique existant
+`EncounterPeriodColorsTest` ; la suite complète finale réussit sans modifier ce test ni ses attentes.
+La dépréciation AGP déjà documentée reste visible, sans suppression ajoutée.
 
 ### Phase 7 — Guides et activités des remakes
 

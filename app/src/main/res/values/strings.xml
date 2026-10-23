@@ -703,4 +703,18 @@
     <string name="water_unavailable">Indisponible</string>
     <string name="encounter_time_icon">Horaire de rencontre : %1$s</string>
     <string name="encounter_headbutt_title">Coup d’Boule sur les arbres</string>
+    <string name="breeding_power_weight">Poids Pouvoir</string>
+    <string name="breeding_power_bracer">Poignée Pouvoir</string>
+    <string name="breeding_power_belt">Ceinture Pouvoir</string>
+    <string name="breeding_power_anklet">Chaîne Pouvoir</string>
+    <string name="breeding_power_lens">Lentille Pouvoir</string>
+    <string name="breeding_power_band">Bandeau Pouvoir</string>
+    <string name="breeding_hgss_nature">Pierre Stase : parents éligibles %1$s. Chaque porteur peut transmettre sa nature, quel que soit son sexe. Avec deux pierres, un seul parent est choisi au hasard. Le test natif réussit 32 767 fois sur 65 536 ; des langues différentes peuvent ensuite modifier la personnalité et la nature.</string>
+    <string name="breeding_hgss_ivs">Trois IV distincts sont hérités. Un objet Pouvoir impose son IV parmi ces trois ; avec deux objets, un seul porteur est choisi au hasard. Les autres IV ne sont pas prédits.</string>
+    <string name="breeding_hgss_forced_iv">Alternative du parent %1$d : %2$s = %3$s.</string>
+    <string name="guide_roamer_hgss_eon">Après le retour de la Copieuse et la rencontre avec Pierre à Carmin sur Mer : Latias dans Or HeartGold, Latios dans Argent SoulSilver, au niveau 35, sur les routes de Kanto.</string>
+    <string name="friendship_hgss_groom_small">Soin HGSS : résultat de base +1</string>
+    <string name="friendship_hgss_groom_medium">Soin HGSS : résultat de base +5</string>
+    <string name="friendship_hgss_groom_large">Soin HGSS : résultat de base +10</string>
+    <string name="friendship_hgss_note">HGSS : Luxe Ball et lieu de réception de l’œuf ajoutent chacun 1 aux gains positifs, puis le Grelot Zen multiplie par 1,5 avec arrondi inférieur. Les pertes restent inchangées. Pour les coiffeurs de Doublonville, choisir le résultat obtenu (+1, +5 ou +10) ; le soin de Nina donne +10. Aucun tirage n’est prédit.</string>
 </resources>
