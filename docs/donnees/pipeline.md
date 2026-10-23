@@ -41,6 +41,12 @@ sans reconstruire Sinnoh ni activer les remakes dans Android. Ses noms, plans et
 `python tools/review_hgss_maps.py` produit les planches indexées et `check_assets.py --hgss-maps`
 contrôle aussi cet aperçu lorsqu'on lui passe le chemin `tools/build/preview/hgss-maps`.
 
+Les [guides et activités HGSS](../generations/contenus-hgss.md) se génèrent séparément avec
+`python tools/build_data.py --hgss-content-only`, après les rencontres et personnages HGSS.
+L'aperçu `hgss-content/index.html` permet leur relecture ; le catalogue et sa preuve sont versionnés
+dans `docs/generations/`. `check_assets.py --hgss-content tools/build/preview/hgss-content`
+contrôle les inventaires, prérequis, liens et exclusions sans génération.
+
 Les images sont en WebP sans perte, vérifiées contre leurs sources. Le style Pokémon est identique partout :
 animations Noir/Blanc et fixes issus de leur première image. Les espèces 1 à 493 sont embarquées ;
 la source est configurée jusqu’à 649. Au-delà, choisir et valider une source avant d’ajouter un jeu.

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "pokeathlon",
+    "title_fr": "Pokéathlon",
+    "text_fr": "Au Dôme, inscrire trois Pokémon et choisir un parcours selon leurs performances : Vitesse, Force, Habileté, Endurance et Saut. Les performances varient selon l’espèce, la nature et le jour. Les Points Athlète servent aux prix quotidiens et aux Cartes Mémo. Le catalogue conserve les quatorze stocks, avant et après le National, avec leurs coûts et la limite quotidienne par objet. Les salles du sous-sol suivent les performances accomplies ; aucun mini-jeu n’est simulé.",
+    "sources": [
+      "src/pokeathlon/pokeathlon_course.c",
+      "src/pokeathlon/pokeathlon_save.c",
+      "src/scrcmd_mart.c",
+      "asm/overlay_96.s"
+    ]
+  },
+  {
+    "id": "noigrumes",
+    "title_fr": "Les Noigrumes de Fargas",
+    "text_fr": "Récolter les arbres de Noigrumes, renouvelés lors du changement de jour. Confier à Fargas un lot d’une même couleur pour le transformer en Balls ; revenir le jour suivant, après la levée du drapeau quotidien. Le délai n’est pas nécessairement de vingt-quatre heures. Les sept conversions et les trente et un arbres sont structurés dans le catalogue.",
+    "sources": [
+      "src/apricorn_tree_sys.c",
+      "asm/unk_02031B0C.s",
+      "src/unk_02055418.c"
+    ]
+  },
+  {
+    "id": "noigrume-drink",
+    "title_fr": "Le Noigrume à boire",
+    "text_fr": "Obtenir le Noigrumixer, y placer des Noigrumes puis marcher pour mélanger. Goûter avant de servir : le mélange agit sur les performances du Pokéathlon et peut aussi en réduire certaines. Les boissons vendues près du Dôme offrent une autre possibilité. L’application ne simule ni le mélange ni les épreuves.",
+    "sources": [
+      "files/msgdata/msg/msg_0021.json",
+      "files/msgdata/msg/msg_0137_D49.json"
+    ]
+  },
+  {
+    "id": "safari",
+    "title_fr": "Le Parc Safari",
+    "text_fr": "Configurer six habitats parmi douze après les épreuves de Baoba. Après le National et les appels de déblocage, placer jusqu’à trente objets par habitat. Les blocs de plaine, forêt, pic et eau apportent des points selon l’âge enregistré de l’habitat ; les décorations ne donnent pas de points. Les candidats admissibles remplacent les emplacements dans l’ordre du moteur. Consulter les exigences de chaque candidat, sans additionner des configurations incompatibles.",
+    "sources": [
+      "src/safari_zone.c",
+      "files/arc/safari_enc.json"
+    ]
+  },
+  {
+    "id": "pokewalker",
+    "title_fr": "Les parcours du Pokéwalker",
+    "text_fr": "L’accessoire reçoit un Pokémon depuis le menu de connexion. Marcher pour obtenir des Watts et débloquer les parcours ; ramener ensuite les Pokémon et objets obtenus. Les parcours externes, dont ceux des anciennes distributions, restent distincts des parcours ouverts par les Watts. Aucun accessoire ni distribution n’est considéré disponible par défaut. Le catalogue donne les six candidats, dix objets et seuils de chaque parcours.",
+    "sources": [
+      "src/pokewalker.c",
+      "asm/overlay_112.s",
+      "src/scrcmd_mystery_gift.c",
+      "src/update_dex_received.c"
+    ]
+  },
+  {
+    "id": "frontier",
+    "title_fr": "La Zone de Combat",
+    "text_fr": "Après la Ligue, rejoindre la Zone de Combat par son accès près d’Oliville. La Tour utilise l’équipe inscrite ; l’Usine propose des locations ; la Scène privilégie un Pokémon et les séries par type ; le Castel utilise ses Points Castel ; l’Arcade applique les effets de sa roulette. Les Points de Combat permettent les achats et l’apprentissage chez les tuteurs. Les règles et réserves de Platine ne sont pas importées par défaut.",
+    "sources": [
+      "asm/frontier.s",
+      "asm/frontier_system.s",
+      "src/frontier/frontier_cmd_arcade.c",
+      "src/field/scrcmd_move_tutor.c"
+    ]
+  },
+  {
+    "id": "contest",
+    "title_fr": "Le Concours de capture d’insectes",
+    "text_fr": "S’inscrire au Parc Naturel le mardi, jeudi ou samedi. Choisir le Pokémon participant ; dans le concours, conserver un seul Pokémon capturé. Avant le National, les jours partagent une table ; après le National, chaque jour dispose de sa table. Le catalogue conserve ces six configurations et leurs niveaux et probabilités conditionnelles.",
+    "sources": [
+      "files/data/mushi/mushi_encount.csv",
+      "src/field/encounter_check.c"
+    ]
+  },
+  {
+    "id": "radio",
+    "title_fr": "La radio et les essaims",
+    "text_fr": "Obtenir la Carte Radio à Doublonville puis le Coupon Expansion à Lavanville après la Centrale. Après le National, le Son de Hoenn intervient le mercredi et le Son de Sinnoh le jeudi ; activer l’émission dans le lieu concerné. L’émission de Chen annonce les essaims du jour. Les remplacements restent conditionnels au lieu et au réglage.",
+    "sources": [
+      "src/field/encounter_check.c"
+    ]
+  },
+  {
+    "id": "pokegear",
+    "title_fr": "Les rendez-vous du Pokématos",
+    "text_fr": "Enregistrer les numéros et respecter les jours et horaires des contacts. Pour les Champions, obtenir seize Badges, enregistrer chaque numéro dans ses conditions propres puis appeler au créneau prévu hors du lieu du contact. Accepter le rendez-vous au Dojo de Safrania. Le calendrier sépare l’enregistrement, l’appel et le lieu du combat ; il ne prédit pas les appels aléatoires.",
+    "sources": [
+      "files/tel/pmtel_book.json",
+      "src/overlay_26_022598C0.c",
+      "src/application/pokegear/phone/scripts/phone_scripts_gym_leader.c"
+    ]
+  },
+  {
+    "id": "photos",
+    "title_fr": "Les photos souvenirs",
+    "text_fr": "Parler aux photographes ou examiner les points de prise de vue lorsqu’ils sont disponibles. L’album peut conserver trente-six photos ; supprimer une ancienne photo libère une place. Les sites et paramètres natifs sont recensés, sans transformer leur présence dans la table en disponibilité permanente.",
+    "sources": [
+      "files/data/photo_data.json",
+      "include/photo_album.h",
+      "src/field_take_photo.c"
+    ]
+  },
+  {
+    "id": "voltorb",
+    "title_fr": "Voltorbataille et Casino",
+    "text_fr": "Dans l’édition occidentale, retourner les cartes multiplicatrices en tenant compte des totaux et Voltorbe indiqués par ligne et colonne. Une carte Voltorbe termine la manche. Les jetons s’échangent contre des récompenses ; les deux villes et leurs espèces proposées restent distinctes. Le catalogue conserve les quatre-vingts configurations possibles, pas une prédiction du plateau.",
+    "sources": [
+      "src/voltorb_flip/voltorb_flip_game.c",
+      "include/config.h",
+      "src/scrcmd_mart.c"
+    ]
+  },
+  {
+    "id": "berries",
+    "title_fr": "Les quatre pots à Baies",
+    "text_fr": "Planter dans les pots portables, arroser et récolter ; appliquer éventuellement un engrais avant la plantation. Cette activité remplace les plantations fixes des autres régions. Les baies obtenues, cadeaux et achats restent liés à leurs services natifs.",
+    "sources": [
+      "src/berry_pots_app.c"
+    ]
+  },
+  {
+    "id": "external",
+    "title_fr": "Transferts et événements",
+    "text_fr": "Le Parc des Amis demande une cartouche compatible ; les échanges demandent une autre partie. Pichu Troizépi, les Ruines Sinjoh et le Mystécristal dépendent d’un accès externe particulier. Rayquaza demande Kyogre et Groudon originaires des deux remakes. Ces provenances restent exclues des objectifs cartouche seule.",
+    "sources": [
+      "src/scrcmd_mystery_gift.c",
+      "src/scrcmd_c.c"
+    ]
+  }
+]

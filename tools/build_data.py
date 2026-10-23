@@ -56,6 +56,9 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
 
 def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
     maps_only.add_argument(
+        "--hgss-content-only", action="store_true", help="générer les guides, objectifs et activités HGSS"
+    )
+    maps_only.add_argument(
         "--hgss-characters-only",
         action="store_true",
         help="générer les personnages, combats, offres et calendrier HGSS",
@@ -216,6 +219,11 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
 
 
 def _hgss_preview(args: argparse.Namespace) -> bool:
+    if args.hgss_content_only:
+        from pokemaps_data.preview_content_hgss import build_content
+
+        build_content(args.cache, args.preview)
+        return True
     if args.hgss_characters_only:
         from pokemaps_data.preview_characters_hgss import build_characters
 

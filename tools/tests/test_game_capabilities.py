@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.games import FIRERED_LEAFGREEN, GAMES, GAMES_IN_PROGRESS, GEN3_GAMES, PretFormat
+from pokemaps_data.hgss_preparation import PREPARATORY_GAMES
 from pokemaps_data.validate import validate
 
 _APP = Path(__file__).parents[2] / "app/src/main/java/org/opensources/pokmaps"
@@ -53,7 +54,8 @@ def test_capabilities_of_the_fourteen_versions(db: sqlite3.Connection) -> None:
 def test_app_version_groups_match_the_pipeline_families() -> None:
     source = (_APP / "domain/model/VersionGroup.kt").read_text(encoding="utf-8")
     entries = re.findall(r'^\s+[A-Z_]+\("([a-z-]+)", "([a-z-]+)"\)[,;]$', source, re.MULTILINE)
-    modeled = GAMES
+    # Android reconnaît aussi le contrat HGSS préparatoire, sans l'ajouter aux jeux distribués.
+    modeled = (*GAMES, *PREPARATORY_GAMES)
     assert dict(entries) == {game.version_group: game.map_family for game in modeled}
     assert len(entries) == len(modeled)
 

@@ -137,6 +137,11 @@ Les [personnages, combats et services HGSS](docs/generations/personnages-hgss.md
 Ouvrir `index.html` pour parcourir les personnages, leurs placements, les revanches et les offres hors ligne.
 Le catalogue relie 737 équipes, 123 combats de scénario résolus, 63 séries de revanches et 567 offres ;
 les sprites, quantités, coûts et étapes sont vérifiés depuis les sources HGSS épinglées.
+Les [guides et activités HGSS](docs/generations/contenus-hgss.md) se génèrent avec
+`python tools/build_data.py --hgss-content-only` : parcours français de Johto à Red,
+objectifs régional/National pour chaque combinaison de starters, calendrier et catalogues particuliers.
+Ouvrir `tools/build/preview/hgss-content/index.html` pour les relire hors ligne ; le catalogue validé est aussi versionné.
+Cette préparation ne rend pas encore les remakes sélectionnables dans l'application.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

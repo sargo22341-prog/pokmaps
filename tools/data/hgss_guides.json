@@ -1,0 +1,732 @@
+[
+  {
+    "id": "depart",
+    "category": "johto",
+    "title_fr": "Un partenaire à Bourg Geon",
+    "text_fr": "Choisir Germignon, Héricendre ou Kaiminus au laboratoire du Prof. Orme. Ce choix est définitif sur cette sauvegarde. Rejoindre Ville Griotte par la Route 29, recevoir les Chaussures de Sport et poursuivre vers la maison de M. Pokémon.",
+    "places": [
+      "MAP_NEW_BARK_ELMS_LAB_1F",
+      "MAP_CHERRYGROVE"
+    ],
+    "requires": [],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "oeuf-mystere",
+    "category": "johto",
+    "title_fr": "La commission de M. Pokémon",
+    "text_fr": "Recevoir l’Œuf Mystère et le Pokédex, puis revenir chez Orme. Combattre le rival sur le retour, remettre l’œuf et apprendre la capture avant de rejoindre Mauville par les Routes 30 et 31.",
+    "places": [
+      "MAP_ROUTE_30_MR_POKEMON_HOUSE",
+      "MAP_NEW_BARK_ELMS_LAB_1F"
+    ],
+    "requires": [
+      "depart"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "mauville",
+    "category": "johto",
+    "title_fr": "Tour Chétiflor et premier Badge",
+    "text_fr": "Gravir la Tour Chétiflor et vaincre son Ancien pour obtenir Flash. Battre Albert à l’Arène de Mauville. Après son appel, récupérer auprès de l’assistant d’Orme l’Œuf de Togepi à la Boutique ; garder une place dans l’équipe.",
+    "places": [
+      "MAP_VIOLET_GYM",
+      "MAP_SPROUT_TOWER_3F",
+      "MAP_VIOLET_POKEMART"
+    ],
+    "requires": [
+      "oeuf-mystere"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "ecorcia",
+    "category": "johto",
+    "title_fr": "Libérer le Puits Ramoloss",
+    "text_fr": "Descendre la Route 32, traverser les Caves Jumelles puis rejoindre Écorcia. Parler à Fargas et le suivre au Puits Ramoloss. Vaincre la Team Rocket avant d’affronter Hector.",
+    "places": [
+      "MAP_SLOWPOKE_WELL_B1F",
+      "MAP_AZALEA_GYM",
+      "MAP_AZALEA_KURT_HOUSE"
+    ],
+    "requires": [
+      "mauville"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "bois",
+    "category": "johto",
+    "title_fr": "Les Canarticho du Bois aux Chênes",
+    "text_fr": "Battre le rival à l’ouest d’Écorcia. Dans le bois, marcher sur les branches pour orienter les Canarticho et les approcher par-derrière. Recevoir Coupe et ouvrir le passage vers la Route 34 ; le Badge d’Hector permet son utilisation.",
+    "places": [
+      "MAP_ILEX_FOREST",
+      "MAP_AZALEA"
+    ],
+    "requires": [
+      "ecorcia"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "doublonville",
+    "category": "johto",
+    "title_fr": "Doublonville et le Badge Plaine",
+    "text_fr": "Obtenir la Carte Radio en répondant au questionnaire de la Tour Radio. Retrouver Blanche à l’Arène, la battre puis lui reparler après sa déception pour recevoir le Badge. La bicyclette est proposée gratuitement dans la ville.",
+    "places": [
+      "MAP_GOLDENROD_RADIO_TOWER_1F",
+      "MAP_GOLDENROD_GYM",
+      "MAP_GOLDENROD_BIKE_SHOP"
+    ],
+    "requires": [
+      "bois"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "simularbre",
+    "category": "johto",
+    "title_fr": "Un arbre qui n’en est pas un",
+    "text_fr": "Récupérer le Carapuce à O après le Badge Plaine. Arroser Simularbre sur la Route 36 pour déclencher le combat et dégager la route. Rejoindre Rosalia ; conserver une sauvegarde avant un Pokémon fixe si l’on veut retenter sa capture.",
+    "places": [
+      "MAP_ROUTE_36",
+      "MAP_ECRUTEAK",
+      "MAP_GOLDENROD_FLOWER_SHOP"
+    ],
+    "requires": [
+      "doublonville"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "rosalia",
+    "category": "johto",
+    "title_fr": "Les légendes de la Tour Cendrée",
+    "text_fr": "Explorer la Tour Cendrée, battre le rival et descendre voir Raikou, Entei et Suicune. Raikou et Entei commencent à errer ; leurs positions ne sont pas prédites. Sauver la danseuse de la Salle de Danse pour obtenir Surf, puis vaincre Mortimer afin de l’utiliser.",
+    "places": [
+      "MAP_BURNED_TOWER_1F",
+      "MAP_BURNED_TOWER_B1F",
+      "MAP_ECRUTEAK_DANCE_THEATER",
+      "MAP_ECRUTEAK_GYM"
+    ],
+    "requires": [
+      "simularbre"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "phare",
+    "category": "johto",
+    "title_fr": "Le phare d’Oliville",
+    "text_fr": "Passer par les Routes 38 et 39 et monter au sommet du phare. Jasmine demande un remède pour le Pokémon malade. Traverser les Routes maritimes 40 et 41 vers Irisia avec Surf.",
+    "places": [
+      "MAP_OLIVINE_LIGHTHOUSE_LIGHT_ROOM",
+      "MAP_CIANWOOD"
+    ],
+    "requires": [
+      "rosalia"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "irisia",
+    "category": "johto",
+    "title_fr": "Le remède et le Badge Choc",
+    "text_fr": "Prendre la Potionsecret à la pharmacie d’Irisia. À l’Arène, arrêter la cascade avec le mécanisme supérieur puis battre Chuck. Sa femme remet Vol à la sortie ; rapporter ensuite le remède à Jasmine.",
+    "places": [
+      "MAP_CIANWOOD_GYM",
+      "MAP_CIANWOOD_PHARMACY",
+      "MAP_OLIVINE_LIGHTHOUSE_LIGHT_ROOM"
+    ],
+    "requires": [
+      "phare"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "jasmine",
+    "category": "johto",
+    "title_fr": "Le Badge Minéral",
+    "text_fr": "Après avoir soigné le Pokémon du phare, retrouver Jasmine à l’Arène d’Oliville et la battre. L’ouverture du chemin vers le Safari est une activité annexe ; poursuivre l’aventure vers Acajou et le Lac Colère.",
+    "places": [
+      "MAP_OLIVINE_GYM",
+      "MAP_MAHOGANY"
+    ],
+    "requires": [
+      "irisia"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "lac-colere",
+    "category": "johto",
+    "title_fr": "Le Léviator rouge",
+    "text_fr": "Sur la Route 42, recevoir Force du montagnard sortant du Mont Creuset. Rejoindre le Lac Colère par la Route 43. Affronter le Léviator chromatique, puis parler à Peter sur la rive et accepter de l’aider. L’Écaille Rouge peut être échangée auprès de M. Pokémon contre le Multi Exp.",
+    "places": [
+      "MAP_LAKE_OF_RAGE",
+      "MAP_ROUTE_30_MR_POKEMON_HOUSE",
+      "MAP_ROUTE_42"
+    ],
+    "requires": [
+      "jasmine"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "repaire",
+    "category": "johto",
+    "title_fr": "Le Repaire Rocket",
+    "text_fr": "Retrouver Peter dans la boutique d’Acajou. Explorer les sous-sols, recueillir les mots de passe, combattre les responsables puis arrêter les machines en affrontant les Électrode. Peter remet Siphon à la fin.",
+    "places": [
+      "MAP_TEAM_ROCKET_HEADQUARTERS_B1F",
+      "MAP_TEAM_ROCKET_HEADQUARTERS_B2F",
+      "MAP_TEAM_ROCKET_HEADQUARTERS_B3F"
+    ],
+    "requires": [
+      "lac-colere"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "acajou",
+    "category": "johto",
+    "title_fr": "Le Badge Glacier",
+    "text_fr": "Vaincre les dresseurs des salles glacées puis Frédo à l’Arène d’Acajou. Après sept Badges, l’appel d’Orme annonce l’occupation de la Tour Radio : retourner à Doublonville.",
+    "places": [
+      "MAP_MAHOGANY_GYM_LEADER_ROOM",
+      "MAP_GOLDENROD_RADIO_TOWER_1F"
+    ],
+    "requires": [
+      "repaire"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "radio",
+    "category": "johto",
+    "title_fr": "Libérer la Tour Radio",
+    "text_fr": "Obtenir un uniforme Rocket dans le souterrain, puis entrer dans la Tour Radio. Battre le faux Directeur, récupérer la Clé Sous-Sol et sauver le vrai Directeur dans les réserves du magasin. Revenir avec la Carte Magnétique et vaincre les derniers responsables. Le Directeur remet l’Arcenci’Aile dans HeartGold ou l’Argent’Aile dans SoulSilver.",
+    "places": [
+      "MAP_GOLDENROD_RADIO_TOWER_5F",
+      "MAP_GOLDENROD",
+      "MAP_GOLDENROD_DEPARTMENT_STORE_BASEMENT",
+      "MAP_GOLDENROD_TUNNEL_WAREHOUSE",
+      "MAP_GOLDENROD_RADIO_TOWER_OBSERVATION_DECK"
+    ],
+    "requires": [
+      "acajou"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "glace",
+    "category": "johto",
+    "title_fr": "La Route de Glace",
+    "text_fr": "À l’est d’Acajou, traverser la Route 44 puis la Route de Glace. Récupérer Cascade et pousser les rochers dans les trous pour résoudre les passages inférieurs. Aider la danseuse près de la sortie, puis rejoindre Ébènelle.",
+    "places": [
+      "MAP_ICE_PATH_1F",
+      "MAP_ICE_PATH_B1F",
+      "MAP_BLACKTHORN"
+    ],
+    "requires": [
+      "radio"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "sandra",
+    "category": "johto",
+    "title_fr": "L’épreuve de l’Antre du Dragon",
+    "text_fr": "Battre Sandra, puis entrer dans l’Antre du Dragon derrière l’Arène. Utiliser Surf et Siphon pour atteindre le sanctuaire et répondre au maître. Recevoir enfin le Badge Lever ; récupérer la CT de Sandra et revenir pour le Minidraco offert. Ses capacités dépendent des réponses.",
+    "places": [
+      "MAP_BLACKTHORN_GYM",
+      "MAP_DRAGONS_DEN_SHRINE"
+    ],
+    "requires": [
+      "glace"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "danseuses",
+    "category": "johto",
+    "title_fr": "Les cinq Kimono",
+    "text_fr": "Après les huit Badges, retourner chez Orme chercher la Master Ball. À Rosalia, vaincre les cinq Kimono à la suite et recevoir le glas propre à la version. Préparer soins et Balls avant de partir au sanctuaire indiqué.",
+    "places": [
+      "MAP_NEW_BARK_ELMS_LAB_1F",
+      "MAP_ECRUTEAK_DANCE_THEATER"
+    ],
+    "requires": [
+      "sandra"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "legende",
+    "category": "johto",
+    "title_fr": "Ho-Oh au sommet du Carillon",
+    "text_fr": "Avec l’Arcenci’Aile et le Glas Transparent, gravir la Tour Carillon et assister à la cérémonie des Kimono. Affronter Ho-Oh avant de poursuivre vers la Ligue. Lugia reste accessible après l’obtention de l’Argent’Aile à Argenta.",
+    "places": [
+      "MAP_BELL_TOWER_1F",
+      "MAP_BELL_TOWER_ROOF"
+    ],
+    "requires": [
+      "danseuses"
+    ],
+    "versions": [
+      "heartgold"
+    ]
+  },
+  {
+    "id": "legende",
+    "category": "johto",
+    "title_fr": "Lugia au fond des Tourb’Îles",
+    "text_fr": "Avec l’Argent’Aile et le Glas Tempête, rejoindre les Tourb’Îles avec Surf et Siphon, puis descendre jusqu’à Lugia. Assister à la cérémonie des Kimono avant le combat. Ho-Oh reste accessible après l’obtention de l’Arcenci’Aile à Argenta.",
+    "places": [
+      "MAP_WHIRL_ISLANDS_1F",
+      "MAP_WHIRL_ISLANDS_B3F_LUGIA_CAVE"
+    ],
+    "requires": [
+      "danseuses"
+    ],
+    "versions": [
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "ligue",
+    "category": "johto",
+    "title_fr": "La Ligue Pokémon",
+    "text_fr": "Depuis Bourg Geon, utiliser Surf vers l’est, traverser les Chutes Tohjo avec Cascade puis les Routes 27 et 26. Passer la Route Victoire et le rival. Vaincre Clément, Koga, Aldo, Marion puis Peter et entrer au Panthéon.",
+    "places": [
+      "MAP_POKEMON_LEAGUE_ENTRANCE",
+      "MAP_VICTORY_ROAD_1F"
+    ],
+    "requires": [
+      "legende"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "aquaria",
+    "category": "kanto",
+    "title_fr": "Le premier voyage vers Kanto",
+    "text_fr": "Après la Ligue, recevoir le Passe Bateau chez Orme. À Oliville, le Prof. Chen débloque le Pokédex National. Prendre l’Aquaria, retrouver la petite-fille du passager et débarquer à Carmin sur Mer.",
+    "places": [
+      "MAP_SS_AQUA_OLIVINE_PORT_INTERIOR",
+      "MAP_SS_AQUA_1F",
+      "MAP_SS_AQUA_CAPTAIN_ROOM"
+    ],
+    "requires": [
+      "ligue"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "carmin",
+    "category": "kanto",
+    "title_fr": "Carmin sur Mer",
+    "text_fr": "Vaincre Major Bob dans son Arène après avoir résolu les interrupteurs des poubelles. Depuis Carmin, gagner Safrania puis Azuria ; l’ordre de plusieurs Arènes de Kanto reste libre. Le parcours proposé évite les retours inutiles.",
+    "places": [
+      "MAP_VERMILION_GYM",
+      "MAP_SAFFRON"
+    ],
+    "requires": [
+      "aquaria"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "safrania",
+    "category": "kanto",
+    "title_fr": "Les téléporteurs de Morgane",
+    "text_fr": "À Safrania, rejoindre Morgane en parcourant les salles à téléporteurs de son Arène. Obtenir le Badge Marais ; le Dojo voisin accueillera plus tard les revanches des Champions, après l’enregistrement de leurs numéros.",
+    "places": [
+      "MAP_SAFFRON_GYM",
+      "MAP_SAFFRON_FIGHTING_DOJO"
+    ],
+    "requires": [
+      "carmin"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "centrale",
+    "category": "kanto",
+    "title_fr": "Rétablir la Centrale",
+    "text_fr": "Depuis Azuria, rejoindre la Centrale par les Routes 9 et 10 avec Surf. Après avoir appris le vol d’une pièce, retourner à l’Arène d’Azuria, poursuivre le sbire sur la Route 24 puis retrouver la Partie Machine dans l’Arène. La rapporter à la Centrale.",
+    "places": [
+      "MAP_ROUTE_10_POWER_PLANT_BROKEN",
+      "MAP_CERULEAN_GYM",
+      "MAP_ROUTE_24"
+    ],
+    "requires": [
+      "safrania"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "ondine",
+    "category": "kanto",
+    "title_fr": "Retrouver Ondine",
+    "text_fr": "Après l’affaire de la Centrale, chercher Ondine au cap de la Route 25 et la retrouver dans son Arène. Vaincre son équipe pour obtenir le Badge Cascade. Les rencontres avec Suicune dans les deux régions conduisent aussi à ce cap.",
+    "places": [
+      "MAP_ROUTE_25",
+      "MAP_CERULEAN_GYM"
+    ],
+    "requires": [
+      "centrale"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "lavanville",
+    "category": "kanto",
+    "title_fr": "La radio de Kanto et le train",
+    "text_fr": "Après la réparation, recevoir le Coupon Expansion à la Tour Radio de Lavanville. Pour le Passe Train, parler à la Copieuse à Safrania, récupérer sa poupée au Fan Club de Carmin puis la lui rapporter. Le train relie alors Safrania à Doublonville.",
+    "places": [
+      "MAP_LAVENDER_RADIO_STATION",
+      "MAP_SAFFRON",
+      "MAP_VERMILION",
+      "MAP_SAFFRON_COPYCAT_HOUSE_2F",
+      "MAP_VERMILION_POKEMON_FAN_CLUB"
+    ],
+    "requires": [
+      "centrale"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "celadopole",
+    "category": "kanto",
+    "title_fr": "Les jardins d’Érika",
+    "text_fr": "Rejoindre Céladopole et traverser le labyrinthe végétal de l’Arène avec Coupe. Battre Érika pour recevoir le Badge Prisme. Le Casino et ses récompenses constituent une activité distincte.",
+    "places": [
+      "MAP_CELADON_GYM"
+    ],
+    "requires": [
+      "safrania"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "parmanie",
+    "category": "kanto",
+    "title_fr": "Janine et ses sosies",
+    "text_fr": "Rejoindre Parmanie par les routes de Kanto. Dans l’Arène, identifier Janine parmi les dresseuses déguisées et tenir compte des murs invisibles. Remporter le Badge Âme. Le Parc des Amis implique une cartouche externe et ne compte pas pour la cartouche seule.",
+    "places": [
+      "MAP_FUCHSIA_GYM"
+    ],
+    "requires": [
+      "celadopole"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "ronflex",
+    "category": "kanto",
+    "title_fr": "Réveiller Ronflex",
+    "text_fr": "Avec le Coupon Expansion, régler manuellement la radio du Pokématos sur la Poké Flûte devant Ronflex à l’entrée de la Cave Taupiqueur, puis lui parler. Capturer ou vaincre Ronflex permet de traverser vers Argenta.",
+    "places": [
+      "MAP_VERMILION",
+      "MAP_DIGLETT_CAVE"
+    ],
+    "requires": [
+      "lavanville"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "argenta",
+    "category": "kanto",
+    "title_fr": "Pierre et l’autre légendaire",
+    "text_fr": "Battre Pierre à l’Arène d’Argenta. Un vieil homme de la ville remet l’aile de l’autre Pokémon légendaire : Argent’Aile dans HeartGold, Arcenci’Aile dans SoulSilver. Descendre ensuite vers Jadielle et Bourg Palette.",
+    "places": [
+      "MAP_PEWTER_GYM",
+      "MAP_PEWTER"
+    ],
+    "requires": [
+      "ronflex"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "auguste",
+    "category": "kanto",
+    "title_fr": "Les Îles Écume et Auguste",
+    "text_fr": "Depuis Bourg Palette, surfer jusqu’à Cramois’Île puis emprunter la Route 20 vers les Îles Écume. L’Arène d’Auguste se trouve dans les îles, pas dans la ville détruite. Remporter le Badge Volcan.",
+    "places": [
+      "MAP_SEAFOAM_ISLANDS_CINNABAR_GYM",
+      "MAP_CINNABAR_ISLAND"
+    ],
+    "requires": [
+      "argenta"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "blue",
+    "category": "kanto",
+    "title_fr": "Le seizième Badge",
+    "text_fr": "Avec les sept autres Badges de Kanto, parler à Blue à Cramois’Île puis le retrouver à l’Arène de Jadielle. Vaincre son équipe pour obtenir le Badge Terre. La Ligue dispose désormais de ses équipes renforcées.",
+    "places": [
+      "MAP_VIRIDIAN_GYM",
+      "MAP_CINNABAR_ISLAND"
+    ],
+    "requires": [
+      "ondine",
+      "parmanie",
+      "auguste"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "red",
+    "category": "postgame",
+    "title_fr": "Red au Mont Argenté",
+    "text_fr": "Avec les seize Badges, parler au Prof. Chen à Bourg Palette pour obtenir Escalade et l’accès au Mont Argenté. Préparer les CS utiles et des soins, atteindre le sommet enneigé puis affronter Red. La grêle et le niveau de son équipe rendent une préparation complète nécessaire.",
+    "places": [
+      "MAP_PALLET_TOWN_OAKS_LAB",
+      "MAP_MOUNT_SILVER_CAVE_SUMMIT"
+    ],
+    "requires": [
+      "blue"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "starters",
+    "category": "postgame",
+    "title_fr": "Les partenaires de Kanto et de Hoenn",
+    "text_fr": "Après Red, Chen propose un seul starter de Kanto à son laboratoire. Pierre Rochard propose un seul starter de Hoenn à la Sylphe SARL après les rencontres nécessaires. Chaque trio représente un choix exclusif sur cette sauvegarde ; les autres familles sont exclues de l’objectif correspondant.",
+    "places": [
+      "MAP_PALLET_TOWN_OAKS_LAB",
+      "MAP_SAFFRON_SILPH_CO_HQ"
+    ],
+    "requires": [
+      "red"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "tour-enfouie",
+    "category": "postgame",
+    "title_fr": "Les légendes après Red",
+    "text_fr": "Après Red et le starter de Chen, M. Pokémon remet l’Orbe Bleue dans HeartGold ou l’Orbe Rouge dans SoulSilver. Rejoindre la Tour Enfouie pour Kyogre ou Groudon. Rayquaza demande les deux Pokémon provenant de HGSS : une autre cartouche est indispensable.",
+    "places": [
+      "MAP_ROUTE_30_MR_POKEMON_HOUSE",
+      "MAP_EMBEDDED_TOWER_KYOGRE_ROOM",
+      "MAP_EMBEDDED_TOWER_GROUDON_ROOM"
+    ],
+    "requires": [
+      "starters"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-togepi",
+    "category": "quest",
+    "title_fr": "Faire éclore Togepi",
+    "text_fr": "Garder l’œuf reçu à Mauville dans l’équipe et marcher jusqu’à son éclosion. Revenir montrer Togepi au Prof. Orme. Cette quête n’exige ni échange ni distribution.",
+    "places": [
+      "MAP_NEW_BARK_ELMS_LAB_1F"
+    ],
+    "requires": [
+      "mauville"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-alph",
+    "category": "quest",
+    "title_fr": "Les Ruines d’Alpha",
+    "text_fr": "Résoudre les quatre puzzles pour ouvrir progressivement les groupes de Zarbi. Examiner aussi les inscriptions des salles : leurs passages secrets utilisent des conditions spécifiques. Les formes ! et ? se débloquent après la collection des vingt-six lettres et les recherches associées.",
+    "places": [
+      "MAP_RUINS_OF_ALPH"
+    ],
+    "requires": [
+      "mauville"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-evoli",
+    "category": "quest",
+    "title_fr": "Le cadeau de Léo",
+    "text_fr": "Rencontrer Léo au Centre Pokémon de Rosalia puis lui rendre visite chez lui à Doublonville avec une place libre pour recevoir Évoli. Ses évolutions de lieu ne sont pas réalisables dans HGSS ; Phyllali et Givrali nécessitent un autre jeu.",
+    "places": [
+      "MAP_ECRUTEAK_POKECENTER_1F",
+      "MAP_GOLDENROD_BILLS_HOUSE"
+    ],
+    "requires": [
+      "rosalia"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-safari",
+    "category": "quest",
+    "title_fr": "Les épreuves de Baoba",
+    "text_fr": "Après le remède du phare, suivre l’ouverture du chemin à l’ouest d’Irisia. Réussir la capture de Racaillou, puis celle de Sabelette après l’appel et le déblocage du réaménagement. Les objets de décoration et les rencontres avancées demandent ensuite le National et les appels de Baoba.",
+    "places": [
+      "MAP_SAFARI_ZONE_ENTRANCE_INTERIOR",
+      "MAP_SAFARI_ZONE_GATE"
+    ],
+    "requires": [
+      "irisia"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-suicune",
+    "category": "quest",
+    "title_fr": "La poursuite de Suicune",
+    "text_fr": "Observer Suicune à la Tour Cendrée, près d’Irisia, sur la Route 42 puis à Carmin et sur la Route 14. Après le retour d’Ondine à son Arène, le retrouver sur la Route 25 pour un combat fixe. Raikou et Entei suivent un autre mécanisme, celui des errants.",
+    "places": [
+      "MAP_CIANWOOD",
+      "MAP_ROUTE_42",
+      "MAP_VERMILION",
+      "MAP_ROUTE_14",
+      "MAP_ROUTE_25"
+    ],
+    "requires": [
+      "ondine"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  },
+  {
+    "id": "q-evenements",
+    "category": "quest",
+    "title_fr": "Les événements et les accès externes",
+    "text_fr": "Pichu Troizépi demande le Pichu chromatique de distribution au Bois aux Chênes. Les Ruines Sinjoh demandent un Arceus extérieur. Le Mystécristal concerne une distribution externe. Ces contenus sont documentés séparément et ne contribuent pas aux objectifs cartouche seule ; aucune distribution actuelle n’est promise.",
+    "places": [
+      "MAP_ILEX_FOREST",
+      "MAP_PEWTER"
+    ],
+    "requires": [
+      "red"
+    ],
+    "versions": [
+      "heartgold",
+      "soulsilver"
+    ]
+  }
+]

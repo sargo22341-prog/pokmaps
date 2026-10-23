@@ -27,6 +27,7 @@ def main() -> int:
     parser.add_argument("--sinnoh-maps", type=Path, help="vérifier aussi les deux catalogues DS préparatoires")
     parser.add_argument("--hgss-maps", type=Path, help="vérifier aussi l'aperçu Johto HGSS préparatoire")
     parser.add_argument("--hgss-encounters", type=Path, help="vérifier aussi l'aperçu des rencontres HGSS")
+    parser.add_argument("--hgss-content", type=Path, help="vérifier aussi les guides et activités HGSS")
     parser.add_argument(
         "--hgss-characters", type=Path, help="vérifier aussi les personnages, offres et calendrier HGSS"
     )
@@ -66,6 +67,10 @@ def main() -> int:
 
 
 def _check_hgss(args: argparse.Namespace) -> None:
+    if args.hgss_content:
+        from pokemaps_data.preview_content_hgss import check_content
+
+        check_content(args.hgss_content)
     if args.hgss_maps:
         from pokemaps_data.validate_johto_hgss import check_johto_preview
 

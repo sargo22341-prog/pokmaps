@@ -1,0 +1,134 @@
+[
+  {
+    "id": "concours",
+    "title_fr": "Concours de capture d’insectes",
+    "weekdays": [
+      1,
+      3,
+      5
+    ],
+    "conditions_fr": "Mardi, jeudi et samedi ; tables différentes après le National.",
+    "places": [
+      "MAP_NATIONAL_PARK"
+    ]
+  },
+  {
+    "id": "lokhlass",
+    "title_fr": "Lokhlass des Caves Jumelles",
+    "weekdays": [
+      4
+    ],
+    "conditions_fr": "Vendredi ; Surf pour atteindre la salle du sous-sol. Rencontre renouvelable.",
+    "places": [
+      "MAP_UNION_CAVE_B2F"
+    ]
+  },
+  {
+    "id": "hoenn-radio",
+    "title_fr": "Son de Hoenn",
+    "weekdays": [
+      2
+    ],
+    "conditions_fr": "Mercredi ; Pokédex National et radio réglée sur l’émission.",
+    "places": [
+      "MAP_GOLDENROD_RADIO_TOWER_1F"
+    ]
+  },
+  {
+    "id": "sinnoh-radio",
+    "title_fr": "Son de Sinnoh",
+    "weekdays": [
+      3
+    ],
+    "conditions_fr": "Jeudi ; Pokédex National et radio réglée sur l’émission.",
+    "places": [
+      "MAP_GOLDENROD_RADIO_TOWER_1F"
+    ]
+  },
+  {
+    "id": "aquaria-johto",
+    "title_fr": "Aquaria au départ d’Oliville",
+    "weekdays": [
+      0,
+      4
+    ],
+    "conditions_fr": "Lundi et vendredi après le premier voyage ; Passe Bateau.",
+    "places": [
+      "MAP_SS_AQUA_OLIVINE_PORT_INTERIOR"
+    ]
+  },
+  {
+    "id": "aquaria-kanto",
+    "title_fr": "Aquaria au départ de Carmin",
+    "weekdays": [
+      2,
+      6
+    ],
+    "conditions_fr": "Mercredi et dimanche après le premier voyage ; Passe Bateau.",
+    "places": [
+      "MAP_SS_AQUA_VERMILION_PORT_INTERIOR"
+    ]
+  },
+  {
+    "id": "melofee",
+    "title_fr": "Danse des Mélofée",
+    "weekdays": [
+      0
+    ],
+    "conditions_fr": "Lundi soir ; observer la danse au Mont Sélénite puis examiner le rocher avec Éclate-Roc.",
+    "places": [
+      "MAP_MOUNT_MOON_SQUARE"
+    ]
+  },
+  {
+    "id": "cadeaux",
+    "title_fr": "Prix du Pokéathlon",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "conditions_fr": "Stock propre à chaque jour et au National ; un exemplaire de chaque prix par jour.",
+    "places": [
+      "MAP_POKEATHLON_DOME_INTERIOR_1F"
+    ]
+  },
+  {
+    "id": "noigrumes",
+    "title_fr": "Récolte et Balls de Fargas",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "conditions_fr": "Récolte quotidienne ; retirer le lot de Balls le jour suivant sa remise.",
+    "places": [
+      "MAP_AZALEA_KURT_HOUSE"
+    ]
+  },
+  {
+    "id": "essaims",
+    "title_fr": "Essaim annoncé à la radio",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "conditions_fr": "Après le National ; lieu et espèce du jour, aucune prédiction de tirage.",
+    "places": [
+      "MAP_GOLDENROD_RADIO_TOWER_1F"
+    ]
+  }
+]

@@ -638,16 +638,22 @@ La dépréciation AGP déjà documentée reste visible, sans suppression ajouté
 
 ### Phase 7 — Guides et activités des remakes
 
-- [ ] **7A — Soluce Johto.** Guides par version, quêtes, lieux/PNJ/objets liés et étapes stables.
+- [x] **7A — Soluce Johto.** Guides par version, quêtes, lieux/PNJ/objets liés et étapes stables.
   Sortie : parcours principal relu en français.
-- [ ] **7B — Kanto et après-jeu.** Soluce jusqu’à Red, objectifs de capture et calendrier.
+- [x] **7B — Kanto et après-jeu.** Soluce jusqu’à Red, objectifs de capture et calendrier.
   Sortie : objectifs calculés par cartouche avec exclusions explicites.
-- [ ] **7C — Catalogues particuliers.** Pokéathlon, Noigrumes, Safari, Pokéwalker et autres activités recensées.
+- [x] **7C — Catalogues particuliers.** Pokéathlon, Noigrumes, Safari, Pokéwalker et autres activités recensées.
   Sortie : données structurées et guides vérifiés ; fractionner par activité si nécessaire.
 - [ ] **7D — Zone de Combat.** Comparer Platine et HGSS, importer seulement les données prouvées communes.
   Sortie : installations, équipes possibles, conditions et récompenses correctes, sans simulation des tirages.
 - [ ] **7E — Succès.** Relire/traduire les archives existantes, générer les ressources et tester
   le set partagé ainsi que la synchronisation manuelle. Sortie : consultation complète hors ligne.
+
+Les sorties 7A–7C sont décrites dans [les contenus HGSS](docs/generations/contenus-hgss.md).
+`python tools/build_data.py --hgss-content-only` produit l'aperçu français de relecture et son catalogue
+versionné : 82 entrées de guide, 54 configurations d'objectifs de capture, calendrier et 13 activités,
+dont les 27 parcours Pokéwalker. Les liens et les exclusions restent propres aux remakes.
+L'activation Android reste en phase 8 ; les catalogues détaillés de combat et les succès restent en 7D/7E.
 
 ### Phase 8 — Activation, recette et livraison
 
