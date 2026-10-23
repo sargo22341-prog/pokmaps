@@ -560,11 +560,17 @@ sur le décor ; les hauteurs d'eau restent des candidats relus visuellement, san
 
 ### Phase 5 — Personnages, objets et services
 
-- [ ] **5A — Acteurs et combats.** Lire sprites, scripts, équipes et variables de starter/scénario.
+Réalisée via `--hgss-characters-only` : aperçu HTML autonome, 737 équipes, 123 combats de scénario
+résolus, 63 séries de revanches, 16 champions, variantes de la Ligue, 497 objets et 567 offres.
+Les 762 acteurs utiles disposent de 100 sprites décodés et de 39 planches de placement relues.
+Les [preuves, sources et commandes de contrôle](docs/generations/personnages-hgss.md) tracent les
+conditions, monnaies, quantités et étapes, ainsi que les retouches éditoriales.
+
+- [x] **5A — Acteurs et combats.** Lire sprites, scripts, équipes et variables de starter/scénario.
   Sortie : aperçu de personnages, placements relus et liens acteur/combat/lieu corrects.
-- [ ] **5B — Revanches et calendrier.** Extraire Pokématos, champions et Ligue selon conditions.
+- [x] **5B — Revanches et calendrier.** Extraire Pokématos, champions et Ligue selon conditions.
   Sortie : rendez-vous et équipes alternatives vérifiés sans héritage du Cherche VS.
-- [ ] **5C — Objets et offres.** Objets cachés/visibles, boutiques, Noigrumes, tuteurs, échanges et récompenses.
+- [x] **5C — Objets et offres.** Objets cachés/visibles, boutiques, Noigrumes, tuteurs, échanges et récompenses.
   Sortie : quantités, coûts, délais et étapes testés, compléments éditoriaux tracés.
 
 ### Phase 6 — Règles Android et compatibilité

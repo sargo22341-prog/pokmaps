@@ -27,6 +27,9 @@ def main() -> int:
     parser.add_argument("--sinnoh-maps", type=Path, help="vérifier aussi les deux catalogues DS préparatoires")
     parser.add_argument("--hgss-maps", type=Path, help="vérifier aussi l'aperçu Johto HGSS préparatoire")
     parser.add_argument("--hgss-encounters", type=Path, help="vérifier aussi l'aperçu des rencontres HGSS")
+    parser.add_argument(
+        "--hgss-characters", type=Path, help="vérifier aussi les personnages, offres et calendrier HGSS"
+    )
     args = parser.parse_args()
     try:
         check_manifest(args.assets)
@@ -54,19 +57,27 @@ def main() -> int:
                 output = args.sinnoh_maps / game.version_group
                 check_inventory(output)
                 validate_gen4_catalog(output)
-        if args.hgss_maps:
-            from pokemaps_data.validate_johto_hgss import check_johto_preview
-
-            check_johto_preview(args.hgss_maps)
-        if args.hgss_encounters:
-            from pokemaps_data.preview_wild_hgss import check_encounters_preview
-
-            check_encounters_preview(args.hgss_encounters)
+        _check_hgss(args)
     except (OSError, ValueError, sqlite3.Error) as error:
         print(str(error), file=sys.stderr)
         return 1
     print("OK : assets versionnés complets, empreintes et base cohérentes.")
     return 0
+
+
+def _check_hgss(args: argparse.Namespace) -> None:
+    if args.hgss_maps:
+        from pokemaps_data.validate_johto_hgss import check_johto_preview
+
+        check_johto_preview(args.hgss_maps)
+    if args.hgss_encounters:
+        from pokemaps_data.preview_wild_hgss import check_encounters_preview
+
+        check_encounters_preview(args.hgss_encounters)
+    if args.hgss_characters:
+        from pokemaps_data.preview_characters_hgss import check_characters
+
+        check_characters(args.hgss_characters)
 
 
 if __name__ == "__main__":

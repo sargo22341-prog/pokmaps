@@ -120,6 +120,7 @@ class Effects:
     payments: tuple[tuple[str, int, int], ...] = ()  # commande, place du paiement, position de l'argument
     initial: tuple[tuple[int, tuple[int, ...]], ...] = ()
     outputs: tuple[tuple[Key, tuple[tuple[int, int], ...]], ...] = ()
+    extra_payment_slots: tuple[int, ...] = ()
 
 
 @dataclass
@@ -221,7 +222,7 @@ class _Analysis:
 
     def _effect(self, step: Step, valuation: Valuation) -> list[Valuation]:
         if self.effects.payments and self.wanted(step):
-            for slot in PAYMENT_SLOTS:
+            for slot in (*PAYMENT_SLOTS, *self.effects.extra_payment_slots):
                 valuation = self._assign(valuation, slot, 0)
         arguments, command = step.arguments, step.command
         outcomes = [assignments for key, assignments in self.effects.outputs if key == step.key]

@@ -1,0 +1,10 @@
+header,identity,name_fr,alias_of,dx,dy,reason,source
+405,obj_T11R0802_var_1,Copieuse,obj_T11R0802_gsgirl1,0,0,La transformation et le retour de la Copieuse partagent la même interaction et un seul repère.,files/fielddata/script/scr_seq/scr_seq_0841_T11R0802.s
+405,obj_T11R0802_gsgirl1,Copieuse,,0,0,Identité de la Copieuse dans sa maison.,files/fielddata/script/scr_seq/scr_seq_0841_T11R0802.s
+67,obj_T21_gsrivel,,,-16,0,Repère ramené sur le bord visible de Ville Griotte : le rival arrive une case au-delà du bloc de ville pendant cette scène.,files/fielddata/script/scr_seq/scr_seq_0850_T21.s
+151,obj_R47_gsman3,,,32,0,Écarter le repère du passage sans déplacer les coordonnées natives.,files/fielddata/eventdata/zone_event/146_R47.json
+153,obj_D25R0102_mania_2,,,32,0,Écarter le repère du passage sans déplacer les coordonnées natives.,files/fielddata/eventdata/zone_event/148_D25R0102.json
+480,obj_T08GYM0101_gsleader13_2,,obj_T08GYM0101_picnicgirl_2,0,0,Le déguisement en Jeannine et la forme révélée partagent un seul repère.,files/fielddata/script/scr_seq/scr_seq_0809_T08GYM0101.s
+480,obj_T08GYM0101_gsleader13_3,,obj_T08GYM0101_campboy_2,0,0,Le déguisement en Jeannine et la forme révélée partagent un seul repère.,files/fielddata/script/scr_seq/scr_seq_0809_T08GYM0101.s
+480,obj_T08GYM0101_gsleader13_4,,obj_T08GYM0101_gsgirl1,0,0,Le déguisement en Jeannine et la forme révélée partagent un seul repère.,files/fielddata/script/scr_seq/scr_seq_0809_T08GYM0101.s
+480,obj_T08GYM0101_gsleader13_5,,obj_T08GYM0101_gsgirl1_2,0,0,Le déguisement en Jeannine et la forme révélée partagent un seul repère.,files/fielddata/script/scr_seq/scr_seq_0809_T08GYM0101.s

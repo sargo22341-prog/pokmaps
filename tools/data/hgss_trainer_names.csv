@@ -1,0 +1,83 @@
+constant,name_fr,source
+TRAINERCLASS_ACE_TRAINER_F,Topdresseur,include/constants/trainer_class.h
+TRAINERCLASS_ACE_TRAINER_M,Topdresseur,include/constants/trainer_class.h
+TRAINERCLASS_ARCADE_STAR,Diva Arcade,include/constants/trainer_class.h
+TRAINERCLASS_BEAUTY,Canon,include/constants/trainer_class.h
+TRAINERCLASS_BIKER,Motard,include/constants/trainer_class.h
+TRAINERCLASS_BIRD_KEEPER_GS,Ornithologue,include/constants/trainer_class.h
+TRAINERCLASS_BLACK_BELT,Karatéka,include/constants/trainer_class.h
+TRAINERCLASS_BOARDER,Surfer des Neiges,include/constants/trainer_class.h
+TRAINERCLASS_BUG_CATCHER,Scout,include/constants/trainer_class.h
+TRAINERCLASS_BURGLAR,Pillard,include/constants/trainer_class.h
+TRAINERCLASS_CAMPER,Campeur,include/constants/trainer_class.h
+TRAINERCLASS_CASTLE_VALET,Valet Castel,include/constants/trainer_class.h
+TRAINERCLASS_CHAMPION,Peter,include/constants/trainer_class.h
+TRAINERCLASS_DOUBLE_TEAM,Duo de Choc,include/constants/trainer_class.h
+TRAINERCLASS_ELDER,Ancien,include/constants/trainer_class.h
+TRAINERCLASS_ELITE_FOUR_BRUNO,Aldo,include/constants/trainer_class.h
+TRAINERCLASS_ELITE_FOUR_KAREN,Marion,include/constants/trainer_class.h
+TRAINERCLASS_ELITE_FOUR_KOGA,Koga,include/constants/trainer_class.h
+TRAINERCLASS_ELITE_FOUR_WILL,Clément,include/constants/trainer_class.h
+TRAINERCLASS_EXECUTIVE_ARCHER,Amos,include/constants/trainer_class.h
+TRAINERCLASS_EXECUTIVE_ARIANA,Ariane,include/constants/trainer_class.h
+TRAINERCLASS_EXECUTIVE_PETREL,Lambda,include/constants/trainer_class.h
+TRAINERCLASS_EXECUTIVE_PROTON,Lance,include/constants/trainer_class.h
+TRAINERCLASS_FACTORY_HEAD,Chef Usine,include/constants/trainer_class.h
+TRAINERCLASS_FIREBREATHER,Crache-Feu,include/constants/trainer_class.h
+TRAINERCLASS_FISHERMAN,Pêcheur,include/constants/trainer_class.h
+TRAINERCLASS_GENTLEMAN,Gentleman,include/constants/trainer_class.h
+TRAINERCLASS_GUITARIST,Guitariste,include/constants/trainer_class.h
+TRAINERCLASS_HALL_MATRON,Dame Scène,include/constants/trainer_class.h
+TRAINERCLASS_HIKER,Montagnard,include/constants/trainer_class.h
+TRAINERCLASS_JUGGLER,Jongleur,include/constants/trainer_class.h
+TRAINERCLASS_KIMONO_GIRL,Danseuse Kimono,include/constants/trainer_class.h
+TRAINERCLASS_LASS,Fillette,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_BLAINE,Auguste,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_BLUE,Blue,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_BROCK,Pierre,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_BUGSY,Hector,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_CHUCK,Chuck,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_CLAIR,Sandra,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_ERIKA,Erika,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_FALKNER,Albert,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_JANINE,Jeannine,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_JASMINE,Jasmine,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_LT_SURGE,Major Bob,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_MISTY,Ondine,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_MORTY,Mortimer,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_PRYCE,Frédo,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_SABRINA,Morgane,include/constants/trainer_class.h
+TRAINERCLASS_LEADER_WHITNEY,Blanche,include/constants/trainer_class.h
+TRAINERCLASS_MEDIUM,Mystimaniac,include/constants/trainer_class.h
+TRAINERCLASS_MYSTERY_MAN,Eusine,include/constants/trainer_class.h
+TRAINERCLASS_PASSERBY,Passant,include/constants/trainer_class.h
+TRAINERCLASS_PICNICKER,Pique-Nique,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_BUCK,Cornil,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_CHERYL,Sara,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_LANCE,Peter,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_MARLEY,Viviane,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_MIRA,Mira,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_RED,Red,include/constants/trainer_class.h
+TRAINERCLASS_PKMN_TRAINER_RILEY,Armand,include/constants/trainer_class.h
+TRAINERCLASS_POKEFAN,Pokéfan,include/constants/trainer_class.h
+TRAINERCLASS_POKEFAN_M,Pokéfan,include/constants/trainer_class.h
+TRAINERCLASS_POKE_MANIAC,Pokémaniac,include/constants/trainer_class.h
+TRAINERCLASS_POLICEMAN,Agent,include/constants/trainer_class.h
+TRAINERCLASS_PSYCHIC_M,Kinésiste,include/constants/trainer_class.h
+TRAINERCLASS_RIVAL,Silver,include/constants/trainer_class.h
+TRAINERCLASS_ROCKET_BOSS,Giovanni,include/constants/trainer_class.h
+TRAINERCLASS_SAGE,Sage,include/constants/trainer_class.h
+TRAINERCLASS_SAILOR,Marin,include/constants/trainer_class.h
+TRAINERCLASS_SCHOOL_KID_M,Écolier,include/constants/trainer_class.h
+TRAINERCLASS_SCIENTIST_GS,Scientifique,include/constants/trainer_class.h
+TRAINERCLASS_SKIER,Skieur,include/constants/trainer_class.h
+TRAINERCLASS_SUPER_NERD,Intello,include/constants/trainer_class.h
+TRAINERCLASS_SWIMMER_F,Nageuse,include/constants/trainer_class.h
+TRAINERCLASS_SWIMMER_M,Nageur,include/constants/trainer_class.h
+TRAINERCLASS_TEACHER,Prof,include/constants/trainer_class.h
+TRAINERCLASS_TEAM_ROCKET,Sbire Rocket,include/constants/trainer_class.h
+TRAINERCLASS_TEAM_ROCKET_F,Sbire Rocket,include/constants/trainer_class.h
+TRAINERCLASS_TOWER_TYCOON,Aigle Tour,include/constants/trainer_class.h
+TRAINERCLASS_TWINS,Jumelles,include/constants/trainer_class.h
+TRAINERCLASS_YOUNGSTER,Gamin,include/constants/trainer_class.h
+TRAINERCLASS_YOUNG_COUPLE,Jeune Couple,include/constants/trainer_class.h

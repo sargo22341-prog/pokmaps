@@ -127,6 +127,11 @@ Le placement se vérifie avec `python tools/build_data.py --hgss-placement-only`
 `python tools/map_editor.py --assets tools/build/preview/hgss-placement`.
 Les points de Johto, Kanto et des gabarits Safari restent dans `tools/data/map_spots.csv` ;
 les terrains sans marqueur ont une [explication explicite](docs/generations/rencontres-hgss.md#placement--4e).
+Les [personnages, combats et services HGSS](docs/generations/personnages-hgss.md) se génèrent avec
+`python tools/build_data.py --hgss-characters-only` dans `tools/build/preview/hgss-characters/`.
+Ouvrir `index.html` pour parcourir les personnages, leurs placements, les revanches et les offres hors ligne.
+Le catalogue relie 737 équipes, 123 combats de scénario résolus, 63 séries de revanches et 567 offres ;
+les sprites, quantités, coûts et étapes sont vérifiés depuis les sources HGSS épinglées.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

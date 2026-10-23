@@ -1,0 +1,10 @@
+sprite,name_fr,source
+SPRITE_DOCTOR,Professeur Orme,files/fielddata/script/scr_seq/scr_seq_0843_T20R0101.s
+SPRITE_OOKIDO,Professeur Chen,include/constants/sprites.h
+SPRITE_MASAKI,Léo,include/constants/sprites.h
+SPRITE_GANTETSU,Fargas,files/fielddata/script/scr_seq/scr_seq_0874_T23R0501.s
+SPRITE_GANTANK,Petite-fille de Fargas,files/fielddata/script/scr_seq/scr_seq_0874_T23R0501.s
+SPRITE_DAIGO,Pierre Rochard,include/constants/sprites.h
+SPRITE_KURUMI,Félicie,include/constants/sprites.h
+SPRITE_RED,Red,include/constants/sprites.h
+SPRITE_MINAKI,Eusine,include/constants/sprites.h

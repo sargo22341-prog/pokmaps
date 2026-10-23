@@ -1,0 +1,7 @@
+header,identity,x,z,surface,reason,source
+67,obj_T21_gsrivel,576,398,native,"Branche représentative du déclencheur z=398 : arrivée x=583 puis sept pas vers l'ouest avant le combat.",files/fielddata/script/scr_seq/scr_seq_0850_T21.s
+74,obj_T23_gsrivel,395,463,native,"Branche joueur z=462 : arrivée 404/463 puis neuf pas vers l'ouest avant le combat.",files/fielddata/script/scr_seq/scr_seq_0866_T23.s
+201,obj_D37R0104_gsrivel,21,5,native,"Scène de rencontre : arrivée 28/4 puis trois pas ouest un sud et quatre ouest.",files/fielddata/script/scr_seq/scr_seq_0096_D37R0104.s
+253,obj_D44R0102_wataru,25,44,upper,"Combat sur le pont supérieur BDHC comme le partenaire Silver : arrivée 28/34 puis sept pas sud trois ouest et trois sud.",files/fielddata/script/scr_seq/scr_seq_0111_D44R0102.s
+253,obj_D44R0102_gsleader8_2,24,44,upper,"Combat sur le pont supérieur BDHC comme le partenaire Silver : arrivée 28/33 puis sept pas sud quatre ouest et quatre sud.",files/fielddata/script/scr_seq/scr_seq_0111_D44R0102.s
+298,obj_D45R0102_sakaki,6,6,native,"Position de Giovanni dans la scène du voyage temporel ; présence conditionnée à l'événement Célébi.",files/fielddata/script/scr_seq/scr_seq_0114_D45R0102.s
