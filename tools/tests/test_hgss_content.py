@@ -7,7 +7,7 @@ import pytest
 
 from pokemaps_data.objectives_hgss import _safari_species, _wild_species, close_collection
 from pokemaps_data.pret_gen4_source import read_json
-from pokemaps_data.preview_content_hgss import CONTRACT, _validate_target, recipe
+from pokemaps_data.preview_content_hgss import CONTRACT, _validate_target, read_content, recipe
 from pokemaps_data.sources_characters_hgss import source_digest
 from pokemaps_data.validate_content_hgss import validate_content
 
@@ -15,7 +15,7 @@ CATALOG = CONTRACT.with_name("contenus-hgss-catalogue.json")
 
 
 def test_versioned_content_is_valid_and_current() -> None:
-    content = read_json(CATALOG)
+    content = read_content(CATALOG)
     proof = read_json(CONTRACT.with_name("contenus-hgss-preuve.json"))
     assert source_digest(CATALOG) == proof["catalog_sha256"]
     assert content["recipe"] == recipe()
@@ -31,7 +31,7 @@ def test_versioned_content_is_valid_and_current() -> None:
 
 @pytest.mark.parametrize("version", ["heartgold", "soulsilver"])
 def test_starter_choices_never_merge_incompatible_families(version: str) -> None:
-    objectives = [r for r in read_json(CATALOG)["objectives"] if r["version"] == version]
+    objectives = [r for r in read_content(CATALOG)["objectives"] if r["version"] == version]
     assert len(objectives) == 27
     assert len({tuple(row["starters"].values()) for row in objectives}) == 27
     for row in objectives:
@@ -44,7 +44,7 @@ def test_starter_choices_never_merge_incompatible_families(version: str) -> None
 
 
 def test_local_legend_fossils_and_external_evolutions() -> None:
-    rows = read_json(CATALOG)["objectives"]
+    rows = read_content(CATALOG)["objectives"]
     hg = set(rows[0]["national"])
     ss = set(rows[27]["national"])
     assert {138, 139, 142, 347, 348, 380, 382} <= hg
@@ -77,7 +77,7 @@ def test_objectives_ignore_banks_attached_only_to_excluded_maps() -> None:
 
 @pytest.mark.parametrize("defect", ["cycle", "unknown_place", "external", "accessory", "unexplained"])
 def test_content_rejects_broken_links_and_objectives(defect: str) -> None:
-    data = deepcopy(read_json(CATALOG))
+    data = deepcopy(read_content(CATALOG))
     if defect == "cycle":
         data["guides"][0]["requires"] = [data["guides"][1]["id"]]
     elif defect == "unknown_place":
@@ -107,7 +107,7 @@ def test_safari_objective_excludes_impossible_block_requirements() -> None:
 
 
 def test_guides_use_distinct_legends_and_reach_red() -> None:
-    guides = read_json(CATALOG)["guides"]
+    guides = read_content(CATALOG)["guides"]
     legends = {r["version"]: r for r in guides if r["id"] == "legende"}
     assert "Ho-Oh" in legends["heartgold"]["title_fr"]
     assert "Lugia" in legends["soulsilver"]["title_fr"]
@@ -119,7 +119,7 @@ def test_guides_use_distinct_legends_and_reach_red() -> None:
 
 
 def test_radio_quest_links_only_the_wing_of_the_selected_cartouche() -> None:
-    rows = [row for row in read_json(CATALOG)["guides"] if row["id"] == "radio"]
+    rows = [row for row in read_content(CATALOG)["guides"] if row["id"] == "radio"]
     for row in rows:
         items = {item["values"][0] for item in row["items"] if item["values"]}
         assert items & {482, 483} == ({483} if row["version"] == "heartgold" else {482})

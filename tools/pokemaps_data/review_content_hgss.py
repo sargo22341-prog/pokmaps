@@ -3,6 +3,8 @@
 from html import escape
 from pathlib import Path
 
+from .review_combat_hgss import combat_review
+
 
 def write_review(folder: Path, data: dict) -> None:
     pieces = [
@@ -30,6 +32,7 @@ def write_review(folder: Path, data: dict) -> None:
             f"<p><b>{escape(row['name_fr'])}</b> : {escape(row['weekday_fr'])}, "
             f"{escape(row['period_fr'])}. {escape(' ; '.join(row['conditions_fr']))}.</p>"
         )
+    pieces.extend(combat_review(data))
     pieces.append("</html>")
     (folder / "index.html").write_text("\n".join(pieces) + "\n", encoding="utf-8")
 

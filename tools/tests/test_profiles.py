@@ -79,7 +79,7 @@ def test_achievement_resources_are_reproducible(tmp_path: Path) -> None:
     build_achievement_resources(tmp_path)
     resources = Path(__file__).resolve().parents[2] / "app/src/main/res/values"
     files = list(tmp_path.glob("*.xml"))
-    assert len(files) == 14
+    assert len(files) == 16
     for path in files:
         assert path.read_bytes() == (resources / path.name).read_bytes()
 

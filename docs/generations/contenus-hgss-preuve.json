@@ -1,6 +1,9 @@
 {
-  "catalog_sha256": "73635996de218a424d89e080c1bb94c3c74f8656fd98af79805048bae3760202",
+  "catalog_sha256": "4bd7ddfdf1fea9f6d641c1f73e0e027db18846f6411e2ada72bebc144f5db05c",
   "guides": 82,
   "objectives": 54,
-  "activities": 13
+  "activities": 13,
+  "battle_sets": 950,
+  "hall_sets": 477,
+  "achievements": 136
 }

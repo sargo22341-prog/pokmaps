@@ -644,16 +644,18 @@ La dépréciation AGP déjà documentée reste visible, sans suppression ajouté
   Sortie : objectifs calculés par cartouche avec exclusions explicites.
 - [x] **7C — Catalogues particuliers.** Pokéathlon, Noigrumes, Safari, Pokéwalker et autres activités recensées.
   Sortie : données structurées et guides vérifiés ; fractionner par activité si nécessaire.
-- [ ] **7D — Zone de Combat.** Comparer Platine et HGSS, importer seulement les données prouvées communes.
+- [x] **7D — Zone de Combat.** Comparer Platine et HGSS, importer seulement les données prouvées communes.
   Sortie : installations, équipes possibles, conditions et récompenses correctes, sans simulation des tirages.
-- [ ] **7E — Succès.** Relire/traduire les archives existantes, générer les ressources et tester
+- [x] **7E — Succès.** Relire/traduire les archives existantes, générer les ressources et tester
   le set partagé ainsi que la synchronisation manuelle. Sortie : consultation complète hors ligne.
 
 Les sorties 7A–7C sont décrites dans [les contenus HGSS](docs/generations/contenus-hgss.md).
 `python tools/build_data.py --hgss-content-only` produit l'aperçu français de relecture et son catalogue
 versionné : 82 entrées de guide, 54 configurations d'objectifs de capture, calendrier et 13 activités,
 dont les 27 parcours Pokéwalker. Les liens et les exclusions restent propres aux remakes.
-L'activation Android reste en phase 8 ; les catalogues détaillés de combat et les succès restent en 7D/7E.
+L'activation Android reste en phase 8. Les volets 7D/7E ajoutent les réserves de combat comparées à Platine,
+les récompenses HGSS et les 136 succès traduits, consultables dans l’aperçu hors ligne ;
+les ressources Android et la synchronisation manuelle du set partagé sont préparées et testées.
 
 ### Phase 8 — Activation, recette et livraison
 

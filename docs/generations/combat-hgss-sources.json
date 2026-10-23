@@ -1,0 +1,25 @@
+{
+  "hgss_commit": "6988158691eb6178cff697cda0428045ddcba5fb",
+  "platinum_commit": "1dc13dcea40c04ab53f1f607de46023dc409ef20",
+  "platinum_catalog_sha256": "c74bb833faa8259939d52dcb92c5d55092ac97849d4d700568215c0c8420e6b9",
+  "native": {
+    "files/a/2/0/2": "69d17bcc62e4bb0f246bd6546d1299205413ff1e12bd9655b19f3735a21419b4",
+    "files/a/2/0/3": "db14c00f0c288755fff0d10728605d612aa64fa85ecde42eaff55de16662d9ec",
+    "files/a/2/0/4": "756b1456bc7e219e4c9d13f79d61fd2e7c1911a360bd31a88ae7500f384c67b6",
+    "src/unk_0204B538.c": "a9874fe06cb8637931aeaf63df191f5b5845687eb087c3529c3a3b9da8b03405",
+    "include/filesystem_files_def.h": "f2506f75fd52a8e40209cec4ca07d291cee18cb9036169a05db62aaa3a9df9cd",
+    "asm/overlay_80_0222BDF4.s": "1dfff840078960d8ea15ed59cc2824391f3b894cdddaf36ec85d1f4c7e1629ab",
+    "asm/overlay_80_02236B78.s": "e861b2949475e52c56a9ba5afb3dcb108cf8652a6deef5052e3a8c0a7fb3147e",
+    "asm/overlay_80_022372D8.s": "c9eb98c6424c38701bf35d4f4550f4479c97219965f13a7a54b703b796bbda77",
+    "asm/overlay_80_02237A70.s": "552bc1290b6d647d2bba56d066f3072703701f34f4f31e3f876b91dbf66a85a4",
+    "asm/overlay_80_02238034.s": "175dbd2242843dd6ec4ff4b3a9255108a239b1496a036d3ca414d8d96d693dab",
+    "files/msgdata/msg/msg_0096_D31R0201.json": "519ad2e3e189d3a2c107d4c2bb87d5aa706b700f3bb4fa5b977cb2c9d688490f",
+    "files/msgdata/msg/msg_0103_D32R0101.json": "8c426772c4c4e8a10122a1d0827d73bdd9b8f59a5e6c2aa9d224435acd45ba08",
+    "files/msgdata/msg/msg_0107_D32R0301.json": "9907fcbcee64f3e03c5c40dd79701ee094fae312a363a0d1175a6af6e64e7bb5",
+    "files/msgdata/msg/msg_0108_D32R0401.json": "55f56328813e8376991438586afd09e8788ad4f6768b96cde26d6b0911e487c0",
+    "files/msgdata/msg/msg_0109_D32R0501.json": "06f2a60e41b7cb531680ba518e9f3b9b9e8556563b39552c87b79a28c7a82b9f",
+    "files/msgdata/msg/msg_0110_D32R0601.json": "79378a68b5381c176ea133e22a73a6cb3dd31b08a3ea09a7a837bb158ef5db45",
+    "src/unk_0204A3F4.c": "f2bb43d94a19523831a0ff9f08884f24afade5902428092ff213d1d61ef5f663",
+    "files/fielddata/script/scr_seq/scr_seq_0076_D32.s": "7d980a893493057fa053be9ceb519c371228bdfbc8f4eaaed0759d0f788283b3"
+  }
+}

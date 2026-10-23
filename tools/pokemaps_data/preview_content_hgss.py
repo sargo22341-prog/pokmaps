@@ -4,8 +4,10 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from .achievement_resources import hgss_achievements
 from .activities_hgss import activity_catalog
 from .catalog_pokemon_hgss import pokemon_catalog
+from .compare_frontier_hgss import battle_catalog
 from .guides_hgss import guide_catalog, map_entries, weekly_calendar
 from .objectives_hgss import breeding_roots, objective_catalog
 from .pokeapi import PokeApi
@@ -25,6 +27,16 @@ def _write(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def read_content(path: Path) -> dict:
+    # Les objectifs et les réserves détaillées dépassent la limite des petits fichiers natifs DS.
+    if path.stat().st_size > 8 * 1024 * 1024:
+        raise ValueError(f"HGSS : catalogue de contenus trop volumineux : {path}")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"HGSS : objet de contenus attendu : {path}")
+    return data
+
+
 def recipe() -> dict[str, str]:
     names = (
         "preview_content_hgss.py",
@@ -39,6 +51,12 @@ def recipe() -> dict[str, str]:
         "evolution_hgss.py",
         "pokeapi.py",
         "pret_gen4_source.py",
+        "frontier_hgss.py",
+        "compare_frontier_hgss.py",
+        "achievement_resources.py",
+        "review_combat_hgss.py",
+        "validate_combat_hgss.py",
+        "rewards_frontier_hgss.py",
     )
     return {name: source_digest(Path(__file__).with_name(name)) for name in names} | {
         f"data/{name}": source_digest(DATA_DIR / name)
@@ -48,6 +66,11 @@ def recipe() -> dict[str, str]:
             "hgss_calendar.json",
             "hgss_maps.csv",
             "hgss_pokemon_rules.json",
+            "hgss_frontier.json",
+            "retroachievements/hgss_fr.csv",
+            "retroachievements/7212.json",
+            "retroachievements/39076.json",
+            "retroachievements/index.json",
         )
     }
 
@@ -88,6 +111,8 @@ def build_content(cache: Path, output: Path) -> None:
         names_fr={str(row["id"]): row["name_fr"] for row in pokemon["pokemon"]},
         item_names_fr=characters["names"]["items"],
         objective_rules=_objective_rules(),
+        battles=battle_catalog(root),
+        achievements=hgss_achievements(),
     )
     validate_content(content)
     from .review_content_hgss import write_review
@@ -122,6 +147,9 @@ def _snapshot(content: dict) -> None:
             guides=len(content["guides"]),
             objectives=len(content["objectives"]),
             activities=len(content["activities"]["guides"]),
+            battle_sets=len(content["battles"]["sets"]),
+            hall_sets=len(content["battles"]["frontier"]["hall"]["sets"]),
+            achievements=len(content["achievements"]["entries"]),
         ),
     )
 
@@ -156,7 +184,7 @@ def check_content(folder: Path, prerequisites: Path | None = None) -> dict:
     actual = {p.name: source_digest(p) for p in folder.iterdir() if p.is_file() and p.name != "inventory.json"}
     if inventory != actual or set(actual) != {"content.json", "index.html"}:
         raise ValueError("HGSS : inventaire des contenus modifié")
-    data = read_json(folder / "content.json")
+    data = read_content(folder / "content.json")
     if data["sources"] != read_json(CONTRACT) or data["recipe"] != recipe():
         raise ValueError("HGSS : sources ou recette des contenus périmées")
     for name, expected in data["prerequisites"].items():

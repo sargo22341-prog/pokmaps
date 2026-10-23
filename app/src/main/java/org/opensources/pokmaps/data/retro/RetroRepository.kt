@@ -64,10 +64,12 @@ class RetroRepository @Inject constructor(
 internal suspend fun readAllRetroProgress(username: String, read: suspend (Int) -> RetroUnlocks): RetroProgress {
     val earned = mutableMapOf<Int, Set<Int>>()
     val hardcore = mutableMapOf<Int, Set<Int>>()
-    for ((version, gameId) in RetroGames.ids) {
+    for ((gameId, versions) in RetroGames.ids.entries.groupBy({ it.value }, { it.key })) {
         val unlocks = read(gameId)
-        earned[version] = unlocks.earned
-        hardcore[version] = unlocks.hardcore
+        for (version in versions) {
+            earned[version] = unlocks.earned
+            hardcore[version] = unlocks.hardcore
+        }
     }
     return RetroProgress(username, earned.toMap(), hardcore.toMap(), System.currentTimeMillis())
 }

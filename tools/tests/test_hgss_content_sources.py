@@ -5,11 +5,12 @@ from pathlib import Path
 import pytest
 
 from pokemaps_data.activities_hgss import _voltorb
+from pokemaps_data.compare_frontier_hgss import battle_catalog
 from pokemaps_data.guides_hgss import guide_catalog, map_entries, weekly_calendar
 from pokemaps_data.pokewalker_hgss import walker_catalog
 from pokemaps_data.pret_gen4_source import read_json
 from pokemaps_data.preview_characters_hgss import check_characters
-from pokemaps_data.preview_content_hgss import CONTRACT, check_content
+from pokemaps_data.preview_content_hgss import CONTRACT, check_content, read_content
 from pokemaps_data.sources_characters_hgss import source_digest
 
 pytestmark = pytest.mark.pipeline
@@ -41,4 +42,9 @@ def test_snapshot_links_and_preview_match_native_prerequisites() -> None:
     content = check_content(ROOT / "build/preview/hgss-content")
     assert guide_catalog(characters, map_entries()) == content["guides"]
     assert weekly_calendar(characters) == content["weekly"]
-    assert content == read_json(CONTRACT.with_name("contenus-hgss-catalogue.json"))
+    assert content == read_content(CONTRACT.with_name("contenus-hgss-catalogue.json"))
+
+
+def test_frontier_snapshot_is_reconstructed_from_native_hgss_archives_and_engine() -> None:
+    content = read_content(CONTRACT.with_name("contenus-hgss-catalogue.json"))
+    assert battle_catalog(NATIVE) == content["battles"]

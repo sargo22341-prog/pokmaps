@@ -94,6 +94,58 @@ Le calendrier ajoute aux contacts les concours, Lokhlass du vendredi, la danse d
 les voyages réguliers de l'Aquaria, la radio, les prix du Pokéathlon et les renouvellements quotidiens.
 Les jours structurés suivent la convention Python : lundi = 0, dimanche = 6.
 
-La Zone de Combat est recensée et orientée dans les guides ; ses équipes et sa comparaison avec Platine
-relèvent de **7D**, séparée de cette livraison. Les succès officiels et leur synchronisation relèvent de **7E**.
-Le schéma Room, les assets Android et les quatorze jeux distribués restent identiques.
+## Zone de Combat — 7D
+
+Le catalogue et la page hors ligne comprennent les cinq installations, les formats, conditions,
+Photos Argent/Or et réserves possibles. La Tour, l’Usine, le Castel et l’Arcade ont des séries de sept combats ;
+la Scène, dix. Les meneurs interviennent en Simple aux combats 21/49, sauf Célosia aux combats 50/170.
+Les Photos restent distinctes de l’étoile obtenue après 100 victoires à la Tour.
+Les noms et Photos ont aussi été recoupés dans les pages [Scène de Combat](https://www.pokepedia.fr/Sc%C3%A8ne_de_Combat)
+et [Photo](https://www.pokepedia.fr/Photo) ; les règles et nombres proviennent du moteur HGSS épinglé.
+
+Le [contrat de comparaison](combat-hgss-sources.json) conserve les empreintes des archives HGSS,
+des sélecteurs et du catalogue Platine versionné `sinnoh.json`. Chaque génération relit indépendamment HGSS :
+950 configurations utiles, 315 réserves de dresseurs, 477 configurations de la Scène et dix rangs.
+Les entrées zéro des archives Pokémon sont des sentinelles et ne deviennent pas des équipes.
+La génération refuse le réemploi si une configuration, réserve, plage ou rang censé être commun diffère.
+Les traductions des configurations égales sont alors reprises du catalogue Platine.
+
+Les huit séries ordinaires de l’Usine sont communes, avec des réserves distinctes pour les locations
+et les adversaires en niveau libre. Trois entrées natives diffèrent de Platine :
+
+| Table | Entrée | HGSS | Platine |
+|---|---|---|---|
+| Niveau 50 | Cardus Or | 759–950 | 351–486 |
+| Libre, adversaires | Cardus Argent | 351–486 | 759–950 |
+| Libre, locations | Entrée 9, inutilisée par le sélecteur borné aux huit séries | 351–486 | 759–950 |
+
+Ces entrées restent lues dans HGSS. Les réserves de Cardus remplacent les entrées vides de l’archive des dresseurs ;
+Célosia relève du sélecteur propre à la Scène. Une réserve décrit des candidats, jamais une équipe garantie.
+Le moteur de la Tour inclut sa borne supérieure ; ceux de l’Usine, du Castel et de l’Arcade l’excluent.
+Les types, rangs, objets, formes, capacités et masques EV restent conservés. Aucun tirage n’est simulé.
+
+Les récompenses comprennent les tables de Points Combat de la Tour, les 20 points après Koner,
+les Photos et les 42 lots du comptoir avec leurs prix HGSS. Les Points Castel gardent leur usage propre.
+Le script du PP Plus vérifie une place de 48 dans le Sac, mais remet **un** objet : le catalogue distingue
+ce contrôle de la quantité remise. Les services Wi-Fi sont décrits comme historiques.
+
+## Succès — 7E
+
+Les 136 entrées de `tools/data/retroachievements/7212.json` sont traduites dans `hgss_fr.csv` :
+titres descriptifs, conditions, points, identifiants officiels et caractère manquable.
+L’archive publique du 12 octobre 2026 est conservée intacte, avec ses empreintes ; aucun nouvel export réseau.
+Les seuils officiels 373/371 du National sont ceux du set, distincts des objectifs « cartouche seule » de 7B.
+Les conditions de niveau, style Défini, session unique, Master Ball et événements externes restent explicites.
+Deux descriptions officielles renvoient aux commentaires du service (cadeaux et fonds de PC) :
+ce renvoi est signalé comme tel ; ces commentaires ne figurent pas dans l’archive locale.
+
+La page de relecture affiche toutes les entrées sans serveur ni réseau.
+`python tools/build_data.py --achievement-resources-only` génère les ressources Android :
+une définition par succès dans `strings_achievements_15.xml`, avec une liste référençant ces mêmes définitions
+pour la version 16. Les deux listes sont vérifiées depuis les ressources Android compilées.
+Les deux cartouches utilisent **7212** ; l’archive SoulSilver **39076**, vide, n’est jamais synchronisée.
+La synchronisation manuelle lit une fois chaque ensemble distinct, puis associe séparément aux versions 15 et 16
+les déverrouillages ordinaires et hardcore. Un échec ne sauvegarde aucune progression partielle.
+La connexion et l’observation des préférences ne déclenchent aucune lecture réseau.
+
+Le schéma Room et les quatorze jeux distribués restent identiques ; les remakes restent préparatoires.

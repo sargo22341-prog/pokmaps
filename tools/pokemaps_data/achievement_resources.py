@@ -1,9 +1,10 @@
 """Ressources Android des succès, produites depuis les archives et traductions relues."""
 
 import csv
+import hashlib
 import json
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -22,7 +23,7 @@ class _Achievement:
 
 def _translations() -> dict[int, tuple[int, list[dict[str, str]]]]:
     versions: dict[int, tuple[int, list[dict[str, str]]]] = {}
-    for filename in ("gen12_fr.csv", "gen3_fr.csv", "gen4_fr.csv"):
+    for filename in ("gen12_fr.csv", "gen3_fr.csv", "gen4_fr.csv", "hgss_fr.csv"):
         with (DATA_DIR / "retroachievements" / filename).open(encoding="utf-8", newline="") as source:
             for row in csv.DictReader(source):
                 version, game = int(row["version_id"]), int(row["game_id"])
@@ -56,6 +57,32 @@ def _achievements(game: int, translations: list[dict[str, str]]) -> list[_Achiev
             )
         )
     return result
+
+
+def hgss_achievements() -> dict:
+    folder = DATA_DIR / "retroachievements"
+    index = json.loads((folder / "index.json").read_text(encoding="utf-8"))
+    for game in (7212, 39076):
+        entry = next(row for row in index["games"] if row["game_id"] == game)
+        if hashlib.sha256((folder / f"{game}.json").read_bytes()).hexdigest() != entry["sha256"]:
+            raise ValueError(f"HGSS : archive de succès modifiée : {game}")
+    empty = json.loads((folder / "39076.json").read_text(encoding="utf-8"))
+    game, rows = _translations()[15]
+    if game != 7212 or empty["achievements"]:
+        raise ValueError("HGSS : association des archives de succès incorrecte")
+    entries = _achievements(game, rows)
+    if len(entries) != 136:
+        raise ValueError("HGSS : 136 succès officiels attendus")
+    return dict(
+        game_id=game,
+        versions=[15, 16],
+        empty_archive=39076,
+        entries=[asdict(row) for row in entries],
+        scope_fr="Archive publique du 12 octobre 2026 : ensemble commun HeartGold/SoulSilver 7212. "
+        "L’entrée SoulSilver 39076 est vide et n’est pas utilisée. La synchronisation de lecture est manuelle. "
+        "Les deux cartouches reçoivent la même progression distante ; leur suivi local reste distinct. "
+        "Les objectifs RetroAchievements conservent les nombres de l’archive, distincts des objectifs cartouche seule.",
+    )
 
 
 def _text(value: str) -> str:
@@ -122,3 +149,13 @@ def build_achievement_resources(output: Path) -> None:
         (output / f"strings_achievements_{version}.xml").write_text(
             _resource(version, entries, known), encoding="utf-8", newline="\n"
         )
+    # Les deux cartouches utilisent le même ensemble : une seule définition par succès.
+    shared = _achievements(*_translations()[15])
+    (output / "strings_achievements_16.xml").write_text(
+        '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
+        '    <array name="achievements_16">\n'
+        + "".join(f"        <item>@array/ra_{entry.identifier}</item>\n" for entry in shared)
+        + "    </array>\n</resources>\n",
+        encoding="utf-8",
+        newline="\n",
+    )

@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Généré par tools/build_data.py (succès) ; modifier les CSV sources. -->
+    <string name="ra_124887_title">Battre Albert pour obtenir le Badge Zéphyr</string>
+    <string name="ra_124887_text">Battre Albert pour obtenir le Badge Zéphyr.</string>
+    <array name="ra_124887">
+        <item>124887</item>
+        <item>@string/ra_124887_title</item>
+        <item>@string/ra_124887_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_119420_title">Battre Albert dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 13</string>
+    <string name="ra_119420_text">Battre Albert dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 13. Option : style de combat Défini.</string>
+    <array name="ra_119420">
+        <item>119420</item>
+        <item>@string/ra_119420_title</item>
+        <item>@string/ra_119420_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124888_title">Battre Hector pour obtenir le Badge Essaim</string>
+    <string name="ra_124888_text">Battre Hector pour obtenir le Badge Essaim.</string>
+    <array name="ra_124888">
+        <item>124888</item>
+        <item>@string/ra_124888_title</item>
+        <item>@string/ra_124888_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_119438_title">Battre Hector dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 17</string>
+    <string name="ra_119438_text">Battre Hector dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 17. Option : style de combat Défini.</string>
+    <array name="ra_119438">
+        <item>119438</item>
+        <item>@string/ra_119438_title</item>
+        <item>@string/ra_119438_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124889_title">Battre Blanche pour obtenir le Badge Plaine</string>
+    <string name="ra_124889_text">Battre Blanche pour obtenir le Badge Plaine.</string>
+    <array name="ra_124889">
+        <item>124889</item>
+        <item>@string/ra_124889_title</item>
+        <item>@string/ra_124889_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_120238_title">Battre Blanche dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 19</string>
+    <string name="ra_120238_text">Battre Blanche dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 19. Option : style de combat Défini.</string>
+    <array name="ra_120238">
+        <item>120238</item>
+        <item>@string/ra_120238_title</item>
+        <item>@string/ra_120238_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124890_title">Battre Mortimer pour obtenir le Badge Brume</string>
+    <string name="ra_124890_text">Battre Mortimer pour obtenir le Badge Brume.</string>
+    <array name="ra_124890">
+        <item>124890</item>
+        <item>@string/ra_124890_title</item>
+        <item>@string/ra_124890_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_120382_title">Battre Mortimer dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 25</string>
+    <string name="ra_120382_text">Battre Mortimer dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 25. Option : style de combat Défini.</string>
+    <array name="ra_120382">
+        <item>120382</item>
+        <item>@string/ra_120382_title</item>
+        <item>@string/ra_120382_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124891_title">Battre Chuck pour obtenir le Badge Choc</string>
+    <string name="ra_124891_text">Battre Chuck pour obtenir le Badge Choc.</string>
+    <array name="ra_124891">
+        <item>124891</item>
+        <item>@string/ra_124891_title</item>
+        <item>@string/ra_124891_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_120389_title">Battre Chuck dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 31</string>
+    <string name="ra_120389_text">Battre Chuck dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 31. Option : style de combat Défini.</string>
+    <array name="ra_120389">
+        <item>120389</item>
+        <item>@string/ra_120389_title</item>
+        <item>@string/ra_120389_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124892_title">Battre Jasmine pour obtenir le Badge Minéral</string>
+    <string name="ra_124892_text">Battre Jasmine pour obtenir le Badge Minéral.</string>
+    <array name="ra_124892">
+        <item>124892</item>
+        <item>@string/ra_124892_title</item>
+        <item>@string/ra_124892_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_120391_title">Battre Jasmine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 35</string>
+    <string name="ra_120391_text">Battre Jasmine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 35. Option : style de combat Défini.</string>
+    <array name="ra_120391">
+        <item>120391</item>
+        <item>@string/ra_120391_title</item>
+        <item>@string/ra_120391_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124893_title">Battre Frédo pour obtenir le Badge Glacier</string>
+    <string name="ra_124893_text">Battre Frédo pour obtenir le Badge Glacier.</string>
+    <array name="ra_124893">
+        <item>124893</item>
+        <item>@string/ra_124893_title</item>
+        <item>@string/ra_124893_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_121219_title">Battre Frédo dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 34</string>
+    <string name="ra_121219_text">Battre Frédo dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 34. Option : style de combat Défini.</string>
+    <array name="ra_121219">
+        <item>121219</item>
+        <item>@string/ra_121219_title</item>
+        <item>@string/ra_121219_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_124894_title">Battre Sandra pour obtenir le Badge Lever</string>
+    <string name="ra_124894_text">Battre Sandra pour obtenir le Badge Lever.</string>
+    <array name="ra_124894">
+        <item>124894</item>
+        <item>@string/ra_124894_title</item>
+        <item>@string/ra_124894_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_121657_title">Battre Sandra dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 41</string>
+    <string name="ra_121657_text">Battre Sandra dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 41. Option : style de combat Défini.</string>
+    <array name="ra_121657">
+        <item>121657</item>
+        <item>@string/ra_121657_title</item>
+        <item>@string/ra_121657_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_125178_title">Battre le Conseil 4 lors du premier passage et entrer au Panthéon</string>
+    <string name="ra_125178_text">Battre le Conseil 4 lors du premier passage et entrer au Panthéon.</string>
+    <array name="ra_125178">
+        <item>125178</item>
+        <item>@string/ra_125178_title</item>
+        <item>@string/ra_125178_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_122018_title">Battre le Conseil 4 et le Maître lors du premier passage en une seule session, sans Pokémon au-dessus du niveau 45</string>
+    <string name="ra_122018_text">Battre le Conseil 4 et le Maître lors du premier passage en une seule session, sans Pokémon au-dessus du niveau 45. Option : style de combat Défini.</string>
+    <array name="ra_122018">
+        <item>122018</item>
+        <item>@string/ra_122018_title</item>
+        <item>@string/ra_122018_text</item>
+        <item>25</item>
+        <item>1</item>
+        <item>hgss-johto</item>
+    </array>
+    <string name="ra_125184_title">Battre Pierre pour obtenir le Badge Roche</string>
+    <string name="ra_125184_text">Battre Pierre pour obtenir le Badge Roche.</string>
+    <array name="ra_125184">
+        <item>125184</item>
+        <item>@string/ra_125184_title</item>
+        <item>@string/ra_125184_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123270_title">Battre Pierre dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 54</string>
+    <string name="ra_123270_text">Battre Pierre dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 54. Option : style de combat Défini.</string>
+    <array name="ra_123270">
+        <item>123270</item>
+        <item>@string/ra_123270_title</item>
+        <item>@string/ra_123270_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125181_title">Battre Ondine pour obtenir le Badge Cascade</string>
+    <string name="ra_125181_text">Battre Ondine pour obtenir le Badge Cascade.</string>
+    <array name="ra_125181">
+        <item>125181</item>
+        <item>@string/ra_125181_title</item>
+        <item>@string/ra_125181_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123271_title">Battre Ondine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 54</string>
+    <string name="ra_123271_text">Battre Ondine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 54. Option : style de combat Défini.</string>
+    <array name="ra_123271">
+        <item>123271</item>
+        <item>@string/ra_123271_title</item>
+        <item>@string/ra_123271_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125179_title">Battre Major Bob pour obtenir le Badge Foudre</string>
+    <string name="ra_125179_text">Battre Major Bob pour obtenir le Badge Foudre.</string>
+    <array name="ra_125179">
+        <item>125179</item>
+        <item>@string/ra_125179_title</item>
+        <item>@string/ra_125179_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123272_title">Battre Major Bob dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 53</string>
+    <string name="ra_123272_text">Battre Major Bob dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 53. Option : style de combat Défini.</string>
+    <array name="ra_123272">
+        <item>123272</item>
+        <item>@string/ra_123272_title</item>
+        <item>@string/ra_123272_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125182_title">Battre Érika pour obtenir le Badge Prisme</string>
+    <string name="ra_125182_text">Battre Érika pour obtenir le Badge Prisme.</string>
+    <array name="ra_125182">
+        <item>125182</item>
+        <item>@string/ra_125182_title</item>
+        <item>@string/ra_125182_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123273_title">Battre Érika dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 56</string>
+    <string name="ra_123273_text">Battre Érika dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 56. Option : style de combat Défini.</string>
+    <array name="ra_123273">
+        <item>123273</item>
+        <item>@string/ra_123273_title</item>
+        <item>@string/ra_123273_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125183_title">Battre Janine pour obtenir le Badge Âme</string>
+    <string name="ra_125183_text">Battre Janine pour obtenir le Badge Âme.</string>
+    <array name="ra_125183">
+        <item>125183</item>
+        <item>@string/ra_125183_title</item>
+        <item>@string/ra_125183_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123274_title">Battre Janine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 50</string>
+    <string name="ra_123274_text">Battre Janine dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 50. Option : style de combat Défini.</string>
+    <array name="ra_123274">
+        <item>123274</item>
+        <item>@string/ra_123274_title</item>
+        <item>@string/ra_123274_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125180_title">Battre Morgane pour obtenir le Badge Marais</string>
+    <string name="ra_125180_text">Battre Morgane pour obtenir le Badge Marais.</string>
+    <array name="ra_125180">
+        <item>125180</item>
+        <item>@string/ra_125180_title</item>
+        <item>@string/ra_125180_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123275_title">Battre Morgane dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 55</string>
+    <string name="ra_123275_text">Battre Morgane dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 55. Option : style de combat Défini.</string>
+    <array name="ra_123275">
+        <item>123275</item>
+        <item>@string/ra_123275_title</item>
+        <item>@string/ra_123275_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125185_title">Battre Auguste pour obtenir le Badge Volcan</string>
+    <string name="ra_125185_text">Battre Auguste pour obtenir le Badge Volcan.</string>
+    <array name="ra_125185">
+        <item>125185</item>
+        <item>@string/ra_125185_title</item>
+        <item>@string/ra_125185_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123276_title">Battre Auguste dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 59</string>
+    <string name="ra_123276_text">Battre Auguste dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 59. Option : style de combat Défini.</string>
+    <array name="ra_123276">
+        <item>123276</item>
+        <item>@string/ra_123276_title</item>
+        <item>@string/ra_123276_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125186_title">Battre Blue pour obtenir le Badge Terre</string>
+    <string name="ra_125186_text">Battre Blue pour obtenir le Badge Terre.</string>
+    <array name="ra_125186">
+        <item>125186</item>
+        <item>@string/ra_125186_title</item>
+        <item>@string/ra_125186_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123415_title">Battre Blue dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 60</string>
+    <string name="ra_123415_text">Battre Blue dans son Arène sans capacité super efficace ni Pokémon au-dessus du niveau 60. Option : style de combat Défini.</string>
+    <array name="ra_123415">
+        <item>123415</item>
+        <item>@string/ra_123415_title</item>
+        <item>@string/ra_123415_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125204_title">Battre le Conseil 4 lors du deuxième passage et entrer au Panthéon</string>
+    <string name="ra_125204_text">Battre le Conseil 4 lors du deuxième passage et entrer au Panthéon.</string>
+    <array name="ra_125204">
+        <item>125204</item>
+        <item>@string/ra_125204_title</item>
+        <item>@string/ra_125204_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_123425_title">Battre le Conseil 4 et le Maître lors du deuxième passage en une seule session, sans Pokémon au-dessus du niveau 70</string>
+    <string name="ra_123425_text">Battre le Conseil 4 et le Maître lors du deuxième passage en une seule session, sans Pokémon au-dessus du niveau 70. Option : style de combat Défini.</string>
+    <array name="ra_123425">
+        <item>123425</item>
+        <item>@string/ra_123425_title</item>
+        <item>@string/ra_123425_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125205_title">Battre Red</string>
+    <string name="ra_125205_text">Battre Red.</string>
+    <array name="ra_125205">
+        <item>125205</item>
+        <item>@string/ra_125205_title</item>
+        <item>@string/ra_125205_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-kanto</item>
+    </array>
+    <string name="ra_125692_title">Obtenir la Photo Argent de la Tour de Combat</string>
+    <string name="ra_125692_text">Obtenir la Photo Argent de la Tour de Combat.</string>
+    <array name="ra_125692">
+        <item>125692</item>
+        <item>@string/ra_125692_title</item>
+        <item>@string/ra_125692_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125693_title">Obtenir la Photo Or de la Tour de Combat</string>
+    <string name="ra_125693_text">Obtenir la Photo Or de la Tour de Combat.</string>
+    <array name="ra_125693">
+        <item>125693</item>
+        <item>@string/ra_125693_title</item>
+        <item>@string/ra_125693_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125694_title">Obtenir la Photo Argent de la Usine de Combat</string>
+    <string name="ra_125694_text">Obtenir la Photo Argent de la Usine de Combat.</string>
+    <array name="ra_125694">
+        <item>125694</item>
+        <item>@string/ra_125694_title</item>
+        <item>@string/ra_125694_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125695_title">Obtenir la Photo Or de la Usine de Combat</string>
+    <string name="ra_125695_text">Obtenir la Photo Or de la Usine de Combat.</string>
+    <array name="ra_125695">
+        <item>125695</item>
+        <item>@string/ra_125695_title</item>
+        <item>@string/ra_125695_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125696_title">Obtenir la Photo Argent de la Scène de Combat</string>
+    <string name="ra_125696_text">Obtenir la Photo Argent de la Scène de Combat.</string>
+    <array name="ra_125696">
+        <item>125696</item>
+        <item>@string/ra_125696_title</item>
+        <item>@string/ra_125696_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125697_title">Obtenir la Photo Or de la Scène de Combat</string>
+    <string name="ra_125697_text">Obtenir la Photo Or de la Scène de Combat.</string>
+    <array name="ra_125697">
+        <item>125697</item>
+        <item>@string/ra_125697_title</item>
+        <item>@string/ra_125697_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125698_title">Obtenir la Photo Argent du Castel de Combat</string>
+    <string name="ra_125698_text">Obtenir la Photo Argent du Castel de Combat.</string>
+    <array name="ra_125698">
+        <item>125698</item>
+        <item>@string/ra_125698_title</item>
+        <item>@string/ra_125698_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125699_title">Obtenir la Photo Or du Castel de Combat</string>
+    <string name="ra_125699_text">Obtenir la Photo Or du Castel de Combat.</string>
+    <array name="ra_125699">
+        <item>125699</item>
+        <item>@string/ra_125699_title</item>
+        <item>@string/ra_125699_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125700_title">Obtenir la Photo Argent du Arcade de Combat</string>
+    <string name="ra_125700_text">Obtenir la Photo Argent du Arcade de Combat.</string>
+    <array name="ra_125700">
+        <item>125700</item>
+        <item>@string/ra_125700_title</item>
+        <item>@string/ra_125700_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125701_title">Obtenir la Photo Or du Arcade de Combat</string>
+    <string name="ra_125701_text">Obtenir la Photo Or du Arcade de Combat.</string>
+    <array name="ra_125701">
+        <item>125701</item>
+        <item>@string/ra_125701_title</item>
+        <item>@string/ra_125701_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125702_title">Obtenir au moins 100 victoires consécutives à la Tour de Combat et une étoile sur la Carte Dresseur</string>
+    <string name="ra_125702_text">Obtenir au moins 100 victoires consécutives à la Tour de Combat et une étoile sur la Carte Dresseur.</string>
+    <array name="ra_125702">
+        <item>125702</item>
+        <item>@string/ra_125702_title</item>
+        <item>@string/ra_125702_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125704_title">Gagner un lot au jeu de grattage en découvrant trois Pokémon identiques</string>
+    <string name="ra_125704_text">Gagner un lot au jeu de grattage en découvrant trois Pokémon identiques.</string>
+    <array name="ra_125704">
+        <item>125704</item>
+        <item>@string/ra_125704_title</item>
+        <item>@string/ra_125704_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-frontier</item>
+    </array>
+    <string name="ra_125518_title">Acheter les 27 Cartes Mémo au Dôme Pokéathlon</string>
+    <string name="ra_125518_text">Acheter les 27 Cartes Mémo au Dôme Pokéathlon.</string>
+    <array name="ra_125518">
+        <item>125518</item>
+        <item>@string/ra_125518_title</item>
+        <item>@string/ra_125518_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125519_title">Obtenir les dix couronnes de solidarité au Dôme Pokéathlon en atteignant un score final d’au moins 450 dans chaque parcours</string>
+    <string name="ra_125519_text">Obtenir les dix couronnes de solidarité au Dôme Pokéathlon en atteignant un score final d’au moins 450 dans chaque parcours.</string>
+    <array name="ra_125519">
+        <item>125519</item>
+        <item>@string/ra_125519_title</item>
+        <item>@string/ra_125519_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125520_title">Obtenir les dix couronnes de confiance au Dôme Pokéathlon en ayant au moins 200 Pokémon médaillés</string>
+    <string name="ra_125520_text">Obtenir les dix couronnes de confiance au Dôme Pokéathlon en ayant au moins 200 Pokémon médaillés.</string>
+    <array name="ra_125520">
+        <item>125520</item>
+        <item>@string/ra_125520_title</item>
+        <item>@string/ra_125520_text</item>
+        <item>100</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125521_title">Obtenir une étoile sur la Carte Dresseur en battant tous les records normaux des épreuves du Pokéathlon</string>
+    <string name="ra_125521_text">Obtenir une étoile sur la Carte Dresseur en battant tous les records normaux des épreuves du Pokéathlon.</string>
+    <array name="ra_125521">
+        <item>125521</item>
+        <item>@string/ra_125521_title</item>
+        <item>@string/ra_125521_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125522_title">Obtenir les dix couronnes de potentiel au Dôme Pokéathlon en battant tous les records de maîtrise des épreuves</string>
+    <string name="ra_125522_text">Obtenir les dix couronnes de potentiel au Dôme Pokéathlon en battant tous les records de maîtrise des épreuves.</string>
+    <array name="ra_125522">
+        <item>125522</item>
+        <item>@string/ra_125522_title</item>
+        <item>@string/ra_125522_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125523_title">Obtenir les dix couronnes d’amitié au Dôme Pokéathlon avec un total de 4 500 points Pokéathlon</string>
+    <string name="ra_125523_text">Obtenir les dix couronnes d’amitié au Dôme Pokéathlon avec un total de 4 500 points Pokéathlon.</string>
+    <array name="ra_125523">
+        <item>125523</item>
+        <item>@string/ra_125523_title</item>
+        <item>@string/ra_125523_text</item>
+        <item>50</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125705_title">Obtenir les cinq trophées spéciaux au Dôme Pokéathlon</string>
+    <string name="ra_125705_text">Obtenir les cinq trophées spéciaux au Dôme Pokéathlon.</string>
+    <array name="ra_125705">
+        <item>125705</item>
+        <item>@string/ra_125705_title</item>
+        <item>@string/ra_125705_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125524_title">Obtenir une Médaille Saut au Dôme Pokéathlon avec Taupiqueur ou Triopikeur</string>
+    <string name="ra_125524_text">Obtenir une Médaille Saut au Dôme Pokéathlon avec Taupiqueur ou Triopikeur.</string>
+    <array name="ra_125524">
+        <item>125524</item>
+        <item>@string/ra_125524_title</item>
+        <item>@string/ra_125524_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-pokeathlon</item>
+    </array>
+    <string name="ra_125187_title">Battre Albert au Dojo de Safrania</string>
+    <string name="ra_125187_text">Battre Albert au Dojo de Safrania.</string>
+    <array name="ra_125187">
+        <item>125187</item>
+        <item>@string/ra_125187_title</item>
+        <item>@string/ra_125187_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125188_title">Battre Hector au Dojo de Safrania</string>
+    <string name="ra_125188_text">Battre Hector au Dojo de Safrania.</string>
+    <array name="ra_125188">
+        <item>125188</item>
+        <item>@string/ra_125188_title</item>
+        <item>@string/ra_125188_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125189_title">Battre Blanche au Dojo de Safrania</string>
+    <string name="ra_125189_text">Battre Blanche au Dojo de Safrania.</string>
+    <array name="ra_125189">
+        <item>125189</item>
+        <item>@string/ra_125189_title</item>
+        <item>@string/ra_125189_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125190_title">Battre Mortimer au Dojo de Safrania</string>
+    <string name="ra_125190_text">Battre Mortimer au Dojo de Safrania.</string>
+    <array name="ra_125190">
+        <item>125190</item>
+        <item>@string/ra_125190_title</item>
+        <item>@string/ra_125190_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125191_title">Battre Chuck au Dojo de Safrania</string>
+    <string name="ra_125191_text">Battre Chuck au Dojo de Safrania.</string>
+    <array name="ra_125191">
+        <item>125191</item>
+        <item>@string/ra_125191_title</item>
+        <item>@string/ra_125191_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125192_title">Battre Jasmine au Dojo de Safrania</string>
+    <string name="ra_125192_text">Battre Jasmine au Dojo de Safrania.</string>
+    <array name="ra_125192">
+        <item>125192</item>
+        <item>@string/ra_125192_title</item>
+        <item>@string/ra_125192_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125193_title">Battre Frédo au Dojo de Safrania</string>
+    <string name="ra_125193_text">Battre Frédo au Dojo de Safrania.</string>
+    <array name="ra_125193">
+        <item>125193</item>
+        <item>@string/ra_125193_title</item>
+        <item>@string/ra_125193_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125194_title">Battre Sandra au Dojo de Safrania</string>
+    <string name="ra_125194_text">Battre Sandra au Dojo de Safrania.</string>
+    <array name="ra_125194">
+        <item>125194</item>
+        <item>@string/ra_125194_title</item>
+        <item>@string/ra_125194_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125195_title">Battre Pierre au Dojo de Safrania</string>
+    <string name="ra_125195_text">Battre Pierre au Dojo de Safrania.</string>
+    <array name="ra_125195">
+        <item>125195</item>
+        <item>@string/ra_125195_title</item>
+        <item>@string/ra_125195_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125196_title">Battre Ondine au Dojo de Safrania</string>
+    <string name="ra_125196_text">Battre Ondine au Dojo de Safrania.</string>
+    <array name="ra_125196">
+        <item>125196</item>
+        <item>@string/ra_125196_title</item>
+        <item>@string/ra_125196_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125197_title">Battre Major Bob au Dojo de Safrania</string>
+    <string name="ra_125197_text">Battre Major Bob au Dojo de Safrania.</string>
+    <array name="ra_125197">
+        <item>125197</item>
+        <item>@string/ra_125197_title</item>
+        <item>@string/ra_125197_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125198_title">Battre Érika au Dojo de Safrania</string>
+    <string name="ra_125198_text">Battre Érika au Dojo de Safrania.</string>
+    <array name="ra_125198">
+        <item>125198</item>
+        <item>@string/ra_125198_title</item>
+        <item>@string/ra_125198_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125199_title">Battre Janine au Dojo de Safrania</string>
+    <string name="ra_125199_text">Battre Janine au Dojo de Safrania.</string>
+    <array name="ra_125199">
+        <item>125199</item>
+        <item>@string/ra_125199_title</item>
+        <item>@string/ra_125199_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125200_title">Battre Morgane au Dojo de Safrania</string>
+    <string name="ra_125200_text">Battre Morgane au Dojo de Safrania.</string>
+    <array name="ra_125200">
+        <item>125200</item>
+        <item>@string/ra_125200_title</item>
+        <item>@string/ra_125200_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125201_title">Battre Auguste au Dojo de Safrania</string>
+    <string name="ra_125201_text">Battre Auguste au Dojo de Safrania.</string>
+    <array name="ra_125201">
+        <item>125201</item>
+        <item>@string/ra_125201_title</item>
+        <item>@string/ra_125201_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125202_title">Battre Blue au Dojo de Safrania</string>
+    <string name="ra_125202_text">Battre Blue au Dojo de Safrania.</string>
+    <array name="ra_125202">
+        <item>125202</item>
+        <item>@string/ra_125202_title</item>
+        <item>@string/ra_125202_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_125203_title">Battre les seize Champions au Dojo en une seule session sans quitter le bâtiment</string>
+    <string name="ra_125203_text">Battre les seize Champions au Dojo en une seule session sans quitter le bâtiment.</string>
+    <array name="ra_125203">
+        <item>125203</item>
+        <item>@string/ra_125203_title</item>
+        <item>@string/ra_125203_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-rematches</item>
+    </array>
+    <string name="ra_123895_title">Capturer tous les Pokémon disponibles du Pokédex de Johto, hors événements et sans échanges externes</string>
+    <string name="ra_123895_text">Capturer tous les Pokémon disponibles du Pokédex de Johto, hors événements et sans échanges externes.</string>
+    <array name="ra_123895">
+        <item>123895</item>
+        <item>@string/ra_123895_title</item>
+        <item>@string/ra_123895_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_123898_title">Capturer les 373 Pokémon disponibles dans HeartGold ou les 371 dans SoulSilver au Pokédex National, hors événements et sans échanges externes</string>
+    <string name="ra_123898_text">Capturer les 373 Pokémon disponibles dans HeartGold ou les 371 dans SoulSilver au Pokédex National, hors événements et sans échanges externes.</string>
+    <array name="ra_123898">
+        <item>123898</item>
+        <item>@string/ra_123898_title</item>
+        <item>@string/ra_123898_text</item>
+        <item>50</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125540_title">Capturer Lugia ou Ho-Oh au niveau 45 sans Master Ball</string>
+    <string name="ra_125540_text">Capturer Lugia ou Ho-Oh au niveau 45 sans Master Ball.</string>
+    <array name="ra_125540">
+        <item>125540</item>
+        <item>@string/ra_125540_title</item>
+        <item>@string/ra_125540_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125541_title">Capturer Lugia ou Ho-Oh au niveau 70 sans Master Ball</string>
+    <string name="ra_125541_text">Capturer Lugia ou Ho-Oh au niveau 70 sans Master Ball.</string>
+    <array name="ra_125541">
+        <item>125541</item>
+        <item>@string/ra_125541_title</item>
+        <item>@string/ra_125541_text</item>
+        <item>10</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125440_title">Capturer Raikou, Entei et Suicune</string>
+    <string name="ra_125440_text">Capturer Raikou, Entei et Suicune.</string>
+    <array name="ra_125440">
+        <item>125440</item>
+        <item>@string/ra_125440_title</item>
+        <item>@string/ra_125440_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125452_title">Capturer Mewtwo sans Master Ball</string>
+    <item name="ra_125452_text" type="string">@string/ra_108176_text</item>
+    <array name="ra_125452">
+        <item>125452</item>
+        <item>@string/ra_125452_title</item>
+        <item>@string/ra_125452_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125539_title">Capturer Artikodin, Électhor et Sulfura</string>
+    <item name="ra_125539_text" type="string">@string/ra_4420_text</item>
+    <array name="ra_125539">
+        <item>125539</item>
+        <item>@string/ra_125539_title</item>
+        <item>@string/ra_125539_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125538_title">Capturer Latias ou Latios sans Master Ball</string>
+    <string name="ra_125538_text">Capturer Latias ou Latios sans Master Ball.</string>
+    <array name="ra_125538">
+        <item>125538</item>
+        <item>@string/ra_125538_title</item>
+        <item>@string/ra_125538_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125537_title">Capturer Kyogre ou Groudon sans Master Ball</string>
+    <string name="ra_125537_text">Capturer Kyogre ou Groudon sans Master Ball.</string>
+    <array name="ra_125537">
+        <item>125537</item>
+        <item>@string/ra_125537_title</item>
+        <item>@string/ra_125537_text</item>
+        <item>5</item>
+        <item>1</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125679_title">Obtenir tous les Encens</string>
+    <string name="ra_125679_text">Obtenir tous les Encens.</string>
+    <array name="ra_125679">
+        <item>125679</item>
+        <item>@string/ra_125679_title</item>
+        <item>@string/ra_125679_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125690_title">Obtenir toutes les Plaques</string>
+    <string name="ra_125690_text">Obtenir toutes les Plaques.</string>
+    <array name="ra_125690">
+        <item>125690</item>
+        <item>@string/ra_125690_title</item>
+        <item>@string/ra_125690_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_121890_title">Obtenir toutes les Flûtes de couleur</string>
+    <string name="ra_121890_text">Obtenir toutes les Flûtes de couleur.</string>
+    <array name="ra_121890">
+        <item>121890</item>
+        <item>@string/ra_121890_title</item>
+        <item>@string/ra_121890_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_125276_title">Obtenir toutes les CT présentes sur le terrain</string>
+    <string name="ra_125276_text">Obtenir toutes les CT présentes sur le terrain.</string>
+    <array name="ra_125276">
+        <item>125276</item>
+        <item>@string/ra_125276_title</item>
+        <item>@string/ra_125276_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_122604_title">Ramasser tous les objets cachés de Johto</string>
+    <string name="ra_122604_text">Ramasser tous les objets cachés de Johto.</string>
+    <array name="ra_122604">
+        <item>122604</item>
+        <item>@string/ra_122604_title</item>
+        <item>@string/ra_122604_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_122619_title">Ramasser tous les objets cachés de Kanto</string>
+    <string name="ra_122619_text">Ramasser tous les objets cachés de Kanto.</string>
+    <array name="ra_122619">
+        <item>122619</item>
+        <item>@string/ra_122619_title</item>
+        <item>@string/ra_122619_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_122634_title">Ramasser tous les objets visibles de Johto</string>
+    <string name="ra_122634_text">Ramasser tous les objets visibles de Johto.</string>
+    <array name="ra_122634">
+        <item>122634</item>
+        <item>@string/ra_122634_title</item>
+        <item>@string/ra_122634_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_122635_title">Ramasser tous les objets visibles de Kanto</string>
+    <string name="ra_122635_text">Ramasser tous les objets visibles de Kanto.</string>
+    <array name="ra_122635">
+        <item>122635</item>
+        <item>@string/ra_122635_title</item>
+        <item>@string/ra_122635_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_123232_title">Combattre tous les Dresseurs de Johto qu’il n’est pas possible de manquer définitivement</string>
+    <string name="ra_123232_text">Combattre tous les Dresseurs de Johto qu’il n’est pas possible de manquer définitivement.</string>
+    <array name="ra_123232">
+        <item>123232</item>
+        <item>@string/ra_123232_title</item>
+        <item>@string/ra_123232_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_123235_title">Combattre tous les Dresseurs de Kanto qu’il n’est pas possible de manquer définitivement</string>
+    <string name="ra_123235_text">Combattre tous les Dresseurs de Kanto qu’il n’est pas possible de manquer définitivement.</string>
+    <array name="ra_123235">
+        <item>123235</item>
+        <item>@string/ra_123235_title</item>
+        <item>@string/ra_123235_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_123666_title">Battre l’équipe finale de chaque Dresseur proposant des revanches</string>
+    <string name="ra_123666_text">Battre l’équipe finale de chaque Dresseur proposant des revanches.</string>
+    <array name="ra_123666">
+        <item>123666</item>
+        <item>@string/ra_123666_title</item>
+        <item>@string/ra_123666_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-collection</item>
+    </array>
+    <string name="ra_121880_title">Apprendre toutes les expressions à la mode</string>
+    <string name="ra_121880_text">Apprendre toutes les expressions à la mode.</string>
+    <array name="ra_121880">
+        <item>121880</item>
+        <item>@string/ra_121880_title</item>
+        <item>@string/ra_121880_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124581_title">Obtenir au moins un exemplaire de chaque accessoire et de chaque fond disponibles</string>
+    <string name="ra_124581_text">Obtenir au moins un exemplaire de chaque accessoire et de chaque fond disponibles.</string>
+    <array name="ra_124581">
+        <item>124581</item>
+        <item>@string/ra_124581_title</item>
+        <item>@string/ra_124581_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125708_title">Fixer huit Sceaux sur une seule Capsule Ball</string>
+    <string name="ra_125708_text">Fixer huit Sceaux sur une seule Capsule Ball.</string>
+    <array name="ra_125708">
+        <item>125708</item>
+        <item>@string/ra_125708_title</item>
+        <item>@string/ra_125708_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125709_title">Posséder simultanément les 77 Sceaux disponibles dans la Boîte Sceaux</string>
+    <string name="ra_125709_text">Posséder simultanément les 77 Sceaux disponibles dans la Boîte Sceaux.</string>
+    <array name="ra_125709">
+        <item>125709</item>
+        <item>@string/ra_125709_title</item>
+        <item>@string/ra_125709_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125706_title">Posséder simultanément les 43 Baies ordinaires disponibles dans la poche Baies</string>
+    <string name="ra_125706_text">Posséder simultanément les 43 Baies ordinaires disponibles dans la poche Baies.</string>
+    <array name="ra_125706">
+        <item>125706</item>
+        <item>@string/ra_125706_title</item>
+        <item>@string/ra_125706_text</item>
+        <item>25</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124162_title">Récolter tous les arbres à Noigrumes en une seule journée</string>
+    <string name="ra_124162_text">Récolter tous les arbres à Noigrumes en une seule journée.</string>
+    <array name="ra_124162">
+        <item>124162</item>
+        <item>@string/ra_124162_title</item>
+        <item>@string/ra_124162_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_119492_title">Remplir l’album photo du PC avec 36 photos de lieux différents</string>
+    <string name="ra_119492_text">Remplir l’album photo du PC avec 36 photos de lieux différents.</string>
+    <array name="ra_119492">
+        <item>119492</item>
+        <item>@string/ra_119492_title</item>
+        <item>@string/ra_119492_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124160_title">Recevoir un colis de sa mère</string>
+    <string name="ra_124160_text">Recevoir un colis de sa mère.</string>
+    <array name="ra_124160">
+        <item>124160</item>
+        <item>@string/ra_124160_title</item>
+        <item>@string/ra_124160_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124353_title">Acheter un médicament à l’herboristerie du Doublon-Tunnel</string>
+    <string name="ra_124353_text">Acheter un médicament à l’herboristerie du Doublon-Tunnel.</string>
+    <array name="ra_124353">
+        <item>124353</item>
+        <item>@string/ra_124353_title</item>
+        <item>@string/ra_124353_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124352_title">Acheter tous les objets du marchand de bonnes affaires le lundi matin</string>
+    <string name="ra_124352_text">Acheter tous les objets du marchand de bonnes affaires le lundi matin.</string>
+    <array name="ra_124352">
+        <item>124352</item>
+        <item>@string/ra_124352_title</item>
+        <item>@string/ra_124352_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125277_title">Faire couper les poils d’un Pokémon par l’un des frères coiffeurs</string>
+    <string name="ra_125277_text">Faire couper les poils d’un Pokémon par l’un des frères coiffeurs.</string>
+    <array name="ra_125277">
+        <item>125277</item>
+        <item>@string/ra_125277_title</item>
+        <item>@string/ra_125277_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124351_title">Montrer un grand Magicarpe au Maître Pêcheur et recevoir sa récompense</string>
+    <string name="ra_124351_text">Montrer un grand Magicarpe au Maître Pêcheur et recevoir sa récompense.</string>
+    <array name="ra_124351">
+        <item>124351</item>
+        <item>@string/ra_124351_title</item>
+        <item>@string/ra_124351_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125278_title">Faire masser un Pokémon par Nina</string>
+    <string name="ra_125278_text">Faire masser un Pokémon par Nina.</string>
+    <array name="ra_125278">
+        <item>125278</item>
+        <item>@string/ra_125278_title</item>
+        <item>@string/ra_125278_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124570_title">Remporter le Concours de capture d’insectes et recevoir sa récompense</string>
+    <string name="ra_124570_text">Remporter le Concours de capture d’insectes et recevoir sa récompense.</string>
+    <array name="ra_124570">
+        <item>124570</item>
+        <item>@string/ra_124570_title</item>
+        <item>@string/ra_124570_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124571_title">Capturer un Pokémon valant au moins 350 points au Concours de capture d’insectes</string>
+    <string name="ra_124571_text">Capturer un Pokémon valant au moins 350 points au Concours de capture d’insectes.</string>
+    <array name="ra_124571">
+        <item>124571</item>
+        <item>@string/ra_124571_title</item>
+        <item>@string/ra_124571_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_121775_title">Recevoir à l’Antre du Dragon un Minidraco connaissant Vit</string>
+    <string name="ra_121775_text">Recevoir à l’Antre du Dragon un Minidraco connaissant Vit. Extrême en répondant correctement à toutes les questions.</string>
+    <array name="ra_121775">
+        <item>121775</item>
+        <item>@string/ra_121775_title</item>
+        <item>@string/ra_121775_text</item>
+        <item>3</item>
+        <item>1</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_121889_title">Recevoir tous les Pokémon offerts, sans compter Tentacool</string>
+    <string name="ra_121889_text">Recevoir tous les Pokémon offerts, sans compter Tentacool. L’archive officielle renvoie aussi aux commentaires du succès.</string>
+    <array name="ra_121889">
+        <item>121889</item>
+        <item>@string/ra_121889_title</item>
+        <item>@string/ra_121889_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125746_title">Recevoir un Tentacool en cadeau</string>
+    <string name="ra_125746_text">Recevoir un Tentacool en cadeau.</string>
+    <array name="ra_125746">
+        <item>125746</item>
+        <item>@string/ra_125746_title</item>
+        <item>@string/ra_125746_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125794_title">Effectuer les dix échanges ordinaires avec les PNJ de Johto et Kanto</string>
+    <string name="ra_125794_text">Effectuer les dix échanges ordinaires avec les PNJ de Johto et Kanto.</string>
+    <array name="ra_125794">
+        <item>125794</item>
+        <item>@string/ra_125794_title</item>
+        <item>@string/ra_125794_text</item>
+        <item>10</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_122572_title">Apprendre quatre CS différentes à un Queulorior</string>
+    <string name="ra_122572_text">Apprendre quatre CS différentes à un Queulorior.</string>
+    <array name="ra_122572">
+        <item>122572</item>
+        <item>@string/ra_122572_title</item>
+        <item>@string/ra_122572_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_123914_title">Échanger un Tesson auprès d’un collectionneur et recevoir trois Baies</string>
+    <string name="ra_123914_text">Échanger un Tesson auprès d’un collectionneur et recevoir trois Baies.</string>
+    <array name="ra_123914">
+        <item>123914</item>
+        <item>@string/ra_123914_title</item>
+        <item>@string/ra_123914_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124242_title">Soigner l’Écrémeuh malade</string>
+    <string name="ra_124242_text">Soigner l’Écrémeuh malade.</string>
+    <array name="ra_124242">
+        <item>124242</item>
+        <item>@string/ra_124242_title</item>
+        <item>@string/ra_124242_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124354_title">Réunir cinq Feuilles d’Or et les faire transformer en Couronne Feuille</string>
+    <string name="ra_124354_text">Réunir cinq Feuilles d’Or et les faire transformer en Couronne Feuille.</string>
+    <array name="ra_124354">
+        <item>124354</item>
+        <item>@string/ra_124354_title</item>
+        <item>@string/ra_124354_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125006_title">Recevoir le Lecteur GB du compositeur de GAME FREAK</string>
+    <string name="ra_125006_text">Recevoir le Lecteur GB du compositeur de GAME FREAK.</string>
+    <array name="ra_125006">
+        <item>125006</item>
+        <item>@string/ra_125006_title</item>
+        <item>@string/ra_125006_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125282_title">Montrer un Leveinard à la dame de la Route 14 et recevoir un Poing Chance</string>
+    <string name="ra_125282_text">Montrer un Leveinard à la dame de la Route 14 et recevoir un Poing Chance.</string>
+    <array name="ra_125282">
+        <item>125282</item>
+        <item>@string/ra_125282_title</item>
+        <item>@string/ra_125282_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125281_title">Obtenir un Œuf Chance sur un Leveinard sauvage</string>
+    <string name="ra_125281_text">Obtenir un Œuf Chance sur un Leveinard sauvage.</string>
+    <array name="ra_125281">
+        <item>125281</item>
+        <item>@string/ra_125281_title</item>
+        <item>@string/ra_125281_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125691_title">Débloquer tous les fonds du système de stockage des Pokémon</string>
+    <string name="ra_125691_text">Débloquer tous les fonds du système de stockage des Pokémon. L’archive officielle renvoie aussi aux commentaires du succès.</string>
+    <array name="ra_125691">
+        <item>125691</item>
+        <item>@string/ra_125691_title</item>
+        <item>@string/ra_125691_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125707_title">Assister aux poussières de diamant au Mont Argenté</string>
+    <string name="ra_125707_text">Assister aux poussières de diamant au Mont Argenté.</string>
+    <array name="ra_125707">
+        <item>125707</item>
+        <item>@string/ra_125707_title</item>
+        <item>@string/ra_125707_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125789_title">Utiliser la radio pour communiquer avec les Zarbi aux Ruines d’Alpha et augmenter les chances de trouver de nouvelles formes</string>
+    <string name="ra_125789_text">Utiliser la radio pour communiquer avec les Zarbi aux Ruines d’Alpha et augmenter les chances de trouver de nouvelles formes.</string>
+    <array name="ra_125789">
+        <item>125789</item>
+        <item>@string/ra_125789_title</item>
+        <item>@string/ra_125789_text</item>
+        <item>1</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_124350_title">Résoudre les huit énigmes des Ruines d’Alpha</string>
+    <string name="ra_124350_text">Résoudre les huit énigmes des Ruines d’Alpha.</string>
+    <array name="ra_124350">
+        <item>124350</item>
+        <item>@string/ra_124350_title</item>
+        <item>@string/ra_124350_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125790_title">Compléter toutes les pages du Carnet Zarbi et résoudre le mystère des Zarbi</string>
+    <string name="ra_125790_text">Compléter toutes les pages du Carnet Zarbi et résoudre le mystère des Zarbi.</string>
+    <array name="ra_125790">
+        <item>125790</item>
+        <item>@string/ra_125790_title</item>
+        <item>@string/ra_125790_text</item>
+        <item>4</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125791_title">Recevoir tous les objets de la fratrie des jours de la semaine</string>
+    <string name="ra_125791_text">Recevoir tous les objets de la fratrie des jours de la semaine.</string>
+    <array name="ra_125791">
+        <item>125791</item>
+        <item>@string/ra_125791_title</item>
+        <item>@string/ra_125791_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125792_title">Recevoir tous les objets du grand-père de Léo</string>
+    <string name="ra_125792_text">Recevoir tous les objets du grand-père de Léo.</string>
+    <array name="ra_125792">
+        <item>125792</item>
+        <item>@string/ra_125792_title</item>
+        <item>@string/ra_125792_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125793_title">Gagner un lot à la Loterie Pokémon</string>
+    <string name="ra_125793_text">Gagner un lot à la Loterie Pokémon.</string>
+    <array name="ra_125793">
+        <item>125793</item>
+        <item>@string/ra_125793_title</item>
+        <item>@string/ra_125793_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125795_title">Assister à la danse des Mélofée au Mont Sélénite</string>
+    <string name="ra_125795_text">Assister à la danse des Mélofée au Mont Sélénite.</string>
+    <array name="ra_125795">
+        <item>125795</item>
+        <item>@string/ra_125795_title</item>
+        <item>@string/ra_125795_text</item>
+        <item>2</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125796_title">Battre Sandra et Peter en Combat Duo</string>
+    <string name="ra_125796_text">Battre Sandra et Peter en Combat Duo.</string>
+    <array name="ra_125796">
+        <item>125796</item>
+        <item>@string/ra_125796_title</item>
+        <item>@string/ra_125796_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_125797_title">Battre le rival au Plateau Indigo</string>
+    <string name="ra_125797_text">Battre le rival au Plateau Indigo.</string>
+    <array name="ra_125797">
+        <item>125797</item>
+        <item>@string/ra_125797_title</item>
+        <item>@string/ra_125797_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-activities</item>
+    </array>
+    <string name="ra_123473_title">Assister à la naissance d’un Pokémon légendaire aux Ruines Sinjoh et retourner aux Ruines d’Alpha</string>
+    <string name="ra_123473_text">Assister à la naissance d’un Pokémon légendaire aux Ruines Sinjoh et retourner aux Ruines d’Alpha. Accès conditionné par un Arceus externe.</string>
+    <array name="ra_123473">
+        <item>123473</item>
+        <item>@string/ra_123473_title</item>
+        <item>@string/ra_123473_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-external</item>
+    </array>
+    <string name="ra_123514_title">Trouver Pichu Troizépi et recevoir les explications du Professeur Orme</string>
+    <string name="ra_123514_text">Trouver Pichu Troizépi et recevoir les explications du Professeur Orme. Événement externe requis.</string>
+    <array name="ra_123514">
+        <item>123514</item>
+        <item>@string/ra_123514_title</item>
+        <item>@string/ra_123514_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-external</item>
+    </array>
+    <string name="ra_123533_title">Battre Giovanni aux Chutes Tohjo pour empêcher le retour de la Team Rocket</string>
+    <string name="ra_123533_text">Battre Giovanni aux Chutes Tohjo pour empêcher le retour de la Team Rocket. Événement Celebi externe requis.</string>
+    <array name="ra_123533">
+        <item>123533</item>
+        <item>@string/ra_123533_title</item>
+        <item>@string/ra_123533_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-external</item>
+    </array>
+    <string name="ra_123534_title">Apporter le Mystécristal au Musée d’Argenta et capturer le Pokémon Éon apparu</string>
+    <string name="ra_123534_text">Apporter le Mystécristal au Musée d’Argenta et capturer le Pokémon Éon apparu. Distribution externe requise.</string>
+    <array name="ra_123534">
+        <item>123534</item>
+        <item>@string/ra_123534_title</item>
+        <item>@string/ra_123534_text</item>
+        <item>5</item>
+        <item>0</item>
+        <item>hgss-external</item>
+    </array>
+    <string name="ra_124349_title">Trouver une salle secrète et découvrir toutes les formes de Motisma</string>
+    <string name="ra_124349_text">Trouver une salle secrète et découvrir toutes les formes de Motisma. Motisma doit provenir d’un autre jeu.</string>
+    <array name="ra_124349">
+        <item>124349</item>
+        <item>@string/ra_124349_title</item>
+        <item>@string/ra_124349_text</item>
+        <item>3</item>
+        <item>0</item>
+        <item>hgss-external</item>
+    </array>
+    <array name="achievements_15">
+        <item>@array/ra_124887</item>
+        <item>@array/ra_119420</item>
+        <item>@array/ra_124888</item>
+        <item>@array/ra_119438</item>
+        <item>@array/ra_124889</item>
+        <item>@array/ra_120238</item>
+        <item>@array/ra_124890</item>
+        <item>@array/ra_120382</item>
+        <item>@array/ra_124891</item>
+        <item>@array/ra_120389</item>
+        <item>@array/ra_124892</item>
+        <item>@array/ra_120391</item>
+        <item>@array/ra_124893</item>
+        <item>@array/ra_121219</item>
+        <item>@array/ra_124894</item>
+        <item>@array/ra_121657</item>
+        <item>@array/ra_125178</item>
+        <item>@array/ra_122018</item>
+        <item>@array/ra_125184</item>
+        <item>@array/ra_123270</item>
+        <item>@array/ra_125181</item>
+        <item>@array/ra_123271</item>
+        <item>@array/ra_125179</item>
+        <item>@array/ra_123272</item>
+        <item>@array/ra_125182</item>
+        <item>@array/ra_123273</item>
+        <item>@array/ra_125183</item>
+        <item>@array/ra_123274</item>
+        <item>@array/ra_125180</item>
+        <item>@array/ra_123275</item>
+        <item>@array/ra_125185</item>
+        <item>@array/ra_123276</item>
+        <item>@array/ra_125186</item>
+        <item>@array/ra_123415</item>
+        <item>@array/ra_125204</item>
+        <item>@array/ra_123425</item>
+        <item>@array/ra_125205</item>
+        <item>@array/ra_125692</item>
+        <item>@array/ra_125693</item>
+        <item>@array/ra_125694</item>
+        <item>@array/ra_125695</item>
+        <item>@array/ra_125696</item>
+        <item>@array/ra_125697</item>
+        <item>@array/ra_125698</item>
+        <item>@array/ra_125699</item>
+        <item>@array/ra_125700</item>
+        <item>@array/ra_125701</item>
+        <item>@array/ra_125702</item>
+        <item>@array/ra_125704</item>
+        <item>@array/ra_125518</item>
+        <item>@array/ra_125519</item>
+        <item>@array/ra_125520</item>
+        <item>@array/ra_125521</item>
+        <item>@array/ra_125522</item>
+        <item>@array/ra_125523</item>
+        <item>@array/ra_125705</item>
+        <item>@array/ra_125524</item>
+        <item>@array/ra_125187</item>
+        <item>@array/ra_125188</item>
+        <item>@array/ra_125189</item>
+        <item>@array/ra_125190</item>
+        <item>@array/ra_125191</item>
+        <item>@array/ra_125192</item>
+        <item>@array/ra_125193</item>
+        <item>@array/ra_125194</item>
+        <item>@array/ra_125195</item>
+        <item>@array/ra_125196</item>
+        <item>@array/ra_125197</item>
+        <item>@array/ra_125198</item>
+        <item>@array/ra_125199</item>
+        <item>@array/ra_125200</item>
+        <item>@array/ra_125201</item>
+        <item>@array/ra_125202</item>
+        <item>@array/ra_125203</item>
+        <item>@array/ra_123895</item>
+        <item>@array/ra_123898</item>
+        <item>@array/ra_125540</item>
+        <item>@array/ra_125541</item>
+        <item>@array/ra_125440</item>
+        <item>@array/ra_125452</item>
+        <item>@array/ra_125539</item>
+        <item>@array/ra_125538</item>
+        <item>@array/ra_125537</item>
+        <item>@array/ra_125679</item>
+        <item>@array/ra_125690</item>
+        <item>@array/ra_121890</item>
+        <item>@array/ra_125276</item>
+        <item>@array/ra_122604</item>
+        <item>@array/ra_122619</item>
+        <item>@array/ra_122634</item>
+        <item>@array/ra_122635</item>
+        <item>@array/ra_123232</item>
+        <item>@array/ra_123235</item>
+        <item>@array/ra_123666</item>
+        <item>@array/ra_121880</item>
+        <item>@array/ra_124581</item>
+        <item>@array/ra_125708</item>
+        <item>@array/ra_125709</item>
+        <item>@array/ra_125706</item>
+        <item>@array/ra_124162</item>
+        <item>@array/ra_119492</item>
+        <item>@array/ra_124160</item>
+        <item>@array/ra_124353</item>
+        <item>@array/ra_124352</item>
+        <item>@array/ra_125277</item>
+        <item>@array/ra_124351</item>
+        <item>@array/ra_125278</item>
+        <item>@array/ra_124570</item>
+        <item>@array/ra_124571</item>
+        <item>@array/ra_121775</item>
+        <item>@array/ra_121889</item>
+        <item>@array/ra_125746</item>
+        <item>@array/ra_125794</item>
+        <item>@array/ra_122572</item>
+        <item>@array/ra_123914</item>
+        <item>@array/ra_124242</item>
+        <item>@array/ra_124354</item>
+        <item>@array/ra_125006</item>
+        <item>@array/ra_125282</item>
+        <item>@array/ra_125281</item>
+        <item>@array/ra_125691</item>
+        <item>@array/ra_125707</item>
+        <item>@array/ra_125789</item>
+        <item>@array/ra_124350</item>
+        <item>@array/ra_125790</item>
+        <item>@array/ra_125791</item>
+        <item>@array/ra_125792</item>
+        <item>@array/ra_125793</item>
+        <item>@array/ra_125795</item>
+        <item>@array/ra_125796</item>
+        <item>@array/ra_125797</item>
+        <item>@array/ra_123473</item>
+        <item>@array/ra_123514</item>
+        <item>@array/ra_123533</item>
+        <item>@array/ra_123534</item>
+        <item>@array/ra_124349</item>
+    </array>
+</resources>

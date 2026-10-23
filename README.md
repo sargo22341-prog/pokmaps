@@ -142,6 +142,10 @@ Les [guides et activités HGSS](docs/generations/contenus-hgss.md) se génèrent
 objectifs régional/National pour chaque combinaison de starters, calendrier et catalogues particuliers.
 Ouvrir `tools/build/preview/hgss-content/index.html` pour les relire hors ligne ; le catalogue validé est aussi versionné.
 Cette préparation ne rend pas encore les remakes sélectionnables dans l'application.
+L’aperçu inclut aussi les cinq installations de la Zone de Combat, leurs configurations possibles,
+conditions et récompenses, ainsi que les 136 succès français de l’archive commune HeartGold/SoulSilver.
+La comparaison avec Platine conserve les différences des tables de l’Usine ; aucun tirage n’est simulé.
+Les ressources Android des succès sont prêtes et la synchronisation manuelle lit une seule fois le set commun.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.

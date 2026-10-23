@@ -2,6 +2,7 @@
 
 from .guides_hgss import map_entries, validate_guides
 from .sources import HGSS_PRET_COMMIT
+from .validate_combat_hgss import validate_achievements, validate_battles
 
 
 def validate_content(data: dict) -> None:
@@ -20,6 +21,8 @@ def validate_content(data: dict) -> None:
             _guide_item(item, data["item_names_fr"])
     _objectives(data["objectives"])
     _activities(data["activities"])
+    validate_battles(data["battles"])
+    validate_achievements(data["achievements"])
     entries = data["calendar"]["entries"]
     if len({r["contact"] for r in entries}) != len(entries) or sum(r["leader"] for r in entries) != 16:
         raise ValueError("HGSS : calendrier des seize Champions incomplet")

@@ -1,0 +1,61 @@
+{
+  "access_fr": "Après l’entrée au Panthéon, rejoindre la Zone de Combat par la Route 40, près d’Oliville. Aucun gain d’expérience. En règle niveau 50, les niveaux supérieurs sont abaissés à 50 ; les niveaux inférieurs ne sont pas relevés. Les Œufs et les espèces interdites ne peuvent pas participer. Les objets et espèces en double sont refusés, sauf les Pokémon de même espèce exigés à la Scène en Duo et Multi.",
+  "scope_fr": "Réserves possibles, pas équipes garanties : le moteur sélectionne des configurations compatibles, notamment sans doublon d’espèce ou d’objet. Aucun tirage, adversaire à venir ni résultat de roulette n’est simulé. Les services Wi-Fi historiques sont décrits sans promettre leur disponibilité actuelle.",
+  "facilities": [
+    {
+      "id": "tower",
+      "name_fr": "Tour de Combat",
+      "rules_fr": "Séries de sept combats. Trois Pokémon en Simple, quatre en Duo, deux par partenaire en Multi. Les objets tenus sont autorisés. Koner intervient en Simple aux combats 21 et 49.",
+      "series_length": 7,
+      "silver": 21,
+      "gold": 49,
+      "boss_trainers": [305, 306],
+      "reward_fr": "Points de Combat après une série gagnée ; Photos Argent puis Or après les victoires sur Koner, enregistrées dans le Magnéto VS. Une série de 100 victoires donne une étoile de Carte Dresseur.",
+      "sources": ["src/unk_0204B538.c", "files/msgdata/msg/msg_0096_D31R0201.json"]
+    },
+    {
+      "id": "factory",
+      "name_fr": "Usine de Combat",
+      "rules_fr": "Séries de sept combats avec des Pokémon de location : trois en Simple, quatre en Duo, deux par partenaire en Multi. Choix niveau 50 ou niveau libre (100). Après une victoire, un Pokémon adverse peut être échangé contre une location. Les réserves de départ et adverses en niveau libre sont distinctes. Cardus intervient en Simple aux combats 21 et 49 ; ses réserves propres restent séparées des locations ordinaires.",
+      "series_length": 7,
+      "silver": 21,
+      "gold": 49,
+      "boss_trainers": [309, 310],
+      "reward_fr": "Points de Combat après sept victoires ; Photos Argent et Or après les victoires correspondantes sur Cardus.",
+      "sources": ["asm/overlay_80_02236B78.s", "files/msgdata/msg/msg_0107_D32R0301.json"]
+    },
+    {
+      "id": "hall",
+      "name_fr": "Scène de Combat",
+      "rules_fr": "Séries de dix combats. Un Pokémon en Simple, deux de la même espèce en Duo ou un par partenaire en Multi, au niveau 30 au minimum. Choix du type adverse parmi dix rangs pour chacun des dix-sept types. Les records suivent l’espèce choisie. Célosia intervient en Simple aux combats 50 et 170. Ses Pokémon sont choisis selon le moteur de la Scène, sans réserve fixe dans l’archive des dresseurs.",
+      "series_length": 10,
+      "silver": 50,
+      "gold": 170,
+      "boss_trainers": [307, 308],
+      "reward_fr": "Points de Combat après dix victoires et récompenses de cumul des records auprès de la réception ; Photos Argent et Or aux victoires correspondantes sur Célosia.",
+      "sources": ["asm/overlay_80_022372D8.s", "files/msgdata/msg/msg_0108_D32R0401.json"]
+    },
+    {
+      "id": "castle",
+      "name_fr": "Castel de Combat",
+      "rules_fr": "Séries de sept combats, en Simple, Duo ou Multi. Les Points Castel servent à soigner, louer des objets et des Baies ou modifier le niveau adverse. Ils dépendent des performances et restent distincts des Points de Combat échangeables. Parsley combat pour Percila en Simple aux combats 21 et 49.",
+      "series_length": 7,
+      "silver": 21,
+      "gold": 49,
+      "boss_trainers": [313, 314],
+      "reward_fr": "Points de Combat après sept victoires ; Photos Argent et Or après les victoires correspondantes sur Parsley. Les Points Castel servent uniquement au défi du Castel.",
+      "sources": ["asm/overlay_80_02237A70.s", "files/msgdata/msg/msg_0109_D32R0501.json"]
+    },
+    {
+      "id": "arcade",
+      "name_fr": "Arcade de Combat",
+      "rules_fr": "Séries de sept combats, en Simple, Duo ou Multi. Une roulette déclenche un effet avant chaque combat. Les objets tenus sont mis de côté pendant le défi. Dahlia intervient en Simple aux combats 21 et 49. Les effets ne permettent pas de prédire les tirages.",
+      "series_length": 7,
+      "silver": 21,
+      "gold": 49,
+      "boss_trainers": [311, 312],
+      "reward_fr": "Points de Combat après sept victoires ; Photos Argent et Or après les victoires correspondantes sur Dahlia.",
+      "sources": ["asm/overlay_80_02238034.s", "files/msgdata/msg/msg_0110_D32R0601.json"]
+    }
+  ]
+}
