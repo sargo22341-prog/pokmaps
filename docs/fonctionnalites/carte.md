@@ -3,6 +3,7 @@
 L'onglet Jeu présente une rangée horizontale de jaquettes par génération : Rouge, Bleu, Jaune ; Or, Argent,
 Cristal ; Rubis, Saphir, Émeraude ; puis « Remake 1G » avec Rouge Feu et Vert Feuille. Une coche indique le jeu actif ;
 les jaquettes gardent leurs noms accessibles. La rangée « 4e génération » réunit Diamant, Perle et Platine.
+La rangée « Remake 2G » propose Or HeartGold et Argent SoulSilver, avec leurs cartes propres de Johto et Kanto.
 
 Changer de version dans la même famille de cartes conserve lieu, centre et zoom lorsque la carte existe aussi dans
 la nouvelle version. Changer de famille revient au départ : Bourg Palette, Bourg Geon, Bourg-en-Vol ou Bonaugure.
@@ -13,10 +14,14 @@ En génération 2, le menu de région en haut à gauche choisit Johto ou Kanto. 
 conserve les couleurs originales. Ce choix filtre aussi les marqueurs et rencontres de la carte.
 Sinnoh propose également les horaires et leur voile ; Diamant/Perle et Platine sont deux familles distinctes.
 Ses sélecteurs séparent étages et niveaux superposés ; le calque Arbres à Miel apparaît sur les plans concernés.
+HeartGold et SoulSilver proposent aussi les horaires, les étages et les niveaux superposés ; leurs filtres
+de rencontres distinguent radio, essaims, arbres, concours et configurations du Safari, sans filtres de Sinnoh.
 
 Toucher une ville ou route affiche son contenu. Les entrées ouvrent bâtiments, grottes et étages. Le retour remonte
 au lieu parent. Les calques choisissent entrées, objets, dresseurs, personnages, Pokémon fixes et sauvages. Les
 arbres accueillent Coup d'Boule, les rochers Éclate-Roc, l'eau surf et pêche.
+Les cartes dédiées portent le libellé neutre « Lieu » dans la recherche et leur fiche : elles peuvent représenter
+un intérieur comme un extérieur isolé, notamment le Parc Safari ou le concours.
 
 La liste du lieu affiche rencontres, niveaux, probabilités, objets et lieux accessibles. Son filtre d'heure est
 indépendant de celui de la carte. Les boutons à icônes combinent Matin, Jour et Nuit ; Tout les réactive.
@@ -70,4 +75,4 @@ Les horaires ou types d’arbres et leurs probabilités précèdent le sprite et
 
 Les cartes de rencontres de Rouge, Bleu, Jaune, Rubis, Saphir, Émeraude, Rouge Feu et Vert Feuille
 masquent les horaires matin, jour et nuit : niveaux et probabilités ne sont affichés qu’une fois.
-Les horaires restent disponibles dans Or, Argent, Cristal, Diamant, Perle et Platine.
+Les horaires restent disponibles dans Or, Argent, Cristal, Diamant, Perle, Platine, HeartGold et SoulSilver.

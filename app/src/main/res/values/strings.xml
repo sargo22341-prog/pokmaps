@@ -283,7 +283,7 @@
     <string name="place_title">Fiche lieu</string>
     <string name="place_not_found">Ce lieu n’existe pas dans ce jeu.</string>
     <string name="place_outdoor">Ville ou route</string>
-    <string name="place_indoor">Lieu intérieur</string>
+    <string name="place_location">Lieu</string>
     <string name="character_title">Fiche personnage</string>
     <string name="character_not_found">Ce personnage n’existe pas dans ce jeu.</string>
     <string name="data_load_error">Impossible de charger ces données. Revenez en arrière et réessayez.</string>

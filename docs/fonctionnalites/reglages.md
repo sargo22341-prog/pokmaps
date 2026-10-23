@@ -17,16 +17,20 @@ Les autres réglages et identifiants RetroAchievements sont exclus. Le sélecteu
 L’import valide le document entier (1 Mo maximum), les jeux contre le catalogue embarqué, puis espèces
 et formes contre chaque jeu, avant une fusion atomique. Les anciens fichiers sans `unown` restent acceptés.
 Les versions 12 à 14 et leurs 493 espèces sont prises en charge, ainsi que les formes de Pokémon.
+Les versions 15 et 16 (HeartGold et SoulSilver) conservent aussi leurs collections indépendantes et leurs formes.
 Les observations d’errants historiques sont ignorées à l’import et retirées des préférences.
 Les nouveaux relevés manuels de Sinnoh utilisent le champ facultatif `sinnohRoamers`, par version et par
 espèce. Les anciens fichiers sans ce champ restent acceptés ; une route ou une espèce non accessible
 dans la version fait rejeter l’import entier. La fusion conserve les autres relevés et privilégie ceux du
 fichier importé pour un même errant. La portée des captures ne fusionne jamais ces observations.
+Dans les remakes, le champ facultatif `roamerObservations` conserve Raikou, Entei et Latias (HeartGold)
+ou Latios (SoulSilver), avec validation des routes natives. Aucune progression GSC n'est copiée vers HGSS.
 
 ## RetroAchievements facultatif
 
 Saisir nom d’utilisateur et clé API web, enregistrer puis « Synchroniser ».
-Seul `API_GetGameInfoAndUserProgress.php` est appelé en GET, une fois pour chacun des quatorze jeux pris en charge.
+Seul `API_GetGameInfoAndUserProgress.php` est appelé en GET, une fois par ensemble officiel distinct des seize jeux.
+HeartGold et SoulSilver partagent l'ensemble 7212 : une seule lecture alimente leurs deux progressions.
 Aucun succès ni compte distant n’est modifié ; aucune requête au lancement, à l’ouverture des guides
 ou au changement de jeu. La permission Internet sert à cette option ; sur GrapheneOS, autoriser Network.
 

@@ -663,10 +663,10 @@ les ressources Android et la synchronisation manuelle du set partagé sont prép
   inventaires et non-régression des jeux existants. Sortie : base, cartes et catalogues cohérents prêts à activer.
 - [x] **8B — Activation contrôlée.** Passer HGSS de `GAMES_IN_PROGRESS` à `GAMES`, actualiser
   documentation et notes, puis lancer tous les contrôles Python/Android. Sortie : contrôles complets verts.
-- [ ] **8C — Recette finale.** Exécuter les parcours des deux cartouches, sauvegardes et changements de jeu,
+- [x] **8C — Recette finale.** Exécuter les parcours des deux cartouches, sauvegardes et changements de jeu,
   mesurer taille/fluidité et vérifier l’installation par-dessus si un appareil est disponible.
   Sortie : rapport honnête des résultats et limites matérielles, captures et aucun défaut connu laissé volontairement.
-- [ ] **8D — Clôture.** Relire le diff et les assets versionnés, vérifier les limites de code,
+- [x] **8D — Clôture.** Relire le diff et les assets versionnés, vérifier les limites de code,
   récapituler les preuves et proposer un message de commit français. Commit et publication sur demande explicite.
 
 **Réalisation 8A — 23 octobre 2026.** Deux générations indépendantes produisent exactement les mêmes
@@ -707,3 +707,138 @@ sans modifier la configuration du dépôt. La dépréciation Gradle/AGP `Configu
 les avis Git de conversion LF/CRLF restent signalés ; aucune suppression d’avertissement n’a été ajoutée.
 Aucune recette sur téléphone, installation ADB, signature release, création de commit ou publication effectuée.
 Les volets 8C/8D restent hors du périmètre demandé pour cette livraison 8A/8B.
+
+**Recette 8C — 23 octobre 2026 : preuves fonctionnelles.** Départ sur le commit d'activation `aa32b9e9`,
+avec un arbre de travail propre. ADB voit un Pixel 6 Pro, Android 17/API 37, build GrapheneOS `2026102101`,
+écran 1440 × 3120 à 60 Hz. Les actions sont pilotées par ADB, sans désinstallation, effacement de données
+ni synchronisation RetroAchievements. Les scripts et journaux restent dans
+`tools/build/scratchpad/phase8-recette/` ; les sauvegardes personnelles ne sont pas ajoutées à Git.
+
+| Parcours | Résultat et portée de la preuve |
+|---|---|
+| Activation et régions | HeartGold ouvre Bourg Geon, puis Kanto ; SoulSilver ouvre Kanto puis Johto. |
+| Même famille | Le passage HG → SS conserve notamment l'intérieur et l'étage du laboratoire. |
+| Intérieur et étage | Laboratoire du Prof. Orme, RDC puis 1er étage, dans les deux cartouches. |
+| Surfaces superposées | Route 47, carte puis niveau inférieur 1, dans les deux cartouches. |
+| Rencontres | Route 29, arbres, niveaux et taux ; fiche de Germignon et retour à la carte. |
+| Radio HG et SS | Son de Hoenn activé, conditions mercredi/National visibles ; retour désactivé aussi testé dans SS. |
+| Safari HG et SS | Prairie sans blocs, puis forêt 10/pic 14, habitat de 70 jours ; taux modifiés. |
+| Concours HG et SS | Lieu dédié, mardi → jeudi, activation du National ; tables et niveaux changent. |
+| Personnages HG et SS | Albert, équipe initiale puis revanche, objet tenu, niveaux et offre de CT51. |
+| Objets et Pokémon HG et SS | Fiches Potion, Raikou et Lugia ouvertes ; aucune capture ajoutée. |
+| Guides | Début de soluce des deux jeux ; 136 succès consultables dans SoulSilver. |
+| Anciens groupes | Cartes de Rouge, Jaune, Or, Cristal, Rubis, Émeraude, Rouge Feu, Diamant et Platine ouvertes. |
+| Vide | Recherche sans correspondance : « Aucun résultat. », sans message d'erreur. |
+| Erreur | Import synthétique contenant la version 17 refusé avec un message visible, sans écriture partielle. |
+
+Les parcours Safari, concours, équipes/revanches, objets, fiches Pokémon, laboratoire et Route 47 sont
+répétés avec les sprites fixes. Le mode avion conservait initialement le Wi-Fi actif : cette première
+passe ne vaut pas preuve hors ligne. Les parcours HG et SS ont donc été repris après coupure explicite
+du Wi-Fi, avec contrôle `Wifi is disabled` et mode avion `enabled`. Les captures de ces reprises ne
+montrent plus d'icône Wi-Fi. Les préférences d'animation debug ont ensuite été rétablies.
+
+**Sauvegarde et installation par-dessus.** L'application présente avant la recette datait du 21 octobre
+et ne proposait pas HGSS. `adb install -r -d` réussit ; Platine reste sélectionné et la date de première
+installation reste le 6 octobre. Un export JSON est écrit dans un nouveau document, puis réimporté par
+le sélecteur Android : « Collection importée et fusionnée. » Le nouvel export est structurellement
+identique, pour les seize versions. Après l'import invalide et après les changements de jeux, les deux
+exports supplémentaires sont encore identiques à l'export initial. Une seconde installation, application
+arrêtée, conserve exactement le SHA-256 du fichier DataStore ; le redémarrage conserve HeartGold.
+L'APK corrigé est ensuite installé par-dessus, avec un nouvel export identique en fin de recette.
+
+Les captures, favoris, formes, Zarbi, progression de guides et relevés d'errants non vides par cartouche,
+ainsi que les imports historiques et le refus atomique d'une mauvaise route, sont aussi couverts par
+les tests JVM, notamment `HgssBackupTest`. Ces cas n'ont pas tous été saisis manuellement sur le téléphone.
+Les erreurs de lecture de base sont testées en JVM ; aucune base personnelle n'est corrompue pour les provoquer.
+
+**Défaut découvert et corrigé.** Les cartes dédiées étaient présentées comme des « Lieux intérieurs »,
+y compris le Safari et le concours. La présence d'une carte autonome ne prouve pas un intérieur.
+La recherche et les fiches utilisent maintenant la ressource française neutre « Lieu » ; deux tests
+Compose de non-régression couvrent ces deux présentations. Le Safari et le concours ont été revérifiés
+sur le téléphone avec l'APK corrigé. README, documentation fonctionnelle et notes de version sont actualisés.
+Cette correction n'ajoute aucune dépendance et ne modifie ni le schéma ni les assets distribués.
+
+**Captures retenues.** Images PNG natives du téléphone, relues visuellement ; les vues Safari et concours
+sont reprises après correction du libellé.
+
+- [HeartGold : Bourg Geon](docs/screenshots/hgss-heartgold-johto.png),
+  [Kanto](docs/screenshots/hgss-heartgold-kanto.png) et
+  [Pokédex régional](docs/screenshots/hgss-heartgold-pokedex.png).
+- [HeartGold : Safari conditionnel](docs/screenshots/hgss-heartgold-safari.png).
+- [SoulSilver : concours du jeudi](docs/screenshots/hgss-soulsilver-concours.png),
+  [revanche et CT51](docs/screenshots/hgss-soulsilver-offre.png),
+  [niveau inférieur de Route 47](docs/screenshots/hgss-soulsilver-pont.png) et
+  [136 succès](docs/screenshots/hgss-soulsilver-succes.png).
+- [Refus d'un import invalide](docs/screenshots/hgss-import-refuse.png).
+
+**Contrôles exécutés.** Sur l'état corrigé, la commande Android complète avec `--no-build-cache` réussit :
+ktlint, absence de services Google, Lint, APK debug et **667 tests JVM/Compose**, zéro échec et zéro ignoré.
+Les tests sont effectivement réexécutés avec l'option `--rerun` de `testDebugUnitTest`.
+`python tools/check_assets.py` réussit en 214,3 s ; Ruff et le format des 520 fichiers Python passent.
+La suite Python directe réussit : **1 140 tests**, 433 tests de sources exclus, en 70,11 s.
+Les tests `pipeline` et une régénération ne sont pas relancés : aucune donnée générée ne change ;
+les preuves de reproductibilité et les 433 tests de sources de 8A/8B restent les vérifications correspondantes.
+
+L'audit global contrôle **977 fichiers source** sous 600 lignes, **3 713 fonctions Python** sous 60 lignes
+par AST et **1 888 fonctions Kotlin** par PSI, maximum 60 lignes. Les fichiers Kotlin touchés passent ktlint ;
+le diff est relu, sans modification étrangère à la recette. Les 50 176 fichiers suivis sous les assets
+représentent 329 671 256 octets (314,40 Mio) ; aucun asset non suivi n'est trouvé dans ce dossier.
+L'inventaire et la base gardent exactement les SHA-256 de 8A :
+
+- Inventaire : `a210d69e3f5b9a08088a84e5057e4e00684eb1d445743815c0dfb36846f79955`.
+- Base : `1c0eedf70af7bf186e45e19e8960e4d44ea5fe8938197db19d3e5d0474bafcd2`.
+
+**Incidents de vérification.** Le premier lancement Gradle est refusé sur son cache utilisateur,
+puis la relance autorisée réussit. Le premier passage Python via `verify.py` est interrompu après des
+erreurs de tests dont le détail n'a pas été recueilli ; la relance directe complète passe sans changer
+le code ni les attentes. Le pilote ADB a rencontré des libellés supposés, des lectures UI interrompues
+avec le code 137 et des captures prises avant la fin d'une transition : ces preuves sont reprises après
+attente, sans les compter comme succès. Une demande de remplacement d'un ancien export est annulée ;
+les exports de recette utilisent des noms distincts. Le contrôle de processus Windows par CIM est refusé,
+sans empêcher les builds. L'outil local d'audit PSI nécessite une correction du BOM et du classpath ;
+l'analyse finale réussit. Le compilateur D8 local refuse le niveau 37 pour le seul injecteur de gestes :
+ce petit outil est recompilé sans avertissement avec son niveau accepté 36 et exécuté sur Android 17.
+Une première compilation de mesure signale plusieurs sessions Kotlin ; la reconstruction séquentielle
+finale passe. La dépréciation AGP `Configuration.setVisible(boolean)` reste visible, comme documenté,
+ainsi que l'avis Git LF/CRLF. Aucune suppression ni baseline n'est ajoutée.
+
+**Mesures 8C.** La [référence de performance](docs/performance.md#recette-hgss-du-23-octobre-2026)
+décrit les douze passages alternés, trois par jeu, sur la variante minifiée `.perf` reconstruite après
+correction : huit glissements et deux pincements réellement injectés et acceptés à chaque passage.
+Le p95 médian est de **10 ms dans HeartGold**, **8 ms dans SoulSilver**, 10 ms dans Émeraude et 11 ms
+dans Platine. Les p99 médians HGSS sont de 11 et 10 ms ; 2/715 et 1/666 trames sont signalées saccadées.
+L'état thermique reste à 0. La PSS mesurée HGSS varie de 213,5 à 244,8 Mio selon le jeu et le passage.
+Les pointes de la première mesure debug sont également conservées, sans comparaison de vitesse trompeuse.
+
+L'APK debug corrigé pèse **330 961 489 octets (315,63 Mio)** ; la variante minifiée de mesure pèse
+**292 511 433 octets (278,96 Mio)**. Cette dernière utilise le paquet distinct `.perf`, est profilable
+et signée avec la clé debug locale ; elle n'est pas une release de distribution signée en CI.
+
+- APK debug SHA-256 : `10ccf70de99d5b41eaa332010e241c5e0c3ada6b30ea1b8f3bf093838d77cae1`.
+- APK de mesure SHA-256 : `98967c0a81c4c184ccad10d84c6bcd0e6908303cdaa75f0050010ff171ca18c5`.
+
+**Limites.** Un seul téléphone est disponible ; aucun appareil moins puissant ni émulateur n'est qualifié.
+Les mesures portent sur les glissements et pincements des cartes, pas sur le démarrage, les temps de
+chargement, la latence de saisie ou la consommation. Les scènes comparées ont des géométries différentes.
+La recette sur téléphone relit des lieux et configurations témoins ; elle ne parcourt pas manuellement
+les centaines de cartes ni toutes les combinaisons de rencontres. Les inventaires, données, règles,
+imports historiques et cas d'erreur restent couverts par leurs validations et tests automatiques.
+La synchronisation RetroAchievements distante n'est pas déclenchée ; son mapping commun est testé en JVM.
+Aucune signature de distribution, installation d'une release CI ni publication n'est réalisée.
+
+**Clôture 8D.** Le changement conserve le schéma 23 et les assets distribués à l'identique. Il comprend
+la correction du libellé dans `PlaceScreen.kt`, `SearchScreen.kt` et `strings.xml`, les deux tests Compose,
+la note de version, README, les pages fonctionnelles, les mesures et les neuf captures de cette recette.
+Les scripts de pilotage, exports personnels, journaux et APK restent hors Git. Aucun autre défaut n'est
+identifié dans les parcours exécutés ; aucune dette ni exclusion d'outil n'est ajoutée.
+Le paquet de mesure `.perf` reste installé, distinct du debug ; aucune désinstallation n'est effectuée.
+En fin de recette, l'application debug affiche la carte de Platine ; animations partout et portée des
+captures Tout sont rétablies. Le mode avion est désactivé et le Wi-Fi réactivé, avec vérification explicite.
+Le document synthétique invalide est retiré des Téléchargements ; les sauvegardes valides sont conservées.
+La notification KDE Connect de fin est tentée une seule fois : code de sortie 1, sans nouvelle tentative.
+
+Message de commit proposé, **sans commit ni publication effectués** :
+
+```text
+Corriger le libellé des lieux et clôturer la recette finale HGSS
+```

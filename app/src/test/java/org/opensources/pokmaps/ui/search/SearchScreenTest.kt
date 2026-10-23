@@ -71,4 +71,13 @@ class SearchScreenTest {
         compose.onNode(hasText("Bourg Palette")).performClick()
         assertEquals(listOf("pallet-town"), openedPlaces)
     }
+
+    @Test
+    fun aDedicatedMapDoesNotImplyAnIndoorPlace() {
+        val place = PlaceResult("hgss-safari-zone-grassland", "Parc Safari — gabarit Prairie", outdoor = false)
+        show(SearchUiState(loading = false, game = FakeGameDao.HEARTGOLD, query = "safari", places = listOf(place)))
+
+        compose.onNode(hasText("Lieu")).assertExists()
+        compose.onNode(hasText("Lieu intérieur")).assertDoesNotExist()
+    }
 }

@@ -139,7 +139,7 @@ private fun Results(
         section(R.string.search_places, state.places, key = { "place:${it.identifier}" }) { place ->
             SheetRow(
                 title = place.name,
-                subtitle = stringResource(if (place.outdoor) R.string.place_outdoor else R.string.place_indoor),
+                subtitle = stringResource(if (place.outdoor) R.string.place_outdoor else R.string.place_location),
                 onClick = { onOpenPlace(place.identifier) },
                 content = { Icon(painterResource(R.drawable.ic_place), contentDescription = null) }
             )

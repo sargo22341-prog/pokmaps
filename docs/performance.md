@@ -99,3 +99,56 @@ d'Or/Argent et Cristal, les référentiels PokéAPI et les cartes GBA analysées
 Un cache distinct pour chaque tuile a été mesuré puis écarté : sur ces petits fichiers, ses lectures et
 vérifications coûtaient davantage que l'encodage. Le cache retient donc une pyramide entière dans un seul fichier.
 Les résultats et scripts de mesure locaux restent dans `tools/build/scratchpad/render-audit/`.
+
+## Recette HGSS du 23 octobre 2026
+
+Pixel 6 Pro, GrapheneOS Android 17 (`2026102101`), écran 1440 × 3120 à 60 Hz. Les assets sont ceux des
+seize jeux activés, sans régénération pendant les contrôles. La variante release minifiée utilise le
+paquet distinct `.perf`, `profileable` et la signature debug locale, selon la procédure ci-dessus.
+Elle est reconstruite après la correction du libellé des lieux ; aucun APK de distribution signé en CI
+n'est produit. ART est compilé avec `cmd package compile -m speed -f org.opensources.pokmaps.perf`.
+
+Le protocole conserve les sprites animés partout, les horaires sur Tout et le réseau coupé (mode avion
+et Wi-Fi explicitement désactivé). Chaque passage ouvre la carte régionale, attend son chargement,
+puis effectue huit glissements alternés de 500 ms, entre x = 1100 et 340, à y = 1500. Deux pincements
+à contacts simultanés font varier le demi-écartement de 150 à 400 pixels, puis l'inverse, autour de
+(720, 1500), avec 24 mouvements espacés de 20 ms. Chaque événement injecté doit être accepté.
+Les traces du pilote conservent les deux confirmations ; les gestes ne sont pas supposés à partir
+de la seule variation du zoom. Les cartes HGSS commencent à Bourg Geon, Émeraude à Bourg-en-Vol
+et Platine à Bonaugure. Trois répétitions inversent l'ordre des quatre jeux une fois sur deux.
+
+`gfxinfo framestats` est remis à zéro pour chaque passage ; `meminfo`, `thermalservice` et le temps CPU
+du fil principal (`schedstat`) sont conservés. Les durées incluent les glissements et les pincements ;
+le CPU est un cumul sur le passage, pas une durée par trame. Les percentiles concernent les trames
+effectivement enregistrées, pas la latence d'un geste ou le temps de chargement. Le nombre de trames
+dépend aussi des animations : il ne mesure pas directement le nombre d'images par seconde de la carte.
+
+Les percentiles et le CPU ci-dessous sont les médianes des trois passages. Les trames saccadées sont
+additionnées, avec leur dénominateur ; la mémoire donne la plage des trois relevés, sans la convertir
+en pic garanti. L'état thermique vaut 0 sur les douze passages.
+
+| Jeu | p50 / p95 / p99 (ms) | Saccades / trames | PSS (Mio) | CPU principal (ms) |
+|---|---:|---:|---:|---:|
+| Émeraude | 6 / 10 / 11 | 3 / 1 240 | 223,3–238,9 | 1 203 |
+| Platine | 6 / 11 / 13 | 3 / 1 237 | 230,5–241,6 | 1 304 |
+| Or HeartGold | 7 / 10 / 11 | 2 / 715 | 222,3–229,9 | 962 |
+| Argent SoulSilver | 6 / 8 / 10 | 1 / 666 | 213,5–244,8 | 830 |
+
+HGSS se situe dans la plage de ces références locales pour les cartes mesurées. Les scènes n'ont pas
+la même géométrie ni le même nombre de marqueurs : ces résultats ne prouvent pas l'égalité des coûts
+de rendu ni une absence universelle de régression. Ils ne sont pas une comparaison avant/après avec
+la build du 13 octobre. Aucun seuil de performance universel n'est déduit de ce seul téléphone.
+
+Une mesure préliminaire debug, sur huit glissements sans pincement, donnait des p95 de 13 à 18 ms,
+des p99 de 18 à 38 ms et une PSS de 285,6 à 450,1 Mio. Ces pointes restent dans les journaux ;
+la différence de variante et de protocole ne permet pas d'en déduire un facteur d'accélération.
+
+L'APK debug final pèse **330 961 489 octets (315,63 Mio)** et la variante minifiée de mesure
+**292 511 433 octets (278,96 Mio)**. Cette dernière est signée avec la clé debug, avec un paquet et
+des métadonnées de profilage propres : sa taille n'est pas celle d'une future release signée en CI.
+Les fichiers suivis sous `app/src/main/assets/` totalisent **329 671 256 octets (314,40 Mio)**.
+
+Les scripts, mesures brutes et captures de la session sont dans `tools/build/scratchpad/phase8-recette/`.
+La [recette fonctionnelle](../plan4g%20remake.md) conserve les preuves de sauvegarde et d'installation,
+les contrôles exécutés et les limites. Ces mesures sur un seul appareil ne qualifient pas un téléphone
+moins puissant ; elles ne remplacent pas une mesure de démarrage, de chargement ou de consommation.

@@ -136,7 +136,7 @@ private fun PlaceHeader(state: PlaceUiState, page: PlacePage, onShowPlace: () ->
         Text(page.map.name, style = MaterialTheme.typography.headlineMedium)
         if (page.map.isExternalEvent) ExternalEventLabel()
         Text(
-            stringResource(if (page.outdoor) R.string.place_outdoor else R.string.place_indoor),
+            stringResource(if (page.outdoor) R.string.place_outdoor else R.string.place_location),
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         if (state.wildIds.isNotEmpty()) CaughtProgress(caught = state.caughtWild, total = state.wildIds.size)

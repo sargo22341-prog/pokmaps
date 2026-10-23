@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les lieux extérieurs sur une carte dédiée ne sont plus présentés comme des intérieurs.
 - Or HeartGold et Argent SoulSilver sont disponibles hors ligne avec Johto, Kanto, leurs Pokédex,
   rencontres conditionnelles, personnages et guides français.
 - Les succès HGSS sont disponibles en français et leur synchronisation manuelle partage une seule lecture
