@@ -36,6 +36,8 @@ from .sources import DATA_DIR
 
 if TYPE_CHECKING:
     from .builder import DatabaseBuilder
+    from .builder_safari_hgss import SafariData
+    from .builder_wild_hgss import HgssWildData
 
 
 _CURATION_ACTIONS = frozenset({"exclude", "note", "trade_for", "move_to"})
@@ -121,6 +123,9 @@ class EncounterTables:
         complete_hoenn_encounters(self.builder, groups)
         complete_remake_encounters(self.builder, groups)
         complete_gen4_encounters(self.builder, groups, self.gen4_wild)
+        from .fixed_application_hgss import complete
+
+        complete(self.builder, groups)
         _roaming_conditions(groups, self.method_identifiers)
         for note in self._battle_notes:
             _add_battle_note(groups, note)
@@ -154,7 +159,21 @@ class EncounterTables:
 
     @cached_property
     def method_identifiers(self) -> dict[int, str]:
-        return {int(row["id"]): row["identifier"] for row in self.api.table("encounter_methods")}
+        return {int(row["id"]): row["identifier"] for row in self.method_values}
+
+    @cached_property
+    def method_values(self) -> list[dict[str, str]]:
+        rows = list(self.api.table("encounter_methods"))
+        if any(g.pret_repo == "pokeheartgold" for g in self.builder.games):
+            rows += [
+                dict(id=str(1000 + i), identifier=f"headbutt-{key}", order=str(100 + i), name_fr=label)
+                for i, key, label in (
+                    (1, "common", "Coup d’Boule — arbre commun"),
+                    (2, "rare", "Coup d’Boule — arbre rare"),
+                    (3, "secret", "Coup d’Boule — arbre particulier"),
+                )
+            ]
+        return rows
 
     def _pokeapi_encounters(self) -> list[WildEncounter]:
         slots = self.api.by_id("encounter_slots")
@@ -186,13 +205,18 @@ class EncounterTables:
                 case PretFormat.GEN3:
                     encounters += list(self.gen3_wild[game.version_group].encounters)
                 case PretFormat.GEN4:
-                    encounters += list(self.gen4_wild[game.version_group].encounters)
+                    data = self.hgss_wild if game.pret_repo == "pokeheartgold" else self.gen4_wild[game.version_group]
+                    encounters += list(data.encounters)
         if gen1_games:
             check_fishing_rows(self.builder, gen1_games, fishing)
         return encounters + fishing
 
     def _replaced_methods(self, version: int) -> frozenset[str]:
         row = next(row for row in self.builder.version_rows if int(row["id"]) == version)
+        if self.builder.game_of(int(row["version_group_id"])).pret_repo == "pokeheartgold":
+            from .builder_wild_hgss import REPLACED_METHODS as HGSS_METHODS
+
+            return HGSS_METHODS
         match self.builder.game_of(int(row["version_group_id"])).pret_format:
             case PretFormat.GEN3:
                 return GEN3_REPLACED_METHODS
@@ -215,7 +239,7 @@ class EncounterTables:
         return {
             game.version_group: wild_context(self.builder.gen4_repo(game, "les règles sauvages"))
             for game in self.builder.games
-            if game.pret_format is PretFormat.GEN4
+            if game.pret_format is PretFormat.GEN4 and game.pret_repo != "pokeheartgold"
         }
 
     @cached_property
@@ -223,8 +247,31 @@ class EncounterTables:
         return {
             game.version_group: gen4_wild_data(self.builder, game, self.gen4_contexts[game.version_group])
             for game in self.builder.games
-            if game.pret_format is PretFormat.GEN4
+            if game.pret_format is PretFormat.GEN4 and game.pret_repo != "pokeheartgold"
         }
+
+    @cached_property
+    def hgss_wild(self) -> HgssWildData:
+        from .builder_wild_hgss import wild_data
+
+        return wild_data(self.builder)
+
+    @cached_property
+    def hgss_safari(self) -> SafariData:
+        from .builder_safari_hgss import safari_data
+
+        return safari_data(self.builder)
+
+    @cached_property
+    def condition_values(self) -> list[dict[str, str]]:
+        rows = list(self.api.table("encounter_condition_values"))
+        if any(g.pret_repo == "pokeheartgold" for g in self.builder.games):
+            rows.extend(self.hgss_safari.conditions)
+            rows += [
+                dict(id=str(2000 + day), identifier=f"hgss-contest-{day}", name_fr=f"Concours du {name}")
+                for day, name in ((1, "mardi"), (3, "jeudi"), (5, "samedi"))
+            ]
+        return rows
 
     @cached_property
     def _battle_notes(self) -> list[BattleNote]:
@@ -315,7 +362,7 @@ class EncounterTables:
 
     @cached_property
     def method_rank(self) -> dict[int, int]:
-        return {int(row["id"]): int(row["order"]) for row in self.api.table("encounter_methods")}
+        return {int(row["id"]): int(row["order"]) for row in self.method_values}
 
     def encounter_tables(self) -> tuple[list[tuple], list[tuple]]:
         groups = sorted(
@@ -357,11 +404,11 @@ class EncounterTables:
             (
                 int(row["id"]),
                 row["identifier"],
-                fixes.get(("method", row["identifier"])) or names[int(row["id"])],
+                fixes.get(("method", row["identifier"])) or names.get(int(row["id"])) or row["name_fr"],
                 int(row["order"]),
                 int(row["identifier"] in ONE_OFF_METHODS),
             )
-            for row in self.api.table("encounter_methods")
+            for row in self.method_values
             if int(row["id"]) in used
         ]
 
@@ -369,11 +416,15 @@ class EncounterTables:
         names = self.api.names("encounter_condition_value_prose", "encounter_condition_value_id")
         used = {value for group in self.encounter_groups for value in group.conditions}
         rows = []
-        for row in self.api.table("encounter_condition_values"):
+        for row in self.condition_values:
             value = int(row["id"])
             if value not in used:
                 continue
-            name = self.builder.locations.name_fixes.get(("condition", row["identifier"])) or names.get(value)
+            name = (
+                self.builder.locations.name_fixes.get(("condition", row["identifier"]))
+                or names.get(value)
+                or row.get("name_fr")
+            )
             if not name:
                 raise ValueError(f"Nom français manquant pour la condition {row['identifier']} (name_fixes.csv)")
             rows.append((value, row["identifier"], name))
@@ -395,7 +446,8 @@ class EncounterTables:
             if not targets or key in present:
                 rates.add((version, area, method, int(row["rate"])))
             rates.update((version, target, method, int(row["rate"])) for target in targets)
-        for data in (*self.gen3_wild.values(), *self.gen4_wild.values()):
+        hgss = (self.hgss_wild,) if any(g.pret_repo == "pokeheartgold" for g in self.builder.games) else ()
+        for data in (*self.gen3_wild.values(), *self.gen4_wild.values(), *hgss):
             for version, area, method, rate in data.rates:
                 key = (version, area, method)
                 targets = self._rate_moves.get(key, set())

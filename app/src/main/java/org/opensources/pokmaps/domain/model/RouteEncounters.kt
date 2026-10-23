@@ -24,7 +24,9 @@ data class RouteEncounterFilter(
     val nationalDex: Boolean = false,
     val daily: Boolean = false,
     val gifts: Boolean = false,
-    val radio: EncounterRadio = EncounterRadio.OFF
+    val radio: EncounterRadio = EncounterRadio.OFF,
+    val safariConfiguration: String? = null,
+    val contestDay: String? = null
 ) {
     init {
         require(!roaming || !gifts)
@@ -36,6 +38,14 @@ data class RouteEncounterFilter(
         if ((ObtainMethod.fromEncounterMethod(encounter.method) == ObtainMethod.GIFT) != gifts) return false
         if (gifts) return true
         val keys = encounter.conditionKeys
+        val safari = keys.singleOrNull { it.startsWith("hgss-safari-") }
+        if (safari != null && safari != safariConfiguration &&
+            !(safariConfiguration == null && safari.endsWith("-base"))
+        ) {
+            return false
+        }
+        val contest = keys.singleOrNull { it.startsWith("hgss-contest-") }
+        if (contest != null && contest != (contestDay ?: "hgss-contest-1")) return false
         if (keys.any { it.startsWith("radio-") } && radio.condition !in keys) return false
         if (keys.any { it.startsWith("slot2-") } && cartridge.condition !in keys) return false
         if (("radar-on" in keys && !radar) || ("radar-off" in keys && radar)) return false
@@ -68,6 +78,7 @@ data class RouteEncounterFilter(
     }
 
     private fun isSelectedCondition(key: String): Boolean = key.startsWith("slot2-") || key.startsWith("radio-") ||
+        key.startsWith("hgss-safari-") || key.startsWith("hgss-contest-") ||
         key in setOf(
             "radar-on",
             "radar-off",

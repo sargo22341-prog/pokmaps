@@ -1,7 +1,10 @@
 # Personnages, objets et services HGSS — phase 5
 
 Les trois volets 5A, 5B et 5C sont implémentés dans le pipeline préparatoire.
-Le catalogue et son aperçu restent séparés de la distribution Android, conformément aux phases suivantes.
+La génération complète convertit désormais les acteurs utiles, équipes, revanches, objets et offres
+vers les tables communes Android. L’aperçu séparé reste disponible pour la relecture.
+Les services de scène sans attribution certaine à un personnage sont détaillés dans les guides,
+sans fabriquer de repère ni attribuer leurs cadeaux à tous les personnages du lieu.
 
 ## Générer et consulter
 

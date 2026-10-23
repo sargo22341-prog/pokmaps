@@ -27,10 +27,12 @@ _MATRIX = {
     "diamond": ("diamond-pearl", 4, PretFormat.GEN4, "diamond-pearl", ("SINNOH",), True, None),
     "pearl": ("diamond-pearl", 4, PretFormat.GEN4, "diamond-pearl", ("SINNOH",), True, None),
     "platinum": ("platinum", 4, PretFormat.GEN4, "platinum", ("SINNOH",), True, None),
+    "heartgold": ("heartgold-soulsilver", 4, PretFormat.GEN4, "heartgold-soulsilver", ("JOHTO", "KANTO"), True, 2),
+    "soulsilver": ("heartgold-soulsilver", 4, PretFormat.GEN4, "heartgold-soulsilver", ("JOHTO", "KANTO"), True, 2),
 }
 
 
-def test_capabilities_of_the_fourteen_versions(db: sqlite3.Connection) -> None:
+def test_capabilities_of_the_sixteen_versions(db: sqlite3.Connection) -> None:
     assert GAMES_IN_PROGRESS == ()
     query = "SELECT v.identifier, vg.generation_id FROM version v JOIN version_group vg ON vg.id = v.version_group_id"
     generations = dict(db.execute(query))
@@ -54,7 +56,7 @@ def test_capabilities_of_the_fourteen_versions(db: sqlite3.Connection) -> None:
 def test_app_version_groups_match_the_pipeline_families() -> None:
     source = (_APP / "domain/model/VersionGroup.kt").read_text(encoding="utf-8")
     entries = re.findall(r'^\s+[A-Z_]+\("([a-z-]+)", "([a-z-]+)"\)[,;]$', source, re.MULTILINE)
-    # Android reconnaît aussi le contrat HGSS préparatoire, sans l'ajouter aux jeux distribués.
+    # Les identités Android et les familles distribuées doivent coïncider.
     modeled = (*GAMES, *PREPARATORY_GAMES)
     assert dict(entries) == {game.version_group: game.map_family for game in modeled}
     assert len(entries) == len(modeled)
@@ -91,6 +93,8 @@ def test_game_query_derives_time_from_encounters(db: sqlite3.Connection) -> None
         "diamond",
         "pearl",
         "platinum",
+        "heartgold",
+        "soulsilver",
     }
     db.execute("DELETE FROM encounter_condition")
     assert all(not row[columns.index("hasTimeOfDay")] for row in db.execute(query))

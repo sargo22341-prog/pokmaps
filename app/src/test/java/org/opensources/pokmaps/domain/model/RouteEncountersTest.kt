@@ -126,4 +126,26 @@ class RouteEncountersTest {
         assertFalse(filter.matches(encounter("walk", "swarm-no")))
         assertFalse(filter.matches(encounter("walk", "story-progress-before-national-dex")))
     }
+
+    @Test
+    fun safariConfigurationsReplaceTheBaseTable() {
+        val base = encounter("walk", "hgss-safari-0-base")
+        val blocks = encounter("walk", "hgss-safari-0-1")
+        assertTrue(RouteEncounterFilter().matches(base))
+        assertFalse(RouteEncounterFilter().matches(blocks))
+        val selected = RouteEncounterFilter(safariConfiguration = "hgss-safari-0-1")
+        assertFalse(selected.matches(base))
+        assertTrue(selected.matches(blocks))
+    }
+
+    @Test
+    fun contestDaysAreExclusive() {
+        val tuesday = encounter("walk", "hgss-contest-1")
+        val saturday = encounter("walk", "hgss-contest-5")
+        assertTrue(RouteEncounterFilter().matches(tuesday))
+        assertFalse(RouteEncounterFilter().matches(saturday))
+        val selected = RouteEncounterFilter(contestDay = "hgss-contest-5")
+        assertFalse(selected.matches(tuesday))
+        assertTrue(selected.matches(saturday))
+    }
 }

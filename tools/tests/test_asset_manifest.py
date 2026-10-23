@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from pokemaps_data.application_hgss import build_catalog as build_hgss_catalog
 from pokemaps_data.asset_manifest import MANIFEST, check_manifest, write_manifest
 from pokemaps_data.builder import DatabaseBuilder
 from pokemaps_data.encounter_backgrounds import build_encounter_backgrounds
@@ -80,6 +81,7 @@ def test_pipeline_reproduces_bundled_assets(builder: DatabaseBuilder, assets_roo
     builder.write(assets_root / "database/pokedex.db", icons)
     build_hoenn_catalog(CACHE, assets_root)
     build_sinnoh_catalog(CACHE, assets_root)
+    build_hgss_catalog(assets_root, assets_root.parent / "hgss-resources")
     build_encounter_backgrounds(CACHE, assets_root)
     assert validate(assets_root / "database/pokedex.db") == []
     shutil.copytree(assets / "licenses", assets_root / "licenses")

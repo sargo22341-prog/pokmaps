@@ -181,8 +181,22 @@ DIAMOND_PEARL = Game(
     (SINNOH,),
     national_dex=True,
 )
+HGSS_JOHTO = Region("JOHTO", "NEW_BARK", 993)
+HGSS_KANTO = Region("KANTO", "PALLET", 992)
+HEARTGOLD_SOULSILVER = Game(
+    "heartgold-soulsilver",
+    "pokeheartgold",
+    (("heartgold", "HEARTGOLD"), ("soulsilver", "SOULSILVER")),
+    "heartgold-soulsilver",
+    (VersionCover("heartgold", "ho-oh", 0xC9A227), VersionCover("soulsilver", "lugia", 0x9DA9B5)),
+    PretFormat.GEN4,
+    (HGSS_JOHTO, HGSS_KANTO),
+    national_dex=True,
+    remake_generation=2,
+)
+# Les lecteurs Sinnoh gardent leur lot dédié ; HGSS utilise les adaptateurs natifs propres aux remakes.
 GEN4_GAMES: tuple[Game, ...] = (PLATINUM, DIAMOND_PEARL)
-GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, *GEN3_GAMES, *GEN4_GAMES)
+GAMES: tuple[Game, ...] = (*_GEN1_GAMES, GOLD_SILVER, CRYSTAL, *GEN3_GAMES, *GEN4_GAMES, HEARTGOLD_SOULSILVER)
 GAMES_IN_PROGRESS: tuple[Game, ...] = ()
 # Tous les jeux générés : ceux de l'application, puis ceux en cours d'intégration.
 ALL_GAMES: tuple[Game, ...] = (*GAMES, *GAMES_IN_PROGRESS)
@@ -237,7 +251,14 @@ EXTERNAL_EVENT_METHODS = frozenset(
     {"colosseum-bonus-disc-jpn", "colosseum-bonus-disc-us", "pokemon-channel-pal", "pokemon-ranger"}
 )
 EXTERNAL_EVENT_LOCATIONS = event_locations() | frozenset(
-    {"pal-park", "newmoon-island", "flower-paradise", "sinnoh-hall-of-origin-1", "sinnoh-hall-of-origin-2"}
+    {
+        "sinjoh-ruins",
+        "pal-park",
+        "newmoon-island",
+        "flower-paradise",
+        "sinnoh-hall-of-origin-1",
+        "sinnoh-hall-of-origin-2",
+    }
 )
 # Métamo : seule la table A (Nosferapti) est accessible sans distribution externe ; les tables B à I
 # étaient prévues pour le Cadeau Mystère, jamais distribué. Garder les rencontres, sans les compter.

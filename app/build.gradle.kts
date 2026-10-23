@@ -252,7 +252,8 @@ tasks.register("checkAssets") {
         val manifest = root.resolve("assets.sha256")
         check(manifest.isFile) { "Inventaire des assets absent : $manifest. Restaurer les assets depuis Git." }
         val entries = manifest.readLines()
-        check(entries.isNotEmpty() && entries.size <= 40000) { "Inventaire des assets vide ou trop volumineux." }
+        // Même borne que le pipeline Python : les seize jeux dépassent 50 000 assets.
+        check(entries.isNotEmpty() && entries.size <= 60000) { "Inventaire des assets vide ou trop volumineux." }
         val paths = mutableSetOf<String>()
         entries.forEach { entry ->
             val parts = entry.split("  ", limit = 2)

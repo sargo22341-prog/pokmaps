@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import sqlite3
 from collections import defaultdict
+from dataclasses import replace
 from functools import cached_property
 from pathlib import Path
 
@@ -70,7 +71,10 @@ class DatabaseBuilder:
         self.pokemon = PokemonTables(self)
         self.moves = MoveTables(self)
         self.items = ItemTables(self)
-        self.locations = LocationTables(api)
+        from .locations_hgss import locations
+
+        native = locations() if any(game.pret_repo == "pokeheartgold" for game in games) else ()
+        self.locations = LocationTables(api, native)
         self.encounters = EncounterTables(self)
         self.abilities = AbilityTables(self)
 
@@ -78,10 +82,18 @@ class DatabaseBuilder:
 
     @cached_property
     def ds_species(self) -> dict[int, dict[str, DsSpecies]]:
-        return {
+        profiles = {
             vg: read_ds_species(self.pret_root(game, "les espèces DS"), game.pret_repo)
             for game, vg in zip(self.games, self.vg_ids, strict=True)
             if game.pret_format is PretFormat.GEN4
+        }
+        abilities = {r["identifier"].replace("-", ""): r["identifier"] for r in self.api.table("abilities")}
+        return {
+            vg: {
+                name: replace(row, abilities=tuple(abilities[a.replace("-", "")] for a in row.abilities))
+                for name, row in rows.items()
+            }
+            for vg, rows in profiles.items()
         }
 
     def game_of(self, version_group_id: int) -> Game:

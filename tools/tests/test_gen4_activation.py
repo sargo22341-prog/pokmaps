@@ -41,7 +41,7 @@ def test_sinnoh_metadata_preserves_its_hashes_across_git_checkouts() -> None:
 def test_sinnoh_versions_and_regional_dexes(db: sqlite3.Connection) -> None:
     versions = db.execute(
         """SELECT v.id, v.identifier, vg.generation_id FROM version v
-           JOIN version_group vg ON vg.id = v.version_group_id WHERE vg.generation_id = 4 ORDER BY v.id"""
+           JOIN version_group vg ON vg.id = v.version_group_id WHERE vg.id IN (8,9) ORDER BY v.id"""
     ).fetchall()
     assert versions == [(12, "diamond", 4), (13, "pearl", 4), (14, "platinum", 4)]
     for group, regional in ((8, 151), (9, 210)):

@@ -1,4 +1,5 @@
 kind,key,name_fr,reason
+location,johto-pokemart,Boutiques Pokémon de Johto,Lieu générique des livraisons externes HGSS en boutique.
 location,sinnoh-pokemart,Boutique Pokémon de Sinnoh,nom français absent de PokéAPI
 method,honey-tree,Arbre à Miel,méthode de Sinnoh relue
 method,pokemon-ranger,Transfert depuis Pokémon Ranger,événement externe

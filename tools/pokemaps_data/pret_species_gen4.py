@@ -40,12 +40,15 @@ def read_ds_species(root: Path, repo: str, *, pearl: bool = False) -> dict[str, 
         if len(paths) != 493:
             raise ValueError(f"{root} : 493 espèces attendues, {len(paths)} trouvées")
         rows = [_platinum(path) for path in paths]
-    elif repo == "pokediamond":
+    elif repo in {"pokediamond", "pokeheartgold"}:
         folder = "personal_pearl" if pearl else "personal"
         source = read_json(root / f"files/poketool/{folder}/personal.json")["baseStats"]
-        evolutions = read_json(root / "files/poketool/personal/evo.json")["evos"]
-        evos = {r["species"]: r["evos"] for r in evolutions}
-        rows = [_diamond(r, evos[r["species"]]) for r in source if r["species"] not in _SPECIAL_DP]
+        payload = read_json(root / "files/poketool/personal/evo.json")
+        evolutions = payload["evoTable"] if repo == "pokeheartgold" else payload["evos"]
+        evos = {r.get("species", r.get("baseSpecies", "")).removeprefix("SPECIES_"): r["evos"] for r in evolutions}
+        if repo == "pokeheartgold":
+            source = source[1:494]
+        rows = [_diamond(r, evos.get(r["species"], [])) for r in source if r["species"] not in _SPECIAL_DP]
     else:
         raise ValueError(f"Dépôt DS inconnu : {repo}")
     result = {row.identifier: row for row in rows}
@@ -95,7 +98,7 @@ def _diamond(r: dict, evolutions: list[dict]) -> DsSpecies:
         r["eggCycles"],
         r["growthRate"],
         tuple(r["eggGroups"]),
-        tuple((e["method"], e.get("param", 0), e["target"]) for e in evolutions),
+        tuple((e["method"], e.get("param", 0), e["target"].removeprefix("SPECIES_")) for e in evolutions),
     )
 
 

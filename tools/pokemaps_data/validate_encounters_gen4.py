@@ -14,7 +14,18 @@ from collections import defaultdict
 from collections.abc import Iterable
 
 # Préfixes des valeurs qui s'excluent ; toute autre valeur est une condition à elle seule.
-_EXCLUSIVE_PREFIXES = ("time-", "swarm-", "radar-", "slot2-", "backlot-", "honey-tree-group-", "great-marsh-daily-")
+_EXCLUSIVE_PREFIXES = (
+    "time-",
+    "swarm-",
+    "radar-",
+    "slot2-",
+    "backlot-",
+    "honey-tree-group-",
+    "great-marsh-daily-",
+    "radio-",
+    "hgss-contest-",
+    "hgss-safari-",
+)
 _NATIONAL_DEX = frozenset({"story-progress-national-dex", "story-progress-before-national-dex"})
 # Une table DS compte au plus cinq conditions (heure, essaim, radar, cartouche, Pokédex) : au plus 3×2×2×6×2.
 _MAX_COMBINATIONS = 512

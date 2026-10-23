@@ -31,7 +31,7 @@ class GuideRepository @Inject constructor(
         val pokemonIds = entries.map { it.pokemonId }.toSet()
         val index = maps.index(game)
         val mentions = GuideMentions(entries, catalog, index)
-        val selected = guideDefinitions(game) + achievementGuides(context, game.versionId)
+        val selected = guideDefinitions(game, context.resources) + achievementGuides(context, game.versionId)
         val chapters = selected.groupBy { it.chapter }
         val articles = selected.map { definition ->
             require(definition.pokemonId in pokemonIds) { "Sprite absent : ${definition.id}" }

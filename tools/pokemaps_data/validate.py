@@ -78,7 +78,8 @@ CHECKS = (
         "méthode de rencontre non prise en charge",
         """SELECT id, identifier FROM encounter_method WHERE identifier NOT IN
            ('walk', 'old-rod', 'good-rod', 'super-rod', 'feebas-tile-fishing', 'surf', 'seaweed',
-            'headbutt', 'headbutt-low', 'headbutt-normal', 'headbutt-high', 'rock-smash',
+            'headbutt', 'headbutt-low', 'headbutt-normal', 'headbutt-high',
+            'headbutt-common', 'headbutt-rare', 'headbutt-secret', 'rock-smash',
             'gift', 'gift-egg', 'colosseum-bonus-disc-jpn', 'colosseum-bonus-disc-us', 'pokemon-channel-pal',
             'static', 'pokeflute', 'squirt-bottle', 'roaming-grass', 'roaming-water',
             'devon-scope', 'wailmer-pail', 'npc-trade', 'pokemon-ranger', 'honey-tree')""",
@@ -444,6 +445,9 @@ def validate(path: Path) -> list[str]:
                 errors.append(f"{description} : {rows[:5]}")
         errors += _check_obtainable(connection)
         errors += validate_profiles(connection)
+        from .application_hgss import validate_database
+
+        errors += validate_database(connection)
         errors += check_slot_probabilities(connection)
     finally:
         connection.close()

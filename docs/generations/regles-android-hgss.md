@@ -1,12 +1,12 @@
-# HGSS — règles Android et sauvegardes préparatoires
+# HGSS — règles Android et sauvegardes
 
 Les versions 15 et 16 et le groupe 10, `heartgold-soulsilver`, sont reconnus par Android.
 La génération reste 4 ; les deux remakes occupent une rangée distincte, de génération d’origine 2.
-Le catalogue préparatoire fournit Ho-Oh et Lugia, les couleurs des jaquettes, Johto puis Kanto
+Le catalogue distribué fournit Ho-Oh et Lugia, les couleurs des jaquettes, Johto puis Kanto
 et le départ à Bourg Geon. Le choix et sa mémorisation sont testés avec un catalogue en mémoire.
-La base distribuée conserve exactement les quatorze jeux actuels : aucun asset n’est activé.
-Les guides et objectifs restent à réaliser dans la phase 7. Les outils de reproduction et de bonheur
-et les observations d’errants ont leurs règles HGSS ; les tests injectent un catalogue préparatoire.
+La base distribuée ajoute les deux remakes aux quatorze jeux antérieurs.
+Les guides et objectifs de la phase 7 sont disponibles, ainsi que les outils de reproduction et de bonheur
+et les observations d’errants propres à HGSS.
 
 ## Preuve des règles de capture
 
@@ -64,7 +64,7 @@ Sources principales :
 Les empreintes normalisées des fichiers lus sont conservées dans `regles-android-hgss-sources.json`.
 
 Les tests de cas d’usage HGSS utilisent des DAO en mémoire pour vérifier les requêtes du groupe 10
-et l’identité des deux cartouches ; ils ne prétendent pas charger une base HGSS déjà distribuée.
+et l’identité des deux cartouches. Ils complètent les tests d’intégration sur la base distribuée.
 Les tests de ViewModel couvrent aussi contenu vide, erreur, reprise et changement de jeu.
 
 ## Base, collection et export commun — 6D

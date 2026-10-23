@@ -16,8 +16,8 @@ from tkinter import messagebox, ttk
 from PIL import Image
 
 from pokemaps_data.games import GAMES_IN_PROGRESS
+from pokemaps_data.map_coordinates import editor_offsets
 from pokemaps_data.map_spots import SPOTS_CSV, Point, TerrainKey, read_spots, selected_key
-from pokemaps_data.maps_assembly_coordinates_gen4 import editor_offsets
 from pokemaps_data.sources import PREVIEW_DIR
 
 from .canvas import SpotCanvas
@@ -252,7 +252,7 @@ class MapEditor:
         kind = self._kind()
         if self.current is None or kind is None:
             return
-        if isinstance(self.wild_terrains, HgssCatalog):
+        if isinstance(self.wild_terrains, HgssCatalog) or self.current.family == "heartgold-soulsilver":
             point = self.wild_terrains.snap(self._editing_family(), self.current.identifier, kind, x, y)
         else:
             point = self.current.snap(x, y)

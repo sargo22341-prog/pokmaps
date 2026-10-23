@@ -9,8 +9,8 @@ from pokemaps_data.builder import SCHEMA_VERSION, DatabaseBuilder
 from pokemaps_data.builder_maps import _ObjectNames, _ObjectRows, _SpotRows
 from pokemaps_data.games import DECLARED_GAMES, map_families
 from pokemaps_data.hgss_preparation import PREPARATORY_GAMES
+from pokemaps_data.map_coordinates import editor_offsets
 from pokemaps_data.map_spots import TerrainKey, read_spots, selected_key
-from pokemaps_data.maps_assembly_coordinates_gen4 import editor_offsets
 from pokemaps_data.maps_characters import ObjectRow
 from pokemaps_data.maps_characters_data import read_character_names
 from pokemaps_data.maps_layout import identifier as map_identifier

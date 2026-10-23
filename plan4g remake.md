@@ -659,12 +659,51 @@ les ressources Android et la synchronisation manuelle du set partagé sont prép
 
 ### Phase 8 — Activation, recette et livraison
 
-- [ ] **8A — Génération candidate.** Produire tous les assets HGSS, contrôler reproductibilité,
+- [x] **8A — Génération candidate.** Produire tous les assets HGSS, contrôler reproductibilité,
   inventaires et non-régression des jeux existants. Sortie : base, cartes et catalogues cohérents prêts à activer.
-- [ ] **8B — Activation contrôlée.** Passer HGSS de `GAMES_IN_PROGRESS` à `GAMES`, actualiser
+- [x] **8B — Activation contrôlée.** Passer HGSS de `GAMES_IN_PROGRESS` à `GAMES`, actualiser
   documentation et notes, puis lancer tous les contrôles Python/Android. Sortie : contrôles complets verts.
 - [ ] **8C — Recette finale.** Exécuter les parcours des deux cartouches, sauvegardes et changements de jeu,
   mesurer taille/fluidité et vérifier l’installation par-dessus si un appareil est disponible.
   Sortie : rapport honnête des résultats et limites matérielles, captures et aucun défaut connu laissé volontairement.
 - [ ] **8D — Clôture.** Relire le diff et les assets versionnés, vérifier les limites de code,
   récapituler les preuves et proposer un message de commit français. Commit et publication sur demande explicite.
+
+**Réalisation 8A — 23 octobre 2026.** Deux générations indépendantes produisent exactement les mêmes
+50 172 assets inventoriés, la même base SQLite, les mêmes inventaires cartographiques, `hgss.json`
+et les mêmes ressources françaises de guides. La comparaison préserve intégralement les 281 789 lignes
+et les 33 042 fichiers antérieurs contrôlés ; la seconde génération préserve aussi les 568 496 lignes
+et les 50 171 fichiers hors base du catalogue activé des seize jeux.
+
+Les données HGSS comprennent 493 profils, le régional de 256 espèces, 94 profils de formes,
+496 lieux natifs, 224 plans et 169 plans inférieurs alignés, soit 889 entrées cartographiques.
+Les 1 314 passages, 1 271 repères, 1 191 offres et 191 configurations Safari sont exportés dans
+le schéma commun 23. Chaque cartouche propose 334 guides et 136 succès ; les 54 objectifs par version
+gardent les choix de starters séparés. Les rencontres Sinjoh et Pichu Troizépi restent externes,
+et les quatre errants gardent leurs routes natives, région, version et niveau.
+
+La candidate refuse les destinations imbriquées dans les assets distribués et les anciens aperçus
+techniques. Les fichiers d'un aperçu du 21 octobre rencontrés dans le dossier de reproduction ont
+été conservés séparément ; ils ne figurent pas dans les assets livrés.
+Inventaire global SHA-256 : `a210d69e3f5b9a08088a84e5057e4e00684eb1d445743815c0dfb36846f79955`.
+Base SHA-256 : `1c0eedf70af7bf186e45e19e8960e4d44ea5fe8938197db19d3e5d0474bafcd2`.
+Les preuves et journaux de session restent hors Git dans `tools/build/scratchpad/phase8-*`.
+
+**Réalisation 8B — Activation et contrôles complets réussis.** HGSS figure dans `GAMES`, `GAMES_IN_PROGRESS` est vide,
+les assets et ressources Android sont intégrés, la documentation et les notes sont actualisées.
+Les contrôles des assets, Ruff, format Python, 1 140 tests ordinaires et 433 tests des sources épinglées
+passent. La recette Android complète passe également : 665 tests JVM/Compose, ktlint, Lint, absence de
+services Google et assemblage debug. L’APK se trouve dans `app/build/outputs/apk/debug/app-debug.apk`.
+Le schéma Room reste 23 ; les limites 600/60 et le diff sont contrôlés.
+
+Les échecs intermédiaires ont été traités : relance autorisée après les refus Windows sur les temporaires,
+relance du générateur qui gardait une ancienne version des modules en mémoire, conversion et contrat des
+Noigrumes corrigés, bornes d’inventaire Python/Gradle alignées à 60 000, inventaire cartographique HGSS copié,
+ressources françaises dédupliquées et typographiées, anciennes attentes de catalogue et de badges d’étage
+adaptées aux seize jeux et aux coupes déjà prises en charge. L’aperçu technique ancien est conservé à part.
+Un délai de rendu Compose a été observé ; son test puis la suite complète passent sans modifier son délai
+ni ses assertions. L’archivage du cache Gradle était lent : la recette finale utilise `--no-build-cache`,
+sans modifier la configuration du dépôt. La dépréciation Gradle/AGP `Configuration.setVisible(boolean)` et
+les avis Git de conversion LF/CRLF restent signalés ; aucune suppression d’avertissement n’a été ajoutée.
+Aucune recette sur téléphone, installation ADB, signature release, création de commit ou publication effectuée.
+Les volets 8C/8D restent hors du périmètre demandé pour cette livraison 8A/8B.

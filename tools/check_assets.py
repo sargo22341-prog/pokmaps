@@ -43,6 +43,11 @@ def main() -> int:
         for game in GEN3_GAMES:
             validate_character_catalog(args.assets / "maps" / game.version_group, game)
         for game in GAMES:
+            if game.pret_repo == "pokeheartgold":
+                from pokemaps_data.application_hgss import validate_assets
+
+                validate_assets(args.assets)
+                continue
             if game.pret_format is PretFormat.GEN4:
                 folder = args.assets / "maps" / game.version_group
                 check_inventory(folder)

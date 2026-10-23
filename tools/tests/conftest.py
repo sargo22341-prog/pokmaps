@@ -75,9 +75,7 @@ def builder(
 
 @pytest.fixture(scope="session")
 def source_cache_ready() -> None:
-    missing = [
-        repo for repo, commit in PRET_COMMITS.items() if not (CACHE / f"{repo}-{commit[:12]}" / ".complete").is_file()
-    ]
+    missing = [repo for repo in PRET_COMMITS if not (pret_dir(CACHE, repo) / ".complete").is_file()]
     if missing:
         pytest.fail(
             f"Sources pret absentes : {missing}. Exécutez tools/build_data.py avant les tests.",

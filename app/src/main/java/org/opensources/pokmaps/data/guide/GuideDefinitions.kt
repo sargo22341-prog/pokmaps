@@ -1,14 +1,15 @@
 package org.opensources.pokmaps.data.guide
 
+import android.content.res.Resources
 import org.opensources.pokmaps.domain.model.Game
 import org.opensources.pokmaps.domain.model.GameVersion
 import org.opensources.pokmaps.domain.model.VersionGroup
 
 /** Choisit les fournisseurs de la branche du jeu avant de construire les définitions propres à sa version. */
-internal fun guideDefinitions(game: Game): List<GuideDefinition> {
+internal fun guideDefinitions(game: Game, resources: Resources? = null): List<GuideDefinition> {
     val versionId = game.version.id
     val branch = when (game.versionGroup) {
-        VersionGroup.HEARTGOLD_SOULSILVER -> emptyList()
+        VersionGroup.HEARTGOLD_SOULSILVER -> hgssGuides(requireNotNull(resources), game)
 
         VersionGroup.RED_BLUE, VersionGroup.YELLOW -> kantoGuides() + sideGuides() + tipGuides()
 

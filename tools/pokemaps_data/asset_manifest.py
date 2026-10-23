@@ -12,7 +12,8 @@ from .encounter_backgrounds import TERRAINS
 from .form_sprites import UNOWN
 
 MANIFEST = "assets.sha256"
-_MAX_FILES = 40_000
+# Les seize jeux dépassent 50 000 fichiers ; garder une borne sous la limite ZIP de 65 535 entrées.
+_MAX_FILES = 60_000
 
 
 def _required_paths(assets: Path) -> set[str]:
@@ -43,6 +44,15 @@ def _required_paths(assets: Path) -> set[str]:
         )
         paths.update(f"maps/{group}/sprites/{sprite}.webp" for group, sprite in rows)
         groups = {row[0] for row in connection.execute("SELECT identifier FROM version_group")}
+        if "heartgold-soulsilver" in groups:
+            paths.update(
+                {
+                    "hgss.json",
+                    "maps/heartgold-soulsilver/catalog.json",
+                    "maps/heartgold-soulsilver/assemblies.json",
+                    "maps/heartgold-soulsilver/terrain.json",
+                }
+            )
         paths.update(
             f"maps/{group}/characters.json" for group in groups & {"ruby-sapphire", "emerald", "firered-leafgreen"}
         )

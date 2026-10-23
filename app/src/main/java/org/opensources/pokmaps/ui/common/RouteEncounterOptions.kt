@@ -34,6 +34,8 @@ internal fun RouteEncounterOptions(
     var national by rememberSaveable(key) { mutableStateOf(false) }
     var daily by rememberSaveable(key) { mutableStateOf(false) }
     var radio by rememberSaveable(key) { mutableStateOf(EncounterRadio.OFF) }
+    var safari by rememberSaveable(key) { mutableStateOf<String?>(null) }
+    var contestDay by rememberSaveable(key) { mutableStateOf<String?>(null) }
     val filter = RouteEncounterFilter(
         cartridge,
         roaming,
@@ -42,16 +44,13 @@ internal fun RouteEncounterOptions(
         national || daily || cartridge != GbaCartridge.NONE || radio != EncounterRadio.OFF,
         daily,
         gifts,
-        radio
+        radio,
+        safari,
+        contestDay
     )
     val keys = remember(encounters) { encounters.flatMap { it.conditionKeys }.toSet() }
-    if (!roaming && !gifts && keys.any { it.startsWith("radio-") }) RadioSelector(radio) { radio = it }
-    if (!roaming && !gifts && keys.any { it.startsWith("slot2-") }) {
-        CompactSelect(cartridge, GbaCartridge.entries, { cartridge = it }) { stringResource(it.label) }
-    }
-    if (!roaming && !gifts && "backlot-mentioned" in keys) {
-        FilterChip(daily, { daily = !daily }, { Text(stringResource(R.string.route_daily)) })
-    }
+    ConditionalEncounterSelectors(encounters, safari, contestDay, { safari = it }, { contestDay = it })
+    OrdinarySelectors(filter, keys, { radio = it }, { cartridge = it }, { daily = !daily })
     RouteSwitches(
         encounters,
         filter,
@@ -72,6 +71,24 @@ internal fun RouteEncounterOptions(
     }
     val filtered = remember(encounters, filter) { filter.apply(encounters) }
     content(filtered)
+}
+
+@Composable
+private fun OrdinarySelectors(
+    filter: RouteEncounterFilter,
+    keys: Set<String>,
+    onRadio: (EncounterRadio) -> Unit,
+    onCartridge: (GbaCartridge) -> Unit,
+    onDaily: () -> Unit
+) {
+    if (filter.roaming || filter.gifts) return
+    if (keys.any { it.startsWith("radio-") }) RadioSelector(filter.radio, onRadio)
+    if (keys.any { it.startsWith("slot2-") }) {
+        CompactSelect(filter.cartridge, GbaCartridge.entries, onCartridge) { stringResource(it.label) }
+    }
+    if ("backlot-mentioned" in keys) {
+        FilterChip(filter.daily, onDaily, { Text(stringResource(R.string.route_daily)) })
+    }
 }
 
 @Composable

@@ -79,8 +79,8 @@
     }
   },
   "prerequisites": {
-    "hgss-characters/inventory.json": "ec159dd8264f7732aed65149547146c34254227f35def8ed37b41c2a9f20f7f9",
-    "hgss-encounters/inventory.json": "1a6d3ab0a0767d7563892314a58e7405a3edafd0aeed9725924df0dea49f030e"
+    "hgss-characters/inventory.json": "7b6bddf743a6bd0f870dc1b5055b1d5267aa76a72cc4401a78863ef498660ba9",
+    "hgss-encounters/inventory.json": "fd56cab0c651ac093383cdf71627dc34cb25a9de74c3865e64d16cd64c5024fa"
   },
   "guides": [
     {

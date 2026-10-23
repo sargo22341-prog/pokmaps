@@ -1,6 +1,6 @@
-# Rencontres préparatoires HeartGold et SoulSilver
+# Rencontres HeartGold et SoulSilver
 
-Lots 4A à 4D du [plan](../../plan4g%20remake.md), sans activation des remakes dans l’application.
+Lots 4A à 4E du [plan](../../plan4g%20remake.md), exportés dans la base et les cartes depuis la phase 8.
 Le moteur et les tables proviennent du commit HGSS fixé dans `sources.HGSS_PRET_COMMIT` ;
 les CSV de comparaison proviennent de `sources.POKEAPI_COMMIT`.
 L’[inventaire des sources](rencontres-hgss-sources.json) fixe leurs empreintes ;
@@ -74,7 +74,7 @@ Le calcul est borné à 18 configurations représentatives par méthode et banqu
 trois choix radio et deux états d’essaim. Les jours sans effet ne sont pas multipliés.
 `filter_distributions` sélectionne une version, une méthode et une configuration compatible.
 Les filtres Android reconnaissent les trois catégories d’arbres, Éclate-Roc et une radio exclusive,
-avec les exigences françaises affichées ; aucun jeu HGSS n’est encore déclaré dans Android.
+avec les exigences françaises affichées. Les deux versions sont sélectionnables dans Android.
 
 Les 60 lieux d’arbres conservent groupes de coordonnées et tables communes/rares/particulières.
 `src/field/headbutt.c` choisit la catégorie ordinaire selon le dernier chiffre de l’identifiant complet
@@ -150,7 +150,8 @@ Le calcul des objectifs compatibles avec les choix de starters et de fossiles re
 Le [catalogue particulier versionné](rencontres-hgss-particulieres.json) permet de vérifier ces données sans cache.
 Son empreinte figure dans la preuve de génération ; les tests pipeline reconstruisent aussi le catalogue complet
 depuis les sources épinglées. L'affichage Android et la traduction des branches de scénario appartiennent aux
-lots d'intégration des personnages et d'activation ; les remakes ne sont pas encore sélectionnables.
+lots d’intégration des personnages et d’activation désormais réalisés. Les listes Android sélectionnent
+une configuration Safari ou un jour de concours ; les errants restent séparés et rattachés à leurs routes natives.
 
 ## Placement — 4E
 

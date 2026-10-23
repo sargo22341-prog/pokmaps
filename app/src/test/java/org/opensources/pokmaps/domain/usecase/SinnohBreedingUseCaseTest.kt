@@ -31,7 +31,7 @@ class SinnohBreedingUseCaseTest {
         try {
             val pokedex = PokedexRepository(database.pokedexDao())
             val pokemon = PokemonRepository(database.pokemonDao(), pokedex)
-            val games = database.gameDao().games().first().filter { it.generationId == 4 }
+            val games = database.gameDao().games().first().filter { it.versionId in 12..14 }
             assertEquals(3, games.size)
             for (game in games) {
                 val tools =

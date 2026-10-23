@@ -3,6 +3,14 @@
 Les builds et releases utilisent les fichiers versionnés ; `tools/build_data.py` est une opération
 explicite de mise à jour. Les règles de reproductibilité et de validation sont dans [AGENTS.md](../../AGENTS.md).
 
+HGSS fait partie de la génération distribuée : 493 profils, régional de 256 espèces, Johto et Kanto,
+cartes superposées alignées, rencontres conditionnelles, personnages et guides français.
+`--hgss-candidate-only --assets tools/build/scratchpad/hgss-candidate --reuse-gen3-maps --application-only`
+construit une candidate séparée et compare chaque ligne et fichier antérieur. Les aperçus ci-dessous restent
+les points de relecture des données natives. L’export commun utilise `hgss_area_bindings.csv` pour les
+obtentions ponctuelles ; les zones sauvages gardent une identité native indépendante de PokéAPI.
+Les recettes de l’export et l’inventaire des cartes accompagnent `hgss.json` et `assets.sha256`.
+
 ## Sources et sorties
 
 | Source | Usage |
@@ -12,7 +20,7 @@ explicite de mise à jour. Les règles de reproductibilité et de validation son
 | `pret/pokegold`, `pokecrystal` | Cartes, scripts et tables sauvages horaires de Johto/Kanto |
 | `pret/pokeruby`, `pokeemerald`, `pokefirered` | Cartes, scripts, rencontres, équipes et règles GBA |
 | `pret/pokeplatinum`, `pokediamond` | Pokémon et cartes DS, modèles, textures, matrices, événements et scripts |
-| `pret/pokeheartgold`, aperçu isolé | Pokémon HGSS, atlas Johto/Kanto, installations, coupes et déplacements scriptés |
+| `pret/pokeheartgold` épinglé | Pokémon HGSS, atlas Johto/Kanto, installations, coupes et déplacements scriptés |
 | PokeAPI/sprites | Sprites Pokémon Noir/Blanc normaux et chromatiques |
 | pokesprite | Icônes d’objets |
 | `tools/data/` | Corrections et compléments éditoriaux relus |

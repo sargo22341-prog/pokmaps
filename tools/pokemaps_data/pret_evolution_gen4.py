@@ -49,7 +49,7 @@ _METHODS = frozenset(_DP_METHODS.values()) | _LEVEL_METHODS | {"EVO_TRADE", "EVO
 
 
 def read_ds_evolution_rules(root: Path, repo: str) -> EvolutionRules:
-    relative = "src/pokemon.c" if repo == "pokeplatinum" else "arm9/src/pokemon.c"
+    relative = "src/pokemon.c" if repo in {"pokeplatinum", "pokeheartgold"} else "arm9/src/pokemon.c"
     if (root / relative).stat().st_size > 4 * 1024 * 1024:
         raise ValueError(f"{root / relative} : moteur DS trop volumineux")
     text = (root / relative).read_text(encoding="utf-8")
@@ -59,8 +59,9 @@ def read_ds_evolution_rules(root: Path, repo: str) -> EvolutionRules:
         if len(found) != 1 or text.count("EVOLVE_FRIENDSHIP_THRESHOLD <= monFriendship") != 3:
             raise ValueError(f"{root} : seuil de bonheur DS inconnu")
         threshold = int(found[0])
-    elif repo == "pokediamond":
-        found = re.findall(r"friendship >= (\d+)", text[text.index("struct Evolution *evoTable") :])
+    elif repo in {"pokediamond", "pokeheartgold"}:
+        body = text if repo == "pokeheartgold" else text[text.index("struct Evolution *evoTable") :]
+        found = re.findall(r"friendship >= (\d+)", body)
         if len(found) != 3 or len(set(found)) != 1:
             raise ValueError(f"{root} : seuil de bonheur DS inconnu")
         threshold = int(found[0])

@@ -56,6 +56,9 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
 
 def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
     maps_only.add_argument(
+        "--hgss-candidate-only", action="store_true", help="générer la candidate complète avec HGSS dans --assets"
+    )
+    maps_only.add_argument(
         "--hgss-content-only", action="store_true", help="générer les guides, objectifs et activités HGSS"
     )
     maps_only.add_argument(
@@ -141,6 +144,13 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> int:
     args = _arguments()
+    if args.hgss_candidate_only:
+        from pokemaps_data.candidate_hgss import validate_destination
+        from pokemaps_data.games import HEARTGOLD_SOULSILVER
+
+        validate_destination(DEFAULT_ASSETS, args.assets)
+        args.application_only = True
+        return _build_all(args, tuple(dict.fromkeys((*GAMES, HEARTGOLD_SOULSILVER))))
     if args.encounter_backgrounds_only:
         build_encounter_backgrounds(args.cache, args.assets)
         write_manifest(args.assets)
@@ -252,12 +262,23 @@ def _hgss_preview(args: argparse.Namespace) -> bool:
     return True
 
 
-def _build_all(args: argparse.Namespace) -> int:
+def _build_all(args: argparse.Namespace, games: tuple[Game, ...] = GAMES) -> int:
     # Tous les dépôts épinglés, y compris ceux des jeux en cours d'intégration : les tests les lisent dans le cache.
     print(f"Téléchargement des désassemblages pret ({', '.join(PRET_COMMITS)})…")
     repos = {repo: fetch_pret(args.cache, repo) for repo in PRET_COMMITS}
     print("Téléchargement des CSV PokéAPI…")
     api = PokeApi(fetch_pokeapi_csv(args.cache))
+    if args.hgss_candidate_only:
+        for game in GEN3_MAP_GAMES:
+            shutil.copytree(
+                DEFAULT_ASSETS / "maps" / game.version_group,
+                args.assets / "maps" / game.version_group,
+                dirs_exist_ok=True,
+            )
+    if any(game.pret_repo == "pokeheartgold" for game in games):
+        from pokemaps_data.application_hgss import prepare
+
+        prepare(args.cache, DEFAULT_ASSETS, args.map_workers)
 
     if args.reuse_gen3_maps:
         for game in GEN3_MAP_GAMES:
@@ -266,17 +287,26 @@ def _build_all(args: argparse.Namespace) -> int:
         build_gen3_maps(args.cache, args.assets / "maps")
     build_fixed_catalog(args.cache, args.assets)
 
-    print(f"Données de l'application ({', '.join(game.version_group for game in GAMES)}) : {args.assets}")
-    if not _build(api, args.cache, repos, args.assets, GAMES):
+    print(f"Données de l'application ({', '.join(game.version_group for game in games)}) : {args.assets}")
+    if not _build(api, args.cache, repos, args.assets, games):
         return 1
     build_hoenn_catalog(args.cache, args.assets)
     build_sinnoh_catalog(args.cache, args.assets)
+    if any(game.pret_repo == "pokeheartgold" for game in games):
+        from pokemaps_data.application_hgss import build_catalog, validate_assets
+
+        build_catalog(args.assets, DEFAULT_ASSETS.parent / "res/values")
+        validate_assets(args.assets)
     build_encounter_backgrounds(args.cache, args.assets)
     if args.assets.resolve() == DEFAULT_ASSETS.resolve():
         build_achievement_resources(Path(__file__).resolve().parents[1] / "app/src/main/res/values")
     if args.assets.resolve() != DEFAULT_ASSETS.resolve():
         shutil.copytree(DEFAULT_ASSETS / "licenses", args.assets / "licenses", dirs_exist_ok=True)
     write_manifest(args.assets)
+    if args.hgss_candidate_only:
+        from pokemaps_data.candidate_hgss import qualify
+
+        qualify(DEFAULT_ASSETS, args.assets)
     if GAMES_IN_PROGRESS and not args.application_only:
         names = ", ".join(game.version_group for game in GAMES_IN_PROGRESS)
         print(f"Aperçu avec les jeux en cours d'intégration ({names}) : {args.preview}")

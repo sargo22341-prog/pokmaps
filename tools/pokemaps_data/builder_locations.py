@@ -7,6 +7,7 @@ import csv
 from dataclasses import dataclass
 from functools import cached_property
 
+from .locations_hgss import NativeLocation
 from .pokeapi import PokeApi, optional_int
 from .sources import DATA_DIR
 
@@ -37,8 +38,18 @@ NAME_FIX_KINDS = frozenset({*_NAME_FIX_TABLES, "area"})
 
 
 class LocationTables:
-    def __init__(self, api: PokeApi) -> None:
+    def __init__(self, api: PokeApi, native: tuple[NativeLocation, ...] = ()) -> None:
         self.api = api
+        self.native = native
+
+    @cached_property
+    def locations(self) -> dict[int, dict[str, str]]:
+        rows = self.api.by_id("locations").copy()
+        for row in self.native:
+            if row.location_id in rows:
+                raise ValueError(f"HGSS : identifiant de lieu déjà utilisé : {row.location_id}")
+            rows[row.location_id] = dict(identifier=row.identifier, region_id=str(row.region) if row.region else "")
+        return rows
 
     @cached_property
     def extra_areas(self) -> dict[int, ExtraArea]:
@@ -53,12 +64,16 @@ class LocationTables:
                 if not row["name_fr"].strip():
                     raise ValueError(f"extra_areas.csv:{line} : nom vide")
                 result[area_id] = ExtraArea(area_id, locations[row["location"]], row["area"], row["name_fr"])
+        for row in self.native:
+            if row.area_id in pokeapi or row.area_id in result:
+                raise ValueError(f"HGSS : identifiant de zone déjà utilisé : {row.area_id}")
+            result[row.area_id] = ExtraArea(row.area_id, row.location_id, "", row.name_fr)
         return result
 
     @cached_property
     def area_keys(self) -> dict[int, str]:
         """Zone -> clé lisible `lieu/zone` utilisée par les fichiers de tools/data/."""
-        locations = self.api.by_id("locations")
+        locations = self.locations
         keys = {
             int(row["id"]): _area_key(locations[int(row["location_id"])]["identifier"], row["identifier"])
             for row in self.api.table("location_areas")
@@ -72,7 +87,7 @@ class LocationTables:
     @cached_property
     def area_locations(self) -> dict[int, str]:
         """Zone -> identifiant PokéAPI de son lieu."""
-        locations = self.api.by_id("locations")
+        locations = self.locations
         result = {
             int(row["id"]): locations[int(row["location_id"])]["identifier"] for row in self.api.table("location_areas")
         }
@@ -104,7 +119,7 @@ class LocationTables:
     def location_area_table(self, used_areas: set[int]) -> list[tuple]:
         """Zones `used_areas`, avec leur nom français (corrigé par name_fixes.csv ou donné par extra_areas.csv)."""
         names = self.api.names("location_area_prose", "location_area_id")
-        locations = self.api.by_id("locations")
+        locations = self.locations
         location_names = self.api.names("location_names", "location_id")
         rows = []
         for area_id in sorted(used_areas):
@@ -126,8 +141,9 @@ class LocationTables:
 
     def location_rows(self, used_areas: set[int]) -> list[tuple]:
         """Lieux des zones `used_areas` ; un nom français manquant arrête la génération."""
-        names = self.api.names("location_names", "location_id")
-        locations = self.api.by_id("locations")
+        names = self.api.names("location_names", "location_id").copy()
+        locations = self.locations
+        names.update({row.location_id: row.name_fr for row in self.native})
         used = sorted({self._area(area)[0] for area in used_areas})
         rows = []
         for location_id in used:

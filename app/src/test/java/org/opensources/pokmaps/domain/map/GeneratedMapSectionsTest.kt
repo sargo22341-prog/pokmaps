@@ -77,7 +77,7 @@ class GeneratedMapSectionsTest {
             val versions = maps(connection).groupBy { it.first }
             val warps = warps(connection)
             val groups = groupIdentifiers(connection)
-            assertEquals((1..9).toSet(), versions.keys)
+            assertEquals((1..10).toSet(), versions.keys)
             versions.forEach { (group, entries) ->
                 val maps = entries.map { it.second }.associateBy { it.id }
                 val catalog = MapCatalog(groups.getValue(group), maps, warps, emptyMap(), emptyMap())
@@ -87,7 +87,9 @@ class GeneratedMapSectionsTest {
                     assertEquals(sections.size, sections.map { it.level }.distinct().size)
                     val parsed = FloorLevel.parse(current.identifier)
                     if (sections.isNotEmpty()) {
-                        assertTrue(current.identifier, sections.any { it.mapId == current.id })
+                        // Les coupes partagent le badge d’étage de leur plan supérieur.
+                        val upperId = catalog.levelsOf(current.id).firstOrNull()?.mapId ?: current.id
+                        assertTrue(current.identifier, sections.any { it.mapId == upperId })
                         if (group <= 4 && !current.identifier.endsWith("pokecenter-1f") &&
                             current.identifier != "pokecenter-2f-plan"
                         ) {

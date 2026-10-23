@@ -63,7 +63,7 @@ class VersionGroupMatrixTest {
     }
 
     @Test
-    fun theShippedDatabaseHoldsExactlyTheFourteenGamesOfTheTestMatrix() {
+    fun theShippedDatabaseHoldsExactlyTheSixteenGamesOfTheTestMatrix() {
         val database = File(System.getProperty("pokemaps.database").orEmpty())
         assertTrue("Asset versionné absent : database/pokedex.db", database.isFile)
         val games = DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
@@ -90,7 +90,13 @@ class VersionGroupMatrixTest {
                 }
             }
         }
-        val declared = FakeGameDao.ELEVEN_GAMES + listOf(FakeGameDao.DIAMOND, FakeGameDao.PEARL, FakeGameDao.PLATINUM)
+        val declared = FakeGameDao.ELEVEN_GAMES + listOf(
+            FakeGameDao.DIAMOND,
+            FakeGameDao.PEARL,
+            FakeGameDao.PLATINUM,
+            FakeGameDao.HEARTGOLD,
+            FakeGameDao.SOULSILVER
+        )
         val matrix = declared.map {
             listOf(it.versionId, it.versionIdentifier, it.versionGroupId, it.versionGroupIdentifier, it.generationId)
         }

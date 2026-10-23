@@ -52,4 +52,8 @@ def form_table(builder: DatabaseBuilder) -> list[tuple]:
                         *(profile[stat] for stat in range(1, 7)),
                     )
                 )
+    if any(game.pret_repo == "pokeheartgold" for game in builder.games):
+        from .builder_pokemon_hgss import forms
+
+        result.extend(forms())
     return sorted(result)

@@ -208,6 +208,10 @@ class MoveTables:
         }
 
     def _pret_moves(self, game: Game) -> list[PretMove]:
+        if game.pret_repo == "pokeheartgold":
+            from .builder_pokemon_hgss import moves
+
+            return moves(self.builder.pret_root(game, "les attaques HGSS"))
         if game.pret_format is PretFormat.GEN3:
             return self.builder.gen3_repo(game, "les effets des attaques").moves
         if game.pret_format is PretFormat.GEN4:

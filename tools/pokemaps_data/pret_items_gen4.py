@@ -33,6 +33,14 @@ def ds_item_constants(root: Path, repo: str) -> tuple[str, ...]:
         return tuple(
             line for line in lines if line.startswith("ITEM_") and line != "ITEM_NONE" and line not in _UNUSED_PLATINUM
         )
+    if repo == "pokeheartgold":
+        from .pret_hgss_trainers import item_constants
+
+        return tuple(
+            name
+            for name, value in item_constants(root).items()
+            if 1 <= value <= 536 and not name.startswith(("ITEM_VAR_", "ITEM_DATA_CARD_"))
+        )
     if repo == "pokediamond":
         rows = read_json(root / "files/itemtool/itemdata/item_data.json")["item_data"]
         return tuple(r["name"] for r in rows if r["name"] != "ITEM_NONE")
@@ -62,9 +70,9 @@ def ds_held_items(builder: DatabaseBuilder, vg: int) -> list[tuple]:
 
 
 def read_held_item_rates(root: Path, repo: str) -> tuple[int, int]:
-    if repo not in {"pokeplatinum", "pokediamond"}:
+    if repo not in {"pokeplatinum", "pokediamond", "pokeheartgold"}:
         raise ValueError(f"Dépôt d'objets DS inconnu : {repo}")
-    path = root / ("src/pokemon.c" if repo == "pokeplatinum" else "arm9/src/pokemon.c")
+    path = root / ("src/pokemon.c" if repo in {"pokeplatinum", "pokeheartgold"} else "arm9/src/pokemon.c")
     if path.stat().st_size > 4 * 1024 * 1024:
         raise ValueError(f"{path} : moteur DS trop volumineux")
     text = path.read_text(encoding="utf-8")

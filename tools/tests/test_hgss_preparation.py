@@ -17,9 +17,9 @@ _ROOT = Path(__file__).resolve().parents[2]
 _INVENTORY = json.loads((_ROOT / "docs/generations/sources-hgss.json").read_text(encoding="utf-8"))
 
 
-def test_preparatory_contract_cannot_enter_existing_generators() -> None:
+def test_qualified_hgss_contract_is_in_the_active_catalog() -> None:
     game = HEARTGOLD_SOULSILVER
-    assert (game,) == PREPARATORY_GAMES
+    assert not PREPARATORY_GAMES
     assert game.pret_versions == (("heartgold", "HEARTGOLD"), ("soulsilver", "SOULSILVER"))
     assert game.version_group == game.map_family == "heartgold-soulsilver"
     assert game.pret_format == PretFormat.GEN4
@@ -28,13 +28,14 @@ def test_preparatory_contract_cannot_enter_existing_generators() -> None:
         ("JOHTO", "NEW_BARK", 993),
         ("KANTO", "PALLET", 992),
     ]
-    for games in (GAMES, GAMES_IN_PROGRESS, ALL_GAMES, DECLARED_GAMES):
-        assert game not in games
-    assert sum(len(g.pret_versions) for g in GAMES) == 14
-    assert "pokeheartgold" not in PRET_COMMITS
+    for games in (GAMES, ALL_GAMES, DECLARED_GAMES):
+        assert game in games
+    assert game not in GAMES_IN_PROGRESS
+    assert sum(len(g.pret_versions) for g in GAMES) == 16
+    assert PRET_COMMITS["pokeheartgold"] == HGSS_PRET_COMMIT
     assert _INVENTORY["pret_commit"] == HGSS_PRET_COMMIT
     assert _INVENTORY["pokeapi_commit"] == POKEAPI_COMMIT
-    current_regions = {r.number for g in DECLARED_GAMES for r in g.regions}
+    current_regions = {r.number for g in DECLARED_GAMES if g != game for r in g.regions}
     assert not current_regions & {r.number for r in game.regions}
 
 

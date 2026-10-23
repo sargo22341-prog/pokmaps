@@ -1,6 +1,7 @@
 # Guides et activités HeartGold / SoulSilver
 
-Les sorties de 7A, 7B et 7C restent préparatoires : les remakes ne sont pas ajoutés aux jeux distribués.
+Les sorties de 7A à 7E alimentent désormais les jeux distribués. La génération complète exporte
+`hgss.json` et `strings_guides_hgss.xml` ; les commandes ciblées ci-dessous restent dédiées à la relecture.
 Le [catalogue versionné](contenus-hgss-catalogue.json) se consulte sans cache ni réseau.
 Les textes éditoriaux français résident dans `tools/data/hgss_guides.json`, `hgss_calendar.json`
 et `hgss_activities.json` ; ils ne sont pas repris des soluces GSC.
@@ -40,7 +41,8 @@ Chaque entrée relie ses lieux français aux en-têtes natifs, les personnages �
 les objets remis aux identifiants des offres et les preuves aux scripts.
 Les liens désignent le contexte du lieu ; ils ne déclarent pas que tous ses personnages ou cadeaux
 sont disponibles à la même étape. Les conditions restent celles du catalogue des personnages.
-Le raccordement aux écrans Android accompagne l'activation de la phase 8.
+Les écrans Android proposent 334 guides par cartouche, avant les 136 succès : parcours,
+54 objectifs, calendrier, configurations Safari et Pokéwalker, Zone de Combat et services de scène.
 
 ## Objectifs par cartouche
 
@@ -148,4 +150,5 @@ La synchronisation manuelle lit une fois chaque ensemble distinct, puis associe 
 les déverrouillages ordinaires et hardcore. Un échec ne sauvegarde aucune progression partielle.
 La connexion et l’observation des préférences ne déclenchent aucune lecture réseau.
 
-Le schéma Room et les quatorze jeux distribués restent identiques ; les remakes restent préparatoires.
+Le schéma Room 23 est conservé. La candidate vérifie que les lignes et fichiers des quatorze jeux antérieurs
+sont identiques avant l’activation des deux remakes.

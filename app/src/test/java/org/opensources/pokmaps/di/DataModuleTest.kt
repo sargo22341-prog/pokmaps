@@ -45,7 +45,8 @@ class DataModuleTest {
         val updated = DataModule.database(context)
         try {
             val games = withContext(Dispatchers.IO) { updated.gameDao().games().first() }
-            assertEquals(14, games.size)
+            assertEquals(16, games.size)
+            assertEquals(setOf(15, 16), games.filter { it.remakeGenerationId == 2 }.map { it.versionId }.toSet())
             assertFalse(context.getDatabasePath(oldName).exists())
             assertTrue(context.getDatabasePath("pokedex-${originalTime + 1}.db").exists())
             assertEquals(before, store.data.first())
@@ -74,7 +75,7 @@ class DataModuleTest {
         val database = DataModule.database(context)
         try {
             val games = withContext(Dispatchers.IO) { database.gameDao().games().first() }
-            assertEquals(14, games.size)
+            assertEquals(16, games.size)
             assertTrue(games.single { it.versionId == 9 }.forms.getValue(386).single().isDefault)
             assertFalse(context.getDatabasePath("pokedex.db").exists())
             assertFalse(context.getDatabasePath("pokedex-123.db").exists())

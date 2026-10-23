@@ -1,8 +1,8 @@
 # Aperçu Pokémon HeartGold et SoulSilver
 
 La phase 2 du [plan](../../plan4g%20remake.md) prépare les données Pokémon sans attendre les cartes
-complètes. Les jeux restent dans `PREPARATORY_GAMES`, hors des générateurs Sinnoh et des jeux distribués.
-Aucun schéma SQL, enum Android, sauvegarde ou asset de l'application ne change.
+complètes. Depuis la phase 8, les jeux sont dans `GAMES` et leurs données rejoignent la base distribuée,
+avec un export HGSS distinct des générateurs de cartes Sinnoh. Le schéma Room 23 est conservé.
 
 ## Générer et relire
 
@@ -68,7 +68,8 @@ Rayquaza 3 contre 45, Dialga/Palkia 30 contre 3. Ces cinq écarts précis sont d
 ## Formes, évolutions et accès
 
 `tools/data/hgss_pokemon_forms.csv` est un catalogue propre à HGSS : 47 formes nommées par cartouche,
-avec les noms français et chemins des sprites déjà distribués. Il n'étend pas le catalogue actif.
+avec les noms français et chemins des sprites déjà distribués. Il fournit les 94 profils de formes
+distribués pour les versions 15 et 16.
 Les statistiques des formes viennent de HGSS : Motisma Chaleur reste Électrik/Spectre, par exemple.
 Morphéo et Arceus conservent une règle de type de combat distincte de leur profil personnel ;
 aucun type Fée ni talent caché moderne n'est ajouté.
@@ -95,4 +96,4 @@ pixels du fixe avec la première image animée. Aucun téléchargement de sprite
 Les tests ordinaires couvrent décodage, bornes, erreurs, évolutions non locales, isolement des sorties
 et restauration d'un aperçu après échec de remplacement. Les tests `pipeline` contrôlent les empreintes,
 les comparaisons exhaustives et les profils par cartouche, dont Motisma, Deoxys, Shaymin et Cheniselle.
-Les cartes, rencontres, obtentions détaillées et services seront reliés dans leurs phases respectives.
+Les cartes, rencontres, obtentions détaillées et services sont reliés par la génération complète.

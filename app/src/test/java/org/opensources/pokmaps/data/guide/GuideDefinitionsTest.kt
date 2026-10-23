@@ -82,9 +82,8 @@ class GuideDefinitionsTest {
         guideDefinitions(FakeGameDao.EMERALD.copy(versionGroupIdentifier = "unsupported"))
     }
 
-    @Test
-    fun preparatoryHgssDoesNotBorrowGuidesFromAnotherBranch() {
-        assertTrue(guideDefinitions(FakeGameDao.HEARTGOLD).isEmpty())
-        assertTrue(guideDefinitions(FakeGameDao.SOULSILVER).isEmpty())
+    @Test(expected = IllegalArgumentException::class)
+    fun hgssRequiresItsOwnCompiledResources() {
+        guideDefinitions(FakeGameDao.HEARTGOLD)
     }
 }

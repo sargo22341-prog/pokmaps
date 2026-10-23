@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from functools import cached_property
 from pathlib import Path
 
 from pokemaps_data.builder_wild_gen4 import wild_context
@@ -16,6 +17,7 @@ from pokemaps_data.pret_reader import open_pret
 from pokemaps_data.sources import pret_dir
 
 from .catalog import Family
+from .hgss_terrain import HgssTerrain
 from .version_choice import VERSION_LABELS
 
 
@@ -34,6 +36,8 @@ class WildTerrains:
 
     def kinds(self, family: Family, map_identifier: str) -> frozenset[str]:
         """Terrains du lieu dans au moins un jeu de la famille (les plans sont communs à la famille)."""
+        if family.identifier == "heartgold-soulsilver":
+            return self._hgss.kinds(map_identifier)
         found: set[str] = set()
         for version_group in family.version_groups:
             game_maps, consts = self._game(version_group)
@@ -43,6 +47,8 @@ class WildTerrains:
 
     def points(self, family: Family, map_identifier: str, kind: str) -> frozenset[Point]:
         """Cases du terrain communes aux jeux qui contiennent le lieu, comme la validation du pipeline."""
+        if family.identifier == "heartgold-soulsilver":
+            return self._hgss.points(map_identifier, kind)
         key = (family, map_identifier, kind)
         if key not in self._points:
             common: set[Point] | None = None
@@ -59,6 +65,8 @@ class WildTerrains:
     def region(self, family: Family, map_identifier: str) -> str | None:
         """Carte du monde (identifiant, ex. « johto ») de la région du lieu, d'après le premier jeu de la famille qui
         le contient : la sienne pour une ville ou une route, celle de la ville ou route d'où l'on y entre sinon."""
+        if family.identifier == "heartgold-soulsilver":
+            return self._hgss.region(map_identifier)
         for version_group in family.version_groups:
             game_maps, consts = self._game(version_group)
             if map_identifier in consts:
@@ -68,6 +76,8 @@ class WildTerrains:
 
     def rejected_versions(self, family: Family, map_identifier: str, kind: str, point: Point) -> tuple[str, ...]:
         """Versions qui refusent un point : le plan affiché peut différer de celui d'un autre jeu."""
+        if family.identifier == "heartgold-soulsilver":
+            return () if point in self._hgss.points(map_identifier, kind) else (VERSION_LABELS[family.identifier],)
         rejected = []
         for group in family.version_groups:
             maps, consts = self._game(group)
@@ -78,6 +88,15 @@ class WildTerrains:
             if point not in valid:
                 rejected.append(VERSION_LABELS[group])
         return tuple(rejected)
+
+    @cached_property
+    def _hgss(self) -> HgssTerrain:
+        if self.maps is None:
+            raise ValueError("HGSS : dossier des cartes distribué absent")
+        return HgssTerrain(self.maps)
+
+    def snap(self, family: Family, name: str, kind: str, x: float, y: float) -> Point | None:
+        return self._hgss.snap(name, kind, x, y)
 
     def _game(self, version_group: str) -> tuple[GameMaps | Gen4WildMaps, dict[str, str]]:
         if version_group not in self._games:

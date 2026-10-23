@@ -24,7 +24,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class GuideRepositoryTest {
     @Test
-    fun fourteenLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
+    fun sixteenLibrariesResolveEveryLinkAndKeepAllOfficialAchievements() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val database = Room.databaseBuilder(context, PokedexDatabase::class.java, "guides-test.db")
             .createFromFile(File(requireNotNull(System.getProperty("pokemaps.database"))))
@@ -42,6 +42,10 @@ class GuideRepositoryTest {
             val expected = listOf(93, 90, 76, 72, 75, 113)
             for (game in database.gameDao().games().first()) {
                 val library = repository.library(game)
+                if (game.versionId in 15..16) {
+                    checkHgssArticles(library)
+                    continue
+                }
                 if (game.generationId == 4) {
                     checkSinnohArticles(library)
                     continue
@@ -101,6 +105,19 @@ class GuideRepositoryTest {
         assertTrue(friday.summary.contains(if (platinum) "niveau 15" else "niveau 22"))
         val weekend = articles.single { it.id == "sinnoh-weekend" }
         assertTrue(weekend.summary.contains(if (platinum) "à l’Aire de Survie" else "à l’Aire de Combat"))
+    }
+
+    private fun checkHgssArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {
+        assertEquals(470, library.articles.size)
+        assertEquals(136, library.articles.count { it.achievementId != null })
+        assertEquals(54, library.articles.count { it.id.startsWith("hgss-goal-") })
+        assertEquals(library.articles.size, library.articles.map { it.id }.toSet().size)
+        assertTrue(library.articles.all { it.title.isNotBlank() && it.paragraphs.isNotEmpty() })
+        val ids = library.articles.map { it.id }.toSet()
+        assertTrue(library.articles.all { ids.containsAll(it.relatedIds) })
+        val links = library.articles.flatMap { it.paragraphs.flatten() }.mapNotNull { it.target }
+        assertTrue(links.any { it is GuideTarget.Place })
+        assertTrue(links.any { it is GuideTarget.Pokemon })
     }
 
     private fun checkGbaArticles(library: org.opensources.pokmaps.domain.guide.GuideLibrary) {

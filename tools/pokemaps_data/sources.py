@@ -49,6 +49,7 @@ _DOWNLOAD_ATTEMPTS = 4
 _RETRY_HTTP_CODES = (408, 429, 500, 502, 503, 504)
 
 # Désassemblages pret (https://github.com/pret) : cartes, tilesets, objets et palettes.
+HGSS_PRET_COMMIT = "6988158691eb6178cff697cda0428045ddcba5fb"
 PRET_COMMITS = {
     "pokered": "d2704a63c26f9ba046ade877445216b3de0519a4",
     "pokeyellow": "e89ead154b9968aa50eed9328ff2b38b6c194382",
@@ -59,6 +60,7 @@ PRET_COMMITS = {
     "pokefirered": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
     "pokediamond": "b623abef1b4dfe204ca50aab42447ac00c134290",
     "pokeplatinum": "1dc13dcea40c04ab53f1f607de46023dc409ef20",
+    "pokeheartgold": HGSS_PRET_COMMIT,
 }
 PRET_URL = "https://github.com/pret/{repo}.git"
 # Délai de chaque commande git. Mesures : pokeemerald (9 octobre 2026) se récupère en moins de 5 s, pour un paquet
@@ -66,9 +68,6 @@ PRET_URL = "https://github.com/pret/{repo}.git"
 # mais son extraction (27 668 fichiers, 132 Mio) prend 12 s et celle de pokediamond (33 254 fichiers) 14 s sous Windows.
 PRET_GIT_TIMEOUT_SECONDS = 120
 
-# Candidat qualifié, hors PRET_COMMITS : aucun lecteur HGSS ni génération automatique avant la preuve des cartes.
-# Inventaire et limites : docs/generations/sources-hgss.md.
-HGSS_PRET_COMMIT = "6988158691eb6178cff697cda0428045ddcba5fb"
 
 POKEAPI_CSV_FILES = (
     "abilities",
@@ -224,11 +223,15 @@ def pokesprite(cache: Path, path: str) -> tuple[str, Path]:
 
 def pret_dir(cache: Path, repo: str) -> Path:
     """Dossier du dépôt pret `repo` dans le cache ; il ne contient la source complète que si `.complete` existe."""
-    return cache / f"{repo}-{PRET_COMMITS[repo][:12]}"
+    return cache / "hgss-qualification" if repo == "pokeheartgold" else cache / f"{repo}-{PRET_COMMITS[repo][:12]}"
 
 
 def fetch_pret(cache: Path, repo: str) -> Path:
     """Récupère le dépôt pret `repo` au commit figé dans `cache/<repo>-<commit>` (sans l'historique git)."""
+    if repo == "pokeheartgold":
+        from .source_hgss import fetch_hgss
+
+        return fetch_hgss(cache)
     commit = PRET_COMMITS[repo]
     target = pret_dir(cache, repo)
     if (target / ".complete").exists():

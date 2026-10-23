@@ -34,6 +34,9 @@ internal fun TreeEncounterDetails(species: TimedSpecies) {
                         )
                     }
                 }
+                if (encounter.method in setOf("headbutt-common", "headbutt-rare", "headbutt-secret")) {
+                    Text(encounter.methodName, style = MaterialTheme.typography.labelSmall)
+                }
                 if (encounter.times.isNotEmpty()) EncounterTimeIcons(encounter)
                 Text(encounterDetails(encounter), style = MaterialTheme.typography.bodySmall)
             }

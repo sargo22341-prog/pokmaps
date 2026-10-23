@@ -1,7 +1,8 @@
 # Pokémaps
 
 Application Android en français : cartes interactives, Pokédex et guides pour **Rouge, Bleu, Jaune,
-Or, Argent, Cristal, Rubis, Saphir, Émeraude, Rouge Feu, Vert Feuille, Diamant, Perle et Platine**.
+Or, Argent, Cristal, Rubis, Saphir, Émeraude, Rouge Feu, Vert Feuille, Diamant, Perle, Platine,
+Or HeartGold et Argent SoulSilver**.
 
 - Android 17 (API 37), Kotlin et Jetpack Compose.
 - Fonctionne sur GrapheneOS, sans services Google Play.
@@ -103,12 +104,11 @@ un cache vérifié par leur contenu lors des générations explicites.
 Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépôts pret ; aucune ressource
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
-HeartGold/SoulSilver disposent d'une [qualification des sources](docs/generations/sources-hgss.md)
-et d'un contrat préparatoire isolé des jeux générables. Ils ne sont pas encore disponibles dans l'application.
-Android reconnaît leur identité préparatoire et leurs [règles de capture](docs/generations/regles-android-hgss.md),
-sans les ajouter au catalogue distribué ; les tests injectent les deux remakes séparément de la base embarquée.
-Leurs outils préparatoires appliquent les règles propres de reproduction (Pierre Stase et objets Pouvoir)
-et de bonheur. Le même export JSON préserve les collections et les dernières routes observées des errants
+Or HeartGold et Argent SoulSilver sont disponibles avec Johto, Kanto et leurs installations.
+Leur [qualification des sources](docs/generations/sources-hgss.md) fixe le dépôt natif et ses empreintes ;
+les [règles de capture](docs/generations/regles-android-hgss.md), de reproduction et de bonheur restent
+propres aux remakes.
+Le même export JSON préserve les collections et les dernières routes observées des errants
 de Sinnoh et des deux remakes, avec import des anciens fichiers ; aucune progression GSC n’est copiée vers HGSS.
 Leur [aperçu cartographique](docs/generations/cartes-hgss.md) se génère sans ROM avec
 `python tools/build_data.py --hgss-maps-only --map-workers 4` dans `tools/build/preview/hgss-maps/`.
@@ -118,16 +118,19 @@ et les installations, portes, voisinages DS, transports scriptés et coupes des 
 Les décors créés par les arènes sont placés dans leur état initial ; les destinations variables et les branches
 de scénario restent identifiées. `python tools/review_hgss_maps.py` produit les planches
 de relecture dans le scratchpad ; `python tools/check_assets.py --hgss-maps tools/build/preview/hgss-maps`
-vérifie l'inventaire, les images, les plans, les coupes et leurs références. Les jeux restent préparatoires.
+vérifie l'inventaire, les images, les plans, les coupes et leurs références. Les aperçus servent à relire
+les sources des assets distribués.
 Leur [aperçu Pokémon indépendant](docs/generations/pokemon-hgss.md) se génère avec
 `python tools/build_data.py --hgss-pokemon-only` dans `tools/build/preview/hgss-pokemon/` :
-493 espèces, régional Johto, attaques, CT/CS, formes et évolutions, sans activation Android.
+493 espèces, régional Johto, attaques, CT/CS, formes et évolutions ; la génération complète les exporte
+dans la base Android.
 L’[aperçu des rencontres HGSS](docs/generations/rencontres-hgss.md) se génère après les cartes avec
 `python tools/build_data.py --hgss-encounters-only` : marche, eau, pêche, horaires, radio, essaims,
 arbres et Éclate-Roc, concours selon le jour et le National, Safari selon les blocs et la maturation,
 avec distributions conditionnelles et écarts PokéAPI classés. Les obtentions particulières conservent
 leur provenance et leurs exclusions par événement, transfert ou accessoire, sans prédiction de disponibilité.
-Les filtres de rencontres distinguent Coup d’Boule et Éclate-Roc ; les remakes restent préparatoires.
+Les filtres distinguent les trois tables natives de Coup d’Boule et Éclate-Roc. Le Safari propose les configurations
+de blocs et de maturation ; le concours sélectionne son jour sans additionner des distributions incompatibles.
 Le placement se vérifie avec `python tools/build_data.py --hgss-placement-only`, puis se relit avec
 `python tools/map_editor.py --assets tools/build/preview/hgss-placement`.
 Les points de Johto, Kanto et des gabarits Safari restent dans `tools/data/map_spots.csv` ;
@@ -141,11 +144,26 @@ Les [guides et activités HGSS](docs/generations/contenus-hgss.md) se génèrent
 `python tools/build_data.py --hgss-content-only` : parcours français de Johto à Red,
 objectifs régional/National pour chaque combinaison de starters, calendrier et catalogues particuliers.
 Ouvrir `tools/build/preview/hgss-content/index.html` pour les relire hors ligne ; le catalogue validé est aussi versionné.
-Cette préparation ne rend pas encore les remakes sélectionnables dans l'application.
+La génération complète embarque ces contenus dans `hgss.json` et les ressources françaises Android.
+Les événements Sinjoh et Pichu Troizépi restent explicitement externes ; les errants utilisent leurs routes natives.
 L’aperçu inclut aussi les cinq installations de la Zone de Combat, leurs configurations possibles,
 conditions et récompenses, ainsi que les 136 succès français de l’archive commune HeartGold/SoulSilver.
 La comparaison avec Platine conserve les différences des tables de l’Usine ; aucun tirage n’est simulé.
-Les ressources Android des succès sont prêtes et la synchronisation manuelle lit une seule fois le set commun.
+Les ressources Android des succès sont embarquées et la synchronisation manuelle lit une seule fois le set commun.
+
+Pour produire une candidate isolée et vérifier les données et fichiers des quatorze jeux antérieurs :
+
+```powershell
+python tools/build_data.py --hgss-candidate-only --assets tools/build/scratchpad/hgss-candidate `
+  --reuse-gen3-maps --application-only
+```
+
+La destination doit être séparée des assets distribués et ne contenir aucun ancien aperçu technique.
+La génération complète valide les prérequis épinglés, exporte les cartes avec leurs niveaux alignés,
+les personnages et leurs offres, puis écrit la base, les catalogues et `assets.sha256`.
+Les ressources de guides sont des données XML générées depuis les catalogues validés, afin de garder
+les centaines de textes français reproductibles et hors du code Kotlin. Les builds Android utilisent
+uniquement les assets versionnés ; ils ne téléchargent ni ne génèrent ces données.
 
 L’aperçu Pokémon de Diamant, Perle et Platine se génère séparément avec
 `python tools/build_data.py --sinnoh-pokemon-only` dans `tools/build/preview/sinnoh-pokemon/`.
@@ -189,7 +207,7 @@ Les fiches utilisent la classe propre à chaque attaque et les conditions d’é
 Les guides de Sinnoh proposent une soluce adaptée à chaque version, des quêtes, conseils, bugs documentés
 et un calendrier des rendez-vous. Deux objectifs suivent les captures accessibles sur une cartouche seule,
 dans le régional puis le National, en tenant compte des starters et fossiles incompatibles.
-Les succès officiels des quatorze jeux sont traduits et consultables hors ligne ; leur synchronisation
+Les succès officiels des seize jeux sont traduits et consultables hors ligne ; leur synchronisation
 RetroAchievements reste manuelle. Les outils de Sinnoh appliquent ses règles de reproduction et de bonheur.
 Les dernières routes observées des errants se notent par cartouche et entrent dans la sauvegarde JSON.
 Les fiches des baies de Sinnoh détaillent croissance, arrosage, paillis et saveurs pour Poffins ; les attaques

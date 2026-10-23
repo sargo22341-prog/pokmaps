@@ -2,7 +2,10 @@
 
 Ce lot étend la [preuve et le catalogue Johto](cartes-hgss.md), depuis le même commit
 `6988158691eb6178cff697cda0428045ddcba5fb` de `pret/pokeheartgold`.
-Il reste préparatoire : aucune ROM, aucune activation Android et aucun remplacement des cartes distribuées.
+La génération complète utilise cet atlas pour les assets Android HGSS, sans ROM.
+Les 496 lieux, 224 plans et 169 plans inférieurs alignés donnent 889 entrées dans la base.
+Les 196 coupes natives restent tracées dans le catalogue source ; les niveaux distribués
+partagent les dimensions et les coordonnées de leur plan supérieur.
 
 ## Reproduire
 

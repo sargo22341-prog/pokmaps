@@ -358,6 +358,11 @@ def build_maps(
     result = {}
     for game in games:
         print(f"Cartes {game.version_group} : préparation des images et des données…", flush=True)
+        if game.pret_repo == "pokeheartgold":
+            from .maps_export_hgss import export_game as export_hgss
+
+            result[game.version_group] = export_hgss(cache, output / game.version_group)
+            continue
         if game.pret_format == PretFormat.GEN3:
             from .maps_export_gen3 import export_game as export_gen3_game
 

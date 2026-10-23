@@ -1,8 +1,9 @@
-# Cartes préparatoires HeartGold et SoulSilver
+# Cartes HeartGold et SoulSilver — preuve et aperçu
 
 Le prototype de phase 1 lit et rend cinq lieux depuis `pret/pokeheartgold` au commit
 `6988158691eb6178cff697cda0428045ddcba5fb`, sans ROM et sans compiler le jeu.
-Il reste séparé des cartes distribuées et ne rend pas HGSS disponible dans Android.
+Le prototype séparé reste disponible pour relire les sources. Depuis la phase 8, la génération complète
+exporte l’atlas validé vers les cartes distribuées HGSS.
 L'[atlas actuel des phases 3B et 3C](cartes-hgss-atlas.md) complète ces lots ; les chiffres ci-dessous
 retracent la preuve initiale et la phase 3A.
 
@@ -175,6 +176,6 @@ Cette égalité locale n'autorise pas à fusionner toutes les variantes HGSS.
 
 La preuve et Johto sont maintenant complétés par l'[atlas des phases 3B et 3C](cartes-hgss-atlas.md) :
 Kanto, installations, coupes de terrain, décors initiaux et déplacements scriptés.
-Les jeux restent dans `PREPARATORY_GAMES` : ni le pipeline générique, ni la base, ni Android ne sont activés.
+Les jeux sont désormais dans `GAMES` : le pipeline, la base et Android utilisent un export HGSS dédié.
 La résolution métier des scripts, des acteurs conditionnels et des accompagnateurs reste dans les phases
 prévues du plan. Les limites de licence de la [qualification](sources-hgss.md) restent applicables avant distribution.
