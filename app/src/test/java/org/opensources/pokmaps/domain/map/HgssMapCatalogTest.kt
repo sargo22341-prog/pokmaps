@@ -10,25 +10,8 @@ import org.junit.Test
 class HgssMapCatalogTest {
     @Test
     fun distributedMapsHaveAlignedSurfaceLevelsAndBothRegions() {
-        val database = File(System.getProperty("pokemaps.database").orEmpty())
-        val maps = DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
-            connection.createStatement().use { statement ->
-                statement.executeQuery("SELECT * FROM map WHERE version_group_id=10").use { rows ->
-                    buildMap {
-                        while (rows.next()) {
-                            val parent = rows.getInt("parent_map_id").takeUnless { rows.wasNull() }
-                            val map = MapInfo(
-                                rows.getInt("id"), rows.getString("identifier"), rows.getString("name_fr"),
-                                parent, rows.getInt("x"), rows.getInt("y"), rows.getInt("width"),
-                                rows.getInt("height"), rows.getInt("level_count"), rows.getInt("is_world") == 1
-                            )
-                            put(map.id, map)
-                        }
-                    }
-                }
-            }
-        }
-        assertEquals(710, maps.size)
+        val maps = distributedMaps()
+        assertEquals(711, maps.size)
         assertEquals(setOf("johto", "kanto"), maps.values.filter { it.isWorld }.map { it.identifier }.toSet())
         val levels = MapLevels.build(maps)
         assertTrue(levels.isNotEmpty())
@@ -46,6 +29,54 @@ class HgssMapCatalogTest {
                     maps.getValue(it.mapId).width to maps.getValue(it.mapId).height
                 }.distinct().size
             )
+        }
+    }
+
+    @Test
+    fun safariAtlasContainsTwelveHabitatsAndTheEntranceWithoutSideSelectors() {
+        val maps = distributedMaps()
+        val catalog = MapCatalog("heartgold-soulsilver", maps, emptyMap(), emptyMap(), emptyMap())
+        val atlas = requireNotNull(catalog.mapByIdentifier("safari-atlas"))
+        val entrance = requireNotNull(catalog.mapByIdentifier("safari-zone-entrance-exterior"))
+        val regions = catalog.regionsOf(atlas.id)
+        assertEquals(13, regions.size)
+        assertEquals(atlas, catalog.displayedMapOf(entrance.id))
+        assertTrue(catalog.floorsOf(atlas.id).isEmpty())
+        assertTrue(catalog.levelsOf(atlas.id).isEmpty())
+        val order = listOf(1, 2, 3, 7, 8, 9, 4, 5, 6, 10, 11, 12)
+        val habitats = order.map { number ->
+            requireNotNull(catalog.mapByIdentifier("safari-zone-${number.toString().padStart(2, '0')}"))
+        }
+        assertEquals(1, habitats.take(6).map { it.y }.distinct().size)
+        assertEquals(1, habitats.drop(6).map { it.y }.distinct().size)
+        assertTrue(habitats.all { it.y < entrance.y })
+        assertEquals(habitats[1].x, entrance.x)
+        habitats.forEach { habitat ->
+            assertEquals(atlas, catalog.displayedMapOf(habitat.id))
+            assertTrue(catalog.floorsOf(habitat.id).isEmpty())
+            assertTrue(habitat.x >= 0 && habitat.x + habitat.width <= atlas.width)
+            assertTrue(habitat.y >= 0 && habitat.y + habitat.height <= atlas.height)
+        }
+    }
+
+    private fun distributedMaps(): Map<Int, MapInfo> {
+        val database = File(System.getProperty("pokemaps.database").orEmpty())
+        return DriverManager.getConnection("jdbc:sqlite:${database.path}").use { connection ->
+            connection.createStatement().use { statement ->
+                statement.executeQuery("SELECT * FROM map WHERE version_group_id=10").use { rows ->
+                    buildMap {
+                        while (rows.next()) {
+                            val parent = rows.getInt("parent_map_id").takeUnless { rows.wasNull() }
+                            val map = MapInfo(
+                                rows.getInt("id"), rows.getString("identifier"), rows.getString("name_fr"),
+                                parent, rows.getInt("x"), rows.getInt("y"), rows.getInt("width"),
+                                rows.getInt("height"), rows.getInt("level_count"), rows.getInt("is_world") == 1
+                            )
+                            put(map.id, map)
+                        }
+                    }
+                }
+            }
         }
     }
 

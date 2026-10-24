@@ -56,6 +56,9 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
 
 def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
     maps_only.add_argument(
+        "--hgss-safari-only", action="store_true", help="assembler les habitats Safari depuis les assets versionnés"
+    )
+    maps_only.add_argument(
         "--hgss-candidate-only", action="store_true", help="générer la candidate complète avec HGSS dans --assets"
     )
     maps_only.add_argument(
@@ -229,6 +232,16 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
 
 
 def _hgss_preview(args: argparse.Namespace) -> bool:
+    if args.hgss_safari_only:
+        from pokemaps_data.application_hgss import validate_assets
+        from pokemaps_data.safari_atlas_hgss import build_atlas
+
+        build_atlas(args.assets)
+        validate_assets(args.assets)
+        if errors := validate(args.assets / "database/pokedex.db"):
+            raise ValueError("\n".join(errors))
+        write_manifest(args.assets)
+        return True
     if args.hgss_content_only:
         from pokemaps_data.preview_content_hgss import build_content
 
@@ -342,6 +355,11 @@ def _build(api: PokeApi, cache: Path, repos: dict[str, Path], assets: Path, game
 
     print("Génération de la base…")
     builder.write(database, item_sprites)
+
+    if any(game.pret_repo == "pokeheartgold" for game in games):
+        from pokemaps_data.safari_atlas_hgss import build_atlas
+
+        build_atlas(assets)
 
     errors = validate(database)
     if all(game in games for game in HOENN_MAP_GAMES):

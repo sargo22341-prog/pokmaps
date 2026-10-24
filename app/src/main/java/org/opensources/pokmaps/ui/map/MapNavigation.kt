@@ -391,7 +391,7 @@ internal class MapNavigation(
     /** Rapproche la vue d'une ville ou d'une route touchée sur la carte du monde, pour voir son contenu. */
     private fun focusOnZone(catalog: MapCatalog, zoneId: Int) {
         val map = session.current.map ?: return
-        if (!map.isWorld) return
+        if (!map.isWorld && map.identifier != "safari-atlas") return
         val mapState = session.current.mapState ?: return
         val zone = catalog.maps[zoneId]?.takeIf { it.parentId != null } ?: return
         if (mapState.scale >= ZONE_FOCUS_MIN_SCALE) return
@@ -409,6 +409,11 @@ internal class MapNavigation(
         val parts = id.split(':')
         val value = parts.getOrNull(1)?.toIntOrNull() ?: return
         when (parts[0]) {
+            MapMarkerIds.REGION -> {
+                selection.selectZone(catalog, value)
+                focusOnZone(catalog, value)
+            }
+
             MapMarkerIds.WARP, MapMarkerIds.HIGHLIGHT_WARP, MapMarkerIds.SECRET_BASE -> {
                 val warp = catalog.warps.values.asSequence().flatten().firstOrNull { it.id == value } ?: return
                 enter(catalog, warp)

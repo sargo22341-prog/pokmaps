@@ -139,6 +139,10 @@ Les filtres distinguent les trois tables natives de Coup d’Boule et Éclate-Ro
 de blocs et de maturation ; le concours sélectionne son jour sans additionner des distributions incompatibles.
 Le placement se vérifie avec `python tools/build_data.py --hgss-placement-only`, puis se relit avec
 `python tools/map_editor.py --assets tools/build/preview/hgss-placement`.
+Le Safari présente ses douze habitats en deux rangées de six, avec l’entrée en dessous et de petites étiquettes.
+Toucher un habitat sélectionne ses Pokémon ; le zoom permet d’examiner son terrain.
+Cet atlas présente toutes les possibilités, indépendamment des six habitats choisis dans le jeu.
+Il se régénère hors ligne depuis les assets versionnés avec `python tools/build_data.py --hgss-safari-only`.
 Les points de Johto, Kanto et des gabarits Safari restent dans `tools/data/map_spots.csv` ;
 les terrains sans marqueur ont une [explication explicite](docs/generations/rencontres-hgss.md#placement--4e).
 Les [personnages, combats et services HGSS](docs/generations/personnages-hgss.md) se génèrent avec

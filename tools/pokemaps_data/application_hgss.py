@@ -102,7 +102,10 @@ def validate_assets(assets: Path) -> None:
         for p in source["plans"]
         if p["id"] not in {"johto-exterieurs", "kanto-exterieurs"}
     )
-    expected = 496 + sum(not p.get("standalone", False) for p in source["plans"]) + lower
+    from .safari_atlas_hgss import validate_atlas
+
+    validate_atlas(assets)
+    expected = 497 + sum(not p.get("standalone", False) for p in source["plans"]) + lower
     if data["commit"] != HGSS_PRET_COMMIT or len(data["maps"]) != expected:
         raise ValueError("HGSS : catalogue distribué incomplet ou d'un autre commit")
     constants = {row["const"] for row in data["maps"]}
@@ -158,6 +161,7 @@ def _validate_map_placement(connection: sqlite3.Connection) -> list[str]:
 def export_recipe() -> dict[str, str]:
     names = (
         "maps_export_hgss.py",
+        "safari_atlas_hgss.py",
         "plans_application_hgss.py",
         "maps_characters_hgss.py",
         "maps_offers_hgss.py",

@@ -209,6 +209,7 @@ sealed interface MapAction {
 }
 
 internal object MapMarkerIds {
+    const val REGION = "region"
     const val LAZY_LOADER = "lazy"
     const val WARP = "w"
     const val SECRET_BASE = "sb"

@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Le Parc Safari de HeartGold et SoulSilver réunit ses douze habitats et l’entrée sur un atlas avec de petites étiquettes.
 - Dans HeartGold et SoulSilver, les bâtiments ont leurs cartes propres, les faux dessous du monde sont retirés
   et les Pokémon sauvages suivent l’herbe et les plans d’eau visibles, notamment sur la Route 30.
 - Les lieux extérieurs sur une carte dédiée ne sont plus présentés comme des intérieurs.

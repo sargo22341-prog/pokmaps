@@ -65,7 +65,18 @@ internal class MapOverlayRenderer(private val tiles: (GameMap) -> TileStreamProv
         drawFocusedObject(state, wanted)
         drawFocusedWarp(state, wanted)
         drawHighlight(state, wanted, entrances, objects)
+        drawRegionLabels(state, wanted)
         apply(state, wanted)
+    }
+
+    private fun drawRegionLabels(state: MapRenderState, wanted: MutableMap<String, MarkerSpec>) {
+        if (state.map.identifier != "safari-atlas") return
+        state.map.regions.forEach { region ->
+            wanted.draw(
+                "${MapMarkerIds.REGION}:${region.id}",
+                MarkerSpec(region.x + 8, region.y + 8, false, 4f, false, MarkerContent.RegionLabel(region))
+            )
+        }
     }
 
     private fun apply(state: MapRenderState, wanted: Map<String, MarkerSpec>) {
@@ -271,7 +282,7 @@ internal class MapOverlayRenderer(private val tiles: (GameMap) -> TileStreamProv
             id,
             spec.x.toDouble() / state.map.width,
             spec.y.toDouble() / state.map.height,
-            relativeOffset = CENTERED,
+            relativeOffset = if (spec.content is MarkerContent.RegionLabel) Offset.Zero else CENTERED,
             zIndex = spec.zIndex,
             // Le sprite d'un Pokémon est centré dans un cadre fait pour le plus grand : on touche son centre.
             clickableAreaScale = if (spec.pokemon) POKEMON_CLICK_SCALE else FULL_CLICK_SCALE,

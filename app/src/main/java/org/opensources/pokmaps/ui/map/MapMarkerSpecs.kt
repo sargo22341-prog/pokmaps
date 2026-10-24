@@ -3,6 +3,7 @@ package org.opensources.pokmaps.ui.map
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import org.opensources.pokmaps.domain.map.MapObject
+import org.opensources.pokmaps.domain.model.MapRegion
 import ovh.plrapps.mapcompose.ui.state.MapState
 
 /** Ce que dessine un marqueur. Toutes ses données y figurent : deux contenus égaux dessinent la même chose. */
@@ -25,6 +26,8 @@ internal sealed interface MarkerContent {
     data class Wild(val wild: WildMarker) : MarkerContent
 
     data class Battle(val alwaysVisible: Boolean) : MarkerContent
+
+    data class RegionLabel(val region: MapRegion) : MarkerContent
 
     data object Highlight : MarkerContent
 }
@@ -57,6 +60,8 @@ internal fun MarkerContent.Draw(mapState: MapState) {
         is MarkerContent.Wild -> WildPokemonMarker(mapState, wild)
 
         is MarkerContent.Battle -> BattleMarker(mapState, alwaysVisible)
+
+        is MarkerContent.RegionLabel -> SafariRegionLabel(mapState, region)
 
         MarkerContent.Highlight -> HighlightMarker()
     }
