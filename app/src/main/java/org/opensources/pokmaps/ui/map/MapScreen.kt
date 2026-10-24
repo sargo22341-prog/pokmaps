@@ -293,7 +293,7 @@ private fun BoxScope.BottomPanel(
                 is BottomCard.Zone -> ZoneBar(
                     zone = card.zone,
                     caught = state.caught,
-                    closable = state.map?.isWorld == true,
+                    closable = state.canClearZone,
                     onOpenList = { onAction(MapAction.OpenZoneList) },
                     onClose = { onAction(MapAction.ClearZone) }
                 )

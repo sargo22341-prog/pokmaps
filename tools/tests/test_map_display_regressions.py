@@ -4,6 +4,34 @@ import sqlite3
 
 import pytest
 
+from pokemaps_data.application_hgss import validate_database
+
+
+@pytest.mark.parametrize("version", [15, 16])
+@pytest.mark.parametrize(
+    "species,place,point",
+    [(249, "whirl-islands-b3f-lugia-cave", (392, 529)), (250, "bell-tower-roof", (561, 2869))],
+)
+def test_hgss_scene_legends_have_one_fixed_marker(
+    db: sqlite3.Connection, version: int, species: int, place: str, point: tuple[int, int]
+) -> None:
+    rows = db.execute(
+        """SELECT m.identifier, o.x, o.y, o.level FROM map_object o JOIN map m ON m.id=o.map_id
+           WHERE m.version_group_id=10 AND o.kind='pokemon' AND o.pokemon_id=? AND o.version_id=?""",
+        (species, version),
+    ).fetchall()
+    assert rows == [(place, *point, 45 if (species, version) in {(249, 16), (250, 15)} else 70)]
+
+
+def test_hgss_missing_legend_marker_is_an_error(db: sqlite3.Connection) -> None:
+    db.execute(
+        "DELETE FROM map_object WHERE pokemon_id=249 AND map_id IN (SELECT id FROM map WHERE version_group_id=10)"
+    )
+    assert validate_database(db) == [
+        "HGSS : repère fixe absent ou incorrect : 249/15 (whirl-islands-b3f-lugia-cave)",
+        "HGSS : repère fixe absent ou incorrect : 249/16 (whirl-islands-b3f-lugia-cave)",
+    ]
+
 
 @pytest.mark.parametrize("group,version", [(8, 12), (8, 13), (9, 14)])
 @pytest.mark.parametrize("species", ["spiritomb", "arceus", "shaymin"])

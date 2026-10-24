@@ -47,12 +47,6 @@ internal class MapSelection(
             ?: catalog.maps[zoneId] ?: return
         val selectedId = info.id
         val display = catalog.displayedMapOf(selectedId) ?: return
-        val zoneIds = if (display.isWorld) {
-            listOf(selectedId)
-        } else {
-            catalog.regionsOf(display.id).map { it.id }
-                .ifEmpty { listOf(selectedId) }
-        }
         val items = catalog.objects[selectedId].orEmpty().filter {
             it.kind == MapObjectKind.ITEM || it.kind == MapObjectKind.HIDDEN_ITEM
         }
@@ -73,14 +67,14 @@ internal class MapSelection(
             )
         }
         session.refreshOverlays()
-        loadZone(loaded, catalog, zone, zoneIds)
+        loadZone(loaded, catalog, zone)
     }
 
-    private fun loadZone(loaded: GameMaps, catalog: MapCatalog, zone: MapZone, zoneIds: List<Int>) {
+    private fun loadZone(loaded: GameMaps, catalog: MapCatalog, zone: MapZone) {
         val request = Any()
         zoneRequest = request
         zoneJob = session.load(
-            block = { zoneIds.associateWith { getMapEncounters(loaded.game, catalog, it) } },
+            block = { mapOf(zone.mapId to getMapEncounters(loaded.game, catalog, zone.mapId)) },
             onFailure = {
                 if (isCurrent(loaded, request, zoneRequest)) {
                     session.update { it.copy(zone = zone.copy(loading = false, failed = true)) }
@@ -125,13 +119,20 @@ internal class MapSelection(
         session.refreshOverlays()
     }
 
-    /** Désélectionne la ville ou la route (une carte intérieure reste toujours sélectionnée). */
+    /** Désélectionne le lieu ; une salle isolée reste sélectionnée, faute d'autre zone à toucher. */
     fun clearZone() {
         val map = session.current.map
-        if (map != null && !map.isWorld) return
+        if (!session.current.canClearZone) return
         invalidateLoads()
         session.updateOverlays { it.copy(wildMarkers = emptyList()) }
-        session.update { it.copy(zone = null, detail = null, zoneListOpen = false, floors = emptyList()) }
+        session.update {
+            it.copy(
+                zone = null,
+                detail = null,
+                zoneListOpen = false,
+                floors = if (map?.isWorld == true) emptyList() else it.floors
+            )
+        }
         session.refreshOverlays()
     }
 

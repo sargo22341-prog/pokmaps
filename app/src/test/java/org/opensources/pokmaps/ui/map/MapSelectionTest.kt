@@ -218,16 +218,32 @@ class MapSelectionTest {
     }
 
     @Test
-    fun everyZoneOfTheFloorHasMarkersAndItsOwnPokemonDetails() = runTest {
+    fun onlyTheSelectedZoneOfACompositePlanHasMarkers() = runTest {
         val fixture = fixture()
         fixture.useCompositePlan()
         fixture.select(PLAN)
         val markers = fixture.session.overlays.wildMarkers
-        assertEquals(setOf(FakeMapDao.ROUTE_1, FakeMapDao.MART), markers.map { it.mapId }.toSet())
+        assertEquals(setOf(FakeMapDao.ROUTE_1), markers.map { it.mapId }.toSet())
         assertEquals(1, checkNotNull(fixture.session.current.zone).encounters.size)
+        fixture.select(FakeMapDao.MART)
+        assertEquals(setOf(FakeMapDao.MART), fixture.session.overlays.wildMarkers.map { it.mapId }.toSet())
         fixture.selection.showWildPokemon(FakeMapDao.PIDGEY, FakeMapDao.MART)
         val detail = fixture.session.current.detail as MapDetail.WildPokemon
         assertEquals(1, detail.encounters.single().encounters.size)
+    }
+
+    @Test
+    fun clearingACompositeZoneRemovesItsMarkersAndAllowsAnotherSelection() = runTest {
+        val fixture = fixture()
+        val catalog = fixture.useCompositePlan()
+        fixture.session.update { it.copy(map = checkNotNull(catalog.gameMap(PLAN))) }
+        fixture.select(PLAN)
+        assertFalse(fixture.session.overlays.wildMarkers.isEmpty())
+        fixture.selection.clearZone()
+        assertNull(fixture.session.current.zone)
+        assertTrue(fixture.session.overlays.wildMarkers.isEmpty())
+        fixture.select(FakeMapDao.MART)
+        assertEquals(setOf(FakeMapDao.MART), fixture.session.overlays.wildMarkers.map { it.mapId }.toSet())
     }
 
     @Test

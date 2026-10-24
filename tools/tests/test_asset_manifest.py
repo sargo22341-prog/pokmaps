@@ -14,6 +14,7 @@ from pokemaps_data.games import GAMES
 from pokemaps_data.hoenn_catalog import build_hoenn_catalog
 from pokemaps_data.maps_gen3 import GEN3_MAP_GAMES, build_gen3_maps
 from pokemaps_data.pret_gen3_fixed import build_fixed_catalog
+from pokemaps_data.safari_atlas_hgss import build_atlas
 from pokemaps_data.sinnoh_catalog import build_sinnoh_catalog
 from pokemaps_data.sprites import build_sprites
 from pokemaps_data.validate import validate
@@ -79,6 +80,7 @@ def test_pipeline_reproduces_bundled_assets(builder: DatabaseBuilder, assets_roo
     build_fixed_catalog(CACHE, assets_root)
     icons = build_sprites(builder, CACHE, assets_root / "sprites")
     builder.write(assets_root / "database/pokedex.db", icons)
+    build_atlas(assets_root)
     build_hoenn_catalog(CACHE, assets_root)
     build_sinnoh_catalog(CACHE, assets_root)
     build_hgss_catalog(assets_root, assets_root.parent / "hgss-resources")

@@ -28,7 +28,7 @@ def fixed_rows(
             candidates.append(encounter)
     result = []
     for actor in catalog["actors"]:
-        key = actor["native"]["sprite"].removeprefix("SPRITE_FOLLOWER_MON_STATIC_").replace("_", "")
+        key = _species_key(actor["native"]["sprite"])
         pokemon = species.get(key)
         if pokemon is None:
             continue
@@ -59,6 +59,13 @@ def fixed_rows(
                 )
             )
     return result
+
+
+def _species_key(sprite: str) -> str:
+    # Les deux légendaires utilisent un acteur de scène, pas le sprite d'un accompagnateur.
+    # zone_event/230_D40R0107.json et 311_D17R0110.json fixent leur position après l'apparition.
+    scene_species = {"SPRITE_LUG_OBJ01": "LUGIA", "SPRITE_HOU_OBJ01": "HOOH"}
+    return scene_species.get(sprite, sprite.removeprefix("SPRITE_FOLLOWER_MON_STATIC_").replace("_", ""))
 
 
 def _areas(api: PokeApi) -> dict[str, set[str]]:

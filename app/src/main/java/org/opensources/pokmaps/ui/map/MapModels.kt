@@ -166,6 +166,7 @@ data class MapUiState(
     val rivalChoiceFailed: Boolean = false
 ) {
     val times: Set<EncounterTime> get() = time.times
+    val canClearZone: Boolean get() = map?.let { it.isWorld || it.regions.isNotEmpty() } ?: true
     val selectedFloorId: Int?
         get() = zone?.mapId?.takeIf { id -> floors.any { it.mapId == id } }
             ?: levels.firstOrNull()?.mapId ?: map?.id

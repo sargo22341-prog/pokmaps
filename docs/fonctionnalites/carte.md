@@ -20,6 +20,9 @@ de rencontres distinguent radio, essaims, arbres, concours et configurations du 
 Toucher une ville ou route affiche son contenu. Les entrées ouvrent bâtiments, grottes et étages. Le retour remonte
 au lieu parent. Les calques choisissent entrées, objets, dresseurs, personnages, Pokémon fixes et sauvages. Les
 arbres accueillent Coup d'Boule, les rochers Éclate-Roc, l'eau surf et pêche.
+Les sprites sauvages sont limités au lieu sélectionné, y compris sur les plans de plusieurs salles et
+l’atlas Safari. Changer de lieu retire les sprites précédents ; fermer la sélection les retire tous.
+La sélection peut être fermée sur une carte régionale ou un plan composé, tout en conservant les sélecteurs d’étage.
 Les cartes dédiées portent le libellé neutre « Lieu » dans la recherche et leur fiche : elles peuvent représenter
 un intérieur comme un extérieur isolé, notamment le Parc Safari ou le concours.
 

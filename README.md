@@ -141,6 +141,8 @@ Le placement se vérifie avec `python tools/build_data.py --hgss-placement-only`
 `python tools/map_editor.py --assets tools/build/preview/hgss-placement`.
 Le Safari présente ses douze habitats en deux rangées de six, avec l’entrée en dessous et de petites étiquettes.
 Toucher un habitat sélectionne ses Pokémon ; le zoom permet d’examiner son terrain.
+Dans toutes les générations, seuls les Pokémon sauvages de la zone sélectionnée sont affichés ;
+changer de zone remplace leurs marqueurs et fermer la sélection les retire de la carte régionale ou du plan composé.
 Cet atlas présente toutes les possibilités, indépendamment des six habitats choisis dans le jeu.
 Il se régénère hors ligne depuis les assets versionnés avec `python tools/build_data.py --hgss-safari-only`.
 Les points de Johto, Kanto et des gabarits Safari restent dans `tools/data/map_spots.csv` ;

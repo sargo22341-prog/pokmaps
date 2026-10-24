@@ -37,6 +37,9 @@ couvre chaque sortie, y compris les images et la page HTML. Une génération inv
 - Trois décalages d'affichage écartent deux repères de passages et ramènent le rival sur le bord visible de Ville Griotte.
 
 Le décodage des accompagnateurs statiques choisit explicitement la palette normale et la texture de face.
+Lugia et Ho-Oh utilisent les acteurs de scène `SPRITE_LUG_OBJ01` et `SPRITE_HOU_OBJ01` : l’export
+les représente comme Pokémon fixes aux positions natives de la grotte de Lugia et du toit de la Tour Carillon,
+avec les niveaux de chaque cartouche, même si leur apparition est précédée d’une cinématique.
 À la frontière Ville Griotte/Route 29, la position du rival est hors du bloc BDHC de ville :
 sa hauteur nulle vient de l'événement et de `MovePersonFacing`, sans hauteur inventée.
 Les personnages nommés et classes portent des libellés français ; les noms individuels natifs sont conservés

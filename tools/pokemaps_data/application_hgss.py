@@ -137,6 +137,22 @@ def validate_database(connection: sqlite3.Connection) -> list[str]:
         if connection.execute(query).fetchone()[0] != expected
     ]
     errors.extend(_validate_map_placement(connection))
+    errors.extend(_validate_fixed_legends(connection))
+    return errors
+
+
+def _validate_fixed_legends(connection: sqlite3.Connection) -> list[str]:
+    errors = []
+    for species, place in ((249, "whirl-islands-b3f-lugia-cave"), (250, "bell-tower-roof")):
+        for version in (15, 16):
+            rows = connection.execute(
+                """SELECT m.identifier FROM map_object o JOIN map m ON m.id=o.map_id
+                   WHERE m.version_group_id=10 AND o.kind='pokemon' AND o.pokemon_id=?
+                   AND (o.version_id IS NULL OR o.version_id=?)""",
+                (species, version),
+            ).fetchall()
+            if rows != [(place,)]:
+                errors.append(f"HGSS : repère fixe absent ou incorrect : {species}/{version} ({place})")
     return errors
 
 
