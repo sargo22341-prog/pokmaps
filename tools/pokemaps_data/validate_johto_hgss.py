@@ -63,7 +63,19 @@ def _check_catalog(folder: Path, manifest: Path) -> dict:
         for level in range(plan["level_count"]):
             if not any((folder / "plans" / plan["id"] / str(level)).glob("*.webp")):
                 raise ValueError(f"{plan['id']} : niveau de tuiles absent : {level}")
+        if plan["layout"] == "native":
+            validate_world_tiles(folder / "plans" / plan["id"], plan)
     return catalog
+
+
+def validate_world_tiles(folder: Path, plan: dict) -> None:
+    level = plan["level_count"] - 1
+    width, height = plan["size"]
+    for path in (folder / str(level)).glob("*.webp"):
+        row, column = map(int, path.stem.split("_"))
+        with Image.open(path) as tile:
+            if tile.size != (256, 256) or not (0 <= column * 256 < width and 0 <= row * 256 < height):
+                raise ValueError(f"{path} : tuile de raccord HGSS hors cadre ou de taille incorrecte")
 
 
 def _check_render(folder: Path, record: dict) -> None:

@@ -5,6 +5,7 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Les raccords de Johto et Kanto dans HeartGold et SoulSilver préservent les arbres, bâtiments et ponts entre lieux.
 - Les Pokémon sauvages s’affichent uniquement dans la zone sélectionnée, dans toutes les générations.
 - Lugia et Ho-Oh apparaissent à leur emplacement fixe dans HeartGold et SoulSilver.
 - Le Parc Safari de HeartGold et SoulSilver réunit ses douze habitats et l’entrée sur un atlas avec de petites étiquettes.

@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-22",
+  "date": "2026-10-24",
   "commit": "6988158691eb6178cff697cda0428045ddcba5fb",
   "geometry_versions": [
     "heartgold",
@@ -53,13 +53,13 @@
     "src/safari_zone.c": "713077994124189a05cf65af9d02b2281e2fc93832783061e8419731bb3ccab5",
     "include/constants/safari.h": "475bd34656e7c550ef57e3ce2feb5f0c658ad5e73ef2f06f75c55d6d07fd6de8"
   },
-  "catalog_recipe": "f0f4898388e85a53f06220e2998cbaba11d715d9280730fe55b6f1e47825b6c0",
-  "render_recipe": "fef8d68dfc2bd3e4bf7fb5a011fa381087609e6bbd61251effc73bd61a907a0e",
-  "catalog_sha256": "5b61449535d9dc885bd9e05fbe1988d9279b31ea9b5cdf0ff24b0db8ac455532",
-  "inventory_sha256": "c1e3936b423543c184100c9b6c671a07cc1c8103f908c10f83f4480fb0882546",
+  "catalog_recipe": "44634b8f344ce42f565ddd98b732212e4910310689ad90e55b7c7dafa1410604",
+  "render_recipe": "70c00923dd15b54039d97c326acbce72b9811c5d85f0bcbf45d09af773833406",
+  "catalog_sha256": "3c39fb8b7adf8dc6f2a75c97ad14be80c35bab872317b9b0e8714ae8ca5d5c12",
+  "inventory_sha256": "224cdd6cde0b6c70235581b11b8ba609b208218403f5219fb62c24dce84bd3e4",
   "inventory_files": 28976,
   "total_files": 28977,
-  "bytes": 216697104,
+  "bytes": 216699340,
   "pixels_sha256": {
     "2": "e2f677007fda3b6ab20ee4147bed9e22f1cf7fb1ca36112103c6f37928603e59",
     "4": "611f5d7d4e270adbea61ebeb059f081122a5a03ff9f22ea0ef0b8e008887cb42",
@@ -806,7 +806,7 @@
     "atlas-46.png": "4f09600a103810591c6258f8ef4d879f29324868c42af79b36e6f183fde2d5bb",
     "atlas-47.png": "0ac28d8d02a70e239fca85d6d334be45c9c10e5c72eae900b3ab99dfa7a31be9",
     "atlas-48.png": "6a15ea0c649c7c7fe8e83f2b743afa691295a1d412fa10b22bfd4834b3da8fb0",
-    "atlas-49.png": "d6b722440f0ddc203c0beada6f487b8a4ec31dec63db076ffda4995426cd6192",
+    "atlas-49.png": "a5210f4ad8c448af303472c293300d124b5af658e6194e62c6afd0015ce93ee3",
     "atlas-50.png": "90e3af67b7bef5fe6ef0e34f69f557047c222dfb8fe020ddb6d7fc1ae91b3c08",
     "atlas-51.png": "adba6db5a2299853d34eb2074321da5b871ef69e679a1bea79d77699629126b7",
     "atlas-52.png": "d6ba4c37aa36e21642e00da55687defc1dfb1feb7936fbb2a9c3ec64bdf6aa79",
@@ -816,8 +816,8 @@
     "atlas-56.png": "ffdd967f085e93ed6deb4a97cac09d789957bf0eab1721b4989e8ca9149f1e3e",
     "atlas-57.png": "48c759e2c0b3a1916b7e95e351cc91f576d3660c5129ef747167b438f8b93a88",
     "atlas-58.png": "e77b317192d338c5b82fa31d354a453bac82adf6d98201341c415e6d5ef8fbc2",
-    "johto-exterieurs-detail.png": "bc41404daa3b02e041f69ec778fa7d96ae479b787a875d34d68850fdd3a7c0b5",
-    "kanto-exterieurs-detail.png": "fcbc71ef4a814e13d23dc5da3c4a33e189d165287fd42d0138fe0819103a98f8"
+    "johto-exterieurs-detail.png": "cf1a4437b66ab9952a7001bb9c631a07c9d0d19a3d69bf8465a92365ae190446",
+    "kanto-exterieurs-detail.png": "b724a979567b25fbad390f40239818dc7620197458a9b51922f75076ada7ebfa"
   },
   "review_coverage": {
     "lieu": 496,
@@ -825,12 +825,25 @@
     "plan": 224,
     "plan-detail": 2
   },
-  "review_method": "Montages de quatre planches et détails natifs ; planche 49 relue après correction du titre Kanto. Les 59 autres planches et tous les pixels des cartes et coupes restent inchangés.",
-  "last_generation_seconds": 442.39,
-  "map_workers": 8,
+  "review_method": "Relecture des huit raccords signalés et de six raccords Johto supplémentaires, puis des planches modifiées. Les 496 images natives et les 196 coupes restent inchangées.",
+  "last_generation_seconds": 958.18,
+  "map_workers": 4,
   "render_cache": true,
   "world_plan_names": {
     "johto-exterieurs": "Johto — extérieurs",
     "kanto-exterieurs": "Kanto — extérieurs"
+  },
+  "world_seams": {
+    "johto_tiles": 83,
+    "kanto_tiles": 109,
+    "references_reviewed": 8,
+    "additional_routes_reviewed": [
+      30,
+      31,
+      34,
+      35,
+      38,
+      42
+    ]
   }
 }

@@ -37,6 +37,7 @@ _CATALOG_MODULES = (
     "catalog_safari_hgss.py",
     "layers_hgss.py",
     "maps_plans_hgss.py",
+    "maps_seams_hgss.py",
     "navigation_hgss.py",
     "sources_atlas_hgss.py",
 )
@@ -96,7 +97,7 @@ def build_johto(root: Path, output: Path, cache: Path, workers: int = 4, scope: 
     groups: dict[str, list[dict]] = defaultdict(list)
     for record in maps:
         groups[record["plan"]].append(record)
-    plans = [write_plan(folder, records, folder / "plans" / name) for name, records in sorted(groups.items())]
+    plans = [write_plan(folder, records, folder / "plans" / name, renderer) for name, records in sorted(groups.items())]
     _project_passages(renderer, maps, plans, passages)
     catalog = {
         "scope": scope,

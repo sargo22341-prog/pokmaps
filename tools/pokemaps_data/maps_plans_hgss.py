@@ -6,6 +6,7 @@ from pathlib import Path
 from PIL import Image
 
 from .maps_render import level_count
+from .maps_render_hgss import HgssRenderer
 
 
 def plan_layout(records: list[dict]) -> tuple[tuple[int, int], list[dict]]:
@@ -31,13 +32,17 @@ def plan_layout(records: list[dict]) -> tuple[tuple[int, int], list[dict]]:
     return size, parts
 
 
-def write_plan(root: Path, records: list[dict], output: Path) -> dict:
+def write_plan(root: Path, records: list[dict], output: Path, renderer: HgssRenderer | None = None) -> dict:
     size, parts = plan_layout(records)
     levels = level_count(*size)
     output.mkdir(parents=True)
     for record, part in zip(records, parts, strict=True):
         with Image.open(root / record["image"]) as image:
             _paste_tiles(image.convert("RGBA"), tuple(part["offset"]), output / str(levels - 1))
+    if renderer is not None and records[0]["plan"] in ("johto-exterieurs", "kanto-exterieurs"):
+        from .maps_seams_hgss import render_seams
+
+        render_seams(root, records, parts, renderer, output / str(levels - 1))
     for level in range(levels - 2, -1, -1):
         _reduce_tiles(output / str(level + 1), output / str(level))
     return {

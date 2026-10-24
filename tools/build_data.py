@@ -56,6 +56,9 @@ def _output_arguments(parser: argparse.ArgumentParser) -> None:
 
 def _preparatory_arguments(maps_only: argparse._MutuallyExclusiveGroup) -> None:
     maps_only.add_argument(
+        "--hgss-world-only", action="store_true", help="réexporter les raccords régionaux HGSS depuis l'aperçu validé"
+    )
+    maps_only.add_argument(
         "--hgss-safari-only", action="store_true", help="assembler les habitats Safari depuis les assets versionnés"
     )
     maps_only.add_argument(
@@ -232,6 +235,11 @@ def _sinnoh_preview(args: argparse.Namespace) -> bool:
 
 
 def _hgss_preview(args: argparse.Namespace) -> bool:
+    if args.hgss_world_only:
+        from pokemaps_data.world_export_hgss import export_worlds
+
+        export_worlds(args.cache, args.assets)
+        return True
     if args.hgss_safari_only:
         from pokemaps_data.application_hgss import validate_assets
         from pokemaps_data.safari_atlas_hgss import build_atlas

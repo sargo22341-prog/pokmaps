@@ -107,6 +107,10 @@ Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépô
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
 Or HeartGold et Argent SoulSilver sont disponibles avec Johto, Kanto et leurs installations.
+Les raccords extérieurs comparent la profondeur des décors voisins pour conserver les arbres,
+les bâtiments et les ponts qui traversent les limites des lieux.
+Après `--hgss-maps-only`, `python tools/build_data.py --hgss-world-only` réexporte uniquement
+les images régionales si les coordonnées et toutes les autres données du catalogue sont inchangées.
 Les bâtiments indépendants disposent de leur propre carte ; seules les salles reliées d'un même plan restent
 assemblées. La carte monde ne propose pas les coupes techniques de relief comme niveaux inférieurs.
 Les rencontres respectent les points éditoriaux et leurs exclusions : les terrains sans projection visible

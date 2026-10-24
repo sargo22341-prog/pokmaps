@@ -108,6 +108,15 @@ Les recettes des bitmaps et du catalogue sont distinctes : modifier la navigatio
 la sélection des coupes invalide les métadonnées, tout en permettant la réutilisation des images dont
 les entrées de rasterisation sont inchangées.
 
+Les images natives ne suffisent pas à assembler les extérieurs par simple superposition : un sol
+voisin peut alors recouvrir le haut d'un arbre, un toit ou le pont de la Route 24. Les tuiles où les
+pixels visibles de plusieurs lieux se croisent sont rendues avec une profondeur commune, depuis
+leurs modèles natifs. Les autres tuiles réutilisent les images séparées. Le cadre et les coordonnées
+restent identiques à ceux du catalogue ; la réduction des niveaux de zoom suit ce raccordement.
+Après régénération de l'aperçu, `python tools/build_data.py --hgss-world-only` réexporte les deux
+régions et leurs inventaires. Ce réexport refuse toute modification du catalogue hors recette
+d'assemblage ; un changement de géométrie ou de données demande une génération complète.
+
 Les compléments de textures proviennent exclusivement des banques HGSS : `bike_02_2` dans la banque 27
 et le sol du restaurant de Céladopole dans la banque 39. Le modèle 177 de la Sylphe SARL exerce
 la matrice d'effet Nitro et la commande `PRJMAP`. Le codec commun suit le biais de texture,
@@ -123,12 +132,13 @@ pixels incohérents, les niveaux de tuiles absents et les membres de plans ou re
 Les planches indexent lieux, coupes et plans, avec un détail de chacune des deux régions.
 La preuve versionnée conserve leurs empreintes et celles des images.
 
-La [preuve du 22 octobre 2026](cartes-hgss-atlas-preuve.json) couvre 496 cartes et gabarits,
+La [preuve du 24 octobre 2026](cartes-hgss-atlas-preuve.json) couvre 496 cartes et gabarits,
 224 plans, 196 coupes et une candidate non visuelle : 918 vues sur 60 planches.
 Les 1 314 portes comprennent 1 299 liens internes, neuf destinations mémorisées et six références
 historiques au poste inutilisé 150. Les 181 instructions de déplacement comprennent les quatre
 transports du train et de l'Aquaria. Les 1 771 fichiers natifs et les trois contrats du Safari sont qualifiés.
-L'aperçu complet, preuve et catalogue Johto compris, compte 28 977 fichiers et 216 697 104 octets.
-La dernière génération avec cache, sur huit processus, a pris 442,39 secondes.
-Les pixels des cartes et coupes restent identiques. La planche 49 a été relue après correction du titre Kanto ;
-les 59 autres planches restent identiques.
+L'aperçu complet, preuve et catalogue Johto compris, compte 28 977 fichiers et 216 699 340 octets.
+La dernière génération avec cache, sur quatre processus, a pris 958,18 secondes.
+Les pixels des cartes natives et coupes restent identiques. Les huit raccords signalés et six autres
+frontières de Johto ont été relus après correction de la profondeur commune. La planche 49 et les
+deux vues détaillées régionales ont changé ; les 57 autres planches restent identiques.
