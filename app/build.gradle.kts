@@ -64,6 +64,11 @@ android {
         buildConfig = true
     }
 
+    composeOptions {
+        // AGP conserve cette dépendance historique ; le plugin Kotlin fournit le compilateur réellement utilisé.
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+
     androidResources {
         // Interface en français uniquement : les traductions des bibliothèques (Material, AndroidX) dans les autres
         // langues ne seraient jamais affichées avec nos textes. Elles occupaient l'essentiel de resources.arsc.

@@ -1,7 +1,11 @@
 # Compilation et vérifications
 
-Prérequis : Android SDK 37, JDK 21, Git et Python 3.11+. Gradle utilise Temurin 21 via
-`gradle/gradle-daemon-jvm.properties`. Installer les dépendances Python épinglées :
+Prérequis : Android SDK 37, JDK 21, Git et Python 3.11+ (3.15.1 en CI). Gradle utilise Temurin 21 via
+`gradle/gradle-daemon-jvm.properties`, avec les derniers correctifs disponibles pour chaque plateforme.
+Java 27 a été vérifié : le compilateur Kotlin embarqué par ktlint utilise encore
+`sun.misc.Unsafe.objectFieldOffset`, qui déclenche un avertissement de fin de vie sur ce JDK.
+Le projet conserve donc Temurin 21 pour respecter l'interdiction de masquer les avertissements du dépôt.
+Installer les dépendances Python épinglées :
 
 ```powershell
 python -m pip install -r tools/requirements.txt -r tools/requirements-dev.txt
@@ -56,6 +60,10 @@ Pour l’installation ADB préservant les données, suivre [AGENTS.md, §10](../
 | `ci.yml` | Assets, contrôles Python et Android, tests JVM, APK debug conservé 14 jours |
 | `release.yml` | Vérifications, signature CI, APK et empreinte SHA-256 dans GitHub Releases |
 | `data-pipeline.yml` | Génération et tests des sources épinglées, mesures du cache, des assets et de l’APK |
+
+Les actions GitHub sont épinglées aux versions stables, y compris majeures.
+Le cache Gradle est assuré par `actions/setup-java` ; celui de `gradle/actions/setup-gradle` est désactivé
+pour ne pas utiliser le composant propriétaire introduit dans sa version 6.
 
 CI et release utilisent les assets versionnés sans régénération. Le workflow manuel du pipeline
 ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.

@@ -4,15 +4,15 @@ description: Génère les données et les cartes de l'application, puis teste le
 runs:
   using: composite
   steps:
-    - uses: actions/setup-python@v6
+    - uses: actions/setup-python@v7.1.0
       with:
-        python-version: "3.13"
+        python-version: "3.15.1"
         cache: pip
         cache-dependency-path: tools/requirements*.txt
 
     - name: Cache des sources (PokéAPI, pokesprite, PokeAPI/sprites, pret)
       id: source-cache
-      uses: actions/cache@v5
+      uses: actions/cache@v6.1.0
       with:
         path: |
           tools/.cache/*
@@ -23,7 +23,7 @@ runs:
         key: data-sources-${{ hashFiles('tools/pokemaps_data/sources.py', 'tools/pokemaps_data/webp.py') }}
 
     - name: Cache des cadres et tuiles de toutes les générations
-      uses: actions/cache@v5
+      uses: actions/cache@v6.1.0
       with:
         path: tools/.cache/map-renders
         # Chaque entrée vérifie ses pixels ou sa géométrie et son intégrité, indépendamment de cette clé CI.
@@ -32,7 +32,7 @@ runs:
 
     - name: Cache des cartes DS préparatoires
       id: sinnoh-map-cache
-      uses: actions/cache@v5
+      uses: actions/cache@v6.1.0
       with:
         path: tools/build/preview/sinnoh-maps
         # Aucun repli : toute modification du pipeline, des données ou des dépendances impose un nouveau rendu.

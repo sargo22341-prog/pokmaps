@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7.0.1
 
       - name: Calculer la version depuis le tag
         id: version
@@ -73,12 +73,16 @@ jobs:
       - name: Vérifier les assets versionnés
         uses: ./.github/actions/check-assets
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6.1.0
         with:
           distribution: temurin
           java-version: "21"
+          cache: gradle
 
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          # Le cache officiel de setup-java évite le composant propriétaire de Gradle Actions 6.
+          cache-disabled: true
 
       - name: Décoder le keystore
         env:
@@ -122,7 +126,7 @@ jobs:
         run: rm -f "$RUNNER_TEMP/release.jks"
 
       - name: Créer la release GitHub
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3.0.3
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           target_commitish: ${{ github.sha }}

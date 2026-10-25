@@ -109,8 +109,10 @@ via [l’index](docs/README.md).
 Les assets finaux et leur inventaire SHA-256 sont versionnés. Les builds Android les réutilisent
 sans génération ni téléchargement de contenu Pokémon. Les sources brutes et caches restent hors Git.
 `python tools/verify.py` lance les contrôles Python et Android sans régénérer les cartes ; `--scope android`
-ou `--scope python` limite le travail à la partie modifiée. Les rendus des quatre générations utilisent
-un cache vérifié par leur contenu lors des générations explicites.
+ou `--scope python` limite le travail à la partie modifiée.
+La compilation utilise Gradle 9.8.2 et Temurin 21 ; la CI utilise Python 3.15.1,
+avec les dépendances Android et Python épinglées aux versions stables.
+Les rendus des quatre générations utilisent un cache vérifié par leur contenu lors des générations explicites.
 Les sources principales sont PokéAPI, PokeAPI/sprites, pokesprite et les dépôts pret ; aucune ressource
 n’est récupérée sur pokemaps.net. Leur rôle est détaillé dans le pipeline.
 
