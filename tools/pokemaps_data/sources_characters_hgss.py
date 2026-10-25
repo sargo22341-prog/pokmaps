@@ -11,7 +11,7 @@ CONTRACT = Path(__file__).resolve().parents[2] / "docs/generations/personnages-h
 
 def source_digest(path: Path) -> str:
     data = path.read_bytes()
-    if path.suffix in {".c", ".h", ".s", ".csv", ".json"}:
+    if path.suffix in {".c", ".h", ".s", ".csv", ".json", ".py"}:
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
 

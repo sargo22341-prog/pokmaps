@@ -67,6 +67,8 @@ pour ne pas utiliser le composant propriétaire introduit dans sa version 6.
 
 CI et release utilisent les assets versionnés sans régénération. Le workflow manuel du pipeline
 ne publie rien et ne remplace pas la mise à jour locale des assets à versionner.
+Les empreintes des sources texte HGSS, scripts Python compris, normalisent les fins de ligne
+Windows et Linux ; les fichiers binaires restent vérifiés octet par octet.
 Son résumé indique la restauration exacte du cache, la durée de génération et des tests de sources,
 la taille du cache et des assets, puis la durée d'assemblage et la taille de l'APK debug.
 Les cartes DS préparatoires disposent d'un cache distinct, sans clé de repli : toute modification des
