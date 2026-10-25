@@ -26,5 +26,5 @@ object MapZoom {
         return fit * ZOOM_OUT
     }
 
-    private const val MIN_HGSS_WORLD_SCALE = 1.0
+    private const val MIN_HGSS_WORLD_SCALE = 0.5
 }

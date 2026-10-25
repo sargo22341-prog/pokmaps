@@ -45,7 +45,8 @@ Changer de jeu depuis une fiche Pokémon absente de la nouvelle génération ram
 
 Dans Or HeartGold et Argent SoulSilver, Johto et Kanto partagent une seule carte continue,
 avec le Mont Argenté, la Route Victoire et la Ligue. Le dézoom du monde est limité pour préserver la fluidité
-sur téléphone. Les grottes gardent leurs véritables étages ; les vues techniques « Dessus 1, 2… »
+sur téléphone, avec une échelle minimale de 0,5. Les grottes gardent leurs véritables étages ;
+les vues techniques « Dessus 1, 2… »
 sont réunies sur la vue supérieure avec leurs repères.
 Le square du Mont Sélénite donne accès à sa boutique sans doubler les sorties selon la scène des Mélofée.
 À Parmanie, le bâtiment de l’ancien Safari mène au Parc des Amis, consacré aux transferts des jeux GBA ;
