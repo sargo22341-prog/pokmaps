@@ -25,7 +25,7 @@ def test_hgss_versions_and_native_regional_are_distributed(db: sqlite3.Connectio
     assert db.execute("SELECT count(*) FROM pokemon_version_group WHERE version_group_id=10").fetchone()[0] == 493
     assert db.execute("SELECT count(*) FROM pokedex_entry WHERE pokedex_id=7").fetchone()[0] == 256
     worlds = db.execute("SELECT identifier, start_map_id FROM map WHERE version_group_id=10 AND is_world=1").fetchall()
-    assert {name for name, _ in worlds} == {"johto", "kanto"}
+    assert {name for name, _ in worlds} == {"johto"}
     assert all(start is not None for _, start in worlds)
     assert validate_database(db) == []
 

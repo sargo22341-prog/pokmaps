@@ -7,9 +7,11 @@ from tempfile import TemporaryDirectory
 
 from .asset_manifest import write_manifest
 from .plans_application_hgss import application_catalog, native_map_types
+from .safari_atlas_hgss import _update_recipe
 from .sources import PREVIEW_DIR
 from .validate_johto_hgss import check_johto_preview
 from .validate_maps_gen4 import write_inventory
+from .worlds_application_hgss import write_world
 
 
 def export_worlds(cache: Path, assets: Path) -> None:
@@ -26,15 +28,17 @@ def export_worlds(cache: Path, assets: Path) -> None:
     for key in set(previous) | set(updated):
         if key != "catalog_recipe" and previous.get(key) != updated.get(key):
             raise ValueError(f"HGSS : {key} modifié ; une génération complète est nécessaire")
-    replacements = {"johto-exterieurs": "johto", "kanto-exterieurs": "kanto"}
+    replacements = {"johto-exterieurs": "johto"}
     with TemporaryDirectory(prefix="hgss-worlds-", dir=output.parent) as temporary:
         staging = Path(temporary)
         for plan, name in replacements.items():
-            shutil.copytree(source / "plans" / plan, staging / name)
+            records = [record for record in updated["maps"] if record["plan"] == plan]
+            write_world(source, staging / name, records, cache / "hgss-qualification")
         _replace_worlds(output, staging, tuple(replacements.values()))
     distributed["source_catalog"] = updated
     destination.write_text(json.dumps(distributed, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     write_inventory(output)
+    _update_recipe(assets)
     write_manifest(assets)
     print("HGSS : Johto et Kanto réexportés, coordonnées et autres données inchangées", flush=True)
 

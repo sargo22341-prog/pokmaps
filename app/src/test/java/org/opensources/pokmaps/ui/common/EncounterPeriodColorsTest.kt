@@ -2,6 +2,7 @@ package org.opensources.pokmaps.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toPixelMap
@@ -25,18 +26,16 @@ class EncounterPeriodColorsTest {
     val compose = createComposeRule()
 
     @Test
-    fun unavailablePeriodsAreGrayAndAvailablePeriodKeepsItsOriginalColors() {
+    fun changingTheTimeFilterKeepsAvailablePeriodsColored() {
+        val times = mutableStateOf(setOf(EncounterTime.MORNING))
         compose.setContent {
-            Box(Modifier.background(Color.White)) { EncounterTimeIcons(encounter(setOf(EncounterTime.MORNING))) }
+            Box(Modifier.background(Color.White)) { EncounterTimeIcons(encounter(times.value)) }
         }
         assertColored("Horaire de rencontre : Matin")
         assertFalse(isColored("Horaire de rencontre : Jour : Indisponible"))
         assertFalse(isColored("Horaire de rencontre : Nuit : Indisponible"))
-    }
-
-    @Test
-    fun untimedEncounterKeepsAllThreePeriodsColored() {
-        compose.setContent { Box(Modifier.background(Color.White)) { EncounterTimeIcons(encounter(emptySet())) } }
+        // Vérifier aussi la recomposition du filtre, sans recréer une surface graphique native de test.
+        compose.runOnIdle { times.value = emptySet() }
         assertColored("Horaire de rencontre : Matin")
         assertColored("Horaire de rencontre : Jour")
         assertColored("Horaire de rencontre : Nuit")

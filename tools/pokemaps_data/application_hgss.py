@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import sqlite3
 from collections.abc import Callable
 from pathlib import Path
@@ -97,21 +98,18 @@ def validate_assets(assets: Path) -> None:
     check_inventory(folder)
     data = read_placement_json(folder / "catalog.json")
     source = data["source_catalog"]
-    lower = sum(
-        max(len(r["layers"]) for r in source["maps"] if r["plan"] == p["id"])
-        for p in source["plans"]
-        if p["id"] not in {"johto-exterieurs", "kanto-exterieurs"}
-    )
     from .safari_atlas_hgss import validate_atlas
 
     validate_atlas(assets)
-    expected = 497 + sum(not p.get("standalone", False) for p in source["plans"]) + lower
+    expected = 497 + sum(not p.get("standalone", False) for p in source["plans"])
     if data["commit"] != HGSS_PRET_COMMIT or len(data["maps"]) != expected:
         raise ValueError("HGSS : catalogue distribué incomplet ou d'un autre commit")
     constants = {row["const"] for row in data["maps"]}
     numbers = {row["number"] for row in data["maps"]}
     if len(constants) != expected or len(numbers) != expected:
         raise ValueError("HGSS : cartes distribuées répétées")
+    if any(re.fullmatch(r".+_LOWER(?:_[1-9][0-9]*)?", const) for const in constants):
+        raise ValueError("HGSS : coupe technique distribuée comme étage du guide")
     for row in data["maps"]:
         name = row["const"].removeprefix("MAP_").lower().replace("_", "-")
         if row["parent"] is not None:
@@ -162,9 +160,12 @@ def _validate_map_placement(connection: sqlite3.Connection) -> list[str]:
     errors = []
     if connection.execute(
         """SELECT count(*) FROM map WHERE version_group_id=10
-           AND (identifier LIKE 'johto-lower%' OR identifier LIKE 'kanto-lower%')"""
+           AND (identifier GLOB '*-lower' OR identifier GLOB '*-lower-[0-9]*')"""
     ).fetchone()[0]:
-        errors.append("HGSS : coupes techniques présentes sur la carte monde")
+        errors.append("HGSS : coupes techniques présentes dans le guide")
+    worlds = connection.execute("SELECT count(*) FROM map WHERE version_group_id=10 AND is_world=1").fetchone()[0]
+    if worlds != 1:
+        errors.append("HGSS : Johto et Kanto doivent partager une seule carte monde")
     for header, kind in exceptions():
         count = connection.execute(
             "SELECT count(*) FROM map_spot WHERE map_id=? AND kind=?", (10_000 + header, kind)
@@ -177,6 +178,8 @@ def _validate_map_placement(connection: sqlite3.Connection) -> list[str]:
 def export_recipe() -> dict[str, str]:
     names = (
         "maps_export_hgss.py",
+        "worlds_application_hgss.py",
+        "passages_guide_hgss.py",
         "safari_atlas_hgss.py",
         "plans_application_hgss.py",
         "maps_characters_hgss.py",
@@ -197,7 +200,11 @@ def export_recipe() -> dict[str, str]:
         "fixed_application_hgss.py",
         "maps_fixed_hgss.py",
     )
-    return {
+    recipe = {
         name: hashlib.sha256(Path(__file__).with_name(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
         for name in names
     }
+    for name in ("hgss_guide_passages.csv", "hgss_script_passages.csv"):
+        path = Path(__file__).parents[1] / "data" / name
+        recipe[name] = hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    return recipe

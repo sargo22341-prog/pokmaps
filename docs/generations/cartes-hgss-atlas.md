@@ -3,16 +3,19 @@
 Ce lot étend la [preuve et le catalogue Johto](cartes-hgss.md), depuis le même commit
 `6988158691eb6178cff697cda0428045ddcba5fb` de `pret/pokeheartgold`.
 La génération complète utilise cet atlas pour les assets Android HGSS, sans ROM.
-L'aperçu conserve 496 lieux et 224 plans techniques. L'export Android sépare les bâtiments indépendants :
-496 lieux, 26 plans assemblés, 17 vues de gabarits isolés et 171 plans inférieurs alignés donnent
-710 entrées dans la base. Les gabarits Safari et les salles de connexion sans accès géographique fixe
+L'aperçu conserve 496 lieux et 224 plans techniques. L'export Android sépare les bâtiments indépendants
+et réunit Johto et Kanto dans leur repère natif commun. Les 171 coupes techniques ne sont plus distribuées :
+leurs portes, personnages et objets restent sur la vue supérieure de leur véritable étage.
+Les 496 lieux, 42 plans et l'atlas Safari donnent 539 entrées distribuées, contre 711 auparavant.
+L'atlas Safari complète ces plans sans remplacer les lieux natifs. Les gabarits Safari et les salles
+de connexion sans accès géographique fixe
 gardent leur ancre native dans une vue individuelle, sans leur inventer une ville d'origine.
 Les salles ne partagent une vue que si une porte native les relie sur le même plan et dans le même type
 de carte ; un accès extérieur ne réunit donc pas les bâtiments qu'il dessert. Les maisons isolées sont
 affichables directement, avec leurs coordonnées locales et leurs portes traduites depuis l'atlas.
-Les coupes techniques des extérieurs de Johto et Kanto ne créent aucun niveau inférieur sur la carte monde.
-Les 196 coupes natives restent tracées dans le catalogue source ; les niveaux distribués
-partagent les dimensions et les coordonnées de leur plan supérieur.
+Les 196 coupes natives restent tracées dans le catalogue source de l'aperçu. Aucun sélecteur de coupes
+n'apparaît dans le guide, y compris dans la Caverne Azurée, la Cave Taupiqueur, les Îles Écume et la Route Victoire.
+Les étages et sous-sols natifs sont conservés.
 
 ## Reproduire
 
@@ -58,7 +61,8 @@ par le joueur n'est présenté comme une configuration universelle. Le `native.j
 complète, y compris ses emplacements vides que le moteur remplit selon la sauvegarde.
 
 Les extérieurs de Johto et de Kanto suivent les positions et altitudes de la matrice DS 0.
-Les contacts entre régions restent des voisinages géométriques. Les autres plans assemblent les salles
+Le monde distribué réunit les deux régions, le Mont Argenté, les Routes 26 à 28 et la Ligue dans ce même repère.
+Les raccords utilisent une profondeur commune, comme dans les aperçus régionaux. Les autres plans assemblent les salles
 avec des espaces, sans créer de continuité praticable entre deux pièces.
 
 ## Portes et déplacements de scénario
@@ -83,7 +87,14 @@ mémorisée en destination fixe inconditionnelle.
 Au Mont Sélénite, le script `D02R0102` déplace quatre portes selon le jour et la scène des Mélofée.
 Les portes 4 et 5 de l'en-tête 448 sont garées hors BDHC dans les événements natifs.
 Leur hauteur de projection est justifiée dans `hgss_warp_heights.csv` par le palier des positions actives.
-Les positions garées et les instructions de déplacement restent toutes conservées.
+Les positions garées et les instructions de déplacement restent toutes conservées dans l'aperçu.
+`hgss_guide_passages.csv` écarte seulement ces deux portes inactives du guide ; les sorties normales du square
+et sa boutique (en-tête 518) sont accessibles sur la vue supérieure.
+
+À Parmanie, l'en-tête 479 ne possède qu'une sortie native vers la ville. Le préposé lance
+`Warp MAP_PAL_PARK, 0, 24, 47, DIR_NORTH` dans `scr_seq_0812_T08R0201.s`.
+`hgss_script_passages.csv` ajoute cet accès au guide en vérifiant l'instruction dans la source épinglée.
+Le Parc des Amis sert aux transferts GBA ; il est distinct du Parc Safari de Johto.
 
 ## Surfaces superposées et décors
 
@@ -113,8 +124,8 @@ voisin peut alors recouvrir le haut d'un arbre, un toit ou le pont de la Route 2
 pixels visibles de plusieurs lieux se croisent sont rendues avec une profondeur commune, depuis
 leurs modèles natifs. Les autres tuiles réutilisent les images séparées. Le cadre et les coordonnées
 restent identiques à ceux du catalogue ; la réduction des niveaux de zoom suit ce raccordement.
-Après régénération de l'aperçu, `python tools/build_data.py --hgss-world-only` réexporte les deux
-régions et leurs inventaires. Ce réexport refuse toute modification du catalogue hors recette
+Après régénération de l'aperçu, `python tools/build_data.py --hgss-world-only` réexporte le monde
+Johto–Kanto et ses inventaires. Ce réexport refuse toute modification du catalogue hors recette
 d'assemblage ; un changement de géométrie ou de données demande une génération complète.
 
 Les compléments de textures proviennent exclusivement des banques HGSS : `bike_02_2` dans la banque 27
@@ -142,3 +153,30 @@ La dernière génération avec cache, sur quatre processus, a pris 958,18 second
 Les pixels des cartes natives et coupes restent identiques. Les huit raccords signalés et six autres
 frontières de Johto ont été relus après correction de la profondeur commune. La planche 49 et les
 deux vues détaillées régionales ont changé ; les 57 autres planches restent identiques.
+
+## Guide commun et mesures sur téléphone — 25 octobre 2026
+
+Les assets cartographiques HGSS passent de 10 040 fichiers et 52 128 283 octets à 7 374 fichiers
+et 39 628 972 octets, soit 12 499 311 octets économisés (24 %). Les cartes des autres jeux sont inchangées.
+Ces chiffres portent sur les ressources versionnées, pas sur la taille compressée de l'APK.
+
+Sur le Pixel 6 Pro en 1 440 × 3 120, l'APK debug a été mesuré avec `dumpsys gfxinfo` et `meminfo` :
+douze balayages horizontaux alternés de 800 pixels en 300 ms, après réglage du zoom par gestes.
+Les échelles candidates ont été comparées avant de fixer le dézoom minimal à 1,0 (taille native).
+
+| Vue du monde commun | Médiane | 95e percentile | Images hors délai |
+|---|---|---|---|
+| Dézoom complet sans limite | 61 ms | 1 500 ms | 75,56 % |
+| Échelle 0,25 | 15 ms | 350 ms | 21,51 % |
+| Échelle 0,5 | 9 ms | 53 ms | 13,69 % |
+| Limite finale 1,0, après réinstallation | 9 ms | 34 ms | 5,02 % |
+
+La dernière série compte 279 images et 271 937 Kio de PSS ; le 99e percentile reste à 40 ms.
+Une série préalable à l'échelle 1,0 donnait 24 ms au 95e percentile et 1,02 % d'images hors délai.
+Ces mesures décrivent les gestes testés sur cet appareil ; elles ne constituent pas une garantie de fréquence constante.
+La limite reste appliquée après rotation et ne change pas le dézoom des grottes ni des autres jeux.
+
+Les accès entrée du square → square → boutique et bâtiment de Parmanie → Parc des Amis ont été parcourus
+sur le téléphone. Dans la Caverne Azurée, le pont reste visible et une échelle du RDC rejoint bien le 1er étage.
+La recherche ne propose plus les coupes techniques de la Cave Taupiqueur, de la Caverne Azurée ou des Îles Écume.
+La preuve de couverture est régénérée après retrait des deux points d'arbres masqués au sud d'Azuria.

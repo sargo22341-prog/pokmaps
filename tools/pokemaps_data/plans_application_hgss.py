@@ -8,8 +8,7 @@ from .maps_layout import identifier
 from .maps_plans_hgss import plan_layout
 from .maps_render import level_count
 from .pret_hgss_maps import HgssMapRepo
-
-_WORLD_PLANS = frozenset({"johto-exterieurs", "kanto-exterieurs"})
+from .worlds_application_hgss import WORLD_PLANS, merge_worlds
 
 
 def native_map_types(root: Path) -> dict[int, str]:
@@ -21,6 +20,7 @@ def application_catalog(source: dict, map_types: dict[int, str]) -> dict:
     records = {r["header"]: r for r in catalog["maps"]}
     reachable = _world_connected(source, records)
     previous = {p["header"]: p["offset"] for plan in source["plans"] for p in plan["parts"]}
+    merge_worlds(catalog)
     links: dict[int, set[int]] = defaultdict(set)
     for passage in source["passages"]:
         start, end = passage["source"], passage["destination"]
@@ -28,8 +28,8 @@ def application_catalog(source: dict, map_types: dict[int, str]) -> dict:
             links[start].add(end)
             links[end].add(start)
     plans = []
-    for plan in source["plans"]:
-        if plan["id"] in _WORLD_PLANS:
+    for plan in catalog["plans"]:
+        if plan["id"] in WORLD_PLANS:
             plans.append(deepcopy(plan))
             continue
         groups = _connected_rooms({p["header"] for p in plan["parts"]}, links)
@@ -70,7 +70,7 @@ def application_catalog(source: dict, map_types: dict[int, str]) -> dict:
 
 
 def _world_connected(source: dict, records: dict) -> set[int]:
-    reached = {h for h, record in records.items() if record["plan"] in _WORLD_PLANS}
+    reached = {h for h, record in records.items() if record["plan"] in WORLD_PLANS}
     edges = [(p["source"], p.get("destination")) for p in source["passages"] + source.get("script_navigation", [])]
     for _ in range(len(records)):
         expanded = reached | {b for a, b in edges if a in reached and b in records}

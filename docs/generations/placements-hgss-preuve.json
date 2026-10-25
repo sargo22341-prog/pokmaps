@@ -11,8 +11,8 @@
     }
   },
   "sources": {
-    "hgss-maps/inventory.json": "4e157d30d6ac5fd06fc79fdae16274cceefd5b3eb615a6dc1fb9995744241235",
-    "hgss-encounters/inventory.json": "fd56cab0c651ac093383cdf71627dc34cb25a9de74c3865e64d16cd64c5024fa"
+    "hgss-maps/inventory.json": "89ed129823fb15e92791bb4becae6fd851f00dd38b66e7350c03253c0a6e50f0",
+    "hgss-encounters/inventory.json": "6614399b77bee04471df2cce0854c3dc108845bf74bfd19922fd99d79576fec4"
   },
   "recipe": {
     "preview_placement_hgss.py": "296d650c4a2ed3e8be27af539fe8bb161156b686f29661b4561add27c537953b",
@@ -23,7 +23,7 @@
     "grass_placement_hgss.py": "07e5ba52cd41d60236c6d2eb6ee5cb82e3a4576178cd96dd2eadc65e27c1c736",
     "world_placement_hgss.py": "2f612531aaac555c2c0f31da0d38152fb3c037ccf2813ecd59271edd992ebecb"
   },
-  "spots_sha256": "492f1984ff5efe2e5ea926b5864fd078e1e1b3e155f0889d7ec781f1df1b1051",
+  "spots_sha256": "eadbd69eb41b066b02bdf2592cb149593c951d2d9439ff07874b07c1d821f2d1",
   "exclusions_sha256": "15b3d08c54fbc0e24051bd4472ba28cfc257cd60c85f93b4f6e1d8f9fcce58b2",
   "water_regions_sha256": "8d26cb3d0a841d81dd480bbc21346bfea2c3d122f2bb8e3dd17db4547e957073",
   "coverage": [
@@ -1082,9 +1082,9 @@
       "map": "cerulean",
       "scope": "kanto",
       "kind": "tree",
-      "points": 14,
-      "points_sha256": "30c3e743cc86ff770bf53cfbf2ac9da70eadf0eb2a6bbd55cb2e552eceec1b75",
-      "available": 42,
+      "points": 12,
+      "points_sha256": "5b7f633a77a48da6d80151fbf04c711352d489fc1fa01e723ace051d79af2e73",
+      "available": 34,
       "reason": ""
     },
     {
@@ -1384,7 +1384,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "570864eeb663217b0b0fe3ba4185b5bfbe6d9e3a6c81ab855357d79ca1cb810e",
-      "available": 2371,
+      "available": 2370,
       "reason": ""
     },
     {
@@ -1444,7 +1444,7 @@
       "kind": "water",
       "points": 40,
       "points_sha256": "22683c776add3f4aaa93164c8719aa061ff4d0dec2d9e27c48041cb73baf324d",
-      "available": 1869,
+      "available": 1868,
       "reason": ""
     },
     {

@@ -1,0 +1,2 @@
+source,x,z,destination,target_x,target_z,file,instruction,reason
+479,7,10,109,24,47,files/fielddata/script/scr_seq/scr_seq_0812_T08R0201.s,"Warp MAP_PAL_PARK, 0, 24, 47, DIR_NORTH",Parc des Amis : accès du guide au parc de transfert via le préposé ; le Safari HGSS se trouve à Johto.

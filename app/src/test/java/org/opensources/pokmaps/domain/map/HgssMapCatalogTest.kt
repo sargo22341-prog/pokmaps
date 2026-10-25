@@ -9,12 +9,12 @@ import org.junit.Test
 
 class HgssMapCatalogTest {
     @Test
-    fun distributedMapsHaveAlignedSurfaceLevelsAndBothRegions() {
+    fun distributedMapsShareOneWorldAndKeepOnlyRealFloors() {
         val maps = distributedMaps()
-        assertEquals(711, maps.size)
-        assertEquals(setOf("johto", "kanto"), maps.values.filter { it.isWorld }.map { it.identifier }.toSet())
+        assertEquals(539, maps.size)
+        assertEquals(setOf("johto"), maps.values.filter { it.isWorld }.map { it.identifier }.toSet())
         val levels = MapLevels.build(maps)
-        assertTrue(levels.isNotEmpty())
+        assertTrue(levels.isEmpty())
         assertTrue(maps.values.filter { it.isWorld }.all { levels[it.id].isNullOrEmpty() })
         val houses = maps.values.filter {
             it.identifier.startsWith("cherrygrove-") &&
@@ -22,13 +22,9 @@ class HgssMapCatalogTest {
         }
         assertEquals(4, houses.size)
         assertTrue(houses.all { it.isDisplayable })
-        for (group in levels.values.distinct()) {
-            assertEquals(
-                1,
-                group.map {
-                    maps.getValue(it.mapId).width to maps.getValue(it.mapId).height
-                }.distinct().size
-            )
+        val world = maps.values.single { it.isWorld }
+        for (name in listOf("new-bark", "pallet", "mount-silver", "route-28", "indigo-plateau")) {
+            assertEquals(world.id, maps.values.single { it.identifier == name }.parentId)
         }
     }
 

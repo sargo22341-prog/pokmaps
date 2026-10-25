@@ -42,6 +42,8 @@ class MapSpriteTest {
             }
         }
         compose.waitUntil(10_000) {
+            // Le chargement des images doit pouvoir déclencher la recomposition et la mesure suivantes.
+            compose.mainClock.advanceTimeByFrame()
             dimensions.all { (path, source) -> sizes[path] == IntSize(source.width * 2, source.height * 2) }
         }
         compose.runOnIdle {

@@ -5,6 +5,9 @@ Le workflow de release publie ces notes sur GitHub puis vide la liste après suc
 Voir la section publication de `README.md`.
 
 <!-- notes -->
+- Dans HeartGold et SoulSilver, Johto et Kanto sont réunis avec un dézoom limité pour la fluidité,
+  les vues superposées des grottes sont simplifiées
+  et les accès du Mont Sélénite et du Parc des Amis sont corrigés.
 - Les raccords de Johto et Kanto dans HeartGold et SoulSilver préservent les arbres, bâtiments et ponts entre lieux.
 - Les Pokémon sauvages s’affichent uniquement dans la zone sélectionnée, dans toutes les générations.
 - Lugia et Ho-Oh apparaissent à leur emplacement fixe dans HeartGold et SoulSilver.

@@ -255,7 +255,7 @@ internal class MapNavigation(
             scroll(position.x, position.y)
             scale(position.scale)
             minimumScaleMode(
-                when {
+                MapZoom.worldMinimumScale(map)?.let(::Forced) ?: when {
                     map.isWorld -> Fit
                     map.regions.isNotEmpty() -> Forced(MIN_PLAN_SCALE)
                     else -> Forced(MIN_INDOOR_SCALE)
@@ -278,8 +278,8 @@ internal class MapNavigation(
         }
 
     /**
-     * Carte du monde : son zoom minimal suit la taille de la vue (rotation, barres), un peu au-delà de la carte
-     * entière ([MapZoom]). Avant la première mesure, la carte entière (Fit) sert de minimum.
+     * Le zoom minimal suit la taille de la vue (rotation, barres) et la limite du monde HGSS ([MapZoom]).
+     * Avant la première mesure, les autres mondes utilisent la carte entière (Fit).
      */
     private fun followViewport(map: GameMap, mapState: MapState) {
         viewportJob?.cancel()
@@ -295,7 +295,7 @@ internal class MapNavigation(
             mapState.getLayoutSizeFlow().collect { size ->
                 if (size.width <= 0 || size.height <= 0) return@collect
                 if (map.isWorld || map.regions.isNotEmpty()) {
-                    MapZoom.minScale(size.width, size.height, map.width, map.height)?.let {
+                    MapZoom.minScale(size.width, size.height, map)?.let {
                         mapState.minimumScaleMode = Forced(it)
                     }
                 }

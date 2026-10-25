@@ -4,8 +4,20 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.opensources.pokmaps.domain.model.GameMap
 
 class MapZoomTest {
+    @Test
+    fun hgssWorldKeepsItsLimitInPortraitAndLandscapeWithoutLimitingCaves() {
+        val world = GameMap(10993, "johto", "Johto et Kanto", "heartgold-soulsilver", 22658, 8192, 8, isWorld = true)
+        assertEquals(1.0, checkNotNull(MapZoom.minScale(1440, 2387, world)), 1e-9)
+        assertEquals(1.0, checkNotNull(MapZoom.minScale(2387, 1440, world)), 1e-9)
+        assertNull(MapZoom.minScale(0, 0, world))
+        val cave = world.copy(isWorld = false)
+        assertNull(MapZoom.worldMinimumScale(cave))
+        assertEquals(1440.0 / 22658 * MapZoom.ZOOM_OUT, checkNotNull(MapZoom.minScale(1440, 2387, cave)), 1e-9)
+    }
+
     @Test
     fun aWidePlanFitsCompletelyOnAPortraitPhone() {
         val scale = checkNotNull(MapZoom.minScale(1440, 2200, 1568, 1024))

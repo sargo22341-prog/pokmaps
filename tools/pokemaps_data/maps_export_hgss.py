@@ -33,12 +33,15 @@ def export_game(cache: Path, output: Path) -> GameMapData:
     from .plans_application_hgss import application_catalog, native_map_types
 
     catalog = application_catalog(catalog, native_map_types(cache / "hgss-qualification"))
-    rows, offsets = _maps(source, output, catalog)
+    rows, offsets = _maps(source, output, catalog, cache / "hgss-qualification")
     print(f"HGSS : {len(rows)} cartes et niveaux exportés", flush=True)
     lookup = {row["header"]: row for row in catalog["maps"]}
     areas = [(row["const"], "hgss-" + identifier(row["const"])) for row in catalog["maps"]]
     areas.extend(_api_areas(catalog))
     data = GameMapData(rows, areas, _warps(catalog, lookup), [], coordinate_offsets=offsets)
+    from .passages_guide_hgss import script_passages
+
+    data.warps.extend(script_passages(cache / "hgss-qualification", lookup, offsets))
     _spots(data, placement, lookup, offsets)
     _editor_assets(output, data, lookup, offsets)
     from .maps_characters_hgss import character_rows
@@ -68,11 +71,11 @@ def _editor_assets(output: Path, data: GameMapData, lookup: dict, offsets: dict)
     (output / "terrain.json").write_text(json.dumps(terrain, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
-def _maps(source: Path, output: Path, catalog: dict) -> tuple[list[MapRow], dict[str, tuple[int, int]]]:
+def _maps(source: Path, output: Path, catalog: dict, root: Path) -> tuple[list[MapRow], dict[str, tuple[int, int]]]:
     rows, offsets = [], {}
     plans = {p["id"]: p for p in catalog["plans"]}
     names = {
-        "johto-exterieurs": ("JOHTO", 993, "Johto", "MAP_NEW_BARK"),
+        "johto-exterieurs": ("JOHTO", 993, "Johto et Kanto", "MAP_NEW_BARK"),
         "kanto-exterieurs": ("KANTO", 992, "Kanto", "MAP_PALLET"),
     }
     for plan in catalog["plans"]:
@@ -94,18 +97,16 @@ def _maps(source: Path, output: Path, catalog: dict) -> tuple[list[MapRow], dict
                 start=start,
             )
         )
-        _write_plan(source, output, catalog, plan, const)
+        _write_plan(source, output, catalog, plan, const, root)
     for record in catalog["maps"]:
         plan = plans[record["plan"]]
         parent = names.get(plan["id"], (plan["id"],))[0]
         offset = next(tuple(p["offset"]) for p in plan["parts"] if p["header"] == record["header"])
         offsets[identifier(record["const"])] = offset
         rows.append(_native_map(source, output, record, plan, parent, offset))
-    from .layers_application_hgss import write_layers
     from .origins_hgss import assign_origins
 
     assign_origins(rows, catalog)
-    write_layers(source, output, catalog, rows)
     return rows, offsets
 
 
@@ -126,8 +127,13 @@ def _native_map(source: Path, output: Path, record: dict, plan: dict, parent: st
     )
 
 
-def _write_plan(source: Path, output: Path, catalog: dict, plan: dict, const: str) -> None:
-    if plan.get("separated"):
+def _write_plan(source: Path, output: Path, catalog: dict, plan: dict, const: str, root: Path) -> None:
+    if plan.get("unified"):
+        from .worlds_application_hgss import write_world
+
+        members = [r for r in catalog["maps"] if r["plan"] == plan["id"]]
+        write_world(source, output / identifier(const), members, root)
+    elif plan.get("separated"):
         from .maps_plans_hgss import write_plan
 
         members = [r for r in catalog["maps"] if r["plan"] == plan["id"]]
@@ -138,9 +144,13 @@ def _write_plan(source: Path, output: Path, catalog: dict, plan: dict, const: st
 
 def _warps(catalog: dict, lookup: dict[int, dict]) -> list[WarpRow]:
     from .layers_application_hgss import surface_map
+    from .passages_guide_hgss import excluded_passages
 
     result = []
+    excluded = excluded_passages(catalog)
     for passage in catalog["passages"]:
+        if (passage["source"], passage["index"]) in excluded:
+            continue
         target = lookup.get(passage["destination"])
         arrival = passage.get("target_pixel", (None, None)) if target else (None, None)
         result.append(
